@@ -64,10 +64,22 @@ up this way came about based largely on theses posts:
 * https://medium.com/@cyrilletuzi/how-to-build-and-publish-an-angular-module-7ad19c0b4464
 * https://github.com/rollup/rollup/wiki/Troubleshooting#treating-module-as-external-dependency
 
-From within a module directory:
+In order to keep developer velocity high, as we write new modules, we can use relative dependencies day-to-day like so:
+
+`import {UmbrellaConfig} from "../umbrella-config/umbrella-config";`
+
+When it comes time to deploy, we'll need to branch and changes these dependencies to something like:
+
+`import {UmbrellaConfig} from "@ddp/umbrella-config/umbrella-config";`
+
+And we'll also need to expand the `peerDependencies` entries for each module.
+
+And then, from within each module directory:
 ```shell
 npm run build
 cd dist
 npm publish
 ```
+
+Bonus points to whoever can automate this process so that our artifactory/npm deployments aren't so painful!
 
