@@ -41,6 +41,8 @@
     "protractor": "5.1.0",
     "ts-node": "2.0.0",
     "tslint": "4.5.0",
-    "typescript": "2.2.0"
+    "typescript": "2.2.0",
+    "rollup":"0.45.2",
+    "uglify-js":"3.0.25"
   }
 }
