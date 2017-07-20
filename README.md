@@ -1,5 +1,11 @@
 # Angular modules for DDP
 
+## An opinion on auto-upgrading
+Semantic versioning is a nice idea; auto-upgrading is bad.  _Please strip out all auto-upgrade flags--`~` and `^`--from
+`package.json`._  It's possible that we'll make an exception for this for `peerDependencies` in our modules, depending
+on how much we end up trusting angular's interpretation of semvar, but for top-level `package.json`, we _do not auto upgrade_
+because _doing so leads to unreproducible builds_.
+
 ## General layout
 This repo contains source for DDP's Angular SDK.  Inside the repo, we have module code, tests, and an angular
 app.  The app itself serves only demonstration and testing purposes; in the real world, DDP app code lives
