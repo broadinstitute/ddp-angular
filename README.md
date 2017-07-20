@@ -58,7 +58,7 @@ Copy paste that into `~.nprmrc`.
 ## Deploying a module to artifactory
 Each module should exist in its own directory so that the module can be built and deployed as its own thing.  The
 `package.json` exists (in slightly different forms) both at the module level and in the `dist` directory; `rollup.config.js`
-exists in each module directory as well.  There is room for improvement in this area in terms of DRY-ness.  Setting things
+and `tsconfig.json` also exist in each module directory as well.  There is room for improvement in this area in terms of DRY-ness.  Setting things
 up this way came about based largely on theses posts:
 * http://blog.mgechev.com/2017/01/21/distributing-an-angular-library-aot-ngc-types/
 * https://medium.com/@cyrilletuzi/how-to-build-and-publish-an-angular-module-7ad19c0b4464
