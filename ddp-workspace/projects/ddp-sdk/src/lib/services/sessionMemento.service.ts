@@ -1,0 +1,200 @@
+import { Injectable, OnDestroy } from '@angular/core';
+import { Session } from '../models/session';
+import { TemporaryUser } from './../models/temporaryUser';
+import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/operators';
+
+@Injectable()
+export class SessionMementoService implements OnDestroy {
+    private readonly SESSION_KEY: string = 'session_key';
+    private readonly TOKEN_KEY = 'token';
+    private readonly sessionSubject: BehaviorSubject<Session | null>;
+    private readonly renewSubject: Subject<number>;
+    private readonly notificationSubject: Subject<number>;
+    private readonly MSECS_TO_NOTIFICATION = 300000;
+    private expirationSubscription: Subscription;
+    private renewSubscription: Subscription;
+    private notificationSubscription: Subscription;
+    private otherBrowserTabStorageEvent$: Observable<any>;
+    private sub: Subscription;
+
+    constructor() {
+        this.sessionSubject = new BehaviorSubject<Session | null>(this.session);
+        this.renewSubject = new Subject<number>();
+        this.notificationSubject = new Subject<number>();
+        this.observeExpiration();
+        // listen for storage events. Only get notified of storage changes in other tabs
+        this.otherBrowserTabStorageEvent$ = fromEvent(window, 'storage');
+        // the session storage
+        this.sub = this.otherBrowserTabStorageEvent$.pipe(
+            filter(event => event.key === this.SESSION_KEY),
+            filter(event => event.newValue !== event.oldValue),
+            map(event => event.newValue)
+        ).subscribe((newSessionValue) => {
+            if (!newSessionValue) {
+                // means other tab logged out. We logout too.
+                this.clear();
+            } else {
+                // copy the value
+                this.updateSession(JSON.parse(newSessionValue));
+            }
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.sub.unsubscribe();
+        this.expirationSubscription.unsubscribe();
+        this.renewSubscription.unsubscribe();
+        this.notificationSubscription.unsubscribe();
+    }
+
+    public get session(): Session | null {
+        const sessionString = localStorage.getItem(this.SESSION_KEY);
+        if (sessionString) {
+            return JSON.parse(sessionString);
+        }
+
+        return null;
+    }
+
+    public get token(): string {
+        const sessionString = localStorage.getItem(this.SESSION_KEY);
+        if (sessionString) {
+            return JSON.parse(sessionString).accessToken;
+        }
+        return '';
+    }
+
+    /**
+     * Make careful note: this is a hot observable. If you subscribe, expect a stream of values
+     * As token gets renewed
+     */
+    public get sessionObservable(): Observable<Session | null> {
+        return this.sessionSubject.asObservable();
+    }
+
+    public get renewObservable(): Observable<number> {
+        return this.renewSubject.asObservable();
+    }
+
+    public get notificationObservable(): Observable<number> {
+        return this.notificationSubject.asObservable();
+    }
+
+    // todo arz remove expiresIn and userGuid constants, extract them from idToken inside the method
+    public setSession(
+        accessToken: string,
+        idToken: string,
+        userGuid: string,
+        locale: string,
+        expiresAtInSeconds: number): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000);
+        this.updateSession(session);
+    }
+
+    public setTemporarySession(user: TemporaryUser): void {
+        const expiresAtInMsec = new Date(user.expiresAt).getTime();
+        const session = new Session('', '', user.userGuid, 'en', expiresAtInMsec);
+        this.updateSession(session);
+    }
+
+    public updateSession(session: Session): void {
+        localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
+        localStorage.setItem(this.TOKEN_KEY, session.idToken);
+        this.sessionSubject.next(session);
+    }
+
+    public setParticipant(guid: string): void {
+        if (this.session === null) {
+            return;
+        }
+        const session = this.session;
+        session.participantGuid = guid;
+        this.updateSession(session);
+    }
+
+    public clear(): void {
+        localStorage.removeItem(this.SESSION_KEY);
+        this.sessionSubject.next(null);
+    }
+
+    public get expiresAt(): number | null {
+        if (!this.session) {
+            return null;
+        }
+
+        return this.session.expiresAt;
+    }
+
+    public isAuthenticatedSession(): boolean {
+        const session = this.sessionSubject.value;
+        if (session === null || this.hasOnlyUserGuid(session)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public isTemporarySession(): boolean {
+        const session = this.sessionSubject.value;
+        if (session === null) {
+            return false;
+        }
+
+        return this.hasOnlyUserGuid(session);
+    }
+
+    public isAuthenticatedSessionExpired(): boolean {
+        return this.isAuthenticatedSession() && this.isSessionExpired();
+    }
+
+    public isTemporarySessionExpired(): boolean {
+        return this.isTemporarySession() && this.isSessionExpired();
+    }
+
+    public disableTokenExpiredProcess(): void {
+        this.renewSubscription && this.renewSubscription.unsubscribe();
+    }
+
+    private hasOnlyUserGuid(session: Session): boolean {
+        return !session.idToken && !!session.userGuid;
+    }
+
+    private isSessionExpired(): boolean {
+        const session = this.sessionSubject.value;
+        if (session === null) {
+            return false;
+        }
+
+        return new Date().getTime() > session.expiresAt;
+    }
+
+    private observeExpiration(): void {
+        this.expirationSubscription = this.sessionSubject
+            .subscribe(session => {
+                if (session) {
+                    const now = Date.now();
+                    const renewSource = of(Math.max(1, session.expiresAt - now)).pipe(
+                        mergeMap(delay => timer(delay))
+                    );
+                    this.renewSubscription = renewSource.subscribe(() => this.renewSubject.next(0));
+                    if (this.isAuthenticatedSession()) {
+                        const notificationSource = of(Math.max(1, session.expiresAt - this.MSECS_TO_NOTIFICATION - now)).pipe(
+                            mergeMap(delay => timer(delay))
+                        );
+                        this.notificationSubscription = notificationSource.subscribe(() => this.notificationSubject.next(0));
+                    }
+                } else {
+                    if (this.expirationSubscription) {
+                        this.expirationSubscription.unsubscribe();
+                    }
+                    if (this.renewSubscription) {
+                        this.renewSubscription.unsubscribe();
+                    }
+                    if (this.notificationSubscription) {
+                        this.notificationSubscription.unsubscribe();
+                    }
+                }
+            });
+    }
+}

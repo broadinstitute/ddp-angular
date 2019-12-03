@@ -1,0 +1,6 @@
+.idea
+**/node_modules/**
+lib
+output-config
+second-app
+toolkit-lib

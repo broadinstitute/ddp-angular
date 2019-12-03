@@ -1,0 +1,55 @@
+.mat-snack-bar-container {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+    margin: 4px;
+    background-color: white;
+    padding: 0px 0px 0px 0px !important;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.column2 {
+    float: left;
+    width: 50%;
+}
+
+.column3 {
+    float: left;
+    width: 33%;
+}
+
+@media (max-width: 600px) {
+    .column2 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .column3 {
+        width: 100%;
+    }
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.example-3col-card {
+    height: 75px;
+    padding: 15px;
+    margin: 10px;
+}
+
+.example-2col-card {
+    padding: 15px;
+    margin: 10px;
+}

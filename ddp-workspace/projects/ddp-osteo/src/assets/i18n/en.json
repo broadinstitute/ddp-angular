@@ -1,0 +1,534 @@
+{
+    "Common": {
+        "Buttons": {
+            "CountMeIn": "Count Me In",
+            "LearnMore": "Learn More",
+            "FAQ": "View more FAQs",
+            "VisitFAQ": "Visit FAQ",
+            "ReturnHome": "Return home",
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
+            },
+            "MailingList": {
+                "Title": "Join Mailing List",
+                "AriaLabel": "Join Mailing List button"
+            },
+            "HeaderMenu": {
+                "AriaLabel": "Header menu button"
+            }
+        },
+        "CMI": "Count Me In"
+    },
+    "Header": {
+        "Logo": {
+            "Title": "Osteosarcoma<br>Project",
+            "Image": {
+                "Alt": "Osteosarcoma project logo"
+            }
+        },
+        "Navigation": {
+            "Dashboard": "Dashboard",
+            "FAQ": "FAQs",
+            "AboutUs": "About Us",
+            "Newsletter": "Newsletter",
+            "ForPhysicians": "For Physicians",
+            "LogIn": "Log In"
+        }
+    },
+    "BehindScenesGallery": {
+        "Items": [
+            {
+                "id": 0,
+                "title": "Touring the Genomics Platform",
+                "text": "Members of the Count Me In team and the Osteo Project’s Patient Advisory Council tour the Genomics Platform at the Broad Institute.",
+                "image": "assets/images/osteo-team.png",
+                "alt": "Osteo team"
+            },
+            {
+                "id": 1,
+                "title": "Lorem ipsum dolor sit amet",
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus posuere mi at mauris interdum lobortis. Cras a elit tortor.",
+                "image": "assets/images/placeholder1.jpg",
+                "alt": "Osteo team"
+            },
+            {
+                "id": 2,
+                "title": "Nulla placerat justo vel vestibulum rutrum",
+                "text": "Integer vitae mattis enim. Nam risus sem, blandit et orci nec, volutpat tincidunt ipsum. Donec pellentesque dapibus tincidunt.",
+                "image": "assets/images/placeholder2.jpg",
+                "alt": "Osteo team"
+            },
+            {
+                "id": 3,
+                "title": "Nam placerat dui turpis, eu luctus nisi gravida congue",
+                "text": "Donec felis libero, molestie nec mi et, porttitor fringilla eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
+                "image": "assets/images/placeholder1.jpg",
+                "alt": "Osteo team"
+            }
+        ],
+        "BackArrowAlt": "Back arrow",
+        "ForwardArrowAlt": "Forward arrow"
+    },
+    "HomePage": {
+        "IntroductionSection": {
+            "Title": "Together, the osteosarcoma community has the power to move research forward",
+            "Text": "By generating the most comprehensive osteosarcoma database, we can accelerate research and the development of new therapies. Only you hold the key to unlock future discoveries.",
+            "IframeTitle": "Introduction YouTube video"
+        },
+        "NavigationSection": {
+            "Button": {
+                "Alt": "Arrow down"
+            }
+        },
+        "OrganizationsSection": {
+            "BroadLogo": {
+                "Alt": "Broad Institute Logo"
+            },
+            "DanaFarberLogo": {
+                "Alt": "Dana Farber Logo"
+            }
+        },
+        "StepsSection": {
+            "Title": "You can help drive discoveries",
+            "Step1": {
+                "Text": "Share your experiences, access to medical records, and samples.",
+                "ImageAlt": "Clipboard"
+            },
+            "Step2": {
+                "Text": "The anonymous study data is shared widely with the biomedical community so all may learn together.",
+                "ImageAlt": "Microscope"
+            },
+            "Step3": {
+                "Text": "This will accelerate the ability of researchers to make discoveries.",
+                "ImageAlt": "Heart"
+            },
+            "NextStepArrowAlt": "Next step arrow"
+        },
+        "HelpSection": {
+            "Title": "Here’s how you can help",
+            "Diagnosed": {
+                "Title": "If you or your child have ever been diagnosed with osteosarcoma",
+                "Text": "You can make an impact by telling us about your or your child’s cancer. Share experiences, access to medical records, a saliva sample, and if you choose, tissue and blood samples to drive new discoveries. Depending on the age at enrollment, patients may enroll themselves. Younger patients will need the help of their parents."
+            },
+            "PassedAway": {
+                "Title": "If your child has passed away from osteosarcoma",
+                "Text": "You can make an impact by answering questions about your child’s diagnosis and experiences to advance our understanding of osteosarcoma."
+            }
+        },
+        "ParticipatingSection": {
+            "Title": "Participating is easy",
+            "AllowList": {
+                "Title": "You can choose to allow the study team to:",
+                "Option1": "send you a simple kit to collect a saliva sample",
+                "Option2": "request copies of your medical records"
+            },
+            "Opt-inToList": {
+                "Title": "You may also opt-in to:",
+                "Option1": "sharing a blood sample",
+                "Option2": "allowing the team to request a portion of tumor tissue (if available)"
+            },
+            "ClosingText": {
+                "Part1": "We will do the rest",
+                "Part2": " — with your permission, we’ll obtain copies of your medical records and send you a saliva kit."
+            },
+            "IframeTitle": "YouTube video about participating"
+        },
+        "GallerySection": {
+            "Title": "Behind the scenes",
+            "TitleImageAlt": "Molecule"
+        },
+        "PartnersSection": {
+            "Title": "Advocacy Partners"
+        },
+        "SocialMediaSection": {
+            "Title": "Follow us on social media",
+            "TwitterFeedTitle": "Twitter feed",
+            "InstagramFeedTitle": "Instagram feed"
+        },
+        "MailingListSection": {
+            "Title": "Want to stay informed on the OS Project?",
+            "Text": "We'll keep you up-to-date on developments, you can unsubscribe at any time."
+        },
+        "ClosingSection": {
+            "Title": "Please join us in saying “Count Me In!”",
+            "Text": "With your help, the osteosarcoma community can be the driving force behind transformative research."
+        }
+    },
+    "AboutUsPage": {
+        "IntroductionSection": {
+            "Title": "About Us",
+            "HeroImgAlt": "Broad hero",
+            "Text": {
+                "Main": "The <span class=\"normal bold\">Osteosarcoma Project</span> is part of <span class=\"normal italic\">Count Me In</span>, a nonprofit organization that <span class=\"normal bold\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
+                "Link": "Visit <span class=\"italic\">Count Me In</span> website"
+            }
+        },
+        "CMISection": {
+            "CMIImgAlt": "Count Me In Logo",
+            "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
+            "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+        },
+        "PACSection": {
+            "Title": "Project Advisory Council",
+            "Text": "The Osteosarcoma Project Advisory Council (PAC) is made up of <span class=\"bold\">patients, advocates, caregivers,</span> and <span class=\"bold\">loved ones</span> who have been impacted by osteosarcoma. The PAC meets regularly with the project operations team via video calls to <span class=\"bold\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
+            "Members": [
+                {
+                    "Name": "John Smith",
+                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
+                    "Image": "../../../assets/images/mock1.png",
+                    "Alt": "John Smith Photo"
+                },
+                {
+                    "Name": "Jane Doe",
+                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
+                    "Image": "../../../assets/images/mock2.png",
+                    "Alt": "Jane Doe Photo"
+                },
+                {
+                    "Name": "John Smith",
+                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
+                    "Image": "../../../assets/images/mock1.png",
+                    "Alt": "John Smith Photo"
+                },
+                {
+                    "Name": "Jane Doe",
+                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
+                    "Image": "../../../assets/images/mock2.png",
+                    "Alt": "Jane Doe Photo"
+                }
+            ]
+        },
+        "SACSection": {
+            "Title": "Scientific Advisory Council",
+            "Members": [
+                {
+                    "Name": "John Smith, Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "https://joincountmein.org/",
+                    "Image": "../../../assets/images/mock3.png",
+                    "Alt": "John Smith, Ph.D. Photo"
+                },
+                {
+                    "Name": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "https://joincountmein.org/",
+                    "Image": "../../../assets/images/mock4.png",
+                    "Alt": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D. Photo"
+                },
+                {
+                    "Name": "Bradley E. Bernstein, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Massachusetts General Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "https://joincountmein.org/",
+                    "Image": "../../../assets/images/mock3.png",
+                    "Alt": "Bradley E. Bernstein, M.D., Ph.D. Photo"
+                },
+                {
+                    "Name": "Rameen Beroukhim, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "https://joincountmein.org/",
+                    "Image": "../../../assets/images/mock4.png",
+                    "Alt": "Rameen Beroukhim, M.D., Ph.D. Photo"
+                },
+                {
+                    "Name": "Wenya Linda Bi, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "https://joincountmein.org/",
+                    "Image": "../../../assets/images/mock3.png",
+                    "Alt": "Wenya Linda Bi, M.D., Ph.D. Photo"
+                }
+            ]
+        },
+        "LearnMoreSection": {
+            "Text": "Learn more about participating in the Osteosarcoma Project"
+        }
+    },
+    "FaqPage": {
+        "Title": "Frequently Asked Questions",
+        "IntroText": {
+            "Paragraph1": "The Osteosarcoma Project (OSP) takes a new approach to cancer research in which patients contribute their experiences, clinical information, and samples to make data freely available for any osteosarcoma researchers. By generating the most comprehensive database for osteosarcoma, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a>, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
+            "Paragraph2": {
+                "Part1": "This project has been built with the guidance and input of many different members of the osteosarcoma community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at",
+                "Part2": "or by phone at"
+            }
+        },
+        "FaqSections": [
+            {
+                "Title": "General FAQ",
+                "Items": [
+                    {
+                        "Question": "What is the goal of the Osteosarcoma Project?",
+                        "Paragraphs": [
+                            "The goal of this project is to generate a large dataset that includes genomic, clinical, molecular, and patient reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community understand the landscape of osteosarcoma and accelerate discoveries by making data more readily available."
+                        ]
+                    },
+                    {
+                        "Question": "Who is conducting this research?",
+                        "Paragraphs": [
+                            "This project is being conducted by <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a>, a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research. <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a> is stewarded by four leading organizations: The Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Emerson Collective, a California-based social change organization; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The Osteo Project also works in collaboration with a growing coalition of nonprofit advocacy partners. Our team is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more about us <a class=\"Link\" href=\"/about-us\">here</a>."
+                        ]
+                    },
+                    {
+                        "Question": "How has the osteosarcoma community been involved in the design of this project?",
+                        "Paragraphs": [
+                            "We have worked closely with patients, parents, and patient advocates within the osteosarcoma community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in osteosarcoma.",
+                            "We're proud to have as our Advocacy Partners MIB Agents to partner with and support this project."
+                        ]
+                    },
+                    {
+                        "Question": "Are there any costs for me to participate?",
+                        "Paragraphs": [
+                            "No, there are no costs to you."
+                        ]
+                    },
+                    {
+                        "Question": "Is this research being conducted for profit?",
+                        "Paragraphs": [
+                            "No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data that has had readily identifiable information removed with the research community in order to accelerate discoveries."
+                        ]
+                    },
+                    {
+                        "Question": "Is this study a clinical trial?",
+                        "Paragraphs": [
+                            "This study is not a clinical trial. Participation will not have any impact on you/your child’s course of care for osteosarcoma. We are not permitted to give any clinical advice as part of your/your child’s participation in this project. We are also not able to return any individual results to people participating in this project as all testing is research-grade and not clinical-grade. Please see below for further details."
+                        ]
+                    },
+                    {
+                        "Question": "How this is different than clinical/commercial genomic testing?",
+                        "Paragraphs": [
+                            "There are many types of genetic sequencing. Clinical-grade genetic sequencing is done in a lab (called a CLIA lab) with strict parameters to make sure that the data is safe to use for clinical care. Our genetic sequencing is research-grade, meaning that it cannot be used to inform clinical care.",
+                            "There are also different types of genetic sequencing depending on what a researcher or physician is interested in. A panel test might be looking at just one or several genes that are already known to have an impact on humans if mutated. This project performs Whole Exome Sequencing (WES), meaning that we look at all of the parts of the DNA that are being used by the body to make proteins. Finally, whole genome sequencing (WGS) is used to sequence all of the DNA in your body’s cells.",
+                            "If you are interested in clinical/commercial testing, please consult your/your child’s medical team."
+                        ]
+                    },
+                    {
+                        "Question": "What's in a tumor and what is germline testing?",
+                        "Paragraphs": [
+                            "Tumors are made of cells in your body whose DNA has mutated so they are no longer healthy and normally-functioning. Your/your child’s germline (also called \"normal\") DNA is the DNA that is in all the healthy cells in the body. We can compare your/your child’s tumor’s DNA to the normal DNA to learn more about the genetic mutations that are present in your/your child’s cancer. Germline testing looks at the normal DNA in your/your child’s body. This is sometimes done to see if there is a mutation present that may have been inherited."
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "I/my child have been diagnosed with osteosarcoma",
+                "Items": [
+                    {
+                        "Question": "How does this project work?",
+                        "Paragraphs": [
+                            "<span class=\"black\">A. Tell us about yourself or your child.</span>",
+                            "Click \"Count Me In\" and complete a simple online form to tell us about yourself/your child. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your/your child’s experiences with osteosarcoma and couple that information with what we learn from the DNA in your/their tumor.",
+                            "<span class=\"black\">B. Give us permission to collect your/your child’s samples and data.</span>",
+                            "If you are in the United States or Canada after you fill out the initial survey, we will ask you to complete an online consent form that requests your permission to obtain copies of your/your child’s medical records and a saliva sample. You may also opt-in to providing a blood sample and/or allowing us to request a small portion of your/your child’s stored tumor sample. We’ll also ask you to tell us where you/your child received medical care so we can contact the appropriate doctors and hospitals.",
+                            "<span class=\"black\">C. We'll find and request your/your child's records.</span>",
+                            "Our team will contact your/your child's doctors and hospitals to obtain copies of medical records. We will only request medical records from the institutions you list while registering. This is a manual process and takes time. Medical records typically are either faxed or mailed to us upon our requests—none come in automatically as a result of participation in this project, regardless of your/your child's physician’s knowledge of participation in this project.",
+                            "If you have opted in to sharing tumor tissue, our team may also request a small portion of your/your child’s stored tumor samples. We will ask pathology departments to share only a part of the tumor tissue, and not to share anything with us that might be needed for clinical care.",
+                            "<span class=\"black\">D. Send Us a Saliva Kit.</span>",
+                            "We'll also send you a simple kit to collect a saliva sample from you/your child, which will contain \"healthy\" germline DNA that can be compared with DNA from your/your child’s tumor sample. ",
+                            "<span class=\"black\">E. We'll Analyze Your/Your Child’s Tumor and Medical Data.</span>",
+                            "We will perform cutting-edge, comprehensive genomic analyses on your/your child's saliva, tumor, and/or blood sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your/your child’s medical record. Any information that would make it easy to identify you/your child as an individual will be removed from all genomic and clinical data.",
+                            "<span class=\"black\">F. We'll Share the Data with Other Researchers.</span>",
+                            "Once potentially identifying information has been removed, our database of genomic and medical information (with your/your child’s identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand osteosarcoma and develop new therapies. To see what kind of data we will be generating you can reference our sister project's, the Metastatic Breast Cancer Project, data on <a class=\"Link\" href=\"https://www.mbcproject.org/data-release\" target=\"_blank\">mbcproject.org/data-release</a>. By sharing all sequencing and clinical data with multiple public databases, we will enable anyone to use this data to accelerate research."
+                        ]
+                    },
+                    {
+                        "Question": "What happens when my child with osteosarcoma becomes an adult?",
+                        "Paragraphs": [
+                            "When your child reaches the age of consenting for themselves, they need to consent themselves to continue to participate in the project. For the US and Canada, this varies by locations and is between ages 18 and 21.",
+                            "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s osteosarcoma treatment."
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "My child passed away from osteosarcoma",
+                "Items": [
+                    {
+                        "Question": "Can I participate if my child has passed away from osteosarcoma?",
+                        "Paragraphs": [
+                            "Yes. You can click \"Count Me In\", and there will be an option to indicate that your child has passed away. This will lead to a survey that will ask questions about your child’s experience with osteosarcoma. Your responses will give researchers unique insights into this cancer and has the power to inform future directions for studies in this rare cancer.",
+                            "We will provide regular updates as the study progresses about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you."
+                        ]
+                    },
+                    {
+                        "Question": "Can I provide access to medical records and tissue on behalf of someone who passed away? ",
+                        "Paragraphs": [
+                            "The Osteosarcoma Project cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for next-of-kin process, but this will take time to develop. Through the Loved Ones survey, you may choose to opt-in to be re-contacted by the study if a process is developed to enable this."
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "I am a member of the community who would like to get involved",
+                "Items": [
+                    {
+                        "Question": "How can I spread the word about the Osteosarcoma Project?",
+                        "Paragraphs": [
+                            "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a>."
+                        ]
+                    },
+                    {
+                        "Question": "How can I receive updates on the Osteosarcoma Project?",
+                        "Paragraphs": [
+                            "If you would like updates on the project, please sign up for our mailing list."
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "My Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        },
+        "StayInformed": {
+            "Title": "Stay informed",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email"
+        },
+        "LovedOneThankYou": {
+            "Title": "Thank you",
+            "ThankYou": "Thank you for taking the time to take the survey and share your Loved One’s experience with osteosarcoma.",
+            "StayInTouch": "We’ll stay in touch with you so that you can see the progress that we are making towards advancements in the understanding of osteosarcoma.",
+            "Contacts": {
+                "TextPt1": "We'd also like to hear from you if you have any additional thoughts you'd like to share — please feel free to email us at ",
+                "TextPt2": "or call us at"
+            },
+            "ThankYouAgain": "Thank you again for sharing with us and supporting the entire osteosarcoma community. If you’d like to help us reach patients or other community members, feel free to share the project. Together, we can move research forward for the osteosarcoma community."
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "View/Edit",
+        "ReviewButton": "View",
+        "ValidateError": "Please correct any errors in the form",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Osteosarcoma Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Osteosarcoma Project",
+            "Alert": "Your session will time-out soon"
+        }
+    }
+}

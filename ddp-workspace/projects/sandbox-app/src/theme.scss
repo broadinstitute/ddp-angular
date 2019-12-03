@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// Default colors
+$my-app-primary: mat-palette($mat-teal, 700, 100, 800);
+$my-app-accent: mat-palette($mat-teal, 700, 100, 800);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+@include angular-material-theme($my-app-theme);
+
+// Dark theme
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark-theme {
+    @include angular-material-theme($dark-theme);
+}
+
+// Light theme
+$light-primary: mat-palette($mat-grey, 200, 500, 300);
+$light-accent: mat-palette($mat-brown, 200);
+$light-warn: mat-palette($mat-deep-orange, 200);
+
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+.light-theme {
+    @include angular-material-theme($light-theme)
+}
+
+.ddp-login-button {
+    border: 2px solid black !important;
+    border-radius: 22px !important;
+}

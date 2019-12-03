@@ -1,0 +1,6 @@
+@import '../../../app-theme.scss';
+
+.footer {
+    background-color: mat-color($app-theme, 200);
+    height: 5rem;
+}

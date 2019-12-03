@@ -1,0 +1,17 @@
+<div class="gallery" (swipeleft)="moveForward()" (swiperight)="moveBack()">
+    <img class="gallery__image" [src]="selectedItem.image" alt="selectedItem.alt">
+    <div class="gallery__text">
+        <h4 class="no-margin">{{selectedItem.title}}</h4>
+        <p>{{selectedItem.text}}</p>
+    </div>
+    <div class="gallery__controls">
+        <input class="control" (click)="moveBack()" type="image" [alt]="'BehindScenesGallery.BackArrowAlt' | translate"
+            src="assets/images/back-arrow.svg">
+        <ng-container *ngFor="let item of gallery">
+            <div class="dot" [ngClass]="{'dot_active': isItemSelected(item.id)}">
+            </div>
+        </ng-container>
+        <input class="control" (click)="moveForward()" type="image"
+            [alt]="'BehindScenesGallery.ForwardArrowAlt' | translate" src="assets/images/forward-arrow.svg">
+    </div>
+</div>

@@ -1,0 +1,94 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+.mat-snack-bar-container {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+    margin: 4px;
+    background-color: white;
+    padding: 0px 0px 0px 0px !important;
+}
+
+.margin10 {
+    margin: 10px;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.column2 {
+    float: left;
+    width: 50%;
+}
+
+.column3 {
+    float: left;
+    width: 33%;
+}
+
+@media (max-width: 600px) {
+    .column2 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .column3 {
+        width: 100%;
+    }
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.example-3col-card {
+    height: 75px;
+    padding: 15px;
+    margin: 10px;
+}
+
+.example-2col-card {
+    padding: 15px;
+    margin: 10px;
+}
+
+.ddp-picklist-group-container {
+    padding: 0 0 0 16px;
+    font-size: 16px;
+}
+
+.ddp-picklist-group-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Properties added to make checkbox's label wrap the container */
+.mat-checkbox-layout .mat-checkbox-label {
+    white-space: normal !important;
+}
+
+.mat-checkbox-inner-container {
+    margin: 2px 8px auto 0px !important;
+}
+
+/* Make group grid adaptive */
+@media only screen and (max-width: 1100px) {
+    .ddp-picklist-group-container {
+        grid-template-columns: repeat(2, 50%) !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .ddp-picklist-group-container {
+        grid-template-columns: repeat(1, 100%) !important;
+    }
+}

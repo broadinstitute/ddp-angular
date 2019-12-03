@@ -1,0 +1,25 @@
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.parent {
+    overflow: hidden;
+}
+  
+.left {
+    float: left;
+    width: 350px;
+}
+  
+.right {
+    overflow: hidden;
+}
+  
+@media (max-width: 900px) {
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+    }
+}

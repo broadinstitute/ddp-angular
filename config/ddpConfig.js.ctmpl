@@ -1,0 +1,36 @@
+{{with $environment := env "ENVIRONMENT"}}
+{{with $version := env "VERSION"}}
+{{with $conf := vault (printf "secret/pepper/%s/%s/conf" $environment $version)}}
+
+var DDP_ENV = {
+  basePepperUrl: "{{$conf.Data.pepperApiBaseUrl}}",
+  {{if eq $environment "dev"}}
+	studyGuid: "TESTSTUDY1",
+        auth0Domain: "login-dev.joincountmein.org",
+        auth0ClientId:"5ps6MnYXmzpuo4OePvfcW0Dfv6cMPNIC",
+        auth0Audience: "ddp-dev.auth0.com",
+    {{end}}
+    {{if eq $environment "test"}}
+	studyGuid: "TESTSTUDY1",
+        auth0Domain: "login-test.joincountmein.org",
+        auth0ClientId:"cXRfKyziX5oiMsHjY0oY2mWx6BLZUdl8",
+        auth0Audience: "ddp-test.auth0.com",
+    {{end}}
+    {{if eq $environment "staging"}}
+	  studyGuid: "TESTSTUDY1",
+          auth0Domain: "login-staging.joincountmein.org",
+          auth0ClientId: "AZQ7QoaF65EJ5e82Ut1FDzTeCc0j0K7k",
+          auth0Audience: "ddp-staging.auth0.com",
+     {{end}}
+     {{if eq $environment "prod"}}
+           auth0Domain: "login.joincountmein.org",
+     {{end}}
+  auth0SilentRenewUrl: document.baseURI + 'silentRenew',
+  loginLandingUrl: document.baseURI + 'login-landing',
+  platformGAToken: "{{$conf.Data.platformGAToken}}",
+  projectGAToken:"{{$conf.Data.projectGAToken}}",
+  doLocalRegistration:false,
+  mapsApiKey:"{{$conf.Data.mapsApiKey}}"
+};
+
+{{end}}{{end}}{{end}}

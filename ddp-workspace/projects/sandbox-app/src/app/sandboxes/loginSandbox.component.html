@@ -1,0 +1,32 @@
+<mat-card class="example-2col-card">
+    <mat-card-header>
+        <mat-card-title>Login control</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="example-container mat-elevation-z8">
+            Component parameters
+            <br/>
+            <mat-form-field style="margin-top: 15px" data-ddp-test="loginCaptionInput">
+                <input matInput [(ngModel)]="loginCaption" placeholder="Login caption">
+            </mat-form-field>
+            <mat-form-field style="margin-top: 15px" data-ddp-test="logoutCaptionInput">
+                <input matInput [(ngModel)]="logoutCaption" placeholder="Logout caption">
+            </mat-form-field>
+            <div class="mat-body-2" data-ddp-test="loginEvent">
+                {{ currentEvent }}
+            </div>
+            <button mat-button (click)="call()" data-ddp-test="callServerButton">
+                MAKE SERVER CALL
+            </button>
+            <div class="mat-body-2" data-ddp-test="profileJson">
+                {{ profile }}
+            </div>
+        </div>
+        <br/>
+        <ddp-login [loginCaption]="loginCaption"
+                [logoutCaption]="logoutCaption"
+                   [auth0Mode]="auth0Mode"
+                (logout)="this.currentEvent='logout event occurs'">
+        </ddp-login>
+    </mat-card-content>
+</mat-card>

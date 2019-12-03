@@ -1,0 +1,14 @@
+#!/bin/bash
+
+{{with $environment := env "ENVIRONMENT"}}
+{{with $version := env "VERSION"}}
+{{with $conf := vault (printf "secret/pepper/%s/%s/conf" $environment $version)}}
+
+# login using build account creds and publish the sdk using whatever version is in package.json
+curl -u '{{$conf.Data.artifactoryBuildUsername}}:{{$conf.Data.artifactoryBuildPassword}}'  https://broadinstitute.jfrog.io/broadinstitute/api/npm/npm-local/auth/ddp > /.npmrc
+curl -u '{{$conf.Data.artifactoryBuildUsername}}:{{$conf.Data.artifactoryBuildPassword}}'   https://broadinstitute.jfrog.io/broadinstitute/api/npm/auth >> /.npmrc
+npm --userconfig /.npmrc publish sdk --registry https://broadinstitute.jfrog.io/broadinstitute/api/npm/npm-virtual/
+
+{{end}}
+{{end}}
+{{end}}

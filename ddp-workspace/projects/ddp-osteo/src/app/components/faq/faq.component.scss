@@ -1,0 +1,55 @@
+@import "../../../app-theme.scss";
+
+.faq-section {
+    background-color: mat-color($app-theme, 350);
+}
+
+.intro-faq-block__content {
+    padding: 2rem 0 0 0;
+}
+
+.faq-block {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+}
+
+.faq-block__icon {
+    margin: 0 1rem 0 0;
+    line-height: 2.25rem;
+}
+
+.faq-block__question {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+}
+
+.faq-block__text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.25rem;
+    line-height: 2.25rem;
+    color: mat-color($app-theme, 700);
+}
+
+// accordion
+.mat-expansion-panel {
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    border-top: 1px solid mat-color($app-theme, 650);
+}
+
+.mat-expansion-panel:last-child {
+    border-bottom: 1px solid mat-color($app-theme, 650);
+}
+
+.mat-expansion-panel-header {
+    padding: 1rem !important;
+}
+
+.mat-content {
+    align-items: flex-start;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}

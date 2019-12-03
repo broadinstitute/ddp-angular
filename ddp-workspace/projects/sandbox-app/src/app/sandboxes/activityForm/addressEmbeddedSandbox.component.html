@@ -1,0 +1,14 @@
+<mat-card class="example-2col-card">
+    <mat-card-title>
+        Embedded Address
+    </mat-card-title>
+    <mat-card-content>
+        <mat-card>
+            <button mat-button (click)="saveAddress()">Save Address</button>
+            <button mat-button (click)="deleteAddress()">Delete Address</button>
+            <button mat-button (click)="deleteTempAddress()">Delete Temp Address</button>
+        </mat-card>
+        <br/>
+      <ddp-address-embedded [activityGuid]="activityInstanceGuid"></ddp-address-embedded>
+    </mat-card-content>
+</mat-card>

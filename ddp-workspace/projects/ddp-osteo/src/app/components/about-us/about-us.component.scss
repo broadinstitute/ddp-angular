@@ -1,0 +1,188 @@
+@import "../../../app-theme.scss";
+
+.intro-section {
+    background-color: mat-color($app-theme, 350);
+}
+
+.image-block {
+    display: flex;
+    justify-content: center;
+}
+
+.image-block__image {
+    min-height: 11rem;
+    width: 100%;
+    height: 100%;
+}
+
+.text-block {
+    position: relative;
+    width: 40rem;
+    top: -10rem;
+    background-color: mat-color($app-theme, 100);
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.text-block__text {
+    padding: 2rem;
+    border-bottom: 1px solid mat-color($app-theme, 650);
+}
+
+.text-block__link {
+    padding: 1rem 2rem;
+}
+
+.title-block {
+    margin-top: -10rem;
+}
+
+.cmi-link {
+    color: mat-color($app-theme, 250);
+    font-size: 1.125rem;
+    line-height: 1.4375rem;
+}
+
+.cmi-link:hover {
+    text-decoration: underline;
+}
+
+.cmi-block {
+    margin: 5rem auto 0 auto;
+}
+
+.cmi-block__logo {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.pac-member {
+    position: relative;
+    margin: 3rem 0;
+}
+
+.pac-member__image {
+    position: absolute;
+    left: -230px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+}
+
+.sac-block {
+    margin-bottom: 3rem;
+}
+
+.sac-members {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sac-member {
+    flex: 50%;
+    display: flex;
+    margin: 0 0 3rem 0;
+    padding: 0 1rem 0 0;
+    box-sizing: border-box;
+}
+
+.sac-member__image {
+    max-width: 100%;
+    max-height: 100%;
+    width: 115px;
+    height: 115px;
+    margin: 0 2rem 0 0;
+    border-radius: 50%;
+}
+
+.sac-member__link {
+    font-size: 1.375rem;
+    line-height: 1.625rem;
+    color: mat-color($app-theme, 250);
+}
+
+.sac-member__link:hover {
+    text-decoration: underline;
+}
+
+.affiliations {
+    margin: 0.5rem 0 0 0;
+}
+
+.affiliations__text {
+    color: mat-color($app-theme, 700);
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.visit-faq-section {
+    background-color: mat-color($app-theme, 400);
+}
+
+.visit-faq-block {
+    margin: 4rem auto;
+    display: flex;
+    align-items: center;
+}
+
+.visit-faq-block__text {
+    padding-right: 4rem;
+}
+
+.visit-faq-block__button {
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 400px) {
+    .visit-faq-block {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .visit-faq-block__text {
+        padding-right: 0;
+        padding-bottom: 3rem;
+    }
+
+    .pac-member__image {
+        height: 115px;
+        width: 115px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sac-members {
+        flex-direction: column;
+    }
+
+    .sac-member {
+        padding: 0;
+    }
+
+    .pac-member__image {
+        height: 150px;
+        width: 150px;
+    }
+
+    .text-block {
+        position: unset;
+        width: 100%;
+        height: 100%;
+        border-radius: unset;
+        box-shadow: unset;
+    }
+
+    .title-block {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .pac-member__image {
+        position: unset;
+    }
+}

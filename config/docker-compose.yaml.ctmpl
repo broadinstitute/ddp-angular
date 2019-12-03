@@ -1,0 +1,23 @@
+{{with $environment := env "ENVIRONMENT"}}
+{{with $version := env "VERSION"}}
+
+demo-webapp:
+
+  image: broadinstitute/pepper-angular-sdk:{{$version}}_{{$environment}}
+
+  volumes:
+      - /app/deploy_to_artifactory.sh:/deploy_to_artifactory.sh
+      - /app/cert.key:/cert.key
+      - /app/cert.crt:/cert.crt
+      - /app/demo-app-nginx.conf:/etc/nginx/conf.d/default.conf
+      - /app/index.html:/usr/share/nginx/html/index.html
+      - /app/ddpConfig.js:/usr/share/nginx/html/basil-app/assets/config/ddpConfig.js
+      - /app/ddpConfig.js:/usr/share/nginx/html/sandbox-app/assets/config/ddpConfig.js
+      - /app/ddpConfig.js:/usr/share/nginx/html/second-app/assets/config/ddpConfig.js
+      - /app/ddpConfig.js:/usr/share/nginx/html/ddp-angio/assets/config/ddpConfig.js
+
+  ports:
+    - "80:80"
+    - "443:443"
+
+{{end}}{{end}}

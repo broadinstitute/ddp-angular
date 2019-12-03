@@ -1,0 +1,43 @@
+<toolkit-redesigned-header></toolkit-redesigned-header>
+<main class="main" routeTransformer>
+    <section class="section faq-section">
+        <div class="content content_medium">
+            <h1 class="section-title" translate>FaqPage.Title</h1>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_tight intro-faq-block">
+            <div class="intro-faq-block__content">
+                <p [innerHTML]="'FaqPage.IntroText.Paragraph1' | translate"></p>
+                <p>
+                    <span translate>FaqPage.IntroText.Paragraph2.Part1</span>
+                    <a class="Link" [href]="infoEmailHref">{{infoEmail}}</a>
+                    <span translate>FaqPage.IntroText.Paragraph2.Part2</span>
+                    <a class="Link" [href]="phoneHref">{{phone}}</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+    <ng-container *ngFor="let faqSection of 'FaqPage.FaqSections' | translate">
+        <section class="section">
+            <div class="content content_tight faq-block">
+                <h3 class="no-margin">{{faqSection.Title}}</h3>
+                <mat-accordion hideToggle="true" multi="true" displayMode="flat">
+                    <ng-container *ngFor="let item of faqSection.Items">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                                <mat-icon class="faq-block__icon">add</mat-icon>
+                                <p class="faq-block__question no-margin">{{item.Question}}</p>
+                            </mat-expansion-panel-header>
+                            <ng-template matExpansionPanelContent>
+                                <ng-container *ngFor="let paragraph of item.Paragraphs">
+                                    <p class="faq-block__text" [innerHTML]="paragraph"></p>
+                                </ng-container>
+                            </ng-template>
+                        </mat-expansion-panel>
+                    </ng-container>
+                </mat-accordion>
+            </div>
+        </section>
+    </ng-container>
+</main>

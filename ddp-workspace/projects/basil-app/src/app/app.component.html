@@ -1,0 +1,36 @@
+<div class="MainContainer">
+    <mat-toolbar color="primary" class="Header">
+        <img [attr.src]="logoUrl"/>
+        <div class="Header-logoText">
+            The Basil
+            <br/>
+            Project
+        </div>
+        <span class="example-fill-remaining-space"></span>
+        <button mat-button [matMenuTriggerFor]="menu" fxHide="false" fxHide.gt-xs *ngIf="isUserAuthenticated()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <a mat-menu-item>
+              <ddp-user-profile></ddp-user-profile>
+            </a>
+            <a mat-menu-item class="Menu-Logout-Button">
+              <ddp-login (logout)="logout()"></ddp-login>
+            </a>
+        </mat-menu>
+        <div>
+          <ddp-login (logout)="logout()" fxHide="false" fxHide.gt-xs *ngIf="!isUserAuthenticated()"></ddp-login>
+        </div>
+        <div fxShow="false" fxShow.gt-xs>
+            <ddp-user-profile></ddp-user-profile>
+            <ddp-login (logout)="logout()"></ddp-login>
+        </div>
+    </mat-toolbar>
+    <div class="Wrapper">
+        <div class="PageContent">
+            <div class="PageLayout">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

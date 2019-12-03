@@ -1,0 +1,89 @@
+<toolkit-redesigned-header></toolkit-redesigned-header>
+<main class="main">
+    <section class="section intro-section">
+        <div class="image-block">
+            <img class="image-block__image" src="../../../assets/images/about-page-broad-hero.jpg"
+                [alt]="'AboutUsPage.IntroductionSection.HeroImgAlt' | translate">
+        </div>
+        <div class="text-block">
+            <p class="text-block__text no-margin light"
+                [innerHTML]="'AboutUsPage.IntroductionSection.Text.Main' | translate">
+            </p>
+            <div class="text-block__link">
+                <a class="cmi-link" [href]="countMeInUrl" target="_blank"
+                    [innerHTML]="'AboutUsPage.IntroductionSection.Text.Link' | translate">
+                </a>
+            </div>
+        </div>
+        <div class="title-block">
+            <h1 class="section-title" translate>
+                AboutUsPage.IntroductionSection.Title
+            </h1>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_tight cmi-block">
+            <div class="cmi-block__logo">
+                <a [href]="countMeInUrl" target="_blank">
+                    <img src="../../../assets/images/logo-count-me-in.svg"
+                        [alt]="'AboutUsPage.CMISection.CMIImgAlt' | translate">
+                </a>
+            </div>
+            <p>
+                <a class="Link italic" [href]="countMeInUrl" target="_blank" translate>Common.CMI</a>
+                <span translate>AboutUsPage.CMISection.Paragraph1</span>
+            </p>
+            <p translate>AboutUsPage.CMISection.Paragraph2</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_tight">
+            <h2 class="section-title" translate>
+                AboutUsPage.PACSection.Title
+            </h2>
+            <p [innerHTML]="'AboutUsPage.PACSection.Text' | translate"></p>
+            <ng-container *ngFor="let member of 'AboutUsPage.PACSection.Members' | translate">
+                <div class="pac-member">
+                    <img class="pac-member__image" [src]="member.Image" [alt]="member.Alt">
+                    <h4 class="no-margin">{{member.Name}}</h4>
+                    <p>{{member.Bio}}</p>
+                </div>
+            </ng-container>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_medium sac-block">
+            <h2 class="section-title" translate>
+                AboutUsPage.SACSection.Title
+            </h2>
+            <div class="sac-members">
+                <ng-container *ngFor="let member of 'AboutUsPage.SACSection.Members' | translate">
+                    <div class="sac-member">
+                        <img class="sac-member__image" [src]="member.Image" [alt]="member.Alt">
+                        <div>
+                            <a class="sac-member__link" [href]="member.Url" target="_blank">{{member.Name}}</a>
+                            <div class="affiliations">
+                                <ng-container *ngFor="let affiliation of member.Affiliations">
+                                    <p class="no-margin affiliations__text">{{affiliation}}</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+    <section class="section visit-faq-section">
+        <div class="content content_tight visit-faq-block">
+            <h3 class="no-margin visit-faq-block__text" translate>
+                AboutUsPage.LearnMoreSection.Text
+            </h3>
+            <div>
+                <a routerLink="/more-details" class="button button_big button_secondary visit-faq-block__button"
+                    translate>
+                    Common.Buttons.VisitFAQ
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

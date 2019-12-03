@@ -1,0 +1,27 @@
+<mat-card class="example-2col-card">
+    <mat-card-title>
+        Paged activity form
+    </mat-card-title>
+    <mat-card-content>
+        <mat-card>
+            <mat-card-title>
+                <div class="mat-subheading-2">
+                    Create activity instance
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <mat-form-field style="margin-top: 15px">
+                    <input matInput [(ngModel)]="activityGuid" placeholder="Activity GUID">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="create()">CREATE</button>
+            </mat-card-actions>
+        </mat-card>
+        <br/>
+        <ddp-activity studyGuid="TESTSTUDY1"
+                      isStepped="true"
+                      [activityGuid]="instanceGuid">
+        </ddp-activity>
+    </mat-card-content>
+</mat-card>

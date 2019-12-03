@@ -1,0 +1,218 @@
+<toolkit-redesigned-header></toolkit-redesigned-header>
+<main class="main">
+    <section class="section">
+        <div class="content content_wide intro-media-block">
+            <div class="intro-media-block__text">
+                <h1 class="no-margin" translate>
+                    HomePage.IntroductionSection.Title
+                </h1>
+                <p translate>
+                    HomePage.IntroductionSection.Text
+                </p>
+                <div class="intro-media-block__buttons">
+                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                        Common.Buttons.CountMeIn
+                    </a>
+                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                        Common.Buttons.LearnMore
+                    </a>
+                </div>
+            </div>
+            <div class="youtube-video">
+                <iframe [title]="'HomePage.IntroductionSection.IframeTitle' | translate" class="youtube-video__iframe"
+                    src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="navigation-section">
+        <input (click)="scrollToStepsSection()" type="image" src="assets/images/arrow.svg"
+            [alt]="'HomePage.NavigationSection.Button.Alt' | translate">
+    </section>
+    <section class="organizations-section">
+        <img src="assets/images/logo-broad-institute.svg" class="organizations-section__img"
+            [alt]="'HomePage.OrganizationsSection.BroadLogo.Alt' | translate">
+        <img src="assets/images/logo-dana-farber-cancer-institute.svg" class="organizations-section__img"
+            [alt]="'HomePage.OrganizationsSection.DanaFarberLogo.Alt' | translate">
+    </section>
+    <section #scrollAnchor class="background-decorator"></section>
+    <section class="section steps-section">
+        <div class="content content_medium steps-block">
+            <h2 class="section-title" translate>HomePage.StepsSection.Title</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step__img"><img src="assets/images/clipboard.svg"
+                            [alt]="'HomePage.StepsSection.Step1.ImageAlt' | translate"></div>
+                    <p translate>HomePage.StepsSection.Step1.Text</p>
+                </div>
+                <div class="arrow">
+                    <img src="assets/images/step-arrow.svg"
+                        [alt]="'HomePage.StepsSection.NextStepArrowAlt' | translate">
+                </div>
+                <div class="step">
+                    <div class="step__img"><img src="assets/images/microscope.svg"
+                            [alt]="'HomePage.StepsSection.Step2.ImageAlt' | translate"></div>
+                    <p translate>HomePage.StepsSection.Step2.Text</p>
+                </div>
+                <div class="arrow">
+                    <img src="assets/images/step-arrow.svg"
+                        [alt]="'HomePage.StepsSection.NextStepArrowAlt' | translate">
+                </div>
+                <div class="step">
+                    <div class="step__img"><img src="assets/images/heart.svg"
+                            [alt]="'HomePage.StepsSection.Step3.ImageAlt' | translate"></div>
+                    <div>
+                        <p translate>HomePage.StepsSection.Step3.Text</p>
+                        <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                            Common.Buttons.LearnMore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section help-section">
+        <div class="content content_medium help-block">
+            <h2 class="section-title" translate>HomePage.HelpSection.Title</h2>
+            <div class="help-block__text">
+                <div>
+                    <p class="big bold" translate>HomePage.HelpSection.Diagnosed.Title</p>
+                    <p translate>HomePage.HelpSection.Diagnosed.Text</p>
+                </div>
+                <div>
+                    <p class="big bold" translate>HomePage.HelpSection.PassedAway.Title</p>
+                    <p translate>HomePage.HelpSection.PassedAway.Text</p>
+                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                        Common.Buttons.FAQ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide media-block">
+            <div class="media-block__text">
+                <h2 translate>
+                    HomePage.ParticipatingSection.Title
+                </h2>
+                <p class="no-margin">
+                    <span class="bold" translate>HomePage.ParticipatingSection.AllowList.Title</span>
+                </p>
+                <ul>
+                    <li translate>HomePage.ParticipatingSection.AllowList.Option1</li>
+                    <li translate>HomePage.ParticipatingSection.AllowList.Option2</li>
+                </ul>
+                <p class="no-margin">
+                    <span class="bold" translate>HomePage.ParticipatingSection.Opt-inToList.Title</span>
+                </p>
+                <ul>
+                    <li translate>HomePage.ParticipatingSection.Opt-inToList.Option1</li>
+                    <li translate>HomePage.ParticipatingSection.Opt-inToList.Option2</li>
+                </ul>
+                <p>
+                    <span class="bold" translate>HomePage.ParticipatingSection.ClosingText.Part1</span>
+                    <span translate>HomePage.ParticipatingSection.ClosingText.Part2</span>
+                </p>
+                <div>
+                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                        Common.Buttons.CountMeIn
+                    </a>
+                </div>
+            </div>
+            <div class="youtube-video">
+                <iframe [title]="'HomePage.ParticipatingSection.IframeTitle' | translate" class="youtube-video__iframe"
+                    src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="section gallery-section">
+        <div class="content content_medium gallery-block">
+            <div class="gallery-header">
+                <h2 class="gallery-header__title" translate>HomePage.GallerySection.Title</h2>
+                <img class="gallery-header__image" src="assets/images/molecule.svg"
+                    [alt]="'HomePage.GallerySection.TitleImageAlt' | translate">
+            </div>
+            <app-gallery></app-gallery>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide partners-block">
+            <h2 translate>
+                HomePage.PartnersSection.Title
+            </h2>
+            <div class="partners-group">
+                <img class="image" src="assets/images/partner_mib.png" alt="Make It Better">
+                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide social-media-block">
+            <div class="social-media-header">
+                <h2 translate>
+                    HomePage.SocialMediaSection.Title
+                </h2>
+                <div class="social-media-logos">
+                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
+                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
+                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
+                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
+                </div>
+            </div>
+            <div class="feeds">
+                <div class="twitter-feed">
+                    <p class="big bold" translate>HomePage.SocialMediaSection.TwitterFeedTitle</p>
+                    <app-twitter-timeline-widget></app-twitter-timeline-widget>
+                </div>
+                <div class="instagram-feed">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide stay-informed-block">
+            <div>
+                <h3 class="no-margin" translate>
+                    HomePage.MailingListSection.Title
+                </h3>
+                <p class="no-margin" translate>
+                    HomePage.MailingListSection.Text
+                </p>
+            </div>
+            <div>
+                <button [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                    class="button button_medium button_secondary" translate>Common.Buttons.MailingList.Title</button>
+            </div>
+        </div>
+    </section>
+    <section class="background-decorator"></section>
+    <section class="section join-us-section">
+        <div class="content content_wide join-us-block">
+            <div class="join-us-content">
+                <h2 class="big no-margin" translate>HomePage.ClosingSection.Title</h2>
+                <p class="extra-margin" translate>
+                    HomePage.ClosingSection.Text
+                </p>
+                <a routerLink="/count-me-in" class="button button_big button_primary" translate>
+                    Common.Buttons.CountMeIn
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

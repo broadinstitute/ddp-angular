@@ -1,0 +1,308 @@
+@import "../app-theme.scss";
+
+// common activity styles
+.section-spinner {
+    display: flex;
+    align-items: center;
+    height: 50vh;
+    justify-content: center;
+}
+
+.main_activity {
+    padding-bottom: 6.25rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+}
+
+.ddp-close-button:hover {
+    color: mat-color($app-theme, 650);
+}
+
+// steps
+.activity-steps {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    grid-gap: 1rem;
+    margin: 3rem 0;
+}
+
+.activity-step {
+    cursor: pointer;
+    color: mat-color($app-theme, 650);
+}
+
+.activity-step.completed {
+    color: mat-color($app-theme, 700);
+}
+
+.activity-step.active.completed {
+    color: mat-color($app-theme, 200);
+}
+
+@media only screen and (max-width: 600px) {
+    .activity-steps {
+        grid-auto-flow: row;
+    }
+}
+
+// activity lists
+.ddp-list {
+    padding: 0 0 0 1.5rem;
+}
+
+.ddp-li {
+    font-weight: 600;
+}
+
+.ddp-block-title-bold {
+    font-weight: 600;
+}
+
+.ddp-block-body {
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+    color: mat-color($app-theme, 700);
+    margin: 1rem 0 1rem -1.5625rem;
+    font-weight: 400;
+}
+
+.ddp-simple-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    .ddp-question-prompt {
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        font-family: inherit;
+    }
+}
+
+.ul-flat-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li::before {
+        content: "— ";
+    }
+}
+
+.inner-ul-flat-list {
+    list-style-type: none;
+    padding: 0;
+
+    p::before {
+        content: "— ";
+    }
+}
+
+.ol-flat-list {
+    font-weight: 600;
+    color: mat-color($app-theme, 200);
+
+    p {
+        color: mat-color($app-theme, 700);
+    }
+}
+
+.simple-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+// buttons layout
+.activity-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0 0 0;
+}
+
+.button_right {
+    margin-left: auto;
+}
+
+// error message
+.ErrorMessage {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    margin: 1rem 0;
+    color: mat-color($app-theme, 500);
+    border-top: 1px solid mat-color($app-theme, 500);
+}
+
+
+.ErrorMessage a {
+  text-decoration: underline !important;
+}
+
+.ddp-activity-validation {
+  .ErrorMessageList {
+    list-style-type: square;
+  }
+
+  .ErrorMessageItem {
+    font-size: 1.25rem;
+    color: mat-color($app-theme, 500);
+    margin: .3rem 0;
+    padding: 0 0 0 0;
+  }
+}
+
+// info box
+.infobox {
+    border: 2px solid mat-color($app-theme, 250);
+    border-radius: 8px;
+    background-color: rgba(113, 84, 255, 0.06);
+    padding: 1rem;
+}
+
+// consent agree question
+.consent-agree {
+    margin: 0rem 0 -1.5rem 0;
+}
+
+// question text
+.ddp-question-prompt {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
+// native dropdown
+select {
+    font-size: 1.25rem;
+    color: mat-color($app-theme, 700);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 0;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .42);
+    border-radius: 0;
+    height: 2.65rem;
+    transition: all .3s;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+select:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
+    cursor: auto;
+}
+
+// picklist
+.mat-checkbox-label,
+.mat-radio-label-content {
+    font-size: 1.25rem;
+    line-height: 1.25rem !important;
+    color: mat-color($app-theme, 700);
+}
+
+.mat-checkbox-inner-container {
+    height: 1.375rem !important;
+    width: 1.375rem !important;
+}
+
+.mat-radio-label {
+    margin: 0.5rem 0;
+    align-items: unset !important;
+}
+
+.mat-radio-label-content {
+    font-weight: 400;
+}
+
+.picklist {
+    .ddp-date-field-margin:first-child {
+        margin: 0 1rem 0 0;
+    }
+
+    .ddp-date-field-margin:last-child {
+        margin: 0;
+    }
+}
+
+.ddp-picklist-option-list-item {
+    height: auto !important;
+    margin-bottom: 1rem;
+}
+
+.mat-list .mat-list-item .mat-list-item-content {
+    display: block !important;
+    padding: 0 4px !important;
+}
+
+.ddp-helper {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.4375rem;
+    color: mat-color($app-theme, 700);
+    font-weight: 400;
+}
+
+.ddp-counter-color {
+    color: mat-color($app-theme, 250);
+}
+
+// input
+.mat-form-field-infix {
+    color: mat-color($app-theme, 700);
+    font-size: 1.25rem;
+}
+
+// agreement question
+.ddp-agreement-text {
+    white-space: normal;
+    color: mat-color($app-theme, 700);
+}
+
+.ddp-agreement {
+    .mat-checkbox-inner-container {
+        top: 4px;
+    }
+}
+
+// composite question
+ddp-activity-composite-answer {
+
+    p,
+    span {
+        font-weight: 400;
+    }
+}
+
+// institutions
+.ddp-institutions-form {
+    margin: 2rem 0;
+    font-weight: 400;
+}
+
+.ddp-address-embedded__title,
+.ddp-institutions-form__title {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+    margin: 0;
+}
+
+.ddp-address-embedded__subtitle,
+.ddp-institutions-form__subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: mat-color($app-theme, 700);
+}
+
+// mat error
+.mat-error {
+    font-size: 0.9rem;
+}

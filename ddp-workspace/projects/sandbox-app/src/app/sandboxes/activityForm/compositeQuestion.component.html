@@ -1,0 +1,43 @@
+<mat-card class="example-2col-card">
+    <mat-card-title>
+        Composite Question
+    </mat-card-title>
+    <mat-card-content>
+        <mat-card>
+            <mat-card-title>
+                <div class="mat-subheading-2">
+                    Component parameters
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <textarea class="margin10" cols="80" 
+                    rows="15" 
+                    [(ngModel)]="inputParameters">
+                </textarea>
+                <div class="margin10">
+                    <ddp-validation-message [message]="validationMessage">
+                    </ddp-validation-message>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="update()">UPDATE</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card>
+            <mat-card-title>
+                <div class="mat-subheading-2">
+                    Component outputs
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <div>Current value</div>
+                <div data-ddp-test="currentValue" class="margin10"> {{ currentValue }}</div>
+            </mat-card-content>
+        </mat-card>
+        <br/>
+        <ddp-activity-composite-answer [block]="question"
+                                     [readonly]="readonly"
+                                     (valueChanged)="valueChanged($event)">
+        </ddp-activity-composite-answer>
+    </mat-card-content>
+</mat-card>

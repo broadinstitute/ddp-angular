@@ -1,0 +1,581 @@
+{
+    "App": {
+        "Home": "Home",
+        "FAQ": "More Details/FAQ",
+        "About": "About Us",
+        "Join": "Join Mailing List",
+        "Info": "Information for Physicians",
+        "Twitter": "Tweets by ASCaProject"
+    },
+    "Toolkit": {
+        "Common": {
+            "Organization": "Count Me In"
+        },
+        "Header": {
+            "HeaderLogo": "Brain<br>Cancer<br>Project",
+            "LearnMore": "Learn More",
+            "CountMeIn": "count me in"
+        },
+        "Footer": {
+            "FooterLogo": "Brain<br>Cancer<br>Project",
+            "Home": "Home",
+            "Data": "Data Release",
+            "FAQ": "More Details/FAQ",
+            "About": "About Us",
+            "Join": "Join Mailing List",
+            "Info": "Information for Physicians",
+            "Top": "▴ Back to top",
+            "Contacts": {
+                "ContactUs": "Contact Us:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            }
+        },
+        "Welcome": {
+            "WelcomeTitle": "Help transform our understanding<br> of Brain Cancer",
+            "WelcomeText": "If you are an adult who has been diagnosed with a <span class='Semibold'>primary brain cancer</span>, such as glioblastoma, astrocytoma, or oligodendroglioma, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice. Together we can develop a comprehensive resource to contribute to research that will inform future therapies. The project will be expanding to include pediatric patients soon.",
+            "SmallTitle": "Significant challenges prevent the development of better therapies for patients with brain cancer. If you have brain cancer, you have the power to accelerate cancer research by combining your data with that of other patients.",
+            "FirstBlock": {
+                "Title": "Your information could unlock discoveries",
+                "Text": "Each patient's cancer is different. The unique information in your cancer holds the key to advances in cancer treatments. By analyzing the DNA in your samples, researchers can make discoveries that will ultimately lead to a better understanding of brain cancer. This information will be invaluable to patients and cancer research for years to come."
+            },
+            "SecondBlock": {
+                "Title": "Here's how you can participate",
+                "FirstStep": {
+                    "Title": "Step 1",
+                    "Subtitle": "Tell us about yourself",
+                    "TextPt1": "Click",
+                    "Link": "\"Count Me In\"",
+                    "TextPt2": "and complete a simple online form to tell us about yourself and your diagnosis with primary brain cancer."
+                },
+                "SecondStep": {
+                    "Title": "Step 2",
+                    "Subtitle": "Give us permission to collect your samples and data",
+                    "Text1": "You will be directed to an online consent form where you can provide permission for the project to collect your saliva sample and medical record data. You may also opt-in to provide a blood sample and/or share access to a minimally necessary amount of stored tumor samples. We'll send you the saliva and/or blood sample collection kit(s) and contact your doctors and hospitals to securely obtain copies of your medical records and tissue samples.",
+                    "Text2": {
+                        "Text": "To learn more about how we collect samples, see our",
+                        "Link": "FAQ"
+                    }
+                },
+                "ThirdStep": {
+                    "Title": "Step 3",
+                    "Subtitle": "Learn with us along the way",
+                    "Text": "The data generated from your samples and medical records will be coupled with that of other patients, de-identified, and shared widely with the biomedical community. We may also ask you additional questions about your experiences to help with future studies. We will provide you with regular updates regarding key discoveries and progress from the project; however, please note that individual data cannot be shared."
+                },
+                "CountMeInButton": "count me in"
+            },
+            "ThirdBlock": {
+                "TitlePt1": "The time to",
+                "TitlePt2": "act",
+                "TitlePt3": "is now",
+                "Text": "We are asking you to say \"Count Me In\" and share something invaluable with cancer research. Your biological samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of brain cancer."
+            },
+            "FourthBlock": {
+                "Title": {
+                    "Engagement": "Project Engagement Partner",
+                    "Advocacy": "Our Advocacy Partners"
+                }
+            },
+            "FifthBlock": {
+                "Title": "Patients are key to cancer research breakthroughs"
+            },
+            "SixthBlock": {
+                "TitlePt1": "Please join us and say",
+                "TitlePt2": "\"Count Me In\"",
+                "Text": "With your help, patients can be the driving force behind cancer research.",
+                "CountMeInButton": "count me in"
+            }
+        },
+        "CountMeIn": {
+            "Title": "Join the movement: tell us about yourself",
+            "MainParagraph": "Complete the form below to tell us about yourself and your cancer. Our goal is to perform many different studies within the brain cancer community. Allowing us to know a little bit about your experience will help us conduct our current projects and also to design future studies. We will be starting with some focused studies in brain cancer, and expanding over time based on what we learn from you. We are asking all patients with brain cancer to say \"Count Me In\" and fill out the form so that we can use the information you provide to plan our next studies.",
+            "ParagraphPart1": "If you've previously submitted your name and email and have already started answering the questionnaire,",
+            "ParagraphLink": "click here",
+            "ParagraphPart2": "so we can resend you a link that will let you pick up where you left off.",
+            "Contact": "Contact Info",
+            "Fields": {
+                "FirstNamePlaceholder": "First Name *",
+                "FirstNameError": "First Name is required",
+                "LastNamePlaceholder": "Last Name *",
+                "LastNameError": "Last Name is required"
+            },
+            "Answers": {
+                "Answer1": "I have been diagnosed with brain cancer. I'm willing to answer additional questions about myself and my experience with brain cancer.",
+                "Answer2": "I haven't been diagnosed with brain cancer, but I want to stay informed about the Brain Cancer Project by joining the email list."
+            },
+            "Required": "* Required field",
+            "RoleError": "Please choose one of the above options.",
+            "Submit": "SUBMIT"
+        },
+        "AboutUs": {
+            "PageHeader": {
+                "Pt1": "The Brain Cancer Project is part of",
+                "Pt2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+            },
+            "PageHeaderLink": {
+                "Pt1": "Visit the",
+                "Pt2": "website"
+            },
+            "Title": "About us",
+            "Content1": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization.",
+            "Content2": "The Brain Cancer Project has been designed and implemented collaboratively with brain cancer patients, advocates, caregivers, loved ones, cancer researchers, and clinicians.",
+            "Partners": "Our Advocacy Partners",
+            "AdvisoryCouncil": {
+                "Title": "Project Advisory Council",
+                "Content1": "The Brain Cancer Project Advisory Council (PAC) is made up of patients, advocates, caregivers, and loved ones who have been impacted by brain cancer. The PAC meets regularly with the project operations team via video calls to develop all aspects of the project, including survey questions, the project website, the project name and logo, and sample kits.",
+                "Subtitle": "Meet the <span class='BreakLine'>Project Advisory Council</span>",
+                "Name1": "Charlie Blotner",
+                "Bio1": "Charlie Blotner is a hospice social worker in Seattle, WA. Intercommunity knowledge serves as an access point to guide his practice interfacing with chronic illness communities. He is passionate about equitable involvement in the research process, and believes the data we currently have about brain cancer is not representative of all of its patients across lived experiences. Above all, Charlie is dedicated to helping people be better informed about their health, research, policy, and the future implications of their disease. Currently, Charlie is enjoying all that life with stable scans has to offer.",
+                "Name2": "Amanda Haddock",
+                "Bio2": "Amanda Haddock’s son died from brain cancer at the age of 18. Since his diagnosis, she has been a fierce advocate for collaborative research with a more recent focus on data sharing in particular. She co-founded Dragon Master Foundation in 2013 as a way to expedite funding directly to a web-based research platform for big data cancer research, now known as Cavatica.org. Based in Wichita, Kansas, Amanda is proud of the fact that researchers around the world can access the data that has been compiled through this project. She won the Champion of Change Award for Precision Medicine from the White House, and she serves as Liaison to the Children’s Brain Tumor Tissue Collaborative’s Scientific Committee.  Amanda’s time is spent helping researchers find pathways to collaborate, helping families understand their vital role in research, and helping everyone remember that time is of the essence.",
+                "Name3": "Adam Hayden",
+                "Bio3": "Adam Hayden is a philosopher of science, a champion of humanities-informed practices in medical education and clinical care, and a person living with brain cancer (glioblastoma). He serves on multiple national advisory councils and committees focused on patient engagement and advocacy and co-moderates a monthly social media chat and a virtual support group for the brain tumor community. He is a co-investigator for the Brain Cancer Quality of Life Collaborative, and he serves his university as Research Assistant to the Department of Philosophy, Indiana University School of Liberal Arts at IUPUI.",
+                "Name4": "Meta Laabs",
+                "Bio4": "Meta Laabs is a retired university administrator, living now in Asheville North Carolina. Meta's husband, Albert Laabs is a GBM survivor. His surgery was in Memphis in 2009 at age 53.  He participated in a vaccine clinical trial (ATTAC) at Preston Robert Tisch Brain Tumor Center at Duke University. He is a continuing patient there for MRI checkups, but has had no recurrences.  His tumor was in his cerebellum and he has balance and stamina issues, but no restrictions or impairments. Meta's son Mark Laabs is an Ocular Melanoma survivor, after being diagnosed while living in China in 2012 at age 29.  He has been a patient at Wills Eye Institute, Jefferson Memorial Hospital in Philadelphia, University of Virginia (clinical trial) and Duke University. Mark lost vision in one eye but is a successful business owner and founded (and is CEO of) the Rare Cancer Research Foundation.",
+                "Name5": "Sabine Schwab",
+                "Bio5": "Sabine Schwab is a former researcher with a Ph.D. in Economics and Social Sciences, international project manager in the life science and photonics industry and German expatriate. She made the conscious decision to end her career in 2014 after being diagnosed with brain cancer (Anaplastic Astrocytoma) and focuses on healthcare advocacy since then. Sabine sits on various national boards and patient advisory councils for the (brain) cancer community and is co-moderator for the monthly brain tumor social media chat on Twitter. In her free time, Sabine enjoys photography and traveling with her husband and five-year old daughter. She is an avid yogi and rock climber.",
+                "Name6": "Susie Wilson and Guy Lipof",
+                "Bio6": "Susie and Guy live in Austin, TX. Their experience with brain cancer started in 1999, just two months after their second child was born. Susie had surgery at MD Anderson Cancer Center and enrolled in a Phase 2 Clinical Trial that has become standard of care. After five years without recurrence, they took advantage of an expat opportunity in Cambridge, UK. Upon returning to Austin, Susie’s brain cancer recurred as a Secondary Glioblastoma. Susie’s dream in 1999 was for her kids to know her, which she exceeded helping them grow-up, celebrating high school graduations and now attending university.",
+                "Bio7": "Guy works in the tech industry. Motivated by their experiences with brain cancer, he joined IBM's Watson division focusing on healthcare and life sciences. He is now part of IBM Watson Health working on oncology and genomics solutions."
+            },
+            "ScientificCouncil": {
+                "Title": "Scientific Advisory Council",
+                "Members": [
+                    {
+                        "image": "/assets/images/Armstrong.jpg",
+                        "name": "Terri S. Armstrong, Ph.D.",
+                        "url": "https://ccr.cancer.gov/Neuro-Oncology-Branch/terri-s-armstrong",
+                        "affiliations": [
+                            "National Cancer Institute Center for Cancer Research",
+                            "National Institutes of Health"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Bandopadhayay.jpg",
+                        "name": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D.",
+                        "url": "http://bandolab.org/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Boston Children’s Hospital",
+                            "Harvard Medical School",
+                            "Broad Institute of MIT and Harvard"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Bernstein.jpeg",
+                        "name": "Bradley E. Bernstein, M.D., Ph.D.",
+                        "url": "http://bernstein.mgh.harvard.edu/",
+                        "affiliations": [
+                            "Massachusetts General Hospital",
+                            "Harvard Medical School",
+                            "Broad Institute of MIT and Harvard"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Beroukhim.jpg",
+                        "name": "Rameen Beroukhim, M.D., Ph.D.",
+                        "url": "http://beroukhimlab.org/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Brigham and Women’s Hospital",
+                            "Harvard Medical School",
+                            "Broad Institute of MIT and Harvard"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Bi.jpg",
+                        "name": "Wenya Linda Bi, M.D., Ph.D.",
+                        "url": "http://skullbase.bwh.harvard.edu/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Brigham and Women’s Hospital",
+                            "Harvard Medical School"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Filbrin.jpg",
+                        "name": "Mariella G. Filbin, M.D., Ph.D.",
+                        "url": "https://filbinlab.dana-farber.org/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Boston Children’s Hospital",
+                            "Harvard Medical School",
+                            "Broad Institute of MIT and Harvard"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Huse.jpg",
+                        "name": "Jason T. Huse, M.D., Ph.D.",
+                        "url": "https://www.mdanderson.org/research/departments-labs-institutes/labs/huse-laboratory.html",
+                        "affiliations": [
+                            "University of Texas MD Anderson Cancer Center"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Ligon.jpg",
+                        "name": "Keith Ligon, M.D., Ph.D.",
+                        "url": "https://ligonlab.dana-farber.org/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Brigham and Women’s Hospital",
+                            "Harvard Medical School"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Verhaak.jpg",
+                        "name": "Roel Verhaak, Ph.D.",
+                        "url": "https://www.jax.org/research-and-faculty/research-labs/the-verhaak-lab",
+                        "affiliations": [
+                            "Jackson Laboratory for Genomic Medicine"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Wen.jpg",
+                        "name": "Patrick Y. Wen, M.D.",
+                        "url": "http://www.dfhcc.harvard.edu/insider/member-detail/member/patrick-y-wen-md/",
+                        "affiliations": [
+                            "Dana-Farber Cancer Institute",
+                            "Brigham and Women’s Hospital",
+                            "Harvard Medical School"
+                        ]
+                    },
+                    {
+                        "image": "assets/images/Yung.jpg",
+                        "name": "W. K. Alfred Yung, M.D.",
+                        "affiliations": [
+                            "University of Texas MD Anderson Cancer Center"
+                        ]
+                    }
+                ]
+            }
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        },
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed!",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email Confirmation (Reenter Email) *",
+                        "Error": "Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "CANCEL",
+                "SubmitButton": "JOIN",
+                "Required": "* Required field",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "ResendEmail": {
+                "InitialForm": {
+                    "Title": "Resend Email",
+                    "Text": "Enter your email below and we'll send you a link so that you can complete your questionnaire.",
+                    "EmailField": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "LoadingError": "We're sorry, but an error has occurred.",
+                    "CancelButton": "CANCEL",
+                    "SubmitButton": "SEND EMAIL"
+                },
+                "ThankYouForm": {
+                    "Title": "Thank you!",
+                    "Text": "We've sent your information to",
+                    "Text2": "If you have any questions about your status in the project, please email ",
+                    "SubmitButton": "OK"
+                }
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue"
+            }
+        },
+        "Warning": {
+            "Title": "Download Chrome or Safari to Continue",
+            "Text1": "This project is designed for use with the internet's safest and most popular browsers--Chrome and Safari.",
+            "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "Click the following links to download",
+                "Pt2": "or",
+                "Pt3": "Chrome and Safari are always free.",
+                "Chrome": "Chrome (for Mac & PC)",
+                "Safari": "Safari (for Mac)"
+            },
+            "SubmitButton": "OK"
+        },
+        "MoreDetails": {
+            "Title": "Learn more about the<br>Brain Cancer Project",
+            "MainText": {
+                "Section1": {
+                    "Text1": "The Brain Cancer Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+                    "Text2": {
+                        "Pt1": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+                        "Pt2": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
+                    }
+                }
+            },
+            "HowProjectWorks": {
+                "Title": "Here's how the project works:",
+                "AboutYourself": {
+                    "Title": "A. Tell us about yourself",
+                    "Text": "Our goal is to study the DNA in tumors, blood, and saliva in order to understand its role in brain cancer. Click \"Count Me In\" and complete a simple online form to tell us about yourself and your diagnosis. In order to better understand brain cancer, we need to hear about your experiences and link that information with what we learn from your DNA."
+                },
+                "Permission": {
+                    "Title": "B. Give us permission to collect your samples and data",
+                    "Text": "You may choose to complete an online consent form that requests your permission for the Brain Cancer Project to obtain copies of your medical records and send you a saliva collection kit. You can also opt-in to provide a blood sample, and/or access to a portion of your stored tumor tissue (if available). We’ll also ask you to tell us where you received your medical care so we can contact your doctors and hospitals to request medical records relating to your diagnosis and treatments for brain cancer."
+                },
+                "Request": {
+                    "Title": "C. We’ll find and request your records and tissue",
+                    "Text": "Our team will contact your doctors and hospitals to obtain copies of your medical records. If you choose to opt-in and share a portion of your stored tumor samples with the study, we will ask pathology departments to send only a part of the tumor tissue, and not to send anything to us that might be needed for clinical care. You may also choose to provide a blood sample instead of, or in addition to, your stored tumor sample."
+                },
+                "SalivaSample": {
+                    "Title": "D. Provide us with a saliva sample",
+                    "Text": "We’ll also send you a simple kit to collect a saliva sample. Your saliva contains DNA that can be compared with DNA from your tumor and/or blood sample(s)."
+                },
+                "BloodSample": {
+                    "Title": "E. Opt-in to provide a blood sample",
+                    "Text1": "If you opt-in, we may also send you a simple kit  that you can bring to your health care provider's office during a regularly scheduled appointment to ask them to draw a complimentary blood sample. Blood samples can help us learn about tumor DNA by looking at circulating tumor DNA (ctDNA) in the bloodstream, in addition to providing the same information that we can obtain from saliva about your germline DNA.",
+                    "Text2": "For participants in the United States whose health care providers are unable to perform the complimentary blood draw, we have an account sent up with Quest Diagnostics so that you may visit your local lab to obtain the draw at no cost to you. Additionally, we are currently exploring similar options for participants Canada."
+                },
+                "Analyze": {
+                    "Title": "F. We'll analyze your tumor and medical data",
+                    "Text": "We will perform comprehensive genomic analyses on your tumor, saliva, and blood samples. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your medical record. Any information that would make it easy to identify you as an individual will be removed from all genomic and clinical data."
+                },
+                "Share": {
+                    "Title": "G. We’ll share the data with other researchers",
+                    "Text": "Our database of deidentified genomic and medical information will be shared with the cancer research community. The database will be made quickly and freely available to researchers, so that the data may be used in other genomic and molecular studies to help us further our understanding of brain cancer and develop new therapies."
+                },
+                "Learn": {
+                    "Title": "H. Learn with us along the way",
+                    "Text": "We are excited to learn with you! Throughout the project, we will provide all patients who say “Count Me In” with quarterly updates about the status of the project and information about new studies that we are conducting. We will also share with you any discoveries from these research projects. We may ask you additional questions about your experience to help with future studies — we want to hear what is important to you."
+                }
+            },
+            "FAQ": {
+                "Title": "Frequently Asked Questions",
+                "Goal": {
+                    "Question": "1. What is the goal of this project?",
+                    "Section1": "Today, very few patients have the ability to contribute their tumor samples and clinical data to cancer research, largely because they do not have a way of doing so. We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity.",
+                    "Section2": "This project will connect brain cancer patients around the United States and Canada with scientists and researchers using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle.",
+                    "Section3": "One of the goals of our studies is to help us better understand the genomic landscape of brain cancer. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies."
+                },
+                "GenomicResearch": {
+                    "Question": "2. What are the genomic and molecular research aspects of this project?",
+                    "Section1": "This study involves genomic and molecular research to better define the genes and molecules that are important in brain cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified as oncogenes, genes that have the potential to cause cancer, and have led to the development of new drugs that specifically target those alterations.",
+                    "Section2": "However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of more effective cancer therapies.",
+                    "Section3": "In order to define these gene alterations in brain cancers, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
+                },
+                "Conduct": {
+                    "Question": "3. Who is conducting this research?",
+                    "Text": {
+                        "Pt1": "This project is being conducted by",
+                        "Pt2": "Our team is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more about us",
+                        "Pt3": "here"
+                    }
+                },
+                "InvolvedInProject": {
+                    "Question": "4. How have patients been involved in the design of this project?",
+                    "Section1": "We have worked closely with patients, caregivers, and patient advocates within the brain cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
+                    "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, American Brain Tumor Association, National Brain Tumor Society, Accelerate Brain Cancer Cure, and Oligo Nation."
+                },
+                "Costs": {
+                    "Question": "5. Are there any costs for me to participate?",
+                    "Text": "No, there are no costs to you. All associated costs related to acquiring medical records, tissue, and blood samples, will be covered by the study."
+                },
+                "TumorTissue": {
+                    "Question": "6. After I provide my information, will I be asked to share a small portion of my tumor tissue and medical records?",
+                    "Text": "We will be asking for informed consent from all patients with brain cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Cancer Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
+                },
+                "TissueSample": {
+                    "Question": "7. If I am asked to share a tissue sample, will my tissue be used up?",
+                    "Section1": "If you do elect to share tissue as part of the study, <span class=\"Semibold\">we will take every measure to ensure your samples are not exhausted.</span>",
+                    "Section2": "In order to get a sense of what archived samples are available for request, the study team reads through the entire medical record to create a procedure history. Once we create the history, we send requests out directly to the pathology departments where the tissue is housed. We ask that pathology departments send the samples to us in the form of unstained slides or blocks, and that they do not exhaust the sample in order to send us a portion. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us.",
+                    "Section3": "You may also choose to provide a blood sample in addition to, or instead of, tissue samples should you have no tissue available or elect not to share your stored tissue samples."
+                },
+                "TissueAndMedicalRecords": {
+                    "Question": "8. Will I receive personalized information about my cancer from this study?",
+                    "Text": "You will not receive individual genomic information from this study. Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+                },
+                "Profit": {
+                    "Question": "9. Is this research being conducted for profit?",
+                    "Text": {
+                        "Pt1": "No. This project is a ",
+                        "Pt2": "nonprofit, academic research endeavor. ",
+                        "Pt3": "Our mission is to generate, aggregate, and freely share data with the research community and patients in a way that protects your personal information in order to fuel discoveries."
+                    }
+                },
+                "InfoForPhysicians": {
+                    "Question": "10. What information can I bring to my medical team so that I can discuss this study with them?",
+                    "Text": "This provided PDF is designed to educate your medical team about the project:",
+                    "Link": "Generate PDF for physicians"
+                },
+                "AnotherStudy": {
+                    "Question": "11. If I'm part of another study, can you use that genomic data instead of me submitting my samples for analysis?",
+                    "Text": "No. In order for you to contribute genomic data to the Brain Cancer Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
+                },
+                "DataHoused": {
+                    "Question": "12. Where will the publicly available data be housed?",
+                    "Text": "Publicly available data will be housed on cbioportal.org, a web-based platform to allow exploration of genomic data, as well as dbGaP and the NCI's Genomic Data Commons (GDC), with more platforms to come in the future.  Data types that we obtain and release are deidentified genomic data, medical record data, pathology data from pathology reports, and patient-reported data obtained through surveys."
+                },
+                "OtherQuestions": {
+                    "Title": "Do you have other questions?",
+                    "Section1": {
+                        "Text": "You can access a 1 page printable information sheet about the project linked here:",
+                        "Link": "The Brain Cancer Project"
+                    },
+                    "Section2": {
+                        "TextPt1": "If you have any other questions, please email us at ",
+                        "TextPt2": "or call us at"
+                    }
+                }
+            }
+        },
+        "StayInformed": {
+            "Title": "Stay Informed!",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "RETURN HOME"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password",
+            "SubmitButton": "SUBMIT",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred.",
+            "PasswordField": {
+                "Error": "Password is required"
+            }
+        },
+        "InternationalPatients": {
+            "Title": "Information for International Patients",
+            "ThankYou": {
+                "TextPt1": "Thank you for your interest in joining the Brain Cancer Project. Currently, the Brain Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
+                "TextPt2": "or"
+            },
+            "Understand": "We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Header": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "Log In"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "SUBMIT",
+        "CloseButton": "CLOSE",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "NEXT",
+        "PreviousButton": "PREV",
+        "SavingButton": "SAVING",
+        "EditButton": "EDIT",
+        "ReviewButton": "VIEW",
+        "ValidateError": "Please correct any errors in the form.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Brain Cancer Project form and its status."
+        },
+        "DatePicker": {
+          "Day": "Choose day...",
+          "Month": "Choose month...",
+          "Year": "Choose year...",
+          "January": "January",
+          "February": "February",
+          "March": "March",
+          "April": "April",
+          "May": "May",
+          "June": "June",
+          "July": "July",
+          "August": "August",
+          "September": "September",
+          "October": "October",
+          "November": "November",
+          "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Brain Cancer Project",
+            "Alert": "Your session will time-out soon"
+        }
+    }
+}

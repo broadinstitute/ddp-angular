@@ -1,0 +1,85 @@
+{
+    "SDK": {
+        "SubmitButton": "ЗАВЕРШИТЬ",
+        "CloseButton": "ЗАКРЫТЬ",
+        "AddButton": "ДОБАВИТЬ",
+        "CancelButton": "ОТМЕНА",
+        "SaveButton": "СОХРАНИТЬ",
+        "NextButton": "СЛЕДУЮЩИЙ",
+        "PreviousButton": "ПРЕДЫДУЩИЙ",
+        "SavingButton": "SAVING",
+        "EditButton": "EDIT",
+        "ReviewButton": "REVIEW",
+        "ValidateError": "Please correct any errors in the form.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "ВОЙТИ",
+            "Logout": "ВЫЙТИ"
+        },
+        "SignInOut": {
+            "SignIn": "Войти",
+            "SignOut": "Выйти"
+        },
+        "UserActivities": {
+            "ActivityName": "Study Activity",
+            "Summary": "Summary",
+            "ActivityStatus": "Состояние",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Участники",
+            "ParticipantPlaceholder": "Участник",
+            "ParticipantsList": "Участники"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Профиль",
+            "ViewAs": "Переключиться",
+            "ManageParticipants": "Управление участниками"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Пользовательские настройки",
+            "UserPreferencesGender": "Пол",
+            "UserPreferencesLocale": "Язык"
+        },
+        "Dashboard": {
+            "Title": "My Study Information"
+        },
+        "DatePicker": {
+          "Day": "Choose day...",
+          "Month": "Choose month...",
+          "Year": "Choose year...",
+          "January": "January",
+          "February": "February",
+          "March": "March",
+          "April": "April",
+          "May": "May",
+          "June": "June",
+          "July": "July",
+          "August": "August",
+          "September": "September",
+          "October": "October",
+          "November": "November",
+          "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "символов осталось",
+            "SingularForm": "символ остался"
+        }
+    }
+}

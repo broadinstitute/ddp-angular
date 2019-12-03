@@ -1,0 +1,83 @@
+@import "../app-theme.scss";
+
+.dashboard-title-section {
+    padding: 2rem 0;
+    background-color: mat-color($app-theme, 350);
+}
+
+.dashboard-content {
+    margin: 2rem 0 0 0;
+}
+
+.dashboard-content_table {
+    margin: 2rem 0;
+}
+
+.infobox_dashboard {
+    padding: 1.5rem 2rem;
+    position: relative;
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+.infobox-text_small {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: mat-color($app-theme, 200);
+}
+
+.ddp-dashboard {
+
+    .mat-cell,
+    .mat-header-cell,
+    .dashboard-mobile-label {
+        font-size: 1.125rem !important;
+        line-height: 1.75rem !important;
+    }
+
+    .dashboard-mobile-label {
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .mat-row {
+        align-items: flex-start !important;
+    }
+
+    .dashboard-status-container__img {
+        height: 25px !important;
+        width: 25px !important;
+        padding: 0 8px 0 0;
+    }
+
+    .Link {
+        color: mat-color($app-theme, 200);
+    }
+
+    @media(max-width: 650px) {
+        .mat-column-actions {
+            .dashboard-mobile-label {
+                line-height: 1.125rem !important;
+            }
+        }
+    }
+}
+
+.dashboard-activity-button {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-family: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left;
+}
+
+.dashboard-activity-button:hover {
+    color: mat-color($app-theme, 650) !important;
+}

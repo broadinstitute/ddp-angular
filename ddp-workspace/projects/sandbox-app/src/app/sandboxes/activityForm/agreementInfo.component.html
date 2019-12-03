@@ -1,0 +1,32 @@
+<mat-card class="example-2col-card">
+    <mat-card-title>
+      Agreement question
+    </mat-card-title>
+    <mat-card-content>
+      <mat-card>
+        <mat-card-title>
+          <div class="mat-subheading-2">
+            Create Agreement instance
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <mat-form-field class="form-field">
+            <input type="text" placeholder="Activity GUID" matInput [matAutocomplete]="auto" [(ngModel)]="activityGuid">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of agreementOptions" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="create()">CREATE</button>
+        </mat-card-actions>
+      </mat-card>
+      <br/>
+      <ddp-activity studyGuid="TESTSTUDY1"
+                    [activityGuid]="instanceGuid">
+      </ddp-activity>
+    </mat-card-content>
+  </mat-card>
+  

@@ -1,0 +1,197 @@
+<mat-sidenav-container>
+  <mat-toolbar color="primary">
+    <button mat-button (click)="navigate('')">
+      <mat-icon>laptop</mat-icon>
+      SANDBOXES
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>color_lens</mat-icon>
+    </button>
+    <span class="fill-remaining-space"></span>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <ddp-login></ddp-login>
+    </div>
+    <button mat-button (click)="sidenav.open()" fxHide="false" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-sidenav #sidenav>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <ddp-login></ddp-login>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-sidenav>
+</mat-sidenav-container>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="setTheme('default-theme')">
+    Default theme
+  </button>
+  <button mat-menu-item (click)="setTheme('dark-theme')">
+    Dark theme
+  </button>
+  <button mat-menu-item (click)="setTheme('light-theme')">
+    Light theme
+  </button>
+</mat-menu>
+<mat-expansion-panel style="margin-bottom: 10px">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Backend requests
+      </mat-panel-title>
+      <mat-panel-description>
+        Setup backend mock data
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ddp-network-sniffer></ddp-network-sniffer>
+</mat-expansion-panel>
+<div class="parent">
+  <div class="left margin10">
+    <mat-accordion style="margin: 5px;">
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  User & Authentication
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+              <mat-list-item role="listitem">
+                  <a routerLink="/login" class="mat-button">
+                      Login & logout
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/userprofile" class="mat-button">
+                      User profile
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/participantprofile" class="mat-button">
+                      Participant profile
+                  </a>
+              </mat-list-item>
+            <mat-list-item role="listitem">
+              <a routerLink="/address" class="mat-button">
+                Mail Address Entry
+              </a>
+            </mat-list-item>
+          </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Activitites
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+              <mat-list-item role="listitem" >
+                  <a routerLink="/activitiesList" class="mat-button">
+                      Activities list
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/activity" class="mat-button">
+                      Activity instance
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/readonly-activity-form" class="mat-button">
+                      Readonly activity form
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/institution-info" class="mat-button">
+                  Institution info
+                </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/agreement-info" class="mat-button">
+                  Agreement info
+                </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/essay-info" class="mat-button">
+                  Essay info
+                </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/paged-activity" class="mat-button">
+                  Paged activity
+                </a>
+              </mat-list-item>
+          </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Activity form
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+              <mat-list-item role="listitem">
+                  <a routerLink="/boolean-question" class="mat-button">
+                    Boolean question
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/agreement-question" class="mat-button">
+                  Agreement question
+                </a>
+            </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/text-question" class="mat-button">
+                    Text question
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <a routerLink="/numeric-question" class="mat-button">
+                  Numeric question
+                </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/date-picker-question" class="mat-button">
+                    Date picker question
+                  </a>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/picklist-question" class="mat-button">
+                    Picklist question
+                  </a>
+              </mat-list-item>
+            <mat-list-item role="listitem">
+              <a routerLink="/composite-question" class="mat-button">
+                Composite question
+              </a>
+            </mat-list-item>
+              <mat-list-item role="listitem">
+                  <a routerLink="/physician-info" class="mat-button">
+                    Physician info
+                  </a>
+              </mat-list-item>
+            <mat-list-item role="listitem">
+              <a routerLink="/address-embedded" class="mat-button">
+                Embedded Address
+              </a>
+            </mat-list-item>
+          </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Misc
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+              <mat-list-item role="listitem">
+                  <a routerLink="/fireCloudStudies" class="mat-button">
+                    Firecloud studies
+                  </a>
+              </mat-list-item>
+          </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="right margin10">
+    <router-outlet></router-outlet>
+  </div>
+</div>

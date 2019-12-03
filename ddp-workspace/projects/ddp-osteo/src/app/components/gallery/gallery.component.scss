@@ -1,0 +1,76 @@
+@import '../../../app-theme.scss';
+
+.gallery {
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.4fr;
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-areas:
+        "text image"
+        "text image"
+        "controls controls";
+}
+
+.gallery__image {
+    grid-area: image;
+    width: 100%;
+    height: auto;
+}
+
+.gallery__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    grid-area: text;
+    padding: 1.25rem;
+    background-color: mat-color($app-theme, 550);
+}
+
+.gallery__controls {
+    grid-area: controls;
+    justify-content: center;
+    grid-gap: 1rem;
+    grid-template-rows: 1fr;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+.dot {
+    height: 1.125rem;
+    width: 1.125rem;
+    background-color: mat-color($app-theme, 550);
+    border-radius: 50%;
+    transition: background-color 150ms ease-in-out;
+}
+
+.dot_active {
+    background-color: mat-color($app-theme, 100);
+}
+
+@media screen and (max-width: 850px) {
+    .gallery {
+        margin: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 0.35fr 0.2fr;
+        grid-template-areas:
+            "image image"
+            "text text"
+            "controls controls";
+    }
+
+    .control {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .gallery {
+        grid-template-rows: 1fr 0.6fr 0.2fr;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .gallery {
+        grid-template-rows: 1fr 0.8fr 0.2fr;
+    }
+}

@@ -1,0 +1,26 @@
+<mat-card class="example-2col-card">
+  <mat-card-header>
+    <mat-card-title>Select a study to export and a destination workspace.</mat-card-title>
+  </mat-card-header>
+  <div class="example-container mat-elevation-z8">
+    <mat-card data-ddp-test="getStudiesCard">
+      <mat-card-header>
+        <mat-card-title>Studies</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ddp-firecloud-studies></ddp-firecloud-studies>
+      </mat-card-content>
+    </mat-card>
+    <br/>
+    <mat-card data-ddp-test="getWorkspacesCard">
+      <mat-card-header>
+        <mat-card-title>Workspaces</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ddp-firecloud-workspaces></ddp-firecloud-workspaces>
+      </mat-card-content>
+    </mat-card>
+    <br/>
+    <ddp-firecloud-export-study></ddp-firecloud-export-study>
+  </div>
+</mat-card>

@@ -1,0 +1,85 @@
+{
+    "SDK": {
+        "SubmitButton": "SOUMETTRE",
+        "CloseButton": "FERMER",
+        "AddButton": "AJOUTER",
+        "CancelButton": "ANNULER",
+        "SaveButton": "ENREGISTRER",
+        "NextButton": "NEXT",
+        "PreviousButton": "PREV",
+        "SavingButton": "SAVING",
+        "EditButton": "EDIT",
+        "ReviewButton": "REVIEW",
+        "ValidateError": "Please correct any errors in the form.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "ENTRER",
+            "Logout": "SORTIR"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Study Activity",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Participants gouvernés",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profil",
+            "ViewAs": "Voir comme",
+            "ManageParticipants": "Gérer les participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Préférences de l'utilisateur",
+            "UserPreferencesGender": "Sexe",
+            "UserPreferencesLocale": "Langue préférée"
+        },
+        "Dashboard": {
+            "Title": "My Study Information"
+        },
+        "DatePicker": {
+          "Day": "Choose day...",
+          "Month": "Choose month...",
+          "Year": "Choose year...",
+          "January": "janvier",
+          "February": "février",
+          "March": "mars",
+          "April": "avril",
+          "May": "mai",
+          "June": "juin",
+          "July": "juillet",
+          "August": "aout",
+          "September": "septembre",
+          "October": "octobre",
+          "November": "novembre",
+          "December": "décembre"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        }
+    }
+}

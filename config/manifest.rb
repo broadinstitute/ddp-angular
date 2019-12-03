@@ -1,0 +1,8 @@
+render "deploy_to_artifactory.sh.ctmpl"
+render "docker-compose.yaml.ctmpl"
+render "pepperConfig.js.ctmpl"
+render "ddpConfig.js.ctmpl"
+copy_file "demo-app-nginx.conf"
+copy_file "index.html"
+copy_secret_from_path "secret/pepper/#{$env}/#{$version}/demo-app-cert.key",nil,"cert.key"
+copy_secret_from_path "secret/pepper/#{$env}/#{$version}/demo-app-cert.crt",nil,"cert.crt"

@@ -1,0 +1,126 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$md-primary: (
+    50 : #fdf6e3,
+    100 : #fbeab9,
+    200 : #f9dc8b,
+    300 : #f6cd5c,
+    400 : #f4c339,
+    500 : #f2b816,
+    600 : #f0b113,
+    700 : #eea810,
+    800 : #eca00c,
+    900 : #e89106,
+    1000: #8c8c8c,
+    1100: #fafafa,
+    A100 : #ffffff,
+    A200 : #fff1dd,
+    A400 : #ffdbaa,
+    A700 : #ffd091,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        1000: #000000,
+        1100: #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-secondary: (
+    50 : #fcf7e8,
+    100 : #f8eac5,
+    200 : #f3dd9e,
+    300 : #eecf77,
+    400 : #ebc45a,
+    500 : #e7ba3d,
+    600 : #e4b337,
+    700 : #e0ab2f,
+    800 : #dda327,
+    900 : #d7941a,
+    A100 : #ffffff,
+    A200 : #fff0d7,
+    A400 : #ffdca4,
+    A700 : #ffd38b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-warn: (
+    50 : #f9e0e0,
+    100 : #f0b3b3,
+    200 : #e68080,
+    300 : #db4d4d,
+    400 : #d42626,
+    500 : #cc0000,
+    600 : #c70000,
+    700 : #c00000,
+    800 : #b90000,
+    900 : #ad0000,
+    A100 : #ffd7d7,
+    A200 : #ffa4a4,
+    A400 : #ff7171,
+    A700 : #ff5858,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$test-app-primary: mat-palette($md-primary, 500, 500, 500);
+$test-app-accent: mat-palette($md-secondary, 900, 700, A500);
+$test-app-warn: mat-palette($md-warn, 900, A400, A500);
+
+$test-app-theme: mat-light-theme($test-app-primary, $test-app-accent, $test-app-warn);
+
+@include angular-material-theme($test-app-theme);
+
+
+.validation-div {
+    color: mat-color($test-app-warn);
+}
+
+
+.ddp-activity-validation {
+    @extend .ddp-activity-validation;
+    width: 100%;
+    margin: 0;
+}

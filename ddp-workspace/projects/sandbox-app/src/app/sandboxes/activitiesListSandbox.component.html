@@ -1,0 +1,24 @@
+<mat-card class="example-2col-card">
+    <mat-card-header>
+        <mat-card-title>User activities</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="example-container mat-elevation-z8">
+            Component parameters
+            <br/>
+            <mat-form-field style="margin-top: 15px" data-ddp-test="activitiesStudyGuid">
+                <input matInput [(ngModel)]="activitiesStudyGuid" placeholder="Study GUID">
+            </mat-form-field>
+        </div>
+        <div class="example-container mat-elevation-z8">
+            Component outputs 
+            <br/>
+            <div data-ddp-test="totalCount">Total count {{ totalCount }}</div>
+            <div data-ddp-test="selectedActivity"> {{ selectedActivity }}</div>
+        </div>
+        <br/>
+        <ddp-user-activities  [studyGuid]=activitiesStudyGuid
+                                   (open)="handleAction($event)">
+        </ddp-user-activities>
+    </mat-card-content>
+</mat-card>
