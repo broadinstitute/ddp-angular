@@ -450,6 +450,15 @@
             },
             "ThankYouAgain": "Thank you again for sharing with us and supporting the entire osteosarcoma community. If you’d like to help us reach patients or other community members, feel free to share the project. Together, we can move research forward for the osteosarcoma community."
         },
+        "AgeUpThankYou": {
+            "Title": "Thank you!",
+            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent luctus gravida mollis. Orci varius natoque.",
+                "Button": "Go to Dashboard"
+            },
+            "ImageAlt": "Email sent"
+        },
         "SessionExpired": {
             "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
         },

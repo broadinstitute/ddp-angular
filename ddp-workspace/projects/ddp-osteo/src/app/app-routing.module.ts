@@ -18,13 +18,14 @@ import {
     PasswordComponent,
     RedirectToLoginLandingComponent,
     WorkflowStartActivityComponent,
-    InternationalPatientsComponent,
     SessionExpiredComponent,
     ActivityLinkComponent,
     LovedOneThankYouComponent,
     RedirectToAuth0LoginComponent,
     HeaderActionGuard,
-    AcceptAgeUpPageComponent
+    VerifyAgeUpPageComponent,
+    AcceptAgeUpPageComponent,
+    AgeUpThankYou
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -204,9 +205,16 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
-        path: 'international-patients',
-        component: InternationalPatientsComponent,
-        canActivate: [IrbGuard]
+        path: 'thank-you',
+        component: AgeUpThankYou,
+        canActivate: [IrbGuard],
+        data: { verify: true }
+    },
+    {
+        path: 'proxy-thank-you',
+        component: AgeUpThankYou,
+        canActivate: [IrbGuard],
+        data: { collect: true }
     },
     {
         path: 'password-reset-done',
@@ -224,6 +232,11 @@ const routes: Routes = [
     {
         path: 'password',
         component: PasswordComponent
+    },
+    {
+        path: 'verify',
+        component: VerifyAgeUpPageComponent,
+        canActivate: [IrbGuard]
     },
     {
         path: 'accept',

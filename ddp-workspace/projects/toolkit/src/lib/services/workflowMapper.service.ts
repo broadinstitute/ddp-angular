@@ -22,6 +22,8 @@ export class WorkflowMapperService {
         } else if (activityResponse.next === this.toolkitConfiguration.internationalPatientsUrl
             || activityResponse.next === WorkflowState.INTERNATIONAL_PATIENTS) {
             return new UrlWorkflowAction(this.toolkitConfiguration.internationalPatientsUrl);
+        } else if (activityResponse.next === WorkflowState.DONE) {
+            return new UrlWorkflowAction(this.toolkitConfiguration.doneUrl);
         } else if (activityResponse.next === WorkflowState.ACTIVITY) {
             switch (activityResponse.activityCode) {
                 case this.toolkitConfiguration.aboutYouGuid:
