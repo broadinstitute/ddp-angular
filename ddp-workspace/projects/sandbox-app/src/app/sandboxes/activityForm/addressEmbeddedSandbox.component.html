@@ -7,8 +7,10 @@
             <button mat-button (click)="saveAddress()">Save Address</button>
             <button mat-button (click)="deleteAddress()">Delete Address</button>
             <button mat-button (click)="deleteTempAddress()">Delete Temp Address</button>
+            <button mat-button (click)="toggleReadOnly()">Toggle read only</button>
+            <button mat-button (click)="setBogusAddress()">Set random address</button>
         </mat-card>
         <br/>
-      <ddp-address-embedded [activityGuid]="activityInstanceGuid"></ddp-address-embedded>
+      <ddp-address-embedded [activityGuid]="activityInstanceGuid" [readonly]="isReadOnly" [address]="bogusAddress"></ddp-address-embedded>
     </mat-card-content>
 </mat-card>

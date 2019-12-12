@@ -1,4 +1,4 @@
-import { DdpModule, ConfigurationService, Auth0CodeCallbackComponent, LogLevel } from 'ddp-sdk';
+import { DdpModule, ConfigurationService, Auth0CodeCallbackComponent, LogLevel, IrbGuard } from 'ddp-sdk';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -48,12 +48,12 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { FireCloudStudiesSandboxComponent } from './sandboxes/firecloudStudiesSandbox.component';
 
-import { AddressEntrySandboxComponent } from './sandboxes/addressEntrySandbox.component';
-import { AddressConfirmSandboxComponent } from './sandboxes/addressConfirmSandbox.component';
 import { InstitutionInfoComponent } from './sandboxes/activityForm/institutionInfo.component';
 import { AgreementInfoComponent } from './sandboxes/activityForm/agreementInfo.component';
 import { EssayInfoComponent } from './sandboxes/activityForm/essayInfo.component';
 import { AddressEmbeddedSandboxComponent } from './sandboxes/activityForm/addressEmbeddedSandbox.component';
+import { LoginLandingComponent, ToolkitModule } from 'toolkit';
+import { tkCfg } from '../../../ddp-brain/src/app/app.module';
 
 const baseElt = document.getElementsByTagName('base');
 let base = '';
@@ -83,6 +83,7 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 const appRoutes: Routes = [
   { path: 'fireCloudStudies', component: FireCloudStudiesSandboxComponent },
   { path: 'silentRenew', component: SilentRenewComponent },
+  { path: 'login-landing', component: LoginLandingComponent, canActivate: [IrbGuard] },
   { path: '', component: DefaultComponent },
   { path: 'login', component: LoginSandboxComponent },
   { path: 'userprofile', component: UserProfileSandboxComponent },
@@ -99,8 +100,6 @@ const appRoutes: Routes = [
   { path: 'physician-info', component: PhysicianInfoComponent },
   { path: 'readonly-activity-form', component: ReadonlyActivityFormComponent },
   { path: 'auth', component: Auth0CodeCallbackComponent },
-  { path: 'address', component: AddressEntrySandboxComponent },
-  { path: 'address/confirm', component: AddressConfirmSandboxComponent },
   { path: 'institution-info', component: InstitutionInfoComponent },
   { path: 'paged-activity', component: PagedActivityComponent },
   { path: 'agreement-info', component: AgreementInfoComponent },
@@ -120,8 +119,6 @@ declare let ga: Function;
     UserProfileSandboxComponent,
     ParticipantProfileSandboxComponent,
     ActivitiesListSandboxComponent,
-    AddressEntrySandboxComponent,
-    AddressConfirmSandboxComponent,
     AddressEmbeddedSandboxComponent,
     ActivitySandboxComponent,
     ActivitySandboxComponent,
@@ -147,6 +144,7 @@ declare let ga: Function;
     ),
     BrowserModule,
     DdpModule,
+    ToolkitModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule,
     MatGridListModule, MatInputModule, MatRadioModule, MatSidenavModule,
     MatExpansionModule, MatListModule, MatSlideToggleModule, MatSelectModule,
@@ -154,7 +152,11 @@ declare let ga: Function;
     FormsModule, FlexLayoutModule, OverlayModule
   ],
   providers: [
-    { provide: 'ddp.config', useValue: config }
+    { provide: 'ddp.config', useValue: config },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: tkCfg
+    }
   ],
   bootstrap: [AppComponent]
 })

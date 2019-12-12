@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { UserActivityServiceAgent, AddressEmbeddedComponent, AddressService, CompositeDisposable } from 'ddp-sdk';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActivityServiceAgent } from 'ddp-sdk';
+import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { empty } from 'rxjs';
 import * as _ from 'underscore';
 
 @Component({
@@ -14,6 +13,8 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   public activityInstanceGuid: string;
   public inputParameters = {};
   private anchor: CompositeDisposable;
+  private isReadOnly = true;
+  public bogusAddress = null;
 
   constructor(private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
@@ -44,6 +45,23 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
       () => console.log("temp address deleted"));
     this.anchor.addNew(del);
+  }
+
+  public toggleReadOnly() {
+    this.isReadOnly = !(this.isReadOnly);
+    console.log("readonly has been toggled to :" + this.isReadOnly);
+  }
+
+  public setBogusAddress(): void {
+    this.bogusAddress = {name : (Math.random() + ''),
+      street1 : (Math.random() + ''),
+      street2 : (Math.random() + ''),
+      city : (Math.random() + ''),
+      state : (Math.random() + ''),
+      zip : (Math.random() + ''),
+      country : 'US',
+      phone: (Math.random() + '')
+    };
   }
 
   public deleteAddress(): void {

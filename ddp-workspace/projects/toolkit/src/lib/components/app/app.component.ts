@@ -151,8 +151,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private initUserActionsListeners(): void {
-        type Partial<T> = { [P in keyof T]?: T[P] };
-
         // get state from side nave directly from widget
         const sideNavStateChanges$: Observable<Partial<AppState>> = this.sidenav.openedChange.asObservable().pipe(
             startWith(this.sidenav.opened),

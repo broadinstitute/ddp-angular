@@ -6,7 +6,7 @@ import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
 import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class AddressService extends UserServiceAgent<Address> {
                 return new Address(data.body);
             }),
             catchError((error) => {
-                return Observable.throw(<AddressVerificationStatus>error.error);
+                return throwError(error.error as AddressVerificationStatus);
             })
         );
     }
@@ -33,7 +33,7 @@ export class AddressService extends UserServiceAgent<Address> {
     public saveTempAddress(address: Address, activityInstanceGuid: string): Observable<any> {
         return this.putObservable('/profile/address/temp/' + activityInstanceGuid, address, {}, true).pipe(
             catchError((error) => {
-                return Observable.throw(error.error);
+                return throwError(error.error);
             })
         );
     }
@@ -67,7 +67,7 @@ export class AddressService extends UserServiceAgent<Address> {
                         }
                     }),
                 catchError((error) => {
-                    return Observable.throw(error.error);
+                    return throwError(error.error);
                 })
             );
         } else {
@@ -77,7 +77,7 @@ export class AddressService extends UserServiceAgent<Address> {
                     return null;
                 }),
                 catchError((error) => {
-                    return Observable.throw(error.error);
+                    return throwError(error.error);
                 })
             );
         }
@@ -97,7 +97,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public deleteAddress(addressOrGuid: Address | string): Observable<any> {
-        const guid = addressOrGuid instanceof Address ? addressOrGuid.guid : <string>addressOrGuid;
+        const guid = addressOrGuid instanceof Address ? addressOrGuid.guid : addressOrGuid as string;
         return this.deleteObservable('/profile/address/' + guid, null, true);
     }
 }
