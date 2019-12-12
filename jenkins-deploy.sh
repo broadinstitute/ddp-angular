@@ -45,11 +45,9 @@ is_cmi_study() {
 
 VAULT_TOKEN=$(cat /etc/vault-token-kdux)
 OUTPUT_DIR=app
-INPUT_DIR=$PROJECT/config
+INPUT_DIR=./config
 BUILD_CONTAINERS=false
 
-# Custom compose for subprojects
-if is_cmi_study "$WEBSITE"; then
     # `study_key` is a shortname for the study, used to lookup vault configs, directories, etc.
     # `study_guid` is the identifier for the study, as defined in pepper.
 
@@ -71,10 +69,6 @@ if is_cmi_study "$WEBSITE"; then
 	echo "FATAL ERROR: unknown cmi study $SUBPROJECT"
 	exit 7
     fi
-else
-    COMPOSE_FILE="/$OUTPUT_DIR/docker-compose.yaml"
-    MANIFEST=manifest.rb
-fi
 
 # configure outside the kdux host, with retries in case vault times out
 for i in {1..3}; do
