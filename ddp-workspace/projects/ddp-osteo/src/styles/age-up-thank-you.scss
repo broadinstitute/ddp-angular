@@ -1,0 +1,17 @@
+@import '../app-theme.scss';
+
+.age-up-email-section {
+    flex-grow: 1;
+    background-color: mat-color($app-theme, 850);
+}
+
+.age-up-email-title {
+    text-align: center;
+}
+
+.age-up-email-image,
+.age-up-email-button {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
