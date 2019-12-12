@@ -178,16 +178,10 @@
                     <p class="big bold" translate>HomePage.SocialMediaSection.TwitterFeedTitle</p>
                     <app-twitter-timeline-widget></app-twitter-timeline-widget>
                 </div>
-                <div class="instagram-feed">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                <div>
+                    <p class="big bold" translate>HomePage.SocialMediaSection.InstagramFeedTitle</p>
+                    <toolkit-instagram-feed-lightswitch-plugin widgetId="211c284b22235ab0a8ee60a88787673e">
+                    </toolkit-instagram-feed-lightswitch-plugin>
                 </div>
             </div>
         </div>
@@ -203,11 +197,8 @@
                 </p>
             </div>
             <div>
-                <button (click)="joinMailingList()"
-                    [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
-                    class="button button_medium button_secondary" translate>
-                    Common.Buttons.MailingList.Title
-                </button>
+                <button [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                    class="button button_medium button_secondary" translate>Common.Buttons.MailingList.Title</button>
             </div>
         </div>
     </section>

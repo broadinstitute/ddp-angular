@@ -22,9 +22,7 @@ import {
     SessionExpiredComponent,
     ActivityLinkComponent,
     LovedOneThankYouComponent,
-    RedirectToAuth0LoginComponent,
-    HeaderActionGuard,
-    AcceptAgeUpPageComponent
+    RedirectToAuth0LoginComponent
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -224,17 +222,6 @@ const routes: Routes = [
     {
         path: 'password',
         component: PasswordComponent
-    },
-    {
-        path: 'accept',
-        component: AcceptAgeUpPageComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'join-list',
-        component: WelcomeComponent,
-        canActivate: [HeaderActionGuard],
-        data: { openJoinDialog: true }
     },
     {
         path: '',

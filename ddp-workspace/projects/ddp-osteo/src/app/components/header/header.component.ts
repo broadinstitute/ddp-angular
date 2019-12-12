@@ -2,7 +2,7 @@ import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { WindowRef, SessionMementoService } from 'ddp-sdk';
-import { HeaderConfigurationService, CommunicationService } from 'toolkit';
+import { HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
     private session: SessionMementoService,
     private window: WindowRef,
     private router: Router,
-    private communicationService: CommunicationService,
     public headerConfig: HeaderConfigurationService,
     @Inject(DOCUMENT) private document: any) { }
 
@@ -34,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public openJoinMailingList(): void {
-    this.communicationService.openJoinDialog();
+    alert('Sorry, dialog not implemented yet');
   }
 
   public get isAuthenticated(): boolean {

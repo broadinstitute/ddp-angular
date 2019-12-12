@@ -39,7 +39,6 @@ import { InternationalPatientsComponent } from './components/international-patie
 import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
-import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -54,6 +53,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
   imports: [
@@ -106,7 +106,7 @@ import { MatButtonModule } from '@angular/material/button';
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
     SessionWillExpireComponent,
-    AcceptAgeUpPageComponent
+    InstagramFeedLightwidgetPluginComponent
   ],
   exports: [
     FooterComponent,
@@ -127,7 +127,7 @@ import { MatButtonModule } from '@angular/material/button';
     InternationalPatientsComponent,
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
-    AcceptAgeUpPageComponent
+    InstagramFeedLightwidgetPluginComponent
   ],
   entryComponents: [
     DisclaimerComponent,

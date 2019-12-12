@@ -111,8 +111,6 @@ import { AddressEntryComponent } from './components/address/addressEntry.compone
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
 import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
-import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -316,7 +314,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEntryComponent,
     AddressEmbeddedComponent,
     AddressConfirmComponent,
-    AcceptAgeUpComponent,
     InputRestrictionDirective,
     LazyLoadImagesDirective,
     UpperCaseInputDirective,
@@ -373,7 +370,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEmbeddedComponent,
     AddressEntryComponent,
     AddressConfirmComponent,
-    AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
     LazyLoadImagesDirective,

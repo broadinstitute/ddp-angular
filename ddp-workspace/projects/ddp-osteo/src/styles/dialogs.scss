@@ -1,4 +1,3 @@
-// common styles
 .mat-dialog-container {
     position: relative;
 
@@ -32,46 +31,4 @@
 .Modal-title {
     margin: 0;
     margin-right: 45px;
-}
-
-// mailing list dialog
-.JoinDialogGroupFields {
-    display: flex;
-}
-
-.JoinField--margin {
-    margin-bottom: 5px;
-}
-
-.JoinDialogNameField {
-    width: 50%;
-    margin: 0 2rem 0 0;
-}
-
-.JoinDialogLastnameField {
-    width: 50%;
-}
-
-.JoinField--margin {
-    margin-bottom: 5px;
-}
-
-.JoinDialogFiled {
-    width: 100%;
-}
-
-@media screen and (max-width: 530px) {
-    .Modal-text {
-        margin-bottom: 0 !important;
-    }
-
-    .JoinDialogGroupFields {
-        flex-direction: column;
-    }
-
-    .JoinDialogLastnameField,
-    .JoinDialogNameField {
-        width: 100%;
-        margin: 0;
-    }
 }
