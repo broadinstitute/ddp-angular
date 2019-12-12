@@ -12,9 +12,10 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   @ViewChild(AddressEmbeddedComponent, { static: true }) addressComponent: AddressEmbeddedComponent;
   public activityInstanceGuid: string;
   public inputParameters = {};
-  private anchor: CompositeDisposable;
-  private isReadOnly = true;
+  public isReadOnly = true;
   public bogusAddress = null;
+  private anchor: CompositeDisposable;
+
 
   constructor(private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
