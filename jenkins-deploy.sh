@@ -49,25 +49,22 @@ INPUT_DIR=$PROJECT/config
 BUILD_CONTAINERS=false
 
 # Custom compose for subprojects
-if [ "$SUBPROJECT" = "housekeeping" ]; then
-    COMPOSE_FILE="/$OUTPUT_DIR/housekeeping-docker-compose.yaml"
-    MANIFEST=manifest.rb
-elif is_cmi_study "$SUBPROJECT"; then
+if is_cmi_study "$WEBSITE"; then
     # `study_key` is a shortname for the study, used to lookup vault configs, directories, etc.
     # `study_guid` is the identifier for the study, as defined in pepper.
 
     COMPOSE_FILE="/$OUTPUT_DIR/docker-compose-study.yaml"
     MANIFEST=manifest-study.rb
-    if [ "$SUBPROJECT" = "pepper-angio" ]; then
+    if [ "$WEBSITE" = "pepper-angio" ]; then
 	STUDY_KEY=angio
 	STUDY_GUID=ANGIO
-    elif  [ "$SUBPROJECT" = "pepper-brain" ]; then
+    elif  [ "$WEBSITE" = "pepper-brain" ]; then
 	STUDY_KEY=brain
 	STUDY_GUID=cmi-brain
-     elif  [ "$SUBPROJECT" = "pepper-mbc" ]; then
+     elif  [ "$WEBSITE" = "pepper-mbc" ]; then
 	STUDY_KEY=mbc
 	STUDY_GUID=cmi-mbc
-     elif  [ "$SUBPROJECT" = "pepper-osteo" ]; then
+     elif  [ "$WEBSITE" = "pepper-osteo" ]; then
 	STUDY_KEY=osteo
 	STUDY_GUID=CMI-OSTEO
     else
@@ -96,12 +93,3 @@ $SSHCMD $SSH_USER@$SSH_HOST "docker-compose -p $PROJECT -f $COMPOSE_FILE up -d -
 
 # Remove any dangling images that might be hanging around
 $SSHCMD $SSH_USER@$SSH_HOST "docker images -aq --no-trunc --filter dangling=true | xargs docker rmi || /bin/true"
-
-if [[ $PROJECT = "pepper-apis" ]]; then
-    if [[ "$SUBPROJECT" != "housekeeping" ]]; then
-        # run the smoketest for pepper-apis deployments to ensure that the app didn't croak after docker-compose up
-        echo "starting smoketest..."
-        #docker pull docker.io/broadinstitute/pepper-api-backend:"$VERSION"_"$ENV"
-        $SSHCMD $SSH_USER@$SSH_HOST "docker run --rm -v /app/application.conf:/app/config/application.conf -v /app/post_deploy_smoketest.sh:/app/post_deploy_smoketest.sh broadinstitute/pepper-api-backend:\"$VERSION\"_\"$ENV\" bash /app/post_deploy_smoketest.sh $SSH_HOST 60"
-    fi
-fi
