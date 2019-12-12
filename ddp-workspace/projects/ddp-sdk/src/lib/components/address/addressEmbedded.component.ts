@@ -354,7 +354,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       withLatestFrom(this.state$),
       tap((inputAddres) => console.log('about to see if we should save a temp address on inputaddrss')),
       filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
-      filter(([addrss, _]) => this.enoughDataToSave(addrss)),
       tap(() => busyCounter$.next(1)),
       concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
       catchError((error) => {

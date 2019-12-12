@@ -155,7 +155,7 @@ export class AddressInputService implements OnDestroy {
       )
     ).pipe(
       startWith(({
-        ...{ formData: this.addressForm.value, formDataSource: 'COMPONENT' },
+        ...{ formData: {}, formDataSource: 'COMPONENT' },
         ...{ countryInfo: null },
         ...{ isReadOnly: this.inputIsReadOnly$.getValue() }
       }) as AddressInputComponentState),
@@ -229,7 +229,7 @@ export class AddressInputService implements OnDestroy {
       skip(1),
       map(compState => this.buildAddressFromFormData(compState.formData, compState.countryInfo)),
       distinctUntilChanged((x, y) => _.isEqual(x, y)),
-      tap((newAddress) => console.log('generated new address' + JSON.stringify(newAddress))),
+      tap((newAddress) => console.log('generated new formAddress$ %o', newAddress)),
       share());
 
     const street1Changed$: Observable<boolean> = formAddress$.pipe(
