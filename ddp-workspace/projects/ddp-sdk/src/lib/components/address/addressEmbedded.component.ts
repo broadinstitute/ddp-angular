@@ -157,11 +157,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   public inputAddress$: Observable<Address | null>;
   public addressErrors$: Observable<AddressError[]>;
   public isReadOnly$: Observable<boolean>;
+  public inputComponentAddress$ = new Subject<Address | null>();
   public generateTaggedAddress = generateTaggedAddress;
 
   private ngUnsubscribe = new Subject();
   private saveTrigger$ = new Subject<void>();
-  private inputComponentAddress$ = new Subject<Address | null>();
   private state$: Observable<ComponentState>;
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
 
@@ -536,7 +536,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.saveTrigger$.next();
   }
 
-  convertToFormattedString(a: Address): string {
+  public convertToFormattedString(a: Address): string {
     const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
     const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
     const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
