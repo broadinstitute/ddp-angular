@@ -1,0 +1,77 @@
+// common styles
+.mat-dialog-container {
+    position: relative;
+
+    .mat-icon-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .button_secondary {
+        margin-right: 1rem;
+    }
+}
+
+.mat-dialog-actions {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+@media screen and (max-width: 330px) {
+    .mat-dialog-container {
+        padding: 15px !important;
+    }
+
+    .mat-icon-button {
+        top: 0px !important;
+        right: 5px !important;
+    }
+}
+
+.Modal-title {
+    margin: 0;
+    margin-right: 45px;
+}
+
+// mailing list dialog
+.JoinDialogGroupFields {
+    display: flex;
+}
+
+.JoinField--margin {
+    margin-bottom: 5px;
+}
+
+.JoinDialogNameField {
+    width: 50%;
+    margin: 0 2rem 0 0;
+}
+
+.JoinDialogLastnameField {
+    width: 50%;
+}
+
+.JoinField--margin {
+    margin-bottom: 5px;
+}
+
+.JoinDialogFiled {
+    width: 100%;
+}
+
+@media screen and (max-width: 530px) {
+    .Modal-text {
+        margin-bottom: 0 !important;
+    }
+
+    .JoinDialogGroupFields {
+        flex-direction: column;
+    }
+
+    .JoinDialogLastnameField,
+    .JoinDialogNameField {
+        width: 100%;
+        margin: 0;
+    }
+}

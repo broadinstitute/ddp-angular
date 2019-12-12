@@ -1,0 +1,55 @@
+@import '../../../app-theme.scss';
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+}
+
+li {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.workflow-step {
+    font-size: 1rem;
+    line-height: 1.625rem;
+}
+
+.workflow-content {
+    display: flex;
+    align-items: center;
+}
+
+.workflow-content__circle {
+    border-radius: 50%;
+    background-color: mat-color($app-theme, 750);
+    color: mat-color($app-theme, 100);
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.workflow-content__text {
+    padding: 0 0 0 5px;
+    white-space: nowrap;
+    color: mat-color($app-theme, 700);
+}
+
+.workflow-content__text_current {
+    color: mat-color($app-theme, 200);
+}
+
+.workflow-content__circle_current {
+    background-color: mat-color($app-theme, 250);
+}
+
+.workflow-divider {
+    flex-grow: 1;
+    border-top: 2px solid mat-color($app-theme, 800);
+    margin: 0 10px;
+    max-width: 60px;
+}
