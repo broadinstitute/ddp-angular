@@ -78,7 +78,7 @@ fi
 
 # configure outside the kdux host, with retries in case vault times out
 for i in {1..3}; do
-  ruby pepper-apis/configure.rb -y && break || sleep 3
+  ruby configure.rb -y && break || sleep 3
 done
 
 scp -r $SSHOPTS $OUTPUT_DIR/* $SSH_USER@$SSH_HOST:/$OUTPUT_DIR
