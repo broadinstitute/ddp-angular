@@ -27,6 +27,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() activityGuid: string;
     @Output() submit: EventEmitter<ActivityResponse | null> = new EventEmitter();
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
+    @Output() activityCode: EventEmitter<string> = new EventEmitter();
+    @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
     protected embeddedComponentValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
     protected workflow: WorkflowServiceAgent;
@@ -88,6 +90,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                         this.isLoaded = true;
                         this.model = x;
                         this.stickySubtitle.emit(this.model.subtitle);
+                        this.activityCode.emit(this.model.activityCode);
                         this.initSteps();
                     }
 
@@ -137,6 +140,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
             });
         });
         this.model.recalculateSectionsVisibility();
+        this.sectionsVisibilityChanged.emit(this.model.visibleSectionsCount());
     }
 
     public flush(): void {

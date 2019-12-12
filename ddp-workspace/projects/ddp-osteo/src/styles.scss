@@ -1,6 +1,5 @@
 @import "app-theme.scss";
 @import "./styles/activity.scss";
-@import "./styles/header.scss";
 @import "./styles/buttons.scss";
 @import "./styles/dashboard.scss";
 @import "./styles/stay-informed.scss";
@@ -8,6 +7,7 @@
 @import "./styles/password.scss";
 @import "./styles/loved-one-thank-you.scss";
 @import "./styles/session-expired.scss";
+@import "./styles/dialogs.scss";
 
 $custom-typography: mat-typography-config($font-family: "Source Sans Pro");
 
@@ -17,7 +17,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
     font-size: 16px;
     color: mat-color($app-theme, 200);
 }
@@ -93,7 +93,7 @@ h4 {
 }
 
 .wrapper {
-    height: 100%;
+    height: 100vh;
     margin-bottom: -5rem; // footer's height
     padding-bottom: 5rem; // footer's height
     padding-top: 6.25rem; // header's height

@@ -12,10 +12,10 @@ import { WorkflowMapperService } from './services/workflowMapper.service';
 import { WorkflowBuilderService } from './services/workflowBuilder.service';
 import { CommunicationService } from './services/communication.service';
 import { ToolkitConfigurationService } from './services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from './services/headerConfiguration.service';
 
 // Components
 import { HeaderComponent } from './components/header/header.component';
-import { HeaderRedesignedComponent } from './components/header/header-redesigned.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflowStartActivity.component';
 import { ActivityPageComponent } from './components/activity-page/activityPage.component';
@@ -39,6 +39,7 @@ import { InternationalPatientsComponent } from './components/international-patie
 import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
+import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -75,6 +76,7 @@ import { MatButtonModule } from '@angular/material/button';
   providers: [
     CommunicationService,
     ToolkitConfigurationService,
+    HeaderConfigurationService,
     WorkflowBuilderService,
     WorkflowMapperService,
     HeaderActionGuard
@@ -82,7 +84,6 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     FooterComponent,
     HeaderComponent,
-    HeaderRedesignedComponent,
     WorkflowStartActivityComponent,
     ActivityPageComponent,
     ActivityComponent,
@@ -104,12 +105,12 @@ import { MatButtonModule } from '@angular/material/button';
     InternationalPatientsComponent,
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
-    SessionWillExpireComponent
+    SessionWillExpireComponent,
+    AcceptAgeUpPageComponent
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
-    HeaderRedesignedComponent,
     WorkflowStartActivityComponent,
     ActivityPageComponent,
     ActivityComponent,
@@ -125,7 +126,8 @@ import { MatButtonModule } from '@angular/material/button';
     ActivityLinkComponent,
     InternationalPatientsComponent,
     SessionExpiredComponent,
-    RedirectToAuth0LoginComponent
+    RedirectToAuth0LoginComponent,
+    AcceptAgeUpPageComponent
   ],
   entryComponents: [
     DisclaimerComponent,

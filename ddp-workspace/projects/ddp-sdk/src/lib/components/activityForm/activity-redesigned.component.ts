@@ -17,19 +17,19 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 @Component({
     selector: 'ddp-redesigned-activity',
     template: `
-    <main class="main main_activity">
-        <section *ngIf="isLoaded && model && (model.name || model.subtitle)" class="section">
-            <div class="content content_tight">
-                <h1 *ngIf="model.name"
-                    #title>
-                    {{model.name}}
-                </h1>
-                <div *ngIf="model.subtitle && false"
-                      [innerHTML]="model.subtitle"
-                      #subtitle>
+    <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
+        <ng-container *ngIf="isLoaded && model">
+            <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
+                <div class="content content_tight">
+                    <div class="sticky-block" [innerHTML]="model.subtitle"></div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <section *ngIf="model.name" class="section">
+                <div class="content content_tight">
+                    <h1>{{model.name}}</h1>
+                </div>
+            </section>
+        </ng-container>
         <!-- article content -->
         <section *ngIf="!isLoaded" class="section section-spinner">
             <mat-spinner></mat-spinner>

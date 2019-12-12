@@ -1,4 +1,3 @@
-<toolkit-redesigned-header></toolkit-redesigned-header>
 <main class="main">
     <section class="section">
         <div class="content content_wide intro-media-block">
@@ -156,14 +155,22 @@
     <section class="section">
         <div class="content content_wide social-media-block">
             <div class="social-media-header">
-                <h2 translate>
+                <h2 class="social-media-header__text" translate>
                     HomePage.SocialMediaSection.Title
                 </h2>
                 <div class="social-media-logos">
-                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
-                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
-                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
-                    <img class="social-media-logos__img" src="https://via.placeholder.com/110x110" alt="Placeholder">
+                    <a [href]="twitterUrl" target="_blank">
+                        <img class="social-media-logos__img" src="assets/images/twitter.png"
+                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Twitter' | translate">
+                    </a>
+                    <a [href]="facebookUrl" target="_blank">
+                        <img class="social-media-logos__img" src="assets/images/facebook.png"
+                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Facebook' | translate">
+                    </a>
+                    <a [href]="instagramUrl" target="_blank">
+                        <img class="social-media-logos__img" src="assets/images/instagram.png"
+                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Instagram' | translate">
+                    </a>
                 </div>
             </div>
             <div class="feeds">
@@ -196,8 +203,11 @@
                 </p>
             </div>
             <div>
-                <button [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
-                    class="button button_medium button_secondary" translate>Common.Buttons.MailingList.Title</button>
+                <button (click)="joinMailingList()"
+                    [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                    class="button button_medium button_secondary" translate>
+                    Common.Buttons.MailingList.Title
+                </button>
             </div>
         </div>
     </section>

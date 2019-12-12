@@ -37,7 +37,8 @@ export class TwitterTimelineWidgetComponent implements OnInit {
       this.twitter.nativeElement,
       {
         height: this.widgetHeight,
-        chrome: 'noscrollbar, noheader, nofooter'
+        chrome: 'noscrollbar, noheader, nofooter',
+        limit: 20
       }
     );
   }

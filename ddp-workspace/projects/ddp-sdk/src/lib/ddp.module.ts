@@ -111,6 +111,8 @@ import { AddressEntryComponent } from './components/address/addressEntry.compone
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
 import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
+import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -153,7 +155,7 @@ import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAu
 import { ConditionalBlockComponent } from './components/activityForm/conditionalBlock.component';
 import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
-import { DrugServiceAgent } from './services/serviceAgents/drugServiceAgent.service';
+import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
@@ -255,7 +257,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MedicalProvidersServiceAgent,
     WorkflowServiceAgent,
     NGXTranslateService,
-    DrugServiceAgent,
+    SuggestionServiceAgent,
     IrbPasswordService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
@@ -314,6 +316,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEntryComponent,
     AddressEmbeddedComponent,
     AddressConfirmComponent,
+    AcceptAgeUpComponent,
     InputRestrictionDirective,
     LazyLoadImagesDirective,
     UpperCaseInputDirective,
@@ -370,6 +373,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEmbeddedComponent,
     AddressEntryComponent,
     AddressConfirmComponent,
+    AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
     LazyLoadImagesDirective,

@@ -11,8 +11,10 @@ import { take } from 'rxjs/operators';
     selector: 'toolkit-join-mailing-list',
     template: `
     <div class="Modal-title">
-        <h1 mat-dialog-title class="Modal-title" translate>Toolkit.Dialogs.JoinMailingList.Title</h1>
-        <mat-icon (click)="closeDialog()" class="close">clear</mat-icon>
+        <h1 class="Modal-title no-margin" translate>Toolkit.Dialogs.JoinMailingList.Title</h1>
+        <button mat-icon-button (click)="closeDialog()">
+            <mat-icon class="ddp-close-button">clear</mat-icon>
+        </button>
     </div>
     <mat-dialog-content>
         <p class="Modal-text" [innerHTML]="'Toolkit.Dialogs.JoinMailingList.Text' | translate"></p>
@@ -57,21 +59,16 @@ import { take } from 'rxjs/operators';
         </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="row NoMargin">
-        <button mat-button
-                color="primary"
-                class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect"
-                (click)="closeDialog()"
+        <button (click)="closeDialog()"
+                class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
                 [innerHTML]="'Toolkit.Dialogs.JoinMailingList.CancelButton' | translate">
         </button>
-        <button mat-button
-                (click)="submitForm()"
+        <button (click)="submitForm()"
                 [disabled]="joinButtonDisabled"
-                color="primary"
-                class="ButtonFilled Button--rect"
+                class="ButtonFilled Button--rect button button_small button_primary"
                 [innerHTML]="'Toolkit.Dialogs.JoinMailingList.SubmitButton' | translate">
         </button>
-    </mat-dialog-actions>
-    `
+    </mat-dialog-actions>`
 })
 export class JoinMailingListComponent implements OnInit, OnDestroy {
     public joinForm: FormGroup;

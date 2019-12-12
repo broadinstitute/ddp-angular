@@ -9,9 +9,10 @@ export class CompositeDisposable {
         subscription && this.addNew(subscription);
     }
 
-    public addNew(teardown: TeardownLogic): void {
+    public addNew(teardown: TeardownLogic): this {
         this.anchor.add(teardown);
         this.isSmbSubscribed = true;
+        return this;
     }
 
     public removeAll(): void {

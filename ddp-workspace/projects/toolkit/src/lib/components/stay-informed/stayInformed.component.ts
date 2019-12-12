@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
     selector: 'toolkit-stay-informed',
@@ -8,7 +9,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
 
     <ng-template #newDesign>
         <main class="main">
-            <toolkit-redesigned-header></toolkit-redesigned-header>
             <section class="section stay-informed-title-section">
                 <div class="content content_tight">
                     <h1 translate>Toolkit.StayInformed.Title</h1>
@@ -72,11 +72,14 @@ export class StayInformedComponent implements OnInit {
     public infoEmailHref: string;
     public useRedesign: boolean;
 
-    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor(
+        private headerConfig: HeaderConfigurationService,
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
         this.infoEmail = this.toolkitConfiguration.infoEmail;
         this.infoEmailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupDefaultHeader();
     }
 }

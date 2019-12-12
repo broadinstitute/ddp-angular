@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
   selector: 'toolkit-error',
@@ -7,8 +8,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
   <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
 
   <ng-template #newDesign>
-    <toolkit-redesigned-header>
-    </toolkit-redesigned-header>
     <main class="main">
       <section class="section error-title-section">
         <div class="content content_tight">
@@ -86,7 +85,9 @@ export class ErrorComponent implements OnInit {
   public emailHref: string;
   public useRedesign: boolean;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.phone = this.toolkitConfiguration.phone;
@@ -94,5 +95,6 @@ export class ErrorComponent implements OnInit {
     this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
     this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
     this.useRedesign = this.toolkitConfiguration.enableRedesign;
+    this.headerConfig.setupDefaultHeader();
   }
 }

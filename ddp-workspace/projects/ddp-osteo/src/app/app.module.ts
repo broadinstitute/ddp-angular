@@ -30,6 +30,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { HeaderComponent } from './components/header/header.component';
+import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -68,9 +70,9 @@ tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
 tkCfg.internationalPatientsUrl = 'international-patients';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
-tkCfg.twitterAccountId = 'count_me_in';
-tkCfg.facebookGroupId = '';
-tkCfg.instagramId = 'countmein';
+tkCfg.twitterAccountId = 'osteoproject';
+tkCfg.facebookGroupId = 'osteosarcomaproject';
+tkCfg.instagramId = 'osteosarcomaproject';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.enableRedesign = true;
 
@@ -133,7 +135,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     GalleryComponent,
     TwitterTimelineWidgetComponent,
     AboutUsComponent,
-    FaqComponent
+    FaqComponent,
+    HeaderComponent,
+    WorkflowProgressComponent
   ],
   providers: [
     {

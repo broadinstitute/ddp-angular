@@ -2,7 +2,8 @@ import { Router } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IrbPasswordService } from 'ddp-sdk';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
     selector: 'toolkit-password',
@@ -11,7 +12,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
 
     <ng-template #newDesign>
         <main class="main">
-            <toolkit-redesigned-header [showLoginButton]="false"></toolkit-redesigned-header>
             <section class="section password-title-section">
                 <div class="content content_tight">
                     <h1 translate>Toolkit.Password.Title</h1>
@@ -97,6 +97,7 @@ export class PasswordComponent implements OnInit {
     public useRedesign: boolean;
 
     constructor(
+        private headerConfig: HeaderConfigurationService,
         private formBuilder: FormBuilder,
         private irbPassword: IrbPasswordService,
         private router: Router,
@@ -105,6 +106,7 @@ export class PasswordComponent implements OnInit {
     public ngOnInit(): void {
         this.initPasswordForm();
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupPasswordHeader();
     }
 
     public submitForm(): void {

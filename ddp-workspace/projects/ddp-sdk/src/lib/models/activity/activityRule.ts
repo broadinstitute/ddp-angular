@@ -1,4 +1,4 @@
 export interface ActivityRule {
     type: string;
-    func: any;
+    func: (data: any) => any;
 }

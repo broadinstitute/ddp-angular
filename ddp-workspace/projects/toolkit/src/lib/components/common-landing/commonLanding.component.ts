@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
   selector: 'toolkit-common-landing',
@@ -7,10 +8,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
   <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
 
   <ng-template #newDesign>
-    <toolkit-redesigned-header [showMainButtons]="false"
-                               [showCmiButton]="false"
-                               [showDashboardButton]="false">
-    </toolkit-redesigned-header>
     <main class="main">
       <section class="section section-spinner">
           <div class="content content_medium info-block">
@@ -52,10 +49,15 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
   ]
 })
 
-export class CommonLandingComponent {
+export class CommonLandingComponent implements OnInit {
   public useRedesign: boolean;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+
+  public ngOnInit(): void {
     this.useRedesign = this.toolkitConfiguration.enableRedesign;
+    this.headerConfig.setupLoginLandingHeader();
   }
 }

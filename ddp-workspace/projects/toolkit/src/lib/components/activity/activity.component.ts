@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { WorkflowBuilderService } from './../../services/workflowBuilder.service';
+import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import { ActivityResponse } from 'ddp-sdk';
 
 @Component({
@@ -9,14 +10,11 @@ import { ActivityResponse } from 'ddp-sdk';
     template: `
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
     <ng-template #newDesign>
-        <toolkit-redesigned-header [showMainButtons]="false"
-                                   [showDashboardButton]="true"
-                                   [stickySubtitle]="stickySubtitle">
-        </toolkit-redesigned-header>
         <ddp-redesigned-activity [studyGuid]="studyGuid"
                                  [activityGuid]="id"
                                  (submit)="navigate($event)"
-                                 (stickySubtitle)="showStickySubtitle($event)">
+                                 (stickySubtitle)="showStickySubtitle($event)"
+                                 (activityCode)="activityCodeChanged($event)">
         </ddp-redesigned-activity>
     </ng-template>
     <ng-template #oldDesign>
@@ -35,8 +33,10 @@ export class ActivityComponent implements OnInit {
     public studyGuid: string;
     public stickySubtitle: string;
     public useRedesign: boolean;
+    public activityCode: string;
 
     constructor(
+        private headerConfig: HeaderConfigurationService,
         private activatedRoute: ActivatedRoute,
         private workflowBuilder: WorkflowBuilderService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
@@ -47,6 +47,7 @@ export class ActivityComponent implements OnInit {
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupActivityHeader();
     }
 
     public navigate(response: ActivityResponse): void {
@@ -55,5 +56,10 @@ export class ActivityComponent implements OnInit {
 
     public showStickySubtitle(stickySubtitle: string): void {
         this.stickySubtitle = stickySubtitle;
+        this.headerConfig.stickySubtitle = stickySubtitle;
+    }
+
+    public activityCodeChanged(code: string): void {
+        this.headerConfig.currentActivity = code;
     }
 }

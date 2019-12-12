@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
     selector: 'toolkit-loved-one-thank-you',
@@ -8,8 +9,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
     </ng-container>
 
     <ng-template #newDesign>
-        <toolkit-redesigned-header>
-        </toolkit-redesigned-header>
         <main class="main">
             <section class="section loved-one-thank-you-title-section">
                 <div class="content content_tight">
@@ -73,7 +72,9 @@ export class LovedOneThankYouComponent implements OnInit {
     public emailHref: string;
     public useRedesign: boolean;
 
-    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor(
+        private headerConfig: HeaderConfigurationService,
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
         this.phone = this.toolkitConfiguration.phone;
@@ -81,5 +82,6 @@ export class LovedOneThankYouComponent implements OnInit {
         this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
         this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupDefaultHeader();
     }
 }

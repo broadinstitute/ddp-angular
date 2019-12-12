@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import { Auth0AdapterService } from 'ddp-sdk';
 
 @Component({
@@ -9,7 +10,6 @@ import { Auth0AdapterService } from 'ddp-sdk';
 
     <ng-template #newDesign>
         <main class="main">
-            <toolkit-redesigned-header></toolkit-redesigned-header>
             <section class="section session-content-section">
                 <div class="content content_tight">
                     <p translate>Toolkit.SessionExpired.Text</p>
@@ -70,10 +70,12 @@ export class SessionExpiredComponent implements OnInit {
 
     constructor(
         private auth0: Auth0AdapterService,
+        private headerConfig: HeaderConfigurationService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupDefaultHeader();
     }
 
     public signin(): void {

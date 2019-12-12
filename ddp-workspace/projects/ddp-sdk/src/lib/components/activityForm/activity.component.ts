@@ -414,33 +414,28 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private updateServerValidationMessages(res: PatchAnswerResponse): void {
+    private updateServerValidationMessages(response: PatchAnswerResponse): void {
         const questionBlocks: AbstractActivityQuestionBlock[] = this.model.sections.reduce((allBlocks, section) =>
             allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
-        const setFailureMessage = (qBlock: AbstractActivityQuestionBlock, failure: ValidationFailure) =>
-            qBlock.serverValidationMessages ?
-                qBlock.serverValidationMessages = (qBlock.serverValidationMessages.concat(failure.message)) :
-                qBlock.serverValidationMessages = [failure.message];
-        // if no validationFailures, we clear them on all the questions
-        if (!(res.validationFailures) || res.validationFailures.length === 0) {
-            questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
-        } else {
-            const answerStableIds = res.answers.map(answer => answer.stableId);
-            res.validationFailures.forEach(failure => {
+        // We should clear server-side validations each time to prevent messages accumulating
+        questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
+        if (response.validationFailures && response.validationFailures.length !== 0) {
+            const answerStableIds = response.answers.map(answer => answer.stableId);
+            response.validationFailures.forEach(failure => {
                 // First we try to see if we can find the question that provided the answer that triggered the failure
                 const questionsForResponse = questionBlocks
                     .filter(qBlock => answerStableIds.includes(qBlock.stableId) && failure.stableIds.includes(qBlock.stableId));
                 if (questionsForResponse.length > 0) {
-                    questionsForResponse.forEach(block => setFailureMessage(block, failure));
+                    questionsForResponse.forEach(block => block.addServerValidationMessage(failure.message));
                 } else {
                     // Must be that the validation failures was not caused by this answer so find a block to assign it to
                     // Try to find the first visible block
                     const shownBlocks = questionBlocks.filter(qBlock => qBlock.shown && failure.stableIds.includes(qBlock.stableId));
                     if (shownBlocks.length > 0) {
-                        setFailureMessage(shownBlocks[0], failure);
+                        shownBlocks[0].addServerValidationMessage(failure.message);
                     } else {
                         const anyBlockInFailure = questionBlocks.filter(qBlock => failure.stableIds.includes(qBlock.stableId));
-                        anyBlockInFailure.length > 0 && setFailureMessage(questionBlocks[0], failure);
+                        anyBlockInFailure.length > 0 && questionBlocks[0].addServerValidationMessage(failure.message);
                     }
                 }
             });

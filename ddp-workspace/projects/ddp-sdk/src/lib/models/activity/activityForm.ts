@@ -45,6 +45,11 @@ export class ActivityForm {
         return this.sections.some(section => section.visible === true);
     }
 
+    public visibleSectionsCount(): number {
+        this.recalculateSectionsVisibility();
+        return this.sections.filter(section => section.visible).length;
+    }
+
     private getAllSections(): Array<ActivitySection> {
         const allSections: ActivitySection[] = [];
         this.introduction && allSections.push(this.introduction);

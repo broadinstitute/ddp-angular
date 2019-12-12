@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import {
     LoggingService,
     UserActivityServiceAgent,
@@ -18,14 +19,11 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
     template: `
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
     <ng-template #newDesign>
-        <toolkit-redesigned-header [showMainButtons]="false"
-                                   [showDashboardButton]="true"
-                                   [stickySubtitle]="stickySubtitle">
-        </toolkit-redesigned-header>
         <ddp-redesigned-activity [studyGuid]="studyGuid"
                                  [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                                  (submit)="raiseSubmit($event)"
-                                 (stickySubtitle)="showStickySubtitle($event)">
+                                 (stickySubtitle)="showStickySubtitle($event)"
+                                 (activityCode)="activityCodeChanged($event)">
         </ddp-redesigned-activity>
     </ng-template>
     <ng-template #oldDesign>
@@ -60,6 +58,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private workflowBuilder: WorkflowBuilderService,
         private logger: LoggingService,
+        private headerConfig: HeaderConfigurationService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
         this.activityGuid = this.activatedRoute.snapshot.data.activityGuid;
         // by default we will not create a new instance
@@ -105,6 +104,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupActivityHeader();
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
@@ -122,5 +122,10 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
     public showStickySubtitle(stickySubtitle: string): void {
         this.stickySubtitle = stickySubtitle;
+        this.headerConfig.stickySubtitle = stickySubtitle;
+    }
+
+    public activityCodeChanged(code: string): void {
+        this.headerConfig.currentActivity = code;
     }
 }

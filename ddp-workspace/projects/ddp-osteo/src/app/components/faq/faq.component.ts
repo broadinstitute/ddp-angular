@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'app-faq',
@@ -12,12 +12,15 @@ export class FaqComponent implements OnInit {
   public infoEmailHref: string;
   public phoneHref: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.infoEmail = this.toolkitConfiguration.infoEmail;
     this.infoEmailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
     this.phone = this.toolkitConfiguration.phone;
     this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
+    this.headerConfig.setupDefaultHeader();
   }
 }

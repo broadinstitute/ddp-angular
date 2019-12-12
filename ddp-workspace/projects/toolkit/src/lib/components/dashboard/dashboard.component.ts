@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import { AnnouncementMessage } from './../../models/announcementMessage';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
@@ -12,8 +13,6 @@ import { filter, map } from 'rxjs/operators';
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
 
     <ng-template #newDesign>
-        <toolkit-redesigned-header>
-        </toolkit-redesigned-header>
         <main class="main">
             <section class="section dashboard-title-section">
                 <div class="content content_medium">
@@ -97,6 +96,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private anchor: Subscription;
 
     constructor(
+        private headerConfig: HeaderConfigurationService,
         private router: Router,
         private announcements: AnnouncementsServiceAgent,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
@@ -115,6 +115,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ).subscribe(messages => this.announcementMessages = messages);
         this.anchor.add(anno);
         this.useRedesign = this.toolkitConfiguration.enableRedesign;
+        this.headerConfig.setupDefaultHeader();
     }
 
     public ngOnDestroy(): void {

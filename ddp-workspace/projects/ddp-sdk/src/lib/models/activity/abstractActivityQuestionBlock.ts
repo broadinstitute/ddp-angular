@@ -48,8 +48,12 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
     public set serverValidationMessages(messages: Array<string>) {
       this.serverValidationMessagesSubject.next(messages);
     }
-    
+
     public get serverValidationMessages(): Array<string> {
       return this.serverValidationMessagesSubject.getValue();
+    }
+
+    public addServerValidationMessage(message: string): void {
+      this.serverValidationMessagesSubject.next(this.serverValidationMessagesSubject.getValue().concat(message));
     }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TextSuggestionProvider } from '../../models/activity/textSuggestionProvider';
+import { SuggestionType } from '../../models/activity/suggestionType';
 import { ActivityRule } from '../../models/activity/activityRule';
 import { TextSuggestion } from '../../models/activity/textSuggestion';
-import { SuggestionMatch } from '../../models/suggestionMatch';
-import { DrugServiceAgent } from '../serviceAgents/drugServiceAgent.service';
+import { SuggestionServiceAgent } from '../serviceAgents/suggestionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { Observable } from 'rxjs';
 import { map, switchMap, filter } from 'rxjs/operators';
@@ -16,18 +16,22 @@ export class ActivitySuggestionBuilder {
 
     constructor(
         private logger: LoggingService,
-        private drugService: DrugServiceAgent) {
+        private suggestionService: SuggestionServiceAgent) {
         this.suggestionBuilders = [
             {
-                type: 'NONE',
+                type: SuggestionType.None,
                 func: (x) => null
             },
             {
-                type: 'DRUG',
+                type: SuggestionType.Drug,
                 func: (x) => this.getDrugSuggestions()
             },
             {
-                type: 'INCLUDED',
+                type: SuggestionType.Cancer,
+                func: (x) => this.getCancerSuggestions()
+            },
+            {
+                type: SuggestionType.Included,
                 func: (x) => this.getIncludedSuggestions(x)
             }
         ];
@@ -49,7 +53,7 @@ export class ActivitySuggestionBuilder {
         // adding extra-typing info here for documentation purposes
         return (value$: Observable<string>) => value$.pipe(
             // using switchMap to cancel pending requests if new queryval becomes available
-            switchMap(value => this.drugService.findDrugSuggestions(value, SUGGESTION_LIMIT).pipe(
+            switchMap(value => this.suggestionService.findDrugSuggestions(value, SUGGESTION_LIMIT).pipe(
                 filter(response => response !== null),
                 map(response =>
                     <TextSuggestion[]>response.results.map(suggestion => (
@@ -59,6 +63,18 @@ export class ActivitySuggestionBuilder {
                         })
                     )
                 )
+            ))
+        );
+    }
+
+    private getCancerSuggestions(): TextSuggestionProvider {
+        return (value$: Observable<string>) => value$.pipe(
+            switchMap(value => this.suggestionService.findCancerSuggestions(value, SUGGESTION_LIMIT).pipe(
+                filter(response => response !== null),
+                map(response => response.results.map(suggestion => ({
+                    value: suggestion.cancer.name,
+                    matches: suggestion.matches
+                })))
             ))
         );
     }
@@ -142,6 +158,10 @@ export class ActivitySuggestionBuilder {
         startOfWordSuggestions.sort(compareOffsetAndText);
         suggestionsWithinWords.sort(compareOffsetAndText);
 
-        return startsWithSuggestions.concat(startOfWordSuggestions, suggestionsWithinWords);
+        return [
+            ...startsWithSuggestions,
+            ...startOfWordSuggestions,
+            ...suggestionsWithinWords
+        ];
     }
 }

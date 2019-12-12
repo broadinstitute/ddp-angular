@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'app-about-us',
@@ -9,9 +9,12 @@ import { ToolkitConfigurationService } from 'toolkit';
 export class AboutUsComponent implements OnInit {
   public countMeInUrl: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
+    this.headerConfig.setupDefaultHeader();
   }
 }
