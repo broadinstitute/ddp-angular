@@ -1,4 +1,4 @@
-import { DdpModule, ConfigurationService, Auth0CodeCallbackComponent, LogLevel, IrbGuard } from 'ddp-sdk';
+import { Auth0CodeCallbackComponent, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
