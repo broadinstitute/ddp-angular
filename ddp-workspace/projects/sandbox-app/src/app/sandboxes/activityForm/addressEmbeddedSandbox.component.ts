@@ -3,6 +3,7 @@ import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActi
 import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import * as _ from 'underscore';
+import { MailAddressBlock } from '../../../../../ddp-sdk/src/lib/models/activity/MailAddressBlock';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
@@ -15,11 +16,16 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   public isReadOnly = true;
   public bogusAddress = null;
   private anchor: CompositeDisposable;
+  public block: MailAddressBlock;
 
 
   constructor(private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
     this.anchor = new CompositeDisposable();
+    const block = new MailAddressBlock(1);
+    block.titleText = 'The Title!!!';
+    block.subtitleText = 'The subtitle!!!';
+    this.block = block;
   }
 
   public ngOnInit(): void {
