@@ -1,6 +1,7 @@
 service: prion
-runtime: python
+runtime: python27
 instance_class: B1
+threadsafe: true
 
 manual_scaling:
   instances: 1
