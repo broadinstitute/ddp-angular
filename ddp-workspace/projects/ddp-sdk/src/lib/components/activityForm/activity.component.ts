@@ -136,7 +136,7 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
                                 <div *ngIf="!isStepped || isLastStep">
-                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
+                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="flush()"
@@ -144,21 +144,21 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                                             [innerHTML]="(isPageBusy | async)
                                                                 ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                                     </button>
-                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary"
+                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary" id="closeButton"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="close()"
                                             [innerHTML]="'SDK.CloseButton' | translate">
                                     </button>
                                 </div>
                                 <div *ngIf="isLoaded && isStepped" class="ConsentButtons">
-                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary"
+                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary" id="prevButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled ButtonFilled--neutral"
                                             (click)="decrementStep()"
                                             [innerHTML]="'SDK.PreviousButton' | translate">
                                     </button>
                                     <div class="NextButton">
-                                        <button *ngIf="!isLastStep" mat-raised-button color="primary"
+                                        <button *ngIf="!isLastStep" mat-raised-button color="primary" id="nextButton"
                                                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                                 class="margin-5 ButtonFilled"
                                                 (click)="incrementStep()"

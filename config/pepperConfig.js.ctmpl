@@ -96,4 +96,11 @@ var DDP_ENV = {
   {{end}}
 {{end}}
 
+{{if eq $study_guid "PRION"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "OAcbZBVls3kOlmRfg75rgBOez2R12AKv";
+    {{end}}
+{{end}}
+
+
 {{end}}{{end}}{{end}}{{end}}
