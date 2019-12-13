@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { VerifyInvitationServiceAgent } from '../../services/serviceAgents/verifyInvitationServiceAgent.service';
+import { InvitationsServiceAgent } from '../../services/serviceAgents/invitationsServiceAgent.service';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ export class VerifyAgeUpComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private verifyService: VerifyInvitationServiceAgent) { }
+        private invitationsService: InvitationsServiceAgent) { }
 
     public ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
@@ -25,7 +25,7 @@ export class VerifyAgeUpComponent implements OnInit {
     }
 
     private verifyInvitation(invitationId: string): void {
-        this.verifyService.verify(invitationId).pipe(
+        this.invitationsService.verify(invitationId).pipe(
             take(1)
         ).subscribe(status => {
             if (status === this.EMAIL_VERIFIED) {
