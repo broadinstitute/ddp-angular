@@ -1,27 +1,23 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-
 import { TranslateService } from '@ngx-translate/core';
-
-import {
-  DdpModule,
-  LogLevel,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent
-} from 'ddp-sdk';
-
-import {
-  ToolkitModule,
-  ToolkitConfigurationService,
-  AppComponent
-} from 'toolkit';
-
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationService, DdpModule, GoogleAnalyticsEventsService, LogLevel, AnalyticsEventsService, AnalyticsEvent } from 'ddp-sdk';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
+import { AccountVerificationComponent } from './components/account-verification/account-verification.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -36,33 +32,14 @@ declare const ga: Function;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.aboutYouGuid = 'ANGIOABOUTYOU';
-tkCfg.consentGuid = 'ANGIOCONSENT';
-tkCfg.releaseGuid = 'ANGIORELEASE';
+tkCfg.consentGuid = 'PRIONCONSENT';
+tkCfg.releaseGuid = 'PRIONMEDICAL';
 tkCfg.dashboardGuid = 'DASHBOARD';
-tkCfg.lovedOneThankYouGuid = 'THANK_YOU';
-tkCfg.aboutYouUrl = 'about-you';
-tkCfg.lovedOneUrl = 'loved-one';
 tkCfg.consentUrl = 'consent';
 tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
-tkCfg.stayInformedUrl = 'stay-informed';
-tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
-tkCfg.internationalPatientsUrl = 'international-patients';
-tkCfg.moreDetailsUrl = 'more-details';
-tkCfg.phone = '857-500-6264';
-tkCfg.infoEmail = 'info@ascproject.org';
-tkCfg.dataEmail = 'data@ascproject.org';
-tkCfg.twitterAccountId = 'ASCaProject';
-tkCfg.facebookGroupId = 'groups/1556795987968214';
-tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=angs_project_painter_2018#summary';
-tkCfg.countMeInUrl = 'https://joincountmein.org/';
-tkCfg.showDataRelease = false;
-tkCfg.showInfoForPhysicians = false;
-tkCfg.showBlog = false;
-tkCfg.blogUrl = '';
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -102,12 +79,25 @@ export function translateFactory(translate: TranslateService, injector: Injector
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitModule
+    PrionToolkitModule,
+    FlexModule,
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   declarations: [
     WelcomeComponent,
     MoreDetailsComponent,
-    AboutUsComponent
+    AccountVerificationComponent
   ],
   providers: [
     {
