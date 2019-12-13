@@ -109,7 +109,7 @@ tkCfg.blogUrl = '';
 const appRoutes: Routes = [
   { path: 'fireCloudStudies', component: FireCloudStudiesSandboxComponent },
   { path: 'silentRenew', component: SilentRenewComponent },
-  { path: 'login-landing', component: LoginLandingComponent, canActivate: [IrbGuard] },
+  { path: 'login-landing', component: LoginLandingComponent },
   { path: '', component: DefaultComponent },
   { path: 'login', component: LoginSandboxComponent },
   { path: 'userprofile', component: UserProfileSandboxComponent },
