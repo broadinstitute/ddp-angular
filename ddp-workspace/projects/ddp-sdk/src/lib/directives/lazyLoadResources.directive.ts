@@ -2,7 +2,7 @@ import { Directive, AfterViewInit, Input, ElementRef, Renderer2 } from '@angular
 import { WindowRef } from '../services/windowRef';
 
 @Directive({
-    selector: 'lazy-resource'
+    selector: '[lazy-resource]'
 })
 export class LazyLoadResourcesDirective implements AfterViewInit {
     @Input() src: string;
