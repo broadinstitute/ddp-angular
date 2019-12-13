@@ -278,7 +278,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       suggestion: Address;
     }
 
-    const verifyInputComponentSparseAddress$ = this.inputComponentAddress$.pipe(
+    const currentAddress$: Observable<Address | null> = merge(
+      this.inputAddress$,
+      this.inputComponentAddress$
+    ).pipe(
+      share()
+    );
+    const verifyInputComponentSparseAddress$ = currentAddress$.pipe(
       filter(address => !this.enoughDataToVerify(address)),
       map(address => [address, this.computeValidityForSparseAddress(address)]),
       tap(([address, isValid]) => {
@@ -290,7 +296,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       })
     );
 
-    const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
+    const verifyInputComponentAddressAction$ = currentAddress$.pipe(
       filter(address => this.enoughDataToVerify(address)),
       tap(() => busyCounter$.next(1)),
       switchMap(inputAddress =>
@@ -322,13 +328,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
           this.stateUpdates$.next({ formErrorMessages: [], suggestedAddress: null, enteredAddress: null, showSuggestion: false });
         }
       })
-    );
-
-  const currentAddress$: Observable<Address | null> = merge(
-    this.inputAddress$,
-    this.inputComponentAddress$
-    ).pipe(
-      share()
     );
 
     const selectedAddress$: Observable<Address> = this.suggestionForm.valueChanges.pipe(
@@ -482,6 +481,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       tap(isBusy => this.componentBusy.emit(isBusy))
     );
 
+    const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.addressErrors$]).pipe(
+      map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
+      distinctUntilChanged(),
+      tap(status => console.log('validStatusChanged to:' + status)),
+      tap(status => this.validStatusChanged.emit(status))
+    );
+
     processSubmitAnnouncement$ && processSubmitAnnouncement$.subscribe();
     merge(
       initializeStateAction$,
@@ -498,6 +504,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       setupSuggestedAddressFormControl$,
       processVerificationStatusErrorAction$,
       processOtherVerificationErrorsAction$,
+      emitValidStatusAction$,
       updateInputComponentWithSelectedAddress$
     ).subscribe();
   }
