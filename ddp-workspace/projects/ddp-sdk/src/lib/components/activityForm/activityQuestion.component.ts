@@ -7,11 +7,13 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { ConfigurationService } from '../../services/configuration.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import { BlockType } from '../../models/activity/blockType';
+import { QuestionType } from '../../models/activity/questionType';
 
 @Component({
   selector: 'ddp-activity-question',
   template: `
-      <div class="ddp-activity-question" #scrollAnchor>
+      <div class="ddp-activity-question" #scrollAnchor [ngClass]="getQuestionClass(block)">
           <ddp-activity-answer
                   [block]="block"
                   [readonly]="readonly"
@@ -109,6 +111,13 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.ngUnsubscribe)
     ).subscribe();
+  }
+
+  public getQuestionClass(block: ActivityQuestionBlock<any>): string {
+    if (block.blockType !== BlockType.Question) {
+      return '';
+    }
+    return 'Question--' + block.questionType;
   }
 
   public ngOnDestroy(): void {

@@ -1,117 +1,90 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
+import { AnalyticsEventCategories, AnalyticsEventActions, AnalyticsEventsService, Auth0AdapterService, BrowserContentService, GoogleAnalyticsEventService, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
     template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
-    <div class="Wrapper">
+    <toolkit-header noBackground="true"></toolkit-header>
+    <div class="Container NoPadding">
         <a id="topView"></a>
-        <div class="Intro-image">
-            <div class="Intro-imageSpan" role="img" aria-label="Angiosarcoma Homepage Image">
-                <span class="Intro-imageInner"></span>
-                <div *ngIf="showArrow" class="Intro-arrow">
-                    <a (click)="scrollTo(secondView)"><img src="./assets/images/arrow.svg" alt="Arrow"></a>
+        <div class="Landing-image">
+            <div class="Landing-content col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                <h1 class="Title" translate>Toolkit.Welcome.WelcomeTitle</h1>
+                <p translate>Toolkit.Welcome.WelcomeText</p>
+                <div class="row">
+                    <a (click)="clickJoinUs()" class="Button Button--primaryDarkYellow col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-sm-offset-2">Join Us</a>
+                </div>
+            </div>
+            <div *ngIf="showArrow" class="Intro-arrow">
+                <a (click)="scrollTo(secondView)"><img src="./assets/images/white-arrow.svg" alt="Arrow"></a>
+            </div>
+        </div>
+        
+        <div class="FullWidth">
+            <div class="row NoMargin">
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title Aligned--center" translate>Toolkit.Welcome.Intro</h1>
+                        <div class="row Margin20">
+                            <a (click)="clickJoinUs()" class="Button Button--primaryYellow col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-1 col-xs-8 col-sm-offset-2" translate>Toolkit.Common.JoinUs</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="Intro-footer row">
-            <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+        <div class="CenterDiv">
+            <img src="/assets/images/yellow-arrow.svg" alt="Arrow">
         </div>
-
-        <div class="Intro row">
-            <section class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title" translate>
-                    Toolkit.Welcome.WelcomeTitle
-                </h1>
-                <p class="Message-text" translate>
-                    Toolkit.Welcome.WelcomeText
-                </p>
-            </section>
-        </div>
-
-        <div class="row">
-            <a #secondView></a>
-            <section class="Message Message--intro col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title Message-title--intro" translate>
-                    Toolkit.Welcome.Intro
-                </h1>
-                <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                    Toolkit.Common.CountMeInButton
-                </a>
-            </section>
-        </div>
-
-        <div class="row">
-            <div class="Separator Separator--small"></div>
-        </div>
-
-        <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <h1 class="Message-title" translate>
-                    Toolkit.Welcome.Participate
-                </h1>
-            </section>
-        </div>
-
-        <div class="row">
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.FirstStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.FirstStep.Subtitle
-                </h2>
-                <p class="Message-stepText">
-                    <span translate>Toolkit.Welcome.Steps.FirstStep.TextPt1</span>
-                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Color--orange" translate> Toolkit.Welcome.Steps.FirstStep.Link </a>
-                    <span translate>Toolkit.Welcome.Steps.FirstStep.TextPt2</span>
-                </p>
-            </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.SecondStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.SecondStep.Subtitle
-                </h2>
-                <p class="Message-stepText" [innerHTML]="'Toolkit.Welcome.Steps.SecondStep.Text' | translate">
-                </p>
-            </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Subtitle
-                </h2>
-                <p class="Message-stepText" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Text
-                </p>
+    
+        <div class="FullWidth">
+            <div class="row NoMargin">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12" translate>Toolkit.Welcome.Participate</h1>
+                        <div class="row Margin20">
+                            <img src="/assets/images/step-1.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>Toolkit.Welcome.Steps.FirstStep.Title</h2>
+                                <p translate>Toolkit.Welcome.Steps.FirstStep.Text</p>
+                            </div>
+                        </div>
+                        <div class="row Margin20">
+                            <img src="/assets/images/step-2.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>Toolkit.Welcome.Steps.SecondStep.Title</h2>
+                                <p translate>Toolkit.Welcome.Steps.SecondStep.Text</p>
+                            </div>
+                        </div>
+                        <div class="row Margin20">
+                            <img src="/assets/images/step-3.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>Toolkit.Welcome.Steps.ThirdStep.Title</h2>
+                                <p translate>Toolkit.Welcome.Steps.ThirdStep.Text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="Separator Separator--small"></div>
+        <div class="CenterDiv">
+            <img src="/assets/images/yellow-arrow.svg" alt="Arrow">
         </div>
-
-        <div class="row row--moreBottomMargin">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title Message-title--intro" translate>
-                    Toolkit.Welcome.Closing
-                </h1>
-                <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                    Toolkit.Common.CountMeInButton
-                </a>
-            </section>
+    
+        <div class="FullWidth">
+            <div class="row NoMargin">
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title Aligned--center" translate>Toolkit.Welcome.Closing</h1>
+                        <div class="row Margin20">
+                            <a (click)="clickJoinUs()" class="Button Button--primaryYellow col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-1 col-xs-8 col-sm-offset-2" translate>Toolkit.Common.JoinUs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </div>
+    </div> 
     `
 })
 export class WelcomeComponent implements OnInit {
@@ -127,7 +100,9 @@ export class WelcomeComponent implements OnInit {
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
     }
 
-    public clickCountMeIn(): void {
+    public clickJoinUs(): void {
+      sessionStorage.setItem('nextUrl', 'account-verification');
+      this.auth0Adapter.signup();
         this.doAnalytics();
         if (this.unsupportedBrowser) {
             this.browserContent.emitWarningEvent();
