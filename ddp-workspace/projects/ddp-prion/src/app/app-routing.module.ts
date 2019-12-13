@@ -5,33 +5,25 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
-  ChangeLanguageRedirectComponent,
   IrbGuard,
   BrowserGuard
 } from 'ddp-sdk';
 
-import {
-  PrionDashboardComponent,
-  PrionActivityPageComponent,
-  PrionActivityComponent,
-  PrionWorkflowStartActivityComponent,
-  PrionErrorComponent,
-  PrionSessionExpiredComponent,
-  PrionPasswordComponent,
-  PrionLoginLandingComponent,
-  PrionRedirectToAuth0LoginComponent,
-  PrionRedirectToLoginLandingComponent
-} from 'toolkit-prion';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { LearnMoreComponent } from './components/learn-more/learn-more.component';
-import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
-import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, RedirectToAuth0LoginComponent, ErrorComponent,
+  RedirectToLoginLandingComponent,
+  SessionExpiredComponent,
+  PasswordComponent,
+  WorkflowStartActivityComponent,
+ActivityComponent} from 'projects/prion-toolkit/src/public-api';
+import { AccountVerificationComponent } from './components/account-verification/account-verification.component';
 
 const routes: Routes = [
   {
     path: 'consent',
-    component: PrionActivityPageComponent,
+    component: ActivityPageComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -42,8 +34,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'medical',
-    component: PrionActivityPageComponent,
+    path: 'release-survey', //TODO: Probably change this path
+    component: ActivityPageComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -54,17 +46,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'study-listing',
-    component: StudyListingComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ]
-  },
-  {
     path: 'dashboard',
-    component: PrionDashboardComponent,
+    component: DashboardComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -77,8 +60,13 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
+    path: 'account-verification',
+    component: AccountVerificationComponent,
+    canActivate: [IrbGuard]
+  },
+  {
     path: 'activity/:id',
-    component: PrionActivityComponent,
+    component: ActivityComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -87,27 +75,17 @@ const routes: Routes = [
   },
   {
     path: 'login-landing',
-    component: PrionLoginLandingComponent,
+    component: LoginLandingComponent,
     canActivate: [IrbGuard]
   },
   {
     path: 'login-landing/:mode',
-    component: PrionRedirectToAuth0LoginComponent,
+    component: RedirectToAuth0LoginComponent,
     canActivate: [IrbGuard]
   },
   {
-    path: 'redirect-join',
-    component: RedirectJoinComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'change-language-redirect',
-    component: ChangeLanguageRedirectComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'start-study',
-    component: PrionWorkflowStartActivityComponent,
+    path: 'start-study', //TODO: Make verification email redirect here and make it so we can't get here any other way or do this more than once
+    component: WorkflowStartActivityComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -116,22 +94,22 @@ const routes: Routes = [
   },
   {
     path: 'error',
-    component: PrionErrorComponent,
+    component: ErrorComponent,
     canActivate: [IrbGuard]
   },
   {
-    path: 'learn-more',
-    component: LearnMoreComponent,
+    path: 'more-details',
+    component: MoreDetailsComponent,
     canActivate: [IrbGuard]
   },
   {
     path: 'password-reset-done',
-    component: PrionRedirectToLoginLandingComponent,
+    component: RedirectToLoginLandingComponent,
     canActivate: [IrbGuard]
   },
   {
     path: 'session-expired',
-    component: PrionSessionExpiredComponent,
+    component: SessionExpiredComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard
@@ -139,7 +117,7 @@ const routes: Routes = [
   },
   {
     path: 'password',
-    component: PrionPasswordComponent
+    component: PasswordComponent
   },
   {
     path: '',
