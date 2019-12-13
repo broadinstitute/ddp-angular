@@ -1,15 +1,15 @@
-import { Directive, AfterViewInit, HostBinding, Input, ElementRef } from '@angular/core';
+import { Directive, AfterViewInit, Input, ElementRef, Renderer2 } from '@angular/core';
 import { WindowRef } from '../services/windowRef';
 
 @Directive({
     selector: 'img[lazy-img]'
 })
 export class LazyLoadImagesDirective implements AfterViewInit {
-    @HostBinding('attr.src') srcAttr = '';
     @Input() src: string;
 
     constructor(
         private el: ElementRef,
+        private renderer: Renderer2,
         private windowRef: WindowRef) { }
 
     public ngAfterViewInit(): void {
@@ -17,6 +17,9 @@ export class LazyLoadImagesDirective implements AfterViewInit {
     }
 
     private lazyLoadImage(): void {
+        const options = {
+            rootMargin: '0px 0px 300px 0px'
+        };
         const observer = new IntersectionObserver((entries: any[]) => {
             entries.forEach((entry: any) => {
                 if (entry.isIntersecting) {
@@ -24,12 +27,12 @@ export class LazyLoadImagesDirective implements AfterViewInit {
                     observer.unobserve(this.el.nativeElement);
                 }
             });
-        });
+        }, options);
         observer.observe(this.el.nativeElement);
     }
 
     private loadImage(): void {
-        this.srcAttr = this.src;
+        this.renderer.setAttribute(this.el.nativeElement, 'src', this.src)
     }
 
     private get canUseLazyLoad(): boolean {
