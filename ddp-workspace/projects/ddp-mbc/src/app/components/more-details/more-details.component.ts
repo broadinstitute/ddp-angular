@@ -47,7 +47,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.SendUs.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.SendUs.Text</p>
                         <div class="PageContent-video">
-                            <iframe class="PageContent-video--iframe" src="https://www.youtube.com/embed/_dKSNMarRuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe lazy-resource class="PageContent-video--iframe" src="https://www.youtube.com/embed/_dKSNMarRuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                                             
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Analyze.Title</h2>
