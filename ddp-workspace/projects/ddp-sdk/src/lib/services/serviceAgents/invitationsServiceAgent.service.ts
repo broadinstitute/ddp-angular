@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class VerifyInvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
+export class InvitationsServiceAgent extends NotAuthenticatedServiceAgent<any> {
     constructor(
         @Inject('ddp.config') _configuration: ConfigurationService,
         _http: HttpClient,

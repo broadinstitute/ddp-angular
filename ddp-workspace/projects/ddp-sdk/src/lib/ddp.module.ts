@@ -158,7 +158,7 @@ import { QuestionPromptComponent } from './components/activityForm/questionPromp
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
-import { VerifyInvitationServiceAgent } from './services/serviceAgents/verifyInvitationServiceAgent.service';
+import { InvitationsServiceAgent } from './services/serviceAgents/invitationsServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
@@ -265,7 +265,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AnnouncementsServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
-    VerifyInvitationServiceAgent,
+    InvitationsServiceAgent,
     Title,
     RenewSessionNotifier
   ],
