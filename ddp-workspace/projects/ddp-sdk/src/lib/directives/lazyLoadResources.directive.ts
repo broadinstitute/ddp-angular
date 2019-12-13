@@ -2,9 +2,9 @@ import { Directive, AfterViewInit, Input, ElementRef, Renderer2 } from '@angular
 import { WindowRef } from '../services/windowRef';
 
 @Directive({
-    selector: 'img[lazy-img]'
+    selector: 'lazy-resource'
 })
-export class LazyLoadImagesDirective implements AfterViewInit {
+export class LazyLoadResourcesDirective implements AfterViewInit {
     @Input() src: string;
 
     constructor(
@@ -13,17 +13,17 @@ export class LazyLoadImagesDirective implements AfterViewInit {
         private windowRef: WindowRef) { }
 
     public ngAfterViewInit(): void {
-        this.canUseLazyLoad ? this.lazyLoadImage() : this.loadImage();
+        this.canUseLazyLoad ? this.lazyLoadResource() : this.loadResource();
     }
 
-    private lazyLoadImage(): void {
+    private lazyLoadResource(): void {
         const options = {
             rootMargin: '0px 0px 300px 0px'
         };
         const observer = new IntersectionObserver((entries: any[]) => {
             entries.forEach((entry: any) => {
                 if (entry.isIntersecting) {
-                    this.loadImage();
+                    this.loadResource();
                     observer.unobserve(this.el.nativeElement);
                 }
             });
@@ -31,7 +31,7 @@ export class LazyLoadImagesDirective implements AfterViewInit {
         observer.observe(this.el.nativeElement);
     }
 
-    private loadImage(): void {
+    private loadResource(): void {
         this.renderer.setAttribute(this.el.nativeElement, 'src', this.src)
     }
 
