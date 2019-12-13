@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
@@ -8,40 +9,18 @@ import {
   BrowserGuard
 } from 'ddp-sdk';
 
-import {
-  ActivityPageComponent,
-  ActivityComponent,
-  DashboardComponent,
-  LoginLandingComponent,
-  ErrorComponent,
-  StayInformedComponent,
-  PasswordComponent,
-  RedirectToLoginLandingComponent,
-  WorkflowStartActivityComponent,
-  InternationalPatientsComponent,
-  SessionExpiredComponent,
-  LovedOneThankYouComponent,
-  RedirectToAuth0LoginComponent
-} from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, RedirectToAuth0LoginComponent, ErrorComponent,
+  RedirectToLoginLandingComponent,
+  SessionExpiredComponent,
+  PasswordComponent,
+  WorkflowStartActivityComponent,
+ActivityComponent} from 'projects/prion-toolkit/src/public-api';
+import { AccountVerificationComponent } from './components/account-verification/account-verification.component';
 
 const routes: Routes = [
-  {
-    path: 'about-you',
-    component: ActivityPageComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
-    data: {
-      activityGuid: 'ANGIOABOUTYOU',
-      createActivityInstance: true
-    }
-  },
   {
     path: 'consent',
     component: ActivityPageComponent,
@@ -51,11 +30,11 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: 'ANGIOCONSENT'
+      activityGuid: 'PRIONCONSENT'
     }
   },
   {
-    path: 'release-survey',
+    path: 'release-survey', //TODO: Probably change this path
     component: ActivityPageComponent,
     canActivate: [
       IrbGuard,
@@ -63,20 +42,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: 'ANGIORELEASE'
-    }
-  },
-  {
-    path: 'loved-one',
-    component: ActivityPageComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
-    data: {
-      activityGuid: 'ANGIOLOVEDONE',
-      createActivityInstance: true
+      activityGuid: 'PRIONMEDICAL'
     }
   },
   {
@@ -91,6 +57,11 @@ const routes: Routes = [
   {
     path: 'auth',
     component: Auth0CodeCallbackComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'account-verification',
+    component: AccountVerificationComponent,
     canActivate: [IrbGuard]
   },
   {
@@ -113,17 +84,13 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'count-me-in',
+    path: 'start-study', //TODO: Make verification email redirect here and make it so we can't get here any other way or do this more than once
     component: WorkflowStartActivityComponent,
     canActivate: [
       IrbGuard,
-      BrowserGuard
+      BrowserGuard,
+      AuthGuard
     ]
-  },
-  {
-    path: 'about-us',
-    component: AboutUsComponent,
-    canActivate: [IrbGuard]
   },
   {
     path: 'error',
@@ -133,21 +100,6 @@ const routes: Routes = [
   {
     path: 'more-details',
     component: MoreDetailsComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'stay-informed',
-    component: StayInformedComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'loved-one-thank-you',
-    component: LovedOneThankYouComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'international-patients',
-    component: InternationalPatientsComponent,
     canActivate: [IrbGuard]
   },
   {

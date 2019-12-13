@@ -4,20 +4,7 @@ import { ToolkitConfigurationService } from 'toolkit';
 @Component({
     selector: 'more-details',
     template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
-    <div class="Wrapper">
-        <div class="PageHeader">
-            <div class="PageHeader-background">
-                <div class="PageLayout">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <h1 class="PageHeader-title" translate>
-                            Toolkit.MoreDetails.Title
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <toolkit-header></toolkit-header>
         <article class="PageContent">
             <div class="PageLayout row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -41,8 +28,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                     </section>
                 </div>
             </div>
-        </article>
-    </div>
+        </article>   
     `
 })
 export class MoreDetailsComponent implements OnInit {
