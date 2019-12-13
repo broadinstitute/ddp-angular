@@ -193,7 +193,8 @@ import { WindowRef } from 'ddp-sdk';
                                     Toolkit.DataRelease.Glossary.Text
                                 </p>
                                 <div id="NCITermDictionaryWidgetEnglish">
-                                    <iframe frameborder="0" 
+                                    <iframe lazy-resource
+                                            frameborder="0" 
                                             src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish" 
                                             id="NCITermDictionaryWidgetContainerEnglish"
                                             title="https://www.mbcproject.org/data-release" 
