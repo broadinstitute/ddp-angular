@@ -13,7 +13,10 @@ export class LazyLoadResourcesDirective implements AfterViewInit {
         private windowRef: WindowRef) { }
 
     public ngAfterViewInit(): void {
-        this.canUseLazyLoad ? this.lazyLoadResource() : this.loadResource();
+        if (this.canUseLazyLoad()) {
+            this.renderer.setAttribute(this.el.nativeElement, 'src', '');
+            this.lazyLoadResource();
+        }
     }
 
     private lazyLoadResource(): void {
@@ -32,10 +35,10 @@ export class LazyLoadResourcesDirective implements AfterViewInit {
     }
 
     private loadResource(): void {
-        this.renderer.setAttribute(this.el.nativeElement, 'src', this.src)
+        this.renderer.setAttribute(this.el.nativeElement, 'src', this.src);
     }
 
-    private get canUseLazyLoad(): boolean {
+    private canUseLazyLoad(): boolean {
         return this.windowRef.nativeWindow && 'IntersectionObserver' in this.windowRef.nativeWindow;
     }
 }
