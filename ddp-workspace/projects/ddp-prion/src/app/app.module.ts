@@ -1,10 +1,12 @@
-//Angular imports
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { TranslateService } from '@ngx-translate/core';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationService, DdpModule, GoogleAnalyticsEventsService, LogLevel, AnalyticsEventsService, AnalyticsEvent } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,30 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTableModule } from "@angular/material";
-
-//External library imports
-import { TranslateService } from '@ngx-translate/core';
-
-//SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
-
-//Toolkit imports
-import { ToolkitModule } from "toolkit";
-
-//Toolkit-prion imports
-import { PrionToolkitConfigurationService,
-  ToolkitPrionModule,
-  PrionAppComponent
-} from "toolkit-prion";
-
-//Local imports
-import { AppRoutingModule } from './app-routing.module';
-import { WelcomeComponent } from "./components/welcome/welcome.component";
-import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
-import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
-import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
+import { AccountVerificationComponent } from './components/account-verification/account-verification.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -48,7 +30,7 @@ declare const DDP_ENV: any;
 
 declare const ga: Function;
 
-export const tkCfg = new PrionToolkitConfigurationService();
+export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.consentGuid = 'PRIONCONSENT';
 tkCfg.releaseGuid = 'PRIONMEDICAL';
@@ -58,8 +40,6 @@ tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
-tkCfg.assetsBucketUrl = 'https://storage.googleapis.com/' + DDP_ENV.assetsBucketName;
-tkCfg.infoEmail = 'help@prionregistry.org';
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -76,52 +56,6 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
-config.cookies = {
-  cookies: [
-    {
-      type: 'Functional',
-      actions: null,
-      list: [
-        {
-          name: 'auth0',
-          description: 'authorization',
-          expiration: 'various'
-        },
-        {
-          name: 'pepper',
-          description: 'authorization',
-          expiration: 'session'
-        },
-        {
-          name: 'tcell',
-          description: 'authorization',
-          expiration: 'various'
-        }
-      ]
-    },
-    {
-      type: 'Analytical',
-      actions: ['Accept', 'Reject'],
-      list: [
-        {
-          name: 'ga',
-          description: 'identification',
-          expiration: '2years'
-        },
-        {
-          name: 'gid',
-          description: 'grouping_behavior',
-          expiration: '24hours'
-        },
-        {
-          name: 'gat',
-          description: 'throttling',
-          expiration: '10minutes'
-        }
-      ]
-    }
-  ]
-};
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
@@ -145,8 +79,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitPrionModule,
-    ToolkitModule,
+    PrionToolkitModule,
     FlexModule,
     CommonModule,
     MatToolbarModule,
@@ -160,14 +93,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatProgressBarModule,
-    MatTableModule
   ],
   declarations: [
     WelcomeComponent,
-    LearnMoreComponent,
-    StudyListingComponent,
-    RedirectJoinComponent
+    MoreDetailsComponent,
+    AccountVerificationComponent
   ],
   providers: [
     {
@@ -188,7 +118,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       multi: true
     }
   ],
-  bootstrap: [PrionAppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private analytics: AnalyticsEventsService) {
