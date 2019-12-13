@@ -1,484 +1,386 @@
 {
-  "App": {
-    "Home": "Home",
-    "FAQ": "More Details/FAQ",
-    "About": "About Us",
-    "Join": "Join Mailing List",
-    "Twitter": "Tweets by Prion<br>Registry",
-    "Common": {
-      "JoinUs": "Join Us"
+    "App": {
+        "Home": "Home",
+        "FAQ": "More Details/FAQ",
+        "About": "About Us",
+        "Join": "Join Mailing List",
+        "Twitter": "Tweets by Prion<br>Registry"
     },
-    "Welcome": {
-      "WelcomeTitle": "Volunteer for research to help fight prion disease",
-      "WelcomeText": "Join the Prion Registry, an online registry for people affected by or at risk for prion disease who want to find opportunities to participate in research.",
-      "Intro": "Join us on this quest",
-      "Closing": "Become a part of this research movement. Let's change the future together.",
-      "Participate": "How it works:",
-      "Steps": {
-        "FirstStep": {
-          "Title": "1. Register",
-          "Text": "Click \"Join Us\" to create an account for yourself or a loved one with prion disease. Once you fill out our easy, online consent form, you will be ready to get started!"
+    "Toolkit": {
+        "Common": {
+            "Organization": "Prion",
+            "CountMeInButton": "Join Us",
+          "JoinUs": "Join Us"
         },
-        "SecondStep": {
-          "Title": "2. Tell us about yourself",
-          "Text": "You will be asked to fill out a short (less than 10 minutes) questionnaire about yourself and your diagnosis or risk."
+        "Header": {
+            "HeaderLogo": "Prion<br>Registry",
+            "LearnMore": "Learn More",
+            "CountMeIn": "Join Us",
+            "CountMeInButton": "Join Us",
+            "JoinUs": "Join Us"
         },
-        "ThirdStep": {
-          "Title": "3. Let's learn together!",
-          "Text": "Once your questionnaire is complete, you will be able to view research studies you're eligible to participate in, and contact investigators to enroll. If you let us, we will also contact you about future research opportunities."
+        "Footer": {
+            "FooterLogo": "Prion<br>Registry",
+            "Home": "Home",
+            "Join": "Join Mailing List",
+            "FAQ": "Learn More",
+            "About": "About Us",
+            "Top": "Back to top",
+            "Contacts": {
+                "ContactUs": "Contact Us:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            }
+        },
+        "AccountVerification": {
+            "Title": "Just one more step!",
+            "Description1": "We've just sent a verification and welcome email to you at:",
+            "Description2": ". Please check your email and be sure to click through the ",
+            "Description3": "\"Confirm my account\"",
+            "Description4": "link at the end of the email. This last verification step is an important part of the security process for this study."
+        },
+        "Welcome": {
+            "WelcomeTitle": "Volunteer for research to help fight prion disease",
+            "WelcomeText": "Join the Prion Registry, an online registry for people affected by or at risk for prion disease who want to find opportunities to participate in research.",
+            "Intro": "Join us on this quest",
+            "Closing": "Become a part of this research movement. Let's change the future together.",
+            "Participate": "How it works:",
+            "Steps": {
+                "FirstStep": {
+                    "Title": "1. Register",
+                    "Text": "Click \"Join Us\" to create an account for yourself or a loved one with prion disease. Once you fill out our easy, online consent form, you will be ready to get started!"
+                },
+                "SecondStep": {
+                    "Title": "2. Tell us about yourself",
+                    "Text": "You will be asked to fill out a short (less than 10 minutes) questionnaire about yourself and your diagnosis or risk."
+                },
+                "ThirdStep": {
+                    "Title": "3. Let's learn together!",
+                    "Text": "Once your questionnaire is complete, you will be able to view research studies you're eligible to participate in, and contact investigators to enroll. If you let us, we will also contact you about future research opportunities."
+                }
+            }
+        },
+        "JoinUs": {
+            "Title": "Join Us",
+            "Description": {
+                "Pt1": "Do you or a relative of yours have prion disease? Tell us about it and join us making a difference...",
+                "Pt2": "You can register in the platform by using your email address and creating a password. We will use this account to communicate with you regarding the Prion Registry."
+            },
+          "Email": "Email Address*",
+          "Password":  "Password*",
+          "AlreadyRegistered": "Already registered? Sign in here"
+        },
+        "MoreDetails": {
+            "Title": "Learn more about Prion Registry",
+            "LearnMore": {
+                "Title": "Frequently Asked Questions",
+                "WhatIs": {
+                    "Question": "1. What is prion disease?",
+                    "Text": "Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+                },
+                "For": {
+                    "Question": "2. What is this registry for?",
+                    "Text": "In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+                },
+                "Participate": {
+                    "Question": "3. Can I participate in this registry?",
+                    "Text": "Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+                },
+                "Why": {
+                    "Question": "4. Why would I want to participate in this registry?",
+                    "Text": "Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+                },
+                "DoIHaveTo": {
+                    "Question": "5. Do I have to participate in this registry?",
+                    "Text": "Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+                }
+            }
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        },
+        "Dialogs": {
+            "Disclaimer": {
+                "Title": "View Prion Registry Data",
+                "Text": "You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
+                "SubmitButton": "OK"
+            },
+            "JoinMailingList": {
+                "Title": "Stay informed!",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email Confirmation (Reenter Email) *",
+                        "Error": "Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "CANCEL",
+                "SubmitButton": "JOIN",
+                "Required": "* Required field",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon!",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
+        },
+        "Warning": {
+            "Title": "Download Chrome or Safari to Continue",
+            "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+            "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "Click the following links to download",
+                "Pt2": "or",
+                "Pt3": "Chrome and Safari are always free.",
+                "Chrome": "Chrome (for Mac & PC)",
+                "Safari": "Safari (for Mac)"
+            },
+            "SubmitButton": "OK"
+        },
+        "StayInformed": {
+            "Title": "Stay Informed!",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "RETURN HOME"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password",
+            "SubmitButton": "Submit",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred.",
+            "PasswordField": {
+                "Error": "Password is required"
+            }
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Header": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "Log In"
         }
-      },
-      "ArrowAlt": "Arrow"
     },
-    "StudyListing": {
-      "Columns": [
-        {
-          "title": "Study Name",
-          "name": "studyName",
-          "placeholder": "Filter by name"
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Back to Dashboard",
+        "AddButton": "Add",
+        "CancelButton": "Cancel",
+        "NextButton": "Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+        "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+        "SavingButton": "Saving",
+        "EditButton": "Edit",
+        "ReviewButton": "View",
+        "ValidateError": "Please complete all required fields.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
         },
-        {
-          "title": "Study Description",
-          "name": "description",
-          "placeholder": "Filter by description"
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
         },
-        {
-          "title": "Principal Investigator",
-          "name": "nameOfPI",
-          "placeholder": "Filter by PI"
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
         },
-        {
-          "title": "Study Site",
-          "name": "site",
-          "placeholder": "Filter by site"
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
         },
-        {
-          "title": "Eligibility Requirements",
-          "name": "eligibilityRequirements",
-          "placeholder": "Filter by eligibility"
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
         },
-        {
-          "title": "More Information",
-          "name": "moreInfo",
-          "placeholder": ""
-        }
-      ],
-      "Rows": [
-        {
-          "studyName": "Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
-          "description": "The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
-          "moreInfo":  "Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
         },
-        {
-          "studyName": "Biomarkers in pre-symptomatic mutation carriers",
-          "description":"Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
-          "site": "Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
-          "eligibilityRequirements": "You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
         },
-        {
-          "studyName": "Challenging the Huntington Disease Paradigm: Evaluation of Psychosocial Issues in Persons at-risk for Genetic Prion Disease",
-          "description": "The purpose of this descriptive study is to examine the psychosocial experience of being at-risk for a genetic prion disease.  Eligible participants for the study will include those who are in one of two groups: 1) those who are at-risk for inheriting a mutation based on family history, but have not undergone predictive testing and 2) those with a mutation confirmed by predictive testing, but who are not yet symptomatic. This anonymous online survey includes questions about psychological adaptation to genetic information and a general mental health assessment, as well as some open-ended questions about experiences of being at-risk and views on the predictive testing process. This study will aim to inform best practices in predictive testing and increase knowledge of the unique psychosocial experience of being at-risk for a genetic prion disease.",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:alm14@case.edu\" ><strong>Dr. Anne Matthews</strong></a>",
-          "site": "Case Western Reserve University, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "<ol><li>Those who are 18 years of age or older.</li><li>Those who can read and understand English.</li><li>Those who are “at-risk” for a genetic prion disease, meaning that they have a relative affected with the disease.</li></ol>",
-          "moreInfo":  "<a target=\"_blank\" href=\"https://cwru.az1.qualtrics.com/jfe/form/SV_8euTkcJbwaVd2OV\">Survey here</a> and <a target=\"_blank\" href=\"{{bucketUrl}}/studies/williamson-HRP-506SBER-consent.pdf\">consent form here.</a>"
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
         },
-        {
-          "studyName": "Early Diagnosis of Human Prion Disease",
-          "description": "The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
-          "site": "Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
-          "eligibilityRequirements": "Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
         },
-        {
-          "studyName": "Teleneurology Assessment Program for CJD (TAPCJD)",
-          "description": "We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
-          "moreInfo":  "Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
         },
-        {
-          "studyName": "Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
-          "description": "Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
-          "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
-          "site": "University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
-          "eligibilityRequirements": "Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
-        }
-      ],
-      "InputPlaceholder": "Filter all columns"
-    },
-    "LearnMore": {
-      "Title": "Learn more about Prion Registry",
-      "LearnMore": {
-        "Title": "Learn More",
-        "WhatIs": {
-          "Question": "What is prion disease?",
-          "Text": "Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Prion Registry form and its status."
         },
-        "For": {
-          "Question": "What is this registry for?",
-          "Text": "In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
-        "Participate": {
-          "Question": "Can I participate in this registry?",
-          "Text": "Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
         },
-        "Why": {
-          "Question": "Why would I want to participate in this registry?",
-          "Text": "Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
         },
-        "DoIHaveTo": {
-          "Question": "Do I have to participate in this registry?",
-          "Text": "Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
-        }
-      }
+        "Title": {
+            "Default": "Prion Registry",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+        },
+        "TooltipAlt": "Information"
     }
-  },
-  "Toolkit": {
-    "Common": {
-      "Organization": "Prion",
-      "LogoAlt": "Prion Registry Logo",
-      "Home": "Home",
-      "LearnMore": "Learn More",
-      "Dashboard": "My Dashboard",
-      "JoinUs": "Join Us"
-    },
-    "Footer": {
-      "BackToTop": "Back to top",
-      "ContactUs": "Contact us:",
-      "ContactMailTo": "mailto:info@prionregistry.org",
-      "ContactEmail": "info@prionregistry.org",
-      "PrivacyPolicy": "Privacy Policy"
-    },
-    "Dashboard": {
-      "StudyListing": {
-        "ActivityName": "Study Listing",
-        "ActivityStatus": "Available",
-        "ActivityCreated": "-",
-        "ActivitySummary": "Available studies and how to join them",
-        "ActivityActions": "View"
-      }
-    },
-    "LoginLanding": {
-      "Text": "Please wait. You will be redirected to a destination soon..."
-    },
-    "Dialogs": {
-      "Disclaimer": {
-        "Title": "View Prion Registry Data",
-        "Text": "You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
-        "SubmitButton": "OK"
-      },
-      "JoinMailingList": {
-        "Title": "Stay informed!",
-        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
-        "Fields": {
-          "FirstName": {
-            "Placeholder": "First Name *",
-            "Error": "First Name is required"
-          },
-          "LastName": {
-            "Placeholder": "Last Name *",
-            "Error": "Last Name is required"
-          },
-          "Email": {
-            "Placeholder": "Email Address *",
-            "Error": "Please enter a valid Email Address"
-          },
-          "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email) *",
-            "Error": "Please enter a valid Email Address"
-          }
-        },
-        "CancelButton": "CANCEL",
-        "SubmitButton": "JOIN",
-        "Required": "* Required field",
-        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
-        "LoadingError": "We're sorry, but an error has occurred."
-      },
-      "SessionWillExpire": {
-        "Title": "Your session will time-out soon!",
-        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "SignOut": "Sign Out",
-        "Continue": "Continue",
-        "RenewalFailed": "Session renewal failed. Please log out and log back in again."
-      }
-    },
-    "Warning": {
-      "Title": "Download Chrome or Safari to Continue",
-      "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
-      "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
-      "Text3": {
-        "Pt1": "Click the following links to download",
-        "Pt2": "or",
-        "Pt3": "Chrome and Safari are always free.",
-        "Chrome": "Chrome (for Mac & PC)",
-        "Safari": "Safari (for Mac)"
-      },
-      "SubmitButton": "OK"
-    },
-    "Password": {
-      "Title": "Please enter the password",
-      "Text": "Please enter your password",
-      "InputPlaceholder": "  ",
-      "SubmitButton": "Submit",
-      "PasswordWrongError": "Incorrect password. Please try again.",
-      "PasswordRequiredError": "Password is required",
-      "OtherError": "We're sorry, but an error has occurred.",
-      "PasswordField": {
-        "Error": "Password is required"
-      }
-    },
-    "ErrorPage": {
-      "Title": "We've encountered an error",
-      "Header": "We're sorry, but an error has occurred.",
-      "DefaultText": {
-        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-        "TextPt2": "."
-      }
-    },
-    "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
-    },
-    "SessionExpired": {
-      "Text": {
-        "Pt1": "You were away for a while, so we logged you out as a security precaution.",
-        "Pt2": "Please log in again to return to the last page you were on."
-      },
-      "LogInButton": "Log In"
-    }
-  },
-  "SDK": {
-    "SubmitButton": "Submit",
-    "CloseButton": "Back to Dashboard",
-    "AddButton": "Add",
-    "CancelButton": "Cancel",
-    "NextButton": "Next <span class=\"Icon fa fa-chevron-right\"></span> ",
-    "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> Prev",
-    "SavingButton": "Saving",
-    "EditButton": "Edit",
-    "ReviewButton": "View",
-    "ValidateError": "Please complete all required fields.",
-    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
-    "SaveError": "We're sorry but an error occurred.",
-    "ExportStudy": {
-      "Export": "EXPORT"
-    },
-    "ListStudies": {
-      "StudyName": "Study Name",
-      "ParticipantCount": "Participant Count"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Workspace Name",
-      "WorkspaceNamespace": "Workspace Namespace"
-    },
-    "Login": {
-      "Login": "LOG IN",
-      "Logout": "LOG OUT"
-    },
-    "SignInOut": {
-      "SignIn": "Sign In",
-      "SignOut": "Sign Out"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "language selection"
-    },
-    "UserActivities": {
-      "ActivityName": "Activity",
-      "Summary": "Summary",
-      "ActivityStatus": "Status",
-      "ActivityDate": "Created",
-      "ActivityActions": "Actions"
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Governed participants",
-      "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Profile",
-      "ViewAs": "View As",
-      "ManageParticipants": "Manage participants"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "User preferences",
-      "UserPreferencesGender": "Sex",
-      "UserPreferencesLocale": "Preferred language"
-    },
-    "Dashboard": {
-      "Title": "Welcome to the Prion Registry!",
-      "Text": "Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
-    },
-    "DatePicker": {
-      "Day": "Choose day...",
-      "Month": "Choose month...",
-      "Year": "Choose year...",
-      "January": "January",
-      "February": "February",
-      "March": "March",
-      "April": "April",
-      "May": "May",
-      "June": "June",
-      "July": "July",
-      "August": "August",
-      "September": "September",
-      "October": "October",
-      "November": "November",
-      "December": "December"
-    },
-    "UserMenu": {
-      "DashboardButton": "My Dashboard",
-      "SignOutButton": "Sign Out"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "characters remaining",
-      "SingularForm": "character remaining"
-    },
-    "Title": {
-      "Default": "Prion Registry",
-      "Alert": "Your session will time-out soon"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "Please enter a valid email"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "Physician Name",
-        "Institution": "Institution",
-        "InstitutionAny": "Institution (if any)",
-        "City": "City",
-        "State": "State"
-      },
-      "PhysicianValidation": "Please fill out all required fields"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Full Name",
-        "Country": "Country/Territory",
-        "Street1": "Street Address",
-        "Street2": "Apt/Floor #",
-        "State": {
-          "State": "State",
-          "Province": "Province",
-          "State/Province/Region": "State/Province/Region"
-        },
-        "City": "City",
-        "Phone": "Phone",
-        "Zip": {
-          "Zip Code": "Zip Code",
-          "Postal Code": "Postal Code",
-          "Zip/Postal Code": "Zip/Postal Code"
-        },
-        "Choose": "Choose {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "Suggested:",
-        "AsEntered": "As Entered:"
-      },
-      "Error": {
-        "InvalidAddress": "Invalid address.",
-        "CannotVerify": "Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "An unknown error occurred while verifying address.",
-        "FieldIsRequired": "{{field}} is required",
-        "FieldIsInvalid": "{{field}} has an invalid value",
-        "InvalidHouseNumber": "Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "The requested resource could not be found.",
-        "FORBIDDEN": "Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-        "E.STREET.MISSING": "Street is missing.",
-        "E.STREET.INVALID": "Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "Zip not found.",
-        "E.ZIP.INVALID": "Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "Dual address.",
-        "E.STREET.MAGNET": "Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-        "E.STATE.INVALID": "Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-        "E.TIMED_OUT": "Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-      }
-    },
-    "TooltipAlt": "Information",
-    "CookiesBanner": {
-      "Message_First": "We use cookies to evaluate site usage, improve performance, and ensure proper function of the website.",
-      "Message_Second" : "Please review our",
-      "Message_Third": "to learn more about the cookies we use.",
-      "Policy": "Privacy Policy",
-      "Preferences": "Manage Preferences",
-      "Reject": "Reject Cookies",
-      "Accept": "Accept Cookies"
-    },
-    "CookiesModal": {
-      "Title": "Manage Cookie Preferences",
-      "Privacy": "Your Privacy",
-      "Privacy_Text": "The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs to the left.Please note that functional cookies must be placed to allow proper function of the website.",
-      "Functional": "Functional Cookies",
-      "Functional_Text": "These cookies provide necessary access, function, and security to the website.",
-      "Analytical": "Analytical Cookies",
-      "Reject": "Reject",
-      "Accept": "Accept",
-      "AlwaysOn": "Always On",
-      "Analytical_Text": "These cookies allow us to evaluate site usage, and improve site experience and performance.",
-      "Details": "Cookie Details",
-      "Name": "Name",
-      "Description": "Description",
-      "Expiration": "Expiration",
-      "Policy": "Privacy policy",
-      "Submit": "Submit Preferences"
-    },
-    "PrivacyPolicy": {
-      "Title": "Privacy Policy",
-      "P1": "Paragraph 1 Text",
-      "P2": "Paragraph 2 Text",
-      "P3": "Paragraph 3 Text"
-    }
-  }
 }
