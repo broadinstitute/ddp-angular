@@ -1,8 +1,12 @@
 @import "../app-theme.scss";
 
 .dashboard-title-section {
-    padding: 2rem 0;
+    padding: 2rem 0 0 0;
     background-color: mat-color($app-theme, 350);
+}
+
+.dashboard-section {
+    margin-bottom: 10rem;
 }
 
 .dashboard-content {
@@ -37,6 +41,10 @@
     .dashboard-mobile-label {
         font-size: 1.125rem !important;
         line-height: 1.75rem !important;
+    }
+
+    .mat-column-name {
+        flex: 0 0 20%;
     }
 
     .dashboard-mobile-label {
