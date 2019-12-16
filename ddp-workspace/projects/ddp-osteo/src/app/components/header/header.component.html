@@ -13,8 +13,7 @@
             <div *ngIf="headerConfig.stickySubtitle" class="sticky" [innerHTML]="headerConfig.stickySubtitle"></div>
         </div>
         <ng-container *ngTemplateOutlet="controls"></ng-container>
-        <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
-            [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
+        <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}" (click)="openCloseMenu()">
             <span class="hamburger-box">
                 <span class="hamburger-inner"></span>
             </span>
@@ -43,9 +42,8 @@
                 </a>
             </li>
             <li class="navigation__item">
-                <button class="SimpleButton" [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
-                    (click)="openJoinMailingList()" translate>
-                    Common.Buttons.MailingList.Title
+                <button class="SimpleButton" (click)="openJoinMailingList()" translate>
+                    Common.Buttons.MailingList
                 </button>
             </li>
             <li class="navigation__item">

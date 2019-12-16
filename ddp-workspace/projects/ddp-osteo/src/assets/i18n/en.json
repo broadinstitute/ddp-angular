@@ -6,21 +6,9 @@
             "FAQ": "View more FAQs",
             "VisitFAQ": "Visit FAQ",
             "ReturnHome": "Return home",
-            "Submit": {
-                "Title": "Submit",
-                "AriaLabel": "Submit button"
-            },
-            "Login": {
-                "Title": "Log In",
-                "AriaLabel": "Log In button"
-            },
-            "MailingList": {
-                "Title": "Join Mailing List",
-                "AriaLabel": "Join Mailing List button"
-            },
-            "HeaderMenu": {
-                "AriaLabel": "Header menu button"
-            }
+            "Submit": "Submit",
+            "Login": "Log In",
+            "MailingList":  "Join Mailing List"
         },
         "CMI": "Count Me In"
     },

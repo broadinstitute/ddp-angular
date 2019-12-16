@@ -15,10 +15,9 @@ import { Auth0AdapterService } from 'ddp-sdk';
                     <p translate>Toolkit.SessionExpired.Text</p>
                     <div class="session-content-section__button">
                         <button (click)="signin()"
-                                [attr.aria-label]="'Common.Buttons.Login.AriaLabel' | translate"
                                 class="button button_medium button_primary"
                                 translate>
-                            Common.Buttons.Login.Title
+                            Common.Buttons.Login
                         </button>
                     </div>
                 </div>

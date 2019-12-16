@@ -31,8 +31,9 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                                     <mat-error *ngIf="isValid('password')" translate>Toolkit.Password.PasswordRequiredError</mat-error>
                             </mat-form-field>
                             <div class="password-section__button">
-                                <button [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate"
-                                    class="button button_medium button_primary" translate>Common.Buttons.Submit.Title</button>
+                                <button class="button button_medium button_primary" translate>
+                                    Common.Buttons.Submit
+                                </button>
                             </div>
                             <div *ngIf="isPasswordWrong" class="ErrorMessage">
                                 <span translate>Toolkit.Password.PasswordWrongError</span>
