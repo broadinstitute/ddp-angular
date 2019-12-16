@@ -247,6 +247,11 @@ select:disabled {
     cursor: auto;
 }
 
+// material dropdown
+.mat-select-value {
+    color: mat-color($app-theme, 700);
+}
+
 // picklist
 .mat-checkbox-label,
 .mat-radio-label-content {
