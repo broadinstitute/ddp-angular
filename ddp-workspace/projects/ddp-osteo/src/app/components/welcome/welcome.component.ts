@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
 import { WindowRef } from 'ddp-sdk';
-import { HeaderConfigurationService, ToolkitConfigurationService } from 'toolkit';
+import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'welcome',
@@ -18,6 +18,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private headerConfig: HeaderConfigurationService,
     private window: WindowRef,
+    private communicationService: CommunicationService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -34,6 +35,10 @@ export class WelcomeComponent implements OnInit {
       top,
       behavior: 'smooth'
     });
+  }
+
+  public joinMailingList(): void {
+    this.communicationService.openJoinDialog();
   }
 
   private get getRealHeaderHeight(): number {

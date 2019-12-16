@@ -39,6 +39,7 @@ import { InternationalPatientsComponent } from './components/international-patie
 import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
+import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -106,6 +107,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
     SessionWillExpireComponent,
+    AcceptAgeUpPageComponent,
     InstagramFeedLightwidgetPluginComponent
   ],
   exports: [
@@ -127,6 +129,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     InternationalPatientsComponent,
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
+    AcceptAgeUpPageComponent,
     InstagramFeedLightwidgetPluginComponent
   ],
   entryComponents: [
