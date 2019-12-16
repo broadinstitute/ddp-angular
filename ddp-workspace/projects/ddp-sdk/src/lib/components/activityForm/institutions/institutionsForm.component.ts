@@ -10,7 +10,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
     selector: 'ddp-institutions-form',
     template: `
     <div class="ddp-institutions-form">
-        <p [innerHTML]="block.titleText" class="ddp-institutions-form__title"></p>
+        <p *ngIf="block.titleText" class="ddp-institutions-form__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-institutions-form__subtitle" [innerHTML]="block.subtitleText"></p>
         <ddp-institution *ngIf="block.showFieldsInitially"
                          [value]="savedAnswers.length > 0 ? savedAnswers[0] : null"
