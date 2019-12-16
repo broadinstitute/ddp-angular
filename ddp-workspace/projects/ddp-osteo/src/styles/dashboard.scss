@@ -63,6 +63,7 @@
 
     .Link {
         color: mat-color($app-theme, 200);
+        white-space: normal;
     }
 
     @media(max-width: 650px) {

@@ -194,6 +194,7 @@ h4 {
 .Link {
     color: mat-color($app-theme, 250);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .Link:hover {
