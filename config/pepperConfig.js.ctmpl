@@ -161,10 +161,10 @@ var DDP_ENV = {
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
         DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{end}}
- {{end}}
+{{end}}
+
 {{if eq $study_guid "PRION"}}
     {{if eq $environment "dev"}}
-        DDP_ENV['assetsBucketName'] = "dev-prion-assets";
         DDP_ENV['auth0ClientId'] = "OAcbZBVls3kOlmRfg75rgBOez2R12AKv";
         DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "prion-dev.auth0.com"
@@ -178,12 +178,6 @@ var DDP_ENV = {
         DDP_ENV['auth0Audience'] = "fixme-not-set"
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
         DDP_ENV['projectGAToken'] = "UA-172530202-1";
-    {{end}}
-{{end}}
-
-{{if eq $study_guid "PRION"}}
-    {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "OAcbZBVls3kOlmRfg75rgBOez2R12AKv";
     {{end}}
 {{end}}
 
