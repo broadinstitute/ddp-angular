@@ -50,6 +50,7 @@ export class ToolkitConfigurationService {
     twitterAccountId: string;
     facebookGroupId: string;
     instagramId: string;
+    lightswitchInstagramWidgetId?: string;
     cBioPortalLink: string;
     countMeInUrl: string;
 
