@@ -2,7 +2,7 @@
 
 
 # render config
-./build-study.sh v1 dev . prion prion --config
+./build-study.sh v1 dev . prion PRION --config
 cp output-config/pepperConfig.js ddp-workspace/projects/ddp-prion/src/assets/config/pepperConfig.js
 pushd ddp-workspace
 
