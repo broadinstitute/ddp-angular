@@ -9,6 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   <iframe [src]="iframeSrc"
           allowtransparency="true"
           class="lightwidget-widget"
+          sandbox="allow-scripts allow-popups allow-same-origin"
           style="width:100%; border:0; overflow:hidden;">
   </iframe>`
 })
