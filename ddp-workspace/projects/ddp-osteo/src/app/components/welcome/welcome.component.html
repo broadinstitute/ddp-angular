@@ -197,8 +197,11 @@
                 </p>
             </div>
             <div>
-                <button [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
-                    class="button button_medium button_secondary" translate>Common.Buttons.MailingList.Title</button>
+                <button (click)="joinMailingList()"
+                    [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                    class="button button_medium button_secondary" translate>
+                    Common.Buttons.MailingList.Title
+                </button>
             </div>
         </div>
     </section>
