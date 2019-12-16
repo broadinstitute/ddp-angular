@@ -27,7 +27,8 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{if ne $study_guid "testboston"}}
+{{/* CD: TODO: Figure out if and syntax below is correct */}}
+{{if ne $study_guid "testboston" and ne $study_guid "PRION"}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
@@ -166,6 +167,9 @@ var DDP_ENV = {
 {{if eq $study_guid "PRION"}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "OAcbZBVls3kOlmRfg75rgBOez2R12AKv";
+        DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
+        DDP_ENV['auth0Audience'] = "prion-dev.auth0.com"
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
     {{end}}
 {{end}}
 
