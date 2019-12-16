@@ -10,7 +10,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 
     <ng-template #newDesign>
         <main class="main">
-            <section class="section loved-one-thank-you-title-section">
+            <section class="section static-page-title-section">
                 <div class="content content_tight">
                 <h1 translate>Toolkit.LovedOneThankYou.Title</h1>
                 </div>

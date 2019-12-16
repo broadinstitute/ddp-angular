@@ -9,7 +9,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 
     <ng-template #newDesign>
         <main class="main">
-            <section class="section stay-informed-title-section">
+            <section class="section static-page-title-section">
                 <div class="content content_tight">
                     <h1 translate>Toolkit.StayInformed.Title</h1>
                 </div>
