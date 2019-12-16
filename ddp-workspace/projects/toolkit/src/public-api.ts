@@ -35,5 +35,6 @@ export * from './lib/components/international-patients/internationalPatients.com
 export * from './lib/components/session-expired/sessionExpired.component';
 export * from './lib/components/redirect-to-auth0-login/redirectToAuth0Login.component';
 export * from './lib/components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+export * from './lib/components/age-up/acceptAgeUpPage.component';
 
 export * from './lib/guards/headerAction.guard';
