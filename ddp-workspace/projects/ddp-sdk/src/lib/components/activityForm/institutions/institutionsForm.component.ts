@@ -40,11 +40,13 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                 </ddp-institution>
             </div>
         </ng-container>
-        <button *ngIf="block.allowMultiple && !readonly"
-                class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary"
-                (click)="addProvider()">
-            {{ block.addButtonText }}
-        </button>
+        <div class="ddp-institutions-form__button">
+            <button *ngIf="block.allowMultiple && !readonly"
+                    class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary button_institutions"
+                    (click)="addProvider()">
+                {{ block.addButtonText }}
+            </button>
+        <div>
     </div>`,
     styles: [`
     .ddp-institutions-form__additional-text {

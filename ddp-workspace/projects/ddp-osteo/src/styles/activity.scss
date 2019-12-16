@@ -355,6 +355,10 @@ ddp-activity-composite-answer {
     color: mat-color($app-theme, 700);
 }
 
+.ddp-institutions-form__button {
+    padding: 1.3rem 0;
+}
+
 // mat error
 .mat-error {
     font-size: 0.9rem;
