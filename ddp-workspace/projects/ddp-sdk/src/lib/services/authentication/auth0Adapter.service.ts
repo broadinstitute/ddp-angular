@@ -104,14 +104,17 @@ export class Auth0AdapterService implements OnDestroy {
     /**
      * Shows the auth0 modal with the ability to signup, but not login
      */
-    public signup(): void {
+    public signup(additionalParams?: Record<string, string>): void {
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
-        const additionalParams = {
+        const params = {
             ...(temporarySession && {
                 temp_user_guid: temporarySession.userGuid
+            }),
+            ...(additionalParams && {
+                ...additionalParams
             })
         };
-        this.showAuth0Modal(Auth0Mode.SignupOnly, additionalParams);
+        this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
     /**

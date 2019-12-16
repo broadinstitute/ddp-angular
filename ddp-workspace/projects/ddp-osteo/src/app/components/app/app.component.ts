@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { RenewSessionNotifier, CompositeDisposable } from 'ddp-sdk';
-import { SessionWillExpireComponent } from 'toolkit';
+import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
+import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 
 @Component({
   selector: 'app-root',
@@ -20,15 +20,24 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private communicationService: CommunicationService,
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier) { }
 
   public ngOnInit(): void {
+    this.mailingListDialogListener();
     this.sessionExpiredDialogListener();
   }
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
+  }
+
+  private mailingListDialogListener(): void {
+    const modalOpen = this.communicationService.openJoinDialog$.subscribe(() => {
+      this.dialog.open(JoinMailingListComponent, this.DIALOG_BASE_SETTINGS);
+    });
+    this.anchor.addNew(modalOpen);
   }
 
   private sessionExpiredDialogListener(): void {
