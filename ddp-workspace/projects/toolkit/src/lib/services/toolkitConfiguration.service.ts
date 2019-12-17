@@ -42,6 +42,7 @@ export class ToolkitConfigurationService {
     bloodConsentUrl: string;
     bloodReleaseUrl: string;
     followupUrl: string;
+    doneUrl: string;
 
     // Social media and contacts
     phone: string;
