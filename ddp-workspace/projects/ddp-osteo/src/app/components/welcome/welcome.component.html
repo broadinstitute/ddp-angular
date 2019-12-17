@@ -30,9 +30,9 @@
             [alt]="'HomePage.NavigationSection.Button.Alt' | translate">
     </section>
     <section class="organizations-section">
-        <img src="assets/images/logo-broad-institute.svg" class="organizations-section__img"
+        <img lazy-resource src="assets/images/logo-broad-institute.svg" class="organizations-section__img"
             [alt]="'HomePage.OrganizationsSection.BroadLogo.Alt' | translate">
-        <img src="assets/images/logo-dana-farber-cancer-institute.svg" class="organizations-section__img"
+        <img lazy-resource src="assets/images/logo-dana-farber-cancer-institute.svg" class="organizations-section__img"
             [alt]="'HomePage.OrganizationsSection.DanaFarberLogo.Alt' | translate">
     </section>
     <section #scrollAnchor class="background-decorator"></section>
@@ -41,26 +41,32 @@
             <h2 class="section-title" translate>HomePage.StepsSection.Title</h2>
             <div class="steps">
                 <div class="step">
-                    <div class="step__img"><img src="assets/images/clipboard.svg"
-                            [alt]="'HomePage.StepsSection.Step1.ImageAlt' | translate"></div>
+                    <div class="step__img">
+                        <img lazy-resource src="assets/images/clipboard.svg"
+                            [alt]="'HomePage.StepsSection.Step1.ImageAlt' | translate">
+                    </div>
                     <p translate>HomePage.StepsSection.Step1.Text</p>
                 </div>
                 <div class="arrow">
-                    <img src="assets/images/step-arrow.svg"
+                    <img lazy-resource src="assets/images/step-arrow.svg"
                         [alt]="'HomePage.StepsSection.NextStepArrowAlt' | translate">
                 </div>
                 <div class="step">
-                    <div class="step__img"><img src="assets/images/microscope.svg"
-                            [alt]="'HomePage.StepsSection.Step2.ImageAlt' | translate"></div>
+                    <div class="step__img">
+                        <img lazy-resource src="assets/images/microscope.svg"
+                            [alt]="'HomePage.StepsSection.Step2.ImageAlt' | translate">
+                    </div>
                     <p translate>HomePage.StepsSection.Step2.Text</p>
                 </div>
                 <div class="arrow">
-                    <img src="assets/images/step-arrow.svg"
+                    <img lazy-resource src="assets/images/step-arrow.svg"
                         [alt]="'HomePage.StepsSection.NextStepArrowAlt' | translate">
                 </div>
                 <div class="step">
-                    <div class="step__img"><img src="assets/images/heart.svg"
-                            [alt]="'HomePage.StepsSection.Step3.ImageAlt' | translate"></div>
+                    <div class="step__img">
+                        <img lazy-resource src="assets/images/heart.svg"
+                            [alt]="'HomePage.StepsSection.Step3.ImageAlt' | translate">
+                    </div>
                     <div>
                         <p translate>HomePage.StepsSection.Step3.Text</p>
                         <a routerLink="/more-details" class="button button_medium button_secondary" translate>
@@ -120,8 +126,8 @@
                 </div>
             </div>
             <div class="youtube-video">
-                <iframe [title]="'HomePage.ParticipatingSection.IframeTitle' | translate" class="youtube-video__iframe"
-                    src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
+                <iframe lazy-resource [title]="'HomePage.ParticipatingSection.IframeTitle' | translate"
+                    class="youtube-video__iframe" src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -131,7 +137,7 @@
         <div class="content content_medium gallery-block">
             <div class="gallery-header">
                 <h2 class="gallery-header__title" translate>HomePage.GallerySection.Title</h2>
-                <img class="gallery-header__image" src="assets/images/molecule.svg"
+                <img lazy-resource class="gallery-header__image" src="assets/images/molecule.svg"
                     [alt]="'HomePage.GallerySection.TitleImageAlt' | translate">
             </div>
             <app-gallery></app-gallery>
@@ -143,12 +149,12 @@
                 HomePage.PartnersSection.Title
             </h2>
             <div class="partners-group">
-                <img class="image" src="assets/images/partner_mib.png" alt="Make It Better">
-                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img lazy-resource class="image" src="assets/images/partner_mib.png" alt="Make It Better">
+                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
             </div>
         </div>
     </section>
@@ -160,15 +166,15 @@
                 </h2>
                 <div class="social-media-logos">
                     <a [href]="twitterUrl" target="_blank">
-                        <img class="social-media-logos__img" src="assets/images/twitter.png"
+                        <img lazy-resource class="social-media-logos__img" src="assets/images/twitter.png"
                             [alt]="'HomePage.SocialMediaSection.ImagesAlts.Twitter' | translate">
                     </a>
                     <a [href]="facebookUrl" target="_blank">
-                        <img class="social-media-logos__img" src="assets/images/facebook.png"
+                        <img lazy-resource class="social-media-logos__img" src="assets/images/facebook.png"
                             [alt]="'HomePage.SocialMediaSection.ImagesAlts.Facebook' | translate">
                     </a>
                     <a [href]="instagramUrl" target="_blank">
-                        <img class="social-media-logos__img" src="assets/images/instagram.png"
+                        <img lazy-resource class="social-media-logos__img" src="assets/images/instagram.png"
                             [alt]="'HomePage.SocialMediaSection.ImagesAlts.Instagram' | translate">
                     </a>
                 </div>
@@ -179,15 +185,15 @@
                     <app-twitter-timeline-widget></app-twitter-timeline-widget>
                 </div>
                 <div class="instagram-feed">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <a #secondView></a>
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <img src="./assets/images/turtle.svg" class="Message-turtle" alt="Angiosarcoma pet">
+                <img lazy-resource src="./assets/images/turtle.svg" class="Message-turtle" alt="Angiosarcoma pet">
                 <p class="Message-text" translate>
                     Toolkit.Welcome.SmallTitle
                 </p>
@@ -58,7 +58,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row NoPadding NoMargin">
-            <img lazy-img src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
+            <img lazy-resource src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
         </div>
 
         <div class="row">
@@ -96,7 +96,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
         <div class="row">
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
+                <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.ThirdBlock.FirstStep.Title
                 </h1>
@@ -110,7 +110,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
+                <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.ThirdBlock.SecondStep.Title
                 </h1>
@@ -121,7 +121,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
+                <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.ThirdBlock.ThirdStep.Title
                 </h1>
@@ -170,26 +170,26 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.sarctrials.org" target="_blank"><img lazy-img src="./assets/images/SARC-logo.svg" alt="SARC Logo"></a>
+                        <a href="http://www.sarctrials.org" target="_blank"><img lazy-resource src="./assets/images/SARC-logo.svg" alt="SARC Logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://sarcomaalliance.org" target="_blank"><img lazy-img src="./assets/images/SarcomaAlliance-logo.svg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.curesarcoma.org" target="_blank"><img lazy-img src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" alt="Sarcoma Foundation of America Logo"></a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.targetcancerfoundation.org" target="_blank"><img lazy-img src="./assets/images/TargetCancerFoundation-logo.svg" alt="Target Cancer Foundation Logo"></a>
+                        <a href="http://sarcomaalliance.org" target="_blank"><img lazy-resource src="./assets/images/SarcomaAlliance-logo.svg" alt="Sarcoma Alliance Logo"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.paulatakacsfoundation.org" target="_blank"><img lazy-img src="./assets/images/PaulaTakacs-logo.svg" alt="The Paula Takacs Foundation Logo"></a>
+                        <a href="http://www.curesarcoma.org" target="_blank"><img lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" alt="Sarcoma Foundation of America Logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.cureasc.org" target="_blank"><img lazy-img src="./assets/images/AngiosarcomaAwareness-logo.svg" alt="Angiosarcoma Awareness Logo"></a>
+                        <a href="http://www.targetcancerfoundation.org" target="_blank"><img lazy-resource src="./assets/images/TargetCancerFoundation-logo.svg" alt="Target Cancer Foundation Logo"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://www.paulatakacsfoundation.org" target="_blank"><img lazy-resource src="./assets/images/PaulaTakacs-logo.svg" alt="The Paula Takacs Foundation Logo"></a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="http://www.cureasc.org" target="_blank"><img lazy-resource src="./assets/images/AngiosarcomaAwareness-logo.svg" alt="Angiosarcoma Awareness Logo"></a>
                     </div>
                 </div>
             </section>
