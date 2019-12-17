@@ -9,7 +9,6 @@ import { take } from 'rxjs/operators';
 })
 export class VerifyAgeUpComponent implements OnInit {
     private url: string;
-    private readonly EMAIL_VERIFIED = 200;
     @Output() public error: EventEmitter<void> = new EventEmitter();
     @Output() public nextUrl: EventEmitter<string> = new EventEmitter();
 
@@ -27,12 +26,9 @@ export class VerifyAgeUpComponent implements OnInit {
     private verifyInvitation(invitationId: string): void {
         this.invitationsService.verify(invitationId).pipe(
             take(1)
-        ).subscribe(status => {
-            if (status === this.EMAIL_VERIFIED) {
-                this.nextUrl.emit(this.url);
-            } else {
-                this.error.emit();
-            }
+        ).subscribe({
+            complete: () => this.nextUrl.emit(this.url),
+            error: () => this.error.emit()
         });
     }
 }
