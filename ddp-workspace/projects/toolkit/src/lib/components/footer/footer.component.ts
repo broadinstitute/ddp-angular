@@ -10,7 +10,7 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, WindowRef } from 'ddp-sd
     template: `<footer class="Footer">
   <div class="Footer-navigation">
       <a class="Footer-logo" [routerLink]="['/']">
-          <img src="assets/images/project-logo.svg" class="Footer-logoImg" alt="Project isotype">
+          <img lazy-resource src="assets/images/project-logo.svg" class="Footer-logoImg" alt="Project isotype">
           <div class="Footer-logoText" [innerHTML]="'Toolkit.Footer.FooterLogo' | translate">
           </div>
       </a>
@@ -53,10 +53,10 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, WindowRef } from 'ddp-sd
                   </li>
                   <li>
                       <a target="_blank" [href]="facebookUrl" (click)="doAnalytics('facebook')">
-                          <img class="Footer-contactLogos" src="assets/images/facebook.svg" alt="Facebook">
+                          <img lazy-resource class="Footer-contactLogos" src="assets/images/facebook.svg" alt="Facebook">
                       </a>
                       <a target="_blank" [href]="twitterUrl" (click)="doAnalytics('twitter')">
-                          <img class="Footer-contactLogos" src="assets/images/twitter.svg" alt="Twitter">
+                          <img lazy-resource class="Footer-contactLogos" src="assets/images/twitter.svg" alt="Twitter">
                       </a>
                   </li>
               </ul>
@@ -74,7 +74,7 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, WindowRef } from 'ddp-sd
       </div>
       </nav>
       <a class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
-            <img class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
+            <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
       </a>
   </div>
 </footer>`
