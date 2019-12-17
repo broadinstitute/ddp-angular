@@ -282,9 +282,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       this.inputAddress$,
       this.inputComponentAddress$
     ).pipe(
-      share()
+      shareReplay(1)
     );
-    const verifyInputComponentSparseAddress$ = currentAddress$.pipe(
+
+    const verifyInputComponentSparseAddress$ = this.inputComponentAddress$.pipe(
       filter(address => !this.enoughDataToVerify(address)),
       map(address => [address, this.computeValidityForSparseAddress(address)]),
       tap(([address, isValid]) => {
@@ -296,7 +297,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       })
     );
 
-    const verifyInputComponentAddressAction$ = currentAddress$.pipe(
+    const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
       filter(address => this.enoughDataToVerify(address)),
       tap(() => busyCounter$.next(1)),
       switchMap(inputAddress =>
@@ -346,10 +347,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     // saving addresses coming from either the inputcomponent or that have been selected from suggestion radio group
-    const saveTempInputComponentAddressAction$ = merge(
-      this.inputComponentAddress$,
-      selectedAddress$
+    const saveTempCurrentAddressAction$ = merge(
+      currentAddress$
     ).pipe(
+      distinctUntilChanged((x, y) => util.isEqual(x, y)),
       withLatestFrom(this.state$),
       tap((inputAddres) => console.log('about to see if we should save a temp address on inputaddrss')),
       filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
@@ -491,7 +492,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     processSubmitAnnouncement$ && processSubmitAnnouncement$.subscribe();
     merge(
       initializeStateAction$,
-      saveTempInputComponentAddressAction$,
+      saveTempCurrentAddressAction$,
       verifyInputComponentAddressAction$,
       verifyInputComponentSparseAddress$,
       verifyInputComponentAddressAction$,
