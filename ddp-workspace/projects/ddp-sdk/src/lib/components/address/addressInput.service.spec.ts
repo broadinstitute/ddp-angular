@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AddressInputService } from './addressInput.service';
 import { CountryService } from '../../services/addressCountry.service';
-import { AddressService } from 'ddp-sdk';
+import { AddressService } from '../../services/address.service';
 import { ChangeDetectorRef } from '@angular/core';
 
 
