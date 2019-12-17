@@ -3,7 +3,7 @@ import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActi
 import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import * as _ from 'underscore';
-import { MailAddressBlock } from '../../../../../ddp-sdk/src/lib/models/activity/MailAddressBlock';
+import { MailAddressBlock } from 'ddp-sdk';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
