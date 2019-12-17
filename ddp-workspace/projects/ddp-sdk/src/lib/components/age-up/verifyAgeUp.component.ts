@@ -24,9 +24,7 @@ export class VerifyAgeUpComponent implements OnInit {
     }
 
     private verifyInvitation(invitationId: string): void {
-        this.invitationsService.verify(invitationId).pipe(
-            take(1)
-        ).subscribe({
+        this.invitationsService.verify(invitationId).subscribe({
             complete: () => this.nextUrl.emit(this.url),
             error: () => this.error.emit()
         });
