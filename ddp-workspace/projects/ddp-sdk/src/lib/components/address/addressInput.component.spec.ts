@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CountryService } from '../../services/addressCountry.service';
 import { AddressInputService } from './addressInput.service';
 import { Directive, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AddressService } from 'ddp-sdk';
+import { AddressService } from '../../services/address.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
