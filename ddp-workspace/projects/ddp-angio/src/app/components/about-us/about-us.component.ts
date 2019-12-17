@@ -48,7 +48,7 @@ import { ToolkitConfigurationService } from 'toolkit';
               <a [href]="countMeInUrl" class="Link" target="_blank" translate> Toolkit.AboutUs.ContentLink</a>.
             </p>
           </section>
-          <img lazy-img src="./assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
+          <img lazy-resource src="./assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row--moreTopMargin">
           <section class="Message">
@@ -60,36 +60,36 @@ import { ToolkitConfigurationService } from 'toolkit';
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="http://www.sarctrials.org" target="_blank">
-                  <img lazy-img src="./assets/images/SARC-logo.svg" alt="SARC Logo">
+                  <img lazy-resource src="./assets/images/SARC-logo.svg" alt="SARC Logo">
                 </a>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="http://www.sarcomaalliance.org" target="_blank">
-                  <img lazy-img src="./assets/images/SarcomaAlliance-logo.svg" alt="Sarcoma Alliance Logo">
+                  <img lazy-resource src="./assets/images/SarcomaAlliance-logo.svg" alt="Sarcoma Alliance Logo">
                 </a>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="http://www.curesarcoma.org" target="_blank">
-                  <img lazy-img src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" alt="Sarcoma Foundation of America Logo">
+                  <img lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" alt="Sarcoma Foundation of America Logo">
                 </a>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="http://www.targetcancerfoundation.org" target="_blank">
-                  <img lazy-img src="./assets/images/TargetCancerFoundation-logo.svg" alt="Target Cancer Foundation Logo">
+                  <img lazy-resource src="./assets/images/TargetCancerFoundation-logo.svg" alt="Target Cancer Foundation Logo">
                 </a>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="https://www.paulatakacsfoundation.org" target="_blank">
-                  <img lazy-img src="./assets/images/PaulaTakacs-logo.svg" alt="The Paula Takacs Foundation Logo">
+                  <img lazy-resource src="./assets/images/PaulaTakacs-logo.svg" alt="The Paula Takacs Foundation Logo">
                 </a>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                 <a href="http://www.cureasc.org" target="_blank">
-                  <img lazy-img src="./assets/images/AngiosarcomaAwareness-logo.svg" alt="Angiosarcoma Awareness Logo">
+                  <img lazy-resource src="./assets/images/AngiosarcomaAwareness-logo.svg" alt="Angiosarcoma Awareness Logo">
                 </a>
               </div>
             </div>
