@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
 import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
-import { Observable, throwError, empty } from 'rxjs';
+import { Observable, throwError, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class InvitationsServiceAgent extends NotAuthenticatedServiceAgent<any> {
     public verify(invitationId: string): Observable<never> {
         return this.postObservable('/invitations/verify', { invitationId })
             .pipe(
-                mergeMap(response => response && response.status === this.OK_STATUS ? empty() : throwError('Email verification failed'))
+                mergeMap(response => response && response.status === this.OK_STATUS ? EMPTY : throwError('Email verification failed'))
             );
     }
 }
