@@ -111,6 +111,7 @@ import { AddressEntryComponent } from './components/address/addressEntry.compone
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
 import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
+import { VerifyAgeUpComponent } from './components/age-up/verifyAgeUp.component';
 import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -157,6 +158,7 @@ import { QuestionPromptComponent } from './components/activityForm/questionPromp
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
+import { InvitationsServiceAgent } from './services/serviceAgents/invitationsServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
@@ -263,6 +265,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AnnouncementsServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
+    InvitationsServiceAgent,
     Title,
     RenewSessionNotifier
   ],
@@ -316,6 +319,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEntryComponent,
     AddressEmbeddedComponent,
     AddressConfirmComponent,
+    VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     InputRestrictionDirective,
     LazyLoadResourcesDirective,
@@ -373,6 +377,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEmbeddedComponent,
     AddressEntryComponent,
     AddressConfirmComponent,
+    VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,

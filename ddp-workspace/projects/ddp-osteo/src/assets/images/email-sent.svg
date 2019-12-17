@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="90px" height="90px" viewBox="0 0 90 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Thank you @1x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="11/20" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Thank-you---verified-email" transform="translate(-675.000000, -253.000000)">
+            <g id="Thank-you-" transform="translate(675.000000, 253.000000)">
+                <circle id="Oval-Copy-3" fill="#FFFFFF" cx="45" cy="45" r="45"></circle>
+                <g id="Group" transform="translate(19.500000, 27.000000)" fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <g id="email-action-check">
+                        <path d="M22.828125,33.421875 L3.703125,33.421875 C1.78738727,33.421875 0.234375,31.8688627 0.234375,29.953125 L0.234375,3.703125 C0.234375,1.78738727 1.78738727,0.234375 3.703125,0.234375 L45.328125,0.234375 C47.2438627,0.234375 48.796875,1.78738727 48.796875,3.703125 L48.796875,19.3125" id="Shape"></path>
+                        <path d="M48.0129375,1.50625 L29.1799375,15.99175 C24.7969828,19.3698736 23.9616533,19.3271534 19.8513125,15.99175 L1.0183125,1.50625" id="Shape"></path>
+                    </g>
+                </g>
+                <circle id="Oval" stroke="#000000" stroke-width="2" fill-opacity="0.4" fill="#00D39D" stroke-linecap="round" stroke-linejoin="round" cx="58.640625" cy="60.890625" r="11.625"></circle>
+                <path d="M63.515625,57.515625 L58.792901,64.0791136 C58.5803509,64.3734356 58.2560177,64.5574774 57.903513,64.5837939 C57.5510083,64.6101104 57.2048254,64.4761265 56.9542088,64.2163826 L54.515625,61.6743653" id="Shape" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

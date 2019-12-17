@@ -63,6 +63,7 @@ tkCfg.parentalConsentUrl = 'parental-consent';
 tkCfg.releaseMinorUrl = 'release-minor-survey';
 tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
+tkCfg.doneUrl = 'proxy-thank-you';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
