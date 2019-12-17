@@ -145,7 +145,7 @@ import { AddressService } from './services/address.service';
 import { AddressEntryDataService } from './services/addressEntryData.service';
 
 import { InputRestrictionDirective } from './directives/inputRestrictionDirective.directive';
-import { LazyLoadImagesDirective } from './directives/lazyLoadImages.directive';
+import { LazyLoadResourcesDirective } from './directives/lazyLoadResources.directive';
 import { DateService } from './services/dateService.service';
 import { CountryService } from './services/addressCountry.service';
 import { MedicalProvidersServiceAgent } from './services/serviceAgents/medicalProvidersServiceAgent.service';
@@ -318,7 +318,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressConfirmComponent,
     AcceptAgeUpComponent,
     InputRestrictionDirective,
-    LazyLoadImagesDirective,
+    LazyLoadResourcesDirective,
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
     RouteTransformerDirective
@@ -376,7 +376,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
-    LazyLoadImagesDirective,
+    LazyLoadResourcesDirective,
     RouteTransformerDirective
   ],
   entryComponents: [

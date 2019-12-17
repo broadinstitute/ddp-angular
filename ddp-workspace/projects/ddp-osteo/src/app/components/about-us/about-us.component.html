@@ -24,7 +24,7 @@
         <div class="content content_tight cmi-block">
             <div class="cmi-block__logo">
                 <a [href]="countMeInUrl" target="_blank">
-                    <img src="../../../assets/images/logo-count-me-in.svg"
+                    <img lazy-resource src="../../../assets/images/logo-count-me-in.svg"
                         [alt]="'AboutUsPage.CMISection.CMIImgAlt' | translate">
                 </a>
             </div>
@@ -43,7 +43,7 @@
             <p [innerHTML]="'AboutUsPage.PACSection.Text' | translate"></p>
             <ng-container *ngFor="let member of 'AboutUsPage.PACSection.Members' | translate">
                 <div class="pac-member">
-                    <img class="pac-member__image" [src]="member.Image" [alt]="member.Alt">
+                    <img lazy-resource class="pac-member__image" [src]="member.Image" [alt]="member.Alt">
                     <h4 class="no-margin">{{member.Name}}</h4>
                     <p>{{member.Bio}}</p>
                 </div>
@@ -58,7 +58,7 @@
             <div class="sac-members">
                 <ng-container *ngFor="let member of 'AboutUsPage.SACSection.Members' | translate">
                     <div class="sac-member">
-                        <img class="sac-member__image" [src]="member.Image" [alt]="member.Alt">
+                        <img lazy-resource class="sac-member__image" [src]="member.Image" [alt]="member.Alt">
                         <div>
                             <a class="sac-member__link" [href]="member.Url" target="_blank">{{member.Name}}</a>
                             <div class="affiliations">
