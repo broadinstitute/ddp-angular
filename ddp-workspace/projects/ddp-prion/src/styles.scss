@@ -1644,30 +1644,32 @@ ul {
     font-weight: 400;
 }
 
+.Question--text, ddp-activity-text-answer {
+  .mat-form-field-wrapper, .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-underline {
+    bottom: 0;
+  }
+
+  .mat-form-field-infix {
+    border-top: none !important;
+  }
+
+  input.mat-input-element {
+    line-height: 2.5rem !important;
+    height: 35px !important;
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
 .Question--text {
     .ErrorMessage {
         margin-top: 0;
         padding-top: 5px;
         border-top: solid 2px #F44336;
-    }
-
-    .mat-form-field-wrapper {
-        padding-bottom: 0;
-    }
-
-    .mat-form-field-underline {
-        bottom: 0;
-    }
-
-    .mat-form-field-infix {
-        border-top: none !important;
-    }
-
-    input.mat-input-element {
-        line-height: 2.5rem !important;
-        height: 35px !important;
-        width: 100%;
-        font-size: 1rem;
     }
 }
 
@@ -1883,18 +1885,14 @@ ul {
 }
 
 select {
-    background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
-    padding: 5px;
-    border: 1px solid mat-color($app-theme, 1800);
-    border-radius: 2px;
-    height: 3rem;
+    height: 35px;
     transition: all .3s;
-}
-
-select:focus {
-    color: mat-color($app-theme, 600);
-    outline: none;
+    border: 1px solid #cecece !important;
+    font-size: 0.9rem;
+    padding: 0 10px 0 10px;
+    margin: 5px 0 30px 0;
+    background-color: rgb(248, 248, 248);
 }
 
 select option {
@@ -1981,6 +1979,29 @@ select:-webkit-autofill {
     font-weight: 400;
 }
 
+.mat-input-element {
+  caret-color: unset !important;
+}
+
+.mat-form-field-underline {
+  visibility: hidden;
+}
+
+mat-form-field.mat-form-field-type-mat-input {
+
+  margin: 0 0 20px 0 !important;
+
+  input {
+    border: 1px solid #cecece !important;
+    height: 35px !important;
+  }
+}
+
+mat-form-field.mat-form-field-type-mat-input.mat-focused input {
+  border-color: #82B547 !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px #82B547 !important;
+}
+
 .ddp-agreement-text {
     white-space: normal;
     margin: 0px;
@@ -2025,6 +2046,16 @@ select:-webkit-autofill {
         font-weight: 400 !important;
         color: mat-color($app-theme, 1700);
     }
+
+  p.Input-label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+
+  p.Medium.UnorderedItem {
+    color: #717174;
+  }
 }
 
 .ddp-dropdown {
@@ -2104,10 +2135,49 @@ select:-webkit-autofill {
     height: 1.5rem !important;
 }
 
-.ddp-composite-text {
-    flex-grow: 1;
-    margin-right: 30px;
+.ddp-answer-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }
+
+@media (min-width: 1200px) {
+  .ddp-answer-container {
+    ddp-activity-answer {
+      margin: 7px;
+      width: 47%;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ddp-answer-container {
+    ddp-activity-answer {
+      margin: 7px;
+      width: 47%;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ddp-answer-container {
+    ddp-activity-answer {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 767px) { //col-xs-12
+  .ddp-answer-container {
+    ddp-activity-answer {
+      width: 100%;
+    }
+  }
+}
+
+
 
 .ddp-close-button {
     margin-left: auto;
@@ -2387,11 +2457,7 @@ input.mat-input-element {
     color: mat-color($app-theme, 600) !important;
 }
 
-.ddp-answer-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+
 
 .mat-option-text {
     line-height: 16px !important;
@@ -2687,6 +2753,14 @@ button.Footer-link {
 .Input-checkLabel {
     font-size: 0.9rem;
     font-weight: 400;
+    margin-bottom: 0;
+}
+
+.Input-label.SubLabel {
+  color: #717174;
+}
+
+.ddp-answer-container p.ddp-question-prompt{
     margin-bottom: 0;
 }
 
