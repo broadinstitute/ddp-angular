@@ -371,6 +371,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     AddressInputComponent,
     AddressEmbeddedComponent,
+    VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
