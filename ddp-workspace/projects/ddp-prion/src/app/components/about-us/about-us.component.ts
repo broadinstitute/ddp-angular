@@ -48,7 +48,7 @@ import { ToolkitConfigurationService } from 'toolkit';
               <a [href]="countMeInUrl" class="Link" target="_blank" translate> Toolkit.AboutUs.ContentLink</a>.
             </p>
           </section>
-          <img lazy-img src="./assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
+          <img lazy-resource src="./assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
         </div>
       </div>
     </article>

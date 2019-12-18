@@ -111,6 +111,7 @@ import { AddressEntryComponent } from './components/address/addressEntry.compone
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
 import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
+import { VerifyAgeUpComponent } from './components/age-up/verifyAgeUp.component';
 import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -145,7 +146,7 @@ import { AddressService } from './services/address.service';
 import { AddressEntryDataService } from './services/addressEntryData.service';
 
 import { InputRestrictionDirective } from './directives/inputRestrictionDirective.directive';
-import { LazyLoadImagesDirective } from './directives/lazyLoadImages.directive';
+import { LazyLoadResourcesDirective } from './directives/lazyLoadResources.directive';
 import { DateService } from './services/dateService.service';
 import { CountryService } from './services/addressCountry.service';
 import { MedicalProvidersServiceAgent } from './services/serviceAgents/medicalProvidersServiceAgent.service';
@@ -157,6 +158,7 @@ import { QuestionPromptComponent } from './components/activityForm/questionPromp
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
+import { InvitationsServiceAgent } from './services/serviceAgents/invitationsServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
@@ -263,6 +265,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AnnouncementsServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
+    InvitationsServiceAgent,
     Title,
     RenewSessionNotifier
   ],
@@ -316,9 +319,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEntryComponent,
     AddressEmbeddedComponent,
     AddressConfirmComponent,
+    VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     InputRestrictionDirective,
-    LazyLoadImagesDirective,
+    LazyLoadResourcesDirective,
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
     RouteTransformerDirective
@@ -373,10 +377,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressEmbeddedComponent,
     AddressEntryComponent,
     AddressConfirmComponent,
+    VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
-    LazyLoadImagesDirective,
+    LazyLoadResourcesDirective,
     RouteTransformerDirective
   ],
   entryComponents: [

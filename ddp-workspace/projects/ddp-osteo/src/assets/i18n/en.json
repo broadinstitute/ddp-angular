@@ -441,7 +441,7 @@
             "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email"
         },
         "LovedOneThankYou": {
-            "Title": "Thank you",
+            "Title": "Thank you!",
             "ThankYou": "Thank you for taking the time to take the survey and share your Loved One’s experience with osteosarcoma.",
             "StayInTouch": "We’ll stay in touch with you so that you can see the progress that we are making towards advancements in the understanding of osteosarcoma.",
             "Contacts": {
@@ -449,6 +449,15 @@
                 "TextPt2": "or call us at"
             },
             "ThankYouAgain": "Thank you again for sharing with us and supporting the entire osteosarcoma community. If you’d like to help us reach patients or other community members, feel free to share the project. Together, we can move research forward for the osteosarcoma community."
+        },
+        "AgeUpThankYou": {
+            "Title": "Thank you!",
+            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "Text": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, you can do so from your dashboard.",
+                "Button": "Go to Dashboard"
+            },
+            "ImageAlt": "Email sent"
         },
         "SessionExpired": {
             "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."

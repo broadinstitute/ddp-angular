@@ -29,7 +29,7 @@ import { StayInformedComponent } from './components/stay-informed/stayInformed.c
 import { ResendEmailComponent } from './components/dialogs/resendEmail.component';
 import { PasswordComponent } from './components/password/password.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
-import { LovedOneThankYouComponent } from './components/loved-one-thank-you/lovedOneThankYou.component';
+import { LovedOneThankYouComponent } from './components/thank-you/lovedOneThankYou.component';
 import { CommonLandingComponent } from './components/common-landing/commonLanding.component';
 import { WarningComponent } from './components/dialogs/warning.component';
 import { WarningMessageComponent } from './components/warning-message/warning-message.component';
@@ -39,7 +39,9 @@ import { InternationalPatientsComponent } from './components/international-patie
 import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
+import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
+import { AgeUpThankYou } from './components/thank-you/ageUpThankYou.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -107,7 +109,9 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
     SessionWillExpireComponent,
+    VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
+    AgeUpThankYou,
     InstagramFeedLightwidgetPluginComponent
   ],
   exports: [
@@ -129,7 +133,9 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     InternationalPatientsComponent,
     SessionExpiredComponent,
     RedirectToAuth0LoginComponent,
+    VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
+    AgeUpThankYou,
     InstagramFeedLightwidgetPluginComponent
   ],
   entryComponents: [
