@@ -38,7 +38,7 @@ import * as _ from 'underscore';
     </ng-container>
     <button *ngIf="block.allowMultiple && !readonly"
             type="button"
-            class="ButtonFilled ButtonFilled--white button button_medium button_secondary"
+            class="ButtonFilled ButtonFilled--white button button_medium button_secondary button_new-item"
             (click)="addBlankRow()">
         {{ block.addButtonText }}
     </button>`,

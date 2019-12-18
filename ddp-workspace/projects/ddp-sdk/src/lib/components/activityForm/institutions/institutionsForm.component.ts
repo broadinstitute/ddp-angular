@@ -42,7 +42,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
         </ng-container>
         <div class="ddp-institutions-form__button">
             <button *ngIf="block.allowMultiple && !readonly"
-                    class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary button_institutions"
+                    class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary button_new-item"
                     (click)="addProvider()">
                 {{ block.addButtonText }}
             </button>
