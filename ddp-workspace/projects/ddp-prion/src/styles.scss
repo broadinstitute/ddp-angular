@@ -2058,6 +2058,32 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
   }
 }
 
+.BulletItem {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0 0 10px 0;
+  text-align: left;
+  padding: 0 0 0 0;
+  color: #717174 !important;
+}
+
+p.Input-label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+p.Medium.UnorderedItem {
+  color: #717174;
+}
+
+[data-ddp-test="answer:prion_medical_doctor_diagnosed"], [data-ddp-test="answer:prion_medical_participant_belief"] {
+  flex-direction: column !important;
+}
+
 .ddp-dropdown {
     padding: 10px;
     margin: 0 0 5px 0;
