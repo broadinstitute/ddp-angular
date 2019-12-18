@@ -344,6 +344,22 @@ ddp-activity-composite-answer {
     margin-right: 1.5rem;
 }
 
+@media screen and (max-width: 560px) {
+    .ddp-answer-container {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .ddp-date-field-margin:first-child,
+    .ddp-composite-text {
+        margin-right: 0 !important;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
 // institutions
 .ddp-institutions-form {
     margin: 2rem 0;

@@ -50,13 +50,13 @@ import * as _ from 'underscore';
         }
 
         .vertical {
-            display: flex !important;
-            flex-direction: column !important;
+            display: flex;
+            flex-direction: column;
         }
 
         .horizontal {
-            display: flex !important;
-            flex-direction: row !important;
+            display: flex;
+            flex-direction: row;
         }`
     ]
 })
