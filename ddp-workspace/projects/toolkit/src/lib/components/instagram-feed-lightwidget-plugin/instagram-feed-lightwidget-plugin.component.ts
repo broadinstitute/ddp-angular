@@ -33,7 +33,7 @@ export class InstagramFeedLightwidgetPluginComponent implements OnInit {
     if (!this.widgetId) {
       throw new TypeError('widgetId is required');
     }
-    this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`//lightwidget.com/widgets/${this.widgetId}.html`);
+    this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`https://lightwidget.com/widgets/${this.widgetId}.html`);
     this.scriptLoader.load({
       name: 'instagram-feed-plugin',
       src: 'https://cdn.lightwidget.com/widgets/lightwidget.js'
