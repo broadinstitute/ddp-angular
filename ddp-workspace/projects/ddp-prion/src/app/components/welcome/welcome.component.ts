@@ -58,7 +58,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
         <div class="row">
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
+                <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.Steps.FirstStep.Title
                 </h1>
@@ -72,7 +72,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
+                <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.Steps.SecondStep.Title
                 </h1>
@@ -83,7 +83,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
+                <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.Steps.ThirdStep.Title
                 </h1>

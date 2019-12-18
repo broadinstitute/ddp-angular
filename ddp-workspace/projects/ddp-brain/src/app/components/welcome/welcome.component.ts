@@ -17,9 +17,9 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="Intro-footer row">
-            <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
-            <img src="./assets/images/logo-minderoo.png" class="Intro-footerLogo-square" alt="Minderoo Foundation Logo">
+            <img lazy-resource src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
+            <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img lazy-resource src="./assets/images/logo-minderoo.png" class="Intro-footerLogo-square" alt="Minderoo Foundation Logo">
         </div>
         
         <div class="Intro row">
@@ -54,7 +54,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row NoPadding NoMargin">
-            <img lazy-img src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
+            <img lazy-resource src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
         </div>
 
         <div class="row">
@@ -71,7 +71,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
         <div class="row">
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
+                <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.SecondBlock.FirstStep.Title
                 </h1>
@@ -85,7 +85,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
+                <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.SecondBlock.SecondStep.Title
                 </h1>
@@ -99,7 +99,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-img src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
+                <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
                 <h1 class="Message-stepTitle NoMargin" translate>
                     Toolkit.Welcome.SecondBlock.ThirdStep.Title
                 </h1>
@@ -148,7 +148,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
-                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img lazy-img class="partner-logo--single" src="./assets/images/TCF-Logo.png" alt="Target Cancer Foundation"></a>
+                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img lazy-resource class="partner-logo--single" src="./assets/images/TCF-Logo.png" alt="Target Cancer Foundation"></a>
                     </div>
                 </div>
             </section>
@@ -161,16 +161,16 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.abta.org/" target="_blank"><img lazy-img class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="ABTA"></a>
+                        <a href="https://www.abta.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="ABTA"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://braintumor.org/" target="_blank"><img lazy-img class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society"></a>
+                        <a href="https://braintumor.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://abc2.org/" target="_blank"><img lazy-img class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure"></a>
+                        <a href="https://abc2.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.oligonation.org/" target="_blank"><img lazy-img class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation"></a>
+                        <a href="https://www.oligonation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation"></a>
                     </div>
                 </div>
             </section>
