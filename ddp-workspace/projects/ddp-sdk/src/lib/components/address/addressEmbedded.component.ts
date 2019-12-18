@@ -195,7 +195,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       shareReplay(1)
     );
 
-    this.state$.subscribe((state) => console.log('New embeddedComponentState$=' + JSON.stringify(state)));
+    this.state$.subscribe((state) => console.debug('New embeddedComponentState$=' + JSON.stringify(state)));
   }
 
   ngOnInit(): void {
@@ -234,7 +234,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       tap(() => busyCounter$.next(-1)),
     );
 
-    this.inputComponentAddress$.subscribe(address => console.log('The new inputcomponentaddress: ' + JSON.stringify(address)));
+    this.inputComponentAddress$.subscribe(address => console.debug('The new inputcomponentaddress: ' + JSON.stringify(address)));
 
     // derived observables
     this.isReadOnly$ = this.state$.pipe(
@@ -335,7 +335,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       // skip initial invocation. A setup artifact.
       skip(1),
       map(formValue => formValue.suggestionRadioGroup as string),
-      tap((suggestionValue) => console.log('Got suggestion value and it is:' + suggestionValue)),
+      tap((suggestionValue) => console.debug('Got suggestion value and it is:' + suggestionValue)),
       distinctUntilChanged(),
       withLatestFrom(this.suggestionInfo$),
       map(([radioValue, suggestionInfo]) => (radioValue === 'suggested') ? suggestionInfo.suggested : suggestionInfo.entered),
@@ -352,12 +352,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     ).pipe(
       distinctUntilChanged((x, y) => util.isEqual(x, y)),
       withLatestFrom(this.state$),
-      tap((inputAddres) => console.log('about to see if we should save a temp address on inputaddrss')),
+      tap((inputAddres) => console.debug('about to see if we should save a temp address on inputaddrss')),
       filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
       tap(() => busyCounter$.next(1)),
       concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
       catchError((error) => {
-        console.log('there was a problems saving temp address:' + error);
+        console.debug('there was a problems saving temp address:' + error);
         return of(null);
       }),
       tap(() => busyCounter$.next(-1))
@@ -377,7 +377,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     const processVerificationStatusErrorAction$ = verificationError$.pipe(
       filter((error) => isVerificationStatusError(error)),
-      tap(verificationError => console.log('about to process verification error:' + JSON.stringify(verificationError))),
+      tap(verificationError => console.debug('about to process verification error:' + JSON.stringify(verificationError))),
       tap(clearSuggestionDisplay),
       map((error) => error as AddressVerificationStatus),
       map((status) => {
@@ -432,29 +432,29 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
-      tap(() => console.log('trying to call remove')),
+      tap(() => console.debug('trying to call remove')),
       withLatestFrom(this.state$),
-      tap((args) => console.log('about to filter with:' + JSON.stringify(args))),
+      tap((args) => console.debug('about to filter with:' + JSON.stringify(args))),
       filter(([_, state]) => !!state.activityInstanceGuid),
       tap(() => busyCounter$.next(1)),
       concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
       catchError(() => {
-        console.log('temp delete failed. This is OK');
+        console.debug('temp delete failed. This is OK');
         return of(null);
       }),
-      tap(() => console.log('temp address deleted!')),
+      tap(() => console.debug('temp address deleted!')),
       tap(() => busyCounter$.next(-1))
     );
 
     // "Real" as opposed to "Temp"
     const saveRealAddressAction$ = this.saveTrigger$.pipe(
-      tap(() => console.log('save trigger called')),
+      tap(() => console.debug('save trigger called')),
       withLatestFrom(currentAddress$),
       filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
-      tap(() => console.log('about to saveaddress!!')),
+      tap(() => console.debug('about to saveaddress!!')),
       tap(() => busyCounter$.next(1)),
       concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-      tap((address) => console.log('address saved!! ' + JSON.stringify(address))),
+      tap((address) => console.debug('address saved!! ' + JSON.stringify(address))),
       tap(() => busyCounter$.next(-1)),
       share()
     );
@@ -485,7 +485,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.addressErrors$]).pipe(
       map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
       distinctUntilChanged(),
-      tap(status => console.log('validStatusChanged to:' + status)),
+      tap(status => console.debug('validStatusChanged to:' + status)),
       tap(status => this.validStatusChanged.emit(status))
     );
 

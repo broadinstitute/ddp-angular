@@ -151,7 +151,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    */
   @Input()
   set address(address: Address) {
-    console.log('setting address:' + JSON.stringify(address));
+    console.debug('setting address:' + JSON.stringify(address));
     this.ais.inputAddress$.next(address);
   }
   @Input()
@@ -219,8 +219,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     ).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();
 
-    this.valueChanged.subscribe((address) => console.log('the address we got was:' + JSON.stringify(address)));
-    this.componentBusy.subscribe((isBusy) => console.log('is busy?:' + isBusy));
+    this.valueChanged.subscribe((address) => console.debug('the address we got was:' + JSON.stringify(address)));
+    this.componentBusy.subscribe((isBusy) => console.debug('is busy?:' + isBusy));
     this.setupBlockChromeStreet1Autofill();
 
   }

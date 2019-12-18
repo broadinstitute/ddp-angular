@@ -128,7 +128,7 @@ export class AddressInputService implements OnDestroy {
       // value
       // todo maybe some way to introduce derived updates and make it so state is updated atomically?
       this.addressForm.valueChanges.pipe(
-        tap((changes) => console.log('getting form changes:' + JSON.stringify(changes))),
+        tap((changes) => console.debug('getting form changes:' + JSON.stringify(changes))),
         distinctUntilChanged((x, y) => _.isEqual(x, y)),
         concatMap((formValue) => {
           return of(formValue['country']).pipe(
@@ -160,7 +160,7 @@ export class AddressInputService implements OnDestroy {
         ...{ isReadOnly: this.inputIsReadOnly$.getValue() }
       }) as AddressInputComponentState),
       scan((acc: AddressInputComponentState, change) => ({ ...acc, ...change })),
-      tap(overallState => console.log('the overall state is:' + JSON.stringify(overallState))),
+      tap(overallState => console.debug('the overall state is:' + JSON.stringify(overallState))),
       // this replay here turns out to be important. Make sure everyone gets that first event
       shareReplay(1)
     );
@@ -190,18 +190,18 @@ export class AddressInputService implements OnDestroy {
 
 
     const isReadOnly$: Observable<boolean> = componentState$.pipe(
-      tap(() => console.log('about to pluck isReadOnly')),
+      tap(() => console.debug('about to pluck isReadOnly')),
       pluck<AddressInputComponentState, 'isReadOnly'>('isReadOnly'),
       distinctUntilChanged((x, y) => {
-        console.log('previous isReadOnly: ' + x + 'new isReadOnly' + y);
+        console.debug('previous isReadOnly: ' + x + 'new isReadOnly' + y);
         return x === y;
       }),
-      tap(isRead => console.log('emitting: ' + isRead)),
+      tap(isRead => console.debug('emitting: ' + isRead)),
       share()
     );
 
     const isReadOnlyFormChanges$ = isReadOnly$.pipe(
-      tap((isReadOnly) => console.log('about to set is readonly to: ' + isReadOnly)),
+      tap((isReadOnly) => console.debug('about to set is readonly to: ' + isReadOnly)),
       tap(readOnly => {
         ['country', 'name', 'street1', 'street2', 'city', 'state', 'zip', 'phone', 'guid']
           .forEach(controlName => {
@@ -229,7 +229,7 @@ export class AddressInputService implements OnDestroy {
       skip(1),
       map(compState => this.buildAddressFromFormData(compState.formData, compState.countryInfo)),
       distinctUntilChanged((x, y) => _.isEqual(x, y)),
-      tap((newAddress) => console.log('generated new formAddress$ %o', newAddress)),
+      tap((newAddress) => console.debug('generated new formAddress$ %o', newAddress)),
       share());
 
     const street1Changed$: Observable<boolean> = formAddress$.pipe(
@@ -237,7 +237,7 @@ export class AddressInputService implements OnDestroy {
       pairwise(),
       map(([prev, current]) => prev !== current),
       startWith(false),
-      tap((changed) => console.log('generated new street1changed with value:' + changed)),
+      tap((changed) => console.debug('generated new street1changed with value:' + changed)),
       share());
 
 
@@ -248,7 +248,7 @@ export class AddressInputService implements OnDestroy {
     const cancelableFormAddress$ = zip(formAddress$, street1Changed$).pipe(
       concatMap(([formAddress, street1Changed]) =>
         of(formAddress).pipe(
-          tap((address) => console.log('inputs to canceLable:' + JSON.stringify(address) + street1Changed)),
+          tap((address) => console.debug('inputs to canceLable:' + JSON.stringify(address) + street1Changed)),
           delay(street1Changed ? 3000 : 0),
           // If autocomplete address has come in during our delay, we don't emit the form address
           takeUntil(this.googleAutocompleteAddress$),
@@ -268,7 +268,7 @@ export class AddressInputService implements OnDestroy {
       concatMap(([googleAddress, componentState]) =>
         this.addressService.verifyAddress(googleAddress).pipe(
           catchError(() => {
-            console.log('had an error calling easypost');
+            console.debug('had an error calling easypost');
             return of(googleAddress);
           }),
           map(suggestedAddress => new Address({ ...suggestedAddress, ...{ guid: componentState.formData.guid } }))
@@ -392,7 +392,7 @@ export class AddressInputService implements OnDestroy {
   }
 
   private buildAutoCompleteAddress(autocompleteAddress: Address, name: string, phone: string): Address {
-    console.log('Processing showAutomcoplete with:' + JSON.stringify(autocompleteAddress));
+    console.debug('Processing showAutomcoplete with:' + JSON.stringify(autocompleteAddress));
 
     const localAutocompleteAddress = new Address(autocompleteAddress);
     // capitalize incoming text
