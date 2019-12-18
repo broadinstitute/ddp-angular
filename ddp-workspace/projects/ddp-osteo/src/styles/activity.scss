@@ -337,6 +337,10 @@ ddp-activity-composite-answer {
     span {
         font-weight: 400;
     }
+
+    .mat-form-field {
+        width: 100%;
+    }
 }
 
 .ddp-composite-text {
@@ -355,9 +359,6 @@ ddp-activity-composite-answer {
         margin-right: 0 !important;
     }
 
-    .mat-form-field {
-        width: 100%;
-    }
 }
 
 // institutions
