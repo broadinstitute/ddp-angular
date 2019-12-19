@@ -173,19 +173,12 @@
 .feeds {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 4rem;
 }
 
 .twitter-feed {
     overflow: hidden;
-    width: 500px;
-}
-
-.instagram-feed {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: max-content;
-    grid-gap: 0.5rem;
+    width: 100%;
 }
 
 .stay-informed-block {
@@ -267,15 +260,7 @@
     }
 
     .feeds {
-        grid-template-columns: 1fr;
-    }
-
-    .twitter-feed {
-        justify-self: center;
-    }
-
-    .instagram-feed {
-        justify-self: center;
+        grid-template-columns: 0.5fr 1fr;
     }
 
     .stay-informed-block {
@@ -320,6 +305,12 @@
     }
 
     .partners-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .feeds {
         grid-template-columns: 1fr;
     }
 }
@@ -373,18 +364,7 @@
         height: 75px;
     }
 
-    .twitter-feed {
-        width: 300px;
-    }
-
     .join-us-content {
         margin: -6rem auto 11.875rem auto;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    .twitter-feed {
-        width: 250px;
-        height: 300px;
     }
 }

@@ -74,6 +74,9 @@ tkCfg.infoEmail = 'info@osproject.org';
 tkCfg.twitterAccountId = 'osteoproject';
 tkCfg.facebookGroupId = 'osteosarcomaproject';
 tkCfg.instagramId = 'osteosarcomaproject';
+// to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
+// need Instagram credentials for @osteosarcomaproject
+tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.enableRedesign = true;
 

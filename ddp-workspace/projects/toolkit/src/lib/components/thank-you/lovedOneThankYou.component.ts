@@ -3,8 +3,8 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
-    selector: 'toolkit-loved-one-thank-you',
-    template: `
+  selector: 'toolkit-loved-one-thank-you',
+  template: `
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign">
     </ng-container>
 
@@ -66,22 +66,22 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
     </ng-template>`
 })
 export class LovedOneThankYouComponent implements OnInit {
-    public phone: string;
-    public email: string;
-    public phoneHref: string;
-    public emailHref: string;
-    public useRedesign: boolean;
+  public phone: string;
+  public email: string;
+  public phoneHref: string;
+  public emailHref: string;
+  public useRedesign: boolean;
 
-    constructor(
-        private headerConfig: HeaderConfigurationService,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
-    public ngOnInit(): void {
-        this.phone = this.toolkitConfiguration.phone;
-        this.email = this.toolkitConfiguration.infoEmail;
-        this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
-        this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
-        this.headerConfig.setupDefaultHeader();
-    }
+  public ngOnInit(): void {
+    this.phone = this.toolkitConfiguration.phone;
+    this.email = this.toolkitConfiguration.infoEmail;
+    this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
+    this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
+    this.useRedesign = this.toolkitConfiguration.enableRedesign;
+    this.headerConfig.setupDefaultHeader();
+  }
 }

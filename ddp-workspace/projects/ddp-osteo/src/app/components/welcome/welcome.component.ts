@@ -11,6 +11,7 @@ export class WelcomeComponent implements OnInit {
   public twitterUrl: string;
   public facebookUrl: string;
   public instagramUrl: string;
+  public lightswitchWidgetId: string;
   private readonly HEADER_HEIGHT_REM = 7;
   @ViewChild('scrollAnchor', { static: true }) scrollAnchor: ElementRef;
 
@@ -25,6 +26,7 @@ export class WelcomeComponent implements OnInit {
     this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
     this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
+    this.lightswitchWidgetId = this.toolkitConfiguration.lightswitchInstagramWidgetId;
   }
 
   public scrollToStepsSection(): void {
