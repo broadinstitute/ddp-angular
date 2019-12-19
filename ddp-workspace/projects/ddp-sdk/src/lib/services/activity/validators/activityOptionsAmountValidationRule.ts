@@ -6,7 +6,7 @@ export class ActivityOptionsAmountValidationRule extends ActivityAbstractValidat
     private outcome: boolean;
 
     constructor(
-        question: ActivityQuestionBlock<ActivityPicklistOption[]>, 
+        question: ActivityQuestionBlock<ActivityPicklistOption[]>,
         public minimumSelection: number,
         public maximumSelection: number) {
         super(question);
@@ -27,7 +27,7 @@ export class ActivityOptionsAmountValidationRule extends ActivityAbstractValidat
             this.result = this.message;
             this.outcome = false;
         }
-        
+
         return this.outcome;
     }
 }

@@ -34,7 +34,7 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
                       [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                       (submit)="raiseSubmit($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>  
+        </ddp-activity>
     </ng-template>`
 })
 export class ActivityPageComponent implements OnInit, OnDestroy {

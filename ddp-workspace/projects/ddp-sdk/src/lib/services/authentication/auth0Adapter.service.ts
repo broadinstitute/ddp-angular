@@ -51,7 +51,7 @@ export class Auth0AdapterService implements OnDestroy {
                 clientID: this.configuration.auth0ClientId,
                 studyGuid: this.configuration.studyGuid,
                 responseType: 'code',
-                audience: audience,
+                audience,
                 scope: 'offline_access ' + scopes,
                 redirectUri: this.configuration.auth0CodeRedirect
             });
@@ -61,7 +61,7 @@ export class Auth0AdapterService implements OnDestroy {
                 domain: this.configuration.auth0Domain,
                 clientID: this.configuration.auth0ClientId,
                 responseType: 'token id_token',
-                audience: audience,
+                audience,
                 scope: scopes,
                 redirectUri: this.configuration.loginLandingUrl
             });

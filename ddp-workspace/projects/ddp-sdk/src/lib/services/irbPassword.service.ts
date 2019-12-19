@@ -21,7 +21,7 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
     public checkPassword(password: string): Observable<boolean> {
         const ddpCfg = this._configuration;
         const studyGuid = ddpCfg.studyGuid;
-        return this.postObservable(`/studies/${studyGuid}/irb-password-check`, { password: password }, {}, true).pipe(
+        return this.postObservable(`/studies/${studyGuid}/irb-password-check`, { password }, {}, true).pipe(
             map((response: HttpResponse<PasswordCheckResult>) => {
                 const loggedIn: boolean = !!(response.body) && response.body.result;
                 if (loggedIn) {

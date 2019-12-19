@@ -14,7 +14,7 @@ export interface TextParameters {
   autocomplete: boolean;
   question?: string;
   placeholder?: string;
-  label?: string
+  label?: string;
 }
 
 @Component({
@@ -87,7 +87,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         while ((position = lowerCaseSuggestion.indexOf(lowerCaseValue, position + step)) !== -1) {
           matches.push({
             offset: position,
-            length: length
+            length
           });
           if (step !== length) {
             step = length;
@@ -95,7 +95,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         }
         values.push({
           value: suggestion,
-          matches: matches
+          matches
         });
       }
     });

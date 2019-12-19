@@ -9,7 +9,7 @@ import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.ser
 @Injectable()
 export class ResendEmailServiceAgent extends NotAuthenticatedServiceAgent<any> {
     constructor(
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(configuration, http, logger);

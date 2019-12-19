@@ -10,9 +10,9 @@ import { finalize, takeUntil, map } from 'rxjs/operators';
 export class ReadonlyActivityFormComponent implements OnDestroy {
     @ViewChild(ActivityComponent, { static: false }) private form: ActivityComponent;
     public instanceGuid: string;
-    public activityGuid: string = 'READONLY01';
+    public activityGuid = 'READONLY01';
     public expiredInstanceGuid: string;
-    public showExpired: boolean = false;
+    public showExpired = false;
     public countdown: number;
     private anchor: CompositeDisposable;
 
@@ -39,7 +39,7 @@ export class ReadonlyActivityFormComponent implements OnDestroy {
         const stream$ = timer(0, interval).pipe(
             finalize(() => {
                 this.expiredInstanceGuid = this.instanceGuid;
-                this.showExpired = true
+                this.showExpired = true;
                 this.form.refresh();
             }),
             takeUntil(timer(duration + interval)),

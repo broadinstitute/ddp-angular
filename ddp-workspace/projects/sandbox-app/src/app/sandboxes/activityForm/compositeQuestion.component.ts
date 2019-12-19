@@ -45,7 +45,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       "questionType": "TEXT",
       "stableId": "CHILD_TEXT1",
       "answers": [
-        
+
       ],
       "validations": [
         {
@@ -75,10 +75,10 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       "shown": true,
       "stableId": "CHILD_DATE1",
       "answers": [
-        
+
       ],
       "validations": [
-        
+
       ]
     },
     {
@@ -94,10 +94,10 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       "shown": true,
       "stableId": "CHILD_DATE2",
       "answers": [
-        
+
       ],
       "validations": [
-        
+
       ]
     },
  {
@@ -113,18 +113,18 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       "shown": true,
       "stableId": "CHILD_DATE3",
       "answers": [
-        
+
       ],
       "validations": [
-        
+
       ]
     }
   ],
   "answers": [
-    
+
   ],
   "validations": [
-    
+
   ]
 }`;
 

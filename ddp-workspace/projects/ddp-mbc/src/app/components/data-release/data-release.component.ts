@@ -28,15 +28,15 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </div>
-    
+
         <article class="PageContent">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="PageContent-section">
                             <div class="row NoMargin Left">
-                                <button mat-button color="primary" 
-                                        class="ButtonFilled Button--rect" 
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
                                         (click)="openDisclaimerDialog()"
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
                                 </button>
@@ -96,7 +96,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem2</li>
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem3</li>
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem4</li>
-                                        </ul>                                        
+                                        </ul>
                                     </li>
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item4</li>
                                 </ul>
@@ -176,11 +176,11 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 </p>
                                 <div id="NCITermDictionaryWidgetEnglish">
                                     <iframe lazy-resource
-                                            frameborder="0" 
-                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish" 
+                                            frameborder="0"
+                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish"
                                             id="NCITermDictionaryWidgetContainerEnglish"
-                                            title="https://www.mbcproject.org/data-release" 
-                                            name="https://www.mbcproject.org/data-release" 
+                                            title="https://www.mbcproject.org/data-release"
+                                            name="https://www.mbcproject.org/data-release"
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>

@@ -29,15 +29,15 @@ import { WindowRef } from 'ddp-sdk';
                 </div>
             </div>
         </div>
-    
+
         <article class="PageContent">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="PageContent-section">
                             <div class="row NoMargin Left">
-                                <button mat-button color="primary" 
-                                        class="ButtonFilled Button--rect" 
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
                                         (click)="openDisclaimerDialog()"
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
                                 </button>
@@ -194,11 +194,11 @@ import { WindowRef } from 'ddp-sdk';
                                 </p>
                                 <div id="NCITermDictionaryWidgetEnglish">
                                     <iframe lazy-resource
-                                            frameborder="0" 
-                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish" 
+                                            frameborder="0"
+                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish"
                                             id="NCITermDictionaryWidgetContainerEnglish"
-                                            title="https://www.mbcproject.org/data-release" 
-                                            name="https://www.mbcproject.org/data-release" 
+                                            title="https://www.mbcproject.org/data-release"
+                                            name="https://www.mbcproject.org/data-release"
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>

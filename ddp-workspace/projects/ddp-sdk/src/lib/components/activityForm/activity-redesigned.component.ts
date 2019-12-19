@@ -106,7 +106,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     </ng-container>
                     <div class="activity-buttons">
                         <ng-container *ngIf="isLoaded && isStepped">
-                            <button *ngIf="!isFirstStep" 
+                            <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_secondary"
                                     (click)="decrementStep()"
@@ -127,7 +127,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     (mouseenter)="mouseEnterOnSubmit()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.readonly && isLoaded" 
+                            <button *ngIf="model.readonly && isLoaded"
                                     class="button button_medium button_primary button_right"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">

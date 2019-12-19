@@ -11,7 +11,7 @@ import { filter, map } from 'rxjs/operators';
 export class PrequalifierServiceAgent extends UserServiceAgent<any> {
     constructor(
         session: SessionMementoService,
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(session, configuration, http, logger);

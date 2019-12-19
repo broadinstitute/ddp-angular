@@ -33,10 +33,10 @@ export class PhysicianInfoComponent extends QuestionComponent<ActivityInstitutio
     const parameters: PhysicianInfoParameters = {
       titleText: `<p>Your physician name</p>`,
       allowMultiple: true,
-      addButtonText: "+ADD ANOTHER PHYSICIAN",
+      addButtonText: '+ADD ANOTHER PHYSICIAN',
       subtitleText: `<p>subtitle sample text</p>`,
-      institutionType: "PHYSICIAN",
-      studyGuid: "TESTSTUDY1",
+      institutionType: 'PHYSICIAN',
+      studyGuid: 'TESTSTUDY1',
       readonly: false,
       showFieldsInitially: true
     };
