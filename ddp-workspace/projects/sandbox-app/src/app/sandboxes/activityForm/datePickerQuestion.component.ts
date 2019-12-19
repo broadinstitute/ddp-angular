@@ -10,7 +10,7 @@ import { DatePickerParameters } from '../../model/datePickerParameters';
 export class DatePickerQuestionComponent extends QuestionComponent<ActivityDateQuestionBlock> {
   constructor() {
     super();
-    let parameters = {
+    const parameters = {
       readonly: false,
       startYear: 1990,
       endYear: 2018,
@@ -24,7 +24,7 @@ export class DatePickerQuestionComponent extends QuestionComponent<ActivityDateQ
     this.question = new ActivityDateQuestionBlock();
     this.question.displayCalendar = parameters.displayCalendar;
     this.question.startYear = parameters.startYear;
-    this.question.endYear = parameters.endYear
+    this.question.endYear = parameters.endYear;
     this.question.fields = parameters.fields;
     this.question.id = 'AAA';
     this.question.question = 'sample question';
@@ -33,7 +33,7 @@ export class DatePickerQuestionComponent extends QuestionComponent<ActivityDateQ
 
   public update(): void {
     try {
-      let parameters: DatePickerParameters = JSON.parse(this.inputParameters);
+      const parameters: DatePickerParameters = JSON.parse(this.inputParameters);
       this.readonly = parameters.readonly;
       this.question.startYear = parameters.startYear;
       this.question.endYear = parameters.endYear;

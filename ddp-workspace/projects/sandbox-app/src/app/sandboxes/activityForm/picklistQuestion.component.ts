@@ -12,7 +12,7 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
 
     constructor(private cdRef: ChangeDetectorRef) {
         super();
-        let parameters: PicklistParameters = {
+        const parameters: PicklistParameters = {
             readonly: false,
             shown: true,
             detailMaxLength: 255,
@@ -173,7 +173,7 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
 
     public update(): void {
         try {
-            let parameters: PicklistParameters = JSON.parse(this.inputParameters);
+            const parameters: PicklistParameters = JSON.parse(this.inputParameters);
             this.apply(parameters);
             this.validationMessage = null;
             this.rerender = true;

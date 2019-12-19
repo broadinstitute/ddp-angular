@@ -56,6 +56,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
   imports: [
@@ -110,7 +111,8 @@ import { MatButtonModule } from '@angular/material/button';
     SessionWillExpireComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
-    AgeUpThankYou
+    AgeUpThankYou,
+    InstagramFeedLightwidgetPluginComponent
   ],
   exports: [
     FooterComponent,
@@ -133,7 +135,8 @@ import { MatButtonModule } from '@angular/material/button';
     RedirectToAuth0LoginComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
-    AgeUpThankYou
+    AgeUpThankYou,
+    InstagramFeedLightwidgetPluginComponent
   ],
   entryComponents: [
     DisclaimerComponent,

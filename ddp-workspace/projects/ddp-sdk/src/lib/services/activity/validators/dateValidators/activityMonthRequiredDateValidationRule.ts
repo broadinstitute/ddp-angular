@@ -10,7 +10,7 @@ export class ActivityMonthRequiredDateValidationRule extends ActivityAbstractVal
 
     public recalculate(): boolean {
         if (this.question.answer != null) {
-            let value = this.question.answer;
+            const value = this.question.answer;
             if (value.month == null) {
                 this.result = this.message;
                 return false;

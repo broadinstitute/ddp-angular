@@ -1,5 +1,5 @@
-import { ActivityQuestionBlock } from "../../../../models/activity/activityQuestionBlock";
-import { ActivityAbstractValidationRule } from "../activityAbstractValidationRule";
+import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
+import { ActivityAbstractValidationRule } from '../activityAbstractValidationRule';
 import { DatePickerValue } from '../../../../models/datePickerValue';
 import { DateService } from '../../../dateService.service';
 

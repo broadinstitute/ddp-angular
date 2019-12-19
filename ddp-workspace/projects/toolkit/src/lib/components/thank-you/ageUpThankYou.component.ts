@@ -4,8 +4,8 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 @Component({
-    selector: 'toolkit-age-up-thank-you',
-    template: `
+  selector: 'toolkit-age-up-thank-you',
+  template: `
     <main class="main">
         <section class="section age-up-email-section">
             <div class="content content_tight">
@@ -33,19 +33,19 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
     </main>`
 })
 export class AgeUpThankYou implements OnInit {
-    public isEmailVerified: boolean;
-    public isEmailCollected: boolean;
-    public dashboardUrl: string;
+  public isEmailVerified: boolean;
+  public isEmailCollected: boolean;
+  public dashboardUrl: string;
 
-    constructor(
-        private activatedRoute: ActivatedRoute,
-        private headerConfig: HeaderConfigurationService,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
-    public ngOnInit(): void {
-        this.headerConfig.setupDefaultHeader();
-        this.isEmailVerified = !!this.activatedRoute.snapshot.data.verify;
-        this.isEmailCollected = !!this.activatedRoute.snapshot.data.collect;
-        this.dashboardUrl = `/${this.toolkitConfiguration.dashboardUrl}`;
-    }
+  public ngOnInit(): void {
+    this.headerConfig.setupDefaultHeader();
+    this.isEmailVerified = !!this.activatedRoute.snapshot.data.verify;
+    this.isEmailCollected = !!this.activatedRoute.snapshot.data.collect;
+    this.dashboardUrl = `/${this.toolkitConfiguration.dashboardUrl}`;
+  }
 }

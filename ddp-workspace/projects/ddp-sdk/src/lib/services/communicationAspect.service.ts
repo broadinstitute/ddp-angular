@@ -9,8 +9,8 @@ export class CommunicationAspect {
     static interceptedFeeds: Array<NetworkingMock> = new Array<NetworkingMock>();
     static initialize(): void { }
     static intrcept(meta: Metadata): void {
-        let callInfo = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
-        let feedMessage = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
+        const callInfo = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
+        const feedMessage = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
         if (CommunicationAspect.interceptedFeeds.findIndex(x => x.key == callInfo) < 0) {
             let codes = [200];
             if (Array.isArray(meta.args[meta.args.length - 1])) {
@@ -24,14 +24,13 @@ export class CommunicationAspect {
                 mockedCode: 200,
                 returnNull: false
             });
-        }
-        else {
-            let feedInfo = CommunicationAspect.interceptedFeeds.find(x => x.key == callInfo);
+        } else {
+            const feedInfo = CommunicationAspect.interceptedFeeds.find(x => x.key == callInfo);
             if (feedInfo && feedInfo.mocked && feedInfo.mock) {
                 if (feedInfo.returnNull) {
                     meta.result = of(null);
                 } else {
-                    let responseData = JSON.parse(feedInfo.mock);
+                    const responseData = JSON.parse(feedInfo.mock);
                     if (feedInfo.mockedCode != 200) {
                         meta.result = throwError(responseData);
                     } else {

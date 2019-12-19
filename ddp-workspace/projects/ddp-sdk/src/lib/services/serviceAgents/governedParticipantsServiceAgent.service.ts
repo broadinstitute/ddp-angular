@@ -19,7 +19,7 @@ export class GovernedParticipantsServiceAgent extends OperatorServiceAgent<any> 
     }
 
     public add(alias: string): Observable<void> {
-        return this.postObservable(`/participants`, { alias: alias });
+        return this.postObservable(`/participants`, { alias });
     }
 
     public getList(): Observable<Array<Participant>> {

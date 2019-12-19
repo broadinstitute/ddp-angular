@@ -21,7 +21,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
             <img lazy-resource src="./assets/images/logo-minderoo.png" class="Intro-footerLogo-square" alt="Minderoo Foundation Logo">
         </div>
-        
+
         <div class="Intro row">
             <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
                 <h1 class="Message-title" [innerHTML]="'Toolkit.Welcome.WelcomeTitle' | translate"></h1>
@@ -60,7 +60,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <div class="Separator Separator--small"></div>
         </div>
-        
+
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
@@ -155,7 +155,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.FourthBlock.Title.Advocacy 
+                    Toolkit.Welcome.FourthBlock.Title.Advocacy
                 </h1>
             </section>
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
@@ -200,7 +200,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                     </span>
                     <br>
                     <span class="Color--orange Semibold" translate>
-                        Toolkit.Welcome.SixthBlock.TitlePt2  
+                        Toolkit.Welcome.SixthBlock.TitlePt2
                     </span>
                 </h1>
                 <p class="Message-text" translate>
@@ -214,7 +214,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 Toolkit.Welcome.SixthBlock.CountMeInButton
             </a>
         </div>
-    </div> 
+    </div>
     `
 })
 export class WelcomeComponent implements OnInit {
