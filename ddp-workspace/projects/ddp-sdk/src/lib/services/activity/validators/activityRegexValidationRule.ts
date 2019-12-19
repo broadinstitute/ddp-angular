@@ -8,7 +8,7 @@ export class ActivityRegexValidationRule extends ActivityAbstractValidationRule 
 
     public recalculate(): boolean {
         if (this.question.answer !== null) {
-            let matchResult: RegExpMatchArray | null = this.question.answer.match(this.regexPattern);
+            const matchResult: RegExpMatchArray | null = this.question.answer.match(this.regexPattern);
             if (matchResult == null || matchResult[0] !== this.question.answer) {
                 this.result = this.message;
                 return false;

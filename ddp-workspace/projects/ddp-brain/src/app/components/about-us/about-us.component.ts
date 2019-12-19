@@ -100,19 +100,19 @@ import { ToolkitConfigurationService } from 'toolkit';
                   <div class="PageContent-sacPhoto" [ngStyle]="{'background-image' : 'url(' + member.image + ')'}"></div>
                   <h2 class="PageContent-sac-name">
                     <div *ngIf="member.url">
-                        <a [href]="member.url" target="_blank">{{member.name}}</a>  
+                        <a [href]="member.url" target="_blank">{{member.name}}</a>
                     </div>
                     <div *ngIf="!member.url">
-                        {{member.name}}  
+                        {{member.name}}
                     </div>
-                    
+
                   </h2>
                   <p class="PageContent-sac-institution" *ngFor="let affiliation of member.affiliations">
                     {{ affiliation }}
                   </p>
                 </div>
               </div>
-            </div>  
+            </div>
         </div>
 
         <div class="row row--moreTopMargin"></div>

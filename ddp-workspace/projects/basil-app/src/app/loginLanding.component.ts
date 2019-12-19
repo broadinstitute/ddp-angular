@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SessionMementoService, ActivityServiceAgent } from 'ddp-sdk';
 import { UserStateService } from './services/userState.service';
 import { UserState } from './model/userState';
-import { PrequalifierComponent } from './prequalifier.component'
+import { PrequalifierComponent } from './prequalifier.component';
 import { Subscription } from 'rxjs';
 
 
@@ -53,8 +53,7 @@ export class LoginLandingComponent implements OnDestroy {
                 .subscribe(x => {
                     this.router.navigateByUrl('prequalifier');
                 });
-        }
-        else {
+        } else {
             this.router.navigateByUrl(url);
         }
     }

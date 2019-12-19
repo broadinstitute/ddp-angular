@@ -13,7 +13,7 @@ import { map, catchError } from 'rxjs/operators';
 export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     constructor(
         session: SessionMementoService,
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(session, configuration, http, logger);

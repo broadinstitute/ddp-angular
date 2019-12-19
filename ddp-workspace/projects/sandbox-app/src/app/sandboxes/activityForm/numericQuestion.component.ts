@@ -3,7 +3,7 @@ import { ActivityNumericQuestionBlock, NumericType } from 'ddp-sdk';
 import { QuestionComponent } from './questionComponent';
 
 export interface NumericParameters {
-  answer: number,
+  answer: number;
   readonly: boolean;
   shown: true;
   numericType: NumericType;

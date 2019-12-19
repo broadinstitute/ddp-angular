@@ -11,10 +11,10 @@ import { Observable, of } from 'rxjs';
 })
 export class ConsentComponent implements OnDestroy {
   @Output() submit: EventEmitter<void> = new EventEmitter();
-  public studyGuid: string = 'TESTSTUDY1';
+  public studyGuid = 'TESTSTUDY1';
   public instanceGuid: string;
   private anchor: CompositeDisposable;
-  private consentCode: string = '1S2G7MIPZT';
+  private consentCode = '1S2G7MIPZT';
 
   constructor(private state: UserStateService,
     private serviceAgent: ActivityServiceAgent,
@@ -23,11 +23,10 @@ export class ConsentComponent implements OnDestroy {
     this.anchor = new CompositeDisposable();
     const get = listServiceAgent.getActivities(of(this.studyGuid))
       .subscribe(x => {
-        let element = x.find(y => y.activityCode == this.consentCode);
+        const element = x.find(y => y.activityCode == this.consentCode);
         if (element) {
           this.instanceGuid = element.instanceGuid;
-        }
-        else {
+        } else {
           this.createConsent();
         }
       });
@@ -51,6 +50,6 @@ export class ConsentComponent implements OnDestroy {
       } else if (x == UserState.Dashboard) {
         this.router.navigateByUrl('dashboard');
       }
-    })
+    });
   }
 }

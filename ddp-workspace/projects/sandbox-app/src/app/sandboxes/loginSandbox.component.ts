@@ -10,8 +10,8 @@ export class LoginSandboxComponent implements OnDestroy {
   public currentEvent: string;
   public profile: string;
   public auth0Mode: Auth0Mode = Auth0Mode.SignupAndLogin;
-  public loginCaption: string = 'LOG IN';
-  public logoutCaption: string = 'LOG OUT';
+  public loginCaption = 'LOG IN';
+  public logoutCaption = 'LOG OUT';
   private anchor: CompositeDisposable;
 
   constructor(private userProfile: UserProfileBusService) {

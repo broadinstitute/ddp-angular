@@ -69,14 +69,14 @@ export class FireCloudServiceAgent extends AdminServiceAgent<any> {
     public getStudies(): Observable<Array<Study>> {
         return this.getObservable(`/admin/studies`).pipe(
             filter(x => x != null),
-            map(x => <Array<Study>>x)
+            map(x => x as Array<Study>)
         );
     }
 
     public getWorkspaces(): Observable<Array<FireCloudWorkspace>> {
         return this.getObservable(`/admin/workspaces`).pipe(
             filter(x => x != null),
-            map(x => <Array<FireCloudWorkspace>>x)
+            map(x => x as Array<FireCloudWorkspace>)
         );
     }
 }

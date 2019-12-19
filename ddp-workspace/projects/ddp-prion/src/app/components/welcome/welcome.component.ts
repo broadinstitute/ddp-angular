@@ -20,7 +20,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
             <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
-        
+
         <div class="Intro row">
             <section class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                 <h1 class="Message-title" translate>
@@ -111,7 +111,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             </section>
         </div>
 
-    </div> 
+    </div>
     `
 })
 export class WelcomeComponent implements OnInit {

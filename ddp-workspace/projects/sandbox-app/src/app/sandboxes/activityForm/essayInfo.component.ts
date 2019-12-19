@@ -12,9 +12,9 @@ import { ActivityServiceAgent, CompositeDisposable } from 'ddp-sdk';
 })
 export class EssayInfoComponent implements OnInit, OnDestroy {
     public instanceGuid: string;
-    public activityGuid: string = "ACTIVITY_FOR_TESTING_ESSAY_TEXT_QUESTION";
+    public activityGuid = 'ACTIVITY_FOR_TESTING_ESSAY_TEXT_QUESTION';
     public essayOptions: any = [
-        "ACTIVITY_FOR_TESTING_ESSAY_TEXT_QUESTION"
+        'ACTIVITY_FOR_TESTING_ESSAY_TEXT_QUESTION'
     ];
     private anchor: CompositeDisposable;
 

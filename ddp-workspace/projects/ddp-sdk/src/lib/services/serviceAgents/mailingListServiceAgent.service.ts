@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class MailingListServiceAgent extends NotAuthenticatedServiceAgent<any> {
     constructor(
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(configuration, http, logger);
@@ -18,4 +18,4 @@ export class MailingListServiceAgent extends NotAuthenticatedServiceAgent<any> {
     public addPerson(person: Person): Observable<any> {
         return this.postObservable(`/mailing-list`, JSON.stringify(person));
     }
-} 
+}

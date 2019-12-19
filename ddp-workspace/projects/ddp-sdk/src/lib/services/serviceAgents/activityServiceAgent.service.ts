@@ -67,7 +67,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         const data: AnswerSubmission = {
             stableId: questionStableId,
             answerGuid: answerId,
-            value: value
+            value
         };
 
         return this.saveAnswerSubmission(studyGuid, activityGuid, data, throwError);
@@ -78,10 +78,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     }
 
     public createInstance(studyGuid: string, activityCode: string): Observable<ActivityInstanceGuid | null> {
-        const body = {
-            activityCode: activityCode
-        };
-        return this.postObservable(`/studies/${studyGuid}/activities`, body).pipe(
+        return this.postObservable(`/studies/${studyGuid}/activities`, { activityCode }).pipe(
             map(x => !!x ? x.body as ActivityInstanceGuid : null)
         );
     }
