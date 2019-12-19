@@ -54,6 +54,7 @@ import { InstitutionInfoComponent } from './sandboxes/activityForm/institutionIn
 import { AgreementInfoComponent } from './sandboxes/activityForm/agreementInfo.component';
 import { EssayInfoComponent } from './sandboxes/activityForm/essayInfo.component';
 import { AddressEmbeddedSandboxComponent } from './sandboxes/activityForm/addressEmbeddedSandbox.component';
+import { EmailQuestionComponent } from './sandboxes/activityForm/emailQuestion.component';
 
 const baseElt = document.getElementsByTagName('base');
 let base = '';
@@ -91,6 +92,7 @@ const appRoutes: Routes = [
   { path: 'activity', component: ActivitySandboxComponent },
   { path: 'date-picker-question', component: DatePickerQuestionComponent },
   { path: 'text-question', component: TextQuestionComponent },
+  { path: 'email-question', component: EmailQuestionComponent },
   { path: 'numeric-question', component: NumericQuestionComponent },
   { path: 'boolean-question', component: BooleanQuestionComponent },
   { path: 'composite-question', component: CompositeQuestionComponent },
@@ -128,6 +130,7 @@ declare let ga: Function;
     FireCloudStudiesSandboxComponent,
     DatePickerQuestionComponent,
     TextQuestionComponent,
+    EmailQuestionComponent,
     NumericQuestionComponent,
     PagedActivityComponent,
     BooleanQuestionComponent,
