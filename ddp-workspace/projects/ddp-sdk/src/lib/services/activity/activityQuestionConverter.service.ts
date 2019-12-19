@@ -18,6 +18,8 @@ import { ActivityNumericQuestionBlock } from '../../models/activity/activityNume
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
+import { InputType } from '../../models/activity/inputType';
+import { ActivityEmailQuestionBlock } from '../../models/activity/activityEmailQuestionBlock';
 
 const DETAIL_MAXLENGTH = 255;
 @Injectable()
@@ -41,7 +43,12 @@ export class ActivityQuestionConverter {
                 type: 'TEXT', func: (questionJson) => {
                     // let's capture some of the validation into the textblock object itself
                     // make's it easier to apply validations in the widget
-                    const textBlock = new ActivityTextQuestionBlock();
+                    let textBlock: ActivityTextQuestionBlock;
+                    if (questionJson.inputType === InputType.Email) {
+                      textBlock = new ActivityEmailQuestionBlock();
+                    } else {
+                      textBlock = new ActivityTextQuestionBlock();
+                    }
                     textBlock.placeholder = questionJson.placeholderText;
                     questionJson.validations.forEach(validation => {
                         if (validation.minLength !== undefined) {

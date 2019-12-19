@@ -1,28 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
-
 // ngx-translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NGXTranslateService } from './services/internationalization/ngxTranslate.service';
-
 // CookieService
 import { CookieModule } from 'ngx-cookie';
-
 // Angular JWT
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-
+import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 // Shared components & services
 import { ConfigurationService } from './services/configuration.service';
 import { SessionMementoService } from './services/sessionMemento.service';
 import { GoogleAnalyticsEventsService } from './services/googleAnalyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
-
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
 import { Auth0RenewService } from './services/authentication/auth0Renew.service';
@@ -78,6 +73,7 @@ import { ActivityQuestionComponent } from './components/activityForm/activityQue
 import { ActivityBooleanAnswer } from './components/activityForm/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/activityTextAnswer.component';
+import { ActivityEmailAnswerComponent } from './components/activityForm/activityEmailAnswer.component';
 import { ActivityNumericAnswer } from './components/activityForm/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
 import { ActivityAnswerComponent } from './components/activityForm/activityAnswer.component';
@@ -289,6 +285,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailAnswerComponent,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,
@@ -344,6 +341,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailAnswerComponent,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,

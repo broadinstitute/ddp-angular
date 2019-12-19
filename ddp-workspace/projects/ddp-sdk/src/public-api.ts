@@ -22,6 +22,7 @@ export * from './lib/models/activity/activityCompositeQuestionBlock';
 export * from './lib/models/activity/activityQuestionBlock';
 export * from './lib/models/activity/activityPicklistQuestionBlock';
 export * from './lib/models/activity/activityTextQuestionBlock';
+export * from './lib/models/activity/activityEmailQuestionBlock';
 export * from './lib/models/activity/activityNumericQuestionBlock';
 export * from './lib/models/activity/activityDateQuestionBlock';
 export * from './lib/models/activity/activityInstitutionBlock';

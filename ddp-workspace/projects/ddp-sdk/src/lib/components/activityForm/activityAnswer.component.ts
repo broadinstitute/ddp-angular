@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
+import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { QuestionType } from '../../models/activity/questionType';
 import { BlockType } from '../../models/activity/blockType';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
+import { InputType } from '../../models/activity/inputType';
+
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -13,7 +16,7 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
                                  [readonly]="readonly"
                                  (valueChanged)="onChange($event)">
     </ddp-activity-boolean-answer>
-    <ddp-activity-text-answer *ngIf="isTextQuestion(block) && block.shown"
+    <ddp-activity-text-answer *ngIf="isTextQuestion(block) && !isEmailQuestion(block) && block.shown"
                               [block]="block"
                               [readonly]="readonly"
                               (valueChanged)="onChange($event)">
@@ -23,6 +26,11 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
                                  [readonly]="readonly"
                                  (valueChanged)="onChange($event)">
     </ddp-activity-numeric-answer>
+    <ddp-activity-email-answer *ngIf="isEmailQuestion(block) && block.shown"
+                                 [block]="block"
+                                 [readonly]="readonly"
+                                 (valueChanged)="onChange($event)">
+    </ddp-activity-email-answer>
     <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block) && block.shown"
                                   [block]="block"
                                   [readonly]="readonly"
@@ -68,6 +76,10 @@ export class ActivityAnswerComponent {
 
     public isNumericQuestion(block: AbstractActivityQuestionBlock): boolean {
         return this.isQuestion(block) && block.questionType === QuestionType.Numeric;
+    }
+
+    public isEmailQuestion(block: AbstractActivityQuestionBlock): boolean {
+      return (block instanceof ActivityTextQuestionBlock) && (block as ActivityTextQuestionBlock).inputType === InputType.Email;
     }
 
     public isPicklistQuestion(block: AbstractActivityQuestionBlock): boolean {
