@@ -34,34 +34,34 @@ import { ToolkitConfigurationService } from 'toolkit';
                     </section>
                     <section class="PageContent-section">
                         <h1 class="PageContent-title" translate>Toolkit.MoreDetails.HowProjectWorks.Title</h1>
-                    
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.AboutYourself.Title</h2>
-                        <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.AboutYourself.Text</p>  
+                        <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.AboutYourself.Text</p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Permission.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Permission.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Request.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Request.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.SendUs.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.SendUs.Text</p>
                         <div class="PageContent-video">
                             <iframe lazy-resource class="PageContent-video--iframe" src="https://www.youtube.com/embed/_dKSNMarRuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Analyze.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Analyze.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Share.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Share.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Title</h2>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.HowProjectWorks.Learn.TextPt1</span>
                             <a [href]="twitterUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Twitter</a>,
                             <a [href]="facebookUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Facebook</a>
-                            <span translate>Toolkit.MoreDetails.HowProjectWorks.Learn.TextPt2</span> 
+                            <span translate>Toolkit.MoreDetails.HowProjectWorks.Learn.TextPt2</span>
                             <a [href]="instagramUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Instagram</a>.
                         </p>
                     </section>
@@ -130,7 +130,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </article>
-    </div>    
+    </div>
     `
 })
 export class MoreDetailsComponent implements OnInit {

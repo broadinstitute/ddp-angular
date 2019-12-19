@@ -18,7 +18,7 @@ export class ActivityComponent implements OnInit {
 
     public ngOnInit(): void {
         // get param
-        this.id = this.activatedRoute.snapshot.queryParams["id"];
+        this.id = this.activatedRoute.snapshot.queryParams['id'];
     }
 
     public navigate(url: string): void {

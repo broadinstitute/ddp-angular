@@ -25,7 +25,7 @@ export class AddressService extends UserServiceAgent<Address> {
                 return new Address(data.body);
             }),
             catchError((error) => {
-                return Observable.throw(<AddressVerificationStatus>error.error);
+                return Observable.throw(error.error as AddressVerificationStatus);
             })
         );
     }
@@ -97,7 +97,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public deleteAddress(addressOrGuid: Address | string): Observable<any> {
-        const guid = addressOrGuid instanceof Address ? addressOrGuid.guid : <string>addressOrGuid;
+        const guid = addressOrGuid instanceof Address ? addressOrGuid.guid : addressOrGuid as string;
         return this.deleteObservable('/profile/address/' + guid, null, true);
     }
 }

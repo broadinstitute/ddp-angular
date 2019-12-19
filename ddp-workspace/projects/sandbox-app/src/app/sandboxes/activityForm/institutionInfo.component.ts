@@ -13,12 +13,12 @@ import { ActivityServiceAgent, CompositeDisposable } from 'ddp-sdk';
 })
 export class InstitutionInfoComponent implements OnInit, OnDestroy {
   public instanceGuid: string;
-  public activityGuid: string = "TEST_MULTIPLE_INSTITUTIONS_COMPONENT";
+  public activityGuid = 'TEST_MULTIPLE_INSTITUTIONS_COMPONENT';
   public insitutionOptions: any = [
-    "TEST_MULTIPLE_INSTITUTIONS_COMPONENT",
-    "TEST_MULTIPLE_PHYSICIANS_COMPONENT",
-    "TEST_SINGLE_INSTITUTION_COMPONENT",
-    "TEST_SINGLE_PHYSICIAN_COMPONENT"
+    'TEST_MULTIPLE_INSTITUTIONS_COMPONENT',
+    'TEST_MULTIPLE_PHYSICIANS_COMPONENT',
+    'TEST_SINGLE_INSTITUTION_COMPONENT',
+    'TEST_SINGLE_PHYSICIAN_COMPONENT'
   ];
   private anchor: CompositeDisposable;
 

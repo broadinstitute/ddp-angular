@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs';
     templateUrl: 'activitySandbox.component.html'
 })
 export class ActivitySandboxComponent implements OnDestroy {
-    public studyGuid: string = 'TESTSTUDY1';
+    public studyGuid = 'TESTSTUDY1';
     public activityInstanceGuid: string;
-    public stepper: boolean = false;
-    public totalCount: number = 0;
+    public stepper = false;
+    public totalCount = 0;
     private anchor: Subscription;
 
     constructor(private prequalifierServiceAgent: PrequalifierServiceAgent) {

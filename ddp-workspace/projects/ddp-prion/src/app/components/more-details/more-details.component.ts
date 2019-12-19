@@ -42,7 +42,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </article>
-    </div>    
+    </div>
     `
 })
 export class MoreDetailsComponent implements OnInit {

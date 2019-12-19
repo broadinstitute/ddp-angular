@@ -32,7 +32,7 @@ import { filter, map, mergeMap, take } from 'rxjs/operators';
       <toolkit-header [showButtons]="false"
                       [stickySubtitle]="stickySubtitle">
       </toolkit-header>
-      <ddp-activity *ngIf="show" 
+      <ddp-activity *ngIf="show"
                     [studyGuid]="studyGuid"
                     [activityGuid]="instanceGuid"
                     (submit)="navigate($event)"

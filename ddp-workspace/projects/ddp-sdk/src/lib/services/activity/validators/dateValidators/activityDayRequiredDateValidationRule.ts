@@ -10,7 +10,7 @@ export class ActivityDayRequiredDateValidationRule extends ActivityAbstractValid
 
     public recalculate(): boolean {
         if (this.question.answer != null) {
-            let value = this.question.answer;
+            const value = this.question.answer;
             if (value.day == null) {
                 this.result = this.message;
                 return false;

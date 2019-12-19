@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   public logoUrl: string;
-  public currentLocale: string = 'en';
+  public currentLocale = 'en';
   private anchor: Subscription;
 
   constructor(

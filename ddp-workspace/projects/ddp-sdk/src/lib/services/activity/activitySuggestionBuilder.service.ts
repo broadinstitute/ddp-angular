@@ -56,12 +56,12 @@ export class ActivitySuggestionBuilder {
             switchMap(value => this.suggestionService.findDrugSuggestions(value, SUGGESTION_LIMIT).pipe(
                 filter(response => response !== null),
                 map(response =>
-                    <TextSuggestion[]>response.results.map(suggestion => (
-                        <TextSuggestion>{
+                    response.results.map(suggestion => (
+                        {
                             value: suggestion.drug.name,
                             matches: suggestion.matches
-                        })
-                    )
+                        } as TextSuggestion)
+                    ) as TextSuggestion[]
                 )
             ))
         );
@@ -96,7 +96,7 @@ export class ActivitySuggestionBuilder {
             const safeValue = lowerCaseValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const regexp = new RegExp('\\b' + safeValue + '(\\b|\\w+)');
             return suggestion.toLowerCase().search(regexp);
-        }
+        };
 
         const compareOffsetAndText = (suggestion1: TextSuggestion, suggestion2: TextSuggestion): number => {
             const offsetCompResult = suggestion1.matches[0].offset - suggestion2.matches[0].offset;

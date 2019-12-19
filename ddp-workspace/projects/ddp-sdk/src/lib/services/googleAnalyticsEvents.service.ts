@@ -11,14 +11,14 @@ export class GoogleAnalyticsEventsService {
     eventValue: string | null = null): void {
     const event = {
       hitType: 'event',
-      eventCategory: eventCategory,
+      eventCategory,
       // set page directly in order to exclude sensitive query params
       // and simpler aggregation of stats
       page: location.pathname,
       location: this.location,
       eventLabel: eventLabel == null ? eventAction : eventLabel,
-      eventAction: eventAction,
-      eventValue: eventValue
+      eventAction,
+      eventValue
     };
     this.emitEvent(event);
   }
