@@ -83,12 +83,12 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
     }
 
     public isTextQuestion(block: ActivityTextQuestionBlock): boolean {
-        return !block.inputType || block.inputType.toLowerCase() === InputType.Text
-            || block.inputType.toLowerCase() === InputType.Signature;
+        return !block.inputType || block.inputType === InputType.Text
+            || block.inputType === InputType.Signature;
     }
 
     public isEssayQuestion(block: ActivityTextQuestionBlock): boolean {
-        return !!block.inputType && block.inputType.toLowerCase() === InputType.Essay;
+        return !!block.inputType && block.inputType === InputType.Essay;
     }
     // Turn the text suggestion into html snippet where text match surrounded by tag
     // no need to convert special characters like < or &. DOM does that for us
