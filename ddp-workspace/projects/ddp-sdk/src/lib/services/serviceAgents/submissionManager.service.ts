@@ -76,8 +76,8 @@ export class SubmissionManager implements OnDestroy {
     public patchAnswer(studyGuid: string, activityInstanceGuid: string, questionStableId: string, value: AnswerValue,
         questionBlockGuid: string, answerGuid: string | null = null): void {
         this.answerSubmissions.next({
-            studyGuid: studyGuid, activityInstanceGuid: activityInstanceGuid, stableId: questionStableId,
-            value: value, answerGuid: answerGuid, blockGuid: questionBlockGuid
+            studyGuid, activityInstanceGuid, stableId: questionStableId,
+            value, answerGuid, blockGuid: questionBlockGuid
         });
     }
 
@@ -95,7 +95,7 @@ export class SubmissionManager implements OnDestroy {
                 take(1),
                 map(guidToShown => (guidToShown[submission.blockGuid] === false) ? null : submission),
                 filter((submission1) => !!submission1),
-                map((submission2) => <ActivityInstanceAnswerSubmission>submission2)
+                map((submission2) => submission2 as ActivityInstanceAnswerSubmission)
             );
 
         // wrapping the call to the serviceAgent that talks to server in a function that takes ActivityInstanceAnswerSubmission
@@ -161,7 +161,7 @@ export class SubmissionManager implements OnDestroy {
 
     private setupPendingSubmissionQueueManagement(): void {
         // we are interested in keeping an observable on the state of queued requests
-        const pendingAnswerSubmissionSubject = new BehaviorSubject(<ActivityInstanceAnswerSubmission[]>[]);
+        const pendingAnswerSubmissionSubject = new BehaviorSubject([] as ActivityInstanceAnswerSubmission[]);
 
         // will define a few operations to update our view of the queue. Here are the types we will use
         type QueueOp = (queue: ActivityInstanceAnswerSubmission[]) => ActivityInstanceAnswerSubmission[];
@@ -199,7 +199,7 @@ export class SubmissionManager implements OnDestroy {
             merge(submissionRemovalOnHideResponse$),
             scan((acc: ActivityInstanceAnswerSubmission[], currentOperation: QueueOp) => {
                 return currentOperation(acc.slice(0));
-            }, <ActivityInstanceAnswerSubmission[]>[])
+            }, [] as ActivityInstanceAnswerSubmission[])
         );
 
         // finally we update queue subject by having it having it subscribe

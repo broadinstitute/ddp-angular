@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class MedicalProvidersServiceAgent extends UserServiceAgent<any>{
+export class MedicalProvidersServiceAgent extends UserServiceAgent<any> {
     constructor(
         session: SessionMementoService,
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(session, configuration, http, logger);

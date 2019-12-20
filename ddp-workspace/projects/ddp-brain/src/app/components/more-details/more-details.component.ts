@@ -31,29 +31,29 @@ import { ToolkitConfigurationService } from 'toolkit';
                     </section>
                     <section class="PageContent-section">
                         <h1 class="PageContent-title" translate>Toolkit.MoreDetails.HowProjectWorks.Title</h1>
-                    
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.AboutYourself.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.AboutYourself.Text</p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Permission.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Permission.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Request.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Request.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.SalivaSample.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.SalivaSample.Text</p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.BloodSample.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.BloodSample.Text1</p>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.BloodSample.Text2</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Analyze.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Analyze.Text</p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Share.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Share.Text</p>
-                                            
+
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Title</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Text</p>
                     </section>
@@ -133,7 +133,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </article>
-    </div>    
+    </div>
     `
 })
 export class MoreDetailsComponent implements OnInit {

@@ -13,7 +13,7 @@ export class LoggingService implements OnInit, OnDestroy {
     private anchor: Subscription;
 
     constructor(
-        @Inject("ddp.config") private config: ConfigurationService,
+        @Inject('ddp.config') private config: ConfigurationService,
         private dispatcher: ExceptionDispatcher) {
     }
 

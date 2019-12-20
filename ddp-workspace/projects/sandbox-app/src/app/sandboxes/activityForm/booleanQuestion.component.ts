@@ -10,7 +10,7 @@ import { BooleanParameters } from '../../model/booleanParameters';
 export class BooleanQuestionComponent extends QuestionComponent<ActivityBooleanQuestionBlock> {
     constructor() {
         super();
-        let parameters: BooleanParameters = {
+        const parameters: BooleanParameters = {
             readonly: false,
             shown: true,
             trueContent: 'yes',
@@ -27,7 +27,7 @@ export class BooleanQuestionComponent extends QuestionComponent<ActivityBooleanQ
 
     public update(): void {
         try {
-            let parameters: BooleanParameters = JSON.parse(this.inputParameters);
+            const parameters: BooleanParameters = JSON.parse(this.inputParameters);
             this.readonly = parameters.readonly;
             this.question.shown = parameters.shown;
             this.question.falseContent = parameters.falseContent;

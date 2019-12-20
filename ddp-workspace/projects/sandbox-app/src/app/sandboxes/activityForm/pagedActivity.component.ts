@@ -7,7 +7,7 @@ import { ActivityServiceAgent } from 'ddp-sdk';
 })
 export class PagedActivityComponent {
     public instanceGuid: string;
-    public activityGuid: string = 'READONLY01';
+    public activityGuid = 'READONLY01';
 
     constructor(private serviceAgent: ActivityServiceAgent) { }
 

@@ -6,8 +6,8 @@ import { mergeMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserStateService {
-    public studyGuid: string = 'TESTSTUDY1';
-    private consentCode: string = '1S2G7MIPZT';
+    public studyGuid = 'TESTSTUDY1';
+    private consentCode = '1S2G7MIPZT';
     private _state: UserState;
 
     constructor(
@@ -29,7 +29,7 @@ export class UserStateService {
                                     return {
                                         consent: c,
                                         prequalifier: p
-                                    }
+                                    };
                                 })
                         );
                     } else {
@@ -99,8 +99,7 @@ export class UserStateService {
             map((x: any) => {
                 if (x && x.statusCode) {
                     return x.statusCode;
-                }
-                else {
+                } else {
                     return null;
                 }
             })

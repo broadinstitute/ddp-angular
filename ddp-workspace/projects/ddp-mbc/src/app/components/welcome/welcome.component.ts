@@ -20,7 +20,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService } from 'ddp-sdk';
             <img lazy-resource src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
             <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
-        
+
         <div class="Intro row">
             <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
                 <h1 class="Message-title Message-title--small" translate>
@@ -85,7 +85,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService } from 'ddp-sdk';
         <div class="row">
             <div class="Separator Separator--large"></div>
         </div>
-        
+
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
@@ -265,7 +265,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService } from 'ddp-sdk';
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
                         <a href="https://lobularbreastcancer.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-lbca.png" alt="Sarcoma Alliance Logo"></a>
                     </div>
-        
+
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
@@ -320,7 +320,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService } from 'ddp-sdk';
                     </span>
                     <br>
                     <span class="Color--blue Semibold" translate>
-                        Toolkit.Welcome.SixthBlock.TitlePt2  
+                        Toolkit.Welcome.SixthBlock.TitlePt2
                     </span>
                 </h1>
                 <p class="Message-text" translate>
@@ -334,7 +334,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService } from 'ddp-sdk';
                 Toolkit.Welcome.SixthBlock.CountMeInButton
             </a>
         </div>
-    </div> 
+    </div>
     `
 })
 export class WelcomeComponent implements OnInit {

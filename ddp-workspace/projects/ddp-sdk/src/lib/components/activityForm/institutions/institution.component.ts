@@ -27,7 +27,7 @@ import * as _ from 'underscore';
         <mat-form-field class="width">
             <input matInput
                    [(ngModel)]="institutionName"
-                   name="institution" 
+                   name="institution"
                    [placeholder]="isPhysician ? 'Institution (if any)' : 'Institution'"
                    [disabled]="readonly"
                    (input)="find($event.target.value)"
@@ -156,7 +156,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     public saveInstitution(): void {
         // setTimeout is necessary, because if we select value in <mat-autocomplete>,
         // <input> will call (change), then (optionSelected) in <mat-autocomplete>,
-        // we will send two request with different values, so, setTimeout postpones (change) 
+        // we will send two request with different values, so, setTimeout postpones (change)
         // handler and if we used <mat-autocomplete> cancels it in (optionSelected) handler,
         // or (change) will handle with small delay.
         this.timer = setTimeout(() => {
