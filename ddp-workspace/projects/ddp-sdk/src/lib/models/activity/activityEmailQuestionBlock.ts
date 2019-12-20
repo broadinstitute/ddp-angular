@@ -1,12 +1,10 @@
 import { ActivityTextQuestionBlock } from './activityTextQuestionBlock';
-import { ActivityEmailValidatorRule } from '../../services/activity/validators/activityEmailValidatorRule';
 
 export class ActivityEmailQuestionBlock extends ActivityTextQuestionBlock {
-  public email: string | null;
-  public emailConfirmation: string | null;
+  public email: string | null = null;
+  public emailConfirmation: string | null = null;
   constructor() {
     super();
-    this.validators.push(new ActivityEmailValidatorRule(this));
   }
 
   get answer(): string | null {
