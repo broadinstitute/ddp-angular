@@ -80,6 +80,12 @@
         "DetailsPlaceholder": {
             "PluralForm": "characters remaining",
             "SingularForm": "character remaining"
+        },
+        "EmailEntry": {
+          "ConfirmationEmailPlaceholder": "Confirm {{value}}",
+          "ConfirmationEmailMissingError": "Please re-enter email address",
+          "ConfirmationEmailMismatchError": "Email addresses need to match",
+          "EmailFormatError": "The email addresses entered have an incorrect format"
         }
     }
 }
