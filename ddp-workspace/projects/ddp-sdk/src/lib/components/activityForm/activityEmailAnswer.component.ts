@@ -4,7 +4,7 @@ import * as _ from 'underscore';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { ActivityEmailQuestionBlock } from '../../models/activity/activityEmailQuestionBlock';
 import { distinctUntilChanged, map, skip, startWith, tap } from 'rxjs/operators';
-import { NGXTranslateService } from 'ddp-sdk';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 @Component({
   selector: 'ddp-activity-email-answer',

@@ -1,6 +1,6 @@
 import { ActivityAbstractValidationRule } from './activityAbstractValidationRule';
 import { ActivityEmailQuestionBlock } from '../../../models/activity/activityEmailQuestionBlock';
-import { NGXTranslateService } from 'ddp-sdk';
+import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { take } from 'rxjs/operators';
 
 // Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
