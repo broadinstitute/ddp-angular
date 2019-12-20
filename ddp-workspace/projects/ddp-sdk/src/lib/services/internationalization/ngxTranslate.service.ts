@@ -7,11 +7,11 @@ import { mergeMap, merge } from 'rxjs/operators';
 export class NGXTranslateService {
     constructor(private translate: TranslateService) { }
 
-    public getTranslation(word: string | Array<string>): Observable<object | string> {
+    public getTranslation(word: string | Array<string>, interpolateParams?: Object): Observable<object | string> {
         return of(null).pipe(
             merge(this.translate.onLangChange),
             merge(this.translate.onDefaultLangChange),
-            mergeMap(() => this.translate.get(word))
+            mergeMap(() => this.translate.get(word, interpolateParams))
         );
     }
 }
