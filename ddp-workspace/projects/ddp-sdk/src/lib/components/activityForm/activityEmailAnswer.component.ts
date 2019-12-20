@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import * as _ from 'underscore';
 import { combineLatest, Subscription } from 'rxjs';
 import { ActivityEmailQuestionBlock } from '../../models/activity/activityEmailQuestionBlock';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, skip, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-activity-email-answer',
@@ -39,19 +39,22 @@ export class ActivityEmailAnswerComponent implements OnInit, OnChanges, OnDestro
   public formControls: FormControl[];
   private subscription: Subscription;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.formControls = [0, 1].map(_ => new FormControl({
       value: this.block.answer,
       disabled: this.readonly
     }, [Validators.email]));
-    this.subscription = combineLatest(this.formControls.map(ctrl => ctrl.valueChanges)).pipe(
+    this.subscription = combineLatest(
+      // need to emit some initial values; nothing emitted until all observable in combineLatest emit something
+      this.formControls.map(ctrl => ctrl.valueChanges.pipe(startWith(ctrl.value as string)))).pipe(
+      // the first one is just part of the setup
+      skip(1),
+      map(([email, confirmVal]) => [email.trim(), confirmVal.trim()]),
       tap(([email, confirmVal]) => {
         this.block.email = email;
         this.block.emailConfirmation = confirmVal;
       }),
-      map(([email, _]) => this.block.validate() ? email : null),
+      map(([email, _]) => this.block.validate() || !!email ? email : null),
       distinctUntilChanged(),
       tap((val) => this.valueChanged.emit(val))
     ).subscribe();
