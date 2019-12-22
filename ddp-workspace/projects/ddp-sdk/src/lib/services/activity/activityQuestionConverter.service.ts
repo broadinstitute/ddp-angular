@@ -21,7 +21,7 @@ import * as _ from 'underscore';
 import { InputType } from '../../models/activity/inputType';
 import { ActivityEmailQuestionBlock } from '../../models/activity/activityEmailQuestionBlock';
 import { ActivityEmailValidatorRule } from './validators/activityEmailValidatorRule';
-import { NGXTranslateService } from 'ddp-sdk';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 const DETAIL_MAXLENGTH = 255;
 @Injectable()
