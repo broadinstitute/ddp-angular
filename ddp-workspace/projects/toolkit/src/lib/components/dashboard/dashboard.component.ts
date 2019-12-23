@@ -107,7 +107,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
         const anno = this.announcements.getMessages(this.studyGuid)
             .pipe(
-                filter(x => x !== null && x.length !== 0),
+                filter(messages => !!messages),
                 map(messages => messages.map(message => ({
                     ...message,
                     shown: true
