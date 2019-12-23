@@ -35,7 +35,7 @@ import { filter, map } from 'rxjs/operators';
                     </section>
                 </ng-container>
             </ng-container>
-            <section class="section">
+            <section class="section dashboard-section">
                 <div class="content content_medium">
                     <div class="dashboard-content dashboard-content_table">
                         <ddp-user-activities [studyGuid]="studyGuid"
