@@ -137,7 +137,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-columns: 1fr;
-    grid-gap: 1rem;
+    grid-gap: 5rem;
     align-items: center;
     justify-items: center;
 }
@@ -255,10 +255,6 @@
         margin: 0 auto;
     }
 
-    .partners-group {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .feeds {
         grid-template-columns: 0.5fr 1fr;
     }
@@ -285,6 +281,11 @@
     .social-media-logos {
         justify-content: center;
     }
+
+    .partners-group {
+        grid-template-columns: repeat(1, minmax(auto, 300px));
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 850px) {
@@ -302,10 +303,6 @@
 
     .arrow {
         display: none;
-    }
-
-    .partners-group {
-        grid-template-columns: 1fr;
     }
 }
 

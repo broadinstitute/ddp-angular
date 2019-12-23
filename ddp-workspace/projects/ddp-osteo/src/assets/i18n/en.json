@@ -143,7 +143,12 @@
             "TitleImageAlt": "Molecule"
         },
         "PartnersSection": {
-            "Title": "Advocacy Partners"
+            "Title": "Advocacy Partners",
+            "ImagesAlts": {
+                "MBIAlt": "Make It Better Agents Logo",
+                "QUADWAlt": "The QuadW Foundation Logo",
+                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund Logo"
+            }
         },
         "SocialMediaSection": {
             "Title": "Follow us on social media",
