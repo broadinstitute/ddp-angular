@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: flex-start;
     grid-area: text;
-    padding: 1.25rem;
+    padding: 4rem 2rem 2rem 2rem;
     background-color: mat-color($app-theme, 550);
 }
 
@@ -51,11 +51,15 @@
     .gallery {
         margin: auto;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 0.35fr 0.2fr;
+        grid-template-rows: min-content 0.35fr 0.2fr;
         grid-template-areas:
             "image image"
             "text text"
             "controls controls";
+    }
+
+    .gallery__text {
+        padding: 2rem;
     }
 
     .control {
@@ -65,12 +69,12 @@
 
 @media screen and (max-width: 500px) {
     .gallery {
-        grid-template-rows: 1fr 0.6fr 0.2fr;
+        grid-template-rows: min-content 0.6fr 0.2fr;
     }
 }
 
 @media screen and (max-width: 400px) {
     .gallery {
-        grid-template-rows: 1fr 0.8fr 0.2fr;
+        grid-template-rows: min-content 0.8fr 0.2fr;
     }
 }

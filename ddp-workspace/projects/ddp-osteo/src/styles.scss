@@ -9,6 +9,7 @@
 @import "./styles/age-up-thank-you.scss";
 @import "./styles/session-expired.scss";
 @import "./styles/dialogs.scss";
+@import "./styles//static-page.scss";
 
 $custom-typography: mat-typography-config($font-family: "Source Sans Pro");
 
@@ -195,6 +196,7 @@ h4 {
 .Link {
     color: mat-color($app-theme, 250);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .Link:hover {

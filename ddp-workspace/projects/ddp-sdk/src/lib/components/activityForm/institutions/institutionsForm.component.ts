@@ -10,7 +10,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
     selector: 'ddp-institutions-form',
     template: `
     <div class="ddp-institutions-form">
-        <p [innerHTML]="block.titleText" class="ddp-institutions-form__title"></p>
+        <p *ngIf="block.titleText" class="ddp-institutions-form__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-institutions-form__subtitle" [innerHTML]="block.subtitleText"></p>
         <ddp-institution *ngIf="block.showFieldsInitially"
                          [value]="savedAnswers.length > 0 ? savedAnswers[0] : null"
@@ -40,11 +40,13 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                 </ddp-institution>
             </div>
         </ng-container>
-        <button *ngIf="block.allowMultiple && !readonly"
-                class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary"
-                (click)="addProvider()">
-            {{ block.addButtonText }}
-        </button>
+        <div class="ddp-institutions-form__button">
+            <button *ngIf="block.allowMultiple && !readonly"
+                    class="ButtonFilled ButtonFilled--white margin-5 button button_medium button_secondary button_new-item"
+                    (click)="addProvider()">
+                {{ block.addButtonText }}
+            </button>
+        <div>
     </div>`,
     styles: [`
     .ddp-institutions-form__additional-text {

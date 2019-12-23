@@ -30,12 +30,12 @@ export class GalleryComponent implements OnInit {
 
   public moveForward(): void {
     const item = this.gallery[this.selectedItem.id + 1];
-    item !== undefined ? this.selectedItem = item : this.selectedItem = this.gallery[0];
+    this.selectedItem = item !== undefined ? item : this.gallery[0];
   }
 
   public moveBack(): void {
     const item = this.gallery[this.selectedItem.id - 1];
     const length = this.gallery.length;
-    item !== undefined ? this.selectedItem = item : this.selectedItem = this.gallery[length - 1];
+    this.selectedItem = item !== undefined ? item : this.gallery[length - 1];
   }
 }

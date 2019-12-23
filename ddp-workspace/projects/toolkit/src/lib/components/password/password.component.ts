@@ -12,7 +12,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 
     <ng-template #newDesign>
         <main class="main">
-            <section class="section password-title-section">
+            <section class="section static-page-title-section">
                 <div class="content content_tight">
                     <h1 translate>Toolkit.Password.Title</h1>
                 </div>
