@@ -8,6 +8,9 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
     public regexPattern: string | null = null;
     public inputType: string | null = null;
     public textSuggestionSource: TextSuggestionProvider | null = null;
+    public confirmEntry: boolean;
+    public confirmPrompt: string | null = null;
+    public mismatchMessage: string | null = null;
 
     constructor() {
         super();

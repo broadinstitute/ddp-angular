@@ -1,5 +1,6 @@
 export enum InputType {
-    Text = 'text',
-    Essay = 'essay',
-    Signature = 'signature'
+    Text = 'TEXT',
+    Essay = 'ESSAY',
+    Signature = 'SIGNATURE',
+    Email = 'EMAIL'
 }
