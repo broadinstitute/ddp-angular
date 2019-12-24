@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange } from '@angular/core';
 import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
-import { InputType } from './../../models/activity/inputType';
+import { InputType } from '../../models/activity/inputType';
 import { TextSuggestion } from '../../models/activity/textSuggestion';
 import { SuggestionMatch } from '../../models/suggestionMatch';
 import { TextSuggestionProvider } from '../../models/activity/textSuggestionProvider';
@@ -13,7 +13,7 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
     selector: 'ddp-activity-text-answer',
     template: `
     <ddp-question-prompt [block]="block"></ddp-question-prompt>
-    <ng-container *ngIf="isTextQuestion(block)">
+    <ng-container *ngIf="isTextInputType(block)">
         <mat-form-field  class="example-input-field" [floatLabel]="block.label ? 'always' : null">
             <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
             <input matInput [(ngModel)]="block.answer"
@@ -36,7 +36,7 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
             </mat-autocomplete>
         </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="isEssayQuestion(block)">
+    <ng-container *ngIf="isEssayInputType(block)">
         <mat-form-field  class="example-input-field ddp-textarea-block" [floatLabel]="block.label ? 'always' : null">
           <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
           <textarea matInput matTextareaAutosize matAutosizeMinRows="3"
@@ -52,6 +52,9 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
                     class="ddp-textarea">
             </textarea>
         </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="isEmailInputType(block)">
+        <ddp-activity-email-input></ddp-activity-email-input>
     </ng-container>
     `,
     styles: [
@@ -87,14 +90,18 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
         this.valueChanged.emit(answer);
     }
 
-    public isTextQuestion(block: ActivityTextQuestionBlock): boolean {
-        return !block.inputType || block.inputType.toLowerCase() === InputType.Text
-            || block.inputType.toLowerCase() === InputType.Signature;
+    public isTextInputType(block: ActivityTextQuestionBlock): boolean {
+        return block.inputType === InputType.Text || block.inputType === InputType.Signature;
     }
 
-    public isEssayQuestion(block: ActivityTextQuestionBlock): boolean {
-        return !!block.inputType && block.inputType.toLowerCase() === InputType.Essay;
+    public isEssayInputType(block: ActivityTextQuestionBlock): boolean {
+        return block.inputType === InputType.Essay;
     }
+
+    public isEmailInputType(block: ActivityTextQuestionBlock): boolean {
+        return block.inputType === InputType.Email;
+    }
+
     // Turn the text suggestion into html snippet where text match surrounded by tag
     // no need to convert special characters like < or &. DOM does that for us
     public generateOptionInnerHtml(suggestion: TextSuggestion, tagName: string, styleClass?: string): string {
