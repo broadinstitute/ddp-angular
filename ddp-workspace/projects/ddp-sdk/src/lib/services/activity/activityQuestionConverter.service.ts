@@ -150,7 +150,7 @@ export class ActivityQuestionConverter {
         questionBlock.stableId = questionJson.stableId;
         questionBlock.displayNumber = displayNumber;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
-            questionJson.validationFailures.map(failure => failure.message) : [];
+            questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
 
         for (const newValidator of this.validatorBuilder.buildQuestionValidatorRule(questionJson, questionBlock)) {
             questionBlock.validators.push(newValidator);
