@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
 import { ActivityNumericQuestionBlock } from '../../models/activity/activityNumericQuestionBlock';
 import * as _ from 'underscore';
