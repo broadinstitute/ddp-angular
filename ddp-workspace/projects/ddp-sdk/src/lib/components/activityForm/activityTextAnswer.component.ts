@@ -54,7 +54,11 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
         </mat-form-field>
     </ng-container>
     <ng-container *ngIf="isEmailInputType(block)">
-        <ddp-activity-email-input></ddp-activity-email-input>
+        <ddp-activity-email-input [block]="block"
+                                  [readonly]="readonly"
+                                  [placeholder]="placeholder"
+                                  (valueChanged)="onChange($event)">
+        </ddp-activity-email-input>
     </ng-container>
     `,
     styles: [
