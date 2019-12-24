@@ -67,10 +67,10 @@ export class ActivityEmailInput implements OnChanges {
     }
 
     public onChange(answer: string): void {
-        const fieldsTouched = Object.values(this.emailForm.controls).every(control => control.touched);
+        const allFieldsTouched = Object.values(this.emailForm.controls).every(control => control.touched);
         if (this.emailForm.valid) {
             this.saveAnswer(answer);
-        } else if (fieldsTouched) {
+        } else if (allFieldsTouched) {
             this.saveAnswer(null);
         }
     }
