@@ -24,11 +24,11 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
                 [disabled]="readonly"
                 [attr.data-ddp-test]="'answer:' + block.stableId"
                 (input)="inputSubject.next(textInput.value)"
-                (change)="valueChanged.emit(textInput.value)"
+                (change)="onChange(textInput.value)"
                 [matAutocomplete]="autoCompleteFromSource"
                 #textInput="ngModel">
             <mat-autocomplete #autoCompleteFromSource="matAutocomplete"
-                (optionSelected)="valueChanged.emit(textInput.value)" class="autoCompletePanel">
+                (optionSelected)="onChange(textInput.value)" class="autoCompletePanel">
                     <mat-option *ngFor="let suggestion of filteredSuggestions$ | async"
                         [value]="suggestion.value" class="autoCompleteOption">
                         <span class="suggestion" [innerHTML]="generateOptionInnerHtml(suggestion,'span', 'suggestion-match')"></span>
@@ -47,7 +47,7 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
                     [placeholder]="placeholder || block.placeholder"
                     [disabled]="readonly"
                     [attr.data-ddp-test]="'answer:' + block.stableId"
-                    (change)="valueChanged.emit(textInput.value)"
+                    (change)="onChange(textInput.value)"
                     #textInput="ngModel"
                     class="ddp-textarea">
             </textarea>
@@ -67,7 +67,7 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
     @Input() block: ActivityTextQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
-    @Output() valueChanged: EventEmitter<string> = new EventEmitter();
+    @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public inputSubject = new Subject<string>();
     public filteredSuggestions$: Observable<TextSuggestion[]>;
 
@@ -80,6 +80,11 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
         if (changes.block && !changes.block.isFirstChange()) {
             this.initFilteredSuggestions();
         }
+    }
+
+    public onChange(value: string): void {
+        const answer = value ? value : null;
+        this.valueChanged.emit(answer);
     }
 
     public isTextQuestion(block: ActivityTextQuestionBlock): boolean {
