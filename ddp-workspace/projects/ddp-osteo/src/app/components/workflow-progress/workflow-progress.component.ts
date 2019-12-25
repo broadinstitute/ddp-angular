@@ -13,6 +13,7 @@ export class WorkflowProgressComponent implements OnChanges {
   @Input() public currentActivity: string;
   @Input() public workflowStartSectionsVisibility: number | null;
   public steps: Array<WorkflowStep> = [];
+  public shown = false;
   private readonly LOVEDONE = 'LOVEDONE';
   private readonly COMPLETE = 'COMPLETE';
 
@@ -45,6 +46,7 @@ export class WorkflowProgressComponent implements OnChanges {
         this.useMainSurveySteps(true);
       }
       this.setStepsStatuses(activities);
+      this.recalculateVisibility();
     });
   }
 
@@ -56,6 +58,7 @@ export class WorkflowProgressComponent implements OnChanges {
     } else if (this.workflowStartSectionsVisibility === 2) {
       this.useMainSurveySteps();
     }
+    this.recalculateVisibility();
   }
 
   private setStepsStatuses(activityInstances: Array<ActivityInstance>): void {
@@ -67,6 +70,12 @@ export class WorkflowProgressComponent implements OnChanges {
         step.isCompleted = true;
       }
     });
+  }
+
+  private recalculateVisibility(): void {
+    if (this.currentActivity) {
+      this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivity));
+    }
   }
 
   private useWorkflowStartSteps(): void {
