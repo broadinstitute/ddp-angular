@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Inject, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Inject } from '@angular/core';
 import { WorkflowStep } from '../../models/workflowStep.model';
 import { SessionMementoService, ConfigurationService, UserActivityServiceAgent, ActivityInstance } from 'ddp-sdk';
 import { of } from 'rxjs';
