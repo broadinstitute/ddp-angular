@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Inject } from '@angular/core';
+import { Component, Input, OnChanges, Inject, SimpleChanges } from '@angular/core';
 import { WorkflowStep } from '../../models/workflowStep.model';
 import { SessionMementoService, ConfigurationService, UserActivityServiceAgent, ActivityInstance } from 'ddp-sdk';
 import { of } from 'rxjs';
@@ -23,10 +23,12 @@ export class WorkflowProgressComponent implements OnChanges {
     @Inject('ddp.config') private configuration: ConfigurationService) { }
 
   public ngOnChanges(): void {
-    if (this.session.isAuthenticatedSession()) {
-      this.setupRegisteredUserSteps();
-    } else {
-      this.setupNewUserSteps();
+    if (this.currentActivity) {
+      if (this.session.isAuthenticatedSession()) {
+        this.setupRegisteredUserSteps();
+      } else {
+        this.setupNewUserSteps();
+      }
     }
   }
 
@@ -73,9 +75,7 @@ export class WorkflowProgressComponent implements OnChanges {
   }
 
   private recalculateVisibility(): void {
-    if (this.currentActivity) {
-      this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivity));
-    }
+    this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivity));
   }
 
   private useWorkflowStartSteps(): void {
