@@ -122,7 +122,7 @@ export class ActivityEmailInput implements OnChanges, OnDestroy {
                 this.block.confirmEntry && (this.block.confirmationValue = cleanedFormData.confirmEmail);
             }),
             // we only emit data we know server will accept
-            filter((_) => this.block.canPatch()),
+            filter((_) => this.emailForm.valid && this.block.canPatch()),
             map((cleanedFormData) => !!cleanedFormData.email ? cleanedFormData.email : ''),
             distinctUntilChanged(),
             tap((val) => this.valueChanged.emit(val))
