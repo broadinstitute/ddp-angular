@@ -1,7 +1,7 @@
 import { AbstractActivityQuestionBlock } from './abstractActivityQuestionBlock';
 
 export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionBlock {
-    private _answer: T | null = null;
+    protected _answer: T | null = null;
     public isRequired: boolean;
     public displayNumber: number | null;
 
