@@ -5,7 +5,7 @@ import { AnswerValue } from '../../models/activity/answerValue';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-activity-question',
@@ -69,6 +69,8 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
       this.block.serverValidationMessages$.pipe(startWith(this.block.serverValidationMessages)),
       localValidatorMsg$]
     ).pipe(
+        // delay() needed to "prevent expression has changed after it was checked error"
+      delay(0),
       map(([serverMsg, localMsg]) => {
         const msgs: string[] = [];
         serverMsg && msgs.push(...serverMsg);
