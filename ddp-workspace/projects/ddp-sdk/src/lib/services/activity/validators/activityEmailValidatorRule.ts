@@ -5,6 +5,7 @@ import { ActivityTextQuestionBlock } from '../../../models/activity/activityText
 
 // Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
 // const EMAIL_REGEXP =
+// tslint:disable-next-line:max-line-length
 // /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 // Expression being used in server to test email format
 export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
@@ -12,7 +13,7 @@ export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
 const TRANSLATION_KEYS = ['SDK.EmailEntry.InvalidEmail'];
 
 export class ActivityEmailValidatorRule extends ActivityAbstractValidationRule {
-  private emailFormatErrorMessage: string;
+  private badEmailMessage: string;
 
   constructor(
     question: ActivityTextQuestionBlock, translate: NGXTranslateService) {
@@ -21,7 +22,7 @@ export class ActivityEmailValidatorRule extends ActivityAbstractValidationRule {
     )
       .pipe(take(1))
       .subscribe((vals) => {
-        this.emailFormatErrorMessage = vals[TRANSLATION_KEYS[0]];
+        this.badEmailMessage = vals[TRANSLATION_KEYS[0]];
       });
   }
 
@@ -38,7 +39,7 @@ export class ActivityEmailValidatorRule extends ActivityAbstractValidationRule {
       this.result = this.textEmailBlock().mismatchMessage;
       return false;
     } else if (!EMAIL_REGEXP.test(email) || !EMAIL_REGEXP.test(confirmation)) {
-      this.result = this.emailFormatErrorMessage;
+      this.result = this.badEmailMessage;
       return false;
     } else {
       return true;
