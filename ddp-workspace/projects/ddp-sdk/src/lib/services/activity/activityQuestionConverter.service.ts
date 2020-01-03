@@ -18,6 +18,9 @@ import { ActivityNumericQuestionBlock } from '../../models/activity/activityNume
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
+import { InputType } from '../../models/activity/inputType';
+import { ActivityEmailValidatorRule } from './validators/activityEmailValidatorRule';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 const DETAIL_MAXLENGTH = 255;
 @Injectable()
@@ -27,7 +30,8 @@ export class ActivityQuestionConverter {
     constructor(
         private validatorBuilder: ActivityValidatorBuilder,
         private suggestionBuilder: ActivitySuggestionBuilder,
-        private logger: LoggingService) {
+        private logger: LoggingService,
+        private translate: NGXTranslateService) {
         this.questionBuilders = [
             {
                 type: 'BOOLEAN', func: (questionJson) => {
@@ -58,6 +62,9 @@ export class ActivityQuestionConverter {
                     textBlock.confirmPrompt = questionJson.confirmPrompt;
                     textBlock.mismatchMessage = questionJson.mismatchMessage;
                     textBlock.inputType = questionJson.inputType;
+                    if (questionJson.inputType === InputType.Email) {
+                        textBlock.validators.push(new ActivityEmailValidatorRule(textBlock, this.translate));
+                    }
                     textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
                     return textBlock;
                 }
@@ -125,7 +132,7 @@ export class ActivityQuestionConverter {
                 }
             },
             {
-                type: 'AGREEMENT', func: (questionJson) => {
+                type: 'AGREEMENT', func: () => {
                     return new ActivityAgreementQuestionBlock();
                 }
             }
