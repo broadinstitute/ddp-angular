@@ -5,7 +5,6 @@ import { ValidationMessage } from '../validationMessage.component';
 import { MatCardModule, MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
-
 import { of, Subject, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
@@ -362,5 +361,4 @@ const buildPerfectAddress = (): Address => {
   perfectAddress.phone = '6175555555';
   return perfectAddress;
 };
-
 
