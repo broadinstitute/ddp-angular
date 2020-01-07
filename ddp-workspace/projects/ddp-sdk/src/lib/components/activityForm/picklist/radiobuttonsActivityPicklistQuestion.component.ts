@@ -21,7 +21,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                     <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
                 </mat-radio-button>
                 <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
-                    <mat-form-field>
+                    <mat-form-field class="ddp-option-details-field">
                         <input matInput
                                (change)="detailTextChanged($event.target.value, option.stableId)"
                                (input)="updateCharactersLeftIndicator(option.stableId, $event.target.value)"
