@@ -2169,6 +2169,10 @@ p.Medium.UnorderedItem {
   margin-left: -15px;
 }
 
+ddp-activity-composite-answer .ddp-answer-container {
+  margin-left: 5px;
+}
+
 @media (min-width: 1200px) {
   .ddp-answer-container {
     ddp-activity-answer {
@@ -2362,6 +2366,26 @@ p.Medium.UnorderedItem {
 .mat-form-field-label-wrapper {
     font-weight: 300;
     font-size: 1rem;
+}
+
+.ddp-option-details-field.mat-form-field {
+  margin-bottom: 0 !important;
+  margin-top: 1.8em !important;
+}
+
+.ddp-option-details-field.mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.ddp-option-details-field .mat-form-field-label {
+  top: 0 !important;
+  color: #717174 !important;
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.ddp-option-details-field.mat-form-field-should-float .mat-form-field-label {
+  transform: unset !important;
+  color: #717174 !important;
 }
 
 .mat-input-placeholder {
@@ -2678,6 +2702,10 @@ button.Footer-link {
     .col-xs-8.col-sm-offset-2 {
         margin-left: 16.666%;
     }
+}
+
+.MedicalTopBar {
+  margin-top: 4px;
 }
 
 .Container {
