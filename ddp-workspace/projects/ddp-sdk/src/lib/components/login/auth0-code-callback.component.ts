@@ -32,14 +32,20 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
         if (authCode) {
             this.log.logEvent(this.LOG_SOURCE, 'Will login to ' + this.configuration.localRegistrationUrl + ' using code ' + authCode);
 
-            const tempSession = this.session.isTemporarySession() ? this.session.session : null;
+            const value = sessionStorage.getItem('localAuthParams') || "{}";
+            const params: object = JSON.parse(value);
+            sessionStorage.removeItem('localAuthParams');
+
             const registrationPayload = {
                 auth0ClientId: this.configuration.auth0ClientId,
                 studyGuid: this.configuration.studyGuid,
                 auth0Code: authCode,
                 redirectUri: this.configuration.auth0CodeRedirect,
-                ...(tempSession && {
-                    tempUserGuid: tempSession.userGuid
+                ...(params['temp_user_guid'] && {
+                    tempUserGuid: params['temp_user_guid']
+                }),
+                ...(params['invitation_id'] && {
+                    invitationId: params['invitation_id']
                 })
             };
 
