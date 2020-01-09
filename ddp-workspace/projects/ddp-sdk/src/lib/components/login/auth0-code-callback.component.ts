@@ -32,10 +32,7 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
         if (authCode) {
             this.log.logEvent(this.LOG_SOURCE, 'Will login to ' + this.configuration.localRegistrationUrl + ' using code ' + authCode);
 
-            const value = sessionStorage.getItem('localAuthParams') || "{}";
-            const params: object = JSON.parse(value);
-            sessionStorage.removeItem('localAuthParams');
-
+            const params = this.consumeLocalAuthParams();
             const registrationPayload = {
                 auth0ClientId: this.configuration.auth0ClientId,
                 studyGuid: this.configuration.studyGuid,
@@ -64,6 +61,12 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.anchor.unsubscribe();
+    }
+
+    private consumeLocalAuthParams(): object {
+        const params = sessionStorage.getItem('localAuthParams') || '{}';
+        sessionStorage.removeItem('localAuthParams');
+        return JSON.parse(params);
     }
 }
 
