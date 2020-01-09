@@ -114,6 +114,9 @@ export class Auth0AdapterService implements OnDestroy {
                 ...additionalParams
             })
         };
+        if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem('localAuthParams', JSON.stringify(params));
+        }
         this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
