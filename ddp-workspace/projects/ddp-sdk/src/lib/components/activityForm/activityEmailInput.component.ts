@@ -1,9 +1,16 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
-import { EMAIL_REGEXP } from '../../services/activity/validators/activityEmailValidatorRule';
-import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, skip, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { InstantErrorStateMatcher } from '../../utility/ui/instantErrorStateMatcher';
+
+// Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
+// const EMAIL_REGEXP =
+// tslint:disable-next-line:max-line-length
+// /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+// Expression being used in server to test email format
+export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
 
 @Component({
     selector: 'ddp-activity-email-input',
@@ -30,6 +37,7 @@ import { Subscription } from 'rxjs';
                            type="email"
                            formControlName="confirmEmail"
                            class="email-input-field"
+                           [errorStateMatcher]="errorStateMatcher"
                            [minlength]="block.minLength"
                            [maxlength]="block.maxLength"
                            [placeholder]="placeholder || block.placeholder"
@@ -58,6 +66,8 @@ export class ActivityEmailInput implements OnChanges, OnDestroy {
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public emailForm: FormGroup;
     private subscription: Subscription;
+    // enable confirm input field to start showing errors without being touched first
+    public errorStateMatcher = new InstantErrorStateMatcher();
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -87,14 +97,13 @@ export class ActivityEmailInput implements OnChanges, OnDestroy {
         const EmailPatternValidator = Validators.pattern(EMAIL_REGEXP);
 
         if (this.block.confirmEntry) {
-
             this.emailForm = this.formBuilder.group({
                 email: new FormControl({
                     value: this.block.answer,
                     disabled: this.readonly
                 }, EmailPatternValidator),
                 confirmEmail: new FormControl({
-                    value: this.block.confirmationValue,
+                    value: this.block.answer,
                     disabled: this.readonly
                 }, EmailPatternValidator)
             }, {
@@ -117,14 +126,12 @@ export class ActivityEmailInput implements OnChanges, OnDestroy {
                 );
                 return cleanedFormData;
             }),
-            tap((cleanedFormData) => {
-                this.block.setAnswer(cleanedFormData.email, false);
-                this.block.confirmEntry && (this.block.confirmationValue = cleanedFormData.confirmEmail);
-            }),
-            // we only emit data we know server will accept
-            filter((_) => this.emailForm.valid && this.block.canPatch()),
-            map((cleanedFormData) => !!cleanedFormData.email ? cleanedFormData.email : ''),
+            // first time is just initialization
+            skip(1),
+            // it's either valid email or a null
+            map((cleanedFormData) => this.emailForm.valid && cleanedFormData.email ? cleanedFormData.email : null),
             distinctUntilChanged(),
+            tap((val) => this.block.setAnswer(val, false)),
             tap((val) => this.valueChanged.emit(val))
         ).subscribe();
     }
