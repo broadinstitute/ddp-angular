@@ -126,6 +126,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public activityCodeChanged(code: string): void {
-        this.headerConfig.currentActivity = code;
+        this.headerConfig.currentActivityCode = code;
     }
 }

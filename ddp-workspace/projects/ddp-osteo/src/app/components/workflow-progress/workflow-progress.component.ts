@@ -10,7 +10,7 @@ import { take, filter } from 'rxjs/operators';
   styleUrls: ['./workflow-progress.component.scss']
 })
 export class WorkflowProgressComponent implements OnChanges {
-  @Input() public currentActivity: string;
+  @Input() public currentActivityCode: string;
   @Input() public workflowStartSectionsVisibility: number | null;
   public steps: Array<WorkflowStep> = [];
   public shown = false;
@@ -23,7 +23,7 @@ export class WorkflowProgressComponent implements OnChanges {
     @Inject('ddp.config') private configuration: ConfigurationService) { }
 
   public ngOnChanges(): void {
-    if (this.currentActivity) {
+    if (this.currentActivityCode) {
       if (this.session.isAuthenticatedSession()) {
         this.setupRegisteredUserSteps();
       } else {
@@ -33,7 +33,7 @@ export class WorkflowProgressComponent implements OnChanges {
   }
 
   public isCurrentStep(activities: Array<string>): boolean {
-    return activities.includes(this.currentActivity);
+    return activities.includes(this.currentActivityCode);
   }
 
   private setupRegisteredUserSteps(): void {
@@ -75,7 +75,7 @@ export class WorkflowProgressComponent implements OnChanges {
   }
 
   private recalculateVisibility(): void {
-    this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivity));
+    this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivityCode));
   }
 
   private useWorkflowStartSteps(): void {
