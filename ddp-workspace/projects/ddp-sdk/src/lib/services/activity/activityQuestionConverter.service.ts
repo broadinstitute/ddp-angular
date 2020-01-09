@@ -18,8 +18,6 @@ import { ActivityNumericQuestionBlock } from '../../models/activity/activityNume
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
-import { InputType } from '../../models/activity/inputType';
-import { ActivityEmailValidatorRule } from './validators/activityEmailValidatorRule';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 const DETAIL_MAXLENGTH = 255;
@@ -62,9 +60,6 @@ export class ActivityQuestionConverter {
                     textBlock.confirmPrompt = questionJson.confirmPrompt;
                     textBlock.mismatchMessage = questionJson.mismatchMessage;
                     textBlock.inputType = questionJson.inputType;
-                    if (questionJson.inputType === InputType.Email) {
-                        textBlock.validators.push(new ActivityEmailValidatorRule(textBlock, this.translate));
-                    }
                     textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
                     return textBlock;
                 }
