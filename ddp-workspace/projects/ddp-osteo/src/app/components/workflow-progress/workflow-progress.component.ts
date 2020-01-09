@@ -10,7 +10,10 @@ import { take, filter } from 'rxjs/operators';
   styleUrls: ['./workflow-progress.component.scss']
 })
 export class WorkflowProgressComponent implements OnChanges {
+  // Receives current activity code to determine current step
   @Input() public currentActivityCode: string;
+  // Receives visible sections count on the workflow start page,
+  // to determine what workflow a user chose
   @Input() public workflowStartSectionsVisibility: number | null;
   public steps: Array<WorkflowStep> = [];
   public shown = false;
