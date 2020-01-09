@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementMessage } from './../../models/announcementMessage';
+import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -25,7 +25,7 @@ import { filter, map } from 'rxjs/operators';
                         <div class="content content_tight">
                             <div class="dashboard-content">
                                 <div class="infobox infobox_dashboard">
-                                    <button mat-icon-button (click)="closeMessage(i)" class="close-button">
+                                    <button *ngIf="!announcement.permanent" mat-icon-button (click)="closeMessage(i)" class="close-button">
                                         <mat-icon class="close">clear</mat-icon>
                                     </button>
                                     <div [innerHTML]="announcement.message"></div>
@@ -69,7 +69,7 @@ import { filter, map } from 'rxjs/operators';
                             <ng-container *ngFor="let announcement of announcementMessages; let i = index">
                                 <ng-container *ngIf="announcement.shown">
                                     <section class="PageContent-section Dashboard-info-section">
-                                        <button mat-icon-button (click)="closeMessage(i)" class="close-button">
+                                        <button *ngIf="!announcement.permanent" mat-icon-button (click)="closeMessage(i)" class="close-button">
                                             <mat-icon class="close">clear</mat-icon>
                                         </button>
                                         <div class="Announcements-section" [innerHTML]="announcement.message">
@@ -92,7 +92,7 @@ import { filter, map } from 'rxjs/operators';
 export class DashboardComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public useRedesign: boolean;
-    public announcementMessages: Array<AnnouncementMessage>;
+    public announcementMessages: Array<AnnouncementDashboardMessage>;
     private anchor: Subscription;
 
     constructor(
@@ -105,9 +105,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
-        const anno = this.announcements.getMessage(this.studyGuid)
+        const anno = this.announcements.getMessages(this.studyGuid)
             .pipe(
-                filter(x => x !== null && x.length !== 0),
+                filter(messages => !!messages),
                 map(messages => messages.map(message => ({
                     ...message,
                     shown: true

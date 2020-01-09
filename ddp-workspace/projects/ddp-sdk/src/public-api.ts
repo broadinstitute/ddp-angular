@@ -33,6 +33,7 @@ export * from './lib/models/auth0-mode';
 export * from './lib/models/temporaryUser';
 export * from './lib/models/userProfile';
 export * from './lib/models/participant';
+export * from './lib/models/announcementMessage';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
