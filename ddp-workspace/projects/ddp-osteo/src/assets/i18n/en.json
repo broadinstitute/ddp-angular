@@ -589,6 +589,9 @@
         "Title": {
             "Default": "Osteosarcoma Project",
             "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
         }
     }
 }
