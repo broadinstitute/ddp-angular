@@ -22,10 +22,9 @@ import { ActivitySection } from '../../models/activity/activitySection';
 import { GoogleAnalytics } from '../../models/googleAnalytics';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
-import { ValidationFailure } from '../../models/activity/validationFailure';
 
 @Component({
     selector: 'ddp-activity',
@@ -247,7 +246,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         combineLatest((this.embeddedComponentBusy$ as Observable<boolean>[])
             .concat([this.submissionManager.isAnswerSubmissionInProgress$]))
             .pipe(
-                map(latestVals => latestVals.some(val => val)))
+                map(latestVals => latestVals.some(val => val)),
+                // fix Angular changed-after-check problem
+                delay(0))
             .subscribe(this.isPageBusy);
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
@@ -307,10 +308,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
             this.scrollToTop();
-            this.resetValidationState();
+            // enable any validation errors to be visible
+            this.validationRequested = true;
             this.sendConsentAnalytics();
-            this.currentSectionIndex = nextIndex;
-            this.visitedSectionIndexes[nextIndex] = true;
+            this.currentSection.validate();
+            if (this.currentSection.valid) {
+                this.resetValidationState();
+                this.currentSectionIndex = nextIndex;
+                this.visitedSectionIndexes[nextIndex] = true;
+            }
         }
     }
 
