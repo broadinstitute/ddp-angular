@@ -18,7 +18,6 @@ import { ActivityNumericQuestionBlock } from '../../models/activity/activityNume
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
-import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 const DETAIL_MAXLENGTH = 255;
 @Injectable()
@@ -28,8 +27,7 @@ export class ActivityQuestionConverter {
     constructor(
         private validatorBuilder: ActivityValidatorBuilder,
         private suggestionBuilder: ActivitySuggestionBuilder,
-        private logger: LoggingService,
-        private translate: NGXTranslateService) {
+        private logger: LoggingService) {
         this.questionBuilders = [
             {
                 type: 'BOOLEAN', func: (questionJson) => {
