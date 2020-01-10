@@ -13,10 +13,10 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
     public mismatchMessage: string | null = null;
 
     constructor() {
-        super();
+      super();
     }
 
     public get questionType(): QuestionType {
-        return QuestionType.Text;
+      return QuestionType.Text;
     }
 }

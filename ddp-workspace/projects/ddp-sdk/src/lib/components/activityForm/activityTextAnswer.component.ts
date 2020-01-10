@@ -90,7 +90,9 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
     }
 
     public onChange(value: string): void {
-        const answer = value ? value : null;
+        // turns out server will not accept null for text questions
+        // send emit empty string for falsy values
+        const answer = value ? value : '';
         this.valueChanged.emit(answer);
     }
 

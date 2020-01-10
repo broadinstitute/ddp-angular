@@ -125,7 +125,7 @@ export class ActivityQuestionConverter {
                 }
             },
             {
-                type: 'AGREEMENT', func: (questionJson) => {
+                type: 'AGREEMENT', func: () => {
                     return new ActivityAgreementQuestionBlock();
                 }
             }
