@@ -1,10 +1,10 @@
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { AddressInputService } from './addressInput.service';
 import { CountryService } from '../../services/addressCountry.service';
 import { AddressService } from '../../services/address.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { combineLatest, of, timer } from 'rxjs';
-import { bufferCount, combineAll, startWith } from 'rxjs/operators';
+import { bufferCount, combineAll, skip, startWith, tap } from 'rxjs/operators';
 import { Address } from '../../models/address';
 import { fail } from 'assert';
 
@@ -118,27 +118,36 @@ describe('AddressInputService', () => {
     ais.inputAddress$.next(testAddress);
   });
 
-  it('Setting input address updates does not push address to addressOutputStream$', done => {
-    const testAddress = new Address();
-    testAddress.name = 'Rapunzel';
-    testAddress.street1 = '1 Mockingbird Lane';
-    testAddress.street2 = '2nd Floor';
-    testAddress.country = 'US';
-    testAddress.state = 'AK';
-    testAddress.zip = '90120';
-    testAddress.phone = '867-5309';
-    testAddress.city = 'Fairbanks';
-    testAddress.guid = '123';
+  it('Generate address to output stream from form updates', fakeAsync(() => {
+    const addressData = {
+      name : 'Rapunzel',
+      street1 : '1 Mockingbird Lane',
+      street2 : '2nd Floor',
+      country : 'US',
+      state : 'AK',
+      zip: '90120',
+      phone: '867-5309',
+      city: 'Fairbanks',
+      guid: '123'
+    };
+    const testAddress = new Address(addressData);
 
-    ais.addressOutputStream$.subscribe(address => fail('An address was emitted. This should not happen'));
-
-    timer(1000).subscribe(val => {
-      expect(1).toBe(1);
-      done();
+    let counter = 0;
+    let lastAddressFromStream: Address = null;
+    ais.addressOutputStream$.subscribe(address => {
+      ++counter;
+      lastAddressFromStream = address;
     });
 
-    // push an input address
-    ais.inputAddress$.next(testAddress);
-  });
+    // update form
+    Object.entries(addressData).forEach((entry: any[]) => {
+      ais.addressForm.patchValue({[entry[0]]: entry[1]});
+    });
+    // move clock forward
+    tick(Object.entries(addressData).length * 1000);
+
+    expect(counter).toEqual(Object.entries(addressData).length);
+    expect(lastAddressFromStream).toEqual(testAddress);
+  }));
 
 });
