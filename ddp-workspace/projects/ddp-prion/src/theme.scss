@@ -1,5 +1,15 @@
 @import '~@angular/material/theming';
-@include mat-core();
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Raleway, sans-serif'
+);
+
+
+//Override typography for all Angular Material
+@include angular-material-typography($custom-typography);
+
+//Override typography in core CSS
+@include mat-core($custom-typography);
 
 $md-primary: (
     50 : #fdf6e3,
