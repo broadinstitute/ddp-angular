@@ -22,7 +22,7 @@ body {
 }
 
 body {
-    font-family: 'Raleway', sans-serif !important;
+    font-family: 'Raleway', sans-serif;
 }
 
 @media only screen and (min-width: 1026px) {
@@ -39,13 +39,11 @@ body {
 
 h1.Title {
     font-size: 1.8rem;
-    font-family: 'Raleway', sans-serif;
     font-weight: 700;
 }
 
 h2.Title {
     font-size: 1.5rem;
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     margin-bottom: 15px;
 }
@@ -53,14 +51,12 @@ h2.Title {
 h3.Subtitle {
     font-size: 1.3rem;
     line-height: 1.8rem;
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     padding-top: 5px;
 }
 
 h4.Subtitle {
     font-size: 1rem;
-    font-family: 'Raleway', sans-serif;
     font-weight: 700;
     padding-top: 20px;
     color: #717174;
@@ -69,14 +65,12 @@ h4.Subtitle {
 
 p {
     font-size: 1rem;
-    font-family: 'Raleway', sans-serif;
     line-height: 1.5rem;
     font-weight: 400 !important;
 }
 
 .LegalAgePrompt {
     font-size: 1rem;
-    font-family: 'Raleway', sans-serif;
     line-height: 1.5rem;
     font-weight: 400 !important;
     color: #333 !important;
@@ -105,7 +99,6 @@ a:focus {
 
 //Button styles
 .Button {
-    font-family: 'Raleway', sans-serif;
     border-radius: 2px;
     font-weight: 500;
     font-size: 1rem;
@@ -220,7 +213,6 @@ a:focus {
 .ButtonFilled {
     border: 1px solid #F2B816;
     border-radius: 2px;
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: 1rem;
     padding: 12px 30px;
@@ -249,7 +241,6 @@ a:focus {
 
 //Consent submit button and back to dashboard button
 #submitButton, #closeButton {
-    font-family: 'Raleway', sans-serif !important;
     background-color: #82B547 !important;
     border-color: #82B547 !important;
     padding: 7px 30px !important;
@@ -264,7 +255,6 @@ a:focus {
 //Next button and previous button
 #nextButton,  #prevButton{
     background: transparent !important;
-    font-family: 'Raleway', sans-serif !important;
     padding: 7px 30px 7px 30px !important;
     font-weight: 500 !important;
     box-shadow: none;
@@ -634,7 +624,6 @@ mat-icon.ddp-dropdown-arrow {
 .Nav-item {
     display: inline;
     padding: 0 0 0 30px;
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
 }
 
@@ -658,7 +647,6 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .Header {
-    font-family: 'Raleway', sans-serif;
     width: 100%;
     height: auto;
     z-index: 1000;
@@ -759,7 +747,6 @@ mat-icon.ddp-dropdown-arrow {
 
 .mat-toolbar {
     font-size: 15px !important;
-    font-family: 'Raleway', sans-serif !important;
 }
 
 @media only screen and (min-width: 1026px) {
@@ -913,7 +900,6 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .PageHeader-title {
-    font-family: 'Raleway', sans-serif;
     margin-left: -15px;
     margin-top: 20px;
     margin-bottom: 0;
@@ -1246,7 +1232,6 @@ ul {
 .Link {
     color: mat-color($app-theme, 600) !important;
     cursor: pointer;
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: 1rem;
     padding: 20px 0 0 0 !important;
@@ -1661,7 +1646,7 @@ ul {
     line-height: 2.5rem !important;
     height: 35px !important;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -1886,13 +1871,14 @@ ul {
 
 select {
     width: 100%;
-    height: 35px;
+    height: 40px;
     transition: all .3s;
     border: 1px solid #cecece !important;
     font-size: 0.9rem;
     padding: 0 10px 0 10px;
     margin: 5px 0 30px 0;
     background-color: rgb(248, 248, 248);
+    color: #717174;
 }
 
 select option {
@@ -1979,10 +1965,6 @@ select:-webkit-autofill {
     font-weight: 400;
 }
 
-.mat-input-element {
-  caret-color: unset !important;
-}
-
 .mat-form-field-underline {
   visibility: hidden;
 }
@@ -2029,10 +2011,6 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
     }
 }
 
-.ddp-question-neutral {
-    color: mat-color($app-theme, 800) !important;
-}
-
 .ddp-required-question-prompt {
     font-weight: 300;
     color: #333 !important;
@@ -2041,7 +2019,6 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
 .ddp-list {
     p {
         font-size: 1rem;
-        font-family: 'Raleway', sans-serif;
         line-height: 1.5rem;
         font-weight: 400 !important;
         color: mat-color($app-theme, 1700);
@@ -2056,6 +2033,10 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
   p.Medium.UnorderedItem {
     color: #717174;
   }
+}
+
+p.ddp-question-prompt{
+  margin-bottom: 0 !important;
 }
 
 .BulletItem {
@@ -2074,14 +2055,6 @@ p.Input-label {
   font-size: 0.9rem;
   font-weight: 400;
   margin-bottom: 0;
-}
-
-p.Medium.UnorderedItem {
-  color: #717174;
-}
-
-[data-ddp-test="answer:prion_medical_doctor_diagnosed"], [data-ddp-test="answer:prion_medical_participant_belief"] {
-  flex-direction: column !important;
 }
 
 .ddp-dropdown {
@@ -2207,8 +2180,6 @@ ddp-activity-composite-answer .ddp-answer-container {
   }
 }
 
-
-
 .ddp-close-button {
     margin-left: auto;
     cursor: pointer;
@@ -2267,7 +2238,6 @@ ddp-activity-composite-answer .ddp-answer-container {
 
 .dashboard-activity-button {
     font-size: 0.9rem;
-    font-family: inherit;
     font-weight: 400;
     background: none;
     border: none;
@@ -2327,12 +2297,23 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .mat-checkbox-label {
-    color: mat-color($app-theme, 800);
-    font-weight: 300;
+    color: #717174;
+    font-weight: 400;
+}
+
+.ddp-picklist-option-list-item .mat-checkbox-layout .mat-checkbox-label {
+  font-size: 0.9rem;
+  line-height: 1.4rem;
 }
 
 .mat-select-placeholder {
     color: mat-color($app-theme, 1700);
+}
+
+.mat-checkbox-frame {
+  border-color: #CECECE;
+  border-width: 1px !important;
+  border-radius: 1px !important;
 }
 
 .mat-radio-label {
@@ -2368,22 +2349,21 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-size: 1rem;
 }
 
-.ddp-option-details-field.mat-form-field {
+.ddp-option-details-field.mat-form-field, .ddp-picklist-option-list-item .mat-form-field {
   margin-bottom: 0 !important;
-  margin-top: 1.8em !important;
+  margin-top: 20px !important;
 }
 
-.ddp-option-details-field.mat-form-field .mat-form-field-wrapper {
+.ddp-option-details-field.mat-form-field .mat-form-field-wrapper, .ddp-picklist-option-list-item .mat-form-field .mat-form-field-wrapper {
   padding-bottom: 0 !important;
 }
 
-.ddp-option-details-field .mat-form-field-label {
+.ddp-option-details-field .mat-form-field-label, .ddp-picklist-option-list-item .mat-form-field-label {
   top: 0 !important;
   color: #717174 !important;
-  font-family: 'Raleway', sans-serif !important;
 }
 
-.ddp-option-details-field.mat-form-field-should-float .mat-form-field-label {
+.ddp-option-details-field.mat-form-field-should-float .mat-form-field-label, .ddp-picklist-option-list-item .mat-form-field-should-float .mat-form-field-label {
   transform: unset !important;
   color: #717174 !important;
 }
@@ -2398,12 +2378,9 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-size: 0.75rem;
 }
 
-.mat-checkbox-frame {
-    border-color: mat-color($app-theme, 900);
-}
-
 .mat-radio-outer-circle {
-    border-color: mat-color($app-theme, 900);
+    border-color: #CECECE;
+    border-width: 1px !important;
 }
 
 .mat-list-item-content {
@@ -2418,7 +2395,6 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-size: 0.9rem !important;
     font-weight: 400;
     margin-bottom: 0;
-    font-family: 'Raleway', sans-serif;
 }
 
 .mat-form-field-infix {
@@ -2430,8 +2406,9 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .mat-input-element {
-    height: 2.0rem !important;
-    font-size: 1rem;
+  caret-color: unset !important;
+  height: 2.0rem !important;
+  font-size: 1rem;
 }
 
 input.mat-input-element {
@@ -2461,7 +2438,7 @@ input.mat-input-element {
 }
 
 .mat-radio-checked .mat-radio-inner-circle {
-    transform: scale(.8) !important;
+    transform: scale(.4) !important;
 }
 
 .mat-menu-item {
@@ -2486,28 +2463,25 @@ input.mat-input-element {
 }
 
 .mat-checkbox-inner-container {
-    width: 20px !important;
-    height: 20px !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 .mat-input-element {
-    font-weight: 100 !important;
+    font-weight: 400 !important;
 }
 
 .mat-select {
     font-weight: 100 !important;
 }
 
-.ddp-helper {
-    font-size: 0.8rem !important;
-    color: mat-color($app-theme, 800) !important;
+p.ddp-helper {
+    display: none !important;
 }
 
 .ddp-counter-color {
     color: mat-color($app-theme, 600) !important;
 }
-
-
 
 .mat-option-text {
     line-height: 16px !important;
@@ -2662,7 +2636,6 @@ input.mat-input-element {
     text-align: right;
     transition: color 0.2s linear;
     padding-left: 30px;
-    font-family: 'Raleway', sans-serif;
 }
 
 .Footer-link:hover {
@@ -2767,7 +2740,6 @@ button.Footer-link {
 
 .List-question {
     font-size: 1.1rem;
-    font-family: 'Raleway', sans-serif;
     line-height: 1.6rem;
     font-weight: 500;
 }
@@ -2811,11 +2783,9 @@ button.Footer-link {
 }
 
 .Input-label.SubLabel {
+  display: inline-block;
+  max-width: 100%;
   color: #717174;
-}
-
-.ddp-answer-container p.ddp-question-prompt{
-    margin-bottom: 0;
 }
 
 .Input-checkLabel {
@@ -2987,17 +2957,14 @@ button.Footer-link {
 }
 
 .Normal {
-    font-family: 'Raleway', sans-serif;
     font-weight: 400!important;
 }
 
 .Medium {
-    font-family: 'Raleway', sans-serif;
     font-weight: 500 !important;
 }
 
 p.Medium {
-    font-family: 'Raleway', sans-serif;
     font-weight: 500 !important;
 }
 
@@ -3046,6 +3013,10 @@ p.Medium {
 .TopMargin40 {
     width: 100%;
     margin: 40px 0 0 0;
+}
+
+.BottomMargin10 {
+  margin-bottom: 10px !important;
 }
 
 .Margin10 {
@@ -3133,7 +3104,6 @@ p.Medium {
 .tooltip .tooltip-inner {
     background-color: #efefef !important;
     color: #717174;
-    font-family: 'Raleway', sans-serif !important;
     font-size: 0.7rem;
     max-width: 250px !important;
 }
@@ -3184,7 +3154,6 @@ p.Medium {
     text-align: right;
     transition: color 0.2s linear;
     padding-left: 30px;
-    font-family: 'Raleway', sans-serif;
 }
 
 .Footer-link:hover {
