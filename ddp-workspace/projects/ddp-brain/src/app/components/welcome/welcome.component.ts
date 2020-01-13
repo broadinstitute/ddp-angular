@@ -171,11 +171,6 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                         </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://abc2.org/" target="_blank">
-                            <img lazy-resource class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure logo">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                         <a href="https://www.oligonation.org/" target="_blank">
                             <img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation logo">
                         </a>
@@ -185,7 +180,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                             <img lazy-resource class="partner-logo" src="./assets/images/DMF-logo.jpg" alt="Dragon Master Foundation logo">
                         </a>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
                         <a href="https://ourbrainbank.org/" target="_blank">
                             <img lazy-resource class="partner-logo" src="./assets/images/OurBrainBank-logo.png" alt="OurBrainBank logo">
                         </a>
