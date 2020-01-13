@@ -161,16 +161,34 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.abta.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="ABTA"></a>
+                        <a href="https://www.abta.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="American Brain Tumor Association logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://braintumor.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society"></a>
+                        <a href="https://braintumor.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://abc2.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure"></a>
+                        <a href="https://abc2.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.oligonation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation"></a>
+                        <a href="https://www.oligonation.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://www.dragonmaster.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/DMF-logo.jpg" alt="Dragon Master Foundation logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://ourbrainbank.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/OurBrainBank-logo.png" alt="OurBrainBank logo">
+                        </a>
                     </div>
                 </div>
             </section>
