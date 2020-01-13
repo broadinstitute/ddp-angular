@@ -30,7 +30,7 @@ RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 # install angular in a separate cached layer
 RUN mkdir -p /ddp-workspace/projects
-ENV ANGULAR_CLI @angular/cli@8.2.0
+ENV ANGULAR_CLI @angular/cli@8.3.21
 RUN npm install -g $ANGULAR_CLI
 
 # now install most of the dependencies early for the sdk and test-app builds
