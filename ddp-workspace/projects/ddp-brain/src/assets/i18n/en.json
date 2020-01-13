@@ -391,7 +391,7 @@
                 "InvolvedInProject": {
                     "Question": "4. How have patients been involved in the design of this project?",
                     "Section1": "We have worked closely with patients, caregivers, and patient advocates within the brain cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
-                    "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, American Brain Tumor Association, National Brain Tumor Society, Accelerate Brain Cancer Cure, and Oligo Nation."
+                    "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, American Brain Tumor Association, National Brain Tumor Society, Accelerate Brain Cancer Cure, Oligo Nation, Dragon Master Foundation and OurBrainBank."
                 },
                 "Costs": {
                     "Question": "5. Are there any costs for me to participate?",
@@ -549,21 +549,21 @@
             "Text": "The dashboard below describes each Brain Cancer Project form and its status."
         },
         "DatePicker": {
-          "Day": "Choose day...",
-          "Month": "Choose month...",
-          "Year": "Choose year...",
-          "January": "January",
-          "February": "February",
-          "March": "March",
-          "April": "April",
-          "May": "May",
-          "June": "June",
-          "July": "July",
-          "August": "August",
-          "September": "September",
-          "October": "October",
-          "November": "November",
-          "December": "December"
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
