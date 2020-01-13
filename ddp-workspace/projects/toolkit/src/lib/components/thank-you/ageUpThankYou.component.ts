@@ -20,7 +20,10 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
                 </p>
                 <ng-container *ngIf="isEmailCollected">
                     <p class="secondary-text" translate>
-                        Toolkit.AgeUpThankYou.EmailCollected.Text
+                        <span translate>Toolkit.AgeUpThankYou.EmailCollected.TextPt1</span>
+                        <a [href]="emailHref" class="Link">{{ email }}</a>
+                        <span translate>Toolkit.AgeUpThankYou.EmailCollected.TextPt2</span>
+                        <a [href]="phoneHref" class="Link">{{ phone }}</a>.
                     </p>
                     <div class="age-up-email-button">
                         <a [routerLink]="dashboardUrl" class="button button_medium button_primary" translate>
@@ -36,6 +39,10 @@ export class AgeUpThankYou implements OnInit {
   public isEmailVerified: boolean;
   public isEmailCollected: boolean;
   public dashboardUrl: string;
+  public phone: string;
+  public email: string;
+  public phoneHref: string;
+  public emailHref: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,5 +54,9 @@ export class AgeUpThankYou implements OnInit {
     this.isEmailVerified = !!this.activatedRoute.snapshot.data.verify;
     this.isEmailCollected = !!this.activatedRoute.snapshot.data.collect;
     this.dashboardUrl = `/${this.toolkitConfiguration.dashboardUrl}`;
+    this.phone = this.toolkitConfiguration.phone;
+    this.email = this.toolkitConfiguration.infoEmail;
+    this.phoneHref = `tel:${this.phone}`;
+    this.emailHref = `mailto:${this.email}`;
   }
 }
