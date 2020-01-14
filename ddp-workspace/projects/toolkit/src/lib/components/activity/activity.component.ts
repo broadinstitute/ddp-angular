@@ -60,6 +60,6 @@ export class ActivityComponent implements OnInit {
     }
 
     public activityCodeChanged(code: string): void {
-        this.headerConfig.currentActivity = code;
+        this.headerConfig.currentActivityCode = code;
     }
 }

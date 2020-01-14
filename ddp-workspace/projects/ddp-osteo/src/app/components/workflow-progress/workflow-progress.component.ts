@@ -10,9 +10,13 @@ import { take, filter } from 'rxjs/operators';
   styleUrls: ['./workflow-progress.component.scss']
 })
 export class WorkflowProgressComponent implements OnChanges {
-  @Input() public currentActivity: string;
+  // Receives current activity code to determine current step
+  @Input() public currentActivityCode: string;
+  // Receives visible sections count on the workflow start page,
+  // to determine what workflow a user chose
   @Input() public workflowStartSectionsVisibility: number | null;
   public steps: Array<WorkflowStep> = [];
+  public shown = false;
   private readonly LOVEDONE = 'LOVEDONE';
   private readonly COMPLETE = 'COMPLETE';
 
@@ -22,15 +26,17 @@ export class WorkflowProgressComponent implements OnChanges {
     @Inject('ddp.config') private configuration: ConfigurationService) { }
 
   public ngOnChanges(): void {
-    if (this.session.isAuthenticatedSession()) {
-      this.setupRegisteredUserSteps();
-    } else {
-      this.setupNewUserSteps();
+    if (this.currentActivityCode) {
+      if (this.session.isAuthenticatedSession()) {
+        this.setupRegisteredUserSteps();
+      } else {
+        this.setupNewUserSteps();
+      }
     }
   }
 
   public isCurrentStep(activities: Array<string>): boolean {
-    return activities.includes(this.currentActivity);
+    return activities.includes(this.currentActivityCode);
   }
 
   private setupRegisteredUserSteps(): void {
@@ -45,6 +51,7 @@ export class WorkflowProgressComponent implements OnChanges {
         this.useMainSurveySteps(true);
       }
       this.setStepsStatuses(activities);
+      this.recalculateVisibility();
     });
   }
 
@@ -56,6 +63,7 @@ export class WorkflowProgressComponent implements OnChanges {
     } else if (this.workflowStartSectionsVisibility === 2) {
       this.useMainSurveySteps();
     }
+    this.recalculateVisibility();
   }
 
   private setStepsStatuses(activityInstances: Array<ActivityInstance>): void {
@@ -67,6 +75,10 @@ export class WorkflowProgressComponent implements OnChanges {
         step.isCompleted = true;
       }
     });
+  }
+
+  private recalculateVisibility(): void {
+    this.shown = this.steps.some(step => step.activityCodes.includes(this.currentActivityCode));
   }
 
   private useWorkflowStartSteps(): void {
