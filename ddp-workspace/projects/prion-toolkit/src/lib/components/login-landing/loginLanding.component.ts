@@ -69,20 +69,9 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
     }
 
     private redirect(): void {
-        let nextUrlFromStorage = sessionStorage.getItem('nextUrl');
-        const tokenFromStorage = localStorage.getItem('token');
+        const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
 
-        if (tokenFromStorage && nextUrlFromStorage && nextUrlFromStorage.indexOf('account-verification') !== 0){
-            // If we have the token and are redirecting, add the email address from the token as a parameter
-            //TODO: I should change this to check whether the user has verified their email rather than checking whether
-            // we passed in a nextUrl and do the redirect if they haven't verified their email
-            const decodedJwt = this.jwtHelper.decodeToken(tokenFromStorage);
-            const email = decodedJwt['name'];
-            sessionStorage.removeItem('nextUrl');
-            const directTo: string = this.router.createUrlTree([nextUrlFromStorage], {queryParams: {'email': email}}).toString();
-            this.auth0.logout(directTo);
-        }
-        else if (nextUrlFromStorage) {
+        if (nextUrlFromStorage) {
             // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
             sessionStorage.removeItem('nextUrl');
             this.router.navigateByUrl(nextUrlFromStorage);
