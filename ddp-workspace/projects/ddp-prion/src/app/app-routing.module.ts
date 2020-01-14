@@ -18,7 +18,6 @@ import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, Redir
   PasswordComponent,
   WorkflowStartActivityComponent,
 ActivityComponent} from 'projects/prion-toolkit/src/public-api';
-import { AccountVerificationComponent } from './components/account-verification/account-verification.component';
 
 const routes: Routes = [
   {
@@ -34,7 +33,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'release-survey', //TODO: Probably change this path
+    path: 'medical',
     component: ActivityPageComponent,
     canActivate: [
       IrbGuard,
@@ -60,11 +59,6 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'account-verification',
-    component: AccountVerificationComponent,
-    canActivate: [IrbGuard]
-  },
-  {
     path: 'activity/:id',
     component: ActivityComponent,
     canActivate: [
@@ -84,7 +78,7 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'start-study', //TODO: Make verification email redirect here and make it so we can't get here any other way or do this more than once
+    path: 'start-study',
     component: WorkflowStartActivityComponent,
     canActivate: [
       IrbGuard,
