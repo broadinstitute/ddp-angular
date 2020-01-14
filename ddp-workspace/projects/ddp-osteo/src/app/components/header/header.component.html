@@ -6,7 +6,7 @@
         </a>
         <div *ngIf="headerConfig.stickySubtitle || headerConfig.showBreadcrumbs" class="activity-heading">
             <div *ngIf="headerConfig.showBreadcrumbs" class="breadcrumbs">
-                <app-workflow-progress [currentActivity]="headerConfig.currentActivity"
+                <app-workflow-progress [currentActivityCode]="headerConfig.currentActivityCode"
                     [workflowStartSectionsVisibility]="headerConfig.workflowStartSectionsVisibility">
                 </app-workflow-progress>
             </div>
