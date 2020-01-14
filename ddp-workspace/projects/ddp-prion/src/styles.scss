@@ -1,16 +1,6 @@
 @import "app-theme.scss";
 $warning-height: 150px;
 
-.mat-radio-button.mat-accent .mat-radio-inner-circle,
-.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background
-{
-    background-color: #82B547;
-}
-
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #82B547;
-}
-
 html,
 body {
     margin: 0;
@@ -1629,7 +1619,7 @@ ul {
     font-weight: 400;
 }
 
-.Question--text, ddp-activity-text-answer {
+.Question--text, ddp-activity-text-answer, .ddp-option-details-field {
   .mat-form-field-wrapper, .mat-form-field-appearance-legacy .mat-form-field-wrapper {
     padding-bottom: 0;
   }
@@ -1641,12 +1631,15 @@ ul {
   .mat-form-field-infix {
     border-top: none !important;
   }
+}
 
+.mat-form-field, .Question--text, ddp-activity-text-answer, .ddp-option-details-field {
   input.mat-input-element {
+    color: rgb(113, 113, 116);
     line-height: 2.5rem !important;
-    height: 35px !important;
+    height: 40px !important;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
   }
 }
 
@@ -2336,6 +2329,11 @@ ddp-activity-composite-answer .ddp-answer-container {
     color: mat-color($app-theme, 1200);
 }
 
+label.mat-form-field-label {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
 .mat-error {
     color: mat-color($app-theme, 1200);
 }
@@ -2378,6 +2376,17 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-size: 0.75rem;
 }
 
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background
+{
+  background-color: #82B547;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #82B547;
+  border-width: 2px !important;
+}
+
 .mat-radio-outer-circle {
     border-color: #CECECE;
     border-width: 1px !important;
@@ -2395,6 +2404,8 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-size: 0.9rem !important;
     font-weight: 400;
     margin-bottom: 0;
+    color: #717174;
+    line-height: 1.4rem !important;
 }
 
 .mat-form-field-infix {
