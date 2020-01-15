@@ -9,3 +9,43 @@
     margin: auto;
     padding: 0 1.5625rem;
 }
+
+.navigation {
+    padding: 3.25rem 3.25rem 3.25rem 0;
+    border-bottom: 1px solid mat-color($app-theme, 700);
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.list__item {
+    margin-right: 2rem;
+}
+
+.footer-link {
+    font-size: 1.25rem;
+    line-height: 1.5625rem;
+}
+
+.footer-link:link,
+.footer-link:visited {
+    color: mat-color($app-theme, 200);
+}
+
+.footer-link:hover {
+    color: mat-color($app-theme, 650);
+    text-decoration: underline;
+}
+
+.footer-link:active {
+    color: mat-color($app-theme, 200);
+    text-decoration: underline;
+}
+
+.footer-link_active {
+    text-decoration: underline;
+}

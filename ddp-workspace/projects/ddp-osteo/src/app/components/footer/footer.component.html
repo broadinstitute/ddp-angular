@@ -1,24 +1,28 @@
 <footer class="footer">
     <div class="footer-content">
-        <nav>
-            <ul class="navigation">
-                <li>
-                    <a routerLink="/" translate>Footer.Navigation.Home</a>
+        <nav class="navigation">
+            <ul class="list">
+                <li class="list__item">
+                    <a class="footer-link" routerLink="/" translate>Footer.Navigation.Home</a>
                 </li>
-                <li>
-                    <a routerLink="more-details" translate>Footer.Navigation.FAQ</a>
+                <li class="list__item">
+                    <a class="footer-link" routerLink="more-details" routerLinkActive="footer-link_active"
+                        translate>Footer.Navigation.FAQ</a>
                 </li>
-                <li>
-                    <a routerLink="about-us" translate>Footer.Navigation.AboutUs</a>
+                <li class="list__item">
+                    <a class="footer-link" routerLink="about-us" routerLinkActive="footer-link_active"
+                        translate>Footer.Navigation.AboutUs</a>
                 </li>
-                <li>
-                    <button class="SimpleButton" [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                <li class="list__item">
+                    <button class="SimpleButton footer-link"
+                        [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
                         (click)="openJoinMailingList()" translate>
                         Common.Buttons.MailingList.Title
                     </button>
                 </li>
                 <li>
-                    <a [routerLink]="['/physician.pdf']" target="_blank" translate>Footer.Navigation.ForPhysicians</a>
+                    <a class="footer-link" [routerLink]="['physician.pdf']" target="_blank"
+                        translate>Footer.Navigation.ForPhysicians</a>
                 </li>
             </ul>
         </nav>
