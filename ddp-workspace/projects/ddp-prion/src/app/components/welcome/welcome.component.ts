@@ -94,14 +94,14 @@ export class WelcomeComponent implements OnInit {
     constructor(
         private windowRef: WindowRef,
         private analytics: AnalyticsEventsService,
-        private browserContent: BrowserContentService) { }
+        private browserContent: BrowserContentService, private auth0Adapter: Auth0AdapterService) { }
 
     public ngOnInit(): void {
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
     }
 
     public clickJoinUs(): void {
-      sessionStorage.setItem('nextUrl', 'account-verification');
+      sessionStorage.setItem('nextUrl', 'start-study');
       this.auth0Adapter.signup();
         this.doAnalytics();
         if (this.unsupportedBrowser) {
