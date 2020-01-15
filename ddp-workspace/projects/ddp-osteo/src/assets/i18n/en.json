@@ -22,7 +22,13 @@
                 "AriaLabel": "Header menu button"
             }
         },
-        "CMI": "Count Me In"
+        "CMI": "Count Me In",
+        "Alts": {
+            "CMI": "Count Me In logo",
+            "Twitter": "Twitter logo",
+            "Facebook": "Facebook logo",
+            "Instagram": "Instagram logo"
+        }
     },
     "Header": {
         "Logo": {
@@ -35,9 +41,26 @@
             "Dashboard": "Dashboard",
             "FAQ": "FAQs",
             "AboutUs": "About Us",
-            "Newsletter": "Newsletter",
             "ForPhysicians": "For Physicians",
             "LogIn": "Log In"
+        }
+    },
+    "Footer": {
+        "Navigation": {
+            "Home": "Home",
+            "FAQ": "FAQs",
+            "AboutUs": "About Us",
+            "ForPhysicians": "For Physicians"
+        },
+        "Info": {
+            "Text": "The Osteosarcoma Project is part of <span class=\"bold\">Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+        },
+        "Contacts": {
+            "Title": "Contact Us",
+            "Address": {
+                "Line1": "415 Main St, Cambridge, MA",
+                "Line2": "02142, United States"
+            }
         }
     },
     "BehindScenesGallery": {
@@ -153,12 +176,7 @@
         "SocialMediaSection": {
             "Title": "Follow us on social media",
             "TwitterFeedTitle": "Twitter feed",
-            "InstagramFeedTitle": "Instagram feed",
-            "ImagesAlts": {
-                "Twitter": "Twitter logo",
-                "Facebook": "Facebook logo",
-                "Instagram": "Instagram logo"
-            }
+            "InstagramFeedTitle": "Instagram feed"
         },
         "MailingListSection": {
             "Title": "Want to stay informed on the OS Project?",
@@ -179,7 +197,6 @@
             }
         },
         "CMISection": {
-            "CMIImgAlt": "Count Me In Logo",
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
             "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },

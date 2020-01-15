@@ -1,1 +1,62 @@
-<footer class="footer"></footer>
+<footer class="footer">
+    <div class="container">
+        <nav class="navigation">
+            <ul>
+                <li>
+                    <a routerLink="/" translate>Footer.Navigation.Home</a>
+                </li>
+                <li>
+                    <a routerLink="more-details" translate>Footer.Navigation.FAQ</a>
+                </li>
+                <li>
+                    <a routerLink="about-us" translate>Footer.Navigation.AboutUs</a>
+                </li>
+                <li>
+                    <button class="SimpleButton" [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                        (click)="openJoinMailingList()" translate>
+                        Common.Buttons.MailingList.Title
+                    </button>
+                </li>
+                <li>
+                    <a [routerLink]="['/physician.pdf']" target="_blank" translate>Footer.Navigation.ForPhysicians</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="info">
+            <img lazy-resource src="../../../assets/images/logo-count-me-in.svg" [alt]="'Common.Alts.CMI' | translate">
+            <p [innerHTML]="'Footer.Info.Text' | translate"></p>
+        </div>
+        <div class="contacts">
+            <p translate>Footer.Contacts.Title</p>
+            <div>
+                <div>
+                    <div>
+                        <a [href]="emailHref" target="_blank">{{ email }}</a>
+                        <a [href]="phoneHref" target="_blank">{{ phone }}</a>
+                    </div>
+                    <div>
+                        <a [href]="twitterUrl" target="_blank">
+                            <img lazy-resource src="assets/images/twitter.png"
+                                [alt]="'Common.Alts.Twitter' | translate">
+                        </a>
+                        <a [href]="facebookUrl" target="_blank">
+                            <img lazy-resource src="assets/images/facebook.png"
+                                [alt]="'Common.Alts.Facebook' | translate">
+                        </a>
+                        <a [href]="instagramUrl" target="_blank">
+                            <img lazy-resource src="assets/images/instagram.png"
+                                [alt]="'Common.Alts.Instagram' | translate">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <ul>
+                        <li translate>Common.CMI</li>
+                        <li translate>Footer.Contacts.Address.Line1</li>
+                        <li translate>Footer.Contacts.Address.Line2</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
