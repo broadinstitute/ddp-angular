@@ -1,10 +1,14 @@
-import { Component, HostListener, Input, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { GoogleAnalyticsEventsService, GoogleAnalytics, BrowserContentService, WindowRef, Auth0AdapterService } from 'ddp-sdk';
-import {FlexModule} from '@angular/flex-layout';
+import {
+  Auth0AdapterService,
+  BrowserContentService,
+  GoogleAnalyticsEventsService,
+  SessionMementoService,
+  WindowRef
+} from 'ddp-sdk';
 
 @Component({
   selector: 'toolkit-header',
@@ -25,7 +29,7 @@ import {FlexModule} from '@angular/flex-layout';
             
             <div class="collapse navbar-collapse Header-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right NoMargin">
-                    <li *ngIf="isConsented()" class="Nav-item">
+                    <li *ngIf="isLoggedIn()" class="Nav-item">
                         <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}">
                             Dashboard
                         </span>
@@ -61,19 +65,15 @@ export class HeaderComponent implements OnInit {
     private windowRef: WindowRef,
     @Inject(DOCUMENT) private document: any,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
-    private auth0Adapter: Auth0AdapterService) { }
+    private auth0Adapter: Auth0AdapterService,
+    private session: SessionMementoService) { }
 
   public ngOnInit(): void {
-  }
 
-  public isConsented(): boolean {
-    //TODO: Return true when consented
-    return false;
   }
 
   public isLoggedIn(): boolean {
-    //TODO: Return true when logged in
-    return false;
+    return this.session.isAuthenticatedSession();
   }
 
   public clickDashboard(): void {
@@ -84,20 +84,8 @@ export class HeaderComponent implements OnInit {
 
   public clickJoinUs(): void {
     if (!this.isLoggedIn()){
-      sessionStorage.setItem('nextUrl', 'account-verification');
+      sessionStorage.setItem('nextUrl', 'start-study');
       this.auth0Adapter.signup();
-    }
-  }
-
-  public clickSignIn(): void {
-    if (!this.isLoggedIn()){
-      this.auth0Adapter.login();
-    }
-  }
-
-  public clickSignOut(): void {
-    if (this.isLoggedIn()){
-      this.auth0Adapter.logout(); //TODO: Direct somewhere?
     }
   }
 
