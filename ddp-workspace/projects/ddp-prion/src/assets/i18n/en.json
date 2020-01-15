@@ -32,13 +32,6 @@
                 "Zip": "02142, United States"
             }
         },
-        "AccountVerification": {
-            "Title": "Just one more step!",
-            "Description1": "We've just sent a verification and welcome email to you at:",
-            "Description2": ". Please check your email and be sure to click through the ",
-            "Description3": "\"Confirm my account\"",
-            "Description4": "link at the end of the email. This last verification step is an important part of the security process for this study."
-        },
         "Welcome": {
             "WelcomeTitle": "Volunteer for research to help fight prion disease",
             "WelcomeText": "Join the Prion Registry, an online registry for people affected by or at risk for prion disease who want to find opportunities to participate in research.",
