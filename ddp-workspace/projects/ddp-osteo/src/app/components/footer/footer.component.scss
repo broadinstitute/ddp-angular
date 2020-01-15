@@ -7,11 +7,21 @@
 .footer-content {
     max-width: 1200px;
     margin: auto;
-    padding: 0 1.5625rem;
+    padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-column {
+    width: 50%;
+}
+
+.mobile-contacts {
+    display: none;
 }
 
 .navigation {
-    padding: 3.25rem 3.25rem 3.25rem 0;
+    padding: 0 3.25rem 3.25rem 0;
     border-bottom: 1px solid mat-color($app-theme, 700);
 }
 
@@ -29,6 +39,7 @@
 .footer-link {
     font-size: 1.25rem;
     line-height: 1.5625rem;
+    white-space: nowrap;
 }
 
 .footer-link:link,
@@ -48,4 +59,23 @@
 
 .footer-link_active {
     text-decoration: underline;
+}
+
+.logo {
+    width: 25px;
+    height: 25px;
+}
+
+@media screen and (max-width: 945px) {
+    .mobile-contacts {
+        display: unset;
+    }
+
+    .desktop-contacts {
+        display: none;
+    }
+
+    .footer-column {
+        width: 100%;
+    }
 }

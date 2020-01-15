@@ -1,66 +1,78 @@
 <footer class="footer">
     <div class="footer-content">
-        <nav class="navigation">
-            <ul class="list">
-                <li class="list__item">
-                    <a class="footer-link" routerLink="/" translate>Footer.Navigation.Home</a>
-                </li>
-                <li class="list__item">
-                    <a class="footer-link" routerLink="more-details" routerLinkActive="footer-link_active"
-                        translate>Footer.Navigation.FAQ</a>
-                </li>
-                <li class="list__item">
-                    <a class="footer-link" routerLink="about-us" routerLinkActive="footer-link_active"
-                        translate>Footer.Navigation.AboutUs</a>
-                </li>
-                <li class="list__item">
-                    <button class="SimpleButton footer-link"
-                        [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
-                        (click)="openJoinMailingList()" translate>
-                        Common.Buttons.MailingList.Title
-                    </button>
-                </li>
-                <li>
-                    <a class="footer-link" [routerLink]="['physician.pdf']" target="_blank"
-                        translate>Footer.Navigation.ForPhysicians</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="info">
-            <img lazy-resource src="../../../assets/images/logo-count-me-in.svg" [alt]="'Common.Alts.CMI' | translate">
-            <p [innerHTML]="'Footer.Info.Text' | translate"></p>
-        </div>
-        <div class="contacts">
-            <p translate>Footer.Contacts.Title</p>
-            <div>
-                <div>
-                    <div>
-                        <a [href]="emailHref" target="_blank">{{ email }}</a>
-                        <a [href]="phoneHref" target="_blank">{{ phone }}</a>
-                    </div>
-                    <div>
-                        <a [href]="twitterUrl" target="_blank">
-                            <img lazy-resource src="assets/images/twitter.png"
-                                [alt]="'Common.Alts.Twitter' | translate">
-                        </a>
-                        <a [href]="facebookUrl" target="_blank">
-                            <img lazy-resource src="assets/images/facebook.png"
-                                [alt]="'Common.Alts.Facebook' | translate">
-                        </a>
-                        <a [href]="instagramUrl" target="_blank">
-                            <img lazy-resource src="assets/images/instagram.png"
-                                [alt]="'Common.Alts.Instagram' | translate">
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <ul>
-                        <li translate>Common.CMI</li>
-                        <li translate>Footer.Contacts.Address.Line1</li>
-                        <li translate>Footer.Contacts.Address.Line2</li>
-                    </ul>
-                </div>
+        <div class="footer-column">
+            <nav class="navigation">
+                <ul class="list">
+                    <li class="list__item">
+                        <a class="footer-link" routerLink="/" translate>Footer.Navigation.Home</a>
+                    </li>
+                    <li class="list__item">
+                        <a class="footer-link" routerLink="more-details" routerLinkActive="footer-link_active"
+                            translate>Footer.Navigation.FAQ</a>
+                    </li>
+                    <li class="list__item">
+                        <a class="footer-link" routerLink="about-us" routerLinkActive="footer-link_active"
+                            translate>Footer.Navigation.AboutUs</a>
+                    </li>
+                    <li class="list__item">
+                        <button class="SimpleButton footer-link"
+                            [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                            (click)="openJoinMailingList()" translate>
+                            Common.Buttons.MailingList.Title
+                        </button>
+                    </li>
+                    <li>
+                        <a class="footer-link" [routerLink]="['physician.pdf']" target="_blank"
+                            translate>Footer.Navigation.ForPhysicians</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-contacts">
+                <ng-container *ngTemplateOutlet="contacts"></ng-container>
             </div>
+            <div class="info">
+                <img lazy-resource src="../../../assets/images/logo-count-me-in.svg"
+                    [alt]="'Common.Alts.CMI' | translate">
+                <p [innerHTML]="'Footer.Info.Text' | translate"></p>
+            </div>
+        </div>
+        <div class="desktop-contacts">
+            <ng-container *ngTemplateOutlet="contacts"></ng-container>
         </div>
     </div>
 </footer>
+
+<ng-template #contacts>
+    <div class="contacts">
+        <p translate>Footer.Contacts.Title</p>
+        <div>
+            <div>
+                <div>
+                    <a [href]="emailHref" target="_blank">{{ email }}</a>
+                    <a [href]="phoneHref" target="_blank">{{ phone }}</a>
+                </div>
+                <div>
+                    <a [href]="twitterUrl" target="_blank">
+                        <img class="logo" lazy-resource src="assets/images/twitter-small.png"
+                            [alt]="'Common.Alts.Twitter' | translate">
+                    </a>
+                    <a [href]="facebookUrl" target="_blank">
+                        <img class="logo" lazy-resource src="assets/images/facebook-small.png"
+                            [alt]="'Common.Alts.Facebook' | translate">
+                    </a>
+                    <a [href]="instagramUrl" target="_blank">
+                        <img class="logo" lazy-resource src="assets/images/instagram-small.png"
+                            [alt]="'Common.Alts.Instagram' | translate">
+                    </a>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li translate>Common.CMI</li>
+                    <li translate>Footer.Contacts.Address.Line1</li>
+                    <li translate>Footer.Contacts.Address.Line2</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>
