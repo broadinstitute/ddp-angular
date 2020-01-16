@@ -108,17 +108,9 @@
     height: 25px;
 }
 
+.contacts-container,
 .social-media__link {
     display: flex;
-}
-
-.contacts-container {
-    display: flex;
-}
-
-.address {
-    display: inline-flex;
-    flex-direction: column;
 }
 
 @media screen and (max-width: 945px) {
