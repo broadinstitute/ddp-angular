@@ -14,6 +14,7 @@ export class FooterComponent implements OnInit {
   public twitterUrl: string;
   public facebookUrl: string;
   public instagramUrl: string;
+  public countMeInUrl: string;
 
   constructor(
     private communicationService: CommunicationService,
@@ -27,6 +28,7 @@ export class FooterComponent implements OnInit {
     this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
     this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
+    this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
   }
 
   public openJoinMailingList(): void {

@@ -31,9 +31,15 @@
                 <ng-container *ngTemplateOutlet="contacts"></ng-container>
             </div>
             <div class="info">
-                <img class="info__image" lazy-resource src="../../../assets/images/logo-count-me-in.svg"
-                    [alt]="'Common.Alts.CMI' | translate">
-                <p class="no-margin footer-secondary-text" [innerHTML]="'Footer.Info.Text' | translate"></p>
+                <a [href]="countMeInUrl" target="_blank">
+                    <img class="info__image" lazy-resource src="../../../assets/images/logo-count-me-in.svg"
+                        [alt]="'Common.Alts.CMI' | translate">
+                </a>
+                <p class="no-margin footer-secondary-text">
+                    <span translate>Footer.Info.Text.Part1</span>
+                    <a class="bold footer-link" [href]="countMeInUrl" target="_blank" translate>Common.CMI</a>,
+                    <span translate>Footer.Info.Text.Part2</span>
+                </p>
             </div>
         </div>
         <div class="desktop-contacts">
@@ -49,10 +55,10 @@
             <div class="links">
                 <ul class="project-contacts">
                     <li class="footer-secondary-text">
-                        <a [href]="emailHref" target="_blank">{{ email }}</a>
+                        <a class="footer-link" [href]="emailHref" target="_blank">{{ email }}</a>
                     </li>
                     <li class="footer-secondary-text">
-                        <a [href]="phoneHref" target="_blank">{{ phone }}</a>
+                        <a class="footer-link" [href]="phoneHref" target="_blank">{{ phone }}</a>
                     </li>
                 </ul>
                 <ul class="social-media">

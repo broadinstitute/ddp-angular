@@ -53,7 +53,10 @@
             "ForPhysicians": "For Physicians"
         },
         "Info": {
-            "Text": "The Osteosarcoma Project is part of <span class=\"bold\">Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+            "Text": {
+                "Part1": "The Osteosarcoma Project is part of",
+                "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+            }
         },
         "Contacts": {
             "Title": "Contact Us",
