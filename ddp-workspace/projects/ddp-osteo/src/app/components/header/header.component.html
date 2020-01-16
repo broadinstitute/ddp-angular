@@ -63,7 +63,7 @@
             [ngClass]="{'header-button': !headerConfig.showMainButtons}">
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
-        <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" routerLink="/count-me-in"
+        <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" routerLink="count-me-in"
             class="button button_small button_primary header-button" [ngClass]="{'button_medium': isPanelOpened}">
             <span translate>Common.Buttons.CountMeIn</span>
         </a>
@@ -71,7 +71,7 @@
 </ng-template>
 
 <ng-template #dashboardButton>
-    <a class="header-link" routerLink="/dashboard" routerLinkActive="header-link_active">
+    <a class="header-link" routerLink="dashboard" routerLinkActive="header-link_active">
         <div class="header-link__dashboard">
             <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
