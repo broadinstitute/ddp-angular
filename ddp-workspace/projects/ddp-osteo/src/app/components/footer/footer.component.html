@@ -31,9 +31,8 @@
                 <ng-container *ngTemplateOutlet="contacts"></ng-container>
             </div>
             <div class="cmi-info">
-                <a [href]="countMeInUrl" target="_blank">
-                    <img class="cmi-info__image" lazy-resource src="assets/images/logo-count-me-in.svg"
-                        [alt]="'Common.Alts.CMI' | translate">
+                <a class="cmi-info__logo" [href]="countMeInUrl" target="_blank">
+                    <img lazy-resource src="assets/images/logo-count-me-in.svg" [alt]="'Common.Alts.CMI' | translate">
                 </a>
                 <p class="no-margin footer-secondary-text">
                     <span translate>Footer.Info.Text.Part1</span>

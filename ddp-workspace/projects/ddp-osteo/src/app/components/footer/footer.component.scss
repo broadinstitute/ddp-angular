@@ -85,7 +85,7 @@
 }
 
 .contact-links,
-.cmi-info__image {
+.cmi-info__logo {
     margin-right: 2.5rem;
 }
 
@@ -109,6 +109,7 @@
 }
 
 .contacts-container,
+.cmi-info__logo,
 .social-media__link {
     display: flex;
 }
@@ -160,7 +161,7 @@
         align-items: flex-start;
     }
 
-    .cmi-info__image {
+    .cmi-info__logo {
         margin-bottom: 1.5rem;
     }
 }
