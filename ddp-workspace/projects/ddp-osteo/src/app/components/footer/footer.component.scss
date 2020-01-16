@@ -2,6 +2,7 @@
 
 .footer {
     background-color: mat-color($app-theme, 900);
+    min-height: 20rem;
 }
 
 .footer-content {
@@ -14,32 +15,49 @@
 
 .footer-column {
     width: 50%;
+    min-width: 570px;
 }
 
 .mobile-contacts {
     display: none;
 }
 
-.navigation {
+.desktop-contacts {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav {
     padding: 0 3.25rem 3.25rem 0;
     border-bottom: 1px solid mat-color($app-theme, 700);
 }
 
-.list {
+.navigation,
+.project-contacts,
+.social-media {
     margin: 0;
     padding: 0;
     list-style-type: none;
     display: flex;
 }
 
-.list__item {
+.navigation__item {
     margin-right: 2rem;
 }
 
 .footer-link {
+    white-space: nowrap;
+}
+
+.footer-main-text {
     font-size: 1.25rem;
     line-height: 1.5625rem;
-    white-space: nowrap;
+}
+
+.footer-secondary-text {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
 }
 
 .footer-link:link,
@@ -66,7 +84,53 @@
     height: 25px;
 }
 
+.info {
+    margin: 3.5rem 0 0 0;
+    display: flex;
+}
+
+.links,
+.info__image {
+    margin-right: 2.5rem;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-contacts {
+    flex-direction: column;
+    margin-bottom: 0.9rem;
+}
+
+.social-media {
+    flex-direction: row;
+}
+
+.social-media__item {
+    margin-right: 1rem;
+}
+
+.contacts-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.address {
+    display: inline-flex;
+    flex-direction: column;
+}
+
 @media screen and (max-width: 945px) {
+    .footer-content {
+        padding: 3.25rem 4rem 4rem 4rem;
+    }
+
+    .nav {
+        border: unset;
+    }
+
     .mobile-contacts {
         display: unset;
     }
@@ -77,5 +141,35 @@
 
     .footer-column {
         width: 100%;
+        min-width: unset;
+    }
+
+    .links {
+        width: 117px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .footer-content {
+        padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navigation {
+        flex-direction: column;
+    }
+
+    .navigation__item {
+        margin-bottom: 1rem;
+    }
+
+    .info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info__image {
+        margin-bottom: 1.5rem;
     }
 }
