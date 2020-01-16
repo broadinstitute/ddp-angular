@@ -1,6 +1,6 @@
 <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-column">
+    <div class="content">
+        <div class="column">
             <nav class="nav">
                 <ul class="navigation">
                     <li class="navigation__item footer-main-text">
@@ -30,9 +30,9 @@
             <div class="mobile-contacts">
                 <ng-container *ngTemplateOutlet="contacts"></ng-container>
             </div>
-            <div class="info">
+            <div class="cmi-info">
                 <a [href]="countMeInUrl" target="_blank">
-                    <img class="info__image" lazy-resource src="assets/images/logo-count-me-in.svg"
+                    <img class="cmi-info__image" lazy-resource src="assets/images/logo-count-me-in.svg"
                         [alt]="'Common.Alts.CMI' | translate">
                 </a>
                 <p class="no-margin footer-secondary-text">
@@ -52,7 +52,7 @@
     <div class="contacts">
         <p class="only-margin-bottom footer-main-text" translate>Footer.Contacts.Title</p>
         <div class="contacts-container">
-            <div class="links">
+            <div class="contact-links">
                 <ul class="project-contacts">
                     <li class="footer-secondary-text">
                         <a class="footer-link" [href]="emailHref" target="_blank">{{ email }}</a>
@@ -63,20 +63,20 @@
                 </ul>
                 <ul class="social-media">
                     <li class="social-media__item">
-                        <a [href]="twitterUrl" target="_blank">
-                            <img class="logo" lazy-resource src="assets/images/twitter-small.png"
+                        <a class="social-media__link" [href]="twitterUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/twitter-small.png"
                                 [alt]="'Common.Alts.Twitter' | translate">
                         </a>
                     </li>
                     <li class="social-media__item">
-                        <a [href]="facebookUrl" target="_blank">
-                            <img class="logo" lazy-resource src="assets/images/facebook-small.png"
+                        <a class="social-media__link" [href]="facebookUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/facebook-small.png"
                                 [alt]="'Common.Alts.Facebook' | translate">
                         </a>
                     </li>
                     <li>
-                        <a [href]="instagramUrl" target="_blank">
-                            <img class="logo" lazy-resource src="assets/images/instagram-small.png"
+                        <a class="social-media__link" [href]="instagramUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/instagram-small.png"
                                 [alt]="'Common.Alts.Instagram' | translate">
                         </a>
                     </li>
