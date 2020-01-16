@@ -1,4 +1,4 @@
-service: brain
+service: angio
 runtime: python37
 
 handlers:

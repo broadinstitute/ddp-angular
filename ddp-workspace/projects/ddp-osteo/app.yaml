@@ -1,4 +1,4 @@
-service: brain
+service: osteo
 runtime: python37
 
 handlers:

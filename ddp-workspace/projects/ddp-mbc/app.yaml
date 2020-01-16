@@ -1,4 +1,4 @@
-service: brain
+service: mbc
 runtime: python37
 
 handlers:
