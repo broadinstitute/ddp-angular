@@ -28,6 +28,13 @@
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo"
+        },
+        "Navigation": {
+            "Home": "Home",
+            "FAQ": "FAQs",
+            "AboutUs": "About Us",
+            "ForPhysicians": "For Physicians",
+            "Dashboard": "Dashboard"
         }
     },
     "Header": {
@@ -36,22 +43,9 @@
             "Image": {
                 "Alt": "Osteosarcoma project logo"
             }
-        },
-        "Navigation": {
-            "Dashboard": "Dashboard",
-            "FAQ": "FAQs",
-            "AboutUs": "About Us",
-            "ForPhysicians": "For Physicians",
-            "LogIn": "Log In"
         }
     },
     "Footer": {
-        "Navigation": {
-            "Home": "Home",
-            "FAQ": "FAQs",
-            "AboutUs": "About Us",
-            "ForPhysicians": "For Physicians"
-        },
         "Info": {
             "Text": {
                 "Part1": "The Osteosarcoma Project is part of",
@@ -110,10 +104,10 @@
         },
         "OrganizationsSection": {
             "BroadLogo": {
-                "Alt": "Broad Institute Logo"
+                "Alt": "Broad Institute logo"
             },
             "DanaFarberLogo": {
-                "Alt": "Dana Farber Logo"
+                "Alt": "Dana Farber logo"
             }
         },
         "StepsSection": {
@@ -168,9 +162,9 @@
         "PartnersSection": {
             "Title": "Advocacy Partners",
             "ImagesAlts": {
-                "MBIAlt": "Make It Better Agents Logo",
-                "QUADWAlt": "The QuadW Foundation Logo",
-                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund Logo"
+                "MBIAlt": "Make It Better Agents logo",
+                "QUADWAlt": "The QuadW Foundation logo",
+                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund logo"
             }
         },
         "SocialMediaSection": {
