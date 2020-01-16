@@ -91,7 +91,6 @@
 .navigation {
     list-style: none;
     display: flex;
-    flex-direction: row;
 }
 
 .navigation__item {
@@ -101,7 +100,6 @@
 
 .auth {
     display: flex;
-    flex-direction: row;
     align-items: center;
 }
 
@@ -117,7 +115,6 @@
 
 .project-logo {
     display: flex;
-    flex-direction: row;
     align-items: center;
     text-decoration: none !important;
 }
