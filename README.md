@@ -35,9 +35,10 @@ javascript config files.  You must build these config files from the top-level d
 
 ```shell
 # generate study specific configs.   Note semi-redundant args for angular dir, image name, and study guid
-./build-study.sh [version] [env] . angio ANGIO --config
-./build-study.sh [version] [env] . brain cmi-brain --config
-./build-study.sh [version] [env] . mbc cmi-mbc --config
+./build-study.sh [version] [env] angio ANGIO --config
+./build-study.sh [version] [env] brain cmi-brain --config
+./build-study.sh [version] [env] mbc cmi-mbc --config
+./build-study.sh [version] [env] osteo CMI-OSTEO --config
 ```
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
