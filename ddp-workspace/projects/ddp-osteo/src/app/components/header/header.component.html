@@ -1,7 +1,7 @@
 <header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}">
     <div class="header-content" [ngClass]="{'header-content_sticky': headerConfig.stickySubtitle}">
         <a class="project-logo" routerLink="/">
-            <img class="project-logo__img" src="assets/images/logo.svg" [alt]="'Header.Logo.Image.Alt' | translate">
+            <img class="project-logo__img" src="assets/images/logo.svg" [alt]="'Header.Logo.ImageAlt' | translate">
             <p class="project-logo__text" [innerHTML]="'Header.Logo.Title' | translate"></p>
         </a>
         <div *ngIf="headerConfig.stickySubtitle || headerConfig.showBreadcrumbs" class="activity-heading">

@@ -40,9 +40,7 @@
     "Header": {
         "Logo": {
             "Title": "Osteosarcoma<br>Project",
-            "Image": {
-                "Alt": "Osteosarcoma project logo"
-            }
+            "ImageAlt": "Osteosarcoma project logo"
         }
     },
     "Footer": {
