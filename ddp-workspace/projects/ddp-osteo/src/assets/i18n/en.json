@@ -57,10 +57,7 @@
         },
         "Contacts": {
             "Title": "Contact Us",
-            "Address": {
-                "Line1": "415 Main St, Cambridge, MA",
-                "Line2": "02142, United States"
-            }
+            "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States"
         }
     },
     "BehindScenesGallery": {

@@ -76,11 +76,8 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <p class="no-margin footer-secondary-text" translate>Common.CMI</p>
-                <p class="no-margin footer-secondary-text" translate>Footer.Contacts.Address.Line1</p>
-                <p class="no-margin footer-secondary-text" translate>Footer.Contacts.Address.Line2</p>
-            </div>
+            <p class="no-margin footer-secondary-text" [innerHTML]="'Footer.Contacts.Address' | translate" translate>
+            </p>
         </div>
     </div>
 </ng-template>
