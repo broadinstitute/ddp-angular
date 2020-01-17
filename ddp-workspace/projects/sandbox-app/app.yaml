@@ -1,4 +1,4 @@
-service: brain
+service: sandbox
 runtime: python37
 
 handlers:
