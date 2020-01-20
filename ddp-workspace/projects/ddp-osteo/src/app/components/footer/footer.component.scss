@@ -1,6 +1,167 @@
 @import '../../../app-theme.scss';
 
 .footer {
-    background-color: mat-color($app-theme, 200);
-    height: 5rem;
+    background-color: mat-color($app-theme, 900);
+    min-height: 20rem;
+}
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    display: flex;
+}
+
+.column {
+    width: 50%;
+    min-width: 570px;
+}
+
+.mobile-contacts {
+    display: none;
+}
+
+.desktop-contacts {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav {
+    padding: 0 3.25rem 3.25rem 0;
+    border-bottom: 1px solid mat-color($app-theme, 700);
+}
+
+.navigation,
+.project-contacts,
+.social-media {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.navigation__item {
+    margin-right: 2rem;
+}
+
+.footer-main-text {
+    font-size: 1.25rem;
+    line-height: 1.5625rem;
+}
+
+.footer-secondary-text {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+}
+
+.footer-link {
+    white-space: nowrap;
+}
+
+.footer-link:link,
+.footer-link:visited {
+    color: mat-color($app-theme, 200);
+}
+
+.footer-link:hover {
+    color: mat-color($app-theme, 650);
+    text-decoration: underline;
+}
+
+.footer-link:active {
+    color: mat-color($app-theme, 200);
+    text-decoration: underline;
+}
+
+.footer-link_active {
+    text-decoration: underline;
+}
+
+.cmi-info {
+    margin: 3.5rem 0 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.contact-links,
+.cmi-info__logo {
+    margin-right: 2.5rem;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-contacts {
+    flex-direction: column;
+    margin-bottom: 0.9rem;
+}
+
+.social-media__item {
+    margin-right: 1rem;
+}
+
+.social-media__logo {
+    width: 25px;
+    height: 25px;
+}
+
+.contacts-container,
+.cmi-info__logo,
+.social-media__link {
+    display: flex;
+}
+
+@media screen and (max-width: 945px) {
+    .content {
+        padding: 3.25rem 4rem 4rem 4rem;
+    }
+
+    .nav {
+        border: unset;
+    }
+
+    .mobile-contacts {
+        display: unset;
+    }
+
+    .desktop-contacts {
+        display: none;
+    }
+
+    .column {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .contact-links {
+        width: 117px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .content {
+        padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navigation {
+        flex-direction: column;
+    }
+
+    .navigation__item {
+        margin-bottom: 1rem;
+    }
+
+    .cmi-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cmi-info__logo {
+        margin-bottom: 1.5rem;
+    }
 }
