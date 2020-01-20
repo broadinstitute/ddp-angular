@@ -72,6 +72,7 @@
     font-size: 1.25rem;
 }
 
+.simple-button,
 .SimpleButton {
     background: none;
     border: none;
@@ -85,16 +86,20 @@
     white-space: nowrap;
 }
 
+.simple-button:hover,
 .SimpleButton:hover {
     color: mat-color($app-theme, 650);
     text-decoration: underline;
 }
 
+.simple-button:focus,
 .SimpleButton:focus {
     text-decoration: underline;
 }
 
 .panel-opened {
+
+    .simple-button,
     .SimpleButton {
         font-size: 1.875rem;
         line-height: 2.25rem;
