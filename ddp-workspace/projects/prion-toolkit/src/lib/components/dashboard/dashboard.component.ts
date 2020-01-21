@@ -14,8 +14,7 @@ import { Subscription } from 'rxjs';
             <div class="PageLayout PageLayout-dashboard">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <!--TODO: Might need to move this-->
-                    <h1 translate>Toolkit.Dashboard.Title</h1>
+                        <h1 translate>Toolkit.Dashboard.Title</h1>
                         <section *ngIf="announcementsText && showMessage" class="PageContent-section Dashboard-info-section">
                             <mat-icon (click)="closeMessage()" class="close">clear</mat-icon>
                             <div class="Announcements-section" [innerHTML]="announcementsText">

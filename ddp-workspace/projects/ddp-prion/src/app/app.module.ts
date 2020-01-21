@@ -17,6 +17,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
+import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
+import { Ng2TableModule } from "ng2-table";
+
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -92,10 +95,12 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    Ng2TableModule
   ],
   declarations: [
     WelcomeComponent,
-    MoreDetailsComponent
+    MoreDetailsComponent,
+    StudyListingComponent
   ],
   providers: [
     {
