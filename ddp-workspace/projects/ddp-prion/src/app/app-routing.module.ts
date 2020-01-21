@@ -18,6 +18,7 @@ import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, Redir
   PasswordComponent,
   WorkflowStartActivityComponent,
 ActivityComponent} from 'projects/prion-toolkit/src/public-api';
+import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,15 @@ const routes: Routes = [
     data: {
       activityGuid: 'PRIONMEDICAL'
     }
+  },
+  {
+    path: 'study-listing',
+    component: StudyListingComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
   },
   {
     path: 'dashboard',
