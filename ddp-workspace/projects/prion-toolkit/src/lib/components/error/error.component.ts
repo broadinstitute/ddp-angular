@@ -10,7 +10,7 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
     <div class="PageLayout">
       <div class="row NoMargin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <!--TODO: Might need to move this-->
+          <!--TODO: Implement the error page-->
         <h1 translate>
               Toolkit.ErrorPage.Title
             </h1>
