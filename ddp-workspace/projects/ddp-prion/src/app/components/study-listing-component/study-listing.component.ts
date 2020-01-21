@@ -1,15 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatTable } from "@angular/material";
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
-import { PrionToolkitConfigurationService } from "toolkit-prion";
-import { Column } from "../../models/study-listing/column";
-import { StudyListingDataSource } from "./study-listing-data-source";
 
 @Component({
   selector: 'study-listing',
   template: `
-    <prion-header></prion-header>
-    <div class="Container">
+    <toolkit-header></toolkit-header>
+    <div class="Wrapper">
       <article class="PageContent">
         <div class="PageLayout">
           <div class="row NoMargin">
@@ -17,30 +13,18 @@ import { StudyListingDataSource } from "./study-listing-data-source";
               <section class="PageContent-section">
                 <div class="row">
                   <div class="col-md-4">
-                    <input class="form-control study-listing-filter study-listing-filter-all" matInput 
-                           (keyup)="applyFilter($event)" [placeholder]="'App.StudyListing.InputPlaceholder' | translate">
+                    <input *ngIf="config.filtering" placeholder="Filter all columns"
+                           [ngTableFiltering]="config.filtering"
+                           class="form-control"
+                           (tableChanged)="onChangeTable(config)"/>
                   </div>
                 </div>
-                <br/>
-                <table mat-table [dataSource]="dataSource"  class="table dataTable table-bordered study-listing-table">
-                  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortByCol(i)">
-                      <span translate [innerHTML]="columns[i].columnTitleKey"></span>
-                      <i class="pull-right fa fa-chevron-up" *ngIf="sortArrows[i] === 1"></i>
-                      <i class="pull-right fa fa-chevron-down" *ngIf="sortArrows[i] === 2"></i>
-                    </th>
-                    <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
-                  </ng-container>
-                  <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef class="filter-cell">
-                      <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col" 
-                             matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterInfo.filterPlaceholder | translate">
-                    </th>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-header-row *matHeaderRowDef="filterColumns" class="filter-row"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
+                <br>
+                <ng-table [config]="config"
+                          (tableChanged)="onChangeTable(config)"
+                          (cellClicked)="onCellClick($event)"
+                          [rows]="rows" [columns]="columns">
+                </ng-table>
               </section>
             </div>
           </div>
@@ -51,72 +35,133 @@ import { StudyListingDataSource } from "./study-listing-data-source";
   `
 })
 export class StudyListingComponent implements OnInit {
-  //TODO: Add ability to sort by column
 
-  public dataSource: StudyListingDataSource;
-  public displayedColumns: string[] = ['studyName', 'description', 'nameOfPI',
-    'site', 'eligibilityRequirements', 'moreInfo'];
-  public filterColumns: string[] = ['studyNameFilter', 'descriptionFilter', 'nameOfPIFilter',
-    'siteFilter', 'eligibilityRequirementsFilter', 'moreInfoFilter'];
-  public columns: Column[];
-  public sortArrows: number[];
+  public rows:Array<any> = [];
+  public columns:Array<any> = [
+    {title: 'Study Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'}},
+    {
+      title: 'Study Description',
+      name: 'description',
+      sort: false,
+      filtering: {filterString: '', placeholder: 'Filter by description'}
+    },
+    {title: 'Principal Investigator', name: 'nameOfPI', sort: '',filtering: {filterString: '', placeholder: 'Filter by PI'}},
+    {title: 'Study Site', name: 'studySite', sort: '', filtering: {filterString: '', placeholder: 'Filter by site'}},
+    {title: 'Eligibility Requirements', name: 'eligibilityRequirements', sort: '', filtering: {filterString: '', placeholder: 'Filter by eligibility'}},
+    {title: 'More Information', name: 'studyInfo', sort: false},
 
-  @ViewChild(MatTable, {static:false})
-  private table: MatTable<any>;
+  ];
+  public page:number = 1;
+  public itemsPerPage:number = 10;
+  public maxSize:number = 5;
+  public numPages:number = 1;
+  public length:number = 0;
 
-  public constructor(private translator: TranslateService,
-                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration:PrionToolkitConfigurationService) {
+  public config:any = {
+    sorting: {columns: this.columns},
+    filtering: {filterString: ''},
+    className: ['table-striped', 'table-bordered']
+  };
+
+  private data:Array<any>;
+
+  public constructor(translator:TranslateService) {
+    this.data = translator.instant('Toolkit.StudyListing.Rows');
+    this.length = this.data.length;
   }
 
-  public ngOnInit(): void {
-    this.columns = [
-      new Column(0, true),
-      new Column(1, true),
-      new Column(2, true),
-      new Column(3, true),
-      new Column(4, true),
-      new Column(5, false)
-    ];
-
-    this.sortArrows = [0, 0, 0, 0, 0];
-
-    this.dataSource = new StudyListingDataSource(this.translator, this.toolkitConfiguration.assetsBucketUrl,
-      this.columns.map(x => x.filterInfo));
+  public ngOnInit():void {
+    this.onChangeTable(this.config);
   }
 
-  public applyFilter(event): void {
-    let generalFilterString: string = (event.target as HTMLInputElement).value;
-    this.dataSource.addFilter(generalFilterString);
-  }
-
-  public applyColumnFilter(column: number, event: Event): void {
-    if (this.columns[column].filterInfo.canFilter) {
-      let filterString: string = (event.target as HTMLInputElement).value;
-      this.columns[column].filterInfo.addFilter(filterString);
-      this.dataSource.addColumnFilters(this.columns.map(x => x.filterInfo));
+  public changeSort(data:any, config:any):any {
+    if (!config.sorting) {
+      return data;
     }
-  }
 
-  public sortByCol(colIndex: number) {
-    if ([0,2,3,4].includes(colIndex)) {
-      //First clear existing sorts if necessary
-      if (this.dataSource.shouldSort && this.dataSource.sortIndex !== colIndex) {
-        this.sortArrows[this.dataSource.sortIndex] = 0;
-      }
+    let columns = this.config.sorting.columns || [];
+    let columnName:string = void 0;
+    let sort:string = void 0;
 
-      if (this.dataSource.shouldSort && this.dataSource.sortIndex === colIndex ) {
-        if ('asc' === this.dataSource.sortDir) {
-          this.dataSource.addSort(true, colIndex, 'desc');
-        }
-        else {
-          this.dataSource.addSort(false, -1, null);
-        }
+    for (let i = 0; i < columns.length; i++) {
+      if (columns[i].sort !== '' && columns[i].sort !== false) {
+        columnName = columns[i].name;
+        sort = columns[i].sort;
       }
-      else {
-        this.dataSource.addSort(true, colIndex, 'asc');
-      }
-
-      this.sortArrows[colIndex] = (this.sortArrows[colIndex] + 1) % 3;
     }
+
+    if (!columnName) {
+      return data;
+    }
+
+    // simple sorting
+    return data.sort((previous:any, current:any) => {
+      if (previous[columnName] > current[columnName]) {
+        return sort === 'desc' ? -1 : 1;
+      } else if (previous[columnName] < current[columnName]) {
+        return sort === 'asc' ? -1 : 1;
+      }
+      return 0;
+    });
   }
+
+  public changeFilter(data:any, config:any):any {
+    let filteredData:Array<any> = data;
+    this.columns.forEach((column:any) => {
+      if (column.filtering) {
+        filteredData = filteredData.filter((item:any) => {
+          console.log(column.filtering.filterString.toLocaleLowerCase()+" >> "+ item[column.name]);
+          return item[column.name].toLocaleLowerCase().match(column.filtering.filterString.toLocaleLowerCase());
+        });
+      }
+    });
+
+    if (!config.filtering) {
+
+      return filteredData;
+    }
+
+    if (config.filtering.columnName) {
+      return filteredData.filter((item:any) =>
+        item[config.filtering.columnName].toLocaleLowerCase().match(this.config.filtering.filterString.toLocaleLowerCase()));
+    }
+
+    let tempArray:Array<any> = [];
+    filteredData.forEach((item:any) => {
+      let flag = false;
+      this.columns.forEach((column:any) => {
+        if (item[column.name].toString().toLocaleLowerCase().match(this.config.filtering.filterString.toLocaleLowerCase())) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        tempArray.push(item);
+      }
+    });
+    filteredData = tempArray;
+
+    console.log( JSON.stringify(filteredData));
+
+    return filteredData;
+  }
+
+  public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+    if (config.filtering) {
+      Object.assign(this.config.filtering, config.filtering);
+    }
+
+    if (config.sorting) {
+      Object.assign(this.config.sorting, config.sorting);
+    }
+
+    let filteredData = this.changeFilter(this.data, this.config);
+    let sortedData = this.changeSort(filteredData, this.config);
+    this.rows = sortedData;
+    this.length = sortedData.length;
+  }
+
+  public onCellClick(data: any): any {
+    console.log(data);
+  }
+
 }
