@@ -489,6 +489,21 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
+.dataTable {
+  width: 100% !important;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+
+  th:nth-of-type(2) {
+    width: 30%;
+  }
+
+}
+
+.form-control {
+  max-width: 100% !important;
+}
+
 .fill-remaining-space {
     flex: 1 1 auto;
 }
@@ -856,7 +871,7 @@ mat-icon.ddp-dropdown-arrow {
 
 .PageHeader {
     height: auto;
-  width: 100%;
+    width: 100%;
     z-index: 1000;
 }
 
