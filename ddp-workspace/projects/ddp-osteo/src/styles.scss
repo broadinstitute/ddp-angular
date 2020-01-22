@@ -96,8 +96,8 @@ h4 {
 
 .wrapper {
     height: 100vh;
-    margin-bottom: -5rem; // footer's height
-    padding-bottom: 5rem; // footer's height
+    margin-bottom: -20rem; // footer's height
+    padding-bottom: 20rem; // footer's height
     padding-top: 6.25rem; // header's height
     box-sizing: border-box;
 }
@@ -177,6 +177,10 @@ h4 {
 
 .extra-margin-top {
     margin-top: 5rem;
+}
+
+.extra-margin-bottom {
+    margin-bottom: 5rem;
 }
 
 .black {

@@ -22,22 +22,37 @@
                 "AriaLabel": "Header menu button"
             }
         },
-        "CMI": "Count Me In"
+        "CMI": "Count Me In",
+        "Alts": {
+            "CMI": "Count Me In logo",
+            "Twitter": "Twitter logo",
+            "Facebook": "Facebook logo",
+            "Instagram": "Instagram logo"
+        },
+        "Navigation": {
+            "Home": "Home",
+            "FAQ": "FAQs",
+            "AboutUs": "About Us",
+            "ForPhysicians": "For Physicians",
+            "Dashboard": "Dashboard"
+        }
     },
     "Header": {
         "Logo": {
             "Title": "Osteosarcoma<br>Project",
-            "Image": {
-                "Alt": "Osteosarcoma project logo"
+            "ImageAlt": "Osteosarcoma project logo"
+        }
+    },
+    "Footer": {
+        "Info": {
+            "Text": {
+                "Part1": "The Osteosarcoma Project is part of",
+                "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
-        "Navigation": {
-            "Dashboard": "Dashboard",
-            "FAQ": "FAQs",
-            "AboutUs": "About Us",
-            "Newsletter": "Newsletter",
-            "ForPhysicians": "For Physicians",
-            "LogIn": "Log In"
+        "Contacts": {
+            "Title": "Contact Us",
+            "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States"
         }
     },
     "BehindScenesGallery": {
@@ -87,10 +102,10 @@
         },
         "OrganizationsSection": {
             "BroadLogo": {
-                "Alt": "Broad Institute Logo"
+                "Alt": "Broad Institute logo"
             },
             "DanaFarberLogo": {
-                "Alt": "Dana Farber Logo"
+                "Alt": "Dana Farber logo"
             }
         },
         "StepsSection": {
@@ -145,21 +160,16 @@
         "PartnersSection": {
             "Title": "Advocacy Partners",
             "ImagesAlts": {
-                "MBIAlt": "Make It Better Agents Logo",
-                "QUADWAlt": "The QuadW Foundation Logo",
-                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund Logo",
-                "BoDAlt": "Because Of Daniel Logo"
+                "MBIAlt": "Make It Better Agents logo",
+                "QUADWAlt": "The QuadW Foundation logo",
+                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund logo",
+                "BoDAlt": "Because Of Daniel logo"
             }
         },
         "SocialMediaSection": {
             "Title": "Follow us on social media",
             "TwitterFeedTitle": "Twitter feed",
-            "InstagramFeedTitle": "Instagram feed",
-            "ImagesAlts": {
-                "Twitter": "Twitter logo",
-                "Facebook": "Facebook logo",
-                "Instagram": "Instagram logo"
-            }
+            "InstagramFeedTitle": "Instagram feed"
         },
         "MailingListSection": {
             "Title": "Want to stay informed on the OS Project?",
@@ -180,7 +190,6 @@
             }
         },
         "CMISection": {
-            "CMIImgAlt": "Count Me In Logo",
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
             "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
@@ -460,7 +469,8 @@
             "Title": "Thank you!",
             "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
             "EmailCollected": {
-                "Text": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, you can do so from your dashboard.",
+                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "or",
                 "Button": "Go to Dashboard"
             },
             "ImageAlt": "Email sent"
@@ -590,6 +600,9 @@
         "Title": {
             "Default": "Osteosarcoma Project",
             "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
         }
     }
 }

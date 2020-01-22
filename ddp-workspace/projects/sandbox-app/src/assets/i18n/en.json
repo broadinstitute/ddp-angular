@@ -80,6 +80,9 @@
         "DetailsPlaceholder": {
             "PluralForm": "characters remaining",
             "SingularForm": "character remaining"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
         }
     }
 }

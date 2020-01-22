@@ -15,6 +15,9 @@ export interface TextParameters {
   question?: string;
   placeholder?: string;
   label?: string;
+  confirmEntry?: boolean;
+  confirmPrompt?: string;
+  mismatchMessage?: string;
 }
 
 @Component({
@@ -62,6 +65,9 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
     newQuestion.regexPattern = parameters.regexPattern;
     newQuestion.inputType = parameters.inputType;
     newQuestion.label = parameters.label;
+    newQuestion.confirmEntry = parameters.confirmEntry;
+    newQuestion.confirmPrompt = parameters.confirmPrompt;
+    newQuestion.mismatchMessage = parameters.mismatchMessage;
     this.validationMessage = null;
     if (parameters.autocomplete && parameters.suggestions) {
       newQuestion.textSuggestionSource = (value$: Observable<string>) => value$.pipe(

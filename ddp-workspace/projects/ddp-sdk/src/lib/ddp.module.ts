@@ -78,6 +78,7 @@ import { ActivityQuestionComponent } from './components/activityForm/activityQue
 import { ActivityBooleanAnswer } from './components/activityForm/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/activityTextAnswer.component';
+import { ActivityEmailInput } from './components/activityForm/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
 import { ActivityAnswerComponent } from './components/activityForm/activityAnswer.component';
@@ -289,6 +290,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailInput,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,
@@ -344,6 +346,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailInput,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,

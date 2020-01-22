@@ -163,7 +163,6 @@
 
 .social-media-header {
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
 }
 
@@ -181,6 +180,10 @@
 .social-media-logos__img {
     width: 110px;
     height: 110px;
+}
+
+.social-media-logo {
+    display: flex;
 }
 
 .feeds {
