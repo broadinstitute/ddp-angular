@@ -47,6 +47,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from "@angular/material";
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    DdpModule
+    DdpModule,
+    MatTableModule
   ],
   providers: [
     CommunicationService,
