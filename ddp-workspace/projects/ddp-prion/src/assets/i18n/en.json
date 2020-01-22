@@ -13,11 +13,12 @@
           "JoinUs": "Join Us"
         },
         "Header": {
-            "HeaderLogo": "Prion<br>Registry",
+            "HeaderAlt": "Prion Registry Logo",
             "LearnMore": "Learn More",
             "CountMeIn": "Join Us",
             "CountMeInButton": "Join Us",
-            "JoinUs": "Join Us"
+            "JoinUs": "Join Us",
+            "Dashboard": "My Dashboard"
         },
         "Footer": {
             "FooterLogo": "Prion<br>Registry",
@@ -31,6 +32,12 @@
                 "Address": "415 Main St, Cambridge, MA",
                 "Zip": "02142, United States"
             }
+        },
+        "Dashboard": {
+          "StudyListing": {
+            "ActivityName": "StudyListing",
+            "ActivityStatus": "Available"
+          }
         },
         "Welcome": {
             "WelcomeTitle": "Volunteer for research to help fight prion disease",
@@ -249,9 +256,6 @@
                 "Error": "Password is required"
             }
         },
-        "Dashboard": {
-            "Title": "Dashboard"
-        },
         "ErrorPage": {
             "Title": "We've encountered an error",
             "Header": "We're sorry, but an error has occurred.",
@@ -307,9 +311,9 @@
             "LanguageSelection": "language selection"
         },
         "UserActivities": {
-            "ActivityName": "Form",
-            "Summary": "Summary",
-            "ActivityStatus": "Status",
+            "ActivityName": "Activity",
+            "Summary": "Status",
+            "ActivityStatus": "Summary",
             "ActivityDate": "Created",
             "ActivityActions": "Actions"
         },
@@ -329,8 +333,8 @@
             "UserPreferencesLocale": "Preferred language"
         },
         "Dashboard": {
-            "Title": "My Dashboard",
-            "Text": "The dashboard below describes each Prion Registry form and its status."
+            "Title": "Welcome to the Prion Registry!",
+            "Text": "Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
         },
         "DatePicker": {
             "Day": "Choose day...",
@@ -350,7 +354,7 @@
             "December": "December"
         },
         "UserMenu": {
-            "DashboardButton": "Dashboard",
+            "DashboardButton": "My Dashboard",
             "SignOutButton": "Sign Out"
         },
         "DetailsPlaceholder": {
