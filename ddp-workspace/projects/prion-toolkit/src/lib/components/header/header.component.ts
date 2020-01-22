@@ -30,13 +30,13 @@ import {
             <div class="collapse navbar-collapse Header-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right NoMargin">
                     <li *ngIf="isLoggedIn()" class="Nav-item">
-                        <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}">
-                            Dashboard
+                        <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}" translate>
+                            Toolkit.Header.Dashboard
                         </span>
                     </li>
                     <li class="Nav-item">
-                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/more-details'}">
-                            Learn More
+                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/more-details'}" translate>
+                            Toolkit.Header.LearnMore
                         </span>
                     </li>
                     <li class="Nav-item">
@@ -45,8 +45,8 @@ import {
                         </span>
                     </li>
                     <li *ngIf="!isLoggedIn()" class="Nav-item Nav-itemJoinUs">
-                        <a (click)="clickJoinUs()" id="JoinUs" class="Button Button--secondaryWhite">
-                            Join Us
+                        <a (click)="clickJoinUs()" id="JoinUs" class="Button Button--secondaryWhite" translate>
+                            Toolkit.Header.JoinUs
                         </a>
                     </li>
                 </ul>
