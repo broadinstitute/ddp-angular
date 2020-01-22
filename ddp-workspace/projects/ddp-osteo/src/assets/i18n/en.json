@@ -160,10 +160,11 @@
         "PartnersSection": {
             "Title": "Advocacy Partners",
             "ImagesAlts": {
-                "MBIAlt": "Make It Better Agents logo",
-                "QUADWAlt": "The QuadW Foundation logo",
-                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund logo",
-                "BoDAlt": "Because Of Daniel logo"
+                "MBI": "Make It Better Agents logo",
+                "QUADW": "The QuadW Foundation logo",
+                "ZSOF": "The Zach Sobiech Osteosarcoma Fund logo",
+                "BoD": "Because Of Daniel logo",
+                "OsCollaborative": "The Osteosarcoma Collaborative logo"
             }
         },
         "SocialMediaSection": {

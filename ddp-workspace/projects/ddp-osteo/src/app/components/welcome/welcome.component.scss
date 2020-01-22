@@ -144,7 +144,7 @@
     grid-auto-columns: 1fr;
     grid-gap: 5rem;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
 }
 
 .partners__group_top {
@@ -152,7 +152,7 @@
 }
 
 .partners__group_bottom {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, minmax(auto, 300px));
 }
 
 .social-media-block {
