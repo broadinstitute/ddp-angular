@@ -884,12 +884,23 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .PageLayout {
-    width: 100%;
-    margin: 0 auto;
+  max-width: 1200px !important;
 }
 
-.PageLayout-dashboard {
-    max-width: 1200px !important;
+.mat-header-cell {
+  color: #717174 !important;
+}
+
+.mat-table .Link {
+  font-weight: 400;
+}
+
+.mat-column-name, .mat-column-summary {
+  width: 50% !important
+}
+
+.mat-column-date, .mat-column-status, .mat-column-actions {
+  display: none !important;
 }
 
 .NoTopMargin {
@@ -986,10 +997,6 @@ mat-icon.ddp-dropdown-arrow {
     font-size: 1.5rem;
     line-height: 1.25;
     width: auto;
-}
-
-.PageLayout {
-    margin: 0 auto;
 }
 
 .WirbOuter {
@@ -1224,8 +1231,6 @@ ul {
 .PageContent-box-text {
     font-weight: 300;
     font-size: 1.1rem;
-    line-height: 1.6rem;
-    color: mat-color($app-theme, 800);
     text-align: left;
 }
 
@@ -1259,11 +1264,11 @@ ul {
 }
 
 .PageContent-title {
-    font-size: 1.4rem;
-    color: mat-color($app-theme, 800);
-    font-weight: 300;
-    line-height: 1.33;
-    margin: 2.1rem 0 1.3rem 0;
+    font-size: 1.5rem;
+    color: rgb(51, 51, 51);
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 20px 0 15px 0;
 }
 
 .Field-padding {
@@ -1846,7 +1851,7 @@ ul {
 }
 
 .PageContent-subtitle {
-    color: mat-color($app-theme, 1000);
+    color: rgb(51, 51, 51);
     font-weight: 400;
     font-size: 1.2rem;
     line-height: 1.8rem;
@@ -1854,7 +1859,10 @@ ul {
 }
 
 .PageContent-subtitle-dashboard {
-    margin: 0.5rem 0 !important;
+  margin: 20px 0 15px 0;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 
 .PageContent-text-dashboard {
@@ -2245,7 +2253,7 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .dashboard-activity-button {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 400;
     background: none;
     border: none;
@@ -2253,6 +2261,7 @@ ddp-activity-composite-answer .ddp-answer-container {
     cursor: pointer;
     text-decoration: none;
     text-align: left;
+    line-height: 2.4rem;
 }
 
 .dashboard-status-container__img {
