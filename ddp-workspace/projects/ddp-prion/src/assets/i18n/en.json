@@ -36,7 +36,10 @@
         "Dashboard": {
           "StudyListing": {
             "ActivityName": "Study Listing",
-            "ActivityStatus": "Available"
+            "ActivityStatus": "Available",
+            "ActivityCreated": "-",
+            "ActivitySummary": "Available",
+            "ActivityActions": "Go"
           }
         },
         "Welcome": {
@@ -312,8 +315,8 @@
         },
         "UserActivities": {
             "ActivityName": "Activity",
-            "Summary": "Status",
-            "ActivityStatus": "Summary",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
             "ActivityDate": "Created",
             "ActivityActions": "Actions"
         },
