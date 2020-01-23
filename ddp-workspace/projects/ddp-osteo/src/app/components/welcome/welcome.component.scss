@@ -153,6 +153,7 @@
 
 .partners__group_bottom {
     grid-template-columns: repeat(2, minmax(auto, 300px));
+    justify-content: space-evenly;
 }
 
 .social-media-block {
