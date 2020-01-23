@@ -110,7 +110,6 @@ export class StudyListingComponent implements OnInit {
     this.columns.forEach((column:any) => {
       if (column.filtering) {
         filteredData = filteredData.filter((item:any) => {
-          console.log(column.filtering.filterString.toLocaleLowerCase()+" >> "+ item[column.name]);
           return item[column.name].toLocaleLowerCase().match(column.filtering.filterString.toLocaleLowerCase());
         });
       }
@@ -139,9 +138,6 @@ export class StudyListingComponent implements OnInit {
       }
     });
     filteredData = tempArray;
-
-    console.log( JSON.stringify(filteredData));
-
     return filteredData;
   }
 
