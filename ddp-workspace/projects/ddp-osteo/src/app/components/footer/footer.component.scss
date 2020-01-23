@@ -46,13 +46,13 @@
 }
 
 .footer-main-text {
-    font-size: 1.25rem;
-    line-height: 1.5625rem;
+    font-size: 20px;
+    line-height: 25px;
 }
 
 .footer-secondary-text {
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
+    font-size: 15px;
+    line-height: 22px;
 }
 
 .footer-link {
@@ -114,7 +114,7 @@
     display: flex;
 }
 
-@media screen and (max-width: 945px) {
+@media screen and (max-width: 975px) {
     .content {
         padding: 3.25rem 4rem 4rem 4rem;
     }
@@ -141,13 +141,13 @@
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 650px) {
     .content {
         padding: 3.25rem 1.5625rem 4rem 1.5625rem;
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 575px) {
     .navigation {
         flex-direction: column;
     }
@@ -163,5 +163,15 @@
 
     .cmi-info__logo {
         margin-bottom: 1.5rem;
+    }
+
+    .footer-main-text {
+        font-size: 18px;
+        line-height: 23px;
+    }
+
+    .footer-secondary-text {
+        font-size: 14px;
+        line-height: 22px;
     }
 }
