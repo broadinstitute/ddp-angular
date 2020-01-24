@@ -23,7 +23,7 @@ import {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="Header-logo" href [routerLink]="['/home']">
-                    <img src="/assets/images/project-logo.svg" alt="Prion Registry Logo">
+                    <img src="/assets/images/project-logo.svg" [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
                 </a>
             </div>
             
