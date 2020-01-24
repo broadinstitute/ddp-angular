@@ -11,7 +11,7 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, WindowRef } from 'ddp-sd
 <footer class="Footer row">
   <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 Footer-logo NoPadding">
       <a href [routerLink]="['/home']">
-          <img src="/assets/images/project-logo-dark.svg" alt="Prion Registry Logo">
+          <img src="/assets/images/project-logo-dark.svg" [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
       </a>
   </div>
   <div class="col-lg-6 col-md-4 col-sm-8 col-xs-12 NoPadding">
