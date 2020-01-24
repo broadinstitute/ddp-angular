@@ -10,10 +10,10 @@
         "Common": {
             "Organization": "Prion",
             "CountMeInButton": "Join Us",
-          "JoinUs": "Join Us"
+            "JoinUs": "Join Us",
+            "LogoAlt": "Prion Registry Logo"
         },
         "Header": {
-            "HeaderAlt": "Prion Registry Logo",
             "LearnMore": "Learn More",
             "CountMeIn": "Join Us",
             "CountMeInButton": "Join Us",
@@ -61,7 +61,8 @@
                     "Title": "3. Let's learn together!",
                     "Text": "Once your questionnaire is complete, you will be able to view research studies you're eligible to participate in, and contact investigators to enroll. If you let us, we will also contact you about future research opportunities."
                 }
-            }
+            },
+            "ArrowAlt": "Arrow"
         },
         "JoinUs": {
             "Title": "Join Us",
@@ -159,7 +160,8 @@
               "eligibilityRequirements": "Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
               "studyInfo":  "See <a target=\"_blank\" href=\"assets/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
             }
-          ]
+          ],
+          "InputPlaceholder": "Filter all columns"
         },
         "MoreDetails": {
             "Title": "Learn more about Prion Registry",
