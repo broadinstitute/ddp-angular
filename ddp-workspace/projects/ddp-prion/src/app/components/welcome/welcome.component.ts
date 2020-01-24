@@ -12,11 +12,11 @@ import { AnalyticsEventCategories, AnalyticsEventActions, AnalyticsEventsService
                 <h1 class="Title" translate>Toolkit.Welcome.WelcomeTitle</h1>
                 <p translate>Toolkit.Welcome.WelcomeText</p>
                 <div class="row">
-                    <a (click)="clickJoinUs()" class="Button Button--primaryDarkYellow col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-sm-offset-2">Join Us</a>
+                    <a (click)="clickJoinUs()" class="Button Button--primaryDarkYellow col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-sm-offset-2" translate>Toolkit.Common.JoinUs</a>
                 </div>
             </div>
             <div *ngIf="showArrow" class="Intro-arrow">
-                <a (click)="scrollTo(secondView)"><img src="./assets/images/white-arrow.svg" alt="Arrow"></a>
+                <a (click)="scrollTo(secondView)"><img src="./assets/images/white-arrow.svg" [attr.alt]="'Toolkit.Welcome.ArrowAlt' | translate"></a>
             </div>
         </div>
         
@@ -34,7 +34,7 @@ import { AnalyticsEventCategories, AnalyticsEventActions, AnalyticsEventsService
         </div>
 
         <div class="CenterDiv">
-            <img src="/assets/images/yellow-arrow.svg" alt="Arrow">
+            <img src="/assets/images/yellow-arrow.svg" [attr.alt]="'Toolkit.Welcome.ArrowAlt' | translate">
         </div>
     
         <div class="FullWidth">
@@ -69,7 +69,7 @@ import { AnalyticsEventCategories, AnalyticsEventActions, AnalyticsEventsService
         </div>
 
         <div class="CenterDiv">
-            <img src="/assets/images/yellow-arrow.svg" alt="Arrow">
+            <img src="/assets/images/yellow-arrow.svg" [attr.alt]="'Toolkit.Welcome.ArrowAlt' | translate">
         </div>
     
         <div class="FullWidth">
