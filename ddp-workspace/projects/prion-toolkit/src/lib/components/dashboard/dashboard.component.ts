@@ -83,7 +83,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                                           class="padding-5"
                                           [attr.data-ddp-test]="'activityCreated::' + 
                                           translator.instant(element.created)">
-                                  <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityCreated' | translate"></span>
+                                  <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityDate' | translate"></span>
                                   <div class="dashboard-status-container" translate>
                                     {{element.created}}
                                   </div>
