@@ -151,25 +151,25 @@
         "LearnMore": {
             "Title": "Learn more about Prion Registry",
             "LearnMore": {
-                "Title": "Frequently Asked Questions",
+                "Title": "Learn More",
                 "WhatIs": {
-                    "Question": "1. What is prion disease?",
+                    "Question": "What is prion disease?",
                     "Text": "Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
                 },
                 "For": {
-                    "Question": "2. What is this registry for?",
+                    "Question": "What is this registry for?",
                     "Text": "In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
                 },
                 "Participate": {
-                    "Question": "3. Can I participate in this registry?",
+                    "Question": "Can I participate in this registry?",
                     "Text": "Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
                 },
                 "Why": {
-                    "Question": "4. Why would I want to participate in this registry?",
+                    "Question": "Why would I want to participate in this registry?",
                     "Text": "Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
                 },
                 "DoIHaveTo": {
-                    "Question": "5. Do I have to participate in this registry?",
+                    "Question": "Do I have to participate in this registry?",
                     "Text": "Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
                 }
             }
