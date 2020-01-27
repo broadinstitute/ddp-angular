@@ -9,7 +9,7 @@ import {
 } from 'ddp-sdk';
 
 import {
-    ActivityComponent,
+    ActivityRedesignedComponent,
     ActivityPageComponent,
     DashboardComponent,
     LoginLandingComponent,
@@ -145,7 +145,7 @@ const routes: Routes = [
     },
     {
         path: 'activity/:id',
-        component: ActivityComponent,
+        component: ActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,

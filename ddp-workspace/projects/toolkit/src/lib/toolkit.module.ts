@@ -20,6 +20,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflowStartActivity.component';
 import { ActivityPageComponent } from './components/activity-page/activityPage.component';
 import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityRedesignedComponent } from './components/activity/activity-redesigned.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginLandingComponent } from './components/login-landing/loginLanding.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -90,6 +91,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     WorkflowStartActivityComponent,
     ActivityPageComponent,
     ActivityComponent,
+    ActivityRedesignedComponent,
     DashboardComponent,
     LoginLandingComponent,
     CommonLandingComponent,
@@ -120,6 +122,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     WorkflowStartActivityComponent,
     ActivityPageComponent,
     ActivityComponent,
+    ActivityRedesignedComponent,
     DashboardComponent,
     LoginLandingComponent,
     RedirectToLoginLandingComponent,

@@ -11,6 +11,7 @@ export * from './lib/services/workflowMapper.service';
 export * from './lib/services/headerConfiguration.service';
 
 export * from './lib/components/activity/activity.component';
+export * from './lib/components/activity/activity-redesigned.component';
 export * from './lib/components/activity-page/activityPage.component';
 export * from './lib/components/app/app.component';
 export * from './lib/components/common-landing/commonLanding.component';

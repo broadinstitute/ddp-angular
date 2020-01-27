@@ -8,16 +8,6 @@ import { ActivityResponse } from 'ddp-sdk';
 @Component({
     selector: 'toolkit-activity',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-    <ng-template #newDesign>
-        <ddp-activity-redesigned [studyGuid]="studyGuid"
-                                 [activityGuid]="id"
-                                 (submit)="navigate($event)"
-                                 (stickySubtitle)="showStickySubtitle($event)"
-                                 (activityCode)="activityCodeChanged($event)">
-        </ddp-activity-redesigned>
-    </ng-template>
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
@@ -25,14 +15,12 @@ import { ActivityResponse } from 'ddp-sdk';
                       [activityGuid]="id"
                       (submit)="navigate($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>
-    </ng-template>`
+        </ddp-activity>`
 })
 export class ActivityComponent implements OnInit {
     public id: string;
     public studyGuid: string;
     public stickySubtitle: string;
-    public useRedesign: boolean;
     public activityCode: string;
 
     constructor(
@@ -46,7 +34,6 @@ export class ActivityComponent implements OnInit {
             this.id = x.id;
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
         this.headerConfig.setupActivityHeader();
     }
 
