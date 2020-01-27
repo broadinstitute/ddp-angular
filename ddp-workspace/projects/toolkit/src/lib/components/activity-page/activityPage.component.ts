@@ -19,12 +19,12 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
     template: `
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
     <ng-template #newDesign>
-        <ddp-redesigned-activity [studyGuid]="studyGuid"
+        <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                                  (submit)="raiseSubmit($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">
-        </ddp-redesigned-activity>
+        </ddp-activity-redesigned>
     </ng-template>
     <ng-template #oldDesign>
         <toolkit-header [showButtons]="false"

@@ -19,14 +19,14 @@ import { filter, map, mergeMap, take } from 'rxjs/operators';
   template: `
     <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
     <ng-template #newDesign>
-      <ddp-redesigned-activity *ngIf="show"
+      <ddp-activity-redesigned *ngIf="show"
                                [studyGuid]="studyGuid"
                                [activityGuid]="instanceGuid"
                                (submit)="navigate($event)"
                                (stickySubtitle)="showStickySubtitle($event)"
                                (activityCode)="activityCodeChanged($event)"
                                (sectionsVisibilityChanged)="sectionsVisibilityChanged($event)">
-      </ddp-redesigned-activity>
+      </ddp-activity-redesigned>
     </ng-template>
     <ng-template #oldDesign>
       <toolkit-header [showButtons]="false"
