@@ -9,29 +9,14 @@
     "Toolkit": {
         "Common": {
             "Organization": "Prion",
-            "CountMeInButton": "Join Us",
             "JoinUs": "Join Us",
-            "LogoAlt": "Prion Registry Logo"
-        },
-        "Header": {
+            "LogoAlt": "Prion Registry Logo",
+            "Home": "Home",
             "LearnMore": "Learn More",
-            "CountMeIn": "Join Us",
-            "CountMeInButton": "Join Us",
-            "JoinUs": "Join Us",
             "Dashboard": "My Dashboard"
         },
         "Footer": {
-            "FooterLogo": "Prion<br>Registry",
-            "Home": "Home",
-            "Join": "Join Mailing List",
-            "FAQ": "Learn More",
-            "About": "About Us",
-            "Top": "Back to top",
-            "Contacts": {
-                "ContactUs": "Contact Us:",
-                "Address": "415 Main St, Cambridge, MA",
-                "Zip": "02142, United States"
-            }
+            "BackToTop": "Back to top"
         },
         "Dashboard": {
           "StudyListing": {
@@ -163,7 +148,7 @@
           ],
           "InputPlaceholder": "Filter all columns"
         },
-        "MoreDetails": {
+        "LearnMore": {
             "Title": "Learn more about Prion Registry",
             "LearnMore": {
                 "Title": "Frequently Asked Questions",
