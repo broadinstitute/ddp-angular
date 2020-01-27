@@ -23,7 +23,7 @@ import {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="Header-logo" href [routerLink]="['/home']">
-                    <img src="/assets/images/project-logo.svg" [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
+                    <img lazy-resource src="/assets/images/project-logo.svg" [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
                 </a>
             </div>
             
@@ -31,12 +31,12 @@ import {
                 <ul class="nav navbar-nav navbar-right NoMargin">
                     <li *ngIf="isLoggedIn()" class="Nav-item">
                         <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}" translate>
-                            Toolkit.Header.Dashboard
+                            Toolkit.Common.Dashboard
                         </span>
                     </li>
                     <li class="Nav-item">
-                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/more-details'}" translate>
-                            Toolkit.Header.LearnMore
+                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/learn-more'}" translate>
+                            Toolkit.Common.LearnMore
                         </span>
                     </li>
                     <li class="Nav-item">
@@ -46,7 +46,7 @@ import {
                     </li>
                     <li *ngIf="!isLoggedIn()" class="Nav-item Nav-item-JoinUs">
                         <a (click)="clickJoinUs()" id="JoinUsLink" class="Button Button--secondaryWhite" translate>
-                            Toolkit.Header.JoinUs
+                            Toolkit.Common.JoinUs
                         </a>
                     </li>
                 </ul>
@@ -91,6 +91,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public clickLearnMore(): void {
-    this.router.navigate(['/more-details']);
+    this.router.navigateByUrl('/learn-more');
   }
 }
