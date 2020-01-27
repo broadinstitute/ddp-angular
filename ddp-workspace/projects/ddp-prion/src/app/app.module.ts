@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
 import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
 import { Ng2TableModule } from "ng2-table";
@@ -99,7 +99,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
   ],
   declarations: [
     WelcomeComponent,
-    MoreDetailsComponent,
+    LearnMoreComponent,
     StudyListingComponent
   ],
   providers: [
