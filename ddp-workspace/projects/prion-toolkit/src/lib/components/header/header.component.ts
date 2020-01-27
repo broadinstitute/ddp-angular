@@ -14,7 +14,7 @@ import {
   selector: 'toolkit-header',
   template: `
     <header class="Header">
-        <nav class="navbar navbar-default Header-background" [ngClass]="{'NoBackground': noBackground, 'Header--home': currentRoute === '/home' || currentRoute === '/'}">
+        <nav class="navbar navbar-default Header-background" [ngClass]="{'NoBackground': noBackground}">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed Header-hamburger" data-toggle="collapse" data-target="#menu" aria-expanded="false">
                     <span class="sr-only"></span>
@@ -44,8 +44,8 @@ import {
                             <ddp-sign-in-out></ddp-sign-in-out>
                         </span>
                     </li>
-                    <li *ngIf="!isLoggedIn()" class="Nav-item Nav-itemJoinUs">
-                        <a (click)="clickJoinUs()" id="JoinUs" class="Button Button--secondaryWhite" translate>
+                    <li *ngIf="!isLoggedIn()" class="Nav-item Nav-item-JoinUs">
+                        <a (click)="clickJoinUs()" id="JoinUsLink" class="Button Button--secondaryWhite" translate>
                             Toolkit.Header.JoinUs
                         </a>
                     </li>
@@ -57,6 +57,7 @@ import {
 })
 export class HeaderComponent implements OnInit {
   @Input() noBackground = false;
+  public unsupportedBrowser: boolean;
 
   constructor(
     private router: Router,
@@ -69,7 +70,7 @@ export class HeaderComponent implements OnInit {
     private session: SessionMementoService) { }
 
   public ngOnInit(): void {
-
+    this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
   }
 
   public isLoggedIn(): boolean {
