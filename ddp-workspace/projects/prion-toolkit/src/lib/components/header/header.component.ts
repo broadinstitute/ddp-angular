@@ -57,6 +57,7 @@ import {
 })
 export class HeaderComponent implements OnInit {
   @Input() noBackground = false;
+  @Input() currentRoute: string = '';
   public unsupportedBrowser: boolean;
 
   constructor(
