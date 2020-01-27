@@ -201,37 +201,37 @@
                 {
                     "Name": "Theresa Beech",
                     "Bio": "Theresa Beech is the mother of two kids, Daniel and Sara. When Daniel was 11, he was diagnosed with osteosarcoma. Two years later, at the age of 13, he was dead. Daniel had a smile that would light up a room, and all throughout treatment, he never quit smiling. While Daniel was on hospice, Theresa taught herself genomics and started doing research into osteosarcoma genetics. She was able to identify two drugs which corresponded to mutations in Daniel’s tumor and prolonged his life. Since Daniel’s death on August 28, 2016, she has continued her patient advocacy and genomics research and is the Principal Investigator of POWR, the Patient/parent Osteosarcoma genome-Wide Registry, believed to be one of the largest genomic and medical history registry of osteosarcoma data in the world. She has presented her research findings at numerous scientific conferences in the US and internationally, and has been invited to speak at a variety of forums. A TV long-story on Daniel and her work won the prestigious National 2018 June L. Biedler Award for TV journalism. In 2019, she started a closed Facebook group called the Osteosarcoma Information Group to provide scientific and medical information and explanations to osteosarcoma patients and their families. Today, there are well over 500 members and doctors and researchers are now joining the group as well. She is the founder and President of “Because of Daniel '', a charitable foundation dedicated to osteosarcoma research and clinical trials. She is also a co-founder and board member of the Osteosarcoma Collaborative, a charitable foundation dedicated to promoting collaboration in osteosarcoma. In her day job, Theresa is a space engineer (aka rocket scientist) for NASA.",
-                    "Image": "../../../assets/images/PAC-Theresa-Beech.jpg",
+                    "Image": "assets/images/PAC-Theresa-Beech.jpg",
                     "Alt": "Theresa Beech photo"
                 },
                 {
                     "Name": "Ann Graham",
                     "Bio": "Ann is the founder and President of MIB Agents Osteosarcoma Alliance. At age 43, Ann was diagnosed with osteosarcoma and was treated in the Pediatric Center at Memorial Sloan Kettering Cancer Center. She was in awe of the courage of her fellow patients. Like most, she was unaware of how little funding pediatric cancers receive, and that osteosarcoma patients lose limbs, fertility, hearing, organ function and too often, their lives. She knew there had to be a way to Make It Better. She began MIB Agents, a nationwide 501c3 non-profit and the FACTOR Conference. Together with MIB Agents everywhere, they endeavor to Make It Better for osteosarcoma patients. She is an Advocate with the A2A Alliance, The Mighty, and a member of CAC2.",
-                    "Image": "../../../assets/images/PAC-Ann-Graham.jpg",
+                    "Image": "assets/images/PAC-Ann-Graham.jpg",
                     "Alt": "Ann Graham photo"
                 },
                 {
                     "Name": "Alexis Johnson",
                     "Bio": "Alexis Johnson is a 12-year Osteosarcoma Cancer survivor and an amputee. During her treatment, Alexis spent countless hours in the hospital and became close with the patients around her. It was here that she met some of the most incredible children who never let their illness stand in their way. She watched them bravely battle Osteosarcoma and many losing their fight due to exhausting all treatment options. Alexis learned that there has been no new treatments and not enough research done. This drove Alexis to wanting to do something to help change this outcome. Alexis has dedicated her life to becoming an advocate in the fight against Osteosarcoma. She is involved in the wonderful organization MIB and worked on several initiatives with them. She has also used the power of her voice to raise awareness and help others who are currently in the fight. Alexis is currently in medical school at the University of Arizona with an end goal of becoming a pediatric oncologist. She is tremendously proud to be a part of this project and understands what the power of knowledge and data can do to greatly change this outcome.",
-                    "Image": "../../../assets/images/PAC-Alexis-Johnson.jpg",
+                    "Image": "assets/images/PAC-Alexis-Johnson.jpg",
                     "Alt": "Alexis Johnson photo"
                 },
                 {
                     "Name": "Ryan Kennington",
                     "Bio": "At the age of 17 years old, Ryan was diagnosed with Osteosarcoma in the femoral head of his right femur. At the University of Pennsylvania Abramson Cancer Center, he underwent treatment and a limb salvaging surgery. One year after he completed treatment, he had a relapse in his lungs and had a video-assisted thoracoscopic surgery to remove the single nodule. Today, Ryan has been cancer free for over 4 years and is enjoying life free of disease. Active in the cancer community, Ryan is involved in non-profit organizations such as MIB agents, Steps to Cure Sarcoma, and UDANCE in order to help raise awareness and funds for cancer research. Motivated by his experiences with Osteosarcoma, he is currently working on earning his Bachelor of Science degree in biology at the University of Delaware and is focusing his attention on improving the outcome of Osteosarcoma patients.",
-                    "Image": "../../../assets/images/PAC-Ryan-Kennington.jpg",
+                    "Image": "assets/images/PAC-Ryan-Kennington.jpg",
                     "Alt": "Ryan Kennington photo"
                 },
                 {
                     "Name": "Ben Moody",
                     "Bio": "Ben Moody is the father of Claire, who was diagnosed with osteosarcoma in 2012 and who passed away in 2016, aged 24.  She was a bright light; she lit up every room. Claire was irrepressibly happy; teeming with energy, she flapped, she twirled, she loved to laugh. One of Claire’s many doctors wrote “Claire is an inspiration to all of us that care for sarcoma patients or do sarcoma research; she is the motivation that pushes us on our journey to find a cure.” Since Claire’s death, Ben has been dedicated to collaborating with those who are passionately focused on finding a cure for osteosarcoma, including as a member of the Board of the Osteosarcoma Collaborative.  Ben is also co-founder of Pan American Finance, an advisory firm based in Miami, Florida, with a key focus on raising capital for renewable energy. Ben has over 35 years of investment banking and private equity experience, and is a graduate of the University of Oxford. ",
-                    "Image": "../../../assets/images/PAC-Ben-Moody.jpg",
+                    "Image": "assets/images/PAC-Ben-Moody.jpg",
                     "Alt": "Ben Moody photo"
                 },
                 {
                     "Name": "Laura Sobeich",
                     "Bio": "Laura Sobiech’s son, Zach, died from osteosarcoma at the age of 18. In the last year of Zach’s life, he wrote a song called “Clouds” that became an international hit. After Zach died, Laura wrote a book called Fly a Little Higher: How God Answered a Mom’s Small Prayer in a Big Way, to tell the story of Zach’s battle with osteosarcoma and how he chose to live despite the disease. This year, Laura’s book is being made into a film by Warner Brothers. Laura works at Children’s Cancer Research Fund, a nonprofit that raises seed grant money for research, and where the Zach Sobiech Osteosarcoma Fund was established in 2012. All proceeds from Zach’s music are donated to the fund to support Zach’s wish that no other kids will have to die from osteosarcoma.",
-                    "Image": "../../../assets/images/PAC-Laura-Sobeich.jpg",
+                    "Image": "assets/images/PAC-Laura-Sobeich.jpg",
                     "Alt": "Laura Sobeich photo"
                 }
             ]
@@ -246,7 +246,7 @@
                         "Lorem ipsum dolor sit amet"
                     ],
                     "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/SAC-Katherine-Janeway.jpg",
+                    "Image": "assets/images/SAC-Katherine-Janeway.jpg",
                     "Alt": "Katherine Janeway photo"
                 },
                 {
@@ -256,7 +256,7 @@
                         "Lorem ipsum dolor sit amet"
                     ],
                     "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/SAC-Brian-Crompton.jpg",
+                    "Image": "assets/images/SAC-Brian-Crompton.jpg",
                     "Alt": "Brian Crompton photo"
                 }
             ]
