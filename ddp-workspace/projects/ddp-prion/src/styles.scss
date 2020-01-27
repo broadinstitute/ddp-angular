@@ -66,6 +66,10 @@ p {
     color: #333 !important;
 }
 
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: auto !important;
+}
+
 .Accent {
     font-weight: 500 !important;
 }
@@ -632,6 +636,14 @@ mat-icon.ddp-dropdown-arrow {
     font-weight: 500;
 }
 
+#JoinUsLink {
+  padding: 12px 30px !important;
+}
+
+button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
+  margin-top: 0;
+}
+
 .Nav-itemLink {
     cursor: pointer;
     color: #ffffff !important;
@@ -651,52 +663,9 @@ mat-icon.ddp-dropdown-arrow {
     color: #a88838 !important;
 }
 
-.Header {
-    width: 100%;
-    height: auto;
-    z-index: 1000;
-}
-
-.HeaderBackground {
-    background: #F2B816 none;
-    position: relative;
-    top: 0;
-    left: 0;
-    min-height: 90px;
-    padding: 25px 35px 35px 55px !important;
-    display: flex;
-    justify-content: space-between;
-}
-
 .NoBackground {
     position: absolute !important;
     background-color: transparent !important;
-}
-
-.HeaderInfo {
-    max-width: 660px;
-    display: inline-block;
-    margin: 0 0 0 20px;
-
-    a {
-        color: mat-color($app-theme, 600);
-    }
-}
-
-.Header-navItemLink {
-    font-size: 1rem;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    font-weight: 300;
-}
-
-.HeaderLink {
-    transition: color 0.3s ease;
-    color: mat-color($app-theme, 100);
-}
-
-.HeaderLink:hover {
-    color: mat-color($app-theme, 700);
 }
 
 .PageHeader-activity-subtitle {
@@ -705,65 +674,6 @@ mat-icon.ddp-dropdown-arrow {
     line-height: 1.6em;
     color: mat-color($app-theme, 100);
     margin: 5px 0 5px 0;
-}
-
-.Header-logoImg {
-    height: 55px;
-}
-
-.Header-link {
-    display: flex;
-    align-items: flex-start;
-}
-
-.Header-logoText {
-    margin: 28px 0 0 10px;
-    color: mat-color($app-theme, 100);
-    font-size: 1.1rem;
-    font-weight: 300;
-    line-height: 1.2rem;
-}
-
-.Header-nav {
-    margin: 0 25px 0 0;
-}
-
-.Header-nav--small {
-    margin: 0;
-}
-
-.Header-navList {
-    display: flex;
-    margin: 0;
-}
-
-.Header-navList--small {
-    padding: 0;
-}
-
-.Header-navItem {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.6em;
-    text-decoration: none;
-    padding: 0 0 0 30px;
-    transition: background-color 0.3s ease;
-}
-
-.mat-toolbar {
-    font-size: 15px !important;
-}
-
-@media only screen and (min-width: 1026px) {
-    .mat-toolbar{
-        font-size: 18px !important;
-    }
-}
-
-@media only screen and (max-width: 1026px) {
-    .mat-toolbar{
-        font-size: 15px !important;
-    }
 }
 
 .LastUpdatedText {
