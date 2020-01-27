@@ -17,7 +17,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                     <h1 translate>Toolkit.Password.Title</h1>
                 </div>
             </section>
-            <section class="section">
+            <section class="section static-page-content-section">
                 <div class="content content_tight">
                     <div class="password-section">
                         <p class="password-section__question" translate>Toolkit.Password.Text</p>

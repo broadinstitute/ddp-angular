@@ -14,7 +14,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
           <h1 translate>Toolkit.ErrorPage.Title</h1>
         </div>
       </section>
-      <section class="section error-content-section">
+      <section class="section static-page-content-section">
         <div class="content content_tight">
           <p translate>Toolkit.ErrorPage.Text</p>
           <p>
