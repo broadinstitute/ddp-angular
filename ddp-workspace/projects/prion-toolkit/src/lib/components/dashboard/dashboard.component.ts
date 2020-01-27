@@ -30,7 +30,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
 @Component({
     selector: 'toolkit-dashboard',
     template: `
-    <toolkit-header>
+    <toolkit-header currentRoute="/dashboard">
     </toolkit-header>
     <div class="Wrapper">
         <article class="PageContent">
