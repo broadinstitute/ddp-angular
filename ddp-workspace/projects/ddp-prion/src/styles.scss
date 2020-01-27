@@ -531,11 +531,10 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .Header-background {
-    background: #F2B816;
     position: relative;
     padding: 30px 80px 20px 80px;
     margin: 0;
-    background-image: none;
+    background: #F2B816 none;
     border-radius: 0;
     border: none;
     -webkit-box-shadow: none;
@@ -683,92 +682,151 @@ button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
     color: mat-color($app-theme, 800);
 }
 
-// Footer
+// Start of footer section
 .Footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
-    min-height: 185px;
-    /* Height of the footer */
-    padding: 0 35px 0 35px;
+    min-height: 100px;
+    padding: 0 50px;
     z-index: 2;
     background-color: #f9f3e8;
-    display: flex;
-    flex-direction: column;
+    margin: 0 0 0 0;
+    clear: both;
 }
 
-.Footer-navigation {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.Footer-link .SimpleButton {
+  padding-left: 0 !important;
+  line-height: 1.5rem !important;
+  font-size: 0.9rem !important;
 }
 
-.Footer-logo {
-    width: 150px;
-    margin: 0 0 0 25px;
-    cursor: pointer;
-    display: flex;
-    align-items: flex-start;
+.Footer-logo img {
+  height: 50px;
+  margin-left: 20px;
 }
 
-.Footer-logoImg {
-    margin-top: 5px;
-    height: 68px;
+@media only screen and (max-width: 450px) {
+  .Footer {
+    padding: 0 15px !important;
+  }
 }
 
-.Footer-logoText {
-    margin: 28px 0 0 10px;
-    color: mat-color($app-theme, 400);
-    font-size: 1.1rem;
-    font-weight: 300;
-    line-height: 1.2rem;
+@media only screen and (max-width: 767px) {
+  .Footer {
+    padding: 0 25px;
+    min-height: 200px;
+    margin: -200px 0 0 0;
+  }
+  .Footer-logo img {
+    margin-left: 0;
+  }
 }
 
-.Footer-nav {
-    display: flex;
-    flex-direction: column;
-    margin: 30px 50px 0 25px;
+@media only screen and (max-width: 992px) {
+  .Footer {
+    padding: 0 25px;
+  }
+  .Footer-logo img {
+    margin-left: 0;
+  }
 }
 
-.Footer-navList {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    flex-wrap: wrap;
-    padding: 0;
+.Footer-text {
+  font-size: 0.9rem !important;
+  color: #727272;
+  margin-top: 10px;
 }
 
-.Footer-navItem {
-    font-size: 0.95rem;
-    line-height: 1.6em;
-    text-decoration: none;
-    padding-left: 20px;
+.Footer-link, .Footer-link .SimpleButton {
+  font-weight: 500;
+  color: #727272;
+  display: inline;
+  cursor: pointer;
+  text-align: right;
+  transition: color 0.2s linear;
+  padding-left: 30px;
+  align-items: unset;
+  background-attachment: unset;
+  background-clip: unset;
+  border: none;
+  border-image-width: 0;
 }
 
-.Footer-navItem--first {
-    padding: 0;
+.Footer-link:hover, .Footer-link .SimpleButton:hover {
+  color: #82B547 !important;
 }
 
-.Footer-navItemLink {
-    transition: color 0.3s ease;
-    cursor: pointer;
-    color: mat-color($app-theme, 500);
-    font-weight: 300;
+button.Footer-link {
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
-.Footer-navItemLink:hover {
-    color: mat-color($app-theme, 700);
-    text-decoration: none;
+.Footer-arrow {
+  font-size: 0.5rem;
+  margin: 0 5px 5px 30px;
 }
 
-@media only screen and (max-width: 1200px) {
-    .Footer-nav {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin: 30px 0 0 25px;
-    }
+@media only screen and (max-width: 767px) {
+  .Footer-text,
+  .Footer-link,
+  .Footer-link .SimpleButton{
+    display: block;
+    float: left !important;
+    text-align: left;
+    padding-left: 0;
+    width: 100%;
+  }
+  .Footer-text {
+    margin-top: 20px;
+  }
+  .Footer-arrow {
+    margin-left: 0;
+  }
 }
+
+.Footer-text {
+  font-size: 0.9rem;
+  color: #727272;
+  margin-top: 10px;
+}
+
+.Footer-link, .Footer-link .SimpleButton {
+  font-weight: 500;
+  color: #727272;
+  display: inline;
+  cursor: pointer;
+  text-align: right;
+  transition: color 0.2s linear;
+  padding-left: 30px;
+}
+
+.Footer-link:hover {
+  color: #82B547;
+}
+
+button.Footer-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .Footer-text,
+  .Footer-link,
+  .Footer-link .SimpleButton{
+    display: block;
+    float: left !important;
+    text-align: left;
+    padding-left: 0;
+    width: 100%;
+  }
+  .Footer-text {
+    margin-top: 20px;
+  }
+}
+//End of footer section
 
 //   Page header
 .MainContainer {
@@ -1054,10 +1112,6 @@ button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
         .ButtonFilled {
             padding: 9px 10px !important;
         }
-    }
-
-    .Footer {
-        padding: 0 15px !important;
     }
 
     .PageHeader-subTitle {
@@ -1658,8 +1712,7 @@ ul {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 12px solid mat-color($app-theme, 600);
-    border-top: 12px solid mat-color($app-theme, 1600);
+    border: 12px solid;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -2450,9 +2503,8 @@ p.ddp-helper {
 }
 
 .Landing-image {
-    background: url(/assets/images/home-image-md.png) no-repeat;
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background: url(/assets/images/home-image-md.png) no-repeat center;
 }
 
 .Landing-image:after {
@@ -2464,9 +2516,8 @@ p.ddp-helper {
 
 @media only screen and (min-width: 1300px) {
     .Landing-image {
-        background: url(/assets/images/home-image-lg.png) no-repeat;
-        background-size: cover;
-        background-position: center;
+      background-size: cover;
+      background: url(/assets/images/home-image-lg.png) no-repeat center;
     }
     .Landing-image:after {
         content: " ";
@@ -2478,9 +2529,8 @@ p.ddp-helper {
 
 @media only screen and (max-width: 767px) {
     .Landing-image {
-        background: url(/assets/images/home-image-sm.png) no-repeat;
-        background-size: cover;
-        background-position: center;
+      background-size: cover;
+      background: url(/assets/images/home-image-sm.png) no-repeat center;
     }
     .Landing-image:after {
         content: " ";
@@ -2506,87 +2556,6 @@ p.ddp-helper {
 @media screen and (max-width: 64.063em) {
     .Message-icon {
         padding: 15px;
-    }
-}
-
-//Footer
-.Footer {
-    position: relative;
-    margin: 0 0 0 0;
-    /* negative value of footer height*/
-    min-height: 100px;
-    clear: both;
-    padding: 0 50px;
-}
-
-@media only screen and (max-width: 767px) {
-    .Footer {
-        padding: 0 25px;
-        min-height: 200px;
-        margin: -200px 0 0 0;
-    }
-}
-
-.Footer-logo img {
-    height: 50px;
-    margin-left: 20px;
-}
-
-@media only screen and (max-width: 992px) {
-    .Footer {
-        padding: 0 25px;
-    }
-    .Footer-logo img {
-        margin-left: 0;
-    }
-}
-
-.Footer-text {
-    font-size: 0.9rem;
-    color: #727272;
-    margin-top: 10px;
-}
-
-.Footer-link {
-    font-weight: 500;
-    color: #727272;
-    display: inline;
-    cursor: pointer;
-    text-align: right;
-    transition: color 0.2s linear;
-    padding-left: 30px;
-}
-
-.Footer-link:hover {
-    color: #82B547;
-}
-
-button.Footer-link {
-    background: transparent;
-    border: none;
-    padding: 0;
-}
-
-.Footer-arrow {
-    font-size: 0.5rem;
-    font-weight: 400;
-    margin: 0 5px 5px 30px;
-}
-
-@media only screen and (max-width: 767px) {
-    .Footer-text,
-    .Footer-link {
-        display: block;
-        float: left !important;
-        text-align: left;
-        padding-left: 0;
-        width: 100%;
-    }
-    .Footer-text {
-        margin-top: 20px;
-    }
-    .Footer-arrow {
-        margin-left: 0;
     }
 }
 
@@ -3027,86 +2996,7 @@ p.Medium {
     max-width: 250px !important;
 }
 
-//Footer
-.Footer {
-    position: relative;
-    margin: 0 0 0 0;
-    /* negative value of footer height*/
-    min-height: 100px;
-    clear: both;
-    padding: 0 50px;
-}
 
-@media only screen and (max-width: 767px) {
-    .Footer {
-        padding: 0 25px;
-        min-height: 200px;
-        margin: 0 0 0 0;
-    }
-}
-
-.Footer-logo img {
-    height: 50px;
-    margin-left: 20px;
-}
-
-@media only screen and (max-width: 992px) {
-    .Footer {
-        padding: 0 25px;
-    }
-    .Footer-logo img {
-        margin-left: 0;
-    }
-}
-
-.Footer-text {
-    font-size: 0.9rem;
-    color: #727272;
-    margin-top: 10px;
-}
-
-.Footer-link {
-    font-weight: 500;
-    color: #727272;
-    display: inline;
-    cursor: pointer;
-    text-align: right;
-    transition: color 0.2s linear;
-    padding-left: 30px;
-}
-
-.Footer-link:hover {
-    color: #82B547;
-}
-
-button.Footer-link {
-    background: transparent;
-    border: none;
-    padding: 0;
-}
-
-.Footer-arrow {
-    font-size: 0.5rem;
-    font-weight: 400;
-    margin: 0 5px 5px 30px;
-}
-
-@media only screen and (max-width: 767px) {
-    .Footer-text,
-    .Footer-link {
-        display: block;
-        float: left !important;
-        text-align: left;
-        padding-left: 0;
-        width: 100%;
-    }
-    .Footer-text {
-        margin-top: 20px;
-    }
-    .Footer-arrow {
-        margin-left: 0;
-    }
-}
 
 .DisplayNone {
   display: none;
