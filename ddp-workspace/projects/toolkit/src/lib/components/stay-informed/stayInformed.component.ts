@@ -14,7 +14,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                     <h1 translate>Toolkit.StayInformed.Title</h1>
                 </div>
             </section>
-            <section class="section stay-informed-content-section">
+            <section class="section static-page-content-section">
                 <div class="content content_tight">
                     <p>
                         <span translate>Toolkit.StayInformed.Text</span>

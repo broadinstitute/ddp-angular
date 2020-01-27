@@ -1,1 +1,88 @@
-<footer class="footer"></footer>
+<footer class="footer">
+    <div class="content">
+        <div class="column">
+            <nav class="nav">
+                <ul class="navigation">
+                    <li class="navigation__item footer-main-text">
+                        <a class="footer-link" routerLink="/" translate>Common.Navigation.Home</a>
+                    </li>
+                    <li class="navigation__item footer-main-text">
+                        <a class="footer-link" routerLink="more-details" routerLinkActive="footer-link_active"
+                            translate>Common.Navigation.FAQ</a>
+                    </li>
+                    <li class="navigation__item footer-main-text">
+                        <a class="footer-link" routerLink="about-us" routerLinkActive="footer-link_active"
+                            translate>Common.Navigation.AboutUs</a>
+                    </li>
+                    <li class="navigation__item footer-main-text">
+                        <button class="simple-button footer-main-text"
+                            [attr.aria-label]="'Common.Buttons.MailingList.AriaLabel' | translate"
+                            (click)="openJoinMailingList()" translate>
+                            Common.Buttons.MailingList.Title
+                        </button>
+                    </li>
+                    <li class="footer-main-text">
+                        <a class="footer-link" [routerLink]="['physician.pdf']" target="_blank"
+                            translate>Common.Navigation.ForPhysicians</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-contacts">
+                <ng-container *ngTemplateOutlet="contacts"></ng-container>
+            </div>
+            <div class="cmi-info">
+                <a class="cmi-info__logo" [href]="countMeInUrl" target="_blank">
+                    <img lazy-resource src="assets/images/logo-count-me-in.svg" [alt]="'Common.Alts.CMI' | translate">
+                </a>
+                <p class="no-margin footer-secondary-text">
+                    <span translate>Footer.Info.Text.Part1</span>
+                    <a class="bold footer-link" [href]="countMeInUrl" target="_blank" translate>Common.CMI</a>,
+                    <span translate>Footer.Info.Text.Part2</span>
+                </p>
+            </div>
+        </div>
+        <div class="desktop-contacts">
+            <ng-container *ngTemplateOutlet="contacts"></ng-container>
+        </div>
+    </div>
+</footer>
+
+<ng-template #contacts>
+    <div class="contacts">
+        <p class="only-margin-bottom footer-main-text" translate>Footer.Contacts.Title</p>
+        <div class="contacts-container">
+            <div class="contact-links">
+                <ul class="project-contacts">
+                    <li class="footer-secondary-text">
+                        <a class="footer-link" [href]="emailHref" target="_blank">{{ email }}</a>
+                    </li>
+                    <li class="footer-secondary-text">
+                        <a class="footer-link" [href]="phoneHref" target="_blank">{{ phone }}</a>
+                    </li>
+                </ul>
+                <ul class="social-media">
+                    <li class="social-media__item">
+                        <a class="social-media__link" [href]="twitterUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/twitter-small.png"
+                                [alt]="'Common.Alts.Twitter' | translate">
+                        </a>
+                    </li>
+                    <li class="social-media__item">
+                        <a class="social-media__link" [href]="facebookUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/facebook-small.png"
+                                [alt]="'Common.Alts.Facebook' | translate">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="social-media__link" [href]="instagramUrl" target="_blank">
+                            <img class="social-media__logo" lazy-resource src="assets/images/instagram-small.png"
+                                [alt]="'Common.Alts.Instagram' | translate">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p class="no-margin footer-secondary-text" [innerHTML]="'Footer.Contacts.Address' | translate" translate>
+            </p>
+        </div>
+    </div>
+</ng-template>

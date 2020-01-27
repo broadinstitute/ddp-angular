@@ -9,10 +9,10 @@
                     HomePage.IntroductionSection.Text
                 </p>
                 <div class="intro-media-block__buttons">
-                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                    <a routerLink="count-me-in" class="button button_medium button_primary" translate>
                         Common.Buttons.CountMeIn
                     </a>
-                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                    <a routerLink="more-details" class="button button_medium button_secondary" translate>
                         Common.Buttons.LearnMore
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div>
                         <p translate>HomePage.StepsSection.Step3.Text</p>
-                        <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                        <a routerLink="more-details" class="button button_medium button_secondary" translate>
                             Common.Buttons.LearnMore
                         </a>
                     </div>
@@ -88,7 +88,7 @@
                 <div>
                     <p class="big bold" translate>HomePage.HelpSection.PassedAway.Title</p>
                     <p translate>HomePage.HelpSection.PassedAway.Text</p>
-                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                    <a routerLink="more-details" class="button button_medium button_secondary" translate>
                         Common.Buttons.FAQ
                     </a>
                 </div>
@@ -120,7 +120,7 @@
                     <span translate>HomePage.ParticipatingSection.ClosingText.Part2</span>
                 </p>
                 <div>
-                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                    <a routerLink="count-me-in" class="button button_medium button_primary" translate>
                         Common.Buttons.CountMeIn
                     </a>
                 </div>
@@ -148,19 +148,31 @@
             <h2 translate>
                 HomePage.PartnersSection.Title
             </h2>
-            <div class="partners-group">
-                <a href="https://www.mibagents.org/" target="_blank">
-                    <img lazy-resource class="image partners-group__image" src="assets/images/partner-mib.jpg"
-                        [alt]="'HomePage.PartnersSection.ImagesAlts.MBIAlt' | translate">
-                </a>
-                <a href="https://www.quadw.org/" target="_blank">
-                    <img lazy-resource class="image partners-group__image" src="assets/images/partner-quadw.jpg"
-                        [alt]="'HomePage.PartnersSection.ImagesAlts.QUADWAlt' | translate">
-                </a>
-                <a href="https://childrenscancer.org/zach/" target="_blank">
-                    <img lazy-resource class="image partners-group__image" src="assets/images/partner-zsof.jpg"
-                        [alt]="'HomePage.PartnersSection.ImagesAlts.ZSOFAlt' | translate">
-                </a>
+            <div class="partners">
+                <div class="partners__group partners__group_top">
+                    <a href="https://www.mibagents.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-mib.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.MBI' | translate">
+                    </a>
+                    <a href="https://www.quadw.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-quadw.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.QUADW' | translate">
+                    </a>
+                    <a href="https://childrenscancer.org/zach/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-zsof.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.ZSOF' | translate">
+                    </a>
+                </div>
+                <div class="partners__group partners__group_bottom">
+                    <a href="https://becauseofdaniel.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-bod.png"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.BoD' | translate">
+                    </a>
+                    <a href="https://www.oscollaborative.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-os-collaborative.svg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.OsCollaborative' | translate">
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -171,17 +183,17 @@
                     HomePage.SocialMediaSection.Title
                 </h2>
                 <div class="social-media-logos">
-                    <a [href]="twitterUrl" target="_blank">
+                    <a class="social-media-logo" [href]="twitterUrl" target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/twitter.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Twitter' | translate">
+                            [alt]="'Common.Alts.Twitter' | translate">
                     </a>
-                    <a [href]="facebookUrl" target="_blank">
+                    <a class="social-media-logo" [href]="facebookUrl" target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/facebook.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Facebook' | translate">
+                            [alt]="'Common.Alts.Facebook' | translate">
                     </a>
-                    <a [href]="instagramUrl" target="_blank">
+                    <a class="social-media-logo" [href]="instagramUrl" target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/instagram.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Instagram' | translate">
+                            [alt]="'Common.Alts.Instagram' | translate">
                     </a>
                 </div>
             </div>
@@ -225,7 +237,7 @@
                 <p class="extra-margin" translate>
                     HomePage.ClosingSection.Text
                 </p>
-                <a routerLink="/count-me-in" class="button button_big button_primary" translate>
+                <a routerLink="count-me-in" class="button button_big button_primary" translate>
                     Common.Buttons.CountMeIn
                 </a>
             </div>
