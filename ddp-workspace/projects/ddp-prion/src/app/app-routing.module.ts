@@ -11,7 +11,7 @@ import {
 
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, RedirectToAuth0LoginComponent, ErrorComponent,
   RedirectToLoginLandingComponent,
   SessionExpiredComponent,
@@ -102,8 +102,8 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'more-details',
-    component: MoreDetailsComponent,
+    path: 'learn-more',
+    component: LearnMoreComponent,
     canActivate: [IrbGuard]
   },
   {
