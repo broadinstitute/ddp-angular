@@ -17,16 +17,6 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'toolkit-activity-page',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-    <ng-template #newDesign>
-        <ddp-activity-redesigned [studyGuid]="studyGuid"
-                                 [activityGuid]="(activityInstance$ | async)?.instanceGuid"
-                                 (submit)="raiseSubmit($event)"
-                                 (stickySubtitle)="showStickySubtitle($event)"
-                                 (activityCode)="activityCodeChanged($event)">
-        </ddp-activity-redesigned>
-    </ng-template>
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
@@ -34,15 +24,13 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
                       [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                       (submit)="raiseSubmit($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>
-    </ng-template>`
+        </ddp-activity>`
 })
 export class ActivityPageComponent implements OnInit, OnDestroy {
     @Output() submit: EventEmitter<void> = new EventEmitter();
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
     public stickySubtitle: string;
-    public useRedesign: boolean;
     private activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
@@ -103,7 +91,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
         this.headerConfig.setupActivityHeader();
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))

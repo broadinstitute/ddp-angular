@@ -10,7 +10,7 @@ import {
 
 import {
     ActivityRedesignedComponent,
-    ActivityPageComponent,
+    ActivityPageRedesignedComponent,
     DashboardComponent,
     LoginLandingComponent,
     ErrorComponent,
@@ -35,7 +35,7 @@ import { FaqComponent } from './components/faq/faq.component';
 const routes: Routes = [
     {
         path: 'about-you',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -47,7 +47,7 @@ const routes: Routes = [
     },
     {
         path: 'about-your-child',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -59,7 +59,7 @@ const routes: Routes = [
     },
     {
         path: 'loved-one',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -71,7 +71,7 @@ const routes: Routes = [
     },
     {
         path: 'consent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -83,7 +83,7 @@ const routes: Routes = [
     },
     {
         path: 'consent-assent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -95,7 +95,7 @@ const routes: Routes = [
     },
     {
         path: 'parental-consent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -107,7 +107,7 @@ const routes: Routes = [
     },
     {
         path: 'release-survey',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -119,7 +119,7 @@ const routes: Routes = [
     },
     {
         path: 'release-minor-survey',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
