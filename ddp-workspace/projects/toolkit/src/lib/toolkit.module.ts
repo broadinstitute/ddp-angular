@@ -33,6 +33,7 @@ import { PasswordComponent } from './components/password/password.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
 import { LovedOneThankYouComponent } from './components/thank-you/lovedOneThankYou.component';
 import { CommonLandingComponent } from './components/common-landing/commonLanding.component';
+import { CommonLandingRedesignedComponent } from './components/common-landing/commonLandingRedesigned.component';
 import { WarningComponent } from './components/dialogs/warning.component';
 import { WarningMessageComponent } from './components/warning-message/warning-message.component';
 import { AppComponent } from './components/app/app.component';
@@ -97,6 +98,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DashboardComponent,
     LoginLandingComponent,
     CommonLandingComponent,
+    CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
     ErrorComponent,
     DisclaimerComponent,

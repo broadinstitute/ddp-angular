@@ -16,6 +16,7 @@ export * from './lib/components/activity-page/activityPage.component';
 export * from './lib/components/activity-page/activityPageRedesigned.component';
 export * from './lib/components/app/app.component';
 export * from './lib/components/common-landing/commonLanding.component';
+export * from './lib/components/common-landing/commonLandingRedesigned.component';
 export * from './lib/components/workflow-start-activity/workflowStartActivity.component';
 export * from './lib/components/dashboard/dashboard.component';
 export * from './lib/components/dialogs/disclaimer.component';

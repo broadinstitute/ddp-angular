@@ -1,23 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'toolkit-common-landing',
   template: `
-  <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-
-  <ng-template #newDesign>
-    <main class="main">
-      <section class="section section-spinner">
-          <div class="content content_medium info-block">
-              <mat-spinner></mat-spinner>
-          </div>
-      </section>
-    </main>
-  </ng-template>
-
-  <ng-template #oldDesign>
     <toolkit-header [showButtons]="false"></toolkit-header>
     <div class="Wrapper">
         <div class="Login-landing-header">
@@ -28,8 +13,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
             </div>
             <mat-spinner></mat-spinner>
         </div>
-    </div>
-  </ng-template>`,
+    </div>`,
   styles: [
     `.center {
         margin: 10px 0;
@@ -49,15 +33,4 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
   ]
 })
 
-export class CommonLandingComponent implements OnInit {
-  public useRedesign: boolean;
-
-  constructor(
-    private headerConfig: HeaderConfigurationService,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
-
-  public ngOnInit(): void {
-    this.useRedesign = this.toolkitConfiguration.enableRedesign;
-    this.headerConfig.setupLoginLandingHeader();
-  }
-}
+export class CommonLandingComponent { }
