@@ -13,7 +13,7 @@ import {
     ActivityPageRedesignedComponent,
     DashboardRedesignedComponent,
     LoginLandingRedesignedComponent,
-    ErrorComponent,
+    ErrorRedesignedComponent,
     StayInformedComponent,
     PasswordComponent,
     RedirectToLoginLandingComponent,
@@ -186,7 +186,7 @@ const routes: Routes = [
     },
     {
         path: 'error',
-        component: ErrorComponent,
+        component: ErrorRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {

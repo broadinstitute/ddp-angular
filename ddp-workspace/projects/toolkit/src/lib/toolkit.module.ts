@@ -28,6 +28,7 @@ import { DashboardRedesignedComponent } from './components/dashboard/dashboard-r
 import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { LoginLandingRedesignedComponent } from './components/login-landing/login-landing-redesigned.component';
 import { ErrorComponent } from './components/error/error.component';
+import { ErrorRedesignedComponent } from './components/error/error-redesigned.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
 import { JoinMailingListComponent } from './components/dialogs/joinMailingList.component';
 import { StayInformedComponent } from './components/stay-informed/stayInformed.component';
@@ -107,6 +108,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
     ErrorComponent,
+    ErrorRedesignedComponent,
     DisclaimerComponent,
     JoinMailingListComponent,
     StayInformedComponent,
@@ -141,6 +143,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     LoginLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
     ErrorComponent,
+    ErrorRedesignedComponent,
     StayInformedComponent,
     PasswordComponent,
     LovedOneThankYouComponent,

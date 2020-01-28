@@ -27,6 +27,7 @@ export * from './lib/components/dialogs/resendEmail.component';
 export * from './lib/components/dialogs/sessionWillExpire.component';
 export * from './lib/components/dialogs/warning.component';
 export * from './lib/components/error/error.component';
+export * from './lib/components/error/error-redesigned.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/login-landing/login-landing.component';
