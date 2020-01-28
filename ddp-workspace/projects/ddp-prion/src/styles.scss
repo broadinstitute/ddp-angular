@@ -837,7 +837,6 @@ button.Footer-link {
 
 //   Page header
 .MainContainer {
-    position: relative;
     min-height: 100%;
     background-color: #f9f3e8;
     overflow: hidden;
@@ -1326,9 +1325,12 @@ ul {
     position: absolute;
     bottom: 20px;
     left: 50%;
-    margin-left: -32px;
+    margin-left: -15px;
     opacity: 1;
-    z-index: 5;
+    cursor: pointer;
+}
+
+.Arrow {
     cursor: pointer;
 }
 
@@ -2502,15 +2504,8 @@ p.ddp-helper {
     }
 }
 
-.Arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    margin-left: -15px;
-}
-
 .Landing-image {
-  background-size: cover;
+  background-size: cover !important;
   background: url(/assets/images/home-image-md.png) no-repeat center;
 }
 
