@@ -11,7 +11,7 @@ import {
 import {
     ActivityRedesignedComponent,
     ActivityPageRedesignedComponent,
-    DashboardComponent,
+    DashboardRedesignedComponent,
     LoginLandingRedesignedComponent,
     ErrorComponent,
     StayInformedComponent,
@@ -131,7 +131,7 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
+        component: DashboardRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,

@@ -24,6 +24,7 @@ import { ActivityPageRedesignedComponent } from './components/activity/activity-
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityRedesignedComponent } from './components/activity/activity-redesigned.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardRedesignedComponent } from './components/dashboard/dashboard-redesigned.component';
 import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { LoginLandingRedesignedComponent } from './components/login-landing/login-landing-redesigned.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -99,6 +100,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityComponent,
     ActivityRedesignedComponent,
     DashboardComponent,
+    DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
     CommonLandingComponent,
@@ -134,6 +136,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityComponent,
     ActivityRedesignedComponent,
     DashboardComponent,
+    DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
