@@ -24,7 +24,8 @@ import { ActivityPageRedesignedComponent } from './components/activity/activity-
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityRedesignedComponent } from './components/activity/activity-redesigned.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginLandingComponent } from './components/login-landing/loginLanding.component';
+import { LoginLandingComponent } from './components/login-landing/login-landing.component';
+import { LoginLandingRedesignedComponent } from './components/login-landing/login-landing-redesigned.component';
 import { ErrorComponent } from './components/error/error.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
 import { JoinMailingListComponent } from './components/dialogs/joinMailingList.component';
@@ -99,6 +100,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityRedesignedComponent,
     DashboardComponent,
     LoginLandingComponent,
+    LoginLandingRedesignedComponent,
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
@@ -133,6 +135,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityRedesignedComponent,
     DashboardComponent,
     LoginLandingComponent,
+    LoginLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
     ErrorComponent,
     StayInformedComponent,

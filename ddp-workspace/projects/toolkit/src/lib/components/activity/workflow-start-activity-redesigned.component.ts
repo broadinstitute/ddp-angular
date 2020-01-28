@@ -12,7 +12,7 @@ import {
 } from 'ddp-sdk';
 
 @Component({
-  selector: 'toolkit-workflow-start-activity',
+  selector: 'toolkit-workflow-start-activity-redesigned',
   template: `
       <ddp-activity-redesigned *ngIf="show"
                                [studyGuid]="studyGuid"

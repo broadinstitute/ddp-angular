@@ -5,8 +5,8 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
   selector: 'toolkit-common-landing-redesigned',
   template: `
     <main class="main">
-      <section class="section section-spinner">
-          <div class="content content_medium info-block">
+      <section class="section section-spinner static-spinner">
+          <div class="content content_medium">
               <mat-spinner></mat-spinner>
           </div>
       </section>

@@ -6,7 +6,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
     template: `
     <main class="main">
         <section class="section section-spinner">
-            <div class="content content_medium info-block">
+            <div class="content content_medium">
                 <ddp-accept-age-up></ddp-accept-age-up>
             </div>
         </section>

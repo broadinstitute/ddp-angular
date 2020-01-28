@@ -12,7 +12,7 @@ import {
     ActivityRedesignedComponent,
     ActivityPageRedesignedComponent,
     DashboardComponent,
-    LoginLandingComponent,
+    LoginLandingRedesignedComponent,
     ErrorComponent,
     StayInformedComponent,
     PasswordComponent,
@@ -163,7 +163,7 @@ const routes: Routes = [
     },
     {
         path: 'login-landing',
-        component: LoginLandingComponent,
+        component: LoginLandingRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
