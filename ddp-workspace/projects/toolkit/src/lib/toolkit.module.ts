@@ -36,7 +36,7 @@ import { StayInformedRedesignedComponent } from './components/stay-informed/stay
 import { ResendEmailComponent } from './components/dialogs/resendEmail.component';
 import { PasswordComponent } from './components/password/password.component';
 import { PasswordRedesignedComponent } from './components/password/password-redesigned.component';
-import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
+import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirect-to-login-landing.component';
 import { LovedOneThankYouComponent } from './components/thank-you/loved-one-thank-you.component';
 import { LovedOneThankYouRedesignedComponent } from './components/thank-you/loved-one-thank-you-redesigned.component';
 import { CommonLandingComponent } from './components/common-landing/common-landing.component';
@@ -48,7 +48,7 @@ import { ActivityLinkComponent } from './components/activity/activity-link.compo
 import { InternationalPatientsComponent } from './components/international-patients/internationalPatients.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { SessionExpiredRedesignedComponent } from './components/session-expired/session-expired-redesigned.component';
-import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
+import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirect-to-auth0-login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';

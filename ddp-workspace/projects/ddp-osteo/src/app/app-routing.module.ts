@@ -19,7 +19,6 @@ import {
     RedirectToLoginLandingComponent,
     WorkflowStartActivityRedesignedComponent,
     SessionExpiredRedesignedComponent,
-    ActivityLinkComponent,
     LovedOneThankYouRedesignedComponent,
     RedirectToAuth0LoginComponent,
     HeaderActionGuard,
