@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import {
     LoggingService,
     UserActivityServiceAgent,
