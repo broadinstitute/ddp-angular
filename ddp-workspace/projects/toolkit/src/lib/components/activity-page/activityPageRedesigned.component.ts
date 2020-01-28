@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityPageComponent } from './activityPage.component';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
@@ -20,15 +20,15 @@ import {
                                  (activityCode)="activityCodeChanged($event)">
         </ddp-activity-redesigned>`
 })
-export class ActivityPageRedesignedComponent extends ActivityPageComponent {
+export class ActivityPageRedesignedComponent extends ActivityPageComponent implements OnInit {
     constructor(
+        private headerConfig: HeaderConfigurationService,
         serviceAgent: ActivityServiceAgent,
         userActivityServiceAgent: UserActivityServiceAgent,
         router: Router,
         activatedRoute: ActivatedRoute,
         workflowBuilder: WorkflowBuilderService,
         logger: LoggingService,
-        headerConfig: HeaderConfigurationService,
         @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
         super(
             serviceAgent,
@@ -36,7 +36,19 @@ export class ActivityPageRedesignedComponent extends ActivityPageComponent {
             router, activatedRoute,
             workflowBuilder,
             logger,
-            headerConfig,
             toolkitConfiguration);
+    }
+
+    public ngOnInit(): void {
+        super.ngOnInit();
+        this.headerConfig.setupActivityHeader();
+    }
+
+    public showStickySubtitle(stickySubtitle: string): void {
+        this.headerConfig.stickySubtitle = stickySubtitle;
+    }
+
+    public activityCodeChanged(code: string): void {
+        this.headerConfig.currentActivityCode = code;
     }
 }

@@ -24,7 +24,6 @@ export class ActivityComponent implements OnInit {
     public activityCode: string;
 
     constructor(
-        private headerConfig: HeaderConfigurationService,
         private activatedRoute: ActivatedRoute,
         private workflowBuilder: WorkflowBuilderService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
@@ -34,7 +33,6 @@ export class ActivityComponent implements OnInit {
             this.id = x.id;
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
-        this.headerConfig.setupActivityHeader();
     }
 
     public navigate(response: ActivityResponse): void {
@@ -43,10 +41,5 @@ export class ActivityComponent implements OnInit {
 
     public showStickySubtitle(stickySubtitle: string): void {
         this.stickySubtitle = stickySubtitle;
-        this.headerConfig.stickySubtitle = stickySubtitle;
-    }
-
-    public activityCodeChanged(code: string): void {
-        this.headerConfig.currentActivityCode = code;
     }
 }

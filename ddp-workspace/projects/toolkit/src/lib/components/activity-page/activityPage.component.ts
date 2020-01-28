@@ -46,7 +46,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private workflowBuilder: WorkflowBuilderService,
         private logger: LoggingService,
-        private headerConfig: HeaderConfigurationService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
         this.activityGuid = this.activatedRoute.snapshot.data.activityGuid;
         // by default we will not create a new instance
@@ -91,7 +90,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.headerConfig.setupActivityHeader();
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
@@ -109,10 +107,5 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
     public showStickySubtitle(stickySubtitle: string): void {
         this.stickySubtitle = stickySubtitle;
-        this.headerConfig.stickySubtitle = stickySubtitle;
-    }
-
-    public activityCodeChanged(code: string): void {
-        this.headerConfig.currentActivityCode = code;
     }
 }
