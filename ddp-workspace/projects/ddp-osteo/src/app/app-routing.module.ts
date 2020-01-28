@@ -18,7 +18,7 @@ import {
     PasswordRedesignedComponent,
     RedirectToLoginLandingComponent,
     WorkflowStartActivityRedesignedComponent,
-    SessionExpiredComponent,
+    SessionExpiredRedesignedComponent,
     ActivityLinkComponent,
     LovedOneThankYouComponent,
     RedirectToAuth0LoginComponent,
@@ -223,7 +223,7 @@ const routes: Routes = [
     },
     {
         path: 'session-expired',
-        component: SessionExpiredComponent,
+        component: SessionExpiredRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard

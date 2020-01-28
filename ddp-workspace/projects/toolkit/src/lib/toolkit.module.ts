@@ -44,7 +44,8 @@ import { WarningMessageComponent } from './components/warning-message/warning-me
 import { AppComponent } from './components/app/app.component';
 import { ActivityLinkComponent } from './components/activity/activity-link.component';
 import { InternationalPatientsComponent } from './components/international-patients/internationalPatients.component';
-import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
+import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
+import { SessionExpiredRedesignedComponent } from './components/session-expired/session-expired-redesigned.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
@@ -123,6 +124,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityLinkComponent,
     InternationalPatientsComponent,
     SessionExpiredComponent,
+    SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,
     SessionWillExpireComponent,
     VerifyAgeUpPageComponent,
@@ -155,6 +157,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ActivityLinkComponent,
     InternationalPatientsComponent,
     SessionExpiredComponent,
+    SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
