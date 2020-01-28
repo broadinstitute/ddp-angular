@@ -45,6 +45,7 @@ export * from './lib/components/international-patients/internationalPatients.com
 export * from './lib/components/session-expired/session-expired.component';
 export * from './lib/components/session-expired/session-expired-redesigned.component';
 export * from './lib/components/redirect-to-auth0-login/redirect-to-auth0-login.component';
+export * from './lib/components/redirect-to-auth0-login/redirect-to-auth0-login-redesigned.component';
 export * from './lib/components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 export * from './lib/components/age-up/verifyAgeUpPage.component';
 export * from './lib/components/age-up/acceptAgeUpPage.component';

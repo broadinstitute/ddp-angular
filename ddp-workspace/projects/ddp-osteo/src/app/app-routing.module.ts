@@ -20,7 +20,7 @@ import {
     WorkflowStartActivityRedesignedComponent,
     SessionExpiredRedesignedComponent,
     LovedOneThankYouRedesignedComponent,
-    RedirectToAuth0LoginComponent,
+    RedirectToAuth0LoginRedesignedComponent,
     HeaderActionGuard,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
@@ -167,7 +167,7 @@ const routes: Routes = [
     },
     {
         path: 'login-landing/:mode',
-        component: RedirectToAuth0LoginComponent,
+        component: RedirectToAuth0LoginRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {

@@ -49,6 +49,7 @@ import { InternationalPatientsComponent } from './components/international-patie
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { SessionExpiredRedesignedComponent } from './components/session-expired/session-expired-redesigned.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirect-to-auth0-login.component';
+import { RedirectToAuth0LoginRedesignedComponent } from './components/redirect-to-auth0-login/redirect-to-auth0-login-redesigned.component';
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
@@ -130,6 +131,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     SessionExpiredComponent,
     SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,
+    RedirectToAuth0LoginRedesignedComponent,
     SessionWillExpireComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
@@ -165,6 +167,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     SessionExpiredComponent,
     SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,
+    RedirectToAuth0LoginRedesignedComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
