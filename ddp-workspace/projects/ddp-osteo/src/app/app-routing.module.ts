@@ -16,7 +16,7 @@ import {
     ErrorRedesignedComponent,
     StayInformedRedesignedComponent,
     PasswordRedesignedComponent,
-    RedirectToLoginLandingComponent,
+    RedirectToLoginLandingRedesignedComponent,
     WorkflowStartActivityRedesignedComponent,
     SessionExpiredRedesignedComponent,
     LovedOneThankYouRedesignedComponent,
@@ -217,7 +217,7 @@ const routes: Routes = [
     },
     {
         path: 'password-reset-done',
-        component: RedirectToLoginLandingComponent,
+        component: RedirectToLoginLandingRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {

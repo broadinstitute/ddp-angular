@@ -37,6 +37,7 @@ import { ResendEmailComponent } from './components/dialogs/resendEmail.component
 import { PasswordComponent } from './components/password/password.component';
 import { PasswordRedesignedComponent } from './components/password/password-redesigned.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirect-to-login-landing.component';
+import { RedirectToLoginLandingRedesignedComponent } from './components/redirect-to-login-landing/redirect-to-login-landing-redesigned.component';
 import { LovedOneThankYouComponent } from './components/thank-you/loved-one-thank-you.component';
 import { LovedOneThankYouRedesignedComponent } from './components/thank-you/loved-one-thank-you-redesigned.component';
 import { CommonLandingComponent } from './components/common-landing/common-landing.component';
@@ -112,6 +113,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
+    RedirectToLoginLandingRedesignedComponent,
     ErrorComponent,
     ErrorRedesignedComponent,
     DisclaimerComponent,
@@ -152,6 +154,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
+    RedirectToLoginLandingRedesignedComponent,
     ErrorComponent,
     ErrorRedesignedComponent,
     StayInformedComponent,
