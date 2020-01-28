@@ -31,7 +31,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { ErrorRedesignedComponent } from './components/error/error-redesigned.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
 import { JoinMailingListComponent } from './components/dialogs/joinMailingList.component';
-import { StayInformedComponent } from './components/stay-informed/stayInformed.component';
+import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
+import { StayInformedRedesignedComponent } from './components/stay-informed/stay-informed-redesigned.component';
 import { ResendEmailComponent } from './components/dialogs/resendEmail.component';
 import { PasswordComponent } from './components/password/password.component';
 import { PasswordRedesignedComponent } from './components/password/password-redesigned.component';
@@ -114,6 +115,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DisclaimerComponent,
     JoinMailingListComponent,
     StayInformedComponent,
+    StayInformedRedesignedComponent,
     ResendEmailComponent,
     PasswordComponent,
     PasswordRedesignedComponent,
@@ -149,6 +151,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ErrorComponent,
     ErrorRedesignedComponent,
     StayInformedComponent,
+    StayInformedRedesignedComponent,
     PasswordComponent,
     PasswordRedesignedComponent,
     LovedOneThankYouComponent,

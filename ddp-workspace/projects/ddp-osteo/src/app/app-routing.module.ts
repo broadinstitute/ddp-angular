@@ -14,7 +14,7 @@ import {
     DashboardRedesignedComponent,
     LoginLandingRedesignedComponent,
     ErrorRedesignedComponent,
-    StayInformedComponent,
+    StayInformedRedesignedComponent,
     PasswordRedesignedComponent,
     RedirectToLoginLandingComponent,
     WorkflowStartActivityRedesignedComponent,
@@ -196,7 +196,7 @@ const routes: Routes = [
     },
     {
         path: 'stay-informed',
-        component: StayInformedComponent,
+        component: StayInformedRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
