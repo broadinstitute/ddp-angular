@@ -15,7 +15,7 @@ import {
     LoginLandingRedesignedComponent,
     ErrorRedesignedComponent,
     StayInformedComponent,
-    PasswordComponent,
+    PasswordRedesignedComponent,
     RedirectToLoginLandingComponent,
     WorkflowStartActivityRedesignedComponent,
     SessionExpiredComponent,
@@ -231,7 +231,7 @@ const routes: Routes = [
     },
     {
         path: 'password',
-        component: PasswordComponent
+        component: PasswordRedesignedComponent
     },
     {
         path: 'verify',

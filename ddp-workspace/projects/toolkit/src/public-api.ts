@@ -34,6 +34,7 @@ export * from './lib/components/login-landing/login-landing.component';
 export * from './lib/components/login-landing/login-landing-redesigned.component';
 export * from './lib/components/thank-you/lovedOneThankYou.component';
 export * from './lib/components/password/password.component';
+export * from './lib/components/password/password-redesigned.component';
 export * from './lib/components/redirect-to-login-landing/redirectToLoginLanding.component';
 export * from './lib/components/stay-informed/stayInformed.component';
 export * from './lib/components/warning-message/warning-message.component';

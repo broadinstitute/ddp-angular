@@ -34,6 +34,7 @@ import { JoinMailingListComponent } from './components/dialogs/joinMailingList.c
 import { StayInformedComponent } from './components/stay-informed/stayInformed.component';
 import { ResendEmailComponent } from './components/dialogs/resendEmail.component';
 import { PasswordComponent } from './components/password/password.component';
+import { PasswordRedesignedComponent } from './components/password/password-redesigned.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
 import { LovedOneThankYouComponent } from './components/thank-you/lovedOneThankYou.component';
 import { CommonLandingComponent } from './components/common-landing/common-landing.component';
@@ -114,6 +115,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     StayInformedComponent,
     ResendEmailComponent,
     PasswordComponent,
+    PasswordRedesignedComponent,
     LovedOneThankYouComponent,
     WarningComponent,
     WarningMessageComponent,
@@ -146,6 +148,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     ErrorRedesignedComponent,
     StayInformedComponent,
     PasswordComponent,
+    PasswordRedesignedComponent,
     LovedOneThankYouComponent,
     WarningMessageComponent,
     AppComponent,
