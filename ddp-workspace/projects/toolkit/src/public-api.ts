@@ -18,6 +18,7 @@ export * from './lib/components/app/app.component';
 export * from './lib/components/common-landing/common-landing.component';
 export * from './lib/components/common-landing/common-landing-redesigned.component';
 export * from './lib/components/activity/workflow-start-activity.component';
+export * from './lib/components/activity/workflow-start-activity-redesigned.component';
 export * from './lib/components/dashboard/dashboard.component';
 export * from './lib/components/dialogs/disclaimer.component';
 export * from './lib/components/dialogs/joinMailingList.component';

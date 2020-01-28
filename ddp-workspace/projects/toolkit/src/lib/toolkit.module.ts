@@ -18,6 +18,7 @@ import { HeaderConfigurationService } from './services/headerConfiguration.servi
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { WorkflowStartActivityComponent } from './components/activity/workflow-start-activity.component';
+import { WorkflowStartActivityRedesignedComponent } from './components/activity/workflow-start-activity-redesigned.component';
 import { ActivityPageComponent } from './components/activity/activity-page.component';
 import { ActivityPageRedesignedComponent } from './components/activity/activity-page-redesigned.component';
 import { ActivityComponent } from './components/activity/activity.component';
@@ -91,6 +92,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     FooterComponent,
     HeaderComponent,
     WorkflowStartActivityComponent,
+    WorkflowStartActivityRedesignedComponent,
     ActivityPageComponent,
     ActivityPageRedesignedComponent,
     ActivityComponent,
@@ -124,6 +126,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     FooterComponent,
     HeaderComponent,
     WorkflowStartActivityComponent,
+    WorkflowStartActivityRedesignedComponent,
     ActivityPageComponent,
     ActivityPageRedesignedComponent,
     ActivityComponent,

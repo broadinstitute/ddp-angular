@@ -17,7 +17,7 @@ import {
     StayInformedComponent,
     PasswordComponent,
     RedirectToLoginLandingComponent,
-    WorkflowStartActivityComponent,
+    WorkflowStartActivityRedesignedComponent,
     SessionExpiredComponent,
     ActivityLinkComponent,
     LovedOneThankYouComponent,
@@ -173,7 +173,7 @@ const routes: Routes = [
     },
     {
         path: 'count-me-in',
-        component: WorkflowStartActivityComponent,
+        component: WorkflowStartActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard
