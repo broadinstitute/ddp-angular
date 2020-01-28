@@ -32,7 +32,8 @@ export * from './lib/components/footer/footer.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/login-landing/login-landing.component';
 export * from './lib/components/login-landing/login-landing-redesigned.component';
-export * from './lib/components/thank-you/lovedOneThankYou.component';
+export * from './lib/components/thank-you/loved-one-thank-you.component';
+export * from './lib/components/thank-you/loved-one-thank-you-redesigned.component';
 export * from './lib/components/password/password.component';
 export * from './lib/components/password/password-redesigned.component';
 export * from './lib/components/redirect-to-login-landing/redirectToLoginLanding.component';
@@ -47,6 +48,6 @@ export * from './lib/components/redirect-to-auth0-login/redirectToAuth0Login.com
 export * from './lib/components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 export * from './lib/components/age-up/verifyAgeUpPage.component';
 export * from './lib/components/age-up/acceptAgeUpPage.component';
-export * from './lib/components/thank-you/ageUpThankYou.component';
+export * from './lib/components/thank-you/age-up-thank-you.component';
 
 export * from './lib/guards/headerAction.guard';

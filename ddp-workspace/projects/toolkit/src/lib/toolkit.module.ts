@@ -37,7 +37,8 @@ import { ResendEmailComponent } from './components/dialogs/resendEmail.component
 import { PasswordComponent } from './components/password/password.component';
 import { PasswordRedesignedComponent } from './components/password/password-redesigned.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
-import { LovedOneThankYouComponent } from './components/thank-you/lovedOneThankYou.component';
+import { LovedOneThankYouComponent } from './components/thank-you/loved-one-thank-you.component';
+import { LovedOneThankYouRedesignedComponent } from './components/thank-you/loved-one-thank-you-redesigned.component';
 import { CommonLandingComponent } from './components/common-landing/common-landing.component';
 import { CommonLandingRedesignedComponent } from './components/common-landing/common-landing-redesigned.component';
 import { WarningComponent } from './components/dialogs/warning.component';
@@ -51,7 +52,7 @@ import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-lo
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
-import { AgeUpThankYou } from './components/thank-you/ageUpThankYou.component';
+import { AgeUpThankYou } from './components/thank-you/age-up-thank-you.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -120,6 +121,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     PasswordComponent,
     PasswordRedesignedComponent,
     LovedOneThankYouComponent,
+    LovedOneThankYouRedesignedComponent,
     WarningComponent,
     WarningMessageComponent,
     AppComponent,
@@ -155,6 +157,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     PasswordComponent,
     PasswordRedesignedComponent,
     LovedOneThankYouComponent,
+    LovedOneThankYouRedesignedComponent,
     WarningMessageComponent,
     AppComponent,
     ActivityLinkComponent,

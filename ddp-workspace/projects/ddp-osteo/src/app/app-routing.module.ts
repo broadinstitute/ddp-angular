@@ -20,7 +20,7 @@ import {
     WorkflowStartActivityRedesignedComponent,
     SessionExpiredRedesignedComponent,
     ActivityLinkComponent,
-    LovedOneThankYouComponent,
+    LovedOneThankYouRedesignedComponent,
     RedirectToAuth0LoginComponent,
     HeaderActionGuard,
     VerifyAgeUpPageComponent,
@@ -154,7 +154,7 @@ const routes: Routes = [
     },
     {
         path: 'activity-link/:id',
-        component: ActivityLinkComponent,
+        component: ActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -201,7 +201,7 @@ const routes: Routes = [
     },
     {
         path: 'loved-one-thank-you',
-        component: LovedOneThankYouComponent,
+        component: LovedOneThankYouRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
