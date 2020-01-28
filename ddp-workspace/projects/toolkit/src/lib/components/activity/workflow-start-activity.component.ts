@@ -31,7 +31,6 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
   public instanceGuid: string;
   public stickySubtitle: string;
   public show = true;
-  public useRedesign: boolean;
   public activityCode: string;
   private anchor: CompositeDisposable = new CompositeDisposable();
 
@@ -47,7 +46,6 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
-    this.useRedesign = this.toolkitConfiguration.enableRedesign;
     this.fetchActivity();
   }k
 

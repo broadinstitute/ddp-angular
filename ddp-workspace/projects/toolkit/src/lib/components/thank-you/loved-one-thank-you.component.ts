@@ -50,6 +50,5 @@ export class LovedOneThankYouComponent implements OnInit {
         this.email = this.toolkitConfiguration.infoEmail;
         this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
         this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
     }
 }
