@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActivityPageComponent } from './activityPage.component';
+import { ActivityPageComponent } from './activity-page.component';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';

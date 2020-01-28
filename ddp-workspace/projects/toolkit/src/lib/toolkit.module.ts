@@ -17,9 +17,9 @@ import { HeaderConfigurationService } from './services/headerConfiguration.servi
 // Components
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflowStartActivity.component';
-import { ActivityPageComponent } from './components/activity/activityPage.component';
-import { ActivityPageRedesignedComponent } from './components/activity/activityPageRedesigned.component';
+import { WorkflowStartActivityComponent } from './components/activity/workflow-start-activity.component';
+import { ActivityPageComponent } from './components/activity/activity-page.component';
+import { ActivityPageRedesignedComponent } from './components/activity/activity-page-redesigned.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityRedesignedComponent } from './components/activity/activity-redesigned.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -37,7 +37,7 @@ import { CommonLandingRedesignedComponent } from './components/common-landing/co
 import { WarningComponent } from './components/dialogs/warning.component';
 import { WarningMessageComponent } from './components/warning-message/warning-message.component';
 import { AppComponent } from './components/app/app.component';
-import { ActivityLinkComponent } from './components/activity/activityLink.component';
+import { ActivityLinkComponent } from './components/activity/activity-link.component';
 import { InternationalPatientsComponent } from './components/international-patients/internationalPatients.component';
 import { SessionExpiredComponent } from './components/session-expired/sessionExpired.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirectToAuth0Login.component';

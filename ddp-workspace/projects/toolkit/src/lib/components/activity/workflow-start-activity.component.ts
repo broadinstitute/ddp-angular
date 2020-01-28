@@ -65,7 +65,7 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
     this.useRedesign = this.toolkitConfiguration.enableRedesign;
     this.headerConfig.setupActivityHeader();
     this.fetchActivity();
-  }
+  }k
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
