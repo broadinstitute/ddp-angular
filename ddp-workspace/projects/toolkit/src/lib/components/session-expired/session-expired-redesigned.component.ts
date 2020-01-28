@@ -25,8 +25,8 @@ import { Auth0AdapterService } from 'ddp-sdk';
 export class SessionExpiredRedesignedComponent extends SessionExpiredComponent implements OnInit {
     constructor(
         private headerConfig: HeaderConfigurationService,
-        auth0: Auth0AdapterService) {
-        super(auth0);
+        private _auth0: Auth0AdapterService) {
+        super(_auth0);
     }
 
     public ngOnInit(): void {

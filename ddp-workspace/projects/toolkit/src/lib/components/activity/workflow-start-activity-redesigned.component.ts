@@ -26,23 +26,22 @@ import {
 export class WorkflowStartActivityRedesignedComponent extends WorkflowStartActivityComponent implements OnInit {
   constructor(
     private headerConfig: HeaderConfigurationService,
-    workflowBuilder: WorkflowBuilderService,
-    temporaryUserService: TemporaryUserServiceAgent,
-    session: SessionMementoService,
-    workflow: WorkflowServiceAgent,
-    windowRef: WindowRef,
-    cdr: ChangeDetectorRef,
-    @Inject('ddp.config') configuration: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(
-      workflowBuilder,
-      temporaryUserService,
-      session,
-      workflow,
-      windowRef,
-      cdr,
-      configuration,
-      toolkitConfiguration);
+    private _workflowBuilder: WorkflowBuilderService,
+    private _temporaryUserService: TemporaryUserServiceAgent,
+    private _session: SessionMementoService,
+    private _workflow: WorkflowServiceAgent,
+    private _windowRef: WindowRef,
+    private _cdr: ChangeDetectorRef,
+    @Inject('ddp.config') private _configuration: ConfigurationService,
+    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+    super(_workflowBuilder,
+      _temporaryUserService,
+      _session,
+      _workflow,
+      _windowRef,
+      _cdr,
+      _configuration,
+      _toolkitConfiguration);
   }
 
   public ngOnInit(): void {

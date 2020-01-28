@@ -18,10 +18,10 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit {
     constructor(
         private headerConfig: HeaderConfigurationService,
-        activatedRoute: ActivatedRoute,
-        workflowBuilder: WorkflowBuilderService,
-        @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-        super(activatedRoute, workflowBuilder, toolkitConfiguration)
+        private _activatedRoute: ActivatedRoute,
+        private _workflowBuilder: WorkflowBuilderService,
+        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+        super(_activatedRoute, _workflowBuilder, _toolkitConfiguration)
     }
 
     public ngOnInit(): void {

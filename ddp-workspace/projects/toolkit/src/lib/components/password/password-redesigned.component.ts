@@ -44,10 +44,10 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 export class PasswordRedesignedComponent extends PasswordComponent implements OnInit {
     constructor(
         private headerConfig: HeaderConfigurationService,
-        formBuilder: FormBuilder,
-        irbPassword: IrbPasswordService,
-        router: Router) {
-        super(formBuilder, irbPassword, router);
+        private _formBuilder: FormBuilder,
+        private _irbPassword: IrbPasswordService,
+        private _router: Router) {
+        super(_formBuilder, _irbPassword, _router);
     }
 
     public ngOnInit(): void {

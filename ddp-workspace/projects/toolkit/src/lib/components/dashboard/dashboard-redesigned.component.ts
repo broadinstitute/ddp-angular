@@ -44,10 +44,10 @@ import { AnnouncementsServiceAgent } from 'ddp-sdk';
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit {
     constructor(
         private headerConfig: HeaderConfigurationService,
-        router: Router,
-        announcements: AnnouncementsServiceAgent,
-        @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-        super(router, announcements, toolkitConfiguration);
+        private _router: Router,
+        private _announcements: AnnouncementsServiceAgent,
+        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+        super(_router, _announcements, _toolkitConfiguration);
     }
 
     public ngOnInit(): void {

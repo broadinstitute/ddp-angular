@@ -33,8 +33,8 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 export class ErrorRedesignedComponent extends ErrorComponent implements OnInit {
   constructor(
     private headerConfig: HeaderConfigurationService,
-    @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(toolkitConfiguration);
+    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+    super(_toolkitConfiguration);
   }
 
   public ngOnInit(): void {

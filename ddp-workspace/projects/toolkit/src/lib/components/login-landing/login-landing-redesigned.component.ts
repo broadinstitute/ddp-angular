@@ -21,21 +21,21 @@ import {
 })
 export class LoginLandingRedesignedComponent extends LoginLandingComponent {
   constructor(
-    router: Router,
-    auth0: Auth0AdapterService,
-    sessionService: SessionMementoService,
-    participantService: GovernedParticipantsServiceAgent,
-    workflowService: WorkflowServiceAgent,
-    workflowBuilder: WorkflowBuilderService,
-    @Inject('ddp.config') config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(router,
-      auth0,
-      sessionService,
-      participantService,
-      workflowService,
-      workflowBuilder,
-      config,
-      toolkitConfiguration);
+    private _router: Router,
+    private _auth0: Auth0AdapterService,
+    private _sessionService: SessionMementoService,
+    private _participantService: GovernedParticipantsServiceAgent,
+    private _workflowService: WorkflowServiceAgent,
+    private _workflowBuilder: WorkflowBuilderService,
+    @Inject('ddp.config') private _config: ConfigurationService,
+    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+    super(_router,
+      _auth0,
+      _sessionService,
+      _participantService,
+      _workflowService,
+      _workflowBuilder,
+      _config,
+      _toolkitConfiguration);
   }
 }

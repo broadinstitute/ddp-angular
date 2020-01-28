@@ -23,20 +23,21 @@ import {
 export class ActivityPageRedesignedComponent extends ActivityPageComponent implements OnInit {
     constructor(
         private headerConfig: HeaderConfigurationService,
-        serviceAgent: ActivityServiceAgent,
-        userActivityServiceAgent: UserActivityServiceAgent,
-        router: Router,
-        activatedRoute: ActivatedRoute,
-        workflowBuilder: WorkflowBuilderService,
-        logger: LoggingService,
-        @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
+        private _serviceAgent: ActivityServiceAgent,
+        private _userActivityServiceAgent: UserActivityServiceAgent,
+        private _router: Router,
+        private _activatedRoute: ActivatedRoute,
+        private _workflowBuilder: WorkflowBuilderService,
+        private _logger: LoggingService,
+        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
         super(
-            serviceAgent,
-            userActivityServiceAgent,
-            router, activatedRoute,
-            workflowBuilder,
-            logger,
-            toolkitConfiguration);
+            _serviceAgent,
+            _userActivityServiceAgent,
+            _router,
+            _activatedRoute,
+            _workflowBuilder,
+            _logger,
+            _toolkitConfiguration);
     }
 
     public ngOnInit(): void {
