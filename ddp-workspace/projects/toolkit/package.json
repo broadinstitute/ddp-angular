@@ -28,7 +28,7 @@
     "npm-sass": "2.2.1",
     "package": "1.0.1",
     "raw-loader": "0.5.1",
-    "rxjs": "6.5.3",
+    "rxjs": "6.5.4",
     "tslib": "1.10.0",
     "underscore": "1.9.1",
     "web-animations-js": "github:angular/web-animations-js#release_pr208",
