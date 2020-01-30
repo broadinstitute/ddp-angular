@@ -36,7 +36,6 @@ tkCfg.releaseGuid = ''; // to be defined later
 tkCfg.followupGuid = ''; // to be defined later
 tkCfg.dashboardGuid = 'DASHBOARD';
 tkCfg.aboutYouUrl = 'about-you';
-tkCfg.lovedOneUrl = 'loved-one';
 tkCfg.consentUrl = 'consent';
 tkCfg.releaseUrl = 'release-survey';
 tkCfg.followupUrl = 'followup-consent';
