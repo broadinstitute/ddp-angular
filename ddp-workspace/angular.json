@@ -1015,12 +1015,20 @@
             "aot": false,
             "assets": [
               "projects/ddp-esc/src/favicon.ico",
-              "projects/ddp-esc/src/assets"
+              "projects/ddp-esc/src/favicon-alert.ico",
+              "projects/ddp-esc/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-esc/src/pdf/",
+                "output": "/"
+              }
             ],
             "styles": [
+              "projects/ddp-esc/src/theme.scss",
               "projects/ddp-esc/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -1051,6 +1059,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "projects/ddp-esc/tsconfig.es5.json"
             }
           }
         },
@@ -1062,6 +1073,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ddp-esc:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-esc:build:es5"
             }
           }
         },
@@ -1080,7 +1094,13 @@
             "karmaConfig": "projects/ddp-esc/karma.conf.js",
             "assets": [
               "projects/ddp-esc/src/favicon.ico",
-              "projects/ddp-esc/src/assets"
+              "projects/ddp-esc/src/favicon-alert.ico",
+              "projects/ddp-esc/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-esc/src/pdf/",
+                "output": "/"
+              }
             ],
             "styles": [
               "projects/ddp-esc/src/styles.scss"
