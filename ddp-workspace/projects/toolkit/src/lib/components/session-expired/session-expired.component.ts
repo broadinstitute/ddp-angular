@@ -1,32 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
+import { Component } from '@angular/core';
 import { Auth0AdapterService } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-session-expired',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-
-    <ng-template #newDesign>
-        <main class="main">
-            <section class="section session-content-section">
-                <div class="content content_tight">
-                    <p translate>Toolkit.SessionExpired.Text</p>
-                    <div class="session-content-section__button">
-                        <button (click)="signin()"
-                                [attr.aria-label]="'Common.Buttons.Login.AriaLabel' | translate"
-                                class="button button_medium button_primary"
-                                translate>
-                            Common.Buttons.Login.Title
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </ng-template>
-
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="false"></toolkit-header>
         <div class="Wrapper">
             <div class="PageHeader">
@@ -62,21 +39,10 @@ import { Auth0AdapterService } from 'ddp-sdk';
                     </div>
                 </div>
             </article>
-        </div>
-    </ng-template>`
+        </div>`
 })
-export class SessionExpiredComponent implements OnInit {
-    public useRedesign: boolean;
-
-    constructor(
-        private auth0: Auth0AdapterService,
-        private headerConfig: HeaderConfigurationService,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
-
-    public ngOnInit(): void {
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
-        this.headerConfig.setupDefaultHeader();
-    }
+export class SessionExpiredComponent {
+    constructor(private auth0: Auth0AdapterService) { }
 
     public signin(): void {
         this.auth0.login();

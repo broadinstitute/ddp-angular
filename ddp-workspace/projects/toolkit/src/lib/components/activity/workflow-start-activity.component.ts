@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import {
   ActivityResponse,
   CompositeDisposable,
@@ -17,18 +16,6 @@ import { filter, map, mergeMap, take } from 'rxjs/operators';
 @Component({
   selector: 'toolkit-workflow-start-activity',
   template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-    <ng-template #newDesign>
-      <ddp-redesigned-activity *ngIf="show"
-                               [studyGuid]="studyGuid"
-                               [activityGuid]="instanceGuid"
-                               (submit)="navigate($event)"
-                               (stickySubtitle)="showStickySubtitle($event)"
-                               (activityCode)="activityCodeChanged($event)"
-                               (sectionsVisibilityChanged)="sectionsVisibilityChanged($event)">
-      </ddp-redesigned-activity>
-    </ng-template>
-    <ng-template #oldDesign>
       <toolkit-header [showButtons]="false"
                       [stickySubtitle]="stickySubtitle">
       </toolkit-header>
@@ -37,15 +24,13 @@ import { filter, map, mergeMap, take } from 'rxjs/operators';
                     [activityGuid]="instanceGuid"
                     (submit)="navigate($event)"
                     (stickySubtitle)="showStickySubtitle($event)">
-      </ddp-activity>
-    </ng-template>`
+      </ddp-activity>`
 })
 export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
   public studyGuid: string;
   public instanceGuid: string;
   public stickySubtitle: string;
   public show = true;
-  public useRedesign: boolean;
   public activityCode: string;
   private anchor: CompositeDisposable = new CompositeDisposable();
 
@@ -56,16 +41,13 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
     private workflow: WorkflowServiceAgent,
     private windowRef: WindowRef,
     private cdr: ChangeDetectorRef,
-    private headerConfig: HeaderConfigurationService,
     @Inject('ddp.config') private configuration: ConfigurationService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
-    this.useRedesign = this.toolkitConfiguration.enableRedesign;
-    this.headerConfig.setupActivityHeader();
     this.fetchActivity();
-  }
+  }k
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
@@ -91,15 +73,6 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
 
   public showStickySubtitle(stickySubtitle: string): void {
     this.stickySubtitle = stickySubtitle;
-    this.headerConfig.stickySubtitle = stickySubtitle;
-  }
-
-  public activityCodeChanged(code: string): void {
-    this.headerConfig.currentActivityCode = code;
-  }
-
-  public sectionsVisibilityChanged(count: number): void {
-    this.headerConfig.workflowStartSectionsVisibility = count;
   }
 
   private fetchActivity(): void {
