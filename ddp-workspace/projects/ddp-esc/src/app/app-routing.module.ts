@@ -20,7 +20,6 @@ import {
   WorkflowStartActivityComponent,
   InternationalPatientsComponent,
   SessionExpiredComponent,
-  ActivityLinkComponent,
   RedirectToAuth0LoginComponent
 } from 'toolkit';
 
@@ -98,7 +97,7 @@ const routes: Routes = [
   },
   {
     path: 'activity-link/:id',
-    component: ActivityLinkComponent,
+    component: ActivityComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
