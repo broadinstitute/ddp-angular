@@ -28,48 +28,48 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-export const tkCfg = new ToolkitConfigurationService();
-tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.aboutYouGuid = ''; // to be defined later
-tkCfg.consentGuid = ''; // to be defined later
-tkCfg.releaseGuid = ''; // to be defined later
-tkCfg.followupGuid = ''; // to be defined later
-tkCfg.dashboardGuid = 'DASHBOARD';
-tkCfg.aboutYouUrl = 'about-you';
-tkCfg.consentUrl = 'consent';
-tkCfg.releaseUrl = 'release-survey';
-tkCfg.followupUrl = 'followup-consent';
-tkCfg.dashboardUrl = 'dashboard';
-tkCfg.activityUrl = 'activity';
-tkCfg.errorUrl = 'error';
-tkCfg.stayInformedUrl = 'stay-informed';
-tkCfg.internationalPatientsUrl = 'international-patients';
-tkCfg.phone = '651-229-6991';
-tkCfg.infoEmail = 'info@escproject.org';
-tkCfg.twitterAccountId = 'ecscproject';
-tkCfg.facebookGroupId = 'ecscproject';
-tkCfg.countMeInUrl = 'https://joincountmein.org/';
-tkCfg.showDataRelease = false;
-tkCfg.showInfoForPhysicians = true;
-tkCfg.showBlog = false;
+const toolkitConfig = new ToolkitConfigurationService();
+toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.aboutYouGuid = ''; // to be defined later
+toolkitConfig.consentGuid = ''; // to be defined later
+toolkitConfig.releaseGuid = ''; // to be defined later
+toolkitConfig.followupGuid = ''; // to be defined later
+toolkitConfig.dashboardGuid = 'DASHBOARD';
+toolkitConfig.aboutYouUrl = 'about-you';
+toolkitConfig.consentUrl = 'consent';
+toolkitConfig.releaseUrl = 'release-survey';
+toolkitConfig.followupUrl = 'followup-consent';
+toolkitConfig.dashboardUrl = 'dashboard';
+toolkitConfig.activityUrl = 'activity';
+toolkitConfig.errorUrl = 'error';
+toolkitConfig.stayInformedUrl = 'stay-informed';
+toolkitConfig.internationalPatientsUrl = 'international-patients';
+toolkitConfig.phone = '651-229-6991';
+toolkitConfig.infoEmail = 'info@escproject.org';
+toolkitConfig.twitterAccountId = 'ecscproject';
+toolkitConfig.facebookGroupId = 'ecscproject';
+toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
+toolkitConfig.showDataRelease = false;
+toolkitConfig.showInfoForPhysicians = true;
+toolkitConfig.showBlog = false;
 
-export const config = new ConfigurationService();
-config.backendUrl = DDP_ENV.basePepperUrl;
-config.auth0Domain = DDP_ENV.auth0Domain;
-config.auth0ClientId = DDP_ENV.auth0ClientId;
-config.studyGuid = DDP_ENV.studyGuid;
-config.logLevel = LogLevel.Info;
-config.baseUrl = location.origin + base;
-config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
-config.loginLandingUrl = DDP_ENV.loginLandingUrl;
-config.auth0CodeRedirect = location.origin + base + 'auth';
-config.localRegistrationUrl = config.backendUrl + '/pepper/v1/register';
-config.doLocalRegistration = DDP_ENV.doLocalRegistration;
-config.mapsApiKey = DDP_ENV.mapsApiKey;
-config.auth0Audience = DDP_ENV.auth0Audience;
-config.projectGAToken = DDP_ENV.projectGAToken;
+const sdkConfig = new ConfigurationService();
+sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
+sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
+sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
+sdkConfig.studyGuid = DDP_ENV.studyGuid;
+sdkConfig.logLevel = LogLevel.Info;
+sdkConfig.baseUrl = location.origin + base;
+sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
+sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
+sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
+sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
+sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
+sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
+sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
+sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
@@ -97,11 +97,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
   providers: [
     {
       provide: 'ddp.config',
-      useValue: config
+      useValue: sdkConfig
     },
     {
       provide: 'toolkit.toolkitConfig',
-      useValue: tkCfg
+      useValue: toolkitConfig
     },
     {
       provide: APP_INITIALIZER,
