@@ -992,6 +992,128 @@
           }
         }
       }
+    },
+    "ddp-esc": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-esc",
+      "sourceRoot": "projects/ddp-esc/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-esc",
+            "index": "projects/ddp-esc/src/index.html",
+            "main": "projects/ddp-esc/src/main.ts",
+            "polyfills": "projects/ddp-esc/src/polyfills.ts",
+            "tsConfig": "projects/ddp-esc/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ddp-esc/src/favicon.ico",
+              "projects/ddp-esc/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-esc/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-esc/src/environments/environment.ts",
+                  "with": "projects/ddp-esc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-esc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-esc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-esc:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-esc/src/test.ts",
+            "polyfills": "projects/ddp-esc/src/polyfills.ts",
+            "tsConfig": "projects/ddp-esc/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-esc/karma.conf.js",
+            "assets": [
+              "projects/ddp-esc/src/favicon.ico",
+              "projects/ddp-esc/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-esc/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-esc/tsconfig.app.json",
+              "projects/ddp-esc/tsconfig.spec.json",
+              "projects/ddp-esc/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-esc/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-esc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-esc:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "ddp-sdk",

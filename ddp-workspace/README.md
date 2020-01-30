@@ -21,9 +21,12 @@ ng serve sandbox-app
 
 DDP apps:
 ```
-ng serve ddp-angio 
+ng serve ddp-angio
 ng serve ddp-brain
 ng serve ddp-mbc
+ng serve ddp-prion
+ng serve ddp-osteo
+ng serve ddp-esc
 ```
 
 By default `ng serve` returns ES2015 files, these files are incompatible with Internet Explorer 11 in order to open app in IE11, you need to add additional param for `ng serve` and generate ES5 files, run `ng serve ddp-angio --configuration es5`
