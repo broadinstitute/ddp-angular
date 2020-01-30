@@ -53,7 +53,7 @@ tkCfg.showDataRelease = false;
 tkCfg.showInfoForPhysicians = true;
 tkCfg.showBlog = false;
 
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
