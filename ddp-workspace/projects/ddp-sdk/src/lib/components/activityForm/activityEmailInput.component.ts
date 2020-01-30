@@ -78,7 +78,8 @@ export class ActivityEmailInput implements OnChanges, OnDestroy {
                 this.initEmailForm();
             }
             if (propName === 'readonly') {
-                this.readonly ? this.emailForm.disable() : this.emailForm.enable();
+                // the emitEvent: false option important! Otherwise emailForm.valueChanges emits a value!
+                this.readonly ? this.emailForm.disable({emitEvent: false}) : this.emailForm.enable({emitEvent: false});
             }
         }
     }
