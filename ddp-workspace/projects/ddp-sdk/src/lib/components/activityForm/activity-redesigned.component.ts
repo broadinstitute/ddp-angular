@@ -15,7 +15,7 @@ import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEven
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 
 @Component({
-    selector: 'ddp-redesigned-activity',
+    selector: 'ddp-activity-redesigned',
     template: `
     <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
         <ng-container *ngIf="isLoaded && model">

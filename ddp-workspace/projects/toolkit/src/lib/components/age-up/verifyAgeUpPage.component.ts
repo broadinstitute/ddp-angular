@@ -8,7 +8,7 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
   template: `
     <main class="main">
         <section class="section section-spinner">
-            <div class="content content_medium info-block">
+            <div class="content content_medium">
                 <ddp-verify-age-up (error)="handleError()"
                                    (nextUrl)="handleNextUrl($event)">
                 </ddp-verify-age-up>
