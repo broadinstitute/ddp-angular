@@ -23,6 +23,8 @@ import {
   RedirectToAuth0LoginComponent
 } from 'toolkit';
 
+import { WelcomeComponent } from './components/welcome/welcome.component';
+
 const routes: Routes = [
   {
     path: 'about-you',
@@ -164,12 +166,12 @@ const routes: Routes = [
     path: 'password',
     component: PasswordComponent
   },
-  // {
-  //   path: '',
-  //   component: WelcomeComponent,
-  //   pathMatch: 'full',
-  //   canActivate: [IrbGuard]
-  // },
+  {
+    path: '',
+    component: WelcomeComponent,
+    pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
   {
     path: 'about-you/:id',
     redirectTo: 'about-you'

@@ -1,1 +1,2081 @@
-@import 'app-theme.scss';
+@import "app-theme.scss";
+$warning-height: 150px;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 16px;
+    padding-right: 0px !important;
+    background-color: mat-color($app-theme, 200);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media only screen and (min-width: 1380px) {
+    html {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none !important;
+    outline: 0;
+}
+
+a:hover,
+a:active,
+a:focus {
+    outline: 0;
+}
+
+.row {
+    display: block;
+}
+
+.Left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+// App Header
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 90px;
+    padding: 0 35px 5px 35px !important;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    background-color: mat-color($app-theme, 50);
+}
+
+.HeaderInfo {
+    max-width: 660px;
+    display: inline-block;
+    margin: 0 0 0 20px;
+
+    a {
+        color: mat-color($app-theme, 600);
+    }
+}
+
+.HeaderInfo--scrolled {
+    margin: 0;
+}
+
+.Header-navItemLink {
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.Header--scrolled {
+    color: mat-color($app-theme, 400);
+}
+
+.HeaderLink {
+    transition: color 0.3s ease;
+    color: mat-color($app-theme, 100);
+}
+
+.HeaderLink:hover {
+    color: mat-color($app-theme, 700);
+}
+
+.PageHeader-activity-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6em;
+    color: mat-color($app-theme, 100);
+    margin: 5px 0 5px 0;
+}
+
+.Header--scrolled {
+    background-color: mat-color($app-theme, 200);
+    box-shadow: 0 1px 8px mat-color($app-theme, 300);
+}
+
+.Header-logoImg {
+    height: 68px;
+}
+
+.Header-logo {
+    margin: 0 0 0 50px;
+    cursor: pointer;
+    height: 100%;
+    align-items: baseline;
+    display: flex;
+    align-self: flex-start;
+}
+
+.Header-logo--small {
+    margin: 0;
+}
+
+.Header-logo--hide {
+    display: none;
+}
+
+.Header-link {
+    display: flex;
+    align-items: flex-start;
+}
+
+.Header-logoText {
+    margin: 28px 0 0 10px;
+    color: mat-color($app-theme, 100);
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.2rem;
+}
+
+.Header-logoText--Scrolled {
+    color: mat-color($app-theme, 400);
+}
+
+.Header-nav {
+    margin: 0px 50px 0 0;
+}
+
+.Header-nav--small {
+    margin: 0;
+}
+
+.Header-navList {
+    display: flex;
+    margin: 0px;
+}
+
+.Header-navList--small {
+    padding: 0;
+}
+
+.Header-navItem {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    line-height: 1.6em;
+    text-decoration: none;
+    padding: 0 0 0 20px;
+    transition: background-color 0.3s ease;
+}
+
+.CountButton {
+    font-weight: 700;
+    border: 2px solid mat-color($app-theme, 100);
+    border-radius: 18px;
+    padding: 5px 20px;
+    color: mat-color($app-theme, 100);
+    text-decoration: none;
+    cursor: pointer;
+    outline: 0;
+}
+
+.CountButton--Scrolled {
+    background-color: mat-color($app-theme, 600);
+    border: none;
+    margin: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.3s ease;
+}
+
+.CountButton--Scrolled:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.MenuButton {
+    display: inline-flex;
+    text-decoration: none;
+    color: mat-color($app-theme, 100);
+    cursor: pointer;
+}
+
+.MenuButton-Icon--Scrolled {
+    color: mat-color($app-theme, 600);
+}
+
+.SimpleButton {
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-weight: 300;
+    text-decoration: none;
+    color: mat-color($app-theme, 100);
+    text-align: left;
+}
+
+.SimpleButton--Scrolled {
+    color: mat-color($app-theme, 600);
+}
+
+.SimpleButton:hover {
+    color: mat-color($app-theme, 700);
+    text-decoration: none;
+}
+
+.SimpleButton:active {
+    text-decoration: none;
+    color: mat-color($app-theme, 600);
+}
+
+.LastUpdatedText {
+    text-align: right;
+    font-weight: 300;
+    padding: 5px;
+    color: mat-color($app-theme, 800);
+}
+
+// Footer
+.Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 185px;
+    /* Height of the footer */
+    padding: 0 35px 0 35px;
+    z-index: 2;
+    background-color: mat-color($app-theme, 200);
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Footer-logo {
+    width: 150px;
+    margin: 0 0 0 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+}
+
+.Footer-logoCMI {
+    padding: 15px 25px 0 25px;
+}
+
+.Footer-logoCMI-img {
+    height: 52px;
+    width: auto;
+}
+
+.Footer-logoImg {
+    height: 68px;
+}
+
+.Footer-logoText {
+    margin: 28px 0 0 10px;
+    color: mat-color($app-theme, 400);
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.2rem;
+}
+
+.Footer-nav {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 50px 0 25px;
+}
+
+.Footer-navList {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.Footer-navItem {
+    font-size: 0.95rem;
+    line-height: 1.6em;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+.Footer-navItem--first {
+    padding: 0;
+}
+
+.Footer-navItemLink {
+    transition: color 0.3s ease;
+    cursor: pointer;
+    color: mat-color($app-theme, 500);
+    font-weight: 300;
+}
+
+.Footer-navItemLink:hover {
+    color: mat-color($app-theme, 700);
+    text-decoration: none;
+}
+
+.Footer-contact {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 0 0 0;
+}
+
+.Footer-contactList {
+    color: mat-color($app-theme, 500);
+    font-weight: 300;
+    list-style-type: none;
+    padding: 0;
+}
+
+.Footer-contactList--right {
+    padding: 0 0 0 50px;
+}
+
+.Footer-contactLink {
+    transition: color 0.3s ease;
+    cursor: pointer;
+    color: mat-color($app-theme, 500);
+    font-weight: 300;
+}
+
+.Footer-contactLink:hover {
+    color: mat-color($app-theme, 700);
+    text-decoration: none;
+}
+
+.Footer-contactLogos {
+    padding-right: 5px;
+    height: 15px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .Footer-nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 30px 0 0 25px;
+    }
+}
+
+//   Page header
+.MainContainer {
+    position: relative;
+    min-height: 100%;
+    background-color: mat-color($app-theme, 200);
+}
+
+.PageHeader {
+    position: relative;
+    padding-top: 0;
+    margin-bottom: 20px;
+}
+
+.PageHeader-background {
+    height: auto;
+    padding: 78px 0 5px 0;
+    color: mat-color($app-theme, 100);
+    width: 100%;
+    background-color: mat-color($app-theme, 600);
+    display: flex;
+}
+
+.PageLayout {
+    max-width: 660px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.PageLayout-dashboard {
+    max-width: 1200px !important;
+}
+
+.PageHeader-title {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 2.4rem;
+    line-height: 2.7rem;
+}
+
+.PageHeader-subTitle {
+    white-space: normal;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6em;
+    color: mat-color($app-theme, 600);
+}
+
+.PageHeader-title small {
+    color: mat-color($app-theme, 100);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 55%;
+    display: block;
+    line-height: 1.5;
+}
+
+.PageHeader-image .PageHeader-imageSpan {
+    display: inline-block;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: middle;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/about-page-broad-hero.jpg);
+    position: relative;
+}
+
+.PageHeader-image .PageHeader-imageSpan .PageHeader-imageInner {
+    padding-top: 42%;
+    display: block;
+    height: 0;
+}
+
+.PageHeader-box {
+    position: relative;
+    bottom: 150px;
+    width: 60%;
+    margin: 0 auto !important;
+    border-radius: 2px;
+    background-color: mat-color($app-theme, 100);
+    text-align: left;
+    z-index: 1;
+}
+
+.PageHeader-boxContent {
+    color: mat-color($app-theme, 1000);
+    padding: 40px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-weight: 300;
+}
+
+.PageHeader-boxFooter {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 20px 40px;
+    font-weight: 300;
+    font-size: 0.95rem;
+}
+
+.PageHeader-backgroundAboutUs {
+    height: auto;
+    padding: 120px 0 0 0;
+    margin-top: -270px;
+    color: mat-color($app-theme, 100);
+    width: 100%;
+    background-color: mat-color($app-theme, 600);
+    z-index: 2;
+}
+
+.PageHeader-titleAboutUs {
+    margin: 100px 0 30px 0;
+    text-align: center;
+    display: block;
+}
+
+.Message {
+    text-align: center;
+    color: mat-color($app-theme, 1100);
+    display: block;
+}
+
+.Message-title {
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1.25;
+    color: mat-color($app-theme, 1000);
+    margin-bottom: 18px;
+}
+
+.Message-partners {
+    height: auto;
+}
+
+.Message-quote {
+    text-align: right;
+    color: mat-color($app-theme, 1000);
+    font-weight: 300;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    width: auto;
+}
+
+.Wrapper {
+    position: relative;
+    min-height: 100%;
+    margin: 0 35px;
+    padding-bottom: 250px;
+    background-color: mat-color($app-theme, 100);
+    z-index: 1;
+}
+
+.PageLayout {
+    max-width: 660px;
+    margin: 0 auto;
+}
+
+.NoMargin {
+    margin: 0 !important;
+}
+
+.NoPadding {
+    padding: 0 !important;
+}
+
+.Float--right {
+    float: right !important;
+}
+
+.Position--relative {
+    position: relative;
+}
+
+.row--moreBottomMargin {
+    margin-bottom: 120px;
+}
+
+@media only screen and (max-width: 450px) {
+    .row--moreBottomMargin {
+        margin-bottom: 180px;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.InputRadio-label {
+    color: mat-color($app-theme, 800);
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.row--moreTopMargin {
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 1480px) {
+    .Footer-logo {
+        order: 1;
+    }
+
+    .Footer-logoCMI {
+        order: 2;
+    }
+
+    .Footer-nav {
+        order: 3;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1025px) {
+    .Wrapper {
+        margin: 0;
+        padding-bottom: 350px;
+    }
+
+    .Header-nav {
+        margin: 0;
+    }
+
+    .Header-logo {
+        margin: 0;
+    }
+
+    .Footer-logo {
+        margin: 0;
+    }
+
+    .Footer-nav {
+        margin: 30px 50px 0 0;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .Message-quote {
+        margin: 0 30px;
+    }
+
+    .Footer-navList {
+        flex-direction: column;
+    }
+
+    .Footer-navItem {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
+    .PageContent-ol li,
+    .PageContent-ul li {
+        padding: 0 0 0 15px;
+    }
+
+    .PageHeader-background {
+        padding: 50px 0 0 0;
+        margin-top: 0;
+    }
+
+    .PageHeader-titleAboutUs {
+        margin: 180px 0 30px 0 !important;
+    }
+
+    .PageHeader-title {
+        padding: 20px 20px 0 20px;
+    }
+
+    .PageContent {
+        padding: 20px 0 150px 0;
+    }
+
+    .PageHeader-box {
+        bottom: 0;
+        width: 100%;
+        margin: 0 auto !important;
+    }
+
+    .Message-title {
+        font-size: 2rem;
+    }
+
+    .Message-quoteExtraMargin {
+        padding: 20px 40px;
+    }
+
+    .Message-quote blockquote {
+        padding: 20px;
+    }
+
+    .Message-quote {
+        padding: 20px;
+    }
+
+    .Message-quote blockquote:before {
+        top: -6px;
+        left: 0;
+    }
+
+    .Message-quote blockquote:after {
+        bottom: -5px;
+        right: -10px;
+    }
+
+    .PageHeader-title {
+        padding: 20px 20px 0 20px;
+    }
+
+    .PageHeader-activity-subtitle {
+        padding: 0 20px 10px 20px;
+    }
+
+    .Modal-title {
+        margin: 0 !important;
+        font-size: 2rem !important;
+        line-height: 2rem !important;
+    }
+
+    .Modal-text {
+        margin: 0 !important;
+    }
+
+    .modal-message {
+        .warning-message-text {
+            margin: 0 !important;
+        }
+    }
+
+    .mat-dialog-actions {
+        padding: 12px 0 0 0 !important;
+
+        .ButtonFilled {
+            padding: 9px 10px !important;
+        }
+    }
+
+    .Footer-logoCMI-img {
+        width: auto;
+        height: 40px;
+    }
+
+    .Header,
+    .Footer {
+        padding: 0 15px !important;
+    }
+
+    .PageHeader-subTitle {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+}
+
+// Page
+.PageContent {
+    padding: 50px 0 150px 0;
+}
+
+.PageContent-section {
+    padding: 1rem 0;
+}
+
+.Dashboard-info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 0 20px 0;
+    padding: 35px 35px 30px 35px;
+    background: mat-color($app-theme, 200);
+    border: 2px solid mat-color($app-theme, 600);
+    position: relative;
+
+    .close-button {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+
+ul {
+    li.PageContent-text-list {
+        padding: 0 !important;
+        margin: 10px 0 !important;
+    }
+}
+
+.PageContent-text,
+.PageContent-box-text {
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    color: mat-color($app-theme, 800);
+    text-align: left;
+}
+
+.PageContent-image {
+    width: 100%;
+    height: auto;
+}
+
+.Link {
+    color: mat-color($app-theme, 600) !important;
+    cursor: pointer;
+}
+
+.Link:hover,
+.Link:focus {
+    color: mat-color($app-theme, 700) !important;
+}
+
+.PageContent-title {
+    font-size: 1.4rem;
+    color: mat-color($app-theme, 800);
+    font-weight: 300;
+    line-height: 1.33;
+    margin: 2.1rem 0 1.3rem 0;
+}
+
+.PageContent-sectionAboutUs {
+    padding: 0;
+}
+
+.Field-padding {
+    padding-bottom: 25px;
+}
+
+.InputRadio-extraMargin {
+    margin: 40px 0;
+}
+
+.HorizontalLine {
+    margin: 40px 0 30px 0;
+}
+
+.topMarginMedium {
+    margin: 15px 0 0 0;
+}
+
+.Italic {
+    font-style: italic;
+}
+
+.Color--neutral {
+    color: mat-color($app-theme, 800) !important;
+}
+
+.Normal {
+    font-weight: 300 !important;
+}
+
+.ButtonFilled {
+    outline: none;
+    padding: 7px 20px;
+    border-radius: 30px !important;
+    border: none;
+    color: mat-color($app-theme, 100) !important;
+    font-size: 1rem;
+    font-weight: 300;
+    transition: all 0.3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+    background-color: mat-color($app-theme, 600);
+}
+
+.ButtonFilled:focus {
+    outline: none;
+}
+
+.ButtonFilled--white {
+    background-color: mat-color($app-theme, 100) !important;
+    color: mat-color($app-theme, 1500) !important;
+    font-size: 0.95rem;
+    margin-top: 20px;
+}
+
+.ButtonFilled--white:hover {
+    background-color: mat-color($app-theme, 100) !important;
+}
+
+.ButtonFilled--neutral {
+    background-color: mat-color($app-theme, 300) !important;
+    margin-right: 0px;
+}
+
+.ButtonFilled--neutral--margin {
+    margin-right: 20px;
+}
+
+.Button--rect {
+    float: right;
+    border-radius: 2px !important;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    font-weight: 300;
+    vertical-align: middle;
+    z-index: 1;
+    transition: all 0.3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.Button--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ButtonFilled:hover,
+.ButtonFloating:hover,
+.Button--rect:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.ButtonFilled:hover,
+.ButtonFilled:visited {
+    color: mat-color($app-theme, 100);
+}
+
+// welcome
+.Intro {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    max-width: 100%;
+    display: inline-block;
+}
+
+.Intro-image .Intro-imageSpan {
+    display: inline-block;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: middle;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/home-image-lg.jpg);
+    position: relative;
+}
+
+@media only screen and (min-width: 1280px) {
+    .Intro-image .Intro-imageSpan {
+        background-image: url(/assets/images/home-image-lg.jpg);
+    }
+
+    .Intro-image .Intro-imageSpan .Intro-imageInner {
+        padding-top: 51% !important;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .Intro-image .Intro-imageSpan {
+        background-image: url(/assets/images/home-image-md.jpg);
+    }
+
+    .Intro-image .Intro-imageSpan .Intro-imageInner {
+        padding-top: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .Intro-image .Intro-imageSpan {
+        background-image: url(/assets/images/home-image-sm.jpg);
+    }
+
+    .Intro-image .Intro-imageSpan .Intro-imageInner {
+        padding-top: 68% !important;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .Intro-image .Intro-imageSpan {
+        background-image: url(/assets/images/home-image-xs.jpg);
+    }
+
+    .Intro-image .Intro-imageSpan .Intro-imageInner {
+        padding-top: 175% !important;
+    }
+}
+
+.Intro-image .Intro-imageSpan .Intro-imageInner {
+    padding-top: 50%;
+    display: block;
+    height: 0;
+}
+
+.Intro-arrow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -32px;
+    opacity: 1;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.Intro-footer {
+    text-align: center;
+    margin: 0 0 -50px 0;
+}
+
+.Intro-footerLogos {
+    margin: 10px 20px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 450px) {
+    .Intro-footerLogos {
+        margin: 10px 10px;
+    }
+}
+
+.Message--intro {
+    margin-top: 150px;
+}
+
+@media only screen and (max-width: 1280px) {
+    .Message--intro {
+        margin-top: 180px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .Message--intro {
+        margin-top: 100px;
+    }
+
+    .Footer-logoCMI {
+        padding-right: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .Message--intro {
+        margin-top: 100px;
+    }
+}
+
+.Message--intro .Message-title,
+.Message--intro .Message-text {
+    color: mat-color($app-theme, 1000);
+}
+
+.Separator {
+    width: 1px;
+    background: mat-color($app-theme, 700);
+    margin: 50px auto;
+    position: relative;
+}
+
+.Separator--small {
+    height: 125px;
+}
+
+.Separator--large {
+    height: 200px;
+}
+
+.Separator:before,
+.Separator:after {
+    content: ' ';
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    position: absolute;
+    left: -3px;
+    background: mat-color($app-theme, 700);
+}
+
+.Separator:before {
+    top: -3px;
+}
+
+.Separator:after {
+    bottom: -3px;
+}
+
+.DNAStrand {
+    width: 100%;
+    margin: 35px 0;
+}
+
+.Message-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: mat-color($app-theme, 1100);
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.Message-turtle {
+    margin: 220px 0 35px 0;
+}
+
+.Message-step {
+    text-align: center;
+    margin: 25px 0 35px 0;
+    padding: 0 30px;
+}
+
+.Message-stepImage {
+    max-height: 100%;
+}
+
+.Message-stepTitle {
+    font-size: 1.5rem;
+    display: block;
+    font-weight: 400;
+    line-height: 1.33;
+    text-align: left;
+    padding: 40px 0 0 30px;
+}
+
+.Message-stepSubtitle {
+    font-size: 0.95rem;
+    display: block;
+    font-weight: 300;
+    line-height: 1.33;
+    text-align: left;
+    padding: 0 0 20px 30px;
+}
+
+.Message-stepText {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    text-align: left;
+    padding: 0 0 0 30px;
+    color: mat-color($app-theme, 800);
+}
+
+.Message-quote blockquote {
+    padding: 0;
+    margin: 0;
+    border: none;
+    position: relative;
+    font-size: 1.5rem;
+    line-height: 1.25;
+}
+
+.Message-quote blockquote:before {
+    content: '\201C';
+    top: -10px;
+    left: -15px;
+}
+
+.Message-quote blockquote:after {
+    content: '\201D';
+    bottom: -25px;
+    right: -15px;
+}
+
+.Message-quote blockquote:before,
+.Message-quote blockquote:after {
+    font-size: 60px;
+    line-height: 1;
+    color: mat-color($app-theme, 600);
+    position: absolute;
+}
+
+.Semibold {
+    font-weight: 400 !important;
+}
+
+.ButtonBordered {
+    padding: 7px 20px;
+    border-radius: 18px;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 2px solid;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.ButtonBordered:hover {
+    text-decoration: none;
+    background-color: transparent;
+    color: mat-color($app-theme, 700);
+    border-color: mat-color($app-theme, 700);
+}
+
+.Button--countMeIn {
+    margin: 0 auto !important;
+    text-align: center;
+    max-width: 180px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 6px 15px 7px 15px;
+    border-radius: 22px;
+    display: block;
+}
+
+.ButtonBordered--countMeInMoreMargin {
+    margin-bottom: 70px !important;
+}
+
+.ButtonBordered--orange,
+.ButtonBordered--orange:visited {
+    color: mat-color($app-theme, 600) !important;
+    border-color: mat-color($app-theme, 600) !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.3s ease-out;
+}
+
+.ButtonBordered--orange:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.ButtonBordered--white,
+.ButtonBordered--white:visited {
+    color: mat-color($app-theme, 100);
+    border-color: mat-color($app-theme, 100);
+}
+
+.Color--orange {
+    color: mat-color($app-theme, 600);
+}
+
+.Semibold {
+    font-weight: 400 !important;
+}
+
+.PageContent-ol,
+.PageContent-ul {
+    margin: 20px !important;
+    padding: 0 !important;
+    text-align: left !important;
+    font-weight: 300 !important;
+}
+
+.PageContent-ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+
+.PageContent-ol li,
+.PageContent-ul li {
+    padding: 0 0 0 25px !important;
+    font-size: 1.1rem !important;
+    font-weight: 300 !important;
+    margin: 35px 0 20px 0 !important;
+    position: relative;
+}
+
+.PageContent-ol li::before,
+.PageContent-ul li::before {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    height: 100%;
+}
+
+.Sub-item {
+    margin: 35px 0 20px 0 !important;
+    padding: 0 0 0 25px !important;
+}
+
+.NoListStyle {
+    list-style-type: none;
+}
+
+.Login-landing-header {
+    height: 78px;
+    background-color: mat-color($app-theme, 600);
+}
+
+.Modal-title {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 10px 0 12px 0;
+    font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .mat-icon-button {
+        top: -20px;
+        right: -15px;
+    }
+}
+
+.Modal-text {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.95rem;
+    line-height: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+
+.md-dialog-container {
+    background-color: mat-color($app-theme, 1100);
+}
+
+.ErrorMessage a {
+    text-decoration: underline !important;
+}
+
+.ErrorMessage {
+    border-top: 2px solid mat-color($app-theme, 1200);
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: mat-color($app-theme, 1200);
+    font-weight: 300;
+    padding: 15px 0;
+}
+
+.ErrorMessage a {
+    text-decoration: underline !important;
+}
+
+.ddp-activity-validation {
+    .ErrorMessageList {
+        list-style-type: square;
+    }
+
+    .ErrorMessageItem {
+        font-size: 0.9rem;
+        color: mat-color($app-theme, 1200);
+        font-weight: 300;
+        margin: 10px 0 10px 0;
+        padding: 0 0 0 0;
+    }
+}
+
+.JoinDialogFiled {
+    width: 100%;
+}
+
+.JoinDialogNameField {
+    width: 50%;
+    margin: 0 30px 0 0;
+}
+
+.JoinDialogLastnameField {
+    width: 50%;
+}
+
+.JoinDialogGroupFields {
+    display: flex;
+}
+
+.JoinField--margin {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 650px) {
+    .JoinDialogGroupFields {
+        flex-direction: column;
+    }
+
+    .JoinDialogNameField {
+        width: 100%;
+        margin: 0;
+    }
+
+    .JoinDialogLastnameField {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .HeaderInfo {
+        margin: 0
+    }
+}
+
+.ResendEmailField {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.ConsentButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.NextButton {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.WizardSteps {
+    position: relative;
+    margin: 40px 0 30px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.WizardSteps-background {
+    background: mat-color($app-theme, 100);
+    margin-top: 40px;
+    border-radius: 12px;
+    z-index: 0;
+    width: 100%;
+}
+
+.WizardSteps-title {
+    padding: 60px 0 15px 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: mat-color($app-theme, 800);
+}
+
+.WizardSteps-img {
+    position: absolute;
+    top: 0;
+    left: calc((100% - 70px) / 2);
+    width: 70px;
+    height: 85px;
+    background-color: mat-color($app-theme, 100);
+    box-shadow: 0 0 5px mat-color($app-theme, 800);
+}
+
+.WizardSteps.completed .WizardSteps-background {
+    background: mat-color($app-theme, 1400);
+}
+
+.WizardSteps.active.completed .WizardSteps-background {
+    background: mat-color($app-theme, 600);
+}
+
+.WizardSteps.active.completed .WizardSteps-title {
+    color: mat-color($app-theme, 100);
+}
+
+.Loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 12px solid mat-color($app-theme, 600);
+    border-top: 12px solid mat-color($app-theme, 1600);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: -50px;
+    margin-left: -30px;
+    animation: spin 2s linear infinite;
+}
+
+.Sidenav li {
+    text-align: end;
+    padding: 0 !important;
+}
+
+.Loader-height {
+    height: 50vh;
+}
+
+.PageContent-box {
+    width: 100%;
+    padding: 3rem;
+    background: mat-color($app-theme, 200);
+    border: 2px solid mat-color($app-theme, 600);
+    box-shadow: none;
+    font-size: 1rem;
+}
+
+.PageContent-box-text {
+    color: mat-color($app-theme, 1000);
+}
+
+.PageContent-strong-text {
+    margin: 0 0 0 40px;
+}
+
+@media only screen and (max-width: 450px) {
+    .PageContent-box {
+        padding: 2.2rem 2rem 2rem 2rem;
+    }
+}
+
+.PageContent-contact-item {
+    font-weight: 300 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.6rem;
+    color: mat-color($app-theme, 800) !important;
+    margin: 0 !important;
+}
+
+.PageContent-list-item {
+    list-style-type: circle !important;
+}
+
+.PageContent-info {
+    margin: 0 20px;
+}
+
+.PageContent-closing-text {
+    color: mat-color($app-theme, 800);
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0 20px;
+}
+
+.PageContent-closing-question {
+    margin: 35px 20px -25px 20px !important;
+}
+
+.PageContent-infobox-section {
+    padding: 2rem 0 0 0;
+}
+
+.PageContent-infobox {
+    padding: 1rem;
+    background: mat-color($app-theme, 200);
+    border: 2px solid mat-color($app-theme, 600);
+    box-shadow: none;
+    font-size: 1rem;
+    margin: 0 20px;
+}
+
+.PageContent-subtitle {
+    color: mat-color($app-theme, 1000);
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.PageContent-subtitle-dashboard {
+    margin: 0.5rem 0 !important;
+}
+
+.PageContent-text-dashboard {
+    font-size: 1rem !important;
+}
+
+.PageContent-text br {
+    line-height: 2.5rem;
+}
+
+.Button--cell {
+    font-size: 0.85rem;
+    min-width: 90px !important;
+    height: 30px;
+    line-height: 26px !important;
+    padding: 0 !important;
+    border-radius: 2px !important;
+    outline: none;
+}
+
+.Announcements-section {
+    align-self: stretch;
+}
+
+select {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 5px;
+    border: 1px solid mat-color($app-theme, 1800);
+    border-radius: 2px;
+    height: 3rem;
+    transition: all .3s;
+}
+
+select:focus {
+    color: mat-color($app-theme, 600);
+    outline: none;
+}
+
+select option {
+    color: black;
+}
+
+select:-webkit-autofill {
+    background-color: transparent !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .Button--cell {
+        min-width: 95% !important;
+    }
+}
+
+.warning-message {
+    position: fixed;
+    height: $warning-height;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: mat-color($app-theme, 2000);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.warning-message {
+    .warning-message-text {
+        color: mat-color($app-theme, 1700);
+        font-size: 1.1rem;
+        line-height: 1.1rem;
+        font-weight: 300;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.modal-message {
+    .warning-message-text {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 0.95rem;
+        line-height: 1.6rem;
+        font-weight: 300;
+        margin-bottom: 15px;
+    }
+}
+
+.warning-message-top {
+    top: $warning-height !important;
+}
+
+// .ddp-list {
+//     margin: 20px;
+//     padding: 0;
+// }
+
+// .ddp-list li {
+//     font-size: 1.1rem;
+//     font-weight: 300;
+//     margin: 35px 0 20px 0;
+//     color: mat-color($app-theme, 1700);
+//     padding: 0 0 0 25px;
+// }
+
+// .ddp-list-inside {
+//     margin: 0;
+//     padding: 0;
+//     list-style-position: inside;
+// }
+
+// .ddp-list-inside li {
+//     padding: 0;
+//     font-size: 1.2rem;
+//     font-weight: 400;
+// }
+
+// .ddp-agreement-text {
+//     white-space: normal;
+//     margin: 0px;
+//     font-size: 1rem;
+//     font-weight: 300;
+//     color: mat-color($app-theme, 800);
+// }
+
+// .ddp-question {
+//     margin: 35px 0 20px 0;
+//     font-weight: 300;
+//     font-size: 1.1rem;
+//     line-height: 1.6rem;
+//     color: mat-color($app-theme, 1700) !important;
+//     padding: 0;
+
+//     .ddp-required-question-prompt {
+//         color: mat-color($app-theme, 800);
+//         font-size: 1.1rem;
+//     }
+
+//     li {
+//         color: mat-color($app-theme, 800);
+//     }
+// }
+
+// .ddp-question-neutral {
+//     color: mat-color($app-theme, 800) !important;
+// }
+
+// .ddp-required-question-prompt {
+//     font-weight: 300;
+//     color: mat-color($app-theme, 1700) !important;
+// }
+
+// .ddp-list {
+//     p {
+//         font-size: 1.1rem;
+//         color: mat-color($app-theme, 1700);
+//     }
+// }
+
+// .ddp-dropdown {
+//     padding: 10px;
+//     margin: 0 0 5px 0;
+//     border: 1px solid mat-color($app-theme, 1800);
+//     border-radius: 2px;
+// }
+
+// .ddp-block-body {
+//     margin: 20px 0 0 0;
+//     color: mat-color($app-theme, 800);
+
+//     .PageContent-text {
+//         margin: 14px 0 0 0;
+//         color: mat-color($app-theme, 800);
+//     }
+// }
+
+// .ddp-block-title-bold {
+//     color: mat-color($app-theme, 1000);
+//     font-weight: 400;
+//     font-size: 1.2rem;
+//     line-height: 1.8rem;
+//     margin: 2rem 0 1rem 0;
+// }
+
+// .ddp-single-question {
+//     margin: 35px 20px 20px 45px;
+// }
+
+.PageContent-contact {
+    list-style-type: disc;
+    margin: 10px 0 0 0;
+}
+
+// .ddp-block-title-color {
+//     font-size: 1.2rem;
+//     line-height: 1.8rem;
+//     font-weight: 300;
+//     margin: 2rem 0 1rem 0;
+//     color: mat-color($app-theme, 800);
+// }
+
+// .ddp-li-gray {
+//     color: mat-color($app-theme, 800) !important;
+// }
+
+// .ddp-date-field-margin {
+//     margin: 0 15px 0 0;
+// }
+
+// .ddp-content {
+//     width: 100%;
+// }
+
+// .ddp-agreement {
+//     margin: 0 0 0 -25px;
+// }
+
+// .ddp-group-block {
+//     margin: 0;
+// }
+
+// .ddp-group-block-list {
+//     padding: 0 !important;
+// }
+
+// .ddp-textarea-block {
+//     .mat-form-field-infix {
+//         border-top: 0 solid transparent !important;
+//     }
+// }
+
+// .ddp-group-margin {
+//     margin: 20px;
+// }
+
+// .ddp-textarea {
+//     height: 1.5rem !important;
+// }
+
+// .ddp-composite-text {
+//     flex-grow: 1;
+//     margin-right: 30px;
+// }
+
+// .ddp-close-button {
+//     margin-left: auto;
+//     cursor: pointer;
+//     color: mat-color($app-theme, 300);
+//     font-size: 1rem;
+//     font-weight: 900;
+// }
+
+// .ddp-user-menu-button {
+//     outline: none;
+//     font-size: 1rem;
+//     font-weight: 300;
+//     color: mat-color($app-theme, 1000);
+// }
+
+// .ddp-user-menu-button:active,
+// .ddp-user-menu-button:focus,
+// .ddp-user-menu-button:hover {
+//     color: mat-color($app-theme, 1000);
+// }
+
+// .ddp-user {
+//     color: mat-color($app-theme, 100);
+// }
+
+// .ddp-user--scrolled {
+//     color: mat-color($app-theme, 600);
+// }
+
+// .ddp-institutions-form,
+// .ddp-activity-question {
+//     display: inline-block;
+//     vertical-align: top;
+//     width: 100%;
+// }
+
+// .ddp-hide-block {
+//     margin: 0 !important;
+//     padding: 0 !important;
+//     height: 0;
+// }
+
+// .ddp-hide-subtitle {
+//     opacity: 0;
+//     transition: all 0.3s ease;
+// }
+
+// .ddp-menu-text {
+//     padding: 0 16px !important;
+// }
+
+// .ddp-dashboard {
+//     .dashboard-mobile-label {
+//         color: rgba(0, 0, 0, 0.54);
+//     }
+// }
+
+// .dashboard-activity-button {
+//     font-size: 0.9rem;
+//     font-family: inherit;
+//     font-weight: 400;
+//     background: none;
+//     border: none;
+//     padding: 0;
+//     cursor: pointer;
+//     text-decoration: none;
+//     text-align: left;
+// }
+
+// .ddp-picklist-option-list-item {
+//     height: auto !important;
+//     margin-bottom: 10px;
+// }
+
+// .ddp-picklist-group-title {
+//     font-size: 1.25rem;
+//     font-weight: 500;
+// }
+
+// .example-radio-group {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// .ddp-login-button {
+//     @extend .mat-button;
+// }
+
+// .ddp-activity-validation {
+//     margin: 5px;
+// }
+
+// .subhead:after {
+//     content: "";
+//     display: table;
+//     clear: both;
+// }
+
+// /**
+//     Define the prompt to be displayed after a required question
+//  */
+// .ddp-required-question-prompt:after {
+//     content: ' *';
+// }
+
+// @media only screen and (max-width: 1100px) {
+//     .ddp-picklist-group-container {
+//         grid-template-columns: repeat(2, 50%) !important;
+//     }
+// }
+
+// @media only screen and (max-width: 600px) {
+//     .ddp-picklist-group-container {
+//         grid-template-columns: repeat(1, 100%) !important;
+//     }
+// }
+
+// .mat-snack-bar-container {
+//     box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+//     margin: 4px;
+//     background-color: mat-color($app-theme, 100);
+//     padding: 0px 0px 0px 0px !important;
+// }
+
+// .mat-checkbox-label {
+//     color: mat-color($app-theme, 800);
+//     font-weight: 300;
+// }
+
+// .mat-select-placeholder {
+//     color: mat-color($app-theme, 1700);
+// }
+
+// .mat-radio-label {
+//     font-weight: 300;
+// }
+
+// .mat-checkbox-layout {
+//     align-items: normal !important;
+// }
+
+// .mat-input-flex {
+//     font-weight: 300;
+// }
+
+// .mat-dialog-container {
+//     background-color: mat-color($app-theme, 1300);
+// }
+
+// .mat-form-field-invalid .mat-form-field-label {
+//     color: mat-color($app-theme, 1200);
+// }
+
+// .mat-error {
+//     color: mat-color($app-theme, 1200);
+// }
+
+// .mat-form-field-invalid .mat-form-field-ripple {
+//     background-color: mat-color($app-theme, 1200);
+// }
+
+// .mat-form-field-label-wrapper {
+//     font-weight: 300;
+//     font-size: 1rem;
+// }
+
+// .mat-input-placeholder {
+//     font-weight: 300;
+//     font-size: 1rem;
+// }
+
+// .mat-error {
+//     font-weight: 300;
+//     font-size: 0.75rem;
+// }
+
+// .mat-checkbox-frame {
+//     border-color: mat-color($app-theme, 900);
+// }
+
+// .mat-radio-outer-circle {
+//     border-color: mat-color($app-theme, 900);
+// }
+
+// .mat-list-item-content {
+//     padding: 0px 4px !important;
+// }
+
+// .mat-checkbox-layout .mat-checkbox-label {
+//     font-size: 1rem;
+// }
+
+// .mat-radio-label-content {
+//     font-size: 1rem;
+// }
+
+// .mat-form-field-infix {
+//     font-size: 1rem;
+// }
+
+// .mat-list .mat-list-item .mat-list-item-content {
+//     display: block !important;
+// }
+
+// .mat-input-element {
+//     height: 2.0rem !important;
+//     font-size: 1rem;
+// }
+
+// input.mat-input-element {
+//     height: 1.2rem !important;
+//     font-size: 1rem;
+// }
+
+// .mat-form-field .mat-form-field-subscript-wrapper {
+//     overflow: visible !important;
+// }
+
+// .mat-input-element {
+//     line-height: 1.1rem;
+//     font-size: 1rem;
+// }
+
+// .mat-radio-outer-circle,
+// .mat-radio-inner-circle {
+//     height: 16px !important;
+//     width: 16px !important;
+// }
+
+// .mat-radio-container {
+//     margin-top: 3px !important;
+//     height: 16px !important;
+//     width: 16px !important;
+// }
+
+// .mat-radio-checked .mat-radio-inner-circle {
+//     transform: scale(.8) !important;
+// }
+
+// .mat-menu-item {
+//     padding: 0 !important;
+// }
+
+// @media only screen and (min-width: 768px) {
+
+//     .mat-row:first-child,
+//     .mat-header-row:first-child {
+//         flex: 0 0 40% !important;
+//     }
+
+//     .mat-row:last-child,
+//     .mat-header-row:last-child {
+//         flex: 0 0 15% !important;
+//     }
+// }
+
+// .mat-checkbox-inner-container:hover .mat-checkbox-persistent-ripple {
+//     opacity: 0 !important;
+// }
+
+// .mat-checkbox-inner-container {
+//     width: 20px !important;
+//     height: 20px !important;
+// }
+
+// .mat-input-element {
+//     font-weight: 100 !important;
+// }
+
+// .mat-select {
+//     font-weight: 100 !important;
+// }
+
+// .ddp-helper {
+//     font-size: 0.8rem !important;
+//     color: mat-color($app-theme, 800) !important;
+// }
+
+// .ddp-counter-color {
+//     color: mat-color($app-theme, 600) !important;
+// }
+
+// .ddp-answer-container {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// .mat-option-text {
+//     line-height: 16px !important;
+//     white-space: normal !important;
+// }
+
+// @media only screen and (max-width: 480px) {
+//     .mat-option-text {
+//         font-size: 14px !important;
+//     }
+
+//     .mat-form-field-placeholder {
+//         font-size: 12px !important;
+//         white-space: normal !important;
+//     }
+// }

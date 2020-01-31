@@ -19,6 +19,8 @@ import {
   AppComponent
 } from 'toolkit';
 
+import { WelcomeComponent } from './components/welcome/welcome.component';
+
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
@@ -87,12 +89,14 @@ function translateFactory(translate: TranslateService, injector: Injector) {
 }
 
 @NgModule({
-  declarations: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule
+  ],
+  declarations: [
+    WelcomeComponent
   ],
   providers: [
     {
