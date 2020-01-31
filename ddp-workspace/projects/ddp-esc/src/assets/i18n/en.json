@@ -1,0 +1,222 @@
+{
+    "App": {
+        "Home": "Home",
+        "FAQ": "More Details/FAQ",
+        "About": "About Us",
+        "Join": "Join Mailing List",
+        "Info": "Information for Physicians"
+    },
+    "Toolkit": {
+        "Common": {
+            "Organization": "Count Me In"
+        },
+        "Header": {
+            "HeaderLogo": "Esophageal<br>& Stomach<br>Cancer Project",
+            "LearnMore": "Learn More",
+            "CountMeIn": "count me in"
+        },
+        "Footer": {
+            "FooterLogo": "Esophageal<br>& Stomach<br>Cancer Project",
+            "Home": "Home",
+            "FAQ": "More Details/FAQ",
+            "About": "About Us",
+            "Join": "Join Mailing List",
+            "Info": "Information for Physicians",
+            "Top": "▴ Back to top",
+            "Contacts": {
+                "ContactUs": "Contact Us:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            }
+        },
+        "Welcome": {},
+        "AboutUs": {},
+        "MoreDetails": {},
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        },
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed!",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email Confirmation (Reenter Email) *",
+                        "Error": "Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "CANCEL",
+                "SubmitButton": "JOIN",
+                "Required": "* Required field",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue"
+            }
+        },
+        "Warning": {
+            "Title": "Download Chrome or Safari to Continue",
+            "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+            "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "Click the following links to download",
+                "Pt2": "or",
+                "Pt3": "Chrome and Safari are always free.",
+                "Chrome": "Chrome (for Mac & PC)",
+                "Safari": "Safari (for Mac)"
+            },
+            "SubmitButton": "OK"
+        },
+        "StayInformed": {
+            "Title": "Stay Informed!",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "RETURN HOME"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password",
+            "SubmitButton": "SUBMIT",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred.",
+            "PasswordField": {
+                "Error": "Password is required"
+            }
+        },
+        "InternationalPatients": {
+            "Title": "Information for International Patients",
+            "ThankYou": {
+                "TextPt1": "Thank you for your interest in joining the Esophageal and Stomach Cancer Project. Currently, the Esophageal and Stomach Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
+                "TextPt2": "or"
+            },
+            "Understand": "We understand that the experiences of every patient matters, and eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Header": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "Log In"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "SUBMIT",
+        "CloseButton": "CLOSE",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "NEXT",
+        "PreviousButton": "PREV",
+        "SavingButton": "SAVING",
+        "EditButton": "EDIT",
+        "ReviewButton": "VIEW",
+        "ValidateError": "Please correct any errors in the form.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Angiosarcoma Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Angiosarcoma Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        }
+    }
+}
