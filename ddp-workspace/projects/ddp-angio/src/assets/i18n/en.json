@@ -86,28 +86,6 @@
                 "CountMeInButton": "count me in"
             }
         },
-        "CountMeIn": {
-            "Title": "Join the movement: tell us about yourself",
-            "MainParagraph": "Complete the form below to tell us about yourself and your cancer. Our goal is to perform many different studies within the angiosarcoma community. Allowing us to know a little bit about your experience will help us conduct our current projects and also to design future studies. We will be starting with some focused studies in angiosarcoma, and expanding over time based on what we learn from you. We are asking all patients with angiosarcoma to say \"Count Me In\" and fill out the form so that we can use the information you provide to plan our next studies.",
-            "ParagraphPart1": "If you've previously submitted your name and email and have already started answering the questionnaire,",
-            "ParagraphLink": "click here",
-            "ParagraphPart2": "so we can resend you a link that will let you pick up where you left off.",
-            "Contact": "Contact Info",
-            "Fields": {
-                "FirstNamePlaceholder": "First Name *",
-                "FirstNameError": "First Name is required",
-                "LastNamePlaceholder": "Last Name *",
-                "LastNameError": "Last Name is required"
-            },
-            "Answers": {
-                "Answer1": "I have been diagnosed with angiosarcoma. I'm willing to answer additional questions about myself and my experience with angiosarcoma.",
-                "Answer2": "I haven't been diagnosed with angiosarcoma, but I want to stay informed about the Angiosarcoma Project by joining the email list.",
-                "Answer3": "I have a loved one that has passed away from angiosarcoma."
-            },
-            "Required": "* Required field",
-            "RoleError": "Please choose one of the above options.",
-            "Submit": "SUBMIT"
-        },
         "AboutUs": {
             "PageHeader": {
                 "Pt1": "The Angiosarcoma Project is part of",
@@ -544,21 +522,21 @@
             "Text": "The dashboard below describes each Angiosarcoma Project form and its status."
         },
         "DatePicker": {
-          "Day": "Choose day...",
-          "Month": "Choose month...",
-          "Year": "Choose year...",
-          "January": "January",
-          "February": "February",
-          "March": "March",
-          "April": "April",
-          "May": "May",
-          "June": "June",
-          "July": "July",
-          "August": "August",
-          "September": "September",
-          "October": "October",
-          "November": "November",
-          "December": "December"
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
