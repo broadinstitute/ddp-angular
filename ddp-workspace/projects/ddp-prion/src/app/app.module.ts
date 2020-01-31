@@ -42,6 +42,7 @@ tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
+tkCfg.assetsBucketUrl = 'https://storage.googleapis.com/' + DDP_ENV.assetsBucketName;
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
