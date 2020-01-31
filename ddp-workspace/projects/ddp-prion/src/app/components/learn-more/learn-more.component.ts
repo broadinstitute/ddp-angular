@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService } from "../../../../../prion-toolkit/src/lib/services/toolkitConfiguration.service";
 
 @Component({
     selector: 'learn-more',
@@ -34,19 +34,10 @@ import { ToolkitConfigurationService } from 'toolkit';
     `
 })
 export class LearnMoreComponent implements OnInit {
-    public infoEmail: string;
-    public phone: string;
-    public infoEmailHref: string;
-    public phoneHref: string;
-    public countMeInUrl: string;
 
     constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
-        this.infoEmail = this.toolkitConfiguration.infoEmail;
-        this.infoEmailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        this.phone = this.toolkitConfiguration.phone;
-        this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
-        this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
+
     }
 }
