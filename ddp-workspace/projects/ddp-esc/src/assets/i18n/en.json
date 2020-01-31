@@ -6,10 +6,13 @@
         "Join": "Join Mailing List",
         "Info": "Information for Physicians"
     },
+    "Common": {
+        "Organization": "Count Me In"
+    },
+    "Welcome": {},
+    "AboutUs": {},
+    "MoreDetails": {},
     "Toolkit": {
-        "Common": {
-            "Organization": "Count Me In"
-        },
         "Header": {
             "HeaderLogo": "Esophageal<br>& Stomach<br>Cancer Project",
             "LearnMore": "Learn More",
@@ -29,9 +32,6 @@
                 "Zip": "02142, United States"
             }
         },
-        "Welcome": {},
-        "AboutUs": {},
-        "MoreDetails": {},
         "LoginLanding": {
             "Text": "Please wait. You will be redirected to a destination soon..."
         },
