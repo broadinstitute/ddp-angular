@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { ToolkitConfigurationService } from "../../../../../prion-toolkit/src/lib/services/toolkitConfiguration.service";
 
 @Component({
   selector: 'study-listing',
@@ -69,7 +70,8 @@ export class StudyListingComponent implements OnInit {
     className: ['table-striped', 'table-bordered']};
   private data:Array<any>;
 
-  public constructor(public translator: TranslateService) {
+  public constructor(public translator: TranslateService,
+                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration:ToolkitConfigurationService) {
     this.translateTable();
     this.translator.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translator.use(event.lang);
@@ -79,6 +81,10 @@ export class StudyListingComponent implements OnInit {
 
   private translateTable(){
     this.data = this.translator.instant('Toolkit.StudyListing.Rows');
+    for (let i = 0; i < this.data.length; i++) {
+      this.data[i].studyInfo= (String)(this.data[i].studyInfo).replace('assets/studies',
+        this.toolkitConfiguration.assetsBucketUrl + '/studies');
+    }
     this.length = this.data.length;
     for (let i = 0; i < this.translatedColumns.length; i++) {
       this.translatedColumns[i].title = this.translator.instant(this.untranslatedColumns[i].title);
