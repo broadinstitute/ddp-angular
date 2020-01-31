@@ -6,13 +6,13 @@
         "Join": "Join Mailing List",
         "Info": "Information for Physicians"
     },
-    "Common": {
-        "Organization": "Count Me In"
-    },
     "Welcome": {},
     "AboutUs": {},
     "MoreDetails": {},
     "Toolkit": {
+        "Common": {
+            "Organization": "Count Me In"
+        },
         "Header": {
             "HeaderLogo": "Esophageal<br>& Stomach<br>Cancer Project",
             "LearnMore": "Learn More",
