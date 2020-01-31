@@ -42,4 +42,5 @@ export class ToolkitConfigurationService {
     showBlog: boolean;
     blogUrl: string;
     enableRedesign = false;
+    assetsBucketUrl: string;
 }
