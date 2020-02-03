@@ -27,6 +27,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
     #        - v1-dependencies-
 
-      - run: ls -l
+      - run: npm ci
 
-      - run: ls -l ./dist
+      - run: echo "The project is $PROJ"
+
+      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
