@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: broadinstitute/pepper-angular-sdk:v1
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
