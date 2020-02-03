@@ -17,8 +17,8 @@ jobs:
     working_directory: ~/repo/ddp-workspace
 
     steps:
-      - checkout
-        path: ~/repo
+      - checkout:
+            path: ~/repo
 
       # Download and cache dependencies
     #  - restore_cache:
