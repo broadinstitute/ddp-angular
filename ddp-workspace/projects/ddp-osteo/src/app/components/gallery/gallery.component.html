@@ -1,5 +1,5 @@
 <div class="gallery" (swipeleft)="moveForward()" (swiperight)="moveBack()">
-    <!-- Note that all images should have 4:3 ratio -->
+    <!-- Note that all images should have the same ratio (4:3 for osteo) -->
     <img class="gallery__image" [src]="selectedItem.image" alt="selectedItem.alt">
     <div class="gallery__text">
         <h4 class="no-margin">{{selectedItem.title}}</h4>
