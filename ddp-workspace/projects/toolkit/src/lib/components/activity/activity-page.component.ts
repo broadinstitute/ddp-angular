@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import {
     LoggingService,
     UserActivityServiceAgent,
@@ -17,16 +16,6 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'toolkit-activity-page',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-    <ng-template #newDesign>
-        <ddp-redesigned-activity [studyGuid]="studyGuid"
-                                 [activityGuid]="(activityInstance$ | async)?.instanceGuid"
-                                 (submit)="raiseSubmit($event)"
-                                 (stickySubtitle)="showStickySubtitle($event)"
-                                 (activityCode)="activityCodeChanged($event)">
-        </ddp-redesigned-activity>
-    </ng-template>
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
@@ -34,15 +23,13 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
                       [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                       (submit)="raiseSubmit($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>
-    </ng-template>`
+        </ddp-activity>`
 })
 export class ActivityPageComponent implements OnInit, OnDestroy {
     @Output() submit: EventEmitter<void> = new EventEmitter();
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
     public stickySubtitle: string;
-    public useRedesign: boolean;
     private activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
@@ -58,7 +45,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private workflowBuilder: WorkflowBuilderService,
         private logger: LoggingService,
-        private headerConfig: HeaderConfigurationService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
         this.activityGuid = this.activatedRoute.snapshot.data.activityGuid;
         // by default we will not create a new instance
@@ -103,8 +89,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
-        this.headerConfig.setupActivityHeader();
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
@@ -122,10 +106,5 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
     public showStickySubtitle(stickySubtitle: string): void {
         this.stickySubtitle = stickySubtitle;
-        this.headerConfig.stickySubtitle = stickySubtitle;
-    }
-
-    public activityCodeChanged(code: string): void {
-        this.headerConfig.currentActivityCode = code;
     }
 }

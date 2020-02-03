@@ -9,19 +9,18 @@ import {
 } from 'ddp-sdk';
 
 import {
-    ActivityComponent,
-    ActivityPageComponent,
-    DashboardComponent,
-    LoginLandingComponent,
-    ErrorComponent,
-    StayInformedComponent,
-    PasswordComponent,
-    RedirectToLoginLandingComponent,
-    WorkflowStartActivityComponent,
-    SessionExpiredComponent,
-    ActivityLinkComponent,
-    LovedOneThankYouComponent,
-    RedirectToAuth0LoginComponent,
+    ActivityRedesignedComponent,
+    ActivityPageRedesignedComponent,
+    DashboardRedesignedComponent,
+    LoginLandingRedesignedComponent,
+    ErrorRedesignedComponent,
+    StayInformedRedesignedComponent,
+    PasswordRedesignedComponent,
+    RedirectToLoginLandingRedesignedComponent,
+    WorkflowStartActivityRedesignedComponent,
+    SessionExpiredRedesignedComponent,
+    LovedOneThankYouRedesignedComponent,
+    RedirectToAuth0LoginRedesignedComponent,
     HeaderActionGuard,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
@@ -35,7 +34,7 @@ import { FaqComponent } from './components/faq/faq.component';
 const routes: Routes = [
     {
         path: 'about-you',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -47,7 +46,7 @@ const routes: Routes = [
     },
     {
         path: 'about-your-child',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -59,7 +58,7 @@ const routes: Routes = [
     },
     {
         path: 'loved-one',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -71,7 +70,7 @@ const routes: Routes = [
     },
     {
         path: 'consent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -83,7 +82,7 @@ const routes: Routes = [
     },
     {
         path: 'consent-assent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -95,7 +94,7 @@ const routes: Routes = [
     },
     {
         path: 'parental-consent',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -107,7 +106,7 @@ const routes: Routes = [
     },
     {
         path: 'release-survey',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -119,7 +118,7 @@ const routes: Routes = [
     },
     {
         path: 'release-minor-survey',
-        component: ActivityPageComponent,
+        component: ActivityPageRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -131,7 +130,7 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
+        component: DashboardRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -145,7 +144,7 @@ const routes: Routes = [
     },
     {
         path: 'activity/:id',
-        component: ActivityComponent,
+        component: ActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -154,7 +153,7 @@ const routes: Routes = [
     },
     {
         path: 'activity-link/:id',
-        component: ActivityLinkComponent,
+        component: ActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -163,17 +162,17 @@ const routes: Routes = [
     },
     {
         path: 'login-landing',
-        component: LoginLandingComponent,
+        component: LoginLandingRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
         path: 'login-landing/:mode',
-        component: RedirectToAuth0LoginComponent,
+        component: RedirectToAuth0LoginRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
         path: 'count-me-in',
-        component: WorkflowStartActivityComponent,
+        component: WorkflowStartActivityRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard
@@ -186,7 +185,7 @@ const routes: Routes = [
     },
     {
         path: 'error',
-        component: ErrorComponent,
+        component: ErrorRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -196,12 +195,12 @@ const routes: Routes = [
     },
     {
         path: 'stay-informed',
-        component: StayInformedComponent,
+        component: StayInformedRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
         path: 'loved-one-thank-you',
-        component: LovedOneThankYouComponent,
+        component: LovedOneThankYouRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -218,12 +217,12 @@ const routes: Routes = [
     },
     {
         path: 'password-reset-done',
-        component: RedirectToLoginLandingComponent,
+        component: RedirectToLoginLandingRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {
         path: 'session-expired',
-        component: SessionExpiredComponent,
+        component: SessionExpiredRedesignedComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard
@@ -231,7 +230,7 @@ const routes: Routes = [
     },
     {
         path: 'password',
-        component: PasswordComponent
+        component: PasswordRedesignedComponent
     },
     {
         path: 'verify',
