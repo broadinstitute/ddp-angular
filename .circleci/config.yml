@@ -33,4 +33,4 @@ jobs:
 
       - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
 
-      - run: ls -l ./ddp-osteo
+      - run: ls -l ./dist/ddp-osteo
