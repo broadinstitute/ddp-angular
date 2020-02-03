@@ -58,6 +58,7 @@ a:hover,
 a:active,
 a:focus {
     outline: 0;
+    color: mat-color($app-theme, 700);
 }
 
 .row {
@@ -1131,7 +1132,7 @@ ul {
 .Message-text {
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 1100);
+    color: mat-color($app-theme, 1000);
     line-height: 1.6;
     margin-bottom: 18px;
 }
@@ -1162,7 +1163,7 @@ ul {
 .Message-stepSubtitle {
     font-size: 0.95rem;
     display: block;
-    font-weight: 300;
+    font-weight: 500;
     line-height: 1.33;
     text-align: left;
     padding: 0 0 20px 30px;
@@ -1174,7 +1175,7 @@ ul {
     line-height: 1.6;
     text-align: left;
     padding: 0 0 0 30px;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 .Message-quote blockquote {

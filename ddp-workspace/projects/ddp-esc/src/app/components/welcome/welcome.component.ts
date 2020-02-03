@@ -8,7 +8,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
     <div class="Wrapper">
         <a id="topView"></a>
         <div class="Intro-image">
-            <div class="Intro-imageSpan" role="img" aria-label="Angiosarcoma Homepage Image">
+            <div class="Intro-imageSpan" role="img" aria-label="Esophageal and Stomach Cancer Homepage Image">
                 <span class="Intro-imageInner"></span>
                 <div *ngIf="showArrow" class="Intro-arrow">
                     <a (click)="scrollTo(secondView)"><img src="./assets/images/arrow.svg" alt="Arrow"></a>
@@ -22,22 +22,25 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="Intro row">
-            <section class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.WelcomeTitle
+                    Welcome.Intro.Title
                 </h1>
                 <p class="Message-text" translate>
-                    Toolkit.Welcome.WelcomeText
+                    Welcome.Intro.Text
                 </p>
             </section>
         </div>
+        <a #secondView></a>
+
+        <div class="row intro-row">
+            <div class="Separator Separator--small"></div>
+        </div>
 
         <div class="row">
-            <a #secondView></a>
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <img lazy-resource src="./assets/images/turtle.svg" class="Message-turtle" alt="Angiosarcoma pet">
+            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <p class="Message-text" translate>
-                    Toolkit.Welcome.SmallTitle
+                    Welcome.FirstBlock.Text
                 </p>
             </section>
         </div>
@@ -46,18 +49,15 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <div class="Separator Separator--small"></div>
         </div>
 
-        <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+        <div class="row NoPadding NoMargin">
+            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.FirstBlock.Title
+                    Welcome.SecondBlock.Title
                 </h1>
                 <p class="Message-text" translate>
-                    Toolkit.Welcome.FirstBlock.Text
+                    Welcome.SecondBlock.Text
                 </p>
             </section>
-        </div>
-
-        <div class="row NoPadding NoMargin">
             <img lazy-resource src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
         </div>
 
@@ -67,76 +67,58 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <h1 class="Message-title">
-                    <span translate>
-                        Toolkit.Welcome.SecondBlock.TitlePt1
-                    </span>
-                    <br>
-                    <span translate>
-                        Toolkit.Welcome.SecondBlock.TitlePt2
-                    </span>
-                </h1>
-                <p class="Message-text" translate>
-                    Toolkit.Welcome.SecondBlock.Text
-                </p>
-            </section>
-        </div>
-
-        <div class="row">
-            <div class="Separator Separator--large"></div>
-        </div>
-
-        <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.ThirdBlock.Title
+                    Welcome.ThirdBlock.Title
                 </h1>
             </section>
         </div>
 
         <div class="row">
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.FirstStep.Title
+                    Welcome.ThirdBlock.FirstStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.FirstStep.Subtitle
+                    Welcome.ThirdBlock.FirstStep.Subtitle
                 </h2>
                 <p class="Message-stepText">
-                    <span translate>Toolkit.Welcome.ThirdBlock.FirstStep.TextPt1</span>
-                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Color--orange" translate> Toolkit.Welcome.ThirdBlock.FirstStep.Link </a>
-                    <span translate>Toolkit.Welcome.ThirdBlock.FirstStep.TextPt2</span>
+                    <span translate>Welcome.ThirdBlock.FirstStep.TextPt1</span>
+                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Color--orange" translate>Welcome.ThirdBlock.FirstStep.Link </a>
+                    <span translate>Welcome.ThirdBlock.FirstStep.TextPt2</span>
                 </p>
             </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.SecondStep.Title
+                    Welcome.ThirdBlock.SecondStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.SecondStep.Subtitle
+                    Welcome.ThirdBlock.SecondStep.Subtitle
                 </h2>
-                <p class="Message-stepText" [innerHTML]="'Toolkit.Welcome.ThirdBlock.SecondStep.Text' | translate">
+                <p class="Message-stepText" [innerHTML]="'Welcome.ThirdBlock.SecondStep.Text1' | translate"></p>
+                <p class="Message-stepText">
+                    <span translate>Welcome.ThirdBlock.SecondStep.Text2.Part1</span>
+                    <a routerLink="/more-details"  class="Color--orange" translate>Welcome.ThirdBlock.SecondStep.Text2.Part2</a>.
                 </p>
             </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.ThirdStep.Title
+                    Welcome.ThirdBlock.ThirdStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.ThirdBlock.ThirdStep.Subtitle
+                    Welcome.ThirdBlock.ThirdStep.Subtitle
                 </h2>
                 <p class="Message-stepText" translate>
-                    Toolkit.Welcome.ThirdBlock.ThirdStep.Text
+                    Welcome.ThirdBlock.ThirdStep.Text
                 </p>
             </div>
         </div>
 
         <div class="row">
             <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                Toolkit.Welcome.ThirdBlock.CountMeInButton
+                Common.CMIButton
             </a>
         </div>
 

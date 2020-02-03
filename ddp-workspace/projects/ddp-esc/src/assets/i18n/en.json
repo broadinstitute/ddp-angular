@@ -6,7 +6,46 @@
         "Join": "Join Mailing List",
         "Info": "Information for Physicians"
     },
-    "Welcome": {},
+    "Common": {
+        "CMIButton": "count me in"
+    },
+    "Welcome": {
+        "Intro": {
+            "Title": "You can have a direct impact on the future of Esophageal and Stomach Cancer",
+            "Text": "If you have been diagnosed with esophageal or gastric/stomach cancer, join a nationwide initiative of patients, doctors, and scientists by sharing your tumor samples, your medical information, and your voice. Together we can develop a comprehensive resource to accelerate discoveries that may inform future therapies."
+        },
+        "FirstBlock": {
+            "Text": "There are significant unmet needs that prevent the development of better therapies for esophageal and gastric/stomach cancer patients, and diagnoses are rising dramatically. If you have esophageal or gastric/stomach cancer, you have the power to accelerate cancer research by combining your data with other patients."
+        },
+        "SecondBlock": {
+            "Title": "Your tumor and medical record could unlock discoveries",
+            "Text": "The unique genetic information in your cancer could hold the key to rapid advances in cancer treatment. By analyzing the DNA in your samples, researchers can make discoveries that will ultimately lead to a better understanding and faster advances in the treatment of esophageal and gastric/stomach cancer. This information will be invaluable to cancer research for years to come."
+        },
+        "ThirdBlock": {
+            "Title": "Here's how you can participate",
+            "FirstStep": {
+                "Title": "Step 1",
+                "Subtitle": "Tell us about yourself",
+                "TextPt1": "Click",
+                "Link": "\"Count Me In\"",
+                "TextPt2": "and complete a short online form to tell us about yourself and your esophageal or gastric/stomach cancer."
+            },
+            "SecondStep": {
+                "Title": "Step 2",
+                "Subtitle": "Give us permission to collect your samples and data",
+                "Text1": "You will be directed to an online consent form where you can provide permission for the project to collect your saliva sample and medical record data. You may also choose to provide a blood sample and/or share access to your stored tumor samples. We will do the rest-- we'll send you the sample collection kit(s) and contact your doctors and hospitals to securely obtain copies of your medical records and tissue samples.",
+                "Text2": {
+                    "Part1": "To learn more about how we collect samples see our",
+                    "Part2": "FAQ"
+                }
+            },
+            "ThirdStep": {
+                "Title": "Step 3",
+                "Subtitle": "Learn with us along the way",
+                "Text": "The data generated from your samples and medical records will be coupled with that of other patients, de-identified, and shared widely with the biomedical community. We may also ask you additional questions about your experiences to help with future studies. We will provide you with regular updates regarding key discoveries and progress from the project, however, please note that individual data cannot be shared."
+            }
+        }
+    },
     "AboutUs": {},
     "MoreDetails": {},
     "Toolkit": {
