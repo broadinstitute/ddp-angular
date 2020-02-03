@@ -1,97 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="119px" height="98px" viewBox="0 0 119 98" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
-    <title>Group 3@2x</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-219.000000, -92.000000)" stroke="#000000" stroke-width="2">
-            <g id="Group-3" transform="translate(220.000000, 93.000000)">
-                <polygon id="Path-4" points="59.2297758 45.6600311 83.0248788 37.2325914 97.3813344 57.5843425 81.8119967 77.7507234 62.6086736 71.2866447 60.4280151 70.5526078 58.9370538 65.4398089"></polygon>
-                <polygon id="Path-5" points="20.41172 45.3077032 19.6911443 72.8253995 39.0618892 83.728411 58.8960211 69.9298932 59.2706096 45.7173783 38.5849337 33.5595281"></polygon>
-                <path d="M63,46.1428571 L63,66" id="Path-8"></path>
-                <polyline id="Path-9" points="82.8773471 43.396359 93.1790491 58.3106573 98.1150758 58.5787239 109.963108 60.3393818"></polyline>
-                <path d="M83.927624,80.5770339 L87.5061554,90.0397951" id="Path-10"></path>
-                <polyline id="Path-7" points="3.61766066 79.9352735 22.0217215 69.9720921 39.4488735 79.8299908"></polyline>
-                <polyline id="Path-6" points="24.5756768 47.0622383 39.579815 37.2231035 40.4854553 35.0988022 40.5030276 29.0064397 40.5414149 12.1385131 52.5379484 6.12565368"></polyline>
-                <path d="M27.4108351,5.3270808 L36.6098724,11.773789" id="Path-11"></path>
-                <g id="Group-2" transform="translate(13.000000, 39.000000)">
-                    <circle id="Oval-Copy-6" fill="#7154FF" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-                <circle id="Oval-Copy-9" fill="#7154FF" cx="40" cy="12" r="7"></circle>
-                <circle id="Oval-Copy-7" fill="#7154FF" cx="40" cy="80" r="7"></circle>
-                <circle id="Oval-Copy-5" fill="#7154FF" cx="83" cy="39" r="7"></circle>
-                <circle id="Oval-Copy-8" fill="#7154FF" cx="82" cy="76" r="7"></circle>
-                <circle id="Oval-Copy-10" fill="#FFFFFF" cx="4.43969262" cy="79.8420201" r="3.5"></circle>
-                <circle id="Oval-Copy-11" fill="#FFFFFF" cx="25.4396926" cy="3.84202014" r="3.5"></circle>
-                <circle id="Oval-Copy-12" fill="#FFFFFF" cx="55.4396926" cy="3.84202014" r="3.5"></circle>
-                <circle id="Oval-Copy-13" fill="#FFFFFF" cx="88.4396926" cy="91.8420201" r="3.5"></circle>
-                <circle id="Oval-Copy-14" fill="#FFFFFF" cx="113.439693" cy="60.8420201" r="3.5"></circle>
-                <g id="Group-Copy" transform="translate(33.000000, 10.000000)" stroke-linecap="round">
-                    <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                    <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                    <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                </g>
-                <g id="Group-Copy-2" transform="translate(76.000000, 37.000000)" stroke-linecap="round">
-                    <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                    <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                    <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                </g>
-                <g id="Group-Copy-2" transform="translate(75.000000, 74.000000)" stroke-linecap="round">
-                    <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                    <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                    <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                </g>
-                <g id="Group-Copy-3" transform="translate(33.000000, 78.000000)" stroke-linecap="round">
-                    <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                    <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                    <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                </g>
-                <g id="Group-2" transform="translate(13.000000, 63.000000)">
-                    <circle id="Oval-Copy-6" fill="#CFCDDA" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-                <g id="Group-2-Copy" transform="translate(33.000000, 27.000000)">
-                    <circle id="Oval-Copy-6" fill="#CFCDDA" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-                <g id="Group-2-Copy-2" transform="translate(54.000000, 39.000000)">
-                    <circle id="Oval-Copy-6" fill="#CFCDDA" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-                <g id="Group-2-Copy-3" transform="translate(54.000000, 63.000000)">
-                    <circle id="Oval-Copy-6" fill="#CFCDDA" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-                <g id="Group-2-Copy-4" transform="translate(89.000000, 50.000000)">
-                    <circle id="Oval-Copy-6" fill="#CFCDDA" cx="7" cy="7" r="7"></circle>
-                    <g id="Group" transform="translate(0.000000, 5.000000)" stroke-linecap="round">
-                        <path d="M2.28571429,6.28571429 L4.57142857,4" id="Line-2"></path>
-                        <path d="M5.71428571,8.67087183 L8,6.38515755" id="Line-2"></path>
-                        <path d="M0,2.95658612 L2.28571429,0.670871833" id="Line-2-Copy-2"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" height="98px" width="119px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 119 98">
+ <title>Group 3@2x</title>
+ <desc>Created with Sketch.</desc>
+ <g id="Landing-Page" fill-rule="evenodd" fill="none">
+  <g id="Artboard" stroke="#000" stroke-width="2" transform="translate(-219 -92)">
+   <g id="Group-3" transform="translate(220 93)">
+    <polygon id="Path-4" points="59.23 45.66 83.025 37.233 97.381 57.584 81.812 77.751 62.609 71.287 60.428 70.553 58.937 65.44"/>
+    <polygon id="Path-5" points="20.412 45.308 19.691 72.825 39.062 83.728 58.896 69.93 59.271 45.717 38.585 33.56"/>
+    <path id="Path-8" d="m63 46.143v19.857"/>
+    <polyline id="Path-9" points="82.877 43.396 93.179 58.311 98.115 58.579 109.96 60.339"/>
+    <path id="Path-10" d="m83.928 80.577l3.578 9.463"/>
+    <polyline id="Path-7" points="3.6177 79.935 22.022 69.972 39.449 79.83"/>
+    <polyline id="Path-6" points="24.576 47.062 39.58 37.223 40.485 35.099 40.503 29.006 40.541 12.139 52.538 6.1257"/>
+    <path id="Path-11" d="m27.411 5.3271l9.199 6.4469"/>
+    <g id="Group-2" transform="translate(13 39)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#7154FF"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
     </g>
+    <circle id="Oval-Copy-9" cy="12" cx="40" r="7" fill="#7154FF"/>
+    <circle id="Oval-Copy-7" cy="80" cx="40" r="7" fill="#7154FF"/>
+    <circle id="Oval-Copy-5" cy="39" cx="83" r="7" fill="#7154FF"/>
+    <circle id="Oval-Copy-8" cy="76" cx="82" r="7" fill="#7154FF"/>
+    <circle id="Oval-Copy-10" cy="79.842" cx="4.4397" r="3.5" fill="#fff"/>
+    <circle id="Oval-Copy-11" cy="3.842" cx="25.44" r="3.5" fill="#fff"/>
+    <circle id="Oval-Copy-12" cy="3.842" cx="55.44" r="3.5" fill="#fff"/>
+    <circle id="Oval-Copy-13" cy="91.842" cx="88.44" r="3.5" fill="#fff"/>
+    <circle id="Oval-Copy-14" cy="60.842" cx="113.44" r="3.5" fill="#fff"/>
+    <g id="Group-Copy" stroke-linecap="round" transform="translate(33 10)">
+     <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+     <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+     <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+    </g>
+    <g id="Group-Copy-2" stroke-linecap="round" transform="translate(76 37)">
+     <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+     <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+     <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+    </g>
+    <g id="Group-Copy-2" stroke-linecap="round" transform="translate(75 74)">
+     <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+     <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+     <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+    </g>
+    <g id="Group-Copy-3" stroke-linecap="round" transform="translate(33 78)">
+     <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+     <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+     <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+    </g>
+    <g id="Group-2" transform="translate(13 63)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#CFCDDA"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
+    </g>
+    <g id="Group-2-Copy" transform="translate(33 27)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#CFCDDA"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
+    </g>
+    <g id="Group-2-Copy-2" transform="translate(54 39)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#CFCDDA"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
+    </g>
+    <g id="Group-2-Copy-3" transform="translate(54 63)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#CFCDDA"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
+    </g>
+    <g id="Group-2-Copy-4" transform="translate(89 50)">
+     <circle id="Oval-Copy-6" cy="7" cx="7" r="7" fill="#CFCDDA"/>
+     <g id="Group" stroke-linecap="round" transform="translate(0 5)">
+      <path id="Line-2" d="m2.2857 6.2857l2.2857-2.2857"/>
+      <path id="Line-2" d="m5.7143 8.6709l2.2857-2.2857"/>
+      <path id="Line-2-Copy-2" d="m0 2.9566l2.2857-2.2857"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
 </svg>

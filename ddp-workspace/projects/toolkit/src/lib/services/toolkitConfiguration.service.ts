@@ -60,5 +60,4 @@ export class ToolkitConfigurationService {
     showInfoForPhysicians: boolean;
     showBlog: boolean;
     blogUrl: string;
-    enableRedesign = false;
 }

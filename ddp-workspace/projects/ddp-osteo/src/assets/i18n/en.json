@@ -160,9 +160,11 @@
         "PartnersSection": {
             "Title": "Advocacy Partners",
             "ImagesAlts": {
-                "MBIAlt": "Make It Better Agents logo",
-                "QUADWAlt": "The QuadW Foundation logo",
-                "ZSOFAlt": "The Zach Sobiech Osteosarcoma Fund logo"
+                "MBI": "Make It Better Agents logo",
+                "QUADW": "The QuadW Foundation logo",
+                "ZSOF": "The Zach Sobiech Osteosarcoma Fund logo",
+                "BoD": "Because Of Daniel logo",
+                "OsCollaborative": "The Osteosarcoma Collaborative logo"
             }
         },
         "SocialMediaSection": {
@@ -523,7 +525,7 @@
         "SavingButton": "Saving",
         "EditButton": "View/Edit",
         "ReviewButton": "View",
-        "ValidateError": "Please correct any errors in the form",
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
         "SaveError": "We're sorry but an error occurred",
         "ExportStudy": {

@@ -4,8 +4,8 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 @Component({
-  selector: 'toolkit-age-up-thank-you',
-  template: `
+    selector: 'toolkit-age-up-thank-you',
+    template: `
     <main class="main">
         <section class="section age-up-email-section">
             <div class="content content_tight">
@@ -36,27 +36,27 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
     </main>`
 })
 export class AgeUpThankYou implements OnInit {
-  public isEmailVerified: boolean;
-  public isEmailCollected: boolean;
-  public dashboardUrl: string;
-  public phone: string;
-  public email: string;
-  public phoneHref: string;
-  public emailHref: string;
+    public isEmailVerified: boolean;
+    public isEmailCollected: boolean;
+    public dashboardUrl: string;
+    public phone: string;
+    public email: string;
+    public phoneHref: string;
+    public emailHref: string;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private headerConfig: HeaderConfigurationService,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor(
+        private activatedRoute: ActivatedRoute,
+        private headerConfig: HeaderConfigurationService,
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
-  public ngOnInit(): void {
-    this.headerConfig.setupDefaultHeader();
-    this.isEmailVerified = !!this.activatedRoute.snapshot.data.verify;
-    this.isEmailCollected = !!this.activatedRoute.snapshot.data.collect;
-    this.dashboardUrl = `/${this.toolkitConfiguration.dashboardUrl}`;
-    this.phone = this.toolkitConfiguration.phone;
-    this.email = this.toolkitConfiguration.infoEmail;
-    this.phoneHref = `tel:${this.phone}`;
-    this.emailHref = `mailto:${this.email}`;
-  }
+    public ngOnInit(): void {
+        this.headerConfig.setupDefaultHeader();
+        this.isEmailVerified = !!this.activatedRoute.snapshot.data.verify;
+        this.isEmailCollected = !!this.activatedRoute.snapshot.data.collect;
+        this.dashboardUrl = `/${this.toolkitConfiguration.dashboardUrl}`;
+        this.phone = this.toolkitConfiguration.phone;
+        this.email = this.toolkitConfiguration.infoEmail;
+        this.phoneHref = `tel:${this.phone}`;
+        this.emailHref = `mailto:${this.email}`;
+    }
 }

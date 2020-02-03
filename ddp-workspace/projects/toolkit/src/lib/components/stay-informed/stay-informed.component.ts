@@ -1,36 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 @Component({
     selector: 'toolkit-stay-informed',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-
-    <ng-template #newDesign>
-        <main class="main">
-            <section class="section static-page-title-section">
-                <div class="content content_tight">
-                    <h1 translate>Toolkit.StayInformed.Title</h1>
-                </div>
-            </section>
-            <section class="section stay-informed-content-section">
-                <div class="content content_tight">
-                    <p>
-                        <span translate>Toolkit.StayInformed.Text</span>
-                        <a [href]="infoEmailHref" class="Link">{{ infoEmail }}</a>.
-                    </p>
-                    <div class="stay-informed-button">
-                        <a routerLink="/" class="button button_medium button_primary" translate>
-                            Common.Buttons.ReturnHome
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </ng-template>
-
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="true"></toolkit-header>
         <div class="Wrapper">
             <div class="PageHeader">
@@ -63,23 +36,16 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                     </div>
                 </div>
             </article>
-        </div>
-    </ng-template>
-    `
+        </div>`
 })
 export class StayInformedComponent implements OnInit {
     public infoEmail: string;
     public infoEmailHref: string;
-    public useRedesign: boolean;
 
-    constructor(
-        private headerConfig: HeaderConfigurationService,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
         this.infoEmail = this.toolkitConfiguration.infoEmail;
         this.infoEmailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
-        this.headerConfig.setupDefaultHeader();
     }
 }
