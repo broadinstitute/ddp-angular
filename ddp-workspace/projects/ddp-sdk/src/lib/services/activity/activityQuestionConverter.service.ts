@@ -19,7 +19,8 @@ import { ActivityAbstractValidationRule } from './validators/activityAbstractVal
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
 
-const DETAIL_MAXLENGTH = 255;
+const DETAIL_MAXLENGTH = 500;
+
 @Injectable()
 export class ActivityQuestionConverter {
     private questionBuilders: Array<ActivityRule>;
