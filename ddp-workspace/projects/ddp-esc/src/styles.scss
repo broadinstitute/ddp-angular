@@ -64,6 +64,10 @@ a:focus {
     display: block;
 }
 
+.intro-row {
+    margin-top: 150px;
+}
+
 .Left {
     display: flex;
     justify-content: flex-start;
@@ -163,11 +167,11 @@ a:focus {
 }
 
 .Header-logoText {
-    margin: 28px 0 0 10px;
+    margin: 13px 0 0 10px;
     color: mat-color($app-theme, 100);
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 300;
-    line-height: 1.2rem;
+    line-height: 19px;
 }
 
 .Header-logoText--Scrolled {
@@ -312,11 +316,11 @@ a:focus {
 }
 
 .Footer-logoText {
-    margin: 28px 0 0 10px;
+    margin: 13px 0 0 10px;
     color: mat-color($app-theme, 400);
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 300;
-    line-height: 1.2rem;
+    line-height: 19px;
 }
 
 .Footer-nav {
@@ -640,6 +644,39 @@ a:focus {
 
     .Footer-nav {
         margin: 30px 50px 0 0;
+    }
+}
+
+@media only screen and (max-width: 478px) {
+
+    .Footer-logoImg,
+    .Header-logoImg {
+        width: 19px;
+        height: auto;
+    }
+
+    .Footer-logoText,
+    .Header-logoText {
+        left: 28px;
+        font-size: 15px;
+        line-height: 17px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .Header {
+        min-height: 65px;
+    }
+
+    .Footer-logoImg,
+    .Header-logoImg {
+        width: 16px;
+    }
+
+    .Footer-logoText,
+    .Header-logoText {
+        font-size: 13px;
+        line-height: 15px;
     }
 }
 
@@ -978,7 +1015,7 @@ ul {
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 700px) {
     .Intro-image .Intro-imageSpan {
         background-image: url(/assets/images/home-image-xs.jpg);
     }
