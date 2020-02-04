@@ -82,7 +82,7 @@ export class StudyListingComponent implements OnInit {
   private translateTable(){
     this.data = this.translator.instant('Toolkit.StudyListing.Rows');
     for (let i = 0; i < this.data.length; i++) {
-      this.data[i].studyInfo= (String)(this.data[i].studyInfo).replace('assets/studies',
+      this.data[i].studyInfo= (String)(this.data[i].studyInfo).replace('BUCKET_URL_HERE',
         this.toolkitConfiguration.assetsBucketUrl + '/studies');
     }
     this.length = this.data.length;
