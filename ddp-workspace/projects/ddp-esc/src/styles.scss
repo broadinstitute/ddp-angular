@@ -215,10 +215,17 @@ a:focus {
     text-decoration: none;
     cursor: pointer;
     outline: 0;
+    transition: all 0.3s ease;
+}
+
+.CountButton:hover {
+    color: mat-color($app-theme, 700);
+    border: 2px solid mat-color($app-theme, 700);
+    transition: all 0.3s ease;
 }
 
 .CountButton--Scrolled {
-    background-color: mat-color($app-theme, 600);
+    background-color: mat-color($app-theme, 2200);
     border: none;
     margin: 2px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -226,6 +233,8 @@ a:focus {
 }
 
 .CountButton--Scrolled:hover {
+    color: mat-color($app-theme, 100);
+    border: none;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -252,10 +261,11 @@ a:focus {
     text-decoration: none;
     color: mat-color($app-theme, 100);
     text-align: left;
+    transition: all 0.3s ease;
 }
 
 .SimpleButton--Scrolled {
-    color: mat-color($app-theme, 600);
+    color: mat-color($app-theme, 2200);
 }
 
 .SimpleButton:hover {
@@ -357,7 +367,7 @@ a:focus {
 }
 
 .Footer-navItemLink:hover {
-    color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 2200);
     text-decoration: none;
 }
 
@@ -388,7 +398,7 @@ a:focus {
 }
 
 .Footer-contactLink:hover {
-    color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 2200);
     text-decoration: none;
 }
 
@@ -829,8 +839,9 @@ ul {
 }
 
 .Link {
-    color: mat-color($app-theme, 600) !important;
+    color: mat-color($app-theme, 2200) !important;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .Link:hover,
@@ -888,7 +899,7 @@ ul {
     font-weight: 300;
     transition: all 0.3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
-    background-color: mat-color($app-theme, 600);
+    background-color: mat-color($app-theme, 2200);
 }
 
 .ButtonFilled:focus {
@@ -1071,17 +1082,13 @@ ul {
 
 .Separator {
     width: 1px;
-    background: mat-color($app-theme, 700);
+    background: mat-color($app-theme, 2100);
     margin: 50px auto;
     position: relative;
 }
 
 .Separator--small {
     height: 125px;
-}
-
-.Separator--large {
-    height: 200px;
 }
 
 .Separator:before,
@@ -1093,7 +1100,7 @@ ul {
     border-radius: 100%;
     position: absolute;
     left: -3px;
-    background: mat-color($app-theme, 700);
+    background: mat-color($app-theme, 2100);
 }
 
 .Separator:before {
@@ -1172,11 +1179,20 @@ ul {
     transition: color 0.3s ease, border-color 0.3s ease;
 }
 
+.ButtonBordered,
+.ButtonBordered:visited {
+    color: mat-color($app-theme, 2200) !important;
+    border-color: mat-color($app-theme, 2200) !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.3s ease-out;
+}
+
 .ButtonBordered:hover {
     text-decoration: none;
     background-color: transparent;
-    color: mat-color($app-theme, 700);
-    border-color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 700) !important;
+    border-color: mat-color($app-theme, 700) !important;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 .Button--countMeIn {
@@ -1190,30 +1206,8 @@ ul {
     display: block;
 }
 
-.ButtonBordered--countMeInMoreMargin {
-    margin-bottom: 70px !important;
-}
-
-.ButtonBordered--orange,
-.ButtonBordered--orange:visited {
-    color: mat-color($app-theme, 600) !important;
-    border-color: mat-color($app-theme, 600) !important;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
-    transition: all 0.3s ease-out;
-}
-
-.ButtonBordered--orange:hover {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
-}
-
-.ButtonBordered--white,
-.ButtonBordered--white:visited {
-    color: mat-color($app-theme, 100);
-    border-color: mat-color($app-theme, 100);
-}
-
-.Color--orange {
-    color: mat-color($app-theme, 600);
+.Color--study {
+    color: mat-color($app-theme, 2200);
 }
 
 .Semibold {
@@ -2070,5 +2064,5 @@ select:-webkit-autofill {
 // }
 
 .mat-drawer-content {
-    overflow: hidden;
+    overflow: hidden !important;
 }

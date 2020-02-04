@@ -84,7 +84,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </h2>
                 <p class="Message-stepText">
                     <span translate>Welcome.ThirdBlock.FirstStep.TextPt1</span>
-                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Color--orange" translate>Welcome.ThirdBlock.FirstStep.Link </a>
+                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Link" translate>Welcome.ThirdBlock.FirstStep.Link </a>
                     <span translate>Welcome.ThirdBlock.FirstStep.TextPt2</span>
                 </p>
             </div>
@@ -99,7 +99,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 <p class="Message-stepText" [innerHTML]="'Welcome.ThirdBlock.SecondStep.Text1' | translate"></p>
                 <p class="Message-stepText">
                     <span translate>Welcome.ThirdBlock.SecondStep.Text2.Part1</span>
-                    <a routerLink="/more-details"  class="Color--orange" translate>Welcome.ThirdBlock.SecondStep.Text2.Part2</a>.
+                    <a routerLink="/more-details"  class="Link" translate>Welcome.ThirdBlock.SecondStep.Text2.Part2</a>.
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -117,7 +117,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
+            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered Button--countMeIn" translate>
                 Common.CMIButton
             </a>
         </div>
@@ -130,7 +130,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
                     <span translate>Welcome.FourthBlock.TitlePt1</span>
-                    <span class="Color--orange Semibold" translate>Welcome.FourthBlock.TitlePt2</span>
+                    <span class="Color--study Semibold" translate>Welcome.FourthBlock.TitlePt2</span>
                     <span translate>Welcome.FourthBlock.TitlePt3</span>
                 </h1>
                 <p class="Message-text" translate>
@@ -208,7 +208,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                         Welcome.SixthBlock.TitlePt1
                     </span>
                     <br>
-                    <span class="Color--orange Semibold" translate>
+                    <span class="Color--study Semibold" translate>
                         Welcome.SixthBlock.TitlePt2
                     </span>
                 </h1>
@@ -219,7 +219,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row row--moreBottomMargin">
-            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
+            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered Button--countMeIn" translate>
                 Common.CMIButton
             </a>
         </div>
