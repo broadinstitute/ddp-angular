@@ -127,14 +127,14 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
-                    <span translate>Toolkit.Welcome.FourthBlock.TitlePt1</span>
-                    <span class="Color--orange Semibold" translate> Toolkit.Welcome.FourthBlock.TitlePt2 </span>
-                    <span translate>Toolkit.Welcome.FourthBlock.TitlePt3</span>
+                    <span translate>Welcome.FourthBlock.TitlePt1</span>
+                    <span class="Color--orange Semibold" translate>Welcome.FourthBlock.TitlePt2</span>
+                    <span translate>Welcome.FourthBlock.TitlePt3</span>
                 </h1>
                 <p class="Message-text" translate>
-                    Toolkit.Welcome.FourthBlock.Text
+                    Welcome.FourthBlock.Text
                 </p>
             </section>
         </div>
@@ -146,51 +146,53 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.FifthBlock.Title
+                    Welcome.FifthBlock.LeadTitle
+                </h1>
+            </section>
+            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
+                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img class="partner-logo--single" lazy-resource src="./assets/images/target-cancer-foundation-logo.svg" alt="Target Cancer Foundation logo"></a>
+                    </div>
+                </div>
+            </section>
+            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+                <h1 class="Message-title" translate>
+                    Welcome.FifthBlock.PartnersTitle
                 </h1>
             </section>
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.sarctrials.org" target="_blank"><img lazy-resource src="./assets/images/SARC-logo.svg" alt="SARC Logo"></a>
+                        <a href="http://ecan.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/esophageal-cancer-action-network.png" alt="Esophageal Cancer Action Network logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://sarcomaalliance.org" target="_blank"><img lazy-resource src="./assets/images/SarcomaAlliance-logo.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.ecaware.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/esophageal-cancer-awareness-association.jpg" alt="Esophageal Cancer Awareness Association logo"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.curesarcoma.org" target="_blank"><img lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" alt="Sarcoma Foundation of America Logo"></a>
+                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.targetcancerfoundation.org" target="_blank"><img lazy-resource src="./assets/images/TargetCancerFoundation-logo.svg" alt="Target Cancer Foundation Logo"></a>
+                        <a href="https://debbiesdream.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/debbies-dream-foundation.svg" alt="Debbie's Dream Foundation logo"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.paulatakacsfoundation.org" target="_blank"><img lazy-resource src="./assets/images/PaulaTakacs-logo.svg" alt="The Paula Takacs Foundation Logo"></a>
+                        <a href="https://www.gicancersalliance.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/gi-cancers-alliance.png" alt="GI Cancers Alliance logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.cureasc.org" target="_blank"><img lazy-resource src="./assets/images/AngiosarcomaAwareness-logo.svg" alt="Angiosarcoma Awareness Logo"></a>
+                        <a href="https://gastriccancer.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/gastric-cancer-foundation.png" alt="Gastric Cancer Foundation logo"></a>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <div class="row row--moreTopMargin">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <div class="Message-quote">
-                    <blockquote translate>
-                        Toolkit.Welcome.FifthBlock.Quote
-                    </blockquote>
-                </div>
-                <br>
-                <div class="Message-quote Message-quoteExtraMargin" [innerHTML]="'Toolkit.Welcome.FifthBlock.QuoteAuthor' | translate">
-                </div>
-                <div class="Message-quote Message-quoteExtraMargin">
-                    <a href="http://www.cureasc.org" target="_blank" class="Link" translate>
-                        Toolkit.Welcome.FifthBlock.Link
-                    </a>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://www.nostomachforcancer.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/no-stomach-for-cancer.png" alt="No Stomach for Cancer logo"></a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://stocan.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/hope-for-stomach-cancer.jpg" alt="Hope for Stomach Cancer"></a>
+                    </div>
                 </div>
             </section>
         </div>
@@ -203,22 +205,22 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
                     <span translate>
-                        Toolkit.Welcome.SixthBlock.TitlePt1
+                        Welcome.SixthBlock.TitlePt1
                     </span>
                     <br>
                     <span class="Color--orange Semibold" translate>
-                        Toolkit.Welcome.SixthBlock.TitlePt2
+                        Welcome.SixthBlock.TitlePt2
                     </span>
                 </h1>
                 <p class="Message-text" translate>
-                    Toolkit.Welcome.SixthBlock.Text
+                    Welcome.SixthBlock.Text
                 </p>
             </section>
         </div>
 
         <div class="row row--moreBottomMargin">
             <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                Toolkit.Welcome.SixthBlock.CountMeInButton
+                Common.CMIButton
             </a>
         </div>
     </div>

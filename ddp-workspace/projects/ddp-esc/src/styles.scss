@@ -1,4 +1,4 @@
-@import "app-theme.scss";
+@import 'app-theme.scss';
 $warning-height: 150px;
 
 html,
@@ -538,16 +538,21 @@ a:focus {
 }
 
 .Message-partners {
-    height: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 210px;
 }
 
-.Message-quote {
-    text-align: right;
-    color: mat-color($app-theme, 1000);
-    font-weight: 300;
-    font-size: 1.5rem;
-    line-height: 1.25;
-    width: auto;
+.partner-logo {
+    max-width: 250px;
+    width: 100%;
+}
+
+.partner-logo--single {
+    max-width: 500px;
+    width: 100%;
 }
 
 .Wrapper {
@@ -682,9 +687,6 @@ a:focus {
 }
 
 @media only screen and (max-width: 750px) {
-    .Message-quote {
-        margin: 0 30px;
-    }
 
     .Footer-navList {
         flex-direction: column;
@@ -727,28 +729,6 @@ a:focus {
 
     .Message-title {
         font-size: 2rem;
-    }
-
-    .Message-quoteExtraMargin {
-        padding: 20px 40px;
-    }
-
-    .Message-quote blockquote {
-        padding: 20px;
-    }
-
-    .Message-quote {
-        padding: 20px;
-    }
-
-    .Message-quote blockquote:before {
-        top: -6px;
-        left: 0;
-    }
-
-    .Message-quote blockquote:after {
-        bottom: -5px;
-        right: -10px;
     }
 
     .PageHeader-title {
@@ -1176,35 +1156,6 @@ ul {
     text-align: left;
     padding: 0 0 0 30px;
     color: mat-color($app-theme, 1000);
-}
-
-.Message-quote blockquote {
-    padding: 0;
-    margin: 0;
-    border: none;
-    position: relative;
-    font-size: 1.5rem;
-    line-height: 1.25;
-}
-
-.Message-quote blockquote:before {
-    content: '\201C';
-    top: -10px;
-    left: -15px;
-}
-
-.Message-quote blockquote:after {
-    content: '\201D';
-    bottom: -25px;
-    right: -15px;
-}
-
-.Message-quote blockquote:before,
-.Message-quote blockquote:after {
-    font-size: 60px;
-    line-height: 1;
-    color: mat-color($app-theme, 600);
-    position: absolute;
 }
 
 .Semibold {
@@ -2117,3 +2068,7 @@ select:-webkit-autofill {
 //         white-space: normal !important;
 //     }
 // }
+
+.mat-drawer-content {
+    overflow: hidden;
+}

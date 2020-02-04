@@ -1,0 +1,159 @@
+<div class="Wrapper">
+    <a id="topView"></a>
+    <div class="Intro-image">
+        <div class="Intro-imageSpan Position--relative" role="img" aria-label="Esophageal and Stomach Cancer Project Homepage Image">
+            <span class="Intro-imageInner"></span>
+            <div class="Intro-arrow">
+                <a pageScroll [pageScrollDuration]="800" href="#secondView"><img src="/assets/images/arrow-blue.svg" alt="Arrow"></a>
+            </div>
+        </div>
+    </div>
+    <div class="Intro-footer row">
+      <img src="/assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
+      <img src="/assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+    </div>
+
+    <div class="Intro row">
+        <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <h1 class="Message-title" [innerHtml]="'home.SCENE1_TITLE' | translate"></h1>
+            <p class="Message-text" [innerHtml]="'home.SCENE1_TEXT' | translate"></p>
+        </section>
+    </div>
+
+    <div class="row">
+      <a id="secondView"></a>
+      <div class="Separator Separator--small" style="margin-top: 220px; margin-bottom: 60px"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <p class="Message-text" [innerHtml]="'home.SCENE2_TEXT' | translate"></p>
+        </section>
+    </div>
+
+    <div class="row">
+        <div class="Separator Separator--small"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.SCENE3_TITLE' | translate"></h1>
+            <p class="Message-text" [innerHtml]="'home.SCENE3_TEXT' | translate"></p>
+        </section>
+    </div>
+
+    <div class="row NoPadding NoMargin">
+        <img src="/assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
+    </div>
+
+    <div class="row">
+        <div class="Separator Separator--small"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.SCENE4_TITLE' | translate"></h1>
+        </section>
+    </div>
+
+    <div class="row">
+        <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <img src="/assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
+            <h2 class="Message-stepTitle NoMargin" [innerHtml]="'home.SCENE4_STEP1_TITLE' | translate"></h2>
+            <h3 class="Message-stepSubtitle NoMargin" [innerHtml]="'home.SCENE4_STEP1_SUBTITLE' | translate"></h3>
+            <p class="Message-stepText" [innerHtml]="'home.SCENE4_STEP1_TEXT' | translate"></p>
+        </div>
+        <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <img src="/assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
+            <h2 class="Message-stepTitle NoMargin" [innerHtml]="'home.SCENE4_STEP2_TITLE' | translate"></h2>
+            <h3 class="Message-stepSubtitle NoMargin" [innerHtml]="'home.SCENE4_STEP2_SUBTITLE' | translate"></h3>
+            <p class="Message-stepText" [innerHtml]="'home.SCENE4_STEP2_TEXT_1' | translate"></p>
+            <p class="Message-stepText" [innerHtml]="'home.SCENE4_STEP2_TEXT_2' | translate"></p>
+        </div>
+        <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <img src="/assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
+            <h2 class="Message-stepTitle NoMargin" [innerHtml]="'home.SCENE4_STEP3_TITLE' | translate"></h2>
+            <h3 class="Message-stepSubtitle NoMargin" [innerHtml]="'home.SCENE4_STEP3_SUBTITLE' | translate"></h3>
+            <p class="Message-stepText" [innerHtml]="'home.SCENE4_STEP3_TEXT' | translate"></p>
+        </div>
+    </div>
+
+    <div class="CenterDiv">
+        <a href [routerLink]="['/count-me-in']" (click)="countMeIn()" class="ButtonCMI ButtonCMI--home"></a>
+    </div>
+
+    <div class="row">
+        <div class="Separator Separator--small"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.SCENE5_TITLE' | translate"></h1>
+            <p class="Message-text" [innerHtml]="'home.SCENE5_TEXT' | translate"></p>
+        </section>
+    </div>
+
+    <div class="row">
+        <div class="Separator Separator--small"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.LEAD_PARTNER_TITLE' | translate"></h1>
+            <a href="http://www.targetcancerfoundation.org/" target="_blank"><img class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 PartnerLogo" src="/assets/images/target-cancer-foundation-logo.svg" alt="Target Cancer Foundation logo"></a>
+        </section>
+    </div>
+
+    <!-- Partners Title -->
+    <div class="row">
+        <div class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.PARTNERS_TITLE' | translate"></h1>  
+        </div>
+    </div>
+
+    <div class="row ourPartners">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+            <div class="row">
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                    <a href="http://ecan.org/" target="_blank"><img class="PartnerLogo" src="/assets/images/esophageal-cancer-action-network.png" alt="Esophageal Cancer Action Network logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                    <a href="https://www.ecaware.org/" target="_blank"><img class="PartnerLogo" src="/assets/images/esophageal-cancer-awareness-association.jpg" alt="Esophageal Cancer Awareness Association logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                    <a href="http://www.degregorio.org/wp/" target="_blank"><img class="PartnerLogo" src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                        <a href="https://debbiesdream.org/" target="_blank"><img class="PartnerLogo PartnerLogo-debbies" src="/assets/images/debbies-dream-foundation.svg" alt="Debbie's Dream Foundation logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                            <a href="https://www.gicancersalliance.org/" target="_blank"><img class="PartnerLogo PartnerLogo-gica" src="/assets/images/gi-cancers-alliance.png" alt="GI Cancers Alliance logo"></a>
+                        </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                        <a href="https://gastriccancer.org/" target="_blank"><img class="PartnerLogo" src="/assets/images/gastric-cancer-foundation.png" alt="Gastric Cancer Foundation logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                        <a href="https://www.nostomachforcancer.org" target="_blank"><img class="PartnerLogo NoPadding" src="/assets/images/no-stomach-for-cancer.png" alt="No Stomach for Cancer logo"></a>
+                    </div>
+                    <div class="Aligned--center logo-container col-sm-6 col-xs-12">
+                        <a href="https://stocan.org/" target="_blank"><img class="PartnerLogo" src="/assets/images/hope-for-stomach-cancer.jpg" alt="Hope for Stomach Cancer"></a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="Separator Separator--small"></div>
+    </div>
+
+    <div class="row">
+        <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <h1 class="Message-title" [innerHtml]="'home.SCENE6_TITLE' | translate"></h1>
+            <p class="Message-text" [innerHtml]="'home.SCENE6_TEXT' | translate"></p>
+        </section>
+    </div>
+
+    <div class="CenterDiv">
+      <a href [routerLink]="['/count-me-in']" (click)="countMeIn()" class="ButtonCMI ButtonCMI--home"></a>
+    </div>
+</div>

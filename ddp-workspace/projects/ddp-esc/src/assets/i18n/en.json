@@ -44,6 +44,21 @@
                 "Subtitle": "Learn with us along the way",
                 "Text": "The data generated from your samples and medical records will be coupled with that of other patients, de-identified, and shared widely with the biomedical community. We may also ask you additional questions about your experiences to help with future studies. We will provide you with regular updates regarding key discoveries and progress from the project, however, please note that individual data cannot be shared."
             }
+        },
+        "FourthBlock": {
+            "TitlePt1": "The time to",
+            "TitlePt2": "act",
+            "TitlePt3": "is now",
+            "Text": "We are asking you to say \"Count Me In\" and donate something invaluable to cancer research. Your biological samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of esophageal and gastric/stomach cancer."
+        },
+        "FifthBlock": {
+            "LeadTitle": "Lead Project Engagement Partner",
+            "PartnersTitle": "Our Advocacy Partners"
+        },
+        "SixthBlock": {
+            "TitlePt1": "Please join us and say",
+            "TitlePt2": "\"Count Me In\"",
+            "Text": "With your help, patients can be the driving force behind cancer research."
         }
     },
     "AboutUs": {},
