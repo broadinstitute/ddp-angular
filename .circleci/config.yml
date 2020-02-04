@@ -8,29 +8,34 @@ jobs:
     docker:
       # specify the version you desire here
       - image: broadinstitute/pepper-angular-toolkit:build_v1
+        auth:
+          username: _json_key  # default username when using a JSON key file to authenticate
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/repo/ddp-workspace
+    working_directory: ~/repo
 
     steps:
+      - run: sudo gcloud --quiet components update
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
       - checkout:
             path: ~/repo
 
-      # Download and cache dependencies
-    #  - restore_cache:
-   #       keys:
-    #        - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-    #        - v1-dependencies-
-
-      - run: npm ci
+#      - run: npm ci
 
       - run: echo "The project is $PROJ"
 
-      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
+  #    - run: ./deploy-to-appengine.sh dev ddp-osteo CMI-OSTEO
+      - run: gcloud iam roles list
 
-      - run: ls -l ./dist/ddp-osteo
+#      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
+
+ #     - run: ls -l ./dist/ddp-osteo
