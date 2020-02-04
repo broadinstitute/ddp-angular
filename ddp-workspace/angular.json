@@ -747,6 +747,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-osteo/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-osteo/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
