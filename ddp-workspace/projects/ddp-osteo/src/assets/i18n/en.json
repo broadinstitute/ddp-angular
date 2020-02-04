@@ -242,8 +242,9 @@
                 {
                     "Name": "Katherine Janeway",
                     "Affiliations": [
-                        "Lorem ipsum dolor sit amet",
-                        "Lorem ipsum dolor sit amet"
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School"
                     ],
                     "Url": "http://www.danafarberbostonchildrens.org/finddoctor/details.aspx?ID=29736",
                     "Image": "assets/images/SAC-Katherine-Janeway.jpg",
@@ -252,8 +253,10 @@
                 {
                     "Name": "Brian Crompton",
                     "Affiliations": [
-                        "Lorem ipsum dolor sit amet",
-                        "Lorem ipsum dolor sit amet"
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
                     ],
                     "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
                     "Image": "assets/images/SAC-Brian-Crompton.jpg",
