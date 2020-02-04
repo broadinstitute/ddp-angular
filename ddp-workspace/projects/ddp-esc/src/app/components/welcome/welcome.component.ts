@@ -38,7 +38,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <p class="Message-text" translate>
                     Welcome.FirstBlock.Text
                 </p>
