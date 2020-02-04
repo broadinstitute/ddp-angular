@@ -60,30 +60,30 @@
             {
                 "id": 0,
                 "title": "Touring the Genomics Platform",
-                "text": "Members of the Count Me In team and the Osteo Project’s Patient Advisory Council tour the Genomics Platform at the Broad Institute.",
-                "image": "assets/images/osteo-team.png",
-                "alt": "Osteo team"
+                "text": "Members of the Count Me In Team and the OSP Project Advisory Council tour the Genomics Platform at the Broad Institute.",
+                "image": "assets/images/osteo-team.jpg",
+                "alt": "Lab selfie"
             },
             {
                 "id": 1,
-                "title": "Lorem ipsum dolor sit amet",
-                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus posuere mi at mauris interdum lobortis. Cras a elit tortor.",
-                "image": "assets/images/placeholder1.jpg",
-                "alt": "Osteo team"
+                "title": "Medical Record Requesting",
+                "text": "Clinical research coordinators like Netsanet, Fergie, and Tania request records for OSP participants, in order to gain a comprehensive view of procedure and treatment history.",
+                "image": "assets/images/coordinators.jpg",
+                "alt": "Project coordinators"
             },
             {
                 "id": 2,
-                "title": "Nulla placerat justo vel vestibulum rutrum",
-                "text": "Integer vitae mattis enim. Nam risus sem, blandit et orci nec, volutpat tincidunt ipsum. Donec pellentesque dapibus tincidunt.",
-                "image": "assets/images/placeholder2.jpg",
-                "alt": "Osteo team"
+                "title": "Project Advisory Council",
+                "text": "We are so grateful to the PACs that worked with us to build the OSP. Every page of this site was built with their partnership and with this community in mind. Learn more about each one of them on the About Us page.",
+                "image": "assets/images/pac.jpg",
+                "alt": "Project Advisory Council"
             },
             {
                 "id": 3,
-                "title": "Nam placerat dui turpis, eu luctus nisi gravida congue",
-                "text": "Donec felis libero, molestie nec mi et, porttitor fringilla eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
-                "image": "assets/images/placeholder1.jpg",
-                "alt": "Osteo team"
+                "title": "This is not just a box",
+                "text": "Each saliva and blood sample we receive from OSP participants represents an important contribution towards future research. This powerful way to contribute can enhance our understanding of osteosarcoma and accelerate future discoveries.",
+                "image": "assets/images/box.jpg",
+                "alt": "Count Me In box"
             }
         ],
         "BackArrowAlt": "Back arrow",
