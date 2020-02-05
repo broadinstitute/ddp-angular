@@ -33,7 +33,7 @@ jobs:
       - run: echo "The project is $PROJ"
 
   #    - run: ./deploy-to-appengine.sh dev ddp-osteo CMI-OSTEO
-      - run: gcloud iam roles list
+      - run:  gcloud --quiet app describe
 
 #      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
 
