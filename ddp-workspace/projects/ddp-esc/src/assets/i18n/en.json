@@ -94,7 +94,7 @@
                         "Bio": [
                             "Adam Bass is an Associate Professor of medicine at Harvard Medical School, a physician/scientist at the Dana-Farber Cancer Institute and Brigham and Women’s Hospital and also is an associate member of the Broad Institute. Dr. Bass obtained his undergraduate degree from Amherst College and his MD degree at Duke University School of Medicine then pursued clinical training in internal medicine at the Massachusetts General Hospital and medical oncology at the Dana-Farber/Partners Cancer Center. At the completion of his clinical training, he was a post-doctoral fellow with Dr. Matthew Meyerson at both the Dana-Farber Cancer Institute and Broad Institute"
                         ],
-                        "Photo": "/assets/images/adam_bass.jpg",
+                        "Photo": "assets/images/adam_bass.jpg",
                         "Alt": "Adam Bass photo"
                     },
                     {
@@ -102,7 +102,7 @@
                         "Bio": [
                             "Jim Palma is the Executive Director of TargetCancer Foundation in Cambridge, MA. Since joining TargetCancer Foundation in 2010, Jim has overseen its growth from a small start-up to a nationally recognized foundation supporting comprehensive rare cancer research and patient support programs. In addition, Jim serves on the Board of Directors of the National Organization for Rare Disorders (NORD), and is a founding Co-Chair of the NORD Rare Cancers Coalition. Jim attended Loyola University Maryland, and has also completed studies at the Institute for Nonprofit Management and Leadership at the Questrom School of Business at Boston University."
                         ],
-                        "Photo": "/assets/images/jim_palma.jpg",
+                        "Photo": "assets/images/jim_palma.jpg",
                         "Alt": "Jim Palma photo"
                     }
                 ]
@@ -116,7 +116,7 @@
                             "Dana is an accomplished and enthusiastic marketing professional with decades of experience in corporate marketing and publishing, membership, and partner/project management. After 25 years at National Geographic, she is now in a new career in the health and wellness arena at Inspire, the leading social network for health.",
                             "Outside of work, she is also focused on healthcare advocacy and policy. In addition to serving as an Executive Board Member of the Esophageal Cancer Action Network (ECAN), she is a Patient Representative on the Locally Advanced Esophageal Cancer Guideline Panel for the American Society of Clinical Oncology (ASCO). Dana lives in Alexandria, VA, with her husband and three teenagers, and enjoys travel and walking and running outdoors."
                         ],
-                        "Photo": "/assets/images/dana_deighton.jpg",
+                        "Photo": "assets/images/dana_deighton.jpg",
                         "Alt": "Dana Deighton photo"
                     },
                     {
@@ -125,7 +125,7 @@
                             "A career marketing and advertising creative executive, Bill was diagnosed with Stage IV esophageal cancer on Sept 11, 2013. A life-long acid reflux condition prompted him to ask for an upper GI endoscopy despite having no symptoms associated with esophageal problems. After his diagnosis Bill responded to treatments with chemotherapy, radiation and immunotherapy under care at Massachusetts General Hospital, until he passed away in July 2019.",
                             "Bill was an avid esophageal cancer awareness advocate, and played a key role in assembling the Project Advisory Council for the Esophageal and Stomach Cancer Project. In addition, he served on the Board of the Esophageal Cancer Awareness Association and actively volunteered with TargetCancer Foundation. Bill produced and directed a series of YouTube videos called “Living with Esophageal Cancer” that features the stories of 8 esophageal cancer survivors."
                         ],
-                        "Photo": "/assets/images/bill_drake.jpg",
+                        "Photo": "assets/images/bill_drake.jpg",
                         "Alt": "Bill Drake photo"
                     },
                     {
@@ -133,7 +133,7 @@
                         "Bio": [
                             "A resident of Chappaqua, NY with his wife and two teenage children, George’s long career as a software engineer led to him most recently heading up the technology department for a hedge fund in NYC. George served on the Project Advisory Council from September 2017 to June 2018, when he passed away. George was diagnosed with Stage IV esophageal cancer on May 24, 2016 and tirelessly fought the disease."
                         ],
-                        "Photo": "/assets/images/george_evans.jpg",
+                        "Photo": "assets/images/george_evans.jpg",
                         "Alt": "George Evans photo"
                     },
                     {
@@ -142,7 +142,7 @@
                             "Jeff is nearing his 7 year survival anniversary. He volunteers with Imerman’s Angels, Livestrong at the YMCA, and a local men’s cancer support group. He still works full time and enjoys exotic (low budget) trips with his boys. He recently got his first tattoo (a periwinkle ribbon) while visiting Bali, Indonesia.",
                             "<span class=\"Italic\">“I’m excited about playing a small part in the development of this program. I look forward to working with my fellow survivors to make this project the most comprehensive of its kind. Meeting the folks at the Broad Institute was a real pleasure. These are some of the smartest people I have ever met.”</span>"
                         ],
-                        "Photo": "/assets/images/jeff_thomas.jpg",
+                        "Photo": "assets/images/jeff_thomas.jpg",
                         "Alt": "Jeff Thomas photo"
                     }
                 ]
