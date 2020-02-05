@@ -444,6 +444,12 @@ a:focus {
     margin: 0 auto;
 }
 
+@media only screen and (min-width: 1440px) {
+    .PageLayout {
+        max-width: 900px;
+    }
+}
+
 .PageLayout-dashboard {
     max-width: 1200px !important;
 }
@@ -572,11 +578,6 @@ a:focus {
     padding-bottom: 250px;
     background-color: mat-color($app-theme, 100);
     z-index: 1;
-}
-
-.PageLayout {
-    max-width: 660px;
-    margin: 0 auto;
 }
 
 .NoMargin {
@@ -829,7 +830,7 @@ ul {
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1100);
     text-align: left;
 }
 
@@ -851,7 +852,7 @@ ul {
 
 .PageContent-title {
     font-size: 1.4rem;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1100);
     font-weight: 300;
     line-height: 1.33;
     margin: 2.1rem 0 1.3rem 0;

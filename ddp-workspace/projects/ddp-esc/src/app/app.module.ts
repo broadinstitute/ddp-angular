@@ -20,6 +20,7 @@ import {
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MoreDetailsComponent } from './components/more-details/more-details.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -96,7 +97,8 @@ function translateFactory(translate: TranslateService, injector: Injector) {
     ToolkitModule
   ],
   declarations: [
-    WelcomeComponent
+    WelcomeComponent,
+    MoreDetailsComponent
   ],
   providers: [
     {

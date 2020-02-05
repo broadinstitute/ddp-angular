@@ -24,6 +24,7 @@ import {
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MoreDetailsComponent } from './components/more-details/more-details.component';
 
 const routes: Routes = [
   {
@@ -134,11 +135,11 @@ const routes: Routes = [
     component: ErrorComponent,
     canActivate: [IrbGuard]
   },
-  // {
-  //   path: 'more-details',
-  //   component: MoreDetailsComponent,
-  //   canActivate: [IrbGuard]
-  // },
+  {
+    path: 'more-details',
+    component: MoreDetailsComponent,
+    canActivate: [IrbGuard]
+  },
   {
     path: 'stay-informed',
     component: StayInformedComponent,
