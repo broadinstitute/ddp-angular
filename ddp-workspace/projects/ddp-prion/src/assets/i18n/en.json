@@ -23,8 +23,8 @@
             "ActivityName": "Study Listing",
             "ActivityStatus": "Available",
             "ActivityCreated": "-",
-            "ActivitySummary": "Available",
-            "ActivityActions": "Go"
+            "ActivitySummary": "Available studies and how to join them",
+            "ActivityActions": "View"
           }
         },
         "Welcome": {
