@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: flex-start;
     grid-area: text;
-    padding: 4rem 2rem 2rem 2rem;
+    padding: 3rem 1.5rem 2rem 1.5rem;
     background-color: mat-color($app-theme, 550);
 }
 
@@ -47,19 +47,27 @@
     background-color: mat-color($app-theme, 100);
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 920px) {
     .gallery {
         margin: auto;
         grid-template-columns: 1fr;
-        grid-template-rows: min-content 0.35fr 0.2fr;
+        grid-template-rows: min-content 0.35fr 0.3fr;
         grid-template-areas:
             "image image"
             "text text"
             "controls controls";
+        width: 500px;
     }
 
     .gallery__text {
         padding: 2rem;
+        min-height: 230px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .gallery__text {
+        min-height: 210px;
     }
 
     .control {
@@ -67,14 +75,40 @@
     }
 }
 
+@media screen and (max-width: 750px) {
+    .gallery__text {
+        min-height: 170px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .gallery {
+        width: auto;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .gallery {
         grid-template-rows: min-content 0.6fr 0.2fr;
+    }
+
+    .gallery__text {
+        min-height: 190px;
     }
 }
 
 @media screen and (max-width: 400px) {
     .gallery {
         grid-template-rows: min-content 0.8fr 0.2fr;
+    }
+
+    .gallery__text {
+        min-height: 250px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .gallery__text {
+        min-height: 255px;
     }
 }
