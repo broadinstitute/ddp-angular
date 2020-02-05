@@ -526,7 +526,7 @@ a:focus {
 .PageHeader-backgroundAboutUs {
     height: auto;
     padding: 120px 0 0 0;
-    margin-top: -270px;
+    margin-top: -300px;
     color: mat-color($app-theme, 100);
     width: 100%;
     background-color: mat-color($app-theme, 600);
@@ -697,6 +697,23 @@ a:focus {
     }
 }
 
+@media only screen and (max-width: 770px) {
+    .PageHeader-box {
+        bottom: 0;
+        width: 100%;
+        margin: 0 auto !important;
+    }
+
+    .PageHeader-titleAboutUs {
+        margin: 180px 0 30px 0 !important;
+    }
+
+
+    .PageHeader-backgroundAboutUs {
+        margin-top: -270px;
+    }
+}
+
 @media only screen and (max-width: 750px) {
 
     .Footer-navList {
@@ -720,22 +737,12 @@ a:focus {
         margin-top: 0;
     }
 
-    .PageHeader-titleAboutUs {
-        margin: 180px 0 30px 0 !important;
-    }
-
     .PageHeader-title {
         padding: 20px 20px 0 20px;
     }
 
     .PageContent {
         padding: 20px 0 150px 0;
-    }
-
-    .PageHeader-box {
-        bottom: 0;
-        width: 100%;
-        margin: 0 auto !important;
     }
 
     .Message-title {

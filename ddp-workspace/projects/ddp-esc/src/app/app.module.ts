@@ -21,6 +21,7 @@ import {
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -98,7 +99,8 @@ function translateFactory(translate: TranslateService, injector: Injector) {
   ],
   declarations: [
     WelcomeComponent,
-    MoreDetailsComponent
+    MoreDetailsComponent,
+    AboutUsComponent
   ],
   providers: [
     {
