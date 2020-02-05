@@ -45,10 +45,10 @@ export class ActivityConverter {
     public convertActivity(input: any): ActivityForm {
         const form = new ActivityForm();
         form.readonly = input.readonly;
-        form.name = input.name;
+        form.title = input.title;
+        form.subtitle = input.subtitle;
         form.formType = input.formType;
         form.activityCode = input.activityCode;
-        form.subtitle = input.subtitle;
         input.lastUpdatedText && (form.lastUpdatedText = input.lastUpdatedText);
         input.lastUpdated && (form.lastUpdated = input.lastUpdated);
         if (_.isUndefined(input.readonlyHint)) {

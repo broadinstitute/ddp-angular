@@ -24,7 +24,7 @@ import { tap, mergeMap } from 'rxjs/operators';
           <button class="dashboard-activity-button Link"
                 [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
                 (click)="openActivity(element.instanceGuid, element.activityCode)">
-            {{ element.activityDashboardName }}
+            {{ element.activityName }}
           </button>
         </mat-cell>
       </ng-container>
