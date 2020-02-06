@@ -1,9 +1,9 @@
-{{with $environment := env "ENVIRONMENT"}}
-{{with $version := env "VERSION"}}
-{{with $conf := vault (printf "secret/pepper/%s/%s/conf" $environment $version)}}
+{{ $environment := env "ENVIRONMENT"}}
+{{ $version := env "VERSION"}}
+{{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
 
 var DDP_ENV = {
-  basePepperUrl: "{{$conf.Data.pepperApiBaseUrl}}",
+  basePepperUrl: "{{.Data.pepperApiBaseUrl}}",
   {{if eq $environment "dev"}}
 	studyGuid: "TESTSTUDY1",
         auth0Domain: "login-dev.joincountmein.org",
@@ -27,10 +27,10 @@ var DDP_ENV = {
      {{end}}
   auth0SilentRenewUrl: document.baseURI + 'silentRenew',
   loginLandingUrl: document.baseURI + 'login-landing',
-  platformGAToken: "{{$conf.Data.platformGAToken}}",
-  projectGAToken:"{{$conf.Data.projectGAToken}}",
+  platformGAToken: "{{.Data.platformGAToken}}",
+  projectGAToken:"{{.Data.projectGAToken}}",
   doLocalRegistration:false,
-  mapsApiKey:"{{$conf.Data.mapsApiKey}}"
+  mapsApiKey:"{{.Data.mapsApiKey}}"
 };
 
-{{end}}{{end}}{{end}}
+{{end}}
