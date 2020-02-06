@@ -251,7 +251,7 @@
             "Header": "We're sorry, but an error has occurred.",
             "DefaultText": {
                 "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "or call us at"
+                "TextPt2": "."
             }
         },
         "ErrorCodes": {
