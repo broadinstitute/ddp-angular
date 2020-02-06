@@ -5,10 +5,12 @@ $version = ENV.fetch("VERSION") { |_|
   exit 1
 }
 
-$env = ENV.fetch("ENV") { |_|
+$env = ENV.fetch("ENVIRONMENT") { |_|
   puts "ENV not set"
   exit 1
 }
+
+$use_docker = ENV.fetch("USE_DOCKER", "true") == "true"
 
 $study_guid = ENV.fetch("STUDY_GUID","")
 $study_key = ENV.fetch("STUDY_KEY","")
@@ -171,24 +173,30 @@ def render_from_path(path, output_file_name = nil)
     end
   end
   copy_file_from_path(path)
-  docker_cmd = [
-      "docker", "run", "--rm", "-w", "/w", "-v", "#{Dir.pwd}:/w",
-      "-e", "VAULT_TOKEN=#{$vault_token}", "-e", "ENVIRONMENT=#{$env}", "-e", "VERSION=#{$version}",
-      "-e", "BUILD_CONTAINERS=#{$build_containers_flag}",
-      "-e", "DOCS_PROXIED_HOST=#{$docsProxiedHost}",
-      "-e", "NGINX_PROXIED_HOST=#{$nginxProxiedHost}",
-      "-e", "NO_SYSLOG=#{$noSyslog}",
-      "-e", "DEBUG=#{$debug_flag}",
-      "-e", "DIR=#{$dir}", "-e", "IMAGE=#{$image}",
-      "-e", "STUDY_GUID=#{$study_guid}",
-      "-e", "STUDY_KEY=#{$study_key}",
-      "-e", "IMAGE_NAME=#{$image_base}",
-      "broadinstitute/dsde-toolbox:latest",
-      "consul-template", "-config=/etc/consul-template/config/config.json",
-      "-template=#{file_name}:#{output_file_name}",
-      "-once"
-  ]
-  Open3.popen3(*docker_cmd) { |stdin, stdout, stderr, wait_thread|
+  if $use_docker == true
+    vault_cmd = [
+             "docker", "run", "--rm", "-w", "/w", "-v", "#{Dir.pwd}:/w",
+                  "-e", "VAULT_TOKEN=#{$vault_token}", "-e", "ENVIRONMENT=#{$env}", "-e", "VERSION=#{$version}",
+                  "-e", "BUILD_CONTAINERS=#{$build_containers_flag}",
+                  "-e", "DOCS_PROXIED_HOST=#{$docsProxiedHost}",
+                  "-e", "NGINX_PROXIED_HOST=#{$nginxProxiedHost}",
+                  "-e", "NO_SYSLOG=#{$noSyslog}",
+                  "-e", "DEBUG=#{$debug_flag}",
+                  "-e", "DIR=#{$dir}", "-e", "IMAGE=#{$image}",
+                  "-e", "STUDY_GUID=#{$study_guid}",
+                  "-e", "STUDY_KEY=#{$study_key}",
+                  "-e", "IMAGE_NAME=#{$image_base}",
+                  "broadinstitute/dsde-toolbox:consul-template-20-0.0.1",
+                  "consul-template", "-config=/etc/consul-template/config/config.json",
+                  "-template=#{file_name}:#{output_file_name}",
+                  "-once"
+    ]
+  else
+    vault_cmd = ["consul-template", "-config=/etc/consul-template/config/config.json",
+                              "-template=#{file_name}:#{output_file_name}", "-once"]
+  end
+
+  Open3.popen3(*vault_cmd) { |stdin, stdout, stderr, wait_thread|
     if wait_thread.value.success?
       puts "#{file_name} > #{output_file_name}"
       File.delete(file_name)
