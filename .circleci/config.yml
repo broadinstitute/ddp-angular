@@ -24,6 +24,7 @@ jobs:
             MANIFEST: manifest-study.rb
             USE_DOCKER: false
       - run: ls -l ddp-workspace/projects/ddp-osteo/output-config
+      - run: more ddp-workspace/projects/ddp-osteo/output-config/pepperConfig.js
 
 
 
@@ -52,4 +53,4 @@ jobs:
 
 #      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
 
-      - run: ls -l ./dist/ddp-osteo/output-config
+ #     - run: ls -l ./dist/ddp-osteo/output-config
