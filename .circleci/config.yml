@@ -15,7 +15,7 @@ jobs:
           name: Generating configuration files
           command: ruby configure.rb -y
           environment:
-            OUTPUT_DIR: ddp-workspace/projects/ddp-osteo/output-config
+            OUTPUT_DIR: ddp-workspace/projects/ddp-$STUDY_KEY/output-config
             INPUT_DIR: config
             MANIFEST: manifest-study.rb
             USE_DOCKER: false
