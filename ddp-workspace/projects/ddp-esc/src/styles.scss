@@ -917,7 +917,7 @@ ul {
     font-weight: 300;
     transition: all 0.3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
-    background-color: mat-color($app-theme, 2200);
+    background-color: mat-color($app-theme, 2200) !important;
 }
 
 .ButtonFilled:focus {
