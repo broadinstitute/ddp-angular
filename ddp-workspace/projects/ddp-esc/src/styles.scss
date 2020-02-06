@@ -806,6 +806,10 @@ a:focus {
     padding: 1rem 0;
 }
 
+.PageContent-section.council {
+    padding: 1rem;
+}
+
 .Dashboard-info-section {
     display: flex;
     flex-direction: column;
@@ -865,6 +869,12 @@ ul {
     margin: 2.1rem 0 1.3rem 0;
 }
 
+.PageContent-title.council {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .PageContent-sectionAboutUs {
     padding: 0;
 }
@@ -878,7 +888,7 @@ ul {
 }
 
 .HorizontalLine {
-    margin: 40px 0 30px 0;
+    margin: 40px 0;
 }
 
 .topMarginMedium {
@@ -1521,12 +1531,48 @@ ul {
     margin: 2rem 0 1rem 0;
 }
 
+.PageContent-subtitle.council {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
 .PageContent-subtitle-dashboard {
     margin: 0.5rem 0 !important;
 }
 
 .PageContent-text-dashboard {
     font-size: 1rem !important;
+}
+
+.reverse-row {
+    display: block;
+}
+
+.council {
+    @media only screen and (min-width: 768px) {
+        .col-xs-offset-2 {
+            margin-left: auto;
+        }
+
+        .reverse-row {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .PageContent-image {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .PageContent-image {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.council-row {
+    margin: 25px 0 100px 0;
 }
 
 .PageContent-text br {
