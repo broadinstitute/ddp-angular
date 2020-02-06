@@ -26,7 +26,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
                 <span translate>Toolkit.ErrorPage.DefaultText.TextPt1</span>
                 <a [href]="emailHref" class="Link">{{ email }}</a>
                 <span translate>Toolkit.ErrorPage.DefaultText.TextPt2</span>
-                <a [href]="phoneHref" class="Link">{{ phone }}</a>.
               </ng-container>
             </div>
           </section>
@@ -47,9 +46,7 @@ export class ErrorComponent implements OnInit {
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
-    this.phone = this.toolkitConfiguration.phone;
     this.email = this.toolkitConfiguration.infoEmail;
-    this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
     this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
   }
 }
