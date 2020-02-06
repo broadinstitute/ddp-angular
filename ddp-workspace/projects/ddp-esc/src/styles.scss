@@ -872,7 +872,7 @@ ul {
 .PageContent-title.council {
     font-size: 2.2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 2.5rem 0;
 }
 
 .PageContent-sectionAboutUs {
@@ -1071,9 +1071,15 @@ ul {
     margin-top: 150px;
 }
 
+@media only screen and (max-width: 1500px) {
+    .Message--intro {
+        margin-top: 65px;
+    }
+}
+
 @media only screen and (max-width: 1280px) {
     .Message--intro {
-        margin-top: 180px;
+        margin-top: 150px;
     }
 }
 
@@ -1534,6 +1540,7 @@ ul {
 .PageContent-subtitle.council {
     margin-top: 0;
     font-size: 1.4rem;
+    line-height: 1.4rem;
 }
 
 .PageContent-subtitle-dashboard {
@@ -1558,21 +1565,21 @@ ul {
             display: flex;
             flex-direction: row-reverse;
         }
-
-        .PageContent-image {
-            margin-bottom: 20px;
-        }
     }
 
     @media only screen and (max-width: 768px) {
         .PageContent-image {
             margin-bottom: 20px;
         }
+
+        .PageContent-text {
+            margin: 0;
+        }
     }
 }
 
 .council-row {
-    margin: 25px 0 100px 0;
+    margin: 25px 0 150px 0;
 }
 
 .PageContent-text br {

@@ -60,24 +60,29 @@ import { ToolkitConfigurationService } from 'toolkit';
       </div>
       <div class="row council-row">
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 no-padding">
-          <section class="PageContent-section council">
-            <h1 class="PageContent-title council">Leadership Team</h1>
-            <div class="row">
-              <div class="col-lg-2 col-md-3 col-sm-2 col-xs-8 col-xs-offset-2">
-                <img class="PageContent-image" alt="Adam Bass photo" src="/assets/images/adam_bass.jpg">
-              </div>
-              <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12">
-                <h2 class="PageContent-subtitle council">Adam Bass, MD</h2>
-                <p class="PageContent-text">Adam Bass is an Associate Professor of medicine at Harvard Medical School, a physician/scientist at the Dana-Farber Cancer Institute and Brigham and Women’s Hospital and also is an associate member of the Broad Institute. Dr. Bass obtained his undergraduate degree from Amherst College and his MD degree at Duke University School of Medicine then pursued clinical training in internal medicine at the Massachusetts General Hospital and medical oncology at the Dana-Farber/Partners Cancer Center. At the completion of his clinical training, he was a post-doctoral fellow with Dr. Matthew Meyerson at both the Dana-Farber Cancer Institute and Broad Institute</p>
-              </div>
-            </div>
-            <hr class="HorizontalLine">
-          </section>
+          <ng-container *ngFor="let team of 'AboutUs.Teams' | translate">
+            <section class="PageContent-section council">
+              <h1 class="PageContent-title council">{{team.Title}}</h1>
+                <ng-container *ngFor="let member of team.Members; odd as isOdd; last as isLast">
+                  <div class="row" [ngClass]="{'reverse-row': isOdd}">
+                    <div class="col-lg-2 col-md-3 col-sm-2 col-xs-8 col-xs-offset-2">
+                      <img lazy-resource class="PageContent-image" [alt]="member.Alt" [src]="member.Photo">
+                    </div>
+                    <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12">
+                      <h2 class="PageContent-subtitle council">{{member.Name}}</h2>
+                      <ng-container *ngFor="let paragraph of member.Bio">
+                        <p class="PageContent-text" [innerHTML]="paragraph"></p>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <hr *ngIf="!isLast" class="HorizontalLine">
+                </ng-container>
+            </section>
+          </ng-container>
         </div>
       </div>
     </article>
-  </div>
-  `
+  </div>`
 })
 export class AboutUsComponent implements OnInit {
   public countMeInUrl: string;
