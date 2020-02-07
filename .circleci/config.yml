@@ -15,7 +15,9 @@ jobs:
       - run:
           name: Update interpolated ENV vars
           command: |
-            echo 'export OUTPUT_DIR=ddp-workspace/projects/ddp-$STUDY_KEY/output-config' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=ddp-workspace/projects/$ANGULAR_PROJECT_NAME' >> $BASH_ENV
+            echo 'export OUTPUT_DIR=$ANGULAR_PROJECT_DIR_PATH/output-config' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Generating configuration files
@@ -24,8 +26,21 @@ jobs:
             INPUT_DIR: config
             MANIFEST: manifest-study.rb
             USE_DOCKER: false
-      - run: ls -l ddp-workspace/projects/ddp-osteo/output-config
-      - run: more ddp-workspace/projects/ddp-osteo/output-config/pepperConfig.js
+      - run:
+          name: Install Angular Project
+          command: npm ci
+      - run:
+          name: Angular Build
+          command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
+      - run:
+          name: Setup gcloud context
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run:
+          name: Deploy to GAE
+          command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml" --project="${GCLOUD_PROJECT_ID}"
 
 
 
