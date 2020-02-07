@@ -28,9 +28,11 @@ jobs:
       - run:
           name: Install Angular Project
           command: npm ci
+          working_directory: ~/repo/ddp-workspace
       - run:
           name: Angular Build
           command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
+          working_directory: ~/repo/ddp-workspace
       - run:
           name: Setup gcloud context
           command: |
