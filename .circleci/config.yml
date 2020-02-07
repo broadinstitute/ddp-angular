@@ -14,10 +14,12 @@ jobs:
       - run:
           name: Update interpolated ENV vars
           command: |
-            echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=ddp-workspace/projects/$ANGULAR_PROJECT_NAME' >> $BASH_ENV
-            echo 'export OUTPUT_DIR=$ANGULAR_PROJECT_DIR_PATH/output-config' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV; source $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=ddp-workspace/projects/$ANGULAR_PROJECT_NAME'; source $BASH_ENV
+            echo 'export OUTPUT_DIR=$ANGULAR_PROJECT_DIR_PATH/output-config'; source $BASH_ENV
+      - run:
+          name: Show ENV variables
+          command: env
       - run:
           name: Generating configuration files
           command: ruby configure.rb -y
