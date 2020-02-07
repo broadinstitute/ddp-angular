@@ -69,11 +69,6 @@ a:focus {
     margin-top: 150px;
 }
 
-.Left {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .row:after {
     content: "";
     display: table;
@@ -541,7 +536,7 @@ a:focus {
 
 .Message {
     text-align: center;
-    color: mat-color($app-theme, 1100);
+    color: mat-color($app-theme, 1000);
     display: block;
 }
 
@@ -604,22 +599,6 @@ a:focus {
     .row--moreBottomMargin {
         margin-bottom: 180px;
     }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.InputRadio-label {
-    color: mat-color($app-theme, 800);
-    font-size: 1rem;
-    font-weight: 300;
 }
 
 .row--moreTopMargin {
@@ -841,7 +820,7 @@ ul {
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 1100);
+    color: mat-color($app-theme, 1000);
     text-align: left;
 }
 
@@ -863,7 +842,7 @@ ul {
 
 .PageContent-title {
     font-size: 1.4rem;
-    color: mat-color($app-theme, 1100);
+    color: mat-color($app-theme, 1000);
     font-weight: 300;
     line-height: 1.33;
     margin: 2.1rem 0 1.3rem 0;
@@ -877,14 +856,6 @@ ul {
 
 .PageContent-sectionAboutUs {
     padding: 0;
-}
-
-.Field-padding {
-    padding-bottom: 25px;
-}
-
-.InputRadio-extraMargin {
-    margin: 40px 0;
 }
 
 .HorizontalLine {
@@ -1109,9 +1080,6 @@ ul {
     background: mat-color($app-theme, 2100);
     margin: 50px auto;
     position: relative;
-}
-
-.Separator--small {
     height: 125px;
 }
 
@@ -1146,10 +1114,6 @@ ul {
     color: mat-color($app-theme, 1000);
     line-height: 1.6;
     margin-bottom: 18px;
-}
-
-.Message-turtle {
-    margin: 220px 0 35px 0;
 }
 
 .Message-step {
@@ -1268,11 +1232,6 @@ ul {
     height: 100%;
 }
 
-.Sub-item {
-    margin: 35px 0 20px 0 !important;
-    padding: 0 0 0 25px !important;
-}
-
 .NoListStyle {
     list-style-type: none;
 }
@@ -1307,7 +1266,7 @@ ul {
 }
 
 .md-dialog-container {
-    background-color: mat-color($app-theme, 1100);
+    background-color: mat-color($app-theme, 1000);
 }
 
 .ErrorMessage a {

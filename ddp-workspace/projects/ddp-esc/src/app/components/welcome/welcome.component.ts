@@ -34,7 +34,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <a #secondView></a>
 
         <div class="row intro-row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row">
@@ -46,7 +46,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row NoPadding NoMargin">
@@ -62,7 +62,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row">
@@ -123,7 +123,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row">
@@ -140,7 +140,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row">
@@ -198,7 +198,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="row">
-            <div class="Separator Separator--small"></div>
+            <div class="Separator"></div>
         </div>
 
         <div class="row">
