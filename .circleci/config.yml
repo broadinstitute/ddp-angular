@@ -6,8 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-#      - image: broadinstitute/dsde-toolbox:consul-template-20-0.0.1
-      - image: broadinstitute/dsde-toolbox:consul-template-20-0.0.1
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
     working_directory: ~/repo
     steps:
       - checkout:
