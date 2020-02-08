@@ -15,7 +15,7 @@ jobs:
           name: Update interpolated ENV vars
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=ddp-workspace/projects/ddp-$STUDY_KEY' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-$STUDY_KEY' >> $BASH_ENV
             echo 'export OUTPUT_DIR=ddp-workspace/projects/ddp-$STUDY_KEY/output-config' >> $BASH_ENV
             source $BASH_ENV
       - run:
@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Deploy to GAE
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo
+          working_directory: ~/repo/ddp-workspace
 
 
 
