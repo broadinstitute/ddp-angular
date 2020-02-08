@@ -13,10 +13,8 @@ docker_build() {
 render_local_config() {
 	local angular_study_dir="ddp-workspace/projects/${ANGULAR_DIR}"
     local output_dir="${angular_study_dir}/output-config"
-    INPUT_DIR=config IMAGE_NAME=$FINAL_IMAGE OUTPUT_DIR=$output_dir STUDY_KEY=$STUDY_KEY STUDY_GUID=$STUDY_GUID ENV=$ENV VERSION=$VERSION MANIFEST=manifest-study.rb OUTPUT_DIR=$output_dir DIR=$output_dir ruby ./configure.rb -y
+    INPUT_DIR=config IMAGE_NAME=$FINAL_IMAGE OUTPUT_DIR=$output_dir STUDY_KEY=$STUDY_KEY STUDY_GUID=$STUDY_GUID ENVIRONMENT=$ENV VERSION=$VERSION MANIFEST=manifest-study.rb OUTPUT_DIR=$output_dir DIR=$output_dir ruby ./configure.rb -y
     local angular_config_dir="${angular_study_dir}/src/assets/config"
-    mkdir -p "${angular_config_dir}"
-    ln -snf "$(pwd)/${output_dir}/pepperConfig.js" "${angular_config_dir}/pepperConfig.js"
 }
 
 docker_push() {
