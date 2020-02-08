@@ -44,8 +44,8 @@ jobs:
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: Deploy to GAE
-          command: gcloud app deploy "${ANGULAR_PROJECT_NAME}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
+          command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          working_directory: ~/repo
 
 
 
