@@ -47,31 +47,3 @@ jobs:
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
-
-
-#  build:
-#    docker:
-#      - image: broadinstitute/pepper-angular-toolkit:build_v1
-#
-#    working_directory: ~/repo
-#
-#    steps:
-#      - run: |
-#          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-#          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-#          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-#
-#      - checkout:
-#            path: ~/repo
-#
-##      - run: npm ci
-#
-#      - run: echo "The project is $PROJ"
-#
-#      - run:  gcloud --quiet app describe
-
-#      - run:  VERSION=v1 ENV=dev OUTPUT_DIR=ddp-workspace/projects/output-config INPUT_DIR=ddp-workspace/projects/$PROJ STUDY_KEY=osteo STUDY_GUID=CMI-OSTEO ruby configure.rb -y
-
-#      - run: ng build $PROJ --base-href=/ --output-path=dist/$PROJ --verbose=true --progress=true
-
- #     - run: ls -l ./dist/ddp-osteo/output-config
