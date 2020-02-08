@@ -3,6 +3,9 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+references:
+  npm_cache_key: &npm_cache_key
+                   v1-dependency-npm-{{ checksum "package-lock.json" }}
 jobs:
   build:
     docker:
@@ -28,10 +31,16 @@ jobs:
             INPUT_DIR: config
             MANIFEST: manifest-study.rb
             USE_DOCKER: false
+      - restore_cache:
+          key: *npm_cache_key
       - run:
           name: Install Angular Project
-          command: npm ci
+          command: npm install
           working_directory: ~/repo/ddp-workspace
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
       - run:
           name: Angular Build
           command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
