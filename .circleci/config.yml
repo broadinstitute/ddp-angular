@@ -21,7 +21,7 @@ jobs:
           command: env
       - run:
           name: Generate config files
-          command: ./build-study.sh v1 $ENV $STUDY_KEY $STUDY_GUID --config
+          command: ./build-study.sh v1 $ENVIRONMENT $STUDY_KEY $STUDY_GUID --config
           environment:
             USE_DOCKER: false
       - restore_cache:
