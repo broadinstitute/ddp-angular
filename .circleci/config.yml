@@ -1,4 +1,8 @@
 version: 2.1
+parameters:
+  play-tag:
+    type: string
+    default: "kid"
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
