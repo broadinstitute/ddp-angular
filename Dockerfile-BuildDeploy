@@ -61,4 +61,8 @@ RUN apt-get update && apt-get install -y \
 ENV ANGULAR_CLI @angular/cli@8.3.23
 RUN npm install --global $ANGULAR_CLI
 
+# keep track of git hash
+ARG GIT_SHA
+RUN echo $GIT_SHA > git_sha.txt
+
 CMD "/bin/bash"
