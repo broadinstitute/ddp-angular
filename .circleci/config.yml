@@ -1,8 +1,4 @@
-# JavaScript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
@@ -34,7 +30,7 @@ jobs:
       - restore_cache:
           key: *npm_cache_key
       - run:
-          name: Install Angular Project
+          name: npm install Angular workspace
           command: npm install
           working_directory: ~/repo/ddp-workspace
       - save_cache:
@@ -55,4 +51,15 @@ jobs:
           name: Deploy to GAE
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - appengine_deployment
 
