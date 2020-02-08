@@ -1,4 +1,10 @@
 #!/usr/bin/ruby -w
+# Docker Image used to call out to generate config files
+$dsde_toolbox_image_name = "broadinstitute/dsde-toolbox:consul-template-20-0.0.1"
+
+# If USE_DOCKER evaluates to false, script will try to call consul-template directly
+# instead of using Docker image built in scripts
+$use_docker = ENV.fetch("USE_DOCKER", "true") == "true"
 
 $version = ENV.fetch("VERSION") { |_|
   puts "VERSION not set"
@@ -6,11 +12,11 @@ $version = ENV.fetch("VERSION") { |_|
 }
 
 $env = ENV.fetch("ENVIRONMENT") { |_|
-  puts "ENV not set"
+  puts "ENVIRONMENT var not set"
   exit 1
 }
 
-$use_docker = ENV.fetch("USE_DOCKER", "true") == "true"
+
 
 $study_guid = ENV.fetch("STUDY_GUID","")
 $study_key = ENV.fetch("STUDY_KEY","")
@@ -186,7 +192,7 @@ def render_from_path(path, output_file_name = nil)
                   "-e", "STUDY_GUID=#{$study_guid}",
                   "-e", "STUDY_KEY=#{$study_key}",
                   "-e", "IMAGE_NAME=#{$image_base}",
-                  "broadinstitute/dsde-toolbox:consul-template-20-0.0.1",
+                  $dsde_toolbox_image_name,
                   "consul-template", "-config=/etc/consul-template/config/config.json",
                   "-template=#{file_name}:#{output_file_name}",
                   "-once"
