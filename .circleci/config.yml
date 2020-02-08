@@ -1,8 +1,4 @@
 version: 2.1
-parameters:
-  play-tag:
-    type: string
-    default: "kid"
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
@@ -19,17 +15,14 @@ jobs:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-$STUDY_KEY' >> $BASH_ENV
-            echo 'export OUTPUT_DIR=ddp-workspace/projects/ddp-$STUDY_KEY/output-config' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Show ENV variables
           command: env
       - run:
-          name: Generating configuration files
-          command: ruby configure.rb -y
+          name: Generate config files
+          command: ./build-study.sh v1 $ENV $STUDY_KEY $STUDY_GUID --config
           environment:
-            INPUT_DIR: config
-            MANIFEST: manifest-study.rb
             USE_DOCKER: false
       - restore_cache:
           key: *npm_cache_key
