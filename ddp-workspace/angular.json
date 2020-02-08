@@ -97,6 +97,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-angio/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-angio/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
@@ -234,6 +239,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-brain/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-brain/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
@@ -371,6 +381,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-mbc/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-mbc/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
@@ -888,6 +903,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-prion/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-prion/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
