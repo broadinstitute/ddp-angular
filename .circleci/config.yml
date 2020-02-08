@@ -36,7 +36,7 @@ jobs:
             - ./node_modules
       - run:
           name: Angular Build
-          command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
+          command: ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Setup gcloud context
