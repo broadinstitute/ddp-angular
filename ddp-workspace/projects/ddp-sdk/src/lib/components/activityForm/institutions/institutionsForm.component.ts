@@ -10,21 +10,25 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
     selector: 'ddp-institutions-form',
     template: `
     <div class="ddp-institutions-form">
-        <p *ngIf="block.titleText" class="ddp-institutions-form__title" [innerHTML]="block.titleText"></p>
+        <p *ngIf="block.titleText" [innerHTML]="block.titleText"
+            class="ddp-institutions-form__title" [ngClass]="{'ddp-institutions-form__title_required': block.required}">
+        </p>
         <p *ngIf="block.subtitleText" class="ddp-institutions-form__subtitle" [innerHTML]="block.subtitleText"></p>
         <ddp-institution *ngIf="block.showFieldsInitially"
                          [value]="savedAnswers.length > 0 ? savedAnswers[0] : null"
                          [studyGuid]="studyGuid"
                          [readonly]="readonly"
+                         [required]="block.required"
                          [institutionType]="block.institutionType"
                          [normalizedInstitutionType]="normalizedInstitutionType"
+                         [validationRequested]=[validationRequested]
                          (valueChanged)="emitChange(0, $event)"
                          (componentBusy)="requestsInProgress.next($event)">
         </ddp-institution>
         <ng-container *ngFor="let answer of savedAnswers; let i = index">
             <div *ngIf="block.showFieldsInitially ? i >= 1 : i >= 0" [id]="block.institutionType + i">
                 <p class="PageContent-subtitle Normal ddp-institutions-form__additional-text">
-                    <span *ngIf="isPhysician">Other physician</span>
+                    <span class="ddp-institutions-form__add-physician" *ngIf="isPhysician">Other physician</span>
                     <span *ngIf="isInstitution">Other institution</span>
                     <button mat-icon-button *ngIf="!readonly" (click)="removeProvider(i)">
                         <mat-icon class="ddp-close-button">close</mat-icon>
@@ -33,8 +37,10 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                 <ddp-institution [value]="answer"
                                  [studyGuid]="studyGuid"
                                  [readonly]="readonly"
+                                 [required]="block.required"
                                  [institutionType]="block.institutionType"
                                  [normalizedInstitutionType]="normalizedInstitutionType"
+                                 [validationRequested]=[validationRequested]
                                  (valueChanged)="emitChange(i, $event)"
                                  (componentBusy)="requestsInProgress.next($event)">
                 </ddp-institution>
@@ -59,12 +65,12 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     @Input() block: ActivityInstitutionBlock;
     @Input() studyGuid: string;
     @Input() readonly: boolean;
+    @Input() validationRequested: boolean;
     @Output() componentBusy = new EventEmitter<boolean>();
     public normalizedInstitutionType: string;
     public requestsInProgress = new BehaviorSubject<number>(1);
     public savedAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
     private deleteSubject = new Subject<string>();
-    private outputAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
     private anchor: Subscription = new Subscription();
     private subjectsAnchor: Subscription = new Subscription();
 
@@ -72,7 +78,6 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.savedAnswers = [];
-        this.outputAnswers = [];
         this.normalizedInstitutionType = this.normalizeInstitutionType(this.block.institutionType);
         const get = this.providersServiceAgent.getMedicalProviders(this.studyGuid, this.normalizedInstitutionType)
             .pipe(
@@ -85,11 +90,11 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
                             provider.city,
                             provider.state,
                             provider.medicalProviderGuid);
-                        this.setAnswer(answer);
+                        this.addAnswer(answer);
                     });
                 } else if (providers.length === 0 && this.block.showFieldsInitially) {
                     const answer = new ActivityInstitutionInfo();
-                    this.setAnswer(answer);
+                    this.addAnswer(answer);
                 }
                 this.requestsInProgress.next(-1);
             });
@@ -119,22 +124,20 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     }
 
     public emitChange(index: number, value: ActivityInstitutionInfo): void {
-        console.log(value);
-        this.outputAnswers[index] = value;
+        this.block.answers[index] = value;
     }
 
     public addProvider(): void {
         const answer = new ActivityInstitutionInfo();
-        this.setAnswer(answer);
+        this.addAnswer(answer);
     }
 
     public removeProvider(index: number): void {
-        const guid = this.outputAnswers[index].guid;
+        const guid = this.block.answers[index].guid;
         if (guid) {
             this.deleteSubject.next(guid);
         }
-        this.savedAnswers.splice(index, 1);
-        this.outputAnswers.splice(index, 1);
+        this.removeAnswer(index);
     }
 
     public get isPhysician(): boolean {
@@ -145,9 +148,14 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
         return this.block.institutionType === InstitutionType.Institution;
     }
 
-    private setAnswer(answer: ActivityInstitutionInfo): void {
+    private addAnswer(answer: ActivityInstitutionInfo): void {
         this.savedAnswers.push(answer);
-        this.outputAnswers.push(answer);
+        this.block.answers.push(answer);
+    }
+
+    private removeAnswer(index: number): void {
+        this.savedAnswers.splice(index, 1);
+        this.block.answers.splice(index, 1);
     }
 
     private normalizeInstitutionType(institutionType: string): string {

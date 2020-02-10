@@ -55,6 +55,7 @@ import { AnswerValue } from './../../models/activity/answerValue';
                     <ddp-institutions-form [block]="block"
                                            [studyGuid]="studyGuid"
                                            [readonly]="readonly"
+                                           [validationRequested]="validationRequested"
                                            (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-institutions-form>
                 </div>

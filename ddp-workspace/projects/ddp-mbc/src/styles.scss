@@ -1409,21 +1409,23 @@ ul {
 }
 
 .ErrorMessage a {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
-.ddp-activity-validation {
-  .ErrorMessageList {
-    list-style-type: square;
-  }
 
-  .ErrorMessageItem {
-    font-size: 0.9rem;
-    color: mat-color($app-theme, 1200);
-    font-weight: 300;
-    margin: 10px 0 10px 0;
-    padding: 0 0 0 0;
-  }
+.ddp-activity-validation {
+    .ErrorMessageList {
+        list-style-type: square;
+    }
+
+    .ErrorMessageItem {
+        font-size: 0.9rem;
+        color: mat-color($app-theme, 1200);
+        font-weight: 300;
+        margin: 10px 0 10px 0;
+        padding: 0 0 0 0;
+    }
 }
+
 .JoinDialogFiled {
     width: 100%;
 }
@@ -2171,4 +2173,9 @@ input.mat-input-element {
     .mat-option-text {
         font-size: 14px !important;
     }
+}
+
+.ddp-institutions-form__title_required:after,
+.ddp-institutions-form__add-physician:after {
+    content: ' *';
 }

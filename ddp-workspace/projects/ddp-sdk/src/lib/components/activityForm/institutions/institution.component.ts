@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { NgForm } from '@angular/forms';
 import { InstitutionServiceAgent } from '../../../services/serviceAgents/institutionServiceAgent.service';
 import { MedicalProvidersServiceAgent } from '../../../services/serviceAgents/medicalProvidersServiceAgent.service';
 import { Institution } from '../../../models/institution';
@@ -14,7 +15,7 @@ import * as _ from 'underscore';
 @Component({
     selector: 'ddp-institution',
     template: `
-    <form autocomplete="off">
+    <form autocomplete="off" #institutionForm="ngForm">
         <mat-form-field *ngIf="isPhysician" class="width">
             <input matInput
                    [(ngModel)]="physicianName"
@@ -22,7 +23,8 @@ import * as _ from 'underscore';
                    placeholder="Physician Name"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
         <mat-form-field class="width">
             <input matInput
@@ -50,7 +52,8 @@ import * as _ from 'underscore';
                    placeholder="City"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
         <mat-form-field class="width">
             <input matInput
@@ -59,7 +62,8 @@ import * as _ from 'underscore';
                    placeholder="State"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
     </form>`,
     styles: [`
@@ -73,9 +77,12 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     @Input() institutionType: string;
     @Input() normalizedInstitutionType: string;
     @Input() studyGuid: string;
+    @Input() required: boolean;
+    @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<ActivityInstitutionInfo | null> = new EventEmitter();
     @Output() componentBusy: EventEmitter<number> = new EventEmitter<number>();
     @ViewChild(MatAutocompleteTrigger, { static: true }) autocomplete: MatAutocompleteTrigger;
+    @ViewChild('institutionForm', { static: true }) private institutionForm: NgForm;
     public institutions: Array<Institution> = [];
     public institutionName: string;
     public physicianName: string;
@@ -127,6 +134,11 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.city = this.value.city ? this.value.city : '';
                 this.state = this.value.state ? this.value.state : '';
                 this.guid = this.value.guid ? this.value.guid : '';
+            }
+            if (propName === 'validationRequested' && this.validationRequested && this.required) {
+                for (const controlName in this.institutionForm.form.controls) {
+                    this.institutionForm.form.controls[controlName].markAsTouched();
+                }
             }
         }
     }
