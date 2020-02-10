@@ -6,7 +6,7 @@ import { ToolkitConfigurationService } from "../../../../../prion-toolkit/src/li
   selector: 'study-listing',
   template: `
     <toolkit-header></toolkit-header>
-    <div class="Wrapper">
+    <div class="Container">
       <article class="PageContent">
         <div class="PageLayout">
           <div class="row NoMargin">
