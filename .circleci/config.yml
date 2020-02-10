@@ -17,9 +17,6 @@ jobs:
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-$STUDY_KEY' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Show ENV variables
-          command: env
-      - run:
           name: Show pipeline vars
           command: |
             echo "pipeline.id << pipeline.id >>"
@@ -39,7 +36,12 @@ jobs:
             	staging) DEPLOY_DEV=staging;;
             	*) DEPLOY_DEV=NOTHING!;;
             esac
-            echo "The chosen $DEPLOY_DEV is"
+            echo "Setting deployment ENVIRONMENT to $DEPLOY_DEV"
+            echo 'export ENVIRONMENT=$DEPLOY_DEV' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Show ENV variables
+          command: env
       - run:
           name: Generate config files
           command: ./build-study.sh v1 $ENVIRONMENT $STUDY_KEY $STUDY_GUID --config
