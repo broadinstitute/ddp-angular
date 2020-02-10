@@ -15,6 +15,8 @@ jobs:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-$STUDY_KEY' >> $BASH_ENV
+            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
+            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"` >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Show pipeline vars
@@ -28,11 +30,11 @@ jobs:
             echo "pipeline.git.revision << pipeline.git.revision >>"
             echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
       - run:
-          name: Pick deployment environment
+          name: Determine deployment environment
           command: |
             case "<< pipeline.git.branch >>" in
             	develop) DEPLOY_DEV=dev;;
-            	appengine_deployment) DEPLOY_DEV=GAEHEREWEGO;;
+            	appengine_deployment) DEPLOY_DEV=dev;;
             	staging) DEPLOY_DEV=staging;;
             	*) DEPLOY_DEV=NOTHING!;;
             esac
@@ -66,7 +68,8 @@ jobs:
           command: |
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
+            gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/dev/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
           name: Deploy to GAE
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
@@ -82,4 +85,3 @@ workflows:
               only:
                 - develop
                 - appengine_deployment
-
