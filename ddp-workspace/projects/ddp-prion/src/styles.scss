@@ -2283,10 +2283,6 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-weight: 300;
 }
 
-.mat-checkbox-layout {
-    align-items: normal !important;
-}
-
 .mat-input-flex {
     font-weight: 300;
 }
@@ -2575,27 +2571,27 @@ p.ddp-helper {
 .Container {
     background: #ffffff;
     overflow: hidden;
-    margin: 0 50px 130px 50px !important;
+    margin: 0 50px 30px 50px !important;
     /*footer height + padding*/
     padding: 30px 30px 80px 30px;
 }
 
 @media only screen and (max-width: 992px) {
     .Container {
-        margin: 0 25px 130px 25px !important;
+        margin: 0 25px 30px 25px !important;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .Container {
-        margin: 0 0 230px 0 !important;
+        margin: 0 0 130px 0 !important;
     }
 }
 
 .ContainerSurvey {
     background: #ffffff;
     top: 0;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
     /*footer height + padding*/
     padding: 30px !important;
     box-shadow: 1px 1px 5px #9E9E9E;
@@ -2603,7 +2599,7 @@ p.ddp-helper {
 
 @media only screen and (max-width: 767px) {
     .ContainerSurvey {
-        margin: 0 0 250px 0 !important;
+        margin: 0 0 150px 0 !important;
     }
 }
 
@@ -2884,6 +2880,10 @@ p.Medium {
     text-align: center;
     display: block;
     width: 100%;
+}
+
+.TopPadding10 {
+  padding-top: 10px !important;
 }
 
 .TopMargin10 {
