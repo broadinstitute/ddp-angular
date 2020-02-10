@@ -20,6 +20,17 @@ jobs:
           name: Show ENV variables
           command: env
       - run:
+          name: Show pipeline vars
+          command: |
+            echo "pipeline.id << pipeline.id >>"
+            echo "pipeline.number	 << pipeline.number	 >>"
+            echo "pipeline.project.git_url << pipeline.project.git_url >>"
+            echo "pipeline.project.type << pipeline.project.type >>"
+            echo "pipeline.git.tag << pipeline.git.tag >>"
+            echo "pipeline.git.branch << pipeline.git.branch >>"
+            echo "pipeline.git.revision << pipeline.git.revision >>"
+            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
+      - run:
           name: Generate config files
           command: ./build-study.sh v1 $ENVIRONMENT $STUDY_KEY $STUDY_GUID --config
           environment:
