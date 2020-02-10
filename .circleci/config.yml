@@ -31,6 +31,16 @@ jobs:
             echo "pipeline.git.revision << pipeline.git.revision >>"
             echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
       - run:
+          name: Pick deployment environment
+          command: |
+            case "$1" in
+            	develop) DEPLOY_DEV=dev;;
+            	appengine_deployment) DEPLOY_DEV=GAEHEREWEGO;;
+            	staging) DEPLOY_DEV=staging;;
+            	*) DEPLOY_DEV=NOTHING!;;
+            esac
+            echo "The chosen $DEPLOY_DEV is"
+      - run:
           name: Generate config files
           command: ./build-study.sh v1 $ENVIRONMENT $STUDY_KEY $STUDY_GUID --config
           environment:
