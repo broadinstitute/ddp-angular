@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Pick deployment environment
           command: |
-            case "$1" in
+            case "<< pipeline.git.branch >>" in
             	develop) DEPLOY_DEV=dev;;
             	appengine_deployment) DEPLOY_DEV=GAEHEREWEGO;;
             	staging) DEPLOY_DEV=staging;;
