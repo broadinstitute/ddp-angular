@@ -15,6 +15,8 @@ commands:
         type: string
       vault_env:
         type: string
+      ng_build_opts
+        type: string
     steps:
       - run: echo Building <<parameters.study_key>> <<parameters.study_guid>>
       - checkout:
@@ -76,7 +78,7 @@ commands:
             - ./node_modules
       - run:
           name: Angular Build
-          command: ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
+          command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Setup gcloud context
@@ -102,6 +104,7 @@ jobs:
           study_guid: OSTEO
           gcp_project: broad-ddp-dev
           vault_env: dev
+          ng_build_opts: # --prod --aot
 
 
 workflows:
