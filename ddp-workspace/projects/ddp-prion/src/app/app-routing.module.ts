@@ -19,6 +19,7 @@ import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, Redir
   WorkflowStartActivityComponent,
 ActivityComponent} from 'projects/prion-toolkit/src/public-api';
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
+import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
 
 const routes: Routes = [
   {
@@ -85,6 +86,11 @@ const routes: Routes = [
   {
     path: 'login-landing/:mode',
     component: RedirectToAuth0LoginComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'redirect-join',
+    component: RedirectJoinComponent,
     canActivate: [IrbGuard]
   },
   {
