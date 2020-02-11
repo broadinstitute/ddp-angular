@@ -14,8 +14,6 @@ commands:
       ng_build_opts:
         type: string
     steps:
-      - run:
-          name: "Building <<parameters.study_key>> <<parameters.study_guid>>"
       - checkout:
           path: ~/repo
       - run:
