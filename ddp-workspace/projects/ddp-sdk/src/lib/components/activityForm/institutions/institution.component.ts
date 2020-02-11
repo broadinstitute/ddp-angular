@@ -65,7 +65,11 @@ import * as _ from 'underscore';
                    (change)="saveValue()"
                    [required]="required">
         </mat-form-field>
-    </form>`,
+    </form>
+    <div class="ddp-activity-validation" *ngIf="validationRequested && required && !this.institutionForm.valid && this.institutionForm.touched">
+        <ddp-validation-message message="Fill all fields">
+        </ddp-validation-message>
+    </div>`,
     styles: [`
     .width {
         width: 100%;
@@ -136,8 +140,8 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.guid = this.value.guid ? this.value.guid : '';
             }
             if (propName === 'validationRequested' && this.validationRequested && this.required) {
-                for (const controlName in this.institutionForm.form.controls) {
-                    this.institutionForm.form.controls[controlName].markAsTouched();
+                for (const controlName in this.institutionForm.controls) {
+                    this.institutionForm.controls[controlName].markAsTouched();
                 }
             }
         }
@@ -200,7 +204,9 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     private updateForm(answer: ActivityInstitutionInfo): Observable<void> {
         const form = this.getAnswerForm(answer);
         return this.providersServiceAgent.updateMedicalProvider(this.studyGuid,
-            this.normalizedInstitutionType, this.guid, form);
+            this.normalizedInstitutionType, this.guid, form).pipe(
+                tap(() => this.valueChanged.emit(answer))
+            );
     }
 
     private saveForm(answer: ActivityInstitutionInfo): Observable<MedicalProviderResponse> {

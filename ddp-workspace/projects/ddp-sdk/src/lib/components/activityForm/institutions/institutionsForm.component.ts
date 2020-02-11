@@ -22,7 +22,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                          [institutionType]="block.institutionType"
                          [normalizedInstitutionType]="normalizedInstitutionType"
                          [validationRequested]=[validationRequested]
-                         (valueChanged)="emitChange(0, $event)"
+                         (valueChanged)="answerChanged(0, $event)"
                          (componentBusy)="requestsInProgress.next($event)">
         </ddp-institution>
         <ng-container *ngFor="let answer of savedAnswers; let i = index">
@@ -41,7 +41,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                                  [institutionType]="block.institutionType"
                                  [normalizedInstitutionType]="normalizedInstitutionType"
                                  [validationRequested]=[validationRequested]
-                                 (valueChanged)="emitChange(i, $event)"
+                                 (valueChanged)="answerChanged(i, $event)"
                                  (componentBusy)="requestsInProgress.next($event)">
                 </ddp-institution>
             </div>
@@ -70,6 +70,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     public normalizedInstitutionType: string;
     public requestsInProgress = new BehaviorSubject<number>(1);
     public savedAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
+    public outputAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
     private deleteSubject = new Subject<string>();
     private anchor: Subscription = new Subscription();
     private subjectsAnchor: Subscription = new Subscription();
@@ -123,8 +124,8 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
         this.subjectsAnchor.unsubscribe();
     }
 
-    public emitChange(index: number, value: ActivityInstitutionInfo): void {
-        this.block.answers[index] = value;
+    public answerChanged(index: number, value: ActivityInstitutionInfo): void {
+        this.outputAnswers[index] = value;
     }
 
     public addProvider(): void {
@@ -133,7 +134,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     }
 
     public removeProvider(index: number): void {
-        const guid = this.block.answers[index].guid;
+        const guid = this.outputAnswers[index].guid;
         if (guid) {
             this.deleteSubject.next(guid);
         }
@@ -150,12 +151,12 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
 
     private addAnswer(answer: ActivityInstitutionInfo): void {
         this.savedAnswers.push(answer);
-        this.block.answers.push(answer);
+        this.outputAnswers.push(answer);
     }
 
     private removeAnswer(index: number): void {
         this.savedAnswers.splice(index, 1);
-        this.block.answers.splice(index, 1);
+        this.outputAnswers.splice(index, 1);
     }
 
     private normalizeInstitutionType(institutionType: string): string {

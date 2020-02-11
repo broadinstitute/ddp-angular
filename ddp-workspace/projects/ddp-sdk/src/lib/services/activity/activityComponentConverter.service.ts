@@ -3,7 +3,6 @@ import { LoggingService } from '../logging.service';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { ActivityInstitutionBlock } from '../../models/activity/activityInstitutionBlock';
 import { ActivityBlock } from '../../models/activity/activityBlock';
-import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 
 @Injectable()
 export class ActivityComponentConverter {
@@ -40,15 +39,6 @@ export class ActivityComponentConverter {
         institutionBlock.showFieldsInitially = inputBlock.component.parameters.showFieldsInitially;
         institutionBlock.required = inputBlock.component.parameters.required;
         institutionBlock.displayNumber = inputBlock.displayNumber;
-        institutionBlock.validators = this.buildPhysicianValidators(institutionBlock.required);
         return institutionBlock;
-    }
-
-    private buildPhysicianValidators(isRequired: boolean): Array<ActivityAbstractValidationRule> {
-        const validators = [];
-        if (isRequired) {
-            // validators.push();
-        }
-        return validators;
     }
 }

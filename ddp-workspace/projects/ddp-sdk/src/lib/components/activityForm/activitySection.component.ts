@@ -92,6 +92,7 @@ export class ActivitySectionComponent {
     @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() embeddedComponentValidStatusChanged: EventEmitter<boolean> = new EventEmitter();
+    @Output() institutionComponentValidationStatusChanged: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
 
     public updateVisibility(visibility: BlockVisibility[]): void {

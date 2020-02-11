@@ -1,7 +1,5 @@
 import { ActivityBlock } from './activityBlock';
 import { BlockType } from './blockType';
-import { ActivityAbstractValidationRule } from '../../services/activity/validators/activityAbstractValidationRule';
-import { ActivityInstitutionInfo } from './activityInstitutionInfo';
 
 export class ActivityInstitutionBlock extends ActivityBlock {
     public allowMultiple: boolean | null;
@@ -12,20 +10,16 @@ export class ActivityInstitutionBlock extends ActivityBlock {
     public showFieldsInitially: boolean;
     public displayNumber: number | null;
     public required: boolean;
-    public answers: Array<ActivityInstitutionInfo> = [];
-    public validators: Array<ActivityAbstractValidationRule> = [];
 
     public get blockType(): BlockType {
         return BlockType.Institution;
     }
 
-    protected validateInternally(): boolean {
-        let result = true;
-        if (this.required && this.shown) {
-            for (const validator of this.validators) {
-                result = result && validator.recalculate();
-            }
-        }
-        return result;
+    public validate(): boolean {
+        return true;
+    }
+
+    public shouldScrollToFirstInvalidQuestion(): boolean {
+        return false;
     }
 }
