@@ -14,7 +14,7 @@ commands:
       ng_build_opts:
         type: string
     steps:
-      - run: echo Building <<parameters.study_key>> <<parameters.study_guid>>
+      - run: Building <<parameters.study_key>> <<parameters.study_guid>>
       - checkout:
           path: ~/repo
       - run:
@@ -74,7 +74,7 @@ commands:
             - ./node_modules
       - run:
           name: Angular Build
-          command: ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
+          command: ng build $ANGULAR_PROJECT_NAME <<parameters.ng_build_opts>> --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Setup gcloud context
@@ -83,7 +83,7 @@ commands:
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
             #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
-          name: Deploy to GAE
+          name: Deploying <<parameters.study_key>> to $ENVIRONMENT
           command: gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
@@ -96,7 +96,7 @@ jobs:
     steps:
       - build-and-deploy-study:
           study_key: osteo
-          study_guid: OSTEO
+          study_guid: CMI_OSTEO
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
   angio:
     docker:
@@ -105,7 +105,27 @@ jobs:
     steps:
       - build-and-deploy-study:
           study_key: angio
-          study_guid: CMI_ANGIO
+          study_guid: ANGIO
+          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+
+  brain:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+    steps:
+      - build-and-deploy-study:
+          study_key: brain
+          study_guid: cmi_brain
+          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+
+  mbc:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+    steps:
+      - build-and-deploy-study:
+          study_key: mbc
+          study_guid: cmi_mbc
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
 
 
