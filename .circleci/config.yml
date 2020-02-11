@@ -108,7 +108,6 @@ jobs:
           study_key: angio
           study_guid: ANGIO
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
-
   brain:
     docker:
       - image: broadinstitute/pepper-angular-toolkit:build_v1
