@@ -13,8 +13,6 @@ commands:
         type: string
       gcp_project:
         type: string
-      vault_env:
-        type: string
       ng_build_opts:
         type: string
     steps:
@@ -86,7 +84,7 @@ commands:
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project <<parameters.gcp_project>>
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
-            gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/<<parameters.vault_env>>/v1/conf | jq -r '.data.gcp.computeZone'`
+            gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_DEV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
           name: Deploy to GAE
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
@@ -103,7 +101,6 @@ jobs:
           study_key: osteo
           study_guid: OSTEO
           gcp_project: broad-ddp-dev
-          vault_env: dev
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
   angio:
     docker:
@@ -114,7 +111,6 @@ jobs:
           study_key: angio
           study_guid: CMI_ANGIO
           gcp_project: broad-ddp-dev
-          vault_env: dev
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
 
 
