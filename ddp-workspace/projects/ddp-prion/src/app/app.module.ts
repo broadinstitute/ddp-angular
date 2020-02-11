@@ -19,6 +19,7 @@ import { LearnMoreComponent } from './components/learn-more/learn-more.component
 import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
 import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
 import { Ng2TableModule } from "ng2-table";
+import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -102,7 +103,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
   declarations: [
     WelcomeComponent,
     LearnMoreComponent,
-    StudyListingComponent
+    StudyListingComponent,
+    RedirectJoinComponent
   ],
   providers: [
     {
