@@ -2,19 +2,24 @@ version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
-jobs:
-  build:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+
+commands:
+  build-and-deploy-study:
+    description: "Build and deploy angular study website"
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
     steps:
+      - run: echo "Building " <<parameters.study_key>> <<parameters.study_guid>>
       - checkout:
           path: ~/repo
       - run:
           name: Update interpolated ENV vars
           command: |
-            echo 'export ANGULAR_PROJECT_NAME=ddp-$STUDY_KEY' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-$STUDY_KEY' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
             # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
             echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
             source $BASH_ENV
@@ -33,10 +38,10 @@ jobs:
           name: Determine deployment environment
           command: |
             case "<< pipeline.git.branch >>" in
-            	develop) DEPLOY_DEV=dev;;
-            	appengine_deployment) DEPLOY_DEV=dev;;
-            	staging) DEPLOY_DEV=staging;;
-            	*) DEPLOY_DEV=NOTHING!;;
+              develop) DEPLOY_DEV=dev;;
+              appengine_deployment) DEPLOY_DEV=dev;;
+              staging) DEPLOY_DEV=staging;;
+              *) DEPLOY_DEV=NOTHING!;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_DEV"
             echo "export ENVIRONMENT=$DEPLOY_DEV" >> $BASH_ENV
@@ -46,7 +51,7 @@ jobs:
           command: env
       - run:
           name: Generate config files
-          command: ./build-study.sh v1 $ENVIRONMENT $STUDY_KEY $STUDY_GUID --config
+          command: ./build-study.sh v1 $ENVIRONMENT <<parameters.study_key>> <<parameters.study_guid>> --config
           environment:
             USE_DOCKER: false
       - restore_cache:
@@ -74,6 +79,18 @@ jobs:
           name: Deploy to GAE
           command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
+
+
+jobs:
+  build:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+    steps:
+      - build-and-deploy-study:
+          study_key: osteo
+          study_guid: OSTEO
+
 
 workflows:
   version: 2
