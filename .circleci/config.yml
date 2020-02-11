@@ -128,7 +128,6 @@ jobs:
           study_guid: cmi_mbc
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
 
-
 workflows:
   version: 2
   build-deploy:
@@ -143,3 +142,13 @@ workflows:
             branches:
               only:
                 - appengine_deployment
+    - brain:
+        filters:
+          branches:
+            only:
+              - appengine_deployment
+    - mbc:
+        filters:
+          branches:
+            only:
+              - appengine_deployment
