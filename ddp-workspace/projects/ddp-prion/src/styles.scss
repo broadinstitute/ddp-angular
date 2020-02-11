@@ -617,11 +617,11 @@ mat-icon.ddp-dropdown-arrow {
     text-align: right;
 }
 
-.Header-collapse.in li.Nav-itemJoinUs,
-.Header-collapse.collapsing li.Nav-itemJoinUs {
+.Header-collapse.in li.Nav-item-JoinUs,
+.Header-collapse.collapsing li.Nav-item-JoinUs {
     width: auto;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 10px !important;
 }
 
 .Nav ul {
