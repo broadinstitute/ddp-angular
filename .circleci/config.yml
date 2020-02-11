@@ -11,8 +11,6 @@ commands:
         type: string
       study_guid:
         type: string
-      gcp_project:
-        type: string
       ng_build_opts:
         type: string
     steps:
@@ -43,18 +41,18 @@ commands:
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
-                DEPLOY_DEV=dev
+                DEPLOY_ENV=dev
               ;;
               appengine_deployment)
-                DEPLOY_DEV=dev
+                DEPLOY_ENV=dev
               ;;
               staging)
-                DEPLOY_DEV=staging
+                DEPLOY_ENV=staging
               ;;
               *) DEPLOY_DEV=NOTHING!;;
             esac
-            echo "Setting deployment ENVIRONMENT to $DEPLOY_DEV"
-            echo "export ENVIRONMENT=$DEPLOY_DEV" >> $BASH_ENV
+            echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
+            echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Show ENV variables
@@ -81,13 +79,12 @@ commands:
       - run:
           name: Setup gcloud context
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project <<parameters.gcp_project>>
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-        
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
-            gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_DEV/v1/conf | jq -r '.data.gcp.computeZone'`
+            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_DEV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
           name: Deploy to GAE
-          command: gcloud app deploy "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          command: gcloud app deploy --project "broad-ddp-${DEPLOY_ENV}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
 
@@ -100,7 +97,6 @@ jobs:
       - build-and-deploy-study:
           study_key: osteo
           study_guid: OSTEO
-          gcp_project: broad-ddp-dev
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
   angio:
     docker:
@@ -110,7 +106,6 @@ jobs:
       - build-and-deploy-study:
           study_key: angio
           study_guid: CMI_ANGIO
-          gcp_project: broad-ddp-dev
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
 
 
