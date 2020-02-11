@@ -117,7 +117,6 @@ jobs:
           study_key: brain
           study_guid: cmi_brain
           ng_build_opts: # --prod --aot # use this to enable/disable prod mode
-
   mbc:
     docker:
       - image: broadinstitute/pepper-angular-toolkit:build_v1
@@ -132,22 +131,22 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - osteo:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
-      - angio:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
-    - brain:
+      osteo:
         filters:
           branches:
             only:
               - appengine_deployment
-    - mbc:
+      angio:
+        filters:
+          branches:
+            only:
+              - appengine_deployment
+      brain:
+        filters:
+          branches:
+            only:
+              - appengine_deployment
+      mbc:
         filters:
           branches:
             only:
