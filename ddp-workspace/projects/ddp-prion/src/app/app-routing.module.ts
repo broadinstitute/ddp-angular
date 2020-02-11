@@ -106,6 +106,11 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
+    path: 'redirect-join',
+    component: RedirectJoinComponent,
+    canActivate: [IrbGuard]
+  },
+  {
     path: 'start-study',
     component: PrionWorkflowStartActivityComponent,
     canActivate: [
