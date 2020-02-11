@@ -15,7 +15,7 @@ commands:
         type: string
       vault_env:
         type: string
-      ng_build_opts
+      ng_build_opts:
         type: string
     steps:
       - run: echo Building <<parameters.study_key>> <<parameters.study_guid>>
