@@ -14,7 +14,7 @@ commands:
       gcp_project:
         type: string
       vault_env:
-        type:string
+        type: string
     steps:
       - run: echo Building <<parameters.study_key>> <<parameters.study_guid>>
       - checkout:
