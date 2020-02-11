@@ -1,27 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventsService, Auth0AdapterService, BrowserContentService, WindowRef } from "ddp-sdk";
+import { Auth0AdapterService, BrowserContentService, GoogleAnalyticsEventsService, WindowRef } from "ddp-sdk";
 
 @Component({
   selector: 'app-redirect-join',
   template: `
-      <prion-header>
-      </prion-header>
-      <div class="Wrapper">
-        <div class="center">
-          <div class="mat-subheading-2" translate>
-            Toolkit.LoginLanding.Text
-          </div>
-          <mat-spinner></mat-spinner>
-        </div>
-      </div>
-  `
+        <ng-container></ng-container>
+    `
 })
 export class RedirectJoinComponent implements OnInit {
   public unsupportedBrowser: boolean;
+  private readonly HEADER_HEIGHT: number = 70;
 
   constructor(
     private windowRef: WindowRef,
-    private analytics: AnalyticsEventsService,
+    private analytics: GoogleAnalyticsEventsService,
     private browserContent: BrowserContentService, private auth0Adapter: Auth0AdapterService) { }
 
   public ngOnInit(): void {
