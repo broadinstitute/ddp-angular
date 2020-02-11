@@ -94,7 +94,7 @@ commands:
 
 
 jobs:
-  build:
+  osteo:
     docker:
       - image: broadinstitute/pepper-angular-toolkit:build_v1
     working_directory: ~/repo
@@ -104,16 +104,31 @@ jobs:
           study_guid: OSTEO
           gcp_project: broad-ddp-dev
           vault_env: dev
-          ng_build_opts: # --prod --aot
+          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+  angio:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+    steps:
+      - build-and-deploy-study:
+          study_key: angio
+          study_guid: CMI_ANGIO
+          gcp_project: broad-ddp-dev
+          vault_env: dev
+          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
 
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
+      - osteo:
           filters:
             branches:
               only:
-                - develop
+                - appengine_deployment
+      - angio:
+          filters:
+            branches:
+              only:
                 - appengine_deployment
