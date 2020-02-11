@@ -81,10 +81,10 @@ commands:
           command: |
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
-            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_DEV/v1/conf | jq -r '.data.gcp.computeZone'`
+            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
           name: Deploy to GAE
-          command: gcloud app deploy --project "broad-ddp-${DEPLOY_ENV}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          command: gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
 
