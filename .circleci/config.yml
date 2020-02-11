@@ -98,7 +98,7 @@ jobs:
       - build-and-deploy-study:
           study_key: osteo
           study_guid: CMI_OSTEO
-          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
   angio:
     docker:
       - image: broadinstitute/pepper-angular-toolkit:build_v1
@@ -107,7 +107,7 @@ jobs:
       - build-and-deploy-study:
           study_key: angio
           study_guid: ANGIO
-          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
   brain:
     docker:
@@ -117,7 +117,7 @@ jobs:
       - build-and-deploy-study:
           study_key: brain
           study_guid: cmi_brain
-          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
   mbc:
     docker:
@@ -127,7 +127,7 @@ jobs:
       - build-and-deploy-study:
           study_key: mbc
           study_guid: cmi_mbc
-          ng_build_opts: # --prod --aot # use this to enable/disable prod mode
+          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
 workflows:
   version: 2
@@ -139,6 +139,16 @@ workflows:
               only:
                 - appengine_deployment
       - angio:
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+      - brain:
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+      - mbc:
           filters:
             branches:
               only:
