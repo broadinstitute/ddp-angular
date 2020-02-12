@@ -140,9 +140,9 @@ jobs:
           study_guid: cmi_mbc
 
   checkout-filter:
-
     steps:
-      name: Checking branch
+      - run:
+          name: Checking branch
 
 workflows:
   version: 2
