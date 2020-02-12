@@ -30,8 +30,8 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="institutionName"
                    name="institution"
-                   [placeholder]="isPhysician ? 
-                        ('SDK.Institutions.Fields.InstitutionAny' | translate) : 
+                   [placeholder]="isPhysician ?
+                        ('SDK.Institutions.Fields.InstitutionAny' | translate) :
                         ('SDK.Institutions.Fields.Institution' | translate)"
                    [disabled]="readonly"
                    (input)="find($event.target.value)"
@@ -114,7 +114,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 filter(value => value.length > 2)
             )).subscribe(value => this.institutions = value);
 
-        const save = this.answerSubject.pipe(
+        const form = this.answerSubject.pipe(
             filter(answer => answer != null),
             distinctUntilChanged((answer1, answer2) => {
                 return _.isEqual(answer1, answer2);
@@ -130,7 +130,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
 
         this.anchor
             .add(get)
-            .add(save);
+            .add(form);
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {

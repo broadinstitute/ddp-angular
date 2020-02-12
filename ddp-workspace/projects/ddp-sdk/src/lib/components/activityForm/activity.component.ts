@@ -272,8 +272,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
      * param sectionIdx the pos in array with status for section
      * param isValid true or false
      */
-    public updateEmbeddedComponentValidationStatus(sectionIdx: number, isValid: boolean): void {
-        this.embeddedComponentsValidationStatus[sectionIdx] = isValid;
+    public updateEmbeddedComponentValidationStatus(sectionIndex: number, isValid: boolean): void {
+        this.embeddedComponentsValidationStatus[sectionIndex] = isValid;
         const reducedValidationStatus = this.embeddedComponentsValidationStatus.reduce((accumulator, value) => accumulator && value, true);
         this.embeddedComponentsValidStatusChanged.next(reducedValidationStatus);
     }
