@@ -3,7 +3,15 @@ references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
 
+
+executors:
+  study-executor:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+
 commands:
+
   build-and-deploy-study:
     description: "Build and deploy an angular study website"
     parameters:
@@ -55,7 +63,10 @@ commands:
                 DEPLOY_ENV=prod
                 NG_BUILD_OPTS=--prod --aot
               ;;
-              *) DEPLOY_DEV=NOTHING!;;
+              *)
+                echo "Cannot map << pipeline.git.branch >> to a deployment environment"
+                exit 17
+              ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
@@ -97,36 +108,32 @@ commands:
 
 jobs:
   osteo:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+    executor:
+      name: study-executor
     steps:
       - build-and-deploy-study:
           study_key: osteo
           study_guid: CMI_OSTEO
 
   angio:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+    executor:
+      name: study-executor
     steps:
       - build-and-deploy-study:
           study_key: angio
           study_guid: ANGIO
 
   brain:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+    executor:
+      name: study-executor
     steps:
       - build-and-deploy-study:
           study_key: brain
           study_guid: cmi_brain
 
   mbc:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+    executor:
+      name: study-executor
     steps:
       - build-and-deploy-study:
           study_key: mbc
@@ -136,23 +143,19 @@ workflows:
   version: 2
   build-deploy:
     jobs:
+     - build:
+          filters:
+            branches:
+              only: appengine_deployment
       - osteo:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
+          requires:
+            - build
       - angio:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
+          requires:
+            - build
       - brain:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
+          requires:
+            - build
       - mbc:
-          filters:
-            branches:
-              only:
-                - appengine_deployment
+          requires:
+            - build
