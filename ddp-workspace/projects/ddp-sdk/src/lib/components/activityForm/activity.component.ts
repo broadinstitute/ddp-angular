@@ -68,7 +68,8 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
                                         (visibilityChanged)="updateVisibility($event)"
-                                        (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
+                                        (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
+                                        (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
                             </ng-container>
@@ -106,7 +107,8 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
                                         (visibilityChanged)="updateVisibility($event)"
-                                        (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                                        (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                        (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(3, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
                             </div>
@@ -122,7 +124,8 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
                                             (visibilityChanged)="updateVisibility($event)"
-                                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                            (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(4, $event)"
+                                            (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(5, $event)"
                                             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
                                 </ng-container>
@@ -199,7 +202,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private readonly HEADER_HEIGHT: number = this.isMobile ? 10 : 70;
     private anchors: CompositeDisposable[];
     // one entry per section (header, body, and footer respectively)
-    private embeddedComponentValidationStatus: boolean[] = [true, true, true];
+    private embeddedComponentsValidationStatus: boolean[] = new Array(6).fill(true);
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
@@ -270,9 +273,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
      * param isValid true or false
      */
     public updateEmbeddedComponentValidationStatus(sectionIdx: number, isValid: boolean): void {
-        this.embeddedComponentValidationStatus[sectionIdx] = isValid;
-        const reducedValidationStatus = this.embeddedComponentValidationStatus.reduce((acc, currVal) => acc && currVal, true);
-        this.embeddedComponentValidStatusChanged.next(reducedValidationStatus);
+        this.embeddedComponentsValidationStatus[sectionIdx] = isValid;
+        const reducedValidationStatus = this.embeddedComponentsValidationStatus.reduce((accumulator, value) => accumulator && value, true);
+        this.embeddedComponentsValidStatusChanged.next(reducedValidationStatus);
     }
 
     public mouseEnterOnSubmit(): void {

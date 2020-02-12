@@ -23,6 +23,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                          [normalizedInstitutionType]="normalizedInstitutionType"
                          [validationRequested]=[validationRequested]
                          (valueChanged)="answerChanged(0, $event)"
+                         (formUpdated)="updateValidationStatus()"
                          (componentBusy)="requestsInProgress.next($event)">
         </ddp-institution>
         <ng-container *ngFor="let answer of savedAnswers; let i = index">
@@ -42,6 +43,7 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
                                  [normalizedInstitutionType]="normalizedInstitutionType"
                                  [validationRequested]=[validationRequested]
                                  (valueChanged)="answerChanged(i, $event)"
+                                 (formUpdated)="updateValidationStatus()"
                                  (componentBusy)="requestsInProgress.next($event)">
                 </ddp-institution>
             </div>
@@ -66,6 +68,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
+    @Output() validationStatusChanged = new EventEmitter<boolean>();
     @Output() componentBusy = new EventEmitter<boolean>();
     public normalizedInstitutionType: string;
     public requestsInProgress = new BehaviorSubject<number>(1);
@@ -161,5 +164,16 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
 
     private normalizeInstitutionType(institutionType: string): string {
         return institutionType.replace(/_/g, '-').toLowerCase();
+    }
+
+    public updateValidationStatus(): void {
+        if (this.block.required && this.validationRequested) {
+            const valid = this.outputAnswers.every(answer => this.isPhysicianFormFull(answer));
+            this.validationStatusChanged.emit(valid);
+        }
+    }
+
+    private isPhysicianFormFull(answer: ActivityInstitutionInfo): boolean {
+        return !!(answer.city.trim() && answer.physicianName.trim() && answer.state.trim());
     }
 }

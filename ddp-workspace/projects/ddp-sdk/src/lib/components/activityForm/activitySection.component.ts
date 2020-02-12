@@ -56,6 +56,7 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                            [studyGuid]="studyGuid"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
+                                           (validationStatusChanged)="institutionComponentValidationStatusChanged.emit($event)"
                                            (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-institutions-form>
                 </div>
@@ -63,7 +64,7 @@ import { AnswerValue } from './../../models/activity/answerValue';
                     <ddp-address-embedded [block]="block"
                                           [readonly]="readonly"
                                           [activityGuid]="activityGuid"
-                                          (validStatusChanged)="embeddedComponentValidStatusChanged.emit($event)"
+                                          (validStatusChanged)="addressComponentValidStatusChanged.emit($event)"
                                           (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-address-embedded>
                 </div>
@@ -91,7 +92,7 @@ export class ActivitySectionComponent {
     @Input() public activityGuid: string;
     @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() embeddedComponentValidStatusChanged: EventEmitter<boolean> = new EventEmitter();
+    @Output() addressComponentValidStatusChanged: EventEmitter<boolean> = new EventEmitter();
     @Output() institutionComponentValidationStatusChanged: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
 

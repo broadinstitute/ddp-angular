@@ -20,7 +20,7 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="physicianName"
                    name="physician"
-                   placeholder="Physician Name"
+                   [placeholder]="'SDK.Institutions.Fields.Name' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
                    (change)="saveValue()"
@@ -30,7 +30,9 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="institutionName"
                    name="institution"
-                   [placeholder]="isPhysician ? 'Institution (if any)' : 'Institution'"
+                   [placeholder]="isPhysician ? 
+                        ('SDK.Institutions.Fields.InstitutionAny' | translate) : 
+                        ('SDK.Institutions.Fields.Institution' | translate)"
                    [disabled]="readonly"
                    (input)="find($event.target.value)"
                    (change)="saveInstitution()"
@@ -49,7 +51,7 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="city"
                    name="city"
-                   placeholder="City"
+                   [placeholder]="'SDK.Institutions.Fields.City' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
                    (change)="saveValue()"
@@ -59,15 +61,15 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="state"
                    name="state"
-                   placeholder="State"
+                   [placeholder]="'SDK.Institutions.Fields.State' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
                    (change)="saveValue()"
                    [required]="required">
         </mat-form-field>
     </form>
-    <div class="ddp-activity-validation" *ngIf="validationRequested && required && !this.institutionForm.valid && this.institutionForm.touched">
-        <ddp-validation-message message="Fill all fields">
+    <div class="ddp-activity-validation" *ngIf="showPhysicianValidationError()">
+        <ddp-validation-message [message]="'SDK.Institutions.PhysicianValidation' | translate">
         </ddp-validation-message>
     </div>`,
     styles: [`
@@ -84,6 +86,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     @Input() required: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<ActivityInstitutionInfo | null> = new EventEmitter();
+    @Output() formUpdated: EventEmitter<void> = new EventEmitter<void>();
     @Output() componentBusy: EventEmitter<number> = new EventEmitter<number>();
     @ViewChild(MatAutocompleteTrigger, { static: true }) autocomplete: MatAutocompleteTrigger;
     @ViewChild('institutionForm', { static: true }) private institutionForm: NgForm;
@@ -111,7 +114,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 filter(value => value.length > 2)
             )).subscribe(value => this.institutions = value);
 
-        const form = this.answerSubject.pipe(
+        const save = this.answerSubject.pipe(
             filter(answer => answer != null),
             distinctUntilChanged((answer1, answer2) => {
                 return _.isEqual(answer1, answer2);
@@ -127,7 +130,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
 
         this.anchor
             .add(get)
-            .add(form);
+            .add(save);
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -138,6 +141,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.city = this.value.city ? this.value.city : '';
                 this.state = this.value.state ? this.value.state : '';
                 this.guid = this.value.guid ? this.value.guid : '';
+                this.formUpdated.emit();
             }
             if (propName === 'validationRequested' && this.validationRequested && this.required) {
                 for (const controlName in this.institutionForm.controls) {
@@ -197,6 +201,15 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         return this.institutionType === InstitutionType.Physician;
     }
 
+    public showPhysicianValidationError(): boolean {
+        return this.required && this.validationRequested && this.institutionForm.invalid && this.isRequiredFormTouched();
+    }
+
+    private isRequiredFormTouched(): boolean {
+        const controls = this.institutionForm.controls;
+        return controls.city.touched && controls.physician.touched && controls.state.touched;
+    }
+
     private getAnswerForm(answer: ActivityInstitutionInfo): ActivityInstitutionForm {
         return new ActivityInstitutionForm(answer.physicianName, answer.institutionName, answer.city, answer.state);
     }
@@ -205,7 +218,10 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         const form = this.getAnswerForm(answer);
         return this.providersServiceAgent.updateMedicalProvider(this.studyGuid,
             this.normalizedInstitutionType, this.guid, form).pipe(
-                tap(() => this.valueChanged.emit(answer))
+                tap(() => {
+                    this.valueChanged.emit(answer);
+                    this.formUpdated.emit();
+                })
             );
     }
 
@@ -222,6 +238,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                     );
                     this.guid = response.medicalProviderGuid;
                     this.valueChanged.emit(answer);
+                    this.formUpdated.emit();
                 })
             );
     }
