@@ -83,7 +83,7 @@ commands:
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
             #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
-          name: <<parameters.study_key>> deploy to {{ .Environment.ENVIRONMENT }}
+          name: <<parameters.study_key>> deploy to ${ENVIRONMENT}
           command: gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
