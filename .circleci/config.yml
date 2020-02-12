@@ -17,7 +17,7 @@ commands:
       - checkout:
           path: ~/repo
       - run:
-          name: Update interpolated ENV vars
+          name: <<parameters.study_key>> update interpolated env vars
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
@@ -26,7 +26,7 @@ commands:
             echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Show pipeline vars
+          name: <<parameters.study_key>> show pipeline vars
           command: |
             echo "pipeline.id << pipeline.id >>"
             echo "pipeline.number	 << pipeline.number	 >>"
@@ -37,7 +37,7 @@ commands:
             echo "pipeline.git.revision << pipeline.git.revision >>"
             echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
       - run:
-          name: Determine deployment environment
+          name: <<parameters.study_key>> determine deployment environment
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
@@ -55,17 +55,17 @@ commands:
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Show ENV variables
+          name: <<parameters.study_key>> show environment variables
           command: env
       - run:
-          name: Generate config files
+          name: <<parameters.study_key>> generate config files
           command: ./build-study.sh v1 $ENVIRONMENT <<parameters.study_key>> <<parameters.study_guid>> --config
           environment:
             USE_DOCKER: false
       - restore_cache:
           key: *npm_cache_key
       - run:
-          name: npm install Angular workspace
+          name: <<parameters.study_key>> npm install
           command: npm install
           working_directory: ~/repo/ddp-workspace
       - save_cache:
@@ -73,17 +73,17 @@ commands:
           paths:
             - ./node_modules
       - run:
-          name: Angular Build
+          name: <<parameters.study_key>> ng build
           command: ng build $ANGULAR_PROJECT_NAME $NG_BUILD_OPTS --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
       - run:
-          name: Setup gcloud context
+          name: <<parameters.study_key>> setup gcloud context
           command: |
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
             #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
       - run:
-          name: Deploying <<parameters.study_key>> to $ENVIRONMENT
+          name: <<parameters.study_key>> deploy to {{ .Environment.ENVIRONMENT }}
           command: gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
