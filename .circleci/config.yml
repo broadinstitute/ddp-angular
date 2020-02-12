@@ -139,16 +139,15 @@ jobs:
           study_key: mbc
           study_guid: cmi_mbc
 
-  checkout-filter:
-    filters:
-      branches:
-        only: appengine_deployment
-
 
 workflows:
   version: 2
   build-deploy:
     jobs:
+      - checkout-filter:
+          filters:
+            branches:
+              only: appengine_deployment
       - osteo:
           requires:
             - checkout-filter
