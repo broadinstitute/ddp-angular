@@ -11,8 +11,6 @@ commands:
         type: string
       study_guid:
         type: string
-      ng_build_opts:
-        type: string
     steps:
       - checkout:
           path: ~/repo
@@ -21,7 +19,6 @@ commands:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export NG_BUILD_OPTS=<<parameters.ng_build_opts>>' >> $BASH_ENV
             # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
             echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
             source $BASH_ENV
@@ -48,14 +45,21 @@ commands:
               ;;
               test)
                 DEPLOY_ENV=test
+                NG_BUILD_OPTS=--prod --aot
               ;;
               staging)
                 DEPLOY_ENV=staging
+                NG_BUILD_OPTS=--prod --aot
+              ;;
+              staging)
+                DEPLOY_ENV=prod
+                NG_BUILD_OPTS=--prod --aot
               ;;
               *) DEPLOY_DEV=NOTHING!;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
+            echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: <<parameters.study_key>> show environment variables
@@ -100,7 +104,7 @@ jobs:
       - build-and-deploy-study:
           study_key: osteo
           study_guid: CMI_OSTEO
-          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
+
   angio:
     docker:
       - image: broadinstitute/pepper-angular-toolkit:build_v1
@@ -109,7 +113,6 @@ jobs:
       - build-and-deploy-study:
           study_key: angio
           study_guid: ANGIO
-          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
   brain:
     docker:
@@ -119,7 +122,6 @@ jobs:
       - build-and-deploy-study:
           study_key: brain
           study_guid: cmi_brain
-          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
   mbc:
     docker:
@@ -129,7 +131,6 @@ jobs:
       - build-and-deploy-study:
           study_key: mbc
           study_guid: cmi_mbc
-          ng_build_opts: "" # --prod --aot # use this to enable/disable prod mode
 
 workflows:
   version: 2
