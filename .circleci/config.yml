@@ -6,7 +6,7 @@ references:
 
 executors:
   study-executor:
-    docker:
+    docker: # todo: create new image endpoint, add this in admin tab for faster starts
       - image: broadinstitute/pepper-angular-toolkit:build_v1
     working_directory: ~/repo
 
@@ -80,6 +80,9 @@ commands:
           command: ./build-study.sh v1 $ENVIRONMENT <<parameters.study_key>> <<parameters.study_guid>> --config
           environment:
             USE_DOCKER: false
+      # todo: conditionally don't build if we already have cached the tarball for the SHA+ENV somewhere (circle artifacts?  github package manager?  GCP bucket?
+      # for better build reproducibility, we want to move the same build artifacts to different environments and not rebuild them and
+      # suffer the pain of npm caching, package-lock, and auto-upgrade pitfalls
       - restore_cache:
           key: *npm_cache_key
       - run:
@@ -145,6 +148,7 @@ workflows:
   build-deploy:
     jobs:
       - osteo:
+          # todo: more DRY on branch filtering
           filters:
             branches:
               only: appengine_deployment
