@@ -101,6 +101,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
                     this.addAnswer(answer);
                 }
                 this.requestsInProgress.next(-1);
+                this.updateValidationStatus();
             });
 
         const sub = this.requestsInProgress.pipe(
@@ -108,7 +109,10 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
             map(result => result > 0),
             startWith(false),
             distinctUntilChanged()
-        ).subscribe(status => this.componentBusy.emit(status));
+        ).subscribe(status => {
+            this.componentBusy.emit(status);
+            this.updateValidationStatus();
+        });
 
         const del = this.deleteSubject.pipe(
             tap(() => this.requestsInProgress.next(1)),
@@ -167,7 +171,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     }
 
     public updateValidationStatus(): void {
-        if (this.block.required && this.validationRequested) {
+        if (this.block.required) {
             const valid = this.outputAnswers.every(answer => this.isPhysicianFormFull(answer));
             this.validationStatusChanged.emit(valid);
         }

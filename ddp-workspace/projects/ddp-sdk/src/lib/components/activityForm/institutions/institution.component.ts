@@ -126,6 +126,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             ))
         ).subscribe(() => {
             this.componentBusy.emit(-1);
+            this.formUpdated.emit();
         });
 
         this.anchor
@@ -141,11 +142,12 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.city = this.value.city ? this.value.city : '';
                 this.state = this.value.state ? this.value.state : '';
                 this.guid = this.value.guid ? this.value.guid : '';
-                this.formUpdated.emit();
             }
-            if (propName === 'validationRequested' && this.validationRequested && this.required) {
-                for (const controlName in this.institutionForm.controls) {
-                    this.institutionForm.controls[controlName].markAsTouched();
+            if (propName === 'validationRequested') {
+                if (this.validationRequested && this.required) {
+                    for (const controlName in this.institutionForm.controls) {
+                        this.institutionForm.controls[controlName].markAsTouched();
+                    }
                 }
             }
         }
@@ -218,10 +220,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         const form = this.getAnswerForm(answer);
         return this.providersServiceAgent.updateMedicalProvider(this.studyGuid,
             this.normalizedInstitutionType, this.guid, form).pipe(
-                tap(() => {
-                    this.valueChanged.emit(answer);
-                    this.formUpdated.emit();
-                })
+                tap(() => this.valueChanged.emit(answer))
             );
     }
 
@@ -238,7 +237,6 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                     );
                     this.guid = response.medicalProviderGuid;
                     this.valueChanged.emit(answer);
-                    this.formUpdated.emit();
                 })
             );
     }
