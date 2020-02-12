@@ -140,9 +140,7 @@ jobs:
           study_guid: cmi_mbc
 
   checkout-filter:
-    filters:
-      branches:
-        only: appengine_deployment
+
     steps:
       name: Checking branch
 
@@ -150,7 +148,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-
+      - checkout-filter:
+          filters:
+            branches:
+              only: appengine_deployment
       - osteo:
           requires:
             - checkout-filter
