@@ -116,7 +116,7 @@ jobs:
     steps:
       - build-and-deploy-study:
           study_key: osteo
-          study_guid: CMI_OSTEO
+          study_guid: CMI-OSTEO
 
   angio:
     executor:
@@ -132,7 +132,7 @@ jobs:
     steps:
       - build-and-deploy-study:
           study_key: brain
-          study_guid: cmi_brain
+          study_guid: cmi-brain
 
   mbc:
     docker:
@@ -141,7 +141,7 @@ jobs:
     steps:
       - build-and-deploy-study:
           study_key: mbc
-          study_guid: cmi_mbc
+          study_guid: cmi-mbc
 
 workflows:
   version: 2
