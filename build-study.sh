@@ -26,6 +26,7 @@ docker_push() {
 
 VERSION=$1; shift
 ENV=$1; shift
+DIR=$1; shift
 STUDY_KEY=$1; shift # handy name for the study, such as angio or brain.  Not the guid.
 STUDY_GUID=$1; shift # guid for the study, as per pepper study configuration
 
