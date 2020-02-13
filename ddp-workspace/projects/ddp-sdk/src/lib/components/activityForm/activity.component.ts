@@ -280,12 +280,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public close(): void {
-        this.sendActivityAnalytics();
+        this.sendActivityAnalytics(GoogleAnalytics.CloseSurvey);
         super.close();
     }
 
     public flush(): void {
-        this.sendActivityAnalytics();
+        this.sendActivityAnalytics(GoogleAnalytics.SubmitSurvey);
         super.flush();
     }
 
@@ -310,7 +310,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             this.scrollToTop();
             // enable any validation errors to be visible
             this.validationRequested = true;
-            this.sendConsentAnalytics();
+            this.sendActivityStepAnalytics();
             this.currentSection.validate();
             if (this.currentSection.valid) {
                 this.resetValidationState();
@@ -343,10 +343,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return this.model.sections.some(section => section.name || section.icons.length);
     }
 
-    public get isStepped(): boolean | void {
-        if (this.model) {
-            return !(this.model.sections.length === 1);
-        }
+    public get isStepped(): boolean {
+        return this.model.sections.length > 1;
     }
 
     public get isLastStep(): boolean {
@@ -374,17 +372,19 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    private sendConsentAnalytics(): void {
-        if (this.model.formType.toLowerCase() === 'consent' && this.model.sections[this.currentSectionIndex].name) {
-            this.analytics.emitCustomEvent(this.model.activityCode, this.model.sections[this.currentSectionIndex].name);
-        }
+    private sendActivityStepAnalytics(): void {
+        // Some sections don't have name, just send section number
+        const sectionName = this.model.sections[this.currentSectionIndex].name ?
+            this.model.sections[this.currentSectionIndex].name :
+            this.currentSectionIndex.toString();
+        this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
     }
 
-    private sendActivityAnalytics(): void {
-        this.sendConsentAnalytics();
-        if (this.model.name) {
-            this.analytics.emitCustomEvent(GoogleAnalytics.SubmitSurvey, this.model.activityCode);
+    private sendActivityAnalytics(event: string): void {
+        if (this.isStepped && this.isLastStep) {
+            this.sendActivityStepAnalytics();
         }
+        this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
     private scrollToTop(): void {
