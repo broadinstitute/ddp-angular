@@ -1,5 +1,5 @@
-import { GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { Component, OnInit, Inject } from '@angular/core';
+import { GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
