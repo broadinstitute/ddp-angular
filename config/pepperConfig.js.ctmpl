@@ -1,13 +1,13 @@
-{{with $environment := env "ENVIRONMENT"}}
-{{with $version := env "VERSION"}}
-{{with $conf := vault (printf "secret/pepper/%s/%s/conf" $environment $version)}}
-{{with $study_guid := env "STUDY_GUID"}}
+{{ $environment := env "ENVIRONMENT"}}
+{{ $version := env "VERSION"}}
+{{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
+{{ $study_guid := env "STUDY_GUID"}}
 
 var DDP_ENV = {
     auth0SilentRenewUrl: location.origin + '/silentRenew',
     loginLandingUrl: location.origin + '/login-landing',
     doLocalRegistration:false,
-    mapsApiKey:"{{$conf.Data.mapsApiKey}}",
+    mapsApiKey:"{{.Data.mapsApiKey}}",
     studyGuid:"{{$study_guid}}",
     tcellbaseurl:"https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
@@ -96,4 +96,4 @@ var DDP_ENV = {
   {{end}}
 {{end}}
 
-{{end}}{{end}}{{end}}{{end}}
+{{end}}

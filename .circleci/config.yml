@@ -1,8 +1,174 @@
 version: 2.1
-jobs:
-  build:
-    docker: 
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+references:
+  npm_cache_key: &npm_cache_key
+                   v1-dependency-npm-{{ checksum "package-lock.json" }}
+
+
+executors:
+  study-executor:
+    docker:
+      - image: broadinstitute/study-server-build:02-14-2020A
+    working_directory: ~/repo
+
+commands:
+
+  build-and-deploy-study:
+    description: "Build and deploy an angular study website"
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout:
+          path: ~/repo
+      - run:
+          name: <<parameters.study_key>> update interpolated env vars
+          command: |
+            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
+            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: <<parameters.study_key>> show pipeline vars
+          command: |
+            echo "pipeline.id << pipeline.id >>"
+            echo "pipeline.number	 << pipeline.number	 >>"
+            echo "pipeline.project.git_url << pipeline.project.git_url >>"
+            echo "pipeline.project.type << pipeline.project.type >>"
+            echo "pipeline.git.tag << pipeline.git.tag >>"
+            echo "pipeline.git.branch << pipeline.git.branch >>"
+            echo "pipeline.git.revision << pipeline.git.revision >>"
+            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
+      - run:
+          name: <<parameters.study_key>> determine deployment environment
+          command: |
+            case "<< pipeline.git.branch >>" in
+              develop)
+                DEPLOY_ENV=dev
+              ;;
+              appengine_deployment)
+                DEPLOY_ENV=dev
+              ;;
+              test)
+                DEPLOY_ENV=test
+                NG_BUILD_OPTS=--prod --aot
+              ;;
+              staging)
+                DEPLOY_ENV=staging
+                NG_BUILD_OPTS=--prod --aot
+              ;;
+              staging)
+                DEPLOY_ENV=prod
+                NG_BUILD_OPTS=--prod --aot
+              ;;
+              *)
+                echo "Cannot map << pipeline.git.branch >> to a deployment environment"
+                exit 17
+              ;;
+            esac
+            echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
+            echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
+            echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: <<parameters.study_key>> show environment variables
+          command: env
+      - run:
+          name: <<parameters.study_key>> generate config files
+          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+          environment:
+            USE_DOCKER: false
+      # todo: conditionally don't build if we already have cached the tarball for the SHA+ENV somewhere (circle artifacts?  github package manager?  GCP bucket?
+      # for better build reproducibility, we want to move the same build artifacts to different environments and not rebuild them and
+      # suffer the pain of npm caching, package-lock, and auto-upgrade pitfalls
+      - restore_cache:
+          key: *npm_cache_key
+      - run:
+          name: <<parameters.study_key>> npm install
+          command: npm install
+          working_directory: ~/repo/ddp-workspace
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
+      - run:
+          name: <<parameters.study_key>> ng build
+          command: ng build $ANGULAR_PROJECT_NAME $NG_BUILD_OPTS --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
+          working_directory: ~/repo/ddp-workspace
+      - run:
+          name: <<parameters.study_key>> setup gcloud context
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
+            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
+      - run:
+          name: <<parameters.study_key>> deploy to GAE
+          command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          working_directory: ~/repo/ddp-workspace
+
+
+jobs:
+  osteo:
+    executor:
+      name: study-executor
+    steps:
+      - build-and-deploy-study:
+          study_key: osteo
+          study_guid: CMI-OSTEO
+
+  angio:
+    executor:
+      name: study-executor
+    steps:
+      - build-and-deploy-study:
+          study_key: angio
+          study_guid: ANGIO
+
+  brain:
+    executor:
+      name: study-executor
+    steps:
+      - build-and-deploy-study:
+          study_key: brain
+          study_guid: cmi-brain
+
+  mbc:
+    docker:
+      - image: broadinstitute/pepper-angular-toolkit:build_v1
+    working_directory: ~/repo
+    steps:
+      - build-and-deploy-study:
+          study_key: mbc
+          study_guid: cmi-mbc
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - osteo:
+          # todo: more DRY on branch filtering
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+                - develop
+      - angio:
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+                - develop
+      - brain:
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+                - develop
+      - mbc:
+          filters:
+            branches:
+              only:
+                - appengine_deployment
+                - develop
