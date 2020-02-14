@@ -1,0 +1,13 @@
+service: angio
+runtime: python37
+
+handlers:
+  - url: /(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
+    static_files: dist/\1
+    upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
+    secure: always
+
+  - url: /(.*)
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
