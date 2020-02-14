@@ -77,7 +77,7 @@ commands:
           command: env
       - run:
           name: <<parameters.study_key>> generate config files
-          command: ./build-study.sh v1 $ENVIRONMENT <<parameters.study_key>> <<parameters.study_guid>> --config
+          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
           environment:
             USE_DOCKER: false
       # todo: conditionally don't build if we already have cached the tarball for the SHA+ENV somewhere (circle artifacts?  github package manager?  GCP bucket?
