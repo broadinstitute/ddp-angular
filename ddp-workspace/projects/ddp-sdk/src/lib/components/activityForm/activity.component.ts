@@ -280,11 +280,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public close(): void {
+        this.sendLastSectionAnalytics();
         this.sendActivityAnalytics(GoogleAnalytics.CloseSurvey);
         super.close();
     }
 
     public flush(): void {
+        this.sendLastSectionAnalytics();
         this.sendActivityAnalytics(GoogleAnalytics.SubmitSurvey);
         super.flush();
     }
@@ -310,7 +312,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             this.scrollToTop();
             // enable any validation errors to be visible
             this.validationRequested = true;
-            this.sendActivityStepAnalytics();
+            this.sendSectionAnalytics();
             this.currentSection.validate();
             if (this.currentSection.valid) {
                 this.resetValidationState();
@@ -372,7 +374,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    private sendActivityStepAnalytics(): void {
+    private sendSectionAnalytics(): void {
         // Some sections don't have name, just send section number
         const sectionName = this.model.sections[this.currentSectionIndex].name ?
             this.model.sections[this.currentSectionIndex].name :
@@ -380,10 +382,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
     }
 
-    private sendActivityAnalytics(event: string): void {
+    private sendLastSectionAnalytics(): void {
         if (this.isStepped && this.isLastStep) {
-            this.sendActivityStepAnalytics();
+            this.sendSectionAnalytics();
         }
+    }
+
+    private sendActivityAnalytics(event: string): void {
         this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
