@@ -13,7 +13,7 @@ executors:
 commands:
 
   build-and-deploy-study:
-    description: "Build and deploy an angular study website"
+    description: "Build and deploy angular study website"
     parameters:
       study_key:
         type: string
