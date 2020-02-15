@@ -143,6 +143,10 @@ jobs:
           study_key: mbc
           study_guid: cmi-mbc
 
+  set-prod-aot:
+    environment:
+      NG_BUILD_OPTS: --prod --aot
+
 workflows:
   version: 2
   build-deploy:
@@ -173,21 +177,21 @@ workflows:
 
     triggers:
       - schedule:
-          cron: "10 16 * * *"
+          cron: "17 16 * * *"
           filters:
             branches:
               only:
                 - develop
     jobs:
       - osteo:
-          environment:
-            NG_BUILD_OPTS: --prod --aot
+          requires:
+            - set-prod-aot
       - angio:
-          environment:
-            NG_BUILD_OPTS: --prod --aot
+          requires:
+            - set-prod-aot
       - brain:
-          environment:
-            NG_BUILD_OPTS: --prod --aot
+          requires:
+            - set-prod-aot
       - mbc:
-          environment:
-            NG_BUILD_OPTS: --prod --aot
+          requires:
+            - set-prod-aot
