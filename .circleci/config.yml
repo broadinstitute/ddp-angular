@@ -152,23 +152,42 @@ workflows:
           filters:
             branches:
               only:
-                - appengine_deployment
                 - develop
       - angio:
           filters:
             branches:
               only:
-                - appengine_deployment
                 - develop
       - brain:
           filters:
             branches:
               only:
-                - appengine_deployment
                 - develop
       - mbc:
           filters:
             branches:
               only:
-                - appengine_deployment
                 - develop
+  nightly:
+    # run a build on develop using --prod --aot as an early warning for prod/aot issues
+
+    triggers:
+      - schedule:
+          cron: "10 16 * * *"
+          filters:
+            branches:
+              only:
+                - develop
+    jobs:
+      - osteo:
+          environment:
+            NG_BUILD_OPTS: --prod --aot
+      - angio:
+          environment:
+            NG_BUILD_OPTS: --prod --aot
+      - brain:
+          environment:
+            NG_BUILD_OPTS: --prod --aot
+      - mbc:
+          environment:
+            NG_BUILD_OPTS: --prod --aot
