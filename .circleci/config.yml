@@ -5,7 +5,12 @@ references:
 
 
 executors:
-  study-executor:
+  commit-executor:
+    docker:
+      - image: broadinstitute/study-server-build:02-14-2020A
+    working_directory: ~/repo
+
+  nightly-executor:
     docker:
       - image: broadinstitute/study-server-build:02-14-2020A
     working_directory: ~/repo
@@ -112,7 +117,7 @@ commands:
 jobs:
   osteo:
     executor:
-      name: study-executor
+      name: commit-executor
     steps:
       - build-and-deploy-study:
           study_key: osteo
@@ -120,7 +125,7 @@ jobs:
 
   angio:
     executor:
-      name: study-executor
+      name: commit-executor
     steps:
       - build-and-deploy-study:
           study_key: angio
@@ -128,24 +133,19 @@ jobs:
 
   brain:
     executor:
-      name: study-executor
+      name: commit-executor
     steps:
       - build-and-deploy-study:
           study_key: brain
           study_guid: cmi-brain
 
   mbc:
-    docker:
-      - image: broadinstitute/pepper-angular-toolkit:build_v1
-    working_directory: ~/repo
+    executor:
+      name: commit-executor
     steps:
       - build-and-deploy-study:
           study_key: mbc
           study_guid: cmi-mbc
-
-  set-prod-aot:
-    environment:
-      NG_BUILD_OPTS: --prod --aot
 
 workflows:
   version: 2
@@ -177,21 +177,17 @@ workflows:
 
     triggers:
       - schedule:
-          cron: "17 16 * * *"
+          cron: "32 16 * * *"
           filters:
             branches:
               only:
                 - develop
     jobs:
       - osteo:
-          requires:
-            - set-prod-aot
+          name: osteo-nightly
       - angio:
-          requires:
-            - set-prod-aot
+          name: angio-nightly
       - brain:
-          requires:
-            - set-prod-aot
+          name: brain-nightly
       - mbc:
-          requires:
-            - set-prod-aot
+          name: mbc-nightly
