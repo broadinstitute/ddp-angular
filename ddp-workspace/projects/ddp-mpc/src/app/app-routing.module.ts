@@ -23,6 +23,11 @@ import {
   RedirectToAuth0LoginComponent
 } from 'toolkit';
 
+// import { WelcomeComponent } from './components/welcome/welcome.component';
+// import { MoreDetailsComponent } from './components/more-details/more-details.component';
+// import { AboutUsComponent } from './components/about-us/about-us.component';
+// import { DataReleaseComponent } from './components/about-us/data-release.component';
+
 const routes: Routes = [
   {
     path: 'about-you',
@@ -175,6 +180,22 @@ const routes: Routes = [
   //   pathMatch: 'full',
   //   canActivate: [IrbGuard]
   // },
+  {
+    path: 'permalink/consent/:id',
+    redirectTo: 'consent'
+  },
+  {
+    path: 'permalink/followupconsent/:id',
+    redirectTo: 'followup-consent'
+  },
+  {
+    path: 'permalink/aboutyou/:id',
+    redirectTo: 'about-you'
+  },
+  {
+    path: 'permalink/release/:id',
+    redirectTo: 'release-survey'
+  },
   {
     path: 'about-you/:id',
     redirectTo: 'about-you'

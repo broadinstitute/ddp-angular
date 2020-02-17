@@ -19,6 +19,11 @@ import {
   AppComponent
 } from 'toolkit';
 
+// import { WelcomeComponent } from './components/welcome/welcome.component';
+// import { MoreDetailsComponent } from './components/more-details/more-details.component';
+// import { AboutUsComponent } from './components/about-us/about-us.component';
+// import { DataReleaseComponent } from './components/about-us/data-release.component';
+
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
@@ -95,6 +100,10 @@ function translateFactory(translate: TranslateService, injector: Injector) {
     ToolkitModule
   ],
   declarations: [
+    // WelcomeComponent,
+    // MoreDetailsComponent,
+    // AboutUsComponent,
+    // DataReleaseComponent
   ],
   providers: [
     {
