@@ -23,7 +23,7 @@ import {
   RedirectToAuth0LoginComponent
 } from 'toolkit';
 
-// import { WelcomeComponent } from './components/welcome/welcome.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 // import { MoreDetailsComponent } from './components/more-details/more-details.component';
 // import { AboutUsComponent } from './components/about-us/about-us.component';
 // import { DataReleaseComponent } from './components/about-us/data-release.component';
@@ -174,12 +174,12 @@ const routes: Routes = [
     path: 'password',
     component: PasswordComponent
   },
-  // {
-  //   path: '',
-  //   component: WelcomeComponent,
-  //   pathMatch: 'full',
-  //   canActivate: [IrbGuard]
-  // },
+  {
+    path: '',
+    component: WelcomeComponent,
+    pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
   {
     path: 'permalink/consent/:id',
     redirectTo: 'consent'
