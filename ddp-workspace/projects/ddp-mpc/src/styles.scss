@@ -327,6 +327,7 @@ a:focus {
     font-size: 18px;
     font-weight: 300;
     line-height: 19px;
+    white-space: pre;
 }
 
 .Footer-nav {
@@ -837,7 +838,7 @@ ul {
 
 .Link:hover,
 .Link:focus {
-    color: mat-color($app-theme, 700) !important;
+    color: mat-color($app-theme, 600) !important;
 }
 
 .PageContent-title {
