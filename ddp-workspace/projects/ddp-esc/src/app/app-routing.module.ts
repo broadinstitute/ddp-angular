@@ -175,6 +175,22 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
+    path: 'permalink/consent/:id',
+    redirectTo: 'consent'
+  },
+  {
+    path: 'permalink/followupconsent/:id',
+    redirectTo: 'followup-consent'
+  },
+  {
+    path: 'permalink/aboutyou/:id',
+    redirectTo: 'about-you'
+  },
+  {
+    path: 'permalink/release/:id',
+    redirectTo: 'release-survey'
+  },
+  {
     path: 'about-you/:id',
     redirectTo: 'about-you'
   },
