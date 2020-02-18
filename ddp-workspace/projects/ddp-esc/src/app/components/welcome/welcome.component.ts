@@ -172,7 +172,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
+                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                         <a href="https://debbiesdream.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/debbies-dream-foundation.svg" alt="Debbie's Dream Foundation logo"></a>
