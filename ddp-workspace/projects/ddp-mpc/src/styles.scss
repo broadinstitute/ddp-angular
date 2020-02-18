@@ -63,10 +63,7 @@ a:focus {
 
 .row {
     display: block;
-}
-
-.intro-row {
-    margin-top: 150px;
+    margin: 0;
 }
 
 .row:after {
@@ -549,16 +546,20 @@ a:focus {
     margin-bottom: 18px;
 }
 
+.Message-mascot {
+    margin: 220px 0 35px 0;
+}
+
 .Message-partners {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
-    height: 210px;
+    height: 200px;
 }
 
 .partner-logo {
-    max-width: 250px;
+    max-width: 200px;
     width: 100%;
 }
 
@@ -1045,7 +1046,7 @@ ul {
 
 @media only screen and (max-width: 1500px) {
     .Message--intro {
-        margin-top: 65px;
+        margin-top: 90px;
     }
 }
 

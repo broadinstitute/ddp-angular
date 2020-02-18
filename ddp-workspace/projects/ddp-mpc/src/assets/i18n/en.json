@@ -10,7 +10,49 @@
     "Common": {
         "CMIButton": "count me in"
     },
-    "Welcome": {},
+    "Welcome": {
+        "Intro": {
+            "Title": "You can have a direct impact on the future of men with prostate cancer",
+            "Text": "The Metastatic Prostate Cancer Project is a nationwide genomic research study for men with advanced or metastatic prostate cancer. We seek to generate the most comprehensive database that will be shared with the entire research community to accelerate discoveries."
+        },
+        "FirstBlock": {
+            "Text": "We can only accomplish this by working directly with men like you, men who are willing to anonymously share their tissues and medical information."
+        },
+        "SecondBlock": {
+            "Title": "Here's how you can participate",
+            "FirstStep": {
+                "Title": "Step 1",
+                "Subtitle": "Tell us about yourself",
+                "TextPt1": "Click",
+                "Link": "\"Count Me In\"",
+                "TextPt2": "and complete a short online form to tell us about yourself and your prostate cancer."
+            },
+            "SecondStep": {
+                "Title": "Step 2",
+                "Subtitle": "Give us permission to collect your samples and data",
+                "Text": "You will be directed to an online consent form to get your permission to collect your samples and data. We will send you a saliva kit and a blood kit. We will do the rest--we’ll contact your doctors and hospitals to securely obtain copies of your medical records and a portion of your stored tumor samples."
+            },
+            "ThirdStep": {
+                "Title": "Step 3",
+                "Subtitle": "Learn with us along the way",
+                "Text": "As we learn, we will provide you with regular updates and share any discoveries coming out of the project. We also may ask you additional questions about your experience to help with future studies."
+            }
+        },
+        "ThirdBlock": {
+            "TitlePt1": "The time to",
+            "TitlePt2": "act",
+            "TitlePt3": "is now",
+            "Text": "We are asking you to say \"Count Me In\" and give something invaluable to prostate cancer research. Your samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of prostate cancer."
+        },
+        "FourthBlock": {
+            "Title": "Our Advocacy Partners"
+        },
+        "FifthBlock": {
+            "TitlePt1": "Please join us and say",
+            "TitlePt2": "\"Count Me In\"",
+            "Text": "With your help, patients can be the driving force behind cancer research."
+        }
+    },
     "DataRelease": {},
     "AboutUs": {},
     "MoreDetails": {},

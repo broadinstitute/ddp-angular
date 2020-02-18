@@ -30,26 +30,11 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             </section>
         </div>
         <a #secondView></a>
-        <div class="row intro-row">
-            <div class="Separator"></div>
-        </div>
         <div class="row">
-            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
+            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <img lazy-resource src="./assets/images/mascot.svg" class="Message-mascot" alt="Prostate Cancer mascot">
                 <p class="Message-text" translate>
                     Welcome.FirstBlock.Text
-                </p>
-            </section>
-        </div>
-        <div class="row">
-            <div class="Separator"></div>
-        </div>
-        <div class="row NoPadding NoMargin">
-            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
-                <h1 class="Message-title" translate>
-                    Welcome.SecondBlock.Title
-                </h1>
-                <p class="Message-text" translate>
-                    Welcome.SecondBlock.Text
                 </p>
             </section>
             <img lazy-resource src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
@@ -60,7 +45,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Welcome.ThirdBlock.Title
+                    Welcome.SecondBlock.Title
                 </h1>
             </section>
         </div>
@@ -68,41 +53,37 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Welcome.ThirdBlock.FirstStep.Title
+                    Welcome.SecondBlock.FirstStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Welcome.ThirdBlock.FirstStep.Subtitle
+                    Welcome.SecondBlock.FirstStep.Subtitle
                 </h2>
                 <p class="Message-stepText">
-                    <span translate>Welcome.ThirdBlock.FirstStep.TextPt1</span>
-                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Link" translate>Welcome.ThirdBlock.FirstStep.Link </a>
-                    <span translate>Welcome.ThirdBlock.FirstStep.TextPt2</span>
+                    <span translate>Welcome.SecondBlock.FirstStep.TextPt1</span>
+                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Link" translate>Welcome.SecondBlock.FirstStep.Link </a>
+                    <span translate>Welcome.SecondBlock.FirstStep.TextPt2</span>
                 </p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Welcome.ThirdBlock.SecondStep.Title
+                    Welcome.SecondBlock.SecondStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Welcome.ThirdBlock.SecondStep.Subtitle
+                    Welcome.SecondBlock.SecondStep.Subtitle
                 </h2>
-                <p class="Message-stepText" [innerHTML]="'Welcome.ThirdBlock.SecondStep.Text1' | translate"></p>
-                <p class="Message-stepText">
-                    <span translate>Welcome.ThirdBlock.SecondStep.Text2.Part1</span>
-                    <a routerLink="/more-details"  class="Link" translate>Welcome.ThirdBlock.SecondStep.Text2.Part2</a>.
-                </p>
+                <p class="Message-stepText" [innerHTML]="'Welcome.SecondBlock.SecondStep.Text' | translate"></p>
             </div>
             <div class="Message-step col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
                 <h1 class="Message-stepTitle NoMargin" translate>
-                    Welcome.ThirdBlock.ThirdStep.Title
+                    Welcome.SecondBlock.ThirdStep.Title
                 </h1>
                 <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Welcome.ThirdBlock.ThirdStep.Subtitle
+                    Welcome.SecondBlock.ThirdStep.Subtitle
                 </h2>
                 <p class="Message-stepText" translate>
-                    Welcome.ThirdBlock.ThirdStep.Text
+                    Welcome.SecondBlock.ThirdStep.Text
                 </p>
             </div>
         </div>
@@ -117,12 +98,12 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
-                    <span translate>Welcome.FourthBlock.TitlePt1</span>
-                    <span class="Color--study Semibold" translate>Welcome.FourthBlock.TitlePt2</span>
-                    <span translate>Welcome.FourthBlock.TitlePt3</span>
+                    <span translate>Welcome.ThirdBlock.TitlePt1</span>
+                    <span class="Color--study Semibold" translate>Welcome.ThirdBlock.TitlePt2</span>
+                    <span translate>Welcome.ThirdBlock.TitlePt3</span>
                 </h1>
                 <p class="Message-text" translate>
-                    Welcome.FourthBlock.Text
+                    Welcome.ThirdBlock.Text
                 </p>
             </section>
         </div>
@@ -132,52 +113,55 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Welcome.FifthBlock.LeadTitle
+                    Welcome.FourthBlock.Title
                 </h1>
             </section>
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+            <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
-                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img class="partner-logo--single" lazy-resource src="./assets/images/target-cancer-foundation-logo.svg" alt="Target Cancer Foundation logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://www.pcf.org"  target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-cancer-foundation.svg" alt="Prostate Cancer Foundation logo"></a>
                     </div>
-                </div>
-            </section>
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <h1 class="Message-title" translate>
-                    Welcome.FifthBlock.PartnersTitle
-                </h1>
-            </section>
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://ecan.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/esophageal-cancer-action-network.png" alt="Esophageal Cancer Action Network logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://pcainternational.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-cancer-international.png" alt="Prostate Cancer International logo"></a>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.ecaware.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/esophageal-cancer-awareness-association.jpg" alt="Esophageal Cancer Awareness Association logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://adkhikeforhope.org" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-adirondack.png" alt="Adirondack logo"></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://cancerabcs.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-cancer-abc.png" alt="Cancer ABC logo"></a>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://debbiesdream.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/debbies-dream-foundation.svg" alt="Debbie's Dream Foundation logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="http://ustoo.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-us-too.svg" alt="Us Too logo logo"></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.gicancersalliance.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/gi-cancers-alliance.png" alt="GI Cancers Alliance logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://ancan.org/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-answer-cancer-foundation.jpg" alt="Answer Cancer Foundation logo"></a>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://gastriccancer.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/gastric-cancer-foundation.png" alt="Gastric Cancer Foundation logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://malecare.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-malecare.png" alt="Malecare logo"></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.nostomachforcancer.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/no-stomach-for-cancer.png" alt="No Stomach for Cancer logo"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://prostatenetwork.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-network.svg" alt="Prostate Network logo"></a>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://stocan.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/hope-for-stomach-cancer.jpg" alt="Hope for Stomach Cancer"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://patientpower.info/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-patient-power.png" alt="Patient Power logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="http://bluecure.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-blue-cure.jpg" alt="Blue Cure logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://themenscancernetwork.com/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-men-cancer-network.jpg" alt="The Men's Cancer Network logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://vetsprostate.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-veterans-prostate-cancer-awareness.svg" alt="Veterans Prostate Cancer Awareness logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
+                        <a href="https://fans4thecure.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-fans-4-the-cure.png" alt="Fans for the Cure logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://facingourrisk.org/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-force.png" alt="Facing Our Risk of Cancer Empowered logo"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
+                        <a href="https://hrprostatehealth.com/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-prostate-health-forum.png" alt="Hampton Roads Prostate Health Forum logo"></a>
                     </div>
                 </div>
             </section>
@@ -189,15 +173,15 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
                     <span translate>
-                        Welcome.SixthBlock.TitlePt1
+                        Welcome.FifthBlock.TitlePt1
                     </span>
                     <br>
                     <span class="Color--study Semibold" translate>
-                        Welcome.SixthBlock.TitlePt2
+                        Welcome.FifthBlock.TitlePt2
                     </span>
                 </h1>
                 <p class="Message-text" translate>
-                    Welcome.SixthBlock.Text
+                    Welcome.FifthBlock.Text
                 </p>
             </section>
         </div>
