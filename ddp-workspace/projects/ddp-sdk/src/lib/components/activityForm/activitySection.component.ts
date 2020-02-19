@@ -8,7 +8,6 @@ import { ActivityInstitutionBlock } from '../../models/activity/activityInstitut
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
-import { AnswerValue } from './../../models/activity/answerValue';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -37,7 +36,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
-                                           (valueChanged)="handleChange($event)"
                                            [activityGuid]="activityGuid">
                     </ddp-conditional-block>
                 </div>
@@ -47,7 +45,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
                                            [activityGuid]="activityGuid"
-                                           (valueChanged)="handleChange($event)"
                                            (visibilityChanged)="updateVisibility($event)">
                     </ddp-activity-question>
                 </div>
@@ -78,7 +75,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                  [readonly]="readonly"
                                  [validationRequested]="validationRequested"
                                  [studyGuid]="studyGuid"
-                                 (valueChanged)="handleChange($event)"
                                  [activityGuid]="activityGuid">
                 </ddp-group-block>
             </div>
@@ -91,17 +87,12 @@ export class ActivitySectionComponent {
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
     @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
-    @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() addressComponentValidStatusChanged: EventEmitter<boolean> = new EventEmitter();
     @Output() institutionComponentValidationStatusChanged: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
 
     public updateVisibility(visibility: BlockVisibility[]): void {
         this.visibilityChanged.emit(visibility);
-    }
-
-    public handleChange(value: AnswerValue): void {
-        this.valueChanged.emit(value);
     }
 
     public isContent(block: ActivityBlock): block is ActivityContentBlock {
