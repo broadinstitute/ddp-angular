@@ -72,6 +72,11 @@ a:focus {
     clear: both;
 }
 
+.Left {
+    display: flex;
+    justify-content: flex-start;
+}
+
 // App Header
 .Header {
     position: fixed;
@@ -807,13 +812,6 @@ a:focus {
         position: absolute;
         right: 0;
         top: 0;
-    }
-}
-
-ul {
-    li.PageContent-text-list {
-        padding: 0 !important;
-        margin: 10px 0 !important;
     }
 }
 

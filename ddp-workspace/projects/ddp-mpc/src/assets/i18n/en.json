@@ -53,7 +53,84 @@
             "Text": "With your help, patients can be the driving force behind cancer research."
         }
     },
-    "DataRelease": {},
+    "DataRelease": {
+        "Title": "MPCproject Data",
+        "ViewDataButton": "VIEW THE MPCPROJECT DATA",
+        "MainText": {
+            "Section1": "The MPCproject has released publicly available datasets in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
+            "Section2": "We have focused our efforts on generating and releasing this data so that the entire research community can have access to it. As we generate and share more data over time, we anticipate that this will accelerate discoveries in metastatic and advanced prostate cancer.",
+            "Section3": "To everybody who is taking part in the MPCproject, we would like to extend our most sincere gratitude for your partnership that enables the creation of this data."
+        },
+        "InformationList": {
+            "Title": "Below, you will find the following information:",
+            "Item1": "Link to the MPCproject data",
+            "Item2": "Additional information about the data",
+            "Item3": "List of common terms used in this research",
+            "Item4": "Link to the methods used to generate this data",
+            "Text": "Questions about these data, including how to cite, can be directed to"
+        },
+        "BioPortal": {
+            "Title": "The MPCproject Data on cBioPortal",
+            "Link": "Visit cBioPortal to explore the MPCproject data"
+        },
+        "AdditionalInfoTitle": "Additional Information about the Genomic Data",
+        "Goal": {
+            "Title": "What is the goal of this data release?",
+            "Text": "The goal of this public data release is to share clinical, genomic, molecular, and patient-reported data on metastatic and advanced prostate cancer to accelerate discoveries and the development of new treatment strategies for metastatic and advanced prostate cancer. Our goal is to add new data to the collection as it is generated."
+        },
+        "Difference": {
+            "Title": "What makes this data different from what is found in existing studies?",
+            "Text": "The collection of data in this release is different for several reasons:",
+            "ReasonsList": {
+                "Item1": "All of the data has been generated through direct partnership with patients",
+                "Item2": "The MPCproject data combines genomic, clinical, and patient-reported data all in one place from metastatic and advanced prostate cancer patients",
+                "Item3": "Data is shared with the entire research community as soon as it is analyzed (e.g. pre-publication)",
+                "Item4": {
+                    "Main": "Data for every patient includes:",
+                    "SubItem1": "Demographic and diagnostic data",
+                    "SubItem2": "Treatment data, including all reported drugs given in the metastatic and/or advanced setting and the duration of that therapy",
+                    "SubItem3": "Patient-reported data from the MPCproject enrollment survey"
+                },
+                "Item5": {
+                    "Main": "In addition, patients have either:",
+                    "SubItem1": "Whole Exome Sequencing (WES) on a sample with the sample’s pathology data",
+                    "SubItem2": "Tumor fraction value derived from Ultra Low Pass Whole Genome Sequencing (ULP-WGS) performed on cell-free DNA (cfDNA) from blood samples"
+                }
+            }
+        },
+        "Additional": {
+            "Title": "Will the MPCproject generate and release additional data?",
+            "Text": "Yes, the MPCproject is an ongoing research initiative. The project will continue to enroll patients and request saliva, blood, and tissue samples indefinitely. Our goal is to release data as it is generated."
+        },
+        "DataIncluded": {
+            "Title": "What data elements are included?",
+            "Text": "Data is included for the following categories:",
+            "List": {
+                "Item1": {
+                    "Title": "Genomic Information",
+                    "Text": "Whole Exome Sequencing (WES) information is included for tumor samples, including mutations, small insertions/deletions, amplifications, and deletions."
+                },
+                "Item2": {
+                    "Title": "Medical Record (MedR): All information that was derived from a medical record is denoted with the prefix MedR",
+                    "Text": "Information about diagnosis and treatment was abstracted from patients’ medical records."
+                },
+                "Item3": {
+                    "Title": "Pathology Report (PATH): All information regarding pathology is denoted with the prefix PATH",
+                    "Text": "Detailed histologic information about each sample was abstracted from pathology reports associated with each sample."
+                },
+                "Item4": {
+                    "Title": "Patient-reported (PRD): All patient-reported data elements are denoted with the prefix PRD",
+                    "Text": "Every patient that registered for the study had the option of completing a 17-question survey about their experiences with metastatic and/or advanced prostate cancer. Twelve questions from this survey have been abstracted for inclusion. These responses have been modified and formatted to prevent individual identification without altering scientific utility."
+                }
+            }
+        },
+        "Resources": {
+            "Title": "Are there resources to define the terminology used in this data release?",
+            "TextPt1": "At the",
+            "TextPt2": "page is The National Cancer Institute’s comprehensive dictionary of clinical terms, as well as definitions of some common genomic terms.",
+            "Link": "bottom of this"
+        }
+    },
     "AboutUs": {},
     "MoreDetails": {},
     "Toolkit": {
