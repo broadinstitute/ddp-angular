@@ -50,8 +50,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
-                            (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
@@ -79,8 +78,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
-                            (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(3, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
 
@@ -93,8 +91,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
                                 (visibilityChanged)="updateVisibility($event)"
-                                (addressComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(4, $event)"
-                                (institutionComponentValidationStatusChanged)="updateEmbeddedComponentValidationStatus(5, $event)"
+                                (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                 (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
                     </ng-container>

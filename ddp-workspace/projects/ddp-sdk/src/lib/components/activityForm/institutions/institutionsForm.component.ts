@@ -68,7 +68,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
-    @Output() validationStatusChanged = new EventEmitter<boolean>();
+    @Output() validStatusChanged = new EventEmitter<boolean>();
     @Output() componentBusy = new EventEmitter<boolean>();
     public normalizedInstitutionType: string;
     public requestsInProgress = new BehaviorSubject<number>(1);
@@ -173,7 +173,7 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     public updateValidationStatus(): void {
         if (this.block.required) {
             const valid = this.outputAnswers.every(answer => this.isPhysicianFormFull(answer));
-            this.validationStatusChanged.emit(valid);
+            this.validStatusChanged.emit(valid);
         }
     }
 
