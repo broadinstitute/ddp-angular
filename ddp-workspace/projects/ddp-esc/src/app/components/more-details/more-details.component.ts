@@ -37,9 +37,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h2 class="PageContent-subtitle" translate>MoreDetails.HowProjectWorks.AboutYourself.Title</h2>
                         <p class="PageContent-text">
                             <span translate>MoreDetails.HowProjectWorks.AboutYourself.Text.Part1</span>
-                            <a routerLink="/count-me-in" class="Link">
-                                "<span translate>Toolkit.Common.Organization</span>"
-                            </a>,
+                            <a routerLink="/count-me-in" class="Link" translate>MoreDetails.HowProjectWorks.AboutYourself.Text.Link</a>,
                             <span translate>MoreDetails.HowProjectWorks.AboutYourself.Text.Part2</span>
                         </p>
 
@@ -81,7 +79,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                             <span translate>MoreDetails.FAQ.Conduct.Text.Part1</span>
                             <a [href]="countMeInUrl" class="Link Italic" target="_blank" translate>Toolkit.Common.Organization</a>
                             <span translate>MoreDetails.FAQ.Conduct.Text.Part2</span>
-                            <a [href]="countMeInUrl" class="Link" target="_blank" translate>MoreDetails.FAQ.Conduct.Text.Part3</a>
+                            <a [href]="countMeInUrl" class="Link" target="_blank" translate>MoreDetails.FAQ.Conduct.Text.Part3</a>.
                         </p>
 
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Involved.Question</h2>
@@ -117,9 +115,9 @@ import { ToolkitConfigurationService } from 'toolkit';
                         </p>
                         <p class="PageContent-text">
                             <span translate>MoreDetails.FAQ.OtherQuestions.Section2.TextPt1</span>
-                            <a class="Link" [href]="infoEmailHref"> {{ infoEmail }} </a>
+                            <a class="Link" [href]="infoEmailHref">{{ infoEmail }}</a>
                             <span translate>MoreDetails.FAQ.OtherQuestions.Section2.TextPt2</span>
-                            <a class="Link" [href]="phoneHref"> {{ phone }}</a>.
+                            <a class="Link" [href]="phoneHref">{{phone}}</a>.
                         </p>
                     </section>
                 </div>
