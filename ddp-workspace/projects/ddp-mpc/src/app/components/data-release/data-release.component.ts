@@ -6,7 +6,6 @@ import { WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'data-release',
-    preserveWhitespaces: true,
     styles: [`
     .PageContent-title, .PageContent-subtitle {
         color: black;
@@ -142,7 +141,7 @@ import { WindowRef } from 'ddp-sdk';
                                 </h2>
                                 <p class="PageContent-text">
                                     <span translate>DataRelease.Cite.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
+                                    <a [href]="dataEmailHref" class="Link">{{ dataEmail }}</a>
                                     <span translate>DataRelease.Cite.TextPt2</span>
                                 </p>
                                 <h2 class="PageContent-subtitle" translate>
@@ -212,7 +211,7 @@ import { WindowRef } from 'ddp-sdk';
                                 </div>
                                 <p class="PageContent-text">
                                     <span translate>DataRelease.Glossary.Additional.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
+                                    <a [href]="dataEmailHref" class="Link">{{ dataEmail }}</a>
                                     <span translate>DataRelease.Glossary.Additional.TextPt2</span>
                                 </p>
                             </div>
