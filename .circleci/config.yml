@@ -7,12 +7,12 @@ references:
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-server-build:02-14-2020A
+      - image: broadinstitute/study-server-build:02-20-2020A
     working_directory: ~/repo
 
   nightly-executor:
     docker:
-      - image: broadinstitute/study-server-build:02-14-2020A
+      - image: broadinstitute/study-server-build:02-20-2020A
     working_directory: ~/repo
 
 commands:
@@ -28,32 +28,13 @@ commands:
       - checkout:
           path: ~/repo
       - run:
-          name: <<parameters.study_key>> update interpolated env vars
-          command: |
-            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
-            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: <<parameters.study_key>> show pipeline vars
-          command: |
-            echo "pipeline.id << pipeline.id >>"
-            echo "pipeline.number	 << pipeline.number	 >>"
-            echo "pipeline.project.git_url << pipeline.project.git_url >>"
-            echo "pipeline.project.type << pipeline.project.type >>"
-            echo "pipeline.git.tag << pipeline.git.tag >>"
-            echo "pipeline.git.branch << pipeline.git.branch >>"
-            echo "pipeline.git.revision << pipeline.git.revision >>"
-            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
-      - run:
           name: <<parameters.study_key>> determine deployment environment
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
               ;;
-              appengine_deployment)
+              angular-appengine-deployment-ctd)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -77,6 +58,27 @@ commands:
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
             source $BASH_ENV
+      - run:
+          name: <<parameters.study_key>> update interpolated env vars
+          command: |
+            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+            echo 'export GCP_SERVICE_KEY=`./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf`' >> $BASH_ENV
+            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
+            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: <<parameters.study_key>> show pipeline vars
+          command: |
+            echo "pipeline.id << pipeline.id >>"
+            echo "pipeline.number	 << pipeline.number	 >>"
+            echo "pipeline.project.git_url << pipeline.project.git_url >>"
+            echo "pipeline.project.type << pipeline.project.type >>"
+            echo "pipeline.git.tag << pipeline.git.tag >>"
+            echo "pipeline.git.branch << pipeline.git.branch >>"
+            echo "pipeline.git.revision << pipeline.git.revision >>"
+            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
+
       - run:
           name: <<parameters.study_key>> show environment variables
           command: env
@@ -105,9 +107,9 @@ commands:
       - run:
           name: <<parameters.study_key>> setup gcloud context
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            echo $GCP_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
-            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: <<parameters.study_key>> deploy to GAE
           command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
