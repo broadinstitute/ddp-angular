@@ -41,6 +41,13 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
                                 </button>
                             </div>
+                            <div class="row topMarginMedium Left">
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
+                                        (click)="scrollTo(dataBrowser)"
+                                        [innerHTML]="'Toolkit.DataRelease.ViewDataBrowser' | translate">
+                                </button>
+                            </div>
                             <div class="row topMarginMedium">
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.MainText.Section1
@@ -189,6 +196,45 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                     <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
                                     <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
                                 </p>
+                                <h2 #dataBrowser class="PageContent-title" translate>
+                                    Toolkit.DataRelease.DataBrowser.Title
+                                </h2>
+                                <p class="PageContent-text" translate>
+                                    Toolkit.DataRelease.DataBrowser.Main.Intro
+                                </p>
+                                <p class="PageContent-text NoMargin" translate>
+                                    Toolkit.DataRelease.DataBrowser.Main.List.Intro
+                                </p>
+                                <ul class="PageContent-ul">
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <a href="AboutYouSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.DataBrowser.Main.List.Item1</a>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <a href="FollowUpSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.DataBrowser.Main.List.Item2</a>
+                                    </li>
+                                </ul>
+                                <h2 class="PageContent-subtitle" translate>
+                                    Toolkit.DataRelease.DataBrowser.HowToUse.Title
+                                </h2>
+                                <ul class="PageContent-ul">
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item1</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item2</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item3</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item4</span>
+                                    </li>
+                                </ul>
+                                <p class="PageContent-text">
+                                    <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.Text1</span>
+                                    <a [href]="dataEmailHref" class="Link">{{ dataEmail }}</a>.
+                                </p>
+                                <p class="PageContent-text" [innerHtml]="'Toolkit.DataRelease.DataBrowser.HowToUse.Text2' | translate"></p>
                             </div>
                         </section>
                     </div>
