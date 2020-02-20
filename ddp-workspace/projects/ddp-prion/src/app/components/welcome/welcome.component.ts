@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventCategories, AnalyticsEventActions, AnalyticsEventsService, Auth0AdapterService, BrowserContentService, GoogleAnalyticsEventService, WindowRef } from 'ddp-sdk';
+import {
+  Auth0AdapterService,
+  BrowserContentService,
+  GoogleAnalytics,
+  GoogleAnalyticsEventsService,
+  WindowRef
+} from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
