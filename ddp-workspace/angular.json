@@ -1046,6 +1046,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-esc/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-esc/output-config/",
+                "output": "assets/config"
               }
             ],
             "styles": [
