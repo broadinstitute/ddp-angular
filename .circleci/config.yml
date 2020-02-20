@@ -159,6 +159,7 @@ workflows:
             branches:
               only:
                 - develop
+                - angular-appengine-deployment-ctd
       - angio:
           filters:
             branches:
