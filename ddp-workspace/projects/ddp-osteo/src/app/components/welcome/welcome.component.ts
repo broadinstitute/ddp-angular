@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
-import { WindowRef } from 'ddp-sdk';
+import { WindowRef, GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -19,6 +19,7 @@ export class WelcomeComponent implements OnInit {
     private headerConfig: HeaderConfigurationService,
     private window: WindowRef,
     private communicationService: CommunicationService,
+    private analytics: GoogleAnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -39,6 +40,14 @@ export class WelcomeComponent implements OnInit {
 
   public joinMailingList(): void {
     this.communicationService.openJoinDialog();
+  }
+
+  public sendSocialMediaAnalytics(event: string): void {
+    this.analytics.emitCustomEvent(GoogleAnalytics.Social, event);
+  }
+
+  public sendCountMeInAnalytics(): void {
+    this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromMainPage);
   }
 
   private get getRealHeaderHeight(): number {
