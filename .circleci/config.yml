@@ -63,8 +63,6 @@ commands:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
-            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: <<parameters.study_key>> show pipeline vars
