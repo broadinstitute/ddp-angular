@@ -54,6 +54,7 @@ toolkitConfig.infoEmail = 'info@mpcproject.org';
 toolkitConfig.dataEmail = 'data@mpcproject.org'
 toolkitConfig.twitterAccountId = 'PrCaProject';
 toolkitConfig.facebookGroupId = 'Prostate-Cancer-Project-1828647940721720';
+toolkitConfig.cBioPortalLink = 'http://www.cbioportal.org/study/summary?id=prad_mpcproject_2018';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 toolkitConfig.showDataRelease = true;
 toolkitConfig.showInfoForPhysicians = true;

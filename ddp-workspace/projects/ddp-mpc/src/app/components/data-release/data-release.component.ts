@@ -151,12 +151,6 @@ import { WindowRef } from 'ddp-sdk';
                                     DataRelease.Unknown.Text
                                 </p>
                                 <h2 class="PageContent-subtitle" translate>
-                                    DataRelease.Samples.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    DataRelease.Samples.Text
-                                </p>
-                                <h2 class="PageContent-subtitle" translate>
                                     DataRelease.Sequence.Title
                                 </h2>
                                 <p class="PageContent-text" translate>
@@ -165,9 +159,7 @@ import { WindowRef } from 'ddp-sdk';
                                 <h2 class="PageContent-subtitle" translate>
                                     DataRelease.Inform.Title
                                 </h2>
-                                <p class="PageContent-text" translate>
-                                    DataRelease.Inform.Text
-                                </p>
+                                <p class="PageContent-text" [innerHTML]="'DataRelease.Inform.Text' | translate"></p>
                                 <h2 class="PageContent-title" translate>
                                     DataRelease.Appendices.Title
                                 </h2>

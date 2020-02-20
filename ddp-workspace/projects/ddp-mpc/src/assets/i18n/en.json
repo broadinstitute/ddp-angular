@@ -129,6 +129,56 @@
             "TextPt1": "At the",
             "TextPt2": "page is The National Cancer Institute’s comprehensive dictionary of clinical terms, as well as definitions of some common genomic terms.",
             "Link": "bottom of this"
+        },
+        "Cite": {
+            "Title": "How should this data be cited?",
+            "TextPt1": "We encourage use of this data for your research studies and publications. To help us track data usage, we kindly ask that you send us an email at",
+            "TextPt2": "to let us know whenever you have published or presented work using or referencing this dataset. We also request that you please include the following attribution: \"The results included here include the use of data from The Metastatic Prostate Cancer Project (https://mpcproject.org/), a project of Count Me In (https://joincountmein.org/).\""
+        },
+        "Unknown": {
+            "Title": "Why are some attributes “Unknown” for some cases and not for others?",
+            "Text": "All of the clinical information that is gathered comes directly from medical records or pathology reports. If the complete report or record that was received did not explicitly contain the information, the field was marked as “Unknown” in order to ensure accuracy."
+        },
+        "Sequence": {
+            "Title": "Will everyone who registers for this study have their tumor sequenced?",
+            "Text": "As of December 2019, over 910 men with metastatic and/or advanced prostate cancer have registered for the project. Of these registrants, over 700 have provided consent. Approximately 500 patients have sent in saliva samples and over 350 patients have sent in blood samples. Medical records and tumor samples are being requested for everyone who has sent in saliva and/or blood and who lives in the USA or Canada. Obtaining medical records and tissue samples is a manual process involving faxes, phone calls, and additional follow up. The ultimate goal is to obtain medical records and tumors from as many consenting patients as possible."
+        },
+        "Inform": {
+            "Title": "Can I use this data to inform my clinical care?",
+            "Text": "This data is intended to be used <span class=\"Semibold\">for research purposes only</span>. Genomic data included in this study is generated in a research lab, not in a clinical lab. All annotations have been de-identified. Therefore, this data cannot be used to inform clinical decision-making. Some of the data has been intentionally altered to protect confidentiality in a way that does not affect data integrity (for example, Age at Diagnosis has been grouped)."
+        },
+        "Appendices": {
+            "Title": "Appendices",
+            "AppendicesList": {
+                "Item1": {
+                    "Link": "Methods",
+                    "Text": "Detailed methods for how these data were generated and analyzed."
+                },
+                "Item2": {
+                    "Link": "About You Survey",
+                    "Text": "The 17-question enrollment survey."
+                },
+                "Item3": {
+                    "Link": "Consent and Release",
+                    "Text": "Forms documenting informed consent and contact information."
+                },
+                "Item4": {
+                    "Link": "Saliva Sample Instructions",
+                    "Text": "Included in each saliva kit."
+                },
+                "Item5": {
+                    "Link": "Blood Sample Instructions",
+                    "Text": "Included in each blood sample kit."
+                }
+            }
+        },
+        "Glossary": {
+            "Title": "Glossary",
+            "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
+            "Additional": {
+                "TextPt1": "If there are additional terms that you would like defined that are not included in the National Cancer Institute Dictionary, please send an email to",
+                "TextPt2": "and include “New Glossary Term” in your email subject line. We will be creating a glossary to define some of the genomics terms seen on cBioPortal."
+            }
         }
     },
     "AboutUs": {},
