@@ -50,6 +50,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
 COPY --from=dsdetoolbox /usr/local/bin/consul-template /usr/local/bin/consul-template
 COPY --from=dsdetoolbox /etc/consul-template/config/config.json /etc/consul-template/config/config.json
 COPY --from=dsdetoolbox /usr/local/bin/vault /usr/local/bin/vault
+ENV VAULT_ADDR https://clotho.broadinstitute.org:8200
 
 
 RUN apt-get update && apt-get install -y \
