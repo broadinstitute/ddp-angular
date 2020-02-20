@@ -62,19 +62,22 @@
                 </ul>
                 <ul class="social-media">
                     <li class="social-media__item">
-                        <a class="social-media__link" [href]="twitterUrl" target="_blank">
+                        <a (click)="sendSocialMediaAnalytics('twitter')" class="social-media__link" [href]="twitterUrl"
+                            target="_blank">
                             <img class="social-media__logo" lazy-resource src="assets/images/twitter-small.png"
                                 [alt]="'Common.Alts.Twitter' | translate">
                         </a>
                     </li>
                     <li class="social-media__item">
-                        <a class="social-media__link" [href]="facebookUrl" target="_blank">
+                        <a (click)="sendSocialMediaAnalytics('facebook')" class="social-media__link"
+                            [href]="facebookUrl" target="_blank">
                             <img class="social-media__logo" lazy-resource src="assets/images/facebook-small.png"
                                 [alt]="'Common.Alts.Facebook' | translate">
                         </a>
                     </li>
                     <li>
-                        <a class="social-media__link" [href]="instagramUrl" target="_blank">
+                        <a (click)="sendSocialMediaAnalytics('instagram')" class="social-media__link"
+                            [href]="instagramUrl" target="_blank">
                             <img class="social-media__logo" lazy-resource src="assets/images/instagram-small.png"
                                 [alt]="'Common.Alts.Instagram' | translate">
                         </a>

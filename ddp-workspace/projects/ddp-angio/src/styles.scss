@@ -914,6 +914,7 @@ ul {
     transition: all 0.3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     background-color: mat-color($app-theme, 600);
+    min-width: unset !important;
 }
 
 .ButtonFilled:focus {
@@ -1347,7 +1348,7 @@ ul {
 }
 
 .ErrorMessage a {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 .ErrorMessage {
@@ -1360,21 +1361,21 @@ ul {
 }
 
 .ErrorMessage a {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 .ddp-activity-validation {
-  .ErrorMessageList {
-    list-style-type: square;
-  }
+    .ErrorMessageList {
+        list-style-type: square;
+    }
 
-  .ErrorMessageItem {
-    font-size: 0.9rem;
-    color: mat-color($app-theme, 1200);
-    font-weight: 300;
-    margin: 10px 0 10px 0;
-    padding: 0 0 0 0;
-  }
+    .ErrorMessageItem {
+        font-size: 0.9rem;
+        color: mat-color($app-theme, 1200);
+        font-weight: 300;
+        margin: 10px 0 10px 0;
+        padding: 0 0 0 0;
+    }
 }
 
 .JoinDialogFiled {
