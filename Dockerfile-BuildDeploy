@@ -54,6 +54,7 @@ COPY --from=dsdetoolbox /usr/local/bin/vault /usr/local/bin/vault
 
 RUN apt-get update && apt-get install -y \
     ruby:amd64=1:2.5.1 \
+    jq \
    && rm -rf /var/lib/apt/lists/*
 
 
