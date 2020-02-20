@@ -21,5 +21,4 @@ export class ValidationMessage {
   public isArrayOfMessages(): boolean {
     return _.isArray(this.message);
   }
-
 }

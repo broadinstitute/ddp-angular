@@ -256,23 +256,23 @@
             "Title": "My Dashboard",
             "Text": "The dashboard below describes each Prion Registry form and its status."
         },
-      "DatePicker": {
-        "Day": "Choose day...",
-        "Month": "Choose month...",
-        "Year": "Choose year...",
-        "January": "January",
-        "February": "February",
-        "March": "March",
-        "April": "April",
-        "May": "May",
-        "June": "June",
-        "July": "July",
-        "August": "August",
-        "September": "September",
-        "October": "October",
-        "November": "November",
-        "December": "December"
-      },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
         "UserMenu": {
             "DashboardButton": "Dashboard",
             "SignOutButton": "Sign Out"
@@ -287,6 +287,16 @@
         },
         "EmailEntry": {
             "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }
