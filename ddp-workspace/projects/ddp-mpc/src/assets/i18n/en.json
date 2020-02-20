@@ -182,7 +182,111 @@
         }
     },
     "AboutUs": {},
-    "MoreDetails": {},
+    "MoreDetails": {
+        "Title": "Learn more about the Metastatic Prostate Cancer Project",
+        "MainText": {
+            "Pt1": "The Metastatic Prostate Cancer Project takes a new approach to cancer research in which researchers partner directly with men with metastatic and/or advanced prostate cancer, who share their samples and clinical information in order to speed up important discoveries. The project is part of",
+            "Pt2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+            "Pt3": "is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. Our goal is to reach out to men with metastatic and/or advanced prostate cancer around the country in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute by allowing men to participate in these studies regardless of where they live."
+        },
+        "HowProjectWorks": {
+            "Title": "Here's how the project works:",
+            "AboutYourself": {
+                "Title": "A. Tell us about yourself.",
+                "Text": "Click \"Count Me In\" and complete a simple online form to tell us about yourself and your cancer. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your experiences with prostate cancer and couple that information with what we learn from the DNA in your tumor."
+            },
+            "Permission": {
+                "Title": "B. Give us permission to collect your samples and data.",
+                "Text": "After you fill out the initial survey, we will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and some of your stored tumor tissue. We’ll also ask you to tell us where you received your medical care so we can contact your doctors and hospitals."
+            },
+            "Request": {
+                "Title": "C. We’ll find and request your records and tissue.",
+                "Text": "Our team will contact your doctors and hospitals to obtain copies of your medical records and a portion of your stored tumor samples. We will ask pathology departments to share only a part of the tumor tissue, and not to share anything with us that might be needed for clinical care."
+            },
+            "SendUs": {
+                "Title": "D. Provide us with a saliva and/or blood sample.",
+                "Text": "We’ll also send you a simple kit to collect a saliva sample, which will contain \"healthy\" DNA that can be compared with DNA from your tumor sample. We may also send you a simple kit to collect a blood sample. We ask that you bring in a blood tube to your health care providers office and ask them to draw a sample, which may contain DNA from your tumor. This may help us to understand the genomics of your cancer from a simple blood draw."
+            },
+            "Analyze": {
+                "Title": "E. We’ll analyze your tumor and medical data.",
+                "Text": "We will perform cutting-edge, comprehensive genomic analyses on your tumor and saliva sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your medical record. Any information that would make it easy to identify you as an individual will be removed from all genomic and clinical data."
+            },
+            "Share": {
+                "Title": "F. We’ll share the data with other researchers.",
+                "Text": "Once potentially identifying information has been removed, our database of genomic and medical information (with your identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand prostate cancer and develop new therapies."
+            },
+            "Learn": {
+                "Title": "G. Learn with us along the way.",
+                "Text": "Throughout the project, we will provide all patients who say \"Count Me In\" with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+            }
+        },
+        "FAQ": {
+            "Title": "Frequently Asked Questions",
+            "Goal": {
+                "Question": "1. What is the goal of this project?",
+                "Section1": "This project will connect men with metastatic and/or advanced prostate cancer across the country with scientists using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle. While prostate cancer is very common, few men have the ability to contribute their tumor samples and clinical data to cancer research, largely because they do not have a way of doing so.",
+                "Section2": "We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity."
+            },
+            "Research": {
+                "Question": "2. What does it mean that you are conducting genomic and molecular research as part of this project?",
+                "Section1": "This study involves genomic and molecular research to better define the genes and molecules that are important in esophageal and gastric/stomach cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified and have led to the development of new drugs that specifically target those alterations. However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of additional cancer therapies and cures.",
+                "Section2": "In order to define these gene alterations in your cancer, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
+            },
+            "WhyBoth": {
+                "Question": "3. Why are you studying both esophageal and gastric/stomach cancer?",
+                "Section1": "In the United States, the most common anatomic location where we see esophageal and gastric/stomach cancer is where the stomach and esophagus meet (often referred to as the gastroesophageal junction or GE Junction). In addition to cancers that arise at this junction, cancers that start in the esophagus may spread to the stomach, and cancers that start in the stomach may spread to the esophagus. Additionally, recent scientific studies indicate that these cancers are strikingly similar on the molecular level. By studying these cancers together we can further compare and contrast them to determine to what extent they have distinct biologic and clinical features."
+            },
+            "Conduct": {
+                "Question": "4. Are there any costs for me to participate?",
+                "Text": {
+                    "Part1": "This project is being conducted by",
+                    "Part2": "and a growing coalition of non-profit advocacy partners. Our team — led by Dr. Adam Bass, a physician and cancer researcher— is made up of cancer researchers, physicians, clinical specialists, and patient advocates.",
+                    "Part3": "Learn more about us here"
+                }
+            },
+            "Involved": {
+                "Question": "5. How have patients been involved in the design of this project?",
+                "Section1": "We have worked closely with patients and patient advocates within the esophageal and gastric/stomach cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
+                "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, ECAN, ECAA, DeGregorio Family Foundation, Debbie's Dream Foundation, GI Cancers Alliance, Gastric Cancer Foundation, No Stomach for Cancer, and Hope for Stomach Cancer."
+            },
+            "Costs": {
+                "Question": "6. Are there any costs for me to participate?",
+                "Text": "No, there are no costs to you. All associated costs related to acquiring medical records and tissue will be covered by the study."
+            },
+            "TissueAndMedicalRecords": {
+                "Question": "7. After I provide my information, will I be asked to share my tumor tissue and medical records?",
+                "Text": "We will be asking for informed consent from all patients with esophageal and gastric/stomach cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Esophageal and Stomach Cancer Project to obtain and analyze your stored tumor tissue and medical records, should you choose to share access to stored tumor tissue. We will keep you informed about our progress along the way."
+            },
+            "TissueSample": {
+                "Question": "8. If I am asked to share a tissue sample, will my tissue be exhausted?",
+                "Text": "If you do elect to share tissue as part of the study, we will take every measure to ensure that your samples are not exhausted as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they send only a small portion to us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us, and we will notify you that we did not use your samples for this reason. You may also choose to provide a blood sample in addition to, or instead of tissue samples if you have no tissue available or elect not to share your stored tissue samples."
+            },
+            "ReceiveBack": {
+                "Question": "9. If my tissue, blood, and medical records are analyzed, will I receive any information back from this study?",
+                "Text": "You will not receive individual information from this study. Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+            },
+            "Profit": {
+                "Question": "10. Is this research being conducted for profit?",
+                "Text": "No. This project is a not-for-profit, academic research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in a way that protects your personal information in order to fuel discoveries."
+            },
+            "Info": {
+                "Question": "11. What information can I bring to my medical team so that I can discuss this study with them?",
+                "Text": "This provided PDF is designed to educate your medical team about the project:",
+                "Link": "Generate PDF for physicians"
+            },
+            "OtherQuestions": {
+                "Title": "Do you have other questions?",
+                "Section1": {
+                    "Text": "You can access a 1 page printable information sheet about the project linked here:",
+                    "Link": "The Metastatic Prostate Cancer Project"
+                },
+                "Section2": {
+                    "TextPt1": "If you have any other questions, please email us at",
+                    "TextPt2": "or call us at"
+                }
+            }
+        }
+    },
     "Toolkit": {
         "Common": {
             "Organization": "Count Me In"
