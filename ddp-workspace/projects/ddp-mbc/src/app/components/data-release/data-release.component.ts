@@ -58,7 +58,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.MainText.Section3
                                 </p>
-                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.InformationList.Title</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.InformationList.Title</p>
                                 <ul class="PageContent-ul">
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item1</li>
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item2</li>
@@ -191,11 +191,6 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>
-                                <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
-                                </p>
                                 <h2 #dataBrowser class="PageContent-title" translate>
                                     Toolkit.DataRelease.DataBrowser.Title
                                 </h2>

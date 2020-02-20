@@ -117,7 +117,7 @@
         },
         "DataRelease": {
             "Title": "MBCproject Data",
-            "ViewDataButton": "VIEW THE MBCPROJECT DATA",
+            "ViewDataButton": "VIEW MBCPROJECT DATA ON CBIOPORTAL",
             "ViewDataBrowser": "VIEW MBCPROJECT PATIENT DATA BROWSER",
             "MainText": {
                 "Section1": "One key goal of the MBCproject is to enable scientific discoveries and the development of new treatment strategies for metastatic breast cancer by widely sharing clinical, genomic, molecular, and patient-reported data.",
@@ -222,11 +222,7 @@
             },
             "Glossary": {
                 "Title": "Glossary",
-                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
-                "Additional": {
-                    "TextPt1": "If there are additional terms that you would like defined that are not included in the National Cancer Institute Dictionary, please send an email to",
-                    "TextPt2": "and include “New Glossary Term:” in your email subject line. We will be creating a glossary to define some of the genomics terms seen on cBioPortal."
-                }
+                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
             },
             "DataBrowser": {
                 "Title": "The Metastatic Breast Cancer Project Patient Data Browser",
