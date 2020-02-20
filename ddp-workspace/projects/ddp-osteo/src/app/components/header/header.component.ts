@@ -1,7 +1,7 @@
 import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { WindowRef, SessionMementoService } from 'ddp-sdk';
+import { WindowRef, SessionMementoService, GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService } from 'toolkit';
 
 @Component({
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private communicationService: CommunicationService,
     public headerConfig: HeaderConfigurationService,
+    private analytics: GoogleAnalyticsEventsService,
     @Inject(DOCUMENT) private document: any) { }
 
   public ngOnInit(): void {
@@ -39,6 +40,10 @@ export class HeaderComponent implements OnInit {
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
+  }
+
+  public sendAnalytics(): void {
+    this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromHeader);
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

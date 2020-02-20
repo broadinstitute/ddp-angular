@@ -1,11 +1,15 @@
 export enum GoogleAnalytics {
     FromHeader = 'fromHeader',
+    FromMainPage = 'fromMainPage',
     FromFAQ = 'fromFAQ',
     ClickedCountMeIn = 'clickedCountMeIn',
     Social = 'social',
     MailingList = 'mailingList',
     Join = 'join',
-    CountMeIn = 'countMeIn',
-    Submit = 'submit',
+    CloseSurvey = 'closeSurvey',
     SubmitSurvey = 'submitSurvey',
+    Dashboard = 'dashboard',
+    Authentication = 'authentication',
+    Login = 'user authenticated',
+    Logout = 'user logged out'
 }
