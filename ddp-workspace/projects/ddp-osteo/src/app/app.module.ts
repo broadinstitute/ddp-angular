@@ -68,7 +68,6 @@ tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
-tkCfg.internationalPatientsUrl = 'international-patients';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
 tkCfg.twitterAccountId = 'the_osproject';
