@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from 'ddp-sdk';
+import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleAnalytics } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
@@ -172,7 +172,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/SarcomaFoundationOfAmerica-logo.svg" src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
+                        <a href="http://www.degregorio.org/wp/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/degregorio-family-foundation.jpg" alt="DeGregorio Family Foundation logo"></a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
                         <a href="https://debbiesdream.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/debbies-dream-foundation.svg" alt="Debbie's Dream Foundation logo"></a>
@@ -270,6 +270,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent('clickedCountMeIn', 'fromMainPage');
+        this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromMainPage);
     }
 }

@@ -95,3 +95,6 @@ node_modules/
 # maven test results
 surefire-reports/
 checkstyle-result.xml
+
+#configuration info
+output-config/
