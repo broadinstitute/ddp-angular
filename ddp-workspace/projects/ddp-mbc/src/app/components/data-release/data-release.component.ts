@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
