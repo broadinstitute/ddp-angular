@@ -236,10 +236,12 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </article>
-        <div class="tableau-iframe">
-            <iframe align="middle" scrolling="yes" allowfullscreen="" frameborder="0" [width]="iframeWidth" [height]="iframeHeight" src="https://public.tableau.com/views/MBCprojectPatientReportedDataBrowser/Dashboard22?:embed=y&:display_count=yes&:origin=viz_share_link&:showVizHome=no&:embed=true">
-            </iframe>
-        </div>
+        <article>
+            <div class="tableau-iframe">
+                <iframe align="middle" scrolling="yes" allowfullscreen="" frameborder="0" [width]="iframeWidth" [height]="iframeHeight" src="https://public.tableau.com/views/MBCprojectPatientReportedDataBrowser/Dashboard22?:embed=y&:display_count=yes&:origin=viz_share_link&:showVizHome=no&:embed=true">
+                </iframe>
+            </div>
+        </article>
     </div>`
 })
 export class DataReleaseComponent implements OnInit {
