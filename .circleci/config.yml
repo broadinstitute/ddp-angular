@@ -147,6 +147,14 @@ jobs:
           study_key: mbc
           study_guid: cmi-mbc
 
+  esc:
+    executor:
+      name: commit-executor
+    steps:
+      - build-and-deploy-study:
+          study_key: esc
+          study_guid: cmi-esc
+
 workflows:
   version: 2
   build-deploy:
@@ -172,6 +180,11 @@ workflows:
             branches:
               only:
                 - develop
+      - esc:
+          filters:
+            branches:
+              only:
+                - DDP-4382_esc-migration
   nightly:
     # run a build on develop using --prod --aot as an early warning for prod/aot issues
 
