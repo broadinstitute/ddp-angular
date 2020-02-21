@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
@@ -29,7 +29,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
             </div>
         </div>
 
-        <article class="PageContent">
+        <article class="PageContent PageContent-release">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -236,12 +236,18 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </article>
+        <div class="tableau-iframe">
+            <iframe align="middle" scrolling="yes" allowfullscreen="" frameborder="0" [width]="iframeWidth" [height]="iframeHeight" src="https://public.tableau.com/views/MBCprojectPatientReportedDataBrowser/Dashboard22?:embed=y&:display_count=yes&:origin=viz_share_link&:showVizHome=no&:embed=true">
+            </iframe>
+        </div>
     </div>`
 })
 export class DataReleaseComponent implements OnInit {
     public dataEmail: string;
     public infoEmail: string;
     public dataEmailHref: string;
+    public iframeWidth: number;
+    public iframeHeight: number;
 
     constructor(private dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
@@ -250,6 +256,8 @@ export class DataReleaseComponent implements OnInit {
         this.dataEmail = this.toolkitConfiguration.dataEmail;
         this.infoEmail = this.toolkitConfiguration.infoEmail;
         this.dataEmailHref = `mailto:${this.toolkitConfiguration.dataEmail}`;
+        this.iframeWidth = this.isMobile ? 400 : 1200;
+        this.iframeHeight = this.isMobile ? 300 : 830;
     }
 
     public scrollTo(target): void {
@@ -265,5 +273,9 @@ export class DataReleaseComponent implements OnInit {
             autoFocus: false,
             scrollStrategy: new NoopScrollStrategy()
         });
+    }
+
+    public get isMobile(): boolean {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 }
