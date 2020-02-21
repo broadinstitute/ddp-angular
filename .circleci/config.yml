@@ -56,6 +56,9 @@ commands:
               appengine_deployment)
                 DEPLOY_ENV=dev
               ;;
+              DDP-4382_esc-migration)
+                DEPLOY_ENV=dev
+              ;;
               test)
                 DEPLOY_ENV=test
                 NG_BUILD_OPTS=--prod --aot
