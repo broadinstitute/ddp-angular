@@ -40,7 +40,7 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
           result = !this.serverValidationMessages || this.serverValidationMessages.length === 0;
           for (const validator of this.validators) {
                 result = result && validator.recalculate();
-            }
+          }
         }
         return result;
     }

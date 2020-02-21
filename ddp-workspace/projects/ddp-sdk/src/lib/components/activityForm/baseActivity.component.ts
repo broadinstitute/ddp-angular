@@ -29,7 +29,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
     @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
-    protected embeddedComponentValidStatusChanged = new Subject<boolean>();
+    protected embeddedComponentsValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
     protected workflow: WorkflowServiceAgent;
     protected submissionManager: SubmissionManager;
@@ -106,7 +106,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                             map(() => this.model.validate()),
                             // let's start with whatever it is the initial state of the form
                             startWith(this.model.validate())),
-                        this.embeddedComponentValidStatusChanged.asObservable().pipe(startWith(true)))
+                        this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
                         .pipe(
                             map(status => status[0] && status[1]),
                             delay(1)

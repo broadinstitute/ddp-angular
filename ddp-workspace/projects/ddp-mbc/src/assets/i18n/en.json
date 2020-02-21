@@ -280,25 +280,6 @@
                 "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
                 "LoadingError": "We're sorry, but an error has occurred."
             },
-            "ResendEmail": {
-                "InitialForm": {
-                    "Title": "Resend Email",
-                    "Text": "Enter your email below and we'll send you a link so that you can complete your questionnaire.",
-                    "EmailField": {
-                        "Placeholder": "Email Address *",
-                        "Error": "Please enter a valid Email Address"
-                    },
-                    "LoadingError": "We're sorry, but an error has occurred.",
-                    "CancelButton": "CANCEL",
-                    "SubmitButton": "SEND EMAIL"
-                },
-                "ThankYouForm": {
-                    "Title": "Thank you!",
-                    "Text": "We've sent your information to",
-                    "Text2": "If you have any questions about your status in the project, please email ",
-                    "SubmitButton": "OK"
-                }
-            },
             "SessionWillExpire": {
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
@@ -564,6 +545,16 @@
         },
         "EmailEntry": {
             "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }
