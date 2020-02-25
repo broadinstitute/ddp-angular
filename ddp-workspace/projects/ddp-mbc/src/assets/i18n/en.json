@@ -16,7 +16,7 @@
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
         },
         "Footer": {
             "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",

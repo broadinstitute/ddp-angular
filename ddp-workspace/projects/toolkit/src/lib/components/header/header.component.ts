@@ -46,8 +46,8 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, BrowserContentService, W
             <li *ngIf="showButtons" class="Header-navItem">
                 <span [routerLink]="unsupportedBrowser ? null : '/count-me-in'"
                       (click)="clickCountMeIn()"
-                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}" translate>
-                    Toolkit.Header.CountMeIn
+                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}" 
+                      [innerHTML]="'Toolkit.Header.CountMeIn' | translate">
                 </span>
             </li>
             <li class="Header-navItem" fxHide="false" fxHide.gt-xs>
