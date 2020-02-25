@@ -133,7 +133,7 @@ commands:
       - run:
           name: <<parameters.study_key>> ng build
           command: |
-            ANGULAR_PROJECT_NAME="ddp-${<< parameters.study_key >>}"
+            ANGULAR_PROJECT_NAME=ddp-<< parameters.study_key >>}
             ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
   store-app-build:
