@@ -228,50 +228,40 @@
                 "Section2": "We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity."
             },
             "Research": {
-                "Question": "2. What does it mean that you are conducting genomic and molecular research as part of this project?",
-                "Section1": "This study involves genomic and molecular research to better define the genes and molecules that are important in esophageal and gastric/stomach cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified and have led to the development of new drugs that specifically target those alterations. However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of additional cancer therapies and cures.",
-                "Section2": "In order to define these gene alterations in your cancer, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
-            },
-            "WhyBoth": {
-                "Question": "3. Why are you studying both esophageal and gastric/stomach cancer?",
-                "Section1": "In the United States, the most common anatomic location where we see esophageal and gastric/stomach cancer is where the stomach and esophagus meet (often referred to as the gastroesophageal junction or GE Junction). In addition to cancers that arise at this junction, cancers that start in the esophagus may spread to the stomach, and cancers that start in the stomach may spread to the esophagus. Additionally, recent scientific studies indicate that these cancers are strikingly similar on the molecular level. By studying these cancers together we can further compare and contrast them to determine to what extent they have distinct biologic and clinical features."
-            },
-            "Conduct": {
-                "Question": "4. Are there any costs for me to participate?",
-                "Text": {
-                    "Part1": "This project is being conducted by",
-                    "Part2": "and a growing coalition of non-profit advocacy partners. Our team — led by Dr. Adam Bass, a physician and cancer researcher— is made up of cancer researchers, physicians, clinical specialists, and patient advocates.",
-                    "Part3": "Learn more about us here"
-                }
+                "Question": "2. Who is conducting this research?",
+                "Text1": "This project is being by",
+                "Text2": "a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research.",
+                "Text3": "is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital, The MPCproject also works with a growing coalition of non-profit advocacy partners. Our team — led by Dr. Eliezer Van Allen, prostate cancer physician and researcher— is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more",
+                "Link": "about us here"
             },
             "Involved": {
-                "Question": "5. How have patients been involved in the design of this project?",
-                "Section1": "We have worked closely with patients and patient advocates within the esophageal and gastric/stomach cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
-                "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, ECAN, ECAA, DeGregorio Family Foundation, Debbie's Dream Foundation, GI Cancers Alliance, Gastric Cancer Foundation, No Stomach for Cancer, and Hope for Stomach Cancer."
+                "Question": "3. How have patients been involved in the design of this project?",
+                "Section1": "We have worked closely with men with prostate cancer from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
+                "Section2": "We're proud to have as our Advocacy Partners: Prostate Cancer Foundation, Prostate Cancer International, ADK Hike for Hope, Cancer ABCs, Us Too, Answer Cancer Foundation, Malecare, Prostate Network, Patient Power, Blue Cure, The Men’s Cancer Network, Veterans Prostate Cancer Awareness, Fans for the Cure, FORCE, and Hampton Roads Prostate Health Forum."
             },
             "Costs": {
-                "Question": "6. Are there any costs for me to participate?",
-                "Text": "No, there are no costs to you. All associated costs related to acquiring medical records and tissue will be covered by the study."
+                "Question": "4. Are there any costs for me to participate?",
+                "Section1": "No, there are no costs to you."
             },
-            "TissueAndMedicalRecords": {
-                "Question": "7. After I provide my information, will I be asked to share my tumor tissue and medical records?",
-                "Text": "We will be asking for informed consent from all patients with esophageal and gastric/stomach cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Esophageal and Stomach Cancer Project to obtain and analyze your stored tumor tissue and medical records, should you choose to share access to stored tumor tissue. We will keep you informed about our progress along the way."
+            "Share": {
+                "Question": "5. After I provide my information, will I be asked to share my tumor tissue and medical records?",
+                "Section1": "As part of the process of providing consent, we will ask your permission to share your stored tumor tissue. We will keep you informed about our progress along the way."
             },
-            "TissueSample": {
-                "Question": "8. If I am asked to share a tissue sample, will my tissue be exhausted?",
-                "Text": "If you do elect to share tissue as part of the study, we will take every measure to ensure that your samples are not exhausted as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they send only a small portion to us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us, and we will notify you that we did not use your samples for this reason. You may also choose to provide a blood sample in addition to, or instead of tissue samples if you have no tissue available or elect not to share your stored tissue samples."
+            "UsedUp": {
+                "Question": "6. If I am asked to share a tissue sample, will my tissue be used up?",
+                "Section1": "We will take every measure to ensure that your samples are not used up as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they share only a small portion with us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us, and we will notify you that we did not use your samples for this reason."
             },
-            "ReceiveBack": {
-                "Question": "9. If my tissue, blood, and medical records are analyzed, will I receive any information back from this study?",
-                "Text": "You will not receive individual information from this study. Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+            "Analyzed": {
+                "Question": "7. If my tissue and medical records are analyzed, will I receive any information back from this study?",
+                "Section1": "Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
             },
             "Profit": {
-                "Question": "10. Is this research being conducted for profit?",
-                "Text": "No. This project is a not-for-profit, academic research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in a way that protects your personal information in order to fuel discoveries."
+                "Question": "8. Is this research being conducted for profit?",
+                "Section1": "No. This project is a not-for-profit, academic research endeavor. Our mission is to generate data to freely share in a way that protects your personal information with the research community in order to fuel scientific discoveries."
             },
             "Info": {
-                "Question": "11. What information can I bring to my medical team so that I can discuss this study with them?",
-                "Text": "This provided PDF is designed to educate your medical team about the project:",
+                "Question": "9. Is there information that I can bring to my doctor so that I can discuss this study with them?",
+                "Text": "Yes, you can print out or use your mobile device to share the document linked here:",
                 "Link": "Generate PDF for physicians"
             },
             "OtherQuestions": {

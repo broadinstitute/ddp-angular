@@ -51,31 +51,39 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Goal.Question</h2>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.Goal.Section1</p>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.Goal.Section2</p>
+
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Research.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.Research.Section1</p>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.Research.Section2</p>
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.WhyBoth.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.WhyBoth.Section1</p>
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Conduct.Question</h2>
                         <p class="PageContent-text">
-                            <span translate>MoreDetails.FAQ.Conduct.Text.Part1</span>
+                            <span translate>MoreDetails.FAQ.Research.Text1</span>
+                            <a [href]="countMeInUrl" class="Link Italic" target="_blank" translate>Toolkit.Common.Organization</a>,
+                            <span translate>MoreDetails.FAQ.Research.Text2</span>
                             <a [href]="countMeInUrl" class="Link Italic" target="_blank" translate>Toolkit.Common.Organization</a>
-                            <span translate>MoreDetails.FAQ.Conduct.Text.Part2</span>
-                            <a [href]="countMeInUrl" class="Link" target="_blank" translate>MoreDetails.FAQ.Conduct.Text.Part3</a>.
+                            <span translate>MoreDetails.FAQ.Research.Text3</span>
+                            <a [href]="countMeInUrl" class="Link" target="_blank" translate>MoreDetails.FAQ.Research.Link</a>.
                         </p>
+
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Involved.Question</h2>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.Involved.Section1</p>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.Involved.Section2</p>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.Involved.Section1</p>
+
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Costs.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.Costs.Text</p>
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.TissueAndMedicalRecords.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.TissueAndMedicalRecords.Text</p>
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.TissueSample.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.TissueSample.Text</p>
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.ReceiveBack.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.ReceiveBack.Text</p>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.Costs.Section1</p>
+
+                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Share.Question</h2>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.Share.Section1</p>
+
+                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.UsedUp.Question</h2>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.UsedUp.Section1</p>
+
+                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.UsedUp.Question</h2>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.UsedUp.Section1</p>
+
+                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Analyzed.Question</h2>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.Analyzed.Section1</p>
+
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Profit.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.Profit.Text</p>
+                        <p class="PageContent-text" translate>MoreDetails.FAQ.Profit.Section1</p>
+
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Info.Question</h2>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.Info.Text</p>
                         <p class="PageContent-text">
