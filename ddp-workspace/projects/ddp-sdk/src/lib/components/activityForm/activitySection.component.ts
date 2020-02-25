@@ -8,7 +8,6 @@ import { ActivityInstitutionBlock } from '../../models/activity/activityInstitut
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
-import { AnswerValue } from './../../models/activity/answerValue';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -37,7 +36,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
-                                           (valueChanged)="handleChange($event)"
                                            [activityGuid]="activityGuid">
                     </ddp-conditional-block>
                 </div>
@@ -47,7 +45,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
                                            [activityGuid]="activityGuid"
-                                           (valueChanged)="handleChange($event)"
                                            (visibilityChanged)="updateVisibility($event)">
                     </ddp-activity-question>
                 </div>
@@ -55,6 +52,8 @@ import { AnswerValue } from './../../models/activity/answerValue';
                     <ddp-institutions-form [block]="block"
                                            [studyGuid]="studyGuid"
                                            [readonly]="readonly"
+                                           [validationRequested]="validationRequested"
+                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
                                            (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-institutions-form>
                 </div>
@@ -62,7 +61,7 @@ import { AnswerValue } from './../../models/activity/answerValue';
                     <ddp-address-embedded [block]="block"
                                           [readonly]="readonly"
                                           [activityGuid]="activityGuid"
-                                          (validStatusChanged)="embeddedComponentValidStatusChanged.emit($event)"
+                                          (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
                                           (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-address-embedded>
                 </div>
@@ -76,7 +75,6 @@ import { AnswerValue } from './../../models/activity/answerValue';
                                  [readonly]="readonly"
                                  [validationRequested]="validationRequested"
                                  [studyGuid]="studyGuid"
-                                 (valueChanged)="handleChange($event)"
                                  [activityGuid]="activityGuid">
                 </ddp-group-block>
             </div>
@@ -89,16 +87,18 @@ export class ActivitySectionComponent {
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
     @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
-    @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() embeddedComponentValidStatusChanged: EventEmitter<boolean> = new EventEmitter();
+    @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    private embeddedValidationStatus: boolean[] = new Array(2).fill(true);
 
     public updateVisibility(visibility: BlockVisibility[]): void {
         this.visibilityChanged.emit(visibility);
     }
 
-    public handleChange(value: AnswerValue): void {
-        this.valueChanged.emit(value);
+    public updateEmbeddedComponentValidationStatus(componentIndex: number, isValid: boolean): void {
+        this.embeddedValidationStatus[componentIndex] = isValid;
+        const reducedValidationStatus = this.embeddedValidationStatus.reduce((accumulator, value) => accumulator && value, true);
+        this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
     }
 
     public isContent(block: ActivityBlock): block is ActivityContentBlock {

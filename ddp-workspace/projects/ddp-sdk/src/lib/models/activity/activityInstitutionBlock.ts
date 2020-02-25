@@ -9,6 +9,7 @@ export class ActivityInstitutionBlock extends ActivityBlock {
     public institutionType: string;
     public showFieldsInitially: boolean;
     public displayNumber: number | null;
+    public required: boolean;
 
     public get blockType(): BlockType {
         return BlockType.Institution;

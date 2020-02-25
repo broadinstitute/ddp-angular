@@ -1736,10 +1736,6 @@ select:-webkit-autofill {
     @extend .mat-button;
 }
 
-.ddp-activity-validation {
-    margin: 5px;
-}
-
 .subhead:after {
     content: "";
     display: table;
@@ -2174,4 +2170,8 @@ input.mat-input-element {
     .mat-option-text {
         font-size: 14px !important;
     }
+}
+
+.ddp-institutions-form__title_required:after {
+    content: ' *';
 }
