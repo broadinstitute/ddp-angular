@@ -232,22 +232,22 @@ workflows:
             branches:
               only:
                 - develop
-  nightly:
-    # run a build on develop using --prod --aot as an early warning for prod/aot issues
-
-    triggers:
-      - schedule:
-          cron: "0 22 * * *"
-          filters:
-            branches:
-              only:
-                - develop
-    jobs:
-      - osteo:
-          name: osteo-nightly
-      - angio:
-          name: angio-nightly
-      - brain:
-          name: brain-nightly
-      - mbc:
-          name: mbc-nightly
+#  nightly:
+#    # run a build on develop using --prod --aot as an early warning for prod/aot issues
+#
+#    triggers:
+#      - schedule:
+#          cron: "0 22 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - develop
+#    jobs:
+#      - osteo:
+#          name: osteo-nightly
+#      - angio:
+#          name: angio-nightly
+#      - brain:
+#          name: brain-nightly
+#      - mbc:
+#          name: mbc-nightly
