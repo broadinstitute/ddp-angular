@@ -212,11 +212,11 @@ workflows:
             branches:
               only:
                 - /^angular-appengine-deployment.*/
-      - osteo-deploy-only:
-          filters:
-            tags:
-              only:
-                - /^angular_test_.*/
+#      - osteo-deploy-only:
+#          filters:
+#            tags:
+#              only:
+#                - /^angular_test_.*/
       - angio:
           filters:
             branches:
