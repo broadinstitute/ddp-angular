@@ -50,7 +50,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
@@ -78,7 +78,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
 
@@ -91,7 +91,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
                                 (visibilityChanged)="updateVisibility($event)"
-                                (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                 (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
                     </ng-container>
