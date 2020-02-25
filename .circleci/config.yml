@@ -75,7 +75,6 @@ commands:
             echo "pipeline.git.branch << pipeline.git.branch >>"
             echo "pipeline.git.revision << pipeline.git.revision >>"
             echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
-
       - run:
           name: <<parameters.study_key>> show environment variables
           command: env
@@ -105,16 +104,59 @@ commands:
           name: <<parameters.study_key>> setup gcloud context
           command: |
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: <<parameters.study_key>> deploy to GAE
           command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
-
+  setup-build-workspace:
+    description: "Setup workspace used by all projects"
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          key: *npm_cache_key
+      - run:
+          name: npm install
+          command: npm install
+          working_directory: ~/repo/ddp-workspace
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
+  build-app:
+    description: "Build DDP study app"
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - run:
+          name: <<parameters.study_key>> ng build
+          command: |
+            ANGULAR_PROJECT_NAME="ddp-${<< parameters.study_key >>}"
+            ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
+          working_directory: ~/repo/ddp-workspace
+  store-app-build:
+    description: "Copy build to cloud storage"
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - run:
+          name: Create archive file
+          command: |
+            ANGULAR_PROJECT_NAME="ddp-${<< parameters.study_key >>}"
+            GIT_SHA=`git rev-parse --verify --short HEAD`
+            DATE=`date +%F`
+            TAR_FILE_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${GIT_SHA}.tar.gz"
+            BUILDS_BUCKET=ddp-angular-builds
+            cd dist/${ANGULAR_PROJECT_NAME}
+            tar -czvf "/tmp/${TAR_NAME}" .
+            gsutil cp  /tmp/ddp-angio_2020-02-24_660d0ac.tar.gz "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_FILE_NAME}"
+          working_directory: ~/repo/ddp-workspace
 
 jobs:
-  osteo:
+  osteo-build-and-deploy:
     executor:
       name: commit-executor
     steps:
@@ -122,6 +164,15 @@ jobs:
           study_key: osteo
           study_guid: CMI-OSTEO
 
+  osteo-build-and-save:
+    executor:
+      name: commit-executor
+    steps:
+      - setup-build-workspace
+      - build-app:
+          study_key: osteo
+      - store-app-build:
+          study_key: osteo
   angio:
     executor:
       name: commit-executor
@@ -150,13 +201,22 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - osteo:
+      - osteo-build-and-deploy:
           # todo: more DRY on branch filtering
           filters:
             branches:
               only:
                 - develop
-                - angular-appengine-deployment-ctd
+      - osteo-build-and-save:
+          filters:
+            branches:
+              only:
+                - /^angular-appengine-deployment.*/
+      - osteo-deploy-only:
+          filters:
+            tags:
+              only:
+                - /^angular_test_.*/
       - angio:
           filters:
             branches:
