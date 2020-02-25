@@ -45,7 +45,7 @@ import { ToolkitConfigurationService } from 'toolkit';
               <span translate>AboutUs.Organization.Section1.Part1</span>
               <span class="Italic" translate>Toolkit.Common.Organization</span>,
               <span translate>AboutUs.Organization.Section1.Part2</span>
-              <a href="countMeInUrl" class="Link" target="_blank" translate>AboutUs.Organization.Section1.Part3</a>.
+              <a [href]="countMeInUrl" class="Link" target="_blank" translate>AboutUs.Organization.Section1.Part3</a>.
             </p>
             <p class="PageContent-text">
               <span translate>AboutUs.Organization.Section2.Part1</span>
