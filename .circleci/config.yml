@@ -133,7 +133,7 @@ commands:
       - run:
           name: <<parameters.study_key>> ng build
           command: |
-            ANGULAR_PROJECT_NAME=ddp-<< parameters.study_key >>}
+            ANGULAR_PROJECT_NAME=ddp-<< parameters.study_key >>
             ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
   store-app-build:
@@ -143,16 +143,17 @@ commands:
         type: string
     steps:
       - run:
-          name: Create archive file
+          name: Create and upload build archive file
           command: |
-            ANGULAR_PROJECT_NAME="ddp-${<< parameters.study_key >>}"
+            ANGULAR_PROJECT_NAME=ddp-<< parameters.study_key >>
             GIT_SHA=`git rev-parse --verify --short HEAD`
             DATE=`date +%F`
-            TAR_FILE_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${GIT_SHA}.tar.gz"
+            TAR_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${GIT_SHA}.tar.gz"
             BUILDS_BUCKET=ddp-angular-builds
             cd dist/${ANGULAR_PROJECT_NAME}
             tar -czvf "/tmp/${TAR_NAME}" .
-            gsutil cp  /tmp/ddp-angio_2020-02-24_660d0ac.tar.gz "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_FILE_NAME}"
+            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            gsutil cp  "/tmp/${TAR_NAME}" "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo/ddp-workspace
 
 jobs:
