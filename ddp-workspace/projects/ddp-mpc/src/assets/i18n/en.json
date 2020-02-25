@@ -181,7 +181,31 @@
             }
         }
     },
-    "AboutUs": {},
+    "AboutUs": {
+        "PageHeader": {
+            "Part1": "The Metastatic Prostate Cancer Project is part of ",
+            "Part2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+        },
+        "PageHeaderLink": {
+            "Part1": "Visit the",
+            "Part2": "website"
+        },
+        "Title": "About us",
+        "Organization": {
+            "Section1": {
+                "Part1": "is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. For more information about",
+                "Part2": "go to",
+                "Part3": "joincountmein.org"
+            },
+            "Section2": {
+                "Part1": "The Metastatic Prostate Cancer Project is led by",
+                "Part2": "Dr. Eliezer Van Allen",
+                "Part3": "MD, an oncologist and prostate cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic prostate cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
+                "Part4": "Count Me In’s",
+                "Part5": "resources and the voice of the metastatic prostate cancer community in order to focus cutting edge genomic science squarely on people living with metastatic prostate cancer."
+            }
+        }
+    },
     "MoreDetails": {
         "Title": "Learn more about the Metastatic Prostate Cancer Project",
         "MainText": {

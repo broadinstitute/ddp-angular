@@ -792,10 +792,6 @@ a:focus {
     padding: 1rem 0;
 }
 
-.PageContent-section.council {
-    padding: 1rem;
-}
-
 .Dashboard-info-section {
     display: flex;
     flex-direction: column;
@@ -848,14 +844,8 @@ a:focus {
     margin: 2.1rem 0 1.3rem 0;
 }
 
-.PageContent-title.council {
-    font-size: 2.2rem;
-    text-align: center;
-    margin: 2.5rem 0;
-}
-
 .PageContent-sectionAboutUs {
-    padding: 0;
+    padding: 0 0 200px 0;
 }
 
 .HorizontalLine {
@@ -1496,12 +1486,6 @@ a:focus {
     margin: 2rem 0 1rem 0;
 }
 
-.PageContent-subtitle.council {
-    margin-top: 0;
-    font-size: 1.4rem;
-    line-height: 1.4rem;
-}
-
 .PageContent-subtitle-dashboard {
     margin: 0.5rem 0 !important;
 }
@@ -1512,33 +1496,6 @@ a:focus {
 
 .reverse-row {
     display: block;
-}
-
-.council {
-    @media only screen and (min-width: 768px) {
-        .col-xs-offset-2 {
-            margin-left: auto;
-        }
-
-        .reverse-row {
-            display: flex;
-            flex-direction: row-reverse;
-        }
-    }
-
-    @media only screen and (max-width: 768px) {
-        .PageContent-image {
-            margin-bottom: 20px;
-        }
-
-        .PageContent-text {
-            margin: 0;
-        }
-    }
-}
-
-.council-row {
-    margin: 25px 0 150px 0;
 }
 
 .PageContent-text br {
