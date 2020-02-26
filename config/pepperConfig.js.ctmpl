@@ -96,4 +96,11 @@ var DDP_ENV = {
   {{end}}
 {{end}}
 
+{{if eq $study_guid "cmi-mpc"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
+  {{end}}
+{{end}}
+
 {{end}}
