@@ -108,6 +108,66 @@ commands:
           name: <<parameters.study_key>> deploy to GAE
           command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
+  app-build-and-store:
+    description: Run build and store archive of it
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - store-app-build
+
+  deploy-stored-build:
+    description: "Deploy build archive to GAE"
+    parameters:
+      environment:
+        type: string
+      study_key:
+        type: string
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - run:
+          name: Add add more environment variables used
+          command: |
+            echo 'export ENVIRONMENT=ddp-<<parameters.environment>>' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Retrieve build archive for << parameters.study_key >> with git SHA ${SHORT_GIT_SHA}
+          command: |
+            set -u
+            # we are getting our builds from the one bucket
+            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+            if [ -z $TAR_FILE_URL ]
+            then
+              echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
+              exit 1
+            fi
+            TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
+            gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
+            # OUTPUT_DIR="/tmp/$(basename -- $TAR_FILE_URL .tar.gz)"
+            cd ~/repo/ddp-workspace
+            # this is where app.yaml files are pointing for assets
+            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+            mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
+      - run:
+          name: setup gcloud context to deploy to << parameters.environment >>
+          command: |
+            set -u
+            ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run:
+          name: deploy to GAE
+          command: gcloud app deploy --version="${SHORT_GIT_SHA}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          working_directory: ~/repo/ddp-workspace
+
   setup-shared-env:
     description: "Setup shared ENV vars"
     parameters:
@@ -171,64 +231,6 @@ commands:
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo
 
-  app-build-and-store:
-    description: Run build and store archive of it
-    parameters:
-      study_key:
-        type: string
-    steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - build-app
-      - store-app-build
-  deploy-stored-build:
-    description: "Deploy build archive to GAE"
-    parameters:
-      environment:
-        type: string
-      study_key:
-        type: string
-    steps:
-      - checkout:
-          path: ~/repo
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - run:
-          name: Add add more environment variables used
-          command: |
-            echo 'export ENVIRONMENT=ddp-<<parameters.environment>>' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: Retrieve build archive for << parameters.study_key >> with git SHA ${SHORT_GIT_SHA}
-          command: |
-            set -u
-            # we are getting our builds from the one bucket
-            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
-            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
-            if [ -z $TAR_FILE_URL ]
-            then
-              echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
-              exit 1
-            fi
-            TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
-            gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
-            # OUTPUT_DIR="/tmp/$(basename -- $TAR_FILE_URL .tar.gz)"
-            cd ~/repo/ddp-workspace
-            # this is where app.yaml files are pointing for assets
-            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
-            mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
-      - run:
-          name: setup gcloud context to deploy to << parameters.environment >>
-          command: |
-            set -u
-            ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - run:
-          name: deploy to GAE
-          command: gcloud app deploy --version="${SHORT_GIT_SHA}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
 
 jobs:
   osteo-build-and-deploy:
@@ -249,9 +251,8 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - setup-build-env:
-          study_key: osteo
       - deploy-stored-build:
+          study_key: osteo
           environment: dev
   angio:
     executor:
