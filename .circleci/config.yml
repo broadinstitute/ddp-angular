@@ -55,7 +55,7 @@ commands:
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
+            echo "export NG_BUILD_OPTS=$NG_BUILD_OPTS" >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: <<parameters.study_key>> update interpolated env vars
@@ -154,13 +154,13 @@ commands:
             fi
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
-            # OUTPUT_DIR="/tmp/$(basename -- $TAR_FILE_URL .tar.gz)"
             cd ~/repo/ddp-workspace
             # this is where app.yaml files are pointing for assets
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
-            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
             source $BASH_ENV
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
+            echo "Contents of extracted archive:"
+            ls -l $OUTPUT_DIR
       - run:
           name: <<parameters.study_key>> generate config files
           command: |
@@ -170,11 +170,6 @@ commands:
             CONFIG_DIR="${OUTPUT_DIR}/assets/config"
             mkdir -p $CONFIG_DIR
             cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js" $CONFIG_DIR
-            echo "OUTPUT_DIR=${OUTPUT_DIR} CONFIG_DIR=${CONFIG_DIR}"
-            ls -l $OUTPUT_DIR
-            ls -l "$OUTPUT_DIR/assets"
-            ls -l $CONFIG_DIR
-            ls -l "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
           environment:
             USE_DOCKER: false
       - run:
