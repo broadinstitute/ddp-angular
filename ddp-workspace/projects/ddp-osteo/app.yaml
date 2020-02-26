@@ -5,6 +5,7 @@ runtime: python37
 # earlier versions of this service
 basic_scaling:
   max_instances: 1
+
 handlers:
   - url: /(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
     static_files: dist/\1
