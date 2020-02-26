@@ -109,6 +109,11 @@
     text-decoration: underline;
 }
 
+.sac-member__link_disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
 .affiliations {
     margin: 0.5rem 0 0 0;
 }
