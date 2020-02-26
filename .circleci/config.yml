@@ -158,10 +158,17 @@ commands:
             cd ~/repo/ddp-workspace
             # this is where app.yaml files are pointing for assets
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+            echo 'export OUTPUT_DIR=$OUTPUT_DIR' >> $BASH_ENV
+            source $BASH_ENV
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
       - run:
           name: <<parameters.study_key>> generate config files
-          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+          command: |
+            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+            cd ddp-workspace
+            CONFIG_DIR="$OUTPUT_DIR/assets/config"
+            mkdir -p $CONFIG_DIR
+            cp ${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js $CONFIG_DIR
           environment:
             USE_DOCKER: false
       - run:
