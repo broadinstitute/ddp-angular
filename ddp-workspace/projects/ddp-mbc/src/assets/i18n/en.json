@@ -16,7 +16,7 @@
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
         },
         "Footer": {
             "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",
@@ -64,8 +64,7 @@
                     "Title": "Step 3",
                     "Subtitle": "Learn with us along the way",
                     "Text": "We are excited to learn with you! Throughout the project, we will provide you with regular updates about the status of the project and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
-                },
-                "CountMeInButton": "count me in"
+                }
             },
             "FourthBlock": {
                 "TitlePt1": "The time to",
@@ -81,9 +80,9 @@
             "SixthBlock": {
                 "TitlePt1": "Please join us and say",
                 "TitlePt2": "\"Count Me In\"",
-                "Text": "With your help, patients can be the driving force behind cancer research.",
-                "CountMeInButton": "count me in"
-            }
+                "Text": "With your help, patients can be the driving force behind cancer research."
+            },
+            "CountMeInButton": "count me in"
         },
         "AboutUs": {
             "PageHeader": {
