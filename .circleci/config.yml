@@ -306,6 +306,8 @@ workflows:
             tags:
               only:
                 - /^angular_test_.*/
+            branches:
+              ignore: /.*/
       - angio:
           filters:
             branches:
