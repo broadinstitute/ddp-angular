@@ -140,7 +140,7 @@ commands:
             echo 'export ENVIRONMENT=<<parameters.environment>>' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Retrieve build archive for << parameters.study_key >> with git SHA ${SHORT_GIT_SHA}
+          name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
           command: |
             set -u
             # we are getting our builds from the one bucket
@@ -156,13 +156,14 @@ commands:
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
             cd ~/repo/ddp-workspace
             # this is where app.yaml files are pointing for assets
+            # save it to use in next step
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
             source $BASH_ENV
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive:"
             ls -l $OUTPUT_DIR
       - run:
-          name: <<parameters.study_key>> generate config files
+          name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
             set -u
             ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
@@ -173,13 +174,13 @@ commands:
           environment:
             USE_DOCKER: false
       - run:
-          name: setup gcloud context to deploy to << parameters.environment >>
+          name: Setup gcloud context to deploy to << parameters.environment >>
           command: |
             set -u
             ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
-          name: deploy to GAE
+          name: Deploy to GAE
           command: gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
@@ -190,6 +191,7 @@ commands:
         type: string
     steps:
       - run:
+          name: Set environment variables to build <<parameters.study_key>>
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
@@ -215,7 +217,7 @@ commands:
     description: "Build DDP study app"
     steps:
       - run:
-          name: ng build $ANGULAR_PROJECT_NAME
+          name: ng build
           command: |
             set -u
             ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
