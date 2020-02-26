@@ -158,6 +158,11 @@ commands:
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
       - run:
+          name: <<parameters.study_key>> generate config files
+          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+          environment:
+            USE_DOCKER: false
+      - run:
           name: setup gcloud context to deploy to << parameters.environment >>
           command: |
             set -u
