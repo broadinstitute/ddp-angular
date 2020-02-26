@@ -135,8 +135,8 @@ import { GoogleAnalyticsEventsService, BrowserContentService, GoogleAnalytics } 
         </div>
 
         <div class="row">
-            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                Toolkit.Welcome.ThirdBlock.CountMeInButton
+            <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
+                Toolkit.Welcome.CountMeInButton
             </a>
         </div>
 
@@ -330,8 +330,8 @@ import { GoogleAnalyticsEventsService, BrowserContentService, GoogleAnalytics } 
         </div>
 
         <div class="row row--moreBottomMargin">
-            <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                Toolkit.Welcome.SixthBlock.CountMeInButton
+            <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
+                Toolkit.Welcome.CountMeInButton
             </a>
         </div>
     </div>
