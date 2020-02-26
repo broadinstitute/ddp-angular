@@ -135,7 +135,7 @@ commands:
       - run:
           name: Add add more environment variables used
           command: |
-            echo 'export ENVIRONMENT=ddp-<<parameters.environment>>' >> $BASH_ENV
+            echo 'export ENVIRONMENT=<<parameters.environment>>' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Retrieve build archive for << parameters.study_key >> with git SHA ${SHORT_GIT_SHA}
