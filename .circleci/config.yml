@@ -167,10 +167,14 @@ commands:
             set -u
             ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
             cd ddp-workspace
-            CONFIG_DIR="$OUTPUT_DIR/assets/config"
+            CONFIG_DIR="${OUTPUT_DIR}/assets/config"
             mkdir -p $CONFIG_DIR
             cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js" $CONFIG_DIR
+            echo "OUTPUT_DIR=${OUTPUT_DIR} CONFIG_DIR=${CONFIG_DIR}"
+            ls -l $OUTPUT_DIR
+            ls -l "$OUTPUT_DIR/assets"
             ls -l $CONFIG_DIR
+            ls -l "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
           environment:
             USE_DOCKER: false
       - run:
