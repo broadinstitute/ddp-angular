@@ -127,6 +127,8 @@ commands:
         type: string
       study_key:
         type: string
+      study_guid:
+        type: string
     steps:
       - checkout:
           path: ~/repo
@@ -258,6 +260,7 @@ jobs:
     steps:
       - deploy-stored-build:
           study_key: osteo
+          study_guid: CMI-OSTEO
           environment: dev
   angio:
     executor:
