@@ -856,6 +856,10 @@ a:focus {
     padding: 50px 0 150px 0;
 }
 
+.PageContent-release {
+    padding-bottom: 0;
+}
+
 .PageContent-section {
     padding: 1rem 0;
 }
@@ -890,7 +894,7 @@ ul {
 .PageContent-box-text {
     font-weight: 300;
     font-size: 1.1rem;
-    line-height: 1.6rem;
+    line-height: 1.7rem;
     color: mat-color($app-theme, 800);
     text-align: left;
 }
@@ -2170,6 +2174,13 @@ input.mat-input-element {
     .mat-option-text {
         font-size: 14px !important;
     }
+}
+
+.tableau-iframe {
+    height: auto;
+    overflow-y: auto;
+    margin: 0 15px 150px 15px;
+    text-align: center;
 }
 
 .ddp-institutions-form__title_required:after {
