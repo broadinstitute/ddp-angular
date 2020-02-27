@@ -344,14 +344,14 @@ parameters:
   study_key:
     type: string
     default: "UNKNOWN"
-  build-app:
+  build-it:
     type: boolean
     default: false
 
 workflows:
   version: 2
   build-app-workflow:
-    when: << pipeline.parameters.build-app >>
+    when: << pipeline.parameters.build-it >>
     jobs:
       - pipeline-app-build-and-store
 
@@ -360,7 +360,7 @@ workflows:
 #      - pipeline-app-build-and-store
 
   build-all:
-    unless: << pipeline.parameters.build-app >>
+    unless: << pipeline.parameters.build-it >>
     jobs:
       - conditionally-build-and-store-all:
           filters:
