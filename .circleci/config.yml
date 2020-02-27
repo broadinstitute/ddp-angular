@@ -16,24 +16,17 @@ executors:
     working_directory: ~/repo
 
 commands:
-  build-and-deploy-study:
-    description: "Build and deploy angular study website"
-    parameters:
-      study_key:
-        type: string
-      study_guid:
-        type: string
+  set-deployment-environment:
+    description: "Set ENVIRONMENT env variable based on branch"
     steps:
-      - checkout:
-          path: ~/repo
       - run:
-          name: <<parameters.study_key>> determine deployment environment
+          name: Determine deployment environment
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
               ;;
-              angular-appengine-deployment-ctd)
+              deleteme-when-done)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -57,6 +50,17 @@ commands:
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             echo "export NG_BUILD_OPTS=$NG_BUILD_OPTS" >> $BASH_ENV
             source $BASH_ENV
+  build-and-deploy-study:
+    description: "Build and deploy angular study website"
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
+    steps:
+      - checkout:
+          path: ~/repo
+      - set-deployment-environment
       - run:
           name: <<parameters.study_key>> update interpolated env vars
           command: |
@@ -134,11 +138,7 @@ commands:
           path: ~/repo
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - run:
-          name: Add add more environment variables used
-          command: |
-            echo 'export ENVIRONMENT=<<parameters.environment>>' >> $BASH_ENV
-            source $BASH_ENV
+      - set-deployment-environment
       - run:
           name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
           command: |
@@ -256,15 +256,15 @@ commands:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run:
-          name: Check for build <<parameters.study_key>> and Git SHA << pipeline.git.revision >>
+          name: Initiate build for <<parameters.study_key>> and git SHA << pipeline.git.revision >> if existing one not found
           command: |
             set -u
             set +e
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
+            # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
-            echo "The found TAR_FILE_URL was ${TAR_FILE_URL}"
             if [ -z $TAR_FILE_URL ]
               then
                 curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
@@ -275,7 +275,7 @@ commands:
                   }
                 }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
               else
-                echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}"
+                echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
             fi
 
 jobs:
@@ -288,6 +288,17 @@ jobs:
           study_key: osteo
       - conditionally-launch-build-and-store:
           study_key: brain
+      - conditionally-launch-build-and-store:
+          study_key: angio
+      - conditionally-launch-build-and-store:
+          study_key: mbc
+  pipeline-app-build-and-store:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-store:
+          study_key: << pipeline.parameters.study_key >>
+
   osteo-build-and-deploy:
     executor:
       name: commit-executor
@@ -295,13 +306,6 @@ jobs:
       - build-and-deploy-study:
           study_key: osteo
           study_guid: CMI-OSTEO
-
-  pipeline-app-build-and-store:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-store:
-          study_key: << pipeline.parameters.study_key >>
 
   osteo-build-and-save:
     executor:
@@ -317,7 +321,14 @@ jobs:
       - deploy-stored-build:
           study_key: osteo
           study_guid: CMI-OSTEO
-          environment: dev
+
+  brain-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build:
+          study_key: brain
+          study_guid: cmi-brain
   angio:
     executor:
       name: commit-executor
@@ -352,7 +363,7 @@ parameters:
 
 workflows:
   version: 2
-  build-app-workflow:
+  build-all-apps-workflow:
     when: << pipeline.parameters.build-it >>
     jobs:
       - pipeline-app-build-and-store:
@@ -360,23 +371,21 @@ workflows:
             tags:
               only:
                 - /^angular_test_.*/
+                - /^rc.*/
+                - /^hotfix.*/
             branches:
               ignore: /.*/
 
-#  deploy-all:
-#    jobs:
-#      - pipeline-app-build-and-store
-
-  build-all:
-    unless: << pipeline.parameters.build-it >>
+  deploy-all-apps-workflow:
     jobs:
-      - conditionally-build-and-store-all:
+      - pipeline-deploy-build:
           filters:
-            tags:
-              only:
-                - /^angular_test_.*/
             branches:
-              ignore: /.*/
+              only:
+                - test
+                - staging
+                - production
+                - deletemewhendone
 
   build-deploy:
     jobs:
