@@ -17,8 +17,8 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
         </div>
 
         <div class="Intro-footer row">
-            <img lazy-resource src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img lazy-resource src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
+            <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
             <img lazy-resource src="./assets/images/logo-minderoo.png" class="Intro-footerLogo-square" alt="Minderoo Foundation Logo">
         </div>
 
