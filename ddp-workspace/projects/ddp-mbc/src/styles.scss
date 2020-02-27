@@ -1736,10 +1736,6 @@ select:-webkit-autofill {
     @extend .mat-button;
 }
 
-.ddp-activity-validation {
-    margin: 5px;
-}
-
 .subhead:after {
     content: "";
     display: table;
@@ -2174,4 +2170,41 @@ input.mat-input-element {
     .mat-option-text {
         font-size: 14px !important;
     }
+}
+
+.ddp-institutions-form__title_required:after {
+    content: ' *';
+}
+
+// Woman's silhouette icon font
+@font-face {
+    font-family: 'icomoon';
+    src: url(./assets/fonts/icomoon.eot?zha7n2);
+    src: url(./assets/fonts/icomoon.eot?zha7n2#iefix) format('embedded-opentype'),
+        url(./assets/fonts/icomoon.ttf?zha7n2) format('truetype'),
+        url(./assets/fonts/icomoon.woff?zha7n2) format('woff'),
+        url(./assets/fonts/icomoon.svg?zha7n2#icomoon) format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.icon-silhouette {
+    // Use !important to prevent issues with browser extensions that change fonts 
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    // Better font rendering 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-silhouette:before {
+    content: "\e900";
+    color: mat-color($app-theme, 100);
+    font-size: 0.7rem;
 }

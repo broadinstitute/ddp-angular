@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { NgForm } from '@angular/forms';
 import { InstitutionServiceAgent } from '../../../services/serviceAgents/institutionServiceAgent.service';
 import { MedicalProvidersServiceAgent } from '../../../services/serviceAgents/medicalProvidersServiceAgent.service';
 import { Institution } from '../../../models/institution';
@@ -14,21 +15,24 @@ import * as _ from 'underscore';
 @Component({
     selector: 'ddp-institution',
     template: `
-    <form autocomplete="off">
+    <form autocomplete="off" #institutionForm="ngForm">
         <mat-form-field *ngIf="isPhysician" class="width">
             <input matInput
                    [(ngModel)]="physicianName"
                    name="physician"
-                   placeholder="Physician Name"
+                   [placeholder]="'SDK.Institutions.Fields.Name' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
         <mat-form-field class="width">
             <input matInput
                    [(ngModel)]="institutionName"
                    name="institution"
-                   [placeholder]="isPhysician ? 'Institution (if any)' : 'Institution'"
+                   [placeholder]="isPhysician ?
+                        ('SDK.Institutions.Fields.InstitutionAny' | translate) :
+                        ('SDK.Institutions.Fields.Institution' | translate)"
                    [disabled]="readonly"
                    (input)="find($event.target.value)"
                    (change)="saveInstitution()"
@@ -47,21 +51,27 @@ import * as _ from 'underscore';
             <input matInput
                    [(ngModel)]="city"
                    name="city"
-                   placeholder="City"
+                   [placeholder]="'SDK.Institutions.Fields.City' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
         <mat-form-field class="width">
             <input matInput
                    [(ngModel)]="state"
                    name="state"
-                   placeholder="State"
+                   [placeholder]="'SDK.Institutions.Fields.State' | translate"
                    [autocomplete]="AUTOCOMPLETE_VALUE"
                    [readonly]="readonly"
-                   (change)="saveValue()">
+                   (change)="saveValue()"
+                   [required]="required">
         </mat-form-field>
-    </form>`,
+    </form>
+    <div class="ddp-activity-validation" *ngIf="showPhysicianValidationError()">
+        <ddp-validation-message [message]="'SDK.Institutions.PhysicianValidation' | translate">
+        </ddp-validation-message>
+    </div>`,
     styles: [`
     .width {
         width: 100%;
@@ -73,9 +83,13 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     @Input() institutionType: string;
     @Input() normalizedInstitutionType: string;
     @Input() studyGuid: string;
+    @Input() required: boolean;
+    @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<ActivityInstitutionInfo | null> = new EventEmitter();
+    @Output() formUpdated: EventEmitter<void> = new EventEmitter<void>();
     @Output() componentBusy: EventEmitter<number> = new EventEmitter<number>();
     @ViewChild(MatAutocompleteTrigger, { static: true }) autocomplete: MatAutocompleteTrigger;
+    @ViewChild('institutionForm', { static: true }) private institutionForm: NgForm;
     public institutions: Array<Institution> = [];
     public institutionName: string;
     public physicianName: string;
@@ -112,6 +126,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             ))
         ).subscribe(() => {
             this.componentBusy.emit(-1);
+            this.formUpdated.emit();
         });
 
         this.anchor
@@ -127,6 +142,13 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.city = this.value.city ? this.value.city : '';
                 this.state = this.value.state ? this.value.state : '';
                 this.guid = this.value.guid ? this.value.guid : '';
+            }
+            if (propName === 'validationRequested') {
+                if (this.validationRequested && this.required) {
+                    for (const controlName in this.institutionForm.controls) {
+                        this.institutionForm.controls[controlName].markAsTouched();
+                    }
+                }
             }
         }
     }
@@ -181,6 +203,15 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         return this.institutionType === InstitutionType.Physician;
     }
 
+    public showPhysicianValidationError(): boolean {
+        return this.required && this.validationRequested && this.institutionForm.invalid && this.isRequiredFormTouched();
+    }
+
+    private isRequiredFormTouched(): boolean {
+        const controls = this.institutionForm.controls;
+        return controls.city.touched && controls.physician.touched && controls.state.touched;
+    }
+
     private getAnswerForm(answer: ActivityInstitutionInfo): ActivityInstitutionForm {
         return new ActivityInstitutionForm(answer.physicianName, answer.institutionName, answer.city, answer.state);
     }
@@ -188,7 +219,9 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     private updateForm(answer: ActivityInstitutionInfo): Observable<void> {
         const form = this.getAnswerForm(answer);
         return this.providersServiceAgent.updateMedicalProvider(this.studyGuid,
-            this.normalizedInstitutionType, this.guid, form);
+            this.normalizedInstitutionType, this.guid, form).pipe(
+                tap(() => this.valueChanged.emit(answer))
+            );
     }
 
     private saveForm(answer: ActivityInstitutionInfo): Observable<MedicalProviderResponse> {

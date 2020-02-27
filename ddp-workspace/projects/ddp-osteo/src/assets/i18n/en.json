@@ -261,6 +261,44 @@
                     "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
                     "Image": "assets/images/SAC-Brian-Crompton.jpg",
                     "Alt": "Brian Crompton photo"
+                },
+                {
+                    "Name": "Alejandro Sweet-Cordero",
+                    "Affiliations": [
+                        "UCSF",
+                        "Helen Diller Family Comprehensive Cancer Center"
+                    ],
+                    "Url": "https://cancer.ucsf.edu/people/profiles/sweetcordero_alejandro.8106",
+                    "Image": "assets/images/SAC-Alejandro-Sweet-Cordero.jpg",
+                    "Alt": "Alejandro Sweet-Cordero photo"
+                },
+                {
+                    "Name": "Richard Gorlick",
+                    "Affiliations": [
+                        "The University of Texas MD Anderson Cancer Center"
+                    ],
+                    "Url": "https://faculty.mdanderson.org/profiles/richard_gorlick.html",
+                    "Image": "assets/images/SAC-Richard-Gorlick.jpg",
+                    "Alt": "Richard Gorlick photo"
+                },
+                {
+                    "Name": "David Malkin",
+                    "Affiliations": [
+                        "The Hospital for Sick Children",
+                        "University of Toronto"
+                    ],
+                    "Url": "http://www.sickkids.ca/AboutSickKids/Directory/People/M/David-Malkin-staff-profile.html",
+                    "Image": "assets/images/SAC-David-Malkin.jpg",
+                    "Alt": "David Malkin photo"
+                },
+                {
+                    "Name": "Nathalie Gaspar",
+                    "Affiliations": [
+                        "Institut Gustave Roussy"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/SAC-Nathalie-Gaspar.jpg",
+                    "Alt": "Nathalie Gaspar photo"
                 }
             ]
         },
@@ -581,6 +619,16 @@
         },
         "EmailEntry": {
             "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }
