@@ -271,7 +271,7 @@ commands:
                   "tag": "<< pipeline.git.tag >>",
                   "parameters": {
                       "study_key": "<<parameters.study_key>>",
-                      "build-app": true
+                      "build-it": true
                   }
                 }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
               else
