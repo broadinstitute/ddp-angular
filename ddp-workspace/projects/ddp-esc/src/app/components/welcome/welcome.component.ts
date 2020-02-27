@@ -17,8 +17,8 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
         </div>
 
         <div class="Intro-footer row">
-            <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
+            <img src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
 
         <div class="Intro row">
@@ -152,7 +152,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
-                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img class="partner-logo--single" lazy-resource src="./assets/images/target-cancer-foundation-logo.svg" alt="Target Cancer Foundation logo"></a>
+                        <a href="http://www.targetcancerfoundation.org/" target="_blank"><img class="partner-logo--single" lazy-resource src="./assets/images/target-cancer-foundation-logo.png" alt="Target Cancer Foundation logo"></a>
                     </div>
                 </div>
             </section>
