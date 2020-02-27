@@ -353,7 +353,13 @@ workflows:
   build-app-workflow:
     when: << pipeline.parameters.build-it >>
     jobs:
-      - pipeline-app-build-and-store
+      - pipeline-app-build-and-store:
+          filters:
+            tags:
+              only:
+                - /^angular_test_.*/
+            branches:
+              ignore: /.*/
 
 #  deploy-all:
 #    jobs:
