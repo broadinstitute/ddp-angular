@@ -309,6 +309,7 @@ jobs:
     steps:
       - app-build-and-store:
           study_key: osteo
+
   osteo-deploy-only:
     executor:
       name: commit-executor
