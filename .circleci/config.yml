@@ -280,6 +280,7 @@ jobs:
     executor:
       name: commit-executor
     steps:
+      - checkout
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
