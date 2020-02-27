@@ -261,7 +261,9 @@ commands:
             set -u
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Checking for ${TAR_FILE_URL_PATTERN}"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+            echo "The found TAR_FILE_URL was ${TAR_FILE_URL}"
             if [ -z $TAR_FILE_URL ]
               then
                 curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
