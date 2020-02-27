@@ -16,8 +16,8 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
             </div>
         </div>
         <div class="Intro-footer row">
-            <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
+            <img src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
         <div class="Intro row">
             <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -119,7 +119,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
             <section class="Message col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
-                        <a href="https://www.pcf.org"  target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-cancer-foundation.svg" alt="Prostate Cancer Foundation logo"></a>
+                        <a href="https://www.pcf.org"  target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-cancer-foundation.png" alt="Prostate Cancer Foundation logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
                         <a href="https://pcainternational.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-prostate-cancer-international.png" alt="Prostate Cancer International logo"></a>
@@ -131,7 +131,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
                         <a href="https://cancerabcs.org" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-cancer-abc.png" alt="Cancer ABC logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
-                        <a href="http://ustoo.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-us-too.svg" alt="Us Too logo logo"></a>
+                        <a href="http://ustoo.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-us-too.png" alt="Us Too logo logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
                         <a href="https://ancan.org/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-answer-cancer-foundation.jpg" alt="Answer Cancer Foundation logo"></a>
@@ -152,7 +152,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
                         <a href="https://themenscancernetwork.com/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-men-cancer-network.jpg" alt="The Men's Cancer Network logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
-                        <a href="https://vetsprostate.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-veterans-prostate-cancer-awareness.svg" alt="Veterans Prostate Cancer Awareness logo"></a>
+                        <a href="https://vetsprostate.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-veterans-prostate-cancer-awareness.png" alt="Veterans Prostate Cancer Awareness logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
                         <a href="https://fans4thecure.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-fans-4-the-cure.png" alt="Fans for the Cure logo"></a>
