@@ -168,14 +168,15 @@ commands:
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
             cd ~/repo/ddp-workspace
-            # this is where app.yaml files are pointing for assets
-            # save it to use in next step
-            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
-            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
-            source $BASH_ENV
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive:"
             ls -l $OUTPUT_DIR
+      - deploy-exploded-build
+
+  deploy-exploded-build:
+    description: Deploy files to GAE
+    steps:
+      - set-deployment-environment
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
@@ -187,12 +188,6 @@ commands:
             cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js" $CONFIG_DIR
           environment:
             USE_DOCKER: false
-      - deploy-exploded-build
-
-  deploy-exploded-build:
-    description: Deploy files to GAE
-    steps:
-      - set-deployment-environment
       - run:
           name: Setup gcloud context
           command: |
@@ -217,6 +212,9 @@ commands:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            source $BASH_ENV
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-angular-builds' >> $BASH_ENV
             source $BASH_ENV
@@ -399,6 +397,22 @@ parameters:
 
 workflows:
   version: 2
+
+  build-and-deploy-all-apps-workflow:
+    jobs:
+      - osteo-build-and-deploy: &build-and-deploy-filters
+          filters:
+            branches:
+              only:
+                - develop
+                - angular-appengine-deployment-ctd
+      - brain-build-and-deploy:
+          <<: *build-and-deploy-filters
+#      - angio-build-and-deploy:
+#          <<: *build-and-deploy-filters
+#      - mbc-build-and-deploy:
+#          <<: *build-and-deploy-filters
+
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
     # should run; should be this one that just launches the builds or the one actually doing the builds
@@ -437,20 +451,6 @@ workflows:
       - angio-deploy-only:
           <<: *deploy-filters
 
-  build-and-deploy-all-apps-workflow:
-    jobs:
-      - osteo-build-and-deploy: &build-and-deploy-filters
-          filters:
-            branches:
-              only:
-                - develop
-                - angular-appengine-deployment-ctd
-      - brain-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - angio-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - mbc-build-and-deploy:
-          <<: *build-and-deploy-filters
 
 #  nightly:
 #    # run a build on develop using --prod --aot as an early warning for prod/aot issues
