@@ -278,7 +278,7 @@ commands:
             fi
 
 jobs:
-  conditionally-build-and-store-all:
+  conditionally-launch-build-and-store-all-job:
     executor:
       name: commit-executor
     steps:
@@ -292,7 +292,7 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: mbc
 
-  pipeline-app-build-and-store:
+  app-build-and-store-job:
     executor:
       name: commit-executor
     steps:
@@ -385,7 +385,7 @@ workflows:
     # should run; should be this one that just launches the builds or the one actually doing the builds
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-build-and-store-all: &build-on-tag-filters
+      - conditionally-launch-build-and-store-all-job: &build-on-tag-filters
           filters:
             tags:
               only:
@@ -396,10 +396,10 @@ workflows:
             branches:
               ignore: /.*/
 
-  build-all-apps-workflow:
+  build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - pipeline-app-build-and-store:
+      - app-build-and-store-job:
           <<: *build-on-tag-filters
 
   deploy-all-apps-workflow:
