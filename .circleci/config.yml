@@ -1,7 +1,10 @@
 version: 2.1
+
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
+
+# Container for all the builds
 executors:
   commit-executor:
     docker:
@@ -55,15 +58,12 @@ commands:
               ;;
               test)
                 DEPLOY_ENV=test
-                NG_BUILD_OPTS=--prod --aot
               ;;
               staging)
                 DEPLOY_ENV=staging
-                NG_BUILD_OPTS=--prod --aot
               ;;
               staging)
                 DEPLOY_ENV=prod
-                NG_BUILD_OPTS=--prod --aot
               ;;
               *)
                 echo "Cannot map << pipeline.git.branch >> to a deployment environment"
@@ -72,7 +72,6 @@ commands:
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo "export NG_BUILD_OPTS=$NG_BUILD_OPTS" >> $BASH_ENV
             source $BASH_ENV
 
   deploy-stored-build:
@@ -395,7 +394,6 @@ workflows:
           <<: *deploy-filters
       - angio-deploy-only:
           <<: *deploy-filters
-
 
   nightly:
     # run a build on develop using --prod --aot as an early warning for prod/aot issues
