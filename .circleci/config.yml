@@ -127,8 +127,6 @@ commands:
   deploy-stored-build:
     description: "Deploy build archive to GAE"
     parameters:
-      environment:
-        type: string
       study_key:
         type: string
       study_guid:
