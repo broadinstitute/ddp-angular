@@ -26,7 +26,7 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              deleteme-when-done)
+              deletemewhendone)
                 DEPLOY_ENV=dev
               ;;
               test)
