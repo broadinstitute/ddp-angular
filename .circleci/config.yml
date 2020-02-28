@@ -50,19 +50,13 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              (angular-appengine-deployment-ctd)
-                DEPLOY_ENV=dev
-              ;;
-              (deletemewhendone)
-                DEPLOY_ENV=dev
-              ;;
               test)
                 DEPLOY_ENV=test
               ;;
               staging)
                 DEPLOY_ENV=staging
               ;;
-              staging)
+              production)
                 DEPLOY_ENV=prod
               ;;
               *)
@@ -368,10 +362,8 @@ workflows:
           filters:
             branches:
               only:
-                - /^angular_test_.*/
                 - /^rc.*/
                 - /^hotfix.*/
-                - /^v\d.*/
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
@@ -388,7 +380,6 @@ workflows:
                 - test
                 - staging
                 - production
-                - deletemewhendone
       - brain-deploy-only:
           <<: *deploy-filters
       - mbc-deploy-only:
