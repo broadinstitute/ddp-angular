@@ -53,6 +53,9 @@ commands:
               test)
                 DEPLOY_ENV=test
               ;;
+              angular-appengine-deployment-ctd)
+                DEPLOY_ENV=test
+              ;;
               staging)
                 DEPLOY_ENV=staging
               ;;
@@ -346,12 +349,12 @@ workflows:
               only:
                 - develop
                 - angular-appengine-deployment-ctd
-      - brain-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - angio-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - mbc-build-and-deploy:
-          <<: *build-and-deploy-filters
+#      - brain-build-and-deploy:
+#          <<: *build-and-deploy-filters
+#      - angio-build-and-deploy:
+#          <<: *build-and-deploy-filters
+#      - mbc-build-and-deploy:
+#          <<: *build-and-deploy-filters
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
