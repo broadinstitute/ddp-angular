@@ -270,7 +270,7 @@ commands:
                   "tag": "<< pipeline.git.tag >>",
                   "parameters": {
                       "study_key": "<<parameters.study_key>>",
-                      "build-it": true
+                      "do-builds": true
                   }
                 }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
               else
@@ -374,35 +374,33 @@ parameters:
   study_key:
     type: string
     default: "UNKNOWN"
-  build-it:
+  do-builds:
     type: boolean
     default: false
 
 workflows:
   version: 2
-  build-all:
-    unless: << pipeline.parameters.build-it >>
+  launch-all-app-builds-workflow:
+    # using do-builds param to select which of the two workflows using the build-on-tag-filters
+    # should run; should be this one that just launches the builds or the one actually doing the builds
+    unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-build-and-store-all:
-          filters:
-            tags:
-              only:
-                - /^angular_test_.*/
-            branches:
-              ignore: /.*/
-
-  build-all-apps-workflow:
-    when: << pipeline.parameters.build-it >>
-    jobs:
-      - pipeline-app-build-and-store:
+      - conditionally-build-and-store-all: &build-on-tag-filters
           filters:
             tags:
               only:
                 - /^angular_test_.*/
                 - /^rc.*/
                 - /^hotfix.*/
+                - /^v\d.*/
             branches:
               ignore: /.*/
+
+  build-all-apps-workflow:
+    when: << pipeline.parameters.do-builds >>
+    jobs:
+      - pipeline-app-build-and-store:
+          <<: *build-on-tag-filters
 
   deploy-all-apps-workflow:
     jobs:
