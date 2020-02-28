@@ -26,7 +26,7 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              deletemewhendone)
+              (angular-appengine-deployment-ctd)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -430,7 +430,6 @@ workflows:
                 - test
                 - staging
                 - production
-                - deletemewhendone
       - brain-deploy-only:
           <<: *deploy-filters
       - mbc-deploy-only:
