@@ -387,8 +387,6 @@ workflows:
             tags:
               only:
                 - /^angular_test_.*/
-                - /^rc.*/
-                - /^hotfix.*/
             branches:
               ignore: /.*/
 
