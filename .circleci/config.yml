@@ -180,8 +180,10 @@ commands:
   deploy-exploded-build:
     description: Deploy files to GAE
     parameters:
-      study_key: string
-      study_guid: string
+      study_key:
+        type: string
+      study_guid:
+        type: string
     steps:
       - set-deployment-environment
       - run:
