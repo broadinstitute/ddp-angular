@@ -351,6 +351,7 @@ workflows:
             branches:
               only:
                 - develop
+                - angular-appengine-deployment-ctd
       - brain-build-and-deploy:
           <<: *build-and-deploy-filters
       - angio-build-and-deploy:
@@ -396,8 +397,6 @@ workflows:
           <<: *deploy-filters
 
   nightly:
-    # run a build on develop using --prod --aot as an early warning for prod/aot issues
-
     triggers:
       - schedule:
           cron: "0 22 * * *"
