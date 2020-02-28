@@ -394,8 +394,8 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - osteo-deploy-only:
-          filters: &deploy-filter
+      - osteo-deploy-only: &deploy-filters
+          filters:
             branches:
               only:
                 - test
@@ -403,11 +403,11 @@ workflows:
                 - production
                 - deletemewhendone
       - brain-deploy-only:
-          <<: *deploy-filter
+            <<: *deploy-filters
       - mbc-deploy-only:
-          <<: *deploy-filter
+          <<: *deploy-filters
       - angio-deploy-only:
-          <<: *deploy-filter
+          <<: *deploy-filters
 
   build-deploy:
     jobs:
