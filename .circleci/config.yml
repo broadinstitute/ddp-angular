@@ -172,7 +172,7 @@ commands:
           environment:
             USE_DOCKER: false
       - run:
-          name: Setup gcloud context to deploy to << parameters.environment >>
+          name: Setup gcloud context
           command: |
             set -u
             ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
