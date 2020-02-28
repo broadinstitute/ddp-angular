@@ -132,6 +132,7 @@ commands:
             set -u
             ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          working_directory: ~/repo
       - run:
           name: Deploy to GAE
           command: |
