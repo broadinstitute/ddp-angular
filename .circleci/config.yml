@@ -403,7 +403,7 @@ workflows:
                 - production
                 - deletemewhendone
       - brain-deploy-only:
-            <<: *deploy-filters
+          <<: *deploy-filters
       - mbc-deploy-only:
           <<: *deploy-filters
       - angio-deploy-only:
