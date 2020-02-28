@@ -292,27 +292,13 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
+
   pipeline-app-build-and-store:
     executor:
       name: commit-executor
     steps:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
-
-  osteo-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - build-and-deploy-study:
-          study_key: osteo
-          study_guid: CMI-OSTEO
-
-  osteo-build-and-save:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-store:
-          study_key: osteo
 
   osteo-deploy-only:
     executor:
@@ -329,6 +315,38 @@ jobs:
       - deploy-stored-build:
           study_key: brain
           study_guid: cmi-brain
+
+  angio-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build:
+          study_key: angio
+          study_guid: ANGIO
+
+  mbc-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build:
+          study_key: mbc
+          study_guid: cmi-mbc
+
+  osteo-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - build-and-deploy-study:
+          study_key: osteo
+          study_guid: CMI-OSTEO
+
+  osteo-build-and-save:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-store:
+          study_key: osteo
+
   angio:
     executor:
       name: commit-executor
@@ -378,14 +396,20 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - pipeline-deploy-build:
-          filters:
+      - osteo-deploy-only:
+          filters: &deploy-filter
             branches:
               only:
                 - test
                 - staging
                 - production
                 - deletemewhendone
+      - brain-deploy-only:
+          <<: *deploy-filter
+      - mbc-deploy-only:
+          <<: *deploy-filter
+      - angio-deploy-only:
+          <<: *deploy-filter
 
   build-deploy:
     jobs:
