@@ -194,7 +194,9 @@ commands:
             cd ddp-workspace
             CONFIG_DIR="${OUTPUT_DIR}/assets/config"
             mkdir -p $CONFIG_DIR
-            cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js" $CONFIG_DIR
+            CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
+            cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
+            echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
           environment:
             USE_DOCKER: false
       - run:
@@ -221,9 +223,9 @@ commands:
           command: |
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+            source $BASH_ENV
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
             echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
-            source $BASH_ENV
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-angular-builds' >> $BASH_ENV
             source $BASH_ENV
