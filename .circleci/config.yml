@@ -241,7 +241,7 @@ commands:
               then
                 echo "No build found for <<parameters.study_key>> with git sha ${SHORT_GIT_SHA}. Initiating a build for it."
                 curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
-                  "tag": "<< pipeline.git.tag >>",
+                  "branch": "<< pipeline.git.branch >>",
                   "parameters": {
                       "study_key": "<<parameters.study_key>>",
                       "do-builds": true
