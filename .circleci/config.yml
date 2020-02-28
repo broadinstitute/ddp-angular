@@ -2,20 +2,41 @@ version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
-
-
 executors:
   commit-executor:
     docker:
       - image: broadinstitute/study-server-build:02-20-2020A
     working_directory: ~/repo
 
-  nightly-executor:
-    docker:
-      - image: broadinstitute/study-server-build:02-20-2020A
-    working_directory: ~/repo
-
 commands:
+  app-build-and-store:
+    description: Run build and store archive of it
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - store-app-build
+
+  app-build-and-deploy:
+    description: Run build and immediately deploy it to GAE
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - deploy-exploded-build:
+          study_key: << parameters.study_key >>
+          study_guid: << parameters.study_guid >>
+
   set-deployment-environment:
     description: "Determine target deployment environment"
     steps:
@@ -53,97 +74,6 @@ commands:
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             echo "export NG_BUILD_OPTS=$NG_BUILD_OPTS" >> $BASH_ENV
             source $BASH_ENV
-  build-and-deploy-study:
-    description: "Build and deploy angular study website"
-    parameters:
-      study_key:
-        type: string
-      study_guid:
-        type: string
-    steps:
-      - checkout:
-          path: ~/repo
-      - set-deployment-environment
-      - run:
-          name: <<parameters.study_key>> update interpolated env vars
-          command: |
-            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: <<parameters.study_key>> show pipeline vars
-          command: |
-            echo "pipeline.id << pipeline.id >>"
-            echo "pipeline.number	 << pipeline.number	 >>"
-            echo "pipeline.project.git_url << pipeline.project.git_url >>"
-            echo "pipeline.project.type << pipeline.project.type >>"
-            echo "pipeline.git.tag << pipeline.git.tag >>"
-            echo "pipeline.git.branch << pipeline.git.branch >>"
-            echo "pipeline.git.revision << pipeline.git.revision >>"
-            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
-      - run:
-          name: <<parameters.study_key>> show environment variables
-          command: env
-      - run:
-          name: <<parameters.study_key>> generate config files
-          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
-          environment:
-            USE_DOCKER: false
-      # todo: conditionally don't build if we already have cached the tarball for the SHA+ENV somewhere (circle artifacts?  github package manager?  GCP bucket?
-      # for better build reproducibility, we want to move the same build artifacts to different environments and not rebuild them and
-      # suffer the pain of npm caching, package-lock, and auto-upgrade pitfalls
-      - restore_cache:
-          key: *npm_cache_key
-      - run:
-          name: <<parameters.study_key>> npm install
-          command: npm install
-          working_directory: ~/repo/ddp-workspace
-      - save_cache:
-          key: *npm_cache_key
-          paths:
-            - ./node_modules
-      - run:
-          name: <<parameters.study_key>> ng build
-          command: ng build $ANGULAR_PROJECT_NAME $NG_BUILD_OPTS --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
-          working_directory: ~/repo/ddp-workspace
-      - run:
-          name: <<parameters.study_key>> setup gcloud context
-          command: |
-            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - run:
-          name: <<parameters.study_key>> deploy to GAE
-          command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
-
-  app-build-and-store:
-    description: Run build and store archive of it
-    parameters:
-      study_key:
-        type: string
-    steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - build-app
-      - store-app-build
-
-  app-build-and-deploy:
-    description: Run build and immediately deploy it to GAE
-    parameters:
-      study_key:
-        type: string
-      study_guid:
-        type: string
-    steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - build-app
-      - deploy-exploded-build:
-          study_key: << parameters.study_key >>
-          study_guid: << parameters.study_guid >>
-
 
   deploy-stored-build:
     description: Deploy archived build to GAE
@@ -165,6 +95,7 @@ commands:
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+
             if [ -z $TAR_FILE_URL ]
             then
               echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
@@ -174,7 +105,7 @@ commands:
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
             cd ~/repo/ddp-workspace
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
-            echo "Contents of extracted archive:"
+            echo "Contents of extracted archive at $OUTPUT_DIR"
             ls -l $OUTPUT_DIR
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
@@ -200,7 +131,7 @@ commands:
             CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
             cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
-          environment:
+          environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
       - run:
           name: Setup gcloud context
@@ -216,7 +147,7 @@ commands:
           working_directory: ~/repo/ddp-workspace
 
   setup-shared-env:
-    description: "Setup shared ENV vars"
+    description: "Setup shared ENV vars used by multiple scripts"
     parameters:
       study_key:
         type: string
@@ -248,6 +179,7 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+
   build-app:
     description: "Build DDP study app"
     steps:
@@ -273,6 +205,8 @@ commands:
             echo "export TAR_PATH=$TAR_PATH" >> $BASH_ENV
             cd ${OUTPUT_DIR}
             tar -czvf ${TAR_PATH} .
+            echo "Tar file created at ${TAR_PATH}"
+            ls -l $TAR_PATH
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Store build archive
@@ -295,13 +229,17 @@ commands:
           command: |
             set -u
             set +e
+            # Looking for latest build of this project in Google bucket
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
             # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+
+            # if not found, let's kick off a build
             if [ -z $TAR_FILE_URL ]
               then
+                echo "No build found for <<parameters.study_key>> with git sha ${SHORT_GIT_SHA}. Initiating a build for it."
                 curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
                   "tag": "<< pipeline.git.tag >>",
                   "parameters": {
@@ -340,7 +278,7 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build:
+      - deploy-stored-build: &osteo-params
           study_key: osteo
           study_guid: CMI-OSTEO
 
@@ -348,7 +286,7 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build:
+      - deploy-stored-build: &brain-params
           study_key: brain
           study_guid: cmi-brain
 
@@ -356,7 +294,7 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build:
+      - deploy-stored-build: &angio-params
           study_key: angio
           study_guid: ANGIO
 
@@ -364,7 +302,7 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build:
+      - deploy-stored-build: &mbc-params
           study_key: mbc
           study_guid: cmi-mbc
 
@@ -373,32 +311,28 @@ jobs:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: osteo
-          study_guid: CMI-OSTEO
+          <<: *osteo-params
 
   angio-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: angio
-          study_guid: ANGIO
+          <<: *angio-params
 
   brain-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: brain
-          study_guid: cmi-brain
+          <<: *brain-params
 
   mbc-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: mbc
-          study_guid: cmi-mbc
+          <<: *mbc-params
 
 parameters:
   study_key:
@@ -430,22 +364,20 @@ workflows:
     # should run; should be this one that just launches the builds or the one actually doing the builds
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-launch-build-and-store-all-job: &build-on-tag-filters
+      - conditionally-launch-build-and-store-all-job: &build-and-store-filters
           filters:
-            tags:
+            branches:
               only:
                 - /^angular_test_.*/
                 - /^rc.*/
                 - /^hotfix.*/
                 - /^v\d.*/
-            branches:
-              ignore: /.*/
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
       - app-build-and-store-job:
-          <<: *build-on-tag-filters
+          <<: *build-and-store-filters
 
   deploy-all-apps-workflow:
     jobs:
@@ -465,22 +397,22 @@ workflows:
           <<: *deploy-filters
 
 
-#  nightly:
-#    # run a build on develop using --prod --aot as an early warning for prod/aot issues
-#
-#    triggers:
-#      - schedule:
-#          cron: "0 22 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - develop
-#    jobs:
-#      - osteo:
-#          name: osteo-nightly
-#      - angio:
-#          name: angio-nightly
-#      - brain:
-#          name: brain-nightly
-#      - mbc:
-#          name: mbc-nightly
+  nightly:
+    # run a build on develop using --prod --aot as an early warning for prod/aot issues
+
+    triggers:
+      - schedule:
+          cron: "0 22 * * *"
+          filters:
+            branches:
+              only:
+                - develop
+    jobs:
+      - osteo-build-and-deploy:
+          name: osteo-nightly
+      - angio-build-and-deploy:
+          name: angio-nightly
+      - brain-build-and-deploy:
+          name: brain-nightly
+      - mbc-build-and-deploy:
+          name: mbc-nightly
