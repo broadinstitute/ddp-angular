@@ -156,6 +156,7 @@ commands:
             # this is where app.yaml files are pointing for assets
             # save it to use in next step
             OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
             source $BASH_ENV
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive:"
