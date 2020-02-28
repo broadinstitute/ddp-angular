@@ -17,10 +17,10 @@ executors:
 
 commands:
   set-deployment-environment:
-    description: "Set ENVIRONMENT env variable based on branch"
+    description: "Determine target deployment environment"
     steps:
       - run:
-          name: Determine deployment environment
+          name: Determine deployment environment for branch << pipeline.git.branch >>
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
@@ -112,6 +112,7 @@ commands:
           name: <<parameters.study_key>> deploy to GAE
           command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
+
   app-build-and-store:
     description: Run build and store archive of it
     parameters:
@@ -124,8 +125,23 @@ commands:
       - build-app
       - store-app-build
 
+  app-build-and-deploy:
+    description: Run build and immediately deploy it to GAE
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - deploy-exploded-build
+
+
   deploy-stored-build:
-    description: "Deploy build archive to GAE"
+    description: Deploy archived build to GAE
     parameters:
       study_key:
         type: string
@@ -136,7 +152,6 @@ commands:
           path: ~/repo
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - set-deployment-environment
       - run:
           name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
           command: |
@@ -172,6 +187,12 @@ commands:
             cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js" $CONFIG_DIR
           environment:
             USE_DOCKER: false
+      - deploy-exploded-build
+
+  deploy-exploded-build:
+    description: Deploy files to GAE
+    steps:
+      - set-deployment-environment
       - run:
           name: Setup gcloud context
           command: |
@@ -180,7 +201,9 @@ commands:
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: Deploy to GAE
-          command: gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          command: |
+            set -u
+            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
 
   setup-shared-env:
@@ -197,6 +220,7 @@ commands:
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-angular-builds' >> $BASH_ENV
             source $BASH_ENV
+
   setup-build-workspace:
     description: "Setup workspace used by all projects"
     steps:
@@ -219,7 +243,7 @@ commands:
           name: ng build
           command: |
             set -u
-            ng build $ANGULAR_PROJECT_NAME --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
+            ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=dist/$ANGULAR_PROJECT_NAME --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
 
   store-app-build:
@@ -246,6 +270,7 @@ commands:
             ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo
+
   conditionally-launch-build-and-store:
     description: Launch build and save job if build missing
     parameters:
@@ -278,6 +303,7 @@ commands:
             fi
 
 jobs:
+
   conditionally-launch-build-and-store-all-job:
     executor:
       name: commit-executor
@@ -335,38 +361,31 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
+      - app-build-and-deploy:
           study_key: osteo
           study_guid: CMI-OSTEO
 
-  osteo-build-and-save:
+  angio-build-and-deploy:
     executor:
       name: commit-executor
     steps:
-      - app-build-and-store:
-          study_key: osteo
-
-  angio:
-    executor:
-      name: commit-executor
-    steps:
-      - build-and-deploy-study:
+      - app-build-and-deploy:
           study_key: angio
           study_guid: ANGIO
 
-  brain:
+  brain-build-and-deploy:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
+      - app-build-and-deploy:
           study_key: brain
           study_guid: cmi-brain
 
-  mbc:
+  mbc-build-and-deploy:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
+      - app-build-and-deploy:
           study_key: mbc
           study_guid: cmi-mbc
 
@@ -419,41 +438,19 @@ workflows:
       - angio-deploy-only:
           <<: *deploy-filters
 
-  build-deploy:
+  build-and-deploy-all-apps-workflow:
     jobs:
-      - osteo-build-and-deploy:
-          # todo: more DRY on branch filtering
+      - osteo-build-and-deploy: &build-and-deploy-filters
           filters:
             branches:
               only:
                 - develop
-      - osteo-build-and-save:
-          filters:
-            branches:
-              only:
-                - /^xxangular-appengine-deployment.*/
-      - osteo-deploy-only:
-          filters:
-            tags:
-              only:
-                - /^xx_angular_test_.*/
-            branches:
-              ignore: /.*/
-      - angio:
-          filters:
-            branches:
-              only:
-                - develop
-      - brain:
-          filters:
-            branches:
-              only:
-                - develop
-      - mbc:
-          filters:
-            branches:
-              only:
-                - develop
+      - brain-build-and-deploy:
+          <<: *build-and-deploy-filters
+      - angio-build-and-deploy:
+          <<: *build-and-deploy-filters
+      - mbc-build-and-deploy:
+          <<: *build-and-deploy-filters
 
 #  nightly:
 #    # run a build on develop using --prod --aot as an early warning for prod/aot issues
