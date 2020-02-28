@@ -269,10 +269,9 @@ commands:
             TAR_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${SHORT_GIT_SHA}.tar.gz"
             TAR_PATH="/tmp/${TAR_NAME}"
             # Save some ENV vars for in job downstream
-            echo "export ANGULAR_PROJECT_NAME=$ANGULAR_PROJECT_NAME" >> $BASH_ENV
             echo "export TAR_NAME=$TAR_NAME" >> $BASH_ENV
             echo "export TAR_PATH=$TAR_PATH" >> $BASH_ENV
-            cd dist/${ANGULAR_PROJECT_NAME}
+            cd ${OUTPUT_DIR}
             tar -czvf ${TAR_PATH} .
           working_directory: ~/repo/ddp-workspace
       - run:
