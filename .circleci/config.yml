@@ -54,7 +54,7 @@ commands:
                 DEPLOY_ENV=test
               ;;
               angular-appengine-deployment-ctd)
-                DEPLOY_ENV=staging
+                DEPLOY_ENV=test
               ;;
               staging)
                 DEPLOY_ENV=staging
