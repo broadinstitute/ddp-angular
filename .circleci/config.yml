@@ -53,9 +53,6 @@ commands:
               test)
                 DEPLOY_ENV=test
               ;;
-              angular-appengine-deployment-ctd)
-                DEPLOY_ENV=test
-              ;;
               staging)
                 DEPLOY_ENV=staging
               ;;
@@ -348,7 +345,6 @@ workflows:
             branches:
               only:
                 - develop
-                - angular-appengine-deployment-ctd
       - brain-build-and-deploy:
           <<: *build-and-deploy-filters
       - angio-build-and-deploy:
