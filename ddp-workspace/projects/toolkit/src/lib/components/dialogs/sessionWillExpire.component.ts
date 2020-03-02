@@ -49,8 +49,8 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             const remainingTime = expiresAt - now - EXTRA_TIME;
             if (remainingTime > 0) {
                 const totalSeconds = Math.floor(remainingTime / 1000);
-                const seconds = (totalSeconds) % 60;
-                const minutes = ((totalSeconds) - seconds) / 60;
+                const seconds = totalSeconds % 60;
+                const minutes = (totalSeconds - seconds) / 60;
                 const formattedMinutes = this.formatTime(minutes);
                 const formattedSeconds = this.formatTime(seconds);
                 this.timeLeft = `${formattedMinutes}:${formattedSeconds}`;
