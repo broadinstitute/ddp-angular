@@ -42,11 +42,12 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
         private dialogRef: MatDialogRef<SessionWillExpireComponent>) { }
 
     public ngOnInit(): void {
+        const EXTRA_TIME = 60000;
         const expiresAt = this.session.expiresAt;
         const timer = interval(1000).subscribe(() => {
             const now = Date.now();
-            const remainingTime = expiresAt - now;
-            if (remainingTime) {
+            const remainingTime = expiresAt - now - EXTRA_TIME;
+            if (remainingTime > 0) {
                 const totalSeconds = Math.floor(remainingTime / 1000);
                 const seconds = (totalSeconds) % 60;
                 const minutes = ((totalSeconds) - seconds) / 60;
