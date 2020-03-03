@@ -39,10 +39,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleA
             </section>
             <img lazy-resource src="./assets/images/dna-strand.svg" class="DNAStrand" alt="DNA Strand" />
         </div>
-        <div class="row">
-            <div class="Separator"></div>
-        </div>
-        <div class="row">
+        <div class="row MarginTop">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
                     Welcome.SecondBlock.Title
