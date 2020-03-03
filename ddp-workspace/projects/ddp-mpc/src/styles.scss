@@ -29,7 +29,7 @@ body {
 
 @media only screen and (max-width: 1024px) {
     html {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -544,7 +544,7 @@ a:focus {
 }
 
 .Message-title {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 300;
     line-height: 1.25;
     color: mat-color($app-theme, 1000);
