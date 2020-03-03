@@ -582,6 +582,10 @@ a:focus {
     z-index: 1;
 }
 
+.MarginTop {
+    margin-top: 150px;
+}
+
 .NoMargin {
     margin: 0 !important;
 }
@@ -600,6 +604,10 @@ a:focus {
 
 .row--moreBottomMargin {
     margin-bottom: 120px;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
 }
 
 @media only screen and (max-width: 450px) {
@@ -1234,7 +1242,7 @@ a:focus {
 .Modal-title {
     font-size: 2.5rem;
     line-height: 2.5rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: mat-color($app-theme, 1000);
     margin: 10px 0 12px 0;
     font-weight: 300;
     display: flex;
@@ -1248,7 +1256,7 @@ a:focus {
 }
 
 .Modal-text {
-    color: rgba(0, 0, 0, 0.5);
+    color: mat-color($app-theme, 1000);
     font-size: 0.95rem;
     line-height: 1.6rem;
     font-weight: 300;
@@ -1573,7 +1581,7 @@ select:-webkit-autofill {
 
 .modal-message {
     .warning-message-text {
-        color: rgba(0, 0, 0, 0.5);
+        color: mat-color($app-theme, 1000);
         font-size: 0.95rem;
         line-height: 1.6rem;
         font-weight: 300;
