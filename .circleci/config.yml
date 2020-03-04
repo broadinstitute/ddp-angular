@@ -8,7 +8,7 @@ references:
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-server-build:02-20-2020A
+      - image: broadinstitute/study-server-build:03-04-2020A
     working_directory: ~/repo
 
 commands:
@@ -50,6 +50,9 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
+              angular-appengine-deployment-ctd)
+                DEPLOY_ENV=dev
+              ;;
               test)
                 DEPLOY_ENV=test
               ;;
@@ -85,7 +88,7 @@ commands:
           command: |
             set -u
             # we are getting our builds from the one bucket
-            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
 
@@ -130,7 +133,7 @@ commands:
           name: Setup gcloud context
           command: |
             set -u
-            ./readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
           working_directory: ~/repo
       - run:
@@ -139,6 +142,21 @@ commands:
             set -u
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
+      - run:
+          name: Update deployments sheet
+          command: |
+            set -u
+            TZ=America/New_York
+            DATE=`date +%F`
+            TIME=`date +%T`
+            COMPONENT='<<parameters.study_key>> Angular client'
+            BRANCH=<< pipeline.git.branch >>
+            TAG=git tag --points-at HEAD | xargs
+            AUTHOR=`git show -s --format='%ae' HEAD`
+            ROW_DATA="[\"$DATE\",\"$TIME\",\"$COMPONENT\",\"$ENVIRONMENT\",\"$BRANCH\",\"$TAG\",\"$SHORT_GIT_SHA\",\"$AUTHOR\"]"
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | sheetappend $RELEASE_SHEET_ID "$ROW_DATA"
+
+
 
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
@@ -149,6 +167,7 @@ commands:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
+            echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
             source $BASH_ENV
@@ -346,6 +365,7 @@ workflows:
             branches:
               only:
                 - develop
+                - angular-appengine-deployment-ctd
       - brain-build-and-deploy:
           <<: *build-and-deploy-filters
       - angio-build-and-deploy:
