@@ -147,8 +147,8 @@ commands:
           command: |
             set -u
             TZ=America/New_York
-            DATE=`date +%F`
-            TIME=`date +%T`
+            DATE=`TZ=$TZ date +%F`
+            TIME=`TZ=$TZ date +%T`
             COMPONENT='<<parameters.study_key>> Angular client'
             BRANCH=<< pipeline.git.branch >>
             TAG=`git tag --points-at HEAD | xargs`
