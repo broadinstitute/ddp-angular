@@ -1074,7 +1074,7 @@ a:focus {
 }
 
 .Separator {
-    width: 1px;
+    width: 2px;
     background: mat-color($app-theme, 2100);
     margin: 50px auto;
     position: relative;
@@ -1085,8 +1085,8 @@ a:focus {
 .Separator:after {
     content: ' ';
     display: block;
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 100%;
     position: absolute;
     left: -3px;
