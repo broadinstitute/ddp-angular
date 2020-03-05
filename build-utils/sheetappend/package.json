@@ -1,0 +1,18 @@
+{
+  "name": "sheetappend",
+  "version": "1.0.0",
+  "bin": "index.js",
+  "description": "Utility to append rows to a Google Sheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Marco Ocana",
+  "devDependencies": {
+    "@types/node": "^13.7.7"
+  },
+  "dependencies": {
+    "google-auth-library": "^5.10.1"
+  }
+}
