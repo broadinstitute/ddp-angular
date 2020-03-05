@@ -151,7 +151,9 @@ commands:
             TIME=`TZ=$TZ date +%T`
             COMPONENT='<<parameters.study_key>> Angular client'
             BRANCH=<< pipeline.git.branch >>
+            # Picking up any tags attached to the current commit
             TAG=`git tag --points-at HEAD | xargs`
+            # Extract email from current commit
             AUTHOR=`git show -s --format='%ae' HEAD`
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | \
             sheetappend $RELEASE_SHEET_ID $DATE $TIME "$COMPONENT" $ENVIRONMENT $BRANCH $TAG $SHORT_GIT_SHA "$AUTHOR" $CIRCLE_BUILD_NUM "$CIRCLE_BUILD_URL"
