@@ -93,6 +93,15 @@ var DDP_ENV = {
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "qTF3AZlx12Dg7AZ3fCcC7b0Nj7JarNcz";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
+   {{else if eq $environment "test"}}
+        DDP_ENV['auth0ClientId'] = "U27zbNPjGPWhLfvLKLSalY1rTvOZblIH";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
+   {{else if eq $environment "staging"}}
+       DDP_ENV['auth0ClientId'] = "CPpfKxQ7tUnG66WHhEXiGhVe8MrC5W1A";
+       DDP_ENV['projectGAToken'] = "UA-108484823-1";
+   {{else if eq $environment "prod"}}
+      DDP_ENV['auth0ClientId'] = "VUC53k6a72LD11q6lRuVH7A5EnTPruwV";
+      DDP_ENV['projectGAToken'] = "UA-64885513-7";
   {{end}}
 {{end}}
 
