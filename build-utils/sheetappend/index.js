@@ -8,6 +8,37 @@ function readCredentialsFromStdIn() {
     return JSON.parse(keyDataString);
 }
 
+function buildAppendRowDataRequest(spreadsheetId, rowValues) {
+    const data = {
+        "range": "Sheet1!A1",
+        "majorDimension": "ROWS",
+        "values": [rowValues]
+    };
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1!A1:append?valueInputOption=USER_ENTERED&insertDataOption=OVERWRITE`;
+    return {method: 'POST', url, data};
+}
+
+function buildInsertRowBelowHeaderRequest(spreadsheetId) {
+     const data = {
+        "requests": [
+            {
+                "insertDimension": {
+                    "range": {
+                        "sheetId": 0,
+                        "dimension": "ROWS",
+                        "startIndex": 1,
+                        "endIndex": 2
+                    },
+                    "inheritFromBefore": false
+                }
+            }
+        ],
+    };
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`;
+    return {method: 'POST', url, data};
+}
+
 async function main() {
     const args = process.argv.slice(2);
     if (args < 2) {
@@ -33,16 +64,11 @@ async function main() {
     const client = auth.fromJSON(keys);
     client.scopes = ['https://www.googleapis.com/auth/spreadsheets'];
 
-    const data = {
-        "range": "Sheet1!A1:B1",
-        "majorDimension": "ROWS",
-        "values": [rowValues]
-    };
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1!A1:B1:append?valueInputOption=USER_ENTERED`;
-    const callback = (error, response) => {
-        if (error) {
-            console.error('The following error was reported:\n %o', error);
+    const handleResponse = (response) => {
+        if (response.status === 200) {
+            console.log("%o", response.data);
+        } else {
+            console.error('There was an error:\n %o', response);
             if (response) {
                 if(response.status === 404) {
                     console.error('Could not find Google sheet with id: %s', spreadsheetId);
@@ -54,11 +80,13 @@ async function main() {
                 }
             }
             process.exit(1);
-        } else {
-            console.log("%o", response.data);
         }
     };
-    client.request({method: 'POST', url, data}, callback);
+
+    let response = await client.request(buildInsertRowBelowHeaderRequest(spreadsheetId));
+    handleResponse(response);
+    response = await client.request(buildAppendRowDataRequest(spreadsheetId, rowValues));
+    handleResponse(response);
 }
 
  main().catch(console.error);
