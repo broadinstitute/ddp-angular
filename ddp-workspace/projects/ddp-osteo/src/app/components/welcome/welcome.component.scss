@@ -145,15 +145,7 @@
     grid-gap: 5rem;
     align-items: center;
     justify-content: center;
-}
-
-.partners__group_top {
     grid-template-columns: repeat(3, 1fr);
-}
-
-.partners__group_bottom {
-    grid-template-columns: repeat(2, minmax(auto, 300px));
-    justify-content: space-evenly;
 }
 
 .social-media-block {
@@ -299,8 +291,7 @@
         justify-content: center;
     }
 
-    .partners__group_top,
-    .partners__group_bottom {
+    .partners__group {
         grid-template-columns: repeat(1, minmax(auto, 300px));
         justify-content: center;
     }
