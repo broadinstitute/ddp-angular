@@ -32,7 +32,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-const toolkitConfig = new ToolkitConfigurationService();
+export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.aboutYouGuid = ''; // to be defined later
 toolkitConfig.consentGuid = ''; // to be defined later
@@ -57,7 +57,7 @@ toolkitConfig.showDataRelease = false;
 toolkitConfig.showInfoForPhysicians = true;
 toolkitConfig.showBlog = false;
 
-const sdkConfig = new ConfigurationService();
+export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -73,7 +73,7 @@ sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
-function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
