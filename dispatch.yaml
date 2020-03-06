@@ -1,7 +1,7 @@
 dispatch:
   - url: "dev.ascproject.org/*"
     service: angio
-  - url: "dev.mbcproject.org/*"
+  - url: "mbc.test.datadonationplatform.org/*"
     service: mbc
   - url: "dev.braincancerproject.org/*"
     service: brain
