@@ -53,6 +53,9 @@ commands:
               angular-appengine-deployment-ctd)
                 DEPLOY_ENV=dev
               ;;
+              DDP-4416_mpc-migration)
+                DEPLOY_ENV=dev
+              ;;
               test)
                 DEPLOY_ENV=test
               ;;
