@@ -11,12 +11,12 @@ dispatch:
   - url: "dev.osproject.org/*"
     service: osteo
 {{else if eq $environment "test"}}
-  - url: "test.angio.datadonationplatform.org/*"
+  - url: "angio.test.datadonationplatform.org/*"
     service: angio
-  - url: "test.mbc.datadonationplatform.org/*"
+  - url: "mbc.test.datadonationplatform.org/*"
     service: mbc
-  - url: "test.brain.datadonationplatform.org/*"
+  - url: "brain.test.datadonationplatform.org/*"
     service: brain
-  - url: "test.osteo.datadonationplatform.org/*"
+  - url: "osteo.test.datadonationplatform.org/*"
     service: osteo
 {{end}}
