@@ -53,6 +53,9 @@ commands:
               angular-appengine-deployment-ctd)
                 DEPLOY_ENV=dev
               ;;
+              DDP-4382_esc-migration)
+                DEPLOY_ENV=dev
+              ;;
               test)
                 DEPLOY_ENV=test
               ;;
@@ -273,6 +276,8 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
+      - conditionally-launch-build-and-store:
+          study_key: esc
 
   app-build-and-store-job:
     executor:
@@ -313,6 +318,14 @@ jobs:
           study_key: mbc
           study_guid: cmi-mbc
 
+  esc-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build: &esc-params
+          study_key: esc
+          study_guid: cmi-esc
+
   osteo-build-and-deploy:
     executor:
       name: commit-executor
@@ -341,6 +354,13 @@ jobs:
       - app-build-and-deploy:
           <<: *mbc-params
 
+  esc-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          <<: *esc-params
+
 parameters:
   study_key:
     type: string
@@ -366,6 +386,11 @@ workflows:
           <<: *build-and-deploy-filters
       - mbc-build-and-deploy:
           <<: *build-and-deploy-filters
+      - esc-build-and-deploy: &build-and-deploy-filters
+          filters:
+            branches:
+              only:
+                - DDP-4382_esc-migration
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
@@ -400,6 +425,8 @@ workflows:
           <<: *deploy-filters
       - angio-deploy-only:
           <<: *deploy-filters
+      - esc-deploy-only:
+          <<: *deploy-filters
 
   nightly:
     triggers:
@@ -418,3 +445,5 @@ workflows:
           name: brain-nightly
       - mbc-build-and-deploy:
           name: mbc-nightly
+      - esc-build-and-deploy:
+          name: esc-nightly
