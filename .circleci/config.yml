@@ -273,6 +273,8 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
+      - conditionally-launch-build-and-store:
+          study_key: mpc
 
   app-build-and-store-job:
     executor:
@@ -313,6 +315,14 @@ jobs:
           study_key: mbc
           study_guid: cmi-mbc
 
+  mpc-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build: &mpc-params
+          study_key: mpc
+          study_guid: cmi-mpc
+
   osteo-build-and-deploy:
     executor:
       name: commit-executor
@@ -341,6 +351,13 @@ jobs:
       - app-build-and-deploy:
           <<: *mbc-params
 
+  mpc-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          <<: *mpc-params
+
 parameters:
   study_key:
     type: string
@@ -365,6 +382,8 @@ workflows:
       - angio-build-and-deploy:
           <<: *build-and-deploy-filters
       - mbc-build-and-deploy:
+          <<: *build-and-deploy-filters
+      - mpc-build-and-deploy:
           <<: *build-and-deploy-filters
 
   launch-all-app-builds-workflow:
@@ -400,6 +419,8 @@ workflows:
           <<: *deploy-filters
       - angio-deploy-only:
           <<: *deploy-filters
+      - mpc-deploy-only:
+          <<: *deploy-filters
 
   nightly:
     triggers:
@@ -418,3 +439,5 @@ workflows:
           name: brain-nightly
       - mbc-build-and-deploy:
           name: mbc-nightly
+      - mpc-build-and-deploy:
+          name: mpc-nightly
