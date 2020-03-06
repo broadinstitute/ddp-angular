@@ -1,75 +1,66 @@
 version: 2.1
+
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
 
-
+# Container for all the builds
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-server-build:02-14-2020A
-    working_directory: ~/repo
-
-  nightly-executor:
-    docker:
-      - image: broadinstitute/study-server-build:02-14-2020A
+      - image: broadinstitute/study-server-build:03-04-2020A
     working_directory: ~/repo
 
 commands:
+  app-build-and-store:
+    description: Run build and store archive of it
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - store-app-build
 
-  build-and-deploy-study:
-    description: "Build and deploy angular study website"
+  app-build-and-deploy:
+    description: Run build and immediately deploy it to GAE
     parameters:
       study_key:
         type: string
       study_guid:
         type: string
     steps:
-      - checkout:
-          path: ~/repo
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - build-app
+      - deploy-exploded-build:
+          study_key: << parameters.study_key >>
+          study_guid: << parameters.study_guid >>
+
+  set-deployment-environment:
+    description: "Determine target deployment environment"
+    steps:
       - run:
-          name: <<parameters.study_key>> update interpolated env vars
-          command: |
-            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            # A hurried solution. I am sure there is a better way to get the vault server address. Perhaps we cook it into Dockerfile?
-            echo 'export VAULT_ADDR=`grep "address" /etc/consul-template/config/config.json  | grep -v localhost | grep -Eo "https.*[^\"]"`' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: <<parameters.study_key>> show pipeline vars
-          command: |
-            echo "pipeline.id << pipeline.id >>"
-            echo "pipeline.number	 << pipeline.number	 >>"
-            echo "pipeline.project.git_url << pipeline.project.git_url >>"
-            echo "pipeline.project.type << pipeline.project.type >>"
-            echo "pipeline.git.tag << pipeline.git.tag >>"
-            echo "pipeline.git.branch << pipeline.git.branch >>"
-            echo "pipeline.git.revision << pipeline.git.revision >>"
-            echo "pipeline.git.base_revision << pipeline.git.base_revision >>"
-      - run:
-          name: <<parameters.study_key>> determine deployment environment
+          name: Determine deployment environment for branch << pipeline.git.branch >>
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
               ;;
-              appengine_deployment)
-                DEPLOY_ENV=dev
-              ;;
-              DDP-4382_esc-migration)
+              angular-appengine-deployment-ctd)
                 DEPLOY_ENV=dev
               ;;
               test)
                 DEPLOY_ENV=test
-                NG_BUILD_OPTS=--prod --aot
               ;;
               staging)
                 DEPLOY_ENV=staging
-                NG_BUILD_OPTS=--prod --aot
               ;;
-              staging)
+              production)
                 DEPLOY_ENV=prod
-                NG_BUILD_OPTS=--prod --aot
               ;;
               *)
                 echo "Cannot map << pipeline.git.branch >> to a deployment environment"
@@ -78,119 +69,339 @@ commands:
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
             source $BASH_ENV
+  deploy-stored-build:
+    description: Deploy archived build to GAE
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - run:
-          name: <<parameters.study_key>> show environment variables
-          command: env
+          name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
+          command: |
+            set -u
+            # we are getting our builds from the one bucket
+            readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+            if [ -z $TAR_FILE_URL ]
+            then
+              echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
+              exit 1
+            fi
+            TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
+            gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
+            cd ~/repo/ddp-workspace
+            mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
+            echo "Contents of extracted archive at $OUTPUT_DIR"
+            ls -l $OUTPUT_DIR
+      - deploy-exploded-build:
+          study_key: << parameters.study_key >>
+          study_guid: << parameters.study_guid >>
+
+  deploy-exploded-build:
+    description: Deploy files to GAE
+    parameters:
+      study_key:
+        type: string
+      study_guid:
+        type: string
+    steps:
+      - set-deployment-environment
       - run:
-          name: <<parameters.study_key>> generate config files
-          command: ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
-          environment:
+          name: <<parameters.study_key>> generate config files and copy pepperConfig.js
+          command: |
+            set -u
+            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+            cd ddp-workspace
+            CONFIG_DIR="${OUTPUT_DIR}/assets/config"
+            mkdir -p $CONFIG_DIR
+            CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
+            cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
+            echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
+          environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
-      # todo: conditionally don't build if we already have cached the tarball for the SHA+ENV somewhere (circle artifacts?  github package manager?  GCP bucket?
-      # for better build reproducibility, we want to move the same build artifacts to different environments and not rebuild them and
-      # suffer the pain of npm caching, package-lock, and auto-upgrade pitfalls
+      - run:
+          name: Setup gcloud context
+          command: |
+            set -u
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          working_directory: ~/repo
+      - run:
+          name: Deploy to GAE
+          command: |
+            set -u
+            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+          working_directory: ~/repo/ddp-workspace
+      - run:
+          name: Update deployments sheet
+          command: |
+            set -u
+            TZ=America/New_York
+            DATE=`TZ=$TZ date +%F`
+            TIME=`TZ=$TZ date +%T`
+            COMPONENT='<<parameters.study_key>> Angular client'
+            BRANCH=<< pipeline.git.branch >>
+            # Picking up any tags attached to the current commit
+            TAG=`git tag --points-at HEAD | xargs`
+            # Extract email from current commit
+            AUTHOR=`git show -s --format='%ae' HEAD`
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | \
+            sheetappend $RELEASE_SHEET_ID $DATE $TIME "$COMPONENT" $ENVIRONMENT $BRANCH "$TAG" $SHORT_GIT_SHA "$AUTHOR" $CIRCLE_BUILD_NUM "$CIRCLE_BUILD_URL"
+  setup-shared-env:
+    description: "Setup shared ENV vars used by multiple scripts"
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - run:
+          name: Set environment variables to build <<parameters.study_key>>
+          command: |
+            echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+            source $BASH_ENV
+            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
+            echo 'export BUILDS_BUCKET=ddp-angular-builds' >> $BASH_ENV
+            source $BASH_ENV
+  setup-build-workspace:
+    description: "Setup workspace used by all projects"
+    steps:
+      - checkout:
+          path: ~/repo
       - restore_cache:
           key: *npm_cache_key
       - run:
-          name: <<parameters.study_key>> npm install
+          name: npm install
           command: npm install
           working_directory: ~/repo/ddp-workspace
       - save_cache:
           key: *npm_cache_key
           paths:
             - ./node_modules
+
+  build-app:
+    description: "Build DDP study app"
+    steps:
       - run:
-          name: <<parameters.study_key>> ng build
-          command: ng build $ANGULAR_PROJECT_NAME $NG_BUILD_OPTS --base-href=/ --output-path=$ANGULAR_PROJECT_DIR_PATH/dist --verbose=true --progress=true
-          working_directory: ~/repo/ddp-workspace
-      - run:
-          name: <<parameters.study_key>> setup gcloud context
+          name: ng build
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-            # ran out of time, but demonstration of basic idea extracting data from Vault directly. Needs to be wrapped in nicer way!
-            #gcloud --quiet config set compute/zone `vault read  -format=json  secret/pepper/$DEPLOY_ENV/v1/conf | jq -r '.data.gcp.computeZone'`
-      - run:
-          name: <<parameters.study_key>> deploy to GAE
-          command: gcloud app deploy --version="${CIRCLE_SHA1}" --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            set -u
+            ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
 
+  store-app-build:
+    description: "Copy build to cloud storage"
+    steps:
+      - run:
+          name: Create build archive
+          command: |
+            set -u
+            DATE=`date +%F`
+            TAR_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${SHORT_GIT_SHA}.tar.gz"
+            TAR_PATH="/tmp/${TAR_NAME}"
+            # Save some ENV vars for in job downstream
+            echo "export TAR_NAME=$TAR_NAME" >> $BASH_ENV
+            echo "export TAR_PATH=$TAR_PATH" >> $BASH_ENV
+            cd ${OUTPUT_DIR}
+            tar -czvf ${TAR_PATH} .
+            echo "Tar file created at ${TAR_PATH}"
+            ls -l $TAR_PATH
+          working_directory: ~/repo/ddp-workspace
+      - run:
+          name: Store build archive
+          command: |
+            set -u
+            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
+          working_directory: ~/repo
 
+  conditionally-launch-build-and-store:
+    description: Launch build and save job if build missing
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - run:
+          name: Initiate build for <<parameters.study_key>> and git SHA << pipeline.git.revision >> if existing one not found
+          command: |
+            set -u
+            set +e
+            # Looking for latest build of this project in Google bucket
+            ./readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Checking for ${TAR_FILE_URL_PATTERN}"
+            # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+            # if not found, let's kick off a build
+            if [ -z $TAR_FILE_URL ]
+              then
+                echo "No build found for <<parameters.study_key>> with git sha ${SHORT_GIT_SHA}. Initiating a build for it."
+                curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
+                  "branch": "<< pipeline.git.branch >>",
+                  "parameters": {
+                      "study_key": "<<parameters.study_key>>",
+                      "do-builds": true
+                  }
+                }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
+              else
+                echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
+            fi
 jobs:
-  osteo:
+
+  conditionally-launch-build-and-store-all-job:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
+      - checkout
+      - conditionally-launch-build-and-store:
+          study_key: osteo
+      - conditionally-launch-build-and-store:
+          study_key: brain
+      - conditionally-launch-build-and-store:
+          study_key: angio
+      - conditionally-launch-build-and-store:
+          study_key: mbc
+
+  app-build-and-store-job:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-store:
+          study_key: << pipeline.parameters.study_key >>
+
+  osteo-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build: &osteo-params
           study_key: osteo
           study_guid: CMI-OSTEO
 
-  angio:
+  brain-deploy-only:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
-          study_key: angio
-          study_guid: ANGIO
-
-  brain:
-    executor:
-      name: commit-executor
-    steps:
-      - build-and-deploy-study:
+      - deploy-stored-build: &brain-params
           study_key: brain
           study_guid: cmi-brain
 
-  mbc:
+  angio-deploy-only:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
+      - deploy-stored-build: &angio-params
+          study_key: angio
+          study_guid: ANGIO
+
+  mbc-deploy-only:
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build: &mbc-params
           study_key: mbc
           study_guid: cmi-mbc
 
-  esc:
+  osteo-build-and-deploy:
     executor:
       name: commit-executor
     steps:
-      - build-and-deploy-study:
-          study_key: esc
-          study_guid: cmi-esc
+      - app-build-and-deploy:
+          <<: *osteo-params
+
+  angio-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          <<: *angio-params
+
+  brain-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          <<: *brain-params
+
+  mbc-build-and-deploy:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          <<: *mbc-params
+
+parameters:
+  study_key:
+    type: string
+    default: "UNKNOWN"
+  do-builds:
+    type: boolean
+    default: false
 
 workflows:
   version: 2
-  build-deploy:
-    jobs:
-      - osteo:
-          # todo: more DRY on branch filtering
-          filters:
-            branches:
-              only:
-                - develop
-      - angio:
-          filters:
-            branches:
-              only:
-                - develop
-      - brain:
-          filters:
-            branches:
-              only:
-                - develop
-      - mbc:
-          filters:
-            branches:
-              only:
-                - develop
-      - esc:
-          filters:
-            branches:
-              only:
-                - DDP-4382_esc-migration
-  nightly:
-    # run a build on develop using --prod --aot as an early warning for prod/aot issues
 
+  build-and-deploy-all-apps-workflow:
+    jobs:
+      - osteo-build-and-deploy: &build-and-deploy-filters
+          filters:
+            branches:
+              only:
+                - develop
+                - angular-appengine-deployment-ctd
+      - brain-build-and-deploy:
+          <<: *build-and-deploy-filters
+      - angio-build-and-deploy:
+          <<: *build-and-deploy-filters
+      - mbc-build-and-deploy:
+          <<: *build-and-deploy-filters
+
+  launch-all-app-builds-workflow:
+    # using do-builds param to select which of the two workflows using the build-on-tag-filters
+    # should run; should be this one that just launches the builds or the one actually doing the builds
+    unless: << pipeline.parameters.do-builds >>
+    jobs:
+      - conditionally-launch-build-and-store-all-job: &build-and-store-filters
+          filters:
+            branches:
+              only:
+                - /^rc.*/
+                - /^hotfix.*/
+
+  build-app-workflow:
+    when: << pipeline.parameters.do-builds >>
+    jobs:
+      - app-build-and-store-job:
+          <<: *build-and-store-filters
+
+  deploy-all-apps-workflow:
+    jobs:
+      - osteo-deploy-only: &deploy-filters
+          filters:
+            branches:
+              only:
+                - test
+                - staging
+                - production
+      - brain-deploy-only:
+          <<: *deploy-filters
+      - mbc-deploy-only:
+          <<: *deploy-filters
+      - angio-deploy-only:
+          <<: *deploy-filters
+
+  nightly:
     triggers:
       - schedule:
           cron: "0 22 * * *"
@@ -199,11 +410,11 @@ workflows:
               only:
                 - develop
     jobs:
-      - osteo:
+      - osteo-build-and-deploy:
           name: osteo-nightly
-      - angio:
+      - angio-build-and-deploy:
           name: angio-nightly
-      - brain:
+      - brain-build-and-deploy:
           name: brain-nightly
-      - mbc:
+      - mbc-build-and-deploy:
           name: mbc-nightly
