@@ -1,0 +1,22 @@
+{{ $environment := env "ENVIRONMENT"}}
+
+dispatch:
+{{if eq $environment "dev"}}
+  - url: "dev.ascproject.org/*"
+    service: angio
+  - url: "dev.mbcproject.org/*"
+    service: mbc
+  - url: "dev.braincancerproject.org/*"
+    service: brain
+  - url: "dev.osproject.org/*"
+    service: osteo
+{{else if eq $environment "test"}}
+  - url: "test.angio.datadonationplatform.org/*"
+    service: angio
+  - url: "test.mbc.datadonationplatform.org/*"
+    service: mbc
+  - url: "test.brain.datadonationplatform.org/*"
+    service: brain
+  - url: "test.osteo.datadonationplatform.org/*"
+    service: osteo
+{{end}}
