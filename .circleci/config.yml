@@ -140,7 +140,7 @@ commands:
           name: Update GAE dispatch file
           command: |
             set -u
-            gcloud app deploy--project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
+            gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Deploy to GAE
