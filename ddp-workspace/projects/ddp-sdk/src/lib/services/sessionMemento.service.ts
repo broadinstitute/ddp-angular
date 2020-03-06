@@ -8,7 +8,7 @@ import { filter, map, mergeMap, startWith } from 'rxjs/operators';
 export class SessionMementoService implements OnDestroy {
     private readonly SESSION_KEY: string = 'session_key';
     private readonly TOKEN_KEY = 'token';
-    private readonly MSECS_TO_NOTIFICATION = 300000;
+    private readonly MSECS_TO_NOTIFICATION = 360000;
 
     private sessionSubject: BehaviorSubject<Session | null> = new BehaviorSubject<Session | null>(this.session);
     private renewSubject: Subject<number> = new Subject<number>();
