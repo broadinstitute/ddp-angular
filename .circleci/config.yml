@@ -386,8 +386,11 @@ workflows:
           <<: *build-and-deploy-filters
       - mbc-build-and-deploy:
           <<: *build-and-deploy-filters
-      - mpc-build-and-deploy:
-          <<: *build-and-deploy-filters
+      - mpc-build-and-deploy: &build-and-deploy-filters
+          filters:
+            branches:
+              only:
+                - DDP-4419_mpc-migration
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
