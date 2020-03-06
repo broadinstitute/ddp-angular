@@ -1,0 +1,9 @@
+dispatch:
+  - url: "dev.ascproject.org/*"
+    service: angio
+  - url: "dev.mbcproject.org/*"
+    service: mbc
+  - url: "dev.braincancerproject.org/*"
+    service: brain
+  - url: "dev.osproject.org/*"
+    service: osteo
