@@ -2,13 +2,13 @@
 
 dispatch:
 {{if eq $environment "dev"}}
-  - url: "dev.ascproject.org/*"
+  - url: "angio.dev.datadonationplatform.org/*"
     service: angio
-  - url: "dev.mbcproject.org/*"
+  - url: "angio.dev.datadonationplatform.org/*"
     service: mbc
-  - url: "dev.braincancerproject.org/*"
+  - url: "angio.dev.datadonationplatform.org/*"
     service: brain
-  - url: "dev.osproject.org/*"
+  - url: "angio.dev.datadonationplatform.org/*"
     service: osteo
 {{else if eq $environment "test"}}
   - url: "angio.test.datadonationplatform.org/*"
