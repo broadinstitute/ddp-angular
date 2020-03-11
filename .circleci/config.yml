@@ -21,6 +21,7 @@ commands:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - set-deployment-environment
       - build-app
       - store-app-build
 
@@ -83,6 +84,7 @@ commands:
           path: ~/repo
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - set-deployment-environment
       - run:
           name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
           command: |
