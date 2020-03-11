@@ -93,7 +93,7 @@ commands:
           command: |
             set -u
             # we are getting our builds from the one bucket
-            readvault.sh secret/pepper/${ENVIRONMENT}/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
 
