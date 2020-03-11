@@ -51,6 +51,9 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
+              circle-ci-update-test)
+                DEPLOY_ENV=dev
+              ;;
               circleci-update-build-bucket)
                 DEPLOY_ENV=dev
               ;;
