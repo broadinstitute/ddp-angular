@@ -235,7 +235,6 @@ commands:
     steps:
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - set-deployment-environment
       - run:
           name: Initiate build for <<parameters.study_key>> and git SHA << pipeline.git.revision >> if existing one not found
           command: |
