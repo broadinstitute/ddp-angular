@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
+import { CompositeDisposable, RenewSessionNotifier, AnalyticsEventsService, AnalyticsEvent } from 'ddp-sdk';
 import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
+
+declare const ga: Function;
 
 @Component({
   selector: 'app-root',
@@ -20,27 +22,29 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private analytics: AnalyticsEventsService,
     private communicationService: CommunicationService,
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier) { }
 
   public ngOnInit(): void {
-    this.mailingListDialogListener();
-    this.sessionExpiredDialogListener();
+    this.initMailingListDialogListener();
+    this.initSessionExpiredDialogListener();
+    this.initAnalyticsListener();
   }
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
   }
 
-  private mailingListDialogListener(): void {
+  private initMailingListDialogListener(): void {
     const modalOpen = this.communicationService.openJoinDialog$.subscribe(() => {
       this.dialog.open(JoinMailingListComponent, this.DIALOG_BASE_SETTINGS);
     });
     this.anchor.addNew(modalOpen);
   }
 
-  private sessionExpiredDialogListener(): void {
+  private initSessionExpiredDialogListener(): void {
     const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
       this.dialog.open(SessionWillExpireComponent, this.DIALOG_BASE_SETTINGS);
     });
@@ -48,5 +52,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dialog.closeAll();
     });
     this.anchor.addNew(modalOpen).addNew(modalClose);
+  }
+
+  private initAnalyticsListener(): void {
+    const events = this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
+    });
+    this.anchor.addNew(events);
   }
 }

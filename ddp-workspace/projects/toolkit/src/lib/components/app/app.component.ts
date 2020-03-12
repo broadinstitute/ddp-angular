@@ -9,14 +9,26 @@ import { WarningComponent } from '../dialogs/warning.component';
 import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { distinctUntilChanged, filter, map, scan, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
-import { BrowserContentService, UserProfile, UserProfileDecorator, UserProfileServiceAgent, WindowRef, RenewSessionNotifier } from 'ddp-sdk';
+import { BehaviorSubject, merge, Observable, of } from 'rxjs';
+import {
+    BrowserContentService,
+    UserProfile,
+    UserProfileDecorator,
+    UserProfileServiceAgent,
+    WindowRef,
+    RenewSessionNotifier,
+    AnalyticsEventsService,
+    CompositeDisposable,
+    AnalyticsEvent
+} from 'ddp-sdk';
 
 declare global {
     interface Window {
         twttr: any;
     }
 }
+
+declare const ga: Function;
 
 @Component({
     selector: 'app-root',
@@ -67,7 +79,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public twitterUrl: string;
     public unsupportedBrowser: boolean;
     public blogUrl: string;
-    private anchor: Subscription = new Subscription();
+    private anchor = new CompositeDisposable();
     private readonly dialogBaseSettings = {
         width: '740px',
         position: { top: '30px' },
@@ -86,6 +98,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private renewNotifier: RenewSessionNotifier,
         private windowRef: WindowRef,
         private userProfile: UserProfileServiceAgent,
+        private analytics: AnalyticsEventsService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
@@ -93,6 +106,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.initBrowserWarningListener();
         this.initSessionWillExpireListener();
         this.initTranslate();
+        this.initAnalyticsListener();
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
@@ -105,7 +119,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.anchor.unsubscribe();
+        this.anchor.removeAll();
     }
 
     public closeNav(): void {
@@ -201,14 +215,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // subscribe once to all the incoming events
         const ops$ = merge(openSideNav$, closeSideNav$, openJoinDialog$).subscribe();
 
-        this.anchor.add(ops$);
+        this.anchor.addNew(ops$);
     }
 
     private initBrowserWarningListener(): void {
         const modal = this.browserContent.events.subscribe(() => {
             this.openWarningDialog();
         });
-        this.anchor.add(modal);
+        this.anchor.addNew(modal);
     }
 
     private initSessionWillExpireListener(): void {
@@ -218,7 +232,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
             this.closeSessionWillExpireDialog();
         });
-        this.anchor.add(modalOpen).add(modalClose);
+        this.anchor.addNew(modalOpen).addNew(modalClose);
     }
 
     private initTranslate(): void {
@@ -227,5 +241,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             const locale = JSON.parse(session).locale;
             this.translate.use(locale);
         }
+    }
+
+    private initAnalyticsListener(): void {
+        const events = this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+        this.anchor.addNew(events);
     }
 }
