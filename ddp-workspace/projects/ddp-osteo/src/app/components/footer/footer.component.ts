@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AnalyticsEventsService, AnalyticsEvents } from 'ddp-sdk';
+import { AnalyticsEventsService, AnalyticsActionTypes } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -38,6 +38,6 @@ export class FooterComponent implements OnInit {
   }
 
   public sendSocialMediaAnalytics(event: string): void {
-    this.analytics.emitCustomEvent(AnalyticsEvents.Social, event);
+    this.analytics.emitCustomEvent(AnalyticsActionTypes.Social, event);
   }
 }

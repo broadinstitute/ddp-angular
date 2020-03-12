@@ -5,7 +5,7 @@
 export * from './lib/ddp.module';
 
 export * from './lib/models/person';
-export * from './lib/models/analyticsEvents';
+export * from './lib/models/analyticsActionTypes';
 export * from './lib/models/email';
 export * from './lib/models/userProfileDecorator';
 export * from './lib/models/activity/activityResponse';

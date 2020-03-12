@@ -1,4 +1,4 @@
-export enum AnalyticsEvents {
+export enum AnalyticsActionTypes {
     FromHeader = 'fromHeader',
     FromMainPage = 'fromMainPage',
     FromFAQ = 'fromFAQ',

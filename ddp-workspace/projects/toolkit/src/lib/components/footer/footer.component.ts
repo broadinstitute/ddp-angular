@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
 import { JoinMailingListComponent } from './../dialogs/joinMailingList.component';
-import { AnalyticsEventsService, AnalyticsEvents, WindowRef } from 'ddp-sdk';
+import { AnalyticsEventsService, AnalyticsActionTypes, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-footer',
@@ -124,7 +124,7 @@ export class FooterComponent implements OnInit {
     }
 
     public doAnalytics(action: string): void {
-        this.analytics.emitCustomEvent(AnalyticsEvents.Social, action);
+        this.analytics.emitCustomEvent(AnalyticsActionTypes.Social, action);
     }
 
     public get showDataRelease(): boolean {

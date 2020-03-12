@@ -6,7 +6,7 @@ import { LoggingService } from '../../../services/logging.service';
 import { UserActivityServiceAgent } from '../../../services/serviceAgents/userActivityServiceAgent.service';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
-import { AnalyticsEvents } from '../../../models/analyticsEvents';
+import { AnalyticsActionTypes } from '../../../models/analyticsActionTypes';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
 
@@ -236,6 +236,6 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   private doAnalytics(action: string): void {
-    this.analytics.emitCustomEvent(AnalyticsEvents.Dashboard, action);
+    this.analytics.emitCustomEvent(AnalyticsActionTypes.Dashboard, action);
   }
 }

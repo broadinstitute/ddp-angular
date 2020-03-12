@@ -7,7 +7,7 @@ import { ConfigurationService } from '../configuration.service';
 import { AnalyticsEventsService } from '../analyticsEvents.service';
 import { RenewSessionNotifier } from '../renewSessionNotifier.service';
 import { Auth0Mode } from '../../models/auth0-mode';
-import { AnalyticsEvents } from '../../models/analyticsEvents';
+import { AnalyticsActionTypes } from '../../models/analyticsActionTypes';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -139,7 +139,7 @@ export class Auth0AdapterService implements OnDestroy {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
                 this.log.logEvent('auth0Adapter.handleAuthentication', authResult);
-                this.analytics.emitCustomEvent(AnalyticsEvents.Authentication, AnalyticsEvents.Login);
+                this.analytics.emitCustomEvent(AnalyticsActionTypes.Authentication, AnalyticsActionTypes.Login);
             } else if (err) {
                 this.log.logError('auth0Adapter.handleAuthentication', err);
                 let error = null;
@@ -187,7 +187,7 @@ export class Auth0AdapterService implements OnDestroy {
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent('auth0Adapter.logout', null);
-        this.analytics.emitCustomEvent(AnalyticsEvents.Authentication, AnalyticsEvents.Logout);
+        this.analytics.emitCustomEvent(AnalyticsActionTypes.Authentication, AnalyticsActionTypes.Logout);
         this.webAuth.logout({
             returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
             clientID: this.configuration.auth0ClientId
