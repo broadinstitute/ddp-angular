@@ -46,7 +46,7 @@ export * from './lib/services/sessionMemento.service';
 export * from './lib/services/serviceAgents/announcementsServiceAgent.service';
 export * from './lib/services/internationalization/ngxTranslate.service';
 export * from './lib/services/serviceAgents/mailingListServiceAgent.service';
-export * from './lib/services/googleAnalyticsEvents.service';
+export * from './lib/services/analyticsEvents.service';
 export * from './lib/services/serviceAgents/resendEmailServiceAgent.service';
 export * from './lib/services/serviceAgents/userProfileServiceAgent.service';
 export * from './lib/services/irbPassword.service';

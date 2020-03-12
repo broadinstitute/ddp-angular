@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { GoogleAnalyticsEventsService, GoogleAnalytics, BrowserContentService, WindowRef } from 'ddp-sdk';
+import { AnalyticsEventsService, GoogleAnalytics, BrowserContentService, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-header',
@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
     constructor(
         private communicationService: CommunicationService,
         private router: Router,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private browserContent: BrowserContentService,
         private windowRef: WindowRef,
         @Inject(DOCUMENT) private document: any,

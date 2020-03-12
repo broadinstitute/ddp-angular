@@ -15,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 import { BaseActivityComponent } from './baseActivity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
@@ -207,7 +207,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes

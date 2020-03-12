@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef, GoogleAnalytics } from 'ddp-sdk';
+import { AnalyticsEventsService, BrowserContentService, WindowRef, GoogleAnalytics } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
@@ -120,7 +120,7 @@ export class WelcomeComponent implements OnInit {
 
     constructor(
         private windowRef: WindowRef,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private browserContent: BrowserContentService) { }
 
     public ngOnInit(): void {

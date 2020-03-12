@@ -10,7 +10,7 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  GoogleAnalyticsEventsService
+  AnalyticsEventsService
 } from 'ddp-sdk';
 
 import {
@@ -131,7 +131,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 export class AppModule {
   constructor(
     private router: Router,
-    private analytics: GoogleAnalyticsEventsService) {
+    private analytics: AnalyticsEventsService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.analytics.emitNavigationEvent();

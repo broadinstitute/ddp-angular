@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
+import { AnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private communicationService: CommunicationService,
-    private analytics: GoogleAnalyticsEventsService,
+    private analytics: AnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {

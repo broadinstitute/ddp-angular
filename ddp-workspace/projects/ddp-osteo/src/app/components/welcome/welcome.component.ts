@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
-import { WindowRef, GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
+import { WindowRef, AnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -19,7 +19,7 @@ export class WelcomeComponent implements OnInit {
     private headerConfig: HeaderConfigurationService,
     private window: WindowRef,
     private communicationService: CommunicationService,
-    private analytics: GoogleAnalyticsEventsService,
+    private analytics: AnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { MailingListServiceAgent, GoogleAnalyticsEventsService, CompositeDisposable, Person, GoogleAnalytics } from 'ddp-sdk';
+import { MailingListServiceAgent, AnalyticsEventsService, CompositeDisposable, Person, GoogleAnalytics } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -85,7 +85,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         private router: Router,
         private formBuilder: FormBuilder,
         private mailingService: MailingListServiceAgent,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         @Inject(MAT_DIALOG_DATA) private data: any,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 

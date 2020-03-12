@@ -4,7 +4,7 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { WindowRef } from '../windowRef';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { GoogleAnalyticsEventsService } from '../googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../analyticsEvents.service';
 import { RenewSessionNotifier } from '../renewSessionNotifier.service';
 import { Auth0Mode } from '../../models/auth0-mode';
 import { GoogleAnalytics } from '../../models/googleAnalytics';
@@ -30,7 +30,7 @@ export class Auth0AdapterService implements OnDestroy {
         private router: Router,
         private log: LoggingService,
         private session: SessionMementoService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
         private renewNotifier: RenewSessionNotifier,
         private jwtHelper: JwtHelperService) {

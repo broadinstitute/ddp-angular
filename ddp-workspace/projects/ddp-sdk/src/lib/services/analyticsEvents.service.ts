@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 declare let ga: Function;
 
 @Injectable()
-export class GoogleAnalyticsEventsService {
+export class AnalyticsEventsService {
   public emitCustomEvent(
     eventCategory: string,
     eventAction: string,
