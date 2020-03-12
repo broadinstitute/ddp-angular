@@ -86,7 +86,7 @@ commands:
           command: |
             set -u
             # we are getting our builds from the one bucket
-            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
 
@@ -223,7 +223,7 @@ commands:
           name: Store build archive
           command: |
             set -u
-            readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo
 
@@ -241,7 +241,7 @@ commands:
             set -u
             set +e
             # Looking for latest build of this project in Google bucket
-            readvault.sh secret/pepper/dev/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
             # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
