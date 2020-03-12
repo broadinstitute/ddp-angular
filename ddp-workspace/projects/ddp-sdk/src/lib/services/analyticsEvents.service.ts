@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
-
-declare let ga: Function;
+import { Subject, Observable } from 'rxjs';
+import { AnalyticsEvent } from '../models/analyticsEvent';
 
 @Injectable()
 export class AnalyticsEventsService {
+  private events = new Subject<AnalyticsEvent>();
+
   public emitCustomEvent(
     eventCategory: string,
     eventAction: string,
     eventLabel: string | null = null,
     eventValue: string | null = null): void {
-    const event = {
+    const event: AnalyticsEvent = {
       hitType: 'event',
-      eventCategory,
       // set page directly in order to exclude sensitive query params
       // and simpler aggregation of stats
       page: location.pathname,
       location: this.location,
-      eventLabel: eventLabel == null ? eventAction : eventLabel,
+      eventCategory,
       eventAction,
+      eventLabel: eventLabel === null ? eventAction : eventLabel,
       eventValue
     };
-    this.emitEvent(event);
+    this.events.next(event);
   }
 
   public emitNavigationEvent(): void {
-    const event = {
+    const event: AnalyticsEvent = {
       hitType: 'pageview',
       // set page directly in order to exclude sensitive query params
       // and simpler aggregation of stats
       page: location.pathname,
       location: this.location
     };
-    this.emitEvent(event);
+    this.events.next(event);
+  }
+
+  public get analyticEvents(): Observable<AnalyticsEvent> {
+    return this.events.asObservable();
   }
 
   private get location(): string {
     return `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ``}${location.pathname}`;
-  }
-
-  private emitEvent(event: object): void {
-    ga('send', event);
-    ga('platform.send', event);
   }
 }
