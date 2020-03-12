@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { AnalyticsEventsService, GoogleAnalytics, BrowserContentService, WindowRef } from 'ddp-sdk';
+import { AnalyticsEventsService, AnalyticsEvents, BrowserContentService, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-header',
@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
 
     private doAnalytics(): void {
         (this.router.url.indexOf(this.toolkitConfiguration.moreDetailsUrl) > -1) ?
-            this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromFAQ) :
-            this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromHeader);
+            this.analytics.emitCustomEvent(AnalyticsEvents.ClickedCountMeIn, AnalyticsEvents.FromFAQ) :
+            this.analytics.emitCustomEvent(AnalyticsEvents.ClickedCountMeIn, AnalyticsEvents.FromHeader);
     }
 }

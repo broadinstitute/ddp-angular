@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventsService, BrowserContentService, WindowRef, GoogleAnalytics } from 'ddp-sdk';
+import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEvents } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
@@ -274,6 +274,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromMainPage);
+        this.analytics.emitCustomEvent(AnalyticsEvents.ClickedCountMeIn, AnalyticsEvents.FromMainPage);
     }
 }

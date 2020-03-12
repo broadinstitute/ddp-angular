@@ -19,7 +19,7 @@ import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
-import { GoogleAnalytics } from '../../models/googleAnalytics';
+import { AnalyticsEvents } from '../../models/analyticsEvents';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -281,13 +281,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public close(): void {
         this.sendLastSectionAnalytics();
-        this.sendActivityAnalytics(GoogleAnalytics.CloseSurvey);
+        this.sendActivityAnalytics(AnalyticsEvents.CloseSurvey);
         super.close();
     }
 
     public flush(): void {
         this.sendLastSectionAnalytics();
-        this.sendActivityAnalytics(GoogleAnalytics.SubmitSurvey);
+        this.sendActivityAnalytics(AnalyticsEvents.SubmitSurvey);
         super.flush();
     }
 

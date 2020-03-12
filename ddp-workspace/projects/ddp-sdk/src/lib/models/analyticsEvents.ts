@@ -1,4 +1,4 @@
-export enum GoogleAnalytics {
+export enum AnalyticsEvents {
     FromHeader = 'fromHeader',
     FromMainPage = 'fromMainPage',
     FromFAQ = 'fromFAQ',

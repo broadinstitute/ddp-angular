@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
-import { WindowRef, AnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
+import { WindowRef, AnalyticsEventsService, AnalyticsEvents } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -43,11 +43,11 @@ export class WelcomeComponent implements OnInit {
   }
 
   public sendSocialMediaAnalytics(event: string): void {
-    this.analytics.emitCustomEvent(GoogleAnalytics.Social, event);
+    this.analytics.emitCustomEvent(AnalyticsEvents.Social, event);
   }
 
   public sendCountMeInAnalytics(): void {
-    this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromMainPage);
+    this.analytics.emitCustomEvent(AnalyticsEvents.ClickedCountMeIn, AnalyticsEvents.FromMainPage);
   }
 
   private get getRealHeaderHeight(): number {
