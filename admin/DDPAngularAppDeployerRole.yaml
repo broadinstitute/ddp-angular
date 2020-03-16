@@ -22,4 +22,4 @@ includedPermissions:
 - storage.objects.get
 - storage.objects.list
 stage: GA
-title: DDP Angular App Deployer
+title: DDP Angular CI CD
