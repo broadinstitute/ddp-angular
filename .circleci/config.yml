@@ -51,6 +51,9 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
+              angular-appengine-deployment-ctd-2)
+                DEPLOY_ENV=dev
+              ;;
               test)
                 DEPLOY_ENV=test
               ;;
