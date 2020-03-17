@@ -366,7 +366,7 @@ workflows:
             branches:
               only:
                 - develop
-                - angular-appengine-deployment-ctd
+                - angular-appengine-deployment-ctd-2
       - brain-build-and-deploy:
           <<: *build-and-deploy-filters
       - angio-build-and-deploy:
