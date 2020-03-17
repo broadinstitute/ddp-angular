@@ -166,6 +166,7 @@ commands:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
+            echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
             echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
             echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
