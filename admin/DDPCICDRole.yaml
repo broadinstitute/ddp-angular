@@ -1,4 +1,4 @@
-description: 'Enable deployments of Angular apps on GAE'
+description: 'Enable deployments of DDP apps and services on GAE'
 etag: BwWgSLxPGqs=
 includedPermissions:
 - appengine.applications.get
