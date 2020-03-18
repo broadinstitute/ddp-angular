@@ -36,8 +36,6 @@ commands:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - run:
-          command: echo "The vault token is $VAULT_TOKEN"
       - build-app
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
