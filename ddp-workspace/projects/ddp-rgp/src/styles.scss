@@ -1,1 +1,1628 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 15px !important;
+    padding-right: 0px !important;
+}
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    html,
+    body {
+        font-size: 30px !important;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2499px) {
+
+    html,
+    body {
+        font-size: 18px !important;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+
+    html,
+    body {
+        font-size: 16px !important;
+    }
+}
+
+@media only screen and (max-width: 1026px) {
+
+    html,
+    body {
+        font-size: 15px !important;
+    }
+}
+
+.row:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .col-xs-8.col-sm-offset-2 {
+        margin-left: 16.666%;
+    }
+}
+
+a,
+button {
+    text-decoration: none !important;
+    outline: 0 !important;
+}
+
+a:hover,
+a:active,
+a:focus {
+    outline: 0;
+}
+
+@media only screen and (max-width: 767px) {
+
+    ul,
+    ol {
+        padding-left: 20px;
+    }
+}
+
+.Wrapper,
+.Wrapper--home,
+.Wrapper--homeBottom {
+    position: relative;
+    min-height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.Wrapper,
+.Wrapper--homeBottom {
+    padding-bottom: 190px;
+    /* Height of the footer*/
+}
+
+.Wrapper {
+    margin: 0 100px;
+}
+
+.Wrapper--home {
+    margin: 100px 50px 0 50px;
+    padding-bottom: 75px;
+}
+
+.Wrapper--homeBottom {
+    margin: 0;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    .Wrapper,
+    .Wrapper--homeBottom {
+        padding-bottom: 391px;
+        /* Height of the footer*/
+    }
+
+    .Wrapper {
+        margin: 0 150px;
+    }
+
+    .Wrapper--home {
+        margin: 197px 150px 0 150px;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2499px) {
+    .Wrapper--home {
+        margin-top: 100px !important;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1920px) {
+    .Wrapper--home {
+        margin-top: 90px !important;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .Wrapper {
+        margin: 0 50px;
+    }
+
+    .Wrapper--home {
+        margin: 80px 50px 0 50px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .Wrapper,
+    .Wrapper--homeBottom {
+        padding-bottom: 235px !important;
+    }
+
+    .Wrapper {
+        margin: 0 35px;
+    }
+
+    .Wrapper--home {
+        margin: 80px 35px 0 35px !important;
+        padding-bottom: 50px;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 767px) {
+
+    .Wrapper,
+    .Wrapper--homeBottom {
+        padding-bottom: 440px !important;
+    }
+
+    .Wrapper {
+        margin: 0 35px;
+    }
+
+    .Wrapper--home {
+        margin: 80px 35px 0 35px !important;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
+    .Wrapper,
+    .Wrapper--homeBottom {
+        padding-bottom: 440px !important;
+    }
+
+    .Wrapper {
+        margin: 0;
+    }
+
+    .Wrapper--home {
+        margin: 80px 0 0 0 !important;
+    }
+}
+
+.Container {
+    margin-top: 50px;
+    padding-bottom: 75px;
+    margin-bottom: 75px;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Container {
+        margin-top: 100px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+    .Container {
+        padding: 0 25px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Container {
+        padding: 0 15px;
+    }
+}
+
+h2.Title {
+    font-size: 2rem;
+    line-height: 2.6rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.Title-small {
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #717174;
+    padding: 0;
+}
+
+h3.Heading {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+h3.Subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+h4.Heading {
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding-top: 20px;
+}
+
+h4.Subtitle {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding-top: 20px;
+    color: #717174;
+}
+
+p.Subheading {
+    font-size: 1rem;
+    font-weight: 500 !important;
+    margin-bottom: 0px;
+}
+
+p.Paragraph {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    padding-bottom: 10px;
+}
+
+.Italic {
+    font-weight: 300 !important;
+    font-style: italic;
+}
+
+.Normal {
+    font-weight: 400 !important;
+}
+
+.Accent {
+    font-weight: 500 !important;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Title-small {
+        font-size: 1.5rem;
+    }
+
+    p.Paragraph {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        padding-bottom: 25px;
+    }
+
+    h3.Subtitle {
+        font-size: 1.3rem;
+        line-height: 1.9rem;
+    }
+
+    h4.Subtitle {
+        font-size: 1.2rem;
+        padding-top: 35px;
+    }
+}
+
+/******ELEMENTS*/
+
+.Button {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 999px !important;
+    font-weight: 500;
+    font-size: 1rem !important;
+    padding: 8px 20px !important;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+.Button:hover {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25) !important;
+}
+
+.Button--primaryGrey,
+.Button--primaryGrey:active,
+.Button--primaryGrey:focus {
+    border: 1px solid #cccccc !important;
+    background-color: #cccccc !important;
+    color: #333333 !important;
+}
+
+.Button--Apply,
+.Button--Apply--white {
+    border-radius: 999px;
+    padding: 14px 25px 14px 25px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.Button--Apply:hover,
+.Button--Apply--white:hover {
+    box-shadow: 3px 3px 15px #666666 !important;
+}
+
+.Button--Apply,
+.Button--Apply:active,
+.Button--Apply:hover {
+    background: #E8702A;
+    color: white;
+}
+
+.Button--Apply--white,
+.Button--Apply--white:active,
+.Button--Apply--white:hover {
+    background: #ffffff;
+    color: #E8702A;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Button {
+        padding: 20px 35px !important;
+    }
+
+    .Button--Apply,
+    .Button--Apply--white {
+        padding: 40px 45px 35px 45px;
+    }
+}
+
+.NotALink {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500 !important;
+    color: #E8702A;
+}
+
+.Link,
+.Link:visited,
+.Link:active {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: #E8702A;
+}
+
+.Link:hover {
+    color: #0EA7B5;
+}
+
+.Link--blue,
+.Link--blue:visited,
+.Link--blue:active {
+    color: #0C457D;
+}
+
+.Link--white,
+.Link--white:visited,
+.Link--white:active {
+    color: white;
+}
+
+.Link--blue:hover,
+.Link--white:hover {
+    color: #E8702A;
+}
+
+.FormQuestion,
+.FormQuestion--noPadding {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.FormQuestion {
+    padding: 10px 15px 0 15px;
+}
+
+.FormQuestion--noPadding {
+    padding: 10px 0 5px 0;
+}
+
+.FormQuestion .Italic,
+.FormQuestion--noPadding .Italic {
+    font-size: 1rem;
+}
+
+.CommentLink {
+    font-size: 0.85rem;
+    font-style: italic;
+    display: block;
+    width: 100%;
+}
+
+@media only screen and (max-width: 450px) {
+    .CommentLink {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+.Checkbox,
+.Checkbox--smaller,
+.RadioButton {
+    display: block !important;
+    margin-bottom: 10px;
+}
+
+.Checkbox .mat-checkbox-inner-container,
+.Checkbox--smaller .mat-checkbox-inner-container {
+    vertical-align: top;
+    margin-top: 2px;
+}
+
+.Checkbox label {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.Checkbox--smaller label,
+.RadioButton label {
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    vertical-align: top;
+}
+
+.Input label,
+.Select .mat-select-placeholder {
+    font-weight: 400 !important;
+    color: black;
+    font-size: 1rem !important;
+}
+
+.Input .mat-input-element:disabled+span label {
+    color: rgba(0, 0, 0, .38) !important;
+}
+
+.Input-textarea {
+    padding-right: 0;
+}
+
+.Input-textarea textarea {
+    resize: vertical !important;
+}
+
+.Select {
+    margin-top: 10px;
+}
+
+td .Select .mat-select-placeholder {
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+td .Select .mat-select-panel {
+    max-height: 290px !important;
+}
+
+td .mat-input-wrapper {
+    margin: 5px 0 0 0 !important;
+}
+
+@media only screen and (max-width: 450px) {
+    .mat-option-multiple {
+        margin-left: 30px !important;
+    }
+
+    .cdk-overlay-container .full-width+*>.cdk-overlay-pane {
+        width: 100% !important;
+    }
+}
+
+.TabGroup .mat-tab-body {
+    padding: 0 15px 15px 15px !important;
+}
+
+.TabGroup .mat-tab-labels {
+    justify-content: space-between;
+}
+
+.TabGroup .mat-tab-label {
+    font-size: 1.2rem !important;
+    font-weight: 300 !important;
+    width: 16.66%;
+}
+
+.TabGroup .mat-tab-label-active {
+    color: #0C457D;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    .Checkbox,
+    .Checkbox--smaller,
+    .RadioButton {
+        margin-bottom: 15px;
+    }
+
+    .Checkbox .mat-checkbox-inner-container,
+    .Checkbox--smaller .mat-checkbox-inner-container {
+        height: 35px;
+        width: 35px;
+        margin-right: 15px;
+    }
+
+    .RadioButton .mat-radio-outer-circle,
+    .RadioButton .mat-radio-inner-circle,
+    .RadioButton .mat-radio-container {
+        height: 35px;
+        width: 35px;
+    }
+
+    .mat-checkbox-layout .mat-checkbox-label {
+        line-height: 40px !important;
+    }
+
+    .mat-option {
+        line-height: 60px;
+        height: 60px;
+        padding: 0 25px;
+        font-size: 1rem;
+    }
+
+    .Select .mat-select-trigger {
+        font-size: 1rem !important;
+    }
+
+    .Select .mat-select-placeholder {
+        padding: 0 2px 10px 2px;
+    }
+
+    .Select {
+        margin-bottom: 15px;
+        margin-top: 40px;
+    }
+}
+
+.MainError {
+    width: 100%;
+    display: inline-block;
+    background: rgba(244, 67, 54, 0.05);
+    border: 1px solid rgba(244, 67, 54, 1);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 15px;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.SimpleError {
+    width: 100%;
+    display: inline-block;
+    border-top: 1px solid rgba(244, 67, 54, 1);
+    margin-top: 5px;
+    padding: 5px 0;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.InlineError {
+    width: 100%;
+    display: inline-block;
+    padding: 4px 0px;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.Inline-error,
+.Inline-error .mat-input-wrapper {
+    margin-bottom: 0 !important;
+}
+
+.Inline-error .mat-input-placeholder,
+.Inline-error .mat-select-placeholder,
+.Inline-error .mat-select-arrow {
+    color: #f44336 !important;
+}
+
+.Inline-error .mat-input-underline,
+.Inline-error .mat-select-underline {
+    background-color: #f44336 !important;
+}
+
+.tooltip {
+    font-size: 0.85rem !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.tooltip .tooltip-inner {
+    background-color: #717174;
+}
+
+.tooltip .tooltip-arrow {
+    border-top-color: #717174 !important;
+}
+
+.HorizontalLine_Home {
+    border: none;
+    color: #e8e8e8;
+    border-top: 1px solid;
+    margin: 0;
+    width: 100%;
+}
+
+.HorizontalLine {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+    margin: 50px 0;
+    width: 100%;
+}
+
+.HorizontalLine--blue {
+    border-top: 2px solid #0C457D;
+    margin: 25px 0 10px 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .HorizontalLine {
+        margin: 25px 0;
+    }
+}
+
+.PageHeader {
+    position: relative;
+    padding-top: 0;
+}
+
+.PageHeader-title,
+.PageHeader-title--aboutUs {
+    font-size: 2.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 50px 0 25px 0;
+    color: #ffffff;
+}
+
+.PageHeader-title--aboutUs {
+    margin: 50px 0 30px 0 !important;
+    text-align: center;
+}
+
+.PageLayout {
+    padding: 0 100px;
+    margin: 0;
+}
+
+@media only screen and (min-width: 2500px) {
+    .PageLayout {
+        padding: 0 150px 25px 150px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .PageLayout {
+        padding: 0 50px;
+    }
+
+    .Select {
+        margin-top: 9px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .PageLayout {
+        padding: 0 35px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .PageLayout {
+        padding: 0;
+    }
+}
+
+.PageHeader-background,
+.PageHeader-background--aboutUs {
+    height: auto;
+    padding: 75px 0 0 0;
+    color: #ffffff;
+    width: 100%;
+    position: relative;
+}
+
+.PageHeader-box,
+.PageHeader-box--dataSharing {
+    position: absolute;
+    border-radius: 0;
+
+}
+
+@media only screen and (min-width: 2500px) {
+
+    .PageHeader-background,
+    .PageHeader-background--aboutUs {
+        padding: 197px 0 0 0;
+    }
+}
+
+.PageHeader-box {
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+    background-color: #ffffff;
+    text-align: left;
+}
+
+.PageHeader-box--dataSharing {
+    width: 50%;
+    left: 50%;
+    padding: 40px 40px 0 40px;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    border: 1px solid #0C457D;
+}
+
+.PageHeader-box--header {
+    bottom: 0;
+}
+
+.PageHeader-box--footer {
+    top: 0;
+    height: 40px;
+}
+
+.PageHeader-boxContent {
+    color: black;
+    padding: 40px 40px 0 40px;
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+    font-weight: 300;
+}
+
+@media only screen and (min-width: 2500px) {
+    .PageHeader-box {
+        width: 1200px;
+        margin-left: -600px;
+    }
+
+    .PageHeader-boxContent {
+        padding: 75px 75px 0 75px;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
+
+    .PageHeader-box--footer {
+        height: 75px;
+    }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 2499px) {
+    .PageHeader-box {
+        width: 900px;
+        margin-left: -450px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .PageHeader-box--dataSharing {
+        width: 50%;
+    }
+
+    .PageHeader-box .PageHeader-boxContent,
+    .PageHeader-box--dataSharing .PageHeader-boxContent {
+        padding: 25px 25px 0 25px;
+    }
+
+    .PageHeader-box--footer {
+        height: 25px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .PageHeader-boxContent {
+        padding: 25px 25px 0 25px;
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .PageHeader-background {
+        padding: 50px 0 0 0;
+        margin-top: 0;
+    }
+
+    .PageHeader-title {
+        font-size: 2rem;
+        padding: 20px 0 0 0;
+    }
+
+    .PageHeader-title--aboutUs {
+        margin: 60px 0 30px 0 !important;
+    }
+}
+
+.PageContent-image,
+.PageContent-imageStep {
+    width: 100%;
+    height: auto;
+}
+
+.PageContent-image {
+    border-bottom: 10px solid #0C457D;
+}
+
+.PageContent-imageStep {
+    border-bottom: 7px solid #E8702A;
+}
+
+.Panel {
+    padding-bottom: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.Panel:hover .Panel-title,
+.Panel:hover .Panel-icon {
+    color: #0EA7B5;
+}
+
+h3.Panel-title {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    font-weight: 300;
+    color: black;
+}
+
+.Panel-icon {
+    color: #aaaaaa;
+    float: right;
+    padding-right: 10px;
+}
+
+.Close-icon {
+    float: right;
+    margin: 10px 5px 0 0;
+}
+
+.Box {
+    background-color: rgba(12, 69, 125, 0.1);
+    border-radius: 2px;
+    border: 1px solid #0C457D;
+    color: #0C457D;
+    font-weight: 300;
+    padding: 25px;
+}
+
+.List-ol {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.List-li {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6rem;
+}
+
+.List-question {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 20px 0 10px 0;
+}
+
+.List-line {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+    margin: 20px 0 0 0;
+    width: 100%;
+}
+
+@media only screen and (min-width: 2500px) {
+    .List-li {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+
+    .List-question {
+        font-size: 1.2rem;
+        padding: 35px 0 15px 0;
+    }
+}
+
+/******LANDING PAGES*/
+
+.Landing-imageContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.Landing-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .Landing-imageContainer {
+        padding: 66.6% 0 0 0;
+        /* sm 66.6% = 100 / (w / h) = 100 / (767 / 510) */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Landing-imageContainer {
+        padding: 66.6% 0 0 0;
+        /*md 66.6% = 100 / (w / h) = 100 / (1024 / 682) */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .Landing-imageContainer {
+        padding: 57.4% 0 0 0;
+        /*lg 57.4% = 100 / (w / h) = 100 / (1920 / 1100) */
+    }
+}
+
+@media only screen and (min-width: 1921px) {
+    .Landing-imageContainer {
+        padding: 57.4% 0 0 0;
+        /*xl 57.4% = 100 / (w / h) = 100 / (3000 / 1719) */
+    }
+}
+
+.Landing-message {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    max-width: 100%;
+    display: inline-block;
+    margin-top: 10vh;
+    margin-right: 50px;
+}
+
+h1.Landing-title {
+    text-align: center;
+    font-size: 2.3rem;
+    line-height: 3rem;
+    font-weight: 300;
+}
+
+h2.Landing-title {
+    text-align: center;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 300;
+}
+
+.Landing-text,
+.Landing-list {
+    color: black;
+    text-align: left;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.Landing-list {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.Landing-article {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 75px 0;
+    padding: 75px 0;
+}
+
+.Landing-article .Landing-list li {
+    color: #ffffff;
+    text-align: left;
+}
+
+.Landing-article .Landing-title,
+.Landing-article .Landing-text {
+    color: #ffffff;
+    text-align: center;
+}
+
+.Landing-stepImage {
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 196px;
+    width: 328px;
+}
+
+.Landing-stepImage01 {
+    background: url(/assets/images/01-step-illustration.svg) no-repeat;
+}
+
+.Landing-stepImage02 {
+    background: url(/assets/images/02-step-illustration.svg) no-repeat;
+}
+
+.Landing-stepImage03 {
+    background: url(/assets/images/03-step-illustration.svg) no-repeat;
+}
+
+.Landing-stepTitle {
+    color: #444444;
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 600;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.Landing-stepText {
+    color: black;
+    font-size: 1.1rem;
+    line-height: 1.7rem;
+    font-weight: 300;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.Margin--small {
+    margin: 50px 0 0 0;
+}
+
+.Margin--large {
+    margin: 75px 0 0 0;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    h1.Landing-title,
+    h2.Landing-title {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .Landing-text,
+    .Landing-list,
+    .Landing-stepText {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+
+    .Landing-stepImage {
+        height: 294px;
+        width: 492px;
+        background-size: 492px 294px;
+    }
+
+    .Margin--small {
+        margin: 100px 0 0 0;
+    }
+
+    .Margin--large {
+        margin: 125px 0 0 0;
+    }
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 2499px) {
+
+    h1.Landing-title,
+    h2.Landing-title {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+
+    .Landing-text,
+    .Landing-list,
+    .Landing-stepText {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+@media (min-width: 1250px) and (max-width: 1919px) {
+    .Landing-message {
+        margin-top: 10vh;
+        margin-right: 40px;
+    }
+
+    h1.Landing-title {
+        font-size: 2.2rem;
+        line-height: 2.8rem;
+    }
+
+    h2.Landing-title {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .Landing-text,
+    .Landing-list,
+    .Landing-stepText {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1249px) {
+    .Landing-message {
+        margin-top: 5vh;
+        margin-right: 25px;
+    }
+
+    h1.Landing-title {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    h2.Landing-title {
+        font-size: 1.8rem;
+        line-height: 2.3rem;
+    }
+
+    .Landing-text,
+    .Landing-list,
+    .Landing-stepText {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
+    }
+
+    .Landing-stepImage {
+        height: 138px;
+        width: 230px;
+        background-size: 230px 138px;
+    }
+
+    .Landing-stepTitle {
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Landing-message {
+        margin-top: 2vh;
+        margin-right: 10px;
+    }
+
+    h1.Landing-title {
+        color: black;
+        text-shadow: none;
+    }
+
+    h1.Landing-title,
+    h2.Landing-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .Landing-text,
+    .Landing-list,
+    .Landing-stepText {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .Landing-article {
+        padding: 25px 15px;
+        margin-bottom: 25px;
+    }
+
+    .Landing-step {
+        text-align: center;
+        display: block;
+        width: 100%;
+        margin-bottom: 50px
+    }
+
+    .Landing-step:last-child {
+        margin-bottom: 15px
+    }
+
+    .Landing-stepTitle {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-top: 20px;
+    }
+
+    .Landing-stepTitle,
+    .Landing-stepText {
+        text-align: left;
+    }
+
+    .Margin--small,
+    .Margin--large {
+        margin: 25px 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Landing-message {
+        position: relative;
+        margin-top: 0;
+    }
+}
+
+.Landing-clarification {
+    margin-top: 20px;
+    color: white;
+    font-weight: 300;
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    font-style: italic;
+}
+
+.Table {
+    width: 100%;
+}
+
+.Table-header {
+    background: rgba(10, 36, 103, 0.8);
+}
+
+.Table-header th {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 10px;
+    border: none;
+}
+
+.Table-header th span {
+    font-weight: 300 !important;
+}
+
+.Table-row td {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    padding: 6px 10px;
+    font-weight: 300;
+}
+
+.Table-row:nth-child(odd) {
+    background: rgba(10, 36, 103, 0.06);
+}
+
+.Table-row:nth-child(even) {
+    background: rgba(10, 36, 103, 0.02);
+}
+
+.Wizard {
+    position: relative;
+    height: 40px;
+    margin: 10px 0 10px 0;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+.Wizard-step {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #efefef;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    margin-left: -20px;
+}
+
+.Wizard-bar {
+    position: relative;
+    margin-top: 15px;
+    height: 4px;
+    width: 100%;
+    background-color: #efefef;
+}
+
+.Wizard-barFirst {
+    margin-left: 50%;
+}
+
+.Wizard-barFirst .Wizard-step {
+    left: 0;
+    margin-left: -20px;
+}
+
+.Wizard-barLast {
+    width: 50% !important;
+    right: 0;
+}
+
+.Wizard-barLast .Wizard-step {
+    margin-left: 0;
+    right: -20px;
+    left: inherit;
+}
+
+.Wizard.completed .Wizard-bar,
+.Wizard.completed .Wizard-step {
+    background-color: #F9DBCA;
+    background-image: none;
+}
+
+.Wizard.active.completed .Wizard-bar,
+.Wizard.active.completed .Wizard-step {
+    background-color: #E8702A;
+    background-image: none;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Wizard-step {
+        position: absolute;
+        font-size: 30px;
+        top: -40px;
+        height: 90px;
+        width: 90px;
+        margin-left: -45px;
+        line-height: 90px;
+    }
+
+    .Wizard-bar {
+        margin-top: 40px;
+        height: 10px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .Wizard-step {
+        position: absolute;
+        top: -13px;
+        height: 30px;
+        width: 30px;
+        margin-left: -15px;
+        line-height: 30px;
+    }
+
+    .Wizard-bar {
+        margin-top: 12px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .Wizard-step {
+        position: absolute;
+        top: -13px;
+        height: 30px;
+        width: 30px;
+        margin-left: -15px;
+        line-height: 30px;
+    }
+
+    .Wizard-bar {
+        margin-top: 12px;
+    }
+}
+
+
+/******GENERAL CLASSES*/
+
+.NoMargin {
+    margin: 0 !important;
+}
+
+.NoMarginTop {
+    margin: 0 10px !important;
+}
+
+.NoMarginBottom {
+    margin-bottom: 0 !important;
+}
+
+.NoPadding {
+    padding: 0 !important;
+}
+
+.Float--left {
+    float: left !important;
+}
+
+.Float--right {
+    float: right !important;
+}
+
+.Aligned--left {
+    text-align: left !important;
+}
+
+.Aligned--right {
+    text-align: right !important;
+}
+
+.Aligned--center {
+    text-align: center !important;
+}
+
+.FullWidth {
+    width: 100%;
+}
+
+.List--noStyle {
+    list-style: none;
+    padding-left: 0;
+}
+
+.Color--orange {
+    color: #E8702A;
+}
+
+.Background--orange {
+    background-color: #E8702A !important;
+}
+
+.Color--blue {
+    color: #0C457D;
+}
+
+.Background--blue {
+    background-color: #0C457D;
+}
+
+.Color--lightBlue {
+    color: #0EA7B5;
+}
+
+.Background--lightBlue {
+    background-color: #0EA7B5;
+}
+
+.Color--white {
+    color: #ffffff !important;
+}
+
+.Position--absolute {
+    position: absolute;
+}
+
+.Position--relative {
+    position: relative;
+}
+
+.CenterDiv {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.TopMargin10 {
+    width: 100%;
+    margin-top: 10px !important;
+}
+
+.TopMargin25 {
+    width: 100%;
+    margin-top: 25px !important;
+}
+
+.TopMargin50 {
+    width: 100%;
+    margin-top: 50px !important;
+}
+
+.TopMargin75 {
+    width: 100%;
+    margin-top: 75px !important;
+}
+
+@media only screen and (min-width: 2500px) {
+    .TopMargin10 {
+        margin-top: 60px !important;
+    }
+
+    .TopMargin25 {
+        margin-top: 75px !important;
+    }
+
+    .TopMargin50 {
+        margin-top: 100px !important;
+    }
+
+    .TopMargin75 {
+        margin-top: 125px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .TopMargin75 {
+        margin-top: 50px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .Hidden-mobile {
+        display: inline-block;
+    }
+
+    .Hidden-desktop {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Hidden-mobile {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .Hidden-desktop {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .Hidden-desktop.PageHeader-box--header,
+    .PageHeader-box--footer {
+        left: 0;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Hidden-desktop.PageHeader-box--header {
+        position: relative;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .RowSameHeight-xs {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .RowSameHeight-sm {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .RowSameHeight-md {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media (min-width: 1200px) {
+    .RowSameHeight-lg {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}

@@ -1,0 +1,51 @@
+<footer class="Footer" [ngClass]="{'Footer--home': inHome}">
+    <div class="row NoMargin">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="Footer-logo" [routerLink]="['/home']" role="img" alt="Rare Genome Project logo"></div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <ul class="FullWidth Footer-menu">
+                <li>
+                    <a href [routerLink]="['/home']" class="Footer-menuItem" i18n>Home</a>
+                </li>
+                <li>
+                    <a href [routerLink]="['/about-us']" class="Footer-menuItem" i18n>About Us</a>
+                </li>
+                <li>
+                    <a href [routerLink]="['/sign-in']" class="Footer-menuItem" i18n>Sign In</a>
+                </li>
+                <li>
+                    <a href [routerLink]="['/how-it-works']" class="Footer-menuItem" i18n>Apply</a>
+                </li>
+                <li>
+                    <a href [routerLink]="" class="Footer-menuItem" (click)="toTop()" i18n>Back to Top</a>
+                </li>
+            </ul>
+            <div class="FullWidth Footer-contact">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 NoPadding">
+                    <ul>
+                        <li i18n>Contact Us:</li>
+                        <li>
+                            <a href="mailto:raregenomes@broadinstitute.org" class="Footer-contactLink" i18n>raregenomes@broadinstitute.org</a>
+                        </li>
+                        <li>
+                            <a href="tel:617-714-7395" class="Footer-contactLink" i18n>617-714-7395</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/RareGenomesProject/"><img
+                              class="Footer-contactLogos" src="/assets/images/facebook.svg" alt="Facebook"></a>
+                            <!-- <a target="_blank" href="https://twitter.com/raregenomes"><img class="Footer-contactLogos" src="/assets/images/twitter.svg" alt="Twitter"></a>-->
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 Footer-contact--last">
+                    <ul>
+                        <li class="Hidden-mobile"><br/></li>
+                        <li i18n>Broad Institute of MIT and Harvard</li>
+                        <li i18n>415 Main Street, Cambridge, MA 02142 United States</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

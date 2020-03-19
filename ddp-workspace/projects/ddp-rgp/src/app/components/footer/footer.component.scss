@@ -1,0 +1,187 @@
+.Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 190px;
+    /* Height of the footer */
+    padding: 50px 100px 25px 100px;
+    z-index: 2;
+    background: #f5f5f5;
+}
+
+.Footer--home {
+    background: #E8702A;
+}
+
+.Footer-logo {
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    background-image: url('/assets/images/rare-genome-project-logo-primary.svg');
+    height: 50px;
+    width: 117px;
+}
+
+.Footer--home .Footer-logo {
+    background-image: url('/assets/images/rare-genome-project-logo-inverted.svg');
+}
+
+@media only screen and (min-width: 2500px) {
+    .Footer {
+        padding: 75px 150px 50px 150px;
+    }
+
+    .Footer-logo {
+        height: 86px;
+        width: 200px;
+        background-size: 200px 86px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .Footer {
+        padding: 35px 40px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Footer {
+        min-height: 240px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Footer {
+        min-height: 440px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .Footer {
+        padding: 25px 15px;
+    }
+}
+
+.Footer-menu {
+    float: right;
+    list-style: none;
+    padding-left: 0 !important;
+}
+
+.Footer-menu>li {
+    display: inline-block;
+}
+
+@media only screen and (max-width: 1024px) {
+    .Footer-menu>li {
+        padding-top: 25px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Footer-menu>li {
+        display: block;
+        padding-top: 15px;
+    }
+}
+
+.Footer-menuItem {
+    display: inline-block;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0C457D;
+    padding: 0 40px 0 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.Footer-menuItem:hover {
+    color: #0EA7B5;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .Footer-menuItem {
+        margin: 0;
+    }
+
+    .Footer-logo {
+        margin-left: 0 !important;
+    }
+
+    .Footer-menu {
+        margin-right: 0 !important;
+    }
+}
+
+.Footer-contact {
+    font-size: 1rem;
+    display: inline-block;
+    margin: 0;
+}
+
+.Footer-contact ul {
+    list-style: none;
+    margin: 15px 0 0 0;
+    padding-left: 0;
+    font-weight: 300;
+    color: black;
+}
+
+.Footer-contact--last {
+    padding: 0 0 0 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .Footer-contact--last {
+        padding: 0;
+    }
+}
+
+.Footer-contactLink {
+    transition: color 0.3s ease;
+    cursor: pointer;
+    color: black;
+    font-weight: 300;
+}
+
+.Footer--home .Footer-contact ul,
+.Footer--home .Footer-contactLink {
+    color: #ffffff;
+}
+
+.Footer--home .Footer-contactLink:hover {
+    color: #0C457D !important;
+}
+
+.Footer-contactLink:hover {
+    color: #0EA7B5 !important;
+}
+
+.Footer-contactLogos {
+    padding-right: 5px;
+    height: 15px;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Footer-contactLogos {
+        padding-right: 25px;
+        height: 30px;
+    }
+
+    .Footer-menuItem {
+        padding: 0 80px 0 0;
+    }
+
+    .Footer-menuItem,
+    .Footer-contact {
+        font-size: 1.1rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Hidden-mobile {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
