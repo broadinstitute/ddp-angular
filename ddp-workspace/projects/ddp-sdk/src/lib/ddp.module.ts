@@ -22,6 +22,7 @@ import { SessionMementoService } from './services/sessionMemento.service';
 import { GoogleAnalyticsEventsService } from './services/googleAnalyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
+import { LanguageService } from './services/languageService.service';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -271,6 +272,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationsServiceAgent,
     Title,
     RenewSessionNotifier,
+    LanguageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
