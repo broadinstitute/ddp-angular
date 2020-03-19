@@ -1020,11 +1020,7 @@
     },
     "ddp-rgp": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "projects/ddp-rgp",
       "sourceRoot": "projects/ddp-rgp/src",
       "prefix": "app",
@@ -1040,12 +1036,25 @@
             "aot": false,
             "assets": [
               "projects/ddp-rgp/src/favicon.ico",
-              "projects/ddp-rgp/src/assets"
+              "projects/ddp-rgp/src/favicon-alert.ico",
+              "projects/ddp-rgp/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-rgp/src/pdf/",
+                "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-rgp/output-config/",
+                "output": "assets/config"
+              }
             ],
             "styles": [
+              "projects/ddp-rgp/src/theme.scss",
               "projects/ddp-rgp/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -1069,13 +1078,11 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "projects/ddp-rgp/tsconfig.es5.json"
             }
           }
         },
@@ -1087,6 +1094,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ddp-rgp:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-rgp:build:es5"
             }
           }
         },
@@ -1105,7 +1115,13 @@
             "karmaConfig": "projects/ddp-rgp/karma.conf.js",
             "assets": [
               "projects/ddp-rgp/src/favicon.ico",
-              "projects/ddp-rgp/src/assets"
+              "projects/ddp-rgp/src/favicon-alert.ico",
+              "projects/ddp-rgp/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-rgp/src/pdf/",
+                "output": "/"
+              }
             ],
             "styles": [
               "projects/ddp-rgp/src/styles.scss"
