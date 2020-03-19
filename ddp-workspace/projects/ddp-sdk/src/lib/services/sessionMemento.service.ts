@@ -159,17 +159,17 @@ export class SessionMementoService implements OnDestroy {
         this.renewSubscription && this.renewSubscription.unsubscribe();
     }
 
-    private hasOnlyUserGuid(session: Session): boolean {
-        return !session.idToken && !!session.userGuid;
-    }
-
-    private isSessionExpired(): boolean {
+    public isSessionExpired(): boolean {
         const session = this.sessionSubject.value;
         if (session === null) {
             return false;
         }
 
         return new Date().getTime() > session.expiresAt;
+    }
+
+    private hasOnlyUserGuid(session: Session): boolean {
+        return !session.idToken && !!session.userGuid;
     }
 
     private observeSessionExpiration(): void {
