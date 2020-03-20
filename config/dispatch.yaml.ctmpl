@@ -4,11 +4,11 @@ dispatch:
 {{if eq $environment "dev"}}
   - url: "angio.dev.datadonationplatform.org/*"
     service: angio
-  - url: "angio.dev.datadonationplatform.org/*"
+  - url: "mbc.dev.datadonationplatform.org/*"
     service: mbc
-  - url: "angio.dev.datadonationplatform.org/*"
+  - url: "brain.dev.datadonationplatform.org/*"
     service: brain
-  - url: "angio.dev.datadonationplatform.org/*"
+  - url: "osteo.dev.datadonationplatform.org/*"
     service: osteo
 {{else if eq $environment "test"}}
   - url: "angio.test.datadonationplatform.org/*"
