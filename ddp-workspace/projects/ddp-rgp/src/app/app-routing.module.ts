@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
-    //canActivate: [IrbGuard]
+    canActivate: [IrbGuard]
   },
   {
     path: '**',
