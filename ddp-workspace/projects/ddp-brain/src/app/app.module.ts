@@ -1,7 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +9,8 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  AnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -30,7 +30,9 @@ if (baseElt) {
   base = baseElt[0].getAttribute('href');
 }
 
-declare let DDP_ENV: any;
+declare const DDP_ENV: any;
+
+declare const ga: Function;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -59,7 +61,7 @@ tkCfg.showInfoForPhysicians = true;
 tkCfg.showBlog = false;
 tkCfg.blogUrl = '';
 
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -126,13 +128,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private analytics: AnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }

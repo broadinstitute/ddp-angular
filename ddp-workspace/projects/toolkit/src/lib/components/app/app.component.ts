@@ -17,9 +17,7 @@ import {
     UserProfileServiceAgent,
     WindowRef,
     RenewSessionNotifier,
-    AnalyticsEventsService,
-    CompositeDisposable,
-    AnalyticsEvent
+    CompositeDisposable
 } from 'ddp-sdk';
 
 declare global {
@@ -27,8 +25,6 @@ declare global {
         twttr: any;
     }
 }
-
-declare const ga: Function;
 
 @Component({
     selector: 'app-root',
@@ -98,7 +94,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private renewNotifier: RenewSessionNotifier,
         private windowRef: WindowRef,
         private userProfile: UserProfileServiceAgent,
-        private analytics: AnalyticsEventsService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
@@ -106,7 +101,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.initBrowserWarningListener();
         this.initSessionWillExpireListener();
         this.initTranslate();
-        this.initAnalyticsListener();
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
@@ -241,13 +235,5 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             const locale = JSON.parse(session).locale;
             this.translate.use(locale);
         }
-    }
-
-    private initAnalyticsListener(): void {
-        const events = this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-            ga('send', event);
-            ga('platform.send', event);
-        });
-        this.anchor.addNew(events);
     }
 }

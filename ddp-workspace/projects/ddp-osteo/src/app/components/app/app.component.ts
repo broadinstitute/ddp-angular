@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CompositeDisposable, RenewSessionNotifier, AnalyticsEventsService, AnalyticsEvent } from 'ddp-sdk';
+import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 
 declare const ga: Function;
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private analytics: AnalyticsEventsService,
     private communicationService: CommunicationService,
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier) { }
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.initMailingListDialogListener();
     this.initSessionExpiredDialogListener();
-    this.initAnalyticsListener();
   }
 
   public ngOnDestroy(): void {
@@ -52,13 +50,5 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dialog.closeAll();
     });
     this.anchor.addNew(modalOpen).addNew(modalClose);
-  }
-
-  private initAnalyticsListener(): void {
-    const events = this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-    this.anchor.addNew(events);
   }
 }
