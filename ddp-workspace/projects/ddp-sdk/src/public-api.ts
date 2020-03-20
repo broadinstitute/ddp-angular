@@ -5,7 +5,6 @@
 export * from './lib/ddp.module';
 
 export * from './lib/models/person';
-export * from './lib/models/analyticsActionTypes';
 export * from './lib/models/email';
 export * from './lib/models/userProfileDecorator';
 export * from './lib/models/activity/activityResponse';
@@ -35,6 +34,8 @@ export * from './lib/models/userProfile';
 export * from './lib/models/participant';
 export * from './lib/models/announcementMessage';
 export * from './lib/models/analyticsEvent';
+export * from './lib/models/analyticsEventCategories';
+export * from './lib/models/analyticsEventActions';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';

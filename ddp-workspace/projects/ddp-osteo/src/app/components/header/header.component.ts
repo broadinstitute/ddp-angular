@@ -1,7 +1,7 @@
 import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsActionTypes } from 'ddp-sdk';
+import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService } from 'toolkit';
 
 @Component({
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public sendAnalytics(): void {
-    this.analytics.emitCustomEvent(AnalyticsActionTypes.ClickedCountMeIn, AnalyticsActionTypes.FromHeader);
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromHeader);
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

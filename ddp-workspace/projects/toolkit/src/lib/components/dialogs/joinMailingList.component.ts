@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { MailingListServiceAgent, AnalyticsEventsService, CompositeDisposable, Person, AnalyticsActionTypes } from 'ddp-sdk';
+import { MailingListServiceAgent, AnalyticsEventsService, CompositeDisposable, Person, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -125,7 +125,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         }
         this.joinButtonDisabled = true;
         const person: Person = this.createPerson;
-        this.analytics.emitCustomEvent(AnalyticsActionTypes.MailingList, AnalyticsActionTypes.Join);
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.MailingList, AnalyticsEventActions.Join);
         const addPerson = this.mailingService.addPerson(person).subscribe(
             x => {
                 if (x) {
