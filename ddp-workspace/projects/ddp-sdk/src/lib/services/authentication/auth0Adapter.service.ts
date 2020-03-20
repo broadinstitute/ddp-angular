@@ -1,6 +1,7 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { WindowRef } from '../windowRef';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
@@ -33,7 +34,8 @@ export class Auth0AdapterService implements OnDestroy {
         private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
         private renewNotifier: RenewSessionNotifier,
-        private jwtHelper: JwtHelperService) {
+        private jwtHelper: JwtHelperService,
+        private language: LanguageService) {
         const scopes = 'openid profile';
         // TODO Clarify how audience should be used, what is the correct value,etc.
         // TODO refactor and document differences between localregistration flow and "normal" flow
@@ -113,7 +115,8 @@ export class Auth0AdapterService implements OnDestroy {
             }),
             ...(additionalParams && {
                 ...additionalParams
-            })
+            }),
+            language: this.language.getCurrentLanguage()
         };
         if (this.configuration.doLocalRegistration) {
             sessionStorage.setItem('localAuthParams', JSON.stringify(params));
