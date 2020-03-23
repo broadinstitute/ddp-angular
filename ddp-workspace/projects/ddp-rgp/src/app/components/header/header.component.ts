@@ -25,7 +25,7 @@ export class HeaderComponent {
   }
 
   private trackNavigation(route: string): void {
-    if (route === null || route === undefined || route.indexOf('/home') === 0 ||
+    if (route === null || route === undefined || route === '/' ||
       route.indexOf('/password') === 0 || route.indexOf('/limb-girdle-muscular-dystrophy') === 0 ||
       route.indexOf('/craniofacial') === 0 || route.indexOf('/eligibility-criteria') === 0) {
       this.inHome = true;
