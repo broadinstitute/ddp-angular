@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 
 })
-export class HeaderComponent implements OnInit {
-
+export class HeaderComponent {
   @Input() currentRoute: string = '';
   inHome: boolean = true;
   inLGMD: boolean = true;
@@ -19,24 +18,19 @@ export class HeaderComponent implements OnInit {
     router.events.subscribe(e => this.trackNav(e));
   }
 
-  public isForFamiliesCollapsed:boolean = true;
-  public isForResearchersCollapsed:boolean = true;
-  public isSpecialtyProjectsCollapsed:boolean = true;
- 
-  public collapsed(event:any):void {
-  }
- 
-  public expanded(event:any):void {
-  }
+  public isForFamiliesCollapsed: boolean = true;
+  public isForResearchersCollapsed: boolean = true;
+  public isSpecialtyProjectsCollapsed: boolean = true;
 
-  ngOnInit() {
-  }
+  public collapsed(event: any): void { }
 
-  trackNav(evt) {
+  public expanded(event: any): void { }
+
+  trackNav(evt): void {
     this.currentPath(evt.urlAfterRedirects);
   }
 
-  currentPath(rt: string) {
+  currentPath(rt: string): void {
     if (rt == null || rt == undefined || rt.indexOf('/home') == 0 || rt.indexOf('/password') == 0 || rt.indexOf('/limb-girdle-muscular-dystrophy') == 0 || rt.indexOf('/craniofacial') == 0 || rt.indexOf('/eligibility-criteria') == 0) {
       this.inHome = true;
       this.inLGMD = true;
@@ -56,14 +50,13 @@ export class HeaderComponent implements OnInit {
     this.inEligiblityCrit = false;
   }
 
-  hoverIn() {
+  hoverIn(): void {
     this.hoverEdit = true;
-    console.log("hoverIn "+this.hoverEdit);
+    console.log('hoverIn ' + this.hoverEdit);
   }
 
-  hoverOut (){
+  hoverOut(): void {
     this.hoverEdit = false;
-    console.log("hoverOut "+this.hoverEdit);
-
+    console.log('hoverOut ' + this.hoverEdit);
   }
 }

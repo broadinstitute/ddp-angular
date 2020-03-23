@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,22 +6,18 @@ import { Router } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
-
+export class FooterComponent {
   inHome: boolean = true;
 
   constructor(private router: Router) {
     router.events.subscribe(e => this.trackNav(e));
   }
 
-  ngOnInit() {
-  }
-
-  trackNav(evt) {
+  trackNav(evt): void {
     this.currentPath(evt.urlAfterRedirects);
   }
 
-  currentPath(rt: string) {
+  currentPath(rt: string): void {
     if (rt == null || rt == undefined || rt.indexOf('/home') == 0 || rt.indexOf('/password') == 0) {
 
       this.inHome = true;
@@ -31,7 +27,7 @@ export class FooterComponent implements OnInit {
     this.inHome = false;
   }
 
-  toTop() {
+  toTop(): void {
     window.scrollTo(0, 0);
   }
 }
