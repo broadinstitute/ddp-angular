@@ -1,5 +1,26 @@
 {
-    "Header": {},
+    "Header": {
+        "Families": {
+            "Text": "For Families",
+            "Item1": "Eligibility Criteria",
+            "Item2": "Getting Started",
+            "Item3": "Privacy & Data Use",
+            "Item4": "For Your Physician"
+        },
+        "Researchers": {
+            "Text": "For Researchers",
+            "Item1": "Data Access"
+        },
+        "Projects": {
+            "Text": "Specialty Projects",
+            "Item1": "LGMD",
+            "Item2": "Craniofacial"
+        },
+        "AboutUs": "About Us",
+        "FAQs": "FAQs",
+        "GetStarted": "Get Started",
+        "SignIn": "Sign In"
+    },
     "Footer": {
         "Navigation": {
             "Home": "Home",

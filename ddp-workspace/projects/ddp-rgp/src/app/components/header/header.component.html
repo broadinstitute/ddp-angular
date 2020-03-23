@@ -13,71 +13,83 @@
         <ul class="nav Header-menu">
             <div class="collapse navbar-collapse Display--inline" id="rare-genomes-nav" [collapse]="isCollapsed">
                 <li dropdown class="dropdown Hidden-mobile">
-                    <a dropdownToggle class="Header-menuItem">For Families<span class="caret"></span></a>
+                    <a dropdownToggle class="Header-menuItem" translate>Header.Families.Text<span
+                            class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a routerLink="/eligibility-criteria" class="Header-subMenuItem">Eligibility Criteria</a>
-                        <a routerLink="/how-it-works" class="Header-subMenuItem">Getting Started</a>
-                        <a routerLink="/privacy-and-your-data" class="Header-subMenuItem">Privacy & Data Use</a>
-                        <a routerLink="/for-your-physician" class="Header-subMenuItem">For Your Physician</a>
+                        <a routerLink="/eligibility-criteria" class="Header-subMenuItem"
+                            translate>Header.Families.Item1</a>
+                        <a routerLink="/how-it-works" class="Header-subMenuItem" translate>Header.Families.Item2</a>
+                        <a routerLink="/privacy-and-your-data" class="Header-subMenuItem"
+                            translate>Header.Families.Item3</a>
+                        <a routerLink="/for-your-physician" class="Header-subMenuItem"
+                            translate>Header.Families.Item4</a>
                     </div>
                 </li>
 
                 <li dropdown class="dropdown Hidden-mobile">
-                    <a dropdownToggle class="Header-menuItem">For Researchers<span class="caret"></span></a>
+                    <a dropdownToggle class="Header-menuItem" translate>Header.Researchers.Text<span
+                            class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a routerLink="/data-sharing" class="Header-subMenuItem">Data Access</a>
+                        <a routerLink="/data-sharing" class="Header-subMenuItem" translate>Header.Researchers.Item1</a>
                     </div>
                 </li>
 
                 <li dropdown class="dropdown Hidden-mobile">
-                    <a dropdownToggle class="Header-menuItem">Specialty Projects <span class="caret"></span></a>
+                    <a dropdownToggle class="Header-menuItem" translate>Header.Projects.Text<span
+                            class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuItem">LGMD</a>
-                        <a routerLink="/craniofacial" class="Header-subMenuItem">Craniofacial</a>
+                        <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuItem"
+                            translate>Header.Projects.Item1</a>
+                        <a routerLink="/craniofacial" class="Header-subMenuItem" translate>Header.Projects.Item2</a>
                     </div>
                 </li>
 
                 <!--ONLY FOR SMALLER DEVICES-->
                 <a (click)="isForFamiliesCollapsed = !isForFamiliesCollapsed" class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem">For Families <span class="caret"></span></p>
+                    <p class="Header-menuItem" translate>Header.Families.Text<span class="caret"></span></p>
                 </a>
                 <div [collapse]="isForFamiliesCollapsed" class="multi-collapse" data-toggle="collapse"
                     data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a routerLink="/eligibility-criteria" class="Header-subMenuMobile">Eligibility Criteria</a>
-                    <a routerLink="/how-it-works" class="Header-subMenuMobile">Getting Started</a>
-                    <a routerLink="/privacy-and-your-data" class="Header-subMenuMobile">Privacy & Data Use</a>
-                    <a routerLink="/for-your-physician" class="Header-subMenuMobile">For Your Physician</a>
+                    <a routerLink="/eligibility-criteria" class="Header-subMenuMobile"
+                        translate>Header.Families.Item1</a>
+                    <a routerLink="/how-it-works" class="Header-subMenuMobile" translate>Header.Families.Item2</a>
+                    <a routerLink="/privacy-and-your-data" class="Header-subMenuMobile"
+                        translate>Header.Families.Item3</a>
+                    <a routerLink="/for-your-physician" class="Header-subMenuMobile" translate>Header.Families.Item4</a>
                 </div>
 
                 <a (click)="isForResearchersCollapsed = !isForResearchersCollapsed"
                     class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem">For Researchers<span class="caret"></span></p>
+                    <p class="Header-menuItem" translate>Header.Researchers.Text<span class="caret"></span></p>
                 </a>
                 <div [collapse]="isForResearchersCollapsed" class="multi-collapse" data-toggle="collapse"
                     data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a routerLink="/data-sharing" class="Header-subMenuMobile">Data Access</a>
+                    <a routerLink="/data-sharing" class="Header-subMenuMobile" translate>Header.Researchers.Item1</a>
                 </div>
 
                 <a (click)="isSpecialtyProjectsCollapsed = !isSpecialtyProjectsCollapsed"
                     class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem">Specialty Projects <span class="caret"></span></p>
+                    <p class="Header-menuItem" translate>Header.Projects.Text<span class="caret"></span></p>
                 </a>
                 <div [collapse]="isSpecialtyProjectsCollapsed" class="multi-collapse" data-toggle="collapse"
                     data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuMobile">LGMD</a>
-                    <a routerLink="/craniofacial" class="Header-subMenuMobile">Craniofacial</a>
+                    <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuMobile"
+                        translate>Header.Projects.Item1</a>
+                    <a routerLink="/craniofacial" class="Header-subMenuMobile" translate>Header.Projects.Item2</a>
                 </div>
                 <!--UNTIL HERE-->
+
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a routerLink="/about-us" class="Header-menuItem Header-menuAllSizes">About Us</a>
+                    <a routerLink="/about-us" class="Header-menuItem Header-menuAllSizes" translate>Header.AboutUs</a>
                 </li>
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a routerLink="/faq" class="Header-menuItem Header-menuAllSizes">FAQs</a>
+                    <a routerLink="/faq" class="Header-menuItem Header-menuAllSizes" translate>Header.FAQs</a>
                 </li>
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a routerLink="/how-it-works" class="Header-menuItem Header-menuAllSizes Orange-link">Get
-                        Started</a>
-                    <a routerLink="/sign-in" class="Header-menuItem Header-menuAllSizes Sign-in">Sign In</a>
+                    <a routerLink="/how-it-works" class="Header-menuItem Header-menuAllSizes Orange-link"
+                        translate>Header.GetStarted</a>
+                    <a routerLink="/sign-in" class="Header-menuItem Header-menuAllSizes Sign-in"
+                        translate>Header.SignIn</a>
                 </li>
             </div>
         </ul>
