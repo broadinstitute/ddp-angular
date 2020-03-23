@@ -1,4 +1,7 @@
 {
+    "Header": {},
+    "Footer": {},
+    "HomePage": {},
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",
