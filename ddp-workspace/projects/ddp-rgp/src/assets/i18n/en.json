@@ -1,6 +1,7 @@
 {
     "Common": {
-        "LogoAlt": "Rare Genome Project logo"
+        "LogoAlt": "Rare Genome Project logo",
+        "ApplyButton": "Apply"
     },
     "Header": {
         "Families": {
@@ -39,7 +40,85 @@
         },
         "FacebookAlt": "Facebook"
     },
-    "HomePage": {},
+    "HomePage": {
+        "Title": "If you or your family member has a rare and genetically undiagnosed condition, you may be eligible to join a patient-driven research study aimed at discovering the genes underlying your family’s rare disease.",
+        "Text": "The Rare Genomes Project (RGP) at the Broad Institute of MIT and Harvard is a patient-driven research study led by genomics experts and clinicians who believe that the latest advances in genomic sequencing are changing medicine and should be accessible to families with rare and undiagnosed conditions.",
+        "IllustrationAlt": "Rare people illustration",
+        "DNAAlt": "DNA Strand Illustration",
+        "MainPoints": {
+            "Discovery": {
+                "Title": "Aid Discovery",
+                "Subtitle": "More than half of the genes underlying rare diseases remain undiscovered.",
+                "Text": "By participating in the Rare Genomes Project, you can help researchers identify the genes that cause rare disease. If you are eligible for the study, we will use genomic sequencing to look for the cause of the rare, undiagnosed disease in your family.",
+                "Alt": "Aid Discovery"
+            },
+            "Answers": {
+                "Title": "Find Answers",
+                "Subtitle": "Your family’s diagnosis belongs to you.",
+                "Text": "If we find a genetic change that may be the cause of the rare disease in your family, we will confirm it in a clinical lab and work with your local doctor to return the result to you.",
+                "Alt": "Find Answers"
+            },
+            "Involved": {
+                "Title": "Get Involved",
+                "Subtitle": "Join the research community.",
+                "Text": "The Rare Genomes Project is supported by The Broad Institute of MIT and Harvard in partnership with patients and advocates like you. We believe that families should be at the center of research involving their diseases, and encourage the involvement of families and the advocacy groups that support them throughout the study.",
+                "Alt": "Get Involved"
+            },
+            "Data": {
+                "Title": "Share Data",
+                "Subtitle": "Data sharing is crucial for improving diagnosis rates of rare disease worldwide.",
+                "Text1": "The genetic information generated in this project will be shared with other scientists to ensure it has the widest possible impact. Your genetic data can help families like yours and improve scientists’ understanding of rare disease. Learn more about our data sharing policies",
+                "Text2": "here",
+                "Alt": "Share Data"
+            }
+        },
+        "Steps": {
+            "Title": "How you can participate",
+            "One": {
+                "Title": "Tell us your story",
+                "Text1": "Click",
+                "Text2": "apply",
+                "Text3": "to see a broad overview of the study and learn how you can start an application where you can tell us about the history of rare disease in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Alt": "Tell us your story"
+            },
+            "Two": {
+                "Title": "Submit a sample",
+                "Text": "Once enrolled, we will mail a pre-paid sample collection kit directly to you and your family. We will also ask you more about medical history and ask for copies of medical records, including any prior genetic test results.",
+                "Alt": "Share your data"
+            },
+            "Three": {
+                "Title": "Discover",
+                "Text": "Through DNA sequencing, we may discover the genetic cause of the rare disease in your family and will work with you and your doctor to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare disease research.",
+                "Alt": "Discover"
+            }
+        },
+        "Quote": {
+            "Text1": "\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because",
+            "Text2": "patients are often the ones that start driving the research",
+            "Author": "-Matt Might, Caregiver and Director, Hugh Kaul Precision Medicine Institute"
+        },
+        "Partners": {
+            "Title": "Our advocacy partners",
+            "NOFRDD": "National Organization for Rare Disorders",
+            "SWAN": "Syndromes without a Name",
+            "Rare": "Rare science accelerating cures for rare kids",
+            "RUNMyDNA": "Run my DNA",
+            "SBD": "Same but Different",
+            "UROurHope": "UR Our Hope",
+            "AOA": "Aware of Angels",
+            "SNS": "Sweet Nectar Society",
+            "RUN": "Rare Undiagnosed Network",
+            "MDA": "Muscular Dystrophy Association",
+            "GlobalGenes": "Global Genes",
+            "MyGene2": "My Gene 2",
+            "PatientWorthy": "Patient Worthy",
+            "TGPP": "The Giving Picture Project"
+        },
+        "LastSection": {
+            "Title": "You can be the driving force behind rare disease research.",
+            "Text": "Many thanks to the National Institutes of Health (NIH), the Muscular Dystrophy Association (MDA), Illumina, Inc., Broad Institute, the Silicon Valley Community Foundation, and Shriners Hospitals for Children for their financial support of our project."
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",
