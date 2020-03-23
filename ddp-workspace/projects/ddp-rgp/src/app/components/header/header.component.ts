@@ -1,44 +1,40 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
-  @Input() currentRoute: string = '';
-  inHome: boolean = true;
-  inLGMD: boolean = true;
-  inEligiblityCrit: boolean = true;
-  hoverEdit: boolean = false;
-  constructor(private router: Router) {
-    router.events.subscribe(e => this.trackNav(e));
-  }
-
+  public inHome: boolean = true;
+  public inLGMD: boolean = true;
+  public inEligiblityCrit: boolean = true;
+  public isCollapsed: boolean = true;
   public isForFamiliesCollapsed: boolean = true;
   public isForResearchersCollapsed: boolean = true;
   public isSpecialtyProjectsCollapsed: boolean = true;
 
-  public collapsed(event: any): void { }
-
-  public expanded(event: any): void { }
-
-  trackNav(evt): void {
-    this.currentPath(evt.urlAfterRedirects);
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.trackNavigation(event.urlAfterRedirects);
+      }
+    });
   }
 
-  currentPath(rt: string): void {
-    if (rt == null || rt == undefined || rt.indexOf('/home') == 0 || rt.indexOf('/password') == 0 || rt.indexOf('/limb-girdle-muscular-dystrophy') == 0 || rt.indexOf('/craniofacial') == 0 || rt.indexOf('/eligibility-criteria') == 0) {
+  private trackNavigation(route: string): void {
+    if (route === null || route === undefined || route.indexOf('/home') === 0 ||
+      route.indexOf('/password') === 0 || route.indexOf('/limb-girdle-muscular-dystrophy') === 0 ||
+      route.indexOf('/craniofacial') === 0 || route.indexOf('/eligibility-criteria') === 0) {
       this.inHome = true;
       this.inLGMD = true;
       this.inEligiblityCrit = true;
       return;
     }
 
-    if (rt.indexOf('/about-us') == 0) {
+    if (route.indexOf('/about-us') === 0) {
       this.inHome = false;
       this.inLGMD = false;
       this.inEligiblityCrit = false;
@@ -48,15 +44,5 @@ export class HeaderComponent {
     this.inLGMD = false;
     this.inHome = false;
     this.inEligiblityCrit = false;
-  }
-
-  hoverIn(): void {
-    this.hoverEdit = true;
-    console.log('hoverIn ' + this.hoverEdit);
-  }
-
-  hoverOut(): void {
-    this.hoverEdit = false;
-    console.log('hoverOut ' + this.hoverEdit);
   }
 }

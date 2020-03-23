@@ -11,11 +11,14 @@ import {
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-// import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -63,13 +66,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
   declarations: [
     AppComponent,
     HomeComponent,
-    // HeaderComponent,
+    HeaderComponent,
     FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DdpModule
+    DdpModule,
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     {
