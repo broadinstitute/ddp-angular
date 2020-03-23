@@ -9,6 +9,8 @@ import {
   GoogleAnalyticsEventsService
 } from 'ddp-sdk';
 
+import { ToolkitConfigurationService } from 'toolkit';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -27,9 +29,14 @@ if (baseElt) {
   base = baseElt[0].getAttribute('href');
 }
 
-declare let DDP_ENV: any;
+export const toolkitConfig = new ToolkitConfigurationService();
+toolkitConfig.phone = '617-714-7395';
+toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
+toolkitConfig.facebookGroupId = 'RareGenomesProject';
 
-export let config = new ConfigurationService();
+declare const DDP_ENV: any;
+
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -80,6 +87,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     {
       provide: 'ddp.config',
       useValue: config
+    },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: toolkitConfig
     },
     {
       provide: APP_INITIALIZER,
