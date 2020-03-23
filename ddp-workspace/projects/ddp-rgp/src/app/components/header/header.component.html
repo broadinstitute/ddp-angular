@@ -1,7 +1,7 @@
 <header appSticky class="row Header" [ngClass]="{'Header--home': inHome || inLGMD || inEligiblityCrit}">
     <nav class="navbar" role="navigation">
         <div class="navbar-header Display--inline">
-            <a class="navbar-brand" href [routerLink]="['/home']" class="Header-logo"></a>
+            <a class="navbar-brand" routerLink="/home" class="Header-logo"></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#rare-genomes-nav">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -14,63 +14,71 @@
                 <li dropdown class="dropdown Hidden-mobile">
                     <a dropdownToggle class="Header-menuItem">For Families <span class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a href [routerLink]="['/eligibility-criteria']" class="Header-subMenuItem">Eligibility Criteria</a>
-                        <a href [routerLink]="['/how-it-works']" class="Header-subMenuItem">Getting Started</a>
-                        <a href [routerLink]="['/privacy-and-your-data']" class="Header-subMenuItem">Privacy & Data Use</a>
-                        <a href [routerLink]="['/for-your-physician']" class="Header-subMenuItem">For Your Physician</a>
+                        <a routerLink="/eligibility-criteria" class="Header-subMenuItem">Eligibility Criteria</a>
+                        <a routerLink="/how-it-works" class="Header-subMenuItem">Getting Started</a>
+                        <a routerLink="/privacy-and-your-data" class="Header-subMenuItem">Privacy & Data Use</a>
+                        <a routerLink="/for-your-physician" class="Header-subMenuItem">For Your Physician</a>
                     </div>
                 </li>
 
                 <li dropdown class="dropdown Hidden-mobile">
                     <a dropdownToggle class="Header-menuItem">For Researchers <span class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a href [routerLink]="['/data-sharing']" class="Header-subMenuItem">Data Access</a>
+                        <a routerLink="/data-sharing" class="Header-subMenuItem">Data Access</a>
                     </div>
                 </li>
 
                 <li dropdown class="dropdown Hidden-mobile">
                     <a dropdownToggle class="Header-menuItem">Specialty Projects <span class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
-                        <a href [routerLink]="['/limb-girdle-muscular-dystrophy']" class="Header-subMenuItem" i18n>LGMD</a>
-                        <a href [routerLink]="['/craniofacial']" class="Header-subMenuItem" i18n>Craniofacial</a>
+                        <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuItem">LGMD</a>
+                        <a routerLink="/craniofacial" class="Header-subMenuItem">Craniofacial</a>
                     </div>
                 </li>
 
                 <!--ONLY FOR SMALLER DEVICES-->
                 <a (click)="isForFamiliesCollapsed = !isForFamiliesCollapsed" class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem" i18n>For Families <span class="caret"></span></p>
+                    <p class="Header-menuItem">For Families <span class="caret"></span></p>
                 </a>
-                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isForFamiliesCollapsed" class="multi-collapse" data-toggle="collapse" data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a href [routerLink]="['/eligibility-criteria']" class="Header-subMenuMobile">Eligibility Criteria</a>
-                    <a href [routerLink]="['/how-it-works']" class="Header-subMenuMobile">Getting Started</a>
-                    <a href [routerLink]="['/privacy-and-your-data']" class="Header-subMenuMobile">Privacy & Data Use</a>
-                    <a href [routerLink]="['/for-your-physician']" class="Header-subMenuMobile">For Your Physician</a>
+                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isForFamiliesCollapsed"
+                    class="multi-collapse" data-toggle="collapse" data-target=".multi-collapse.in, .navbar-collapse.in">
+                    <a routerLink="/eligibility-criteria" class="Header-subMenuMobile">Eligibility Criteria</a>
+                    <a routerLink="/how-it-works" class="Header-subMenuMobile">Getting Started</a>
+                    <a routerLink="/privacy-and-your-data" class="Header-subMenuMobile">Privacy & Data Use</a>
+                    <a routerLink="/for-your-physician" class="Header-subMenuMobile">For Your Physician</a>
                 </div>
 
-                <a (click)="isForResearchersCollapsed = !isForResearchersCollapsed" class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem" i18n>For Researchers <span class="caret"></span></p>
+                <a (click)="isForResearchersCollapsed = !isForResearchersCollapsed"
+                    class="Hidden-desktop Header-menuMobile">
+                    <p class="Header-menuItem">For Researchers <span class="caret"></span></p>
                 </a>
-                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isForResearchersCollapsed" class="multi-collapse" data-toggle="collapse" data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a href [routerLink]="['/data-sharing']" class="Header-subMenuMobile">Data Access</a>
+                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)"
+                    [collapse]="isForResearchersCollapsed" class="multi-collapse" data-toggle="collapse"
+                    data-target=".multi-collapse.in, .navbar-collapse.in">
+                    <a routerLink="/data-sharing" class="Header-subMenuMobile">Data Access</a>
                 </div>
 
-                <a (click)="isSpecialtyProjectsCollapsed = !isSpecialtyProjectsCollapsed" class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem" i18n>Specialty Projects <span class="caret"></span></p>
+                <a (click)="isSpecialtyProjectsCollapsed = !isSpecialtyProjectsCollapsed"
+                    class="Hidden-desktop Header-menuMobile">
+                    <p class="Header-menuItem">Specialty Projects <span class="caret"></span></p>
                 </a>
-                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isSpecialtyProjectsCollapsed" class="multi-collapse" data-toggle="collapse" data-target=".multi-collapse.in, .navbar-collapse.in">
-                    <a href [routerLink]="['/limb-girdle-muscular-dystrophy']" class="Header-subMenuMobile" i18n>LGMD</a>
-                    <a href [routerLink]="['/craniofacial']" class="Header-subMenuMobile" i18n>Craniofacial</a>
+                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)"
+                    [collapse]="isSpecialtyProjectsCollapsed" class="multi-collapse" data-toggle="collapse"
+                    data-target=".multi-collapse.in, .navbar-collapse.in">
+                    <a routerLink="/limb-girdle-muscular-dystrophy" class="Header-subMenuMobile">LGMD</a>
+                    <a routerLink="/craniofacial" class="Header-subMenuMobile">Craniofacial</a>
                 </div>
                 <!--UNTIL HERE-->
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a href [routerLink]="['/about-us']" class="Header-menuItem Header-menuAllSizes" i18n>About Us</a>
+                    <a routerLink="/about-us" class="Header-menuItem Header-menuAllSizes">About Us</a>
                 </li>
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a href [routerLink]="['/faq']" class="Header-menuItem Header-menuAllSizes" i18n>FAQs</a>
+                    <a routerLink="/faq" class="Header-menuItem Header-menuAllSizes">FAQs</a>
                 </li>
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
-                    <a href [routerLink]="['/how-it-works']" class="Header-menuItem Header-menuAllSizes Orange-link" i18n>Get Started</a>
-                    <a href [routerLink]="['/sign-in']" class="Header-menuItem Header-menuAllSizes Sign-in" i18n>Sign In</a>
+                    <a routerLink="/how-it-works" class="Header-menuItem Header-menuAllSizes Orange-link">Get
+                        Started</a>
+                    <a routerLink="/sign-in" class="Header-menuItem Header-menuAllSizes Sign-in">Sign In</a>
                 </li>
             </div>
         </ul>

@@ -1,24 +1,24 @@
 <footer class="Footer" [ngClass]="{'Footer--home': inHome}">
     <div class="row NoMargin">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="Footer-logo" [routerLink]="['/home']" role="img" alt="Rare Genome Project logo"></div>
+            <div class="Footer-logo" routerLink="/home" role="img" alt="Rare Genome Project logo"></div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <ul class="FullWidth Footer-menu">
                 <li>
-                    <a [routerLink]="['/home']" class="Footer-menuItem">Home</a>
+                    <a routerLink="/home" class="Footer-menuItem">Home</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/about-us']" class="Footer-menuItem">About Us</a>
+                    <a routerLink="/about-us" class="Footer-menuItem">About Us</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/sign-in']" class="Footer-menuItem">Sign In</a>
+                    <a routerLink="/sign-in" class="Footer-menuItem">Sign In</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/how-it-works']" class="Footer-menuItem">Apply</a>
+                    <a routerLink="/how-it-works" class="Footer-menuItem">Apply</a>
                 </li>
                 <li>
-                    <a [routerLink]="" class="Footer-menuItem" (click)="toTop()">Back to Top</a>
+                    <a routerLink="" class="Footer-menuItem" (click)="toTop()">Back to Top</a>
                 </li>
             </ul>
             <div class="FullWidth Footer-contact">
