@@ -6,35 +6,34 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <ul class="FullWidth Footer-menu">
                 <li>
-                    <a routerLink="/" class="Footer-menuItem">Home</a>
+                    <a routerLink="/" class="Footer-menuItem" translate>Footer.Navigation.Home</a>
                 </li>
                 <li>
-                    <a routerLink="/about-us" class="Footer-menuItem">About Us</a>
+                    <a routerLink="/about-us" class="Footer-menuItem" translate>Footer.Navigation.AboutUs</a>
                 </li>
                 <li>
-                    <a routerLink="/sign-in" class="Footer-menuItem">Sign In</a>
+                    <a routerLink="/sign-in" class="Footer-menuItem" translate>Footer.Navigation.SignIn</a>
                 </li>
                 <li>
-                    <a routerLink="/how-it-works" class="Footer-menuItem">Apply</a>
+                    <a routerLink="/how-it-works" class="Footer-menuItem" translate>Footer.Navigation.Apply</a>
                 </li>
                 <li>
-                    <a routerLink="" class="Footer-menuItem" (click)="toTop()">Back to Top</a>
+                    <a routerLink="" class="Footer-menuItem" (click)="toTop()" translate>Footer.Navigation.Back</a>
                 </li>
             </ul>
             <div class="FullWidth Footer-contact">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 NoPadding">
                     <ul>
-                        <li>Contact Us:</li>
+                        <li translate>Footer.Address.Text</li>
                         <li>
-                            <a href="mailto:raregenomes@broadinstitute.org"
-                                class="Footer-contactLink">raregenomes@broadinstitute.org</a>
+                            <a [href]="emailHref" class="Footer-contactLink">{{email}}</a>
                         </li>
                         <li>
-                            <a href="tel:617-714-7395" class="Footer-contactLink">617-714-7395</a>
+                            <a [href]="phoneHref" class="Footer-contactLink">{{phone}}</a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.facebook.com/RareGenomesProject/"><img
-                                    class="Footer-contactLogos" src="/assets/images/facebook.svg" alt="Facebook"></a>
+                            <a target="_blank" [href]="facebookUrl"><img class="Footer-contactLogos"
+                                    src="/assets/images/facebook.svg" alt="Facebook"></a>
                             <!-- <a target="_blank" href="https://twitter.com/raregenomes"><img class="Footer-contactLogos" src="/assets/images/twitter.svg" alt="Twitter"></a>-->
                         </li>
                     </ul>
@@ -42,8 +41,8 @@
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 Footer-contact--last">
                     <ul>
                         <li class="Hidden-mobile"><br /></li>
-                        <li>Broad Institute of MIT and Harvard</li>
-                        <li>415 Main Street, Cambridge, MA 02142 United States</li>
+                        <li translate>Footer.Address.Line1</li>
+                        <li translate>Footer.Address.Line2</li>
                     </ul>
                 </div>
             </div>

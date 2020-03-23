@@ -1,6 +1,19 @@
 {
     "Header": {},
-    "Footer": {},
+    "Footer": {
+        "Navigation": {
+            "Home": "Home",
+            "AboutUs": "About Us",
+            "SignIn": "Sign In",
+            "Apply": "Apply",
+            "Back": "Back to Top"
+        },
+        "Address": {
+            "Text": "Contact Us:",
+            "Line1": "Broad Institute of MIT and Harvard",
+            "Line2": "415 Main Street, Cambridge, MA 02142 United States"
+        }
+    },
     "HomePage": {},
     "SDK": {
         "SubmitButton": "Submit",
