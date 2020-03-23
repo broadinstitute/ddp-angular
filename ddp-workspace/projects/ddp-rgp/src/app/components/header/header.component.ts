@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { WindowRef } from 'ddp-sdk';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +17,24 @@ export class HeaderComponent {
   public isForFamiliesCollapsed: boolean = true;
   public isForResearchersCollapsed: boolean = true;
   public isSpecialtyProjectsCollapsed: boolean = true;
+  public isPageScrolled: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private window: WindowRef,
+    @Inject(DOCUMENT) private document: any) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.trackNavigation(event.urlAfterRedirects);
       }
     });
+  }
+
+  @HostListener('window: scroll') public onWindowScroll(): void {
+    const scrolledPixels = this.window.nativeWindow.pageYOffset
+      || this.document.documentElement.scrollTop
+      || this.document.body.scrollTop || 0;
+    this.isPageScrolled = !!scrolledPixels;
   }
 
   private trackNavigation(route: string): void {
