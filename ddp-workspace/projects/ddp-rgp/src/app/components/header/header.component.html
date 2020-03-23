@@ -13,7 +13,7 @@
         <ul class="nav Header-menu">
             <div class="collapse navbar-collapse Display--inline" id="rare-genomes-nav" [collapse]="isCollapsed">
                 <li dropdown class="dropdown Hidden-mobile">
-                    <a dropdownToggle class="Header-menuItem">For Families <span class="caret"></span></a>
+                    <a dropdownToggle class="Header-menuItem">For Families<span class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
                         <a routerLink="/eligibility-criteria" class="Header-subMenuItem">Eligibility Criteria</a>
                         <a routerLink="/how-it-works" class="Header-subMenuItem">Getting Started</a>
@@ -23,7 +23,7 @@
                 </li>
 
                 <li dropdown class="dropdown Hidden-mobile">
-                    <a dropdownToggle class="Header-menuItem">For Researchers <span class="caret"></span></a>
+                    <a dropdownToggle class="Header-menuItem">For Researchers<span class="caret"></span></a>
                     <div *dropdownMenu class="dropdown-menu">
                         <a routerLink="/data-sharing" class="Header-subMenuItem">Data Access</a>
                     </div>
@@ -51,7 +51,7 @@
 
                 <a (click)="isForResearchersCollapsed = !isForResearchersCollapsed"
                     class="Hidden-desktop Header-menuMobile">
-                    <p class="Header-menuItem">For Researchers <span class="caret"></span></p>
+                    <p class="Header-menuItem">For Researchers<span class="caret"></span></p>
                 </a>
                 <div [collapse]="isForResearchersCollapsed" class="multi-collapse" data-toggle="collapse"
                     data-target=".multi-collapse.in, .navbar-collapse.in">
