@@ -10,7 +10,7 @@ and the service account when using these scripts.
 
 `GCP_PROJECT` can be either `broad-ddp-dev` , `broad-ddp-test`, `broad-ddp-staging`, or `broad-ddp-prod` 
 
-`SERVICE_ACCOUNT` is the "email" address for the service account
+`SERVICE_ACCOUNT` is the "email" address for the service account, which can be read via `vaultcli read secret/pepper/[dev | test | staging | prod]/v1/conf | jq .gcp.serviceKey.client_email`
 
 ```
 export GCP_PROJECT=...
