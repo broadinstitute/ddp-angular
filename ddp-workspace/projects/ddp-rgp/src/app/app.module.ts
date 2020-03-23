@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { Router, NavigationEnd } from '@angular/router';
+import { LOCATION_INITIALIZED } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import {
   DdpModule,
@@ -15,12 +21,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { Router, NavigationEnd } from '@angular/router';
-import { LOCATION_INITIALIZED } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
-
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -74,7 +75,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

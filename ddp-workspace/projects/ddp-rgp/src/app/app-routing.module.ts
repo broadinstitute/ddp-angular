@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 import {
   IrbGuard
@@ -12,6 +13,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+    // canActivate: [IrbGuard]
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
     // canActivate: [IrbGuard]
   },
   {
