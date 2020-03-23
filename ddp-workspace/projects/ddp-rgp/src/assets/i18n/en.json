@@ -1,4 +1,7 @@
 {
+    "Common": {
+        "LogoAlt": "Rare Genome Project logo"
+    },
     "Header": {
         "Families": {
             "Text": "For Families",
@@ -33,7 +36,8 @@
             "Text": "Contact Us:",
             "Line1": "Broad Institute of MIT and Harvard",
             "Line2": "415 Main Street, Cambridge, MA 02142 United States"
-        }
+        },
+        "FacebookAlt": "Facebook"
     },
     "HomePage": {},
     "SDK": {

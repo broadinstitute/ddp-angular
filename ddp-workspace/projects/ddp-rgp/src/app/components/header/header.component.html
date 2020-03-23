@@ -1,7 +1,7 @@
 <header class="row Header" [ngClass]="{'Header--home': inHome || inLGMD || inEligiblityCrit, 'stick': isPageScrolled}">
     <nav class="navbar" role="navigation">
         <div class="navbar-header Display--inline">
-            <a class="navbar-brand" routerLink="/" class="Header-logo"></a>
+            <a class="navbar-brand" routerLink="/" class="Header-logo" [attr.alt]="'Common.LogoAlt' | translate"></a>
             <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed"
                 [attr.aria-expanded]="!isCollapsed" aria-controls="rare-genomes-nav">
                 <span class="sr-only">Toggle navigation</span>

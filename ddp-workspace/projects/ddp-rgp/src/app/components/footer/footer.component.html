@@ -1,7 +1,7 @@
 <footer class="Footer" [ngClass]="{'Footer--home': inHome}">
     <div class="row NoMargin">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="Footer-logo" routerLink="/" role="img" alt="Rare Genome Project logo"></div>
+            <div class="Footer-logo" routerLink="/" role="img" [attr.alt]="'Common.LogoAlt' | translate"></div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <ul class="FullWidth Footer-menu">
@@ -33,8 +33,7 @@
                         </li>
                         <li>
                             <a target="_blank" [href]="facebookUrl"><img class="Footer-contactLogos"
-                                    src="/assets/images/facebook.svg" alt="Facebook"></a>
-                            <!-- <a target="_blank" href="https://twitter.com/raregenomes"><img class="Footer-contactLogos" src="/assets/images/twitter.svg" alt="Twitter"></a>-->
+                                    src="/assets/images/facebook.svg" [alt]="'Footer.FacebookAlt' | translate"></a>
                         </li>
                     </ul>
                 </div>
