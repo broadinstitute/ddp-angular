@@ -1,0 +1,19 @@
+<div class="row NoMargin">
+    <mat-icon mat-dialog-close class="fa fa-times Dialog-headerClose" aria-hidden="true" (click)="closeDialog()">
+    </mat-icon>
+
+    <div *ngIf="data.imageUrl" class="col-lg-3 col-md-3 col-sm-4 col-xs-4 Dialog-container">
+        <img [src]="data.imageUrl" class="Dialog-photo" alt="{{data.name}}">
+    </div>
+
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 Dialog-container">
+        <div mat-dialog-title class="Dialog-header">
+            <h2 mat-dialog-title class="Title Color--blue">{{data.name}}</h2>
+            <p class="Dialog-headerRole">{{data.role}}</p>
+        </div>
+
+        <mat-dialog-content>
+            <p class="Paragraph">{{data.bio}}</p>
+        </mat-dialog-content>
+    </div>
+</div>

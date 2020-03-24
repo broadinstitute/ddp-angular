@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-// import { AboutUsService } from './about-us.service';
-// import { MdDialogRef } from '@angular/material';
-// import { AboutUsDialogsComponent } from './about-us-dialogs/about-us-dialogs.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AboutUsDialogComponent } from './dialog/about-us-dialog.component';
+import { DialogData } from './dialogData';
 
 @Component({
   selector: 'app-about-us',
@@ -9,14 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent {
-  // public result: any;
-  // dialogRef: MdDialogRef<AboutUsDialogsComponent>;
+  constructor(private dialog: MatDialog) { }
 
-  // constructor(private dialogsService: AboutUsService) { }
-
-  public openDialog(id) {
-    // this.dialogsService
-    //   .showDetails(id)
-    //   .subscribe(res => this.result = res);
+  public openDialog(data: DialogData) {
+    this.dialog.open(AboutUsDialogComponent, {
+      data: {
+        ...data
+      }
+    });
   }
 }

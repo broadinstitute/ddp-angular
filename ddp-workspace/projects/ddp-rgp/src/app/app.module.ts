@@ -15,13 +15,20 @@ import {
   GoogleAnalyticsEventsService
 } from 'ddp-sdk';
 
-import { ToolkitConfigurationService } from 'toolkit';
+import {
+  ToolkitModule,
+  ToolkitConfigurationService
+} from 'toolkit';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -76,12 +83,19 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AboutUsDialogComponent
+  ],
+  entryComponents: [
+    AboutUsDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DdpModule,
+    ToolkitModule,
+    MatIconModule,
+    MatDialogModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
