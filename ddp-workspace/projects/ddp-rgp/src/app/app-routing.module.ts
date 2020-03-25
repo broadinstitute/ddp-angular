@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 import {
   IrbGuard
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
+    // canActivate: [IrbGuard]
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
     // canActivate: [IrbGuard]
   },
   {

@@ -26,6 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -84,7 +85,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HeaderComponent,
     FooterComponent,
     AboutUsComponent,
-    AboutUsDialogComponent
+    AboutUsDialogComponent,
+    FaqComponent
   ],
   entryComponents: [
     AboutUsDialogComponent
