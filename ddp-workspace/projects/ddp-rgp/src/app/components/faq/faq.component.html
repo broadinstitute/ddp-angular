@@ -2,292 +2,133 @@
   <div class="PageHeader-background Background--orange">
     <div class="row PageLayout">
       <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h1 class="PageHeader-title" i18n>Frequently Asked Questions</h1>
+        <h1 class="PageHeader-title" translate>FaqPage.Title</h1>
       </div>
     </div>
   </div>
 </div>
-<div class="Wrapper row">
+<div class="Wrapper row" routeTransformer>
   <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
-    <p class="Paragraph" i18n>Browse through these FAQs to find answers to commonly raised questions. We also
-      encourage you to read through the other pages of this website. If your question is not answered, please
-      reach out to us by email at <a href="mailto:raregenomes@broadinstitute.org" class="Link" target="_blank" i18n>
-        raregenomes@broadinstitute.org</a> or by phone at 617-714-7395.</p>
+    <p class="Paragraph">
+      <span translate>FaqPage.Intro.Text1</span>
+      <a [href]="emailHref" class="Link">{{email}}</a>
+      <span translate>FaqPage.Intro.Text2</span>
+      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+    </p>
 
     <a (click)="isGeneralCollapsed = !isGeneralCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>General Questions
+      <h3 class="Panel-title" translate>FaqPage.General.Title
         <i class="fa Panel-icon"
           [ngClass]="{'fa-chevron-down': isGeneralCollapsed, 'fa-chevron-up': !isGeneralCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isGeneralCollapsed">
-      <p class="Subheading" i18n>What is the goal of The Rare Genomes Project?</p>
-      <p class="Paragraph" i18n>The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed
-        rare, genetic conditions by providing families affected by rare disease access to whole genomic sequencing.</p>
-
-      <p class="Subheading" i18n>What does "undiagnosed" mean?</p>
-      <p class="Paragraph" i18n>For our project, we use this term to mean “<span class="Accent" i18n>genetically</span>
-        undiagnosed.” Genetically undiagnosed patients do not have a genetic change(s) identified that explains
-        their symptoms. These patients may or may not have a <span class="Accent" i18n>clinical diagnosis</span>, which
-        is based on symptoms and other types of medical test results.</p>
-      <p class="Paragraph" i18n>For example, individuals are most often diagnosed with cystic fibrosis based on
-        physical symptoms and a sweat test. This is a <span class="Accent" i18n>clinical diagnosis</span>. Having
-        genetic testing that identifies two variants in the <span class="Italic">CFTR</span> gene that cause cystic
-        fibrosis is a <span class="Accent" i18n>genetic diagnosis</span>.</p>
-
-      <p class="Subheading" i18n>Who is conducting the research?</p>
-      <p class="Paragraph" i18n>The Rare Genomes Project was launched at the Broad Institute of MIT and Harvard by
-        researchers Daniel MacArthur, PhD and Heidi Rehm, PhD. We are also working in collaboration with Monkol Lek,
-        PhD from Yale University, Eric Liao, MD from Massachusetts General Hospital, Carsten Bonnemann, MD from NIH,
-        and the Lab for Molecular Medicine at Partners HealthCare Center for Personalized Medicine.</p>
-      <p class="Paragraph" i18n>Our team is made up of researchers, physicians, software developers,
-        genetic counselors, and study coordinators. Learn more about us
-        <a href [routerLink]="['/about-us']" class="Link" i18n>here</a>.
-      </p>
+    <div [collapse]="isGeneralCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.General.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
+
     <a (click)="isBeforeCollapsed = !isBeforeCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>Before You Apply
+      <h3 class="Panel-title" translate>FaqPage.Before.Title
         <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isBeforeCollapsed, 'fa-chevron-up': !isBeforeCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isBeforeCollapsed">
-      <p class="Subheading" i18n>Do I have to travel to the Rare Genomes Project office in Massachusetts to
-        participate?</p>
-      <p class="Paragraph" i18n>No. Participation is entirely remote.</p>
-
-      <p class="Subheading" i18n>Are there any costs to participate?</p>
-      <p class="Paragraph" i18n>There are no costs to you to participate in this study. Everything you need to
-        participate, including the cost of sample collection, genomic sequencing, and clinical confirmation genetic
-        testing, will be covered by us.</p>
-
-      <p class="Subheading" i18n>Will I receive medical care and/or treatment from the Rare Genomes Project?</p>
-      <p class="Paragraph" i18n>No. Medical care and treatment will not be provided as part of this research study.</p>
-
-      <p class="Subheading" i18n>What role does my medical provider play in this study?</p>
-      <p class="Paragraph" i18n>While we do not require involvement in the application process, a family's clinician
-        can help individuals identify pertinent medical records and is also critical in partnering with us to
-        clinically confirm and return results to families.</p>
-
-      <p class="Subheading" i18n>What type of sample will I be asked for?</p>
-      <p class="Paragraph" i18n>We request one small tube of blood. In rare cases, we have worked with families to
-        explore alternative sample types.</p>
-
-      <p class="Subheading" i18n>What type of genetic testing is performed by the Rare Genomes Project offering?</p>
-      <p class="Paragraph" i18n>The Rare Genomes Project offers Whole Genome Sequencing (WGS). WGS is a different
-        test than Whole Exome Sequencing (WES), which is a more focused test that is more commonly covered by
-        insurance companies. Sometimes, we may perform additional tests including Structural Variant Analysis and
-        RNAseq. To learn more about WGS and other types of genetic testing, we recommend reading through Genetics
-        Home Reference's <a href="https://ghr.nlm.nih.gov/primer#testing" target="_blank" class="Link" i18n>website</a>.
-      </p>
-
-      <p class="Subheading" i18n>I have already had whole genome sequencing. Will the Rare Genomes Project accept my
-        external data for reanalysis?</p>
-      <p class="Paragraph" i18n>On a case-by-case basis. If you have had prior genomic sequencing, fill out an
-        application to our study and indicate that you have prior sequencing data available. If your application is
-        accepted, we will reach out to you and discuss the next steps. Due to the resources involved in obtaining and
-        manipulating data from other sources, it is sometimes more time and cost effective for us to sequence your
-        genome again.</p>
+    <div [collapse]="isBeforeCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Before.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
 
     <a (click)="isProcessCollapsed = !isProcessCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>The Application Process
+      <h3 class="Panel-title" translate>FaqPage.Process.Title
         <i class="fa Panel-icon"
           [ngClass]="{'fa-chevron-down': isProcessCollapsed, 'fa-chevron-up': !isProcessCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isProcessCollapsed">
-      <p class="Subheading" i18n>Who should apply to participate?</p>
-      <p class="Paragraph" i18n>Patients and families with rare, suspected genetic disease. To see if the
-        Rare Genomes Project might be appropriate for your family, visit our
-        <a href [routerLink]="['/eligibility-criteria']" class="Link" i18n>Eligibility Criteria</a> page for
-        more detailed information.</p>
-
-      <p class="Subheading" i18n>Can I apply if I live outside the United States?</p>
-      <p class="Paragraph" i18n>We currently are only able to enroll individuals that live in the United States.
-        However, we hope to eventually expand the project. If you live outside the United States and are interested
-        in participating, we encourage you to indicate on our
-        <a href [routerLink]="['/count-me-in']" class="Link" i18n>application page</a> that you do not live in the
-        United States and then join our mailing list on the following page when prompted. We will contact you if we
-        change our participation requirements in the future.</p>
-
-      <p class="Subheading" i18n>Who in my family should participate?</p>
-      <p class="Paragraph" i18n>The nature of this project requires that the person in your family with an
-        undiagnosed genetic condition participate. Although not a requirement, having additional family members
-        participate, especially both of the patient's biological parents and additional affected family members,
-        improves our chances of finding the genetic cause of the rare, undiagnosed condition. For example, a study of
-        whole exome sequencing showed that analysis of parents along with affected children increased the likelihood
-        of diagnosis from 22% to 31% (<a href="https://jamanetwork.com/journals/jama/fullarticle/1918775"
-          target="_blank" class="Link" i18n>Lee et al. 2014</a>).</p>
-
-      <p class="Subheading" i18n>Can I still apply to the Rare Genomes Project if the affected family member is
-        adopted, or one biological parent is unavailable?</p>
-      <p class="Paragraph" i18n>Yes. In cases where one biological parent is unavailable, we may ask about the
-        availability of their other relatives.</p>
-
-      <p class="Subheading" i18n>If I complete an application, will I automatically be able to participate?</p>
-      <p class="Paragraph" i18n>No. Our clinical team reviews each application to determine whether the
-        individual or family is a good fit for this study. In some cases, we may need to review your medical records
-        in order to make a determination. To learn more, visit our
-        <a href [routerLink]="['/eligibility-criteria']" class="Link" i18n>Eligibility Criteria</a> page.</p>
-
-      <p class="Subheading" i18n>Why was my application to the Rare Genomes Project not accepted?</p>
-      <p class="Paragraph" i18n>There are many reasons an application may not be accepted. Some reasons include: the
-        condition is not likely to be caused by a change in a single gene, the approach taken by our study is not
-        likely to diagnose the condition in question, or we believe a genetic diagnosis has already been identified.
-        You can read more about our eligibility criteria <a href [routerLink]="['/eligibility-criteria']" class="Link"
-          i18n>here</a>.</p>
+    <div [collapse]="isProcessCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Process.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
 
     <a (click)="isCollectionCollapsed = !isCollectionCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>Collection of Data and DNA
+      <h3 class="Panel-title" translate>FaqPage.Collection.Title
         <i class="fa Panel-icon"
           [ngClass]="{'fa-chevron-down': isCollectionCollapsed, 'fa-chevron-up': !isCollectionCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollectionCollapsed">
-      <p class="Subheading" i18n>How and where do I get my blood drawn?</p>
-      <p class="Paragraph" i18n>We will mail you a pre-paid specimen collection kit for you to have your blood drawn
-        at a location of your choosing. We have partnered with Quest Diagnostics, a company with
-        <a href="https://appointment.questdiagnostics.com/patient/confirmation" target="_blank" class="Link"
-          i18n>thousands of blood draw locations</a> across the United States and Puerto Rico, who will draw blood
-        for the study and bill us directly. Alternatively, you can have your blood drawn by a local provider. If
-        you are billed for this, send us a receipt for reimbursement.</p>
-
-      <p class="Subheading" i18n>What happens after I return my blood kit?</p>
-      <p class="Paragraph" i18n>After your kit returns to our facilities, we will extract DNA from your blood sample
-        and prepare it for DNA sequencing or targeted testing.</p>
-
-      <p class="Subheading" i18n>Who in my family will get their genome sequenced?</p>
-      <p class="Paragraph" i18n>It depends. Typically, we perform genome sequencing on the affected individual(s) in
-        the family and their biological parents (when available). We typically only perform targeted testing for
-        specific variants of interest in unaffected family members.</p>
-
-      <p class="Subheading" i18n>What else might I be asked to share if I participate in this project?</p>
-      <p class="Paragraph" i18n>We require medical records from the affected family member(s). We may also inquire
-        about the availability of excess tissue from clinical procedures for additional testing. Because this study
-        does not include a physical examination by study staff, we will also ask participants to share a photograph;
-        this is optional.</p>
-
-      <p class="Subheading" i18n>Why am I being asked for photographs?</p>
-      <p class="Paragraph" i18n>We routinely ask for photographs of the member of the family with the undiagnosed
-        condition. Some genetic syndromes are known to cause characteristic or subtle facial features that we consider
-        when determining if a participant’s condition is related to a genetic variant. Photographs are considered
-        part of the patient’s medical record and will not be shared externally without permission.</p>
-
-      <p class="Subheading" i18n>When should I update study staff?</p>
-      <p class="Paragraph" i18n>It is important to contact us if you change your contact information (such as phone
-        number or address) or have new medical information you wish to add to your file (such as a new symptom, a
-        genetic diagnosis from another source, or the development of the condition in other family members.)</p>
-
-      <p class="Subheading" i18n>Can I withdraw from the project?</p>
-      <p class="Paragraph" i18n>Yes, you can withdraw from the project at any time. If you do, your samples and your
-        information will be destroyed. However, it will not be possible to destroy samples and information that have
-        already been shared with other researchers. If you decide to withdraw your permission, you should contact us
-        in writing at <a href="mailto:raregenomes@broadinstitute.org" class="Link" target="_blank" i18n>
-          raregenomes@broadinstitute.org</a>.</p>
-
+    <div [collapse]="isCollectionCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Collection.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
 
     <a (click)="isReturnCollapsed = !isReturnCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>Return of Results
+      <h3 class="Panel-title" translate>FaqPage.Return.Title
         <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isReturnCollapsed, 'fa-chevron-up': !isReturnCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isReturnCollapsed">
-      <p class="Subheading" i18n>Will I receive results?</p>
-      <p class="Paragraph" i18n>Our goal is to find the genetic explanation for the undiagnosed condition in each
-        family who enrolls, but we cannot guarantee a result for each family. If we are able to find a genetic cause
-        of your condition, we will work with the medical provider of your choice to return results that are known or
-        suspected to be related to the rare disease in the family.</p>
-      <p class="Subheading" i18n>Will I receive results unrelated to the rare condition for which I applied?</p>
-      <p class="Paragraph" i18n>We do not actively search for genetic results unrelated to the rare condition in the
-        family. However, if we find a variant that causes a condition with treatment implications, we will provide
-        the option of clinically confirming the result to have it returned.</p>
-      <p class="Subheading" i18n>How will I receive my results?</p>
-      <p class="Paragraph" i18n>You can only receive results that have been confirmed in a Clinical Laboratory
-        Improvement Amendments (CLIA)-certified laboratory. If we find results that we believe may explain the
-        underlying cause of the rare condition present in your family, we will contact you and ask if you would like
-        to have the findings clinically confirmed in a CLIA-certified laboratory. A genetic counselor on our staff
-        will work with a doctor of your choice to order testing through the CLIA lab.</p>
+    <div [collapse]="isReturnCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Return.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
 
     <a (click)="isDataCollapsed = !isDataCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>Data Generation and Usage
+      <h3 class="Panel-title" translate>FaqPage.Data.Title
         <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isDataCollapsed, 'fa-chevron-up': !isDataCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isDataCollapsed">
-      <p class="Subheading" i18n>How will my genetic data be shared?</p>
-      <p class="Paragraph" i18n>One of the goals of this project is to improve rare disease diagnosis for
-        participants and the rare disease community as a whole. Data sharing supports this goal by allowing
-        researchers and clinicians around the world to access the de-identified genetic data generated in our
-        project. Learn more about how we share de-identified data <a href [routerLink]="['/privacy-and-your-data']"
-          class="Link" i18n>here</a>.</p>
-
-      <p class="Subheading" i18n>Can I have access to my genetic sequencing data?</p>
-      <p class="Paragraph" i18n>Unfortunately, no. Because the genomic sequencing in this study will be performed in
-        a research laboratory (non-CLIA laboratory), federal regulations prohibit us from directly releasing your
-        individual raw sequencing data to you.</p>
-
-      <p class="Subheading" i18n>Can outside researchers access data generated as part of this project?</p>
-      <p class="Paragraph" i18n>Yes. If you are a researcher looking for more information, please visit our data
-        sharing <a href [routerLink]="['/data-sharing']" class="Link" i18n>page</a>.</p>
-
-      <p class="Subheading" i18n>Can outside researchers request samples from this study for use in their own
-        research?</p>
-      <p class="Paragraph" i18n>In some cases, we may share de-identified samples with external collaborators. Please
-        contact us to learn more.</p>
-
-      <p class="Subheading" i18n>Can outside researchers submit a cohort of samples be sequenced through this
-        project?</p>
-      <p class="Paragraph" i18n>While the Rare Genomes Project works directly with patients, the Broad Center for
-        Mendelian Genomics (CMG) may be interested in collaborating with external researchers. To learn more, visit
-        the CMG's <a href="https://cmg.broadinstitute.org" target="_blank" class="Link" i18n>website</a>.</p>
+    <div [collapse]="isDataCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Data.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+
     <hr class="List-line">
+
     <a (click)="isSpreadCollapsed = !isSpreadCollapsed" class="Panel">
-      <h3 class="Panel-title" i18n>Spreading the Word about RGP
+      <h3 class="Panel-title" translate>FaqPage.Spread.Title
         <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isSpreadCollapsed, 'fa-chevron-up': !isSpreadCollapsed}"
           aria-hidden="true"></i>
       </h3>
     </a>
-    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isSpreadCollapsed">
-      <p class="Subheading" i18n>How can I refer families with rare and undiagnosed genetic conditions to this
-        project?</p>
-      <p class="Paragraph" i18n>If you are a family involved in the Rare Genomes Project and know other families who
-        might benefit from participation, please direct them to our website or have them contact us at
-        <a href="mailto:raregenomes@broadinstitute.org" target="_blank" class="Link"
-          i18n>raregenomes@broadinstitute.org</a>. If you would like to share your participation with others, feel free
-        to post the link to our
-        website on your social media pages so that more patients can learn about the project.</p>
-      <p class="Paragraph" i18n>If you are a clinician who cares for a patient you believe could benefit from the
-        Rare Genomes Project, encourage the family to fill out an online application on this website and have them
-        indicate your name when asked about a referring provider.</p>
-
-      <p class="Subheading" i18n>Do you have informational materials for patients and families?</p>
-      <p class="Paragraph" i18n>Yes! Please contact us by phone at 617-714-7395 or by email at
-        <a href="mailto:raregenomes@broadinstitute.org" target="_blank" class="Link" i18n>
-          raregenomes@broadinstitute.org</a> for copies of our materials.</p>
-
-      <p class="Subheading" i18n>Does the Rare Genomes Project work with other organizations?</p>
-      <p class="Paragraph" i18n>Yes! We are interested in working with advocacy groups who support families who may
-        benefit from our research. We are also interested in raising awareness of groups that help individuals and
-        families with rare diseases access support, resources, and future research or treatment opportunities. If you
-        are involved with either type of advocacy group, please reach out to us by email at
-        <a href="mailto:raregenomes@broadinstitute.org" target="_blank" class="Link" i18n>
-          raregenomes@broadinstitute.org</a>, or by phone at 617-714-7395.</p>
+    <div [collapse]="isSpreadCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Spread.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
     </div>
+    
     <hr class="List-line">
   </div>
 </div>
+
+<ng-template #item let-question="question">
+  <p class="Subheading" [innerHTML]="question.question"></p>
+  <ng-container *ngFor="let answer of question.answers">
+    <p class="Paragraph" [innerHTML]="answer"></p>
+  </ng-container>
+</ng-template>
