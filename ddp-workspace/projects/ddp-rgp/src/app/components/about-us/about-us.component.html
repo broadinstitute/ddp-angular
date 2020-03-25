@@ -2,23 +2,13 @@
     <div class="AboutUs-imageContainer">
         <div class="AboutUs-image" role="img" aria-label="About Us image">
             <div class="PageHeader-box PageHeader-box--header Hidden-mobile">
-                <div class="PageHeader-boxContent">
-                    We are a tight-knit team of researchers, clinicians, software developers, genetic counselors, and
-                    coordinators, who believe that the latest advances in genome sequencing technology are changing the
-                    world, and that they should be available to every rare
-                    and undiagnosed family.
-                </div>
+                <div class="PageHeader-boxContent" translate>AboutUsPage.InfoBox</div>
             </div>
         </div>
     </div>
 </div>
 <div class="PageHeader-box PageHeader-box--header Hidden-desktop">
-    <div class="PageHeader-boxContent">
-        We are a tight-knit team of researchers, clinicians, software developers, genetic counselors, and coordinators,
-        who believe that the latest advances in genome sequencing technology are changing the world, and that they
-        should be available to every rare
-        and undiagnosed family.
-    </div>
+    <div class="PageHeader-boxContent" translate>AboutUsPage.InfoBox</div>
 </div>
 
 <div class="PageHeader-background Background--blue">
@@ -26,7 +16,7 @@
         <div class="PageHeader-box PageHeader-box--footer"></div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 class="PageHeader-title--aboutUs">Our Story</h1>
+                <h1 class="PageHeader-title--aboutUs" translate>AboutUsPage.Title</h1>
             </div>
         </div>
     </div>
@@ -34,217 +24,63 @@
 
 <div class="Wrapper row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <p class="Paragraph TopMargin75">We created the Rare Genomes Project to enable patients with undiagnosed,
-            suspected genetic conditions to participate in genomic research regardless of where they live, to engage
-            participants as partners in the research process, and to turn genomic
-            data into clinically meaningful answers for families.</p>
-        <p class="Paragraph">Improving our understanding of the rarest genetic conditions requires combining the
-            experiences of patients and families directly with genomic research. By reaching out nationwide and
-            empowering the rare and undiagnosed community to donate a sample
-            and their story, we hope to better understand the genetic basis of all undiagnosed diseases.
-        </p>
+        <p class="Paragraph TopMargin75" translate>AboutUsPage.Intro.Text1</p>
+        <p class="Paragraph" translate>AboutUsPage.Intro.Text2</p>
         <hr class="HorizontalLine">
 
         <img src="/assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
-        <h2 class="Title Color--blue Aligned--center TopMargin75">The Broad Institute</h2>
-        <p class="Paragraph TopMargin50">The Broad Institute of MIT and Harvard is a non-profit, academic research
-            institution based in Cambridge, Massachusetts, focused on using genomic data to better understand human
-            health and disease. The Broad is home to sequencing facilities that
-            can produce and analyze genetic data at the rate of an entire genome every 12 minutes—more systematically
-            and at a larger scale than any other facility. We have developed new advances in genome sequencing and
-            analysis technology that have
-            allowed us to find the genetic changes at the root of the diseases of thousands of patients. The Broad’s
-            research philosophy is centered on large-scale collaborative research and open data sharing.</p>
+        <h2 class="Title Color--blue Aligned--center TopMargin75" translate>AboutUsPage.Broad.Title</h2>
+        <p class="Paragraph TopMargin50" translate>AboutUsPage.Broad.Section1</p>
         <p class="Paragraph">Despite these exciting improvements in diagnosis, however, the vast majority of rare
-            disease patients still remain undiagnosed. <span class="Accent">The Broad is committed to changing this for
-                all rare disease patients</span>, and we are sharing
-            our resources with the research community at large to make sure that we are advancing rare disease research
-            worldwide. For more information about the Broad Institute, go to <a href="https://broadinstitute.org"
-                target="_blank" class="Link">broadinstitute.org</a>.</p>
+            disease patients still remain undiagnosed.
+            <span translate>AboutUsPage.Broad.Section2.Text1</span>
+            <span class="Accent" translate>AboutUsPage.Broad.Section2.Text2</span>,
+            <span translate>AboutUsPage.Broad.Section2.Text3</span>
+            <a href="https://broadinstitute.org" target="_blank" class="Link">broadinstitute.org</a>.</p>
         <hr class="HorizontalLine">
     </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h2 class="Title Color--blue Aligned--center">Our Team</h2>
+        <h2 class="Title Color--blue Aligned--center" translate>AboutUsPage.Team.Title</h2>
         <div class="row" style="margin: 25px 0 0 0">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(0)">
-                    <h4 class="Subtitle TeamMember-name">Daniel MacArthur, PhD</h4>
-                    <p class="TeamMember-role">Principal Investigator</p>
+            <ng-container *ngFor="let teammate of 'AboutUsPage.Team.Section1' | translate">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="TeamMember" (click)="openDialog(teammate)">
+                        <h4 class="Subtitle TeamMember-name">{{teammate.name}}</h4>
+                        <p class="TeamMember-role">{{teammate.role}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(1)">
-                    <h4 class="Subtitle TeamMember-name">Heidi Rehm, PhD, FACMG</h4>
-                    <p class="TeamMember-role">Principal Investigator</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(2)">
-                    <h4 class="Subtitle TeamMember-name">Anne O’Donnell-Luria, MD, PhD</h4>
-                    <p class="TeamMember-role">Medical Director</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(3)">
-                    <h4 class="Subtitle TeamMember-name">Melanie O'Leary, MS, LGC</h4>
-                    <p class="TeamMember-role">Operations Lead</p>
-                </div>
-            </div>
+            </ng-container>
         </div>
-
         <div class="row NoMargin">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(4)">
-                    <h4 class="Subtitle TeamMember-name">Harindra Arachchi, MBA</h4>
-                    <p class="TeamMember-role">Software Engineer</p>
+            <ng-container *ngFor="let teammate of 'AboutUsPage.Team.Section2' | translate">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="TeamMember" (click)="openDialog(teammate)">
+                        <h4 class="Subtitle TeamMember-name">{{teammate.name}}</h4>
+                        <p class="TeamMember-role">{{teammate.role}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(5)">
-                    <h4 class="Subtitle TeamMember-name">Samantha Baxter, MS, LGC</h4>
-                    <p class="TeamMember-role">Senior Clinical Genomics Specialist</p>
+            </ng-container>
+            <ng-container *ngFor="let teammate of 'AboutUsPage.Team.Section3' | translate">
+                <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-xs-12">
+                    <div class="TeamMember" (click)="openDialog(teammate)">
+                        <h4 class="Subtitle TeamMember-name">{{teammate.name}}</h4>
+                        <p class="TeamMember-role">{{teammate.role}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(6)">
-                    <h4 class="Subtitle TeamMember-name">Jaime Chang</h4>
-                    <p class="TeamMember-role">Senior Project Coordinator</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(7)">
-                    <h4 class="Subtitle TeamMember-name">Katherine Chao</h4>
-                    <p class="TeamMember-role">Genomic Variant Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(8)">
-                    <h4 class="Subtitle TeamMember-name">Beryl Cummings</h4>
-                    <p class="TeamMember-role">Genomic Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(9)">
-                    <h4 class="Subtitle TeamMember-name">Eleina England, MS</h4>
-                    <p class="TeamMember-role">Genomic Variant Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(10)">
-                    <h4 class="Subtitle TeamMember-name">Julia Goodrich, PhD</h4>
-                    <p class="TeamMember-role">Genomic Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(11)">
-                    <h4 class="Subtitle TeamMember-name">Monica Hsiung Wojcik, MD</h4>
-                    <p class="TeamMember-role">Clinical Genomic Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(12)">
-                    <h4 class="Subtitle TeamMember-name">Kristen Laricchia, MS</h4>
-                    <p class="TeamMember-role">Associate Computational Biologist</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(13)">
-                    <h4 class="Subtitle TeamMember-name">Monkol Lek, PhD</h4>
-                    <p class="TeamMember-role">Computational Biologist</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(26)">
-                    <h4 class="Subtitle TeamMember-name">Eric Liao, MD, PhD</h4>
-                    <p class="TeamMember-role">Collaborator</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(14)">
-                    <h4 class="Subtitle TeamMember-name">Alysia Lovgren, PhD</h4>
-                    <p class="TeamMember-role">Analysis Lead</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(15)">
-                    <h4 class="Subtitle TeamMember-name">Lauren Margolin</h4>
-                    <p class="TeamMember-role">Senior Project Manager</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(16)">
-                    <h4 class="Subtitle TeamMember-name">Lynn Pais, MS</h4>
-                    <p class="TeamMember-role">Genomic Variant Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(17)">
-                    <h4 class="Subtitle TeamMember-name">Hana Snow</h4>
-                    <p class="TeamMember-role">Software Engineer</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(18)">
-                    <h4 class="Subtitle TeamMember-name">Matthew Solomonson, PhD</h4>
-                    <p class="TeamMember-role">Senior Software Engineer</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(19)">
-                    <h4 class="Subtitle TeamMember-name">Miriam Udler, MD, PhD</h4>
-                    <p class="TeamMember-role">Clinical Genomic Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(20)">
-                    <h4 class="Subtitle TeamMember-name">Zaheer Valivullah</h4>
-                    <p class="TeamMember-role">Genomic Variant Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(21)">
-                    <h4 class="Subtitle TeamMember-name">Grace VanNoy, MS, LGC</h4>
-                    <p class="TeamMember-role">Clinical Project Manager</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(22)">
-                    <h4 class="Subtitle TeamMember-name">Qingbo Wang</h4>
-                    <p class="TeamMember-role">Genomic Analyst</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(23)">
-                    <h4 class="Subtitle TeamMember-name">Ben Weisburd</h4>
-                    <p class="TeamMember-role">Software Engineer</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(24)">
-                    <h4 class="Subtitle TeamMember-name">Clara Williamson</h4>
-                    <p class="TeamMember-role">Clinical Project Coordinator</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-xs-12">
-                <div class="TeamMember" (click)="openDialog(25)">
-                    <h4 class="Subtitle TeamMember-name">Mike Wilson</h4>
-                    <p class="TeamMember-role">Associate Computational Biologist</p>
-                </div>
-            </div>
+            </ng-container>
         </div>
     </div>
 
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 Container">
         <hr class="HorizontalLine">
-        <p class="Paragraph Accent Aligned--center">Enormous thanks to our friends at Broad Institute's Data
-            Donation Platform for their absolutely critical design, engineering, and technical work on this project.
-            Raregenomes.org is powered by DDP's direct-to-patient study recruitment software.</p>
+        <p class="Paragraph Accent Aligned--center" translate>AboutUsPage.ThanksBroad</p>
         <hr class="HorizontalLine">
 
-        <p class="Paragraph Aligned--center">All patient and family portraits on our website were photographed by Season
-            Atwater, founder of <a href="http://awareofangels.org" target="_blank" class="Link">Aware of Angels</a>.
-            Thank you Season for being an amazing advocate for this community,
-            and thank you to all of the families who so kindly shared their photos with us.</p>
+        <p class="Paragraph Aligned--center">
+            <span translate>AboutUsPage.ThanksPhotographer.Text1</span>
+            <a href="http://awareofangels.org" target="_blank" class="Link">Aware of Angels</a>.
+            <span translate>AboutUsPage.ThanksPhotographer.Text2</span>
+        </p>
     </div>
 </div>
