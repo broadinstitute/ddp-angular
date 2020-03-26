@@ -567,6 +567,83 @@
         "PasswordRequiredError": "Password is required",
         "SubmitButton": "Submit"
     },
+    "EligibilityPage": {
+        "Title": "Eligibility Criteria",
+        "Intro": {
+            "Text1": "The Rare Genomes Project offers research-based genomic sequencing to patients and families with an undiagnosed, suspected genetic disease. Each application that we receive is carefully reviewed by our team to determine if our study is likely to find the genetic cause of the condition in your family.",
+            "Text2": {
+                "Part1": "We welcome applications from families with all types of rare disease. Additionally, we have specialized branches of our project focusing on",
+                "Part2": "limb-girdle muscular dystrophy",
+                "Part3": "and",
+                "Part4": "craniofacial conditions",
+                "Part5": "which are described in more detail on their disease-specific pages."
+            }
+        },
+        "Eligible": {
+            "Intro": {
+                "Text1": "To be eligible, participants",
+                "Text2": "must:"
+            },
+            "List": {
+                "Item1": "Have a rare and genetically undiagnosed condition",
+                "Item2": "Live in the United States",
+                "Item3": "Understand English",
+                "Item4": "Be currently under the care of a medical provider that is helping to understand the cause of the condition",
+                "Item5": "Have access to a mobile or landline telephone and a computer"
+            },
+            "Ending": {
+                "Text1": {
+                    "Part1": "Applicants do",
+                    "Part2": "NOT",
+                    "Part3": "need to pay any fees associated with our study or travel to our office in Cambridge, Massachusetts. Participation is entirely remote and free-of-cost."
+                },
+                "Text2": {
+                    "Part1": "If one or more of these criteria do not apply to you, we encourage you to",
+                    "Part2": "join our mailing list",
+                    "Part3": "We will contact you if participation requirements have changed, making you eligible to apply to the study."
+                }
+            }
+        },
+        "General": {
+            "MoreLikely": {
+                "Text": {
+                    "Part1": "In general, the families",
+                    "Part2": "more likely",
+                    "Part3": "to benefit from our study approach are suspected to have a single gene cause of disease and may have some of the following features:"
+                },
+                "List": {
+                    "Item1": "An earlier-than-typical onset or severe presentation of symptoms",
+                    "Item2": "Multiple family members with the same (or similar) medical condition",
+                    "Item3": "Available, unaffected biological parents of the affected individual(s)",
+                    "Item4": "Some prior genetic testing that did not identify a diagnosis"
+                }
+            },
+            "LessLikely": {
+                "Text": {
+                    "Part1": "In general, the families",
+                    "Part2": "less likely",
+                    "Part3": "to benefit from our study approach include those with a condition that:"
+                },
+                "List": {
+                    "Item1": "Is not likely to be caused by a change in a single gene (for example, Ehlers-Danlos syndrome, isolated heart defects, VACTERL, and autoimmune disorders)",
+                    "Item2": "Has a suspected or known environmental cause",
+                    "Item3": "Has already been diagnosed genetically",
+                    "Item4": "Has not been diagnosed by prior whole genome sequencing"
+                }
+            },
+            "Ending": {
+                "Text1": {
+                    "Part1": "If you think your family is eligible, we encourage you to",
+                    "Part2": "learn more about how to apply"
+                },
+                "Text2": {
+                    "Part1": "Please reach out to us by email at",
+                    "Part2": "or by phone at",
+                    "Part3": "if you have any questions or would like us to consider a special-case application."
+                }
+            }
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",

@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { PasswordComponent } from './components/password/password.component';
+import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
 
 import {
   IrbGuard
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'eligibility-criteria',
+    component: EligibilityCriteriaComponent,
     canActivate: [IrbGuard]
   },
   {

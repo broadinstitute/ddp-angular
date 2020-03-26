@@ -1,0 +1,108 @@
+.Background--blue.alt {
+  padding: 0;
+  position: absolute;
+  z-index: 2;
+  width: auto;
+  text-align: center;
+  margin-top: -100px;
+  right: 0;
+  margin-right: 100px;
+}
+
+.Background--blue.alt .PageHeader-title {
+  margin: 45px 0;
+}
+
+.Eligibility-imageContainer {
+  padding: 0;
+  height: 750px;
+}
+
+.Landing-image.Landing-imageEligibility {
+  background-size: cover;
+  background-position: center bottom -70px;
+}
+
+.Margin--25 {
+  margin-top: 25px;
+}
+
+@media only screen and (max-width: 767px) {
+  .Eligibility-imageContainer {
+    height: 330px;
+  }
+
+  .Landing-image.Landing-imageEligibility {
+    background-image: url(/assets/images/eligibility-criteria-sm.jpg);
+    width: 767px;
+    height: 330px;
+    background-size: 100%;
+    background-position: center center;
+  }
+
+  .Background--blue.alt {
+    margin-right: 35px;
+    margin-top: -70px;
+  }
+
+  .Background--blue.alt .PageHeader-title {
+    margin: 35px 0;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1025px) {
+  .Background--blue.alt {
+    margin-right: 50px;
+    margin-top: -70px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Eligibility-imageContainer {
+    height: 400px;
+  }
+
+  .Landing-image.Landing-imageEligibility {
+    background-image: url(/assets/images/eligibility-criteria-md.jpg);
+    width: 1024px;
+    height: 400px;
+  }
+
+  .Background--blue.alt {
+    margin-right: 35px;
+    margin-top: -70px;
+  }
+
+  .Background--blue.alt .PageHeader-title {
+    margin: 35px 0;
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .Landing-image.Landing-imageEligibility {
+    background-image: url(/assets/images/eligibility-criteria-lg.jpg);
+    width: 1920px;
+    height: 750px;
+    background-position-x: 70%;
+    background-position-y: top;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1920px) {
+  .Landing-image.Landing-imageEligibility {
+    background-image: url(/assets/images/eligibility-criteria-lg.jpg);
+    width: 1920px;
+    height: 750px;
+    background-position: bottom 40% center;
+  }
+}
+
+@media only screen and (min-width: 1700px) and (max-width: 1920px) {
+  .Landing-image.Landing-imageEligibility {
+    background-image: url(/assets/images/eligibility-criteria-xl.jpg);
+    background-position-y: 40%;
+    height: 800px;
+  }
+}

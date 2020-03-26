@@ -29,6 +29,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { PasswordComponent } from './components/password/password.component';
+import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -92,7 +93,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     AboutUsDialogComponent,
     FaqComponent,
-    PasswordComponent
+    PasswordComponent,
+    EligibilityCriteriaComponent
   ],
   entryComponents: [
     AboutUsDialogComponent
