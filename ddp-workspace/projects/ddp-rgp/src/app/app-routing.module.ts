@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { PasswordComponent } from './components/password/password.component';
 
 import {
   IrbGuard
@@ -14,17 +15,21 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
-    // canActivate: [IrbGuard]
+    canActivate: [IrbGuard]
   },
   {
     path: 'about-us',
     component: AboutUsComponent,
-    // canActivate: [IrbGuard]
+    canActivate: [IrbGuard]
   },
   {
     path: 'faq',
     component: FaqComponent,
-    // canActivate: [IrbGuard]
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'password',
+    component: PasswordComponent
   },
   {
     path: '**',

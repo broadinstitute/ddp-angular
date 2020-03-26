@@ -561,6 +561,12 @@
             ]
         }
     },
+    "ErrorPage": {
+        "PasswordWrongError": "Incorrect password. Please try again.",
+        "OtherError": "We're sorry, but an error has occurred.",
+        "PasswordRequiredError": "Password is required",
+        "SubmitButton": "Submit"
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",

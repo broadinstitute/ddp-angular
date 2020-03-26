@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Router, NavigationEnd } from '@angular/router';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -27,9 +28,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { PasswordComponent } from './components/password/password.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -86,7 +91,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     FooterComponent,
     AboutUsComponent,
     AboutUsDialogComponent,
-    FaqComponent
+    FaqComponent,
+    PasswordComponent
   ],
   entryComponents: [
     AboutUsDialogComponent
@@ -99,7 +105,12 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatIconModule,
     MatDialogModule,
     CollapseModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     {
