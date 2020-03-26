@@ -153,8 +153,9 @@ commands:
           name: Update deployments sheet
           command: |
             set -u
+            set +x
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | \
-            reportdeploy.sh $RELEASE_SHEET_ID '<<parameters.study_key>> Angular client' "$ENVIRONMENT" "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL"
+            reportdeploy.sh "$RELEASE_SHEET_ID" '<<parameters.study_key>> Angular client' "$ENVIRONMENT" "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL"
 
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
