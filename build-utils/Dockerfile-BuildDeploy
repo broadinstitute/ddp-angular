@@ -63,12 +63,9 @@ RUN apt-get update && apt-get install -y \
 ENV ANGULAR_CLI @angular/cli@8.3.23
 RUN npm install --global $ANGULAR_CLI
 
-# Copy and build and install sheetappend utility
-WORKDIR /usr/src/sheetappend
-COPY ./sheetappend/*.js .
-COPY ./sheetappend/package*.json ./
-RUN npm install
-RUN npm link
+# Copy and build-utils
+COPY . /opt/build-utils
+RUN npm install -g /opt/build-utils/sheetappend
 
 # keep track of git hash
 ARG GIT_SHA
