@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 
@@ -22,6 +22,7 @@ import { SessionMementoService } from './services/sessionMemento.service';
 import { GoogleAnalyticsEventsService } from './services/googleAnalyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
+import { LanguageService } from './services/languageService.service';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -164,6 +165,8 @@ import { RouteTransformerDirective } from './directives/routeTransformer.directi
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
+import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
   return {
@@ -268,7 +271,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TemporaryUserServiceAgent,
     InvitationsServiceAgent,
     Title,
-    RenewSessionNotifier
+    RenewSessionNotifier,
+    LanguageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   declarations: [
     NetworkSnifferComponent,

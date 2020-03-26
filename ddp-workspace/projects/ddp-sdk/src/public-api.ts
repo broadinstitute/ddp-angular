@@ -60,6 +60,7 @@ export * from './lib/services/serviceAgents/temporaryUserServiceAgent.service';
 export * from './lib/services/renewSessionNotifier.service';
 export * from './lib/services/scriptLoader.service';
 export * from './lib/services/serviceAgents/governedParticipantsServiceAgent.service';
+export * from './lib/services/languageService.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
