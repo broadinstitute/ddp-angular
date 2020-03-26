@@ -50,7 +50,7 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              angular-appengine-deployment-ctd-2)
+              circle-ci-updates-1)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -364,7 +364,7 @@ workflows:
             branches:
               only:
                 - develop
-                - angular-appengine-deployment-ctd-2
+                - circle-ci-updates-1
       - brain-build-and-deploy:
           <<: *build-and-deploy-filters
       - angio-build-and-deploy:
