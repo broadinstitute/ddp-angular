@@ -22,6 +22,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                             <mat-form-field>
                                 <input matInput
                                     type="password"
+                                    (change)="hideErrors()"
                                     formControlName="password"
                                     [placeholder]="'Toolkit.Password.InputPlaceholder' | translate"
                                     maxLength="200">
@@ -33,6 +34,9 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                             </div>
                             <div *ngIf="isPasswordWrong" class="ErrorMessage">
                                 <span translate>Toolkit.Password.PasswordWrongError</span>
+                            </div>
+                            <div *ngIf="isOtherError" class="ErrorMessage">
+                                <span translate>Toolkit.Password.OtherError</span>
                             </div>
                         </form>
                     </div>
