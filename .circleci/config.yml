@@ -8,7 +8,7 @@ references:
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-server-build:03-04-2020A
+      - image: broadinstitute/study-website-build:03-26-2020A
     working_directory: ~/repo
 
 commands:
