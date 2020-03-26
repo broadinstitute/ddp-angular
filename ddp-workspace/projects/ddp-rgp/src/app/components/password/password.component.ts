@@ -25,13 +25,20 @@ export class PasswordComponent implements OnInit {
     });
   }
 
-  public clearForm(): void {
+  public clearErrorMessage(): void {
     this.errorMessage = '';
   }
 
   public checkPassword(): void {
-    this.clearForm();
+    this.clearErrorMessage();
     const password = this.passwordForm.controls['password'].value;
+    const controls = this.passwordForm.controls;
+
+    if (this.passwordForm.invalid) {
+      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+      return;
+    }
+
     this.irbPassword.checkPassword(password).subscribe(
       response => {
         if (response) {
