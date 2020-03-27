@@ -644,6 +644,73 @@
             }
         }
     },
+    "HowItWorks": {
+        "Title": "Getting Started",
+        "Intro": {
+            "Question": "Thinking about joining us?",
+            "Answer": {
+                "Text1": "We’re excited you’re interested in our project! Read through these steps to learn more about what participation in the Rare Genomes Project entails. If you think the Rare Genomes Project might be right for you, click",
+                "Text2": "Start an Application",
+                "Text3": "at the bottom of this page."
+            }
+        },
+        "CommonAlt": "How it works family picture",
+        "Items": [
+            {
+                "title": "Get to know our project",
+                "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a> and read through the steps below.",
+                "image": "/assets/images/step-1.jpg "
+            },
+            {
+                "title": "Tell us about your family",
+                "text": "During the application process, we will ask about the rare, suspected genetic disease in your family, limited demographic information, family history information, and the results of previous genetic and other tests. After you complete your application, our study team will review the information you submit to determine if you are a good fit for the study. If so, we will set up a consent session with your family to explain the study and make sure that all of your questions are answered before sending you a consent document to sign.",
+                "image": "/assets/images/step-2.jpg "
+            },
+            {
+                "title": "Share your medical history",
+                "text": "After signing consent documents, we will ask for copies of medical records, including genetic test results, from affected family members. You can send this information by mail or secure fax using the information provided after your consent session.",
+                "image": "/assets/images/step-3.jpg "
+            },
+            {
+                "title": "Send us your sample",
+                "text": "Once enrolled, we will mail pre-paid sample collection kits directly to you and your family. You can take these kits to your local Quest Diagnostics facility, or to a local doctor’s office or hospital. We cover all fees associated with sample collection.",
+                "image": "/assets/images/step-4.jpg "
+            },
+            {
+                "title": "Have your DNA sequenced",
+                "text": "When your sample arrives at our lab, we will extract DNA from the sample and perform genomic sequencing. To learn more about genomic sequencing, you can visit the U.S. National Library of Medicine's <a href=\"https://ghr.nlm.nih.gov/primer/testing/sequencing\" target=\"_blank\" class=\"Link\">Help Me Understand Genetics</a> page.",
+                "image": "/assets/images/step-5.jpg "
+            },
+            {
+                "title": "Have your genomic data analyzed",
+                "text": "To search for the genetic cause of your condition, we will compare your genome to hundreds of thousands of other individuals without your condition as well as your family members. This allows us to identify which DNA variants in your genome are potentially related to your condition.",
+                "image": "/assets/images/step-6.jpg "
+            },
+            {
+                "title": "Share your data",
+                "text": "Sharing your symptoms and genomic data with other researchers and clinicians makes finding others with similar symptoms and changes in the same genes more likely. You can learn more about the ways we share data and our privacy policy <a href=\"/privacy-and-your-data\" class=\"Link\"> here</a>.",
+                "image": "/assets/images/step-7.jpg "
+            },
+            {
+                "title": "Receive clinically significant results",
+                "text": "If we find results that we believe may explain the cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings confirmed in a clinical laboratory. If you do, we will work with you and your doctor to return the results to you.",
+                "image": "/assets/images/step-8.jpg "
+            }
+        ],
+        "Ending": {
+            "Start": {
+                "Text": "If this project sounds like it could benefit you or a loved one, we encourage you to fill out an online application here:",
+                "Button": "Start an Application"
+            },
+            "AnyQuestions": {
+                "Question": "Still have questions?",
+                "Text1": "If you do not see your question",
+                "Text2": "here",
+                "Text3": "please email us at",
+                "Text4": "or call us at"
+            }
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",

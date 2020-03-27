@@ -2,7 +2,7 @@
   <div class="PageHeader-background Background--orange">
     <div class="row PageLayout">
       <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h1 class="PageHeader-title">Getting Started</h1>
+        <h1 class="PageHeader-title" translate>HowItWorks.Title</h1>
       </div>
     </div>
   </div>
@@ -10,134 +10,41 @@
 <div class="Wrapper row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container Container--howItWorks">
     <img src="/assets/images/how-it-works-family.jpg" class="PageContent-image" alt="How it works family picture">
-    <h2 class="Title Color--blue Aligned--center TopMargin50">Thinking about joining us?</h2>
-    <p class="Paragraph TopMargin25 Accent">We’re excited you’re interested in our project! Read
-      through these steps to learn more about what participation in the Rare Genomes Project entails. If you think
-      the Rare Genomes Project might be right for you, click “<span class="NotALink">Start an Application</span>”
-      at the bottom of this page.</p>
-    <hr class="HorizontalLine">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-1.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Get to know our project</h2>
-        <p class="Paragraph">The Rare Genomes Project is a research study focused on patients and families with
-          <span class="Accent">rare
-            and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare
-          disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more
-          information, review our <a routerLink="/eligibility-criteria" class="Link">eligibility
-            criteria</a> and read through the steps below.</p>
-      </div>
-    </div>
+    <h2 class="Title Color--blue Aligned--center TopMargin50" translate>HowItWorks.Intro.Question</h2>
+    <p class="Paragraph TopMargin25 Accent">
+      <span translate>HowItWorks.Intro.Answer.Text1</span>
+      “<span class="NotALink" translate>HowItWorks.Intro.Answer.Text2</span>”
+      <span translate>HowItWorks.Intro.Answer.Text3</span>
+    </p>
 
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-2.jpg" class="PageContent-imageStep" alt="How it works family picture">
+    <ng-container *ngFor="let item of 'HowItWorks.Items' | translate; let first = first;">
+      <hr *ngIf="first" class="HorizontalLine">
+      <hr *ngIf="!first" class="HorizontalLine HorizontalLine--howItWorks">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <img [src]="item.image" class="PageContent-imageStep" [alt]="'HowItWorks.CommonAlt' | translate">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
+          <h2 class="Title Color--blue">{{item.title}}</h2>
+          <p class="Paragraph" [innerHTML]="item.text"></p>
+        </div>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Tell us about your family</h2>
-        <p class="Paragraph">During the application process, we will ask about the rare, suspected genetic disease in
-          your family, limited demographic information, family history information, and the results of previous
-          genetic and other tests. After you complete your application, our study team will review the information
-          you submit to determine if you are a good fit for the study. If so, we will set up a consent session with
-          your family to explain the study and make sure that all of your questions are answered
-          before sending you a consent document to sign.</p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-3.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Share your medical history</h2>
-        <p class="Paragraph">After signing consent documents, we will ask for copies of medical records, including
-          genetic test results, from affected family members. You can send this information by mail or secure fax
-          using the information provided after your consent session.</p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-4.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Send us your sample</h2>
-        <p class="Paragraph">Once enrolled, we will mail pre-paid sample collection kits directly to you and your
-          family. You can take these kits to your local Quest Diagnostics facility, or to a local doctor’s office or
-          hospital. We cover all fees associated with sample collection.</p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-5.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Have your DNA sequenced</h2>
-        <p class="Paragraph">When your sample arrives at our lab, we will extract DNA from the sample and perform
-          genomic sequencing. To learn more about genomic sequencing, you can visit the U.S. National Library of
-          Medicine's <a href="https://ghr.nlm.nih.gov/primer/testing/sequencing" target="_blank" class="Link">Help Me
-            Understand Genetics</a> page.</p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-6.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Have your genomic data analyzed</h2>
-        <p class="Paragraph">To search for the genetic cause of your condition, we will compare your genome to
-          hundreds of thousands of other individuals without your condition as well as your family members. This
-          allows us to identify which DNA variants in your genome are potentially related to your condition.</p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-7.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Share your data</h2>
-        <p class="Paragraph">Sharing your symptoms and genomic data with other researchers and clinicians makes
-          finding others with similar symptoms and changes in the same genes more likely. You can learn more about
-          the ways we share data and our privacy policy <a routerLink="/privacy-and-your-data" class="Link">
-            here</a>.
-        </p>
-      </div>
-    </div>
-
-    <hr class="HorizontalLine HorizontalLine--howItWorks">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <img src="/assets/images/step-8.jpg" class="PageContent-imageStep" alt="How it works family picture">
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
-        <h2 class="Title Color--blue">Receive clinically significant results</h2>
-        <p class="Paragraph">If we find results that we believe may explain the cause of the rare condition present
-          in your family, we will contact you and ask if you would like to have the findings confirmed in a clinical
-          laboratory. If you do, we will work with you and your doctor to return the results to you.</p>
-      </div>
-    </div>
+    </ng-container>
 
     <hr class="HorizontalLine">
-    <h2 class="Title Color--blue TopMargin50">If this project sounds like it could benefit you
-      or a loved one, we encourage you to fill out an online application here:</h2>
+    <h2 class="Title Color--blue TopMargin50" translate>HowItWorks.Ending.Start.Text</h2>
     <div class="CenterDiv TopMargin50">
-      <a routerLink="/tell-us-your-story" class="Button--Apply">Start an Application</a>
+      <a routerLink="/tell-us-your-story" class="Button--Apply" translate>HowItWorks.Ending.Start.Button</a>
     </div>
-    <h2 class="Title Color--blue TopMargin75">Still have questions?</h2>
-    <p class="Paragraph">If you do not see your question <a routerLink="/faq" class="Link">here</a>,
-      please email us at <a href="mailto:raregenomes@broadinstitute.org" class="Link" target="_blank">
-        raregenomes@broadinstitute.org</a> or call us at 617-714-7395.</p>
+    <h2 class="Title Color--blue TopMargin75" translate>HowItWorks.Ending.AnyQuestions.Question</h2>
+    <p class="Paragraph">
+      <span translate>HowItWorks.Ending.AnyQuestions.Text1</span>
+      <a routerLink="/faq" class="Link" translate>HowItWorks.Ending.AnyQuestions.Text2</a>,
+      <span translate>HowItWorks.Ending.AnyQuestions.Text3</span>
+      <a [href]="emailHref" class="Link">{{email}}</a>
+      <span translate>HowItWorks.Ending.AnyQuestions.Text4</span>
+      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+    </p>
 
   </div>
 </div>
