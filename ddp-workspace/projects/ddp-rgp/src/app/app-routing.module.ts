@@ -7,6 +7,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { PasswordComponent } from './components/password/password.component';
 import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
+import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 
 import {
   IrbGuard
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'how-it-works',
     component: HowItWorksComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'privacy-and-your-data',
+    component: PrivacyAndYourDataComponent,
     canActivate: [IrbGuard]
   },
   {

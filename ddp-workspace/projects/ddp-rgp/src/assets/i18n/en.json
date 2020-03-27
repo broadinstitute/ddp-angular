@@ -121,6 +121,7 @@
     },
     "AboutUsPage": {
         "Title": "Our Story",
+        "ImageAlt": "About Us image",
         "InfoBox": "We are a tight-knit team of researchers, clinicians, software developers, genetic counselors, and coordinators, who believe that the latest advances in genome sequencing technology are changing the world, and that they should be available to every rare and undiagnosed family.",
         "Intro": {
             "Text1": "We created the Rare Genomes Project to enable patients with undiagnosed, suspected genetic conditions to participate in genomic research regardless of where they live, to engage participants as partners in the research process, and to turn genomic data into clinically meaningful answers for families.",
@@ -709,6 +710,57 @@
                 "Text3": "please email us at",
                 "Text4": "or call us at"
             }
+        }
+    },
+    "PrivacyAndYourDataPage": {
+        "Title": "Privacy and Your Data",
+        "ImageAlt": "Data Sharing image",
+        "Intro": "<b>Genomic sequencing is just the first step in understanding rare diseases-</b> sharing your symptoms and genomic data with other researchers and clinicians makes finding others with similar symptoms and changes in the same genes more likely.",
+        "DataSharing": {
+            "Title": "What is Data Sharing?",
+            "Text1": "Data sharing means that sequencing and limited clinical data from this project will be shared with others outside our project. Those who would like to access the data we produce in the Rare Genomes Project are often other scientists who are interested in learning more about the genetics of a specific disease or condition. Because any given rare disease affects so few people, data sharing enables scientists worldwide to connect with one another and accelerate the speed of new discoveries in genetic disease.",
+            "Text2": "We will utilize multiple platforms to share your sequencing data and key symptoms of the rare genetic disease in your family. <b>The information that we share is de-identified, meaning that your name, date of birth, contact information, or other personal identifiers are never shared.</b>"
+        },
+        "VariantInformation": {
+            "Title": "How We Share Variant Information",
+            "Paragraph1": {
+                "Text1": "We share variant information when we are suspicious that a specific variant may cause a rare disease. For this type of variant, we share information through an online tool called",
+                "Text2": "Matchmaker Exchange",
+                "Text3": "which helps researchers and clinicians connect with one another. These connections can lead to collaborations that help establish evidence that variants and genes are related to rare diseases."
+            },
+            "Paragraph2": {
+                "Text1": "We also share variant information when we have confirmed that a variant causes a rare disease. For these variants, we share information through an online, public database called",
+                "Text2": "ClinVar",
+                "Text3": "ClinVar serves as a reference that clinicians and scientists can use to know which genetic changes have been found in patients and associated with genetic diseases."
+            }
+        },
+        "GenomicInformation": {
+            "Title": "How We Share Full Genomic Information",
+            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. Data is stored at the Broad Institute and accessible through its Data Use Oversight System",
+            "Text2": "DUOS",
+            "Text3": "We also share data through a similar, federally-funded genomic database called",
+            "Text4": "AnVIL",
+            "Text5": "Interested researchers must apply and be granted access to the data in these platforms."
+        },
+        "Privacy": {
+            "Title": "Privacy",
+            "Text": "Data sharing is important to advancing the understanding of rare genetic disease, and we have many safeguards in place to ensure that the data we collect as part of our project is securely stored and shared responsibly. Below are some frequently asked questions about privacy and data usage in the Rare Genomes Project."
+        },
+        "Stored": {
+            "Question": "How is my data stored?",
+            "Answer": "We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID, and access to personal identifiers is restricted to select study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
+        },
+        "Shared": {
+            "Question": "Will my name or personal information be shared with other researchers and clinicians?",
+            "Answer": "Never. The genetic data that we generate in the project is <b>de-identified</b>, meaning that it does not contain personally identifiable information such as your name or date of birth."
+        },
+        "Profit": {
+            "Question": "Will the Rare Genomes Project profit off of my data?",
+            "Answer": "No. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
+        },
+        "Ending": {
+            "Text1": "We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
+            "Text2": "or by phone at"
         }
     },
     "SDK": {
