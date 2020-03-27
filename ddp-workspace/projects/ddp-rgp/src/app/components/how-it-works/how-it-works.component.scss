@@ -1,0 +1,49 @@
+.HowItWorks-image {
+    display: inline-block;
+    width: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/how-it-works-family.jpg);
+    position: relative;
+}
+
+.HowItWorks-image .HowItWorks-imageInner {
+    padding-top: 50%;
+    display: block;
+    height: 0;
+}
+
+.HowItWorks-box {
+    width: 60% !important;
+    margin: 0 auto !important;
+}
+
+h2.Title {
+    margin-top: 25px;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    .Container--howItWorks>h2.Title,
+    .Container--howItWorks>.Paragraph {
+        padding: 0 100px;
+    }
+
+    .PageContent-textStep {
+        padding-left: 50px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Container--howItWorks {
+        margin-top: 0;
+    }
+
+    .HorizontalLine--howItWorks {
+        display: none;
+    }
+
+    h2.Title {
+        margin-top: 50px;
+    }
+}
