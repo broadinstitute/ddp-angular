@@ -8,6 +8,7 @@ import { PasswordComponent } from './components/password/password.component';
 import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
+import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
 
 import {
   IrbGuard
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: 'privacy-and-your-data',
     component: PrivacyAndYourDataComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'for-your-physician',
+    component: ForYourPhysicianComponent,
     canActivate: [IrbGuard]
   },
   {
