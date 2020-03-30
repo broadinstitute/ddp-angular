@@ -7,10 +7,10 @@ import { ToolkitConfigurationService } from 'toolkit';
   styleUrls: ['./data-sharing.component.scss']
 })
 export class DataSharingComponent implements OnInit {
-  public isMatchmakerCollapsed:boolean = true;
-  public isClinVarCollapsed:boolean = true;
-  public isDUOSCollapsed:boolean = true;
-  public isAnVILCollapsed:boolean = true;
+  public isMatchmakerCollapsed: boolean = true;
+  public isClinVarCollapsed: boolean = true;
+  public isDUOSCollapsed: boolean = true;
+  public isAnVILCollapsed: boolean = true;
 
   public phone: string;
   public email: string;
@@ -18,7 +18,7 @@ export class DataSharingComponent implements OnInit {
   public emailHref: string;
   public facebookUrl: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {}
+  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.phone = this.toolkitConfiguration.phone;
@@ -27,5 +27,4 @@ export class DataSharingComponent implements OnInit {
     this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
   }
-
 }
