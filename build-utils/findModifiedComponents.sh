@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 #ignore these file name patterns when figuring out what modules changed 
 declare -a exclude_patterns=( "^.*\.md" )
