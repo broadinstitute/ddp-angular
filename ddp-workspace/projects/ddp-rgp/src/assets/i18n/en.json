@@ -838,6 +838,53 @@
             "Text2": "or call us at"
         }
     },
+    "LGMDPage": {
+        "Title": "The limb-girdle muscular dystrophy (LGMD) branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link\">Muscular Dystrophy Association</a> and the <a href=\"https://www.jain-foundation.org/\" target=\"_blank\" class=\"Link\">Jain Foundation</a> dedicated to diagnosis and gene discovery through whole genome sequencing for individuals and families with LGMD.",
+        "ImageAlt": "If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
+        "Background": {
+            "Title": "Background",
+            "Text": "The limb-girdle muscular dystrophies are a group of muscle diseases characterized by weakness and wasting of the muscles in the hips, legs, shoulders, and/or other proximal muscles. There are currently over 30 known forms of LGMD, with a diverse range of clinical signs and symptoms, that collectively are estimated to affect as many as 1 in 15,000 individuals."
+        },
+        "Genetics": {
+            "Title": "Genetics and LGMD",
+            "Text": "Multiple studies estimate that roughly half of those undergoing genetic testing do not have a causative DNA variant in any of the known LGMD-causing genes. This project enables individuals who have had negative or incomplete results from prior genetic testing to participate in a study using whole-genome sequencing (WGS) to search for additional causes of LGMD."
+        },
+        "Right": {
+            "Title": "Is This Study Right For Me?",
+            "Text": "Our efforts will focus on individuals and families who:",
+            "Items": [
+                "Have a clinical diagnosis of LGMD*",
+                "Have had prior genetic testing that was negative or did not provide a full genetic explanation*",
+                "Are currently under the care of a neurologist, medical geneticist, or relevant subspecialist",
+                "Live in the United States",
+                "Are English-speaking"
+            ],
+            "Ending": {
+                "Text1": "*If you are unsure whether you have a clinical diagnosis of LGMD or you have not had prior genetic testing for your LGMD, you may still be eligible to participate and are encouraged to apply by",
+                "Text2": "clicking here"
+            }
+        },
+        "Steps": {
+            "Title": "How you can participate",
+            "One": {
+                "Title": "Tell us your story",
+                "Text1": "Click",
+                "Text2": "apply",
+                "Text3": "to tell us about the history of LGMD in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Alt": "Tell us your story"
+            },
+            "Two": {
+                "Title": "Submit a sample",
+                "Text": "Once enrolled, we’ll mail a pre-paid sample collection kit directly to you and your family. We’ll also ask you more about medical history and ask for copies of medical records, including genetic test results.",
+                "Alt": "Share your data"
+            },
+            "Three": {
+                "Title": "Discover",
+                "Text": "Through DNA sequencing, we may discover the genetic cause of the LGMD in your family and will work with you and your doctors to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed disease, including LGMD.",
+                "Alt": "Discover"
+            }
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",

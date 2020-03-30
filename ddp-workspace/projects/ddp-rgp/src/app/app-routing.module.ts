@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -10,10 +10,18 @@ import { HowItWorksComponent } from './components/how-it-works/how-it-works.comp
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
+import { LGMDComponent } from './components/lgmd/lgmd.component';
 
 import {
   IrbGuard
 } from 'ddp-sdk';
+
+// This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
+// The Angular compiler complains if you try to create a function that returns a generic version of
+// this function where it case-insensitively matches the specified string
+export function lgmdMatcher(url: UrlSegment[]) {
+  return <UrlMatchResult>(url[0].path.toLowerCase() === 'lgmd' ? ({ consumed: url }) : null);
+}
 
 const routes: Routes = [
   {
@@ -55,6 +63,16 @@ const routes: Routes = [
   {
     path: 'data-sharing',
     component: DataSharingComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'limb-girdle-muscular-dystrophy',
+    component: LGMDComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    matcher: lgmdMatcher,
+    redirectTo: '/limb-girdle-muscular-dystrophy',
     canActivate: [IrbGuard]
   },
   {

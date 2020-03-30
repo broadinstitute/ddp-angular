@@ -34,6 +34,7 @@ import { HowItWorksComponent } from './components/how-it-works/how-it-works.comp
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
+import { LGMDComponent } from './components/lgmd/lgmd.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -102,7 +103,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HowItWorksComponent,
     PrivacyAndYourDataComponent,
     ForYourPhysicianComponent,
-    DataSharingComponent
+    DataSharingComponent,
+    LGMDComponent
   ],
   entryComponents: [
     AboutUsDialogComponent

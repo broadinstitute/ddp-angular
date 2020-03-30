@@ -1,0 +1,106 @@
+<div class="Wrapper--home">
+  <div class="FullWidth">
+    <div class="Landing-imageContainer">
+      <div class="Landing-image Landing-imageLGMD" role="img" [attr.aria-label]="'LGMDPage.ImageAlt' | translate">
+      </div>
+    </div>
+  </div>
+
+  <div class="Landing-message row">
+    <section class="col-lg-5 col-lg-offset-7 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+      <h2 class="Landing-title" [innerHTML]="'LGMDPage.Title' | translate"></h2>
+    </section>
+  </div>
+
+  <div class="row Margin--large">
+    <section class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+      <h2 class="Landing-title Color--blue" translate>LGMDPage.Background.Title</h2>
+      <p class="Landing-text" translate>LGMDPage.Background.Text</p>
+    </section>
+  </div>
+
+  <div class="row Margin--large">
+    <section class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+      <h2 class="Landing-title Color--blue" translate>LGMDPage.Genetics.Title</h2>
+      <p class="Landing-text" translate>LGMDPage.Genetics.Text</p>
+    </section>
+  </div>
+
+  <div class="row Landing-article Background--lightBlue">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+      <h2 class="Landing-title" translate>LGMDPage.Right.Title</h2>
+      <p class="Landing-text Aligned--left" translate>LGMDPage.Right.Title</p>
+      <ul class="Landing-list Color--white">
+        <ng-container *ngFor="let item of 'LGMDPage.Right.Items' | translate">
+          <li>{{item}}</li>
+        </ng-container>
+      </ul>
+      <p class="Landing-clarification">
+        <span translate>LGMDPage.Right.Ending.Text1</span>
+        <a routerLink="/how-it-works" class="Link Link--blue" translate>LGMDPage.Right.Ending.Text2</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="row Margin--large">
+    <section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+      <h1 class="Landing-title Color--black">How You Can Participate</h1>
+      <div class="row Margin--large">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
+          <div class="Landing-stepImage Landing-stepImage01" role="img" alt="Tell us your story"></div>
+          <h3 class="Landing-stepTitle">Tell us your story</h3>
+          <p class="Landing-stepText">Click <a routerLink="/how-it-works" class="Link">apply</a> to
+            tell us about the history of LGMD in your family. The information will be reviewed by our study team, and
+            eligible families will be invited to participate. We will contact you to arrange a detailed discussion
+            about the study and send you a consent form.</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
+          <div class="Landing-stepImage Landing-stepImage02" role="img" alt="Share your data"></div>
+          <h3 class="Landing-stepTitle">Submit a sample</h3>
+          <p class="Landing-stepText">Once enrolled, we’ll mail a pre-paid sample collection kit directly to you
+            and
+            your family. We’ll also ask you more about medical history and ask for copies of medical records, including
+            genetic test results.</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
+          <div class="Landing-stepImage Landing-stepImage03" role="img" alt="Discover"></div>
+          <h3 class="Landing-stepTitle">Discover</h3>
+          <p class="Landing-stepText">Through DNA sequencing, we may discover the genetic cause of the LGMD in your
+            family and will work with you and your doctors to return important results to you. We will also share
+            de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed
+            disease, including LGMD.</p>
+        </div>
+      </div>
+      <hr class="HorizontalLine">
+      <div class="CenterDiv Margin--large">
+        <a routerLink="/how-it-works" class="Button--Apply">Apply</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="row Landing-article Background--blue">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+      <h2 class="Landing-title">Information and Resources</h2>
+      <p class="Landing-text">Additional information and resources for individuals with LGMD are can be found here:
+        <a href="https://www.mda.org/" target="_blank" class="Link Accent">Muscular Dystrophy Association</a>, <a
+          href="https://www.ncbi.nlm.nih.gov/books/NBK1408/" target="_blank" class="Link Accent">GeneReviews</a>, and
+        the <a href="https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition" target="_blank"
+          class="Link Accent"> Genetics Home Reference</a>.</p>
+    </div>
+  </div>
+
+  <div class="Wrapper--homeBottom">
+    <div class="row Margin--large">
+      <section class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="Landing-title">We thank the Muscular Dystrophy Association for their financial support of this
+          project.</h2>
+        <div class="row Margin--small">
+          <div
+            class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <img src="/assets/images/muscular-dystrophy-association-logo.svg" alt="Muscular Dystrophy Association Logo">
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
