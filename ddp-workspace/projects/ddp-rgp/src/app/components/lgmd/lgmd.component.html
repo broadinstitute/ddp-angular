@@ -44,60 +44,56 @@
 
   <div class="row Margin--large">
     <section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-      <h1 class="Landing-title Color--black">How You Can Participate</h1>
+      <h1 class="Landing-title Color--black" translate>LGMDPage.Steps.Title</h1>
       <div class="row Margin--large">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
-          <div class="Landing-stepImage Landing-stepImage01" role="img" alt="Tell us your story"></div>
-          <h3 class="Landing-stepTitle">Tell us your story</h3>
-          <p class="Landing-stepText">Click <a routerLink="/how-it-works" class="Link">apply</a> to
-            tell us about the history of LGMD in your family. The information will be reviewed by our study team, and
-            eligible families will be invited to participate. We will contact you to arrange a detailed discussion
-            about the study and send you a consent form.</p>
+          <div class="Landing-stepImage Landing-stepImage01" role="img"
+            [attr.alt]="'LGMDPage.Steps.One.Alt' | translate"></div>
+          <h3 class="Landing-stepTitle" translate>LGMDPage.Steps.One.Title</h3>
+          <p class="Landing-stepText">
+            <span translate>LGMDPage.Steps.One.Text1</span>
+            <a routerLink="/how-it-works" class="Link" translate>LGMDPage.Steps.One.Text2</a>
+            <span translate>LGMDPage.Steps.One.Text3</span>
+          </p>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
-          <div class="Landing-stepImage Landing-stepImage02" role="img" alt="Share your data"></div>
-          <h3 class="Landing-stepTitle">Submit a sample</h3>
-          <p class="Landing-stepText">Once enrolled, we’ll mail a pre-paid sample collection kit directly to you
-            and
-            your family. We’ll also ask you more about medical history and ask for copies of medical records, including
-            genetic test results.</p>
+          <div class="Landing-stepImage Landing-stepImage02" role="img"
+            [attr.alt]="'LGMDPage.Steps.Two.Alt' | translate">
+          </div>
+          <h3 class="Landing-stepTitle" translate>LGMDPage.Steps.Two.Title</h3>
+          <p class="Landing-stepText" translate>LGMDPage.Steps.Two.Text</p>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Landing-step">
-          <div class="Landing-stepImage Landing-stepImage03" role="img" alt="Discover"></div>
-          <h3 class="Landing-stepTitle">Discover</h3>
-          <p class="Landing-stepText">Through DNA sequencing, we may discover the genetic cause of the LGMD in your
-            family and will work with you and your doctors to return important results to you. We will also share
-            de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed
-            disease, including LGMD.</p>
+          <div class="Landing-stepImage Landing-stepImage03" role="img"
+            [attr.alt]="'LGMDPage.Steps.Three.Alt' | translate">
+          </div>
+          <h3 class="Landing-stepTitle" translate>LGMDPage.Steps.Three.Title</h3>
+          <p class="Landing-stepText" translate>LGMDPage.Steps.Three.Text</p>
         </div>
       </div>
       <hr class="HorizontalLine">
       <div class="CenterDiv Margin--large">
-        <a routerLink="/how-it-works" class="Button--Apply">Apply</a>
+        <a routerLink="/how-it-works" class="Button--Apply" translate>Common.ApplyButton</a>
       </div>
     </section>
   </div>
 
   <div class="row Landing-article Background--blue">
     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-      <h2 class="Landing-title">Information and Resources</h2>
-      <p class="Landing-text">Additional information and resources for individuals with LGMD are can be found here:
-        <a href="https://www.mda.org/" target="_blank" class="Link Accent">Muscular Dystrophy Association</a>, <a
-          href="https://www.ncbi.nlm.nih.gov/books/NBK1408/" target="_blank" class="Link Accent">GeneReviews</a>, and
-        the <a href="https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition" target="_blank"
-          class="Link Accent"> Genetics Home Reference</a>.</p>
+      <h2 class="Landing-title" translate>LGMDPage.Info.Title</h2>
+      <p class="Landing-text" [innerHTML]="'LGMDPage.Info.Text' | translate"></p>
     </div>
   </div>
 
   <div class="Wrapper--homeBottom">
     <div class="row Margin--large">
       <section class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h2 class="Landing-title">We thank the Muscular Dystrophy Association for their financial support of this
-          project.</h2>
+        <h2 class="Landing-title" translate>LGMDPage.Partner.Text</h2>
         <div class="row Margin--small">
           <div
             class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-            <img src="/assets/images/muscular-dystrophy-association-logo.svg" alt="Muscular Dystrophy Association Logo">
+            <img src="/assets/images/muscular-dystrophy-association-logo.svg"
+              [alt]="'LGMDPage.Partner.Alt' | translate">
           </div>
         </div>
       </section>

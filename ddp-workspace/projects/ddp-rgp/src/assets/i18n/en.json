@@ -865,7 +865,7 @@
             }
         },
         "Steps": {
-            "Title": "How you can participate",
+            "Title": "How You Can Participate",
             "One": {
                 "Title": "Tell us your story",
                 "Text1": "Click",
@@ -883,6 +883,14 @@
                 "Text": "Through DNA sequencing, we may discover the genetic cause of the LGMD in your family and will work with you and your doctors to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed disease, including LGMD.",
                 "Alt": "Discover"
             }
+        },
+        "Info": {
+            "Title": "Information and Resources",
+            "Text": "Additional information and resources for individuals with LGMD are can be found here: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition\" target=\"_blank\" class=\"Link Accent\"> Genetics Home Reference</a>."
+        },
+        "Partner": {
+            "Text": "We thank the Muscular Dystrophy Association for their financial support of this project.",
+            "Alt": "Muscular Dystrophy Association Logo"
         }
     },
     "SDK": {
