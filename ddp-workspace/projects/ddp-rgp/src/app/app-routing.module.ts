@@ -9,6 +9,7 @@ import { EligibilityCriteriaComponent } from './components/eligibility-criteria/
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
+import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 
 import {
   IrbGuard
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'for-your-physician',
     component: ForYourPhysicianComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'data-sharing',
+    component: DataSharingComponent,
     canActivate: [IrbGuard]
   },
   {

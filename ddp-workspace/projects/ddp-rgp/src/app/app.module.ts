@@ -33,6 +33,7 @@ import { EligibilityCriteriaComponent } from './components/eligibility-criteria/
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
+import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -100,7 +101,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     EligibilityCriteriaComponent,
     HowItWorksComponent,
     PrivacyAndYourDataComponent,
-    ForYourPhysicianComponent
+    ForYourPhysicianComponent,
+    DataSharingComponent
   ],
   entryComponents: [
     AboutUsDialogComponent
