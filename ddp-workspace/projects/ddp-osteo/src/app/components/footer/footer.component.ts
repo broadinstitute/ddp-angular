@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { GoogleAnalyticsEventsService, GoogleAnalytics } from 'ddp-sdk';
+import { AnalyticsEventsService, AnalyticsEventCategories } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private communicationService: CommunicationService,
-    private analytics: GoogleAnalyticsEventsService,
+    private analytics: AnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -38,6 +38,6 @@ export class FooterComponent implements OnInit {
   }
 
   public sendSocialMediaAnalytics(event: string): void {
-    this.analytics.emitCustomEvent(GoogleAnalytics.Social, event);
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
   }
 }

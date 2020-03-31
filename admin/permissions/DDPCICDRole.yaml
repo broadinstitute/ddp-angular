@@ -1,5 +1,4 @@
 description: 'Enable deployments of DDP apps and services on GAE'
-etag: BwWgSLxPGqs=
 includedPermissions:
 - appengine.applications.get
 - appengine.applications.update
@@ -17,10 +16,6 @@ includedPermissions:
 - cloudbuild.builds.get
 - cloudbuild.builds.list
 - cloudbuild.builds.update
-- storage.objects.create
-- storage.objects.delete
-- storage.objects.get
-- storage.objects.list
 - cloudsql.instances.connect
 - cloudsql.instances.get
 stage: GA

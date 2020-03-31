@@ -1,0 +1,40 @@
+{{ $environment := env "ENVIRONMENT"}}
+
+dispatch:
+{{if eq $environment "dev"}}
+  - url: "angio.dev.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.dev.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.dev.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.dev.datadonationplatform.org/*"
+    service: osteo
+{{else if eq $environment "test"}}
+  - url: "angio.test.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.test.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.test.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.test.datadonationplatform.org/*"
+    service: osteo
+{{else if eq $environment "staging"}}
+  - url: "angio.staging.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.staging.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.staging.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.staging.datadonationplatform.org/*"
+    service: osteo
+{{else if eq $environment "prod"}}
+  - url: "ascproject.org/*"
+    service: angio
+  - url: "mbcproject.org/*"
+    service: mbc
+  - url: "braincancerproject.org/*"
+    service: brain
+  - url: "osproject.org/*"
+    service: osteo
+{{end}}

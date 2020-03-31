@@ -5,10 +5,11 @@ import { LanguageService } from '../languageService.service';
 import { WindowRef } from '../windowRef';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { GoogleAnalyticsEventsService } from '../googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../analyticsEvents.service';
 import { RenewSessionNotifier } from '../renewSessionNotifier.service';
 import { Auth0Mode } from '../../models/auth0-mode';
-import { GoogleAnalytics } from '../../models/googleAnalytics';
+import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
+import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +32,7 @@ export class Auth0AdapterService implements OnDestroy {
         private router: Router,
         private log: LoggingService,
         private session: SessionMementoService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
         private renewNotifier: RenewSessionNotifier,
         private jwtHelper: JwtHelperService,
@@ -142,7 +143,7 @@ export class Auth0AdapterService implements OnDestroy {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
                 this.log.logEvent('auth0Adapter.handleAuthentication', authResult);
-                this.analytics.emitCustomEvent(GoogleAnalytics.Authentication, GoogleAnalytics.Login);
+                this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError('auth0Adapter.handleAuthentication', err);
                 let error = null;
@@ -190,7 +191,7 @@ export class Auth0AdapterService implements OnDestroy {
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent('auth0Adapter.logout', null);
-        this.analytics.emitCustomEvent(GoogleAnalytics.Authentication, GoogleAnalytics.Logout);
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
         this.webAuth.logout({
             returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
             clientID: this.configuration.auth0ClientId
