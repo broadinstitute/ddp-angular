@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { Router, NavigationEnd } from '@angular/router';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +12,8 @@ import {
   DdpModule,
   ConfigurationService,
   LogLevel,
-  GoogleAnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -55,6 +55,8 @@ toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
 toolkitConfig.facebookGroupId = 'RareGenomesProject';
 
 declare const DDP_ENV: any;
+
+declare const ga: Function;
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -146,13 +148,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private analytics: GoogleAnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }
