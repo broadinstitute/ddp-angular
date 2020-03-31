@@ -19,7 +19,7 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 // Shared components & services
 import { ConfigurationService } from './services/configuration.service';
 import { SessionMementoService } from './services/sessionMemento.service';
-import { GoogleAnalyticsEventsService } from './services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
 import { LanguageService } from './services/languageService.service';
@@ -237,7 +237,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserProfileBusService,
     LoggingService,
     SessionMementoService,
-    GoogleAnalyticsEventsService,
+    AnalyticsEventsService,
     UserActivityServiceAgent,
     UserProfileServiceAgent,
     ActivityServiceAgent,
