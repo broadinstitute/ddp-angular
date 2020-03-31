@@ -893,6 +893,62 @@
             "Alt": "Muscular Dystrophy Association Logo"
         }
     },
+    "CraniofacialPage": {
+        "Title": "The craniofacial branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Cleft and Craniofacial Center at Massachusetts General Hospital</a> and <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a> dedicated to genetic diagnosis and gene discovery for congenital craniofacial conditions.",
+        "Text": "This project enables patients with undiagnosed, suspected single gene forms of craniofacial conditions to participate in a study using genome sequencing to search for the genetic cause of the craniofacial condition in their family.",
+        "ImageAlt": "If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
+        "Background": {
+            "Title": "Background",
+            "Text": "Craniofacial conditions affect the development of bones and tissues of the head and face. They can occur in isolation, with additional craniofacial conditions, or as one feature of an underlying syndrome affecting other parts of the body. For example, <a href=\"https://www.nidcr.nih.gov/health-info/cleft-lip-palate/more-info\" target=\"_blank\" class=\"Link\">facial clefts</a> can be an isolated condition, can co-occur with <a href=\"https://rarediseases.info.nih.gov/diseases/6209/craniosynostosis\" target=\"_blank\" class=\"Link\">craniosynostosis</a>, or can be part of a genetic syndrome such as <a href=\"https://rarediseases.info.nih.gov/diseases/9124/treacher-collins-syndrome\" target=\"_blank\" class=\"Link\">Treacher Collins syndrome</a>. Collectively, the many types of craniofacial conditions are estimated to affect approximately 1 in 700-1,000 newborns."
+        },
+        "Genetics": {
+            "Title": "Genetics and Craniofacial Conditions",
+            "Text": "Craniofacial conditions may be caused by genetic changes, environmental factors, or a combination of the two. The likelihood of a strictly genetic cause is increased if the condition is atypically severe or rare, there are delays in development or health issues affecting additional body systems, or there are multiple affected family members. Although many single gene causes have been identified, our goal is to identify additional genes that cause craniofacial conditions."
+        },
+        "Right": {
+            "Title": "Is This Study Right For Me?",
+            "Text": "Our initial efforts will focus on individuals and families who:",
+            "ListItems": {
+                "Item1": {
+                    "Text": "Have a craniofacial condition that is suspected to be due to a single gene. <br>Features suggesting a single gene cause include:",
+                    "Subitems": {
+                        "Item1": "An atypically severe presentation or a rare condition",
+                        "Item2": "Involvement of both sides of the face or head (e.g. ears), or the middle structures (e.g. nose), depending on the condition",
+                        "Item3": "Additional early-onset medical conditions affecting different parts of the body or delays in development",
+                        "Item4": "Presence in siblings or multiple generations of family members"
+                    }
+                },
+                "Item2": "Do <span class=\"Accent\">NOT</span> have a condition with a low suspicion of a single gene cause, such as <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\"> isolated cleft lip and/or palate</a>, isolated <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a>, or <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">hemifacial microsomia</a>",
+                "Item3": "Are currently under the care of a medical geneticist or relevant subspecialist",
+                "Item4": "Live in the United States",
+                "Item5": "Are English-speaking"
+            }
+        },
+        "Steps": {
+            "Title": "How You Can Participate",
+            "One": {
+                "Title": "Tell us your story",
+                "Text1": "Click",
+                "Text2": "apply",
+                "Text3": "to tell us about the history of the craniofacial condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Alt": "Tell us your story"
+            },
+            "Two": {
+                "Title": "Submit a sample",
+                "Text": "Once enrolled, we’ll mail a pre-paid sample collection kit directly to you and your family. We’ll also ask you more about medical history and ask for copies of medical records, including genetic test results.",
+                "Alt": "Share your data"
+            },
+            "Three": {
+                "Title": "Discover",
+                "Text": "Through DNA sequencing, we may discover the genetic cause of the craniofacial condition in your family and will work with you and your doctors to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed disease, including craniofacial conditions.",
+                "Alt": "Discover"
+            }
+        },
+        "Info": {
+            "Title": "Information and Resources",
+            "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">Genetics Home Reference</a>."
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",
