@@ -15,11 +15,11 @@ import { DOCUMENT } from '@angular/common';
 import { BaseActivityComponent } from './baseActivity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
-import { GoogleAnalytics } from '../../models/googleAnalytics';
+import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -207,7 +207,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes
@@ -281,13 +281,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public close(): void {
         this.sendLastSectionAnalytics();
-        this.sendActivityAnalytics(GoogleAnalytics.CloseSurvey);
+        this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
         super.close();
     }
 
     public flush(): void {
         this.sendLastSectionAnalytics();
-        this.sendActivityAnalytics(GoogleAnalytics.SubmitSurvey);
+        this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);
         super.flush();
     }
 

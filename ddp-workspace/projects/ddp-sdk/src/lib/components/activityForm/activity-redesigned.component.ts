@@ -11,7 +11,7 @@ import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 
 @Component({
@@ -151,7 +151,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         windowRef: WindowRef,
         renderer: Renderer2,
         submitService: SubmitAnnouncementService,
-        analytics: GoogleAnalyticsEventsService,
+        analytics: AnalyticsEventsService,
         @Inject(DOCUMENT) document: any,
         injector: Injector) {
         super(windowRef, renderer, submitService, analytics, document, injector);

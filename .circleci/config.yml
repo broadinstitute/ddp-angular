@@ -145,6 +145,12 @@ commands:
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
       - run:
+          name: Update GAE dispatch file
+          command: |
+            set -u
+            gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
+          working_directory: ~/repo/ddp-workspace
+      - run:
           name: Update deployments sheet
           command: |
             set -u

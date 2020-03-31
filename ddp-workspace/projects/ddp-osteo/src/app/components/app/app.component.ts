@@ -4,6 +4,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 
+declare const ga: Function;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,22 +27,22 @@ export class AppComponent implements OnInit, OnDestroy {
     private renewNotifier: RenewSessionNotifier) { }
 
   public ngOnInit(): void {
-    this.mailingListDialogListener();
-    this.sessionExpiredDialogListener();
+    this.initMailingListDialogListener();
+    this.initSessionExpiredDialogListener();
   }
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
   }
 
-  private mailingListDialogListener(): void {
+  private initMailingListDialogListener(): void {
     const modalOpen = this.communicationService.openJoinDialog$.subscribe(() => {
       this.dialog.open(JoinMailingListComponent, this.DIALOG_BASE_SETTINGS);
     });
     this.anchor.addNew(modalOpen);
   }
 
-  private sessionExpiredDialogListener(): void {
+  private initSessionExpiredDialogListener(): void {
     const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
       this.dialog.open(SessionWillExpireComponent, this.DIALOG_BASE_SETTINGS);
     });
