@@ -35,7 +35,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                     <div class="PageLayout">
                         <div *ngIf="isLoaded" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h1 class="PageHeader-title" #title>
-                                {{model ? model.name : ''}}
+                                {{model ? model.title : ''}}
                             </h1>
                             <div *ngIf="model && model.subtitle"
                                  class="PageHeader-activity-subtitle"
