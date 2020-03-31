@@ -5,8 +5,8 @@ import { ActivityInstanceState } from '../../../models/activity/activityInstance
 import { LoggingService } from '../../../services/logging.service';
 import { UserActivityServiceAgent } from '../../../services/serviceAgents/userActivityServiceAgent.service';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
-import { GoogleAnalyticsEventsService } from '../../../services/googleAnalyticsEvents.service';
-import { GoogleAnalytics } from '../../../models/googleAnalytics';
+import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
+import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
 
@@ -177,7 +177,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private serviceAgent: UserActivityServiceAgent,
     private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
     private logger: LoggingService,
-    private analytics: GoogleAnalyticsEventsService,
+    private analytics: AnalyticsEventsService,
     public domSanitizationService: DomSanitizer) {
     this.studyGuidObservable = new BehaviorSubject<string | null>(null);
   }
@@ -236,6 +236,6 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   private doAnalytics(action: string): void {
-    this.analytics.emitCustomEvent(GoogleAnalytics.Dashboard, action);
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
   }
 }

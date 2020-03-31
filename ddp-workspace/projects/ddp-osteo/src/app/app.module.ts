@@ -1,7 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as Hammer from 'hammerjs';
@@ -12,7 +11,8 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  GoogleAnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -40,7 +40,9 @@ if (baseElt) {
   base = baseElt[0].getAttribute('href');
 }
 
-declare let DDP_ENV: any;
+declare const DDP_ENV: any;
+
+declare const ga: Function;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -167,13 +169,10 @@ export class MyHammerConfig extends HammerGestureConfig {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private analytics: GoogleAnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }
