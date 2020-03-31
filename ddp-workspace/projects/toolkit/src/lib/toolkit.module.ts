@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Modules
-import { DdpModule } from 'ddp-sdk';
+import { DdpModule, AnalyticsEventsService } from 'ddp-sdk';
 
 // Services
 import { WorkflowMapperService } from './services/workflowMapper.service';
@@ -184,4 +184,14 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     SessionWillExpireComponent
   ]
 })
-export class ToolkitModule { }
+export class ToolkitModule {
+  constructor(
+    private router: Router,
+    private analytics: AnalyticsEventsService) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.analytics.emitNavigationEvent();
+      }
+    });
+  }
+}
