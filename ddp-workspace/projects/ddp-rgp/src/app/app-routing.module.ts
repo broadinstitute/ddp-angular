@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     matcher: lgmdMatcher,
-    redirectTo: '/limb-girdle-muscular-dystrophy',
+    redirectTo: 'limb-girdle-muscular-dystrophy',
     canActivate: [IrbGuard]
   },
   {
@@ -84,6 +84,11 @@ const routes: Routes = [
   {
     path: 'password',
     component: PasswordComponent
+  },
+  {
+    path: 'count-me-in',
+    redirectTo: 'tell-us-your-story',
+    canActivate: [IrbGuard]
   },
   {
     path: '**',
