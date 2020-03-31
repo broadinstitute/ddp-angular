@@ -11,6 +11,7 @@ import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/
 import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
+import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
 
 import {
   IrbGuard
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
+  {
+    matcher: lgmdMatcher,
+    redirectTo: '/limb-girdle-muscular-dystrophy',
     canActivate: [IrbGuard]
   },
   {
@@ -71,8 +77,8 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    matcher: lgmdMatcher,
-    redirectTo: '/limb-girdle-muscular-dystrophy',
+    path: 'craniofacial',
+    component: CraniofacialComponent,
     canActivate: [IrbGuard]
   },
   {
