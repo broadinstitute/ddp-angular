@@ -1,7 +1,7 @@
 <div class="FullWidth">
   <div class="DataSharing-imageContainer">
     <span class="Gradient-overlay"></span>
-    <div class="DataSharing-image" role="img" [attr.aria-label]="'DataAccess.ImageAlt' | translate"></div>
+    <div class="DataSharing-image" role="img" [attr.aria-label]="'DataAccessPage.ImageAlt' | translate"></div>
   </div>
 </div>
 
@@ -9,7 +9,7 @@
   <div class="PageLayout">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1 class="PageHeader-title" translate>DataAccess.Title</h1>
+        <h1 class="PageHeader-title" translate>DataAccessPage.Title</h1>
       </div>
     </div>
   </div>
@@ -18,20 +18,20 @@
 <div class="Wrapper row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
 
-    <p class="Paragraph TopMargin50" translate>DataAccess.Text</p>
+    <p class="Paragraph TopMargin50" translate>DataAccessPage.Text</p>
 
     <div class="TopMargin50">
       <a (click)="isMatchmakerCollapsed = !isMatchmakerCollapsed" class="Panel">
         <h3 class="Panel-title">
           <a href="http://www.matchmakerexchange.org/" class="Panel-titleLink" target="_blank"
-            translate>DataAccess.MatchmakerExchange.Title</a>
+            translate>DataAccessPage.MatchmakerExchange.Title</a>
           <i class="fa Panel-icon"
             [ngClass]="{'fa-chevron-down': isMatchmakerCollapsed, 'fa-chevron-up': !isMatchmakerCollapsed}"
             aria-hidden="true"></i>
         </h3>
       </a>
       <div class="Panel-content" [collapse]="isMatchmakerCollapsed">
-        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccess.MatchmakerExchange.Text' | translate"></p>
+        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccessPage.MatchmakerExchange.Text' | translate"></p>
       </div>
 
       <hr class="List-line">
@@ -39,14 +39,14 @@
       <a (click)="isClinVarCollapsed = !isClinVarCollapsed" class="Panel">
         <h3 class="Panel-title">
           <a href="https://www.ncbi.nlm.nih.gov/clinvar/" class="Panel-titleLink" target="_blank"
-            translate>DataAccess.ClinVar.Title</a>
+            translate>DataAccessPage.ClinVar.Title</a>
           <i class="fa Panel-icon"
             [ngClass]="{'fa-chevron-down': isClinVarCollapsed, 'fa-chevron-up': !isClinVarCollapsed}"
             aria-hidden="true"></i>
         </h3>
       </a>
       <div class="Panel-content" [collapse]="isClinVarCollapsed">
-        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccess.ClinVar.Text' | translate"></p>
+        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccessPage.ClinVar.Text' | translate"></p>
       </div>
 
       <hr class="List-line">
@@ -54,13 +54,13 @@
       <a (click)="isDUOSCollapsed = !isDUOSCollapsed" class="Panel">
         <h3 class="Panel-title">
           <a href="https://duos.broadinstitute.org/#/home" class="Panel-titleLink" target="_blank"
-            translate>DataAccess.DUOS.Title</a>
+            translate>DataAccessPage.DUOS.Title</a>
           <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isDUOSCollapsed, 'fa-chevron-up': !isDUOSCollapsed}"
             aria-hidden="true"></i>
         </h3>
       </a>
       <div class="Panel-content" [collapse]="isDUOSCollapsed">
-        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccess.DUOS.Text' | translate"></p>
+        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccessPage.DUOS.Text' | translate"></p>
       </div>
 
       <hr class="List-line">
@@ -68,22 +68,22 @@
       <a (click)="isAnVILCollapsed = !isAnVILCollapsed" class="Panel">
         <h3 class="Panel-title">
           <a href="https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/"
-            class="Panel-titleLink" target="_blank" translate>DataAccess.AnVIL.Title</a>
+            class="Panel-titleLink" target="_blank" translate>DataAccessPage.AnVIL.Title</a>
           <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isAnVILCollapsed, 'fa-chevron-up': !isAnVILCollapsed}"
             aria-hidden="true"></i>
         </h3>
       </a>
       <div class="Panel-content" [collapse]="isAnVILCollapsed">
-        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccess.AnVIL.Text1' | translate"></p>
-        <p class="Paragraph" [innerHTML]="'DataAccess.AnVIL.Text2' | translate"></p>
+        <p class="Paragraph TopMargin25" [innerHTML]="'DataAccessPage.AnVIL.Text1' | translate"></p>
+        <p class="Paragraph" [innerHTML]="'DataAccessPage.AnVIL.Text2' | translate"></p>
       </div>
 
       <hr class="List-line">
 
       <h3 class="Subtitle Normal TopMargin50 Aligned--center">
-        <span translate>DataAccess.Questions.Text1</span>
+        <span translate>DataAccessPage.Questions.Text1</span>
         <a [href]="emailHref" class="Link">{{email}}</a>,
-        <span translate>DataAccess.Questions.Text2</span>
+        <span translate>DataAccessPage.Questions.Text2</span>
         <a [href]="phoneHref" class="Link">{{phone}}</a>.
       </h3>
     </div>
