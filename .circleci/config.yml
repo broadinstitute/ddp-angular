@@ -242,7 +242,7 @@ commands:
           command: |
             set -u
             set +e
-            CHANGED_PROJECTS=findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>
+            CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
             echo "Following projects were found to have changed: $CHANGED_PROJECTS"
             echo $CHANGED_PROJECTS |
                 grep -E -e ${ANGULAR_PROJECT_NAME} -e _SHARED_  -e ddp-sdk -e toolkit #
