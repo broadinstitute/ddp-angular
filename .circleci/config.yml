@@ -242,6 +242,14 @@ commands:
           command: |
             set -u
             set +e
+            CHANGED_PROJECTS=findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>
+            echo "Following projects were found to have changed: $CHANGED_PROJECTS"
+            echo $CHANGED_PROJECTS |
+                grep -E -e ${ANGULAR_PROJECT_NAME} -e _SHARED_  -e ddp-sdk -e toolkit #
+            if [[ $? -eq 1 ]];then
+                echo "The Angular project ${ANGULAR_PROJECT_NAME} not affected. Skipping build"
+                exit 0
+            fi
             # Looking for latest build of this project in Google bucket
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
