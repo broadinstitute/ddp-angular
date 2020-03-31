@@ -1,7 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +9,8 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  GoogleAnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -32,6 +32,8 @@ if (baseElt) {
 }
 
 declare const DDP_ENV: any;
+
+declare const ga: Function;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -128,13 +130,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private analytics: GoogleAnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }
