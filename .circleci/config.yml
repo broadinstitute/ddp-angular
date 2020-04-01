@@ -253,6 +253,7 @@ commands:
           name: Check << parameters.study_keys >> and launch build if modified
           command: |
             set -u
+            set +e
             set +x
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
