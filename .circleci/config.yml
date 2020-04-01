@@ -280,7 +280,7 @@ commands:
               elif
                 echo "Skipping $STUDY_KEY"
               fi
-            done
+            done;
 
   conditionally-launch-build-and-store:
     description: Launch build and save job if build missing
