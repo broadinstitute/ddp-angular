@@ -335,7 +335,7 @@ jobs:
       - app-build-and-deploy:
           study_key: << pipeline.parameters.study_key >>
           study_guid: << pipeline.parameters.study_guid >>
-          skip_build: true
+          skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
     executor:
