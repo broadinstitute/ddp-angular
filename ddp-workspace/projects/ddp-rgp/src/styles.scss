@@ -1626,3 +1626,100 @@ h2.Landing-title {
         display: flex;
     }
 }
+
+// Toolkit Mailing List dialog
+.Modal-title {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    color: #333;
+    margin: 10px 0 12px 0;
+    font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .mat-icon-button {
+        top: -20px;
+        right: -15px;
+    }
+}
+
+.Modal-text {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+
+.JoinDialogFiled {
+    width: 100%;
+}
+
+.JoinDialogNameField {
+    width: 50%;
+    margin: 0 30px 0 0;
+}
+
+.JoinDialogLastnameField {
+    width: 50%;
+}
+
+.JoinDialogGroupFields {
+    display: flex;
+}
+
+.JoinField--margin {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 650px) {
+    .JoinDialogGroupFields {
+        flex-direction: column;
+    }
+
+    .JoinDialogNameField {
+        width: 100%;
+        margin: 0;
+    }
+
+    .JoinDialogLastnameField {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .Modal-title {
+        margin: 0 !important;
+        font-size: 2rem !important;
+        line-height: 2rem !important;
+    }
+
+    .Modal-text {
+        margin: 0 !important;
+    }
+}
+
+toolkit-join-mailing-list {
+    .ButtonFilled {
+        background: #19457d;
+        color: white;
+        min-width: 64px;
+        line-height: 36px;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 999px !important;
+        font-weight: 500;
+        font-size: 1rem !important;
+        padding: 8px 20px !important;
+        border: none;
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    }
+
+    .ButtonFilled--neutral {
+        background: #E8702A;
+    }
+
+    .ButtonFilled--neutral--margin {
+        margin-right: 20px;
+    }
+}

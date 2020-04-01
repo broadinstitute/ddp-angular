@@ -949,6 +949,59 @@
             "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">Genetics Home Reference</a>."
         }
     },
+    "ThankYouPage": {
+        "Title": "Thank you for your interest in joining the Rare Genomes Project",
+        "Intro": {
+            "Text1": "Unfortunately, your responses to our pre-screening questionnaire do not match the",
+            "Text2": "current requirements for participation",
+            "Text3": "in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:"
+        },
+        "List": {
+            "Item1": "Understand English",
+            "Item2": "Live in the United States",
+            "Item3": "Have a rare and undiagnosed genetic condition",
+            "Item4": "Are currently under the care of a doctor helping to figure out the cause of the patient’s condition"
+        },
+        "Button": "Join Mailing List",
+        "Ending": "Over time, we may be able to expand the project. We hope you will join our mailing list. If you do, we will contact you if participation requirements change, making you eligible to apply to the study.",
+        "Info": "If you would like your information to be deleted from our database at any time, please email us at"
+    },
+    "StayInformedPage": {
+        "Title": "Stay Informed!",
+        "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
+        "Button": "Return home"
+    },
+    "Toolkit": {
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed!",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email Confirmation (Reenter Email) *",
+                        "Error": "Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "CANCEL",
+                "SubmitButton": "JOIN",
+                "Required": "* Required field",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            }
+        }
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",

@@ -1,0 +1,34 @@
+<div class="PageHeader">
+  <div class="PageHeader-background Background--orange">
+    <div class="row PageLayout">
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h1 class="PageHeader-title" translate>ThankYouPage.Title</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="Wrapper row">
+  <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
+    <p class="Paragraph">
+      <span translate>ThankYouPage.Intro.Text1</span>
+      <a routerLink="/eligibility-criteria" class="Link" translate>ThankYouPage.Intro.Text2</a>
+      <span translate>ThankYouPage.Intro.Text3</span>
+    </p>
+    <ul>
+      <li class="List-li" translate>ThankYouPage.List.Item1</li>
+      <li class="List-li" translate>ThankYouPage.List.Item2</li>
+      <li class="List-li" translate>ThankYouPage.List.Item3</li>
+      <li class="List-li" translate>ThankYouPage.List.Item4</li>
+    </ul>
+    <p class="Paragraph TopMargin25" translate>ThankYouPage.Ending</p>
+
+    <div class="row NoMargin Button-container">
+      <button mat-raised-button color="primary" class="Button Float--right" style="margin-top: 25px"
+        (click)="openMailingDialog()" [innerHTML]="'ThankYouPage.Button' | translate"></button>
+    </div>
+    <p class="Paragraph TopMargin50">
+      <span translate>ThankYouPage.Info</span>
+      <a [href]="emailHref" class="Link">{{email}}</a>.
+    </p>
+  </div>
+</div>

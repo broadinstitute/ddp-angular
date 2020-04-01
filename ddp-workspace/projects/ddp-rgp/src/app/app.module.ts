@@ -36,6 +36,8 @@ import { ForYourPhysicianComponent } from './components/for-your-physician/for-y
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -51,9 +53,11 @@ if (baseElt) {
 }
 
 export const toolkitConfig = new ToolkitConfigurationService();
+toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.phone = '617-714-7395';
 toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
 toolkitConfig.facebookGroupId = 'RareGenomesProject';
+toolkitConfig.stayInformedUrl = 'stay-informed';
 
 declare const DDP_ENV: any;
 
@@ -108,7 +112,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ForYourPhysicianComponent,
     DataSharingComponent,
     LGMDComponent,
-    CraniofacialComponent
+    CraniofacialComponent,
+    ThankYouComponent,
+    StayInformedComponent
   ],
   entryComponents: [
     AboutUsDialogComponent
