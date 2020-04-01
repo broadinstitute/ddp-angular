@@ -171,17 +171,20 @@ commands:
     parameters:
       study_key:
         type: string
+        default: UNKNOWN
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
             echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            source $BASH_ENV
-            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
-            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            if [[ <<parameters.study_key>> -neq 'UNKNOWN']]; then
+              echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+              echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+              source $BASH_ENV
+              OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+              echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            fi
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
@@ -249,6 +252,8 @@ commands:
       - run:
           name: Check << parameters.study_keys >> and launch build if modified
           command: |
+            set -u
+            set +x
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
             STUDY_GUIDS=(<< parameters.study_guids >>)
@@ -337,6 +342,7 @@ jobs:
       name: commit-executor
     steps:
       - checkout
+      - setup-shared-env
       - conditionally-launch-build-and-deploy:
           study_keys: "osteo brain angio mbc"
           study_guids: "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
