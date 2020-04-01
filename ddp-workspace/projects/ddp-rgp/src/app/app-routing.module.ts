@@ -15,6 +15,7 @@ import { CraniofacialComponent } from './components/craniofacial/craniofacial.co
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
+import { CountMeInComponent } from './components/count-me-in/count-me-in.component'
 
 import {
   IrbGuard
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'tell-us-your-story',
+    component: CountMeInComponent,
     canActivate: [IrbGuard]
   },
   {
