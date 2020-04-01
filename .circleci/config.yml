@@ -277,7 +277,7 @@ commands:
                                       \"do-builds\": true
                                   }
                                 }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
-              elif
+              else
                 echo "Skipping $STUDY_KEY"
               fi
             done;
