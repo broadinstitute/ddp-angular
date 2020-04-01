@@ -44,11 +44,11 @@ export class PasswordComponent implements OnInit {
         if (response) {
           this.router.navigateByUrl('');
         } else {
-          this.setErrorMessage('ErrorPage.PasswordWrongError');
+          this.setErrorMessage('PasswordPage.PasswordWrongError');
         }
       },
       error => {
-        this.setErrorMessage('ErrorPage.OtherError');
+        this.setErrorMessage('PasswordPage.OtherError');
       }
     );
   }

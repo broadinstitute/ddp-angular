@@ -562,7 +562,7 @@
             ]
         }
     },
-    "ErrorPage": {
+    "PasswordPage": {
         "PasswordWrongError": "Incorrect password. Please try again.",
         "OtherError": "We're sorry, but an error has occurred.",
         "PasswordRequiredError": "Password is required",
@@ -1001,6 +1001,11 @@
                 "LoadingError": "We're sorry, but an error has occurred."
             }
         }
+    },
+    "ErrorPage": {
+        "Title": "We've encountered an error",
+        "Text1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "Text2": "or call us at"
     },
     "SDK": {
         "SubmitButton": "Submit",
