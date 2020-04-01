@@ -31,14 +31,20 @@ commands:
         type: string
       study_guid:
         type: string
+      skip_build:
+        type: boolean
+        defaut: false
     steps:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - build-app
-      - deploy-exploded-build:
-          study_key: << parameters.study_key >>
-          study_guid: << parameters.study_guid >>
+      - unless:
+          condition: << parameters.skip_build >>
+          steps:
+          - build-app
+          - deploy-exploded-build:
+              study_key: << parameters.study_key >>
+              study_guid: << parameters.study_guid >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -51,6 +57,9 @@ commands:
                 DEPLOY_ENV=dev
               ;;
               circle-ci-updates-1)
+                DEPLOY_ENV=dev
+              ;;
+              play*)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -228,7 +237,44 @@ commands:
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo
+  conditionally-launch-build-and-deploy:
+    description: Launch build and deploy if project has changed
+    parameters:
+      study_keys:
+        type: string
+      study_guids:
+        type: string
+    steps:
+      -run:
+        name:
+        command: |
+          # CircleCi does not support arrays as params, so here is my workaround
+          STUDY_KEYS=(<< parameters.study_keys >>)
+          STUDY_GUIDS=(<< parameters.study_guids >>)
 
+          CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
+
+          for i in "${!STUDY_KEYS[@]}"; do
+            STUDY_KEY=${STUDY_KEYS[$i]}
+            STUDY_GUID=${STUDY_GUIDS[$i]}
+
+            NG_PROJECT_NAME="ddp-$STUDY_KEY"
+            echo  $CHANGED_PROJECTS |
+                grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit
+            if [[ $? -eq 0 ]]; then
+              echo "Launching build and deploy for $NG_PROJECT_NAME"
+              curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
+                                \"branch\": \"<< pipeline.git.branch >>\",
+                                \"parameters\": {
+                                    \"study_key\": \"$STUDY_KEY\",
+                                    \"study_guid\": \"$STUDY_GUID\",
+                                    \"do-builds\": true
+                                }
+                              }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
+            elif
+              echo "Skipping $STUDY_KEY"
+            fi
+          done
   conditionally-launch-build-and-store:
     description: Launch build and save job if build missing
     parameters:
@@ -242,14 +288,16 @@ commands:
           command: |
             set -u
             set +e
-            CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
-            echo "Following projects were found to have changed: $CHANGED_PROJECTS"
-            echo $CHANGED_PROJECTS |
-                grep -E -e ${ANGULAR_PROJECT_NAME} -e _SHARED_  -e ddp-sdk -e toolkit #
-            if [[ $? -eq 1 ]];then
-                echo "The Angular project ${ANGULAR_PROJECT_NAME} not affected. Skipping build"
-                exit 0
-            fi
+#            CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
+#            echo "Following projects were found to have changed: $CHANGED_PROJECTS"
+#            # see if one of the changed projects matches one of the patterns
+#            echo $CHANGED_PROJECTS |
+#                grep -E -e ${ANGULAR_PROJECT_NAME} -e _SHARED_  -e ddp-sdk -e toolkit
+#            # if we got a 1 from grep means no matches. This project does not need to be built
+#            if [[ $? -eq 1 ]];then
+#                echo "The Angular project ${ANGULAR_PROJECT_NAME} not affected. Skipping build"
+#                exit 0
+#            fi
             # Looking for latest build of this project in Google bucket
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
@@ -273,6 +321,23 @@ commands:
             fi
 
 jobs:
+  build-and-deploy-job:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          study_key: << pipeline.parameters.study_key >>
+          study_guid: << pipeline.parameters.study_guid >>
+
+  conditionally-launch-build-and-deploy-all-job:
+    executor:
+      name: commit-executor
+    steps:
+      - checkout
+      - conditionally-launch-build-and-deploy:
+          study_keys: "osteo brain angio mbc"
+          study_guids: "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+
 
   conditionally-launch-build-and-store-all-job:
     executor:
@@ -359,6 +424,9 @@ parameters:
   study_key:
     type: string
     default: "UNKNOWN"
+  study_guid:
+    type: string
+    default: "UNKNOWN"
   do-builds:
     type: boolean
     default: false
@@ -367,6 +435,8 @@ workflows:
   version: 2
 
   build-and-deploy-all-apps-workflow:
+    # @TODO hope we can get rid of this workflow for simpler one below
+    when: false
     jobs:
       - osteo-build-and-deploy: &build-and-deploy-filters
           filters:
@@ -380,6 +450,22 @@ workflows:
           <<: *build-and-deploy-filters
       - mbc-build-and-deploy:
           <<: *build-and-deploy-filters
+
+  new-build-and-deploy-all-apps-workflow:
+    unless: << pipeline.parameters.do-builds >>
+    jobs:
+      - conditionally-launch-build-and-deploy-all-job: &build-and-deploy-filters
+        filters:
+          branches:
+            only:
+              - develop
+              - circle-ci-updates-1
+              - /play.*/
+
+  build-and-deploy-workflow:
+    when: << pipeline.parameters.do-builds >>
+    jobs:
+      - build-and-deploy-job: *build-and-deploy-filters
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
