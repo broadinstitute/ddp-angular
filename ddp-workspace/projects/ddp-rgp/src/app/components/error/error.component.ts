@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -7,6 +7,7 @@ import { ToolkitConfigurationService } from 'toolkit';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
+  @Input() public errorText: string;
   public phone: string;
   public email: string;
   public phoneHref: string;

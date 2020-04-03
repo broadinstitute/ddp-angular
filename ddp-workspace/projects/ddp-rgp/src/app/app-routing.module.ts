@@ -16,9 +16,13 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { CountMeInComponent } from './components/count-me-in/count-me-in.component'
+import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
+import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
+import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 
 import {
-  IrbGuard
+  IrbGuard,
+  Auth0CodeCallbackComponent
 } from 'ddp-sdk';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
@@ -33,6 +37,26 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'auth',
+    component: Auth0CodeCallbackComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'login-landing',
+    component: Auth0LandingComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'login-landing/:mode',
+    component: Auth0RedirectComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'password-reset-done',
+    component: RedirectToAuth0Landing,
     canActivate: [IrbGuard]
   },
   {

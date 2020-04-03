@@ -1,0 +1,28 @@
+<ng-container *ngIf="errorText || errorText === ''; then error else auth0">
+</ng-container>
+<ng-template #auth0>
+    <ddp-redirect-to-auth0-login>
+        <div class="PageHeader">
+            <div class="PageHeader-background Background--orange">
+                <div class="row PageLayout">
+                    <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                        <h1 class="PageHeader-title"> </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Wrapper row">
+            <div class="row Margin--75">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Spinner">
+                        <p class="Paragraph" translate>Auth0LandingPage.Text</p>
+                        <mat-spinner></mat-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ddp-redirect-to-auth0-login>
+</ng-template>
+<ng-template #error>
+    <app-error [errorText]="errorText"></app-error>
+</ng-template>

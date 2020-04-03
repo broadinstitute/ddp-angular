@@ -40,12 +40,16 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { CountMeInComponent } from './components/count-me-in/count-me-in.component'
+import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
+import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
+import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -119,7 +123,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ThankYouComponent,
     StayInformedComponent,
     ErrorComponent,
-    CountMeInComponent
+    CountMeInComponent,
+    Auth0LandingComponent,
+    Auth0RedirectComponent,
+    RedirectToAuth0Landing
   ],
   entryComponents: [
     AboutUsDialogComponent
@@ -137,7 +144,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

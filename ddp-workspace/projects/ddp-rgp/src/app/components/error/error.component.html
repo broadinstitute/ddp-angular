@@ -10,10 +10,15 @@
 <div class="Wrapper row">
   <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
     <p class="Paragraph">
-      <span translate>ErrorPage.Text1</span>
-      <a [href]="emailHref" class="Link">{{email}}</a>
-      <span translate>ErrorPage.Text2</span>
-      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+      <ng-container *ngIf="errorText">
+        <span [innerHTML]="errorText"></span>
+      </ng-container>
+      <ng-container *ngIf="!errorText">
+        <span translate>ErrorPage.Text1</span>
+        <a [href]="emailHref" class="Link">{{email}}</a>
+        <span translate>ErrorPage.Text2</span>
+        <a [href]="phoneHref" class="Link">{{phone}}</a>.
+      </ng-container>
     </p>
   </div>
 </div>

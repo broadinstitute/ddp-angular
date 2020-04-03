@@ -1012,6 +1012,9 @@
         "SectionTitle": "Thank you for your interest in joining the Rare Genomes Project!",
         "Text": "To get started, please let us know if you or a loved one meets the <span class=\"Accent\">participation requirements</span> listed below by attesting that all of the statements listed next to the checkboxes below are true. You will then be asked to create a <span class=\"NotALink\"> raregenomes.org</span> account and complete a questionnaire to tell us about the rare condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate."
     },
+    "Auth0LandingPage": {
+        "Text": "Please wait. You will be redirected to a destination soon..."
+    },
     "SDK": {
         "SubmitButton": "Submit",
         "CloseButton": "Close",
