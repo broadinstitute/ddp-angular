@@ -43,6 +43,7 @@ import { CountMeInComponent } from './components/count-me-in/count-me-in.compone
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
+import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -126,7 +127,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     CountMeInComponent,
     Auth0LandingComponent,
     Auth0RedirectComponent,
-    RedirectToAuth0Landing
+    RedirectToAuth0Landing,
+    SessionExpiredComponent
   ],
   entryComponents: [
     AboutUsDialogComponent

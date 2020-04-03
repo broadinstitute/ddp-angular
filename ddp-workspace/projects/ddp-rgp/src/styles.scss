@@ -1700,7 +1700,8 @@ h2.Landing-title {
     }
 }
 
-toolkit-join-mailing-list {
+toolkit-join-mailing-list,
+toolkit-session-will-expire {
     .ButtonFilled {
         background: #19457d;
         color: white;
@@ -1721,5 +1722,11 @@ toolkit-join-mailing-list {
 
     .ButtonFilled--neutral--margin {
         margin-right: 20px;
+    }
+
+    @media only screen and (max-width: 450px) {
+        .ButtonFilled--neutral--margin {
+            margin-right: 10px;
+        }
     }
 }

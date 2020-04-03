@@ -999,6 +999,12 @@
                 "Required": "* Required field",
                 "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
                 "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue"
             }
         }
     },
@@ -1011,6 +1017,11 @@
         "Title": "Tell us your story",
         "SectionTitle": "Thank you for your interest in joining the Rare Genomes Project!",
         "Text": "To get started, please let us know if you or a loved one meets the <span class=\"Accent\">participation requirements</span> listed below by attesting that all of the statements listed next to the checkboxes below are true. You will then be asked to create a <span class=\"NotALink\"> raregenomes.org</span> account and complete a questionnaire to tell us about the rare condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate."
+    },
+    "SessionExpiredPage": {
+        "Text1": "You were away for a while, so we logged you out as a security precaution.",
+        "Text2": "Please log in again to return to the last page you were on.",
+        "Button": "Log In"
     },
     "Auth0LandingPage": {
         "Text": "Please wait. You will be redirected to a destination soon..."

@@ -19,6 +19,7 @@ import { CountMeInComponent } from './components/count-me-in/count-me-in.compone
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
+import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 
 import {
   IrbGuard,
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'password-reset-done',
     component: RedirectToAuth0Landing,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'session-expired',
+    component: SessionExpiredComponent,
     canActivate: [IrbGuard]
   },
   {

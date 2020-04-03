@@ -4,7 +4,7 @@ import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from
 import { interval, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'ddp-session-will-expire',
+    selector: 'toolkit-session-will-expire',
     template: `
     <div class="Modal-title">
         <h1 class="Modal-title no-margin">
