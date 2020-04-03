@@ -453,23 +453,6 @@ workflows:
   version: 2
 
   build-and-deploy-all-apps-workflow:
-    # @TODO hope we can get rid of this workflow for simpler one below
-    when: false
-    jobs:
-      - osteo-build-and-deploy: &build-and-deploy-filters
-          filters:
-            branches:
-              only:
-                - develop
-                - circle-ci-updates-1
-      - brain-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - angio-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - mbc-build-and-deploy:
-          <<: *build-and-deploy-filters
-
-  new-build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job: &build-and-deploy-filters
