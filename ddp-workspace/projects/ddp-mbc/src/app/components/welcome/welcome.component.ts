@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleAnalyticsEventsService, BrowserContentService, GoogleAnalytics } from 'ddp-sdk';
+import { AnalyticsEventsService, BrowserContentService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
@@ -342,7 +342,7 @@ export class WelcomeComponent implements OnInit {
     private readonly HEADER_HEIGHT: number = 70;
 
     constructor(
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private browserContent: BrowserContentService) { }
 
     public ngOnInit(): void {
@@ -380,6 +380,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromMainPage);
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
     }
 }
