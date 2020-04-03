@@ -22,14 +22,12 @@
         },
         "AboutUs": "About Us",
         "FAQs": "FAQs",
-        "GetStarted": "Get Started",
-        "SignIn": "Sign In"
+        "GetStarted": "Get Started"
     },
     "Footer": {
         "Navigation": {
             "Home": "Home",
             "AboutUs": "About Us",
-            "SignIn": "Sign In",
             "Apply": "Apply",
             "Back": "Back to Top"
         },
@@ -1055,8 +1053,8 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Log In",
-            "SignOut": "Log Out"
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
         },
         "UserActivities": {
             "ActivityName": "Form",

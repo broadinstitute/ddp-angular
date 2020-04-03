@@ -1627,7 +1627,7 @@ h2.Landing-title {
     }
 }
 
-// Toolkit Mailing List dialog
+// Toolkit dialogs
 .Modal-title {
     font-size: 2.5rem;
     line-height: 2.5rem;
@@ -1729,4 +1729,15 @@ toolkit-session-will-expire {
             margin-right: 10px;
         }
     }
+}
+
+// SDK sign in/sign out button
+.SimpleButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    white-space: nowrap;
 }
