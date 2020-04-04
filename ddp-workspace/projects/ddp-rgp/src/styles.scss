@@ -1700,6 +1700,7 @@ h2.Landing-title {
     }
 }
 
+ddp-user-activities,
 toolkit-join-mailing-list,
 toolkit-session-will-expire {
     .ButtonFilled {
@@ -1731,7 +1732,8 @@ toolkit-session-will-expire {
     }
 }
 
-// SDK sign in/sign out button
+// SDK styles
+.dashboard-activity-button,
 .SimpleButton {
     background: none;
     border: none;
@@ -1739,5 +1741,72 @@ toolkit-session-will-expire {
     cursor: pointer;
     text-decoration: none;
     font-family: inherit;
+}
+
+.SimpleButton {
     white-space: nowrap;
+}
+
+.ddp-dashboard {
+
+    .mat-cell,
+    .mat-header-cell,
+    .dashboard-mobile-label {
+        font-size: 1.125rem !important;
+        line-height: 1.75rem !important;
+    }
+
+    .mat-column-name {
+        flex: 0 0 20%;
+    }
+
+    .dashboard-mobile-label {
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .mat-row {
+        align-items: flex-start !important;
+    }
+
+    .dashboard-status-container__img {
+        padding: 0 8px 0 0;
+    }
+
+    @media(max-width: 950px) {
+        .mat-cell {
+            align-items: flex-start !important;
+            padding: 0 0 12px 0 !important;
+        }
+
+        .mat-header-row {
+            display: none !important;
+        }
+
+        .mat-column-status {
+            align-items: center !important;
+        }
+
+        .mat-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 12px 0 0 0 !important;
+        }
+
+        .mat-row::after {
+            display: none !important;
+        }
+
+        .dashboard-mobile-label {
+            min-width: 75px;
+            display: inline-block !important;
+        }
+    }
+
+    @media(max-width: 650px) {
+        .mat-column-actions {
+            .dashboard-mobile-label {
+                line-height: 1.125rem !important;
+            }
+        }
+    }
 }

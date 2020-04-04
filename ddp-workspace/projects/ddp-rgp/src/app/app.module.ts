@@ -44,6 +44,7 @@ import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -62,6 +63,7 @@ if (baseElt) {
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.stayInformedUrl = 'stay-informed';
+toolkitConfig.activityUrl = 'activity';
 toolkitConfig.errorUrl = 'error';
 toolkitConfig.phone = '617-714-7395';
 toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
@@ -128,7 +130,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     Auth0LandingComponent,
     Auth0RedirectComponent,
     RedirectToAuth0Landing,
-    SessionExpiredComponent
+    SessionExpiredComponent,
+    UserDashboardComponent
   ],
   entryComponents: [
     AboutUsDialogComponent

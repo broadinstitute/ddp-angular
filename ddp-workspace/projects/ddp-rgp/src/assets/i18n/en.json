@@ -969,6 +969,9 @@
         "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
         "Button": "Return home"
     },
+    "DashboardPage": {
+        "Title": "My Dashboard"
+    },
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {

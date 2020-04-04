@@ -20,10 +20,12 @@ import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 import {
   IrbGuard,
-  Auth0CodeCallbackComponent
+  Auth0CodeCallbackComponent,
+  AuthGuard
 } from 'ddp-sdk';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
@@ -143,6 +145,14 @@ const routes: Routes = [
     path: 'error',
     component: ErrorComponent,
     canActivate: [IrbGuard]
+  },
+  {
+    path: 'dashboard',
+    component: UserDashboardComponent,
+    canActivate: [
+      AuthGuard,
+      IrbGuard
+    ]
   },
   {
     path: '**',
