@@ -3,13 +3,13 @@ import { ReplaySubject } from 'rxjs';
 
 export class ActivityForm {
     public readonly: boolean;
-    public name: string;
+    public title: string;
+    public subtitle: string | null;
     public sections: Array<ActivitySection>;
     public introduction: ActivitySection;
     public closing: ActivitySection;
     public formType: string;
     public activityCode: string;
-    public subtitle: string | null;
     public readonlyHint: string | null;
     public lastUpdatedText?: string;
     public lastUpdated?: Date;
