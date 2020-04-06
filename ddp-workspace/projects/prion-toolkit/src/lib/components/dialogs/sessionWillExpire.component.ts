@@ -7,25 +7,25 @@ import { interval, Subscription } from 'rxjs';
     selector: 'ddp-session-will-expire',
     template: `
     <div class="Modal-title">
-        <h1 mat-dialog-title class="Modal-title">
+        <h1 class="Modal-title no-margin">
+            <span>
             <span translate>Toolkit.Dialogs.SessionWillExpire.Title</span>
             <span>{{ timeLeft }}</span>
+            </span>
         </h1>
-        <mat-icon (click)="closeDialog()" class="close">clear</mat-icon>
+        <button mat-icon-button (click)="closeDialog()">
+            <mat-icon class="ddp-close-button">clear</mat-icon>
+        </button>
     </div>
     <mat-dialog-content>
         <p class="Modal-text" translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="row NoMargin">
-        <button mat-button
-                color="primary"
-                class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect"
+        <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
                 (click)="signOut()"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
-        <button mat-button
-                color="primary"
-                class="ButtonFilled Button--rect"
+        <button class="ButtonFilled Button--rect button button_small button_primary"
                 (click)="renewSession()"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
         </button>
@@ -33,7 +33,7 @@ import { interval, Subscription } from 'rxjs';
 })
 export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public timeLeft = '00:00';
-    private anchor: Subscription = new Subscription;
+    private anchor: Subscription = new Subscription();
 
     constructor(
         private session: SessionMementoService,
@@ -42,19 +42,21 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
         private dialogRef: MatDialogRef<SessionWillExpireComponent>) { }
 
     public ngOnInit(): void {
+        const EXTRA_TIME = 60000;
         const expiresAt = this.session.expiresAt;
         const timer = interval(1000).subscribe(() => {
             const now = Date.now();
-            const remainingTime = expiresAt - now;
-            if (remainingTime) {
+            const remainingTime = expiresAt - now - EXTRA_TIME;
+            if (remainingTime > 0) {
                 const totalSeconds = Math.floor(remainingTime / 1000);
-                const seconds = (totalSeconds) % 60;
-                const minutes = ((totalSeconds) - seconds) / 60;
+                const seconds = totalSeconds % 60;
+                const minutes = (totalSeconds - seconds) / 60;
                 const formattedMinutes = this.formatTime(minutes);
                 const formattedSeconds = this.formatTime(seconds);
                 this.timeLeft = `${formattedMinutes}:${formattedSeconds}`;
             } else {
                 this.timeLeft = '00:00';
+                this.auth0.logout('session-expired');
             }
         });
         this.anchor.add(timer);
