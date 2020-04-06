@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 import { TranslateService } from "@ngx-translate/core";
-import { AnnouncementDashboardMessage } from "../../../../../toolkit/src/lib/models/announcementDashboardMessage";
 import { filter, map } from "rxjs/operators";
 
 export interface StaticActivity {
@@ -195,9 +195,8 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     public studyGuid: string;
-    public welcomeText: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
-    private anchor: Subscription;
+    private anchor: Subscription = new Subscription();
     public dataSource = STATIC_ACTIVITIES;
     public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
 
@@ -206,7 +205,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private announcements: AnnouncementsServiceAgent,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
-        this.anchor = new Subscription();
     }
 
     public ngOnInit(): void {
