@@ -56,9 +56,11 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
+              # @todo: take this out
               circle-ci-updates-1)
                 DEPLOY_ENV=dev
               ;;
+              # @todo take this out
               play*)
                 DEPLOY_ENV=dev
               ;;
@@ -280,14 +282,16 @@ commands:
 
             CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
 
+            echo "The following projects were found to have changed: $CHANGED_PROJECTS"
+
             for i in "${!STUDY_KEYS[@]}"; do
               STUDY_KEY=${STUDY_KEYS[$i]}
               STUDY_GUID=${STUDY_GUIDS[$i]}
 
               NG_PROJECT_NAME="ddp-$STUDY_KEY"
-              echo  $CHANGED_PROJECTS |
-                  grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit
-              if [[ $? -eq 0 ]]; then
+              CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
+                  grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
+              if [[ ! -z $CHANGED_DEPENDENCIES ]]; then
                 echo "Launching build and deploy for $NG_PROJECT_NAME"
                 curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                   \"branch\": \"<< pipeline.git.branch >>\",
@@ -460,6 +464,7 @@ workflows:
             branches:
               only:
                 - develop
+                # @TODO remove these when done.
                 - circle-ci-updates-1
                 - /play.*/
 
