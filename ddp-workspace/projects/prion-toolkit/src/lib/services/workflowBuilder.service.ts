@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UrlCommand } from './commands/urlCommand.service';
-import { MailingListCommand } from './commands/mailingListCommand.service';
 import { RegistrationCommand } from './commands/registrationCommand.service';
 import { WorkflowRule } from './../models/workflowRule';
 import { WorkflowActionType } from '../models/workflowActionType';
@@ -29,10 +28,6 @@ export class WorkflowBuilderService {
             {
                 type: WorkflowActionType.URL,
                 func: (action: UrlWorkflowAction) => new UrlCommand(action.url, this.router)
-            },
-            {
-                type: WorkflowActionType.MAILING_LIST,
-                func: (action: MailingListWorkflowAction) => new MailingListCommand(this.dialog, this.userProfile)
             },
             {
                 type: WorkflowActionType.REGISTRATION,
