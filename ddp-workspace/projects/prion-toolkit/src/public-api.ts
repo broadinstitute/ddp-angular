@@ -16,7 +16,6 @@ export * from './lib/components/common-landing/commonLanding.component';
 export * from './lib/components/workflow-start-activity/workflowStartActivity.component';
 export * from './lib/components/dashboard/dashboard.component';
 export * from './lib/components/dialogs/disclaimer.component';
-export * from './lib/components/dialogs/joinMailingList.component';
 export * from './lib/components/dialogs/resendEmail.component';
 export * from './lib/components/dialogs/sessionWillExpire.component';
 export * from './lib/components/dialogs/warning.component';
