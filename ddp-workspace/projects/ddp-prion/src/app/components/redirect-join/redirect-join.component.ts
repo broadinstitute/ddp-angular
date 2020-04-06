@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth0AdapterService, BrowserContentService, GoogleAnalyticsEventsService, WindowRef } from "ddp-sdk";
+import { AnalyticsEventsService, Auth0AdapterService, BrowserContentService, WindowRef } from "ddp-sdk";
 
 @Component({
   selector: 'app-redirect-join',
@@ -13,7 +13,7 @@ export class RedirectJoinComponent implements OnInit {
 
   constructor(
     private windowRef: WindowRef,
-    private analytics: GoogleAnalyticsEventsService,
+    private analytics: AnalyticsEventsService,
     private browserContent: BrowserContentService, private auth0Adapter: Auth0AdapterService) { }
 
   public ngOnInit(): void {
