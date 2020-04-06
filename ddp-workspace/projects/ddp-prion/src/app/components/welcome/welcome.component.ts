@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AnalyticsEventActions,
+  AnalyticsEventCategories,
+  AnalyticsEventsService,
   Auth0AdapterService,
   BrowserContentService,
-  GoogleAnalytics,
-  GoogleAnalyticsEventsService,
   WindowRef
 } from 'ddp-sdk';
 
