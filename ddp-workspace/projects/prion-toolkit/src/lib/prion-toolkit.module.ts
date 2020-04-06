@@ -23,7 +23,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginLandingComponent } from './components/login-landing/loginLanding.component';
 import { ErrorComponent } from './components/error/error.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
-import { JoinMailingListComponent } from './components/dialogs/joinMailingList.component';
 import { ResendEmailComponent } from './components/dialogs/resendEmail.component';
 import { PasswordComponent } from './components/password/password.component';
 import { RedirectToLoginLandingComponent } from './components/redirect-to-login-landing/redirectToLoginLanding.component';
@@ -85,7 +84,6 @@ import { MatTableModule } from "@angular/material";
     RedirectToLoginLandingComponent,
     ErrorComponent,
     DisclaimerComponent,
-    JoinMailingListComponent,
     ResendEmailComponent,
     PasswordComponent,
     WarningComponent,
@@ -115,7 +113,6 @@ import { MatTableModule } from "@angular/material";
   ],
   entryComponents: [
     DisclaimerComponent,
-    JoinMailingListComponent,
     ResendEmailComponent,
     WarningComponent,
     SessionWillExpireComponent
