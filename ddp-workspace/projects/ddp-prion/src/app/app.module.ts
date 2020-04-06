@@ -1,12 +1,12 @@
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateService } from '@ngx-translate/core';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfigurationService, DdpModule, GoogleAnalyticsEventsService, LogLevel, AnalyticsEventsService, AnalyticsEvent } from 'ddp-sdk';
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
