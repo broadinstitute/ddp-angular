@@ -33,7 +33,7 @@ export class FooterComponent implements OnInit {
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
   }
 
-  public toTop(): void {
+  public scrollToTop(): void {
     window.scrollTo(0, 0);
   }
 
