@@ -10,14 +10,14 @@ import { WindowRef, SessionMementoService } from 'ddp-sdk';
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
-  public inHome: boolean = true;
-  public inLGMD: boolean = true;
-  public inEligiblityCrit: boolean = true;
-  public isCollapsed: boolean = true;
-  public isForFamiliesCollapsed: boolean = true;
-  public isForResearchersCollapsed: boolean = true;
-  public isSpecialtyProjectsCollapsed: boolean = true;
-  public isPageScrolled: boolean = false;
+  public inHome = true;
+  public inLGMD = true;
+  public inEligiblityCrit = true;
+  public isCollapsed = true;
+  public isForFamiliesCollapsed = true;
+  public isForResearchersCollapsed = true;
+  public isSpecialtyProjectsCollapsed = true;
+  public isPageScrolled = false;
 
   constructor(
     private router: Router,

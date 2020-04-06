@@ -7,11 +7,11 @@ import { ToolkitConfigurationService } from 'toolkit';
   styleUrls: ['./privacy-and-your-data.component.scss']
 })
 export class PrivacyAndYourDataComponent implements OnInit {
-  public isShareVariantCollapsed: boolean = true;
-  public isShareGenoCollapsed: boolean = true;
-  public isStoredCollapsed: boolean = true;
-  public isPersonalInfoCollapsed: boolean = true;
-  public isProfitOffCollapsed: boolean = true;
+  public isShareVariantCollapsed = true;
+  public isShareGenoCollapsed = true;
+  public isStoredCollapsed = true;
+  public isPersonalInfoCollapsed = true;
+  public isProfitOffCollapsed = true;
 
   public phone: string;
   public email: string;

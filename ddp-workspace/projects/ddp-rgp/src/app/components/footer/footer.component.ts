@@ -8,7 +8,7 @@ import { ToolkitConfigurationService } from 'toolkit';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  public inHome: boolean = true;
+  public inHome = true;
   public phone: string;
   public email: string;
   public phoneHref: string;

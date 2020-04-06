@@ -15,7 +15,7 @@ import { CraniofacialComponent } from './components/craniofacial/craniofacial.co
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
-import { CountMeInComponent } from './components/count-me-in/count-me-in.component'
+import { CountMeInComponent } from './components/count-me-in/count-me-in.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
@@ -32,7 +32,7 @@ import {
 // The Angular compiler complains if you try to create a function that returns a generic version of
 // this function where it case-insensitively matches the specified string
 export function lgmdMatcher(url: UrlSegment[]) {
-  return <UrlMatchResult>(url[0].path.toLowerCase() === 'lgmd' ? ({ consumed: url }) : null);
+  return (url[0].path.toLowerCase() === 'lgmd' ? ({ consumed: url }) : null) as UrlMatchResult;
 }
 
 const routes: Routes = [

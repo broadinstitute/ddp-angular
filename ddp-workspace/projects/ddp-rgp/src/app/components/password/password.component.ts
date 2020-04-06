@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 })
 export class PasswordComponent implements OnInit {
   passwordForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,

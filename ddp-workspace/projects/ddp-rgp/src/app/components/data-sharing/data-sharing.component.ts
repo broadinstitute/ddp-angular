@@ -7,10 +7,10 @@ import { ToolkitConfigurationService } from 'toolkit';
   styleUrls: ['./data-sharing.component.scss']
 })
 export class DataSharingComponent implements OnInit {
-  public isMatchmakerCollapsed: boolean = true;
-  public isClinVarCollapsed: boolean = true;
-  public isDUOSCollapsed: boolean = true;
-  public isAnVILCollapsed: boolean = true;
+  public isMatchmakerCollapsed = true;
+  public isClinVarCollapsed = true;
+  public isDUOSCollapsed = true;
+  public isAnVILCollapsed = true;
 
   public phone: string;
   public email: string;

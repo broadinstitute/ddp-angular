@@ -30,6 +30,6 @@ export class Auth0LandingComponent extends LoginLandingComponent {
     workflowBuilder: WorkflowBuilderService,
     @Inject('ddp.config') config: ConfigurationService,
     @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(router, auth0, sessionService, participantService, workflowService, workflowBuilder, config, toolkitConfiguration)
+    super(router, auth0, sessionService, participantService, workflowService, workflowBuilder, config, toolkitConfiguration);
   }
 }
