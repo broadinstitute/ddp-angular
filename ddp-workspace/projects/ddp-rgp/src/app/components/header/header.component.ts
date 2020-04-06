@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation, Inject, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { WindowRef } from 'ddp-sdk';
+import { WindowRef, SessionMementoService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import { WindowRef } from 'ddp-sdk';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public inHome: boolean = true;
   public inLGMD: boolean = true;
   public inEligiblityCrit: boolean = true;
@@ -22,12 +22,20 @@ export class HeaderComponent {
   constructor(
     private router: Router,
     private window: WindowRef,
-    @Inject(DOCUMENT) private document: any) {
+    private session: SessionMementoService,
+    @Inject(DOCUMENT) private document: any) { }
+
+  public ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.isCollapsed = true;
         this.trackNavigation(event.urlAfterRedirects);
       }
     });
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession();
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

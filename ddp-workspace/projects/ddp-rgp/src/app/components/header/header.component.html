@@ -85,6 +85,10 @@
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
                     <a routerLink="/faq" class="Header-menuItem Header-menuAllSizes" translate>Header.FAQs</a>
                 </li>
+                <li *ngIf="isAuthenticated" data-target=".navbar-collapse.in" data-toggle="collapse">
+                    <a routerLink="/dashboard" class="Header-menuItem Header-menuAllSizes"
+                        translate>Header.Dashboard</a>
+                </li>
                 <li data-target=".navbar-collapse.in" data-toggle="collapse">
                     <a routerLink="/how-it-works" class="Header-menuItem Header-menuAllSizes Orange-link"
                         translate>Header.GetStarted</a>

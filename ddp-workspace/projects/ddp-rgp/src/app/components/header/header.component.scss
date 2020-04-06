@@ -161,13 +161,13 @@ header.stick .icon-bar,
     position: relative;
 }
 
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 849px) {
     .Header-menu {
         margin-top: 5px;
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 849px) {
     .Header-menu li {
         display: block;
         text-align: right;
@@ -194,10 +194,10 @@ header.stick .icon-bar,
     left: 0;
     font-weight: 400;
     margin: 0;
-    font-size: 15px;
+    font-size: 15px !important;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 849px) {
     .Header-menuItem.Sign-in {
         position: relative;
         text-align: left;
@@ -206,7 +206,7 @@ header.stick .icon-bar,
         left: 0;
         font-weight: 500;
         margin: 7px 10px;
-        font-size: 0.95rem;
+        font-size: 0.95rem !important;
     }
 }
 
@@ -258,9 +258,22 @@ header.stick .Header-menuItem:hover,
     }
 }
 
+@media only screen and (max-width: 1350px) {
+    .Header-menuItem {
+        margin: 15px 0 0 25px;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .Header-menuItem {
         margin: 15px 0 0 20px;
+    }
+}
+
+@media only screen and (max-width: 1140px) {
+    .Header-menuItem {
+        font-size: 0.95rem;
+        margin: 15px 0 0 15px;
     }
 }
 
@@ -271,7 +284,7 @@ header.stick .Header-menuItem:hover,
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 850px) {
     .Hidden-mobile {
         display: inline-block;
     }
@@ -286,19 +299,14 @@ header.stick .Header-menuItem:hover,
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 900px) {
+@media only screen and (min-width: 850px) and (max-width: 900px) {
     .Header-menuItem {
         font-size: 14px;
         margin: 5px 0 0 12px;
     }
 }
 
-@media only screen and (max-width: 767px) {
-    .Hidden-mobile {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
+@media only screen and (max-width: 849px) {
     .Hidden-desktop {
         display: block;
     }
@@ -384,7 +392,7 @@ header.stick .Orange-link,
     color: #E8702A !important;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 849px) {
 
     header.stick .Orange-link,
     .Header--home .Orange-link,
@@ -393,5 +401,52 @@ header.stick .Orange-link,
         width: 100%;
         text-align: right;
         padding-right: 20px;
+    }
+}
+
+@media (max-width: 849px) {
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-left,
+    .navbar-right {
+        float: none !important;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+
+    .navbar-nav>li {
+        float: none;
+    }
+
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .collapse.in {
+        display: block !important;
     }
 }
