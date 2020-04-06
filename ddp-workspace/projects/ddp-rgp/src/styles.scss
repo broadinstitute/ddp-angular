@@ -9,6 +9,7 @@ body {
 
 body {
     font-family: 'Roboto', sans-serif !important;
+    overflow-y: scroll;
 }
 
 @media only screen and (min-width: 2500px) {
@@ -1745,6 +1746,10 @@ toolkit-session-will-expire {
 
 .SimpleButton {
     white-space: nowrap;
+}
+
+.dashboard-activity-button {
+    text-align: left;
 }
 
 .ddp-dashboard {
