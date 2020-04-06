@@ -3,7 +3,6 @@ import { MatDialog, MatDialogRef, MatSidenav } from '@angular/material';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from './app.component.state';
-import { JoinMailingListComponent } from '../dialogs/joinMailingList.component';
 import { SessionWillExpireComponent } from '../dialogs/sessionWillExpire.component';
 import { WarningComponent } from '../dialogs/warning.component';
 import { CommunicationService } from '../../services/communication.service';
