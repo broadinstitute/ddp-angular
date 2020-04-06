@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
 import {
-  GoogleAnalyticsEventsService,
-  GoogleAnalytics,
-  WindowRef,
+  AnalyticsEventCategories,
+  AnalyticsEventsService,
   Auth0AdapterService,
-  SessionMementoService
+  SessionMementoService,
+  WindowRef
 } from 'ddp-sdk';
 import { Router } from "@angular/router";
 
@@ -39,7 +39,7 @@ export class FooterComponent implements OnInit {
     constructor(
         private router: Router,
         private dialog: MatDialog,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
         private auth0Adapter: Auth0AdapterService,
@@ -77,6 +77,6 @@ export class FooterComponent implements OnInit {
     }
 
     public doAnalytics(action: string): void {
-        this.analytics.emitCustomEvent(GoogleAnalytics.Social, action);
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, action);
     }
 }
