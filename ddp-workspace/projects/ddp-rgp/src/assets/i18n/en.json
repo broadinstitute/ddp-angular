@@ -973,6 +973,24 @@
     "DashboardPage": {
         "Title": "My Dashboard"
     },
+    "ErrorPage": {
+        "Title": "We've encountered an error",
+        "Text1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "Text2": "or call us at"
+    },
+    "CountMeInPage": {
+        "Title": "Tell us your story",
+        "SectionTitle": "Thank you for your interest in joining the Rare Genomes Project!",
+        "Text": "To get started, please let us know if you or a loved one meets the <span class=\"Accent\">participation requirements</span> listed below by attesting that all of the statements listed next to the checkboxes below are true. You will then be asked to create a <span class=\"NotALink\"> raregenomes.org</span> account and complete a questionnaire to tell us about the rare condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate."
+    },
+    "SessionExpiredPage": {
+        "Text1": "You were away for a while, so we logged you out as a security precaution.",
+        "Text2": "Please log in again to return to the last page you were on.",
+        "Button": "Log In"
+    },
+    "Auth0LandingPage": {
+        "Text": "Please wait. You will be redirected to a destination soon..."
+    },
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {
@@ -1009,24 +1027,6 @@
                 "Continue": "Continue"
             }
         }
-    },
-    "ErrorPage": {
-        "Title": "We've encountered an error",
-        "Text1": "Please wait a moment and retry. If the trouble persists, please email us at",
-        "Text2": "or call us at"
-    },
-    "CountMeInPage": {
-        "Title": "Tell us your story",
-        "SectionTitle": "Thank you for your interest in joining the Rare Genomes Project!",
-        "Text": "To get started, please let us know if you or a loved one meets the <span class=\"Accent\">participation requirements</span> listed below by attesting that all of the statements listed next to the checkboxes below are true. You will then be asked to create a <span class=\"NotALink\"> raregenomes.org</span> account and complete a questionnaire to tell us about the rare condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate."
-    },
-    "SessionExpiredPage": {
-        "Text1": "You were away for a while, so we logged you out as a security precaution.",
-        "Text2": "Please log in again to return to the last page you were on.",
-        "Button": "Log In"
-    },
-    "Auth0LandingPage": {
-        "Text": "Please wait. You will be redirected to a destination soon..."
     },
     "SDK": {
         "SubmitButton": "Submit",
