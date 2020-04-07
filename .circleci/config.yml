@@ -8,7 +8,7 @@ references:
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-server-build:03-04-2020A
+      - image: broadinstitute/study-website-build:03-26-2020A
     working_directory: ~/repo
 
 commands:
@@ -31,14 +31,20 @@ commands:
         type: string
       study_guid:
         type: string
+      skip_build:
+        type: boolean
+        default: false
     steps:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - build-app
-      - deploy-exploded-build:
-          study_key: << parameters.study_key >>
-          study_guid: << parameters.study_guid >>
+      - unless:
+          condition: << parameters.skip_build >>
+          steps:
+          - build-app
+          - deploy-exploded-build:
+              study_key: << parameters.study_key >>
+              study_guid: << parameters.study_guid >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -50,7 +56,12 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              angular-appengine-deployment-ctd-2)
+              # @todo: take this out
+              circle-ci-updates-1)
+                DEPLOY_ENV=dev
+              ;;
+              # @todo take this out
+              play*)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -144,7 +155,7 @@ commands:
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
           working_directory: ~/repo/ddp-workspace
       - run:
-          name: Update GAE dispatch file
+          name: Update GAE dispatch config
           command: |
             set -u
             gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
@@ -153,34 +164,48 @@ commands:
           name: Update deployments sheet
           command: |
             set -u
-            TZ=America/New_York
-            DATE=`TZ=$TZ date +%F`
-            TIME=`TZ=$TZ date +%T`
-            COMPONENT='<<parameters.study_key>> Angular client'
-            BRANCH=<< pipeline.git.branch >>
-            # Picking up any tags attached to the current commit
-            TAG=`git tag --points-at HEAD | xargs`
-            # Extract email from current commit
-            AUTHOR=`git show -s --format='%ae' HEAD`
+            set +x
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | \
-            sheetappend $RELEASE_SHEET_ID $DATE $TIME "$COMPONENT" $ENVIRONMENT $BRANCH "$TAG" $SHORT_GIT_SHA "$AUTHOR" $CIRCLE_BUILD_NUM "$CIRCLE_BUILD_URL"
+            reportdeploy.sh "$RELEASE_SHEET_ID" '<<parameters.study_key>> Angular client' "$ENVIRONMENT" "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL"
+      - run:
+          name: Delete previous versions of service
+          command: |
+            set -u
+            set +x
+            # extract the service name from the GAE yaml file
+            CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            SERVICE=$(grep -Eo -m1 "^service:\s*.*" "${CONFIG_FILE}" | awk '{print $2}')
+            echo "The service name is *${SERVICE}*"
 
+            # find what other versions are currently running
+            # skip first line, exclude our version, print 2nd column
+            AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
+            VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
+
+            for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
+              echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
+              gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
+            done;
+          working_directory: ~/repo/ddp-workspace
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
     parameters:
       study_key:
         type: string
+        default: UNKNOWN
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
             echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
-            echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
-            source $BASH_ENV
-            OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
-            echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
+              echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
+              echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
+              source $BASH_ENV
+              OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
+              echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
+            fi
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
@@ -237,6 +262,50 @@ commands:
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
           working_directory: ~/repo
 
+  conditionally-launch-build-and-deploy:
+    description: Launch build and deploy if project has changed
+    parameters:
+      study_keys:
+        type: string
+      study_guids:
+        type: string
+    steps:
+      - run:
+          name: Check << parameters.study_keys >> and launch build if modified
+          command: |
+            set -u
+            set +e
+            set +x
+            # CircleCi does not support arrays as params, so here is my workaround
+            STUDY_KEYS=(<< parameters.study_keys >>)
+            STUDY_GUIDS=(<< parameters.study_guids >>)
+
+            CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
+
+            echo "The following projects were found to have changed: $CHANGED_PROJECTS"
+
+            for i in "${!STUDY_KEYS[@]}"; do
+              STUDY_KEY=${STUDY_KEYS[$i]}
+              STUDY_GUID=${STUDY_GUIDS[$i]}
+
+              NG_PROJECT_NAME="ddp-$STUDY_KEY"
+              CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
+                  grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
+              if [[ ! -z $CHANGED_DEPENDENCIES ]]; then
+                echo "Launching build and deploy for $NG_PROJECT_NAME"
+                curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
+                                  \"branch\": \"<< pipeline.git.branch >>\",
+                                  \"parameters\": {
+                                      \"study_key\": \"$STUDY_KEY\",
+                                      \"study_guid\": \"$STUDY_GUID\",
+                                      \"do-builds\": true
+                                  }
+                                }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
+              else
+                echo "Skipping $STUDY_KEY"
+              fi
+            done;
+
   conditionally-launch-build-and-store:
     description: Launch build and save job if build missing
     parameters:
@@ -250,7 +319,6 @@ commands:
           command: |
             set -u
             set +e
-            # Looking for latest build of this project in Google bucket
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
@@ -273,6 +341,25 @@ commands:
             fi
 
 jobs:
+  build-and-deploy-job:
+    executor:
+      name: commit-executor
+    steps:
+      - app-build-and-deploy:
+          study_key: << pipeline.parameters.study_key >>
+          study_guid: << pipeline.parameters.study_guid >>
+          skip_build: false
+
+  conditionally-launch-build-and-deploy-all-job:
+    executor:
+      name: commit-executor
+    steps:
+      - checkout
+      - setup-shared-env
+      - conditionally-launch-build-and-deploy:
+          study_keys: "osteo brain angio mbc"
+          study_guids: "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+
 
   conditionally-launch-build-and-store-all-job:
     executor:
@@ -359,6 +446,9 @@ parameters:
   study_key:
     type: string
     default: "UNKNOWN"
+  study_guid:
+    type: string
+    default: "UNKNOWN"
   do-builds:
     type: boolean
     default: false
@@ -367,19 +457,21 @@ workflows:
   version: 2
 
   build-and-deploy-all-apps-workflow:
+    unless: << pipeline.parameters.do-builds >>
     jobs:
-      - osteo-build-and-deploy: &build-and-deploy-filters
+      - conditionally-launch-build-and-deploy-all-job: &build-and-deploy-filters
           filters:
             branches:
               only:
                 - develop
-                - angular-appengine-deployment-ctd-2
-      - brain-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - angio-build-and-deploy:
-          <<: *build-and-deploy-filters
-      - mbc-build-and-deploy:
-          <<: *build-and-deploy-filters
+                # @TODO remove these when done.
+                - circle-ci-updates-1
+                - /play.*/
+
+  build-and-deploy-workflow:
+    when: << pipeline.parameters.do-builds >>
+    jobs:
+      - build-and-deploy-job: *build-and-deploy-filters
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
