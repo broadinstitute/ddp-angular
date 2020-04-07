@@ -62,6 +62,10 @@ if (baseElt) {
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.aboutFamily = 'about-your-family';
+toolkitConfig.dashboardUrl = 'dashboard';
+toolkitConfig.aboutFamilyGuid = 'DASHBOARD';
+toolkitConfig.dashboardGuid = ''; // To be defined later 
 toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.activityUrl = 'activity';
 toolkitConfig.errorUrl = 'error';

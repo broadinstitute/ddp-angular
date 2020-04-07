@@ -30,6 +30,8 @@ export class WorkflowMapperService {
                     return new UrlWorkflowAction(this.toolkitConfiguration.aboutYouUrl);
                 case this.toolkitConfiguration.aboutChildGuid:
                     return new UrlWorkflowAction(this.toolkitConfiguration.aboutChildUrl);
+                case this.toolkitConfiguration.aboutFamilyGuid:
+                    return new UrlWorkflowAction(this.toolkitConfiguration.aboutFamily);
                 case this.toolkitConfiguration.consentGuid:
                     return new UrlWorkflowAction(this.toolkitConfiguration.consentUrl);
                 case this.toolkitConfiguration.consentAssentGuid:

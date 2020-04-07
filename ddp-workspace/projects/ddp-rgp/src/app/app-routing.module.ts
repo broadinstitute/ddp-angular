@@ -147,6 +147,33 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
+    path: 'about-your-family',
+    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    canActivate: [
+      AuthGuard,
+      IrbGuard
+    ],
+    data: {
+      activityGuid: '' // To be defined later 
+    }
+  },
+  {
+    path: 'activity/:id',
+    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    canActivate: [
+      AuthGuard,
+      IrbGuard
+    ]
+  },
+  {
+    path: 'activity-link/:id',
+    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    canActivate: [
+      AuthGuard,
+      IrbGuard
+    ]
+  },
+  {
     path: 'dashboard',
     component: UserDashboardComponent,
     canActivate: [
