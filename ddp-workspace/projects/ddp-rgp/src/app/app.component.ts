@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private renewNotifier: RenewSessionNotifier,
+    private renewNotifier: RenewSessionNotifier
   ) { }
 
   public ngOnInit(): void {
