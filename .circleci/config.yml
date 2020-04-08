@@ -84,7 +84,7 @@ commands:
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             source $BASH_ENV
-            
+
   deploy-stored-build:
     description: Deploy archived build to GAE
     parameters:
@@ -106,6 +106,7 @@ commands:
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+
             if [ -z $TAR_FILE_URL ]
             then
               echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
@@ -178,10 +179,12 @@ commands:
             CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
             SERVICE=$(grep -Eo -m1 "^service:\s*.*" "${CONFIG_FILE}" | awk '{print $2}')
             echo "The service name is *${SERVICE}*"
+
             # find what other versions are currently running
             # skip first line, exclude our version, print 2nd column
             AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
             VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
+
             for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
               echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
@@ -209,6 +212,7 @@ commands:
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
+
   setup-build-workspace:
     description: "Setup workspace used by all projects"
     steps:
@@ -323,6 +327,7 @@ commands:
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
             # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+
             # if not found, let's kick off a build
             if [ -z $TAR_FILE_URL ]
               then
@@ -337,6 +342,7 @@ commands:
               else
                 echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
             fi
+
 jobs:
   build-and-deploy-job:
     executor:
