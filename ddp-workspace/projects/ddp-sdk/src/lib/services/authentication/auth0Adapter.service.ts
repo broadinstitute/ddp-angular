@@ -117,7 +117,9 @@ export class Auth0AdapterService implements OnDestroy {
             ...(additionalParams && {
                 ...additionalParams
             }),
-            language: this.language.getCurrentLanguage()
+            language: this.language.getCurrentLanguage(),
+            // @todo : hack delete when done
+            serverUrl: this.configuration.backendUrl
         };
         if (this.configuration.doLocalRegistration) {
             sessionStorage.setItem('localAuthParams', JSON.stringify(params));
