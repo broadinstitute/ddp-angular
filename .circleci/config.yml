@@ -84,6 +84,7 @@ commands:
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             source $BASH_ENV
+            
   deploy-stored-build:
     description: Deploy archived build to GAE
     parameters:
