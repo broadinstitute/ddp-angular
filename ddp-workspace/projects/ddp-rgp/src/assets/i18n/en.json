@@ -124,7 +124,8 @@
         "InfoBox": "We are a tight-knit team of researchers, clinicians, software developers, genetic counselors, and coordinators, who believe that the latest advances in genome sequencing technology are changing the world, and that they should be available to every rare and undiagnosed family.",
         "Intro": {
             "Text1": "We created the Rare Genomes Project to enable patients with undiagnosed, suspected genetic conditions to participate in genomic research regardless of where they live, to engage participants as partners in the research process, and to turn genomic data into clinically meaningful answers for families.",
-            "Text2": "Improving our understanding of the rarest genetic conditions requires combining the experiences of patients and families directly with genomic research. By reaching out nationwide and empowering the rare and undiagnosed community to donate a sample and their story, we hope to better understand the genetic basis of all undiagnosed diseases."
+            "Text2": "Improving our understanding of the rarest genetic conditions requires combining the experiences of patients and families directly with genomic research. By reaching out nationwide and empowering the rare and undiagnosed community to donate a sample and their story, we hope to better understand the genetic basis of all undiagnosed diseases.",
+            "ImageAlt": "Broad Building"
         },
         "Broad": {
             "Title": "The Broad Institute",
@@ -644,7 +645,7 @@
             }
         }
     },
-    "HowItWorks": {
+    "HowItWorksPage": {
         "Title": "Getting Started",
         "Intro": {
             "Question": "Thinking about joining us?",

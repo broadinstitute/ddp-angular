@@ -2,28 +2,29 @@
   <div class="PageHeader-background Background--orange">
     <div class="row PageLayout">
       <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h1 class="PageHeader-title" translate>HowItWorks.Title</h1>
+        <h1 class="PageHeader-title" translate>HowItWorksPage.Title</h1>
       </div>
     </div>
   </div>
 </div>
 <div class="Wrapper row" routeTransformer>
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container Container--howItWorks">
-    <img src="/assets/images/how-it-works-family.jpg" class="PageContent-image" alt="How it works family picture">
-    <h2 class="Title Color--blue Aligned--center TopMargin50" translate>HowItWorks.Intro.Question</h2>
+    <img src="/assets/images/how-it-works-family.jpg" class="PageContent-image"
+      [alt]="'HowItWorksPage.CommonAlt' | translate">
+    <h2 class="Title Color--blue Aligned--center TopMargin50" translate>HowItWorksPage.Intro.Question</h2>
     <p class="Paragraph TopMargin25 Accent">
-      <span translate>HowItWorks.Intro.Answer.Text1</span>
-      “<span class="NotALink" translate>HowItWorks.Intro.Answer.Text2</span>”
-      <span translate>HowItWorks.Intro.Answer.Text3</span>
+      <span translate>HowItWorksPage.Intro.Answer.Text1</span>
+      “<span class="NotALink" translate>HowItWorksPage.Intro.Answer.Text2</span>”
+      <span translate>HowItWorksPage.Intro.Answer.Text3</span>
     </p>
 
-    <ng-container *ngFor="let item of 'HowItWorks.Items' | translate; let first = first;">
+    <ng-container *ngFor="let item of 'HowItWorksPage.Items' | translate; let first = first;">
       <hr *ngIf="first" class="HorizontalLine">
       <hr *ngIf="!first" class="HorizontalLine HorizontalLine--howItWorks">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <img lazy-resource [src]="item.image" class="PageContent-imageStep"
-            [alt]="'HowItWorks.CommonAlt' | translate">
+            [alt]="'HowItWorksPage.CommonAlt' | translate">
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
           <h2 class="Title Color--blue">{{item.title}}</h2>
@@ -33,17 +34,17 @@
     </ng-container>
 
     <hr class="HorizontalLine">
-    <h2 class="Title Color--blue TopMargin50" translate>HowItWorks.Ending.Start.Text</h2>
+    <h2 class="Title Color--blue TopMargin50" translate>HowItWorksPage.Ending.Start.Text</h2>
     <div class="CenterDiv TopMargin50">
-      <a routerLink="/tell-us-your-story" class="Button--Apply" translate>HowItWorks.Ending.Start.Button</a>
+      <a routerLink="/tell-us-your-story" class="Button--Apply" translate>HowItWorksPage.Ending.Start.Button</a>
     </div>
-    <h2 class="Title Color--blue TopMargin75" translate>HowItWorks.Ending.AnyQuestions.Question</h2>
+    <h2 class="Title Color--blue TopMargin75" translate>HowItWorksPage.Ending.AnyQuestions.Question</h2>
     <p class="Paragraph">
-      <span translate>HowItWorks.Ending.AnyQuestions.Text1</span>
-      <a routerLink="/faq" class="Link" translate>HowItWorks.Ending.AnyQuestions.Text2</a>,
-      <span translate>HowItWorks.Ending.AnyQuestions.Text3</span>
+      <span translate>HowItWorksPage.Ending.AnyQuestions.Text1</span>
+      <a routerLink="/faq" class="Link" translate>HowItWorksPage.Ending.AnyQuestions.Text2</a>,
+      <span translate>HowItWorksPage.Ending.AnyQuestions.Text3</span>
       <a [href]="emailHref" class="Link">{{email}}</a>
-      <span translate>HowItWorks.Ending.AnyQuestions.Text4</span>
+      <span translate>HowItWorksPage.Ending.AnyQuestions.Text4</span>
       <a [href]="phoneHref" class="Link">{{phone}}</a>.
     </p>
 
