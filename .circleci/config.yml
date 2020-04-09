@@ -56,14 +56,6 @@ commands:
               develop)
                 DEPLOY_ENV=dev
               ;;
-              # @todo: take this out
-              circle-ci-updates-1)
-                DEPLOY_ENV=dev
-              ;;
-              # @todo take this out
-              play*)
-                DEPLOY_ENV=dev
-              ;;
               test)
                 DEPLOY_ENV=test
               ;;
@@ -464,9 +456,6 @@ workflows:
             branches:
               only:
                 - develop
-                # @TODO remove these when done.
-                - circle-ci-updates-1
-                - /play.*/
 
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
