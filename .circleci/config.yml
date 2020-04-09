@@ -34,9 +34,6 @@ commands:
     parameters:
       study_key:
         type: string
-      study_guid:
-        type: string
-        default: NOTNEEDED
       skip_build:
         type: boolean
         default: false
