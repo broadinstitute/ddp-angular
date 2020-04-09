@@ -522,6 +522,7 @@ workflows:
                 - test
                 - staging
                 - production
+                - /^deleteme.*/
           study_key: osteo
 
       - deploy-stored-build-job:
