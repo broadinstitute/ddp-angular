@@ -3,17 +3,11 @@ version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
                 "osteo brain angio mbc"
   study_guids: &study_guids
                 "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
-#  deploy_branch_filters: &deploy_branch_filters
-#    filters:
-#      branches:
-#        only:
-#          - test
-#          - staging
-#          - production
 
 # Container for all the builds
 executors:
