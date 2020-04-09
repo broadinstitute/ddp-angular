@@ -3,6 +3,10 @@ version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  study_keys: &study_keys
+                "osteo brain angio mbc"
+  study_guids: &study_guids
+                "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
 
 # Container for all the builds
 executors:
@@ -29,8 +33,6 @@ commands:
     parameters:
       study_key:
         type: string
-      study_guid:
-        type: string
       skip_build:
         type: boolean
         default: false
@@ -44,7 +46,6 @@ commands:
           - build-app
           - deploy-exploded-build:
               study_key: << parameters.study_key >>
-              study_guid: << parameters.study_guid >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -58,6 +59,9 @@ commands:
               ;;
               test)
                 DEPLOY_ENV=test
+              ;;
+              trigger-build-deploy)
+                DEPLOY_ENV=dev
               ;;
               staging)
                 DEPLOY_ENV=staging
@@ -118,13 +122,14 @@ commands:
         type: string
       study_guid:
         type: string
+        default: UNKNOWN
     steps:
       - set-deployment-environment
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
             set -u
-            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
             cd ddp-workspace
             CONFIG_DIR="${OUTPUT_DIR}/assets/config"
             mkdir -p $CONFIG_DIR
@@ -185,6 +190,12 @@ commands:
       study_key:
         type: string
         default: UNKNOWN
+      study_keys:
+        type: string
+        default: *study_keys
+      study_guids:
+        type: string
+        default: *study_guids
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
@@ -192,6 +203,21 @@ commands:
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
             echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
             if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
+              echo 'export STUDY_KEY=<<parameters.study_key>>' >> $BASH_ENV
+              STUDY_KEYS=(<<parameters.study_keys>>)
+              STUDY_GUIDS=(<<parameters.study_guids>>)
+              for i in ${!STUDY_KEYS[@]}; do
+                  currentKey=${STUDY_KEYS[$i]}
+                  if [[ $currentKey == '<<parameters.study_key>>' ]]; then
+                      STUDY_GUID="${STUDY_GUIDS[$i]}"
+                      echo "export STUDY_GUID=${STUDY_GUID}" >> $BASH_ENV
+                      break;
+                  fi
+              done;
+              if [[ -z $STUDY_GUID ]]; then
+                echo "Could not find study guid for <<parameters.study_key>>"
+                exit 1
+              fi
               echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
               echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
               source $BASH_ENV
@@ -259,8 +285,6 @@ commands:
     parameters:
       study_keys:
         type: string
-      study_guids:
-        type: string
     steps:
       - run:
           name: Check << parameters.study_keys >> and launch build if modified
@@ -270,7 +294,6 @@ commands:
             set +x
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
-            STUDY_GUIDS=(<< parameters.study_guids >>)
 
             CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
 
@@ -278,7 +301,6 @@ commands:
 
             for i in "${!STUDY_KEYS[@]}"; do
               STUDY_KEY=${STUDY_KEYS[$i]}
-              STUDY_GUID=${STUDY_GUIDS[$i]}
 
               NG_PROJECT_NAME="ddp-$STUDY_KEY"
               CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
@@ -289,7 +311,6 @@ commands:
                                   \"branch\": \"<< pipeline.git.branch >>\",
                                   \"parameters\": {
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"study_guid\": \"$STUDY_GUID\",
                                       \"do-builds\": true
                                   }
                                 }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
@@ -339,7 +360,6 @@ jobs:
     steps:
       - app-build-and-deploy:
           study_key: << pipeline.parameters.study_key >>
-          study_guid: << pipeline.parameters.study_guid >>
           skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
@@ -349,9 +369,7 @@ jobs:
       - checkout
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
-          study_keys: "osteo brain angio mbc"
-          study_guids: "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
-
+          study_keys: *study_keys
 
   conditionally-launch-build-and-store-all-job:
     executor:
