@@ -413,62 +413,6 @@ jobs:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
 
-  osteo-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build:
-          study_key: osteo
-
-  brain-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build:
-          study_key: brain
-
-  angio-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build:
-          study_key: angio
-
-  mbc-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build:
-          study_key: mbc
-
-  osteo-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          study_key: osteo
-
-  angio-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          study_key: angio
-
-  brain-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          study_key: brain
-
-  mbc-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          study_key: mbc
-
 parameters:
   study_key:
     type: string
@@ -549,11 +493,15 @@ workflows:
               only:
                 - develop
     jobs:
-      - osteo-build-and-deploy:
+      - build-and-deploy-job:
           name: osteo-nightly
-      - angio-build-and-deploy:
+          study_key: osteo
+      - build-and-deploy-job:
           name: angio-nightly
-      - brain-build-and-deploy:
+          study_key: angio
+      - build-and-deploy-job:
           name: brain-nightly
-      - mbc-build-and-deploy:
+          study_key: brain
+      - build-and-deploy-job:
           name: mbc-nightly
+          study_key: mbc
