@@ -7,6 +7,13 @@ references:
                 "osteo brain angio mbc"
   study_guids: &study_guids
                 "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+#  deploy_branch_filters: &deploy_branch_filters
+#    filters:
+#      branches:
+#        only:
+#          - test
+#          - staging
+#          - production
 
 # Container for all the builds
 executors:
@@ -63,7 +70,12 @@ commands:
               test)
                 DEPLOY_ENV=test
               ;;
+              # @todo cleanup whendone
               trigger-build-deploy)
+                DEPLOY_ENV=dev
+              ;;
+              ;;
+              deleteme*)
                 DEPLOY_ENV=dev
               ;;
               staging)
@@ -85,8 +97,6 @@ commands:
     description: Deploy archived build to GAE
     parameters:
       study_key:
-        type: string
-      study_guid:
         type: string
     steps:
       - checkout:
@@ -116,16 +126,12 @@ commands:
             ls -l $OUTPUT_DIR
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
-          study_guid: << parameters.study_guid >>
 
   deploy-exploded-build:
     description: Deploy files to GAE
     parameters:
       study_key:
         type: string
-      study_guid:
-        type: string
-        default: UNKNOWN
     steps:
       - set-deployment-environment
       - run:
@@ -399,61 +405,57 @@ jobs:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build: &osteo-params
+      - deploy-stored-build:
           study_key: osteo
-          study_guid: CMI-OSTEO
 
   brain-deploy-only:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build: &brain-params
+      - deploy-stored-build:
           study_key: brain
-          study_guid: cmi-brain
 
   angio-deploy-only:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build: &angio-params
+      - deploy-stored-build:
           study_key: angio
-          study_guid: ANGIO
 
   mbc-deploy-only:
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build: &mbc-params
+      - deploy-stored-build:
           study_key: mbc
-          study_guid: cmi-mbc
 
   osteo-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          <<: *osteo-params
+          study_key: osteo
 
   angio-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          <<: *angio-params
+          study_key: angio
 
   brain-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          <<: *brain-params
+          study_key: brain
 
   mbc-build-and-deploy:
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          <<: *mbc-params
+          study_key: mbc
 
 parameters:
   study_key:
@@ -504,19 +506,24 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - osteo-deploy-only: &deploy-filters
+      - deploy-stored-build: &deploy_branch_filters
           filters:
             branches:
               only:
                 - test
                 - staging
                 - production
-      - brain-deploy-only:
-          <<: *deploy-filters
-      - mbc-deploy-only:
-          <<: *deploy-filters
-      - angio-deploy-only:
-          <<: *deploy-filters
+          study_key: osteo
+
+      - deploy-stored-build:
+          <<: *deploy_branch_filters
+          study_key: brain
+      - deploy-stored-build:
+          <<: *deploy_branch_filters
+          study_key: mbc
+      - deploy-stored-build:
+          <<: *deploy_branch_filters
+          study_key: angio
 
   nightly:
     triggers:
