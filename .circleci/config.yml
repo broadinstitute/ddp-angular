@@ -414,7 +414,7 @@ workflows:
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-launch-build-and-deploy-all-job: &build-and-deploy-filters
+      - conditionally-launch-build-and-deploy-all-job:
           filters:
             branches:
               only:
@@ -424,7 +424,6 @@ workflows:
     when: << pipeline.parameters.do-builds >>
     jobs:
       - build-and-deploy-job:
-          <<: *build-and-deploy-filters
           study_key: << pipeline.parameters.study_key >>
 
   launch-all-app-builds-workflow:
