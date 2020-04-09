@@ -477,6 +477,7 @@ workflows:
             branches:
               only:
                 - develop
+                - trigger-build-deploy
 
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
@@ -525,7 +526,6 @@ workflows:
             branches:
               only:
                 - develop
-                - trigger-build-deploy
     jobs:
       - osteo-build-and-deploy:
           name: osteo-nightly
