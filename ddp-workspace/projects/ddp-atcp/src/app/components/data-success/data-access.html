@@ -1,0 +1,369 @@
+<div class="wizard-page">
+  <app-header></app-header>
+  <div class="wizard">
+    <ul class="progressBar nav nav-pills" [ngClass]="{submitted : form.submitted}">
+      <div class="progressBarLine"></div>
+      <li class="item"
+          *ngFor="let empty of countTabs; let i = index;"
+          (click)="setActiveTab($event, i)"
+          [ngClass]="{'active' : activeTab >= i, 'has-errors': !displayDontHaveErrors(i )}">
+        <a href="#" class="itemDot"></a>
+      </li>
+    </ul>
+  </div>
+  <form class="content" #form="ngForm" (ngSubmit)="submit(form)" [ngClass]="{submitted : form.submitted}">
+    <div [ngClass]="{'active' : activeTab === 0}">
+      <h2 translate>DataAccess.Header.Title</h2>
+      <p translate>DataAccess.Header.Paragraph1</p>
+      <p translate>DataAccess.Header.Paragraph2</p>
+      <p translate>DataAccess.Header.Paragraph3</p>
+      <p translate>DataAccess.Header.Paragraph4</p>
+      <p translate>DataAccess.Header.Paragraph5</p>
+      <hr>
+    </div>
+    <div [ngClass]="{'active' : activeTab === 1 }">
+      <h2 translate>DataAccess.ResearcherForm.Title</h2>
+      <div>
+        <div class="form-group">
+          <label for="name" translate>DataAccess.ResearcherForm.Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 required
+                 name="data_access_request[researcher_name]"
+                 [(ngModel)]="name">
+          <span class="error" *ngIf="form.submitted && !name">
+            Researcher name cannot be empty.
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="email" translate>DataAccess.ResearcherForm.Email</label>
+          <input type="text"
+                 class="form-control"
+                 id="email"
+                 name="data_access_request[researcher_email]"
+                 required
+                 [(ngModel)]="email">
+          <span class="error" *ngIf="form.submitted && !email">
+            Researcher email cannot be empty.
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="phone" translate>DataAccess.ResearcherForm.Phone</label>
+          <input type="text" class="form-control" id="phone">
+        </div>
+        <p><b translate>DataAccess.ResearcherForm.Attachment</b></p>
+        <input type="file" name="data_access_request[researcher_biosketch]"
+               name="data_access_request[researcher_phone]">
+      </div>
+      <hr>
+    </div>
+    <div [ngClass]="{'active organization' : activeTab === 2 }">
+      <h2 translate>DataAccess.OrganizationForm.Title</h2>
+      <div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="org-name" translate>DataAccess.OrganizationForm.Name</label>
+              <input type="text"
+                     class="form-control"
+                     id="org-name"
+                     name="data_access_request[org_name]"
+                     required
+                     [(ngModel)]="orgname">
+              <span class="error" *ngIf="form.submitted && !orgname">
+            Org name cannot be empty.
+          </span>
+            </div>
+            <div class="form-group">
+              <label for="department" translate>DataAccess.OrganizationForm.Department</label>
+              <input type="text" class="form-control" id="department" name="data_access_request[org_dept]">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="address" translate>DataAccess.OrganizationForm.Address1</label>
+              <input type="text"
+                     class="form-control"
+                     id="address"
+                     name="data_access_request[org_address_1]"
+                     required
+                     [(ngModel)]="address1">
+              <span class="error" *ngIf="form.submitted && !address1">
+            Org address 1 cannot be empty.
+          </span>
+            </div>
+            <div class="form-group">
+              <label for="address2" translate>DataAccess.OrganizationForm.Address2</label>
+              <input type="text" class="form-control" id="address2" name="data_access_request[org_address_2]">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="city" translate>DataAccess.OrganizationForm.City</label>
+              <input type="text"
+                     class="form-control"
+                     id="city"
+                     name="data_access_request[org_city]"
+                     required
+                     [(ngModel)]="city">
+              <span class="error" *ngIf="form.submitted && !city">
+            Org city cannot be empty.
+          </span>
+            </div>
+            <div class="form-group">
+              <label for="state" translate>DataAccess.OrganizationForm.State</label>
+              <input type="text" class="form-control" id="state" name="data_access_request[org_state]">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="country" translate>DataAccess.OrganizationForm.Country</label>
+              <input type="text"
+                     class="form-control"
+                     id="country"
+                     name="data_access_request[org_country]"
+                     required
+                     [(ngModel)]="country">
+              <span class="error" *ngIf="form.submitted && !country">
+            Org country cannot be empty.
+          </span>
+            </div>
+            <div class="form-group">
+              <label for="zip" translate>DataAccess.OrganizationForm.Zip</label>
+              <input type="text"
+                     class="form-control"
+                     id="zip"
+                     name="data_access_request[org_zip]"
+                     required
+                     [(ngModel)]="zip">
+              <span class="error" *ngIf="form.submitted && !zip">
+            Org zip cannot be empty.
+          </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div [ngClass]="{'active research' : activeTab === 3 }">
+      <h2 translate>DataAccess.ResearchProject.Title</h2>
+      <div>
+        <p><b translate>DataAccess.ResearchProject.Article1.Title</b></p>
+        <textarea cols="10"
+                  rows="10"
+                  class="form-control title"
+                  name="data_access_request[project_description]"
+                  required
+                  [(ngModel)]="description"></textarea>
+        <span class="error" *ngIf="form.submitted && !description">
+            Org zip cannot be empty.
+        </span>
+        <p translate>DataAccess.ResearchProject.Article1.Paragraph</p><br>
+        <p><b translate>DataAccess.ResearchProject.Article2.Title</b></p>
+        <textarea cols="30" rows="10" class="form-control"
+                  name="data_access_request[collaborators]"></textarea>
+        <p translate>DataAccess.ResearchProject.Article2.Paragraph</p><br>
+        <p><b translate>DataAccess.ResearchProject.Article3.Title</b></p>
+        <textarea cols="30"
+                  rows="10"
+                  class="form-control"
+                  name="data_access_request[research_use]"
+                  required
+                  [(ngModel)]="use"></textarea>
+        <span class="error" *ngIf="form.submitted && !use">
+          Research use cannot be empty.
+        </span>
+        <p translate>DataAccess.ResearchProject.Article3.Paragraph</p>
+      </div>
+      <hr>
+    </div>
+    <div [ngClass]="{'active type-research' : activeTab === 4 }">
+      <h2 translate>DataAccess.TypeResearch.Title</h2>
+      <div>
+        <div>
+          <p translate>DataAccess.TypeResearch.SubTitle</p>
+          <div class="checkbox">
+            <input name="data_access_request[disease_study]" type="hidden" value="0">
+            <input type="checkbox" value="1"
+                   name="data_access_request[disease_study]"
+                   id="data_access_request_disease_study">
+            <label class="FormItem-label" for="data_access_request_disease_study" translate>
+              DataAccess.TypeResearch.DisableStudy.Label
+            </label>
+            <p translate>DataAccess.TypeResearch.DisableStudy.Paragraph</p><br>
+          </div>
+        </div>
+        <div>
+          <div class="checkbox">
+            <input name="data_access_request[methods_development_study]" type="hidden" value="0">
+            <input type="checkbox"
+                   value="1"
+                   name="data_access_request[methods_development_study]"
+                   id="data_access_request_methods_development_study">
+            <label class="FormItem-label" for="data_access_request_methods_development_study" translate>
+              DataAccess.TypeResearch.MethodDevelopment.Label
+            </label>
+            <p translate>
+              DataAccess.TypeResearch.MethodDevelopment.Paragraph
+            </p>
+            <br>
+          </div>
+        </div>
+        <div>
+          <div class="checkbox">
+            <input name="data_access_request[controls_study]" type="hidden" value="0">
+            <input type="checkbox" value="1"
+                   name="data_access_request[controls_study]"
+                   id="data_access_request_controls_study">
+            <label class="FormItem-label" for="data_access_request_controls_study" translate>
+              DataAccess.TypeResearch.Controls.Label
+            </label>
+            <p translate>DataAccess.TypeResearch.Controls.Paragraph</p><br>
+          </div>
+        </div>
+        <div>
+          <div class="checkbox">
+            <input name="data_access_request[variation_study]" type="hidden" value="0">
+            <input type="checkbox" value="1"
+                   name="data_access_request[variation_study]"
+                   id="data_access_request_variation_study">
+            <label class="FormItem-label" for="data_access_request_variation_study" translate>
+              DataAccess.TypeResearch.Population.Label
+            </label>
+            <p translate>DataAccess.TypeResearch.Population.Paragraph</p><br>
+          </div>
+        </div>
+        <div>
+          <div class="checkbox">
+            <input name="data_access_request[other_study]" type="hidden" value="0">
+            <input type="checkbox" value="1"
+                   name="data_access_request[other_study]"
+                   id="data_access_request_other_study">
+            <label class="FormItem-label" for="data_access_request_other_study" translate>
+              DataAccess.TypeResearch.Other.Label
+            </label>
+          </div>
+          <div>
+            <div>
+              <label class="FormItem-label" for="data_access_request_other_study_text" translate>
+                DataAccess.TypeResearch.Describe.Label
+              </label>
+              <textarea class="form-control" name="data_access_request[other_study_text]"
+                        id="data_access_request_other_study_text"></textarea>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{'active dataset' : activeTab === 5 }">
+      <h2 translate>DataAccess.Dataset.Title</h2>
+      <div>
+        <p translate>DataAccess.Dataset.SubTitle1</p>
+        <div class="checkbox">
+          <input name="data_access_request[survey_data_requested]" type="hidden" value="0">
+          <input type="checkbox"
+                 value="1"
+                 name="data_access_request[survey_data_requested]"
+                 id="data_access_request_survey_data_requested">
+          <label class="FormItem-label" for="data_access_request_survey_data_requested" translate>
+            DataAccess.Dataset.Controls.Survey.Label
+          </label>
+        </div>
+        <div class="checkbox">
+          <input name="data_access_request[genomic_data_requested]" type="hidden" value="0">
+          <input type="checkbox"
+                 value="1"
+                 name="data_access_request[genomic_data_requested]"
+                 id="data_access_request_genomic_data_requested">
+          <label class="FormItem-label" for="data_access_request_genomic_data_requested" translate>
+            DataAccess.Dataset.Controls.Genomic.Label
+          </label>
+        </div>
+        <p><b translate>DataAccess.Dataset.SubTitle2</b></p>
+        <textarea rows="4"
+                  class="form-control"
+                  name="data_access_request[specific_request]"
+                  id="data_access_request_specific_request"></textarea>
+        <br>
+        <p><b translate>DataAccess.Dataset.Text1</b></p>
+        <textarea rows="4"
+                  class="form-control"
+                  name="data_access_request[a_t_disease_areas]"
+                  id="data_access_request_a_t_disease_areas"></textarea>
+        <hr>
+      </div>
+    </div>
+    <div [ngClass]="{'active assurances' : activeTab === 6 }">
+      <h2 translate>DataAccess.Assurances.Title</h2>
+      <div class="clear">
+        <p translate>DataAccess.Assurances.Paragraph1</p>
+        <ul>
+          <li *ngFor="let assurance of assurances" translate>
+            {{ assurance }}
+          </li>
+        </ul>
+        <div>
+          <label for="data_access_request_researcher_signature" translate>
+            DataAccess.Assurances.Controls.ApplyingSignature.Label
+          </label>
+          <input class="form-control FormItem-input"
+                 type="text"
+                 name="data_access_request[researcher_signature]"
+                 id="data_access_request_researcher_signature"
+                 required
+                 [(ngModel)]="sign">
+          <span class="error" *ngIf="form.submitted && !sign">
+            Researcher signature cannot be empty.
+        </span>
+        </div>
+        <div>
+          <label for="data_access_request_signature_date" translate>
+            DataAccess.Assurances.Controls.Date.Label
+          </label>
+          <input class="form-control"
+                 readonly="readonly"
+                 type="text"
+                 value="2020-03-27"
+                 name="data_access_request[signature_date]"
+                 id="data_access_request_signature_date">
+        </div>
+      </div>
+      <hr>
+    </div>
+  </form>
+  <div class="navigation">
+    <a href="#"
+       class="BtnBordered green"
+       *ngIf="activeTab > 0"
+       (click)="setActiveTab($event, activeTab - 1)">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span translate>Common.Navigation.Previous</span>
+    </a>
+    <a href="#"
+       class="BtnBordered green"
+       *ngIf="activeTab !== countTabs.length - 1"
+       (click)="setActiveTab($event, activeTab + 1)">
+      <span translate>Common.Navigation.Next</span>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    <button
+      type="submit"
+      class="BtnBordered green"
+      (click)="submit(form)"
+      [disabled]="form.invalid && form.submitted"
+      *ngIf="activeTab === countTabs.length - 1"
+      translate
+    >
+      Common.Navigation.Submit
+    </button>
+  </div>
+  <app-footer></app-footer>
+</div>

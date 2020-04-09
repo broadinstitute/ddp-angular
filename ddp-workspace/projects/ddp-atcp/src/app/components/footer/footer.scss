@@ -1,0 +1,18 @@
+@import '../../styles/app-theme';
+.footer {
+  text-align: center;
+  @media (min-width: 627px) {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+  }
+  > div {
+    padding: 20px 0;
+    display: inline-block;
+    text-align: left;
+  }
+  > a {
+    padding: 20px 0;
+    display: block;
+  }
+}

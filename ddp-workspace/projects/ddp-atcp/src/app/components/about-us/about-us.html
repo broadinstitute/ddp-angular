@@ -1,0 +1,45 @@
+<app-header></app-header>
+<section class="about-us">
+  <h1>About Us</h1>
+  <div>
+    <p>
+      <b translate>AboutPage.PlatformName</b>
+      <span translate>AboutPage.Text.First</span>
+    </p>
+    <p translate>AboutPage.Text.Second</p>
+    <p translate>AboutPage.Text.Third</p>
+    <hr>
+  </div>
+  <div>
+    <h2 translate>AboutPage.FamilyOversight.Header</h2>
+    <p translate>AboutPage.FamilyOversight.Text</p>
+    <ul>
+      <li *ngFor="let hospital of hospitals">
+        <span>{{ hospital.name }}</span> (<i>{{ hospital.country }}</i>)</li>
+    </ul>
+    <hr>
+  </div>
+  <div>
+    <h2 translate>AboutPage.ScientificBoard.Header</h2>
+    <p translate>AboutPage.ScientificBoard.Text</p>
+    <ul>
+      <li *ngFor="let doctor of doctors">
+        <span>{{ doctor.name }}</span>,
+        <span>{{ doctor.rank }}</span> -
+        <i>{{ doctor.hospital }}</i>
+      </li>
+    </ul>
+    <hr>
+  </div>
+  <div>
+    <h2 translate>AboutPage.DataAccess.Header</h2>
+    <p translate>AboutPage.DataAccess.Text</p>
+    <hr>
+  </div>
+  <div>
+    <h2 translate>AboutPage.FinancialSupport.Header</h2>
+    <p translate>AboutPage.FinancialSupport.Text.First</p>
+    <p translate>AboutPage.FinancialSupport.Text.Second</p>
+  </div>
+</section>
+<app-footer></app-footer>

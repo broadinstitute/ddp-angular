@@ -1,0 +1,37 @@
+@import "../../styles/app-theme";
+.about-us {
+  margin: 40px 25px 0 25px;
+  @media (min-width: 801px) {
+    margin: 40px 40px 0 40px;
+  }
+  @media (min-width: 1280px) {
+    margin: 40px 50px 0 50px;
+  }
+  div {
+    @media (min-width: 768px) {
+      max-width: 83.33333333%;
+    }
+    @media (min-width: 1200px) {
+      max-width: 58.33333333%;
+    }
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 27px 0;
+    color: #4274BC;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  ul {
+    padding-left: 20px;
+    li {
+      padding-bottom: 5px;
+    }
+  }
+}

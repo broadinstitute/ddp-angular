@@ -1,0 +1,10 @@
+export const Dashboard = 'dashboard';
+export const ActivityId = 'activity/:id';
+export const AboutUs = 'about-us';
+export const Error = 'error';
+export const Password = 'password';
+export const JoinUs = 'join-us';
+export const Welcome = '';
+export const AboutInitiative = 'about_initiative';
+export const DataAccess = 'data_access';
+export const Statistics = 'statistics';

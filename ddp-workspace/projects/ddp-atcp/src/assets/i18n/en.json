@@ -1,0 +1,569 @@
+{
+  "Common": {
+    "Navigation": {
+      "Language": "Language",
+      "ForResearchers": "For Researchers",
+      "DataAccessRequest": "Data Access Request",
+      "LearnMore": "Learn More",
+      "AboutUs": "About Us",
+      "AboutThisInitiative": "About this Initiative",
+      "JoinUs": "Join Us",
+      "SignIn": "Sign In",
+      "Previous": "Previous",
+      "Next": "Next",
+      "MyAccount": "My Account",
+      "YourParticipants": "Your Participants",
+      "Submit": "Submit"
+    },
+    "Buttons": {
+      "Submit": {
+        "Title": "Submit"
+      }
+    }
+  },
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
+    }
+  },
+  "DataAccess": {
+    "Header": {
+      "Title": "Data Access Request",
+      "Paragraph1": "The Global A-T Family Data Platform is a patient-driven effort overseen by A-T families and experts worldwide through which health information, genetic and potentially other types of data about people with A-T can be shared with researchers. This platform will enable researchers to access important patient data from around the world quickly, securely and efficiently, hopefully leading to new discoveries.",
+      "Paragraph2": "Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
+      "Paragraph3": "Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
+      "Paragraph4": "Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
+      "Paragraph5": "Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred."
+    },
+    "ResearcherForm": {
+      "Title": "Researcher Information",
+      "Name": "Name",
+      "Email": "Email",
+      "Phone": "Phone",
+      "Attachment": "Please attach a CV and/or biographical sketch (PDF files only, 2MB max)"
+    },
+    "OrganizationForm": {
+      "Title": "Organization Information",
+      "Name": "Organization Name",
+      "Department": "Department",
+      "Address1": "Address 1",
+      "Address2": "Address 2",
+      "City": "City/Town",
+      "State": "State/Province",
+      "Country": "Country",
+      "Zip": "Zip/Postal Code"
+    },
+    "ResearchProject": {
+      "Title": "Research Project Overview",
+      "Article1": {
+        "Title": "Descriptive Title of Project",
+        "Paragraph": "Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title."
+      },
+      "Article2": {
+        "Title": "Names and Institutions of Collaborators",
+        "Paragraph": "Collaborators at different institutions from the PI must complete a separate DAR form."
+      },
+      "Article3": {
+        "Title": "Research Use Statement",
+        "Paragraph": "Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them."
+      }
+    },
+    "TypeResearch": {
+      "Title": "Type of Research",
+      "SubTitle": "Select all applicable options.",
+
+      "DisableStudy": {
+        "Label": "Disease study",
+        "Paragraph": "The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
+      },
+      "MethodDevelopment": {
+        "Label": "Methods development and validation studies",
+        "Paragraph": "The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
+      },
+      "Controls": {
+        "Label": "Controls",
+        "Paragraph": "The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
+      },
+      "Population": {
+        "Label": "Population structure or normal variation studies",
+        "Paragraph": "The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
+      },
+      "Other": {
+        "Label": "Other"
+      },
+      "Describe": {
+        "Label": "Please describe"
+      }
+    },
+    "Dataset": {
+      "Title": "Dataset(s) requested",
+      "SubTitle1": "Select all applicable options.",
+      "SubTitle2": "Specific Requests",
+      "Text1": "Please state the disease area(s), if any, that this study focuses on.",
+      "Controls": {
+        "Survey": {
+          "Label": "Clinical Survey Data"
+        },
+        "Genomic": {
+          "Label": "Genomic Data"
+        }
+      }
+    },
+    "Assurances": {
+      "Title": "Assurances Statement",
+      "Paragraph1": "I agree to the following assurances:",
+      "AssuranceList": {
+        "Item0": "Data will only be used for approved research.",
+        "Item1": "Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
+        "Item2": "There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
+        "Item3": "All applicable laws and local institutional policies will be followed.",
+        "Item4": "Data will not be sold or shared with third parties.",
+        "Item5": "Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
+        "Item6": "Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
+        "Item7": "The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
+        "Item8": "Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
+        "Item9": "These assurances will be agreed to annually."
+      },
+      "Controls": {
+        "ApplyingSignature": {
+          "Label": "Signature of Applying Researcher"
+        },
+        "Date": {
+          "Label": "Date"
+        }
+      }
+    }
+  },
+  "AboutPage": {
+    "PageTitle": "About Us",
+    "PlatformName": "The Global A-T Family Data Platform",
+    "FamilyOversight": {
+      "Header": "Family Oversight Board",
+      "Text": "Our platform’s mission is to enable researchers to access important patient data from around the world quickly, securely and efficiently, hopefully leading to new discoveries. To ensure that our mission and activities are always aligned with what is best for people with A-T around the world, we have established an international Family Oversight Board. Currently, the following family members of A-T patients (listed in alphabetical order) have kindly agreed to serve on this board:"
+    },
+    "ScientificBoard": {
+      "Header": "Scientific and Medical Advisory Board",
+      "Text": "In addition to ensuring that the platform’s activities promote and enable data sharing while protecting people with A-T, the Family Advisory Board has selected and invited respected scientists and clinicians to join a Scientific and Medical Advisory Board which will provide expert advice to the Family Advisory Board. It is hoped that the members of this advisory board will not only include experts in the clinical presentation and underlying biology of ataxia-telangiectasia but also experts in the analysis of large datasets such as genome sequence data, biostatistics, application programming interfaces, data security, regulatory issues, medical ethics, legal matters, and surveying methodologies. Currently, the following experts (listed alphabetically) have generously offered to serve on this advisory board:"
+    },
+    "FinancialSupport": {
+      "Header": "Financial Support of the Global A-T Family Data Platform",
+      "Text": {
+        "First": "Currently, the development and operation of the Global A-T Family Data Platform is being financially supported only by the Ataxia-Telangiectasia Children’s Project, Inc., better known as the A-­T Children’s Project, which is a non­profit organization based in Coconut Creek, Florida, USA, that raises funds to support and coordinate biomedical research projects, scientific conferences and clinical centers aimed at finding life improving therapies for A-T.",
+        "Second": "Although the A-T Children’s Project initiated this project, it is hoped that A-T organizations, clinicians, and families from around the world will support this endeavor by encouraging family participation, helping to oversee access to the data, and when possible, contributing financial support."
+      }
+    },
+    "DataAccess": {
+      "Header": "Data Access Committee",
+      "Text": "The information on the Global A-T Family Data Platform can only be accessed by qualified investigators who have been granted permission by the Data Access Committee. This committee is comprised of A-T family representatives recruited for our Family Oversight Board who in turn recruit experts for our Scientific and Medical Advisory Board – ensuring that each researcher’s project is consistent with the goals of this initiative. The Family Oversight Board will oversee the Scientific and Medical Advisory Board."
+    },
+    "Text": {
+      "First": "is a patient-driven effort overseen by A-T families and experts worldwide through which health, genetic and potentially other types of information about people with A-T can be shared with researchers.",
+      "Second": "We are selecting strategic partners for various components of this initiative, one of which is the Broad Institute of MIT and Harvard, who will be providing the genome sequencing service for us. We are also partnering with staff working at the A-T Children’s Project who have been trained to answer questions about this platform and to send DNA testing kits to families who request them.",
+      "Third": "We expect that in the future, the Global A-T Family Data Platform will partner with additional organizations to collect other types of biological and lifestyle data, such as using wearable technologies to capture information about how a person with A-T moves."
+    },
+    "Hospitals": [
+      {
+        "name": "Cedric Anchisi",
+        "country": "France"
+      },
+      {
+        "name": "Orly Dror-Azuriel",
+        "country": "Israel"
+      },
+      {
+        "name": "Natalie Elkheir",
+        "country": "Australia"
+      },
+      {
+        "name": "Rianne Kranendonk",
+        "country": "Netherlands"
+      },
+      {
+        "name": "Maria Angelica Lodovici",
+        "country": "Brazil"
+      },
+      {
+        "name": "Brad Margus",
+        "country": "United States"
+      },
+      {
+        "name": "Emily Read",
+        "country": "England"
+      },
+      {
+        "name": "Manoj Kumar Srivastwa",
+        "country": "India"
+      },
+      {
+        "name": "Conrad Van Hierden ",
+        "country": "Canada"
+      },
+      {
+        "name": "Paxti Villen",
+        "country": "Spain"
+      }, {
+        "name": "Lian Yarlett",
+        "country": "England"
+      }
+    ],
+    "Doctors": [
+      {
+        "name": "Martin Bobrow",
+        "rank": "MD",
+        "hospital": "Emeritus Professor of Medical Genetics – University of Cambridge, Cambridge, United Kingdom and Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, UK"
+      },
+      {
+        "name": "Luciana Chessa",
+        "rank": "MD, PhD",
+        "hospital": "Professor of Medical Genetics, Sapienza University, Roma, Italy"
+      },
+      {
+        "name": "David Coman",
+        "rank": "MD",
+        "hospital": "Medical Director of Paediatrics, Wesley Hospital, Queensland, Australia"
+      },
+      {
+        "name": "Beatriz Tavares Costa Carvalho",
+        "rank": "MD",
+        "hospital": "Associate Professor, Federal University, São Paulo, Brazil"
+      },
+      {
+        "name": "Thomas Crawford",
+        "rank": "MD",
+        "hospital": "Associate Professor of Pediatrics and Neurology, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+      },
+      {
+        "name": "David Glazer",
+        "rank": "",
+        "hospital": "Director, Google Genomics, Mountain View, CA, USA"
+      },
+      {
+        "name": "Setsuko Hasegawa",
+        "rank": "MD",
+        "hospital": "Pediatrics and Developmental Biology, Tokyo Medical and Dental University, Japan"
+      },
+      {
+        "name": "Lutz Krause",
+        "rank": "PhD",
+        "hospital": "Associate Professor, The University of Queensland, Queensland, Australia"
+      },
+      {
+        "name": "Martin Lavin",
+        "rank": "PhD",
+        "hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australia"
+      },
+      {
+        "name": "Howard Lederman",
+        "rank": "MD, PhD",
+        "hospital": "Professor of Pediatrics, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+      },
+      {
+        "name": "Nizar Mahlaoui",
+        "rank": "MD, MSc, MPH",
+        "hospital": "Pediatric Immuno-Hematology, Co-coordinator of The French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, France"
+      },
+      {
+        "name": "Andreea Nissenkorn",
+        "rank": "MD",
+        "hospital": "Pediatric Neurologist, Sheba Medical Center, Ramat Gan, Israel"
+      },
+      {
+        "name": "Anthony Philippakis",
+        "rank": "MD, PhD",
+        "hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA"
+      },
+      {
+        "name": "Agata Polizzi",
+        "rank": "MD, PhD",
+        "hospital": "National Centre for Rare Diseases, Rome, Italy"
+      },
+      {
+        "name": "Cynthia Rothblum-Oviatt",
+        "rank": "PhD",
+        "hospital": "Science Coordinator, A-T Children’s Project, Coconut Creek, FL, USA"
+      },
+      {
+        "name": "Yosef Shiloh",
+        "rank": "PhD",
+        "hospital": "Professor of Human Genetics, Tel Aviv University, Ramat Aviv, Israel"
+      },
+      {
+        "name": "Grant Stewart",
+        "rank": "PhD",
+        "hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
+      },
+      {
+        "name": "Dominique Stoppa-Lyonnet",
+        "rank": "MD, PhD",
+        "hospital": "Professor of Genetics, Paris Descartes University and Head of the Genetics Department, Institut Curie, Paris, France"
+      },
+      {
+        "name": "Masatoshi Takagi",
+        "rank": "MD, PhD",
+        "hospital": "Associate Professor, Tokyo Medical and Dental University, Tokyo, Japan"
+      },
+      {
+        "name": "Anne-Marie Tassé",
+        "rank": "PhD",
+        "hospital": "Executive Director, Public Population Project in Genomics and Society, Montreal, Canada"
+      },
+      {
+        "name": "A. Malcolm Taylor",
+        "rank": "PhD",
+        "hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
+      },
+      {
+        "name": "William Whitehouse",
+        "rank": "MD",
+        "hospital": "Clinical Associate Professor, University of Nottingham, Nottingham, UK"
+      },
+      {
+        "name": "Stefan Zielen",
+        "rank": "MD, PhD",
+        "hospital": "Children’s Hospital of Johann Wolfgang Goethe University, Frankfurt, Germany"
+      }
+    ]
+  },
+  "HomePage": {
+    "IntroductionSection": {
+      "Title": "Help transform our understanding of ataxia-telangiectasia (A-T).",
+      "Text": {
+        "First": "If you or your child has A-T, you may be able to help researchers make new discoveries and accelerate the development of therapies.",
+        "Second": "Each patient's genetic information and medical condition are unique and may be the key for the development of treatments. Share this information, send us a saliva sample for genome sequencing and join us on a journey to learn more about A-T."
+      }
+    },
+    "SecondSection": {
+      "Title": "Join us on this quest and stay informed about the latest findings."
+    },
+    "Participate": {
+      "Steps": {
+        "One": {
+          "H2": "How can you participate:",
+          "H3": "1. Create an Account",
+          "Text": "Click on \"Join Us\" and complete a brief form to enroll yourself or your child with A-T in our data platform."
+        },
+        "Second": {
+          "H3": "2. Give us permission",
+          "Text": "During the enrollment process, we will ask you to complete a consent form giving permission to share\n          the data you provide us with researchers in a de-identified manner.\n          If you choose, you may also give us permission to:",
+          "Ul": [
+            "share a saliva sample that each A-T patient can send us for genome sequencing",
+            "obtain the A-T patient’s medical records from their physicians and share them with researchers",
+            "share medical records you have uploaded yourself with researchers",
+            "contact you in the future about follow-up research studies"
+          ]
+        },
+        "Third": {
+          "H3": "3. Share your insight and saliva sample",
+          "Text": "Complete an online questionnaire about how A-T affects you or your child. We will also send you a saliva\n          sample collection kit for genome sequencing. You will also be able to periodically update the records of\n          medical history and experiences you shared with the platform."
+        },
+        "Fourth": {
+          "H3": "4. Let’s learn together",
+          "Text": {
+            "First": "We will provide you with updates about the latest discoveries made possible by your participation.",
+            "Second": "And if you agree, we may contact you in the future to ask more questions about your or your child’s\n          experiences and invite you to participate in additional future studies."
+          }
+        }
+      },
+      "Together": {
+        "H3": {
+          "First": "Together, we have the power to improve the health of children and young adults with A-T.",
+          "Second": "Get started now!"
+        }
+      }
+    }
+  },
+  "WorkflowProgress": {
+    "AboutYou": "About You",
+    "Consent": "Consent Form",
+    "MedicalRelease": "Medical Release",
+    "Questionnaire": "Questionnaire"
+  },
+  "SDK": {
+    "SubmitButton": "Submit",
+    "CloseButton": "Close",
+    "AddButton": "ADD",
+    "CancelButton": "CANCEL",
+    "NextButton": "Next",
+    "PreviousButton": "Back",
+    "SavingButton": "Saving",
+    "EditButton": "View/Edit",
+    "ReviewButton": "View",
+    "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+    "SaveError": "We're sorry but an error occurred",
+    "ExportStudy": {
+      "Export": "EXPORT"
+    },
+    "ListStudies": {
+      "StudyName": "Study Name",
+      "ParticipantCount": "Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "Workspace Name",
+      "WorkspaceNamespace": "Workspace Namespace"
+    },
+    "Login": {
+      "Login": "LOG IN",
+      "Logout": "LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
+    },
+    "UserActivities": {
+      "ActivityName": "Form",
+      "Summary": "Summary",
+      "ActivityStatus": "Status",
+      "ActivityDate": "Created",
+      "ActivityActions": "Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "Governed participants",
+      "ParticipantPlaceholder": "Participant",
+      "ParticipantsList": "Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "Profile",
+      "ViewAs": "View As",
+      "ManageParticipants": "Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "User preferences",
+      "UserPreferencesGender": "Sex",
+      "UserPreferencesLocale": "Preferred language"
+    },
+    "Dashboard": {
+      "Title": "My Console",
+      "Text": ""
+    },
+    "DatePicker": {
+      "Day": "Choose day...",
+      "Month": "Choose month...",
+      "Year": "Choose year...",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "UserMenu": {
+      "DashboardButton": "Dashboard",
+      "SignOutButton": "Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "characters remaining",
+      "SingularForm": "character remaining"
+    },
+    "Title": {
+      "Default": "Osteosarcoma Project",
+      "Alert": "Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "Physician Name",
+        "Institution": "Institution",
+        "InstitutionAny": "Institution (if any)",
+        "City": "City",
+        "State": "State"
+      },
+      "PhysicianValidation": "Please fill out all required fields"
+    }
+  },
+  "Toolkit": {
+    "Dashboard": {
+      "Title": "Thank you for joining the Global A-T Family Data Platform!",
+      "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T."
+    },
+    "ErrorPage": {
+      "Title": "We're sorry, but an error occurred. Please try again later.",
+      "Text": "",
+      "DefaultText": {
+        "TextPt1": "Please contact the ",
+        "TextPt2": "if you continue to experience difficulties."
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password *",
+      "InputPlaceholder": "Password",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "PasswordRequiredError": "Password is required"
+    },
+    "StayInformed": {
+      "Title": "Stay informed",
+      "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email"
+    },
+    "LovedOneThankYou": {
+      "Title": "Thank you!",
+      "ThankYou": "Thank you for taking the time to take the survey and share your Loved One’s experience with osteosarcoma.",
+      "StayInTouch": "We’ll stay in touch with you so that you can see the progress that we are making towards advancements in the understanding of osteosarcoma.",
+      "Contacts": {
+        "TextPt1": "We'd also like to hear from you if you have any additional thoughts you'd like to share — please feel free to email us at ",
+        "TextPt2": "or call us at"
+      },
+      "ThankYouAgain": "Thank you again for sharing with us and supporting the entire osteosarcoma community. If you’d like to help us reach patients or other community members, feel free to share the project. Together, we can move research forward for the osteosarcoma community."
+    },
+    "AgeUpThankYou": {
+      "Title": "Thank you!",
+      "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+      "EmailCollected": {
+        "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+        "TextPt2": "or",
+        "Button": "Go to Dashboard"
+      },
+      "ImageAlt": "Email sent"
+    },
+    "SessionExpired": {
+      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "Dialogs": {
+      "JoinMailingList": {
+        "Title": "Stay informed",
+        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "First Name *",
+            "Error": "First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "Last Name *",
+            "Error": "Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "Email address *",
+            "Error": "Please enter a valid email address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "Email confirmation *",
+            "Error": "Please enter a valid email address"
+          }
+        },
+        "CancelButton": "Cancel",
+        "SubmitButton": "Join",
+        "Required": "",
+        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "We're sorry, but an error has occurred."
+      },
+      "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue"
+      }
+    }
+  }
+}

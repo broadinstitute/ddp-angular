@@ -1,0 +1,7 @@
+@import '../../styles/app-theme.scss';
+@import '../../styles/common';
+
+.error-page {
+  @include common-static-page;
+  @include common-footer-down;
+}

@@ -1,0 +1,95 @@
+<div class="welcome-page">
+  <div class="main-screen">
+    <app-header></app-header>
+    <div class="first-display">
+      <div>
+        <h1 translate>
+          HomePage.IntroductionSection.Title
+        </h1>
+        <h2 translate>
+          HomePage.IntroductionSection.Text.First
+          <br> HomePage.IntroductionSection.Text.Second
+          <a
+            class="BtnBordered white"
+            [routerLink]="[RouterResource.JoinUs]"
+            translate>
+            Common.Navigation.JoinUs
+          </a>
+        </h2>
+      </div>
+      <img alt="Arrow"
+           src="/assets/images/atcp/white-arrow.svg"
+           class="reference-together"
+           (click)="scrollTo()">
+    </div>
+  </div>
+  <div class="second-display">
+    <h2 translate>HomePage.SecondSection.Title</h2>
+    <a
+      class="BtnBordered green"
+      [routerLink]="[RouterResource.JoinUs]"
+      translate>
+      Common.Navigation.JoinUs
+    </a>
+    <img alt="Arrow"
+         src="/assets/images/atcp/green-arrow.svg"
+         class="reference-together"
+         (click)="scrollTo()">
+  </div>
+  <div class="participate-display">
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step01-icon.svg" alt=""></div>
+      <div class="description">
+        <h2 translate>HomePage.Participate.Steps.One.H2</h2>
+        <h3 translate>HomePage.Participate.Steps.One.H3</h3>
+        <div translate>HomePage.Participate.Steps.One.Text</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step02-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Second.H3</h3>
+        <div translate>
+          HomePage.Participate.Steps.Second.Text
+          <ul>
+            <li *ngFor="let text of list">{{text}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step03-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Third.H3</h3>
+        <div translate>HomePage.Participate.Steps.Third.Text</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step04-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Fourth.H3</h3>
+        <div translate>
+          HomePage.Participate.Steps.Fourth.Text.First
+          <br>
+          HomePage.Participate.Steps.Fourth.Text.Second
+        </div>
+      </div>
+    </div>
+  </div>
+  <img alt="Arrow"
+       src="/assets/images/atcp/green-arrow.svg"
+       class="reference-together"
+       (click)="scrollTo()">
+  <div class="together-display" #together>
+    <h3 translate>
+      HomePage.Participate.Together.H3.First <br> HomePage.Participate.Together.H3.Second
+    </h3>
+    <a
+      class="BtnBordered green"
+      [routerLink]="[RouterResource.JoinUs]"
+      translate>
+      Common.Navigation.JoinUs
+    </a>
+  </div>
+</div>
+<app-footer></app-footer>

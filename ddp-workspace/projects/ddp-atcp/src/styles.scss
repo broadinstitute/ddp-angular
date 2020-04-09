@@ -1,0 +1,45 @@
+@import 'app/styles/app-theme';
+@import 'app/styles/common';
+@import 'app/styles/buttons';
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-size: 16px;
+  color: mat-color($app-theme, 200);
+  font-family: 'Lato', sans-serif;
+  min-width: 320px;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: mat-color($app-theme, 300);
+}
+
+a:focus {
+  text-decoration: underline;
+}
