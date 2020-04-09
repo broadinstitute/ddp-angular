@@ -401,6 +401,16 @@ jobs:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
 
+  deploy-stored-build-job:
+    parameters:
+      study_key:
+        type: string
+    executor:
+      name: commit-executor
+    steps:
+      - deploy-stored-build:
+          study_key: <<parameter.study_key>>
+
   osteo-deploy-only:
     executor:
       name: commit-executor
@@ -506,7 +516,7 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - deploy-stored-build: &deploy_branch_filters
+      - deploy-stored-build-job: &deploy_branch_filters
           filters:
             branches:
               only:
