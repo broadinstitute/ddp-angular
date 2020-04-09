@@ -107,11 +107,14 @@ COPY --from=dsdetoolbox /etc/consul-template/config/config.json /etc/consul-temp
 COPY --from=dsdetoolbox /usr/local/bin/vault /usr/local/bin/vault
 ENV VAULT_ADDR https://clotho.broadinstitute.org:8200
 
-RUN apk update
-RUN apk upgrade
-RUN apk add curl bash jq
-# Install ruby and ruby-bundler
-RUN apk add ruby ruby-bundler ruby-json
+RUN apk add --no-cache --virtual .build-deps \
+    curl \
+    bash \
+    jq \
+    ruby \
+    ruby-bundler \
+    ruby-json \
+&& apk del. build-deps
 
 # Setting up Angular CLI globally
 ENV ANGULAR_CLI @angular/cli@8.3.23
