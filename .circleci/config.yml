@@ -419,7 +419,6 @@ workflows:
             branches:
               only:
                 - develop
-                - trigger-build-deploy
 
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
