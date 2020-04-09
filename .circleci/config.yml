@@ -74,7 +74,6 @@ commands:
               trigger-build-deploy)
                 DEPLOY_ENV=dev
               ;;
-              ;;
               deleteme*)
                 DEPLOY_ENV=dev
               ;;
