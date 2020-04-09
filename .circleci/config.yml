@@ -363,11 +363,14 @@ commands:
 
 jobs:
   build-and-deploy-job:
+    parameters:
+      study_key:
+        type: string
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: << pipeline.parameters.study_key >>
+          study_key: << parameters.study_key >>
           skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
@@ -493,7 +496,9 @@ workflows:
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - build-and-deploy-job: *build-and-deploy-filters
+      - build-and-deploy-job:
+          <<: *build-and-deploy-filters
+          study_key: << pipeline.parameters.study_key >>
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
