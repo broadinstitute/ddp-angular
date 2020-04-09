@@ -68,8 +68,8 @@ commands:
                 DEPLOY_ENV=prod
               ;;
               *)
-                echo "Cannot map << pipeline.git.branch >> to a deployment environment"
-                exit 17
+                DEPLOY_ENV=dev
+                echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
