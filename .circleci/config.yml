@@ -525,6 +525,7 @@ workflows:
             branches:
               only:
                 - develop
+                - trigger-build-deploy
     jobs:
       - osteo-build-and-deploy:
           name: osteo-nightly
