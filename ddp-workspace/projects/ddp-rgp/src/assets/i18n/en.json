@@ -566,7 +566,8 @@
         "PasswordWrongError": "Incorrect password. Please try again.",
         "OtherError": "We're sorry, but an error has occurred.",
         "PasswordRequiredError": "Password is required",
-        "SubmitButton": "Submit"
+        "SubmitButton": "Submit",
+        "Placeholder": "Please enter a password to access the site "
     },
     "EligibilityPage": {
         "Title": "Eligibility Criteria",
