@@ -36,7 +36,7 @@ export class PasswordComponent implements OnInit {
 
     if (this.passwordForm.invalid) {
       Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
-      
+
       return;
     }
 
