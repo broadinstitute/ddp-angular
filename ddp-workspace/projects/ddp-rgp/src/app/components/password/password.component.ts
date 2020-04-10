@@ -10,8 +10,8 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./password.component.scss']
 })
 export class PasswordComponent implements OnInit {
-  passwordForm: FormGroup;
-  errorMessage = '';
+  public passwordForm: FormGroup;
+  public errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,10 +36,13 @@ export class PasswordComponent implements OnInit {
 
     if (this.passwordForm.invalid) {
       Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+      
       return;
     }
 
-    this.irbPassword.checkPassword(password).subscribe(
+    this.irbPassword.checkPassword(password).pipe(
+      take(1)
+    ).subscribe(
       response => {
         if (response) {
           this.router.navigateByUrl('');
