@@ -93,12 +93,12 @@ export class ActivityCompositeAnswer implements OnChanges {
                             this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown));
                     });
 
-                    const standardEmptyRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
+                    const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
                         this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
 
                     this.childQuestionBlocks = answeredQuestionBlocks.map((currentRow: ActivityQuestionBlock<any>[]) => {
-                        if (currentRow.length !== standardEmptyRow.length) {
-                            const additionalQuestions = standardEmptyRow.slice(currentRow.length);
+                        if (currentRow.length !== blankRow.length) {
+                            const additionalQuestions = blankRow.slice(currentRow.length);
                             currentRow.splice(currentRow.length, 0, ...additionalQuestions);
                         }
                         return currentRow;
