@@ -84,7 +84,7 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.childQuestionBlocks = [];
                     this.addBlankRow();
                 } else {
-                    const answeredQuestionBlocks: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
+                    const questionsRows: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
                         // assuming order of answers same as order of questions here.
                         // And adding braces and a return statement here fixes a bug that should not be happening
                         // Breaks when running the compiled version of SDK  but OK when including library via symlink
@@ -96,7 +96,7 @@ export class ActivityCompositeAnswer implements OnChanges {
                     const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
                         this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
 
-                    this.childQuestionBlocks = answeredQuestionBlocks.map((currentRow: ActivityQuestionBlock<any>[]) => {
+                    this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
                         if (currentRow.length !== blankRow.length) {
                             const blankQuestions = blankRow.slice(currentRow.length);
                             currentRow.push(...blankQuestions);
