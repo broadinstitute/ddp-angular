@@ -84,13 +84,24 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.childQuestionBlocks = [];
                     this.addBlankRow();
                 } else {
-                    this.childQuestionBlocks = newAnswers.map((rowOfAnswers: any[]) => {
+                    const answeredQuestionBlocks: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
                         // assuming order of answers same as order of questions here.
                         // And adding braces and a return statement here fixes a bug that should not be happening
                         // Breaks when running the compiled version of SDK  but OK when including library via symlink
                         // TODO investigate what is going on. Perhaps differences in TypeScript compiler target Javascript config?
-                        return rowOfAnswers.map((answerContainer: any, index: number) =>
+                        return rowOfAnswers.map((answerContainer: ActivityQuestionBlock<any>, index: number) =>
                             this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown));
+                    });
+
+                    const standardEmptyRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
+                        this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
+
+                    this.childQuestionBlocks = answeredQuestionBlocks.map((currentRow: ActivityQuestionBlock<any>[]) => {
+                        if (currentRow.length !== standardEmptyRow.length) {
+                            const additionalQuestions = standardEmptyRow.slice(currentRow.length);
+                            currentRow.splice(currentRow.length, 0, ...additionalQuestions);
+                        }
+                        return currentRow;
                     });
                 }
             }
@@ -105,11 +116,9 @@ export class ActivityCompositeAnswer implements OnChanges {
         newQuestionBlock.validators = childQuestionBlock.validators.map((each) => this.deepClone(each));
         if (this.convertQuestionToLabels && !newQuestionBlock.label) {
             newQuestionBlock.label = childQuestionBlock.question;
-            newQuestionBlock.question = '';
         }
         if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
             newQuestionBlock.placeholder = newQuestionBlock.question;
-            newQuestionBlock.question = null;
             if (childQuestionBlock.isRequired) {
                 newQuestionBlock.placeholder += ' *';
             }
@@ -118,6 +127,7 @@ export class ActivityCompositeAnswer implements OnChanges {
         newQuestionBlock.validators.forEach((validator) => validator.question = newQuestionBlock);
         newQuestionBlock.answer = answerContainer === null ? null : answerContainer.value;
         newQuestionBlock.shown = shown;
+        newQuestionBlock.question = '';
 
         return newQuestionBlock;
     }
