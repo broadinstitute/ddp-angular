@@ -14,7 +14,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                             [value]="option.stableId"
                             [disabled]="readonly"
                             [disableRipple]="true"
-                            (change)="select(option.stableId)">
+                            (change)="select(option.stableId); updateCharactersLeftIndicator(option.stableId)">
                     {{option.optionLabel}}
                 </mat-radio-button>
                 <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">

@@ -17,7 +17,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                         [placeholder]="block.picklistLabel"
                         [disabled]="readonly"
                         [multiple]="true"
-                        (selectionChange)="handleMaterialSelect($event)"
+                        (selectionChange)="handleMaterialSelect($event); updateCharactersLeftIndicator(details.stableId)"
                         class="width">
                 <mat-option *ngFor="let option of block.picklistOptions"
                             [value]="option.stableId">
@@ -30,7 +30,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     <ng-template #nativeSelect>
         <select [value]="setNativeSelected()"
                 [disabled]="readonly"
-                (change)="handleNativeSelect($event.target.value)"
+                (change)="handleNativeSelect($event.target.value); updateCharactersLeftIndicator(details.stableId)"
                 class="width">
             <option value="">{{block.picklistLabel}}</option>
             <option *ngFor="let option of block.picklistOptions"
