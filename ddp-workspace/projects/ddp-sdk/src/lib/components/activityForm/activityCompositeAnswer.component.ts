@@ -105,18 +105,22 @@ export class ActivityCompositeAnswer implements OnChanges {
         newQuestionBlock.validators = childQuestionBlock.validators.map((each) => this.deepClone(each));
         if (this.convertQuestionToLabels && !newQuestionBlock.label) {
             newQuestionBlock.label = childQuestionBlock.question;
+            newQuestionBlock.question = '';
         }
         if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
             newQuestionBlock.placeholder = newQuestionBlock.question;
+            newQuestionBlock.question = '';
             if (childQuestionBlock.isRequired) {
                 newQuestionBlock.placeholder += ' *';
             }
+        }
+        if (this.block.childOrientation === ChildOrientation.Horizontal) {
+            newQuestionBlock.question = '';
         }
         // clone does not update references to original object. we need to do that here.
         newQuestionBlock.validators.forEach((validator) => validator.question = newQuestionBlock);
         newQuestionBlock.answer = answerContainer === null ? null : answerContainer.value;
         newQuestionBlock.shown = shown;
-        newQuestionBlock.question = '';
 
         return newQuestionBlock;
     }
