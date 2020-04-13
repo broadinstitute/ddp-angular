@@ -96,6 +96,10 @@ export class ActivityCompositeAnswer implements OnChanges {
                     const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
                         this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
 
+                    // If a row in Composite block has 2 and more questions, and a user answered only on the first question and reloaded the page
+                    // the backend returns an array of answers only with 1 item, so when the component will build rows, we will miss some blocks
+                    // example: https://broadinstitute.atlassian.net/browse/DDP-4536; method below looks which blocks were missed and add them
+                    // Important: if a user answered only on the last question, backend returns the correct array of answers
                     this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
                         if (currentRow.length !== blankRow.length) {
                             const missedQuestions = blankRow.slice(currentRow.length);
