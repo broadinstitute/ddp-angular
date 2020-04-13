@@ -33,7 +33,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [checked]="getOptionSelection(option.stableId)"
                           [disabled]="readonly"
                           [disableRipple]="true"
-                          (change)="select($event.checked, option.stableId, option.exclusive); updateCharactersLeftIndicator(option.stableId)">
+                          (change)="select($event.checked, option.stableId, option.exclusive); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
                 {{option.optionLabel}}
             </mat-checkbox>
             <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
