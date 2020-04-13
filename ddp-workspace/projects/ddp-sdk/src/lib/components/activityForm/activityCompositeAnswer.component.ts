@@ -98,8 +98,8 @@ export class ActivityCompositeAnswer implements OnChanges {
 
                     this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
                         if (currentRow.length !== blankRow.length) {
-                            const blankQuestions = blankRow.slice(currentRow.length);
-                            currentRow.push(...blankQuestions);
+                            const missedQuestions = blankRow.slice(currentRow.length);
+                            currentRow.push(...missedQuestions);
                         }
                         return currentRow;
                     });
