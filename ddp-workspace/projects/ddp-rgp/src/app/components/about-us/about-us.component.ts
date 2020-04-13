@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AboutUsDialogComponent } from './dialog/about-us-dialog.component';
-import { DialogData } from './dialogData';
+import { DialogData } from '../../models/dialogData.model';
 
 @Component({
   selector: 'app-about-us',
