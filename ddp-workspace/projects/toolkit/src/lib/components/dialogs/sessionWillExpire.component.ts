@@ -78,7 +78,6 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public renewSession(): void {
         // Blocks UI to prevent interference in the session renewing process
         this.isRenewing = true;
-        this.dialogRef.disableClose = true;
         const participantGuid = this.session.session.participantGuid;
         const session = this.session.sessionObservable.pipe(
             // Because the session is BehaviorSubject, we should skip a current session,
