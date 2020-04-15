@@ -82,7 +82,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             // Because the session is BehaviorSubject, we should skip a current session,
             // we are only interested in the renewed session
             skip(1)
-        ).subscribe((session) => {
+        ).subscribe(() => {
             this.renewNotifier.hideSessionExpirationNotifications();
         });
         this.anchor.add(session);
