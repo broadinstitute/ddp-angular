@@ -78,19 +78,12 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public renewSession(): void {
         // Blocks UI to prevent interference in the session renewing process
         this.isRenewing = true;
-        const participantGuid = this.session.session.participantGuid;
         const session = this.session.sessionObservable.pipe(
             // Because the session is BehaviorSubject, we should skip a current session,
             // we are only interested in the renewed session
             skip(1)
         ).subscribe((session) => {
-            // If participantGuid is in place or we didn't have participantGuid at all, return to the app
-            if ((participantGuid && session.participantGuid) || !participantGuid) {
-                this.renewNotifier.hideSessionExpirationNotifications();
-                // If we had participantGuid, but new session lost it, restore it
-            } else if (participantGuid && !session.participantGuid) {
-                this.session.setParticipant(participantGuid);
-            }
+            this.renewNotifier.hideSessionExpirationNotifications();
         });
         this.anchor.add(session);
         this.auth0.auth0RenewToken();

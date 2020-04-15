@@ -184,7 +184,8 @@ export class Auth0AdapterService implements OnDestroy {
             userGuid,
             locale,
             // the time of expiration in UTC seconds
-            decodedJwt['exp'] as number);
+            decodedJwt['exp'] as number,
+            authResult.participantGuid);
         console.log('auth0Adapter successfully updated session token ', decodedJwt);
     }
 
@@ -201,6 +202,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     public auth0RenewToken(): void {
+        const participantGuid = this.session.session.participantGuid;
         // Original code called renewAuth. This seems to be renewing token correctly
         // Note the response types. 'code' is explicitly not supported
         this.webAuth.checkSession(
@@ -213,7 +215,11 @@ export class Auth0AdapterService implements OnDestroy {
                     console.log(err);
                 } else {
                     console.log('auth0Adapter.renewToken success', result);
-                    this.setSession(result);
+
+                    this.setSession({
+                        ...result,
+                        participantGuid
+                    });
                 }
             });
     }
