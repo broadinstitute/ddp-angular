@@ -68,13 +68,11 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public signOut(): void {
         this.renewNotifier.hideSessionExpirationNotifications();
-        this.session.disableTokenExpiredProcess();
         this.auth0.logout();
     }
 
     public renewSession(): void {
         this.renewNotifier.hideSessionExpirationNotifications();
-        this.session.disableTokenExpiredProcess();
         this.auth0.auth0RenewToken();
     }
 
