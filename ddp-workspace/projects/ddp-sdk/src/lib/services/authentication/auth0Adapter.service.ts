@@ -215,7 +215,6 @@ export class Auth0AdapterService implements OnDestroy {
                     console.log(err);
                 } else {
                     console.log('auth0Adapter.renewToken success', result);
-
                     this.setSession({
                         ...result,
                         participantGuid
