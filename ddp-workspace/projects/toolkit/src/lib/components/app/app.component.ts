@@ -139,7 +139,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public openSessionWillExpireDialog(): void {
-        this.dialog.open(SessionWillExpireComponent, this.dialogBaseSettings);
+        this.dialog.open(SessionWillExpireComponent, { ...this.dialogBaseSettings, disableClose: true });
     }
 
     public closeSessionWillExpireDialog(): void {

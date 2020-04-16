@@ -13,7 +13,7 @@ import { interval, Subscription } from 'rxjs';
                 <span>{{ timeLeft }}</span>
             </span>
         </h1>
-        <button mat-icon-button (click)="closeDialog()">
+        <button mat-icon-button (click)="closeDialog()" [disabled]="isRenewing">
             <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
@@ -23,16 +23,19 @@ import { interval, Subscription } from 'rxjs';
     <mat-dialog-actions align="end" class="row NoMargin">
         <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
                 (click)="signOut()"
+                [disabled]="isRenewing"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
         <button class="ButtonFilled Button--rect button button_small button_primary"
                 (click)="renewSession()"
+                [disabled]="isRenewing"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
         </button>
     </mat-dialog-actions>`
 })
 export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public timeLeft = '00:00';
+    public isRenewing = false;
     private anchor: Subscription = new Subscription();
 
     constructor(
@@ -68,13 +71,12 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public signOut(): void {
         this.renewNotifier.hideSessionExpirationNotifications();
-        this.session.disableTokenExpiredProcess();
         this.auth0.logout();
     }
 
     public renewSession(): void {
-        this.renewNotifier.hideSessionExpirationNotifications();
-        this.session.disableTokenExpiredProcess();
+        // Blocks UI to prevent interference in the session renewing process
+        this.isRenewing = true;
         this.auth0.auth0RenewToken();
     }
 
