@@ -10,6 +10,8 @@ dispatch:
     service: brain
   - url: "osteo.dev.datadonationplatform.org/*"
     service: osteo
+  - url: "rgp.dev.datadonationplatform.org/*"
+    service: rgp
 {{else if eq $environment "test"}}
   - url: "angio.test.datadonationplatform.org/*"
     service: angio
