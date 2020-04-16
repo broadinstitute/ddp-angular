@@ -11,10 +11,10 @@ do
 done
 NG_PROJECT_PATH_PREFIX='ddp-workspace\/projects\/'
 SHARED='_SHARED_'
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  SED_CMD='sed -E'
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
   SED_CMD='gsed -E'
+else
+  SED_CMD='sed -E'
 fi
 git diff --name-only $1 $2 |
 ${EXCLUDE_CMD} | # Exclude from changes files that we want to ignore
