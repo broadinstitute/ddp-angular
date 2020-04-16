@@ -35,7 +35,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                             <div *ngIf="isPasswordWrong" class="ErrorMessage">
                                 <span translate>Toolkit.Password.PasswordWrongError</span>
                             </div>
-                            <div *ngIf="isOtherError" class="ErrorMessage">
+                            <div *ngIf="isCommunicationError" class="ErrorMessage">
                                 <span translate>Toolkit.Password.OtherError</span>
                             </div>
                         </form>
