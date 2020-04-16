@@ -7,7 +7,7 @@ references:
   study_keys: &study_keys
                 "osteo brain angio mbc rgp"
   study_guids: &study_guids
-                "CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-rgp"
+                "CMI-OSTEO cmi-brain ANGIO cmi-mbc rgp"
 
 # Container for all the builds
 executors:
