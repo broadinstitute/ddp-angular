@@ -202,6 +202,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     public auth0RenewToken(): void {
+        const participantGuid = this.session.session.participantGuid;
         this.session.sessionObservable.pipe(
             // Because the session is BehaviorSubject, we should skip a current session,
             // we are only interested in the renewed session
@@ -210,7 +211,6 @@ export class Auth0AdapterService implements OnDestroy {
         ).subscribe(() => {
             this.renewNotifier.hideSessionExpirationNotifications();
         });
-        const participantGuid = this.session.session.participantGuid;
         // Original code called renewAuth. This seems to be renewing token correctly
         // Note the response types. 'code' is explicitly not supported
         this.webAuth.checkSession(
