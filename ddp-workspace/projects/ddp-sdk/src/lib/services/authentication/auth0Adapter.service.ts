@@ -12,7 +12,7 @@ import { AnalyticsEventCategories } from '../../models/analyticsEventCategories'
 import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, skip, take } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
 
@@ -184,7 +184,8 @@ export class Auth0AdapterService implements OnDestroy {
             userGuid,
             locale,
             // the time of expiration in UTC seconds
-            decodedJwt['exp'] as number);
+            decodedJwt['exp'] as number,
+            authResult.participantGuid);
         console.log('auth0Adapter successfully updated session token ', decodedJwt);
     }
 
@@ -201,6 +202,15 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     public auth0RenewToken(): void {
+        const participantGuid = this.session.session.participantGuid;
+        this.session.sessionObservable.pipe(
+            // Because the session is BehaviorSubject, we should skip a current session,
+            // we are only interested in the renewed session
+            skip(1),
+            take(1)
+        ).subscribe(() => {
+            this.renewNotifier.hideSessionExpirationNotifications();
+        });
         // Original code called renewAuth. This seems to be renewing token correctly
         // Note the response types. 'code' is explicitly not supported
         this.webAuth.checkSession(
@@ -213,7 +223,10 @@ export class Auth0AdapterService implements OnDestroy {
                     console.log(err);
                 } else {
                     console.log('auth0Adapter.renewToken success', result);
-                    this.setSession(result);
+                    this.setSession({
+                        ...result,
+                        participantGuid
+                    });
                 }
             });
     }
