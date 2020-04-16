@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
-import { skip } from 'rxjs/operators';
 
 @Component({
     selector: 'ddp-session-will-expire',
@@ -78,14 +77,6 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public renewSession(): void {
         // Blocks UI to prevent interference in the session renewing process
         this.isRenewing = true;
-        const session = this.session.sessionObservable.pipe(
-            // Because the session is BehaviorSubject, we should skip a current session,
-            // we are only interested in the renewed session
-            skip(1)
-        ).subscribe(() => {
-            this.renewNotifier.hideSessionExpirationNotifications();
-        });
-        this.anchor.add(session);
         this.auth0.auth0RenewToken();
     }
 
