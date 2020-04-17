@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
+import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
@@ -14,7 +15,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                             [value]="option.stableId"
                             [disabled]="readonly"
                             [disableRipple]="true"
-                            (change)="select(option.stableId); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
+                            (change)="optionChanged(option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
                     {{option.optionLabel}}
                 </mat-radio-button>
                 <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
@@ -96,10 +97,11 @@ export class RadioButtonsActivityPicklistQuestion extends BaseActivityPicklistQu
         return selected;
     }
 
-    public select(id: string): void {
+    public optionChanged(option: ActivityPicklistOption): void {
+        const { stableId } = option;
         const answer = {} as ActivityPicklistAnswerDto;
-        answer.stableId = id;
-        answer.detail = this.getAnswerDetailText(id);
+        answer.stableId = stableId;
+        answer.detail = this.getAnswerDetailText(stableId);
         this.block.answer = [answer];
         this.valueChanged.emit(this.block.answer);
     }

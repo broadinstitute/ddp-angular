@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
+import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
 @Component({
@@ -33,7 +34,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [checked]="getOptionSelection(option.stableId)"
                           [disabled]="readonly"
                           [disableRipple]="true"
-                          (change)="select($event.checked, option.stableId, option.exclusive); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
+                          (change)="optionChanged($event.checked, option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
                 {{option.optionLabel}}
             </mat-checkbox>
             <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
@@ -138,7 +139,8 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         return selected;
     }
 
-    public select(value: boolean, id: string, exclusive: boolean): void {
+    public optionChanged(value: boolean, option: ActivityPicklistOption): void {
+        const { exclusive, stableId } = option;
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
@@ -150,15 +152,15 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
             this.exclusiveChosen = false;
         }
         const answer = {} as ActivityPicklistAnswerDto;
-        answer.stableId = id;
-        answer.detail = this.setDetailText(id);
+        answer.stableId = stableId;
+        answer.detail = this.setDetailText(stableId);
         if (value) {
             if (this.block.selectMode === PicklistSelectMode.SINGLE) {
                 this.block.answer = [];
             }
             this.block.answer.push(answer);
         } else {
-            const index = this.answerIndex(id);
+            const index = this.answerIndex(stableId);
             this.block.answer.splice(index, 1);
         }
         this.valueChanged.emit(this.block.answer);
