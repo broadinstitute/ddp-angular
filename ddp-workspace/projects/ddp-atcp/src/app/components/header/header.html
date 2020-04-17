@@ -6,24 +6,24 @@
   </a>
   <nav>
     <ul>
-      <li class="dropdown">
-        <a class="dropdown-toggle"
-           data-toggle="dropdown"
-           href="#"
-           translate>
-          <i class="fa fa-globe language-dropdown"></i>Common.Navigation.Language
-          <i class="caret"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right languages">
-          <li *ngFor="let language of languages; trackBy: trackByFn"
-              [attr.id]="language.code">
-            <a class="green-hover"
-               href="/?locale=de">
-              {{ language.name }}
-            </a>
-          </li>
-        </ul>
-      </li>
+<!--      <li class="dropdown">-->
+<!--        <a class="dropdown-toggle"-->
+<!--           data-toggle="dropdown"-->
+<!--           href="#"-->
+<!--           translate>-->
+<!--          <i class="fa fa-globe language-dropdown"></i>Common.Navigation.Language-->
+<!--          <i class="caret"></i>-->
+<!--        </a>-->
+<!--        <ul class="dropdown-menu dropdown-menu-right languages">-->
+<!--          <li *ngFor="let language of languages; trackBy: trackByFn"-->
+<!--              [attr.id]="language.code">-->
+<!--            <a class="green-hover"-->
+<!--               href="/?locale=de">-->
+<!--              {{ language.name }}-->
+<!--            </a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </li>-->
       <li class="dropdown">
         <a class="Link dropdown-toggle"
            data-toggle="dropdown"
@@ -64,6 +64,11 @@
             <a id="about_initiative"
                [routerLink]="['/' + RouterResource.AboutInitiative]"
                translate>Common.Navigation.AboutThisInitiative</a>
+          </li>
+          <li *ngIf="isAuthenticated">
+            <a id="statistics"
+               [routerLink]="['/' + RouterResource.Statistics]"
+               translate>Common.Navigation.Statistics</a>
           </li>
         </ul>
       </li>

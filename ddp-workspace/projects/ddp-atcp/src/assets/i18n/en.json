@@ -6,6 +6,7 @@
       "DataAccessRequest": "Data Access Request",
       "LearnMore": "Learn More",
       "AboutUs": "About Us",
+      "Statistics": "Statistics",
       "AboutThisInitiative": "About this Initiative",
       "JoinUs": "Join Us",
       "SignIn": "Sign In",
@@ -72,7 +73,6 @@
     "TypeResearch": {
       "Title": "Type of Research",
       "SubTitle": "Select all applicable options.",
-
       "DisableStudy": {
         "Label": "Disease study",
         "Paragraph": "The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
@@ -202,7 +202,8 @@
       {
         "name": "Paxti Villen",
         "country": "Spain"
-      }, {
+      },
+      {
         "name": "Lian Yarlett",
         "country": "England"
       }
@@ -345,7 +346,7 @@
         },
         "Second": {
           "H3": "2. Give us permission",
-          "Text": "During the enrollment process, we will ask you to complete a consent form giving permission to share\n          the data you provide us with researchers in a de-identified manner.\n          If you choose, you may also give us permission to:",
+          "Text": "During the enrollment process, we will ask you to complete a consent form giving permission to share\nthe data you provide us with researchers in a de-identified manner.\nIf you choose, you may also give us permission to:",
           "Ul": [
             "share a saliva sample that each A-T patient can send us for genome sequencing",
             "obtain the A-T patient’s medical records from their physicians and share them with researchers",
@@ -355,13 +356,13 @@
         },
         "Third": {
           "H3": "3. Share your insight and saliva sample",
-          "Text": "Complete an online questionnaire about how A-T affects you or your child. We will also send you a saliva\n          sample collection kit for genome sequencing. You will also be able to periodically update the records of\n          medical history and experiences you shared with the platform."
+          "Text": "Complete an online questionnaire about how A-T affects you or your child. We will also send you a saliva\nsample collection kit for genome sequencing. You will also be able to periodically update the records of\nmedical history and experiences you shared with the platform."
         },
         "Fourth": {
           "H3": "4. Let’s learn together",
           "Text": {
             "First": "We will provide you with updates about the latest discoveries made possible by your participation.",
-            "Second": "And if you agree, we may contact you in the future to ask more questions about your or your child’s\n          experiences and invite you to participate in additional future studies."
+            "Second": "And if you agree, we may contact you in the future to ask more questions about your or your child’s\nexperiences and invite you to participate in additional future studies."
           }
         }
       },
@@ -566,6 +567,186 @@
         "SignOut": "Sign Out",
         "Continue": "Continue"
       }
+    }
+  },
+  "AboutInitiative": {
+    "Title": "About this initiative",
+    "FirstParagraph": {
+      "Title": "Ataxia-telangiectasia (A-T)",
+      "Text": "is an inherited, neurodegenerative disease. A child with A-T begins to suffer\nfrom\nprogressive loss of muscle control around the age of two years. By the age of nine or ten, children with A-T\nusually become dependent on wheelchairs and their speech becomes slurred. Reading and swallowing also become\ndifficult. About 30 percent of A-T children develop cancer, and most of them have some degree of immune system\nproblems. Although progress has been made in extending the lives of people with A-T through managing their\nsymptoms, the disease remains relentless."
+    },
+    "SecondParagraph": {
+      "Title": "A-T affects everyone in a different way",
+      "TextOne": "Siblings with A-T seem to share more similar clinical features than A-T children who carry the same mutations but belong to different families. Scientists therefore believe that a family’s genes – other than the one the causes A-T – may change how A-T affects patients. In addition, it is possible that living in different environments, engaging in different lifestyles and eating a different diet may impact the health of people with A-T.",
+      "TextSecond": "We recently identified several people who have typical, disease-causing mutations in their A-T genes, and make no\nA-T protein (just as other people with A-T), and yet their A-T symptoms are astonishingly mild. We are now\noptimistic that we might be able to find changes in other genes that correct or compensate for the A-T mutations\nin these 'super-mild' patients. If so, researchers could possibly find new drug treatments to help all people with\nA-T. But first, we need to gather the clinical and genetic data from as many people with A-T as possible.",
+      "TextThird": "Similarly, by comparing the medical histories and lifestyles of different A-T patients, researchers may learn\nwhich symptom management strategies produce better health outcomes. But first, we need to obtain and combine data\nfrom many A-T patients in one place."
+    },
+    "ThirdParagraph": {
+      "Title": "The Global A-T Family Data Platform",
+      "Text": "The Global A-T Family Data Platform is a patient-driven effort overseen by A-T families and experts worldwide\nthrough which health information, genetic and potentially other types of data about people with A-T can be shared\nwith researchers. This platform will enable researchers to access important patient data from around the world\nquickly, securely and efficiently, hopefully leading to new discoveries.",
+      "SubTitle": "Here’s how the platform works:",
+      "Steps": [
+        {
+          "Name": "Enroll in the Data Platform",
+          "Text": "Click on \"Join Us\" and create an account with your name and email address. Once you have created your\naccount, you will be able to register yourself (if you have A-T) or your child(ren) with A-T as Participants\nin our Data Platform by completing a brief form."
+        },
+        {
+          "Name": "Give us permission",
+          "Text": "During the enrollment process, we will ask you to complete a consent form giving permission to share the data\nyou provide us with researchers in a de-identified manner. If you choose, you may also give us permission\nto:",
+          "Steps": [
+            "share a saliva sample that each person with A-T can send us for genome sequencing",
+            "obtain the A-T patient’s medical records from their physicians and share them with researchers",
+            "share medical records you have uploaded yourself with researchers",
+            "contact you in the future about follow-up research studies"
+          ]
+        },
+        {
+          "Name": "Tell us about yourself or your child",
+          "Text": "To join this initiative, you will need to answer some questions about the person with A-T’s health, the\ndoctors they have seen, and their medical and family history. Periodically, we will invite you to complete\nadditional (optional) questionnaires about the person with A-T’s medical condition (surveys created by\nresearchers who will study your data to improve their understanding A-T)."
+        },
+        {
+          "Name": "Send us a saliva kit",
+          "Text": "If you choose to participate in the genome sequencing study, you will send a saliva sample to us in a\npre-stamped package that we will provide."
+        },
+        {
+          "Name": "We will analyze the DNA and health\ninformation",
+          "Text": "We will analyze the DNA in the cells obtained from the saliva sample. No additional procedures will be\nrequired. We will link the results of the genetic analysis on your saliva and the medical information you\nprovide in our online questionnaires."
+        },
+        {
+          "Name": "We will share the data with researchers",
+          "Text": "Once potentially identifying information has been removed, the database of health information and genomic\ndata will be made available to researchers around the world through a secure, access-controlled data\nrepository. Your data will only be accessed by qualified investigators who have been granted permission by a\ndata access committee comprised of A-T family members as well as scientific and medical advisors. We will keep\ntrack of every study that has used your information."
+        },
+        {
+          "Name": "Your continuous feedback can accelerate\nresearch",
+          "Text": "Periodically, we will invite you to answer questionnaires developed by researchers who are studying the data\nto understand A-T better. Using this platform, we will have an unprecedented opportunity to quickly obtain\nanswers to important follow-up research questions directly from families. Our ability to follow up with\nparticipants can significantly impact research and shorten the path toward making new discoveries."
+        },
+        {
+          "Name": "Learn with us along the way",
+          "Text": "This unique combination of health and genetic information may hold the key for developing therapies, which\nwould not be possible without your help. We will be sure to provide you with updates about the status of our\nefforts and tell you about the latest discoveries made possible by your participation."
+        }
+      ]
+    }
+  },
+  "Statistics": {
+    "Title": "The A-T Family Data Platfom by the Numbers",
+    "CountersFirst": {
+      "Title": "Enrollment statistics as of December 2019:",
+      "List": [
+        {
+          "Number": 1958,
+          "Text": "Total number of participants"
+        },
+        {
+          "Number": 23,
+          "Text": "Countries represented"
+        },
+        {
+          "Number": 913,
+          "Text": "People participating \n in the genome study"
+        },
+        {
+          "Number": 820,
+          "Text": "Sample collection kits sent out \n in total"
+        }
+      ]
+    },
+    "CountersSecond": [
+      {
+        "Number": 425,
+        "Text": "Children enrolled \n by their parents"
+      },
+      {
+        "Number": 389,
+        "Text": "Sign-ups to stay informed <br> about the initiative"
+      },
+      {
+        "Number": 258,
+        "Text": "Self-enrolled participants"
+      }
+    ],
+    "CountersThird": {
+      "Title": "Countries represented",
+      "List": [
+        {
+          "width": "50px",
+          "emoji": "\uD83C\uDDFA\uD83C\uDDF8",
+          "name": "United States"
+        },
+        {
+          "width": "30px",
+          "emoji": "🇨🇦",
+          "name": "Canada"
+        },
+        {
+          "width": "7px",
+          "emoji": "🇦🇩",
+          "name": "Andorra"
+        },
+        {
+          "emoji": "🇦🇪",
+          "name": "United Arab Emirates"
+        },
+        {
+          "emoji": "🇦🇫",
+          "name": "Afghanistan"
+        },
+        {
+          "emoji": "🇦🇬",
+          "name": "Antigua & Barbuda"
+        },
+        {
+          "emoji": "🇦🇮",
+          "name": "Anguilla"
+        },
+        {
+          "emoji": "🇦🇱",
+          "name": "Albania"
+        },
+        {
+          "emoji": "🇦🇲",
+          "name": "Armenia"
+        },
+        {
+          "emoji": "🇦🇴",
+          "name": "Angola"
+        },
+        {
+          "emoji": "🇦🇷",
+          "name": "Argentina"
+        },
+        {
+          "emoji": "🇦🇸",
+          "name": "American Samoa"
+        },
+        {
+          "emoji": "🇦🇹",
+          "name": "Austria"
+        },
+        {
+          "emoji": "🇦🇺",
+          "name": "Australia"
+        },
+        {
+          "emoji": "🇦🇼",
+          "name": "Aruba"
+        },
+        {
+          "emoji": "🇦🇽",
+          "name": "Åland Islands"
+        },
+        {
+          "emoji": "🇦🇿",
+          "name": "Azerbaijan"
+        },
+        {
+          "emoji": "🇧🇦",
+          "name": "Bosnia & Herzegovina"
+        },
+        {
+          "emoji": "🇧🇧",
+          "name": "Barbados"
+        }
+      ]
     }
   }
 }
