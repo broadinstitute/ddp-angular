@@ -5,9 +5,9 @@ references:
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-                "osteo brain angio mbc"
+                "osteo brain angio mbc esc"
   study_guids: &study_guids
-                "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+                "CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-esc"
 
 # Container for all the builds
 executors:
@@ -381,6 +381,8 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
+      - conditionally-launch-build-and-store:
+          study_key: esc
 
   app-build-and-store-job:
     executor:
@@ -466,6 +468,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: angio
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: esc
 
   nightly:
     triggers:
@@ -488,3 +493,6 @@ workflows:
       - build-and-deploy-job:
           name: mbc-nightly
           study_key: mbc
+      - build-and-deploy-job:
+          name: esc-nightly
+          study_key: esc
