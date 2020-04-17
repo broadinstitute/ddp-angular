@@ -17,7 +17,7 @@
     "@nguniversal/express-engine": "8.1.1",
     "@ngx-translate/core": "12.1.2",
     "@ngx-translate/http-loader": "4.0.0",
-    "auth0-js": "9.12.2",
+    "auth0-js": "9.13.2",
     "auth0-lock": "11.21.0",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.4",
