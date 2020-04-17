@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private initSessionExpiredDialogListener(): void {
     const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
-      this.dialog.open(SessionWillExpireComponent, this.DIALOG_BASE_SETTINGS);
+      this.dialog.open(SessionWillExpireComponent, { ...this.DIALOG_BASE_SETTINGS, disableClose: true });
     });
     const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
       this.dialog.closeAll();
