@@ -77,7 +77,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                     <!-- steps -->
                     <div class="row NoMargin" *ngIf="isStepped && showStepper">
                         <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="row">
+                            <div class="row WizardSteps-container">
                                 <ng-container *ngFor="let section of model.sections; let i = index">
                                     <ng-container *ngIf="section.visible">
                                         <div class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"

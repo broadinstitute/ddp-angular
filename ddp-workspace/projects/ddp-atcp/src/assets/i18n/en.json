@@ -374,10 +374,12 @@
     }
   },
   "WorkflowProgress": {
-    "AboutYou": "About You",
-    "Consent": "Consent Form",
-    "MedicalRelease": "Medical Release",
-    "Questionnaire": "Questionnaire"
+    "Registration": "Registration",
+    "Consent": "Consent",
+    "ContactingPhysician": "Contacting Physician",
+    "MedicalHistory": "Medical History",
+    "GenomeStudy": "Genome Study",
+    "ReviewSubmission": "Review & Submission"
   },
   "SDK": {
     "SubmitButton": "Submit",

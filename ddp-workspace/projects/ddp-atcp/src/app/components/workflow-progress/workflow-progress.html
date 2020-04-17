@@ -1,40 +1,16 @@
-<ul *ngIf="steps.length && shown" class="workflow-progress">
-  <ng-container *ngFor="let step of steps; index as i; last as isLastStep">
-    <li class="workflow-step">
-      <div class="workflow-content">
-        <ng-container
-          *ngIf="!isCurrentStep(step.activityCodes) && step.isCompleted; then completed else incomplete">
-        </ng-container>
-        <ng-template #incomplete>
-          <div class="workflow-content__circle"
-               [ngClass]="{'workflow-content__circle_current': isCurrentStep(step.activityCodes)}">
-            {{ step.number }}
-          </div>
-        </ng-template>
-        <span class="workflow-content__text"
-              [ngClass]="{'workflow-content__text_current': isCurrentStep(step.activityCodes)}" translate>
-                    {{ step.name }}
-                </span>
-      </div>
-    </li>
-    <div *ngIf="!isLastStep" class="workflow-divider"></div>
-  </ng-container>
-</ul>
-
-<ng-template #completed>
-  <svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-969.000000, -485.000000)">
-        <g transform="translate(969.000000, 485.000000)">
-          <rect fill="#00D39D" x="0" y="0" width="25" height="25" rx="12.5"></rect>
-          <g transform="translate(6.000000, 6.000000)" fill="#FFFFFF">
-            <path
-              d="M11.0537035,0.243045906 C10.9690261,0.158368486 10.831371,0.158368486 10.7466935,0.243045906 L4.05630893,6.93343052 L2.29328164,5.17083747 C2.20860422,5.08572581 2.07094913,5.08572581 1.98627171,5.17083747 L0.0699565757,7.08715261 C-0.0147208437,7.17183002 -0.0147208437,7.30905087 0.0699565757,7.39416253 L3.90258685,11.2267928 C3.94514268,11.2689144 4.00072581,11.2901923 4.05630893,11.2901923 C4.11189206,11.2901923 4.16747519,11.2689144 4.20959677,11.2267928 L12.9700186,2.46637097 C13.0108375,2.42555211 13.0334181,2.37040323 13.0334181,2.31264888 C13.0334181,2.25532878 13.0108375,2.2001799 12.9700186,2.15936104 L11.0537035,0.243045906 Z">
-            </path>
-          </g>
-        </g>
-      </g>
-    </g>
-  </svg>
-</ng-template>
+<div class="workflow-progress">
+  <ul *ngIf="steps.length">
+    <ng-container *ngFor="let step of steps; index as i;">
+      <li [ngClass]="{'in-progress': step.state === CREATED, 'in-complete': step.state === COMPLETE}">
+        <span class="number">{{ i + 1 }}</span>
+        <span class="glyphicon glyphicon-ok"></span>
+        <span translate class="name">
+        {{ step.name }}
+          <span>
+          {{ states[step.state] }}
+        </span>
+      </span>
+      </li>
+    </ng-container>
+  </ul>
+</div>

@@ -13,9 +13,9 @@ import * as RouterResource from './router-resources';
 
 import { WelcomeComponent } from './components/welcome/welcome';
 import { AboutUsComponent } from './components/about-us/about-us';
-import { JoinUsComponent } from './components/join-us/join-as';
+import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
-import { DataAccessComponent } from './components/data-success/data-access';
+import { DataAccessComponent } from './components/data-access/data-access';
 import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { ActivityComponent } from './components/activity/activity';
@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: RouterResource.Dashboard,
     component: DashBoardComponent,
-    canActivate: [IrbGuard, AuthGuard]
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
   },
   {
     path: 'login-landing',

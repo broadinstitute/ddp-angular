@@ -5,17 +5,11 @@
   }
 
   .submitted {
-    .has-errors {
-      > a {
-        background-color: #DB2C2C !important;
-      }
-    }
-  }
-  .submitted {
     .ng-invalid {
       border-color: #DB2C2C !important;
     }
   }
+
   .wizard {
     border-radius: 2px;
     padding: 45px 25px 0 25px;
@@ -30,74 +24,6 @@
     }
     @media (min-width: 1280px) {
       padding: 45px 50px 0 50px;
-    }
-
-    .progressBar {
-      position: relative;
-      width: 100%;
-      height: 20px;
-      margin-bottom: 30px;
-    }
-
-    .progressBarLine {
-      position: absolute;
-      top: 12px;
-      left: 24px;
-      right: 24px;
-      height: 4px;
-      background-color: #cccccc;
-      z-index: 1;
-    }
-
-    .item {
-      width: 16.2%;
-      margin: 0 -4px 0 0 !important;
-
-      &.active {
-        &:hover {
-          .itemDot {
-            background-color: #7BA946 !important;
-          }
-        }
-
-        .itemDot {
-          background: #7BA946;
-        }
-      }
-
-      &:last-child {
-        width: 26px;
-        margin-left: 6px !important;
-      }
-
-      .disabled {
-        opacity: 0.4;
-        filter: alpha(opacity=40);
-        cursor: default;
-      }
-
-      .itemDot {
-        width: 26px;
-        height: 26px;
-        border-radius: 13px !important;
-        border: 3px solid #cccccc;
-        background: #eeeeee;
-        z-index: 2;
-        padding: 0 !important;
-        transition: background 0.3s ease;
-
-        &:active {
-          background-color: #5C7A36 !important;
-        }
-
-        &:hover {
-          background-color: #559BE0 !important;
-        }
-      }
-    }
-
-    .itemDone .Wizard-itemDot {
-      background-color: #7BA946 !important;
     }
   }
 
@@ -270,11 +196,13 @@
       padding: 8.5px 21.5px 8.5px 21.5px;
       float: right;
       background-color: #fff;
+
       &[disabled] {
         border-color: #cccccc !important;
         color: #cccccc !important;
         cursor: default !important;
       }
+
       &:first-child {
         float: left;
 

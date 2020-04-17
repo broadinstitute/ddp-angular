@@ -1,3 +1,28 @@
+@mixin btn-green {
+  padding: 7px 20px 9px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  transition: border 0.3s ease, color 0.3s ease;
+  cursor: pointer !important;
+  border-color: #7BA946 !important;
+  color: #7BA946 !important;
+  background-color: #fff;
+  margin: 0;
+  outline: none;
+  &:focus, &:active {
+    border-color: #7BA946 !important;
+    color: #7BA946 !important;
+
+    &:hover {
+      border-color: #559BE0 !important;
+      color: #559BE0 !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
 .BtnBordered {
   padding: 7px 20px 9px 20px;
   border-radius: 2px;
@@ -11,9 +36,11 @@
   &:visited, &:active {
     background-color: #ffffff !important;
   }
+
   &:hover {
     text-decoration: none;
   }
+
   &.blue {
     &:focus, &:active {
       margin-top: 15px;
@@ -27,32 +54,38 @@
       background-color: transparent !important;
     }
   }
+
   &.green, &.green:focus, &.green:active {
     margin-top: 15px;
     border-color: #7BA946 !important;
     color: #7BA946 !important;
+
     &:hover {
       border-color: #559BE0 !important;
       color: #559BE0 !important;
       background-color: transparent !important;
     }
   }
+
   &.black {
     &:focus, &:active {
       margin-top: 25px;
       border-color: #333333 !important;
       color: #333333 !important;
     }
+
     &:hover {
       border-color: #ffffff !important;
       color: #ffffff !important;
       background-color: transparent !important;
     }
   }
+
   &.white, &.white:focus, &.white:active {
     color: #FFFFFF !important;
-      margin-top: 25px;
-      border-color: #FFFFFF !important;
+    margin-top: 25px;
+    border-color: #FFFFFF !important;
+
     &:hover {
       border-color: #93C453 !important;
       color: #93C453 !important;

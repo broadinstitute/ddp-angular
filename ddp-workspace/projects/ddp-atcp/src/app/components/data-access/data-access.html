@@ -1,15 +1,7 @@
 <div class="wizard-page">
   <app-header></app-header>
   <div class="wizard">
-    <ul class="progressBar nav nav-pills" [ngClass]="{submitted : form.submitted}">
-      <div class="progressBarLine"></div>
-      <li class="item"
-          *ngFor="let empty of countTabs; let i = index;"
-          (click)="setActiveTab($event, i)"
-          [ngClass]="{'active' : activeTab >= i, 'has-errors': !displayDontHaveErrors(i )}">
-        <a href="#" class="itemDot"></a>
-      </li>
-    </ul>
+    <app-progress-bar [count]="countTabs" [active]="activeTab" (onChanged)="setActiveTab($event)"></app-progress-bar>
   </div>
   <form class="content" #form="ngForm" (ngSubmit)="submit(form)" [ngClass]="{submitted : form.submitted}">
     <div [ngClass]="{'active' : activeTab === 0}">
@@ -343,14 +335,14 @@
     <a href="#"
        class="BtnBordered green"
        *ngIf="activeTab > 0"
-       (click)="setActiveTab($event, activeTab - 1)">
+       (click)="setActiveTab(activeTab - 1, $event)">
       <span class="glyphicon glyphicon-chevron-left"></span>
       <span translate>Common.Navigation.Previous</span>
     </a>
     <a href="#"
        class="BtnBordered green"
-       *ngIf="activeTab !== countTabs.length - 1"
-       (click)="setActiveTab($event, activeTab + 1)">
+       *ngIf="activeTab !== countTabs - 1"
+       (click)="setActiveTab(activeTab + 1, $event)">
       <span translate>Common.Navigation.Next</span>
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
@@ -359,7 +351,7 @@
       class="BtnBordered green"
       (click)="submit(form)"
       [disabled]="form.invalid && form.submitted"
-      *ngIf="activeTab === countTabs.length - 1"
+      *ngIf="activeTab === countTabs - 1"
       translate
     >
       Common.Navigation.Submit

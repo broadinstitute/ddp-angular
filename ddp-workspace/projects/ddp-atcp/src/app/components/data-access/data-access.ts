@@ -19,9 +19,8 @@ export class DataAccessComponent {
   public use;
 
   public sign;
-
-  public activeTab = 0;
-  public countTabs = new Array(7);
+  public activeTab: number = 0;
+  public countTabs = 7;
   public todayString = this.getToday();
 
   public displayDontHaveErrors(tab: number) {
@@ -37,8 +36,10 @@ export class DataAccessComponent {
     return true;
   }
 
-  public setActiveTab(event: Event, index: number) {
-    event.preventDefault();
+  public setActiveTab(index: number, event?) {
+    if (event) {
+      event.preventDefault();
+    }
     this.activeTab = index;
   }
 
@@ -52,12 +53,12 @@ export class DataAccessComponent {
   public submit(form) {
     if (form.invalid) {
       form.submitted = true;
-      this.countTabs.find((val, i) => {
+      for (let i = 0; i < this.countTabs; i++) {
         if (!this.displayDontHaveErrors(i)) {
           this.activeTab = i;
           return true;
         }
-      });
+      }
     }
   }
 }

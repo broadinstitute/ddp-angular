@@ -32,15 +32,16 @@ import { AboutUsComponent } from './components/about-us/about-us';
 import { HeaderComponent } from './components/header/header';
 import { MatMenuModule } from '@angular/material';
 import { LanguagesProvider } from './providers/languages.provider';
-import { JoinUsComponent } from './components/join-us/join-as';
+import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
-import { DataAccessComponent } from './components/data-success/data-access';
+import { DataAccessComponent } from './components/data-access/data-access';
 import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { ActivityComponent } from './components/activity/activity';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
 import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -154,7 +155,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ActivityComponent,
     WorkflowProgressComponent,
     ErrorComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ProgressBarComponent
   ],
   entryComponents: [
     DashBoardComponent,

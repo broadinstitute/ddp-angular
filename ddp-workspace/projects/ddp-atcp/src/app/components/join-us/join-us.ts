@@ -12,16 +12,19 @@ import {
 
 @Component({
   selector: `app-join-us`,
+  styleUrls: ['./join-us.scss'],
   template: `
-    <app-header></app-header>
-    <div class="page-padding">
-      <ddp-activity [studyGuid]="studyGuid"
-                    [activityGuid]="instanceGuid"
-                    (submit)="navigate($event)"
-                    (stickySubtitle)="showStickySubtitle($event)">
-      </ddp-activity>
+    <div class="join-us">
+      <app-header></app-header>
+      <div class="page-padding">
+        <ddp-activity [studyGuid]="studyGuid"
+                      [activityGuid]="instanceGuid"
+                      (submit)="navigate($event)"
+                      (stickySubtitle)="showStickySubtitle($event)">
+        </ddp-activity>
+      </div>
+      <app-footer></app-footer>
     </div>
-    <app-footer></app-footer>
   `
 })
 export class JoinUsComponent implements OnInit {
@@ -42,7 +45,6 @@ export class JoinUsComponent implements OnInit {
               private temporaryUserService: TemporaryUserServiceAgent,
               private workflow: WorkflowServiceAgent) {
   }
-
 
   public ngOnInit(): void {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
