@@ -1942,6 +1942,14 @@ select:-webkit-autofill {
     }
 }
 
+@media only screen and (max-width: 480px) {
+    ddp-activity-composite-answer {
+        .ddp-answer-container {
+            flex-direction: column !important;
+        }
+    }
+}
+
 .mat-snack-bar-container {
     box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
     margin: 4px;

@@ -3,12 +3,17 @@ version: 2.1
 references:
   npm_cache_key: &npm_cache_key
                    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  # Note: important that values of guids and keys have matching order!"
+  study_keys: &study_keys
+                "osteo brain angio mbc"
+  study_guids: &study_guids
+                "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
 
 # Container for all the builds
 executors:
   commit-executor:
     docker:
-      - image: broadinstitute/study-website-build:03-26-2020A
+      - image: broadinstitute/study-website-build:04-09-2020A
     working_directory: ~/repo
 
 commands:
@@ -29,8 +34,6 @@ commands:
     parameters:
       study_key:
         type: string
-      study_guid:
-        type: string
       skip_build:
         type: boolean
         default: false
@@ -44,7 +47,6 @@ commands:
           - build-app
           - deploy-exploded-build:
               study_key: << parameters.study_key >>
-              study_guid: << parameters.study_guid >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -54,17 +56,6 @@ commands:
           command: |
             case "<< pipeline.git.branch >>" in
               develop)
-                DEPLOY_ENV=dev
-              ;;
-              # @todo: take this out
-              circle-ci-updates-1)
-                DEPLOY_ENV=dev
-              ;;
-              # @todo take this out
-              play*)
-                DEPLOY_ENV=dev
-              ;;
-              DDP-4419_mpc-migration)
                 DEPLOY_ENV=dev
               ;;
               test)
@@ -77,8 +68,8 @@ commands:
                 DEPLOY_ENV=prod
               ;;
               *)
-                echo "Cannot map << pipeline.git.branch >> to a deployment environment"
-                exit 17
+                DEPLOY_ENV=dev
+                echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
@@ -89,8 +80,6 @@ commands:
     description: Deploy archived build to GAE
     parameters:
       study_key:
-        type: string
-      study_guid:
         type: string
     steps:
       - checkout:
@@ -120,14 +109,11 @@ commands:
             ls -l $OUTPUT_DIR
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
-          study_guid: << parameters.study_guid >>
 
   deploy-exploded-build:
     description: Deploy files to GAE
     parameters:
       study_key:
-        type: string
-      study_guid:
         type: string
     steps:
       - set-deployment-environment
@@ -135,7 +121,7 @@ commands:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
             set -u
-            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> <<parameters.study_guid>> --config
+            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
             cd ddp-workspace
             CONFIG_DIR="${OUTPUT_DIR}/assets/config"
             mkdir -p $CONFIG_DIR
@@ -161,7 +147,7 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            gcloud app deploy --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
           working_directory: ~/repo/ddp-workspace
       - run:
           name: Update deployments sheet
@@ -196,6 +182,12 @@ commands:
       study_key:
         type: string
         default: UNKNOWN
+      study_keys:
+        type: string
+        default: *study_keys
+      study_guids:
+        type: string
+        default: *study_guids
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
@@ -203,6 +195,21 @@ commands:
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
             echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
             if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
+              echo 'export STUDY_KEY=<<parameters.study_key>>' >> $BASH_ENV
+              STUDY_KEYS=(<<parameters.study_keys>>)
+              STUDY_GUIDS=(<<parameters.study_guids>>)
+              for i in ${!STUDY_KEYS[@]}; do
+                  currentKey=${STUDY_KEYS[$i]}
+                  if [[ $currentKey == '<<parameters.study_key>>' ]]; then
+                      STUDY_GUID="${STUDY_GUIDS[$i]}"
+                      echo "export STUDY_GUID=${STUDY_GUID}" >> $BASH_ENV
+                      break;
+                  fi
+              done;
+              if [[ -z $STUDY_GUID ]]; then
+                echo "Could not find study guid for <<parameters.study_key>>"
+                exit 1
+              fi
               echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
               echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
               source $BASH_ENV
@@ -219,7 +226,9 @@ commands:
       - checkout:
           path: ~/repo
       - restore_cache:
-          key: *npm_cache_key
+          keys:
+            - *npm_cache_key
+            - v1-dependency-npm-
       - run:
           name: npm install
           command: npm install
@@ -270,8 +279,6 @@ commands:
     parameters:
       study_keys:
         type: string
-      study_guids:
-        type: string
     steps:
       - run:
           name: Check << parameters.study_keys >> and launch build if modified
@@ -281,7 +288,6 @@ commands:
             set +x
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
-            STUDY_GUIDS=(<< parameters.study_guids >>)
 
             CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
 
@@ -289,7 +295,6 @@ commands:
 
             for i in "${!STUDY_KEYS[@]}"; do
               STUDY_KEY=${STUDY_KEYS[$i]}
-              STUDY_GUID=${STUDY_GUIDS[$i]}
 
               NG_PROJECT_NAME="ddp-$STUDY_KEY"
               CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
@@ -300,7 +305,6 @@ commands:
                                   \"branch\": \"<< pipeline.git.branch >>\",
                                   \"parameters\": {
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"study_guid\": \"$STUDY_GUID\",
                                       \"do-builds\": true
                                   }
                                 }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
@@ -345,12 +349,14 @@ commands:
 
 jobs:
   build-and-deploy-job:
+    parameters:
+      study_key:
+        type: string
     executor:
       name: commit-executor
     steps:
       - app-build-and-deploy:
-          study_key: << pipeline.parameters.study_key >>
-          study_guid: << pipeline.parameters.study_guid >>
+          study_key: << parameters.study_key >>
           skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
@@ -360,9 +366,7 @@ jobs:
       - checkout
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
-          study_keys: "osteo brain angio mbc mpc"
-          study_guids: "CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-mpc"
-
+          study_keys: *study_keys
 
   conditionally-launch-build-and-store-all-job:
     executor:
@@ -377,8 +381,6 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
-      - conditionally-launch-build-and-store:
-          study_key: mpc
 
   app-build-and-store-job:
     executor:
@@ -387,80 +389,15 @@ jobs:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
 
-  osteo-deploy-only:
+  deploy-stored-build-job:
+    parameters:
+      study_key:
+        type: string
     executor:
       name: commit-executor
     steps:
-      - deploy-stored-build: &osteo-params
-          study_key: osteo
-          study_guid: CMI-OSTEO
-
-  brain-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build: &brain-params
-          study_key: brain
-          study_guid: cmi-brain
-
-  angio-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build: &angio-params
-          study_key: angio
-          study_guid: ANGIO
-
-  mbc-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build: &mbc-params
-          study_key: mbc
-          study_guid: cmi-mbc
-
-  mpc-deploy-only:
-    executor:
-      name: commit-executor
-    steps:
-      - deploy-stored-build: &mpc-params
-          study_key: mpc
-          study_guid: cmi-mpc
-
-  osteo-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          <<: *osteo-params
-
-  angio-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          <<: *angio-params
-
-  brain-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          <<: *brain-params
-
-  mbc-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          <<: *mbc-params
-
-  mpc-build-and-deploy:
-    executor:
-      name: commit-executor
-    steps:
-      - app-build-and-deploy:
-          <<: *mpc-params
+      - deploy-stored-build:
+          study_key: << parameters.study_key >>
 
 parameters:
   study_key:
@@ -479,20 +416,17 @@ workflows:
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-launch-build-and-deploy-all-job: &build-and-deploy-filters
+      - conditionally-launch-build-and-deploy-all-job:
           filters:
             branches:
               only:
                 - develop
-                # @TODO remove these when done.
-                - circle-ci-updates-1
-                - DDP-4419_mpc-migration
-                - /play.*/
 
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - build-and-deploy-job: *build-and-deploy-filters
+      - build-and-deploy-job:
+          study_key: << pipeline.parameters.study_key >>
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
@@ -514,21 +448,24 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - osteo-deploy-only: &deploy-filters
+      - deploy-stored-build-job: &deploy_branch_filters
           filters:
             branches:
               only:
                 - test
                 - staging
                 - production
-      - brain-deploy-only:
-          <<: *deploy-filters
-      - mbc-deploy-only:
-          <<: *deploy-filters
-      - angio-deploy-only:
-          <<: *deploy-filters
-      - mpc-deploy-only:
-          <<: *deploy-filters
+          study_key: osteo
+
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: brain
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: mbc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: angio
 
   nightly:
     triggers:
@@ -539,13 +476,15 @@ workflows:
               only:
                 - develop
     jobs:
-      - osteo-build-and-deploy:
+      - build-and-deploy-job:
           name: osteo-nightly
-      - angio-build-and-deploy:
+          study_key: osteo
+      - build-and-deploy-job:
           name: angio-nightly
-      - brain-build-and-deploy:
+          study_key: angio
+      - build-and-deploy-job:
           name: brain-nightly
-      - mbc-build-and-deploy:
+          study_key: brain
+      - build-and-deploy-job:
           name: mbc-nightly
-      - mpc-build-and-deploy:
-          name: mpc-nightly
+          study_key: mbc
