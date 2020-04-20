@@ -137,7 +137,7 @@ import {
                         <a href="http://ustoo.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-us-too.png" alt="Us Too logo logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://ancan.org/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-answer-cancer-foundation.jpg" alt="Answer Cancer Foundation logo"></a>
+                        <a href="https://ancan.org/" target="_blank"><img class="partner-logo" lazy-resource src="./assets/images/logo-answer-cancer-foundation.png" alt="Answer Cancer Foundation logo"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 PartnerLogo Message-partners">
                         <a href="https://malecare.org/" target="_blank"><img class="partner-logo" lazy-resource src="/assets/images/logo-malecare.png" alt="Malecare logo"></a>
