@@ -22,6 +22,7 @@ import {
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { DataReleaseComponent } from './components/data-release/data-release.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -52,10 +53,11 @@ toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.internationalPatientsUrl = 'international-patients';
 toolkitConfig.phone = '651-229-6991';
 toolkitConfig.infoEmail = 'info@escproject.org';
+toolkitConfig.dataEmail = 'data@escproject.org'
 toolkitConfig.twitterAccountId = 'ecscproject';
 toolkitConfig.facebookGroupId = 'ecscproject';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
-toolkitConfig.showDataRelease = false;
+toolkitConfig.showDataRelease = true;
 toolkitConfig.showInfoForPhysicians = true;
 toolkitConfig.showBlog = false;
 
@@ -102,7 +104,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
   declarations: [
     WelcomeComponent,
     MoreDetailsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    DataReleaseComponent
   ],
   providers: [
     {

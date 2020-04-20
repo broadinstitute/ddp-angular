@@ -4,7 +4,8 @@
         "FAQ": "More Details/FAQ",
         "About": "About Us",
         "Join": "Join Mailing List",
-        "Info": "Information for Physicians"
+        "Info": "Information for Physicians",
+        "Data": "Data"
     },
     "Common": {
         "CMIButton": "count me in"
@@ -262,6 +263,26 @@
             }
         }
     },
+    "DataRelease": {
+        "Title": "ESCproject Data",
+        "DataBrowser": "The Esophageal and Stomach Cancer Project Patient Data Browser",
+        "BrowserText": "Below is an interactive data browser for exploring the patient-reported data from the Esophageal and Stomach Cancer Project. This contains data from patients from the USA and Canada who signed consent.",
+        "PatientReported": "Patient-reported data included here are from patients who completed the following survey. An example of what patients see when they sign up is linked here:",
+        "InitialSurvey": "Initial intake survey",
+        "DataUse": {
+            "Text": "How to use the data browser:",
+            "List": {
+                "Item1": "On a computer, hover your cursor over any chart to see more information.",
+                "Item2": "Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left-hand corner.",
+                "Item3": "Click or tap it again to remove the filter.",
+                "Item4": "Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+            }
+        },
+        "Updated": "This data will be updated periodically as new patients join the project and as new surveys are deployed. If you have any questions or feedback, please email",
+        "ThankYou": "Thank you to every patient who has said <span class=\"Italic\">Count Me In</span> and generously shared their experiences, information, and samples to accelerate discoveries.",
+        "Video": "Data Browser Walkthrough",
+        "Tableau": "ESC Data Browser"
+    },
     "Toolkit": {
         "Common": {
             "Organization": "Count Me In"
@@ -269,11 +290,13 @@
         "Header": {
             "HeaderLogo": "Esophageal<br>& Stomach<br>Cancer Project",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me in",
+            "DataRelease": "Data"
         },
         "Footer": {
             "FooterLogo": "Esophageal<br>& Stomach<br>Cancer Project",
             "Home": "Home",
+            "Data": "Data",
             "FAQ": "More Details/FAQ",
             "About": "About Us",
             "Join": "Join Mailing List",
