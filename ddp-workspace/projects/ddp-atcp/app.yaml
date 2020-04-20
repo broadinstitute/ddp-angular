@@ -1,25 +1,18 @@
 service: atcp
-runtime: python27
-instance_class: B1
-threadsafe: true
+runtime: python37
 
-manual_scaling:
-  instances: 1
+# This setting will not matter except to prevent default automatic-scaling which prevents disabling
+# earlier versions of this service
+basic_scaling:
+  max_instances: 1
 
 handlers:
-  - url: /(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json))
+  - url: /(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
     static_files: dist/\1
-    upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json))
+    upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
+    secure: always
 
   - url: /(.*)
     static_files: dist/index.html
     upload: dist/index.html
-
-skip_files:
-  - e2e/
-  - node_modules/
-  - src/
-  - ^(.*/)?\..*$
-  - ^(.*/)?.*\.md$
-  - ^(.*/)?.*\.yaml$
-  - ^LICENSE
+    secure: always
