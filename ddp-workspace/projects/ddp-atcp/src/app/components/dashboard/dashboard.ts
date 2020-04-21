@@ -4,8 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 import {
   ActivityInstance,
   ActivityResponse,
-  LoggingService, NGXTranslateService,
-  UserActivityServiceAgent, UserProfileDecorator,
+  LoggingService,
+  UserActivityServiceAgent,
+  UserProfileDecorator,
   UserProfileServiceAgent
 } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
@@ -43,7 +44,6 @@ export class DashBoardComponent implements OnInit {
   public IN_PROGRESS = IN_PROGRESS;
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
-              private ngxTranslate: NGXTranslateService,
               private userActivity: UserActivityServiceAgent,
               private logger: LoggingService,
               private userAgent: UserProfileServiceAgent) {

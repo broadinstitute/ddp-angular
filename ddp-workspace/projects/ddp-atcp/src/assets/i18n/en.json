@@ -113,18 +113,18 @@
     "Assurances": {
       "Title": "Assurances Statement",
       "Paragraph1": "I agree to the following assurances:",
-      "AssuranceList": {
-        "Item0": "Data will only be used for approved research.",
-        "Item1": "Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
-        "Item2": "There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
-        "Item3": "All applicable laws and local institutional policies will be followed.",
-        "Item4": "Data will not be sold or shared with third parties.",
-        "Item5": "Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
-        "Item6": "Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
-        "Item7": "The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
-        "Item8": "Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
-        "Item9": "These assurances will be agreed to annually."
-      },
+      "AssuranceList": [
+        "Data will only be used for approved research.",
+        "Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
+        "There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
+        "All applicable laws and local institutional policies will be followed.",
+        "Data will not be sold or shared with third parties.",
+        "Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
+        "Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
+        "The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
+        "Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
+        "These assurances will be agreed to annually."
+      ],
       "Controls": {
         "ApplyingSignature": {
           "Label": "Signature of Applying Researcher"

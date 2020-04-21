@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NGXTranslateService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-data-access',
   templateUrl: './data-access.html',
   styleUrls: ['./data-access.scss']
 })
-export class DataAccessComponent {
+export class DataAccessComponent implements OnInit {
   public name;
   public email;
 
@@ -19,10 +20,10 @@ export class DataAccessComponent {
   public use;
 
   public sign;
-  public activeTab: number = 0;
+  public activeTab = 0;
   public countTabs = 7;
   public todayString = this.getToday();
-
+  public AssuranceList = [];
   public displayDontHaveErrors(tab: number) {
     if (tab === 1) {
       return this.name && this.email;
@@ -60,5 +61,13 @@ export class DataAccessComponent {
         }
       }
     }
+  }
+
+  constructor(private ngxTranslate: NGXTranslateService) {
+  }
+
+  ngOnInit() {
+    this.ngxTranslate.getTranslation('DataAccess')
+      .subscribe((data: any) => this.AssuranceList = data.Assurances.AssuranceList);
   }
 }

@@ -3,6 +3,7 @@ import { ActivityInstance } from 'ddp-sdk';
 
 export const CREATED = 'CREATED';
 export const IN_PROGRESS = 'IN_PROGRESS';
+export const COMPLETE = 'COMPLETE';
 
 @Component({
   selector: 'app-workflow-progress',
@@ -15,4 +16,5 @@ export class WorkflowProgressComponent {
 
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
+  public COMPLETE = COMPLETE;
 }
