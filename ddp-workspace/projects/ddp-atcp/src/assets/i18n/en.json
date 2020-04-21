@@ -380,7 +380,12 @@
     "ContactingPhysician": "Contacting Physician",
     "MedicalHistory": "Medical History",
     "GenomeStudy": "Genome Study",
-    "ReviewSubmission": "Review & Submission"
+    "ReviewSubmission": "Review & Submission",
+    "Statuses": {
+      "COMPLETE": "Completed",
+      "IN_PROGRESS": "In Progress",
+      "CREATED": "Not Started"
+    }
   },
   "SDK": {
     "SubmitButton": "Submit",

@@ -22,26 +22,36 @@
       min-height: 60px;
       display: flex;
       flex-direction: column;
+      position: relative;
       @media (min-width: 590px) {
         flex-direction: row;
         align-items: center;
         margin: 0 0 1px;
+        padding-left: 25px;
         .glyphicon {
           margin-top: 0 !important;
         }
       }
-
+      &.blue-hover:hover {
+        color: #559BE0;
+        &:before, &:after {
+          background-color: #559BE0;
+        }
+      }
       .glyphicon {
         display: none;
         margin-top: auto;
         font-size: 26px;
         max-width: 21px;
       }
+
       .number {
         max-width: 21px;
       }
+
       &.in-complete {
         color: #7BA946;
+        cursor: pointer;
 
         &:after, &:before {
           background-color: #7BA946;
@@ -59,6 +69,7 @@
       &.in-progress {
         background-color: #eee;
         color: #4274BC;
+        cursor: pointer;
 
         &:after, &:before {
           background-color: #4274BC;
@@ -88,11 +99,12 @@
       &:before {
         content: '';
         background-color: #eee;
-        min-height: 70px;
         min-width: 10px;
-        margin-right: 15px;
         display: none;
-        margin-top: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
         @media (min-width: 590px) {
           display: inline-block;
         }

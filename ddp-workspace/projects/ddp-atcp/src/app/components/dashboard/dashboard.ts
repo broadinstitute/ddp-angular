@@ -22,7 +22,9 @@ import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
       <div class="page-padding">
         <h1 *ngIf="firstName"> {{ firstName }} <span translate>DashBoard.EnrollmentProcess</span></h1>
         <div class="workdir">
-          <app-workflow-progress [steps]="steps" [instanceGuid]="instanceGuid"></app-workflow-progress>
+          <app-workflow-progress [steps]="steps"
+                                 [instanceGuid]="instanceGuid"
+                                 (onChangeActivity)="updateInstanceGuid($event)"></app-workflow-progress>
           <ddp-activity-redesigned [studyGuid]="studyGuid" [activityGuid]="instanceGuid"
                                    (submit)="setActivity($event)"></ddp-activity-redesigned>
         </div>

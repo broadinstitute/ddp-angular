@@ -1,11 +1,17 @@
 <div class="workflow-progress">
   <ul *ngIf="steps.length">
     <ng-container *ngFor="let step of steps; index as i;">
-      <li [ngClass]="{'in-progress': step.instanceGuid === instanceGuid, 'in-complete': step.statusCode === COMPLETE}">
+      <li [ngClass]="{
+            'in-progress': getStatus(step) === IN_PROGRESS,
+            'in-complete': getStatus(step) === COMPLETE,
+            'blue-hover': step.statusCode === IN_PROGRESS || step.instanceGuid === instanceGuid || step.statusCode === COMPLETE
+            }"
+        (click)="changeActivity(step)">
         <span class="number">{{ i + 1 }}</span>
         <span class="glyphicon glyphicon-ok"></span>
         <span class="name">
           {{ step.activityName }}
+          <span>{{ statuses[ step.instanceGuid === instanceGuid ? IN_PROGRESS : step.statusCode] }}</span>
         </span>
       </li>
     </ng-container>

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ActivityInstance } from 'ddp-sdk';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { ActivityInstance, NGXTranslateService } from 'ddp-sdk';
 
 export const CREATED = 'CREATED';
 export const IN_PROGRESS = 'IN_PROGRESS';
@@ -10,11 +10,34 @@ export const COMPLETE = 'COMPLETE';
   templateUrl: './workflow-progress.html',
   styleUrls: ['./workflow-progress.scss']
 })
-export class WorkflowProgressComponent {
+export class WorkflowProgressComponent implements OnInit {
   @Input() public steps: ActivityInstance[] = [];
   @Input() public instanceGuid: string;
+  @Output() public onChangeActivity = new EventEmitter<string>();
 
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
   public COMPLETE = COMPLETE;
+  public statuses = {};
+
+  constructor(private ngxTranslate: NGXTranslateService) {
+  }
+
+  ngOnInit(): void {
+    this.ngxTranslate.getTranslation('WorkflowProgress.Statuses')
+      .subscribe(statuses => this.statuses = statuses);
+  }
+
+  public getStatus(step: ActivityInstance): string {
+    if (step.statusCode === IN_PROGRESS || step.instanceGuid === this.instanceGuid) {
+      return this.IN_PROGRESS;
+    }
+    return step.statusCode;
+  }
+
+  public changeActivity(step: ActivityInstance): void {
+    if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS) {
+      this.onChangeActivity.emit(step.instanceGuid);
+    }
+  }
 }
