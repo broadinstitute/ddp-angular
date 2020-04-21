@@ -18,7 +18,6 @@ import { AboutInitiativeComponent } from './components/about-initiative/about-in
 import { DataAccessComponent } from './components/data-access/data-access';
 import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
-import { ActivityComponent } from './components/activity/activity';
 import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
 
@@ -35,15 +34,6 @@ const routes: Routes = [
         IrbGuard,
         BrowserGuard,
         AuthGuard
-      ]
-  },
-  {
-      path: RouterResource.ActivityId,
-      component: ActivityComponent,
-      canActivate: [
-          IrbGuard,
-          BrowserGuard,
-          AuthGuard
       ]
   },
   {

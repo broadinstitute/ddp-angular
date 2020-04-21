@@ -37,7 +37,6 @@ import { AboutInitiativeComponent } from './components/about-initiative/about-in
 import { DataAccessComponent } from './components/data-access/data-access';
 import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
-import { ActivityComponent } from './components/activity/activity';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
 import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
@@ -79,9 +78,7 @@ tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
 tkCfg.infoEmail = 'bistline@broadinstitute.org';
-tkCfg.twitterAccountId = 'the_osproject';
-tkCfg.facebookGroupId = 'osteosarcomaproject';
-tkCfg.instagramId = 'the_osproject';
+
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
@@ -152,7 +149,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     DataAccessComponent,
     PasswordComponent,
     DashBoardComponent,
-    ActivityComponent,
     WorkflowProgressComponent,
     ErrorComponent,
     StatisticsComponent,

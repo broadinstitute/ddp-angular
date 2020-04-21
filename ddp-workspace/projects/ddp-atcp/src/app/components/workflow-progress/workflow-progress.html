@@ -1,15 +1,12 @@
 <div class="workflow-progress">
   <ul *ngIf="steps.length">
     <ng-container *ngFor="let step of steps; index as i;">
-      <li [ngClass]="{'in-progress': step.state === CREATED, 'in-complete': step.state === COMPLETE}">
+      <li [ngClass]="{'in-progress': step.instanceGuid === instanceGuid, 'in-complete': step.state === COMPLETE}">
         <span class="number">{{ i + 1 }}</span>
         <span class="glyphicon glyphicon-ok"></span>
-        <span translate class="name">
-        {{ step.name }}
-          <span>
-          {{ states[step.state] }}
+        <span class="name">
+          {{ step.activityDashboardName }}
         </span>
-      </span>
       </li>
     </ng-container>
   </ul>
