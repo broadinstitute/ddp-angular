@@ -22,22 +22,24 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{if eq $environment "dev"}}
-    DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
-    DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
-    DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-{{else if eq $environment "test"}}
-    DDP_ENV['auth0Domain'] = "login-test.joincountmein.org";
-    DDP_ENV['auth0Audience'] = "ddp-test.auth0.com";
-    DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
-{{else if eq $environment "staging"}}
-    DDP_ENV['auth0Domain'] = "login-staging.joincountmein.org";
-    DDP_ENV['auth0Audience'] = "ddp-staging.auth0.com";
-    DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
-{{else if eq $environment "prod"}}
-    DDP_ENV['auth0Domain'] = "login.joincountmein.org";
-    DDP_ENV['auth0Audience'] = "datadonationplatform.auth0.com";
-    DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+{{if ne $study_guid "atcp"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
+        DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{else if eq $environment "test"}}
+        DDP_ENV['auth0Domain'] = "login-test.joincountmein.org";
+        DDP_ENV['auth0Audience'] = "ddp-test.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
+    {{else if eq $environment "staging"}}
+        DDP_ENV['auth0Domain'] = "login-staging.joincountmein.org";
+        DDP_ENV['auth0Audience'] = "ddp-staging.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
+    {{else if eq $environment "prod"}}
+        DDP_ENV['auth0Domain'] = "login.joincountmein.org";
+        DDP_ENV['auth0Audience'] = "datadonationplatform.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+    {{end}}
 {{end}}
 
 {{if eq $study_guid "ANGIO"}}
@@ -103,6 +105,15 @@ var DDP_ENV = {
       DDP_ENV['auth0ClientId'] = "VUC53k6a72LD11q6lRuVH7A5EnTPruwV";
       DDP_ENV['projectGAToken'] = "UA-64885513-1";
   {{end}}
+{{end}}
+
+{{if eq $study_guid "atcp"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
+        DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
+        DDP_ENV['auth0Audience'] = "at-dev.auth0.com"
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{end}}
 {{end}}
 
 {{end}}
