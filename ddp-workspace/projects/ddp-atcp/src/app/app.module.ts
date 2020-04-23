@@ -141,7 +141,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 export class AppModule {
   constructor(
     private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {UA-10
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
       ga('send', event);
       ga('platform.send', event);
     });
