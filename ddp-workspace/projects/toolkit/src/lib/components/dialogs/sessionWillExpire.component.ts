@@ -13,7 +13,7 @@ import { interval, Subscription } from 'rxjs';
                 <span>{{ timeLeft }}</span>
             </span>
         </h1>
-        <button mat-icon-button (click)="closeDialog()" [disabled]="isRenewing">
+        <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI">
             <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
@@ -23,19 +23,20 @@ import { interval, Subscription } from 'rxjs';
     <mat-dialog-actions align="end" class="row NoMargin">
         <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
                 (click)="signOut()"
-                [disabled]="isRenewing"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
         <button class="ButtonFilled Button--rect button button_small button_primary"
                 (click)="renewSession()"
-                [disabled]="isRenewing"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
         </button>
     </mat-dialog-actions>`
 })
 export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public timeLeft = '00:00';
-    public isRenewing = false;
+    // Blocks UI to prevent interference in the session renewing/logout process
+    public blockUI = false;
     private anchor: Subscription = new Subscription();
 
     constructor(
@@ -59,7 +60,9 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
                 this.timeLeft = `${formattedMinutes}:${formattedSeconds}`;
             } else {
                 this.timeLeft = '00:00';
-                this.auth0.logout('session-expired');
+                if (!this.blockUI) {
+                    this.auth0.logout('session-expired');
+                }
             }
         });
         this.anchor.add(timer);
@@ -70,13 +73,13 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     }
 
     public signOut(): void {
+        this.blockUI = true;
         this.renewNotifier.hideSessionExpirationNotifications();
         this.auth0.logout();
     }
 
     public renewSession(): void {
-        // Blocks UI to prevent interference in the session renewing process
-        this.isRenewing = true;
+        this.blockUI = true;
         this.auth0.auth0RenewToken();
     }
 
