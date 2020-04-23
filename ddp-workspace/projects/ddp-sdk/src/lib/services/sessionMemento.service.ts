@@ -52,6 +52,8 @@ export class SessionMementoService implements OnDestroy {
 
     public get session(): Session | null {
         const sessionString = localStorage.getItem(this.SESSION_KEY);
+        console.log('Found localstorage session with value: %o', JSON.parse(sessionString));
+        console.log('The document domain is:' + document.domain);
         if (sessionString) {
             return JSON.parse(sessionString);
         }
@@ -60,12 +62,8 @@ export class SessionMementoService implements OnDestroy {
     }
 
     public get token(): string {
-        const sessionString = localStorage.getItem(this.SESSION_KEY);
-        if (sessionString) {
-            return JSON.parse(sessionString).accessToken;
-        }
-
-        return '';
+        const sessionObj = this.session;
+        return sessionObj ? sessionObj.accessToken : '';
     }
 
     /**
@@ -105,6 +103,8 @@ export class SessionMementoService implements OnDestroy {
     public updateSession(session: Session): void {
         localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
         localStorage.setItem(this.TOKEN_KEY, session.idToken);
+        console.log('The domain for our document is: ' + document.domain);
+        console.log('The session object we just stored is: %o', session);
         this.sessionSubject.next(session);
     }
 
@@ -119,6 +119,7 @@ export class SessionMementoService implements OnDestroy {
 
     public clear(): void {
         localStorage.removeItem(this.SESSION_KEY);
+        console.log('The session object has been removed');
         this.sessionSubject.next(null);
     }
 
