@@ -108,6 +108,17 @@
         "Genomic": {
           "Label": "Genomic Data"
         }
+      },
+      "Messages": {
+        "ResearcherName": "Researcher name cannot be empty.",
+        "ResearcherEmail": "Researcher email cannot be empty.",
+        "ResearcherOrgName": "Org name cannot be empty.",
+        "ResearcherOrgAddress": "Org address 1 cannot be empty.",
+        "ResearcherOrgCity": "Org city cannot be empty.",
+        "ResearcherOrgCountry": "Org country cannot be empty.",
+        "ResearcherOrgZip": "Org zip cannot be empty.",
+        "ResearcherUse": "Research use cannot be empty.",
+        "ResearcherSign": "Researcher signature cannot be empty."
       }
     },
     "Assurances": {
@@ -164,165 +175,165 @@
     },
     "Hospitals": [
       {
-        "name": "Cedric Anchisi",
-        "country": "France"
+        "Name": "Cedric Anchisi",
+        "Country": "France"
       },
       {
-        "name": "Orly Dror-Azuriel",
-        "country": "Israel"
+        "Name": "Orly Dror-Azuriel",
+        "Country": "Israel"
       },
       {
-        "name": "Natalie Elkheir",
-        "country": "Australia"
+        "Name": "Natalie Elkheir",
+        "Country": "Australia"
       },
       {
-        "name": "Rianne Kranendonk",
-        "country": "Netherlands"
+        "Name": "Rianne Kranendonk",
+        "Country": "Netherlands"
       },
       {
-        "name": "Maria Angelica Lodovici",
-        "country": "Brazil"
+        "Name": "Maria Angelica Lodovici",
+        "Country": "Brazil"
       },
       {
-        "name": "Brad Margus",
-        "country": "United States"
+        "Name": "Brad Margus",
+        "Country": "United States"
       },
       {
-        "name": "Emily Read",
-        "country": "England"
+        "Name": "Emily Read",
+        "Country": "England"
       },
       {
-        "name": "Manoj Kumar Srivastwa",
-        "country": "India"
+        "Name": "Manoj Kumar Srivastwa",
+        "Country": "India"
       },
       {
-        "name": "Conrad Van Hierden ",
-        "country": "Canada"
+        "Name": "Conrad Van Hierden ",
+        "Country": "Canada"
       },
       {
-        "name": "Paxti Villen",
-        "country": "Spain"
+        "Name": "Paxti Villen",
+        "Country": "Spain"
       },
       {
-        "name": "Lian Yarlett",
+        "Name": "Lian Yarlett",
         "country": "England"
       }
     ],
     "Doctors": [
       {
-        "name": "Martin Bobrow",
-        "rank": "MD",
-        "hospital": "Emeritus Professor of Medical Genetics – University of Cambridge, Cambridge, United Kingdom and Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, UK"
+        "Name": "Martin Bobrow",
+        "Rank": "MD",
+        "Hospital": "Emeritus Professor of Medical Genetics – University of Cambridge, Cambridge, United Kingdom and Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, UK"
       },
       {
-        "name": "Luciana Chessa",
-        "rank": "MD, PhD",
-        "hospital": "Professor of Medical Genetics, Sapienza University, Roma, Italy"
+        "Name": "Luciana Chessa",
+        "Rank": "MD, PhD",
+        "Hospital": "Professor of Medical Genetics, Sapienza University, Roma, Italy"
       },
       {
-        "name": "David Coman",
-        "rank": "MD",
-        "hospital": "Medical Director of Paediatrics, Wesley Hospital, Queensland, Australia"
+        "Name": "David Coman",
+        "Rank": "MD",
+        "Hospital": "Medical Director of Paediatrics, Wesley Hospital, Queensland, Australia"
       },
       {
-        "name": "Beatriz Tavares Costa Carvalho",
-        "rank": "MD",
-        "hospital": "Associate Professor, Federal University, São Paulo, Brazil"
+        "Name": "Beatriz Tavares Costa Carvalho",
+        "Rank": "MD",
+        "Hospital": "Associate Professor, Federal University, São Paulo, Brazil"
       },
       {
-        "name": "Thomas Crawford",
-        "rank": "MD",
-        "hospital": "Associate Professor of Pediatrics and Neurology, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Name": "Thomas Crawford",
+        "Rank": "MD",
+        "Hospital": "Associate Professor of Pediatrics and Neurology, Johns Hopkins Children’s Center, Baltimore, MD, USA"
       },
       {
-        "name": "David Glazer",
-        "rank": "",
-        "hospital": "Director, Google Genomics, Mountain View, CA, USA"
+        "Name": "David Glazer",
+        "Rank": "",
+        "Hospital": "Director, Google Genomics, Mountain View, CA, USA"
       },
       {
-        "name": "Setsuko Hasegawa",
-        "rank": "MD",
-        "hospital": "Pediatrics and Developmental Biology, Tokyo Medical and Dental University, Japan"
+        "Name": "Setsuko Hasegawa",
+        "Rank": "MD",
+        "Hospital": "Pediatrics and Developmental Biology, Tokyo Medical and Dental University, Japan"
       },
       {
-        "name": "Lutz Krause",
-        "rank": "PhD",
-        "hospital": "Associate Professor, The University of Queensland, Queensland, Australia"
+        "Name": "Lutz Krause",
+        "Rank": "PhD",
+        "Hospital": "Associate Professor, The University of Queensland, Queensland, Australia"
       },
       {
-        "name": "Martin Lavin",
-        "rank": "PhD",
-        "hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australia"
+        "Name": "Martin Lavin",
+        "Rank": "PhD",
+        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australia"
       },
       {
-        "name": "Howard Lederman",
-        "rank": "MD, PhD",
-        "hospital": "Professor of Pediatrics, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Name": "Howard Lederman",
+        "Rank": "MD, PhD",
+        "Hospital": "Professor of Pediatrics, Johns Hopkins Children’s Center, Baltimore, MD, USA"
       },
       {
-        "name": "Nizar Mahlaoui",
-        "rank": "MD, MSc, MPH",
-        "hospital": "Pediatric Immuno-Hematology, Co-coordinator of The French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, France"
+        "Name": "Nizar Mahlaoui",
+        "Rank": "MD, MSc, MPH",
+        "Hospital": "Pediatric Immuno-Hematology, Co-coordinator of The French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, France"
       },
       {
-        "name": "Andreea Nissenkorn",
-        "rank": "MD",
-        "hospital": "Pediatric Neurologist, Sheba Medical Center, Ramat Gan, Israel"
+        "Name": "Andreea Nissenkorn",
+        "Rank": "MD",
+        "Hospital": "Pediatric Neurologist, Sheba Medical Center, Ramat Gan, Israel"
       },
       {
-        "name": "Anthony Philippakis",
-        "rank": "MD, PhD",
-        "hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA"
+        "Name": "Anthony Philippakis",
+        "Rank": "MD, PhD",
+        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA"
       },
       {
-        "name": "Agata Polizzi",
-        "rank": "MD, PhD",
-        "hospital": "National Centre for Rare Diseases, Rome, Italy"
+        "Name": "Agata Polizzi",
+        "Rank": "MD, PhD",
+        "Hospital": "National Centre for Rare Diseases, Rome, Italy"
       },
       {
-        "name": "Cynthia Rothblum-Oviatt",
-        "rank": "PhD",
-        "hospital": "Science Coordinator, A-T Children’s Project, Coconut Creek, FL, USA"
+        "Name": "Cynthia Rothblum-Oviatt",
+        "Rank": "PhD",
+        "Hospital": "Science Coordinator, A-T Children’s Project, Coconut Creek, FL, USA"
       },
       {
-        "name": "Yosef Shiloh",
-        "rank": "PhD",
-        "hospital": "Professor of Human Genetics, Tel Aviv University, Ramat Aviv, Israel"
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD",
+        "Hospital": "Professor of Human Genetics, Tel Aviv University, Ramat Aviv, Israel"
       },
       {
-        "name": "Grant Stewart",
-        "rank": "PhD",
-        "hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
+        "Name": "Grant Stewart",
+        "Rank": "PhD",
+        "Hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
       },
       {
-        "name": "Dominique Stoppa-Lyonnet",
-        "rank": "MD, PhD",
-        "hospital": "Professor of Genetics, Paris Descartes University and Head of the Genetics Department, Institut Curie, Paris, France"
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "MD, PhD",
+        "Hospital": "Professor of Genetics, Paris Descartes University and Head of the Genetics Department, Institut Curie, Paris, France"
       },
       {
-        "name": "Masatoshi Takagi",
-        "rank": "MD, PhD",
-        "hospital": "Associate Professor, Tokyo Medical and Dental University, Tokyo, Japan"
+        "Name": "Masatoshi Takagi",
+        "Rank": "MD, PhD",
+        "Hospital": "Associate Professor, Tokyo Medical and Dental University, Tokyo, Japan"
       },
       {
-        "name": "Anne-Marie Tassé",
-        "rank": "PhD",
-        "hospital": "Executive Director, Public Population Project in Genomics and Society, Montreal, Canada"
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD",
+        "Hospital": "Executive Director, Public Population Project in Genomics and Society, Montreal, Canada"
       },
       {
-        "name": "A. Malcolm Taylor",
-        "rank": "PhD",
-        "hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD",
+        "Hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK"
       },
       {
-        "name": "William Whitehouse",
-        "rank": "MD",
-        "hospital": "Clinical Associate Professor, University of Nottingham, Nottingham, UK"
+        "Name": "William Whitehouse",
+        "Rank": "MD",
+        "Hospital": "Clinical Associate Professor, University of Nottingham, Nottingham, UK"
       },
       {
-        "name": "Stefan Zielen",
-        "rank": "MD, PhD",
-        "hospital": "Children’s Hospital of Johann Wolfgang Goethe University, Frankfurt, Germany"
+        "Name": "Stefan Zielen",
+        "Rank": "MD, PhD",
+        "Hospital": "Children’s Hospital of Johann Wolfgang Goethe University, Frankfurt, Germany"
       }
     ]
   },
@@ -541,7 +552,7 @@
     "Dialogs": {
       "JoinMailingList": {
         "Title": "Stay informed",
-        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Text": "Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
         "Fields": {
           "FirstName": {
             "Placeholder": "First Name *",
@@ -662,7 +673,7 @@
       },
       {
         "Number": 389,
-        "Text": "Sign-ups to stay informed <br> about the initiative"
+        "Text": "Sign-ups to stay informed \n about the initiative"
       },
       {
         "Number": 258,
@@ -673,83 +684,83 @@
       "Title": "Countries represented",
       "List": [
         {
-          "width": "50px",
-          "emoji": "\uD83C\uDDFA\uD83C\uDDF8",
-          "name": "United States"
+          "Width": "50px",
+          "Emoji": "\uD83C\uDDFA\uD83C\uDDF8",
+          "Name": "United States"
         },
         {
-          "width": "30px",
-          "emoji": "🇨🇦",
-          "name": "Canada"
+          "Width": "30px",
+          "Emoji": "🇨🇦",
+          "Name": "Canada"
         },
         {
-          "width": "7px",
-          "emoji": "🇦🇩",
-          "name": "Andorra"
+          "Width": "7px",
+          "Emoji": "🇦🇩",
+          "Name": "Andorra"
         },
         {
-          "emoji": "🇦🇪",
-          "name": "United Arab Emirates"
+          "Emoji": "🇦🇪",
+          "Name": "United Arab Emirates"
         },
         {
-          "emoji": "🇦🇫",
-          "name": "Afghanistan"
+          "Emoji": "🇦🇫",
+          "Name": "Afghanistan"
         },
         {
-          "emoji": "🇦🇬",
-          "name": "Antigua & Barbuda"
+          "Emoji": "🇦🇬",
+          "Name": "Antigua & Barbuda"
         },
         {
-          "emoji": "🇦🇮",
-          "name": "Anguilla"
+          "Emoji": "🇦🇮",
+          "Name": "Anguilla"
         },
         {
-          "emoji": "🇦🇱",
-          "name": "Albania"
+          "Emoji": "🇦🇱",
+          "Name": "Albania"
         },
         {
-          "emoji": "🇦🇲",
-          "name": "Armenia"
+          "Emoji": "🇦🇲",
+          "Name": "Armenia"
         },
         {
-          "emoji": "🇦🇴",
-          "name": "Angola"
+          "Emoji": "🇦🇴",
+          "Name": "Angola"
         },
         {
-          "emoji": "🇦🇷",
-          "name": "Argentina"
+          "Emoji": "🇦🇷",
+          "Name": "Argentina"
         },
         {
-          "emoji": "🇦🇸",
-          "name": "American Samoa"
+          "Emoji": "🇦🇸",
+          "Name": "American Samoa"
         },
         {
-          "emoji": "🇦🇹",
-          "name": "Austria"
+          "Emoji": "🇦🇹",
+          "Name": "Austria"
         },
         {
-          "emoji": "🇦🇺",
-          "name": "Australia"
+          "Emoji": "🇦🇺",
+          "Name": "Australia"
         },
         {
-          "emoji": "🇦🇼",
-          "name": "Aruba"
+          "Emoji": "🇦🇼",
+          "Name": "Aruba"
         },
         {
-          "emoji": "🇦🇽",
-          "name": "Åland Islands"
+          "Emoji": "🇦🇽",
+          "Name": "Åland Islands"
         },
         {
-          "emoji": "🇦🇿",
-          "name": "Azerbaijan"
+          "Emoji": "🇦🇿",
+          "Name": "Azerbaijan"
         },
         {
-          "emoji": "🇧🇦",
-          "name": "Bosnia & Herzegovina"
+          "Emoji": "🇧🇦",
+          "Name": "Bosnia & Herzegovina"
         },
         {
-          "emoji": "🇧🇧",
-          "name": "Barbados"
+          "Emoji": "🇧🇧",
+          "Name": "Barbados"
         }
       ]
     }

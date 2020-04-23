@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as RouterResource from '../../router-resources';
-import { NGXTranslateService } from 'ddp-sdk';
+import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.html',
   styleUrls: ['./welcome.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
   public list: string[] = [];
-
+  private anchor = new CompositeDisposable();
   @ViewChild('together', {
     static: false
   }) together;
@@ -18,12 +18,17 @@ export class WelcomeComponent implements OnInit {
   constructor(private ngxTranslate: NGXTranslateService) {
   }
 
-  public scrollTo() {
+  public scrollTo(): void {
     this.together.nativeElement.scrollIntoView();
   }
 
   public ngOnInit(): void {
-    this.ngxTranslate.getTranslation('HomePage.Participate.Steps.Second.Ul')
+    const translate$ = this.ngxTranslate.getTranslation('HomePage.Participate.Steps.Second.Ul')
       .subscribe((list: string[]) => this.list = list);
+    this.anchor.addNew(translate$);
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }

@@ -15,7 +15,7 @@
     <p translate>AboutPage.FamilyOversight.Text</p>
     <ul>
       <li *ngFor="let hospital of hospitals">
-        <span>{{ hospital.name }}</span> (<i>{{ hospital.country }}</i>)</li>
+        <span>{{ hospital.Name }}</span> (<i>{{ hospital.Country }}</i>)</li>
     </ul>
     <hr>
   </div>
@@ -24,9 +24,9 @@
     <p translate>AboutPage.ScientificBoard.Text</p>
     <ul>
       <li *ngFor="let doctor of doctors">
-        <span>{{ doctor.name }}</span>,
-        <span>{{ doctor.rank }}</span> -
-        <i>{{ doctor.hospital }}</i>
+        <span>{{ doctor.Name }}</span>,
+        <span>{{ doctor.Rank }}</span> -
+        <i>{{ doctor.Hospital }}</i>
       </li>
     </ul>
     <hr>

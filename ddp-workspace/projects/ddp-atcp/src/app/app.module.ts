@@ -1,12 +1,9 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-
-import * as Hammer from 'hammerjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,7 +11,8 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  AnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -50,39 +48,9 @@ if (baseElt) {
 }
 
 declare let DDP_ENV: any;
-
+declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.aboutYouGuid = 'ABOUTYOU';
-tkCfg.aboutChildGuid = 'ABOUTCHILD';
-tkCfg.consentGuid = 'CONSENT';
-tkCfg.consentAssentGuid = 'CONSENT_ASSENT';
-tkCfg.parentalConsentGuid = 'PARENTAL_CONSENT';
-tkCfg.releaseGuid = 'RELEASE_SELF';
-tkCfg.releaseMinorGuid = 'RELEASE_MINOR';
-tkCfg.dashboardGuid = 'DASHBOARD';
-tkCfg.lovedOneGuid = 'LOVEDONE';
-tkCfg.lovedOneThankYouGuid = 'THANK_YOU';
-tkCfg.aboutYouUrl = 'about-you';
-tkCfg.aboutChildUrl = 'about-your-child';
-tkCfg.lovedOneUrl = 'loved-one';
-tkCfg.consentUrl = 'consent';
-tkCfg.consentAssentUrl = 'consent-assent';
-tkCfg.parentalConsentUrl = 'parental-consent';
-tkCfg.releaseMinorUrl = 'release-minor-survey';
-tkCfg.releaseUrl = 'release-survey';
-tkCfg.dashboardUrl = 'dashboard';
-tkCfg.doneUrl = 'proxy-thank-you';
-tkCfg.activityUrl = 'activity';
-tkCfg.errorUrl = 'error';
-tkCfg.stayInformedUrl = 'stay-informed';
-tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
-tkCfg.infoEmail = 'bistline@broadinstitute.org';
-
-// to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
-// need Instagram credentials for @osteosarcomaproject
-tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
-tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -115,15 +83,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
       });
     });
   });
-}
-
-export class MyHammerConfig extends HammerGestureConfig {
-  public buildHammer(element: HTMLElement): Hammer {
-    const hammer = new Hammer(element, {
-      touchAction: 'pan-y'
-    });
-    return hammer;
-  }
 }
 
 @NgModule({
@@ -175,22 +134,16 @@ export class MyHammerConfig extends HammerGestureConfig {
       ],
       multi: true
     },
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
-    },
     LanguagesProvider
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(
-    private router: Router,
     private analytics: AnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {UA-10
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }

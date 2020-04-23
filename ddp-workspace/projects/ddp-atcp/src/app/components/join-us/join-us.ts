@@ -2,11 +2,13 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import {
-  ActivityResponse, CompositeDisposable,
+  ActivityResponse,
+  CompositeDisposable,
   ConfigurationService,
   SessionMementoService,
   TemporaryUser,
-  TemporaryUserServiceAgent, WindowRef,
+  TemporaryUserServiceAgent,
+  WindowRef,
   WorkflowServiceAgent
 } from 'ddp-sdk';
 

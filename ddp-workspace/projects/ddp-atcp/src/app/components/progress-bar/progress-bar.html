@@ -5,7 +5,7 @@
         *ngFor="let name of tabs; let i = index;"
         (click)="setActiveTab($event, i)"
         [ngClass]="{'active' : active >= i}">
-      <a href="#" class="dot" [ngClass]="{'disabled-hover': canChooseeTab}"></a>
+      <a href="#" class="dot"></a>
     </li>
   </ul>
 </div>
