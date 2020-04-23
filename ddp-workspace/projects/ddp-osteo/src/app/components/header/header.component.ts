@@ -1,7 +1,7 @@
 import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions, Auth0AdapterService } from 'ddp-sdk';
+import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService } from 'toolkit';
 
 @Component({
@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
     private communicationService: CommunicationService,
     public headerConfig: HeaderConfigurationService,
     private analytics: AnalyticsEventsService,
-    public auth0: Auth0AdapterService,
     @Inject(DOCUMENT) private document: any) { }
 
   public ngOnInit(): void {
