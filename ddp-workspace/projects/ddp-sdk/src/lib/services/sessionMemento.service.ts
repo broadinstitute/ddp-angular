@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap, startWith } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -52,8 +52,6 @@ export class SessionMementoService implements OnDestroy {
 
     public get session(): Session | null {
         const sessionString = localStorage.getItem(this.SESSION_KEY);
-        console.log('Found localstorage session with value: %o', JSON.parse(sessionString));
-        console.log('The document domain is:' + document.domain);
         if (sessionString) {
             return JSON.parse(sessionString);
         }
@@ -62,8 +60,12 @@ export class SessionMementoService implements OnDestroy {
     }
 
     public get token(): string {
-        const sessionObj = this.session;
-        return sessionObj ? sessionObj.accessToken : '';
+        const sessionString = localStorage.getItem(this.SESSION_KEY);
+        if (sessionString) {
+            return JSON.parse(sessionString).accessToken;
+        }
+
+        return '';
     }
 
     /**
@@ -103,8 +105,6 @@ export class SessionMementoService implements OnDestroy {
     public updateSession(session: Session): void {
         localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
         localStorage.setItem(this.TOKEN_KEY, session.idToken);
-        console.log('The domain for our document is: ' + document.domain);
-        console.log('The session object we just stored is: %o', session);
         this.sessionSubject.next(session);
     }
 
@@ -119,7 +119,6 @@ export class SessionMementoService implements OnDestroy {
 
     public clear(): void {
         localStorage.removeItem(this.SESSION_KEY);
-        console.log('The session object has been removed');
         this.sessionSubject.next(null);
     }
 

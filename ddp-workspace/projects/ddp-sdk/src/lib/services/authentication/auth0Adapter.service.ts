@@ -11,10 +11,11 @@ import { Auth0Mode } from '../../models/auth0-mode';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { bindNodeCallback, Subject } from 'rxjs';
-import { takeUntil, skip, take, tap } from 'rxjs/operators';
+import { bindNodeCallback, Observable, Subject } from 'rxjs';
+import { takeUntil, skip, take, tap, catchError, mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
+import { Session } from '../../models/session';
 
 /**
  * Main class that handles Auth0 authentication
@@ -109,7 +110,6 @@ export class Auth0AdapterService implements OnDestroy {
      * Shows the auth0 modal with the ability to signup, but not login
      */
     public signup(additionalParams?: Record<string, string>): void {
-        console.log('Calling signup!');
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
         const params = {
             ...(temporarySession && {
@@ -166,15 +166,11 @@ export class Auth0AdapterService implements OnDestroy {
 
     public renewSession(renewalAuthResult): void {
         const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
-        let locale = decodedJwt['locale'];
-        if (locale == null) {
-            locale = 'en';
-        }
         this.session.setSession(
             renewalAuthResult.accessToken,
             renewalAuthResult.idToken,
             this.session.session.userGuid,
-            locale,
+            this.session.session.locale,
             // the time of expiration in UTC seconds
             decodedJwt['exp'] as number,
             this.session.session.participantGuid);
@@ -218,66 +214,22 @@ export class Auth0AdapterService implements OnDestroy {
         });
     }
 
-    public auth0RenewToken(): void {
-        const participantGuid = this.session.session.participantGuid;
-        const renewSubscription = this.session.sessionObservable.pipe(
-            tap(session => console.log('The session from observable: %o', session)),
-            // Because the session is BehaviorSubject, we should skip a current session,
-            // we are only interested in the renewed session
-            skip(1),
-            take(1)
-        ).subscribe(() => {
-            this.renewNotifier.hideSessionExpirationNotifications();
-        });
-
-        // Original code called renewAuth. This seems to be renewing token correctly
-        // Note the response types. 'code' is explicitly not supported
-        console.log('About to call checksession');
+    public auth0RenewToken(): Observable<Session | null>  {
         const studyGuid = this.configuration.studyGuid;
         const checkSession$ = bindNodeCallback(cb => this.webAuth.checkSession({
             studyGuid,
             responseType: 'token id_token',
             renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
         }, cb));
-        checkSession$().pipe(
-                tap(result => console.log('i got executed!!')),
-                take(1))
-                .subscribe(
-                    result => {
-                        // @todo remove when done
-                        // throw new Error('Could not renew token');
-                        console.log('auth0Adapter.renewToken success: %o', result);
-                        this.renewSession(result);
-                },
-            err => {
-                console.log('got an error on renewal: %o', err);
-                console.log('The result had been: %o', err);
-                renewSubscription.unsubscribe();
-                throw new Error('Could not renew token');
-            }
+        return checkSession$().pipe(
+                take(1),
+                tap(result => {
+                    this.renewSession(result);
+                }),
+                tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
+                mergeMap(result => this.session.sessionObservable.pipe(take(1)))
         );
-        // const checkSessionCall = this.webAuth.checkSession(
-        //     {
-        //         studyGuid: this.configuration.studyGuid,
-        //         responseType: 'token id_token',
-        //         renew_token_only: true, // this flag will indicate that Auth0 should not try to call user registration
-        //     },
-        //     (err, result) => {
-        //         if (err) {
-        //             console.log('got an error on renewal: %o', err);
-        //             console.log('The result had been: %o', err);
-        //             renewSubscription.unsubscribe();
-        //             throw new Error('Could not renew token');
-        //         } else {
-        //             //@todo remove when done
-        //             throw new Error('Could not renew token');
-        //             console.log('auth0Adapter.renewToken success: %o', result);
-        //             this.renewSession(result);
-        //         }
-        //     });
-        // console.log('the checksession call: %o', checkSessionCall);
     }
-
 
     public handleExpiredSession(): void {
         if (this.session.isAuthenticatedSessionExpired()) {
