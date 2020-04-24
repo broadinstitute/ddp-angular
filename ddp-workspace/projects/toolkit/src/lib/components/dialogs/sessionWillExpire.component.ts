@@ -15,7 +15,7 @@ import { finalize, take, tap } from 'rxjs/operators';
                 <span>{{ timeLeft }}</span>
             </span>
             <ng-template #renewalFailedMessage>
-                <span>Session renewal failed. Please log out and log back in again.</span>
+                <span translate>Toolkit.Dialogs.SessionWillExpire.RenewalFailed</span>
             </ng-template>
         </h1>
         <button mat-icon-button (click)="closeDialog()" [disabled]="isRenewing">
