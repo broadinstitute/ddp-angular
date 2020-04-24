@@ -52,12 +52,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             const now = Date.now();
             const remainingTime = expiresAt - now - EXTRA_TIME;
             if (remainingTime > 0) {
-                const totalSeconds = Math.floor(remainingTime / 1000);
-                const seconds = totalSeconds % 60;
-                const minutes = (totalSeconds - seconds) / 60;
-                const formattedMinutes = this.formatTime(minutes);
-                const formattedSeconds = this.formatTime(seconds);
-                this.timeLeft = `${formattedMinutes}:${formattedSeconds}`;
+                this.timeLeft = this.calculateTimeLeft(remainingTime);
             } else {
                 this.timeLeft = '00:00';
                 if (!this.blockUI) {
@@ -85,6 +80,15 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public closeDialog(): void {
         this.dialogRef.close();
+    }
+
+    private calculateTimeLeft(remainingTime: number): string {
+        const totalSeconds = Math.floor(remainingTime / 1000);
+        const seconds = totalSeconds % 60;
+        const minutes = (totalSeconds - seconds) / 60;
+        const formattedMinutes = this.formatTime(minutes);
+        const formattedSeconds = this.formatTime(seconds);
+        return `${formattedMinutes}:${formattedSeconds}`;
     }
 
     private formatTime(value: number): string {
