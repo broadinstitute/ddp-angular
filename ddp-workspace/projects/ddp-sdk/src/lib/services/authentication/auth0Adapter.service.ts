@@ -216,6 +216,12 @@ export class Auth0AdapterService implements OnDestroy {
 
     public auth0RenewToken(): Observable<Session | null>  {
         const studyGuid = this.configuration.studyGuid;
+        const auth0IdToken = this.jwtHelper.decodeToken(this.session.session.idToken)['sub'];
+        const clientId = this.configuration.auth0ClientId;
+        const resultMatchesThisSession = (result: any) => {
+            const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
+            return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
+        };
         const checkSession$ = bindNodeCallback(cb => this.webAuth.checkSession({
             studyGuid,
             responseType: 'token id_token',
@@ -224,7 +230,11 @@ export class Auth0AdapterService implements OnDestroy {
         return checkSession$().pipe(
                 take(1),
                 tap(result => {
-                    this.renewSession(result);
+                    if (resultMatchesThisSession(result)) {
+                        this.renewSession(result);
+                    } else {
+                        throw new Error('Token received does not match this session');
+                    }
                 }),
                 tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
                 mergeMap(result => this.session.sessionObservable.pipe(take(1)))
