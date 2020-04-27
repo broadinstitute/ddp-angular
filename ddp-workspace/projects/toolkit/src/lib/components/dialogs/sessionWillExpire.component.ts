@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
-import { finalize, take, tap } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
     selector: 'ddp-session-will-expire',
