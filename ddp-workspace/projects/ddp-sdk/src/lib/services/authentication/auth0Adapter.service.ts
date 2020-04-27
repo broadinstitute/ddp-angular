@@ -12,7 +12,7 @@ import { AnalyticsEventCategories } from '../../models/analyticsEventCategories'
 import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { bindNodeCallback, Observable, Subject } from 'rxjs';
-import { takeUntil, skip, take, tap, catchError, mergeMap } from 'rxjs/operators';
+import { takeUntil, take, tap, mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
 import { Session } from '../../models/session';
