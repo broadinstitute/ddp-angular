@@ -228,16 +228,16 @@ export class Auth0AdapterService implements OnDestroy {
             renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
         }, cb));
         return checkSession$().pipe(
-                take(1),
-                tap(result => {
-                    if (resultMatchesThisSession(result)) {
-                        this.renewSession(result);
-                    } else {
-                        throw new Error('Token received does not match this session');
-                    }
-                }),
-                tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
-                mergeMap(result => this.session.sessionObservable.pipe(take(1)))
+            take(1),
+            tap(result => {
+                if (resultMatchesThisSession(result)) {
+                    this.renewSession(result);
+                } else {
+                    throw new Error('Token received does not match this session');
+                }
+            }),
+            tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
+            mergeMap(result => this.session.sessionObservable.pipe(take(1)))
         );
     }
 
