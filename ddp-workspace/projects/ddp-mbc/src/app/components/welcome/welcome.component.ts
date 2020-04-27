@@ -271,7 +271,7 @@ import { AnalyticsEventsService, BrowserContentService, AnalyticsEventCategories
                         <a href="https://www.facingourrisk.org/index.php" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-force.png" [alt]="'Toolkit.Common.LogoAlts.Force' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://shaysharpespinkwishes.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-SSLogo-noBG.PNG" [alt]="'Toolkit.Common.LogoAlts.Shay' | translate"></a>
+                        <a href="https://shaysharpespinkwishes.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-shaysharpes.png" [alt]="'Toolkit.Common.LogoAlts.Shay' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
                         <a href="https://www.metastasis-research.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-MRS_LogoColor.jpg" [alt]="'Toolkit.Common.LogoAlts.MRS' | translate"></a>
