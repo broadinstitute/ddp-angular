@@ -87,7 +87,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             take(1),
             finalize(() => this.isRenewing = false)
         ).subscribe(
-            () => true,
+            () => { },
             err => this.renewalFailed = true
         );
     }
