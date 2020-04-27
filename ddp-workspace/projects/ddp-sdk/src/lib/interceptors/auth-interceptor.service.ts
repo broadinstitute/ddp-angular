@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.session.isSessionExpired()) {
-            this.auth0.logout('session-expired');
+            this.auth0.handleExpiredSession();
         } else {
             return next.handle(req);
         }
