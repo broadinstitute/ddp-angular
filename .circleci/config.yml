@@ -44,6 +44,7 @@ commands:
       - unless:
           condition: << parameters.skip_build >>
           steps:
+          - set-deployment-environment
           - build-app
           - deploy-exploded-build:
               study_key: << parameters.study_key >>
@@ -120,7 +121,6 @@ commands:
       study_key:
         type: string
     steps:
-      - set-deployment-environment
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
