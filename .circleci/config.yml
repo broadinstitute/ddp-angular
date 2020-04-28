@@ -75,8 +75,8 @@ commands:
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
-            echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo "export NG_BUILD_OPTS=$NG_BUILD_OPTS" >> $BASH_ENV
+            echo 'export ENVIRONMENT=$DEPLOY_ENV' >> $BASH_ENV
+            echo 'export NG_BUILD_OPTS=$NG_BUILD_OPTS' >> $BASH_ENV
             source $BASH_ENV
 
   deploy-stored-build:
@@ -248,7 +248,7 @@ commands:
           name: ng build
           command: |
             set -u
-            ng build $ANGULAR_PROJECT_NAME ${NG_BUILD_OPTS} --prod --aot  --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
+            ng build $ANGULAR_PROJECT_NAME $NG_BUILD_OPTS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
 
   store-app-build:
