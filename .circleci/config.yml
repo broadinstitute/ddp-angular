@@ -58,6 +58,7 @@ commands:
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap=false
               ;;
               test)
                 DEPLOY_ENV=test
@@ -71,7 +72,6 @@ commands:
               ;;
               *)
                 DEPLOY_ENV=dev
-                BUILD_PARAMS=--sourceMap
                 echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
