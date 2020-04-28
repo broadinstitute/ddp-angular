@@ -58,7 +58,7 @@ commands:
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
-                BUILD_PARAMS=--sourceMap=false
+                BUILD_PARAMS=--sourceMap
               ;;
               test)
                 DEPLOY_ENV=test
