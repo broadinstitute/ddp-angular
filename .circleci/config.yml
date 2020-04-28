@@ -57,11 +57,11 @@ commands:
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
-                PARAMS=--sourceMap
+                BUILD_PARAMS=--sourceMap
               ;;
               test)
                 DEPLOY_ENV=test
-                PARAMS=--sourceMap
+                BUILD_PARAMS=--sourceMap
               ;;
               staging)
                 DEPLOY_ENV=staging
@@ -76,7 +76,7 @@ commands:
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo "export BUILD_PARAMS=$PARAMS" >> $BASH_ENV
+            echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
             source $BASH_ENV
 
   deploy-stored-build:
@@ -248,7 +248,7 @@ commands:
           name: ng build
           command: |
             set -u
-            ng build $ANGULAR_PROJECT_NAME --prod --aot $BUILD_PARAMS --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
+            ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot  --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
 
   store-app-build:
