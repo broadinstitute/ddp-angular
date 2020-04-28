@@ -161,7 +161,6 @@ commands:
       - run:
           name: Delete previous versions of service
           command: |
-            set -u
             set +x
             # extract the service name from the GAE yaml file
             CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
