@@ -19,6 +19,7 @@ executors:
     docker:
       - image: broadinstitute/study-website-build:04-09-2020A
     working_directory: ~/repo/ddp-workspace
+    resource_class: medium+
 
 commands:
   app-build-and-store:
