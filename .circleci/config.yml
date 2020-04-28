@@ -253,6 +253,7 @@ commands:
           name: ng build
           command: |
             set -u
+            export NODE_OPTIONS='--max_old_space_size=4096'
             ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
           working_directory: ~/repo/ddp-workspace
 
