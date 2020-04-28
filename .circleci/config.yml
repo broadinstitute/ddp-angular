@@ -18,7 +18,7 @@ executors:
   commit-executor:
     docker:
       - image: broadinstitute/study-website-build:04-09-2020A
-    working_directory: ~/repo
+    working_directory: ~/repo/ddp-workspace
 
 commands:
   app-build-and-store:
@@ -134,25 +134,23 @@ commands:
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
+          working_directory: ~/repo
       - run:
           name: Setup gcloud context
           command: |
             set -u
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          working_directory: ~/repo
       - run:
           name: Deploy to GAE
           command: |
             set -u
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Update GAE dispatch config
           command: |
             set -u
             gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Update deployments sheet
           command: |
@@ -186,7 +184,6 @@ commands:
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
             done;
             exit 0;
-          working_directory: ~/repo/ddp-workspace
 
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
@@ -253,9 +250,7 @@ commands:
           name: ng build
           command: |
             set -u
-            export NODE_OPTIONS='--max_old_space_size=4096'
             ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-          working_directory: ~/repo/ddp-workspace
 
   store-app-build:
     description: "Copy build to cloud storage"
@@ -274,14 +269,12 @@ commands:
             tar -czvf ${TAR_PATH} .
             echo "Tar file created at ${TAR_PATH}"
             ls -l $TAR_PATH
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Store build archive
           command: |
             set -u
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
-          working_directory: ~/repo
 
   conditionally-launch-build-and-deploy:
     description: Launch build and deploy if project has changed
@@ -358,7 +351,6 @@ commands:
 
 jobs:
   build-and-deploy-job:
-    working_directory: ~/repo/ddp-workspace
     parameters:
       study_key:
         type: string
