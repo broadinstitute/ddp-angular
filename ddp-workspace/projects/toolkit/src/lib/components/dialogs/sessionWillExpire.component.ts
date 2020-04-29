@@ -5,10 +5,9 @@ import { interval, Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 
 @Component({
-    selector: 'ddp-session-will-expire',
+    selector: 'toolkit-session-will-expire',
     template: `
     <div class="Modal-title">
-
         <h1 class="Modal-title no-margin">
             <span *ngIf="!renewalFailed; else renewalFailedMessage">
                 <span translate>Toolkit.Dialogs.SessionWillExpire.Title</span>
@@ -24,6 +23,9 @@ import { finalize, take } from 'rxjs/operators';
     </div>
     <mat-dialog-content *ngIf="!renewalFailed">
         <p class="Modal-text" translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
+    </mat-dialog-content>
+    <mat-dialog-content *ngIf="blockUI">
+        <mat-progress-bar class="Modal-progress" mode="indeterminate"></mat-progress-bar>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="row NoMargin">
         <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
@@ -62,6 +64,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             } else {
                 this.timeLeft = '00:00';
                 if (!this.blockUI) {
+                    this.blockUI = true;
                     this.auth0.handleExpiredAuthenticatedSession();
                 }
             }
