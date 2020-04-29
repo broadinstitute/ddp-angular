@@ -2,22 +2,27 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
     selector: 'ddp-session-will-expire',
     template: `
     <div class="Modal-title">
+
         <h1 class="Modal-title no-margin">
-            <span>
+            <span *ngIf="!renewalFailed; else renewalFailedMessage">
                 <span translate>Toolkit.Dialogs.SessionWillExpire.Title</span>
                 <span>{{ timeLeft }}</span>
             </span>
+            <ng-template #renewalFailedMessage>
+                <span translate>Toolkit.Dialogs.SessionWillExpire.RenewalFailed</span>
+            </ng-template>
         </h1>
         <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI">
             <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
-    <mat-dialog-content>
+    <mat-dialog-content *ngIf="!renewalFailed">
         <p class="Modal-text" translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="row NoMargin">
@@ -26,7 +31,7 @@ import { interval, Subscription } from 'rxjs';
                 [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
-        <button class="ButtonFilled Button--rect button button_small button_primary"
+        <button *ngIf="!renewalFailed" class="ButtonFilled Button--rect button button_small button_primary"
                 (click)="renewSession()"
                 [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
@@ -37,6 +42,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public timeLeft = '00:00';
     // Blocks UI to prevent interference in the session renewing/logout process
     public blockUI = false;
+    public renewalFailed = false;
     private anchor: Subscription = new Subscription();
 
     constructor(
@@ -75,7 +81,13 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public renewSession(): void {
         this.blockUI = true;
-        this.auth0.auth0RenewToken();
+        this.auth0.auth0RenewToken().pipe(
+            take(1),
+            finalize(() => this.blockUI = false)
+        ).subscribe(
+            () => { },
+            err => this.renewalFailed = true
+        );
     }
 
     public closeDialog(): void {
