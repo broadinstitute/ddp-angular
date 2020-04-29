@@ -2,7 +2,11 @@ version: 2.1
 
 references:
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm1-{{ checksum "package-lock.json" }}
+  npm_cache_restore_key: &npm_cache_restore_key
+    keys:
+      - *npm_cache_key
+      - v1-dependency-npm1
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
                 "osteo brain angio mbc"
@@ -14,7 +18,8 @@ executors:
   commit-executor:
     docker:
       - image: broadinstitute/study-website-build:04-09-2020A
-    working_directory: ~/repo
+    working_directory: ~/repo/ddp-workspace
+    resource_class: medium+
 
 commands:
   app-build-and-store:
@@ -134,25 +139,23 @@ commands:
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
+          working_directory: ~/repo
       - run:
           name: Setup gcloud context
           command: |
             set -u
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          working_directory: ~/repo
       - run:
           name: Deploy to GAE
           command: |
             set -u
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Update GAE dispatch config
           command: |
             set -u
             gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Update deployments sheet
           command: |
@@ -163,7 +166,6 @@ commands:
       - run:
           name: Delete previous versions of service
           command: |
-            set -u
             set +x
             # extract the service name from the GAE yaml file
             CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
@@ -175,11 +177,18 @@ commands:
             AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
             VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
 
+            # Sometime deleting versions fails. If there are less than 3 versions then we are not going to worry about it
+            # and set flag so this job step does not fail when exit error value is generated
+            if [[ ! -z $VERSIONS_TO_DELETE ]] && [[ "${#VERSIONS_TO_DELETE[@]}" -lt 3 ]]; then
+              set +e
+            fi
+
             for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
               echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
             done;
-          working_directory: ~/repo/ddp-workspace
+            exit 0;
+
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
     parameters:
@@ -229,14 +238,10 @@ commands:
     steps:
       - checkout:
           path: ~/repo
-      - restore_cache:
-          keys:
-            - *npm_cache_key
-            - v1-dependency-npm-
+      - restore_cache: *npm_cache_restore_key
       - run:
           name: npm install
           command: npm install
-          working_directory: ~/repo/ddp-workspace
       - save_cache:
           key: *npm_cache_key
           paths:
@@ -250,7 +255,6 @@ commands:
           command: |
             set -u
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-          working_directory: ~/repo/ddp-workspace
 
   store-app-build:
     description: "Copy build to cloud storage"
@@ -269,14 +273,12 @@ commands:
             tar -czvf ${TAR_PATH} .
             echo "Tar file created at ${TAR_PATH}"
             ls -l $TAR_PATH
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Store build archive
           command: |
             set -u
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
-          working_directory: ~/repo
 
   conditionally-launch-build-and-deploy:
     description: Launch build and deploy if project has changed
