@@ -77,7 +77,6 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     }
 
     public signOut(): void {
-        this.blockUI = true;
         this.renewNotifier.hideSessionExpirationNotifications();
         this.auth0.logout();
     }

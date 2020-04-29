@@ -214,7 +214,7 @@ export class Auth0AdapterService implements OnDestroy {
         });
     }
 
-    public auth0RenewToken(): Observable<Session | null>  {
+    public auth0RenewToken(): Observable<Session | null> {
         const studyGuid = this.configuration.studyGuid;
         const auth0IdToken = this.jwtHelper.decodeToken(this.session.session.idToken)['sub'];
         const clientId = this.configuration.auth0ClientId;
