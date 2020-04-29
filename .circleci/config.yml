@@ -240,8 +240,8 @@ commands:
           path: ~/repo
       - restore_cache: *npm_cache_restore_key
       - run:
-          name: npm ci
-          command: npm ci
+          name: npm install
+          command: npm install
       - save_cache:
           key: *npm_cache_key
           paths:
