@@ -49,10 +49,10 @@ commands:
       - unless:
           condition: << parameters.skip_build >>
           steps:
-          - set-deployment-environment
-          - build-app
-          - deploy-exploded-build:
-              study_key: << parameters.study_key >>
+            - set-deployment-environment
+            - build-app
+            - deploy-exploded-build:
+                study_key: << parameters.study_key >>
 
   set-deployment-environment:
     description: "Determine working environment"
