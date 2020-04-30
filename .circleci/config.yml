@@ -236,7 +236,7 @@ commands:
       - restore_cache: *npm_cache_restore_key
       - run:
           name: Install dependencies
-          command: dir
+          command: "[ ! -d ./node_modules ] && npm ci"
       - save_cache:
           key: *npm_cache_key
           paths:
