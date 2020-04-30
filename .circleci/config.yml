@@ -236,7 +236,12 @@ commands:
       - restore_cache: *npm_cache_restore_key
       - run:
           name: Install dependencies
-          command: "[ ! -d ~/repo/ddp-workspace/node_modules ] && npm ci"
+          command: |
+            if [[ ! -d node_modules ]]; then
+              npm ci
+            else
+              echo "package.json and package-lock.json unchanged, using cache"
+            fi
       - save_cache:
           key: *npm_cache_key
           paths:
