@@ -2,7 +2,7 @@ version: 2.1
 
 references:
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm1-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
@@ -49,9 +49,9 @@ commands:
       - unless:
           condition: << parameters.skip_build >>
           steps:
-          - build-app
-          - deploy-exploded-build:
-              study_key: << parameters.study_key >>
+            - build-app
+            - deploy-exploded-build:
+                study_key: << parameters.study_key >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -236,8 +236,8 @@ commands:
           path: ~/repo
       - restore_cache: *npm_cache_restore_key
       - run:
-          name: npm install
-          command: npm install
+          name: Install dependencies
+          command: "[ ! -d ./node_modules ] && npm ci || echo package.json and package-lock.json unchanged, using cache"
       - save_cache:
           key: *npm_cache_key
           paths:
