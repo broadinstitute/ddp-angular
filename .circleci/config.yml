@@ -6,7 +6,6 @@ references:
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
-      - v1-dependency-npm1
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
                 "osteo brain angio mbc"
