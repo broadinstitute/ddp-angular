@@ -2,7 +2,7 @@ version: 2.1
 
 references:
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm1-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
