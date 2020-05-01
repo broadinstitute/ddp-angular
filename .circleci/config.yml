@@ -2,11 +2,10 @@ version: 2.1
 
 references:
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm1-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
-      - v1-dependency-npm1
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
                 "osteo brain angio mbc"
@@ -240,8 +239,13 @@ commands:
           path: ~/repo
       - restore_cache: *npm_cache_restore_key
       - run:
-          name: npm install
-          command: npm install
+          name: Install dependencies
+          command: |
+            if [[ ! -d node_modules ]]; then
+              npm ci
+            else
+              echo "package.json and package-lock.json unchanged, using cache"
+            fi
       - save_cache:
           key: *npm_cache_key
           paths:
