@@ -49,9 +49,10 @@ commands:
       - unless:
           condition: << parameters.skip_build >>
           steps:
-          - build-app
-          - deploy-exploded-build:
-              study_key: << parameters.study_key >>
+            - set-deployment-environment
+            - build-app
+            - deploy-exploded-build:
+                study_key: << parameters.study_key >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -62,9 +63,11 @@ commands:
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
               ;;
               test)
                 DEPLOY_ENV=test
+                BUILD_PARAMS=--sourceMap
               ;;
               staging)
                 DEPLOY_ENV=staging
@@ -74,11 +77,13 @@ commands:
               ;;
               *)
                 DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
                 echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
+            echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
             source $BASH_ENV
 
   deploy-stored-build:
@@ -121,7 +126,6 @@ commands:
       study_key:
         type: string
     steps:
-      - set-deployment-environment
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
@@ -250,7 +254,7 @@ commands:
           name: ng build
           command: |
             set -u
-            ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
+            ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
 
   store-app-build:
     description: "Copy build to cloud storage"
