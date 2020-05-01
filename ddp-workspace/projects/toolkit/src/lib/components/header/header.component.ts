@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { GoogleAnalyticsEventsService, GoogleAnalytics, BrowserContentService, WindowRef } from 'ddp-sdk';
+import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-header',
@@ -46,8 +46,8 @@ import { GoogleAnalyticsEventsService, GoogleAnalytics, BrowserContentService, W
             <li *ngIf="showButtons" class="Header-navItem">
                 <span [routerLink]="unsupportedBrowser ? null : '/count-me-in'"
                       (click)="clickCountMeIn()"
-                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}" translate>
-                    Toolkit.Header.CountMeIn
+                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}" 
+                      [innerHTML]="'Toolkit.Header.CountMeIn' | translate">
                 </span>
             </li>
             <li class="Header-navItem" fxHide="false" fxHide.gt-xs>
@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
     constructor(
         private communicationService: CommunicationService,
         private router: Router,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private browserContent: BrowserContentService,
         private windowRef: WindowRef,
         @Inject(DOCUMENT) private document: any,
@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
 
     private doAnalytics(): void {
         (this.router.url.indexOf(this.toolkitConfiguration.moreDetailsUrl) > -1) ?
-            this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromFAQ) :
-            this.analytics.emitCustomEvent(GoogleAnalytics.ClickedCountMeIn, GoogleAnalytics.FromHeader);
+            this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromFAQ) :
+            this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromHeader);
     }
 }

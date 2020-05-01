@@ -9,17 +9,18 @@
                     HomePage.IntroductionSection.Text
                 </p>
                 <div class="intro-media-block__buttons">
-                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                    <a routerLink="count-me-in" (click)="sendCountMeInAnalytics()"
+                        class="button button_medium button_primary" translate>
                         Common.Buttons.CountMeIn
                     </a>
-                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                    <a routerLink="more-details" class="button button_medium button_secondary" translate>
                         Common.Buttons.LearnMore
                     </a>
                 </div>
             </div>
             <div class="youtube-video">
                 <iframe [title]="'HomePage.IntroductionSection.IframeTitle' | translate" class="youtube-video__iframe"
-                    src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
+                    src="https://www.youtube.com/embed/d6UcF6ngNKg" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -69,7 +70,7 @@
                     </div>
                     <div>
                         <p translate>HomePage.StepsSection.Step3.Text</p>
-                        <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                        <a routerLink="more-details" class="button button_medium button_secondary" translate>
                             Common.Buttons.LearnMore
                         </a>
                     </div>
@@ -88,7 +89,7 @@
                 <div>
                     <p class="big bold" translate>HomePage.HelpSection.PassedAway.Title</p>
                     <p translate>HomePage.HelpSection.PassedAway.Text</p>
-                    <a routerLink="/more-details" class="button button_medium button_secondary" translate>
+                    <a routerLink="more-details" class="button button_medium button_secondary" translate>
                         Common.Buttons.FAQ
                     </a>
                 </div>
@@ -120,14 +121,15 @@
                     <span translate>HomePage.ParticipatingSection.ClosingText.Part2</span>
                 </p>
                 <div>
-                    <a routerLink="/count-me-in" class="button button_medium button_primary" translate>
+                    <a routerLink="count-me-in" (click)="sendCountMeInAnalytics()"
+                        class="button button_medium button_primary" translate>
                         Common.Buttons.CountMeIn
                     </a>
                 </div>
             </div>
             <div class="youtube-video">
                 <iframe lazy-resource [title]="'HomePage.ParticipatingSection.IframeTitle' | translate"
-                    class="youtube-video__iframe" src="https://www.youtube.com/embed/VAvMSzBJaqQ" frameborder="0"
+                    class="youtube-video__iframe" src="https://www.youtube.com/embed/n0tHdBHsTcw" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -148,13 +150,35 @@
             <h2 translate>
                 HomePage.PartnersSection.Title
             </h2>
-            <div class="partners-group">
-                <img lazy-resource class="image" src="assets/images/partner_mib.png" alt="Make It Better">
-                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
-                <img lazy-resource class="image" src="https://via.placeholder.com/350x150" alt="Placeholder">
+            <div class="partners">
+                <div class="partners__group">
+                    <a href="https://www.mibagents.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-mib.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.MBI' | translate">
+                    </a>
+                    <a href="https://www.quadw.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-quadw.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.QUADW' | translate">
+                    </a>
+                    <a href="https://childrenscancer.org/zach/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-zsof.jpg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.ZSOF' | translate">
+                    </a>
+                </div>
+                <div class="partners__group">
+                    <a href="https://becauseofdaniel.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-bod.png"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.BoD' | translate">
+                    </a>
+                    <a href="https://www.oscollaborative.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-os-collaborative.svg"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.OsCollaborative' | translate">
+                    </a>
+                    <a href="http://www.targetcancerfoundation.org/" target="_blank">
+                        <img lazy-resource class="image" src="assets/images/partner-tcf.png"
+                            [alt]="'HomePage.PartnersSection.ImagesAlts.TCF' | translate">
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -165,17 +189,20 @@
                     HomePage.SocialMediaSection.Title
                 </h2>
                 <div class="social-media-logos">
-                    <a [href]="twitterUrl" target="_blank">
+                    <a (click)="sendSocialMediaAnalytics('twitter')" class="social-media-logo" [href]="twitterUrl"
+                        target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/twitter.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Twitter' | translate">
+                            [alt]="'Common.Alts.Twitter' | translate">
                     </a>
-                    <a [href]="facebookUrl" target="_blank">
+                    <a (click)="sendSocialMediaAnalytics('facebook')" class="social-media-logo" [href]="facebookUrl"
+                        target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/facebook.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Facebook' | translate">
+                            [alt]="'Common.Alts.Facebook' | translate">
                     </a>
-                    <a [href]="instagramUrl" target="_blank">
+                    <a (click)="sendSocialMediaAnalytics('instagram')" class="social-media-logo" [href]="instagramUrl"
+                        target="_blank">
                         <img lazy-resource class="social-media-logos__img" src="assets/images/instagram.png"
-                            [alt]="'HomePage.SocialMediaSection.ImagesAlts.Instagram' | translate">
+                            [alt]="'Common.Alts.Instagram' | translate">
                     </a>
                 </div>
             </div>
@@ -184,16 +211,10 @@
                     <p class="big bold" translate>HomePage.SocialMediaSection.TwitterFeedTitle</p>
                     <app-twitter-timeline-widget></app-twitter-timeline-widget>
                 </div>
-                <div class="instagram-feed">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
-                    <img lazy-resource class="image" src="https://via.placeholder.com/200x200" alt="Placeholder">
+                <div>
+                    <p class="big bold" translate>HomePage.SocialMediaSection.InstagramFeedTitle</p>
+                    <toolkit-instagram-feed-lightswitch-plugin [widgetId]="lightswitchWidgetId">
+                    </toolkit-instagram-feed-lightswitch-plugin>
                 </div>
             </div>
         </div>
@@ -225,7 +246,8 @@
                 <p class="extra-margin" translate>
                     HomePage.ClosingSection.Text
                 </p>
-                <a routerLink="/count-me-in" class="button button_big button_primary" translate>
+                <a routerLink="count-me-in" (click)="sendCountMeInAnalytics()" class="button button_big button_primary"
+                    translate>
                     Common.Buttons.CountMeIn
                 </a>
             </div>

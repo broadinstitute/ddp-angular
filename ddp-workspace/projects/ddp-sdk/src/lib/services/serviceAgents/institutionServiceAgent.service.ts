@@ -12,7 +12,7 @@ import { flatMap } from 'rxjs/operators';
 export class InstitutionServiceAgent extends SessionServiceAgent<any> {
     constructor(
         session: SessionMementoService,
-        @Inject("ddp.config") configuration: ConfigurationService,
+        @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
         super(session, configuration, http, logger);

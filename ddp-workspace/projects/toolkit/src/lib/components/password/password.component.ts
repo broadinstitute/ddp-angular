@@ -1,50 +1,11 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IrbPasswordService } from 'ddp-sdk';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 
 @Component({
     selector: 'toolkit-password',
     template: `
-    <ng-container *ngIf="useRedesign; then newDesign else oldDesign"></ng-container>
-
-    <ng-template #newDesign>
-        <main class="main">
-            <section class="section password-title-section">
-                <div class="content content_tight">
-                    <h1 translate>Toolkit.Password.Title</h1>
-                </div>
-            </section>
-            <section class="section">
-                <div class="content content_tight">
-                    <div class="password-section">
-                        <p class="password-section__question" translate>Toolkit.Password.Text</p>
-                        <form [formGroup]="passwordForm" (ngSubmit)="submitForm()">
-                            <mat-form-field>
-                                <input matInput
-                                    type="password"
-                                    formControlName="password"
-                                    [placeholder]="'Toolkit.Password.InputPlaceholder' | translate"
-                                    maxLength="200">
-                                    <mat-error *ngIf="isValid('password')" translate>Toolkit.Password.PasswordRequiredError</mat-error>
-                            </mat-form-field>
-                            <div class="password-section__button">
-                                <button [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate"
-                                    class="button button_medium button_primary" translate>Common.Buttons.Submit.Title</button>
-                            </div>
-                            <div *ngIf="isPasswordWrong" class="ErrorMessage">
-                                <span translate>Toolkit.Password.PasswordWrongError</span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </ng-template>
-
-    <ng-template #oldDesign>
         <toolkit-header [showButtons]="true"
                         [showUserMenu]="false">
         </toolkit-header>
@@ -87,26 +48,20 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                     </div>
                 </div>
             </article>
-        </div>
-    </ng-template>`
+        </div>`
 })
 
 export class PasswordComponent implements OnInit {
     public passwordForm: FormGroup;
     public isPasswordWrong = false;
-    public useRedesign: boolean;
 
     constructor(
-        private headerConfig: HeaderConfigurationService,
         private formBuilder: FormBuilder,
         private irbPassword: IrbPasswordService,
-        private router: Router,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+        private router: Router) { }
 
     public ngOnInit(): void {
         this.initPasswordForm();
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
-        this.headerConfig.setupPasswordHeader();
     }
 
     public submitForm(): void {

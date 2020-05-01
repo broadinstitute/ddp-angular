@@ -11,11 +11,11 @@ import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 
 @Component({
-    selector: 'ddp-redesigned-activity',
+    selector: 'ddp-activity-redesigned',
     template: `
     <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
         <ng-container *ngIf="isLoaded && model">
@@ -24,9 +24,9 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <div class="sticky-block" [innerHTML]="model.subtitle"></div>
                 </div>
             </section>
-            <section *ngIf="model.name" class="section">
+            <section *ngIf="model.title" class="section">
                 <div class="content content_tight">
-                    <h1>{{model.name}}</h1>
+                    <h1>{{model.title}}</h1>
                 </div>
             </section>
         </ng-container>
@@ -50,7 +50,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
@@ -78,7 +78,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (visibilityChanged)="updateVisibility($event)"
-                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
 
@@ -91,7 +91,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
                                 (visibilityChanged)="updateVisibility($event)"
-                                (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                 (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
                     </ng-container>
@@ -106,7 +106,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     </ng-container>
                     <div class="activity-buttons">
                         <ng-container *ngIf="isLoaded && isStepped">
-                            <button *ngIf="!isFirstStep" 
+                            <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_secondary"
                                     (click)="decrementStep()"
@@ -127,7 +127,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     (mouseenter)="mouseEnterOnSubmit()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.readonly && isLoaded" 
+                            <button *ngIf="model.readonly && isLoaded"
                                     class="button button_medium button_primary button_right"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
@@ -151,7 +151,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         windowRef: WindowRef,
         renderer: Renderer2,
         submitService: SubmitAnnouncementService,
-        analytics: GoogleAnalyticsEventsService,
+        analytics: AnalyticsEventsService,
         @Inject(DOCUMENT) document: any,
         injector: Injector) {
         super(windowRef, renderer, submitService, analytics, document, injector);

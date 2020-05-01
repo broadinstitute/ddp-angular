@@ -14,7 +14,10 @@ export interface TextParameters {
   autocomplete: boolean;
   question?: string;
   placeholder?: string;
-  label?: string
+  label?: string;
+  confirmEntry?: boolean;
+  confirmPrompt?: string;
+  mismatchMessage?: string;
 }
 
 @Component({
@@ -62,6 +65,9 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
     newQuestion.regexPattern = parameters.regexPattern;
     newQuestion.inputType = parameters.inputType;
     newQuestion.label = parameters.label;
+    newQuestion.confirmEntry = parameters.confirmEntry;
+    newQuestion.confirmPrompt = parameters.confirmPrompt;
+    newQuestion.mismatchMessage = parameters.mismatchMessage;
     this.validationMessage = null;
     if (parameters.autocomplete && parameters.suggestions) {
       newQuestion.textSuggestionSource = (value$: Observable<string>) => value$.pipe(
@@ -87,7 +93,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         while ((position = lowerCaseSuggestion.indexOf(lowerCaseValue, position + step)) !== -1) {
           matches.push({
             offset: position,
-            length: length
+            length
           });
           if (step !== length) {
             step = length;
@@ -95,7 +101,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         }
         values.push({
           value: suggestion,
-          matches: matches
+          matches
         });
       }
     });

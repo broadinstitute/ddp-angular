@@ -29,12 +29,12 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const get = this.activityService.getActivities(new BehaviorSubject("TESTSTUDY1")).subscribe((result) => {
+    const get = this.activityService.getActivities(new BehaviorSubject('TESTSTUDY1')).subscribe((result) => {
       if (result && _.isArray(result) && result.length > 0) {
         this.activityInstanceGuid = result[0].instanceGuid;
-        console.log("Got an activityIntanceGuid:" + this.activityInstanceGuid);
+        console.log('Got an activityIntanceGuid:' + this.activityInstanceGuid);
       } else {
-        console.log("Could not find and activity");
+        console.log('Could not find and activity');
       }
     });
     this.anchor.addNew(get);
@@ -50,7 +50,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
 
   public deleteTempAddress(): void {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
-      () => console.log("temp address deleted"));
+      () => console.log('temp address deleted'));
     this.anchor.addNew(del);
   }
 
@@ -79,7 +79,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
         } else {
           return empty();
         }
-      })).subscribe(() => console.log("address was deleted"));
+      })).subscribe(() => console.log('address was deleted'));
     this.anchor.addNew(address);
   }
 }

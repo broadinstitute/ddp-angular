@@ -37,6 +37,7 @@ export class ActivityComponentConverter {
         institutionBlock.subtitleText = inputBlock.component.parameters.subtitleText;
         institutionBlock.institutionType = inputBlock.component.parameters.institutionType;
         institutionBlock.showFieldsInitially = inputBlock.component.parameters.showFieldsInitially;
+        institutionBlock.required = inputBlock.component.parameters.required;
         institutionBlock.displayNumber = inputBlock.displayNumber;
         return institutionBlock;
     }

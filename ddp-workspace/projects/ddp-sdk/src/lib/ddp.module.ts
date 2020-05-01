@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 
@@ -19,9 +19,10 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 // Shared components & services
 import { ConfigurationService } from './services/configuration.service';
 import { SessionMementoService } from './services/sessionMemento.service';
-import { GoogleAnalyticsEventsService } from './services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
+import { LanguageService } from './services/languageService.service';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -78,6 +79,7 @@ import { ActivityQuestionComponent } from './components/activityForm/activityQue
 import { ActivityBooleanAnswer } from './components/activityForm/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/activityTextAnswer.component';
+import { ActivityEmailInput } from './components/activityForm/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
 import { ActivityAnswerComponent } from './components/activityForm/activityAnswer.component';
@@ -161,6 +163,8 @@ import { RouteTransformerDirective } from './directives/routeTransformer.directi
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
+import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
   return {
@@ -231,7 +235,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserProfileBusService,
     LoggingService,
     SessionMementoService,
-    GoogleAnalyticsEventsService,
+    AnalyticsEventsService,
     UserActivityServiceAgent,
     UserProfileServiceAgent,
     ActivityServiceAgent,
@@ -265,7 +269,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TemporaryUserServiceAgent,
     InvitationsServiceAgent,
     Title,
-    RenewSessionNotifier
+    RenewSessionNotifier,
+    LanguageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   declarations: [
     NetworkSnifferComponent,
@@ -287,6 +297,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailInput,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,
@@ -340,6 +351,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ActivityQuestionComponent,
     ActivityBooleanAnswer,
     ActivityTextAnswer,
+    ActivityEmailInput,
     ActivityNumericAnswer,
     ActivityAnswerComponent,
     ActivityPicklistAnswer,

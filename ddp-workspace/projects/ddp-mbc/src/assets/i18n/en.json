@@ -10,13 +10,50 @@
     },
     "Toolkit": {
         "Common": {
-            "Organization": "Count Me In"
+            "Organization": "Count Me In",
+            "LogoAlts": {
+                "MBCN": "Metastatic Breast Cancer Network logo",
+                "Avon": "Avon Foundation For Women logo",
+                "Alliance": "MBC Alliance logo",
+                "LBBC": "Living Beyond Breast Cancer logo",
+                "IBCRF": "Inflammatory Breast Cancer Foundation logo",
+                "Young": "Young Survival Coalition logo",
+                "Share": "Share Cancer Support logo",
+                "Male": "The Male Breast Cancer Coalition logo",
+                "Theresa": "Theresa's Research Foundation logo",
+                "TNBC": "Triple Negative Breast Cancer Foundation logo",
+                "IBC": "The IBC Network Foundation",
+                "A4BC": "Advocates 4 Breast Cancer logo",
+                "Metavivor": "Metavivor logo",
+                "Metup": "Metup logo",
+                "Tigerlily": "Tigerlily Foundation logo",
+                "Komen": "Susan G. Komen logo",
+                "BCRF": "Breast Cancer Research Foundation logo",
+                "DSLFR": "The Dr. Susan Love Foundation logo",
+                "BCSM": "The Breast Cancer Social Media logo",
+                "HopeScarves": "Hope Scarves logo",
+                "CancerCouch": "The Cancer Couch logo",
+                "TwistedPink": "Twisted Pink logo",
+                "CierraSisters": "Cierra Sisters logo",
+                "BC": "Breast Cancer Trials logo",
+                "BCAlliance": "Breast Cancer Alliance logo",
+                "TutuProject": "The Tutu Project logo",
+                "MPBCAlliance": "Metaplastic Breast Cancer Global Alliance logo",
+                "LBCA": "Lobular Breast Cancer Alliance logo",
+                "Force": "Facing Our Risk of Cancer Empowered logo",
+                "Shay": "Shay Sharpe's Pink Wishes logo",
+                "MRS": "Metastasis Research Society logo",
+                "Sisters": "Sisters R Us Circle of Survivors logo",
+                "HMN": "Health Ministries Network logo",
+                "Min": "Minority Coalition logo",
+                "MBCCanada": "Metastatic Breast Cancer Canada logo"
+            }
         },
         "Header": {
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
         },
         "Footer": {
             "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",
@@ -64,8 +101,7 @@
                     "Title": "Step 3",
                     "Subtitle": "Learn with us along the way",
                     "Text": "We are excited to learn with you! Throughout the project, we will provide you with regular updates about the status of the project and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
-                },
-                "CountMeInButton": "count me in"
+                }
             },
             "FourthBlock": {
                 "TitlePt1": "The time to",
@@ -81,30 +117,9 @@
             "SixthBlock": {
                 "TitlePt1": "Please join us and say",
                 "TitlePt2": "\"Count Me In\"",
-                "Text": "With your help, patients can be the driving force behind cancer research.",
-                "CountMeInButton": "count me in"
-            }
-        },
-        "CountMeIn": {
-            "Title": "Join the movement: tell us about yourself",
-            "MainParagraph": "Complete the form below to tell us about yourself and your cancer. Our goal is to perform many different studies within the metastatic breast cancer community. Allowing us to know a little bit about your experience will help us conduct our current projects and also to design future studies. We will be starting with some focused studies in metastatic breast cancer, and expanding over time based on what we learn from you. We are asking all patients with metastatic breast cancer to say \"Count Me In\" and fill out the form so that we can use the information you provide to plan our next studies.",
-            "ParagraphPart1": "If you’ve previously submitted your name and email and have already started answering the questionnaire,",
-            "ParagraphLink": "click here",
-            "ParagraphPart2": "so we can resend you a link that will let you pick up where you left off.",
-            "Contact": "Contact Info",
-            "Fields": {
-                "FirstNamePlaceholder": "First Name *",
-                "FirstNameError": "First Name is required",
-                "LastNamePlaceholder": "Last Name *",
-                "LastNameError": "Last Name is required"
+                "Text": "With your help, patients can be the driving force behind cancer research."
             },
-            "Answers": {
-                "Answer1": "I have been diagnosed with metastatic breast cancer (also known as advanced or stage IV breast cancer). I’m willing to answer additional questions about myself and my experience with metastatic breast cancer.",
-                "Answer2": "I haven't been diagnosed with metastatic breast cancer, but I want to stay informed about the Metastatic Breast Cancer Project by joining the email list."
-            },
-            "Required": "* Required field",
-            "RoleError": "Please choose one of the above options.",
-            "Submit": "SUBMIT"
+            "CountMeInButton": "count me in"
         },
         "AboutUs": {
             "PageHeader": {
@@ -138,7 +153,8 @@
         },
         "DataRelease": {
             "Title": "MBCproject Data",
-            "ViewDataButton": "VIEW THE MBCPROJECT DATA",
+            "ViewDataButton": "VIEW MBCPROJECT DATA ON CBIOPORTAL",
+            "ViewDataBrowser": "VIEW MBCPROJECT PATIENT DATA BROWSER",
             "MainText": {
                 "Section1": "One key goal of the MBCproject is to enable scientific discoveries and the development of new treatment strategies for metastatic breast cancer by widely sharing clinical, genomic, molecular, and patient-reported data.",
                 "Section2": "To this end, the MBCproject has first released available data in cBioPortal, a web-based platform to allow exploration of genomic data. Much effort has been put into generating, cleaning, and releasing this data so that the entire global research community can analyze and develop new research directions. The MBCproject data is being released as it is generated, and as the project continues to enroll patients, more data will be added. As we release more data over time, we anticipate that this will help accelerate discoveries in metastatic breast cancer.",
@@ -242,10 +258,28 @@
             },
             "Glossary": {
                 "Title": "Glossary",
-                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
-                "Additional": {
-                    "TextPt1": "If there are additional terms that you would like defined that are not included in the National Cancer Institute Dictionary, please send an email to",
-                    "TextPt2": "and include “New Glossary Term:” in your email subject line. We will be creating a glossary to define some of the genomics terms seen on cBioPortal."
+                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
+            },
+            "DataBrowser": {
+                "Title": "The Metastatic Breast Cancer Project Patient Data Browser",
+                "Main": {
+                    "Intro": "Below is an interactive data browser for exploring the patient-reported data from the Metastatic Breast Cancer Project. This contains data from patients from the USA and Canada who signed consent.",
+                    "List": {
+                        "Intro": "Patient-reported data included here are from patients who completed both of the following surveys. Examples of what patients see when they sign up are linked here:",
+                        "Item1": "Initial intake survey",
+                        "Item2": "First follow-up survey"
+                    }
+                },
+                "HowToUse": {
+                    "Title": "How to use the data browser:",
+                    "List": {
+                        "Item1": "On a computer, hover your cursor over any chart to see more information.",
+                        "Item2": "Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left hand corner.",
+                        "Item3": "Click or tap it again to remove the filter.",
+                        "Item4": "Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+                    },
+                    "Text1": "This data will be updated periodically as new patients join the project and as new surveys are deployed. If you have any questions or feedback, please email",
+                    "Text2": "Thank you to every patient who has said <span class=\"Italic\">Count Me In</span> and generously shared their experiences, information, and samples to accelerate discoveries."
                 }
             }
         },
@@ -282,30 +316,12 @@
                 "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
                 "LoadingError": "We're sorry, but an error has occurred."
             },
-            "ResendEmail": {
-                "InitialForm": {
-                    "Title": "Resend Email",
-                    "Text": "Enter your email below and we'll send you a link so that you can complete your questionnaire.",
-                    "EmailField": {
-                        "Placeholder": "Email Address *",
-                        "Error": "Please enter a valid Email Address"
-                    },
-                    "LoadingError": "We're sorry, but an error has occurred.",
-                    "CancelButton": "CANCEL",
-                    "SubmitButton": "SEND EMAIL"
-                },
-                "ThankYouForm": {
-                    "Title": "Thank you!",
-                    "Text": "We've sent your information to",
-                    "Text2": "If you have any questions about your status in the project, please email ",
-                    "SubmitButton": "OK"
-                }
-            },
             "SessionWillExpire": {
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
-                "Continue": "Continue"
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
         },
         "Warning": {
@@ -536,21 +552,21 @@
             "Text": "The dashboard below describes each Metastatic Breast Cancer Project form and its status."
         },
         "DatePicker": {
-          "Day": "Choose day...",
-          "Month": "Choose month...",
-          "Year": "Choose year...",
-          "January": "January",
-          "February": "February",
-          "March": "March",
-          "April": "April",
-          "May": "May",
-          "June": "June",
-          "July": "July",
-          "August": "August",
-          "September": "September",
-          "October": "October",
-          "November": "November",
-          "December": "December"
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
@@ -563,6 +579,19 @@
         "Title": {
             "Default": "The Metastatic Breast Cancer Project",
             "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }

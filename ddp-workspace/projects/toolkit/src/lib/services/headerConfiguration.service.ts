@@ -8,7 +8,7 @@ export class HeaderConfigurationService {
     public showDashboardButton = false;
     public showBreadcrumbs = false;
     public stickySubtitle = '';
-    public currentActivity = '';
+    public currentActivityCode = '';
     public workflowStartSectionsVisibility: number | null = null;
 
     public setupActivityHeader(): void {
@@ -36,7 +36,7 @@ export class HeaderConfigurationService {
         this.showDashboardButton = false;
         this.showBreadcrumbs = false;
         this.stickySubtitle = '';
-        this.currentActivity = '';
+        this.currentActivityCode = '';
         this.workflowStartSectionsVisibility = null;
     }
 }

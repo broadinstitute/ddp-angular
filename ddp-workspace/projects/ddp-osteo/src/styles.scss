@@ -1,16 +1,16 @@
-@import "app-theme.scss";
-@import "./styles/activity.scss";
-@import "./styles/buttons.scss";
-@import "./styles/dashboard.scss";
-@import "./styles/stay-informed.scss";
-@import "./styles/error.scss";
-@import "./styles/password.scss";
-@import "./styles/loved-one-thank-you.scss";
-@import "./styles/age-up-thank-you.scss";
-@import "./styles/session-expired.scss";
-@import "./styles/dialogs.scss";
+@import 'app-theme.scss';
+@import './styles/activity.scss';
+@import './styles/buttons.scss';
+@import './styles/dashboard.scss';
+@import './styles/stay-informed.scss';
+@import './styles/password.scss';
+@import './styles/loved-one-thank-you.scss';
+@import './styles/age-up-thank-you.scss';
+@import './styles/session-expired.scss';
+@import './styles/dialogs.scss';
+@import './styles//static-page.scss';
 
-$custom-typography: mat-typography-config($font-family: "Source Sans Pro");
+$custom-typography: mat-typography-config($font-family: 'Source Sans Pro');
 
 @include mat-core($custom-typography);
 
@@ -95,8 +95,8 @@ h4 {
 
 .wrapper {
     height: 100vh;
-    margin-bottom: -5rem; // footer's height
-    padding-bottom: 5rem; // footer's height
+    margin-bottom: -20rem; // footer's height
+    padding-bottom: 20rem; // footer's height
     padding-top: 6.25rem; // header's height
     box-sizing: border-box;
 }
@@ -178,6 +178,10 @@ h4 {
     margin-top: 5rem;
 }
 
+.extra-margin-bottom {
+    margin-bottom: 5rem;
+}
+
 .black {
     color: mat-color($app-theme, 200);
 }
@@ -195,6 +199,7 @@ h4 {
 .Link {
     color: mat-color($app-theme, 250);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .Link:hover {

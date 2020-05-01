@@ -21,6 +21,6 @@ export class SilentRenewComponent implements OnInit {
   }
 
   public doRenew(): void {
-    this.auth0Service.auth0RenewToken();
+    this.auth0Service.auth0RenewToken().subscribe();
   }
 }

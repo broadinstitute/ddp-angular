@@ -68,126 +68,125 @@ import { ToolkitConfigurationService } from 'toolkit';
               <section class="Message">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.mbcn.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbcn.svg" alt="SARC Logo"></a>
+                        <a href="http://www.mbcn.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbcn.png" [alt]="'Toolkit.Common.LogoAlts.MBCN' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.avonfoundation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-avon.svg" alt="Sarcoma Alliance Logo"></a>
+                        <img lazy-resource class="partner-logo" src="./assets/images/logo-avon.svg" [alt]="'Toolkit.Common.LogoAlts.Avon' | translate">
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.mbcalliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbca.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.mbcalliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbca.png" [alt]="'Toolkit.Common.LogoAlts.Alliance' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.lbbc.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-lbbc.svg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.ibcresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ibcrf.svg" alt="SARC Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.youngsurvival.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ysc.svg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.sharecancersupport.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-share.png" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://malebreastcancercoalition.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbcc.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="http://www.lbbc.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-lbbc.svg" [alt]="'Toolkit.Common.LogoAlts.LBBC' | translate"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.theresasresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-theresas.svg" alt="SARC Logo"></a>
+                        <a href="http://www.ibcresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ibcrf.png" [alt]="'Toolkit.Common.LogoAlts.IBCRF' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://tnbcfoundation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tnbc.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.youngsurvival.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ysc.png" [alt]="'Toolkit.Common.LogoAlts.Young' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.theibcnetwork.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ibc.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.sharecancersupport.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-share.png" [alt]="'Toolkit.Common.LogoAlts.Share' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://advocates4breastcancer.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-a4bc.jpg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.metavivor.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-metavivor.svg" alt="SARC Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://metup.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-metup.png" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.tigerlilyfoundation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tigerlily.jpg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://ww5.komen.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-susangkomen.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://malebreastcancercoalition.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-mbcc.png" [alt]="'Toolkit.Common.LogoAlts.Male' | translate"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.bcrf.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bcrf.svg" alt="SARC Logo"></a>
+                        <a href="http://www.theresasresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-theresas.png" [alt]="'Toolkit.Common.LogoAlts.Theresa' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.drsusanloveresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-dslrf.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://tnbcfoundation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tnbc.png" [alt]="'Toolkit.Common.LogoAlts.TNBC' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://bcsm.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bcsm.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.theibcnetwork.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-ibc.svg" [alt]="'Toolkit.Common.LogoAlts.IBC' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://hopescarves.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-hopescarves.svg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.thecancercouch.com/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-cancer-couch-foundation.png" alt="SARC Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://twistedpink.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-twistedpink.jpg" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://www.cierrasisters.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-cierra-sisters.png" alt="Sarcoma Alliance Logo"></a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.breastcancertrials.org/BCTIncludes/index.html" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bc-trials.jpg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="http://advocates4breastcancer.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-a4bc.jpg" [alt]="'Toolkit.Common.LogoAlts.A4BC' | translate"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="http://breastcanceralliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bca.jpg" alt="SARC Logo"></a>
+                        <a href="http://www.metavivor.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-metavivor.png" [alt]="'Toolkit.Common.LogoAlts.Metavivor' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://thetutuproject.com/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tutuproject.jpg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="http://metup.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-metup.png" [alt]="'Toolkit.Common.LogoAlts.Metup' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.mpbcalliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-MetaplasticBreastGlobalAlliance.svg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.tigerlilyfoundation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tigerlily.jpg" [alt]="'Toolkit.Common.LogoAlts.Tigerlily' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://lobularbreastcancer.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-lbca.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://ww5.komen.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-susangkomen.png" [alt]="'Toolkit.Common.LogoAlts.Komen' | translate"></a>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.facingourrisk.org/index.php" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-force.svg" alt="SARC Logo"></a>
+                        <a href="https://www.bcrf.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bcrf.svg" [alt]="'Toolkit.Common.LogoAlts.BCRF' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://shaysharpespinkwishes.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-SSLogo-noBG.PNG" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://www.drsusanloveresearch.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-dslrf.png" [alt]="'Toolkit.Common.LogoAlts.DSLFR' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://www.metastasis-research.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-MRS_LogoColor.jpg" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://bcsm.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bcsm.png" [alt]="'Toolkit.Common.LogoAlts.BCSM' | translate"></a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
-                        <a href="https://sistersrus.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-highresolutionpng.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://hopescarves.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-hopescarves.svg" [alt]="'Toolkit.Common.LogoAlts.HopeScarves' | translate"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://www.thecancercouch.com/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-cancer-couch-foundation.png" [alt]="'Toolkit.Common.LogoAlts.CancerCouch' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://twistedpink.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-twistedpink.jpg" [alt]="'Toolkit.Common.LogoAlts.TwistedPink' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="http://www.cierrasisters.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-cierra-sisters.png" [alt]="'Toolkit.Common.LogoAlts.CierraSisters' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://www.breastcancertrials.org/BCTIncludes/index.html" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bc-trials.jpg" [alt]="'Toolkit.Common.LogoAlts.BC' | translate"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="http://breastcanceralliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-bca.jpg" [alt]="'Toolkit.Common.LogoAlts.BCAlliance' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://thetutuproject.com/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-tutuproject.jpg" [alt]="'Toolkit.Common.LogoAlts.TutuProject' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://www.mpbcalliance.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-MetaplasticBreastGlobalAlliance.png" [alt]="'Toolkit.Common.LogoAlts.MPBCAlliance' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://lobularbreastcancer.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-lbca.png" [alt]="'Toolkit.Common.LogoAlts.LBCA' | translate"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://www.facingourrisk.org/index.php" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-force.png" [alt]="'Toolkit.Common.LogoAlts.Force' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://shaysharpespinkwishes.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-shaysharpes.png" [alt]="'Toolkit.Common.LogoAlts.Shay' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://www.metastasis-research.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-MRS_LogoColor.jpg" [alt]="'Toolkit.Common.LogoAlts.MRS' | translate"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 Message-partners">
+                        <a href="https://sistersrus.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo-highresolutionpng.png" [alt]="'Toolkit.Common.LogoAlts.Sisters' | translate"></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Message-partners">
-                        <img lazy-resource class="partner-logo" src="./assets/images/logo-hmn.png" alt="SARC Logo">
+                        <img lazy-resource class="partner-logo" src="./assets/images/logo-hmn.png" [alt]="'Toolkit.Common.LogoAlts.HMN' | translate">
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Message-partners">
-                        <img lazy-resource class="partner-logo" src="./assets/images/logo-min_coalition.png" alt="Sarcoma Alliance Logo">
+                        <img lazy-resource class="partner-logo" src="./assets/images/logo-min_coalition.png" [alt]="'Toolkit.Common.LogoAlts.Min' | translate">
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Message-partners">
-                        <a href="https://mbccanada.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo_mbccanada.png" alt="Sarcoma Alliance Logo"></a>
+                        <a href="https://mbccanada.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/logo_mbccanada.png" [alt]="'Toolkit.Common.LogoAlts.MBCCanada' | translate"></a>
                     </div>
                 </div>
             </section>

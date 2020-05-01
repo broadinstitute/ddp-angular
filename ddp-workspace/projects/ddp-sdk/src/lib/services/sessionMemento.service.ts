@@ -1,32 +1,33 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
-import { TemporaryUser } from './../models/temporaryUser';
+import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
     private readonly SESSION_KEY: string = 'session_key';
     private readonly TOKEN_KEY = 'token';
-    private readonly sessionSubject: BehaviorSubject<Session | null>;
-    private readonly renewSubject: Subject<number>;
-    private readonly notificationSubject: Subject<number>;
-    private readonly MSECS_TO_NOTIFICATION = 300000;
+    private readonly MSECS_TO_NOTIFICATION = 360000;
+
+    private sessionSubject: BehaviorSubject<Session | null> = new BehaviorSubject<Session | null>(this.session);
+    private renewSubject: Subject<number> = new Subject<number>();
+    private notificationSubject: Subject<number> = new Subject<number>();
+
+    private otherBrowserTabStorageEvent$: Observable<any>;
+
     private expirationSubscription: Subscription;
     private renewSubscription: Subscription;
     private notificationSubscription: Subscription;
-    private otherBrowserTabStorageEvent$: Observable<any>;
-    private sub: Subscription;
+    private anchor: Subscription = new Subscription();
 
     constructor() {
-        this.sessionSubject = new BehaviorSubject<Session | null>(this.session);
-        this.renewSubject = new Subject<number>();
-        this.notificationSubject = new Subject<number>();
-        this.observeExpiration();
+        this.observeSessionExpiration();
+        this.observeSessionStatus();
         // listen for storage events. Only get notified of storage changes in other tabs
         this.otherBrowserTabStorageEvent$ = fromEvent(window, 'storage');
         // the session storage
-        this.sub = this.otherBrowserTabStorageEvent$.pipe(
+        const tab = this.otherBrowserTabStorageEvent$.pipe(
             filter(event => event.key === this.SESSION_KEY),
             filter(event => event.newValue !== event.oldValue),
             map(event => event.newValue)
@@ -39,10 +40,11 @@ export class SessionMementoService implements OnDestroy {
                 this.updateSession(JSON.parse(newSessionValue));
             }
         });
+        this.anchor.add(tab);
     }
 
     public ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.anchor.unsubscribe();
         this.expirationSubscription.unsubscribe();
         this.renewSubscription.unsubscribe();
         this.notificationSubscription.unsubscribe();
@@ -62,6 +64,7 @@ export class SessionMementoService implements OnDestroy {
         if (sessionString) {
             return JSON.parse(sessionString).accessToken;
         }
+
         return '';
     }
 
@@ -87,8 +90,9 @@ export class SessionMementoService implements OnDestroy {
         idToken: string,
         userGuid: string,
         locale: string,
-        expiresAtInSeconds: number): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000);
+        expiresAtInSeconds: number,
+        participantGuid: string | null = null): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid);
         this.updateSession(session);
     }
 
@@ -156,11 +160,7 @@ export class SessionMementoService implements OnDestroy {
         this.renewSubscription && this.renewSubscription.unsubscribe();
     }
 
-    private hasOnlyUserGuid(session: Session): boolean {
-        return !session.idToken && !!session.userGuid;
-    }
-
-    private isSessionExpired(): boolean {
+    public isSessionExpired(): boolean {
         const session = this.sessionSubject.value;
         if (session === null) {
             return false;
@@ -169,7 +169,11 @@ export class SessionMementoService implements OnDestroy {
         return new Date().getTime() > session.expiresAt;
     }
 
-    private observeExpiration(): void {
+    private hasOnlyUserGuid(session: Session): boolean {
+        return !session.idToken && !!session.userGuid;
+    }
+
+    private observeSessionExpiration(): void {
         this.expirationSubscription = this.sessionSubject
             .subscribe(session => {
                 if (session) {
@@ -196,5 +200,15 @@ export class SessionMementoService implements OnDestroy {
                     }
                 }
             });
+    }
+
+    private observeSessionStatus(): void {
+        const VISIBLE_STATE = 'visible';
+        const visible = fromEvent(document, 'visibilitychange').pipe(
+            map(() => document.visibilityState),
+            filter(visibility => visibility === VISIBLE_STATE),
+            startWith(VISIBLE_STATE)
+        ).subscribe(() => this.renewSubject.next(0));
+        this.anchor.add(visible);
     }
 }

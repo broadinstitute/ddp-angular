@@ -4,11 +4,11 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 @Component({
-    selector: 'toolkit-verify-age-up-page',
-    template: `
+  selector: 'toolkit-verify-age-up-page',
+  template: `
     <main class="main">
         <section class="section section-spinner">
-            <div class="content content_medium info-block">
+            <div class="content content_medium">
                 <ddp-verify-age-up (error)="handleError()"
                                    (nextUrl)="handleNextUrl($event)">
                 </ddp-verify-age-up>
@@ -17,20 +17,20 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
     </main>`
 })
 export class VerifyAgeUpPageComponent implements OnInit {
-    constructor(
-        private router: Router,
-        private headerConfig: HeaderConfigurationService,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private router: Router,
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
-    public ngOnInit(): void {
-        this.headerConfig.setupDefaultHeader();
-    }
+  public ngOnInit(): void {
+    this.headerConfig.setupDefaultHeader();
+  }
 
-    public handleNextUrl(url: string): void {
-        this.router.navigateByUrl(url);
-    }
+  public handleNextUrl(url: string): void {
+    this.router.navigateByUrl(url);
+  }
 
-    public handleError(): void {
-        this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
-    }
+  public handleError(): void {
+    this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
+  }
 }

@@ -29,15 +29,15 @@ import { WindowRef } from 'ddp-sdk';
                 </div>
             </div>
         </div>
-    
+
         <article class="PageContent">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="PageContent-section">
                             <div class="row NoMargin Left">
-                                <button mat-button color="primary" 
-                                        class="ButtonFilled Button--rect" 
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
                                         (click)="openDisclaimerDialog()"
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
                                 </button>
@@ -52,6 +52,19 @@ import { WindowRef } from 'ddp-sdk';
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.MainText.Section3
                                 </p>
+
+                              <div class="row NoMargin Left">
+                                <a href="http://em.rdcu.be/ls/click?upn=1VX9wGiUV7k-2FG8imEHteF25Ol5yBjR8SA-2FhQtoXbTgU-3DgnoE_eYO6zdaQoUubxrJz-2BH2Zv38FHa3PI5OJUb9BGSLB-2BF6glT83ifBpYralVEDHtm8fUe-2Fn2THVk97Rxygjq3vwNUApHjpwIHPbAn8NGj-2B4k4IRyGmAQwVgdtIxzIPwH4I5t0r5oau6ZlrcVrlqp9-2FKg4-2FwNLNPuZX3HycTX0v1XpUk2lh15XEgnM6M0A5rOIG1YGhUUshXmSFLbpMQGgGKsQb6ejoYL1PsmMQEhEJu94850We9c0axfNJM1lsMxWGnC83WszbjBFZwZBjJ5KrqH09R57ssi7kp2rpSMCUNxrEZfn-2BdVj0614MEOChUvTOT"
+                                   target="_blank"
+                                   style="margin-top:20px;">
+                                  <button mat-button color="primary"
+                                          class="ButtonFilled Button--rect"
+                                          [innerHTML]="'Toolkit.DataRelease.ViewPaperButton' | translate">
+                                  </button>  
+                                </a>
+                                
+                              </div>
+                              
                                 <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.InformationList.Title</h2>
                                 <ul class="PageContent-ul">
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item1</li>
@@ -194,11 +207,11 @@ import { WindowRef } from 'ddp-sdk';
                                 </p>
                                 <div id="NCITermDictionaryWidgetEnglish">
                                     <iframe lazy-resource
-                                            frameborder="0" 
-                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish" 
+                                            frameborder="0"
+                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish"
                                             id="NCITermDictionaryWidgetContainerEnglish"
-                                            title="https://www.mbcproject.org/data-release" 
-                                            name="https://www.mbcproject.org/data-release" 
+                                            title="https://www.mbcproject.org/data-release"
+                                            name="https://www.mbcproject.org/data-release"
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>

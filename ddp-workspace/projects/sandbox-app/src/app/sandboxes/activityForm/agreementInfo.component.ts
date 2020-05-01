@@ -12,9 +12,9 @@ import { ActivityServiceAgent, CompositeDisposable } from 'ddp-sdk';
 })
 export class AgreementInfoComponent implements OnInit, OnDestroy {
     public instanceGuid: string;
-    public activityGuid: string = "ACTIVITY_FOR_TESTING_AGREEMENT_QUESTION";
+    public activityGuid = 'ACTIVITY_FOR_TESTING_AGREEMENT_QUESTION';
     public agreementOptions: any = [
-        "ACTIVITY_FOR_TESTING_AGREEMENT_QUESTION"
+        'ACTIVITY_FOR_TESTING_AGREEMENT_QUESTION'
     ];
     private anchor: CompositeDisposable;
 

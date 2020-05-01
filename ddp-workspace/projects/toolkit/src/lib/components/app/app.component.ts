@@ -9,8 +9,16 @@ import { WarningComponent } from '../dialogs/warning.component';
 import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { distinctUntilChanged, filter, map, scan, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
-import { BrowserContentService, UserProfile, UserProfileDecorator, UserProfileServiceAgent, WindowRef, RenewSessionNotifier } from 'ddp-sdk';
+import { BehaviorSubject, merge, Observable, of } from 'rxjs';
+import {
+    BrowserContentService,
+    UserProfile,
+    UserProfileDecorator,
+    UserProfileServiceAgent,
+    WindowRef,
+    RenewSessionNotifier,
+    CompositeDisposable
+} from 'ddp-sdk';
 
 declare global {
     interface Window {
@@ -67,7 +75,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public twitterUrl: string;
     public unsupportedBrowser: boolean;
     public blogUrl: string;
-    private anchor: Subscription = new Subscription();
+    private anchor = new CompositeDisposable();
     private readonly dialogBaseSettings = {
         width: '740px',
         position: { top: '30px' },
@@ -105,7 +113,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.anchor.unsubscribe();
+        this.anchor.removeAll();
     }
 
     public closeNav(): void {
@@ -131,7 +139,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public openSessionWillExpireDialog(): void {
-        this.dialog.open(SessionWillExpireComponent, this.dialogBaseSettings);
+        this.dialog.open(SessionWillExpireComponent, { ...this.dialogBaseSettings, disableClose: true });
     }
 
     public closeSessionWillExpireDialog(): void {
@@ -199,14 +207,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // subscribe once to all the incoming events
         const ops$ = merge(openSideNav$, closeSideNav$, openJoinDialog$).subscribe();
 
-        this.anchor.add(ops$);
+        this.anchor.addNew(ops$);
     }
 
     private initBrowserWarningListener(): void {
         const modal = this.browserContent.events.subscribe(() => {
             this.openWarningDialog();
         });
-        this.anchor.add(modal);
+        this.anchor.addNew(modal);
     }
 
     private initSessionWillExpireListener(): void {
@@ -216,7 +224,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
             this.closeSessionWillExpireDialog();
         });
-        this.anchor.add(modalOpen).add(modalClose);
+        this.anchor.addNew(modalOpen).addNew(modalClose);
     }
 
     private initTranslate(): void {

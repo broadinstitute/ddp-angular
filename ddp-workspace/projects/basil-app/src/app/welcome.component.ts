@@ -16,7 +16,7 @@ import { Auth0Mode } from 'ddp-sdk';
         margin-left: -150px;
         width: 300px;
         height: 300px;
-    }​`
+    } `
   ]
 })
 export class WelcomeComponent {

@@ -109,14 +109,19 @@
     text-decoration: underline;
 }
 
+.sac-member__link_disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
 .affiliations {
     margin: 0.5rem 0 0 0;
 }
 
 .affiliations__text {
     color: mat-color($app-theme, 700);
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .visit-faq-section {

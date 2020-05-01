@@ -1,7 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as Hammer from 'hammerjs';
@@ -12,7 +11,8 @@ import {
   DdpModule,
   LogLevel,
   ConfigurationService,
-  GoogleAnalyticsEventsService
+  AnalyticsEventsService,
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
@@ -40,7 +40,9 @@ if (baseElt) {
   base = baseElt[0].getAttribute('href');
 }
 
-declare let DDP_ENV: any;
+declare const DDP_ENV: any;
+
+declare const ga: Function;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -68,14 +70,15 @@ tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
-tkCfg.internationalPatientsUrl = 'international-patients';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
-tkCfg.twitterAccountId = 'osteoproject';
+tkCfg.twitterAccountId = 'the_osproject';
 tkCfg.facebookGroupId = 'osteosarcomaproject';
-tkCfg.instagramId = 'osteosarcomaproject';
+tkCfg.instagramId = 'the_osproject';
+// to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
+// need Instagram credentials for @osteosarcomaproject
+tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
-tkCfg.enableRedesign = true;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -166,13 +169,10 @@ export class MyHammerConfig extends HammerGestureConfig {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private analytics: GoogleAnalyticsEventsService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.analytics.emitNavigationEvent();
-      }
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+      ga('send', event);
+      ga('platform.send', event);
     });
   }
 }

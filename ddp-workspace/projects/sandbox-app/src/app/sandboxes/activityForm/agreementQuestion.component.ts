@@ -10,10 +10,10 @@ import { AgreementParameters } from '../../model/agreementParameters';
 export class AgreementQuestionComponent extends QuestionComponent<ActivityAgreementQuestionBlock> {
     constructor() {
         super();
-        let parameters: AgreementParameters = {
+        const parameters: AgreementParameters = {
             readonly: false,
             shown: true,
-            question: "I understand that my data... and I agree researchers can..."
+            question: 'I understand that my data... and I agree researchers can...'
         };
 
         this.inputParameters = JSON.stringify(parameters, null, '\t');
@@ -25,7 +25,7 @@ export class AgreementQuestionComponent extends QuestionComponent<ActivityAgreem
 
     public update(): void {
         try {
-            let parameters: AgreementParameters = JSON.parse(this.inputParameters);
+            const parameters: AgreementParameters = JSON.parse(this.inputParameters);
             this.readonly = parameters.readonly;
             this.question.shown = parameters.shown;
             this.question.question = parameters.question;

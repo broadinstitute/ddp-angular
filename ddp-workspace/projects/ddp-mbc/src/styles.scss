@@ -856,6 +856,10 @@ a:focus {
     padding: 50px 0 150px 0;
 }
 
+.PageContent-release {
+    padding-bottom: 0;
+}
+
 .PageContent-section {
     padding: 1rem 0;
 }
@@ -890,7 +894,7 @@ ul {
 .PageContent-box-text {
     font-weight: 300;
     font-size: 1.1rem;
-    line-height: 1.6rem;
+    line-height: 1.7rem;
     color: mat-color($app-theme, 800);
     text-align: left;
 }
@@ -977,6 +981,7 @@ ul {
     transition: all 0.3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     background-color: mat-color($app-theme, 600);
+    min-width: unset !important;
 }
 
 .ButtonFilled:focus {
@@ -1409,21 +1414,23 @@ ul {
 }
 
 .ErrorMessage a {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
-.ddp-activity-validation {
-  .ErrorMessageList {
-    list-style-type: square;
-  }
 
-  .ErrorMessageItem {
-    font-size: 0.9rem;
-    color: mat-color($app-theme, 1200);
-    font-weight: 300;
-    margin: 10px 0 10px 0;
-    padding: 0 0 0 0;
-  }
+.ddp-activity-validation {
+    .ErrorMessageList {
+        list-style-type: square;
+    }
+
+    .ErrorMessageItem {
+        font-size: 0.9rem;
+        color: mat-color($app-theme, 1200);
+        font-weight: 300;
+        margin: 10px 0 10px 0;
+        padding: 0 0 0 0;
+    }
 }
+
 .JoinDialogFiled {
     width: 100%;
 }
@@ -1731,10 +1738,6 @@ select:-webkit-autofill {
 
 .ddp-login-button {
     @extend .mat-button;
-}
-
-.ddp-activity-validation {
-    margin: 5px;
 }
 
 .subhead:after {
@@ -2171,4 +2174,48 @@ input.mat-input-element {
     .mat-option-text {
         font-size: 14px !important;
     }
+}
+
+.tableau-iframe {
+    height: auto;
+    overflow-y: auto;
+    margin: 0 15px 150px 15px;
+    text-align: center;
+}
+
+.ddp-institutions-form__title_required:after {
+    content: ' *';
+}
+
+// Woman's silhouette icon font
+@font-face {
+    font-family: 'icomoon';
+    src: url(./assets/fonts/icomoon.eot?zha7n2);
+    src: url(./assets/fonts/icomoon.eot?zha7n2#iefix) format('embedded-opentype'),
+        url(./assets/fonts/icomoon.ttf?zha7n2) format('truetype'),
+        url(./assets/fonts/icomoon.woff?zha7n2) format('woff'),
+        url(./assets/fonts/icomoon.svg?zha7n2#icomoon) format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.icon-silhouette {
+    // Use !important to prevent issues with browser extensions that change fonts
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    // Better font rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-silhouette:before {
+    content: "\e900";
+    color: mat-color($app-theme, 100);
+    font-size: 0.7rem;
 }

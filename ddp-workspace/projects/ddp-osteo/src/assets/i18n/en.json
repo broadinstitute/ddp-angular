@@ -22,22 +22,37 @@
                 "AriaLabel": "Header menu button"
             }
         },
-        "CMI": "Count Me In"
+        "CMI": "Count Me In",
+        "Alts": {
+            "CMI": "Count Me In logo",
+            "Twitter": "Twitter logo",
+            "Facebook": "Facebook logo",
+            "Instagram": "Instagram logo"
+        },
+        "Navigation": {
+            "Home": "Home",
+            "FAQ": "FAQs",
+            "AboutUs": "About Us",
+            "ForPhysicians": "For Physicians",
+            "Dashboard": "Dashboard"
+        }
     },
     "Header": {
         "Logo": {
             "Title": "Osteosarcoma<br>Project",
-            "Image": {
-                "Alt": "Osteosarcoma project logo"
+            "ImageAlt": "Osteosarcoma project logo"
+        }
+    },
+    "Footer": {
+        "Info": {
+            "Text": {
+                "Part1": "The Osteosarcoma Project is part of",
+                "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
-        "Navigation": {
-            "Dashboard": "Dashboard",
-            "FAQ": "FAQs",
-            "AboutUs": "About Us",
-            "Newsletter": "Newsletter",
-            "ForPhysicians": "For Physicians",
-            "LogIn": "Log In"
+        "Contacts": {
+            "Title": "Contact Us",
+            "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States"
         }
     },
     "BehindScenesGallery": {
@@ -45,30 +60,30 @@
             {
                 "id": 0,
                 "title": "Touring the Genomics Platform",
-                "text": "Members of the Count Me In team and the Osteo Project’s Patient Advisory Council tour the Genomics Platform at the Broad Institute.",
-                "image": "assets/images/osteo-team.png",
-                "alt": "Osteo team"
+                "text": "Members of the Count Me In Team and the OSP Project Advisory Council tour the Genomics Platform at the Broad Institute.",
+                "image": "assets/images/osteo-team.jpg",
+                "alt": "Lab selfie"
             },
             {
                 "id": 1,
-                "title": "Lorem ipsum dolor sit amet",
-                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus posuere mi at mauris interdum lobortis. Cras a elit tortor.",
-                "image": "assets/images/placeholder1.jpg",
-                "alt": "Osteo team"
+                "title": "Medical Record Requesting",
+                "text": "Clinical research coordinators like Netsanet, Fergie, and Tania request records for OSP participants, in order to gain a comprehensive view of procedure and treatment history.",
+                "image": "assets/images/coordinators.jpg",
+                "alt": "Project coordinators"
             },
             {
                 "id": 2,
-                "title": "Nulla placerat justo vel vestibulum rutrum",
-                "text": "Integer vitae mattis enim. Nam risus sem, blandit et orci nec, volutpat tincidunt ipsum. Donec pellentesque dapibus tincidunt.",
-                "image": "assets/images/placeholder2.jpg",
-                "alt": "Osteo team"
+                "title": "Project Advisory Council",
+                "text": "We are so grateful to the PACs that worked with us to build the OSP. Every page of this site was built with their partnership and with this community in mind. Learn more about each one of them on the About Us page.",
+                "image": "assets/images/pac.jpg",
+                "alt": "Project Advisory Council"
             },
             {
                 "id": 3,
-                "title": "Nam placerat dui turpis, eu luctus nisi gravida congue",
-                "text": "Donec felis libero, molestie nec mi et, porttitor fringilla eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
-                "image": "assets/images/placeholder1.jpg",
-                "alt": "Osteo team"
+                "title": "This is not just a box",
+                "text": "Each saliva and blood sample we receive from OSP participants represents an important contribution towards future research. This powerful way to contribute can enhance our understanding of osteosarcoma and accelerate future discoveries.",
+                "image": "assets/images/box.jpg",
+                "alt": "Count Me In box"
             }
         ],
         "BackArrowAlt": "Back arrow",
@@ -87,10 +102,10 @@
         },
         "OrganizationsSection": {
             "BroadLogo": {
-                "Alt": "Broad Institute Logo"
+                "Alt": "Broad Institute logo"
             },
             "DanaFarberLogo": {
-                "Alt": "Dana Farber Logo"
+                "Alt": "Dana Farber logo"
             }
         },
         "StepsSection": {
@@ -143,17 +158,20 @@
             "TitleImageAlt": "Molecule"
         },
         "PartnersSection": {
-            "Title": "Advocacy Partners"
+            "Title": "Advocacy Partners",
+            "ImagesAlts": {
+                "MBI": "Make It Better Agents logo",
+                "QUADW": "The QuadW Foundation logo",
+                "ZSOF": "The Zach Sobiech Osteosarcoma Fund logo",
+                "BoD": "Because Of Daniel logo",
+                "OsCollaborative": "The Osteosarcoma Collaborative logo",
+                "TCF": "Target Cancer Foundation logo"
+            }
         },
         "SocialMediaSection": {
             "Title": "Follow us on social media",
             "TwitterFeedTitle": "Twitter feed",
-            "InstagramFeedTitle": "Instagram feed",
-            "ImagesAlts": {
-                "Twitter": "Twitter logo",
-                "Facebook": "Facebook logo",
-                "Instagram": "Instagram logo"
-            }
+            "InstagramFeedTitle": "Instagram feed"
         },
         "MailingListSection": {
             "Title": "Want to stay informed on the OS Project?",
@@ -174,7 +192,6 @@
             }
         },
         "CMISection": {
-            "CMIImgAlt": "Count Me In Logo",
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
             "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
@@ -183,28 +200,40 @@
             "Text": "The Osteosarcoma Project Advisory Council (PAC) is made up of <span class=\"bold\">patients, advocates, caregivers,</span> and <span class=\"bold\">loved ones</span> who have been impacted by osteosarcoma. The PAC meets regularly with the project operations team via video calls to <span class=\"bold\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
             "Members": [
                 {
-                    "Name": "John Smith",
-                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
-                    "Image": "../../../assets/images/mock1.png",
-                    "Alt": "John Smith Photo"
+                    "Name": "Theresa Beech",
+                    "Bio": "Theresa Beech is the mother of two kids, Daniel and Sara. When Daniel was 11, he was diagnosed with osteosarcoma. Two years later, at the age of 13, he was dead. Daniel had a smile that would light up a room, and all throughout treatment, he never quit smiling. While Daniel was on hospice, Theresa taught herself genomics and started doing research into osteosarcoma genetics. She was able to identify two drugs which corresponded to mutations in Daniel’s tumor and prolonged his life. Since Daniel’s death on August 28, 2016, she has continued her patient advocacy and genomics research and is the Principal Investigator of POWR, the Patient/parent Osteosarcoma genome-Wide Registry, believed to be one of the largest genomic and medical history registry of osteosarcoma data in the world. She has presented her research findings at numerous scientific conferences in the US and internationally, and has been invited to speak at a variety of forums. A TV long-story on Daniel and her work won the prestigious National 2018 June L. Biedler Award for TV journalism. In 2019, she started a closed Facebook group called the Osteosarcoma Information Group to provide scientific and medical information and explanations to osteosarcoma patients and their families. Today, there are well over 500 members and doctors and researchers are now joining the group as well. She is the founder and President of “Because of Daniel '', a charitable foundation dedicated to osteosarcoma research and clinical trials. She is also a co-founder and board member of the Osteosarcoma Collaborative, a charitable foundation dedicated to promoting collaboration in osteosarcoma. In her day job, Theresa is a space engineer (aka rocket scientist) for NASA.",
+                    "Image": "assets/images/PAC-Theresa-Beech.jpg",
+                    "Alt": "Theresa Beech photo"
                 },
                 {
-                    "Name": "Jane Doe",
-                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
-                    "Image": "../../../assets/images/mock2.png",
-                    "Alt": "Jane Doe Photo"
+                    "Name": "Ann Graham",
+                    "Bio": "Ann is the founder and President of MIB Agents Osteosarcoma Alliance. At age 43, Ann was diagnosed with osteosarcoma and was treated in the Pediatric Center at Memorial Sloan Kettering Cancer Center. She was in awe of the courage of her fellow patients. Like most, she was unaware of how little funding pediatric cancers receive, and that osteosarcoma patients lose limbs, fertility, hearing, organ function and too often, their lives. She knew there had to be a way to Make It Better. She began MIB Agents, a nationwide 501c3 non-profit and the FACTOR Conference. Together with MIB Agents everywhere, they endeavor to Make It Better for osteosarcoma patients. She is an Advocate with the A2A Alliance, The Mighty, and a member of CAC2.",
+                    "Image": "assets/images/PAC-Ann-Graham.jpg",
+                    "Alt": "Ann Graham photo"
                 },
                 {
-                    "Name": "John Smith",
-                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
-                    "Image": "../../../assets/images/mock1.png",
-                    "Alt": "John Smith Photo"
+                    "Name": "Alexis Johnson",
+                    "Bio": "Alexis Johnson is a 12-year Osteosarcoma Cancer survivor and an amputee. During her treatment, Alexis spent countless hours in the hospital and became close with the patients around her. It was here that she met some of the most incredible children who never let their illness stand in their way. She watched them bravely battle Osteosarcoma and many losing their fight due to exhausting all treatment options. Alexis learned that there has been no new treatments and not enough research done. This drove Alexis to wanting to do something to help change this outcome. Alexis has dedicated her life to becoming an advocate in the fight against Osteosarcoma. She is involved in the wonderful organization MIB and worked on several initiatives with them. She has also used the power of her voice to raise awareness and help others who are currently in the fight. Alexis is currently in medical school at the University of Arizona with an end goal of becoming a pediatric oncologist. She is tremendously proud to be a part of this project and understands what the power of knowledge and data can do to greatly change this outcome.",
+                    "Image": "assets/images/PAC-Alexis-Johnson.jpg",
+                    "Alt": "Alexis Johnson photo"
                 },
                 {
-                    "Name": "Jane Doe",
-                    "Bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in tortor sapien. Nullam suscipit id purus eu suscipit. Aenean condimentum dui eget enim tempus lobortis. Etiam pretium, est in ultricies malesuada, augue dui porttitor ipsum, in aliquam risus justo sit amet lacus. Donec eu justo tellus. Vestibulum eu felis tortor. Vestibulum fermentum sagittis mauris sit amet consectetur. Suspendisse sed ornare neque. Phasellus sollicitudin cursus ex, id hendrerit magna maximus id.",
-                    "Image": "../../../assets/images/mock2.png",
-                    "Alt": "Jane Doe Photo"
+                    "Name": "Ryan Kennington",
+                    "Bio": "At the age of 17 years old, Ryan was diagnosed with Osteosarcoma in the femoral head of his right femur. At the University of Pennsylvania Abramson Cancer Center, he underwent treatment and a limb salvaging surgery. One year after he completed treatment, he had a relapse in his lungs and had a video-assisted thoracoscopic surgery to remove the single nodule. Today, Ryan has been cancer free for over 4 years and is enjoying life free of disease. Active in the cancer community, Ryan is involved in non-profit organizations such as MIB agents, Steps to Cure Sarcoma, and UDANCE in order to help raise awareness and funds for cancer research. Motivated by his experiences with Osteosarcoma, he is currently working on earning his Bachelor of Science degree in biology at the University of Delaware and is focusing his attention on improving the outcome of Osteosarcoma patients.",
+                    "Image": "assets/images/PAC-Ryan-Kennington.jpg",
+                    "Alt": "Ryan Kennington photo"
+                },
+                {
+                    "Name": "Ben Moody",
+                    "Bio": "Ben Moody is the father of Claire, who was diagnosed with osteosarcoma in 2012 and who passed away in 2016, aged 24.  She was a bright light; she lit up every room. Claire was irrepressibly happy; teeming with energy, she flapped, she twirled, she loved to laugh. One of Claire’s many doctors wrote “Claire is an inspiration to all of us that care for sarcoma patients or do sarcoma research; she is the motivation that pushes us on our journey to find a cure.” Since Claire’s death, Ben has been dedicated to collaborating with those who are passionately focused on finding a cure for osteosarcoma, including as a member of the Board of the Osteosarcoma Collaborative.  Ben is also co-founder of Pan American Finance, an advisory firm based in Miami, Florida, with a key focus on raising capital for renewable energy. Ben has over 35 years of investment banking and private equity experience, and is a graduate of the University of Oxford. ",
+                    "Image": "assets/images/PAC-Ben-Moody.jpg",
+                    "Alt": "Ben Moody photo"
+                },
+                {
+                    "Name": "Laura Sobeich",
+                    "Bio": "Laura Sobiech’s son, Zach, died from osteosarcoma at the age of 18. In the last year of Zach’s life, he wrote a song called “Clouds” that became an international hit. After Zach died, Laura wrote a book called Fly a Little Higher: How God Answered a Mom’s Small Prayer in a Big Way, to tell the story of Zach’s battle with osteosarcoma and how he chose to live despite the disease. This year, Laura’s book is being made into a film by Warner Brothers. Laura works at Children’s Cancer Research Fund, a nonprofit that raises seed grant money for research, and where the Zach Sobiech Osteosarcoma Fund was established in 2012. All proceeds from Zach’s music are donated to the fund to support Zach’s wish that no other kids will have to die from osteosarcoma.",
+                    "Image": "assets/images/PAC-Laura-Sobeich.jpg",
+                    "Alt": "Laura Sobeich photo"
                 }
             ]
         },
@@ -212,62 +241,65 @@
             "Title": "Scientific Advisory Council",
             "Members": [
                 {
-                    "Name": "John Smith, Ph.D.",
+                    "Name": "Katherine Janeway",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Boston Children’s Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
-                    ],
-                    "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/mock3.png",
-                    "Alt": "John Smith, Ph.D. Photo"
-                },
-                {
-                    "Name": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D.",
-                    "Affiliations": [
-                        "Dana-Farber Cancer Institute",
-                        "Boston Children’s Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
-                    ],
-                    "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/mock4.png",
-                    "Alt": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D. Photo"
-                },
-                {
-                    "Name": "Bradley E. Bernstein, M.D., Ph.D.",
-                    "Affiliations": [
-                        "Massachusetts General Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
-                    ],
-                    "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/mock3.png",
-                    "Alt": "Bradley E. Bernstein, M.D., Ph.D. Photo"
-                },
-                {
-                    "Name": "Rameen Beroukhim, M.D., Ph.D.",
-                    "Affiliations": [
-                        "Dana-Farber Cancer Institute",
-                        "Boston Children’s Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
-                    ],
-                    "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/mock4.png",
-                    "Alt": "Rameen Beroukhim, M.D., Ph.D. Photo"
-                },
-                {
-                    "Name": "Wenya Linda Bi, M.D., Ph.D.",
-                    "Affiliations": [
-                        "Dana-Farber Cancer Institute",
-                        "Brigham and Women’s Hospital",
                         "Harvard Medical School"
                     ],
-                    "Url": "https://joincountmein.org/",
-                    "Image": "../../../assets/images/mock3.png",
-                    "Alt": "Wenya Linda Bi, M.D., Ph.D. Photo"
+                    "Url": "http://www.danafarberbostonchildrens.org/finddoctor/details.aspx?ID=29736",
+                    "Image": "assets/images/SAC-Katherine-Janeway.jpg",
+                    "Alt": "Katherine Janeway photo"
+                },
+                {
+                    "Name": "Brian Crompton",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
+                    "Image": "assets/images/SAC-Brian-Crompton.jpg",
+                    "Alt": "Brian Crompton photo"
+                },
+                {
+                    "Name": "Alejandro Sweet-Cordero",
+                    "Affiliations": [
+                        "UCSF",
+                        "Helen Diller Family Comprehensive Cancer Center"
+                    ],
+                    "Url": "https://cancer.ucsf.edu/people/profiles/sweetcordero_alejandro.8106",
+                    "Image": "assets/images/SAC-Alejandro-Sweet-Cordero.jpg",
+                    "Alt": "Alejandro Sweet-Cordero photo"
+                },
+                {
+                    "Name": "Richard Gorlick",
+                    "Affiliations": [
+                        "The University of Texas MD Anderson Cancer Center"
+                    ],
+                    "Url": "https://faculty.mdanderson.org/profiles/richard_gorlick.html",
+                    "Image": "assets/images/SAC-Richard-Gorlick.jpg",
+                    "Alt": "Richard Gorlick photo"
+                },
+                {
+                    "Name": "David Malkin",
+                    "Affiliations": [
+                        "The Hospital for Sick Children",
+                        "University of Toronto"
+                    ],
+                    "Url": "http://www.sickkids.ca/AboutSickKids/Directory/People/M/David-Malkin-staff-profile.html",
+                    "Image": "assets/images/SAC-David-Malkin.jpg",
+                    "Alt": "David Malkin photo"
+                },
+                {
+                    "Name": "Nathalie Gaspar",
+                    "Affiliations": [
+                        "Institut Gustave Roussy"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/SAC-Nathalie-Gaspar.jpg",
+                    "Alt": "Nathalie Gaspar photo"
                 }
             ]
         },
@@ -297,14 +329,14 @@
                     {
                         "Question": "Who is conducting this research?",
                         "Paragraphs": [
-                            "This project is being conducted by <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a>, a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research. <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a> is stewarded by four leading organizations: The Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Emerson Collective, a California-based social change organization; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The Osteo Project also works in collaboration with a growing coalition of nonprofit advocacy partners. Our team is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more about us <a class=\"Link\" href=\"/about-us\">here</a>."
+                            "This project is being conducted by <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a>, a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research. <a class=\"Link italic\" href=\"https://joincountmein.org/\" target=\"_blank\">Count Me In</a> is stewarded by four leading organizations: The Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Emerson Collective, a California-based social change organization; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The Osteosarcoma Project also works in collaboration with a growing coalition of nonprofit advocacy partners. Our team is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more about us <a class=\"Link\" href=\"/about-us\">here</a>."
                         ]
                     },
                     {
                         "Question": "How has the osteosarcoma community been involved in the design of this project?",
                         "Paragraphs": [
                             "We have worked closely with patients, parents, and patient advocates within the osteosarcoma community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in osteosarcoma.",
-                            "We're proud to have as our Advocacy Partners MIB Agents to partner with and support this project."
+                            "We're proud to have our Advocacy Partners MIB Agents, QuadW, The Zach Sobiech Osteosarcoma Fund, Because of Daniel, The Osteosarcoma Collaborative, and Target Cancer Foundation to partner with and support this project."
                         ]
                     },
                     {
@@ -454,7 +486,8 @@
             "Title": "Thank you!",
             "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
             "EmailCollected": {
-                "Text": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, you can do so from your dashboard.",
+                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "or",
                 "Button": "Go to Dashboard"
             },
             "ImageAlt": "Email sent"
@@ -494,7 +527,8 @@
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
-                "Continue": "Continue"
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
         }
     },
@@ -508,7 +542,7 @@
         "SavingButton": "Saving",
         "EditButton": "View/Edit",
         "ReviewButton": "View",
-        "ValidateError": "Please correct any errors in the form",
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
         "SaveError": "We're sorry but an error occurred",
         "ExportStudy": {
@@ -584,6 +618,19 @@
         "Title": {
             "Default": "Osteosarcoma Project",
             "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }

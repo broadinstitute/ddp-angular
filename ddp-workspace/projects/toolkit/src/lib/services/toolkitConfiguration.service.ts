@@ -51,6 +51,7 @@ export class ToolkitConfigurationService {
     twitterAccountId: string;
     facebookGroupId: string;
     instagramId: string;
+    lightswitchInstagramWidgetId?: string;
     cBioPortalLink: string;
     countMeInUrl: string;
 
@@ -59,5 +60,4 @@ export class ToolkitConfigurationService {
     showInfoForPhysicians: boolean;
     showBlog: boolean;
     blogUrl: string;
-    enableRedesign = false;
 }

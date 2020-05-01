@@ -1,4 +1,4 @@
-<ul *ngIf="steps.length">
+<ul *ngIf="steps.length && shown">
     <ng-container *ngFor="let step of steps; index as i; last as isLastStep">
         <li class="workflow-step">
             <div class="workflow-content">

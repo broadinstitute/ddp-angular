@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from 'ddp-sdk';
+import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
     selector: 'welcome',
@@ -17,11 +17,11 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         </div>
 
         <div class="Intro-footer row">
-            <img lazy-resource src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img lazy-resource src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
+            <img lazy-resource src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
             <img lazy-resource src="./assets/images/logo-minderoo.png" class="Intro-footerLogo-square" alt="Minderoo Foundation Logo">
         </div>
-        
+
         <div class="Intro row">
             <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
                 <h1 class="Message-title" [innerHTML]="'Toolkit.Welcome.WelcomeTitle' | translate"></h1>
@@ -60,7 +60,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
         <div class="row">
             <div class="Separator Separator--small"></div>
         </div>
-        
+
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
@@ -155,22 +155,35 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
 
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title" translate>
-                    Toolkit.Welcome.FourthBlock.Title.Advocacy 
+                    Toolkit.Welcome.FourthBlock.Title.Advocacy
                 </h1>
             </section>
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.abta.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="ABTA"></a>
+                        <a href="https://www.abta.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/ABTA-logo.jpg" alt="American Brain Tumor Association logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://braintumor.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society"></a>
+                        <a href="https://braintumor.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/NBTS-logo.png" alt="National Brain Tumor Society logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://abc2.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/ABC2_LOGO_OrangeBack_wtag.png" alt="Accelerate Brain Cancer Cure"></a>
+                        <a href="https://www.oligonation.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation logo">
+                        </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 Message-partners">
-                        <a href="https://www.oligonation.org/" target="_blank"><img lazy-resource class="partner-logo" src="./assets/images/OligoNation_Logo.jpg" alt="Oligo Nation"></a>
+                        <a href="https://www.dragonmaster.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/DMF-logo.jpg" alt="Dragon Master Foundation logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 Message-partners">
+                        <a href="https://ourbrainbank.org/" target="_blank">
+                            <img lazy-resource class="partner-logo" src="./assets/images/OurBrainBank-logo.png" alt="OurBrainBank logo">
+                        </a>
                     </div>
                 </div>
             </section>
@@ -200,7 +213,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                     </span>
                     <br>
                     <span class="Color--orange Semibold" translate>
-                        Toolkit.Welcome.SixthBlock.TitlePt2  
+                        Toolkit.Welcome.SixthBlock.TitlePt2
                     </span>
                 </h1>
                 <p class="Message-text" translate>
@@ -214,7 +227,7 @@ import { GoogleAnalyticsEventsService, BrowserContentService, WindowRef } from '
                 Toolkit.Welcome.SixthBlock.CountMeInButton
             </a>
         </div>
-    </div> 
+    </div>
     `
 })
 export class WelcomeComponent implements OnInit {
@@ -223,7 +236,7 @@ export class WelcomeComponent implements OnInit {
 
     constructor(
         private windowRef: WindowRef,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private browserContent: BrowserContentService) { }
 
     public ngOnInit(): void {
@@ -261,6 +274,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent('clickedCountMeIn', 'fromMainPage');
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
     }
 }

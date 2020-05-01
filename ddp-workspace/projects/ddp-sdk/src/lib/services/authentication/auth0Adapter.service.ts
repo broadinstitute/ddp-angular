@@ -1,17 +1,21 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { WindowRef } from '../windowRef';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { GoogleAnalyticsEventsService } from '../googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../analyticsEvents.service';
 import { RenewSessionNotifier } from '../renewSessionNotifier.service';
 import { Auth0Mode } from '../../models/auth0-mode';
+import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
+import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { bindNodeCallback, Observable, Subject } from 'rxjs';
+import { takeUntil, take, tap, mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
+import { Session } from '../../models/session';
 
 /**
  * Main class that handles Auth0 authentication
@@ -29,10 +33,11 @@ export class Auth0AdapterService implements OnDestroy {
         private router: Router,
         private log: LoggingService,
         private session: SessionMementoService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
         private renewNotifier: RenewSessionNotifier,
-        private jwtHelper: JwtHelperService) {
+        private jwtHelper: JwtHelperService,
+        private language: LanguageService) {
         const scopes = 'openid profile';
         // TODO Clarify how audience should be used, what is the correct value,etc.
         // TODO refactor and document differences between localregistration flow and "normal" flow
@@ -51,7 +56,7 @@ export class Auth0AdapterService implements OnDestroy {
                 clientID: this.configuration.auth0ClientId,
                 studyGuid: this.configuration.studyGuid,
                 responseType: 'code',
-                audience: audience,
+                audience,
                 scope: 'offline_access ' + scopes,
                 redirectUri: this.configuration.auth0CodeRedirect
             });
@@ -61,7 +66,7 @@ export class Auth0AdapterService implements OnDestroy {
                 domain: this.configuration.auth0Domain,
                 clientID: this.configuration.auth0ClientId,
                 responseType: 'token id_token',
-                audience: audience,
+                audience,
                 scope: scopes,
                 redirectUri: this.configuration.loginLandingUrl
             });
@@ -112,8 +117,14 @@ export class Auth0AdapterService implements OnDestroy {
             }),
             ...(additionalParams && {
                 ...additionalParams
-            })
+            }),
+            language: this.language.getCurrentLanguage(),
+            // @todo : hack delete when done
+            serverUrl: this.configuration.backendUrl
         };
+        if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem('localAuthParams', JSON.stringify(params));
+        }
         this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
@@ -135,7 +146,7 @@ export class Auth0AdapterService implements OnDestroy {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
                 this.log.logEvent('auth0Adapter.handleAuthentication', authResult);
-                this.analytics.emitCustomEvent('authentication', 'user authenticated');
+                this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError('auth0Adapter.handleAuthentication', err);
                 let error = null;
@@ -151,6 +162,18 @@ export class Auth0AdapterService implements OnDestroy {
                 }
             }
         });
+    }
+
+    public renewSession(renewalAuthResult): void {
+        const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
+        this.session.setSession(
+            renewalAuthResult.accessToken,
+            renewalAuthResult.idToken,
+            this.session.session.userGuid,
+            this.session.session.locale,
+            // the time of expiration in UTC seconds
+            decodedJwt['exp'] as number,
+            this.session.session.participantGuid);
     }
 
     public setSession(authResult): void {
@@ -174,7 +197,8 @@ export class Auth0AdapterService implements OnDestroy {
             userGuid,
             locale,
             // the time of expiration in UTC seconds
-            decodedJwt['exp'] as number);
+            decodedJwt['exp'] as number,
+            authResult.participantGuid);
         console.log('auth0Adapter successfully updated session token ', decodedJwt);
     }
 
@@ -183,29 +207,38 @@ export class Auth0AdapterService implements OnDestroy {
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent('auth0Adapter.logout', null);
-        this.analytics.emitCustomEvent('authentication', 'user logged out');
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
         this.webAuth.logout({
             returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
             clientID: this.configuration.auth0ClientId
         });
     }
 
-    public auth0RenewToken(): void {
-        // Original code called renewAuth. This seems to be renewing token correctly
-        // Note the response types. 'code' is explicitly not supported
-        this.webAuth.checkSession(
-            {
-                studyGuid: this.configuration.studyGuid,
-                responseType: 'token id_token'
-            },
-            (err, result) => {
-                if (err) {
-                    console.log(err);
+    public auth0RenewToken(): Observable<Session | null>  {
+        const studyGuid = this.configuration.studyGuid;
+        const auth0IdToken = this.jwtHelper.decodeToken(this.session.session.idToken)['sub'];
+        const clientId = this.configuration.auth0ClientId;
+        const resultMatchesThisSession = (result: any) => {
+            const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
+            return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
+        };
+        const checkSession$ = bindNodeCallback(cb => this.webAuth.checkSession({
+            studyGuid,
+            responseType: 'token id_token',
+            renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
+        }, cb));
+        return checkSession$().pipe(
+            take(1),
+            tap(result => {
+                if (resultMatchesThisSession(result)) {
+                    this.renewSession(result);
                 } else {
-                    console.log('auth0Adapter.renewToken success', result);
-                    this.setSession(result);
+                    throw new Error('Token received does not match this session');
                 }
-            });
+            }),
+            tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
+            mergeMap(result => this.session.sessionObservable.pipe(take(1)))
+        );
     }
 
     public handleExpiredSession(): void {

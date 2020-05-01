@@ -38,7 +38,7 @@ import * as _ from 'underscore';
     </ng-container>
     <button *ngIf="block.allowMultiple && !readonly"
             type="button"
-            class="ButtonFilled ButtonFilled--white button button_medium button_secondary"
+            class="ButtonFilled ButtonFilled--white button button_medium button_secondary button_new-item"
             (click)="addBlankRow()">
         {{ block.addButtonText }}
     </button>`,
@@ -50,13 +50,13 @@ import * as _ from 'underscore';
         }
 
         .vertical {
-            display: flex !important;
-            flex-direction: column !important;
+            display: flex;
+            flex-direction: column;
         }
 
         .horizontal {
-            display: flex !important;
-            flex-direction: row !important;
+            display: flex;
+            flex-direction: row;
         }`
     ]
 })
@@ -84,13 +84,28 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.childQuestionBlocks = [];
                     this.addBlankRow();
                 } else {
-                    this.childQuestionBlocks = newAnswers.map((rowOfAnswers: any[]) => {
+                    const questionsRows: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
                         // assuming order of answers same as order of questions here.
                         // And adding braces and a return statement here fixes a bug that should not be happening
                         // Breaks when running the compiled version of SDK  but OK when including library via symlink
                         // TODO investigate what is going on. Perhaps differences in TypeScript compiler target Javascript config?
-                        return rowOfAnswers.map((answerContainer: any, index: number) =>
+                        return rowOfAnswers.map((answerContainer: ActivityQuestionBlock<any>, index: number) =>
                             this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown));
+                    });
+
+                    const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
+                        this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
+
+                    // If a row in Composite block has 2 and more questions, and a user answered only on the first question and reloaded the page
+                    // the backend returns an array of answers only with 1 item, so when the component will build rows, we will miss some blocks
+                    // example: https://broadinstitute.atlassian.net/browse/DDP-4536; method below looks which blocks were missed and add them
+                    // Important: if a user answered only on the last question, backend returns the correct array of answers
+                    this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
+                        if (currentRow.length !== blankRow.length) {
+                            const missedQuestions = blankRow.slice(currentRow.length);
+                            currentRow.push(...missedQuestions);
+                        }
+                        return currentRow;
                     });
                 }
             }
@@ -109,10 +124,13 @@ export class ActivityCompositeAnswer implements OnChanges {
         }
         if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
             newQuestionBlock.placeholder = newQuestionBlock.question;
-            newQuestionBlock.question = null;
+            newQuestionBlock.question = '';
             if (childQuestionBlock.isRequired) {
                 newQuestionBlock.placeholder += ' *';
             }
+        }
+        if (this.block.childOrientation === ChildOrientation.Horizontal) {
+            newQuestionBlock.question = '';
         }
         // clone does not update references to original object. we need to do that here.
         newQuestionBlock.validators.forEach((validator) => validator.question = newQuestionBlock);

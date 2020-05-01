@@ -4,8 +4,13 @@
 .section-spinner {
     display: flex;
     align-items: center;
-    height: 50vh;
+    flex: 1;
     justify-content: center;
+}
+
+.static-spinner {
+    padding-bottom: 6.25rem;
+    padding-top: 1rem;
 }
 
 .main_activity {
@@ -247,6 +252,11 @@ select:disabled {
     cursor: auto;
 }
 
+// material dropdown
+.mat-select-value {
+    color: mat-color($app-theme, 700);
+}
+
 // picklist
 .mat-checkbox-label,
 .mat-radio-label-content {
@@ -271,7 +281,7 @@ select:disabled {
 
 .picklist {
     .ddp-date-field-margin:first-child {
-        margin: 0 1rem 0 0;
+        margin: 0 1.5rem 0 0;
     }
 
     .ddp-date-field-margin:last-child {
@@ -319,12 +329,39 @@ select:disabled {
     }
 }
 
+.ddp-content__agreement {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+}
+
 // composite question
 ddp-activity-composite-answer {
 
     p,
     span {
         font-weight: 400;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+.ddp-composite-text {
+    flex-grow: 1;
+    margin-right: 1.5rem;
+}
+
+@media screen and (max-width: 560px) {
+    .ddp-answer-container {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .ddp-date-field-margin:first-child,
+    .ddp-composite-text {
+        margin-right: 0 !important;
     }
 }
 
@@ -348,6 +385,10 @@ ddp-activity-composite-answer {
     line-height: 1.5rem;
     margin: 0 0 0.5rem 0;
     color: mat-color($app-theme, 700);
+}
+
+.ddp-institutions-form__button {
+    padding: 1.3rem 0;
 }
 
 // mat error

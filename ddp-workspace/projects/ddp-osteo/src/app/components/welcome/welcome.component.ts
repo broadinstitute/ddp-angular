@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
-import { WindowRef } from 'ddp-sdk';
+import { WindowRef, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -11,6 +11,7 @@ export class WelcomeComponent implements OnInit {
   public twitterUrl: string;
   public facebookUrl: string;
   public instagramUrl: string;
+  public lightswitchWidgetId: string;
   private readonly HEADER_HEIGHT_REM = 7;
   @ViewChild('scrollAnchor', { static: true }) scrollAnchor: ElementRef;
 
@@ -18,6 +19,7 @@ export class WelcomeComponent implements OnInit {
     private headerConfig: HeaderConfigurationService,
     private window: WindowRef,
     private communicationService: CommunicationService,
+    private analytics: AnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -25,6 +27,7 @@ export class WelcomeComponent implements OnInit {
     this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
     this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
+    this.lightswitchWidgetId = this.toolkitConfiguration.lightswitchInstagramWidgetId;
   }
 
   public scrollToStepsSection(): void {
@@ -37,6 +40,14 @@ export class WelcomeComponent implements OnInit {
 
   public joinMailingList(): void {
     this.communicationService.openJoinDialog();
+  }
+
+  public sendSocialMediaAnalytics(event: string): void {
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
+  }
+
+  public sendCountMeInAnalytics(): void {
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
   }
 
   private get getRealHeaderHeight(): number {

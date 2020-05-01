@@ -80,6 +80,9 @@
         "DetailsPlaceholder": {
             "PluralForm": "символов осталось",
             "SingularForm": "символ остался"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Пожалуйста введите верный адрес электронной почты"
         }
     }
 }

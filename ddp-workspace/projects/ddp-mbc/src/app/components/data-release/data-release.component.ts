@@ -28,17 +28,24 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </div>
-    
-        <article class="PageContent">
+
+        <article class="PageContent PageContent-release">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="PageContent-section">
                             <div class="row NoMargin Left">
-                                <button mat-button color="primary" 
-                                        class="ButtonFilled Button--rect" 
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
                                         (click)="openDisclaimerDialog()"
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
+                                </button>
+                            </div>
+                            <div class="row topMarginMedium Left">
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
+                                        (click)="scrollTo(dataBrowser)"
+                                        [innerHTML]="'Toolkit.DataRelease.ViewDataBrowser' | translate">
                                 </button>
                             </div>
                             <div class="row topMarginMedium">
@@ -51,7 +58,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.MainText.Section3
                                 </p>
-                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.InformationList.Title</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.InformationList.Title</p>
                                 <ul class="PageContent-ul">
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item1</li>
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item2</li>
@@ -96,7 +103,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem2</li>
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem3</li>
                                             <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item3.SubItem4</li>
-                                        </ul>                                        
+                                        </ul>
                                     </li>
                                     <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Different.FieldsList.Item4</li>
                                 </ul>
@@ -176,23 +183,63 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 </p>
                                 <div id="NCITermDictionaryWidgetEnglish">
                                     <iframe lazy-resource
-                                            frameborder="0" 
-                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish" 
+                                            frameborder="0"
+                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish"
                                             id="NCITermDictionaryWidgetContainerEnglish"
-                                            title="https://www.mbcproject.org/data-release" 
-                                            name="https://www.mbcproject.org/data-release" 
+                                            title="https://www.mbcproject.org/data-release"
+                                            name="https://www.mbcproject.org/data-release"
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>
-                                <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
+                                <h2 #dataBrowser class="PageContent-title" translate>
+                                    Toolkit.DataRelease.DataBrowser.Title
+                                </h2>
+                                <p class="PageContent-text" translate>
+                                    Toolkit.DataRelease.DataBrowser.Main.Intro
                                 </p>
+                                <p class="PageContent-text NoMargin" translate>
+                                    Toolkit.DataRelease.DataBrowser.Main.List.Intro
+                                </p>
+                                <ul class="PageContent-ul">
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <a href="AboutYouSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.DataBrowser.Main.List.Item1</a>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <a href="FollowUpSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.DataBrowser.Main.List.Item2</a>
+                                    </li>
+                                </ul>
+                                <h2 class="PageContent-subtitle" translate>
+                                    Toolkit.DataRelease.DataBrowser.HowToUse.Title
+                                </h2>
+                                <ul class="PageContent-ul">
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item1</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item2</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item3</span>
+                                    </li>
+                                    <li class="PageContent-text PageContent-text-list">
+                                        <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.List.Item4</span>
+                                    </li>
+                                </ul>
+                                <p class="PageContent-text">
+                                    <span translate>Toolkit.DataRelease.DataBrowser.HowToUse.Text1</span>
+                                    <a [href]="dataEmailHref" class="Link">{{ dataEmail }}</a>.
+                                </p>
+                                <p class="PageContent-text" [innerHtml]="'Toolkit.DataRelease.DataBrowser.HowToUse.Text2' | translate"></p>
                             </div>
                         </section>
                     </div>
                 </div>
+            </div>
+        </article>
+        <article>
+            <div class="tableau-iframe">
+                <iframe align="middle" scrolling="yes" allowfullscreen="" frameborder="0" [width]="iframeWidth" [height]="iframeHeight" src="https://public.tableau.com/views/MBCprojectPatientReportedDataBrowser/Dashboard22?:embed=y&:display_count=yes&:origin=viz_share_link&:showVizHome=no&:embed=true">
+                </iframe>
             </div>
         </article>
     </div>`
@@ -201,6 +248,8 @@ export class DataReleaseComponent implements OnInit {
     public dataEmail: string;
     public infoEmail: string;
     public dataEmailHref: string;
+    public iframeWidth: number;
+    public iframeHeight: number;
 
     constructor(private dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
@@ -209,6 +258,8 @@ export class DataReleaseComponent implements OnInit {
         this.dataEmail = this.toolkitConfiguration.dataEmail;
         this.infoEmail = this.toolkitConfiguration.infoEmail;
         this.dataEmailHref = `mailto:${this.toolkitConfiguration.dataEmail}`;
+        this.iframeWidth = this.isMobile ? 400 : 1200;
+        this.iframeHeight = this.isMobile ? 300 : 830;
     }
 
     public scrollTo(target): void {
@@ -224,5 +275,9 @@ export class DataReleaseComponent implements OnInit {
             autoFocus: false,
             scrollStrategy: new NoopScrollStrategy()
         });
+    }
+
+    public get isMobile(): boolean {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 }

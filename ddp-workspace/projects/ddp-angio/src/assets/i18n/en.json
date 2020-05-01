@@ -86,28 +86,6 @@
                 "CountMeInButton": "count me in"
             }
         },
-        "CountMeIn": {
-            "Title": "Join the movement: tell us about yourself",
-            "MainParagraph": "Complete the form below to tell us about yourself and your cancer. Our goal is to perform many different studies within the angiosarcoma community. Allowing us to know a little bit about your experience will help us conduct our current projects and also to design future studies. We will be starting with some focused studies in angiosarcoma, and expanding over time based on what we learn from you. We are asking all patients with angiosarcoma to say \"Count Me In\" and fill out the form so that we can use the information you provide to plan our next studies.",
-            "ParagraphPart1": "If you've previously submitted your name and email and have already started answering the questionnaire,",
-            "ParagraphLink": "click here",
-            "ParagraphPart2": "so we can resend you a link that will let you pick up where you left off.",
-            "Contact": "Contact Info",
-            "Fields": {
-                "FirstNamePlaceholder": "First Name *",
-                "FirstNameError": "First Name is required",
-                "LastNamePlaceholder": "Last Name *",
-                "LastNameError": "Last Name is required"
-            },
-            "Answers": {
-                "Answer1": "I have been diagnosed with angiosarcoma. I'm willing to answer additional questions about myself and my experience with angiosarcoma.",
-                "Answer2": "I haven't been diagnosed with angiosarcoma, but I want to stay informed about the Angiosarcoma Project by joining the email list.",
-                "Answer3": "I have a loved one that has passed away from angiosarcoma."
-            },
-            "Required": "* Required field",
-            "RoleError": "Please choose one of the above options.",
-            "Submit": "SUBMIT"
-        },
         "AboutUs": {
             "PageHeader": {
                 "Pt1": "The Angiosarcoma Project is part of",
@@ -134,8 +112,9 @@
         "DataRelease": {
             "Title": "ASCproject Data",
             "ViewDataButton": "VIEW THE ASCPROJECT DATA",
+            "ViewPaperButton": "VIEW OUR PUBLISHED RESEARCH ON THE ASCPROJECT",
             "MainText": {
-                "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added in six month intervals.",
+                "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
                 "Section2": "We have focused our efforts on generating and releasing this data so that the entire research community can have access to it. As we generate more data over time, we anticipate that this will accelerate discoveries in angiosarcoma.",
                 "Section3": "To everybody who is taking part in the ASCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data."
             },
@@ -289,30 +268,12 @@
                 "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
                 "LoadingError": "We're sorry, but an error has occurred."
             },
-            "ResendEmail": {
-                "InitialForm": {
-                    "Title": "Resend Email",
-                    "Text": "Enter your email below and we'll send you a link so that you can complete your questionnaire.",
-                    "EmailField": {
-                        "Placeholder": "Email Address *",
-                        "Error": "Please enter a valid Email Address"
-                    },
-                    "LoadingError": "We're sorry, but an error has occurred.",
-                    "CancelButton": "CANCEL",
-                    "SubmitButton": "SEND EMAIL"
-                },
-                "ThankYouForm": {
-                    "Title": "Thank you!",
-                    "Text": "We've sent your information to",
-                    "Text2": "If you have any questions about your status in the project, please email ",
-                    "SubmitButton": "OK"
-                }
-            },
             "SessionWillExpire": {
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
-                "Continue": "Continue"
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
         },
         "Warning": {
@@ -544,21 +505,21 @@
             "Text": "The dashboard below describes each Angiosarcoma Project form and its status."
         },
         "DatePicker": {
-          "Day": "Choose day...",
-          "Month": "Choose month...",
-          "Year": "Choose year...",
-          "January": "January",
-          "February": "February",
-          "March": "March",
-          "April": "April",
-          "May": "May",
-          "June": "June",
-          "July": "July",
-          "August": "August",
-          "September": "September",
-          "October": "October",
-          "November": "November",
-          "December": "December"
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
@@ -571,6 +532,19 @@
         "Title": {
             "Default": "Angiosarcoma Project",
             "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
         }
     }
 }

@@ -15,17 +15,16 @@ import { DOCUMENT } from '@angular/common';
 import { BaseActivityComponent } from './baseActivity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { GoogleAnalyticsEventsService } from '../../services/googleAnalyticsEvents.service';
+import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
-import { GoogleAnalytics } from '../../models/googleAnalytics';
+import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
-import { ValidationFailure } from '../../models/activity/validationFailure';
 
 @Component({
     selector: 'ddp-activity',
@@ -36,7 +35,7 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                     <div class="PageLayout">
                         <div *ngIf="isLoaded" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h1 class="PageHeader-title" #title>
-                                {{model ? model.name : ''}}
+                                {{model ? model.title : ''}}
                             </h1>
                             <div *ngIf="model && model.subtitle"
                                  class="PageHeader-activity-subtitle"
@@ -69,7 +68,7 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
                                         (visibilityChanged)="updateVisibility($event)"
-                                        (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
+                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
                             </ng-container>
@@ -107,7 +106,7 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
                                         (visibilityChanged)="updateVisibility($event)"
-                                        (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
                             </div>
@@ -123,7 +122,7 @@ import { ValidationFailure } from '../../models/activity/validationFailure';
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
                                             (visibilityChanged)="updateVisibility($event)"
-                                            (embeddedComponentValidStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
                                 </ng-container>
@@ -200,7 +199,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private readonly HEADER_HEIGHT: number = this.isMobile ? 10 : 70;
     private anchors: CompositeDisposable[];
     // one entry per section (header, body, and footer respectively)
-    private embeddedComponentValidationStatus: boolean[] = [true, true, true];
+    private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
@@ -208,7 +207,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
-        private analytics: GoogleAnalyticsEventsService,
+        private analytics: AnalyticsEventsService,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes
@@ -247,7 +246,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         combineLatest((this.embeddedComponentBusy$ as Observable<boolean>[])
             .concat([this.submissionManager.isAnswerSubmissionInProgress$]))
             .pipe(
-                map(latestVals => latestVals.some(val => val)))
+                map(latestVals => latestVals.some(val => val)),
+                // fix Angular changed-after-check problem
+                delay(0))
             .subscribe(this.isPageBusy);
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
@@ -268,10 +269,10 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
      * param sectionIdx the pos in array with status for section
      * param isValid true or false
      */
-    public updateEmbeddedComponentValidationStatus(sectionIdx: number, isValid: boolean): void {
-        this.embeddedComponentValidationStatus[sectionIdx] = isValid;
-        const reducedValidationStatus = this.embeddedComponentValidationStatus.reduce((acc, currVal) => acc && currVal, true);
-        this.embeddedComponentValidStatusChanged.next(reducedValidationStatus);
+    public updateEmbeddedComponentValidationStatus(sectionIndex: number, isValid: boolean): void {
+        this.embeddedComponentsValidationStatus[sectionIndex] = isValid;
+        const reducedValidationStatus = this.embeddedComponentsValidationStatus.reduce((accumulator, value) => accumulator && value, true);
+        this.embeddedComponentsValidStatusChanged.next(reducedValidationStatus);
     }
 
     public mouseEnterOnSubmit(): void {
@@ -279,12 +280,14 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public close(): void {
-        this.sendActivityAnalytics();
+        this.sendLastSectionAnalytics();
+        this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
         super.close();
     }
 
     public flush(): void {
-        this.sendActivityAnalytics();
+        this.sendLastSectionAnalytics();
+        this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);
         super.flush();
     }
 
@@ -307,10 +310,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
             this.scrollToTop();
-            this.resetValidationState();
-            this.sendConsentAnalytics();
-            this.currentSectionIndex = nextIndex;
-            this.visitedSectionIndexes[nextIndex] = true;
+            // enable any validation errors to be visible
+            this.validationRequested = true;
+            this.sendSectionAnalytics();
+            this.currentSection.validate();
+            if (this.currentSection.valid) {
+                this.resetValidationState();
+                this.currentSectionIndex = nextIndex;
+                this.visitedSectionIndexes[nextIndex] = true;
+            }
         }
     }
 
@@ -337,10 +345,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return this.model.sections.some(section => section.name || section.icons.length);
     }
 
-    public get isStepped(): boolean | void {
-        if (this.model) {
-            return !(this.model.sections.length === 1);
-        }
+    public get isStepped(): boolean {
+        return this.model.sections.length > 1;
     }
 
     public get isLastStep(): boolean {
@@ -368,17 +374,22 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    private sendConsentAnalytics(): void {
-        if (this.model.formType.toLowerCase() === 'consent' && this.model.sections[this.currentSectionIndex].name) {
-            this.analytics.emitCustomEvent(this.model.activityCode, this.model.sections[this.currentSectionIndex].name);
+    private sendSectionAnalytics(): void {
+        // Some sections don't have name, just send section number
+        const sectionName = this.model.sections[this.currentSectionIndex].name ?
+            this.model.sections[this.currentSectionIndex].name :
+            this.currentSectionIndex.toString();
+        this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
+    }
+
+    private sendLastSectionAnalytics(): void {
+        if (this.isStepped && this.isLastStep) {
+            this.sendSectionAnalytics();
         }
     }
 
-    private sendActivityAnalytics(): void {
-        this.sendConsentAnalytics();
-        if (this.model.name) {
-            this.analytics.emitCustomEvent(GoogleAnalytics.SubmitSurvey, this.model.activityCode);
-        }
+    private sendActivityAnalytics(event: string): void {
+        this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
     private scrollToTop(): void {

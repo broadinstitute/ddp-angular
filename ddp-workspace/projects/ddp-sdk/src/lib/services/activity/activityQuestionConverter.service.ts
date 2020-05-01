@@ -19,7 +19,8 @@ import { ActivityAbstractValidationRule } from './validators/activityAbstractVal
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import * as _ from 'underscore';
 
-const DETAIL_MAXLENGTH = 255;
+const DETAIL_MAXLENGTH = 500;
+
 @Injectable()
 export class ActivityQuestionConverter {
     private questionBuilders: Array<ActivityRule>;
@@ -54,6 +55,9 @@ export class ActivityQuestionConverter {
                             textBlock.regexPattern = validation.regexPattern;
                         }
                     });
+                    textBlock.confirmEntry = questionJson.confirmEntry;
+                    textBlock.confirmPrompt = questionJson.confirmPrompt;
+                    textBlock.mismatchMessage = questionJson.mismatchMessage;
                     textBlock.inputType = questionJson.inputType;
                     textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
                     return textBlock;
@@ -122,7 +126,7 @@ export class ActivityQuestionConverter {
                 }
             },
             {
-                type: 'AGREEMENT', func: (questionJson) => {
+                type: 'AGREEMENT', func: () => {
                     return new ActivityAgreementQuestionBlock();
                 }
             }
@@ -147,7 +151,7 @@ export class ActivityQuestionConverter {
         questionBlock.stableId = questionJson.stableId;
         questionBlock.displayNumber = displayNumber;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
-                          questionJson.validationFailures.map(vf => vf.message) : [];
+            questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
 
         for (const newValidator of this.validatorBuilder.buildQuestionValidatorRule(questionJson, questionBlock)) {
             questionBlock.validators.push(newValidator);
