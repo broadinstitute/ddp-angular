@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Injectable, OnDestroy } from '@angular/core';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { BehaviorSubject, merge, Observable, of, pipe, Subject, UnaryFunction, zip } from 'rxjs';
 import {
@@ -46,6 +46,7 @@ export interface AddressInputComponentState {
   formData: any;
 }
 
+@Injectable()
 export class AddressInputService implements OnDestroy {
   /**
    * The formgroup used by the input form
