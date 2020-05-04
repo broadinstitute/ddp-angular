@@ -1,0 +1,12 @@
+dispatch:
+  - url: "ascproject.org/*"
+    service: angio
+  - url: "mbcproject.org/*"
+    service: mbc
+  - url: "braincancerproject.org/*"
+    service: brain
+  - url: "osproject.org/**"
+    service: osteo
+  - url: "pepper-backend.prod.datadonationplatform.org/*"
+    service: pepper-backend
+

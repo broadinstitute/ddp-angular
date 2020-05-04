@@ -1,0 +1,12 @@
+dispatch:
+  - url: "angio.staging.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.staging.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.staging.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.staging.datadonationplatform.org/*"
+    service: osteo
+  - url: "pepper-backend.staging.datadonationplatform.org/*"
+    service: pepper-backend
+
