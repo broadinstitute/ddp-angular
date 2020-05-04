@@ -2,15 +2,17 @@ version: 2.1
 
 references:
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+    v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-                "osteo brain angio mbc"
+    "osteo brain angio mbc"
   study_guids: &study_guids
-                "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+  config_deployment_dir: &config_deployment_dir
+      config/deployment
 
 # Container for all the builds
 executors:
@@ -124,6 +126,9 @@ commands:
     parameters:
       study_key:
         type: string
+      config_deploy_dir:
+        type: string
+        default: *config_deployment_dir
     steps:
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
@@ -154,7 +159,9 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
+            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
+          working_directory: ~/repo
       - run:
           name: Update deployments sheet
           command: |
