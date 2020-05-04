@@ -9,4 +9,6 @@ dispatch:
     service: osteo
   - url: "pepper-backend.staging.datadonationplatform.org/*"
     service: pepper-backend
+  - url: "pepper-staging.datadonationplatform.org/*"
+    service: pepper-backend
 
