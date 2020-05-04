@@ -11,6 +11,8 @@ references:
     "osteo brain angio mbc"
   study_guids: &study_guids
       "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+  config_deployment_dir: &config_deployment_dir
+    ~/repo/ddp-workspace/config/deployment
 
 # Container for all the builds
 executors:
@@ -124,6 +126,9 @@ commands:
     parameters:
       study_key:
         type: string
+      config_deploy_dir:
+        type: string
+        default: *config_deployment_dir
     steps:
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
@@ -154,7 +159,8 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
+            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}_dispatch.yaml"
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
       - run:
           name: Update deployments sheet
           command: |
