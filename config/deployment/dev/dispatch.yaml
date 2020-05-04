@@ -1,0 +1,15 @@
+
+dispatch:
+  - url: "angio.dev.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.dev.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.dev.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.dev.datadonationplatform.org/*"
+    service: osteo
+  - url: "pepper-backend.dev.datadonationplatform.org/*"
+    service: pepper-backend
+  - url: "pepper-dev.datadonationplatform.org/*"
+    service: pepper-backend
+
