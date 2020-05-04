@@ -159,7 +159,7 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}_dispatch.yaml"
+            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
             gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
           working_directory: ~/repo
       - run:
