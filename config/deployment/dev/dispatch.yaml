@@ -1,5 +1,9 @@
 
 dispatch:
+  - url: "pepper-dev.datadonationplatform.org/docs*"
+    service: pepper-api-spec
+  - url: "pepper-dev.datadonationplatform.org/spec/*"
+    service: pepper-api-spec
   - url: "angio.dev.datadonationplatform.org/*"
     service: angio
   - url: "mbc.dev.datadonationplatform.org/*"
