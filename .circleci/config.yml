@@ -78,7 +78,7 @@ commands:
               staging)
                 DEPLOY_ENV=staging
               ;;
-              deletemedummy:
+              deletemedummy)
                 DEPLOY_ENV=dev
               ;;
               production)
