@@ -315,7 +315,7 @@ commands:
             echo "The path is $PATH"
             ls -l /home/circleci/repo/build-utils
             echo "The current PWD is $PWD"
-            ls -l /home/circleci/repo
+            ls -l /home/circleci/repo/ddp-workspace
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
 
