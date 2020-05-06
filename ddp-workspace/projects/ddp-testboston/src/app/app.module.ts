@@ -36,7 +36,7 @@ declare const ga: Function;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 
-export let sdkConfig = new ConfigurationService();
+export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
