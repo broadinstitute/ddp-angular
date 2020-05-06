@@ -20,9 +20,9 @@ references:
 
 # Container for all the builds
 executors:
-  commit-executor:
+  build-executor:
     docker:
-      - image: broadinstitute/study-website-build:04-09-2020A
+      - image: broadinstitute/study-website-build:05-06-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
@@ -379,7 +379,7 @@ jobs:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-deploy:
           study_key: << parameters.study_key >>
@@ -388,7 +388,7 @@ jobs:
   conditionally-launch-build-and-deploy-all-job:
     working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - checkout
       - setup-shared-env
@@ -398,7 +398,7 @@ jobs:
   conditionally-launch-build-and-store-all-job:
     working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - checkout
       - conditionally-launch-build-and-store:
@@ -413,7 +413,7 @@ jobs:
   app-build-and-store-job:
     working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
@@ -424,7 +424,7 @@ jobs:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
