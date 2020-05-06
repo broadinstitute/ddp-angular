@@ -312,6 +312,8 @@ commands:
             set -u
             set +e
             set +x
+            echo "The path is $PATH"
+            ls -l /home/circleci/repo/build-utils
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
 
