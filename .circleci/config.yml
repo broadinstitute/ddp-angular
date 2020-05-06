@@ -78,9 +78,6 @@ commands:
               staging)
                 DEPLOY_ENV=staging
               ;;
-              deletemedummy)
-                DEPLOY_ENV=dev
-              ;;
               production)
                 DEPLOY_ENV=prod
               ;;
@@ -258,8 +255,6 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            echo "the PWD is $PWD"
-            ls -l
             if [[ ! -d node_modules ]]; then
               npm ci
             else
@@ -315,13 +310,8 @@ commands:
             set -u
             set +e
             set +x
-            echo "The path is $PATH"
-            ls -l /home/circleci/repo/build-utils
-            echo "The current PWD is $PWD"
-            ls -l /home/circleci/repo/ddp-workspace
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
-
 
             CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
 
@@ -462,7 +452,6 @@ workflows:
             branches:
               only:
                 - develop
-                - fix_circleci_paths
 
   build-and-deploy-workflow:
     when: << pipeline.parameters.do-builds >>
@@ -481,7 +470,6 @@ workflows:
               only:
                 - /^rc.*/
                 - /^hotfix.*/
-                - fix_circleci_paths
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
@@ -498,7 +486,6 @@ workflows:
                 - test
                 - staging
                 - production
-                - deletemedummy
           study_key: osteo
 
       - deploy-stored-build-job:
