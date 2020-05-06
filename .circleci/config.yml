@@ -396,7 +396,8 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
