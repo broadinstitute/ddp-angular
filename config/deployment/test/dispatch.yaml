@@ -11,4 +11,3 @@ dispatch:
     service: pepper-backend
   - url: "pepper-test.datadonationplatform.org/*"
     service: pepper-backend
-

@@ -8,9 +8,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc"
+    "osteo brain angio mbc testboston"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
@@ -398,6 +398,8 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
+      - conditionally-launch-build-and-store:
+          study_key: testboston
 
   app-build-and-store-job:
     executor:
@@ -483,6 +485,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: angio
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: testboston
 
   nightly:
     triggers:
@@ -505,3 +510,6 @@ workflows:
       - build-and-deploy-job:
           name: mbc-nightly
           study_key: mbc
+      - build-and-deploy-job:
+          name: testboston-nightly
+          study_key: testboston
