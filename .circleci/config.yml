@@ -78,6 +78,9 @@ commands:
               staging)
                 DEPLOY_ENV=staging
               ;;
+              deletemedummy:
+                DEPLOY_ENV=dev
+              ;;
               production)
                 DEPLOY_ENV=prod
               ;;
@@ -407,7 +410,8 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
@@ -494,6 +498,7 @@ workflows:
                 - test
                 - staging
                 - production
+                - deletemedummy
           study_key: osteo
 
       - deploy-stored-build-job:
