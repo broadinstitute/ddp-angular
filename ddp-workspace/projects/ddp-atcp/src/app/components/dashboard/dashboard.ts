@@ -20,7 +20,6 @@ import { filter, first } from 'rxjs/operators';
   styleUrls: ['./dashboard.scss'],
   template: `
     <div class="dashboard">
-      <app-header></app-header>
       <div class="page-padding">
         <h1 *ngIf="firstName"> {{ firstName }} <span translate>DashBoard.EnrollmentProcess</span></h1>
         <div class="workdir">
@@ -31,7 +30,6 @@ import { filter, first } from 'rxjs/operators';
                                    (submit)="setActivity($event)"></ddp-activity-redesigned>
         </div>
       </div>
-      <app-footer></app-footer>
     </div>
   `
 })

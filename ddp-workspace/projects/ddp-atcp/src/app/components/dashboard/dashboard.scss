@@ -1,8 +1,6 @@
-@import '../../styles/common';
 @import '../../styles/buttons';
 
 .dashboard {
-  @include common-footer-down;
 
   ::ng-deep {
     .ddp-required-question-prompt {

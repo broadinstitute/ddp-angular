@@ -19,6 +19,9 @@
     "Buttons": {
       "Submit": {
         "Title": "Submit"
+      },
+      "Login": {
+        "Title": "LOG IN"
       }
     }
   },

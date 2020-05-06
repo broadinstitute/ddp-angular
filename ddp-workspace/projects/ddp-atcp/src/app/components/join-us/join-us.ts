@@ -14,10 +14,8 @@ import {
 
 @Component({
   selector: `app-join-us`,
-  styleUrls: ['./join-us.scss'],
   template: `
     <div class="join-us">
-      <app-header></app-header>
       <div class="page-padding">
         <ddp-activity [studyGuid]="studyGuid"
                       [activityGuid]="instanceGuid"
@@ -25,7 +23,6 @@ import {
                       (stickySubtitle)="showStickySubtitle($event)">
         </ddp-activity>
       </div>
-      <app-footer></app-footer>
     </div>
   `
 })

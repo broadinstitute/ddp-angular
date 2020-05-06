@@ -20,6 +20,8 @@ import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
+import { SessionExpiredComponent } from './components/session-expired/session-expired';
+import { PasswordResetComponent } from './components/password-reset/password-reset';
 
 const routes: Routes = [
   {
@@ -46,12 +48,25 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'login-landing',
+    path: RouterResource.PasswordResetDone,
+    component: PasswordResetComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: RouterResource.SessionExpired,
+    component: SessionExpiredComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard
+    ]
+  },
+  {
+    path: RouterResource.LoginLanding,
     component: LoginLandingRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
-    path: 'auth',
+    path: RouterResource.Auth,
     component: Auth0CodeCallbackComponent,
     canActivate: [IrbGuard]
   },

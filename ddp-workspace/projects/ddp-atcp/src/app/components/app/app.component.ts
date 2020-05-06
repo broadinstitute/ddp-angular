@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { CommunicationService, JoinMailingListComponent, SessionWillExpireCompon
 })
 export class AppComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
+  public isWelcomPage: boolean = false;
   private readonly DIALOG_BASE_SETTINGS = {
     width: '740px',
     position: { top: '30px' },
@@ -20,11 +22,15 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private router: Router,
     private communicationService: CommunicationService,
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier) { }
 
   public ngOnInit(): void {
+    this.router.events.subscribe(() => {
+      this.isWelcomPage = this.router.url === '/';
+    });
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();
   }

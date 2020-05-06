@@ -39,6 +39,8 @@ import { WorkflowProgressComponent } from './components/workflow-progress/workfl
 import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar';
+import { SessionExpiredComponent } from './components/session-expired/session-expired';
+import { PasswordResetComponent } from './components/password-reset/password-reset';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -111,7 +113,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WorkflowProgressComponent,
     ErrorComponent,
     StatisticsComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    SessionExpiredComponent,
+    PasswordResetComponent
   ],
   entryComponents: [
     DashBoardComponent,
