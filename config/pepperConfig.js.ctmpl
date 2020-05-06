@@ -107,7 +107,7 @@ var DDP_ENV = {
 
 {{if eq $study_guid "testboston"}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0ClientId'] = "m4lhHnq2WvRm3lloUHbQzwCte7s03o3S";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
    {{else if eq $environment "test"}}
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
@@ -117,7 +117,7 @@ var DDP_ENV = {
        DDP_ENV['projectGAToken'] = "UA-108484823-1";
    {{else if eq $environment "prod"}}
       DDP_ENV['auth0ClientId'] = "fixme-not-set";
-      DDP_ENV['projectGAToken'] = "";
+      DDP_ENV['projectGAToken'] = "fixme-not-set";
   {{end}}
 {{end}}
 
