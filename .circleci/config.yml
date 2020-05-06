@@ -6,7 +6,7 @@ references:
   ng_workspace_path: &ng_workspace_path
       /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-    v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
@@ -34,6 +34,7 @@ commands:
         type: string
     steps:
       - setup-build-workspace
+      - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - build-app
