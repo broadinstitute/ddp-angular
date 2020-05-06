@@ -255,6 +255,7 @@ commands:
           name: Install dependencies
           command: |
             echo "the PWD is $PWD"
+            ls -l
             if [[ ! -d node_modules ]]; then
               npm ci
             else
