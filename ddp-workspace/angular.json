@@ -1050,6 +1050,7 @@
               }
             ],
             "styles": [
+              "projects/ddp-testboston/src/theme.scss",
               "projects/ddp-testboston/src/styles.scss"
             ],
             "scripts": [],
