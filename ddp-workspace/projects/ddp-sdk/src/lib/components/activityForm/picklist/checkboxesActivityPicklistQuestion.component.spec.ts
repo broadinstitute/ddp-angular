@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
-import { NGXTranslateService } from 'ddp-sdk';
+import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { of } from 'rxjs';
 
 describe('CheckboxesActivityPicklistQuestion', () => {
@@ -158,5 +158,4 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         });
     });
 });
-
 
