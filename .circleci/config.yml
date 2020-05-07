@@ -1,8 +1,12 @@
 version: 2.1
 
 references:
+  repo_path: &repo_path
+      /home/circleci/repo
+  ng_workspace_path: &ng_workspace_path
+      /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-    v1-dependency-npm1-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
@@ -16,10 +20,10 @@ references:
 
 # Container for all the builds
 executors:
-  commit-executor:
+  build-executor:
     docker:
-      - image: broadinstitute/study-website-build:04-09-2020A
-    working_directory: ~/repo/ddp-workspace
+      - image: broadinstitute/study-website-build:05-06-2020A
+    working_directory: *ng_workspace_path
     resource_class: medium+
 
 commands:
@@ -30,6 +34,7 @@ commands:
         type: string
     steps:
       - setup-build-workspace
+      - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - build-app
@@ -94,7 +99,7 @@ commands:
         type: string
     steps:
       - checkout:
-          path: ~/repo
+          path: *repo_path
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - set-deployment-environment
@@ -114,7 +119,6 @@ commands:
             fi
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
-            cd ~/repo/ddp-workspace
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive at $OUTPUT_DIR"
             ls -l $OUTPUT_DIR
@@ -143,7 +147,7 @@ commands:
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
-          working_directory: ~/repo
+          working_directory: *repo_path
       - run:
           name: Setup gcloud context
           command: |
@@ -161,7 +165,7 @@ commands:
             set -u
             DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
             gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
-          working_directory: ~/repo
+          working_directory: *repo_path
       - run:
           name: Update deployments sheet
           command: |
@@ -207,12 +211,15 @@ commands:
       study_guids:
         type: string
         default: *study_guids
+      repo_path:
+        type: string
+        default: *repo_path
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
-            echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
+            echo 'export PATH=$PATH:<< parameters.repo_path >>/build-utils' >> $BASH_ENV
             if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
               echo 'export STUDY_KEY=<<parameters.study_key>>' >> $BASH_ENV
               STUDY_KEYS=(<<parameters.study_keys>>)
@@ -243,7 +250,7 @@ commands:
     description: "Setup workspace used by all projects"
     steps:
       - checkout:
-          path: ~/repo
+          path: *repo_path
       - restore_cache: *npm_cache_restore_key
       - run:
           name: Install dependencies
@@ -366,30 +373,35 @@ commands:
 
 jobs:
   build-and-deploy-job:
+    working_directory: *ng_workspace_path
     parameters:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-deploy:
           study_key: << parameters.study_key >>
           skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
 
   conditionally-launch-build-and-store-all-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
@@ -402,18 +414,20 @@ jobs:
           study_key: testboston
 
   app-build-and-store-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
 
   deploy-stored-build-job:
+    working_directory: *ng_workspace_path
     parameters:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
