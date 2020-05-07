@@ -4,6 +4,10 @@
             "Submit": {
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
             }
         }
     },
@@ -17,6 +21,9 @@
             "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
             "PasswordRequiredError": "Password is required"
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
         }
     },
     "SDK": {

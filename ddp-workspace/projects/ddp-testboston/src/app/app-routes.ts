@@ -8,5 +8,6 @@ export const AppRoutes = {
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
-    Password: 'password'
+    Password: 'password',
+    SessionExpired: 'session-expired'
 };

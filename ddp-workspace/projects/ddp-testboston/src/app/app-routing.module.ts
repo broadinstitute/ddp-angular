@@ -18,7 +18,8 @@ import {
   DashboardRedesignedComponent,
   ActivityRedesignedComponent,
   ErrorRedesignedComponent,
-  PasswordRedesignedComponent
+  PasswordRedesignedComponent,
+  SessionExpiredRedesignedComponent
 } from 'toolkit';
 
 const routes: Routes = [
@@ -85,6 +86,13 @@ const routes: Routes = [
   {
     path: AppRoutes.Error,
     component: ErrorRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.SessionExpired,
+    component: SessionExpiredRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
