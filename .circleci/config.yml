@@ -271,7 +271,7 @@ commands:
     steps:
       - run:
           name: ng test
-          command: ng test ddp-sdk --watch=false --browsers ChromeHeadless
+          command: ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox
 
   build-app:
     description: "Build DDP study app"
