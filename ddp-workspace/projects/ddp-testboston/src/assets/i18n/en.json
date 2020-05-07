@@ -75,7 +75,7 @@
         },
         "Dashboard": {
             "Title": "My Dashboard",
-            "Text": "The dashboard below describes each Osteosarcoma Project form and its status."
+            "Text": "The dashboard below describes each TestBoston Project form and its status."
         },
         "DatePicker": {
             "Day": "Choose day...",
@@ -103,7 +103,7 @@
             "SingularForm": "character remaining"
         },
         "Title": {
-            "Default": "Osteosarcoma Project",
+            "Default": "TestBoston Project",
             "Alert": "Your session will time-out soon"
         },
         "EmailEntry": {
