@@ -7,3 +7,19 @@
     z-index: 1;
     height: 6.25rem;
 }
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 6.25rem;
+    padding: 0 1.5rem;
+}
+
+button {
+    color: white !important;
+}
+
+button:not(:last-child) {
+    margin-right: 5px;
+}
