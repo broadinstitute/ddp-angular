@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
+import { NGXTranslateService } from 'ddp-sdk';
+import { of } from 'rxjs';
 
 describe('CheckboxesActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -14,7 +16,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         picklistOptions: [
             {
                 stableId: 'AAA',
-                optionLabel: 'I have not recived any medications',
+                optionLabel: 'I have not received any medications',
                 allowDetails: true,
                 detailLabel: '',
                 exclusive: true,
@@ -65,13 +67,16 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         block = questionBlock;
         readonly = mode;
 
-        changed(value: any): void { }
+        changed(value: any): void {}
     }
 
     let component: CheckboxesActivityPicklistQuestion;
     let fixture: ComponentFixture<CheckboxesActivityPicklistQuestion>;
     let debugElement: DebugElement;
-
+    const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+    ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
+        return of(['Singular Translation', 'Plural Translation']);
+    });
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -80,6 +85,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                 MatInputModule,
                 BrowserAnimationsModule
             ],
+            providers: [{provide: NGXTranslateService, useValue: ngxTranslateServiceSpy}],
             declarations: [
                 TestHostComponent,
                 CheckboxesActivityPicklistQuestion
@@ -93,6 +99,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             component = fixture.componentInstance;
             debugElement = fixture.debugElement;
             component.block = questionBlock;
+            component.block.answer = null;
             component.readonly = mode;
             fixture.detectChanges();
         });
@@ -103,12 +110,12 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should emit valueChanged event', () => {
             const value = spyOn(component.valueChanged, 'emit');
-            component.select(true, 'AAA', true);
+            component.optionChanged(true, questionBlock.picklistOptions[0]);
             expect(value).toHaveBeenCalledTimes(1);
         });
 
         it('should emit answer', () => {
-            component.select(true, 'AAA', true);
+            component.optionChanged(true, questionBlock.picklistOptions[0]);
             expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: null }]);
         });
     });
@@ -118,7 +125,10 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             fixture = TestBed.createComponent(CheckboxesActivityPicklistQuestion);
             component = fixture.componentInstance;
             debugElement = fixture.debugElement;
+            // reinitialize answers after using somewhere else
+            questionBlock.answer = null;
             component.block = questionBlock;
+
         });
 
         it('should render 3 checkboxes', () => {
@@ -129,17 +139,24 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should show details field', () => {
             fixture.detectChanges();
-            const checkbox = debugElement.queryAll(By.css('.mat-checkbox-label'))[0];
-            checkbox.triggerEventHandler('click', null);
-            const filed = debugElement.queryAll(By.css('mat-form-field'));
-            expect(filed.length).toBe(1);
-        });
+            const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
+            // NB: this is how you get at the thing you can click!
+            // Figured it out from:
+            // https://github.com/angular/components/blob/106d274ef99533779ff8674597e844308a95131f/src/lib/checkbox/checkbox.spec.ts
+            const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
+            inputElement.click();
 
+            fixture.detectChanges();
+            const field = debugElement.queryAll(By.css('mat-form-field'));
+            expect(field.length).toBe(1);
+        });
         it('should add detais text to answer', () => {
             fixture.detectChanges();
-            component.select(true, 'AAA', true);
+            component.optionChanged(true, questionBlock.picklistOptions[0]);
             component.detailTextChanged('Text', 'AAA');
             expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: 'Text' }]);
         });
     });
 });
+
+
