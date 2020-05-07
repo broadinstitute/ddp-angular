@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { AppRoutes } from './app-routes';
+import { AppGuids } from './app-guids';
+
 import {
   DdpModule,
   LogLevel,
@@ -23,6 +26,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
+import { MatButtonModule } from '@angular/material/button';
+
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
@@ -35,6 +40,17 @@ declare const DDP_ENV: any;
 declare const ga: Function;
 
 export const toolkitConfig = new ToolkitConfigurationService();
+toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.consentUrl = AppRoutes.Consent;
+toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
+toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
+toolkitConfig.activityUrl = AppRoutes.Activity;
+toolkitConfig.errorUrl = AppRoutes.Error;
+toolkitConfig.consentGuid = AppGuids.Consent;
+toolkitConfig.covidSurveyGuid = AppGuids.Covid;
+toolkitConfig.dashboardGuid = AppGuids.Dashboard;
+toolkitConfig.phone = 'XXX-XXX-XXXX';
+toolkitConfig.infoEmail = 'testboston@datadonationplatform.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -81,7 +97,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppRoutingModule,
     CommonModule,
     DdpModule,
-    ToolkitModule
+    ToolkitModule,
+    MatButtonModule
   ],
   providers: [
     {
