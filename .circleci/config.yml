@@ -264,6 +264,12 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+  run-tests:
+    description: "Run all tests"
+    steps:
+      - run:
+          name: ng test
+          command: ng test --browsers ChromeHeadless
 
   build-app:
     description: "Build DDP study app"
@@ -380,6 +386,7 @@ jobs:
     executor:
       name: build-executor
     steps:
+      - run-tests
       - app-build-and-deploy:
           study_key: << parameters.study_key >>
           skip_build: false
@@ -392,6 +399,7 @@ jobs:
       - checkout:
           path: *repo_path
       - setup-shared-env
+      - run-tests
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
 
@@ -402,6 +410,7 @@ jobs:
     steps:
       - checkout:
           path: *repo_path
+      - run-tests
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
