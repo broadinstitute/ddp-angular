@@ -9,33 +9,49 @@
           HomePage.IntroductionSection.Text.First
           <br> HomePage.IntroductionSection.Text.Second
           <a
+            *ngIf="!isAuthenticated"
             class="BtnBordered white"
             [routerLink]="[RouterResource.JoinUs]"
             translate>
             Common.Navigation.JoinUs
+          </a>
+          <a
+            *ngIf="isAuthenticated"
+            class="BtnBordered white"
+            [routerLink]="[RouterResource.Dashboard]"
+            translate>
+            Common.Navigation.YourParticipants
           </a>
         </h2>
       </div>
       <img alt="Arrow"
            src="/assets/images/atcp/white-arrow.svg"
            class="reference-together"
-           (click)="scrollTo()">
+           (click)="scrollTo(join)">
     </div>
   </div>
-  <div class="second-display">
+  <div class="second-display" #join>
     <h2 translate>HomePage.SecondSection.Title</h2>
     <a
+      *ngIf="!isAuthenticated"
       class="BtnBordered green"
       [routerLink]="[RouterResource.JoinUs]"
       translate>
       Common.Navigation.JoinUs
     </a>
+    <a
+      *ngIf="isAuthenticated"
+      class="BtnBordered green"
+      [routerLink]="[RouterResource.Dashboard]"
+      translate>
+      Common.Navigation.YourParticipants
+    </a>
     <img alt="Arrow"
          src="/assets/images/atcp/green-arrow.svg"
          class="reference-together"
-         (click)="scrollTo()">
+         (click)="scrollTo(participate)">
   </div>
-  <div class="participate-display">
+  <div class="participate-display" #participate>
     <div class="step">
       <div class="number"><img src="/assets/images/atcp/step01-icon.svg" alt=""></div>
       <div class="description">
@@ -78,16 +94,24 @@
   <img alt="Arrow"
        src="/assets/images/atcp/green-arrow.svg"
        class="reference-together"
-       (click)="scrollTo()">
+       (click)="scrollTo(together)">
   <div class="together-display" #together>
     <h3 translate>
       HomePage.Participate.Together.H3.First <br> HomePage.Participate.Together.H3.Second
     </h3>
     <a
+      *ngIf="!isAuthenticated"
       class="BtnBordered green"
       [routerLink]="[RouterResource.JoinUs]"
       translate>
       Common.Navigation.JoinUs
+    </a>
+    <a
+      *ngIf="isAuthenticated"
+      class="BtnBordered green"
+      [routerLink]="[RouterResource.Dashboard]"
+      translate>
+      Common.Navigation.YourParticipants
     </a>
   </div>
 </div>

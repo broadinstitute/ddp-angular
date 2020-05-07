@@ -1,5 +1,5 @@
 import { ValueProvider, InjectionToken } from '@angular/core';
-import * as languages from '../../assets/i18n/languages.json';
+import languages from '../../assets/i18n/languages.json';
 
 export interface Language {
   code: string;
@@ -10,5 +10,5 @@ export const LanguagesToken = new InjectionToken<Language>('Language');
 
 export const LanguagesProvider: ValueProvider = {
   provide: LanguagesToken,
-  useValue: languages
+  useValue: languages,
 };

@@ -22,6 +22,7 @@ import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { SessionExpiredComponent } from './components/session-expired/session-expired';
 import { PasswordResetComponent } from './components/password-reset/password-reset';
+import { AuthComponent } from './components/Auth/auth';
 
 const routes: Routes = [
   {
@@ -67,7 +68,7 @@ const routes: Routes = [
   },
   {
     path: RouterResource.Auth,
-    component: Auth0CodeCallbackComponent,
+    component: AuthComponent,
     canActivate: [IrbGuard]
   },
   {

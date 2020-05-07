@@ -41,6 +41,7 @@ import { StatisticsComponent } from './components/statistics/statistics';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 import { SessionExpiredComponent } from './components/session-expired/session-expired';
 import { PasswordResetComponent } from './components/password-reset/password-reset';
+import { AuthComponent } from './components/Auth/auth';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -115,7 +116,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     StatisticsComponent,
     ProgressBarComponent,
     SessionExpiredComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    AuthComponent
   ],
   entryComponents: [
     DashBoardComponent,

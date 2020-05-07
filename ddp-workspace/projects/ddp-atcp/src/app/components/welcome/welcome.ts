@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as RouterResource from '../../router-resources';
-import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
+import { CompositeDisposable, NGXTranslateService, SessionMementoService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-welcome',
@@ -15,11 +15,24 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     static: false
   }) together;
 
-  constructor(private ngxTranslate: NGXTranslateService) {
+  @ViewChild('join', {
+    static: false
+  }) join;
+
+  @ViewChild('participate', {
+    static: false
+  }) participate;
+
+  constructor(private ngxTranslate: NGXTranslateService,
+              private session: SessionMementoService) {
   }
 
-  public scrollTo(): void {
-    this.together.nativeElement.scrollIntoView();
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession();
+  }
+
+  public scrollTo(element): void {
+    element.scrollIntoView();
   }
 
   public ngOnInit(): void {
