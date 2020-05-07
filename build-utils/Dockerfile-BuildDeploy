@@ -114,6 +114,8 @@ RUN apk  --no-cache add \
     ruby \
     ruby-bundler \
     ruby-json  \
+    make \
+    g++ \
     && rm -rf /var/cache/apk/*
 
 # Setting up Angular CLI globally
