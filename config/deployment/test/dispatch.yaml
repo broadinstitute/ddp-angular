@@ -1,0 +1,14 @@
+dispatch:
+  - url: "angio.test.datadonationplatform.org/*"
+    service: angio
+  - url: "mbc.test.datadonationplatform.org/*"
+    service: mbc
+  - url: "brain.test.datadonationplatform.org/*"
+    service: brain
+  - url: "osteo.test.datadonationplatform.org/*"
+    service: osteo
+  - url: "pepper-backend.test.datadonationplatform.org/*"
+    service: pepper-backend
+  - url: "pepper-test.datadonationplatform.org/*"
+    service: pepper-backend
+
