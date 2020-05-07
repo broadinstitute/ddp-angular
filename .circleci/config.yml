@@ -37,6 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - run-tests
       - build-app
       - store-app-build
 
@@ -56,6 +57,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
+            - run-tests
             - build-app
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
@@ -386,7 +388,6 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - run-tests
       - app-build-and-deploy:
           study_key: << parameters.study_key >>
           skip_build: false
@@ -399,7 +400,6 @@ jobs:
       - checkout:
           path: *repo_path
       - setup-shared-env
-      - run-tests
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
 
@@ -410,7 +410,6 @@ jobs:
     steps:
       - checkout:
           path: *repo_path
-      - run-tests
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
