@@ -527,11 +527,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
   addressIsBlank(address: Address): boolean {
-    return this.countOfFieldsWithData(address) === 0;
+    return !address || this.countOfFieldsWithData(address) === 0;
   }
 
-  enoughDataToSave(address: Address): boolean {
-    return this.countOfFieldsWithData(address) >= 1;
+  enoughDataToSave(address: Address | null): boolean {
+    return address && this.countOfFieldsWithData(address) >= 1;
   }
 
   countOfFieldsWithData(address: Address): number {
