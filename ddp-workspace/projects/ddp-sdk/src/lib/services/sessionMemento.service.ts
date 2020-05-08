@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap, startWith } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
