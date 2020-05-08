@@ -62,6 +62,7 @@
     "karma": "5.0.1",
     "karma-chrome-launcher": "3.0.0",
     "karma-coverage-istanbul-reporter": "2.0.5",
+    "karma-junit-reporter": "2.0.1",
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.2",
     "ng-packagr": "5.7.1",
