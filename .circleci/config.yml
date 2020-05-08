@@ -279,9 +279,9 @@ commands:
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: ./junit
+          path: /tmp/junit
       - store_artifacts:
-          path: ./junit
+          path: /tmp/junit
 
   build-app:
     description: "Build DDP study app"
