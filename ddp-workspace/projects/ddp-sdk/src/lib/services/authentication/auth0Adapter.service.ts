@@ -11,10 +11,11 @@ import { Auth0Mode } from '../../models/auth0-mode';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { AnalyticsEventActions } from '../../models/analyticsEventActions';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject } from 'rxjs';
-import { takeUntil, skip, take } from 'rxjs/operators';
+import { bindNodeCallback, Observable, Subject } from 'rxjs';
+import { takeUntil, take, tap, mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
+import { Session } from '../../models/session';
 
 /**
  * Main class that handles Auth0 authentication
@@ -163,6 +164,18 @@ export class Auth0AdapterService implements OnDestroy {
         });
     }
 
+    public renewSession(renewalAuthResult): void {
+        const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
+        this.session.setSession(
+            renewalAuthResult.accessToken,
+            renewalAuthResult.idToken,
+            this.session.session.userGuid,
+            this.session.session.locale,
+            // the time of expiration in UTC seconds
+            decodedJwt['exp'] as number,
+            this.session.session.participantGuid);
+    }
+
     public setSession(authResult): void {
         const decodedJwt = this.jwtHelper.decodeToken(authResult.idToken);
         this.log.logEvent(' authResult', decodedJwt);
@@ -201,34 +214,31 @@ export class Auth0AdapterService implements OnDestroy {
         });
     }
 
-    public auth0RenewToken(): void {
-        const participantGuid = this.session.session.participantGuid;
-        this.session.sessionObservable.pipe(
-            // Because the session is BehaviorSubject, we should skip a current session,
-            // we are only interested in the renewed session
-            skip(1),
-            take(1)
-        ).subscribe(() => {
-            this.renewNotifier.hideSessionExpirationNotifications();
-        });
-        // Original code called renewAuth. This seems to be renewing token correctly
-        // Note the response types. 'code' is explicitly not supported
-        this.webAuth.checkSession(
-            {
-                studyGuid: this.configuration.studyGuid,
-                responseType: 'token id_token'
-            },
-            (err, result) => {
-                if (err) {
-                    console.log(err);
+    public auth0RenewToken(): Observable<Session | null>  {
+        const studyGuid = this.configuration.studyGuid;
+        const auth0IdToken = this.jwtHelper.decodeToken(this.session.session.idToken)['sub'];
+        const clientId = this.configuration.auth0ClientId;
+        const resultMatchesThisSession = (result: any) => {
+            const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
+            return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
+        };
+        const checkSession$ = bindNodeCallback(cb => this.webAuth.checkSession({
+            studyGuid,
+            responseType: 'token id_token',
+            renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
+        }, cb));
+        return checkSession$().pipe(
+            take(1),
+            tap(result => {
+                if (resultMatchesThisSession(result)) {
+                    this.renewSession(result);
                 } else {
-                    console.log('auth0Adapter.renewToken success', result);
-                    this.setSession({
-                        ...result,
-                        participantGuid
-                    });
+                    throw new Error('Token received does not match this session');
                 }
-            });
+            }),
+            tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
+            mergeMap(result => this.session.sessionObservable.pipe(take(1)))
+        );
     }
 
     public handleExpiredSession(): void {
