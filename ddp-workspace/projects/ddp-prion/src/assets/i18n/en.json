@@ -16,7 +16,10 @@
             "Dashboard": "My Dashboard"
         },
         "Footer": {
-            "BackToTop": "Back to top"
+            "BackToTop": "Back to top",
+            "ContactUs": "Contact us:",
+            "ContactMailTo": "mailto:info@prionregistry.org",
+            "ContactEmail": "info@prionregistry.org"
         },
         "Dashboard": {
           "StudyListing": {
