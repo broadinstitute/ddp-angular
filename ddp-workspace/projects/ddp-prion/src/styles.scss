@@ -694,8 +694,8 @@ button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
     position: relative;
     bottom: 0;
     width: 100%;
-    min-height: 100px;
-    padding: 0 50px;
+    height: 130px;
+    padding: 20px 50px 20px 50px;
     z-index: 2;
     background-color: #f9f3e8;
     margin: 0 0 0 0;
@@ -708,41 +708,34 @@ button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
   font-size: 0.9rem !important;
 }
 
-.Footer-logo img {
+.Footer-left img {
   height: 50px;
-  margin-left: 20px;
 }
 
-@media only screen and (max-width: 450px) {
-  .Footer {
-    padding: 0 15px !important;
-  }
+.Footer-left {
+  padding-left: 20px;
+  padding-top: 5px;
+  height: 90px;
 }
 
-@media only screen and (max-width: 767px) {
-  .Footer {
-    padding: 0 25px;
-    min-height: 200px;
-    margin: -200px 0 0 0;
-  }
-  .Footer-logo img {
-    margin-left: 0;
-  }
+p.Footer-contact {
+  font-size: 0.9rem !important;
+  color: #727272 !important;
+  font-weight: 500 !important;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
-@media only screen and (max-width: 992px) {
-  .Footer {
-    padding: 0 25px;
-  }
-  .Footer-logo img {
-    margin-left: 0;
-  }
+.Footer-links {
+  height: 90px;
+  padding: 31px 0 0;
 }
 
 .Footer-text {
   font-size: 0.9rem !important;
   color: #727272;
-  margin-top: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .Footer-link, .Footer-link .SimpleButton {
@@ -776,6 +769,22 @@ button.Footer-link {
 }
 
 @media only screen and (max-width: 767px) {
+  .Footer {
+    padding: 20px 25px 20px 25px;
+    min-height: 280px;
+  }
+  .Footer-left {
+    padding-top: 6px;
+    padding-left: 0;
+    height: unset;
+  }
+  .Footer-links {
+    padding-top: 0;
+    height: unset;
+  }
+  .Footer-text {
+    margin-top: 5px;
+  }
   .Footer-text,
   .Footer-link,
   .Footer-link .SimpleButton{
@@ -793,44 +802,18 @@ button.Footer-link {
   }
 }
 
-.Footer-text {
-  font-size: 0.9rem;
-  color: #727272;
-  margin-top: 10px;
-}
-
-.Footer-link, .Footer-link .SimpleButton {
-  font-weight: 500;
-  color: #727272;
-  display: inline;
-  cursor: pointer;
-  text-align: right;
-  transition: color 0.2s linear;
-  padding-left: 30px;
-}
-
-.Footer-link:hover {
-  color: #82B547;
-}
-
-button.Footer-link {
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-@media only screen and (max-width: 767px) {
-  .Footer-text,
-  .Footer-link,
-  .Footer-link .SimpleButton{
-    display: block;
-    float: left !important;
-    text-align: left;
-    padding-left: 0;
-    width: 100%;
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+  .Footer {
+    padding: 20px 25px 20px 25px;
   }
-  .Footer-text {
-    margin-top: 20px;
+  .Footer-left {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+  .Footer-links {
+    padding-top: 20px;
   }
 }
 //End of footer section
@@ -966,10 +949,6 @@ button.Footer-link {
     margin: 0 0 20px !important;
 }
 
-.Float--right {
-    float: right !important;
-}
-
 .Position--relative {
     position: relative;
 }
@@ -990,46 +969,19 @@ button.Footer-link {
     font-weight: 300;
 }
 
-@media only screen and (max-width: 1480px) {
-    .Footer-logo {
-        order: 1;
-    }
-
-    .Footer-nav {
-        order: 3;
-        width: 100%;
-    }
-}
-
 @media only screen and (max-width: 1025px) {
-    .Header-nav {
-        margin: 0;
-    }
+  .Header-nav {
+    margin: 0;
+  }
 
-    .Header-logo {
-        margin: 0;
-    }
-
-    .Footer-logo {
-        margin: 0;
-    }
-
-    .Footer-nav {
-        margin: 30px 50px 0 0;
-    }
+  .Header-logo {
+    margin: 0;
+  }
 }
 
 @media only screen and (max-width: 750px) {
     .Message-quote {
         margin: 0 30px;
-    }
-
-    .Footer-navList {
-        flex-direction: column;
-    }
-
-    .Footer-navItem {
-        padding: 0;
     }
 }
 
@@ -2571,27 +2523,27 @@ p.ddp-helper {
 .Container {
     background: #ffffff;
     overflow: hidden;
-    margin: 0 50px 30px 50px !important;
+    margin: 0 50px 0 50px !important;
     /*footer height + padding*/
     padding: 30px 30px 80px 30px;
 }
 
 @media only screen and (max-width: 992px) {
     .Container {
-        margin: 0 25px 30px 25px !important;
+        margin: 0 25px 0 25px !important;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .Container {
-        margin: 0 0 130px 0 !important;
+        margin: 0 0 0 0 !important;
     }
 }
 
 .ContainerSurvey {
     background: #ffffff;
     top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     /*footer height + padding*/
     padding: 30px !important;
     box-shadow: 1px 1px 5px #9E9E9E;
@@ -2599,7 +2551,7 @@ p.ddp-helper {
 
 @media only screen and (max-width: 767px) {
     .ContainerSurvey {
-        margin: 0 0 150px 0 !important;
+        margin: 0 0 20px 0 !important;
     }
 }
 
