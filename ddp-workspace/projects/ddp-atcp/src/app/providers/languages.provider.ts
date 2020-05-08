@@ -1,5 +1,5 @@
 import { ValueProvider, InjectionToken } from '@angular/core';
-import languages from '../../assets/i18n/languages.json';
+import * as languages from '../../assets/i18n/languages.json';
 
 export interface Language {
   code: string;

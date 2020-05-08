@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { NGXTranslateService } from 'ddp-sdk';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
+
+interface StepI {
+  Name: string;
+  Text: string;
+  Steps?: {
+    Name: string;
+    Text: string;
+  }[];
+}
 
 @Component({
   selector: 'app-about-initiative',
   templateUrl: './about-initiative.html',
   styleUrls: ['./about-initiative.scss']
 })
-export class AboutInitiativeComponent implements OnInit {
-  public AboutInitiative;
-  public steps;
-
+export class AboutInitiativeComponent implements OnInit, OnDestroy {
+  public steps: StepI[];
+  private anchor = new CompositeDisposable();
   constructor(private ngxTranslate: NGXTranslateService) {
   }
 
   public ngOnInit(): void {
-    this.ngxTranslate.getTranslation('AboutInitiative')
-      .subscribe((data: any) => {
-        this.AboutInitiative = data;
-        this.steps = this.AboutInitiative.ThirdParagraph.Steps;
-      });
+    const translateSub$ = this.ngxTranslate.getTranslation('AboutInitiative.ThirdParagraph.Steps')
+      .subscribe((steps: StepI[]) => this.steps = steps);
+    this.anchor.addNew(translateSub$);
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }

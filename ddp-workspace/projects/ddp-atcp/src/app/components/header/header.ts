@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { NGXTranslateService, SessionMementoService } from 'ddp-sdk';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { CompositeDisposable, NGXTranslateService, SessionMementoService } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
 
@@ -8,9 +8,10 @@ import { Language, LanguagesToken } from '../../providers/languages.provider';
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
   public SignIn: string;
+  private anchor = new CompositeDisposable();
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
@@ -18,8 +19,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.ngxTranslate.getTranslation('Common.Navigation.SignIn')
+    const translate$ = this.ngxTranslate.getTranslation('Common.Navigation.SignIn')
       .subscribe((SignIn: string) => this.SignIn = SignIn);
+    this.anchor.addNew(translate$);
   }
 
   public get isAuthenticated(): boolean {
@@ -28,5 +30,9 @@ export class HeaderComponent implements OnInit {
 
   public trackByFn(indx: number): number {
     return indx;
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }

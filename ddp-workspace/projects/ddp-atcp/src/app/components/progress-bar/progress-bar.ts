@@ -8,19 +8,18 @@ import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core
 export class ProgressBarComponent implements OnChanges {
   @Input() public count: number;
   @Input() public active = 0;
-  @Input() public canChange = false;
-  @Input() public canChooseeTab = true;
-  @Output() public onChanged: EventEmitter<number> = new EventEmitter<number>();
-  public tabs: any[] = [];
+  @Output() public onChange: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnChanges() {
+  public tabs: undefined[] = [];
+
+  public ngOnChanges(): void {
     if (this.count) {
       this.tabs = new Array(this.count);
     }
   }
 
-  public setActiveTab(event: Event, index: number) {
+  public setActiveTab(event: Event, index: number): void {
     event.preventDefault();
-    this.onChanged.emit(index);
+    this.onChange.emit(index);
   }
 }

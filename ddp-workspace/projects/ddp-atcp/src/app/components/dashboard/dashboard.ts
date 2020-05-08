@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { UserActivitiesDataSource } from '../../../../../ddp-sdk/src/lib/components/user/activities/userActivitiesDataSource';
 import { BehaviorSubject } from 'rxjs';
 import {
   ActivityInstance,
   ActivityResponse,
+  CompositeDisposable,
   LoggingService,
   UserActivityServiceAgent,
   UserProfileDecorator,
@@ -12,6 +13,7 @@ import {
 import { ToolkitConfigurationService } from 'toolkit';
 
 import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
+import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: `app-dashboard`,
@@ -33,17 +35,17 @@ import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
     </div>
   `
 })
-export class DashBoardComponent implements OnInit {
+export class DashBoardComponent implements OnInit, OnDestroy {
   public instanceGuid: string;
   public studyGuid: string;
   public steps: ActivityInstance[] = [];
   public dataSource: UserActivitiesDataSource;
-  public loaded: boolean;
   public firstName: string;
   private studyGuidObservable: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
+  private anchor = new CompositeDisposable();
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
               private userActivity: UserActivityServiceAgent,
@@ -65,8 +67,9 @@ export class DashBoardComponent implements OnInit {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
     this.studyGuidObservable.next(this.studyGuid);
     this.userAgent.profile
+      .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
       .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName);
-    new UserActivitiesDataSource(
+    const useActivities = new UserActivitiesDataSource(
       this.userActivity,
       this.logger,
       this.studyGuidObservable)
@@ -82,5 +85,10 @@ export class DashBoardComponent implements OnInit {
         }
         this.updateInstanceGuid(this.steps[currentActivityIndex].instanceGuid);
       });
+    this.anchor.addNew(useActivities);
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }
