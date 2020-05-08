@@ -271,7 +271,9 @@ commands:
     steps:
       - run:
           name: ng test
-          command: ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox
+          command: |
+            mkdir -p junit
+            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox
           environment:
             JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
