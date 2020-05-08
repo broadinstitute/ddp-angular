@@ -14,7 +14,7 @@ references:
   study_keys: &study_keys
     "osteo brain angio mbc esc"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain ANGIO cmi-mbc esc"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-esc"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
