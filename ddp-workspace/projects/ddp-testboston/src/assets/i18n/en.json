@@ -1,1 +1,130 @@
-{}
+{
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
+            }
+        }
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "My Dashboard"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "View/Edit",
+        "ReviewButton": "View",
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each TestBoston Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "TestBoston Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        }
+    }
+}

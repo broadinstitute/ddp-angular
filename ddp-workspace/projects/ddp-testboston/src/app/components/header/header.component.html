@@ -1,1 +1,9 @@
-<p>header works!</p>
+<header class="header">
+    <div class="buttons-container">
+        <button mat-raised-button color="primary" (click)="openHomePage()">Home</button>
+        <button *ngIf="showButton" mat-raised-button color="primary" (click)="register()">Register</button>
+        <button *ngIf="isAuthenticated" mat-raised-button color="primary" (click)="openDashboard()">Dashboard</button>
+        <button *ngIf="showButton" mat-raised-button color="primary"
+            (click)="logInOut()">{{isAuthenticated ? 'Log Out' : 'Log In'}}</button>
+    </div>
+</header>
