@@ -37,6 +37,8 @@ COMPONENT=$2
 ENVIRONMENT=$3
 CIRCLE_BUILD_NUM=$4
 CIRCLE_BUILD_URL=$5
+# Stick both into one column with a formula
+CIRCLE_BUILD_HYPERLINK="=HYPERLINK(\"$CIRCLE_BUILD_URL\",\"$CIRCLE_BUILD_NUM\")"
 
 TZ=America/New_York
 DATE=`TZ=$TZ date +%F`
@@ -51,4 +53,4 @@ OTHER_BRANCHES=$(other_branches_same_commit | xargs)
 AUTHOR=$(commit_author)
 # Passing to sheetappend the GCP credentials we are expecting to be piped into this script
 cat /dev/stdin |
-   sheetappend $RELEASE_SHEET_ID $DATE $TIME "$COMPONENT" $ENVIRONMENT $BRANCH "$TAG" $SHORT_GIT_SHA "$AUTHOR" $CIRCLE_BUILD_NUM "$CIRCLE_BUILD_URL" "$OTHER_BRANCHES"
+   sheetappend $RELEASE_SHEET_ID $DATE $TIME "$COMPONENT" $ENVIRONMENT $BRANCH "$TAG" $SHORT_GIT_SHA "$AUTHOR" "$CIRCLE_BUILD_HYPERLINK" "" "$OTHER_BRANCHES"

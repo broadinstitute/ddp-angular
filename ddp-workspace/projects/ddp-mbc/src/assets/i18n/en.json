@@ -10,7 +10,44 @@
     },
     "Toolkit": {
         "Common": {
-            "Organization": "Count Me In"
+            "Organization": "Count Me In",
+            "LogoAlts": {
+                "MBCN": "Metastatic Breast Cancer Network logo",
+                "Avon": "Avon Foundation For Women logo",
+                "Alliance": "MBC Alliance logo",
+                "LBBC": "Living Beyond Breast Cancer logo",
+                "IBCRF": "Inflammatory Breast Cancer Foundation logo",
+                "Young": "Young Survival Coalition logo",
+                "Share": "Share Cancer Support logo",
+                "Male": "The Male Breast Cancer Coalition logo",
+                "Theresa": "Theresa's Research Foundation logo",
+                "TNBC": "Triple Negative Breast Cancer Foundation logo",
+                "IBC": "The IBC Network Foundation",
+                "A4BC": "Advocates 4 Breast Cancer logo",
+                "Metavivor": "Metavivor logo",
+                "Metup": "Metup logo",
+                "Tigerlily": "Tigerlily Foundation logo",
+                "Komen": "Susan G. Komen logo",
+                "BCRF": "Breast Cancer Research Foundation logo",
+                "DSLFR": "The Dr. Susan Love Foundation logo",
+                "BCSM": "The Breast Cancer Social Media logo",
+                "HopeScarves": "Hope Scarves logo",
+                "CancerCouch": "The Cancer Couch logo",
+                "TwistedPink": "Twisted Pink logo",
+                "CierraSisters": "Cierra Sisters logo",
+                "BC": "Breast Cancer Trials logo",
+                "BCAlliance": "Breast Cancer Alliance logo",
+                "TutuProject": "The Tutu Project logo",
+                "MPBCAlliance": "Metaplastic Breast Cancer Global Alliance logo",
+                "LBCA": "Lobular Breast Cancer Alliance logo",
+                "Force": "Facing Our Risk of Cancer Empowered logo",
+                "Shay": "Shay Sharpe's Pink Wishes logo",
+                "MRS": "Metastasis Research Society logo",
+                "Sisters": "Sisters R Us Circle of Survivors logo",
+                "HMN": "Health Ministries Network logo",
+                "Min": "Minority Coalition logo",
+                "MBCCanada": "Metastatic Breast Cancer Canada logo"
+            }
         },
         "Header": {
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
@@ -283,7 +320,8 @@
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
-                "Continue": "Continue"
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
         },
         "Warning": {

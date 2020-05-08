@@ -112,8 +112,9 @@
         "DataRelease": {
             "Title": "ASCproject Data",
             "ViewDataButton": "VIEW THE ASCPROJECT DATA",
+            "ViewPaperButton": "VIEW OUR PUBLISHED RESEARCH ON THE ASCPROJECT",
             "MainText": {
-                "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added in six month intervals.",
+                "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
                 "Section2": "We have focused our efforts on generating and releasing this data so that the entire research community can have access to it. As we generate more data over time, we anticipate that this will accelerate discoveries in angiosarcoma.",
                 "Section3": "To everybody who is taking part in the ASCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data."
             },
@@ -271,7 +272,8 @@
                 "Title": "Your session will time-out soon",
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
-                "Continue": "Continue"
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
         },
         "Warning": {
