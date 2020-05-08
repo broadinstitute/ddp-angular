@@ -272,6 +272,14 @@ commands:
       - run:
           name: ng test
           command: ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox
+          environment:
+            JUNIT_REPORT_PATH: ./junit/
+            JUNIT_REPORT_NAME: test-results.xml
+          when: always
+      - store_test_results:
+          path: ./junit
+      - store_artifacts:
+          path: ./junit
 
   build-app:
     description: "Build DDP study app"
