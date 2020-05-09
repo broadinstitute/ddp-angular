@@ -1,0 +1,4 @@
+
+dispatch:
+  - url: "outage.mbcproject.org/*"
+    service: default
