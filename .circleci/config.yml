@@ -1,20 +1,30 @@
 version: 2.1
 
 references:
+  repo_path: &repo_path
+      /home/circleci/repo
+  ng_workspace_path: &ng_workspace_path
+      /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm-{{ checksum "package-lock.json" }}
+    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+  npm_cache_restore_key: &npm_cache_restore_key
+    keys:
+      - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-                "osteo brain angio mbc"
+    "osteo brain angio mbc"
   study_guids: &study_guids
-                "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc"
+  config_deployment_dir: &config_deployment_dir
+      config/deployment
 
 # Container for all the builds
 executors:
-  commit-executor:
+  build-executor:
     docker:
-      - image: broadinstitute/study-website-build:04-09-2020A
-    working_directory: ~/repo
+      - image: broadinstitute/study-website-build:05-06-2020A
+    working_directory: *ng_workspace_path
+    resource_class: medium+
 
 commands:
   app-build-and-store:
@@ -24,6 +34,7 @@ commands:
         type: string
     steps:
       - setup-build-workspace
+      - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - build-app
@@ -44,9 +55,10 @@ commands:
       - unless:
           condition: << parameters.skip_build >>
           steps:
-          - build-app
-          - deploy-exploded-build:
-              study_key: << parameters.study_key >>
+            - set-deployment-environment
+            - build-app
+            - deploy-exploded-build:
+                study_key: << parameters.study_key >>
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -57,9 +69,11 @@ commands:
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
               ;;
               test)
                 DEPLOY_ENV=test
+                BUILD_PARAMS=--sourceMap
               ;;
               staging)
                 DEPLOY_ENV=staging
@@ -69,11 +83,13 @@ commands:
               ;;
               *)
                 DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
                 echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
+            echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
             source $BASH_ENV
 
   deploy-stored-build:
@@ -83,7 +99,7 @@ commands:
         type: string
     steps:
       - checkout:
-          path: ~/repo
+          path: *repo_path
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - set-deployment-environment
@@ -103,7 +119,6 @@ commands:
             fi
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
-            cd ~/repo/ddp-workspace
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive at $OUTPUT_DIR"
             ls -l $OUTPUT_DIR
@@ -115,8 +130,10 @@ commands:
     parameters:
       study_key:
         type: string
+      config_deploy_dir:
+        type: string
+        default: *config_deployment_dir
     steps:
-      - set-deployment-environment
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
@@ -130,25 +147,25 @@ commands:
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
+          working_directory: *repo_path
       - run:
           name: Setup gcloud context
           command: |
             set -u
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          working_directory: ~/repo
       - run:
           name: Deploy to GAE
           command: |
             set -u
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Update GAE dispatch config
           command: |
             set -u
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/output-config/dispatch.yaml"
-          working_directory: ~/repo/ddp-workspace
+            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
+          working_directory: *repo_path
       - run:
           name: Update deployments sheet
           command: |
@@ -159,7 +176,6 @@ commands:
       - run:
           name: Delete previous versions of service
           command: |
-            set -u
             set +x
             # extract the service name from the GAE yaml file
             CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
@@ -171,11 +187,18 @@ commands:
             AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
             VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
 
+            # Sometime deleting versions fails. If there are less than 3 versions then we are not going to worry about it
+            # and set flag so this job step does not fail when exit error value is generated
+            if [[ ! -z $VERSIONS_TO_DELETE ]] && [[ "${#VERSIONS_TO_DELETE[@]}" -lt 3 ]]; then
+              set +e
+            fi
+
             for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
               echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
             done;
-          working_directory: ~/repo/ddp-workspace
+            exit 0;
+
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
     parameters:
@@ -188,12 +211,15 @@ commands:
       study_guids:
         type: string
         default: *study_guids
+      repo_path:
+        type: string
+        default: *repo_path
     steps:
       - run:
           name: Set environment variables to build <<parameters.study_key>>
           command: |
             echo "export VAULT_TOKEN=`vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_ROLE_SECRET_ID`" >> $BASH_ENV
-            echo 'export PATH=$PATH:~/repo/build-utils' >> $BASH_ENV
+            echo 'export PATH=$PATH:<< parameters.repo_path >>/build-utils' >> $BASH_ENV
             if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
               echo 'export STUDY_KEY=<<parameters.study_key>>' >> $BASH_ENV
               STUDY_KEYS=(<<parameters.study_keys>>)
@@ -224,15 +250,16 @@ commands:
     description: "Setup workspace used by all projects"
     steps:
       - checkout:
-          path: ~/repo
-      - restore_cache:
-          keys:
-            - *npm_cache_key
-            - v1-dependency-npm-
+          path: *repo_path
+      - restore_cache: *npm_cache_restore_key
       - run:
-          name: npm install
-          command: npm install
-          working_directory: ~/repo/ddp-workspace
+          name: Install dependencies
+          command: |
+            if [[ ! -d node_modules ]]; then
+              npm ci
+            else
+              echo "package.json and package-lock.json unchanged, using cache"
+            fi
       - save_cache:
           key: *npm_cache_key
           paths:
@@ -245,8 +272,7 @@ commands:
           name: ng build
           command: |
             set -u
-            ng build $ANGULAR_PROJECT_NAME --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-          working_directory: ~/repo/ddp-workspace
+            ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
 
   store-app-build:
     description: "Copy build to cloud storage"
@@ -265,14 +291,12 @@ commands:
             tar -czvf ${TAR_PATH} .
             echo "Tar file created at ${TAR_PATH}"
             ls -l $TAR_PATH
-          working_directory: ~/repo/ddp-workspace
       - run:
           name: Store build archive
           command: |
             set -u
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
-          working_directory: ~/repo
 
   conditionally-launch-build-and-deploy:
     description: Launch build and deploy if project has changed
@@ -349,30 +373,35 @@ commands:
 
 jobs:
   build-and-deploy-job:
+    working_directory: *ng_workspace_path
     parameters:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-deploy:
           study_key: << parameters.study_key >>
           skip_build: false
 
   conditionally-launch-build-and-deploy-all-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
 
   conditionally-launch-build-and-store-all-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
-      - checkout
+      - checkout:
+          path: *repo_path
       - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
@@ -383,18 +412,20 @@ jobs:
           study_key: mbc
 
   app-build-and-store-job:
+    working_directory: *ng_workspace_path
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - app-build-and-store:
           study_key: << pipeline.parameters.study_key >>
 
   deploy-stored-build-job:
+    working_directory: *ng_workspace_path
     parameters:
       study_key:
         type: string
     executor:
-      name: commit-executor
+      name: build-executor
     steps:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
