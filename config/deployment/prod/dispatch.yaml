@@ -5,10 +5,11 @@ dispatch:
     service: mbc
   - url: "braincancerproject.org/*"
     service: brain
-  - url: "osproject.org/**"
+  - url: "osproject.org/*"
     service: osteo
+  - url: "testboston.org/*"
+    service: testboston
   - url: "pepper-backend.prod.datadonationplatform.org/*"
     service: pepper-backend
   - url: "pepper.datadonationplatform.org/*"
     service: pepper-backend
-
