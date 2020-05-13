@@ -4,6 +4,32 @@
     margin: 10rem auto 8rem auto;
 }
 
+.invitation {
+    margin: 5rem 0 0 0;
+
+    &__primary {
+        border-radius: 10px;
+        background-color: #2951C6;
+        color: white;
+        padding: 1rem 2rem;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 34px;
+
+        &:active {
+            text-decoration: none;
+        }
+    }
+
+    &__secondary {
+        color: black;
+        padding: 1rem 2rem;
+        font-size: 22px;
+        line-height: 34px;
+        text-decoration: underline;
+    }
+}
+
 .about-section {
     background-color: mat-color($app-theme, 300);
 }

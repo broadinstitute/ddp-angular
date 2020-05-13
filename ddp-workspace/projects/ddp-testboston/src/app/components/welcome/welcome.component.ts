@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
+import { AppRoutes } from '../../app-routes';
 
 @Component({
   selector: 'app-welcome',
@@ -11,6 +12,7 @@ export class WelcomeComponent implements OnInit {
   public email: string;
   public phoneHref: string;
   public emailHref: string;
+  public appRoutes = AppRoutes;
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 

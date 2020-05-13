@@ -4,9 +4,9 @@
             <h1 class="bold">Join a project to help understand actual COVID-19 infection rates in your community.</h1>
             <p>Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT
                 and Harvard.</p>
-            <div>
-                <a href="#">I have an invite code</a>
-                <a href="#">Don’t have an invite code?</a>
+            <div class="invitation">
+                <a class="invitation__primary" [routerLink]="appRoutes.Prequalifier">I have an invite code</a>
+                <a class="invitation__secondary" routerLink="/">Don’t have an invite code?</a>
             </div>
         </div>
     </section>
@@ -49,7 +49,7 @@
     </section>
     <section class="section activity-section">
         <div class="content activity-block">
-            <h2 class="center semi-bold">Don't have invitation activity</h2>
+            <h2 class="center semi-bold">Mailing list?</h2>
         </div>
     </section>
 </main>
