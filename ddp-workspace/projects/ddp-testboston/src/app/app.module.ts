@@ -29,6 +29,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -102,7 +104,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule,
     MatButtonModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule,
+    MatInputModule
   ],
   providers: [
     {

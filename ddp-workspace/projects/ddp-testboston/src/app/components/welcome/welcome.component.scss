@@ -76,11 +76,25 @@
 }
 
 .activity-section {
-    background-color: mat-color($app-theme, 400);
+    background-color: mat-color($app-theme, 200);
+    color: white;
+
+    h2 {
+        line-height: 2.5rem;
+    }
 }
 
 .activity-block {
     margin: 5rem auto 6rem auto;
+}
+
+.mailing-list-container {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    padding: 3rem 5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 // accordion

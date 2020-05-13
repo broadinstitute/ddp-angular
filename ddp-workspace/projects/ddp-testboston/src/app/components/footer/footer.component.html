@@ -1,1 +1,42 @@
-<footer class="footer"></footer>
+<footer class="footer">
+    <div class="footer-content">
+        <div>
+            <a class="project-logo" routerLink="/">
+                <img class="project-logo__img" src="assets/images/logo-testboston.jpg"
+                    [alt]="'Header.Logo.ImageAlt' | translate">
+                <p class="project-logo__text" [innerHTML]="'Header.Logo.Title' | translate"></p>
+            </a>
+            <div class="contacts">
+                <a class="Link" [href]="phoneHref">{{phone}}</a>
+                <a class="Link" [href]="emailHref">{{email}}</a>
+            </div>
+        </div>
+        <nav class="nav">
+            <ul class="navigation">
+                <li class="navigation__item">
+                    <a class="footer-link" routerLink="/about-study" routerLinkActive="footer-link_active" translate>
+                        About the Study
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="footer-link" routerLink="/faq" routerLinkActive="footer-link_active" translate>
+                        FAQ
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="footer-link" routerLink="/mailing-list" routerLinkActive="footer-link_active" translate>
+                        Mailing List
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="footer-link" routerLink="/privacy" routerLinkActive="footer-link_active" translate>
+                        Privacy
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <ddp-sign-in-out></ddp-sign-in-out>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>

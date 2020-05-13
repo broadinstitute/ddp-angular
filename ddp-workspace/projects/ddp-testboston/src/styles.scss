@@ -1,5 +1,9 @@
 @import 'app-theme.scss';
 
+$custom-typography: mat-typography-config($font-family: 'Nunito');
+
+@include mat-core($custom-typography);
+
 html,
 body {
     margin: 0;
@@ -117,6 +121,23 @@ li {
         white-space: nowrap;
         padding: 1rem 1.5rem;
         border-radius: 10px;
+        font-weight: 600;
+        background-color: mat-color($app-theme, 100);
+    }
+}
+
+.footer {
+    .SimpleButton {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: mat-color($app-theme, 700);
+        text-decoration: none;
+        font-size: 1.125rem;
+        line-height: 2.0625rem;
+        font-family: inherit;
+        white-space: nowrap;
         font-weight: 600;
     }
 }

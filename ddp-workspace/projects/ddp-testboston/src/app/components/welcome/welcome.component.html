@@ -49,7 +49,28 @@
     </section>
     <section class="section activity-section">
         <div class="content activity-block">
-            <h2 class="center semi-bold">Mailing list?</h2>
+            <h2 class="semi-bold">Don’t have an invitation code?<br>
+                Interested in staying up-to-date?</h2>
+            <p>Join our mailing list by answering a few questions:</p>
+            <div class="mailing-list-container">
+                <p>1. Are you 18 years old or older?</p>
+                <mat-radio-group>
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <p>2. Are you a Brigham & Women’s patient?</p>
+                <mat-radio-group>
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                    <mat-radio-button value="No answer">Prefer not to answer</mat-radio-button>
+                </mat-radio-group>
+                <p>3. What email address is best for you?</p>
+                <mat-form-field>
+                    <mat-label>Enter email address</mat-label>
+                    <input matInput placeholder="example@example.com">
+                </mat-form-field>
+                <button mat-raised-button color="primary">Submit</button>
+            </div>
         </div>
     </section>
 </main>

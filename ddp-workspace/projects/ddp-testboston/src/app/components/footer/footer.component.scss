@@ -4,3 +4,78 @@
     background-color: mat-color($app-theme, 100);
     min-height: 15rem;
 }
+
+.footer-content {
+    display: flex;
+    max-width: 1350px;
+    margin: auto;
+    padding: 0 1.5625rem;
+    margin-top: 3.5rem;
+}
+
+.project-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    color: black;
+}
+
+.project-logo:hover {
+    text-decoration: none;
+}
+
+.project-logo__img {
+    margin-right: 0.9375rem;
+    height: 1.6875rem;
+}
+
+.project-logo__text {
+    margin: 0;
+    font-size: 1.375rem;
+}
+
+a {
+    font-weight: 600;
+    line-height: 1.625rem;
+}
+
+.contacts {
+    margin-top: 2rem;
+    margin-left: 2.625rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding-left: 10rem;
+}
+
+.navigation__item {
+    margin-right: 2.8125rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+}
+
+.footer-link:link,
+.footer-link:visited {
+    color: mat-color($app-theme, 700);
+    line-height: 2.0625rem;
+}
+
+.footer-link:hover {
+    color: mat-color($app-theme, 700);
+    text-decoration: underline;
+}
+
+.footer-link:active {
+    color: mat-color($app-theme, 700);
+    text-decoration: underline;
+}
