@@ -1,3 +1,55 @@
 <main class="main">
-    <h1>Welcome to TestBoston Project!</h1>
+    <section class="section">
+        <div class="content intro-block">
+            <h1 class="bold">Join a project to help understand actual COVID-19 infection rates in your community.</h1>
+            <p>Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT
+                and Harvard.</p>
+            <div>
+                <a href="#">I have an invite code</a>
+                <a href="#">Don’t have an invite code?</a>
+            </div>
+        </div>
+    </section>
+    <section class="section about-section">
+        <div class="content about-block">
+            <h2 class="semi-bold">About the Study</h2>
+            <p>Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have
+                higher infection rates than others. We want to understand this and provide linkages to care for those
+                living in these high-risk communities.</p>
+            <h3>Questions we are trying to answer:</h3>
+            <ul class="about-list">
+                <li><span>&#8226;</span>How common it is to have COVID-19 without symptoms?</li>
+                <li><span>&#8226;</span>Do people become immune to COVID-19 after they have it?</li>
+                <li><span>&#8226;</span>How can researchers test many people while they are at home? </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content question-block">
+            <h2 class="center semi-bold">Have a question?</h2>
+            <p>If your question is not answered below, you can call or email our study staff at
+                <a class="Link" [href]="phoneHref">{{phone}}</a> or <a class="Link" [href]="emailHref">{{email}}</a>.
+            </p>
+            <mat-accordion hideToggle="true" multi="true" displayMode="flat">
+                <ng-container *ngFor="let item of 'HomePage.FaqSection.Items' | translate">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                            <mat-icon class="question-block__icon">add</mat-icon>
+                            <p class="question-block__question no-margin">{{item.Question}}</p>
+                        </mat-expansion-panel-header>
+                        <ng-template matExpansionPanelContent>
+                            <ng-container *ngFor="let paragraph of item.Paragraphs">
+                                <p class="question-block__text" [innerHTML]="paragraph"></p>
+                            </ng-container>
+                        </ng-template>
+                    </mat-expansion-panel>
+                </ng-container>
+            </mat-accordion>
+        </div>
+    </section>
+    <section class="section activity-section">
+        <div class="content activity-block">
+            <h2 class="center semi-bold">Don't have invitation activity</h2>
+        </div>
+    </section>
 </main>

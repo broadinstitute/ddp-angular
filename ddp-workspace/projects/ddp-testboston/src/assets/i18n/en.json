@@ -11,6 +11,80 @@
             }
         }
     },
+    "HomePage": {
+        "FaqSection": {
+            "Title": "Have a question?",
+            "Text": {
+                "Part1": "If your question is not answered below, you can call or email our study staff at",
+                "Part2": "or"
+            },
+            "Items": [
+                {
+                    "Question": "Can anybody join this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Will I get a COVID-19 test if I join?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Is it free to participate?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "What will I be asked to do?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Can I invite my family members to join this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Who is running this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "How long will the study last?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                }
+            ]
+        }
+    },
     "Toolkit": {
         "Dashboard": {
             "Title": "My Dashboard"

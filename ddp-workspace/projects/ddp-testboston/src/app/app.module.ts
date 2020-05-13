@@ -27,6 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -49,8 +51,8 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.consentGuid = AppGuids.Consent;
 toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
-toolkitConfig.phone = 'XXX-XXX-XXXX';
-toolkitConfig.infoEmail = 'testboston@datadonationplatform.org';
+toolkitConfig.phone = '1-617-123-4567';
+toolkitConfig.infoEmail = 'info@testboston.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -98,7 +100,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     CommonModule,
     DdpModule,
     ToolkitModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [
     {

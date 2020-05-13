@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-primary: (
+    50: transparent,
+    100: #FFFFFF,
+    200: #293A6B,
+    300: #FFDB3F,
+    400: #F8F8F8,
+    500: #D6D9EA,
+    600: #2951C6,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000
+    ));
+
+$app-theme: mat-palette($mat-primary);

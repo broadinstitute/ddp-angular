@@ -1,0 +1,80 @@
+@import '../../../app-theme.scss';
+
+.intro-block {
+    margin: 10rem auto 8rem auto;
+}
+
+.about-section {
+    background-color: mat-color($app-theme, 300);
+}
+
+.about-block {
+    margin: 6rem auto 5rem auto;
+}
+
+.about-list {
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        margin: 0.7rem 0;
+
+        span {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.question-block {
+    margin: 6rem auto 5rem auto;
+}
+
+.question-block__icon {
+    margin: 0 1rem 0 0;
+    line-height: 2.25rem;
+}
+
+.question-block__question {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+    margin: 0;
+}
+
+.question-block__text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25rem;
+    line-height: 2.25rem;
+    color: mat-color($app-theme, 700);
+}
+
+.activity-section {
+    background-color: mat-color($app-theme, 400);
+}
+
+.activity-block {
+    margin: 5rem auto 6rem auto;
+}
+
+// accordion
+.mat-expansion-panel {
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    border-top: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel:last-child {
+    border-bottom: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel-header {
+    padding: 1rem !important;
+}
+
+.mat-content {
+    align-items: flex-start;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}
