@@ -16,7 +16,8 @@
         font-weight: 600;
         line-height: 34px;
 
-        &:active {
+        &:active,
+        &:focus {
             text-decoration: none;
         }
     }
