@@ -11,6 +11,12 @@
             }
         }
     },
+    "Header": {
+        "Logo": {
+            "Title": "Test Boston",
+            "ImageAlt": "Test Boston logo"
+        }
+    },
     "HomePage": {
         "FaqSection": {
             "Title": "Have a question?",
@@ -129,8 +135,8 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Log In",
-            "SignOut": "Log Out"
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
         },
         "UserActivities": {
             "ActivityName": "Form",

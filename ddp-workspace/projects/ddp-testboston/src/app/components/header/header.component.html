@@ -1,9 +1,65 @@
 <header class="header">
-    <div class="buttons-container">
-        <button mat-raised-button color="primary" (click)="openHomePage()">Home</button>
-        <button *ngIf="showButton" mat-raised-button color="primary" (click)="register()">Register</button>
-        <button *ngIf="isAuthenticated" mat-raised-button color="primary" (click)="openDashboard()">Dashboard</button>
-        <button *ngIf="showButton" mat-raised-button color="primary"
-            (click)="logInOut()">{{isAuthenticated ? 'Log Out' : 'Log In'}}</button>
+    <div class="header-content">
+        <a class="project-logo" routerLink="/">
+            <img class="project-logo__img" src="assets/images/logo-testboston.jpg"
+                [alt]="'Header.Logo.ImageAlt' | translate">
+            <p class="project-logo__text" [innerHTML]="'Header.Logo.Title' | translate"></p>
+        </a>
+        <nav class="nav">
+            <ul class="navigation">
+                <li *ngIf="isAuthenticated" class="navigation__item">
+                    <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/about-study" routerLinkActive="header-link_active" translate>
+                        About the Study
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/faq" routerLinkActive="header-link_active" translate>
+                        FAQ
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/mailing-list" routerLinkActive="header-link_active" translate>
+                        Mailing List
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/privacy" routerLinkActive="header-link_active" translate>
+                        Privacy
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth">
+            <ddp-sign-in-out class="simple-button"></ddp-sign-in-out>
+        </div>
     </div>
 </header>
+
+<ng-template #dashboardButton>
+    <a class="header-link" routerLink="dashboard" routerLinkActive="header-link_active">
+        <div class="header-link__dashboard">
+            <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <g class="dashboard-icon_color" transform="translate(-385.000000, -41.000000)" stroke="#000000"
+                        stroke-width="1.5">
+                        <g transform="translate(386.000000, 40.000000)">
+                            <g transform="translate(0.000000, 2.000000)">
+                                <circle cx="10" cy="8.125" r="4.375"></circle>
+                                <path
+                                    d="M15.7608333,17.3966667 C14.2362899,15.8625492 12.1628105,14.9998815 10,14.9998815 C7.83718949,14.9998815 5.76371015,15.8625492 4.23916667,17.3966667">
+                                </path>
+                                <circle cx="10" cy="10" r="9.375"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <span translate>Dashboard</span>
+    </a>
+</ng-template>
