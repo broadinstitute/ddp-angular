@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [ngClass]="{'header_shadow': isPageScrolled}">
     <div class="header-content">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img" src="assets/images/logo-testboston.jpg"

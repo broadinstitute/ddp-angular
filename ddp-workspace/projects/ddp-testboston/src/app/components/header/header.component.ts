@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { SessionMementoService } from 'ddp-sdk';
+import { Component, HostListener, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { SessionMementoService, WindowRef } from 'ddp-sdk';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,21 @@ import { SessionMementoService } from 'ddp-sdk';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  public isPageScrolled = false;
+
   constructor(
-    private session: SessionMementoService) { }
+    private session: SessionMementoService,
+    private window: WindowRef,
+    @Inject(DOCUMENT) private document: any) { }
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
+  }
+
+  @HostListener('window: scroll') public onWindowScroll(): void {
+    const scrolledPixels = this.window.nativeWindow.pageYOffset
+      || this.document.documentElement.scrollTop
+      || this.document.body.scrollTop || 0;
+    this.isPageScrolled = !!scrolledPixels;
   }
 }
