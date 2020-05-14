@@ -10,19 +10,19 @@
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/about-study" routerLinkActive="header-link_active" translate>
+                    <button class="button_simple" (click)="scrollTo('#about-the-study')">
                         About the Study
-                    </a>
+                    </button>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/faq" routerLinkActive="header-link_active" translate>
+                    <button class="button_simple" (click)="scrollTo('#faq')">
                         FAQ
-                    </a>
+                    </button>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/mailing-list" routerLinkActive="header-link_active" translate>
+                    <button class="button_simple" (click)="scrollTo('#mailing-list')">
                         Mailing List
-                    </a>
+                    </button>
                 </li>
                 <li class="navigation__item">
                     <a class="header-link" routerLink="/privacy" routerLinkActive="header-link_active" translate>

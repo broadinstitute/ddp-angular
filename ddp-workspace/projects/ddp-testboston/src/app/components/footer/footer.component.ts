@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
@@ -12,12 +12,21 @@ export class FooterComponent implements OnInit {
   public phoneHref: string;
   public emailHref: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(
+    private renderer: Renderer2,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.phone = this.toolkitConfiguration.phone;
     this.email = this.toolkitConfiguration.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
+  }
+
+  scrollTo(selector: string): void {
+    const anchor = this.renderer.selectRootElement(selector);
+    anchor.scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 }

@@ -1,5 +1,11 @@
 @import '../../../app-theme.scss';
 
+.anchor {
+    display: block;
+    padding-top: 100px;
+    margin-top: -100px;
+}
+
 .intro-block {
     margin: 10rem auto 8rem auto;
 }
@@ -115,7 +121,7 @@
         outline: none;
         border: none;
         align-self: center;
-        font-family: 'Nunito', sans-serif;
+        font-family: inherit;
     }
 }
 
