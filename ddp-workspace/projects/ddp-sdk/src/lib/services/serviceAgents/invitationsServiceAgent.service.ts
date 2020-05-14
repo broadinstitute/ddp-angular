@@ -18,7 +18,7 @@ export class InvitationsServiceAgent extends NotAuthenticatedServiceAgent<any> {
     }
 
     public verify(invitationId: string): Observable<never> {
-        return this.postObservable('/invitations/verify', { invitationId })
+        return this.postObservable(`/studies/${this._configuration.studyGuid}/invitation-verify`, { invitationId })
             .pipe(
                 mergeMap(response => response && response.status === this.OK_STATUS ? EMPTY : throwError('Email verification failed'))
             );
