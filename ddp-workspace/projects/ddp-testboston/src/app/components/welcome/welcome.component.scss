@@ -75,7 +75,7 @@
     color: mat-color($app-theme, 700);
 }
 
-.activity-section {
+.mailing-list-section {
     background-color: mat-color($app-theme, 200);
     color: white;
 
@@ -84,17 +84,39 @@
     }
 }
 
-.activity-block {
+.mailing-list-block {
     margin: 5rem auto 6rem auto;
 }
 
-.mailing-list-container {
+.mailing-list {
     background-color: white;
     color: black;
     border-radius: 20px;
-    padding: 3rem 5rem;
+    padding: 2rem 5rem;
     display: flex;
     flex-direction: column;
+
+    &__group {
+        margin: 0 0 1.5rem 0;
+    }
+
+    &__item {
+        margin: 0 1.5rem 0 0;
+    }
+
+    &__button {
+        height: 60px;
+        width: 215px;
+        border-radius: 10px;
+        background-color: #9399AC;
+        font-size: 22px;
+        line-height: 34px;
+        color: white;
+        outline: none;
+        border: none;
+        align-self: center;
+        font-family: 'Nunito', sans-serif;
+    }
 }
 
 // accordion

@@ -11,12 +11,6 @@
             }
         }
     },
-    "Header": {
-        "Logo": {
-            "Title": "Test Boston",
-            "ImageAlt": "Test Boston logo"
-        }
-    },
     "HomePage": {
         "FaqSection": {
             "Title": "Have a question?",

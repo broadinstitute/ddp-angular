@@ -25,13 +25,8 @@
 }
 
 .project-logo__img {
-    margin-right: 0.9375rem;
-    height: 1.6875rem;
-}
-
-.project-logo__text {
-    margin: 0;
-    font-size: 1.375rem;
+    height: 1.25rem;
+    margin-top: 0.3rem;
 }
 
 a {
@@ -40,8 +35,7 @@ a {
 }
 
 .contacts {
-    margin-top: 2rem;
-    margin-left: 2.625rem;
+    margin-top: 1.2rem;
     display: flex;
     flex-direction: column;
 }
@@ -78,4 +72,11 @@ a {
 .footer-link:active {
     color: mat-color($app-theme, 700);
     text-decoration: underline;
+}
+
+.separator {
+    height: 5px;
+    width: 30px;
+    background-color: #454545;
+    margin-bottom: 1rem;
 }

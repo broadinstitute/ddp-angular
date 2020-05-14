@@ -113,16 +113,15 @@ li {
     .SimpleButton {
         border: none;
         cursor: pointer;
-        color: mat-color($app-theme, 200);
+        color: mat-color($app-theme, 700);
         text-decoration: none;
         font-size: 1.0625rem;
         line-height: 1.375rem;
         font-family: inherit;
         white-space: nowrap;
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
+        padding: 0;
         font-weight: 600;
-        background-color: mat-color($app-theme, 100);
+        background: none;
     }
 }
 
@@ -140,8 +139,17 @@ li {
         white-space: nowrap;
         font-weight: 600;
     }
+}
 
-    .SimpleButton:hover {
-        text-decoration: underline;
-    }
+.SimpleButton:hover,
+.SimpleButton:focus {
+    text-decoration: underline;
+}
+
+mat-form-field,
+mat-radio-button {
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 1.375rem !important;
+    line-height: 1.375rem !important;
+    color: #787681 !important;
 }

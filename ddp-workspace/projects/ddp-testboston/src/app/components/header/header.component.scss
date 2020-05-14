@@ -1,7 +1,7 @@
 @import '../../../app-theme.scss';
 
 .header {
-    background-color: mat-color($app-theme, 200);
+    background-color: white;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,6 +12,7 @@
 
 .header_shadow {
     box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all ease 0.5s;
 }
 
 .header-content {
@@ -28,7 +29,6 @@
     display: flex;
     align-items: center;
     text-decoration: none !important;
-    color: mat-color($app-theme, 100);
 }
 
 .project-logo:hover {
@@ -36,13 +36,7 @@
 }
 
 .project-logo__img {
-    margin-right: 0.9375rem;
-    height: 3.25rem;
-}
-
-.project-logo__text {
-    margin: 0;
-    font-size: 2.5rem;
+    height: 2.1875rem;
 }
 
 .navigation {
@@ -54,41 +48,42 @@
 .navigation__item {
     margin-right: 2.8125rem;
     display: flex;
-    color: mat-color($app-theme, 100);
+    color: mat-color($app-theme, 700);
 }
 
 .header-link__dashboard,
 .header-link {
     display: flex;
     align-items: center;
+    font-weight: 600;
 }
 
 .header-link:link,
 .header-link:visited {
-    color: mat-color($app-theme, 100);
+    color: mat-color($app-theme, 700);
     font-size: 1.0625rem;
     line-height: 1.375rem;
 
     .dashboard-icon_color {
-        stroke: mat-color($app-theme, 100);
+        stroke: mat-color($app-theme, 700);
     }
 }
 
 .header-link:hover {
-    color: mat-color($app-theme, 100);
+    color: mat-color($app-theme, 700);
     text-decoration: underline;
 
     .dashboard-icon_color {
-        stroke: mat-color($app-theme, 100);
+        stroke: mat-color($app-theme, 700);
     }
 }
 
 .header-link:active {
-    color: mat-color($app-theme, 100);
+    color: mat-color($app-theme, 700);
     text-decoration: underline;
 
     .dashboard-icon_color {
-        stroke: mat-color($app-theme, 100);
+        stroke: mat-color($app-theme, 700);
     }
 }
 
