@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
+import { AppRoutes } from '../../app-routes';
 
 @Component({
   selector: 'app-footer',
@@ -11,6 +12,7 @@ export class FooterComponent implements OnInit {
   public email: string;
   public phoneHref: string;
   public emailHref: string;
+  public appRoutes = AppRoutes;
 
   constructor(
     private renderer: Renderer2,
