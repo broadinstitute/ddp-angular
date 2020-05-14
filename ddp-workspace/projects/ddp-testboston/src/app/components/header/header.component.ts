@@ -1,6 +1,7 @@
 import { Component, HostListener, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SessionMementoService, WindowRef } from 'ddp-sdk';
+import { AppRoutes } from './../../app-routes';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { SessionMementoService, WindowRef } from 'ddp-sdk';
 })
 export class HeaderComponent {
   public isPageScrolled = false;
+  public appRoutes = AppRoutes;
 
   constructor(
     private session: SessionMementoService,
