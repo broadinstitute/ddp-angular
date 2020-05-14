@@ -3,12 +3,12 @@ export const AppRoutes = {
     ActivityId: 'activity/:id',
     ActivityLinkId: 'activity-link/:id',
     Error: 'error',
-    Prequalifier: '/prequalifier',
+    Prequalifier: 'prequalifier',
     LoginLanding: 'login-landing',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
     Password: 'password',
     SessionExpired: 'session-expired',
-    Privacy: '/privacy'
+    Privacy: 'privacy'
 };
