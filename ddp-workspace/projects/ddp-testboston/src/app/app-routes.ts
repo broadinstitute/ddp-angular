@@ -1,3 +1,5 @@
+import { UserRegistrationPrequalComponent } from './user-registration-prequal/userRegistrationPrequal.component';
+
 export const AppRoutes = {
     Activity: 'activity',
     ActivityId: 'activity/:id',
@@ -9,5 +11,6 @@ export const AppRoutes = {
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
     Password: 'password',
-    SessionExpired: 'session-expired'
+    SessionExpired: 'session-expired',
+    UserRegistrationPrequal: 'user-registration-prequal'
 };

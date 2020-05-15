@@ -21,6 +21,7 @@ import {
   PasswordRedesignedComponent,
   SessionExpiredRedesignedComponent
 } from 'toolkit';
+import { UserRegistrationPrequalComponent } from './user-registration-prequal/userRegistrationPrequal.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,13 @@ const routes: Routes = [
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.UserRegistrationPrequal,
+    component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard
     ]
