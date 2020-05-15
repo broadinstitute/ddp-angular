@@ -54,7 +54,7 @@ export class MailingListComponent implements OnInit {
     const subject = this.createSubject(this.mailingListForm.value.email, this.mailingListForm.value.bwhPatient);
     this.mailingService.join(subject).pipe(
       take(1)
-    ).subscribe();
+    ).subscribe(() => { });
   }
 
   private handleMinorSubject(): void {
@@ -68,7 +68,7 @@ export class MailingListComponent implements OnInit {
       info: [
         JSON.stringify({
           over18: true,
-          bwhPatient
+          bwhPatient: JSON.parse(bwhPatient)
         })
       ]
     };
