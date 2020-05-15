@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
 import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
-import { Observable, throwError, EMPTY } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { InvitationCheckPayload } from '../../../../../ddp-testboston/src/app/models/invitationCheckPayload';
 import { DdpError } from '../../../../../ddp-testboston/src/app/models/ddpError';
 import { ErrorType } from '../../../../../ddp-testboston/src/app/models/errorType';
@@ -30,7 +30,6 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
             .pipe(
                 map(response => response ? response.body : null),
                 catchError(err => {
-                    console.log('got an error and it is: %o', err);
                     const errorType = err.status === 400 ? ErrorType.InvalidInvitation : ErrorType.Unknown;
                     return throwError(new DdpError('Problem with submission', errorType));
                 })
