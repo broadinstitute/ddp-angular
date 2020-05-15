@@ -23,7 +23,7 @@ export class HeaderComponent {
   }
 
   public register(): void {
-    this.router.navigateByUrl(AppRoutes.Prequalifier);
+    this.router.navigateByUrl(AppRoutes.UserRegistrationPrequal);
   }
 
   public openHomePage(): void {
