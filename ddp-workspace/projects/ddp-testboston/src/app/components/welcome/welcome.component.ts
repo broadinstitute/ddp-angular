@@ -14,11 +14,11 @@ export class WelcomeComponent implements OnInit {
   public emailHref: string;
   public appRoutes = AppRoutes;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(@Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
-    this.phone = this.toolkitConfiguration.phone;
-    this.email = this.toolkitConfiguration.infoEmail;
+    this.phone = this.config.phone;
+    this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
   }

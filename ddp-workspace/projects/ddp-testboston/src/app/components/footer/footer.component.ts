@@ -16,11 +16,11 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
-    this.phone = this.toolkitConfiguration.phone;
-    this.email = this.toolkitConfiguration.infoEmail;
+    this.phone = this.config.phone;
+    this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
   }
