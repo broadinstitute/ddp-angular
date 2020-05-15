@@ -1,6 +1,8 @@
 export interface Person {
-    firstName: string;
-    lastName: string;
     emailAddress: string;
-    studyGuid: string;
+    firstName?: string;
+    lastName?: string;
+    info?: Array<string>;
+    umbrellaGuid?: string;
+    studyGuid?: string;
 }

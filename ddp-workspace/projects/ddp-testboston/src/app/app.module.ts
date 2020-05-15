@@ -25,12 +25,14 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -94,7 +96,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    MailingListComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatIconModule,
     MatExpansionModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

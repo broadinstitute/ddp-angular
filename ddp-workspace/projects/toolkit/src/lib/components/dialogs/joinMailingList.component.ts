@@ -126,7 +126,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         this.joinButtonDisabled = true;
         const person: Person = this.createPerson;
         this.analytics.emitCustomEvent(AnalyticsEventCategories.MailingList, AnalyticsEventActions.Join);
-        const addPerson = this.mailingService.addPerson(person).subscribe(
+        const addPerson = this.mailingService.join(person).subscribe(
             x => {
                 if (x) {
                     this.redirect();

@@ -6,7 +6,9 @@
                 and Harvard.</p>
             <div class="invitation">
                 <a class="invitation__primary" routerLink="/join">I have an invite code</a>
-                <a class="invitation__secondary" routerLink="/">Don’t have an invite code?</a>
+                <button class="invitation__secondary" (click)="scrollTo('#mailing-list')">
+                    Don’t have an invitecode?
+                </button>
             </div>
         </div>
     </section>
@@ -55,25 +57,7 @@
             <h2 class="semi-bold">Don’t have an invitation code?<br>
                 Interested in staying up-to-date?</h2>
             <p>Join our mailing list by answering a few questions:</p>
-            <div class="mailing-list">
-                <p>1. Are you 18 years old or older?</p>
-                <mat-radio-group class="mailing-list__group">
-                    <mat-radio-button class="mailing-list__item" value="Yes">Yes</mat-radio-button>
-                    <mat-radio-button value="No">No</mat-radio-button>
-                </mat-radio-group>
-                <p>2. Are you a Brigham & Women’s patient?</p>
-                <mat-radio-group class="mailing-list__group">
-                    <mat-radio-button class="mailing-list__item" value="Yes">Yes</mat-radio-button>
-                    <mat-radio-button class="mailing-list__item" value="No">No</mat-radio-button>
-                    <mat-radio-button value="No answer">Prefer not to answer</mat-radio-button>
-                </mat-radio-group>
-                <p>3. What email address is best for you?</p>
-                <mat-form-field>
-                    <mat-label>Enter email address</mat-label>
-                    <input matInput placeholder="example@example.com">
-                </mat-form-field>
-                <button class="mailing-list__button">Submit</button>
-            </div>
+            <app-mailing-list></app-mailing-list>
         </div>
     </section>
 </main>
