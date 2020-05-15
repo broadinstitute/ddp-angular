@@ -24,7 +24,7 @@ import {
 
 const routes: Routes = [
   {
-    path: AppRoutes.Prequalifier,
+    path: AppRoutes.Join,
     component: WorkflowStartActivityRedesignedComponent,
     canActivate: [
       IrbGuard
