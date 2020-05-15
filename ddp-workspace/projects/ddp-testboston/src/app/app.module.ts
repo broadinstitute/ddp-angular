@@ -9,16 +9,16 @@ import { AppRoutes } from './app-routes';
 import { AppGuids } from './app-guids';
 
 import {
-  DdpModule,
-  LogLevel,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent
+    DdpModule,
+    LogLevel,
+    ConfigurationService,
+    AnalyticsEventsService,
+    AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
-  ToolkitModule,
-  ToolkitConfigurationService
+    ToolkitModule,
+    ToolkitConfigurationService
 } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
@@ -27,12 +27,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { UserRegistrationPrequalComponent } from './user-registration-prequal/userRegistrationPrequal.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
 if (baseElt) {
-  base = baseElt[0].getAttribute('href');
+    base = baseElt[0].getAttribute('href');
 }
 
 declare const DDP_ENV: any;
@@ -51,6 +55,7 @@ toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
 toolkitConfig.phone = 'XXX-XXX-XXXX';
 toolkitConfig.infoEmail = 'testboston@datadonationplatform.org';
+toolkitConfig.recaptchaSiteKey = '6LdqYvUUAAAAAFl_KZFyNQBT3dMjvVnTb-P9wfAs';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -69,63 +74,70 @@ sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
-  return () => new Promise<any>((resolve: any) => {
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en';
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
-      }, () => {
-        resolve(null);
-      });
+    return () => new Promise<any>((resolve: any) => {
+        const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+        locationInitialized.then(() => {
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                console.log(`Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                console.error(`Problem with '${locale}' language initialization.`);
+            }, () => {
+                resolve(null);
+            });
+        });
     });
-  });
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    WelcomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    DdpModule,
-    ToolkitModule,
-    MatButtonModule
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: sdkConfig
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        HeaderComponent,
+        WelcomeComponent,
+        UserRegistrationPrequalComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CommonModule,
+        DdpModule,
+        ToolkitModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        ReactiveFormsModule
+    ],
+
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: sdkConfig
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
 }
