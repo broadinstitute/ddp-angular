@@ -78,6 +78,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
     private studyGuid: string;
     private stayInformedUrl: string;
     private anchor: CompositeDisposable;
+    private readonly EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
 
     constructor(
         private dialogRef: MatDialogRef<JoinMailingListComponent>,
@@ -147,8 +148,8 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         this.joinForm = this.formBuilder.group({
             firstName: [this.data.firstName ? this.data.firstName : '', Validators.required],
             lastName: [this.data.lastName ? this.data.lastName : '', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            confirmEmail: ['', [Validators.required, Validators.email]]
+            email: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEXP)]],
+            confirmEmail: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEXP)]]
         });
     }
 
