@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     text-decoration: none !important;
-    color: black;
+    color: mat-color($app-theme, 400);
 }
 
 .project-logo:hover {
@@ -60,17 +60,17 @@ a {
 
 .footer-link:link,
 .footer-link:visited {
-    color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 400);
     line-height: 2.0625rem;
 }
 
 .footer-link:hover {
-    color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 400);
     text-decoration: underline;
 }
 
 .footer-link:active {
-    color: mat-color($app-theme, 700);
+    color: mat-color($app-theme, 400);
     text-decoration: underline;
 }
 
