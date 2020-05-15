@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, Renderer2 } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SessionMementoService, WindowRef } from 'ddp-sdk';
 import { AppRoutes } from './../../app-routes';
@@ -15,18 +15,10 @@ export class HeaderComponent {
   constructor(
     private session: SessionMementoService,
     private window: WindowRef,
-    private renderer: Renderer2,
     @Inject(DOCUMENT) private document: any) { }
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
-  }
-
-  scrollTo(selector: string): void {
-    const anchor = this.renderer.selectRootElement(selector);
-    anchor.scrollIntoView({
-      behavior: 'smooth'
-    });
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

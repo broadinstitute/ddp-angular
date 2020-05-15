@@ -1,6 +1,5 @@
 @import '../app-theme.scss';
 
-.button_simple,
 .SimpleButton {
     border: none;
     cursor: pointer;
@@ -18,9 +17,7 @@
 .header,
 .footer {
 
-    .button_simple:focus,
     .SimpleButton:focus,
-    .button_simple:hover,
     .SimpleButton:hover {
         text-decoration: underline;
     }
@@ -28,7 +25,6 @@
 
 .footer {
 
-    .button_simple,
     .SimpleButton {
         font-size: 1.125rem;
         line-height: 2.0625rem;

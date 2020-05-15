@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { Router, Scroll, Event, NavigationEnd } from '@angular/router';
+
+import { filter, delay } from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -134,10 +137,42 @@ export function translateFactory(translate: TranslateService, injector: Injector
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
+
+  constructor(
+    private analytics: AnalyticsEventsService,
+    private router: Router,
+    private viewportScroller: ViewportScroller) {
+    this.initGoogleAnalyticsListener();
+    this.initScrollRestorationListener();
+  }
+
+  private initGoogleAnalyticsListener(): void {
     this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
       ga('send', event);
       ga('platform.send', event);
+    });
+  }
+
+  private initScrollRestorationListener(): void {
+    this.router.events.pipe(
+      filter((event: Event): event is Scroll => event instanceof Scroll),
+      delay(0)
+    ).subscribe(e => {
+      if (e.position) {
+        // backward navigation
+        this.viewportScroller.scrollToPosition(e.position);
+      } else if (e.anchor) {
+        // anchor navigation
+        const anchor = document.getElementById(e.anchor);
+        if (anchor) {
+          anchor.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // forward navigation
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
     });
   }
 }
