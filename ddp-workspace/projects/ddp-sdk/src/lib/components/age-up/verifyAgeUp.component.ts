@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InvitationsServiceAgent } from '../../services/serviceAgents/invitationServiceAgent.service';
-import { take } from 'rxjs/operators';
+import { InvitationServiceAgent } from '../../services/serviceAgents/invitationServiceAgent.service';
 
 @Component({
     selector: 'ddp-verify-age-up',
@@ -14,7 +13,7 @@ export class VerifyAgeUpComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private invitationsService: InvitationsServiceAgent) { }
+        private invitationsService: InvitationServiceAgent) { }
 
     public ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
