@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InvitationsServiceAgent } from '../../services/serviceAgents/invitationsServiceAgent.service';
+import { InvitationsServiceAgent } from '../../services/serviceAgents/invitationServiceAgent.service';
 import { take } from 'rxjs/operators';
 
 @Component({
