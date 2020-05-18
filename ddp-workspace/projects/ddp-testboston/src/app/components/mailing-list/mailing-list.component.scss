@@ -8,6 +8,7 @@
     border-radius: 1.25rem;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .mailing-list {
@@ -66,9 +67,10 @@
     }
 
     &__close {
-        position: relative;
-        top: -120px;
-        right: -560px;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: mat-color($app-theme, 1000);
     }
 
     &_result {

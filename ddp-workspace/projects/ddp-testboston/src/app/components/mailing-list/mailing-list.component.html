@@ -57,10 +57,10 @@
     </ng-container>
 
     <ng-container *ngIf="thankYou">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('thankYou')">
+            <mat-icon>clear</mat-icon>
+        </button>
         <div class="mailing-list mailing-list_result">
-            <button class="mailing-list__close" mat-icon-button (click)="onClose('thankYou')">
-                <mat-icon>clear</mat-icon>
-            </button>
             <img src="assets/images/email-sent.svg" [alt]="'MailingList.ThankYou.ImageAlt' | translate">
             <h3 class="center no-margin mailing-list__title" translate>MailingList.ThankYou.Title</h3>
             <p class="center" translate>MailingList.ThankYou.Text</p>
@@ -68,10 +68,10 @@
     </ng-container>
 
     <ng-container *ngIf="sorry">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('sorry')">
+            <mat-icon>clear</mat-icon>
+        </button>
         <div class="mailing-list mailing-list_result">
-            <button class="mailing-list__close" mat-icon-button (click)="onClose('sorry')">
-                <mat-icon>clear</mat-icon>
-            </button>
             <h3 class="center no-margin mailing-list__title" translate>MailingList.Sorry.Title</h3>
             <p class="center">
                 <span translate>MailingList.Sorry.Text.Part1</span>
@@ -82,10 +82,10 @@
     </ng-container>
 
     <ng-container *ngIf="error">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('error')">
+            <mat-icon>clear</mat-icon>
+        </button>
         <div class="mailing-list mailing-list_result">
-            <button class="mailing-list__close" mat-icon-button (click)="onClose('error')">
-                <mat-icon>clear</mat-icon>
-            </button>
             <h3 class="center no-margin mailing-list__title" translate>Toolkit.ErrorPage.Text</h3>
             <p class="center">
                 <span translate>Toolkit.ErrorPage.DefaultText.TextPt1</span>
