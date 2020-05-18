@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
 import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
@@ -20,20 +20,23 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
         super(_configuration, _http, _logger);
     }
 
-    public check(invitationId: string, recaptchaToken: string, zip?: string): Observable<any> {
+    public check(invitationId: string, recaptchaToken: string, zip: string): Observable<any> {
         const payload: InvitationCheckPayload = {
             invitationId,
-            zip,
+            qualificationDetails: {zipCode: zip},
             recaptchaToken,
             auth0ClientId: this.configuration.auth0ClientId};
         return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`,  payload, {}, true)
             .pipe(
                 map(response => response ? response.body : null),
-                catchError(err => {
-                    const errorType = err.status === 400 ? ErrorType.InvalidInvitation : ErrorType.Unknown;
-                    return throwError(new DdpError('Problem with submission', errorType));
+                catchError((err: HttpErrorResponse)  => {
+                    return throwError(this.buildErrorObject(err));
                 })
             );
+    }
+
+    private buildErrorObject(serverError: HttpErrorResponse): DdpError {
+        return new DdpError(serverError.error ? serverError.error.message : '', serverError.error ? serverError.error.code  : null);
     }
 
     public verify(invitationId: string): Observable<never> {
