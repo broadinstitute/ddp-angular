@@ -1,31 +1,71 @@
-<form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
-    <p class="mailing-list__question">1. Are you 18 years old or older?</p>
-    <mat-radio-group class="mailing-list__group" formControlName="adult">
-        <mat-radio-button class="mailing-list__item" value="true">Yes</mat-radio-button>
-        <mat-radio-button value="false">No</mat-radio-button>
-        <mat-error class="mailing-list__error" *ngIf="fieldHasError('adult', 'required')">
-            Please select an option
-        </mat-error>
-    </mat-radio-group>
-    <p class="mailing-list__question">2. Are you a Brigham & Women’s patient?</p>
-    <mat-radio-group class="mailing-list__group" formControlName="bwhPatient">
-        <mat-radio-button class="mailing-list__item" value="true">Yes</mat-radio-button>
-        <mat-radio-button class="mailing-list__item" value="false">No</mat-radio-button>
-        <mat-radio-button value="null">Prefer not to answer</mat-radio-button>
-        <mat-error class="mailing-list__error" *ngIf="fieldHasError('bwhPatient', 'required')">
-            Please select an option
-        </mat-error>
-    </mat-radio-group>
-    <p class="mailing-list__question mailing-list__question_last">3. What email address is best for you?</p>
-    <mat-form-field class="mailing-list__input">
-        <mat-label>Enter email address</mat-label>
-        <input matInput placeholder="example@example.com" formControlName="email" type="email">
-        <mat-error *ngIf="fieldHasError('email', 'pattern') && !fieldHasError('email', 'required')">
-            Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="fieldHasError('email', 'required')">
-            Please enter your email address
-        </mat-error>
-    </mat-form-field>
-    <button class="mailing-list__button" type="submit">Submit</button>
-</form>
+<div class="container">
+    <ng-container *ngIf="!thankYou && !sorry && !error && !isLoading">
+        <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
+            <p class="mailing-list__question">1. Are you 18 years old or older?</p>
+            <mat-radio-group class="mailing-list__group" formControlName="adult">
+                <mat-radio-button class="mailing-list__item" value="true">Yes</mat-radio-button>
+                <mat-radio-button value="false">No</mat-radio-button>
+                <mat-error class="mailing-list__error" *ngIf="fieldHasError('adult', 'required')">
+                    Please select an option
+                </mat-error>
+            </mat-radio-group>
+            <p class="mailing-list__question">2. Are you a Brigham & Women’s patient?</p>
+            <mat-radio-group class="mailing-list__group" formControlName="bwhPatient">
+                <mat-radio-button class="mailing-list__item" value="true">Yes</mat-radio-button>
+                <mat-radio-button class="mailing-list__item" value="false">No</mat-radio-button>
+                <mat-radio-button value="null">Prefer not to answer</mat-radio-button>
+                <mat-error class="mailing-list__error" *ngIf="fieldHasError('bwhPatient', 'required')">
+                    Please select an option
+                </mat-error>
+            </mat-radio-group>
+            <p class="mailing-list__question mailing-list__question_last">3. What email address is best for you?</p>
+            <mat-form-field class="mailing-list__input">
+                <mat-label>Enter email address</mat-label>
+                <input matInput placeholder="example@example.com" formControlName="email" type="email">
+                <mat-error *ngIf="fieldHasError('email', 'pattern') && !fieldHasError('email', 'required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="fieldHasError('email', 'required')">
+                    Please enter your email address
+                </mat-error>
+            </mat-form-field>
+            <button class="mailing-list__button" type="submit">Submit</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="thankYou">
+        <div class="mailing-list mailing-list_result">
+            <img src="assets/images/email-sent.svg" alt="Email sent">
+            <h3 class="center no-margin mailing-list__title">Email Confirmation</h3>
+            <p class="center">Thank you for signing up for the TestBoston mailing list! You should receive a
+                confirmation email shortly.
+            </p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="sorry">
+        <div class="mailing-list mailing-list_result">
+            <h3 class="center no-margin mailing-list__title">We’re sorry, it looks like you’re ineligible to join</h3>
+            <p class="center">You must be 18 years or older to join the TestBoston mailing list. Please read
+                our <a class="Link Link_bold" routerLink="/" fragment="faq">FAQ</a> for more information.
+            </p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="error">
+        <div class="mailing-list mailing-list_result">
+            <button class="mailing-list__close" mat-icon-button (click)="onErrorClose()">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <h3 class="center no-margin mailing-list__title">We're sorry, but an error has occurred</h3>
+            <p class="center">Please wait a moment and retry. If the trouble persists, please email us
+                at <a class="Link Link_bold" [href]="emailHref">{{email}}</a> or call us at <a class="Link Link_bold"
+                    [href]="phoneHref">{{phone}}</a>.
+            </p>
+        </div>
+    </ng-container>
+</div>

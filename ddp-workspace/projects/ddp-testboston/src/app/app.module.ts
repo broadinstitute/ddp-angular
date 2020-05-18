@@ -36,6 +36,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -113,7 +114,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatExpansionModule,
     MatRadioModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

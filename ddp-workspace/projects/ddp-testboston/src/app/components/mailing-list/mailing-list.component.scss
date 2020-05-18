@@ -1,10 +1,17 @@
 @import '../../../app-theme.scss';
 
-.mailing-list {
+.container {
+    width: 100%;
+    height: 33.75rem;
+    display: flex;
     background-color: mat-color($app-theme, 100);
-    color: mat-color($app-theme, 400);
     border-radius: 1.25rem;
-    padding: 2rem 8rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.mailing-list {
+    color: mat-color($app-theme, 400);
     display: flex;
     flex-direction: column;
 
@@ -22,7 +29,7 @@
     }
 
     &__question {
-        color: #3F4750;
+        color: mat-color($app-theme, 1000);
         font-weight: 600;
 
         &_last {
@@ -39,7 +46,7 @@
         height: 3.75rem;
         width: 13.4375rem;
         border-radius: 0.625rem;
-        background-color: #9399AC;
+        background-color: mat-color($app-theme, 1100);
         font-size: 1.375rem;
         line-height: 2.125rem;
         color: mat-color($app-theme, 100);
@@ -48,5 +55,23 @@
         align-self: center;
         font-family: inherit;
         margin-top: 1.5rem;
+    }
+
+    &__title {
+        font-size: 2rem;
+        line-height: 2.75rem;
+        font-weight: 700;
+        margin-right: 3rem;
+        margin-left: 3rem;
+    }
+
+    &__close {
+        position: relative;
+        top: -120px;
+        right: -560px;
+    }
+
+    &_result {
+        margin: 0 5rem;
     }
 }
