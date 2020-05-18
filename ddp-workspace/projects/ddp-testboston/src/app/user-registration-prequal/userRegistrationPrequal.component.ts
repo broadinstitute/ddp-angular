@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { InvitationServiceAgent } from '../../../../ddp-sdk/src/lib/services/serviceAgents/invitationServiceAgent.service';
@@ -42,7 +42,7 @@ import { take } from 'rxjs/operators';
       }
   `]
 })
-export class UserRegistrationPrequalComponent implements OnInit {
+export class UserRegistrationPrequalComponent {
   public formGroup: FormGroup;
   public errorMessage: string | null = null;
 
@@ -54,14 +54,6 @@ export class UserRegistrationPrequalComponent implements OnInit {
       invitationId: new FormControl(null, Validators.required),
       zip: new FormControl(null, Validators.required)
     });
-  }
-  public ngOnInit(): void {
-    this.formGroup.get('invitationId')
-        .valueChanges
-        .subscribe(val => {
-          console.log('invitationId: %s, status: %s', val, this.formGroup.get('invitationId').status);
-          console.log("validators: %o", this.formGroup.get('invitationId').validator);
-        });
   }
 
   public onSubmit(): void {
@@ -77,7 +69,6 @@ export class UserRegistrationPrequalComponent implements OnInit {
             this.errorMessage = 'We got an invalid invitation';
           } else {
             this.errorMessage = 'Submission could not be processed';
-            console.log('we got some sucky error');
           }
         }
     );
