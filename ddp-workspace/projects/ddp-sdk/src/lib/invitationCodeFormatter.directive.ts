@@ -1,6 +1,7 @@
 import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import formatErrorMsg = jasmine.formatErrorMsg;
 
 const DISPLAY_SEPARATOR = ' - ';
 const DISPLAY_INPUT_MAX_LEN = 18;
@@ -42,6 +43,27 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
         console.log('get value got called and we returning: %o', this._value);
         return this._value;
     }
+    cursorInSeparator(currDisVal: string | null, cursorPos: number | null =  null): boolean {
+        if (currDisVal == null) {
+            return false;
+        }
+        if (cursorPos == null) {
+            cursorPos = this.elementRef.nativeElement.selectionStart;
+        }
+        let startPos = 0;
+        do {
+            const separatorPos = currDisVal.indexOf(DISPLAY_SEPARATOR, startPos);
+            if (separatorPos < 0) {
+                console.log('No separator after startpos: %d', startPos);
+                return false;
+            } else if (cursorPos > separatorPos && cursorPos < (separatorPos + DISPLAY_SEPARATOR.length)) {
+                console.log('Found cursor at: %d between: %d and %d',
+                    cursorPos, separatorPos, separatorPos + DISPLAY_SEPARATOR.length);
+                return true;
+            }
+            startPos += DISPLAY_SEPARATOR.length;
+        } while (true);
+    }
 
     private formatDisplayValue(inputValue: string | null): void {
         if (inputValue !== null) {
@@ -51,25 +73,6 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
                                 .replace(/(.{4})/g, `$1${DISPLAY_SEPARATOR}`)
                                 .substr(0, DISPLAY_INPUT_MAX_LEN);
 
-            // const addedChars = displayValue.length - value.length;
-          // const inputValueLongerThanPrevious = this._previousValue.length <= cleanedValue.length ? 1 : -1;
-            // const isBackSpace = this.isBackspace ? -1 : 1;
-            const cursorInSeparator = (currDisVal: string): boolean => {
-                const cursorPos = this.elementRef.nativeElement.selectionStart;
-                let startPos = 0;
-                do {
-                    const separatorPos = currDisVal.indexOf(DISPLAY_SEPARATOR, startPos);
-                    if (separatorPos < 0) {
-                        console.log('No separator after startpos: %d', startPos);
-                        return false;
-                    } else if (cursorPos > separatorPos && cursorPos < (separatorPos + DISPLAY_SEPARATOR.length)) {
-                        console.log('Found cursor at: %d between: %d and %d',
-                            cursorPos, separatorPos, separatorPos + DISPLAY_SEPARATOR.length);
-                        return true;
-                    }
-                    startPos += DISPLAY_SEPARATOR.length;
-                } while (true);
-            };
            const setDisplayValue = (newVal: string, newSelectionStart: number | null = null): void => {
                 const existingSelectionStart = this.elementRef.nativeElement.selectionStart;
                 this.elementRef.nativeElement.value = newVal;
@@ -93,26 +96,32 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
             let addedChars = 0;
             if (this.isBackspace) {
                 console.log('this is a backspace!!!');
-                while (cursorInSeparator(formattedValue)) {
+                while (this.cursorInSeparator(formattedValue)) {
                     console.log('Moving left one!');
                     this.elementRef.nativeElement.selectionStart -= 1;
                     this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
                 }
                 setDisplayValue(formattedValue);
             } else if (this.elementRef.nativeElement.selectionStart < inputValue.length) {
-
+                    let movedRight = 0;
+                    let cursorPos = this.elementRef.nativeElement.selectionStart;
+                    while (this.cursorInSeparator(formattedValue, cursorPos)) {
+                        console.log('moving right');
+                        ++movedRight;
+                        ++cursorPos;
+                        if (cursorPos > formattedValue.length || movedRight > 20) {
+                            console.error('we at cursor pos: %d and still going!!!', cursorPos);
+                            break;
+                        }
+                    }
                     const separatorsAdded =  (separatorCount(trimSeparator(formattedValue)) - separatorCount(trimSeparator(inputValue)));
-                    const charsAddedByFormatting = separatorsAdded * DISPLAY_SEPARATOR.length;
+                    const charsAddedByFormatting = (separatorsAdded * DISPLAY_SEPARATOR.length) - movedRight;
                     console.log('Moving right by: %d', charsAddedByFormatting);
                     console.log('Position before shifting: %d', this.elementRef.nativeElement.selectionStart);
                     const newSelectionStart = this.elementRef.nativeElement.selectionStart + charsAddedByFormatting;
                    // this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
                 console.log('Position after shifting: %d', this.elementRef.nativeElement.selectionStart);
-                    // while (cursorInSeparator(formattedValue)) {
-                    //     console.log('moving right');
-                    //     this.elementRef.nativeElement.selectionStart += 1;
-                    //     this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
-                    // }
+
                     console.log('i did this');
                     setDisplayValue(formattedValue, newSelectionStart);
                 console.log('Position after setting value: %d', this.elementRef.nativeElement.selectionStart);
@@ -174,7 +183,12 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
         // knowledge used in formatDisplayValue
          if (event.key === 'Backspace') {
              this.isBackspace = true;
-        }
+        } else {
+             const pos = this.elementRef.nativeElement.selectionStart;
+             const value = this.elementRef.nativeElement.value;
+             const showWhereSelection = `*${value.slice(0, pos)}[]${value.slice(pos)}*`;
+             console.log('the cursor is in separator?: %s %o', showWhereSelection, this.cursorInSeparator(this.elementRef.nativeElement.value));
+         }
     }
 
     _onChange(value: any): void {
