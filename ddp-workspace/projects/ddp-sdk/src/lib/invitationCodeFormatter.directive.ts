@@ -109,10 +109,6 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
                         console.log('moving right');
                         ++movedRight;
                         ++cursorPos;
-                        if (cursorPos > formattedValue.length || movedRight > 20) {
-                            console.error('we at cursor pos: %d and still going!!!', cursorPos);
-                            break;
-                        }
                     }
                     const separatorsAdded =  (separatorCount(trimSeparator(formattedValue)) - separatorCount(trimSeparator(inputValue)));
                     const charsAddedByFormatting = (separatorsAdded * DISPLAY_SEPARATOR.length) - movedRight;
