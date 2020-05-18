@@ -11,7 +11,61 @@
             }
         }
     },
+    "Navigation": {
+        "LogoAlt": "Test Boston logo",
+        "About": "About the Study",
+        "FAQ": "FAQ",
+        "MailingList": "Mailing List",
+        "Privacy": "Privacy",
+        "Dashboard": "Dashboard"
+    },
+    "MailingList": {
+        "Questions": {
+            "Adult": "1. Are you 18 years old or older?",
+            "Patient": "2. Are you a Brigham & Women’s patient?",
+            "Email": "3. What email address is best for you?"
+        },
+        "Answers": {
+            "Yes": "Yes",
+            "No": "No",
+            "NoAnswer": "Prefer not to answer"
+        },
+        "Validations": {
+            "RequiredOption": "Please select an option",
+            "RequiredEmail": "Please enter your email address",
+            "InvalidEmail": "Please enter a valid email address"
+        },
+        "EmailLabel": "Enter email address",
+        "EmailPlaceholder": "example@example.com",
+        "ThankYou": {
+            "Title": "Email Confirmation",
+            "Text": "Thank you for signing up for the TestBoston mailing list! You should receive a confirmation email shortly.",
+            "ImageAlt": "Email sent"
+        },
+        "Sorry": {
+            "Title": "We’re sorry, it looks like you’re ineligible to join",
+            "Text": {
+                "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
+                "Part2": "FAQ",
+                "Part3": "for more information."
+            }
+        }
+    },
     "HomePage": {
+        "IntroSection": {
+            "Title": "Join a project to help understand actual COVID-19 infection rates in your community.",
+            "Text": "Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT and Harvard.",
+            "HaveCode": "I have an invite code",
+            "DontHaveCode": "Don’t have an invitecode?"
+        },
+        "AboutSection": {
+            "Title": "About the Study",
+            "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. We want to understand this and provide linkages to care for those living in these high-risk communities.",
+            "Questions": "Questions we are trying to answer:",
+            "Question1": "How common it is to have COVID-19 without symptoms?",
+            "Question2": "Do people become immune to COVID-19 after they have it?",
+            "Question3": "How can researchers test many people while they are at home?"
+        },
         "FaqSection": {
             "Title": "Have a question?",
             "Text": {
@@ -83,6 +137,10 @@
                     ]
                 }
             ]
+        },
+        "MailingSection": {
+            "Title": "Don’t have an invitation code?<br>Interested in staying up-to-date?",
+            "Text": "Join our mailing list by answering a few questions:"
         }
     },
     "Toolkit": {
@@ -95,6 +153,14 @@
             "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
             "PasswordRequiredError": "Password is required"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
         },
         "SessionExpired": {
             "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."

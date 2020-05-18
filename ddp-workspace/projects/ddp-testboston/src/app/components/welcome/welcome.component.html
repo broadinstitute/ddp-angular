@@ -1,36 +1,37 @@
 <main class="main">
     <section class="section">
         <div class="content intro-block">
-            <h1 class="bold">Join a project to help understand actual COVID-19 infection rates in your community.</h1>
-            <p>Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT
-                and Harvard.</p>
+            <h1 class="bold" translate>HomePage.IntroSection.Title</h1>
+            <p translate>HomePage.IntroSection.Text</p>
             <div class="invitation">
-                <a class="invitation__primary" routerLink="/join">I have an invite code</a>
-                <a class="invitation__secondary" routerLink="/" fragment="mailing-list">Don’t have an invitecode?</a>
+                <a class="invitation__primary" routerLink="/join" translate>HomePage.IntroSection.HaveCode</a>
+                <a class="invitation__secondary" routerLink="/" fragment="mailing-list"
+                    translate>HomePage.IntroSection.DontHaveCode</a>
             </div>
         </div>
     </section>
     <section class="section about-section">
         <div id="about-the-study" class="anchor"></div>
         <div class="content about-block">
-            <h2 class="semi-bold">About the Study</h2>
-            <p>Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have
-                higher infection rates than others. We want to understand this and provide linkages to care for those
-                living in these high-risk communities.</p>
-            <h3>Questions we are trying to answer:</h3>
+            <h2 class="semi-bold" translate>HomePage.AboutSection.Title</h2>
+            <p translate>HomePage.AboutSection.Text</p>
+            <h3 translate>HomePage.AboutSection.Questions</h3>
             <ul class="about-list">
-                <li><span>&#8226;</span>How common it is to have COVID-19 without symptoms?</li>
-                <li><span>&#8226;</span>Do people become immune to COVID-19 after they have it?</li>
-                <li><span>&#8226;</span>How can researchers test many people while they are at home? </li>
+                <li><span>&#8226;</span><span translate>HomePage.AboutSection.Question1</span></li>
+                <li><span>&#8226;</span><span translate>HomePage.AboutSection.Question2</span></li>
+                <li><span>&#8226;</span><span translate>HomePage.AboutSection.Question3</span></li>
             </ul>
         </div>
     </section>
     <section class="section">
         <div id="faq" class="anchor"></div>
         <div class="content question-block">
-            <h2 class="center semi-bold">Have a question?</h2>
-            <p>If your question is not answered below, you can call or email our study staff at
-                <a class="Link" [href]="phoneHref">{{phone}}</a> or <a class="Link" [href]="emailHref">{{email}}</a>.
+            <h2 class="center semi-bold" translate>HomePage.FaqSection.Title</h2>
+            <p>
+                <span translate>HomePage.FaqSection.Text.Part1</span>
+                <a class="Link" [href]="phoneHref">{{phone}}</a>
+                <span translate>HomePage.FaqSection.Text.Part2</span>
+                <a class="Link" [href]="emailHref">{{email}}</a>.
             </p>
             <mat-accordion hideToggle="true" multi="true" displayMode="flat">
                 <ng-container *ngFor="let item of 'HomePage.FaqSection.Items' | translate">
@@ -52,9 +53,8 @@
     <section class="section mailing-list-section">
         <div id="mailing-list" class="anchor"></div>
         <div class="content mailing-list-block">
-            <h2 class="semi-bold">Don’t have an invitation code?<br>
-                Interested in staying up-to-date?</h2>
-            <p>Join our mailing list by answering a few questions:</p>
+            <h2 class="semi-bold" [innerHTML]="'HomePage.MailingSection.Title' | translate"></h2>
+            <p translate>HomePage.MailingSection.Text</p>
             <app-mailing-list></app-mailing-list>
         </div>
     </section>

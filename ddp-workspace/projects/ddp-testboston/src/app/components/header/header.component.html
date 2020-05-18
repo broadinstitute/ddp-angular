@@ -2,7 +2,7 @@
     <div class="header-content">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
-                [alt]="'Header.Logo.ImageAlt' | translate">
+                [alt]="'Navigation.LogoAlt' | translate">
         </a>
         <nav class="nav">
             <ul class="navigation">
@@ -10,23 +10,23 @@
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="about-the-study">
-                        About the Study
+                    <a class="header-link" routerLink="/" fragment="about-the-study" translate>
+                        Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="faq">
-                        FAQ
+                    <a class="header-link" routerLink="/" fragment="faq" translate>
+                        Navigation.FAQ
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="mailing-list">
-                        Mailing List
+                    <a class="header-link" routerLink="/" fragment="mailing-list" translate>
+                        Navigation.MailingList
                     </a>
                 </li>
                 <li class="navigation__item">
                     <a class="header-link" routerLink="/privacy" routerLinkActive="header-link_active" translate>
-                        Privacy
+                        Navigation.Privacy
                     </a>
                 </li>
             </ul>
@@ -59,6 +59,6 @@
                 </g>
             </svg>
         </div>
-        <span translate>Dashboard</span>
+        <span translate>Navigation.Dashboard</span>
     </a>
 </ng-template>

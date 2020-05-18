@@ -52,7 +52,7 @@ export class MailingListComponent implements OnInit {
     }
   }
 
-  public onErrorClose(): void {
+public onErrorClose(): void {
     this.error = false;
   }
 
