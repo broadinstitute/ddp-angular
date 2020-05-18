@@ -98,6 +98,10 @@
 
 .mailing-list-block {
     @include block-margin;
+
+    &__text {
+        margin: 1rem 0 2rem 0;
+    }
 }
 
 // accordion
