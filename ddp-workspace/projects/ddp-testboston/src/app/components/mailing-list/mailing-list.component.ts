@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MailingListServiceAgent, Person } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
@@ -23,6 +23,7 @@ export class MailingListComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private ref: ChangeDetectorRef,
     private mailingService: MailingListServiceAgent,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
@@ -52,8 +53,13 @@ export class MailingListComponent implements OnInit {
     }
   }
 
-public onErrorClose(): void {
-    this.error = false;
+  public onClose(key: string): void {
+    this[key] = false;
+    if (key !== 'error') {
+      this.mailingListForm.reset();
+      this.isSubmitted = false;
+      this.ref.detectChanges();
+    }
   }
 
   private initForm(): void {
