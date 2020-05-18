@@ -1,5 +1,9 @@
 @import '../../../app-theme.scss';
 
+@mixin block-margin {
+    margin: 6rem auto 5rem auto;
+}
+
 .anchor {
     display: block;
     padding-top: 100px;
@@ -44,7 +48,7 @@
 }
 
 .about-block {
-    margin: 6rem auto 5rem auto;
+    @include block-margin;
 }
 
 .about-list {
@@ -61,26 +65,26 @@
 }
 
 .question-block {
-    margin: 6rem auto 5rem auto;
-}
+    @include block-margin;
 
-.question-block__icon {
-    margin: 0 1rem 0 0;
-    line-height: 2.25rem;
-}
+    &__icon {
+        margin: 0 1rem 0 0;
+        line-height: 2.25rem;
+    }
 
-.question-block__question {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.375rem;
-    line-height: 2.25rem;
-    margin: 0;
-}
+    &__question {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        margin: 0;
+    }
 
-.question-block__text {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.25rem;
-    line-height: 2.25rem;
-    color: mat-color($app-theme, 400);
+    &__text {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        color: mat-color($app-theme, 400);
+    }
 }
 
 .mailing-list-section {
@@ -93,7 +97,7 @@
 }
 
 .mailing-list-block {
-    margin: 5rem auto 6rem auto;
+    @include block-margin;
 }
 
 // accordion

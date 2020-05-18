@@ -18,20 +18,15 @@
     align-items: center;
     text-decoration: none !important;
     color: mat-color($app-theme, 400);
-}
 
-.project-logo:hover {
-    text-decoration: none;
-}
+    &:hover {
+        text-decoration: none;
+    }
 
-.project-logo__img {
-    height: 1.25rem;
-    margin-top: 0.3rem;
-}
-
-a {
-    font-weight: 600;
-    line-height: 1.625rem;
+    &__img {
+        height: 1.25rem;
+        margin-top: 0.3rem;
+    }
 }
 
 .contacts {
@@ -45,38 +40,38 @@ a {
     display: flex;
     margin: 0;
     padding-left: 10rem;
-}
 
-.navigation__item {
-    margin-right: 2.8125rem;
-    font-weight: 600;
-    font-size: 1.125rem;
+    &__item {
+        margin-right: 2.8125rem;
+        font-weight: 600;
+        font-size: 1.125rem;
+    }
 }
 
 .footer-link {
     display: flex;
     align-items: center;
-}
 
-.footer-link:link,
-.footer-link:visited {
-    color: mat-color($app-theme, 400);
-    line-height: 2.0625rem;
-}
+    &:link,
+    &:visited {
+        color: mat-color($app-theme, 400);
+        line-height: 2.0625rem;
+    }
 
-.footer-link:hover {
-    color: mat-color($app-theme, 400);
-    text-decoration: underline;
-}
+    &:hover {
+        color: mat-color($app-theme, 400);
+        text-decoration: underline;
+    }
 
-.footer-link:active {
-    color: mat-color($app-theme, 400);
-    text-decoration: underline;
+    &:active {
+        color: mat-color($app-theme, 400);
+        text-decoration: underline;
+    }
 }
 
 .separator {
     height: 5px;
     width: 30px;
-    background-color: #454545;
+    background-color: mat-color($app-theme, 400);
     margin-bottom: 1rem;
 }
