@@ -4,10 +4,6 @@
             "Submit": {
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
-            },
-            "Login": {
-                "Title": "Log In",
-                "AriaLabel": "Log In button"
             }
         }
     },
@@ -37,12 +33,12 @@
         },
         "EmailLabel": "Enter email address",
         "EmailPlaceholder": "example@example.com",
-        "ThankYou": {
+        "ThankYouBlock": {
             "Title": "Email Confirmation",
             "Text": "Thank you for signing up for the TestBoston mailing list! You should receive a confirmation email shortly.",
             "ImageAlt": "Email sent"
         },
-        "Sorry": {
+        "SorryBlock": {
             "Title": "We’re sorry, it looks like you’re ineligible to join",
             "Text": {
                 "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
@@ -55,8 +51,8 @@
         "IntroSection": {
             "Title": "Join a project to help understand actual COVID-19 infection rates in your community.",
             "Text": "Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT and Harvard.",
-            "HaveCode": "I have an invite code",
-            "DontHaveCode": "Don’t have an invitecode?"
+            "Code": "I have an invite code",
+            "NoCode": "Don’t have an invitecode?"
         },
         "AboutSection": {
             "Title": "About the Study",

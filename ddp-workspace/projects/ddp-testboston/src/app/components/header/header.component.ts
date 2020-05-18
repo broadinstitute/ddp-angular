@@ -15,7 +15,7 @@ export class HeaderComponent {
   constructor(
     private session: SessionMementoService,
     private window: WindowRef,
-    @Inject(DOCUMENT) private document: any) { }
+    @Inject(DOCUMENT) private document: Document) { }
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();

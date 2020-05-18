@@ -1,7 +1,7 @@
 <div class="container">
     <ng-container *ngIf="!thankYou && !sorry && !error && !isLoading">
         <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
-            <p class="mailing-list__question">{{'MailingList.Questions.Adult' | translate}}</p>
+            <p class="mailing-list__question" translate>MailingList.Questions.Adult</p>
             <mat-radio-group class="mailing-list__group" formControlName="adult">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
@@ -14,7 +14,7 @@
                 </mat-error>
             </mat-radio-group>
 
-            <p class="mailing-list__question">{{'MailingList.Questions.Patient' | translate}}</p>
+            <p class="mailing-list__question" translate>MailingList.Questions.Patient</p>
             <mat-radio-group class="mailing-list__group" formControlName="bwhPatient">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
@@ -30,9 +30,7 @@
                 </mat-error>
             </mat-radio-group>
 
-            <p class="mailing-list__question mailing-list__question_last">
-                {{'MailingList.Questions.Email' | translate}}
-            </p>
+            <p class="mailing-list__question mailing-list__question_last" translate>MailingList.Questions.Email</p>
             <mat-form-field class="mailing-list__input">
                 <mat-label>{{'MailingList.EmailLabel' | translate}}</mat-label>
                 <input matInput [placeholder]="'MailingList.EmailPlaceholder' | translate" formControlName="email"
@@ -61,9 +59,9 @@
             <mat-icon>clear</mat-icon>
         </button>
         <div class="mailing-list mailing-list_result">
-            <img src="assets/images/email-sent.svg" [alt]="'MailingList.ThankYou.ImageAlt' | translate">
-            <h3 class="center no-margin mailing-list__title" translate>MailingList.ThankYou.Title</h3>
-            <p class="center" translate>MailingList.ThankYou.Text</p>
+            <img src="assets/images/email-sent.svg" [alt]="'MailingList.ThankYouBlock.ImageAlt' | translate">
+            <h3 class="center no-margin mailing-list__title" translate>MailingList.ThankYouBlock.Title</h3>
+            <p class="center" translate>MailingList.ThankYouBlock.Text</p>
         </div>
     </ng-container>
 
@@ -72,11 +70,11 @@
             <mat-icon>clear</mat-icon>
         </button>
         <div class="mailing-list mailing-list_result">
-            <h3 class="center no-margin mailing-list__title" translate>MailingList.Sorry.Title</h3>
+            <h3 class="center no-margin mailing-list__title" translate>MailingList.SorryBlock.Title</h3>
             <p class="center">
-                <span translate>MailingList.Sorry.Text.Part1</span>
-                <a class="Link Link_bold" routerLink="/" fragment="faq" translate>MailingList.Sorry.Text.Part2</a>
-                <span translate>MailingList.Sorry.Text.Part3</span>
+                <span translate>MailingList.SorryBlock.Text.Part1</span>
+                <a class="Link Link_bold" routerLink="/" fragment="faq" translate>MailingList.SorryBlock.Text.Part2</a>
+                <span translate>MailingList.SorryBlock.Text.Part3</span>
             </p>
         </div>
     </ng-container>
