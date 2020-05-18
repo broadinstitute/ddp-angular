@@ -55,10 +55,10 @@
     padding: 0;
     list-style-type: none;
 
-    li {
+    &__item {
         margin: 0.7rem 0;
 
-        span:first-child {
+        .dot {
             margin-right: 1rem;
         }
     }
