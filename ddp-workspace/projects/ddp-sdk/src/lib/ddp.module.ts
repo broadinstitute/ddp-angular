@@ -166,6 +166,7 @@ import { RouteTransformerDirective } from './directives/routeTransformer.directi
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+import { InvitationCodeFormatterDirective } from './invitationCodeFormatter.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -336,7 +337,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LazyLoadResourcesDirective,
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    InvitationCodeFormatterDirective
   ],
   exports: [
     NetworkSnifferComponent,
@@ -395,7 +397,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TranslateModule,
     LazyLoadResourcesDirective,
     RouteTransformerDirective,
-    UpperCaseInputDirective
+    UpperCaseInputDirective,
+    InvitationCodeFormatterDirective
   ],
   entryComponents: [
     UserPreferencesComponent,
