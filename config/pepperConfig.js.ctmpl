@@ -24,8 +24,7 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{/* CD: TODO: Figure out if and syntax below is correct */}}
-{{if ne $study_guid "testboston" and ne $study_guid "PRION"}}
+{{if (and (ne $study_guid "testboston") (ne $study_guid "PRION"))}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
