@@ -1,9 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { InvitationServiceAgent } from '../../../../ddp-sdk/src/lib/services/serviceAgents/invitationServiceAgent.service';
 import { Auth0AdapterService } from 'ddp-sdk';
 import { ErrorType } from '../models/errorType';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-registration-prequal',
@@ -15,11 +16,11 @@ import { ErrorType } from '../models/errorType';
         <mat-form-field class="example-input-field" floatLabel="always">
           <mat-label>Enter invitation code</mat-label>
           <input matInput
+                 uppercase
                  formControlName="invitationId"
-                 maxlength="12"
-                 minlength="12"
-                 pattern="([a-zA-Z0-9]{4}){2}([a-zA-Z0-9]){4}"
-                 placeholder="XXXXXXXXXXXXXXXX" uppercase>
+                 pattern="[a-zA-Z0-9]{12}"
+                 maxLength="12"
+                 placeholder="Your invitation code">
         </mat-form-field>
         <mat-form-field class="example-input-field" floatLabel="always">
           <mat-label>What is your current mailing zip code?</mat-label>
@@ -27,6 +28,7 @@ import { ErrorType } from '../models/errorType';
                  formControlName="zip"
                  minlength="5"
                  maxlength="5"
+                 placeholder="5 digit zip"
                  pattern="[0-9]{5}">
         </mat-form-field>
         <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken"></re-captcha>
@@ -40,7 +42,7 @@ import { ErrorType } from '../models/errorType';
       }
   `]
 })
-export class UserRegistrationPrequalComponent {
+export class UserRegistrationPrequalComponent implements OnInit {
   public formGroup: FormGroup;
   public errorMessage: string | null = null;
 
@@ -53,11 +55,22 @@ export class UserRegistrationPrequalComponent {
       zip: new FormControl(null, Validators.required)
     });
   }
+  public ngOnInit(): void {
+    this.formGroup.get('invitationId')
+        .valueChanges
+        .subscribe(val => {
+          console.log('invitationId: %s, status: %s', val, this.formGroup.get('invitationId').status);
+          console.log("validators: %o", this.formGroup.get('invitationId').validator);
+        });
+  }
 
   public onSubmit(): void {
     this.errorMessage = null;
     const form = this.formGroup.value;
-    this.invitationService.check(form.invitationId, form.recaptchaToken, form.zip).subscribe(
+    this.invitationService
+        .check(form.invitationId, form.recaptchaToken, form.zip)
+        .pipe(take(1))
+        .subscribe(
         () => this.auth0.signup({ invitation_id: form.invitationId }),
         (error) => {
           if (error.errorType === ErrorType.InvalidInvitation) {
