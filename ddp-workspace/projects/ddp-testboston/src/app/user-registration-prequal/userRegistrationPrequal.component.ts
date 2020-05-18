@@ -7,7 +7,7 @@ import { ErrorType } from '../models/errorType';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-user-registration-prequal',
+  selector: 'user-registration-prequal',
   template: `
       <div *ngIf="errorMessage" class="ErrorMessage">
         <span>{{ errorMessage }}</span>
