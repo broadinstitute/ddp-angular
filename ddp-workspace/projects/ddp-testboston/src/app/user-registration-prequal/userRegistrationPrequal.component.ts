@@ -65,8 +65,8 @@ export class UserRegistrationPrequalComponent {
         .subscribe(
         () => this.auth0.signup({ invitation_id: form.invitationId }),
         (error) => {
-          if (error.errorType === ErrorType.InvalidInvitation) {
-            this.errorMessage = 'We got an invalid invitation';
+          if (error.message) {
+            this.errorMessage = error.message;
           } else {
             this.errorMessage = 'Submission could not be processed';
           }
