@@ -64,9 +64,9 @@ export class MailingListComponent implements OnInit {
 
   private initForm(): void {
     this.mailingListForm = this.formBuilder.group({
-      adult: new FormControl('', Validators.required),
-      bwhPatient: new FormControl('', Validators.required),
-      email: new FormControl('', [
+      adult: new FormControl(null, Validators.required),
+      bwhPatient: new FormControl(null, Validators.required),
+      email: new FormControl(null, [
         Validators.required,
         Validators.pattern(/^\S+@\S+\.\S+$/)
       ])
