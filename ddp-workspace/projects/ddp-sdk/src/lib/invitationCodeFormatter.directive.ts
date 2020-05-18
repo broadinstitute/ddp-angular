@@ -1,7 +1,6 @@
 import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import formatErrorMsg = jasmine.formatErrorMsg;
 
 const DISPLAY_SEPARATOR = ' - ';
 const DISPLAY_INPUT_MAX_LEN = 18;
