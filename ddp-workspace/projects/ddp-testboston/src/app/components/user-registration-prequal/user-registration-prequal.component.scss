@@ -1,4 +1,59 @@
-.registration-prequal-form {
+.main {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}
+
+.section {
+    width: 100%;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 1.5625rem;
+    max-width: 700px;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 2.75rem;
+}
+
+p {
+    font-size: 1.375rem;
+    line-height: 2.0625rem;
+}
+
+.invitation-form {
+    display: flex;
+    flex-direction: column;
+
+    &__input {
+        width: 20rem;
+    }
+
+    &__submit {
+        margin: 2rem 0 0 0;
+        color: #FFFFFF;
+        font-size: 1.375rem;
+        font-weight: 600;
+        line-height: 2.125rem;
+        height: 3.75rem;
+        width: 13.125rem;
+        border-radius: 10px;
+        background-color: #2951C6;
+        border: none;
+
+        &:disabled {
+            background-color: #8098de;
+        }
+    }
+}
+
+.ErrorMessage {
+    margin: 1rem 0;
+    color: #ee4416;
+    font-size: 1.375rem;
+    line-height: 2.0625rem;
 }
