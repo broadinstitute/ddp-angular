@@ -22,27 +22,27 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
     private isBackspace = false;
 
     setModelValue(newValue: string | null): void {
-      this._value = newValue;
+        this._value = newValue;
     }
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>) {
-    this.setModelValue(elementRef.nativeElement.value);
-    console.log('created directive on: %o', elementRef);
-  }
+    constructor(private elementRef: ElementRef<HTMLInputElement>) {
+        this.setModelValue(elementRef.nativeElement.value);
+        console.log('created directive on: %o', elementRef);
+    }
 
-  @Input('value')
-  set value(value: string | null) {
-    console.log('set valuew was called with value: %o', value);
-    this.setModelValue(value);
-    this.formatDisplayValue(value);
-  }
-
+    @Input('value')
+    set value(value: string | null) {
+        console.log('set valuew was called with value: %o', value);
+        this.setModelValue(value);
+        this.formatDisplayValue(value);
+    }
 
     get value(): string | null {
         console.log('get value got called and we returning: %o', this._value);
         return this._value;
     }
-    cursorInSeparator(currDisVal: string | null, cursorPos: number | null =  null): boolean {
+
+    cursorInSeparator(currDisVal: string | null, cursorPos: number | null = null): boolean {
         if (currDisVal == null) {
             return false;
         }
@@ -69,28 +69,28 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
             // get rid of  non-alphanumeric
             const cleanedDataValue = this.cleanValue(inputValue);
             const formattedValue = cleanedDataValue
-                                .replace(/(.{4})/g, `$1${DISPLAY_SEPARATOR}`)
-                                .substr(0, DISPLAY_INPUT_MAX_LEN);
+                .replace(/(.{4})/g, `$1${DISPLAY_SEPARATOR}`)
+                .substr(0, DISPLAY_INPUT_MAX_LEN);
 
-           const setDisplayValue = (newVal: string, newSelectionStart: number | null = null): void => {
+            const setDisplayValue = (newVal: string, newSelectionStart: number | null = null): void => {
                 const existingSelectionStart = this.elementRef.nativeElement.selectionStart;
                 this.elementRef.nativeElement.value = newVal;
-               this.elementRef.nativeElement.selectionStart = newSelectionStart == null ?  existingSelectionStart : newSelectionStart;
-               this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
+                this.elementRef.nativeElement.selectionStart = newSelectionStart == null ? existingSelectionStart : newSelectionStart;
+                this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
             };
 
-           const trimSeparator = (val: string): string => {
-               const trimmed = val.endsWith(DISPLAY_SEPARATOR) ?
-                   val.substr(0, val.length - DISPLAY_SEPARATOR.length)
-                   : val;
-               console.log('original: *%s* trimmed: *%s', val, trimmed);
-               return trimmed;
-           };
-           const separatorCount = (val: string): number => {
-               const count =  val.split(DISPLAY_SEPARATOR).length - 1;
-               console.log('Found %d separators in: *%s*', count, val);
-               return count;
-           };
+            const trimSeparator = (val: string): string => {
+                const trimmed = val.endsWith(DISPLAY_SEPARATOR) ?
+                    val.substr(0, val.length - DISPLAY_SEPARATOR.length)
+                    : val;
+                console.log('original: *%s* trimmed: *%s', val, trimmed);
+                return trimmed;
+            };
+            const separatorCount = (val: string): number => {
+                const count = val.split(DISPLAY_SEPARATOR).length - 1;
+                console.log('Found %d separators in: *%s*', count, val);
+                return count;
+            };
 
             let addedChars = 0;
             if (this.isBackspace) {
@@ -102,23 +102,23 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
                 }
                 setDisplayValue(formattedValue);
             } else if (this.elementRef.nativeElement.selectionStart < inputValue.length) {
-                    let movedRight = 0;
-                    let cursorPos = this.elementRef.nativeElement.selectionStart;
-                    while (this.cursorInSeparator(formattedValue, cursorPos)) {
-                        console.log('moving right');
-                        ++movedRight;
-                        ++cursorPos;
-                    }
-                    const separatorsAdded =  (separatorCount(trimSeparator(formattedValue)) - separatorCount(trimSeparator(inputValue)));
-                    const charsAddedByFormatting = (separatorsAdded * DISPLAY_SEPARATOR.length) - movedRight;
-                    console.log('Moving right by: %d', charsAddedByFormatting);
-                    console.log('Position before shifting: %d', this.elementRef.nativeElement.selectionStart);
-                    const newSelectionStart = this.elementRef.nativeElement.selectionStart + charsAddedByFormatting;
-                   // this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
+                let movedRight = 0;
+                let cursorPos = this.elementRef.nativeElement.selectionStart;
+                while (this.cursorInSeparator(formattedValue, cursorPos)) {
+                    console.log('moving right');
+                    ++movedRight;
+                    ++cursorPos;
+                }
+                const separatorsAdded = (separatorCount(trimSeparator(formattedValue)) - separatorCount(trimSeparator(inputValue)));
+                const charsAddedByFormatting = (separatorsAdded * DISPLAY_SEPARATOR.length) - movedRight;
+                console.log('Moving right by: %d', charsAddedByFormatting);
+                console.log('Position before shifting: %d', this.elementRef.nativeElement.selectionStart);
+                const newSelectionStart = this.elementRef.nativeElement.selectionStart + charsAddedByFormatting;
+                // this.elementRef.nativeElement.selectionEnd = this.elementRef.nativeElement.selectionStart;
                 console.log('Position after shifting: %d', this.elementRef.nativeElement.selectionStart);
 
-                    console.log('i did this');
-                    setDisplayValue(formattedValue, newSelectionStart);
+                console.log('i did this');
+                setDisplayValue(formattedValue, newSelectionStart);
                 console.log('Position after setting value: %d', this.elementRef.nativeElement.selectionStart);
             } else {
                 // addedChars = (separtorCountAfter - separtorCount) * (DISPLAY_SEPARATOR.length);
@@ -176,21 +176,19 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
     onKeyPress(event: KeyboardEvent): void {
         // just record that we are handling a backspace event
         // knowledge used in formatDisplayValue
-         if (event.key === 'Backspace') {
-             this.isBackspace = true;
+        if (event.key === 'Backspace') {
+            this.isBackspace = true;
         } else {
-             const pos = this.elementRef.nativeElement.selectionStart;
-             const value = this.elementRef.nativeElement.value;
-             const showWhereSelection = `*${value.slice(0, pos)}[]${value.slice(pos)}*`;
-             console.log('the cursor is in separator?: %s %o', showWhereSelection, this.cursorInSeparator(this.elementRef.nativeElement.value));
-         }
+            const pos = this.elementRef.nativeElement.selectionStart;
+            const value = this.elementRef.nativeElement.value;
+            const showWhereSelection = `*${value.slice(0, pos)}[]${value.slice(pos)}*`;
+            console.log('the cursor is in separator?: %s %o', showWhereSelection, this.cursorInSeparator(this.elementRef.nativeElement.value));
+        }
     }
 
-    _onChange(value: any): void {
-    }
+    _onChange(value: any): void { }
 
-    _onTouched(value: any): void {
-    }
+    _onTouched(value: any): void { }
 
     @HostListener('blur')
     _onBlur(): void {
@@ -203,19 +201,19 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
         this.formatDisplayValue(obj);
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnChange(fn: any): void {
         console.log('registerOnChange called with: %o', fn);
         this._onChange = fn;
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
         console.log('registerOnTouched called with: %o', fn);
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     setDisabledState?(isDisabled: boolean): void {
         console.log('setDisabledState : %o', isDisabled);
         console.log('setDisabledState not implemented');
