@@ -23,20 +23,17 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
     public check(invitationId: string, recaptchaToken: string, zip: string): Observable<any> {
         const payload: InvitationCheckPayload = {
             invitationId,
-            qualificationDetails: {zipCode: zip},
+            qualificationDetails: { zipCode: zip },
             recaptchaToken,
-            auth0ClientId: this.configuration.auth0ClientId};
-        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`,  payload, {}, true)
+            auth0ClientId: this.configuration.auth0ClientId
+        };
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`, payload, {}, true)
             .pipe(
                 map(response => response ? response.body : null),
-                catchError((err: HttpErrorResponse)  => {
+                catchError((err: HttpErrorResponse) => {
                     return throwError(this.buildErrorObject(err));
                 })
             );
-    }
-
-    private buildErrorObject(serverError: HttpErrorResponse): DdpError {
-        return new DdpError(serverError.error ? serverError.error.message : '', serverError.error ? serverError.error.code  : null);
     }
 
     public verify(invitationId: string): Observable<never> {
@@ -44,5 +41,9 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
             .pipe(
                 mergeMap(response => response && response.status === this.OK_STATUS ? EMPTY : throwError('Email verification failed'))
             );
+    }
+
+    private buildErrorObject(serverError: HttpErrorResponse): DdpError {
+        return new DdpError(serverError.error ? serverError.error.message : '', serverError.error ? serverError.error.code : null);
     }
 }
