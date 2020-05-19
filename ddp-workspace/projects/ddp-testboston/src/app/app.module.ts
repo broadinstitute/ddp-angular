@@ -25,12 +25,13 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import { MatButtonModule } from '@angular/material/button';
-import { UserRegistrationPrequalComponent } from './user-registration-prequal/userRegistrationPrequal.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -111,7 +112,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         RecaptchaFormsModule,
         ReactiveFormsModule
     ],
-
     providers: [
         {
             provide: 'ddp.config',

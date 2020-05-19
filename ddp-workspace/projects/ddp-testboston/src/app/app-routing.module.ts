@@ -5,6 +5,7 @@ import { AppRoutes } from './app-routes';
 import { AppGuids } from './app-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import {
   AuthGuard,
@@ -12,7 +13,6 @@ import {
 } from 'ddp-sdk';
 
 import {
-  WorkflowStartActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
@@ -21,12 +21,11 @@ import {
   PasswordRedesignedComponent,
   SessionExpiredRedesignedComponent
 } from 'toolkit';
-import { UserRegistrationPrequalComponent } from './user-registration-prequal/userRegistrationPrequal.component';
 
 const routes: Routes = [
   {
-    path: AppRoutes.Prequalifier,
-    component: WorkflowStartActivityRedesignedComponent,
+    path: AppRoutes.UserRegistrationPrequal,
+    component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard
     ]
@@ -106,13 +105,6 @@ const routes: Routes = [
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
-    canActivate: [
-      IrbGuard
-    ]
-  },
-  {
-    path: AppRoutes.UserRegistrationPrequal,
-    component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard
     ]

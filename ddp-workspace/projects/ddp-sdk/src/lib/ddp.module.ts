@@ -166,7 +166,7 @@ import { RouteTransformerDirective } from './directives/routeTransformer.directi
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
-import { InvitationCodeFormatterDirective } from './invitationCodeFormatter.directive';
+import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
