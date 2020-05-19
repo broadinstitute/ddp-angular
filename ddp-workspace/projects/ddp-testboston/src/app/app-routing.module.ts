@@ -24,6 +24,13 @@ import {
 
 const routes: Routes = [
   {
+    path: AppRoutes.UserRegistrationPrequal,
+    component: UserRegistrationPrequalComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.Consent,
     component: ActivityPageRedesignedComponent,
     canActivate: [
@@ -98,13 +105,6 @@ const routes: Routes = [
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
-    canActivate: [
-      IrbGuard
-    ]
-  },
-  {
-    path: AppRoutes.UserRegistrationPrequal,
-    component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard
     ]
