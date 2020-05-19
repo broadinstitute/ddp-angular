@@ -3,6 +3,6 @@ export interface InvitationCheckPayload {
     invitationId: string;
     auth0ClientId: string;
     qualificationDetails: {
-        zipCode: string
+        zipCode: string;
     };
 }
