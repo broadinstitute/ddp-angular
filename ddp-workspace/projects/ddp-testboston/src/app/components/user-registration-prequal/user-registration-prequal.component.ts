@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Auth0AdapterService, InvitationServiceAgent } from 'ddp-sdk';
-import { ErrorType } from '../../models/errorType';
+import { ErrorType } from '../../../../../ddp-sdk/src/lib/models/errorType';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -10,42 +10,35 @@ import { take } from 'rxjs/operators';
   templateUrl: './user-registration-prequal.component.html',
   styleUrls: ['./user-registration-prequal.component.scss']
 })
-export class UserRegistrationPrequalComponent implements OnInit {
+export class UserRegistrationPrequalComponent {
   public formGroup: FormGroup;
   public errorMessage: string | null = null;
 
-  constructor(
-    private auth0: Auth0AdapterService,
-    private invitationService: InvitationServiceAgent,
-    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) { }
-
-  public ngOnInit(): void {
-    this.initForm();
+  constructor(private invitationService: InvitationServiceAgent,
+              @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
+              private auth0: Auth0AdapterService) {
+    this.formGroup = new FormGroup({
+      recaptchaToken: new FormControl(null, Validators.required),
+      invitationId: new FormControl(null, Validators.required),
+      zip: new FormControl(null, Validators.required)
+    });
   }
 
   public onSubmit(): void {
     this.errorMessage = null;
     const form = this.formGroup.value;
     this.invitationService
-      .check(form.invitationId, form.recaptchaToken, form.zip)
-      .pipe(take(1))
-      .subscribe(
-        () => this.auth0.signup({ invitation_id: form.invitationId }),
-        (error) => {
-          if (error.message) {
-            this.errorMessage = error.message;
-          } else {
-            this.errorMessage = 'Submission could not be processed';
-          }
-        }
-      );
-  }
-
-  private initForm(): void {
-    this.formGroup = new FormGroup({
-      recaptchaToken: new FormControl(null, Validators.required),
-      invitationId: new FormControl(null, Validators.required),
-      zip: new FormControl(null, Validators.required)
-    });
+        .check(form.invitationId, form.recaptchaToken, form.zip)
+        .pipe(take(1))
+        .subscribe(
+            () => this.auth0.signup({ invitation_id: form.invitationId }),
+            (error) => {
+              if (error.message) {
+                this.errorMessage = error.message;
+              } else {
+                this.errorMessage = 'Submission could not be processed';
+              }
+            }
+        );
   }
 }

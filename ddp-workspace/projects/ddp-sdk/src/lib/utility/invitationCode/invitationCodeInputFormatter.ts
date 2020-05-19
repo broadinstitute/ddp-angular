@@ -1,4 +1,4 @@
-import { TextInputState } from './textInputState';
+import { TextInputState } from '../../models/textInputState';
 
 export class InvitationCodeInputFormatter {
     readonly DISPLAY_INPUT_MAX_LEN = 18;

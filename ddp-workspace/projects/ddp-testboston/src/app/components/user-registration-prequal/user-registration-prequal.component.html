@@ -7,15 +7,26 @@
             <form class="invitation-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
                 <mat-form-field class="invitation-form__input" floatLabel="always">
                     <mat-label>Enter invitation code</mat-label>
-                    <input matInput uppercase formControlName="invitationId" pattern="[a-zA-Z0-9]{12}" maxLength="12"
-                        placeholder="Your invitation code">
+                    <input matInput
+                           invitationcode
+                           formControlName="invitationId"
+                           pattern="[a-zA-Z0-9]{12}"
+                           maxLength="18"
+                           placeholder="Your invitation code">
                 </mat-form-field>
                 <mat-form-field class="invitation-form__input" floatLabel="always">
                     <mat-label>What is your current mailing zip code?</mat-label>
-                    <input matInput formControlName="zip" minlength="5" maxlength="5" placeholder="5 digit zip"
-                        type="number" pattern="[0-9]{5}">
+                    <input matInput
+                           formControlName="zip"
+                           minlength="5"
+                           maxlength="5"
+                           placeholder="5 digit zip"
+                           type="number"
+                           pattern="[0-9]{5}">
                 </mat-form-field>
-                <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken">
+                <re-captcha [siteKey]="config.recaptchaSiteKey"
+                            size="normal"
+                            formControlName="recaptchaToken">
                 </re-captcha>
                 <button class="invitation-form__submit" type="submit" [disabled]="formGroup.invalid">Submit</button>
                 <div *ngIf="errorMessage" class="ErrorMessage">

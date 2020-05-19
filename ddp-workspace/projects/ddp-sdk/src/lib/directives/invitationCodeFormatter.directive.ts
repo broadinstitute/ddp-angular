@@ -1,7 +1,7 @@
 import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InvitationCodeInputFormatter } from './invitationCodeInputFormatter';
+import { InvitationCodeInputFormatter } from '../utility/invitationCode/invitationCodeInputFormatter';
 
 @Directive({
     selector: 'input[invitationcode]',
@@ -20,36 +20,36 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
     private isBackspace = false;
     private formatter = new InvitationCodeInputFormatter();
 
-    setModelValue(newValue: string | null): void {
-      this._value = newValue;
+    constructor(private elementRef: ElementRef<HTMLInputElement>) {
+        this.setModelValue(elementRef.nativeElement.value);
+        console.debug('created directive on: %o', elementRef);
     }
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>) {
-    this.setModelValue(elementRef.nativeElement.value);
-    console.log('created directive on: %o', elementRef);
-  }
+    setModelValue(newValue: string | null): void {
+        this._value = newValue;
+    }
 
-  @Input('value')
-  set value(value: string | null) {
-    value = value == null ? '' : value;
-    console.log('set value was called with value: %o', value);
-    const cleanedInputState = this.formatter.cleanupInput(value, this.elementRef.nativeElement.selectionStart);
-    this.setModelValue(cleanedInputState.value);
-    const formattedState = this.formatter.addSeparator(cleanedInputState.value, cleanedInputState.selectionStart, this.isBackspace);
-    this.elementRef.nativeElement.value = formattedState.value;
-    this.elementRef.nativeElement.selectionStart = formattedState.selectionStart;
-    this.elementRef.nativeElement.selectionEnd = formattedState.selectionStart;
-  }
+    @Input('value')
+    set value(value: string | null) {
+        value = value == null ? '' : value;
+        console.debug('set value was called with value: %o', value);
+        const cleanedInputState = this.formatter.cleanupInput(value, this.elementRef.nativeElement.selectionStart);
+        this.setModelValue(cleanedInputState.value);
+        const formattedState = this.formatter.addSeparator(cleanedInputState.value, cleanedInputState.selectionStart, this.isBackspace);
+        this.elementRef.nativeElement.value = formattedState.value;
+        this.elementRef.nativeElement.selectionStart = formattedState.selectionStart;
+        this.elementRef.nativeElement.selectionEnd = formattedState.selectionStart;
+    }
 
 
     get value(): string | null {
-        console.log('get value got called and we returning: %o', this._value);
+        console.debug('get value got called and we returning: %o', this._value);
         return this._value;
     }
 
     @HostListener('input', ['$event.target.value'])
     onInput(value): void {
-        console.log('onInput called with: *%s*', value);
+        console.debug('onInput called with: *%s*', value);
         this.value = value;
         this._onChange(this._value);
     }
@@ -71,29 +71,28 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
     _onBlur(): void {
         this._onTouched(this._value);
     }
+
     // part of implementing ControlValueAccessor used by ngControls on form modules
     writeValue(obj: any): void {
-        console.log('write value called with: %s', obj);
+        console.debug('write value called with: %s', obj);
         this.value = obj;
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnChange(fn: any): void {
-        console.log('registerOnChange called with: %o', fn);
+        console.debug('registerOnChange called with: %o', fn);
         this._onChange = fn;
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
-        console.log('registerOnTouched called with: %o', fn);
+        console.debug('registerOnTouched called with: %o', fn);
     }
 
-  // part of implementing ControlValueAccessor used by ngControls on form modules
+    // part of implementing ControlValueAccessor used by ngControls on form modules
     setDisabledState?(isDisabled: boolean): void {
-        console.log('setDisabledState : %o', isDisabled);
-        console.log('setDisabledState not implemented');
+        console.debug('setDisabledState : %o', isDisabled);
+        console.debug('setDisabledState not implemented');
     }
-
-
 }

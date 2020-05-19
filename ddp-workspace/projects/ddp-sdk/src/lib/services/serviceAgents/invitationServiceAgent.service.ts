@@ -5,9 +5,9 @@ import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
 import { EMPTY, Observable, throwError } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { InvitationCheckPayload } from '../../../../../ddp-testboston/src/app/models/invitationCheckPayload';
-import { DdpError } from '../../../../../ddp-testboston/src/app/models/ddpError';
-import { ErrorType } from '../../../../../ddp-testboston/src/app/models/errorType';
+import { InvitationCheckPayload } from '../../models/invitationCheckPayload';
+import { DdpError } from '../../models/ddpError';
+import { ErrorType } from '../../models/errorType';
 
 @Injectable()
 export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {

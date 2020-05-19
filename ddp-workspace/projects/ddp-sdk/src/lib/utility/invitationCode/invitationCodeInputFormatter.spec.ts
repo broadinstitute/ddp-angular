@@ -1,6 +1,5 @@
-import { InvitationCodeFormatterDirective } from './invitationCodeFormatter.directive';
 import { InvitationCodeInputFormatter } from './invitationCodeInputFormatter';
-import { TextInputState } from './textInputState';
+import { TextInputState } from '../../models/textInputState';
 
 type Formatter = (inputState: TextInputState) => TextInputState;
 
