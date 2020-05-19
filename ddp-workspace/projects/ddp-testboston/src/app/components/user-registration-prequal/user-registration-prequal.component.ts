@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Auth0AdapterService, InvitationServiceAgent } from 'ddp-sdk';
@@ -10,18 +10,17 @@ import { take } from 'rxjs/operators';
   templateUrl: './user-registration-prequal.component.html',
   styleUrls: ['./user-registration-prequal.component.scss']
 })
-export class UserRegistrationPrequalComponent {
+export class UserRegistrationPrequalComponent implements OnInit {
   public formGroup: FormGroup;
   public errorMessage: string | null = null;
 
-  constructor(private invitationService: InvitationServiceAgent,
-    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
-    private auth0: Auth0AdapterService) {
-    this.formGroup = new FormGroup({
-      recaptchaToken: new FormControl(null, Validators.required),
-      invitationId: new FormControl(null, Validators.required),
-      zip: new FormControl(null, Validators.required)
-    });
+  constructor(
+    private auth0: Auth0AdapterService,
+    private invitationService: InvitationServiceAgent,
+    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) { }
+
+  public ngOnInit(): void {
+    this.initForm();
   }
 
   public onSubmit(): void {
@@ -40,5 +39,13 @@ export class UserRegistrationPrequalComponent {
           }
         }
       );
+  }
+
+  private initForm(): void {
+    this.formGroup = new FormGroup({
+      recaptchaToken: new FormControl(null, Validators.required),
+      invitationId: new FormControl(null, Validators.required),
+      zip: new FormControl(null, Validators.required)
+    });
   }
 }
