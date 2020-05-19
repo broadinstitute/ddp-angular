@@ -1,5 +1,8 @@
 <div class="container">
     <ng-container *ngIf="!thankYou && !sorry && !error && !isLoading">
+        <div class="title">
+            <h3 class="title__text center" translate>MailingList.Title</h3>
+        </div>
         <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
             <p class="mailing-list__question" translate>MailingList.Questions.Adult</p>
             <mat-radio-group class="mailing-list__group" formControlName="adult">

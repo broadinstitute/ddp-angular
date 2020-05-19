@@ -6,7 +6,7 @@
                     [alt]="'Navigation.LogoAlt' | translate">
             </a>
             <div class="contacts">
-                <div class="separator"></div>
+                <div class="contacts__separator"></div>
                 <a class="Link" [href]="phoneHref">{{phone}}</a>
                 <a class="Link" [href]="emailHref">{{email}}</a>
             </div>
@@ -19,8 +19,8 @@
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="footer-link" routerLink="/" fragment="faq" translate>
-                        Navigation.FAQ
+                    <a class="footer-link" routerLink="/" fragment="q&a" translate>
+                        Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
@@ -29,14 +29,14 @@
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="footer-link" routerLink="/privacy" routerLinkActive="footer-link_active" translate>
+                    <a class="footer-link" routerLink="/privacy-policy" routerLinkActive="footer-link_active" translate>
                         Navigation.Privacy
                     </a>
                 </li>
-                <li class="navigation__item">
-                    <ddp-sign-in-out></ddp-sign-in-out>
-                </li>
             </ul>
         </nav>
+        <div class="auth">
+            <ddp-sign-in-out></ddp-sign-in-out>
+        </div>
     </div>
 </footer>

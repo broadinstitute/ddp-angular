@@ -6,17 +6,14 @@
         </a>
         <nav class="nav">
             <ul class="navigation">
-                <li *ngIf="isAuthenticated" class="navigation__item">
-                    <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
-                </li>
                 <li class="navigation__item">
                     <a class="header-link" routerLink="/" fragment="about-the-study" translate>
                         Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="faq" translate>
-                        Navigation.FAQ
+                    <a class="header-link" routerLink="/" fragment="q&a" translate>
+                        Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
@@ -24,14 +21,12 @@
                         Navigation.MailingList
                     </a>
                 </li>
-                <li class="navigation__item">
-                    <a class="header-link" routerLink="/privacy" routerLinkActive="header-link_active" translate>
-                        Navigation.Privacy
-                    </a>
-                </li>
             </ul>
         </nav>
         <div class="auth">
+            <div class="auth__dashboard" *ngIf="isAuthenticated">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </div>
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
     </div>

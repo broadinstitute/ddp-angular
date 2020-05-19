@@ -10,12 +10,13 @@
     "Navigation": {
         "LogoAlt": "Test Boston logo",
         "About": "About the Study",
-        "FAQ": "FAQ",
+        "Q&A": "Q&A",
         "MailingList": "Mailing List",
-        "Privacy": "Privacy",
-        "Dashboard": "Dashboard"
+        "Privacy": "Privacy Policy",
+        "Dashboard": "My Dashboard"
     },
     "MailingList": {
+        "Title": "Mailing List Form",
         "Questions": {
             "Adult": "1. Are you 18 years old or older?",
             "Patient": "2. Are you a Brigham & Women’s patient?",
@@ -49,10 +50,10 @@
     },
     "HomePage": {
         "IntroSection": {
-            "Title": "Join a project to help understand actual COVID-19 infection rates in your community.",
-            "Text": "Test Boston is supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT and Harvard.",
-            "Code": "I have an invite code",
-            "NoCode": "Don’t have an invitecode?"
+            "Title": "We want to help our city safely get back to normal.",
+            "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT and Harvard.",
+            "Code": "Enter my invitation code",
+            "NoCode": "I was not invited, can I participate?"
         },
         "AboutSection": {
             "Title": "About the Study",
@@ -135,8 +136,8 @@
             ]
         },
         "MailingSection": {
-            "Title": "Don’t have an invitation code?<br>Interested in staying up-to-date?",
-            "Text": "Join our mailing list by answering a few questions:"
+            "Title": "TestBoston enrollment is currently invite-only. ",
+            "Text": "We understand that more people may want to participate, and we are trying to open TestBoston up to a larger group in the future. To receive updates on enrollment, please join our mailing list:"
         }
     },
     "Toolkit": {

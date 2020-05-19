@@ -1,7 +1,7 @@
 <main class="main">
     <section class="section">
         <div class="content intro-block">
-            <h1 class="bold" translate>HomePage.IntroSection.Title</h1>
+            <h1 class="intro-block__title semi-bold center" translate>HomePage.IntroSection.Title</h1>
             <p translate>HomePage.IntroSection.Text</p>
             <div class="invitation">
                 <a class="invitation__primary" routerLink="/join" translate>HomePage.IntroSection.Code</a>
@@ -14,7 +14,7 @@
         <div id="about-the-study" class="anchor"></div>
         <div class="content about-block">
             <h2 class="semi-bold" translate>HomePage.AboutSection.Title</h2>
-            <p translate>HomePage.AboutSection.Text</p>
+            <p class="about-block__text" translate>HomePage.AboutSection.Text</p>
             <h3 translate>HomePage.AboutSection.Questions</h3>
             <ul class="about-list">
                 <li class="about-list__item">
@@ -33,14 +33,14 @@
         </div>
     </section>
     <section class="section">
-        <div id="faq" class="anchor"></div>
+        <div id="q&a" class="anchor"></div>
         <div class="content question-block">
             <h2 class="center semi-bold" translate>HomePage.FaqSection.Title</h2>
             <p>
                 <span translate>HomePage.FaqSection.Text.Part1</span>
-                <a class="Link" [href]="phoneHref">{{phone}}</a>
+                <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>
                 <span translate>HomePage.FaqSection.Text.Part2</span>
-                <a class="Link" [href]="emailHref">{{email}}</a>.
+                <a class="Link Link_semi-bold" [href]="emailHref">{{email}}</a>.
             </p>
             <mat-accordion hideToggle="true" multi="true" displayMode="flat">
                 <ng-container *ngFor="let item of 'HomePage.FaqSection.Items' | translate">

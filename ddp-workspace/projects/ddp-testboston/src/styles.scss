@@ -12,7 +12,7 @@ body {
     height: 100vh;
     font-size: 16px;
     font-weight: 400;
-    color: mat-color($app-theme, 400);
+    color: mat-color($app-theme, 700);
 }
 
 body {
@@ -54,8 +54,8 @@ a {
 }
 
 h1 {
-    font-size: 2rem;
-    line-height: 2.75rem;
+    font-size: 2.625rem;
+    line-height: 3rem;
 }
 
 h2 {
@@ -101,7 +101,7 @@ li {
 }
 
 .Link {
-    color: mat-color($app-theme, 600);
+    color: mat-color($app-theme, 1500);
     text-decoration: none;
     white-space: nowrap;
 
@@ -109,12 +109,16 @@ li {
         font-weight: 700;
     }
 
+    &_semi-bold {
+        font-weight: 600;
+    }
+
     &:hover {
         text-decoration: underline;
     }
 
     &:active {
-        color: mat-color($app-theme, 600);
+        color: mat-color($app-theme, 150);
         text-decoration: underline;
     }
 }
