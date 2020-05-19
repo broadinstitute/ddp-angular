@@ -35,11 +35,6 @@ export class MailingListComponent implements OnInit {
     this.initForm();
   }
 
-  public fieldHasError(field: string, error: string): boolean {
-    return this.isSubmitted && this.mailingListForm && this.mailingListForm.controls[field].errors
-      && this.mailingListForm.controls[field].errors[error];
-  }
-
   public onSubmit(): void {
     this.isSubmitted = true;
     if (this.mailingListForm.invalid) {
@@ -60,6 +55,11 @@ export class MailingListComponent implements OnInit {
       this.isSubmitted = false;
       this.ref.detectChanges();
     }
+  }
+
+  public fieldHasError(field: string, error: string): boolean {
+    return this.isSubmitted && this.mailingListForm && this.mailingListForm.controls[field].errors
+      && this.mailingListForm.controls[field].errors[error];
   }
 
   public get showSurvey(): boolean {
