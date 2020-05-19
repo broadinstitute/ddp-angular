@@ -81,13 +81,4 @@ describe('InvitationCodeFormatterDirective', () => {
     expect(formatterObject.addSeparator('XB28LQ8PZNH', 11, true)).toEqual({ value: 'XB28 - LQ8P - ZNH', selectionStart: 17 });
   });
 
-
-  it('play with default parame', () => {
-    const playFunction = (arg: boolean = false) => {
-      expect(arg).toBe(true);
-    };
-    const valObject = {booleanInQuestion: true};
-    playFunction(valObject.booleanInQuestion);
-  });
-
 });
