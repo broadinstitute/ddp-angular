@@ -1,9 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
-import { InvitationServiceAgent } from '../../../../ddp-sdk/src/lib/services/serviceAgents/invitationServiceAgent.service';
-import { Auth0AdapterService } from 'ddp-sdk';
-import { ErrorType } from '../models/errorType';
+import { Auth0AdapterService, InvitationServiceAgent } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -16,10 +14,10 @@ import { take } from 'rxjs/operators';
         <mat-form-field class="example-input-field" floatLabel="always">
           <mat-label>Enter invitation code</mat-label>
           <input matInput
-                 uppercase
+                 invitationcode
                  formControlName="invitationId"
                  pattern="[a-zA-Z0-9]{12}"
-                 maxLength="12"
+                 maxLength="18"
                  placeholder="Your invitation code">
         </mat-form-field>
         <mat-form-field class="example-input-field" floatLabel="always">
