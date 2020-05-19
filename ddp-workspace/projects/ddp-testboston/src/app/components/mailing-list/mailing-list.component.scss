@@ -7,15 +7,20 @@
     background-color: mat-color($app-theme, 100);
     border-radius: 1.25rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     position: relative;
+
+    &_center {
+        justify-content: center;
+    }
 }
 
 .mailing-list {
     color: mat-color($app-theme, 400);
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
 
     &_result {
         margin: 0 5rem;
@@ -44,7 +49,6 @@
     }
 
     &__input {
-        width: 25rem;
         margin-left: 1rem;
     }
 

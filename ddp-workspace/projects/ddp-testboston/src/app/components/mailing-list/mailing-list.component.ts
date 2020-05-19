@@ -62,6 +62,10 @@ export class MailingListComponent implements OnInit {
     }
   }
 
+  public get showSurvey(): boolean {
+    return !this.thankYou && !this.sorry && !this.error && !this.isLoading;
+  }
+
   private initForm(): void {
     this.mailingListForm = this.formBuilder.group({
       adult: new FormControl(null, Validators.required),

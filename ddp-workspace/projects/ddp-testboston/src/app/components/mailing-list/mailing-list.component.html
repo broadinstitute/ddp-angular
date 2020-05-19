@@ -1,5 +1,5 @@
-<div class="container">
-    <ng-container *ngIf="!thankYou && !sorry && !error && !isLoading">
+<div class="container" [ngClass]="{'container_center': !showSurvey}">
+    <ng-container *ngIf="showSurvey">
         <div class="title">
             <h3 class="title__text center" translate>MailingList.Title</h3>
         </div>
