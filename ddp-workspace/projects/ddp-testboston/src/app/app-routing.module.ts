@@ -24,7 +24,7 @@ import {
 
 const routes: Routes = [
   {
-    path: AppRoutes.Prequalifier,
+    path: AppRoutes.Join,
     component: WorkflowStartActivityRedesignedComponent,
     canActivate: [
       IrbGuard
@@ -117,8 +117,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: false,
-    scrollPositionRestoration: 'top'
+    enableTracing: false
   })],
   exports: [RouterModule]
 })
