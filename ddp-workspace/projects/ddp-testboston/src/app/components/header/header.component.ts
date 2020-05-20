@@ -11,6 +11,7 @@ import { AppRoutes } from './../../app-routes';
 export class HeaderComponent {
   public isPageScrolled = false;
   public appRoutes = AppRoutes;
+  public isMenuOpened = false;
 
   constructor(
     private session: SessionMementoService,
@@ -19,6 +20,14 @@ export class HeaderComponent {
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
+  }
+
+  public openMenu(): void {
+    this.isMenuOpened = true;
+  }
+
+  public closeMenu(): void {
+    this.isMenuOpened = false;
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

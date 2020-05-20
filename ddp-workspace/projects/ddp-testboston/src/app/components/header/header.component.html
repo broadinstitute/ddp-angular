@@ -29,8 +29,51 @@
             </div>
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
+        <div class="mobile-menu">
+            <ng-container *ngIf="!isMenuOpened">
+                <button class="SimpleButton" (click)="openMenu()">Menu</button>
+            </ng-container>
+            <ng-container *ngIf="isMenuOpened">
+                <button class="mobile-menu__close" mat-icon-button (click)="closeMenu()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </ng-container>
+        </div>
     </div>
 </header>
+
+<div class="overlay" [ngClass]="{'overlay_opened': isMenuOpened}">
+    <nav class="overlay-content">
+        <ul class="">
+            <li class="">
+                <a class="" routerLink="/" fragment="about-the-study" translate>
+                    Navigation.About
+                </a>
+            </li>
+            <li class="">
+                <a class="" routerLink="/" fragment="q&a" translate>
+                    Navigation.Q&A
+                </a>
+            </li>
+            <li class="">
+                <a class="" routerLink="/" fragment="mailing-list" translate>
+                    Navigation.MailingList
+                </a>
+            </li>
+            <li class="">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </li>
+            <li class="">
+                <ddp-sign-in-out></ddp-sign-in-out>
+            </li>
+            <li class="">
+                <a class="" routerLink="/privacy-policy" routerLinkActive="header-link_active" translate>
+                    Navigation.Privacy
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 <ng-template #dashboardButton>
     <a class="header-link" routerLink="/dashboard" routerLinkActive="header-link_active">
