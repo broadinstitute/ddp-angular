@@ -4,6 +4,7 @@ import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/c
 import { AppRoutingModule } from './app-routing.module';
 import { Router, Scroll, Event } from '@angular/router';
 import { filter, delay } from 'rxjs/operators';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -36,7 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
@@ -122,28 +123,29 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MatFormFieldModule,
         RecaptchaModule,
         RecaptchaFormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatTooltipModule
     ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: sdkConfig
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: sdkConfig
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 
