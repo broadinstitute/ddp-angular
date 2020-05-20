@@ -35,12 +35,11 @@
         "EmailLabel": "Enter email address",
         "EmailPlaceholder": "example@example.com",
         "ThankYouBlock": {
-            "Title": "Email Confirmation",
-            "Text": "Thank you for signing up for the TestBoston mailing list! You should receive a confirmation email shortly.",
-            "ImageAlt": "Email sent"
+            "Title": "You’re all set!",
+            "Text": "Thank you for signing up for the TestBoston mailing list."
         },
         "SorryBlock": {
-            "Title": "We’re sorry, it looks like you’re ineligible to join",
+            "Title": "We’re sorry, it looks like you’re ineligible to join.",
             "Text": {
                 "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
                 "Part2": "FAQ",
@@ -153,7 +152,7 @@
         },
         "ErrorPage": {
             "Title": "We've encountered an error",
-            "Text": "We're sorry, but an error has occurred",
+            "Text": "We're sorry, but an error has occurred.",
             "DefaultText": {
                 "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
                 "TextPt2": "or call us at"
