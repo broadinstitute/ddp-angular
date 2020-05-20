@@ -41,8 +41,8 @@
     }
 
     .Link {
-        font-size: 1rem;
-        line-height: 1.625rem;
+        font-size: 16px;
+        line-height: 26px;
         color: mat-color($app-theme, 1200);
         font-weight: 600 !important;
     }
@@ -88,5 +88,20 @@
     &:active {
         color: mat-color($app-theme, 1300);
         text-decoration: underline;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .navigation__item {
+        margin-right: 2rem;
+    }
+}
+
+@media screen and (max-width: 850px) {
+
+    .nav,
+    .auth {
+        display: none;
     }
 }
