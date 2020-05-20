@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { Router, Scroll, Event } from '@angular/router';
+
+import { filter, delay } from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -9,30 +12,37 @@ import { AppRoutes } from './app-routes';
 import { AppGuids } from './app-guids';
 
 import {
-  DdpModule,
-  LogLevel,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent
+    DdpModule,
+    LogLevel,
+    ConfigurationService,
+    AnalyticsEventsService,
+    AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
-  ToolkitModule,
-  ToolkitConfigurationService
+    ToolkitModule,
+    ToolkitConfigurationService
 } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
 if (baseElt) {
-  base = baseElt[0].getAttribute('href');
+    base = baseElt[0].getAttribute('href');
 }
 
 declare const DDP_ENV: any;
@@ -49,8 +59,8 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.consentGuid = AppGuids.Consent;
 toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
-toolkitConfig.phone = 'XXX-XXX-XXXX';
-toolkitConfig.infoEmail = 'testboston@datadonationplatform.org';
+toolkitConfig.phone = '1-617-123-4567';
+toolkitConfig.infoEmail = 'info@testboston.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -69,63 +79,102 @@ sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
-  return () => new Promise<any>((resolve: any) => {
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en';
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
-      }, () => {
-        resolve(null);
-      });
+    return () => new Promise<any>((resolve: any) => {
+        const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+        locationInitialized.then(() => {
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                console.log(`Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                console.error(`Problem with '${locale}' language initialization.`);
+            }, () => {
+                resolve(null);
+            });
+        });
     });
-  });
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    WelcomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    DdpModule,
-    ToolkitModule,
-    MatButtonModule
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: sdkConfig
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        HeaderComponent,
+        WelcomeComponent,
+        MailingListComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CommonModule,
+        DdpModule,
+        ToolkitModule,
+        MatButtonModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatRadioModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: sdkConfig
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
+
+    constructor(
+        private analytics: AnalyticsEventsService,
+        private router: Router,
+        private viewportScroller: ViewportScroller) {
+        this.initGoogleAnalyticsListener();
+        this.initScrollRestorationListener();
+    }
+
+    private initGoogleAnalyticsListener(): void {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
+
+    private initScrollRestorationListener(): void {
+        this.router.events.pipe(
+            filter((event: Event): event is Scroll => event instanceof Scroll),
+            delay(0)
+        ).subscribe(e => {
+            if (e.position) {
+                // backward navigation
+                this.viewportScroller.scrollToPosition(e.position);
+            } else if (e.anchor) {
+                // anchor navigation
+                const anchor = document.getElementById(e.anchor);
+                if (anchor) {
+                    anchor.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            } else {
+                // forward navigation
+                this.viewportScroller.scrollToPosition([0, 0]);
+            }
+        });
+    }
 }
