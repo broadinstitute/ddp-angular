@@ -34,13 +34,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -51,7 +49,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -83,7 +81,7 @@ sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
@@ -91,7 +89,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
             translate.setDefaultLang(locale);
             translate.use(locale).subscribe(() => {
                 console.log(`Successfully initialized '${locale}' language as default.`);
-            }, err => {
+            }, () => {
                 console.error(`Problem with '${locale}' language initialization.`);
             }, () => {
                 resolve(null);
