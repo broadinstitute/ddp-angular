@@ -10,8 +10,8 @@ import { AppRoutes } from './../../app-routes';
 })
 export class HeaderComponent {
   public isPageScrolled = false;
-  public appRoutes = AppRoutes;
   public isMenuOpened = false;
+  public appRoutes = AppRoutes;
 
   constructor(
     private session: SessionMementoService,
