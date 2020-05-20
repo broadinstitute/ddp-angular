@@ -3,7 +3,6 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { Router, Scroll, Event } from '@angular/router';
-
 import { filter, delay } from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -29,14 +28,17 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
+import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -47,7 +49,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -61,6 +63,7 @@ toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
 toolkitConfig.phone = '1-617-123-4567';
 toolkitConfig.infoEmail = 'info@testboston.org';
+toolkitConfig.recaptchaSiteKey = '6LdqYvUUAAAAAFl_KZFyNQBT3dMjvVnTb-P9wfAs';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -78,7 +81,7 @@ sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
@@ -86,7 +89,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
             translate.setDefaultLang(locale);
             translate.use(locale).subscribe(() => {
                 console.log(`Successfully initialized '${locale}' language as default.`);
-            }, err => {
+            }, () => {
                 console.error(`Problem with '${locale}' language initialization.`);
             }, () => {
                 resolve(null);
@@ -101,7 +104,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         FooterComponent,
         HeaderComponent,
         WelcomeComponent,
-        MailingListComponent
+        MailingListComponent,
+        UserRegistrationPrequalComponent
     ],
     imports: [
         BrowserModule,
@@ -114,29 +118,32 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MatExpansionModule,
         MatRadioModule,
         MatInputModule,
-        ReactiveFormsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        ReactiveFormsModule
     ],
-    providers: [
-        {
-            provide: 'ddp.config',
-            useValue: sdkConfig
-        },
-        {
-            provide: 'toolkit.toolkitConfig',
-            useValue: toolkitConfig
-        },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: translateFactory,
-            deps: [
-                TranslateService,
-                Injector
-            ],
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: 'ddp.config',
+      useValue: sdkConfig
+    },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: toolkitConfig
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [
+        TranslateService,
+        Injector
+      ],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 
