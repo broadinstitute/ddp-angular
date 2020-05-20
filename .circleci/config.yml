@@ -22,7 +22,7 @@ references:
 executors:
   build-executor:
     docker:
-      - image: broadinstitute/study-website-build:05-06-2020A
+      - image: broadinstitute/study-website-build:05-07-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
@@ -37,6 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - run-tests
       - build-app
       - store-app-build
 
@@ -56,6 +57,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
+            - run-tests
             - build-app
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
@@ -264,6 +266,22 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+  run-tests:
+    description: "Run all tests"
+    steps:
+      - run:
+          name: ng test
+          command: |
+            mkdir -p /tmp/junit
+            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox
+          environment:
+            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_NAME: test-results.xml
+          when: always
+      - store_test_results:
+          path: /tmp/junit
+      - store_artifacts:
+          path: /tmp/junit
 
   build-app:
     description: "Build DDP study app"
