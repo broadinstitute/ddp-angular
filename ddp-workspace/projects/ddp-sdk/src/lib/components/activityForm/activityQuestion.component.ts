@@ -75,7 +75,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         const msgs: string[] = [];
         serverMsg && msgs.push(...serverMsg);
         localMsg && msgs.push(localMsg);
-        return msgs;
+        return msgs.length ? msgs : null;
       }),
       shareReplay()
     );

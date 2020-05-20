@@ -58,17 +58,20 @@ describe('ActivityQuestionComponent', () => {
     expect(answerComponentFixture).toBeTruthy();
     expect(answerComponent).toBeTruthy();
   });
-  it('expect block validation to appear and disappear',  fakeAsync(() => {
+ it('expect block validation to appear and disappear',  fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
     component.block = block;
     component.ngOnInit();
+    // these tick(1) needed because of delay(0) used in message observable definition
+    tick(1);
     fixture.detectChanges();
     // we start with no message
     expect(getValidationMessageFixture()).toBeFalsy();
     block.serverValidationMessages = ['Message!!!'];
     component.block = block;
+    tick(1);
     fixture.detectChanges();
 
     // we have a message from initial load
@@ -77,16 +80,17 @@ describe('ActivityQuestionComponent', () => {
     fixture.detectChanges();
 
     block.serverValidationMessages = [];
-
+    tick(1);
     fixture.detectChanges();
     // triggered internal validation. Since Validation rules exist, message is cleared
     expect(getValidationMessageFixture()).toBeFalsy();
     block.serverValidationMessages = ['Wrong!!!'];
+    tick(1);
     fixture.detectChanges();
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
-  it('expect block validation to appear and disappear some more',  fakeAsync(() => {
+ it('expect block validation to appear and disappear some more',  fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -95,16 +99,18 @@ describe('ActivityQuestionComponent', () => {
     rule.message = 'Too long!';
     block.validators.push(rule);
     component.ngOnInit();
+    tick(1);
     fixture.detectChanges();
     // we start with no message
     expect(getValidationMessageFixture()).toBeFalsy();
     block.answer = 'Too long an answer';
     component.validationRequested = true;
+    tick(1);
     fixture.detectChanges();
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
-  it('expect patch response not to trigger message',  fakeAsync(() => {
+ it('expect patch response not to trigger message',  fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -123,8 +129,8 @@ describe('ActivityQuestionComponent', () => {
               blockVisibility: []})}));
     component.ngOnInit();
     getTestScheduler().flush();
-    tick();
     fixture.detectChanges();
+    tick(1);
     expect(getValidationMessageFixture()).toBeFalsy();
   }));
 

@@ -46,4 +46,7 @@ describe('IrbPasswordService', () => {
 
         });
     });
+    it('bogus test', () => {
+        expect(1).toBe(0);
+    });
 });
