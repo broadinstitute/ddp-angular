@@ -5,6 +5,7 @@ import { AppRoutes } from './app-routes';
 import { AppGuids } from './app-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import {
   AuthGuard,
@@ -24,8 +25,8 @@ import {
 
 const routes: Routes = [
   {
-    path: AppRoutes.Join,
-    component: WorkflowStartActivityRedesignedComponent,
+    path: AppRoutes.UserRegistrationPrequal,
+    component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard
     ]
