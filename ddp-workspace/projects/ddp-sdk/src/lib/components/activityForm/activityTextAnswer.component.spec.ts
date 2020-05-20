@@ -1,10 +1,10 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQue
 import { QuestionPromptComponent } from './questionPrompt.component';
 import { InputType } from '../../models/activity/inputType';
 import { TextSuggestion } from '../../models/activity/textSuggestion';
+import { ActivityEmailInput } from './activityEmailInput.component';
 
 describe('ActivityTextAnswer', () => {
     let component: ActivityTextAnswer;
@@ -21,8 +22,8 @@ describe('ActivityTextAnswer', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ActivityTextAnswer, QuestionPromptComponent],
-            imports: [HttpClientTestingModule, FormsModule, MatAutocompleteModule,
+            declarations: [ActivityTextAnswer, ActivityEmailInput, QuestionPromptComponent],
+            imports: [HttpClientTestingModule, FormsModule, MatAutocompleteModule, ReactiveFormsModule, NoopAnimationsModule,
                 MatFormFieldModule, MatInputModule, BrowserAnimationsModule]
         })
             .compileComponents();
@@ -30,18 +31,22 @@ describe('ActivityTextAnswer', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActivityTextAnswer);
+        expect(fixture instanceof ComponentFixture).toBe(true);
+        expect(fixture.componentInstance instanceof ActivityTextAnswer).toBe(true);
         component = fixture.componentInstance;
         const block = new ActivityTextQuestionBlock();
         block.inputType = InputType.Text;
-        component.block = new ActivityTextQuestionBlock();
+        block.question = 'Who are you?';
         component.readonly = false;
         component.placeholder = 'nothing';
-
+        component.block = block;
     });
 
     it('input and change work without autosuggest', fakeAsync(() => {
         expect(component).toBeTruthy();
         fixture.detectChanges();
+        const questionComponent = fixture.debugElement.query(By.directive(QuestionPromptComponent));
+        expect(questionComponent).not.toBeNull();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement).not.toBeFalsy();
         const valueToEmit = 'Boohoo';

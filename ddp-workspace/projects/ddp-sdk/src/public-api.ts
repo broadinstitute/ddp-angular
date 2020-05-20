@@ -24,6 +24,7 @@ export * from './lib/models/activity/activityTextQuestionBlock';
 export * from './lib/models/activity/activityNumericQuestionBlock';
 export * from './lib/models/activity/activityDateQuestionBlock';
 export * from './lib/models/activity/activityInstitutionBlock';
+export * from './lib/models/activity/MailAddressBlock';
 export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/suggestionMatch';
@@ -75,3 +76,5 @@ export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
 
 export * from './lib/compositeDisposable';
+
+export * from './lib/models/address';

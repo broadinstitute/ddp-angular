@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { UserActivityServiceAgent, AddressEmbeddedComponent, AddressService, CompositeDisposable } from 'ddp-sdk';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActivityServiceAgent } from 'ddp-sdk';
+import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { empty } from 'rxjs';
 import * as _ from 'underscore';
+import { MailAddressBlock } from 'ddp-sdk';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
@@ -13,11 +13,19 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   @ViewChild(AddressEmbeddedComponent, { static: true }) addressComponent: AddressEmbeddedComponent;
   public activityInstanceGuid: string;
   public inputParameters = {};
+  public isReadOnly = true;
+  public bogusAddress = null;
   private anchor: CompositeDisposable;
+  public block: MailAddressBlock;
+
 
   constructor(private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
     this.anchor = new CompositeDisposable();
+    const block = new MailAddressBlock(1);
+    block.titleText = 'The Title!!!';
+    block.subtitleText = 'The subtitle!!!';
+    this.block = block;
   }
 
   public ngOnInit(): void {
@@ -44,6 +52,23 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
       () => console.log('temp address deleted'));
     this.anchor.addNew(del);
+  }
+
+  public toggleReadOnly() {
+    this.isReadOnly = !(this.isReadOnly);
+    console.log("readonly has been toggled to :" + this.isReadOnly);
+  }
+
+  public setBogusAddress(): void {
+    this.bogusAddress = {name : (Math.random() + ''),
+      street1 : (Math.random() + ''),
+      street2 : (Math.random() + ''),
+      city : (Math.random() + ''),
+      state : (Math.random() + ''),
+      zip : (Math.random() + ''),
+      country : 'US',
+      phone: (Math.random() + '')
+    };
   }
 
   public deleteAddress(): void {

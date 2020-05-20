@@ -109,9 +109,7 @@ import { DatePickerComponent } from './components/datePicker.component';
 
 import { ExceptionDispatcher } from './services/exceptionHandling/exceptionDispatcher.service';
 import { AddressInputComponent } from './components/address/addressInput.component';
-import { AddressEntryComponent } from './components/address/addressEntry.component';
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
-import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
 import { VerifyAgeUpComponent } from './components/age-up/verifyAgeUp.component';
 import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
@@ -328,9 +326,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ExportStudyComponent,
     DatePickerComponent,
     AddressInputComponent,
-    AddressEntryComponent,
     AddressEmbeddedComponent,
-    AddressConfirmComponent,
     VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     InputRestrictionDirective,
@@ -389,8 +385,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     AddressInputComponent,
     AddressEmbeddedComponent,
-    AddressEntryComponent,
-    AddressConfirmComponent,
     VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     ValidationMessage,

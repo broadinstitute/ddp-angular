@@ -37,6 +37,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
+                          console.log('there is an error');
                             if (error && error.status) {
                                 if (unrecoverableStatuses.indexOf(error.status) > -1) {
                                     return throwError(error);
@@ -202,12 +203,16 @@ export class ServiceAgent<TEntity> {
     }
 
     protected getHeaders(options: any): Observable<any> {
-        return of(Object.assign({
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-            withCredentials: false,
-            observe: 'response',
-            responseType: 'json'
-        }, options));
+      console.log('about to get the headers');
+      const headers = Object.assign({
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: false,
+        observe: 'response',
+        responseType: 'json'
+      }, options);
+
+      console.log('the headers are:' + JSON.stringify(headers));
+        return of(headers);
     }
 
     protected getBackendUrl(): string {
