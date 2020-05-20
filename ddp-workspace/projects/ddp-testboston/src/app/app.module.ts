@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { Router, Scroll, Event } from '@angular/router';
+import { filter, delay } from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -25,9 +27,16 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -54,8 +63,8 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.consentGuid = AppGuids.Consent;
 toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
-toolkitConfig.phone = 'XXX-XXX-XXXX';
-toolkitConfig.infoEmail = 'testboston@datadonationplatform.org';
+toolkitConfig.phone = '1-617-123-4567';
+toolkitConfig.infoEmail = 'info@testboston.org';
 toolkitConfig.recaptchaSiteKey = '6LdqYvUUAAAAAFl_KZFyNQBT3dMjvVnTb-P9wfAs';
 
 export const sdkConfig = new ConfigurationService();
@@ -97,6 +106,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         FooterComponent,
         HeaderComponent,
         WelcomeComponent,
+        MailingListComponent,
         UserRegistrationPrequalComponent
     ],
     imports: [
@@ -106,38 +116,74 @@ export function translateFactory(translate: TranslateService, injector: Injector
         DdpModule,
         ToolkitModule,
         MatButtonModule,
-        MatFormFieldModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatRadioModule,
         MatInputModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
         RecaptchaModule,
         RecaptchaFormsModule,
         ReactiveFormsModule
     ],
-    providers: [
-        {
-            provide: 'ddp.config',
-            useValue: sdkConfig
-        },
-        {
-            provide: 'toolkit.toolkitConfig',
-            useValue: toolkitConfig
-        },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: translateFactory,
-            deps: [
-                TranslateService,
-                Injector
-            ],
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: 'ddp.config',
+      useValue: sdkConfig
+    },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: toolkitConfig
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [
+        TranslateService,
+        Injector
+      ],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(private analytics: AnalyticsEventsService) {
+
+    constructor(
+        private analytics: AnalyticsEventsService,
+        private router: Router,
+        private viewportScroller: ViewportScroller) {
+        this.initGoogleAnalyticsListener();
+        this.initScrollRestorationListener();
+    }
+
+    private initGoogleAnalyticsListener(): void {
         this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
             ga('send', event);
             ga('platform.send', event);
+        });
+    }
+
+    private initScrollRestorationListener(): void {
+        this.router.events.pipe(
+            filter((event: Event): event is Scroll => event instanceof Scroll),
+            delay(0)
+        ).subscribe(e => {
+            if (e.position) {
+                // backward navigation
+                this.viewportScroller.scrollToPosition(e.position);
+            } else if (e.anchor) {
+                // anchor navigation
+                const anchor = document.getElementById(e.anchor);
+                if (anchor) {
+                    anchor.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            } else {
+                // forward navigation
+                this.viewportScroller.scrollToPosition([0, 0]);
+            }
         });
     }
 }

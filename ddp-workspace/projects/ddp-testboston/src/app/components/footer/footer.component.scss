@@ -1,4 +1,92 @@
+@import '../../../app-theme.scss';
+
 .footer {
-    background-color: #f5f5f5;
-    min-height: 6.25rem;
+    background-color: mat-color($app-theme, 100);
+    min-height: 12rem;
+}
+
+.footer-content {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5625rem;
+    margin-top: 4rem;
+}
+
+.project-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    color: mat-color($app-theme, 400);
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &__img {
+        height: 2.1875rem;
+    }
+}
+
+.contacts {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+
+    &__separator {
+        height: 5px;
+        width: 30px;
+        background-color: mat-color($app-theme, 1200);
+        margin-bottom: 1rem;
+    }
+
+    .Link {
+        font-size: 1rem;
+        line-height: 1.625rem;
+        color: mat-color($app-theme, 1200);
+        font-weight: 600 !important;
+    }
+}
+
+.nav {
+    width: 100%;
+    margin-left: 4.7rem;
+}
+
+.navigation {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding-left: 0;
+
+    &__item {
+        margin-right: 2.8125rem;
+        font-weight: 600;
+        font-size: 1.125rem;
+        line-height: 2.0625rem;
+    }
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+
+    &_active {
+        text-decoration: underline;
+    }
+
+    &:link,
+    &:visited {
+        color: mat-color($app-theme, 1300);
+    }
+
+    &:hover {
+        color: mat-color($app-theme, 1300);
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: mat-color($app-theme, 1300);
+        text-decoration: underline;
+    }
 }

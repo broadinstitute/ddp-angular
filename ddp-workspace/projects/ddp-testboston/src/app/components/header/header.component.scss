@@ -1,25 +1,111 @@
+@import '../../../app-theme.scss';
+
 .header {
-    background-color: #f5f5f5;
+    background-color: mat-color($app-theme, 100);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1;
-    height: 6.25rem;
+    height: 8rem;
+
+    &_shadow {
+        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+        transition: all ease 0.5s;
+    }
 }
 
-.buttons-container {
+.header-content {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    height: 6.25rem;
-    padding: 0 1.5rem;
+    height: 8rem;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5625rem;
 }
 
-button {
-    color: white !important;
+.project-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &__img {
+        height: 2.1875rem;
+    }
 }
 
-button:not(:last-child) {
-    margin-right: 5px;
+.nav {
+    width: 100%;
+    margin-left: 4.7rem;
+}
+
+.navigation {
+    list-style: none;
+    display: flex;
+    padding: 0;
+
+    &__item {
+        margin-right: 2.8125rem;
+        display: flex;
+        color: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link__dashboard,
+.header-link {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 2.0625rem;
+    white-space: nowrap;
+}
+
+.header-link:link,
+.header-link:visited {
+    color: mat-color($app-theme, 1300);
+
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link:hover {
+    color: mat-color($app-theme, 1300);
+    text-decoration: underline;
+
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link:active {
+    color: mat-color($app-theme, 1300);
+    text-decoration: underline;
+
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link__dashboard {
+    margin: 0 0.2rem 0 0;
+}
+
+.header-link_active {
+    text-decoration: underline;
+}
+
+.auth {
+    display: flex;
+    align-items: center;
+
+    &__dashboard {
+        margin-right: 2.8125rem;
+    }
 }

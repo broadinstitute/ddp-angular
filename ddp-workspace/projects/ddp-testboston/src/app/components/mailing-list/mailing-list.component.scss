@@ -1,0 +1,97 @@
+@import '../../../app-theme.scss';
+
+.container {
+    width: 100%;
+    height: 37.5rem;
+    display: flex;
+    background-color: mat-color($app-theme, 100);
+    border-radius: 1.25rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+
+    &_center {
+        justify-content: center;
+    }
+}
+
+.mailing-list {
+    color: mat-color($app-theme, 400);
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+
+    &_result {
+        margin: 0 3rem;
+    }
+
+    &__group {
+        height: 2.5rem;
+        margin-left: 1rem;
+    }
+
+    &__item {
+        margin: 0 1.5rem 0 0;
+    }
+
+    &__error {
+        margin-top: 0.3125rem;
+    }
+
+    &__question {
+        color: mat-color($app-theme, 1000);
+        font-weight: 600;
+
+        &_last {
+            margin-bottom: 0.3rem;
+        }
+    }
+
+    &__input {
+        margin-left: 1rem;
+    }
+
+    &__button {
+        height: 3.75rem;
+        width: 13.4375rem;
+        border-radius: 0.625rem;
+        background-color: mat-color($app-theme, 1100);
+        font-size: 1.375rem;
+        line-height: 2.125rem;
+        color: mat-color($app-theme, 100);
+        outline: none;
+        border: none;
+        align-self: center;
+        font-family: inherit;
+        margin: 1.9rem 0;
+    }
+
+    &__title {
+        font-size: 2rem;
+        line-height: 2.75rem;
+        font-weight: 700;
+        margin-right: 3rem;
+        margin-left: 3rem;
+    }
+
+    &__close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: mat-color($app-theme, 1000);
+    }
+}
+
+.title {
+    width: 100%;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background-color: mat-color($app-theme, 1200);
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2.75rem;
+        color: mat-color($app-theme, 100);
+        font-weight: 400;
+    }
+}

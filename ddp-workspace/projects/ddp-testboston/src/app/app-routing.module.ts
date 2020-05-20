@@ -13,6 +13,7 @@ import {
 } from 'ddp-sdk';
 
 import {
+  WorkflowStartActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
@@ -117,8 +118,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: false,
-    scrollPositionRestoration: 'top'
+    enableTracing: false
   })],
   exports: [RouterModule]
 })
