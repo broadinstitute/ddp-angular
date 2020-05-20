@@ -17,7 +17,7 @@ export class MailingListComponent implements OnInit {
   public emailHref: string;
   public thankYou = false;
   public sorry = false;
-  public error = true;
+  public error = false;
   public isLoading = false;
   private isSubmitted = false;
 
