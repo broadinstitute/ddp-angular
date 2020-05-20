@@ -1,0 +1,266 @@
+{
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            }
+        }
+    },
+    "Navigation": {
+        "LogoAlt": "Test Boston logo",
+        "About": "About the Study",
+        "Q&A": "Q&A",
+        "MailingList": "Mailing List",
+        "Privacy": "Privacy Policy",
+        "Dashboard": "My Dashboard"
+    },
+    "MailingList": {
+        "Title": "Mailing List Form",
+        "Questions": {
+            "Adult": "1. Are you 18 years old or older?",
+            "Patient": "2. Are you a Brigham & Women’s patient?",
+            "Email": "3. What email address is best for you?"
+        },
+        "Answers": {
+            "Yes": "Yes",
+            "No": "No",
+            "NoAnswer": "Prefer not to answer"
+        },
+        "Validations": {
+            "RequiredOption": "Please select an option",
+            "RequiredEmail": "Please enter your email address",
+            "InvalidEmail": "Please enter a valid email address"
+        },
+        "EmailLabel": "Enter email address",
+        "EmailPlaceholder": "example@example.com",
+        "ThankYouBlock": {
+            "Title": "You’re all set!",
+            "Text": "Thank you for signing up for the TestBoston mailing list."
+        },
+        "SorryBlock": {
+            "Title": "We’re sorry, it looks like you’re ineligible to join.",
+            "Text": {
+                "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
+                "Part2": "FAQ",
+                "Part3": "for more information."
+            }
+        }
+    },
+    "HomePage": {
+        "IntroSection": {
+            "Title": "We want to help our city safely get back to normal.",
+            "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Partners Healthcare, and Broad Institute of MIT and Harvard.",
+            "Code": "Enter my invitation code",
+            "NoCode": "I was not invited, can I participate?"
+        },
+        "AboutSection": {
+            "Title": "About the Study",
+            "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. We want to understand this and provide linkages to care for those living in these high-risk communities.",
+            "Questions": "Questions we are trying to answer:",
+            "Question1": "How common it is to have COVID-19 without symptoms?",
+            "Question2": "Do people become immune to COVID-19 after they have it?",
+            "Question3": "How can researchers test many people while they are at home?"
+        },
+        "FaqSection": {
+            "Title": "Have a question?",
+            "Text": {
+                "Part1": "If your question is not answered below, you can call or email our study staff at",
+                "Part2": "or"
+            },
+            "Items": [
+                {
+                    "Question": "Can anybody join this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Will I get a COVID-19 test if I join?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Is it free to participate?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "What will I be asked to do?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Can I invite my family members to join this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "Who is running this study?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                },
+                {
+                    "Question": "How long will the study last?",
+                    "Paragraphs": [
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                    ]
+                }
+            ]
+        },
+        "MailingSection": {
+            "Title": "TestBoston enrollment is currently invite-only. ",
+            "Text": "We understand that more people may want to participate, and we are trying to open TestBoston up to a larger group in the future. To receive updates on enrollment, please join our mailing list:"
+        }
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "My Dashboard"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "View/Edit",
+        "ReviewButton": "View",
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each TestBoston Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "TestBoston Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        }
+    }
+}

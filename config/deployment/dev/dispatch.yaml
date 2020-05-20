@@ -12,8 +12,9 @@ dispatch:
     service: brain
   - url: "osteo.dev.datadonationplatform.org/*"
     service: osteo
+  - url: "testboston.dev.datadonationplatform.org/*"
+    service: testboston
   - url: "pepper-backend.dev.datadonationplatform.org/*"
     service: pepper-backend
   - url: "pepper-dev.datadonationplatform.org/*"
     service: pepper-backend
-

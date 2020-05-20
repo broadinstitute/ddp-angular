@@ -158,12 +158,13 @@ import { QuestionPromptComponent } from './components/activityForm/questionPromp
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
-import { InvitationsServiceAgent } from './services/serviceAgents/invitationsServiceAgent.service';
+import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -267,7 +268,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AnnouncementsServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
-    InvitationsServiceAgent,
+    InvitationServiceAgent,
     Title,
     RenewSessionNotifier,
     LanguageService,
@@ -332,7 +333,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LazyLoadResourcesDirective,
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    InvitationCodeFormatterDirective
   ],
   exports: [
     NetworkSnifferComponent,
@@ -388,7 +390,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ValidationMessage,
     TranslateModule,
     LazyLoadResourcesDirective,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    UpperCaseInputDirective,
+    InvitationCodeFormatterDirective
   ],
   entryComponents: [
     UserPreferencesComponent,

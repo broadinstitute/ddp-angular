@@ -1,0 +1,133 @@
+@import '../../../app-theme.scss';
+
+@mixin block-margin {
+    margin: 6rem auto;
+}
+
+.anchor {
+    display: block;
+    padding-top: 100px;
+    margin-top: -100px;
+}
+
+.intro-block {
+    margin: 6rem auto 8rem auto;
+
+    &__title {
+        color: mat-color($app-theme, 1200);
+    }
+}
+
+.invitation {
+    margin: 5rem 0 0 0;
+    font-size: 1.25rem;
+    line-height: 2.125rem;
+    font-weight: 600;
+
+    &__primary {
+        border-radius: 0.625rem;
+        background-color: mat-color($app-theme, 300);
+        color: mat-color($app-theme, 700);
+        padding: 1rem 2rem;
+
+        &:active,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+    &__secondary {
+        color: mat-color($app-theme, 1300);
+        padding: 1rem 2rem;
+        text-decoration: underline;
+    }
+}
+
+.about-section {
+    background-color: mat-color($app-theme, 1400);
+    color: mat-color($app-theme, 700);
+}
+
+.about-block {
+    @include block-margin;
+
+    &__text {
+        margin: 2.5rem 0;
+    }
+}
+
+.about-list {
+    padding: 0;
+    list-style-type: none;
+
+    &__item {
+        margin: 0.7rem 0;
+
+        .dot {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.question-block {
+    @include block-margin;
+
+    &__icon {
+        margin: 0 1rem 0 0;
+        line-height: 2.25rem;
+    }
+
+    &__question {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        margin: 0;
+    }
+
+    &__text {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        color: mat-color($app-theme, 400);
+    }
+}
+
+.mailing-list-section {
+    background-color: mat-color($app-theme, 1600);
+
+    h2 {
+        font-size: 2rem;
+        line-height: 2.75rem;
+    }
+}
+
+.mailing-list-block {
+    @include block-margin;
+
+    &__text {
+        margin: 1rem 0 2rem 0;
+    }
+}
+
+// accordion
+.mat-expansion-panel {
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    border-top: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel:last-child {
+    border-bottom: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel-header {
+    padding: 1rem !important;
+}
+
+.mat-content {
+    align-items: flex-start;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}
