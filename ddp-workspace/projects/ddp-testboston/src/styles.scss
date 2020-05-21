@@ -135,3 +135,15 @@ mat-error {
     font-family: 'Nunito', sans-serif !important;
     font-size: 1rem !important;
 }
+
+@media only screen and (max-width: 768px) {
+    mat-error {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .content {
+        padding: 0 1rem;
+    }
+}

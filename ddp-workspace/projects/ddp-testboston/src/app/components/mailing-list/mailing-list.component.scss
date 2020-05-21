@@ -95,3 +95,34 @@
         font-weight: 400;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .container {
+        height: 48rem;
+    }
+
+    .mailing-list {
+        &__group {
+            display: flex;
+            flex-direction: column;
+
+            &_two {
+                height: 6rem;
+            }
+
+            &_three {
+                height: 9rem;
+            }
+        }
+
+        &__item {
+            margin: 0 0 1rem 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .container {
+        height: 52rem;
+    }
+}

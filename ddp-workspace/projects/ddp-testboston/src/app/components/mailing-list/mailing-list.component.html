@@ -5,7 +5,7 @@
         </div>
         <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
             <p class="mailing-list__question" translate>MailingList.Questions.Adult</p>
-            <mat-radio-group class="mailing-list__group" formControlName="adult">
+            <mat-radio-group class="mailing-list__group mailing-list__group_two" formControlName="adult">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
                 </mat-radio-button>
@@ -18,7 +18,7 @@
             </mat-radio-group>
 
             <p class="mailing-list__question" translate>MailingList.Questions.Patient</p>
-            <mat-radio-group class="mailing-list__group" formControlName="bwhPatient">
+            <mat-radio-group class="mailing-list__group mailing-list__group_three" formControlName="bwhPatient">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
                 </mat-radio-button>

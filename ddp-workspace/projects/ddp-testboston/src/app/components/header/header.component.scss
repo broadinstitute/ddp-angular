@@ -139,26 +139,6 @@
     }
 }
 
-@media screen and (max-width: 1050px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 2rem;
-    }
-}
-
-@media screen and (max-width: 885px) {
-
-    .nav,
-    .auth {
-        display: none;
-    }
-
-    .mobile-menu {
-        display: unset;
-    }
-}
-
 // Menu 
 .overlay {
     height: 0;
@@ -196,6 +176,38 @@
 
         .header-link {
             font-size: 1.875rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 2rem;
+    }
+}
+
+@media only screen and (max-width: 885px) {
+
+    .nav,
+    .auth {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: unset;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .header-content {
+        padding: 0 1rem;
+    }
+
+    .project-logo {
+        &__img {
+            height: 1.8rem;
         }
     }
 }

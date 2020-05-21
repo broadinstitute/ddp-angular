@@ -19,7 +19,8 @@
 }
 
 .invitation {
-    margin: 5rem 0 0 0;
+    display: inline-flex;
+    margin: 2.5rem 0 0 0;
     font-size: 1.25rem;
     line-height: 2.125rem;
     font-weight: 600;
@@ -130,4 +131,31 @@
 
 ::ng-deep .mat-expansion-panel-body {
     padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}
+
+@media only screen and (max-width: 570px) {
+    .intro-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem auto 4rem auto;
+
+        &__text {
+            text-align: center;
+        }
+    }
+
+    .invitation {
+        flex-direction: column;
+
+        &__primary {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        &__secondary {
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+    }
 }

@@ -91,17 +91,29 @@
     }
 }
 
-@media screen and (max-width: 1050px) {
+@media only screen and (max-width: 1050px) {
 
     .navigation__item {
         margin-right: 2rem;
     }
 }
 
-@media screen and (max-width: 885px) {
+@media only screen and (max-width: 885px) {
 
     .nav,
     .auth {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .footer-content {
+        padding: 0 1rem;
+    }
+
+    .project-logo {
+        &__img {
+            height: 1.8rem;
+        }
     }
 }
