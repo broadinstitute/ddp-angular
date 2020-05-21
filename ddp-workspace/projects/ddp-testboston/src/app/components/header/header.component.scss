@@ -6,7 +6,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     height: 8rem;
 
     &_shadow {
@@ -139,14 +139,15 @@
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
 
+    .auth__dashboard,
     .navigation__item {
         margin-right: 2rem;
     }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 885px) {
 
     .nav,
     .auth {
@@ -165,15 +166,36 @@
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 1;
     background-color: mat-color($app-theme, 100);
     overflow: hidden;
     transition: 0.5s;
 
-    &_opened {
+    &_visible {
         height: 100%;
     }
 }
 
 .overlay-content {
-    margin-top: 8rem;
+    margin-top: 10rem;
+}
+
+.menu {
+    margin: 0;
+    padding: 0 0 0 1.5625rem;
+    list-style: none;
+    display: none;
+
+    &_visible {
+        display: block;
+    }
+
+    &__item {
+        display: flex;
+        margin-bottom: 4rem;
+
+        .header-link {
+            font-size: 1.875rem;
+        }
+    }
 }

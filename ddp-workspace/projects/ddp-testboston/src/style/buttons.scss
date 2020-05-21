@@ -26,3 +26,14 @@
         text-decoration: underline;
     }
 }
+
+.overlay {
+    .SimpleButton {
+        font-size: 1.875rem;
+    }
+
+    .SimpleButton:focus,
+    .SimpleButton:hover {
+        text-decoration: underline;
+    }
+}

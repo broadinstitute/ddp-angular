@@ -13,7 +13,6 @@ import {
 } from 'ddp-sdk';
 
 import {
-  WorkflowStartActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
@@ -25,7 +24,7 @@ import {
 
 const routes: Routes = [
   {
-    path: AppRoutes.UserRegistrationPrequal,
+    path: AppRoutes.Join,
     component: UserRegistrationPrequalComponent,
     canActivate: [
       IrbGuard

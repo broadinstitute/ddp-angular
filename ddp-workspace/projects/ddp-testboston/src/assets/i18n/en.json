@@ -13,7 +13,8 @@
         "Q&A": "Q&A",
         "MailingList": "Mailing List",
         "Privacy": "Privacy Policy",
-        "Dashboard": "My Dashboard"
+        "Dashboard": "My Dashboard",
+        "Menu": "Menu"
     },
     "MailingList": {
         "Title": "Mailing List Form",
