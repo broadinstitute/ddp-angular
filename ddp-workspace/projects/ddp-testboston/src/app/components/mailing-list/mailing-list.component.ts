@@ -80,7 +80,8 @@ export class MailingListComponent implements OnInit {
   private subscribeToNewsletter(): void {
     this.isLoading = true;
     const bwhPatient = JSON.parse(this.mailingListForm.value.bwhPatient);
-    const subject = this.createSubject(this.mailingListForm.value.email, bwhPatient);
+    const email = this.mailingListForm.value.email;
+    const subject = this.createSubject(email, bwhPatient);
     this.mailingService.join(subject).pipe(
       take(1),
       tap(() => this.isLoading = false)

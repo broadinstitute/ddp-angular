@@ -16,12 +16,6 @@
 .project-logo {
     display: flex;
     align-items: center;
-    text-decoration: none !important;
-    color: mat-color($app-theme, 400);
-
-    &:hover {
-        text-decoration: none;
-    }
 
     &__img {
         height: 2.1875rem;

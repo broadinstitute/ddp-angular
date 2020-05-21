@@ -36,13 +36,15 @@ export class HeaderComponent {
   }
 
   public closeMenu(): void {
-    this.isMenuOpened = false;
-    this.window.nativeWindow.requestAnimationFrame(() => {
-      this.renderer.removeClass(this.overlay.nativeElement, 'overlay_visible');
-    });
-    this.window.nativeWindow.requestAnimationFrame(() => {
-      this.renderer.removeClass(this.menu.nativeElement, 'menu_visible');
-    });
+    if (this.isMenuOpened) {
+      this.isMenuOpened = false;
+      this.window.nativeWindow.requestAnimationFrame(() => {
+        this.renderer.removeClass(this.overlay.nativeElement, 'overlay_visible');
+      });
+      this.window.nativeWindow.requestAnimationFrame(() => {
+        this.renderer.removeClass(this.menu.nativeElement, 'menu_visible');
+      });
+    }
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

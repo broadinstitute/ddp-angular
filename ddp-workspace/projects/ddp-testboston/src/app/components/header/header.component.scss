@@ -28,11 +28,6 @@
 .project-logo {
     display: flex;
     align-items: center;
-    text-decoration: none !important;
-
-    &:hover {
-        text-decoration: none;
-    }
 
     &__img {
         height: 2.1875rem;
@@ -139,7 +134,7 @@
     }
 }
 
-// Menu 
+// Header menu
 .overlay {
     height: 0;
     width: 100%;
@@ -208,6 +203,18 @@
     .project-logo {
         &__img {
             height: 1.8rem;
+        }
+    }
+
+    .overlay-content {
+        margin-top: 9rem;
+    }
+
+    .menu {
+        padding: 0 0 0 1rem;
+
+        &__item {
+            margin-bottom: 3rem;
         }
     }
 }

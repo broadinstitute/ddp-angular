@@ -69,7 +69,7 @@
                 <ddp-sign-in-out></ddp-sign-in-out>
             </li>
             <li class="menu__item">
-                <a class="header-link" routerLink="/privacy-policy" routerLinkActive="header-link_active"
+                <a class="header-link" [routerLink]="'/' + appRoutes.Privacy" routerLinkActive="header-link_active"
                     (click)="closeMenu()" translate>
                     Navigation.Privacy
                 </a>
@@ -79,7 +79,8 @@
 </div>
 
 <ng-template #dashboardButton>
-    <a class="header-link" routerLink="/dashboard" routerLinkActive="header-link_active" (click)="closeMenu()">
+    <a class="header-link" [routerLink]="'/' + appRoutes.Dashboard" routerLinkActive="header-link_active"
+        (click)="closeMenu()">
         <div class="header-link__dashboard">
             <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
