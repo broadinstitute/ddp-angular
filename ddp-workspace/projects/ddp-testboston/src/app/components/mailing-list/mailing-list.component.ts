@@ -44,7 +44,7 @@ export class MailingListComponent implements OnInit {
     if (isAdult) {
       this.subscribeToNewsletter();
     } else {
-      this.declineSubscription();
+      this.rejectSubscription();
     }
   }
 
@@ -94,7 +94,7 @@ export class MailingListComponent implements OnInit {
     });
   }
 
-  private declineSubscription(): void {
+  private rejectSubscription(): void {
     this.sorry = true;
   }
 
