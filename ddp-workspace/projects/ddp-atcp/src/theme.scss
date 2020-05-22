@@ -118,3 +118,7 @@ $test-app-theme: mat-light-theme($test-app-primary, $test-app-accent, $test-app-
     width: 100%;
     margin: 0;
 }
+
+ddp-validation-message{
+  color: mat-color($md-warn, 900)
+}
