@@ -71,17 +71,17 @@
 
     // yellow button
     &_basic {
-        color: mat-color($app-theme, 2700);
+        color: mat-color($app-theme, 2600);
         background-color: mat-color($app-theme, 300);
 
         &:hover {
-            background-color: mat-color($app-theme, 2600);
+            background-color: mat-color($app-theme, 200);
         }
     }
 
     // white button
     &_simple {
-        color: mat-color($app-theme, 2700);
+        color: mat-color($app-theme, 2600);
         background-color: mat-color($app-theme, 100);
     }
 
