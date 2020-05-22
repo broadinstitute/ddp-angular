@@ -64,7 +64,7 @@ toolkitConfig.covidSurveyGuid = AppGuids.Covid;
 toolkitConfig.dashboardGuid = AppGuids.Dashboard;
 toolkitConfig.phone = '1-617-123-4567';
 toolkitConfig.infoEmail = 'info@testboston.org';
-toolkitConfig.recaptchaSiteKey = '6LdqYvUUAAAAAFl_KZFyNQBT3dMjvVnTb-P9wfAs';
+toolkitConfig.recaptchaSiteKey = '6LdxFPsUAAAAAFdX1VHmLIbxAD8f151Kg0wk9KwJ';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
