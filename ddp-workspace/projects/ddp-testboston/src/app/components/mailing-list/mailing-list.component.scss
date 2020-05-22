@@ -53,17 +53,8 @@
     }
 
     &__button {
-        height: 3.75rem;
-        width: 13.4375rem;
-        border-radius: 0.625rem;
-        background-color: mat-color($app-theme, 1100);
-        font-size: 1.375rem;
-        line-height: 2.125rem;
-        color: mat-color($app-theme, 100);
-        outline: none;
-        border: none;
-        align-self: center;
-        font-family: inherit;
+        display: flex;
+        justify-content: center;
         margin: 1.9rem 0;
     }
 

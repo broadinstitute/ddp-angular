@@ -20,28 +20,7 @@
 
 .invitation {
     display: inline-flex;
-    margin: 2.5rem 0 0 0;
-    font-size: 1.25rem;
-    line-height: 2.125rem;
-    font-weight: 600;
-
-    &__primary {
-        border-radius: 0.625rem;
-        background-color: mat-color($app-theme, 300);
-        color: mat-color($app-theme, 700);
-        padding: 1rem 2rem;
-
-        &:active,
-        &:focus {
-            text-decoration: none;
-        }
-    }
-
-    &__secondary {
-        color: mat-color($app-theme, 1300);
-        padding: 1rem 2rem;
-        text-decoration: underline;
-    }
+    margin: 1rem 0 0 0;
 }
 
 .about-section {
@@ -133,7 +112,7 @@
     padding: 0 1rem 1rem calc(2rem + 24px) !important;
 }
 
-@media only screen and (max-width: 570px) {
+@media only screen and (max-width: 580px) {
     .intro-block {
         display: flex;
         flex-direction: column;
@@ -148,14 +127,9 @@
     .invitation {
         flex-direction: column;
 
-        &__primary {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        &__secondary {
+        .button:last-child {
             margin-top: 1rem;
-            padding: 1rem;
+            margin-left: 0;
         }
     }
 }

@@ -46,10 +46,12 @@
                 </mat-error>
             </mat-form-field>
 
-            <button class="mailing-list__button" type="submit"
-                [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
-                {{'Common.Buttons.Submit.Title' | translate}}
-            </button>
+            <div class="mailing-list__button">
+                <button class="button button_additional" type="submit"
+                    [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
+                    {{'Common.Buttons.Submit.Title' | translate}}
+                </button>
+            </div>
         </form>
     </ng-container>
 

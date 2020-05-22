@@ -1,5 +1,101 @@
 @import '../app-theme.scss';
 
+.button {
+    min-width: 9.4rem;
+    padding: 0.9rem 2.5rem;
+    font-family: inherit;
+    border-radius: 10px;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 2.125rem;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 600;
+    color: mat-color($app-theme, 100);
+
+    &:active,
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+
+    // blue button
+    &_primary {
+        background-color: mat-color($app-theme, 1700);
+
+        &:disabled {
+            color: mat-color($app-theme, 1900);
+            background-color: mat-color($app-theme, 1800);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2000);
+        }
+    }
+
+    // light blue button
+    &_secondary {
+        color: mat-color($app-theme, 1200);
+        background-color: mat-color($app-theme, 100);
+        border: 1px solid mat-color($app-theme, 1200);
+
+        &:disabled {
+            color: mat-color($app-theme, 2500);
+            border: 1px solid mat-color($app-theme, 2500);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2400);
+        }
+    }
+
+    // gray button
+    &_additional {
+        background-color: mat-color($app-theme, 1100);
+
+        &:disabled {
+            color: mat-color($app-theme, 2300);
+            background-color: mat-color($app-theme, 2200);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2100);
+        }
+    }
+
+    // yellow button
+    &_basic {
+        color: mat-color($app-theme, 2700);
+        background-color: mat-color($app-theme, 300);
+
+        &:hover {
+            background-color: mat-color($app-theme, 2600);
+        }
+    }
+
+    // white button
+    &_simple {
+        color: mat-color($app-theme, 2700);
+        background-color: mat-color($app-theme, 100);
+    }
+
+    // underlined button
+    &_underline {
+        text-decoration: underline;
+
+        &:focus,
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 .SimpleButton {
     border: none;
     cursor: pointer;
