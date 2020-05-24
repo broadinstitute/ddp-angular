@@ -8,7 +8,8 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     selector: 'ddp-activity-radiobuttons-picklist-question',
     template: `
     <div>
-        <mat-radio-group class="ddp-radio-group-column">
+        <label id="radio-group-label" *ngIf="block.label" [innerHTML]="block.label"></label>
+        <mat-radio-group class="ddp-radio-group-column" aria-labelledby="radio-group-label">
             <div *ngFor="let option of block.picklistOptions" class="margin-5">
                 <mat-radio-button
                             [checked]="getOptionSelection(option.stableId)"
