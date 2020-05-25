@@ -1,5 +1,6 @@
 export const AppGuids = {
     Consent: 'CONSENT',
     Dashboard: 'DASHBOARD',
-    Covid: 'COVID_SURVEY'
+    Covid: 'COVID_SURVEY',
+    Address: 'ADDRESS'
 };

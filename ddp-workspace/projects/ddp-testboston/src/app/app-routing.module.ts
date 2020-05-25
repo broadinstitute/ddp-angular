@@ -13,7 +13,6 @@ import {
 } from 'ddp-sdk';
 
 import {
-  WorkflowStartActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
@@ -51,6 +50,17 @@ const routes: Routes = [
     ],
     data: {
       activityGuid: AppGuids.Covid
+    }
+  },
+  {
+    path: AppRoutes.Address,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: AppGuids.Address
     }
   },
   {

@@ -11,5 +11,6 @@ export const AppRoutes = {
     Password: 'password',
     UserRegistrationPrequal: 'join',
     SessionExpired: 'session-expired',
-    Privacy: 'privacy-policy'
+    Privacy: 'privacy-policy',
+    Address: 'address'
 };
