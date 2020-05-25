@@ -1,7 +1,8 @@
 import { Component, HostListener, Inject, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SessionMementoService, WindowRef } from 'ddp-sdk';
-import { AppRoutes } from './../../app-routes';
+import { AppRoutes } from '../../app-routes';
+import { ScrollerService } from '../../services/scroller.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent {
     private renderer: Renderer2,
     private session: SessionMementoService,
     private window: WindowRef,
+    private scrollerService: ScrollerService,
     @Inject(DOCUMENT) private document: Document) { }
 
   public get isAuthenticated(): boolean {
@@ -45,6 +47,10 @@ export class HeaderComponent {
         this.renderer.removeClass(this.menu.nativeElement, 'menu_visible');
       });
     }
+  }
+
+  public scrollToAnchor(anchor: string): void {
+    this.scrollerService.scrollToAnchor(anchor);
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

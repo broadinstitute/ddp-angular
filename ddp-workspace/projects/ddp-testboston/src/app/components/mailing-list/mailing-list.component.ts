@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MailingListServiceAgent, Person } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { take, tap } from 'rxjs/operators';
+import { ScrollerService } from '../../services/scroller.service';
 
 @Component({
   selector: 'app-mailing-list',
@@ -25,6 +26,7 @@ export class MailingListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
     private mailingService: MailingListServiceAgent,
+    private scrollerService: ScrollerService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -64,6 +66,10 @@ export class MailingListComponent implements OnInit {
 
   public get showSurvey(): boolean {
     return !this.thankYou && !this.sorry && !this.error && !this.isLoading;
+  }
+
+  public scrollToAnchor(anchor: string): void {
+    this.scrollerService.scrollToAnchor(anchor);
   }
 
   private initForm(): void {

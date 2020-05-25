@@ -7,17 +7,19 @@
         <nav class="nav">
             <ul class="navigation">
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="about-the-study" translate>
+                    <a class="header-link" routerLink="/" fragment="about-the-study"
+                        (click)="scrollToAnchor('about-the-study')" translate>
                         Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="q&a" translate>
+                    <a class="header-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="mailing-list" translate>
+                    <a class="header-link" routerLink="/" fragment="mailing-list"
+                        (click)="scrollToAnchor('mailing-list')" translate>
                         Navigation.MailingList
                     </a>
                 </li>
@@ -48,17 +50,20 @@
     <nav class="overlay-content">
         <ul #menu class="menu">
             <li class="menu__item">
-                <a class="header-link" routerLink="/" fragment="about-the-study" (click)="closeMenu()" translate>
+                <a class="header-link" routerLink="/" fragment="about-the-study"
+                    (click)="closeMenu(); scrollToAnchor('about-the-study')" translate>
                     Navigation.About
                 </a>
             </li>
             <li class="menu__item">
-                <a class="header-link" routerLink="/" fragment="q&a" (click)="closeMenu()" translate>
+                <a class="header-link" routerLink="/" fragment="q&a" (click)="closeMenu(); scrollToAnchor('q&a')"
+                    translate>
                     Navigation.Q&A
                 </a>
             </li>
             <li class="menu__item">
-                <a class="header-link" routerLink="/" fragment="mailing-list" (click)="closeMenu()" translate>
+                <a class="header-link" routerLink="/" fragment="mailing-list"
+                    (click)="closeMenu(); scrollToAnchor('mailing-list')" translate>
                     Navigation.MailingList
                 </a>
             </li>

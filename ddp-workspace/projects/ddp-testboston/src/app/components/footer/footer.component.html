@@ -14,17 +14,19 @@
         <nav class="nav">
             <ul class="navigation">
                 <li class="navigation__item">
-                    <a class="footer-link" routerLink="/" fragment="about-the-study" translate>
+                    <a class="footer-link" routerLink="/" fragment="about-the-study"
+                        (click)="scrollToAnchor('about-the-study')" translate>
                         Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="footer-link" routerLink="/" fragment="q&a" translate>
+                    <a class="footer-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="footer-link" routerLink="/" fragment="mailing-list" translate>
+                    <a class="footer-link" routerLink="/" fragment="mailing-list"
+                        (click)="scrollToAnchor('mailing-list')" translate>
                         Navigation.MailingList
                     </a>
                 </li>
