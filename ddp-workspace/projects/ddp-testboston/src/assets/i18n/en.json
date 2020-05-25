@@ -172,6 +172,8 @@
         "SavingButton": "Saving",
         "EditButton": "View/Edit",
         "ReviewButton": "View",
+        "AgreeButton": "I agree",
+        "NotAgreeButton": "I am not ready to agree",
         "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
         "SaveError": "We're sorry but an error occurred",
