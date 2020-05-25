@@ -11,6 +11,7 @@ import {
   concatMap,
   distinctUntilChanged,
   filter,
+  finalize,
   map,
   mergeMap,
   pluck,
@@ -222,8 +223,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       ),
       tap(([state, defaultAddress]) =>
         defaultAddress && this.stateUpdates$.next({ inputAddress: defaultAddress as Address })),
-      // todo: just for manual testing. delete when done
-      //     tap(([state, defaultAddress]) => this.inputComponentAddress$.next(defaultAddress as Address)),
+      // filter for case where we need to go on to look for a temp address?
       filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
       map(([state, _]) => state as ComponentState),
       mergeMap((state) => this.addressService.getTempAddress(state.activityInstanceGuid)),
@@ -231,7 +231,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       // fake that the address was just entered. Perhaps this can become a separate subject?
       // guess we are saving temp address again. No harm but not nice either.
       tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
-      tap(() => busyCounter$.next(-1)),
+      finalize(() => busyCounter$.next(-1))
     );
 
     this.inputComponentAddress$.subscribe(address => console.debug('The new inputcomponentaddress: ' + JSON.stringify(address)));
