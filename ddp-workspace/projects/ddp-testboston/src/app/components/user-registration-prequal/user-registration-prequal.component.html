@@ -5,34 +5,21 @@
                 <h1 class="invitation-form__title semi-bold">First, confirm your eligibility</h1>
                 <div class="invitation-form__container">
                     <p class="invitation-form__question bold">Enter invitation code</p>
-                    <img class="invitation-form__info"
-                        src="assets/images/info.png"
-                        #tooltip="matTooltip"
-                        (click)="tooltip.toggle()"
-                        alt="Info icon"
+                    <img class="invitation-form__info" src="assets/images/info.png" #tooltip="matTooltip"
+                        (click)="tooltip.toggle()" alt="Info icon"
                         matTooltip="If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top."
                         matTooltipPosition="right">
                 </div>
                 <mat-form-field class="invitation-form__input">
-                    <input matInput
-                           invitationcode
-                           formControlName="invitationId"
-                           pattern="[a-zA-Z0-9]{12}"
-                           maxLength="18"
-                           placeholder="Enter invitation code">
+                    <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
+                        maxLength="18" placeholder="Enter invitation code">
                 </mat-form-field>
                 <p class="invitation-form__question bold">What is your current mailing zip code?</p>
                 <mat-form-field class="invitation-form__input" Label="always">
-                    <input matInput
-                           formControlName="zip"
-                           minlength="5"
-                           maxlength="5"
-                           placeholder="Enter mailing zip code"
-                           pattern="[0-9]{5}">
+                    <input matInput formControlName="zip" minlength="5" maxlength="5"
+                        placeholder="Enter mailing zip code" pattern="[0-9]{5}">
                 </mat-form-field>
-                <re-captcha [siteKey]="config.recaptchaSiteKey" 
-                            size="normal"
-                            formControlName="recaptchaToken">
+                <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken">
                 </re-captcha>
                 <div class="invitation-form__button">
                     <button class="button button_primary" type="submit" [disabled]="formGroup.invalid"
