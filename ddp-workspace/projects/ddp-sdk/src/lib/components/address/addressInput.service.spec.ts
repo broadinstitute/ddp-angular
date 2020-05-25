@@ -150,4 +150,26 @@ describe('AddressInputService', () => {
     expect(lastAddressFromStream).toEqual(testAddress);
   }));
 
+  it('Ensure that when we read an address all fields are touched', fakeAsync(() => {
+    const allChildFormControls = Object.values(ais.addressForm.controls);
+    expect(allChildFormControls.length).toBeGreaterThan(4);
+    // Before setting any data all controls are untouched.
+    expect(Object.values(ais.addressForm.controls).filter(control => control.touched).length).toBe(0);
+    const addressData = {
+      name : '',
+      street1 : '1 Mockingbird Lane',
+      street2 : '2nd Floor',
+      country : 'US',
+      state : 'AK',
+      zip: '90120',
+      phone: '867-5309',
+      city: 'Fairbanks',
+      guid: '123'
+    };
+    tick(2);
+    ais.inputAddress$.next(new Address(addressData));
+    // check that when set an address, we ensure the controls are touched
+    expect(Object.values(ais.addressForm.controls).filter(control => !control.touched).length).toBe(0);
+  }));
+
 });
