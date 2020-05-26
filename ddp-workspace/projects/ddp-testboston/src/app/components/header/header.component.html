@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{'header_shadow': isPageScrolled}">
+<header class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
@@ -7,17 +7,19 @@
         <nav class="nav">
             <ul class="navigation">
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="about-the-study" translate>
+                    <a class="header-link" routerLink="/" fragment="about-the-study"
+                        (click)="scrollToAnchor('about-the-study')" translate>
                         Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="q&a" translate>
+                    <a class="header-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="mailing-list" translate>
+                    <a class="header-link" routerLink="/" fragment="mailing-list"
+                        (click)="scrollToAnchor('mailing-list')" translate>
                         Navigation.MailingList
                     </a>
                 </li>
@@ -29,11 +31,61 @@
             </div>
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
+        <div class="mobile-menu">
+            <ng-container *ngIf="!isMenuOpened">
+                <button class="SimpleButton" (click)="openMenu()">
+                    {{'Navigation.Menu' | translate}}
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isMenuOpened">
+                <button class="mobile-menu__close" mat-icon-button (click)="closeMenu()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </ng-container>
+        </div>
     </div>
 </header>
 
+<div #overlay class="overlay">
+    <nav class="overlay-content">
+        <ul #menu class="menu">
+            <li class="menu__item">
+                <a class="header-link" routerLink="/" fragment="about-the-study"
+                    (click)="closeMenu(); scrollToAnchor('about-the-study')" translate>
+                    Navigation.About
+                </a>
+            </li>
+            <li class="menu__item">
+                <a class="header-link" routerLink="/" fragment="q&a" (click)="closeMenu(); scrollToAnchor('q&a')"
+                    translate>
+                    Navigation.Q&A
+                </a>
+            </li>
+            <li class="menu__item">
+                <a class="header-link" routerLink="/" fragment="mailing-list"
+                    (click)="closeMenu(); scrollToAnchor('mailing-list')" translate>
+                    Navigation.MailingList
+                </a>
+            </li>
+            <li class="menu__item" *ngIf="isAuthenticated">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </li>
+            <li class="menu__item">
+                <ddp-sign-in-out></ddp-sign-in-out>
+            </li>
+            <li class="menu__item">
+                <a class="header-link" [routerLink]="'/' + appRoutes.Privacy" routerLinkActive="header-link_active"
+                    (click)="closeMenu()" translate>
+                    Navigation.Privacy
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
 <ng-template #dashboardButton>
-    <a class="header-link" routerLink="/dashboard" routerLinkActive="header-link_active">
+    <a class="header-link" [routerLink]="'/' + appRoutes.Dashboard" routerLinkActive="header-link_active"
+        (click)="closeMenu()">
         <div class="header-link__dashboard">
             <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
