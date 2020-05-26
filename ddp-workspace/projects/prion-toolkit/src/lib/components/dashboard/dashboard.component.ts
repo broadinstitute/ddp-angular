@@ -95,7 +95,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                                 <mat-cell *matCellDef="let element"
                                           class="padding-5"
                                           [attr.data-ddp-test]="'activityStatus::' + 
-                                          translator.instant(element.status)">
+                                          translator.get(element.status)">
                                   <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
                                   <div class="dashboard-status-container" translate>
                                     {{element.status}}
