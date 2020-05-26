@@ -4,7 +4,7 @@
             <form class="invitation-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
                 <h1 class="invitation-form__title semi-bold">First, confirm your eligibility</h1>
                 <div class="invitation-form__container">
-                    <p class="invitation-form__question bold">Enter invitation code</p>
+                    <p class="invitation-form__question bold">Enter your invitation code</p>
                     <img class="invitation-form__info" src="assets/images/info.png" alt="Info icon"
                         matTooltip="If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top."
                         matTooltipPosition="right">
@@ -12,18 +12,48 @@
                 <mat-form-field class="invitation-form__input">
                     <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
                         maxLength="18" placeholder="Enter invitation code">
+                    <mat-error *ngIf="hasFormError('invitationId', 'required')">
+                        Please input your invitation code
+                    </mat-error>
                 </mat-form-field>
+                <ng-container *ngIf="hasCustomError(errorType.InvalidInvitation)">
+                    <div class="error error_input" [innerHTML]="error.message"></div>
+                </ng-container>
                 <p class="invitation-form__question bold">What is your current mailing zip code?</p>
                 <mat-form-field class="invitation-form__input" Label="always">
                     <input matInput formControlName="zip" minlength="5" maxlength="5"
                         placeholder="Enter mailing zip code" pattern="[0-9]{5}">
+                    <mat-error *ngIf="hasFormError('zip', 'required')">
+                        Please input your mailing zip code
+                    </mat-error>
                 </mat-form-field>
-                <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken">
-                </re-captcha>
-                <button class="invitation-form__submit" type="submit" [disabled]="formGroup.invalid">Submit</button>
-                <div *ngIf="errorMessage" class="ErrorMessage">
-                    <span>{{ errorMessage }}</span>
+                <ng-container *ngIf="hasCustomError(errorType.InvalidQualifications)">
+                    <div class="error error_input" [innerHTML]="error.message"></div>
+                </ng-container>
+                <p class="invitation-form__question bold" translate>Are you 18 years old or older?</p>
+                <mat-radio-group class="age" formControlName="adult">
+                    <mat-radio-button value="true" class="age__item">
+                        Yes
+                    </mat-radio-button>
+                    <mat-radio-button value="false">
+                        No
+                    </mat-radio-button>
+                    <mat-error class="age__error" *ngIf="hasCustomError(errorType.MinorSubject)">
+                        <span translate>We’re sorry, it looks like you’re ineligible to join. You must be 18 years or
+                            older to join the TestBoston Project. Please read our</span>
+                        <a class="Link Link_bold" routerLink="/" fragment="q&a" translate>FAQ</a>
+                        <span translate>for more information.</span>
+                    </mat-error>
+                </mat-radio-group>
+                <div class="invitation-form__captcha">
+                    <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken"
+                        #captcha>
+                    </re-captcha>
                 </div>
+                <button class="invitation-form__submit" type="submit" [disabled]="formGroup.invalid">Submit</button>
+                <ng-container *ngIf="hasCustomError(errorType.UnknownError)">
+                    <div class="error" [innerHTML]="error.message"></div>
+                </ng-container>
             </form>
         </div>
     </section>
