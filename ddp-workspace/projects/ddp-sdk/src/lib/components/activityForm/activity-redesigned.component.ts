@@ -5,7 +5,8 @@ import {
     Injector,
     OnDestroy,
     OnInit,
-    Renderer2
+    Renderer2,
+    Input
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
@@ -119,18 +120,33 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="!isStepped || isLastStep">
-                            <button *ngIf="!model.readonly && isLoaded"  #submitButton
+                        <ng-container *ngIf="(!isStepped || isLastStep) && !isAgree() && isLoaded">
+                            <button *ngIf="!model.readonly"  #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_primary button_right"
                                     (click)="flush()"
                                     (mouseenter)="mouseEnterOnSubmit()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.readonly && isLoaded"
+                            <button *ngIf="model.readonly"
                                     class="button button_medium button_primary button_right"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && !model.readonly && isLoaded">
+                            <button class="button button_medium button_primary"
+                                    (click)="close()">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    {{'SDK.NotAgreeButton' | translate}}
+                            </button>
+                            <button #submitButton
+                                    [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                    class="button button_medium button_primary"
+                                    (click)="flush()"
+                                    (mouseenter)="mouseEnterOnSubmit()">
+                                    <mat-icon>check_circle_outline</mat-icon>
+                                    {{(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.AgreeButton' | translate)}}
                             </button>
                         </ng-container>
                     </div>
@@ -147,6 +163,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+    @Input() agreeConsent = false;
+    
     constructor(
         windowRef: WindowRef,
         renderer: Renderer2,
@@ -155,5 +173,9 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         @Inject(DOCUMENT) document: any,
         injector: Injector) {
         super(windowRef, renderer, submitService, analytics, document, injector);
+    }
+
+    public isAgree(): boolean {
+        return this.model.activityCode === 'CONSENT' && this.agreeConsent;
     }
 }
