@@ -44,11 +44,6 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
       form.zip);
   }
 
-  public hasFormError(field: string, error: string): boolean {
-    return this.formGroup && this.formGroup.touched && this.formGroup.controls[field].errors
-      && this.formGroup.controls[field].errors[error];
-  }
-
   public hasCustomError(errorType: ErrorType): boolean {
     return this.error && this.error.errorType === errorType;
   }

@@ -12,9 +12,6 @@
                 <mat-form-field class="invitation-form__input">
                     <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
                         maxLength="18" placeholder="Enter invitation code">
-                    <mat-error *ngIf="hasFormError('invitationId', 'required')">
-                        Please input your invitation code
-                    </mat-error>
                 </mat-form-field>
                 <ng-container *ngIf="hasCustomError(errorType.InvalidInvitation)">
                     <div class="error error_input" [innerHTML]="error.message"></div>
@@ -23,9 +20,6 @@
                 <mat-form-field class="invitation-form__input" Label="always">
                     <input matInput formControlName="zip" minlength="5" maxlength="5"
                         placeholder="Enter mailing zip code" pattern="[0-9]{5}">
-                    <mat-error *ngIf="hasFormError('zip', 'required')">
-                        Please input your mailing zip code
-                    </mat-error>
                 </mat-form-field>
                 <ng-container *ngIf="hasCustomError(errorType.InvalidQualifications)">
                     <div class="error error_input" [innerHTML]="error.message"></div>
