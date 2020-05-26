@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { UserActivitiesDataSource } from '../../../../../ddp-sdk/src/lib/components/user/activities/userActivitiesDataSource';
 import { BehaviorSubject } from 'rxjs';
 import {
@@ -8,7 +8,7 @@ import {
   LoggingService,
   UserActivityServiceAgent,
   UserProfileDecorator,
-  UserProfileServiceAgent
+  UserProfileServiceAgent, WindowRef
 } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 
@@ -26,7 +26,7 @@ import { filter, first } from 'rxjs/operators';
           <app-workflow-progress [steps]="steps"
                                  [instanceGuid]="instanceGuid"
                                  (onChangeActivity)="updateInstanceGuid($event)"></app-workflow-progress>
-          <ddp-activity-redesigned [studyGuid]="studyGuid" [activityGuid]="instanceGuid"
+          <ddp-activity-redesigned *ngIf="showActivity" [studyGuid]="studyGuid" [activityGuid]="instanceGuid"
                                    (submit)="setActivity($event)"></ddp-activity-redesigned>
         </div>
       </div>
@@ -40,7 +40,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public dataSource: UserActivitiesDataSource;
   public firstName: string;
   private studyGuidObservable: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-
+  public showActivity = true;
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
   private anchor;
@@ -48,7 +48,9 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
               private userActivity: UserActivityServiceAgent,
               private logger: LoggingService,
-              private userAgent: UserProfileServiceAgent) {
+              private userAgent: UserProfileServiceAgent,
+              private windowRef: WindowRef,
+              private cdr: ChangeDetectorRef) {
   }
 
   public setActivity(data: ActivityResponse | null): void {
@@ -60,6 +62,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
 
   public updateInstanceGuid(instanceGuid): void {
     this.instanceGuid = instanceGuid;
+    this.resetActivityComponent();
   }
 
   private getSteps(): void {
@@ -94,6 +97,15 @@ export class DashBoardComponent implements OnInit, OnDestroy {
       .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
       .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName);
     this.getSteps();
+  }
+
+  // force the activity component to reset it by removing and adding it again
+  private resetActivityComponent(): void {
+    this.showActivity = false;
+    this.cdr.detectChanges();
+    this.showActivity = true;
+    // need to scroll to top after done! This is more visible in mobile
+    this.windowRef.nativeWindow.scrollTo(0, 0);
   }
 
   public ngOnDestroy(): void {
