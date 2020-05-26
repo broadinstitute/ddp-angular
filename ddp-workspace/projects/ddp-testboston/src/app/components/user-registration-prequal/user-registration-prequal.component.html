@@ -14,7 +14,7 @@
                     <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
                         maxLength="18" placeholder="Enter invitation code">
                 </mat-form-field>
-                <ng-container *ngIf="hasCustomError(errorType.InvalidInvitation)">
+                <ng-container *ngIf="hasError(errorType.InvalidInvitation)">
                     <div class="error error_input" [innerHTML]="error.message"></div>
                 </ng-container>
                 <p class="invitation-form__question bold">What is your current mailing zip code?</p>
@@ -22,7 +22,7 @@
                     <input matInput formControlName="zip" minlength="5" maxlength="5"
                         placeholder="Enter mailing zip code" pattern="[0-9]{5}">
                 </mat-form-field>
-                <ng-container *ngIf="hasCustomError(errorType.InvalidQualifications)">
+                <ng-container *ngIf="hasError(errorType.InvalidQualifications)">
                     <div class="error error_input" [innerHTML]="error.message"></div>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>Are you 18 years old or older?</p>
@@ -33,7 +33,7 @@
                     <mat-radio-button value="false">
                         No
                     </mat-radio-button>
-                    <mat-error class="age__error" *ngIf="hasCustomError(errorType.MinorSubject)">
+                    <mat-error class="age__error" *ngIf="hasError(errorType.MinorSubject)">
                         <span translate>We’re sorry, it looks like you’re ineligible to join. You must be 18 years or
                             older to join the TestBoston Project. Please read our</span>
                         <a class="Link Link_bold" routerLink="/" fragment="q&a" translate>FAQ</a>
@@ -51,7 +51,7 @@
                         {{'Common.Buttons.Submit.Title' | translate}}
                     </button>
                 </div>
-                <ng-container *ngIf="hasCustomError(errorType.UnknownError)">
+                <ng-container *ngIf="hasError(errorType.UnknownError)">
                     <div class="error" [innerHTML]="error.message"></div>
                 </ng-container>
             </form>
