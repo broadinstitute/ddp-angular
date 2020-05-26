@@ -62,6 +62,7 @@ export class ToolkitConfigurationService {
     showInfoForPhysicians: boolean;
     showBlog: boolean;
     blogUrl: string;
+    agreeConsent: boolean;
 
     // security
     recaptchaSiteKey: string;

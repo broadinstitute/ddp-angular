@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MailingListServiceAgent, Person } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { take, tap } from 'rxjs/operators';
+import { ScrollerService } from '../../services/scroller.service';
 
 @Component({
   selector: 'app-mailing-list',
@@ -25,6 +26,7 @@ export class MailingListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
     private mailingService: MailingListServiceAgent,
+    private scrollerService: ScrollerService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
@@ -44,7 +46,7 @@ export class MailingListComponent implements OnInit {
     if (isAdult) {
       this.subscribeToNewsletter();
     } else {
-      this.declineSubscription();
+      this.rejectSubscription();
     }
   }
 
@@ -66,6 +68,10 @@ export class MailingListComponent implements OnInit {
     return !this.thankYou && !this.sorry && !this.error && !this.isLoading;
   }
 
+  public scrollToAnchor(anchor: string): void {
+    this.scrollerService.scrollToAnchor(anchor);
+  }
+
   private initForm(): void {
     this.mailingListForm = this.formBuilder.group({
       adult: new FormControl(null, Validators.required),
@@ -80,7 +86,8 @@ export class MailingListComponent implements OnInit {
   private subscribeToNewsletter(): void {
     this.isLoading = true;
     const bwhPatient = JSON.parse(this.mailingListForm.value.bwhPatient);
-    const subject = this.createSubject(this.mailingListForm.value.email, bwhPatient);
+    const email = this.mailingListForm.value.email;
+    const subject = this.createSubject(email, bwhPatient);
     this.mailingService.join(subject).pipe(
       take(1),
       tap(() => this.isLoading = false)
@@ -93,7 +100,7 @@ export class MailingListComponent implements OnInit {
     });
   }
 
-  private declineSubscription(): void {
+  private rejectSubscription(): void {
     this.sorry = true;
   }
 

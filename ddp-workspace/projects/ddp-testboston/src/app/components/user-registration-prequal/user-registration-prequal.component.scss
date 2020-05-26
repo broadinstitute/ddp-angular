@@ -35,26 +35,9 @@
         align-items: center;
     }
 
-    &__captcha {
-        margin: 2rem 0 0 0;
-    }
-
+    &__captcha,
     &__submit {
         margin: 2rem 0 0 0;
-        color: #FFFFFF;
-        font-size: 1.375rem;
-        font-weight: 600;
-        line-height: 2.125rem;
-        height: 3.75rem;
-        width: 13.125rem;
-        border-radius: 10px;
-        background-color: #2951C6;
-        border: none;
-        font-family: inherit;
-
-        &:disabled {
-            background-color: #8098de;
-        }
     }
 }
 

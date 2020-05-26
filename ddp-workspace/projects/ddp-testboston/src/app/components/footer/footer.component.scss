@@ -16,12 +16,6 @@
 .project-logo {
     display: flex;
     align-items: center;
-    text-decoration: none !important;
-    color: mat-color($app-theme, 400);
-
-    &:hover {
-        text-decoration: none;
-    }
 
     &__img {
         height: 2.1875rem;
@@ -41,8 +35,8 @@
     }
 
     .Link {
-        font-size: 1rem;
-        line-height: 1.625rem;
+        font-size: 16px;
+        line-height: 26px;
         color: mat-color($app-theme, 1200);
         font-weight: 600 !important;
     }
@@ -88,5 +82,32 @@
     &:active {
         color: mat-color($app-theme, 1300);
         text-decoration: underline;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+
+    .navigation__item {
+        margin-right: 2rem;
+    }
+}
+
+@media only screen and (max-width: 885px) {
+
+    .nav,
+    .auth {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .footer-content {
+        padding: 0 1rem;
+    }
+
+    .project-logo {
+        &__img {
+            height: 1.8rem;
+        }
     }
 }
