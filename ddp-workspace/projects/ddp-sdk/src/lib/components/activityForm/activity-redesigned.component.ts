@@ -5,7 +5,8 @@ import {
     Injector,
     OnDestroy,
     OnInit,
-    Renderer2
+    Renderer2,
+    Input
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
@@ -162,6 +163,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+    @Input() agreeConsent = false;
+    
     constructor(
         windowRef: WindowRef,
         renderer: Renderer2,
@@ -173,6 +176,6 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public isAgree(): boolean {
-        return this.model.activityCode === 'CONSENT';
+        return this.model.activityCode === 'CONSENT' && this.agreeConsent;
     }
 }

@@ -10,6 +10,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
     template: `
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="id"
+                                 [agreeConsent]="config.agreeConsent"
                                  (submit)="navigate($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">
@@ -20,8 +21,8 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         private headerConfig: HeaderConfigurationService,
         private _activatedRoute: ActivatedRoute,
         private _workflowBuilder: WorkflowBuilderService,
-        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
-        super(_activatedRoute, _workflowBuilder, _toolkitConfiguration)
+        @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
+        super(_activatedRoute, _workflowBuilder, config)
     }
 
     public ngOnInit(): void {
