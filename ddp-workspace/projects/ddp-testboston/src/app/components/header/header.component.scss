@@ -194,6 +194,17 @@
     .mobile-menu {
         display: unset;
     }
+
+    .menu {
+        .header-link {
+            align-items: flex-start;
+        }
+    }
+
+    .dashboard-icon {
+        height: 26px;
+        width: 26px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -223,5 +234,10 @@
             line-height: 2.1rem;
             align-items: flex-start;
         }
+    }
+
+    .dashboard-icon {
+        height: 22px;
+        width: 22px;
     }
 }
