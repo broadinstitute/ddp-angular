@@ -19,7 +19,7 @@
                     <input matInput formControlName="zip" minlength="5" maxlength="5"
                         placeholder="Enter mailing zip code" pattern="[0-9]{5}">
                 </mat-form-field>
-                <re-captcha [siteKey]="config.recaptchaSiteKey" size="normal" formControlName="recaptchaToken">
+                <re-captcha [siteKey]="config.recaptchaSiteClientKey" size="normal" formControlName="recaptchaToken">
                 </re-captcha>
                 <div class="invitation-form__button">
                     <button class="button button_primary" type="submit" [disabled]="formGroup.invalid"

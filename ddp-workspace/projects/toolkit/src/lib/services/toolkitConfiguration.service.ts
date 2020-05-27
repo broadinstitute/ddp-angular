@@ -64,6 +64,5 @@ export class ToolkitConfigurationService {
     blogUrl: string;
     agreeConsent: boolean;
 
-    // security
-    recaptchaSiteKey: string;
+    recaptchaSiteClientKey: string;
 }
