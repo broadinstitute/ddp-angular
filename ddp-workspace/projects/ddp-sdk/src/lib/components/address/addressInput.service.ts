@@ -365,8 +365,8 @@ export class AddressInputService implements OnDestroy {
         const newFieldValue = address[propName];
         if (formControl && newFieldValue !== formControl.value) {
           formControl.patchValue(newFieldValue, { emitEvent: emitValueChange });
-          markFieldsAsTouched && formControl.markAsTouched();
         }
+        markFieldsAsTouched && formControl.markAsTouched();
       });
       // this line really does look necessary after some updates
       // particularly if updating the FormGroup with data and place holders in fields

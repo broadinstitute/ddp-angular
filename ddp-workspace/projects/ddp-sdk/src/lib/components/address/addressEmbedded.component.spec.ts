@@ -290,6 +290,8 @@ describe('AddressEmbeddedComponent', () => {
     spyOnSubmitAnnounced.and.returnValue(hot('--a', {a: (new ActivityResponse('blah'))}));
     // @ts-ignore
     addressServiceSpy.findDefaultAddress.and.returnValue(of(defaultAddress));
+    let componentIsBusy = false;
+    component.componentBusy.subscribe(isBusy => componentIsBusy = isBusy);
     fixture.detectChanges();
     expect(childComponent.address).toBe(defaultAddress);
     expect(addressServiceSpy.getTempAddress).not.toHaveBeenCalled();
@@ -301,6 +303,8 @@ describe('AddressEmbeddedComponent', () => {
     tick();
     fixture.detectChanges();
     expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(defaultAddress, false);
+    // check for bug where we not setting busy flag back to false if no temp address loaded
+    expect(componentIsBusy).toBe(false);
   }));
   it('test component busy output', fakeAsync(() => {
     component.activityGuid = '123';

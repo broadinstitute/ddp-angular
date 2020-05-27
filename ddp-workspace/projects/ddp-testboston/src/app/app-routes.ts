@@ -9,7 +9,6 @@ export const AppRoutes = {
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
     Password: 'password',
-    UserRegistrationPrequal: 'join',
     SessionExpired: 'session-expired',
     Privacy: 'privacy-policy',
     Address: 'address'

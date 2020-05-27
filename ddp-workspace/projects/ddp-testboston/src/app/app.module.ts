@@ -67,6 +67,7 @@ toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.phone = '1-617-123-4567';
 toolkitConfig.infoEmail = 'info@testboston.org';
 toolkitConfig.recaptchaSiteKey = '6LdxFPsUAAAAAFdX1VHmLIbxAD8f151Kg0wk9KwJ';
+toolkitConfig.agreeConsent = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;

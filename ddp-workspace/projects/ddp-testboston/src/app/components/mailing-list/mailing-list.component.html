@@ -5,7 +5,7 @@
         </div>
         <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
             <p class="mailing-list__question" translate>MailingList.Questions.Adult</p>
-            <mat-radio-group class="mailing-list__group" formControlName="adult">
+            <mat-radio-group class="mailing-list__group mailing-list__group_two" formControlName="adult">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
                 </mat-radio-button>
@@ -18,7 +18,7 @@
             </mat-radio-group>
 
             <p class="mailing-list__question" translate>MailingList.Questions.Patient</p>
-            <mat-radio-group class="mailing-list__group" formControlName="bwhPatient">
+            <mat-radio-group class="mailing-list__group mailing-list__group_three" formControlName="bwhPatient">
                 <mat-radio-button class="mailing-list__item" value="true">
                     {{'MailingList.Answers.Yes' | translate}}
                 </mat-radio-button>
@@ -46,10 +46,12 @@
                 </mat-error>
             </mat-form-field>
 
-            <button class="mailing-list__button" type="submit"
-                [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
-                {{'Common.Buttons.Submit.Title' | translate}}
-            </button>
+            <div class="mailing-list__button">
+                <button class="button button_additional" type="submit"
+                    [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
+                    {{'Common.Buttons.Submit.Title' | translate}}
+                </button>
+            </div>
         </form>
     </ng-container>
 
@@ -75,7 +77,8 @@
             <h3 class="center no-margin mailing-list__title" translate>MailingList.SorryBlock.Title</h3>
             <p class="center">
                 <span translate>MailingList.SorryBlock.Text.Part1</span>
-                <a class="Link Link_bold" routerLink="/" fragment="faq" translate>MailingList.SorryBlock.Text.Part2</a>
+                <a class="Link Link_bold" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
+                    translate>MailingList.SorryBlock.Text.Part2</a>
                 <span translate>MailingList.SorryBlock.Text.Part3</span>
             </p>
         </div>

@@ -21,7 +21,7 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['junit'],
+    reporters: ['junit', 'kjhtml'],
     junitReporter: {
       outputDir: process.env.JUNIT_REPORT_PATH,
       outputFile: process.env.JUNIT_REPORT_NAME,
