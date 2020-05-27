@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Auth0AdapterService, InvitationServiceAgent, DdpError, ErrorType } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, finalize } from 'rxjs/operators';
 import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
@@ -15,6 +15,7 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
+  public isLoading = false;
   private anchor: Subscription;
   @ViewChild('captcha', { static: false }) private captcha: RecaptchaComponent;
 
@@ -61,8 +62,10 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   }
 
   private checkInvitation(invitationId: string, recaptchaToken: string, zip: string): void {
+    this.isLoading = true;
     this.invitationService.check(invitationId, recaptchaToken, zip).pipe(
-      take(1)
+      take(1),
+      finalize(() => this.isLoading = false)
     ).subscribe(
       () => this.auth0.signup({ invitation_id: invitationId }),
       (error) => {

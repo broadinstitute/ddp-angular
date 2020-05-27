@@ -59,9 +59,12 @@
                     </re-captcha>
                 </div>
                 <div class="invitation-form__submit">
-                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid"
+                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid || isLoading"
                         [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
                         {{'Common.Buttons.Submit.Title' | translate}}
+                        <mat-icon *ngIf="isLoading" class="button__spinner">
+                            <mat-spinner color="primary" diameter="20"></mat-spinner>
+                        </mat-icon>
                     </button>
                 </div>
                 <ng-container *ngIf="hasInvitationError(errorType.UnknownError)">

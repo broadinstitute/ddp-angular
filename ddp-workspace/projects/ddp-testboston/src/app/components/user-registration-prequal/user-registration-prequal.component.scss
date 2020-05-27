@@ -82,4 +82,11 @@
     .error {
         font-size: 1.1rem;
     }
+
+    .invitation-form {
+        &__captcha {
+            transform: scale(0.95);
+            transform-origin: 0;
+        }
+    }
 }
