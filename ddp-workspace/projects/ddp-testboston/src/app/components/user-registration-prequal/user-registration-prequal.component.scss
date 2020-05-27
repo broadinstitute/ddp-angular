@@ -70,6 +70,10 @@
 }
 
 @media only screen and (max-width: 480px) {
+    .registration-block {
+        margin: 0 auto 3rem auto;
+    }
+
     .age {
         display: flex;
         flex-direction: column;
