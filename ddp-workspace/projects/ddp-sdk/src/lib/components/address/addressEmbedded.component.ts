@@ -495,7 +495,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       saveTempCurrentAddressAction$,
       verifyInputComponentAddressAction$,
       verifyInputComponentSparseAddress$,
-      verifyInputComponentAddressAction$,
       handleAddressSuggestionAction$,
       saveRealAddressAction$,
       removeTempAddressAction$,
