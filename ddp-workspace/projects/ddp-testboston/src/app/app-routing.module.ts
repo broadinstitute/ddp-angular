@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutes } from './app-routes';
-import { AppGuids } from './app-guids';
+import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: AppGuids.Consent
+      activityGuid: ActivityGuids.Consent
     }
   },
   {
@@ -49,7 +49,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: AppGuids.Covid
+      activityGuid: ActivityGuids.Covid
     }
   },
   {
@@ -60,7 +60,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: AppGuids.Address
+      activityGuid: ActivityGuids.Address
     }
   },
   {
