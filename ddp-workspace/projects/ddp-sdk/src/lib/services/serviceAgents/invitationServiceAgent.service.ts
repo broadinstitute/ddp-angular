@@ -20,10 +20,12 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
         super(_configuration, _http, _logger);
     }
 
-    public check(invitationId: string, recaptchaToken: string, zip: string): Observable<any> {
+    public check(invitationId: string, recaptchaToken: string, zipCode: string): Observable<any> {
         const payload: InvitationCheckPayload = {
             invitationId,
-            qualificationDetails: { zipCode: zip },
+            qualificationDetails: {
+                zipCode
+            },
             recaptchaToken,
             auth0ClientId: this.configuration.auth0ClientId
         };
@@ -44,6 +46,17 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
     }
 
     private buildErrorObject(serverError: HttpErrorResponse): DdpError {
-        return new DdpError(serverError.error ? serverError.error.message : '', serverError.error ? serverError.error.code : null);
+        return new DdpError(this.buildErrorMessage(serverError), this.buildErrorType(serverError));
+    }
+
+    private buildErrorMessage(serverError: HttpErrorResponse): string {
+        return serverError.error ? serverError.error.message : '';
+    }
+
+    private buildErrorType(serverError: HttpErrorResponse): ErrorType {
+        if (serverError.error && Object.values(ErrorType).includes(serverError.error.code)) {
+            return serverError.error.code;
+        }
+        return ErrorType.UnknownError;
     }
 }

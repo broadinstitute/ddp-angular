@@ -37,6 +37,9 @@ export * from './lib/models/announcementMessage';
 export * from './lib/models/analyticsEvent';
 export * from './lib/models/analyticsEventCategories';
 export * from './lib/models/analyticsEventActions';
+export * from './lib/models/address';
+export * from './lib/models/ddpError';
+export * from './lib/models/errorType';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
@@ -69,12 +72,9 @@ export * from './lib/services/serviceAgents/invitationServiceAgent.service';
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
-export * from './lib/directives/invitationCodeFormatter.directive';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
 
 export * from './lib/compositeDisposable';
-
-export * from './lib/models/address';

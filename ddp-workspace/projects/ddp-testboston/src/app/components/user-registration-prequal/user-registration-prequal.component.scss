@@ -1,3 +1,5 @@
+@import '../../../app-theme.scss';
+
 .registration-block {
     margin: 3rem auto 8rem auto;
 }
@@ -7,7 +9,7 @@
     flex-direction: column;
 
     &__title {
-        color: #454545;
+        color: mat-color($app-theme, 400);
     }
 
     &__input {
@@ -15,13 +17,14 @@
     }
 
     &__question {
-        margin: 0;
+        margin: 0.5rem 0 0 0;
         font-size: 1.375rem;
         line-height: 2.0625rem;
-        color: #454545;
+        color: mat-color($app-theme, 400);
     }
 
     &__info {
+        margin: 0.5rem 0 0 0;
         height: 24px;
         width: 24px;
         margin-left: 5px;
@@ -34,14 +37,62 @@
         align-items: center;
     }
 
-    &__button {
+    &__captcha,
+    &__submit {
         margin: 2rem 0 0 0;
     }
 }
 
-.ErrorMessage {
-    margin: 1rem 0;
-    color: #ee4416;
-    font-size: 1.375rem;
-    line-height: 2.0625rem;
+.age {
+    margin: 0.5rem 0 0 0;
+
+    &__item {
+        margin-right: 1.5rem;
+    }
+
+    &__error {
+        margin-top: 0.3125rem;
+
+        .Link {
+            color: mat-color($app-theme, 2700) !important;
+        }
+    }
+}
+
+.error {
+    color: mat-color($app-theme, 2700);
+    font-size: 1rem;
+    margin: 1rem 0 0 0;
+
+    &_input {
+        margin: 0;
+        position: relative;
+        top: -1.5rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .registration-block {
+        margin: 0 auto 3rem auto;
+    }
+
+    .age {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .error {
+        font-size: 1.1rem;
+    }
+
+    .invitation-form {
+        &__captcha {
+            transform: scale(0.95);
+            transform-origin: 0;
+        }
+    }
 }
