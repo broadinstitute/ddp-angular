@@ -208,14 +208,20 @@
     }
 
     .overlay-content {
-        margin-top: 9rem;
+        margin-top: 8rem;
     }
 
     .menu {
         padding: 0 0 0 1rem;
 
         &__item {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-link {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+            align-items: flex-start;
         }
     }
 }
