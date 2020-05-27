@@ -52,8 +52,8 @@
                     </mat-error>
                 </mat-radio-group>
                 <div class="invitation-form__captcha">
-                    <re-captcha [siteKey]="config.recaptchaSiteKey" 
-                                size="normal" 
+                    <re-captcha [siteKey]="config.recaptchaSiteClientKey"
+                                size="normal"
                                 formControlName="recaptchaToken"
                                 #captcha>
                     </re-captcha>
