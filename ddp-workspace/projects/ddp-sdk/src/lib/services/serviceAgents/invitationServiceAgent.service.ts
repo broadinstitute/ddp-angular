@@ -20,10 +20,12 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
         super(_configuration, _http, _logger);
     }
 
-    public check(invitationId: string, recaptchaToken: string, zip: string): Observable<any> {
+    public check(invitationId: string, recaptchaToken: string, zipCode: string): Observable<any> {
         const payload: InvitationCheckPayload = {
             invitationId,
-            qualificationDetails: { zipCode: zip },
+            qualificationDetails: {
+                zipCode
+            },
             recaptchaToken,
             auth0ClientId: this.configuration.auth0ClientId
         };
