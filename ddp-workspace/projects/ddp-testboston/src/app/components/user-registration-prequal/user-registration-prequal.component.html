@@ -2,34 +2,76 @@
     <section class="section">
         <div class="content registration-block">
             <form class="invitation-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-                <h1 class="invitation-form__title semi-bold">First, confirm your eligibility</h1>
+                <h1 class="invitation-form__title semi-bold" translate>PrequalPage.Title</h1>
                 <div class="invitation-form__container">
-                    <p class="invitation-form__question bold">Enter invitation code</p>
-                    <img class="invitation-form__info" src="assets/images/info.png" #tooltip="matTooltip"
-                        (click)="tooltip.toggle()" alt="Info icon"
-                        matTooltip="If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top."
-                        matTooltipPosition="right">
+                    <p class="invitation-form__question bold" translate>PrequalPage.InvitationCode.Question</p>
+                    <img class="invitation-form__info" 
+                         src="assets/images/info.png" 
+                         [alt]="'PrequalPage.InvitationCode.TooltipAlt' | translate"
+                         (click)="tooltip.toggle()"
+                         #tooltip="matTooltip"
+                         [matTooltip]="'PrequalPage.InvitationCode.Tooltip' | translate"
+                         matTooltipPosition="right">
                 </div>
                 <mat-form-field class="invitation-form__input">
-                    <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
-                        maxLength="18" placeholder="Enter invitation code">
+                    <input matInput
+                           invitationcode
+                           formControlName="invitationId"
+                           pattern="[a-zA-Z0-9]{12}"
+                           maxLength="18"
+                           [placeholder]="'PrequalPage.InvitationCode.Placeholder' | translate">
                 </mat-form-field>
-                <p class="invitation-form__question bold">What is your current mailing zip code?</p>
+                <ng-container *ngIf="hasInvitationError(errorType.InvalidInvitation)">
+                    <div class="error error_input" [innerHTML]="error.message"></div>
+                </ng-container>
+                <p class="invitation-form__question bold" translate>PrequalPage.Zip.Question</p>
                 <mat-form-field class="invitation-form__input" Label="always">
-                    <input matInput formControlName="zip" minlength="5" maxlength="5"
-                        placeholder="Enter mailing zip code" pattern="[0-9]{5}">
+                    <input matInput
+                           formControlName="zip"
+                           minlength="5"
+                           maxlength="5"
+                           pattern="[0-9]{5}"
+                           [placeholder]="'PrequalPage.Zip.Placeholder' | translate">
                 </mat-form-field>
-                <re-captcha [siteKey]="config.recaptchaSiteClientKey" size="normal" formControlName="recaptchaToken">
-                </re-captcha>
-                <div class="invitation-form__button">
-                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid"
+                <ng-container *ngIf="hasInvitationError(errorType.InvalidQualifications)">
+                    <div class="error error_input" [innerHTML]="error.message"></div>
+                </ng-container>
+                <p class="invitation-form__question bold" translate>PrequalPage.Adult.Question</p>
+                <mat-radio-group class="age" formControlName="adult">
+                    <mat-radio-button value="true" class="age__item">
+                        {{'PrequalPage.Adult.Yes' | translate}}
+                    </mat-radio-button>
+                    <mat-radio-button value="false">
+                        {{'PrequalPage.Adult.No' | translate}}
+                    </mat-radio-button>
+                    <mat-error class="age__error" *ngIf="hasInvitationError(errorType.MinorSubject)">
+                        <span translate>PrequalPage.Adult.Error.Part1</span>
+                        <a class="Link Link_bold" routerLink="/" fragment="q&a"
+                            translate>PrequalPage.Adult.Error.Part2</a>
+                        <span translate>PrequalPage.Adult.Error.Part3</span>
+                    </mat-error>
+                </mat-radio-group>
+                <div class="invitation-form__captcha">
+                    <re-captcha [siteKey]="config.recaptchaSiteClientKey"
+                                size="normal"
+                                formControlName="recaptchaToken"
+                                #captcha>
+                    </re-captcha>
+                </div>
+                <div class="invitation-form__submit">
+                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid || isLoading"
                         [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
                         {{'Common.Buttons.Submit.Title' | translate}}
+                        <mat-icon *ngIf="isLoading" class="button__spinner">
+                            <mat-spinner color="primary" diameter="20"></mat-spinner>
+                        </mat-icon>
                     </button>
                 </div>
-                <div *ngIf="errorMessage" class="ErrorMessage">
-                    <span>{{ errorMessage }}</span>
-                </div>
+                <ng-container *ngIf="hasInvitationError(errorType.UnknownError)">
+                    <p class="error" translate>
+                        PrequalPage.Error
+                    </p>
+                </ng-container>
             </form>
         </div>
     </section>

@@ -7,7 +7,6 @@
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
-    text-align: center;
     cursor: pointer;
     font-size: 1.25rem;
     line-height: 2.125rem;
@@ -15,11 +14,18 @@
     transition: 0.3s;
     font-weight: 600;
     color: mat-color($app-theme, 100);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &:active,
     &:hover,
     &:focus {
         text-decoration: none;
+    }
+
+    &:disabled {
+        cursor: initial;
     }
 
     // blue button
@@ -92,6 +98,17 @@
         &:focus,
         &:hover {
             text-decoration: underline;
+        }
+    }
+
+    &__spinner {
+        margin-left: 5px;
+        height: 20px !important;
+        width: 20px !important;
+
+        .mat-progress-spinner circle,
+        .mat-spinner circle {
+            stroke: mat-color($app-theme, 100);
         }
     }
 }

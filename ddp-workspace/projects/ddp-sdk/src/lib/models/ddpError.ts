@@ -1,9 +1,9 @@
 import { ErrorType } from './errorType';
 
 export class DdpError extends Error {
-    errorType: string;
-    constructor(msg: string, errorType: ErrorType) {
-        super(msg);
+    public errorType: string;
+    constructor(message: string, errorType: ErrorType) {
+        super(message);
         this.errorType = errorType;
     }
 }
