@@ -22,6 +22,10 @@
         text-decoration: none;
     }
 
+    &:disabled {
+        cursor: initial;
+    }
+
     // blue button
     &_primary {
         background-color: mat-color($app-theme, 1700);

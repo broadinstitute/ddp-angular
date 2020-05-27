@@ -44,7 +44,7 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
       form.zip);
   }
 
-  public hasError(errorType: ErrorType): boolean {
+  public hasInvitationError(errorType: ErrorType): boolean {
     return this.error && this.error.errorType === errorType;
   }
 
