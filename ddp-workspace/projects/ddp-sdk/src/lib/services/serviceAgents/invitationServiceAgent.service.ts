@@ -52,10 +52,7 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
     }
 
     private buildErrorType(serverError: HttpErrorResponse): ErrorType {
-        if (!serverError.error) {
-            return ErrorType.UnknownError;
-        }
-        if (Object.values(ErrorType).includes(serverError.error.code)) {
+        if (serverError.error && Object.values(ErrorType).includes(serverError.error.code)) {
             return serverError.error.code;
         }
         return ErrorType.UnknownError;
