@@ -149,7 +149,7 @@
             "Placeholder": "Enter invitation code",
             "Error": {
                 "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
-                "Part2": "and"
+                "Part2": "or"
             }
         },
         "Zip": {
