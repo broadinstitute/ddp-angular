@@ -272,7 +272,7 @@ export class AddressInputService implements OnDestroy {
             console.debug('had an error calling easypost');
             return of(googleAddress);
           }),
-          map(suggestedAddress => new Address({ ...suggestedAddress, ...{ guid: componentState.formData.guid } }))
+          map(verifyResponse => new Address({ ...verifyResponse, ...{ guid: componentState.formData.guid } }))
         )
       ),
       share());
