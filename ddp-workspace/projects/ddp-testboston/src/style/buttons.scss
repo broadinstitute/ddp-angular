@@ -60,6 +60,20 @@
         }
     }
 
+    // red button
+    &_warn {
+        background-color: mat-color($app-theme, 2800);
+
+        &:disabled {
+            background-color: mat-color($app-theme, 3000);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2900);
+        }
+    }
+
     // gray button
     &_additional {
         background-color: mat-color($app-theme, 1100);
@@ -110,6 +124,10 @@
         .mat-spinner circle {
             stroke: mat-color($app-theme, 100);
         }
+    }
+
+    &__icon {
+        margin-right: 5px;
     }
 }
 
