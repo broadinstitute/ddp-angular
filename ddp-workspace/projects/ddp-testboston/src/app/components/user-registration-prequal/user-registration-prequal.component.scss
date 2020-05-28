@@ -13,7 +13,7 @@
     }
 
     &__input {
-        width: 20rem;
+        width: 25rem;
     }
 
     &__question {
@@ -51,6 +51,7 @@
     }
 
     &__error {
+        width: 25rem;
         margin-top: 0.3125rem;
 
         .Link {
@@ -63,11 +64,17 @@
     color: mat-color($app-theme, 2700);
     font-size: 1rem;
     margin: 1rem 0 0 0;
+    width: 25rem;
 
     &_input {
         margin: 0;
         position: relative;
         top: -1.5rem;
+        line-height: 1.5rem;
+    }
+
+    .Link {
+        color: mat-color($app-theme, 2700) !important;
     }
 }
 
@@ -87,6 +94,10 @@
 
     .error {
         font-size: 1.1rem;
+
+        &_input {
+            line-height: 1.6rem;
+        }
     }
 
     .invitation-form {

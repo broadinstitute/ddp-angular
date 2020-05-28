@@ -22,7 +22,12 @@
                            [placeholder]="'PrequalPage.InvitationCode.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidInvitation)">
-                    <div class="error error_input" [innerHTML]="error.message"></div>
+                    <p class="error error_input">
+                        <span translate>PrequalPage.InvitationCode.Error.Part1</span>
+                        <a class="Link Link_bold" [href]="emailHref">{{email}}</a>
+                        <span translate>PrequalPage.InvitationCode.Error.Part2</span>
+                        <a class="Link Link_bold" [href]="phoneHref">{{phone}}</a>.
+                    </p>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Zip.Question</p>
                 <mat-form-field class="invitation-form__input" Label="always">
@@ -34,7 +39,9 @@
                            [placeholder]="'PrequalPage.Zip.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidQualifications)">
-                    <div class="error error_input" [innerHTML]="error.message"></div>
+                    <p class="error error_input" translate>
+                        PrequalPage.Zip.Error
+                    </p>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Adult.Question</p>
                 <mat-radio-group class="age" formControlName="adult">
