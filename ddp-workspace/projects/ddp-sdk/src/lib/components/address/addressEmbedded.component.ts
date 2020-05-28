@@ -29,6 +29,7 @@ import { AddressInputComponent } from './addressInput.component';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { generateTaggedAddress, isStreetRequiredError } from './addressUtils';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
+import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 
 interface ComponentState {
   inputAddress: Address | null;
@@ -39,6 +40,12 @@ interface ComponentState {
   suggestedAddress: Address | null;
   formErrorMessages: string[];
   fieldErrors: AddressError[];
+  warnings?: AddressVerificationWarnings;
+}
+interface AddressSuggestion {
+  entered: Address;
+  suggested: Address;
+  warnings: AddressVerificationWarnings;
 }
 
 @Component({
@@ -74,7 +81,7 @@ interface ComponentState {
                         <span class="suggested"
                               [innerHTML]="convertToFormattedString(generateTaggedAddress(info.entered, info.suggested,'b'))"></span>
                     </mat-radio-button>
-                    <mat-radio-button class="margin-5" value="original" [disableRipple]="true">
+                    <mat-radio-button class="margin-5" value="entered" [disableRipple]="true">
                         <b>As entered: </b>{{ convertToFormattedString(info.entered) }}
                     </mat-radio-button>
                 </mat-radio-group>
@@ -154,9 +161,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   public suggestionForm: FormGroup;
   public isInputComponentBusy$ = new BehaviorSubject<boolean>(false);
   // variables for template
-  public suggestionInfo$: Observable<{ entered: Address; suggested: Address }>;
+  public suggestionInfo$: Observable<AddressSuggestion>;
   public inputAddress$: Observable<Address | null>;
-  public addressErrors$: Observable<AddressError[]>;
+  public addressErrors$: Observable<AddressError[]>
   public isReadOnly$: Observable<boolean>;
   public inputComponentAddress$ = new Subject<Address | null>();
   public generateTaggedAddress = generateTaggedAddress;
@@ -173,7 +180,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     @Optional() private submitService: SubmitAnnouncementService
   ) {
     this.suggestionForm = new FormGroup({
-      suggestionRadioGroup: new FormControl('original')
+      suggestionRadioGroup: new FormControl('entered')
     });
     this.initializeComponentState();
   }
@@ -262,21 +269,18 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     this.suggestionInfo$ = this.state$.pipe(
-      map(state => state.showSuggestion && !this.readonly ? { suggested: state.suggestedAddress, entered: state.enteredAddress } : null),
+      map(state => state.showSuggestion && !this.readonly ?
+                {suggested: state.suggestedAddress,
+                  entered: state.enteredAddress,
+                  warnings: state.warnings} : null),
       shareReplay(1)
     );
 
     const setupSuggestedAddressFormControl$ = this.suggestionInfo$.pipe(
       filter(info => !!info),
       distinctUntilChanged((x, y) => util.isEqual(x, y)),
-      tap(() => this.suggestionForm.get('suggestionRadioGroup').patchValue('original'))
+      tap(() => this.suggestionForm.get('suggestionRadioGroup').patchValue('entered'))
     );
-
-
-    interface AddressSuggestion {
-      address: Address;
-      suggestion: Address;
-    }
 
     const currentAddress$: Observable<Address | null> = merge(
       this.inputAddress$,
@@ -302,7 +306,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       tap(() => busyCounter$.next(1)),
       switchMap(inputAddress =>
         this.addressService.verifyAddress(inputAddress).pipe(
-          map(suggested => ({ address: inputAddress, suggestion: suggested }) as AddressSuggestion),
+          map(verifyResponse => ({ entered: inputAddress,
+                                    suggested: new Address(verifyResponse),
+                                    warnings: verifyResponse.warnings }) as AddressSuggestion),
           tap((addressSuggestion) => addressSuggestion$.next(addressSuggestion)),
           catchError((error) => {
             verificationError$.next(error);
@@ -317,26 +323,42 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const handleAddressSuggestionAction$ = addressSuggestion$.pipe(
       tap(() => this.stateUpdates$.next({ fieldErrors: []})),
       tap((addressSuggestion) => {
-        const suggested = addressSuggestion.suggestion;
-        const entered = addressSuggestion.address;
+        const suggested = addressSuggestion.suggested;
+        const entered = addressSuggestion.entered;
         // copy data that would not be in suggestion
         suggested.isDefault = entered.isDefault;
         suggested.guid = entered.guid;
         // showing suggestion only if it differs from entered address
+        // we might have warning messages for the entered address
+        const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
         if (!suggested.hasSameDataValues(entered)) {
-          this.stateUpdates$.next({ formErrorMessages: [], suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true });
+          this.stateUpdates$.next({ formErrorMessages: enteredWarningMessages, warnings: addressSuggestion.warnings,
+            suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true });
         } else {
-          this.stateUpdates$.next({ formErrorMessages: [], suggestedAddress: null, enteredAddress: null, showSuggestion: false });
+          this.stateUpdates$.next({ formErrorMessages: enteredWarningMessages, warnings: addressSuggestion.warnings,
+            suggestedAddress: null, enteredAddress: null, showSuggestion: false });
         }
       })
     );
 
-    const selectedAddress$: Observable<Address> = this.suggestionForm.valueChanges.pipe(
-      // skip initial invocation. A setup artifact.
-      skip(1),
-      map(formValue => formValue.suggestionRadioGroup as string),
-      tap((suggestionValue) => console.debug('Got suggestion value and it is:' + suggestionValue)),
-      distinctUntilChanged(),
+    type SuggestionOption = 'suggested' | 'entered';
+    const suggestionRadioValue$: Observable<SuggestionOption> = this.suggestionForm.valueChanges.pipe(
+        // skip initial invocation. A setup artifact.
+        skip(1),
+        map(formValue => formValue.suggestionRadioGroup as SuggestionOption),
+        distinctUntilChanged(),
+        share());
+
+    const handleSelectedWarnings$ = suggestionRadioValue$.pipe(
+        withLatestFrom(this.suggestionInfo$),
+        tap(([radioValue, suggestionInfo]) =>
+            this.stateUpdates$.next({
+              formErrorMessages: suggestionInfo.warnings[radioValue].map(warn => warn.message)
+            })),
+        share()
+    );
+
+    const selectedAddress$: Observable<Address> = suggestionRadioValue$.pipe(
       withLatestFrom(this.suggestionInfo$),
       map(([radioValue, suggestionInfo]) => (radioValue === 'suggested') ? suggestionInfo.suggested : suggestionInfo.entered),
       share()
@@ -502,6 +524,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       updateInputComponentWithSavedAddressAction$,
       emitComponentBusyAction$,
       setupSuggestedAddressFormControl$,
+      handleSelectedWarnings$,
       processVerificationStatusErrorAction$,
       processOtherVerificationErrorsAction$,
       emitValidStatusAction$,
