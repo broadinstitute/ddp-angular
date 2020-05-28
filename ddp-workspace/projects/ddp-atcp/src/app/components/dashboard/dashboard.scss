@@ -12,8 +12,8 @@
     }
 
     mat-list-item {
-      height: unset;
 
+      height: auto !important;
       .mat-checkbox-inner-container {
         margin-top: 0;
       }
@@ -21,6 +21,10 @@
       .mat-checkbox-label {
         margin-top: -5px;
       }
+    }
+
+    .mat-list .mat-list-item .mat-list-item-content {
+      display: block !important;
     }
 
     .activity-buttons {
