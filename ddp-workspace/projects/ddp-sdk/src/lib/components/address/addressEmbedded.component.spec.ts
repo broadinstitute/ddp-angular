@@ -15,6 +15,7 @@ import { Address } from '../../models/address';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
 import { AddressError } from '../../models/addressError';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
+import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
 
 @Component({
   selector: 'ddp-address-input',
@@ -118,11 +119,11 @@ describe('AddressEmbeddedComponent', () => {
 
   it('ensure handling of PERFECT new address', () => {
       component.activityGuid = '123';
-      const perfectAddress = buildPerfectAddress();
-      addressServiceSpy.verifyAddress.and.returnValue(of(clone(perfectAddress)));
+      const perfectAddressVerification = buildPerfectAddressVerification();
+      addressServiceSpy.verifyAddress.and.returnValue(of(clone(perfectAddressVerification)));
       fixture.detectChanges();
 
-      childComponent.valueChanged.emit(perfectAddress);
+      childComponent.valueChanged.emit(buildPerfectAddress());
       fixture.detectChanges();
       expect(addressServiceSpy.verifyAddress).toHaveBeenCalled();
       expect(addressServiceSpy.saveTempAddress).toHaveBeenCalled();
@@ -153,7 +154,7 @@ describe('AddressEmbeddedComponent', () => {
 
     const radioGroupComponentDebug = findRadioGroupDebug(fixture);
     const groupInstance: MatRadioGroup = radioGroupComponentDebug.injector.get<MatRadioGroup>(MatRadioGroup);
-    expect(groupInstance.value).toBe('original');
+    expect(groupInstance.value).toBe('entered');
   });
 
   it ('test suggestion selection changes address and saves temp address and updates child component', () => {
@@ -164,7 +165,7 @@ describe('AddressEmbeddedComponent', () => {
     const radioInstances = radioDebugElements.map(debugEl => debugEl.componentInstance) as MatRadioButton[];
     const groupInstance: MatRadioGroup = radioGroupComponentDebug.injector.get<MatRadioGroup>(MatRadioGroup);
     fixture.detectChanges();
-    expect(groupInstance.selected.value).toBe('original');
+    expect(groupInstance.selected.value).toBe('entered');
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalled();
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addresses.enteredAddress, '123');
@@ -206,7 +207,7 @@ describe('AddressEmbeddedComponent', () => {
     // setting address from child to a "perfect" address after selecting a suggested address
     const incomingPerfectAddress = buildPerfectAddress();
     incomingPerfectAddress.name = 'SOME OTHER NAME';
-    addressServiceSpy.verifyAddress.and.returnValue(of(incomingPerfectAddress));
+    addressServiceSpy.verifyAddress.and.returnValue(of(new AddressVerificationResponse(incomingPerfectAddress)));
     childComponent.valueChanged.emit(incomingPerfectAddress);
     fixture.detectChanges();
 
@@ -272,6 +273,35 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
   });
 
+  it ('test show verify warnings', fakeAsync(() => {
+    component.activityGuid = '123';
+
+    const validationMessageBefore = findValidationMessageDebug(fixture);
+    expect(validationMessageBefore).toBeNull();
+    const addressToEnter = buildPerfectAddress();
+    addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
+    // field 'address' is the global error.
+    const verificationResponseWithWarningForEntered = new AddressVerificationResponse(addressToEnter);
+    const warningMsg = 'You have been warned!';
+    verificationResponseWithWarningForEntered.warnings.entered = [{code: 'WARNING', message: warningMsg}];
+
+    addressServiceSpy.verifyAddress.and.returnValue(of(verificationResponseWithWarningForEntered));
+    fixture.detectChanges();
+
+    let formErrorMessagesAfterVerify = null;
+    component.formErrorMessages$.subscribe(msgs => formErrorMessagesAfterVerify = msgs);
+
+    childComponent.valueChanged.emit(addressToEnter);
+    fixture.detectChanges();
+    expect(addressServiceSpy.verifyAddress).toHaveBeenCalledWith(addressToEnter);
+    const validationMessageAfter = findValidationMessageDebug(fixture);
+    expect(validationMessageAfter).not.toBeNull();
+    expect(formErrorMessagesAfterVerify).not.toBeNull();
+    expect(formErrorMessagesAfterVerify[0]).toEqual(warningMsg);
+    // we save temp address even if it has errors
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
+  }));
+
   it('test readonly input', () => {
     component.readonly = true;
     fixture.detectChanges();
@@ -309,7 +339,7 @@ describe('AddressEmbeddedComponent', () => {
   it('test component busy output', fakeAsync(() => {
     component.activityGuid = '123';
     const perfectAddress = buildPerfectAddress();
-    addressServiceSpy.verifyAddress.and.callFake(() => cold('a', {a: buildPerfectAddress()}));
+    addressServiceSpy.verifyAddress.and.callFake(() => cold('a', {a: buildPerfectAddressVerification()}));
     addressServiceSpy.saveTempAddress.and.callFake(() => cold('-a', {a: true}));
     fixture.detectChanges();
 
@@ -337,7 +367,7 @@ describe('AddressEmbeddedComponent', () => {
     const enteredAddress = buildPerfectAddress();
     enteredAddress.street1 = '75 AMES STREET';
 
-    addressServiceSpy.verifyAddress.and.returnValue(of(buildPerfectAddress()));
+    addressServiceSpy.verifyAddress.and.returnValue(of(new AddressVerificationResponse(buildPerfectAddress())));
     fixture.detectChanges();
 
     childComponent.valueChanged.emit(enteredAddress);
@@ -366,5 +396,9 @@ const buildPerfectAddress = (): Address => {
   perfectAddress.zip = '02142-1403';
   perfectAddress.phone = '6175555555';
   return perfectAddress;
+};
+const buildPerfectAddressVerification = (): AddressVerificationResponse => {
+  const perfectAddressVerify = new AddressVerificationResponse(buildPerfectAddress());
+  return perfectAddressVerify;
 };
 
