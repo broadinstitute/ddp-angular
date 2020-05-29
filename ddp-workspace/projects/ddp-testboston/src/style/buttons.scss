@@ -151,3 +151,12 @@
         text-decoration: underline;
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .overlay {
+        .SimpleButton {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+        }
+    }
+}
