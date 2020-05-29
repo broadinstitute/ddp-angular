@@ -68,6 +68,8 @@ export class WorkflowMapperService {
                 return new UrlWorkflowAction(this.toolkitConfiguration.lovedOneUrl);
             case this.toolkitConfiguration.covidSurveyGuid:
                 return new UrlWorkflowAction(this.toolkitConfiguration.covidSurveyUrl);
+            case this.toolkitConfiguration.addressGuid:
+                return new UrlWorkflowAction(this.toolkitConfiguration.addressUrl);
             default:
                 // If we have a next activity instance but no dedicated route, that's okay. Load it on-the-fly.
                 return new UrlWorkflowAction(`${this.toolkitConfiguration.activityUrl}/${activityResponse.instanceGuid}`);
