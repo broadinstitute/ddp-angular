@@ -8,6 +8,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import {
+  Auth0CodeCallbackComponent,
   AuthGuard,
   IrbGuard
 } from 'ddp-sdk';
@@ -93,6 +94,11 @@ const routes: Routes = [
     canActivate: [
       IrbGuard
     ]
+  },
+  {
+    path: AppRoutes.LocalAuth,
+    component: Auth0CodeCallbackComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: AppRoutes.Error,
