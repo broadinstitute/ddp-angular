@@ -10,5 +10,6 @@ export const AppRoutes = {
     Dashboard: 'dashboard',
     Password: 'password',
     SessionExpired: 'session-expired',
-    Privacy: 'privacy-policy'
+    Privacy: 'privacy-policy',
+    Address: 'mailing-address'
 };

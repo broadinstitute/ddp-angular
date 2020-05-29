@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppRoutes } from './app-routes';
-import { AppGuids } from './app-guids';
+import { ActivityGuids } from './aсtivity-guids';
 
 import {
     DdpModule,
@@ -54,14 +54,16 @@ declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
-toolkitConfig.consentGuid = AppGuids.Consent;
-toolkitConfig.covidSurveyGuid = AppGuids.Covid;
-toolkitConfig.dashboardGuid = AppGuids.Dashboard;
+toolkitConfig.addressGuid = ActivityGuids.Address;
+toolkitConfig.consentGuid = ActivityGuids.Consent;
+toolkitConfig.covidSurveyGuid = ActivityGuids.Covid;
+toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.phone = '1-617-123-4567';
 toolkitConfig.infoEmail = 'info@testboston.org';
 toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
