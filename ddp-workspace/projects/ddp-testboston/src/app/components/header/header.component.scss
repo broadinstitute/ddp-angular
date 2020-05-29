@@ -194,6 +194,11 @@
     .mobile-menu {
         display: unset;
     }
+
+    .dashboard-icon {
+        height: 26px;
+        width: 26px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -208,14 +213,24 @@
     }
 
     .overlay-content {
-        margin-top: 9rem;
+        margin-top: 8rem;
     }
 
     .menu {
         padding: 0 0 0 1rem;
 
         &__item {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
+
+        .header-link {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+        }
+    }
+
+    .dashboard-icon {
+        height: 22px;
+        width: 22px;
     }
 }

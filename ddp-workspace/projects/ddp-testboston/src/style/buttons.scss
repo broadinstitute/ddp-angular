@@ -60,6 +60,20 @@
         }
     }
 
+    // red button
+    &_warn {
+        background-color: mat-color($app-theme, 2800);
+
+        &:disabled {
+            background-color: mat-color($app-theme, 3000);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2900);
+        }
+    }
+
     // gray button
     &_additional {
         background-color: mat-color($app-theme, 1100);
@@ -111,6 +125,10 @@
             stroke: mat-color($app-theme, 100);
         }
     }
+
+    &__icon {
+        margin-right: 5px;
+    }
 }
 
 .SimpleButton {
@@ -149,5 +167,14 @@
     .SimpleButton:focus,
     .SimpleButton:hover {
         text-decoration: underline;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .overlay {
+        .SimpleButton {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+        }
     }
 }

@@ -146,18 +146,23 @@
             "Question": "Enter your invitation code",
             "TooltipAlt": "Info icon",
             "Tooltip": "If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top.",
-            "Placeholder": "Enter invitation code"
+            "Placeholder": "Enter invitation code",
+            "Error": {
+                "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
+                "Part2": "or"
+            }
         },
         "Zip": {
             "Question": "What is your current mailing zip code?",
-            "Placeholder": "Enter mailing zip code"
+            "Placeholder": "Enter mailing zip code",
+            "Error": "We’re sorry. That zip code is outside the TestBoston study zone. Please check the zip code you entered and try again."
         },
         "Adult": {
             "Question": "Are you 18 years old or older?",
             "Yes": "Yes",
             "No": "No",
             "Error": {
-                "Part1": "We’re sorry, it looks like you’re ineligible to join. You must be 18 years or older to join the TestBoston Project. Please read our",
+                "Part1": "We’re sorry, it looks like you’re ineligible to join. You must be 18 years or older to join the TestBoston study. Please read our",
                 "Part2": "FAQ",
                 "Part3": "for more information."
             }
@@ -198,7 +203,7 @@
         "EditButton": "View/Edit",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
-        "NotAgreeButton": "I am not ready to agree",
+        "NotAgreeButton": "I'm not ready to agree",
         "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
         "SaveError": "We're sorry but an error occurred",

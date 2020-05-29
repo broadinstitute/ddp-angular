@@ -20,6 +20,7 @@ export class ToolkitConfigurationService {
     bloodReleaseGuid: string;
     followupGuid: string;
     covidSurveyGuid: string;
+    addressGuid: string;
 
     // URLs
     aboutUsUrl: string;
@@ -45,6 +46,7 @@ export class ToolkitConfigurationService {
     followupUrl: string;
     doneUrl: string;
     covidSurveyUrl: string;
+    addressUrl: string;
 
     // Social media and contacts
     phone: string;
