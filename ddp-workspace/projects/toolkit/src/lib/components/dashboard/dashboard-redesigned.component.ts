@@ -10,8 +10,8 @@ import { AnnouncementsServiceAgent } from 'ddp-sdk';
     template: `
         <main class="main">
             <section class="section dashboard-title-section">
-                <div class="content content_medium">
-                    <h1 translate>Toolkit.Dashboard.Title</h1>
+                <div class="content content_medium content_wide">
+                    <h1 class="dashboard-title-section__title" translate>Toolkit.Dashboard.Title</h1>
                 </div>
             </section>
             <ng-container *ngFor="let announcement of announcementMessages; let i = index">
@@ -34,6 +34,7 @@ import { AnnouncementsServiceAgent } from 'ddp-sdk';
                 <div class="content content_medium">
                     <div class="dashboard-content dashboard-content_table">
                         <ddp-user-activities [studyGuid]="studyGuid"
+                                             [displayedColumns]="config.dashboardDisplayedColumns"
                                              (open)="navigate($event)">
                         </ddp-user-activities>
                     </div>
@@ -46,8 +47,8 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private headerConfig: HeaderConfigurationService,
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
-        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
-        super(_router, _announcements, _toolkitConfiguration);
+        @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
+        super(_router, _announcements, config);
     }
 
     public ngOnInit(): void {

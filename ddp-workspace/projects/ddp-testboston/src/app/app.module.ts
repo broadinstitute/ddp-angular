@@ -68,6 +68,7 @@ toolkitConfig.phone = '617-525-8418';
 toolkitConfig.infoEmail = 'info@testboston.org';
 toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 toolkitConfig.agreeConsent = true;
+toolkitConfig.dashboardDisplayedColumns = ['name', 'status', 'actions'];
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;

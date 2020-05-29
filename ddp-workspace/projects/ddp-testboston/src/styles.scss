@@ -1,6 +1,7 @@
 @import 'app-theme.scss';
 @import './style/buttons.scss';
 @import './style/activity.scss';
+@import './style/dashboard.scss';
 
 $custom-typography: mat-typography-config($font-family: 'Nunito');
 
@@ -87,6 +88,10 @@ li {
     margin: 0 auto;
     padding: 0 1.5625rem;
     max-width: 700px;
+
+    &_wide {
+        max-width: 1200px;
+    }
 }
 
 .center {
