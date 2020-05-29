@@ -11,12 +11,16 @@ export class ActivityMonthRequiredDateValidationRule extends ActivityAbstractVal
     public recalculate(): boolean {
         if (this.question.answer != null) {
             const value = this.question.answer;
-            if (value.month == null) {
+            if (!this.isBlank(value) && value.month == null) {
                 this.result = this.message;
                 return false;
             }
         }
         this.result = null;
         return true;
+    }
+
+    private isBlank(value: DatePickerValue): boolean {
+        return value.year == null && value.month == null && value.day == null;
     }
 }
