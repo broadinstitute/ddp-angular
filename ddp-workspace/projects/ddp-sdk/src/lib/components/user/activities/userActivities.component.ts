@@ -197,9 +197,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // observable stream from main data source, so we will get
           // single final result when both statuses and activity
           // instances will be loaded
-          mergeMap(x => {
-            return this.dataSource.isNull;
-          }, (x, y) => y)
+          mergeMap(x => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
         ).subscribe(x => this.loaded = !x);
