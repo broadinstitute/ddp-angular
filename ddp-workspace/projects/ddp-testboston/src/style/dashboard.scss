@@ -107,3 +107,10 @@
 .dashboard-activity-button:hover {
     color: mat-color($app-theme, 650) !important;
 }
+
+
+@media only screen and (max-width: 480px) {
+    .dashboard-section {
+        margin: 2rem 0 4rem 0;
+    }
+}
