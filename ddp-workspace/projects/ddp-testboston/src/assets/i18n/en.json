@@ -73,64 +73,80 @@
                 {
                     "Question": "Can anybody join this study?",
                     "Paragraphs": [
+                        "TestBoston is open to a randomly selected group of adult residents from the greater boston area, who have received care at Brigham and Women’s Hospital at least once in the past year. Each randomly selected patient will receive an invitation to the study by postal mail or email."
+                    ]
+                },
+                {
+                    "Question": "Will I get a COVID-19 test if I join the study?",
+                    "Paragraphs": [
+                        "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home-testing kit containing two tests within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab tests if you have COVID-19 right now. You will receive the results of this test. The finger prick tests if you have antibodies to COVID-19 (meaning that you were sick with or were exposed to the virus in the past). We are not currently permitted to give you the results of your antibody test. If you agree to be re-tested, we will send you kits to repeat these tests every month for 5 additional months."
+                    ]
+                },
+                {
+                    "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
+                    "Paragraphs": [
+                        "No - anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study regardless of whether or not you are experiencing symptoms (or have ever experienced symptoms in the past)."
+                    ]
+                },
+                {
+                    "Question": "Do I have to go anywhere to be in the study?",
+                    "Paragraphs": [
+                        "No. TestBoston is a home-based study. Participants in TestBoston do not have to visit a clinic, hospital, or doctor’s office. Participants will answer a short survey online and receive COVID-19 sample collection kits at home, which are mailed back to our lab."
+                    ]
+                },
+                {
+                    "Question": "Will a doctor, nurse, or study staff visit my house to test me?",
+                    "Paragraphs": [
+                        "No, you will receive a sample collection kit in the mail and independently complete a nasal swab and a finger prick blood test by yourself. If you have any questions, you may reach the study team at any time by phone or email."
+                    ]
+                },
+                {
+                    "Question": "How long does it take to find out the test result?",
+                    "Paragraphs": [
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
                     ]
                 },
                 {
-                    "Question": "Will I get a COVID-19 test if I join?",
+                    "Question": "Why can’t you give me the antibody test result?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
                     ]
                 },
                 {
-                    "Question": "Is it free to participate?",
+                    "Question": "Is it free to participate in TestBoston?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                        "Yes. There is no charge to participate in TestBoston."
                     ]
                 },
                 {
-                    "Question": "What will I be asked to do?",
+                    "Question": "What will I have to do if I join the study?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                        "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants are also asked to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot."
                     ]
                 },
                 {
-                    "Question": "Can I invite my family members to join this study?",
+                    "Question": "Can my family join TestBoston?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to join the TestBoston mailing list."
+                    ]
+                },
+                {
+                    "Question": "Can I give my invitation code to someone else?",
+                    "Paragraphs": [
+                        "No, the invitation code should only be used by the person that the letter is addressed to."
                     ]
                 },
                 {
                     "Question": "Who is running this study?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                        "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Mass General Brigham (MGB, formerly Partners Healthcare), and the Broad Institute of MIT and Harvard. The people leading the study are Dr. Lisa Cosimi, Dr. Ann Woolley, and Dr. Deborah Hung. All the doctors are infectious disease clinicians at Brigham and Women’s Hospital.",
+                        "MGB is the largest healthcare system in the Boston area. Its hospitals include Brigham and Women’s and Massachusetts General Hospital. The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
                     ]
                 },
                 {
                     "Question": "How long will the study last?",
                     "Paragraphs": [
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa.",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat interdum sem, id consequat dui rhoncus at. Phasellus non ligula in nunc convallis maximus. Vivamus nisl tellus, gravida et luctus nec, mollis in dolor. Sed congue massa."
+                        "Participants in the study can decide to stop being in the study at any time. Individuals who participate in the entire study can expect to complete the study after 6 months."
                     ]
                 }
             ]
