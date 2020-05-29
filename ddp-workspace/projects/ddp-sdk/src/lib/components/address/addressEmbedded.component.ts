@@ -5,7 +5,7 @@ import { Address } from '../../models/address';
 import { AddressError } from '../../models/addressError';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import * as util from 'underscore';
-import { BehaviorSubject, combineLatest, merge, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -22,6 +22,7 @@ import {
   startWith,
   switchMap,
   take,
+  takeUntil,
   tap,
   withLatestFrom
 } from 'rxjs/operators';
@@ -175,6 +176,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   private saveTrigger$ = new Subject<void>();
   private state$: Observable<ComponentState>;
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
+  private stateSubscription: Subscription;
 
 
   constructor(
@@ -207,7 +209,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       tap(state =>  console.debug('New embeddedComponentState$=%o', state)),
       shareReplay(1)
     );
-    this.state$.subscribe();
+    this.stateSubscription = this.state$.pipe(
+        takeUntil(this.ngUnsubscribe))
+        .subscribe();
   }
 
   ngOnInit(): void {
@@ -512,25 +516,28 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       tap(status => this.validStatusChanged.emit(status))
     );
 
-    processSubmitAnnouncement$ && processSubmitAnnouncement$.subscribe();
+    processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
+        takeUntil(this.ngUnsubscribe))
+        .subscribe();
     merge(
-      initializeStateAction$,
-      saveTempCurrentAddressAction$,
-      verifyInputComponentAddressAction$,
-      verifyInputComponentSparseAddress$,
-      handleAddressSuggestionAction$,
-      saveRealAddressAction$,
-      removeTempAddressAction$,
-      emitValueChangedAction$,
-      updateInputComponentWithSavedAddressAction$,
-      emitComponentBusyAction$,
-      setupSuggestedAddressFormControl$,
-      handleSelectedWarnings$,
-      processVerificationStatusErrorAction$,
-      processOtherVerificationErrorsAction$,
-      emitValidStatusAction$,
-      updateInputComponentWithSelectedAddress$
-    ).subscribe();
+        initializeStateAction$,
+        saveTempCurrentAddressAction$,
+        verifyInputComponentAddressAction$,
+        verifyInputComponentSparseAddress$,
+        handleAddressSuggestionAction$,
+        saveRealAddressAction$,
+        removeTempAddressAction$,
+        emitValueChangedAction$,
+        updateInputComponentWithSavedAddressAction$,
+        emitComponentBusyAction$,
+        setupSuggestedAddressFormControl$,
+        handleSelectedWarnings$,
+        processVerificationStatusErrorAction$,
+        processOtherVerificationErrorsAction$,
+        emitValidStatusAction$,
+        updateInputComponentWithSelectedAddress$
+    ).pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe();
   }
 
 
