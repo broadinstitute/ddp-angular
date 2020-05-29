@@ -1,5 +1,24 @@
 @import '../app-theme.scss';
 
+// common activity styles
+.section-spinner {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.static-spinner {
+    padding-bottom: 8rem;
+    padding-top: 1rem;
+}
+
+.main_activity {
+    padding-bottom: 8rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+}
+
 // buttons layout
 .activity-buttons {
     display: flex;
