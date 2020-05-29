@@ -49,6 +49,11 @@
         line-height: 1.75rem !important;
     }
 
+    .mat-header-cell:last-of-type,
+    .mat-cell:last-of-type {
+        padding-right: 10px !important;
+    }
+
     .dashboard-mobile-label {
         color: rgba(0, 0, 0, 0.54);
     }
