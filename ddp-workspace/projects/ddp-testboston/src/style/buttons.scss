@@ -115,6 +115,12 @@
         }
     }
 
+    &_small {
+        padding: 0.2rem 0;
+        font-size: 1.125rem;
+        line-height: 2.125rem;
+    }
+
     &__spinner {
         margin-left: 5px;
         height: 20px !important;
