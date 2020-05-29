@@ -19,6 +19,7 @@
                            formControlName="invitationId"
                            pattern="[a-zA-Z0-9]{12}"
                            maxLength="18"
+                           [attr.disabled]="isLoading ? true : null"
                            [placeholder]="'PrequalPage.InvitationCode.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidInvitation)">
@@ -31,13 +32,14 @@
                            minlength="5"
                            maxlength="5"
                            pattern="[0-9]{5}"
+                           [attr.disabled]="isLoading ? true : null"
                            [placeholder]="'PrequalPage.Zip.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidQualifications)">
                     <div class="error error_input" [innerHTML]="error.message"></div>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Adult.Question</p>
-                <mat-radio-group class="age" formControlName="adult">
+                <mat-radio-group class="age" formControlName="adult" [disabled]="isLoading">
                     <mat-radio-button value="true" class="age__item">
                         {{'PrequalPage.Adult.Yes' | translate}}
                     </mat-radio-button>
