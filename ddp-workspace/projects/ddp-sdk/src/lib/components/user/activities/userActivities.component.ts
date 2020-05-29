@@ -7,6 +7,7 @@ import { UserActivityServiceAgent } from '../../../services/serviceAgents/userAc
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
+import { DashboardColumns } from '../../../models/dashboardColumns';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
 
@@ -165,8 +166,8 @@ import { tap, mergeMap } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
   @Input() studyGuid: string;
+  @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
-  public displayedColumns = ['name', 'summary', 'date', 'status', 'actions'];
   public dataSource: UserActivitiesDataSource;
   public loaded: boolean;
   private states: Array<ActivityInstanceState> | null;

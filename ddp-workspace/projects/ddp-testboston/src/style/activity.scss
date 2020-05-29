@@ -16,3 +16,11 @@
         }
     }
 }
+
+// info box
+.infobox {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 8px;
+    background-color: rgba(113, 84, 255, 0.06);
+    padding: 1rem;
+}

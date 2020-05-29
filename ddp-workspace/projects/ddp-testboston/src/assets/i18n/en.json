@@ -166,7 +166,7 @@
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "My Dashboard"
+            "Title": "Dashboard"
         },
         "Password": {
             "Title": "Please enter the password",
@@ -195,7 +195,7 @@
         "NextButton": "Next",
         "PreviousButton": "Back",
         "SavingButton": "Saving",
-        "EditButton": "View/Edit",
+        "EditButton": "Continue",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
         "NotAgreeButton": "I am not ready to agree",
