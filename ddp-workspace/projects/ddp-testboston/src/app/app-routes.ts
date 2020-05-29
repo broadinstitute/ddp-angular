@@ -5,6 +5,7 @@ export const AppRoutes = {
     Error: 'error',
     Join: 'join',
     LoginLanding: 'login-landing',
+    LocalAuth: 'auth',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
