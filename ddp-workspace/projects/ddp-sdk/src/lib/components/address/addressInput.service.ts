@@ -129,7 +129,6 @@ export class AddressInputService implements OnDestroy {
       // value
       // todo maybe some way to introduce derived updates and make it so state is updated atomically?
       this.addressForm.valueChanges.pipe(
-        tap((changes) => console.debug('getting form changes:' + JSON.stringify(changes))),
         distinctUntilChanged((x, y) => _.isEqual(x, y)),
         concatMap((formValue) => {
           return of(formValue['country']).pipe(
@@ -161,7 +160,6 @@ export class AddressInputService implements OnDestroy {
         ...{ isReadOnly: this.inputIsReadOnly$.getValue() }
       }) as AddressInputComponentState),
       scan((acc: AddressInputComponentState, change) => ({ ...acc, ...change })),
-      tap(overallState => console.debug('the overall state is:' + JSON.stringify(overallState))),
       // this replay here turns out to be important. Make sure everyone gets that first event
       shareReplay(1)
     );
@@ -191,18 +189,14 @@ export class AddressInputService implements OnDestroy {
 
 
     const isReadOnly$: Observable<boolean> = componentState$.pipe(
-      tap(() => console.debug('about to pluck isReadOnly')),
       pluck<AddressInputComponentState, 'isReadOnly'>('isReadOnly'),
       distinctUntilChanged((x, y) => {
-        console.debug('previous isReadOnly: ' + x + 'new isReadOnly' + y);
         return x === y;
       }),
-      tap(isRead => console.debug('emitting: ' + isRead)),
       share()
     );
 
     const isReadOnlyFormChanges$ = isReadOnly$.pipe(
-      tap((isReadOnly) => console.debug('about to set is readonly to: ' + isReadOnly)),
       tap(readOnly => {
         ['country', 'name', 'street1', 'street2', 'city', 'state', 'zip', 'phone', 'guid']
           .forEach(controlName => {
@@ -222,7 +216,7 @@ export class AddressInputService implements OnDestroy {
 
     // this is the address that we are building from data in the form
     // todo: can we factor out all these distinctUntilChanged. We have them everywhere
-    const formAddress$ = componentState$.pipe(
+    const formAddress$: Observable<Address> = componentState$.pipe(
       filter((compState) => compState.formDataSource === 'COMPONENT'),
       // only care about changes
       distinctUntilChanged((x, y) => _.isEqual(x.formData, y.formData)),
@@ -230,30 +224,28 @@ export class AddressInputService implements OnDestroy {
       skip(1),
       map(compState => this.buildAddressFromFormData(compState.formData, compState.countryInfo)),
       distinctUntilChanged((x, y) => _.isEqual(x, y)),
-      tap((newAddress) => console.debug('generated new formAddress$ %o', newAddress)),
       share());
 
     const street1Changed$: Observable<boolean> = formAddress$.pipe(
       pluck('street1'),
+      startWith(null as string | null),
       pairwise(),
       map(([prev, current]) => prev !== current),
       startWith(false),
-      tap((changed) => console.debug('generated new street1changed with value:' + changed)),
       share());
-
 
     // if street1 changed, user is actually typing a value or trying to use google autocomplete
     // since we don't know what they are up to, we will wait before we push the address
     // if we get an autocomplete google address, then we won't push the form address
     // Note that for this work properly we should always get a properly paired of address and street1Changed
-    const cancelableFormAddress$ = zip(formAddress$, street1Changed$).pipe(
-      concatMap(([formAddress, street1Changed]) =>
-        of(formAddress).pipe(
-          tap((address) => console.debug('inputs to canceLable:' + JSON.stringify(address) + street1Changed)),
-          delay(street1Changed ? 3000 : 0),
-          // If autocomplete address has come in during our delay, we don't emit the form address
-          takeUntil(this.googleAutocompleteAddress$),
-          take(1)
+    const cancelableFormAddress$ = street1Changed$.pipe(withLatestFrom(formAddress$)).pipe(
+      concatMap(([streetChanged, address]) =>
+        of(streetChanged).pipe(
+            delay(streetChanged ? 3000 : 0),
+            mapTo(address),
+            // If autocomplete address has come in during our delay, we don't emit the form address
+            takeUntil(this.googleAutocompleteAddress$),
+            take(1)
         )),
       share());
 
@@ -288,8 +280,7 @@ export class AddressInputService implements OnDestroy {
       cancelableFormAddress$.pipe(map(formAddress => ({ address: formAddress, fromGoogle: false }))))
       .pipe(
         tap((addressWithSource: AddressWithSource) => {
-          addressWithSource.fromGoogle && this.setAddressValues(addressWithSource.address, false, false);
-          //    this.syncNativeStreet1WithForm(addressWithSource.address.street1);
+          this.setAddressValues(addressWithSource.address, false, false);
         })
       );
 

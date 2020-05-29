@@ -39,6 +39,7 @@ interface ComponentState {
   enteredAddress: Address | null;
   suggestedAddress: Address | null;
   formErrorMessages: string[];
+  formWarningMessages: string[];
   fieldErrors: AddressError[];
   warnings?: AddressVerificationWarnings;
 }
@@ -60,8 +61,8 @@ interface AddressSuggestion {
             [readonly]="isReadOnly$ | async"
             (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
     <ddp-validation-message
-            *ngIf="(formErrorMessages$ | async).length > 0"
-            [message]="(formErrorMessages$ | async).join(' ')">
+            *ngIf="(errorMessagesToDisplay$ | async).length > 0"
+            [message]="(errorMessagesToDisplay$ | async).join(' ')">
     </ddp-validation-message>
     <form [formGroup]="suggestionForm" novalidate>
         <mat-card id="suggestionMatCard" *ngIf="suggestionInfo$ | async as info">
@@ -111,6 +112,7 @@ interface AddressSuggestion {
 })
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   @Input() block: MailAddressBlock;
+
   @Input()
   public set readonly(val: boolean) {
     this.stateUpdates$.next({ isReadOnly: val });
@@ -158,10 +160,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
   @ViewChild(AddressInputComponent, { static: true }) addressInputComponent: AddressInputComponent;
   public formErrorMessages$: Observable<string[]>;
+  public errorMessagesToDisplay$: Observable<string[]>;
   public suggestionForm: FormGroup;
   public isInputComponentBusy$ = new BehaviorSubject<boolean>(false);
   // variables for template
-  public suggestionInfo$: Observable<AddressSuggestion>;
+  public suggestionInfo$: Observable<AddressSuggestion | null>;
   public inputAddress$: Observable<Address | null>;
   public addressErrors$: Observable<AddressError[]>
   public isReadOnly$: Observable<boolean>;
@@ -193,6 +196,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       showSuggestion: false,
       enteredAddress: null,
       suggestedAddress: null,
+      formWarningMessages: [],
       formErrorMessages: [],
       fieldErrors: []
     };
@@ -200,10 +204,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
       scan((acc: ComponentState, update) => ({ ...acc, ...update })),
+      tap(state =>  console.debug('New embeddedComponentState$=%o', state)),
       shareReplay(1)
     );
-
-    this.state$.subscribe((state) => console.debug('New embeddedComponentState$=' + JSON.stringify(state)));
+    this.state$.subscribe();
   }
 
   ngOnInit(): void {
@@ -212,7 +216,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
   setupActions(): void {
     const verificationError$ = new Subject<any>();
-    const addressSuggestion$ = new Subject<AddressSuggestion>();
+    const addressSuggestion$ = new Subject<AddressSuggestion | null>();
 
     const busyCounter$ = new BehaviorSubject(0);
 
@@ -241,8 +245,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       finalize(() => busyCounter$.next(-1))
     );
 
-    this.inputComponentAddress$.subscribe(address => console.debug('The new inputcomponentaddress: ' + JSON.stringify(address)));
-
     // derived observables
     this.isReadOnly$ = this.state$.pipe(
       pluck('isReadOnly'),
@@ -252,7 +254,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     this.inputAddress$ = this.state$.pipe(
       pluck('inputAddress'),
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
       shareReplay()
     );
 
@@ -264,7 +265,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     this.addressErrors$ = this.state$.pipe(
       pluck('fieldErrors'),
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
       shareReplay()
     );
 
@@ -274,6 +274,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                   entered: state.enteredAddress,
                   warnings: state.warnings} : null),
       shareReplay(1)
+    );
+
+    this.errorMessagesToDisplay$ = this.state$.pipe(
+        map(state => state.formErrorMessages.concat(state.formWarningMessages)),
+        distinctUntilChanged((x, y) => util.isEqual(x, y)),
+        shareReplay(1)
     );
 
     const setupSuggestedAddressFormControl$ = this.suggestionInfo$.pipe(
@@ -291,6 +297,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     const verifyInputComponentSparseAddress$ = this.inputComponentAddress$.pipe(
       filter(address => !this.enoughDataToVerify(address)),
+      tap(address => addressSuggestion$.next(null)),
       map(address => [address, this.computeValidityForSparseAddress(address)]),
       tap(([address, isValid]) => {
         if (address && !isValid) {
@@ -303,6 +310,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
       filter(address => this.enoughDataToVerify(address)),
+      tap(address => addressSuggestion$.next(null)),
       tap(() => busyCounter$.next(1)),
       switchMap(inputAddress =>
         this.addressService.verifyAddress(inputAddress).pipe(
@@ -322,6 +330,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     const handleAddressSuggestionAction$ = addressSuggestion$.pipe(
       tap(() => this.stateUpdates$.next({ fieldErrors: []})),
+      filter(suggestion => !!suggestion),
       tap((addressSuggestion) => {
         const suggested = addressSuggestion.suggested;
         const entered = addressSuggestion.entered;
@@ -332,11 +341,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         // we might have warning messages for the entered address
         const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
         if (!suggested.hasSameDataValues(entered)) {
-          this.stateUpdates$.next({ formErrorMessages: enteredWarningMessages, warnings: addressSuggestion.warnings,
-            suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true });
+          this.stateUpdates$.next({ formErrorMessages: [], formWarningMessages: enteredWarningMessages,
+            warnings: addressSuggestion.warnings, suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true });
         } else {
-          this.stateUpdates$.next({ formErrorMessages: enteredWarningMessages, warnings: addressSuggestion.warnings,
-            suggestedAddress: null, enteredAddress: null, showSuggestion: false });
+          this.stateUpdates$.next({ formErrorMessages: [], formWarningMessages: enteredWarningMessages,
+            warnings: addressSuggestion.warnings, suggestedAddress: null, enteredAddress: null, showSuggestion: false });
         }
       })
     );
@@ -353,7 +362,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         withLatestFrom(this.suggestionInfo$),
         tap(([radioValue, suggestionInfo]) =>
             this.stateUpdates$.next({
-              formErrorMessages: suggestionInfo.warnings[radioValue].map(warn => warn.message)
+              formWarningMessages: suggestionInfo ? suggestionInfo.warnings[radioValue].map(warn => warn.message) : []
             })),
         share()
     );
@@ -374,7 +383,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     ).pipe(
       distinctUntilChanged((x, y) => util.isEqual(x, y)),
       withLatestFrom(this.state$),
-      tap((inputAddres) => console.debug('about to see if we should save a temp address on inputaddrss')),
       filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
       tap(() => busyCounter$.next(1)),
       concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
@@ -454,9 +462,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
-      tap(() => console.debug('trying to call remove')),
       withLatestFrom(this.state$),
-      tap((args) => console.debug('about to filter with:' + JSON.stringify(args))),
       filter(([_, state]) => !!state.activityInstanceGuid),
       tap(() => busyCounter$.next(1)),
       concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
@@ -464,19 +470,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         console.debug('temp delete failed. This is OK');
         return of(null);
       }),
-      tap(() => console.debug('temp address deleted!')),
       tap(() => busyCounter$.next(-1))
     );
 
     // "Real" as opposed to "Temp"
     const saveRealAddressAction$ = this.saveTrigger$.pipe(
-      tap(() => console.debug('save trigger called')),
       withLatestFrom(currentAddress$),
       filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
-      tap(() => console.debug('about to saveaddress!!')),
       tap(() => busyCounter$.next(1)),
       concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-      tap((address) => console.debug('address saved!! ' + JSON.stringify(address))),
       tap(() => busyCounter$.next(-1)),
       share()
     );
@@ -507,7 +509,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.addressErrors$]).pipe(
       map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
       distinctUntilChanged(),
-      tap(status => console.debug('validStatusChanged to:' + status)),
       tap(status => this.validStatusChanged.emit(status))
     );
 

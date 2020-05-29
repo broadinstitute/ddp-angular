@@ -4,7 +4,7 @@ import { AddressInputComponent } from './addressInput.component';
 import { ValidationMessage } from '../validationMessage.component';
 import { MatCardModule, MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
+import { Component, DebugElement, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { of, Subject, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
@@ -20,7 +20,8 @@ import { AddressVerificationResponse } from '../../models/addressVerificationRes
 @Component({
   selector: 'ddp-address-input',
   template: `
-    <div></div>`
+    <div>{{ address }}</div>
+    <div>{{ addressErrors }}</div>`
 })
 class FakeAddressInputComponent {
   @Output()valueChanged = new EventEmitter();
@@ -85,8 +86,9 @@ describe('AddressEmbeddedComponent', () => {
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
+    expect(childComponent).toBeTruthy();
   });
-  it('ensure try to read default and not temp address at startup', () => {
+  it('ensure try to read default and not temp address at startup when no activity guid', () => {
     fixture.detectChanges();
     // this call should return null
     expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalled();
@@ -94,7 +96,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.getTempAddress).not.toHaveBeenCalled();
   });
 
-  it('ensure try to read default and and temp address at startup', () => {
+  it('ensure try to read default and temp address at startup', () => {
     // this call should return null
     component.activityGuid = '123';
     fixture.detectChanges();
@@ -157,7 +159,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(groupInstance.value).toBe('entered');
   });
 
-  it ('test suggestion selection changes address and saves temp address and updates child component', () => {
+  it('test suggestion selection changes address and saves temp address and updates child component', () => {
     const addresses = emitAddressThatTriggersSuggestion();
     component.activityGuid = '123';
     const radioGroupComponentDebug = fixture.debugElement.query(By.directive(MatRadioGroup));
@@ -221,7 +223,7 @@ describe('AddressEmbeddedComponent', () => {
 
   });
 
-  it ('test global address error from EasyPost', () => {
+  it('test global address error from EasyPost', () => {
     component.activityGuid = '123';
     const validationMessageBefore = findValidationMessageDebug(fixture);
     expect(validationMessageBefore).toBeNull();
@@ -247,7 +249,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
   });
 
-  it ('test field level error from EasyPost', () => {
+  it('test field level error from EasyPost', () => {
     component.activityGuid = '123';
     const validationMessageBefore = findValidationMessageDebug(fixture);
     expect(validationMessageBefore).toBeNull();
@@ -273,7 +275,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
   });
 
-  it ('test show verify warnings', fakeAsync(() => {
+  it('test show verify warnings', fakeAsync(() => {
     component.activityGuid = '123';
 
     const validationMessageBefore = findValidationMessageDebug(fixture);
@@ -289,7 +291,7 @@ describe('AddressEmbeddedComponent', () => {
     fixture.detectChanges();
 
     let formErrorMessagesAfterVerify = null;
-    component.formErrorMessages$.subscribe(msgs => formErrorMessagesAfterVerify = msgs);
+    component.errorMessagesToDisplay$.subscribe(msgs => formErrorMessagesAfterVerify = msgs);
 
     childComponent.valueChanged.emit(addressToEnter);
     fixture.detectChanges();
