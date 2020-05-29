@@ -12,6 +12,10 @@ import { RecaptchaComponent } from 'ng-recaptcha';
   styleUrls: ['./user-registration-prequal.component.scss']
 })
 export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
+  public phone: string;
+  public email: string;
+  public phoneHref: string;
+  public emailHref: string;
   public formGroup: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
@@ -25,6 +29,10 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
     @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
+    this.phone = this.config.phone;
+    this.email = this.config.infoEmail;
+    this.phoneHref = `tel:${this.phone}`;
+    this.emailHref = `mailto:${this.email}`;
     this.initForm();
   }
 
