@@ -8,6 +8,7 @@ import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AddressVerificationResponse } from '../models/addressVerificationResponse';
 
 @Injectable()
 export class AddressService extends UserServiceAgent<Address> {
@@ -19,10 +20,10 @@ export class AddressService extends UserServiceAgent<Address> {
         super(session, configuration, http, logger);
     }
 
-    public verifyAddress(address: Address): Observable<Address> {
-        return this.postObservable('/profile/address/verify', address, null, true).pipe(
+    public verifyAddress(address: Address): Observable<AddressVerificationResponse> {
+        return this.postObservable('/profile/address/verify', {...address, studyGuid: this.configuration.studyGuid}, null, true).pipe(
             map((data: any) => {
-                return new Address(data.body);
+                return new AddressVerificationResponse(data.body);
             }),
             catchError((error) => {
                 return throwError(error.error as AddressVerificationStatus);
