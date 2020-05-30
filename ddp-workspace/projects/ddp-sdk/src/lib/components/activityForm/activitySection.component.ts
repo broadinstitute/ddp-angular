@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { ActivityBlock } from '../../models/activity/activityBlock';
 import { BlockType } from '../../models/activity/blockType';
@@ -8,6 +8,7 @@ import { ActivityInstitutionBlock } from '../../models/activity/activityInstitut
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
+import { ConfigurationService, UserActivityServiceAgent } from 'ddp-sdk';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -59,6 +60,7 @@ import { ConditionalBlock } from '../../models/activity/conditionalBlock';
                 </div>
                 <div *ngIf="isMailAddress(block)">
                     <ddp-address-embedded [block]="block"
+                                          [country]="config.country"
                                           [readonly]="readonly"
                                           [activityGuid]="activityGuid"
                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
@@ -90,6 +92,9 @@ export class ActivitySectionComponent {
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
     private embeddedValidationStatus: boolean[] = new Array(2).fill(true);
+
+    constructor(@Inject('ddp.config') public config: ConfigurationService) {
+    }
 
     public updateVisibility(visibility: BlockVisibility[]): void {
         this.visibilityChanged.emit(visibility);
