@@ -260,8 +260,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.staticCountry$ = this.state$.pipe(
         map(compState => {
           // ok to look at country at ngOnInit. We don't want to do this more than once
-          if ((this.country && (!(compState.inputAddress) || (compState.inputAddress.country === this.theCountry)))) {
-            return this.theCountry;
+          if ((this.country && (!(compState.inputAddress) || (compState.inputAddress.country === this.country)))) {
+            return this.country;
           } else {
             return null;
           }
