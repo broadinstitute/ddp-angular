@@ -60,6 +60,7 @@ interface AddressSuggestion {
             [address]="inputAddress$ | async"
             [addressErrors]="addressErrors$ | async"
             [readonly]="isReadOnly$ | async"
+            [country]="staticCountry$ | async"
             (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
     <ddp-validation-message
             *ngIf="(errorMessagesToDisplay$ | async).length > 0"
@@ -135,6 +136,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
   /**
+   * Use if we want to limit country to be only one. Country field will not be shown
+   */
+  @Input()
+  public country: string | null;
+
+  /**
    * Will emit an address whenever it is saved
    * type {EventEmitter<Address>}
    */
@@ -167,10 +174,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   // variables for template
   public suggestionInfo$: Observable<AddressSuggestion | null>;
   public inputAddress$: Observable<Address | null>;
-  public addressErrors$: Observable<AddressError[]>
+  public addressErrors$: Observable<AddressError[]>;
   public isReadOnly$: Observable<boolean>;
   public inputComponentAddress$ = new Subject<Address | null>();
   public generateTaggedAddress = generateTaggedAddress;
+  public staticCountry$: Observable<string | null>;
 
   private ngUnsubscribe = new Subject();
   private saveTrigger$ = new Subject<void>();
@@ -247,6 +255,19 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       // guess we are saving temp address again. No harm but not nice either.
       tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
       finalize(() => busyCounter$.next(-1))
+    );
+
+    this.staticCountry$ = this.state$.pipe(
+        map(compState => {
+          // ok to look at country at ngOnInit. We don't want to do this more than once
+          if ((this.country && (!(compState.inputAddress) || (compState.inputAddress.country === this.theCountry)))) {
+            return this.theCountry;
+          } else {
+            return null;
+          }
+        }),
+        distinctUntilChanged(),
+        shareReplay()
     );
 
     // derived observables
@@ -382,9 +403,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     // saving addresses coming from either the inputcomponent or that have been selected from suggestion radio group
-    const saveTempCurrentAddressAction$ = merge(
-      currentAddress$
-    ).pipe(
+    const saveTempCurrentAddressAction$ = currentAddress$.pipe(
       distinctUntilChanged((x, y) => util.isEqual(x, y)),
       withLatestFrom(this.state$),
       filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
