@@ -120,9 +120,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
    * a "Save" event is received.
    */
   @Input()
-  public set activityGuid(val: string | null) {
-    this.stateUpdates$.next({ activityInstanceGuid: val });
-  }
+  public activityGuid: string | null;
 
   /**
    * Will emit an address whenever it is saved
@@ -196,11 +194,21 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       shareReplay(1)
     );
 
+    this.inputAddress$ = this.addressService.findDefaultAddress().pipe(
+        mergeMap(defaultAddress => !defaultAddress ? tempAddress$ : of(defaultAddress)));
+    const tempAddress$: Observable<Address | null> = this.activityGuid ?
+        this.addressService.getTempAddress(this.activityGuid).pipe(
+            tap((tempAddress) => this.inputComponentAddress$.next(tempAddress))) :
+        of(null);
+
     this.state$.subscribe((state) => console.debug('New embeddedComponentState$=' + JSON.stringify(state)));
   }
 
   ngOnInit(): void {
     this.setupActions();
+  }
+  private initializeInputAddress(): void {
+      // this.busyCounter$.next(1);
   }
 
   setupActions(): void {
@@ -215,22 +223,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       distinctUntilChanged()
     );
 
+
+
     const initializeStateAction$ = this.state$.pipe(
       take(1),
+      tap(() => console.log('i am doing intializeStateASction')),
       tap(() => busyCounter$.next(1)),
-      mergeMap((state) => this.addressService.findDefaultAddress().pipe(
-        map(defaultAddress => [state, defaultAddress]))
-      ),
-      tap(([state, defaultAddress]) =>
-        defaultAddress && this.stateUpdates$.next({ inputAddress: defaultAddress as Address })),
-      // filter for case where we need to go on to look for a temp address?
-      filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
-      map(([state, _]) => state as ComponentState),
-      mergeMap((state) => this.addressService.getTempAddress(state.activityInstanceGuid)),
-      tap((tempAddress) => tempAddress && this.stateUpdates$.next({ inputAddress: tempAddress as Address })),
-      // fake that the address was just entered. Perhaps this can become a separate subject?
-      // guess we are saving temp address again. No harm but not nice either.
-      tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
+      tap(() => this.initializeInputAddress()),
       finalize(() => busyCounter$.next(-1))
     );
 
@@ -240,12 +239,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.isReadOnly$ = this.state$.pipe(
       pluck('isReadOnly'),
       distinctUntilChanged(),
-      shareReplay()
-    );
-
-    this.inputAddress$ = this.state$.pipe(
-      pluck('inputAddress'),
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
       shareReplay()
     );
 
@@ -350,12 +343,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const saveTempCurrentAddressAction$ = merge(
       currentAddress$
     ).pipe(
+      tap((currentAddrss) => console.log("got current addresss and it is: %o", currentAddrss)),
       distinctUntilChanged((x, y) => util.isEqual(x, y)),
       withLatestFrom(this.state$),
       tap((inputAddres) => console.debug('about to see if we should save a temp address on inputaddrss')),
-      filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
+      filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!this.activityGuid),
       tap(() => busyCounter$.next(1)),
-      concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
+      concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, this.activityGuid)),
       catchError((error) => {
         console.debug('there was a problems saving temp address:' + error);
         return of(null);
@@ -492,12 +486,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     processSubmitAnnouncement$ && processSubmitAnnouncement$.subscribe();
     merge(
       initializeStateAction$,
-      saveTempCurrentAddressAction$,
       verifyInputComponentAddressAction$,
       verifyInputComponentSparseAddress$,
       verifyInputComponentAddressAction$,
       handleAddressSuggestionAction$,
-      saveRealAddressAction$,
+        saveRealAddressAction$,
       removeTempAddressAction$,
       emitValueChangedAction$,
       updateInputComponentWithSavedAddressAction$,
@@ -506,7 +499,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
       processVerificationStatusErrorAction$,
       processOtherVerificationErrorsAction$,
       emitValidStatusAction$,
-      updateInputComponentWithSelectedAddress$
+      updateInputComponentWithSelectedAddress$,
+     saveTempCurrentAddressAction$
     ).subscribe();
   }
 
