@@ -28,6 +28,7 @@ class FakeAddressInputComponent {
   @Input()address;
   @Input()readonly;
   @Input()addressErrors;
+  @Input()country;
   ais = {currentAddress$: new Subject<Address>()};
   public clearVerificationErrors(): void {
     console.log('verifications cleared!');
