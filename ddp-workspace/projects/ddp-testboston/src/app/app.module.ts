@@ -85,6 +85,7 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.country = 'US';
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
