@@ -502,6 +502,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
         tap(() => busyCounter$.next(1)),
         concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+        removeTempAddressOperator(),
         tap(() => busyCounter$.next(-1)),
         share()
     );
@@ -543,7 +544,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         verifyInputComponentSparseAddress$,
         handleAddressSuggestionAction$,
         saveRealAddressAction$,
-        removeTempAddressAction$,
         emitValueChangedAction$,
         updateInputComponentWithSavedAddressAction$,
         emitComponentBusyAction$,
@@ -612,7 +612,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.componentBusy.pipe(
+      // finding that some slow http operations
+      // killed if we destroy too early
+      this.componentBusy.pipe(
         filter(busy => !busy),
         tap(() => {
           this.ngUnsubscribe.next();
