@@ -8,7 +8,7 @@ import { ActivityInstitutionBlock } from '../../models/activity/activityInstitut
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
-import { ConfigurationService, UserActivityServiceAgent } from 'ddp-sdk';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
     selector: 'ddp-activity-section',
