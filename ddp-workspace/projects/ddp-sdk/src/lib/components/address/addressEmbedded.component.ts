@@ -33,7 +33,6 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 
 interface ComponentState {
-  inputAddress: Address | null;
   isReadOnly: boolean;
   activityInstanceGuid: string | null;
   showSuggestion: boolean;
@@ -122,7 +121,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
   @Input()
   public set address(val: Address | null) {
-    this.stateUpdates$.next({ inputAddress: val });
+    this.inputAddress$.next(val);
   }
 
   /**
@@ -173,10 +172,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   public isInputComponentBusy$ = new BehaviorSubject<boolean>(false);
   // variables for template
   public suggestionInfo$: Observable<AddressSuggestion | null>;
-  public inputAddress$: Observable<Address | null>;
+  public inputAddress$: Subject<Address | null> = new BehaviorSubject(null);
   public addressErrors$: Observable<AddressError[]>;
   public isReadOnly$: Observable<boolean>;
-  public inputComponentAddress$ = new Subject<Address | null>();
+  public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
   public generateTaggedAddress = generateTaggedAddress;
   public staticCountry$: Observable<string | null>;
 
@@ -200,7 +199,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
   private initializeComponentState(): void {
     const initialState: ComponentState = {
-      inputAddress: null,
       isReadOnly: false,
       activityInstanceGuid: null,
       showSuggestion: false,
@@ -233,34 +231,34 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const busyCounter$ = new BehaviorSubject(0);
 
     const isThisComponentBusy$ = busyCounter$.pipe(
-      scan((acc, val) => acc + val, 0),
-      map(val => val > 0),
-      distinctUntilChanged()
+        scan((acc, val) => acc + val, 0),
+        map(val => val > 0),
+        distinctUntilChanged()
     );
 
     const initializeStateAction$ = this.state$.pipe(
-      take(1),
-      tap(() => busyCounter$.next(1)),
-      mergeMap((state) => this.addressService.findDefaultAddress().pipe(
-        map(defaultAddress => [state, defaultAddress]))
-      ),
-      tap(([state, defaultAddress]) =>
-        defaultAddress && this.stateUpdates$.next({ inputAddress: defaultAddress as Address })),
-      // filter for case where we need to go on to look for a temp address?
-      filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
-      map(([state, _]) => state as ComponentState),
-      mergeMap((state) => this.addressService.getTempAddress(state.activityInstanceGuid)),
-      tap((tempAddress) => tempAddress && this.stateUpdates$.next({ inputAddress: tempAddress as Address })),
-      // fake that the address was just entered. Perhaps this can become a separate subject?
-      // guess we are saving temp address again. No harm but not nice either.
-      tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
-      finalize(() => busyCounter$.next(-1))
+        take(1),
+        tap(() => busyCounter$.next(1)),
+        mergeMap((state) => this.addressService.findDefaultAddress().pipe(
+            map(defaultAddress => [state, defaultAddress]))
+        ),
+        tap(([_, defaultAddress]: [ComponentState, Address | null]) =>
+            defaultAddress && this.inputAddress$.next(defaultAddress)),
+        // filter for case where we need to go on to look for a temp address?
+        filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
+        // map(([state, _]) => state as ComponentState),
+        mergeMap(([state, _]) => this.addressService.getTempAddress(state.activityInstanceGuid)),
+        tap((tempAddress) => this.inputAddress$.next(tempAddress)),
+        // fake that the address was just entered. Perhaps this can become a separate subject?
+        // guess we are saving temp address again. No harm but not nice either.
+        tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
+        finalize(() => busyCounter$.next(-1)),
     );
 
-    this.staticCountry$ = this.state$.pipe(
-        map(compState => {
+    this.staticCountry$ = this.inputAddress$.pipe(
+        map(address => {
           // ok to look at country at ngOnInit. We don't want to do this more than once
-          if ((this.country && (!(compState.inputAddress) || (compState.inputAddress.country === this.country)))) {
+          if ((this.country && (!(address) || (address.country === this.country)))) {
             return this.country;
           } else {
             return null;
@@ -272,33 +270,30 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     // derived observables
     this.isReadOnly$ = this.state$.pipe(
-      pluck('isReadOnly'),
-      distinctUntilChanged(),
-      shareReplay()
-    );
-
-    this.inputAddress$ = this.state$.pipe(
-      pluck('inputAddress'),
-      shareReplay()
+        pluck('isReadOnly'),
+        distinctUntilChanged(),
+        shareReplay()
     );
 
     this.formErrorMessages$ = this.state$.pipe(
-      pluck('formErrorMessages'),
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
-      shareReplay()
+        pluck('formErrorMessages'),
+        distinctUntilChanged((x, y) => util.isEqual(x, y)),
+        shareReplay()
     );
 
     this.addressErrors$ = this.state$.pipe(
-      pluck('fieldErrors'),
-      shareReplay()
+        pluck('fieldErrors'),
+        shareReplay()
     );
 
     this.suggestionInfo$ = this.state$.pipe(
-      map(state => state.showSuggestion && !this.readonly ?
-                {suggested: state.suggestedAddress,
-                  entered: state.enteredAddress,
-                  warnings: state.warnings} : null),
-      shareReplay(1)
+        map(state => state.showSuggestion && !this.readonly ?
+            {
+              suggested: state.suggestedAddress,
+              entered: state.enteredAddress,
+              warnings: state.warnings
+            } : null),
+        shareReplay(1)
     );
 
     this.errorMessagesToDisplay$ = this.state$.pipe(
@@ -308,71 +303,77 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     const setupSuggestedAddressFormControl$ = this.suggestionInfo$.pipe(
-      filter(info => !!info),
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
-      tap(() => this.suggestionForm.get('suggestionRadioGroup').patchValue('entered'))
+        filter(info => !!info),
+        distinctUntilChanged((x, y) => util.isEqual(x, y)),
+        tap(() => this.suggestionForm.get('suggestionRadioGroup').patchValue('entered'))
     );
 
     const currentAddress$: Observable<Address | null> = merge(
-      this.inputAddress$,
-      this.inputComponentAddress$
+        this.inputAddress$,
+        this.inputComponentAddress$
     ).pipe(
-      shareReplay(1)
+        shareReplay(1)
     );
 
     const verifyInputComponentSparseAddress$ = this.inputComponentAddress$.pipe(
-      filter(address => !this.enoughDataToVerify(address)),
-      tap(address => addressSuggestion$.next(null)),
-      map(address => [address, this.computeValidityForSparseAddress(address)]),
-      tap(([address, isValid]) => {
-        if (address && !isValid) {
-          this.stateUpdates$.next({ formErrorMessages: ['Invalid address'] });
-        } else {
-          this.stateUpdates$.next({ formErrorMessages: [] });
-        }
-      })
+        filter(address => !this.enoughDataToVerify(address)),
+        tap(address => addressSuggestion$.next(null)),
+        map(address => [address, this.computeValidityForSparseAddress(address)]),
+        tap(([address, isValid]) => {
+          if (address && !isValid) {
+            this.stateUpdates$.next({ formErrorMessages: ['Invalid address'] });
+          } else {
+            this.stateUpdates$.next({ formErrorMessages: [] });
+          }
+        })
     );
 
     const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
-      filter(address => this.enoughDataToVerify(address)),
-      tap(address => addressSuggestion$.next(null)),
-      tap(() => busyCounter$.next(1)),
-      switchMap(inputAddress =>
-        this.addressService.verifyAddress(inputAddress).pipe(
-          map(verifyResponse => ({ entered: inputAddress,
-                                    suggested: new Address(verifyResponse),
-                                    warnings: verifyResponse.warnings }) as AddressSuggestion),
-          tap((addressSuggestion) => addressSuggestion$.next(addressSuggestion)),
-          catchError((error) => {
-            verificationError$.next(error);
-            return of(null);
-          })
-        )
-      ),
-      tap(() => busyCounter$.next(-1)),
+        filter(address => this.enoughDataToVerify(address)),
+        tap(address => addressSuggestion$.next(null)),
+        tap(() => busyCounter$.next(1)),
+        switchMap(inputAddress =>
+            this.addressService.verifyAddress(inputAddress).pipe(
+                map(verifyResponse => ({
+                  entered: inputAddress,
+                  suggested: new Address(verifyResponse),
+                  warnings: verifyResponse.warnings
+                }) as AddressSuggestion),
+                tap((addressSuggestion) => addressSuggestion$.next(addressSuggestion)),
+                catchError((error) => {
+                  verificationError$.next(error);
+                  return of(null);
+                })
+            )
+        ),
+        tap(() => busyCounter$.next(-1)),
     );
 
 
     const handleAddressSuggestionAction$ = addressSuggestion$.pipe(
-      tap(() => this.stateUpdates$.next({ fieldErrors: []})),
-      filter(suggestion => !!suggestion),
-      tap((addressSuggestion) => {
-        const suggested = addressSuggestion.suggested;
-        const entered = addressSuggestion.entered;
-        // copy data that would not be in suggestion
-        suggested.isDefault = entered.isDefault;
-        suggested.guid = entered.guid;
-        // showing suggestion only if it differs from entered address
-        // we might have warning messages for the entered address
-        const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
-        if (!suggested.hasSameDataValues(entered)) {
-          this.stateUpdates$.next({ formErrorMessages: [], formWarningMessages: enteredWarningMessages,
-            warnings: addressSuggestion.warnings, suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true });
-        } else {
-          this.stateUpdates$.next({ formErrorMessages: [], formWarningMessages: enteredWarningMessages,
-            warnings: addressSuggestion.warnings, suggestedAddress: null, enteredAddress: null, showSuggestion: false });
-        }
-      })
+        tap(() => this.stateUpdates$.next({ fieldErrors: [] })),
+        filter(suggestion => !!suggestion),
+        tap((addressSuggestion) => {
+          const suggested = addressSuggestion.suggested;
+          const entered = addressSuggestion.entered;
+          // copy data that would not be in suggestion
+          suggested.isDefault = entered.isDefault;
+          suggested.guid = entered.guid;
+          // showing suggestion only if it differs from entered address
+          // we might have warning messages for the entered address
+          const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
+          if (!suggested.hasSameDataValues(entered)) {
+            this.stateUpdates$.next({
+              formErrorMessages: [], formWarningMessages: enteredWarningMessages,
+              warnings: addressSuggestion.warnings, suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true
+            });
+          } else {
+            this.stateUpdates$.next({
+              formErrorMessages: [], formWarningMessages: enteredWarningMessages,
+              warnings: addressSuggestion.warnings, suggestedAddress: null, enteredAddress: null, showSuggestion: false
+            });
+          }
+        })
     );
 
     type SuggestionOption = 'suggested' | 'entered';
@@ -393,34 +394,34 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     const selectedAddress$: Observable<Address> = suggestionRadioValue$.pipe(
-      withLatestFrom(this.suggestionInfo$),
-      map(([radioValue, suggestionInfo]) => (radioValue === 'suggested') ? suggestionInfo.suggested : suggestionInfo.entered),
-      share()
+        withLatestFrom(this.suggestionInfo$),
+        map(([radioValue, suggestionInfo]) => (radioValue === 'suggested') ? suggestionInfo.suggested : suggestionInfo.entered),
+        share()
     );
 
     const updateInputComponentWithSelectedAddress$: Observable<Address> = selectedAddress$.pipe(
-      tap(address => this.stateUpdates$.next({inputAddress: address}))
+        tap(address => this.inputAddress$.next(address))
     );
 
     // saving addresses coming from either the inputcomponent or that have been selected from suggestion radio group
     const saveTempCurrentAddressAction$ = currentAddress$.pipe(
-      distinctUntilChanged((x, y) => util.isEqual(x, y)),
-      withLatestFrom(this.state$),
-      filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
-      tap(() => busyCounter$.next(1)),
-      concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
-      catchError((error) => {
-        console.debug('there was a problems saving temp address:' + error);
-        return of(null);
-      }),
-      tap(() => busyCounter$.next(-1))
+        distinctUntilChanged((x, y) => util.isEqual(x, y)),
+        withLatestFrom(this.state$),
+        filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
+        tap(() => busyCounter$.next(1)),
+        concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
+        catchError((error) => {
+          console.warn('there was a problems saving temp address:' + error);
+          return of(null);
+        }),
+        tap(() => busyCounter$.next(-1))
     );
 
     let processSubmitAnnouncement$;
     if (this.submitService) {
       processSubmitAnnouncement$ = this.submitService.submitAnnounced$.pipe(
-        tap(() => this.saveTrigger$.next()
-        ));
+          tap(() => this.saveTrigger$.next()
+          ));
     }
 
 
@@ -429,117 +430,114 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const clearSuggestionDisplay = () => this.stateUpdates$.next({ showSuggestion: false, suggestedAddress: null });
 
     const processVerificationStatusErrorAction$ = verificationError$.pipe(
-      filter((error) => isVerificationStatusError(error)),
-      tap(verificationError => console.debug('about to process verification error:' + JSON.stringify(verificationError))),
-      tap(clearSuggestionDisplay),
-      map((error) => error as AddressVerificationStatus),
-      map((status) => {
-        status.errors.sort((a, b) => {
-            // Put the "not found" error last, so that error message display reads a bit nicer.
-            if (a.code === 'E.ADDRESS.NOT_FOUND') {
-              return 1;
-            } else if (b.code === 'E.ADDRESS.NOT_FOUND') {
-              return -1;
+        filter((error) => isVerificationStatusError(error)),
+        tap(clearSuggestionDisplay),
+        map((error) => error as AddressVerificationStatus),
+        map((status) => {
+          status.errors.sort((a, b) => {
+                // Put the "not found" error last, so that error message display reads a bit nicer.
+                if (a.code === 'E.ADDRESS.NOT_FOUND') {
+                  return 1;
+                } else if (b.code === 'E.ADDRESS.NOT_FOUND') {
+                  return -1;
+                } else {
+                  return 0;
+                }
+              }
+          );
+          return status;
+        }),
+        tap((verError: AddressVerificationStatus) => {
+
+          const errorUpdate: Partial<ComponentState> = { formErrorMessages: [], fieldErrors: [] };
+          // const fieldErrors = new Array<AddressError>();
+
+          verError.errors.forEach(currError => {
+            const errMessage = this.lookupErrorMessage(currError);
+            if (currError.field === 'address') {
+              // These are the "global" errors reported by EasyPost
+              errorUpdate.formErrorMessages.push(errMessage);
+            } else if (isStreetRequiredError(currError)) {
+              // Seems like EasyPost needs a street address before it verifies other fields.
+              // Since street1 might not be filled yet, transform message into a "global" error message.
+              errorUpdate.formErrorMessages.push('Street address is missing, could not verify address.');
             } else {
-              return 0;
+              errorUpdate.fieldErrors.push(currError);
             }
-          }
-        );
-        return status;
-      }),
-      tap((verError: AddressVerificationStatus) => {
-
-        const errorUpdate: Partial<ComponentState> = { formErrorMessages: [], fieldErrors: [] };
-        // const fieldErrors = new Array<AddressError>();
-
-        verError.errors.forEach(currError => {
-          const errMessage = this.lookupErrorMessage(currError);
-          if (currError.field === 'address') {
-            // These are the "global" errors reported by EasyPost
-            errorUpdate.formErrorMessages.push(errMessage);
-          } else if (isStreetRequiredError(currError)) {
-            // Seems like EasyPost needs a street address before it verifies other fields.
-            // Since street1 might not be filled yet, transform message into a "global" error message.
-            errorUpdate.formErrorMessages.push('Street address is missing, could not verify address.');
-          } else {
-            errorUpdate.fieldErrors.push(currError);
-          }
-        });
-        this.stateUpdates$.next(errorUpdate);
-      })
+          });
+          this.stateUpdates$.next(errorUpdate);
+        })
     );
     const processOtherVerificationErrorsAction$ = verificationError$.pipe(
-      filter((error) => !isVerificationStatusError(error)),
-      tap(clearSuggestionDisplay),
-      tap((error) => {
-        let formErrorMessage;
-        if (error.errors && error.message) {
-          formErrorMessage = error.message;
-        } else if (error.errors) {
-          formErrorMessage = 'Could not verify address, please double-check your address.';
-        } else {
-          formErrorMessage = 'An unknown error occurred while verifying address.';
-        }
-        this.stateUpdates$.next({ formErrorMessages: [formErrorMessage] });
-      })
+        filter((error) => !isVerificationStatusError(error)),
+        tap(clearSuggestionDisplay),
+        tap((error) => {
+          let formErrorMessage;
+          if (error.errors && error.message) {
+            formErrorMessage = error.message;
+          } else if (error.errors) {
+            formErrorMessage = 'Could not verify address, please double-check your address.';
+          } else {
+            formErrorMessage = 'An unknown error occurred while verifying address.';
+          }
+          this.stateUpdates$.next({ formErrorMessages: [formErrorMessage] });
+        })
     );
 
     const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
-      withLatestFrom(this.state$),
-      filter(([_, state]) => !!state.activityInstanceGuid),
-      tap(() => busyCounter$.next(1)),
-      concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
-      catchError(() => {
-        console.debug('temp delete failed. This is OK');
-        return of(null);
-      }),
-      tap(() => busyCounter$.next(-1))
+        withLatestFrom(this.state$),
+        filter(([_, state]) => !!state.activityInstanceGuid),
+        tap(() => busyCounter$.next(1)),
+        concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
+        catchError(() => {
+          console.debug('temp delete failed. This is OK');
+          return of(null);
+        }),
+        tap(() => busyCounter$.next(-1))
     );
 
     // "Real" as opposed to "Temp"
     const saveRealAddressAction$ = this.saveTrigger$.pipe(
-      withLatestFrom(currentAddress$),
-      filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
-      tap(() => busyCounter$.next(1)),
-      concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-      tap(() => busyCounter$.next(-1)),
-      share()
+        withLatestFrom(currentAddress$),
+        filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
+        tap(() => busyCounter$.next(1)),
+        concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+        tap(() => busyCounter$.next(-1)),
+        share()
     );
 
     const savedAddress$ = saveRealAddressAction$.pipe(
-      filter(savedAddressVal => !!savedAddressVal),
-      share()
+        filter(savedAddressVal => !!savedAddressVal),
+        share()
     );
 
     const removeTempAddressAction$ = saveRealAddressAction$.pipe(
-      removeTempAddressOperator()
+        removeTempAddressOperator()
     );
 
     const emitValueChangedAction$ = savedAddress$.pipe(
-      tap((address => this.valueChanged.emit(address))));
+        tap((address => this.valueChanged.emit(address))));
 
-    // todo: look to see if we can set address in child without having reference to component object
     const updateInputComponentWithSavedAddressAction$ = savedAddress$.pipe(
-      tap((address => this.stateUpdates$.next({inputAddress: address})))
+        tap(address => this.inputAddress$.next(address))
     );
 
     const emitComponentBusyAction$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
-      map(busyFlags => busyFlags.some(val => val)),
-      distinctUntilChanged(),
-      tap(isBusy => this.componentBusy.emit(isBusy))
+        map(busyFlags => busyFlags.some(val => val)),
+        distinctUntilChanged(),
+        tap(isBusy => this.componentBusy.emit(isBusy))
     );
 
     const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.addressErrors$]).pipe(
-      map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
-      distinctUntilChanged(),
-      tap(status => this.validStatusChanged.emit(status))
+        map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
+        distinctUntilChanged(),
+        tap(status => this.validStatusChanged.emit(status))
     );
 
     processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
         takeUntil(this.ngUnsubscribe))
         .subscribe();
     merge(
-        initializeStateAction$,
         saveTempCurrentAddressAction$,
         verifyInputComponentAddressAction$,
         verifyInputComponentSparseAddress$,
@@ -554,9 +552,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         processVerificationStatusErrorAction$,
         processOtherVerificationErrorsAction$,
         emitValidStatusAction$,
-        updateInputComponentWithSelectedAddress$
-    ).pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe();
+        updateInputComponentWithSelectedAddress$,
+        initializeStateAction$
+    ).pipe(
+        takeUntil(this.ngUnsubscribe)
+    ).subscribe();
   }
 
 
@@ -612,8 +612,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.componentBusy.pipe(
+        filter(busy => !busy),
+        tap(() => {
+          this.ngUnsubscribe.next();
+          this.ngUnsubscribe.complete();
+          console.debug('unsubscribe completed');
+        }),
+        take(1)
+    ).subscribe();
   }
 }
 
