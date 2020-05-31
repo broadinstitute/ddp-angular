@@ -41,6 +41,7 @@ interface ComponentState {
   formErrorMessages: string[];
   formWarningMessages: string[];
   fieldErrors: AddressError[];
+  isTemporarilyDisabled: boolean;
   warnings?: AddressVerificationWarnings;
 }
 interface AddressSuggestion {
@@ -198,16 +199,18 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
   private initializeComponentState(): void {
-    const initialState: ComponentState = {
-      isReadOnly: false,
-      activityInstanceGuid: null,
-      showSuggestion: false,
-      enteredAddress: null,
-      suggestedAddress: null,
-      formWarningMessages: [],
-      formErrorMessages: [],
-      fieldErrors: []
-    };
+      const initialState: ComponentState = {
+              isReadOnly: false,
+              activityInstanceGuid: null,
+              showSuggestion: false,
+              enteredAddress: null,
+              suggestedAddress: null,
+              formWarningMessages: [],
+              formErrorMessages: [],
+              fieldErrors: [],
+              isTemporarilyDisabled: false
+          };
+
 
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
@@ -239,6 +242,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const initializeStateAction$ = this.state$.pipe(
         take(1),
         tap(() => busyCounter$.next(1)),
+        // let's disable form while we try to load initial address
+        tap(() => this.stateUpdates$.next({isTemporarilyDisabled: true})),
         mergeMap((state) => this.addressService.findDefaultAddress().pipe(
             map(defaultAddress => [state, defaultAddress]))
         ),
@@ -252,7 +257,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         // fake that the address was just entered. Perhaps this can become a separate subject?
         // guess we are saving temp address again. No harm but not nice either.
         tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
-        finalize(() => busyCounter$.next(-1)),
+        finalize(() => {
+            this.stateUpdates$.next({isTemporarilyDisabled: false});
+            busyCounter$.next(-1);
+        }),
     );
 
     this.staticCountry$ = this.inputAddress$.pipe(
@@ -270,7 +278,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     // derived observables
     this.isReadOnly$ = this.state$.pipe(
-        pluck('isReadOnly'),
+        map(state => state.isReadOnly || state.isTemporarilyDisabled),
         distinctUntilChanged(),
         shareReplay()
     );
@@ -328,10 +336,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         })
     );
 
+    // Since we use switchMap, we can't expect every incoming value
+    // generates a corresponding one on other side
+    // so keep a count going in and subtract the total when something goes out
+    let initiatedVerifyAddressCalls = 0;
     const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
         filter(address => this.enoughDataToVerify(address)),
         tap(address => addressSuggestion$.next(null)),
         tap(() => busyCounter$.next(1)),
+        tap(() => ++initiatedVerifyAddressCalls),
         switchMap(inputAddress =>
             this.addressService.verifyAddress(inputAddress).pipe(
                 map(verifyResponse => ({
@@ -346,7 +359,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 })
             )
         ),
-        tap(() => busyCounter$.next(-1)),
+        tap(() => busyCounter$.next(-1 * initiatedVerifyAddressCalls))
     );
 
 
