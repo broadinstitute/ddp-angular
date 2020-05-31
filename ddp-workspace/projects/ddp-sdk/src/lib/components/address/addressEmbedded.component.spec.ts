@@ -25,8 +25,8 @@ import { AddressVerificationResponse } from '../../models/addressVerificationRes
 })
 class FakeAddressInputComponent {
   private _address: Address | null;
+  private _readonly = false;
   @Output()valueChanged = new EventEmitter();
-  @Input()readonly;
   @Input()addressErrors;
   @Input()country;
   @Input()
@@ -41,6 +41,14 @@ class FakeAddressInputComponent {
     ais = {currentAddress$: new Subject<Address>()};
   public clearVerificationErrors(): void {
     console.log('verifications cleared!');
+  }
+  @Input()
+  set readonly(val: boolean) {
+    console.log('set readonly called with: %o', val);
+    this._readonly = val;
+  }
+  get readonly(): boolean {
+    return this._readonly;
   }
 }
 
@@ -437,6 +445,34 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressFromChild, activityGuid);
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(2);
     expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
+  }));
+
+  it('hide country field when property is set', fakeAsync(() => {
+    fixture.detectChanges();
+    expect(childComponent.country).toBeNull();
+    component.country = 'US';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBe('US');
+    component.country = null;
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBeNull();
+    component.activityGuid = '123';
+    component.country = 'US';
+    let tempAddress = new Address({country: 'CA'});
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(childComponent.country).toBeNull();
+    component.activityGuid = '123';
+    component.country = 'CA';
+    tempAddress = new Address({country: 'CA'});
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBe('CA');
   }));
 
   it('test component busy output', fakeAsync(() => {
