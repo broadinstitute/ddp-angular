@@ -89,6 +89,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(component).toBeTruthy();
     expect(childComponent).toBeTruthy();
   });
+
   it('ensure try to read default and not temp address at startup when no activity guid', () => {
     fixture.detectChanges();
     // this call should return null
@@ -339,6 +340,43 @@ describe('AddressEmbeddedComponent', () => {
     // check for bug where we not setting busy flag back to false if no temp address loaded
     expect(componentIsBusy).toBe(false);
   }));
+
+
+  it('ensure we save the correct temporary address', fakeAsync(() => {
+    const activityGuid = '123';
+    const tempAddress = buildPerfectAddress();
+    component.activityGuid = activityGuid;
+    console.log('setting up stuff now');
+    addressServiceSpy.findDefaultAddress.and.returnValue(of(null));
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    addressServiceSpy.verifyAddress.and.returnValue(of(new AddressVerificationResponse(tempAddress)));
+
+    fixture.detectChanges();
+
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalledTimes(1);
+    expect(addressServiceSpy.getTempAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalledTimes(1);
+
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    // childComponent.address = tempAddress;
+    expect(childComponent.address).toBe(tempAddress);
+    expect(addressServiceSpy.getTempAddress).toHaveBeenCalled();
+    // expect(addressServiceSpy.saveTempAddress).not.toHaveBeenCalled();
+    expect(findValidationMessageDebug(fixture)).toBeNull();
+    expect(findRadioGroupDebug(fixture)).toBeNull();
+    expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(tempAddress, activityGuid);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
+    const addressFromChild = buildPerfectAddress();
+    addressFromChild.name = 'NEW NAME';
+    childComponent.valueChanged.emit(addressFromChild);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressFromChild, activityGuid);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(2);
+  }));
+
   it('test component busy output', fakeAsync(() => {
     component.activityGuid = '123';
     const perfectAddress = buildPerfectAddress();
