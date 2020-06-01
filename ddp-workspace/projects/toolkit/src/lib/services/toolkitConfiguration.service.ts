@@ -65,7 +65,7 @@ export class ToolkitConfigurationService {
     showInfoForPhysicians: boolean;
     showBlog: boolean;
     agreeConsent: boolean;
-    dashboardDisplayedColumns: Array<DashboardColumns>;
+    dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
 
     // Keys and tokens
     recaptchaSiteClientKey: string;
