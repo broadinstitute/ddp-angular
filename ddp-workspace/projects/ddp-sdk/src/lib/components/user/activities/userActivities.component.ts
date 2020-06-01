@@ -169,8 +169,8 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
   public dataSource: UserActivitiesDataSource;
-  public loaded: boolean;
-  private states: Array<ActivityInstanceState> | null;
+  public loaded = false;
+  private states: Array<ActivityInstanceState> | null = null;
   private studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
 
