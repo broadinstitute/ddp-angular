@@ -24,13 +24,31 @@ import { AddressVerificationResponse } from '../../models/addressVerificationRes
     <div>{{ addressErrors }}</div>`
 })
 class FakeAddressInputComponent {
+  private _address: Address | null;
+  private _readonly = false;
   @Output()valueChanged = new EventEmitter();
-  @Input()address;
-  @Input()readonly;
   @Input()addressErrors;
-  ais = {currentAddress$: new Subject<Address>()};
+  @Input()country;
+  @Input()
+  set address(val: Address | null) {
+    console.log('set address called with: %o', val);
+    this._address = val;
+  }
+  get address(): Address | null {
+    return this._address;
+  }
+
+    ais = {currentAddress$: new Subject<Address>()};
   public clearVerificationErrors(): void {
     console.log('verifications cleared!');
+  }
+  @Input()
+  set readonly(val: boolean) {
+    console.log('set readonly called with: %o', val);
+    this._readonly = val;
+  }
+  get readonly(): boolean {
+    return this._readonly;
   }
 }
 
@@ -45,10 +63,11 @@ describe('AddressEmbeddedComponent', () => {
 
   beforeEach(async(() => {
     addressServiceSpy = jasmine.createSpyObj('AddressService',
-      ['verifyAddress', 'findDefaultAddress', 'getTempAddress', 'saveTempAddress', 'saveAddress']);
+      ['verifyAddress', 'findDefaultAddress', 'getTempAddress', 'saveTempAddress', 'saveAddress', 'deleteTempAddress']);
     addressServiceSpy.findDefaultAddress.and.returnValue(of(null));
     addressServiceSpy.getTempAddress.and.returnValue(of(null));
     addressServiceSpy.saveTempAddress.and.returnValue(of(null));
+    addressServiceSpy.deleteTempAddress.and.returnValue(of(null));
     addressServiceSpy.saveAddress.and.callFake((val) => {
       if (val && val instanceof Address) {
         val.guid = '34234';
@@ -88,6 +107,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(component).toBeTruthy();
     expect(childComponent).toBeTruthy();
   });
+
   it('ensure try to read default and not temp address at startup when no activity guid', () => {
     fixture.detectChanges();
     // this call should return null
@@ -338,6 +358,123 @@ describe('AddressEmbeddedComponent', () => {
     // check for bug where we not setting busy flag back to false if no temp address loaded
     expect(componentIsBusy).toBe(false);
   }));
+
+  it('test saving partial address from input component', fakeAsync(() => {
+    // this makes sure child component gets initial value from parent embedded
+    const spyOnSubmitAnnounced = spyOnProperty(submitAnnounceService, 'submitAnnounced$', 'get');
+    spyOnSubmitAnnounced.and.returnValue(hot('--a', {a: (new ActivityResponse('blah'))}));
+    fixture.detectChanges();
+    const partialAddressFromInputComponent = new Address({
+      name: 'hello',
+      country: 'US',
+      zip: '01234',
+      street1: '22 BLAH STREET',
+      state: 'MA'
+    });
+    component.activityGuid = '123';
+    const validationFailureResponse = {
+      code: 'ADDRESS.VERIFY.FAILURE',
+      message: 'Unable to verify address.',
+      errors:
+      [{
+        code: 'E.ADDRESS.INVALID',
+        field: 'address',
+        message: 'Invalid city/state/ZIP',
+        suggestion: null
+      }, { code: 'E.ADDRESS.NOT_FOUND', field: 'address', message: 'Address not found', suggestion: null }]
+    };
+    addressServiceSpy.verifyAddress.and.returnValue(throwError(validationFailureResponse));
+    // here comes the partial address
+    console.log('Emitting address');
+    childComponent.address = partialAddressFromInputComponent;
+    childComponent.valueChanged.emit(partialAddressFromInputComponent);
+    console.log('About to detect changes');
+    fixture.detectChanges();
+    console.log('After detect changes');
+    expect(addressServiceSpy.verifyAddress).toHaveBeenCalledWith(partialAddressFromInputComponent);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, '123');
+    expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
+    expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
+    const errorComponent = findValidationMessageDebug(fixture);
+    expect(errorComponent).not.toBeNull();
+    expect(findRadioGroupDebug(fixture)).toBeNull();
+
+    getTestScheduler().flush();
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    expect(spyOnSubmitAnnounced).toHaveBeenCalled();
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
+    expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
+    expect(addressServiceSpy.deleteTempAddress).toHaveBeenCalledWith('123');
+  }));
+
+
+  it('ensure we save the correct temporary address', fakeAsync(() => {
+    const activityGuid = '123';
+    const tempAddress = buildPerfectAddress();
+    component.activityGuid = activityGuid;
+    console.log('setting up stuff now');
+    addressServiceSpy.findDefaultAddress.and.returnValue(of(null));
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    addressServiceSpy.verifyAddress.and.returnValue(of(new AddressVerificationResponse(tempAddress)));
+
+    fixture.detectChanges();
+
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalledTimes(1);
+    expect(addressServiceSpy.getTempAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.findDefaultAddress).toHaveBeenCalledTimes(1);
+
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    // childComponent.address = tempAddress;
+    expect(childComponent.address).toBe(tempAddress);
+    expect(addressServiceSpy.getTempAddress).toHaveBeenCalled();
+    // expect(addressServiceSpy.saveTempAddress).not.toHaveBeenCalled();
+    expect(findValidationMessageDebug(fixture)).toBeNull();
+    expect(findRadioGroupDebug(fixture)).toBeNull();
+    expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(tempAddress, activityGuid);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
+    const addressFromChild = buildPerfectAddress();
+    addressFromChild.name = 'NEW NAME';
+    childComponent.valueChanged.emit(addressFromChild);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressFromChild, activityGuid);
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(2);
+    expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
+  }));
+
+  it('hide country field when property is set', fakeAsync(() => {
+    fixture.detectChanges();
+    expect(childComponent.country).toBeNull();
+    component.country = 'US';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBe('US');
+    component.country = null;
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBeNull();
+    component.activityGuid = '123';
+    component.country = 'US';
+    let tempAddress = new Address({country: 'CA'});
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(childComponent.country).toBeNull();
+    component.activityGuid = '123';
+    component.country = 'CA';
+    tempAddress = new Address({country: 'CA'});
+    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(childComponent.country).toBe('CA');
+  }));
+
   it('test component busy output', fakeAsync(() => {
     component.activityGuid = '123';
     const perfectAddress = buildPerfectAddress();
