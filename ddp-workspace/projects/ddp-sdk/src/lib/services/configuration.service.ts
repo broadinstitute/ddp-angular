@@ -23,5 +23,5 @@ export class ConfigurationService {
     projectGAToken: string;
     studyGuid: string;
     // country code if limiting app to just one country
-    country: string | null = null;
+    supportedCountry: string | null = null;
 }

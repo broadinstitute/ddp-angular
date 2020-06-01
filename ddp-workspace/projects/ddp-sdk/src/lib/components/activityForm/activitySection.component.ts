@@ -60,7 +60,7 @@ import { ConfigurationService } from '../../services/configuration.service';
                 </div>
                 <div *ngIf="isMailAddress(block)">
                     <ddp-address-embedded [block]="block"
-                                          [country]="config.country"
+                                          [country]="config.supportedCountry"
                                           [readonly]="readonly"
                                           [activityGuid]="activityGuid"
                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
