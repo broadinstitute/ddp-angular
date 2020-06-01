@@ -3,9 +3,9 @@ import { QuestionType } from './questionType';
 import { DatePickerValue } from '../datePickerValue';
 import { DateField } from './dateField';
 import { DateRenderMode } from './dateRenderMode';
-import { ActivityDayRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityDayRequiredDateValidationRule'
-import { ActivityMonthRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityMonthRequiredDateValidationRule'
-import { ActivityYearRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityYearRequiredDateValidationRule'
+import { ActivityDayRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityDayRequiredDateValidationRule';
+import { ActivityMonthRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityMonthRequiredDateValidationRule';
+import { ActivityYearRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityYearRequiredDateValidationRule';
 
 export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerValue> {
     public renderMode: DateRenderMode;
@@ -40,17 +40,17 @@ export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerV
         for (const validator of this.validators) {
             if (validator instanceof ActivityDayRequiredDateValidationRule) {
                 hasFieldRule = true;
-                if (value.day == null) {
+                if (value.day === null) {
                     return false;
                 }
             } else if (validator instanceof ActivityMonthRequiredDateValidationRule) {
                 hasFieldRule = true;
-                if (value.month == null) {
+                if (value.month === null) {
                     return false;
                 }
             } else if (validator instanceof ActivityYearRequiredDateValidationRule) {
                 hasFieldRule = true;
-                if (value.year == null) {
+                if (value.year === null) {
                     return false;
                 }
             }
