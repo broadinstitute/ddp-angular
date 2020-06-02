@@ -20,7 +20,9 @@ import {
   ActivityRedesignedComponent,
   ErrorRedesignedComponent,
   PasswordRedesignedComponent,
-  SessionExpiredRedesignedComponent
+  SessionExpiredRedesignedComponent,
+  RedirectToAuth0LoginRedesignedComponent,
+  RedirectToLoginLandingRedesignedComponent
 } from 'toolkit';
 
 const routes: Routes = [
@@ -96,9 +98,18 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.LoginLandingMode,
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.LocalAuth,
     component: Auth0CodeCallbackComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard
+    ]
   },
   {
     path: AppRoutes.Error,
@@ -117,6 +128,13 @@ const routes: Routes = [
   {
     path: AppRoutes.Password,
     component: PasswordRedesignedComponent
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
   },
   {
     path: '',
