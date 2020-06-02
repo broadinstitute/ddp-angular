@@ -11,7 +11,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
         <main class="main">
             <section class="section static-page-title-section">
                 <div class="content content_tight">
-                    <h1 translate>Toolkit.Password.Title</h1>
+                    <h1 class="static-page-title-section__title" translate>Toolkit.Password.Title</h1>
                 </div>
             </section>
             <section class="section static-page-content-section">
