@@ -9,7 +9,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
     <main class="main">
       <section class="section static-page-title-section">
         <div class="content content_tight">
-          <h1 translate>Toolkit.ErrorPage.Title</h1>
+          <h1 class="static-page-title-section__title" translate>Toolkit.ErrorPage.Title</h1>
         </div>
       </section>
       <section class="section static-page-content-section">
@@ -21,9 +21,9 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
             </ng-container>
             <ng-container *ngIf="!errorText">
               <span translate>Toolkit.ErrorPage.DefaultText.TextPt1</span>
-              <a [href]="emailHref" class="Link">{{ email }}</a>
+              <a [href]="emailHref" class="Link Link_bold">{{ email }}</a>
               <span translate>Toolkit.ErrorPage.DefaultText.TextPt2</span>
-              <a [href]="phoneHref" class="Link">{{ phone }}</a>.
+              <a [href]="phoneHref" class="Link Link_bold">{{ phone }}</a>.
             </ng-container>
           </p>
         </div>

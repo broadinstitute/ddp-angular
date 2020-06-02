@@ -43,3 +43,11 @@
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
 }
+
+// error message
+.ErrorMessage {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    margin: 1rem 0;
+    color: mat-color($app-theme, 2700);
+}

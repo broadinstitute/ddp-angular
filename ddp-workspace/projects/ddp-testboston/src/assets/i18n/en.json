@@ -4,6 +4,10 @@
             "Submit": {
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
             }
         }
     },
