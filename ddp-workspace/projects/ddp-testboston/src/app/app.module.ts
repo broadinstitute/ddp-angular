@@ -86,6 +86,8 @@ sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.supportedCountry = 'US';
+sdkConfig.dashboardShowQuestionCount = true;
+sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {

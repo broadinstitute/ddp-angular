@@ -11,4 +11,6 @@ export interface ActivityInstance {
     icon: string;
     createdAt: number;
     readonly: boolean;
+    numQuestions: number;
+    numQuestionsAnswered: number;
 }

@@ -23,7 +23,7 @@
     margin: 1rem 0 0 0;
 
     .button:last-child {
-        margin-left: 0.2rem;
+        margin-left: 0.1rem;
     }
 }
 
@@ -98,6 +98,10 @@
     border-radius: unset !important;
     box-shadow: unset !important;
     border-top: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel-header {
+    transition: 0.3s;
 }
 
 .mat-expansion-panel:last-child {
