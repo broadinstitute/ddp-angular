@@ -36,14 +36,6 @@
     }
 }
 
-// info box
-.infobox {
-    border: 2px solid mat-color($app-theme, 1200);
-    border-radius: 8px;
-    background-color: rgba(113, 84, 255, 0.06);
-    padding: 1rem;
-}
-
 @media only screen and (max-width: 560px) {
     .activity-buttons_mobile {
         flex-direction: column;
@@ -56,5 +48,22 @@
         .button:not(:last-child) {
             margin-bottom: 1.5rem;
         }
+    }
+}
+
+// info box
+.infobox {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 8px;
+    background-color: rgba(113, 84, 255, 0.06);
+    padding: 1rem;
+}
+
+// close button
+.ddp-close-button {
+    transition: 0.3s;
+
+    &:hover {
+        color: rgba(0, 0, 0, 0.26);
     }
 }
