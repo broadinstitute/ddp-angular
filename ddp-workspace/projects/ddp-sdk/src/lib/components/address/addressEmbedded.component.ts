@@ -5,7 +5,7 @@ import { Address } from '../../models/address';
 import { AddressError } from '../../models/addressError';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import * as util from 'underscore';
-import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, of, pipe, Subject, Subscription } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -14,7 +14,6 @@ import {
   finalize,
   map,
   mergeMap,
-  pluck,
   scan,
   share,
   shareReplay,
@@ -31,6 +30,7 @@ import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { generateTaggedAddress, isStreetRequiredError } from './addressUtils';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
+import { extract } from '../../utility/rxjsoperator/extract';
 
 interface ComponentState {
   isReadOnly: boolean;
@@ -277,38 +277,40 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     // derived observables
-    this.isReadOnly$ = this.state$.pipe(
-        map(state => state.isReadOnly || state.isTemporarilyDisabled),
-        distinctUntilChanged(),
-        shareReplay()
-    );
+    // this.isReadOnly$ = this.state$.pipe(
+    //     map(state => state.isReadOnly || state.isTemporarilyDisabled),
+    //     distinctUntilChanged(),
+    //     shareReplay()
+    // );
 
-    this.formErrorMessages$ = this.state$.pipe(
-        pluck('formErrorMessages'),
-        distinctUntilChanged((x, y) => util.isEqual(x, y)),
-        shareReplay()
-    );
+      this.isReadOnly$ = this.state$.pipe(
+          extract(state => state.isReadOnly || state.isTemporarilyDisabled)
+      );
+
+    // this.formErrorMessages$ = this.state$.pipe(
+    //     pluck('formErrorMessages'),
+    //     distinctUntilChanged((x, y) => util.isEqual(x, y)),
+    //     shareReplay()
+    // );
+      this.formErrorMessages$ = this.state$.pipe(
+          extract('formErrorMessages')
+      );
 
     this.addressErrors$ = this.state$.pipe(
-        pluck('fieldErrors'),
-        shareReplay()
+        extract('fieldErrors', {onlyDistinct: false})
     );
 
     this.suggestionInfo$ = this.state$.pipe(
-        map(state => state.showSuggestion && !this.readonly ?
+        extract(state => state.showSuggestion && !this.readonly ?
             {
               suggested: state.suggestedAddress,
               entered: state.enteredAddress,
               warnings: state.warnings
-            } : null),
-        shareReplay(1)
+            } : null, {onlyDistinct: false})
     );
 
     this.errorMessagesToDisplay$ = this.state$.pipe(
-        map(state => state.formErrorMessages.concat(state.formWarningMessages)),
-        distinctUntilChanged((x, y) => util.isEqual(x, y)),
-        shareReplay(1)
-    );
+        extract(state => state.formErrorMessages.concat(state.formWarningMessages)));
 
     const setupSuggestedAddressFormControl$ = this.suggestionInfo$.pipe(
         filter(info => !!info),
