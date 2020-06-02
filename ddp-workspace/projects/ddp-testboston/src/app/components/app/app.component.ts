@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.initSessionExpiredDialogListener();
-    this.dialog.open(SessionWillExpireComponent, { ...this.DIALOG_BASE_SETTINGS, disableClose: true });
   }
 
   public ngOnDestroy(): void {
