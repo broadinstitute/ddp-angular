@@ -231,7 +231,8 @@
             "Summary": "Summary",
             "ActivityStatus": "Status",
             "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityActions": "Actions",
+            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered"
         },
         "ManageParticipants": {
             "GovernedParticipants": "Governed participants",
