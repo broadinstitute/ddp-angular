@@ -1,4 +1,6 @@
-@import "../../styles/app-theme";
+@import '../../styles/typography';
+@import '../../styles/brushes';
+
 .about-us {
   margin: 40px 25px 0 25px;
   @media (min-width: 801px) {
@@ -16,10 +18,9 @@
     }
   }
   h1 {
-    font-size: 24px;
-    font-weight: 700;
+    @include page-title();
+    @include c-blue();
     margin: 0 0 27px 0;
-    color: #4274BC;
   }
   h2 {
     font-size: 18px;

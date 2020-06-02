@@ -1,3 +1,6 @@
+@import '../../styles/variables';
+@import '../../styles/brushes';
+
 .progress-bar-container {
   position: relative;
 
@@ -27,12 +30,12 @@
       &.active {
         &:hover {
           .dot {
-            background-color: #7BA946 !important;
+            @include bg-green($important: '!important');
           }
         }
 
         .dot {
-          background: #7BA946;
+          @include bg-green();
         }
       }
 
@@ -62,7 +65,7 @@
         }
 
         &:hover {
-          background-color: #559BE0 !important;
+          @include bg-blue-light($important: '!important');
         }
       }
     }

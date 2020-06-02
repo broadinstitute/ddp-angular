@@ -1,27 +1,6 @@
-@mixin btn-green {
-  padding: 7px 20px 9px 20px;
-  border-radius: 2px;
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  transition: border 0.3s ease, color 0.3s ease;
-  cursor: pointer !important;
-  border-color: #7BA946 !important;
-  color: #7BA946 !important;
-  background-color: #fff;
-  margin: 0;
-  outline: none;
-  &:focus, &:active {
-    border-color: #7BA946 !important;
-    color: #7BA946 !important;
-
-    &:hover {
-      border-color: #559BE0 !important;
-      color: #559BE0 !important;
-      background-color: transparent !important;
-    }
-  }
-}
+@import 'theme';
+@import './variables';
+@import './brushes';
 
 .BtnBordered {
   padding: 7px 20px 9px 20px;
@@ -37,20 +16,20 @@
     background-color: #ffffff !important;
   }
 
-  &:hover {
+  &:hover, &:focus {
     text-decoration: none;
   }
 
   &.blue {
     &:focus, &:active {
       margin-top: 15px;
-      border-color: #4274BC !important;
-      color: #4274BC !important;
+      @include brc-blue($important: '!important');
+      @include c-blue($important: '!important');
     }
 
     &:hover {
-      border-color: #559BE0 !important;
-      color: #559BE0 !important;
+      @include brc-blue($important: '!important');
+      @include c-blue($important: '!important');
       background-color: transparent !important;
     }
   }
@@ -59,10 +38,9 @@
     margin-top: 15px;
     border-color: #7BA946 !important;
     color: #7BA946 !important;
-
     &:hover {
-      border-color: #559BE0 !important;
-      color: #559BE0 !important;
+      @include c-blue($important: '!important');
+      @include brc-blue($important: '!important');
       background-color: transparent !important;
     }
   }
@@ -93,9 +71,6 @@
     }
   }
 }
-
-// common styles for material buttons
-@import "./app-theme.scss";
 
 .button {
   min-width: 8.5rem;

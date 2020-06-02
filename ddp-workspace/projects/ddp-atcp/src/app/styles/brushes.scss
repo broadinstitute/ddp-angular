@@ -1,0 +1,31 @@
+@import '../styles/variables';
+@import 'theme';
+
+html, body {
+  font-size: 55px;
+  color: mat-color($app-theme);
+}
+
+@mixin c-blue($important: '') {
+  color: $blue unquote($important);
+}
+
+@mixin c-green {
+  color: $green;
+}
+
+@mixin c-blue-light() {
+  color: $blue-light;
+}
+
+@mixin bg-blue-light($important: '') {
+  background-color: $blue-light unquote($important);
+}
+
+@mixin bg-green($important: '') {
+  background-color: $green unquote($important);
+}
+
+@mixin brc-blue($important: '') {
+  border-color: $blue unquote($important);
+}

@@ -1,6 +1,33 @@
+@import './variables';
+
 @mixin flexer($display: flex, $direction: row, $content: flex-start, $items: stretch) {
     display: $display;
     flex-direction: $direction;
     justify-content: $content;
     align-items: $items;
+}
+
+@mixin btn-green {
+  padding: 7px 20px 9px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  transition: border 0.3s ease, color 0.3s ease;
+  cursor: pointer !important;
+  border-color: $green !important;
+  color: $green !important;
+  background-color: #fff;
+  margin: 0;
+  outline: none;
+  &:focus, &:active {
+    border-color: $green !important;
+    color: $green !important;
+
+    &:hover {
+      border-color: $blue !important;
+      color: $blue !important;
+      background-color: transparent !important;
+    }
+  }
 }

@@ -1,4 +1,5 @@
-@import "../../styles/app-theme";
+@import '../../styles/variables';
+@import '../../styles/brushes';
 
 .statistics {
   @media (min-width: 687px) {
@@ -50,7 +51,7 @@
       }
 
       div {
-        color: #7BA946;
+        @include c-green();
         font-size: 55px;
         font-weight: 700;
         height: 70px;

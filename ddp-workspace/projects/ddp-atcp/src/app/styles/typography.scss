@@ -1,0 +1,22 @@
+@import 'theme';
+@import 'variables.scss';
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: mat-color($app-theme, 300);
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+@mixin page-title {
+  font-size: 24px;
+  font-weight: 700;
+}

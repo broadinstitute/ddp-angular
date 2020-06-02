@@ -14,14 +14,19 @@ import {
 
 @Component({
   selector: `app-join-us`,
+  styleUrls: ['./join-us.scss'],
   template: `
     <div class="join-us">
       <div class="page-padding">
-        <ddp-activity [studyGuid]="studyGuid"
-                      [activityGuid]="instanceGuid"
-                      (submit)="navigate($event)"
-                      (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>
+        <div class="row">
+          <div class="col-lg-5 col-md-6 col-sm-8 col-xs-10">
+            <ddp-activity [studyGuid]="studyGuid"
+                          [activityGuid]="instanceGuid"
+                          (submit)="navigate($event)"
+                          (stickySubtitle)="showStickySubtitle($event)">
+            </ddp-activity>
+          </div>
+        </div>
       </div>
     </div>
   `

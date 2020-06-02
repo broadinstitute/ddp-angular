@@ -211,6 +211,21 @@
         }
       }
     },
+    "ddp-atcp-auth": {
+      "root": "projects/ddp-atcp/src/assets/auth0-scripts",
+      "sourceRoot": "projects/ddp-atcp/src/assets/auth0-scripts",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ddp-atcp/src/assets/auth0-scripts/tsconfig.lib.json",
+            "project": "projects/ddp-atcp/src/assets/auth0-scripts/ng-package.json"
+          }
+        }
+      }
+    },
     "ddp-atcp": {
       "projectType": "application",
       "schematics": {},
@@ -245,8 +260,8 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "projects/ddp-atcp/src/theme.scss",
-              "projects/ddp-atcp/src/styles.scss"
+              "projects/ddp-atcp/src/app/styles/theme.scss",
+              "projects/ddp-atcp/src/app/styles/main.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

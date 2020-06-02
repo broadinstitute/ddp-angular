@@ -1,4 +1,5 @@
-@import '../../styles/app-theme';
+@import '../../styles/variables';
+@import '../../styles/brushes';
 
 .workflow-progress {
   ul {
@@ -33,9 +34,9 @@
         }
       }
       &.blue-hover:hover {
-        color: #559BE0;
+        @include c-blue-light();
         &:before, &:after {
-          background-color: #559BE0;
+          @include bg-blue-light();
         }
       }
       .glyphicon {
@@ -50,11 +51,12 @@
       }
 
       &.in-complete {
-        color: #7BA946;
+        @include c-green();
+        color: $green;
         cursor: pointer;
 
         &:after, &:before {
-          background-color: #7BA946;
+          @include bg-green();
         }
 
         .number {

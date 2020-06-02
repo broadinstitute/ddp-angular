@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../../../dist/ddp-atcp/assets/auth0-scripts",
+  "lib": {
+    "entryFile": "./main.ts"
+  }
+}
