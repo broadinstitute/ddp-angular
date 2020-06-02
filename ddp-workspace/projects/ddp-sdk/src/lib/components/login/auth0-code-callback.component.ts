@@ -43,6 +43,9 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
                 }),
                 ...(params['invitation_id'] && {
                     invitationId: params['invitation_id']
+                }),
+                ...(params['language'] && {
+                    languageCode: params['language']
                 })
             };
 
