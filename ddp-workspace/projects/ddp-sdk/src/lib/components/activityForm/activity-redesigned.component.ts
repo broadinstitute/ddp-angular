@@ -105,7 +105,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <ng-container *ngIf="model.lastUpdatedText">
                         <span>{{model.lastUpdatedText}} </span>
                     </ng-container>
-                    <div class="activity-buttons">
+                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded}">
                         <ng-container *ngIf="isLoaded && isStepped">
                             <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -165,7 +165,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() agreeConsent = false;
-    
+
     constructor(
         windowRef: WindowRef,
         renderer: Renderer2,

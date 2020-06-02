@@ -43,3 +43,18 @@
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
 }
+
+@media only screen and (max-width: 560px) {
+    .activity-buttons_mobile {
+        flex-direction: column;
+        align-items: center;
+
+        .button {
+            width: 20rem;
+        }
+
+        .button:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
