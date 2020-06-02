@@ -1,7 +1,7 @@
 @import '../app-theme.scss';
 
 .dashboard-title-section {
-    background-color: #CCE0FB;
+    background-color: mat-color($app-theme, 3100);
 
     &__title {
         font-weight: 600;
@@ -83,7 +83,7 @@
         white-space: normal;
     }
 
-    @media(max-width: 650px) {
+    @media only screen and(max-width: 650px) {
         .mat-column-actions {
             .dashboard-mobile-label {
                 line-height: 1.125rem !important;

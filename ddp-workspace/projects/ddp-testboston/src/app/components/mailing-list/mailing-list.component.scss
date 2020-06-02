@@ -74,6 +74,14 @@
     }
 }
 
+.mat-icon {
+    transition: 0.3s;
+
+    &:hover {
+        color: rgba(0, 0, 0, 0.26) !important;
+    }
+}
+
 .title {
     width: 100%;
     border-radius: 1.25rem 1.25rem 0 0;
