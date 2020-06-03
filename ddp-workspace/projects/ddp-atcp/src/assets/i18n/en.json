@@ -115,6 +115,7 @@
       "Messages": {
         "ResearcherName": "Researcher name cannot be empty.",
         "ResearcherEmail": "Researcher email cannot be empty.",
+        "FileSizeExceedsTheLimit": "File size exceeds the limit",
         "ResearcherOrgName": "Org name cannot be empty.",
         "ResearcherOrgAddress": "Org address 1 cannot be empty.",
         "ResearcherOrgCity": "Org city cannot be empty.",

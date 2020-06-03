@@ -24,7 +24,10 @@ export class DataAccessComponent implements OnInit, OnDestroy {
   public countTabs = 7;
   public todayString: string = this.getToday();
   public AssuranceList: string[] = [];
+  attachment: File = null;
+  private readonly maxAttachmentSize = 2 * 1024 * 1024;
   private anchor: CompositeDisposable = new CompositeDisposable();
+  public fileSizeExceedsLimit: boolean;
 
   public displayDontHaveErrors(tab: number): boolean {
     if (tab === 1) {
@@ -76,5 +79,15 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
+  }
+
+  public onAttachmentChange(selectedFile: any): void {
+    if (this.maxAttachmentSize && selectedFile.size >= this.maxAttachmentSize) {
+      this.fileSizeExceedsLimit = true;
+      return;
+    } else {
+      this.fileSizeExceedsLimit = false;
+    }
+    this.attachment = selectedFile;
   }
 }

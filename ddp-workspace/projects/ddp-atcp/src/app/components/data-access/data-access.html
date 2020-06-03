@@ -44,8 +44,17 @@
           <input type="text" class="form-control" id="phone">
         </div>
         <p><b translate>DataAccess.ResearcherForm.Attachment</b></p>
-        <input type="file" name="data_access_request[researcher_biosketch]"
-               name="data_access_request[researcher_phone]">
+        <!-- TODO: add translation for buttonText and hintText-->
+        <ddp-file-uploader name="data_access_request[researcher_biosketch]"
+                 (fileChange)="onAttachmentChange($event)"
+                 isRequired="true"
+                 allowedExtensions="application/pdf"
+                 buttonText="Choose file"
+                 hintText="No file chosen"
+        ></ddp-file-uploader>
+        <span class="error" *ngIf="fileSizeExceedsLimit" translate>
+                DataAccess.Dataset.Messages.FileSizeExceedsTheLimit
+              </span>
       </div>
       <hr>
     </div>
