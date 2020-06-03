@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -14,12 +14,15 @@ export class WelcomeComponent implements OnInit {
   public emailHref: string;
   public appRoutes = AppRoutes;
 
-  constructor(@Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
+  constructor(
+    private headerConfig: HeaderConfigurationService,
+    @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.phone = this.config.phone;
     this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
+    this.headerConfig.setupDefaultHeader();
   }
 }

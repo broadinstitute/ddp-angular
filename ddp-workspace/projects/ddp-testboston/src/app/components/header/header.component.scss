@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     height: 8rem;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: auto;
     padding: 0 1.5625rem;
 }
@@ -107,6 +107,7 @@
 
 .mobile-menu {
     display: none;
+    margin-left: 2rem;
 
     .SimpleButton {
         font-size: 18px;
@@ -121,8 +122,8 @@
     }
 
     &__close {
-        width: 60px;
-        height: 60px;
+        width: 72px;
+        height: 72px;
 
         mat-icon {
             height: 30px;
@@ -176,7 +177,11 @@
     }
 }
 
-@media only screen and (max-width: 1050px) {
+.mobile-buttons {
+    display: none;
+}
+
+@media only screen and (max-width: 1370px) {
 
     .auth__dashboard,
     .navigation__item {
@@ -184,7 +189,34 @@
     }
 }
 
-@media only screen and (max-width: 885px) {
+@media only screen and (max-width: 1290px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 2rem;
+    }
+
+    .nav {
+        margin-left: 2rem;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .navigation {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: unset;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .project-logo {
+        &__img {
+            height: 1.8rem;
+        }
+    }
 
     .nav,
     .auth {
@@ -199,17 +231,29 @@
         height: 26px;
         width: 26px;
     }
+
+    .mobile-buttons {
+        display: unset;
+    }
+
+    // remove when real selector done
+    .language-icon {
+        height: 26px;
+        width: 26px;
+        font-size: 26px;
+    }
+
+    .language {
+        font-size: 1.875rem !important;
+        line-height: 2.25rem !important;
+    }
+
+    // remove when real selector done
 }
 
 @media only screen and (max-width: 480px) {
     .header-content {
         padding: 0 1rem;
-    }
-
-    .project-logo {
-        &__img {
-            height: 1.8rem;
-        }
     }
 
     .overlay-content {
@@ -233,4 +277,31 @@
         height: 22px;
         width: 22px;
     }
+
+    // remove when real selector done
+    .language-icon {
+        height: 22px;
+        width: 22px;
+        font-size: 22px;
+    }
+
+    .language {
+        font-size: 1.5rem !important;
+        line-height: 2.1rem !important;
+    }
+
+    // remove when real selector done
 }
+
+// remove when real selector done
+.language {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 2.0625rem;
+    white-space: nowrap;
+    color: #1a3173;
+    display: flex;
+    align-items: center;
+}
+
+// remove when real selector done
