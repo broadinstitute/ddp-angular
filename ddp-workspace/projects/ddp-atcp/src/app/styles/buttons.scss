@@ -108,9 +108,8 @@
 }
 
 .button_primary {
-  background-color: mat-color($app-theme, 250);
-  border: 2px solid mat-color($app-theme, 50);
-  color: mat-color($app-theme, 100);
+  background-color: mat-color($app-primary);
+  color: mat-color($app-primary, A100);
 }
 
 .button_primary:disabled {
@@ -156,17 +155,18 @@
   line-height: 1.375rem;
   font-family: inherit;
   white-space: nowrap;
+  outline: none;
 }
 
 .simple-button:hover,
 .SimpleButton:hover {
   color: mat-color($app-theme, 650);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .simple-button:focus,
 .SimpleButton:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .panel-opened {
