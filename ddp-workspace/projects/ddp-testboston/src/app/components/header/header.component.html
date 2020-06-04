@@ -38,18 +38,18 @@
             <div *ngIf="headerConfig.showLoginButton" class="auth__dashboard">
                 <ddp-sign-in-out></ddp-sign-in-out>
             </div>
-            <!-- remove when real selector done -->
+            <!-- replace with real language selector component when when it is done -->
             <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-            <!-- remove when real selector done -->
+            <!-- replace with real language selector component when when it is done -->
         </div>
-        <div class="mobile-menu">
+        <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
                 <button class="SimpleButton" (click)="openMenu()">
                     {{'Navigation.Menu' | translate}}
                 </button>
             </ng-container>
             <ng-container *ngIf="isMenuOpened">
-                <button class="mobile-menu__close" mat-icon-button (click)="closeMenu()">
+                <button class="menu-button__close" mat-icon-button (click)="closeMenu()">
                     <mat-icon>clear</mat-icon>
                 </button>
             </ng-container>
@@ -86,7 +86,7 @@
                     </a>
                 </li>
             </ng-container>
-            <div class="mobile-buttons">
+            <div class="menu_mobile-buttons">
                 <li class="menu__item" *ngIf="isAuthenticated">
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
@@ -94,9 +94,9 @@
                     <ddp-sign-in-out></ddp-sign-in-out>
                 </li>
                 <li class="menu__item">
-                    <!-- remove when real selector done -->
+                    <!-- replace with real language selector component when when it is done -->
                     <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-                    <!-- remove when real selector done -->
+                    <!-- replace with real language selector component when when it is done -->
                 </li>
             </div>
         </ul>
@@ -130,11 +130,11 @@
     </a>
 </ng-template>
 
-<!-- remove when real selector done -->
+<!-- replace with real language selector component when when it is done -->
 <ng-template #languageButton>
     <div class="language">
         <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
         <span>English</span>
     </div>
 </ng-template>
-<!-- remove when real selector done -->
+<!-- replace with real language selector component when when it is done -->

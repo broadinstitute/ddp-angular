@@ -59,19 +59,17 @@
     font-size: 1.125rem;
     line-height: 2.0625rem;
     white-space: nowrap;
+    color: mat-color($app-theme, 1300);
 }
 
 .header-link:link,
 .header-link:visited {
-    color: mat-color($app-theme, 1300);
-
     .dashboard-icon_color {
         stroke: mat-color($app-theme, 1300);
     }
 }
 
 .header-link:hover {
-    color: mat-color($app-theme, 1300);
     text-decoration: underline;
 
     .dashboard-icon_color {
@@ -80,7 +78,6 @@
 }
 
 .header-link:active {
-    color: mat-color($app-theme, 1300);
     text-decoration: underline;
 
     .dashboard-icon_color {
@@ -105,7 +102,7 @@
     }
 }
 
-.mobile-menu {
+.menu-button {
     display: none;
     margin-left: 2rem;
 
@@ -166,6 +163,10 @@
         display: block;
     }
 
+    &_mobile-buttons {
+        display: none;
+    }
+
     &__item {
         display: flex;
         margin-bottom: 4rem;
@@ -175,10 +176,6 @@
             line-height: 2.25rem;
         }
     }
-}
-
-.mobile-buttons {
-    display: none;
 }
 
 @media only screen and (max-width: 1370px) {
@@ -206,7 +203,7 @@
         display: none;
     }
 
-    .mobile-menu {
+    .menu-button {
         display: unset;
     }
 }
@@ -223,20 +220,18 @@
         display: none;
     }
 
-    .mobile-menu {
-        display: unset;
-    }
-
     .dashboard-icon {
         height: 26px;
         width: 26px;
     }
 
-    .mobile-buttons {
-        display: unset;
+    .menu {
+        &_mobile-buttons {
+            display: unset;
+        }
     }
 
-    // remove when real selector done
+    // replace with real language selector component styles when when it is done
     .language-icon {
         height: 26px;
         width: 26px;
@@ -248,7 +243,7 @@
         line-height: 2.25rem !important;
     }
 
-    // remove when real selector done
+    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 480px) {
@@ -278,7 +273,7 @@
         width: 22px;
     }
 
-    // remove when real selector done
+    // replace with real language selector component styles when when it is done
     .language-icon {
         height: 22px;
         width: 22px;
@@ -290,10 +285,10 @@
         line-height: 2.1rem !important;
     }
 
-    // remove when real selector done
+    // replace with real language selector component styles when when it is done
 }
 
-// remove when real selector done
+// replace with real language selector component when styles when it is done
 .language {
     font-weight: 600;
     font-size: 1.125rem;
@@ -304,4 +299,4 @@
     align-items: center;
 }
 
-// remove when real selector done
+// replace with real language selector component styles when when it is done
