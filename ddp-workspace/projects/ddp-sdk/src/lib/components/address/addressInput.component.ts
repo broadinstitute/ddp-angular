@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DoCheck,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { CountryService } from '../../services/addressCountry.service';
 import { CountryAddressInfoSummary } from '../../models/countryAddressInfoSummary';
@@ -136,7 +147,8 @@ import { AddressInputService } from '../address/addressInput.service';
       padding: 0;
       margin:0;
     }`],
-  providers: [AddressInputService]
+  providers: [AddressInputService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 

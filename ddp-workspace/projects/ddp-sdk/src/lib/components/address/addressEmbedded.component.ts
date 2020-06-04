@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AddressService } from '../../services/address.service';
 import { Address } from '../../models/address';
@@ -110,7 +121,8 @@ interface AddressSuggestion {
       :host ::ng-deep .mat-radio-label {
           white-space: normal;
       }
-    `]
+    `],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   @Input() block: MailAddressBlock;
