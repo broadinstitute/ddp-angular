@@ -68,6 +68,7 @@ import { ActivityQuestionConverter } from './services/activity/activityQuestionC
 import { ActivityComponentConverter } from './services/activity/activityComponentConverter.service';
 import { ActivityValidatorBuilder } from './services/activity/activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './services/activity/activitySuggestionBuilder.service';
+import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectInvitationServiceAgent.service';
 
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 
@@ -238,6 +239,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SessionMementoService,
     AnalyticsEventsService,
     UserActivityServiceAgent,
+    SubjectInvitationServiceAgent,
     UserProfileServiceAgent,
     ActivityServiceAgent,
     PrequalifierServiceAgent,
