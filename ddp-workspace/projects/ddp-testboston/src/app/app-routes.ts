@@ -6,6 +6,7 @@ export const AppRoutes = {
     Join: 'join',
     LoginLanding: 'login-landing',
     LoginLandingMode: 'login-landing/:mode',
+    AdminLoginLanding: 'admin-login-landing',
     LocalAuth: 'auth',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',

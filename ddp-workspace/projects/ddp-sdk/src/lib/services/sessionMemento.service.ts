@@ -91,8 +91,9 @@ export class SessionMementoService implements OnDestroy {
         userGuid: string,
         locale: string,
         expiresAtInSeconds: number,
-        participantGuid: string | null = null): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid);
+        participantGuid: string | null = null,
+        isAdmin: boolean = false): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin);
         this.updateSession(session);
     }
 
@@ -137,6 +138,10 @@ export class SessionMementoService implements OnDestroy {
         }
 
         return true;
+    }
+
+    public isAuthenticatedAdminSession(): boolean {
+        return this.isAuthenticatedSession() && this.sessionSubject.value.isAdmin;
     }
 
     public isTemporarySession(): boolean {
