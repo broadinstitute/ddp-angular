@@ -7,8 +7,9 @@ import { AddressError } from '../../models/addressError';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { merge, Observable, of, Subject, zip } from 'rxjs';
 import * as _ from 'underscore';
-import { map, take, takeUntil, tap } from 'rxjs/operators';
+import { map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AddressInputService } from '../address/addressInput.service';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -16,7 +17,7 @@ import { AddressInputService } from '../address/addressInput.service';
     <form [formGroup]="ais.addressForm" novalidate autocomplete="off">
       <div class="address-input-container">
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('name') | async"
+          <input matInput [placeholder]="getLabelForControl('Name') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="name"
@@ -24,9 +25,8 @@ import { AddressInputService } from '../address/addressInput.service';
                  required>
           <mat-error>{{getFieldErrorMessage('name') | async}}</mat-error>
         </mat-form-field>
-
         <mat-form-field>
-          <mat-select [placeholder]="getLabelForControl('country') | async"
+          <mat-select [placeholder]="getLabelForControl('Country') | async"
                       formControlName="country"
                       required>
             <mat-option [value]="">Choose Country...</mat-option>
@@ -38,7 +38,7 @@ import { AddressInputService } from '../address/addressInput.service';
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput #street1 [placeholder]="getLabelForControl('street1') | async"
+          <input matInput #street1 [placeholder]="getLabelForControl('Street1') | async"
                  formControlName="street1"
                  uppercase
                  required
@@ -49,7 +49,7 @@ import { AddressInputService } from '../address/addressInput.service';
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('street2') | async"
+          <input matInput [placeholder]="getLabelForControl('Street2') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="street2"
@@ -58,7 +58,7 @@ import { AddressInputService } from '../address/addressInput.service';
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('city') | async" formControlName="city"
+          <input matInput [placeholder]="getLabelForControl('City') | async" formControlName="city"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  uppercase required>
@@ -71,7 +71,7 @@ import { AddressInputService } from '../address/addressInput.service';
 
           <ng-template #showStateDropdown>
             <mat-form-field>
-              <mat-select [placeholder]="getLabelForControl('state') | async" formControlName="state" required>
+              <mat-select [placeholder]="getLabelForControl('State') | async" formControlName="state" required>
                 <mat-option [value]="">Choose {{(ais.stateLabel$ | async).toLowerCase()}}...</mat-option>
                 <mat-option *ngFor="let theState of info.subnationalDivisions"
                             [value]="theState.code">{{theState.name | uppercase}}
@@ -83,7 +83,7 @@ import { AddressInputService } from '../address/addressInput.service';
 
           <ng-template #showStateTextField>
             <mat-form-field>
-              <input matInput [placeholder]="getLabelForControl('state') | async"
+              <input matInput [placeholder]="getLabelForControl('State') | async"
                      [name]="disableAutofill"
                      [attr.autocomplete]="autocompleteAttributeValue()"
                      formControlName="state"
@@ -96,7 +96,7 @@ import { AddressInputService } from '../address/addressInput.service';
 
         <ng-template #defaultStateField>
           <mat-form-field>
-            <input matInput [placeholder]="getLabelForControl('state') | async"
+            <input matInput [placeholder]="getLabelForControl('State') | async"
                    [name]="disableAutofill"
                    [attr.autocomplete]="autocompleteAttributeValue()"
                    formControlName="state"
@@ -107,7 +107,7 @@ import { AddressInputService } from '../address/addressInput.service';
         </ng-template>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('zip') | async"
+          <input matInput [placeholder]="getLabelForControl('Zip') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="zip"
@@ -117,7 +117,7 @@ import { AddressInputService } from '../address/addressInput.service';
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('phone') | async"
+          <input matInput [placeholder]="getLabelForControl('Phone') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="phone"
@@ -191,7 +191,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   // See if we can continue making stuff in form observable as much as possible
   constructor(
     private countryService: CountryService,
-    public ais: AddressInputService) {
+    public ais: AddressInputService,
+    private ngxTranslate: NGXTranslateService) {
   }
 
   ngOnInit(): void {
@@ -296,23 +297,22 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    * param {string} formControlName
    * returns {any}
    */
-  public getLabelForControl(formControlName: string): Observable<string> {
-    if (formControlName === 'zip') {
-      return this.ais.postalCodeLabel$;
-    } else if (formControlName === 'state') {
-      return this.ais.stateLabel$;
-    }
-    const controlNameToLabelName = {
-      name: 'Full Name',
-      street1: 'Street Address',
-      street2: 'Apt/Floor #',
-      city: 'City',
-      phone: 'Phone Number',
-      country: 'Country/Territory'
-    };
 
-    return of(controlNameToLabelName[formControlName]);
+  public getLabelForControl(formControlName: string): Observable<string> {
+    const prefix = 'MailAddress.Fields.';
+
+    if (formControlName === 'Zip') {
+      return this.ais.postalCodeLabel$.pipe(
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${prefix}.Zip.${postalCodeString}`)));
+
+    } else if (formControlName === 'State') {
+      return this.ais.stateLabel$.pipe(
+          mergeMap(stateString => this.ngxTranslate.getTranslation(`${prefix}.State.${stateString}`)));
+    } else {
+      return this.ngxTranslate.getTranslation(`${prefix}formControlName`) as Observable<string>;
+    }
   }
+
 
   public displayVerificationErrors(errors: AddressError[]): void {
     if (errors.length > 0) {

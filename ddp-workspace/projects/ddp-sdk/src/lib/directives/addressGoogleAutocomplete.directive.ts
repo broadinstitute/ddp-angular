@@ -94,6 +94,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     private getGoogleAddress(): Address | null {
         const place: PlaceResult = this.autoComplete.getPlace();
         if (!place || this.isFallbackResult(place)) {
+            console.log('google autocomplete did nothing and place value was: %o', place);
             return null;
         }
 
@@ -113,6 +114,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
         googleAddress.state = fieldVal('administrative_area_level_1', false);
         googleAddress.country = fieldVal('country', false);
         googleAddress.zip = fieldVal('postal_code');
+        console.log('google autocomplete pushing: %o', googleAddress);
 
         return googleAddress;
     }
