@@ -1,0 +1,16 @@
+@import '../app-theme.scss';
+
+.static-page-title-section {
+    background-color: mat-color($app-theme, 3100);
+
+    &__title {
+        font-weight: 600;
+        font-size: 2rem;
+        line-height: 2.75rem;
+        margin: 2.75rem 0;
+    }
+}
+
+.static-page-content-section {
+    margin: 4rem 0;
+}

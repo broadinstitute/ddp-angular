@@ -8,6 +8,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 
 import {
+  Auth0CodeCallbackComponent,
   AuthGuard,
   IrbGuard
 } from 'ddp-sdk';
@@ -19,7 +20,9 @@ import {
   ActivityRedesignedComponent,
   ErrorRedesignedComponent,
   PasswordRedesignedComponent,
-  SessionExpiredRedesignedComponent
+  SessionExpiredRedesignedComponent,
+  RedirectToAuth0LoginRedesignedComponent,
+  RedirectToLoginLandingRedesignedComponent
 } from 'toolkit';
 
 const routes: Routes = [
@@ -95,6 +98,20 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.LoginLandingMode,
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.LocalAuth,
+    component: Auth0CodeCallbackComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.Error,
     component: ErrorRedesignedComponent,
     canActivate: [
@@ -111,6 +128,13 @@ const routes: Routes = [
   {
     path: AppRoutes.Password,
     component: PasswordRedesignedComponent
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
   },
   {
     path: '',

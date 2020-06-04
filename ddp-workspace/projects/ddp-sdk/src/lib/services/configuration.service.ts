@@ -22,4 +22,11 @@ export class ConfigurationService {
     mapsApiKey: string;
     projectGAToken: string;
     studyGuid: string;
+    // country code if limiting app to just one country
+    supportedCountry: string | null = null;
+    // whether dashboard status should display a count of questions
+    dashboardShowQuestionCount = false;
+    // if dashboardShowQuestionCount is true, exclude activity guids listed here from showing
+    // their question count
+    dashboardShowQuestionCountExceptions: string[] = [];
 }

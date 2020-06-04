@@ -1343,6 +1343,10 @@ ul {
     margin-bottom: 15px;
 }
 
+.Modal-progress {
+    margin: 5px 0;
+}
+
 .md-dialog-container {
     background-color: mat-color($app-theme, 1100);
 }
@@ -2138,4 +2142,8 @@ input.mat-input-element {
         font-size: 12px !important;
         white-space: normal !important;
     }
+}
+
+.mat-progress-bar-buffer {
+    background-color: lightgray !important;
 }

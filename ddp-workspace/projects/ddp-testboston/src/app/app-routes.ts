@@ -5,11 +5,14 @@ export const AppRoutes = {
     Error: 'error',
     Join: 'join',
     LoginLanding: 'login-landing',
+    LoginLandingMode: 'login-landing/:mode',
+    LocalAuth: 'auth',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
     Password: 'password',
     SessionExpired: 'session-expired',
     Privacy: 'privacy-policy',
-    Address: 'mailing-address'
+    Address: 'mailing-address',
+    PasswordResetDone: 'password-reset-done'
 };

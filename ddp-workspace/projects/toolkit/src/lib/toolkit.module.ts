@@ -69,6 +69,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
@@ -87,6 +89,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     MatDialogModule,
     MatSidenavModule,
     MatButtonModule,
+    MatProgressBarModule,
     DdpModule
   ],
   providers: [

@@ -3,12 +3,12 @@ import { DOCUMENT } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { NGXTranslateService } from './internationalization/ngxTranslate.service';
 import { CompositeDisposable } from '../compositeDisposable';
-import { Subject, Observable } from 'rxjs';
+import { ReplaySubject, Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class RenewSessionNotifier implements OnDestroy {
     private anchor: CompositeDisposable = new CompositeDisposable();
-    private openDialog: Subject<void> = new Subject<void>();
+    private openDialog: ReplaySubject<void> = new ReplaySubject<void>(1);
     private closeDialog: Subject<void> = new Subject<void>();
     public openDialogEvents: Observable<void> = this.openDialog.asObservable();
     public closeDialogEvents: Observable<void> = this.closeDialog.asObservable();

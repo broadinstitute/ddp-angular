@@ -25,7 +25,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
                  required>
           <mat-error>{{getFieldErrorMessage('name') | async}}</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field *ngIf="!country">
           <mat-select [placeholder]="getLabelForControl('Country') | async"
                       formControlName="country"
                       required>
@@ -44,7 +44,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
                  required
                  addressgoogleautocomplete
                  (addressChanged)="ais.googleAutocompleteAddress$.next($event)"
-                 [autocompleteRestrictCountryCode]="ais.addressForm.get('country')?.value">
+                 [autocompleteRestrictCountryCode]="ais.addressForm.get('country')?.value || country">
           <mat-error>{{getFieldErrorMessage('street1') | async}}</mat-error>
         </mat-form-field>
 
@@ -158,6 +158,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   set readonly(val: boolean) {
     this.ais.inputIsReadOnly$.next(val);
   }
+  @Input()
+  country: string | null;
 
   /**
    * Set the errors in the input component. If list is empty, errors will be cleared.

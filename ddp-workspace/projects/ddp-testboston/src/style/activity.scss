@@ -1,5 +1,24 @@
 @import '../app-theme.scss';
 
+// common activity styles
+.section-spinner {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.static-spinner {
+    padding-bottom: 8rem;
+    padding-top: 1rem;
+}
+
+.main_activity {
+    padding-bottom: 8rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+}
+
 // buttons layout
 .activity-buttons {
     display: flex;
@@ -14,5 +33,46 @@
         &_right {
             margin-left: auto;
         }
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .activity-buttons_mobile {
+        flex-direction: column;
+        align-items: center;
+
+        .button {
+            width: 20rem;
+        }
+
+        .button:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
+
+// info box
+.infobox {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 8px;
+    background-color: rgba(113, 84, 255, 0.06);
+    padding: 1rem;
+}
+
+
+// error message
+.ErrorMessage {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    margin: 1rem 0;
+    color: mat-color($app-theme, 2700);
+}
+
+// close button
+.ddp-close-button {
+    transition: 0.3s;
+
+    &:hover {
+        color: rgba(0, 0, 0, 0.26);
     }
 }

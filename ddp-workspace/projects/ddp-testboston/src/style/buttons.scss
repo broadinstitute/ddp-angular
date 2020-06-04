@@ -17,6 +17,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid transparent;
 
     &:active,
     &:hover,
@@ -57,6 +58,20 @@
         &:hover:not([disabled]),
         &:hover:enabled {
             background-color: mat-color($app-theme, 2400);
+        }
+    }
+
+    // red button
+    &_warn {
+        background-color: mat-color($app-theme, 2800);
+
+        &:disabled {
+            background-color: mat-color($app-theme, 3000);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2900);
         }
     }
 
@@ -101,6 +116,12 @@
         }
     }
 
+    &_small {
+        padding: 0.2rem 0;
+        font-size: 1.125rem;
+        line-height: 2.125rem;
+    }
+
     &__spinner {
         margin-left: 5px;
         height: 20px !important;
@@ -110,6 +131,10 @@
         .mat-spinner circle {
             stroke: mat-color($app-theme, 100);
         }
+    }
+
+    &__icon {
+        margin-right: 5px;
     }
 }
 

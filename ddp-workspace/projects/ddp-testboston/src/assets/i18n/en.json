@@ -4,6 +4,10 @@
             "Submit": {
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
             }
         }
     },
@@ -171,7 +175,7 @@
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "My Dashboard"
+            "Title": "Dashboard"
         },
         "Password": {
             "Title": "Please enter the password",
@@ -190,6 +194,15 @@
         },
         "SessionExpired": {
             "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
         }
     },
     "SDK": {
@@ -200,10 +213,10 @@
         "NextButton": "Next",
         "PreviousButton": "Back",
         "SavingButton": "Saving",
-        "EditButton": "View/Edit",
+        "EditButton": "Continue",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
-        "NotAgreeButton": "I am not ready to agree",
+        "NotAgreeButton": "I'm not ready to agree",
         "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
         "SaveError": "We're sorry but an error occurred",
@@ -231,7 +244,8 @@
             "Summary": "Summary",
             "ActivityStatus": "Status",
             "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityActions": "Actions",
+            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered"
         },
         "ManageParticipants": {
             "GovernedParticipants": "Governed participants",
