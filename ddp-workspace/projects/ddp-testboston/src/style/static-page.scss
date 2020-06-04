@@ -12,5 +12,11 @@
 }
 
 .static-page-content-section {
-    margin: 4rem 0;
+    margin: 4rem 0 15rem 0;
+}
+
+@media only screen and (max-width: 480px) {
+    .static-page-content-section {
+        margin: 4rem 0 10rem 0;
+    }
 }
