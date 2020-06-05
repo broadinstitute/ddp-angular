@@ -5,8 +5,8 @@ import { AdminServiceAgent } from './adminServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { Observable, throwError } from 'rxjs';
-import { Subject } from '../../models/subject';
+import { Observable, throwError, of } from 'rxjs';
+import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
 import { DdpError } from '../../models/ddpError';
 import { ErrorType } from '../../models/errorType';
@@ -25,9 +25,9 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
         return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-details`, { invitationId, notes });
     }
 
-    public lookupInvitation(invitationId: string): Observable<Subject | null> {
+    public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
         return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId }, {}, true).pipe(
-            map(response => response.body),
+            map(response => response ? response.body : null),
             catchError((error: HttpErrorResponse) => {
                 return throwError(this.buildErrorObject(error));
             })
@@ -39,11 +39,11 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     private buildErrorObject(serverError: HttpErrorResponse): DdpError {
-        return new DdpError(this.buildErrorMessage(serverError), serverError.error ? serverError.error.message : '');
+        return new DdpError(serverError.error ? serverError.error.message : '', this.buildErrorType(serverError));
     }
 
-    private buildErrorMessage(serverError: HttpErrorResponse): string {
-        if (serverError.error && serverError.error.code === '404') {
+    private buildErrorType(serverError: HttpErrorResponse): ErrorType {
+        if (serverError.error && serverError.error.code === 'NOT_FOUND') {
             return ErrorType.InvitationNotFound;
         }
         return ErrorType.UnknownError;

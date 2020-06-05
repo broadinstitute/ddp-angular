@@ -41,6 +41,7 @@ export * from './lib/models/address';
 export * from './lib/models/ddpError';
 export * from './lib/models/errorType';
 export * from './lib/models/dashboardColumns';
+export * from './lib/models/studySubject';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';

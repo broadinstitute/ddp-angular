@@ -1,4 +1,4 @@
-export interface Subject {
+export interface StudySubject {
     invitationId: string;
     createdAt: string;
     voidedAt: string;
