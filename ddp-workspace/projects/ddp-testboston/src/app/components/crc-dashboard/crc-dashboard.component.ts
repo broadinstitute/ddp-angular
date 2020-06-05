@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
+import { Subject } from 'rxjs';
 import { filter, tap, mergeMap, map, delay, debounceTime, finalize } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-crc-dashboard',
@@ -21,6 +21,7 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
 
   constructor(
+    private ref: ChangeDetectorRef,
     private sessionService: SessionMementoService,
     private subjectInvitation: SubjectInvitationServiceAgent) { }
 
@@ -72,29 +73,32 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
         this.subject = null;
       }),
       filter(form => this.searchForm.valid && !!form.invitationId),
-      tap(() => this.isLoading = true),
+      tap(() => {
+        this.isLoading = true;
+        this.ref.detectChanges();
+      }),
       map(form => form.invitationId),
       // todo: remove delay
       delay(3000),
       mergeMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
-      tap(() => this.isLoading = false),
-      finalize(() => this.isLoading = false)
-    ).subscribe(
-      (subject) => this.subject = subject,
-      (error) => this.error = error
-    );
+      tap(() => this.isLoading = false)
+    ).subscribe(subject => {
+      if (subject) {
+        this.subject = subject;
+      } else {
+        this.error = new DdpError('', ErrorType.InvitationNotFound);
+      }
+    });
     this.anchor.addNew(form);
   }
 
   private initNotesListener(): void {
     const notes = this.notesSubject.asObservable().pipe(
       debounceTime(1000),
-      mergeMap((notes) => this.subjectInvitation.updateInvitationDetails(this.subject.invitationId, notes))
-    ).subscribe(
-      (response) => {
-        this.error = response ? null : new DdpError('', ErrorType.NotesError);
-      }
-    );
+      mergeMap(notes => this.subjectInvitation.updateInvitationDetails(this.subject.invitationId, notes))
+    ).subscribe(response => {
+      this.error = response ? null : new DdpError('', ErrorType.NotesError);
+    });
     this.anchor.addNew(notes);
   }
 }

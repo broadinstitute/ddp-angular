@@ -45,6 +45,16 @@
     }
 }
 
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__spinner {
+        margin-left: 1rem;
+    }
+}
+
 .error {
     display: flex;
     align-items: center;
@@ -52,7 +62,7 @@
     font-size: 1.125rem;
     line-height: 1.125rem;
     font-weight: 700;
-    margin: 0 0 0 2rem;
+    margin: 0 0 0 1rem;
 
     mat-icon {
         margin-right: 0.2rem;
@@ -90,6 +100,7 @@
         line-height: 2rem;
         font-weight: 300;
         margin: 0;
+        color: #454545;
     }
 }
 
