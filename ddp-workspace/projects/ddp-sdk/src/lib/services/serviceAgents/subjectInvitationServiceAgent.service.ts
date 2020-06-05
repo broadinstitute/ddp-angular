@@ -1,15 +1,14 @@
-import { map, catchError } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AdminServiceAgent } from './adminServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, timer, of } from 'rxjs';
 import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
-import { DdpError } from '../../models/ddpError';
-import { ErrorType } from '../../models/errorType';
+
 
 @Injectable()
 export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
@@ -26,7 +25,34 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
-        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
+        // return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
+        if (invitationId === '111111111111') {
+            return of({
+                invitationId: '111111111111',
+                createdAt: '',
+                voidedAt: '',
+                verifiedAt: '',
+                acceptedAt: '',
+                userGuid: 'USER_GUID',
+                userHruid: '',
+                userLoginEmail: 'foo@bar.baz',
+                notes: 'some notes\nmore notes'
+            });
+        }
+        if (invitationId === '222222222222') {
+            return of({
+                invitationId: '222222222222',
+                createdAt: '',
+                voidedAt: '',
+                verifiedAt: '',
+                acceptedAt: '',
+                userGuid: '',
+                userHruid: '',
+                userLoginEmail: '',
+                notes: ''
+            });
+        }
+        return of(null);
     }
 
     public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {
