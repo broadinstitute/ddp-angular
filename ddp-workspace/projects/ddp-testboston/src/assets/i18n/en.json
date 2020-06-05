@@ -309,7 +309,7 @@
             "PhysicianValidation": "Please fill out all required fields"
         },
         "MailAddress": {
-            "Fields:": {
+            "Fields": {
                 "Name": "Full Name",
                 "Country": "Country/Territory",
                 "Street1": "Street Address",

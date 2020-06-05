@@ -301,17 +301,17 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    */
 
   public getLabelForControl(formControlName: string): Observable<string> {
-    const prefix = 'MailAddress.Fields.';
+    const prefix = 'SDK.MailAddress.Fields.';
 
     if (formControlName === 'Zip') {
       return this.ais.postalCodeLabel$.pipe(
-          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${prefix}.Zip.${postalCodeString}`)));
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${prefix}Zip.${postalCodeString}`) as Observable<string>));
 
     } else if (formControlName === 'State') {
       return this.ais.stateLabel$.pipe(
-          mergeMap(stateString => this.ngxTranslate.getTranslation(`${prefix}.State.${stateString}`)));
+          mergeMap(stateString => this.ngxTranslate.getTranslation(`${prefix}State.${stateString}`) as Observable<string>));
     } else {
-      return this.ngxTranslate.getTranslation(`${prefix}formControlName`) as Observable<string>;
+      return this.ngxTranslate.getTranslation(`${prefix}${formControlName}`) as Observable<string>;
     }
   }
 
@@ -352,7 +352,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     if (currError.field === 'country' && currError.message.indexOf('valid ISO 3166-1') !== -1) {
       // EasyPost doesn't have an error code for this, and we don't want to show a scary message to the user,
       // so let's match the string and tone it down.
-      return this.getLabelForControl('country').pipe((map(label => label + ' is required')));
+      return this.getLabelForControl('Country').pipe((map(label => label + ' is required')));
     }
 
     const CODE_TO_MESSAGE = {
