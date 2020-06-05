@@ -1,6 +1,7 @@
 import { Component, HostListener, Inject, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SessionMementoService, WindowRef } from 'ddp-sdk';
+import { HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { ScrollerService } from '../../services/scroller.service';
 
@@ -21,6 +22,7 @@ export class HeaderComponent {
     private session: SessionMementoService,
     private window: WindowRef,
     private scrollerService: ScrollerService,
+    public headerConfig: HeaderConfigurationService,
     @Inject(DOCUMENT) private document: Document) { }
 
   public get isAuthenticated(): boolean {
