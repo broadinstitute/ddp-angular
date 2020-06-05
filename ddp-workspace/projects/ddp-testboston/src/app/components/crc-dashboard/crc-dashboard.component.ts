@@ -37,7 +37,6 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   public clearSearchField(): void {
     this.searchForm.reset();
-    this.subject = null;
   }
 
   public get showSearchButton(): boolean {
