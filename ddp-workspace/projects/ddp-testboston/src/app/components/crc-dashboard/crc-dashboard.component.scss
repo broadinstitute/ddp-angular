@@ -1,0 +1,134 @@
+@mixin block-title-font {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #3F4750;
+}
+
+.search-section {
+    background-color: #F8F8F8;
+}
+
+.search-block {
+    margin: 5rem 0 1rem 0;
+}
+
+.title {
+    color: #454545;
+    font-size: 1.5625rem;
+    line-height: 2.125rem;
+}
+
+.invitation-code {
+    display: flex;
+}
+
+.search-field {
+    width: 24rem;
+
+    &__icon {
+        color: #787681;
+    }
+
+    &__clear {
+        font-size: 1.125rem;
+        font-family: inherit;
+        border: none;
+        text-decoration: underline;
+        background: none;
+        color: #787681;
+        display: none;
+
+        &_visible {
+            display: flex;
+        }
+    }
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    color: #ad0000;
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0 2rem;
+
+    mat-icon {
+        margin-right: 0.2rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    &_notes {
+        font-weight: 600;
+        margin: 1rem 0 0 0;
+    }
+}
+
+.subject-block {
+    margin: 1rem 0 3rem 0;
+}
+
+.subject-info {
+    display: flex;
+}
+
+.info-block {
+    &:first-child {
+        margin-right: 3rem;
+    }
+
+    &__title {
+        @include block-title-font;
+        opacity: 0.6;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 300;
+        margin: 0;
+    }
+}
+
+.buttons {
+    margin: 2rem 0;
+}
+
+.notes {
+    &__title {
+        @include block-title-font;
+    }
+
+    &__textarea {
+        width: 100%;
+        resize: vertical;
+        font-family: inherit;
+        box-sizing: border-box;
+        padding: 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        border: 1px solid #C2C7CB;
+        border-radius: 4px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .invitation-code {
+        flex-direction: column;
+    }
+
+    .search-field {
+        width: 20rem;
+    }
+
+    .error {
+        margin: 0;
+    }
+
+    .subject-info {
+        flex-direction: column;
+    }
+}

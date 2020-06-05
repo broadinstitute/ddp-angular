@@ -26,16 +26,31 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
-        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId }, {}, true).pipe(
-            map(response => response ? response.body : null),
-            catchError((error: HttpErrorResponse) => {
-                return throwError(this.buildErrorObject(error));
-            })
-        );
+        // return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId }, {}, true).pipe(
+        //     map(response => response ? response.body : null),
+        //     catchError((error: HttpErrorResponse) => {
+        //         return throwError(this.buildErrorObject(error));
+        //     })
+        // );
+        return of({
+            invitationId: '111111111111',
+            createdAt: '',
+            voidedAt: '',
+            verifiedAt: '',
+            acceptedAt: '',
+            userGuid: 'guid',
+            userHruid: '',
+            userLoginEmail: 'foo@bar.baz',
+            notes: 'notes'
+        });
     }
 
     public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {
         return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/participants`, { invitationId });
+    }
+
+    public createUserLoginAccount(userGuid: string, email: string): Observable<any | null> {
+        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/user/${userGuid}/login-account`, { email });
     }
 
     private buildErrorObject(serverError: HttpErrorResponse): DdpError {

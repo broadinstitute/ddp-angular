@@ -10,6 +10,7 @@ export const AppRoutes = {
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
+    CrcDashboard: 'crc-dashboard',
     Password: 'password',
     SessionExpired: 'session-expired',
     Privacy: 'privacy-policy',

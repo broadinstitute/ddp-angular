@@ -7,4 +7,5 @@ export interface StudySubject {
     userGuid: string;
     userHruid: string;
     userLoginEmail: string;
+    notes: string;
 }
