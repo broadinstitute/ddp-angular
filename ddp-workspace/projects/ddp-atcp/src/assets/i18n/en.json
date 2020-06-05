@@ -115,11 +115,13 @@
       "Messages": {
         "ResearcherName": "Researcher name cannot be empty.",
         "ResearcherEmail": "Researcher email cannot be empty.",
+        "ResearcherBiosketch": "Researcher biosketch cannot be empty.",
         "FileSizeExceedsTheLimit": "File size exceeds the limit",
         "ResearcherOrgName": "Org name cannot be empty.",
         "ResearcherOrgAddress": "Org address 1 cannot be empty.",
         "ResearcherOrgCity": "Org city cannot be empty.",
         "ResearcherOrgCountry": "Org country cannot be empty.",
+        "ResearcherProjectDescription": "Project description cannot be empty.",
         "ResearcherOrgZip": "Org zip cannot be empty.",
         "ResearcherUse": "Research use cannot be empty.",
         "ResearcherSign": "Researcher signature cannot be empty."

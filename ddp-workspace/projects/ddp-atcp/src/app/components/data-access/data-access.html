@@ -22,8 +22,8 @@
                  id="name"
                  required
                  name="data_access_request[researcher_name]"
-                 [(ngModel)]="name">
-          <span class="error" *ngIf="form.submitted && !name" translate>
+                 [(ngModel)]="model.researcher_name">
+          <span class="error" *ngIf="form.submitted && !model.researcher_name" translate>
             DataAccess.Dataset.Messages.ResearcherName
           </span>
         </div>
@@ -34,14 +34,14 @@
                  id="email"
                  name="data_access_request[researcher_email]"
                  required
-                 [(ngModel)]="email">
-          <span class="error" *ngIf="form.submitted && !email" translate>
+                 [(ngModel)]="model.researcher_email">
+          <span class="error" *ngIf="form.submitted && !model.researcher_email" translate>
             DataAccess.Dataset.Messages.ResearcherEmail
           </span>
         </div>
         <div class="form-group">
           <label for="phone" translate>DataAccess.ResearcherForm.Phone</label>
-          <input type="text" class="form-control" id="phone">
+          <input type="text" class="form-control" id="phone" [(ngModel)]="model.researcher_phone" [ngModelOptions]="{standalone: true}">
         </div>
         <p><b translate>DataAccess.ResearcherForm.Attachment</b></p>
         <!-- TODO: add translation for buttonText and hintText-->
@@ -55,6 +55,9 @@
         <span class="error" *ngIf="fileSizeExceedsLimit" translate>
                 DataAccess.Dataset.Messages.FileSizeExceedsTheLimit
               </span>
+        <span class="error" *ngIf="form.submitted && !researcherBiosketch" translate>
+            DataAccess.Dataset.Messages.ResearcherBiosketch
+          </span>
       </div>
       <hr>
     </div>
@@ -70,14 +73,15 @@
                      id="org-name"
                      name="data_access_request[org_name]"
                      required
-                     [(ngModel)]="orgname">
-              <span class="error" *ngIf="form.submitted && !orgname" translate>
+                     [(ngModel)]="model.org_name">
+              <span class="error" *ngIf="form.submitted && !model.org_name" translate>
                 DataAccess.Dataset.Messages.ResearcherOrgName
               </span>
             </div>
             <div class="form-group">
               <label for="department" translate>DataAccess.OrganizationForm.Department</label>
-              <input type="text" class="form-control" id="department" name="data_access_request[org_dept]">
+              <input type="text" class="form-control" id="department" name="data_access_request[org_dept]"
+                     [(ngModel)]="model.org_dept">
             </div>
           </div>
         </div>
@@ -90,14 +94,15 @@
                      id="address"
                      name="data_access_request[org_address_1]"
                      required
-                     [(ngModel)]="address1">
-              <span class="error" *ngIf="form.submitted && !address1" translate>
+                     [(ngModel)]="model.org_address_1">
+              <span class="error" *ngIf="form.submitted && !model.org_address_1" translate>
                 DataAccess.Dataset.Messages.ResearcherOrgAddress
               </span>
             </div>
             <div class="form-group">
               <label for="address2" translate>DataAccess.OrganizationForm.Address2</label>
-              <input type="text" class="form-control" id="address2" name="data_access_request[org_address_2]">
+              <input type="text" class="form-control" id="address2" name="data_access_request[org_address_2]"
+                     [(ngModel)]="model.org_address_2">
             </div>
           </div>
         </div>
@@ -110,14 +115,15 @@
                      id="city"
                      name="data_access_request[org_city]"
                      required
-                     [(ngModel)]="city">
-              <span class="error" *ngIf="form.submitted && !city" translate>
+                     [(ngModel)]="model.org_city">
+              <span class="error" *ngIf="form.submitted && !model.org_city" translate>
                 DataAccess.Dataset.Messages.ResearcherOrgCity
               </span>
             </div>
             <div class="form-group">
               <label for="state" translate>DataAccess.OrganizationForm.State</label>
-              <input type="text" class="form-control" id="state" name="data_access_request[org_state]">
+              <input type="text" class="form-control" id="state" name="data_access_request[org_state]"
+                     [(ngModel)]="model.org_state">
             </div>
           </div>
         </div>
@@ -130,8 +136,8 @@
                      id="country"
                      name="data_access_request[org_country]"
                      required
-                     [(ngModel)]="country">
-              <span class="error" *ngIf="form.submitted && !country" translate>
+                     [(ngModel)]="model.org_country">
+              <span class="error" *ngIf="form.submitted && !model.org_country" translate>
                 DataAccess.Dataset.Messages.ResearcherOrgCountry
               </span>
             </div>
@@ -142,8 +148,8 @@
                      id="zip"
                      name="data_access_request[org_zip]"
                      required
-                     [(ngModel)]="zip">
-              <span class="error" *ngIf="form.submitted && !zip" translate>
+                     [(ngModel)]="model.org_zip">
+              <span class="error" *ngIf="form.submitted && !model.org_zip" translate>
                 DataAccess.Dataset.Messages.ResearcherOrgZip
               </span>
             </div>
@@ -161,14 +167,16 @@
                   class="form-control title"
                   name="data_access_request[project_description]"
                   required
-                  [(ngModel)]="description"></textarea>
-        <span class="error" *ngIf="form.submitted && !description" translate>
-          DataAccess.Dataset.Messages.ResearcherOrgZip
+                  [(ngModel)]="model.project_description"></textarea>
+        <span class="error" *ngIf="form.submitted && !model.project_description" translate>
+          DataAccess.Dataset.Messages.ResearcherProjectDescription
         </span>
         <p translate>DataAccess.ResearchProject.Article1.Paragraph</p><br>
         <p><b translate>DataAccess.ResearchProject.Article2.Title</b></p>
         <textarea cols="30" rows="10" class="form-control"
-                  name="data_access_request[collaborators]"></textarea>
+                  name="data_access_request[collaborators]"
+                  [(ngModel)]="model.collaborators"
+        ></textarea>
         <p translate>DataAccess.ResearchProject.Article2.Paragraph</p><br>
         <p><b translate>DataAccess.ResearchProject.Article3.Title</b></p>
         <textarea cols="30"
@@ -176,8 +184,8 @@
                   class="form-control"
                   name="data_access_request[research_use]"
                   required
-                  [(ngModel)]="use"></textarea>
-        <span class="error" *ngIf="form.submitted && !use" translate>
+                  [(ngModel)]="model.research_use"></textarea>
+        <span class="error" *ngIf="form.submitted && !model.research_use" translate>
           DataAccess.Dataset.Messages.ResearcherUse
         </span>
         <p translate>DataAccess.ResearchProject.Article3.Paragraph</p>
@@ -190,10 +198,10 @@
         <div>
           <p translate>DataAccess.TypeResearch.SubTitle</p>
           <div class="checkbox">
-            <input name="data_access_request[disease_study]" type="hidden" value="0">
-            <input type="checkbox" value="1"
+            <input type="checkbox"
                    name="data_access_request[disease_study]"
-                   id="data_access_request_disease_study">
+                   id="data_access_request_disease_study"
+            [(ngModel)]="model.disease_study">
             <label class="FormItem-label" for="data_access_request_disease_study" translate>
               DataAccess.TypeResearch.DisableStudy.Label
             </label>
@@ -202,11 +210,10 @@
         </div>
         <div>
           <div class="checkbox">
-            <input name="data_access_request[methods_development_study]" type="hidden" value="0">
             <input type="checkbox"
-                   value="1"
                    name="data_access_request[methods_development_study]"
-                   id="data_access_request_methods_development_study">
+                   id="data_access_request_methods_development_study"
+                   [(ngModel)]="model.methods_development_study">
             <label class="FormItem-label" for="data_access_request_methods_development_study" translate>
               DataAccess.TypeResearch.MethodDevelopment.Label
             </label>
@@ -218,10 +225,10 @@
         </div>
         <div>
           <div class="checkbox">
-            <input name="data_access_request[controls_study]" type="hidden" value="0">
-            <input type="checkbox" value="1"
+            <input type="checkbox"
                    name="data_access_request[controls_study]"
-                   id="data_access_request_controls_study">
+                   id="data_access_request_controls_study"
+                   [(ngModel)]="model.controls_study">
             <label class="FormItem-label" for="data_access_request_controls_study" translate>
               DataAccess.TypeResearch.Controls.Label
             </label>
@@ -230,10 +237,10 @@
         </div>
         <div>
           <div class="checkbox">
-            <input name="data_access_request[variation_study]" type="hidden" value="0">
-            <input type="checkbox" value="1"
+            <input type="checkbox"
                    name="data_access_request[variation_study]"
-                   id="data_access_request_variation_study">
+                   id="data_access_request_variation_study"
+                   [(ngModel)]="model.variation_study">
             <label class="FormItem-label" for="data_access_request_variation_study" translate>
               DataAccess.TypeResearch.Population.Label
             </label>
@@ -242,10 +249,10 @@
         </div>
         <div>
           <div class="checkbox">
-            <input name="data_access_request[other_study]" type="hidden" value="0">
-            <input type="checkbox" value="1"
+            <input type="checkbox"
                    name="data_access_request[other_study]"
-                   id="data_access_request_other_study">
+                   id="data_access_request_other_study"
+                   [(ngModel)]="model.other_study">
             <label class="FormItem-label" for="data_access_request_other_study" translate>
               DataAccess.TypeResearch.Other.Label
             </label>
@@ -256,7 +263,7 @@
                 DataAccess.TypeResearch.Describe.Label
               </label>
               <textarea class="form-control" name="data_access_request[other_study_text]"
-                        id="data_access_request_other_study_text"></textarea>
+                        id="data_access_request_other_study_text"  [(ngModel)]="model.other_study_text"></textarea>
             </div>
             <hr>
           </div>
@@ -268,21 +275,19 @@
       <div>
         <p translate>DataAccess.Dataset.SubTitle1</p>
         <div class="checkbox">
-          <input name="data_access_request[survey_data_requested]" type="hidden" value="0">
           <input type="checkbox"
-                 value="1"
                  name="data_access_request[survey_data_requested]"
-                 id="data_access_request_survey_data_requested">
+                 id="data_access_request_survey_data_requested"
+                 [(ngModel)]="model.survey_data_requested">
           <label class="FormItem-label" for="data_access_request_survey_data_requested" translate>
             DataAccess.Dataset.Controls.Survey.Label
           </label>
         </div>
         <div class="checkbox">
-          <input name="data_access_request[genomic_data_requested]" type="hidden" value="0">
           <input type="checkbox"
-                 value="1"
                  name="data_access_request[genomic_data_requested]"
-                 id="data_access_request_genomic_data_requested">
+                 id="data_access_request_genomic_data_requested"
+                 [(ngModel)]="model.genomic_data_requested">
           <label class="FormItem-label" for="data_access_request_genomic_data_requested" translate>
             DataAccess.Dataset.Controls.Genomic.Label
           </label>
@@ -291,13 +296,13 @@
         <textarea rows="4"
                   class="form-control"
                   name="data_access_request[specific_request]"
-                  id="data_access_request_specific_request"></textarea>
+                  id="data_access_request_specific_request" [(ngModel)]="model.specific_request"></textarea>
         <br>
         <p><b translate>DataAccess.Dataset.Text1</b></p>
         <textarea rows="4"
                   class="form-control"
                   name="data_access_request[a_t_disease_areas]"
-                  id="data_access_request_a_t_disease_areas"></textarea>
+                  id="data_access_request_a_t_disease_areas" [(ngModel)]="model.a_t_disease_areas" ></textarea>
         <hr>
       </div>
     </div>
@@ -319,8 +324,8 @@
                  name="data_access_request[researcher_signature]"
                  id="data_access_request_researcher_signature"
                  required
-                 [(ngModel)]="sign">
-          <span class="error" *ngIf="form.submitted && !sign" translate>
+                 [(ngModel)]="model.researcher_signature">
+          <span class="error" *ngIf="form.submitted && !model.researcher_signature" translate>
             DataAccess.Dataset.Messages.ResearcherSign
         </span>
         </div>
@@ -331,7 +336,7 @@
           <input class="form-control"
                  readonly="readonly"
                  type="text"
-                 value="2020-03-27"
+                 [(ngModel)]="model.signature_date"
                  name="data_access_request[signature_date]"
                  id="data_access_request_signature_date">
         </div>

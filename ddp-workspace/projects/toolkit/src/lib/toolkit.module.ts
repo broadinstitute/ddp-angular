@@ -70,6 +70,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+import {ServerMessageComponent} from "./components/dialogs/serverMessage.component";
 
 @NgModule({
   imports: [
@@ -126,6 +127,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     LovedOneThankYouComponent,
     LovedOneThankYouRedesignedComponent,
     WarningComponent,
+    ServerMessageComponent,
     WarningMessageComponent,
     AppComponent,
     ActivityLinkComponent,
@@ -164,6 +166,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     LovedOneThankYouComponent,
     LovedOneThankYouRedesignedComponent,
     WarningMessageComponent,
+    ServerMessageComponent,
     AppComponent,
     ActivityLinkComponent,
     InternationalPatientsComponent,
@@ -181,6 +184,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     JoinMailingListComponent,
     ResendEmailComponent,
     WarningComponent,
+    ServerMessageComponent,
     SessionWillExpireComponent
   ]
 })

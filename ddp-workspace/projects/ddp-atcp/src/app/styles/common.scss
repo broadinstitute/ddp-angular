@@ -92,3 +92,60 @@ hr {
     }
   }
 }
+
+.server-modal-box {
+  max-width: none !important;
+  .mat-dialog-container {
+    border-radius: 0px;
+    color: #666666;
+    font-weight: bold;
+    background: #eaf6ea;
+    border-left: 10px solid #5cb85c;
+
+    .server-message-popup {
+      .server-message-popup-header {
+        .close {
+          position: absolute;
+          right: 15px;
+          top: 10px;
+          padding: 0;
+          cursor: pointer;
+          background: transparent;
+          border: 0;
+        }
+      }
+      .server-message-popup-content {
+
+      }
+    }
+  }
+}
+
+.server-error-modal-box {
+  max-width: none !important;
+  .mat-dialog-container {
+    border-radius: 0px;
+    color: #666666;
+    font-weight: bold;
+    background: #f6eaeb;
+    border-left: 10px solid #b85c5c;
+
+    .server-message-popup {
+      .server-message-popup-header {
+        .close {
+          position: absolute;
+          right: 15px;
+          top: 10px;
+          padding: 0;
+          cursor: pointer;
+          background: transparent;
+          border: 0;
+        }
+      }
+      .server-message-popup-content {
+
+      }
+    }
+  }
+}
+

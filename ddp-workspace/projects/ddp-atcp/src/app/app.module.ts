@@ -37,6 +37,7 @@ import { DashBoardComponent } from './components/dashboard/dashboard';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -93,7 +94,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule,
     MatExpansionModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   declarations: [
     WelcomeComponent,

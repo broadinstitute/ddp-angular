@@ -155,24 +155,14 @@
       padding-left: 5px;
     }
 
-    label {
-      font-size: 15px;
-      padding-left: 5px;
-
-      &:before {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        width: 17px;
-        height: 17px;
-        left: 0;
-        border: 1px solid #cccccc;
-        border-radius: 1px;
-        background-color: #fff;
-        transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-      }
-    }
+ label{
+   min-height: 20px;
+   margin-bottom: 0;
+   padding-left: 5px;
+   font-size: 15px;
+ }
   }
+
 
   .navigation {
     padding: 0 25px;
