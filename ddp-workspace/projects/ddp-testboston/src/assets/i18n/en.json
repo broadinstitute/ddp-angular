@@ -13,12 +13,21 @@
     },
     "Navigation": {
         "LogoAlt": "Test Boston logo",
+        "Home": "Home",
         "About": "About the Study",
         "Q&A": "Q&A",
-        "MailingList": "Mailing List",
+        "WhoWeAre": "Who We Are",
+        "StayInformed": "Stay Informed",
         "Privacy": "Privacy Policy",
         "Dashboard": "My Dashboard",
-        "Menu": "Menu"
+        "Menu": "Menu",
+        "Invitation": "Invitation Code",
+        "Titles": {
+            "TestBoston": "TestBoston",
+            "ContactUs": "Contact Us",
+            "Participation": "Participation",
+            "Language": "Language"
+        }
     },
     "MailingList": {
         "Title": "Mailing List Form",

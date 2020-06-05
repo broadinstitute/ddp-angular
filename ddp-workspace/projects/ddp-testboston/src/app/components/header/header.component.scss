@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     height: 8rem;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: auto;
     padding: 0 1.5625rem;
 }
@@ -59,19 +59,17 @@
     font-size: 1.125rem;
     line-height: 2.0625rem;
     white-space: nowrap;
+    color: mat-color($app-theme, 1300);
 }
 
 .header-link:link,
 .header-link:visited {
-    color: mat-color($app-theme, 1300);
-
     .dashboard-icon_color {
         stroke: mat-color($app-theme, 1300);
     }
 }
 
 .header-link:hover {
-    color: mat-color($app-theme, 1300);
     text-decoration: underline;
 
     .dashboard-icon_color {
@@ -80,7 +78,6 @@
 }
 
 .header-link:active {
-    color: mat-color($app-theme, 1300);
     text-decoration: underline;
 
     .dashboard-icon_color {
@@ -105,8 +102,9 @@
     }
 }
 
-.mobile-menu {
+.menu-button {
     display: none;
+    margin-left: 2rem;
 
     .SimpleButton {
         font-size: 18px;
@@ -121,8 +119,8 @@
     }
 
     &__close {
-        width: 60px;
-        height: 60px;
+        width: 72px;
+        height: 72px;
 
         mat-icon {
             height: 30px;
@@ -165,6 +163,10 @@
         display: block;
     }
 
+    &_mobile-buttons {
+        display: none;
+    }
+
     &__item {
         display: flex;
         margin-bottom: 4rem;
@@ -176,7 +178,7 @@
     }
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 1370px) {
 
     .auth__dashboard,
     .navigation__item {
@@ -184,32 +186,69 @@
     }
 }
 
-@media only screen and (max-width: 885px) {
+@media only screen and (max-width: 1290px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 2rem;
+    }
+
+    .nav {
+        margin-left: 2rem;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .navigation {
+        display: none;
+    }
+
+    .menu-button {
+        display: unset;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .project-logo {
+        &__img {
+            height: 1.8rem;
+        }
+    }
 
     .nav,
     .auth {
         display: none;
     }
 
-    .mobile-menu {
-        display: unset;
-    }
-
     .dashboard-icon {
         height: 26px;
         width: 26px;
     }
+
+    .menu {
+        &_mobile-buttons {
+            display: unset;
+        }
+    }
+
+    // replace with real language selector component styles when when it is done
+    .language-icon {
+        height: 26px;
+        width: 26px;
+        font-size: 26px;
+    }
+
+    .language {
+        font-size: 1.875rem !important;
+        line-height: 2.25rem !important;
+    }
+
+    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 480px) {
     .header-content {
         padding: 0 1rem;
-    }
-
-    .project-logo {
-        &__img {
-            height: 1.8rem;
-        }
     }
 
     .overlay-content {
@@ -233,4 +272,31 @@
         height: 22px;
         width: 22px;
     }
+
+    // replace with real language selector component styles when when it is done
+    .language-icon {
+        height: 22px;
+        width: 22px;
+        font-size: 22px;
+    }
+
+    .language {
+        font-size: 1.5rem !important;
+        line-height: 2.1rem !important;
+    }
+
+    // replace with real language selector component styles when when it is done
 }
+
+// replace with real language selector component when styles when it is done
+.language {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 2.0625rem;
+    white-space: nowrap;
+    color: #1a3173;
+    display: flex;
+    align-items: center;
+}
+
+// replace with real language selector component styles when when it is done

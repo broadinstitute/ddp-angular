@@ -1,13 +1,13 @@
 .session-content-section {
-    margin: 6rem 0 0 0;
+    margin: 5rem 0 0 0;
 
     &__button {
         margin: 3rem 0 0 0;
     }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 480px) {
     .session-content-section {
-        margin: 3rem 0;
+        margin: 3rem 0 10rem 0;
     }
 }

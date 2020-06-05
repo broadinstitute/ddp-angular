@@ -101,6 +101,12 @@
     }
 
     .mailing-list {
+
+        &_result,
+        &__title {
+            margin: 0;
+        }
+
         &__group {
             display: flex;
             flex-direction: column;
