@@ -126,6 +126,10 @@
     }
 }
 
+.placeholder {
+    height: 30rem;
+}
+
 @media only screen and (max-width: 480px) {
     .invitation-code {
         flex-direction: column;
@@ -141,5 +145,9 @@
 
     .subject-info {
         flex-direction: column;
+    }
+
+    .placeholder {
+        height: 20rem;
     }
 }
