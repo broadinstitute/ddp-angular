@@ -1,11 +1,10 @@
-import { map, delay } from 'rxjs/operators';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdminServiceAgent } from './adminServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { Observable, timer, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
 

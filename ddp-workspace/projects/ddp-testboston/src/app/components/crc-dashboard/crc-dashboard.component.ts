@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
 import { Subject } from 'rxjs';
-import { filter, tap, mergeMap, map, delay, debounceTime, finalize } from 'rxjs/operators';
+import { filter, tap, mergeMap, map, delay, debounceTime } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
