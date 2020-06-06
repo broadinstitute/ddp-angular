@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DoCheck,
   ElementRef,
   EventEmitter,
   Input,
@@ -18,7 +17,7 @@ import { AddressError } from '../../models/addressError';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { merge, Observable, of, Subject, zip } from 'rxjs';
 import * as _ from 'underscore';
-import { map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AddressInputService } from '../address/addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
@@ -28,7 +27,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
     <form [formGroup]="ais.addressForm" novalidate autocomplete="off">
       <div class="address-input-container">
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('Name') | async"
+          <input matInput [placeholder]="getLabelForControl('name') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="name"
@@ -37,10 +36,10 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
           <mat-error>{{getFieldErrorMessage('name') | async}}</mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="!country">
-          <mat-select [placeholder]="getLabelForControl('Country') | async"
+          <mat-select [placeholder]="getLabelForControl('country') | async"
                       formControlName="country"
                       required>
-            <mat-option [value]="">Choose Country...</mat-option>
+            <mat-option [value]="">{{'SDK.MailAddress.Fields.Choose' | translate: {field: (getLabelForControl('country') | async)} }}</mat-option>
             <mat-option *ngFor="let theCountry of (countries$ | async)" [value]="theCountry.code">
               {{theCountry.name | uppercase}}
             </mat-option>
@@ -49,7 +48,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput #street1 [placeholder]="getLabelForControl('Street1') | async"
+          <input matInput #street1 [placeholder]="getLabelForControl('street1') | async"
                  formControlName="street1"
                  uppercase
                  required
@@ -60,7 +59,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('Street2') | async"
+          <input matInput [placeholder]="getLabelForControl('street2') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="street2"
@@ -69,7 +68,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('City') | async" formControlName="city"
+          <input matInput [placeholder]="getLabelForControl('city') | async" formControlName="city"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  uppercase required>
@@ -82,8 +81,8 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 
           <ng-template #showStateDropdown>
             <mat-form-field>
-              <mat-select [placeholder]="getLabelForControl('State') | async" formControlName="state" required>
-                <mat-option [value]="">Choose {{(ais.stateLabel$ | async).toLowerCase()}}...</mat-option>
+              <mat-select [placeholder]="getLabelForControl('state') | async" formControlName="state" required>
+                <mat-option [value]="">{{'SDK.MailAddress.Fields.Choose' | translate: {field: (getLabelForControl('state') | async)} }}</mat-option>
                 <mat-option *ngFor="let theState of info.subnationalDivisions"
                             [value]="theState.code">{{theState.name | uppercase}}
                 </mat-option>
@@ -94,7 +93,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 
           <ng-template #showStateTextField>
             <mat-form-field>
-              <input matInput [placeholder]="getLabelForControl('State') | async"
+              <input matInput [placeholder]="getLabelForControl('state') | async"
                      [name]="disableAutofill"
                      [attr.autocomplete]="autocompleteAttributeValue()"
                      formControlName="state"
@@ -107,7 +106,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 
         <ng-template #defaultStateField>
           <mat-form-field>
-            <input matInput [placeholder]="getLabelForControl('State') | async"
+            <input matInput [placeholder]="getLabelForControl('state') | async"
                    [name]="disableAutofill"
                    [attr.autocomplete]="autocompleteAttributeValue()"
                    formControlName="state"
@@ -118,7 +117,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
         </ng-template>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('Zip') | async"
+          <input matInput [placeholder]="getLabelForControl('zip') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="zip"
@@ -128,7 +127,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [placeholder]="getLabelForControl('Phone') | async"
+          <input matInput [placeholder]="getLabelForControl('phone') | async"
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="phone"
@@ -287,19 +286,20 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   getFieldErrorMessage(formControlName: string): Observable<string | null> {
     const control: AbstractControl | null = this.ais.addressForm.get(formControlName);
     const errors = control ? control.errors : null;
+    const transErrorKeyPrefix = 'SDK.MailAddress.Error.';
     if (errors) {
       return this.getLabelForControl(formControlName).pipe(
-        map(fieldLabel => {
-          if (errors.required) {
-            return `${fieldLabel}  is required`;
-          }
-          if (errors.pattern) {
-            return `${fieldLabel} has an invalid value`;
-          }
-          if (errors.verify) {
-            return errors.verify;
-          }
-        }));
+          mergeMap(fieldLabel => {
+            if (errors.required) {
+              return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsRequired`, {field: fieldLabel});
+            }
+            if (errors.pattern) {
+              return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsInvalid`, {field: fieldLabel});
+            }
+            if (errors.verify) {
+              return of(errors.verify);
+            }
+          }));
     } else {
       of(null);
     }
@@ -313,25 +313,27 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    */
 
   public getLabelForControl(formControlName: string): Observable<string> {
-    const prefix = 'SDK.MailAddress.Fields.';
-
-    if (formControlName === 'Zip') {
+    const fieldKey = this.buildFieldTranslationKey(formControlName);
+    if (formControlName === 'zip') {
       return this.ais.postalCodeLabel$.pipe(
-          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${prefix}Zip.${postalCodeString}`) as Observable<string>));
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
 
-    } else if (formControlName === 'State') {
+    } else if (formControlName === 'state') {
       return this.ais.stateLabel$.pipe(
-          mergeMap(stateString => this.ngxTranslate.getTranslation(`${prefix}State.${stateString}`) as Observable<string>));
+          mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));
     } else {
-      return this.ngxTranslate.getTranslation(`${prefix}${formControlName}`) as Observable<string>;
+      return this.ngxTranslate.getTranslation(fieldKey);
     }
   }
 
+  private buildFieldTranslationKey(formControlName: string): string {
+    return 'SDK.MailAddress.Fields.' + formControlName[0].toUpperCase() + formControlName.substring(1);
+  }
 
   public displayVerificationErrors(errors: AddressError[]): void {
     if (errors.length > 0) {
       errors.forEach((currError: AddressError) => {
-        this.lookupErrorMessage(currError).pipe(
+        of(currError.message).pipe(
           take(1))
           .subscribe(errMessage => {
             // Got an error that matches one of our control names? Make sure it is displayed
@@ -358,18 +360,5 @@ export class AddressInputComponent implements OnInit, OnDestroy {
 
   public get disableAutofill(): string {
     return `disable-autofill`;
-  }
-
-  private lookupErrorMessage(currError: AddressError): Observable<string> {
-    if (currError.field === 'country' && currError.message.indexOf('valid ISO 3166-1') !== -1) {
-      // EasyPost doesn't have an error code for this, and we don't want to show a scary message to the user,
-      // so let's match the string and tone it down.
-      return this.getLabelForControl('Country').pipe((map(label => label + ' is required')));
-    }
-
-    const CODE_TO_MESSAGE = {
-      'E.HOUSE_NUMBER.INVALID': 'Street number could not be found'
-    };
-    return of(CODE_TO_MESSAGE[currError.code] ? CODE_TO_MESSAGE[currError.code] : currError.message);
   }
 }

@@ -16,7 +16,7 @@ import { Address } from '../../models/address';
 import { AddressError } from '../../models/addressError';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import * as util from 'underscore';
-import { BehaviorSubject, combineLatest, merge, Observable, of, pipe, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -42,6 +42,7 @@ import { generateTaggedAddress, isStreetRequiredError } from './addressUtils';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 import { extract } from '../../utility/rxjsoperator/extract';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 interface ComponentState {
   isReadOnly: boolean;
@@ -80,23 +81,19 @@ interface AddressSuggestion {
     <form [formGroup]="suggestionForm" novalidate>
         <mat-card id="suggestionMatCard" *ngIf="suggestionInfo$ | async as info">
             <mat-card-header>
-                <mat-card-title>We have checked your address entry and have suggested changes that could help ensure
-                    delivery.
-                </mat-card-title>
-                <mat-card-subtitle>Click "Suggested" to update form. You will be able to click "As entered" to restore your
-                    original entries.
-                </mat-card-subtitle>
+                <mat-card-title translate>SDK.MailAddress.Suggestion.Title</mat-card-title>
+                <mat-card-subtitle translate>SDK.MailAddress.Suggestion.Subtitle</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <mat-radio-group class="suggestion-radio-group"
                                  formControlName="suggestionRadioGroup">
                     <mat-radio-button class="margin-5" value="suggested" [disableRipple]="true">
-                        <b>Suggested: </b>
+                        <b>{{'SDK.MailAddress.Suggestion.Suggested' | translate}} </b>
                         <span class="suggested"
                               [innerHTML]="convertToFormattedString(generateTaggedAddress(info.entered, info.suggested,'b'))"></span>
                     </mat-radio-button>
                     <mat-radio-button class="margin-5" value="entered" [disableRipple]="true">
-                        <b>As entered: </b>{{ convertToFormattedString(info.entered) }}
+                        <b>{{'SDK.MailAddress.Suggestion.AsEntered' | translate}} </b>{{ convertToFormattedString(info.entered) }}
                     </mat-radio-button>
                 </mat-radio-group>
             </mat-card-content>
@@ -202,6 +199,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   constructor(
     private addressService: AddressService,
     private cdr: ChangeDetectorRef,
+    private ngxTranslate: NGXTranslateService,
     @Optional() private submitService: SubmitAnnouncementService
   ) {
     this.suggestionForm = new FormGroup({
@@ -339,14 +337,17 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     const verifyInputComponentSparseAddress$ = this.inputComponentAddress$.pipe(
         filter(address => !this.enoughDataToVerify(address)),
-        tap(address => addressSuggestion$.next(null)),
+        tap(() => addressSuggestion$.next(null)),
         map(address => [address, this.computeValidityForSparseAddress(address)]),
-        tap(([address, isValid]) => {
-          if (address && !isValid) {
-            this.stateUpdates$.next({ formErrorMessages: ['Invalid address'] });
-          } else {
-            this.stateUpdates$.next({ formErrorMessages: [] });
-          }
+        mergeMap(([address, isValid]) => {
+                if (address && !isValid) {
+                    return this.ngxTranslate.getTranslation('SDK.MailAddress.Error.InvalidAddress');
+                } else {
+                    return of(null);
+                }
+        }),
+        tap((error: string | null) => {
+            this.stateUpdates$.next({ formErrorMessages: error ? [error] : [] });
         })
     );
 
@@ -356,7 +357,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     let initiatedVerifyAddressCalls = 0;
     const verifyInputComponentAddressAction$ = this.inputComponentAddress$.pipe(
         filter(address => this.enoughDataToVerify(address)),
-        tap(address => addressSuggestion$.next(null)),
+        tap(() => addressSuggestion$.next(null)),
         tap(() => busyCounter$.next(1)),
         tap(() => ++initiatedVerifyAddressCalls),
         switchMap(inputAddress =>
@@ -481,10 +482,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
           // const fieldErrors = new Array<AddressError>();
 
           verError.errors.forEach(currError => {
-            const errMessage = this.lookupErrorMessage(currError);
             if (currError.field === 'address') {
               // These are the "global" errors reported by EasyPost
-              errorUpdate.formErrorMessages.push(errMessage);
+              errorUpdate.formErrorMessages.push(currError.message);
             } else if (isStreetRequiredError(currError)) {
               // Seems like EasyPost needs a street address before it verifies other fields.
               // Since street1 might not be filled yet, transform message into a "global" error message.
@@ -499,17 +499,16 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const processOtherVerificationErrorsAction$ = verificationError$.pipe(
         filter((error) => !isVerificationStatusError(error)),
         tap(clearSuggestionDisplay),
-        tap((error) => {
-          let formErrorMessage;
-          if (error.errors && error.message) {
-            formErrorMessage = error.message;
-          } else if (error.errors) {
-            formErrorMessage = 'Could not verify address, please double-check your address.';
-          } else {
-            formErrorMessage = 'An unknown error occurred while verifying address.';
-          }
-          this.stateUpdates$.next({ formErrorMessages: [formErrorMessage] });
-        })
+        mergeMap(error => {
+            if (error.errors && error.message) {
+                return of(error.message);
+            } else if (error.errors) {
+                return this.ngxTranslate.getTranslation('SDK.MailAddress.Error.CannotVerify');
+            } else {
+                return this.ngxTranslate.getTranslation('SDK.MailAddress.Error.UnknownVerifyError');
+            }
+        }),
+        tap((errorMessage) => this.stateUpdates$.next({ formErrorMessages: [errorMessage]}))
     );
 
     const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
@@ -538,10 +537,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const savedAddress$ = saveRealAddressAction$.pipe(
         filter(savedAddressVal => !!savedAddressVal),
         share()
-    );
-
-    const removeTempAddressAction$ = saveRealAddressAction$.pipe(
-        removeTempAddressOperator()
     );
 
     const emitValueChangedAction$ = savedAddress$.pipe(
@@ -625,18 +620,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
     const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
     const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
+      // tslint:disable-next-line:max-line-length
     return `${isEmpty(a.name) ? '' : a.name}${isEmpty(a.name) ? streetFormat(a.street1) : format(a.street1)}${format(a.street2)}${format(a.city)}${format(a.state)}`
       + `${format(a.zip)}${format(a.country)}${isEmpty(a.phone) ? '' : ', Phone: ' + a.phone}`;
-  }
-
-  private lookupErrorMessage(currError: AddressError): string {
-    const CODE_TO_MESSAGE = {
-      'E.HOUSE_NUMBER.INVALID': 'We could not find the street number provided.',
-      'E.ADDRESS.NOT_FOUND': 'We could not find the entered address.',
-      'E.STREET.MAGNET': 'Street address is ambiguous.'
-    };
-    return CODE_TO_MESSAGE[currError.code] ? CODE_TO_MESSAGE[currError.code]
-      : (currError.message.endsWith('.') ? currError.message : currError.message + '.');
   }
 
   ngOnDestroy(): void {
