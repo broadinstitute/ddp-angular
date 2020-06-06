@@ -287,21 +287,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     );
 
     // derived observables
-    // this.isReadOnly$ = this.state$.pipe(
-    //     map(state => state.isReadOnly || state.isTemporarilyDisabled),
-    //     distinctUntilChanged(),
-    //     shareReplay()
-    // );
 
       this.isReadOnly$ = this.state$.pipe(
           extract(state => state.isReadOnly || state.isTemporarilyDisabled)
       );
 
-    // this.formErrorMessages$ = this.state$.pipe(
-    //     pluck('formErrorMessages'),
-    //     distinctUntilChanged((x, y) => util.isEqual(x, y)),
-    //     shareReplay()
-    // );
       this.formErrorMessages$ = this.state$.pipe(
           extract('formErrorMessages')
       );
@@ -389,7 +379,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
           suggested.guid = entered.guid;
           // showing suggestion only if it differs from entered address
           // we might have warning messages for the entered addresss
-          console.log('and our addresssuggestion is: %o', addressSuggestion);
           const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
           if (!suggested.hasSameDataValues(entered)) {
             this.stateUpdates$.next({
