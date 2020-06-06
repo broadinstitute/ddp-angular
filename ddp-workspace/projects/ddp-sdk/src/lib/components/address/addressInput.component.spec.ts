@@ -8,7 +8,8 @@ import { Directive, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AddressService } from '../../services/address.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
-import { NGXTranslateService } from 'ddp-sdk';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
+import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 
 
 @Directive({
@@ -31,7 +32,12 @@ describe('AddressInputComponent', () => {
     aisSpy = jasmine.createSpyObj('AddressInputService', ['createForm']);
 
     addressServiceSpy = jasmine.createSpyObj('AddressService', ['verifyAddress']);
-    translateServiceSpy.getTranslation.and.returnValue(of('label'));
+    // @ts-ignore
+    translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
+      return of(Array.isArray(word) ?
+          word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
+          'label1');
+    });
 
     TestBed.configureTestingModule({
       declarations: [ AddressInputComponent, FakeAddressGoogleAutocomplete ],
@@ -40,7 +46,7 @@ describe('AddressInputComponent', () => {
         {provide: AddressService, useValue: addressServiceSpy},
         {provide: NGXTranslateService, useValue: translateServiceSpy},
         AddressInputService],
-      imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatInputModule, NoopAnimationsModule],
+      imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatInputModule, NoopAnimationsModule, TranslateTestingModule],
       // schemas needed to avoid problems with google autocomplete directive attributes in input element
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
