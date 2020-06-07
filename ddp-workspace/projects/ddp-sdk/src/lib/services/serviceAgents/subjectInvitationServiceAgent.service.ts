@@ -51,7 +51,7 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
                 userGuid: '',
                 userHruid: '',
                 userLoginEmail: '',
-                notes: null
+                notes: ''
             }).pipe(
                 delay(3000)
             );
