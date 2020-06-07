@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
 import { Subject } from 'rxjs';
-import { filter, tap, mergeMap, map, delay, debounceTime } from 'rxjs/operators';
+import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -21,7 +21,6 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
 
   constructor(
-    private ref: ChangeDetectorRef,
     private sessionService: SessionMementoService,
     private subjectInvitation: SubjectInvitationServiceAgent) { }
 
@@ -72,18 +71,13 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
         this.subject = null;
       }),
       filter(form => this.searchForm.valid && !!form.invitationId),
-      tap(() => {
-        this.isLoading = true;
-        this.ref.detectChanges();
-      }),
       map(form => form.invitationId),
-      // todo: remove delay
-      delay(3000),
-      mergeMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
+      tap(() => this.isLoading = true),
+      switchMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
       tap(() => this.isLoading = false)
-    ).subscribe(subject => {
-      if (subject) {
-        this.subject = subject;
+    ).subscribe(response => {
+      if (response) {
+        this.subject = response;
       } else {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
       }
@@ -93,8 +87,9 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   private initNotesListener(): void {
     const notes = this.notesSubject.asObservable().pipe(
-      debounceTime(1000),
-      mergeMap(notes => this.subjectInvitation.updateInvitationDetails(this.subject.invitationId, notes))
+      debounceTime(200),
+      distinctUntilChanged(),
+      concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.subject.invitationId, notes))
     ).subscribe(response => {
       this.error = response ? null : new DdpError('', ErrorType.NotesError);
     });

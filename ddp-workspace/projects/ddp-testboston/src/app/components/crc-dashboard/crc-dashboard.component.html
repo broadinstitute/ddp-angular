@@ -11,10 +11,9 @@
                                     <mat-icon matPrefix class="search-field__icon">search</mat-icon>
                                 </button>
                                 <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
-                                    maxLength="18" [attr.disabled]="isLoading ? true : null"
-                                    [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
-                                <button class="search-field__clear" matSuffix (click)="clearSearchField()"
-                                    [disabled]="isLoading"
+                                    maxLength="18" [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
+                                <button matSuffix [disabled]="isLoading" (click)="clearSearchField()"
+                                    class="search-field__clear"
                                     [ngClass]="{'search-field__clear_visible': showSearchButton}">
                                     {{'CrcDashboard.ClearSearch' | translate}}
                                 </button>
