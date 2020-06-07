@@ -7,6 +7,7 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { Observable, of } from 'rxjs';
 import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
+import { delay } from 'rxjs/operators';
 
 
 @Injectable()
@@ -20,11 +21,11 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     public updateInvitationDetails(invitationId: string, notes: string): Observable<any | null> {
-        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-details`, { invitationId, notes });
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-details`, { invitationId, notes });
     }
 
     public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
-        // return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
+        // return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
         if (invitationId === '111111111111') {
             return of({
                 invitationId: '111111111111',
@@ -36,7 +37,9 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
                 userHruid: '',
                 userLoginEmail: 'foo@bar.baz',
                 notes: 'some notes\nmore notes'
-            });
+            }).pipe(
+                delay(3000)
+            );
         }
         if (invitationId === '222222222222') {
             return of({
@@ -48,17 +51,21 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
                 userGuid: '',
                 userHruid: '',
                 userLoginEmail: '',
-                notes: ''
-            });
+                notes: null
+            }).pipe(
+                delay(3000)
+            );
         }
-        return of(null);
+        return of(null).pipe(
+            delay(3000)
+        );
     }
 
     public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {
-        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/participants`, { invitationId });
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/participants`, { invitationId });
     }
 
     public createUserLoginAccount(userGuid: string, email: string): Observable<any | null> {
-        return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/user/${userGuid}/login-account`, { email });
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/user/${userGuid}/login-account`, { email });
     }
 }
