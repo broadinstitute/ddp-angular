@@ -25,40 +25,7 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
-        // return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
-        if (invitationId === '111111111111') {
-            return of({
-                invitationId: '111111111111',
-                createdAt: '',
-                voidedAt: '',
-                verifiedAt: '',
-                acceptedAt: '',
-                userGuid: 'USER_GUID',
-                userHruid: '',
-                userLoginEmail: 'foo@bar.baz',
-                notes: 'some notes\nmore notes'
-            }).pipe(
-                delay(3000)
-            );
-        }
-        if (invitationId === '222222222222') {
-            return of({
-                invitationId: '222222222222',
-                createdAt: '',
-                voidedAt: '',
-                verifiedAt: '',
-                acceptedAt: '',
-                userGuid: '',
-                userHruid: '',
-                userLoginEmail: '',
-                notes: ''
-            }).pipe(
-                delay(3000)
-            );
-        }
-        return of(null).pipe(
-            delay(3000)
-        );
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
     }
 
     public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {

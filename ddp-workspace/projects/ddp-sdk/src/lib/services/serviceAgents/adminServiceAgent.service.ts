@@ -16,6 +16,6 @@ export class AdminServiceAgent<TEntity> extends SessionServiceAgent<TEntity> {
     }
 
     protected getBackendUrl(): string {
-        return this.configuration.backendUrl + '/admin';
+        return this.configuration.backendUrl + '/pepper/v1/admin';
     }
 }
