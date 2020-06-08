@@ -4,11 +4,11 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 19px;
-    color: #3F4750;
+    color: mat-color($app-theme, 1000);
 }
 
 .search-section {
-    background-color: #F8F8F8;
+    background-color: mat-color($app-theme, 3200);
 }
 
 .search-block {
@@ -16,7 +16,7 @@
 }
 
 .title {
-    color: #454545;
+    color: mat-color($app-theme, 400);
     font-size: 1.5625rem;
     line-height: 2.125rem;
 }
@@ -29,7 +29,7 @@
     width: 24rem;
 
     &__icon {
-        color: #787681;
+        color: mat-color($app-theme, 900);
     }
 
     &__clear {
@@ -38,12 +38,12 @@
         border: none;
         text-decoration: underline;
         background: none;
-        color: #787681;
+        color: mat-color($app-theme, 900);
         display: none;
         transition: 0.3s;
 
         &:hover {
-            color: #454545;
+            color: mat-color($app-theme, 400);
         }
 
         &_visible {
@@ -65,7 +65,7 @@
 .error {
     display: flex;
     align-items: center;
-    color: #ad0000;
+    color: mat-color($app-theme, 2700);
     font-size: 1.125rem;
     line-height: 1.125rem;
     font-weight: 700;
@@ -107,7 +107,7 @@
         line-height: 2rem;
         font-weight: 300;
         margin: 0;
-        color: #454545;
+        color: mat-color($app-theme, 400);
     }
 }
 
@@ -128,7 +128,7 @@
         padding: 1rem;
         font-size: 1.25rem;
         line-height: 1.5rem;
-        border: 1px solid #C2C7CB;
+        border: 1px solid mat-color($app-theme, 3300);
         border-radius: 4px;
     }
 }
@@ -137,13 +137,9 @@
     height: 30rem;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 720px) {
     .invitation-code {
         flex-direction: column;
-    }
-
-    .search-field {
-        width: 20rem;
     }
 
     .error {
@@ -156,5 +152,11 @@
 
     .placeholder {
         height: 20rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .search-field {
+        width: 20rem;
     }
 }
