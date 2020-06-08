@@ -14,10 +14,10 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
   public searchForm: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
-  public subject: StudySubject | null = null;
+  public studySubject: StudySubject | null = null;
   public appRoutes = AppRoutes;
   public isLoading = false;
-  private notesSubject: Subject<string> = new Subject<string>();
+  private notes = new Subject<string>();
   private anchor = new CompositeDisposable();
 
   constructor(
@@ -46,12 +46,20 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
     return this.error && this.error.errorType === errorType;
   }
 
+  public isInvitationValid(): boolean {
+    return this.searchForm.valid && !!this.searchForm.controls.invitationId.value;
+  }
+
+  public areInvitationsEqual(invitationId: string): boolean {
+    return invitationId === this.searchForm.controls.invitationId.value;
+  }
+
   public setSelectedSubject(): void {
-    this.sessionService.setParticipant(this.subject.userGuid);
+    this.sessionService.setParticipant(this.studySubject.userGuid);
   }
 
   public saveNotes(notes: string): void {
-    this.notesSubject.next(notes);
+    this.notes.next(notes);
   }
 
   public enrollSubject(): void {
@@ -65,34 +73,40 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initSearchListener(): void {
-    const form = this.searchForm.valueChanges.pipe(
+    const search = this.searchForm.valueChanges.pipe(
+      map((form: SearchForm) => form.invitationId),
+      distinctUntilChanged(),
       tap(() => {
         this.error = null;
-        this.subject = null;
+        this.studySubject = null;
+        this.isLoading = false;
       }),
-      filter(form => this.searchForm.valid && !!form.invitationId),
-      map(form => form.invitationId),
+      filter(invitationId => this.searchForm.valid && !!invitationId),
       tap(() => this.isLoading = true),
       switchMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
       tap(() => this.isLoading = false)
     ).subscribe(response => {
-      if (response) {
-        this.subject = response;
-      } else {
+      if (response && this.areInvitationsEqual(response.invitationId)) {
+        this.studySubject = response;
+      } else if (response === null && this.isInvitationValid()) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
       }
     });
-    this.anchor.addNew(form);
+    this.anchor.addNew(search);
   }
 
   private initNotesListener(): void {
-    const notes = this.notesSubject.asObservable().pipe(
+    const note = this.notes.asObservable().pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.subject.invitationId, notes))
+      concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.studySubject.invitationId, notes))
     ).subscribe(response => {
       this.error = response ? null : new DdpError('', ErrorType.NotesError);
     });
-    this.anchor.addNew(notes);
+    this.anchor.addNew(note);
   }
+}
+
+interface SearchForm {
+  invitationId: string;
 }

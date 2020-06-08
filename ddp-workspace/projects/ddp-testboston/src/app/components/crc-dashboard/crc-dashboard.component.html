@@ -7,13 +7,12 @@
                     <div class="invitation-code">
                         <div class="container">
                             <mat-form-field class="search-field">
-                                <button mat-button mat-icon-button matPrefix [disabled]="true">
-                                    <mat-icon matPrefix class="search-field__icon">search</mat-icon>
+                                <button matPrefix mat-icon-button [disabled]="true">
+                                    <mat-icon class="search-field__icon">search</mat-icon>
                                 </button>
                                 <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
                                     maxLength="18" [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
-                                <button matSuffix [disabled]="isLoading" (click)="clearSearchField()"
-                                    class="search-field__clear"
+                                <button matSuffix (click)="clearSearchField()" class="search-field__clear"
                                     [ngClass]="{'search-field__clear_visible': showSearchButton}">
                                     {{'CrcDashboard.ClearSearch' | translate}}
                                 </button>
@@ -33,26 +32,27 @@
             </div>
         </div>
     </section>
-    <section *ngIf="subject" class="section">
+    <section *ngIf="studySubject" class="section">
         <div class="content">
             <div class="subject-block">
                 <div class="subject-info">
                     <div class="info-block">
                         <p class="info-block__title" translate>CrcDashboard.InvitationCode</p>
-                        <p class="info-block__text">{{subject.invitationId | invitation}}</p>
+                        <p class="info-block__text">{{studySubject.invitationId | invitation}}</p>
                     </div>
                     <div class="info-block">
                         <p class="info-block__title" translate>CrcDashboard.Email</p>
                         <p class="info-block__text">
-                            {{subject.userLoginEmail ? subject.userLoginEmail : 'CrcDashboard.NoEmail' | translate}}
+                            {{studySubject.userLoginEmail ? studySubject.userLoginEmail : 'CrcDashboard.NoEmail' | translate}}
                         </p>
                     </div>
                 </div>
                 <div class="buttons">
-                    <button *ngIf="!subject.userLoginEmail" class="button button_primary" (click)="enrollSubject()">
+                    <button *ngIf="!studySubject.userLoginEmail" class="button button_primary"
+                        (click)="enrollSubject()">
                         {{'CrcDashboard.Buttons.Enrollment' | translate}}
                     </button>
-                    <a *ngIf="subject.userLoginEmail" class="button button_primary" (click)="setSelectedSubject()"
+                    <a *ngIf="studySubject.userLoginEmail" class="button button_primary" (click)="setSelectedSubject()"
                         [routerLink]="'/' + appRoutes.Dashboard" translate>
                         CrcDashboard.Buttons.Dashboard
                     </a>
@@ -61,7 +61,7 @@
                     <p class="notes__title" translate>CrcDashboard.Notes</p>
                     <textarea class="notes__textarea" rows="10"
                         [placeholder]="'CrcDashboard.NotesPlaceholder' | translate"
-                        (input)="saveNotes($event.target.value)" [ngModel]="subject.notes"></textarea>
+                        (input)="saveNotes($event.target.value)" [ngModel]="studySubject.notes"></textarea>
                     <ng-container *ngIf="hasError(errorType.NotesError)">
                         <p class="error error_notes" translate>
                             CrcDashboard.NotesError
@@ -71,5 +71,5 @@
             </div>
         </div>
     </section>
-    <section *ngIf="!subject" class="placeholder"></section>
+    <section *ngIf="!studySubject" class="placeholder"></section>
 </main>

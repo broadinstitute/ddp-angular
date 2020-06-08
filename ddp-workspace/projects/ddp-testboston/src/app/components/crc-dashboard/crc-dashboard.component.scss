@@ -1,3 +1,5 @@
+@import '../../../app-theme.scss';
+
 @mixin block-title-font {
     font-size: 14px;
     font-weight: 700;
@@ -38,6 +40,11 @@
         background: none;
         color: #787681;
         display: none;
+        transition: 0.3s;
+
+        &:hover {
+            color: #454545;
+        }
 
         &_visible {
             display: flex;
