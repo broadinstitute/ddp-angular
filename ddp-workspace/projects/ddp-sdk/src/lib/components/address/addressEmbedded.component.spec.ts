@@ -16,6 +16,8 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AddressError } from '../../models/addressError';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
+import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 
 @Component({
   selector: 'ddp-address-input',
@@ -76,14 +78,22 @@ describe('AddressEmbeddedComponent', () => {
         return of(null);
       }
     });
+    const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+    // @ts-ignore
+    translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
+      return of(Array.isArray(word) ?
+          word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
+          'label1');
+    });
 
     TestBed.configureTestingModule({
       declarations: [ AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessage ],
       providers: [
         {provide: AddressService, useValue: addressServiceSpy},
-        {provide: SubmitAnnouncementService, useValue: submitAnnounceService}
+        {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
+        {provide: NGXTranslateService, useValue: translateServiceSpy}
       ],
-      imports: [MatCardModule, MatRadioModule, ReactiveFormsModule]
+      imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
     })
     .compileComponents();
     fixture = TestBed.createComponent(AddressEmbeddedComponent);

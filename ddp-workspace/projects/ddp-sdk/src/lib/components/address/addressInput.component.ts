@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { CountryService } from '../../services/addressCountry.service';
 import { CountryAddressInfoSummary } from '../../models/countryAddressInfoSummary';
@@ -7,8 +17,9 @@ import { AddressError } from '../../models/addressError';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { merge, Observable, of, Subject, zip } from 'rxjs';
 import * as _ from 'underscore';
-import { map, take, takeUntil, tap } from 'rxjs/operators';
+import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AddressInputService } from '../address/addressInput.service';
+import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -24,12 +35,11 @@ import { AddressInputService } from '../address/addressInput.service';
                  required>
           <mat-error>{{getFieldErrorMessage('name') | async}}</mat-error>
         </mat-form-field>
-
         <mat-form-field *ngIf="!country">
           <mat-select [placeholder]="getLabelForControl('country') | async"
                       formControlName="country"
                       required>
-            <mat-option [value]="">Choose Country...</mat-option>
+            <mat-option [value]="">{{'SDK.MailAddress.Fields.Choose' | translate: {field: (getLabelForControl('country') | async)} }}</mat-option>
             <mat-option *ngFor="let theCountry of (countries$ | async)" [value]="theCountry.code">
               {{theCountry.name | uppercase}}
             </mat-option>
@@ -72,7 +82,7 @@ import { AddressInputService } from '../address/addressInput.service';
           <ng-template #showStateDropdown>
             <mat-form-field>
               <mat-select [placeholder]="getLabelForControl('state') | async" formControlName="state" required>
-                <mat-option [value]="">Choose {{(ais.stateLabel$ | async).toLowerCase()}}...</mat-option>
+                <mat-option [value]="">{{'SDK.MailAddress.Fields.Choose' | translate: {field: (getLabelForControl('state') | async)} }}</mat-option>
                 <mat-option *ngFor="let theState of info.subnationalDivisions"
                             [value]="theState.code">{{theState.name | uppercase}}
                 </mat-option>
@@ -136,7 +146,8 @@ import { AddressInputService } from '../address/addressInput.service';
       padding: 0;
       margin:0;
     }`],
-  providers: [AddressInputService]
+  providers: [AddressInputService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
@@ -193,7 +204,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   // See if we can continue making stuff in form observable as much as possible
   constructor(
     private countryService: CountryService,
-    public ais: AddressInputService) {
+    public ais: AddressInputService,
+    private ngxTranslate: NGXTranslateService) {
   }
 
   ngOnInit(): void {
@@ -274,19 +286,20 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   getFieldErrorMessage(formControlName: string): Observable<string | null> {
     const control: AbstractControl | null = this.ais.addressForm.get(formControlName);
     const errors = control ? control.errors : null;
+    const transErrorKeyPrefix = 'SDK.MailAddress.Error.';
     if (errors) {
       return this.getLabelForControl(formControlName).pipe(
-        map(fieldLabel => {
-          if (errors.required) {
-            return `${fieldLabel}  is required`;
-          }
-          if (errors.pattern) {
-            return `${fieldLabel} has an invalid value`;
-          }
-          if (errors.verify) {
-            return errors.verify;
-          }
-        }));
+          mergeMap(fieldLabel => {
+            if (errors.required) {
+              return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsRequired`, {field: fieldLabel});
+            }
+            if (errors.pattern) {
+              return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsInvalid`, {field: fieldLabel});
+            }
+            if (errors.verify) {
+              return of(errors.verify);
+            }
+          }));
     } else {
       of(null);
     }
@@ -298,28 +311,29 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    * param {string} formControlName
    * returns {any}
    */
-  public getLabelForControl(formControlName: string): Observable<string> {
-    if (formControlName === 'zip') {
-      return this.ais.postalCodeLabel$;
-    } else if (formControlName === 'state') {
-      return this.ais.stateLabel$;
-    }
-    const controlNameToLabelName = {
-      name: 'Full Name',
-      street1: 'Street Address',
-      street2: 'Apt/Floor #',
-      city: 'City',
-      phone: 'Phone Number',
-      country: 'Country/Territory'
-    };
 
-    return of(controlNameToLabelName[formControlName]);
+  public getLabelForControl(formControlName: string): Observable<string> {
+    const fieldKey = this.buildFieldTranslationKey(formControlName);
+    if (formControlName === 'zip') {
+      return this.ais.postalCodeLabel$.pipe(
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
+
+    } else if (formControlName === 'state') {
+      return this.ais.stateLabel$.pipe(
+          mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));
+    } else {
+      return this.ngxTranslate.getTranslation(fieldKey);
+    }
+  }
+
+  private buildFieldTranslationKey(formControlName: string): string {
+    return 'SDK.MailAddress.Fields.' + formControlName[0].toUpperCase() + formControlName.substring(1);
   }
 
   public displayVerificationErrors(errors: AddressError[]): void {
     if (errors.length > 0) {
       errors.forEach((currError: AddressError) => {
-        this.lookupErrorMessage(currError).pipe(
+        of(currError.message).pipe(
           take(1))
           .subscribe(errMessage => {
             // Got an error that matches one of our control names? Make sure it is displayed
@@ -346,18 +360,5 @@ export class AddressInputComponent implements OnInit, OnDestroy {
 
   public get disableAutofill(): string {
     return `disable-autofill`;
-  }
-
-  private lookupErrorMessage(currError: AddressError): Observable<string> {
-    if (currError.field === 'country' && currError.message.indexOf('valid ISO 3166-1') !== -1) {
-      // EasyPost doesn't have an error code for this, and we don't want to show a scary message to the user,
-      // so let's match the string and tone it down.
-      return this.getLabelForControl('country').pipe((map(label => label + ' is required')));
-    }
-
-    const CODE_TO_MESSAGE = {
-      'E.HOUSE_NUMBER.INVALID': 'Street number could not be found'
-    };
-    return of(CODE_TO_MESSAGE[currError.code] ? CODE_TO_MESSAGE[currError.code] : currError.message);
   }
 }

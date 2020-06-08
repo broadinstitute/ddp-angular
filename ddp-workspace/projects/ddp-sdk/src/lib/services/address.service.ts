@@ -7,8 +7,11 @@ import { SessionMementoService } from './sessionMemento.service';
 import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, take } from 'rxjs/operators';
 import { AddressVerificationResponse } from '../models/addressVerificationResponse';
+import { NGXTranslateService } from './internationalization/ngxTranslate.service';
+
+const ERROR_MSG_TRANS_KEY_PREFIX = 'SDK.MailAddress.Error.';
 
 @Injectable()
 export class AddressService extends UserServiceAgent<Address> {
@@ -16,7 +19,8 @@ export class AddressService extends UserServiceAgent<Address> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
+        logger: LoggingService,
+        private translate: NGXTranslateService) {
         super(session, configuration, http, logger);
     }
 
@@ -26,9 +30,17 @@ export class AddressService extends UserServiceAgent<Address> {
                 return new AddressVerificationResponse(data.body);
             }),
             catchError((error) => {
-                return throwError(error.error as AddressVerificationStatus);
-            })
-        );
+                const verificationStatus = error.error as AddressVerificationStatus;
+                return this.translate.getTranslation(verificationStatus.errors
+                    .map(addressError => ERROR_MSG_TRANS_KEY_PREFIX + addressError.code))
+                    .pipe(
+                        take(1),
+                        map(codeToMsg => {
+                            verificationStatus.errors = verificationStatus.errors.map(
+                                addressError => ({ ...addressError, message: codeToMsg[ERROR_MSG_TRANS_KEY_PREFIX + addressError.code] }));
+                            throw verificationStatus;
+                        }));
+            }));
     }
 
     public saveTempAddress(address: Address, activityInstanceGuid: string): Observable<any> {
