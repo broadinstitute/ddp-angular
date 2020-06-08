@@ -4,10 +4,9 @@ import { AdminServiceAgent } from './adminServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
-import { delay } from 'rxjs/operators';
 
 
 @Injectable()
