@@ -60,7 +60,7 @@
 <div #overlay class="overlay">
     <nav class="overlay-content">
         <ul #menu class="menu">
-            <ng-container *ngIf="headerConfig.showMainButtons">
+            <ng-container>
                 <li class="menu__item">
                     <a class="header-link" routerLink="/" fragment="about-the-study"
                         (click)="closeMenu(); scrollToAnchor('about-the-study')" translate>
