@@ -55,7 +55,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
-                
+
                 <!-- simple steps -->
                 <ng-container *ngIf="isStepped && showStepper && !isAgree()">
                     <div class="activity-steps">
@@ -76,14 +76,14 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <div class="activity-steps">
                         <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
                             <ng-container *ngIf="section.visible">
-                                <div class="activity-step"
+                                <button class="activity-step"
                                     (click)="jumpStep(i)"
                                     [class.active]="isActive(i)"
                                     [class.completed]="isCompleted(i)">
                                     <span class="activity-step__number">{{i + 1}}</span>
                                     <span class="activity-step__text">{{section.name}}</span>
-                                </div>
-                                <span *ngIf="!isLastStep" class="activity-steps__divider"></span>
+                                </button>
+                                <div *ngIf="!isLastStep" class="activity-steps__divider"></div>
                             </ng-container>
                         </ng-container>
                     </div>

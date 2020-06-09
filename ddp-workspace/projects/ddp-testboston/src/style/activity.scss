@@ -99,6 +99,12 @@
     flex-direction: column;
     align-items: center;
     width: 58px;
+    font-family: inherit;
+    background-color: unset;
+    color: unset;
+    outline: none;
+    border: none;
+    padding: 0;
     cursor: default;
 
     &__number {
