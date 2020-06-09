@@ -8,8 +8,8 @@ import { LanguageService } from "ddp-sdk";
   template: `
     <div [hidden]="!loaded">
       <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
-        <svg class="ddp-globe">
-          <use href="assets/images/globe.svg#Language-Selector-3" height="24px" width="24px"></use>
+        <svg class="ddp-globe" height="24px" width="24px">
+          <use href="assets/images/globe.svg#Language-Selector-3"></use>
         </svg>
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
         <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
@@ -44,7 +44,6 @@ export class LanguageSelectorComponent implements OnInit {
     //TODO: Make sure we handle the case where no languages have been configured cleanly
     //TODO: Handle case where user is logged in and we can get the language from the profile
     //TODO: Store current language in session storage and check session storage in case we are returning from Auth0 or something
-    //TODO: Test navigating to different pages
     this.serviceAgent.getConfiguredLanguages(this.studyGuid).subscribe(x => {
       if (x) {
         console.log('got configured languages: ' + JSON.stringify(x));
