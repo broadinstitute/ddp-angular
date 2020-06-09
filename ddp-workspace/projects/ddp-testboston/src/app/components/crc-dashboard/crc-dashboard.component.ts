@@ -64,7 +64,7 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   public enrollSubject(): void {
     // TBD
-    alert("We are sorry, but the CRC Dashboard doesn't support enrollment yet.")
+    alert("We are sorry, but the CRC Dashboard doesn't support enrollment yet.");
   }
 
   private initForm(): void {
