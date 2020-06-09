@@ -55,10 +55,11 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
-                <!-- steps -->
-                <ng-container *ngIf="isStepped && showStepper">
+                
+                <!-- simple steps -->
+                <ng-container *ngIf="isStepped && showStepper && !isAgree()">
                     <div class="activity-steps">
-                        <ng-container *ngFor="let section of model.sections; let i = index">
+                        <ng-container *ngFor="let section of model.sections; index as i">
                             <ng-container *ngIf="section.visible">
                                 <p class="activity-step no-margin big bold"
                                     (click)="jumpStep(i)"
@@ -66,6 +67,23 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [class.completed]="isCompleted(i)">
                                     {{section.name}}
                                 </p>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <!-- steps with circle -->
+                <ng-container *ngIf="isStepped && showStepper && isAgree()">
+                    <div class="activity-steps">
+                        <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
+                            <ng-container *ngIf="section.visible">
+                                <div class="activity-step"
+                                    (click)="jumpStep(i)"
+                                    [class.active]="isActive(i)"
+                                    [class.completed]="isCompleted(i)">
+                                    <span class="activity-step__number">{{i + 1}}</span>
+                                    <span class="activity-step__text">{{section.name}}</span>
+                                </div>
+                                <span *ngIf="!isLastStep" class="activity-steps__divider"></span>
                             </ng-container>
                         </ng-container>
                     </div>
@@ -105,7 +123,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <ng-container *ngIf="model.lastUpdatedText">
                         <span>{{model.lastUpdatedText}} </span>
                     </ng-container>
-                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded}">
+                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
                         <ng-container *ngIf="isLoaded && isStepped">
                             <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -120,7 +138,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && !isAgree() && isLoaded">
+                        <ng-container *ngIf="(!isStepped || isLastStep) && !isAgree() && isLoaded && !model.readonly">
                             <button *ngIf="!model.readonly" #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_primary button_right"
@@ -134,7 +152,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded">
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly">
                             <button class="button button_medium button_warn"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     (click)="close()">

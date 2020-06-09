@@ -17,6 +17,7 @@
     padding-bottom: 8rem;
     padding-top: 1rem;
     box-sizing: border-box;
+    font-family: 'PT Serif', sans-serif;
 }
 
 // buttons layout
@@ -24,6 +25,7 @@
     display: flex;
     justify-content: space-between;
     margin: 4rem 0 0 0;
+    font-family: 'Nunito', sans-serif;
 
     .button {
         font-family: inherit;
@@ -74,5 +76,88 @@
 
     &:hover {
         color: rgba(0, 0, 0, 0.26);
+    }
+}
+
+// steps
+.activity-steps {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    font-family: 'Nunito', sans-serif;
+
+    &__divider {
+        flex: 1;
+        border-top: 3px solid #DDE1E6;
+        margin: 20px 0 0 0;
+    }
+}
+
+.activity-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 58px;
+    cursor: default;
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #DDE1E6;
+        border-radius: 20px;
+        font-size: 20px;
+        line-height: 38px;
+    }
+
+    &__text {
+        white-space: nowrap;
+        font-size: 18px;
+        line-height: 38px;
+    }
+}
+
+.activity-step.completed {
+    cursor: pointer;
+
+    .activity-step {
+        &__number {
+            color: white;
+            background-color: #1A3173;
+        }
+
+        &__text {
+            color: #1A3173;
+        }
+    }
+}
+
+.activity-step.active.completed {
+    cursor: default;
+
+    .activity-step {
+        &__number {
+            color: white;
+            background-color: #2660B2;
+        }
+
+        &__text {
+            color: #2660B2 !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .activity-steps {
+        padding: 1rem 0;
+    }
+
+    .activity-step {
+        &__text {
+            display: none;
+        }
     }
 }
