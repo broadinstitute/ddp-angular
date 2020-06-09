@@ -290,20 +290,62 @@ a:focus {
     font-weight: 300;
     text-decoration: none;
     color: mat-color($app-theme, 100);
+    //stroke: mat-color($app-theme, 100); //TODO: Maybe put back
+    //fill: transparent;  //TODO: Maybe put back
 }
 
 .SimpleButton--Scrolled {
     color: mat-color($app-theme, 600);
+    //stroke: mat-color($app-theme, 600);  //TODO: Maybe put back
+    //fill: transparent;  //TODO: Maybe put back
 }
 
 .SimpleButton:hover {
     color: mat-color($app-theme, 700);
+    //stroke: mat-color($app-theme, 700);  //TODO: Maybe put back
+    //fill: transparent; //TODO: Maybe put back
     text-decoration: none;
 }
 
 .SimpleButton:active {
     text-decoration: none;
     color: mat-color($app-theme, 600);
+    //stroke: mat-color($app-theme, 600); //TODO: Maybe put back
+    //fill: transparent; //TODO: Maybe put back
+}
+
+//TODO: Make changes to stylesheets for other studies
+.SimpleButton .ddp-globe {
+    stroke: mat-color($app-theme, 100); //TODO: Maybe put back
+    fill: transparent;  //TODO: Maybe put back
+    height: 24px;
+    width: 24px;
+    vertical-align: bottom;
+}
+
+.SimpleButton--Scrolled .ddp-globe {
+    stroke: mat-color($app-theme, 600);  //TODO: Maybe put back
+    fill: transparent;  //TODO: Maybe put back
+}
+
+.SimpleButton:hover .ddp-globe {
+    stroke: mat-color($app-theme, 700);  //TODO: Maybe put back
+    fill: transparent; //TODO: Maybe put back
+}
+
+.SimpleButton:active .ddp-globe {
+    stroke: mat-color($app-theme, 600); //TODO: Maybe put back
+    fill: transparent; //TODO: Maybe put back
+}
+
+//TODO: Figure out the below stuff
+.ddp-current-language {
+  line-height: 1.6em;
+  min-height: 24px;
+}
+
+mat-icon.ddp-dropdown-arrow {
+    vertical-align: bottom;
 }
 
 .LastUpdatedText {
