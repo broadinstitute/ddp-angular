@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Globe@1x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Language-Selector-3" transform="translate(-1243.000000, -20.000000)">
+            <g id="nav-bar" transform="translate(1.000000, 0.000000)">
+                <g id="Globe" transform="translate(1243.000000, 21.000000)">
+                    <g id="earth-3">
+                        <g stroke-width="1.5">
+                            <circle id="Oval" cx="11" cy="11" r="10.3125"></circle>
+                            <path d="M8.51491667,21.0109167 C7.11975,18.9649167 6.1875,15.2469167 6.1875,11 C6.1875,6.75308333 7.11975,3.03508333 8.51491667,0.989083333" id="Shape"></path>
+                            <path d="M0.6875,11 L21.3125,11" id="Shape"></path>
+                            <path d="M2.27516667,16.5 L19.7248333,16.5" id="Shape"></path>
+                            <path d="M2.27516667,5.5 L19.7248333,5.5" id="Shape"></path>
+                            <path d="M13.4850833,0.989083333 C14.88025,3.03508333 15.8125,6.75308333 15.8125,11 C15.8125,15.2469167 14.88025,18.9649167 13.4850833,21.0109167" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
