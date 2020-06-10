@@ -151,6 +151,13 @@ blockquote {
   padding: 10px 20px;
   margin: 20px 0;
   font-size: 17.5px;
+
+  &.blockquote-full {
+    @include bg-grey();
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+  }
 }
 
 .formItem-label {
@@ -254,4 +261,13 @@ blockquote {
 .ul-orange {
   @include ul-color($orange, $black);
   padding-left: 24px;
+}
+
+.link-black {
+  @include c-dark();
+
+  &:hover {
+    @include c-blue-light();
+    text-decoration: none;
+  }
 }

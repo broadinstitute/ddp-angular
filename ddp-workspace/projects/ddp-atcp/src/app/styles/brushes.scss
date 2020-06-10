@@ -17,6 +17,10 @@ html, body {
   color: $black;
 }
 
+@mixin c-dark {
+  color: $dark;
+}
+
 @mixin c-orange {
   color: $orange;
 }
@@ -63,6 +67,10 @@ html, body {
 
 @mixin bg-dark-green($important: '') {
   background-color: $dark-green unquote($important);
+}
+
+@mixin bg-grey($important: '') {
+  background-color: $grey unquote($important);
 }
 
 @mixin brc-blue($important: '') {
