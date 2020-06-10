@@ -5,6 +5,7 @@ import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { StudySubject } from '../../models/studySubject';
 import { UserGuid } from '../../models/userGuid';
 
@@ -24,11 +25,15 @@ export class SubjectInvitationServiceAgent extends AdminServiceAgent<any> {
     }
 
     public lookupInvitation(invitationId: string): Observable<StudySubject | null> {
-        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId });
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-lookup`, { invitationId }).pipe(
+            map(response => response ? response.body : null)
+        );
     }
 
     public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {
-        return this.postObservable(`/studies/${this.configuration.studyGuid}/participants`, { invitationId });
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/participants`, { invitationId }).pipe(
+            map(response => response ? response.body : null)
+        );
     }
 
     public createUserLoginAccount(userGuid: string, email: string): Observable<any | null> {
