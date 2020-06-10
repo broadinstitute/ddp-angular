@@ -1,3 +1,6 @@
+@import './mixins';
+@import './brushes';
+
 hr {
   border-color: #cccccc;
 }
@@ -93,6 +96,69 @@ hr {
   }
 }
 
+.content_download {
+  @include flexer(flex, row, space-between, center);
+  flex-wrap: wrap;
+}
+
+.content.content_tight h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4274BC;
+}
+
+.ddp-block-title-bold > b,
+.ddp-block-title-bold > p,
+.ddp-single-question > p,
+.consent-agree.bold,
+.ddp-activity-content > p {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  padding-bottom: 5px;
+  margin: 15px 0 5px 0 !important;
+  display: block;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  margin: 10px 0 20px 0;
+}
+
+.subtitle--light {
+  font-weight: 300;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-size: 15px;
+  font-style: italic;
+  display: block;
+  padding: 10px 0;
+}
+
+.align-center {
+  text-align: center;
+  margin: 0;
+}
+
+blockquote {
+  padding: 10px 20px;
+  margin: 20px 0;
+  font-size: 17.5px;
+}
+
+.formItem-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
 .server-modal-box {
   max-width: none !important;
   .mat-dialog-container {
@@ -149,3 +215,43 @@ hr {
   }
 }
 
+.c-black {
+  @include c-black();
+}
+
+.c-blue {
+  @include c-blue();
+}
+
+.c-purple {
+  @include c-purple();
+}
+
+.c-green {
+  @include c-green();
+}
+
+.c-red {
+  @include c-red();
+}
+
+.c-orange {
+  @include c-orange();
+}
+
+.c-pink {
+  @include c-pink();
+}
+
+.c-yellow {
+  @include c-yellow();
+}
+
+.ul-purple {
+  @include ul-color($purple, $black);
+}
+
+.ul-orange {
+  @include ul-color($orange, $black);
+  padding-left: 24px;
+}

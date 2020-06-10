@@ -15,6 +15,8 @@ import { ToolkitConfigurationService } from 'toolkit';
 import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
 import { filter, first } from 'rxjs/operators';
 
+const ASSENT = 'ASSENT';
+
 @Component({
   selector: `app-dashboard`,
   styleUrls: ['./dashboard.scss'],
@@ -22,11 +24,13 @@ import { filter, first } from 'rxjs/operators';
     <div class="dashboard">
       <div class="page-padding">
         <h1 *ngIf="firstName"> {{ firstName }} <span translate>DashBoard.EnrollmentProcess</span></h1>
-        <div class="workdir">
+        <div class="workdir" [ngClass]="{'is-assets' : isAssetsActivity}">
           <app-workflow-progress [steps]="steps"
                                  [instanceGuid]="instanceGuid"
                                  (onChangeActivity)="updateInstanceGuid($event)"></app-workflow-progress>
-          <ddp-activity-redesigned *ngIf="showActivity" [studyGuid]="studyGuid" [activityGuid]="instanceGuid"
+          <ddp-activity-redesigned *ngIf="showActivity" [studyGuid]="studyGuid"
+                                   [buttonWithArrow]="true"
+                                   [activityGuid]="instanceGuid"
                                    (submit)="setActivity($event)"></ddp-activity-redesigned>
         </div>
       </div>
@@ -41,6 +45,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public firstName: string;
   private studyGuidObservable: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public showActivity = true;
+  public isAssetsActivity = false;
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
   private anchor;
@@ -53,15 +58,16 @@ export class DashBoardComponent implements OnInit, OnDestroy {
               private cdr: ChangeDetectorRef) {
   }
 
-  public setActivity(data: ActivityResponse | null): void {
-    if (data && data.instanceGuid) {
-      this.updateInstanceGuid(data.instanceGuid);
+  public setActivity(activityResposne: ActivityResponse | null): void {
+    if (activityResposne && activityResposne.instanceGuid) {
+      this.updateInstanceGuid(activityResposne);
       this.getSteps();
     }
   }
 
-  public updateInstanceGuid(instanceGuid): void {
-    this.instanceGuid = instanceGuid;
+  public updateInstanceGuid(activity: ActivityInstance | ActivityResponse): void {
+    this.isAssetsActivity = activity.activityCode === ASSENT;
+    this.instanceGuid = activity.instanceGuid;
     this.resetActivityComponent();
   }
 
@@ -85,7 +91,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.length - 1;
         }
-        this.updateInstanceGuid(this.steps[currentActivityIndex].instanceGuid);
+        this.updateInstanceGuid(this.steps[currentActivityIndex]);
       });
     this.anchor.addNew(useActivities);
   }

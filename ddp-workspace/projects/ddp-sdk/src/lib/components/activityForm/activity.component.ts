@@ -190,6 +190,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
 export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
+    @Input() buttonWithArrow = false;
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;

@@ -23,11 +23,26 @@
   &:focus, &:active {
     border-color: $green !important;
     color: $green !important;
+  }
 
-    &:hover {
-      border-color: $blue !important;
-      color: $blue !important;
-      background-color: transparent !important;
+  &:hover {
+    border-color: $blue-light !important;
+    color: $blue-light !important;
+    background-color: transparent !important;
+  }
+}
+
+@mixin ul-color($colorCirle, $colorText) {
+  padding-left: 24px;
+
+  li {
+    color: $colorCirle;
+    font-size: 22px;
+
+    p {
+      color: $colorText;
+      font-size: 16px;
+      margin-bottom: 0;
     }
   }
 }

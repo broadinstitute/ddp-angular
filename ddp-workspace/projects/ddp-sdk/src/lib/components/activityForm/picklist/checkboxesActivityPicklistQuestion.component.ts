@@ -35,7 +35,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [disabled]="readonly"
                           [disableRipple]="true"
                           (change)="optionChanged($event.checked, option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
-                {{option.optionLabel}}
+                <span [innerHTML]="option.optionLabel"></span>
             </mat-checkbox>
             <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
                 <mat-form-field matLine>

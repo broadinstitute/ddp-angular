@@ -1,5 +1,6 @@
 @import '../../styles/mixins';
 @import '../../styles/brushes';
+@import '../../styles/typography';
 
 .dashboard {
 
@@ -36,13 +37,53 @@
       button.button_primary, button.button_secondary {
         @include btn-green;
       }
+
+      .button.button_primary.button_right {
+        margin-left: auto;
+      }
+
+      .button.button_secondary.button_warn {
+        @include c-red(!important);
+        @include brc-red(!important);
+        margin-left: auto;
+        margin-right: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 2px;
+
+        &:hover,
+        &:focus,
+        &:active {
+          @include c-light-red(!important);
+          @include brc-light-red(!important);
+        }
+      }
+
+      .button.button_primary.button_fill_green {
+        @include bg-green;
+        color: white !important;
+        margin-left: 10px;
+
+        &:focus,
+        &:hover {
+          @include bg-light-green(!important);
+          @include brc-light-green(!important);
+          color: white !important;
+        }
+
+        &:active {
+          @include bg-dark-green(!important);
+          @include brc-dark-green(!important);
+          color: white !important;
+        }
+      }
     }
 
     .activity-steps {
       display: flex;
       justify-content: space-between;
       position: relative;
-      margin: 50px 0 30px;
+      margin: 30px 0;
 
       &:after {
         position: absolute;
@@ -74,12 +115,21 @@
 
         &.completed {
           @include bg-green();
+          cursor: pointer;
         }
 
         &.active {
           background-color: #337ab7;
         }
       }
+    }
+
+    ddp-activity-dropdown-picklist-question select {
+      margin-bottom: 20px;
+    }
+
+    .mat-checkbox-label {
+      font-weight: normal;
     }
   }
 
@@ -116,11 +166,29 @@
 
 
     ddp-activity-redesigned {
-      padding: 30px 0;
+      padding: 0;
       flex-grow: 1;
 
       @media (min-width: 590px) {
-        padding: 30px;
+        padding: 0 30px;
+      }
+    }
+
+    &.is-assets {
+
+      ddp-activity-redesigned {
+
+        ::ng-deep {
+          @include font-McLaren();
+
+          .assent-subtitle {
+            padding-bottom: 5px;
+          }
+
+          .content.content_tight h1 {
+            font-size: 23px;
+          }
+        }
       }
     }
   }

@@ -13,7 +13,7 @@ export const COMPLETE = 'COMPLETE';
 export class WorkflowProgressComponent implements OnInit, OnDestroy {
   @Input() public steps: ActivityInstance[] = [];
   @Input() public instanceGuid: string;
-  @Output() public onChangeActivity = new EventEmitter<string>();
+  @Output() public onChangeActivity = new EventEmitter<ActivityInstance>();
 
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
@@ -31,7 +31,7 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
 
   public changeActivity(step: ActivityInstance): void {
     if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS) {
-      this.onChangeActivity.emit(step.instanceGuid);
+      this.onChangeActivity.emit(step);
     }
   }
 

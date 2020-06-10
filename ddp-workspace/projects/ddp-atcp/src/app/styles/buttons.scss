@@ -1,6 +1,7 @@
 @import 'theme';
 @import './variables';
 @import './brushes';
+@import './mixins';
 
 .BtnBordered {
   padding: 7px 20px 9px 20px;
@@ -35,7 +36,11 @@
   }
 
   &.green, &.green:focus, &.green:active {
-    margin-top: 15px;
+    //margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
     border-color: #7BA946 !important;
     color: #7BA946 !important;
     &:hover {
@@ -72,8 +77,42 @@
   }
 }
 
+.BtnBordered--withIcon {
+  @include flexer(flex, row, center);
+  min-width: fit-content;
+  max-width: fit-content;
+
+  mat-icon,
+  span {
+    margin-right: 5px;
+  }
+}
+
+.ddp-block-body .BtnBordered--withIcon {
+  margin: 25px auto;
+}
+
+.BtnBordered--neutral,
+.BtnBordered--neutral:focus,
+.BtnBordered--neutral:active {
+  @include c-neutral-gray;
+  @include brc-neutral-gray;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.BtnBordered--neutral:hover {
+  @include c-blue-light();
+  @include brc-blue-light;
+}
+
 .button {
-  min-width: 8.5rem;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
   padding: 0.625rem 1.25rem;
   font-family: inherit;
   border-radius: 4px;
@@ -110,6 +149,7 @@
 .button_primary {
   background-color: mat-color($app-primary);
   color: mat-color($app-primary, A100);
+  border: 1px solid mat-color($app-theme, A100);
 }
 
 .button_primary:disabled {
@@ -119,13 +159,13 @@
 .button_secondary {
   background-color: mat-color($app-theme, 50);
   color: mat-color($app-theme, 200);
-  border: 2px solid mat-color($app-theme, 200);
+  border: 1px solid mat-color($app-theme, 200);
 }
 
 .button_secondary:disabled {
   background-color: mat-color($app-theme, 50);
   color: mat-color($app-theme, 650);
-  border: 2px solid mat-color($app-theme, 650);
+  border: 1px solid mat-color($app-theme, 650);
 }
 
 .button_primary:hover:not([disabled]),
@@ -176,4 +216,8 @@
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
+}
+
+.button_right {
+  margin-left: auto !important;
 }
