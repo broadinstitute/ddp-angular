@@ -33,15 +33,9 @@
       display: flex;
       justify-content: space-between;
       margin: 30px 0;
-
-      button.button_primary, button.button_secondary {
-        @include bthGreen();
+      .button {
+        justify-content: center;
       }
-
-      button.button_submit, button.button_close {
-        @include bthFilledGreen();
-      }
-
       .button.button_primary.button_right {
         margin-left: auto;
       }
