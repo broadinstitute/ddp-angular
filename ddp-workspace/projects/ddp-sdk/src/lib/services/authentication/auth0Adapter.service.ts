@@ -256,14 +256,15 @@ export class Auth0AdapterService implements OnDestroy {
         this.session.clear();
         this.log.logEvent('auth0Adapter.logout', null);
         this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
+        const returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;
         if (wasAdmin) {
             this.adminWebAuth.logout({
-                returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
+                returnTo,
                 clientID: this.configuration.adminClientId
             });
         } else {
             this.webAuth.logout({
-                returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
+                returnTo,
                 clientID: this.configuration.auth0ClientId
             });
         }
