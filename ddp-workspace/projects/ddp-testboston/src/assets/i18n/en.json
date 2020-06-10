@@ -184,6 +184,7 @@
     },
     "CrcDashboard": {
         "Title": "To start, enter the subject’s 12-digit invitation code",
+        "Subtitle": "If the code is unknown, use the subject's name to retrieve the code from the Brigham link file.",
         "SearchPlaceholder": "Enter Invitation Code",
         "ClearSearch": "Clear",
         "SearchError": "Code Not Found",
