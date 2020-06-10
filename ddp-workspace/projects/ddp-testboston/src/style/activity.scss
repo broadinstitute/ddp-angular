@@ -10,14 +10,28 @@
 
 .static-spinner {
     padding-bottom: 8rem;
-    padding-top: 1rem;
 }
 
 .main_activity {
     padding-bottom: 8rem;
-    padding-top: 1rem;
     box-sizing: border-box;
     font-family: 'PT Serif', sans-serif;
+}
+
+.sticky-section {
+    margin: 0 0 2rem 0;
+    background-color: #464E64;
+}
+
+// consent
+.consent-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Nunito', sans-serif;
+    margin: 3rem 0;
+    color: white;
 }
 
 // buttons layout
@@ -99,12 +113,6 @@
     flex-direction: column;
     align-items: center;
     width: 58px;
-    font-family: inherit;
-    background-color: unset;
-    color: unset;
-    outline: none;
-    border: none;
-    padding: 0;
     cursor: default;
 
     &__number {

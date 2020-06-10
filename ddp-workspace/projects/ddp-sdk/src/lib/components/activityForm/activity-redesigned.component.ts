@@ -76,13 +76,13 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <div class="activity-steps">
                         <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
                             <ng-container *ngIf="section.visible">
-                                <button class="activity-step"
+                                <div class="activity-step"
                                     (click)="jumpStep(i)"
                                     [class.active]="isActive(i)"
                                     [class.completed]="isCompleted(i)">
                                     <span class="activity-step__number">{{i + 1}}</span>
                                     <span class="activity-step__text">{{section.name}}</span>
-                                </button>
+                                </div>
                                 <div *ngIf="!isLastStep" class="activity-steps__divider"></div>
                             </ng-container>
                         </ng-container>
