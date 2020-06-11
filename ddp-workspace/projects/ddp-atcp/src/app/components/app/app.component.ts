@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation, isDevMode} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
@@ -6,6 +6,7 @@ import {CommunicationService, JoinMailingListComponent, SessionWillExpireCompone
 import { Router } from '@angular/router';
 import * as RouterResource from '../../router-resources';
 import {ServerMessageComponent} from "../../../../../toolkit/src/lib/components/dialogs/serverMessage.component";
+import {environment} from "../../../environments/environment.prod";
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
   public isWelcomePage: boolean = false;
   public isBasePage: boolean = false;
+  public isDevMode: boolean = isDevMode();
 
   private readonly DIALOG_BASE_SETTINGS = {
     width: '740px',
