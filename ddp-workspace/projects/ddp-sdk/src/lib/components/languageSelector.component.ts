@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { StudyLanguage } from "../models/studyLanguage";
 import { LanguageServiceAgent } from "../services/serviceAgents/languageServiceAgent.service";
-import { LanguageService } from "ddp-sdk";
+import { isNullOrUndefined } from "util";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'ddp-language-selector',
@@ -22,75 +23,79 @@ import { LanguageService } from "ddp-sdk";
   `
 })
 export class LanguageSelectorComponent implements OnInit {
-
-  //TODO: Figure out if all of these fields are necessary
   @Input() studyGuid: string;
   @Input() isScrolled: boolean;
   public loaded: boolean;
   private studyLanguages: Array<StudyLanguage>;
-  private defaultLanguage: StudyLanguage;
   private currentLanguage: StudyLanguage;
-  public isLoadingError = false;
-  public isNoDefaultFoundError = false;
 
   constructor (
-    private serviceAgent: LanguageServiceAgent
+    private serviceAgent: LanguageServiceAgent,
+    private translateService: TranslateService
   ) { }
 
   public ngOnInit(): void {
-    //TODO: Figure out if this can be simplified
-    //TODO: Do something with the error messages
-    //TODO: Handle case where exactly one language is configured
-    //TODO: Make sure we handle the case where no languages have been configured cleanly
-    //TODO: Handle case where user is logged in and we can get the language from the profile
-    //TODO: Store current language in session storage and check session storage in case we are returning from Auth0 or something
     this.serviceAgent.getConfiguredLanguages(this.studyGuid).subscribe(x => {
       if (x) {
         console.log('got configured languages: ' + JSON.stringify(x));
-        this.isLoadingError = false;
-        this.studyLanguages = x;
-        this.findDefaultLanguage();
-        if (this.currentLanguage == null) {
-          this.currentLanguage = this.defaultLanguage;
-        }
-        if (this.studyLanguages === null) {
-          this.isLoadingError = true;
-        }
-        else {
-          this.loaded = true;
+        //Only use language selector if multiple languages are configured!
+        if (x.length > 1) {
+          this.studyLanguages = x;
+          this.translateService.addLangs(this.studyLanguages.map(x => x.languageCode));
+          if (this.findCurrentLanguage()) {
+            this.loaded = true;
+          }
         }
       } else {
-        this.isLoadingError = true;
+        console.error('Error: no configured language list was returned.');
       }
     });
   }
 
-  private findDefaultLanguage(): void {
-    //TODO: Check if this can be simplified
-    this.isNoDefaultFoundError = false;
-    let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault === true);
-    if (lang !== undefined && lang !== null) {
-      this.defaultLanguage = lang;
-    } else {
-      this.isNoDefaultFoundError = true;
-    }
-  }
-
   private getUnselectedLanguages(): Array<StudyLanguage> {
-    //TODO: Check if this can be simplified
     if (this.studyLanguages !== null  && this.studyLanguages !== undefined) {
       return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
     }
    return null;
   }
 
-  public changeLanguage(lang: StudyLanguage) {
+  private changeLanguage(lang: StudyLanguage): void {
     this.currentLanguage = lang;
-
-
-
-    //TODO: Implement this!
+    this.translateService.use(lang.languageCode);
+    sessionStorage.setItem('studyLanguage', lang.languageCode);
   }
 
+  //Find the current language and return true if successful or false otherwise
+  public findCurrentLanguage(): boolean {
+    //Check if we already have a current language
+    if (!isNullOrUndefined(this.currentLanguage)) {
+      if (null === sessionStorage.getItem('studyLanguage')) {
+        //If we already have the current language and it isn't in session storage, put it there
+        sessionStorage.setItem('studyLanguage', this.currentLanguage.languageCode);
+      }
+      this.translateService.use(this.currentLanguage.languageCode);
+      return true;
+    }
 
+    //Check session storage
+    let sessionCode: string = sessionStorage.getItem('studyLanguage');
+    if (!isNullOrUndefined(sessionCode)){
+      let sessionLang: StudyLanguage = this.studyLanguages.find(x => x.languageCode === sessionCode);
+      if (!isNullOrUndefined(sessionLang)) {
+        this.changeLanguage(sessionLang);
+        return true;
+      }
+    }
+
+    //TODO: Check user profile for configured language--will happen in a later ticket
+
+    //Check for a default language
+    let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
+    if (isNullOrUndefined(lang)) {
+      console.error('Error: no default language found');
+      return false;
+    }
+    this.changeLanguage(lang);
+    return true;
+  }
 }
