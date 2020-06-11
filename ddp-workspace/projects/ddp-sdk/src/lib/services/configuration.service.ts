@@ -13,6 +13,9 @@ export class ConfigurationService {
     logLevel: LogLevel;
     auth0SilentRenewUrl: string;
     loginLandingUrl: string;
+    // Auth0 client used for administrative purposes in the app.
+    adminClientId: string | null = null;
+    adminLoginLandingUrl: string | null = null;
     localRegistrationUrl: string;
     // Registration of user is done either by Auth0 contacting server back-end (doLocalRegistration: false)
     // or by client application after being redirected back from Auth0 (doLocalRegistration: true)
