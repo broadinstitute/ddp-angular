@@ -16,7 +16,7 @@
       <h2 translate>DataAccess.ResearcherForm.Title</h2>
       <div>
         <div class="form-group">
-          <label for="name" translate>DataAccess.ResearcherForm.Name</label>
+          <label for="name" >{{ ('DataAccess.ResearcherForm.Name') | translate }} *</label>
           <input type="text"
                  class="form-control"
                  id="name"
@@ -28,7 +28,7 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="email" translate>DataAccess.ResearcherForm.Email</label>
+          <label for="email" >{{ ('DataAccess.ResearcherForm.Email') | translate }} *</label>
           <input type="text"
                  class="form-control"
                  id="email"
@@ -43,7 +43,7 @@
           <label for="phone" translate>DataAccess.ResearcherForm.Phone</label>
           <input type="text" class="form-control" id="phone" [(ngModel)]="model.researcher_phone" [ngModelOptions]="{standalone: true}">
         </div>
-        <p><b translate>DataAccess.ResearcherForm.Attachment</b></p>
+        <p><b>{{ ('DataAccess.ResearcherForm.Attachment') | translate }} *</b></p>
         <!-- TODO: add translation for buttonText and hintText-->
         <ddp-file-uploader name="data_access_request[researcher_biosketch]"
                  (fileChange)="onAttachmentChange($event)"
@@ -67,7 +67,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="org-name" translate>DataAccess.OrganizationForm.Name</label>
+              <label for="org-name" >{{ ('DataAccess.OrganizationForm.Name') | translate }} *</label>
               <input type="text"
                      class="form-control"
                      id="org-name"
@@ -88,7 +88,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="address" translate>DataAccess.OrganizationForm.Address1</label>
+              <label for="address">{{ ('DataAccess.OrganizationForm.Address1') | translate }} *</label>
               <input type="text"
                      class="form-control"
                      id="address"
@@ -109,7 +109,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="city" translate>DataAccess.OrganizationForm.City</label>
+              <label for="city">{{ ('DataAccess.OrganizationForm.City') | translate }} *</label>
               <input type="text"
                      class="form-control"
                      id="city"
@@ -130,7 +130,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="country" translate>DataAccess.OrganizationForm.Country</label>
+              <label for="country">{{ ('DataAccess.OrganizationForm.Country') | translate }} *</label>
               <input type="text"
                      class="form-control"
                      id="country"
@@ -142,7 +142,7 @@
               </span>
             </div>
             <div class="form-group">
-              <label for="zip" translate>DataAccess.OrganizationForm.Zip</label>
+              <label for="zip">{{ ('DataAccess.OrganizationForm.Zip') | translate }} *</label>
               <input type="text"
                      class="form-control"
                      id="zip"
@@ -161,7 +161,7 @@
     <div [ngClass]="{'active research' : activeTab === 3 }">
       <h2 translate>DataAccess.ResearchProject.Title</h2>
       <div>
-        <p><b translate>DataAccess.ResearchProject.Article1.Title</b></p>
+        <p><b>{{ ('DataAccess.ResearchProject.Article1.Title') | translate }} *</b></p>
         <textarea cols="10"
                   rows="10"
                   class="form-control title"
@@ -178,7 +178,7 @@
                   [(ngModel)]="model.collaborators"
         ></textarea>
         <p translate>DataAccess.ResearchProject.Article2.Paragraph</p><br>
-        <p><b translate>DataAccess.ResearchProject.Article3.Title</b></p>
+        <p><b>{{ ('DataAccess.ResearchProject.Article3.Title') | translate }} *</b></p>
         <textarea cols="30"
                   rows="10"
                   class="form-control"
@@ -316,8 +316,8 @@
           </li>
         </ul>
         <div>
-          <label for="data_access_request_researcher_signature" translate>
-            DataAccess.Assurances.Controls.ApplyingSignature.Label
+          <label for="data_access_request_researcher_signature">
+            {{ ('DataAccess.Assurances.Controls.ApplyingSignature.Label') | translate }} *
           </label>
           <input class="form-control FormItem-input"
                  type="text"
