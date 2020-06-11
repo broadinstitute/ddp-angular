@@ -66,9 +66,11 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   }
 
   public updateInstanceGuid(activity: ActivityInstance | ActivityResponse): void {
+     if (this.instanceGuid !== activity.instanceGuid) {
     this.isAssetsActivity = activity.activityCode === ASSENT;
     this.instanceGuid = activity.instanceGuid;
     this.resetActivityComponent();
+     }
   }
 
   private getSteps(): void {
