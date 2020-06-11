@@ -27,7 +27,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
             </section>
             <section *ngIf="model.title" class="section">
                 <div class="content content_tight">
-                    <h1>{{model.title}}</h1>
+                    <h1 [innerHTML]="model.title"></h1>
                 </div>
             </section>
         </ng-container>
