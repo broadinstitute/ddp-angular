@@ -71,9 +71,7 @@
           </li>
         </ul>
       </li>
-
-      <li class="dropdown"
-          *ngIf="!isAuthenticated">
+      <li *ngIf="!isAuthenticated" >
         <a class="BtnBordered white"
            id="join-us-nav"
            [routerLink]="['/' + RouterResource.JoinUs]"
@@ -81,8 +79,7 @@
           Common.Navigation.JoinUs
         </a>
       </li>
-      <li class="dropdown"
-          *ngIf="isAuthenticated">
+      <li *ngIf="isAuthenticated">
         <a class="dropdown-toggle"
            data-toggle="dropdown"
            role="button"
