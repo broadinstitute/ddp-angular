@@ -17,8 +17,7 @@
         <ul class="dropdown-menu dropdown-menu-right languages">
           <li *ngFor="let language of languages; trackBy: trackByFn"
               [attr.id]="language.code">
-            <a class="green-hover"
-               href="/?locale=en">
+            <a class="green-hover" (click)="changeLanguage(language)">
               {{ language.name }}
             </a>
           </li>

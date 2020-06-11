@@ -22,4 +22,5 @@ export class ConfigurationService {
     mapsApiKey: string;
     projectGAToken: string;
     studyGuid: string;
+    defaultLanguageCode: string;
 }

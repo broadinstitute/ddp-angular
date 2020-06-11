@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "kalıtsal bir nörodejeneratif hastalıktır. A-T'li bir çocuk, yaklaşık iki yaş civarında ilerleyici kas kontrol kaybı yaşamaya başlar. Dokuz veya on yaşlarında A-T'li çocuklar genellikle tekerlekli sandalye kullanmak zorunda kalır ve konuşmaları bozulur. Okuma ve yutkunma da zorlaşır. A-T'li çocukların yaklaşık yüzde 30'unda kanser gelişir ve çoğunda bir ölçüde bağışıklık sistemi problemi vardır. A-T hastalarının yaşamını gösterdikleri belirtilerin yönetilmesi yoluyla uzatma bakımından ilerleme olmuşsa da hastalık durmaksızın ilerler.",
+			"Title": "Ataksi Telenjiektazi (A-T)"
+		},
+		"SecondParagraph": {
+			"TextOne": "A-T'li kardeşler, A-T hastası olup aynı mutasyonları taşıyan ama farklı ailelerden olan çocuklara göre daha fazla klinik özelliği paylaşıyor görünmektedir. Bilim insanları bu nedenle bir ailenin genlerinin yani A-T'ye neden olanlar dışındaki genlerin, A-T'nin hastaları nasıl etkilediğini değiştirebileceğini düşünmektedir. Ayrıca farklı ortamlarda yaşamak, farklı yaşam tarzlarına sahip olmak ve farklı beslenmenin A-T hastalarının sağlığını etkilemesi mümkündür.",
+			"TextSecond": "Yakın zamanlarda A-T genlerinde tipik, hastalık oluşturan mutasyonları olan ve A-T proteinini üretmeyen (tıpkı A-T hastası diğer kişiler gibi) ama A-T belirtileri şaşırtıcı ölçüde hafif olan birkaç kişi tespit ettik. Artık bu 'çok hafif' hastalarda A-T mutasyonlarını düzelten veya dengeleyen başka gen değişiklikleri bulabileceğimiz konusunda iyimseriz. Bu durumda araştırmacılar belki tüm A-T hastalarına yardımcı olmak üzere yeni ilaç tedavileri bulabilir. Ancak önce mümkün olduğunca fazla A-T hastasından klinik ve genetik veri toplamamız gerekir.",
+			"TextThird": "Benzer şekilde A-T hastalarının tıbbi öykülerini ve yaşam tarzlarını karşılaştırarak araştırmacılar, hangi belirti yönetimi stratejisinin sağlık açısından daha iyi sonuçlar getirdiğini öğrenebilir. Ancak öncelikle mümkün olduğunca fazla A-T hastasından veri toplayıp tek yerde bir araya getirmemiz gerekir.",
+			"Title": "A-T herkesi farklı bir şekilde etkiler"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Veri Platformuna kaydolun",
+					"Text": "\\\"Bize Katılın\\\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
+				},
+				{
+					"Name": "Bize izin verin"
+				}
+			]
+		}
+	}
+}

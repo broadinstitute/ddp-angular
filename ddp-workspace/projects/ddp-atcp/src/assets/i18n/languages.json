@@ -1,50 +1,50 @@
 [
   {
-    "code": "de-DE",
+    "code": "de",
     "name": "Deutsche"
   },
   {
-    "code": "en-US",
+    "code": "en",
     "name": "English"
   },
   {
-    "code": "es-ES",
+    "code": "es",
     "name": "Español"
   },
   {
-    "code": "fr-FR",
+    "code": "fr",
     "name": "Française"
   },
   {
-    "code": "it-IT",
+    "code": "it",
     "name": "Italiano"
   },
   {
-    "code": "pl-PL",
+    "code": "pl",
     "name": "Polskie"
   },
   {
-    "code": "pt-BR",
+    "code": "pt",
     "name": "Português"
   },
   {
-    "code": "tr-TR",
+    "code": "tr",
     "name": "Türk"
   },
   {
-    "code": "zh-CN",
+    "code": "zh",
     "name": "中文"
   },
   {
-    "code": "ja-JP",
+    "code": "ja",
     "name": "日本語"
   },
   {
-    "code": "hi-IN",
+    "code": "hi",
     "name": "हिन्दी"
   },
   {
-    "code": "ru-RU",
+    "code": "ru",
     "name": "Русский"
   }
 ]

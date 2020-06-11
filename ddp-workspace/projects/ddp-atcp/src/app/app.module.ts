@@ -29,7 +29,7 @@ import { FooterComponent } from './components/footer/footer';
 import { AboutUsComponent } from './components/about-us/about-us';
 import { HeaderComponent } from './components/header/header';
 import { MatMenuModule } from '@angular/material';
-import { LanguagesProvider } from './providers/languages.provider';
+import {Language, LanguagesProvider, LanguagesToken} from './providers/languages.provider';
 import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { DataAccessComponent } from './components/data-access/data-access';
@@ -66,12 +66,15 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode: "en";
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+    const languag: Language[] = injector.get(LanguagesToken, Promise.resolve(null));
     locationInitialized.then(() => {
-      const locale = 'en';
+      translate.addLangs(languag.map(x => x.code));
+      const locale = config.defaultLanguageCode;
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
         console.log(`Successfully initialized '${locale}' language as default.`);

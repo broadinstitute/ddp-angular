@@ -1,7 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { CompositeDisposable, NGXTranslateService, SessionMementoService } from 'ddp-sdk';
+import {CompositeDisposable, ConfigurationService, NGXTranslateService, SessionMementoService} from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
+import {TranslateService} from "@ngx-translate/core";
+import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
-              private ngxTranslate: NGXTranslateService) {
+              private ngxTranslate: NGXTranslateService,
+              private translate: TranslateService,
+              @Inject('ddp.config') private configuration: ConfigurationService) {
   }
 
   public ngOnInit(): void {
@@ -34,5 +38,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
+  }
+
+  public changeLanguage(language: Language): void {
+    this.translate.use(language.code).subscribe(() => {
+      console.log(`Successfully initialized '${language.code}' language.`);
+    }, err => {
+      console.error(`Problem with '${language.code}' language initialization. Default '${this.configuration.defaultLanguageCode}' language is used`);
+      this.translate.use(this.configuration.defaultLanguageCode);
+    });
   }
 }

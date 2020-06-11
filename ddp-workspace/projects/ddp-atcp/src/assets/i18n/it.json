@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "è una malattia neurodegenerativa ereditaria. I bambini affetti da A-T iniziano a presentare perdita progressiva del controllo muscolare intorno all'età di due anni. Entro i nove o dieci anni di età, sono generalmente costretti a utilizzare una sedia a rotelle e iniziano ad avere difficoltà di articolazione della parola. Anche leggere e ingoiare diventano operazioni difficili. Circa il 30% dei bambini affetti da A-T sviluppa tumori e la maggior parte di essi presenta problemi del sistema immunitario più o meno gravi. Benché attraverso la gestione dei sintomi siano stati compiuti progressi che hanno permesso di prolungare la vita delle persone affette da A-T, la malattia rimane inarrestabile.",
+			"Title": "L'atassia-teleangectasia (A-T)"
+		},
+		"SecondParagraph": {
+			"TextOne": "I fratelli affetti da A-T sembrano condividere caratteristiche cliniche più simili rispetto ai bambini con A-T portatori delle stesse mutazioni, ma appartenenti a famiglie diverse. Gli scienziati ritengono quindi che altri geni - presenti in una determinata famiglia, diversi da quello responsabile per l'A-T - possono cambiare il modo in cui la malattia colpisce i pazienti. Inoltre, è possibile che vivere in ambienti diversi, condurre stili di vita diversi e seguire una dieta diversa possano influire sullo stato di salute delle persone affette da A-T.",
+			"TextSecond": "Abbiamo recentemente individuato varie persone che presentano le tipiche mutazioni responsabili della malattia nel gene dell'A-T e che non producono la proteina associata all'A-T (esattamente come le altre persone affette da A-T), ma che tuttavia manifestano sintomi sorprendentemente lievi. Siamo ora ottimisti in relazione alla possibilità di trovare alterazioni in altri geni che siano in grado di correggere o compensare le mutazioni responsabili dell'A-T in questi \\\"pazienti con sintomi\\\" molto lievi. Se così fosse, i ricercatori potrebbero trovare nuovi trattamenti farmacologici in grado di aiutare tutte le persone affette da A-T. Ma prima dobbiamo raccogliere i dati clinici e genetici del maggior numero possibile di persone affette da A-T.",
+			"TextThird": "Analogamente, confrontando la storia clinica e lo stile di vita di pazienti diversi affetti da A-T, i ricercatori potrebbero comprendere quali strategie di gestione dei sintomi producono esiti migliori a livello sanitario. Ma prima dobbiamo ottenere e combinare in un unico archivio i dati di molti pazienti affetti da A-T.",
+			"Title": "L'A-T colpisce ogni paziente in maniera diversa"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Registrati nella piattaforma di dati",
+					"Text": "Fai clic su Unisciti a noi e crea un account con il tuo nome e il tuo indirizzo di posta elettronica. Dopo aver creato il tuo account, potrai registrarti (se sei affetto/a da A-T) o registrare tuo/a figlio/a o i tuoi figli affetti da A-T come partecipanti nella nostra piattaforma di dati, compilando un breve modulo."
+				},
+				{
+					"Name": "Forniscici la tua autorizzazione"
+				}
+			]
+		}
+	}
+}
