@@ -250,11 +250,9 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private handleExpiredAuthenticatedSession(): void {
-        this.renewNotifier.hideSessionExpirationNotifications();
-        if (!this.configuration.doLocalRegistration) {
-            sessionStorage.setItem('nextUrl', this.router.url);
-            this.logout('session-expired');
-        }
+      this.renewNotifier.hideSessionExpirationNotifications();
+      sessionStorage.setItem('nextUrl', this.router.url);
+      this.logout('session-expired');
     }
 
     private handleExpiredTemporarySession(): void {
