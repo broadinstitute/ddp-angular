@@ -6,15 +6,18 @@ import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
+import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
 
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
+  AdminAuthGuard,
   IrbGuard
 } from 'ddp-sdk';
 
 import {
   LoginLandingRedesignedComponent,
+  AdminLoginLandingComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
   ActivityRedesignedComponent,
@@ -102,6 +105,21 @@ const routes: Routes = [
     component: RedirectToAuth0LoginRedesignedComponent,
     canActivate: [
       IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.AdminLoginLanding,
+    component: AdminLoginLandingComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.CrcDashboard,
+    component: CrcDashboardComponent,
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
     ]
   },
   {

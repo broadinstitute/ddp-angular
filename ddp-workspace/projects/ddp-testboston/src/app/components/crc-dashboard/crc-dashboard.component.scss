@@ -1,0 +1,170 @@
+@import '../../../app-theme.scss';
+
+@mixin block-title-font {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 19px;
+    color: mat-color($app-theme, 1000);
+}
+
+.search-section {
+    background-color: mat-color($app-theme, 3200);
+}
+
+.search-block {
+    margin: 5rem 0 1rem 0;
+}
+
+.title {
+    color: mat-color($app-theme, 400);
+    font-size: 1.5625rem;
+    line-height: 2.125rem;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    color: mat-color($app-theme, 400);
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0;
+}
+
+.invitation-code {
+    display: flex;
+}
+
+.search-field {
+    width: 24rem;
+
+    &__icon {
+        color: mat-color($app-theme, 900);
+    }
+
+    &__clear {
+        font-size: 1.125rem;
+        font-family: inherit;
+        border: none;
+        text-decoration: underline;
+        background: none;
+        color: mat-color($app-theme, 900);
+        display: none;
+        transition: 0.3s;
+
+        &:hover {
+            color: mat-color($app-theme, 400);
+        }
+
+        &_visible {
+            display: flex;
+        }
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__spinner {
+        margin-left: 1rem;
+    }
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    color: mat-color($app-theme, 2700);
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0 1rem;
+
+    mat-icon {
+        margin-right: 0.2rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    &_notes {
+        font-weight: 600;
+        margin: 1rem 0 0 0;
+    }
+}
+
+.subject-block {
+    margin: 1rem 0 3rem 0;
+}
+
+.subject-info {
+    display: flex;
+}
+
+.info-block {
+    &:first-child {
+        margin-right: 3rem;
+    }
+
+    &__title {
+        @include block-title-font;
+        opacity: 0.6;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 300;
+        margin: 0;
+        color: mat-color($app-theme, 400);
+    }
+}
+
+.buttons {
+    margin: 2rem 0;
+}
+
+.notes {
+    &__title {
+        @include block-title-font;
+    }
+
+    &__textarea {
+        width: 100%;
+        resize: vertical;
+        font-family: inherit;
+        box-sizing: border-box;
+        padding: 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        border: 1px solid mat-color($app-theme, 3300);
+        border-radius: 4px;
+    }
+}
+
+.placeholder {
+    height: 30rem;
+}
+
+@media only screen and (max-width: 720px) {
+    .invitation-code {
+        flex-direction: column;
+    }
+
+    .error {
+        margin: 0;
+    }
+
+    .subject-info {
+        flex-direction: column;
+    }
+
+    .placeholder {
+        height: 20rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .search-field {
+        width: 20rem;
+    }
+}

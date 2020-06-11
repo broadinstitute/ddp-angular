@@ -39,6 +39,7 @@ import { ParticipantProfileComponent } from './components/user/participantProfil
 import { ManageParticipantsComponent } from './components/user/manageParticipants.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 import { IrbGuard } from './guards/irb.guard';
 import { BrowserGuard } from './guards/browser.guard';
 
@@ -68,6 +69,7 @@ import { ActivityQuestionConverter } from './services/activity/activityQuestionC
 import { ActivityComponentConverter } from './services/activity/activityComponentConverter.service';
 import { ActivityValidatorBuilder } from './services/activity/activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './services/activity/activitySuggestionBuilder.service';
+import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectInvitationServiceAgent.service';
 
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 
@@ -166,6 +168,8 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
 
+import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
   return {
@@ -228,6 +232,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     AuthGuard,
+    AdminAuthGuard,
     IrbGuard,
     BrowserGuard,
     Auth0AdapterService,
@@ -238,6 +243,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SessionMementoService,
     AnalyticsEventsService,
     UserActivityServiceAgent,
+    SubjectInvitationServiceAgent,
     UserProfileServiceAgent,
     ActivityServiceAgent,
     PrequalifierServiceAgent,
@@ -334,7 +340,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
     RouteTransformerDirective,
-    InvitationCodeFormatterDirective
+    InvitationCodeFormatterDirective,
+    InvitationPipe
   ],
   exports: [
     NetworkSnifferComponent,
@@ -392,7 +399,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LazyLoadResourcesDirective,
     RouteTransformerDirective,
     UpperCaseInputDirective,
-    InvitationCodeFormatterDirective
+    InvitationCodeFormatterDirective,
+    InvitationPipe
   ],
   entryComponents: [
     UserPreferencesComponent,

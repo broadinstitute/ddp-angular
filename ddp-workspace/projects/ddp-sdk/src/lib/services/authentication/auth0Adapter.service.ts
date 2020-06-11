@@ -26,6 +26,7 @@ export class Auth0AdapterService implements OnDestroy {
      * Handle to Auth0 library service
      */
     public webAuth: any;
+    public adminWebAuth: any | null;
     private ngUnsubscribe = new Subject<any>();
 
     constructor(
@@ -38,39 +39,19 @@ export class Auth0AdapterService implements OnDestroy {
         private renewNotifier: RenewSessionNotifier,
         private jwtHelper: JwtHelperService,
         private language: LanguageService) {
-        const scopes = 'openid profile';
-        // TODO Clarify how audience should be used, what is the correct value,etc.
-        // TODO refactor and document differences between localregistration flow and "normal" flow
-        let audience = 'https://' + this.configuration.auth0Domain;
-        if (!_.isUndefined(this.configuration.auth0Audience)) {
-            // when using a custom auth0 domain, the audience and domain will differ
-            // and the audience needs to be the original name of the tenant
-            audience = 'https://' + this.configuration.auth0Audience;
-        }
-        audience = audience + '/userinfo';
         const doLocalRegistration = configuration.doLocalRegistration;
         if (doLocalRegistration) {
             this.log.logEvent('auth0Adapter', 'issuing code-based auth');
-            this.webAuth = new auth0.WebAuth({
-                domain: this.configuration.auth0Domain,
-                clientID: this.configuration.auth0ClientId,
-                studyGuid: this.configuration.studyGuid,
-                responseType: 'code',
-                audience,
-                scope: 'offline_access ' + scopes,
-                redirectUri: this.configuration.auth0CodeRedirect
-            });
+            this.webAuth = this.createLocalWebAuth(this.configuration.auth0ClientId);
+            if (this.configuration.adminClientId !== null) {
+                this.adminWebAuth = this.createLocalWebAuth(this.configuration.adminClientId);
+            }
         } else {
             this.log.logEvent('auth0Adapter', 'logging in via token');
-            this.webAuth = new auth0.WebAuth({
-                domain: this.configuration.auth0Domain,
-                clientID: this.configuration.auth0ClientId,
-                responseType: 'token id_token',
-                audience,
-                scope: scopes,
-                redirectUri: this.configuration.loginLandingUrl
-            });
-
+            this.webAuth = this.createWebAuth(this.configuration.auth0ClientId, this.configuration.loginLandingUrl);
+            if (this.configuration.adminClientId !== null) {
+                this.adminWebAuth = this.createWebAuth(this.configuration.adminClientId, this.configuration.adminLoginLandingUrl);
+            }
         }
         this.session.renewObservable
             .pipe(takeUntil(this.ngUnsubscribe))
@@ -85,6 +66,44 @@ export class Auth0AdapterService implements OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
+    private createWebAuth(clientId: string, redirectUri: string): any {
+        // TODO Clarify how audience should be used, what is the correct value,etc.
+        // TODO refactor and document differences between localregistration flow and "normal" flow
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            // when using a custom auth0 domain, the audience and domain will differ
+            // and the audience needs to be the original name of the tenant
+            audience = 'https://' + this.configuration.auth0Audience;
+        }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            responseType: 'token id_token',
+            audience,
+            scope: 'openid profile',
+            redirectUri
+        });
+    }
+
+    private createLocalWebAuth(clientId: string): any {
+        // TOOD see audience in createWebAuth()
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            audience = 'https://' + this.configuration.auth0Audience;
+        }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            studyGuid: this.configuration.studyGuid,
+            responseType: 'code',
+            audience,
+            scope: 'offline_access openid profile',
+            redirectUri: this.configuration.auth0CodeRedirect
+        });
+    }
+
     /**
      * Two modes: signup or login
      */
@@ -94,6 +113,9 @@ export class Auth0AdapterService implements OnDestroy {
             mode,
             ...(additionalAuth0QueryParams && additionalAuth0QueryParams)
         };
+        if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
+        }
         this.webAuth.authorize(
             auth0Params,
             () => this.log.logError('auth0Adapter.login', null));
@@ -122,9 +144,6 @@ export class Auth0AdapterService implements OnDestroy {
             // @todo : hack delete when done
             serverUrl: this.configuration.backendUrl
         };
-        if (this.configuration.doLocalRegistration) {
-            sessionStorage.setItem('localAuthParams', JSON.stringify(params));
-        }
         this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
@@ -164,19 +183,46 @@ export class Auth0AdapterService implements OnDestroy {
         });
     }
 
-    public renewSession(renewalAuthResult): void {
-        const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
-        this.session.setSession(
-            renewalAuthResult.accessToken,
-            renewalAuthResult.idToken,
-            this.session.session.userGuid,
-            this.session.session.locale,
-            // the time of expiration in UTC seconds
-            decodedJwt['exp'] as number,
-            this.session.session.participantGuid);
+    public adminLogin(additionalParams?: Record<string, string>): void {
+        const auth0Params = {
+            study_guid: this.configuration.studyGuid,
+            mode: Auth0Mode.LoginOnly,
+            ...(additionalParams && additionalParams)
+        };
+        if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem("localAdminAuth", 'true');
+            sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
+        }
+        this.adminWebAuth.authorize(
+            auth0Params,
+            () => this.log.logError('auth0Adapter.adminLogin', null));
     }
 
-    public setSession(authResult): void {
+    public handleAdminAuthentication(onErrorCallback?: (e: any | null) => void): void {
+        this.adminWebAuth.parseHash((err, authResult) => {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                this.windowRef.nativeWindow.location.hash = '';
+                this.setSession(authResult, true);
+                this.log.logEvent('auth0Adapter.handleAdminAuthentication', authResult);
+                this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
+            } else if (err) {
+                this.log.logError('auth0Adapter.handleAdminAuthentication', err);
+                let error = null;
+                try {
+                    error = JSON.parse(decodeURIComponent(err.errorDescription));
+                } catch (e) {
+                    console.error('Problem decoding authentication error', e);
+                }
+                if (onErrorCallback && error) {
+                    // We might encounter errors from Auth0 that is not in expected
+                    // JSON format, so only run callback if decoding is successful.
+                    onErrorCallback(error);
+                }
+            }
+        });
+    }
+
+    public setSession(authResult, isAdmin: boolean = false): void {
         const decodedJwt = this.jwtHelper.decodeToken(authResult.idToken);
         this.log.logEvent(' authResult', decodedJwt);
         const userGuid = decodedJwt['https://datadonationplatform.org/uid'];
@@ -198,31 +244,43 @@ export class Auth0AdapterService implements OnDestroy {
             locale,
             // the time of expiration in UTC seconds
             decodedJwt['exp'] as number,
-            authResult.participantGuid);
+            authResult.participantGuid,
+            isAdmin);
         console.log('auth0Adapter successfully updated session token ', decodedJwt);
     }
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
+        const wasAdmin = this.session.session.isAdmin;
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent('auth0Adapter.logout', null);
         this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
-        this.webAuth.logout({
-            returnTo: `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`,
-            clientID: this.configuration.auth0ClientId
-        });
+        const returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;
+        if (wasAdmin) {
+            this.adminWebAuth.logout({
+                returnTo,
+                clientID: this.configuration.adminClientId
+            });
+        } else {
+            this.webAuth.logout({
+                returnTo,
+                clientID: this.configuration.auth0ClientId
+            });
+        }
     }
 
     public auth0RenewToken(): Observable<Session | null> {
+        const currentSession = this.session.session;
         const studyGuid = this.configuration.studyGuid;
-        const auth0IdToken = this.jwtHelper.decodeToken(this.session.session.idToken)['sub'];
-        const clientId = this.configuration.auth0ClientId;
+        const auth0IdToken = this.jwtHelper.decodeToken(currentSession.idToken)['sub'];
+        const clientId = currentSession.isAdmin ? this.configuration.adminClientId : this.configuration.auth0ClientId;
         const resultMatchesThisSession = (result: any) => {
             const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
             return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
         };
-        const checkSession$ = bindNodeCallback(cb => this.webAuth.checkSession({
+        const auth0 = currentSession.isAdmin ? this.adminWebAuth : this.webAuth;
+        const checkSession$ = bindNodeCallback(cb => auth0.checkSession({
             studyGuid,
             responseType: 'token id_token',
             renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
@@ -239,6 +297,20 @@ export class Auth0AdapterService implements OnDestroy {
             tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
             mergeMap(result => this.session.sessionObservable.pipe(take(1)))
         );
+    }
+
+    public renewSession(renewalAuthResult): void {
+        const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
+        const oldSession = this.session.session;
+        this.session.setSession(
+            renewalAuthResult.accessToken,
+            renewalAuthResult.idToken,
+            oldSession.userGuid,
+            oldSession.locale,
+            // the time of expiration in UTC seconds
+            decodedJwt['exp'] as number,
+            oldSession.participantGuid,
+            oldSession.isAdmin);
     }
 
     public handleExpiredSession(): void {

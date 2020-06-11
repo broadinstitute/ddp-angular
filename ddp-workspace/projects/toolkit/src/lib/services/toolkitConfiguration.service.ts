@@ -48,6 +48,7 @@ export class ToolkitConfigurationService {
     doneUrl: string;
     covidSurveyUrl: string;
     addressUrl: string;
+    adminDashboardUrl: string | null = null;
 
     // Social media and contacts
     phone: string;
