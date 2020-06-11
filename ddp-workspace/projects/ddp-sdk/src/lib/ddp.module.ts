@@ -39,6 +39,7 @@ import { ParticipantProfileComponent } from './components/user/participantProfil
 import { ManageParticipantsComponent } from './components/user/manageParticipants.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 import { IrbGuard } from './guards/irb.guard';
 import { BrowserGuard } from './guards/browser.guard';
 
@@ -231,6 +232,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     AuthGuard,
+    AdminAuthGuard,
     IrbGuard,
     BrowserGuard,
     Auth0AdapterService,

@@ -77,6 +77,7 @@ export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 
 export * from './lib/guards/auth.guard';
+export * from './lib/guards/adminAuth.guard';
 export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
 

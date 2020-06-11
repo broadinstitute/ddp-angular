@@ -32,6 +32,7 @@ export * from './lib/components/footer/footer.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/login-landing/login-landing.component';
 export * from './lib/components/login-landing/login-landing-redesigned.component';
+export * from './lib/components/login-landing/admin-login-landing.component';
 export * from './lib/components/thank-you/loved-one-thank-you.component';
 export * from './lib/components/thank-you/loved-one-thank-you-redesigned.component';
 export * from './lib/components/password/password.component';

@@ -116,26 +116,34 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "testboston-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "testboston-dev.auth0.com";
         DDP_ENV['auth0ClientId'] = "m4lhHnq2WvRm3lloUHbQzwCte7s03o3S";
+        DDP_ENV['adminClientId'] = "OC3gFZD8vIBiKlJ3tPUJJ2cUI5EwVFSz";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{else if eq $environment "test"}}
         DDP_ENV['auth0Domain'] = "testboston-test.auth0.com";
         DDP_ENV['auth0Audience'] = "testboston-test.auth0.com";
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['adminClientId'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
         DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
+        DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{else if eq $environment "staging"}}
         DDP_ENV['auth0Domain'] = "testboston-staging.auth0.com";
         DDP_ENV['auth0Audience'] = "testboston-staging.auth0.com";
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['adminClientId'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
         DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
+        DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{else if eq $environment "prod"}}
         DDP_ENV['auth0Domain'] = "fixme-not-set";
         DDP_ENV['auth0Audience'] = "fixme-not-set";
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['adminClientId'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+        DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{end}}
 {{end}}
 

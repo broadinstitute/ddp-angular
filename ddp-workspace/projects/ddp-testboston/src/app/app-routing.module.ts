@@ -11,11 +11,13 @@ import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
+  AdminAuthGuard,
   IrbGuard
 } from 'ddp-sdk';
 
 import {
   LoginLandingRedesignedComponent,
+  AdminLoginLandingComponent,
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
   ActivityRedesignedComponent,
@@ -106,9 +108,19 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.AdminLoginLanding,
+    component: AdminLoginLandingComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.CrcDashboard,
     component: CrcDashboardComponent,
-    canActivate: []
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
+    ]
   },
   {
     path: AppRoutes.LocalAuth,
