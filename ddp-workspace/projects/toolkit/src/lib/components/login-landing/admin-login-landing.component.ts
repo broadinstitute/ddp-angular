@@ -35,9 +35,9 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
       this.redirect();
     }
 
-    // Subscribe to session observable, so once auth session is set, then we redirect.
+    // Subscribe to session observable, so once admin session is set, then we redirect.
     this.anchor = this.sessionService.sessionObservable.pipe(
-      filter(session => session !== null && !!session.idToken),
+      filter(session => session !== null && !!session.idToken && session.isAdmin),
       take(1)
     ).subscribe(() => {
       this.redirect();
