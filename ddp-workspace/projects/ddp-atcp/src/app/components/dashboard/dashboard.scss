@@ -112,6 +112,8 @@
 
     ddp-activity-redesigned {
       padding: 30px 0;
+      flex-grow: 1;
+
       @media (min-width: 590px) {
         padding: 30px;
       }

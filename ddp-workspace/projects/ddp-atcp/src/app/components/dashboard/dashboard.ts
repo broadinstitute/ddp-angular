@@ -43,7 +43,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
 
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
-  private anchor = new CompositeDisposable();
+  private anchor;
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
               private userActivity: UserActivityServiceAgent,
@@ -54,6 +54,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public setActivity(data: ActivityResponse | null): void {
     if (data && data.instanceGuid) {
       this.updateInstanceGuid(data.instanceGuid);
+      this.getSteps();
     }
   }
 
@@ -61,12 +62,11 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     this.instanceGuid = instanceGuid;
   }
 
-  public ngOnInit(): void {
-    this.studyGuid = this.toolkitConfiguration.studyGuid;
-    this.studyGuidObservable.next(this.studyGuid);
-    this.userAgent.profile
-      .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
-      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName);
+  private getSteps(): void {
+    if (this.anchor) {
+      this.anchor.removeAll();
+    }
+    this.anchor = new CompositeDisposable();
     const useActivities = new UserActivitiesDataSource(
       this.userActivity,
       this.logger,
@@ -77,6 +77,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         let currentActivityIndex = data.findIndex((activity: ActivityInstance) => activity.statusCode === this.IN_PROGRESS);
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.findIndex((activity: ActivityInstance) => activity.statusCode === this.CREATED);
+          data[currentActivityIndex].statusCode = IN_PROGRESS;
         }
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.length - 1;
@@ -84,6 +85,15 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         this.updateInstanceGuid(this.steps[currentActivityIndex].instanceGuid);
       });
     this.anchor.addNew(useActivities);
+  }
+
+  public ngOnInit(): void {
+    this.studyGuid = this.toolkitConfiguration.studyGuid;
+    this.studyGuidObservable.next(this.studyGuid);
+    this.userAgent.profile
+      .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
+      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName);
+    this.getSteps();
   }
 
   public ngOnDestroy(): void {

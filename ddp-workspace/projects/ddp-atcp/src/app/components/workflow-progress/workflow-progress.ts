@@ -29,13 +29,6 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
     this.anchor.addNew(translate$);
   }
 
-  public getStatus(step: ActivityInstance): string {
-    if (step.statusCode === IN_PROGRESS || step.instanceGuid === this.instanceGuid) {
-      return this.IN_PROGRESS;
-    }
-    return step.statusCode;
-  }
-
   public changeActivity(step: ActivityInstance): void {
     if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS) {
       this.onChangeActivity.emit(step.instanceGuid);
