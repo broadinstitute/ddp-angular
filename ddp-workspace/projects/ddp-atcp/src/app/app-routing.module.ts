@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-  Auth0CodeCallbackComponent,
   AuthGuard,
   IrbGuard,
   BrowserGuard
 } from 'ddp-sdk';
 
-import { LoginLandingRedesignedComponent } from 'toolkit';
+import { LoginLandingRedesignedComponent, RedirectToAuth0LoginComponent } from 'toolkit';
 import * as RouterResource from './router-resources';
 
 import { WelcomeComponent } from './components/welcome/welcome';
@@ -64,6 +63,11 @@ const routes: Routes = [
   {
     path: RouterResource.LoginLanding,
     component: LoginLandingRedesignedComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: RouterResource.LoginLandingMode,
+    component: RedirectToAuth0LoginComponent,
     canActivate: [IrbGuard]
   },
   {
