@@ -14,7 +14,8 @@
         "Header": {
             "HeaderLogo": "Brain<br>Cancer<br>Project",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me in",
+            "LanguageSelection": "language selection"
         },
         "Footer": {
             "FooterLogo": "Brain<br>Cancer<br>Project",

@@ -9,7 +9,8 @@ import { TranslateService } from "@ngx-translate/core";
   template: `
     <div [hidden]="!loaded">
       <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
-        <svg class="ddp-globe" height="24px" width="24px">
+        <svg class="ddp-globe" height="24px" width="24px" aria-live="title">
+          <title id="title" [lang]="currentLanguage.languageCode" translate>Toolkit.Header.LanguageSelection</title>
           <use href="assets/images/globe.svg#Language-Selector-3"></use>
         </svg>
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
