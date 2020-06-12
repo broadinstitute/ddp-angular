@@ -14,7 +14,8 @@
         "Header": {
             "HeaderLogo": "Prion<br>Registry",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
+            "CountMeIn": "count me in",
+            "LanguageSelection": "language selection"
         },
         "Footer": {
             "FooterLogo": "Prion<br>Registry",

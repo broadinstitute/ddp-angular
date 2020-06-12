@@ -53,7 +53,8 @@
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
+            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n",
+            "LanguageSelection": "language selection"
         },
         "Footer": {
             "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",
