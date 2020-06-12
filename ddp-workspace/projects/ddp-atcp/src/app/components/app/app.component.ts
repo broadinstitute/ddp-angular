@@ -4,6 +4,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 import { CommunicationService, JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 import { Router } from '@angular/router';
+import * as RouterResource from '../../router-resources';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
-  public isWelcomPage: boolean = false;
+  public isWelcomePage: boolean = false;
+  public isBasePage: boolean = false;
+
   private readonly DIALOG_BASE_SETTINGS = {
     width: '740px',
     position: { top: '30px' },
@@ -20,6 +23,14 @@ export class AppComponent implements OnInit, OnDestroy {
     autoFocus: false,
     scrollStrategy: new NoopScrollStrategy()
   };
+
+  private baseUrls = [
+    RouterResource.Auth,
+    RouterResource.Error,
+    RouterResource.Password,
+    RouterResource.PasswordResetDone,
+    RouterResource.SessionExpired
+  ];
 
   constructor(
     private router: Router,
@@ -29,7 +40,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.router.events.subscribe(() => {
-      this.isWelcomPage = this.router.url === '/';
+      this.isWelcomePage = this.router.url === '/';
+      this.isBasePage = this.baseUrls.includes(this.router.url.substr(1).split('?')[0]);
     });
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();

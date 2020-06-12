@@ -4,10 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   AuthGuard,
   IrbGuard,
-  BrowserGuard
+  BrowserGuard,
+  Auth0CodeCallbackComponent
 } from 'ddp-sdk';
 
-import { LoginLandingRedesignedComponent, RedirectToAuth0LoginComponent } from 'toolkit';
+import {
+  ErrorRedesignedComponent,
+  LoginLandingRedesignedComponent,
+  PasswordRedesignedComponent,
+  RedirectToAuth0LoginComponent,
+  RedirectToLoginLandingRedesignedComponent,
+  SessionExpiredRedesignedComponent
+} from 'toolkit';
 import * as RouterResource from './router-resources';
 
 import { WelcomeComponent } from './components/welcome/welcome';
@@ -15,18 +23,13 @@ import { AboutUsComponent } from './components/about-us/about-us';
 import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { DataAccessComponent } from './components/data-access/data-access';
-import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
-import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
-import { SessionExpiredComponent } from './components/session-expired/session-expired';
-import { PasswordResetComponent } from './components/password-reset/password-reset';
-import { AuthComponent } from './components/Auth/auth';
 
 const routes: Routes = [
   {
       path: RouterResource.Error,
-      component: ErrorComponent,
+      component: ErrorRedesignedComponent,
       canActivate: [IrbGuard]
   },
   {
@@ -49,12 +52,12 @@ const routes: Routes = [
   },
   {
     path: RouterResource.PasswordResetDone,
-    component: PasswordResetComponent,
+    component: RedirectToLoginLandingRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
     path: RouterResource.SessionExpired,
-    component: SessionExpiredComponent,
+    component: SessionExpiredRedesignedComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard
@@ -72,12 +75,12 @@ const routes: Routes = [
   },
   {
     path: RouterResource.Auth,
-    component: AuthComponent,
+    component: Auth0CodeCallbackComponent,
     canActivate: [IrbGuard]
   },
   {
     path: RouterResource.Password,
-    component: PasswordComponent
+    component: PasswordRedesignedComponent
   },
   {
     path: RouterResource.DataAccess,

@@ -33,15 +33,10 @@ import { LanguagesProvider } from './providers/languages.provider';
 import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { DataAccessComponent } from './components/data-access/data-access';
-import { PasswordComponent } from './components/password/password';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
-import { ErrorComponent } from './components/error/error';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar';
-import { SessionExpiredComponent } from './components/session-expired/session-expired';
-import { PasswordResetComponent } from './components/password-reset/password-reset';
-import { AuthComponent } from './components/Auth/auth';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -109,15 +104,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HeaderComponent,
     JoinUsComponent,
     DataAccessComponent,
-    PasswordComponent,
     DashBoardComponent,
     WorkflowProgressComponent,
-    ErrorComponent,
     StatisticsComponent,
     ProgressBarComponent,
-    SessionExpiredComponent,
-    PasswordResetComponent,
-    AuthComponent
   ],
   entryComponents: [
     DashBoardComponent,

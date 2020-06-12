@@ -2,7 +2,8 @@
 
 .Container {
   @include common-footer-down;
-  &.welcom {
+
+  &.welcome {
     &::ng-deep .Header {
       position: absolute;
       top: 0;
