@@ -74,15 +74,17 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-        for (const propName in changes) {
+        for (const propName in changes)
+        {
+            if (propName === 'studyGuid' || propName === 'activityGuid') {
+              this.isLoaded = false;
+              this.resetValidationState();
+            }
+            // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
             if (propName === 'studyGuid') {
                 this.studyGuidObservable.next(this.studyGuid);
             } else if (propName === 'activityGuid') {
                 this.activityGuidObservable.next(this.activityGuid);
-            }
-            if (propName === 'studyGuid' || propName === 'activityGuid') {
-                this.isLoaded = false;
-                this.resetValidationState();
             }
         }
     }
