@@ -29,6 +29,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
     @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
+    @Output() activityLoad: EventEmitter<ActivityForm> = new EventEmitter<ActivityForm>();
+
     protected embeddedComponentsValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
     protected workflow: WorkflowServiceAgent;
@@ -36,7 +38,17 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected router: Router;
     public model: ActivityForm;
     public validationRequested = false;
-    public isLoaded = false;
+
+    private _isLoaded = false;
+    get isLoaded(): boolean {
+      return this._isLoaded;
+    }
+    set isLoaded(val) {
+      if (val !== this.isLoaded) {
+        this._isLoaded = val;
+        this.activityLoad.emit(this.model);
+      }
+    }
     public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
@@ -87,11 +99,11 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     if (!x) {
                         this.model = new ActivityForm();
                     } else {
-                        this.isLoaded = true;
                         this.model = x;
                         this.stickySubtitle.emit(this.model.subtitle);
                         this.activityCode.emit(this.model.activityCode);
                         this.initSteps();
+                        this.isLoaded = true;
                     }
 
                     // combine the latest status updates from the form model
