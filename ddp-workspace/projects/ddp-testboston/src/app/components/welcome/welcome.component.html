@@ -33,7 +33,7 @@
             </ul>
         </div>
     </section>
-    <section class="section">
+    <section class="section question-section">
         <div id="q&a" class="anchor"></div>
         <div class="content question-block">
             <h2 class="center semi-bold" translate>HomePage.FaqSection.Title</h2>
@@ -58,6 +58,20 @@
                     </mat-expansion-panel>
                 </ng-container>
             </mat-accordion>
+        </div>
+    </section>
+    <section class="section">
+        <div id="who-we-are" class="anchor"></div>
+        <div class="content team-block">
+            <h2 class="semi-bold" translate>HomePage.TeamSection.Title</h2>
+            <p translate>HomePage.TeamSection.Text</p>
+            <ul class="team-list">
+                <li class="member" *ngFor="let teammate of 'HomePage.TeamSection.List' | translate">
+                    <h5 class="member__title">{{teammate.Name}}</h5>
+                    <p class="member__affiliations">{{teammate.Affiliations}}</p>
+                    <p class="member__info">{{teammate.Info}}</p>
+                </li>
+            </ul>
         </div>
     </section>
     <section class="section mailing-list-section">
