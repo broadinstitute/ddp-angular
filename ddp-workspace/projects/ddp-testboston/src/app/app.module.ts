@@ -4,7 +4,7 @@ import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/c
 import { AppRoutingModule } from './app-routing.module';
 import { Router, Scroll, Event } from '@angular/router';
 import { filter, delay } from 'rxjs/operators';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -40,6 +40,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -58,6 +59,7 @@ toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
+toolkitConfig.adminDashboardUrl = AppRoutes.CrcDashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.addressGuid = ActivityGuids.Address;
@@ -74,11 +76,13 @@ export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
+sdkConfig.adminClientId = DDP_ENV.adminClientId;
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
 sdkConfig.logLevel = LogLevel.Info;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
+sdkConfig.adminLoginLandingUrl = DDP_ENV.adminLoginLandingUrl;
 sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
@@ -113,7 +117,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         HeaderComponent,
         WelcomeComponent,
         MailingListComponent,
-        UserRegistrationPrequalComponent
+        UserRegistrationPrequalComponent,
+        CrcDashboardComponent
     ],
     imports: [
         BrowserModule,
@@ -131,7 +136,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         RecaptchaModule,
         RecaptchaFormsModule,
         ReactiveFormsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        FormsModule
     ],
     providers: [
         {
