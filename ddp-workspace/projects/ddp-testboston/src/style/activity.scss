@@ -18,20 +18,36 @@
     font-family: 'PT Serif', sans-serif;
 }
 
-.sticky-section {
+// consent header
+.header-section {
     margin: 0 0 2rem 0;
     background-color: #464E64;
 }
 
-// consent
-.consent-header {
+.activity-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     font-family: 'Nunito', sans-serif;
-    margin: 3rem 0;
+    margin: 4rem 0;
     color: white;
+
+    &__icon {
+        height: 1.25rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .activity-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .button {
+            margin-top: 1rem;
+        }
+    }
 }
 
 // buttons layout
@@ -73,6 +89,7 @@
     border-radius: 8px;
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
+    margin: 2rem 0;
 }
 
 
@@ -174,4 +191,88 @@
             display: none;
         }
     }
+}
+
+// subject
+.subject {
+    display: flex;
+
+    &__block:first-child {
+        margin-right: 3rem;
+    }
+}
+
+// questions
+.ddp-activity-question {
+    mat-checkbox,
+    mat-radio-button {
+        color: black !important;
+    }
+}
+
+ddp-activity-boolean-answer {
+    .example-radio-group {
+        display: flex;
+        flex-direction: column;
+
+        mat-radio-button {
+            margin: 5px 30px 5px 0px !important;
+        }
+    }
+}
+
+.ddp-question-prompt {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+.ddp-list {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+
+    mat-radio-group {
+        font-weight: 400;
+    }
+}
+
+.mat-checkbox-label,
+.mat-radio-label-content {
+    font-size: 1.25rem !important;
+    line-height: 1.875rem !important;
+    color: mat-color($app-theme, 700);
+}
+
+.mat-list-item-content {
+    padding-left: 5px !important;
+}
+
+.ddp-picklist-option-list-item {
+    height: auto !important;
+    margin-bottom: 1rem;
+}
+
+.mat-checkbox-inner-container {
+    height: 19px !important;
+    width: 19px !important;
+    margin-top: 5px !important;
+}
+
+// static content 
+.static-header,
+.static-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.375rem;
+    line-height: 2.0625rem;
+}
+
+.static-text {
+    color: #767676;
+}
+
+// last updated text
+.last-updated {
+    display: flex;
+    margin: 3rem 0;
 }

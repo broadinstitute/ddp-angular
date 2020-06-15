@@ -25,9 +25,9 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <div class="sticky-block" [innerHTML]="model.subtitle"></div>
                 </div>
             </section>
-            <section *ngIf="model.title" class="section">
+            <section *ngIf="model.title" class="section header-section">
                 <div class="content content_tight">
-                    <h1>{{model.title}}</h1>
+                    <h1 class="activity-header" [innerHTML]="model.title"></h1>
                 </div>
             </section>
         </ng-container>
@@ -121,7 +121,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     </ng-container>
 
                     <ng-container *ngIf="model.lastUpdatedText">
-                        <span>{{model.lastUpdatedText}} </span>
+                        <span class="last-updated">{{model.lastUpdatedText}} </span>
                     </ng-container>
                     <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
                         <ng-container *ngIf="isLoaded && isStepped">
@@ -138,8 +138,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && !isAgree() && isLoaded && !model.readonly">
-                            <button *ngIf="!model.readonly" #submitButton
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded">
+                            <button *ngIf="!model.readonly && !isAgree()" #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_primary button_right"
                                     (click)="flush()"
@@ -195,6 +195,6 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public isAgree(): boolean {
-        return this.model.activityCode === 'CONSENT' && this.agreeConsent && !this.model.readonly;
+        return this.model.activityCode === 'CONSENT' && this.agreeConsent;
     }
 }
