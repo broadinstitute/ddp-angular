@@ -131,6 +131,12 @@
         line-height: 2.125rem;
     }
 
+    // activity new item button
+    &_new-item {
+        margin-bottom: 1.5rem;
+        padding: 0.3rem 1rem;
+    }
+
     &__spinner {
         margin-left: 5px;
         height: 20px !important;
