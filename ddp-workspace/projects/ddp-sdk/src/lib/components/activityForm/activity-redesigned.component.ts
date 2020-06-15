@@ -62,10 +62,10 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                         <ng-container *ngFor="let section of model.sections; index as i">
                             <ng-container *ngIf="section.visible">
                                 <p class="activity-step no-margin big bold"
-                                    (click)="jumpStep(i)"
-                                    [class.active]="isActive(i)"
-                                    [class.completed]="isCompleted(i)">
-                                    {{section.name}}
+                                   (click)="jumpStep(i)"
+                                   [class.active]="isActive(i)"
+                                   [class.completed]="isCompleted(i)">
+                                   {{section.name}}
                                 </p>
                             </ng-container>
                         </ng-container>
@@ -77,11 +77,11 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                         <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
                             <ng-container *ngIf="section.visible">
                                 <div class="activity-step"
-                                    (click)="jumpStep(i)"
-                                    [class.active]="isActive(i)"
-                                    [class.completed]="isCompleted(i)">
-                                    <span class="activity-step__number">{{i + 1}}</span>
-                                    <span class="activity-step__text">{{section.name}}</span>
+                                     (click)="jumpStep(i)"
+                                     [class.active]="isActive(i)"
+                                     [class.completed]="isCompleted(i)">
+                                     <span class="activity-step__number">{{i + 1}}</span>
+                                     <span class="activity-step__text">{{section.name}}</span>
                                 </div>
                                 <div *ngIf="!isLastStep" class="activity-steps__divider"></div>
                             </ng-container>
