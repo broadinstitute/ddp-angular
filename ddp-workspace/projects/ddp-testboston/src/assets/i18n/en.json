@@ -148,6 +148,27 @@
                 }
             ]
         },
+        "TeamSection": {
+            "Title": "Our Team",
+            "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "List": [
+                {
+                    "Name": "Ann E. Woolley, MD",
+                    "Affiliations": "Infectious Disease",
+                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                },
+                {
+                    "Name": "Lisa A. Cosimi, MD",
+                    "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
+                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                },
+                {
+                    "Name": "Deborah T. Hung, MD, PhD",
+                    "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
+                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                }
+            ]
+        },
         "MailingSection": {
             "Title": "TestBoston enrollment is currently invite-only. ",
             "Text": "We understand that more people may want to participate, and we are trying to open TestBoston up to a larger group in the future. To receive updates on enrollment, please join our mailing list:"
@@ -351,10 +372,10 @@
                     "Zip Code": "Zip Code",
                     "Postal Code": "Postal Code",
                     "Zip/Postal Code": "Zip/Postal Code"
-                   },
+                },
                 "Choose": "Choose {{field}} ..."
             },
-            "Suggestion":{
+            "Suggestion": {
                 "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
                 "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
                 "Suggested": "Suggested:",
