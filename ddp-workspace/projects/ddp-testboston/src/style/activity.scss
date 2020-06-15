@@ -204,9 +204,18 @@
 
 // questions
 .ddp-activity-question {
+
     mat-checkbox,
     mat-radio-button {
         color: black !important;
+    }
+
+    .mat-radio-label {
+        align-items: normal !important;
+    }
+
+    .mat-radio-container {
+        margin-top: 0.1875rem;
     }
 }
 
@@ -267,8 +276,13 @@ ddp-activity-boolean-answer {
     line-height: 2.0625rem;
 }
 
+.static-header {
+    margin-bottom: 0;
+}
+
 .static-text {
     color: #767676;
+    margin-top: 0;
 }
 
 // last updated text
