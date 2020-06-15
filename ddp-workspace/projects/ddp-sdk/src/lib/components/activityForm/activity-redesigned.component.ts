@@ -195,6 +195,6 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public isAgree(): boolean {
-        return this.model.activityCode === 'CONSENT' && this.agreeConsent;
+        return this.model.formType === 'CONSENT' && this.agreeConsent;
     }
 }
