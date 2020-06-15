@@ -11,22 +11,28 @@ import {
 } from './ui-actions';
 import { createAuth0 } from './auth';
 import { configs, createForm } from './forms';
+import { translatorCreator } from './translator';
 
 declare const config;
 declare const $;
 
 const isResetPasswordPage = Array.isArray(config);
 const webAuth = createAuth0(config);
+let baseUrl;
+const authLoc = Math.max(config.callbackURL.indexOf('/auth'), config.callbackURL.indexOf('/login-landing'));
+
+if (authLoc === -1) {
+  baseUrl = config.callbackURL;
+} else {
+  baseUrl = config.callbackURL.substring(0, authLoc);
+}
+let dictionary;
+const translator = translatorCreator(!isResetPasswordPage ? config(baseUrl) : config[3], (loadedDictionary: any) => {
+  dictionary = loadedDictionary;
+});
 
 if (!isResetPasswordPage) {
-  let mainUrl = '';
-  const authLoc = Math.max(config.callbackURL.indexOf('/auth'), config.callbackURL.indexOf('/login-landing'));
-  if (authLoc === -1) {
-    mainUrl = config.callbackURL;
-  } else {
-    mainUrl = config.callbackURL.substring(0, authLoc);
-  }
-  prepareUiElements(mainUrl);
+  prepareUiElements(baseUrl);
 } else {
   prepareUiElements(config[3]);
 }
@@ -55,7 +61,7 @@ if (!isResetPasswordPage) {
       type: $form.attr('method'),
       url: $form.attr('action'),
       data: $form.serialize(),
-      success: () => showModal('Your password has been changed successfully.'),
+      success: () => showModal(dictionary.modal.SuccessChangedPassword),
     });
   });
 }
@@ -65,7 +71,7 @@ createForm(configs.login, ($form, data) => {
     realm: 'Username-Password-Authentication',
     email: data.email,
     password: data.password,
-  }, () => showModal('Invalid email or password', true));
+  }, () => showModal(dictionary.modal.InvalidLogin, true));
 });
 
 createForm(configs.resendInstructions, () => {});
@@ -77,7 +83,7 @@ createForm(configs.forgetPassword, ($form, data) => {
     if (err) {
       $form.find('.form-group').addClass('error');
     } else {
-      showModal('You will receive an email with instructions on how to reset your password in a few minutes.');
+      showModal(dictionary.modal.YouWillGetInstructions);
     }
   });
 });
@@ -108,6 +114,13 @@ $('.hideModal').on('click', event => {
   event.preventDefault();
   hideModal();
 });
+
+$(document).on('click', '.change-language', event => {
+  event.preventDefault();
+  translator.changeTranslate($(event.currentTarget).data('language'));
+});
+
+translator.changeTranslate('en');
 
 $('#google-sign').on('click', e => {
   e.preventDefault();
