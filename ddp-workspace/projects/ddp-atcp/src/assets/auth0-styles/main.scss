@@ -30,6 +30,47 @@ b {
   color: #DB2C2C !important;
 }
 
+.tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.tooltip.right.in {
+  top: -44px;
+  left: 100%;
+  display: block;
+  margin-left: 3px;
+  padding: 0 5px;
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
 .tooltip-inner {
   min-width: 300px !important;
   padding: 10px 10px 10px 15px;
@@ -48,6 +89,11 @@ b {
 
 .tooltip.bottom .tooltip-arrow {
   border-right-color: #eee;
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #eee !important;
+  top: 50%;
 }
 
 .tooltip.bottom {
@@ -139,7 +185,8 @@ b {
 
 .BtnFilled--blue {
   margin-top: 15px;
-  background: #4274bc
+  background: #4274bc;
+  border: none;
 }
 
 .BtnFilled--blue:hover {
@@ -278,6 +325,13 @@ b {
   font-weight: 400;
   color: #666
 }
+.FormItem-label-email {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+}
+
 body, html {
   margin: 0;
   padding: 0;
