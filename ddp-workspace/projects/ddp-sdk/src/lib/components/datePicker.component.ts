@@ -80,7 +80,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
       <div *ngIf="renderMode == 'PICKLIST'" class="picklist ddp-answer-container">
         <div *ngFor="let dateField of dateFields; let fieldIdx = index"
              class="date-field ddp-answer-field"
-             [ngClass]="{'ddp-date-field-margin': dateFields.length > 1}">
+             [ngClass]="{'ddp-date-field-margin': dateFields.length > 1, 'native-select': !label}">
           <ng-template [ngIf]="label" [ngIfElse]="pickListWithoutLabels">
             <mat-form-field *ngIf="dateField === 'MM'" floatLabel="always">
               <mat-label [innerHTML]="fieldIdx === 0 ? label : ('')"></mat-label>
