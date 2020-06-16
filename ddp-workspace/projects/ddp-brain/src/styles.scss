@@ -309,6 +309,7 @@ a:focus {
     stroke: mat-color($app-theme, 100);
     fill: transparent;
     vertical-align: middle;
+    transition: stroke 0.3s ease;
 }
 
 .SimpleButton--Scrolled .ddp-globe {
