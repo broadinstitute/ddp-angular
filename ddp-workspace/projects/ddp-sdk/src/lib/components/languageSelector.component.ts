@@ -1,17 +1,18 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Inject, Input, OnInit } from "@angular/core";
 import { StudyLanguage } from "../models/studyLanguage";
+import { ConfigurationService } from "../services/configuration.service";
+import { LanguageService} from "../services/languageService.service";
 import { LanguageServiceAgent } from "../services/serviceAgents/languageServiceAgent.service";
 import { isNullOrUndefined } from "util";
-import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'ddp-language-selector',
   template: `
     <div [hidden]="!loaded">
       <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
-        <svg class="ddp-globe" height="24px" width="24px" aria-live="title">
+        <svg class="ddp-globe" height="24px" width="24px">
           <title id="title" [lang]="currentLanguage.languageCode" translate>Toolkit.Header.LanguageSelection</title>
-          <use href="assets/images/globe.svg#Language-Selector-3"></use>
+          <use [attr.href]="iconURL"></use>
         </svg>
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
         <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
@@ -24,25 +25,27 @@ import { TranslateService } from "@ngx-translate/core";
   `
 })
 export class LanguageSelectorComponent implements OnInit {
-  @Input() studyGuid: string;
   @Input() isScrolled: boolean;
   public loaded: boolean;
+  public currentLanguage: StudyLanguage;
   private studyLanguages: Array<StudyLanguage>;
-  private currentLanguage: StudyLanguage;
+  public iconURL: string;
 
   constructor (
     private serviceAgent: LanguageServiceAgent,
-    private translateService: TranslateService
+    private language: LanguageService,
+    @Inject('ddp.config') private config: ConfigurationService
   ) { }
 
   public ngOnInit(): void {
-    this.serviceAgent.getConfiguredLanguages(this.studyGuid).subscribe(x => {
+    this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : "assets/images/globe.svg#Language-Selector-3";
+    this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).subscribe(x => {
       if (x) {
         console.log('got configured languages: ' + JSON.stringify(x));
         //Only use language selector if multiple languages are configured!
         if (x.length > 1) {
           this.studyLanguages = x;
-          this.translateService.addLangs(this.studyLanguages.map(x => x.languageCode));
+          this.language.addLanguages(this.studyLanguages.map(x => x.languageCode));
           if (this.findCurrentLanguage()) {
             this.loaded = true;
           }
@@ -60,30 +63,30 @@ export class LanguageSelectorComponent implements OnInit {
    return null;
   }
 
-  private changeLanguage(lang: StudyLanguage): void {
-    this.currentLanguage = lang;
-    this.translateService.use(lang.languageCode);
-    sessionStorage.setItem('studyLanguage', lang.languageCode);
+  public changeLanguage(lang: StudyLanguage): void {
+    if (this.language.canUseLanguage(lang.languageCode)) {
+      this.currentLanguage = lang;
+      this.language.changeLanguage(lang.languageCode);
+    }
+    else {
+      console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
+    }
   }
 
   //Find the current language and return true if successful or false otherwise
   public findCurrentLanguage(): boolean {
     //Check if we already have a current language
     if (!isNullOrUndefined(this.currentLanguage)) {
-      if (null === sessionStorage.getItem('studyLanguage')) {
-        //If we already have the current language and it isn't in session storage, put it there
-        sessionStorage.setItem('studyLanguage', this.currentLanguage.languageCode);
-      }
-      this.translateService.use(this.currentLanguage.languageCode);
+      this.changeLanguage(this.currentLanguage);
       return true;
     }
 
-    //Check session storage
-    let sessionCode: string = sessionStorage.getItem('studyLanguage');
-    if (!isNullOrUndefined(sessionCode)){
-      let sessionLang: StudyLanguage = this.studyLanguages.find(x => x.languageCode === sessionCode);
-      if (!isNullOrUndefined(sessionLang)) {
-        this.changeLanguage(sessionLang);
+    //Check storage
+    let loadedCode: string = this.language.useStoredLanguage();
+    if (loadedCode) {
+      let loadedLang: StudyLanguage = this.studyLanguages.find(x => x.languageCode === loadedCode);
+      if (!isNullOrUndefined(loadedLang)) {
+        this.currentLanguage = loadedLang;
         return true;
       }
     }
@@ -92,11 +95,12 @@ export class LanguageSelectorComponent implements OnInit {
 
     //Check for a default language
     let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
-    if (isNullOrUndefined(lang)) {
-      console.error('Error: no default language found');
-      return false;
+    if (!isNullOrUndefined(lang)) {
+      this.changeLanguage(lang);
+      return true;
     }
-    this.changeLanguage(lang);
-    return true;
+
+    console.error('Error: no default language found');
+    return false;
   }
 }
