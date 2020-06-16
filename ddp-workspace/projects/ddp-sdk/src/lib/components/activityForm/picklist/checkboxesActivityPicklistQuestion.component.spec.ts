@@ -2,12 +2,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
+import { TooltipComponent } from '../../tooltip.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
+import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
 
 describe('CheckboxesActivityPicklistQuestion', () => {
@@ -20,7 +23,8 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                 allowDetails: true,
                 detailLabel: '',
                 exclusive: true,
-                groupId: null
+                groupId: null,
+                tooltip: 'Helper text'
             }
         ],
         picklistGroups: [
@@ -33,7 +37,8 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         allowDetails: false,
                         detailLabel: '',
                         exclusive: false,
-                        groupId: 'category_1'
+                        groupId: 'category_1',
+                        tooltip: null
                     }
                 ]
             },
@@ -46,7 +51,8 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         allowDetails: false,
                         detailLabel: '',
                         exclusive: false,
-                        groupId: 'category_2'
+                        groupId: 'category_2',
+                        tooltip: null
                     }
                 ]
             }
@@ -67,7 +73,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         block = questionBlock;
         readonly = mode;
 
-        changed(value: any): void {}
+        changed(value: any): void { }
     }
 
     let component: CheckboxesActivityPicklistQuestion;
@@ -77,18 +83,28 @@ describe('CheckboxesActivityPicklistQuestion', () => {
     ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
         return of(['Singular Translation', 'Plural Translation']);
     });
+    const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
+    configServiceSpy.tooltipIconUrl.and.callFake(() => {
+        return '/path/';
+    });
+    
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,
                 MatCheckboxModule,
                 MatInputModule,
-                BrowserAnimationsModule
+                MatTooltipModule,
+                BrowserAnimationsModule,
+                TranslateTestingModule
             ],
-            providers: [{provide: NGXTranslateService, useValue: ngxTranslateServiceSpy}],
+            providers: [
+                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
+                { provide: 'ddp.config', useValue: configServiceSpy }],
             declarations: [
                 TestHostComponent,
-                CheckboxesActivityPicklistQuestion
+                CheckboxesActivityPicklistQuestion,
+                TooltipComponent
             ]
         }).compileComponents();
     }));
@@ -128,13 +144,18 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             // reinitialize answers after using somewhere else
             questionBlock.answer = null;
             component.block = questionBlock;
-
         });
 
         it('should render 3 checkboxes', () => {
             fixture.detectChanges();
             const count = debugElement.queryAll(By.css('mat-list-item'));
             expect(count.length).toBe(3);
+        });
+
+        it('should render 1 tooltip', () => {
+            fixture.detectChanges();
+            const count = debugElement.queryAll(By.css('ddp-tooltip'));
+            expect(count.length).toBe(1);
         });
 
         it('should show details field', () => {
@@ -150,6 +171,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             const field = debugElement.queryAll(By.css('mat-form-field'));
             expect(field.length).toBe(1);
         });
+
         it('should add detais text to answer', () => {
             fixture.detectChanges();
             component.optionChanged(true, questionBlock.picklistOptions[0]);
@@ -158,4 +180,3 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         });
     });
 });
-
