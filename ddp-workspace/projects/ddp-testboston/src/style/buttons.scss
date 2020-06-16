@@ -116,10 +116,25 @@
         }
     }
 
+    // download button 
+    &_download {
+        color: mat-color($app-theme, 100);
+        border: 1px solid mat-color($app-theme, 100);
+        font-size: 1rem;
+        line-height: 2.125rem;
+        padding: 0.2rem 0.8rem;
+    }
+
     &_small {
         padding: 0.2rem 0;
         font-size: 1.125rem;
         line-height: 2.125rem;
+    }
+
+    // activity new item button
+    &_new-item {
+        margin-bottom: 1.5rem;
+        padding: 0.3rem 1rem;
     }
 
     &__spinner {
