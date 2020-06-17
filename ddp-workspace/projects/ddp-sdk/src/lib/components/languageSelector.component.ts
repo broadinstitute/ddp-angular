@@ -1,9 +1,10 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Inject, Input, OnDestroy, OnInit } from "@angular/core";
 import { StudyLanguage } from "../models/studyLanguage";
 import { ConfigurationService } from "../services/configuration.service";
 import { LanguageService} from "../services/languageService.service";
 import { LanguageServiceAgent } from "../services/serviceAgents/languageServiceAgent.service";
 import { isNullOrUndefined } from "util";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'ddp-language-selector',
@@ -24,12 +25,13 @@ import { isNullOrUndefined } from "util";
     </div>
   `
 })
-export class LanguageSelectorComponent implements OnInit {
+export class LanguageSelectorComponent implements OnInit, OnDestroy {
   @Input() isScrolled: boolean;
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
-  private studyLanguages: Array<StudyLanguage>;
   public iconURL: string;
+  private studyLanguages: StudyLanguage[];
+  private anchor: Subscription;
 
   constructor (
     private serviceAgent: LanguageServiceAgent,
@@ -39,9 +41,8 @@ export class LanguageSelectorComponent implements OnInit {
 
   public ngOnInit(): void {
     this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : "assets/images/globe.svg#Language-Selector-3";
-    this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).subscribe(x => {
+    this.anchor = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).subscribe(x => {
       if (x) {
-        console.log('got configured languages: ' + JSON.stringify(x));
         //Only use language selector if multiple languages are configured!
         if (x.length > 1) {
           this.studyLanguages = x;
@@ -56,8 +57,12 @@ export class LanguageSelectorComponent implements OnInit {
     });
   }
 
-  private getUnselectedLanguages(): Array<StudyLanguage> {
-    if (this.studyLanguages !== null  && this.studyLanguages !== undefined) {
+  public ngOnDestroy(): void {
+    this.anchor.unsubscribe();
+  }
+
+  public getUnselectedLanguages(): Array<StudyLanguage> {
+    if (!isNullOrUndefined(this.studyLanguages)) {
       return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
     }
    return null;
