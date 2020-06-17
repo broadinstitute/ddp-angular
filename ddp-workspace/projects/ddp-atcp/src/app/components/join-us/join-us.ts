@@ -3,6 +3,7 @@ import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import {
   ActivityResponse,
+  Auth0AdapterService,
   CompositeDisposable,
   ConfigurationService,
   SessionMementoService,
@@ -23,8 +24,11 @@ import {
             <ddp-activity [studyGuid]="studyGuid"
                           [activityGuid]="instanceGuid"
                           (submit)="navigate($event)"
-                          (stickySubtitle)="showStickySubtitle($event)">
+                          (stickySubtitle)="showStickySubtitle($event)" #activity>
             </ddp-activity>
+            <div *ngIf="activity.isLoaded" class="helpHint align-center">
+              <a (click)="signIn()">Already registered? Sign In here</a>
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +51,8 @@ export class JoinUsComponent implements OnInit {
               private workflowBuilder: WorkflowBuilderService,
               private session: SessionMementoService,
               private temporaryUserService: TemporaryUserServiceAgent,
-              private workflow: WorkflowServiceAgent) {
+              private workflow: WorkflowServiceAgent,
+              private auth0: Auth0AdapterService) {
   }
 
   public ngOnInit(): void {
@@ -104,5 +109,9 @@ export class JoinUsComponent implements OnInit {
     } else {
       return response;
     }
+  }
+
+  public signIn(): void {
+    this.auth0.login();
   }
 }

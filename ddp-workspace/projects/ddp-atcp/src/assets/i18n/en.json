@@ -405,6 +405,7 @@
     }
   },
   "SDK": {
+    "JoinUsButton": "Join Us",
     "SubmitButton": "Submit",
     "SaveAndSubmit": "Save & Submit",
     "CloseButton": "Close",

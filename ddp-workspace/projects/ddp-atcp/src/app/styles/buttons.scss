@@ -109,6 +109,33 @@
   @include brc-blue-light;
 }
 
+.BtnFilled {
+  padding: 8px 20px 10px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  text-align: center;
+  transition: background .3s ease, color .3s ease;
+  color: #fff !important;
+  border: none;
+}
+
+.BtnFilled--blue {
+  margin-top: 15px;
+  background: $blue;
+  border: none;
+  outline: none;
+}
+
+.BtnFilled--blue:hover {
+  background: $blue-light;
+  border: none;
+}
+
+.BtnFilled--blue:active {
+  background: $blue-dark;
+  border: none;
+}
+
 .button {
   min-width: 100px;
   display: flex;
@@ -220,4 +247,11 @@
 
 .button_right {
   margin-left: auto !important;
+}
+.Btn-centered {
+  margin-left: 25%;
+}
+
+.Btn-wide {
+  width: 50%;
 }

@@ -125,7 +125,7 @@ hr {
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 10px 0;
 }
 
 .subtitle--light {
@@ -270,5 +270,18 @@ blockquote {
   &:hover {
     @include c-blue-light();
     text-decoration: none;
+  }
+}
+
+.helpHint {
+  font-size: 13px;
+  padding-top: 15px !important;
+  color: #4274bc;
+  font-style: italic !important;
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none !important;
   }
 }

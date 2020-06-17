@@ -134,7 +134,17 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                 <div *ngIf="model.lastUpdatedText" class="LastUpdatedText">
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
-                                <div *ngIf="!isStepped || isLastStep">
+                                <div *ngIf="model.activityCode ==='PREQUAL'">
+                                    <button *ngIf="!model.readonly && isLoaded" #submitButton
+                                            [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                            class="BtnFilled BtnFilled--blue Btn-centered Btn-wide"
+                                            (click)="flush()"
+                                            (mouseenter)="mouseEnterOnSubmit()"
+                                            [innerHTML]="(isPageBusy | async)
+                                                                    ? ('SDK.SavingButton' | translate) : ('SDK.JoinUsButton' | translate)">
+                                    </button>
+                                </div>
+                                <div *ngIf="(!isStepped || isLastStep) && model.activityCode !=='PREQUAL'">
                                     <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
