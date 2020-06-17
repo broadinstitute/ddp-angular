@@ -25,9 +25,9 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     <div class="sticky-block" [innerHTML]="model.subtitle"></div>
                 </div>
             </section>
-            <section *ngIf="model.title" class="section">
+            <section *ngIf="model.title" class="section header-section">
                 <div class="content content_tight">
-                    <h1 [innerHTML]="model.title"></h1>
+                    <h1 class="activity-header" [innerHTML]="model.title"></h1>
                 </div>
             </section>
         </ng-container>
@@ -55,17 +55,35 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
-                <!-- steps -->
-                <ng-container *ngIf="isStepped && showStepper">
+
+                <!-- simple steps -->
+                <ng-container *ngIf="isStepped && showStepper && !isAgree()">
                     <div class="activity-steps">
-                        <ng-container *ngFor="let section of model.sections; let i = index">
+                        <ng-container *ngFor="let section of model.sections; index as i">
                             <ng-container *ngIf="section.visible">
                                 <p class="activity-step no-margin big bold"
-                                    (click)="jumpStep(i)"
-                                    [class.active]="isActive(i)"
-                                    [class.completed]="isCompleted(i)">
-                                    {{section.name}}
+                                   (click)="jumpStep(i)"
+                                   [class.active]="isActive(i)"
+                                   [class.completed]="isCompleted(i)">
+                                   {{section.name}}
                                 </p>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <!-- steps with circle -->
+                <ng-container *ngIf="isStepped && showStepper && isAgree()">
+                    <div class="activity-steps">
+                        <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
+                            <ng-container *ngIf="section.visible">
+                                <div class="activity-step"
+                                     (click)="jumpStep(i)"
+                                     [class.active]="isActive(i)"
+                                     [class.completed]="isCompleted(i)">
+                                     <span class="activity-step__number">{{i + 1}}</span>
+                                     <span class="activity-step__text">{{section.name}}</span>
+                                </div>
+                                <div *ngIf="!isLastStep" class="activity-steps__divider"></div>
                             </ng-container>
                         </ng-container>
                     </div>
@@ -103,9 +121,9 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                     </ng-container>
 
                     <ng-container *ngIf="model.lastUpdatedText">
-                        <span>{{model.lastUpdatedText}} </span>
+                        <span class="last-updated">{{model.lastUpdatedText}} </span>
                     </ng-container>
-                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded}">
+                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
                         <ng-container *ngIf="isLoaded && isStepped">
                             <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -120,8 +138,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && !isAgree() && isLoaded">
-                            <button *ngIf="!model.readonly" #submitButton
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded">
+                            <button *ngIf="!model.readonly && !isAgree()" #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_primary button_right"
                                     (click)="flush()"
@@ -134,7 +152,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded">
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly">
                             <button class="button button_medium button_warn"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     (click)="close()">
@@ -177,6 +195,6 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public isAgree(): boolean {
-        return this.model.activityCode === 'CONSENT' && this.agreeConsent && !this.model.readonly;
+        return this.model.formType === 'CONSENT' && this.agreeConsent;
     }
 }
