@@ -442,6 +442,7 @@
                 "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
-        }
+        },
+        "TooltipAlt": "Information"
     }
 }

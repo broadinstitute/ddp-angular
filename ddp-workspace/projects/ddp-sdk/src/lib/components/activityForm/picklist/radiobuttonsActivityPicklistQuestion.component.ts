@@ -18,6 +18,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                             [disableRipple]="true"
                             (change)="optionChanged(option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
                     {{option.optionLabel}}
+                    <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
                 </mat-radio-button>
                 <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
                     <mat-form-field>

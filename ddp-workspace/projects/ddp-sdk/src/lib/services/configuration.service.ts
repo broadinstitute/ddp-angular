@@ -32,4 +32,5 @@ export class ConfigurationService {
     // if dashboardShowQuestionCount is true, exclude activity guids listed here from showing
     // their question count
     dashboardShowQuestionCountExceptions: string[] = [];
+    tooltipIconUrl: string = '';
 }
