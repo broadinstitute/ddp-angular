@@ -7,7 +7,9 @@ import {
   showModal,
   hideModal,
   onActivateResetPasssword,
-  prepareUiElements
+  prepareUiElements,
+  showTooltip,
+  hideTooltip
 } from './ui-actions';
 import { createAuth0 } from './auth';
 import { configs, createForm } from './forms';
@@ -137,5 +139,9 @@ if (!isResetPasswordPage) {
   // open password reset form
   onActivateResetPasssword();
 }
+
+const helpLinks = document.getElementsByClassName("FormItem-help");
+Array.from(helpLinks).forEach(x => x.addEventListener("mouseenter", () => showTooltip(x)));
+Array.from(helpLinks).forEach(x => x.addEventListener("mouseleave", () => hideTooltip(x)));
 
 export const api = null;

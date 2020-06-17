@@ -53,3 +53,6 @@ export const prepareUiElements = (url: string): void => {
     $el.attr('href', url + $el.attr('href'));
   });
 };
+
+export const showTooltip = (x) => x.parentElement.getElementsByClassName("tooltip")[0].classList.add("in");
+export const hideTooltip = (x) => x.parentElement.getElementsByClassName("tooltip")[0].classList.remove("in");

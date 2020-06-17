@@ -30,45 +30,12 @@ b {
   color: #DB2C2C !important;
 }
 
-.tooltip {
-  position: absolute;
-  z-index: 1070;
-  display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: normal;
-  line-break: auto;
-  line-height: 1.5;
-  text-align: left;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  white-space: normal;
-  word-break: normal;
-  word-spacing: normal;
-  word-wrap: normal;
-  font-size: 12px;
-  opacity: 0;
-}
-
-.tooltip.right.in {
+.tooltip.right {
   top: -44px;
   left: 100%;
   display: block;
   margin-left: 3px;
   padding: 0 5px;
-}
-
-.fade {
-  opacity: 0;
-  -webkit-transition: opacity 0.15s linear;
-  -o-transition: opacity 0.15s linear;
-  transition: opacity 0.15s linear;
-}
-
-.fade.in {
-  opacity: 1;
 }
 
 .tooltip-inner {
@@ -187,27 +154,33 @@ b {
   margin-top: 15px;
   background: #4274bc;
   border: none;
+  outline: none;
 }
 
 .BtnFilled--blue:hover {
-  background: #559be0
+  background: #559be0;
+  border: none;
 }
 
 .BtnFilled--blue:active {
-  background: #346391
+  background: #346391;
+  border: none;
 }
 
 .BtnFilled--red {
-  margin-top: 15px;
-  background: #db2c2c
+  display: inline-block;
+  background: #db2c2c;
+  text-decoration: none;
 }
 
 .BtnFilled--red:hover {
-  background: #559be0
+  background: #559be0;
+  text-decoration: none;
 }
 
 .BtnFilled--red:active {
-  background: #db2c2c
+  background: #db2c2c;
+  text-decoration: none;
 }
 
 .SignHelp {
@@ -284,17 +257,17 @@ b {
   flex-direction: column;
   min-height: 100vh;
 }
-.main-offset {
+.main-offset.visible {
   margin: 45px 25px 0 25px;
 }
 @media only screen and (min-width: 800px) {
-  .main-offset {
+  .main-offset.visible {
     margin: 45px 40px 0 40px;
   }
 }
 
 @media only screen and (min-width: 1280px) {
-  .main-offset {
+  .main-offset.visible {
     margin: 45px 50px 0 50px;
   }
 }
@@ -330,6 +303,19 @@ b {
   justify-content: space-between;
   position: relative;
   flex-wrap: wrap;
+}
+
+.FormItem-help {
+  color: #559BE0;
+  font-size: 12px;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.FormItem-help:hover,
+.FormItem-help:focus,
+.FormItem-help:active {
+  text-decoration: none;
 }
 
 body, html {
