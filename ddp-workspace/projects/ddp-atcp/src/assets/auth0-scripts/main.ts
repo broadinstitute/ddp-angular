@@ -29,7 +29,7 @@ if (authLoc === -1) {
   baseUrl = config.callbackURL.substring(0, authLoc);
 }
 let dictionary;
-const translator = translatorCreator(!isResetPasswordPage ? config(baseUrl) : config[3], (loadedDictionary: any) => {
+const translator = translatorCreator(!isResetPasswordPage ? baseUrl : config[3], (loadedDictionary: any) => {
   dictionary = loadedDictionary;
 });
 
