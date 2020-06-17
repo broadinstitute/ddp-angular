@@ -142,6 +142,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ScriptLoaderService } from './services/scriptLoader.service';
 import { AddressService } from './services/address.service';
@@ -158,6 +159,7 @@ import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAu
 import { ConditionalBlockComponent } from './components/activityForm/conditionalBlock.component';
 import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
+import { TooltipComponent } from './components/tooltip.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
@@ -214,6 +216,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MatGridListModule,
     MatStepperModule,
     MatAutocompleteModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -341,7 +344,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AddressGoogleAutocompleteDirective,
     RouteTransformerDirective,
     InvitationCodeFormatterDirective,
-    InvitationPipe
+    InvitationPipe,
+    TooltipComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -400,7 +404,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     RouteTransformerDirective,
     UpperCaseInputDirective,
     InvitationCodeFormatterDirective,
-    InvitationPipe
+    InvitationPipe,
+    TooltipComponent
   ],
   entryComponents: [
     UserPreferencesComponent,

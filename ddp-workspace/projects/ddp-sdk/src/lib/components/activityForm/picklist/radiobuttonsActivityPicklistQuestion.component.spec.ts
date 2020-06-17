@@ -1,73 +1,48 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
+import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 import { TooltipComponent } from '../../tooltip.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
 
-describe('CheckboxesActivityPicklistQuestion', () => {
+describe('RadioButtonsActivityPicklistQuestion', () => {
     const questionBlock = {
         picklistLabel: '',
         picklistOptions: [
             {
                 stableId: 'AAA',
-                optionLabel: 'I have not received any medications',
+                optionLabel: 'I have received medications',
                 allowDetails: true,
                 detailLabel: '',
-                exclusive: true,
-                groupId: null,
                 tooltip: 'Helper text'
-            }
-        ],
-        picklistGroups: [
-            {
-                name: 'Category 01',
-                options: [
-                    {
-                        stableId: 'BBB',
-                        optionLabel: 'letrozole (Femara)',
-                        allowDetails: false,
-                        detailLabel: '',
-                        exclusive: false,
-                        groupId: 'category_1',
-                        tooltip: null
-                    }
-                ]
             },
             {
-                name: 'Category 02',
-                options: [
-                    {
-                        stableId: 'CCC',
-                        optionLabel: 'doxorubicin (adriamycin)',
-                        allowDetails: false,
-                        detailLabel: '',
-                        exclusive: false,
-                        groupId: 'category_2',
-                        tooltip: null
-                    }
-                ]
+                stableId: 'BBB',
+                optionLabel: 'I have not received any medications',
+                allowDetails: false,
+                detailLabel: '',
+                tooltip: null
             }
         ],
-        renderMode: 'CHECKBOX_LIST',
-        selectMode: 'MULTIPLE'
+        renderMode: 'LIST',
+        selectMode: 'SINGLE'
     } as ActivityPicklistQuestionBlock;
     const mode = false;
 
     @Component({
         template: `
-        <ddp-activity-checkboxes-picklist-question [block]="block"
-                                                   [readonly]="readonly"
-                                                   (valueChanged)="changed($event)">
-        </ddp-activity-checkboxes-picklist-question>`
+        <ddp-activity-radiobuttons-picklist-question [block]="block"
+                                                     [readonly]="readonly"
+                                                     (valueChanged)="changed($event)">
+        </ddp-activity-radiobuttons-picklist-question>`
     })
     class TestHostComponent {
         block = questionBlock;
@@ -76,8 +51,8 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         changed(value: any): void { }
     }
 
-    let component: CheckboxesActivityPicklistQuestion;
-    let fixture: ComponentFixture<CheckboxesActivityPicklistQuestion>;
+    let component: RadioButtonsActivityPicklistQuestion;
+    let fixture: ComponentFixture<RadioButtonsActivityPicklistQuestion>;
     let debugElement: DebugElement;
     const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
     ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
@@ -92,7 +67,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,
-                MatCheckboxModule,
+                MatRadioModule,
                 MatInputModule,
                 MatTooltipModule,
                 BrowserAnimationsModule,
@@ -103,7 +78,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                 { provide: 'ddp.config', useValue: configServiceSpy }],
             declarations: [
                 TestHostComponent,
-                CheckboxesActivityPicklistQuestion,
+                RadioButtonsActivityPicklistQuestion,
                 TooltipComponent
             ]
         }).compileComponents();
@@ -111,7 +86,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
     describe('test as a class', () => {
         beforeEach(() => {
-            fixture = TestBed.createComponent(CheckboxesActivityPicklistQuestion);
+            fixture = TestBed.createComponent(RadioButtonsActivityPicklistQuestion);
             component = fixture.componentInstance;
             debugElement = fixture.debugElement;
             component.block = questionBlock;
@@ -126,19 +101,19 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should emit valueChanged event', () => {
             const value = spyOn(component.valueChanged, 'emit');
-            component.optionChanged(true, questionBlock.picklistOptions[0]);
+            component.optionChanged(questionBlock.picklistOptions[0]);
             expect(value).toHaveBeenCalledTimes(1);
         });
 
         it('should emit answer', () => {
-            component.optionChanged(true, questionBlock.picklistOptions[0]);
+            component.optionChanged(questionBlock.picklistOptions[0]);
             expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: null }]);
         });
     });
 
     describe('stand alone testing', () => {
         beforeEach(() => {
-            fixture = TestBed.createComponent(CheckboxesActivityPicklistQuestion);
+            fixture = TestBed.createComponent(RadioButtonsActivityPicklistQuestion);
             component = fixture.componentInstance;
             debugElement = fixture.debugElement;
             // reinitialize answers after using somewhere else
@@ -146,10 +121,10 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             component.block = questionBlock;
         });
 
-        it('should render 3 checkboxes', () => {
+        it('should render 2 radiobuttons', () => {
             fixture.detectChanges();
-            const count = debugElement.queryAll(By.css('mat-list-item'));
-            expect(count.length).toBe(3);
+            const count = debugElement.queryAll(By.css('mat-radio-button'));
+            expect(count.length).toBe(2);
         });
 
         it('should render 1 tooltip', () => {
@@ -160,13 +135,9 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should show details field', () => {
             fixture.detectChanges();
-            const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
-            // NB: this is how you get at the thing you can click!
-            // Figured it out from:
-            // https://github.com/angular/components/blob/106d274ef99533779ff8674597e844308a95131f/src/lib/checkbox/checkbox.spec.ts
-            const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
+            const radioButton = debugElement.queryAll(By.css('mat-radio-button'))[0];
+            const inputElement = radioButton.nativeElement.querySelector('input') as HTMLInputElement;
             inputElement.click();
-
             fixture.detectChanges();
             const field = debugElement.queryAll(By.css('mat-form-field'));
             expect(field.length).toBe(1);
@@ -174,7 +145,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should add detais text to answer', () => {
             fixture.detectChanges();
-            component.optionChanged(true, questionBlock.picklistOptions[0]);
+            component.optionChanged(questionBlock.picklistOptions[0]);
             component.detailTextChanged('Text', 'AAA');
             expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: 'Text' }]);
         });

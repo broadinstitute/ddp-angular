@@ -161,3 +161,16 @@ mat-error,
         padding: 0 1rem;
     }
 }
+
+.tooltip {
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+    margin-left: 3px;
+
+    &__icon {
+        height: 24px;
+        width: 24px;
+        cursor: pointer;
+    }
+}
