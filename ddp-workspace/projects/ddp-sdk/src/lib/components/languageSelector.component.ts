@@ -12,7 +12,7 @@ import { Subscription } from "rxjs";
     <div [hidden]="!loaded">
       <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
         <svg class="ddp-globe" height="24px" width="24px">
-          <title id="title" [lang]="currentLanguage.languageCode" translate>Toolkit.Header.LanguageSelection</title>
+          <title id="title" [lang]="currentLanguage.languageCode" translate>SDK.LanguageSelector.LanguageSelection</title>
           <use [attr.href]="iconURL"></use>
         </svg>
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>

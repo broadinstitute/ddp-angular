@@ -14,8 +14,7 @@
         "Header": {
             "HeaderLogo": "Prion<br>Registry",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in",
-            "LanguageSelection": "language selection"
+            "CountMeIn": "count me in"
         },
         "Footer": {
             "FooterLogo": "Prion<br>Registry",
@@ -231,6 +230,9 @@
         "SignInOut": {
             "SignIn": "Sign In",
             "SignOut": "Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
         },
         "UserActivities": {
             "ActivityName": "Form",
