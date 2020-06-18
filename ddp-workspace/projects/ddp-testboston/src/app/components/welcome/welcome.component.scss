@@ -89,6 +89,10 @@
         line-height: 2.25rem;
         color: mat-color($app-theme, 400);
     }
+
+    &__help {
+        margin-top: 2.5rem;
+    }
 }
 
 .team-block {
