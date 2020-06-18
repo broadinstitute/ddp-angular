@@ -15,6 +15,7 @@
 
   &:visited, &:active {
     background-color: #ffffff !important;
+    text-decoration: none;
   }
 
   &:hover, &:focus {
@@ -26,27 +27,48 @@
       margin-top: 15px;
       @include brc-blue($important: '!important');
       @include c-blue($important: '!important');
+      text-decoration: none;
     }
 
     &:hover {
       @include brc-blue($important: '!important');
       @include c-blue($important: '!important');
       background-color: transparent !important;
+      text-decoration: none;
     }
   }
 
   &.green, &.green:focus, &.green:active {
-    //margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 100px;
     border-color: #7BA946 !important;
     color: #7BA946 !important;
+    text-decoration: none;
+
     &:hover {
       @include c-blue($important: '!important');
       @include brc-blue($important: '!important');
       background-color: transparent !important;
+      text-decoration: none;
+    }
+  }
+
+  &.green-lightBlue, &.green-lightBlue:focus, &.green-lightBlue:active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    border-color: #7BA946 !important;
+    color: #7BA946 !important;
+    text-decoration: none;
+
+    &.green-lightBlue:hover {
+      @include c-blue-light($important: '!important');
+      @include brc-blue-light($important: '!important');
+      background-color: transparent !important;
+      text-decoration: none;
     }
   }
 
@@ -68,11 +90,13 @@
     color: #FFFFFF !important;
     margin-top: 25px;
     border-color: #FFFFFF !important;
+    text-decoration: none;
 
     &:hover {
       border-color: #93C453 !important;
       color: #93C453 !important;
       background-color: transparent !important;
+      text-decoration: none;
     }
   }
 }

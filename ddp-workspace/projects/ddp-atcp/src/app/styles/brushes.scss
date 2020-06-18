@@ -37,8 +37,8 @@ html, body {
   color: $yellow;
 }
 
-@mixin c-blue-light() {
-  color: $blue-light;
+@mixin c-blue-light($important: '') {
+  color: $blue-light unquote($important);
 }
 
 @mixin c-neutral-gray {
