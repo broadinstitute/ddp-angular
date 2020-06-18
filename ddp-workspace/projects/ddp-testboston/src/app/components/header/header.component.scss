@@ -13,6 +13,10 @@
         box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
         transition: all ease 0.5s;
     }
+
+    &_crc {
+        background-color: mat-color($app-theme, 3700);
+    }
 }
 
 .header-content {
@@ -31,6 +35,16 @@
 
     &__img {
         height: 2.1875rem;
+    }
+
+    &_crc {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: mat-color($app-theme, 1300);
+        font-size: 1.125rem;
+        font-weight: 600;
+        text-decoration: none;
     }
 }
 

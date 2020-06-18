@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
+<header *ngIf="!isAdmin" class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
@@ -138,3 +138,14 @@
     </div>
 </ng-template>
 <!-- replace with real language selector component when when it is done -->
+
+<header *ngIf="isAdmin" class="header header_crc" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
+    <div class="header-content">
+        <a class="project-logo project-logo_crc" routerLink="/">
+            <img class="project-logo__img" src="assets/images/logo-testboston.png"
+                [alt]="'Navigation.LogoAlt' | translate">
+            <span translate>Navigation.CRCLogoSubtitle</span>
+        </a>
+        <ddp-sign-in-out></ddp-sign-in-out>
+    </div>
+</header>
