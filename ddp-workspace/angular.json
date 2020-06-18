@@ -212,16 +212,16 @@
       }
     },
     "ddp-atcp-auth": {
-      "root": "projects/ddp-atcp/src/assets/auth0-scripts",
-      "sourceRoot": "projects/ddp-atcp/src/assets/auth0-scripts",
+      "root": "projects/ddp-atcp/src/auth0/auth0-scripts",
+      "sourceRoot": "projects/ddp-atcp/src/auth0/auth0-scripts",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ddp-atcp/src/assets/auth0-scripts/tsconfig.lib.json",
-            "project": "projects/ddp-atcp/src/assets/auth0-scripts/ng-package.json"
+            "tsConfig": "projects/ddp-atcp/src/auth0/auth0-scripts/tsconfig.lib.json",
+            "project": "projects/ddp-atcp/src/auth0/auth0-scripts/ng-package.json"
           }
         }
       }
@@ -255,6 +255,17 @@
                 "glob": "pepperConfig.js",
                 "input": "projects/ddp-atcp/output-config/",
                 "output": "assets/config"
+              },
+              {
+                "glob": "ddp-atcp-auth.umd.js",
+                "input": "projects/ddp-atcp/src/auth0/compiled/auth0-scripts/bundles/",
+                "output": "assets/auth0-scripts/bundles/"
+              },
+              {
+                "glob": "main.css",
+                "input": "projects/ddp-atcp/src/auth0/compiled/auth0-styles/",
+                "output": "assets/auth0-styles",
+
               }
             ],
             "styles": [
