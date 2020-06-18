@@ -16,8 +16,7 @@
             "HeaderLogo": "Angiosarcoma<br>Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in",
-            "LanguageSelection": "language selection"
+            "CountMeIn": "count me in"
         },
         "Footer": {
             "FooterLogo": "Angiosarcoma<br>Project",
@@ -478,6 +477,9 @@
         "SignInOut": {
             "SignIn": "Sign In",
             "SignOut": "Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
         },
         "UserActivities": {
             "ActivityName": "Form",

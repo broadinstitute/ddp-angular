@@ -14,8 +14,7 @@
         "Header": {
             "HeaderLogo": "Brain<br>Cancer<br>Project",
             "LearnMore": "Learn More",
-            "CountMeIn": "count me in",
-            "LanguageSelection": "language selection"
+            "CountMeIn": "count me in"
         },
         "Footer": {
             "FooterLogo": "Brain<br>Cancer<br>Project",
@@ -483,6 +482,9 @@
         "SignInOut": {
             "SignIn": "Sign In",
             "SignOut": "Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
         },
         "UserActivities": {
             "ActivityName": "Form",
