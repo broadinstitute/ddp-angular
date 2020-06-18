@@ -37,6 +37,11 @@
         height: 1.25rem;
         margin-right: 0.5rem;
     }
+
+    &__text {
+        font-weight: 400;
+        margin-bottom: 0;
+    }
 }
 
 @media only screen and (max-width: 520px) {
