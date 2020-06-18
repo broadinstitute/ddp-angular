@@ -64,6 +64,16 @@
     }
 }
 
+.faq-panel-list {
+    margin: 0;
+    padding: 0;
+
+    &__item {
+        margin: 0.7rem 0;
+        padding: 0.3rem 0;
+    }
+}
+
 .question-section {
     background-color: mat-color($app-theme, 3200);
 }
