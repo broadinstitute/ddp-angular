@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { SessionMementoService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { ScrollerService } from '../../services/scroller.service';
@@ -16,6 +17,7 @@ export class FooterComponent implements OnInit {
   public appRoutes = AppRoutes;
 
   constructor(
+    private session: SessionMementoService,
     private scrollerService: ScrollerService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
@@ -24,6 +26,10 @@ export class FooterComponent implements OnInit {
     this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
+  }
+
+  public get isAdmin(): boolean {
+    return this.session.isAuthenticatedAdminSession();
   }
 
   public scrollToAnchor(anchor: string): void {
