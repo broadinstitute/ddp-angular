@@ -62,7 +62,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
     configServiceSpy.tooltipIconUrl.and.callFake(() => {
         return '/path/';
     });
-    
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -75,7 +75,8 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
-                { provide: 'ddp.config', useValue: configServiceSpy }],
+                { provide: 'ddp.config', useValue: configServiceSpy }
+            ],
             declarations: [
                 TestHostComponent,
                 RadioButtonsActivityPicklistQuestion,
