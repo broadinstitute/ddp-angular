@@ -45,7 +45,7 @@
     padding: 0;
 
     &__item {
-        margin-right: 2.8125rem;
+        margin-right: 1.8rem;
         display: flex;
         color: mat-color($app-theme, 1300);
     }
@@ -60,6 +60,10 @@
     line-height: 2.0625rem;
     white-space: nowrap;
     color: mat-color($app-theme, 1300);
+}
+
+.header-link__icon {
+    padding-right: 0.3rem;
 }
 
 .header-link:link,
@@ -175,6 +179,10 @@
             font-size: 1.875rem;
             line-height: 2.25rem;
         }
+
+        .header-link__icon {
+            padding-right: 0.3rem;
+        }
     }
 }
 
@@ -182,7 +190,7 @@
 
     .auth__dashboard,
     .navigation__item {
-        margin-right: 2rem;
+        margin-right: 1.5rem;
     }
 }
 
@@ -190,7 +198,7 @@
 
     .auth__dashboard,
     .navigation__item {
-        margin-right: 2rem;
+        margin-right: 1.5rem;
     }
 
     .nav {
