@@ -42,7 +42,7 @@
                             </ng-container>
                             <ul class="faq-panel-list" *ngIf="item.Bullets && item.Bullets.length > 0">
                                 <li class="faq-panel-list__item" *ngFor="let bullet of item.Bullets">
-                                    <span class="question-block__text" [innerHTML]="bullet | translate"></span>
+                                    <span class="question-block__text" [innerHTML]="bullet"></span>
                                 </li>
                             </ul>
                         </ng-template>
