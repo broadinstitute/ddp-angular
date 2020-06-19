@@ -305,6 +305,36 @@ a:focus {
     color: mat-color($app-theme, 600);
 }
 
+.SimpleButton .ddp-globe {
+    stroke: mat-color($app-theme, 100);
+    fill: transparent;
+    vertical-align: middle;
+    transition: stroke 0.3s ease;
+}
+
+.SimpleButton--Scrolled .ddp-globe {
+    stroke: mat-color($app-theme, 600);
+    fill: transparent;
+}
+
+.SimpleButton:hover .ddp-globe {
+    stroke: mat-color($app-theme, 700);
+    fill: transparent;
+}
+
+.SimpleButton:active .ddp-globe {
+    stroke: mat-color($app-theme, 600);
+    fill: transparent;
+}
+
+.ddp-current-language {
+    vertical-align: middle;
+}
+
+mat-icon.ddp-dropdown-arrow {
+    vertical-align: middle;
+}
+
 // Footer
 .Footer {
     position: absolute;
