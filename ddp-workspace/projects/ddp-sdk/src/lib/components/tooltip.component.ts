@@ -8,7 +8,10 @@ import { ConfigurationService } from '../services/configuration.service';
              [src]="icon" 
              [alt]="'SDK.TooltipAlt' | translate"
              [matTooltip]="text"
-             [matTooltipPosition]="position">`
+             matTooltipClass="tooltip__box"
+             [matTooltipPosition]="position"
+             (click)="tooltip.toggle()"
+             #tooltip="matTooltip">`
 })
 export class TooltipComponent {
     @Input() icon = this.config.tooltipIconUrl;
