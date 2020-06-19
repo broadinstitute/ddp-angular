@@ -50,7 +50,7 @@
                     <li>
                         <ddp-sign-in-out></ddp-sign-in-out>
                     </li>
-                    <li>
+                    <li *ngIf="!isAuthenticated">
                         <a class="Link footer-link" [routerLink]="'/' + appRoutes.Join"
                             routerLinkActive="footer-link_active" translate>Navigation.Invitation</a>
                     </li>

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { SessionMementoService } from 'ddp-sdk';
 import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 
@@ -15,6 +16,7 @@ export class WelcomeComponent implements OnInit {
   public appRoutes = AppRoutes;
 
   constructor(
+    private session: SessionMementoService,
     private headerConfig: HeaderConfigurationService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
@@ -24,5 +26,9 @@ export class WelcomeComponent implements OnInit {
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
     this.headerConfig.setupDefaultHeader();
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession() || this.session.isAuthenticatedAdminSession();
   }
 }
