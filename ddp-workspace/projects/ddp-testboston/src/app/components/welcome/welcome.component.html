@@ -3,7 +3,7 @@
         <div class="content intro-block">
             <h1 class="intro-block__title semi-bold center" translate>HomePage.IntroSection.Title</h1>
             <p class="intro-block__text" translate>HomePage.IntroSection.Text</p>
-            <div class="invitation">
+            <div *ngIf="!isAuthenticated" class="invitation">
                 <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
                     translate>HomePage.IntroSection.Code</a>
                 <a class="button button_simple button_underline" routerLink="/" fragment="stay-informed"

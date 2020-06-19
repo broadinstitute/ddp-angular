@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { SessionMementoService } from 'ddp-sdk';
 import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { ScrollerService } from '../../services/scroller.service';
@@ -16,6 +17,7 @@ export class WelcomeComponent implements OnInit {
   public appRoutes = AppRoutes;
 
   constructor(
+    private session: SessionMementoService,
     private scrollerService: ScrollerService,
     private headerConfig: HeaderConfigurationService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
@@ -28,6 +30,10 @@ export class WelcomeComponent implements OnInit {
     this.headerConfig.setupDefaultHeader();
   }
 
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession() || this.session.isAuthenticatedAdminSession();
+  }
+  
   public scrollToAnchor(anchor: string): void {
     this.scrollerService.scrollToAnchor(anchor);
   }
