@@ -29,15 +29,19 @@
                         Navigation.StayInformed
                     </a>
                 </li>
-                <li class="navigation__item">
+                <!-- <li class="navigation__item">
                     <a class="header-link" href="kit-instructions.pdf" download translate>
                         <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
                         Navigation.KitInstructions
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <div class="auth">
+            <a class="header-link auth__dashboard" href="kit-instructions.pdf" download translate>
+                <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
+                Navigation.KitInstructions
+            </a>
             <div class="auth__dashboard" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </div>

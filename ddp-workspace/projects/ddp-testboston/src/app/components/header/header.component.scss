@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     height: 6.75rem;
-    max-width: 1350px;
+    max-width: 1450px;
     margin: auto;
     padding: 0 1.5625rem;
 }
@@ -36,7 +36,7 @@
 
 .nav {
     width: 100%;
-    margin-left: 4.7rem;
+    margin-left: 1.8rem;
 }
 
 .navigation {
@@ -60,10 +60,10 @@
     line-height: 2.0625rem;
     white-space: nowrap;
     color: mat-color($app-theme, 1300);
-}
 
-.header-link__icon {
-    padding-right: 0.3rem;
+    &__icon {
+        margin-right: 0.2rem;
+    }
 }
 
 .header-link:link,
@@ -102,7 +102,7 @@
     align-items: center;
 
     &__dashboard {
-        margin-right: 2.8125rem;
+        margin-right: 1.8rem;
     }
 }
 
@@ -186,6 +186,16 @@
     }
 }
 
+@media only screen and (max-width: 1400px) {
+    .navigation {
+        display: none;
+    }
+
+    .menu-button {
+        display: unset;
+    }
+}
+
 @media only screen and (max-width: 1370px) {
 
     .auth__dashboard,
@@ -206,17 +216,7 @@
     }
 }
 
-@media only screen and (max-width: 1260px) {
-    .navigation {
-        display: none;
-    }
-
-    .menu-button {
-        display: unset;
-    }
-}
-
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 900px) {
     .project-logo {
         &__img {
             height: 1.8rem;
@@ -228,6 +228,7 @@
         display: none;
     }
 
+    .header-link__icon,
     .dashboard-icon {
         height: 26px;
         width: 26px;
@@ -267,7 +268,7 @@
         padding: 0 0 0 1rem;
 
         &__item {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .header-link {
@@ -276,6 +277,7 @@
         }
     }
 
+    .header-link__icon,
     .dashboard-icon {
         height: 22px;
         width: 22px;
@@ -294,6 +296,12 @@
     }
 
     // replace with real language selector component styles when when it is done
+}
+
+@media only screen and (max-width: 321px) {
+    .overlay-content {
+        margin-top: 6.5rem;
+    }
 }
 
 // replace with real language selector component when styles when it is done
