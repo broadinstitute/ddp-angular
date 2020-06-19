@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
@@ -81,7 +81,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     }
     `]
 })
-export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQuestion {
+export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
     /**
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
      */
@@ -93,6 +93,10 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
 
     constructor(private translate: NGXTranslateService) {
         super(translate);
+    }
+
+    public ngOnInit(): void {
+        this.exclusiveChosen = this.hasSelectedExclusiveOption();
     }
 
     public setDetailText(id: string): string | null {
