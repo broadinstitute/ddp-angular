@@ -149,7 +149,7 @@
                 {
                     "Question": "Can my family join TestBoston?",
                     "Paragraphs": [
-                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"/#stay-informed\">join the TestBoston mailing list</a>."
+                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
                     ]
                 },
                 {
@@ -176,7 +176,7 @@
                     "Paragraphs": [],
                     "Bullets": [
                         "<strong>The US Centers for Disease Control and Prevention (CDC):</strong> The CDC has assembled a <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">Coronavirus homepage</a> with a number of resources to learn about COVID-19 symptoms, how to protect yourself, and the most up to date national policies.",
-                        "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
+                        "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold Link_wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
                         "<strong>Massachusetts residents:</strong> The Massachusetts Department of Public Health (DPH) Hotline can be reached at <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> or at <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 hours per day, 7 days per week. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
                         "<strong>Boston residents:</strong> Find reliable information at the Boston Public Health Commission, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
                     ]
