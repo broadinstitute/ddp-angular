@@ -34,7 +34,6 @@ export class ActivityComponent implements OnInit {
             this.id = x.id;
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
     }
 
     public navigate(response: ActivityResponse): void {
