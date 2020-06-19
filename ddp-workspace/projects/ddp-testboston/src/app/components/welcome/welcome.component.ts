@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
+import { ScrollerService } from '../../services/scroller.service';
 
 @Component({
   selector: 'app-welcome',
@@ -15,6 +16,7 @@ export class WelcomeComponent implements OnInit {
   public appRoutes = AppRoutes;
 
   constructor(
+    private scrollerService: ScrollerService,
     private headerConfig: HeaderConfigurationService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
@@ -24,5 +26,9 @@ export class WelcomeComponent implements OnInit {
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
     this.headerConfig.setupDefaultHeader();
+  }
+
+  public scrollToAnchor(anchor: string): void {
+    this.scrollerService.scrollToAnchor(anchor);
   }
 }
