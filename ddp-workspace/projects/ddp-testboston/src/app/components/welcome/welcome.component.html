@@ -7,7 +7,7 @@
                 <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
                     translate>HomePage.IntroSection.Code</a>
                 <a class="button button_simple button_underline" routerLink="/" fragment="stay-informed"
-                    translate>HomePage.IntroSection.NoCode</a>
+                    (click)="scrollToAnchor('stay-informed')" translate>HomePage.IntroSection.NoCode</a>
             </div>
         </div>
     </section>
