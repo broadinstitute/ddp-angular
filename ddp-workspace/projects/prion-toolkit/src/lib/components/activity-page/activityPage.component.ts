@@ -32,7 +32,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     @Output() submit: EventEmitter<void> = new EventEmitter();
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
-    public useRedesign: boolean;
+    public stickySubtitle: string;
     private activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
@@ -92,7 +92,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.useRedesign = this.toolkitConfiguration.enableRedesign;
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
