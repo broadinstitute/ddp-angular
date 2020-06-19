@@ -21,6 +21,10 @@ body {
     color: mat-color($app-theme, 700);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
     overflow-y: scroll;
@@ -94,7 +98,7 @@ li {
     max-width: 700px;
 
     &_wide {
-        max-width: 1350px;
+        max-width: 1450px;
     }
 }
 
@@ -117,6 +121,10 @@ li {
 
     &_bold {
         font-weight: 700;
+    }
+
+    &_no-wrap {
+        white-space: initial;
     }
 
     &_semi-bold {

@@ -32,6 +32,10 @@
             </ul>
         </nav>
         <div class="auth">
+            <a class="header-link auth__dashboard" href="kit-instructions.pdf" download translate>
+                <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
+                Navigation.KitInstructions
+            </a>
             <div class="auth__dashboard" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </div>
@@ -87,6 +91,12 @@
                 </li>
             </ng-container>
             <div class="menu_mobile-buttons">
+                <li class="menu__item">
+                    <a class="header-link" href="kit-instructions.pdf" download translate>
+                        <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
+                        Navigation.KitInstructions
+                    </a>
+                </li>
                 <li class="menu__item" *ngIf="isAuthenticated">
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
