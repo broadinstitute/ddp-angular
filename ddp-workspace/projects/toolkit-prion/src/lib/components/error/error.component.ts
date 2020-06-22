@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
+import { ErrorComponent, ToolkitConfigurationService } from "toolkit";
 
 @Component({
   selector: 'toolkit-error',
@@ -10,7 +10,6 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
     <div class="PageLayout">
       <div class="row NoMargin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <!--TODO: Implement the error page-->
         <h1 translate>
               Toolkit.ErrorPage.Title
             </h1>
@@ -36,17 +35,19 @@ import { ToolkitConfigurationService } from './../../services/toolkitConfigurati
 </div>
   `
 })
-export class ErrorComponent implements OnInit {
+export class PrionErrorComponent extends ErrorComponent implements OnInit {
   @Input() public errorText: string;
   public phone: string;
   public email: string;
   public phoneHref: string;
   public emailHref: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+  constructor(@Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+    super(_toolkitConfiguration);
+  }
 
   public ngOnInit(): void {
-    this.email = this.toolkitConfiguration.infoEmail;
-    this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
+    this.email = this._toolkitConfiguration.infoEmail;
+    this.emailHref = `mailto:${this._toolkitConfiguration.infoEmail}`;
   }
 }
