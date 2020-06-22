@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from "../../../../../prion-toolkit/src/lib/services/toolkitConfiguration.service";
+import { ToolkitConfigurationService } from "toolkit";
 
 @Component({
     selector: 'learn-more',
