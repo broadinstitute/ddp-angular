@@ -3,11 +3,11 @@
         <div class="content intro-block">
             <h1 class="intro-block__title semi-bold center" translate>HomePage.IntroSection.Title</h1>
             <p class="intro-block__text" translate>HomePage.IntroSection.Text</p>
-            <div class="invitation">
+            <div *ngIf="!isAuthenticated" class="invitation">
                 <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
                     translate>HomePage.IntroSection.Code</a>
                 <a class="button button_simple button_underline" routerLink="/" fragment="stay-informed"
-                    translate>HomePage.IntroSection.NoCode</a>
+                    (click)="scrollToAnchor('stay-informed')" translate>HomePage.IntroSection.NoCode</a>
             </div>
         </div>
     </section>
@@ -40,6 +40,11 @@
                             <ng-container *ngFor="let paragraph of item.Paragraphs">
                                 <p class="question-block__text" [innerHTML]="paragraph"></p>
                             </ng-container>
+                            <ul class="faq-panel-list" *ngIf="item.Bullets && item.Bullets.length > 0">
+                                <li class="faq-panel-list__item" *ngFor="let bullet of item.Bullets">
+                                    <span class="question-block__text" [innerHTML]="bullet"></span>
+                                </li>
+                            </ul>
                         </ng-template>
                     </mat-expansion-panel>
                 </ng-container>

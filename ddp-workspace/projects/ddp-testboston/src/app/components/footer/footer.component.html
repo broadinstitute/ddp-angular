@@ -50,9 +50,14 @@
                     <li>
                         <ddp-sign-in-out></ddp-sign-in-out>
                     </li>
-                    <li>
+                    <li *ngIf="!isAuthenticated">
                         <a class="Link footer-link" [routerLink]="'/' + appRoutes.Join"
                             routerLinkActive="footer-link_active" translate>Navigation.Invitation</a>
+                    </li>
+                    <li>
+                        <a class="Link footer-link" href="kit-instructions.pdf" download translate>
+                            Navigation.KitInstructions
+                        </a>
                     </li>
                 </ul>
             </div>

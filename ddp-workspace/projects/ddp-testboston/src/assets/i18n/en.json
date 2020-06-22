@@ -19,6 +19,7 @@
         "Q&A": "Q&A",
         "WhoWeAre": "Who We Are",
         "StayInformed": "Stay Informed",
+        "KitInstructions": "Kit Instructions",
         "Privacy": "Privacy Policy",
         "Dashboard": "My Dashboard",
         "Menu": "Menu",
@@ -95,19 +96,19 @@
                 {
                     "Question": "Will I get a COVID-19 test if I join the study?",
                     "Paragraphs": [
-                        "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for  COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home self-testing kit within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions how to collect and return your samples to our lab for testing. The nasal swab of the front of your nose tests if you have COVID-19 right now. The finger prick tests if you have antibodies to COVID-19 (meaning that you were exposed to the virus in the past). If you agree to be re-tested, and are eligible for the longer study, we will send you kits to repeat these tests every month for 5 additional months."
+                        "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for  COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home self-testing kit within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab of the front of your nose tests if you have COVID-19 right now. The finger prick tests if you have antibodies to COVID-19 (meaning that you were exposed to the virus in the past). If you agree to be re-tested, and are eligible for the longer study, we will send you kits to repeat these tests every month for 5 additional months."
                     ]
                 },
                 {
                     "Question": "Will I receive the results of my tests?",
                     "Paragraphs": [
-                        "You will receive the results of the virology test. We are not currently permitted to give you the results of your antibody test. We will report aggregate results (your results combined with other research participants results) to the Massachusetts Department of Public Health and other key stakeholders in public health to know what percent of study participants had a positive antibody, and to help us better understand the prevalence, or how widespread COVID-19 is."
+                        "You will receive the results of the virology test. We are not currently permitted to give you the results of your antibody test. We will report aggregate results (your results combined with other research participants' results) to the Massachusetts Department of Public Health and other key stakeholders in public health to know what percent of study participants had a positive antibody, and to help us better understand the prevalence, or how widespread COVID-19 is."
                     ]
                 },
                 {
                     "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
                     "Paragraphs": [
-                        "No - anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study regardless of whether or not you are experiencing symptoms (or have ever experienced symptoms in the past). You may also enroll if you have had COVID-19 in the past."
+                        "No. Anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past). You may also enroll if you have had COVID-19 in the past."
                     ]
                 },
                 {
@@ -119,7 +120,7 @@
                 {
                     "Question": "Will a doctor, nurse, or study staff visit my house to test me?",
                     "Paragraphs": [
-                        "No, you will receive a sample collection kit in the mail and independently complete a nasal swab and a finger prick blood test by yourself. If you have any questions, you may reach the study team at any time by phone or email."
+                        "No. You will receive a sample collection kit in the mail and independently complete a nasal swab and a finger prick blood test by yourself. If you have any questions, you may reach the study team at any time by phone or email."
                     ]
                 },
                 {
@@ -143,19 +144,19 @@
                 {
                     "Question": "What will I have to do if I join the study?",
                     "Paragraphs": [
-                        "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home.  Participants are asked to return the kits to us in a pre-paid box for processing. Participants are also asked to repeat this process each month for 5 additional months. The test collections are a nasal swab from the front of your nose and a finger prick blood spot."
+                        "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants will also be asked if they would like to be tested monthly for COVID-19 for the next 5 months. The test collections are a nasal swab from the front of your nose and a finger prick blood spot."
                     ]
                 },
                 {
                     "Question": "Can my family join TestBoston?",
                     "Paragraphs": [
-                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to join the TestBoston mailing list."
+                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
                     ]
                 },
                 {
                     "Question": "Can I give my invitation code to someone else?",
                     "Paragraphs": [
-                        "No, the invitation code should only be used by the person that the letter is addressed to."
+                        "No. The invitation code should only be used by the person that the letter is addressed to."
                     ]
                 },
                 {
@@ -170,6 +171,16 @@
                     "Paragraphs": [
                         "Participants in the study can decide to stop being in the study at any time. Individuals who participate in the entire study can expect to complete the study after 6 months."
                     ]
+                },
+                {
+                    "Question": "Where can I find more information about COVID 19?",
+                    "Paragraphs": [],
+                    "Bullets": [
+                        "<strong>The US Centers for Disease Control and Prevention (CDC):</strong> The CDC has assembled a <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">Coronavirus homepage</a> with a number of resources to learn about COVID-19 symptoms, how to protect yourself, and the most up to date national policies.",
+                        "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
+                        "<strong>Massachusetts residents:</strong> The Massachusetts Department of Public Health (DPH) Hotline can be reached at <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> or at <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 hours per day, 7 days per week. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
+                        "<strong>Boston residents:</strong> Find reliable information at the Boston Public Health Commission, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+                    ]
                 }
             ]
         },
@@ -179,18 +190,18 @@
             "List": [
                 {
                     "Name": "Ann E. Woolley, MD",
-                    "Affiliations": "Infectious Disease",
-                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    "Affiliations": "Instructor in Medicine",
+                    "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
                 },
                 {
                     "Name": "Lisa A. Cosimi, MD",
                     "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
-                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
                 },
                 {
                     "Name": "Deborah T. Hung, MD, PhD",
                     "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
-                    "Info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT & Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham & Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
                 }
             ]
         },

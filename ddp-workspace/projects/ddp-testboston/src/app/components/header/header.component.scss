@@ -24,7 +24,7 @@
     justify-content: space-between;
     align-items: center;
     height: 6.75rem;
-    max-width: 1350px;
+    max-width: 1450px;
     margin: auto;
     padding: 0 1.5625rem;
 }
@@ -50,7 +50,7 @@
 
 .nav {
     width: 100%;
-    margin-left: 4.7rem;
+    margin-left: 2.5rem;
 }
 
 .navigation {
@@ -59,7 +59,7 @@
     padding: 0;
 
     &__item {
-        margin-right: 2.8125rem;
+        margin-right: 1.8rem;
         display: flex;
         color: mat-color($app-theme, 1300);
     }
@@ -70,10 +70,14 @@
     display: flex;
     align-items: center;
     font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 2.0625rem;
+    font-size: 16px;
+    line-height: 33px;
     white-space: nowrap;
     color: mat-color($app-theme, 1300);
+
+    &__icon {
+        margin-right: 0.2rem;
+    }
 }
 
 .header-link:link,
@@ -112,7 +116,7 @@
     align-items: center;
 
     &__dashboard {
-        margin-right: 2.8125rem;
+        margin-right: 1.8rem;
     }
 }
 
@@ -121,8 +125,8 @@
     margin-left: 2rem;
 
     .SimpleButton {
-        font-size: 18px;
-        line-height: 18px;
+        font-size: 16px;
+        line-height: 16px;
         text-decoration: none;
         box-sizing: border-box;
         height: 37px;
@@ -144,6 +148,11 @@
             color: mat-color($app-theme, 1300);
         }
     }
+}
+
+.language {
+    font-size: 16px !important;
+    line-height: 33px !important;
 }
 
 // Header menu
@@ -183,36 +192,20 @@
 
     &__item {
         display: flex;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
 
         .header-link {
             font-size: 1.875rem;
             line-height: 2.25rem;
         }
+
+        .header-link__icon {
+            padding-right: 0.3rem;
+        }
     }
 }
 
-@media only screen and (max-width: 1370px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 2rem;
-    }
-}
-
-@media only screen and (max-width: 1290px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 2rem;
-    }
-
-    .nav {
-        margin-left: 2rem;
-    }
-}
-
-@media only screen and (max-width: 1260px) {
+@media only screen and (max-width: 1350px) {
     .navigation {
         display: none;
     }
@@ -222,7 +215,27 @@
     }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 1370px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 1290px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+
+    .nav {
+        margin-left: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
     .project-logo {
         &__img {
             height: 1.8rem;
@@ -234,6 +247,7 @@
         display: none;
     }
 
+    .header-link__icon,
     .dashboard-icon {
         height: 26px;
         width: 26px;
@@ -273,7 +287,7 @@
         padding: 0 0 0 1rem;
 
         &__item {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .header-link {
@@ -282,6 +296,7 @@
         }
     }
 
+    .header-link__icon,
     .dashboard-icon {
         height: 22px;
         width: 22px;
@@ -300,6 +315,12 @@
     }
 
     // replace with real language selector component styles when when it is done
+}
+
+@media only screen and (max-width: 321px) {
+    .overlay-content {
+        margin-top: 6.5rem;
+    }
 }
 
 // replace with real language selector component when styles when it is done

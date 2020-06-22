@@ -169,6 +169,8 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
+import { LanguageSelectorComponent } from "./components/languageSelector.component";
+import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
@@ -252,6 +254,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     PrequalifierServiceAgent,
     GovernedParticipantsServiceAgent,
     ActivityInstanceStatusServiceAgent,
+    LanguageServiceAgent,
     MailingListServiceAgent,
     ActivityValidatorBuilder,
     ActivitySuggestionBuilder,
@@ -327,6 +330,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LoadingComponent,
     LoaderComponent,
     UserMenuComponent,
+    LanguageSelectorComponent,
     ManageParticipantsComponent,
     Auth0CodeCallbackComponent,
     RedirectToAuth0LoginComponent,
@@ -386,6 +390,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LoadingComponent,
     LoaderComponent,
     UserMenuComponent,
+    LanguageSelectorComponent,
     ManageParticipantsComponent,
     RedirectToAuth0LoginComponent,
     Auth0CodeCallbackComponent,
