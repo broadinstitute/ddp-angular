@@ -140,6 +140,7 @@ export class Auth0AdapterService implements OnDestroy {
             ...(additionalParams && {
                 ...additionalParams
             }),
+            time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
             language: this.language.getCurrentLanguage(),
             // @todo : hack delete when done
             serverUrl: this.configuration.backendUrl
