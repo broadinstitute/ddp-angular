@@ -12,19 +12,24 @@ import {
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
-import { ActivityPageComponent, DashboardComponent, LoginLandingComponent, RedirectToAuth0LoginComponent, ErrorComponent,
-  RedirectToLoginLandingComponent,
-  SessionExpiredComponent,
-  PasswordComponent,
-  WorkflowStartActivityComponent,
-ActivityComponent} from 'projects/prion-toolkit/src/public-api';
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import {
+  LoginLandingComponent, PasswordComponent,
+  RedirectToAuth0LoginComponent,
+  RedirectToLoginLandingComponent
+} from "toolkit";
+import { PrionDashboardComponent } from "../../../toolkit-prion/src/lib/components/dashboard/dashboard.component";
+import { PrionActivityPageComponent } from "../../../toolkit-prion/src/lib/components/activity-page/activityPage.component";
+import { PrionActivityComponent } from "../../../toolkit-prion/src/lib/components/activity/activity.component";
+import { PrionWorkflowStartActivityComponent } from "../../../toolkit-prion/src/lib/components/workflow-start-activity/workflowStartActivity.component";
+import { PrionErrorComponent } from "../../../toolkit-prion/src/lib/components/error/error.component";
+import { PrionSessionExpiredComponent } from "../../../toolkit-prion/src/lib/components/session-expired/sessionExpired.component";
 
 const routes: Routes = [
   {
     path: 'consent',
-    component: ActivityPageComponent,
+    component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -36,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'medical',
-    component: ActivityPageComponent,
+    component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -57,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: PrionDashboardComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -71,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: 'activity/:id',
-    component: ActivityComponent,
+    component: PrionActivityComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -95,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: 'start-study',
-    component: WorkflowStartActivityComponent,
+    component: PrionWorkflowStartActivityComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
@@ -104,7 +109,7 @@ const routes: Routes = [
   },
   {
     path: 'error',
-    component: ErrorComponent,
+    component: PrionErrorComponent,
     canActivate: [IrbGuard]
   },
   {
@@ -119,7 +124,7 @@ const routes: Routes = [
   },
   {
     path: 'session-expired',
-    component: SessionExpiredComponent,
+    component: PrionSessionExpiredComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard
