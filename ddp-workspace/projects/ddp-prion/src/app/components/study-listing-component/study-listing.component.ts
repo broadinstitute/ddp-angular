@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-import { ToolkitConfigurationService } from "../../../../../prion-toolkit/src/lib/services/toolkitConfiguration.service";
+import { PrionToolkitConfigurationService } from "../../../../../toolkit-prion/src/lib/services/toolkitConfiguration.service";
 
 @Component({
   selector: 'study-listing',
@@ -71,7 +71,7 @@ export class StudyListingComponent implements OnInit {
   private data:Array<any>;
 
   public constructor(public translator: TranslateService,
-                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration:ToolkitConfigurationService) {
+                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration:PrionToolkitConfigurationService) {
     this.translateTable();
     this.translator.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translator.use(event.lang);
@@ -182,7 +182,7 @@ export class StudyListingComponent implements OnInit {
     this.length = sortedData.length;
   }
 
-  public onCellClick(data: any): any {
+  public static onCellClick(data: any): any {
     console.log(data);
   }
 
