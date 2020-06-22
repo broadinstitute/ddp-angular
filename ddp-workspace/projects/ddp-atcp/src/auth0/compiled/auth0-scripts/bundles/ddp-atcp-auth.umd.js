@@ -343,7 +343,7 @@
             domain: config.auth0Domain,
             clientID: config.clientID,
             redirectUri: config.callbackURL,
-            responseType: config.responseType,
+            responseType: config.internalOptions.response_type,
             params: config.internalOptions,
             configurationBaseUrl: config.clientConfigurationBaseUrl,
         });
