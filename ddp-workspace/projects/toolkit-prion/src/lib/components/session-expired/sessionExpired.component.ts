@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Auth0AdapterService } from 'ddp-sdk';
+import { SessionExpiredComponent } from "toolkit";
 
 @Component({
-    selector: 'toolkit-session-expired',
-    template: `
+  selector: 'toolkit-session-expired',
+  template: `
         <toolkit-header></toolkit-header>
         <div class="Wrapper">
         <article class="PageContent">
@@ -29,10 +30,8 @@ import { Auth0AdapterService } from 'ddp-sdk';
         </article>
         </div>`
 })
-export class SessionExpiredComponent {
-    constructor(private auth0: Auth0AdapterService) { }
-
-    public signin(): void {
-        this.auth0.login();
-    }
+export class PrionSessionExpiredComponent extends SessionExpiredComponent {
+  constructor(private _auth0: Auth0AdapterService) {
+    super(_auth0);
+  }
 }
