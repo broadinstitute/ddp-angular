@@ -16,10 +16,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
-import { AppComponent, PrionToolkitModule, ToolkitConfigurationService } from 'projects/prion-toolkit/src/public-api';
 import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
 import { Ng2TableModule } from "ng2-table";
 import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
+import { PrionToolkitConfigurationService } from "../../../toolkit-prion/src/lib/services/toolkitConfiguration.service";
+import { ToolkitPrionModule } from "../../../toolkit-prion/src/lib/toolkit.module";
+import { PrionAppComponent } from "../../../toolkit-prion/src/lib/components/app/app.component";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -33,7 +37,7 @@ declare const DDP_ENV: any;
 
 declare const ga: Function;
 
-export const tkCfg = new ToolkitConfigurationService();
+export const tkCfg = new PrionToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.consentGuid = 'PRIONCONSENT';
 tkCfg.releaseGuid = 'PRIONMEDICAL';
@@ -84,7 +88,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    PrionToolkitModule,
+    ToolkitPrionModule,
     FlexModule,
     CommonModule,
     MatToolbarModule,
@@ -98,7 +102,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    Ng2TableModule
+    Ng2TableModule,
+    MatProgressBarModule
   ],
   declarations: [
     WelcomeComponent,
@@ -125,7 +130,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [PrionAppComponent]
 })
 export class AppModule {
   constructor(private analytics: AnalyticsEventsService) {
