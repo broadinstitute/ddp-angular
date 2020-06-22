@@ -41,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -119,7 +120,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         WelcomeComponent,
         MailingListComponent,
         UserRegistrationPrequalComponent,
-        CrcDashboardComponent
+        CrcDashboardComponent,
+        PrivacyPolicyComponent
     ],
     imports: [
         BrowserModule,

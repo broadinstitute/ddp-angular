@@ -47,6 +47,10 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100%;
+
+    &_privacy {
+        background-color: mat-color($app-theme, 3200);
+    }
 }
 
 button {
