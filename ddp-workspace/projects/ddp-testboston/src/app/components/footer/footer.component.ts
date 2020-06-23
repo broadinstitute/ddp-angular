@@ -28,6 +28,10 @@ export class FooterComponent implements OnInit {
     this.emailHref = `mailto:${this.email}`;
   }
 
+  public get isAdmin(): boolean {
+    return this.session.isAuthenticatedAdminSession();
+  }
+
   public scrollToAnchor(anchor: string): void {
     this.scrollerService.scrollToAnchor(anchor);
   }

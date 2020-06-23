@@ -12,7 +12,8 @@
         }
     },
     "Navigation": {
-        "LogoAlt": "Test Boston logo",
+        "LogoAlt": "TestBoston logo",
+        "CRCLogoSubtitle": "Subject Support Interface",
         "Home": "Home",
         "About": "About the Study",
         "Q&A": "Q&A",
