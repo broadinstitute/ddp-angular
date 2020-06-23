@@ -7,6 +7,7 @@ import { ActivityGuids } from './aсtivity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 import {
   Auth0CodeCallbackComponent,
@@ -150,6 +151,13 @@ const routes: Routes = [
   {
     path: AppRoutes.PasswordResetDone,
     component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Privacy,
+    component: PrivacyPolicyComponent,
     canActivate: [
       IrbGuard
     ]
