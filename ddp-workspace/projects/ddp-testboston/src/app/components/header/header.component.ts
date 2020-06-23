@@ -29,6 +29,10 @@ export class HeaderComponent {
     return this.session.isAuthenticatedSession();
   }
 
+  public get isAdmin(): boolean {
+    return this.session.isAuthenticatedAdminSession();
+  }
+
   public openMenu(): void {
     this.isMenuOpened = true;
     this.window.nativeWindow.requestAnimationFrame(() => {
