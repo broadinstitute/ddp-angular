@@ -11,7 +11,7 @@ import {
 @Component({
     selector: 'welcome',
     template: `
-    <toolkit-header noBackground="true"></toolkit-header>
+    <prion-header noBackground="true"></prion-header>
     <div class="Container NoPadding">
       <a id="topView"></a>
         <div class="Landing-image">
@@ -99,7 +99,6 @@ import {
 })
 export class WelcomeComponent implements OnInit {
     public unsupportedBrowser: boolean;
-    private readonly HEADER_HEIGHT: number = 70;
 
     constructor(
         private windowRef: WindowRef,
