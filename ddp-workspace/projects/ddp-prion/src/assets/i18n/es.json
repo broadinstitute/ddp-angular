@@ -1,0 +1,464 @@
+{
+  "App": {
+    "Home": "Hogar",
+    "FAQ": "Más detalles / preguntas frecuentes",
+    "About": "Sobre nosotros",
+    "Join": "Unirse a la lista de correos",
+    "Twitter": "Tweets por el registro de priones"
+  },
+  "Toolkit": {
+    "Common": {
+      "Organization": "Prion",
+      "JoinUs": "Únete a nosotros",
+      "LogoAlt": "Prion Registry Logo",
+      "Home": "Hogar",
+      "LearnMore": "Aprende más",
+      "Dashboard": "Mi tablero"
+    },
+    "Footer": {
+      "BackToTop": "Volver arriba",
+      "ContactUs": "Contacta con nosotros:",
+      "ContactMailTo": "mailto:info@prionregistry.org",
+      "ContactEmail": "info@prionregistry.org"
+    },
+    "Dashboard": {
+      "StudyListing": {
+        "ActivityName": "Listado de estudios",
+        "ActivityStatus": "Disponible",
+        "ActivityCreated": "-",
+        "ActivitySummary": "Estudios disponibles y cómo unirse a ellos",
+        "ActivityActions": "Ver"
+      }
+    },
+    "Welcome": {
+      "WelcomeTitle": "Voluntario para la investigación para ayudar a combatir la enfermedad por priones",
+      "WelcomeText": "Únase al Registro de Priones, un registro en línea para personas afectadas o en riesgo de enfermedad por priones que desean encontrar oportunidades para participar en la investigación.",
+      "Intro": "Únete a nosotros en esta búsqueda",
+      "Closing": "Forma parte de este movimiento de investigación. Cambiemos el futuro juntos.",
+      "Participate": "Cómo funciona:",
+      "Steps": {
+        "FirstStep": {
+          "Title": "1. Registrarse",
+          "Text": "Haga clic en \"Únase a nosotros\" para crear una cuenta para usted o un ser querido con enfermedad priónica. Una vez que complete nuestro sencillo formulario de consentimiento en línea, ¡estará listo para comenzar!"
+        },
+        "SecondStep": {
+          "Title": "2. Cuéntanos acerca de tí",
+          "Text": "Se le pedirá que complete un breve cuestionario (menos de 10 minutos) sobre usted y su diagnóstico o riesgo."
+        },
+        "ThirdStep": {
+          "Title": "3. ¡Aprendamos juntos!",
+          "Text": "Una vez que complete su cuestionario, podrá ver los estudios de investigación en los que es elegible para participar y contactar a los investigadores para inscribirse. Si nos lo permite, también nos pondremos en contacto con usted para futuras oportunidades de investigación."
+        }
+      },
+      "ArrowAlt": "Flecha"
+    },
+    "JoinUs": {
+      "Title": "Únete a nosotros",
+      "Description": {
+        "Pt1": "¿Usted o un pariente suyo tiene enfermedad priónica? Cuéntanos y únete a nosotros para marcar la diferencia ...",
+        "Pt2": "Puede registrarse en la plataforma utilizando su dirección de correo electrónico y creando una contraseña. Utilizaremos esta cuenta para comunicarnos con usted en relación con el Registro de Priones."
+      },
+      "Email": "Dirección de correo electrónico*",
+      "Password":  "Contraseña*",
+      "AlreadyRegistered": "¿Ya registrado? Firme aquí"
+    },
+    "StudyListing": {
+      "Columns": [
+        {
+          "title": "Nombre del estudio",
+          "name": "name",
+          "placeholder": "Filtrar por nombre"
+        },
+        {
+          "title": "Descripción del estudio",
+          "name": "description",
+          "placeholder": "Filtrar por descripción"
+        },
+        {
+          "title": "Investigador principal",
+          "name": "nameOfPI",
+          "placeholder": "Filtrar por PI"
+        },
+        {
+          "title": "Sitio de Estudio",
+          "name": "studySite",
+          "placeholder": "Filtrar por sitio"
+        },
+        {
+          "title": "Requisitos de elegibilidad",
+          "name": "eligibilityRequirements",
+          "placeholder": "Filtrar por elegibilidad"
+        },
+        {
+          "title": "Más información",
+          "name": "studyInfo",
+          "placeholder": ""
+        }
+      ],
+      "Rows": [
+        {
+          "name": "es: Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
+          "description": "es: The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "studySite": "es: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
+          "studyInfo":  "es: Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info.",
+          "metadata": {
+            "status": "es: 2",
+            "tested positive": "es: 5"
+          }
+        },
+        {
+          "name": "es: Biomarkers in pre-symptomatic mutation carriers",
+          "description":"es: Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
+          "studySite": "es: Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
+          "eligibilityRequirements": "es: You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt  style=\"font-weight: 400;\">- Between the ages of 18-85</dt><dt  style=\"font-weight: 400;\">- Fluent in English</dt></dl>",
+          "studyInfo":  "es: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+        },
+        {
+          "name": "es: Challenging the Huntington Disease Paradigm: Evaluation of Psychosocial Issues in Persons at-risk for Genetic Prion Disease",
+          "description": "es: The purpose of this descriptive study is to examine the psychosocial experience of being at-risk for a genetic prion disease.  Eligible participants for the study will include those who are in one of two groups: 1) those who are at-risk for inheriting a mutation based on family history, but have not undergone predictive testing and 2) those with a mutation confirmed by predictive testing, but who are not yet symptomatic. This anonymous online survey includes questions about psychological adaptation to genetic information and a general mental health assessment, as well as some open-ended questions about experiences of being at-risk and views on the predictive testing process. This study will aim to inform best practices in predictive testing and increase knowledge of the unique psychosocial experience of being at-risk for a genetic prion disease.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:alm14@case.edu\" ><strong>Dr. Anne Matthews</strong></a>",
+          "studySite": "es: Case Western Reserve University, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: <ol><li>Those who are 18 years of age or older.</li><li>Those who can read and understand English.</li><li>Those who are “at-risk” for a genetic prion disease, meaning that they have a relative affected with the disease.</li></ol>",
+          "studyInfo":  "es: <a target=\"_blank\" href=\"https://cwru.az1.qualtrics.com/jfe/form/SV_8euTkcJbwaVd2OV\">Survey here</a> and <a target=\"_blank\" href=\"BUCKET_URL_HERE/williamson-HRP-506SBER-consent.pdf\">consent form here.</a>"
+        },
+        {
+          "name": "es: Early Diagnosis of Human Prion Disease",
+          "description": "es: The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
+          "studySite": "es: Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
+          "eligibilityRequirements": "es: Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
+          "studyInfo":  "es: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+        },
+        {
+          "name": "es: Teleneurology Assessment Program for CJD (TAPCJD)",
+          "description": "es: We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "studySite": "es: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
+          "studyInfo":  "es: Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+        },
+        {
+          "name": "es: Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
+          "description": "es: Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
+          "studySite": "es: University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
+          "eligibilityRequirements": "es: Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
+          "studyInfo":  "es: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+        }
+      ],
+      "InputPlaceholder": "es: Filter all columns"
+    },
+    "LearnMore": {
+      "Title": "es: Learn more about Prion Registry",
+      "LearnMore": {
+        "Title": "es: Learn More",
+        "WhatIs": {
+          "Question": "es: What is prion disease?",
+          "Text": "es: Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+        },
+        "For": {
+          "Question": "es: What is this registry for?",
+          "Text": "es: In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+        },
+        "Participate": {
+          "Question": "es: Can I participate in this registry?",
+          "Text": "es: Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+        },
+        "Why": {
+          "Question": "es: Why would I want to participate in this registry?",
+          "Text": "es: Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+        },
+        "DoIHaveTo": {
+          "Question": "es: Do I have to participate in this registry?",
+          "Text": "es: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+        }
+      }
+    },
+    "LoginLanding": {
+      "Text": "es: Please wait. You will be redirected to a destination soon..."
+    },
+    "Dialogs": {
+      "Disclaimer": {
+        "Title": "es: View Prion Registry Data",
+        "Text": "es: You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
+        "SubmitButton": "es: OK"
+      },
+      "JoinMailingList": {
+        "Title": "es: Stay informed!",
+        "Text": "es: Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "es: First Name *",
+            "Error": "es: First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "es: Last Name *",
+            "Error": "es: Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "es: Email Address *",
+            "Error": "es: Please enter a valid Email Address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "es: Email Confirmation (Reenter Email) *",
+            "Error": "es: Please enter a valid Email Address"
+          }
+        },
+        "CancelButton": "es: CANCEL",
+        "SubmitButton": "es: JOIN",
+        "Required": "es: * Required field",
+        "MatchEmailsError": "es: Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "es: We're sorry, but an error has occurred."
+      },
+      "SessionWillExpire": {
+        "Title": "es: Your session will time-out soon!",
+        "Text": "es: To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "es: Sign Out",
+        "Continue": "es: Continue",
+        "RenewalFailed": "es: Session renewal failed. Please log out and log back in again."
+      }
+    },
+    "Warning": {
+      "Title": "es: Download Chrome or Safari to Continue",
+      "Text1": "es: This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+      "Text2": "es: It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Text3": {
+        "Pt1": "es: Click the following links to download",
+        "Pt2": "es: or",
+        "Pt3": "es: Chrome and Safari are always free.",
+        "Chrome": "es: Chrome (for Mac & PC)",
+        "Safari": "es: Safari (for Mac)"
+      },
+      "SubmitButton": "es: OK"
+    },
+    "StayInformed": {
+      "Title": "es: Stay Informed!",
+      "Text": "es: Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+      "ReturnButton": "es: RETURN HOME"
+    },
+    "Password": {
+      "Title": "es: Please enter the password",
+      "Text": "es: Please enter your password",
+      "SubmitButton": "es: Submit",
+      "PasswordWrongError": "es: Incorrect password. Please try again.",
+      "OtherError": "es: We're sorry, but an error has occurred.",
+      "PasswordField": {
+        "Error": "es: Password is required"
+      }
+    },
+    "ErrorPage": {
+      "Title": "es: We've encountered an error",
+      "Header": "es: We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "es: Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "es: ."
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "es: Your password reset link has expired."
+    },
+    "SessionExpired": {
+      "Text": {
+        "Pt1": "es: You were away for a while, so we logged you out as a security precaution.",
+        "Pt2": "es: Please log in again to return to the last page you were on."
+      },
+      "LogInButton": "es: Log In"
+    }
+  },
+  "SDK": {
+    "SubmitButton": "es: Submit",
+    "CloseButton": "es: Back to Dashboard",
+    "AddButton": "es: Add",
+    "CancelButton": "es: Cancel",
+    "NextButton": "es: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": "es:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+    "SavingButton": "es: Saving",
+    "EditButton": "es: Edit",
+    "ReviewButton": "es: View",
+    "ValidateError": "es: Please complete all required fields.",
+    "CommunicationError": "es: There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SaveError": "es: We're sorry but an error occurred.",
+    "ExportStudy": {
+      "Export": "es: EXPORT"
+    },
+    "ListStudies": {
+      "StudyName": "es: Study Name",
+      "ParticipantCount": "es: Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "es: Workspace Name",
+      "WorkspaceNamespace": "es: Workspace Namespace"
+    },
+    "Login": {
+      "Login": "es: LOG IN",
+      "Logout": "es: LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "es: Sign In",
+      "SignOut": "es: Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "es: language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "es: Activity",
+      "Summary": "es: Summary",
+      "ActivityStatus": "es: Status",
+      "ActivityDate": "es: Created",
+      "ActivityActions": "es: Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "es: Governed participants",
+      "ParticipantPlaceholder": "es: Participant",
+      "ParticipantsList": "es: Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "es: Profile",
+      "ViewAs": "es: View As",
+      "ManageParticipants": "es: Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "es: User preferences",
+      "UserPreferencesGender": "es: Sex",
+      "UserPreferencesLocale": "es: Preferred language"
+    },
+    "Dashboard": {
+      "Title": "es: Welcome to the Prion Registry!",
+      "Text": "es: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+    },
+    "DatePicker": {
+      "Day": "es: Choose day...",
+      "Month": "es: Choose month...",
+      "Year": "es: Choose year...",
+      "January": "es: January",
+      "February": "es: February",
+      "March": "es: March",
+      "April": "es: April",
+      "May": "es: May",
+      "June": "es: June",
+      "July": "es: July",
+      "August": "es: August",
+      "September": "es: September",
+      "October": "es: October",
+      "November": "es: November",
+      "December": "es: December"
+    },
+    "UserMenu": {
+      "DashboardButton": "es: My Dashboard",
+      "SignOutButton": "es: Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "es: characters remaining",
+      "SingularForm": "es: character remaining"
+    },
+    "Title": {
+      "Default": "es: Prion Registry",
+      "Alert": "es: Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "es: Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "es: Physician Name",
+        "Institution": "es: Institution",
+        "InstitutionAny": "es: Institution (if any)",
+        "City": "es: City",
+        "State": "es: State"
+      },
+      "PhysicianValidation": "es: Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "es: Full Name",
+        "Country": "es: Country/Territory",
+        "Street1": "es: Street Address",
+        "Street2": "es: Apt/Floor #",
+        "State": {
+          "State": "es: State",
+          "Province": "es: Province",
+          "State/Province/Region": "es: State/Province/Region"
+        },
+        "City": "es: City",
+        "Phone": "es: Phone",
+        "Zip": {
+          "Zip Code": "es: Zip Code",
+          "Postal Code": "es: Postal Code",
+          "Zip/Postal Code": "es: Zip/Postal Code"
+        },
+        "Choose": "es: Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "es: We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "es: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "es: Suggested:",
+        "AsEntered": "es: As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "es: Invalid address.",
+        "CannotVerify": "es: Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "es: An unknown error occurred while verifying address.",
+        "FieldIsRequired": "es: {{field}} is required",
+        "FieldIsInvalid": "es: {{field}} has an invalid value",
+        "InvalidHouseNumber": "es: Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "es: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "es: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "es: The requested resource could not be found.",
+        "FORBIDDEN": "es: Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "es: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "es: Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "es: Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "es: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "es: This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "es: API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "es: At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "es: The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "es: Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "es: The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "es: The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "es: Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "es: Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "es: The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "es: Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "es: One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "es: Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "es: Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "es: Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "es: USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "es: International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "es: Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "es: Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "es: This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "es: No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "es: We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "es: We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "es: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "es: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "es: House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "es: We could not find the street number provided.",
+        "E.STREET.MISSING": "es: Street is missing.",
+        "E.STREET.INVALID": "es: Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "es: Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "es: Box number is invalid.",
+        "E.ADDRESS.INVALID": "es: Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "es: Zip not found.",
+        "E.ZIP.INVALID": "es: Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "es: Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "es: Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "es: Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "es: Dual address.",
+        "E.STREET.MAGNET": "es: Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "es: Unverifiable city / state.",
+        "E.STATE.INVALID": "es: Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "es: Invalid delivery address.",
+        "E.TIMED_OUT": "es: Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "es: The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "es: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "es: Information"
+  }
+}

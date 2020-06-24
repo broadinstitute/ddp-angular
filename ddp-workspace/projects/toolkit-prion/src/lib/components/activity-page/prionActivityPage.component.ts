@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderService } from "toolkit";
 
 @Component({
-    selector: 'toolkit-activity-page',
+    selector: 'prion-activity-page',
     template: `
     <ng-container>
-        <toolkit-header>
-        </toolkit-header>
+        <prion-header>
+        </prion-header>
         <div class="ContainerSurvey-top row">
             <ddp-activity [studyGuid]="studyGuid"
                       [activityGuid]="(activityInstance$ | async)?.instanceGuid"
