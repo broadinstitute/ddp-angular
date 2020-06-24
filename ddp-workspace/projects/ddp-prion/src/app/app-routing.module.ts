@@ -9,22 +9,25 @@ import {
   BrowserGuard
 } from 'ddp-sdk';
 
+import {
+  PrionDashboardComponent,
+  PrionActivityPageComponent,
+  PrionActivityComponent,
+  PrionWorkflowStartActivityComponent,
+  PrionErrorComponent,
+  PrionSessionExpiredComponent,
+  PrionPasswordComponent
+} from 'toolkit-prion';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
 import {
-  LoginLandingComponent, PasswordComponent,
+  LoginLandingComponent,
   RedirectToAuth0LoginComponent,
   RedirectToLoginLandingComponent
 } from "toolkit";
-import { PrionDashboardComponent } from "../../../toolkit-prion/src/lib/components/dashboard/dashboard.component";
-import { PrionActivityPageComponent } from "../../../toolkit-prion/src/lib/components/activity-page/activityPage.component";
-import { PrionActivityComponent } from "../../../toolkit-prion/src/lib/components/activity/activity.component";
-import { PrionWorkflowStartActivityComponent } from "../../../toolkit-prion/src/lib/components/workflow-start-activity/workflowStartActivity.component";
-import { PrionErrorComponent } from "../../../toolkit-prion/src/lib/components/error/error.component";
-import { PrionSessionExpiredComponent } from "../../../toolkit-prion/src/lib/components/session-expired/sessionExpired.component";
 
 const routes: Routes = [
   {
@@ -132,7 +135,7 @@ const routes: Routes = [
   },
   {
     path: 'password',
-    component: PasswordComponent
+    component: PrionPasswordComponent
   },
   {
     path: '',

@@ -1,12 +1,10 @@
+//Angular imports
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { TranslateService } from '@ngx-translate/core';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,17 +12,30 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { LearnMoreComponent } from './components/learn-more/learn-more.component';
-import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
-import { Ng2TableModule } from "ng2-table";
-import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
-import { PrionToolkitConfigurationService } from "../../../toolkit-prion/src/lib/services/toolkitConfiguration.service";
-import { ToolkitPrionModule } from "../../../toolkit-prion/src/lib/toolkit.module";
-import { PrionAppComponent } from "../../../toolkit-prion/src/lib/components/app/app.component";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from "@angular/material";
 
+//External library imports
+import { TranslateService } from '@ngx-translate/core';
 
+//SDK imports
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
+
+//Toolkit imports
+import { ToolkitModule } from "toolkit";
+
+//Toolkit-prion imports
+import { PrionToolkitConfigurationService,
+  ToolkitPrionModule,
+  PrionAppComponent
+} from "toolkit-prion";
+
+//Local imports
+import { AppRoutingModule } from './app-routing.module';
+import { WelcomeComponent } from "./components/welcome/welcome.component";
+import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
+import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
+import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -89,6 +100,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppRoutingModule,
     DdpModule,
     ToolkitPrionModule,
+    ToolkitModule,
     FlexModule,
     CommonModule,
     MatToolbarModule,
@@ -102,8 +114,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    Ng2TableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule
   ],
   declarations: [
     WelcomeComponent,
