@@ -4,7 +4,7 @@ import { ToolkitConfigurationService } from "toolkit";
 @Component({
     selector: 'learn-more',
     template: `
-    <toolkit-header currentRoute="/learn-more"></toolkit-header>
+    <prion-header currentRoute="/learn-more"></prion-header>
     <div class="Container">
       <article class="PageContent">
         <div class="PageLayout row">
