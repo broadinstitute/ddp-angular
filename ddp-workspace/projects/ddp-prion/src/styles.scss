@@ -426,11 +426,6 @@ a:focus {
     transition: stroke 0.3s ease;
 }
 
-.SimpleButton--Scrolled .ddp-globe {
-    stroke: mat-color($app-theme, 600);
-    fill: transparent;
-}
-
 .SimpleButton:hover .ddp-globe {
     stroke: mat-color($app-theme, 700);
     fill: transparent;
@@ -439,6 +434,10 @@ a:focus {
 .SimpleButton:active .ddp-globe {
     stroke: mat-color($app-theme, 600);
     fill: transparent;
+}
+
+ddp-language-selector .SimpleButton {
+    margin-top: 0;
 }
 
 .ddp-current-language {
@@ -493,7 +492,55 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
-.dataTable {
+.study-listing-table {
+  width: 100% !important;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+
+  td {
+    vertical-align: top;
+    display: table-cell;
+  }
+
+  th {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+  }
+
+  .mat-header-row {
+    border: none;
+    border-collapse: collapse;
+    display: table-row;
+    vertical-align: middle;
+    max-width: 80%;
+  }
+
+  .mat-row {
+    display: table-row;
+    max-width: 80%;
+  }
+
+  .table-bordered mat-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+  }
+
+  .table-bordered mat-header-cell {
+    border: 0 solid #ddd;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    vertical-align: bottom;
+    padding: 8px;
+    line-height: 1.42857143;
+    text-align: left;
+    display: table-cell;
+  }
+}
+
+.ddp-dashboard {
   width: 100% !important;
   table-layout: fixed;
   overflow-wrap: break-word;
@@ -501,7 +548,6 @@ mat-icon.ddp-dropdown-arrow {
   th:nth-of-type(2) {
     width: 30%;
   }
-
 }
 
 .form-control {
