@@ -2,9 +2,9 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ErrorComponent, ToolkitConfigurationService } from "toolkit";
 
 @Component({
-  selector: 'toolkit-error',
+  selector: 'prion-error',
   template: `
-  <toolkit-header></toolkit-header>
+  <prion-header></prion-header>
   <div class="Wrapper">
   <article class="PageContent">
     <div class="PageLayout">

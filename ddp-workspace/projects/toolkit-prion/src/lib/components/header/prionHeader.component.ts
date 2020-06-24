@@ -11,7 +11,7 @@ import {
 import { CommunicationService, HeaderComponent, ToolkitConfigurationService } from "toolkit";
 
 @Component({
-  selector: 'toolkit-header',
+  selector: 'prion-header',
   template: `
     <header class="Header">
       <nav class="navbar navbar-default Header-background" [ngClass]="{'NoBackground': noBackground}">

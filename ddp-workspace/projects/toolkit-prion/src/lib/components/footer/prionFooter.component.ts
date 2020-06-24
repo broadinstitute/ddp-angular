@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import { FooterComponent, ToolkitConfigurationService } from "toolkit";
 
 @Component({
-  selector: 'toolkit-footer',
+  selector: 'prion-footer',
   template: `
     <footer class="Footer row">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 Footer-left">

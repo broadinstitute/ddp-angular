@@ -10,11 +10,11 @@ import {
 import { ToolkitConfigurationService, WorkflowBuilderService, WorkflowStartActivityComponent } from "toolkit";
 
 @Component({
-  selector: 'toolkit-workflow-start-activity',
+  selector: 'prion-workflow-start-activity',
   template: `
     <ng-container>
-      <toolkit-header>
-      </toolkit-header>
+      <prion-header>
+      </prion-header>
       <div class="ContainerSurvey-top row">
             <ddp-activity *ngIf="show" 
                     [studyGuid]="studyGuid"
