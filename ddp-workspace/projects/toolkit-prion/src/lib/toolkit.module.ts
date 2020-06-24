@@ -1,39 +1,48 @@
+//Angular imports
 import {
-  MatCardModule, MatDialogModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule, MatProgressBar, MatProgressBarModule,
-  MatProgressSpinnerModule, MatTableModule,
+  MatCardModule, MatDialogModule, MatFormFieldModule,
+  MatIconModule, MatInputModule, MatProgressBar,
+  MatProgressBarModule, MatProgressSpinnerModule, MatTableModule,
   MatToolbarModule
 } from "@angular/material";
-import { RouterModule } from "@angular/router";
+import { NavigationEnd, Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { DdpModule } from "ddp-sdk";
-import { PrionToolkitConfigurationService } from "./services/toolkitConfiguration.service";
-import { PrionFooterComponent } from "./components/footer/footer.component";
-import { PrionHeaderComponent } from "./components/header/header.component";
+
+//SDK imports
+import { AnalyticsEventsService, DdpModule } from "ddp-sdk";
+
+//Toolkit imports
 import {
   ActivityLinkComponent,
-  CommonLandingComponent,
   CommunicationService,
   DisclaimerComponent,
   HeaderActionGuard,
   LoginLandingComponent,
-  PasswordComponent, RedirectToAuth0LoginComponent,
+  RedirectToAuth0LoginComponent,
   RedirectToLoginLandingComponent,
-  ResendEmailComponent, WarningComponent, WarningMessageComponent,
-  WorkflowBuilderService, WorkflowMapperService,
+  ResendEmailComponent,
+  ToolkitModule,
+  WarningComponent,
+  WarningMessageComponent,
+  WorkflowBuilderService,
+  WorkflowMapperService
 } from "toolkit";
-import { PrionDashboardComponent } from "./components/dashboard/dashboard.component";
-import { PrionAppComponent } from "./components/app/app.component";
-import { PrionActivityPageComponent } from "./components/activity-page/activityPage.component";
-import { PrionActivityComponent } from "./components/activity/activity.component";
-import { PrionWorkflowStartActivityComponent } from "./components/workflow-start-activity/workflowStartActivity.component";
-import { PrionErrorComponent } from "./components/error/error.component";
-import { PrionSessionExpiredComponent } from "./components/session-expired/sessionExpired.component";
+
+//Local imports
+import { PrionToolkitConfigurationService } from "./services/prionToolkitConfiguration.service";
+import { PrionFooterComponent } from "./components/footer/prionFooter.component";
+import { PrionHeaderComponent } from "./components/header/prionHeader.component";
+import { PrionActivityPageComponent } from "./components/activity-page/prionActivityPage.component";
+import { PrionWorkflowStartActivityComponent } from "./components/workflow-start-activity/prionWorkflowStartActivity.component";
+import { PrionActivityComponent } from "./components/activity/prionActivity.component";
+import { PrionDashboardComponent } from "./components/dashboard/prionDashboard.component";
+import { PrionErrorComponent } from "./components/error/prionError.component";
+import { PrionPasswordComponent } from "./components/password/prionPassword.component";
+import { PrionAppComponent } from "./components/app/prionApp.component";
+import { PrionSessionExpiredComponent } from "./components/session-expired/prionSessionExpired.component";
 
 @NgModule({
   imports: [
@@ -49,8 +58,9 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/sessi
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatTableModule,
     DdpModule,
-    MatTableModule
+    ToolkitModule
   ],
   providers: [
     CommunicationService,
@@ -68,19 +78,10 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/sessi
     PrionActivityPageComponent,
     PrionActivityComponent,
     PrionDashboardComponent,
-    LoginLandingComponent,
-    CommonLandingComponent,
-    RedirectToLoginLandingComponent,
     PrionErrorComponent,
-    DisclaimerComponent,
-    ResendEmailComponent,
-    PasswordComponent,
-    WarningComponent,
-    WarningMessageComponent,
+    PrionPasswordComponent,
     PrionAppComponent,
-    ActivityLinkComponent,
-    PrionSessionExpiredComponent,
-    RedirectToAuth0LoginComponent,
+    PrionSessionExpiredComponent
   ],
   exports: [
     PrionFooterComponent,
@@ -92,7 +93,7 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/sessi
     LoginLandingComponent,
     RedirectToLoginLandingComponent,
     PrionErrorComponent,
-    PasswordComponent,
+    PrionPasswordComponent,
     WarningMessageComponent,
     ActivityLinkComponent,
     PrionSessionExpiredComponent,
@@ -105,4 +106,14 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/sessi
     WarningComponent
   ]
 })
-export class ToolkitPrionModule { }
+export class ToolkitPrionModule {
+  constructor(
+    private router: Router,
+    private analytics: AnalyticsEventsService) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.analytics.emitNavigationEvent();
+      }
+    });
+  }
+}
