@@ -19,7 +19,7 @@ import {
       <div class="MainContainer">
         <router-outlet></router-outlet>
       </div>
-      <toolkit-footer></toolkit-footer>
+      <prion-footer></prion-footer>
     `
 })
 export class PrionAppComponent implements OnInit, OnDestroy {
