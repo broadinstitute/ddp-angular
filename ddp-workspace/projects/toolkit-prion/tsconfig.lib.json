@@ -19,12 +19,18 @@
     "paths": {
       "ddp-sdk": [
         "dist/ddp-sdk"
-        ],
-        "ddp-sdk/*": [
-          "dist/ddp-sdk/*"
-        ]
-      }
-    },
+      ],
+      "ddp-sdk/*": [
+        "dist/ddp-sdk/*"
+      ],
+      "toolkit": [
+        "dist/toolkit"
+      ],
+      "toolkit/*": [
+        "dist/toolkit/*"
+      ]
+    }
+  },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
