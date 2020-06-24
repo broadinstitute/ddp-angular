@@ -1444,6 +1444,41 @@
           }
         }
       }
+    },
+    "toolkit-prion": {
+      "projectType": "library",
+      "root": "projects/toolkit-prion",
+      "sourceRoot": "projects/toolkit-prion/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/toolkit-prion/tsconfig.lib.json",
+            "project": "projects/toolkit-prion/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/toolkit-prion/src/test.ts",
+            "tsConfig": "projects/toolkit-prion/tsconfig.spec.json",
+            "karmaConfig": "projects/toolkit-prion/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/toolkit-prion/tsconfig.lib.json",
+              "projects/toolkit-prion/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ddp-sdk",
