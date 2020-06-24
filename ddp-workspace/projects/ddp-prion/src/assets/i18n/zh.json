@@ -1,0 +1,464 @@
+{
+  "App": {
+    "Home": "家",
+    "FAQ": "更多詳情/常見問題",
+    "About": "關於我們",
+    "Join": "加入郵件列表",
+    "Twitter": "Prion <br>註冊處的推文"
+  },
+  "Toolkit": {
+    "Common": {
+      "Organization": "Prion",
+      "JoinUs": "加入我們",
+      "LogoAlt": "Prion Registry 商標",
+      "Home": "家",
+      "LearnMore": "學到更多",
+      "Dashboard": "我的儀表板"
+    },
+    "Footer": {
+      "BackToTop": "回到頂部",
+      "ContactUs": "聯繫我們：",
+      "ContactMailTo": "mailto:info@prionregistry.org",
+      "ContactEmail": "info@prionregistry.org"
+    },
+    "Dashboard": {
+      "StudyListing": {
+        "ActivityName": "研究清單",
+        "ActivityStatus": "可用的",
+        "ActivityCreated": "-",
+        "ActivitySummary": "可用的研究以及如何加入",
+        "ActivityActions": "視圖"
+      }
+    },
+    "Welcome": {
+      "WelcomeTitle": "致力於抗擊research病毒疾病的研究志願者",
+      "WelcomeText": "加入Prion註冊中心，這是一個在線註冊中心，面向患有by病毒疾病或有感染風險的人，他們希望找到參與研究的機會。",
+      "Intro": "加入我們的任務",
+      "Closing": "成為這項研究運動的一部分。 讓我們一起改變未來。",
+      "Participate": "這個怎麼運作：",
+      "Steps": {
+        "FirstStep": {
+          "Title": "1. 寄存器",
+          "Text": "單擊“加入我們”為您自己或摯愛的病毒病患者創建一個帳戶。 填寫我們的簡單在線同意書後，您就可以開始了！"
+        },
+        "SecondStep": {
+          "Title": "2. 向我們介紹你自己",
+          "Text": "您將被要求填寫一份有關您自己以及您的診斷或風險的簡短問卷（少於10分鐘）。"
+        },
+        "ThirdStep": {
+          "Title": "3. 讓我們一起學習！",
+          "Text": "問卷填寫完畢後，您將可以查看您有資格參加的研究，並聯繫調查人員進行註冊。 如果您允許我們，我們還將就未來的研究機會與您聯繫。"
+        }
+      },
+      "ArrowAlt": "箭頭"
+    },
+    "JoinUs": {
+      "Title": "加入我們",
+      "Description": {
+        "Pt1": "您或您的親戚有病毒病嗎？ 告訴我們並加入我們吧！",
+        "Pt2": "您可以使用電子郵件地址並創建密碼在平台中註冊。 我們將使用此帳戶與您就Prion註冊中心進行溝通。"
+      },
+      "Email": "電子郵件地址*",
+      "Password":  "密碼*",
+      "AlreadyRegistered": "已經登記了？ 在這裡登入"
+    },
+    "StudyListing": {
+      "Columns": [
+        {
+          "title": "研究名稱",
+          "name": "name",
+          "placeholder": "按名稱篩選"
+        },
+        {
+          "title": "研究內容",
+          "name": "description",
+          "placeholder": "按描述過濾"
+        },
+        {
+          "title": "首席研究員",
+          "name": "nameOfPI",
+          "placeholder": "按PI過濾"
+        },
+        {
+          "title": "學習地點",
+          "name": "studySite",
+          "placeholder": "按網站篩選"
+        },
+        {
+          "title": "資格要求",
+          "name": "eligibilityRequirements",
+          "placeholder": "按資格過濾"
+        },
+        {
+          "title": "更多信息",
+          "name": "studyInfo",
+          "placeholder": ""
+        }
+      ],
+      "Rows": [
+        {
+          "name": "zh: Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
+          "description": "zh: The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "studySite": "zh: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "zh: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
+          "studyInfo":  "zh: Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info.",
+          "metadata": {
+            "status": "zh: 2",
+            "tested positive": "zh: 5"
+          }
+        },
+        {
+          "name": "zh: Biomarkers in pre-symptomatic mutation carriers",
+          "description":"zh: Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
+          "studySite": "zh: Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
+          "eligibilityRequirements": "zh: You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt  style=\"font-weight: 400;\">- Between the ages of 18-85</dt><dt  style=\"font-weight: 400;\">- Fluent in English</dt></dl>",
+          "studyInfo":  "zh: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+        },
+        {
+          "name": "zh: Challenging the Huntington Disease Paradigm: Evaluation of Psychosocial Issues in Persons at-risk for Genetic Prion Disease",
+          "description": "zh: The purpose of this descriptive study is to examine the psychosocial experience of being at-risk for a genetic prion disease.  Eligible participants for the study will include those who are in one of two groups: 1) those who are at-risk for inheriting a mutation based on family history, but have not undergone predictive testing and 2) those with a mutation confirmed by predictive testing, but who are not yet symptomatic. This anonymous online survey includes questions about psychological adaptation to genetic information and a general mental health assessment, as well as some open-ended questions about experiences of being at-risk and views on the predictive testing process. This study will aim to inform best practices in predictive testing and increase knowledge of the unique psychosocial experience of being at-risk for a genetic prion disease.",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:alm14@case.edu\" ><strong>Dr. Anne Matthews</strong></a>",
+          "studySite": "zh: Case Western Reserve University, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "zh: <ol><li>Those who are 18 years of age or older.</li><li>Those who can read and understand English.</li><li>Those who are “at-risk” for a genetic prion disease, meaning that they have a relative affected with the disease.</li></ol>",
+          "studyInfo":  "zh: <a target=\"_blank\" href=\"https://cwru.az1.qualtrics.com/jfe/form/SV_8euTkcJbwaVd2OV\">Survey here</a> and <a target=\"_blank\" href=\"BUCKET_URL_HERE/williamson-HRP-506SBER-consent.pdf\">consent form here.</a>"
+        },
+        {
+          "name": "zh: Early Diagnosis of Human Prion Disease",
+          "description": "zh: The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
+          "studySite": "zh: Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
+          "eligibilityRequirements": "zh: Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
+          "studyInfo":  "zh: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+        },
+        {
+          "name": "zh: Teleneurology Assessment Program for CJD (TAPCJD)",
+          "description": "zh: We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "studySite": "zh: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "zh: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
+          "studyInfo":  "zh: Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+        },
+        {
+          "name": "zh: Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
+          "description": "zh: Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
+          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
+          "studySite": "zh: University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
+          "eligibilityRequirements": "zh: Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
+          "studyInfo":  "zh: See <a target=\"_blank\" href=\"BUCKET_URL_HERE/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+        }
+      ],
+      "InputPlaceholder": "zh: Filter all columns"
+    },
+    "LearnMore": {
+      "Title": "zh: Learn more about Prion Registry",
+      "LearnMore": {
+        "Title": "zh: Learn More",
+        "WhatIs": {
+          "Question": "zh: What is prion disease?",
+          "Text": "zh: Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+        },
+        "For": {
+          "Question": "zh: What is this registry for?",
+          "Text": "zh: In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+        },
+        "Participate": {
+          "Question": "zh: Can I participate in this registry?",
+          "Text": "zh: Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+        },
+        "Why": {
+          "Question": "zh: Why would I want to participate in this registry?",
+          "Text": "zh: Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+        },
+        "DoIHaveTo": {
+          "Question": "zh: Do I have to participate in this registry?",
+          "Text": "zh: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+        }
+      }
+    },
+    "LoginLanding": {
+      "Text": "zh: Please wait. You will be redirected to a destination soon..."
+    },
+    "Dialogs": {
+      "Disclaimer": {
+        "Title": "zh: View Prion Registry Data",
+        "Text": "zh: You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
+        "SubmitButton": "zh: OK"
+      },
+      "JoinMailingList": {
+        "Title": "zh: Stay informed!",
+        "Text": "zh: Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "zh: First Name *",
+            "Error": "zh: First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "zh: Last Name *",
+            "Error": "zh: Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "zh: Email Address *",
+            "Error": "zh: Please enter a valid Email Address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "zh: Email Confirmation (Reenter Email) *",
+            "Error": "zh: Please enter a valid Email Address"
+          }
+        },
+        "CancelButton": "zh: CANCEL",
+        "SubmitButton": "zh: JOIN",
+        "Required": "zh: * Required field",
+        "MatchEmailsError": "zh: Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "zh: We're sorry, but an error has occurred."
+      },
+      "SessionWillExpire": {
+        "Title": "zh: Your session will time-out soon!",
+        "Text": "zh: To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "zh: Sign Out",
+        "Continue": "zh: Continue",
+        "RenewalFailed": "zh: Session renewal failed. Please log out and log back in again."
+      }
+    },
+    "Warning": {
+      "Title": "zh: Download Chrome or Safari to Continue",
+      "Text1": "zh: This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+      "Text2": "zh: It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Text3": {
+        "Pt1": "zh: Click the following links to download",
+        "Pt2": "zh: or",
+        "Pt3": "zh: Chrome and Safari are always free.",
+        "Chrome": "zh: Chrome (for Mac & PC)",
+        "Safari": "zh: Safari (for Mac)"
+      },
+      "SubmitButton": "zh: OK"
+    },
+    "StayInformed": {
+      "Title": "zh: Stay Informed!",
+      "Text": "zh: Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+      "ReturnButton": "zh: RETURN HOME"
+    },
+    "Password": {
+      "Title": "zh: Please enter the password",
+      "Text": "zh: Please enter your password",
+      "SubmitButton": "zh: Submit",
+      "PasswordWrongError": "zh: Incorrect password. Please try again.",
+      "OtherError": "zh: We're sorry, but an error has occurred.",
+      "PasswordField": {
+        "Error": "zh: Password is required"
+      }
+    },
+    "ErrorPage": {
+      "Title": "zh: We've encountered an error",
+      "Header": "zh: We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "zh: Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "zh: ."
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "zh: Your password reset link has expired."
+    },
+    "SessionExpired": {
+      "Text": {
+        "Pt1": "zh: You were away for a while, so we logged you out as a security precaution.",
+        "Pt2": "zh: Please log in again to return to the last page you were on."
+      },
+      "LogInButton": "zh: Log In"
+    }
+  },
+  "SDK": {
+    "SubmitButton": "zh: Submit",
+    "CloseButton": "zh: Back to Dashboard",
+    "AddButton": "zh: Add",
+    "CancelButton": "zh: Cancel",
+    "NextButton": "zh: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": "zh:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+    "SavingButton": "zh: Saving",
+    "EditButton": "zh: Edit",
+    "ReviewButton": "zh: View",
+    "ValidateError": "zh: Please complete all required fields.",
+    "CommunicationError": "zh: There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SaveError": "zh: We're sorry but an error occurred.",
+    "ExportStudy": {
+      "Export": "zh: EXPORT"
+    },
+    "ListStudies": {
+      "StudyName": "zh: Study Name",
+      "ParticipantCount": "zh: Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "zh: Workspace Name",
+      "WorkspaceNamespace": "zh: Workspace Namespace"
+    },
+    "Login": {
+      "Login": "zh: LOG IN",
+      "Logout": "zh: LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "zh: Sign In",
+      "SignOut": "zh: Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "zh: language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "zh: Activity",
+      "Summary": "zh: Summary",
+      "ActivityStatus": "zh: Status",
+      "ActivityDate": "zh: Created",
+      "ActivityActions": "zh: Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "zh: Governed participants",
+      "ParticipantPlaceholder": "zh: Participant",
+      "ParticipantsList": "zh: Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "zh: Profile",
+      "ViewAs": "zh: View As",
+      "ManageParticipants": "zh: Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "zh: User preferences",
+      "UserPreferencesGender": "zh: Sex",
+      "UserPreferencesLocale": "zh: Preferred language"
+    },
+    "Dashboard": {
+      "Title": "zh: Welcome to the Prion Registry!",
+      "Text": "zh: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+    },
+    "DatePicker": {
+      "Day": "zh: Choose day...",
+      "Month": "zh: Choose month...",
+      "Year": "zh: Choose year...",
+      "January": "zh: January",
+      "February": "zh: February",
+      "March": "zh: March",
+      "April": "zh: April",
+      "May": "zh: May",
+      "June": "zh: June",
+      "July": "zh: July",
+      "August": "zh: August",
+      "September": "zh: September",
+      "October": "zh: October",
+      "November": "zh: November",
+      "December": "zh: December"
+    },
+    "UserMenu": {
+      "DashboardButton": "zh: My Dashboard",
+      "SignOutButton": "zh: Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "zh: characters remaining",
+      "SingularForm": "zh: character remaining"
+    },
+    "Title": {
+      "Default": "zh: Prion Registry",
+      "Alert": "zh: Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "zh: Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "zh: Physician Name",
+        "Institution": "zh: Institution",
+        "InstitutionAny": "zh: Institution (if any)",
+        "City": "zh: City",
+        "State": "zh: State"
+      },
+      "PhysicianValidation": "zh: Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "zh: Full Name",
+        "Country": "zh: Country/Territory",
+        "Street1": "zh: Street Address",
+        "Street2": "zh: Apt/Floor #",
+        "State": {
+          "State": "zh: State",
+          "Province": "zh: Province",
+          "State/Province/Region": "zh: State/Province/Region"
+        },
+        "City": "zh: City",
+        "Phone": "zh: Phone",
+        "Zip": {
+          "Zip Code": "zh: Zip Code",
+          "Postal Code": "zh: Postal Code",
+          "Zip/Postal Code": "zh: Zip/Postal Code"
+        },
+        "Choose": "zh: Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "zh: We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "zh: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "zh: Suggested:",
+        "AsEntered": "zh: As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "zh: Invalid address.",
+        "CannotVerify": "zh: Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "zh: An unknown error occurred while verifying address.",
+        "FieldIsRequired": "zh: {{field}} is required",
+        "FieldIsInvalid": "zh: {{field}} has an invalid value",
+        "InvalidHouseNumber": "zh: Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "zh: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "zh: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "zh: The requested resource could not be found.",
+        "FORBIDDEN": "zh: Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "zh: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "zh: Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "zh: Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "zh: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "zh: This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "zh: API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "zh: At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "zh: The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "zh: Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "zh: The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "zh: The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "zh: Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "zh: Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "zh: The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "zh: Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "zh: One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "zh: Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "zh: Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "zh: Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "zh: USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "zh: International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "zh: Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "zh: Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "zh: This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "zh: No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "zh: We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "zh: We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "zh: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "zh: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "zh: House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "zh: We could not find the street number provided.",
+        "E.STREET.MISSING": "zh: Street is missing.",
+        "E.STREET.INVALID": "zh: Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "zh: Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "zh: Box number is invalid.",
+        "E.ADDRESS.INVALID": "zh: Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "zh: Zip not found.",
+        "E.ZIP.INVALID": "zh: Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "zh: Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "zh: Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "zh: Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "zh: Dual address.",
+        "E.STREET.MAGNET": "zh: Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "zh: Unverifiable city / state.",
+        "E.STATE.INVALID": "zh: Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "zh: Invalid delivery address.",
+        "E.TIMED_OUT": "zh: Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "zh: The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "zh: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "zh: Information"
+  }
+}
