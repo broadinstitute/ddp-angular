@@ -25,10 +25,10 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
 ];
 
 @Component({
-    selector: 'toolkit-dashboard',
+    selector: 'prion-dashboard',
     template: `
-      <toolkit-header currentRoute="/dashboard">
-      </toolkit-header>
+      <prion-header currentRoute="/dashboard">
+      </prion-header>
       <div class="Wrapper">
         <article class="PageContent">
           <div class="PageLayout PageLayout-dashboard">
@@ -128,7 +128,7 @@ export class PrionDashboardComponent extends DashboardComponent implements OnIni
         private _announcements: AnnouncementsServiceAgent,
         @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
-      super(_router, _announcements, _toolkitConfiguration)
+        super(_router, _announcements, _toolkitConfiguration);
     }
 
     public ngOnInit(): void {
