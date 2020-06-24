@@ -3,9 +3,9 @@ import { Auth0AdapterService } from 'ddp-sdk';
 import { SessionExpiredComponent } from "toolkit";
 
 @Component({
-  selector: 'toolkit-session-expired',
+  selector: 'prion-session-expired',
   template: `
-        <toolkit-header></toolkit-header>
+        <prion-header></prion-header>
         <div class="Wrapper">
         <article class="PageContent">
             <div class="PageLayout">
