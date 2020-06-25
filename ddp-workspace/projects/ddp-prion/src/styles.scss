@@ -492,17 +492,25 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
-input.mat-input-element.study-listing-filter-all {
+input.mat-input-element.study-listing-filter {
   font-size: 14px;
   line-height: 1.42857143;
   height: 34px !important;
   margin-top: 0;
 }
 
+input.mat-input-element.study-listing-filter-col {
+  font-weight: 400 !important;
+}
+
 .study-listing-table {
   width: 100% !important;
   table-layout: fixed;
   overflow-wrap: break-word;
+
+  .filter-row, tbody>tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
 
   th:nth-of-type(2) {
     width: 30%;
