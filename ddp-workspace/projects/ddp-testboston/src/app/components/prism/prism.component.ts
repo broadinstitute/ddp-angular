@@ -6,11 +6,11 @@ import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switch
 import { AppRoutes } from '../../app-routes';
 
 @Component({
-  selector: 'app-crc-dashboard',
-  templateUrl: './crc-dashboard.component.html',
-  styleUrls: ['./crc-dashboard.component.scss']
+  selector: 'app-prism',
+  templateUrl: './prism.component.html',
+  styleUrls: ['./prism.component.scss']
 })
-export class CrcDashboardComponent implements OnInit, OnDestroy {
+export class PrismComponent implements OnInit, OnDestroy {
   public searchForm: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
