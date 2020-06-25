@@ -11,6 +11,12 @@
     }
 }
 
+.content_dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .dashboard-section {
     margin: 5rem 0 15rem 0;
 }
@@ -38,6 +44,26 @@
     font-size: 1rem;
     line-height: 1.5rem;
     color: mat-color($app-theme, 700);
+}
+
+.invitation-code {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin: 0;
+
+    &__text {
+        font-size: 20px;
+    }
+}
+
+.dashboard-message {
+    margin-bottom: 5rem;
+
+    &__text {
+        margin-top: 5rem;
+        margin-bottom: 2.5rem;
+    }
 }
 
 .ddp-dashboard {
