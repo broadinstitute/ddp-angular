@@ -24,6 +24,7 @@ import {
   RedirectToAuth0LoginComponent,
   RedirectToLoginLandingComponent,
   ResendEmailComponent,
+  SessionWillExpireComponent,
   ToolkitModule,
   WarningComponent,
   WarningMessageComponent,
@@ -103,7 +104,8 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/prion
   entryComponents: [
     DisclaimerComponent,
     ResendEmailComponent,
-    WarningComponent
+    WarningComponent,
+    SessionWillExpireComponent
   ]
 })
 export class ToolkitPrionModule {
