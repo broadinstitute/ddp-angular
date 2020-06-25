@@ -4,6 +4,7 @@ import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType
 import { Subject } from 'rxjs';
 import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
+import { SearchForm } from '../../models/searchForm.model';
 
 @Component({
   selector: 'app-prism',
@@ -12,11 +13,12 @@ import { AppRoutes } from '../../app-routes';
 })
 export class PrismComponent implements OnInit, OnDestroy {
   public searchForm: FormGroup;
+  public zipForm: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
   public studySubject: StudySubject | null = null;
   public appRoutes = AppRoutes;
-  public isLoading = false;
+  public isInvitationLoading = false;
   private notes = new Subject<string>();
   private anchor = new CompositeDisposable();
 
@@ -25,7 +27,8 @@ export class PrismComponent implements OnInit, OnDestroy {
     private subjectInvitation: SubjectInvitationServiceAgent) { }
 
   public ngOnInit(): void {
-    this.initForm();
+    this.initSearchForm();
+    this.initZipForm();
     this.initSearchListener();
     this.initNotesListener();
   }
@@ -64,12 +67,18 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public enrollSubject(): void {
     // TBD
-    alert("We are sorry, but the CRC Dashboard doesn't support enrollment yet.");
+    alert(`We are sorry, but the CRC Dashboard doesn't support enrollment yet.`);
   }
 
-  private initForm(): void {
+  private initSearchForm(): void {
     this.searchForm = new FormGroup({
       invitationId: new FormControl(null)
+    });
+  }
+
+  private initZipForm(): void {
+    this.zipForm = new FormGroup({
+      zip: new FormControl(null)
     });
   }
 
@@ -80,12 +89,12 @@ export class PrismComponent implements OnInit, OnDestroy {
       tap(() => {
         this.error = null;
         this.studySubject = null;
-        this.isLoading = false;
+        this.isInvitationLoading = false;
       }),
       filter(invitationId => this.searchForm.valid && !!invitationId),
-      tap(() => this.isLoading = true),
+      tap(() => this.isInvitationLoading = true),
       switchMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
-      tap(() => this.isLoading = false)
+      tap(() => this.isInvitationLoading = false)
     ).subscribe(response => {
       if (response && this.areInvitationsEqual(response.invitationId)) {
         this.studySubject = response;
@@ -106,8 +115,4 @@ export class PrismComponent implements OnInit, OnDestroy {
     });
     this.anchor.addNew(note);
   }
-}
-
-interface SearchForm {
-  invitationId: string;
 }

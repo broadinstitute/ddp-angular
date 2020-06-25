@@ -1,63 +1,73 @@
 <main class="main">
-    <section class="section search-section">
-        <div class="content">
-            <div class="search-block">
-                <form [formGroup]="searchForm">
-                    <p class="title" translate>CrcDashboard.Title</p>
-                    <p class="subtitle" translate>CrcDashboard.Subtitle</p>
-                    <div class="invitation-code">
-                        <div class="container">
-                            <mat-form-field class="search-field">
-                                <button matPrefix mat-icon-button [disabled]="true">
-                                    <mat-icon class="search-field__icon">search</mat-icon>
-                                </button>
-                                <input matInput invitationcode formControlName="invitationId" pattern="[a-zA-Z0-9]{12}"
-                                    maxLength="18" [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
-                                <button matSuffix (click)="clearSearchField()" class="search-field__clear"
-                                    [ngClass]="{'search-field__clear_visible': showSearchButton}">
-                                    {{'CrcDashboard.ClearSearch' | translate}}
-                                </button>
-                            </mat-form-field>
-                            <div *ngIf="isLoading" class="container__spinner">
-                                <mat-spinner color="primary" diameter="30"></mat-spinner>
+    <section class="section">
+        <div class="content content-prism">
+            <div class="block" [ngClass]="{'block_small': studySubject}">
+                <div class="search-block">
+                    <form [formGroup]="searchForm">
+                        <p class="step">STEP 1</p>
+                        <p class="title" translate>CrcDashboard.Title</p>
+                        <p class="subtitle" translate>CrcDashboard.Subtitle</p>
+                        <div class="invitation-code">
+                            <div class="container">
+                                <mat-form-field class="search-field">
+                                    <button matPrefix mat-icon-button [disabled]="true">
+                                        <mat-icon class="search-field__icon">search</mat-icon>
+                                    </button>
+                                    <input matInput invitationcode formControlName="invitationId"
+                                        pattern="[a-zA-Z0-9]{12}" maxLength="18"
+                                        [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
+                                    <button matSuffix (click)="clearSearchField()" class="search-field__clear"
+                                        [ngClass]="{'search-field__clear_visible': showSearchButton}">
+                                        {{'CrcDashboard.ClearSearch' | translate}}
+                                    </button>
+                                </mat-form-field>
+                                <div *ngIf="isInvitationLoading" class="container__spinner">
+                                    <mat-spinner color="primary" diameter="30"></mat-spinner>
+                                </div>
                             </div>
+                            <ng-container *ngIf="hasError(errorType.InvitationNotFound)">
+                                <p class="error">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    <span translate>CrcDashboard.SearchError</span>
+                                </p>
+                            </ng-container>
                         </div>
-                        <ng-container *ngIf="hasError(errorType.InvitationNotFound)">
-                            <p class="error">
-                                <mat-icon>highlight_off</mat-icon>
-                                <span translate>CrcDashboard.SearchError</span>
-                            </p>
-                        </ng-container>
+                    </form>
+                </div>
+                <ng-container *ngIf="studySubject && !studySubject.userGuid">
+                    <div>
+                        <p class="step">STEP 2 (OPTIONAL)</p>
+                        <p class="title">Check mailing zipcode</p>
+                        <mat-form-field class="invitation-form__input">
+                            <input matInput minlength="5" maxlength="5" pattern="[0-9]{5}" placeholder="Enter zipcode">
+                        </mat-form-field>
                     </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <section *ngIf="studySubject" class="section">
-        <div class="content">
-            <div class="subject-block">
-                <div class="subject-info">
-                    <div class="info-block">
-                        <p class="info-block__title" translate>CrcDashboard.InvitationCode</p>
-                        <p class="info-block__text">{{studySubject.invitationId | invitation}}</p>
+                    <div>
+                        <p class="step">STEP 3 (OPTIONAL)</p>
+                        <p class="title">Verbally confirm subject is 18 years or older before beginning enrollment.</p>
                     </div>
+                    <div class="navigate">
+                        <button class="button button_primary" (click)="enrollSubject()">
+                            {{'CrcDashboard.Buttons.Enrollment' | translate}}
+                        </button>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="studySubject && studySubject.userGuid">
                     <div class="info-block">
                         <p class="info-block__title" translate>CrcDashboard.Email</p>
                         <p class="info-block__text">
                             {{studySubject.userLoginEmail ? studySubject.userLoginEmail : 'CrcDashboard.NoEmail' | translate}}
                         </p>
                     </div>
-                </div>
-                <div class="buttons">
-                    <button *ngIf="!studySubject.userLoginEmail" class="button button_primary"
-                        (click)="enrollSubject()">
-                        {{'CrcDashboard.Buttons.Enrollment' | translate}}
-                    </button>
-                    <a *ngIf="studySubject.userLoginEmail" class="button button_primary" (click)="setSelectedSubject()"
-                        [routerLink]="'/' + appRoutes.Dashboard" translate>
-                        CrcDashboard.Buttons.Dashboard
-                    </a>
-                </div>
+                    <div class="navigate">
+                        <a class="button button_primary" (click)="setSelectedSubject()"
+                            [routerLink]="'/' + appRoutes.Dashboard" translate>
+                            CrcDashboard.Buttons.Dashboard
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="block_small" *ngIf="studySubject">
                 <div class="notes">
                     <p class="notes__title" translate>CrcDashboard.Notes</p>
                     <textarea class="notes__textarea" rows="10"
@@ -72,5 +82,4 @@
             </div>
         </div>
     </section>
-    <section *ngIf="!studySubject" class="placeholder"></section>
 </main>
