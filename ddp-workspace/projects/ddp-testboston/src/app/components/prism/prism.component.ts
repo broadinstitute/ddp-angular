@@ -19,6 +19,7 @@ export class PrismComponent implements OnInit, OnDestroy {
   public studySubject: StudySubject | null = null;
   public appRoutes = AppRoutes;
   public isInvitationLoading = false;
+  public isZipLoading = false;
   private notes = new Subject<string>();
   private anchor = new CompositeDisposable();
 
@@ -31,30 +32,23 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.initZipForm();
     this.initSearchListener();
     this.initNotesListener();
+    this.initZipListener();
   }
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
   }
 
-  public clearSearchField(): void {
-    this.searchForm.reset();
+  public clearForm(form: string): void {
+    this[form].reset();
   }
 
-  public get showSearchButton(): boolean {
-    return !!this.searchForm.controls.invitationId.value;
+  public showClearButton(form: string, field: string): boolean {
+    return !!this[form].controls[field].value;
   }
 
   public hasError(errorType: ErrorType): boolean {
     return this.error && this.error.errorType === errorType;
-  }
-
-  public isInvitationValid(): boolean {
-    return this.searchForm.valid && !!this.searchForm.controls.invitationId.value;
-  }
-
-  public areInvitationsEqual(invitationId: string): boolean {
-    return invitationId === this.searchForm.controls.invitationId.value;
   }
 
   public setSelectedSubject(): void {
@@ -68,6 +62,14 @@ export class PrismComponent implements OnInit, OnDestroy {
   public enrollSubject(): void {
     // TBD
     alert(`We are sorry, but the CRC Dashboard doesn't support enrollment yet.`);
+  }
+
+  private isInvitationValid(): boolean {
+    return this.searchForm.controls.invitationId.valid;
+  }
+
+  private areInvitationsEqual(invitationId: string): boolean {
+    return invitationId === this.searchForm.controls.invitationId.value;
   }
 
   private initSearchForm(): void {
@@ -91,7 +93,7 @@ export class PrismComponent implements OnInit, OnDestroy {
         this.studySubject = null;
         this.isInvitationLoading = false;
       }),
-      filter(invitationId => this.searchForm.valid && !!invitationId),
+      filter(invitationId => this.searchForm.controls.invitationId.valid && !!invitationId),
       tap(() => this.isInvitationLoading = true),
       switchMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
       tap(() => this.isInvitationLoading = false)
@@ -115,4 +117,6 @@ export class PrismComponent implements OnInit, OnDestroy {
     });
     this.anchor.addNew(note);
   }
+
+  private initZipListener(): void { }
 }

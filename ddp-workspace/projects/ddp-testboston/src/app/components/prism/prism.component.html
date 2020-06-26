@@ -7,17 +7,17 @@
                         <p class="step">STEP 1</p>
                         <p class="title" translate>CrcDashboard.Title</p>
                         <p class="subtitle" translate>CrcDashboard.Subtitle</p>
-                        <div class="invitation-code">
+                        <div class="form-block">
                             <div class="container">
-                                <mat-form-field class="search-field">
+                                <mat-form-field class="prism-field">
                                     <button matPrefix mat-icon-button [disabled]="true">
-                                        <mat-icon class="search-field__icon">search</mat-icon>
+                                        <mat-icon class="prism-field__icon">search</mat-icon>
                                     </button>
                                     <input matInput invitationcode formControlName="invitationId"
                                         pattern="[a-zA-Z0-9]{12}" maxLength="18"
                                         [placeholder]="'CrcDashboard.SearchPlaceholder' | translate">
-                                    <button matSuffix (click)="clearSearchField()" class="search-field__clear"
-                                        [ngClass]="{'search-field__clear_visible': showSearchButton}">
+                                    <button matSuffix (click)="clearForm('searchForm')" class="prism-field__clear"
+                                        [ngClass]="{'prism-field__clear_visible': showClearButton('searchForm', 'invitationId')}">
                                         {{'CrcDashboard.ClearSearch' | translate}}
                                     </button>
                                 </mat-form-field>
@@ -37,10 +37,28 @@
                 <ng-container *ngIf="studySubject && !studySubject.userGuid">
                     <div>
                         <p class="step">STEP 2 (OPTIONAL)</p>
-                        <p class="title">Check mailing zipcode</p>
-                        <mat-form-field class="invitation-form__input">
-                            <input matInput minlength="5" maxlength="5" pattern="[0-9]{5}" placeholder="Enter zipcode">
-                        </mat-form-field>
+                        <p class="title">Check mailing zip code</p>
+                        <div class="form-block">
+                            <div class="container">
+                                <mat-form-field class="prism-field prism-field_small">
+                                    <input  matInput minlength="5" maxlength="5" pattern="[0-9]{5}"
+                                        placeholder="Enter zip code">
+                                    <button matSuffix (click)="clearForm('zipForm')" class="prism-field__clear"
+                                        [ngClass]="{'prism-field__clear_visible': showClearButton('zipForm', 'zip')}">
+                                        {{'CrcDashboard.ClearSearch' | translate}}
+                                    </button>
+                                </mat-form-field>
+                                <div *ngIf="isZipLoading" class="container__spinner">
+                                    <mat-spinner color="primary" diameter="30"></mat-spinner>
+                                </div>
+                            </div>
+                            <!-- <ng-container *ngIf="hasError(errorType.InvitationNotFound)">
+                                <p class="error">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    <span translate>CrcDashboard.SearchError</span>
+                                </p>
+                            </ng-container> -->
+                        </div>
                     </div>
                     <div>
                         <p class="step">STEP 3 (OPTIONAL)</p>
@@ -72,7 +90,8 @@
                     <p class="notes__title" translate>CrcDashboard.Notes</p>
                     <textarea class="notes__textarea" rows="10"
                         [placeholder]="'CrcDashboard.NotesPlaceholder' | translate"
-                        (input)="saveNotes($event.target.value)" [ngModel]="studySubject.notes"></textarea>
+                        (input)="saveNotes($event.target.value)" [ngModel]="studySubject.notes">
+                    </textarea>
                     <ng-container *ngIf="hasError(errorType.NotesError)">
                         <p class="error error_notes" translate>
                             CrcDashboard.NotesError

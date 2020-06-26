@@ -53,11 +53,11 @@
     margin: 1.5rem 0;
 }
 
-.invitation-code {
+.form-block {
     display: flex;
 }
 
-.search-field {
+.prism-field {
     width: 24rem;
 
     &__icon {
@@ -81,6 +81,10 @@
         &_visible {
             display: flex;
         }
+    }
+
+    &_small {
+        width: 10rem;
     }
 }
 
@@ -175,7 +179,7 @@
 }
 
 @media only screen and (max-width: 510px) {
-    .invitation-code {
+    .form-block {
         flex-direction: column;
     }
 
@@ -189,7 +193,7 @@
         margin: 3rem 0 1rem 0;
     }
 
-    .search-field {
+    .prism-field {
         width: 20rem;
     }
 }
