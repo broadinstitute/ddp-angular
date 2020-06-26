@@ -26,7 +26,7 @@
 }
 
 .search-block {
-    margin: 5rem 0 1rem 0;
+    margin: 5rem 0 0 0;
 }
 
 .title {
@@ -35,14 +35,21 @@
     line-height: 2.0625rem;
     margin: 0;
     font-weight: bold;
+
+    &_field {
+        margin-bottom: -1rem;
+    }
 }
 
 .subtitle {
     color: mat-color($app-theme, 400);
     font-size: 1.125rem;
     line-height: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    margin: 0;
+
+    &_field {
+        margin-bottom: -0.5rem;
+    }
 }
 
 .navigate {
@@ -186,7 +193,7 @@
 
     .success,
     .error {
-        margin: 0 0 1rem 0;
+        margin: -1rem 0 1.5rem;
     }
 }
 
