@@ -4,7 +4,7 @@ import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType
 import { Subject } from 'rxjs';
 import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
-import { SearchForm } from '../../models/searchForm.model';
+import { PrismForm } from '../../models/prismForm.model';
 
 @Component({
   selector: 'app-prism',
@@ -12,14 +12,14 @@ import { SearchForm } from '../../models/searchForm.model';
   styleUrls: ['./prism.component.scss']
 })
 export class PrismComponent implements OnInit, OnDestroy {
-  public searchForm: FormGroup;
-  public zipForm: FormGroup;
+  public prismForm: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
   public studySubject: StudySubject | null = null;
   public appRoutes = AppRoutes;
   public isInvitationLoading = false;
   public isZipLoading = false;
+  public zipVerified = false;
   private notes = new Subject<string>();
   private anchor = new CompositeDisposable();
 
@@ -28,23 +28,23 @@ export class PrismComponent implements OnInit, OnDestroy {
     private subjectInvitation: SubjectInvitationServiceAgent) { }
 
   public ngOnInit(): void {
-    this.initSearchForm();
-    this.initZipForm();
+    this.initPrismForm();
     this.initSearchListener();
-    this.initNotesListener();
-    this.initZipListener();
   }
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
   }
 
-  public clearForm(form: string): void {
-    this[form].reset();
+  public clearField(field: string): void {
+    this.prismForm.controls[field].reset();
+    if (field === 'invitationId') {
+      this.resetForm();
+    }
   }
 
-  public showClearButton(form: string, field: string): boolean {
-    return !!this[form].controls[field].value;
+  public showClearButton(field: string): boolean {
+    return !!this.prismForm.controls[field].value;
   }
 
   public hasError(errorType: ErrorType): boolean {
@@ -64,44 +64,63 @@ export class PrismComponent implements OnInit, OnDestroy {
     alert(`We are sorry, but the CRC Dashboard doesn't support enrollment yet.`);
   }
 
-  private isInvitationValid(): boolean {
-    return this.searchForm.controls.invitationId.valid;
-  }
-
-  private areInvitationsEqual(invitationId: string): boolean {
-    return invitationId === this.searchForm.controls.invitationId.value;
-  }
-
-  private initSearchForm(): void {
-    this.searchForm = new FormGroup({
+  private initPrismForm(): void {
+    this.prismForm = new FormGroup({
       invitationId: new FormControl(null)
     });
   }
 
-  private initZipForm(): void {
-    this.zipForm = new FormGroup({
-      zip: new FormControl(null)
-    });
+  private addFields(studySubject: StudySubject): void {
+    if (studySubject.userGuid) {
+      this.addNotesField();
+    } else {
+      this.addZipField();
+      this.addNotesField();
+    }
+  }
+
+  private addZipField(): void {
+    this.prismForm.addControl('zip', new FormControl(null));
+    this.initZipListener();
+  }
+
+  private addNotesField(): void {
+    this.prismForm.addControl('notes', new FormControl(this.studySubject.notes));
+    this.initNotesListener();
+  }
+
+  private resetForm(): void {
+    if (this.prismForm.controls.zip) {
+      this.prismForm.removeControl('zip');
+      this.zipVerified = false;
+      this.isZipLoading = false;
+    }
+    if (this.prismForm.controls.notes) {
+      this.prismForm.removeControl('notes');
+    }
   }
 
   private initSearchListener(): void {
-    const search = this.searchForm.valueChanges.pipe(
-      map((form: SearchForm) => form.invitationId),
+    const search = this.prismForm.valueChanges.pipe(
+      map((form: PrismForm) => form.invitationId),
       distinctUntilChanged(),
       tap(() => {
         this.error = null;
         this.studySubject = null;
         this.isInvitationLoading = false;
+        this.resetForm();
       }),
-      filter(invitationId => this.searchForm.controls.invitationId.valid && !!invitationId),
+      filter(invitationId => this.prismForm.controls.invitationId.valid && !!invitationId),
       tap(() => this.isInvitationLoading = true),
       switchMap(invitationId => this.subjectInvitation.lookupInvitation(invitationId)),
       tap(() => this.isInvitationLoading = false)
     ).subscribe(response => {
-      if (response && this.areInvitationsEqual(response.invitationId)) {
+      if (response && (response.invitationId === this.prismForm.controls.invitationId.value)) {
         this.studySubject = response;
-      } else if (response === null && this.isInvitationValid()) {
+        this.addFields(response);
+      } else if (response === null && this.prismForm.controls.invitationId.valid) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
+        this.resetForm();
       }
     });
     this.anchor.addNew(search);
@@ -118,5 +137,26 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.anchor.addNew(note);
   }
 
-  private initZipListener(): void { }
+  private initZipListener(): void {
+    const zip = this.prismForm.valueChanges.pipe(
+      map((form: PrismForm) => form.zip),
+      distinctUntilChanged(),
+      tap(() => {
+        this.error = null;
+        this.isZipLoading = false;
+        this.zipVerified = false;
+      }),
+      filter(zip => this.prismForm.controls.zip.valid && !!zip),
+      tap(() => this.isZipLoading = true),
+      switchMap(zip => this.subjectInvitation.checkZipCode(this.studySubject.invitationId, zip)),
+      tap(() => this.isZipLoading = false)
+    ).subscribe(response => {
+      if (response && this.prismForm.controls.invitationId.valid) {
+        this.zipVerified = true;
+      } else if (response === null && this.prismForm.controls.invitationId.valid) {
+        this.error = new DdpError('', ErrorType.InvalidZip);
+      }
+    });
+    this.anchor.addNew(zip);
+  }
 }

@@ -98,6 +98,7 @@
     }
 }
 
+.success,
 .error {
     display: flex;
     align-items: center;
@@ -118,6 +119,10 @@
         font-weight: 600;
         margin: 1rem 0 0 0;
     }
+}
+
+.success {
+    color: mat-color($app-theme, 3800);
 }
 
 .info-block {
@@ -183,6 +188,7 @@
         flex-direction: column;
     }
 
+    .success,
     .error {
         margin: 0;
     }
@@ -195,5 +201,9 @@
 
     .prism-field {
         width: 20rem;
+
+        &_small {
+            width: 12rem;
+        }
     }
 }

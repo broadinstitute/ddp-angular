@@ -253,7 +253,9 @@
         },
         "Notes": "SUBJECT NOTES",
         "NotesPlaceholder": "Start Typing...",
-        "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry."
+        "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry.",
+        "ZipError": "Invalid zipcode",
+        "ZipSuccess": "Valid zipcode"
     },
     "Toolkit": {
         "Dashboard": {
