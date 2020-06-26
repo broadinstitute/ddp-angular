@@ -8,12 +8,12 @@
                         <p class="title" [ngClass]="{'block_small': !studySubject}" translate>
                             Prism.Steps.Step1.Title
                         </p>
-                        <p class="subtitle" [ngClass]="{'block_small': !studySubject}" translate>
+                        <p class="subtitle subtitle_field" [ngClass]="{'block_small': !studySubject}" translate>
                             Prism.Steps.Step1.Subtitle
                         </p>
                         <div class="form-block">
                             <div class="container">
-                                <mat-form-field class="prism-field">
+                                <mat-form-field class="prism-field" floatLabel="never">
                                     <button matPrefix mat-icon-button [disabled]="true">
                                         <mat-icon class="prism-field__icon">search</mat-icon>
                                     </button>
@@ -39,10 +39,10 @@
                     </div>
                     <!-- Unenrolled subject's form -->
                     <ng-container *ngIf="studySubject && !studySubject.userGuid">
-                        <p class="title" translate>Prism.Steps.Step2.Title</p>
+                        <p class="title title_field" translate>Prism.Steps.Step2.Title</p>
                         <div class="form-block">
                             <div class="container">
-                                <mat-form-field class="prism-field prism-field_small">
+                                <mat-form-field class="prism-field prism-field_small" floatLabel="never">
                                     <input matInput formControlName="zip" minlength="5" maxlength="5" pattern="[0-9]{5}"
                                         [placeholder]="'Prism.Steps.Step2.Placeholder' | translate">
                                     <button matSuffix (click)="clearField('zip')" class="prism-field__clear"
