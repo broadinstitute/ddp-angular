@@ -56,6 +56,7 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   public setSelectedSubject(): void {
     this.sessionService.setParticipant(this.studySubject.userGuid);
+    this.sessionService.setInvitationId(this.studySubject.invitationId);
   }
 
   public saveNotes(notes: string): void {
