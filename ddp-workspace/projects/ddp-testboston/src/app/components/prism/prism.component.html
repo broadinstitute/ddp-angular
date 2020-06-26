@@ -38,7 +38,7 @@
                             </ng-container>
                         </div>
                     </div>
-                    <!-- Unenrolled subject's info -->
+                    <!-- Unenrolled subject's form -->
                     <ng-container *ngIf="studySubject && !studySubject.userGuid">
                         <p class="step" translate>Prism.Steps.Step2.Step</p>
                         <p class="title" translate>Prism.Steps.Step2.Title</p>
@@ -77,7 +77,7 @@
                             </button>
                         </div>
                     </ng-container>
-                    <!-- Enrolled subject's info -->
+                    <!-- Enrolled subject's form -->
                     <ng-container *ngIf="studySubject && studySubject.userGuid">
                         <div class="info-block">
                             <p class="info-block__title" translate>Prism.Email</p>
