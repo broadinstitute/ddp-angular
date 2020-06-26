@@ -1,7 +1,7 @@
 <main class="main">
     <section class="section">
         <div class="content content-prism">
-            <form [formGroup]="prismForm">
+            <form [formGroup]="prismForm" class="prism-form">
                 <div class="block" [ngClass]="{'block_small': studySubject}">
                     <div class="search-block">
                         <p class="step">STEP 1</p>
@@ -34,42 +34,39 @@
                         </div>
                     </div>
                     <ng-container *ngIf="studySubject && !studySubject.userGuid">
-                        <div>
-                            <p class="step">STEP 2 (OPTIONAL)</p>
-                            <p class="title">Check mailing zip code</p>
-                            <div class="form-block">
-                                <div class="container">
-                                    <mat-form-field class="prism-field prism-field_small">
-                                        <input matInput formControlName="zip" minlength="5" maxlength="5"
-                                            pattern="[0-9]{5}" placeholder="Enter zip code">
-                                        <button matSuffix (click)="clearField('zip')" class="prism-field__clear"
-                                            [ngClass]="{'prism-field__clear_visible': showClearButton('zip')}">
-                                            {{'CrcDashboard.ClearSearch' | translate}}
-                                        </button>
-                                    </mat-form-field>
-                                    <div *ngIf="isZipLoading" class="container__spinner">
-                                        <mat-spinner color="primary" diameter="30"></mat-spinner>
-                                    </div>
+
+                        <p class="step">STEP 2 (OPTIONAL)</p>
+                        <p class="title">Check mailing zip code</p>
+                        <div class="form-block">
+                            <div class="container">
+                                <mat-form-field class="prism-field prism-field_small">
+                                    <input matInput formControlName="zip" minlength="5" maxlength="5" pattern="[0-9]{5}"
+                                        placeholder="Enter zip code">
+                                    <button matSuffix (click)="clearField('zip')" class="prism-field__clear"
+                                        [ngClass]="{'prism-field__clear_visible': showClearButton('zip')}">
+                                        {{'CrcDashboard.ClearSearch' | translate}}
+                                    </button>
+                                </mat-form-field>
+                                <div *ngIf="isZipLoading" class="container__spinner">
+                                    <mat-spinner color="primary" diameter="30"></mat-spinner>
                                 </div>
-                                <ng-container *ngIf="hasError(errorType.InvalidZip)">
-                                    <p class="error">
-                                        <mat-icon>highlight_off</mat-icon>
-                                        <span translate>CrcDashboard.ZipError</span>
-                                    </p>
-                                </ng-container>
-                                <ng-container *ngIf="zipVerified">
-                                    <p class="success">
-                                        <mat-icon>check_circle</mat-icon>
-                                        <span translate>CrcDashboard.ZipSuccess</span>
-                                    </p>
-                                </ng-container>
                             </div>
+                            <ng-container *ngIf="hasError(errorType.InvalidZip)">
+                                <p class="error">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    <span translate>CrcDashboard.ZipError</span>
+                                </p>
+                            </ng-container>
+                            <ng-container *ngIf="zipVerified">
+                                <p class="success">
+                                    <mat-icon>check_circle</mat-icon>
+                                    <span translate>CrcDashboard.ZipSuccess</span>
+                                </p>
+                            </ng-container>
                         </div>
-                        <div>
-                            <p class="step">STEP 3 (OPTIONAL)</p>
-                            <p class="title">Verbally confirm subject is 18 years or older before beginning enrollment.
-                            </p>
-                        </div>
+                        <p class="step">STEP 3 (OPTIONAL)</p>
+                        <p class="title">Verbally confirm subject is 18 years or older before beginning enrollment.
+                        </p>
                         <div class="navigate">
                             <button class="button button_primary" (click)="enrollSubject()">
                                 {{'CrcDashboard.Buttons.Enrollment' | translate}}
@@ -94,10 +91,8 @@
                 <div class="block_small" *ngIf="studySubject">
                     <div class="notes">
                         <p class="notes__title" translate>CrcDashboard.Notes</p>
-                        <textarea class="notes__textarea" rows="10"
-                            [placeholder]="'CrcDashboard.NotesPlaceholder' | translate"
-                            (input)="saveNotes($event.target.value)" [ngModel]="studySubject.notes">
-                    </textarea>
+                        <textarea formControlName="notes" class="notes__textarea" rows="10"
+                            [placeholder]="'CrcDashboard.NotesPlaceholder' | translate"></textarea>
                         <ng-container *ngIf="hasError(errorType.NotesError)">
                             <p class="error error_notes" translate>
                                 CrcDashboard.NotesError

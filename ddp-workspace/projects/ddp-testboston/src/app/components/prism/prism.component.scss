@@ -8,9 +8,12 @@
 }
 
 .content-prism {
+    max-width: 1050px;
+}
+
+.prism-form {
     display: flex;
     flex-direction: row;
-    max-width: 1050px;
 }
 
 .block {
@@ -174,7 +177,7 @@
         width: 100%;
     }
 
-    .content-prism {
+    .prism-form {
         flex-direction: column;
     }
 

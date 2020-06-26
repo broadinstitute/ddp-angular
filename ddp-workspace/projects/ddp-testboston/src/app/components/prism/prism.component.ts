@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
-import { Subject } from 'rxjs';
 import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 import { PrismForm } from '../../models/prismForm.model';
@@ -20,7 +19,6 @@ export class PrismComponent implements OnInit, OnDestroy {
   public isInvitationLoading = false;
   public isZipLoading = false;
   public zipVerified = false;
-  private notes = new Subject<string>();
   private anchor = new CompositeDisposable();
 
   constructor(
@@ -53,10 +51,6 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public setSelectedSubject(): void {
     this.sessionService.setParticipant(this.studySubject.userGuid);
-  }
-
-  public saveNotes(notes: string): void {
-    this.notes.next(notes);
   }
 
   public enrollSubject(): void {
@@ -127,7 +121,9 @@ export class PrismComponent implements OnInit, OnDestroy {
   }
 
   private initNotesListener(): void {
-    const note = this.notes.asObservable().pipe(
+    const note = this.prismForm.valueChanges.pipe(
+      filter(() => !!this.prismForm.controls.notes),
+      map((form: PrismForm) => form.notes),
       debounceTime(200),
       distinctUntilChanged(),
       concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.studySubject.invitationId, notes))
@@ -139,6 +135,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initZipListener(): void {
     const zip = this.prismForm.valueChanges.pipe(
+      filter(() => !!this.prismForm.controls.zip),
       map((form: PrismForm) => form.zip),
       distinctUntilChanged(),
       tap(() => {
