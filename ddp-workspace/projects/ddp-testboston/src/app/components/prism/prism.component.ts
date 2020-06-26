@@ -49,6 +49,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public setSelectedSubject(): void {
     this.sessionService.setParticipant(this.studySubject.userGuid);
+    this.sessionService.setInvitationId(this.studySubject.invitationId);
   }
 
   public enrollSubject(): void {
