@@ -25,14 +25,6 @@
     }
 }
 
-.step {
-    opacity: 0.6;
-    color: #282828;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 19px;
-}
-
 .search-block {
     margin: 5rem 0 1rem 0;
 }
@@ -194,7 +186,7 @@
 
     .success,
     .error {
-        margin: 0;
+        margin: 0 0 1rem 0;
     }
 }
 

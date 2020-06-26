@@ -5,7 +5,6 @@
                 <div class="block" [ngClass]="{'block_small': studySubject}">
                     <!-- Static search field -->
                     <div class="search-block">
-                        <p class="step" translate>Prism.Steps.Step1.Step</p>
                         <p class="title" [ngClass]="{'block_small': !studySubject}" translate>
                             Prism.Steps.Step1.Title
                         </p>
@@ -40,7 +39,6 @@
                     </div>
                     <!-- Unenrolled subject's form -->
                     <ng-container *ngIf="studySubject && !studySubject.userGuid">
-                        <p class="step" translate>Prism.Steps.Step2.Step</p>
                         <p class="title" translate>Prism.Steps.Step2.Title</p>
                         <div class="form-block">
                             <div class="container">
@@ -69,7 +67,6 @@
                                 </p>
                             </ng-container>
                         </div>
-                        <p class="step" translate>Prism.Steps.Step3.Step</p>
                         <p class="title" translate>Prism.Steps.Step3.Title</p>
                         <div class="navigate">
                             <button class="button button_primary" (click)="enrollSubject()">
