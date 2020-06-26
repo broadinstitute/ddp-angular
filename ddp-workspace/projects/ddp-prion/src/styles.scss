@@ -508,6 +508,10 @@ input.mat-input-element.study-listing-filter-col {
   table-layout: fixed;
   overflow-wrap: break-word;
 
+  tr.mat-header-row {
+    height: unset;
+  }
+
   .filter-row, tbody>tr:nth-of-type(even) {
     background-color: #f9f9f9;
   }
@@ -553,6 +557,7 @@ input.mat-input-element.study-listing-filter-col {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
+    font-size: 15px !important;
   }
 
   .table-bordered mat-header-cell {
