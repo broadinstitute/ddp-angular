@@ -1,0 +1,111 @@
+<main class="main">
+    <section class="section">
+        <div class="content content-prism">
+            <form [formGroup]="prismForm" class="prism-form">
+                <div class="block" [ngClass]="{'block_small': studySubject}">
+                    <!-- Static search field -->
+                    <div class="search-block">
+                        <p class="title" [ngClass]="{'block_small': !studySubject}" translate>
+                            Prism.Steps.Step1.Title
+                        </p>
+                        <p class="subtitle" [ngClass]="{'block_small': !studySubject}" translate>
+                            Prism.Steps.Step1.Subtitle
+                        </p>
+                        <div class="form-block">
+                            <div class="container">
+                                <mat-form-field class="prism-field">
+                                    <button matPrefix mat-icon-button [disabled]="true">
+                                        <mat-icon class="prism-field__icon">search</mat-icon>
+                                    </button>
+                                    <input matInput invitationcode formControlName="invitationId"
+                                        pattern="[a-zA-Z0-9]{12}" maxLength="18"
+                                        [placeholder]="'Prism.Steps.Step1.Placeholder' | translate">
+                                    <button matSuffix (click)="clearField('invitationId')" class="prism-field__clear"
+                                        [ngClass]="{'prism-field__clear_visible': showClearButton('invitationId')}">
+                                        {{'Prism.ClearSearch' | translate}}
+                                    </button>
+                                </mat-form-field>
+                                <div *ngIf="isInvitationLoading" class="container__spinner">
+                                    <mat-spinner color="primary" diameter="30"></mat-spinner>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="hasError(errorType.InvitationNotFound)">
+                                <p class="error">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    <span translate>Prism.Steps.Step1.Error</span>
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- Unenrolled subject's form -->
+                    <ng-container *ngIf="studySubject && !studySubject.userGuid">
+                        <p class="title" translate>Prism.Steps.Step2.Title</p>
+                        <div class="form-block">
+                            <div class="container">
+                                <mat-form-field class="prism-field prism-field_small">
+                                    <input matInput formControlName="zip" minlength="5" maxlength="5" pattern="[0-9]{5}"
+                                        [placeholder]="'Prism.Steps.Step2.Placeholder' | translate">
+                                    <button matSuffix (click)="clearField('zip')" class="prism-field__clear"
+                                        [ngClass]="{'prism-field__clear_visible': showClearButton('zip')}">
+                                        {{'Prism.ClearSearch' | translate}}
+                                    </button>
+                                </mat-form-field>
+                                <div *ngIf="isZipLoading" class="container__spinner">
+                                    <mat-spinner color="primary" diameter="30"></mat-spinner>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="hasError(errorType.InvalidZip)">
+                                <p class="error">
+                                    <mat-icon>highlight_off</mat-icon>
+                                    <span translate>Prism.Steps.Step2.Error</span>
+                                </p>
+                            </ng-container>
+                            <ng-container *ngIf="zipVerified">
+                                <p class="success">
+                                    <mat-icon>check_circle</mat-icon>
+                                    <span translate>Prism.Steps.Step2.Success</span>
+                                </p>
+                            </ng-container>
+                        </div>
+                        <p class="title" translate>Prism.Steps.Step3.Title</p>
+                        <div class="navigate">
+                            <button class="button button_primary" (click)="enrollSubject()">
+                                {{'Prism.Buttons.Enrollment' | translate}}
+                            </button>
+                        </div>
+                    </ng-container>
+                    <!-- Enrolled subject's form -->
+                    <ng-container *ngIf="studySubject && studySubject.userGuid">
+                        <div class="info-block">
+                            <p class="info-block__title" translate>Prism.Email</p>
+                            <p class="info-block__text">
+                                {{studySubject.userLoginEmail ? studySubject.userLoginEmail : 'Prism.NoEmail' | translate}}
+                            </p>
+                        </div>
+                        <div class="navigate">
+                            <a class="button button_primary" (click)="setSelectedSubject()"
+                                [routerLink]="'/' + appRoutes.Dashboard" translate>
+                                Prism.Buttons.Dashboard
+                            </a>
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Notes for all subjects -->
+                <ng-container *ngIf="studySubject">
+                    <div class="block_small">
+                        <div class="notes">
+                            <p class="notes__title" translate>Prism.Notes</p>
+                            <textarea formControlName="notes" class="notes__textarea" rows="10"
+                                [placeholder]="'Prism.NotesPlaceholder' | translate"></textarea>
+                            <ng-container *ngIf="hasError(errorType.NotesError)">
+                                <p class="error error_notes" translate>
+                                    Prism.NotesError
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </form>
+        </div>
+    </section>
+</main>

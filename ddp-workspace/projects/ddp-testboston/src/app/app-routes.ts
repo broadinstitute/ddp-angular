@@ -11,7 +11,7 @@ export const AppRoutes = {
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
     Dashboard: 'dashboard',
-    CrcDashboard: 'prism',
+    Prism: 'prism',
     Password: 'password',
     SessionExpired: 'session-expired',
     Privacy: 'privacy-policy',

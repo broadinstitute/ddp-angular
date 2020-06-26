@@ -40,8 +40,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { PrismComponent } from './components/prism/prism.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -60,7 +60,7 @@ toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
-toolkitConfig.adminDashboardUrl = AppRoutes.CrcDashboard;
+toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.addressGuid = ActivityGuids.Address;
@@ -120,8 +120,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         WelcomeComponent,
         MailingListComponent,
         UserRegistrationPrequalComponent,
-        CrcDashboardComponent,
-        PrivacyPolicyComponent
+        PrivacyPolicyComponent,
+        PrismComponent
     ],
     imports: [
         BrowserModule,

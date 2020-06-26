@@ -151,7 +151,7 @@
 
 <header *ngIf="isAdmin" class="header header_crc" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
-        <a class="project-logo project-logo_crc" routerLink="/">
+        <a class="project-logo project-logo_crc" [routerLink]="'/' + appRoutes.Prism">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
                 [alt]="'Navigation.LogoAlt' | translate">
             <span translate>Navigation.CRCLogoSubtitle</span>

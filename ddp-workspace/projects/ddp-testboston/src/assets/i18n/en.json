@@ -239,14 +239,9 @@
         },
         "Error": "We're sorry, but an error has occurred. Please wait a moment and retry."
     },
-    "CrcDashboard": {
-        "Title": "To start, enter the subject’s 12-digit invitation code",
-        "Subtitle": "If the code is unknown, use the subject's name to retrieve the code from the Brigham link file.",
-        "SearchPlaceholder": "Enter Invitation Code",
+    "Prism": {
         "ClearSearch": "Clear",
-        "SearchError": "Code Not Found",
-        "InvitationCode": "INVITATION CODE",
-        "Email": "LOGIN EMAIL",
+        "Email": "SUBJECT EMAIL ADDRESS",
         "NoEmail": "N/A",
         "Buttons": {
             "Enrollment": "Begin Enrollment",
@@ -254,7 +249,24 @@
         },
         "Notes": "SUBJECT NOTES",
         "NotesPlaceholder": "Start Typing...",
-        "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry."
+        "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry.",
+        "Steps": {
+            "Step1": {
+                "Title": "Enter the subject’s 12-digit invitation code",
+                "Subtitle": "If the code is unknown, access the Brigham link file and use the subject’s name to retrieve the code.",
+                "Placeholder": "Enter Invitation Code",
+                "Error": "Code Not Found"
+            },
+            "Step2": {
+                "Title": "Check mailing zip code",
+                "Placeholder": "Enter zip code",
+                "Error": "Invalid zip code",
+                "Success": "Valid zip code"
+            },
+            "Step3": {
+                "Title": "Verbally confirm subject is 18 years or older before beginning enrollment."
+            }
+        }
     },
     "Toolkit": {
         "Dashboard": {

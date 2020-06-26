@@ -1,5 +1,5 @@
 export interface InvitationCheckPayload {
-    recaptchaToken: string;
+    recaptchaToken?: string;
     invitationId: string;
     auth0ClientId: string;
     qualificationDetails: {
