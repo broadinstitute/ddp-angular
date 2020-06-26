@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
-import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap, skip } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -26,6 +26,9 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.initPrismForm();
+    this.initSearchListener();
+    this.initZipListener();
+    this.initNotesListener();
   }
 
   public ngOnDestroy(): void {
@@ -34,9 +37,6 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public clearField(field: string): void {
     this.prismForm.controls[field].reset();
-    if (field === 'invitationId') {
-      this.removeFields();
-    }
   }
 
   public showClearButton(field: string): boolean {
@@ -58,39 +58,21 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initPrismForm(): void {
     this.prismForm = new FormGroup({
-      invitationId: new FormControl(null)
+      invitationId: new FormControl(null),
+      zip: new FormControl(null),
+      notes: new FormControl(null)
     });
-    this.initSearchListener();
   }
 
-  private addFields(studySubject: StudySubject): void {
-    if (studySubject.userGuid) {
-      this.addNotesField();
-    } else {
-      this.addZipField();
-      this.addNotesField();
-    }
+  private initNotesField(notes: string): void {
+    this.prismForm.controls.notes.patchValue(notes);
   }
 
-  private addZipField(): void {
-    this.prismForm.addControl('zip', new FormControl(null));
-    this.initZipListener();
-  }
-
-  private addNotesField(): void {
-    this.prismForm.addControl('notes', new FormControl(this.studySubject.notes));
-    this.initNotesListener();
-  }
-
-  private removeFields(): void {
-    if (this.prismForm.controls.zip) {
-      this.prismForm.removeControl('zip');
-      this.zipVerified = false;
-      this.isZipLoading = false;
-    }
-    if (this.prismForm.controls.notes) {
-      this.prismForm.removeControl('notes');
-    }
+  private resetAdditionalFields(): void {
+    this.prismForm.controls.zip.reset();
+    this.prismForm.controls.notes.reset();
+    this.zipVerified = false;
+    this.isZipLoading = false;
   }
 
   private initSearchListener(): void {
@@ -100,7 +82,7 @@ export class PrismComponent implements OnInit, OnDestroy {
         this.error = null;
         this.studySubject = null;
         this.isInvitationLoading = false;
-        this.removeFields();
+        this.resetAdditionalFields();
       }),
       filter(invitationId => this.prismForm.controls.invitationId.valid && !!invitationId),
       tap(() => this.isInvitationLoading = true),
@@ -109,10 +91,9 @@ export class PrismComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       if (response && this.prismForm.controls.invitationId.valid) {
         this.studySubject = response;
-        this.addFields(response);
+        this.initNotesField(response.notes);
       } else if (response === null && this.prismForm.controls.invitationId.valid) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
-        this.removeFields();
       }
     });
     this.anchor.addNew(search);
@@ -120,6 +101,8 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initNotesListener(): void {
     const note = this.prismForm.controls.notes.valueChanges.pipe(
+      filter(() => this.studySubject !== null),
+      skip(1),
       debounceTime(200),
       distinctUntilChanged(),
       concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.studySubject.invitationId, notes))
@@ -131,6 +114,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initZipListener(): void {
     const zip = this.prismForm.controls.zip.valueChanges.pipe(
+      filter(() => this.studySubject !== null && !this.studySubject.userGuid),
       distinctUntilChanged(),
       tap(() => {
         this.error = null;
