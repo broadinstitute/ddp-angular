@@ -31,7 +31,7 @@ import { Column } from "../../models/study-listing/column";
                   <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
                     <th mat-header-cell *matHeaderCellDef class="filter-cell">
                       <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col" 
-                             matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterPlaceholder | translate">
+                             matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterInfo.filterPlaceholder | translate">
                     </th>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
