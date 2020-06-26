@@ -26,7 +26,7 @@ import { Column } from "../../models/study-listing/column";
                   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
                     <th mat-header-cell *matHeaderCellDef translate [innerHTML]="columns[i].columnTitleKey">
                     </th>
-                    <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+                    <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
                   </ng-container>
                   <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
                     <th mat-header-cell *matHeaderCellDef class="filter-cell">
