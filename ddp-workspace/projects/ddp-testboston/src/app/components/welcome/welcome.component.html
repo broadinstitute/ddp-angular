@@ -1,0 +1,82 @@
+<main class="main">
+    <section class="section">
+        <div class="content intro-block">
+            <h1 class="intro-block__title semi-bold center" translate>HomePage.IntroSection.Title</h1>
+            <p class="intro-block__text" translate>HomePage.IntroSection.Text</p>
+            <div *ngIf="!isAuthenticated" class="invitation">
+                <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
+                    translate>HomePage.IntroSection.Code</a>
+                <a class="button button_simple button_underline" routerLink="/" fragment="stay-informed"
+                    (click)="scrollToAnchor('stay-informed')" translate>HomePage.IntroSection.NoCode</a>
+            </div>
+        </div>
+    </section>
+    <section class="section about-section">
+        <div id="about-the-study" class="anchor"></div>
+        <div class="content about-block">
+            <h2 class="semi-bold" translate>HomePage.AboutSection.Title</h2>
+            <p class="about-block__text" translate>HomePage.AboutSection.Text</p>
+            <h3 translate>HomePage.AboutSection.Questions.Title</h3>
+            <ul class="about-list">
+                <li class="about-list__item" *ngFor="let item of 'HomePage.AboutSection.Questions.List' | translate">
+                    <span class="dot">&#8226;</span>
+                    <span translate>{{item}}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section question-section">
+        <div id="q&a" class="anchor"></div>
+        <div class="content question-block">
+            <h2 class="center semi-bold" translate>HomePage.FaqSection.Title</h2>
+            <mat-accordion hideToggle="true" multi="true" displayMode="flat">
+                <ng-container *ngFor="let item of 'HomePage.FaqSection.Items' | translate">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                            <mat-icon class="question-block__icon">add</mat-icon>
+                            <p class="question-block__question no-margin">{{item.Question}}</p>
+                        </mat-expansion-panel-header>
+                        <ng-template matExpansionPanelContent>
+                            <ng-container *ngFor="let paragraph of item.Paragraphs">
+                                <p class="question-block__text" [innerHTML]="paragraph"></p>
+                            </ng-container>
+                            <ul class="faq-panel-list" *ngIf="item.Bullets && item.Bullets.length > 0">
+                                <li class="faq-panel-list__item" *ngFor="let bullet of item.Bullets">
+                                    <span class="question-block__text" [innerHTML]="bullet"></span>
+                                </li>
+                            </ul>
+                        </ng-template>
+                    </mat-expansion-panel>
+                </ng-container>
+            </mat-accordion>
+            <p class="question-block__help">
+                <span translate>HomePage.FaqSection.Text</span>
+                <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>
+                <span>|</span>
+                <a class="Link Link_semi-bold" [href]="emailHref">{{email}}</a>.
+            </p>
+        </div>
+    </section>
+    <section class="section">
+        <div id="who-we-are" class="anchor"></div>
+        <div class="content team-block">
+            <h2 class="semi-bold" translate>HomePage.TeamSection.Title</h2>
+            <p translate>HomePage.TeamSection.Text</p>
+            <ul class="team-list">
+                <li class="member" *ngFor="let teammate of 'HomePage.TeamSection.List' | translate">
+                    <h5 class="member__title">{{teammate.Name}}</h5>
+                    <p class="member__affiliations">{{teammate.Affiliations}}</p>
+                    <p class="member__info">{{teammate.Info}}</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section mailing-list-section">
+        <div id="stay-informed" class="anchor"></div>
+        <div class="content mailing-list-block">
+            <h2 class="semi-bold" [innerHTML]="'HomePage.MailingSection.Title' | translate"></h2>
+            <p class="mailing-list-block__text" translate>HomePage.MailingSection.Text</p>
+            <app-mailing-list></app-mailing-list>
+        </div>
+    </section>
+</main>

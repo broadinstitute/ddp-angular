@@ -6,8 +6,9 @@ import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlo
     template: `
     <div *ngIf="block.question">
         <p class="ddp-question-prompt"
-           [ngClass]="{'ddp-required-question-prompt': displayAsRequired}"
-           [innerHTML]="block.question">
+           [ngClass]="{'ddp-required-question-prompt': displayAsRequired}">
+           <span [innerHTML]="block.question"></span>
+           <ddp-tooltip *ngIf="block.tooltip" class="tooltip" [text]="block.tooltip"></ddp-tooltip>
         </p>
     </div>`
 })

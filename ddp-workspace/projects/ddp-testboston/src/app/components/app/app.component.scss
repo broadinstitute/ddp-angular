@@ -1,0 +1,14 @@
+.wrapper {
+    height: 100vh;
+    margin-bottom: -22rem; // footer's height
+    padding-bottom: 22rem; // footer's height
+    padding-top: 6.75rem; // header's height
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        margin-bottom: -45rem;
+        padding-bottom: 45rem;
+    }
+}

@@ -1,0 +1,204 @@
+@import '../../../app-theme.scss';
+
+@mixin block-margin {
+    margin: 6rem auto;
+}
+
+@mixin member {
+    margin: 0.8rem 0;
+    line-height: 2rem;
+}
+
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.anchor {
+    display: block;
+    padding-top: 3rem;
+    margin-top: -3rem;
+}
+
+.intro-block {
+    margin: 6rem auto 8rem auto;
+
+    &__title {
+        color: mat-color($app-theme, 1200);
+    }
+}
+
+.invitation {
+    display: inline-flex;
+    margin: 1rem 0 0 0;
+
+    .button:last-child {
+        color: mat-color($app-theme, 1300) !important;
+        margin-left: 0.1rem;
+    }
+}
+
+.about-section {
+    background-color: mat-color($app-theme, 1400);
+    color: mat-color($app-theme, 700);
+}
+
+.about-block {
+    @include block-margin;
+
+    &__text {
+        margin: 2.5rem 0;
+    }
+}
+
+.about-list {
+    @include reset-list;
+
+    &__item {
+        margin: 0.7rem 0;
+
+        .dot {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.faq-panel-list {
+    margin: 1rem 0 1rem 1.375rem;
+    padding: 0;
+
+    &__item {
+        padding: 0.5rem 0;
+    }
+}
+
+.question-section {
+    background-color: mat-color($app-theme, 3200);
+}
+
+.question-block {
+    @include block-margin;
+
+    &__icon {
+        margin: 0 1rem 0 0;
+        line-height: 2.25rem;
+    }
+
+    &__question {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        margin: 0;
+    }
+
+    &__text {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        color: mat-color($app-theme, 400);
+    }
+
+    &__help {
+        margin-top: 2.5rem;
+    }
+}
+
+.team-block {
+    @include block-margin;
+}
+
+.team-list {
+    @include reset-list;
+}
+
+.member {
+    margin: 3.5rem 0;
+
+    &__title {
+        color: mat-color($app-theme, 1200);
+        font-size: 1.625rem;
+        font-weight: 600;
+        @include member;
+    }
+
+    &__affiliations {
+        color: mat-color($app-theme, 700);
+        font-size: 1.375rem;
+        font-weight: 600;
+        @include member;
+    }
+
+    &__info {
+        color: mat-color($app-theme, 700);
+        font-size: 1.25rem;
+        @include member;
+    }
+}
+
+.mailing-list-section {
+    background-color: mat-color($app-theme, 1600);
+
+    h2 {
+        font-size: 2rem;
+        line-height: 2.75rem;
+    }
+}
+
+.mailing-list-block {
+    @include block-margin;
+
+    &__text {
+        margin: 1rem 0 2rem 0;
+    }
+}
+
+// accordion
+.mat-expansion-panel {
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    border-top: 1px solid mat-color($app-theme, 500);
+    background-color: mat-color($app-theme, 3200);
+}
+
+.mat-expansion-panel-header {
+    transition: 0.3s;
+}
+
+.mat-expansion-panel:last-child {
+    border-bottom: 1px solid mat-color($app-theme, 500);
+}
+
+.mat-expansion-panel-header {
+    padding: 1rem !important;
+}
+
+.mat-content {
+    align-items: flex-start;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}
+
+@media only screen and (max-width: 580px) {
+    .intro-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem auto 4rem auto;
+
+        &__text {
+            text-align: center;
+        }
+    }
+
+    .invitation {
+        flex-direction: column;
+
+        .button:last-child {
+            margin-top: 1rem;
+            margin-left: 0;
+        }
+    }
+}

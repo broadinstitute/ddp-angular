@@ -17,6 +17,7 @@ import {
       <ddp-activity-redesigned *ngIf="show"
                                [studyGuid]="studyGuid"
                                [activityGuid]="instanceGuid"
+                               [agreeConsent]="_toolkitConfiguration.agreeConsent"
                                (submit)="navigate($event)"
                                (stickySubtitle)="showStickySubtitle($event)"
                                (activityCode)="activityCodeChanged($event)"
@@ -33,7 +34,7 @@ export class WorkflowStartActivityRedesignedComponent extends WorkflowStartActiv
     private _windowRef: WindowRef,
     private _cdr: ChangeDetectorRef,
     @Inject('ddp.config') private _configuration: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+    @Inject('toolkit.toolkitConfig') public _toolkitConfiguration: ToolkitConfigurationService) {
     super(_workflowBuilder,
       _temporaryUserService,
       _session,

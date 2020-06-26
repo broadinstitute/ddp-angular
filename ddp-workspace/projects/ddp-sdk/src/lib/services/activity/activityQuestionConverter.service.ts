@@ -149,6 +149,7 @@ export class ActivityQuestionConverter {
         }
         questionBlock.question = questionJson.prompt;
         questionBlock.stableId = questionJson.stableId;
+        questionBlock.tooltip = questionJson.tooltip;
         questionBlock.displayNumber = displayNumber;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DashboardColumns } from 'ddp-sdk';
 
 @Injectable()
 export class ToolkitConfigurationService {
@@ -19,6 +20,8 @@ export class ToolkitConfigurationService {
     bloodConsentGuid: string;
     bloodReleaseGuid: string;
     followupGuid: string;
+    covidSurveyGuid: string;
+    addressGuid: string;
 
     // URLs
     aboutUsUrl: string;
@@ -43,6 +46,9 @@ export class ToolkitConfigurationService {
     bloodReleaseUrl: string;
     followupUrl: string;
     doneUrl: string;
+    covidSurveyUrl: string;
+    addressUrl: string;
+    adminDashboardUrl: string | null = null;
 
     // Social media and contacts
     phone: string;
@@ -51,13 +57,18 @@ export class ToolkitConfigurationService {
     twitterAccountId: string;
     facebookGroupId: string;
     instagramId: string;
-    lightswitchInstagramWidgetId?: string;
     cBioPortalLink: string;
     countMeInUrl: string;
+    blogUrl: string;
 
     // Layout settings
     showDataRelease: boolean;
     showInfoForPhysicians: boolean;
     showBlog: boolean;
-    blogUrl: string;
+    agreeConsent: boolean;
+    dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
+
+    // Keys and tokens
+    recaptchaSiteClientKey: string;
+    lightswitchInstagramWidgetId: string;
 }

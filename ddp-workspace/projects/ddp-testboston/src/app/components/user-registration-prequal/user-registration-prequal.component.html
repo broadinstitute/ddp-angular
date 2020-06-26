@@ -1,0 +1,88 @@
+<main class="main">
+    <section class="section">
+        <div class="content registration-block">
+            <form class="invitation-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                <h1 class="invitation-form__title semi-bold" translate>PrequalPage.Title</h1>
+                <div class="invitation-form__container">
+                    <p class="invitation-form__question bold" translate>PrequalPage.InvitationCode.Question</p>
+                    <img class="invitation-form__info" 
+                         src="assets/images/info.png" 
+                         [alt]="'PrequalPage.InvitationCode.TooltipAlt' | translate"
+                         matTooltipClass="tooltip__box"
+                         (click)="tooltip.toggle()"
+                         #tooltip="matTooltip"
+                         [matTooltip]="'PrequalPage.InvitationCode.Tooltip' | translate"
+                         matTooltipPosition="right">
+                </div>
+                <mat-form-field class="invitation-form__input">
+                    <input matInput
+                           invitationcode
+                           formControlName="invitationId"
+                           pattern="[a-zA-Z0-9]{12}"
+                           maxLength="18"
+                           [attr.disabled]="isLoading ? true : null"
+                           [placeholder]="'PrequalPage.InvitationCode.Placeholder' | translate">
+                </mat-form-field>
+                <ng-container *ngIf="hasInvitationError(errorType.InvalidInvitation)">
+                    <p class="error error_input">
+                        <span translate>PrequalPage.InvitationCode.Error.Part1</span>
+                        <a class="Link Link_bold" [href]="emailHref">{{email}}</a>
+                        <span translate>PrequalPage.InvitationCode.Error.Part2</span>
+                        <a class="Link Link_bold" [href]="phoneHref">{{phone}}</a>.
+                    </p>
+                </ng-container>
+                <p class="invitation-form__question bold" translate>PrequalPage.Zip.Question</p>
+                <mat-form-field class="invitation-form__input">
+                    <input matInput
+                           formControlName="zip"
+                           minlength="5"
+                           maxlength="5"
+                           pattern="[0-9]{5}"
+                           [attr.disabled]="isLoading ? true : null"
+                           [placeholder]="'PrequalPage.Zip.Placeholder' | translate">
+                </mat-form-field>
+                <ng-container *ngIf="hasInvitationError(errorType.InvalidQualifications)">
+                    <p class="error error_input" translate>
+                        PrequalPage.Zip.Error
+                    </p>
+                </ng-container>
+                <p class="invitation-form__question bold" translate>PrequalPage.Adult.Question</p>
+                <mat-radio-group class="age" formControlName="adult" [disabled]="isLoading">
+                    <mat-radio-button value="true" class="age__item">
+                        {{'PrequalPage.Adult.Yes' | translate}}
+                    </mat-radio-button>
+                    <mat-radio-button value="false">
+                        {{'PrequalPage.Adult.No' | translate}}
+                    </mat-radio-button>
+                    <mat-error class="age__error" *ngIf="hasInvitationError(errorType.MinorSubject)">
+                        <span translate>PrequalPage.Adult.Error.Part1</span>
+                        <a class="Link Link_bold" routerLink="/" fragment="q&a"
+                            translate>PrequalPage.Adult.Error.Part2</a>
+                        <span translate>PrequalPage.Adult.Error.Part3</span>
+                    </mat-error>
+                </mat-radio-group>
+                <div class="invitation-form__captcha">
+                    <re-captcha [siteKey]="config.recaptchaSiteClientKey"
+                                size="normal"
+                                formControlName="recaptchaToken"
+                                #captcha>
+                    </re-captcha>
+                </div>
+                <div class="invitation-form__submit">
+                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid || isLoading"
+                        [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
+                        {{'Common.Buttons.Submit.Title' | translate}}
+                        <mat-icon *ngIf="isLoading" class="button__spinner">
+                            <mat-spinner color="primary" diameter="20"></mat-spinner>
+                        </mat-icon>
+                    </button>
+                </div>
+                <ng-container *ngIf="hasInvitationError(errorType.UnknownError)">
+                    <p class="error" translate>
+                        PrequalPage.Error
+                    </p>
+                </ng-container>
+            </form>
+        </div>
+    </section>
+</main>

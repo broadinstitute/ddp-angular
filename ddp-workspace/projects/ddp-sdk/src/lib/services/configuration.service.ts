@@ -13,6 +13,9 @@ export class ConfigurationService {
     logLevel: LogLevel;
     auth0SilentRenewUrl: string;
     loginLandingUrl: string;
+    // Auth0 client used for administrative purposes in the app.
+    adminClientId: string | null = null;
+    adminLoginLandingUrl: string | null = null;
     localRegistrationUrl: string;
     // Registration of user is done either by Auth0 contacting server back-end (doLocalRegistration: false)
     // or by client application after being redirected back from Auth0 (doLocalRegistration: true)
@@ -22,4 +25,14 @@ export class ConfigurationService {
     mapsApiKey: string;
     projectGAToken: string;
     studyGuid: string;
+    // country code if limiting app to just one country
+    supportedCountry: string | null = null;
+    // whether dashboard status should display a count of questions
+    dashboardShowQuestionCount = false;
+    // if dashboardShowQuestionCount is true, exclude activity guids listed here from showing
+    // their question count
+    dashboardShowQuestionCountExceptions: string[] = [];
+    tooltipIconUrl: string = '';
+    // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
+    languageSelectorIconURL: string | null = null;
 }

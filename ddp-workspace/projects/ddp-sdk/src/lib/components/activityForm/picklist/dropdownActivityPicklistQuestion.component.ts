@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
@@ -62,7 +62,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
         }
     `]
 })
-export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion {
+export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
     public details: ActivityPicklistDetails;
     /**
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
@@ -72,6 +72,10 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
     constructor(private translate: NGXTranslateService) {
         super(translate);
         this.details = new ActivityPicklistDetails();
+    }
+
+    public ngOnInit(): void {
+        this.exclusiveChosen = this.hasSelectedExclusiveOption();
     }
 
     public setMaterialSelected(): Array<string> | string {
