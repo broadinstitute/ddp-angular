@@ -492,83 +492,64 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
+//Study Listing Table
+//All filters (top and column filters)
 input.mat-input-element.study-listing-filter {
   font-size: 14px;
-  line-height: 1.42857143;
   height: 34px !important;
   margin-top: 0;
 }
 
-input.mat-input-element.study-listing-filter-col {
-  font-weight: 400 !important;
-}
-
+//Inside the table
 .study-listing-table {
-  width: 100% !important;
   table-layout: fixed;
   overflow-wrap: break-word;
 
-  tr.mat-header-row {
-    height: unset;
-  }
-
+  //Add color striping
   .filter-row, tbody>tr:nth-of-type(even) {
     background-color: #f9f9f9;
   }
 
+  //Longer second column
   th:nth-of-type(2) {
     width: 30%;
   }
 
-  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+  //Make cell padding consistent
+  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type,
+  th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type
+  {
     padding-left: 8px !important;
-  }
-
-  td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
     padding-right: 8px !important;
   }
 
-  td {
-    vertical-align: top;
-    display: table-cell;
-  }
-
+  //Table headers
   th {
     font-weight: bold;
     font-size: 15px;
     color: #333;
   }
 
-  .mat-header-row {
-    border: none;
-    border-collapse: collapse;
-    display: table-row;
-    vertical-align: middle;
-    max-width: 80%;
+  tr.mat-header-row {
+    height: unset;
   }
 
-  .mat-row {
-    display: table-row;
-    max-width: 80%;
+  //Filter header row
+  .study-listing-filter-col {
+    width: auto;
   }
 
-  .table-bordered mat-cell {
-    border: 1px solid #ddd;
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    font-size: 15px !important;
+  .filter-cell {
+    border-bottom-width: 1px;
   }
 
-  .table-bordered mat-header-cell {
-    border: 0 solid #ddd;
-    border-right-width: 2px;
-    border-left-width: 2px;
-    vertical-align: bottom;
-    padding: 8px;
-    line-height: 1.42857143;
-    text-align: left;
+  //Table body
+  td {
     display: table-cell;
+  }
+
+  .mat-cell {
+    font-size: 15px;
   }
 }
 
