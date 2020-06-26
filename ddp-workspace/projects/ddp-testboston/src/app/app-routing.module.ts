@@ -6,7 +6,7 @@ import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
-import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
+import { PrismComponent } from './components/prism/prism.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 import {
@@ -116,8 +116,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: AppRoutes.CrcDashboard,
-    component: CrcDashboardComponent,
+    path: AppRoutes.Prism,
+    component: PrismComponent,
     canActivate: [
       IrbGuard,
       AdminAuthGuard
