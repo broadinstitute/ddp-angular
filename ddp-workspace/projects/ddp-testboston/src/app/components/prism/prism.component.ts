@@ -53,7 +53,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   public enrollSubject(): void {
     // TBD
-    alert(`We are sorry, but the PRISM doesn't support enrollment yet.`);
+    alert(`Error: enrollment isn’t supported right now.`);
   }
 
   private initPrismForm(): void {
