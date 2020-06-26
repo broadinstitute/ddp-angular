@@ -260,10 +260,10 @@
             },
             "Step2": {
                 "Step": "STEP 2 (OPTIONAL)",
-                "Title": "Check mailing zipcode",
-                "Placeholder": "Enter zipcode",
-                "Error": "Invalid zipcode",
-                "Success": "Valid zipcode"
+                "Title": "Check mailing zip code",
+                "Placeholder": "Enter zip code",
+                "Error": "Invalid zip code",
+                "Success": "Valid zip code"
             },
             "Step3": {
                 "Step": "STEP 3 (OPTIONAL)",
