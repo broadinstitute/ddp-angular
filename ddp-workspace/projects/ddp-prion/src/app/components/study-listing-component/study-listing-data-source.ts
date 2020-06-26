@@ -29,7 +29,7 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
   }
 
   private rowMatchesFilter(row: StudyInfo): boolean {
-    return !this.isFiltered() || Object.values(row).some(element => element.toLowerCase().includes(this.filterBy.toLowerCase()));
+    return !this.isFiltered() || row.getStringValues().some(element => element.toLowerCase().includes(this.filterBy.toLowerCase()));
   }
 
   private rowMeetsColumnFilters(row: StudyInfo): boolean {
