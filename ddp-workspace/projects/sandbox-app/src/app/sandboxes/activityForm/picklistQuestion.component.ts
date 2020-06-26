@@ -24,7 +24,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                     allowDetails: true,
                     detailLabel: 'Why?',
                     exclusive: true,
-                    groupId: null
+                    groupId: null,
+                    tooltip: null
                 }
             ],
             groups: [
@@ -37,7 +38,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'CCC',
@@ -45,7 +47,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'DDD',
@@ -53,7 +56,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'EEE',
@@ -61,7 +65,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'FFF',
@@ -69,7 +74,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'HHH',
@@ -77,7 +83,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'III',
@@ -85,7 +92,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'KKK',
@@ -93,7 +101,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'LLL',
@@ -101,7 +110,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'MMM',
@@ -109,7 +119,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         },
                         {
                             stableId: 'NNN',
@@ -117,7 +128,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_1'
+                            groupId: 'category_1',
+                            tooltip: null
                         }
                     ]
                 },
@@ -130,7 +142,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_2'
+                            groupId: 'category_2',
+                            tooltip: null
                         },
                         {
                             stableId: 'PPP',
@@ -138,7 +151,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_2'
+                            groupId: 'category_2',
+                            tooltip: null
                         },
                         {
                             stableId: 'QQQ',
@@ -146,7 +160,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_2'
+                            groupId: 'category_2',
+                            tooltip: null
                         },
                         {
                             stableId: 'RRR',
@@ -154,7 +169,8 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             allowDetails: false,
                             detailLabel: null,
                             exclusive: false,
-                            groupId: 'category_2'
+                            groupId: 'category_2',
+                            tooltip: null
                         }
                     ]
                 }
