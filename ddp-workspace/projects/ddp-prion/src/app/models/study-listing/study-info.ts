@@ -16,4 +16,8 @@ export class StudyInfo {
     this.moreInfo = moreInfo;
     this.colValues = [studyName, description, nameOfPI, site, eligibilityRequirements, moreInfo];
   }
+
+  public getStringValues(): string[] {
+    return [this.studyName, this.description, this.nameOfPI, this.site, this.eligibilityRequirements, this.moreInfo];
+  }
 }
