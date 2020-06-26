@@ -64,7 +64,7 @@ export class PrismComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initNotesField(notes: string): void {
+  private setNotesInitialValue(notes: string): void {
     this.prismForm.controls.notes.patchValue(notes);
   }
 
@@ -91,7 +91,7 @@ export class PrismComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       if (response && this.prismForm.controls.invitationId.valid) {
         this.studySubject = response;
-        this.initNotesField(response.notes);
+        this.setNotesInitialValue(response.notes);
       } else if (response === null && this.prismForm.controls.invitationId.valid) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
       }
