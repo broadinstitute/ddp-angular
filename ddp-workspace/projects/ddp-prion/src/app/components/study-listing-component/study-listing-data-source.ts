@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 import { FilterInfo } from "../../models/study-listing/filter-info";
 
 export class StudyListingDataSource extends DataSource<StudyInfo> {
-  private filterBy: string = null;
+  private readonly filterBy: string = null;
   constructor(private translator: TranslateService, private bucketUrl: string, filterBy: string, private columnFilters: FilterInfo[]) {
     super();
     if (filterBy !== null && filterBy !== undefined) {
@@ -15,9 +15,9 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
   }
 
   public connect(): Observable<Array<StudyInfo>> {
-    return this.translator.stream('App.StudyListing.Rows', {bucketUrl: this.bucketUrl})
+    return this.translator.stream('App.StudyListing.Rows')
       .pipe(map(x => (x as Array<StudyInfo>)
-        .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements, x.moreInfo))
+        .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements, x.moreInfo.replace('{{bucketUrl}}', this.bucketUrl)))
         .filter(x => this.rowMatchesFilter(x))
         .filter(x => this.rowMeetsColumnFilters(x))));
   }
