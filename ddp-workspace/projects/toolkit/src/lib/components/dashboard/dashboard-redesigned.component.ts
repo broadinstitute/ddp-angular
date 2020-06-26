@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementsServiceAgent, SessionMementoService, ConfigurationService } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-dashboard-redesigned',
@@ -66,8 +66,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private session: SessionMementoService,
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
-        @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
-        @Inject('ddp.config') private sdkConfig: ConfigurationService) {
+        @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
         super(_router, _announcements, config);
     }
 
@@ -81,10 +80,10 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     public get subjectInfoExists(): boolean {
-        return !!this.session.session.participantGuid && !!this.sdkConfig.invitationId;
+        return !!this.session.session.participantGuid && !!this.session.session.invitationId;
     }
 
     public get invitationId(): string {
-        return this.sdkConfig.invitationId;
+        return this.session.session.invitationId;
     }
 }

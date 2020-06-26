@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService, ConfigurationService } from 'ddp-sdk';
+import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
 import { Subject } from 'rxjs';
 import { filter, tap, map, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
@@ -22,8 +22,7 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private sessionService: SessionMementoService,
-    private subjectInvitation: SubjectInvitationServiceAgent,
-    @Inject('ddp.config') private config: ConfigurationService) { }
+    private subjectInvitation: SubjectInvitationServiceAgent) { }
 
   public ngOnInit(): void {
     this.initForm();
@@ -57,7 +56,7 @@ export class CrcDashboardComponent implements OnInit, OnDestroy {
 
   public setSelectedSubject(): void {
     this.sessionService.setParticipant(this.studySubject.userGuid);
-    this.config.invitationId = this.studySubject.invitationId;
+    this.sessionService.setInvitationId(this.studySubject.invitationId);
   }
 
   public saveNotes(notes: string): void {
