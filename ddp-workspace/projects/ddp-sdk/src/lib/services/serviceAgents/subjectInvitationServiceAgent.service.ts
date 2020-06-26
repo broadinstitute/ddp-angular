@@ -48,8 +48,6 @@ export class SubjectInvitationServiceAgent extends SessionServiceAgent<any> {
             },
             auth0ClientId: this.configuration.auth0ClientId
         };
-        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`, payload).pipe(
-            map(response => response ? 'Verified' : null),
-        );
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`, payload);
     }
 }
