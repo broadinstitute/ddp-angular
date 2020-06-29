@@ -52,9 +52,8 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.sessionService.setInvitationId(this.studySubject.invitationId);
   }
 
-  public enrollSubject(): void {
-    // TBD
-    alert(`Error: enrollment isn’t supported right now.`);
+  public beginSubjectEnrollment(): void {
+    this.sessionService.setInvitationId(this.studySubject.invitationId);
   }
 
   private initPrismForm(): void {

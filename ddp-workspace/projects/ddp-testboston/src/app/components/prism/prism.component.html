@@ -69,9 +69,10 @@
                         </div>
                         <p class="title" translate>Prism.Steps.Step3.Title</p>
                         <div class="navigate">
-                            <button class="button button_primary" (click)="enrollSubject()">
-                                {{'Prism.Buttons.Enrollment' | translate}}
-                            </button>
+                            <a class="button button_primary" (click)="beginSubjectEnrollment()"
+                                [routerLink]="'/' + appRoutes.EnrollSubject" translate>
+                                Prism.Buttons.Enrollment
+                            </a>
                         </div>
                     </ng-container>
                     <!-- Enrolled subject's form -->
