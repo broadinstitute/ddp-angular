@@ -22,7 +22,6 @@ import {
   HeaderActionGuard,
   LoginLandingComponent,
   RedirectToAuth0LoginComponent,
-  RedirectToLoginLandingComponent,
   ResendEmailComponent,
   SessionWillExpireComponent,
   ToolkitModule,
@@ -44,6 +43,9 @@ import { PrionErrorComponent } from "./components/error/prionError.component";
 import { PrionPasswordComponent } from "./components/password/prionPassword.component";
 import { PrionAppComponent } from "./components/app/prionApp.component";
 import { PrionSessionExpiredComponent } from "./components/session-expired/prionSessionExpired.component";
+import { PrionLoginLandingComponent } from "./components/login-landing/prionLoginLanding.component";
+import { PrionCommonLandingComponent } from "./components/common-landing/prionCommonLanding.component";
+import { PrionRedirectToLoginLandingComponent } from "./components/redirect-to-login-landing/prionRedirectToLoginLanding.component";
 
 @NgModule({
   imports: [
@@ -73,33 +75,37 @@ import { PrionSessionExpiredComponent } from "./components/session-expired/prion
     MatProgressBar
   ],
   declarations: [
-    PrionFooterComponent,
-    PrionHeaderComponent,
-    PrionWorkflowStartActivityComponent,
-    PrionActivityPageComponent,
     PrionActivityComponent,
+    PrionActivityPageComponent,
+    PrionAppComponent,
+    PrionCommonLandingComponent,
     PrionDashboardComponent,
     PrionErrorComponent,
+    PrionFooterComponent,
+    PrionHeaderComponent,
+    PrionLoginLandingComponent,
     PrionPasswordComponent,
-    PrionAppComponent,
-    PrionSessionExpiredComponent
+    PrionRedirectToLoginLandingComponent,
+    PrionSessionExpiredComponent,
+    PrionWorkflowStartActivityComponent
   ],
   exports: [
+    ActivityLinkComponent,
+    LoginLandingComponent,
+    PrionActivityComponent,
+    PrionActivityPageComponent,
+    PrionAppComponent,
+    PrionDashboardComponent,
+    PrionErrorComponent,
     PrionFooterComponent,
     PrionHeaderComponent,
-    PrionWorkflowStartActivityComponent,
-    PrionActivityPageComponent,
-    PrionActivityComponent,
-    PrionDashboardComponent,
-    LoginLandingComponent,
-    RedirectToLoginLandingComponent,
-    PrionErrorComponent,
+    PrionLoginLandingComponent,
     PrionPasswordComponent,
-    WarningMessageComponent,
-    ActivityLinkComponent,
+    PrionRedirectToLoginLandingComponent,
     PrionSessionExpiredComponent,
+    PrionWorkflowStartActivityComponent,
     RedirectToAuth0LoginComponent,
-    PrionAppComponent
+    WarningMessageComponent
   ],
   entryComponents: [
     DisclaimerComponent,
