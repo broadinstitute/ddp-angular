@@ -29,6 +29,7 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.initSearchListener();
     this.initZipListener();
     this.initNotesListener();
+    this.setInvitationIdInitialValue();
   }
 
   public ngOnDestroy(): void {
@@ -47,13 +48,9 @@ export class PrismComponent implements OnInit, OnDestroy {
     return this.error && this.error.errorType === errorType;
   }
 
-  public setSelectedSubject(): void {
-    this.sessionService.setParticipant(this.studySubject.userGuid);
-    this.sessionService.setInvitationId(this.studySubject.invitationId);
-  }
-
-  public beginSubjectEnrollment(): void {
-    this.sessionService.setInvitationId(this.studySubject.invitationId);
+  public setSubject(invitationId: string | null = null, userGuid: string | null = null): void {
+    this.sessionService.setInvitationId(invitationId);
+    this.sessionService.setParticipant(userGuid);
   }
 
   private initPrismForm(): void {
@@ -66,6 +63,13 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private setNotesInitialValue(notes: string): void {
     this.prismForm.controls.notes.patchValue(notes);
+  }
+
+  private setInvitationIdInitialValue(): void {
+    const invitationId = this.sessionService.session.invitationId;
+    if (invitationId) {
+      this.prismForm.controls.invitationId.patchValue(invitationId);
+    }
   }
 
   private resetAdditionalFields(): void {
@@ -83,6 +87,7 @@ export class PrismComponent implements OnInit, OnDestroy {
         this.studySubject = null;
         this.isInvitationLoading = false;
         this.resetAdditionalFields();
+        this.setSubject();
       }),
       filter(invitationId => this.prismForm.controls.invitationId.valid && !!invitationId),
       tap(() => this.isInvitationLoading = true),
