@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs';
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
   @Input() isScrolled: boolean;
-  @Output() visibility: EventEmitter<boolean> = new EventEmitter();
+  @Output() isVisible: EventEmitter<boolean> = new EventEmitter();
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
   public iconURL: string;
@@ -49,14 +49,14 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
           this.language.addLanguages(this.studyLanguages.map(x => x.languageCode));
           if (this.findCurrentLanguage()) {
             this.loaded = true;
-            this.visibility.emit(true);
+            this.isVisible.emit(true);
           }
         } else {
-          this.visibility.emit(false);
+          this.isVisible.emit(false);
         }
       } else {
         console.error('Error: no configured language list was returned.');
-        this.visibility.emit(false);
+        this.isVisible.emit(false);
       }
     });
   }
