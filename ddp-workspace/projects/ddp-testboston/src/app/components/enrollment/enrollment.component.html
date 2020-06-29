@@ -1,26 +1,39 @@
 <main class="main">
     <section class="section">
         <div class="content">
-            <div *ngIf="invitationId; else error">
+            <form *ngIf="invitationId && !participantGuid; else error" [formGroup]="accountForm"
+                (ngSubmit)="onSubmit()">
                 <h1 class="title">Account setup</h1>
                 <p class="text">Subject's First Name</p>
                 <mat-form-field class="field" floatLabel="never">
-                    <input matInput placeholder="Enter first name">
+                    <input matInput formControlName="firstName" placeholder="Enter first name">
+                    <mat-error *ngIf="fieldHasError('firstName', 'required')">
+                        Please enter subject's first name
+                    </mat-error>
                 </mat-form-field>
                 <p class="text">Subject's Last Name</p>
                 <mat-form-field class="field" floatLabel="never">
-                    <input matInput placeholder="Enter last name">
+                    <input matInput formControlName="lastName" placeholder="Enter last name">
+                    <mat-error *ngIf="fieldHasError('lastName', 'required')">
+                        Please enter subject's last name
+                    </mat-error>
                 </mat-form-field>
                 <p class="text">Subject's Email Address (Optional)</p>
                 <mat-form-field class="field" floatLabel="never">
-                    <input matInput placeholder="example@example.com">
+                    <input matInput formControlName="email" placeholder="example@example.com">
+                    <mat-error *ngIf="fieldHasError('email', 'pattern')">
+                        Please enter valid email address
+                    </mat-error>
                 </mat-form-field>
                 <div class="navigation">
-                    <button class="button button_primary" (click)="enroll()">
+                    <button type="submit" class="button button_primary" [disabled]="isLoading">
                         Next
+                        <mat-icon *ngIf="isLoading" class="button__spinner">
+                            <mat-spinner color="primary" diameter="20"></mat-spinner>
+                        </mat-icon>
                     </button>
                 </div>
-            </div>
+            </form>
             <ng-template #error>
                 <div class="error">
                     <p class="error__text" translate>Toolkit.Dashboard.Invitation.Message</p>
