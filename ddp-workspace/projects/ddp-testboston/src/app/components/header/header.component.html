@@ -42,9 +42,7 @@
             <div *ngIf="headerConfig.showLoginButton" class="auth__dashboard">
                 <ddp-sign-in-out></ddp-sign-in-out>
             </div>
-            <!-- replace with real language selector component when when it is done -->
-            <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-            <!-- replace with real language selector component when when it is done -->
+            <ddp-language-selector></ddp-language-selector>
         </div>
         <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
@@ -97,16 +95,14 @@
                         Navigation.KitInstructions
                     </a>
                 </li>
-                <li class="menu__item" *ngIf="isAuthenticated">
+                <li class="menu__item">
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
                 <li *ngIf="headerConfig.showLoginButton" class="menu__item">
                     <ddp-sign-in-out></ddp-sign-in-out>
                 </li>
                 <li class="menu__item">
-                    <!-- replace with real language selector component when when it is done -->
-                    <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-                    <!-- replace with real language selector component when when it is done -->
+                    <ddp-language-selector></ddp-language-selector>
                 </li>
             </div>
         </ul>
@@ -139,15 +135,6 @@
         <span translate>Navigation.Dashboard</span>
     </a>
 </ng-template>
-
-<!-- replace with real language selector component when when it is done -->
-<ng-template #languageButton>
-    <div class="language">
-        <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
-        <span>English</span>
-    </div>
-</ng-template>
-<!-- replace with real language selector component when when it is done -->
 
 <header *ngIf="isAdmin" class="header header_crc" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
