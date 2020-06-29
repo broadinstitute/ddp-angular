@@ -10,24 +10,25 @@ import {
 } from 'ddp-sdk';
 
 import {
+  RedirectToAuth0LoginComponent
+} from "toolkit";
+
+import {
   PrionDashboardComponent,
   PrionActivityPageComponent,
   PrionActivityComponent,
   PrionWorkflowStartActivityComponent,
   PrionErrorComponent,
   PrionSessionExpiredComponent,
-  PrionPasswordComponent
+  PrionPasswordComponent,
+  PrionLoginLandingComponent,
+  PrionRedirectToLoginLandingComponent
 } from 'toolkit-prion';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
-import {
-  LoginLandingComponent,
-  RedirectToAuth0LoginComponent,
-  RedirectToLoginLandingComponent
-} from "toolkit";
 
 const routes: Routes = [
   {
@@ -88,7 +89,7 @@ const routes: Routes = [
   },
   {
     path: 'login-landing',
-    component: LoginLandingComponent,
+    component: PrionLoginLandingComponent,
     canActivate: [IrbGuard]
   },
   {
@@ -122,7 +123,7 @@ const routes: Routes = [
   },
   {
     path: 'password-reset-done',
-    component: RedirectToLoginLandingComponent,
+    component: PrionRedirectToLoginLandingComponent,
     canActivate: [IrbGuard]
   },
   {
