@@ -1,1 +1,34 @@
-<p>enrollment works!</p>
+<main class="main">
+    <section class="section">
+        <div class="content">
+            <div *ngIf="invitationId; else error">
+                <h1 class="title">Account setup</h1>
+                <p class="text">Subject's First Name</p>
+                <mat-form-field class="field" floatLabel="never">
+                    <input matInput placeholder="Enter first name">
+                </mat-form-field>
+                <p class="text">Subject's Last Name</p>
+                <mat-form-field class="field" floatLabel="never">
+                    <input matInput placeholder="Enter last name">
+                </mat-form-field>
+                <p class="text">Subject's Email Address (Optional)</p>
+                <mat-form-field class="field" floatLabel="never">
+                    <input matInput placeholder="example@example.com">
+                </mat-form-field>
+                <div class="navigation">
+                    <button class="button button_primary" (click)="enroll()">
+                        Next
+                    </button>
+                </div>
+            </div>
+            <ng-template #error>
+                <div class="error">
+                    <p class="error__text" translate>Toolkit.Dashboard.Invitation.Message</p>
+                    <a class="button button_primary" [routerLink]="'/' + appRoutes.Prism" translate>
+                        Toolkit.Dashboard.Invitation.Button
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </section>
+</main>
