@@ -56,6 +56,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         }
       } else {
         console.error('Error: no configured language list was returned.');
+        this.visibility.emit(false);
       }
     });
   }
