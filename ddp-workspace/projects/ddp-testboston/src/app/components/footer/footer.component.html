@@ -1,6 +1,6 @@
 <footer *ngIf="!isAdmin" class="footer">
     <div class="footer-content">
-        <div class="wrapper" [ngClass]="{'wrapper_simple': !showLanguageSection}">
+        <div class="wrapper" [ngClass]="{'wrapper_simple': !showLanguageColumn}">
             <nav class="column">
                 <p class="column__title" translate>Navigation.Titles.TestBoston</p>
                 <ul class="list list_extended">
@@ -61,7 +61,7 @@
                     </li>
                 </ul>
             </div>
-            <div *ngIf="showLanguageSection" class="column">
+            <div *ngIf="showLanguageColumn" class="column">
                 <p class="column__title" translate>Navigation.Titles.Language</p>
                 <ul class="list">
                     <li>

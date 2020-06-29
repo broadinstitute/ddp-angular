@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
   public phoneHref: string;
   public emailHref: string;
   public appRoutes = AppRoutes;
-  public showLanguageSection = true;
+  public showLanguageColumn = true;
 
   constructor(
     private session: SessionMementoService,
@@ -42,6 +42,6 @@ export class FooterComponent implements OnInit {
   }
 
   public handleLanguageVisibility(visible: boolean): void {
-    this.showLanguageSection = visible;
+    this.showLanguageColumn = visible;
   }
 }

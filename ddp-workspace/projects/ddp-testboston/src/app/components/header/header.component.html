@@ -95,7 +95,7 @@
                         Navigation.KitInstructions
                     </a>
                 </li>
-                <li class="menu__item">
+                <li class="menu__item" *ngIf="isAuthenticated">
                     <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
                 </li>
                 <li *ngIf="headerConfig.showLoginButton" class="menu__item">
