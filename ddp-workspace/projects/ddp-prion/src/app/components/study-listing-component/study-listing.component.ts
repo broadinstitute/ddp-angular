@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatTable } from "@angular/material";
+import { MatSort, MatTable } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { PrionToolkitConfigurationService } from "toolkit-prion";
 import { StudyListingDataSource } from "./study-listing-data-source";
@@ -22,9 +22,9 @@ import { Column } from "../../models/study-listing/column";
                   </div>
                 </div>
                 <br/>
-                <table mat-table [dataSource]="dataSource" class="table dataTable table-bordered study-listing-table">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortCol($event)" class="table dataTable table-bordered study-listing-table">
                   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef translate [innerHTML]="columns[i].columnTitleKey">
+                    <th mat-header-cell *matHeaderCellDef translate [innerHTML]="columns[i].columnTitleKey"  mat-sort-header>
                     </th>
                     <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
                   </ng-container>
@@ -48,9 +48,7 @@ import { Column } from "../../models/study-listing/column";
   `
 })
 export class StudyListingComponent implements OnInit {
-  //TODO: Fix literal rendering of HTML in data
-  //TODO: Fix display of table
-  //TODO: Add ablity to sort by column
+  //TODO: Add ability to sort by column
 
   public dataSource: StudyListingDataSource;
   public displayedColumns: string[] = ['studyName', 'description', 'nameOfPI',
@@ -62,6 +60,9 @@ export class StudyListingComponent implements OnInit {
 
   @ViewChild(MatTable, {static:false})
   private table: MatTable<any>;
+
+  @ViewChild(MatSort, {static: false})
+  private sort: MatSort;
 
   public constructor(private translator: TranslateService,
                      @Inject('toolkit.toolkitConfig') private toolkitConfiguration:PrionToolkitConfigurationService) {
@@ -95,5 +96,11 @@ export class StudyListingComponent implements OnInit {
 
   private updateDataSource() {
     this.dataSource = new StudyListingDataSource(this.translator, this.toolkitConfiguration.assetsBucketUrl, this.generalFilterString, this.columns.map(x => x.filterInfo));
+  }
+
+  private sortCol(event) {
+    //TODO: Implement sortCol
+    //TODO: TEMP
+    console.log('sorting');
   }
 }
