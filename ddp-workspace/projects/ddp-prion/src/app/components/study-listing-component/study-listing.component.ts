@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatSort, MatTable } from "@angular/material";
+import { MatTable } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { PrionToolkitConfigurationService } from "toolkit-prion";
-import { StudyListingDataSource } from "./study-listing-data-source";
 import { Column } from "../../models/study-listing/column";
+import { StudyListingDataSource } from "./study-listing-data-source";
 
 @Component({
   selector: 'study-listing',
@@ -22,9 +22,12 @@ import { Column } from "../../models/study-listing/column";
                   </div>
                 </div>
                 <br/>
-                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortCol($event)" class="table dataTable table-bordered study-listing-table">
+                <table mat-table [dataSource]="dataSource"  class="table dataTable table-bordered study-listing-table">
                   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef translate [innerHTML]="columns[i].columnTitleKey"  mat-sort-header>
+                    <th mat-header-cell *matHeaderCellDef (click)="sortByCol(i)">
+                      <span translate [innerHTML]="columns[i].columnTitleKey"></span>
+                      <i class="pull-right fa fa-chevron-up" *ngIf="sortArrows[i] === 1"></i>
+                      <i class="pull-right fa fa-chevron-down" *ngIf="sortArrows[i] === 2"></i>
                     </th>
                     <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
                   </ng-container>
@@ -56,13 +59,10 @@ export class StudyListingComponent implements OnInit {
   public filterColumns: string[] = ['studyNameFilter', 'descriptionFilter', 'nameOfPIFilter',
     'siteFilter', 'eligibilityRequirementsFilter', 'moreInfoFilter'];
   public columns: Column[];
-  private generalFilterString: string = null;
+  public sortArrows: number[];
 
   @ViewChild(MatTable, {static:false})
   private table: MatTable<any>;
-
-  @ViewChild(MatSort, {static: false})
-  private sort: MatSort;
 
   public constructor(private translator: TranslateService,
                      @Inject('toolkit.toolkitConfig') private toolkitConfiguration:PrionToolkitConfigurationService) {
@@ -78,29 +78,45 @@ export class StudyListingComponent implements OnInit {
       new Column(5, false)
     ];
 
-    this.updateDataSource();
+    this.sortArrows = [0, 0, 0, 0, 0];
+
+    this.dataSource = new StudyListingDataSource(this.translator, this.toolkitConfiguration.assetsBucketUrl,
+      this.columns.map(x => x.filterInfo));
   }
 
   public applyFilter(event): void {
-    this.generalFilterString = (event.target as HTMLInputElement).value;
-    this.updateDataSource();
+    let generalFilterString: string = (event.target as HTMLInputElement).value;
+    this.dataSource.addFilter(generalFilterString);
   }
 
   public applyColumnFilter(column: number, event: Event): void {
     if (this.columns[column].filterInfo.canFilter) {
       let filterString: string = (event.target as HTMLInputElement).value;
       this.columns[column].filterInfo.addFilter(filterString);
-      this.updateDataSource();
+      this.dataSource.addColumnFilters(this.columns.map(x => x.filterInfo));
     }
   }
 
-  private updateDataSource() {
-    this.dataSource = new StudyListingDataSource(this.translator, this.toolkitConfiguration.assetsBucketUrl, this.generalFilterString, this.columns.map(x => x.filterInfo));
-  }
+  public sortByCol(colIndex: number) {
+    if ([0,2,3,4].includes(colIndex)) {
+      //First clear existing sorts if necessary
+      if (this.dataSource.shouldSort && this.dataSource.sortIndex !== colIndex) {
+        this.sortArrows[this.dataSource.sortIndex] = 0;
+      }
 
-  private sortCol(event) {
-    //TODO: Implement sortCol
-    //TODO: TEMP
-    console.log('sorting');
+      if (this.dataSource.shouldSort && this.dataSource.sortIndex === colIndex ) {
+        if ('asc' === this.dataSource.sortDir) {
+          this.dataSource.addSort(true, colIndex, 'desc');
+        }
+        else {
+          this.dataSource.addSort(false, -1, null);
+        }
+      }
+      else {
+        this.dataSource.addSort(true, colIndex, 'asc');
+      }
+
+      this.sortArrows[colIndex] = (this.sortArrows[colIndex] + 1) % 3;
+    }
   }
 }
