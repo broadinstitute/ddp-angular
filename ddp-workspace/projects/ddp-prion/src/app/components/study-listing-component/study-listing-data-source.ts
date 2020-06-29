@@ -1,51 +1,67 @@
 import { StudyInfo } from "../../models/study-listing/study-info";
 import { DataSource } from "@angular/cdk/table";
-import { Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { map } from "rxjs/operators";
 import { FilterInfo } from "../../models/study-listing/filter-info";
 
 export class StudyListingDataSource extends DataSource<StudyInfo> {
-  private readonly filterBy: string = null;
-  private shouldSort: boolean = false;
-  private sortIndex: number = -1;
-  private sortDir: string = null;
+  private baseData: StudyInfo[] = null;
+  private filterBy: string = null;
+  shouldSort: boolean = false;
+  sortIndex: number = -1;
+  sortDir: string = null;
+  dataSubj: BehaviorSubject<StudyInfo[]>;
 
-  constructor(private translator: TranslateService, private bucketUrl: string, filterBy: string, private columnFilters: FilterInfo[], shouldSort: boolean = false, sortIndex: number = -1, sortDir: string = null) {
+  constructor(private translator: TranslateService, private bucketUrl: string, private columnFilters: FilterInfo[]) {
     super();
-    if (filterBy !== null && filterBy !== undefined) {
-      this.filterBy = filterBy.toLowerCase();
-    }
-    if (shouldSort && sortIndex > -1 && sortDir !== null && (sortDir === 'asc' || sortDir == 'desc')) {
-      this.shouldSort = shouldSort;
-      this.sortDir = sortDir;
-      this.sortIndex = sortIndex;
-    }
-    else {
-      this.shouldSort = false;
-      this.sortDir = null;
-      this.sortIndex = -1;
-    }
+    this.baseData = (this.translator.instant('App.StudyListing.Rows') as StudyInfo[])
+      .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements,
+        x.moreInfo.replace('{{bucketURL}}', this.bucketUrl)));
+    this.dataSubj = new BehaviorSubject<StudyInfo[]>(this.baseData);
+    this.updateDataProcessing();
+    this.translator.onLangChange.subscribe(() => this.updateTranslations());
   }
 
-  public connect(): Observable<Array<StudyInfo>> {
-    return this.translator.stream('App.StudyListing.Rows')
-      .pipe(map(x => (x as Array<StudyInfo>)
-        .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements, x.moreInfo.replace('{{bucketUrl}}', this.bucketUrl)))
-        .filter(x => this.rowMatchesFilter(x))
-        .filter(x => this.rowMeetsColumnFilters(x))))
-      .pipe(map(x => this.sortData(x)));
+  connect(): BehaviorSubject<StudyInfo[]> {
+    return this.dataSubj;
   }
 
-  public disconnect(): void { }
+  disconnect(): void { }
 
-  public updateSort(shouldSort: boolean = false, sortIndex: number = -1, sortDir: string = null): void {
+  updateDataProcessing() {
+    let data = this.baseData.filter(x => this.rowMatchesFilter(x));
+    data = data.filter(x => this.rowMeetsColumnFilters(x));
+    data = this.sortData(data);
+    this.dataSubj.next(data);
+  }
+
+  updateTranslations() {
+    this.baseData = (this.translator.instant('App.StudyListing.Rows') as StudyInfo[])
+      .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements,
+        x.moreInfo.replace('{{bucketURL}}', this.bucketUrl)));
+    this.updateDataProcessing();
+  }
+
+  public addSort(shouldSort: boolean = false, sortIndex: number = -1, sortDir: string = null): void {
     this.shouldSort = shouldSort;
     this.sortIndex = sortIndex;
     this.sortDir = sortDir;
-    //TODO: Call this and make it update the observable somehow...  Maybe do
-    //the workaround where we recreate the data source or use a BehaviorSource
+    this.updateDataProcessing();
+  }
 
+  public addFilter(filterBy: string) {
+    if (filterBy !== null && filterBy !== undefined && filterBy.length > 0) {
+      this.filterBy = filterBy.toLowerCase();
+    }
+    else {
+      this.filterBy = null;
+    }
+    this.updateDataProcessing();
+  }
+
+  public addColumnFilters(columnFilters: FilterInfo[]) {
+    this.columnFilters = columnFilters;
+    this.updateDataProcessing();
   }
 
   private isFiltered(): boolean {
