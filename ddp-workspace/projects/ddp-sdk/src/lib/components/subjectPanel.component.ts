@@ -7,9 +7,9 @@ import { ConfigurationService } from '../services/configuration.service';
     template: `
         <div *ngIf="isAdmin() && !!invitationId()" class="ddp-subject-panel">
             <div class="subject-panel-container">
-                <a [routerLink]="'/' + adminPage()" class="Link ddp-subject-panel__text bold">
+                <a [routerLink]="'/' + adminPage()" class="ddp-subject-panel__text bold">
                     <mat-icon>chevron_left</mat-icon>
-                    <span translate>SDK.SubjectPanel.Link</span>
+                    <span class="Link" translate>SDK.SubjectPanel.Link</span>
                 </a>
                 <div>
                     <p class="ddp-subject-panel__text ddp-subject-panel_inline">
