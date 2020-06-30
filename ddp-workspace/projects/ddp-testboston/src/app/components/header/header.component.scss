@@ -258,20 +258,6 @@
             display: unset;
         }
     }
-
-    // replace with real language selector component styles when when it is done
-    .language-icon {
-        height: 26px;
-        width: 26px;
-        font-size: 26px;
-    }
-
-    .language {
-        font-size: 1.875rem !important;
-        line-height: 2.25rem !important;
-    }
-
-    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 480px) {
@@ -301,20 +287,6 @@
         height: 22px;
         width: 22px;
     }
-
-    // replace with real language selector component styles when when it is done
-    .language-icon {
-        height: 22px;
-        width: 22px;
-        font-size: 22px;
-    }
-
-    .language {
-        font-size: 1.5rem !important;
-        line-height: 2.1rem !important;
-    }
-
-    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 321px) {
@@ -322,16 +294,3 @@
         margin-top: 6.5rem;
     }
 }
-
-// replace with real language selector component when styles when it is done
-.language {
-    font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 2.0625rem;
-    white-space: nowrap;
-    color: #1a3173;
-    display: flex;
-    align-items: center;
-}
-
-// replace with real language selector component styles when when it is done

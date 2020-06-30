@@ -200,3 +200,39 @@
         }
     }
 }
+
+// language selector
+ddp-language-selector {
+    .SimpleButton {
+        display: flex;
+        align-items: center;
+        height: 33px;
+    }
+
+    .SimpleButton:focus,
+    .SimpleButton:hover {
+        text-decoration: none;
+    }
+
+    .ddp-globe {
+        stroke: mat-color($app-theme, 1300);
+        fill: transparent;
+        vertical-align: middle;
+        margin-right: 0.2rem;
+    }
+}
+
+.footer {
+    .ddp-globe {
+        stroke: mat-color($app-theme, 100);
+    }
+}
+
+.language-menu {
+    .mat-menu-item {
+        font-size: 16px !important;
+        line-height: 33px !important;
+        font-weight: 600 !important;
+        color: mat-color($app-theme, 1300) !important;
+    }
+}
