@@ -1,7 +1,10 @@
 <main class="main">
+    <section *ngIf="!showError()" class="section">
+        <ddp-subject-panel></ddp-subject-panel>
+    </section>
     <section class="section">
         <div class="content">
-            <div *ngIf="isSubjectEnrolled || subjectNotSelected; else enroll" class="error">
+            <div *ngIf="showError(); else enroll" class="error">
                 <p class="error__text" translate>Toolkit.Dashboard.Invitation.Message</p>
                 <a class="button button_primary" [routerLink]="'/' + appRoutes.Prism" translate>
                     Toolkit.Dashboard.Invitation.Button

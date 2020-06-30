@@ -9,6 +9,9 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
     selector: 'toolkit-dashboard-redesigned',
     template: `
         <main class="main">
+            <section class="section">
+                <ddp-subject-panel></ddp-subject-panel>
+            </section>
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
                     <h1 class="dashboard-title-section__title" translate>
