@@ -1,6 +1,6 @@
 <footer *ngIf="!isAdmin" class="footer">
     <div class="footer-content">
-        <div class="wrapper">
+        <div class="wrapper" [ngClass]="{'wrapper_simple': !showLanguageColumn}">
             <nav class="column">
                 <p class="column__title" translate>Navigation.Titles.TestBoston</p>
                 <ul class="list list_extended">
@@ -61,16 +61,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="column">
+            <div *ngIf="showLanguageColumn" class="column">
                 <p class="column__title" translate>Navigation.Titles.Language</p>
                 <ul class="list">
                     <li>
-                        <!-- replace with real language selector component when when it is done -->
-                        <div class="language">
-                            <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
-                            <span>English</span>
-                        </div>
-                        <!-- replace with real language selector component when when it is done -->
+                        <ddp-language-selector (isVisible)="handleLanguageVisibility($event)"></ddp-language-selector>
                     </li>
                 </ul>
             </div>
