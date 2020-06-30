@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import {
   SessionMementoService,
@@ -21,8 +22,11 @@ export class EnrollmentComponent implements OnInit {
   public appRoutes = AppRoutes;
   public accountForm: FormGroup;
   public isLoading = false;
+  public isSubjectEnrolled = false;
+  public subjectNotSelected = false;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private session: SessionMementoService,
     private userProfile: UserProfileServiceAgent,
@@ -32,41 +36,34 @@ export class EnrollmentComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initAccountForm();
-  }
-
-  public get invitationId(): string {
-    return this.session.session.invitationId;
-  }
-
-  public get participantGuid(): string {
-    return this.session.session.participantGuid;
+    this.isSubjectEnrolled = !!this.session.session.participantGuid;
+    this.subjectNotSelected = !!this.session.session.invitationId;
   }
 
   public onSubmit(): void {
     if (this.accountForm.invalid) {
       return;
     }
+
     const profile = this.createProfile();
     const email = this.accountForm.controls.email.value;
+    const participantGuid = this.session.session.participantGuid;
+    const invitationId = this.session.session.invitationId;
+
     this.isLoading = true;
     this.accountForm.disable();
-    this.subjectInvitation.createStudyParticipant(this.invitationId).pipe(
+
+    this.subjectInvitation.createStudyParticipant(invitationId).pipe(
       take(1),
       tap(userGuid => this.session.setParticipant(userGuid)),
       mergeMap(() => this.userProfile.saveProfile(false, profile)),
-      mergeMap(() => {
-        if (email) {
-          return this.subjectInvitation.createUserLoginAccount(this.session.session.participantGuid, email);
-        }
-        return of(null);
-      }),
+      mergeMap(() => email ? this.subjectInvitation.createUserLoginAccount(participantGuid, email) : of(null)),
       mergeMap(() => this.workflow.getStart())
     ).subscribe(response => {
       if (response) {
         this.workflowBuilder.getCommand(response).execute();
       } else {
-        this.isLoading = false;
-        this.accountForm.enable();
+        this.router.navigateByUrl(this.appRoutes.Error);
       }
     });
   }
