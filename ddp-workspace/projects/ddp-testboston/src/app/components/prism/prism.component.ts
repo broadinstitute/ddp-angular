@@ -97,6 +97,7 @@ export class PrismComponent implements OnInit, OnDestroy {
       if (response && this.prismForm.controls.invitationId.valid) {
         this.studySubject = response;
         this.setNotesInitialValue(response.notes);
+        this.setSubject(response.invitationId, response.userGuid);
       } else if (response === null && this.prismForm.controls.invitationId.valid) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
       }

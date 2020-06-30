@@ -69,8 +69,7 @@
                         </div>
                         <p class="title" translate>Prism.Steps.Step3.Title</p>
                         <div class="navigate">
-                            <a class="button button_primary" (click)="setSubject(studySubject.invitationId)"
-                                [routerLink]="'/' + appRoutes.EnrollSubject" translate>
+                            <a class="button button_primary" [routerLink]="'/' + appRoutes.EnrollSubject" translate>
                                 Prism.Buttons.Enrollment
                             </a>
                         </div>
@@ -84,9 +83,7 @@
                             </p>
                         </div>
                         <div class="navigate">
-                            <a class="button button_primary"
-                                (click)="setSubject(studySubject.invitationId, studySubject.userGuid)"
-                                [routerLink]="'/' + appRoutes.Dashboard" translate>
+                            <a class="button button_primary" [routerLink]="'/' + appRoutes.Dashboard" translate>
                                 Prism.Buttons.Dashboard
                             </a>
                         </div>
