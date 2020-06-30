@@ -496,6 +496,10 @@
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
         },
-        "TooltipAlt": "Information"
+        "TooltipAlt": "Information",
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "Text": "Subject Invitation Code: "
+        }
     }
 }

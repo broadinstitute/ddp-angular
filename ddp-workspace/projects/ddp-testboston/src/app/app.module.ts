@@ -95,6 +95,7 @@ sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
+sdkConfig.lookupPageUrl = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {

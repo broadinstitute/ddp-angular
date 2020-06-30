@@ -1,0 +1,28 @@
+@import '../app-theme.scss';
+
+.ddp-subject-panel {
+    background-color: mat-color($app-theme, 200);
+    font-family: 'Nunito', sans-serif;
+
+    &__text {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        line-height: 28px;
+        margin: 0;
+        text-decoration: none !important;
+    }
+
+    &_inline {
+        display: inline-block;
+    }
+}
+
+.subject-panel-container {
+    max-width: 1450px;
+    padding: 1rem 1.5625rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
