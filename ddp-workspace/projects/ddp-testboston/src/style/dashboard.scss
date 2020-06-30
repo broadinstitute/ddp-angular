@@ -46,17 +46,6 @@
     color: mat-color($app-theme, 700);
 }
 
-.invitation-code {
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
-    margin: 0;
-
-    &__text {
-        font-size: 20px;
-    }
-}
-
 .dashboard-message {
     margin-bottom: 5rem;
 

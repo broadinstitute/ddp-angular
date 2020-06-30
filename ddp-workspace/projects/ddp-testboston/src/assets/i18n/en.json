@@ -291,7 +291,6 @@
         "Dashboard": {
             "Title": "Dashboard",
             "Invitation": {
-                "InvitationCode": "Invitation Code:",
                 "Message": "Please use the look-up tool to manage a participant.",
                 "Button": "Go"
             }
