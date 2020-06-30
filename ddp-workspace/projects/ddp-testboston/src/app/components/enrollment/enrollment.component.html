@@ -1,10 +1,10 @@
 <main class="main">
-    <section *ngIf="!showError()" class="section">
+    <section *ngIf="!showError" class="section">
         <ddp-subject-panel></ddp-subject-panel>
     </section>
     <section class="section">
         <div class="content">
-            <div *ngIf="showError(); else enroll" class="error">
+            <div *ngIf="showError; else enroll" class="error">
                 <p class="error__text" translate>Toolkit.Dashboard.Invitation.Message</p>
                 <a class="button button_primary" [routerLink]="'/' + appRoutes.Prism" translate>
                     Toolkit.Dashboard.Invitation.Button
@@ -12,31 +12,34 @@
             </div>
             <ng-template #enroll>
                 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-                    <h1 class="title">Account setup</h1>
-                    <p class="text">Subject's First Name</p>
+                    <h1 class="title" translate>Enrollment.Title</h1>
+                    <p class="text" translate>Enrollment.FirstName.Text</p>
                     <mat-form-field class="field" floatLabel="never">
-                        <input matInput formControlName="firstName" placeholder="Enter first name">
+                        <input matInput formControlName="firstName"
+                            [placeholder]="'Enrollment.FirstName.Placeholder' | translate">
                         <mat-error *ngIf="fieldHasError('firstName', 'required')">
-                            Please enter subject's first name
+                            {{'Enrollment.FirstName.Error' | translate}}
                         </mat-error>
                     </mat-form-field>
-                    <p class="text">Subject's Last Name</p>
+                    <p class="text" translate>Enrollment.LastName.Text</p>
                     <mat-form-field class="field" floatLabel="never">
-                        <input matInput formControlName="lastName" placeholder="Enter last name">
+                        <input matInput formControlName="lastName"
+                            [placeholder]="'Enrollment.LastName.Placeholder' | translate">
                         <mat-error *ngIf="fieldHasError('lastName', 'required')">
-                            Please enter subject's last name
+                            {{'Enrollment.LastName.Error' | translate}}
                         </mat-error>
                     </mat-form-field>
-                    <p class="text">Subject's Email Address (Optional)</p>
+                    <p class="text" translate>Enrollment.Email.Text</p>
                     <mat-form-field class="field" floatLabel="never">
-                        <input matInput formControlName="email" placeholder="example@example.com">
+                        <input matInput formControlName="email"
+                            [placeholder]="'Enrollment.Email.Placeholder' | translate">
                         <mat-error *ngIf="fieldHasError('email', 'pattern')">
-                            Please enter valid email address
+                            {{'Enrollment.Email.Error' | translate}}
                         </mat-error>
                     </mat-form-field>
                     <div class="navigation">
                         <button type="submit" class="button button_primary" [disabled]="isLoading">
-                            Next
+                            {{'Enrollment.Button' | translate}}
                             <mat-icon *ngIf="isLoading" class="button__spinner">
                                 <mat-spinner color="primary" diameter="20"></mat-spinner>
                             </mat-icon>

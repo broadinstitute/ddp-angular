@@ -22,6 +22,7 @@ export class EnrollmentComponent implements OnInit {
   public appRoutes = AppRoutes;
   public accountForm: FormGroup;
   public isLoading = false;
+  public showError = false;
 
   constructor(
     private router: Router,
@@ -34,10 +35,7 @@ export class EnrollmentComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initAccountForm();
-  }
-
-  public showError(): boolean {
-    return (this.session.session.participantGuid === null && this.session.session.invitationId === null) ||
+    this.showError = (this.session.session.participantGuid === null && this.session.session.invitationId === null) ||
       (this.session.session.participantGuid !== null);
   }
 
