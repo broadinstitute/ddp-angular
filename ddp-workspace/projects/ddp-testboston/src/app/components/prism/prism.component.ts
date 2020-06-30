@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
-import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap, skip } from 'rxjs/operators';
+import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -107,8 +107,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initNotesListener(): void {
     const note = this.prismForm.controls.notes.valueChanges.pipe(
-      filter(() => this.studySubject !== null),
-      skip(1),
+      filter((notes) => this.studySubject !== null && this.studySubject.notes !== notes),
       debounceTime(200),
       distinctUntilChanged(),
       concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.studySubject.invitationId, notes))
