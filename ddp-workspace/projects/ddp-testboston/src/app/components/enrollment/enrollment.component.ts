@@ -46,7 +46,6 @@ export class EnrollmentComponent implements OnInit {
 
     const profile = this.createProfile();
     const email = this.accountForm.controls.email.value;
-    const participantGuid = this.session.session.participantGuid;
     const invitationId = this.session.session.invitationId;
 
     this.isLoading = true;
@@ -56,7 +55,7 @@ export class EnrollmentComponent implements OnInit {
       take(1),
       tap(userGuid => this.session.setParticipant(userGuid)),
       mergeMap(() => this.userProfile.saveProfile(false, profile)),
-      mergeMap(() => email ? this.subjectInvitation.createUserLoginAccount(participantGuid, email) : of(null)),
+      mergeMap(() => email ? this.subjectInvitation.createUserLoginAccount(this.session.session.participantGuid, email) : of(null)),
       mergeMap(() => this.workflow.getStart())
     ).subscribe(response => {
       if (response) {
