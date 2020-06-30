@@ -36,6 +36,7 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import { ChangeLanguageRedirectComponent } from "./components/change-language-redirect/change-language-redirect.component";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -121,7 +122,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WelcomeComponent,
     LearnMoreComponent,
     StudyListingComponent,
-    RedirectJoinComponent
+    RedirectJoinComponent,
+    ChangeLanguageRedirectComponent
   ],
   providers: [
     {
