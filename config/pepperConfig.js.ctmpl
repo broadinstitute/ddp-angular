@@ -181,5 +181,3 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "UA-172530202-1";
     {{end}}
 {{end}}
-
-{{end}}
