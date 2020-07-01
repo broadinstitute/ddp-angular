@@ -172,5 +172,3 @@ var DDP_ENV = {
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
     {{end}}
 {{end}}
-
-{{end}}
