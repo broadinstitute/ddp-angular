@@ -13,6 +13,7 @@ import { ScrollerService } from '../../services/scroller.service';
 export class HeaderComponent {
   public isPageScrolled = false;
   public isMenuOpened = false;
+  public languageSelectorShown = true;
   public appRoutes = AppRoutes;
   @ViewChild('overlay', { static: false }) private overlay: ElementRef;
   @ViewChild('menu', { static: false }) private menu: ElementRef;
@@ -57,6 +58,10 @@ export class HeaderComponent {
 
   public scrollToAnchor(anchor: string): void {
     this.scrollerService.scrollToAnchor(anchor);
+  }
+
+  public handleLanguageVisibility(visible: boolean): void {
+    this.languageSelectorShown = visible;
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {
