@@ -54,8 +54,8 @@ export class EnrollmentComponent implements OnInit {
     this.subjectInvitation.createStudyParticipant(invitationId).pipe(
       take(1),
       tap(userGuid => this.session.setParticipant(userGuid)),
+      mergeMap(userGuid => email ? this.subjectInvitation.createUserLoginAccount(userGuid, email) : of(null)),
       mergeMap(() => this.userProfile.saveProfile(false, profile)),
-      mergeMap(() => email ? this.subjectInvitation.createUserLoginAccount(this.session.session.participantGuid, email) : of(null)),
       mergeMap(() => this.workflow.getStart())
     ).subscribe(response => {
       if (response) {
