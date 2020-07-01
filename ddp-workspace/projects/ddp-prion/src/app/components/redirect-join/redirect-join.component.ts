@@ -4,12 +4,20 @@ import { AnalyticsEventsService, Auth0AdapterService, BrowserContentService, Win
 @Component({
   selector: 'app-redirect-join',
   template: `
-        <ng-container></ng-container>
-    `
+      <prion-header>
+      </prion-header>
+      <div class="Wrapper">
+        <div class="center">
+          <div class="mat-subheading-2" translate>
+            Toolkit.LoginLanding.Text
+          </div>
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+  `
 })
 export class RedirectJoinComponent implements OnInit {
   public unsupportedBrowser: boolean;
-  private readonly HEADER_HEIGHT: number = 70;
 
   constructor(
     private windowRef: WindowRef,
