@@ -17,6 +17,10 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
                     <h1 class="dashboard-title-section__title" translate>
                         Toolkit.Dashboard.Title
                     </h1>
+                    <p *ngIf="!isAdmin && invitationId" class="invitation-code">
+                        <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
+                        <span>{{invitationId | invitation}}</span>
+                    </p>
                 </div>
             </section>
             <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
@@ -60,6 +64,8 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
         </main>`
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit {
+    public invitationId: string | null = null;
+
     constructor(
         private headerConfig: HeaderConfigurationService,
         private session: SessionMementoService,
@@ -80,9 +86,5 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
     public get subjectInfoExists(): boolean {
         return !!this.session.session.participantGuid && !!this.session.session.invitationId;
-    }
-
-    public get invitationId(): string {
-        return this.session.session.invitationId;
     }
 }
