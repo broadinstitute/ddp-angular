@@ -5,13 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
+  ChangeLanguageRedirectComponent,
   IrbGuard,
   BrowserGuard
 } from 'ddp-sdk';
-
-import {
-  RedirectToAuth0LoginComponent
-} from "toolkit";
 
 import {
   PrionDashboardComponent,
@@ -22,6 +19,7 @@ import {
   PrionSessionExpiredComponent,
   PrionPasswordComponent,
   PrionLoginLandingComponent,
+  PrionRedirectToAuth0LoginComponent,
   PrionRedirectToLoginLandingComponent
 } from 'toolkit-prion';
 
@@ -29,7 +27,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
-import { ChangeLanguageRedirectComponent } from "./components/change-language-redirect/change-language-redirect.component";
 
 const routes: Routes = [
   {
@@ -95,7 +92,7 @@ const routes: Routes = [
   },
   {
     path: 'login-landing/:mode',
-    component: RedirectToAuth0LoginComponent,
+    component: PrionRedirectToAuth0LoginComponent,
     canActivate: [IrbGuard]
   },
   {
