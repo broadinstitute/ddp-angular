@@ -14,12 +14,15 @@ import { ActivityResponse } from '../models/activity/activityResponse';
  */
 @Injectable()
 export class SubmitAnnouncementService {
-    public submitAnnounced$: Observable<ActivityResponse>;
+    private _submitAnnounced$: Observable<ActivityResponse>;
     private submitAnnouncedSource: Subject<ActivityResponse>;
 
     constructor() {
         this.submitAnnouncedSource = new Subject<ActivityResponse>();
-        this.submitAnnounced$ = this.submitAnnouncedSource.asObservable();
+        this._submitAnnounced$ = this.submitAnnouncedSource.asObservable();
+    }
+    get submitAnnounced$(): Observable<ActivityResponse> {
+      return this._submitAnnounced$;
     }
 
     public announceSubmit(response: ActivityResponse): void {

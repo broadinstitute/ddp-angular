@@ -8,7 +8,7 @@ import { CountryAddressInfoSummary } from '../models/countryAddressInfoSummary';
 import { CountryAddressInfo } from '../models/countryAddressInfo';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class CountryService extends SessionServiceAgent<CountryAddressInfo | CountryAddressInfoSummary[]> implements OnDestroy {
@@ -49,10 +49,12 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     }
 
     public findAllCountryInfoSummaries(): Observable<CountryAddressInfoSummary[]> {
+        console.log('find all countryinfo summaries');
         return this.allCountryInfoSummariesSubject$.asObservable();
     }
 
     private initializeAllCountryInfoSummaries(): void {
+      console.log('initializeAllCountryINfosums');
         this.anchor = this.getObservable('/addresscountries').pipe(
             map((data: any) => {
                 if (data) {
@@ -60,7 +62,8 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
                 } else {
                     return [];
                 }
-            })
+            }),
+          tap((data) => console.log('initializeAllCountryInfosums got allcedss' + data.length))
         ).subscribe(this.allCountryInfoSummariesSubject$);
     }
 }

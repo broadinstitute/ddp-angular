@@ -301,7 +301,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public jumpStep(step: number): void {
         if (this.visitedSectionIndexes[step]) {
-            this.scrollToTop();
+            this.smoothScrollToTop();
             this.currentSectionIndex = step;
         }
     }
@@ -394,6 +394,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     private scrollToTop(): void {
         this.windowRef.nativeWindow.scrollTo(0, 0);
+    }
+
+    private smoothScrollToTop(): void {
+        this.windowRef.nativeWindow.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     private nextAvailableSectionIndex(): number {

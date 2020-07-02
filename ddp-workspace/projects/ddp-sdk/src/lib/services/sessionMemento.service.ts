@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith } from 'rxjs/operators';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -91,8 +91,10 @@ export class SessionMementoService implements OnDestroy {
         userGuid: string,
         locale: string,
         expiresAtInSeconds: number,
-        participantGuid: string | null = null): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid);
+        participantGuid: string | null = null,
+        isAdmin: boolean = false,
+        invitationId: string | null = null): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin, invitationId);
         this.updateSession(session);
     }
 
@@ -117,6 +119,15 @@ export class SessionMementoService implements OnDestroy {
         this.updateSession(session);
     }
 
+    public setInvitationId(invitationId: string): void {
+        if (this.session === null) {
+            return;
+        }
+        const session = this.session;
+        session.invitationId = invitationId;
+        this.updateSession(session);
+    }
+
     public clear(): void {
         localStorage.removeItem(this.SESSION_KEY);
         this.sessionSubject.next(null);
@@ -137,6 +148,10 @@ export class SessionMementoService implements OnDestroy {
         }
 
         return true;
+    }
+
+    public isAuthenticatedAdminSession(): boolean {
+        return this.isAuthenticatedSession() && this.sessionSubject.value.isAdmin;
     }
 
     public isTemporarySession(): boolean {

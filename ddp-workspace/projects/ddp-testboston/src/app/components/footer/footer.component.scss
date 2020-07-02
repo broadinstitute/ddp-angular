@@ -1,0 +1,103 @@
+@import '../../../app-theme.scss';
+
+@mixin font {
+    font-size: 16px;
+    line-height: 33px;
+    color: mat-color($app-theme, 100);
+}
+
+.footer {
+    height: 22rem;
+    background-color: mat-color($app-theme, 1300);
+}
+
+.footer-content {
+    max-width: 850px;
+    margin: auto;
+    padding: 0 3rem;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5rem 0;
+
+    &_simple {
+        justify-content: space-around;
+    }
+}
+
+.column {
+    &__title {
+        @include font;
+        font-weight: 700;
+        opacity: 0.6;
+    }
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link {
+    @include font;
+    font-weight: 600;
+
+    &_active {
+        text-decoration: underline;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer {
+        height: 45rem;
+    }
+
+    .footer-content {
+        padding: 0 1.5625rem;
+    }
+
+    .wrapper {
+        flex-direction: column;
+
+        &_simple {
+            justify-content: space-between;
+        }
+    }
+
+    .list {
+        &_extended {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__column:first-child {
+            margin: 0 4rem 0 0;
+        }
+    }
+
+    .column {
+        &__title {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .footer-content {
+        padding: 0 1rem;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .list {
+        &__column:first-child {
+            margin: 0 2rem 0 0;
+        }
+    }
+}

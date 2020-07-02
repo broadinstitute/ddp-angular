@@ -1,3 +1,13 @@
+pepperConfig\.js
+ddpConfig\.js
+output-config/
+# npm
+node_modules/
+
+dist/
+
+
+#configuration info
 # macOS
 *.DS_Store
 .AppleDouble
@@ -33,7 +43,7 @@ Desktop.ini
 *.log
 *.logs
 
-pepper-angular/ddp-angio/src/assets/config/ddpConfig\.js
+
 
 # Xcode
 ## Build generated
@@ -87,14 +97,6 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
 
-Carthage/Build
 
-# npm
-node_modules/
 
-# maven test results
-surefire-reports/
-checkstyle-result.xml
 
-#configuration info
-output-config/

@@ -20,7 +20,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     }
 
     public get profile(): Observable<UserProfileDecorator> {
-        return this.getObservable('/profile', {}, [400]).pipe(
+        return this.getObservable('/profile', {}, [404]).pipe(
             map(x => {
                 if (x === null) {
                     return null;

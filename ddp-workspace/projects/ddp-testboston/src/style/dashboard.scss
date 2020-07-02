@@ -1,0 +1,152 @@
+@import '../app-theme.scss';
+
+.dashboard-title-section {
+    background-color: mat-color($app-theme, 3100);
+
+    &__title {
+        font-weight: 600;
+        font-size: 2rem;
+        line-height: 2.75rem;
+        margin: 2.75rem 0;
+    }
+}
+
+.content_dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-section {
+    margin: 5rem 0 15rem 0;
+}
+
+.dashboard-content {
+    margin: 2rem 0 0 0;
+}
+
+.dashboard-content_table {
+    margin: 2rem 0;
+}
+
+.infobox_dashboard {
+    padding: 1.5rem 2rem;
+    position: relative;
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+.infobox-text_small {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: mat-color($app-theme, 700);
+}
+
+.invitation-code {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin: 0;
+
+    &__text {
+        font-size: 20px;
+    }
+}
+
+.dashboard-message {
+    margin-bottom: 5rem;
+
+    &__text {
+        margin-top: 5rem;
+        margin-bottom: 2.5rem;
+    }
+}
+
+.ddp-dashboard {
+
+    .mat-cell,
+    .mat-header-cell,
+    .dashboard-mobile-label {
+        font-size: 1.125rem !important;
+        line-height: 1.75rem !important;
+    }
+
+    .mat-header-cell:first-of-type,
+    .mat-cell:first-of-type {
+        padding-left: 10px !important;
+    }
+
+    .mat-header-cell:last-of-type,
+    .mat-cell:last-of-type {
+        padding-right: 10px !important;
+    }
+
+    .dashboard-mobile-label {
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .mat-column-actions {
+        flex: 0 0 20%;
+    }
+
+    .mat-row {
+        align-items: center !important;
+        padding: 15px 0 !important;
+    }
+
+    .dashboard-status-container__img {
+        height: 25px !important;
+        width: 25px !important;
+        padding: 0 8px 0 0;
+    }
+
+    .Link {
+        color: mat-color($app-theme, 700);
+        white-space: normal;
+    }
+
+    @media only screen and(max-width: 650px) {
+        .mat-column-actions {
+            .dashboard-mobile-label {
+                line-height: 1.125rem !important;
+            }
+        }
+
+        .mat-row {
+            align-items: flex-start !important;
+            padding: 5px 0 !important;
+        }
+
+        .mat-header-cell:first-of-type,
+        .mat-cell:first-of-type {
+            padding-left: 0px !important;
+        }
+    }
+}
+
+.dashboard-activity-button {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-family: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left;
+}
+
+.dashboard-activity-button:hover {
+    color: mat-color($app-theme, 650) !important;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .dashboard-section {
+        margin: 2rem 0 4rem 0;
+    }
+}

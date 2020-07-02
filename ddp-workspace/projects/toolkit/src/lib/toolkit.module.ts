@@ -27,6 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardRedesignedComponent } from './components/dashboard/dashboard-redesigned.component';
 import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { LoginLandingRedesignedComponent } from './components/login-landing/login-landing-redesigned.component';
+import { AdminLoginLandingComponent } from './components/login-landing/admin-login-landing.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorRedesignedComponent } from './components/error/error-redesigned.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
@@ -69,6 +70,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
@@ -87,6 +90,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     MatDialogModule,
     MatSidenavModule,
     MatButtonModule,
+    MatProgressBarModule,
     DdpModule
   ],
   providers: [
@@ -110,6 +114,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
+    AdminLoginLandingComponent,
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
@@ -153,6 +158,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
+    AdminLoginLandingComponent,
     RedirectToLoginLandingComponent,
     RedirectToLoginLandingRedesignedComponent,
     ErrorComponent,
