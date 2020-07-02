@@ -7,5 +7,4 @@ export interface Invitation {
     voidedAt: string | null;
     verifiedAt: string | null;
     acceptedAt: string | null;
-    notes: string | null;
 }
