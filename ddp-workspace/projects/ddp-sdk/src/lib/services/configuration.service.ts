@@ -35,4 +35,5 @@ export class ConfigurationService {
     tooltipIconUrl: string = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
     languageSelectorIconURL: string | null = null;
+    lookupPageUrl: string | null = null;
 }

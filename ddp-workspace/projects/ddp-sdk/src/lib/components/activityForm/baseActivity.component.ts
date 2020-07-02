@@ -214,7 +214,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected nextWorkflowActivity(): void {
-        this.workflow.getNext(this.studyGuid)
+        this.workflow.getNext()
             .pipe(take(1))
             .subscribe(response => this.submit.emit(response));
     }

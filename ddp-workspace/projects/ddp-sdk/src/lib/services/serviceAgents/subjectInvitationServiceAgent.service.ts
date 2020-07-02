@@ -6,7 +6,6 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StudySubject } from '../../models/studySubject';
-import { UserGuid } from '../../models/userGuid';
 import { InvitationCheckPayload } from '../../models/invitationCheckPayload';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
 
@@ -30,9 +29,9 @@ export class SubjectInvitationServiceAgent extends SessionServiceAgent<any> {
         );
     }
 
-    public createStudyParticipant(invitationId: string): Observable<UserGuid | null> {
+    public createStudyParticipant(invitationId: string): Observable<string | null> {
         return this.postObservable(`/admin/studies/${this.configuration.studyGuid}/participants`, { invitationId }).pipe(
-            map(response => response ? response.body : null)
+            map(response => response && response.body ? response.body.userGuid : null)
         );
     }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
@@ -160,6 +161,7 @@ import { ConditionalBlockComponent } from './components/activityForm/conditional
 import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
+import { SubjectPanelComponent } from './components/subjectPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
@@ -233,7 +235,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         useFactory: jwtOptionsFactory,
         deps: [SessionMementoService]
       }
-    })
+    }),
+    RouterModule
   ],
   providers: [
     AuthGuard,
@@ -349,7 +352,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     RouteTransformerDirective,
     InvitationCodeFormatterDirective,
     InvitationPipe,
-    TooltipComponent
+    TooltipComponent,
+    SubjectPanelComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -410,7 +414,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UpperCaseInputDirective,
     InvitationCodeFormatterDirective,
     InvitationPipe,
-    TooltipComponent
+    TooltipComponent,
+    SubjectPanelComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
