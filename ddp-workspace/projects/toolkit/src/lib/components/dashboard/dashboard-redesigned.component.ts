@@ -3,7 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
+import { map, take, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-dashboard-redesigned',
@@ -14,7 +15,7 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
                     <h1 class="dashboard-title-section__title" translate>
                         Toolkit.Dashboard.Title
                     </h1>
-                    <p *ngIf="isAdmin && subjectInfoExists" class="invitation-code">
+                    <p *ngIf="invitationId" class="invitation-code">
                         <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
                         <span>{{invitationId | invitation}}</span>
                     </p>
@@ -61,11 +62,14 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
         </main>`
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit {
+    public invitationId: string | null = null;
+
     constructor(
         private headerConfig: HeaderConfigurationService,
         private session: SessionMementoService,
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
+        private userInvitation: UserInvitationServiceAgent,
         @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
         super(_router, _announcements, config);
     }
@@ -73,6 +77,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public ngOnInit(): void {
         super.ngOnInit();
         this.headerConfig.setupDefaultHeader();
+        !this.isAdmin && this.getInvitationId();
     }
 
     public get isAdmin(): boolean {
@@ -83,7 +88,14 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         return !!this.session.session.participantGuid && !!this.session.session.invitationId;
     }
 
-    public get invitationId(): string {
-        return this.session.session.invitationId;
+    private getInvitationId(): void {
+        this.userInvitation.getInvitations().pipe(
+            take(1),
+            filter(invitations => !!invitations),
+            map(invitations => invitations.find(invitation => {
+                return invitation.invitationType === InvitationType.RECRUITMENT;
+            })),
+            filter(invitation => !!invitation)
+        ).subscribe(invitation => this.invitationId = invitation.invitationId);
     }
 }
