@@ -42,6 +42,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -94,6 +95,7 @@ sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
+sdkConfig.lookupPageUrl = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
@@ -121,7 +123,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrivacyPolicyComponent,
-        PrismComponent
+        PrismComponent,
+        EnrollmentComponent
     ],
     imports: [
         BrowserModule,
