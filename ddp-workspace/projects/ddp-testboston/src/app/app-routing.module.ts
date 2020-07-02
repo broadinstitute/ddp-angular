@@ -8,6 +8,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { EnrollmentComponent } from './components/enrollment/enrollment.component'
 
 import {
   Auth0CodeCallbackComponent,
@@ -118,6 +119,14 @@ const routes: Routes = [
   {
     path: AppRoutes.Prism,
     component: PrismComponent,
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.EnrollSubject,
+    component: EnrollmentComponent,
     canActivate: [
       IrbGuard,
       AdminAuthGuard

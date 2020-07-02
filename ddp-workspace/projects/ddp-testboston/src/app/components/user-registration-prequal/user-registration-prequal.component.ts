@@ -72,13 +72,13 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   private checkInvitation(invitationId: string, recaptchaToken: string, zip: string): void {
     this.isLoading = true;
     this.invitationService.check(invitationId, recaptchaToken, zip).pipe(
-      take(1),
-      finalize(() => this.isLoading = false)
+      take(1)
     ).subscribe(
       () => this.auth0.signup({ invitation_id: invitationId }),
       (error) => {
         this.captcha.reset();
         this.error = error;
+        this.isLoading = false;
       }
     );
   }

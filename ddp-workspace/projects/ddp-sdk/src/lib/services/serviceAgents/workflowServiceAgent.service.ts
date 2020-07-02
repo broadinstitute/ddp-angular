@@ -17,19 +17,19 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
         super(session, configuration, http, logger);
     }
 
-    public byActivityCode(studyGuid: string, state: string, activityCode: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=${state}&activityCode=${activityCode}`, null);
+    public byActivityCode(state: string, activityCode: string): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&activityCode=${activityCode}`, null);
     }
 
-    public byInstanceGuid(studyGuid: string, state: string, instanceGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=${state}&instanceGuid=${instanceGuid}`, null);
+    public byInstanceGuid(state: string, instanceGuid: string): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&instanceGuid=${instanceGuid}`, null);
     }
 
-    public getNext(studyGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=RETURN_USER`, null);
+    public getNext(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=RETURN_USER`, null);
     }
 
-    public getStart(studyGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=START`, null);
+    public getStart(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=START`, null);
     }
 }

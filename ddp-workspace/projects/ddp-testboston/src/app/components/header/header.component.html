@@ -39,10 +39,10 @@
             <div class="auth__dashboard" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </div>
-            <div *ngIf="headerConfig.showLoginButton" class="auth__dashboard">
+            <div *ngIf="headerConfig.showLoginButton" [ngClass]="{'auth__dashboard': languageSelectorShown}">
                 <ddp-sign-in-out></ddp-sign-in-out>
             </div>
-            <ddp-language-selector></ddp-language-selector>
+            <ddp-language-selector (isVisible)="handleLanguageVisibility($event)"></ddp-language-selector>
         </div>
         <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
