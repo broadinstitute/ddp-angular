@@ -17,7 +17,7 @@ import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
                     <h1 class="dashboard-title-section__title" translate>
                         Toolkit.Dashboard.Title
                     </h1>
-                    <p *ngIf="!isAdmin && invitationId" class="invitation-code">
+                    <p *ngIf="invitationId" class="invitation-code">
                         <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
                         <span>{{invitationId | invitation}}</span>
                     </p>
