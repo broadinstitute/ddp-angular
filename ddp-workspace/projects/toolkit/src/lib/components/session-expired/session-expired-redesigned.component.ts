@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionExpiredComponent } from './session-expired.component';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
 import { Auth0AdapterService } from 'ddp-sdk';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'toolkit-session-expired-redesigned',
@@ -23,7 +24,10 @@ import { Auth0AdapterService } from 'ddp-sdk';
         </main>`
 })
 export class SessionExpiredRedesignedComponent extends SessionExpiredComponent implements OnInit {
+    private isAdminSessionExpired: boolean;
+
     constructor(
+        private activatedRoute: ActivatedRoute,
         private headerConfig: HeaderConfigurationService,
         private _auth0: Auth0AdapterService) {
         super(_auth0);
@@ -31,5 +35,14 @@ export class SessionExpiredRedesignedComponent extends SessionExpiredComponent i
 
     public ngOnInit(): void {
         this.headerConfig.setupDefaultHeader();
+        this.isAdminSessionExpired = !!this.activatedRoute.snapshot.data.admin;
+    }
+
+    public signin(): void {
+        if (this.isAdminSessionExpired) {
+            this._auth0.adminLogin();
+        } else {
+            super.signin();
+        }
     }
 }

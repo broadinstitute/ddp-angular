@@ -65,7 +65,7 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
                 this.timeLeft = '00:00';
                 if (!this.blockUI) {
                     this.blockUI = true;
-                    this.auth0.handleExpiredAuthenticatedSession();
+                    this.auth0.handleExpiredSession();
                 }
             }
         });

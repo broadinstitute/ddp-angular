@@ -167,6 +167,10 @@ export class SessionMementoService implements OnDestroy {
         return this.isAuthenticatedSession() && this.isSessionExpired();
     }
 
+    public isAuthenticatedAdminSessionExpired(): boolean {
+        return this.isAuthenticatedAdminSession() && this.isSessionExpired();
+    }
+
     public isTemporarySessionExpired(): boolean {
         return this.isTemporarySession() && this.isSessionExpired();
     }
