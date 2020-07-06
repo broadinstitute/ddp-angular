@@ -191,7 +191,7 @@ export class Auth0AdapterService implements OnDestroy {
             ...(additionalParams && additionalParams)
         };
         if (this.configuration.doLocalRegistration) {
-            sessionStorage.setItem("localAdminAuth", 'true');
+            sessionStorage.setItem('localAdminAuth', 'true');
             sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
         }
         this.adminWebAuth.authorize(
@@ -316,15 +316,14 @@ export class Auth0AdapterService implements OnDestroy {
 
     public handleExpiredSession(): void {
         if (this.session.isAuthenticatedSessionExpired()) {
-            this.handleExpiredAuthenticatedSession(this.configuration.sessionExpiredUrl);
+            this.handleExpiredAuthenticatedSession();
         } else if (this.session.isTemporarySessionExpired()) {
             this.handleExpiredTemporarySession();
-        } else if (this.session.isAuthenticatedAdminSessionExpired()) {
-            this.handleExpiredAuthenticatedSession(this.configuration.adminSessionExpiredUrl);
         }
     }
 
-    public handleExpiredAuthenticatedSession(returnToUrl: string): void {
+    public handleExpiredAuthenticatedSession(): void {
+        const returnToUrl = this.session.getSessionExpiredUrl();
         this.renewNotifier.hideSessionExpirationNotifications();
         sessionStorage.setItem('nextUrl', this.router.url);
         this.logout(returnToUrl);
