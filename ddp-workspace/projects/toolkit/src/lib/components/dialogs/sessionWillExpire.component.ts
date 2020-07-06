@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
+import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier, ConfigurationService } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 
@@ -51,7 +51,8 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
         private session: SessionMementoService,
         private auth0: Auth0AdapterService,
         private renewNotifier: RenewSessionNotifier,
-        private dialogRef: MatDialogRef<SessionWillExpireComponent>) { }
+        private dialogRef: MatDialogRef<SessionWillExpireComponent>,
+        @Inject('ddp.config') private config: ConfigurationService) { }
 
     public ngOnInit(): void {
         const EXTRA_TIME = 60000;
@@ -65,7 +66,9 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
                 this.timeLeft = '00:00';
                 if (!this.blockUI) {
                     this.blockUI = true;
-                    this.auth0.handleExpiredSession();
+                    const returnToUrl = this.session.isAuthenticatedAdminSessionExpired() ?
+                        this.config.adminSessionExpiredUrl : this.config.sessionExpiredUrl;
+                    this.auth0.handleExpiredAuthenticatedSession(returnToUrl);
                 }
             }
         });
