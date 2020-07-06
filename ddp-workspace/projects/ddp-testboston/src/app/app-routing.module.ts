@@ -159,7 +159,7 @@ const routes: Routes = [
     canActivate: [
       IrbGuard
     ],
-    data: { admin: true }
+    data: { isAdmin: true }
   },
   {
     path: AppRoutes.Password,
