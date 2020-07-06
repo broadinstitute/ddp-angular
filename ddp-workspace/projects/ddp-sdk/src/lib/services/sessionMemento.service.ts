@@ -1,9 +1,8 @@
-import { Injectable, OnDestroy, Inject } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
 import { filter, map, mergeMap, startWith } from 'rxjs/operators';
-import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -22,7 +21,7 @@ export class SessionMementoService implements OnDestroy {
     private notificationSubscription: Subscription;
     private anchor: Subscription = new Subscription();
 
-    constructor(@Inject('ddp.config') private config: ConfigurationService) {
+    constructor() {
         this.observeSessionExpiration();
         this.observeSessionStatus();
         // listen for storage events. Only get notified of storage changes in other tabs
@@ -183,11 +182,6 @@ export class SessionMementoService implements OnDestroy {
         }
 
         return new Date().getTime() > session.expiresAt;
-    }
-
-    public getSessionExpiredUrl(): string {
-        return this.session.isAdmin ?
-            this.config.adminSessionExpiredUrl : this.config.sessionExpiredUrl;
     }
 
     private hasOnlyUserGuid(session: Session): boolean {

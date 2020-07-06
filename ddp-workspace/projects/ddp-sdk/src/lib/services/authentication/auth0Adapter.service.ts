@@ -323,7 +323,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     public handleExpiredAuthenticatedSession(): void {
-        const returnToUrl = this.session.getSessionExpiredUrl();
+        const returnToUrl = this.getSessionExpiredUrl();
         this.renewNotifier.hideSessionExpirationNotifications();
         sessionStorage.setItem('nextUrl', this.router.url);
         this.logout(returnToUrl);
@@ -332,5 +332,10 @@ export class Auth0AdapterService implements OnDestroy {
     private handleExpiredTemporarySession(): void {
         this.session.clear();
         window.location.reload();
+    }
+
+    private getSessionExpiredUrl(): string {
+        return this.session.session.isAdmin ?
+            this.configuration.adminSessionExpiredUrl : this.configuration.sessionExpiredUrl;
     }
 }
