@@ -42,7 +42,7 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
                     Toolkit.Header.LearnMore
                 </span>
             </li>
-            <li *ngIf="showUserMenu && !unsupportedBrowser" class="Header-navItem">
+            <li *ngIf="showUserMenu && !unsupportedBrowser" class="Header-navItem user-menu-header">
                 <ddp-user-menu [isScrolled]="isScrolled">
                 </ddp-user-menu>
             </li>
