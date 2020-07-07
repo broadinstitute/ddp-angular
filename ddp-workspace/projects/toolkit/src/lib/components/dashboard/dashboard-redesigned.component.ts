@@ -3,7 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementsServiceAgent, SessionMementoService } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
+import { map, take, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-dashboard-redesigned',
@@ -71,6 +72,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private session: SessionMementoService,
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
+        private userInvitation: UserInvitationServiceAgent,
         @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
         super(_router, _announcements, config);
     }
@@ -78,6 +80,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public ngOnInit(): void {
         super.ngOnInit();
         this.headerConfig.setupDefaultHeader();
+        !this.isAdmin && this.getInvitationId();
     }
 
     public get isAdmin(): boolean {
@@ -86,5 +89,16 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
     public get subjectInfoExists(): boolean {
         return !!this.session.session.participantGuid && !!this.session.session.invitationId;
+    }
+
+    private getInvitationId(): void {
+        this.userInvitation.getInvitations().pipe(
+            take(1),
+            filter(invitations => !!invitations),
+            map(invitations => invitations.find(invitation => {
+                return invitation.invitationType === InvitationType.RECRUITMENT;
+            })),
+            filter(invitation => !!invitation)
+        ).subscribe(invitation => this.invitationId = invitation.invitationId);
     }
 }
