@@ -38,7 +38,7 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
   updateTranslations() {
     this.baseData = (this.translator.instant('App.StudyListing.Rows') as StudyInfo[])
       .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements,
-        x.moreInfo.replace('{{bucketURL}}', this.bucketUrl)));
+        x.moreInfo.replace('{{bucketUrl}}', this.bucketUrl)));
     this.updateDataProcessing();
   }
 
