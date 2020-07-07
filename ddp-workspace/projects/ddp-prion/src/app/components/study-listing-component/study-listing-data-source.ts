@@ -16,7 +16,7 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
     super();
     this.baseData = (this.translator.instant('App.StudyListing.Rows') as StudyInfo[])
       .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements,
-        x.moreInfo.replace('{{bucketURL}}', this.bucketUrl)));
+        x.moreInfo.replace('{{bucketUrl}}', this.bucketUrl)));
     this.dataSubj = new BehaviorSubject<StudyInfo[]>(this.baseData);
     this.updateDataProcessing();
     this.translator.onLangChange.subscribe(() => this.updateTranslations());
