@@ -35,5 +35,10 @@ export class ConfigurationService {
     tooltipIconUrl: string = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
     languageSelectorIconURL: string | null = null;
+    // urls for app pages
     lookupPageUrl: string | null = null;
+    sessionExpiredUrl = 'session-expired';
+    adminSessionExpiredUrl = 'admin-session-expired';
+    errorPageUrl = 'error';
+    dashboardPageUrl = 'dashboard';
 }
