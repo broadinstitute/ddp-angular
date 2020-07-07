@@ -268,6 +268,25 @@
             }
         }
     },
+    "Enrollment": {
+        "Title": "Account setup",
+        "FirstName": {
+            "Text": "Subject's First Name",
+            "Placeholder": "Enter first name",
+            "Error": "Please enter subject's first name"
+        },
+        "LastName": {
+            "Text": "Subject's Last Name",
+            "Placeholder": "Enter last name",
+            "Error": "Please enter subject's last name"
+        },
+        "Email": {
+            "Text": "Subject's Email Address (Optional)",
+            "Placeholder": "example@example.com",
+            "Error": "Please enter valid email address"
+        },
+        "Button": "Next"
+    },
     "Toolkit": {
         "Dashboard": {
             "Title": "Dashboard",
@@ -499,6 +518,10 @@
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
         },
-        "TooltipAlt": "Information"
+        "TooltipAlt": "Information",
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "Text": "Subject Invitation Code: "
+        }
     }
 }

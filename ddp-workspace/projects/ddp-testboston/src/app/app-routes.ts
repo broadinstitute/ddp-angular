@@ -16,5 +16,6 @@ export const AppRoutes = {
     SessionExpired: 'session-expired',
     Privacy: 'privacy-policy',
     Address: 'mailing-address',
-    PasswordResetDone: 'password-reset-done'
+    PasswordResetDone: 'password-reset-done',
+    EnrollSubject: 'enrollment'
 };
