@@ -267,12 +267,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public isActivityCompleted(statusCode: string): boolean {
-    const statuses = this.config.dashboardActivitiesCompletedStatuses;
-    if (statuses.length === 0) {
-      return false;
-    } else {
-      return statuses.includes(statusCode);
-    }
+    return this.config.dashboardActivitiesCompletedStatuses.includes(statusCode)
   }
 
   private doAnalytics(action: string): void {
