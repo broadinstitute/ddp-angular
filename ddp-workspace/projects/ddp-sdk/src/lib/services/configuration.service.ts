@@ -32,7 +32,7 @@ export class ConfigurationService {
     // if dashboardShowQuestionCount is true, exclude activity guids listed here from showing
     // their question count
     dashboardShowQuestionCountExceptions: string[] = [];
-    // if activity status added here, buttons will be shown as for read-only activity
+    // if activity status added here, buttons text will be changed on custom
     dashboardActivitiesCompletedStatuses: string[] = [];
     tooltipIconUrl: string = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
