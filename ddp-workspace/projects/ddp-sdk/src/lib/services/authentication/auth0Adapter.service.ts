@@ -280,8 +280,8 @@ export class Auth0AdapterService implements OnDestroy {
       const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
       return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
     };
-    const auth0 = currentSession.isAdmin ? this.adminWebAuth : this.webAuth;
-    const checkSession$ = bindNodeCallback(cb => auth0.checkSession({
+    const auth = currentSession.isAdmin ? this.adminWebAuth : this.webAuth;
+    const checkSession$ = bindNodeCallback(cb => auth.checkSession({
       studyGuid,
       responseType: 'token id_token',
       renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
