@@ -46,3 +46,53 @@
     }
   }
 }
+
+@mixin steps{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 30px 0;
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    right: 15px;
+    height: 4px;
+    background-color: $silver-grey;
+    z-index: 1;
+    content: '';
+    display: block;
+  }
+}
+
+@mixin step{
+  width: 26px;
+  height: 26px;
+  border-radius: 13px !important;
+  border: 3px solid $silver-grey;
+  background: $grey;
+  z-index: 2;
+  padding: 0 !important;
+  transition: background 0.3s ease;
+  font-size: 0;
+  margin: 0;
+
+  &:hover {
+    @include bg-blue-light();
+  }
+
+  &.completed {
+    @include bg-green();
+    cursor: pointer;
+  }
+
+  &.active {
+    background-color: $astral-blue;
+  }
+
+  .activity-step-image {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
