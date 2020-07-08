@@ -4,9 +4,7 @@ import {
   ConfigurationService,
   NGXTranslateService,
   SessionMementoService,
-  UserProfileDecorator,
-  CurrentActivityService,
-  ActivityCodes,
+  UserProfileDecorator
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
@@ -23,13 +21,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public SignIn: string;
   private anchor = new CompositeDisposable();
   private userProfileDecorator: UserProfileDecorator;
-  isProgressBarVisible = false;
-  activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
               private ngxTranslate: NGXTranslateService,
-              private currentActivityService: CurrentActivityService,
               private translate: TranslateService,
               @Inject('ddp.config') private configuration: ConfigurationService,
               private userPreferencesServiceAgent: UserPreferencesServiceAgent) {
@@ -40,14 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((SignIn: string) => this.SignIn = SignIn);
     this.anchor.addNew(translate$);
 
-    const currentActivity$ = this.currentActivityService.getCurrentActivity().subscribe(x => {
-      x && x.activityCode === this.activityToShowProgress
-        ? this.isProgressBarVisible = true
-        : this.isProgressBarVisible = false;
-    });
-    this.anchor.addNew(currentActivity$);
-
-   const userProfileSubs$ = this.userPreferencesServiceAgent.profile
+    const userProfileSubs$ = this.userPreferencesServiceAgent.profile
       .subscribe((data: UserProfileDecorator) => {
         if (!!data) {
           this.userProfileDecorator = data;
@@ -55,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       });
 
-   this.anchor.addNew(userProfileSubs$);
+    this.anchor.addNew(userProfileSubs$);
   }
 
   public get isAuthenticated(): boolean {

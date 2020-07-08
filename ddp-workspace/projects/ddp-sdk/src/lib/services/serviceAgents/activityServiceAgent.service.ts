@@ -82,11 +82,4 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             map(x => !!x ? x.body as ActivityInstanceGuid : null)
         );
     }
-
-    public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
-      const payload = { lastVisitedActivitySection: index };
-
-      return this.patchObservable(`/studies/${studyGuid}/activities/${activityGuid}/lastVisitedSection`, payload).pipe(
-        map(httpResponse => httpResponse));
-    }
 }
