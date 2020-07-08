@@ -21,6 +21,7 @@ import {
     withLatestFrom
 } from 'rxjs/operators';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
@@ -34,6 +35,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected workflow: WorkflowServiceAgent;
     protected submissionManager: SubmissionManager;
     protected router: Router;
+    protected config: ConfigurationService;
     public model: ActivityForm;
     public validationRequested = false;
     public isLoaded = false;
@@ -54,6 +56,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
+        this.config = injector.get('ddp.config');
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -122,7 +125,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected navigateToErrorPage(): void {
-        this.router.navigateByUrl('/error');
+        this.router.navigateByUrl(this.config.errorPageUrl);
     }
 
     public refresh(): void {
@@ -186,7 +189,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public close(): void {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl(this.config.dashboardPageUrl);
     }
 
     private initSteps(): void {

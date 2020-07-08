@@ -23,6 +23,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { PartnersComponent } from './components/partners/partners.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -117,7 +118,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     DataReleaseComponent,
     MoreDetailsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PartnersComponent
   ],
   providers: [
     {
