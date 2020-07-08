@@ -1,0 +1,161 @@
+<header *ngIf="!isAdmin" class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
+    <div class="header-content">
+        <a class="project-logo" routerLink="/">
+            <img class="project-logo__img" src="assets/images/logo-testboston.png"
+                [alt]="'Navigation.LogoAlt' | translate">
+        </a>
+        <nav class="nav">
+            <ul *ngIf="headerConfig.showMainButtons" class="navigation">
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/" fragment="about-the-study"
+                        (click)="scrollToAnchor('about-the-study')" translate>
+                        Navigation.About
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
+                        Navigation.Q&A
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/" fragment="who-we-are" (click)="scrollToAnchor('who-we-are')"
+                        translate>
+                        Navigation.WhoWeAre
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" routerLink="/" fragment="stay-informed"
+                        (click)="scrollToAnchor('stay-informed')" translate>
+                        Navigation.StayInformed
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth">
+            <a class="header-link auth__dashboard" href="kit-instructions.pdf" target="_blank" translate>
+                <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
+                Navigation.KitInstructions
+            </a>
+            <div class="auth__dashboard" *ngIf="isAuthenticated">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </div>
+            <div *ngIf="headerConfig.showLoginButton" class="auth__dashboard">
+                <ddp-sign-in-out></ddp-sign-in-out>
+            </div>
+            <!-- replace with real language selector component when when it is done -->
+            <ng-container *ngTemplateOutlet="languageButton"></ng-container>
+            <!-- replace with real language selector component when when it is done -->
+        </div>
+        <div class="menu-button">
+            <ng-container *ngIf="!isMenuOpened">
+                <button class="SimpleButton" (click)="openMenu()">
+                    {{'Navigation.Menu' | translate}}
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isMenuOpened">
+                <button class="menu-button__close" mat-icon-button (click)="closeMenu()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</header>
+
+<div #overlay class="overlay">
+    <nav class="overlay-content">
+        <ul #menu class="menu">
+            <ng-container>
+                <li class="menu__item">
+                    <a class="header-link" routerLink="/" fragment="about-the-study"
+                        (click)="closeMenu(); scrollToAnchor('about-the-study')" translate>
+                        Navigation.About
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a class="header-link" routerLink="/" fragment="q&a" (click)="closeMenu(); scrollToAnchor('q&a')"
+                        translate>
+                        Navigation.Q&A
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a class="header-link" routerLink="/" fragment="who-we-are"
+                        (click)="closeMenu(); scrollToAnchor('who-we-are')" translate>
+                        Navigation.WhoWeAre
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a class="header-link" routerLink="/" fragment="stay-informed"
+                        (click)="closeMenu(); scrollToAnchor('stay-informed')" translate>
+                        Navigation.StayInformed
+                    </a>
+                </li>
+            </ng-container>
+            <div class="menu_mobile-buttons">
+                <li class="menu__item">
+                    <a class="header-link" href="kit-instructions.pdf" target="_blank" translate>
+                        <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
+                        Navigation.KitInstructions
+                    </a>
+                </li>
+                <li class="menu__item" *ngIf="isAuthenticated">
+                    <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+                </li>
+                <li *ngIf="headerConfig.showLoginButton" class="menu__item">
+                    <ddp-sign-in-out></ddp-sign-in-out>
+                </li>
+                <li class="menu__item">
+                    <!-- replace with real language selector component when when it is done -->
+                    <ng-container *ngTemplateOutlet="languageButton"></ng-container>
+                    <!-- replace with real language selector component when when it is done -->
+                </li>
+            </div>
+        </ul>
+    </nav>
+</div>
+
+<ng-template #dashboardButton>
+    <a class="header-link" [routerLink]="'/' + appRoutes.Dashboard" routerLinkActive="header-link_active"
+        (click)="closeMenu()">
+        <div class="header-link__dashboard">
+            <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <g class="dashboard-icon_color" transform="translate(-385.000000, -41.000000)" stroke="#000000"
+                        stroke-width="1.5">
+                        <g transform="translate(386.000000, 40.000000)">
+                            <g transform="translate(0.000000, 2.000000)">
+                                <circle cx="10" cy="8.125" r="4.375"></circle>
+                                <path
+                                    d="M15.7608333,17.3966667 C14.2362899,15.8625492 12.1628105,14.9998815 10,14.9998815 C7.83718949,14.9998815 5.76371015,15.8625492 4.23916667,17.3966667">
+                                </path>
+                                <circle cx="10" cy="10" r="9.375"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <span translate>Navigation.Dashboard</span>
+    </a>
+</ng-template>
+
+<!-- replace with real language selector component when when it is done -->
+<ng-template #languageButton>
+    <div class="language">
+        <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
+        <span>English</span>
+    </div>
+</ng-template>
+<!-- replace with real language selector component when when it is done -->
+
+<header *ngIf="isAdmin" class="header header_crc" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
+    <div class="header-content">
+        <a class="project-logo project-logo_crc" [routerLink]="'/' + appRoutes.Prism">
+            <img class="project-logo__img" src="assets/images/logo-testboston.png"
+                [alt]="'Navigation.LogoAlt' | translate">
+            <span translate>Navigation.CRCLogoSubtitle</span>
+        </a>
+        <ddp-sign-in-out></ddp-sign-in-out>
+    </div>
+</header>

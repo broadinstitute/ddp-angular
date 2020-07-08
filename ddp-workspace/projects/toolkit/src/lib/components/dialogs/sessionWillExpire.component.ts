@@ -5,10 +5,9 @@ import { interval, Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 
 @Component({
-    selector: 'ddp-session-will-expire',
+    selector: 'toolkit-session-will-expire',
     template: `
     <div class="Modal-title">
-
         <h1 class="Modal-title no-margin">
             <span *ngIf="!renewalFailed; else renewalFailedMessage">
                 <span translate>Toolkit.Dialogs.SessionWillExpire.Title</span>
@@ -18,29 +17,33 @@ import { finalize, take } from 'rxjs/operators';
                 <span translate>Toolkit.Dialogs.SessionWillExpire.RenewalFailed</span>
             </ng-template>
         </h1>
-        <button mat-icon-button (click)="closeDialog()" [disabled]="isRenewing">
+        <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI">
             <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
     <mat-dialog-content *ngIf="!renewalFailed">
         <p class="Modal-text" translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
     </mat-dialog-content>
+    <mat-dialog-content *ngIf="blockUI">
+        <mat-progress-bar class="Modal-progress" mode="indeterminate"></mat-progress-bar>
+    </mat-dialog-content>
     <mat-dialog-actions align="end" class="row NoMargin">
         <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
                 (click)="signOut()"
-                [disabled]="isRenewing"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
         <button *ngIf="!renewalFailed" class="ButtonFilled Button--rect button button_small button_primary"
                 (click)="renewSession()"
-                [disabled]="isRenewing"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
         </button>
     </mat-dialog-actions>`
 })
 export class SessionWillExpireComponent implements OnInit, OnDestroy {
     public timeLeft = '00:00';
-    public isRenewing = false;
+    // Blocks UI to prevent interference in the session renewing/logout process
+    public blockUI = false;
     public renewalFailed = false;
     private anchor: Subscription = new Subscription();
 
@@ -57,15 +60,13 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
             const now = Date.now();
             const remainingTime = expiresAt - now - EXTRA_TIME;
             if (remainingTime > 0) {
-                const totalSeconds = Math.floor(remainingTime / 1000);
-                const seconds = totalSeconds % 60;
-                const minutes = (totalSeconds - seconds) / 60;
-                const formattedMinutes = this.formatTime(minutes);
-                const formattedSeconds = this.formatTime(seconds);
-                this.timeLeft = `${formattedMinutes}:${formattedSeconds}`;
+                this.timeLeft = this.calculateTimeLeft(remainingTime);
             } else {
                 this.timeLeft = '00:00';
-                this.auth0.logout('session-expired');
+                if (!this.blockUI) {
+                    this.blockUI = true;
+                    this.auth0.handleExpiredAuthenticatedSession();
+                }
             }
         });
         this.anchor.add(timer);
@@ -81,11 +82,10 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
     }
 
     public renewSession(): void {
-        // Blocks UI to prevent interference in the session renewing process
-        this.isRenewing = true;
+        this.blockUI = true;
         this.auth0.auth0RenewToken().pipe(
             take(1),
-            finalize(() => this.isRenewing = false)
+            finalize(() => this.blockUI = false)
         ).subscribe(
             () => { },
             err => this.renewalFailed = true
@@ -94,6 +94,15 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public closeDialog(): void {
         this.dialogRef.close();
+    }
+
+    private calculateTimeLeft(remainingTime: number): string {
+        const totalSeconds = Math.floor(remainingTime / 1000);
+        const seconds = totalSeconds % 60;
+        const minutes = (totalSeconds - seconds) / 60;
+        const formattedMinutes = this.formatTime(minutes);
+        const formattedSeconds = this.formatTime(seconds);
+        return `${formattedMinutes}:${formattedSeconds}`;
     }
 
     private formatTime(value: number): string {

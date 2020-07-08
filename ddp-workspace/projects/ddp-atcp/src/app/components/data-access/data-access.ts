@@ -96,8 +96,8 @@ export class DataAccessComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const translate$ = this.ngxTranslate.getTranslation('DataAccess.Assurances.AssuranceList')
-      .subscribe((list: string[]) => this.AssuranceList = list);
+    const translate$ = this.ngxTranslate.getTranslation(['DataAccess.Assurances.AssuranceList'])
+      .subscribe((list: string[]) => this.AssuranceList = list['DataAccess.Assurances.AssuranceList']);
     this.anchor.addNew(translate$);
     this.studyGuid = this.toolkitConfiguration.studyGuid;
     this.model.signature_date = this.getToday();

@@ -57,21 +57,21 @@
             "Title": "My Study Information"
         },
         "DatePicker": {
-          "Day": "Choose day...",
-          "Month": "Choose month...",
-          "Year": "Choose year...",
-          "January": "January",
-          "February": "February",
-          "March": "March",
-          "April": "April",
-          "May": "May",
-          "June": "June",
-          "July": "July",
-          "August": "August",
-          "September": "September",
-          "October": "October",
-          "November": "November",
-          "December": "December"
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
@@ -80,6 +80,7 @@
         "DetailsPlaceholder": {
             "PluralForm": "characters remaining",
             "SingularForm": "character remaining"
-        }
+        },
+        "TooltipAlt": "Information"
     }
 }

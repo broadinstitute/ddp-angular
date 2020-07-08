@@ -1,0 +1,202 @@
+@import '../app-theme.scss';
+
+.button {
+    min-width: 9.4rem;
+    padding: 0.9rem 2.5rem;
+    font-family: inherit;
+    border-radius: 10px;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 2.125rem;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 600;
+    color: mat-color($app-theme, 100);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+
+    &:active,
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+
+    &:disabled {
+        cursor: initial;
+    }
+
+    // blue button
+    &_primary {
+        background-color: mat-color($app-theme, 1700);
+
+        &:disabled {
+            color: mat-color($app-theme, 1900);
+            background-color: mat-color($app-theme, 1800);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2000);
+        }
+    }
+
+    // light blue button
+    &_secondary {
+        color: mat-color($app-theme, 1200);
+        background-color: mat-color($app-theme, 100);
+        border: 1px solid mat-color($app-theme, 1200);
+
+        &:disabled {
+            color: mat-color($app-theme, 2500);
+            border: 1px solid mat-color($app-theme, 2500);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2400);
+        }
+    }
+
+    // red button
+    &_warn {
+        background-color: mat-color($app-theme, 2800);
+
+        &:disabled {
+            background-color: mat-color($app-theme, 3000);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2900);
+        }
+    }
+
+    // gray button
+    &_additional {
+        background-color: mat-color($app-theme, 1100);
+
+        &:disabled {
+            color: mat-color($app-theme, 2300);
+            background-color: mat-color($app-theme, 2200);
+        }
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: mat-color($app-theme, 2100);
+        }
+    }
+
+    // yellow button
+    &_basic {
+        color: mat-color($app-theme, 2600);
+        background-color: mat-color($app-theme, 300);
+
+        &:hover {
+            background-color: mat-color($app-theme, 200);
+        }
+    }
+
+    // white button
+    &_simple {
+        color: mat-color($app-theme, 2600);
+        background-color: mat-color($app-theme, 100);
+    }
+
+    // underlined button
+    &_underline {
+        text-decoration: underline;
+
+        &:focus,
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // download button 
+    &_download {
+        color: mat-color($app-theme, 100);
+        border: 1px solid mat-color($app-theme, 100);
+        font-size: 1rem;
+        line-height: 2.125rem;
+        padding: 0.2rem 0.8rem;
+    }
+
+    &_small {
+        padding: 0.2rem 0;
+        font-size: 1.125rem;
+        line-height: 2.125rem;
+    }
+
+    // activity new item button
+    &_new-item {
+        margin-bottom: 1.5rem;
+        padding: 0.3rem 1rem;
+    }
+
+    &__spinner {
+        margin-left: 5px;
+        height: 20px !important;
+        width: 20px !important;
+
+        .mat-progress-spinner circle,
+        .mat-spinner circle {
+            stroke: mat-color($app-theme, 100);
+        }
+    }
+
+    &__icon {
+        margin-right: 5px;
+    }
+}
+
+.SimpleButton {
+    border: none;
+    background: none;
+    text-decoration: none;
+    cursor: pointer;
+    color: mat-color($app-theme, 1300);
+    font-family: inherit;
+    white-space: nowrap;
+    padding: 0;
+    font-weight: 600;
+}
+
+.SimpleButton:focus,
+.SimpleButton:hover {
+    text-decoration: underline;
+}
+
+.header {
+    .SimpleButton {
+        font-size: 16px;
+        line-height: 33px;
+    }
+}
+
+.footer {
+    .SimpleButton {
+        font-size: 16px;
+        line-height: 33px;
+        color: mat-color($app-theme, 100);
+    }
+}
+
+.overlay {
+    .SimpleButton {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .overlay {
+        .SimpleButton {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+        }
+    }
+}

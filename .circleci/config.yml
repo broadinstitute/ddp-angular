@@ -2,27 +2,27 @@ version: 2.1
 
 references:
   repo_path: &repo_path
-      /home/circleci/repo
+               /home/circleci/repo
   ng_workspace_path: &ng_workspace_path
-      /home/circleci/repo/ddp-workspace
+                       /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc atcp"
+    "osteo brain angio mbc testboston atcp"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain ANGIO cmi-mbc atcp"
+    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston atcp"
   config_deployment_dir: &config_deployment_dir
-      config/deployment
+                           config/deployment
 
 # Container for all the builds
 executors:
   build-executor:
     docker:
-      - image: broadinstitute/study-website-build:05-06-2020A
+      - image: broadinstitute/study-website-build:05-07-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
@@ -37,6 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - run-tests
       - build-app
       - store-app-build
 
@@ -56,6 +57,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
+            - run-tests
             - build-app
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
@@ -264,6 +266,22 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+  run-tests:
+    description: "Run all tests"
+    steps:
+      - run:
+          name: ng test
+          command: |
+            mkdir -p /tmp/junit
+            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+          environment:
+            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_NAME: test-results.xml
+          when: always
+      - store_test_results:
+          path: /tmp/junit
+      - store_artifacts:
+          path: /tmp/junit
 
   build-app:
     description: "Build DDP study app"
@@ -411,6 +429,8 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: mbc
       - conditionally-launch-build-and-store:
+          study_key: testboston
+      - conditionally-launch-build-and-store:
           study_key: atcp
 
   app-build-and-store-job:
@@ -501,6 +521,9 @@ workflows:
           study_key: angio
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: testboston
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: atcp
 
   nightly:
@@ -524,6 +547,9 @@ workflows:
       - build-and-deploy-job:
           name: mbc-nightly
           study_key: mbc
+      - build-and-deploy-job:
+          name: testboston-nightly
+          study_key: testboston
       - build-and-deploy-job:
           name: atcp-nightly
           study_key: atcp

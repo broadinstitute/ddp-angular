@@ -1186,6 +1186,144 @@
           }
         }
       }
+    },
+    "ddp-testboston": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ddp-testboston",
+      "sourceRoot": "projects/ddp-testboston/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-testboston",
+            "index": "projects/ddp-testboston/src/index.html",
+            "main": "projects/ddp-testboston/src/main.ts",
+            "polyfills": "projects/ddp-testboston/src/polyfills.ts",
+            "tsConfig": "projects/ddp-testboston/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ddp-testboston/src/favicon.ico",
+              "projects/ddp-testboston/src/favicon-alert.ico",
+              "projects/ddp-testboston/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-testboston/src/pdf/",
+                "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-testboston/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-testboston/src/theme.scss",
+              "projects/ddp-testboston/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-testboston/src/environments/environment.ts",
+                  "with": "projects/ddp-testboston/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "es5": {
+              "tsConfig": "projects/ddp-testboston/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-testboston:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-testboston:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-testboston:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-testboston:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-testboston/src/test.ts",
+            "polyfills": "projects/ddp-testboston/src/polyfills.ts",
+            "tsConfig": "projects/ddp-testboston/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-testboston/karma.conf.js",
+            "assets": [
+              "projects/ddp-testboston/src/favicon.ico",
+              "projects/ddp-testboston/src/favicon-alert.ico",
+              "projects/ddp-testboston/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-testboston/src/pdf/",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/ddp-testboston/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-testboston/tsconfig.app.json",
+              "projects/ddp-testboston/tsconfig.spec.json",
+              "projects/ddp-testboston/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-testboston/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-testboston:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-testboston:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "ddp-sdk",

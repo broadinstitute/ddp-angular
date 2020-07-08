@@ -2,5 +2,7 @@ export interface Person {
     firstName: string;
     lastName: string;
     emailAddress: string;
-    studyGuid: string;
+    info?: Array<string>;
+    umbrellaGuid?: string;
+    studyGuid?: string;
 }

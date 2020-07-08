@@ -1,4 +1,15 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChange, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChange,
+  Input,
+  Output,
+  EventEmitter,
+  AfterContentInit,
+  Inject
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserActivitiesDataSource } from './userActivitiesDataSource';
 import { ActivityInstanceState } from '../../../models/activity/activityInstanceState';
@@ -7,8 +18,11 @@ import { UserActivityServiceAgent } from '../../../services/serviceAgents/userAc
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
+import { DashboardColumns } from '../../../models/dashboardColumns';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
+import { ActivityInstance } from '../../../models/activityInstance';
+import { ConfigurationService } from '../../../services/configuration.service';
 
 @Component({
   selector: 'ddp-user-activities',
@@ -52,7 +66,7 @@ import { tap, mergeMap } from 'rxjs/operators';
           {{ element.createdAt | date: 'MM/dd/yyyy' }}
         </mat-cell>
       </ng-container>
-
+      
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate">
@@ -63,7 +77,12 @@ import { tap, mergeMap } from 'rxjs/operators';
             <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
             <div class="dashboard-status-container">
               <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
+              <ng-container *ngIf="showQuestionCount(element); else showStatusCode">
+                {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered': element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}
+              </ng-container>
+              <ng-template #showStatusCode>
               {{ getState(element.statusCode) }}
+              </ng-template>
             </div>
         </mat-cell>
       </ng-container>
@@ -165,11 +184,11 @@ import { tap, mergeMap } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
   @Input() studyGuid: string;
+  @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
-  public displayedColumns = ['name', 'summary', 'date', 'status', 'actions'];
   public dataSource: UserActivitiesDataSource;
-  public loaded: boolean;
-  private states: Array<ActivityInstanceState> | null;
+  public loaded = false;
+  private states: Array<ActivityInstanceState> | null = null;
   private studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
 
@@ -178,6 +197,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
     private logger: LoggingService,
     private analytics: AnalyticsEventsService,
+    @Inject('ddp.config') private config: ConfigurationService,
     public domSanitizationService: DomSanitizer) {
     this.studyGuidObservable = new BehaviorSubject<string | null>(null);
   }
@@ -196,9 +216,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // observable stream from main data source, so we will get
           // single final result when both statuses and activity
           // instances will be loaded
-          mergeMap(x => {
-            return this.dataSource.isNull;
-          }, (x, y) => y)
+          mergeMap(x => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
         ).subscribe(x => this.loaded = !x);
@@ -237,5 +255,17 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
 
   private doAnalytics(action: string): void {
     this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
+  }
+  public showQuestionCount(activityInstance: ActivityInstance): boolean {
+    if (!this.config.dashboardShowQuestionCount ||
+        this.config.dashboardShowQuestionCountExceptions.includes(activityInstance.activityCode)) {
+      return false;
+    } else if (activityInstance.numQuestions === 0) {
+      return false;
+    } else if (activityInstance.statusCode === 'COMPLETE' && activityInstance.numQuestions === activityInstance.numQuestionsAnswered) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

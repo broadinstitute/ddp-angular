@@ -1,10 +1,11 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -14,34 +15,69 @@ import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQue
 import { QuestionPromptComponent } from './questionPrompt.component';
 import { InputType } from '../../models/activity/inputType';
 import { TextSuggestion } from '../../models/activity/textSuggestion';
+import { ActivityEmailInput } from './activityEmailInput.component';
+import { TooltipComponent } from '../tooltip.component';
+import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 
 describe('ActivityTextAnswer', () => {
     let component: ActivityTextAnswer;
     let fixture: ComponentFixture<ActivityTextAnswer>;
+    const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
+    configServiceSpy.tooltipIconUrl.and.callFake(() => {
+        return '/path/';
+    });
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ActivityTextAnswer, QuestionPromptComponent],
-            imports: [HttpClientTestingModule, FormsModule, MatAutocompleteModule,
-                MatFormFieldModule, MatInputModule, BrowserAnimationsModule]
-        })
-            .compileComponents();
+            declarations: [
+                ActivityTextAnswer,
+                ActivityEmailInput,
+                QuestionPromptComponent,
+                TooltipComponent
+            ],
+            imports: [
+                HttpClientTestingModule,
+                FormsModule,
+                MatAutocompleteModule,
+                ReactiveFormsModule,
+                NoopAnimationsModule,
+                MatFormFieldModule,
+                MatInputModule,
+                BrowserAnimationsModule,
+                TranslateTestingModule,
+                MatTooltipModule
+            ],
+            providers: [
+                { provide: 'ddp.config', useValue: configServiceSpy }
+            ],
+        }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActivityTextAnswer);
+        expect(fixture instanceof ComponentFixture).toBe(true);
+        expect(fixture.componentInstance instanceof ActivityTextAnswer).toBe(true);
         component = fixture.componentInstance;
         const block = new ActivityTextQuestionBlock();
         block.inputType = InputType.Text;
-        component.block = new ActivityTextQuestionBlock();
+        block.question = 'Who are you?';
+        block.tooltip = 'Helper text';
         component.readonly = false;
         component.placeholder = 'nothing';
+        component.block = block;
+    });
 
+    it('should render 1 tooltip', () => {
+        fixture.detectChanges();
+        const count = fixture.debugElement.queryAll(By.css('ddp-tooltip'));
+        expect(count.length).toBe(1);
     });
 
     it('input and change work without autosuggest', fakeAsync(() => {
         expect(component).toBeTruthy();
         fixture.detectChanges();
+        const questionComponent = fixture.debugElement.query(By.directive(QuestionPromptComponent));
+        expect(questionComponent).not.toBeNull();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement).not.toBeFalsy();
         const valueToEmit = 'Boohoo';

@@ -5,7 +5,8 @@ import {
   Injector,
   OnDestroy,
   OnInit,
-  Renderer2
+  Renderer2,
+  Input
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
@@ -16,35 +17,35 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { ActivityCodes } from '../../constants/activityCodes';
 
 @Component({
-    selector: 'ddp-activity-redesigned',
-    template: `
-      <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
+  selector: 'ddp-activity-redesigned',
+  template: `
+    <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
         <ng-container *ngIf="isLoaded && model">
             <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
             <div class="content content_tight">
               <div class="sticky-block" [innerHTML]="model.subtitle"></div>
             </div>
           </section>
-          <section *ngIf="model.title" class="section">
+            <section *ngIf="model.title" class="section header-section">
             <div class="content content_tight"
                  [ngClass]="{'content_download' : model.activityCode === ActivityCodes.CONSENT || ActivityCodes.ASSENT}">
-              <h1>{{model.title}}</h1>
-              <a *ngIf="model.activityCode === ActivityCodes.CONSENT"
-                 download="Research_Consent_Form_EN.pdf"
-                 class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
-                 href="assets/pdf/A-T_Research_Consent_Form.pdf">
-                <mat-icon>arrow_circle_down</mat-icon>
-                {{ 'SDK.DownloadPdf.Consent.Download' | translate }}
-              </a>
-              <a *ngIf="model.activityCode === ActivityCodes.ASSENT"
-                 download="Research_Assent_Form_EN.pdf"
-                 class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral ButtonBordered--assent-kids"
-                 href="assets/pdf/A-T_Research_Assent_Form.pdf">
-                <mat-icon>arrow_circle_down</mat-icon>
-                {{ 'SDK.DownloadPdf.Assent.Download' | translate }}
-              </a>
-            </div>
-          </section>
+                    <h1 class="activity-header" [innerHTML]="model.title"></h1>
+                    <a *ngIf="model.activityCode === ActivityCodes.CONSENT"
+                       download="Research_Consent_Form_EN.pdf"
+                       class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
+                       href="assets/pdf/A-T_Research_Consent_Form.pdf">
+                      <mat-icon>arrow_circle_down</mat-icon>
+                      {{ 'SDK.DownloadPdf.Consent.Download' | translate }}
+                    </a>
+                    <a *ngIf="model.activityCode === ActivityCodes.ASSENT"
+                       download="Research_Assent_Form_EN.pdf"
+                       class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral ButtonBordered--assent-kids"
+                       href="assets/pdf/A-T_Research_Assent_Form.pdf">
+                      <mat-icon>arrow_circle_down</mat-icon>
+                      {{ 'SDK.DownloadPdf.Assent.Download' | translate }}
+                    </a>
+                </div>
+            </section>
         </ng-container>
         <!-- article content -->
         <section *ngIf="!isLoaded" class="section section-spinner">
@@ -70,17 +71,18 @@ import { ActivityCodes } from '../../constants/activityCodes';
                 (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
               </ddp-activity-section>
             </ng-container>
-            <!-- steps -->
-            <ng-container *ngIf="isStepped && showStepper">
+
+                <!-- simple steps -->
+                <ng-container *ngIf="isStepped && showStepper && !isAgree()">
               <div [ngClass]="{'activity-steps' : model.activityCode !== ActivityCodes.ASSENT,
                                     'activity-steps-kids' : model.activityCode === ActivityCodes.ASSENT}">
-                <ng-container *ngFor="let section of model.sections; let i = index">
-                  <ng-container *ngIf="section.visible">
+                <ng-container *ngFor="let section of model.sections; index as i">
+                          <ng-container *ngIf="section.visible">
                     <div [ngClass]="{'activity-step no-margin' : model.activityCode !== ActivityCodes.ASSENT,
                                     'activity-step-kids no-margin' : model.activityCode === ActivityCodes.ASSENT}"
-                         (click)="jumpStep(i)"
-                         [class.active]="isActive(i)"
-                         [class.completed]="isCompleted(i)">
+                                 (click)="jumpStep(i)"
+                                 [class.active]="isActive(i)"
+                                 [class.completed]="isCompleted(i)">
                       <ng-container
                         *ngIf="(isActive(i) || isCompleted(i)) && setIcon(i, section.incompleteIcon, section.completeIcon)">
                         <div>
@@ -89,13 +91,30 @@ import { ActivityCodes } from '../../constants/activityCodes';
                         </div>
                       </ng-container>
                       <p class="big bold">
-                        {{section.name}}
-                      </p>
+                              {{section.name}}
+                            </p>
                     </div>
-                  </ng-container>
+                          </ng-container>
+                        </ng-container>
+                    </div>
                 </ng-container>
-              </div>
-            </ng-container>
+                <!-- steps with circle -->
+                <ng-container *ngIf="isStepped && showStepper && isAgree()">
+                    <div class="activity-steps">
+                        <ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
+                            <ng-container *ngIf="section.visible">
+                                <div class="activity-step"
+                                     (click)="jumpStep(i)"
+                                     [class.active]="isActive(i)"
+                                     [class.completed]="isCompleted(i)">
+                                     <span class="activity-step__number">{{i + 1}}</span>
+                                     <span class="activity-step__text">{{section.name}}</span>
+                                </div>
+                                <div *ngIf="!isLastStep" class="activity-steps__divider"></div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
 
             <ng-container *ngIf="model">
               <ddp-activity-section
@@ -129,12 +148,10 @@ import { ActivityCodes } from '../../constants/activityCodes';
               </ng-container>
 
               <ng-container *ngIf="model.lastUpdatedText">
-                <span>{{model.lastUpdatedText}} </span>
+                        <span class="last-updated">{{model.lastUpdatedText}} </span>
               </ng-container>
-
-              <hr>
-
-              <div class="activity-buttons">
+                  <hr>
+                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
                 <ng-container *ngIf="isLoaded && isStepped && isFirstStep">
                   <button *ngIf="model.activityCode === ActivityCodes.MEDICAL_HISTORY"
                           [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -166,26 +183,25 @@ import { ActivityCodes } from '../../constants/activityCodes';
                     <mat-icon *ngIf="buttonWithArrow && !(isPageBusy | async)">navigate_next</mat-icon>
                   </button>
                 </ng-container>
-
-                <ng-container *ngIf="(!isStepped || isLastStep) && !model.readonly && isLoaded">
-                  <a *ngIf="model.activityCode === ActivityCodes.REGISTRATION"
-                     href="/"
-                     disabled="(isPageBusy | async) || dataEntryDisabled"
-                     class="ButtonBordered ButtonBordered--neutral ButtonWide button_right"
-                     [innerHTML]="'SDK.CancelButton' | translate">
-                  </a>
-                  <button *ngIf="model.activityCode === ActivityCodes.REGISTRATION"
-                          #submitButton
-                          [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                          class="button ButtonFilled ButtonFilled--green ButtonWide"
-                          (click)="flush()"
-                          [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.RegisterButton' | translate)">
-                  </button>
-                  <a *ngIf="model.activityCode === ActivityCodes.CONSENT || model.activityCode === ActivityCodes.ASSENT"
-                     href="/"
-                     disabled="(isPageBusy | async) || dataEntryDisabled"
-                     class="button button_right"
-                     [ngClass]="{'ButtonBordered ButtonBordered--red' : model.activityCode === ActivityCodes.CONSENT,
+                        <ng-container *ngIf="(!isStepped || isLastStep) && !model.readonly && isLoaded">
+                          <a *ngIf="model.activityCode === ActivityCodes.REGISTRATION"
+                             href="/"
+                             disabled="(isPageBusy | async) || dataEntryDisabled"
+                             class="ButtonBordered ButtonBordered--neutral ButtonWide button_right"
+                             [innerHTML]="'SDK.CancelButton' | translate">
+                          </a>
+                          <button *ngIf="!model.readonly && !isAgree() && model.activityCode === ActivityCodes.REGISTRATION"
+                                  #submitButton
+                                  [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                  class="button ButtonFilled ButtonFilled--green ButtonWide"
+                                  (click)="flush()"
+                                  [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.RegisterButton' | translate)">
+                          </button>
+                            <a *ngIf="model.activityCode === ActivityCodes.CONSENT || model.activityCode === ActivityCodes.ASSENT"
+                                    href="/"
+                                    disabled="(isPageBusy | async) || dataEntryDisabled"
+                                    class="button button_right"
+                                    [ngClass]="{'ButtonBordered ButtonBordered--red' : model.activityCode === ActivityCodes.CONSENT,
                                      'ButtonFilled ButtonFilled--kids ButtonFilled--red' : model.activityCode === ActivityCodes.ASSENT}"
                      [innerHTML]="(model.activityCode === ActivityCodes.CONSENT ? 'SDK.DoNotConsent' : 'SDK.DoNotAssent') | translate">
                   </a>
@@ -217,6 +233,11 @@ import { ActivityCodes } from '../../constants/activityCodes';
                           (mouseenter)="mouseEnterOnSubmit()"
                           [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                   </button>
+                            <button *ngIf="model.readonly"
+                                    class="button button_medium button_primary button_right"
+                                    (click)="close()"
+                                    [innerHTML]="'SDK.CloseButton' | translate">
+                            </button>
                   <button *ngIf="model.activityCode === ActivityCodes.REVIEW_AND_SUBMISSION"
                           #submitButton
                           class="button ButtonFilled ButtonFilled--green button_right"
@@ -224,38 +245,57 @@ import { ActivityCodes } from '../../constants/activityCodes';
                           [innerHTML]="'SDK.SaveAndSubmitEnrollment' | translate">
                   </button>
                 </ng-container>
-
-                <ng-container *ngIf="!isStepped || isLastStep && (model.readonly && isLoaded)">
-                  <a *ngIf="model.readonly && isLoaded"
-                     [ngClass]="{'ButtonBordered  ButtonBordered--green button_right' : model.activityCode !== ActivityCodes.ASSENT,
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly">
+                            <button class="button button_medium button_warn"
+                                    [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                    (click)="close()">
+                                    <mat-icon class="button__icon">highlight_off</mat-icon>
+                                    {{'SDK.NotAgreeButton' | translate}}
+                            </button>
+                            <button #submitButton
+                                    [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                    class="button button_medium button_primary"
+                                    (click)="flush()"
+                                    (mouseenter)="mouseEnterOnSubmit()">
+                                    <mat-icon *ngIf="!(isPageBusy | async)" class="button__icon">check_circle_outline</mat-icon>
+                                    {{(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.AgreeButton' | translate)}}
+                            </button>
+                        </ng-container>
+                      <ng-container *ngIf="!isStepped || isLastStep && (model.readonly && isLoaded)">
+                        <a *ngIf="model.readonly && isLoaded"
+                           [ngClass]="{'ButtonBordered  ButtonBordered--green button_right' : model.activityCode !== ActivityCodes.ASSENT,
                                      'ButtonFilled ButtonFilled--kids ButtonFilled--light-green' : model.activityCode === ActivityCodes.ASSENT}"
-                     href="/"
-                     [innerHTML]="'SDK.CloseButton' | translate">
-                  </a>
+                           href="/"
+                           [innerHTML]="'SDK.CloseButton' | translate">
+                        </a>
+                      </ng-container>
+                    </div>
+                    <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
+                        <span translate>SDK.ValidateError</span>
+                    </div>
+                    <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
+                        <span translate>SDK.CommunicationError</span>
+                    </div>
                 </ng-container>
-              </div>
-              <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
-                <span translate>SDK.ValidateError</span>
-              </div>
-              <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
-                <span translate>SDK.CommunicationError</span>
-              </div>
-            </ng-container>
-          </div>
+            </div>
         </section>
-      </main>`,
-    providers: [SubmitAnnouncementService, SubmissionManager]
+    </main>`,
+  providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
-    public ActivityCodes = ActivityCodes;
+  @Input() agreeConsent = false;
+  public ActivityCodes = ActivityCodes;
+  constructor(
+    windowRef: WindowRef,
+    renderer: Renderer2,
+    submitService: SubmitAnnouncementService,
+    analytics: AnalyticsEventsService,
+    @Inject(DOCUMENT) document: any,
+    injector: Injector) {
+    super(windowRef, renderer, submitService, analytics, document, injector);
+  }
 
-    constructor(
-        windowRef: WindowRef,
-        renderer: Renderer2,
-        submitService: SubmitAnnouncementService,
-        analytics: AnalyticsEventsService,
-        @Inject(DOCUMENT) document: any,
-        injector: Injector) {
-        super(windowRef, renderer, submitService, analytics, document, injector);
-    }
+  public isAgree(): boolean {
+    return this.model.formType === 'CONSENT' && this.agreeConsent;
+  }
 }

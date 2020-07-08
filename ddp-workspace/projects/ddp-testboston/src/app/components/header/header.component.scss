@@ -1,0 +1,337 @@
+@import '../../../app-theme.scss';
+
+.header {
+    background-color: mat-color($app-theme, 100);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    height: 6.75rem;
+
+    &_shadow {
+        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+        transition: all ease 0.5s;
+    }
+
+    &_crc {
+        background-color: mat-color($app-theme, 3700);
+    }
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6.75rem;
+    max-width: 1450px;
+    margin: auto;
+    padding: 0 1.5625rem;
+}
+
+.project-logo {
+    display: flex;
+    align-items: center;
+
+    &__img {
+        height: 2.1875rem;
+    }
+
+    &_crc {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: mat-color($app-theme, 1300);
+        font-size: 1.125rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+}
+
+.nav {
+    width: 100%;
+    margin-left: 2.5rem;
+}
+
+.navigation {
+    list-style: none;
+    display: flex;
+    padding: 0;
+
+    &__item {
+        margin-right: 1.8rem;
+        display: flex;
+        color: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link__dashboard,
+.header-link {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 33px;
+    white-space: nowrap;
+    color: mat-color($app-theme, 1300);
+
+    &__icon {
+        margin-right: 0.2rem;
+    }
+}
+
+.header-link:link,
+.header-link:visited {
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link:hover {
+    text-decoration: underline;
+
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link:active {
+    text-decoration: underline;
+
+    .dashboard-icon_color {
+        stroke: mat-color($app-theme, 1300);
+    }
+}
+
+.header-link__dashboard {
+    margin: 0 0.2rem 0 0;
+}
+
+.header-link_active {
+    text-decoration: underline;
+}
+
+.auth {
+    display: flex;
+    align-items: center;
+
+    &__dashboard {
+        margin-right: 1.8rem;
+    }
+}
+
+.menu-button {
+    display: none;
+    margin-left: 2rem;
+
+    .SimpleButton {
+        font-size: 16px;
+        line-height: 16px;
+        text-decoration: none;
+        box-sizing: border-box;
+        height: 37px;
+        width: 72px;
+        border: 2px solid mat-color($app-theme, 1300);
+        color: mat-color($app-theme, 1300);
+        border-radius: 10px;
+    }
+
+    &__close {
+        width: 72px;
+        height: 72px;
+
+        mat-icon {
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            font-size: 30px;
+            color: mat-color($app-theme, 1300);
+        }
+    }
+}
+
+.language {
+    font-size: 16px !important;
+    line-height: 33px !important;
+}
+
+// Header menu
+.overlay {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-color: mat-color($app-theme, 100);
+    overflow: hidden;
+    transition: 0.5s;
+
+    &_visible {
+        height: 100%;
+    }
+}
+
+.overlay-content {
+    margin-top: 8.75rem;
+}
+
+.menu {
+    margin: 0;
+    padding: 0 0 0 1.5625rem;
+    list-style: none;
+    display: none;
+
+    &_visible {
+        display: block;
+    }
+
+    &_mobile-buttons {
+        display: none;
+    }
+
+    &__item {
+        display: flex;
+        margin-bottom: 3rem;
+
+        .header-link {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+
+        .header-link__icon {
+            padding-right: 0.3rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .navigation {
+        display: none;
+    }
+
+    .menu-button {
+        display: unset;
+    }
+}
+
+@media only screen and (max-width: 1370px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 1290px) {
+
+    .auth__dashboard,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+
+    .nav {
+        margin-left: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .project-logo {
+        &__img {
+            height: 1.8rem;
+        }
+    }
+
+    .nav,
+    .auth {
+        display: none;
+    }
+
+    .header-link__icon,
+    .dashboard-icon {
+        height: 26px;
+        width: 26px;
+    }
+
+    .menu {
+        &_mobile-buttons {
+            display: unset;
+        }
+    }
+
+    // replace with real language selector component styles when when it is done
+    .language-icon {
+        height: 26px;
+        width: 26px;
+        font-size: 26px;
+    }
+
+    .language {
+        font-size: 1.875rem !important;
+        line-height: 2.25rem !important;
+    }
+
+    // replace with real language selector component styles when when it is done
+}
+
+@media only screen and (max-width: 480px) {
+    .header-content {
+        padding: 0 1rem;
+    }
+
+    .overlay-content {
+        margin-top: 8rem;
+    }
+
+    .menu {
+        padding: 0 0 0 1rem;
+
+        &__item {
+            margin-bottom: 2rem;
+        }
+
+        .header-link {
+            font-size: 1.5rem;
+            line-height: 2.1rem;
+        }
+    }
+
+    .header-link__icon,
+    .dashboard-icon {
+        height: 22px;
+        width: 22px;
+    }
+
+    // replace with real language selector component styles when when it is done
+    .language-icon {
+        height: 22px;
+        width: 22px;
+        font-size: 22px;
+    }
+
+    .language {
+        font-size: 1.5rem !important;
+        line-height: 2.1rem !important;
+    }
+
+    // replace with real language selector component styles when when it is done
+}
+
+@media only screen and (max-width: 321px) {
+    .overlay-content {
+        margin-top: 6.5rem;
+    }
+}
+
+// replace with real language selector component when styles when it is done
+.language {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 2.0625rem;
+    white-space: nowrap;
+    color: #1a3173;
+    display: flex;
+    align-items: center;
+}
+
+// replace with real language selector component styles when when it is done
