@@ -170,6 +170,10 @@
     &_visible {
         height: 100%;
     }
+
+    &_overflow {
+        overflow-y: auto;
+    }
 }
 
 .overlay-content {
