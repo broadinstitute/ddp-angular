@@ -77,6 +77,7 @@ export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
+export * from './lib/components/changeLanguageRedirect.component';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';

@@ -172,6 +172,7 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
 import { LanguageSelectorComponent } from "./components/languageSelector.component";
+import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedirect.component";
 import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
@@ -306,6 +307,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserPreferencesComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
 
     // activity form
     ActivityComponent,
@@ -366,6 +368,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ParticipantProfileComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
 
     ActivityComponent,
     ActivityRedesignedComponent,
