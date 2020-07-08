@@ -215,6 +215,14 @@
     }
 }
 
+@media only screen and (max-width: 1370px) {
+
+    .static-menu__item,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+}
+
 @media only screen and (max-width: 1350px) {
     .navigation {
         display: none;
@@ -222,14 +230,6 @@
 
     .menu-button {
         display: unset;
-    }
-}
-
-@media only screen and (max-width: 1370px) {
-
-    .static-menu__item,
-    .navigation__item {
-        margin-right: 1.5rem;
     }
 }
 
