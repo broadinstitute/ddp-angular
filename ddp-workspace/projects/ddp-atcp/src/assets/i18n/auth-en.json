@@ -9,7 +9,7 @@
     "resendInstructions": "Resend confirmation instructions",
     "email": {
       "label": "Email",
-      "error": "Email not found"
+      "error": "Email cannot be empty"
     },
     "password": {
       "label": "Password",
