@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
               private ngxTranslate: NGXTranslateService,
+              private currentActivityService: CurrentActivityService,
               private translate: TranslateService,
               @Inject('ddp.config') private configuration: ConfigurationService,
               private userPreferencesServiceAgent: UserPreferencesServiceAgent) {

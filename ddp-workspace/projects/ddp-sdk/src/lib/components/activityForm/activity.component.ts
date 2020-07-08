@@ -1,15 +1,17 @@
 import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    HostListener,
-    Inject,
-    Injector,
-    Input,
-    OnDestroy,
-    OnInit,
-    Renderer2,
-    ViewChild
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BaseActivityComponent } from './baseActivity.component';
@@ -25,6 +27,7 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
+import {ActivityForm} from "../../models/activity/activityForm";
 
 @Component({
     selector: 'ddp-activity',
@@ -214,7 +217,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
-    constructor(
+  constructor(
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
@@ -273,6 +276,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnDestroy(): void {
         this.anchors.forEach(anchor => anchor.removeAll());
+        this.currentActivityService.saveCurrentActivity(null);
     }
 
     /**
@@ -329,6 +333,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.resetValidationState();
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
+                this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
             }
         }
     }

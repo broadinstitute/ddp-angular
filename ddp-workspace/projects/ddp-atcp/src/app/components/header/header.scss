@@ -1,4 +1,6 @@
 @import "../../styles/mixins.scss";
+@import '../../styles/theme.scss';
+@import "../../styles/variables";
 
 .Header {
   width: 100%;
@@ -11,6 +13,7 @@
     flex-direction: row;
     padding: 0 40px;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   @media (min-width: 1281px) {
     padding: 0 50px;
@@ -51,7 +54,7 @@
         > a {
           font-weight: 700;
           font-size: 16px;
-          color: #ffffff;
+          color: mat-color($md-primary, A100);
           transition: color 0.3s ease;
 
           .fa-globe {
@@ -69,7 +72,7 @@
           padding: 0;
 
           &:hover {
-            color: #93C453 !important;
+            color: $light-green !important;
             text-decoration: none;
           }
         }
@@ -78,7 +81,7 @@
           margin-top: 15px;
           padding: 0 !important;
           border-radius: 2px;
-          box-shadow: 0 1px 2px #cccccc;
+          box-shadow: 0 1px 2px $grey;
           font-size: 15px;
           text-align: right;
 
@@ -99,8 +102,27 @@
     }
 
     a:hover {
-      color: #93C453 !important;
+      color: $light-green !important;
       text-decoration: none;
     }
+  }
+}
+
+  ddp-activity-progress-bar {
+    @media (min-width: 911px) {
+      flex-grow: 1;
+      width: 100%;
+    }
+
+  ::ng-deep span {
+    color: mat-color($md-primary, A100);
+  }
+
+  ::ng-deep .mat-progress-bar-buffer {
+    background-color: mat-color($md-primary, A100);
+  }
+
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: $blue-light;
   }
 }

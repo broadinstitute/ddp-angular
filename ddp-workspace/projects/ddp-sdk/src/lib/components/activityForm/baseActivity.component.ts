@@ -21,6 +21,7 @@ import {
     withLatestFrom
 } from 'rxjs/operators';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import {CurrentActivityService} from "../../services/activity/currentActivity.service";
 
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
@@ -29,7 +30,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
     @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
-    @Output() activityLoad: EventEmitter<ActivityForm> = new EventEmitter<ActivityForm>();
 
     protected embeddedComponentsValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
@@ -39,16 +39,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     public model: ActivityForm;
     public validationRequested = false;
 
-    private _isLoaded = false;
-    get isLoaded(): boolean {
-      return this._isLoaded;
-    }
-    set isLoaded(val) {
-      if (val !== this.isLoaded) {
-        this._isLoaded = val;
-        this.activityLoad.emit(this.model);
-      }
-    }
+    public isLoaded = false;
+
     public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
@@ -61,11 +53,14 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
 
+    public currentActivityService: CurrentActivityService;
+
     protected constructor(injector: Injector) {
         this.serviceAgent = injector.get(ActivityServiceAgent);
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
+        this.currentActivityService = injector.get(CurrentActivityService);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -94,7 +89,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.serviceAgent
+        const get = this.currentActivityService
             .getActivity(this.studyGuidObservable, this.activityGuidObservable)
             .subscribe(
                 x => {
