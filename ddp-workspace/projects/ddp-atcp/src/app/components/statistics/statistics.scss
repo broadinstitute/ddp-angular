@@ -24,7 +24,7 @@
     font-weight: 700;
     margin-top: 40px;
     display: block;
-    color: #7F7F7F;
+    color: $neutral-gray;
   }
 
   h2 {
@@ -42,7 +42,7 @@
     margin-top: 25px;
 
     li {
-      color: #7f7f7f;
+      color: $neutral-gray;
       font-size: 14px;
       vertical-align: top;
       @media (min-width: 502px) {
@@ -68,7 +68,7 @@
   }
 
   hr.hor-bar {
-    border: 4px #3373c2 solid;
+    border: 4px $mariner-blue solid;
     margin-top: 5px;
     margin-bottom: 0;
     margin-right: 15px;
@@ -77,7 +77,7 @@
 
   ul.countries {
     margin: 10px 0;
-    color: #636363;
+    color: $dove-grey;
 
     p {
       font-size: 16px;

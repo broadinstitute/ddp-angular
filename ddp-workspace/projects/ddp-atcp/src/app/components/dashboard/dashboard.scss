@@ -13,6 +13,16 @@
       padding-left: 15px;
     }
 
+    ul.ddp-list  {
+      label {
+        font-weight: normal;
+      }
+
+      li {
+        margin-bottom: 20px;
+      }
+    }
+
     mat-list-item {
 
       height: auto !important;
@@ -29,54 +39,6 @@
       display: block !important;
     }
 
-    .activity-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin: 30px 0;
-      .button {
-        justify-content: center;
-      }
-      .button.button_primary.button_right {
-        margin-left: auto;
-      }
-
-      .button.button_secondary.button_warn {
-        @include c-red(!important);
-        @include brc-red(!important);
-        margin-left: auto;
-        margin-right: 10px;
-        font-size: 16px;
-        font-weight: 700;
-        border-radius: 2px;
-
-        &:hover,
-        &:focus,
-        &:active {
-          @include c-light-red(!important);
-          @include brc-light-red(!important);
-        }
-      }
-
-      .button.button_primary.button_fill_green {
-        @include bg-green;
-        color: white !important;
-        margin-left: 10px;
-
-        &:focus,
-        &:hover {
-          @include bg-light-green(!important);
-          @include brc-light-green(!important);
-          color: white !important;
-        }
-
-        &:active {
-          @include bg-dark-green(!important);
-          @include brc-dark-green(!important);
-          color: white !important;
-        }
-      }
-    }
-
     .activity-steps {
       display: flex;
       justify-content: space-between;
@@ -89,7 +51,7 @@
         left: 15px;
         right: 15px;
         height: 4px;
-        background-color: #cccccc;
+        background-color: $silver-grey;
         z-index: 1;
         content: '';
         display: block;
@@ -99,8 +61,8 @@
         width: 26px;
         height: 26px;
         border-radius: 13px !important;
-        border: 3px solid #cccccc;
-        background: #eeeeee;
+        border: 3px solid $silver-grey;
+        background: $grey;
         z-index: 2;
         padding: 0 !important;
         transition: background 0.3s ease;
@@ -117,7 +79,7 @@
         }
 
         &.active {
-          background-color: #337ab7;
+          background-color: $astral-blue;
         }
       }
     }
@@ -136,7 +98,7 @@
       display: block;
       font-size: 26px;
       font-weight: 700;
-      color: #7F7F7F;
+      color: $neutral-gray;
       margin: 40px 0 20px 0 !important;
     }
   }
@@ -181,6 +143,7 @@
 
           .assent-subtitle {
             padding-bottom: 5px;
+            font-size: 18px;
           }
 
           .content.content_tight h1 {

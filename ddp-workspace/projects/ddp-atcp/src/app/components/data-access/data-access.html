@@ -346,14 +346,14 @@
   </form>
   <div class="navigation">
     <a href="#"
-       class="BtnBordered green"
+       class="ButtonBordered ButtonBordered--green"
        *ngIf="activeTab > 0"
        (click)="setActiveTab(activeTab - 1, $event)">
       <span class="glyphicon glyphicon-chevron-left"></span>
       <span translate>Common.Navigation.Previous</span>
     </a>
     <a href="#"
-       class="BtnBordered green"
+       class="ButtonBordered ButtonBordered--green"
        *ngIf="activeTab !== countTabs - 1"
        (click)="setActiveTab(activeTab + 1, $event)">
       <span translate>Common.Navigation.Next</span>
@@ -361,7 +361,7 @@
     </a>
     <button
       type="submit"
-      class="BtnBordered green"
+      class="ButtonBordered ButtonBordered--green"
       (click)="submit(form)"
       [disabled]="form.invalid && form.submitted"
       *ngIf="activeTab === countTabs - 1"

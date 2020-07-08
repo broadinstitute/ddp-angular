@@ -23,7 +23,7 @@ const ASSENT = 'ASSENT';
   template: `
     <div class="dashboard">
       <div class="page-padding">
-        <h1 *ngIf="firstName"> {{ firstName }} <span translate>DashBoard.EnrollmentProcess</span></h1>
+        <h1 *ngIf="firstName"> {{ firstName }}'s <span translate>DashBoard.EnrollmentProcess</span></h1>
         <div class="workdir" [ngClass]="{'is-assets' : isAssetsActivity}">
           <app-workflow-progress [steps]="steps"
                                  [instanceGuid]="instanceGuid"
@@ -88,7 +88,13 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         let currentActivityIndex = data.findIndex((activity: ActivityInstance) => activity.statusCode === this.IN_PROGRESS);
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.findIndex((activity: ActivityInstance) => activity.statusCode === this.CREATED);
-          data[currentActivityIndex].statusCode = IN_PROGRESS;
+
+          // data[currentActivityIndex].statusCode = IN_PROGRESS;
+
+          //  TODO: temporary code instead line 92 until "personal information" will be implemented
+          currentActivityIndex !== -1
+            ? data[currentActivityIndex].statusCode = IN_PROGRESS
+            : currentActivityIndex = 6;
         }
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.length - 1;

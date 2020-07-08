@@ -3,161 +3,13 @@
 @import './brushes';
 @import './mixins';
 
-.BtnBordered {
-  padding: 7px 20px 9px 20px;
-  border-radius: 2px;
-  border: 1px solid !important;
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  transition: border 0.3s ease, color 0.3s ease;
-  cursor: pointer !important;
-
-  &:visited, &:active {
-    background-color: #ffffff !important;
-    text-decoration: none;
-  }
-
-  &:hover, &:focus {
-    text-decoration: none;
-  }
-
-  &.blue {
-    &:focus, &:active {
-      margin-top: 15px;
-      @include brc-blue($important: '!important');
-      @include c-blue($important: '!important');
-      text-decoration: none;
-    }
-
-    &:hover {
-      @include brc-blue($important: '!important');
-      @include c-blue($important: '!important');
-      background-color: transparent !important;
-      text-decoration: none;
-    }
-  }
-
-  &.green, &.green:focus, &.green:active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 100px;
-    border-color: #7BA946 !important;
-    color: #7BA946 !important;
-    text-decoration: none;
-
-    &:hover {
-      @include c-blue($important: '!important');
-      @include brc-blue($important: '!important');
-      background-color: transparent !important;
-      text-decoration: none;
-    }
-  }
-
-  &.green-lightBlue, &.green-lightBlue:focus, &.green-lightBlue:active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 100px;
-    border-color: #7BA946 !important;
-    color: #7BA946 !important;
-    text-decoration: none;
-
-    &.green-lightBlue:hover {
-      @include c-blue-light($important: '!important');
-      @include brc-blue-light($important: '!important');
-      background-color: transparent !important;
-      text-decoration: none;
-    }
-  }
-
-  &.black {
-    &:focus, &:active {
-      margin-top: 25px;
-      border-color: #333333 !important;
-      color: #333333 !important;
-    }
-
-    &:hover {
-      border-color: #ffffff !important;
-      color: #ffffff !important;
-      background-color: transparent !important;
-    }
-  }
-
-  &.white, &.white:focus, &.white:active {
-    color: #FFFFFF !important;
-    margin-top: 25px;
-    border-color: #FFFFFF !important;
-    text-decoration: none;
-
-    &:hover {
-      border-color: #93C453 !important;
-      color: #93C453 !important;
-      background-color: transparent !important;
-      text-decoration: none;
-    }
-  }
-}
-
-.BtnBordered--withIcon {
-  @include flexer(flex, row, center);
-  min-width: fit-content;
-  max-width: fit-content;
-
-  mat-icon,
-  span {
-    margin-right: 5px;
-  }
-}
-
-.ddp-block-body .BtnBordered--withIcon {
-  margin: 25px auto;
-}
-
-.BtnBordered--neutral,
-.BtnBordered--neutral:focus,
-.BtnBordered--neutral:active {
-  @include c-neutral-gray;
-  @include brc-neutral-gray;
-  min-width: 100px;
+.activity-buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
-
-.BtnBordered--neutral:hover {
-  @include c-blue-light();
-  @include brc-blue-light;
-}
-
-.BtnFilled {
-  padding: 8px 20px 10px 20px;
-  border-radius: 2px;
-  font-size: 16px;
-  text-align: center;
-  transition: background .3s ease, color .3s ease;
-  color: #fff !important;
-  border: none;
-}
-
-.BtnFilled--blue {
-  margin-top: 15px;
-  background: $blue;
-  border: none;
-  outline: none;
-}
-
-.BtnFilled--blue:hover {
-  background: $blue-light;
-  border: none;
-}
-
-.BtnFilled--blue:active {
-  background: $blue-dark;
-  border: none;
+  justify-content: space-between;
+  margin: 30px 0;
+  .button {
+    justify-content: center;
+  }
 }
 
 .button {
@@ -171,13 +23,17 @@
   box-sizing: border-box;
   text-align: center;
   cursor: pointer;
+  text-decoration: none;
+
+  &:active,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }
 
-.button,
-.button:active,
-.button:hover,
-.button:focus {
-  text-decoration: none;
+.button_right {
+  margin-left: auto !important;
 }
 
 .button_small {
@@ -258,10 +114,10 @@
 .simple-button:focus,
 .SimpleButton:focus {
   text-decoration: none;
+  color: mat-color($app-theme, 200);
 }
 
 .panel-opened {
-
   .simple-button,
   .SimpleButton {
     font-size: 1.875rem;
@@ -269,13 +125,216 @@
   }
 }
 
-.button_right {
-  margin-left: auto !important;
+.ButtonBordered, .BtnBordered {
+  padding: 7px 20px 9px 20px;
+  border-radius: 2px;
+  border: 1px solid !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  transition: border 0.3s ease, color 0.3s ease;
+  @include bg-transparent($important: '!important');
+  cursor: pointer !important;
+  text-decoration: none !important;
+
+  &:hover, &:focus, &:visited, &:active  {
+    text-decoration: none !important;
+  }
+
+  &--blue, &--blue:focus, &--blue:active  {
+    margin-top: 15px;
+    @include brc-blue($important: '!important');
+    @include c-blue($important: '!important');
+
+    &:hover {
+      @include brc-blue($important: '!important');
+      @include c-blue($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--green, &--green:focus, &--green:active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    @include brc-green($important: '!important');
+    @include c-green($important: '!important');
+
+    .mat-icon {
+      font-weight: bold;
+    }
+
+    &:hover {
+      @include c-blue-light($important: '!important');
+      @include brc-blue-light($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--white, &--white:focus, &--white:active {
+    @include c-white($important: '!important');
+    @include brc-white($important: '!important');
+    margin-top: 25px;
+
+    &:hover {
+      @include brc-light-green($important: '!important');
+      @include c-light-green($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--withIcon {
+    @include flexer(flex, row, center);
+    min-width: fit-content;
+    max-width: fit-content;
+
+    mat-icon,
+    span {
+      margin-right: 5px;
+    }
+  }
+
+  &--neutral, &--neutral:focus, &--neutral:active {
+    @include c-neutral-gray;
+    @include brc-neutral-gray;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      @include c-blue-light();
+      @include brc-blue-light;
+    }
+  }
+
+  &--red {
+    @include c-red(!important);
+    @include brc-red(!important);
+    margin-left: auto;
+    margin-right: 10px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      @include c-light-red(!important);
+      @include brc-light-red(!important);
+    }
+  }
+
+  &--assent-kids {
+    font-size: 18px;
+    border-radius: 5px !important;
+    border: 3px solid !important;
+  }
 }
+
+.ddp-block-body .BtnBordered--withIcon {
+  margin: 25px auto;
+}
+
+.ButtonFilled, .ButtonFilled, .BtnFilled {
+  padding: 8px 20px 10px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  text-align: center;
+  transition: background .3s ease, color .3s ease;
+  @include c-white($important: '!important');
+  text-decoration: none;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  &--blue {
+    margin-top: 15px;
+    @include bg-blue($important: '!important');
+    border: none;
+    outline: none;
+
+    &:hover {
+      @include bg-blue-light($important: '!important');
+      border: none;
+    }
+
+    &:active {
+      @include bg-blue-dark($important: '!important');
+      border: none;
+    }
+  }
+
+  &--green {
+    @include bg-green;
+    @include brc-green(!important);
+    @include c-white($important: '!important');
+    margin-left: 10px;
+
+    &:focus,
+    &:hover {
+      @include bg-light-green(!important);
+      @include brc-light-green(!important);
+      @include c-white($important: '!important');
+    }
+
+    &:active {
+      @include bg-dark-green(!important);
+      @include brc-dark-green(!important);
+      @include c-white($important: '!important');
+      outline: none;
+    }
+  }
+
+  &--kids {
+    padding: 10px 20px 12px 20px !important;
+    border-radius: 5px !important;
+    font-family: 'McLaren', cursive !important;
+    font-size: 18px;
+    text-align: center;
+    @include c-white($important: '!important');
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 10px;
+
+    &:hover, &:focus, &:active {
+      @include bg-blue-light($important: '!important');
+    }
+  }
+
+  &--neutral {
+    @include bg-light-neutral-grey($important: '!important');
+  }
+
+  &--light-green {
+    @include bg-light-green($important: '!important');
+  }
+
+  &--red {
+    @include bg-red($important: '!important');
+  }
+}
+
 .Btn-centered {
   margin-left: 25%;
 }
 
 .Btn-wide {
   width: 50%;
+}
+
+@media (min-width: $mobile-width) {
+  .ButtonWide {
+    width: 30%
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .ButtonWide {
+    width: 25%
+  }
+}
+
+@media (min-width: $desktop) {
+  .ButtonWide {
+    width: 17%
+  }
 }

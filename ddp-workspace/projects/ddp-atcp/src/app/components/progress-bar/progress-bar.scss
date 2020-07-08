@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background-color: #cccccc;
+    background-color: $silver-grey;
     z-index: 1;
   }
 
@@ -54,14 +54,14 @@
         width: 26px;
         height: 26px;
         border-radius: 13px !important;
-        border: 3px solid #cccccc;
-        background: #eeeeee;
+        border: 3px solid $silver-grey;
+        background: $grey;
         z-index: 2;
         padding: 0 !important;
         transition: background 0.3s ease;
 
         &:active {
-          background-color: #5C7A36 !important;
+          background-color: $dark-green !important;
         }
 
         &:hover {

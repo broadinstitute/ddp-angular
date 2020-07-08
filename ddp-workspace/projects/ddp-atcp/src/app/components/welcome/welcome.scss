@@ -7,7 +7,7 @@
   margin-bottom: 152px;
 
   .main-screen {
-    background-color: #4274BC;
+    background-color: $blue;
     @media (min-width: 751px) {
       background-color: unset;
       background-image: url('../../../assets/images/home_sm.jpg');
@@ -24,7 +24,7 @@
 
     .first-display {
       padding-top: 301px;
-      color: #fff;
+      color: $white;
       position: relative;
       overflow: hidden;
       @media (min-width: 666px) {
@@ -222,7 +222,7 @@
       }
 
       .number {
-        background-color: #4274BC;
+        background-color: $blue;
         width: 33%;
         display: flex;
         justify-content: flex-end;

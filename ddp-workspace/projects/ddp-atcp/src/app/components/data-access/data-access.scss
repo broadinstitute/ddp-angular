@@ -2,13 +2,13 @@
 
 .wizard-page {
   .error {
-    color: #DB2C2C !important;
+    color: $red !important;
     font-weight: 700;
   }
 
   .submitted {
     .ng-invalid {
-      border-color: #DB2C2C !important;
+      border-color: $red !important;
     }
   }
 
@@ -67,13 +67,13 @@
     label {
       font-size: 14px;
       font-weight: 400;
-      color: #666666;
+      color: $dove-grey;
     }
 
     input.form-control, textarea.form-control {
       font-size: 15px;
-      border: 1px solid #cccccc;
-      border-left: 3px solid #cccccc;
+      border: 1px solid $silver-grey;
+      border-left: 3px solid $silver-grey;
       border-radius: 0;
       box-shadow: none !important;
 
@@ -187,11 +187,11 @@
       margin-top: 0;
       padding: 8.5px 21.5px 8.5px 21.5px;
       float: right;
-      background-color: #fff;
+      background-color: $white;
 
       &[disabled] {
-        border-color: #cccccc !important;
-        color: #cccccc !important;
+        border-color: $silver-grey !important;
+        color: $silver-grey !important;
         cursor: default !important;
       }
 

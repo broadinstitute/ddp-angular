@@ -3,7 +3,7 @@
 @import 'theme';
 
 hr {
-  border-color: #cccccc;
+  border-color: $silver-grey;
 }
 .page-padding {
   padding: 0 25px;
@@ -56,7 +56,7 @@ hr {
       h1 {
         font-size: 26px;
         font-weight: 700;
-        color: #7F7F7F;
+        color: $neutral-gray;
         margin: 40px 0 20px 0 !important;
       }
     }
@@ -105,7 +105,7 @@ hr {
 .content.content_tight h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #4274BC;
+  color: $blue;
 }
 
 .ddp-block-title-bold > b,
@@ -136,7 +136,8 @@ hr {
   font-weight: bold;
 }
 
-.italic {
+.italic,
+.infobox {
   font-size: 15px;
   font-style: italic;
   display: block;
@@ -164,17 +165,17 @@ blockquote {
 .formItem-label {
   font-size: 14px;
   font-weight: 400;
-  color: #666666;
+  color: $dove-grey;
 }
 
 .server-modal-box {
   max-width: none !important;
   .mat-dialog-container {
-    border-radius: 0px;
-    color: #666666;
+    border-radius: 0;
+    color: $dove-grey;
     font-weight: bold;
-    background: #eaf6ea;
-    border-left: 10px solid #5cb85c;
+    background: $panache-green;
+    border-left: 10px solid $fern-green;
 
     .server-message-popup {
       .server-message-popup-header {
@@ -199,10 +200,10 @@ blockquote {
   max-width: none !important;
   .mat-dialog-container {
     border-radius: 0px;
-    color: #666666;
+    color: $dove-grey;
     font-weight: bold;
-    background: #f6eaeb;
-    border-left: 10px solid #b85c5c;
+    background: $dawn-pink;
+    border-left: 10px solid $matrix-red;
 
     .server-message-popup {
       .server-message-popup-header {
@@ -229,6 +230,10 @@ blockquote {
 
 .c-blue {
   @include c-blue();
+}
+
+.c-bright-blue {
+  @include c-bright-blue();
 }
 
 .c-purple {
@@ -276,7 +281,7 @@ blockquote {
 .helpHint {
   font-size: 13px;
   padding-top: 15px !important;
-  color: #4274bc;
+  @include c-blue($important: '!important');
   font-style: italic !important;
 
   a:hover,
@@ -284,4 +289,48 @@ blockquote {
   a:active {
     text-decoration: none !important;
   }
+}
+
+a[href^="mailto"]:hover,
+a[href^="mailto"]:active {
+  text-decoration: none;
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $blue-light !important;
+}
+.mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-disabled.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: $disabled-grey !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $blue-light !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: $blue-light !important;
+}
+
+.mat-radio-button.mat-radio-disabled.mat-radio-checked .mat-radio-outer-circle,
+.mat-radio-button.mat-radio-disabled .mat-radio-outer-circle {
+  border-color: $disabled-grey !important;
+}
+
+.mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element,
+.mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
+  background-color: $disabled-grey !important;
+}
+
+ddp-activity-progress-bar .mat-progress-bar-fill::after {
+  background-color: $bright-blue !important;
+}
+
+.MedicalBottomBar {
+  background: $grey;
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  font-size: 16px;
 }

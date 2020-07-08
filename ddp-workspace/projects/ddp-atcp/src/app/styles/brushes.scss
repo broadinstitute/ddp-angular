@@ -5,12 +5,24 @@ html, body {
   color: mat-color($app-theme);
 }
 
+@mixin c-white($important: '') {
+  color: $white unquote($important);
+}
+
 @mixin c-blue($important: '') {
   color: $blue unquote($important);
 }
 
+@mixin c-bright-blue($important: '') {
+  color: $bright-blue unquote($important);
+}
+
 @mixin c-green($important: '') {
-  color: $green;
+  color: $green unquote($important);;
+}
+
+@mixin c-light-green($important: '') {
+  color: $light-green unquote($important);;
 }
 
 @mixin c-black {
@@ -53,8 +65,16 @@ html, body {
   color: $light-red unquote($important);
 }
 
+@mixin bg-blue($important: '') {
+  background-color: $blue unquote($important);
+}
+
 @mixin bg-blue-light($important: '') {
   background-color: $blue-light unquote($important);
+}
+
+@mixin bg-blue-dark($important: '') {
+  background-color: $blue-dark unquote($important);
 }
 
 @mixin bg-green($important: '') {
@@ -69,8 +89,24 @@ html, body {
   background-color: $dark-green unquote($important);
 }
 
+@mixin bg-light-neutral-grey($important: '') {
+  background-color: $light-neutral-grey unquote($important);
+}
+
 @mixin bg-grey($important: '') {
   background-color: $grey unquote($important);
+}
+
+@mixin bg-light-grey($important: '') {
+  background-color: $grey unquote($important);
+}
+
+@mixin bg-transparent($important: '') {
+  background-color: transparent unquote($important);
+}
+
+@mixin bg-red($important: '') {
+  background-color: $red unquote($important);
 }
 
 @mixin brc-blue($important: '') {
@@ -93,10 +129,18 @@ html, body {
   border-color: $light-red unquote($important);
 }
 
+@mixin brc-green($important: '') {
+  border-color: $green unquote($important);
+}
+
 @mixin brc-light-green($important: '') {
   border-color: $light-green unquote($important);
 }
 
 @mixin brc-dark-green($important: '') {
   border-color: $dark-green unquote($important);
+}
+
+@mixin brc-white($important: '') {
+  border-color: $white unquote($important);
 }

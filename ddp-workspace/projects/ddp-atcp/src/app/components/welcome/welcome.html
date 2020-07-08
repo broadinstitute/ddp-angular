@@ -10,14 +10,14 @@
           <br> HomePage.IntroductionSection.Text.Second
           <a
             *ngIf="!isAuthenticated"
-            class="BtnBordered white"
+            class="ButtonBordered ButtonBordered--white"
             [routerLink]="[RouterResource.JoinUs]"
             translate>
             Common.Navigation.JoinUs
           </a>
           <a
             *ngIf="isAuthenticated"
-            class="BtnBordered white"
+            class="ButtonBordered ButtonBordered--white"
             [routerLink]="[RouterResource.Dashboard]"
             translate>
             Common.Navigation.YourParticipants
@@ -34,14 +34,14 @@
     <h2 translate>HomePage.SecondSection.Title</h2>
     <a
       *ngIf="!isAuthenticated"
-      class="BtnBordered green-lightBlue"
+      class="ButtonBordered ButtonBordered--green"
       [routerLink]="[RouterResource.JoinUs]"
       translate>
       Common.Navigation.JoinUs
     </a>
     <a
       *ngIf="isAuthenticated"
-      class="BtnBordered green"
+      class="ButtonBordered ButtonBordered--green"
       [routerLink]="[RouterResource.Dashboard]"
       translate>
       Common.Navigation.YourParticipants
@@ -101,14 +101,14 @@
     </h3>
     <a
       *ngIf="!isAuthenticated"
-      class="BtnBordered green-lightBlue"
+      class="ButtonBordered ButtonBordered--green"
       [routerLink]="[RouterResource.JoinUs]"
       translate>
       Common.Navigation.JoinUs
     </a>
     <a
       *ngIf="isAuthenticated"
-      class="BtnBordered green"
+      class="ButtonBordered ButtonBordered--green"
       [routerLink]="[RouterResource.Dashboard]"
       translate>
       Common.Navigation.YourParticipants
