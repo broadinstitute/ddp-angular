@@ -90,7 +90,6 @@ var DDP_ENV = {
   {{end}}
 {{end}}
 
-
 {{if eq $study_guid "cmi-mbc"}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "qTF3AZlx12Dg7AZ3fCcC7b0Nj7JarNcz";
@@ -108,7 +107,13 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "atcp"}}
-    {{if eq $environment "dev"}}
+   {{if eq $environment "dev"}}
+          DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
+          DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
+          DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
+          DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{end}}
+    {{else if eq $environment "staging"}}
         DDP_ENV['auth0ClientId'] = "7HzrckGgnPAO7UqDbcuUb9QoTc3V2eHa";
         DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
