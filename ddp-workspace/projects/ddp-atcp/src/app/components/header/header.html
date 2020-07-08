@@ -79,7 +79,7 @@
           Common.Navigation.JoinUs
         </a>
       </li>
-      <li *ngIf="isAuthenticated">
+      <li class="dropdown" *ngIf="isAuthenticated">
         <a class="dropdown-toggle"
            data-toggle="dropdown"
            role="button"
@@ -92,7 +92,7 @@
         <ul class="dropdown-menu dropdown-menu-right dropdown">
           <li>
             <a id="console"
-               [routerLink]="['/' + RouterResource.Dashboard]"
+               [routerLink]="['/' + RouterResource.Console]"
                translate>
               Common.Navigation.YourParticipants
             </a>

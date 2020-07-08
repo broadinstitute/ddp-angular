@@ -25,6 +25,7 @@ import { AboutInitiativeComponent } from './components/about-initiative/about-in
 import { DataAccessComponent } from './components/data-access/data-access';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { StatisticsComponent } from './components/statistics/statistics';
+import { ConsoleComponent } from "./components/console/console";
 
 const routes: Routes = [
   {
@@ -107,6 +108,11 @@ const routes: Routes = [
     path: RouterResource.Welcome,
     component: WelcomeComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard]
+  },
+  {
+    path: RouterResource.Console,
+    component: ConsoleComponent,
     canActivate: [IrbGuard]
   },
   {

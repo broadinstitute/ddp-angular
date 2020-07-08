@@ -525,7 +525,14 @@
   "Toolkit": {
     "Dashboard": {
       "Title": "Thank you for joining the Global A-T Family Data Platform!",
-      "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T."
+      "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T.",
+      "Participant": "Participant",
+      "EnrollmentStatus": "Enrollment Status",
+      "Actions": "Actions",
+      "NoData": "---",
+      "Self": "Self",
+      "NoParticipants": "No participants yet",
+      "AddSelf": "Add self"
     },
     "ErrorPage": {
       "Title": "We're sorry, but an error occurred. Please try again later.",

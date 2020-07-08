@@ -121,6 +121,21 @@ hr {
   display: block;
 }
 
+.title {
+  font-weight: 700;
+
+  &--grey {
+    font-size: 26px;
+    color: $neutral-gray;
+  }
+
+  &--green {
+    padding: 20px 0 15px 0;
+    font-size: 24px;
+    color: $green;
+  }
+}
+
 .subtitle {
   font-size: 18px;
   font-weight: 700;

@@ -1,4 +1,5 @@
 export const Dashboard = 'dashboard';
+export const Console = 'console';
 export const ActivityId = 'activity/:id';
 export const AboutUs = 'about-us';
 export const Error = 'error';
