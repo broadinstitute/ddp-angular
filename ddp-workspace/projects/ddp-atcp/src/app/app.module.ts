@@ -41,6 +41,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ConsoleComponent} from "./components/console/console";
 import {MatTableModule} from "@angular/material/table";
+import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -141,7 +142,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    LanguagesProvider
+    LanguagesProvider,
+    UserPreferencesServiceAgent
   ],
   bootstrap: [AppComponent]
 })
