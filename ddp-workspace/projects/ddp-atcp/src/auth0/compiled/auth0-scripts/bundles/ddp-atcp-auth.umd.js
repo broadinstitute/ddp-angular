@@ -410,10 +410,7 @@
     /** @type {?} */
     var login = {
         id: ɵ3,
-        validators: [commonChecks[0], {
-                name: 'password',
-                rules: 'required|min_length[8]'
-            }],
+        validators: [],
     };
     var ɵ4 = screensIds.resetPassword, ɵ5 = /**
      * @param {?} value

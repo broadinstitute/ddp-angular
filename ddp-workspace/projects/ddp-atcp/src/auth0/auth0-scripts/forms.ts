@@ -47,10 +47,7 @@ const signUp: Config = {
 
 const login: Config = {
   id: screensIds.login,
-  validators: [commonChecks[0], {
-    name: 'password',
-    rules: 'required|min_length[8]'
-  }],
+  validators: [],
 };
 
 const resetPassword: Config = {
