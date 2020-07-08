@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     const userProfileSubs$ = this.userPreferencesServiceAgent.profile
       .subscribe((data: UserProfileDecorator) => {
-        if (!!data) {
+        if (!!data && this.isAuthenticated) {
           this.userProfileDecorator = data;
           this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
         }
