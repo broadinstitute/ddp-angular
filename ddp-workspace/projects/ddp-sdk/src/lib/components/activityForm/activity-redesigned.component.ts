@@ -145,20 +145,11 @@ import { ActivityCodes } from '../../constants/activityCodes';
                         </ng-container>
 
                         <ng-container *ngIf="isLoaded && isStepped && !isLastStep">
-                            <a *ngIf="(!(isFirstStep && model.activityCode === ActivityCodes.MEDICAL_HISTORY)
-                            && (model.activityCode === ActivityCodes.MEDICAL_HISTORY || model.activityCode === ActivityCodes.ASSENT))"
-                               class="button button_right"
-                               [ngClass]="{'ButtonBordered ButtonBordered--green' : model.activityCode !== ActivityCodes.ASSENT,
-                                        'ButtonFilled ButtonFilled--kids ButtonFilled--neutral' : model.activityCode === ActivityCodes.ASSENT}"
-                               href="/"
-                               (click)="close()">
-                              {{ 'SDK.ContinueLater' | translate }}
-                            </a>
                             <button *ngIf="!(isFirstStep && model.activityCode === ActivityCodes.MEDICAL_HISTORY)"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button"
+                                    class="button button_right"
                                     [ngClass]="{'ButtonFilled ButtonFilled--kids ButtonFilled--light-green' : model.activityCode === ActivityCodes.ASSENT,
-                                    'ButtonBordered ButtonBordered--green button_right' : model.activityCode !== ActivityCodes.ASSENT}"
+                                    'ButtonBordered ButtonBordered--green' : model.activityCode !== ActivityCodes.ASSENT}"
                                     (click)="incrementStep()">
                               {{ (isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate) }}
                               <mat-icon *ngIf="buttonWithArrow && !(isPageBusy | async)">navigate_next</mat-icon>
