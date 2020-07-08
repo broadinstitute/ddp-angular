@@ -50,7 +50,7 @@
 
 .nav {
     width: 100%;
-    margin-left: 2.5rem;
+    margin-left: 5rem;
 }
 
 .navigation {
@@ -111,11 +111,11 @@
     text-decoration: underline;
 }
 
-.auth {
+.static-menu {
     display: flex;
     align-items: center;
 
-    &__dashboard {
+    &__item {
         margin-right: 1.8rem;
     }
 }
@@ -205,6 +205,12 @@
     }
 }
 
+@media only screen and (max-width: 1400px) {
+    .nav {
+        margin-left: 2.5rem;
+    }
+}
+
 @media only screen and (max-width: 1350px) {
     .navigation {
         display: none;
@@ -217,25 +223,19 @@
 
 @media only screen and (max-width: 1370px) {
 
-    .auth__dashboard,
+    .static-menu__item,
     .navigation__item {
         margin-right: 1.5rem;
     }
 }
 
 @media only screen and (max-width: 1290px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 1.5rem;
-    }
-
     .nav {
         margin-left: 2.5rem;
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 910px) {
     .project-logo {
         &__img {
             height: 1.8rem;
@@ -243,7 +243,7 @@
     }
 
     .nav,
-    .auth {
+    .static-menu {
         display: none;
     }
 
