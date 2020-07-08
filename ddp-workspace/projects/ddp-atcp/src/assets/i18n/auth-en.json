@@ -9,7 +9,10 @@
     "resendInstructions": "Resend confirmation instructions",
     "email": {
       "label": "Email",
-      "error": "Email cannot be empty"
+      "error": "Email cannot be empty",
+      "whoseEmail": "Whose email should I input?",
+      "whoseEmailTooltip": "If you are a parent/legal guardian of a child(ren) with A-T, please use your own email address. We will use this address to correspond with you regarding anyone you register in The Global A-T Family Data Platform."
+
     },
     "password": {
       "label": "Password",
@@ -60,8 +63,12 @@
     "or": "OR"
   },
   "signUp": {
-    "title": "Join Us",
-    "subTitle": "Do you or your child have A-T? Tell us about it and join us in making a difference…"
+    "title": "Create account",
+    "subTitle": "You can log into the Platform with your email address by creating a password, or with your Google account. We will use this email address to communicate with you regarding the Global A-T Family Data Platform.",
+    "subtitleWithEmail": "Use your email address",
+    "emailLabel": "Email address",
+    "createAccountBtn": "Create Account",
+    "passwordHint": "(8 characters minimum)"
   },
   "modal": {
     "SuccessChangedPassword": "Your password has been changed successfully.",
