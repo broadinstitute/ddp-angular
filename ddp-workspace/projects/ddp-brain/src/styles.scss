@@ -1561,6 +1561,35 @@ ul {
     text-decoration: underline !important;
 }
 
+// move user menu to the side panel on the small screens
+.user-menu-panel {
+    display: none;
+
+    .SimpleButton {
+        font-size: 1.1rem !important;
+        color: mat-color($app-theme, 600) !important;
+    }
+
+    .SimpleButton:hover {
+        color: mat-color($app-theme, 700) !important;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .user-menu-panel {
+        display: block;
+    }
+
+    .user-menu-header {
+        display: none;
+        padding: 0;
+    }
+
+    .ddp-user {
+        color: mat-color($app-theme, 600) !important;
+    }
+}
+
 .ddp-activity-validation {
     .ErrorMessageList {
         list-style-type: square;

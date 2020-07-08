@@ -1589,6 +1589,35 @@ select:-webkit-autofill {
     top: $warning-height !important;
 }
 
+// move user menu to the side panel on the small screens
+.user-menu-panel {
+    display: none;
+
+    .SimpleButton {
+        font-size: 1.1rem !important;
+        color: mat-color($app-theme, 2200) !important;
+    }
+
+    .SimpleButton:hover {
+        color: mat-color($app-theme, 600) !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .user-menu-panel {
+        display: block;
+
+        .ddp-user {
+            color: mat-color($app-theme, 2200);
+        }
+    }
+
+    .user-menu-header {
+        display: none;
+        padding: 0;
+    }
+}
+
 // .ddp-list {
 //     margin: 20px;
 //     padding: 0;
@@ -1749,26 +1778,26 @@ select:-webkit-autofill {
 //     font-weight: 900;
 // }
 
-// .ddp-user-menu-button {
-//     outline: none;
-//     font-size: 1rem;
-//     font-weight: 300;
-//     color: mat-color($app-theme, 1000);
-// }
+.ddp-user-menu-button {
+    outline: none;
+    font-size: 1rem;
+    font-weight: 300;
+    color: mat-color($app-theme, 1000);
+}
 
-// .ddp-user-menu-button:active,
-// .ddp-user-menu-button:focus,
-// .ddp-user-menu-button:hover {
-//     color: mat-color($app-theme, 1000);
-// }
+.ddp-user-menu-button:active,
+.ddp-user-menu-button:focus,
+.ddp-user-menu-button:hover {
+    color: mat-color($app-theme, 1000);
+}
 
-// .ddp-user {
-//     color: mat-color($app-theme, 100);
-// }
+.ddp-user {
+    color: mat-color($app-theme, 100);
+}
 
-// .ddp-user--scrolled {
-//     color: mat-color($app-theme, 600);
-// }
+.ddp-user--scrolled {
+    color: mat-color($app-theme, 2200);
+}
 
 // .ddp-institutions-form,
 // .ddp-activity-question {
