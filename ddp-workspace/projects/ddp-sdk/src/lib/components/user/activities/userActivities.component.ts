@@ -96,7 +96,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
           <button *ngIf="!element.readonly"
                   class="ButtonFilled Button--cell button button_small button_primary"
                   (click)="openActivity(element.instanceGuid, element.activityCode)"
-                  [innerHTML]="'SDK.EditButton' | translate">
+                  [innerHTML]="isActivityCompleted(element.statusCode) ? ('SDK.CompleteButton' | translate) : ('SDK.EditButton' | translate)">
           </button>
           <button *ngIf="element.readonly"
                   class="ButtonBordered ButtonBordered--orange Button--cell button button_small button_secondary"
@@ -253,12 +253,9 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     return caption != null ? caption.name : '';
   }
 
-  private doAnalytics(action: string): void {
-    this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
-  }
   public showQuestionCount(activityInstance: ActivityInstance): boolean {
     if (!this.config.dashboardShowQuestionCount ||
-        this.config.dashboardShowQuestionCountExceptions.includes(activityInstance.activityCode)) {
+      this.config.dashboardShowQuestionCountExceptions.includes(activityInstance.activityCode)) {
       return false;
     } else if (activityInstance.numQuestions === 0) {
       return false;
@@ -267,5 +264,13 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     } else {
       return true;
     }
+  }
+
+  public isActivityCompleted(statusCode: string): boolean {
+    return this.config.dashboardActivitiesCompletedStatuses.includes(statusCode);
+  }
+
+  private doAnalytics(action: string): void {
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
   }
 }
