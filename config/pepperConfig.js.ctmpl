@@ -6,15 +6,15 @@
 var DDP_ENV = {
     auth0SilentRenewUrl: location.origin + '/silentRenew',
     loginLandingUrl: location.origin + '/login-landing',
-    doLocalRegistration:false,
+    doLocalRegistration: false,
     {{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
-    mapsApiKey:"{{.Data.mapsApiKey}}",
+    mapsApiKey: "{{.Data.mapsApiKey}}",
     {{end}}
     {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
     recaptchaSiteClientKey:"{{.Data.recaptchaSiteClientKey}}",
     {{end}}
-    studyGuid:"{{$study_guid}}",
-    tcellbaseurl:"https://us.agent.tcell.insight.rapid7.com/api/v1"
+    studyGuid: "{{$study_guid}}",
+    tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
 
 {{if ne $environment "prod"}}
