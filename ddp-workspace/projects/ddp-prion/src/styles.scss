@@ -448,6 +448,19 @@ mat-icon.ddp-dropdown-arrow {
     vertical-align: middle;
 }
 
+.mat-menu-content {
+  padding: 10px !important;
+
+  .mat-menu-item:first-of-type {
+    line-height: 32px !important;
+    padding-bottom: 16px !important;
+  }
+
+  .mat-menu-item:last-of-type {
+    line-height: 32px !important;
+    padding-top: 16px !important;
+  }
+}
 
 .example-container {
     display: flex;
