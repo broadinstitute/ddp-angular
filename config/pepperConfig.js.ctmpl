@@ -1,7 +1,7 @@
-{{ $environment := env "ENVIRONMENT"}}
-{{ $version := env "VERSION"}}
+{{$environment := env "ENVIRONMENT"}}
+{{$version := env "VERSION"}}
 {{$study := env "STUDY_KEY"}}
-{{ $study_guid := env "STUDY_GUID"}}
+{{$study_guid := env "STUDY_GUID"}}
 
 var DDP_ENV = {
     auth0SilentRenewUrl: location.origin + '/silentRenew',
