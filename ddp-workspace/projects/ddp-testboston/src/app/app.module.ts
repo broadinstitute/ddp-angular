@@ -94,6 +94,7 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
+sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 
