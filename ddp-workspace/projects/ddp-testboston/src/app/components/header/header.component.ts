@@ -42,11 +42,19 @@ export class HeaderComponent {
     this.window.nativeWindow.requestAnimationFrame(() => {
       this.renderer.addClass(this.overlay.nativeElement, 'overlay_visible');
     });
+    // To prevent showing right scroll while the animation works(weird artifacts are visible in chrome), we need to add
+    // 'overlay_overflow' class when the animation ends. Overflow is needed for horizontal mobile screen orientation
+    setTimeout(() => {
+      this.renderer.addClass(this.overlay.nativeElement, 'overlay_overflow');
+    }, 500);
   }
 
   public closeMenu(): void {
     if (this.isMenuOpened) {
       this.isMenuOpened = false;
+      this.window.nativeWindow.requestAnimationFrame(() => {
+        this.renderer.removeClass(this.overlay.nativeElement, 'overlay_overflow');
+      });
       this.window.nativeWindow.requestAnimationFrame(() => {
         this.renderer.removeClass(this.overlay.nativeElement, 'overlay_visible');
       });

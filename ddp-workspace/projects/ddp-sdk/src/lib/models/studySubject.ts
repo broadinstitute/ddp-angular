@@ -1,11 +1,7 @@
-export interface StudySubject {
-    invitationId: string;
-    createdAt: string;
-    voidedAt: string | null;
-    verifiedAt: string | null;
-    acceptedAt: string | null;
+import { Invitation } from './invitation';
+
+export interface StudySubject extends Invitation {
     userGuid: string | null;
-    userHruid: string | null;
     userLoginEmail: string | null;
     notes: string | null;
 }

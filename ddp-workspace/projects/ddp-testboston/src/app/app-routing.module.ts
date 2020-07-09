@@ -154,6 +154,14 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.AdminSessionExpired,
+    component: SessionExpiredRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ],
+    data: { isAdmin: true }
+  },
+  {
     path: AppRoutes.Password,
     component: PasswordRedesignedComponent
   },
