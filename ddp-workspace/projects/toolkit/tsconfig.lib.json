@@ -18,13 +18,10 @@
     ],
     "paths": {
       "ddp-sdk": [
-        "dist/ddp-sdk"
-        ],
-        "ddp-sdk/*": [
-          "dist/ddp-sdk/*"
-        ]
-      }
-    },
+        "projects/ddp-sdk/src/public-api"
+      ]
+    }
+  },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
