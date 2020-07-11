@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MatSidenav } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from './app.component.state';
@@ -172,7 +173,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 of({ joinDialogOpen: false }) :
                 merge(
                     dialog.afterClosed().pipe(map(() => ({ joinDialogOpen: false }))),
-                    dialog.afterOpen().pipe(map(() => ({ joinDialogOpen: true })))
+                    dialog.afterOpened().pipe(map(() => ({ joinDialogOpen: true })))
                 )),
             distinctUntilChanged()
         );

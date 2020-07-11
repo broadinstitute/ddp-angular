@@ -25,7 +25,7 @@
       ],
       "toolkit": [
         "projects/toolkit/src/public-api"
-      ],
+      ]
     }
   }
 }

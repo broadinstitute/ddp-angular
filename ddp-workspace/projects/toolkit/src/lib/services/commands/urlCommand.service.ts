@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { WorkflowCommand } from '../../models/workflowCommand';
 
+@Injectable()
 export class UrlCommand implements WorkflowCommand {
     constructor(
         private url: string,

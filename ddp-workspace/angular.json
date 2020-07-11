@@ -93,6 +93,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-angio",
             "index": "projects/ddp-angio/src/index.html",
             "main": "projects/ddp-angio/src/main.ts",
@@ -139,12 +143,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -152,7 +156,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-angio/tsconfig.es5.json"
@@ -243,6 +247,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-brain",
             "index": "projects/ddp-brain/src/index.html",
             "main": "projects/ddp-brain/src/main.ts",
@@ -289,12 +297,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -302,7 +310,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-brain/tsconfig.es5.json"
@@ -393,6 +401,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-mbc",
             "index": "projects/ddp-mbc/src/index.html",
             "main": "projects/ddp-mbc/src/main.ts",
@@ -439,12 +451,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -452,7 +464,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-mbc/tsconfig.es5.json"
@@ -543,6 +555,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/sandbox-app",
             "index": "projects/sandbox-app/src/index.html",
             "main": "projects/sandbox-app/src/main.ts",
@@ -578,12 +594,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             }
@@ -664,6 +680,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/basil-app",
             "index": "projects/basil-app/src/index.html",
             "main": "projects/basil-app/src/main.ts",
@@ -698,12 +718,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -711,7 +731,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/basil-app/tsconfig.es5.json"
@@ -792,6 +812,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-osteo",
             "index": "projects/ddp-osteo/src/index.html",
             "main": "projects/ddp-osteo/src/main.ts",
@@ -838,12 +862,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -851,7 +875,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-osteo/tsconfig.es5.json"
@@ -942,6 +966,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-prion",
             "index": "projects/ddp-prion/src/index.html",
             "main": "projects/ddp-prion/src/main.ts",
@@ -987,12 +1015,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
+                  "maximumWarning": "25kb",
                   "maximumError": "10kb"
                 }
               ]
@@ -1001,7 +1029,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-prion/tsconfig.es5.json"
@@ -1084,6 +1112,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "util"
+            ],
             "outputPath": "dist/ddp-testboston",
             "index": "projects/ddp-testboston/src/index.html",
             "main": "projects/ddp-testboston/src/main.ts",
@@ -1130,12 +1162,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ]
             },
@@ -1143,7 +1175,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "25kb"
                 }
               ],
               "tsConfig": "projects/ddp-testboston/tsconfig.es5.json"
