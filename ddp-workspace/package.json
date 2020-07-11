@@ -39,7 +39,7 @@
     "raw-loader": "0.5.1",
     "rxjs": "6.6.0",
     "tslib": "2.0.0",
-    "underscore": "1.9.1",
+    "underscore": "1.10.2",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.3"
   },
