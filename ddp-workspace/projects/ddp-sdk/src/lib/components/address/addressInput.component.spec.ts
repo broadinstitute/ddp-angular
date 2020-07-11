@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddressInputComponent } from './addressInput.component';
-import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CountryService } from '../../services/addressCountry.service';
 import { AddressInputService } from './addressInput.service';
