@@ -25,7 +25,7 @@ describe('IrbPasswordService', () => {
         });
         // For some reason TestBed is willing to inject Configuration into service, but not httpclient
         // So we need to instantiate ourselves
-        httpClient = TestBed.get(HttpClient);
+        httpClient = TestBed.inject(HttpClient);
         service = new IrbPasswordService(config, cookieServiceSpy, httpClient, loggingServiceSpy);
 
     });

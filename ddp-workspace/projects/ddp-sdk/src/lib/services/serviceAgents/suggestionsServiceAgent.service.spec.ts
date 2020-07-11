@@ -33,8 +33,8 @@ describe('SuggestionServiceAgent Test', () => {
             imports: [HttpClientTestingModule]
         });
 
-        httpClient = TestBed.get(HttpClient);
-        httpTestingController = TestBed.get(HttpTestingController);
+        httpClient = TestBed.inject(HttpClient);
+        httpTestingController = TestBed.inject(HttpTestingController);
 
         service = new SuggestionServiceAgent(sessionSpy, config, httpClient, loggingServiceSpy);
     });
