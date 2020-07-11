@@ -7,10 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "package_ddp-sdk": "ng build ddp-sdk && cd dist/ddp-sdk && npm pack",
-    "package_toolkit": "ng build toolkit && cd dist/toolkit && npm pack",
-    "package_libs": "npm run package_ddp-sdk && npm run package_toolkit"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
