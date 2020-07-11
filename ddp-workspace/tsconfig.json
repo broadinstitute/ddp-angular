@@ -1,31 +1,71 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "downlevelIteration": true,
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "ddp-sdk": [
-        "projects/ddp-sdk/src/public-api"
-      ],
-      "toolkit": [
-        "projects/toolkit/src/public-api"
-      ],
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/ddp-sdk/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ddp-sdk/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/toolkit/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/toolkit/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-angio/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-angio/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-brain/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-brain/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-mbc/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-mbc/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/sandbox-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/sandbox-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/basil-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/basil-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-osteo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-osteo/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-prion/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-prion/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-testboston/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-testboston/tsconfig.spec.json"
     }
-  }
+  ]
 }
