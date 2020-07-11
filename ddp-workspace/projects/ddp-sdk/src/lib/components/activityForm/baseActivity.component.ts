@@ -24,8 +24,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
-    selector: 'ddp-base-activity',
-    template: `<div></div>`
+    template: ``
 })
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;

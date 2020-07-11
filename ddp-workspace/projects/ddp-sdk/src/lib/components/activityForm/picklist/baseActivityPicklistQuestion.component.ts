@@ -5,8 +5,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'ddp-base-picklist-question',
-    template: `<div></div>`
+    template: ``
 })
 export class BaseActivityPicklistQuestion implements OnChanges, OnDestroy {
     @Input() block: ActivityPicklistQuestionBlock;
