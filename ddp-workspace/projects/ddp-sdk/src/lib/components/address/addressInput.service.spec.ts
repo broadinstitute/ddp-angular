@@ -60,8 +60,8 @@ describe('AddressInputService', () => {
       expect(postalCodeLabels.length).toBe(3);
       // there should be a default label. Not worrying about value
       expect(postalCodeLabels[0]).toBeTruthy();
-      expect(postalCodeLabels[1]).toBe('Postal Code');
-      expect(postalCodeLabels[2]).toBeTruthy();
+      expect(postalCodeLabels[1]).toBeTruthy();
+      expect(postalCodeLabels[2]).toBe('Postal Code');
       done();
     });
     ais.addressForm.patchValue({ country: 'CA' });
@@ -86,8 +86,8 @@ describe('AddressInputService', () => {
       expect(postalCodeLabels.length).toBe(3);
       // there should be a default label. Not worrying about value
       expect(postalCodeLabels[0]).toBeTruthy();
-      expect(postalCodeLabels[1]).toBe(testPostalCodeLabel);
-      expect(postalCodeLabels[2]).toBeTruthy();
+      expect(postalCodeLabels[1]).toBeTruthy();
+      expect(postalCodeLabels[2]).toBe(testPostalCodeLabel);
       done();
     });
     ais.addressForm.patchValue({ country: 'CA' });
