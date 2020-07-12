@@ -87,7 +87,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
     configServiceSpy.tooltipIconUrl.and.callFake(() => {
         return '/path/';
     });
-    
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [

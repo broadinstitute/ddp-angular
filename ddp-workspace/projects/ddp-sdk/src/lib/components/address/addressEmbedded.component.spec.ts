@@ -345,6 +345,7 @@ describe('AddressEmbeddedComponent', () => {
     fixture.detectChanges();
     expect(childComponent.readonly).toBe(false);
   });
+
   it('test loading default address', fakeAsync(() => {
     const defaultAddress = buildPerfectAddress();
     defaultAddress.guid = '789';
@@ -422,7 +423,6 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
     expect(addressServiceSpy.deleteTempAddress).toHaveBeenCalledWith('123');
   }));
-
 
   it('ensure we save the correct temporary address', fakeAsync(() => {
     const activityGuid = '123';
@@ -526,11 +526,10 @@ describe('AddressEmbeddedComponent', () => {
     fixture.detectChanges();
     return { enteredAddress, suggestedAddress: buildPerfectAddress() };
   };
-
 });
+
 const findValidationMessageDebug = (fixture): DebugElement =>
   fixture.debugElement.query(By.directive(ValidationMessage));
-
 
 const findRadioGroupDebug = (fixture): DebugElement =>
   fixture.debugElement.query(By.directive(MatRadioGroup));
@@ -549,8 +548,8 @@ const buildPerfectAddress = (): Address => {
   perfectAddress.phone = '6175555555';
   return perfectAddress;
 };
+
 const buildPerfectAddressVerification = (): AddressVerificationResponse => {
   const perfectAddressVerify = new AddressVerificationResponse(buildPerfectAddress());
   return perfectAddressVerify;
 };
-
