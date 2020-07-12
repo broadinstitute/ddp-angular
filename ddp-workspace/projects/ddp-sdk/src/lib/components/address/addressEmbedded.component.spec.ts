@@ -198,7 +198,7 @@ describe('AddressEmbeddedComponent', () => {
     const radioInstances = radioDebugElements.map(debugEl => debugEl.componentInstance) as MatRadioButton[];
     const groupInstance: MatRadioGroup = radioGroupComponentDebug.injector.get<MatRadioGroup>(MatRadioGroup);
     fixture.detectChanges();
-    expect(groupInstance.selected.value).toBe('entered');
+    expect(groupInstance.value).toBe('entered');
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalled();
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addresses.enteredAddress, '123');
