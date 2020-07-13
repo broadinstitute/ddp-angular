@@ -3,7 +3,6 @@ import { StudyLanguage } from '../models/studyLanguage';
 import { ConfigurationService } from '../services/configuration.service';
 import { LanguageService } from '../services/languageService.service';
 import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
-import { isNullOrUndefined } from 'util';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,7 +30,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
   public iconURL: string;
-  private studyLanguages: StudyLanguage[];
+  private studyLanguages: StudyLanguage[] = [];
   private anchor: Subscription;
 
   constructor(
@@ -66,7 +65,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   public getUnselectedLanguages(): Array<StudyLanguage> {
-    if (!isNullOrUndefined(this.studyLanguages)) {
+    if (this.studyLanguages.length) {
       return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
     }
     return null;
@@ -85,7 +84,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   //Find the current language and return true if successful or false otherwise
   public findCurrentLanguage(): boolean {
     //Check if we already have a current language
-    if (!isNullOrUndefined(this.currentLanguage)) {
+    if (!!this.currentLanguage) {
       this.changeLanguage(this.currentLanguage);
       return true;
     }
@@ -94,7 +93,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     let loadedCode: string = this.language.useStoredLanguage();
     if (loadedCode) {
       let loadedLang: StudyLanguage = this.studyLanguages.find(x => x.languageCode === loadedCode);
-      if (!isNullOrUndefined(loadedLang)) {
+      if (!!loadedLang) {
         this.currentLanguage = loadedLang;
         return true;
       }
@@ -104,7 +103,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     //Check for a default language
     let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
-    if (!isNullOrUndefined(lang)) {
+    if (!!lang) {
       this.changeLanguage(lang);
       return true;
     }

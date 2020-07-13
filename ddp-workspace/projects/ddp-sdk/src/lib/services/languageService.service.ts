@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { isNullOrUndefined } from "util";
 
 @Injectable()
 export class LanguageService {
@@ -11,7 +10,7 @@ export class LanguageService {
     }
 
     public canUseLanguage(languageCode: string): boolean {
-      if (isNullOrUndefined(languageCode)) {
+      if (!!languageCode) {
         return false;
       }
       return this.translate.getLangs().includes(languageCode);
