@@ -10,7 +10,7 @@ import {
   UserProfileDecorator,
   UserProfileServiceAgent, WindowRef
 } from 'ddp-sdk';
-import { ToolkitConfigurationService } from 'toolkit';
+import {ToolkitConfigurationService, WorkflowBuilderService} from 'toolkit';
 
 import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
 import { filter, first } from 'rxjs/operators';
@@ -55,21 +55,24 @@ export class DashBoardComponent implements OnInit, OnDestroy {
               private logger: LoggingService,
               private userAgent: UserProfileServiceAgent,
               private windowRef: WindowRef,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private workflowBuilder: WorkflowBuilderService) {
   }
 
   public setActivity(activityResposne: ActivityResponse | null): void {
     if (activityResposne && activityResposne.instanceGuid) {
       this.updateInstanceGuid(activityResposne);
       this.getSteps();
+    } else {
+      this.workflowBuilder.getCommand(new ActivityResponse(activityResposne.next)).execute();
     }
   }
 
   public updateInstanceGuid(activity: ActivityInstance | ActivityResponse): void {
      if (this.instanceGuid !== activity.instanceGuid) {
-    this.isAssetsActivity = activity.activityCode === ASSENT;
-    this.instanceGuid = activity.instanceGuid;
-    this.resetActivityComponent();
+        this.isAssetsActivity = activity.activityCode === ASSENT;
+        this.instanceGuid = activity.instanceGuid;
+        this.resetActivityComponent();
      }
   }
 

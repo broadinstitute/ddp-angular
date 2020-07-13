@@ -198,6 +198,10 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.router.navigateByUrl('/dashboard');
     }
 
+    public navigateToConsole(): void {
+      this.router.navigateByUrl('/console');
+    }
+
     private initSteps(): void {
         if (!this.model.isSomeSectionVisible()) {
             this.nextWorkflowActivity();

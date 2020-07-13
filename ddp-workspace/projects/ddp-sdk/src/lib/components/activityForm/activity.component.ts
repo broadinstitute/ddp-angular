@@ -300,6 +300,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         super.close();
     }
 
+  public navigateToConsole(): void {
+    this.sendLastSectionAnalytics();
+    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
+    super.navigateToConsole();
+  }
+
     public flush(): void {
         this.sendLastSectionAnalytics();
         this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);

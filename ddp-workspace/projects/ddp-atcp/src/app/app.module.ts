@@ -54,6 +54,7 @@ declare let DDP_ENV: any;
 declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
+tkCfg.dashboardUrl = "/console";
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
