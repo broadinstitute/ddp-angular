@@ -93,10 +93,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-angio",
             "index": "projects/ddp-angio/src/index.html",
             "main": "projects/ddp-angio/src/main.ts",
@@ -247,10 +243,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-brain",
             "index": "projects/ddp-brain/src/index.html",
             "main": "projects/ddp-brain/src/main.ts",
@@ -401,10 +393,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-mbc",
             "index": "projects/ddp-mbc/src/index.html",
             "main": "projects/ddp-mbc/src/main.ts",
@@ -555,10 +543,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/sandbox-app",
             "index": "projects/sandbox-app/src/index.html",
             "main": "projects/sandbox-app/src/main.ts",
@@ -680,10 +664,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/basil-app",
             "index": "projects/basil-app/src/index.html",
             "main": "projects/basil-app/src/main.ts",
@@ -812,10 +792,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-osteo",
             "index": "projects/ddp-osteo/src/index.html",
             "main": "projects/ddp-osteo/src/main.ts",
@@ -966,10 +942,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-prion",
             "index": "projects/ddp-prion/src/index.html",
             "main": "projects/ddp-prion/src/main.ts",
@@ -1112,10 +1084,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "underscore",
-              "util"
-            ],
             "outputPath": "dist/ddp-testboston",
             "index": "projects/ddp-testboston/src/index.html",
             "main": "projects/ddp-testboston/src/main.ts",
