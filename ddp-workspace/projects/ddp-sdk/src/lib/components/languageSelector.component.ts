@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   selector: 'ddp-language-selector',
   template: `
     <div [hidden]="!loaded">
-      <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
+      <button *ngIf="!!currentLanguage" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" [matMenuTriggerFor]="menu">
         <svg class="ddp-globe" height="24px" width="24px">
           <title id="title" [lang]="currentLanguage.languageCode" translate>SDK.LanguageSelector.LanguageSelection</title>
           <use [attr.href]="iconURL"></use>
