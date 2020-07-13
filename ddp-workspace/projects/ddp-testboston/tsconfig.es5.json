@@ -1,8 +1,8 @@
 {
-    "extends": "./tsconfig.app.json",
-    "compilerOptions": {
-        "target": "es5"
-    },
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "target": "es5"
+  },
   "include": [
     "projects/ddp-testboston/src/**/*.d.ts"
   ]
