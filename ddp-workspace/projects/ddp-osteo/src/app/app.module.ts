@@ -1,5 +1,5 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -130,7 +130,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     DdpModule,
     ToolkitModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    HammerModule 
   ],
   declarations: [
     WelcomeComponent,
