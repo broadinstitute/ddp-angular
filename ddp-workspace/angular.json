@@ -122,8 +122,7 @@
               "projects/ddp-angio/src/theme.scss",
               "projects/ddp-angio/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -277,8 +276,7 @@
               "projects/ddp-brain/src/theme.scss",
               "projects/ddp-brain/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -432,8 +430,7 @@
               "projects/ddp-mbc/src/theme.scss",
               "projects/ddp-mbc/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -576,8 +573,7 @@
               "projects/sandbox-app/src/theme.scss",
               "projects/sandbox-app/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -701,8 +697,7 @@
             "styles": [
               "projects/basil-app/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -846,8 +841,7 @@
               "projects/ddp-osteo/src/theme.scss",
               "projects/ddp-osteo/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1000,8 +994,7 @@
               "projects/ddp-prion/src/theme.scss",
               "projects/ddp-prion/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1148,8 +1141,7 @@
               "projects/ddp-testboston/src/theme.scss",
               "projects/ddp-testboston/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
