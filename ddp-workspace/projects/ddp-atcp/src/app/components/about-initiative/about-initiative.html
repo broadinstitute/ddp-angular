@@ -26,11 +26,14 @@
     </p>
     <p translate>AboutInitiative.ThirdParagraph.SubTitle</p>
     <ul>
-      <li *ngFor="let step of steps; let isLast = last;">
-        <h2 translate>{{ step.Name }}</h2>
-        <p translate>{{ step.Text }}</p>
-        <ul class="List" *ngIf="step.Steps">
-          <li *ngFor="let step of step.Steps" translate>{{ step }}</li>
+
+      <li *ngFor="let isLast = last; let step of 'AboutInitiative.ThirdParagraph.Steps' | extractTranslationPathsForArray | async; ">
+        <h2 translate>{{ step }}.Name</h2>
+        <p translate>{{ step }}.Text</p>
+        <ul class="List" >
+          <li *ngFor="let step_level_2 of step + '.Steps' | extractTranslationPathsForArray | async" translate>
+            {{ step_level_2 }}
+          </li>
         </ul>
         <br *ngIf="!isLast">
       </li>

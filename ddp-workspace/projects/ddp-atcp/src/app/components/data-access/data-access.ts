@@ -6,8 +6,7 @@ import {CommunicationService, ToolkitConfigurationService} from "toolkit";
 import {DataAccessServiceAgent} from "../../services/serviceAgents/dataAccessServiceAgent.service";
 import {DataAccessRequestSuccessResult} from "../../models/dataAccessRequestSuccessResult";
 import {DataAccessRequestError} from "../../models/dataAccessRequestError";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {Observable, of} from "rxjs";
+import { of } from "rxjs";
 import {delay} from "rxjs/operators";
 import {ServerMessage} from "../../../../../toolkit/src/lib/models/serverMessage";
 
@@ -21,7 +20,6 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public activeTab = 0;
   public countTabs = 7;
-  public AssuranceList: string[] = [];
   private readonly maxAttachmentSize = 2 * 1024 * 1024;
   private anchor: CompositeDisposable = new CompositeDisposable();
   public fileSizeExceedsLimit: boolean;
@@ -96,9 +94,6 @@ export class DataAccessComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const translate$ = this.ngxTranslate.getTranslation(['DataAccess.Assurances.AssuranceList'])
-      .subscribe((list: string[]) => this.AssuranceList = list['DataAccess.Assurances.AssuranceList']);
-    this.anchor.addNew(translate$);
     this.studyGuid = this.toolkitConfiguration.studyGuid;
     this.model.signature_date = this.getToday();
     this.model.request_date = this.getToday();

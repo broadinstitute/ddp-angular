@@ -311,7 +311,7 @@
       <div class="clear">
         <p translate>DataAccess.Assurances.Paragraph1</p>
         <ul>
-          <li *ngFor="let assurance of AssuranceList">
+          <li *ngFor="let assurance of 'DataAccess.Assurances.AssuranceList' | extractTranslationPathsForArray | async;" translate>
             {{ assurance }}
           </li>
         </ul>

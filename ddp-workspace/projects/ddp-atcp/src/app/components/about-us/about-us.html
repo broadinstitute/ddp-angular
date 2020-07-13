@@ -13,8 +13,8 @@
     <h2 translate>AboutPage.FamilyOversight.Header</h2>
     <p translate>AboutPage.FamilyOversight.Text</p>
     <ul>
-      <li *ngFor="let hospital of hospitals">
-        <span>{{ hospital.Name }}</span> (<i>{{ hospital.Country }}</i>)</li>
+      <li *ngFor="let hospital of 'AboutPage.Hospitals'| extractTranslationPathsForArray | async;">
+        <span translate>{{ hospital }}.Name</span> (<i translate>{{hospital}}.Country</i>)</li>
     </ul>
     <hr>
   </div>
@@ -22,10 +22,10 @@
     <h2 translate>AboutPage.ScientificBoard.Header</h2>
     <p translate>AboutPage.ScientificBoard.Text</p>
     <ul>
-      <li *ngFor="let doctor of doctors">
-        <span>{{ doctor.Name }}</span>,
-        <span>{{ doctor.Rank }}</span> -
-        <i>{{ doctor.Hospital }}</i>
+      <li *ngFor="let doctor of 'AboutPage.Doctors' | extractTranslationPathsForArray | async;">
+        <span translate >{{ doctor }}.Name</span>,
+        <span translate >{{ doctor }}.Rank</span> -
+        <i translate >{{ doctor }}.Hospital</i>
       </li>
     </ul>
     <hr>

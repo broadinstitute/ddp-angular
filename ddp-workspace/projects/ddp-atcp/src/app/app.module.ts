@@ -42,6 +42,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ConsoleComponent} from "./components/console/console";
 import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
+import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -120,7 +121,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WorkflowProgressComponent,
     StatisticsComponent,
     ProgressBarComponent,
-    ConsoleComponent
+    ConsoleComponent,
+    ExtractTranslationPathsForArrayPipe
   ],
   entryComponents: [
     DashBoardComponent,
