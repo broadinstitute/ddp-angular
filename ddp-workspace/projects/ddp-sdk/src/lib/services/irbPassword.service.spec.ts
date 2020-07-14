@@ -55,9 +55,8 @@ describe('IrbPasswordService', () => {
             done();
         });
         // mock backend request
-        const req = httpTestingController
-            .expectOne(mockRequestUrl);
-        req.flush({
+        const request = httpTestingController.expectOne(mockRequestUrl);
+        request.flush({
             result: false
         });
     });
