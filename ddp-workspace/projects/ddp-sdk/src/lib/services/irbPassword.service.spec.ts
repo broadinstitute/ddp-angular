@@ -29,8 +29,8 @@ describe('IrbPasswordService', () => {
             providers: [
                 IrbPasswordService,
                 CookieService,
-                { provide: 'ddp.config', useValue: config },
-                LoggingService
+                LoggingService,
+                { provide: 'ddp.config', useValue: config }
             ]
         });
         // For some reason TestBed is willing to inject Configuration into service, but not httpclient
