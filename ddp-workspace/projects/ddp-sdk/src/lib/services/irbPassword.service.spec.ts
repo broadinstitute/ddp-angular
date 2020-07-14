@@ -15,9 +15,9 @@ describe('IrbPasswordService', () => {
     config.studyGuid = 'study';
     const mockRequestUrl = `${config.backendUrl}/pepper/v1/studies/${config.studyGuid}/irb-password-check`;
     // Faking out the cookieservice
-    const cookieServiceSpy = jasmine.createSpyObj('CookieService', ['checkPassword']);
+    const cookieServiceSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('CookieService', ['put']);
     // called within the parent class
-    const loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logException']);
+    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
 
     beforeEach(() => {
         TestBed.configureTestingModule({
