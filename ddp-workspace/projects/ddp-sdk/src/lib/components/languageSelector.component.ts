@@ -65,10 +65,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   public getUnselectedLanguages(): Array<StudyLanguage> {
-    if (this.studyLanguages.length) {
-      return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
-    }
-    return null;
+    return this.studyLanguages.filter(language => language.languageCode !== this.currentLanguage.languageCode);
   }
 
   public changeLanguage(lang: StudyLanguage): void {
