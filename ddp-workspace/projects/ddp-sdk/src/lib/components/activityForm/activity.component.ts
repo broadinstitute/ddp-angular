@@ -339,6 +339,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.resetValidationState();
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
+              this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
             }
         }
     }

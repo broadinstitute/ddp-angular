@@ -14,7 +14,7 @@ export class ActivityForm {
     public lastUpdatedText?: string;
     public lastUpdated?: Date;
     public validationState: ReplaySubject<boolean> = new ReplaySubject();
-    public lastVisitedActivitySection: number | null;
+    public sectionIndex: number | null;
 
     constructor() {
         this.sections = new Array<ActivitySection>();

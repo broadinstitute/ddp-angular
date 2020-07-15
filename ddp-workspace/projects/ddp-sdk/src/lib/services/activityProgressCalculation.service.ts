@@ -7,7 +7,7 @@ import {ActivityCodes} from '../constants/activityCodes';
 export class ActivityProgressCalculationService {
   private progress = new BehaviorSubject(null);
   private activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
-  private lastVisitedSectionIndex: number | null
+  private sectionIndex: number | null
   private sectionsAmount: number;
   private sectionWeight: number;
   private lastSectionWeight: number;
@@ -15,7 +15,7 @@ export class ActivityProgressCalculationService {
 
   public setProgress(activity: ActivityForm) {
     if (activity.activityCode === this.activityToShowProgress) {
-      this.lastVisitedSectionIndex = activity.lastVisitedActivitySection;
+      this.sectionIndex = activity.sectionIndex;
 
       if (activity.readonly) {
         this.progress.next(100);
@@ -24,7 +24,7 @@ export class ActivityProgressCalculationService {
 
       this.sectionsAmount = activity.sections.length;
       this.calculateSectionsWeight();
-      this.calculateProgress(activity.lastVisitedActivitySection);
+      this.calculateProgress(activity.sectionIndex);
     }
   }
 
@@ -39,23 +39,16 @@ export class ActivityProgressCalculationService {
   public updateProgress(activity, sectionIndex) {
     if (activity.activityCode === this.activityToShowProgress
           && this.shouldUpdate(sectionIndex)) {
-      this.lastVisitedSectionIndex = sectionIndex;
+      this.sectionIndex = sectionIndex;
       this.calculateProgress(sectionIndex);
     }
   }
 
   private shouldUpdate(sectionIndex) {
-    return sectionIndex > this.lastVisitedSectionIndex;
+    return sectionIndex > this.sectionIndex;
   }
 
   private calculateProgress(sectionIndex: number | null) {
-    // if section will be removed after backend support
-    if (sectionIndex === undefined) {
-      this.progress.next(0);
-      this.lastVisitedSectionIndex = 0;
-      return;
-    }
-
    const currentProgress = this.weight.slice(0, sectionIndex).reduce((acc, weight) => acc + weight, 0);
    this.progress.next(currentProgress);
   }

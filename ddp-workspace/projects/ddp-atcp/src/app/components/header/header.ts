@@ -4,7 +4,9 @@ import {
   ConfigurationService,
   NGXTranslateService,
   SessionMementoService,
-  UserProfileDecorator
+  UserProfileDecorator,
+  CurrentActivityService,
+  ActivityCodes
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
@@ -21,11 +23,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public SignIn: string;
   private anchor = new CompositeDisposable();
   private userProfileDecorator: UserProfileDecorator;
+  isProgressBarVisible = false;
+  activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
               private ngxTranslate: NGXTranslateService,
               private translate: TranslateService,
+              private currentActivityService: CurrentActivityService,
               @Inject('ddp.config') private configuration: ConfigurationService,
               private userPreferencesServiceAgent: UserPreferencesServiceAgent) {
   }
@@ -42,8 +47,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
         }
       });
-
     this.anchor.addNew(userProfileSubs$);
+
+    const currentActivity$ = this.currentActivityService.getCurrentActivity().subscribe(x => {
+      x && x.activityCode === this.activityToShowProgress
+      ? this.isProgressBarVisible = true
+        : this.isProgressBarVisible = false;
+      });
+    this.anchor.addNew(currentActivity$);
   }
 
   public get isAuthenticated(): boolean {

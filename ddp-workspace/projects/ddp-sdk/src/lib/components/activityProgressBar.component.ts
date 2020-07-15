@@ -38,6 +38,8 @@ export class ActivityProgressBarComponent implements OnInit {
   constructor(private activityProgressCalculationService: ActivityProgressCalculationService) {}
 
   ngOnInit() {
-    this.activityProgressCalculationService.getProgress().subscribe(x => this.progress = x);
+    this.activityProgressCalculationService.getProgress().subscribe(x => {
+      this.progress = x;
+    });
   }
 }
