@@ -623,12 +623,14 @@
     /** @type {?} */
     var baseUrl;
     /** @type {?} */
-    var authLoc = Math.max(config.callbackURL.indexOf('/auth'), config.callbackURL.indexOf('/login-landing'));
+    var callbackURL = isResetPasswordPage ? config[3] : config.callbackURL;
+    /** @type {?} */
+    var authLoc = Math.max(callbackURL.indexOf('/auth'), callbackURL.indexOf('/login-landing'));
     if (authLoc === -1) {
-        baseUrl = config.callbackURL;
+        baseUrl = callbackURL;
     }
     else {
-        baseUrl = config.callbackURL.substring(0, authLoc);
+        baseUrl = callbackURL.substring(0, authLoc);
     }
     /** @type {?} */
     var dictionary;
@@ -642,13 +644,8 @@
         dictionary = loadedDictionary;
     };
     /** @type {?} */
-    var translator = translatorCreator(!isResetPasswordPage ? baseUrl + languageDataDir : config[3], (ɵ0$3));
-    if (!isResetPasswordPage) {
-        prepareUiElements(baseUrl);
-    }
-    else {
-        prepareUiElements(config[3]);
-    }
+    var translator = translatorCreator(baseUrl + languageDataDir, (ɵ0$3));
+    prepareUiElements(baseUrl);
     /**
      * start validate-js for checking forms
      */
@@ -788,7 +785,7 @@
     function (e) {
         e.preventDefault();
         webAuth.popup.authorize({
-            redirectUri: config.callbackURL,
+            redirectUri: callbackURL,
             connection: 'google',
         }, (/**
          * @return {?}

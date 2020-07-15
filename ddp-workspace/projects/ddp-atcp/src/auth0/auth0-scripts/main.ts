@@ -21,24 +21,22 @@ declare const $;
 const isResetPasswordPage = Array.isArray(config);
 const webAuth = createAuth0(config);
 let baseUrl;
-const authLoc = Math.max(config.callbackURL.indexOf('/auth'), config.callbackURL.indexOf('/login-landing'));
+
+const callbackURL = isResetPasswordPage ? config[3] : config.callbackURL;
+const authLoc = Math.max(callbackURL.indexOf('/auth'), callbackURL.indexOf('/login-landing'));
 
 if (authLoc === -1) {
-  baseUrl = config.callbackURL;
+  baseUrl = callbackURL;
 } else {
-  baseUrl = config.callbackURL.substring(0, authLoc);
+  baseUrl = callbackURL.substring(0, authLoc);
 }
 let dictionary;
 const languageDataDir = '/assets/i18n';
-const translator = translatorCreator(!isResetPasswordPage ? baseUrl + languageDataDir : config[3], (loadedDictionary: any) => {
+const translator = translatorCreator(baseUrl + languageDataDir, (loadedDictionary: any) => {
   dictionary = loadedDictionary;
 });
 
-if (!isResetPasswordPage) {
-  prepareUiElements(baseUrl);
-} else {
-  prepareUiElements(config[3]);
-}
+prepareUiElements(baseUrl);
 
 /**
  * start validate-js for checking forms
@@ -128,7 +126,7 @@ translator.changeTranslate('en');
 $('#google-sign').on('click', e => {
   e.preventDefault();
   webAuth.popup.authorize({
-    redirectUri: config.callbackURL,
+    redirectUri: callbackURL,
     connection: 'google',
   }, () => {});
 });
