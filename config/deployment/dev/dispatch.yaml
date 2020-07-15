@@ -24,5 +24,7 @@ dispatch:
     service: study-manager-backend
   - url: "dsm.dev.datadonationplatform.org/info/*"
     service: study-manager-backend
+  - url: "dsm.dev.datadonationplatform.org/ui/*"
+    service: study-manager-backend
   - url: "dsm.dev.datadonationplatform.org/*"
     service: study-manager-ui
