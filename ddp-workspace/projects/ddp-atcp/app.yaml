@@ -11,6 +11,8 @@ handlers:
     static_files: dist/\1
     upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
     secure: always
+    http_headers:
+      Access-Control-Allow-Origin: https://at-dev.auth0.com
 
   - url: /(.*)
     static_files: dist/index.html
