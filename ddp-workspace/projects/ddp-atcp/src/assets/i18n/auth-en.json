@@ -19,7 +19,7 @@
       "error": "at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*)."
     },
     "reenter": {
-      "label": "Reenter password",
+      "label": "Re-enter password",
       "error": "Password confirmation doesn't match Password"
     },
     "resetPassword": {
