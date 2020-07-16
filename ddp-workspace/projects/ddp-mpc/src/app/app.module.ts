@@ -37,10 +37,10 @@ declare const ga: Function;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.aboutYouGuid = ''; // to be defined later
-toolkitConfig.consentGuid = ''; // to be defined later
-toolkitConfig.releaseGuid = ''; // to be defined later
-toolkitConfig.followupGuid = ''; // to be defined later
+toolkitConfig.aboutYouGuid = 'ABOUTYOU';
+toolkitConfig.consentGuid = 'CONSENT';
+toolkitConfig.releaseGuid = 'RELEASE';
+toolkitConfig.followupGuid = 'FOLLOWUPCONSENT';
 toolkitConfig.dashboardGuid = 'DASHBOARD';
 toolkitConfig.aboutYouUrl = 'about-you';
 toolkitConfig.consentUrl = 'consent';
