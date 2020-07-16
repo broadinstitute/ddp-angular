@@ -38,7 +38,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: '' // to be defined later
+      activityGuid: 'ABOUTYOU'
     }
   },
   {
@@ -50,7 +50,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: '' // to be defined later
+      activityGuid: 'CONSENT'
     }
   },
   {
@@ -62,7 +62,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: '' // to be defined later
+      activityGuid: 'FOLLOWUPCONSENT'
     }
   },
   {
@@ -74,7 +74,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: '' // to be defined later
+      activityGuid: 'RELEASE'
     }
   },
   {
