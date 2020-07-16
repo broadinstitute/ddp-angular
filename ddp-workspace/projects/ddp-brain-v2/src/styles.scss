@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'app-theme.scss';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-size: 16px;
+    color: mat-color($app-theme, 200);
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1024px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+.wrapper {
+    height: 100vh;
+    margin-bottom: -20rem; // footer's height
+    padding-bottom: 20rem; // footer's height
+    padding-top: 6.25rem; // header's height
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}
+
+.section {
+    width: 100%;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 1.5625rem;
+}
+
+.content_wide {
+    max-width: 1200px;
+}
