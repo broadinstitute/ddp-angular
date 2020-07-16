@@ -7,10 +7,10 @@
   @include flexer(flex, column, center, center);
   padding: 0 25px 0 25px;
   z-index: 20;
-  display: flex;
   background-color: $blue;
   @media (min-width: 911px) {
     flex-direction: row;
+    flex-shrink: 0;
     padding: 0 40px;
     justify-content: space-between;
     flex-wrap: wrap;

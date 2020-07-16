@@ -1,5 +1,6 @@
 .footer {
   text-align: center;
+  flex-shrink: 0;
   @media (min-width: 627px) {
     display: flex;
     justify-content: space-between;
