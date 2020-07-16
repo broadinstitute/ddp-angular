@@ -333,6 +333,7 @@
         "PreviousButton": "Back",
         "SavingButton": "Saving",
         "EditButton": "Continue",
+        "CompleteButton": "Edit",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
         "NotAgreeButton": "I'm not ready to agree",
