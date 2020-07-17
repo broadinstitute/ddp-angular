@@ -22,6 +22,7 @@ import {
 } from 'rxjs/operators';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
+import {CurrentActivityService} from "../../services/activity/currentActivity.service";
 
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
@@ -51,12 +52,15 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
 
+    public currentActivityService: CurrentActivityService;
+
     protected constructor(injector: Injector) {
         this.serviceAgent = injector.get(ActivityServiceAgent);
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
         this.config = injector.get('ddp.config');
+        this.currentActivityService = injector.get(CurrentActivityService);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -66,14 +70,15 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
         for (const propName in changes) {
+            if (propName === 'studyGuid' || propName === 'activityGuid') {
+              this.isLoaded = false;
+              this.resetValidationState();
+            }
+            // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
             if (propName === 'studyGuid') {
                 this.studyGuidObservable.next(this.studyGuid);
             } else if (propName === 'activityGuid') {
                 this.activityGuidObservable.next(this.activityGuid);
-            }
-            if (propName === 'studyGuid' || propName === 'activityGuid') {
-                this.isLoaded = false;
-                this.resetValidationState();
             }
         }
     }
@@ -83,18 +88,18 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.serviceAgent
+        const get = this.currentActivityService
             .getActivity(this.studyGuidObservable, this.activityGuidObservable)
             .subscribe(
                 x => {
                     if (!x) {
                         this.model = new ActivityForm();
                     } else {
-                        this.isLoaded = true;
                         this.model = x;
                         this.stickySubtitle.emit(this.model.subtitle);
                         this.activityCode.emit(this.model.activityCode);
                         this.initSteps();
+                        this.isLoaded = true;
                     }
 
                     // combine the latest status updates from the form model
@@ -190,6 +195,10 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     public close(): void {
         this.router.navigateByUrl(this.config.dashboardPageUrl);
+    }
+
+    public navigateToConsole(): void {
+      this.router.navigateByUrl('/console');
     }
 
     private initSteps(): void {

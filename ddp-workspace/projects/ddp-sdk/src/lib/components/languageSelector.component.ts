@@ -23,7 +23,6 @@ import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
         <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
       </button>
-      
       <mat-menu #menu="matMenu" class="language-menu">
         <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
       </mat-menu>

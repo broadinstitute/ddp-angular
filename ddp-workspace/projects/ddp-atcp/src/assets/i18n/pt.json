@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "é uma doença neurodegenerativa herdada. Uma criança com A-T começa a sofrer perda progressiva do controle dos músculos por volta dos dois anos de idade. Por volta dos nove ou dez anos de idade, crianças com A-T em geral ficam dependentes da cadeira de rodas e sua fala se torna arrastada. Também se torna difícil ler e engolir. Cerca de 30% das crianças com A-T desenvolvem câncer, e a maioria delas apresenta algum grau de problemas com o sistema imunológico. Ainda que tenha sido feito progresso no sentido de estender a vida de pessoas com A-T mediante manejo dos sintomas, a doença permanece implacável.",
+			"Title": "ataxia-telangiectasia (A-T)"
+		},
+		"SecondParagraph": {
+			"TextOne": "Irmãos com A-T parecem compartilhar mais características clínicas do que crianças com A-T portadoras das mesmas mutações, mas que pertencem a famílias diferentes. Os cientistas, portanto, acreditam que os genes \\\" de uma família, exceto o gene que causa a A-T \\\", podem afetar como a A-T acomete os pacientes. Além disso, é possível que viver em diferentes ambientes, seguir estilos de vida diferentes e consumir dietas diferentes possa afetar a saúde de pessoas com A-T.",
+			"TextSecond": "Identificamos recentemente diversas pessoas com mutações típicas, que causam doenças, nos seus genes da A-T e que não produzem a proteína da A-T (assim como outras pessoas com A-T), mas seus sintomas de A-T são surpreendentemente brandos. Estamos agora otimistas de que seremos capazes de encontrar alterações em outros genes que corrigem ou compensam as mutações da A-T nesses pacientes com A-T \\\"super branda\\\". Em caso positivo, os pesquisadores poderão possivelmente encontrar novos tratamentos medicamentosos para ajudar todas as pessoas com A-T. Mas precisamos, primeiro, reunir os dados clínicos e genéticos de tantas pessoas com A-T quanto possível.",
+			"TextThird": "De maneira similar, mediante comparação dos históricos médicos e dos estilos de vida de diferentes pacientes com A-T, os pesquisadores poderão descobrir quais estratégicas de manejo de sintomas produzem melhores resultados de saúde. Mas precisamos, primeiro, obter e reunir em um só lugar dados de muitos pacientes com A-T.",
+			"Title": "A A-T afeta cada pessoa de maneira diferente"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Inscreva-se na plataforma de dados",
+					"Text": "Clique em \\\"Junte-se a nós\\\" e crie uma conta com o seu nome e endereço de e-mail. Depois que tiver criado sua conta, você poderá se registrar (caso tenha A-T) ou registrar seu(s) filho(s) com A-T como participantes de nossa plataforma de dados preenchendo um breve formulário."
+				},
+				{
+					"Name": "Dê seu consentimento"
+				}
+			]
+		}
+	}
+}

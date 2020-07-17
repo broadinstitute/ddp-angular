@@ -48,4 +48,5 @@ export class ConfigurationService {
     compositeRequiredFieldExceptions: QuestionType[] = [];
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
+    defaultLanguageCode: string;
 }

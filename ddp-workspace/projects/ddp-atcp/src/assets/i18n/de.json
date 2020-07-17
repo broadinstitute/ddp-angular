@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "ist eine vererbte neurodegenerative Erkrankung. Bei einem Kind mit AT beginnt im Alter von zwei Jahren ein fortschreitenden Verlust der Muskelkontrolle. Im Alter von neun oder zehn Jahren sind Kinder mit AT gewöhnlich auf einen Rollstuhl angewiesen und haben eine undeutliche Aussprache. Lesen und Schlucken sind ebenfalls schwierig. Etwa 30 Prozent der Kinder mit AT bekommen Krebs, und die meisten haben Probleme mit dem Immunsystem. Obwohl Fortschritte bei der Verlängerung des Lebens von Menschen mit AT durch das Management der Symptome erzielt werden konnten, ist die Krankheit derzeit weiterhin nicht heilbar.",
+			"Title": "Ataxia teleangiectatica (AT)"
+		},
+		"SecondParagraph": {
+			"TextOne": "Geschwister mit AT haben offenbar mehr ähnliche klinische Eigenschaften als Kinder mit AT, die die gleichen Mutationen haben, jedoch aus verschiedenen Familien stammen. Wissenschaftler gehen daher davon aus, dass die Gene einer Familie ? anders als die Gene, die AT verursachen – ändern können, wie sich AT auf Patienten auswirkt. Zudem ist es möglich, dass sich das Leben in verschiedenen Umgebungen, unterschiedliche Lebensstile sowie eine unterschiedliche Ernährungsweise auf die Gesundheit von Menschen mit AT auswirken können.",
+			"TextSecond": "Wir haben kürzlich mehrere Personen identifiziert, die in ihren AT-Genen typische, krankheitsverursachende Mutationen aufwiesen und kein AT-Protein erzeugten (so wie andere Personen mit AT), und dennoch erstaunlich milde AT-Symptome aufwiesen. Wir sind nun optimistisch, dass wir Veränderungen in anderen Genen finden können, welche die AT-Mutationen bei Patienten mit extrem milden Symptomen korrigieren oder kompensieren können. Wenn das gelänge, könnten Forscher neue Wirkstoffe zur Behandlung aller Menschen mit AT entwickeln. Zunächst müssen jedoch die klinischen und genetischen Daten von möglichst vielen AT-Patienten gesammelt werden.",
+			"TextThird": "In ähnlicher Weise können Forscher durch Vergleichen der Krankengeschichten und Lebensstile verschiedener AT-Patienten mehr darüber erfahren, welche Symptom-Management-Strategien die besseren Ergebnisse für die Gesundheit ermöglichen. Zuerst müssen jedoch Daten von AT-Patienten an einem zentralen Ort erfasst und miteinander kombiniert werden.",
+			"Title": "AT wirkt sich individuell auf die Betroffenen aus"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Anmelden auf der Datenplattform",
+					"Text": "Klicken Sie auf \\\"Join Us\\\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
+				},
+				{
+					"Name": "Erteilen des Einverständnisses"
+				}
+			]
+		}
+	}
+}
