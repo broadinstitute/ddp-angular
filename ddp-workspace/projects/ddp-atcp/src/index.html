@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global A-T Family Data Platform | Activate Account Notification</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link id="app-favicon" rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,700italic,400italic,300,300italic' rel='stylesheet'
+  type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600|Source+Serif+Pro:600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=McLaren">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="assets/config/pepperConfig.js"></script>
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', DDP_ENV.projectGAToken, 'auto');
+    ga('create', DDP_ENV.platformGAToken, 'auto', 'platform');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+</head>
+
+<body onload="loadTcell()">
+  <app-root></app-root>
+</body>
+
+<script type="text/javascript">
+  function loadTcell() {
+    var tcellScript = document.createElement('script');
+    tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
+    tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
+    tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
+    tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);
+    tcellScript.async = true;
+    document.body.appendChild(tcellScript);
+  }
+</script>
+
+</html>

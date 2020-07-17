@@ -49,6 +49,7 @@ export class ActivityConverter {
         form.subtitle = input.subtitle;
         form.formType = input.formType;
         form.activityCode = input.activityCode;
+        form.sectionIndex = input.sectionIndex;
         input.lastUpdatedText && (form.lastUpdatedText = input.lastUpdatedText);
         input.lastUpdated && (form.lastUpdated = input.lastUpdated);
         if (_.isUndefined(input.readonlyHint)) {

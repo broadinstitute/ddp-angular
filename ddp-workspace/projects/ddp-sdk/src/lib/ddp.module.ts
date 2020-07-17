@@ -24,6 +24,7 @@ import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
 import { LanguageService } from './services/languageService.service';
+import { FileUploaderComponent } from './components/file-uploader.component';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -176,6 +177,9 @@ import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedi
 import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+import {ActivityProgressBarComponent} from "./components/activityProgressBar.component";
+import {CurrentActivityService} from "./services/activity/currentActivity.service";
+import {ActivityProgressCalculationService} from "./services/activityProgressCalculation.service";
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -289,6 +293,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Title,
     RenewSessionNotifier,
     LanguageService,
+    CurrentActivityService,
+    ActivityProgressCalculationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -308,6 +314,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserActivitiesComponent,
     DashboardComponent,
     ChangeLanguageRedirectComponent,
+    FileUploaderComponent,
 
     // activity form
     ActivityComponent,
@@ -331,6 +338,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
+    ActivityProgressBarComponent,
     InstitutionComponent,
     InstitutionsFormComponent,
     LoadingComponent,
@@ -391,6 +399,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
+    ActivityProgressBarComponent,
 
     InstitutionComponent,
     InstitutionsFormComponent,
@@ -419,7 +428,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+    FileUploaderComponent
   ],
   entryComponents: [
     UserPreferencesComponent,

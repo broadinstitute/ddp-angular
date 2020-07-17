@@ -7,6 +7,7 @@ import { AppState } from './app.component.state';
 import { JoinMailingListComponent } from '../dialogs/joinMailingList.component';
 import { SessionWillExpireComponent } from '../dialogs/sessionWillExpire.component';
 import { WarningComponent } from '../dialogs/warning.component';
+import { ServerMessageComponent} from "../dialogs/serverMessage.component";
 import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { distinctUntilChanged, filter, map, scan, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';

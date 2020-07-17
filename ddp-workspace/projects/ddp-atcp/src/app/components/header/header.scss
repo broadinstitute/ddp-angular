@@ -1,0 +1,128 @@
+@import "../../styles/mixins.scss";
+@import '../../styles/theme.scss';
+@import "../../styles/variables";
+
+.Header {
+  width: 100%;
+  @include flexer(flex, column, center, center);
+  padding: 0 25px 0 25px;
+  z-index: 20;
+  background-color: $blue;
+  @media (min-width: 911px) {
+    flex-direction: row;
+    flex-shrink: 0;
+    padding: 0 40px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 1281px) {
+    padding: 0 50px;
+  }
+
+  .logo {
+    margin: 18px 0 0 0;
+    height: 45px;
+    @media (min-width: 911px) {
+      margin: 18px 0;
+    }
+  }
+
+  nav {
+    margin: 28px 0 0 0;
+    @media (min-width: 666px) {
+      margin: 28px 0 20px 0;
+    }
+
+    > ul {
+      @include flexer(flex, column, center, center);
+      padding: 0;
+      margin: 0;
+      @media (min-width: 666px) {
+        flex-direction: row;
+        margin-bottom: 10px;
+      }
+
+      > li {
+        display: inline !important;
+        padding-left: 20px;
+        text-decoration: none;
+        margin-bottom: 20px;
+        @media (min-width: 666px) {
+          margin-bottom: 0;
+        }
+
+        > a {
+          font-weight: 700;
+          font-size: 16px;
+          color: mat-color($md-primary, A100);
+          transition: color 0.3s ease;
+
+          .fa-globe {
+            margin-right: 5px;
+          }
+        }
+
+        ::ng-deep button {
+          background-color: rgba(0, 0, 0, 0);
+          border: none;
+          color: $white;
+          font-family: Lato, sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 0 0 5px 0;
+
+          &:hover {
+            color: $light-green !important;
+            text-decoration: none;
+          }
+        }
+
+        .dropdown-menu {
+          margin-top: 15px;
+          padding: 0 !important;
+          border-radius: 2px;
+          box-shadow: 0 1px 2px $grey;
+          font-size: 15px;
+          text-align: right;
+
+          a {
+            padding: 10px 20px 10px 20px;
+          }
+
+          &.languages {
+            font-size: 14px;
+            text-align: left !important;
+          }
+        }
+
+        .divider {
+          margin: 0;
+        }
+      }
+    }
+
+    a:hover {
+      color: $light-green !important;
+      text-decoration: none;
+    }
+  }
+}
+
+  ddp-activity-progress-bar {
+    @media (min-width: 911px) {
+      flex-grow: 1;
+      width: 100%;
+    }
+
+  ::ng-deep span {
+    color: mat-color($md-primary, A100);
+  }
+
+  ::ng-deep .mat-progress-bar-buffer {
+    background-color: mat-color($md-primary, A100);
+  }
+
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: $blue-light;
+  }
+}

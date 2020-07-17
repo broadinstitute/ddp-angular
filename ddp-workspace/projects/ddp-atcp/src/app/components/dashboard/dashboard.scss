@@ -1,0 +1,131 @@
+@import '../../styles/buttons';
+@import '../../styles/brushes';
+@import '../../styles/typography';
+
+.dashboard {
+
+  ::ng-deep {
+    .ddp-required-question-prompt {
+      white-space: normal;
+    }
+
+    ol.ddp-list, .inner-ul-flat-list {
+      padding-left: 15px;
+    }
+
+    ul.ddp-list  {
+      label {
+        font-weight: normal;
+      }
+
+      li {
+        margin-bottom: 20px;
+      }
+    }
+
+    mat-list-item {
+
+      height: auto !important;
+      .mat-checkbox-inner-container {
+        margin-top: 0;
+      }
+
+      .mat-checkbox-label {
+        margin-top: -5px;
+      }
+    }
+
+    .mat-list .mat-list-item .mat-list-item-content {
+      display: block !important;
+    }
+
+    .activity-steps {
+      @include steps;
+
+      .activity-step {
+        @include step;
+      }
+    }
+
+    .activity-steps-kids {
+      @include steps;
+      &:after {
+        background-color: $blue;
+      }
+      .activity-step-kids {
+        @include step;
+        border-color: $blue;
+      }
+    }
+
+
+    ddp-activity-dropdown-picklist-question select {
+      margin-bottom: 20px;
+    }
+
+    .mat-checkbox-label {
+      font-weight: normal;
+    }
+  }
+
+  .page-padding {
+    > h1 {
+      display: block;
+      font-size: 26px;
+      font-weight: 700;
+      color: $neutral-gray;
+      margin: 40px 0 20px 0 !important;
+    }
+  }
+
+  .workdir {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 590px) {
+      flex-direction: row;
+      margin-top: 20px;
+    }
+
+    app-workflow-progress {
+      @media (min-width: 590px) {
+        min-width: 36%;
+      }
+      @media (min-width: 768px) {
+        min-width: 33%;
+      }
+      @media (min-width: 992px) {
+        min-width: 25%;
+      }
+    }
+
+
+    ddp-activity-redesigned {
+      padding: 0;
+      flex-grow: 1;
+
+      @media (min-width: 590px) {
+        padding: 0 30px;
+      }
+    }
+
+    &.is-assets {
+
+      ddp-activity-redesigned {
+
+        ::ng-deep {
+          @include font-McLaren();
+
+          .assent-subtitle {
+            padding-bottom: 5px;
+            font-size: 18px;
+          }
+
+          .content.content_tight h1 {
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
+}

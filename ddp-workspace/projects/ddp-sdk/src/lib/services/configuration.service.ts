@@ -43,4 +43,5 @@ export class ConfigurationService {
     adminSessionExpiredUrl = 'admin-session-expired';
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
+    defaultLanguageCode: string;
 }
