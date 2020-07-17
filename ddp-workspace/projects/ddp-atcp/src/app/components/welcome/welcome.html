@@ -1,0 +1,117 @@
+<div class="welcome-page">
+  <div class="main-screen">
+    <div class="first-display">
+      <div>
+        <h1 translate>
+          HomePage.IntroductionSection.Title
+        </h1>
+        <h2 translate>
+          HomePage.IntroductionSection.Text.First
+          <br> HomePage.IntroductionSection.Text.Second
+          <a
+            *ngIf="!isAuthenticated"
+            class="ButtonBordered ButtonBordered--white"
+            [routerLink]="[RouterResource.JoinUs]"
+            translate>
+            Common.Navigation.JoinUs
+          </a>
+          <a
+            *ngIf="isAuthenticated"
+            class="ButtonBordered ButtonBordered--white"
+            [routerLink]="[RouterResource.Console]"
+            translate>
+            Common.Navigation.YourParticipants
+          </a>
+        </h2>
+      </div>
+      <img alt="Arrow"
+           src="/assets/images/atcp/white-arrow.svg"
+           class="reference-together"
+           (click)="scrollTo(join)">
+    </div>
+  </div>
+  <div class="second-display" #join>
+    <h2 translate>HomePage.SecondSection.Title</h2>
+    <a
+      *ngIf="!isAuthenticated"
+      class="ButtonBordered ButtonBordered--green"
+      [routerLink]="[RouterResource.JoinUs]"
+      translate>
+      Common.Navigation.JoinUs
+    </a>
+    <a
+      *ngIf="isAuthenticated"
+      class="ButtonBordered ButtonBordered--green"
+      [routerLink]="[RouterResource.Console]"
+      translate>
+      Common.Navigation.YourParticipants
+    </a>
+    <img alt="Arrow"
+         src="/assets/images/atcp/green-arrow.svg"
+         class="reference-together"
+         (click)="scrollTo(participate)">
+  </div>
+  <div class="participate-display" #participate>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step01-icon.svg" alt=""></div>
+      <div class="description">
+        <h2 translate>HomePage.Participate.Steps.One.H2</h2>
+        <h3 translate>HomePage.Participate.Steps.One.H3</h3>
+        <div translate>HomePage.Participate.Steps.One.Text</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step02-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Second.H3</h3>
+        <div translate>
+          HomePage.Participate.Steps.Second.Text
+          <ul>
+            <li *ngFor="let text of list">{{text}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step03-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Third.H3</h3>
+        <div translate>HomePage.Participate.Steps.Third.Text</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number"><img src="/assets/images/atcp/step04-icon.svg" alt=""></div>
+      <div class="description">
+        <h3 translate>HomePage.Participate.Steps.Fourth.H3</h3>
+        <div translate>
+          HomePage.Participate.Steps.Fourth.Text.First
+          <br>
+          HomePage.Participate.Steps.Fourth.Text.Second
+        </div>
+      </div>
+    </div>
+  </div>
+  <img alt="Arrow"
+       src="/assets/images/atcp/green-arrow.svg"
+       class="reference-together"
+       (click)="scrollTo(together)">
+  <div class="together-display" #together>
+    <h3 translate>
+      HomePage.Participate.Together.H3.First <br> HomePage.Participate.Together.H3.Second
+    </h3>
+    <a
+      *ngIf="!isAuthenticated"
+      class="ButtonBordered ButtonBordered--green"
+      [routerLink]="[RouterResource.JoinUs]"
+      translate>
+      Common.Navigation.JoinUs
+    </a>
+    <a
+      *ngIf="isAuthenticated"
+      class="ButtonBordered ButtonBordered--green"
+      [routerLink]="[RouterResource.Console]"
+      translate>
+      Common.Navigation.YourParticipants
+    </a>
+  </div>
+</div>

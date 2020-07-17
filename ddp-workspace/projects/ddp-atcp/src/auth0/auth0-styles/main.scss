@@ -1,0 +1,360 @@
+//./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/auth0-styles/main.css --style compressed
+
+@import '../../app/components/header/header';
+@import '../../app/components/footer/footer';
+
+a, a:active, a:focus, a:hover, a:link {
+  text-decoration: none !important;
+  outline: 0 !important;
+}
+
+b {
+  font-weight: 700
+}
+
+.form-group.error .FormItem-label {
+  color: #DB2C2C !important;
+}
+
+.form-group.error input {
+  border: 1px solid #DB2C2C !important;
+  border-left: 3px solid #DB2C2C !important;
+}
+
+.form-group .message {
+  display: none;
+}
+
+.form-group.error .message {
+  display: block;
+  color: #DB2C2C !important;
+}
+
+.tooltip.right {
+  top: -44px;
+  left: 100%;
+  display: block;
+  margin-left: 3px;
+  padding: 0 5px;
+}
+
+.tooltip-inner {
+  min-width: 300px !important;
+  padding: 10px 10px 10px 15px;
+  color: #346391;
+  text-align: left;
+  background-color: #eee;
+  border-radius: 2px;
+  font-family: Lato, sans-serif;
+  font-size: 13px
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #eee;
+  left: 50% !important
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-right-color: #eee;
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #eee !important;
+  top: 50%;
+}
+
+.tooltip.bottom {
+  left: 0 !important
+}
+
+.Italic {
+  font-style: italic !important
+}
+
+.Normal {
+  font-weight: 400 !important
+}
+
+.BlueColor {
+  color: #4274bc
+}
+
+.NoPadding {
+  padding: 0 !important
+}
+
+.NoMargin {
+  margin: 0 !important
+}
+
+.AlignedLeft {
+  text-align: left !important
+}
+
+.AlignedCenter {
+  text-align: center
+}
+
+.OverLine {
+  position: relative;
+  margin: 30px 0 30px 0
+}
+
+.OverLine-comment {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  background: #fff;
+  padding: 0 10px;
+  margin-left: -22px
+}
+
+.OverLine-line {
+  margin: 0 !important
+}
+
+.Line--dark {
+  border-color: #afafaf
+}
+
+.Line--noBottom {
+  margin-bottom: 0 !important
+}
+
+.BtnBordered {
+  padding: 7px 20px 9px 20px;
+  border-radius: 2px;
+  border: 1px solid !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  transition: border .3s ease, color .3s ease;
+  cursor: pointer !important
+}
+
+.BtnBordered:active, .BtnBordered:visited {
+  background-color: #fff !important
+}
+
+.BtnBordered--neutral a {
+  color: #7f7f7f !important
+}
+
+.BtnFilled {
+  padding: 8px 20px 10px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  text-align: center;
+  transition: background .3s ease, color .3s ease;
+  color: #fff !important;
+  border: none;
+}
+
+.BtnFilled--blue {
+  margin-top: 15px;
+  background: #4274bc;
+  border: none;
+  outline: none;
+}
+
+.BtnFilled--blue:hover {
+  background: #559be0;
+  border: none;
+}
+
+.BtnFilled--blue:active {
+  background: #346391;
+  border: none;
+}
+
+.BtnFilled--red {
+  display: inline-block;
+  background: #db2c2c;
+  text-decoration: none;
+}
+
+.BtnFilled--red:hover {
+  background: #559be0;
+  text-decoration: none;
+}
+
+.BtnFilled--red:active {
+  background: #db2c2c;
+  text-decoration: none;
+}
+
+.SignHelp {
+  text-align: center;
+  font-size: 13px;
+  padding-top: 15px !important;
+  color: #4274bc
+}
+
+.SignHelp:hover {
+  color: #559be0
+}
+
+.Title {
+  font-size: 24px;
+  font-weight: 700;
+  display: inline;
+  padding: 20px 0 15px 0 !important
+}
+
+.Subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  padding-bottom: 5px;
+  margin-top: 10px
+}
+
+.Subtitle--light {
+  font-weight: 300
+}
+
+.NoticesModal {
+  padding: 0
+}
+
+.NoticesModal .modal-content, .NoticesModal .modal-dialog {
+  border-radius: 0 !important
+}
+
+.NoticesModal-body {
+  position: relative;
+  border-radius: 0;
+  padding: 0
+}
+
+.NoticesModal .close {
+  position: absolute;
+  right: 15px;
+  top: 10px
+}
+
+.NoticesModal-text {
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 25px
+}
+
+.NoticesModal--success {
+  color: #666;
+  padding: 25px 25px 25px 0;
+  border-left: 10px solid #5cb85c;
+  background-color: #eaf6ea
+}
+
+.NoticesModal--danger {
+  color: #666;
+  padding: 25px 25px 25px 0;
+  border-left: 10px solid #d9534f;
+  background-color: #fdf7f7
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.SimpleButton {
+  background: 0 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #1d1b25;
+  text-decoration: none;
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  font-family: inherit;
+  white-space: nowrap
+}
+
+.SimpleButton:hover {
+  color: #bbbbbe;
+  text-decoration: underline
+}
+
+.SimpleButton:focus {
+  text-decoration: underline
+}
+.FormItem-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666
+}
+.FormItem-label-email {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.FormItem-help {
+  color: #559BE0;
+  font-size: 12px;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.FormItem-help:hover,
+.FormItem-help:focus,
+.FormItem-help:active {
+  text-decoration: none;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%
+}
+
+body {
+  font-family: Lato, sans-serif;
+  font-size: 16px
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}
+
+.path {
+  height: 0;
+  overflow: hidden;
+}
+
+.visible {
+  height: auto;
+  overflow: unset;
+  margin: 45px 25px 0 25px;
+}
+
+@media only screen and (min-width: 800px) {
+  .visible {
+    margin: 45px 40px 0 40px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .visible {
+    margin: 30px 30px 0 45px;
+  }
+}
+
+.not-visible {
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.footer-container {
+  margin-top: auto;
+}

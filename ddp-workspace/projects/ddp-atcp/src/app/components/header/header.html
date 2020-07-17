@@ -1,0 +1,111 @@
+<header class="Header">
+  <a [routerLink]="['/' + RouterResource.Welcome]">
+    <img class="logo"
+         alt="A-T Portal Logo"
+         src="/assets/images/atcp/original-logo-white.svg">
+  </a>
+  <nav>
+    <ul>
+      <li class="dropdown">
+        <a class="dropdown-toggle"
+           data-toggle="dropdown"
+           href="#"
+           translate>
+          <i class="fa fa-globe language-dropdown"></i>Common.Navigation.Language
+          <i class="caret"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right languages">
+          <li *ngFor="let language of languages; trackBy: trackByFn"
+              [attr.id]="language.code">
+            <a class="green-hover" (click)="changeLanguage(language)">
+              {{ language.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="Link dropdown-toggle"
+           data-toggle="dropdown"
+           href="#"
+           translate>
+          Common.Navigation.ForResearchers
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <a [routerLink]="['/' + RouterResource.DataAccess]"
+               translate>
+              Common.Navigation.DataAccessRequest
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle"
+           data-toggle="dropdown"
+           role="button"
+           aria-haspopup="true"
+           aria-expanded="false"
+           href="#"
+           translate>
+          Common.Navigation.LearnMore<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right dropdown">
+          <li>
+            <a id="about_us"
+               [routerLink]="['/' + RouterResource.AboutUs]"
+               translate>
+              Common.Navigation.AboutUs
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a id="about_initiative"
+               [routerLink]="['/' + RouterResource.AboutInitiative]"
+               translate>Common.Navigation.AboutThisInitiative</a>
+          </li>
+          <li *ngIf="isAuthenticated">
+            <a id="statistics"
+               [routerLink]="['/' + RouterResource.Statistics]"
+               translate>Common.Navigation.Statistics</a>
+          </li>
+        </ul>
+      </li>
+      <li *ngIf="!isAuthenticated" >
+        <a class="ButtonBordered ButtonBordered--white"
+           id="join-us-nav"
+           [routerLink]="['/' + RouterResource.JoinUs]"
+           translate>
+          Common.Navigation.JoinUs
+        </a>
+      </li>
+      <li class="dropdown" *ngIf="isAuthenticated">
+        <a class="dropdown-toggle"
+           data-toggle="dropdown"
+           role="button"
+           aria-haspopup="true"
+           aria-expanded="false"
+           href="#"
+           translate>
+          Common.Navigation.MyAccount<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right dropdown">
+          <li>
+            <a id="console"
+               [routerLink]="['/' + RouterResource.Console]"
+               translate>
+              Common.Navigation.YourParticipants
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ddp-sign-in-out [signInCaption]="SignIn"></ddp-sign-in-out>
+      </li>
+    </ul>
+  </nav>
+  <ddp-activity-progress-bar
+    title="Common.Navigation.MedicalHistoryQuestionnaire"
+    *ngIf="isProgressBarVisible"
+    automation-id="activity-progress-bar"></ddp-activity-progress-bar>
+</header>

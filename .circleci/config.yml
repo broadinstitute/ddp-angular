@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain brain-v2 angio mbc testboston mpc"
+    "osteo brain brain-v2 angio mbc testboston mpc atcp"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc"
+      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc atcp"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
@@ -434,6 +434,8 @@ jobs:
           study_key: brain-v2
       - conditionally-launch-build-and-store:
           study_key: mpc
+      - conditionally-launch-build-and-store:
+          study_key: atcp
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -530,6 +532,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: mpc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: atcp
 
   nightly:
     triggers:
@@ -561,3 +566,6 @@ workflows:
       - build-and-deploy-job:
           name: mpc-nightly
           study_key: mpc
+      - build-and-deploy-job:
+          name: atcp-nightly
+          study_key: atcp
