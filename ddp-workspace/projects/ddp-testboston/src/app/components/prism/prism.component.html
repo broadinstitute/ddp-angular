@@ -69,9 +69,9 @@
                         </div>
                         <p class="title" translate>Prism.Steps.Step3.Title</p>
                         <div class="navigate">
-                            <button class="button button_primary" (click)="enrollSubject()">
-                                {{'Prism.Buttons.Enrollment' | translate}}
-                            </button>
+                            <a class="button button_primary" [routerLink]="'/' + appRoutes.EnrollSubject" translate>
+                                Prism.Buttons.Enrollment
+                            </a>
                         </div>
                     </ng-container>
                     <!-- Enrolled subject's form -->
@@ -83,8 +83,7 @@
                             </p>
                         </div>
                         <div class="navigate">
-                            <a class="button button_primary" (click)="setSelectedSubject()"
-                                [routerLink]="'/' + appRoutes.Dashboard" translate>
+                            <a class="button button_primary" [routerLink]="'/' + appRoutes.Dashboard" translate>
                                 Prism.Buttons.Dashboard
                             </a>
                         </div>

@@ -66,7 +66,7 @@ export class JoinUsComponent implements OnInit {
 
   private fetchActivity(): void {
     if (this.session.isAuthenticatedSession()) {
-      this.workflow.getStart(this.studyGuid).pipe(take(1)).subscribe((response: ActivityResponse | null) => {
+      this.workflow.getStart().pipe(take(1)).subscribe((response: ActivityResponse | null) => {
         if (response && response.instanceGuid) {
           this.instanceGuid = response.instanceGuid;
         }
@@ -75,7 +75,7 @@ export class JoinUsComponent implements OnInit {
       this.temporaryUserService.createTemporaryUser(this.configuration.auth0ClientId).pipe(
         filter(x => x !== null),
         map((user: TemporaryUser) => this.session.setTemporarySession(user)),
-        mergeMap(() => this.workflow.getStart(this.studyGuid)),
+        mergeMap(() => this.workflow.getStart()),
         take(1)
       ).subscribe((response: ActivityResponse | null) => {
         if (response && response.instanceGuid) {

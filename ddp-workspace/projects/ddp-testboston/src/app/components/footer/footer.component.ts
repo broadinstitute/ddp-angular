@@ -15,6 +15,7 @@ export class FooterComponent implements OnInit {
   public phoneHref: string;
   public emailHref: string;
   public appRoutes = AppRoutes;
+  public showLanguageColumn = true;
 
   constructor(
     private session: SessionMementoService,
@@ -35,8 +36,12 @@ export class FooterComponent implements OnInit {
   public scrollToAnchor(anchor: string): void {
     this.scrollerService.scrollToAnchor(anchor);
   }
-  
+
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession() || this.session.isAuthenticatedAdminSession();
+  }
+
+  public handleLanguageVisibility(visible: boolean): void {
+    this.showLanguageColumn = visible;
   }
 }

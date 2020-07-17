@@ -66,7 +66,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
           {{ element.createdAt | date: 'MM/dd/yyyy' }}
         </mat-cell>
       </ng-container>
-      
+
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate">
@@ -96,7 +96,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
           <button *ngIf="!element.readonly"
                   class="ButtonFilled Button--cell button button_small button_primary"
                   (click)="openActivity(element.instanceGuid, element.activityCode)"
-                  [innerHTML]="'SDK.EditButton' | translate">
+                  [innerHTML]="isActivityCompleted(element.statusCode) ? ('SDK.CompleteButton' | translate) : ('SDK.EditButton' | translate)">
           </button>
           <button *ngIf="element.readonly"
                   class="ButtonBordered ButtonBordered--orange Button--cell button button_small button_secondary"
@@ -251,6 +251,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     }
     const caption = this.states.find(x => x.code === code);
     return caption != null ? caption.name : '';
+  }
+
+  public isActivityCompleted(statusCode: string): boolean {
+    return this.config.dashboardActivitiesCompletedStatuses.includes(statusCode);
   }
 
   private doAnalytics(action: string): void {

@@ -42,6 +42,7 @@ export * from './lib/models/ddpError';
 export * from './lib/models/errorType';
 export * from './lib/models/dashboardColumns';
 export * from './lib/models/studySubject';
+export * from './lib/models/invitationType';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
@@ -69,17 +70,14 @@ export * from './lib/services/renewSessionNotifier.service';
 export * from './lib/services/scriptLoader.service';
 export * from './lib/services/serviceAgents/governedParticipantsServiceAgent.service';
 export * from './lib/services/languageService.service';
-
 export * from './lib/services/serviceAgents/invitationServiceAgent.service';
 export * from './lib/services/serviceAgents/subjectInvitationServiceAgent.service';
-
-export * from './lib/services/serviceAgents/invitationServiceAgent.service';
-export * from './lib/services/serviceAgents/subjectInvitationServiceAgent.service';
+export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
 export * from './lib/services/activity/currentActivity.service';
-
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
+export * from './lib/components/changeLanguageRedirect.component';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';
@@ -87,5 +85,4 @@ export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
 
 export * from './lib/compositeDisposable';
-
 export * from './lib/constants/activityCodes';

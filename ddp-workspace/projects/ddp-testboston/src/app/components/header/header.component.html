@@ -31,20 +31,18 @@
                 </li>
             </ul>
         </nav>
-        <div class="auth">
-            <a class="header-link auth__dashboard" href="kit-instructions.pdf" target="_blank" translate>
+        <div class="static-menu">
+            <a class="header-link static-menu__item" href="kit-instructions.pdf" target="_blank" translate>
                 <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
                 Navigation.KitInstructions
             </a>
-            <div class="auth__dashboard" *ngIf="isAuthenticated">
+            <div class="static-menu__item" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </div>
-            <div *ngIf="headerConfig.showLoginButton" class="auth__dashboard">
+            <div *ngIf="headerConfig.showLoginButton" [ngClass]="{'static-menu__item': languageSelectorShown}">
                 <ddp-sign-in-out></ddp-sign-in-out>
             </div>
-            <!-- replace with real language selector component when when it is done -->
-            <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-            <!-- replace with real language selector component when when it is done -->
+            <ddp-language-selector (isVisible)="handleLanguageVisibility($event)"></ddp-language-selector>
         </div>
         <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
@@ -104,9 +102,7 @@
                     <ddp-sign-in-out></ddp-sign-in-out>
                 </li>
                 <li class="menu__item">
-                    <!-- replace with real language selector component when when it is done -->
-                    <ng-container *ngTemplateOutlet="languageButton"></ng-container>
-                    <!-- replace with real language selector component when when it is done -->
+                    <ddp-language-selector></ddp-language-selector>
                 </li>
             </div>
         </ul>
@@ -139,15 +135,6 @@
         <span translate>Navigation.Dashboard</span>
     </a>
 </ng-template>
-
-<!-- replace with real language selector component when when it is done -->
-<ng-template #languageButton>
-    <div class="language">
-        <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
-        <span>English</span>
-    </div>
-</ng-template>
-<!-- replace with real language selector component when when it is done -->
 
 <header *ngIf="isAdmin" class="header header_crc" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">

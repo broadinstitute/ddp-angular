@@ -21,6 +21,9 @@ import { ActivityCodes } from '../../constants/activityCodes';
   template: `
   <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
         <ng-container *ngIf="isLoaded && model">
+            <section class="section">
+                <ddp-subject-panel></ddp-subject-panel>
+            </section>
             <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
                 <div class="content content_tight">
                     <div class="sticky-block" [innerHTML]="model.subtitle"></div>

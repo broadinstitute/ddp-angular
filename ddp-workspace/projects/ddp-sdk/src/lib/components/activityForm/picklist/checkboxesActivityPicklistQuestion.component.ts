@@ -6,8 +6,8 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
 @Component({
-  selector: 'ddp-activity-checkboxes-picklist-question',
-  template: `
+    selector: 'ddp-activity-checkboxes-picklist-question',
+    template: `
     <mat-list *ngIf="block.picklistOptions.length">
         <ng-container *ngFor="let option of block.picklistOptions">
             <ng-container *ngTemplateOutlet="item; context: {option: option}">
@@ -36,8 +36,8 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [disableRipple]="true"
                           (change)="optionChanged($event.checked, option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
               <span [innerHTML]="option.optionLabel"></span>
-              <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
-           </mat-checkbox>
+                <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
+            </mat-checkbox>
             <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
                 <mat-form-field matLine>
                     <input matInput
@@ -57,7 +57,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
         </mat-list-item>
     </ng-template>
     `,
-  styles: [`
+    styles: [`
     :host ::ng-deep
     .mat-list .mat-list-item .mat-list-text,
     .mat-list .mat-list-item .mat-line {
@@ -82,116 +82,116 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     `]
 })
 export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
-  /**
-   * If an option is marked exclusive, then when it's selected all other options should be de-selected.
-   */
-  private exclusiveChosen = false;
+    /**
+     * If an option is marked exclusive, then when it's selected all other options should be de-selected.
+     */
+    private exclusiveChosen = false;
 
-  // map of question stableId + option stable id -> detail text used to save detail text
-  // in browser even when option is not selected
-  private cachedDetailTextForQuestionAndOption: Record<string, string> = {};
+    // map of question stableId + option stable id -> detail text used to save detail text
+    // in browser even when option is not selected
+    private cachedDetailTextForQuestionAndOption: Record<string, string> = {};
 
-  constructor(private translate: NGXTranslateService) {
-    super(translate);
-  }
+    constructor(private translate: NGXTranslateService) {
+        super(translate);
+    }
 
-  public ngOnInit(): void {
-    this.exclusiveChosen = this.hasSelectedExclusiveOption();
-  }
+    public ngOnInit(): void {
+        this.exclusiveChosen = this.hasSelectedExclusiveOption();
+    }
 
-  public setDetailText(id: string): string | null {
-    let text: string | null = null;
-    const questionOptionDetailKey = this.getQuestionOptionDetailKey(id);
-    if (this.block.answer) {
-      this.block.answer.filter((item) => {
-        return item.stableId === id;
-      }).forEach((item) => {
-        text = item.detail;
-        if (text) {
-          this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey] = text;
+    public setDetailText(id: string): string | null {
+        let text: string | null = null;
+        const questionOptionDetailKey = this.getQuestionOptionDetailKey(id);
+        if (this.block.answer) {
+            this.block.answer.filter((item) => {
+                return item.stableId === id;
+            }).forEach((item) => {
+                text = item.detail;
+                if (text) {
+                    this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey] = text;
+                }
+            });
         }
-      });
-    }
-    if (text === null) {
-      if (this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey]) {
-        text = this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey];
-      }
-    }
-    return text;
-  }
-
-  public detailTextChanged(value: string, id: string): void {
-    if (this.block.answer) {
-      this.block.answer.forEach((item, i) => {
-        if (item.stableId === id) {
-          this.block.answer[i].detail = value;
-          this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionDetailKey(id)] = value;
+        if (text === null) {
+            if (this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey]) {
+                text = this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey];
+            }
         }
-      });
-      this.valueChanged.emit(this.block.answer);
+        return text;
     }
-  }
 
-  public getOptionSelection(id: string): boolean {
-    let selected = false;
-    if (this.block.answer) {
-      this.block.answer.forEach((item) => {
-        if (item.stableId === id) {
-          selected = true;
+    public detailTextChanged(value: string, id: string): void {
+        if (this.block.answer) {
+            this.block.answer.forEach((item, i) => {
+                if (item.stableId === id) {
+                    this.block.answer[i].detail = value;
+                    this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionDetailKey(id)] = value;
+                }
+            });
+            this.valueChanged.emit(this.block.answer);
         }
-      });
     }
-    return selected;
-  }
 
-  public optionChanged(value: boolean, option: ActivityPicklistOption): void {
-    const { exclusive, stableId } = option;
-    if (this.block.answer === null) {
-      this.block.answer = this.createAnswer();
-    }
-    if (exclusive) {
-      this.block.answer = [];
-      this.exclusiveChosen = true;
-    } else if (!exclusive && this.exclusiveChosen) {
-      this.block.answer = [];
-      this.exclusiveChosen = false;
-    }
-    const answer = {} as ActivityPicklistAnswerDto;
-    answer.stableId = stableId;
-    answer.detail = this.setDetailText(stableId);
-    if (value) {
-      if (this.block.selectMode === PicklistSelectMode.SINGLE) {
-        this.block.answer = [];
-      }
-      this.block.answer.push(answer);
-    } else {
-      const index = this.answerIndex(stableId);
-      this.block.answer.splice(index, 1);
-    }
-    this.valueChanged.emit(this.block.answer);
-  }
-
-  private createAnswer(): Array<ActivityPicklistAnswerDto> {
-    return new Array<ActivityPicklistAnswerDto>();
-  }
-
-  private answerIndex(id: string): number {
-    let index = -1;
-    if (this.block.answer) {
-      this.block.answer.forEach((item, i) => {
-        if (item.stableId === id) {
-          index = i;
+    public getOptionSelection(id: string): boolean {
+        let selected = false;
+        if (this.block.answer) {
+            this.block.answer.forEach((item) => {
+                if (item.stableId === id) {
+                    selected = true;
+                }
+            });
         }
-      });
+        return selected;
     }
-    return index;
-  }
 
-  /**
-   * Makes a key of question stable id and option stable id
-   * to squirrel away the detail text when value is unselected
-   */
-  private getQuestionOptionDetailKey(optionStableId: string): string {
-    return this.block.stableId + '.' + optionStableId;
-  }
+    public optionChanged(value: boolean, option: ActivityPicklistOption): void {
+        const { exclusive, stableId } = option;
+        if (this.block.answer === null) {
+            this.block.answer = this.createAnswer();
+        }
+        if (exclusive) {
+            this.block.answer = [];
+            this.exclusiveChosen = true;
+        } else if (!exclusive && this.exclusiveChosen) {
+            this.block.answer = [];
+            this.exclusiveChosen = false;
+        }
+        const answer = {} as ActivityPicklistAnswerDto;
+        answer.stableId = stableId;
+        answer.detail = this.setDetailText(stableId);
+        if (value) {
+            if (this.block.selectMode === PicklistSelectMode.SINGLE) {
+                this.block.answer = [];
+            }
+            this.block.answer.push(answer);
+        } else {
+            const index = this.answerIndex(stableId);
+            this.block.answer.splice(index, 1);
+        }
+        this.valueChanged.emit(this.block.answer);
+    }
+
+    private createAnswer(): Array<ActivityPicklistAnswerDto> {
+        return new Array<ActivityPicklistAnswerDto>();
+    }
+
+    private answerIndex(id: string): number {
+        let index = -1;
+        if (this.block.answer) {
+            this.block.answer.forEach((item, i) => {
+                if (item.stableId === id) {
+                    index = i;
+                }
+            });
+        }
+        return index;
+    }
+
+    /**
+     * Makes a key of question stable id and option stable id
+     * to squirrel away the detail text when value is unselected
+     */
+    private getQuestionOptionDetailKey(optionStableId: string): string {
+        return this.block.stableId + '.' + optionStableId;
+    }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
-import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap, skip } from 'rxjs/operators';
+import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -29,6 +29,7 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.initSearchListener();
     this.initZipListener();
     this.initNotesListener();
+    this.setInvitationIdInitialValue();
   }
 
   public ngOnDestroy(): void {
@@ -47,14 +48,9 @@ export class PrismComponent implements OnInit, OnDestroy {
     return this.error && this.error.errorType === errorType;
   }
 
-  public setSelectedSubject(): void {
-    this.sessionService.setParticipant(this.studySubject.userGuid);
-    this.sessionService.setInvitationId(this.studySubject.invitationId);
-  }
-
-  public enrollSubject(): void {
-    // TBD
-    alert(`Error: enrollment isn’t supported right now.`);
+  public setSubject(invitationId: string | null = null, userGuid: string | null = null): void {
+    this.sessionService.setInvitationId(invitationId);
+    this.sessionService.setParticipant(userGuid);
   }
 
   private initPrismForm(): void {
@@ -67,6 +63,13 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private setNotesInitialValue(notes: string): void {
     this.prismForm.controls.notes.patchValue(notes);
+  }
+
+  private setInvitationIdInitialValue(): void {
+    const invitationId = this.sessionService.session.invitationId;
+    if (invitationId) {
+      this.prismForm.controls.invitationId.patchValue(invitationId);
+    }
   }
 
   private resetAdditionalFields(): void {
@@ -84,6 +87,7 @@ export class PrismComponent implements OnInit, OnDestroy {
         this.studySubject = null;
         this.isInvitationLoading = false;
         this.resetAdditionalFields();
+        this.setSubject();
       }),
       filter(invitationId => this.prismForm.controls.invitationId.valid && !!invitationId),
       tap(() => this.isInvitationLoading = true),
@@ -93,6 +97,7 @@ export class PrismComponent implements OnInit, OnDestroy {
       if (response && this.prismForm.controls.invitationId.valid) {
         this.studySubject = response;
         this.setNotesInitialValue(response.notes);
+        this.setSubject(response.invitationId, response.userGuid);
       } else if (response === null && this.prismForm.controls.invitationId.valid) {
         this.error = new DdpError('', ErrorType.InvitationNotFound);
       }
@@ -102,8 +107,7 @@ export class PrismComponent implements OnInit, OnDestroy {
 
   private initNotesListener(): void {
     const note = this.prismForm.controls.notes.valueChanges.pipe(
-      filter(() => this.studySubject !== null),
-      skip(1),
+      filter((notes) => this.studySubject !== null && this.studySubject.notes !== notes),
       debounceTime(200),
       distinctUntilChanged(),
       concatMap(notes => this.subjectInvitation.updateInvitationDetails(this.studySubject.invitationId, notes))

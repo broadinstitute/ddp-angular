@@ -14,7 +14,9 @@ export const AppRoutes = {
     Prism: 'prism',
     Password: 'password',
     SessionExpired: 'session-expired',
+    AdminSessionExpired: 'admin-session-expired',
     Privacy: 'privacy-policy',
     Address: 'mailing-address',
-    PasswordResetDone: 'password-reset-done'
+    PasswordResetDone: 'password-reset-done',
+    EnrollSubject: 'enrollment'
 };

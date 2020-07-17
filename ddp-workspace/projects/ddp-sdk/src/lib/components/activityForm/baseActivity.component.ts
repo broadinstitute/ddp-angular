@@ -21,6 +21,7 @@ import {
     withLatestFrom
 } from 'rxjs/operators';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import {CurrentActivityService} from "../../services/activity/currentActivity.service";
 
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
@@ -30,17 +31,15 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
     @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
-
     protected embeddedComponentsValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
     protected workflow: WorkflowServiceAgent;
     protected submissionManager: SubmissionManager;
     protected router: Router;
+    protected config: ConfigurationService;
     public model: ActivityForm;
     public validationRequested = false;
-
     public isLoaded = false;
-
     public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
@@ -60,6 +59,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
+        this.config = injector.get('ddp.config');
         this.currentActivityService = injector.get(CurrentActivityService);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
@@ -69,8 +69,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-        for (const propName in changes)
-        {
+        for (const propName in changes) {
             if (propName === 'studyGuid' || propName === 'activityGuid') {
               this.isLoaded = false;
               this.resetValidationState();
@@ -131,7 +130,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected navigateToErrorPage(): void {
-        this.router.navigateByUrl('/error');
+        this.router.navigateByUrl(this.config.errorPageUrl);
     }
 
     public refresh(): void {
@@ -195,7 +194,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public close(): void {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl(this.config.dashboardPageUrl);
     }
 
     public navigateToConsole(): void {
@@ -227,7 +226,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected nextWorkflowActivity(): void {
-        this.workflow.getNext(this.studyGuid)
+        this.workflow.getNext()
             .pipe(take(1))
             .subscribe(response => this.submit.emit(response));
     }

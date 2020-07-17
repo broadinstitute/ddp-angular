@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
@@ -71,7 +72,7 @@ import { ActivityComponentConverter } from './services/activity/activityComponen
 import { ActivityValidatorBuilder } from './services/activity/activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './services/activity/activitySuggestionBuilder.service';
 import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectInvitationServiceAgent.service';
-
+import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
@@ -161,6 +162,7 @@ import { ConditionalBlockComponent } from './components/activityForm/conditional
 import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
+import { SubjectPanelComponent } from './components/subjectPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
@@ -171,6 +173,7 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
 import { LanguageSelectorComponent } from "./components/languageSelector.component";
+import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedirect.component";
 import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
@@ -237,7 +240,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         useFactory: jwtOptionsFactory,
         deps: [SessionMementoService]
       }
-    })
+    }),
+    RouterModule
   ],
   providers: [
     AuthGuard,
@@ -282,6 +286,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     IrbPasswordService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
+    UserInvitationServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
     InvitationServiceAgent,
@@ -308,6 +313,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserPreferencesComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
     FileUploaderComponent,
 
     // activity form
@@ -357,7 +363,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     RouteTransformerDirective,
     InvitationCodeFormatterDirective,
     InvitationPipe,
-    TooltipComponent
+    TooltipComponent,
+    SubjectPanelComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -369,6 +376,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ParticipantProfileComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
 
     ActivityComponent,
     ActivityRedesignedComponent,
@@ -420,6 +428,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
+    SubjectPanelComponent,
     FileUploaderComponent
   ],
   entryComponents: [

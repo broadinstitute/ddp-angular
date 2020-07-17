@@ -1,10 +1,10 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from "@angular/core";
-import { StudyLanguage } from "../models/studyLanguage";
-import { ConfigurationService } from "../services/configuration.service";
-import { LanguageService} from "../services/languageService.service";
-import { LanguageServiceAgent } from "../services/serviceAgents/languageServiceAgent.service";
-import { isNullOrUndefined } from "util";
-import { Subscription } from "rxjs";
+import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { StudyLanguage } from '../models/studyLanguage';
+import { ConfigurationService } from '../services/configuration.service';
+import { LanguageService } from '../services/languageService.service';
+import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
+import { isNullOrUndefined } from 'util';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -18,8 +18,8 @@ import { Subscription } from "rxjs";
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
         <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
       </button>
-      
-      <mat-menu #menu="matMenu">
+
+      <mat-menu #menu="matMenu" class="language-menu">
         <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
       </mat-menu>
     </div>
@@ -27,17 +27,17 @@ import { Subscription } from "rxjs";
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
   @Input() isScrolled: boolean;
+  @Output() isVisible: EventEmitter<boolean> = new EventEmitter();
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
   public iconURL: string;
   private studyLanguages: StudyLanguage[];
   private anchor: Subscription;
 
-  constructor (
+  constructor(
     private serviceAgent: LanguageServiceAgent,
     private language: LanguageService,
-    @Inject('ddp.config') private config: ConfigurationService
-  ) { }
+    @Inject('ddp.config') private config: ConfigurationService) { }
 
   public ngOnInit(): void {
     this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : "assets/images/globe.svg#Language-Selector-3";
@@ -49,10 +49,14 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
           this.language.addLanguages(this.studyLanguages.map(x => x.languageCode));
           if (this.findCurrentLanguage()) {
             this.loaded = true;
+            this.isVisible.emit(true);
           }
+        } else {
+          this.isVisible.emit(false);
         }
       } else {
         console.error('Error: no configured language list was returned.');
+        this.isVisible.emit(false);
       }
     });
   }
@@ -65,7 +69,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     if (!isNullOrUndefined(this.studyLanguages)) {
       return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
     }
-   return null;
+    return null;
   }
 
   public changeLanguage(lang: StudyLanguage): void {

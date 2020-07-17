@@ -50,7 +50,7 @@
 
 .nav {
     width: 100%;
-    margin-left: 2.5rem;
+    margin-left: 5rem;
 }
 
 .navigation {
@@ -111,18 +111,18 @@
     text-decoration: underline;
 }
 
-.auth {
+.static-menu {
     display: flex;
     align-items: center;
 
-    &__dashboard {
+    &__item {
         margin-right: 1.8rem;
     }
 }
 
 .menu-button {
     display: none;
-    margin-left: 2rem;
+    margin-left: 1.8rem;
 
     .SimpleButton {
         font-size: 16px;
@@ -170,6 +170,10 @@
     &_visible {
         height: 100%;
     }
+
+    &_overflow {
+        overflow-y: auto;
+    }
 }
 
 .overlay-content {
@@ -205,6 +209,20 @@
     }
 }
 
+@media only screen and (max-width: 1400px) {
+    .nav {
+        margin-left: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 1370px) {
+
+    .static-menu__item,
+    .navigation__item {
+        margin-right: 1.5rem;
+    }
+}
+
 @media only screen and (max-width: 1350px) {
     .navigation {
         display: none;
@@ -215,27 +233,13 @@
     }
 }
 
-@media only screen and (max-width: 1370px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 1.5rem;
-    }
-}
-
 @media only screen and (max-width: 1290px) {
-
-    .auth__dashboard,
-    .navigation__item {
-        margin-right: 1.5rem;
-    }
-
     .nav {
         margin-left: 2.5rem;
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 910px) {
     .project-logo {
         &__img {
             height: 1.8rem;
@@ -243,7 +247,7 @@
     }
 
     .nav,
-    .auth {
+    .static-menu {
         display: none;
     }
 
@@ -258,20 +262,6 @@
             display: unset;
         }
     }
-
-    // replace with real language selector component styles when when it is done
-    .language-icon {
-        height: 26px;
-        width: 26px;
-        font-size: 26px;
-    }
-
-    .language {
-        font-size: 1.875rem !important;
-        line-height: 2.25rem !important;
-    }
-
-    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 480px) {
@@ -301,20 +291,6 @@
         height: 22px;
         width: 22px;
     }
-
-    // replace with real language selector component styles when when it is done
-    .language-icon {
-        height: 22px;
-        width: 22px;
-        font-size: 22px;
-    }
-
-    .language {
-        font-size: 1.5rem !important;
-        line-height: 2.1rem !important;
-    }
-
-    // replace with real language selector component styles when when it is done
 }
 
 @media only screen and (max-width: 321px) {
@@ -322,16 +298,3 @@
         margin-top: 6.5rem;
     }
 }
-
-// replace with real language selector component when styles when it is done
-.language {
-    font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 2.0625rem;
-    white-space: nowrap;
-    color: #1a3173;
-    display: flex;
-    align-items: center;
-}
-
-// replace with real language selector component styles when when it is done
