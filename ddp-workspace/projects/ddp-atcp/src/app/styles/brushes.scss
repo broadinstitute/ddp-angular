@@ -1,0 +1,146 @@
+@import '../styles/variables';
+@import 'theme';
+
+html, body {
+  color: mat-color($app-theme);
+}
+
+@mixin c-white($important: '') {
+  color: $white unquote($important);
+}
+
+@mixin c-blue($important: '') {
+  color: $blue unquote($important);
+}
+
+@mixin c-bright-blue($important: '') {
+  color: $bright-blue unquote($important);
+}
+
+@mixin c-green($important: '') {
+  color: $green unquote($important);;
+}
+
+@mixin c-light-green($important: '') {
+  color: $light-green unquote($important);;
+}
+
+@mixin c-black {
+  color: $black;
+}
+
+@mixin c-dark {
+  color: $dark;
+}
+
+@mixin c-orange {
+  color: $orange;
+}
+
+@mixin c-pink {
+  color: $pink;
+}
+
+@mixin c-purple() {
+  color: $purple;
+}
+
+@mixin c-yellow() {
+  color: $yellow;
+}
+
+@mixin c-blue-light($important: '') {
+  color: $blue-light unquote($important);
+}
+
+@mixin c-neutral-gray {
+  color: $neutral-gray;
+}
+
+@mixin c-red($important: '') {
+  color: $red unquote($important);
+}
+
+@mixin c-light-red($important: '') {
+  color: $light-red unquote($important);
+}
+
+@mixin bg-blue($important: '') {
+  background-color: $blue unquote($important);
+}
+
+@mixin bg-blue-light($important: '') {
+  background-color: $blue-light unquote($important);
+}
+
+@mixin bg-blue-dark($important: '') {
+  background-color: $blue-dark unquote($important);
+}
+
+@mixin bg-green($important: '') {
+  background-color: $green unquote($important);
+}
+
+@mixin bg-light-green($important: '') {
+  background-color: $light-green unquote($important);
+}
+
+@mixin bg-dark-green($important: '') {
+  background-color: $dark-green unquote($important);
+}
+
+@mixin bg-light-neutral-grey($important: '') {
+  background-color: $light-neutral-grey unquote($important);
+}
+
+@mixin bg-grey($important: '') {
+  background-color: $grey unquote($important);
+}
+
+@mixin bg-light-grey($important: '') {
+  background-color: $grey unquote($important);
+}
+
+@mixin bg-transparent($important: '') {
+  background-color: transparent unquote($important);
+}
+
+@mixin bg-red($important: '') {
+  background-color: $red unquote($important);
+}
+
+@mixin brc-blue($important: '') {
+  border-color: $blue unquote($important);
+}
+
+@mixin brc-blue-light($important: '') {
+  border-color: $blue-light unquote($important);
+}
+
+@mixin brc-neutral-gray($important: '') {
+  border-color: $neutral-gray unquote($important);
+}
+
+@mixin brc-red($important: '') {
+  border-color: $red unquote($important);
+}
+
+@mixin brc-light-red($important: '') {
+  border-color: $light-red unquote($important);
+}
+
+@mixin brc-green($important: '') {
+  border-color: $green unquote($important);
+}
+
+@mixin brc-light-green($important: '') {
+  border-color: $light-green unquote($important);
+}
+
+@mixin brc-dark-green($important: '') {
+  border-color: $dark-green unquote($important);
+}
+
+@mixin brc-white($important: '') {
+  border-color: $white unquote($important);
+}

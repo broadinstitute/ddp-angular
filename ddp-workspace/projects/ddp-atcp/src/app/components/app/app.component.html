@@ -1,0 +1,18 @@
+<div class="Container" [ngClass]="{welcom : isWelcomePage}">
+    <app-header></app-header>
+  <mat-expansion-panel style="margin-bottom: 10px" *ngIf="isDevMode">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Backend requests
+      </mat-panel-title>
+      <mat-panel-description>
+        Setup backend mock data
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ddp-network-sniffer></ddp-network-sniffer>
+  </mat-expansion-panel>
+    <div [ngClass]="{'page-padding': isBasePage}">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+</div>
