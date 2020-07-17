@@ -1,0 +1,85 @@
+@import "../../styles/_variables.scss";
+
+.console {
+  padding: 30px 20px 40px 20px;
+  width: 100%;
+
+  .BtnFilled {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    mat-icon {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .console {
+    padding: 0;
+    margin: 30px 40px 40px 40px;
+    width: 83%;
+
+    .BtnFilled {
+      width: 50%;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .console {
+    width: 70%;
+
+    .BtnFilled {
+      width: 25%;
+    }
+  }
+}
+
+.console-table {
+  width: 100%;
+  margin-bottom: 25px;
+
+  .table-header,
+  .table-row {
+    font-style: italic;
+    font-size: 15px;
+    color: $neutral-gray;
+    padding: 5px;
+  }
+
+  .table-row .disabled {
+    color: $light-neutral-grey;
+    font-size: 16px;
+  }
+
+  .table-header {
+    border-bottom: 2px solid $grey;
+  }
+
+  .table-row {
+    border-bottom: 1px solid $grey;
+  }
+
+  .table-header:first-child,
+  .table-row:first-child {
+    width: 25%;
+  }
+
+  .table-row:first-child {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .BtnFilled {
+    display: block;
+    width: 100%;
+    margin: 0 0 5px 0;
+  }
+
+  .BtnFilled:last-of-type {
+    margin: 0;
+  }
+}

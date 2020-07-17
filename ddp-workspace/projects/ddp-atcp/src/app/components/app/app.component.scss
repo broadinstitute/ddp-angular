@@ -1,0 +1,14 @@
+@import '../../styles/common';
+
+.Container {
+  @include common-footer-down;
+
+  &.welcome {
+    &::ng-deep .Header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(34, 34, 34, 0.3);
+    }
+  }
+}

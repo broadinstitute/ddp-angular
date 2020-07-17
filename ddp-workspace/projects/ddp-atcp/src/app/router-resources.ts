@@ -1,0 +1,16 @@
+export const Dashboard = 'dashboard';
+export const Console = 'console';
+export const ActivityId = 'activity/:id';
+export const AboutUs = 'about-us';
+export const Error = 'error';
+export const Password = 'password';
+export const JoinUs = 'join-us';
+export const Welcome = '';
+export const AboutInitiative = 'about_initiative';
+export const DataAccess = 'data_access';
+export const Statistics = 'statistics';
+export const LoginLandingMode = 'login-landing/:mode';
+export const LoginLanding = 'login-landing';
+export const Auth = 'auth';
+export const PasswordResetDone = 'password-reset-done';
+export const SessionExpired = 'session-expired';
