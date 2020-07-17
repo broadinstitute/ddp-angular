@@ -74,6 +74,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+import {ServerMessageComponent} from "./components/dialogs/serverMessage.component";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -131,6 +133,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     LovedOneThankYouComponent,
     LovedOneThankYouRedesignedComponent,
     WarningComponent,
+    ServerMessageComponent,
     WarningMessageComponent,
     AppComponent,
     ActivityLinkComponent,
@@ -171,6 +174,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     LovedOneThankYouComponent,
     LovedOneThankYouRedesignedComponent,
     WarningMessageComponent,
+    ServerMessageComponent,
     AppComponent,
     ActivityLinkComponent,
     InternationalPatientsComponent,
@@ -189,6 +193,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     JoinMailingListComponent,
     ResendEmailComponent,
     WarningComponent,
+    ServerMessageComponent,
     SessionWillExpireComponent
   ]
 })

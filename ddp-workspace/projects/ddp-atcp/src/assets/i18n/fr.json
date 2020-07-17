@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "est une maladie neurodégénérative héréditaire. Un enfant atteint d’AT perd progressivement le contrôle de ses muscles à partir de deux ans. Vers l’âge de neuf ou dix ans, les enfants AT sont généralement en fauteuil roulant et présentent des troubles de l’élocution. Lire et déglutir devient également difficile. Environ 30 % des enfants AT développent un cancer, et la plupart souffrent de troubles immunitaires plus ou moins sévères. Bien que les traitements symptomatiques permettent de prolonger la vie des patients AT, la maladie demeure incurable.",
+			"Title": "ataxie-télangiectasie (AT)"
+		},
+		"SecondParagraph": {
+			"TextOne": "Les frères et sœurs AT semblent partager plus de caractéristiques cliniques similaires que les enfants porteurs des mêmes mutations, mais n'appartenant pas à la même famille. Les scientifiques pensent donc que les gènes d’une famille (autres que celui responsable du développement de l'AT) peuvent changer la façon dont cette maladie affecte les patients. En outre, il est possible que des environnements, des modes de vie et des régimes alimentaires différents aient un impact sur la santé des personnes atteintes d’AT.",
+			"TextSecond": "Nous avons récemment identifié plusieurs personnes qui présentent des mutations pathogènes typiques de leurs gènes AT et ne synthétisent aucune protéine AT (tout comme d’autres personnes atteints d'AT), mais dont les symptômes sont étonnamment légers. Nous avons donc l'espoir d'identifier des changements dans d’autres gènes qui corrigent ou compensent les mutations AT chez les 'patients' peu symptomatiques. Si tel est le cas, les chercheurs pourraient éventuellement mettre au point de nouveaux traitements médicamenteux pour aider toutes les personnes AT. Toutefois, nous devons commencer par recueillir les données cliniques et génétiques d'un nombre maximal de personnes AT.",
+			"TextThird": "De même, en comparant les antécédents médicaux et les modes de vie de différents patients AT, les chercheurs peuvent découvrir quelles stratégies de gestion des symptômes permettent d’obtenir les meilleurs résultats thérapeutiques. Avant toute chose, il convient cependant de recueillir et de centraliser les données des nombreux patients AT.",
+			"Title": "L’AT affecte chaque individu d’une manière différente"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Inscrivez-vous à la plate-forme de données",
+					"Text": "Cliquez sur Nous rejoindre et créez un compte avec votre nom et votre adresse e-mail. Une fois votre compte créé, vous pourrez vous enregistrer (si vous êtes atteint d’AT) ou enregistrer votre (vos) enfant(s) atteint(s) d’AT comme participants à notre plateforme de données en remplissant un bref formulaire."
+				},
+				{
+					"Name": "Accordez-nous votre autorisation"
+				}
+			]
+		}
+	}
+}
