@@ -1,0 +1,133 @@
+@import '../../styles/variables';
+@import '../../styles/brushes';
+
+.workflow-progress {
+  ul {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+    @media (min-width: 590px) {
+      flex-direction: column;
+      border: 1px solid $grey;
+      box-shadow: 0 2px 3px $grey;
+    }
+
+    li {
+      font-size: 35px;
+      font-weight: 700;
+      color: $grey;
+      width: 100%;
+      margin: 0 5px;
+      align-items: center;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      @media (min-width: 590px) {
+        flex-direction: row;
+        align-items: center;
+        margin: 0 0 1px;
+        padding-left: 25px;
+        .glyphicon {
+          margin-top: 0 !important;
+        }
+      }
+      &.blue-hover:hover {
+        @include c-blue-light();
+        &:before, &:after {
+          @include bg-blue-light();
+        }
+      }
+      .glyphicon {
+        display: none;
+        margin-top: auto;
+        font-size: 26px;
+        max-width: 21px;
+      }
+
+      .number {
+        max-width: 21px;
+      }
+
+      &.in-complete {
+        @include c-green();
+        color: $green;
+        cursor: pointer;
+
+        &:after, &:before {
+          @include bg-green();
+        }
+
+        .number {
+          display: none;
+        }
+
+        .glyphicon {
+          display: block;
+        }
+      }
+
+      &.in-progress {
+        background-color: $grey;
+        color: $blue;
+        cursor: pointer;
+
+        &:after, &:before {
+          background-color: $blue;
+        }
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:after {
+        content: '';
+        height: 10px;
+        width: 100%;
+        display: block;
+        background-color: $grey;
+        margin-top: auto;
+        @media (min-width: 590px) {
+          display: none;
+        }
+      }
+
+      &:before {
+        content: '';
+        background-color: $grey;
+        min-width: 10px;
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        @media (min-width: 590px) {
+          display: inline-block;
+        }
+      }
+
+      .name {
+        display: none;
+        font-size: 20px;
+        margin-left: 20px;
+        text-align: left;
+        @media (min-width: 590px) {
+          display: block;
+        }
+
+        span {
+          font-size: 14px;
+          font-style: italic;
+          display: block;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}

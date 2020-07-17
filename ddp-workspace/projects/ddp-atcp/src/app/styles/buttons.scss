@@ -1,0 +1,340 @@
+@import 'theme';
+@import './variables';
+@import './brushes';
+@import './mixins';
+
+.activity-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  .button {
+    justify-content: center;
+  }
+}
+
+.button {
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  font-family: inherit;
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:active,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.button_right {
+  margin-left: auto !important;
+}
+
+.button_small {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+}
+
+.button_medium {
+  padding: 0.625rem 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.9375rem;
+}
+
+.button_big {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.625rem;
+  line-height: 2.0625rem;
+}
+
+.button_primary {
+  background-color: mat-color($app-primary);
+  color: mat-color($app-primary, A100);
+  border: 1px solid mat-color($app-theme, A100);
+}
+
+.button_primary:disabled {
+  background-color: mat-color($app-theme, 600);
+}
+
+.button_secondary {
+  background-color: mat-color($app-theme, 50);
+  color: mat-color($app-theme, 200);
+  border: 1px solid mat-color($app-theme, 200);
+}
+
+.button_secondary:disabled {
+  background-color: mat-color($app-theme, 50);
+  color: mat-color($app-theme, 650);
+  border: 1px solid mat-color($app-theme, 650);
+}
+
+.button_primary:hover:not([disabled]),
+.button_primary:hover:enabled {
+  background-color: mat-color($app-theme, 300);
+}
+
+.button_secondary:hover:not([disabled]),
+.button_secondary:hover:enabled {
+  background-color: mat-color($app-theme, 200);
+  color: mat-color($app-theme, 100);
+}
+
+.button_new-item {
+  font-size: 1.25rem;
+}
+
+.simple-button,
+.SimpleButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: mat-color($app-theme, 200);
+  text-decoration: none;
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  font-family: inherit;
+  white-space: nowrap;
+  outline: none;
+}
+
+.simple-button:hover,
+.SimpleButton:hover {
+  color: mat-color($app-theme, 650);
+  text-decoration: none;
+}
+
+.simple-button:focus,
+.SimpleButton:focus {
+  text-decoration: none;
+  color: mat-color($app-theme, 200);
+}
+
+.panel-opened {
+  .simple-button,
+  .SimpleButton {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+.ButtonBordered, .BtnBordered {
+  padding: 7px 20px 9px 20px;
+  border-radius: 2px;
+  border: 1px solid !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  transition: border 0.3s ease, color 0.3s ease;
+  @include bg-transparent($important: '!important');
+  cursor: pointer !important;
+  text-decoration: none !important;
+
+  &:hover, &:focus, &:visited, &:active  {
+    text-decoration: none !important;
+  }
+
+  &--blue, &--blue:focus, &--blue:active  {
+    margin-top: 15px;
+    @include brc-blue($important: '!important');
+    @include c-blue($important: '!important');
+
+    &:hover {
+      @include brc-blue($important: '!important');
+      @include c-blue($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--green, &--green:focus, &--green:active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    @include brc-green($important: '!important');
+    @include c-green($important: '!important');
+
+    .mat-icon {
+      font-weight: bold;
+    }
+
+    &:hover {
+      @include c-blue-light($important: '!important');
+      @include brc-blue-light($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--white, &--white:focus, &--white:active {
+    @include c-white($important: '!important');
+    @include brc-white($important: '!important');
+    margin-top: 25px;
+
+    &:hover {
+      @include brc-light-green($important: '!important');
+      @include c-light-green($important: '!important');
+      @include bg-transparent($important: '!important');
+    }
+  }
+
+  &--withIcon {
+    @include flexer(flex, row, center);
+    min-width: fit-content;
+    max-width: fit-content;
+
+    mat-icon,
+    span {
+      margin-right: 5px;
+    }
+  }
+
+  &--neutral, &--neutral:focus, &--neutral:active {
+    @include c-neutral-gray;
+    @include brc-neutral-gray;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      @include c-blue-light();
+      @include brc-blue-light;
+    }
+  }
+
+  &--red {
+    @include c-red(!important);
+    @include brc-red(!important);
+    margin-left: auto;
+    margin-right: 10px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      @include c-light-red(!important);
+      @include brc-light-red(!important);
+    }
+  }
+
+  &--assent-kids {
+    font-size: 18px;
+    border-radius: 5px !important;
+    border: 3px solid !important;
+  }
+}
+
+.ddp-block-body .BtnBordered--withIcon {
+  margin: 25px auto;
+}
+
+.ButtonFilled, .ButtonFilled, .BtnFilled {
+  padding: 8px 20px 10px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  text-align: center;
+  transition: background .3s ease, color .3s ease;
+  @include c-white($important: '!important');
+  text-decoration: none;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  &--blue {
+    margin-top: 15px;
+    @include bg-blue($important: '!important');
+    border: none;
+    outline: none;
+
+    &:hover {
+      @include bg-blue-light($important: '!important');
+      border: none;
+    }
+
+    &:active {
+      @include bg-blue-dark($important: '!important');
+      border: none;
+    }
+  }
+
+  &--green {
+    @include bg-green;
+    @include brc-green(!important);
+    @include c-white($important: '!important');
+    margin-left: 10px;
+
+    &:focus,
+    &:hover {
+      @include bg-light-green(!important);
+      @include brc-light-green(!important);
+      @include c-white($important: '!important');
+    }
+
+    &:active {
+      @include bg-dark-green(!important);
+      @include brc-dark-green(!important);
+      @include c-white($important: '!important');
+      outline: none;
+    }
+  }
+
+  &--kids {
+    padding: 10px 20px 12px 20px !important;
+    border-radius: 5px !important;
+    font-family: 'McLaren', cursive !important;
+    font-size: 18px;
+    text-align: center;
+    @include c-white($important: '!important');
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 10px;
+
+    &:hover, &:focus, &:active {
+      @include bg-blue-light($important: '!important');
+    }
+  }
+
+  &--neutral {
+    @include bg-light-neutral-grey($important: '!important');
+  }
+
+  &--light-green {
+    @include bg-light-green($important: '!important');
+  }
+
+  &--red {
+    @include bg-red($important: '!important');
+  }
+}
+
+.Btn-centered {
+  margin-left: 25%;
+}
+
+.Btn-wide {
+  width: 50%;
+}
+
+@media (min-width: $mobile-width) {
+  .ButtonWide {
+    width: 30%
+  }
+}
+
+@media (min-width: $tablet-width) {
+  .ButtonWide {
+    width: 25%
+  }
+}
+
+@media (min-width: $desktop) {
+  .ButtonWide {
+    width: 17%
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
@@ -9,7 +9,7 @@ import { filter, map } from 'rxjs/operators';
 @Component({
     selector: 'toolkit-dashboard',
     template: `
-        <toolkit-header [showButtons]="false">
+        <toolkit-header [showButtons]="false" *ngIf="!hideHeader">
         </toolkit-header>
         <div class="Wrapper">
             <div class="PageHeader">
@@ -19,6 +19,9 @@ import { filter, map } from 'rxjs/operators';
                             <h1 class="PageHeader-title" translate>
                                 Toolkit.Dashboard.Title
                             </h1>
+                            <h2 class="PageHeader-text"
+                                *ngIf="showText"
+                                translate>Toolkit.Dashboard.Text</h2>
                         </div>
                     </div>
                 </div>
@@ -50,6 +53,10 @@ import { filter, map } from 'rxjs/operators';
         </div>`
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+
+    @Input() public hideHeader = false;
+    @Input() public showText = false;
+
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
     private anchor: Subscription = new Subscription();

@@ -1,0 +1,85 @@
+{
+  "title": "Global A-T Family Data Platform | Activate Account Notification",
+  "common": {
+    "alreadyRegistered": "Already registered? Sign In here",
+    "joinUs": "Join Us",
+    "signinWithGoogle": "Sign In with Google",
+    "signin": "Sign In",
+    "forgotPassword": "Forgot your password?",
+    "resendInstructions": "Resend confirmation instructions",
+    "email": {
+      "label": "Email",
+      "error": "Email cannot be empty",
+      "whoseEmail": "Whose email should I input?",
+      "whoseEmailTooltip": "If you are a parent/legal guardian of a child(ren) with A-T, please use your own email address. We will use this address to correspond with you regarding anyone you register in The Global A-T Family Data Platform."
+
+    },
+    "password": {
+      "label": "Password",
+      "error": "at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*)."
+    },
+    "reenter": {
+      "label": "Re-enter password",
+      "error": "Password confirmation doesn't match Password"
+    },
+    "resetPassword": {
+      "label": "New password",
+      "error": "at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*)."
+    },
+    "confirmNewPassword": {
+      "label": "Confirm new password",
+      "error": "Password confirmation doesn't match Password"
+    },
+    "or": "OR"
+  },
+  "header": {
+    "researchers": "For Researchers",
+    "dataAccessRequest": "Data Access Request",
+    "learnMore": "Learn More",
+    "aboutUs": "About Us",
+    "aboutThisInitiative": "About this Initiative",
+    "joinUs": "Join Us",
+    "signIn": "Sign In",
+    "language": "Language"
+  },
+  "activateAccount": {
+    "title": "Account Activation",
+    "checkEmail": "You are almost done! Please check your email:",
+    "activateAccount": "An email has been sent there with the guidelines to activate your account.",
+    "stillWaiting": "Still waiting for your email?"
+  },
+  "forgotPassword": {
+    "title": "Forgot your password?",
+    "enterEmail": "Please enter your email address and we will send you password reset instructions.",
+    "submit": "Send me reset password instructions"
+  },
+  "resendInstructions": {
+    "title": "Resend confirmation instructions",
+    "subTitle": "If you did not receive your confirmation instructions, you can enter your email address to generate another confirmation email.",
+    "submit": "Resend confirmation instructions"
+  },
+  "login": {
+    "title": "You can log into the Global A-T Family Data Platform using your email address or with your Google account.",
+    "useEmail": "Use your email address:"
+  },
+  "signUp": {
+    "title": "Create an Account",
+    "subTitle": "You can log into the Platform with your email address by creating a password, or with your Google account. We will use this email address to communicate with you regarding the Global A-T Family Data Platform.",
+    "subtitleWithEmail": "Use your email address",
+    "emailLabel": "Email address",
+    "createAccountBtn": "Create Account",
+    "passwordHint": "(8 characters minimum)",
+    "useGoogle": "Use your Google account",
+    "googleEmail": "Google email address",
+    "createAccountWithGoogleBtn": "Create Account with Google"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Your password has been changed successfully.",
+    "InvalidLogin": "Invalid email or password",
+    "YouWillGetInstructions": "You will receive an email with instructions on how to reset your password in a few minutes."
+  },
+  "resetPassword": {
+    "title": "Change your password",
+    "submit": "Change my password"
+  }
+}
