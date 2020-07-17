@@ -74,7 +74,7 @@ export * from './lib/services/languageService.service';
 export * from './lib/services/serviceAgents/invitationServiceAgent.service';
 export * from './lib/services/serviceAgents/subjectInvitationServiceAgent.service';
 export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
-
+export * from './lib/services/activity/currentActivity.service';
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
@@ -86,3 +86,4 @@ export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
 
 export * from './lib/compositeDisposable';
+export * from './lib/constants/activityCodes';

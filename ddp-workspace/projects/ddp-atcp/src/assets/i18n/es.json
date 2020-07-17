@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "es una enfermedad hereditaria y neurodegenerativa. Un niño con A-T comienza a padecer una pérdida progresiva del control muscular alrededor de los dos años de edad. A los nueve o diez años, los niños con A-T por lo general comienzan a necesitar sillas de ruedas y a tener dificultad para hablar. También se dificultan la lectura y la deglución. Alrededor del 30 por ciento de los niños con A-T desarrollan cáncer, y la mayoría adquiere algún tipo de problema en el sistema inmunitario. Si bien se realizaron avances para extender la vida de las personas con A-T mediante el tratamiento de los síntomas, la enfermedad aún persiste.",
+			"Title": "ataxia telangiectasia (A-T)"
+		},
+		"SecondParagraph": {
+			"TextOne": "Se ha observado que los hermanos con A-T parecen compartir características clínicas más similares que los niños con A-T que portan las mismas mutaciones, pero pertenecen a diferentes familias. Es por ello que los científicos creen que los genes de una familia - además de aquel que causa la A-T - pueden cambiar la forma en que esta enfermedad afecta a los pacientes. Además, es posible que vivir en entornos diferentes, llevar estilos de vida diferentes y seguir dietas distintas puede tener un impacto en la salud de las personas con A-T.",
+			"TextSecond": "Recientemente, hemos identificado a algunas personas que tienen mutaciones típicas, causantes de la enfermedad, en sus genes de A-T y no producen la proteína de la A-T (como sucede con otras personas con A-T), y aun así sus síntomas de esta enfermedad son sorprendentemente leves. Ahora tenemos la esperanza de que podríamos encontrar cambios en otros genes que corrijan o compensen las mutaciones de A-T en estos 'pacientes con síntomas' extremadamente leves. Si es así, los investigadores podrían encontrar nuevos tratamientos con medicamentos para ayudar a todas las personas con A-T. Pero antes, debemos recopilar los datos clínicos y genéticos de la mayor cantidad posible de personas con A-T.",
+			"TextThird": "De forma similar, comparando las historias clínicas y los estilos de vida de los diferentes pacientes con A-T, los investigadores podrían descubrir qué estrategias de tratamiento sintomático producen los mejores resultados de salud. Pero para ello, primero es preciso obtener y combinar datos de muchos pacientes con A-T en un solo lugar.",
+			"Title": "La A-T afecta a cada persona de forma diferente"
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Inscríbase en la Plataforma de datos",
+					"Text": "Haga clic en Únase a nosotros y cree una cuenta con su nombre y dirección de correo electrónico. Una vez creada la cuenta, podrá registrarse (si padece A-T) o registrar a su(s) hijo(s) con A-T como participantes en nuestra Plataforma de datos completando un formulario breve."
+				},
+				{
+					"Name": "Autorícenos"
+				}
+			]
+		}
+	}
+}
