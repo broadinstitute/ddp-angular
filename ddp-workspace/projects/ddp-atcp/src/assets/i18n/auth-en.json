@@ -29,7 +29,8 @@
     "confirmNewPassword": {
       "label": "Confirm new password",
       "error": "Password confirmation doesn't match Password"
-    }
+    },
+    "or": "OR"
   },
   "header": {
     "researchers": "For Researchers",
@@ -59,16 +60,18 @@
   },
   "login": {
     "title": "You can log into the Global A-T Family Data Platform using your email address or with your Google account.",
-    "useEmail": "see your email address:",
-    "or": "OR"
+    "useEmail": "Use your email address:"
   },
   "signUp": {
-    "title": "Create account",
+    "title": "Create an Account",
     "subTitle": "You can log into the Platform with your email address by creating a password, or with your Google account. We will use this email address to communicate with you regarding the Global A-T Family Data Platform.",
     "subtitleWithEmail": "Use your email address",
     "emailLabel": "Email address",
     "createAccountBtn": "Create Account",
-    "passwordHint": "(8 characters minimum)"
+    "passwordHint": "(8 characters minimum)",
+    "useGoogle": "Use your Google account",
+    "googleEmail": "Google email address",
+    "createAccountWithGoogleBtn": "Create Account with Google"
   },
   "modal": {
     "SuccessChangedPassword": "Your password has been changed successfully.",
