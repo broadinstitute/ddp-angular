@@ -1,0 +1,25 @@
+{
+	"AboutInitiative": {
+		"FirstParagraph": {
+			"Text": "jest dziedziczną chorobą neurodegeneracyjną. Dziecko z A-T zaczyna cierpieć na postępujący zanik kontroli nad mięśniami w wieku około 2 lat. W wieku 9-10 lat dzieci z A-T są już zazwyczaj uzależnione od wózków inwalidzkich, a ich mowa staje się niewyraźna. Czytanie oraz połykanie również zaczyna sprawiać problemy. U około 30 procent dzieci z A-T rozwija się nowotwór, a większość z nich ma w jakimś stopniu problem z układem odpornościowym. Mimo że poprzez niwelację symptomów nastąpił postęp w przedłużaniu życia osób z A-T, choroba pozostaje niezwyciężona.",
+			"Title": "Zespół ataksja-teleangiektazja (A-T)"
+		},
+		"SecondParagraph": {
+			"TextOne": "U rodzeństwa z A-T można zauważyć więcej podobieństw w objawach klinicznych niż u dzieci, które obciążone są tymi samymi mutacjami, ale należą do innych rodzin. Dlatego naukowcy uważają, iż geny rodzinne, inne niż te, które wywołują A-T, mogą modyfikować wpływ A-T na pacjentów. Dodatkowo możliwe jest, że życie w różnych środowiskach, prowadzenie odmiennego trybu życia oraz stosowanie różnych diet może wpływać na zdrowie osób z A-T.",
+			"TextSecond": "Nie tak dawno zidentyfikowaliśmy kilka osób, które posiadają typowe, chorobotwórcze mutacje w ich genach A-T i nie wytwarzają białek A-T (tak jak inne osoby z A-T), a jednak ich objawy A-T są zadziwiająco łagodne. Jesteśmy dobrej myśli, że być może uda nam się wykryć zmiany w innych genach, które naprawiają bądź kompensują mutacje A-T u pacjentów z takimi \\\"wyjątkowo łagodnymi\\\" objawami. Gdyby tak było, badacze mogliby znaleźć nowe metody leczenia wszystkich osób z A-T. Jednakże najpierw musimy zebrać dane kliniczne i genetyczne od jak największej liczby osób z A-T.",
+			"TextThird": "W podobny sposób, porównując wywiady chorobowe oraz tryb życia różnych pacjentów z A-T, badacze będą w stanie określić, które strategie radzenia sobie z symptomami dają lepsze rezultaty zdrowotne. Najpierw jednak musimy uzyskać i połączyć dane od wielu pacjentów z A-T w jednym miejscu.",
+			"Title": "A-T dotyka każdego w inny sposób."
+		},
+		"ThirdParagraph": {
+			"Steps": [
+				{
+					"Name": "Zapisz się do platformy danych.",
+					"Text": "Kliknij „Dołącz do nas” i utwórz konto ze swoim imieniem i adresem e-mail. Po utworzeniu konta będziesz mieć możliwość zarejestrowania siebie (jeśli cierpisz na A-T) lub swojego dziecka/dzieci z A-T jako uczestnika naszej platformy danych poprzez wypełnienie krótkiego formularza."
+				},
+				{
+					"Name": "Udziel nam pozwolenia."
+				}
+			]
+		}
+	}
+}
