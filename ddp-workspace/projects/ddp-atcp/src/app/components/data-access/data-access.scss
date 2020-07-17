@@ -1,0 +1,213 @@
+@import '../../styles/variables';
+
+.wizard-page {
+  .error {
+    color: $red !important;
+    font-weight: 700;
+  }
+
+  .submitted {
+    .ng-invalid {
+      border-color: $red !important;
+    }
+  }
+
+  .wizard {
+    border-radius: 2px;
+    padding: 45px 25px 0 25px;
+    @media (min-width: 768px) {
+      width: 83.33333333%;
+    }
+    @media (min-width: 801px) {
+      padding: 45px 40px 0 40px;
+    }
+    @media (min-width: 992px) {
+      width: 58.33333333%;
+    }
+    @media (min-width: 1280px) {
+      padding: 45px 50px 0 50px;
+    }
+  }
+
+  .content {
+    padding: 9px 25px 0;
+    @media (min-width: 768px) {
+      width: 83.33333333%;
+    }
+    @media (min-width: 801px) {
+      padding: 9px 40px 0;
+    }
+    @media (min-width: 992px) {
+      width: 58.33333333%;
+    }
+    @media (min-width: 1280px) {
+      padding: 9px 50px 0;
+    }
+
+    > div {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    h2 {
+      margin: 0 0 14px 0;
+      padding: 0;
+      font-size: 22px !important;
+      font-weight: 700;
+    }
+
+    hr {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 400;
+      color: $dove-grey;
+    }
+
+    input.form-control, textarea.form-control {
+      font-size: 15px;
+      border: 1px solid $silver-grey;
+      border-left: 3px solid $silver-grey;
+      border-radius: 0;
+      box-shadow: none !important;
+
+      &:focus {
+        border: 1px solid $blue-light;
+        border-left: 3px solid $blue-light;
+      }
+    }
+
+    .research {
+      textarea {
+        height: 94px;
+
+        &.title {
+          height: 54px;
+        }
+      }
+    }
+
+    .organization {
+      > div {
+        &:after {
+          content: '';
+          clear: both;
+          display: block;
+        }
+      }
+
+      .form-group {
+        @media (min-width: 992px) {
+          width: 50%;
+          float: left;
+        }
+
+        &:nth-child(n + 1) {
+          @media (min-width: 992px) {
+            padding-right: 15px;
+          }
+        }
+      }
+    }
+
+    .type-research {
+      > div > div:last-child {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .assurances {
+    .clear:after {
+      clear: both;
+      content: '';
+      display: block;
+    }
+
+    ul {
+      padding-left: 15px;
+    }
+
+    > div > div {
+      &:nth-child(3) {
+        @media (min-width: 992px) {
+          padding-right: 15px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        width: 50%;
+        float: left;
+      }
+    }
+  }
+
+  .checkbox {
+    padding-left: 20px;
+
+    p {
+      padding-left: 5px;
+    }
+
+ label{
+   min-height: 20px;
+   margin-bottom: 0;
+   padding-left: 5px;
+   font-size: 15px;
+ }
+  }
+
+
+  .navigation {
+    padding: 0 25px;
+    margin-bottom: 60px;
+    min-height: 41px;
+
+    @media (min-width: 768px) {
+      padding: 0 25px;
+      width: 83.33333333%;
+    }
+    @media (min-width: 801px) {
+      padding: 0 40px;
+    }
+    @media (min-width: 992px) {
+      width: 58.33333333%;
+    }
+    @media (min-width: 1280px) {
+      padding: 0 50px;
+    }
+
+    a, button {
+      margin-top: 0;
+      padding: 8.5px 21.5px 8.5px 21.5px;
+      float: right;
+      background-color: $white;
+
+      &[disabled] {
+        border-color: $silver-grey !important;
+        color: $silver-grey !important;
+        cursor: default !important;
+      }
+
+      &:first-child {
+        float: left;
+
+        .glyphicon {
+          padding-left: 0;
+          padding-right: 5px;
+        }
+      }
+
+      .glyphicon {
+        padding-left: 5px;
+        font-size: 13px;
+      }
+    }
+  }
+}
