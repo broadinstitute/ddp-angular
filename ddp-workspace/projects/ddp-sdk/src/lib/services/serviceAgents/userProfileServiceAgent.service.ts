@@ -37,7 +37,9 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     }
 
     public saveProfile(isNew: boolean, profile: UserProfile): Observable<any> {
-        profile.preferredLanguage = 'en';
+        if (!profile.preferredLanguage) {
+          profile.preferredLanguage = 'en';
+        }
         if (isNew) {
             return this.postObservable('/profile', JSON.stringify(profile));
         } else {

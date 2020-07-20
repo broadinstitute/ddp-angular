@@ -4,6 +4,7 @@ import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
+import { LanguageService } from "./languageService.service";
 import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
 import { Observable, throwError } from 'rxjs';
@@ -20,8 +21,9 @@ export class AddressService extends UserServiceAgent<Address> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService,
-        private translate: NGXTranslateService) {
-        super(session, configuration, http, logger);
+        private translate: NGXTranslateService,
+        private _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public verifyAddress(address: Address): Observable<AddressVerificationResponse> {

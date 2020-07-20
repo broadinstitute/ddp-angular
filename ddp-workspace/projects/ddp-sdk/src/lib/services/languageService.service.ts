@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { isNullOrUndefined } from "util";
+import { Observable, Subject } from "rxjs";
+import { startWith } from "rxjs/operators";
 
 @Injectable()
 export class LanguageService {
-    constructor(private translate: TranslateService) { }
+    private profileLanguageUpdateNotifier: Subject<boolean>;
+    constructor(private translate: TranslateService) {
+      this.profileLanguageUpdateNotifier = new Subject<boolean>();
+      this.profileLanguageUpdateNotifier.next(false);
+    }
 
     public getCurrentLanguage(): string {
         return this.translate.currentLang;
@@ -27,6 +33,14 @@ export class LanguageService {
         return loadedCode;
       }
       return null;
+    }
+
+    public getProfileLanguageUpdateNotifier(): Observable<boolean> {
+      return this.profileLanguageUpdateNotifier.asObservable().pipe(startWith(false));
+    }
+
+    public notifyOfProfileLanguageUpdate(val: boolean): void {
+      this.profileLanguageUpdateNotifier.next(val);
     }
 
     public changeLanguagePromise(languageCode: string): Promise<any> {
