@@ -25,6 +25,10 @@
   cursor: pointer;
   text-decoration: none;
 
+  @media (max-width: $mobile-width) {
+    min-width: 80px;
+  }
+
   &:active,
   &:hover,
   &:focus {
@@ -161,6 +165,10 @@
     @include brc-green($important: '!important');
     @include c-green($important: '!important');
 
+    @media (max-width: $mobile-width) {
+      min-width: 80px;
+    }
+
     .mat-icon {
       font-weight: bold;
     }
@@ -214,6 +222,11 @@
     @include brc-red(!important);
     margin-left: auto;
     margin-right: 10px;
+
+    @media (max-width: $mobile-width) {
+      margin-left: 10px !important;
+      margin-right: 0;
+    }
 
     &:hover,
     &:focus,
