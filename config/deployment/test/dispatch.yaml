@@ -11,6 +11,8 @@ dispatch:
     service: testboston
   - url: "mpc.test.datadonationplatform.org/*"
     service: mpc
+  - url: "brain-v2.test.datadonationplatform.org/*"
+    service: brain-v2
   - url: "pepper-backend.test.datadonationplatform.org/*"
     service: pepper-backend
   - url: "pepper-test.datadonationplatform.org/*"
