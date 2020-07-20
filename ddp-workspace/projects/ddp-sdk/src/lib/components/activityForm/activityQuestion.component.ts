@@ -8,7 +8,6 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
-import { QuestionType } from '../../models/activity/questionType';
 
 @Component({
   selector: 'ddp-activity-question',
