@@ -17,9 +17,44 @@
 					"Text": "Clique em \\\"Junte-se a nós\\\" e crie uma conta com o seu nome e endereço de e-mail. Depois que tiver criado sua conta, você poderá se registrar (caso tenha A-T) ou registrar seu(s) filho(s) com A-T como participantes de nossa plataforma de dados preenchendo um breve formulário."
 				},
 				{
-					"Name": "Dê seu consentimento"
+					"Name": "Dê seu consentimento",
+					"Steps": [
+						"compartilhar uma amostra de saliva que cada paciente com A-T pode nos enviar para sequenciamento genômico",
+						"obter os prontuários médicos do paciente com A-T dos seus médicos e compartilhá-los com pesquisadores",
+						"compartilhar com pesquisadores prontuários médicos enviados por você",
+						"entrar em contato com você no futuro sobre pesquisas complementares"
+					],
+					"Text": "Durante o processo de inscrição, solicitaremos que você preencha um termo de consentimento para nos dar permissão de compartilhar\ncom pesquisadores, de maneira anonimizada, os dados que você fornecer.\nSe preferir, você pode também nos dar permissão para:"
+				},
+				{
+					"Name": "Conte-nos sobre você ou sobre o seu filho",
+					"Text": "Para se juntar a essa iniciativa, você precisará responder a algumas perguntas sobre a saúde da pessoa com A-T, os médicos com os quais ela consultou e sobre o histórico médico e o histórico familar dela. Convidaremos você periodicamente para preencher questionários adicionais (opcionais) sobre o quadro clínico da pessoa com A-T (pesquisas criadas por pesquisadores que estudarão seus dados para aumentar a própria compreensão da A-T)."
+				},
+				{
+					"Name": "Envie-nos um kit de coleta de saliva",
+					"Text": "Caso você decida participar do estudo de sequenciamento genômico, você enviará uma amostra de saliva para nós em um pacote com postagem pré-paga fornecido por nós."
+				},
+				{
+					"Name": "Analisaremos o DNA e as informações de saúde",
+					"Text": "Analisaremos o DNA das células obtidas na amostra de saliva. Nenhum procedimento adicional será necessário. Associaremos os resultados da análise genética da sua saliva às informações médicas que você fornecer em nossos questionários on-line."
+				},
+				{
+					"Name": "Compartilharemos os dados com pesquisadores",
+					"Text": "Depois que informações possivelmente identificadoras tiverem sido removidas, o banco de dados de informações de saúde e dados genômicos será disponibilizado para pesquisadores de todo o mundo através de um repositório de dados seguro e com controle de acesso. Seus dados somente poderão ser acessados por investigadores qualificados autorizados por um comitê de acesso a dados composto por membros de famílias com A-T e por assessores científicos e médicos.  Acompanharemos todos os estudos que tiverem usado suas informações."
+				},
+				{
+					"Name": "Seu feedback contínuo pode acelerar a pesquisa",
+					"Text": "Convidaremos você periodicamente para responder a questionários desenvolvidos por pesquisadores que estiverem estudando os dados para entender melhor a A-T. Usando essa plataforma, teremos uma oportunidade sem precedentes de obter, diretamente das famílias, respostas rápidas para importantes perguntas complementares. Nossa capacidade de fazer acompanhamento com os participantes poderá afetar significativamente a pesquisa e encurtar o caminho para novas descobertas."
+				},
+				{
+					"Name": "Aprenda conosco ao longo do caminho",
+					"Text": "Essa combinação única de informações de saúde e genéticas pode deter a chave para o desenvolvimento de terapias, o que não seria possível sem a sua ajuda. Não deixaremos de oferecer a você atualizações da situação das nossas iniciativas e as últimas descobertas possibilitadas pela sua participação."
 				}
-			]
-		}
+			],
+			"SubTitle": "A plataforma funciona assim:",
+			"Text": "A Global A-T Family Data Platform é uma iniciativa liderada por pacientes e supervisionada por famílias e especialistas em A-T de todo o mundo através da qual informações de saúde, dados genéticos e potencialmente outros tipos de dados sobre pessoas com A-T podem ser compartilhados com pesquisadores. A missão da nossa plataforma é permitir aos pesquisadores acessar importantes dados de pacientes de todo o mundo de maneira rápida, segura e eficiente, o que, esperamos, leve a novas descobertas.",
+			"Title": "A iniciativa Global A-T Family Data Platform"
+		},
+		"Title": "Sobre esta iniciativa"
 	}
 }

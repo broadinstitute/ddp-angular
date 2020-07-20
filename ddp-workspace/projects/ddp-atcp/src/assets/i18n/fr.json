@@ -17,9 +17,44 @@
 					"Text": "Cliquez sur Nous rejoindre et créez un compte avec votre nom et votre adresse e-mail. Une fois votre compte créé, vous pourrez vous enregistrer (si vous êtes atteint d’AT) ou enregistrer votre (vos) enfant(s) atteint(s) d’AT comme participants à notre plateforme de données en remplissant un bref formulaire."
 				},
 				{
-					"Name": "Accordez-nous votre autorisation"
+					"Name": "Accordez-nous votre autorisation",
+					"Steps": [
+						"partager un échantillon de salive envoyé par un patient AT à des fins de séquençage du génome ;",
+						"obtenir le dossier médical du patient AT auprès de ses médecins et le transmettre aux chercheurs ;",
+						"partager le dossier médical que vous avez vous-même téléchargé avec des chercheurs ;",
+						"vous contacter au sujet d'études ultérieures."
+					],
+					"Text": "Au cours de l’inscription, nous vous demanderons de remplir un formulaire de consentement autorisant le partage\nanonyme des données avec des chercheurs.\nSi vous le souhaitez, vous pouvez également nous autoriser à :"
+				},
+				{
+					"Name": "Parlez-nous de vous ou de votre enfant",
+					"Text": "Pour participer à cette initiative, vous devrez répondre à quelques questions au sujet de la personne AT, les médecins consultés et ses antécédents médicaux et familiaux. Nous vous inviterons périodiquement à remplir (si vous le souhaitez) des questionnaires supplémentaires à propos de la personne AT (enquêtes créées par des chercheurs qui étudieront vos données afin d’améliorer leur compréhension de l’AT)."
+				},
+				{
+					"Name": "Envoyez-nous un échantillon de salive",
+					"Text": "Si vous choisissez de participer à l’étude de séquençage du génome, vous devrez nous envoyer un échantillon de salive dans un colis préaffranchi que nous vous fournirons."
+				},
+				{
+					"Name": "Nous analyserons l’ADN et les informations médicales",
+					"Text": "Nous analyserons l’ADN des cellules extraites de l’échantillon de salive. Aucune procédure supplémentaire ne sera nécessaire. Nous associerons les résultats de l’analyse génétique de la salive et les renseignements médicaux que vous fournissez à nos questionnaires en ligne."
+				},
+				{
+					"Name": "Nous partagerons les données avec les chercheurs",
+					"Text": "Une fois les informations d’identification potentielle supprimées, la base de données génomiques et médicales sera accessible aux chercheurs du monde entier via un accès contrôlé et sécurisé. Vos données ne seront accessibles qu’aux chercheurs qualifiés ayant reçu l’autorisation du comité d’accès aux données composé de membres de la famille de patients AT, ainsi que de conseillers scientifiques et médicaux.  Nous conserverons la liste de toutes les études utilisant vos informations."
+				},
+				{
+					"Name": "Votre participation continue peut accélérer la recherche",
+					"Text": "Nous vous inviterons périodiquement à remplir des questionnaires élaborés par les chercheurs qui étudieront les données afin d’améliorer leur compréhension de l’AT. Cette plateforme offre une opportunité sans précédent d’obtenir rapidement les réponses à des questions importantes pour la poursuite des recherches directement auprès des familles. La possibilité d’assurer ce suivi avec les participants peut avoir un fort impact sur les recherches et accélérer les découvertes."
+				},
+				{
+					"Name": "Apprenez avec nous",
+					"Text": "Cette combinaison unique d’informations médicales et génétiques peut être la clé du développement de traitements, qui ne serait pas possible sans votre aide. Nous vous tiendrons au courant des efforts de recherche en cours ainsi que des dernières découvertes rendues possibles par votre participation."
 				}
-			]
-		}
+			],
+			"SubTitle": "Fonctionnement de la plateforme :",
+			"Text": "<p>La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes.",
+			"Title": "Plateforme de données internationale sur les familles AT"
+		},
+		"Title": "Au sujet de cette initiative"
 	}
 }

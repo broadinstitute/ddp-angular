@@ -17,9 +17,44 @@
 					"Text": "Kliknij „Dołącz do nas” i utwórz konto ze swoim imieniem i adresem e-mail. Po utworzeniu konta będziesz mieć możliwość zarejestrowania siebie (jeśli cierpisz na A-T) lub swojego dziecka/dzieci z A-T jako uczestnika naszej platformy danych poprzez wypełnienie krótkiego formularza."
 				},
 				{
-					"Name": "Udziel nam pozwolenia."
+					"Name": "Udziel nam pozwolenia.",
+					"Steps": [
+						"przekazanie próbki śliny, którą każdy pacjent z A-T może nam wysłać do sekwencjonowania genomu;",
+						"pozyskanie dokumentacji medycznej pacjenta z A-T od lekarza i przekazanie jej badaczom;",
+						"przekazanie naukowcom dokumentacji medycznej przesłanej za pośrednictwem naszej platformy;",
+						"kontakt z tobą w przyszłości w sprawie kontynuacji badań."
+					],
+					"Text": "W trakcie rejestracji poprosimy cię o wypełnienie formularza zgody, który umożliwi nam dzielenie się\ntwoimi anonimowymi danymi z naukowcami.\nJeśli zechcesz, możesz również zezwolić nam na:"
+				},
+				{
+					"Name": "Opowiedz nam o sobie lub swoim dziecku.",
+					"Text": "Aby dołączyć do tej inicjatywy, należy odpowiedzieć na pytania dotyczące zdrowia osoby z A-T, konsultowanych lekarzy oraz historii choroby i wywiadu rodzinnego. Okresowo będziemy cię zapraszać do wypełnienia dodatkowych (opcjonalnych) ankiet na temat stanu zdrowia osoby z A-T (ankiet opracowanych przez badaczy, którzy będą analizować dane w celu lepszego zrozumienia A-T)."
+				},
+				{
+					"Name": "Prześlij nam próbkę śliny.",
+					"Text": "Jeśli zdecydujesz się wziąć udział w badaniu sekwencji genomu, prześlesz nam próbkę śliny w już zaadresowanej przesyłce, którą my ci dostarczymy."
+				},
+				{
+					"Name": "Przeanalizujemy DNA oraz dane medyczne.",
+					"Text": "Dokonamy analizy DNA w komórkach uzyskanych z próbki śliny. Żadne inne procedury nie będą wymagane. Połączymy wyniki analizy genetycznej twojej śliny oraz informacji medycznych przez ciebie dostarczonych w naszych ankietach internetowych."
+				},
+				{
+					"Name": "Przekażemy dane badaczom.",
+					"Text": "Po usunięciu informacji umożliwiających potencjalną identyfikację, informacje o zdrowiu i genomach zostaną udostępnione badaczom na całym świecie za pomocą bezpiecznej bazy danych z kontrolą dostępu. Dostęp do twoich danych będą mieli jedynie wykwalifikowani badacze, którzy uzyskali zezwolenie od Komitetu ds. Dostępu Danych, złożonego z członków rodzin osób z A-T, ale również doradców naukowych i medycznych.  Będziemy śledzić wszystkie badania wykorzystujące twoje informacje."
+				},
+				{
+					"Name": "Informacje zwrotne od ciebie mogą przyspieszyć prace badawcze.",
+					"Text": "Okresowo będziemy zapraszać do wypełnienia ankiet opracowanych przez badaczy, którzy analizują dane w celu lepszego zrozumienia A-T. Korzystając z tej platformy, będziemy mieli bezprecedensową możliwość szybkiego uzyskania odpowiedzi na dodatkowe pytania wprost od rodzin. Możliwość kontaktu z uczestnikami może znacząco wpłynąć na badania i skrócić drogę do nowych odkryć."
+				},
+				{
+					"Name": "Ucz się z nami przez cały czas.",
+					"Text": "To wyjątkowe połączenie informacji zdrowotnych i genetycznych może mieć kluczowe znaczenie dla opracowania metod leczenia, które nie byłyby możliwe bez twojej pomocy. Z pewnością będziemy na bieżąco informować cię o naszych wysiłkach i o najnowszych odkryciach możliwych dzięki twojemu uczestnictwu."
 				}
-			]
-		}
+			],
+			"SubTitle": "Oto jak działa platforma:",
+			"Text": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć.",
+			"Title": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T"
+		},
+		"Title": "O inicjatywie"
 	}
 }

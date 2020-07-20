@@ -17,9 +17,44 @@
 					"Text": "Klicken Sie auf \\\"Join Us\\\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
 				},
 				{
-					"Name": "Erteilen des Einverständnisses"
+					"Name": "Erteilen des Einverständnisses",
+					"Steps": [
+						"Weitergabe einer Speichelprobe, die uns von allen AT-Patienten zur Genomsequenzierung zugesendet werden kann",
+						"Anforderung der Behandlungsunterlagen des AT-Patienten von dessen Ärzten und ihre Weitergabe an Forscher",
+						"Weitergabe der von Ihnen hochgeladenen Behandlungsunterlagen an Forscher",
+						"Zukünftige Kontaktaufnahme hinsichtlich Folgeforschungsstudien"
+					],
+					"Text": "Während des Registrierungsprozesses werden Sie gebeten, eine Einverständniserklärung auszufüllen,\ndamit wir die von Ihnen bereitgestellten Daten in anonymisierter Form an Forscher weitergeben dürfen.\nSie können darüber hinaus ebenfalls Folgendem zustimmen:"
+				},
+				{
+					"Name": "Angaben über Sie oder Ihr Kind",
+					"Text": "Um an dieser Initiative teilzunehmen, müssen Sie einige Fragen zum Gesundheitszustand der Person mit AT, zu deren behandelnden Ärzten und zur Krankengeschichte und Familienanamnese beantworten. Wir werden Sie regelmäßig dazu einladen, zusätzliche (optionale) Fragebögen zum Gesundheitszustand der Person mit AT auszufüllen (von den Forschern, die Ihre Daten untersuchen, erstelle Umfragen, um ein besseres Verständnis von AT zu erlangen)."
+				},
+				{
+					"Name": "Einsenden des Speichelentnahme-Kits",
+					"Text": "Wenn Sie sich für eine Teilnahme an der Studie zur Genomsequenzierung entscheiden, senden Sie uns in einem von uns bereitgestellten vorfrankierten Paket eine Speichelprobe zu."
+				},
+				{
+					"Name": "Wir analysieren die DNA und Gesundheitsinformationen",
+					"Text": "Wir werden die DNA in den aus der Speichelprobe gewonnenen Zellen analysieren. Darüber hinaus sind keine weiteren Verfahren erforderlich. Wir werden die Ergebnisse der Genanalyse mit Ihrem Speichel mit den medizinischen Informationen verknüpfen, die Sie in unseren Online-Fragebögen angeben."
+				},
+				{
+					"Name": "Wir geben die Daten an Forscher weiter",
+					"Text": "Sobald personenbezogene Informationen entfernt worden sind, steht die Datenbank der Gesundheitsinformationen und Gendaten Forschern auf der ganzen Welt über ein sicheres Datenarchiv mit Zugriffskontrolle zur Verfügung. Auf Ihre Daten haben nur qualifizierte Prüfärzte Zugriff, die von einer Datenzugriffskommission, bestehend aus AT-Betroffenen sowie wissenschaftlichen und medizinischen Beratern, eine Zugriffsberechtigung erhalten haben.  Wir protokollieren jede Studie, für die Ihre Informationen verwendet wurden."
+				},
+				{
+					"Name": "Ihr kontinuierliches Feedback kann die Forschung beschleunigen",
+					"Text": "Wir laden Sie regelmäßig dazu ein, Fragebögen zu beantworten, die von den Forschern erstellt wurden, die Ihre Daten untersuchen, um ein besseres Verständnis von AT zu erlangen. Diese Plattform gibt uns die einmalige Gelegenheit, Antworten auf nachträgliche Forschungsfragen schnell und direkt von Familien zu erhalten. Die Möglichkeit, uns erneut an die Teilnehmer zu wenden, kann große Auswirkungen auf die Forschung haben und den Weg zu neuen Entdeckungen verkürzen."
+				},
+				{
+					"Name": "Gemeinsam gelangen wir ans Ziel",
+					"Text": "Diese spezielle Kombination aus Gesundheits- und Gendaten ist möglicherweise der Schlüssel zur Entwicklung neuer Therapien, und dies wäre ohne Ihre Hilfe nicht möglich. Sie werden über den Stand unserer Bemühungen sowie über alle neuen Informationen und Entdeckungen, die wir dank Ihrer Teilnahme machen können, informiert."
 				}
-			]
-		}
+			],
+			"SubTitle": "So funktioniert die Plattform:",
+			"Text": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was ? so unsere Hoffnung ? zu neuen Entdeckungen führen wird.",
+			"Title": "Die Plattform für globale Daten von AT-Familien"
+		},
+		"Title": "Über diese Initiative"
 	}
 }

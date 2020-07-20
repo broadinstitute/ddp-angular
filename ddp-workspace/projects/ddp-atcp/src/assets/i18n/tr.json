@@ -17,9 +17,44 @@
 					"Text": "\\\"Bize Katılın\\\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
 				},
 				{
-					"Name": "Bize izin verin"
+					"Name": "Bize izin verin",
+					"Steps": [
+						"her A-T hastasının bize genom sekanslama için gönderebileceği bir tükürük örneğini paylaşmak",
+						"A-T hastasının tıbbi kayıtlarını doktorlarından alıp araştırmacılarla paylaşmak",
+						"kendi yüklediğiniz tıbbi kayıtları araştırmacılarla paylaşmak",
+						"gelecekte yapılacak, durumu takip eden araştırma çalışmalarıyla ilgili olarak sizinle irtibat kurmak"
+					],
+					"Text": "Kayıt sürecinde sizden biz araştırmacılara sağladığınız verileri\nkimlik bilgileriniz kaldırılmış bir şekilde paylaşma izni veren bir olur formu doldurmanızı isteyeceğiz.\nTercih ederseniz bize ayrıca şunları yapmamız için izin verebilirsiniz:"
+				},
+				{
+					"Name": "Bize kendiniz veya çocuğunuz hakkında bilgi verin",
+					"Text": "Bu girişime katılmak için A-T'li hastanın sağlığı, daha önce göründüğü doktorlar ve tıbbi öyküsü ve aile geçmişi hakkında bazı soruları yanıtlamanız gerekecektir. Düzenli olarak A-T hastasının tıbbi durumu hakkında ek (isteğe bağlı) soru formları doldurmanız istenecektir (A-T hakkındki bilgilerini geliştirmek için verilerinizi inceleyecek araştırmacılar tarafından oluşturulmuş anketler)."
+				},
+				{
+					"Name": "Bize bir tükürük kiti gönderin.",
+					"Text": "Genom sekanslama çalışmasına katılmayı seçerseniz sağlayacağımız önceden pul yapıştırılmış bir paketle bize bir tükürük örneği göndereceksiniz."
+				},
+				{
+					"Name": "DNA ve sağlık bilgilerini inceleyeceğiz",
+					"Text": "Tükürük örneğinden elde edilen hücrelerdeki DNA'yı analiz edeceğiz. Ek bir işlem gerekmeyecektir. Tükürüğünüzden yapılan genetik analizin sonuçlarını ve çevrim içi soru formlarında bize sağladığınız tıbbi bilgiyi birbirine bağlayacağız."
+				},
+				{
+					"Name": "Verileri araştırmacılarla paylaşacağız",
+					"Text": "Kim olduğunuzu tanımlayabilecek bilgiler giderildikten sonra sağlık bilgisi ve genomik veriler veri tabanı dünya çapındaki araştırmacılara güvenli ve kontrollü erişimli bir veri deposu yoluyla sağlanacaktır. Verilerinize sadece A-T hastası aile üyeleri ve ayrıca bilimsel ve tıbbi danışmanlardan oluşan bir veri erişim komitesince izin verilmiş vasıflı araştırmacılar erişecektir.  Bilgilerinizi kullanmış olan tüm çalışmaların kaydını tutacağız."
+				},
+				{
+					"Name": "Sürekli geri bildiriminiz araştırmayı hızlandırabilir",
+					"Text": "Düzenli olarak sizi A-T'yi daha iyi anlamak üzere verileri inceleyen araştırmacıların geliştirdiği soru formlarını yanıtlamaya davet edeceğiz. Bu platformu kullanarak, önemli takip amaçlı araştırma sorularına doğrudan ailelerden hızla yanıt almak gibi daha önce görülmemiş bir fırsatı yakalamış olacağız. Katılımcıları takip etme imkanımız araştırmaları önemli derecede etkileme ve yeni keşifler oluşma süresini kısaltma olasılığı doğurmaktadır."
+				},
+				{
+					"Name": "Bizimle birlikte siz de öğrenin",
+					"Text": "Bu benzersiz sağlık ve genetik bilgi kombinasyonu sizin yardımınız olmadan mümkün olamayacak tedavileri geliştirmenin temeli olabilir. Size mutlaka çabalarımızın durumu hakkında güncellemeler göndereceğiz ve katılımınızın mümkün kıldığı son keşifleri bildireceğiz."
 				}
-			]
-		}
+			],
+			"SubTitle": "Platform şöyle çalışır:",
+			"Text": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır.",
+			"Title": "Global A-T Aile Veri Platformu"
+		},
+		"Title": "Bu girişim hakkında"
 	}
 }
