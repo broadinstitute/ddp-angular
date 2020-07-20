@@ -99,7 +99,7 @@ Auth0.registerLanguageDictionary("ht", {
   "signUpTitle": "Enskri",
   "signUpLabel": "Enskri",
   "signUpSubmitLabel": "Enskri",
-  "signUpTerms": "Poutèt ou enskri, ou aksepte kondisyon itilizasyon ak règleman sou konfidansyalite nou yo.",
+  "signUpTerms": "",
   "signUpWithLabel": "Enskri avèk %s",
   "socialLoginInstructions": "",
   "socialSignUpInstructions": "",
