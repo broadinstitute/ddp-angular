@@ -9,6 +9,8 @@ dispatch:
     service: osteo
   - url: "testboston.test.datadonationplatform.org/*"
     service: testboston
+  - url: "brain-v2.test.datadonationplatform.org/*"
+    service: brain-v2
   - url: "pepper-backend.test.datadonationplatform.org/*"
     service: pepper-backend
   - url: "pepper-test.datadonationplatform.org/*"

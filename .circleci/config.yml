@@ -2,21 +2,21 @@ version: 2.1
 
 references:
   repo_path: &repo_path
-               /home/circleci/repo
+      /home/circleci/repo
   ng_workspace_path: &ng_workspace_path
-                       /home/circleci/repo/ddp-workspace
+      /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston atcp"
+    "osteo brain brain-v2 angio mbc testboston atcp"
   study_guids: &study_guids
-    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston atcp"
+      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston atcp"
   config_deployment_dir: &config_deployment_dir
-                           config/deployment
+      config/deployment
 
 # Container for all the builds
 executors:
@@ -431,6 +431,8 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: testboston
       - conditionally-launch-build-and-store:
+          study_key: brain-v2
+      - conditionally-launch-build-and-store:
           study_key: atcp
 
   app-build-and-store-job:
@@ -524,6 +526,9 @@ workflows:
           study_key: testboston
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: brain-v2
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: atcp
 
   nightly:
@@ -550,6 +555,9 @@ workflows:
       - build-and-deploy-job:
           name: testboston-nightly
           study_key: testboston
+      - build-and-deploy-job:
+          name: brain-v2-nightly
+          study_key: brain-v2
       - build-and-deploy-job:
           name: atcp-nightly
           study_key: atcp

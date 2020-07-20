@@ -1324,6 +1324,148 @@
           }
         }
       }
+    },
+    "ddp-brain-v2": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-brain-v2",
+      "sourceRoot": "projects/ddp-brain-v2/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-brain-v2",
+            "index": "projects/ddp-brain-v2/src/index.html",
+            "main": "projects/ddp-brain-v2/src/main.ts",
+            "polyfills": "projects/ddp-brain-v2/src/polyfills.ts",
+            "tsConfig": "projects/ddp-brain-v2/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ddp-brain-v2/src/favicon.ico",
+              "projects/ddp-brain-v2/src/favicon-alert.ico",
+              "projects/ddp-brain-v2/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-brain-v2/src/pdf/",
+                "output": "/"
+              },
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-brain-v2/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-brain-v2/src/theme.scss",
+              "projects/ddp-brain-v2/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-brain-v2/src/environments/environment.ts",
+                  "with": "projects/ddp-brain-v2/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "es5": {
+              "tsConfig": "projects/ddp-brain-v2/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-brain-v2:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-brain-v2:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-brain-v2:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-brain-v2:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-brain-v2/src/test.ts",
+            "polyfills": "projects/ddp-brain-v2/src/polyfills.ts",
+            "tsConfig": "projects/ddp-brain-v2/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-brain-v2/karma.conf.js",
+            "assets": [
+              "projects/ddp-brain-v2/src/favicon.ico",
+              "projects/ddp-brain-v2/src/favicon-alert.ico",
+              "projects/ddp-brain-v2/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-brain-v2/src/pdf/",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/ddp-brain-v2/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-brain-v2/tsconfig.app.json",
+              "projects/ddp-brain-v2/tsconfig.spec.json",
+              "projects/ddp-brain-v2/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-brain-v2/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-brain-v2:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-brain-v2:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "ddp-sdk",
