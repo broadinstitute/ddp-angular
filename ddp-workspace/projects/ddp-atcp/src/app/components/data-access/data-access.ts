@@ -49,9 +49,9 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public getToday(): string {
     const data = new Date();
-    const mouth = data.getMonth() + 1;
-    const day = data.getDay();
-    return data.getFullYear() + '-' + (mouth > 9 ? mouth : '0' + mouth) + '-' + (day > 9 ? day : '0' + day);
+    const month = data.getMonth() + 1;
+    const day = data.getDate();
+    return data.getFullYear() + '-' + (month > 9 ? month : '0' + month) + '-' + (day > 9 ? day : '0' + day);
   }
 
   public submit(form): void {
