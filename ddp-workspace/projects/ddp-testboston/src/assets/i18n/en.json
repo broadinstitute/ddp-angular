@@ -1,528 +1,528 @@
 {
-    "Common": {
-        "Buttons": {
-            "Submit": {
-                "Title": "Submit",
-                "AriaLabel": "Submit button"
-            },
-            "Login": {
-                "Title": "Log In",
-                "AriaLabel": "Log In button"
-            }
-        }
-    },
-    "Navigation": {
-        "LogoAlt": "TestBoston logo",
-        "CRCLogoSubtitle": "Subject Support Interface",
-        "Home": "Home",
-        "About": "About the Study",
-        "Q&A": "Q&A",
-        "WhoWeAre": "Who We Are",
-        "StayInformed": "Stay Informed",
-        "KitInstructions": "Kit Instructions",
-        "Privacy": "Privacy Policy",
-        "Dashboard": "My Dashboard",
-        "Menu": "Menu",
-        "Invitation": "Invitation Code",
-        "Titles": {
-            "TestBoston": "TestBoston",
-            "ContactUs": "Contact Us",
-            "Participation": "Participation",
-            "Language": "Language"
-        }
-    },
-    "MailingList": {
-        "Title": "Mailing List Form",
-        "Questions": {
-            "Adult": "1. Are you 18 years old or older?",
-            "Patient": "2. Are you a Brigham & Women’s patient?",
-            "Email": "3. What email address is best for you?"
-        },
-        "Answers": {
-            "Yes": "Yes",
-            "No": "No",
-            "NoAnswer": "Prefer not to answer"
-        },
-        "Validations": {
-            "RequiredOption": "Please select an option",
-            "RequiredEmail": "Please enter your email address",
-            "InvalidEmail": "Please enter a valid email address"
-        },
-        "EmailLabel": "Enter email address",
-        "EmailPlaceholder": "example@example.com",
-        "ThankYouBlock": {
-            "Title": "You’re all set!",
-            "Text": "Thank you for signing up for the TestBoston mailing list."
-        },
-        "SorryBlock": {
-            "Title": "We’re sorry, it looks like you’re ineligible to join.",
-            "Text": {
-                "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
-                "Part2": "FAQ",
-                "Part3": "for more information."
-            }
-        }
-    },
-    "HomePage": {
-        "IntroSection": {
-            "Title": "We want to help our city safely get back to work.",
-            "Text": "TestBoston is a COVID-19 research study supported by Brigham and Women's Hospital, Mass General Brigham (formerly Partners Healthcare), and the Broad Institute of MIT and Harvard.",
-            "Code": "Enter my invitation code",
-            "NoCode": "I was not invited, can I participate?"
-        },
-        "AboutSection": {
-            "Title": "About the Study",
-            "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. Some people catch COVID-19 and don’t have symptoms. We hope our study will help us understand COVID-19 better, and benefit patients with and without COVID in the future.",
-            "Questions": {
-                "Title": "Questions we are trying to answer:",
-                "List": [
-                    "How common is COVID-19 in our communities?",
-                    "How common it is to have COVID-19 without symptoms?",
-                    "Do people become immune to COVID-19 after they have it?",
-                    "How can researchers test many people while they are at home?"
-                ]
-            }
-        },
-        "FaqSection": {
-            "Title": "Answers to Common Questions about TestBoston",
-            "Text": "You can also call or email our study staff if you have questions about TestBoston:",
-            "Items": [
-                {
-                    "Question": "Can anybody join this study?",
-                    "Paragraphs": [
-                        "TestBoston is open to a randomly selected group of adult residents from the greater Boston area, who have received care at Brigham and Women’s Hospital at least once in the past year. Each randomly selected patient will receive an invitation to the study by postal mail or email."
-                    ]
-                },
-                {
-                    "Question": "Will I get a COVID-19 test if I join the study?",
-                    "Paragraphs": [
-                        "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for  COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home self-testing kit within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab of the front of your nose tests if you have COVID-19 right now. The finger prick tests if you have antibodies to COVID-19 (meaning that you were exposed to the virus in the past). If you agree to be re-tested, and are eligible for the longer study, we will send you kits to repeat these tests every month for 5 additional months."
-                    ]
-                },
-                {
-                    "Question": "Will I receive the results of my tests?",
-                    "Paragraphs": [
-                        "You will receive the results of the virology test. We are not currently permitted to give you the results of your antibody test. We will report aggregate results (your results combined with other research participants' results) to the Massachusetts Department of Public Health and other key stakeholders in public health to know what percent of study participants had a positive antibody, and to help us better understand the prevalence, or how widespread COVID-19 is."
-                    ]
-                },
-                {
-                    "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
-                    "Paragraphs": [
-                        "No. Anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past). You may also enroll if you have had COVID-19 in the past."
-                    ]
-                },
-                {
-                    "Question": "Do I have to go anywhere to be in the study?",
-                    "Paragraphs": [
-                        "No. TestBoston is a home-based study. Participants in TestBoston do not have to visit a clinic, hospital, or doctor’s office. Participants will answer a short survey online and receive COVID-19 sample collection kits at home, which are mailed back to our lab. "
-                    ]
-                },
-                {
-                    "Question": "Will a doctor, nurse, or study staff visit my house to test me?",
-                    "Paragraphs": [
-                        "No. You will receive a sample collection kit in the mail and independently complete a nasal swab and a finger prick blood test by yourself. If you have any questions, you may reach the study team at any time by phone or email."
-                    ]
-                },
-                {
-                    "Question": "How long does it take to find out the test result?",
-                    "Paragraphs": [
-                        "You should expect to receive your virology result within 72 hours after the sample is received in the lab."
-                    ]
-                },
-                {
-                    "Question": "Why can’t you give me the antibody test result?",
-                    "Paragraphs": [
-                        "Because the antibody test will be performed in a research laboratory (a facility in which scientific research, experiments, and measurement may be performed) and not a clinical laboratory (a laboratory where tests are usually done on clinical specimens in order to obtain information about the health of a patient), we cannot directly release results from the research antibody test to you. "
-                    ]
-                },
-                {
-                    "Question": "Is it free to participate in TestBoston?",
-                    "Paragraphs": [
-                        "Yes. There is no charge to participate in TestBoston."
-                    ]
-                },
-                {
-                    "Question": "What will I have to do if I join the study?",
-                    "Paragraphs": [
-                        "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants will also be asked if they would like to be tested monthly for COVID-19 for the next 5 months. The test collections are a nasal swab from the front of your nose and a finger prick blood spot."
-                    ]
-                },
-                {
-                    "Question": "Can my family join TestBoston?",
-                    "Paragraphs": [
-                        "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
-                    ]
-                },
-                {
-                    "Question": "Can I give my invitation code to someone else?",
-                    "Paragraphs": [
-                        "No. The invitation code should only be used by the person that the letter is addressed to."
-                    ]
-                },
-                {
-                    "Question": "Who is running this study?",
-                    "Paragraphs": [
-                        "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Mass General Brigham (MGB, formerly Partners Healthcare), and the Broad Institute of MIT and Harvard. The people leading the study are Dr. Lisa Cosimi,  Dr. Ann Woolley, and Dr. Deborah Hung. All the doctors are infectious disease clinicians at Brigham and Women’s Hospital.",
-                        "MGB is the largest healthcare system in the Boston area. Its hospitals include Brigham and Women’s and Massachusetts General Hospital. The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
-                    ]
-                },
-                {
-                    "Question": "How long will the study last?",
-                    "Paragraphs": [
-                        "Participants in the study can decide to stop being in the study at any time. Individuals who participate in the entire study can expect to complete the study after 6 months."
-                    ]
-                },
-                {
-                    "Question": "Where can I find more information about COVID 19?",
-                    "Paragraphs": [],
-                    "Bullets": [
-                        "<strong>The US Centers for Disease Control and Prevention (CDC):</strong> The CDC has assembled a <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">Coronavirus homepage</a> with a number of resources to learn about COVID-19 symptoms, how to protect yourself, and the most up to date national policies.",
-                        "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
-                        "<strong>Massachusetts residents:</strong> The Massachusetts Department of Public Health (DPH) Hotline can be reached at <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> or at <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 hours per day, 7 days per week. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-                        "<strong>Boston residents:</strong> Find reliable information at the Boston Public Health Commission, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
-                    ]
-                }
-            ]
-        },
-        "TeamSection": {
-            "Title": "Our Team",
-            "Text": "We are a team of infectious disease doctors and researchers who want to better understand how COVID-19 is affecting individuals and communities so we can better serve all patients. ",
-            "List": [
-                {
-                    "Name": "Ann E. Woolley, MD",
-                    "Affiliations": "Instructor in Medicine",
-                    "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
-                },
-                {
-                    "Name": "Lisa A. Cosimi, MD",
-                    "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
-                    "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
-                },
-                {
-                    "Name": "Deborah T. Hung, MD, PhD",
-                    "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
-                    "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT & Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham & Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
-                }
-            ]
-        },
-        "MailingSection": {
-            "Title": "TestBoston is currently enrolling invited patients of Brigham and Women’s Hospital. ",
-            "Text": "If you did not receive an invitation to join the study but are interested in staying up to date about general TestBoston information, please join our newsletter list:"
-        }
-    },
-    "PrequalPage": {
-        "Title": "First, confirm your eligibility",
-        "InvitationCode": {
-            "Question": "Enter your invitation code",
-            "TooltipAlt": "Info icon",
-            "Tooltip": "If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top.",
-            "Placeholder": "Enter invitation code",
-            "Error": {
-                "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
-                "Part2": "or"
-            }
-        },
-        "Zip": {
-            "Question": "What is your current mailing zip code?",
-            "Placeholder": "Enter mailing zip code",
-            "Error": "We’re sorry. That zip code is outside the TestBoston study zone. Please check the zip code you entered and try again."
-        },
-        "Adult": {
-            "Question": "Are you 18 years old or older?",
-            "Yes": "Yes",
-            "No": "No",
-            "Error": {
-                "Part1": "We’re sorry, it looks like you’re ineligible to join. You must be 18 years or older to join the TestBoston study. Please read our",
-                "Part2": "FAQ",
-                "Part3": "for more information."
-            }
-        },
-        "Error": "We're sorry, but an error has occurred. Please wait a moment and retry."
-    },
-    "Prism": {
-        "ClearSearch": "Clear",
-        "Email": "SUBJECT EMAIL ADDRESS",
-        "NoEmail": "N/A",
-        "Buttons": {
-            "Enrollment": "Begin Enrollment",
-            "Dashboard": "View Dashboard"
-        },
-        "Notes": "SUBJECT NOTES",
-        "NotesPlaceholder": "Start Typing...",
-        "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry.",
-        "Steps": {
-            "Step1": {
-                "Title": "Enter the subject’s 12-digit invitation code",
-                "Subtitle": "If the code is unknown, access the Brigham link file and use the subject’s name to retrieve the code.",
-                "Placeholder": "Enter Invitation Code",
-                "Error": "Code Not Found"
-            },
-            "Step2": {
-                "Title": "Check mailing zip code",
-                "Placeholder": "Enter zip code",
-                "Error": "Invalid zip code",
-                "Success": "Valid zip code"
-            },
-            "Step3": {
-                "Title": "Verbally confirm subject is 18 years or older before beginning enrollment."
-            }
-        }
-    },
-    "Enrollment": {
-        "Title": "Account setup",
-        "FirstName": {
-            "Text": "Subject's First Name",
-            "Placeholder": "Enter first name",
-            "Error": "Please enter subject's first name"
-        },
-        "LastName": {
-            "Text": "Subject's Last Name",
-            "Placeholder": "Enter last name",
-            "Error": "Please enter subject's last name"
-        },
-        "Email": {
-            "Text": "Subject's Email Address (Optional)",
-            "Placeholder": "example@example.com",
-            "Error": "Please enter valid email address"
-        },
-        "Button": "Next"
-    },
-    "Toolkit": {
-        "Dashboard": {
-            "Title": "Dashboard",
-            "Invitation": {
-                "InvitationCode": "Invitation Code:",
-                "Message": "Please use the look-up tool to manage a participant.",
-                "Button": "Go"
-            }
-        },
-        "Password": {
-            "Title": "Please enter the password",
-            "Text": "Please enter your password *",
-            "InputPlaceholder": "Password",
-            "PasswordWrongError": "Incorrect password. Please try again.",
-            "PasswordRequiredError": "Password is required"
-        },
-        "ErrorPage": {
-            "Title": "We've encountered an error",
-            "Text": "We're sorry, but an error has occurred.",
-            "DefaultText": {
-                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "or call us at"
-            }
-        },
-        "SessionExpired": {
-            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
-        },
-        "Dialogs": {
-            "SessionWillExpire": {
-                "Title": "Your session will time-out soon",
-                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-                "SignOut": "Sign Out",
-                "Continue": "Continue",
-                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
-            }
-        }
-    },
-    "SDK": {
-        "SubmitButton": "Submit",
-        "CloseButton": "Close",
-        "AddButton": "ADD",
-        "CancelButton": "CANCEL",
-        "NextButton": "Next",
-        "PreviousButton": "Back",
-        "SavingButton": "Saving",
-        "EditButton": "Continue",
-        "CompleteButton": "Edit",
-        "ReviewButton": "View",
-        "AgreeButton": "I agree",
-        "NotAgreeButton": "I'm not ready to agree",
-        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
-        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-        "SaveError": "We're sorry but an error occurred",
-        "ExportStudy": {
-            "Export": "EXPORT"
-        },
-        "ListStudies": {
-            "StudyName": "Study Name",
-            "ParticipantCount": "Participant Count"
-        },
-        "ListWorkspaces": {
-            "WorkspaceName": "Workspace Name",
-            "WorkspaceNamespace": "Workspace Namespace"
-        },
-        "Login": {
-            "Login": "LOG IN",
-            "Logout": "LOG OUT"
-        },
-        "SignInOut": {
-            "SignIn": "Sign In",
-            "SignOut": "Sign Out"
-        },
-        "LanguageSelector": {
-            "LanguageSelection": "language selection"
-        },
-        "UserActivities": {
-            "ActivityName": "Form",
-            "Summary": "Summary",
-            "ActivityStatus": "Status",
-            "ActivityDate": "Created",
-            "ActivityActions": "Actions",
-            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered"
-        },
-        "ManageParticipants": {
-            "GovernedParticipants": "Governed participants",
-            "ParticipantPlaceholder": "Participant",
-            "ParticipantsList": "Participants"
-        },
-        "ParticipantProfile": {
-            "OpenProfile": "Profile",
-            "ViewAs": "View As",
-            "ManageParticipants": "Manage participants"
-        },
-        "UserPreferences": {
-            "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex",
-            "UserPreferencesLocale": "Preferred language"
-        },
-        "Dashboard": {
-            "Title": "My Dashboard",
-            "Text": "The dashboard below describes each TestBoston form and its status."
-        },
-        "DatePicker": {
-            "Day": "Choose day...",
-            "Month": "Choose month...",
-            "Year": "Choose year...",
-            "January": "January",
-            "February": "February",
-            "March": "March",
-            "April": "April",
-            "May": "May",
-            "June": "June",
-            "July": "July",
-            "August": "August",
-            "September": "September",
-            "October": "October",
-            "November": "November",
-            "December": "December"
-        },
-        "UserMenu": {
-            "DashboardButton": "Dashboard",
-            "SignOutButton": "Sign Out"
-        },
-        "DetailsPlaceholder": {
-            "PluralForm": "characters remaining",
-            "SingularForm": "character remaining"
-        },
-        "Title": {
-            "Default": "TestBoston",
-            "Alert": "Your session will time-out soon"
-        },
-        "EmailEntry": {
-            "InvalidEmail": "Please enter a valid email"
-        },
-        "Institutions": {
-            "Fields": {
-                "Name": "Physician Name",
-                "Institution": "Institution",
-                "InstitutionAny": "Institution (if any)",
-                "City": "City",
-                "State": "State"
-            },
-            "PhysicianValidation": "Please fill out all required fields"
-        },
-        "MailAddress": {
-            "Fields": {
-                "Name": "Full Name",
-                "Country": "Country/Territory",
-                "Street1": "Street Address",
-                "Street2": "Apt/Floor #",
-                "State": {
-                    "State": "State",
-                    "Province": "Province",
-                    "State/Province/Region": "State/Province/Region"
-                },
-                "City": "City",
-                "Phone": "Phone",
-                "Zip": {
-                    "Zip Code": "Zip Code",
-                    "Postal Code": "Postal Code",
-                    "Zip/Postal Code": "Zip/Postal Code"
-                },
-                "Choose": "Choose {{field}} ..."
-            },
-            "Suggestion": {
-                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-                "Suggested": "Suggested:",
-                "AsEntered": "As Entered:"
-            },
-            "Error": {
-                "InvalidAddress": "Invalid address.",
-                "CannotVerify": "Could not verify address, please double-check your address.",
-                "UnknownVerifyError": "An unknown error occurred while verifying address.",
-                "FieldIsRequired": "{{field}} is required",
-                "FieldIsInvalid": "{{field}} has an invalid value",
-                "InvalidHouseNumber": "Street number could not be found",
-                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-                "NOT_FOUND": "The requested resource could not be found.",
-                "FORBIDDEN": "Unable to access the requested resource.",
-                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-                "PARAMETER.REQUIRED": "Missing required parameter.",
-                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-                "E.STREET.MISSING": "Street is missing.",
-                "E.STREET.INVALID": "Street is invalid.",
-                "E.BOX_NUMBER.MISSING": "Box number is missing.",
-                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-                "E.ZIP.NOT_FOUND": "Zip not found.",
-                "E.ZIP.INVALID": "Zip invalid.",
-                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-                "E.ADDRESS.DUAL": "Dual address.",
-                "E.STREET.MAGNET": "Street address is ambiguous.",
-                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-                "E.STATE.INVALID": "Invalid State.",
-                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-                "E.TIMED_OUT": "Exceeded max timeout.",
-                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-            }
-        },
-        "TooltipAlt": "Information",
-        "SubjectPanel": {
-            "Link": "Return to subject look-up",
-            "Text": "Subject Invitation Code: "
-        }
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit button"
+      },
+      "Login": {
+        "Title": "Log In",
+        "AriaLabel": "Log In button"
+      }
     }
+  },
+  "Navigation": {
+    "LogoAlt": "TestBoston logo",
+    "CRCLogoSubtitle": "Subject Support Interface",
+    "Home": "Home",
+    "About": "About the Study",
+    "Q&A": "Q&A",
+    "WhoWeAre": "Who We Are",
+    "StayInformed": "Stay Informed",
+    "KitInstructions": "Kit Instructions",
+    "Privacy": "Privacy Policy",
+    "Dashboard": "My Dashboard",
+    "Menu": "Menu",
+    "Invitation": "Invitation Code",
+    "Titles": {
+      "TestBoston": "TestBoston",
+      "ContactUs": "Contact Us",
+      "Participation": "Participation",
+      "Language": "Language"
+    }
+  },
+  "MailingList": {
+    "Title": "Mailing List Form",
+    "Questions": {
+      "Adult": "1. Are you 18 years old or older?",
+      "Patient": "2. Are you a Brigham & Women’s patient?",
+      "Email": "3. What email address is best for you?"
+    },
+    "Answers": {
+      "Yes": "Yes",
+      "No": "No",
+      "NoAnswer": "Prefer not to answer"
+    },
+    "Validations": {
+      "RequiredOption": "Please select an option",
+      "RequiredEmail": "Please enter your email address",
+      "InvalidEmail": "Please enter a valid email address"
+    },
+    "EmailLabel": "Enter email address",
+    "EmailPlaceholder": "example@example.com",
+    "ThankYouBlock": {
+      "Title": "You’re all set!",
+      "Text": "Thank you for signing up for the TestBoston mailing list."
+    },
+    "SorryBlock": {
+      "Title": "We’re sorry, it looks like you’re ineligible to join.",
+      "Text": {
+        "Part1": "You must be 18 years or older to join the TestBoston mailing list. Please read our",
+        "Part2": "FAQ",
+        "Part3": "for more information."
+      }
+    }
+  },
+  "HomePage": {
+    "IntroSection": {
+      "Title": "We want to help our city safely get back to work.",
+      "Text": "TestBoston is a COVID-19 research study supported by Brigham and Women's Hospital, Mass General Brigham (formerly Partners Healthcare), and the Broad Institute of MIT and Harvard.",
+      "Code": "Enter my invitation code",
+      "NoCode": "I was not invited, can I participate?"
+    },
+    "AboutSection": {
+      "Title": "About the Study",
+      "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. Some people catch COVID-19 and don’t have symptoms. We hope our study will help us understand COVID-19 better, and benefit patients with and without COVID in the future.",
+      "Questions": {
+        "Title": "Questions we are trying to answer:",
+        "List": [
+          "How common is COVID-19 in our communities?",
+          "How common it is to have COVID-19 without symptoms?",
+          "Do people become immune to COVID-19 after they have it?",
+          "How can researchers test many people while they are at home?"
+        ]
+      }
+    },
+    "FaqSection": {
+      "Title": "Answers to Common Questions about TestBoston",
+      "Text": "You can also call or email our study staff if you have questions about TestBoston:",
+      "Items": [
+        {
+          "Question": "Can anybody join this study?",
+          "Paragraphs": [
+            "TestBoston is open to a randomly selected group of adult residents from the greater Boston area, who have received care at Brigham and Women’s Hospital at least once in the past year. Each randomly selected patient will receive an invitation to the study by postal mail or email."
+          ]
+        },
+        {
+          "Question": "Will I get a COVID-19 test if I join the study?",
+          "Paragraphs": [
+            "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for  COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home self-testing kit within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab of the front of your nose tests if you have COVID-19 right now. The finger prick tests if you have antibodies to COVID-19 (meaning that you were exposed to the virus in the past). If you agree to be re-tested, and are eligible for the longer study, we will send you kits to repeat these tests every month for 5 additional months."
+          ]
+        },
+        {
+          "Question": "Will I receive the results of my tests?",
+          "Paragraphs": [
+            "You will receive the results of the virology test. We are not currently permitted to give you the results of your antibody test. We will report aggregate results (your results combined with other research participants' results) to the Massachusetts Department of Public Health and other key stakeholders in public health to know what percent of study participants had a positive antibody, and to help us better understand the prevalence, or how widespread COVID-19 is."
+          ]
+        },
+        {
+          "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
+          "Paragraphs": [
+            "No. Anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past). You may also enroll if you have had COVID-19 in the past."
+          ]
+        },
+        {
+          "Question": "Do I have to go anywhere to be in the study?",
+          "Paragraphs": [
+            "No. TestBoston is a home-based study. Participants in TestBoston do not have to visit a clinic, hospital, or doctor’s office. Participants will answer a short survey online and receive COVID-19 sample collection kits at home, which are mailed back to our lab. "
+          ]
+        },
+        {
+          "Question": "Will a doctor, nurse, or study staff visit my house to test me?",
+          "Paragraphs": [
+            "No. You will receive a sample collection kit in the mail and independently complete a nasal swab and a finger prick blood test by yourself. If you have any questions, you may reach the study team at any time by phone or email."
+          ]
+        },
+        {
+          "Question": "How long does it take to find out the test result?",
+          "Paragraphs": [
+            "You should expect to receive your virology result within 72 hours after the sample is received in the lab."
+          ]
+        },
+        {
+          "Question": "Why can’t you give me the antibody test result?",
+          "Paragraphs": [
+            "Because the antibody test will be performed in a research laboratory (a facility in which scientific research, experiments, and measurement may be performed) and not a clinical laboratory (a laboratory where tests are usually done on clinical specimens in order to obtain information about the health of a patient), we cannot directly release results from the research antibody test to you. "
+          ]
+        },
+        {
+          "Question": "Is it free to participate in TestBoston?",
+          "Paragraphs": [
+            "Yes. There is no charge to participate in TestBoston."
+          ]
+        },
+        {
+          "Question": "What will I have to do if I join the study?",
+          "Paragraphs": [
+            "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants will also be asked if they would like to be tested monthly for COVID-19 for the next 5 months. The test collections are a nasal swab from the front of your nose and a finger prick blood spot."
+          ]
+        },
+        {
+          "Question": "Can my family join TestBoston?",
+          "Paragraphs": [
+            "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
+          ]
+        },
+        {
+          "Question": "Can I give my invitation code to someone else?",
+          "Paragraphs": [
+            "No. The invitation code should only be used by the person that the letter is addressed to."
+          ]
+        },
+        {
+          "Question": "Who is running this study?",
+          "Paragraphs": [
+            "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Mass General Brigham (MGB, formerly Partners Healthcare), and the Broad Institute of MIT and Harvard. The people leading the study are Dr. Lisa Cosimi,  Dr. Ann Woolley, and Dr. Deborah Hung. All the doctors are infectious disease clinicians at Brigham and Women’s Hospital.",
+            "MGB is the largest healthcare system in the Boston area. Its hospitals include Brigham and Women’s and Massachusetts General Hospital. The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
+          ]
+        },
+        {
+          "Question": "How long will the study last?",
+          "Paragraphs": [
+            "Participants in the study can decide to stop being in the study at any time. Individuals who participate in the entire study can expect to complete the study after 6 months."
+          ]
+        },
+        {
+          "Question": "Where can I find more information about COVID 19?",
+          "Paragraphs": [],
+          "Bullets": [
+            "<strong>The US Centers for Disease Control and Prevention (CDC):</strong> The CDC has assembled a <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">Coronavirus homepage</a> with a number of resources to learn about COVID-19 symptoms, how to protect yourself, and the most up to date national policies.",
+            "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
+            "<strong>Massachusetts residents:</strong> The Massachusetts Department of Public Health (DPH) Hotline can be reached at <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> or at <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 hours per day, 7 days per week. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
+            "<strong>Boston residents:</strong> Find reliable information at the Boston Public Health Commission, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+          ]
+        }
+      ]
+  },
+  "TeamSection": {
+    "Title": "Our Team",
+    "Text": "We are a team of infectious disease doctors and researchers who want to better understand how COVID-19 is affecting individuals and communities so we can better serve all patients. ",
+    "List": [
+      {
+        "Name": "Ann E. Woolley, MD",
+        "Affiliations": "Instructor in Medicine",
+        "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
+      },
+      {
+        "Name": "Lisa A. Cosimi, MD",
+        "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
+        "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
+      },
+      {
+        "Name": "Deborah T. Hung, MD, PhD",
+        "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
+        "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT & Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham & Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
+      }
+    ]
+  },
+  "MailingSection": {
+    "Title": "TestBoston is currently enrolling invited patients of Brigham and Women’s Hospital. ",
+    "Text": "If you did not receive an invitation to join the study but are interested in staying up to date about general TestBoston information, please join our newsletter list:"
+  }
+  },
+  "PrequalPage": {
+    "Title": "First, confirm your eligibility",
+    "InvitationCode": {
+      "Question": "Enter your invitation code",
+      "TooltipAlt": "Info icon",
+      "Tooltip": "If you received a paper or email invitation from your doctor, it includes a 12-digit invitation code at the top.",
+      "Placeholder": "Enter invitation code",
+      "Error": {
+        "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
+        "Part2": "or"
+      }
+    },
+    "Zip": {
+      "Question": "What is your current mailing zip code?",
+      "Placeholder": "Enter mailing zip code",
+      "Error": "We’re sorry. That zip code is outside the TestBoston study zone. Please check the zip code you entered and try again."
+    },
+    "Adult": {
+      "Question": "Are you 18 years old or older?",
+      "Yes": "Yes",
+      "No": "No",
+      "Error": {
+        "Part1": "We’re sorry, it looks like you’re ineligible to join. You must be 18 years or older to join the TestBoston study. Please read our",
+        "Part2": "FAQ",
+        "Part3": "for more information."
+      }
+    },
+    "Error": "We're sorry, but an error has occurred. Please wait a moment and retry."
+  },
+  "Prism": {
+    "ClearSearch": "Clear",
+    "Email": "SUBJECT EMAIL ADDRESS",
+    "NoEmail": "N/A",
+    "Buttons": {
+      "Enrollment": "Begin Enrollment",
+      "Dashboard": "View Dashboard"
+    },
+    "Notes": "SUBJECT NOTES",
+    "NotesPlaceholder": "Start Typing...",
+    "NotesError": "We're sorry, but your notes weren't saved. Please wait a moment and retry.",
+    "Steps": {
+      "Step1": {
+        "Title": "Enter the subject’s 12-digit invitation code",
+        "Subtitle": "If the code is unknown, access the Brigham link file and use the subject’s name to retrieve the code.",
+        "Placeholder": "Enter Invitation Code",
+        "Error": "Code Not Found"
+      },
+      "Step2": {
+        "Title": "Check mailing zip code",
+        "Placeholder": "Enter zip code",
+        "Error": "Invalid zip code",
+        "Success": "Valid zip code"
+      },
+      "Step3": {
+        "Title": "Verbally confirm subject is 18 years or older before beginning enrollment."
+      }
+    }
+  },
+  "Enrollment": {
+    "Title": "Account setup",
+    "FirstName": {
+      "Text": "Subject's First Name",
+      "Placeholder": "Enter first name",
+      "Error": "Please enter subject's first name"
+    },
+    "LastName": {
+      "Text": "Subject's Last Name",
+      "Placeholder": "Enter last name",
+      "Error": "Please enter subject's last name"
+    },
+    "Email": {
+      "Text": "Subject's Email Address (Optional)",
+      "Placeholder": "example@example.com",
+      "Error": "Please enter valid email address"
+    },
+    "Button": "Next"
+  },
+  "Toolkit": {
+    "Dashboard": {
+      "Title": "Dashboard",
+      "Invitation": {
+        "InvitationCode": "Invitation Code:",
+        "Message": "Please use the look-up tool to manage a participant.",
+        "Button": "Go"
+      }
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password *",
+      "InputPlaceholder": "Password",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "PasswordRequiredError": "Password is required"
+    },
+    "ErrorPage": {
+      "Title": "We've encountered an error",
+      "Text": "We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "or call us at"
+      }
+    },
+    "SessionExpired": {
+      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "Dialogs": {
+      "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue",
+        "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+      }
+    }
+  },
+  "SDK": {
+    "SubmitButton": "Submit",
+    "CloseButton": "Close",
+    "AddButton": "ADD",
+    "CancelButton": "CANCEL",
+    "NextButton": "Next",
+    "PreviousButton": "Back",
+    "SavingButton": "Saving",
+    "EditButton": "Continue",
+    "CompleteButton": "Edit",
+    "ReviewButton": "View",
+    "AgreeButton": "I agree",
+    "NotAgreeButton": "I'm not ready to agree",
+    "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+    "SaveError": "We're sorry but an error occurred",
+    "ExportStudy": {
+      "Export": "EXPORT"
+    },
+    "ListStudies": {
+      "StudyName": "Study Name",
+      "ParticipantCount": "Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "Workspace Name",
+      "WorkspaceNamespace": "Workspace Namespace"
+    },
+    "Login": {
+      "Login": "LOG IN",
+      "Logout": "LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "Sign In",
+      "SignOut": "Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "Form",
+      "Summary": "Summary",
+      "ActivityStatus": "Status",
+      "ActivityDate": "Created",
+      "ActivityActions": "Actions",
+      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "Governed participants",
+      "ParticipantPlaceholder": "Participant",
+      "ParticipantsList": "Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "Profile",
+      "ViewAs": "View As",
+      "ManageParticipants": "Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "User preferences",
+      "UserPreferencesGender": "Sex",
+      "UserPreferencesLocale": "Preferred language"
+    },
+    "Dashboard": {
+      "Title": "My Dashboard",
+      "Text": "The dashboard below describes each TestBoston form and its status."
+    },
+    "DatePicker": {
+      "Day": "Choose day...",
+      "Month": "Choose month...",
+      "Year": "Choose year...",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "UserMenu": {
+      "DashboardButton": "Dashboard",
+      "SignOutButton": "Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "characters remaining",
+      "SingularForm": "character remaining"
+    },
+    "Title": {
+      "Default": "TestBoston",
+      "Alert": "Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "Physician Name",
+        "Institution": "Institution",
+        "InstitutionAny": "Institution (if any)",
+        "City": "City",
+        "State": "State"
+      },
+      "PhysicianValidation": "Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "Full Name",
+        "Country": "Country/Territory",
+        "Street1": "Street Address",
+        "Street2": "Apt/Floor #",
+        "State": {
+          "State": "State",
+          "Province": "Province",
+          "State/Province/Region": "State/Province/Region"
+        },
+        "City": "City",
+        "Phone": "Phone",
+        "Zip": {
+          "Zip Code": "Zip Code",
+          "Postal Code": "Postal Code",
+          "Zip/Postal Code": "Zip/Postal Code"
+        },
+        "Choose": "Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "Suggested:",
+        "AsEntered": "As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "Invalid address.",
+        "CannotVerify": "Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "An unknown error occurred while verifying address.",
+        "FieldIsRequired": "{{field}} is required",
+        "FieldIsInvalid": "{{field}} has an invalid value",
+        "InvalidHouseNumber": "Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "The requested resource could not be found.",
+        "FORBIDDEN": "Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+        "E.STREET.MISSING": "Street is missing.",
+        "E.STREET.INVALID": "Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "Zip not found.",
+        "E.ZIP.INVALID": "Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "Dual address.",
+        "E.STREET.MAGNET": "Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+        "E.STATE.INVALID": "Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+        "E.TIMED_OUT": "Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "Information",
+    "SubjectPanel": {
+      "Link": "Return to subject look-up",
+      "Text": "Subject Invitation Code: "
+    }
+  }
 }
