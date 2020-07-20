@@ -4,6 +4,7 @@ export const AppRoutes = {
     ActivityLinkId: 'activity-link/:id',
     Error: 'error',
     Join: 'join',
+    LanguageRedirect: 'language-redirect',
     LoginLanding: 'login-landing',
     LoginLandingMode: 'login-landing/:mode',
     AdminLoginLanding: 'admin-login-landing',
