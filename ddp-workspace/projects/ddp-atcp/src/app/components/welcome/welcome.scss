@@ -23,22 +23,17 @@
     }
 
     .first-display {
-      padding-top: 301px;
       color: $white;
       position: relative;
       overflow: hidden;
-      @media (min-width: 666px) {
-        padding-top: 146px;
-      }
       @media (min-width: 750px) {
         height: 75vw;
       }
       @media (min-width: 800px) {
-        padding-top: 151px;
+        padding-top: 146px;
       }
       @media (min-width: 841px) {
         padding-bottom: 66px;
-        padding-top: 146px;
       }
       @media (min-width: 910px) {
         padding-top: 106px;
