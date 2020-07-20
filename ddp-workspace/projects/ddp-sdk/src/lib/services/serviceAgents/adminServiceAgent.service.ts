@@ -4,6 +4,7 @@ import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 
 @Injectable()
 export class AdminServiceAgent<TEntity> extends SessionServiceAgent<TEntity> {
@@ -11,8 +12,9 @@ export class AdminServiceAgent<TEntity> extends SessionServiceAgent<TEntity> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     protected getBackendUrl(): string {

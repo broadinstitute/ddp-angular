@@ -4,8 +4,9 @@ import { ServiceAgent } from './serviceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { Observable, of } from 'rxjs';
-import { flatMap, take } from 'rxjs/operators';
+import { flatMap, switchMap, take } from 'rxjs/operators';
 
 @Injectable()
 export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
@@ -13,7 +14,8 @@ export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
         private _session: SessionMementoService,
         @Inject('ddp.config') protected _configuration: ConfigurationService,
         private _http: HttpClient,
-        private _logger: LoggingService) {
+        private _logger: LoggingService,
+        private language: LanguageService = null) {
         super(_configuration, _http, _logger);
     }
 
@@ -46,5 +48,16 @@ export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
 
     protected getBackendUrl(): string {
         return this.configuration.backendUrl + '/pepper/v1';
+    }
+
+    protected getObservable(path: string, options: any = {}, unrecoverableStatuses: Array<number> = []): Observable<TEntity | null> {
+      if (this.language) {
+        return this.language.getProfileLanguageUpdateNotifier()
+          .pipe(switchMap(() =>
+            super.getObservable(path, options, unrecoverableStatuses)));
+      }
+      else {
+        return super.getObservable(path, options, unrecoverableStatuses);
+      }
     }
 }

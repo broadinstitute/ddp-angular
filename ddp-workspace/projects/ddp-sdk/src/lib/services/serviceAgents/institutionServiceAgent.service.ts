@@ -4,6 +4,7 @@ import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { Institution } from '../../models/institution';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
@@ -14,8 +15,9 @@ export class InstitutionServiceAgent extends SessionServiceAgent<any> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public getSummary(input: Observable<string>): Observable<Institution[]> {
