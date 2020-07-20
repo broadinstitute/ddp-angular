@@ -1239,7 +1239,7 @@
             "main": "projects/ddp-brain-v2/src/main.ts",
             "polyfills": "projects/ddp-brain-v2/src/polyfills.ts",
             "tsConfig": "projects/ddp-brain-v2/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ddp-brain-v2/src/favicon.ico",
               "projects/ddp-brain-v2/src/favicon-alert.ico",
@@ -1259,8 +1259,7 @@
               "projects/ddp-brain-v2/src/theme.scss",
               "projects/ddp-brain-v2/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1275,19 +1274,28 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
                 }
               ]
             },
             "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
               "tsConfig": "projects/ddp-brain-v2/tsconfig.es5.json"
             }
           }
