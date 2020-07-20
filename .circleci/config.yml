@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston mpc"
+    "osteo brain brain-v2 angio mbc testboston mpc"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc"
+      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
@@ -93,7 +93,6 @@ commands:
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
             source $BASH_ENV
-
   deploy-stored-build:
     description: Deploy archived build to GAE
     parameters:
@@ -113,7 +112,6 @@ commands:
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
-
             if [ -z $TAR_FILE_URL ]
             then
               echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
@@ -183,24 +181,20 @@ commands:
             CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
             SERVICE=$(grep -Eo -m1 "^service:\s*.*" "${CONFIG_FILE}" | awk '{print $2}')
             echo "The service name is *${SERVICE}*"
-
             # find what other versions are currently running
             # skip first line, exclude our version, print 2nd column
             AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
             VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
-
             # Sometime deleting versions fails. If there are less than 3 versions then we are not going to worry about it
             # and set flag so this job step does not fail when exit error value is generated
             if [[ ! -z $VERSIONS_TO_DELETE ]] && [[ "${#VERSIONS_TO_DELETE[@]}" -lt 3 ]]; then
               set +e
             fi
-
             for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
               echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
             done;
             exit 0;
-
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
     parameters:
@@ -247,7 +241,6 @@ commands:
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
-
   setup-build-workspace:
     description: "Setup workspace used by all projects"
     steps:
@@ -291,7 +284,6 @@ commands:
           command: |
             set -u
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-
   store-app-build:
     description: "Copy build to cloud storage"
     steps:
@@ -315,7 +307,6 @@ commands:
             set -u
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gsutil cp  ${TAR_PATH} "gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${TAR_NAME}"
-
   conditionally-launch-build-and-deploy:
     description: Launch build and deploy if project has changed
     parameters:
@@ -330,14 +321,10 @@ commands:
             set +x
             # CircleCi does not support arrays as params, so here is my workaround
             STUDY_KEYS=(<< parameters.study_keys >>)
-
             CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
-
             echo "The following projects were found to have changed: $CHANGED_PROJECTS"
-
             for i in "${!STUDY_KEYS[@]}"; do
               STUDY_KEY=${STUDY_KEYS[$i]}
-
               NG_PROJECT_NAME="ddp-$STUDY_KEY"
               CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
                   grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
@@ -354,7 +341,6 @@ commands:
                 echo "Skipping $STUDY_KEY"
               fi
             done;
-
   conditionally-launch-build-and-store:
     description: Launch build and save job if build missing
     parameters:
@@ -373,7 +359,6 @@ commands:
             echo "Checking for ${TAR_FILE_URL_PATTERN}"
             # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
-
             # if not found, let's kick off a build
             if [ -z $TAR_FILE_URL ]
               then
@@ -388,7 +373,6 @@ commands:
               else
                 echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
             fi
-
 jobs:
   build-and-deploy-job:
     working_directory: *ng_workspace_path
@@ -430,6 +414,8 @@ jobs:
           study_key: mbc
       - conditionally-launch-build-and-store:
           study_key: testboston
+      - conditionally-launch-build-and-store:
+          study_key: brain-v2
       - conditionally-launch-build-and-store:
           study_key: mpc
 
@@ -524,6 +510,9 @@ workflows:
           study_key: testboston
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: brain-v2
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: mpc
 
   nightly:
@@ -550,6 +539,9 @@ workflows:
       - build-and-deploy-job:
           name: testboston-nightly
           study_key: testboston
+      - build-and-deploy-job:
+          name: brain-v2-nightly
+          study_key: brain-v2
       - build-and-deploy-job:
           name: mpc-nightly
           study_key: mpc
