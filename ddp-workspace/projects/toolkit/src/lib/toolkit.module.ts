@@ -181,13 +181,6 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
     InstagramFeedLightwidgetPluginComponent
-  ],
-  entryComponents: [
-    DisclaimerComponent,
-    JoinMailingListComponent,
-    ResendEmailComponent,
-    WarningComponent,
-    SessionWillExpireComponent
   ]
 })
 export class ToolkitModule {

@@ -420,11 +420,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationPipe,
     TooltipComponent,
     SubjectPanelComponent
-  ],
-  entryComponents: [
-    UserPreferencesComponent,
-    ManageParticipantsComponent,
-    NewRequestMock
   ]
 })
 export class DdpModule { }
