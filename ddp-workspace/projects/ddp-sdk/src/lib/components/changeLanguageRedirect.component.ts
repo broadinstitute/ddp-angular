@@ -18,9 +18,6 @@ export class ChangeLanguageRedirectComponent implements OnInit {
   //The destination to redirect to, relative to the main site
   private dest: string = null;
 
-  //Optionally, a parameter to pass through to the destination to redirect to
-  private queryParamValue: string = null;
-
   constructor(
     private languageService: LanguageService,
     private languageServiceAgent: LanguageServiceAgent,
@@ -31,16 +28,13 @@ export class ChangeLanguageRedirectComponent implements OnInit {
 
   public ngOnInit(): void {
     //Get the specified language and specified destination and store for later
-    let paramPromise: Promise<void> = this.getParamInfo();
-
-    //Get any parameters to pass through to specified destination
     let queryParamPromise: Promise<void> = this.getQueryParamInfo();
 
     //Get the study's configured languages and store for later
     let supportedLanguagesPromise: Promise<void> = this.getSupportedLanguagesPromise();
 
     //Attempt to change language and redirect
-    Promise.all([paramPromise, queryParamPromise, supportedLanguagesPromise])
+    Promise.all([queryParamPromise, supportedLanguagesPromise])
       .then(() => {
         //Add the configured languages
         this.languageService.addLanguages(this.supportedLanguages.map(x => x.languageCode));
@@ -48,17 +42,12 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         //Try to switch to the specified language
         let langChangePromise: Promise<any> = this.languageService.changeLanguagePromise(this.lang);
         langChangePromise.catch(reason => {
-          console.log(`Could not change language to ${this.lang}: ${reason}.`);
+          console.error(`Could not change language to ${this.lang}: ${reason}.`);
         }).then(() => {
           console.log(`Changed language to ${this.languageService.getCurrentLanguage()}`);
         }).finally(() => {
           //Do the redirect
-          let destName = this.dest;
-          if (this.queryParamValue) {
-            destName = destName + '/' + this.queryParamValue;
-          }
-
-          this.router.navigate([destName], {relativeTo: this.route.root});
+          this.router.navigate([this.dest], {relativeTo: this.route.root});
           });
       });
   }
@@ -68,17 +57,18 @@ export class ChangeLanguageRedirectComponent implements OnInit {
       (languages => {this.supportedLanguages = languages}));
   }
 
-  private getParamInfo(): Promise<void> {
-    return this.getPromiseFromObservable(this.route.paramMap, (params => {
-      this.lang = params.get('language');
-      this.dest = params.get('destination');
-    }));
-  }
-
   private getQueryParamInfo(): Promise<void> {
     return this.getPromiseFromObservable(this.route.queryParamMap, (queryParams => {
-      if (queryParams.has('destParamValue')) {
-        this.queryParamValue = queryParams.get('destParamValue');
+      if (queryParams.has('language')) {
+        this.lang = queryParams.get('language');
+      } else {
+        console.error("Missing language query parameter!");
+      }
+
+      if (queryParams.has('destination')) {
+        this.dest = queryParams.get('destination');
+      } else {
+        console.error("Missing destination query parameter!");
       }
     }));
   }
