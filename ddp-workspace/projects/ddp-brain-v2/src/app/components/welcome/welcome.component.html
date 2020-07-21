@@ -1,30 +1,35 @@
 <main class="main">
     <section class="section">
-        <div class="content content_wide">
-            <div>
-                <div>
+        <div class="content content_wide introduction-block">
+            <div class="introduction">
+                <div class="introduction__info">
                     <h1>Help transform our understanding of Brain Cancer</h1>
-                    <p>
+                    <p class="introduction__text">
                         If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide
                         movement of patients and their families, doctors, and scientists by sharing your information and
                         your voice.
                     </p>
-                    <div>
-                        <a href="#">Count Me In</a>
-                        <a href="#">Learn More</a>
+                    <div class="introduction__buttons">
+                        <a [routerLink]="'/' + appRoutes.CountMeIn"
+                            class="button button_medium button_primary introduction__cmi">
+                            Count Me In
+                        </a>
+                        <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary">
+                            Learn More
+                        </a>
                     </div>
-                    <p>
+                    <p class="introduction__examples">
                         Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and
                         medulloblastoma.
                     </p>
-                    <div>
-                        <img src="assets/images/logo-broad-institute.png" alt="">
-                        <img src="assets/images/logo-dana-farber-cancer-institute.png" alt="">
-                        <img src="assets/images/logo-minderoo.png" alt="">
+                    <div class="logos">
+                        <img class="logos__wide" src="assets/images/logo-broad-institute.png" alt="">
+                        <img class="logos__wide" src="assets/images/logo-dana-farber-cancer-institute.png" alt="">
+                        <img class="logos__square" src="assets/images/logo-minderoo.png" alt="">
                     </div>
                 </div>
-                <div>
-                    <img src="https://dummyimage.com/560x480/aaa/fff" alt="">
+                <div class="introduction__image">
+                    <img src="assets/images/brain.svg" alt="">
                 </div>
             </div>
         </div>

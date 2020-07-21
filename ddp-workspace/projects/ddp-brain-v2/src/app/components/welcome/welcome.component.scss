@@ -1,0 +1,57 @@
+@import './../../../app-theme.scss';
+
+@mixin block-margin {
+    margin: 5rem auto;
+}
+
+.introduction-block {
+    @include block-margin;
+}
+
+.introduction {
+    display: flex;
+
+    &__info,
+    &__image {
+        width: 50%;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__text {
+        margin-right: 3rem;
+    }
+
+    &__cmi {
+        margin-right: 1rem;
+    }
+
+    &__buttons {
+        margin: 2.5rem 0;
+    }
+
+    &__examples {
+        margin: 1.5rem 3rem 1.5rem 0;
+        font-size: 16px;
+        line-height: 22px;
+        color: mat-color($app-theme, 450);
+    }
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+
+    &__wide {
+        height: 30px;
+        margin-right: 3rem;
+    }
+
+    &__square {
+        height: 60px;
+    }
+}

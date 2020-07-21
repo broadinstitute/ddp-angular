@@ -1,4 +1,5 @@
 @import 'app-theme.scss';
+@import './styles/buttons.scss';
 
 html,
 body {
@@ -52,4 +53,28 @@ body {
 
 .content_wide {
     max-width: 1200px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Source Serif Pro', serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 3.125rem;
+}
+
+ol li,
+ul li,
+p {
+    font-size: 1.375rem;
+    line-height: 2.25rem;
 }
