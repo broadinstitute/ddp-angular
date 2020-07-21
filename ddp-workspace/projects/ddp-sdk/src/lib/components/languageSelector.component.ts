@@ -121,7 +121,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   //Find the current language and return true if successful or false otherwise
-  public findCurrentLanguage(): Observable<Boolean> {
+  public findCurrentLanguage(): Observable<boolean> {
     //Check for a language in the profile
     let profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
 
