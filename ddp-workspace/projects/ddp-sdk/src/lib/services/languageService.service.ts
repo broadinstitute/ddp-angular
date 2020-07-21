@@ -6,10 +6,10 @@ import { startWith } from "rxjs/operators";
 
 @Injectable()
 export class LanguageService {
-    private profileLanguageUpdateNotifier: Subject<boolean>;
+    private profileLanguageUpdateNotifier: Subject<void>;
     constructor(private translate: TranslateService) {
-      this.profileLanguageUpdateNotifier = new Subject<boolean>();
-      this.profileLanguageUpdateNotifier.next(false);
+      this.profileLanguageUpdateNotifier = new Subject<void>();
+      this.profileLanguageUpdateNotifier.next();
     }
 
     public getCurrentLanguage(): string {
@@ -35,12 +35,13 @@ export class LanguageService {
       return null;
     }
 
-    public getProfileLanguageUpdateNotifier(): Observable<boolean> {
-      return this.profileLanguageUpdateNotifier.asObservable().pipe(startWith(false));
+    public getProfileLanguageUpdateNotifier(): Observable<void> {
+      return this.profileLanguageUpdateNotifier.asObservable().pipe(
+        startWith()); //Make sure anything that updates when the language updates gets an initial value!
     }
 
-    public notifyOfProfileLanguageUpdate(val: boolean): void {
-      this.profileLanguageUpdateNotifier.next(val);
+    public notifyOfProfileLanguageUpdate(): void {
+      this.profileLanguageUpdateNotifier.next();
     }
 
     public changeLanguagePromise(languageCode: string): Promise<any> {
