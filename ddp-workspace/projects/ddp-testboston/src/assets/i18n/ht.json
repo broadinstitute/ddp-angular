@@ -1,0 +1,528 @@
+{
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Soumèt",
+        "AriaLabel": "Bouton pou soumèt"
+      },
+      "Login": {
+        "Title": "Konekte",
+        "AriaLabel": "Bouton pou konekte"
+      }
+    }
+  },
+  "Navigation": {
+    "LogoAlt": "Logo TestBoston",
+    "CRCLogoSubtitle": "Entèfas sipò pou sijè",
+    "Home": "Akèy",
+    "About": "Apwopo etid la",
+    "Q&A": "Kesyon ak repons",
+    "WhoWeAre": "Kimoun nou ye",
+    "StayInformed": "Rete enfòme",
+    "KitInstructions": "Machasuiv pou kit",
+    "Privacy": "Règleman sou konfidansyalite",
+    "Dashboard": "Dach mwen an",
+    "Menu": "Meni",
+    "Invitation": "Kòd envitasyon",
+    "Titles": {
+      "TestBoston": "TestBoston ",
+      "ContactUs": "Kontakte nou",
+      "Participation": "Patisipasyon",
+      "Language": "Lang"
+    }
+  },
+  "MailingList": {
+    "Title": "Fòmilè lis pou voye kourye",
+    "Questions": {
+      "Adult": "1. Èske w gen laj 18 lane oswa plis?",
+      "Patient": "2. Èske w se yon pasyan nan Brigham & Women’s?",
+      "Email": "3. Ki adrès imel ki pi bon pou ou?"
+    },
+    "Answers": {
+      "Yes": "Wi",
+      "No": "Non",
+      "NoAnswer": "Pito pa reponn"
+    },
+    "Validations": {
+      "RequiredOption": "Tanpri, chwazi yon opsyon",
+      "RequiredEmail": "Tanpri, mete adrès imèl ou a.",
+      "InvalidEmail": "Tanpri, mete yon adrès imèl ki valab"
+    },
+    "EmailLabel": "Mete adrès imèl la",
+    "EmailPlaceholder": "example@example.com",
+    "ThankYouBlock": {
+      "Title": "Ou pare!",
+      "Text": "Mèsi poutèt ou enskri nan lis pou resevwa kourye TestBoston."
+    },
+    "SorryBlock": {
+      "Title": "Nou regrèt, sanble ou pa kalifye pou w patisipe.",
+      "Text": {
+        "Part1": "Ou dwe gen laj 18 lane oswa plis pou w patisipe nan lis pou resevwa kourye TestBoston. Tanpri, fè lekti seksyon",
+        "Part2": "kesyon moun poze souvan nou an",
+        "Part3": "pou w jwenn plis enfòmasyon."
+      }
+    }
+  },
+  "HomePage": {
+    "IntroSection": {
+      "Title": "Nou vle ede vil nou a retounen travay an tout sekirite.",
+      "Text": "TestBoston se yon etid rechèch sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard.",
+      "Code": "Mete kòd envitasyon mwen an",
+      "NoCode": "Yo pa t envite m, èske m kapab patisipe?"
+    },
+    "AboutSection": {
+      "Title": "Apwopo etid la",
+      "Text": "Objektif nou a se siveye to enfeksyon COVID-19 nan Massachusetts avèk le tan. Sèten kominote gen pi gwo to enfeksyon pase lòt. Sèten moun trape COVID-19 epi yo pa gen sentòm. Nou espere etid nou a pral ede nou konprann COVID-19 pi byen, epi li pral benefisye pi devan pasyan ki gen COVID ak sa ki pa genyen l.",
+      "Questions": {
+        "Title": "Kesyon n ap eseye reponn:",
+        "List": [
+          "Nan ki pwen COVID-19 kouran nan kominote nou yo?",
+          "Nan ki pwen li kouran pou moun gen COVID-19 san sentòm?",
+          "Èske moun vin gen iminite kont COVID-19 apre yo te genyen li?",
+          "Kijan chèchè yo kapab teste anpil moun pandan moun yo lakay yo?"
+        ]
+      }
+    },
+    "FaqSection": {
+      "Title": "Repons pou kesyon ki kouran apwopo TestBoston",
+      "Text": "Ou kapab rele oswa voye imèl tou bay estaf etid nou a si w gen kesyon apwopo TestBoston:",
+      "Items": [
+        {
+          "Question": "Èske nenpòt moun kapab antre nan etid sa a?",
+          "Paragraphs": [
+            "TestBoston disponib pou yon sèten gwoup rezidan adilt nan gran rejyon Boston lan, ki te resevwa swen nan Brigham and Women’s Hospital omwen yon fwa nan ane ki sot pase a. Chak pasyan ki chwazi oaza pral resevwa yon envitasyon pou etid la pa lapòs oswa nan imèl."
+          ]
+        },
+        {
+          "Question": "Èske mwen pral fè yon tès pou COVID-19 si mwen antre nan etid la?",
+          "Paragraphs": [
+            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, ou pral resevwa yon kit pou pran tès la lakay ou oumenm nan apeprè yon semèn apre ou antre nan etid la. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. Aplikatè nan devan nen w lan teste si w gen COVID-19 aktyèlman. Tès pou pike dwèt la teste si w gen antikò COVID-19 (ki vle di ou te ekspoze nan viris la avan sa). Si w aksepte pou w refè yon tès, epi w kalifye pou etid pi long lan, n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
+          ]
+        },
+        {
+          "Question": "Èske m ap resevwa rezilta tès mwen yo?",
+          "Paragraphs": [
+            "Ou pral resevwa rezilta tès viral viwoloji a. Nou pa otorize aktyèlman pou n ba ou rezilta tès antikò ou yo. Nou pral rapòte rezilta yo an gwoup (rezilta ou yo melanje avèk rezilta lòt patisipan rechèch yo) bay Depatman Sante Piblik Massachusetts ak bay lòt pati konsène kle yo nan sante piblik pou konnen ki pousantaj nan patisipan etid yo ki te gen yon antikò pozitif, ak pou ede nou konprann prevalans lan pi byen, oswa nan ki pwen COVID-19 lan pwopaje toupatou."
+          ]
+        },
+        {
+          "Question": "Èske TestBoston se sèlman pou moun ki gen sentòm COVID-19?",
+          "Paragraphs": [
+            "Non. Nou envite tout moun ki te resevwa yon envitasyon pou yo patisipe nan TestBoston pou li enskri nan etid la, kèlkeswa si wi ou non ou gen sentòm (oswa ou te janm gen sentòm anvan sa). Ou gendwa enskri tou si w te gen COVID-19 anvan sa."
+          ]
+        },
+        {
+          "Question": "Èske mwen oblije ale yon kote pou patisipe nan etid la?",
+          "Paragraphs": [
+            "Non. TestBoston se yon etid ki baze lakay. Patisipan nan TestBoston pa oblije ale nan yon klinik, lopital, ni kabinè doktè. Patisipan yo pral reponn yon sondaj kout sou entènèt epi y ap resevwa kit yo pou pran echantiyon pou COVID-19 lakay yo, ke y ap voye tounen bay laboratwa nou a. "
+          ]
+        },
+        {
+          "Question": "Èske yon doktè, yon enfimye/enfimyè, oswa yon pèsonèl etid pral vizite kay mwen pou teste m?",
+          "Paragraphs": [
+            "Non. Ou pral resevwa yon kit kòlèk echantiyon pa lapòs epi w ap fè prelèvman avèk aplikatè nan nen an poukont ou ansanm ak yon tès san pou pike pwent dwèt ou. Si w gen nenpòt kesyon ou ta remen poze, ou ka kontakte ekip etid la nenpòt lè nan telefòn oswa imèl."
+          ]
+        },
+        {
+          "Question": "Konbyen tan sa pran pou w konnen rezilta tès la?",
+          "Paragraphs": [
+            "Ou dwe espere resevwa rezilta viwoloji ou a sou 72 èdtan apre yo te resevwa echantiyon an nan laboratwa a."
+          ]
+        },
+        {
+          "Question": "Poukisa ou pa ka ban m rezilta tès antikò a?",
+          "Paragraphs": [
+            "Piske tès antikò yo pral fèt nan yon laboratwa rechèch (yon etablisman kote yo gendwa reyalize rechèch syantifik, eksperyans, ak mezi) epi se pa nan yon laboratwa klinik (yon laboratwa kote yo fè tès òdinèman sou echantiyon klinik pou jwenn enfòmasyon sou sante yon pasyan), nou pa kapab kominike ba ou dirèkteman rezilta ki soti nan tès antikò rechèch yo. "
+          ]
+        },
+        {
+          "Question": "Èske li gratis pou patisipe nan TestBoston?",
+          "Paragraphs": [
+            "Wi. Pa gen okenn frè pou w peye pou w patisipe nan TestBoston."
+          ]
+        },
+        {
+          "Question": "Kisa mwen pral dwe fè si mwen antre nan etid la?",
+          "Paragraphs": [
+            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. Nou pral mande patisipan yo tou si yo ta renmen fè tès chak mwa pou COVID-19 pandan 5 pwochen mwa yo. Kòlèk pou tès yo se yon prelèvman echantiyon avèk aplikatè nan devan nen ak yon pike nan pwent dwèt pou pran san."
+          ]
+        },
+        {
+          "Question": "Èske fanmi m ka antre nan TestBoston?",
+          "Paragraphs": [
+            "Kounye a, se sèlman pasyan Brigham and Women’s ki resevwa envitasyon ki kreye oaza yo ki kapab antre nan TestBoston. Si plis pase yon sèl moun nan kay ou te resevwa yon lèt envitasyon, lè sa nou toude kapab antre nan etid la si nou vle. Si w pa te resevwa yon envitasyon, men ou enterese rete enfòme sou pwogrè etid la, nou envite w <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">patisipe nan lis pou resevwa kourye TestBoston</a>."
+          ]
+        },
+        {
+          "Question": "Èske mwen ka bay yon lòt moun kòd envitasyon mwen an?",
+          "Paragraphs": [
+            "Non. Se moun yo adrese lèt la sèlman ki dwe itilize kòd envitasyon an."
+          ]
+        },
+        {
+          "Question": "Kiyès k ap dirije etid sa a?",
+          "Paragraphs": [
+            "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (MGB, ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard. Moun k ap dirije etid la se Doktè Lisa Cosimi, Doktè Ann Woolley, ak Doktè Deborah Hung. Tout doktè yo se klinisyen maladi enfektyez nan Brigham and Women’s Hospital.",
+            "MGB se pi gwo sistèm swen sante nan zòn Boston lan. Lopital li yo gen ladan yo Brigham and Women’s ak Massachusetts General Hospital. Broad Institute se yon enstiti rechèch inivèsitè premye plan ki chita nan Cambridge. Broad Institute reyalize plizyè milye tès COVID-19 chak jou pou Depatman Sante yo nan tout Massachusetts, ansanm ak pou divès etid sou COVID-19 nan Massachusetts."
+          ]
+        },
+        {
+          "Question": "Konbyen tan etid la ap dire?",
+          "Paragraphs": [
+            "Patisipan nan etid la kapab, nenpòt lè, deside sispann patisipe nan etid. Moun ki patisipe nan etid la annantye ka atann pou yo fini etid la apre 6 mwa."
+          ]
+        },
+        {
+          "Question": "Kikote mwen kapab jwenn plis enfòmasyon sou COVID 19?",
+          "Paragraphs": [],
+          "Bullets": [
+            "<strong>Sant pou Kontwòl ak Prevansyon Maladi Etazini (CDC):</strong> CDC a te kreye yon paj <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">dakèy pou kowonaviris</a> ki gen yon kantite resous pou aprann plis sou sentòm COVID-19, fason pou pwoteje tèt ou, ak politik nasyonal ki pi ajou yo.",
+            "<strong>Enfòmasyon ki fasil-pou-li avèk imaj:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Fason pou pran swen tèt ou oswa yon manm fanmi ki gen COVID-19</a>.",
+            "<strong>Rezidan Massachusetts yo:</strong> Ou ka kontakte liy dirèk Depatman sante piblik Massachusetts (DPH) la swa nan <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> oswa nan <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 èdtan pa jou, 7 jou pa semèn. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>.  Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
+            "<strong>Rezidan Boston yo:</strong> Jwenn enfòmasyon fyab nan Komisyon sante piblik Boston lan, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+          ]
+        }
+      ]
+  },
+  "TeamSection": {
+    "Title": "Ekip nou an",
+    "Text": "Nou se yon ekip doktè ak chèchè nan domèn maladi enfektyez ki vle konprann pi byen fason COVID-19 afekte moun ak kominote yo pou nou kapab sèvi tout pasyan yo pi byen. ",
+    "List": [
+      {
+        "Name": "Doktè Ann E. Woolley, MD",
+        "Affiliations": "Enstriktè nan medsin",
+        "Info": "Doktè Ann Woolley se yon enstriktè nan medsin ak yon doktè nan domèn maladi enfektyez nan Brigham & Women’s Hospital ak Harvard Medical School. Doktè Woolley te resevwa yon BS nan jeni mekanik ak ayewospasyal nan Princeton University nan ane 2001 ak yon sètifika pòs-bakaloreya nan etid premedikal nan Columbia University anvan fòmasyon nan sante piblik ak nan medsin nan Mount Sinai School of medicine nan New York. Avèk yon konsantrasyon sou transplantasyon, epatit, ak enfeksyon kadyak, rechèch Doktè Woolley te demontre nouvo metòd pou itilize an tout sekirite ògàn moun ki konsidere kòm donatè men ki pa t apwopriye oparavan. Travay li te pèmèt rakousi tan datant pou moun ki bezwen don ògàn, epi pèmèt plis moun kapab chwazi pou yo vin donatè ògàn pou sove lavi."
+      },
+      {
+        "Name": "Doktè Lisa A. Cosimi, MD",
+        "Affiliations": "Asistan pwofesè, maladi enfektyèz nan Harvard Medical School, Global Health Equity",
+        "Info": "Doktè Cosimi se yon medsen asosye nan Global Health Equity & Incetuous Disease nan Brigham & Women’s Hospital, ak pwofesè adjwen nan medsin nan Harvard Medical School. Doktè Cosimi te resevwa yon BA nan ekonomi nan Cornell University an 1992 ak doktora an medsin nan Weill Cornell Medical College an 1996.  Li te fè rezidans li nan medsin entèn ak swen primè nan Massachusetts General Hospital epi fòmasyon nan maladi enfektyez nan pwogram bous konbine Partners.  Rechèch Doktè Cosimi te konsantre sou fason pou ranfòse sistèm sante yo ak kalite swen sante yo nan anviwònman ki gen resous limite. Gwoup li a, Partnership for Health Advancement in Vietnam (HAIVN), te asosye avèk Ministè Sante Vyetnam, Inivèsite Medikal ak lopital yo pou refòme ak modènize edikasyon travayè swen sante, ak amelyore kalite ak aksè nan swen sante pou VIH, tibèkiloz ak lòt enfeksyon k ap parèt nan tout peyi a."
+      },
+      {
+        "Name": "Doktè Deborah T. Hung, MD, PhD",
+        "Affiliations": "Pwofesè agreje, maladi enfektyez, swen pilmonè, ak swen entansif nan Harvard Medical School",
+        "Info": "Doktè Deborah Hung se pwofesè nan jenetik nan Massachusetts General Hospital Harvard Medical School, yon manm prensipal fakilte a ak ko-direktris pwogram maladi enfektyez ak mikwobyòm nan Broad Institute of MIT & Harvard, epi yon medsen tretan nan maladi enfektyez ak medsin swen pilmonè ak swen entansif nan Brigham & Women’s Hospital. Li travay nan entèfas byoloji chimik, jenomik, ak patojenèz bakteryèn pou etabli nouvo paradigm pou yon antibyotik baze sou biyoloji esansyèl ki nesesè pou yon patojèn lakòz maladi kay moun li antre sou li an. Avèk itilizasyon fòmasyon li kòm chimis sentetik, jenetisyen bakteryèn, ak medsen klinik, li eksplore apwòch pou deranje entèraksyon an patojèn-ot."
+      }
+    ]
+  },
+  "MailingSection": {
+    "Title": "TestBoston enskri aktyèlman pasyan Brigham and Women’s Hospital ki resevwa envitasyon. ",
+    "Text": "Si w pa te resevwa yon envitasyon pou antre nan etid la, men ou enterese rete okouran enfòmasyon jeneral TestBoston, tanpri antre nan lis bilten nouvèl nou an:"
+  }
+  },
+  "PrequalPage": {
+    "Title": "Premyèman, konfime kalifikasyon ou",
+    "InvitationCode": {
+      "Question": "Mete kòd envitasyon ou an",
+      "TooltipAlt": "Ikòn enfòmasyon",
+      "Tooltip": "Si w te resevwa yon envitasyon sou papye oswa nan imèl nan men doktè ou a, li gen ladan yon kòd envitasyon 12 chif nan anlè.",
+      "Placeholder": "Mete kòd envitasyon ou an",
+      "Error": {
+        "Part1": "Kòd ou mete a pa aktif. Tanpri, tcheke kòd ou a epi eseye ankò. Ou ka toujou kontakte estaf etid TestBoston an pou w jwenn èd:",
+        "Part2": "oswa"
+      }
+    },
+    "Zip": {
+      "Question": "Ki kòd postal ou aktyèlman pou kourye?",
+      "Placeholder": "Mete kòd postal kourye ou a",
+      "Error": "Nou regrèt sa. Kòd postal sa a sitiye deyò zòn etid TestBoston an. Tanpri tcheke kòd postal ou mete a epi eseye ankò."
+    },
+    "Adult": {
+      "Question": "Èske w gen laj 18 lane oswa plis?",
+      "Yes": "Wi",
+      "No": "Non",
+      "Error": {
+        "Part1": "Nou regrèt, sanble ou pa kalifye pou w patisipe. Ou dwe gen laj 18 lane oswa plis pou w antre nan etid TestBoston an. Tanpri, fè lekti seksyon",
+        "Part2": "kesyon moun poze souvan nou an",
+        "Part3": "pou w jwenn plis enfòmasyon."
+      }
+    },
+    "Error": "Nou regrèt sa, gen yon erè ki rive Tanpri, tann yon moman epi eseye ankò."
+  },
+  "Prism": {
+    "ClearSearch": "Efase",
+    "Email": "ADRÈS IMÈL SIJÈ A",
+    "NoEmail": "PA APLIKAB",
+    "Buttons": {
+      "Enrollment": "Kòmanse enskripsyon an",
+      "Dashboard": "Gade dach la"
+    },
+    "Notes": "NÒT SIJÈ A",
+    "NotesPlaceholder": "Kòmanse tape...",
+    "NotesError": "Nou regrèt sa, men nòt ou yo pa t anrejistre. Tanpri, tann yon moman epi eseye ankò.",
+    "Steps": {
+      "Step1": {
+        "Title": "Antre kòd envitasyon 12 chif sijè a",
+        "Subtitle": "Si w pa konnen kòd la, jwenn aksè nan fichye lyen Brigham lan epi sèvi ak non sijè a pou w rekipere kòd la.",
+        "Placeholder": "Mete kòd envitasyon an",
+        "Error": "Nou pa jwenn kòd la"
+      },
+      "Step2": {
+        "Title": "Tcheke kòd postal kourye a",
+        "Placeholder": "Antre kòd postal la",
+        "Error": "Kòd postal la pa valab",
+        "Success": "Kòd postal la valab"
+      },
+      "Step3": {
+        "Title": "Konfime aloral ke sijè a gen laj 18 lane oswa plis anvan w kòmanse enskripsyon an."
+      }
+    }
+  },
+  "Enrollment": {
+    "Title": "Konfigirasyon kont",
+    "FirstName": {
+      "Text": "Prenon sijè a",
+      "Placeholder": "Mete prenon an",
+      "Error": "Tanpri, mete prenon sijè a"
+    },
+    "LastName": {
+      "Text": "Siyati sijè a",
+      "Placeholder": "Mete siyati a",
+      "Error": "Tanpri, mete siyati sijè a"
+    },
+    "Email": {
+      "Text": "Adrès imèl sijè a (ochwa)",
+      "Placeholder": "example@example.com",
+      "Error": "Tanpri, mete yon adrès imèl ki valab"
+    },
+    "Button": "Suivan"
+  },
+  "Toolkit": {
+    "Dashboard": {
+      "Title": "Dach",
+      "Invitation": {
+        "InvitationCode": "Kòd envitasyon an:",
+        "Message": "Tanpri, itilize zouti rechèch pou jere yon patisipan.",
+        "Button": "Ale"
+      }
+    },
+    "Password": {
+      "Title": "Tanpri, mete modpas la",
+      "Text": "Tanpri, mete modpas ou an *",
+      "InputPlaceholder": "Modpas",
+      "PasswordWrongError": "Modpas la pa bon. Tanpri, eseye ankò.",
+      "PasswordRequiredError": "Modpas la obligatwa"
+    },
+    "ErrorPage": {
+      "Title": "Nou rankontre yon erè",
+      "Text": "Nou regrèt sa, gen yon erè ki rive",
+      "DefaultText": {
+        "TextPt1": "Tanpri, tann yon moman epi eseye ankò. Si pwoblèm lan pèsiste, tanpri swa voye yon imèl ban nou nan",
+        "TextPt2": "oswa rele nou nan"
+      }
+    },
+    "SessionExpired": {
+      "Text": "Ou te absan pandan yon bon bout tan, ki fè nou dekonekte w pa mezi sekirite. Tanpri, konekte ankò pou retounen nan dènye paj kote ou te ye a."
+    },
+    "Dialogs": {
+      "SessionWillExpire": {
+        "Title": "Sesyon ou an pral ekspire trè byento",
+        "Text": "Pou pwoteje konfidansyalite w, sistèm lan pral dekonekte w paske ou te absan pandan yon bon bout tan. Klike sou “Kontinye” pou w rete konekte. Klike sou \"Dekonekte\" si w fini pou kounye a.",
+        "SignOut": "Dekonekte",
+        "Continue": "Kontinye",
+        "RenewalFailed": "Renouvèlman sesyon an pa mache. Tanpri dekonekte epi tounen konekte ankò."
+      }
+    }
+  },
+  "SDK": {
+    "SubmitButton": "Soumèt",
+    "CloseButton": "Fèmen",
+    "AddButton": "AJOUTE",
+    "CancelButton": "ANILE",
+    "NextButton": "Suivan",
+    "PreviousButton": "Retounen",
+    "SavingButton": "Anrejistreman",
+    "EditButton": "Kontinye",
+    "CompleteButton": "Modifye",
+    "ReviewButton": "Gade",
+    "AgreeButton": "Mwen aksepte",
+    "NotAgreeButton": "Mwen pa pare pou aksepte",
+    "ValidateError": "Soumisyon an pa kapab kontinye. Tanpri, egzamine mesaj yo ki nan fòmilè a pou w jwenn plis detay.",
+    "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
+    "SaveError": "Nou regrèt sa, gen yon erè ki rive",
+    "ExportStudy": {
+      "Export": "EKSPÒTASYON"
+    },
+    "ListStudies": {
+      "StudyName": "Non etid la",
+      "ParticipantCount": "Kantite patisipan ki genyen"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "Non espas travay la",
+      "WorkspaceNamespace": "Espas non espas travay la"
+    },
+    "Login": {
+      "Login": "KONEKTE",
+      "Logout": "DEKONEKTE"
+    },
+    "SignInOut": {
+      "SignIn": "Konekte",
+      "SignOut": "Dekonekte"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "seleksyon lang"
+    },
+    "UserActivities": {
+      "ActivityName": "Fòmilè",
+      "Summary": "Rezime",
+      "ActivityStatus": "Estati",
+      "ActivityDate": "Kreye",
+      "ActivityActions": "Aksyon",
+      "ActivityQuestionCount": "{{questionsAnswered}} sou {{questionTotal}} reponn"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "Patisipan gouvène",
+      "ParticipantPlaceholder": "Patisipan",
+      "ParticipantsList": "Patisipan"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "Pwofil",
+      "ViewAs": "Gade kòm",
+      "ManageParticipants": "Jere patisipan yo"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "Preferans itilizatè",
+      "UserPreferencesGender": "Sèks",
+      "UserPreferencesLocale": "Lang prefere"
+    },
+    "Dashboard": {
+      "Title": "Dach mwen an",
+      "Text": "Dach ki anba a dekri chak fòmilè TestBoston ak estati li."
+    },
+    "DatePicker": {
+      "Day": "Chwazi jou a...",
+      "Month": "Chwazi mwa a...",
+      "Year": "Chwazi ane a...",
+      "January": "Janvye",
+      "February": "Fevriye",
+      "March": "Mas",
+      "April": "Avril",
+      "May": "Me",
+      "June": "Jen",
+      "July": "Jiyè",
+      "August": "Out",
+      "September": "Septanm",
+      "October": "Oktòb",
+      "November": "Novanm",
+      "December": "Desanm"
+    },
+    "UserMenu": {
+      "DashboardButton": "Dach",
+      "SignOutButton": "Dekonekte"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "karaktè ki rete yo",
+      "SingularForm": "karaktè ki rete"
+    },
+    "Title": {
+      "Default": "TestBoston ",
+      "Alert": "Sesyon ou an pral ekspire trè byento"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "Tanpri, mete yon imèl ki valab"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "Non doktè a",
+        "Institution": "Enstitisyon",
+        "InstitutionAny": "Enstitisyon (si genyen)",
+        "City": "Vil",
+        "State": "Eta"
+      },
+      "PhysicianValidation": "Tanpri ranpli tout chan obligatwa yo"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "Tout non an",
+        "Country": "Peyi/Teritwa",
+        "Street1": "Adrès ri a",
+        "Street2": "# Apt/Etaj",
+        "State": {
+          "State": "Eta",
+          "Province": "Pwovens",
+          "State/Province/Region": "Eta/Pwovens/Rejyon"
+        },
+        "City": "Vil",
+        "Phone": "Telefòn",
+        "Zip": {
+          "Zip Code": "Kòd postal",
+          "Postal Code": "Kòd postal",
+          "Zip/Postal Code": "Zip/Kòd postal"
+        },
+        "Choose": "Chwazi {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "Nou te verifye adrès ou mete a epi nou sijere chanjman ki ta ka ede garanti livrezon an.",
+        "Subtitle": "Klike sou \"Sijere\" pou modifye fòmilè a. Ou pral kapab klike sou \"Jan li ye a\" pou w retabli sa w te mete odepa a.",
+        "Suggested": "Sijere:",
+        "AsEntered": "Jan li ye a:"
+      },
+      "Error": {
+        "InvalidAddress": "Adrès la pa valab.",
+        "CannotVerify": "Nou pa t kapab verifye adrès la, tanpri verifye adrès ou a ankò.",
+        "UnknownVerifyError": "Te gen yon erè enkoni pandan verifikasyon adrès la.",
+        "FieldIsRequired": "{{field}} obligatwa",
+        "FieldIsInvalid": "{{field}} gen yon valè ki pa valab",
+        "InvalidHouseNumber": "Nou pa t kapab jwenn nimewo ri a",
+        "INTERNAL_SERVER_ERROR": "Nou regrèt sa, gen yon bagay ki pase mal. Si pwoblèm lan pèsiste, tanpri kontakte nou nan support@easypost.com.",
+        "NOT_ACCEPTABLE": "Resous demann lan idantifye kapab sèlman kreye antite repons ki gen karakteristik kontni ki pa akseptab selon antèt akseptasyon ki voye nan demann lan.",
+        "NOT_FOUND": "Nou pa ka jwenn resous ki mande a.",
+        "FORBIDDEN": "Enposib pou jwenn aksè nan resous ki mande a.",
+        "PAYMENT_REQUIRED": "Pa gen ase lajan. Tanpri, tcheke reglaj faktirasyon ou nan http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "Enposib pou jwenn aksè nan resous ki mande a, otorizasyon an pa mache.",
+        "BAD_REQUEST": "Demann lan mal fòme. Tanpri, tcheke kontni yo epi eseye ankò.",
+        "PAYMENT_GATEWAY.ERROR": "Pwosesè peman an pa t kapab okipe demann lan. Tanpri, eseye ankò oswa kontakte support@easypost.com si pwoblèm lan pèsiste.",
+        "MODE.UNAUTHORIZED": "Resous sa a egzije yon kle API pwodiksyon pou jwenn aksè.",
+        "MODE.CONFLICT": "Mòd kle API a te an konfli avèk mòd paramèt la.",
+        "DATE.PARSE.FAILURE": "Omwen yon dat te mal fòmate epi li pa te kapab analize.",
+        "PARAMETER.FORBIDDEN": "Demann lan pa t ka reyalize akòz pwopriyete entèdi ki prezan nan paramèt yo.",
+        "PARAMETER.REQUIRED": "Paramèt obligatwa manke.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Paramèt ki transmèt yo te gen yon karaktè ki pa valab.",
+        "ADDRESS.PARAMETERS.INVALID": "Paramèt ki transmèt yo pou kreye yon adrès te manke oswa yo pa t valab.",
+        "ADDRESS.COUNTRY.INVALID": "'Peyi' a pa valab, tanpri bay yon kòd peyi ISO ki gen 2 karaktè.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "Nou pa jwenn adrès la.",
+        "ADDRESS.VERIFICATION.FAILURE": "Adrès la pa t kapab verifye.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "Verifikasyon adrès la pa disponib. Tanpri, eseye ankò.",
+        "ADDRESS.VERIFICATION.INVALID": "Youn nan verifikasyon ki chwazi yo pa valab.",
+        "ADDRESS.VERIFY.FAILURE": "Pa kapab verifye adrès la.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "Pa kapab verifye adrès avèk transpòtè ki founi a.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Verifikasyon adrès la pa disponib akòz yon sèvis anwo ki pa reponn. Tanpri, eseye ankò.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS ka valide adrès Etazini Damerik sèlman.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "Verifikasyon entènasyonal pa aktive nan kont sa a. Tanpri kontakte support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "Done adrès ki bay yo pa ase. Ou dwe bay yon ri.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Done adrès ki bay yo pa ase. Ou dwe bay yon vil ak yon eta oswa yon kòd postal.",
+        "E.COUNTRY.UNSUPPORTED": "Peyi sa a pa sipòte nan mòd sa a. Eseye nan mòd pwodiksyon an.",
+        "E.ENGINE.UNAVAILABLE": "Pa gen motè verifikasyon ki disponib pou sèvis peyi sa a. Tanpri, eseye ankò pita.",
+        "E.QUERY.UNANSWERABLE": "Nou pa ka bay ase done nan peyi sa a pou satisfè demann sa a. Tanpri, eseye ankò pita.",
+        "E.ADDRESS.NOT_FOUND": "Nou pa te kapab jwenn adrès ki antre a.",
+        "E.SECONDARY_INFORMATION.INVALID": "Enfòmasyon segondè yo pa valab (# Apt/Suite). Tanpri konnen, sa kapab parèt kòm yon erè sou yon demann ki reyisi.",
+        "E.SECONDARY_INFORMATION.MISSING": "Enfòmasyon segondè yo manke (# Apt/Suite). Tanpri konnen, sa kapab parèt kòm yon erè sou yon demann ki reyisi.",
+        "E.HOUSE_NUMBER.MISSING": "Nimewo kay la manke.",
+        "E.HOUSE_NUMBER.INVALID": "Nou pa t kapab jwenn nimewo ri ki bay la.",
+        "E.STREET.MISSING": "Ri a manke.",
+        "E.STREET.INVALID": "Ri a pa valab.",
+        "E.BOX_NUMBER.MISSING": "Nimewo bwat la manke.",
+        "E.BOX_NUMBER.INVALID": "Nimewo bwat la pa valab.",
+        "E.ADDRESS.INVALID": "Vil/Eta/ZIP a pa valab.",
+        "E.ZIP.NOT_FOUND": "Nou pa jwenn Zip la.",
+        "E.ZIP.INVALID": "Zip la pa valab.",
+        "E.ZIP.PLUS4.NOT_FOUND": "Nou pa ka jwenn Zip + 4.",
+        "E.ADDRESS.MULTIPLE": "Plizyè adrès te retounen avèk menm zip la.",
+        "E.ADDRESS.INSUFFICIENT": "Done adrès la pa sifi/pa kòrèk.",
+        "E.ADDRESS.DUAL": "Doub adrès.",
+        "E.STREET.MAGNET": "Adrès ri a pa klè.",
+        "E.CITY_STATE.INVALID": "Vil / Eta pa kapab verifye.",
+        "E.STATE.INVALID": "Eta a pa valab.",
+        "E.ADDRESS.DELIVERY.INVALID": "Adrès pou livrezon an pa valab.",
+        "E.TIMED_OUT": "Depasman delè maksimòm lan.",
+        "E.TIME_ZONE.UNAVAILABLE": "Sèvis lè zòn lan pa disponib aktyèlman.",
+        "E.PO_BOX.INTERNATIONAL": "Nou pa ka verifye bwat postal entènasyonal. Tanpri konnen, sa kapab parèt kòm yon erè sou yon demann ki reyisi."
+      }
+    },
+    "TooltipAlt": "Enfòmasyon",
+    "SubjectPanel": {
+      "Link": "Retounen nan rechèch sijè",
+      "Text": "Kòd envitasyon sijè a:"
+    }
+  }
+}
