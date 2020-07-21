@@ -37,7 +37,7 @@ export class LanguageService {
 
     public getProfileLanguageUpdateNotifier(): Observable<void> {
       return this.profileLanguageUpdateNotifier.asObservable().pipe(
-        startWith()); //Make sure anything that updates when the language updates gets an initial value!
+        startWith(<void>null)); //Make sure anything that updates when the language updates gets an initial value!
     }
 
     public notifyOfProfileLanguageUpdate(): void {

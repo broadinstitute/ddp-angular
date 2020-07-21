@@ -51,7 +51,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     public saveProfileAttributes(profile: UserProfile): Observable<any> {
       //Save non-null profile attributes
       let profileChanges: object = {};
-      for (let key in Object.keys(profile)) {
+      for (let key of Object.keys(profile)) {
         if (!isNullOrUndefined(profile[key])) {
           profileChanges[key] = profile[key];
         }
