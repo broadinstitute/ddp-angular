@@ -18,7 +18,7 @@ export class UserServiceAgent<TEntity> extends SessionServiceAgent<TEntity> impl
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService,
-        _language: LanguageService = null) {
+        _language: LanguageService) {
         super(session, configuration, http, logger, _language);
         this.anchor = session.sessionObservable.pipe(
             filter(x => x !== null),

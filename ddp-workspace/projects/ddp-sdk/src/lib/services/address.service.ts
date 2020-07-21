@@ -22,8 +22,8 @@ export class AddressService extends UserServiceAgent<Address> {
         http: HttpClient,
         logger: LoggingService,
         private translate: NGXTranslateService,
-        private _language: LanguageService) {
-        super(session, configuration, http, logger, _language);
+        private __language: LanguageService) {
+        super(session, configuration, http, logger, __language);
     }
 
     public verifyAddress(address: Address): Observable<AddressVerificationResponse> {

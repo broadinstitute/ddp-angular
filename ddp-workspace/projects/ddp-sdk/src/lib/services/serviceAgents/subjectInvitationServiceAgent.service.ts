@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { LanguageService } from '../languageService.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StudySubject } from '../../models/studySubject';
@@ -16,9 +15,8 @@ export class SubjectInvitationServiceAgent extends SessionServiceAgent<any> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService,
-        _language: LanguageService) {
-        super(session, configuration, http, logger, _language);
+        logger: LoggingService) {
+        super(session, configuration, http, logger, null);
     }
 
     public updateInvitationDetails(invitationId: string, notes: string): Observable<any | null> {

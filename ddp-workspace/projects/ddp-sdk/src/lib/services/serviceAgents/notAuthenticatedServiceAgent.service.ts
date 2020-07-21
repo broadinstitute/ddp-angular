@@ -10,7 +10,7 @@ export class NotAuthenticatedServiceAgent<TEntity> extends ServiceAgent<TEntity>
         @Inject('ddp.config') protected _configuration: ConfigurationService,
         private _http: HttpClient,
         private _logger: LoggingService) {
-        super(_configuration, _http, _logger);
+        super(_configuration, _http, _logger, null);
     }
 
     protected getBackendUrl(): string {

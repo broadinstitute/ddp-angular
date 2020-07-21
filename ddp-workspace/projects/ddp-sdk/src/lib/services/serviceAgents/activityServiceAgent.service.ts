@@ -22,13 +22,13 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         private converter: ActivityConverter,
         http: HttpClient,
         logger: LoggingService,
-        private _language: LanguageService) {
-        super(session, configuration, http, logger);
+        private __language: LanguageService) {
+        super(session, configuration, http, logger, null);
     }
 
     public getActivity(studyGuid: Observable<string | null>,
         activityGuid: Observable<string | null>): Observable<ActivityForm> {
-        return this._language.getProfileLanguageUpdateNotifier().pipe(
+        return this.__language.getProfileLanguageUpdateNotifier().pipe(
           switchMap(() => studyGuid)).pipe(
           combineLatest(activityGuid, (x, y) => {
             return { study: x, activity: y };

@@ -9,7 +9,7 @@ import { UserProfileServiceAgent} from '../services/serviceAgents/userProfileSer
 import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
 import { isNullOrUndefined } from 'util';
 import { iif, Observable, of, Subscription } from 'rxjs';
-import { concatMap, flatMap, map, take } from 'rxjs/operators';
+import { flatMap, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -38,6 +38,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   public iconURL: string;
   private studyLanguages: StudyLanguage[];
   private anchor: CompositeDisposable;
+  private readonly defaultIconUrl: string = "assets/images/globe.svg#Language-Selector-3";
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
@@ -48,33 +49,32 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.anchor = new CompositeDisposable();
-    this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : "assets/images/globe.svg#Language-Selector-3";
-    let sub: Subscription = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).subscribe(x => {
-      if (x) {
-        //Only use language selector if multiple languages are configured!
-        if (x.length > 1) {
-          this.studyLanguages = x;
-          this.language.addLanguages(this.studyLanguages.map(x => x.languageCode));
-          let sub2: Subscription = this.findCurrentLanguage().subscribe(x => {
-            this.loaded = x.valueOf();
-            this.isVisible.emit(x.valueOf());
-          });
-          this.anchor.addNew(sub2);
+    this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : this.defaultIconUrl;
+    const sub = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).pipe(
+      mergeMap(studyLanguages => {
+        if (studyLanguages) {
+          //Only use language selector if multiple languages are configured!
+          if (studyLanguages.length > 1) {
+            this.studyLanguages = studyLanguages;
+            this.language.addLanguages(this.studyLanguages.map(language => language.languageCode));
+            return this.findCurrentLanguage();
+          } else {
+            return of(false);
+          }
         } else {
-          this.isVisible.emit(false);
+          console.error('Error: no configured language list was returned.');
+          return of(false);
         }
-      } else {
-        console.error('Error: no configured language list was returned.');
-        this.isVisible.emit(false);
-      }
+      })
+    ).subscribe(langLoadedSuccessfully => {
+      this.loaded = langLoadedSuccessfully;
+      this.isVisible.emit(langLoadedSuccessfully);
     });
     this.anchor.addNew(sub);
   }
 
   public ngOnDestroy(): void {
-    if (this.anchor) {
-      this.anchor.removeAll();
-    }
+    this.anchor.removeAll();
   }
 
   public getUnselectedLanguages(): Array<StudyLanguage> {
@@ -105,18 +105,10 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   //Update the language in the profile to the current language
   private updateProfileLanguage(): void {
-    // Create observable that gets the user's profile and creates a copy with updated preferred language
-    let getProfileObservable: Observable<UserProfile> = this.profileServiceAgent.profile
-      .pipe(map(x => {
-        return {...x.profile, preferredLanguage: this.currentLanguage.languageCode};
-      })).pipe(take(1));
-
-    // When we get the new profile value, save it
-    let updateProfileObservable: Observable<any> = getProfileObservable
-      .pipe(concatMap(profile => this.profileServiceAgent.saveProfile(false, profile)));
-
-    //Subscribe to the combined observable
-    let sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate(true));
+    let profileModifications: UserProfile = new UserProfile();
+    profileModifications.preferredLanguage = this.currentLanguage.languageCode;
+    let updateProfileObservable: Observable<any> = this.profileServiceAgent.saveProfileAttributes(profileModifications);
+    let sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
     this.anchor.addNew(sub);
   }
 
@@ -133,19 +125,19 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     //Create an observable that will check each applicable option and return the first valid language found, if any
     let langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
-      flatMap(x => {
-        return this.getNextObservable(x, currentStoredLangObservable);
+      flatMap(profileLang => {
+        return this.getNextObservable(profileLang, currentStoredLangObservable);
       }),
-      flatMap(y => {
-        return this.getNextObservable(y, defaultLangObservable);
+      flatMap(currentStoredLang => {
+        return this.getNextObservable(currentStoredLang, defaultLangObservable);
       })
     );
 
     //Return an observable that uses langObservable to get the language and if found, sets the language and
     // returns true, or otherwise logs an error and returns false
-    return langObservable.pipe(map(x => {
-      if (this.foundLanguage(x)) {
-        this.changeLanguage(x);
+    return langObservable.pipe(map(language => {
+      if (this.foundLanguage(language)) {
+        this.changeLanguage(language);
         return true;
       }
       else {
@@ -174,7 +166,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         //Check for a stored language
         let loadedCode: string = this.language.useStoredLanguage();
         if (loadedCode) {
-          let lang: StudyLanguage = this.studyLanguages.find(x => x.languageCode === loadedCode);
+          let lang: StudyLanguage = this.studyLanguages.find(studyLang => studyLang.languageCode === loadedCode);
           subscriber.next(isNullOrUndefined(lang) ? null : lang);
         }
         else {
@@ -187,9 +179,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   private getProfileLangObservable(): Observable<StudyLanguage> {
     let profileLangObservable: Observable<StudyLanguage> = this.profileServiceAgent.profile
-      .pipe(map(x => {
-        if (x && x.profile.preferredLanguage) {
-          return this.studyLanguages.find(y => y.languageCode === x.profile.preferredLanguage);
+      .pipe(map(profileDecorator => {
+        if (profileDecorator && profileDecorator.profile.preferredLanguage) {
+          return this.studyLanguages.find(studyLang => studyLang.languageCode === profileDecorator.profile.preferredLanguage);
         }
         else {
           return null;
