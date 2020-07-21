@@ -14,6 +14,7 @@ import {
   Auth0CodeCallbackComponent,
   AuthGuard,
   AdminAuthGuard,
+  ChangeLanguageRedirectComponent,
   IrbGuard
 } from 'ddp-sdk';
 
@@ -93,6 +94,13 @@ const routes: Routes = [
     canActivate: [
       IrbGuard,
       AuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.LanguageRedirect,
+    component: ChangeLanguageRedirectComponent,
+    canActivate: [
+      IrbGuard
     ]
   },
   {
