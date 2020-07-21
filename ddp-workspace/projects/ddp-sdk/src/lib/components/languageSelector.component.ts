@@ -135,8 +135,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     let langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
       flatMap(x => {
         return this.getNextObservable(x, currentStoredLangObservable);
-      })
-    ).pipe(
+      }),
       flatMap(y => {
         return this.getNextObservable(y, defaultLangObservable);
       })
