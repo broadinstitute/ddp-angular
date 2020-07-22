@@ -1377,10 +1377,6 @@ ul {
     margin: 5px 0;
 }
 
-.md-dialog-container {
-    background-color: mat-color($app-theme, 1100);
-}
-
 .ErrorMessage a {
     text-decoration: underline !important;
 }
@@ -1709,6 +1705,35 @@ select:-webkit-autofill {
 
 .warning-message-top {
     top: $warning-height !important;
+}
+
+// move user menu to the side panel on the small screens
+.user-menu-panel {
+    display: none;
+
+    .SimpleButton {
+        font-size: 1.1rem !important;
+        color: mat-color($app-theme, 600) !important;
+    }
+
+    .SimpleButton:hover {
+        color: mat-color($app-theme, 700) !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .user-menu-panel {
+        display: block;
+
+        .ddp-user {
+            color: mat-color($app-theme, 600) !important;
+        }
+    }
+
+    .user-menu-header {
+        display: none;
+        padding: 0;
+    }
 }
 
 .ddp-list {
