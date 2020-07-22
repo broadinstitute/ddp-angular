@@ -11,10 +11,11 @@
                     </p>
                     <div class="introduction__buttons">
                         <a [routerLink]="'/' + appRoutes.CountMeIn"
-                            class="button button_medium button_primary introduction__cmi">
+                            class="button button_medium button_primary introduction__cmi medium">
                             Count Me In
                         </a>
-                        <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary">
+                        <a [routerLink]="'/' + appRoutes.MoreDetails"
+                            class="button button_medium button_secondary medium">
                             Learn More
                         </a>
                     </div>
@@ -60,79 +61,31 @@
                     </a>
                     <p>
                         To learn more about Count Me In, our mission, and other projects and published research,
-                        <a class="Link" [href]="cmiUrl" target="_blank">visit our site</a>.
+                        <a class="Link medium" [href]="cmiUrl" target="_blank">visit our site</a>.
                     </p>
                 </div>
             </div>
         </div>
     </section>
     <section class="section">
-        <div class="content content_wide">
+        <div class="content content_wide participation-block">
             <div>
                 <h2>What does participation look like?</h2>
                 <div>
-                    <div>
-                        <p>
-                            <span>&#8226;</span>
-                            <span>STEP 1</span>
-                            <span> 10-15 minutes</span>
-                        </p>
-                        <p>
-                            Provide Consent
-                        </p>
-                        <p>
-                            This document is several pages, but take your time. Your progress will be automatically
-                            saved so you can come back to it later.
-                        </p>
-                        <a href="#">Preview the consent form</a>
-                    </div>
-                    <div>
-                        <p>
-                            <span>&#8226;</span>
-                            <span>STEP 2</span>
-                            <span> 5 minutes</span>
-                        </p>
-                        <p>
-                            Tell us where you’ve been treated
-                        </p>
-                        <p>
-                            We ask where patients have been treated, so that we can request medical records, and if
-                            applicable, archived tumor tissue.
-                        </p>
-                        <a href="#">Preview the medical release</a>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <p>
-                            <span>&#8226;</span>
-                            <span>STEP 3</span>
-                            <span> 10 minutes</span>
-                        </p>
-                        <p>
-                            Respond to simple surveys
-                        </p>
-                        <p>
-                            In these surveys, we ask questions about your experience with brain cancer, like your brain
-                            tumor type, when you were diagnosed, and the types of treatments you’ve had.
-                        </p>
-                        <a href="#">Preview the surveys</a>
-                    </div>
-                    <div>
-                        <p>
-                            <span>&#8226;</span>
-                            <span>STEP 4</span>
-                            <span> 10 minutes</span>
-                        </p>
-                        <p>
-                            Provide a saliva and/or blood sample
-                        </p>
-                        <p>
-                            We will send you a kit to collect a sample of your saliva and/or blood. We will compare the
-                            normal DNA in your saliva or blood to your tumor DNA.
-                        </p>
-                        <a href="#">See the kits</a>
-                    </div>
+                    <ng-container *ngFor="let steps of 'HomePage.Participation.Survey' | translate; last as isLast">
+                        <div class="line" [ngClass]="{'line_underlined': !isLast}">
+                            <div class="participation" *ngFor="let step of steps">
+                                <p class="step">
+                                    <span class="step__indicator"></span>
+                                    <span class="step__index medium">{{step.Number}}</span>
+                                    <span class="step__time">{{step.Time}}</span>
+                                </p>
+                                <p class="participation__title">{{step.Title}}</p>
+                                <p>{{step.Text}}</p>
+                                <a class="Link medium" [href]="step.Link">{{step.LinkText}}</a>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>

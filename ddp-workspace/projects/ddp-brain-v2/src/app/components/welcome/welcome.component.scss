@@ -4,6 +4,11 @@
     margin: 5rem auto;
 }
 
+@mixin small-font {
+    font-size: 14px;
+    line-height: 32px;
+}
+
 .introduction-block {
     margin: 1rem auto 5rem auto;
 }
@@ -87,5 +92,58 @@
     &__cmi {
         display: inline-flex;
         margin: 1rem 0;
+    }
+}
+
+.participation-block {
+    @include block-margin;
+}
+
+.line {
+    display: flex;
+
+    &_underlined {
+        border-bottom: 1px solid mat-color($app-theme, 600);
+    }
+}
+
+.line:first-child {
+    padding: 0 0 3rem 0;
+}
+
+.line:last-child {
+    padding: 3rem 0 0 0;
+}
+
+.participation {
+    width: 50%;
+    padding: 0 7rem 0 0;
+
+    &__title {
+        font-size: 1.625rem;
+        line-height: 2rem;
+    }
+}
+
+.step {
+    display: flex;
+    align-items: center;
+
+    &__indicator {
+        display: block;
+        height: 12px;
+        width: 12px;
+        border-radius: 6px;
+        background-color: mat-color($app-theme, 550);
+    }
+
+    &__index {
+        margin: 0 6px;
+        @include small-font;
+    }
+
+    &__time {
+        margin: 0;
+        @include small-font;
     }
 }

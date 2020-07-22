@@ -83,6 +83,7 @@ h2 {
     line-height: 3.125rem;
 }
 
+a,
 ol li,
 ul li,
 p {
@@ -93,7 +94,6 @@ p {
 .Link {
     color: mat-color($app-theme, 250);
     text-decoration: none;
-    white-space: nowrap;
 }
 
 .Link:hover {
@@ -103,4 +103,12 @@ p {
 .Link:active {
     color: mat-color($app-theme, 300);
     text-decoration: underline;
+}
+
+.medium {
+    font-family: 'Untitled-Sans-Medium', sans-serif;
+}
+
+.no-margin {
+    margin: 0;
 }

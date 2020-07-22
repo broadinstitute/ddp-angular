@@ -1,1 +1,44 @@
-{}
+{
+    "HomePage": {
+        "Participation": {
+            "Survey": [
+                [
+                    {
+                        "Number": "STEP 1",
+                        "Time": "10-15 minutes",
+                        "Title": "Provide Consent",
+                        "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
+                        "LinkText": "Preview the consent form",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 2",
+                        "Time": "5 minutes",
+                        "Title": "Tell us where you’ve been treated",
+                        "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                        "LinkText": "Preview the medical release",
+                        "Link": "#"
+                    }
+                ],
+                [
+                    {
+                        "Number": "STEP 3",
+                        "Time": "10 minutes",
+                        "Title": "Respond to simple surveys",
+                        "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
+                        "LinkText": "Preview the surveys",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 4",
+                        "Time": "10 minutes",
+                        "Title": "Provide a saliva and/or blood sample",
+                        "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.",
+                        "LinkText": "See the kits",
+                        "Link": "#"
+                    }
+                ]
+            ]
+        }
+    }
+}
