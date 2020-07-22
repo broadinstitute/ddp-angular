@@ -55,6 +55,16 @@ body {
     max-width: 1200px;
 }
 
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: mat-color($app-theme, 200);
+}
+
+a:focus {
+    text-decoration: underline;
+}
+
 h1,
 h2,
 h3,
@@ -77,4 +87,19 @@ ul li,
 p {
     font-size: 1.375rem;
     line-height: 2.25rem;
+}
+
+.Link {
+    color: mat-color($app-theme, 250);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.Link:hover {
+    text-decoration: underline;
+}
+
+.Link:active {
+    color: mat-color($app-theme, 300);
+    text-decoration: underline;
 }

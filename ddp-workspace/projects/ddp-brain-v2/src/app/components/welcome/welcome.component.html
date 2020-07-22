@@ -29,18 +29,18 @@
                     </div>
                 </div>
                 <div class="introduction__image">
-                    <img src="assets/images/brain.png" alt="">
+                    <img class="image" src="assets/images/brain.png" alt="">
                 </div>
             </div>
         </div>
     </section>
     <section class="section about-section">
         <div class="content content_wide about-block">
-            <div>
-                <div>
-                    <img src="https://dummyimage.com/440x610/aaa/fff" alt="">
+            <div class="about">
+                <div class="about__image">
+                    <img class="image" src="assets/images/people.png" alt="">
                 </div>
-                <div>
+                <div class="about__info">
                     <h2>
                         What’s this project about?
                     </h2>
@@ -55,12 +55,12 @@
                         drive this disease and sharing this data, we hope insights can be gained to develop more
                         effective therapies.
                     </p>
-                    <a href="#">
+                    <a [href]="cmiUrl" target="_blank">
                         <img src="assets/images/logo-count-me-in.svg" alt="">
                     </a>
                     <p>
-                        To learn more about Count Me In, our mission, and other projects and published research, visit
-                        our site.
+                        To learn more about Count Me In, our mission, and other projects and published research,
+                        <a class="Link" [href]="cmiUrl" target="_blank">visit our site</a>.
                     </p>
                 </div>
             </div>

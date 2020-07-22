@@ -20,11 +20,6 @@
         display: flex;
         align-items: center;
         padding-left: 3rem;
-
-        img {
-            height: auto;
-            max-width: 100%;
-        }
     }
 
     &__cmi {
@@ -41,6 +36,11 @@
         line-height: 22px;
         color: mat-color($app-theme, 450);
     }
+}
+
+.image {
+    height: auto;
+    max-width: 100%;
 }
 
 .logos {
@@ -63,4 +63,19 @@
 
 .about-block {
     @include block-margin;
+}
+
+.about {
+    display: flex;
+
+    &__info,
+    &__image {
+        width: 50%;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+        padding-right: 3rem;
+    }
 }
