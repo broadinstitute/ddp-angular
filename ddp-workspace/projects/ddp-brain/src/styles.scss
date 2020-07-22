@@ -1548,10 +1548,6 @@ ul {
     margin: 5px 0;
 }
 
-.md-dialog-container {
-    background-color: mat-color($app-theme, 1100);
-}
-
 .ErrorMessage {
     border-top: 2px solid mat-color($app-theme, 1200);
     margin-top: 30px;
@@ -1563,6 +1559,35 @@ ul {
 
 .ErrorMessage a {
     text-decoration: underline !important;
+}
+
+// move user menu to the side panel on the small screens
+.user-menu-panel {
+    display: none;
+
+    .SimpleButton {
+        font-size: 1.1rem !important;
+        color: mat-color($app-theme, 600) !important;
+    }
+
+    .SimpleButton:hover {
+        color: mat-color($app-theme, 700) !important;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .user-menu-panel {
+        display: block;
+    }
+
+    .user-menu-header {
+        display: none;
+        padding: 0;
+    }
+
+    .ddp-user {
+        color: mat-color($app-theme, 600) !important;
+    }
 }
 
 .ddp-activity-validation {

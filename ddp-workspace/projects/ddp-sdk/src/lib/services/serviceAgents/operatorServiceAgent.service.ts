@@ -17,7 +17,7 @@ export class OperatorServiceAgent<TEntity> extends SessionServiceAgent<TEntity> 
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
         this.anchor = session.sessionObservable.pipe(
             filter(x => x !== null),
             map(x => x.userGuid)

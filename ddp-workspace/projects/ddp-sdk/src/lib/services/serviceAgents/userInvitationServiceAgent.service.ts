@@ -5,6 +5,7 @@ import { LoggingService } from '../logging.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { Invitation } from '../../models/invitation';
 import { ConfigurationService } from '../configuration.service';
+import { LanguageService } from '../languageService.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -13,8 +14,9 @@ export class UserInvitationServiceAgent extends UserServiceAgent<Array<Invitatio
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public getInvitations(): Observable<Array<Invitation> | null> {

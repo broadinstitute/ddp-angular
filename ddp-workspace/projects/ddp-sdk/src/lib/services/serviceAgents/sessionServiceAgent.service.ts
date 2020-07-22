@@ -4,6 +4,7 @@ import { ServiceAgent } from './serviceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { Observable, of } from 'rxjs';
 import { flatMap, take } from 'rxjs/operators';
 
@@ -13,8 +14,9 @@ export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
         private _session: SessionMementoService,
         @Inject('ddp.config') protected _configuration: ConfigurationService,
         private _http: HttpClient,
-        private _logger: LoggingService) {
-        super(_configuration, _http, _logger);
+        private _logger: LoggingService,
+        private _language: LanguageService) {
+        super(_configuration, _http, _logger, _language);
     }
 
     protected getHeaders(options: any): Observable<any> {
@@ -42,7 +44,6 @@ export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
             take(1)
         );
     }
-
 
     protected getBackendUrl(): string {
         return this.configuration.backendUrl + '/pepper/v1';

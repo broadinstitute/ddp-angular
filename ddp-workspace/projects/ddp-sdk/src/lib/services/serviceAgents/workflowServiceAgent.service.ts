@@ -14,7 +14,7 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
     }
 
     public byActivityCode(state: string, activityCode: string): Observable<ActivityResponse | null> {
