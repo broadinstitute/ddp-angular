@@ -101,7 +101,7 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'change-language-redirect/:destination/:language',
+    path: 'change-language-redirect',
     component: ChangeLanguageRedirectComponent,
     canActivate: [IrbGuard]
   },
