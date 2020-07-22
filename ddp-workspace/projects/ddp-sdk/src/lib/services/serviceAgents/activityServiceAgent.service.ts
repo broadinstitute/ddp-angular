@@ -5,10 +5,11 @@ import { UserServiceAgent } from './userServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { ActivityInstanceGuid } from '../../models/activityInstanceGuid';
 import { Observable, of, throwError } from 'rxjs';
-import { combineLatest, flatMap, catchError, map } from 'rxjs/operators';
+import { combineLatest, flatMap, catchError, map, switchMap } from 'rxjs/operators';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
@@ -20,35 +21,37 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         @Inject('ddp.config') configuration: ConfigurationService,
         private converter: ActivityConverter,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        private __language: LanguageService) {
+        super(session, configuration, http, logger, null);
     }
 
     public getActivity(studyGuid: Observable<string | null>,
         activityGuid: Observable<string | null>): Observable<ActivityForm> {
-        return studyGuid.pipe(
-            combineLatest(activityGuid, (x, y) => {
-                return { study: x, activity: y };
-            }),
-            flatMap(x => {
-                if (x.study == null || x.study === '' ||
-                    x.activity == null || x.activity === '') {
-                    return of(null);
-                }
-                return this.getObservable(`/studies/${x.study}/activities/${x.activity}`, {}, [404]);
-            }, (x, y) => y),
-            catchError(e => {
-                if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
-                    return throwError('ACTIVITY_NOT_FOUND');
-                }
-                return throwError(e);
-            }),
-            map(x => {
-                if (x == null) {
-                    return null;
-                }
-                return this.converter.convertActivity(x);
-            })
+        return this.__language.getProfileLanguageUpdateNotifier().pipe(
+          switchMap(() => studyGuid)).pipe(
+          combineLatest(activityGuid, (x, y) => {
+            return { study: x, activity: y };
+          }),
+          flatMap(x => {
+            if (x.study == null || x.study === '' ||
+              x.activity == null || x.activity === '') {
+              return of(null);
+            }
+            return this.getObservable(`/studies/${x.study}/activities/${x.activity}`, {}, [404]);
+          }, (x, y) => y),
+          catchError(e => {
+            if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
+              return throwError('ACTIVITY_NOT_FOUND');
+            }
+            return throwError(e);
+          }),
+          map(x => {
+            if (x == null) {
+              return null;
+            }
+            return this.converter.convertActivity(x);
+          })
         );
     }
 
