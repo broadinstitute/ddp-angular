@@ -22,12 +22,17 @@
         padding-left: 3rem;
     }
 
+    &__text {
+        margin-right: 5rem;
+    }
+
     &__cmi {
         margin-right: 1rem;
     }
 
     &__buttons {
-        margin: 2.5rem 0;
+        display: flex;
+        margin: 1.5rem 0;
     }
 
     &__examples {
@@ -77,5 +82,10 @@
         display: flex;
         align-items: center;
         padding-right: 3rem;
+    }
+
+    &__cmi {
+        display: inline-flex;
+        margin: 1rem 0;
     }
 }
