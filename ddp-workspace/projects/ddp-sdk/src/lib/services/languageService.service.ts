@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { isNullOrUndefined } from "util";
 import { Observable, Subject } from "rxjs";
 import { startWith } from "rxjs/operators";
@@ -14,6 +14,10 @@ export class LanguageService {
 
     public getCurrentLanguage(): string {
         return this.translate.currentLang;
+    }
+
+    public onLanguageChange(): Observable<LangChangeEvent> {
+      return this.translate.onLangChange;
     }
 
     public canUseLanguage(languageCode: string): boolean {
