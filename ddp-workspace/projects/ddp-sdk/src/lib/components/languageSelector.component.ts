@@ -107,7 +107,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private updateProfileLanguage(): void {
     let profileModifications: UserProfile = new UserProfile();
     profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-    let updateProfileObservable: Observable<any> = this.profileServiceAgent.saveProfileAttributes(profileModifications);
+    let updateProfileObservable: Observable<any> = this.profileServiceAgent.updateProfile(profileModifications);
     let sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
     this.anchor.addNew(sub);
   }
