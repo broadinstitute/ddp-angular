@@ -12,7 +12,7 @@ export class AdminServiceAgent<TEntity> extends SessionServiceAgent<TEntity> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
     }
 
     protected getBackendUrl(): string {

@@ -129,7 +129,7 @@ var DDP_ENV = {
 
 {{if eq $study_guid "testboston"}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0Domain'] = "testboston-dev.auth0.com";
+        DDP_ENV['auth0Domain'] = "login-dev.testboston.org";
         DDP_ENV['auth0Audience'] = "testboston-dev.auth0.com";
         DDP_ENV['auth0ClientId'] = "m4lhHnq2WvRm3lloUHbQzwCte7s03o3S";
         DDP_ENV['adminClientId'] = "OC3gFZD8vIBiKlJ3tPUJJ2cUI5EwVFSz";

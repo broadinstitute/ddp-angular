@@ -16,7 +16,7 @@ export class SubjectInvitationServiceAgent extends SessionServiceAgent<any> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
     }
 
     public updateInvitationDetails(invitationId: string, notes: string): Observable<any | null> {
