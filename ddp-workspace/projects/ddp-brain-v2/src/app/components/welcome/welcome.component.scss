@@ -5,7 +5,7 @@
 }
 
 .introduction-block {
-    @include block-margin;
+    margin: 1rem auto 5rem auto;
 }
 
 .introduction {
@@ -54,4 +54,12 @@
     &__square {
         height: 60px;
     }
+}
+
+.about-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.about-block {
+    @include block-margin;
 }
