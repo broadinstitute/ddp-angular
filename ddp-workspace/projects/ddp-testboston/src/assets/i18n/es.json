@@ -66,7 +66,7 @@
   "HomePage": {
     "IntroSection": {
       "Title": "Queremos contribuir a que la gente de nuestra ciudad pueda volver a trabajar sin riesgos.",
-      "Text": "TestBoston es un estudio de investigación de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (antes Partners Healthcare) y Broad Institute de MIT y Harvard.",
+      "Text": "TestBoston es un estudio de investigación de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (antes Partners Healthcare) y Broad Institute of MIT and Harvard.",
       "Code": "Ingresar mi código de invitación",
       "NoCode": "No me invitaron. ¿Puedo participar?"
     },
@@ -162,7 +162,7 @@
         {
           "Question": "¿Quién realiza este estudio?",
           "Paragraphs": [
-            "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (MGB, antes Partners Healthcare) y Broad Institute de MIT y Harvard. Las personas que dirigen el estudio son la Dra. Lisa Cosimi,  la Dra. Ann Woolley y la Dra. Deborah Hung. Todas ellas son infectólogas de Brigham and Women’s Hospital.",
+            "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (MGB, antes Partners Healthcare) y Broad Institute of MIT and Harvard. Las personas que dirigen el estudio son la Dra. Lisa Cosimi,  la Dra. Ann Woolley y la Dra. Deborah Hung. Todas ellas son infectólogas de Brigham and Women’s Hospital.",
             "MGB es el sistema sanitario más grande de la zona de Boston. Entre sus hospitales se cuentan Brigham and Women’s y Massachusetts General Hospital. Broad Institute es un destacado instituto de investigaciones académicas ubicado en Cambridge. Broad Institute realiza miles de pruebas diarias de COVID-19 para los departamentos de Salud de Massachusetts, así como para distintos estudios de COVID-19 que se llevan a cabo en este estado."
           ]
         },
@@ -201,7 +201,7 @@
       {
         "Name": "Dra. Deborah T. Hung, PhD",
         "Affiliations": "Profesora titular de Infectología, Neumología y Medicina Intensiva de la Facultad de Medicina de Harvard",
-        "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute de MIT y Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham & Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
+        "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute of MIT and Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham and Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
       }
     ]
   },
