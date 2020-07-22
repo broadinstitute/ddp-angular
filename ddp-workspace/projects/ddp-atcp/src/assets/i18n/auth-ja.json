@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "をチェックしてください。このアドレスに、アカウントを有効化するためのガイドラインを記載したEメールを送信しました。",
+    "checkEmail": "もうすぐ完了です! あなたのEメール: ",
+    "stillWaiting": "まだEメールが届きませんか?",
+    "title": "アカウントのアクチベーション"
+  },
+  "common": {
+    "alreadyRegistered": "すでに登録済ですか? ここからサインインしてください",
+    "confirmNewPassword": {
+      "label": "新規パスワードを確認する"
+    },
+    "email": {
+      "whoseEmail": "どなたのEメールアドレスを入力しますか?",
+      "whoseEmailTooltip": "あなたがA-T患者であるお子様(たち) の親/法的保護者である場合には、あなた自身のEメールアドレスを使用してください。このアドレスへ、グローバル A-T ファミリーデータプラットフォームに登録された方々に関するご連絡をいたします。"
+    },
+    "forgotPassword": "パスワードをお忘れですか?",
+    "joinUs": "参加する",
+    "or": "または",
+    "password": {
+      "label": "パスワード"
+    },
+    "reenter": {
+      "label": "パスワードを再入力してください"
+    },
+    "resendInstructions": "確認方法を再送する",
+    "resetPassword": {
+      "label": "新規パスワード"
+    },
+    "signin": "サインイン",
+    "signinWithGoogle": "Googleでサインインする"
+  },
+  "forgotPassword": {
+    "enterEmail": "Eメールアドレスを入力してください。パスワードリセットのための方法を送信します。",
+    "submit": "パスワードリセットのための方法を送信する",
+    "title": "パスワードをお忘れですか?"
+  },
+  "header": {
+    "aboutThisInitiative": "このイニシアチブについて",
+    "aboutUs": "組織概要",
+    "joinUs": "参加する",
+    "language": "言語",
+    "learnMore": "さらに詳しく",
+    "signIn": "サインイン"
+  },
+  "login": {
+    "title": "グローバルA-Tファミリーデータプラットフォームには、EメールアドレスまたはGoogleアカウントを使ってログインできます。",
+    "useEmail": "Eメールアドレスを使う:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "パスワードが変更されました。",
+    "YouWillGetInstructions": "数分以内に、パスワードのリセット方法について説明したEメールが届きます。"
+  },
+  "resendInstructions": {
+    "subTitle": "確認方法が届かない場合には、Eメールアドレスを入力して確認Eメールが再度送信されるようにできます。",
+    "submit": "確認方法を再送する",
+    "title": "確認方法を再送する"
+  },
+  "resetPassword": {
+    "submit": "パスワードを変更する",
+    "title": "パスワードを変更する"
+  },
+  "signUp": {
+    "createAccountBtn": "アカウントの作成",
+    "createAccountWithGoogleBtn": "Googleアカウントを使う",
+    "emailLabel": "Eメールアドレス",
+    "googleEmail": "Google Eメールアドレス",
+    "passwordHint": "(最少文字数は8)",
+    "subTitle": "プラットフォームには、パスワードを作成したEメールアドレスまたはGoogleアカウントを使ってログインできます。このEメールアドレスを使って、グローバル A-T ファミリーデータプラットホフォームに関するご連絡をいたします。",
+    "subtitleWithEmail": "Eメールアドレスを使う",
+    "title": "アカウントの作成",
+    "useGoogle": "Googleアカウントを使う"
+  },
+  "title": "グローバルA-Tファミリーデータプラットフォーム | アカウント有効化のお知らせ"
+}
