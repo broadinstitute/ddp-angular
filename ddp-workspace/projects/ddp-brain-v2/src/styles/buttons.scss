@@ -75,6 +75,11 @@
     font-size: 1.25rem;
 }
 
+.button_learn-more:hover:not([disabled]),
+.button_learn-more:hover:enabled {
+    color: mat-color($app-theme, 650);
+}
+
 .simple-button,
 .SimpleButton {
     background: none;

@@ -147,3 +147,22 @@
         @include small-font;
     }
 }
+
+.learn-more-section {
+    background-color: mat-color($app-theme, 650);
+}
+
+.learn-more-block {
+    margin: 3rem auto;
+}
+
+.learn-more {
+    display: flex;
+    align-items: center;
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-right: 7rem;
+    }
+}

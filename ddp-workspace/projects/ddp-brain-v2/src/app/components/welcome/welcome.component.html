@@ -90,11 +90,14 @@
             </div>
         </div>
     </section>
-    <section class="section">
-        <div class="content content_wide">
-            <div>
-                <p>To learn more about participation, eligibility criteria and more</p>
-                <a href="#">View FAQ page</a>
+    <section class="section learn-more-section">
+        <div class="content content_wide learn-more-block">
+            <div class="learn-more">
+                <p class="learn-more__text">To learn more about participation, eligibility criteria and more</p>
+                <a [routerLink]="'/' + appRoutes.MoreDetails"
+                    class="button button_medium button_secondary button_learn-more medium">
+                    View FAQ page
+                </a>
             </div>
         </div>
     </section>
