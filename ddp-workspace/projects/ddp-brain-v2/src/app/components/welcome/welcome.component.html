@@ -156,11 +156,17 @@
     </section>
     <section class="section join-section">
         <div class="content content_wide join-block">
-            <div>
-                <h2>Please join us in saying “Count Me In!”</h2>
-                <p>With your help, patients and their families can be the driving force behind transformative brain
-                    cancer research.</p>
-                <a href="#">Count Me In</a>
+            <div class="join">
+                <img class="join__image" src="assets/images/hands.png" alt="">
+                <h2 class="join__title h2-big center">Please join us in saying “Count Me In!”</h2>
+                <p class="join__text center">
+                    With your help, patients and their families can be the driving force behind
+                    transformative brain
+                    cancer research.
+                </p>
+                <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_big button_primary">
+                    Count Me In
+                </a>
             </div>
         </div>
     </section>
