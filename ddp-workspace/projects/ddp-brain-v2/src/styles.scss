@@ -2,6 +2,8 @@
 @import './styles/fonts.scss';
 @import './styles/buttons.scss';
 @import './styles/dialogs.scss';
+@import './styles/password.scss';
+@import './styles/static-page.scss';
 
 html,
 body {
@@ -51,10 +53,14 @@ body {
 .content {
     margin: 0 auto;
     padding: 0 1.5625rem;
-}
 
-.content_wide {
-    max-width: 1200px;
+    &_tight {
+        max-width: 1000px;
+    }
+
+    &_wide {
+        max-width: 1200px;
+    }
 }
 
 a {

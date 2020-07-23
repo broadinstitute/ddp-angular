@@ -1,4 +1,12 @@
 {
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            }
+        }
+    },
     "HomePage": {
         "Participation": {
             "Survey": [
@@ -122,6 +130,13 @@
                 "Continue": "Continue",
                 "RenewalFailed": "Session renewal failed. Please log out and log back in again."
             }
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
         }
     }
 }
