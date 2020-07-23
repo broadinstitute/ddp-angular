@@ -1039,7 +1039,7 @@
               "projects/ddp-testboston/src/favicon-alert.ico",
               "projects/ddp-testboston/src/assets",
               {
-                "glob": "*.pdf",
+                "glob": "**/*",
                 "input": "projects/ddp-testboston/src/pdf/",
                 "output": "/"
               },
