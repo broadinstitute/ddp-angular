@@ -93,6 +93,7 @@ p {
 }
 
 .Link {
+    font-family: 'Untitled-Sans-Medium', sans-serif;
     color: mat-color($app-theme, 250);
     text-decoration: none;
 }
@@ -104,10 +105,6 @@ p {
 .Link:active {
     color: mat-color($app-theme, 300);
     text-decoration: underline;
-}
-
-.medium {
-    font-family: 'Untitled-Sans-Medium', sans-serif;
 }
 
 .no-margin {

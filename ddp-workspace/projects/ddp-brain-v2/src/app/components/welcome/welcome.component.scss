@@ -138,6 +138,7 @@
     }
 
     &__index {
+        font-family: 'Untitled-Sans-Medium', sans-serif;
         margin: 0 6px;
         @include small-font;
     }
@@ -228,4 +229,12 @@
         overflow: hidden;
         width: 450px;
     }
+}
+
+.join-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.join-block {
+    margin: 3rem auto 9rem auto;
 }
