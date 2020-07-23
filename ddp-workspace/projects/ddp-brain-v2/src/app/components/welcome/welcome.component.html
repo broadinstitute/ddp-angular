@@ -24,9 +24,11 @@
                         medulloblastoma.
                     </p>
                     <div class="logos">
-                        <img class="logos__wide" src="assets/images/logo-broad-institute.png" alt="">
-                        <img class="logos__wide" src="assets/images/logo-dana-farber-cancer-institute.png" alt="">
-                        <img class="logos__square" src="assets/images/logo-minderoo.png" alt="">
+                        <img class="logos__wide" src="assets/images/logo-broad-institute.png"
+                            alt="Broad Institute logo">
+                        <img class="logos__wide" src="assets/images/logo-dana-farber-cancer-institute.png"
+                            alt="Dana Farber logo">
+                        <img class="logos__square" src="assets/images/logo-minderoo.png" alt="Minderoo Foundation logo">
                     </div>
                 </div>
                 <div class="introduction__image">
@@ -101,21 +103,22 @@
             </div>
         </div>
     </section>
-    <section class="section">
-        <div class="content content_wide">
+    <section class="section partners-section">
+        <div class="content content_wide partners-block">
             <div>
                 <h2>Partners</h2>
-                <div>
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                    <img src="https://dummyimage.com/330x125/aaa/fff" alt="">
-                </div>
+                <ng-container *ngFor="let row of 'HomePage.Partners.Organizations' | translate">
+                    <div class="partners">
+                        <ng-container *ngFor="let partner of row">
+                            <a class="partners__link" [href]="partner.Website" target="_blank">
+                                <img class="partners__logo" [src]="partner.Logo" [alt]="partner.Alt">
+                            </a>
+                        </ng-container>
+                    </div>
+                </ng-container>
                 <p>
                     For more information on how to become a partner for the Brain Cancer Project,
-                    contact the team at info@braincancerproject.org.
+                    contact the team at <a class="Link medium" [href]="infoEmailHref">{{infoEmail}}</a>.
                 </p>
             </div>
         </div>

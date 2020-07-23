@@ -10,10 +10,14 @@ import { ToolkitConfigurationService } from 'toolkit';
 export class WelcomeComponent implements OnInit {
   public appRoutes = AppRoutes;
   public cmiUrl: string;
+  public infoEmail: string;
+  public infoEmailHref: string;
 
   constructor(@Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.cmiUrl = this.config.countMeInUrl;
+    this.infoEmail = this.config.infoEmail;
+    this.infoEmailHref = `mailto:${this.infoEmail}`;
   }
 }

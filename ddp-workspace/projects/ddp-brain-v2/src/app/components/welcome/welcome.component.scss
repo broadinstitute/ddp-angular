@@ -166,3 +166,27 @@
         margin-right: 7rem;
     }
 }
+
+.partners-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.partners-block {
+    @include block-margin;
+}
+
+.partners {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 3rem 0;
+
+    &__link {
+        margin: 0 1rem;
+    }
+
+    &__logo {
+        max-width: 300px;
+        width: 100%;
+    }
+}

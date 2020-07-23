@@ -39,6 +39,51 @@
                     }
                 ]
             ]
+        },
+        "Partners": {
+            "Organizations": [
+                [
+                    {
+                        "Website": "http://www.targetcancerfoundation.org/",
+                        "Logo": "assets/images/TCF-logo.png",
+                        "Alt": "Target Cancer Foundation logo"
+                    },
+                    {
+                        "Website": "https://www.abta.org/",
+                        "Logo": "assets/images/ABTA-logo.jpg",
+                        "Alt": "American Brain Tumor Association logo"
+                    },
+                    {
+                        "Website": "https://braintumor.org/",
+                        "Logo": "assets/images/NBTS-logo.png",
+                        "Alt": "National Brain Tumor Society logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://www.oligonation.org/",
+                        "Logo": "assets/images/ON-logo.jpg",
+                        "Alt": "Oligo Nation logo"
+                    },
+                    {
+                        "Website": "https://www.dragonmaster.org/",
+                        "Logo": "assets/images/DMF-logo.jpg",
+                        "Alt": "Dragon Master Foundation logo"
+                    },
+                    {
+                        "Website": "https://ourbrainbank.org/",
+                        "Logo": "assets/images/OBB-logo.png",
+                        "Alt": "OurBrainBank logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://carsonlesliefoundation.org/",
+                        "Logo": "assets/images/CLF-logo.png",
+                        "Alt": "The Carson Leslie Foundation logo"
+                    }
+                ]
+            ]
         }
     }
 }
