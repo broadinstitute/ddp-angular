@@ -85,5 +85,43 @@
                 ]
             ]
         }
+    },
+    "Toolkit": {
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email address *",
+                        "Error": "Please enter a valid email address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email confirmation *",
+                        "Error": "Please enter a valid email address"
+                    }
+                },
+                "CancelButton": "Cancel",
+                "SubmitButton": "Join",
+                "Required": "",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
+        }
     }
 }

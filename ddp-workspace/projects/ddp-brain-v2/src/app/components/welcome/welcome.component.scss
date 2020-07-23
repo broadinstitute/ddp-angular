@@ -190,3 +190,42 @@
         width: 100%;
     }
 }
+
+.stay-informed-block {
+    @include block-margin;
+}
+
+.stay-informed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.socials {
+    margin-bottom: 10rem;
+
+    &__text {
+        margin: 3rem 0 0 0;
+    }
+
+    &__facebook {
+        margin-right: 1rem;
+    }
+}
+
+.twitter {
+    &__title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    &__link {
+        font-size: 1.125rem;
+        line-height: 2rem;
+    }
+
+    &__feed {
+        overflow: hidden;
+        width: 450px;
+    }
+}

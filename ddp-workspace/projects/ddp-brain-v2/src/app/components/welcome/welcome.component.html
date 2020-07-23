@@ -84,7 +84,7 @@
                                 </p>
                                 <p class="participation__title">{{step.Title}}</p>
                                 <p>{{step.Text}}</p>
-                                <a class="Link medium" [href]="step.Link">{{step.LinkText}}</a>
+                                <a class="Link medium" [href]="step.Link" target="_blank">{{step.LinkText}}</a>
                             </div>
                         </div>
                     </ng-container>
@@ -106,7 +106,7 @@
     <section class="section partners-section">
         <div class="content content_wide partners-block">
             <div>
-                <h2>Partners</h2>
+                <h2 class="h2-big">Partners</h2>
                 <ng-container *ngFor="let row of 'HomePage.Partners.Organizations' | translate">
                     <div class="partners">
                         <ng-container *ngFor="let partner of row">
@@ -118,30 +118,40 @@
                 </ng-container>
                 <p>
                     For more information on how to become a partner for the Brain Cancer Project,
-                    contact the team at <a class="Link medium" [href]="infoEmailHref">{{infoEmail}}</a>.
+                    contact the team at <a class="Link medium" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
                 </p>
             </div>
         </div>
     </section>
     <section class="section">
-        <div class="content content_wide">
-            <div>
-                <div>
-                    <h2>Stay informed</h2>
+        <div class="content content_wide stay-informed-block">
+            <div class="stay-informed">
+                <div class="socials">
+                    <h2 class="h2-big">Stay informed</h2>
                     <p>Sign up for our mailing list or follow us on social media.</p>
-                    <button>Join Mailing List</button>
+                    <button class="button button_medium button_secondary medium" (click)="joinMailingList()">
+                        Join Mailing List</button>
                     <div>
-                        <p>
+                        <p class="socials__text">
                             Social
                         </p>
                         <div>
-                            <a href="#">Facebook</a>
-                            <a href="#">Twitter</a>
+                            <a class="Link medium socials__facebook" [href]="'https://www.facebook.com/' + facebookAccount"
+                                target="_blank">Facebook</a>
+                            <a class="Link medium" [href]="'https://twitter.com/' + twitterAccount"
+                                target="_blank">Twitter</a>
                         </div>
                     </div>
                 </div>
-                <div>
-                    Twitter feed
+                <div class="twitter">
+                    <p>
+                        <span class="twitter__title">Tweets by </span>
+                        <a [href]="'https://twitter.com/' + twitterAccount" class="Link medium twitter__link"
+                            target="_blank">@{{twitterAccount}}</a>
+                    </p>
+                    <div class="twitter__feed">
+                        <toolkit-twitter-timeline-widget></toolkit-twitter-timeline-widget>
+                    </div>
                 </div>
             </div>
         </div>

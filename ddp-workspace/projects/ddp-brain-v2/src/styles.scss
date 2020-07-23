@@ -1,6 +1,7 @@
 @import 'app-theme.scss';
 @import './styles/fonts.scss';
 @import './styles/buttons.scss';
+@import './styles/dialogs.scss';
 
 html,
 body {
@@ -111,4 +112,14 @@ p {
 
 .no-margin {
     margin: 0;
+}
+
+.h2-big {
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+}
+
+.ddp-close-button:hover {
+    color: mat-color($app-theme, 400);
+    transition: 0.3s;
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService, CommunicationService } from 'toolkit';
 
 @Component({
   selector: 'app-welcome',
@@ -11,13 +11,21 @@ export class WelcomeComponent implements OnInit {
   public appRoutes = AppRoutes;
   public cmiUrl: string;
   public infoEmail: string;
-  public infoEmailHref: string;
+  public twitterAccount: string;
+  public facebookAccount: string;
 
-  constructor(@Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
+  constructor(
+    private communicationService: CommunicationService,
+    @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.cmiUrl = this.config.countMeInUrl;
     this.infoEmail = this.config.infoEmail;
-    this.infoEmailHref = `mailto:${this.infoEmail}`;
+    this.twitterAccount = this.config.twitterAccountId;
+    this.facebookAccount = this.config.facebookGroupId;
+  }
+
+  public joinMailingList(): void {
+    this.communicationService.openJoinDialog();
   }
 }
