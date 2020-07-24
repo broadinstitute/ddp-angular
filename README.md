@@ -39,6 +39,8 @@ javascript config files.  You must build these config files from the top-level d
 ./build-study.sh [version] [env] brain cmi-brain --config
 ./build-study.sh [version] [env] mbc cmi-mbc --config
 ./build-study.sh [version] [env] osteo CMI-OSTEO --config
+./build-study.sh [version] [env] testboston testboston --config
+./build-study.sh [version] [env] mpc cmi-mpc --config
 ```
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
