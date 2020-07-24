@@ -85,6 +85,7 @@ createForm(configs.forgetPassword, ($form, data) => {
       $form.find('.form-group').addClass('error');
     } else {
       showModal(dictionary.modal.YouWillGetInstructions);
+      onActivateLogin();
     }
   });
 });
