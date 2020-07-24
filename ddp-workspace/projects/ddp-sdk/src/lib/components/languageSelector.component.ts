@@ -1,15 +1,15 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
-import { CompositeDisposable} from '../compositeDisposable';
+import { CompositeDisposable } from '../compositeDisposable';
 import { UserProfile } from '../models/userProfile';
 import { StudyLanguage } from '../models/studyLanguage';
 import { ConfigurationService } from '../services/configuration.service';
 import { LanguageService } from '../services/languageService.service';
 import { SessionMementoService } from '../services/sessionMemento.service';
-import { UserProfileServiceAgent} from '../services/serviceAgents/userProfileServiceAgent.service';
+import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
 import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
 import { isNullOrUndefined } from 'util';
 import { iif, Observable, of, Subscription } from 'rxjs';
-import { flatMap, map, mergeMap } from 'rxjs/operators';
+import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -50,6 +50,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.anchor = new CompositeDisposable();
     this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : this.defaultIconUrl;
+    this.currentLanguageListener();
     const sub = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).pipe(
       mergeMap(studyLanguages => {
         if (studyLanguages) {
@@ -205,5 +206,17 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   private foundLanguage(lang: StudyLanguage): boolean {
     return !isNullOrUndefined(lang) && this.language.canUseLanguage(lang.languageCode);
+  }
+
+  private currentLanguageListener(): void {
+    const sub = this.language.onLanguageChange().pipe(
+      filter(() => !!this.currentLanguage),
+      filter(event => event.lang !== this.currentLanguage.languageCode)
+    ).subscribe(event => {
+      this.currentLanguage = this.studyLanguages.find(language => {
+        return language.languageCode === event.lang;
+      });
+    });
+    this.anchor.addNew(sub);
   }
 }
