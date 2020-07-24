@@ -41,7 +41,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 
@@ -124,7 +123,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         WelcomeComponent,
         MailingListComponent,
         UserRegistrationPrequalComponent,
-        PrivacyPolicyComponent,
         PrismComponent,
         EnrollmentComponent
     ],
