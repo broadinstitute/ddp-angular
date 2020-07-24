@@ -7,7 +7,6 @@ import { LanguageService } from '../services/languageService.service';
 import { SessionMementoService } from '../services/sessionMemento.service';
 import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
 import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
-import { isNullOrUndefined } from 'util';
 import { iif, Observable, of, Subscription } from 'rxjs';
 import { flatMap, map, mergeMap } from 'rxjs/operators';
 
@@ -36,7 +35,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
   public iconURL: string;
-  private studyLanguages: StudyLanguage[];
+  private studyLanguages: StudyLanguage[] = [];
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = "assets/images/globe.svg#Language-Selector-3";
 
@@ -66,9 +65,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
           return of(false);
         }
       })
-    ).subscribe(langLoadedSuccessfully => {
-      this.loaded = langLoadedSuccessfully;
-      this.isVisible.emit(langLoadedSuccessfully);
+    ).subscribe(loaded => {
+      this.loaded = loaded;
+      this.isVisible.emit(loaded);
     });
     this.anchor.addNew(sub);
   }
@@ -78,14 +77,11 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   public getUnselectedLanguages(): Array<StudyLanguage> {
-    if (!isNullOrUndefined(this.studyLanguages)) {
-      return this.studyLanguages.filter(elem => elem !== this.currentLanguage);
-    }
-    return null;
+    return this.studyLanguages.filter(language => language.languageCode !== this.currentLanguage.languageCode);
   }
 
   public changeLanguage(lang: StudyLanguage): void {
-    if (!isNullOrUndefined(this.currentLanguage) && this.currentLanguage.languageCode === lang.languageCode) {
+    if (this.currentLanguage && this.currentLanguage.languageCode === lang.languageCode) {
       return;
     }
 
@@ -97,8 +93,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
           this.updateProfileLanguage();
         }
       }
-    }
-    else {
+    } else {
       console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
     }
   }
@@ -139,8 +134,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       if (this.foundLanguage(language)) {
         this.changeLanguage(language);
         return true;
-      }
-      else {
+      } else {
         console.error('Error: no stored, profile, or default language found');
         return false;
       }
@@ -150,8 +144,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private getNextObservable(lang: StudyLanguage, obs: Observable<StudyLanguage>): Observable<StudyLanguage> {
     if (this.foundLanguage(lang)) {
       return of(lang);
-    }
-    else {
+    } else {
       return obs;
     }
   }
@@ -159,17 +152,15 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private getCurrentStoredLangObservable(): Observable<StudyLanguage> {
     return new Observable<StudyLanguage>(subscriber => {
       //Use the current language if it exists
-      if (!isNullOrUndefined(this.currentLanguage)) {
+      if (this.currentLanguage) {
         subscriber.next(this.currentLanguage);
-      }
-      else {
+      } else {
         //Check for a stored language
         let loadedCode: string = this.language.useStoredLanguage();
         if (loadedCode) {
           let lang: StudyLanguage = this.studyLanguages.find(studyLang => studyLang.languageCode === loadedCode);
-          subscriber.next(isNullOrUndefined(lang) ? null : lang);
-        }
-        else {
+          subscriber.next(lang ? lang : null);
+        } else {
           subscriber.next(null);
         }
       }
@@ -182,8 +173,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       .pipe(map(profileDecorator => {
         if (profileDecorator && profileDecorator.profile.preferredLanguage) {
           return this.studyLanguages.find(studyLang => studyLang.languageCode === profileDecorator.profile.preferredLanguage);
-        }
-        else {
+        } else {
           return null;
         }
       }));
@@ -193,10 +183,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private getDefaultLangObservable(): Observable<StudyLanguage> {
     return new Observable<StudyLanguage>(subscriber => {
       let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
-      if (!isNullOrUndefined(lang)) {
+      if (lang) {
         subscriber.next(lang);
-      }
-      else {
+      } else {
         subscriber.next(null);
       }
       subscriber.complete();
@@ -204,6 +193,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private foundLanguage(lang: StudyLanguage): boolean {
-    return !isNullOrUndefined(lang) && this.language.canUseLanguage(lang.languageCode);
+    return lang && this.language.canUseLanguage(lang.languageCode);
   }
 }
