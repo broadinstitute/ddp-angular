@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoggingService, ConfigurationService } from 'ddp-sdk';
+import {LoggingService, ConfigurationService, LanguageService} from 'ddp-sdk';
 import { ServiceAgent } from 'projects/ddp-sdk/src/lib/services/serviceAgents/serviceAgent.service';
 import {DataAccessParameters} from "../../models/dataAccessParameters";
 
@@ -10,8 +10,9 @@ export class DataAccessServiceAgent extends ServiceAgent<any> {
   constructor(
     @Inject('ddp.config') configuration: ConfigurationService,
     http: HttpClient,
-    logger: LoggingService) {
-    super(configuration, http, logger);
+    logger: LoggingService,
+    language: LanguageService) {
+    super(configuration, http, logger, language);
   }
 
   public createNewDataAccessRequest(dataAccessParameters: DataAccessParameters, researcher_biosketch: File, studyGuid: string): Observable<any> {
