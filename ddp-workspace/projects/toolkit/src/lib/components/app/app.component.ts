@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
@@ -58,6 +59,9 @@ declare global {
                 <li *ngIf="showInfoForPhysicians">
                     <a [routerLink]="['physician.pdf']" target="_blank" class="Link" translate>App.Info</a>
                 </li>
+                <li class="user-menu-panel">
+                    <ddp-user-menu class="Link"></ddp-user-menu>
+                </li>
                 <li class="NoPadding TopMarginMedium">
                     <a class="twitter-timeline" data-tweet-limit="20" data-theme="light" [href]="twitterUrl">App.Twitter</a>
                 </li>
@@ -95,6 +99,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private renewNotifier: RenewSessionNotifier,
         private windowRef: WindowRef,
         private userProfile: UserProfileServiceAgent,
+        private router: Router,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
@@ -102,6 +107,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.initBrowserWarningListener();
         this.initSessionWillExpireListener();
         this.initTranslate();
+        this.initRouterListener();
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
@@ -234,5 +240,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             const locale = JSON.parse(session).locale;
             this.translate.use(locale);
         }
+    }
+
+    private initRouterListener(): void {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.closeNav();
+            }
+        });
     }
 }

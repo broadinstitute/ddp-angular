@@ -15,7 +15,7 @@ export class InstitutionServiceAgent extends SessionServiceAgent<any> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
     }
 
     public getSummary(input: Observable<string>): Observable<Institution[]> {

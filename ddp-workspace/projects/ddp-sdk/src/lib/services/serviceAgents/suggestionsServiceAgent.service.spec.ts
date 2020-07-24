@@ -36,7 +36,7 @@ describe('SuggestionServiceAgent Test', () => {
         httpClient = TestBed.inject(HttpClient);
         httpTestingController = TestBed.inject(HttpTestingController);
 
-        service = new SuggestionServiceAgent(sessionSpy, config, httpClient, loggingServiceSpy);
+        service = new SuggestionServiceAgent(sessionSpy, config, httpClient, loggingServiceSpy, null);
     });
 
     afterEach(() => {

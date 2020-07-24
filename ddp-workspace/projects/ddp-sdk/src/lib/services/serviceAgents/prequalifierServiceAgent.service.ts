@@ -2,6 +2,7 @@ import { UserServiceAgent } from './userServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,8 +14,9 @@ export class PrequalifierServiceAgent extends UserServiceAgent<any> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public getPrequalifier(studyGuid: string): Observable<string> {

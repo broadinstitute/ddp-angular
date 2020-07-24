@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
+import { LanguageService } from "./languageService.service";
 import { SessionServiceAgent } from './serviceAgents/sessionServiceAgent.service';
 import { CountryAddressInfoSummary } from '../models/countryAddressInfoSummary';
 import { CountryAddressInfo } from '../models/countryAddressInfo';
@@ -20,8 +21,9 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
         this.initializeAllCountryInfoSummaries();
     }
 

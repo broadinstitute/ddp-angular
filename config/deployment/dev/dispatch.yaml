@@ -14,6 +14,8 @@ dispatch:
     service: osteo
   - url: "testboston.dev.datadonationplatform.org/*"
     service: testboston
+  - url: "mpc.dev.datadonationplatform.org/*"
+    service: mpc
   - url: "brain-v2.dev.datadonationplatform.org/*"
     service: brain-v2
   - url: "pepper-backend.dev.datadonationplatform.org/*"
