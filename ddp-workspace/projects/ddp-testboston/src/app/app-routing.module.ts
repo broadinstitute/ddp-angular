@@ -7,7 +7,6 @@ import { ActivityGuids } from './aсtivity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component'
 
 import {
@@ -176,13 +175,6 @@ const routes: Routes = [
   {
     path: AppRoutes.PasswordResetDone,
     component: RedirectToLoginLandingRedesignedComponent,
-    canActivate: [
-      IrbGuard
-    ]
-  },
-  {
-    path: AppRoutes.Privacy,
-    component: PrivacyPolicyComponent,
     canActivate: [
       IrbGuard
     ]
