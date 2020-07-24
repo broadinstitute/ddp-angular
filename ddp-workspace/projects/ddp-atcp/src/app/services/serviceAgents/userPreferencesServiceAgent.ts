@@ -1,7 +1,14 @@
 import { Observable, of, throwError } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoggingService, ConfigurationService, UserProfile, SessionMementoService, UserProfileDecorator } from 'ddp-sdk';
+import {
+  LoggingService,
+  ConfigurationService,
+  UserProfile,
+  SessionMementoService,
+  UserProfileDecorator,
+  LanguageService
+} from 'ddp-sdk';
 import { UserServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/userServiceAgent.service';
 import { catchError, filter, first, map } from 'rxjs/operators';
 
@@ -12,8 +19,9 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
     session: SessionMementoService,
     @Inject('ddp.config') configuration: ConfigurationService,
     http: HttpClient,
-    logger: LoggingService) {
-    super(session, configuration, http, logger);
+    logger: LoggingService,
+    _language: LanguageService) {
+    super(session, configuration, http, logger, _language);
   }
 
   public get profile(): Observable<UserProfileDecorator> {
