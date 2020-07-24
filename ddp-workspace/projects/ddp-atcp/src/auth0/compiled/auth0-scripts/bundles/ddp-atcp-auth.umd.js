@@ -728,6 +728,7 @@
             }
             else {
                 showModal(dictionary.modal.YouWillGetInstructions);
+                onActivateLogin();
             }
         }));
     }));
