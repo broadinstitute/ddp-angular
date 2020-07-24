@@ -7,6 +7,7 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { ActivityInstitution } from '../../models/activity/activityInstitution';
 import { ActivityInstitutionForm } from '../../models/activity/activityInstitutionForm';
 import { MedicalProviderResponse } from '../../models/medicalProviderResponse';
+import { LanguageService } from '../languageService.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -16,8 +17,9 @@ export class MedicalProvidersServiceAgent extends UserServiceAgent<any> {
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public createMedicalProvider(studyGuid: string, institutionType: string, form: ActivityInstitutionForm): Observable<MedicalProviderResponse> {

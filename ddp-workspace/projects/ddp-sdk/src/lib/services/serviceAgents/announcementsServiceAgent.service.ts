@@ -5,6 +5,7 @@ import { ConfigurationService } from '../configuration.service';
 import { UserServiceAgent } from './userServiceAgent.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { AnnouncementMessage } from '../../models/announcementMessage';
+import { LanguageService } from '../languageService.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -13,8 +14,9 @@ export class AnnouncementsServiceAgent extends UserServiceAgent<Array<Announceme
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
     }
 
     public getMessages(studyGuid: string): Observable<Array<AnnouncementMessage> | null> {

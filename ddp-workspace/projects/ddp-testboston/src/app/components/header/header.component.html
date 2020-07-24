@@ -32,7 +32,7 @@
             </ul>
         </nav>
         <div class="static-menu">
-            <a class="header-link static-menu__item" href="kit-instructions.pdf" target="_blank" translate>
+            <a class="header-link static-menu__item" [href]="language + '/kit-instructions.pdf'" target="_blank" translate>
                 <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
                 Navigation.KitInstructions
             </a>
@@ -90,7 +90,7 @@
             </ng-container>
             <div class="menu_mobile-buttons">
                 <li class="menu__item">
-                    <a class="header-link" href="kit-instructions.pdf" target="_blank" translate>
+                    <a class="header-link" [href]="language + '/kit-instructions.pdf'" target="_blank" translate>
                         <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
                         Navigation.KitInstructions
                     </a>
