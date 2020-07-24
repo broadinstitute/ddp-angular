@@ -249,29 +249,31 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         distinctUntilChanged()
     );
 
-    const initializeStateAction$ = this.state$.pipe(
-        take(1),
-        tap(() => busyCounter$.next(1)),
-        // let's disable form while we try to load initial address
-        tap(() => this.stateUpdates$.next({isTemporarilyDisabled: true})),
-        mergeMap((state) => this.addressService.findDefaultAddress().pipe(
-            map(defaultAddress => [state, defaultAddress]))
-        ),
-        tap(([_, defaultAddress]: [ComponentState, Address | null]) =>
-            defaultAddress && this.inputAddress$.next(defaultAddress)),
-        // filter for case where we need to go on to look for a temp address?
-        filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
-        // map(([state, _]) => state as ComponentState),
-        mergeMap(([state, _]) => this.addressService.getTempAddress(state.activityInstanceGuid)),
-        tap((tempAddress) => this.inputAddress$.next(tempAddress)),
-        // fake that the address was just entered. Perhaps this can become a separate subject?
-        // guess we are saving temp address again. No harm but not nice either.
-        tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
-        finalize(() => {
-            this.stateUpdates$.next({isTemporarilyDisabled: false});
-            busyCounter$.next(-1);
-        }),
-    );
+      const initializeStateAction$ = this.state$.pipe(
+          take(1),
+          tap(() => busyCounter$.next(1)),
+          // let's disable form while we try to load initial address
+          tap(() => this.stateUpdates$.next({ isTemporarilyDisabled: true })),
+          mergeMap((state) => this.addressService.findDefaultAddress().pipe(
+              map(defaultAddress => [state, defaultAddress]))
+          ),
+          tap(([_, defaultAddress]: [ComponentState, Address | null]) =>
+              defaultAddress && this.inputAddress$.next(defaultAddress)),
+          take(1),
+          // filter for case where we need to go on to look for a temp address?
+          filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
+          // map(([state, _]) => state as ComponentState),
+          mergeMap(([state, _]) => this.addressService.getTempAddress(state.activityInstanceGuid)),
+          tap((tempAddress) => this.inputAddress$.next(tempAddress)),
+          // fake that the address was just entered. Perhaps this can become a separate subject?
+          // guess we are saving temp address again. No harm but not nice either.
+          tap((tempAddress) => this.inputComponentAddress$.next(tempAddress)),
+          take(1),
+          finalize(() => {
+              this.stateUpdates$.next({ isTemporarilyDisabled: false });
+              busyCounter$.next(-1);
+          }),
+      );
 
     this.staticCountry$ = this.inputAddress$.pipe(
         map(address => {
