@@ -22,13 +22,13 @@ dispatch:
     service: pepper-backend
   - url: "pepper-dev.datadonationplatform.org/*"
     service: pepper-backend
-  - url: "dsm.dev.datadonationplatform.org/api/*"
+  - url: "dsm-dev.datadonationplatform.org/api/*"
     service: study-manager-backend
-  - url: "dsm.dev.datadonationplatform.org/app/*"
+  - url: "dsm-dev.datadonationplatform.org/app/*"
     service: study-manager-backend
-  - url: "dsm.dev.datadonationplatform.org/info/*"
+  - url: "dsm-dev.datadonationplatform.org/info/*"
     service: study-manager-backend
-  - url: "dsm.dev.datadonationplatform.org/ui/*"
+  - url: "dsm-dev.datadonationplatform.org/ui/*"
     service: study-manager-backend
-  - url: "dsm.dev.datadonationplatform.org/*"
+  - url: "dsm-dev.datadonationplatform.org/*"
     service: study-manager-ui
