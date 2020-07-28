@@ -216,6 +216,16 @@
 
 .twitter {
     &__title {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    &__text {
         font-size: 1.5rem;
         line-height: 2rem;
     }

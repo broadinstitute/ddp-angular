@@ -142,11 +142,14 @@
                     </div>
                 </div>
                 <div class="twitter">
-                    <p>
-                        <span class="twitter__title">Tweets by </span>
-                        <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
-                            target="_blank">@{{twitterAccount}}</a>
-                    </p>
+                    <div class="twitter__title">
+                        <img class="twitter__logo" src="assets/images/twitter.svg" alt="">
+                        <p>
+                            <span class="twitter__text">Tweets by </span>
+                            <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
+                                target="_blank">@{{twitterAccount}}</a>
+                        </p>
+                    </div>
                     <div class="twitter__feed">
                         <toolkit-twitter-timeline-widget></toolkit-twitter-timeline-widget>
                     </div>
