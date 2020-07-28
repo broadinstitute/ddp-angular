@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="introduction__image">
-                    <img class="image" src="assets/images/brain.png" alt="">
+                    <img class="image" src="assets/images/brain.png" alt="Brain">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
         <div class="content content_wide about-block">
             <div class="about">
                 <div class="about__image">
-                    <img class="image" src="assets/images/people.png" alt="">
+                    <img lazy-resource class="image" src="assets/images/people.png" alt="People">
                 </div>
                 <div class="about__info">
                     <h2>
@@ -58,7 +58,7 @@
                         effective therapies.
                     </p>
                     <a class="about__cmi" [href]="cmiUrl" target="_blank">
-                        <img src="assets/images/logo-count-me-in.svg" alt="">
+                        <img lazy-resource src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
                     </a>
                     <p>
                         To learn more about Count Me In, our mission, and other projects and published research,
@@ -110,7 +110,7 @@
                     <div class="partners">
                         <ng-container *ngFor="let partner of row">
                             <a class="partners__link" [href]="partner.Website" target="_blank">
-                                <img class="partners__logo" [src]="partner.Logo" [alt]="partner.Alt">
+                                <img lazy-resource class="partners__logo" [src]="partner.Logo" [alt]="partner.Alt">
                             </a>
                         </ng-container>
                     </div>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="twitter">
                     <div class="twitter__title">
-                        <img class="twitter__logo" src="assets/images/twitter.svg" alt="">
+                        <img lazy-resource class="twitter__logo" src="assets/images/twitter.svg" alt="Twitter logo">
                         <p>
                             <span class="twitter__text">Tweets by </span>
                             <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
@@ -160,7 +160,7 @@
     <section class="section join-section">
         <div class="content content_wide join-block">
             <div class="join">
-                <img class="join__image" src="assets/images/hands.png" alt="">
+                <img lazy-resource class="join__image" src="assets/images/hands.png" alt="Hands">
                 <h2 class="join__title h2-big center">Please join us in saying “Count Me In!”</h2>
                 <p class="join__text center">
                     With your help, patients and their families can be the driving force behind
