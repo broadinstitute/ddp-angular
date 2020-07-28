@@ -170,5 +170,14 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "prion-dev.auth0.com"
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-172530202-1";
+    {{end}}
+    {{if eq $environment "prod"}}
+        DDP_ENV['assetsBucketName'] = "prod-prion-assets";
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0Domain'] = "fixme-not-set";
+        DDP_ENV['auth0Audience'] = "fixme-not-set"
+        DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-172530202-1";
     {{end}}
 {{end}}
