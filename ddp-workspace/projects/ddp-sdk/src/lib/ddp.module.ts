@@ -15,6 +15,7 @@ import { NGXTranslateService } from './services/internationalization/ngxTranslat
 import { CookieModule } from 'ngx-cookie';
 import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
 import { CookiesManagementService } from './services/cookiesManagement.service';
+import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
 
 // Angular JWT
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -361,7 +362,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TooltipComponent,
     SubjectPanelComponent,
 
-    CookiesBannerComponent
+    CookiesBannerComponent,
+    CookiesPreferencesModalComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -426,12 +428,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TooltipComponent,
     SubjectPanelComponent,
 
-    CookiesBannerComponent
+    CookiesBannerComponent,
+    CookiesPreferencesModalComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
     ManageParticipantsComponent,
-    NewRequestMock
+    NewRequestMock,
+    CookiesPreferencesModalComponent
   ]
 })
 export class DdpModule { }
