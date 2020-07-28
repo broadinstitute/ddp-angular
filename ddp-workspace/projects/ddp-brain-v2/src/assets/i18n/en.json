@@ -80,14 +80,14 @@
             "Organizations": [
                 [
                     {
-                        "Website": "http://www.targetcancerfoundation.org/",
-                        "Logo": "assets/images/TCF-logo.png",
-                        "Alt": "Target Cancer Foundation logo"
+                        "Website": "https://www.abta.org/",
+                        "Logo": "assets/images/ABTA-logo.png",
+                        "Alt": "American Brain Tumor Association logo"
                     },
                     {
-                        "Website": "https://www.abta.org/",
-                        "Logo": "assets/images/ABTA-logo.jpg",
-                        "Alt": "American Brain Tumor Association logo"
+                        "Website": "https://ourbrainbank.org/",
+                        "Logo": "assets/images/OBB-logo.png",
+                        "Alt": "OurBrainBank logo"
                     },
                     {
                         "Website": "https://braintumor.org/",
@@ -98,18 +98,18 @@
                 [
                     {
                         "Website": "https://www.oligonation.org/",
-                        "Logo": "assets/images/ON-logo.jpg",
+                        "Logo": "assets/images/ON-logo.png",
                         "Alt": "Oligo Nation logo"
                     },
                     {
                         "Website": "https://www.dragonmaster.org/",
-                        "Logo": "assets/images/DMF-logo.jpg",
+                        "Logo": "assets/images/DMF-logo.png",
                         "Alt": "Dragon Master Foundation logo"
                     },
                     {
-                        "Website": "https://ourbrainbank.org/",
-                        "Logo": "assets/images/OBB-logo.png",
-                        "Alt": "OurBrainBank logo"
+                        "Website": "http://www.targetcancerfoundation.org/",
+                        "Logo": "assets/images/TCF-logo.png",
+                        "Alt": "Target Cancer Foundation logo"
                     }
                 ],
                 [
