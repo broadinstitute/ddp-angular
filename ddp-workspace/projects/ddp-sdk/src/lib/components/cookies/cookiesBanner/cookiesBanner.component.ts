@@ -2,9 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigurationService } from '../../../services/configuration.service';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 
 @Component({
   selector: 'ddp-cookies-banner',
@@ -48,22 +45,8 @@ export class CookiesBannerComponent {
   }
 
   openPreferences(): void {
-    this.dialog.open(CookiesPreferencesModalComponent, {
-      width: '740px',
-      data: this.configuration.cookies,
-      autoFocus: false,
-      disableClose: true,
-      scrollStrategy: new NoopScrollStrategy()
-    });
   }
 
   openPolicy(): void {
-    this.dialog.open(PrivacyPolicyModalComponent, {
-      width: '740px',
-      data: {},
-      autoFocus: false,
-      disableClose: false,
-      scrollStrategy: new NoopScrollStrategy()
-    });
   }
 }
