@@ -76,6 +76,47 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.cookies = {
+  cookies: [
+    {
+      type: 'Functional',
+      actions: null,
+      list: [
+        {
+          name: 'auth0',
+          description: 'User authorization',
+          expiration: 'n years'
+        },
+        {
+          name: 'pepper platform',
+          description: 'User authorization',
+          expiration: 'session'
+        }
+      ]
+    },
+    {
+      type: 'Analytical',
+      actions: ['Accept', 'Reject'],
+      list: [
+        {
+          name: '_ga',
+          description: 'User identification',
+          expiration: '2 years'
+        },
+        {
+          name: '_gid',
+          description: 'Grouping user behavior',
+          expiration: '24 hours'
+        },
+        {
+          name: '_gat',
+          description: 'Throttling requests to increase the efficiency of network calls',
+          expiration: '10 minutes'
+        }
+      ]
+    }
+  ]
+};
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
