@@ -63,6 +63,7 @@ export class CookiesManagementService {
   public acceptAll(): void {
     this.cookie.put('consent', 'true', {expires: this.getExpirationDate()});
     this.analytics.startGATracking();
+    this.analytics.startTCellTracking();
   }
 
   public rejectNotFunctional(): void {
