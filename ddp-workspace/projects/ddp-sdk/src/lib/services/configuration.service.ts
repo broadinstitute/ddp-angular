@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
+import { Cookies } from '../models/cookies';
 
 @Injectable()
 export class ConfigurationService {
@@ -43,4 +44,5 @@ export class ConfigurationService {
     adminSessionExpiredUrl = 'admin-session-expired';
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
+    cookies: Cookies | null;
 }
