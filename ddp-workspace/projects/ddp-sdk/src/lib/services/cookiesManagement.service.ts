@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigurationService } from './configuration.service';
-import { AnalyticsEventsService } from './analyticsEvents.service';
+
 
 @Injectable()
 export class CookiesManagementService {
@@ -10,9 +10,7 @@ export class CookiesManagementService {
   private isCookiesToReject: BehaviorSubject<boolean> =  new BehaviorSubject(null);
   private expireDays = 10;
 
-  constructor(private cookie: CookieService,
-              private analytics: AnalyticsEventsService,
-              @Inject('ddp.config') private configuration: ConfigurationService) {
+  constructor(private cookie: CookieService, @Inject('ddp.config') private configuration: ConfigurationService) {
   }
 
   public manageCookies(): void {
@@ -62,13 +60,10 @@ export class CookiesManagementService {
 
   public acceptAll(): void {
     this.cookie.put('consent', 'true', {expires: this.getExpirationDate()});
-    this.analytics.startGATracking();
-    this.analytics.startTCellTracking();
   }
 
   public rejectNotFunctional(): void {
     this.cookie.put('consent', 'false', {expires: this.getExpirationDate()});
-    this.analytics.doNotTrackGA();
   }
 
   private getExpirationDate(): Date {
