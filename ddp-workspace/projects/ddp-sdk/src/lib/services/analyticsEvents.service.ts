@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { AnalyticsEvent } from '../models/analyticsEvent';
 
+declare const DDP_ENV: any;
+declare const ga: Function;
+
 @Injectable()
 export class AnalyticsEventsService {
   private events = new Subject<AnalyticsEvent>();
@@ -42,5 +45,15 @@ export class AnalyticsEventsService {
 
   private get location(): string {
     return `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ``}${location.pathname}`;
+  }
+
+  public startGATracking(): void {
+    window['ga-disable-' + DDP_ENV.platformGAToken] = false;
+    ga('create', DDP_ENV.projectGAToken, 'auto');
+    ga('create', DDP_ENV.platformGAToken, 'auto', 'platform');
+  }
+
+  public doNotTrackGA(): void {
+    window['ga-disable-' + DDP_ENV.platformGAToken] = true;
   }
 }
