@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Cookies } from '../../../models/cookies';
+import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'ddp-cookies-preferences-modal',
@@ -93,5 +95,12 @@ export class CookiesPreferencesModalComponent {
   }
 
   openPolicy(): void {
+    this.dialog.open(PrivacyPolicyModalComponent, {
+      width: '740px',
+      data: {},
+      autoFocus: false,
+      disableClose: false,
+      scrollStrategy: new NoopScrollStrategy()
+    });
   }
 }
