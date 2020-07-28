@@ -120,6 +120,14 @@ a:focus {
     color: #ffffff !important;
 }
 
+.Button--borderedYellow,
+.Button--borderedYellow:active,
+.Button--borderedYellow:focus {
+  border: 1px solid #F2B816 !important;
+  background-color: transparent !important;
+  color: #F2B816 !important;
+}
+
 .Button--primaryNeutral,
 .Button--primaryNeutral:active,
 .Button--primaryNeutral:focus {
@@ -3114,4 +3122,76 @@ p.Medium {
   flex-basis: 0 !important;
   flex-grow: 1 !important;
   flex-shrink: 1 !important;
+}
+
+.cookiesBanner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  min-height: 124px;
+  width: 100%;
+  padding: 20px 75px;
+  background-color: rgba(13, 13, 11, 0.9);
+  z-index: 10;
+
+  &__text {
+    color: #FFFFFF;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+  }
+
+  &__link {
+    min-width: fit-content !important;
+    padding: 0;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    text-decoration: underline !important;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+
+
+    &:hover,
+    &:active {
+      color: #a88838;
+    }
+  }
+
+  .policy {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  button {
+    min-width: 180px;
+    padding: 10px;
+    margin: 0 0 0 10px;
+  }
+
+  > a {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .cookiesBanner {
+    flex-direction: column;
+    padding: 20px 45px;
+
+    button, a {
+      margin: 10px 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .cookiesBanner {
+    padding: 15px;
+  }
 }
