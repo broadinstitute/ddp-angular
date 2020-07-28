@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
 import { QuestionType } from './../models/activity/questionType';
+import { Cookies } from '../models/cookies';
 
 @Injectable()
 export class ConfigurationService {
@@ -48,4 +49,5 @@ export class ConfigurationService {
     compositeRequiredFieldExceptions: QuestionType[] = [];
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
+    cookies: Cookies | null;
 }
