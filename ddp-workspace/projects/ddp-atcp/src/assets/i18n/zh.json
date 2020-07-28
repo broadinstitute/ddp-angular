@@ -56,5 +56,320 @@
 			"Title": "全球A-T成员数据平台"
 		},
 		"Title": "关于这个计划"
+	},
+	"AboutPage": {
+		"DataAccess": {
+			"Header": "数据访问委员会",
+			"Text": "有关全球A-T成员数据平台的信息只能由获得数据访问委员会许可的合格研究者访问。 该委员会由A-T家庭代表组成，是为家庭监督委员会招募的，后者又为我们的科学和医疗咨询委员会招募专家，确保每个研究人员的项目符合这一计划的目标。  家事监督委员会将监督科学和医疗咨询委员会。"
+		},
+		"Doctors": [
+			{
+				"Hospital": "英国剑桥剑桥大学医学遗传学荣誉教授和英国欣克斯顿威康信托桑格研究所荣誉教职",
+				"Name": "Martin Bobrow",
+				"Rank": "MD"
+			},
+			{
+				"Hospital": "意大利罗马Sapienza大学医学遗传学教授",
+				"Name": "Luciana Chessa"
+			},
+			{
+				"Hospital": "澳大利亚昆士兰州卫斯理医院儿科医生"
+			},
+			{
+				"Hospital": "巴西圣保罗联邦大学副教授"
+			},
+			{
+				"Hospital": "美国马里兰州巴尔的摩约翰霍普金斯儿童中心儿科与神经病学副教授"
+			},
+			{
+				"Hospital": "美国加州Mountain View Google Genomics 负责人"
+			},
+			{
+				"Hospital": "日本东京医科大学儿科与发育生物学系"
+			},
+			{
+				"Hospital": "澳大利亚昆士兰州，昆士兰大学副教授"
+			},
+			{
+				"Hospital": "澳大利亚昆士兰布里斯班，大学分子肿瘤学基础教授"
+			},
+			{
+				"Hospital": "美国巴尔的摩，约翰霍普金斯儿童中心儿科教授"
+			},
+			{
+				"Hospital": "法国巴黎Necker医院，法国原发免疫缺陷转诊中心儿童免疫血液学协调员"
+			},
+			{
+				"Hospital": "以色列拉马特甘的Sheba医学中心小儿神经病学家"
+			},
+			{
+				"Hospital": "美国马萨诸塞州剑桥大学研究所首席数据官"
+			},
+			{
+				"Hospital": "意大利罗马国家罕见疾病中心"
+			},
+			{
+				"Hospital": "美国佛罗里达州椰子溪A-T儿童项目科学协调员"
+			},
+			{
+				"Hospital": "以色列拉姆特维夫特拉维夫大学人类遗传学教授"
+			},
+			{
+				"Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授"
+			},
+			{
+				"Hospital": "巴黎笛卡尔大学遗传学教授，法国巴黎居里研究所遗传学系主任"
+			},
+			{
+				"Hospital": "日本东京东京医科大学副教授"
+			},
+			{
+				"Hospital": "基因组学与社会公共人口项目执行主任，加拿大蒙特利尔"
+			},
+			{
+				"Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授"
+			},
+			{
+				"Hospital": "英国诺丁汉诺丁汉大学临床副教授"
+			},
+			{
+				"Hospital": "德国法兰克福约翰·沃尔夫冈歌德大学儿童医院"
+			}
+		],
+		"FamilyOversight": {
+			"Header": "家庭监督委员会",
+			"Text": "我们平台的使命是使研究人员能够快速、安全有效地获取来自世界各地的重要患者数据，希望能带来新的发现。 为了确保我们的使命和活动始终与世界各地最适合A-T患者保持一致，我们建立了一个国际家庭监督委员会。  目前，A-T患者的以下家庭成员（按字母顺序排列）已同意在本委员会任职："
+		},
+		"FinancialSupport": {
+			"Header": "全球A-T成员数据平台的财务支持",
+			"Text": {
+				"First": "目前，全球A-T成员数据平台的开发和运营仅由共济失调患者儿童项目公司资助，即A-T Children’s Project。该公司是位于美国佛罗里达州Coconut Creek的非营利组织，其筹集资金支持和协调生物医学研究项目、科学会议和临床中心，旨在寻找改善A-T的疗法",
+				"Second": "虽然A-T Children’s Project 启动了这个项目，希望来自世界各地的A-T组织、临床医生和家属将通过鼓励家庭参与，帮助监督数据访问，并在可能的情况下提供财政资助来支持这一努力。"
+			}
+		},
+		"Hospitals": [
+			{
+				"Country": "法国",
+				"Name": "Cedric Anchisi "
+			},
+			{
+				"Country": "以色列",
+				"Name": "Orly Dror-Azuriel "
+			},
+			{
+				"Country": "澳大利亚",
+				"Name": "Natalie Elkheir "
+			},
+			{
+				"Country": "荷兰",
+				"Name": "Rianne Kranendonk "
+			},
+			{
+				"Country": "巴西",
+				"Name": "Maria Angelica Lodovici "
+			},
+			{
+				"Country": "美国",
+				"Name": "Brad Margus "
+			},
+			{
+				"Country": "英国",
+				"Name": "Emily Read "
+			},
+			{
+				"Country": "印度",
+				"Name": "Manoj Kumar Srivastwa "
+			},
+			{
+				"Country": "加拿大",
+				"Name": "Conrad Van Hierden "
+			},
+			{
+				"Country": "西班牙",
+				"Name": "Paxti Villen "
+			},
+			{
+				"Country": "英国",
+				"Name": "Lian Yarlett "
+			}
+		],
+		"PageTitle": "关于我们",
+		"PlatformName": "全球A-T成员数据平台",
+		"ScientificBoard": {
+			"Header": "科学和医学顾问委员会",
+			"Text": "家庭咨询委员会除了确保该平台的活动促进和实现数据共享同时保护A-T人员之外，还选择并邀请受尊敬的科学家和临床医生参与科学和医疗顾问委员会，向顾问委员会提供专家意见。  希望咨询委员会的成员不仅将包括共济失调性毛细血管扩张症的临床表现和潜在生物学专家，还包括大量数据集的分析专家，如基因组序列数据，生物统计学，应用程序编程接口，数据安全性，监管问题，医学伦理，法律事项和调查方法。  目前，以下专家（按字母顺序排列）慷慨地提出在这个咨询委员会任职："
+		},
+		"Text": {
+			"First": " 是由A-T成员和全球专家监督的患者驱动的努力，通过该平台，研究人员可以共享关于A-T人员的健康信息、遗传和潜在的其他类型的数据。",
+			"Second": "我们正在为该计划的各个组成部分选择战略合作伙伴，其中之一是麻省理工学院和哈佛大学，将为我们提供基因组测序服务。 我们还与在A-T Children’s Project 工作的员工合作，他们接受过培训，能回答有关该平台的问题，并向要求DNA测试包的家庭发送DNA测试包。",
+			"Third": "我们预计，未来，全球A-T成员数据平台将与其他组织合作，收集其他类型的生物和生活方式数据，例如使用可穿戴技术来获取有关A-T人员移动的信息。"
+		}
+	},
+	"Common": {
+		"Navigation": {
+			"AboutThisInitiative": "关于这个计划",
+			"AboutUs": "关于我们",
+			"JoinUs": "加入我们",
+			"Language": "语言",
+			"LearnMore": "了解更多",
+			"MyAccount": "我的帐户",
+			"Next": "下一个",
+			"Previous": "上一个",
+			"SignIn": "签到",
+			"YourParticipants": "您的参与者"
+		}
+	},
+	"DataAccess": {
+		"Header": {
+			"Paragraph1": "全球A-T成员数据平台是由A-T成员和全球专家监督的患者驱动的努力，通过该平台，研究人员可以共享关于A-T人员的健康信息、遗传和潜在的其他类型的数据。 该平台将使研究人员能够快速、安全有效地访问世界各地的重要患者数据，希望能够引起新的发现。"
+		},
+		"OrganizationForm": {
+			"Country": "国家",
+			"State": "州/省"
+		}
+	},
+	"HomePage": {
+		"IntroductionSection": {
+			"Text": {
+				"First": "如果您或您的小孩有A-T，您可能可以帮助研究人员发现新的发现并加快治疗的发展。",
+				"Second": " 每个患者的遗传信息和医疗状况是独一无二的，可能是治疗发展的关键。 分享此信息，向我们发送唾液样本进行基因组测序，并加入我们，了解有关A-T的更多信息。"
+			},
+			"Title": "帮助改变我们对共济失调性毛细血管扩张症（A-T）的理解。"
+		},
+		"Participate": {
+			"Steps": {
+				"Fourth": {
+					"H3": "4. 我们一起研究",
+					"Text": {
+						"First": "我们将为您提供有关参与可能实现的最新发现的更新。",
+						"Second": " 如果您同意，我们日后可能会与您联络，询问有关您或您孩子经历的更多问题，并邀请您参与更多的未来研究。"
+					}
+				},
+				"One": {
+					"H2": "您如何参与：",
+					"H3": "1. 创建一个帐户",
+					"Text": "点击 \"加入我们\" 填写一份简短的表格，以便在我们的数据平台上注册患有A-T的自己或您的孩子。"
+				},
+				"Second": {
+					"H3": "2. 给我们许可",
+					"Text": "在注册过程中，我们会要求您填写一份允许研究人员分享\n您以去识别化的方式向我们提供数据的同意书。\n如果您选择，您也可以给我们许可：",
+					"Ul": [
+						"分享每个A-T患者可以送我们进行基因组测序的唾液样本",
+						"从医生那里获得A-T患者的医疗记录，并与研究人员分享",
+						"分享您与研究人员一起上传的医疗记录",
+						"今后联系您进行后续研究"
+					]
+				},
+				"Third": {
+					"H3": "3. 分享您的观点和唾液样本",
+					"Text": "完成一项关于A-T如何影响您或您的孩子的在线调查问卷。 我们还会向您发送一个用于基因组测序的唾液样本收集套件。 您还可以定期更新与平台共享的病史和体验记录。"
+				}
+			},
+			"Together": {
+				"H3": {
+					"First": "在一起，我们有能力改善患有A-T儿童和年轻人的健康。",
+					"Second": "现在开始！"
+				}
+			}
+		},
+		"SecondSection": {
+			"Title": "应邀加入我们，随时了解最新发现。"
+		}
+	},
+	"SDK": {
+		"CancelButton": "取消",
+		"Dashboard": {
+			"Title": "我的控制台"
+		},
+		"DoNotAssent": "不同意",
+		"DoNotConsent": "不同意",
+		"DownloadPdf": {
+			"Assent": {
+				"Download": "下载完整的表单"
+			},
+			"Consent": {
+				"Download": "下载完整的知情同意书"
+			}
+		},
+		"Institutions": {
+			"Fields": {
+				"City": "市"
+			}
+		},
+		"JoinUsButton": "加入我们",
+		"ManageParticipants": {
+			"ParticipantPlaceholder": "参与者"
+		},
+		"NextButton": "下一个",
+		"PreviousButton": "上一个",
+		"RegisterButton": "注册",
+		"SaveAndSubmit": "保存并提交",
+		"SaveAndSubmitEnrollment": "保存并提交注册",
+		"SignAndAssent": "签名和同意",
+		"SignAndConsent": "签名和同意",
+		"StartOrResume": "开始/恢复",
+		"UserActivities": {
+			"ActivityActions": "操作",
+			"ActivityStatus": "状态"
+		},
+		"UserMenu": {
+			"SignOutButton": "登出"
+		}
+	},
+	"Toolkit": {
+		"AgeUpThankYou": {
+			"EmailCollected": {
+				"TextPt2": "或"
+			}
+		},
+		"Dashboard": {
+			"Actions": "操作",
+			"AddSelf": "添加自己",
+			"EnrollmentStatus": "注册状态",
+			"NoData": "---",
+			"NoParticipants": "没有参与者",
+			"Participant": "参与者",
+			"Text": "被诊断患有A-T的每个人都可以参与我们的研究计划。 在这里注册并分享您的医疗和可能的遗传信息，使研究人员能够更好地了解A-T。",
+			"Title": "感谢您加入全球A-T成员数据平台！"
+		},
+		"Dialogs": {
+			"JoinMailingList": {
+				"CancelButton": "取消",
+				"Fields": {
+					"Email": {
+						"Placeholder": "电子邮箱地址："
+					},
+					"FirstName": {
+						"Placeholder": "名"
+					},
+					"LastName": {
+						"Placeholder": "姓"
+					}
+				}
+			},
+			"SessionWillExpire": {
+				"Continue": "继续",
+				"SignOut": "登出"
+			}
+		},
+		"ErrorPage": {
+			"DefaultText": {
+				"TextPt1": "如果您遇到困难无法继续， "
+			},
+			"Title": "很抱歉，但发生错误。 请稍后再试。"
+		}
+	},
+	"WorkflowProgress": {
+		"Consent": "同意",
+		"ContactingPhysician": "联系医生",
+		"GenomeStudy": "基因研究",
+		"MedicalHistory": "病史",
+		"Registration": "注册",
+		"ReviewSubmission": "审查和提交",
+		"Statuses": {
+			"COMPLETE": "已完成",
+			"CREATED": "没有开始",
+			"IN_PROGRESS": "进行中"
+		}
 	}
 }
