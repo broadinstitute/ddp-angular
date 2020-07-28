@@ -454,6 +454,24 @@
       "Preferences": "Manage Preferences",
       "Reject": "Reject Cookies",
       "Accept": "Accept Cookies"
+    },
+    "CookiesModal": {
+      "Title": "Manage Cookie Preferences",
+      "Privacy": "Your Privacy",
+      "Privacy_Text": "The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs to the left.Please note that functional cookies must be placed to allow proper function of the website.",
+      "Functional": "Functional Cookies",
+      "Functional_Text": "These cookies provide necessary access, function, and security to the website.",
+      "Analytical": "Analytical Cookies",
+      "Reject": "Reject",
+      "Accept": "Accept",
+      "AlwaysOn": "Always On",
+      "Analytical_Text": "These cookies allow us to evaluate site usage, and improve site experience and performance.",
+      "Details": "Cookie Details",
+      "Name": "Name",
+      "Description": "Description",
+      "Expiration": "Expiration",
+      "Policy": "Privacy policy",
+      "Submit": "Submit Preferences"
     }
   }
 }
