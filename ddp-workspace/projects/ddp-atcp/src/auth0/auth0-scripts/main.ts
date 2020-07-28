@@ -128,7 +128,7 @@ $('#google-sign').on('click', e => {
   e.preventDefault();
   webAuth.popup.authorize({
     redirectUri: callbackURL,
-    connection: 'google',
+    connection: 'google-oauth2',
   }, () => {});
 });
 
