@@ -24,20 +24,9 @@
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300i,300,400,500,700" rel="stylesheet">
   <script src="https://kit.fontawesome.com/6ff953c590.js" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    function loadTcell() {
-      var tcellScript = document.createElement('script');
-      tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
-      tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
-      tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
-      tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);
-      tcellScript.async = true;
-      document.body.appendChild(tcellScript);
-    }
-  </script>
 </head>
 
-<body onload="loadTcell()">
+<body>
   <script src="assets/config/pepperConfig.js"></script>
   <app-root></app-root>
   <script>
