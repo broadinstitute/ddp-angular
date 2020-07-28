@@ -56,14 +56,4 @@ export class AnalyticsEventsService {
   public doNotTrackGA(): void {
     window['ga-disable-' + DDP_ENV.platformGAToken] = true;
   }
-
-  public startTCellTracking(): void {
-    const tcellScript = document.createElement('script');
-    tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
-    tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
-    tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
-    tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);
-    tcellScript.async = true;
-    document.body.appendChild(tcellScript);
-  }
 }
