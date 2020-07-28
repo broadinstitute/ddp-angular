@@ -398,3 +398,14 @@
         }
     }
 }
+
+@media screen and (max-width: 320px) {
+    .logos {
+        display: flex;
+        flex-direction: column;
+
+        &__wide {
+            margin: 0 0 1rem 0;
+        }
+    }
+}
