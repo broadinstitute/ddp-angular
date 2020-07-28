@@ -13,6 +13,8 @@ import { NGXTranslateService } from './services/internationalization/ngxTranslat
 
 // CookieService
 import { CookieModule } from 'ngx-cookie';
+import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
+import { CookiesManagementService } from './services/cookiesManagement.service';
 
 // Angular JWT
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -171,9 +173,9 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
-import { LanguageSelectorComponent } from "./components/languageSelector.component";
-import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedirect.component";
-import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
+import { LanguageSelectorComponent } from './components/languageSelector.component';
+import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
+import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
@@ -280,6 +282,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NGXTranslateService,
     SuggestionServiceAgent,
     IrbPasswordService,
+    CookiesManagementService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
     UserInvitationServiceAgent,
@@ -356,7 +359,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+
+    CookiesBannerComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -419,7 +424,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+
+    CookiesBannerComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
