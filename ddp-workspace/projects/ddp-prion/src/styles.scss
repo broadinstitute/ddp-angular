@@ -3419,3 +3419,9 @@ ddp-cookies-preferences-modal {
     }
   }
 }
+
+ddp-privacy-policy-modal {
+  .Container, .PageContent {
+    background: transparent;
+  }
+}
