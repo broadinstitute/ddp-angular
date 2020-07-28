@@ -155,7 +155,8 @@
       "BackToTop": "Back to top",
       "ContactUs": "Contact us:",
       "ContactMailTo": "mailto:info@prionregistry.org",
-      "ContactEmail": "info@prionregistry.org"
+      "ContactEmail": "info@prionregistry.org",
+      "PrivacyPolicy": "Privacy Policy"
     },
     "Dashboard": {
       "StudyListing": {
@@ -472,6 +473,12 @@
       "Expiration": "Expiration",
       "Policy": "Privacy policy",
       "Submit": "Submit Preferences"
+    },
+    "PrivacyPolicy": {
+      "Title": "Privacy Policy",
+      "P1": "Paragraph 1 Text",
+      "P2": "Paragraph 2 Text",
+      "P3": "Paragraph 3 Text"
     }
   }
 }
