@@ -27,6 +27,12 @@ body {
     }
 }
 
+@media only screen and (max-width: 1026px) {
+    html{
+        font-size: 15px !important;
+    }
+}
+
 h1.Title {
     font-size: 1.8rem;
     font-weight: 700;
@@ -118,14 +124,6 @@ a:focus {
     border: 1px solid #F2B816 !important;
     background-color: #F2B816 !important;
     color: #ffffff !important;
-}
-
-.Button--borderedYellow,
-.Button--borderedYellow:active,
-.Button--borderedYellow:focus {
-  border: 1px solid #F2B816 !important;
-  background-color: transparent !important;
-  color: #F2B816 !important;
 }
 
 .Button--primaryNeutral,

@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { BrowserContentService, CookiesManagementService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
+import { BrowserContentService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
 import { MatDialog } from "@angular/material";
-import { combineLatest, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { NoopScrollStrategy } from "@angular/cdk/overlay";
 import {
