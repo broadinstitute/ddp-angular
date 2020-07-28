@@ -389,12 +389,7 @@
 
     .logos {
         &__wide {
-            height: 20px;
-            margin-right: 1rem;
-        }
-
-        &__square {
-            height: 45px;
+            margin-right: 15px;
         }
     }
 }
@@ -405,7 +400,12 @@
         flex-direction: column;
 
         &__wide {
-            margin: 0 0 1rem 0;
+            height: 25px;
+            margin: 0 0 1.5rem 0;
+        }
+
+        &__square {
+            height: 50px;
         }
     }
 }
