@@ -102,17 +102,17 @@
 .line {
     display: flex;
 
+    &:first-child {
+        padding: 0 0 3rem 0;
+    }
+
+    &:last-child {
+        padding: 3rem 0 0 0;
+    }
+
     &_underlined {
         border-bottom: 1px solid mat-color($app-theme, 600);
     }
-}
-
-.line:first-child {
-    padding: 0 0 3rem 0;
-}
-
-.line:last-child {
-    padding: 3rem 0 0 0;
 }
 
 .participation {
@@ -199,11 +199,11 @@
 .stay-informed {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .socials {
-    margin-bottom: 10rem;
+    margin: 0 3rem 10rem 0;
 
     &__text {
         margin: 3rem 0 0 0;
@@ -256,6 +256,7 @@
 
     &__image {
         height: auto;
+        width: 100%;
         max-width: 550px;
     }
 
@@ -268,5 +269,132 @@
         line-height: 2.625rem;
         max-width: 700px;
         margin-bottom: 4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .introduction {
+        flex-direction: column;
+
+        &__info,
+        &__image {
+            width: 100%;
+        }
+
+        &__image {
+            padding-left: 0;
+            padding-top: 3rem;
+        }
+
+        &__text,
+        &__examples {
+            margin-right: 0;
+        }
+    }
+
+    .about {
+        flex-direction: column-reverse;
+
+        &__info,
+        &__image {
+            width: 100%;
+        }
+
+        &__image {
+            padding-right: 0;
+            padding-top: 3rem;
+        }
+    }
+
+    .line {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        padding: 0;
+
+        &:first-child {
+            padding: 0;
+        }
+
+        &:last-child {
+            padding: 0;
+        }
+    }
+
+    .participation {
+        width: 100%;
+        padding: 0;
+        margin: 2rem 0 0 0;
+    }
+
+    .learn-more {
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__text {
+            margin-right: 0;
+        }
+    }
+
+    .partners {
+        flex-direction: column;
+        margin: 0;
+
+        &__link {
+            margin: 1rem 0;
+        }
+    }
+
+    .stay-informed {
+        flex-direction: column;
+    }
+
+    .socials {
+        margin: 0 0 2.5rem 0;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .twitter {
+        &__feed {
+            width: auto;
+            height: 300px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logos {
+        &__wide {
+            height: 25px;
+            margin-right: 1rem;
+        }
+
+        &__square {
+            height: 50px;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .introduction {
+        &__buttons {
+            flex-direction: column;
+        }
+
+        &__cmi {
+            margin: 0 0 1.5rem 0;
+        }
+    }
+
+    .logos {
+        &__wide {
+            height: 20px;
+            margin-right: 1rem;
+        }
+
+        &__square {
+            height: 45px;
+        }
     }
 }
