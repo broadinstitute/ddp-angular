@@ -4,11 +4,35 @@
             "Submit": {
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
-            }
+            },
+            "CMI": "Count Me In",
+            "LearnMore": "Learn More",
+            "ViewFAQ": "View FAQ page",
+            "JoinMailingList": "Join Mailing List"
         }
     },
     "HomePage": {
+        "Introduction": {
+            "Title": "Help transform our understanding of Brain Cancer",
+            "Text": "If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice.",
+            "Examples": "Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and medulloblastoma.",
+            "BroadAlt": "Broad Institute logo",
+            "DanaFarberAlt": "Dana Farber logo",
+            "MinderooAlt": "Minderoo Foundation logo",
+            "BrainAlt": "Brain"
+        },
+        "About": {
+            "Title": "What’s this project about?",
+            "Text1": "The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
+            "Text2": "Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
+            "Text3": {
+                "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
+                "Part2": "visit our site"
+            },
+            "CMIAlt": "Count Me In logo"
+        },
         "Participation": {
+            "Title": "What does participation look like?",
             "Survey": [
                 [
                     {
@@ -48,7 +72,11 @@
                 ]
             ]
         },
+        "LearnMore": {
+            "Text": "To learn more about participation, eligibility criteria and more"
+        },
         "Partners": {
+            "Title": "Partners",
             "Organizations": [
                 [
                     {
@@ -91,7 +119,20 @@
                         "Alt": "The Carson Leslie Foundation logo"
                     }
                 ]
-            ]
+            ],
+            "Text": "For more information on how to become a partner for the Brain Cancer Project, contact the team at"
+        },
+        "StayInformed": {
+            "Title": "Stay informed",
+            "Text1": "Sign up for our mailing list or follow us on social media.",
+            "Text2": "Social",
+            "Facebook": "Facebook",
+            "Twitter": "Twitter",
+            "Text3": "Tweets by"
+        },
+        "Join": {
+            "Title": "Please join us in saying “Count Me In!”",
+            "Text": "With your help, patients and their families can be the driving force behind transformative brain cancer research."
         }
     },
     "Toolkit": {

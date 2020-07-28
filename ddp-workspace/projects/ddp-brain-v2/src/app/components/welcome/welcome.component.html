@@ -3,35 +3,27 @@
         <div class="content content_wide introduction-block">
             <div class="introduction">
                 <div class="introduction__info">
-                    <h1>Help transform our understanding of Brain Cancer</h1>
-                    <p class="introduction__text">
-                        If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide
-                        movement of patients and their families, doctors, and scientists by sharing your information and
-                        your voice.
-                    </p>
+                    <h1 translate>HomePage.Introduction.Title</h1>
+                    <p class="introduction__text" translate>HomePage.Introduction.Text</p>
                     <div class="introduction__buttons">
                         <a [routerLink]="'/' + appRoutes.CountMeIn"
-                            class="button button_medium button_primary introduction__cmi">
-                            Count Me In
-                        </a>
-                        <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary">
-                            Learn More
-                        </a>
+                            class="button button_medium button_primary introduction__cmi"
+                            translate>Common.Buttons.CMI</a>
+                        <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary"
+                            translate>Common.Buttons.LearnMore</a>
                     </div>
-                    <p class="introduction__examples">
-                        Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and
-                        medulloblastoma.
-                    </p>
+                    <p class="introduction__examples" translate>HomePage.Introduction.Examples</p>
                     <div class="logos">
                         <img class="logos__wide" src="assets/images/logo-broad-institute.png"
-                            alt="Broad Institute logo">
+                            [alt]="'HomePage.Introduction.BroadAlt' | translate">
                         <img class="logos__wide" src="assets/images/logo-dana-farber-cancer-institute.png"
-                            alt="Dana Farber logo">
-                        <img class="logos__square" src="assets/images/logo-minderoo.png" alt="Minderoo Foundation logo">
+                            [alt]="'HomePage.Introduction.DanaFarberAlt' | translate">
+                        <img class="logos__square" src="assets/images/logo-minderoo.png"
+                            [alt]="'HomePage.Introduction.MinderooAlt' | translate">
                     </div>
                 </div>
                 <div class="introduction__image">
-                    <img class="image" src="assets/images/brain.png" alt="Brain">
+                    <img class="image" src="assets/images/brain.png" [alt]="'HomePage.Introduction.Brain' | translate">
                 </div>
             </div>
         </div>
@@ -43,26 +35,16 @@
                     <img lazy-resource class="image" src="assets/images/people.png" alt="People">
                 </div>
                 <div class="about__info">
-                    <h2>
-                        What’s this project about?
-                    </h2>
-                    <p>
-                        The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new
-                        approach to cancer research - bringing patients and researchers together as partners to
-                        accelerate discoveries.
-                    </p>
-                    <p>
-                        Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of
-                        biomedical research, no matter where they live. By discovering the genes and the variants that
-                        drive this disease and sharing this data, we hope insights can be gained to develop more
-                        effective therapies.
-                    </p>
+                    <h2 translate>HomePage.About.Title</h2>
+                    <p translate>HomePage.About.Text1</p>
+                    <p translate>HomePage.About.Text2</p>
                     <a class="about__cmi" [href]="cmiUrl" target="_blank">
-                        <img lazy-resource src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
+                        <img lazy-resource src="assets/images/logo-count-me-in.svg"
+                            [alt]="'HomePage.About.CMIAlt' | translate">
                     </a>
                     <p>
-                        To learn more about Count Me In, our mission, and other projects and published research,
-                        <a class="Link" [href]="cmiUrl" target="_blank">visit our site</a>.
+                        <span translate>HomePage.About.Text3.Part1</span>
+                        <a class="Link" [href]="cmiUrl" target="_blank" translate>HomePage.About.Text3.Part2</a>.
                     </p>
                 </div>
             </div>
@@ -71,7 +53,7 @@
     <section class="section">
         <div class="content content_wide participation-block">
             <div>
-                <h2>What does participation look like?</h2>
+                <h2 translate>HomePage.Participation.Title</h2>
                 <div>
                     <ng-container *ngFor="let steps of 'HomePage.Participation.Survey' | translate; last as isLast">
                         <div class="line" [ngClass]="{'line_underlined': !isLast}">
@@ -94,10 +76,10 @@
     <section class="section learn-more-section">
         <div class="content content_wide learn-more-block">
             <div class="learn-more">
-                <p class="learn-more__text">To learn more about participation, eligibility criteria and more</p>
+                <p class="learn-more__text" translate>HomePage.LearnMore.Text</p>
                 <a [routerLink]="'/' + appRoutes.MoreDetails"
-                    class="button button_medium button_secondary button_learn-more">
-                    View FAQ page
+                    class="button button_medium button_secondary button_learn-more" translate>
+                    Common.Buttons.ViewFAQ
                 </a>
             </div>
         </div>
@@ -105,7 +87,7 @@
     <section class="section partners-section">
         <div class="content content_wide partners-block">
             <div>
-                <h2 class="h2-big">Partners</h2>
+                <h2 class="h2-big" translate>HomePage.Partners.Title</h2>
                 <ng-container *ngFor="let row of 'HomePage.Partners.Organizations' | translate">
                     <div class="partners">
                         <ng-container *ngFor="let partner of row">
@@ -116,8 +98,8 @@
                     </div>
                 </ng-container>
                 <p>
-                    For more information on how to become a partner for the Brain Cancer Project,
-                    contact the team at <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
+                    <span translate>HomePage.Partners.Text</span>
+                    <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
                 </p>
             </div>
         </div>
@@ -126,18 +108,18 @@
         <div class="content content_wide stay-informed-block">
             <div class="stay-informed">
                 <div class="socials">
-                    <h2 class="h2-big">Stay informed</h2>
-                    <p>Sign up for our mailing list or follow us on social media.</p>
+                    <h2 class="h2-big" translate>HomePage.StayInformed.Title</h2>
+                    <p translate>HomePage.StayInformed.Text1</p>
                     <button class="button button_medium button_secondary" (click)="joinMailingList()">
-                        Join Mailing List</button>
+                        {{'Common.Buttons.JoinMailingList' | translate}}</button>
                     <div>
-                        <p class="socials__text">
-                            Social
-                        </p>
+                        <p class="socials__text" translate>HomePage.StayInformed.Text2</p>
                         <div>
                             <a class="Link medium socials__facebook"
-                                [href]="'https://www.facebook.com/' + facebookAccount" target="_blank">Facebook</a>
-                            <a class="Link" [href]="'https://twitter.com/' + twitterAccount" target="_blank">Twitter</a>
+                                [href]="'https://www.facebook.com/' + facebookAccount" target="_blank"
+                                translate>HomePage.StayInformed.Facebook</a>
+                            <a class="Link" [href]="'https://twitter.com/' + twitterAccount" target="_blank"
+                                translate>HomePage.StayInformed.Twitter</a>
                         </div>
                     </div>
                 </div>
@@ -145,7 +127,7 @@
                     <div class="twitter__title">
                         <img lazy-resource class="twitter__logo" src="assets/images/twitter.svg" alt="Twitter logo">
                         <p>
-                            <span class="twitter__text">Tweets by </span>
+                            <span class="twitter__text" translate>HomePage.StayInformed.Text3</span>
                             <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
                                 target="_blank">@{{twitterAccount}}</a>
                         </p>
@@ -161,15 +143,10 @@
         <div class="content content_wide join-block">
             <div class="join">
                 <img lazy-resource class="join__image" src="assets/images/hands.png" alt="Hands">
-                <h2 class="join__title h2-big center">Please join us in saying “Count Me In!”</h2>
-                <p class="join__text center">
-                    With your help, patients and their families can be the driving force behind
-                    transformative brain
-                    cancer research.
-                </p>
-                <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_big button_primary">
-                    Count Me In
-                </a>
+                <h2 class="join__title h2-big center" translate>HomePage.Join.Title</h2>
+                <p class="join__text center" translate>HomePage.Join.Text</p>
+                <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_big button_primary"
+                    translate>Common.Buttons.CMI</a>
             </div>
         </div>
     </section>
