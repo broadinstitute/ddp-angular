@@ -787,7 +787,7 @@
         e.preventDefault();
         webAuth.popup.authorize({
             redirectUri: callbackURL,
-            connection: 'google',
+            connection: 'google-oauth2',
         }, (/**
          * @return {?}
          */
