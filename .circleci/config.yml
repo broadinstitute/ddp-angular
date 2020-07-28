@@ -22,7 +22,7 @@ references:
 executors:
   build-executor:
     docker:
-      - image: broadinstitute/study-website-build:05-07-2020A
+      - image: broadinstitute/study-website-build:07-28-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
