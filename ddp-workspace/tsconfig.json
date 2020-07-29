@@ -27,12 +27,8 @@
         "projects/toolkit/src/public-api"
       ],
       "toolkit-prion": [
-        "projects/toolkit-prion/src/public-api",
-        "dist/toolkit-prion"
-      ],
-      "toolkit-prion/*": [
-        "dist/toolkit-prion/*"
-      ]
+        "projects/toolkit-prion/src/public-api"
+        ]
     }
   }
 }
