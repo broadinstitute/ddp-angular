@@ -15,5 +15,6 @@ export const createAuth0 = config => {
     responseType: config.internalOptions.response_type,
     params: config.internalOptions,
     configurationBaseUrl: config.clientConfigurationBaseUrl,
+    scope: config.internalOptions.scope
   });
 };
