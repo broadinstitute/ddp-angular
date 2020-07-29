@@ -271,6 +271,9 @@
     "ExportStudy": {
       "Export": "EXPORT"
     },
+    "Common": {
+      "LogoAlt": "Prion Registry"
+    },
     "ListStudies": {
       "StudyName": "Study Name",
       "ParticipantCount": "Participant Count"
@@ -446,6 +449,59 @@
         "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
       }
     },
-    "TooltipAlt": "Information"
+    "TooltipAlt": "Information",
+    "CookiesBanner": {
+      "Message_First": "We use cookies to evaluate site usage, improve performance, and ensure proper function of the website.",
+      "Message_Second" : "Please review our",
+      "Message_Third": "to learn more about the cookies we use.",
+      "Policy": "Privacy Policy",
+      "Preferences": "Manage Preferences",
+      "Reject": "Reject Cookies",
+      "Accept": "Accept Cookies"
+    },
+    "CookiesModal": {
+      "Title": "Manage Cookie Preferences",
+      "Privacy": "Your Privacy",
+      "Privacy_Text": "The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
+      "Functional": "Functional Cookies",
+      "Functional_Text": "These cookies provide necessary access, function, and security to the website.",
+      "Analytical": "Analytical Cookies",
+      "Reject": "Reject",
+      "Accept": "Accept",
+      "AlwaysOn": "Always On",
+      "Analytical_Text": "These cookies allow us to evaluate site usage, and improve site experience and performance.",
+      "Details": "Cookie Details",
+      "Name": "Name",
+      "Description": "Description",
+      "Expiration": "Expiration",
+      "Policy": "Privacy policy",
+      "Submit": "Submit Preferences",
+      "CookieName": {
+        "auth0": "auth0",
+        "pepper": "pepper platform",
+        "ga": "_ga",
+        "gid": "_gid",
+        "gat": "_gat"
+      },
+      "CookieDescription": {
+        "authorization": "user authorization",
+        "identification": "user identification",
+        "grouping_behavior": "grouping user behavior",
+        "throttling": "throttling requests to increase the efficiency of network calls"
+      },
+      "CookieExpiration": {
+        "various": "various",
+        "session": "session",
+        "2years": "2 years",
+        "24hours": "24 hours",
+        "10minutes": "10 minutes"
+      }
+    },
+    "PrivacyPolicy": {
+      "Title": "Privacy Policy",
+      "P1": "Paragraph 1 Text",
+      "P2": "Paragraph 2 Text",
+      "P3": "Paragraph 3 Text"
+    }
   }
 }
