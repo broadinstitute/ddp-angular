@@ -85,12 +85,12 @@ config.cookies = {
       list: [
         {
           name: 'auth0',
-          description: 'User authorization',
-          expiration: 'n years'
+          description: 'authorization',
+          expiration: 'various'
         },
         {
-          name: 'pepper platform',
-          description: 'User authorization',
+          name: 'pepper',
+          description: 'authorization',
           expiration: 'session'
         }
       ]
@@ -100,19 +100,19 @@ config.cookies = {
       actions: ['Accept', 'Reject'],
       list: [
         {
-          name: '_ga',
-          description: 'User identification',
-          expiration: '2 years'
+          name: 'ga',
+          description: 'identification',
+          expiration: '2years'
         },
         {
-          name: '_gid',
-          description: 'Grouping user behavior',
-          expiration: '24 hours'
+          name: 'gid',
+          description: 'grouping_behavior',
+          expiration: '24hours'
         },
         {
-          name: '_gat',
-          description: 'Throttling requests to increase the efficiency of network calls',
-          expiration: '10 minutes'
+          name: 'gat',
+          description: 'throttling',
+          expiration: '10minutes'
         }
       ]
     }

@@ -271,6 +271,9 @@
     "ExportStudy": {
       "Export": "EXPORT"
     },
+    "Common": {
+      "LogoAlt": "Prion Registry"
+    },
     "ListStudies": {
       "StudyName": "Study Name",
       "ParticipantCount": "Participant Count"
@@ -459,7 +462,7 @@
     "CookiesModal": {
       "Title": "Manage Cookie Preferences",
       "Privacy": "Your Privacy",
-      "Privacy_Text": "The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs to the left.Please note that functional cookies must be placed to allow proper function of the website.",
+      "Privacy_Text": "The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
       "Functional": "Functional Cookies",
       "Functional_Text": "These cookies provide necessary access, function, and security to the website.",
       "Analytical": "Analytical Cookies",
@@ -472,7 +475,27 @@
       "Description": "Description",
       "Expiration": "Expiration",
       "Policy": "Privacy policy",
-      "Submit": "Submit Preferences"
+      "Submit": "Submit Preferences",
+      "CookieName": {
+        "auth0": "auth0",
+        "pepper": "pepper platform",
+        "ga": "_ga",
+        "gid": "_gid",
+        "gat": "_gat"
+      },
+      "CookieDescription": {
+        "authorization": "user authorization",
+        "identification": "user identification",
+        "grouping_behavior": "grouping user behavior",
+        "throttling": "throttling requests to increase the efficiency of network calls"
+      },
+      "CookieExpiration": {
+        "various": "various",
+        "session": "session",
+        "2years": "2 years",
+        "24hours": "24 hours",
+        "10minutes": "10 minutes"
+      }
     },
     "PrivacyPolicy": {
       "Title": "Privacy Policy",

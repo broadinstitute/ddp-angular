@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   template: `
     <div class="cookiesModal cookiesModal__header">
       <img class="cookiesModal__logo" lazy-resource src="/assets/images/project-logo-dark.svg"
-           [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
+           [attr.alt]="'SDK.Common.LogoAlt' | translate">
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>
     <ddp-privacy-policy-static></ddp-privacy-policy-static>
