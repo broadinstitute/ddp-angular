@@ -36,6 +36,7 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
 import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
 import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import { PrivacyPolicyComponent } from "./components/privacy-policy/privacy-policy.component";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -76,6 +77,47 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.cookies = {
+  cookies: [
+    {
+      type: 'Functional',
+      actions: null,
+      list: [
+        {
+          name: 'auth0',
+          description: 'authorization',
+          expiration: 'various'
+        },
+        {
+          name: 'pepper',
+          description: 'authorization',
+          expiration: 'session'
+        }
+      ]
+    },
+    {
+      type: 'Analytical',
+      actions: ['Accept', 'Reject'],
+      list: [
+        {
+          name: 'ga',
+          description: 'identification',
+          expiration: '2years'
+        },
+        {
+          name: 'gid',
+          description: 'grouping_behavior',
+          expiration: '24hours'
+        },
+        {
+          name: 'gat',
+          description: 'throttling',
+          expiration: '10minutes'
+        }
+      ]
+    }
+  ]
+};
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
@@ -121,7 +163,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WelcomeComponent,
     LearnMoreComponent,
     StudyListingComponent,
-    RedirectJoinComponent
+    RedirectJoinComponent,
+    PrivacyPolicyComponent
   ],
   providers: [
     {
