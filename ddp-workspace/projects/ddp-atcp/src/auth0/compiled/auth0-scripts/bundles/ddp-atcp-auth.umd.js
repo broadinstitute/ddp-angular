@@ -785,7 +785,7 @@
      */
     function (e) {
         e.preventDefault();
-        webAuth.popup.authorize({
+        webAuth.authorize({
             redirectUri: callbackURL,
             connection: 'google-oauth2',
         }, (/**
@@ -799,7 +799,7 @@
      */
     function (e) {
         e.preventDefault();
-        webAuth.popup.authorize({
+        webAuth.authorize({
             redirectUri: callbackURL,
             connection: 'google-oauth2',
         }, (/**
