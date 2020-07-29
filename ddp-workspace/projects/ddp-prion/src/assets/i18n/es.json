@@ -155,7 +155,8 @@
       "BackToTop": "Volver arriba",
       "ContactUs": "Contacta con nosotros:",
       "ContactMailTo": "mailto:info@prionregistry.org",
-      "ContactEmail": "info@prionregistry.org"
+      "ContactEmail": "info@prionregistry.org",
+      "PrivacyPolicy": "es: Privacy Policy"
     },
     "Dashboard": {
       "StudyListing": {
@@ -269,6 +270,9 @@
     "SaveError": "es: We're sorry but an error occurred.",
     "ExportStudy": {
       "Export": "es: EXPORT"
+    },
+    "Common": {
+      "LogoAlt": "es: Prion Registry"
     },
     "ListStudies": {
       "StudyName": "es: Study Name",
@@ -445,6 +449,59 @@
         "E.PO_BOX.INTERNATIONAL": "es: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
       }
     },
-    "TooltipAlt": "es: Information"
+    "TooltipAlt": "es: Information",
+    "CookiesBanner": {
+      "Message_First": "es: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website.",
+      "Message_Second" : "es: Please review our",
+      "Message_Third": "es: to learn more about the cookies we use.",
+      "Policy": "es: Privacy Policy",
+      "Preferences": "es: Manage Preferences",
+      "Reject": "es: Reject Cookies",
+      "Accept": "es: Accept Cookies"
+    },
+    "CookiesModal": {
+      "Title": "es: Manage Cookie Preferences",
+      "Privacy": "es: Your Privacy",
+      "Privacy_Text": "es: The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
+      "Functional": "es: Functional Cookies",
+      "Functional_Text": "es: These cookies provide necessary access, function, and security to the website.",
+      "Analytical": "es: Analytical Cookies",
+      "Reject": "es: Reject",
+      "Accept": "es: Accept",
+      "AlwaysOn": "es: Always On",
+      "Analytical_Text": "es: These cookies allow us to evaluate site usage, and improve site experience and performance.",
+      "Details": "es: Cookie Details",
+      "Name": "es: Name",
+      "Description": "es: Description",
+      "Expiration": "es: Expiration",
+      "Policy": "es: Privacy policy",
+      "Submit": "es: Submit Preferences",
+      "CookieName": {
+        "auth0": "es: auth0",
+        "pepper": "es: pepper platform",
+        "ga": "es: _ga",
+        "gid": "es: _gid",
+        "gat": "es: _gat"
+      },
+      "CookieDescription": {
+        "authorization": "es: user authorization",
+        "identification": "es: user identification",
+        "grouping_behavior": "es: grouping user behavior",
+        "throttling": "es: throttling requests to increase the efficiency of network calls"
+      },
+      "CookieExpiration": {
+        "various": "es: various",
+        "session": "es: session",
+        "2years": "es: 2 years",
+        "24hours": "es: 24 hours",
+        "10minutes": "es: 10 minutes"
+      }
+    },
+    "PrivacyPolicy": {
+      "Title": "es: Privacy Policy",
+      "P1": "es: Paragraph 1 Text",
+      "P2": "es: Paragraph 2 Text",
+      "P3": "es: Paragraph 3 Text"
+    }
   }
 }
