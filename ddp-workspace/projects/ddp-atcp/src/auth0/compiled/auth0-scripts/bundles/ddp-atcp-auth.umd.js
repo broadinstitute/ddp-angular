@@ -346,6 +346,7 @@
             responseType: config.internalOptions.response_type,
             params: config.internalOptions,
             configurationBaseUrl: config.clientConfigurationBaseUrl,
+            scope: config.internalOptions.scope
         });
     });
 
@@ -801,7 +802,7 @@
         e.preventDefault();
         webAuth.authorize({
             redirectUri: callbackURL,
-            connection: 'google-oauth2',
+            connection: 'google-oauth2'
         }, (/**
          * @return {?}
          */

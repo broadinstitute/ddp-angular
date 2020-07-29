@@ -136,7 +136,7 @@ $('#google').on('click', e => {
   e.preventDefault();
   webAuth.authorize({
     redirectUri: callbackURL,
-    connection: 'google-oauth2',
+    connection: 'google-oauth2'
   }, () => {});
 });
 
