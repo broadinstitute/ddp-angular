@@ -804,9 +804,7 @@
             redirectUri: callbackURL,
             mode: config.internalOptions.mode,
             studyGuid: config.internalOptions.study_guid,
-            user_metadata: {
-                temp_user_guid: config.extraParams.temp_user_guid,
-            },
+            tempUserGuid: config.extraParams.temp_user_guid,
             connection: 'google-oauth2'
         }, (/**
          * @return {?}
