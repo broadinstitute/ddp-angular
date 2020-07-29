@@ -132,6 +132,14 @@ $('#google-sign').on('click', e => {
   }, () => {});
 });
 
+$('#google').on('click', e => {
+  e.preventDefault();
+  webAuth.popup.authorize({
+    redirectUri: callbackURL,
+    connection: 'google-oauth2',
+  }, () => {});
+});
+
 if (!isResetPasswordPage) {
   // open login or signUp form
   config.extraParams.mode === 'login' ? onActivateLogin() : onActivateSignUp();
