@@ -7,8 +7,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 @Component({
   selector: 'ddp-cookies-preferences-modal',
   template: `
-    <div class="cookiesModal cookiesModal__header">
-      <img class="cookiesModal__logo" lazy-resource src="/assets/images/project-logo-dark.svg"
+    <div class="cookiesModal cookiesModal--header">
+      <img class="cookiesModal--logo" lazy-resource src="/assets/images/project-logo-dark.svg"
            [attr.alt]="'SDK.Common.LogoAlt' | translate">
       <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
@@ -16,7 +16,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
     <div mat-dialog-content>
       <mat-tab-group>
         <mat-tab [label]="'SDK.CookiesModal.Privacy' | translate">
-          <div class="cookiesModal__tabHeader">
+          <div class="cookiesModal--tabHeader">
             <h4 translate>SDK.CookiesModal.Privacy</h4>
           </div>
           <p translate>SDK.CookiesModal.Privacy_Text</p>
@@ -26,9 +26,9 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
         <mat-tab *ngFor="let cookie of data.cookies" [label]="'SDK.CookiesModal.' + cookie.type | translate">
           <section>
-            <div class="cookiesModal__tabHeader">
+            <div class="cookiesModal--tabHeader">
               <h4 translate>{{ 'SDK.CookiesModal.' + cookie.type }}</h4>
-              <div  class="cookiesModal__tabActions">
+              <div  class="cookiesModal--tabActions">
                 <mat-radio-group *ngIf="cookie.actions" aria-label="Select an option">
                   <mat-radio-button value="Accept"><span translate>SDK.CookiesModal.Accept</span></mat-radio-button>
                   <mat-radio-button value="Reject"><span translate>SDK.CookiesModal.Reject</span></mat-radio-button>
@@ -38,8 +38,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
             </div>
             <p translate>{{ 'SDK.CookiesModal.' + cookie.type + '_Text'}}</p>
           </section>
-          <section *ngIf="cookie.list" class="cookiesModal__tabTable">
-            <h4 class="cookiesModal__tableHeader" translate>SDK.CookiesModal.Details</h4>
+          <section *ngIf="cookie.list" class="cookiesModal--tabTable">
+            <h4 class="cookiesModal--tableHeader" translate>SDK.CookiesModal.Details</h4>
             <mat-table [dataSource]="cookie.list" class="mat-elevation-z0">
 
               <!-- Name Column -->
@@ -68,8 +68,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
       </mat-tab-group>
     </div>
-    <div mat-dialog-actions class="cookiesModal__actions">
-      <button class="cookiesModal__link"
+    <div mat-dialog-actions class="cookiesModal--actions">
+      <button class="cookiesModal--link"
               (click)="openPolicy()"
               [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
       <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-8"
