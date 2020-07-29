@@ -917,23 +917,12 @@ button.Footer-link {
 }
 
 .PageLayout {
-  max-width: 1200px !important;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.mat-header-cell {
-  color: #717174 !important;
-}
-
-.mat-table .Link {
-  font-weight: 400;
-}
-
-.mat-column-name, .mat-column-summary {
-  width: 50% !important
-}
-
-.mat-column-date, .mat-column-status, .mat-column-actions {
-  display: none !important;
+.PageLayout-dashboard {
+    max-width: 1200px !important;
 }
 
 .NoTopMargin {
@@ -2239,7 +2228,7 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .dashboard-activity-button {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     background: none;
     border: none;
@@ -2247,7 +2236,6 @@ ddp-activity-composite-answer .ddp-answer-container {
     cursor: pointer;
     text-decoration: none;
     text-align: left;
-    line-height: 2.4rem;
 }
 
 .dashboard-status-container__img {
