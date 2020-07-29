@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
 import { ToolkitConfigurationService, CommunicationService } from 'toolkit';
+import { AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
   selector: 'app-welcome',
@@ -15,6 +16,7 @@ export class WelcomeComponent implements OnInit {
   public facebookAccount: string;
 
   constructor(
+    private analytics: AnalyticsEventsService,
     private communicationService: CommunicationService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
@@ -27,5 +29,13 @@ export class WelcomeComponent implements OnInit {
 
   public joinMailingList(): void {
     this.communicationService.openJoinDialog();
+  }
+
+  public sendSocialMediaAnalytics(event: string): void {
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
+  }
+
+  public sendCountMeInAnalytics(): void {
+    this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
   }
 }

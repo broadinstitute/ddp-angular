@@ -6,7 +6,7 @@
                     <h1 translate>HomePage.Introduction.Title</h1>
                     <p class="introduction__text" translate>HomePage.Introduction.Text</p>
                     <div class="introduction__buttons">
-                        <a [routerLink]="'/' + appRoutes.CountMeIn"
+                        <a [routerLink]="'/' + appRoutes.CountMeIn" (click)="sendCountMeInAnalytics()"
                             class="button button_medium button_primary introduction__cmi"
                             translate>Common.Buttons.CMI</a>
                         <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary"
@@ -115,10 +115,11 @@
                     <div>
                         <p class="socials__text" translate>HomePage.StayInformed.Text2</p>
                         <div>
-                            <a class="Link medium socials__facebook"
+                            <a class="Link medium socials__facebook" (click)="sendSocialMediaAnalytics('twitter')"
                                 [href]="'https://www.facebook.com/' + facebookAccount" target="_blank"
                                 translate>HomePage.StayInformed.Facebook</a>
-                            <a class="Link" [href]="'https://twitter.com/' + twitterAccount" target="_blank"
+                            <a class="Link" [href]="'https://twitter.com/' + twitterAccount"
+                                (click)="sendSocialMediaAnalytics('facebook')" target="_blank"
                                 translate>HomePage.StayInformed.Twitter</a>
                         </div>
                     </div>
@@ -129,7 +130,7 @@
                         <p>
                             <span class="twitter__text" translate>HomePage.StayInformed.Text3</span>
                             <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
-                                target="_blank">@{{twitterAccount}}</a>
+                                (click)="sendSocialMediaAnalytics('twitter')" target="_blank">@{{twitterAccount}}</a>
                         </p>
                     </div>
                     <div class="twitter__feed">
@@ -146,7 +147,7 @@
                 <h2 class="join__title h2-big center" translate>HomePage.Join.Title</h2>
                 <p class="join__text center" translate>HomePage.Join.Text</p>
                 <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_big button_primary"
-                    translate>Common.Buttons.CMI</a>
+                    (click)="sendCountMeInAnalytics()" translate>Common.Buttons.CMI</a>
             </div>
         </div>
     </section>
