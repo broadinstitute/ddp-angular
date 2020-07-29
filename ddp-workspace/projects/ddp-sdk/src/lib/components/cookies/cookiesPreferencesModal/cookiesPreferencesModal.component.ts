@@ -9,7 +9,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
   template: `
     <div class="cookiesModal cookiesModal__header">
       <img class="cookiesModal__logo" lazy-resource src="/assets/images/project-logo-dark.svg"
-           [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
+           [attr.alt]="'SDK.Common.LogoAlt' | translate">
       <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>
@@ -45,19 +45,19 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Name</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieName.' + element.name}} </mat-cell>
               </ng-container>
 
               <!-- Description Column -->
               <ng-container matColumnDef="description">
                 <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Description</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieDescription.' + element.description}} </mat-cell>
               </ng-container>
 
               <!-- Expiration Column -->
               <ng-container matColumnDef="expiration">
                 <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Expiration </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.expiration}} </mat-cell>
+                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieExpiration.' + element.expiration}} </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
