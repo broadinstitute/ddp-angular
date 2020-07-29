@@ -3136,14 +3136,14 @@ p.Medium {
   background-color: rgba(13, 13, 11, 0.9);
   z-index: 10;
 
-  &__text {
+  &--text {
     color: #FFFFFF;
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 400;
   }
 
-  &__link {
+  &--link {
     min-width: fit-content !important;
     padding: 0;
     color: #FFFFFF;
@@ -3197,7 +3197,7 @@ p.Medium {
 }
 
 .cookiesModal {
-  &__header {
+  &--header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -3205,19 +3205,19 @@ p.Medium {
     margin-bottom: 20px;
   }
 
-  &__logo {
+  &--logo {
     width: 213px;
     padding: 10px;
   }
 
-  &__actions {
+  &--actions {
     padding: 40px 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  &__link {
+  &--link {
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: bold;
@@ -3232,7 +3232,7 @@ p.Medium {
     }
   }
 
-  &__tabHeader {
+  &--tabHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -3240,17 +3240,17 @@ p.Medium {
     padding: 10px;
   }
 
-  &__tableHeader {
+  &--tableHeader {
     padding: 10px;
     border-bottom: 2px solid #82B547;
   }
 
-  &__tabHeader h4,
-  &__tabTable h4 {
+  &--tabHeader h4,
+  &--tabTable h4 {
     font-weight: bold;
   }
 
-  &__tabActions {
+  &--tabActions {
     .mat-radio-button {
       margin: 0 10px;
       padding: 10px;
@@ -3337,7 +3337,7 @@ ddp-cookies-preferences-modal {
 
 @media only screen and (max-width: 1026px) {
   .cookiesModal {
-    &__logo {
+    &--logo {
       width: 186px;
     }
   }
@@ -3345,7 +3345,7 @@ ddp-cookies-preferences-modal {
 
 @media only screen and (max-width: 767px) {
   .cookiesModal {
-    &__header {
+    &--header {
       position: relative;
       flex-direction: column;
       align-items: flex-start;
@@ -3391,12 +3391,12 @@ ddp-cookies-preferences-modal {
 
 @media only screen and (max-width: 450px) {
   .cookiesModal {
-    &__tabHeader,
-    &__actions {
+    &--tabHeader,
+    &--actions {
       flex-direction: column;
     }
 
-    &__link {
+    &--link {
       padding: 10px;
     }
   }
