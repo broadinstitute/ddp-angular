@@ -346,6 +346,7 @@
             responseType: config.internalOptions.response_type,
             params: config.internalOptions,
             configurationBaseUrl: config.clientConfigurationBaseUrl,
+            scope: config.internalOptions.scope
         });
     });
 
@@ -785,7 +786,7 @@
      */
     function (e) {
         e.preventDefault();
-        webAuth.popup.authorize({
+        webAuth.authorize({
             redirectUri: callbackURL,
             connection: 'google-oauth2',
         }, (/**
@@ -799,9 +800,9 @@
      */
     function (e) {
         e.preventDefault();
-        webAuth.popup.authorize({
+        webAuth.authorize({
             redirectUri: callbackURL,
-            connection: 'google-oauth2',
+            connection: 'google-oauth2'
         }, (/**
          * @return {?}
          */
