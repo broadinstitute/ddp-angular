@@ -10,15 +10,15 @@ import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal
   selector: 'ddp-cookies-banner',
   template: `
   <div class="cookiesBanner">
-    <div class="cookiesBanner__text">
+    <div class="cookiesBanner--text">
       <span translate>SDK.CookiesBanner.Message_First</span>
       <span translate>SDK.CookiesBanner.Message_Second</span>
-      <button class="cookiesBanner__link policy"
+      <button class="cookiesBanner--link policy"
               (click)="openPolicy()"
               [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
       <span translate>SDK.CookiesBanner.Message_Third</span>
     </div>
-    <button class="cookiesBanner__link"
+    <button class="cookiesBanner--link"
             (click)="openPreferences()"
             [innerText]="'SDK.CookiesBanner.Preferences' | translate"></button>
     <button class="Button Button--borderedYellow col-lg-4 col-md-4 col-sm-8 col-xs-8"
