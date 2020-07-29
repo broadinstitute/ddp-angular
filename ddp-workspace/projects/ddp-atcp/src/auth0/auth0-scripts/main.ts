@@ -126,7 +126,7 @@ translator.changeTranslate('en');
 
 $('#google-sign').on('click', e => {
   e.preventDefault();
-  webAuth.popup.authorize({
+  webAuth.authorize({
     redirectUri: callbackURL,
     connection: 'google-oauth2',
   }, () => {});
@@ -134,9 +134,9 @@ $('#google-sign').on('click', e => {
 
 $('#google').on('click', e => {
   e.preventDefault();
-  webAuth.popup.authorize({
+  webAuth.authorize({
     redirectUri: callbackURL,
-    connection: 'google-oauth2',
+    connection: 'google-oauth2'
   }, () => {});
 });
 
