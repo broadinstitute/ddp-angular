@@ -793,6 +793,20 @@
          */
         function () { }));
     }));
+    $('#google').on('click', (/**
+     * @param {?} e
+     * @return {?}
+     */
+    function (e) {
+        e.preventDefault();
+        webAuth.popup.authorize({
+            redirectUri: callbackURL,
+            connection: 'google-oauth2',
+        }, (/**
+         * @return {?}
+         */
+        function () { }));
+    }));
     if (!isResetPasswordPage) {
         // open login or signUp form
         config.extraParams.mode === 'login' ? onActivateLogin() : onActivateSignUp();
