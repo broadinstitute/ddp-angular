@@ -11,21 +11,20 @@ import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal
   template: `
   <div class="cookiesBanner">
     <div class="cookiesBanner--text">
-      <span translate>SDK.CookiesBanner.Message_First</span>
-      <span translate>SDK.CookiesBanner.Message_Second</span>
+      <span translate>SDK.CookiesBanner.Text_Before_Policy_Link</span>
       <button class="cookiesBanner--link policy"
               (click)="openPolicy()"
               [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
-      <span translate>SDK.CookiesBanner.Message_Third</span>
+      <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
     <button class="cookiesBanner--link"
             (click)="openPreferences()"
             [innerText]="'SDK.CookiesBanner.Preferences' | translate"></button>
-    <button class="Button Button--borderedYellow col-lg-4 col-md-4 col-sm-8 col-xs-8"
+    <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"
             (click)="reject()"
             [innerText]="'SDK.CookiesBanner.Reject' | translate">
     </button>
-    <button class="Button Button--primaryYellow col-lg-4 col-md-4 col-sm-8 col-xs-8"
+    <button class="Button CookieButton--Accept col-lg-4 col-md-4 col-sm-8 col-xs-8"
             (click)="accept()"
             [innerText]="'SDK.CookiesBanner.Accept' | translate">
     </button>
