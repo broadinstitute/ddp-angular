@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { BrowserContentService, CookiesManagementService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
 import { MatDialog } from "@angular/material";
-import { combineLatest, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { NoopScrollStrategy } from "@angular/cdk/overlay";
 import {
@@ -20,10 +20,12 @@ import {
         <router-outlet></router-outlet>
       </div>
       <prion-footer></prion-footer>
+      <ddp-cookies-banner *ngIf="showCookiesBanner"></ddp-cookies-banner>
     `
 })
 export class PrionAppComponent implements OnInit, OnDestroy {
   public unsupportedBrowser: boolean;
+  public showCookiesBanner: boolean;
   private anchor: Subscription = new Subscription();
   private readonly dialogBaseSettings = {
     width: '740px',
@@ -41,11 +43,13 @@ export class PrionAppComponent implements OnInit, OnDestroy {
     private renewNotifier: RenewSessionNotifier,
     private windowRef: WindowRef,
     private userProfile: UserProfileServiceAgent,
+    private cookiesManagementService: CookiesManagementService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.initBrowserWarningListener();
     this.initSessionWillExpireListener();
+    this.initHasToSetCookiesPolicyListener();
     this.initTranslate();
     this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
   }
@@ -82,6 +86,14 @@ export class PrionAppComponent implements OnInit, OnDestroy {
     });
     this.anchor.add(modalOpen).add(modalClose);
   }
+
+  private initHasToSetCookiesPolicyListener(): void {
+    const hasToSetCookiesPolicy =  this.cookiesManagementService.getHasToSetCookiesPolicy().subscribe(x => {
+      this.showCookiesBanner = x;
+    });
+    this.anchor.add(hasToSetCookiesPolicy);
+  }
+
 
   private initTranslate(): void {
     const session = localStorage.getItem('session_key');
