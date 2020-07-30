@@ -7,7 +7,6 @@ declare const ga: Function;
 export class AnalyticsManagementService {
   public trackAnalytics(): void {
     this.startGATracking();
-    this.startTCellTracking();
   }
 
   public doNotTrackAnalytics(): void {
@@ -27,19 +26,5 @@ export class AnalyticsManagementService {
         ga('create', DDP_ENV.platformGAToken, 'auto', 'platform');
       }
     });
-  }
-
-  private startTCellTracking(): void {
-    if (document.getElementById('tcell')) {
-      return;
-    }
-    const tcellScript = document.createElement('script');
-    tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
-    tcellScript.setAttribute('id', 'tcell');
-    tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
-    tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
-    tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);
-    tcellScript.async = true;
-    document.body.appendChild(tcellScript);
   }
 }

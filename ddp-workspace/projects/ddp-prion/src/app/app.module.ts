@@ -91,6 +91,11 @@ config.cookies = {
           name: 'pepper',
           description: 'authorization',
           expiration: 'session'
+        },
+        {
+          name: 'tcell',
+          description: 'authorization',
+          expiration: 'various'
         }
       ]
     },
