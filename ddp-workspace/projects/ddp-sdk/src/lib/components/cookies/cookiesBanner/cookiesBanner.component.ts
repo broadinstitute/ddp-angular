@@ -38,13 +38,11 @@ export class CookiesBannerComponent {
   }
 
   accept(): void {
-    this.cookiesService.acceptAll();
-    this.cookiesService.closeBanner();
+    this.cookiesService.acceptCookies();
   }
 
   reject(): void {
-    this.cookiesService.rejectNotFunctional();
-    this.cookiesService.closeBanner();
+    this.cookiesService.rejectNotFunctionalCookies();
   }
 
   openPreferences(): void {
