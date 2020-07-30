@@ -478,6 +478,7 @@
       "CookieName": {
         "auth0": "he: auth0",
         "pepper": "he: pepper platform",
+        "tcell": "he: tcell",
         "ga": "he: _ga",
         "gid": "he: _gid",
         "gat": "he: _gat"
