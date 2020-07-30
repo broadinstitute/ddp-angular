@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { BrowserContentService, CookiesManagementService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
 import { MatDialog } from "@angular/material";
-import { combineLatest, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { NoopScrollStrategy } from "@angular/cdk/overlay";
 import {
@@ -49,7 +49,7 @@ export class PrionAppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.initBrowserWarningListener();
     this.initSessionWillExpireListener();
-    this.initFirstTimeVisitorCookieListener();
+    this.initHasToSetCookiesPolicyListener();
     this.initTranslate();
     this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
   }
@@ -87,13 +87,11 @@ export class PrionAppComponent implements OnInit, OnDestroy {
     this.anchor.add(modalOpen).add(modalClose);
   }
 
-  private initFirstTimeVisitorCookieListener(): void {
-    const firstTimeVisitorCookie = combineLatest(
-      this.cookiesManagementService.getIsFirstTimeVisitor(),
-      this.cookiesManagementService.getIsCookiesToReject()).subscribe(x => {
-      this.showCookiesBanner = x[0] && x[1];
+  private initHasToSetCookiesPolicyListener(): void {
+    const hasToSetCookiesPolicy =  this.cookiesManagementService.getHasToSetCookiesPolicy().subscribe(x => {
+      this.showCookiesBanner = x;
     });
-    this.anchor.add(firstTimeVisitorCookie);
+    this.anchor.add(hasToSetCookiesPolicy);
   }
 
 
