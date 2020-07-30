@@ -4,9 +4,11 @@ export interface Cookie {
   expiration: string;
 }
 
+export type CookiesTypes = 'Functional' | 'Analytical';
+
 export interface Cookies {
   cookies: Array<{
-    type: 'Functional' | 'Analytical';
+    type: CookiesTypes;
     actions: ['Accept', 'Reject'] | null;
     list: Array<Cookie>;
   }>;
