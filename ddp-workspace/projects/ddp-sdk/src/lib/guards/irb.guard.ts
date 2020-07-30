@@ -17,7 +17,7 @@ export class IrbGuard implements CanActivate {
 
     public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         if (this.session.isAuthenticatedSession() || this.irbPassword.isIrbAuthenticated()) {
-            this.cookiesManagementService.manageCookies();
+            this.cookiesManagementService.checkCookiesPolicy();
             return of(true);
         } else {
             return this.irbPassword.requiresIrbAuthentication().pipe(
