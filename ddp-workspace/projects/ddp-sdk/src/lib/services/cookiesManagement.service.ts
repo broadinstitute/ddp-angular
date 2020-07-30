@@ -2,78 +2,93 @@ import { Inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigurationService } from './configuration.service';
-import { AnalyticsEventsService } from './analyticsEvents.service';
+import { AnalyticsManagementService } from './analyticsManagement.service';
+import { CookiesTypes } from '../models/cookies';
 
 @Injectable()
 export class CookiesManagementService {
-  private isFirstTimeVisitor: BehaviorSubject<boolean> =  new BehaviorSubject(null);
-  private isCookiesToReject: BehaviorSubject<boolean> =  new BehaviorSubject(null);
-  private expireDays = 10;
+  private cookiesTypes: Array<CookiesTypes>;
+  private readonly policyStorageName: string;
+  private hasToSetCookiesPolicy: BehaviorSubject<boolean> =  new BehaviorSubject(null);
 
   constructor(private cookie: CookieService,
-              private analytics: AnalyticsEventsService,
+              private analytics: AnalyticsManagementService,
               @Inject('ddp.config') private configuration: ConfigurationService) {
+    this.cookiesTypes = this.configuration.cookies.cookies.map(x => x.type).filter(x => x !== 'Functional');
+    this.policyStorageName = this.configuration.studyGuid + '_cookies_consent';
   }
 
-  public manageCookies(): void {
-    this.checkCookiesStatus();
-    this.checkCookiesToReject();
-    this.checkFirstTimeCookie();
-  }
+  public checkCookiesPolicy(): void {
+    if (this.getConsentDecision()) {
+      this.hasToSetCookiesPolicy.next(false);
+      this.followPolicy();
+      return;
+    }
 
-  private checkCookiesStatus(): void {
-    const status = this.cookie.get('consent');
-    if (status === null || status === undefined) {
-      this.cookie.put('consent', 'false', {expires: this.getExpirationDate()});
+    this.checkNeedToSetCookiesPolicy();
+    if (this.hasToSetCookiesPolicy && !localStorage.getItem(this.policyStorageName)) {
+      this.setDefaultPreferences();
     }
   }
 
-  private checkCookiesToReject(): void {
-    // If there are cookies other then functional -> they can be rejected -> show banner
-    this.configuration.cookies.cookies.filter(x => x.type !== 'Functional').length
-      ? this.isCookiesToReject.next(true)
-      : this.isCookiesToReject.next(false);
+  // if there are other cookies than functional and no consent decision was made and -> need to set Policy
+  private checkNeedToSetCookiesPolicy(): void {
+    this.cookiesTypes.length && !this.getConsentDecision()
+      ? this.hasToSetCookiesPolicy.next(true)
+      : this.hasToSetCookiesPolicy.next(false);
   }
 
-  private checkFirstTimeCookie(): void {
-    if (this.cookie.get('isFirstTimeVisitor') === null || this.cookie.get('isFirstTimeVisitor') === undefined) {
-      this.cookie.put('isFirstTimeVisitor', 'true', {expires: this.getExpirationDate()});
-      this.isFirstTimeVisitor.next(true);
-    } else {
-      this.cookie.get('isFirstTimeVisitor') === 'true'
-        ? this.isFirstTimeVisitor.next(true)
-        : this.isFirstTimeVisitor.next(false);
+  private getConsentDecision(): boolean {
+    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
+    return policy ? policy.consent_decision : false;
+  }
+
+  private followPolicy(): void {
+    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
+    policy.cookies['Analytical'] ? this.analytics.trackAnalytics() : this.analytics.doNotTrackAnalytics();
+  }
+
+  private setDefaultPreferences(): void {
+    const policy = { consent_decision: false, consent_status: false, cookies: {} };
+    this.cookiesTypes.forEach(x => policy.cookies[x] = null);
+    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
+  }
+
+  public acceptCookies(): void {
+    this.hasToSetCookiesPolicy.next(false);
+    this.updateConsentStatus(true);
+    if (this.checkDefaultAcceptance())  {
+      this.updateCookiesAcceptance(true);
+      this.analytics.trackAnalytics();
     }
   }
 
-  public getIsCookiesToReject(): BehaviorSubject<boolean> {
-    return this.isCookiesToReject;
+  public rejectNotFunctionalCookies(): void {
+    this.hasToSetCookiesPolicy.next(false);
+    this.updateConsentStatus(false);
+    this.updateCookiesAcceptance(false);
+    this.analytics.doNotTrackAnalytics();
   }
 
-  public getIsFirstTimeVisitor(): BehaviorSubject<boolean> {
-    return this.isFirstTimeVisitor;
+  private updateConsentStatus(value: boolean): void {
+    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
+    policy.consent_status = value;
+    policy.consent_decision = true;
+    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
   }
 
-  public closeBanner(): void {
-    this.cookie.put('isFirstTimeVisitor', 'false', {expires: this.getExpirationDate()});
-    this.isFirstTimeVisitor.next(false);
-    this.isCookiesToReject.next(false);
+  private checkDefaultAcceptance(): boolean {
+    const cookiesAcceptance = Object.values(JSON.parse(localStorage.getItem(this.policyStorageName)).cookies);
+    return cookiesAcceptance.every(x => x === null);
   }
 
-  public acceptAll(): void {
-    this.cookie.put('consent', 'true', {expires: this.getExpirationDate()});
-    this.analytics.startGATracking();
-    this.analytics.startTCellTracking();
+  private updateCookiesAcceptance(value): void {
+    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
+    this.cookiesTypes.forEach(x => policy.cookies[x] = value);
+    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
   }
 
-  public rejectNotFunctional(): void {
-    this.cookie.put('consent', 'false', {expires: this.getExpirationDate()});
-    this.analytics.doNotTrackGA();
-  }
-
-  private getExpirationDate(): Date {
-    const date = new Date();
-    date.setDate(date.getDate() + this.expireDays);
-    return date;
+  public getHasToSetCookiesPolicy(): BehaviorSubject<boolean> {
+    return this.hasToSetCookiesPolicy;
   }
 }
