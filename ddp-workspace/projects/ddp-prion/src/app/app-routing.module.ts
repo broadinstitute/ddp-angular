@@ -27,7 +27,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
 import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -123,11 +122,6 @@ const routes: Routes = [
   {
     path: 'learn-more',
     component: LearnMoreComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'privacy-policy',
-    component: PrivacyPolicyComponent,
     canActivate: [IrbGuard]
   },
   {
