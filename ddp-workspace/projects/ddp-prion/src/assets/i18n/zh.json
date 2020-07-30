@@ -478,6 +478,7 @@
       "CookieName": {
         "auth0": "zh: auth0",
         "pepper": "zh: pepper platform",
+        "tcell": "zh: tcell",
         "ga": "zh: _ga",
         "gid": "zh: _gid",
         "gat": "zh: _gat"
