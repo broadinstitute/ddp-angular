@@ -149,7 +149,8 @@
       "Home": "בית",
       "LearnMore": "למד עוד",
       "Dashboard": "לוח המחוונים שלי",
-      "JoinUs": "הצטרף אלינו"
+      "JoinUs": "הצטרף אלינו",
+      "PrivacyPolicy": "he: Privacy Policy"
     },
     "Footer": {
       "BackToTop": "חזרה למעלה",
@@ -269,6 +270,9 @@
     "SaveError": "he: We're sorry but an error occurred.",
     "ExportStudy": {
       "Export": "he: EXPORT"
+    },
+    "Common": {
+      "LogoAlt": "he: Prion Registry"
     },
     "ListStudies": {
       "StudyName": "he: Study Name",
@@ -445,6 +449,59 @@
         "E.PO_BOX.INTERNATIONAL": "he: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
       }
     },
-    "TooltipAlt": "he: Information"
+    "TooltipAlt": "he: Information",
+    "CookiesBanner": {
+      "Text_Before_Policy_Link": "he: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
+      "Text_After_Policy_Link": "he: to learn more about the cookies we use.",
+      "Policy": "he: Privacy Policy",
+      "Preferences": "he: Manage Preferences",
+      "Reject": "he: Reject Cookies",
+      "Accept": "he: Accept Cookies"
+    },
+    "CookiesModal": {
+      "Title": "he: Manage Cookie Preferences",
+      "Privacy": "he: Your Privacy",
+      "Privacy_Text": "he: The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
+      "Functional": "he: Functional Cookies",
+      "Functional_Text": "he: These cookies provide necessary access, function, and security to the website.",
+      "Analytical": "he: Analytical Cookies",
+      "Reject": "he: Reject",
+      "Accept": "he: Accept",
+      "AlwaysOn": "he: Always On",
+      "Analytical_Text": "he: These cookies allow us to evaluate site usage, and improve site experience and performance.",
+      "Details": "he: Cookie Details",
+      "Name": "he: Name",
+      "Description": "he: Description",
+      "Expiration": "he: Expiration",
+      "Policy": "he: Privacy policy",
+      "Submit": "he: Submit Preferences",
+      "CookieName": {
+        "auth0": "he: auth0",
+        "pepper": "he: pepper platform",
+        "tcell": "he: tcell",
+        "ga": "he: _ga",
+        "gid": "he: _gid",
+        "gat": "he: _gat"
+      },
+      "CookieDescription": {
+        "authorization": "he: user authorization",
+        "identification": "he: user identification",
+        "grouping_behavior": "he: grouping user behavior",
+        "throttling": "he: throttling requests to increase the efficiency of network calls"
+      },
+      "CookieExpiration": {
+        "various": "he: various",
+        "session": "he: session",
+        "2years": "he: 2 years",
+        "24hours": "he: 24 hours",
+        "10minutes": "he: 10 minutes"
+      }
+    },
+    "PrivacyPolicy": {
+      "Title": "he: Privacy Policy",
+      "P1": "he: Paragraph 1 Text",
+      "P2": "he: Paragraph 2 Text",
+      "P3": "he: Paragraph 3 Text"
+    }
   }
 }
