@@ -451,9 +451,8 @@
     },
     "TooltipAlt": "Information",
     "CookiesBanner": {
-      "Message_First": "We use cookies to evaluate site usage, improve performance, and ensure proper function of the website.",
-      "Message_Second" : "Please review our",
-      "Message_Third": "to learn more about the cookies we use.",
+      "Text_Before_Policy_Link": "We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
+      "Text_After_Policy_Link": "to learn more about the cookies we use.",
       "Policy": "Privacy Policy",
       "Preferences": "Manage Preferences",
       "Reject": "Reject Cookies",

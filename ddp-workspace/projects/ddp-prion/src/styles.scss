@@ -114,15 +114,18 @@ a:focus {
 
 .Button--primaryYellow,
 .Button--primaryYellow:active,
-.Button--primaryYellow:focus {
+.Button--primaryYellow:focus,
+.CookieButton--Accept,
+.CookieButton--Accept:active,
+.CookieButton--Accept:focus, {
     border: 1px solid #F2B816 !important;
     background-color: #F2B816 !important;
     color: #ffffff !important;
 }
 
-.Button--borderedYellow,
-.Button--borderedYellow:active,
-.Button--borderedYellow:focus {
+.CookieButton--Reject,
+.CookieButton--Reject:active,
+.CookieButton--Reject:focus {
   border: 1px solid #F2B816 !important;
   background-color: transparent !important;
   color: #F2B816 !important;
