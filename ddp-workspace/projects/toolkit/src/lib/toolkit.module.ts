@@ -56,6 +56,8 @@ import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpi
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 import { AgeUpThankYou } from './components/thank-you/age-up-thank-you.component';
+import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -71,8 +73,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
-import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
   imports: [
@@ -143,7 +143,8 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent
   ],
   exports: [
     FooterComponent,
@@ -180,7 +181,8 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent
   ],
   entryComponents: [
     DisclaimerComponent,
