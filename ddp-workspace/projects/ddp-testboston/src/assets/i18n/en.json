@@ -182,32 +182,32 @@
           ]
         }
       ]
-  },
-  "TeamSection": {
-    "Title": "Our Team",
-    "Text": "We are a team of infectious disease doctors and researchers who want to better understand how COVID-19 is affecting individuals and communities so we can better serve all patients. ",
-    "List": [
-      {
-        "Name": "Ann E. Woolley, MD",
-        "Affiliations": "Instructor in Medicine",
-        "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
-      },
-      {
-        "Name": "Lisa A. Cosimi, MD",
-        "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
-        "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
-      },
-      {
-        "Name": "Deborah T. Hung, MD, PhD",
-        "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
-        "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT and Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
-      }
-    ]
-  },
-  "MailingSection": {
-    "Title": "TestBoston is currently enrolling invited patients of Brigham and Women’s Hospital. ",
-    "Text": "If you did not receive an invitation to join the study but are interested in staying up to date about general TestBoston information, please join our newsletter list:"
-  }
+    },
+    "TeamSection": {
+      "Title": "Our Team",
+      "Text": "We are a team of infectious disease doctors and researchers who want to better understand how COVID-19 is affecting individuals and communities so we can better serve all patients. ",
+      "List": [
+        {
+          "Name": "Ann E. Woolley, MD",
+          "Affiliations": "Instructor in Medicine",
+          "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
+        },
+        {
+          "Name": "Lisa A. Cosimi, MD",
+          "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
+          "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
+        },
+        {
+          "Name": "Deborah T. Hung, MD, PhD",
+          "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
+          "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT and Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
+        }
+      ]
+    },
+    "MailingSection": {
+      "Title": "TestBoston is currently enrolling invited patients of Brigham and Women’s Hospital. ",
+      "Text": "If you did not receive an invitation to join the study but are interested in staying up to date about general TestBoston information, please join our newsletter list:"
+    }
   },
   "PrequalPage": {
     "Title": "First, confirm your eligibility",
@@ -241,7 +241,11 @@
   "Prism": {
     "ClearSearch": "Clear",
     "Email": "SUBJECT EMAIL ADDRESS",
-    "NoEmail": "N/A",
+    "NoneListed": {
+      "Title": "None listed",
+      "Text": "If the participant wants to bo able to login to the TestBoston site, please enable their TestBoston account",
+      "Link": "here"
+    },
     "Buttons": {
       "Enrollment": "Begin Enrollment",
       "Dashboard": "View Dashboard"
