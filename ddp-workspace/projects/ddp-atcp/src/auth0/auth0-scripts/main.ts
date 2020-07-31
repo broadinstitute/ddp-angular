@@ -127,6 +127,7 @@ translator.changeTranslate('en');
 $('#google-sign').on('click', e => {
   e.preventDefault();
   webAuth.authorize({
+    state: config.extraParams.state,
     redirectUri: callbackURL,
     connection: 'google-oauth2',
   }, () => {});
@@ -135,10 +136,8 @@ $('#google-sign').on('click', e => {
 $('#google').on('click', e => {
   e.preventDefault();
   webAuth.authorize({
+    state: config.extraParams.state,
     redirectUri: callbackURL,
-    mode: config.internalOptions.mode,
-    studyGuid: config.internalOptions.study_guid,
-    tempUserGuid: config.extraParams.temp_user_guid,
     connection: 'google-oauth2'
   }, () => {});
 });
