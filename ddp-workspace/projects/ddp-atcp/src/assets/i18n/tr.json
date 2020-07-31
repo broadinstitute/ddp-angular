@@ -17,9 +17,360 @@
 					"Text": "\\\"Bize Katılın\\\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
 				},
 				{
-					"Name": "Bize izin verin"
+					"Name": "Bize izin verin",
+					"Steps": [
+						"her A-T hastasının bize genom sekanslama için gönderebileceği bir tükürük örneğini paylaşmak",
+						"A-T hastasının tıbbi kayıtlarını doktorlarından alıp araştırmacılarla paylaşmak",
+						"kendi yüklediğiniz tıbbi kayıtları araştırmacılarla paylaşmak",
+						"gelecekte yapılacak, durumu takip eden araştırma çalışmalarıyla ilgili olarak sizinle irtibat kurmak"
+					],
+					"Text": "Kayıt sürecinde sizden biz araştırmacılara sağladığınız verileri\nkimlik bilgileriniz kaldırılmış bir şekilde paylaşma izni veren bir olur formu doldurmanızı isteyeceğiz.\nTercih ederseniz bize ayrıca şunları yapmamız için izin verebilirsiniz:"
+				},
+				{
+					"Name": "Bize kendiniz veya çocuğunuz hakkında bilgi verin",
+					"Text": "Bu girişime katılmak için A-T'li hastanın sağlığı, daha önce göründüğü doktorlar ve tıbbi öyküsü ve aile geçmişi hakkında bazı soruları yanıtlamanız gerekecektir. Düzenli olarak A-T hastasının tıbbi durumu hakkında ek (isteğe bağlı) soru formları doldurmanız istenecektir (A-T hakkındki bilgilerini geliştirmek için verilerinizi inceleyecek araştırmacılar tarafından oluşturulmuş anketler)."
+				},
+				{
+					"Name": "Bize bir tükürük kiti gönderin.",
+					"Text": "Genom sekanslama çalışmasına katılmayı seçerseniz sağlayacağımız önceden pul yapıştırılmış bir paketle bize bir tükürük örneği göndereceksiniz."
+				},
+				{
+					"Name": "DNA ve sağlık bilgilerini inceleyeceğiz",
+					"Text": "Tükürük örneğinden elde edilen hücrelerdeki DNA'yı analiz edeceğiz. Ek bir işlem gerekmeyecektir. Tükürüğünüzden yapılan genetik analizin sonuçlarını ve çevrim içi soru formlarında bize sağladığınız tıbbi bilgiyi birbirine bağlayacağız."
+				},
+				{
+					"Name": "Verileri araştırmacılarla paylaşacağız",
+					"Text": "Kim olduğunuzu tanımlayabilecek bilgiler giderildikten sonra sağlık bilgisi ve genomik veriler veri tabanı dünya çapındaki araştırmacılara güvenli ve kontrollü erişimli bir veri deposu yoluyla sağlanacaktır. Verilerinize sadece A-T hastası aile üyeleri ve ayrıca bilimsel ve tıbbi danışmanlardan oluşan bir veri erişim komitesince izin verilmiş vasıflı araştırmacılar erişecektir.  Bilgilerinizi kullanmış olan tüm çalışmaların kaydını tutacağız."
+				},
+				{
+					"Name": "Sürekli geri bildiriminiz araştırmayı hızlandırabilir",
+					"Text": "Düzenli olarak sizi A-T'yi daha iyi anlamak üzere verileri inceleyen araştırmacıların geliştirdiği soru formlarını yanıtlamaya davet edeceğiz. Bu platformu kullanarak, önemli takip amaçlı araştırma sorularına doğrudan ailelerden hızla yanıt almak gibi daha önce görülmemiş bir fırsatı yakalamış olacağız. Katılımcıları takip etme imkanımız araştırmaları önemli derecede etkileme ve yeni keşifler oluşma süresini kısaltma olasılığı doğurmaktadır."
+				},
+				{
+					"Name": "Bizimle birlikte siz de öğrenin",
+					"Text": "Bu benzersiz sağlık ve genetik bilgi kombinasyonu sizin yardımınız olmadan mümkün olamayacak tedavileri geliştirmenin temeli olabilir. Size mutlaka çabalarımızın durumu hakkında güncellemeler göndereceğiz ve katılımınızın mümkün kıldığı son keşifleri bildireceğiz."
 				}
-			]
+			],
+			"SubTitle": "Platform şöyle çalışır:",
+			"Text": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır.",
+			"Title": "Global A-T Aile Veri Platformu"
+		},
+		"Title": "Bu girişim hakkında"
+	},
+	"AboutPage": {
+		"DataAccess": {
+			"Header": "Veri Erişim Komitesi",
+			"Text": "Global A-T Aile Veri Platformu hakkında bilgiye sadece kendilerine Veri Erişim Komitesi tarafından izin verilmiş vasıflı araştırmacılar erişebilir. Bu komite, Aile Gözetim Kurulumuz için kaydedilmiş A-T aile temsilcilerinden oluşur ve bunlar da Bilimsel ve Tıbbi Danışma Kurulu için uzmanları bulurlar ve her araştırmacının projesinin bu girişimin hedefleriyle uyumlu olduğundan emin olurlar.  Aile Gözetim Kurulu Bilimsel ve Tıbbi Danışma Kurulunun gözetimini yapacaktır."
+		},
+		"Doctors": [
+			{
+				"Hospital": "Tıbbi Genetik Emeritus Profesörü – Cambridge Üniversitesi, Cambridge, Birleşik Krallık ve Onursal Öğretim Üyesi, Wellcome Trust Sanger Enstitüsü, Hinxton, Birleşik Krallık",
+				"Name": "Martin Bobrow",
+				"Rank": "Dr."
+			},
+			{
+				"Hospital": "Tıbbi Genetik Profesörü, Sapienza Üniversitesi, Roma, İtalya",
+				"Name": "Luciana Chessa"
+			},
+			{
+				"Hospital": "Pediatri Tıbbi Müdürü, Wesley Hastanesi, Queensland, Avustralya"
+			},
+			{
+				"Hospital": "Doçent, Federal Üniversite, São Paulo, Brezilya"
+			},
+			{
+				"Hospital": "Pediatri ve Nöroloji Doçenti, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD."
+			},
+			{
+				"Hospital": "Müdür, Google Genomics, Mountain View, CA, ABD"
+			},
+			{
+				"Hospital": "Pediatrik ve Gelişimsel Biyoloji, Tokyo Tıp ve Diş Hekimliği Üniversitesi, Japonya"
+			},
+			{
+				"Hospital": "Doçent, Queensland Üniversitesi, Queensland, Avustralya"
+			},
+			{
+				"Hospital": "Moleküler Onkoloji Kurucu Profesörü, Queensland Üniversitesi, Brisbane, Avustralya"
+			},
+			{
+				"Hospital": "Pediatri Profesörü, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD"
+			},
+			{
+				"Hospital": "Pediatrik İmmunohematoloji, Primer İmmünyetmezlikler için Fransız Referans Merkezi Koordinatörü, Necker Hastanesi, Paris, Fransa"
+			},
+			{
+				"Hospital": "Pediatrik Nörolog, Sheba Tıp Merkezi, Ramat Gan, İsrail"
+			},
+			{
+				"Hospital": "Baş Veri Görevlisi, Broad Enstitüsü, Cambridge, MA, ABD"
+			},
+			{
+				"Hospital": "Ulusal Nadir Hastalıklar Merkezi, Roma, İtalya"
+			},
+			{
+				"Hospital": "Bilim Koordinatörü, A-T Çocuk Projesi, Coconut Creek, FL, ABD"
+			},
+			{
+				"Hospital": "İnsan Genetiği Profesörü, Tel Aviv University, Ramat Aviv, İsrail"
+			},
+			{
+				"Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+			},
+			{
+				"Hospital": "Genetik Profesörü, Paris Descartes Üniversitesi ve Genetik Bölümü Başkanı, Curie Enstitüsü, Paris, Fransa"
+			},
+			{
+				"Hospital": "Doçent, Tokyo Tıp ve Diş Hekimliği Üniversitesi Tokyo, Japonya"
+			},
+			{
+				"Hospital": "Yönetici Müdür, Genomik ve Toplum için Kamusal Popülasyon Projesi, Montreal, Kanada"
+			},
+			{
+				"Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+			},
+			{
+				"Hospital": "Klinik Doçent, Nottingham Üniversitesi, Nottingham, Birleşik Krallık"
+			},
+			{
+				"Hospital": "Johann Wolfgang Goethe Üniversitesi Çocuk Hastanesi, Frankfurt, Almanya"
+			}
+		],
+		"FamilyOversight": {
+			"Header": "Aile Gözetim Kurulu",
+			"Text": "Platformumuzun misyonu; araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlamak ve umarız ki yeni keşiflerin yapılmasını mümkün kılmaktır. Misyonumuz ve aktivitelerimizin daima tüm dünyadan A-T'li kişiler açısından en iyi seçeneklerle uyumlu olması için uluslararası bir Aile Gözetim Kurulu oluşturduk.  Şu anda aşağıdaki A-T hastası aile üyeleri (alfabetik sırayla verilmiştir) bu kurulda hizmet etmeyi kabul etmişlerdir:"
+		},
+		"FinancialSupport": {
+			"Header": "Global A-T Aile Veri Platformunun Mali Desteği",
+			"Text": {
+				"First": "Şu anda Global A-T Aile Veri Platformunun gelişmesi ve çalışması sadece A-T için yaşamı daha iyi hale getirici tedaviler bulma hedefini güden biyomedikal araştırma projeleri, bilimsel konferanslar ve klinik merkezleri desteklemek ve koordine etmek için fonlar toplayan A.B.D.'de, Florida'da Coconut Creek'de yer alan ve kar amacı gütmeyen bir organizasyon olan, daha çok A-T Çocuk Projesi olarak tanınan Ataxia-Telangiectasia Children’s Project, Inc. tarafından mali olarak desteklenmektedir.",
+				"Second": "Bu projeyi A-T Çocuk Projesi başlatsa da dünya çapında A-T kuruluşları, klinisyenler ve ailelerin aile katılımını desteklemek, veri erişimini gözetmeye yardımcı olmak ve mümkün olduğunda mali destek sağlamak yoluyla bu girişimi destekleyeceği ümit edilmektedir."
+			}
+		},
+		"Hospitals": [
+			{
+				"Country": "Fransa",
+				"Name": "Cedric Anchisi "
+			},
+			{
+				"Country": "İsrail",
+				"Name": "Orly Dror-Azuriel "
+			},
+			{
+				"Country": "Avustralya",
+				"Name": "Natalie Elkheir "
+			},
+			{
+				"Country": "Hollanda",
+				"Name": "Rianne Kranendonk "
+			},
+			{
+				"Country": "Brezilya",
+				"Name": "Maria Angelica Lodovici "
+			},
+			{
+				"Country": "Amerika Birleşik Devletleri",
+				"Name": "Brad Margus "
+			},
+			{
+				"Country": "İngiltere",
+				"Name": "Emily Read "
+			},
+			{
+				"Country": "Hindistan",
+				"Name": "Manoj Kumar Srivastwa "
+			},
+			{
+				"Country": "Kanada",
+				"Name": "Conrad Van Hierden "
+			},
+			{
+				"Country": "İspanya",
+				"Name": "Paxti Villen "
+			},
+			{
+				"Country": "İngiltere",
+				"Name": "Lian Yarlett "
+			}
+		],
+		"PageTitle": "Hakkımızda",
+		"PlatformName": "Global A-T Aile Veri Platformu",
+		"ScientificBoard": {
+			"Header": "Bilimsel ve Tıbbi Danışma Kurulu",
+			"Text": "Platformun aktivitelerinin A-T'li kişileri korurken veri paylaşımını desteklemesi ve mümkün kılmasını sağlamak üzere Aile Danışma Kurulu, bu Aile Danışma Kuruluna uzman görüşlerini sunacak bir Bilimsel ve Tıbbi Danışma Kuruluna katılmak üzere tanınan bilim insanlarını ve klinisyenleri seçmiş ve davet etmiştir.  Bu danışma kurulunun üyelerinin hem ataksi telenjiektazinin klinik ortaya çıkış şekli ve altta yatan biyolojisi konusunda uzmanları hem de genom sekansı verileri gibi büyük veri setlerinin analizi, biyoistatistik, uygulama programlama arayüzleri, veri güvenliği, mevzuat konuları, tıbbi etik, adli konular ve anket yöntemleri konusunda uzmanları içereceği ümit edilmektedir.  Şu anda aşağıdaki uzmanlar (alfabetik olarak verilmiştir) bu danışma kurulunda hizmet etmeyi kabul etmiştir:"
+		},
+		"Text": {
+			"First": " dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık, genetik ve olası diğer tipteki bilgilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir.",
+			"Second": "Bu girişimin çeşitli bileşenleri için stratejik ortaklar seçiyoruz ve bunlardan biri bize genom sekanslama hizmetini sağlayacak olan Harvard ve MIT Broad Enstitüsü. Ayrıca bu platform hakkında soruları yanıtlamak üzere ve isteyen ailelere DNA testi kitleri göndermek üzere eğitilmiş olan A-T Children’s Project adlı Çocuk Projesinde çalışan personelle ortaklık yapıyoruz.",
+			"Third": "Gelecekte Global A-T Aile Veri Platformunun, A-T'li bir hastanın nasıl hareket ettiği konusunda bilgi toplamak için giyilebilir teknolojiler kullanmak gibi diğer türlerde biyolojik ve yaşam tarzıyla ilgili verileri toplamak amacıyla başka kurumlarla işbirliği yapmasını bekliyoruz."
+		}
+	},
+	"Common": {
+		"Navigation": {
+			"AboutThisInitiative": "Bu girişim hakkında",
+			"AboutUs": "Hakkımızda",
+			"JoinUs": "Bize Katılın",
+			"Language": "Dil",
+			"LearnMore": "Daha Fazla Bilgi",
+			"MyAccount": "Hesabım",
+			"Next": "Sonraki",
+			"Previous": "Önceki",
+			"SignIn": "Oturum Aç",
+			"YourParticipants": "Katılımcılarınız"
+		}
+	},
+	"DataAccess": {
+		"Header": {
+			"Paragraph1": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır."
+		},
+		"OrganizationForm": {
+			"Country": "Ülke",
+			"State": "İl"
+		}
+	},
+	"HomePage": {
+		"IntroductionSection": {
+			"Text": {
+				"First": "Sizde veya çocuğunuzda A-T varsa araştırmacıların yeni keşifler yapmaları ve tedavilerin gelişmesini hızlandırmalarına yardımcı olabilirsiniz.",
+				"Second": " Her hastanın genetik bilgisi ve tıbbi durumu benzersizdir ve tedavilerin geliştirilmesine temel teşkil edebilir. Bu bilgiyi paylaşın, genom sekanslamamız için bize bir tükürük örneği gönderin ve A-T hakkında daha fazla bilgi edinme yolculuğumuzda bize katılın."
+			},
+			"Title": "Ataksi Telenjiektazi (A-T) hakkında bildiklerimizi dönüştürmeye yardımcı olun."
+		},
+		"Participate": {
+			"Steps": {
+				"Fourth": {
+					"H3": "4. Birlikte öğrenelim",
+					"Text": {
+						"First": "Size katılımınızın mümkün kıldığı son keşifler hakkında güncellemeler göndereceğiz.",
+						"Second": " Ve kabul ederseniz gelecekte siz ve çocuğunuzun deneyimleri hakkında daha fazla soru sormak ve gelecekteki ek çalışmalara katılmanız için sizi davet etmek üzere sizinle irtibat kurabiliriz."
+					}
+				},
+				"One": {
+					"H2": "Nasıl katılabilirsiniz:",
+					"H3": "1. Hesap Oluşturun",
+					"Text": "Kendinizi veya A-T'li çocuğunuzu veri platformumuza kaydetmek için \"Bize Katılın\" kısmına tıklayın ve kısa bir form doldurun."
+				},
+				"Second": {
+					"H3": "2. Bize izin verin",
+					"Text": "Kayıt sürecinde sizden biz araştırmacılara sağladığınız verileri\nkimlik bilgileriniz kaldırılmış bir şekilde paylaşma izni veren bir olur formu doldurmanızı isteyeceğiz.\nTercih ederseniz bize ayrıca şunları yapmamız için izin verebilirsiniz:",
+					"Ul": [
+						"her A-T hastasının bize genom sekanslama için gönderebileceği bir tükürük örneğini paylaşmak",
+						"A-T hastasının tıbbi kayıtlarını doktorlarından alıp araştırmacılarla paylaşmak",
+						"kendi yüklediğiniz tıbbi kayıtları araştırmacılarla paylaşmak",
+						"gelecekte yapılacak, durumu takip eden araştırma çalışmalarıyla ilgili olarak sizinle irtibat kurmak"
+					]
+				},
+				"Third": {
+					"H3": "3. Görüşlerinizi ve tükürük örneğinizi paylaşın",
+					"Text": "A-T'nini sizi veya çocuğunuzu nasıl etkilediği konusunda çevrim içi bir soru formunu doldurun. Size ayrıca genom sekanslama için bir tükürük örneği alma kiti göndereceğiz. Ayrıca düzenli olarak tıbbi öykü kayıtlarını ve platformla paylaştığınız deneyimleri güncelleyebileceksiniz."
+				}
+			},
+			"Together": {
+				"H3": {
+					"First": "Birlikte A-T'li çocuklar ve genç yetişkinlerin sağlığını daha iyi hale getirme gücümüz var.",
+					"Second": "Şimdi başlayın!"
+				}
+			}
+		},
+		"SecondSection": {
+			"Title": "Bu arayışta bize katılıp son bulgulardan haberdar olun."
+		}
+	},
+	"SDK": {
+		"CancelButton": "İptal",
+		"Dashboard": {
+			"Title": "Konsolum"
+		},
+		"DoNotAssent": "Olur Vermiyorum",
+		"DoNotConsent": "Olur Vermiyorum",
+		"DownloadPdf": {
+			"Assent": {
+				"Download": "Küçükler için Tüm Olur Formunu İndir"
+			},
+			"Consent": {
+				"Download": "Tüm Olur Formunu İndir"
+			}
+		},
+		"Institutions": {
+			"Fields": {
+				"City": "İlçe"
+			}
+		},
+		"JoinUsButton": "Bize Katılın",
+		"ManageParticipants": {
+			"ParticipantPlaceholder": "Katılımcı"
+		},
+		"NextButton": "Sonraki",
+		"PreviousButton": "Önceki",
+		"RegisterButton": "Kaydol",
+		"SaveAndSubmit": "Kaydet ve Gönder",
+		"SaveAndSubmitEnrollment": "Kaydet ve Çalışmaya Kaydı Gönder",
+		"SignAndAssent": "İmza ve Olur",
+		"SignAndConsent": "İmza ve Olur",
+		"StartOrResume": "Başla/Devam Et",
+		"UserActivities": {
+			"ActivityActions": "Eylemler",
+			"ActivityStatus": "Durum"
+		},
+		"UserMenu": {
+			"SignOutButton": "Oturumu Kapat"
+		}
+	},
+	"Toolkit": {
+		"AgeUpThankYou": {
+			"EmailCollected": {
+				"TextPt2": "veya"
+			}
+		},
+		"Dashboard": {
+			"Actions": "Eylemler",
+			"AddSelf": "Kendinizi Ekleyin",
+			"EnrollmentStatus": "Kayıt Durumu",
+			"NoData": "---",
+			"NoParticipants": "Henüz katılımcı yok",
+			"Participant": "Katılımcı",
+			"Text": "A-T tanısı konmuş herkes araştırma girişimimize katılabilir. Burada kaydolun ve araştırmacıların A-T durumunu daha iyi anlayabilmesi için tıbbi ve belki de genetik bilginizi paylaşın.",
+			"Title": "Global A-T Aile Veri Platformuna katıldığınız için teşekkür ederiz"
+		},
+		"Dialogs": {
+			"JoinMailingList": {
+				"CancelButton": "İptal",
+				"Fields": {
+					"Email": {
+						"Placeholder": "E-posta adresi"
+					},
+					"FirstName": {
+						"Placeholder": "Adı"
+					},
+					"LastName": {
+						"Placeholder": "Soyadı"
+					}
+				}
+			},
+			"SessionWillExpire": {
+				"Continue": "Devam",
+				"SignOut": "Oturumu Kapat"
+			}
+		},
+		"ErrorPage": {
+			"DefaultText": {
+				"TextPt1": "Sorun yaşamaya devam ederseniz lütfen ",
+				"TextPt2": " site yöneticisiyle irtibat kurun."
+			},
+			"Title": "Üzgünüz ama bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+		}
+	},
+	"WorkflowProgress": {
+		"Consent": "Olur",
+		"ContactingPhysician": "İrtibat Kurulacak Doktor",
+		"GenomeStudy": "Genom Çalışması",
+		"MedicalHistory": "Tıbbi Öykü",
+		"Registration": "Kayıt",
+		"ReviewSubmission": "Gözden Geçir ve Gönder",
+		"Statuses": {
+			"COMPLETE": "Tamamlandı",
+			"CREATED": "Henüz Başlanmadı",
+			"IN_PROGRESS": "İşlemde"
 		}
 	}
 }
