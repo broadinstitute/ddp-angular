@@ -272,7 +272,7 @@
     }
   },
   "Enrollment": {
-    "Title": "Account setup",
+    "Title": "Account set-up",
     "FirstName": {
       "Text": "Subject's First Name",
       "Placeholder": "Enter first name",
