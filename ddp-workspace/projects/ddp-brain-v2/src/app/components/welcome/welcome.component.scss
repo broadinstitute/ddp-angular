@@ -1,0 +1,412 @@
+@import './../../../app-theme.scss';
+
+@mixin block-margin {
+    margin: 5rem auto;
+}
+
+@mixin small-font {
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.introduction-block {
+    margin: 2rem auto 5rem auto;
+}
+
+.introduction {
+    display: flex;
+
+    &__info,
+    &__image {
+        width: 50%;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+        padding-left: 3rem;
+    }
+
+    &__text {
+        margin-right: 5rem;
+    }
+
+    &__cmi {
+        margin-right: 1rem;
+    }
+
+    &__buttons {
+        display: flex;
+        margin: 1.5rem 0;
+    }
+
+    &__examples {
+        margin: 1.5rem 3rem 1.5rem 0;
+        font-size: 16px;
+        line-height: 22px;
+        color: mat-color($app-theme, 450);
+    }
+}
+
+.image {
+    height: auto;
+    max-width: 100%;
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+
+    &__wide {
+        height: 30px;
+        margin-right: 3rem;
+    }
+
+    &__square {
+        height: 60px;
+    }
+}
+
+.about-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.about-block {
+    @include block-margin;
+}
+
+.about {
+    display: flex;
+
+    &__info,
+    &__image {
+        width: 50%;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+        padding-right: 3rem;
+    }
+
+    &__cmi {
+        display: inline-flex;
+        margin: 1rem 0;
+    }
+}
+
+.participation-block {
+    @include block-margin;
+}
+
+.line {
+    display: flex;
+
+    &:first-child {
+        padding: 0 0 3rem 0;
+    }
+
+    &:last-child {
+        padding: 3rem 0 0 0;
+    }
+
+    &_underlined {
+        border-bottom: 1px solid mat-color($app-theme, 600);
+    }
+}
+
+.participation {
+    width: 50%;
+    padding: 0 7rem 0 0;
+
+    &__title {
+        font-size: 1.625rem;
+        line-height: 2rem;
+    }
+}
+
+.step {
+    display: flex;
+    align-items: center;
+
+    &__indicator {
+        display: block;
+        height: 12px;
+        width: 12px;
+        border-radius: 6px;
+        background-color: mat-color($app-theme, 550);
+    }
+
+    &__index {
+        font-family: 'Untitled-Sans-Medium', sans-serif;
+        margin: 0 6px;
+        @include small-font;
+    }
+
+    &__time {
+        margin: 0;
+        @include small-font;
+    }
+}
+
+.learn-more-section {
+    background-color: mat-color($app-theme, 650);
+}
+
+.learn-more-block {
+    margin: 3rem auto;
+}
+
+.learn-more {
+    display: flex;
+    align-items: center;
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-right: 7rem;
+    }
+}
+
+.partners-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.partners-block {
+    @include block-margin;
+}
+
+.partners {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 3rem 0;
+
+    &__link {
+        margin: 0 1rem;
+    }
+
+    &__logo {
+        max-width: 300px;
+        width: 100%;
+    }
+}
+
+.stay-informed-block {
+    @include block-margin;
+}
+
+.stay-informed {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.socials {
+    margin: 0 3rem 10rem 0;
+
+    &__text {
+        margin: 3rem 0 0 0;
+    }
+
+    &__facebook {
+        margin-right: 1rem;
+    }
+}
+
+.twitter {
+    &__title {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    &__link {
+        font-size: 1.125rem;
+        line-height: 2rem;
+    }
+
+    &__feed {
+        overflow: hidden;
+        width: 450px;
+    }
+}
+
+.join-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.join-block {
+    margin: 3rem auto 7rem auto;
+}
+
+.join {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__image {
+        height: auto;
+        width: 100%;
+        max-width: 550px;
+    }
+
+    &__title {
+        margin: 1rem 0;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        line-height: 2.625rem;
+        max-width: 700px;
+        margin-bottom: 4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .introduction {
+        flex-direction: column;
+
+        &__info,
+        &__image {
+            width: 100%;
+        }
+
+        &__image {
+            padding-left: 0;
+            padding-top: 3rem;
+        }
+
+        &__text,
+        &__examples {
+            margin-right: 0;
+        }
+    }
+
+    .about {
+        flex-direction: column-reverse;
+
+        &__info,
+        &__image {
+            width: 100%;
+        }
+
+        &__image {
+            padding-right: 0;
+            padding-top: 3rem;
+        }
+    }
+
+    .participation-title {
+        margin-bottom: 0;
+    }
+
+    .line {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        padding: 0;
+
+        &:first-child,
+        &:last-child {
+            padding: 0;
+        }
+    }
+
+    .participation {
+        width: 100%;
+        padding: 0;
+        margin: 2rem 0 0 0;
+    }
+
+    .learn-more {
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__text {
+            margin-right: 0;
+        }
+    }
+
+    .partners {
+        flex-direction: column;
+        margin: 0;
+
+        &__link {
+            margin: 1rem 0;
+        }
+    }
+
+    .stay-informed {
+        flex-direction: column;
+    }
+
+    .socials {
+        margin: 0 0 2.5rem 0;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .twitter {
+        &__feed {
+            width: auto;
+            height: 300px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logos {
+        &__wide {
+            height: 25px;
+            margin-right: 1rem;
+        }
+
+        &__square {
+            height: 50px;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .introduction {
+        &__buttons {
+            flex-direction: column;
+        }
+
+        &__cmi {
+            margin: 0 0 1.5rem 0;
+        }
+    }
+
+    .logos {
+        &__wide {
+            margin-right: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .logos {
+        display: flex;
+        flex-direction: column;
+
+        &__wide {
+            height: 25px;
+            margin: 0 0 1.5rem 0;
+        }
+
+        &__square {
+            height: 50px;
+        }
+    }
+}

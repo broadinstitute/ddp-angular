@@ -12,7 +12,8 @@ import {
   ActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
-  WorkflowStartActivityRedesignedComponent
+  WorkflowStartActivityRedesignedComponent,
+  PasswordRedesignedComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -105,6 +106,10 @@ const routes: Routes = [
     canActivate: [
       IrbGuard
     ]
+  },
+  {
+    path: 'password',
+    component: PasswordRedesignedComponent
   },
   {
     path: '',

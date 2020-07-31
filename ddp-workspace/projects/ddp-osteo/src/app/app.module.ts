@@ -27,7 +27,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
-import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -137,7 +136,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     FooterComponent,
     GalleryComponent,
-    TwitterTimelineWidgetComponent,
     AboutUsComponent,
     FaqComponent,
     HeaderComponent,

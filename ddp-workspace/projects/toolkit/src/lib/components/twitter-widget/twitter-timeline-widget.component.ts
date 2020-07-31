@@ -1,12 +1,11 @@
 import { Component, ViewChild, ElementRef, Input, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { ScriptLoaderService } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-twitter-timeline-widget',
-  templateUrl: './twitter-timeline-widget.component.html',
-  styleUrls: ['./twitter-timeline-widget.component.scss']
+  selector: 'toolkit-twitter-timeline-widget',
+  template: `<div #twitter></div>`
 })
 export class TwitterTimelineWidgetComponent implements OnInit {
   @Input() private twitterAccountId = this.toolkitConfiguration.twitterAccountId;

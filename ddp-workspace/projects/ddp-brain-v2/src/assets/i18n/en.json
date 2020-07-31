@@ -1,1 +1,183 @@
-{}
+{
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "CMI": "Count Me In",
+            "LearnMore": "Learn More",
+            "ViewFAQ": "View FAQ page",
+            "JoinMailingList": "Join Mailing List"
+        }
+    },
+    "HomePage": {
+        "Introduction": {
+            "Title": "Help transform our understanding of Brain Cancer",
+            "Text": "If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice.",
+            "Examples": "Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and medulloblastoma.",
+            "BroadAlt": "Broad Institute logo",
+            "DanaFarberAlt": "Dana Farber logo",
+            "MinderooAlt": "Minderoo Foundation logo",
+            "BrainAlt": "Brain"
+        },
+        "About": {
+            "Title": "What’s this project about?",
+            "Text1": "The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
+            "Text2": "Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
+            "Text3": {
+                "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
+                "Part2": "visit our site"
+            },
+            "CMIAlt": "Count Me In logo"
+        },
+        "Participation": {
+            "Title": "What does participation look like?",
+            "Survey": [
+                [
+                    {
+                        "Number": "STEP 1",
+                        "Time": "10-15 minutes",
+                        "Title": "Provide Consent",
+                        "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
+                        "LinkText": "Preview the consent form",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 2",
+                        "Time": "5 minutes",
+                        "Title": "Tell us where you’ve been treated",
+                        "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                        "LinkText": "Preview the medical release",
+                        "Link": "#"
+                    }
+                ],
+                [
+                    {
+                        "Number": "STEP 3",
+                        "Time": "10 minutes",
+                        "Title": "Respond to simple surveys",
+                        "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
+                        "LinkText": "Preview the surveys",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 4",
+                        "Time": "10 minutes",
+                        "Title": "Provide a saliva and/or blood sample",
+                        "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.",
+                        "LinkText": "See the kits",
+                        "Link": "#"
+                    }
+                ]
+            ]
+        },
+        "LearnMore": {
+            "Text": "To learn more about participation, eligibility criteria and more"
+        },
+        "Partners": {
+            "Title": "Partners",
+            "Organizations": [
+                [
+                    {
+                        "Website": "https://www.abta.org/",
+                        "Logo": "assets/images/ABTA-logo.png",
+                        "Alt": "American Brain Tumor Association logo"
+                    },
+                    {
+                        "Website": "https://ourbrainbank.org/",
+                        "Logo": "assets/images/OBB-logo.png",
+                        "Alt": "OurBrainBank logo"
+                    },
+                    {
+                        "Website": "https://braintumor.org/",
+                        "Logo": "assets/images/NBTS-logo.png",
+                        "Alt": "National Brain Tumor Society logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://www.oligonation.org/",
+                        "Logo": "assets/images/ON-logo.png",
+                        "Alt": "Oligo Nation logo"
+                    },
+                    {
+                        "Website": "https://www.dragonmaster.org/",
+                        "Logo": "assets/images/DMF-logo.png",
+                        "Alt": "Dragon Master Foundation logo"
+                    },
+                    {
+                        "Website": "http://www.targetcancerfoundation.org/",
+                        "Logo": "assets/images/TCF-logo.png",
+                        "Alt": "Target Cancer Foundation logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://carsonlesliefoundation.org/",
+                        "Logo": "assets/images/CLF-logo.png",
+                        "Alt": "The Carson Leslie Foundation logo"
+                    }
+                ]
+            ],
+            "Text": "For more information on how to become a partner for the Brain Cancer Project, contact the team at"
+        },
+        "StayInformed": {
+            "Title": "Stay informed",
+            "Text1": "Sign up for our mailing list or follow us on social media.",
+            "Text2": "Social",
+            "Facebook": "Facebook",
+            "Twitter": "Twitter",
+            "Text3": "Tweets by"
+        },
+        "Join": {
+            "Title": "Please join us in saying “Count Me In!”",
+            "Text": "With your help, patients and their families can be the driving force behind transformative brain cancer research."
+        }
+    },
+    "Toolkit": {
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email address *",
+                        "Error": "Please enter a valid email address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email confirmation *",
+                        "Error": "Please enter a valid email address"
+                    }
+                },
+                "CancelButton": "Cancel",
+                "SubmitButton": "Join",
+                "Required": "",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        }
+    }
+}
