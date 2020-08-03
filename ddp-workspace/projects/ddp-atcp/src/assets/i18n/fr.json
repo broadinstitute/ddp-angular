@@ -17,9 +17,360 @@
 					"Text": "Cliquez sur Nous rejoindre et créez un compte avec votre nom et votre adresse e-mail. Une fois votre compte créé, vous pourrez vous enregistrer (si vous êtes atteint d’AT) ou enregistrer votre (vos) enfant(s) atteint(s) d’AT comme participants à notre plateforme de données en remplissant un bref formulaire."
 				},
 				{
-					"Name": "Accordez-nous votre autorisation"
+					"Name": "Accordez-nous votre autorisation",
+					"Steps": [
+						"partager un échantillon de salive envoyé par un patient AT à des fins de séquençage du génome ;",
+						"obtenir le dossier médical du patient AT auprès de ses médecins et le transmettre aux chercheurs ;",
+						"partager le dossier médical que vous avez vous-même téléchargé avec des chercheurs ;",
+						"vous contacter au sujet d'études ultérieures."
+					],
+					"Text": "Au cours de l’inscription, nous vous demanderons de remplir un formulaire de consentement autorisant le partage\nanonyme des données avec des chercheurs.\nSi vous le souhaitez, vous pouvez également nous autoriser à :"
+				},
+				{
+					"Name": "Parlez-nous de vous ou de votre enfant",
+					"Text": "Pour participer à cette initiative, vous devrez répondre à quelques questions au sujet de la personne AT, les médecins consultés et ses antécédents médicaux et familiaux. Nous vous inviterons périodiquement à remplir (si vous le souhaitez) des questionnaires supplémentaires à propos de la personne AT (enquêtes créées par des chercheurs qui étudieront vos données afin d’améliorer leur compréhension de l’AT)."
+				},
+				{
+					"Name": "Envoyez-nous un échantillon de salive",
+					"Text": "Si vous choisissez de participer à l’étude de séquençage du génome, vous devrez nous envoyer un échantillon de salive dans un colis préaffranchi que nous vous fournirons."
+				},
+				{
+					"Name": "Nous analyserons l’ADN et les informations médicales",
+					"Text": "Nous analyserons l’ADN des cellules extraites de l’échantillon de salive. Aucune procédure supplémentaire ne sera nécessaire. Nous associerons les résultats de l’analyse génétique de la salive et les renseignements médicaux que vous fournissez à nos questionnaires en ligne."
+				},
+				{
+					"Name": "Nous partagerons les données avec les chercheurs",
+					"Text": "Une fois les informations d’identification potentielle supprimées, la base de données génomiques et médicales sera accessible aux chercheurs du monde entier via un accès contrôlé et sécurisé. Vos données ne seront accessibles qu’aux chercheurs qualifiés ayant reçu l’autorisation du comité d’accès aux données composé de membres de la famille de patients AT, ainsi que de conseillers scientifiques et médicaux.  Nous conserverons la liste de toutes les études utilisant vos informations."
+				},
+				{
+					"Name": "Votre participation continue peut accélérer la recherche",
+					"Text": "Nous vous inviterons périodiquement à remplir des questionnaires élaborés par les chercheurs qui étudieront les données afin d’améliorer leur compréhension de l’AT. Cette plateforme offre une opportunité sans précédent d’obtenir rapidement les réponses à des questions importantes pour la poursuite des recherches directement auprès des familles. La possibilité d’assurer ce suivi avec les participants peut avoir un fort impact sur les recherches et accélérer les découvertes."
+				},
+				{
+					"Name": "Apprenez avec nous",
+					"Text": "Cette combinaison unique d’informations médicales et génétiques peut être la clé du développement de traitements, qui ne serait pas possible sans votre aide. Nous vous tiendrons au courant des efforts de recherche en cours ainsi que des dernières découvertes rendues possibles par votre participation."
 				}
-			]
+			],
+			"SubTitle": "Fonctionnement de la plateforme :",
+			"Text": "<p>La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes.",
+			"Title": "Plateforme de données internationale sur les familles AT"
+		},
+		"Title": "Au sujet de cette initiative"
+	},
+	"AboutPage": {
+		"DataAccess": {
+			"Header": "Comité d’accès aux données",
+			"Text": "Les informations enregistrées sur la plateforme de donnée internationale sur les familles AT ne sont accessibles qu’aux chercheurs qualifiés ayant reçu l’autorisation du comité d’accès aux données. Ce comité est composé de représentants des familles AT recrutés pour le comité de surveillance des familles qui, à son tour, recrute des experts pour le comité consultatif scientifique et médical.  Il veille à ce que le projet de chaque chercheur soit compatible avec les objectifs de cette initiative.  Le comité de surveillance des familles supervisera le comité consultatif scientifique et médical."
+		},
+		"Doctors": [
+			{
+				"Hospital": "Professeur émérite de génétique médicale de l’université de Cambridge, Cambridge, Royaume-Uni et professeur honoraire de la faculté Wellcome Trust Sanger Institute, Hinxton, Royaume-Uni",
+				"Name": "Martin Bobrow",
+				"Rank": "MD"
+			},
+			{
+				"Hospital": "Professeure de génétique médicale de l’université Sapienza, Rome, Italie",
+				"Name": "Luciana Chessa"
+			},
+			{
+				"Hospital": "Directeur médical de pédiatrie de l’hôpital Wesley, Queensland, Australie"
+			},
+			{
+				"Hospital": "Professeure agrégée de l’université fédérale, São Paulo, Brésil"
+			},
+			{
+				"Hospital": "Professeur agrégé de pédiatrie et de neurologie du Johns Hopkins Children Center, Baltimore, MD, États-Unis"
+			},
+			{
+				"Hospital": "Directeur de Google Genomics, Mountain View, CA, États-Unis"
+			},
+			{
+				"Hospital": "Professeure de pédiatrie et de biologie du développement de l’université médicale et dentaire, Tokyo, Japon"
+			},
+			{
+				"Hospital": "Professeur agrégé de l’université de Queensland, Queensland, Australie"
+			},
+			{
+				"Hospital": "Professeur de la fondation d’oncologie moléculaire de l’université de Queensland, Brisbane, Australie"
+			},
+			{
+				"Hospital": "Professeur de pédiatrie du Johns Hopkins Children’s Center, Baltimore, MD, États-Unis"
+			},
+			{
+				"Hospital": "Immuno-hématologie pédiatrique, co-coordinateur du centre de référence français de l’immunodéficience primaire, Hôpital Necker, Paris, France"
+			},
+			{
+				"Hospital": "Neurologue pédiatrique du Sheba Medical Center, Ramat Gan, Israël"
+			},
+			{
+				"Hospital": "Directeur des données du Broad Institute, Cambridge, MA, États-Unis"
+			},
+			{
+				"Hospital": "Centre national pour les maladies rares, Rome, Italie"
+			},
+			{
+				"Hospital": "Coordinatrice scientifique de l’A-T Children’s Project, Coconut Creek, FL, États-Unis"
+			},
+			{
+				"Hospital": "Professeur de génétique humaine de l’université de Tel-Aviv, Ramat Aviv, Israël"
+			},
+			{
+				"Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni"
+			},
+			{
+				"Hospital": "Professeure de génétique de l’université Paris Descartes et chef du service de génétique de l’Institut Marie Curie, Paris, France"
+			},
+			{
+				"Hospital": "Professeur agrégé de l’université médicale et dentaire, Tokyo, Japon"
+			},
+			{
+				"Hospital": "Directrice du projet public de génomique des populations, Montréal, Canada"
+			},
+			{
+				"Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni"
+			},
+			{
+				"Hospital": "Professeur agrégé de clinique de l’université de Nottingham, Nottingham, Royaume-Uni"
+			},
+			{
+				"Hospital": "Hôpital pour enfants de l’université Johann Wolfgang Goethe, Francfort, Allemagne"
+			}
+		],
+		"FamilyOversight": {
+			"Header": "Comité de surveillance des familles",
+			"Text": "La mission de notre plateforme est de permettre aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes. Pour que notre mission et les activités connexes soient toujours parfaitement conformes aux intérêts des personnes atteintes d'AT dans le monde, nous avons créé un comité de surveillance des familles international.  Le comité de surveillance des familles se compose actuellement des proches de patient atteints d'AT suivants (par ordre alphabétique) :"
+		},
+		"FinancialSupport": {
+			"Header": "Soutien financier de la plateforme de données internationale sur les familles AT",
+			"Text": {
+				"First": "Actuellement, le développement et l’exploitation de la plateforme de données internationale sur les familles AT sont entièrement financés par Ataxia-Telangiectasia Children’s Project, Inc., plus connu sous le nom d'AT Children’s Project. Cet organisme à but non lucratif basé à Coconut Creek, en Floride, aux États-Unis, recueille des fonds pour soutenir et coordonner des études biomédicales, des conférences scientifiques et des centres cliniques pour la recherche de traitements améliorant la vie des patients atteints d’AT.",
+				"Second": "Bien qu’AT Children’s Project soit à l'origine de ce projet, nous espérons que les organisations, les cliniciens et les familles AT du monde entier soutiendront cet effort en encourageant la participation des familles, en aidant au contrôle de l’accès aux données et, dans la mesure du possible, en apportant leur soutien financier."
+			}
+		},
+		"Hospitals": [
+			{
+				"Country": "France",
+				"Name": "Cédric Anchisi "
+			},
+			{
+				"Country": "Israël",
+				"Name": "Orly Dror-Azuriel "
+			},
+			{
+				"Country": "Australie",
+				"Name": "Natalie Elkheir "
+			},
+			{
+				"Country": "Pays-Bas",
+				"Name": "Rianne Kranendonk "
+			},
+			{
+				"Country": "Brésil",
+				"Name": "Maria Angelica Lodovici "
+			},
+			{
+				"Country": "États-Unis",
+				"Name": "Brad Margus "
+			},
+			{
+				"Country": "Angleterre",
+				"Name": "Emily Read "
+			},
+			{
+				"Country": "Inde",
+				"Name": "Manoj Kumar Srivastwa "
+			},
+			{
+				"Country": "Canada",
+				"Name": "Conrad Van Hierden "
+			},
+			{
+				"Country": "Espagne",
+				"Name": "Paxti Villen "
+			},
+			{
+				"Country": "Angleterre",
+				"Name": "Lian Yarlett "
+			}
+		],
+		"PageTitle": "À notre sujet",
+		"PlatformName": "Plateforme de données internationale sur les familles AT",
+		"ScientificBoard": {
+			"Header": "Comité consultatif scientifique et médical",
+			"Text": "En plus de s’assurer que les activités de la plateforme promeuvent et favorisent le partage des données tout en protégeant les personnes atteintes d'AT, le comité de surveillance des familles a sélectionné et invité des scientifiques et des cliniciens reconnus à rejoindre le comité consultatif scientifique et médical pour bénéficier de leurs conseils.  Nous espérons que les membres de ce comité consultatif ne comprendront pas seulement des spécialistes du tableau clinique et de la biologie sous-jacente de l’ataxie-télangiectasie, mais également des experts dans l’analyse de gros volumes de données : séquençage du génome, biostatistique, interfaces de programmation d’applications, sécurité des données, questions réglementaires, éthique médicale, affaires juridiques et méthodes d’enquête.  Le comité consultatif scientifique et médical se compose actuellement des experts suivants (par ordre alphabétique) :"
+		},
+		"Text": {
+			"First": " est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT.",
+			"Second": "Nous faisons appel à des partenaires stratégiques pour diverses composantes de cette initiative, notamment le Broad Institute of MIT and Harvard, qui procédera au séquençage du génome. Nous avons également établi un partenariat avec le personnel travaillant dans le cadre du A-T Children’s Project, qui a été formé pour répondre aux questions relatives à cette plateforme et qui enverra les kits de test ADN aux familles qui en font la demande.",
+			"Third": "WNous souhaitons collaborer avec d’autres organisations pour recueillir d’autres types de données biologiques et liées au mode de vie, par exemple grâce à l’utilisation de vêtements intelligents qui permettent de recueillir des informations sur la façon dont une personne atteinte d'AT se déplace."
+		}
+	},
+	"Common": {
+		"Navigation": {
+			"AboutThisInitiative": "Au sujet de cette initiative",
+			"AboutUs": "À notre sujet",
+			"JoinUs": "Nous rejoindre",
+			"Language": "Langue",
+			"LearnMore": "En savoir plus",
+			"MyAccount": "Mon Compte",
+			"Next": "Suivant",
+			"Previous": "Précédent",
+			"SignIn": "Connexion",
+			"YourParticipants": "Vos participants"
+		}
+	},
+	"DataAccess": {
+		"Header": {
+			"Paragraph1": "La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes."
+		},
+		"OrganizationForm": {
+			"Country": "Pays",
+			"State": "État/province"
+		}
+	},
+	"HomePage": {
+		"IntroductionSection": {
+			"Text": {
+				"First": "Si vous ou votre enfant êtes atteints d’AT, vous pouvez être en mesure d’aider les chercheurs à faire de nouvelles découvertes et à accélérer le développement de traitements.",
+				"Second": " Les informations génétiques et la pathologie propres à chaque patient sont uniques et peuvent être la clé du développement thérapeutique. Partagez ces informations, envoyez-nous un échantillon de salive pour le séquençage du génome et accompagnez-nous sur le chemin d’une meilleure connaissance de l’AT."
+			},
+			"Title": "Aidez-nous à mieux comprendre l’ataxie-télangiectasie (AT)."
+		},
+		"Participate": {
+			"Steps": {
+				"Fourth": {
+					"H3": "4. Apprenons ensemble.",
+					"Text": {
+						"First": "Nous vous tiendrons au courant des dernières découvertes rendues possibles par la participation de votre enfant.",
+						"Second": " Si vous le souhaitez, nous pourrons vous contacter par la suite pour vous poser des questions supplémentaires vous concernant ou concernant votre enfant et vous inviter à prendre part à d’autres études."
+					}
+				},
+				"One": {
+					"H2": "Comment participer :",
+					"H3": "1. Créez un compte",
+					"Text": "Cliquez sur Nous rejoindre, puis remplissez un court formulaire pour vous inscrire ou inscrire votre enfant AT sur notre plateforme de données."
+				},
+				"Second": {
+					"H3": "2. Accordez-nous votre autorisation",
+					"Text": "Au cours de l’inscription, nous vous demanderons de remplir un formulaire de consentement autorisant le partage\nanonyme des données avec des chercheurs.\nSi vous le souhaitez, vous pouvez également nous autoriser à :",
+					"Ul": [
+						"partager un échantillon de salive envoyé par un patient AT à des fins de séquençage du génome ;",
+						"obtenir le dossier médical du patient AT auprès de ses médecins et le transmettre aux chercheurs ;",
+						"partager le dossier médical que vous avez vous-même téléchargé avec des chercheurs ;",
+						"vous contacter au sujet d'études ultérieures."
+					]
+				},
+				"Third": {
+					"H3": "3. Faites-nous part de votre expérience et envoyez-nous un échantillon de salive.",
+					"Text": "Remplissez un questionnaire en ligne sur la façon dont l’AT vous affecte ou affecte votre enfant. Nous vous enverrons un kit de prélèvement d’échantillon de salive pour le séquençage du génome. Vous pourrez également actualiser le dossier de vos antécédents médicaux, ainsi que l'expérience dont vous nous avez fait part sur la plateforme."
+				}
+			},
+			"Together": {
+				"H3": {
+					"First": "Ensemble, nous pouvons améliorer la santé des enfants et des jeunes adultes atteints d’AT.",
+					"Second": "Rejoignez-nous dès maintenant !"
+				}
+			}
+		},
+		"SecondSection": {
+			"Title": "Rejoignez-nous et restez informé(e) des dernières découvertes."
+		}
+	},
+	"SDK": {
+		"CancelButton": "Annuler",
+		"Dashboard": {
+			"Title": "Ma console"
+		},
+		"DoNotAssent": "Ne donne pas mon assentiment",
+		"DoNotConsent": "Ne donne pas mon consentement",
+		"DownloadPdf": {
+			"Assent": {
+				"Download": "Télécharger le formulaire d’assentiment complet"
+			},
+			"Consent": {
+				"Download": "Télécharger le formulaire de consentement complet"
+			}
+		},
+		"Institutions": {
+			"Fields": {
+				"City": "Ville"
+			}
+		},
+		"JoinUsButton": "Nous rejoindre",
+		"ManageParticipants": {
+			"ParticipantPlaceholder": "Participant"
+		},
+		"NextButton": "Suivant",
+		"PreviousButton": "Précédent",
+		"RegisterButton": "S’enregistrer",
+		"SaveAndSubmit": "Enregistrer et soumettre",
+		"SaveAndSubmitEnrollment": "Enregistrer et soumettre l’inscription",
+		"SignAndAssent": "Signature et assentiment",
+		"SignAndConsent": "Signature et consentement",
+		"StartOrResume": "Commencer/reprendre",
+		"UserActivities": {
+			"ActivityActions": "Actions",
+			"ActivityStatus": "Statut"
+		},
+		"UserMenu": {
+			"SignOutButton": "Déconnexion"
+		}
+	},
+	"Toolkit": {
+		"AgeUpThankYou": {
+			"EmailCollected": {
+				"TextPt2": "ou"
+			}
+		},
+		"Dashboard": {
+			"Actions": "Actions",
+			"AddSelf": "S’ajouter soi-même",
+			"EnrollmentStatus": "État de l’inscription",
+			"NoData": "---",
+			"NoParticipants": "Aucun participant",
+			"Participant": "Participant",
+			"Text": "Toute personne diagnostiquée d'une AT peut participer à notre initiative de recherche. Inscrivez-vous et partager vos informations médicales, et peut-être génétiques, afin que les chercheurs puissent mieux comprendre l’AT.",
+			"Title": "Nous vous remercions de rejoindre la plateforme globale de données sur les familles AT."
+		},
+		"Dialogs": {
+			"JoinMailingList": {
+				"CancelButton": "Annuler",
+				"Fields": {
+					"Email": {
+						"Placeholder": "Adresse e-mail"
+					},
+					"FirstName": {
+						"Placeholder": "Prénom"
+					},
+					"LastName": {
+						"Placeholder": "Nom"
+					}
+				}
+			},
+			"SessionWillExpire": {
+				"Continue": "Continuer",
+				"SignOut": "Déconnexion"
+			}
+		},
+		"ErrorPage": {
+			"DefaultText": {
+				"TextPt1": "Veuillez contacter l’",
+				"TextPt2": " en cas de problème."
+			},
+			"Title": "Une erreur est survenue. Veuillez réessayer plus tard."
+		}
+	},
+	"WorkflowProgress": {
+		"Consent": "Consentement",
+		"ContactingPhysician": "Médecin à contacter",
+		"GenomeStudy": "Étude du génome",
+		"MedicalHistory": "Antécédents médicaux",
+		"Registration": "Enregistrement",
+		"ReviewSubmission": "Examen et soumission",
+		"Statuses": {
+			"COMPLETE": "Rempli",
+			"CREATED": "Non commencé",
+			"IN_PROGRESS": "En cours"
 		}
 	}
 }
