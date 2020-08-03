@@ -787,6 +787,7 @@
     function (e) {
         e.preventDefault();
         webAuth.authorize({
+            state: config.extraParams.state,
             redirectUri: callbackURL,
             connection: 'google-oauth2',
         }, (/**
@@ -801,10 +802,8 @@
     function (e) {
         e.preventDefault();
         webAuth.authorize({
+            state: config.extraParams.state,
             redirectUri: callbackURL,
-            mode: config.internalOptions.mode,
-            studyGuid: config.internalOptions.study_guid,
-            tempUserGuid: config.extraParams.temp_user_guid,
             connection: 'google-oauth2'
         }, (/**
          * @return {?}
