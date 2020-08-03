@@ -8,7 +8,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
   selector: 'ddp-cookies-preferences-modal',
   template: `
     <div class="cookiesModal cookiesModal--header">
-      <img class="cookiesModal--logo" lazy-resource src="/assets/images/project-logo-dark.svg"
+      <img class="cookiesModal--logo" lazy-resource
+           [src]="this.data.logo"
            [attr.alt]="'SDK.Common.LogoAlt' | translate">
       <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
@@ -24,7 +25,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
         <!-- Create tabs for all cookie types -->
 
-        <mat-tab *ngFor="let cookie of data.cookies" [label]="'SDK.CookiesModal.' + cookie.type | translate">
+        <mat-tab *ngFor="let cookie of data.cookies.cookies" [label]="'SDK.CookiesModal.' + cookie.type | translate">
           <section>
             <div class="cookiesModal--tabHeader">
               <h4 translate>{{ 'SDK.CookiesModal.' + cookie.type }}</h4>
@@ -83,7 +84,7 @@ export class CookiesPreferencesModalComponent {
 
   constructor(public dialogRef: MatDialogRef<CookiesPreferencesModalComponent>,
               public dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) public data: Cookies) {
+              @Inject(MAT_DIALOG_DATA) public data) {
   }
 
   close(): void {
@@ -97,7 +98,7 @@ export class CookiesPreferencesModalComponent {
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: {},
+      data: this.data.logo,
       autoFocus: false,
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigurationService } from '../../../services/configuration.service';
@@ -31,6 +31,8 @@ import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal
   </div>`
 })
 export class CookiesBannerComponent {
+  @Input() logoSrc: string;
+
   constructor(private cookiesService: CookiesManagementService,
               public dialog: MatDialog,
               @Inject('ddp.config') private configuration: ConfigurationService) {
@@ -47,7 +49,7 @@ export class CookiesBannerComponent {
   openPreferences(): void {
     this.dialog.open(CookiesPreferencesModalComponent, {
       width: '740px',
-      data: this.configuration.cookies,
+      data: { cookies: this.configuration.cookies, logo: this.logoSrc },
       autoFocus: false,
       disableClose: true,
       scrollStrategy: new NoopScrollStrategy()
@@ -57,7 +59,7 @@ export class CookiesBannerComponent {
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: {},
+      data: this.logoSrc,
       autoFocus: false,
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
