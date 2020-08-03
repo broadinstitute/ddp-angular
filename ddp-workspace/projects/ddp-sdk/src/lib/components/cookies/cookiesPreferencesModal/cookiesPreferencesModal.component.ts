@@ -30,9 +30,14 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
             <div class="cookiesModal--tabHeader">
               <h4 translate>{{ 'SDK.CookiesModal.' + cookie.type }}</h4>
               <div  class="cookiesModal--tabActions">
-                <mat-radio-group *ngIf="cookie.actions" aria-label="Select an option">
-                  <mat-radio-button value="Accept"><span translate>SDK.CookiesModal.Accept</span></mat-radio-button>
-                  <mat-radio-button value="Reject"><span translate>SDK.CookiesModal.Reject</span></mat-radio-button>
+                <mat-radio-group *ngIf="cookie.actions" aria-label="Select an option"
+                                 (change)="this.onChange(cookie.type, $event.value)">
+                  <mat-radio-button value="Accept" checked>
+                    <span translate>SDK.CookiesModal.Accept</span>
+                  </mat-radio-button>
+                  <mat-radio-button value="Reject">
+                    <span translate>SDK.CookiesModal.Reject</span>
+                  </mat-radio-button>
                 </mat-radio-group>
                 <p *ngIf="!cookie.actions" translate>SDK.CookiesModal.AlwaysOn</p>
               </div>
@@ -103,5 +108,8 @@ export class CookiesPreferencesModalComponent {
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
     });
+  }
+
+  onChange(cookieType, value): void {
   }
 }
