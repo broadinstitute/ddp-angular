@@ -32,12 +32,12 @@
             </ul>
         </nav>
         <div class="side-menu">
-            <ng-container *ngIf="isAuthenticated && headerConfig.showDashboardButton">
+            <ng-container *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </ng-container>
             <ddp-sign-in-out *ngIf="headerConfig.showLoginButton" class="side-menu__auth"></ddp-sign-in-out>
             <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" [routerLink]="'/' + appRoutes.CountMeIn"
-                class="button button_small button_primary regular" translate>Common.Buttons.CMI</a>
+                class="button button_small button_primary regular cmi" translate>Common.Buttons.CMI</a>
         </div>
         <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
@@ -85,7 +85,7 @@
                     Navigation.Data
                 </a>
             </li>
-            <li *ngIf="isAuthenticated && headerConfig.showDashboardButton" class="menu__item menu__item_dashboard">
+            <li *ngIf="isAuthenticated" class="menu__item menu__item_dashboard">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
             </li>
             <li *ngIf="headerConfig.showLoginButton" class="menu__item menu__item_auth">

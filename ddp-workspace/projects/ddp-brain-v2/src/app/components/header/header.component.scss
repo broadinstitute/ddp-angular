@@ -76,7 +76,7 @@
     }
 
     &_active {
-        font-family: 'Untitled-Sans-Regular', sans-serif;
+        font-family: 'Untitled-Sans-Medium', sans-serif;
     }
 }
 
@@ -95,8 +95,6 @@
 }
 
 .menu-button {
-    margin-left: 2.5rem;
-
     &__button {
         display: flex;
         align-items: center;
@@ -216,6 +214,10 @@
 
     .menu-button {
         display: block;
+    }
+
+    .cmi {
+        margin-right: 2.5rem;
     }
 }
 
