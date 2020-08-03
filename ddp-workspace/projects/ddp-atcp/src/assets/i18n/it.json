@@ -17,9 +17,359 @@
 					"Text": "Fai clic su Unisciti a noi e crea un account con il tuo nome e il tuo indirizzo di posta elettronica. Dopo aver creato il tuo account, potrai registrarti (se sei affetto/a da A-T) o registrare tuo/a figlio/a o i tuoi figli affetti da A-T come partecipanti nella nostra piattaforma di dati, compilando un breve modulo."
 				},
 				{
-					"Name": "Forniscici la tua autorizzazione"
+					"Name": "Forniscici la tua autorizzazione",
+					"Steps": [
+						"condividere un campione di saliva che ogni paziente affetto da A-T può inviarci per il sequenziamento del suo genoma",
+						"ottenere la documentazione clinica del paziente affetto da A-T dal suo medico e condividerla con i ricercatori",
+						"condividere con i ricercatori la documentazione clinica che tu stesso/a hai caricato",
+						"contattarti in futuro in relazione a ulteriori studi di ricerca"
+					],
+					"Text": "Durante il processo di registrazione, ti chiederemo di compilare un modulo di consenso che ci autorizzi a condividere\ni dati che ci fornisci con i ricercatori in un modo che non permetterà di risalire alla tua identità.\nSe lo desideri, potrai anche autorizzarci a:"
+				},
+				{
+					"Name": "Forniscici informazioni su di te o su tuo/a figlio/a",
+					"Text": "Per partecipare a questa iniziativa, dovrai rispondere ad alcune domande sullo stato di salute della persona affetta da A-T, sui medici che l'hanno seguita e sulla sua storia clinica e familiare. Periodicamente, ti chiederemo di completare ulteriori questionari (opzionali) sulla malattia della persona affetta da A-T (questionari creati da ricercatori che studieranno i tuoi dati per migliorare le loro conoscenze sull'A-T)."
+				},
+				{
+					"Name": "Inviaci un kit con la tua saliva",
+					"Text": "Se decidi di partecipare allo studio di sequenziamento del genoma, dovrai inviarci un campione di saliva in un pacco preaffrancato che ti forniremo."
+				},
+				{
+					"Name": "Analizzeremo il DNA e le informazioni sanitarie",
+					"Text": "Analizzeremo il DNA presente nelle cellule ottenute dal campione di saliva. Non saranno necessarie ulteriori procedure. Collegheremo i risultati dell'analisi genetica eseguita sulla tua saliva e le informazioni cliniche che ci avrai fornito nei questionari online."
+				},
+				{
+					"Name": "Condivideremo i dati con i ricercatori",
+					"Text": "Una volta eliminate le informazioni che potrebbero permettere di risalire alla tua identità, il database di informazioni sanitarie e dati genomici sarà reso disponibile a ricercatori di tutto il mondo attraverso un archivio dati protetto, ad accesso controllato. Ai tuoi dati potranno accedere soltanto ricercatori qualificati che hanno ricevuto apposita autorizzazione da un comitato per l'accesso ai dati costituito da membri di famiglie con A-T e da consulenti scientifici e medici.  Sarà tenuta traccia di ogni studio in cui sono state utilizzate le tue informazioni."
+				},
+				{
+					"Name": "Il tuo contributo continuo può accelerare la ricerca",
+					"Text": "Periodicamente, ti inviteremo a rispondere a questionari sviluppati da ricercatori che stanno studiando i dati per comprendere meglio l'A-T. Attraverso questa piattaforma, avremo un'opportunità senza precedenti di ottenere direttamente dalle famiglie risposte rapide ad altre domande importanti durante il prosieguo della ricerca. La nostra capacità di continuare a interpellare i partecipanti può avere un impatto significativo sulla ricerca e accorciare il cammino da percorrere per compiere nuove scoperte."
+				},
+				{
+					"Name": "Impara con noi lungo la strada",
+					"Text": "Questa combinazione unica di informazioni sanitarie e dati genetici può essere la chiave per lo sviluppo di terapie, che non sarebbe possibile senza il tuo aiuto. Non mancheremo di mantenerti aggiornato/a sullo stato dei nostri sforzi e sulle ultime scoperte rese possibili dalla tua partecipazione."
 				}
-			]
+			],
+			"SubTitle": "Ecco come funziona la piattaforma:",
+			"Text": "La Piattaforma globale di dati sulle famiglie con A-T è uno sforzo incentrato sui pazienti e supervisionato da famiglie con A-T e da specialisti di tutto il mondo attraverso il quale è possibile condividere con i ricercatori informazioni sanitarie, dati genetici ed eventualmente dati di altro tipo sulle persone affette da A-T. Questa piattaforma permetterà ai ricercatori di accedere in modo rapido, sicuro ed efficiente da tutto il mondo a dati importanti dei pazienti, con la speranza che ciò possa condurre a nuove scoperte.",
+			"Title": "La Piattaforma globale di dati sulle famiglie con A-T"
+		},
+		"Title": "Informazioni su questa iniziativa"
+	},
+	"AboutPage": {
+		"DataAccess": {
+			"Header": "Comitato per l'accesso ai dati",
+			"Text": "Alle informazioni presenti sulla Piattaforma globale di dati sulle famiglie con A-T possono accedere soltanto ricercatori qualificati che hanno ricevuto apposita autorizzazione dal Comitato per l'accesso ai dati. Questo comitato è composto da rappresentanti delle famiglie con A-T reclutati per il nostro Comitato familiare di supervisione, che a loro volta reclutano specialisti per il nostro Comitato consultivo scientifico e medico;“ in tal modo viene garantito che il progetto di ciascun ricercatore sia coerente con le finalità di questa iniziativa.  Il Comitato familiare di supervisione ha compiti di supervisione sull'attività del Comitato consultivo scientifico e medico."
+		},
+		"Doctors": [
+			{
+				"Hospital": "Professore emerito di Genetica medica –“ Università di Cambridge, Cambridge, Regno Unito e Docente onorario, Wellcome Trust Sanger Institute, Hinxton, Regno Unito",
+				"Name": "Martin Bobrow",
+				"Rank": "MD"
+			},
+			{
+				"Hospital": "Professore di Genetica medica, Università La Sapienza, Roma, Italia",
+				"Name": "Luciana Chessa"
+			},
+			{
+				"Hospital": "Direttore medico del Dipartimento di Pediatria, Wesley Hospital, Queensland, Australia"
+			},
+			{
+				"Hospital": "Professore associato, Università Federale, San Paolo, Brasile"
+			},
+			{
+				"Hospital": "Professore associato di Pediatria e Neurologia, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti"
+			},
+			{
+				"Hospital": "Direttore, Google Genomics, Mountain View, CA, Stati Uniti"
+			},
+			{
+				"Hospital": "Pediatria e Biologia dello sviluppo, Università di Medicina e Odontoiatria di Tokyo, Giappone"
+			},
+			{
+				"Hospital": "Professore associato, Università del Queensland, Queensland, Australia"
+			},
+			{
+				"Hospital": "Professore fondatore di Oncologia molecolare, Università del Queensland, Brisbane, Australia"
+			},
+			{
+				"Hospital": "Professore di Pediatria, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti"
+			},
+			{
+				"Hospital": "Immunoematologia pediatrica, Coordinatore del Centro di riferimento francese per i deficit immunitari ereditari, Ospedale Necker, Parigi, Francia"
+			},
+			{
+				"Hospital": "Neurologo pediatrico, Sheba Medical Center, Ramat Gan, Israele"
+			},
+			{
+				"Hospital": "Responsabile dati aziendali, Broad Institute, Cambridge, MA, Stati Uniti"
+			},
+			{
+				"Hospital": "Centro Nazionale Malattie Rare, Roma, Italia"
+			},
+			{
+				"Hospital": "Coordinatore scientifico, A-T Children's Project, Coconut Creek, FL, Stati Uniti"
+			},
+			{
+				"Hospital": "Professore di Genetica umana, Università di Tel Aviv, Ramat Aviv, Israele"
+			},
+			{
+				"Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito"
+			},
+			{
+				"Hospital": "Professore di Genetica, Università Paris Descartes e Direttore del Dipartimento di Genetica, Institut Curie, Parigi, Francia"
+			},
+			{
+				"Hospital": "Professore associato, Università di Medicina e Odontoiatria di Tokyo, Tokyo, Giappone"
+			},
+			{
+				"Hospital": "Direttore esecutivo, Public Population Project in Genomics and Society, Montreal, Canada"
+			},
+			{
+				"Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito"
+			},
+			{
+				"Hospital": "Professore associato clinico, Università di Nottingham, Nottingham, Regno Unito"
+			},
+			{
+				"Hospital": "Ospedale pediatrico dell'Università Johann Wolfgang Goethe, Francoforte, Germania"
+			}
+		],
+		"FamilyOversight": {
+			"Header": "Comitato familiare di supervisione",
+			"Text": "La missione della nostra piattaforma è permettere ai ricercatori di accedere in modo rapido, sicuro ed efficiente da tutto il mondo a dati importanti dei pazienti, con la speranza che ciò possa condurre a nuove scoperte. Per garantire che la nostra missione e le nostre attività siano sempre in linea con ciò che è meglio per le persone affette da A-T in tutto il mondo, abbiamo istituito un Comitato familiare internazionale di supervisione.  Attualmente, i seguenti familiari di pazienti affetti da A-T (elencati in ordine alfabetico) hanno gentilmente accettato di far parte di questo comitato:"
+		},
+		"FinancialSupport": {
+			"Header": "Supporto finanziario della Piattaforma globale di dati sulle famiglie con A-T",
+			"Text": {
+				"First": "Attualmente, il supporto finanziario per lo sviluppo e il funzionamento della Piattaforma globale di dati sulle famiglie con A-T è assicurato soltanto da Ataxia-Telangiectasia Children's Project, Inc., meglio conosciuta come A­T Children's Project, che è un'organizzazione senza scopo di lucro con sede a Coconut Creek, Florida, Stati Uniti, e che raccoglie fondi per sostenere e coordinare progetti di ricerca biomedica, conferenze scientifiche e centri clinici con l'obiettivo di individuare terapie in grado di migliorare la vita delle persone affette da A-T.",
+				"Second": "Benché questo progetto sia stato iniziato dall'A-T Children’s Project, la speranza è che famiglie, medici e organizzazioni che si occupano di A-T in tutto il mondo sostengano questo impegno promuovendo la partecipazione delle famiglie, aiutando nella supervisione dell'accesso ai dati e, laddove possibile, fornendo supporto finanziario."
+			}
+		},
+		"Hospitals": [
+			{
+				"Country": "Francia",
+				"Name": "Cedric Anchisi "
+			},
+			{
+				"Country": "Israele",
+				"Name": "Orly Dror-Azuriel "
+			},
+			{
+				"Country": "Australia",
+				"Name": "Natalie Elkheir "
+			},
+			{
+				"Country": "Paesi Bassi",
+				"Name": "Rianne Kranendonk "
+			},
+			{
+				"Country": "Brasile",
+				"Name": "Maria Angelica Lodovici "
+			},
+			{
+				"Country": "Stati Uniti",
+				"Name": "Brad Margus "
+			},
+			{
+				"Country": "Inghilterra",
+				"Name": "Emily Read "
+			},
+			{
+				"Country": "India",
+				"Name": "Manoj Kumar Srivastwa "
+			},
+			{
+				"Country": "Canada",
+				"Name": "Conrad Van Hierden "
+			},
+			{
+				"Country": "Spagna",
+				"Name": "Paxti Villen "
+			},
+			{
+				"Country": "Inghilterra",
+				"Name": "Lian Yarlett "
+			}
+		],
+		"PageTitle": "Chi siamo",
+		"PlatformName": "La Piattaforma globale di dati sulle famiglie con A-T",
+		"ScientificBoard": {
+			"Header": "Comitato consultivo scientifico e medico",
+			"Text": "Oltre a garantire che le attività della piattaforma consentano e promuovano la condivisione di dati, proteggendo nel contempo le persone affette da A-T, il Comitato familiare di supervisione ha selezionato e invitato stimati scienziati e medici a far parte di un Comitato consultivo scientifico e medico, che fornirà consulenza specialistica al Comitato familiare di supervisione.  La speranza è che i membri di questo comitato consultivo non includano soltanto specialisti in materia di manifestazioni cliniche e meccanismi biologici alla base dell'atassia-teleangectasia, ma anche esperti nell'analisi di ampi set di dati come quelli derivanti dal sequenziamento del genoma, esperti di biostatistica, di interfacce di programmazione di applicazioni, di protezione dei dati, di problemi normativi, di etica medica, di questioni legali e di metodologie di indagine.  Attualmente, i seguenti specialisti (elencati in ordine alfabetico) si sono generosamente offerti di far parte di questo comitato consultivo:"
+		},
+		"Text": {
+			"First": " è uno sforzo incentrato sui pazienti e supervisionato da famiglie con A-T e da specialisti di tutto il mondo attraverso il quale è possibile condividere con i ricercatori informazioni sanitarie, genetiche ed eventualmente di altro tipo sulle persone affette da A-T.",
+			"Second": "Stiamo selezionando partner strategici per varie componenti di questa iniziativa, uno dei quali è il Broad Institute del MIT e dell'Università di Harvard, che ci fornirà il servizio di sequenziamento del genoma. Stiamo anche collaborando con il personale che lavora all'A-T Children's Project (Progetto per i bambini con A-T), che è stato addestrato a rispondere a domande relative a questa piattaforma e può inviare i kit per eseguire il test del DNA alle famiglie che ne fanno richiesta.",
+			"Third": "WCi auguriamo che in futuro la Piattaforma globale di dati sulle famiglie con A-T possa collaborare con altre organizzazioni al fine di raccogliere altri tipi di dati biologici e sullo stile di vita, utilizzando ad esempio tecnologie indossabili per acquisire informazioni su come si muovono le persone affette da A-T."
+		}
+	},
+	"Common": {
+		"Navigation": {
+			"AboutThisInitiative": "Informazioni su questa iniziativa",
+			"AboutUs": "Chi siamo",
+			"JoinUs": "Unisciti a noi",
+			"Language": "Lingua",
+			"LearnMore": "Per saperne di più",
+			"MyAccount": "Il Mio Account",
+			"Next": "Avanti",
+			"Previous": "Indietro",
+			"SignIn": "Accedi",
+			"YourParticipants": "I tuoi partecipanti"
+		}
+	},
+	"DataAccess": {
+		"Header": {
+			"Paragraph1": "La Piattaforma globale di dati sulle famiglie con A-T è uno sforzo incentrato sui pazienti e supervisionato da famiglie con A-T e da specialisti di tutto il mondo attraverso il quale è possibile condividere con i ricercatori informazioni sanitarie, dati genetici ed eventualmente dati di altro tipo sulle persone affette da A-T. Questa piattaforma permetterà ai ricercatori di accedere in modo rapido, sicuro ed efficiente da tutto il mondo a dati importanti dei pazienti, con la speranza che ciò possa condurre a nuove scoperte."
+		},
+		"OrganizationForm": {
+			"Country": "Paese",
+			"State": "Stato/Provincia"
+		}
+	},
+	"HomePage": {
+		"IntroductionSection": {
+			"Text": {
+				"First": "Se tu o tuo/a figlio/a siete affetti da A-T, potreste essere in grado di aiutare i ricercatori a compiere nuove scoperte e ad accelerare lo sviluppo di terapie.",
+				"Second": " La malattia e i dati genetici di ciascun paziente sono unici e potrebbero essere la chiave per lo sviluppo di trattamenti. Condividi queste informazioni, inviaci un campione di saliva per il sequenziamento del genoma e unisciti a noi in questo cammino per conoscere meglio l'A-T."
+			},
+			"Title": "Aiuta a trasformare le nostre conoscenze sull'atassia-teleangectasia (A-T)."
+		},
+		"Participate": {
+			"Steps": {
+				"Fourth": {
+					"H3": "4. Impariamo insieme",
+					"Text": {
+						"First": "Ti manterremo aggiornato/a sulle ultime scoperte rese possibili dalla tua partecipazione.",
+						"Second": " Inoltre, se sei d'accordo, potremmo contattarti in futuro per farti ulteriori domande sulle tue esperienze o su quelle di tuo/a figlio/a e per invitarti a partecipare a ulteriori studi eseguiti in futuro."
+					}
+				},
+				"One": {
+					"H2": "Come partecipare:",
+					"H3": "1. Crea un account",
+					"Text": "Fai clic su Unisciti a noi e compila un breve modulo per registrarti o per registrare tuo/a figlio/a affetto da A-T nella nostra piattaforma di dati."
+				},
+				"Second": {
+					"H3": "2. Forniscici la tua autorizzazione",
+					"Text": "Durante il processo di registrazione, ti chiederemo di compilare un modulo di consenso che ci autorizzi a condividere\ni dati che ci fornisci con i ricercatori in un modo che non permetterà di risalire alla tua identità.\nSe lo desideri, potrai anche autorizzarci a:",
+					"Ul": [
+						"condividere un campione di saliva che ogni paziente affetto da A-T può inviarci per il sequenziamento del suo genoma",
+						"ottenere la documentazione clinica del paziente affetto da A-T dal suo medico e condividerla con i ricercatori",
+						"condividere con i ricercatori la documentazione clinica che tu stesso/a hai caricato",
+						"contattarti in futuro in relazione a ulteriori studi di ricerca"
+					]
+				},
+				"Third": {
+					"H3": "3. Condividi la tua esperienza e un campione di saliva",
+					"Text": "Compila un questionario online sul modo in cui l'A-T influisce sulla tua vita o su quella di tuo/a figlio/a. Ti invieremo anche un kit per la raccolta di un campione di saliva per il sequenziamento del genoma. Inoltre, potrai aggiornare periodicamente la documentazione relativa alla tua storia clinica e le esperienze che hai condiviso con la piattaforma."
+				}
+			},
+			"Together": {
+				"H3": {
+					"First": "Insieme, abbiamo la possibilità di migliorare la salute dei bambini e dei giovani adulti affetti da A-T.",
+					"Second": "Inizia subito!"
+				}
+			}
+		},
+		"SecondSection": {
+			"Title": "Unisciti a noi in questa ricerca e mantieniti informato/a sulle ultime scoperte."
+		}
+	},
+	"SDK": {
+		"CancelButton": "Annulla",
+		"Dashboard": {
+			"Title": "La mia console"
+		},
+		"DoNotAssent": "Non rilascio l'assenso",
+		"DoNotConsent": "Non rilascio il consenso",
+		"DownloadPdf": {
+			"Assent": {
+				"Download": "Scarica la versione integrale del modulo di assenso"
+			},
+			"Consent": {
+				"Download": "Scarica la versione integrale del modulo di consenso"
+			}
+		},
+		"Institutions": {
+			"Fields": {
+				"City": "Città"
+			}
+		},
+		"JoinUsButton": "Unisciti a noi",
+		"ManageParticipants": {
+			"ParticipantPlaceholder": "Partecipante"
+		},
+		"NextButton": "Avanti",
+		"PreviousButton": "Indietro",
+		"RegisterButton": "Registra",
+		"SaveAndSubmit": "Salva e invia",
+		"SaveAndSubmitEnrollment": "Salva e invia arruolamento",
+		"SignAndAssent": "Firma e assenso",
+		"SignAndConsent": "Firma e consenso",
+		"StartOrResume": "Inizia/Riprendi",
+		"UserActivities": {
+			"ActivityActions": "Azioni",
+			"ActivityStatus": "Stato"
+		},
+		"UserMenu": {
+			"SignOutButton": "Disconnetti"
+		}
+	},
+	"Toolkit": {
+		"AgeUpThankYou": {
+			"EmailCollected": {
+				"TextPt2": "oppure"
+			}
+		},
+		"Dashboard": {
+			"Actions": "Azioni",
+			"AddSelf": "Aggiungi te stesso/a",
+			"EnrollmentStatus": "Stato dell'arruolamento",
+			"NoData": "---",
+			"NoParticipants": "Non esiste ancora nessun partecipante",
+			"Participant": "Partecipante",
+			"Text": "Alla nostra iniziativa di ricerca possono partecipare tutte le persone a cui è stata diagnosticata l'A-T. Arruolati qui e condividi le tue informazioni cliniche e possibilmente i tuoi dati genetici per permettere ai ricercatori di comprendere meglio l'A-T.",
+			"Title": "Grazie per esserti registrato/a nella Piattaforma globale di dati sulle famiglie con A-T!"
+		},
+		"Dialogs": {
+			"JoinMailingList": {
+				"CancelButton": "Annulla",
+				"Fields": {
+					"Email": {
+						"Placeholder": "Indirizzo di posta elettronica"
+					},
+					"FirstName": {
+						"Placeholder": "Nome"
+					},
+					"LastName": {
+						"Placeholder": "Cognome"
+					}
+				}
+			},
+			"SessionWillExpire": {
+				"Continue": "Continua",
+				"SignOut": "Disconnetti"
+			}
+		},
+		"ErrorPage": {
+			"DefaultText": {
+				"TextPt1": "Se i problemi persistono, contatta l'"
+			},
+			"Title": "Siamo spiacenti, si è verificato un errore. Riprova più tardi."
+		}
+	},
+	"WorkflowProgress": {
+		"Consent": "Consenso",
+		"ContactingPhysician": "Informazioni per contattare il medico",
+		"GenomeStudy": "Studio sul genoma",
+		"MedicalHistory": "Storia clinica",
+		"Registration": "Registrazione",
+		"ReviewSubmission": "Revisione e invio",
+		"Statuses": {
+			"COMPLETE": "Completato",
+			"CREATED": "Non iniziato",
+			"IN_PROGRESS": "In corso"
 		}
 	}
 }
