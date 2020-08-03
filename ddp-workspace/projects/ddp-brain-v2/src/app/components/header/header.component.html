@@ -1,0 +1,125 @@
+<header class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
+    <div class="header-content">
+        <a class="project-logo" routerLink="/">
+            <img class="project-logo__img" src="assets/images/logo-brain.svg" [alt]="'Header.Logo.Alt' | translate">
+            <p class="project-logo__text" [innerHTML]="'Header.Logo.Title' | translate"></p>
+        </a>
+        <nav class="nav">
+            <ul class="navigation">
+                <li class="navigation__item">
+                    <a class="header-link" [routerLink]="'/' + appRoutes.MoreDetails"
+                        routerLinkActive="header-link_active" translate>
+                        Navigation.FAQs
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" [routerLink]="'/' + appRoutes.AboutUs" routerLinkActive="header-link_active"
+                        translate>
+                        Navigation.AboutUs
+                    </a>
+                </li>
+                <li class="navigation__item">
+                    <button class="simple-button" (click)="openJoinMailingList()" translate>
+                        Navigation.MailingList
+                    </button>
+                </li>
+                <li class="navigation__item">
+                    <a class="header-link" [routerLink]="'/' + appRoutes.Data" routerLinkActive="header-link_active"
+                        translate>
+                        Navigation.Data
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="side-menu">
+            <ng-container *ngIf="isAuthenticated && headerConfig.showDashboardButton">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </ng-container>
+            <ddp-sign-in-out *ngIf="headerConfig.showLoginButton" class="side-menu__auth"></ddp-sign-in-out>
+            <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" [routerLink]="'/' + appRoutes.CountMeIn"
+                class="button button_small button_primary regular" translate>Common.Buttons.CMI</a>
+        </div>
+        <div class="menu-button">
+            <ng-container *ngIf="!isMenuOpened">
+                <button class="simple-button menu-button__button" (click)="openMenu()">
+                    <div class="lines">
+                        <span class="lines__item"></span>
+                        <span class="lines__item"></span>
+                        <span class="lines__item"></span>
+                    </div>
+                    {{'Navigation.Menu' | translate}}
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isMenuOpened">
+                <button class="simple-button menu-button__close" mat-icon-button (click)="closeMenu()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</header>
+
+<div #overlay class="overlay">
+    <nav class="overlay-content">
+        <ul #menu class="menu">
+            <li class="menu__item">
+                <a class="header-link" [routerLink]="'/' + appRoutes.MoreDetails" (click)="closeMenu()"
+                    routerLinkActive="header-link_active" translate>
+                    Navigation.FAQs
+                </a>
+            </li>
+            <li class="menu__item">
+                <a class="header-link" [routerLink]="'/' + appRoutes.AboutUs" (click)="closeMenu()"
+                    routerLinkActive="header-link_active" translate>
+                    Navigation.AboutUs
+                </a>
+            </li>
+            <li class="menu__item">
+                <button class="simple-button" (click)="openJoinMailingList()" translate>
+                    Navigation.MailingList
+                </button>
+            </li>
+            <li class="menu__item">
+                <a class="header-link" [routerLink]="'/' + appRoutes.Data" (click)="closeMenu()"
+                    routerLinkActive="header-link_active" translate>
+                    Navigation.Data
+                </a>
+            </li>
+            <li *ngIf="isAuthenticated && headerConfig.showDashboardButton" class="menu__item menu__item_dashboard">
+                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+            </li>
+            <li *ngIf="headerConfig.showLoginButton" class="menu__item menu__item_auth">
+                <ddp-sign-in-out></ddp-sign-in-out>
+            </li>
+            <li *ngIf="!isAuthenticated && headerConfig.showCmiButton" class="menu__item menu__item_cmi">
+                <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_small button_primary regular"
+                    translate>Common.Buttons.CMI</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<ng-template #dashboardButton>
+    <a class="header-link header-link_dashboard" [routerLink]="'/' + appRoutes.Dashboard"
+        routerLinkActive="header-link_active">
+        <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
+                stroke-linejoin="round">
+                <g class="dashboard-icon_color" transform="translate(-385.000000, -41.000000)" stroke="#000000"
+                    stroke-width="1.5">
+                    <g transform="translate(386.000000, 40.000000)">
+                        <g transform="translate(0.000000, 2.000000)">
+                            <circle cx="10" cy="8.125" r="4.375"></circle>
+                            <path
+                                d="M15.7608333,17.3966667 C14.2362899,15.8625492 12.1628105,14.9998815 10,14.9998815 C7.83718949,14.9998815 5.76371015,15.8625492 4.23916667,17.3966667">
+                            </path>
+                            <circle cx="10" cy="10" r="9.375"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <span translate>Navigation.Dashboard</span>
+    </a>
+</ng-template>

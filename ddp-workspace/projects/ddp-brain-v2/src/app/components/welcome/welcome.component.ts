@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
-import { ToolkitConfigurationService, CommunicationService } from 'toolkit';
+import { ToolkitConfigurationService, CommunicationService, HeaderConfigurationService } from 'toolkit';
 import { AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
@@ -18,9 +18,11 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private analytics: AnalyticsEventsService,
     private communicationService: CommunicationService,
+    private headerConfig: HeaderConfigurationService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
+    this.headerConfig.setupDefaultHeader();
     this.cmiUrl = this.config.countMeInUrl;
     this.infoEmail = this.config.infoEmail;
     this.twitterAccount = this.config.twitterAccountId;

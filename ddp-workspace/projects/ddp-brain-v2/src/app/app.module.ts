@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { LOCATION_INITIALIZED } from '@angular/common';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -22,7 +23,9 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+
+import { MatIconModule } from '@angular/material/icon';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -33,7 +36,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -90,13 +93,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitModule
+    ToolkitModule,
+    MatIconModule
   ],
   providers: [
     {
