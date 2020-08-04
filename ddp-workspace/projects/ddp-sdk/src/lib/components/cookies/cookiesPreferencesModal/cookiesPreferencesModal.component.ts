@@ -1,8 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Cookies } from '../../../models/cookies';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { CookiesManagementService } from '../../../services/cookiesManagement.service';
+import { ConsentStatuses } from '../../../models/cookies';
 
 @Component({
   selector: 'ddp-cookies-preferences-modal',
@@ -32,10 +33,10 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
               <div  class="cookiesModal--tabActions">
                 <mat-radio-group *ngIf="cookie.actions" aria-label="Select an option"
                                  (change)="this.onChange(cookie.type, $event.value)">
-                  <mat-radio-button value="Accept" checked>
+                  <mat-radio-button value="Accept" [checked]="this.cookies[cookie.type]">
                     <span translate>SDK.CookiesModal.Accept</span>
                   </mat-radio-button>
-                  <mat-radio-button value="Reject">
+                  <mat-radio-button value="Reject" [checked]="!this.cookies[cookie.type]">
                     <span translate>SDK.CookiesModal.Reject</span>
                   </mat-radio-button>
                 </mat-radio-group>
@@ -84,23 +85,44 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
       </button>
     </div>`,
 })
-export class CookiesPreferencesModalComponent {
+export class CookiesPreferencesModalComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'description', 'expiration'];
+  public cookies;
 
   constructor(public dialogRef: MatDialogRef<CookiesPreferencesModalComponent>,
               public dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data,
+              private cookiesService: CookiesManagementService) {
   }
 
-  close(): void {
+  ngOnInit(): void {
+    const initialCookiesAcceptance = this.cookiesService.getCurrentCookiesAcceptance();
+    this.setDefaultAcceptance(initialCookiesAcceptance);
+  }
+
+  private setDefaultAcceptance(initialCookies): void {
+    this.cookies = {...initialCookies};
+    Object.keys(initialCookies).forEach(x => {
+      if (initialCookies[x] === null) {
+        this.cookies[x] = true;
+      }
+    });
+  }
+
+  public onChange(cookieType, value): void {
+    this.cookies[cookieType] = value === 'Accept';
+  }
+
+  public close(): void {
     this.dialogRef.close();
   }
 
-  submit(): void {
+  public submit(): void {
+    this.cookiesService.updatePreferences(ConsentStatuses.managed, this.cookies);
     this.dialogRef.close();
   }
 
-  openPolicy(): void {
+  public openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
       data: this.data.logo,
@@ -108,8 +130,5 @@ export class CookiesPreferencesModalComponent {
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
     });
-  }
-
-  onChange(cookieType, value): void {
   }
 }

@@ -1,3 +1,5 @@
+import { CookiesPreferences } from './cookies';
+
 export class UserProfile {
     public birthYear: number | null;
     public birthDayInMonth: number | null;
@@ -7,4 +9,5 @@ export class UserProfile {
     public preferredLanguage: string | null;
     public firstName: string | null;
     public lastName: string | null;
+    public cookiesPreferences: CookiesPreferences | null;
 }

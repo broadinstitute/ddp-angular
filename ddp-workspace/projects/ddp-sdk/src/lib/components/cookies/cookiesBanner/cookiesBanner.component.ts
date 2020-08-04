@@ -1,10 +1,11 @@
 import { Component, Inject, Input } from '@angular/core';
-import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigurationService } from '../../../services/configuration.service';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { ConfigurationService } from '../../../services/configuration.service';
+import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
 import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { ConsentStatuses } from '../../../models/cookies';
 
 @Component({
   selector: 'ddp-cookies-banner',
@@ -39,11 +40,11 @@ export class CookiesBannerComponent {
   }
 
   accept(): void {
-    this.cookiesService.acceptCookies();
+    this.cookiesService.updatePreferences(ConsentStatuses.defaultAccept);
   }
 
   reject(): void {
-    this.cookiesService.rejectNotFunctionalCookies();
+    this.cookiesService.updatePreferences(ConsentStatuses.defaultReject);
   }
 
   openPreferences(): void {

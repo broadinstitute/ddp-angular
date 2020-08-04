@@ -15,6 +15,7 @@ export class UserProfileDecorator {
             this.profile.preferredLanguage = existingProfile.preferredLanguage;
             this.profile.firstName = existingProfile.firstName;
             this.profile.lastName = existingProfile.lastName;
+            this.profile.cookiesPreferences = existingProfile.cookiesPreferences;
         } else {
             this.profile = new UserProfile();
         }
