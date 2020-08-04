@@ -11,6 +11,7 @@
     cursor: pointer;
     font-weight: 500;
     transition: 0.3s;
+    white-space: nowrap;
 }
 
 .button,
@@ -21,8 +22,8 @@
 }
 
 .button_small {
-    font-size: 1.0625rem;
-    line-height: 1.375rem;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .button_medium {
@@ -74,6 +75,10 @@
     font-size: 1.25rem;
 }
 
+.button_learn-more {
+    min-width: 13rem;
+}
+
 .button_learn-more:hover:not([disabled]),
 .button_learn-more:hover:enabled {
     color: mat-color($app-theme, 650);
@@ -87,15 +92,15 @@
     cursor: pointer;
     color: mat-color($app-theme, 200);
     text-decoration: none;
-    font-size: 1.0625rem;
-    line-height: 1.375rem;
+    font-size: 16px;
+    line-height: 20px;
     font-family: inherit;
     white-space: nowrap;
+    transition: 0.3s;
 }
 
 .simple-button:hover,
 .SimpleButton:hover {
-    color: mat-color($app-theme, 400);
     text-decoration: underline;
 }
 
@@ -104,8 +109,9 @@
     text-decoration: underline;
 }
 
-.panel-opened {
+.menu {
 
+    .button,
     .simple-button,
     .SimpleButton {
         font-size: 1.875rem;

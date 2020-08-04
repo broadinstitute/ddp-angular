@@ -1,0 +1,277 @@
+@import '../../../app-theme.scss';
+
+.header {
+    background-color: mat-color($app-theme, 100);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    height: 6.25rem;
+
+    &_shadow {
+        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+        transition: all ease 0.5s;
+    }
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6.25rem;
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 1.5625rem;
+}
+
+.project-logo {
+    display: flex;
+    align-items: center;
+
+    &:focus {
+        text-decoration: none;
+    }
+
+    &__img {
+        height: 3.125rem;
+        margin-right: 13px;
+    }
+
+    &__text {
+        font-size: 16px;
+        line-height: 17px;
+        white-space: nowrap;
+    }
+}
+
+.nav {
+    width: 100%;
+    margin-left: 4rem;
+}
+
+.navigation {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+
+    &__item {
+        margin-right: 2.5rem;
+    }
+}
+
+.header-link {
+    font-size: 16px;
+    line-height: 20px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &_dashboard {
+        display: flex;
+        align-items: center;
+        margin-right: 2.5rem;
+    }
+
+    &_active {
+        font-family: 'Untitled-Sans-Medium', sans-serif;
+    }
+}
+
+.side-menu {
+    display: flex;
+    align-items: center;
+
+    &__dashboard,
+    &__auth {
+        margin-right: 2.5rem;
+    }
+}
+
+.dashboard-icon {
+    margin-right: 5px;
+}
+
+.menu-button {
+    &__button {
+        display: flex;
+        align-items: center;
+        border: 2px solid mat-color($app-theme, 200);
+        width: 100px;
+        height: 40px;
+        justify-content: center;
+        border-radius: 10px;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
+        margin: 0 25px;
+        padding: 0;
+    }
+}
+
+.lines {
+    width: 16px;
+    margin-right: 10px;
+
+    &__item {
+        display: flex;
+        height: 2px;
+        width: 100%;
+        background: mat-color($app-theme, 200);
+
+        &:not(:last-child) {
+            margin-bottom: 4px;
+        }
+    }
+}
+
+// Header menu
+.overlay {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-color: mat-color($app-theme, 100);
+    overflow: hidden;
+    transition: 0.5s;
+
+    &_visible {
+        height: 100%;
+    }
+
+    &_overflow {
+        overflow-y: auto;
+    }
+}
+
+.overlay-content {
+    margin-top: 8rem;
+}
+
+.menu {
+    margin: 0;
+    padding: 0 0 0 1.5625rem;
+    list-style: none;
+    display: none;
+
+    &_visible {
+        display: block;
+    }
+
+    &_mobile-buttons {
+        display: none;
+    }
+
+    &__item {
+        display: flex;
+        margin-bottom: 3rem;
+
+        &_dashboard,
+        &_auth,
+        &_cmi {
+            display: none;
+        }
+
+        .header-link {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+    }
+
+    .dashboard-icon {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+.menu-button {
+    display: none;
+}
+
+@media screen and (max-width: 1100px) {
+    .nav {
+        margin: 0;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .cmi {
+        margin-right: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 725px) {
+    .side-menu {
+        .header-link {
+            &_dashboard {
+                display: none;
+            }
+        }
+    }
+
+    .menu {
+        &__item {
+            &_dashboard {
+                display: block;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 595px) {
+    .side-menu {
+        &__auth {
+            display: none;
+        }
+    }
+
+    .menu {
+        &__item {
+            &_auth {
+                display: block;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .side-menu {
+        .button_primary {
+            display: none;
+        }
+    }
+
+    .menu {
+        &__item {
+            &_cmi {
+                display: block;
+            }
+        }
+    }
+
+    .menu-button {
+        margin: 0;
+    }
+}
