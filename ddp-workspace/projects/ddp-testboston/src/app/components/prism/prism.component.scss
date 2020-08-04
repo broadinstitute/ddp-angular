@@ -7,6 +7,13 @@
     color: mat-color($app-theme, 1000);
 }
 
+@mixin text {
+    color: mat-color($app-theme, 400);
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    margin: 0;
+}
+
 .content-prism {
     max-width: 1050px;
 }
@@ -42,10 +49,7 @@
 }
 
 .subtitle {
-    color: mat-color($app-theme, 400);
-    font-size: 1.125rem;
-    line-height: 1.5rem;
-    margin: 0;
+    @include text;
 
     &_field {
         margin-bottom: -0.5rem;
@@ -139,6 +143,24 @@
         font-weight: 300;
         margin: 0;
         color: mat-color($app-theme, 400);
+    }
+}
+
+.none-listed {
+    &__title {
+        margin: 0;
+        font-weight: 200;
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+
+    &__text {
+        @include text;
+    }
+
+    &__link {
+        font-weight: 600;
+        text-decoration: underline;
     }
 }
 

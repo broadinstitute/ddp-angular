@@ -32,7 +32,8 @@
             </ul>
         </nav>
         <div class="static-menu">
-            <a class="header-link static-menu__item" [href]="language + '/kit-instructions.pdf'" target="_blank" translate>
+            <a class="header-link static-menu__item" [href]="language + '/kit-instructions.pdf'" target="_blank"
+                translate>
                 <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
                 Navigation.KitInstructions
             </a>
@@ -59,7 +60,7 @@
     </div>
 </header>
 
-<div #overlay class="overlay">
+<div *ngIf="!isAdmin" #overlay class="overlay">
     <nav class="overlay-content">
         <ul #menu class="menu">
             <ng-container>
