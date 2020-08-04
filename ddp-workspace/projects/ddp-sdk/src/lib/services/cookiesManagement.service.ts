@@ -7,6 +7,7 @@ import { ConsentStatuses, CookiesConsentStatuses, CookiesPreferences, CookiesTyp
 import { SessionMementoService } from './sessionMemento.service';
 import { UserProfileServiceAgent } from './serviceAgents/userProfileServiceAgent.service';
 import { UserProfile } from '../models/userProfile';
+import { LoggingService } from './logging.service';
 
 @Injectable()
 export class CookiesManagementService {
@@ -20,7 +21,8 @@ export class CookiesManagementService {
               private analytics: AnalyticsManagementService,
               @Inject('ddp.config') private configuration: ConfigurationService,
               private profileServiceAgent: UserProfileServiceAgent,
-              private session: SessionMementoService) {
+              private session: SessionMementoService,
+              private logger: LoggingService) {
     this.cookiesTypes = this.configuration.cookies.cookies.map(x => x.type).filter(x => x !== 'Functional');
     this.cookiesConsentStorageName = this.configuration.studyGuid + '_cookies_consent';
     this.isAuthenticated = this.session.isAuthenticatedSession();
@@ -83,6 +85,7 @@ export class CookiesManagementService {
     const profileModifications: UserProfile = new UserProfile();
     profileModifications.cookiesPreferences = this.consent;
     this.profileServiceAgent.updateProfile(profileModifications).subscribe();
+    this.logConsentUpdate();
   }
 
   private updateLocalStorageConsent(): void {
@@ -126,5 +129,10 @@ export class CookiesManagementService {
     cookies
       ? this.consent.cookies = cookies
       : this.cookiesTypes.forEach(x => this.consent.cookies[x] = status === ConsentStatuses.defaultAccept);
+  }
+
+  private logConsentUpdate(): void {
+    const loggerEvent = 'Cookies preferences update event occured. Status: ' + this.consent.status;
+    this.logger.logEvent('Cookies Management Service', loggerEvent);
   }
 }
