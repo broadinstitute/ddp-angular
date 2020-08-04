@@ -16,6 +16,7 @@ import { CookieModule } from 'ngx-cookie';
 import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
 import { CookiesManagementService } from './services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
 import { PrivacyPolicyModalComponent } from './components/cookies/privacyPolicy/privacyPolicyModal.component';
 import { PrivacyPolicyStaticComponent } from './components/cookies/privacyPolicy/privacyPolicyStatic.component';
 import { AnalyticsManagementService } from './services/analyticsManagement.service';
@@ -368,6 +369,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
     PrivacyPolicyModalComponent,
     PrivacyPolicyStaticComponent
   ],
@@ -436,6 +438,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
     PrivacyPolicyModalComponent,
     PrivacyPolicyStaticComponent
   ],

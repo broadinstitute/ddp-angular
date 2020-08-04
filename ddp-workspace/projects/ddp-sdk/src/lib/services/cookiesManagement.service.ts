@@ -56,7 +56,6 @@ export class CookiesManagementService {
 
     if (this.isAuthenticated && !profileConsent) {
       this.updateUserProfileConsent();
-      console.log(this.consent);
     }
   }
 

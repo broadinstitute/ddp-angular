@@ -120,7 +120,7 @@ a:focus {
 .CookieButton--Accept:focus {
     border: 1px solid #F2B816 !important;
     background-color: #F2B816 !important;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .CookieButton--Reject,
@@ -129,6 +129,39 @@ a:focus {
   border: 1px solid #F2B816 !important;
   background-color: transparent !important;
   color: #F2B816 !important;
+}
+
+.CookieButton--Preferences {
+  min-width: 200px !important;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  text-decoration: underline !important;
+  cursor: pointer;
+  background-color: transparent;
+  border: none !important;
+  box-shadow: none;
+
+  &:hover,
+  &:active {
+    color: #a88838;
+  }
+}
+
+.CookieButton--DataRequest,
+.CookieButton--DataRequest:active,
+.CookieButton--DataRequest:focus {
+  min-width: 200px !important;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  text-decoration: none !important;
+  cursor: pointer;
+  border: 1px solid #82B547 !important;
+  background-color: #82B547 !important;
+  color: #FFFFFF;
+  box-shadow: none;
 }
 
 .Button--primaryNeutral,
