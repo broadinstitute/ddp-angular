@@ -74,10 +74,12 @@ export class EnrollmentComponent implements OnInit {
   }
 
   private initAccountForm(): void {
+    const nonWhitespaceRegExp = /\S/;
+    const emailRegExp = /^\S+@\S+\.\S+$/;
     this.accountForm = this.formBuilder.group({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.pattern(/^\S+@\S+\.\S+$/))
+      firstName: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)]),
+      lastName: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)]),
+      email: new FormControl(null, Validators.pattern(emailRegExp))
     });
   }
 
