@@ -40,15 +40,20 @@
             </div>
             <div>
                 <div class="social-media">
-                    <a class="footer-link social-media__facebook medium"
-                        [href]="'https://www.facebook.com/' + facebookAccount" target="_blank">Facebook</a>
-                    <a class="footer-link social-media__twitter medium" [href]="'https://twitter.com/' + twitterAccount"
-                        target="_blank">Twitter</a>
+                    <p class="social-media__title">Social Media</p>
+                    <div class="social-media__links">
+                        <a class="footer-link social-media__facebook medium"
+                            [href]="'https://www.facebook.com/' + facebookAccount" target="_blank">Facebook</a>
+                        <a class="footer-link social-media__twitter medium"
+                            [href]="'https://twitter.com/' + twitterAccount" target="_blank">Twitter</a>
+                    </div>
                 </div>
                 <div>
                     <div class="contact-us">
+                        <p class="contact-us__title contact-us__title_last">Contact Us</p>
                         <a class="footer-link contact-us__item medium" [href]="'mailto: + infoEmail'">{{infoEmail}}</a>
-                        <a class="footer-link contact-us__item contact-us__item_phone medium" [href]="'tel:' + phone">{{phone}}</a>
+                        <a class="footer-link contact-us__item contact-us__item_phone medium"
+                            [href]="'tel:' + phone">{{phone}}</a>
                     </div>
                     <div>
                         <p class="address">

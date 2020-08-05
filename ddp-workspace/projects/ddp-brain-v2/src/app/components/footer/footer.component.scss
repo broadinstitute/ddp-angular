@@ -5,6 +5,14 @@
     line-height: 25px;
 }
 
+@mixin contacts-title {
+    white-space: nowrap;
+    margin: 0 0 1rem 0;
+    font-size: 16px;
+    line-height: 25px;
+    opacity: 0.7;
+}
+
 .footer {
     background-color: mat-color($app-theme, 200);
     min-height: 17rem;
@@ -38,6 +46,7 @@
     color: mat-color($app-theme, 100);
     font-size: 16px;
     line-height: 20px;
+    white-space: nowrap;
 
     &:hover {
         text-decoration: underline;
@@ -64,8 +73,6 @@
 }
 
 .info {
-    max-width: 600px;
-
     &__line {
         border-top: 1px solid mat-color($app-theme, 700);
         margin: 1.6rem 0;
@@ -83,6 +90,7 @@
 .cmi-text {
     font-size: 14px;
     line-height: 22px;
+    max-width: 600px;
 
     &__link {
         font-size: inherit;
@@ -102,19 +110,24 @@
 }
 
 .sections {
-    opacity: 0.7;
     margin-right: 2.2rem;
 
     &__item {
-        margin: 0 0 1rem 0;
-        font-size: 16px;
-        line-height: 25px;
+        @include contacts-title;
     }
 }
 
 .social-media {
     display: flex;
     margin: 0 0 1rem 0;
+
+    &__links {
+        display: flex;
+    }
+
+    &__title {
+        display: none;
+    }
 
     &__facebook {
         margin-right: 1rem;
@@ -129,6 +142,10 @@
 .contact-us {
     margin: 0 0 1rem 0;
 
+    &__title {
+        display: none;
+    }
+
     &__item {
         @include footer-link-text;
 
@@ -141,4 +158,62 @@
 .address {
     font-size: 15px;
     line-height: 22px;
+}
+
+@media screen and (max-width: 990px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .info {
+        display: none;
+    }
+
+    .mobile-info {
+        display: block;
+    }
+
+    .contacts {
+        margin: 3rem 0 1rem 0;
+    }
+
+    .list {
+        &__item {
+            .mat-icon {
+                margin-left: -6px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .list {
+        flex-direction: column;
+
+        &__item:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sections {
+        display: none;
+    }
+
+    .contact-us,
+    .social-media {
+        display: flex;
+        flex-direction: column;
+
+        &__title {
+            @include contacts-title;
+            display: block;
+            margin-bottom: 0.5rem;
+
+            &_last {
+                margin-top: 1rem;
+            }
+        }
+    }
 }
