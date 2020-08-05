@@ -754,6 +754,10 @@ mat-icon.ddp-dropdown-arrow {
         padding: 20px 0 150px 0;
     }
 
+    .PageContent-top {
+        padding: 20px 0 0 0;
+    }
+
     .PageHeader-box {
         bottom: 0;
         width: 100%;
@@ -839,6 +843,10 @@ mat-icon.ddp-dropdown-arrow {
     padding: 50px 0 150px 0;
 }
 
+.PageContent-top {
+    padding: 50px 0 0 0;
+}
+
 .PageContent-section {
     padding: 1rem 0;
 }
@@ -919,6 +927,10 @@ ul {
 
 .topMarginMedium {
     margin: 15px 0 0 0;
+}
+
+.topMarginBig {
+    margin: 30px 0 0 0;
 }
 
 .Italic {
@@ -1734,6 +1746,13 @@ select:-webkit-autofill {
         display: none;
         padding: 0;
     }
+}
+
+.tableau-iframe {
+    height: auto;
+    overflow-y: auto;
+    margin: 0 15px 150px 15px;
+    text-align: center;
 }
 
 .ddp-list {

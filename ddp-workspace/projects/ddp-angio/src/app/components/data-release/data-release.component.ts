@@ -30,7 +30,7 @@ import { WindowRef } from 'ddp-sdk';
             </div>
         </div>
 
-        <article class="PageContent">
+        <article class="PageContent-top">
             <div class="PageLayout">
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -42,7 +42,14 @@ import { WindowRef } from 'ddp-sdk';
                                         [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
                                 </button>
                             </div>
-                            <div class="row topMarginMedium">
+                            <div class="row topMarginMedium Left">
+                                <button mat-button color="primary"
+                                        class="ButtonFilled Button--rect"
+                                        (click)="scrollTo(dataBrowser)"
+                                        [innerHTML]="'Toolkit.DataRelease.ViewDataBrowser' | translate">
+                                </button>
+                            </div>
+                            <div class="row topMarginBig">
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.MainText.Section1
                                 </p>
@@ -220,10 +227,48 @@ import { WindowRef } from 'ddp-sdk';
                                     <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
                                     <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
                                 </p>
+                                <h2 #dataBrowser class="PageContent-title" translate>
+                                    The Angiosarcoma Project Patient Data Browser
+                                </h2>
+                                <p class="PageContent-text" translate>
+                                    Below is an interactive data browser for exploring the patient-reported data of the Angiosarcoma Project. Data depicted in the browser is from consented ASCproject patients in the USA and Canada.  
+                                </p>
+                                <p class="PageContent-text" translate>
+                                    <span>Patient-reported data included here are from patients who completed the following ASCproject intake survey. An example of what patients see when they sign up is linked here:</span>
+                                    <a href="AboutYouSurvey.pdf" class="Link">Initial intake survey</a>.
+                                </p>
+                                <h2 class="PageContent-subtitle" translate>
+                                    How to use the interactive data browser:
+                                </h2>
+                                <ul class="PageContent-ul">
+                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item1</li>
+                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item2</li>
+                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item3</li>
+                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item4</li>
+                                </ul>
+                                <p class="PageContent-text" translate>
+                                    <span>This data will be updated periodically as new patient-reported data is generated, such as when new patients join the project or as new surveys are deployed. If you have any questions or feedback, please email</span>
+                                    <a [href]="dataEmailHref" class="Link">{{dataEmail}}</a>.  
+                                </p>
+                                <p class="PageContent-text" translate>
+                                    Thank you to every patient who has said <i>Count Me In</i> and generously shared their experiences, information, and samples to accelerate discoveries. 
+                                </p>
+                                <p class="PageContent-text" translate>
+                                    <span>Here is a</span>
+                                    <a href="https://www.youtube.com/watch?v=16sok49U564&feature=youtu.be" class="Link" translate>walkthrough video</a>.  
+                                    <span>on how to use a similar interactive data browser to explore patient survey data.</span>
+                                </p>
                             </div>
                         </section>
                     </div>
                 </div>
+            </div>
+        </article>
+        <article>
+            <div class="tableau-iframe">
+                <iframe frameborder="0" allowtransparency="true" allowfullscreen="true" marginheight="0" marginwidth="0" scrolling="no" [width]="iframeWidth" [height]="iframeHeight" 
+                    src="https://public.tableau.com/views/AngiosarcomaProjectPatientReportedDataBrowser/ASCprojectPRD?%3Aembed=y&amp;%3AshowVizHome=no&amp;%3Adisplay_count=y&amp;%3Adisplay_static_image=y&amp;%3AbootstrapWhenNotified=true&amp;%3Alanguage=en&amp;:embed=y&amp;:showVizHome=n&amp;:apiID=host0#navType=0&amp;navSrc=Parse">
+                </iframe>
             </div>
         </article>
     </div>`
@@ -231,6 +276,8 @@ import { WindowRef } from 'ddp-sdk';
 export class DataReleaseComponent implements OnInit {
     public dataEmail: string;
     public dataEmailHref: string;
+    public iframeWidth: number;
+    public iframeHeight: number;
 
     constructor(
         private dialog: MatDialog,
@@ -240,6 +287,8 @@ export class DataReleaseComponent implements OnInit {
     public ngOnInit(): void {
         this.dataEmail = this.toolkitConfiguration.dataEmail;
         this.dataEmailHref = `mailto:${this.toolkitConfiguration.dataEmail}`;
+        this.iframeWidth = this.isMobile ? 400 : 1200;
+        this.iframeHeight = this.isMobile ? 300 : 930;
     }
 
     public scrollTo(target): void {
@@ -255,5 +304,9 @@ export class DataReleaseComponent implements OnInit {
             autoFocus: false,
             scrollStrategy: new NoopScrollStrategy()
         });
+    }
+
+    public get isMobile(): boolean {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 }
