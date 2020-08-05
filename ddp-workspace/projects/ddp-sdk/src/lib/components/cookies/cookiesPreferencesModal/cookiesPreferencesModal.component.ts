@@ -76,9 +76,8 @@ import { ConsentStatuses } from '../../../models/cookies';
       </mat-tab-group>
     </div>
     <div mat-dialog-actions class="cookiesModal--actions">
-      <button class="cookiesModal--link"
-              (click)="openPolicy()"
-              [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
+      <ddp-privacy-policy-button [logoSrc]="this.data.logo"
+                                 [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
       <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-8"
               (click)="submit()"
               [innerText]="'SDK.CookiesModal.Submit' | translate">
@@ -120,15 +119,5 @@ export class CookiesPreferencesModalComponent implements OnInit {
   public submit(): void {
     this.cookiesService.updatePreferences(ConsentStatuses.managed, this.cookies);
     this.dialogRef.close();
-  }
-
-  public openPolicy(): void {
-    this.dialog.open(PrivacyPolicyModalComponent, {
-      width: '740px',
-      data: this.data.logo,
-      autoFocus: false,
-      disableClose: false,
-      scrollStrategy: new NoopScrollStrategy()
-    });
   }
 }

@@ -3,31 +3,30 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
-import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 
 @Component({
-  selector: 'ddp-cookies-preferences-button',
+  selector: 'ddp-privacy-policy-button',
   template: `
-    <button (click)="openPreferences()"
-            [innerText]="this.text"
+    <button (click)="openPolicy()"
+            [innerText]="'SDK.CookiesBanner.Policy' | translate"
             [class]="this.className"></button>`
 })
-export class CookiesPreferencesButtonComponent {
-  @Input() logoSrc: string;
-  @Input() text: string;
+export class PrivacyPolicyButtonComponent {
   @Input() className: string;
+  @Input() logoSrc: string;
 
   constructor(private cookiesService: CookiesManagementService,
               public dialog: MatDialog,
               @Inject('ddp.config') private configuration: ConfigurationService) {
   }
 
-  openPreferences(): void {
-    this.dialog.open(CookiesPreferencesModalComponent, {
+  openPolicy(): void {
+    this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: { cookies: this.configuration.cookies, logo: this.logoSrc },
+      data: this.logoSrc,
       autoFocus: false,
-      disableClose: true,
+      disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
     });
   }

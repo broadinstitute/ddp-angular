@@ -20,6 +20,7 @@ import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesP
 import { PrivacyPolicyModalComponent } from './components/cookies/privacyPolicy/privacyPolicyModal.component';
 import { PrivacyPolicyStaticComponent } from './components/cookies/privacyPolicy/privacyPolicyStatic.component';
 import { AnalyticsManagementService } from './services/analyticsManagement.service';
+import { PrivacyPolicyButtonComponent } from './components/cookies/privacyPolicy/privacyPolicyButton.component';
 
 // Angular JWT
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -371,6 +372,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesPreferencesModalComponent,
     CookiesPreferencesButtonComponent,
     PrivacyPolicyModalComponent,
+    PrivacyPolicyButtonComponent,
     PrivacyPolicyStaticComponent
   ],
   exports: [
@@ -440,6 +442,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesPreferencesModalComponent,
     CookiesPreferencesButtonComponent,
     PrivacyPolicyModalComponent,
+    PrivacyPolicyButtonComponent,
     PrivacyPolicyStaticComponent
   ],
   entryComponents: [

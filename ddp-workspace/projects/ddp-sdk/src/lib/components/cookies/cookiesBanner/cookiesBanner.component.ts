@@ -12,9 +12,8 @@ import { ConsentStatuses } from '../../../models/cookies';
   <div class="cookiesBanner">
     <div class="cookiesBanner--text">
       <span translate>SDK.CookiesBanner.Text_Before_Policy_Link</span>
-      <button class="cookiesBanner--link policy"
-              (click)="openPolicy()"
-              [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
+      <ddp-privacy-policy-button [logoSrc]="this.logoSrc"
+                                 [className]="'cookiesBanner--link policy'"></ddp-privacy-policy-button>
       <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
     <ddp-cookies-preferences-button [logoSrc]="this.logoSrc"
@@ -45,15 +44,5 @@ export class CookiesBannerComponent {
 
   reject(): void {
     this.cookiesService.updatePreferences(ConsentStatuses.defaultReject);
-  }
-
-  openPolicy(): void {
-    this.dialog.open(PrivacyPolicyModalComponent, {
-      width: '740px',
-      data: this.logoSrc,
-      autoFocus: false,
-      disableClose: false,
-      scrollStrategy: new NoopScrollStrategy()
-    });
   }
 }
