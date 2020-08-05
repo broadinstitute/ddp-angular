@@ -228,35 +228,32 @@ import { WindowRef } from 'ddp-sdk';
                                     <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
                                 </p>
                                 <h2 #dataBrowser class="PageContent-title" translate>
-                                    The Angiosarcoma Project Patient Data Browser
+                                    Toolkit.DataRelease.DataBrowser.Title
                                 </h2>
                                 <p class="PageContent-text" translate>
-                                    Below is an interactive data browser for exploring the patient-reported data of the Angiosarcoma Project. Data depicted in the browser is from consented ASCproject patients in the USA and Canada.  
+                                    Toolkit.DataRelease.DataBrowser.Text1
                                 </p>
-                                <p class="PageContent-text" translate>
-                                    <span>Patient-reported data included here are from patients who completed the following ASCproject intake survey. An example of what patients see when they sign up is linked here:</span>
-                                    <a href="AboutYouSurvey.pdf" class="Link">Initial intake survey</a>.
+                                <p class="PageContent-text">
+                                    <span translate>Toolkit.DataRelease.DataBrowser.Text2.Text</span>
+                                    <a href="AboutYouSurvey.pdf" class="Link" target="_blank" translate>Toolkit.DataRelease.DataBrowser.Text2.Link</a>.
                                 </p>
                                 <h2 class="PageContent-subtitle" translate>
-                                    How to use the interactive data browser:
+                                    Toolkit.DataRelease.DataBrowser.List.Title
                                 </h2>
                                 <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item1</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item2</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item3</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item4</li>
+                                    <li class="PageContent-text PageContent-text-list" *ngFor="let item of 'Toolkit.DataRelease.DataBrowser.List.Items' | translate">
+                                        {{item}}
+                                    </li>
                                 </ul>
                                 <p class="PageContent-text" translate>
-                                    <span>This data will be updated periodically as new patient-reported data is generated, such as when new patients join the project or as new surveys are deployed. If you have any questions or feedback, please email</span>
+                                    <span translate>Toolkit.DataRelease.DataBrowser.Text3</span>
                                     <a [href]="dataEmailHref" class="Link">{{dataEmail}}</a>.  
                                 </p>
+                                <p class="PageContent-text" [innerHtml]="'Toolkit.DataRelease.DataBrowser.Text4' | translate"></p>
                                 <p class="PageContent-text" translate>
-                                    Thank you to every patient who has said <i>Count Me In</i> and generously shared their experiences, information, and samples to accelerate discoveries. 
-                                </p>
-                                <p class="PageContent-text" translate>
-                                    <span>Here is a</span>
-                                    <a href="https://www.youtube.com/watch?v=16sok49U564&feature=youtu.be" class="Link" translate>walkthrough video</a>.  
-                                    <span>on how to use a similar interactive data browser to explore patient survey data.</span>
+                                    <span translate>Toolkit.DataRelease.DataBrowser.Text5.Part1</span>
+                                    <a href="https://www.youtube.com/watch?v=16sok49U564&feature=youtu.be" class="Link" target="_blank" translate>Toolkit.DataRelease.DataBrowser.Text5.Link</a>
+                                    <span translate>Toolkit.DataRelease.DataBrowser.Text5.Part2</span>
                                 </p>
                             </div>
                         </section>

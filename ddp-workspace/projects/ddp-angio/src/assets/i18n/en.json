@@ -112,6 +112,7 @@
         "DataRelease": {
             "Title": "ASCproject Data",
             "ViewDataButton": "VIEW THE ASCPROJECT DATA",
+            "ViewDataBrowser": "VIEW THE ASCPROJECT PATIENT DATA BROWSER",
             "ViewPaperButton": "VIEW OUR PUBLISHED RESEARCH ON THE ASCPROJECT",
             "MainText": {
                 "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
@@ -232,6 +233,30 @@
                 "Additional": {
                     "TextPt1": "If there are additional terms that you would like defined that are not included in the National Cancer Institute Dictionary, please send an email to",
                     "TextPt2": "and include “New Glossary Term:” in your email subject line. We will be creating a glossary to define some of the genomics terms seen on cBioPortal."
+                }
+            },
+            "DataBrowser": {
+                "Title": "The Angiosarcoma Project Patient Data Browser",
+                "Text1": "Below is an interactive data browser for exploring the patient-reported data of the Angiosarcoma Project. Data depicted in the browser is from consented ASCproject patients in the USA and Canada.",
+                "Text2": {
+                    "Text": "Patient-reported data included here are from patients who completed the following ASCproject intake survey. An example of what patients see when they sign up is linked here:",
+                    "Link": "Initial intake survey"
+                },
+                "List": {
+                    "Title": "How to use the interactive data browser:",
+                    "Items": [
+                        "On a computer, hover your cursor over any chart to see more information.",
+                        "Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left-hand corner.",
+                        "Click or tap it again to remove the filter.",
+                        "Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+                    ]
+                },
+                "Text3": "This data will be updated periodically as new patient-reported data is generated, such as when new patients join the project or as new surveys are deployed. If you have any questions or feedback, please email",
+                "Text4": "Thank you to every patient who has said <i>Count Me In</i> and generously shared their experiences, information, and samples to accelerate discoveries.",
+                "Text5": {
+                    "Part1": "Here is a",
+                    "Link": "walkthrough video",
+                    "Part2": "on how to use a similar interactive data browser to explore patient survey data."
                 }
             }
         },
