@@ -252,7 +252,7 @@ import { WindowRef } from 'ddp-sdk';
                                 <p class="PageContent-text" [innerHtml]="'Toolkit.DataRelease.DataBrowser.Text4' | translate"></p>
                                 <p class="PageContent-text" translate>
                                     <span translate>Toolkit.DataRelease.DataBrowser.Text5.Part1</span>
-                                    <a href="https://www.youtube.com/watch?v=16sok49U564&feature=youtu.be" class="Link" target="_blank" translate>Toolkit.DataRelease.DataBrowser.Text5.Link</a>
+                                    <a href="https://www.youtube.com/watch?v=16sok49U564" class="Link" target="_blank" translate>Toolkit.DataRelease.DataBrowser.Text5.Link</a>
                                     <span translate>Toolkit.DataRelease.DataBrowser.Text5.Part2</span>
                                 </p>
                             </div>
