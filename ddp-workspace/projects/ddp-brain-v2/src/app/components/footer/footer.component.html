@@ -1,0 +1,73 @@
+<footer class="footer">
+    <div class="footer-content">
+        <div class="nav">
+            <nav>
+                <ul class="list">
+                    <li class="list__item">
+                        <button class="simple-button footer-button" (click)="scrollToTop()">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                            <span>Back to top</span>
+                        </button>
+                    </li>
+                    <li class="list__item">
+                        <a class="footer-link" [routerLink]="'/' + appRoutes.MoreDetails"
+                            routerLinkActive="header-link_active">FAQs</a>
+                    </li>
+                    <li class="list__item">
+                        <a class="footer-link" [routerLink]="'/' + appRoutes.AboutUs"
+                            routerLinkActive="header-link_active">About Us</a>
+                    </li>
+                    <li class="list__item">
+                        <button class="simple-button footer-button" (click)="openJoinMailingList()">
+                            <span>Join Mailing List</span>
+                        </button>
+                    </li>
+                    <li class="list__item">
+                        <a class="footer-link" [routerLink]="'/' + appRoutes.Data"
+                            routerLinkActive="header-link_active">Data</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="info">
+                <div class="info__line"></div>
+                <ng-container *ngTemplateOutlet="text"></ng-container>
+            </div>
+        </div>
+        <div class="contacts">
+            <div class="sections">
+                <p class="sections__item">Social Media</p>
+                <p class="sections__item">Contact Us</p>
+            </div>
+            <div>
+                <div class="social-media">
+                    <a class="footer-link social-media__facebook medium"
+                        [href]="'https://www.facebook.com/' + facebookAccount" target="_blank">Facebook</a>
+                    <a class="footer-link social-media__twitter medium" [href]="'https://twitter.com/' + twitterAccount"
+                        target="_blank">Twitter</a>
+                </div>
+                <div>
+                    <div class="contact-us">
+                        <a class="footer-link contact-us__item medium" [href]="'mailto: + infoEmail'">{{infoEmail}}</a>
+                        <a class="footer-link contact-us__item contact-us__item_phone medium" [href]="'tel:' + phone">{{phone}}</a>
+                    </div>
+                    <div>
+                        <p class="address">
+                            Count Me In<br>
+                            415 Main St, Cambridge, MA<br>
+                            02142, United States
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-info">
+            <ng-container *ngTemplateOutlet="text"></ng-container>
+        </div>
+    </div>
+</footer>
+
+<ng-template #text>
+    <p class="cmi-text">The Brain Cancer Project is part of <a class="cmi-text__link" [href]="cmiUrl"
+            target="_blank">Count Me In</a>, a research initiative that brings together
+        patients and scientists as partners to speed up discoveries in cancer research.</p>
+</ng-template>

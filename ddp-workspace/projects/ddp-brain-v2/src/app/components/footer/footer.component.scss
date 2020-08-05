@@ -1,0 +1,144 @@
+@import '../../../app-theme.scss';
+
+@mixin footer-link-text {
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.footer {
+    background-color: mat-color($app-theme, 200);
+    min-height: 17rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    display: flex;
+    justify-content: space-between;
+    color: mat-color($app-theme, 100);
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        margin-right: 2.5rem;
+    }
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    color: mat-color($app-theme, 100);
+    font-size: 16px;
+    line-height: 20px;
+
+    &:hover {
+        text-decoration: underline;
+        color: mat-color($app-theme, 100);
+    }
+
+    &_active {
+        font-family: 'Untitled-Sans-Medium', sans-serif;
+    }
+}
+
+.footer-button {
+    display: flex;
+    align-items: center;
+    color: mat-color($app-theme, 100);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        span {
+            text-decoration: underline;
+        }
+    }
+}
+
+.info {
+    max-width: 600px;
+
+    &__line {
+        border-top: 1px solid mat-color($app-theme, 700);
+        margin: 1.6rem 0;
+    }
+}
+
+.nav {
+    margin-right: 3rem;
+}
+
+.mobile-info {
+    display: none;
+}
+
+.cmi-text {
+    font-size: 14px;
+    line-height: 22px;
+
+    &__link {
+        font-size: inherit;
+        line-height: inherit;
+        color: mat-color($app-theme, 100);
+        font-family: 'Untitled-Sans-Medium', sans-serif;
+
+        &:hover {
+            color: mat-color($app-theme, 100);
+            text-decoration: underline;
+        }
+    }
+}
+
+.contacts {
+    display: flex;
+}
+
+.sections {
+    opacity: 0.7;
+    margin-right: 2.2rem;
+
+    &__item {
+        margin: 0 0 1rem 0;
+        font-size: 16px;
+        line-height: 25px;
+    }
+}
+
+.social-media {
+    display: flex;
+    margin: 0 0 1rem 0;
+
+    &__facebook {
+        margin-right: 1rem;
+    }
+
+    &__facebook,
+    &__twitter {
+        @include footer-link-text;
+    }
+}
+
+.contact-us {
+    margin: 0 0 1rem 0;
+
+    &__item {
+        @include footer-link-text;
+
+        &_phone {
+            display: inline-flex;
+        }
+    }
+}
+
+.address {
+    font-size: 15px;
+    line-height: 22px;
+}
