@@ -1,9 +1,5 @@
-import { Component, Inject, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { ConfigurationService } from '../../../services/configuration.service';
+import { Component, Input } from '@angular/core';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 import { ConsentStatuses } from '../../../models/cookies';
 
 @Component({
@@ -33,9 +29,7 @@ import { ConsentStatuses } from '../../../models/cookies';
 export class CookiesBannerComponent {
   @Input() logoSrc: string;
 
-  constructor(private cookiesService: CookiesManagementService,
-              public dialog: MatDialog,
-              @Inject('ddp.config') private configuration: ConfigurationService) {
+  constructor(private cookiesService: CookiesManagementService) {
   }
 
   accept(): void {

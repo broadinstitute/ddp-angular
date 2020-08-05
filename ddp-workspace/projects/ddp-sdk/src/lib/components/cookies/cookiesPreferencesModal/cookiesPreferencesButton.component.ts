@@ -2,7 +2,6 @@ import { Component, Inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ConfigurationService } from '../../../services/configuration.service';
-import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
 
 @Component({
@@ -17,8 +16,7 @@ export class CookiesPreferencesButtonComponent {
   @Input() text: string;
   @Input() className: string;
 
-  constructor(private cookiesService: CookiesManagementService,
-              public dialog: MatDialog,
+  constructor(public dialog: MatDialog,
               @Inject('ddp.config') private configuration: ConfigurationService) {
   }
 

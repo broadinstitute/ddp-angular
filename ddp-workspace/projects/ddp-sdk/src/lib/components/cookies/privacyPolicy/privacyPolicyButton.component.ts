@@ -1,8 +1,6 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { ConfigurationService } from '../../../services/configuration.service';
-import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 
 @Component({
@@ -16,9 +14,7 @@ export class PrivacyPolicyButtonComponent {
   @Input() className: string;
   @Input() logoSrc: string;
 
-  constructor(private cookiesService: CookiesManagementService,
-              public dialog: MatDialog,
-              @Inject('ddp.config') private configuration: ConfigurationService) {
+  constructor(public dialog: MatDialog) {
   }
 
   openPolicy(): void {

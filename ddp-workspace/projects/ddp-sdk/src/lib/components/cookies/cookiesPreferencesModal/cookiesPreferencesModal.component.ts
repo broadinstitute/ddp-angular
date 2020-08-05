@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
 import { ConsentStatuses } from '../../../models/cookies';
 
@@ -89,9 +87,9 @@ export class CookiesPreferencesModalComponent implements OnInit {
   public cookies;
 
   constructor(public dialogRef: MatDialogRef<CookiesPreferencesModalComponent>,
+              private cookiesService: CookiesManagementService,
               public dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) public data,
-              private cookiesService: CookiesManagementService) {
+              @Inject(MAT_DIALOG_DATA) public data) {
   }
 
   ngOnInit(): void {
