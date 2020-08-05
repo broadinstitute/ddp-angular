@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigurationService } from './configuration.service';
 import { AnalyticsManagementService } from './analyticsManagement.service';
@@ -17,8 +16,7 @@ export class CookiesManagementService {
   private readonly isAuthenticated: boolean;
   private hasToSetCookiesPreferences: BehaviorSubject<boolean> =  new BehaviorSubject(null);
 
-  constructor(private cookie: CookieService,
-              private analytics: AnalyticsManagementService,
+  constructor(private analytics: AnalyticsManagementService,
               @Inject('ddp.config') private configuration: ConfigurationService,
               private profileServiceAgent: UserProfileServiceAgent,
               private session: SessionMementoService,

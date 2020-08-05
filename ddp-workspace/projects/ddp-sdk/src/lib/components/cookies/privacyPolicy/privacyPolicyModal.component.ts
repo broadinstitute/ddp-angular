@@ -14,8 +14,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   `,
 })
 export class PrivacyPolicyModalComponent {
-  public displayedColumns: string[] = ['name', 'description', 'expiration'];
-
   constructor(public dialogRef: MatDialogRef<PrivacyPolicyModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
   }

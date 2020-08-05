@@ -17,26 +17,19 @@ import { ConsentStatuses } from '../../../models/cookies';
                                     [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'">
     </ddp-cookies-preferences-button>
     <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"
-            (click)="reject()"
+            (click)="cookiesService.updatePreferences(statuses.defaultReject)"
             [innerText]="'SDK.CookiesBanner.Reject' | translate">
     </button>
     <button class="Button CookieButton--Accept col-lg-4 col-md-4 col-sm-8 col-xs-8"
-            (click)="accept()"
+            (click)="cookiesService.updatePreferences(statuses.defaultAccept)"
             [innerText]="'SDK.CookiesBanner.Accept' | translate">
     </button>
   </div>`
 })
 export class CookiesBannerComponent {
   @Input() logoSrc: string;
+  public statuses = ConsentStatuses;
 
-  constructor(private cookiesService: CookiesManagementService) {
-  }
-
-  accept(): void {
-    this.cookiesService.updatePreferences(ConsentStatuses.defaultAccept);
-  }
-
-  reject(): void {
-    this.cookiesService.updatePreferences(ConsentStatuses.defaultReject);
+  constructor(public cookiesService: CookiesManagementService) {
   }
 }
