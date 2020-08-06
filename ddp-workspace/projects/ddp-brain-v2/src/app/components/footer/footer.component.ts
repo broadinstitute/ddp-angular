@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ToolkitConfigurationService, CommunicationService } from 'toolkit';
+import { WindowRef } from 'ddp-sdk';
 
 @Component({
   selector: 'app-footer',
@@ -15,7 +16,10 @@ export class FooterComponent implements OnInit {
   public phone: string;
   public appRoutes = AppRoutes;
 
-  constructor(@Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
+  constructor(
+    private window: WindowRef,
+    private communicationService: CommunicationService,
+    @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.cmiUrl = this.config.countMeInUrl;
@@ -25,7 +29,14 @@ export class FooterComponent implements OnInit {
     this.phone = this.config.phone;
   }
 
-  public scrollToTop(): void { }
+  public scrollToTop(): void {
+    this.window.nativeWindow.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 
-  public openJoinMailingList(): void { }
+  public openJoinMailingList(): void {
+    this.communicationService.openJoinDialog();
+  }
 }
