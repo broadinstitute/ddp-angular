@@ -17,8 +17,19 @@
             "Alt": "Brain Cancer Project logo"
         }
     },
+    "Footer": {
+        "SocialMedia": "Social Media",
+        "ContactUs": "Contact Us",
+        "Facebook": "Facebook",
+        "Twitter": "Twitter",
+        "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States",
+        "Text": {
+            "Part1": "The Brain Cancer Project is part of",
+            "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+        }
+    },
     "Navigation": {
-        "BackToTop": "↑ Back to top",
+        "BackToTop": "Back to top",
         "FAQs": "FAQs",
         "AboutUs": "About Us",
         "MailingList": "Join Mailing List",

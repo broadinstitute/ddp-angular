@@ -6,25 +6,25 @@
                     <li class="list__item">
                         <button class="simple-button footer-button" (click)="scrollToTop()">
                             <mat-icon>arrow_drop_up</mat-icon>
-                            <span>Back to top</span>
+                            <span translate>Navigation.BackToTop</span>
                         </button>
                     </li>
                     <li class="list__item">
                         <a class="footer-link" [routerLink]="'/' + appRoutes.MoreDetails"
-                            routerLinkActive="header-link_active">FAQs</a>
+                            routerLinkActive="header-link_active" translate>Navigation.FAQs</a>
                     </li>
                     <li class="list__item">
                         <a class="footer-link" [routerLink]="'/' + appRoutes.AboutUs"
-                            routerLinkActive="header-link_active">About Us</a>
+                            routerLinkActive="header-link_active" translate>Navigation.AboutUs</a>
                     </li>
                     <li class="list__item">
                         <button class="simple-button footer-button" (click)="openJoinMailingList()">
-                            <span>Join Mailing List</span>
+                            <span translate>Navigation.MailingList</span>
                         </button>
                     </li>
                     <li class="list__item">
-                        <a class="footer-link" [routerLink]="'/' + appRoutes.Data"
-                            routerLinkActive="header-link_active">Data</a>
+                        <a class="footer-link" [routerLink]="'/' + appRoutes.Data" routerLinkActive="header-link_active"
+                            translate>Navigation.Data</a>
                     </li>
                 </ul>
             </nav>
@@ -35,33 +35,31 @@
         </div>
         <div class="contacts">
             <div class="sections">
-                <p class="sections__item">Social Media</p>
-                <p class="sections__item">Contact Us</p>
+                <p class="sections__item" translate>Footer.SocialMedia</p>
+                <p class="sections__item" translate>Footer.ContactUs</p>
             </div>
             <div>
                 <div class="social-media">
-                    <p class="social-media__title">Social Media</p>
+                    <p class="social-media__title" translate>Footer.SocialMedia</p>
                     <div class="social-media__links">
                         <a class="footer-link social-media__facebook medium"
-                            [href]="'https://www.facebook.com/' + facebookAccount" target="_blank">Facebook</a>
+                            [href]="'https://www.facebook.com/' + facebookAccount" target="_blank"
+                            translate>Footer.Facebook</a>
                         <a class="footer-link social-media__twitter medium"
-                            [href]="'https://twitter.com/' + twitterAccount" target="_blank">Twitter</a>
+                            [href]="'https://twitter.com/' + twitterAccount" target="_blank"
+                            translate>Footer.Twitter</a>
                     </div>
                 </div>
                 <div>
                     <div class="contact-us">
-                        <p class="contact-us__title contact-us__title_last">Contact Us</p>
+                        <p class="contact-us__title contact-us__title_last" translate>FooterContactUs</p>
                         <a class="footer-link contact-us__item medium" [href]="'mailto: + infoEmail'">{{infoEmail}}</a>
                         <a class="footer-link contact-us__item contact-us__item_phone medium"
                             [href]="'tel:' + phone">{{phone}}</a>
                     </div>
-                    <div>
-                        <p class="address">
-                            Count Me In<br>
-                            415 Main St, Cambridge, MA<br>
-                            02142, United States
-                        </p>
-                    </div>
+                    <address>
+                        <p class="address" [innerHTML]="'Footer.Address' | translate"></p>
+                    </address>
                 </div>
             </div>
         </div>
@@ -73,9 +71,8 @@
 
 <ng-template #text>
     <p class="cmi-text">
-        <span translate>The Brain Cancer Project is part of</span>
-        <a class="cmi-text__link" [href]="cmiUrl" target="_blank" translate>Count Me In</a>,
-        <span translate>a research initiative that brings together patients and scientists as partners to speed up
-            discoveries in cancer research.</span>
+        <span translate>Footer.Text.Part1</span>
+        <a class="cmi-text__link" [href]="cmiUrl" target="_blank" translate>Common.CMI</a>,
+        <span translate>Footer.Text.Part2</span>
     </p>
 </ng-template>
