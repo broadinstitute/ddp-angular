@@ -5,11 +5,11 @@
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
             },
-            "CMI": "Count Me In",
             "LearnMore": "Learn More",
             "ViewFAQ": "View FAQ page",
             "JoinMailingList": "Join Mailing List"
-        }
+        },
+        "CMI": "Count Me In"
     },
     "Header": {
         "Logo": {
