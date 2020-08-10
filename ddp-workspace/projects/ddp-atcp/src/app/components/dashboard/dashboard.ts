@@ -10,7 +10,7 @@ import {
   UserProfileDecorator,
   UserProfileServiceAgent, WindowRef
 } from 'ddp-sdk';
-import {ToolkitConfigurationService, WorkflowBuilderService} from 'toolkit';
+import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
 import { filter, first } from 'rxjs/operators';
@@ -28,10 +28,10 @@ const ASSENT = 'ASSENT';
           <app-workflow-progress [steps]="steps"
                                  [instanceGuid]="instanceGuid"
                                  (onChangeActivity)="updateInstanceGuid($event)"></app-workflow-progress>
-          <ddp-activity-redesigned *ngIf="showActivity" [studyGuid]="studyGuid"
-                                   [buttonWithArrow]="true"
-                                   [activityGuid]="instanceGuid"
-                                   (submit)="setActivity($event)"></ddp-activity-redesigned>
+          <app-atcp-activity *ngIf="showActivity" [studyGuid]="studyGuid"
+                         [buttonWithArrow]="true"
+                         [activityGuid]="instanceGuid"
+                         (submit)="setActivity($event)"></app-atcp-activity>
         </div>
       </div>
     </div>
