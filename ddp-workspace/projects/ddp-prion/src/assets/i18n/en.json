@@ -140,6 +140,245 @@
           "Text": "Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
         }
       }
+    },
+    "PrivacyPolicy": {
+      "Title": "Prion Registry Privacy Statement",
+      "Intro": {
+        "Title": "Last Updated: July 28, 2020",
+        "Text": {
+          "P1": "The Prion Registry has been developed by the Broad Institute of MIT and Harvard (“",
+          "P2BoldUnderline": "Broad Institute",
+          "P3": "”) in collaboration with the Prion Registry Consortium. We deeply value your privacy. This Privacy Statement (“",
+          "P4BoldUnderline": "Policy",
+          "P5": "”) provides important information about how the Prion Registry collects and uses your personal information. ",
+          "P6Bold": "Please make sure you review this Policy before submitting your information to the Prion Registry. If you have any questions about this Policy, please contact us at the addresses listed at the end of this Policy."
+        }
+      },
+      "Who": {
+        "Title": "1. Who is the Prion Registry?",
+        "Text": {
+          "P1": "The Prion Registry is an online registry, maintained by scientists and prion disease patient advocates at the Broad Institute, for people affected by or at risk for prion disease who want to find opportunities to participate in research. Our ultimate goal is to further the development of life-saving therapies to cure, treat, prevent, or delay prion disease. We created this Registry to make it easier for patients to:",
+          "P2Number": {
+            "1": "be counted,",
+            "2": "find research studies to participate in, and",
+            "3": "share their data with researchers."
+          },
+          "P3": "This Registry will also help qualified researchers recruit study participants and gather data. For more information on the Prion Registry, please see PrionRegistry.org. For more information on the Broad Institute, please see https://www.broadinstitute.org/about-us.\nPlease note that the Registry may link to other websites that are not affiliated with us or the Research Project ",
+          "P4Bold": "(“Third-Party Sites”).",
+          "P5": " We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites. You should make sure you review the privacy policies for those Third-Party Sites before providing them any of your information."
+        }
+      },
+      "Purpose": {
+        "Title": "2. What is the purpose and scope of this Policy?",
+        "Text": {
+          "P1": "This Policy describes the information we collect from users of the Registry, the purposes for collecting that information, how we use that information, and with whom we share that information.   It applies to users who are patients enrolled in our Research Projects (“",
+          "P2Bold": "Participant Users",
+          "P3": "”), and those users who are not enrolled in any Research Project and are using the Registry for general informational purposes or because they are interested in participating in a future research project (“",
+          "P4Bold": "General Users",
+          "P5": "”).  We will refer to all users, including Participant Users and General Users, in this Policy as “",
+          "P6Bold": "you",
+          "P7": "” or “",
+          "P8Bold": "your",
+          "P9": "”."
+        }
+      },
+      "Use": {
+        "Title": "3. If I use the Registry, am I agreeing to this Policy?",
+        "Text": "Yes.  However, your use of and contribution of information to the Registry is entirely voluntary and you have certain rights to control use of your information as described below.   If you decide to use the Registry, you are agreeing that we can use your information as described in this Policy."
+      },
+      "HowCollect": {
+        "Title": "4. How do we collect information from you?",
+        "Text": {
+          "P1": "We collect information about you in two ways.",
+          "P2": "First, we collect certain information from you ",
+          "P3Underline": "when you provide it to us directly.",
+          "P4": " Specifically, we collect information about you when you: ",
+
+          "P5Underline": "Create a Prion Registry account and profile",
+          "P6": " through our website.",
+          "P7Underline": "Participate in the Registry",
+          "P8": " by providing us information about you and your experiences with prion disease.  For example, the medical questionnaire in our Registry will ask you a series of questions about your demographics, current prion disease status, willingness to be contacted for trials, past trial participation, zip code and contact information.  Please note that you are not required to answer any question.",
+          "P9Underline": "Respond to notifications of research opportunities",
+          "P10": ", surveys and other communications we may send to you.",
+          "P11Underline": "Communicate with us",
+          "P12": " (e.g. by email).",
+
+          "P13": "Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
+
+          "P14": "When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
+          "P15": "We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics and MixPanel, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+        }
+      },
+      "WhatCollect": {
+        "Title": "5. What kind of information do we collect?",
+        "Text": {
+          "P1BoldUnderline": "Personal Information",
+          "P2": ": Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
+          "P3BoldUnderline": "Medical and research-related information",
+          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
+          "P5BoldUnderline": "Registry Usage Information",
+          "P6": ": Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
+          "P7BoldUnderline": "Device Information",
+          "P8": ": Information that relates to a particular computer, mobile device, or other device (e.g. iPad) that you use to access the Registry. Device information includes your IP address (which is a number assigned by an internet service provider to the computer you use to access the Internet), a device ID (which is a number assigned to a mobile phone by the device manufacturer), or the type of operating system or web browser used to access the Registry.\n"
+        }
+      },
+      "Cookies": {
+        "Title": "6. Do we use cookies and other tracking technologies?",
+        "Text": {
+          "P1": "Yes.  We use cookies for various purposes, such as to make it easier for you to navigate our Registry, to enable a faster log-in process or to better understand user interactions with the Registry.  There are two types of cookies: session and persistent cookies.",
+          "P2Underline": "Session Cookies",
+          "P3": ".  Session cookies exist only during a session.  They disappear from your computer or device when you close your browser or turn off your computer or device.  We use Session Cookies to allow our systems to uniquely identify you during a session or while you are logged in to the Registry.  This allows us to process your communications and requests and verify your identity after you have logged in and as you move through our Registry, and to optimize your experience in using the Registry.",
+          "P4Underline": "Persistent Cookies",
+          "P5": ".  Persistent Cookies remain on your computer or device after you have closed your browser or the Registry or turned off your computer or mobile device.  We use persistent cookies to track aggregate and statistical information about user activity on our Registry (see “Tracking Technologies” below).",
+          "P6Bold": "Disabling Cookies.",
+          "P7": "  You may opt-out of non-essential cookies by selecting “Reject Cookies” or by clicking on “Manage Preferences” in the prompt asking whether you accept the use of cookies. Non-essential cookies are those that allow us to monitor site usage and improve the site, such as Google Analytics. Other cookies, however, are essential to the website’s functionality, including those cookies that allow you to stay logged into the site while you use it. The only way to opt out of these essential cookies is to not join the site.",
+          "P8": "You may also view and manage your cookie preferences by clicking on the button below.",
+          "P9Bold": "Tracking Technologies.",
+          "P10": "  We use automated devices, applications, and analytic tools such as Google Analytics, to evaluate usage of our Registry and improve our user experience and performance.  We may also use third-party tracking technologies, such as tCell, to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services.  We do not share your personal information with these third parties.",
+          "P11Bold": "Do Not Track Signals. ",
+          "P12": "We respond to browser-level Do Not Track (“",
+          "P13BoldUnderline": "DNT",
+          "P14": "”) signals by disabling optional tracking technologies such as Google Analytics, however, we do not disable tracking that is essential to the website’s functionality, such as cookies that allow you to stay logged in. For information about DNT, visit www.allaboutdnt.org."
+        }
+      },
+      "CookiePreferences": "Cookie Preferences",
+      "HowUse": {
+        "Title": "6. How do we use your information?",
+        "Text": {
+          "P1": "We use your data for the following purposes only:",
+          "P2BoldUnderline": "Identify Research Opportunities. ",
+          "P3": "We use the information you provide about yourself, your medical condition, and experiences to identify opportunities for you to participate in research. If you agree, you may choose to be contacted about future research studies and/or clinical trials in which you may be eligible to participate. You may also choose not to receive these invitations or decline to participate in future studies. Please note that the research studies with whom we partner only receive aggregate, de-identified data from our participants unless you enter into a separate research consent with them. This aggregate data does not identify you personally.",
+          "P4BoldUnderline": "Provide the Registry and Communicate with You. ",
+          "P5": "We, together with our collaborators, vendors, and service providers, use your information to operate the Registry, respond to your inquiries, notify you of research opportunities, ask you to periodically update your profile and health status, and for other communication purposes.",
+          "P6BoldUnderline": "Perform and promote research. ",
+          "P7": "We will use the information you provide to generate de-identified, aggregate descriptive statistics, such as the number of people interested in participating in prion disease research in a given geographic area. These statistics may be used to perform research, such as characterizing the prevalence of prion disease, or to promote prion disease research, for example, by securing funding or collaborations. As part of this work, we may use the information you provide to verify the accuracy of the Registry data, develop scientific publications, and answer questions from IRBs, IECs or government or regulatory agencies.",
+          "P8BoldUnderline": "Personalize Your Experience. ",
+          "P9": "We use your information to tailor the content and information that we may send or display to you, to offer location customization, and personalized help and instructions, and to otherwise personalize your experiences while you are using the Registry.",
+          "P10BoldUnderline": "Develop and Improve Our Registry. ",
+          "P11": "We use your information to ensure our Registry is working as intended, to better understand how users access and use our Registry, both on an aggregated and individualized basis, to understand the features that our Registry find valuable, make improvements to our Registry, to develop new features and applications, and for other research and analytical purposes."
+        }
+      },
+      "ShareWith": {
+        "Title": "7. With whom do we share your information?",
+        "Text": {
+          "P1": "",
+          "P2BoldUnderline": "Research Partners.",
+          "P3": "",
+          "P4Bold": "It will then be your choice whether to contact these researchers and share your identity in order to enroll in their studies; researchers will not be able to directly view your contact information in the registry.",
+          "P5BoldUnderline": "Vendors and Service Providers",
+          "P6": "",
+          "P7BoldUnderline": "Legal and Safety Reasons",
+          "P8": "",
+          "P9": "In response to a request by law enforcement;",
+          "P10": "In response to legal process, such as a subpoena, a request for discovery in a civil proceeding, or in response to a court order.",
+          "P11": "",
+          "P12BoldUnderline": "Reorganization, Sale or Merger",
+          "P13": "",
+          "P14BoldUnderline": "With Your Consent",
+          "P15": "",
+          "P16BoldUnderline": "Aggregate and De-Identified Information",
+          "P17": ""
+        }
+      },
+      "ThirdParty": {
+        "Title": "8. What about Third-Party Sites?",
+        "Text": {
+          "P1": "",
+          "P2BoldUnderline": "",
+          "P3": ""
+        }
+      },
+      "OtherUsers": {
+        "Title": "9. Can other users see my information?",
+        "Text": ""
+      },
+      "InformationRights": {
+        "Title": "10. What rights do I have with respect to my information?",
+        "Text": {
+          "P1": "",
+          "P2": ""
+        }
+      },
+      "DataRequest": "Data Request",
+      "Security": {
+        "Title": "11. What kind of security does the Registry use to protect my information?",
+        "Text": {
+          "P1": "",
+          "P2": "",
+          "P3": "",
+          "P4": "",
+          "P5": "",
+          "P6": "",
+          "P7": "",
+          "P8": ""
+        }
+      },
+      "Children": {
+        "Title": "12. Do you collect personal information from children?",
+        "Text": ""
+      },
+      "Country": {
+        "Title": "13. Is there any transfer of personal information from one country to another?",
+        "Text": ""
+      },
+      "Contact": {
+        "Title": "14. Whom do I contact if I have a question or request?",
+        "Text": {
+          "P1": "",
+          "P2Bold": "Broad Institute:",
+          "P3": "By email to: info@prionregistry.org",
+          "P4": "By mail to:",
+          "P5": "The Broad Institute of MIT and Harvard",
+          "P6": "415 Main St.",
+          "P7": "Cambridge, MA 02142,",
+          "P8": "United States"
+        }
+      },
+      "Update": {
+        "Title": "15. Will you update or change this Policy?",
+        "Text": {
+          "P1": "",
+          "P2": ""
+        }
+      },
+      "EU": {
+        "Title": "16. Notice to Residents of the European Union",
+        "Text": {
+          "P1": "",
+          "P2BoldUnderline": "GDPR",
+          "P3": "",
+          "P4Bold": "Legitimate interests. ",
+          "P5": "",
+          "P6": "improving our products and services and the content on Registry (for example to manage the Registry, improve the Registry, and better tailor the features, performance and support of the Registry);",
+          "P7": "",
+          "P8": "",
+          "P9": "fulfilling your requests and communicating with you when you contact us; and ",
+          "P10": "",
+          "P11Bold": "Consent. ",
+          "P12": "",
+          "P13Bold": "Legal obligations. ",
+          "P14": "",
+          "P15Bold": "Data Retention.",
+          "P16": "",
+          "P17Bold": "EU Data Subject Rights. ",
+          "P18": "",
+          "P19Bold": "The right to be informed - ",
+          "P20": "",
+          "P21Bold": "The right to access - ",
+          "P22": "",
+          "P23Bold": "The right to rectification - ",
+          "P24": "",
+          "P25Bold": "The right to erasure - ",
+          "P26": "",
+          "P27Bold": "The right to restrict processing - ",
+          "P28": "",
+          "P29Bold": "The right to data portability - ",
+          "P30": "",
+          "P31": "",
+          "P32Bold": "Submitting Requests: ",
+          "P33": ""
+        }
+      }
     }
   },
   "Toolkit": {
@@ -153,10 +392,10 @@
     },
     "Footer": {
       "BackToTop": "Back to top",
+      "PrivacyPolicy": "Privacy Policy",
       "ContactUs": "Contact us:",
       "ContactMailTo": "mailto:info@prionregistry.org",
-      "ContactEmail": "info@prionregistry.org",
-      "PrivacyPolicy": "Privacy Policy"
+      "ContactEmail": "info@prionregistry.org"
     },
     "Dashboard": {
       "StudyListing": {
@@ -496,12 +735,6 @@
         "24hours": "24 hours",
         "10minutes": "10 minutes"
       }
-    },
-    "PrivacyPolicy": {
-      "Title": "Privacy Policy",
-      "P1": "Paragraph 1 Text",
-      "P2": "Paragraph 2 Text",
-      "P3": "Paragraph 3 Text"
     }
   }
 }

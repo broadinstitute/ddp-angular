@@ -82,8 +82,7 @@ export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/changeLanguageRedirect.component';
 export * from './lib/components/cookies/cookiesBanner/cookiesBanner.component';
-export * from './lib/components/cookies/privacyPolicy/privacyPolicyModal.component';
-export * from './lib/components/cookies/privacyPolicy/privacyPolicyStatic.component';
+export * from './lib/components/privacy-policy/privacyPolicyModal.component';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';

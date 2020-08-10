@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { PrivacyPolicyModalComponent } from '../../privacy-policy/privacyPolicyModal.component';
+import { PrivacyModalData } from "../../../models/privacyModalData";
 
 @Component({
   selector: 'ddp-cookies-banner',
@@ -57,7 +58,7 @@ export class CookiesBannerComponent {
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: {},
+      data: new PrivacyModalData(this.configuration.usePrionPrivacyPolicyTemplate),
       autoFocus: false,
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
