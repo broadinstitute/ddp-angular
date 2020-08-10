@@ -29,6 +29,7 @@ import { FooterComponent, ToolkitConfigurationService } from "toolkit";
           <span *ngIf="!isLoggedIn()"  (click)="clickJoinUs()" class="Footer-link" translate>Toolkit.Common.JoinUs</span>
           <span *ngIf="isLoggedIn()"  (click)="clickDashboard()" class="Footer-link" translate>Toolkit.Common.Dashboard</span>
           <ddp-sign-in-out class="Footer-link"></ddp-sign-in-out>
+          <span (click)="clickPrivacyPolicy()" class="Footer-link" translate>Toolkit.Footer.PrivacyPolicy</span>
           <button (click)="goToTop()" class="Footer-link"><i class="fas fa-arrow-up Footer-arrow"></i><span translate>Toolkit.Footer.BackToTop</span></button>
         </p>
       </div>
@@ -69,5 +70,9 @@ export class PrionFooterComponent extends FooterComponent implements OnInit {
 
   public clickLearnMore(): void {
     this._router.navigateByUrl('/learn-more');
+  }
+
+  public clickPrivacyPolicy(): void {
+    this._router.navigateByUrl('/privacy-policy');
   }
 }

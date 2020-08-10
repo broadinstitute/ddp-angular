@@ -140,6 +140,9 @@
           "Text": "he: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
         }
       }
+    },
+    "PrivacyPolicy": {
+
     }
   },
   "Toolkit": {
@@ -154,6 +157,7 @@
     },
     "Footer": {
       "BackToTop": "חזרה למעלה",
+      "PrivacyPolicy": "מדיניות פרטיות",
       "ContactUs": "צור קשר:",
       "ContactMailTo": "mailto:info@prionregistry.org",
       "ContactEmail": "info@prionregistry.org"
@@ -496,12 +500,6 @@
         "24hours": "he: 24 hours",
         "10minutes": "he: 10 minutes"
       }
-    },
-    "PrivacyPolicy": {
-      "Title": "he: Privacy Policy",
-      "P1": "he: Paragraph 1 Text",
-      "P2": "he: Paragraph 2 Text",
-      "P3": "he: Paragraph 3 Text"
     }
   }
 }
