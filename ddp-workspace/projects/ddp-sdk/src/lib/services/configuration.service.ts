@@ -50,4 +50,5 @@ export class ConfigurationService {
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
     cookies: Cookies | null;
+    usePrionPrivacyPolicyTemplate: boolean;
 }
