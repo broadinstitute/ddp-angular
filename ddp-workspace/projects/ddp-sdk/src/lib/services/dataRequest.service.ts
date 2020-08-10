@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoggingService, ConfigurationService, LanguageService } from 'ddp-sdk';
+import { ConfigurationService } from '../services/configuration.service';
+import { LanguageService } from '../services/languageService.service';
+import { LoggingService } from '../services/logging.service';
+
 import { ServiceAgent } from './serviceAgents/serviceAgent.service';
 import { Observable } from 'rxjs';
 import { DataRequest } from '../models/dataRequest';
