@@ -497,6 +497,21 @@
         "10minutes": "es: 10 minutes"
       }
     },
+    "DataRequest": {
+      "DataRequest": "es: Data Request",
+      "SubmitRequest": "es: Submit Request",
+      "Title": "es: Data Request Access",
+      "SubTitle": "es: What would you like to request?",
+      "Copy": "es: Receive a copy of my data",
+      "Update": "es: Update/change my data",
+      "Delete": "es: Delete my data entirely",
+      "Other": "es: Other",
+      "DescribeRequest": "es: Please describe your request",
+      "RequestHasBeenSubmitted": "es: Your request has been submitted. We will respond to your request soon as possible.",
+      "Okay": "es: Okay",
+      "SignInTooltip": "es: Please sign in to start a data access request",
+      "Error": "es: Please enter your request."
+    },
     "PrivacyPolicy": {
       "Title": "es: Privacy Policy",
       "P1": "es: Paragraph 1 Text",

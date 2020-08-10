@@ -497,6 +497,21 @@
         "10minutes": "zh: 10 minutes"
       }
     },
+    "DataRequest": {
+      "DataRequest": "zh: Data Request",
+      "SubmitRequest": "zh: Submit Request",
+      "Title": "zh: Data Request Access",
+      "SubTitle": "zh: What would you like to request?",
+      "Copy": "zh: Receive a copy of my data",
+      "Update": "zh: Update/change my data",
+      "Delete": "zh: Delete my data entirely",
+      "Other": "zh: Other",
+      "DescribeRequest": "zh: Please describe your request",
+      "RequestHasBeenSubmitted": "zh: Your request has been submitted. We will respond to your request soon as possible.",
+      "Okay": "zh: Okay",
+      "SignInTooltip": "zh: Please sign in to start a data access request",
+      "Error": "zh: Please enter your request."
+    },
     "PrivacyPolicy": {
       "Title": "zh: Privacy Policy",
       "P1": "zh: Paragraph 1 Text",

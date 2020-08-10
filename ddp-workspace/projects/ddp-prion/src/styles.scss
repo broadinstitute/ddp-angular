@@ -112,6 +112,34 @@ a:focus {
     color: #ffffff !important;
 }
 
+.DataRequestButton--DataRequest,
+.DataRequestButton--DataRequest:active,
+.DataRequestButton--DataRequest:hover {
+  position: relative;
+  border: 1px solid #82B547 !important;
+  background-color: #82B547 !important;
+  color: #ffffff !important;
+}
+
+.DataRequestButton--DataRequest:disabled:hover:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 180px;
+  top: -10px;
+  width: 220px;
+  margin-left: 5px;
+  padding: 12px;
+  color: #FFFFFF;
+  background: rgba(#F2B816, 0.8);
+  border-radius: 3px;
+}
+
+.DataRequestButton--DataRequest:disabled {
+  border: 1px solid #9E9E9E !important;
+  background-color: #9E9E9E !important;
+  color: #ffffff !important;
+}
+
 .Button--primaryYellow,
 .Button--primaryYellow:active,
 .Button--primaryYellow:focus,
@@ -3426,5 +3454,78 @@ ddp-cookies-preferences-modal {
 ddp-privacy-policy-modal {
   .Container, .PageContent {
     background: transparent;
+  }
+}
+
+.dataRequestModal {
+  &--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  &--request {
+    padding: 0 40px;
+  }
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+
+    mat-radio-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mat-radio-button {
+      margin: 10px 0;
+    }
+
+    .mat-input-element {
+      min-height: 100px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  &--submittedRequest {
+    padding: 50px 0 0 0;
+
+    p {
+      padding: 0 100px 50px 100px;
+      text-align: center;
+    }
+
+    .mat-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    .material-icons {
+      display: block;
+      margin: 0 auto;
+      font-size: 45px;
+      color: #82B547;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .dataRequestModal {
+    &--header {
+      padding-left: 0;
+    }
+
+    &--request {
+      padding: 0;
+    }
+
+    &--submittedRequest {
+      p {
+        padding: 0 10px 50px 10px;
+      }
+    }
   }
 }
