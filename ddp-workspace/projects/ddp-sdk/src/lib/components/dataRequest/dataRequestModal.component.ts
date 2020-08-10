@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { TextInputValidator } from '../../utility/validators/textInputValidator';
 import { Subscription } from 'rxjs';
+import { DataRequestService } from '../../services/dataRequest.service';
+import { DataRequest, DataRequestOptions } from '../../models/dataRequest';
 
 @Component({
   selector: 'ddp-data-request-modal',
@@ -57,11 +59,12 @@ export class DataRequestModalComponent implements OnInit, OnDestroy {
     otherText: new FormControl('')
   });
 
-  private selectedOption: string = this.form.get('options').value;
+  private selectedOption: DataRequestOptions = this.form.get('options').value;
   private textValue: string;
   private anchor: Subscription = new Subscription();
 
-  constructor(public dialogRef: MatDialogRef<DataRequestModalComponent>) {
+  constructor(public dialogRef: MatDialogRef<DataRequestModalComponent>,
+              private dataRequestService: DataRequestService) {
   }
 
   ngOnInit(): void {
@@ -103,9 +106,15 @@ export class DataRequestModalComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.form.valid
-      ? this.requestSubmitted = true
-      : this.isTextError = this.showTextField && this.form.get('otherText').status === 'INVALID';
+    if (this.form.valid) {
+      const request: DataRequest = this.textValue
+        ? { option: this.selectedOption, otherText: this.textValue}
+        : { option: this.selectedOption};
+      this.dataRequestService.sendDataRequest(request).subscribe(() => this.requestSubmitted = true);
+      return;
+    }
+
+    this.isTextError = this.showTextField && this.form.get('otherText').status === 'INVALID';
   }
 
   close(): void {
