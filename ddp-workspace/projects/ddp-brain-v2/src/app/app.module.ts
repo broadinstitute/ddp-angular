@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import { MatIconModule } from '@angular/material/icon';
 
@@ -94,7 +95,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
   declarations: [
     AppComponent,
     WelcomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
