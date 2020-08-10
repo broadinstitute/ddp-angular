@@ -1,4 +1,4 @@
-export type CookiesTypes = 'Functional' | 'Analytical' | 'Security';
+export type CookiesTypes = 'Functional' | 'Analytical';
 
 export interface Cookie {
   name: string;
