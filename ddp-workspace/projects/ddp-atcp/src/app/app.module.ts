@@ -12,7 +12,7 @@ import {
   LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
 } from 'ddp-sdk';
 
 import {
@@ -28,8 +28,9 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer';
 import { AboutUsComponent } from './components/about-us/about-us';
 import { HeaderComponent } from './components/header/header';
+import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
 import { MatMenuModule } from '@angular/material';
-import {Language, LanguagesProvider, LanguagesToken} from './providers/languages.provider';
+import { Language, LanguagesProvider, LanguagesToken} from './providers/languages.provider';
 import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { DataAccessComponent } from './components/data-access/data-access';
@@ -43,6 +44,7 @@ import {ConsoleComponent} from "./components/console/console";
 import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
+
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -115,6 +117,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     AboutInitiativeComponent,
     HeaderComponent,
+    AtcpActivityComponent,
     JoinUsComponent,
     DataAccessComponent,
     DashBoardComponent,

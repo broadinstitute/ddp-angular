@@ -28,10 +28,10 @@ const ASSENT = 'ASSENT';
           <app-workflow-progress [steps]="steps"
                                  [instanceGuid]="instanceGuid"
                                  (onChangeActivity)="updateInstanceGuid($event)"></app-workflow-progress>
-          <ddp-activity-redesigned *ngIf="showActivity" [studyGuid]="studyGuid"
-                                   [buttonWithArrow]="true"
-                                   [activityGuid]="instanceGuid"
-                                   (submit)="setActivity($event)"></ddp-activity-redesigned>
+          <atcp-activity *ngIf="showActivity" [studyGuid]="studyGuid"
+                         [buttonWithArrow]="true"
+                         [activityGuid]="instanceGuid"
+                         (submit)="setActivity($event)"></atcp-activity>
         </div>
       </div>
     </div>
