@@ -100,7 +100,7 @@
     }
 
 
-    atcp-activity {
+    app-atcp-activity {
       padding: 0;
       flex-grow: 1;
 
@@ -111,7 +111,7 @@
 
     &.is-assets {
 
-      atcp-activity {
+      app-atcp-activity {
 
         ::ng-deep {
           @include font-McLaren();

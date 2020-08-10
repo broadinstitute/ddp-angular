@@ -44,6 +44,7 @@ import {ConsoleComponent} from "./components/console/console";
 import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -108,7 +109,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatMenuModule,
     MatProgressBarModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     WelcomeComponent,
