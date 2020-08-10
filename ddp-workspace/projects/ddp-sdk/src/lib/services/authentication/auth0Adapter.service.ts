@@ -206,7 +206,10 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     public handleAdminAuthentication(onErrorCallback?: (e: any | null) => void): void {
-        this.adminWebAuth.parseHash((err, authResult) => {
+        const options = {
+            __enableIdPInitiatedLogin: true
+        };
+        this.adminWebAuth.parseHash(options, (err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult, true);
