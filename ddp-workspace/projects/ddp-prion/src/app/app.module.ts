@@ -76,6 +76,52 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.cookies = {
+  cookies: [
+    {
+      type: 'Functional',
+      actions: null,
+      list: [
+        {
+          name: 'auth0',
+          description: 'authorization',
+          expiration: 'various'
+        },
+        {
+          name: 'pepper',
+          description: 'authorization',
+          expiration: 'session'
+        },
+        {
+          name: 'tcell',
+          description: 'authorization',
+          expiration: 'various'
+        }
+      ]
+    },
+    {
+      type: 'Analytical',
+      actions: ['Accept', 'Reject'],
+      list: [
+        {
+          name: 'ga',
+          description: 'identification',
+          expiration: '2years'
+        },
+        {
+          name: 'gid',
+          description: 'grouping_behavior',
+          expiration: '24hours'
+        },
+        {
+          name: 'gat',
+          description: 'throttling',
+          expiration: '10minutes'
+        }
+      ]
+    }
+  ]
+};
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
