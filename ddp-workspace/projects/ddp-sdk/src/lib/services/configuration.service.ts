@@ -45,4 +45,5 @@ export class ConfigurationService {
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
     cookies: Cookies | null;
+    usePrionPrivacyPolicyTemplate: boolean;
 }

@@ -91,6 +91,10 @@ a:focus {
     outline: 0;
 }
 
+.Underline {
+  text-decoration: underline;
+}
+
 //Button styles
 .Button {
     border-radius: 2px;
@@ -722,6 +726,10 @@ input.mat-input-element.study-listing-filter {
     font-weight: 500;
 }
 
+.Nav-item:first-of-type {
+  padding-left: 20px !important;
+}
+
 #JoinUsLink {
   padding: 12px 30px !important;
 }
@@ -838,6 +846,7 @@ p.Footer-contact {
   background-clip: unset;
   border: none;
   border-image-width: 0;
+  white-space: nowrap;
 }
 
 .Footer-link:hover, .Footer-link .SimpleButton:hover {
@@ -1965,6 +1974,12 @@ select:-webkit-autofill {
     padding: 0;
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+.list {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400 !important;
 }
 
 .mat-form-field-underline {

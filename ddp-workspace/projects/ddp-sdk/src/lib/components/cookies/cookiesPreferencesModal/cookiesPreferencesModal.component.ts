@@ -1,8 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Cookies } from '../../../models/cookies';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { PrivacyPolicyModalComponent } from '../../privacy-policy/privacyPolicyModal.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { PrivacyModalData } from "../../../models/privacyModalData";
+import { ConfigurationService } from "../../../services/configuration.service";
 
 @Component({
   selector: 'ddp-cookies-preferences-modal',
@@ -83,6 +85,7 @@ export class CookiesPreferencesModalComponent {
 
   constructor(public dialogRef: MatDialogRef<CookiesPreferencesModalComponent>,
               public dialog: MatDialog,
+              @Inject('ddp.config') private configuration: ConfigurationService,
               @Inject(MAT_DIALOG_DATA) public data: Cookies) {
   }
 
@@ -97,7 +100,7 @@ export class CookiesPreferencesModalComponent {
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: {},
+      data: new PrivacyModalData(this.configuration.usePrionPrivacyPolicyTemplate),
       autoFocus: false,
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()
