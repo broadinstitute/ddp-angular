@@ -15,5 +15,6 @@ export const AppRoutes = {
     PasswordResetDone: 'password-reset-done',
     CountMeIn: 'count-me-in',
     AboutUs: 'about-us',
-    Data: 'data'
+    Data: 'data',
+    MoreDetails: 'more-details'
 };

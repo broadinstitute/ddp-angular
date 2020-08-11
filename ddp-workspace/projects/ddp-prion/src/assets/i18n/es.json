@@ -140,6 +140,10 @@
           "Text": "es: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
         }
       }
+    },
+    "ThirdParty": {
+      "Title": "",
+      "Description": "es: For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry."
     }
   },
   "Toolkit": {
@@ -153,10 +157,10 @@
     },
     "Footer": {
       "BackToTop": "Volver arriba",
+      "PrivacyPolicy": "Política de privacidad",
       "ContactUs": "Contacta con nosotros:",
       "ContactMailTo": "mailto:info@prionregistry.org",
-      "ContactEmail": "info@prionregistry.org",
-      "PrivacyPolicy": "es: Privacy Policy"
+      "ContactEmail": "info@prionregistry.org"
     },
     "Dashboard": {
       "StudyListing": {
@@ -513,10 +517,252 @@
       "Error": "es: Please enter your request."
     },
     "PrivacyPolicy": {
-      "Title": "es: Privacy Policy",
-      "P1": "es: Paragraph 1 Text",
-      "P2": "es: Paragraph 2 Text",
-      "P3": "es: Paragraph 3 Text"
+      "Title": "es: Prion Registry Privacy Statement",
+      "Intro": {
+        "Title": "es: Last Updated: July 28, 2020",
+        "Text": {
+          "P1": "es: The Prion Registry has been developed by the Broad Institute of MIT and Harvard (“",
+          "P2BoldUnderline": "Broad Institute",
+          "P3": "es: ”) in collaboration with the Prion Registry Consortium. We deeply value your privacy. This Privacy Statement (“",
+          "P4BoldUnderline": "es: Policy",
+          "P5": "es: ”) provides important information about how the Prion Registry collects and uses your personal information. ",
+          "P6Bold": "es: Please make sure you review this Policy before submitting your information to the Prion Registry. If you have any questions about this Policy, please contact us at the addresses listed at the end of this Policy."
+        }
+      },
+      "Who": {
+        "Title": "es: 1. Who is the Prion Registry?",
+        "Text": {
+          "P1": "es: The Prion Registry is an online registry, maintained by scientists and prion disease patient advocates at the Broad Institute, for people affected by or at risk for prion disease who want to find opportunities to participate in research. Our ultimate goal is to further the development of life-saving therapies to cure, treat, prevent, or delay prion disease. We created this Registry to make it easier for patients to:",
+          "P2Number": {
+            "1": "es: be counted,",
+            "2": "es: find research studies to participate in, and",
+            "3": "es: share their data with researchers."
+          },
+          "P3": "es: This Registry will also help qualified researchers recruit study participants and gather data. For more information on the Prion Registry, please see ",
+          "P4Link": "es: PrionRegistry.org",
+          "P5": "es: . For more information on the Broad Institute, please see ",
+          "P6Link": "https://www.broadinstitute.org/about-us",
+          "P7": ". ",
+          "P8": "es: Please note that the Registry may link to other websites that are not affiliated with us or the Research Project (“",
+          "P9Bold": "es: Third-Party Sites",
+          "P10": "es: ”). We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites. You should make sure you review the privacy policies for those Third-Party Sites before providing them any of your information."
+        }
+      },
+      "Purpose": {
+        "Title": "es: 2. What is the purpose and scope of this Policy?",
+        "Text": {
+          "P1": "es: This Policy describes the information we collect from users of the Registry, the purposes for collecting that information, how we use that information, and with whom we share that information.   It applies to users who are patients enrolled in our Research Projects (“",
+          "P2Bold": "es: Participant Users",
+          "P3": "es: ”), and those users who are not enrolled in any Research Project and are using the Registry for general informational purposes or because they are interested in participating in a future research project (“",
+          "P4Bold": "es: General Users",
+          "P5": "es: ”).  We will refer to all users, including Participant Users and General Users, in this Policy as “",
+          "P6Bold": "es: you",
+          "P7": "es: ” or “",
+          "P8Bold": "es: your",
+          "P9": "”."
+        }
+      },
+      "Use": {
+        "Title": "es: 3. If I use the Registry, am I agreeing to this Policy?",
+        "Text": "es: Yes.  However, your use of and contribution of information to the Registry is entirely voluntary and you have certain rights to control use of your information as described below.   If you decide to use the Registry, you are agreeing that we can use your information as described in this Policy."
+      },
+      "HowCollect": {
+        "Title": "es: 4. How do we collect information from you?",
+        "Text": {
+          "P1": "es: We collect information about you in two ways.",
+          "P2": "es: First, we collect certain information from you ",
+          "P3Underline": "es: when you provide it to us directly.",
+          "P4": "es:  Specifically, we collect information about you when you: ",
+
+          "P5Underline": "es: Create a Prion Registry account and profile",
+          "P6": "es:  through our website.",
+          "P7Underline": "es: Participate in the Registry",
+          "P8": "es:  by providing us information about you and your experiences with prion disease.  For example, the medical questionnaire in our Registry will ask you a series of questions about your demographics, current prion disease status, willingness to be contacted for trials, past trial participation, zip code and contact information.  Please note that you are not required to answer any question.",
+          "P9Underline": "es: Respond to notifications of research opportunities",
+          "P10": "es: , surveys and other communications we may send to you.",
+          "P11Underline": "es: Communicate with us",
+          "P12": "es:  (e.g. by email).",
+
+          "P13": "es: Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
+
+          "P14": "es: When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
+          "P15": "es: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+        }
+      },
+      "WhatCollect": {
+        "Title": "es: 5. What kind of information do we collect?",
+        "Text": {
+          "P1BoldUnderline": "es: Personal Information",
+          "P2": "es: : Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
+          "P3BoldUnderline": "es: Medical and research-related information",
+          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
+          "P5BoldUnderline": "es: Registry Usage Information",
+          "P6": "es: : Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
+          "P7BoldUnderline": "es: Device Information",
+          "P8": "es: : Information that relates to a particular computer, mobile device, or other device (e.g. iPad) that you use to access the Registry. Device information includes your IP address (which is a number assigned by an internet service provider to the computer you use to access the Internet), a device ID (which is a number assigned to a mobile phone by the device manufacturer), or the type of operating system or web browser used to access the Registry.\n"
+        }
+      },
+      "Cookies": {
+        "Title": "es: 6. Do we use cookies and other tracking technologies?",
+        "Text": {
+          "P1": "es: Yes.  We use cookies for various purposes, such as to make it easier for you to navigate our Registry, to enable a faster log-in process or to better understand user interactions with the Registry.  There are two types of cookies: session and persistent cookies.",
+          "P2Underline": "es: Session Cookies",
+          "P3": "es: .  Session cookies exist only during a session.  They disappear from your computer or device when you close your browser or turn off your computer or device.  We use Session Cookies to allow our systems to uniquely identify you during a session or while you are logged in to the Registry.  This allows us to process your communications and requests and verify your identity after you have logged in and as you move through our Registry, and to optimize your experience in using the Registry.",
+          "P4Underline": "es: Persistent Cookies",
+          "P5": "es: .  Persistent Cookies remain on your computer or device after you have closed your browser or the Registry or turned off your computer or mobile device.  We use persistent cookies to track aggregate and statistical information about user activity on our Registry (see “Tracking Technologies” below).",
+          "P6Bold": "es: Disabling Cookies.",
+          "P7": "es:   You may opt-out of non-essential cookies by selecting “Reject Cookies” or by clicking on “Manage Preferences” in the prompt asking whether you accept the use of cookies. Non-essential cookies are those that allow us to monitor site usage and improve the site, such as Google Analytics. Other cookies, however, are essential to the website’s functionality, including those cookies that allow you to stay logged into the site while you use it. The only way to opt out of these essential cookies is to not join the site.",
+          "P8": "es: You may also view and manage your cookie preferences by clicking on the button below.",
+          "P9Bold": "es: Tracking Technologies.",
+          "P10": "es:   We use automated devices, applications, and analytic tools such as Google Analytics, to evaluate usage of our Registry and improve our user experience and performance.  We may also use third-party tracking technologies, such as tCell, to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services.  We do not share your personal information with these third parties.",
+          "P11Bold": "es: Do Not Track Signals. ",
+          "P12": "es: We respond to browser-level Do Not Track (“",
+          "P13BoldUnderline": "es: DNT",
+          "P14": "es: ”) signals by disabling optional tracking technologies such as Google Analytics, however, we do not disable tracking that is essential to the website’s functionality, such as cookies that allow you to stay logged in. For information about DNT, visit ",
+          "P15Link": "www.allaboutdnt.org",
+          "P16": "."
+        }
+      },
+      "CookiePreferences": "es: Cookie Preferences",
+      "HowUse": {
+        "Title": "es: 6. How do we use your information?",
+        "Text": {
+          "P1": "es: We use your data for the following purposes only:",
+          "P2BoldUnderline": "es: Identify Research Opportunities.",
+          "P3": "es:  We use the information you provide about yourself, your medical condition, and experiences to identify opportunities for you to participate in research. If you agree, you may choose to be contacted about future research studies and/or clinical trials in which you may be eligible to participate. You may also choose not to receive these invitations or decline to participate in future studies. Please note that the research studies with whom we partner only receive aggregate, de-identified data from our participants unless you enter into a separate research consent with them. This aggregate data does not identify you personally.",
+          "P4BoldUnderline": "es: Provide the Registry and Communicate with You.",
+          "P5": "es:  We, together with our collaborators, vendors, and service providers, use your information to operate the Registry, respond to your inquiries, notify you of research opportunities, ask you to periodically update your profile and health status, and for other communication purposes.",
+          "P6BoldUnderline": "es: Perform and promote research.",
+          "P7": "es:  We will use the information you provide to generate de-identified, aggregate descriptive statistics, such as the number of people interested in participating in prion disease research in a given geographic area. These statistics may be used to perform research, such as characterizing the prevalence of prion disease, or to promote prion disease research, for example, by securing funding or collaborations. As part of this work, we may use the information you provide to verify the accuracy of the Registry data, develop scientific publications, and answer questions from IRBs, IECs or government or regulatory agencies.",
+          "P8BoldUnderline": "es: Personalize Your Experience.",
+          "P9": "es:  We use your information to tailor the content and information that we may send or display to you, to offer location customization, and personalized help and instructions, and to otherwise personalize your experiences while you are using the Registry.",
+          "P10BoldUnderline": "es: Develop and Improve Our Registry.",
+          "P11": "es:  We use your information to ensure our Registry is working as intended, to better understand how users access and use our Registry, both on an aggregated and individualized basis, to understand the features that our Registry find valuable, make improvements to our Registry, to develop new features and applications, and for other research and analytical purposes."
+        }
+      },
+      "ShareWith": {
+        "Title": "es: 7. With whom do we share your information?",
+        "Text": {
+          "P1": "es: The Prion Registry does not sell or share your information for marketing purposes, but we may share your information in the following ways: ",
+          "P2BoldUnderline": "es: Research Partners.",
+          "P3": "es:   After removing your name and any other readily identifiable information, Registry staff may share statistics regarding de-identified data with researchers or organizations interested in launching research studies. For example, staff may provide information regarding the number of individuals in the registry who qualify for a potential research study, based on age, genetic mutation status, location, and/or other information. This information could be used to help design a study or secure funding or collaboration commitments. Qualified researchers who have received approval from an ethics committee will also be able to post studies for which you will be notified of your eligibility. An ethics committee is a group that independently reviews and watches over all research studies involving people. The board follows local laws and codes of ethics to make sure that the rights and welfare of people taking part in research studies are protected. ",
+          "P4Bold": "es: It will then be your choice whether to contact these researchers and share your identity in order to enroll in their studies; researchers will not be able to directly view your contact information in the registry.",
+          "P5BoldUnderline": "es: Vendors and Service Providers.",
+          "P6": "es:   We use various third-party vendors and service providers that assist us in providing the Registry.  For example, we may use third-party vendors to store and authenticate account credentials, store and analyze system logs, send email communications, and for hosting and storing information collected through our Registry.  We may need to share your information with these vendors and service providers to enable them to provide these services to us.  These service providers and vendors are required to only use your information to provide their services to us and in a manner consistent with this Policy.",
+          "P7BoldUnderline": "es: Legal and Safety Reasons.",
+          "P8": "es:   We may be required, by law, to disclose your personal information to third parties, such as in the following situations:",
+          "P9": "es: In response to a request by law enforcement;",
+          "P10": "es: In response to legal process, such as a subpoena, a request for discovery in a civil proceeding, or in response to a court order.",
+          "P11": "es: We may also access, preserve, and disclose your personal information to enforce the terms of use for the Registry and protect your, our, or others’ rights, property, or safety.",
+          "P12BoldUnderline": "es: Reorganization, Sale or Merger.",
+          "P13": "es:   Broad Institute may be involved in a business transaction where its ownership or assets are transferred or sold to another legal entity.  This can happen in a merger with another legal entity, an acquisition by another legal entity, a corporate reorganization, or a legal proceeding (e.g. bankruptcy or receivership), where a trustee or other takes over control of the entity.  In each of these situations, your information may be transferred as part of such a transaction as permitted by law and/or contract. The successor in interest will continue to be bound by the terms of this Policy.",
+          "P14BoldUnderline": "es: With Your Consent.",
+          "P15": "es:   We may ask you from time to time to give us permission to share your information with other third parties not described in this section.  In each case, we will describe that third party and the purpose for sharing your information.",
+          "P16BoldUnderline": "es: Aggregate and De-Identified Information.",
+          "P17": "es:   We may share aggregate or de-identified information about users and their use of the Registry with third parties and publicly for reporting, funding applications, research, or similar purposes.  This information will not identify you personally."
+        }
+      },
+      "ThirdParty": {
+        "Title": "es: 8. What about Third-Party Sites?",
+        "Text": {
+          "P1": "es: The Registry may link to other websites that are not affiliated with us (“",
+          "P2BoldUnderline": "es: Third-Party Sites",
+          "P3": "es: ”).  We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites.  For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry. Other sites may have different privacy practices. You should make sure you review the privacy policies of those Third-Party Sites before providing any of your information to them."
+        }
+      },
+      "OtherUsers": {
+        "Title": "es: 9. Can other users see my information?",
+        "Text": "es: Users will not be able to post content that is visible to any other users of the Registry.  Your information will only be made available to us, our research partners, our service providers and vendors, and the other third parties listed in Section 7."
+      },
+      "InformationRights": {
+        "Title": "es: 10. What rights do I have with respect to my information?",
+        "Text": {
+          "P1": "es: Registered users can request to update, receive a copy of, or delete information submitted to the Registry by clicking on the button below:",
+          "P2": "es: We will respond to any user request as soon as we reasonably can, and within the time and in the manner required by law.   We may request additional information from you to verify the request.  We may not be able to accommodate all requests; for example, we may be unable to accommodate a deletion request if we are required to maintain information under law or a legal obligation or if information is used as part of a published study."
+        }
+      },
+      "DataRequest": "es: Data Request",
+      "Security": {
+        "Title": "es: 11. What kind of security does the Registry use to protect my information?",
+        "Text": {
+          "P1": "es: We use reasonable security to protect the information we collect from users. These safeguards encompass administrative, technical, and physical procedures and controls, including:",
+          "P2": "es: encryption of information in transit and at rest on servers;",
+          "P3": "es: threat and risk assessments;",
+          "P4": "es: system monitoring;",
+          "P5": "es: access control;",
+          "P6": "es: privacy and security training;",
+          "P7": "es: secure destruction of records.",
+          "P8": "es: However, we cannot guarantee the security of information we collect or any transmission of information over the Internet.  For this reason, you should make sure that you keep your profile account on the Registry confidential, including any user identification or password.  You should also notify us immediately if there has been any unauthorized use of your account."
+        }
+      },
+      "Children": {
+        "Title": "es: 12. Do you collect personal information from children?",
+        "Text": "es: The Registry is not designed or intended for use by individuals under the legal age of majority in their location of residence, and we do not knowingly collect information from such individuals. If we become aware that we have information for minors, we will promptly delete it. Anyone who believes that we may have such information from individuals under the legal age of majority should contact us at the addresses provided below."
+      },
+      "Country": {
+        "Title": "es: 13. Is there any transfer of personal information from one country to another?",
+        "Text": "es: We store and process the information you provide on servers in the United States.  If you are a user of the Registry, you agree to the transfer of your information to the United States and acknowledge that the laws in the United States may offer less protection to your information than the laws where you live."
+      },
+      "Contact": {
+        "Title": "es: 14. Whom do I contact if I have a question or request?",
+        "Text": {
+          "P1": "es: You may contact us at the addresses below if you have any questions or complaints about information practices or this Policy:",
+          "P2Bold": "Broad Institute:",
+          "P3": "es: By email to: info@prionregistry.org",
+          "P4": "es: By mail to:",
+          "P5": "The Broad Institute of MIT and Harvard",
+          "P6": "es: 415 Main St.",
+          "P7": "es: Cambridge, MA 02142,",
+          "P8": "es: United States"
+        }
+      },
+      "Update": {
+        "Title": "es: 15. Will you update or change this Policy?",
+        "Text": {
+          "P1": "es: We may modify this Policy from time to time, and you can see when the last update was by looking at the “Last Updated” date at the top of this page. If you object to any changes, you may stop accessing the Registry. Your continued use of the Registry after we post an updated Policy means that you acknowledge the updated Policy following the date it takes effect.",
+          "P2": "es: As a general practice, we will not use your personal information for uses or purposes that are significantly different from those described in this Policy.  However, from time to time, we may need to use your information for uses not previously disclosed in this Policy.  If this should happen, we will use reasonable efforts to notify you and obtain your consent to such new uses as required by law."
+        }
+      },
+      "EU": {
+        "Title": "es: 16. Notice to Residents of the European Union",
+        "Text": {
+          "P1": "es: This section outlines certain additional information that we are obligated to provide to data subjects of the European Union pursuant to the European Union General Data Protection Regulation 2016/679 and its amendments (“",
+          "P2BoldUnderline": "es: GDPR",
+          "P3": "es: ”).  We act as a data controller under the GDPR for the personal data that we collect from users of the Registry.  For such personal data, we rely on the following legal bases for processing such information:",
+          "P4Bold": "es: Legitimate interests. ",
+          "P5": "es: We may use your personal data for our legitimate interests provided that our legitimate interests are not outweighed by any prejudice or harm to your interests, rights and freedoms, including:",
+          "P6": "es: improving our products and services and the content on Registry (for example to manage the Registry, improve the Registry, and better tailor the features, performance and support of the Registry);",
+          "P7": "es: operating and administering the Registry;",
+          "P8": "es: promoting the safety and security of the Registry;",
+          "P9": "es: fulfilling your requests and communicating with you when you contact us; and ",
+          "P10": "es: promoting the Registry.",
+          "P11Bold": "es: Consent. ",
+          "P12": "es: In some cases, you will give us consent to use your personal data for a specific purpose.  For example, we will rely on your consent to use technical information such as cookie data and health information to identify relevant research studies.",
+          "P13Bold": "es: Legal obligations. ",
+          "P14": "es: We may be required to process your personal data to comply with our legal obligations.",
+          "P15Bold": "es: Data Retention. ",
+          "P16": "es: We retain personal information about you for the time necessary to accomplish the purpose for which such information was collected, usually for any period thereafter as legally required or permitted by applicable law.  Our retention policies reflect applicable statute of limitation periods and legal requirements.",
+          "P17Bold": "es: EU Data Subject Rights. ",
+          "P18": "es: Data subjects of the European Union have the following rights:",
+          "P19Bold": "es: The right to be informed - ",
+          "P20": "es: You have the right to be informed about the collection and use of your personal data.",
+          "P21Bold": "es: The right to access - ",
+          "P22": "es: You have the right to request copies of your personal data.",
+          "P23Bold": "es: The right to rectification - ",
+          "P24": "es: You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete information that you believe is incomplete.",
+          "P25Bold": "es: The right to erasure - ",
+          "P26": "es: You have the right to request that we erase your personal data, under certain conditions.",
+          "P27Bold": "es: The right to restrict processing - ",
+          "P28": "es: You have the right to request that we erase your personal data, under certain conditions.",
+          "P29Bold": "es: The right to object to processing - ",
+          "P30": "es: You have the right to object to our processing of your personal data, under certain circumstances.",
+          "P31Bold": "es: The right to data portability - ",
+          "P32": "es: You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.",
+          "P33": "es: If you believe our processing of your personal data violates data protection laws, you have a legal right to lodge a complaint with a supervisory authority responsible for data protection.  You may do so in the EU member state of your habitual residence, your place of work or the place of the alleged violation.",
+          "P34Bold": "es: Submitting Requests: ",
+          "P35": "es: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
+        }
+      }
     }
   }
 }

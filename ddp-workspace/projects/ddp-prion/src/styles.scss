@@ -91,6 +91,10 @@ a:focus {
     outline: 0;
 }
 
+.Underline {
+  text-decoration: underline;
+}
+
 //Button styles
 .Button {
     border-radius: 2px;
@@ -107,9 +111,9 @@ a:focus {
 .Button--primary,
 .Button--primary:active,
 .Button--primary:focus {
-    border: 1px solid #82B547 !important;
-    background-color: #82B547 !important;
-    color: #ffffff !important;
+  border: 1px solid #82B547 !important;
+  background-color: #82B547 !important;
+  color: #ffffff !important;
 }
 
 .DataRequestButton--DataRequest,
@@ -455,6 +459,10 @@ a:focus {
     color: #a88838 !important;
 }
 
+.SpacedButtonDiv {
+  padding-bottom: 30px;
+}
+
 // End of button styling section
 
 // Language selector styles
@@ -750,6 +758,10 @@ input.mat-input-element.study-listing-filter {
     font-weight: 500;
 }
 
+.Nav-item:first-of-type {
+  padding-left: 20px !important;
+}
+
 #JoinUsLink {
   padding: 12px 30px !important;
 }
@@ -866,6 +878,7 @@ p.Footer-contact {
   background-clip: unset;
   border: none;
   border-image-width: 0;
+  white-space: nowrap;
 }
 
 .Footer-link:hover, .Footer-link .SimpleButton:hover {
@@ -1273,6 +1286,14 @@ ul {
 
 .Link--neutral:hover {
     color: #82B547;
+}
+
+.Link--green {
+    color: #82B547 !important;
+}
+
+.Link--green:hover {
+  color: mat-color($app-theme, 600) !important;
 }
 
 .PageContent-title {
@@ -1993,6 +2014,20 @@ select:-webkit-autofill {
     padding: 0;
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+.list {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400 !important;
+}
+
+.list--spaced li {
+  padding-top: 10px;
+}
+
+.list--sublist li {
+  padding-top: 0px;
 }
 
 .mat-form-field-underline {

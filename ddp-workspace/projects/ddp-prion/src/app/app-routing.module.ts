@@ -27,6 +27,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
 import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
+import { PrivacyPolicyFullComponent } from "./components/privacy-policy/privacy-policy-full.component";
+import { ThirdPartyComponent } from "./components/third-party/third-party.component";
 
 const routes: Routes = [
   {
@@ -52,6 +54,11 @@ const routes: Routes = [
     data: {
       activityGuid: 'PRIONMEDICAL'
     }
+  },
+  {
+    path: '3rd-party',
+    component: ThirdPartyComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: 'study-listing',
@@ -122,6 +129,11 @@ const routes: Routes = [
   {
     path: 'learn-more',
     component: LearnMoreComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyFullComponent,
     canActivate: [IrbGuard]
   },
   {
