@@ -674,6 +674,9 @@
       ]
     }
   },
+  "JoinUs": {
+    "SignInButton": "Already registered? Sign In here"
+  },
   "Statistics": {
     "Title": "The A-T Family Data Platform by the Numbers",
     "CountersFirst": {
