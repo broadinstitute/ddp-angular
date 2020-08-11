@@ -1,1 +1,401 @@
-{}
+{
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "LearnMore": "Learn More",
+            "ViewFAQ": "View FAQ page",
+            "JoinMailingList": "Join Mailing List"
+        },
+        "CMI": "Count Me In"
+    },
+    "Header": {
+        "Logo": {
+            "Title": "Brain Cancer<br>Project",
+            "Alt": "Brain Cancer Project logo"
+        }
+    },
+    "Footer": {
+        "SocialMedia": "Social Media",
+        "ContactUs": "Contact Us",
+        "Facebook": "Facebook",
+        "Twitter": "Twitter",
+        "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States",
+        "Text": {
+            "Part1": "The Brain Cancer Project is part of",
+            "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+        }
+    },
+    "Navigation": {
+        "BackToTop": "Back to top",
+        "FAQs": "FAQs",
+        "AboutUs": "About Us",
+        "MailingList": "Join Mailing List",
+        "Data": "Data",
+        "Dashboard": "Dashboard",
+        "Menu": "Menu"
+    },
+    "HomePage": {
+        "Introduction": {
+            "Title": "Help transform our understanding of Brain Cancer",
+            "Text": "If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice.",
+            "Examples": "Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and medulloblastoma.",
+            "BroadAlt": "Broad Institute logo",
+            "DanaFarberAlt": "Dana Farber logo",
+            "MinderooAlt": "Minderoo Foundation logo",
+            "BrainAlt": "Brain"
+        },
+        "About": {
+            "Title": "What’s this project about?",
+            "Text1": "The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
+            "Text2": "Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
+            "Text3": {
+                "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
+                "Part2": "visit our site"
+            },
+            "CMIAlt": "Count Me In logo"
+        },
+        "Participation": {
+            "Title": "What does participation look like?",
+            "Survey": [
+                [
+                    {
+                        "Number": "STEP 1",
+                        "Time": "10-15 minutes",
+                        "Title": "Provide Consent",
+                        "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
+                        "LinkText": "Preview the consent form",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 2",
+                        "Time": "5 minutes",
+                        "Title": "Tell us where you’ve been treated",
+                        "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                        "LinkText": "Preview the medical release",
+                        "Link": "#"
+                    }
+                ],
+                [
+                    {
+                        "Number": "STEP 3",
+                        "Time": "10 minutes",
+                        "Title": "Respond to simple surveys",
+                        "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
+                        "LinkText": "Preview the surveys",
+                        "Link": "#"
+                    },
+                    {
+                        "Number": "STEP 4",
+                        "Time": "10 minutes",
+                        "Title": "Provide a saliva and/or blood sample",
+                        "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.",
+                        "LinkText": "See the kits",
+                        "Link": "#"
+                    }
+                ]
+            ]
+        },
+        "LearnMore": {
+            "Text": "To learn more about participation, eligibility criteria and more"
+        },
+        "Partners": {
+            "Title": "Partners",
+            "Organizations": [
+                [
+                    {
+                        "Website": "https://www.abta.org/",
+                        "Logo": "assets/images/ABTA-logo.png",
+                        "Alt": "American Brain Tumor Association logo"
+                    },
+                    {
+                        "Website": "https://ourbrainbank.org/",
+                        "Logo": "assets/images/OBB-logo.png",
+                        "Alt": "OurBrainBank logo"
+                    },
+                    {
+                        "Website": "https://braintumor.org/",
+                        "Logo": "assets/images/NBTS-logo.png",
+                        "Alt": "National Brain Tumor Society logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://www.oligonation.org/",
+                        "Logo": "assets/images/ON-logo.png",
+                        "Alt": "Oligo Nation logo"
+                    },
+                    {
+                        "Website": "https://www.dragonmaster.org/",
+                        "Logo": "assets/images/DMF-logo.png",
+                        "Alt": "Dragon Master Foundation logo"
+                    },
+                    {
+                        "Website": "http://www.targetcancerfoundation.org/",
+                        "Logo": "assets/images/TCF-logo.png",
+                        "Alt": "Target Cancer Foundation logo"
+                    }
+                ],
+                [
+                    {
+                        "Website": "https://carsonlesliefoundation.org/",
+                        "Logo": "assets/images/CLF-logo.png",
+                        "Alt": "The Carson Leslie Foundation logo"
+                    }
+                ]
+            ],
+            "Text": "For more information on how to become a partner for the Brain Cancer Project, contact the team at"
+        },
+        "StayInformed": {
+            "Title": "Stay informed",
+            "Text1": "Sign up for our mailing list or follow us on social media.",
+            "Text2": "Social",
+            "Facebook": "Facebook",
+            "Twitter": "Twitter",
+            "Text3": "Tweets by"
+        },
+        "Join": {
+            "Title": "Please join us in saying “Count Me In!”",
+            "Text": "With your help, patients and their families can be the driving force behind transformative brain cancer research."
+        }
+    },
+    "Toolkit": {
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email address *",
+                        "Error": "Please enter a valid email address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email confirmation *",
+                        "Error": "Please enter a valid email address"
+                    }
+                },
+                "CancelButton": "Cancel",
+                "SubmitButton": "Join",
+                "Required": "",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "View/Edit",
+        "ReviewButton": "View",
+        "AgreeButton": "I agree",
+        "NotAgreeButton": "I am not ready to agree",
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Brain Cancer Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Brain Cancer Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+        },
+        "TooltipAlt": "Information"
+    }
+}

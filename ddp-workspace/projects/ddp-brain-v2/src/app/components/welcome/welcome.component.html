@@ -1,1 +1,153 @@
-<p>welcome works!</p>
+<main class="main">
+    <section class="section">
+        <div class="content content_wide introduction-block">
+            <div class="introduction">
+                <div class="introduction__info">
+                    <h1 translate>HomePage.Introduction.Title</h1>
+                    <p class="introduction__text" translate>HomePage.Introduction.Text</p>
+                    <div class="introduction__buttons">
+                        <a [routerLink]="'/' + appRoutes.CountMeIn" (click)="sendCountMeInAnalytics()"
+                            class="button button_medium button_primary introduction__cmi" translate>Common.CMI</a>
+                        <a [routerLink]="'/' + appRoutes.MoreDetails" class="button button_medium button_secondary"
+                            translate>Common.Buttons.LearnMore</a>
+                    </div>
+                    <p class="introduction__examples" translate>HomePage.Introduction.Examples</p>
+                    <div class="logos">
+                        <img class="logos__wide" src="assets/images/logo-broad-institute.png"
+                            [alt]="'HomePage.Introduction.BroadAlt' | translate">
+                        <img class="logos__wide" src="assets/images/logo-dana-farber-cancer-institute.png"
+                            [alt]="'HomePage.Introduction.DanaFarberAlt' | translate">
+                        <img class="logos__square" src="assets/images/logo-minderoo.png"
+                            [alt]="'HomePage.Introduction.MinderooAlt' | translate">
+                    </div>
+                </div>
+                <div class="introduction__image">
+                    <img class="image" src="assets/images/brain.png" [alt]="'HomePage.Introduction.Brain' | translate">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section about-section">
+        <div class="content content_wide about-block">
+            <div class="about">
+                <div class="about__image">
+                    <img lazy-resource class="image" src="assets/images/people.png" alt="People">
+                </div>
+                <div class="about__info">
+                    <h2 translate>HomePage.About.Title</h2>
+                    <p translate>HomePage.About.Text1</p>
+                    <p translate>HomePage.About.Text2</p>
+                    <a class="about__cmi" [href]="cmiUrl" target="_blank">
+                        <img lazy-resource src="assets/images/logo-count-me-in.svg"
+                            [alt]="'HomePage.About.CMIAlt' | translate">
+                    </a>
+                    <p>
+                        <span translate>HomePage.About.Text3.Part1</span>
+                        <a class="Link" [href]="cmiUrl" target="_blank" translate>HomePage.About.Text3.Part2</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide participation-block">
+            <div>
+                <h2 class="participation-title" translate>HomePage.Participation.Title</h2>
+                <div>
+                    <ng-container *ngFor="let steps of 'HomePage.Participation.Survey' | translate; last as isLast">
+                        <div class="line" [ngClass]="{'line_underlined': !isLast}">
+                            <div class="participation" *ngFor="let step of steps">
+                                <p class="step">
+                                    <span class="step__indicator"></span>
+                                    <span class="step__index">{{step.Number}}</span>
+                                    <span class="step__time">{{step.Time}}</span>
+                                </p>
+                                <p class="participation__title">{{step.Title}}</p>
+                                <p>{{step.Text}}</p>
+                                <a class="Link" [href]="step.Link" target="_blank">{{step.LinkText}}</a>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section learn-more-section">
+        <div class="content content_wide learn-more-block">
+            <div class="learn-more">
+                <p class="learn-more__text" translate>HomePage.LearnMore.Text</p>
+                <a [routerLink]="'/' + appRoutes.MoreDetails"
+                    class="button button_medium button_secondary button_learn-more" translate>
+                    Common.Buttons.ViewFAQ
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="section partners-section">
+        <div class="content content_wide partners-block">
+            <div>
+                <h2 class="h2-big" translate>HomePage.Partners.Title</h2>
+                <ng-container *ngFor="let row of 'HomePage.Partners.Organizations' | translate">
+                    <div class="partners">
+                        <ng-container *ngFor="let partner of row">
+                            <a class="partners__link" [href]="partner.Website" target="_blank">
+                                <img lazy-resource class="partners__logo" [src]="partner.Logo" [alt]="partner.Alt">
+                            </a>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <p>
+                    <span translate>HomePage.Partners.Text</span>
+                    <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_wide stay-informed-block">
+            <div class="stay-informed">
+                <div class="socials">
+                    <h2 class="h2-big" translate>HomePage.StayInformed.Title</h2>
+                    <p translate>HomePage.StayInformed.Text1</p>
+                    <button class="button button_medium button_secondary" (click)="joinMailingList()">
+                        {{'Common.Buttons.JoinMailingList' | translate}}</button>
+                    <div>
+                        <p class="socials__text" translate>HomePage.StayInformed.Text2</p>
+                        <div>
+                            <a class="Link medium socials__facebook" (click)="sendSocialMediaAnalytics('twitter')"
+                                [href]="'https://www.facebook.com/' + facebookAccount" target="_blank"
+                                translate>HomePage.StayInformed.Facebook</a>
+                            <a class="Link" [href]="'https://twitter.com/' + twitterAccount"
+                                (click)="sendSocialMediaAnalytics('facebook')" target="_blank"
+                                translate>HomePage.StayInformed.Twitter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="twitter">
+                    <div class="twitter__title">
+                        <img lazy-resource class="twitter__logo" src="assets/images/twitter.svg" alt="Twitter logo">
+                        <p>
+                            <span class="twitter__text" translate>HomePage.StayInformed.Text3</span>
+                            <a [href]="'https://twitter.com/' + twitterAccount" class="Link twitter__link"
+                                (click)="sendSocialMediaAnalytics('twitter')" target="_blank">@{{twitterAccount}}</a>
+                        </p>
+                    </div>
+                    <div class="twitter__feed">
+                        <toolkit-twitter-timeline-widget></toolkit-twitter-timeline-widget>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section join-section">
+        <div class="content content_wide join-block">
+            <div class="join">
+                <img lazy-resource class="join__image" src="assets/images/hands.png" alt="Hands">
+                <h2 class="join__title h2-big center" translate>HomePage.Join.Title</h2>
+                <p class="join__text center" translate>HomePage.Join.Text</p>
+                <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_big button_primary"
+                    (click)="sendCountMeInAnalytics()" translate>Common.CMI</a>
+            </div>
+        </div>
+    </section>
+</main>

@@ -7,7 +7,7 @@ import { ActivityGuids } from './aсtivity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
-import { EnrollmentComponent } from './components/enrollment/enrollment.component'
+import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 
 import {
   Auth0CodeCallbackComponent,
