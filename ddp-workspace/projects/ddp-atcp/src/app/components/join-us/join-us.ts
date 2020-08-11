@@ -27,7 +27,7 @@ import {
                           (stickySubtitle)="showStickySubtitle($event)" #activity>
             </ddp-activity>
             <div *ngIf="activity.isLoaded" class="helpHint align-center">
-              <a (click)="signIn()">Already registered? Sign In here</a>
+              <a (click)="signIn()" translate>JoinUs.SignInButton</a>
             </div>
           </div>
         </div>
