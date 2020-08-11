@@ -4,8 +4,6 @@ import { ConfigurationService } from './configuration.service';
 import { AnalyticsManagementService } from './analyticsManagement.service';
 import { ConsentStatuses, CookiesConsentStatuses, CookiesPreferences, CookiesTypes } from '../models/cookies';
 import { SessionMementoService } from './sessionMemento.service';
-import { UserProfileServiceAgent } from './serviceAgents/userProfileServiceAgent.service';
-import { UserProfile } from '../models/userProfile';
 import { LoggingService } from './logging.service';
 
 @Injectable()
@@ -18,7 +16,6 @@ export class CookiesManagementService {
 
   constructor(private analytics: AnalyticsManagementService,
               @Inject('ddp.config') private configuration: ConfigurationService,
-              private profileServiceAgent: UserProfileServiceAgent,
               private session: SessionMementoService,
               private logger: LoggingService) {
     this.cookiesTypes = this.configuration.cookies.cookies.map(x => x.type).filter(x => x !== 'Functional');
@@ -45,45 +42,17 @@ export class CookiesManagementService {
 
   private setConsent(): void {
     const localStorageConsent = this.getLocalStorageConsent();
-    const profileConsent = this.getUserProfileConsent();
-
-    if (this.isAuthenticated && profileConsent) {
-      this.consent = profileConsent;
-      this.updateLocalStorageConsent();
-    } else {
-      localStorageConsent ? this.consent = localStorageConsent : this.setDefaultConsent();
-    }
-
-    if (this.isAuthenticated && !profileConsent) {
-      this.updateUserProfileConsent();
-    }
+    localStorageConsent ? this.consent = localStorageConsent : this.setDefaultConsent();
   }
 
   private getLocalStorageConsent(): CookiesPreferences   {
     return JSON.parse(localStorage.getItem(this.cookiesConsentStorageName));
   }
 
-  private getUserProfileConsent(): CookiesPreferences {
-    let consent = null;
-    if (this.isAuthenticated) {
-      this.profileServiceAgent.profile.subscribe(x => {
-        x.profile.cookiesPreferences ? consent = x.profile.cookiesPreferences : consent = null;
-      });
-    }
-    return consent;
-  }
-
   private setDefaultConsent(): void {
     this.consent = { decision: false, status: 'default_reject', cookies: {} };
     this.cookiesTypes.forEach(x => this.consent.cookies[x] = null);
     this.updateLocalStorageConsent();
-  }
-
-  private updateUserProfileConsent(): void {
-    const profileModifications: UserProfile = new UserProfile();
-    profileModifications.cookiesPreferences = this.consent;
-    this.profileServiceAgent.updateProfile(profileModifications).subscribe();
-    this.logConsentUpdate();
   }
 
   private updateLocalStorageConsent(): void {
@@ -114,11 +83,8 @@ export class CookiesManagementService {
     this.dismissBanner();
     this.updateConsent(status, cookies);
     this.updateLocalStorageConsent();
-
-    if (this.isAuthenticated) {
-      this.updateUserProfileConsent();
-    }
     this.followConsent();
+    this.logConsentUpdate();
   }
 
   private updateConsent(status: CookiesConsentStatuses, cookies?: any): void {
