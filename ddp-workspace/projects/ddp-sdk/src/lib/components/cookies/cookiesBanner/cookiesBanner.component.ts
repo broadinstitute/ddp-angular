@@ -13,7 +13,6 @@ import { ConsentStatuses } from '../../../models/cookies';
       <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
     <ddp-cookies-preferences-button [logoSrc]="this.logoSrc"
-                                    [text]="'SDK.CookiesBanner.Preferences' | translate"
                                     [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'">
     </ddp-cookies-preferences-button>
     <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"

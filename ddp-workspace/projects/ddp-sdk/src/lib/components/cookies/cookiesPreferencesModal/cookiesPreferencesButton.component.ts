@@ -8,12 +8,11 @@ import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/coo
   selector: 'ddp-cookies-preferences-button',
   template: `
     <button (click)="openPreferences()"
-            [innerText]="this.text"
+            [innerText]="'SDK.CookiesBanner.Preferences' | translate"
             [class]="this.className"></button>`
 })
 export class CookiesPreferencesButtonComponent {
   @Input() logoSrc: string;
-  @Input() text: string;
   @Input() className: string;
 
   constructor(public dialog: MatDialog,
