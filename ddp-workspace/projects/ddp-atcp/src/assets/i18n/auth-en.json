@@ -76,7 +76,8 @@
   "modal": {
     "SuccessChangedPassword": "Your password has been changed successfully.",
     "InvalidLogin": "Invalid email or password",
-    "YouWillGetInstructions": "You will receive an email with instructions on how to reset your password in a few minutes."
+    "YouWillGetInstructions": "You will receive an email with instructions on how to reset your password in a few minutes.",
+    "PasswordResetError": "There was an error processing the password reset."
   },
   "resetPassword": {
     "title": "Change your password",

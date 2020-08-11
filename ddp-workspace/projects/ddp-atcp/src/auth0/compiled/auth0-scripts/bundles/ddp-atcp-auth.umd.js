@@ -684,9 +684,22 @@
                 url: $form.attr('action'),
                 data: $form.serialize(),
                 success: (/**
+                 * @param {?} result
                  * @return {?}
                  */
-                function () { return showModal(dictionary.modal.SuccessChangedPassword); }),
+                function (result) {
+                    showModal(dictionary.modal.SuccessChangedPassword);
+                    if (result.result_url) {
+                        window.location.assign(result.result_url.split('?')[0]);
+                    }
+                }),
+                error: (/**
+                 * @param {?} error
+                 * @return {?}
+                 */
+                function (error) {
+                    showModal(dictionary.modal.SuccessChangedPassword, true);
+                })
             });
         }));
     }
