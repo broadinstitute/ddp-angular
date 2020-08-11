@@ -67,7 +67,7 @@
                         "Title": "Provide Consent",
                         "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
                         "LinkText": "Preview the consent form",
-                        "Link": "#"
+                        "Link": "consent.pdf"
                     },
                     {
                         "Number": "STEP 2",
@@ -75,7 +75,7 @@
                         "Title": "Tell us where you’ve been treated",
                         "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
                         "LinkText": "Preview the medical release",
-                        "Link": "#"
+                        "Link": "release.pdf"
                     }
                 ],
                 [
@@ -85,7 +85,7 @@
                         "Title": "Respond to simple surveys",
                         "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
                         "LinkText": "Preview the surveys",
-                        "Link": "#"
+                        "Link": "surveys.pdf"
                     },
                     {
                         "Number": "STEP 4",
@@ -93,7 +93,7 @@
                         "Title": "Provide a saliva and/or blood sample",
                         "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.",
                         "LinkText": "See the kits",
-                        "Link": "#"
+                        "Link": "kits.pdf"
                     }
                 ]
             ]
@@ -159,6 +159,167 @@
         "Join": {
             "Title": "Please join us in saying “Count Me In!”",
             "Text": "With your help, patients and their families can be the driving force behind transformative brain cancer research."
+        }
+    },
+    "FaqPage": {
+        "Title": "Frequently Asked Questions",
+        "Intro": {
+            "Text1": "The Brain Cancer Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+            "Text2": {
+                "Part1": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+                "Part2": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
+            }
+        },
+        "Sections": [
+            {
+                "Title": "General FAQ",
+                "Items": [
+                    {
+                        "Question": "What is the goal of this project?",
+                        "Paragraphs": [
+                            "The goal of this project is to generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of brain cancer and accelerate discoveries by making data more readily available."
+                        ]
+                    },
+                    {
+                        "Question": "What are the genomic and molecular research aspects of this project?",
+                        "Paragraphs": [
+                            "This study involves genomic and molecular research to better define the genes and molecules that are important in brain cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified as oncogenes, genes that have the potential to cause cancer, and have led to the development of new drugs that specifically target those alterations.",
+                            "However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of more effective cancer therapies.",
+                            "In order to define these gene alterations in brain cancers, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
+                        ]
+                    },
+                    {
+                        "Question": "Who is conducting this research?",
+                        "Paragraphs": [
+                            "This project is being conducted by Count Me In. Our team is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more about us <a class=\"Link\" href=\"/about-us\">here</a>."
+                        ]
+                    },
+                    {
+                        "Question": "How has the brain cancer community been involved in the design of this project?",
+                        "Paragraphs": [
+                            "We have worked closely with patients, parents, and patient advocates within the brain cancer community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in brain cancer.",
+                            "We're proud to have our Advocacy Partners TargetCancer Foundation, American Brain Tumor Association, National Brain Tumor Society, Oligo Nation, Dragon Master Foundation, and OurBrainBank."
+                        ]
+                    },
+                    {
+                        "Question": "Are there any costs for me to participate?",
+                        "Paragraphs": [
+                            "No, there are no costs to you. All associated costs related to acquiring medical records, tissue, and blood samples, will be covered by the study."
+                        ]
+                    },
+                    {
+                        "Question": "Is this research being conducted for profit?",
+                        "Paragraphs": [
+                            "No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data that has had readily identifiable information removed with the research community in order to accelerate discoveries."
+                        ]
+                    },
+                    {
+                        "Question": "After I provide my information, will I be asked to share a small portion of my tumor tissue and medical records?",
+                        "Paragraphs": [
+                            "We will be asking for informed consent from all patients with brain cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Cancer Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
+                        ]
+                    },
+                    {
+                        "Question": "If I am asked to share a tissue sample, will my tissue be used up?",
+                        "Paragraphs": [
+                            "If you do elect to share tissue as part of the study, we will take every measure to ensure your samples are not exhausted.",
+                            "In order to get a sense of what archived samples are available for request, the study team reads through the entire medical record to create a procedure history. Once we create the history, we send requests out directly to the pathology departments where the tissue is housed. We ask that pathology departments send the samples to us in the form of unstained slides or blocks, and that they do not exhaust the sample in order to send us a portion. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us.",
+                            "You may also choose to provide a blood sample in addition to, or instead of, tissue samples should you have no tissue available or elect not to share your stored tissue samples."
+                        ]
+                    },
+                    {
+                        "Question": "Is this study a clinical trial?",
+                        "Paragraphs": [
+                            "This study is not a clinical trial. Participation will not have any impact on you/your child’s course of care for brain cancer. We are not permitted to give any clinical advice as part of your/your child’s participation in this project. We are also not able to return any individual results to people participating in this project as all testing is research-grade and not clinical-grade. Please see below for further details."
+                        ]
+                    },
+                    {
+                        "Question": "How is this different from clinical/commercial genomic testing?",
+                        "Paragraphs": [
+                            "There are many types of genetic sequencing. Clinical-grade genetic sequencing is done in a lab (called a CLIA lab) with strict parameters to make sure that the data is safe to use for clinical care. Our genetic sequencing is research-grade, meaning that it cannot be used to inform clinical care.",
+                            "There are also different types of genetic sequencing depending on what a researcher or physician is interested in. A panel test might be looking at just one or several genes that are already known to have an impact on humans if mutated. This project performs Whole Exome Sequencing (WES), meaning that we look at all of the parts of the DNA that are being used by the body to make proteins. Finally, whole genome sequencing (WGS) is used to sequence all of the DNA in your body’s cells.",
+                            "If you are interested in clinical/commercial testing, please consult your/your child’s medical team."
+                        ]
+                    },
+                    {
+                        "Question": "What information can I bring to my medical team so that I can discuss this study with them?",
+                        "Paragraphs": [
+                            "This provided PDF is designed to educate your medical team about the project:",
+                            "<a class=\"Link\" href=\"physician.pdf\" target=\"_blank\">Generate PDF for physicians</a>"
+                        ]
+                    },
+                    {
+                        "Question": "If I'm part of another study, can you use that genomic data instead of me submitting my samples for analysis?",
+                        "Paragraphs": [
+                            "No. In order for you to contribute genomic data to the Brain Cancer Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
+                        ]
+                    },
+                    {
+                        "Question": "Where will the publicly available data be housed?",
+                        "Paragraphs": [
+                            "Publicly available data will be housed on cbioportal.org, a web-based platform to allow exploration of genomic data, as well as dbGaP and the NCI's Genomic Data Commons (GDC), with more platforms to come in the future. Data types that we obtain and release are deidentified genomic data, medical record data, pathology data from pathology reports, and patient-reported data obtained through surveys."
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "I/my child have been diagnosed with brain cancer",
+                "Items": [
+                    {
+                        "Question": "How does this project work?",
+                        "Paragraphs": [
+                            "<span class=\"medium\">A. Tell us about yourself or your child.</span>",
+                            "Click \"Count Me In\" and complete a simple online form to tell us about yourself/your child. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your/your child’s experiences with brain cancer and couple that information with what we learn from the DNA in your/their tumor.",
+                            "<span class=\"medium\">B. Give us permission to collect your/your child’s samples and data.</span>",
+                            "If you are in the United States or Canada after you fill out the initial survey, we will ask you to complete an online consent form that requests your permission to obtain copies of your/your child’s medical records and a saliva sample. You may also opt-in to providing a blood sample and/or allowing us to request a small portion of your/your child’s stored tumor sample. We’ll also ask you to tell us where you/your child received medical care so we can contact the appropriate doctors and hospitals.",
+                            "<span class=\"medium\">C. We'll find and request your/your child's records.</span>",
+                            "Our team will contact your/your child's doctors and hospitals to obtain copies of medical records. We will only request medical records from the institutions you list while registering. This is a manual process and takes time. Medical records typically are either faxed or mailed to us upon our requests—none come in automatically as a result of participation in this project, regardless of your/your child's physician’s knowledge of participation in this project.",
+                            "If you have opted in to sharing tumor tissue, our team may also request a small portion of your/your child’s stored tumor samples. We will ask pathology departments to share only a part of the tumor tissue, and not to share anything with us that might be needed for clinical care.",
+                            "<span class=\"medium\">D. Send Us a Saliva Kit.</span>",
+                            "We'll also send you a simple kit to collect a saliva sample from you/your child, which will contain \"healthy\" germline DNA that can be compared with DNA from your/your child’s tumor sample.",
+                            "<span class=\"medium\">E. We'll Analyze Your/Your Child’s Tumor and Medical Data.</span>",
+                            "We will perform cutting-edge, comprehensive genomic analyses on your/your child's saliva, tumor, and/or blood sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your/your child’s medical record. Any information that would make it easy to identify you/your child as an individual will be removed from all genomic and clinical data.",
+                            "<span class=\"medium\">F. We'll Share the Data with Other Researchers.</span>",
+                            "Once potentially identifying information has been removed, our database of genomic and medical information (with your/your child’s identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand brain cancer and develop new therapies. To see what kind of data we will be generating you can reference our sister project's, the Metastatic Breast Cancer Project, data on <a class=\"Link\" href=\"https://mbcproject.org/data-release\" target=\"_blank\">mbcproject.org/data-release</a>. By sharing all sequencing and clinical data with multiple public databases, we will enable anyone to use this data to accelerate research."
+                        ]
+                    },
+                    {
+                        "Question": "What happens when my child with brain cancer becomes an adult?",
+                        "Paragraphs": [
+                            "When your child reaches the age of consenting for themselves, they need to consent themselves to continue to participate in the project. For the US and Canada, this varies by locations and is between ages 18 and 21.",
+                            "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s brain cancer treatment."
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "I am a member of the community who would like to get involved",
+                "Items": [
+                    {
+                        "Question": "How can I spread the word about the Brain Cancer Project?",
+                        "Paragraphs": [
+                            "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@braincancerproject.org\">info@braincancerproject.org</a> or call us at <a class=\"Link\" href=\"tel:651-229-3480\">651-229-3480</a>."
+                        ]
+                    },
+                    {
+                        "Question": "How can I receive updates on the Brain Cancer Project?",
+                        "Paragraphs": [
+                            "If you would like updates on the project, please <a class=\"Link\" href=\"/join-list\">sign up for our mailing list</a>."
+                        ]
+                    }
+                ]
+            }
+        ],
+        "OtherQuestions": {
+            "Title": "Do you have other questions?",
+            "Text1": {
+                "Part1": "You can access a 1 page printable information sheet about the project linked here:",
+                "Part2": "The Brain Cancer Project"
+            },
+            "Text2": {
+                "Part1": "If you have any other questions, please email us at",
+                "Part2": "or call us at"
+            }
         }
     },
     "Toolkit": {

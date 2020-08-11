@@ -1,0 +1,76 @@
+@import '../../../app-theme.scss';
+
+.faq-section {
+    background-color: mat-color($app-theme, 800);
+}
+
+.intro-faq-block {
+    &__content {
+        padding: 3rem 0 0 0;
+    }
+}
+
+.faq-block {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+
+    &__title {
+        margin: 0.5rem 0;
+    }
+
+    &__icon {
+        margin: 0 1rem 0 0;
+        line-height: 2.25rem;
+    }
+
+    &__question {
+        font-family: 'Untitled-Sans-Regular', sans-serif;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+    }
+
+    &__text {
+        font-family: 'Untitled-Sans-Regular', sans-serif;
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        color: mat-color($app-theme, 700);
+    }
+}
+
+.other-questions-section {
+    background-color: mat-color($app-theme, 500);
+}
+
+.other-questions-block {
+    margin: 6rem auto;
+    max-width: 700px;
+
+    &__title {
+        font-size: 1.75rem;
+        line-height: 3.125rem;
+    }
+}
+
+// accordion
+.mat-expansion-panel {
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    border-top: 2px solid mat-color($app-theme, 900);
+
+    &:last-child {
+        border-bottom: 2px solid mat-color($app-theme, 900);
+    }
+}
+
+.mat-expansion-panel-header {
+    padding: 1rem !important;
+    transition: 0.3s;
+}
+
+.mat-content {
+    align-items: flex-start;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 1rem 1rem calc(2rem + 24px) !important;
+}

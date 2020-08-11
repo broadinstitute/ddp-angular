@@ -1,0 +1,57 @@
+<main class="main">
+    <section class="section faq-section">
+        <div class="content content_medium">
+            <h1 class="section-title" translate>FaqPage.Title</h1>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_tight intro-faq-block">
+            <div class="intro-faq-block__content">
+                <p [innerHTML]="'FaqPage.Intro.Text1' | translate"></p>
+                <p>
+                    <span class="medium" translate>Common.CMI</span>,
+                    <span translate>FaqPage.Intro.Text2.Part1</span>
+                    <span class="medium" translate>Common.CMI</span>
+                    <span translate>FaqPage.Intro.Text2.Part2</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <ng-container *ngFor="let section of 'FaqPage.Sections' | translate; last as isLast">
+        <section class="section" [ngClass]="{'section_last': isLast}" routeTransformer>
+            <div class="content content_tight faq-block">
+                <h2 class="faq-block__title">{{section.Title}}</h2>
+                <mat-accordion hideToggle="true" multi="true" displayMode="flat">
+                    <ng-container *ngFor="let item of section.Items">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                                <mat-icon class="faq-block__icon">add</mat-icon>
+                                <p class="faq-block__question no-margin">{{item.Question}}</p>
+                            </mat-expansion-panel-header>
+                            <ng-template matExpansionPanelContent>
+                                <ng-container *ngFor="let paragraph of item.Paragraphs">
+                                    <p class="faq-block__text" [innerHTML]="paragraph"></p>
+                                </ng-container>
+                            </ng-template>
+                        </mat-expansion-panel>
+                    </ng-container>
+                </mat-accordion>
+            </div>
+        </section>
+    </ng-container>
+    <section class="section other-questions-section">
+        <div class="content content_tight other-questions-block">
+            <h3 class="other-questions-block__title" translate>FaqPage.OtherQuestions.Title</h3>
+            <p>
+                <span translate>FaqPage.OtherQuestions.Text1.Part1</span>
+                <a class="Link" href="project-info.pdf" target="_blank" translate>FaqPage.OtherQuestions.Text1.Part2</a>
+            </p>
+            <p>
+                <span translate>FaqPage.OtherQuestions.Text2.Part1</span>
+                <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>
+                <span translate>FaqPage.OtherQuestions.Text2.Part2</span>
+                <a class="Link" [href]="'tel:' + phone">{{phone}}</a>.
+            </p>
+        </div>
+    </section>
+</main>
