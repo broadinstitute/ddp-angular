@@ -1260,6 +1260,14 @@ ul {
     color: #82B547;
 }
 
+.Link--green {
+    color: #82B547 !important;
+}
+
+.Link--green:hover {
+  color: mat-color($app-theme, 600) !important;
+}
+
 .PageContent-title {
     font-size: 1.5rem;
     color: rgb(51, 51, 51);
