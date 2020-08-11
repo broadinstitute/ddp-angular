@@ -182,32 +182,32 @@
           ]
         }
       ]
-  },
-  "TeamSection": {
-    "Title": "Ekip nou an",
-    "Text": "Nou se yon ekip doktè ak chèchè nan domèn maladi enfektyez ki vle konprann pi byen fason COVID-19 afekte moun ak kominote yo pou nou kapab sèvi tout pasyan yo pi byen. ",
-    "List": [
-      {
-        "Name": "Doktè Ann E. Woolley, MD",
-        "Affiliations": "Enstriktè nan medsin",
-        "Info": "Doktè Ann Woolley se yon enstriktè nan medsin ak yon doktè nan domèn maladi enfektyez nan Brigham & Women’s Hospital ak Harvard Medical School. Doktè Woolley te resevwa yon BS nan jeni mekanik ak ayewospasyal nan Princeton University nan ane 2001 ak yon sètifika pòs-bakaloreya nan etid premedikal nan Columbia University anvan fòmasyon nan sante piblik ak nan medsin nan Mount Sinai School of medicine nan New York. Avèk yon konsantrasyon sou transplantasyon, epatit, ak enfeksyon kadyak, rechèch Doktè Woolley te demontre nouvo metòd pou itilize an tout sekirite ògàn moun ki konsidere kòm donatè men ki pa t apwopriye oparavan. Travay li te pèmèt rakousi tan datant pou moun ki bezwen don ògàn, epi pèmèt plis moun kapab chwazi pou yo vin donatè ògàn pou sove lavi."
-      },
-      {
-        "Name": "Doktè Lisa A. Cosimi, MD",
-        "Affiliations": "Asistan pwofesè, maladi enfektyèz nan Harvard Medical School, Global Health Equity",
-        "Info": "Doktè Cosimi se yon medsen asosye nan Global Health Equity & Incetuous Disease nan Brigham & Women’s Hospital, ak pwofesè adjwen nan medsin nan Harvard Medical School. Doktè Cosimi te resevwa yon BA nan ekonomi nan Cornell University an 1992 ak doktora an medsin nan Weill Cornell Medical College an 1996.  Li te fè rezidans li nan medsin entèn ak swen primè nan Massachusetts General Hospital epi fòmasyon nan maladi enfektyez nan pwogram bous konbine Partners.  Rechèch Doktè Cosimi te konsantre sou fason pou ranfòse sistèm sante yo ak kalite swen sante yo nan anviwònman ki gen resous limite. Gwoup li a, Partnership for Health Advancement in Vietnam (HAIVN), te asosye avèk Ministè Sante Vyetnam, Inivèsite Medikal ak lopital yo pou refòme ak modènize edikasyon travayè swen sante, ak amelyore kalite ak aksè nan swen sante pou VIH, tibèkiloz ak lòt enfeksyon k ap parèt nan tout peyi a."
-      },
-      {
-        "Name": "Doktè Deborah T. Hung, MD, PhD",
-        "Affiliations": "Pwofesè agreje, maladi enfektyez, swen pilmonè, ak swen entansif nan Harvard Medical School",
-        "Info": "Doktè Deborah Hung se pwofesè nan jenetik nan Massachusetts General Hospital Harvard Medical School, yon manm prensipal fakilte a ak ko-direktris pwogram maladi enfektyez ak mikwobyòm nan Broad Institute of MIT and Harvard, epi yon medsen tretan nan maladi enfektyez ak medsin swen pilmonè ak swen entansif nan Brigham and Women’s Hospital. Li travay nan entèfas byoloji chimik, jenomik, ak patojenèz bakteryèn pou etabli nouvo paradigm pou yon antibyotik baze sou biyoloji esansyèl ki nesesè pou yon patojèn lakòz maladi kay moun li antre sou li an. Avèk itilizasyon fòmasyon li kòm chimis sentetik, jenetisyen bakteryèn, ak medsen klinik, li eksplore apwòch pou deranje entèraksyon an patojèn-ot."
-      }
-    ]
-  },
-  "MailingSection": {
-    "Title": "TestBoston enskri aktyèlman pasyan Brigham and Women’s Hospital ki resevwa envitasyon. ",
-    "Text": "Si w pa te resevwa yon envitasyon pou antre nan etid la, men ou enterese rete okouran enfòmasyon jeneral TestBoston, tanpri antre nan lis bilten nouvèl nou an:"
-  }
+    },
+    "TeamSection": {
+      "Title": "Ekip nou an",
+      "Text": "Nou se yon ekip doktè ak chèchè nan domèn maladi enfektyez ki vle konprann pi byen fason COVID-19 afekte moun ak kominote yo pou nou kapab sèvi tout pasyan yo pi byen. ",
+      "List": [
+        {
+          "Name": "Doktè Ann E. Woolley, MD",
+          "Affiliations": "Enstriktè nan medsin",
+          "Info": "Doktè Ann Woolley se yon enstriktè nan medsin ak yon doktè nan domèn maladi enfektyez nan Brigham & Women’s Hospital ak Harvard Medical School. Doktè Woolley te resevwa yon BS nan jeni mekanik ak ayewospasyal nan Princeton University nan ane 2001 ak yon sètifika pòs-bakaloreya nan etid premedikal nan Columbia University anvan fòmasyon nan sante piblik ak nan medsin nan Mount Sinai School of medicine nan New York. Avèk yon konsantrasyon sou transplantasyon, epatit, ak enfeksyon kadyak, rechèch Doktè Woolley te demontre nouvo metòd pou itilize an tout sekirite ògàn moun ki konsidere kòm donatè men ki pa t apwopriye oparavan. Travay li te pèmèt rakousi tan datant pou moun ki bezwen don ògàn, epi pèmèt plis moun kapab chwazi pou yo vin donatè ògàn pou sove lavi."
+        },
+        {
+          "Name": "Doktè Lisa A. Cosimi, MD",
+          "Affiliations": "Asistan pwofesè, maladi enfektyèz nan Harvard Medical School, Global Health Equity",
+          "Info": "Doktè Cosimi se yon medsen asosye nan Global Health Equity & Incetuous Disease nan Brigham & Women’s Hospital, ak pwofesè adjwen nan medsin nan Harvard Medical School. Doktè Cosimi te resevwa yon BA nan ekonomi nan Cornell University an 1992 ak doktora an medsin nan Weill Cornell Medical College an 1996.  Li te fè rezidans li nan medsin entèn ak swen primè nan Massachusetts General Hospital epi fòmasyon nan maladi enfektyez nan pwogram bous konbine Partners.  Rechèch Doktè Cosimi te konsantre sou fason pou ranfòse sistèm sante yo ak kalite swen sante yo nan anviwònman ki gen resous limite. Gwoup li a, Partnership for Health Advancement in Vietnam (HAIVN), te asosye avèk Ministè Sante Vyetnam, Inivèsite Medikal ak lopital yo pou refòme ak modènize edikasyon travayè swen sante, ak amelyore kalite ak aksè nan swen sante pou VIH, tibèkiloz ak lòt enfeksyon k ap parèt nan tout peyi a."
+        },
+        {
+          "Name": "Doktè Deborah T. Hung, MD, PhD",
+          "Affiliations": "Pwofesè agreje, maladi enfektyez, swen pilmonè, ak swen entansif nan Harvard Medical School",
+          "Info": "Doktè Deborah Hung se pwofesè nan jenetik nan Massachusetts General Hospital Harvard Medical School, yon manm prensipal fakilte a ak ko-direktris pwogram maladi enfektyez ak mikwobyòm nan Broad Institute of MIT and Harvard, epi yon medsen tretan nan maladi enfektyez ak medsin swen pilmonè ak swen entansif nan Brigham and Women’s Hospital. Li travay nan entèfas byoloji chimik, jenomik, ak patojenèz bakteryèn pou etabli nouvo paradigm pou yon antibyotik baze sou biyoloji esansyèl ki nesesè pou yon patojèn lakòz maladi kay moun li antre sou li an. Avèk itilizasyon fòmasyon li kòm chimis sentetik, jenetisyen bakteryèn, ak medsen klinik, li eksplore apwòch pou deranje entèraksyon an patojèn-ot."
+        }
+      ]
+    },
+    "MailingSection": {
+      "Title": "TestBoston enskri aktyèlman pasyan Brigham and Women’s Hospital ki resevwa envitasyon. ",
+      "Text": "Si w pa te resevwa yon envitasyon pou antre nan etid la, men ou enterese rete okouran enfòmasyon jeneral TestBoston, tanpri antre nan lis bilten nouvèl nou an:"
+    }
   },
   "PrequalPage": {
     "Title": "Premyèman, konfime kalifikasyon ou",
@@ -241,7 +241,11 @@
   "Prism": {
     "ClearSearch": "Efase",
     "Email": "ADRÈS IMÈL SIJÈ A",
-    "NoEmail": "PA APLIKAB",
+    "NoneListed": {
+      "Title": "None listed",
+      "Text": "If the participant wants to bo able to login to the TestBoston site, please enable their TestBoston account",
+      "Link": "here"
+    },
     "Buttons": {
       "Enrollment": "Kòmanse enskripsyon an",
       "Dashboard": "Gade dach la"

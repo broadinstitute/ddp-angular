@@ -1,0 +1,120 @@
+@import "../app-theme.scss";
+
+.button {
+    min-width: 8.5rem;
+    padding: 0.625rem 1.25rem;
+    font-family: 'Untitled-Sans-Medium', sans-serif;
+    border-radius: 4px;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.button,
+.button:active,
+.button:hover,
+.button:focus {
+    text-decoration: none;
+}
+
+.button_small {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.button_medium {
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.button_big {
+    padding: 1rem 2rem;
+    font-size: 1.4375rem;
+    line-height: 1.8125rem;
+}
+
+.button_primary {
+    background-color: mat-color($app-theme, 250);
+    border: 2px solid mat-color($app-theme, 50);
+    color: mat-color($app-theme, 100);
+}
+
+.button_primary:disabled {
+    background-color: mat-color($app-theme, 350);
+}
+
+.button_secondary {
+    background-color: mat-color($app-theme, 50);
+    color: mat-color($app-theme, 200);
+    border: 2px solid mat-color($app-theme, 200);
+}
+
+.button_secondary:disabled {
+    background-color: mat-color($app-theme, 50);
+    color: mat-color($app-theme, 400);
+    border: 2px solid mat-color($app-theme, 400);
+}
+
+.button_primary:hover:not([disabled]),
+.button_primary:hover:enabled {
+    color: mat-color($app-theme, 100);
+    background-color: mat-color($app-theme, 300);
+}
+
+.button_secondary:hover:not([disabled]),
+.button_secondary:hover:enabled {
+    background-color: mat-color($app-theme, 200);
+    color: mat-color($app-theme, 100);
+}
+
+.button_new-item {
+    font-size: 1.25rem;
+}
+
+.button_learn-more {
+    min-width: 13rem;
+}
+
+.button_learn-more:hover:not([disabled]),
+.button_learn-more:hover:enabled {
+    color: mat-color($app-theme, 650);
+}
+
+.simple-button,
+.SimpleButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: mat-color($app-theme, 200);
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.simple-button:hover,
+.SimpleButton:hover {
+    text-decoration: underline;
+}
+
+.simple-button:focus,
+.SimpleButton:focus {
+    text-decoration: underline;
+}
+
+.menu {
+
+    .button,
+    .simple-button,
+    .SimpleButton {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+}

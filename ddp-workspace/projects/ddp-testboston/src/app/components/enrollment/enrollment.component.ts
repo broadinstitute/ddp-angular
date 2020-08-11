@@ -5,12 +5,13 @@ import {
   SessionMementoService,
   SubjectInvitationServiceAgent,
   UserProfile,
+  UserProfileDecorator,
   UserProfileServiceAgent,
   WorkflowServiceAgent
 } from 'ddp-sdk';
 import { WorkflowBuilderService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
-import { of } from 'rxjs';
+import { of, throwError, Observable } from 'rxjs';
 import { take, tap, mergeMap } from 'rxjs/operators';
 
 @Component({
@@ -23,6 +24,7 @@ export class EnrollmentComponent implements OnInit {
   public accountForm: FormGroup;
   public isLoading = false;
   public showError = false;
+  private profile: UserProfile;
 
   constructor(
     private router: Router,
@@ -35,8 +37,7 @@ export class EnrollmentComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initAccountForm();
-    this.showError = (this.session.session.participantGuid === null && this.session.session.invitationId === null) ||
-      (this.session.session.participantGuid !== null);
+    this.setupInitialState();
   }
 
   public onSubmit(): void {
@@ -47,15 +48,16 @@ export class EnrollmentComponent implements OnInit {
     const profile = this.createProfile();
     const email = this.accountForm.controls.email.value;
     const invitationId = this.session.session.invitationId;
+    const participantGuid = this.session.session.participantGuid;
+    const participantGuid$ = participantGuid ? of(participantGuid) : this.createStudyParticipant(invitationId);
 
     this.isLoading = true;
     this.accountForm.disable();
 
-    this.subjectInvitation.createStudyParticipant(invitationId).pipe(
+    participantGuid$.pipe(
       take(1),
-      tap(userGuid => this.session.setParticipant(userGuid)),
       mergeMap(userGuid => email ? this.subjectInvitation.createUserLoginAccount(userGuid, email) : of(null)),
-      mergeMap(() => this.userProfile.saveProfile(false, profile)),
+      mergeMap(() => this.isProfileChanged(profile) ? this.userProfile.updateProfile(profile) : of(null)),
       mergeMap(() => this.workflow.getStart())
     ).subscribe(response => {
       if (response) {
@@ -72,10 +74,12 @@ export class EnrollmentComponent implements OnInit {
   }
 
   private initAccountForm(): void {
+    const nonWhitespaceRegExp = /\S/;
+    const emailRegExp = /^\S+@\S+\.\S+$/;
     this.accountForm = this.formBuilder.group({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.pattern(/^\S+@\S+\.\S+$/))
+      firstName: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)]),
+      lastName: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)]),
+      email: new FormControl(null, Validators.pattern(emailRegExp))
     });
   }
 
@@ -84,5 +88,51 @@ export class EnrollmentComponent implements OnInit {
     profile.firstName = this.accountForm.controls.firstName.value;
     profile.lastName = this.accountForm.controls.lastName.value;
     return profile;
+  }
+
+  private createStudyParticipant(invitationId: string): Observable<string> {
+    return this.subjectInvitation.createStudyParticipant(invitationId).pipe(
+      tap(userGuid => this.session.setParticipant(userGuid))
+    );
+  }
+
+  private isProfileChanged(profile: UserProfile): boolean {
+    return this.profile.firstName !== profile.firstName || this.profile.lastName !== profile.lastName;
+  }
+
+  private setupInitialState(): void {
+    const invitationId$ = of(this.session.session.invitationId);
+
+    invitationId$.pipe(
+      take(1),
+      mergeMap(invitationId => {
+        if (invitationId) {
+          return this.subjectInvitation.lookupInvitation(invitationId);
+        } else {
+          return throwError('There is no invitationId!');
+        }
+      }),
+      mergeMap(studySubject => {
+        if (studySubject.userLoginEmail) {
+          return throwError('The subject already has email-associated account!');
+        } else {
+          const participantGuid = this.session.session.participantGuid;
+          return participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
+        }
+      })
+    ).subscribe(
+      response => {
+        if (response) {
+          this.accountForm.controls.firstName.patchValue(response.profile.firstName);
+          this.accountForm.controls.lastName.patchValue(response.profile.lastName);
+          this.profile = response.profile;
+        } else {
+          this.router.navigateByUrl(this.appRoutes.Error);
+        }
+      },
+      error => {
+        this.showError = true;
+      }
+    );
   }
 }
