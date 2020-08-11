@@ -1,19 +1,18 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
-import {ActivityForm} from "../models/activity/activityForm";
-import {ActivityCodes} from '../constants/activityCodes';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ActivityForm } from '../models/activity/activityForm';
+import { ActivityCodes } from 'ddp-sdk';
 
 @Injectable()
 export class ActivityProgressCalculationService {
   private progress = new BehaviorSubject(null);
   private activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
-  private sectionIndex: number | null
+  private sectionIndex: number | null;
   private sectionsAmount: number;
-  private sectionWeight: number;
-  private lastSectionWeight: number;
-  private weight: Array<number>;
+  private lastStepWeight: number;
+  private stepWeights: Array<number>;
 
-  public setProgress(activity: ActivityForm) {
+  public setProgress(activity: ActivityForm): void {
     if (activity.activityCode === this.activityToShowProgress) {
       this.sectionIndex = activity.sectionIndex;
 
@@ -23,20 +22,30 @@ export class ActivityProgressCalculationService {
       }
 
       this.sectionsAmount = activity.sections.length;
-      this.calculateSectionsWeight();
+      this.calculateStepWeights();
+
       this.calculateProgress(activity.sectionIndex);
     }
   }
 
-  private calculateSectionsWeight() {
-    this.sectionWeight = +(100 / (this.sectionsAmount - 1)).toFixed(0);
-    this.lastSectionWeight = 100 - this.sectionWeight * (this.sectionsAmount - 1) + this.sectionWeight;
-    this.weight = Array(this.sectionsAmount - 2).fill(this.sectionWeight);
-    this.weight.push(this.lastSectionWeight);
+  private calculateStepWeights(): void {
+    const stepsAmount = this.sectionsAmount - 1;
+    const stepWeightFloat = (100 / (stepsAmount));
+    let stepWeightRounded = Math.ceil(stepWeightFloat);
+    if ((stepWeightRounded * (stepsAmount - 1)) > 100) {
+        stepWeightRounded = Math.floor(stepWeightFloat);
+    }
+
+    // last step weight requires correction, therefore, initial arrays size = stepsAmsount -1
+    this.stepWeights = Array(stepsAmount - 1);
+    this.stepWeights.fill(stepWeightRounded);
+
+    const correctionForLastStepWeight = 100 - (stepWeightRounded * (stepsAmount));
+    this.lastStepWeight = stepWeightRounded + correctionForLastStepWeight;
+    this.stepWeights.push(this.lastStepWeight);
   }
 
-
-  public updateProgress(activity, sectionIndex) {
+  public updateProgress(activity, sectionIndex): void {
     if (activity.activityCode === this.activityToShowProgress
           && this.shouldUpdate(sectionIndex)) {
       this.sectionIndex = sectionIndex;
@@ -44,13 +53,13 @@ export class ActivityProgressCalculationService {
     }
   }
 
-  private shouldUpdate(sectionIndex) {
+  private shouldUpdate(sectionIndex): boolean {
     return sectionIndex > this.sectionIndex;
   }
 
-  private calculateProgress(sectionIndex: number | null) {
-   const currentProgress = this.weight.slice(0, sectionIndex).reduce((acc, weight) => acc + weight, 0);
-   this.progress.next(currentProgress);
+  private calculateProgress(sectionIndex: number | null): void {
+    const currentProgress = this.stepWeights.slice(0, sectionIndex).reduce((acc, weight) => acc + weight, 0);
+    this.progress.next(currentProgress);
   }
 
   public getProgress(): Observable<any> {
