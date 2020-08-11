@@ -26,10 +26,6 @@ import { ToolkitConfigurationService } from "toolkit";
 
               <h4 class="Subtitle Color--green" translate>App.LearnMore.LearnMore.DoIHaveTo.Question</h4>
               <p translate>App.LearnMore.LearnMore.DoIHaveTo.Text</p>
-              <ddp-cookies-preferences-button [logoSrc]="'/assets/images/project-logo-dark.svg'"
-                                              [text]="'SDK.CookiesBanner.Preferences' | translate"
-                                              [className]="'Button Button--primary col-lg-4 col-md-4 col-sm-4 col-xs-8'">
-              </ddp-cookies-preferences-button>
             </section>
           </div>
         </div>
