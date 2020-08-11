@@ -431,6 +431,10 @@ a:focus {
     color: #a88838 !important;
 }
 
+.SpacedButtonDiv {
+  padding-bottom: 30px;
+}
+
 // End of button styling section
 
 // Language selector styles
@@ -1980,6 +1984,14 @@ select:-webkit-autofill {
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 400 !important;
+}
+
+.list--spaced li {
+  padding-top: 10px;
+}
+
+.list--sublist li {
+  padding-top: 0px;
 }
 
 .mat-form-field-underline {
