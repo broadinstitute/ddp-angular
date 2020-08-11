@@ -1,5 +1,3 @@
-import { CookiesPreferences } from './cookies';
-
 export class UserProfile {
     public birthYear: number | null;
     public birthDayInMonth: number | null;
