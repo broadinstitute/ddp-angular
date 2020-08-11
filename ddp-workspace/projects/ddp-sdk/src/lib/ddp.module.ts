@@ -17,6 +17,7 @@ import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cooki
 import { CookiesManagementService } from './services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
+import { PrionPrivacyPolicyComponent} from "./components/privacy-policy/prionPrivacyPolicy.component";
 import { AnalyticsManagementService } from './services/analyticsManagement.service';
 
 // Angular JWT
@@ -367,7 +368,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
-    PrivacyPolicyModalComponent
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -434,7 +436,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
-    PrivacyPolicyModalComponent
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
