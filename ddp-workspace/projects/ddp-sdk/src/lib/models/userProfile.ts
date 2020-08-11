@@ -9,5 +9,4 @@ export class UserProfile {
     public preferredLanguage: string | null;
     public firstName: string | null;
     public lastName: string | null;
-    public cookiesPreferences: CookiesPreferences | null;
 }
