@@ -62,10 +62,18 @@ if (!isResetPasswordPage) {
       type: $form.attr('method'),
       url: $form.attr('action'),
       data: $form.serialize(),
-      success: () => showModal(dictionary.modal.SuccessChangedPassword),
-    });
+      success: (result) => {
+        showModal(dictionary.modal.SuccessChangedPassword);
+        if (result.result_url) {
+          window.location.assign(result.result_url.split('?')[0]);
+        }
+    },
+    error: (error) => {
+      showModal(dictionary.modal.SuccessChangedPassword, true);
+    }});
   });
 }
+
 createForm(configs.login, ($form, data) => {
   webAuth.login({
     state: !isResetPasswordPage && config.extraParams.state,
