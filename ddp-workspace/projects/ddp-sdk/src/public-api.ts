@@ -81,7 +81,7 @@ export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/changeLanguageRedirect.component';
 export * from './lib/components/cookies/cookiesBanner/cookiesBanner.component';
-export * from './lib/components/cookies/privacyPolicy/privacyPolicyButton.component';
+export * from './lib/components/privacy-policy/privacyPolicyButton.component';
 export * from './lib/components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
 export * from './lib/components/privacy-policy/privacyPolicyModal.component';
 export * from './lib/components/privacy-policy/prionPrivacyPolicy.component';

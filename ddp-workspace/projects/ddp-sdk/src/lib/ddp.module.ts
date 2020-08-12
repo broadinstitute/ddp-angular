@@ -17,7 +17,7 @@ import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cooki
 import { CookiesManagementService } from './services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
 import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
-import { PrivacyPolicyButtonComponent } from './components/cookies/privacyPolicy/privacyPolicyButton.component';
+import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { AnalyticsManagementService } from './services/analyticsManagement.service';

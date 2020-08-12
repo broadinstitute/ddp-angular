@@ -1,9 +1,9 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { PrivacyPolicyModalComponent } from '../../privacy-policy/privacyPolicyModal.component';
-import { PrivacyModalData } from '../../../models/privacyModalData';
-import { ConfigurationService } from '../../../services/configuration.service';
+import { PrivacyPolicyModalComponent } from './privacyPolicyModal.component';
+import { PrivacyModalData } from '../../models/privacyModalData';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-privacy-policy-button',
