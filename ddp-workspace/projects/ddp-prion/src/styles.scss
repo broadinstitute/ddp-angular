@@ -118,13 +118,36 @@ a:focus {
 
 .Button--primaryYellow,
 .Button--primaryYellow:active,
-.Button--primaryYellow:focus,
-.CookieButton--Accept,
-.CookieButton--Accept:active,
-.CookieButton--Accept:focus {
+.Button--primaryYellow:focus {
     border: 1px solid #F2B816 !important;
     background-color: #F2B816 !important;
     color: #ffffff !important;
+}
+
+.CookieButton--Accept,
+.CookieButton--Accept:active,
+.CookieButton--Accept:focus {
+  border: 1px solid #F2B816 !important;
+  background-color: #F2B816 !important;
+  color: #000000;
+}
+
+.CookieButton--Preferences,
+.CookieButton--Preferences:active,
+.CookieButton--Preferences:focus {
+  width: 200px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  &:hover,
+  &:active {
+    color: #a88838;
+  }
 }
 
 .CookieButton--Reject,
@@ -3461,5 +3484,14 @@ ddp-cookies-preferences-modal {
 ddp-privacy-policy-modal {
   .Container, .PageContent {
     background: transparent;
+  }
+
+  .Container {
+    margin: 0 !important;
+    padding: 0;
+
+    .col-lg-8, .col-md-10, .col-sm-12, .col-xs-12 {
+      width: 100%;
+    }
   }
 }

@@ -8,8 +8,8 @@ import { PrivacyModalData } from "../../models/privacyModalData";
 @Component({
   selector: 'ddp-privacy-policy-modal',
   template: `
-    <div class="cookiesModal cookiesModal__header">
-      <img class="cookiesModal__logo" lazy-resource src="/assets/images/project-logo-dark.svg"
+    <div class="cookiesModal cookiesModal--header">
+      <img class="cookiesModal--logo" lazy-resource src="/assets/images/project-logo-dark.svg"
            [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>

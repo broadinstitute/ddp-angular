@@ -8,7 +8,7 @@ import { ConsentStatuses } from '../../../models/cookies';
   template: `
     <div class="cookiesModal cookiesModal--header">
       <img class="cookiesModal--logo" lazy-resource
-           src="'/assets/images/project-logo-dark.svg'"
+           src="/assets/images/project-logo-dark.svg"
            [attr.alt]="'SDK.Common.LogoAlt' | translate">
       <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
@@ -73,8 +73,7 @@ import { ConsentStatuses } from '../../../models/cookies';
       </mat-tab-group>
     </div>
     <div mat-dialog-actions class="cookiesModal--actions">
-      <ddp-privacy-policy-button [logoSrc]="this.data.logo"
-                                 [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
+      <ddp-privacy-policy-button [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
       <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-8"
               (click)="submit()"
               [innerText]="'SDK.CookiesModal.Submit' | translate">
