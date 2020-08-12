@@ -157,7 +157,7 @@ config.cookies = {
           duration: '24hours'
         },
         {
-          name: 'gat_platform',
+          name: 'gat',
           description: 'throttling',
           duration: '10minutes'
         }

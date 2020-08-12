@@ -493,6 +493,7 @@
         "google_analytics": "Google Analytics:",
         "ga": "_ga",
         "gid": "_gid",
+        "gat": "_gat",
         "gat_platform": "_gat_platform"
       },
       "CookieDescription": {
