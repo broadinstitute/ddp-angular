@@ -13,6 +13,7 @@ import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/coo
 })
 export class CookiesPreferencesButtonComponent {
   @Input() className: string;
+  @Input() privacyPolicyLink: boolean;
 
   constructor(public dialog: MatDialog,
               @Inject('ddp.config') private configuration: ConfigurationService) {
@@ -21,7 +22,8 @@ export class CookiesPreferencesButtonComponent {
   openPreferences(): void {
     this.dialog.open(CookiesPreferencesModalComponent, {
       width: '740px',
-      data: { cookies: this.configuration.cookies },
+      height: '640px',
+      data: { cookies: this.configuration.cookies, privacyPolicyLink: this.privacyPolicyLink },
       autoFocus: false,
       disableClose: true,
       scrollStrategy: new NoopScrollStrategy()

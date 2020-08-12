@@ -13,7 +13,7 @@ import { ConsentStatuses } from '../../../models/cookies';
       <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>
-    <div mat-dialog-content>
+    <div>
       <mat-tab-group>
         <mat-tab [label]="'SDK.CookiesModal.Privacy' | translate">
           <div class="cookiesModal--tabHeader">
@@ -50,38 +50,47 @@ import { ConsentStatuses } from '../../../models/cookies';
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Name</mat-header-cell>
-                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieName.' + element.name}} </mat-cell>
+                <mat-cell *matCellDef="let element" translate>
+                  {{'SDK.CookiesModal.CookieName.' + element.name}}
+                </mat-cell>
               </ng-container>
 
               <!-- Description Column -->
               <ng-container matColumnDef="description">
                 <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Description</mat-header-cell>
-                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieDescription.' + element.description}} </mat-cell>
+                <mat-cell *matCellDef="let element" translate>
+                  {{element.description ? 'SDK.CookiesModal.CookieDescription.' + element.description : null}}
+                </mat-cell>
               </ng-container>
 
-              <!-- Expiration Column -->
-              <ng-container matColumnDef="expiration">
-                <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Expiration </mat-header-cell>
-                <mat-cell *matCellDef="let element" translate> {{'SDK.CookiesModal.CookieExpiration.' + element.expiration}} </mat-cell>
+              <!-- Duration Column -->
+              <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Duration </mat-header-cell>
+                <mat-cell *matCellDef="let element" translate>
+                  {{element.duration ? 'SDK.CookiesModal.CookieDuration.' + element.duration : null}}
+                </mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns; let element"
+                       [ngClass]="{'cookiesModal--cookieSource' : !element.description}"></mat-row>
             </mat-table>
           </section>
         </mat-tab>
       </mat-tab-group>
     </div>
     <div mat-dialog-actions class="cookiesModal--actions">
-      <ddp-privacy-policy-button [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
-      <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-8"
+      <ddp-privacy-policy-button *ngIf="this.data.privacyPolicyLink" [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
+      <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-12"
               (click)="submit()"
               [innerText]="'SDK.CookiesModal.Submit' | translate">
       </button>
     </div>`,
 })
 export class CookiesPreferencesModalComponent implements OnInit {
-  public displayedColumns: string[] = ['name', 'description', 'expiration'];
+  public displayedColumns: string[] = ['name', 'description', 'duration'];
   public cookies;
 
   constructor(public dialogRef: MatDialogRef<CookiesPreferencesModalComponent>,

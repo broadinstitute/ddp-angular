@@ -11,7 +11,8 @@ import { ConsentStatuses } from '../../../models/cookies';
       <ddp-privacy-policy-button [className]="'cookiesBanner--link policy'"></ddp-privacy-policy-button>
       <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
-    <ddp-cookies-preferences-button [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'">
+    <ddp-cookies-preferences-button [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'"
+                                    [privacyPolicyLink]="true">
     </ddp-cookies-preferences-button>
     <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"
             (click)="cookiesService.updatePreferences(statuses.defaultReject)"

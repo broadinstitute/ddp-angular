@@ -92,7 +92,7 @@ import {
               </p>
               <p translate>SDK.PrivacyPolicy.Cookies.Text.P8</p>
               <div class="CenterDiv SpacedButtonDiv">
-                <ddp-cookies-preferences-button [className]="'Button Button--primary'"></ddp-cookies-preferences-button>
+                <ddp-cookies-preferences-button [privacyPolicyLink]="false" [className]="'Button Button--primary'"></ddp-cookies-preferences-button>
               </div>
               <p><span class="Accent" translate>SDK.PrivacyPolicy.Cookies.Text.P9Bold</span><span translate>SDK.PrivacyPolicy.Cookies.Text.P10</span>
               </p>

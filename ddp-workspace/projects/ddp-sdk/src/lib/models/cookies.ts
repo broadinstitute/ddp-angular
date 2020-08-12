@@ -1,7 +1,7 @@
 export interface Cookie {
   name: string;
   description: string;
-  expiration: string;
+  duration: string;
 }
 
 export type CookiesTypes = 'Functional' | 'Analytical';

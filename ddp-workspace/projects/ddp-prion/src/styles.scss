@@ -3276,6 +3276,10 @@ p.Medium {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    .Button--primary {
+      margin-left: auto;
+    }
   }
 
   &--link {
@@ -3309,6 +3313,17 @@ p.Medium {
   &--tabHeader h4,
   &--tabTable h4 {
     font-weight: bold;
+  }
+
+  &--cookieSource:not(:first-of-type) {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  &--cookieSource {
+    .mat-cell {
+      font-weight: bold;
+      font-size: 1rem;
+    }
   }
 
   &--tabActions {
@@ -3387,13 +3402,31 @@ ddp-cookies-preferences-modal {
   }
 
   .mat-table {
+    max-height: 250px;
+    overflow: auto;
     background-color: #fafafa;
 
     .mat-cell {
-      padding-right: 24px;
+      padding-right: 10px;
+      font-size: 0.8rem;
+      min-width: 100px;
+    }
+
+    .mat-header-cell {
+      padding-right: 10px;
+      min-width: 100px;
+    }
+
+    .mat-cell:first-of-type,
+    .mat-header-cell:first-of-type {
+      padding-left: 10px;
+      min-width: 190px;
+    }
+
+    .mat-row {
+      border-bottom: none;
     }
   }
-
 }
 
 @media only screen and (max-width: 1026px) {
@@ -3439,6 +3472,15 @@ ddp-cookies-preferences-modal {
     .mat-header-row {
       display: flex !important;
     }
+    .mat-table {
+      .mat-header-cell {
+        min-width: 100px;
+      }
+      .mat-cell {
+        font-size: 0.9rem;
+        min-width: 100px;
+      }
+    }
 
     .mat-row {
       flex-direction: row !important;
@@ -3447,6 +3489,7 @@ ddp-cookies-preferences-modal {
 
   .cdk-overlay-pane {
     max-width: 100vw !important;
+    height: 100vh !important;
   }
 }
 
@@ -3492,6 +3535,14 @@ ddp-privacy-policy-modal {
 
     .col-lg-8, .col-md-10, .col-sm-12, .col-xs-12 {
       width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  ddp-privacy-policy-modal {
+    .mat-dialog-content {
+      max-height: 100%;
     }
   }
 }
