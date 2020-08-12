@@ -91,6 +91,10 @@ a:focus {
     outline: 0;
 }
 
+.Underline {
+  text-decoration: underline;
+}
+
 //Button styles
 .Button {
     border-radius: 2px;
@@ -120,7 +124,7 @@ a:focus {
 .CookieButton--Accept:focus {
     border: 1px solid #F2B816 !important;
     background-color: #F2B816 !important;
-    color: #000000 !important;
+    color: #ffffff !important;
 }
 
 .CookieButton--Reject,
@@ -129,24 +133,6 @@ a:focus {
   border: 1px solid #F2B816 !important;
   background-color: transparent !important;
   color: #F2B816 !important;
-}
-
-.CookieButton--Preferences {
-  min-width: 200px !important;
-  color: #FFFFFF;
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.5rem;
-  text-decoration: underline !important;
-  cursor: pointer;
-  background-color: transparent;
-  border: none !important;
-  box-shadow: none;
-
-  &:hover,
-  &:active {
-    color: #a88838;
-  }
 }
 
 .Button--primaryNeutral,
@@ -445,6 +431,10 @@ a:focus {
     color: #a88838 !important;
 }
 
+.SpacedButtonDiv {
+  padding-bottom: 30px;
+}
+
 // End of button styling section
 
 // Language selector styles
@@ -740,6 +730,10 @@ input.mat-input-element.study-listing-filter {
     font-weight: 500;
 }
 
+.Nav-item:first-of-type {
+  padding-left: 20px !important;
+}
+
 #JoinUsLink {
   padding: 12px 30px !important;
 }
@@ -856,6 +850,7 @@ p.Footer-contact {
   background-clip: unset;
   border: none;
   border-image-width: 0;
+  white-space: nowrap;
 }
 
 .Footer-link:hover, .Footer-link .SimpleButton:hover {
@@ -1263,6 +1258,14 @@ ul {
 
 .Link--neutral:hover {
     color: #82B547;
+}
+
+.Link--green {
+    color: #82B547 !important;
+}
+
+.Link--green:hover {
+  color: mat-color($app-theme, 600) !important;
 }
 
 .PageContent-title {
@@ -1983,6 +1986,20 @@ select:-webkit-autofill {
     padding: 0;
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+.list {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400 !important;
+}
+
+.list--spaced li {
+  padding-top: 10px;
+}
+
+.list--sublist li {
+  padding-top: 0px;
 }
 
 .mat-form-field-underline {

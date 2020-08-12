@@ -12,7 +12,6 @@ import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/coo
             [class]="this.className"></button>`
 })
 export class CookiesPreferencesButtonComponent {
-  @Input() logoSrc: string;
   @Input() className: string;
 
   constructor(public dialog: MatDialog,
@@ -22,7 +21,7 @@ export class CookiesPreferencesButtonComponent {
   openPreferences(): void {
     this.dialog.open(CookiesPreferencesModalComponent, {
       width: '740px',
-      data: { cookies: this.configuration.cookies, logo: this.logoSrc },
+      data: { cookies: this.configuration.cookies },
       autoFocus: false,
       disableClose: true,
       scrollStrategy: new NoopScrollStrategy()

@@ -8,12 +8,10 @@ import { ConsentStatuses } from '../../../models/cookies';
   <div class="cookiesBanner">
     <div class="cookiesBanner--text">
       <span translate>SDK.CookiesBanner.Text_Before_Policy_Link</span>
-      <ddp-privacy-policy-button [logoSrc]="this.logoSrc"
-                                 [className]="'cookiesBanner--link policy'"></ddp-privacy-policy-button>
+      <ddp-privacy-policy-button [className]="'cookiesBanner--link policy'"></ddp-privacy-policy-button>
       <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
-    <ddp-cookies-preferences-button [logoSrc]="this.logoSrc"
-                                    [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'">
+    <ddp-cookies-preferences-button [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'">
     </ddp-cookies-preferences-button>
     <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"
             (click)="cookiesService.updatePreferences(statuses.defaultReject)"
@@ -26,7 +24,6 @@ import { ConsentStatuses } from '../../../models/cookies';
   </div>`
 })
 export class CookiesBannerComponent {
-  @Input() logoSrc: string;
   public statuses = ConsentStatuses;
 
   constructor(public cookiesService: CookiesManagementService) {

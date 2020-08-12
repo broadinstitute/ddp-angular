@@ -20,7 +20,7 @@ import {
         <router-outlet></router-outlet>
       </div>
       <prion-footer></prion-footer>
-      <ddp-cookies-banner *ngIf="showCookiesBanner" [logoSrc]="'/assets/images/project-logo-dark.svg'"></ddp-cookies-banner>
+      <ddp-cookies-banner *ngIf="showCookiesBanner"></ddp-cookies-banner>
     `
 })
 export class PrionAppComponent implements OnInit, OnDestroy {

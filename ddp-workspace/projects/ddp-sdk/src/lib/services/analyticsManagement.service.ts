@@ -27,7 +27,7 @@ export class AnalyticsManagementService {
   private startGATracking(): void {
     window['ga-disable-' + DDP_ENV.platformGAToken] = false;
     ga(() => {
-      // @ts-ignore
+      // @ts-ignore, create trackers if non created
       if (!ga.getAll().length) {
         ga('create', DDP_ENV.projectGAToken, 'auto');
         ga('create', DDP_ENV.platformGAToken, 'auto', 'platform');

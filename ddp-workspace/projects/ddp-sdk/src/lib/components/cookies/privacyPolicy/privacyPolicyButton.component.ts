@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal.component';
+import { PrivacyPolicyModalComponent } from '../../privacy-policy/privacyPolicyModal.component';
+import { PrivacyModalData } from '../../../models/privacyModalData';
+import { ConfigurationService } from '../../../services/configuration.service';
 
 @Component({
   selector: 'ddp-privacy-policy-button',
@@ -12,15 +14,15 @@ import { PrivacyPolicyModalComponent } from '../privacyPolicy/privacyPolicyModal
 })
 export class PrivacyPolicyButtonComponent {
   @Input() className: string;
-  @Input() logoSrc: string;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              @Inject('ddp.config') private configuration: ConfigurationService) {
   }
 
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
       width: '740px',
-      data: this.logoSrc,
+      data: new PrivacyModalData(this.configuration.usePrionPrivacyPolicyTemplate),
       autoFocus: false,
       disableClose: false,
       scrollStrategy: new NoopScrollStrategy()

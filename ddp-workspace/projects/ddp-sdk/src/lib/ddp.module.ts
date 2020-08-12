@@ -17,10 +17,10 @@ import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cooki
 import { CookiesManagementService } from './services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
 import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
-import { PrivacyPolicyModalComponent } from './components/cookies/privacyPolicy/privacyPolicyModal.component';
-import { PrivacyPolicyStaticComponent } from './components/cookies/privacyPolicy/privacyPolicyStatic.component';
-import { AnalyticsManagementService } from './services/analyticsManagement.service';
 import { PrivacyPolicyButtonComponent } from './components/cookies/privacyPolicy/privacyPolicyButton.component';
+import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
+import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
+import { AnalyticsManagementService } from './services/analyticsManagement.service';
 
 // Angular JWT
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -371,9 +371,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
     CookiesPreferencesButtonComponent,
-    PrivacyPolicyModalComponent,
     PrivacyPolicyButtonComponent,
-    PrivacyPolicyStaticComponent
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -441,9 +441,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
     CookiesPreferencesButtonComponent,
-    PrivacyPolicyModalComponent,
     PrivacyPolicyButtonComponent,
-    PrivacyPolicyStaticComponent
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
