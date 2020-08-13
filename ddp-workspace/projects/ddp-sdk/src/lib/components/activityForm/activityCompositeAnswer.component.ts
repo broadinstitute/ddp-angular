@@ -145,7 +145,8 @@ export class ActivityCompositeAnswer implements OnChanges {
     private shouldSetPlaceholderToBeQuestionText(childQuestionBlock: ActivityQuestionBlock<any>): boolean {
         if (childQuestionBlock.question && !(childQuestionBlock.placeholder)) {
             return (childQuestionBlock.questionType === QuestionType.Text)
-                || (childQuestionBlock.questionType === QuestionType.Date);
+                || (childQuestionBlock.questionType === QuestionType.Date)
+                || (childQuestionBlock.questionType === QuestionType.Numeric);
         }
         return false;
     }
