@@ -2,7 +2,7 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import * as RouterResource from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -58,7 +58,8 @@ declare let DDP_ENV: any;
 declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.dashboardUrl = "/console";
+tkCfg.dashboardUrl = RouterResource.Console;
+tkCfg.errorUrl = RouterResource.Error;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
