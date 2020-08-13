@@ -11,11 +11,19 @@ dispatch:
     service: testboston
   - url: "mpcproject.org/*"
     service: mpc
-  - url: "pepper-backend.prod.datadonationplatform.org/*"
-    service: pepper-backend
+  - url: "pepper.datadonationplatform.org/docs*"
+    service: pepper-api-spec
+  - url: "pepper.datadonationplatform.org/spec/*"
+    service: pepper-api-spec
   - url: "pepper.datadonationplatform.org/*"
     service: pepper-backend
   - url: "dsm.datadonationplatform.org/api/*"
+    service: study-manager-backend
+  - url: "dsm.datadonationplatform.org/app/*"
+    service: study-manager-backend
+  - url: "dsm.datadonationplatform.org/info/*"
+    service: study-manager-backend
+  - url: "dsm.datadonationplatform.org/ui/*"
     service: study-manager-backend
   - url: "dsm.datadonationplatform.org/*"
     service: study-manager-ui
