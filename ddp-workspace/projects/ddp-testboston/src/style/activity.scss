@@ -365,28 +365,35 @@ ddp-activity-boolean-answer {
 ddp-activity-composite-answer {
     ddp-activity-numeric-answer {
         display: flex;
-
-        &:first-child {
-            box-sizing: border-box;
-            padding-left: 40px;
-        }
+        width: 10rem;
+        box-sizing: border-box;
+        padding-left: 40px;
+        margin-right: -20px;
     }
 
     .horizontal {
         .ddp-radio-group-column {
-            padding-left: 40px;
+            flex-direction: row;
+            margin-left: 25px;
+        }
+
+        .ddp-answer-field {
+            display: flex;
+            align-items: center;
         }
     }
 }
 
-@media only screen and (max-width:650px) {
+@media only screen and (max-width:380px) {
     ddp-activity-composite-answer {
         .ddp-answer-container {
             flex-direction: column !important;
         }
 
-        ddp-activity-numeric-answer {
-            width: 20rem;
+        .horizontal {
+            .ddp-radio-group-column {
+                margin-left: 40px;
+            }
         }
     }
 }
