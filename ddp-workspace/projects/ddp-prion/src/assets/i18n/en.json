@@ -482,6 +482,10 @@
       "CookieName": {
         "auth0": "Auth0:",
         "auth0_com.auth0.auth": "com.auth0.auth.#",
+        "auth0_auth0": "auth0",
+        "auth0_auth0_compat": "auth0_compat",
+        "auth0_did": "did",
+        "auth0_did_compat": "did_compat",
         "pepper": "Pepper:",
         "pepper_cookie": "prion_cookies_consent",
         "pepper_session_key": "session_key",
@@ -507,12 +511,16 @@
         "throttling": "throttling to increase the efficiency of analytics collection",
         "security": "security",
         "cookie": "cookie preferences",
-        "language": "language preferences"
+        "language": "language preferences",
+        "session": "handles user sessions",
+        "ua_identifier": "the identifier for a device/user agent"
       },
       "CookieDuration": {
         "session": "session",
+        "1year": "1 year",
         "2years": "2 years",
         "24hours": "24 hours",
+        "3days": "3 days",
         "10minutes": "10 minutes",
         "30minutes": "30 minutes",
         "persistent": "persistent"

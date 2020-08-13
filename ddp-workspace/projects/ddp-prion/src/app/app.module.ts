@@ -96,6 +96,26 @@ config.cookies = {
           duration: '30minutes'
         },
         {
+          name: 'auth0_auth0',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_auth0_compat',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_did',
+          description: 'ua_identifier',
+          duration: '1year'
+        },
+        {
+          name: 'auth0_did_compat',
+          description: 'ua_identifier',
+          duration: '1year'
+        },
+        {
           name: 'pepper',
           description: null,
           duration: null
