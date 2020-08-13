@@ -121,6 +121,16 @@ config.cookies = {
           duration: 'persistent'
         },
         {
+          name: 'pepper_nextUrl',
+          description: 'navigation',
+          duration: 'session'
+        },
+        {
+          name: 'pepper_auth',
+          description: 'authentication',
+          duration: 'session'
+        },
+        {
           name: 'tcell',
           description: null,
           duration: null
