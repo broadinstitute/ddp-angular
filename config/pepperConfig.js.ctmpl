@@ -10,9 +10,6 @@ var DDP_ENV = {
     {{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
     mapsApiKey: "{{.Data.mapsApiKey}}",
     {{end}}
-    {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
-    recaptchaSiteClientKey:"{{.Data.recaptchaSiteClientKey}}",
-    {{end}}
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
@@ -128,6 +125,9 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "testboston"}}
+    {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
+        recaptchaSiteClientKey:"{{.Data.recaptchaSiteClientKey}}",
+    {{end}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.testboston.org";
         DDP_ENV['auth0Audience'] = "testboston-dev.auth0.com";
