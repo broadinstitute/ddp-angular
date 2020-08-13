@@ -1,9 +1,4 @@
-
 dispatch:
-  - url: "pepper-dev.datadonationplatform.org/docs*"
-    service: pepper-api-spec
-  - url: "pepper-dev.datadonationplatform.org/spec/*"
-    service: pepper-api-spec
   - url: "angio.dev.datadonationplatform.org/*"
     service: angio
   - url: "mbc.dev.datadonationplatform.org/*"
@@ -18,8 +13,10 @@ dispatch:
     service: mpc
   - url: "brain-v2.dev.datadonationplatform.org/*"
     service: brain-v2
-  - url: "pepper-backend.dev.datadonationplatform.org/*"
-    service: pepper-backend
+  - url: "pepper-dev.datadonationplatform.org/docs*"
+    service: pepper-api-spec
+  - url: "pepper-dev.datadonationplatform.org/spec/*"
+    service: pepper-api-spec
   - url: "pepper-dev.datadonationplatform.org/*"
     service: pepper-backend
   - url: "dsm-dev.datadonationplatform.org/api/*"
