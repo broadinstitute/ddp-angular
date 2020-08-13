@@ -160,6 +160,11 @@ config.cookies = {
           name: 'gat',
           description: 'throttling',
           duration: '10minutes'
+        },
+        {
+          name: 'gat_platform',
+          description: 'throttling',
+          duration: '10minutes'
         }
       ]
     }
