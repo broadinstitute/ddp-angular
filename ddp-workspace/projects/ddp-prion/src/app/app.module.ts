@@ -87,18 +87,83 @@ config.cookies = {
       list: [
         {
           name: 'auth0',
+          description: null,
+          duration: null
+        },
+        {
+          name: 'auth0_com.auth0.auth',
           description: 'authorization',
-          expiration: 'various'
+          duration: '30minutes'
+        },
+        {
+          name: 'auth0_auth0',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_auth0_compat',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_did',
+          description: 'ua_identifier',
+          duration: '1year'
+        },
+        {
+          name: 'auth0_did_compat',
+          description: 'ua_identifier',
+          duration: '1year'
         },
         {
           name: 'pepper',
-          description: 'authorization',
-          expiration: 'session'
+          description: null,
+          duration: null
+        },
+        {
+          name: 'pepper_session_key',
+          description: 'authentication',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_token',
+          description: 'authentication',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_cookie',
+          description: 'cookie',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_studyLanguage',
+          description: 'language',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_nextUrl',
+          description: 'navigation',
+          duration: 'session'
+        },
+        {
+          name: 'pepper_auth',
+          description: 'authentication',
+          duration: 'session'
         },
         {
           name: 'tcell',
-          description: 'authorization',
-          expiration: 'various'
+          description: null,
+          duration: null
+        },
+        {
+          name: 'tcell_agent_session_id',
+          description: 'security',
+          duration: 'persistent'
+        },
+        {
+          name: 'tcell_agent_policy_cache',
+          description: 'security',
+          duration: 'persistent'
         }
       ]
     },
@@ -107,19 +172,29 @@ config.cookies = {
       actions: ['Accept', 'Reject'],
       list: [
         {
+          name: 'google_analytics',
+          description: null,
+          duration: null
+        },
+        {
           name: 'ga',
           description: 'identification',
-          expiration: '2years'
+          duration: '2years'
         },
         {
           name: 'gid',
           description: 'grouping_behavior',
-          expiration: '24hours'
+          duration: '24hours'
         },
         {
           name: 'gat',
           description: 'throttling',
-          expiration: '10minutes'
+          duration: '10minutes'
+        },
+        {
+          name: 'gat_platform',
+          description: 'throttling',
+          duration: '10minutes'
         }
       ]
     }
