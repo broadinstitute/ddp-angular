@@ -142,8 +142,23 @@
       }
     },
     "ThirdParty": {
-      "Title": "",
-      "Description": "es: For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry."
+      "Title": "es: List of Third-Party Tools",
+      "Description": "es: The Prion Registry leverages the following third-party tools that may receive information about a user:",
+      "Tools": {
+        "Sendgrid": "es: Sendgrid",
+        "Auth0": "es: Auth0",
+        "Tcell": "es: Tcell",
+        "Google_Cloud": "es: Google Cloud",
+        "Google_Analytics": "es: Google Analytics"
+      },
+      "Usage": {
+        "email": "es: as an email service",
+        "authentication": "es: as an authentication system to provide access to the Registry",
+        "security": "es: as an Registry cloud firewall and runtime protection",
+        "host": "es: to host the Registry",
+        "analytics": "es: as an analytics tool"
+      },
+      "Last_updated": "es: Last updated:"
     }
   },
   "Toolkit": {
