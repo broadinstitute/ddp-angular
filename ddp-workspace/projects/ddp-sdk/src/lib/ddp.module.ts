@@ -16,8 +16,10 @@ import { CookieModule } from 'ngx-cookie';
 import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
 import { CookiesManagementService } from './services/cookiesManagement.service';
 import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
+import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
-import { PrionPrivacyPolicyComponent} from "./components/privacy-policy/prionPrivacyPolicy.component";
+import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { AnalyticsManagementService } from './services/analyticsManagement.service';
 
 // Angular JWT
@@ -368,6 +370,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
+    PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent
   ],
@@ -436,6 +440,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     CookiesBannerComponent,
     CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
+    PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent
   ],

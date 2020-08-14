@@ -49,7 +49,7 @@ export class PrionAppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.initBrowserWarningListener();
     this.initSessionWillExpireListener();
-    this.initHasToSetCookiesPolicyListener();
+    this.initHasToSetCookiesPreferencesListener();
     this.initTranslate();
     this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
   }
@@ -87,13 +87,12 @@ export class PrionAppComponent implements OnInit, OnDestroy {
     this.anchor.add(modalOpen).add(modalClose);
   }
 
-  private initHasToSetCookiesPolicyListener(): void {
-    const hasToSetCookiesPolicy =  this.cookiesManagementService.getHasToSetCookiesPolicy().subscribe(x => {
+  private initHasToSetCookiesPreferencesListener(): void {
+    const hasToSetCookiesPreferences =  this.cookiesManagementService.getHasToSetCookiesPreferences().subscribe(x => {
       this.showCookiesBanner = x;
     });
-    this.anchor.add(hasToSetCookiesPolicy);
+    this.anchor.add(hasToSetCookiesPreferences);
   }
-
 
   private initTranslate(): void {
     const session = localStorage.getItem('session_key');
