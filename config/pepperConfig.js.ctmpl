@@ -126,7 +126,7 @@ var DDP_ENV = {
 
 {{if eq $study_guid "testboston"}}
     {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
-        recaptchaSiteClientKey:"{{.Data.recaptchaSiteClientKey}}",
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
     {{end}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.testboston.org";
