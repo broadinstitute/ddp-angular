@@ -1,11 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfigurationService } from '../../../services/configuration.service';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CookiesPreferencesModalComponent } from '../cookiesPreferencesModal/cookiesPreferencesModal.component';
-import { PrivacyPolicyModalComponent } from '../../privacy-policy/privacyPolicyModal.component';
-import { PrivacyModalData } from "../../../models/privacyModalData";
+import { ConsentStatuses } from '../../../models/cookies';
 
 @Component({
   selector: 'ddp-cookies-banner',
@@ -13,55 +8,25 @@ import { PrivacyModalData } from "../../../models/privacyModalData";
   <div class="cookiesBanner">
     <div class="cookiesBanner--text">
       <span translate>SDK.CookiesBanner.Text_Before_Policy_Link</span>
-      <button class="cookiesBanner--link policy"
-              (click)="openPolicy()"
-              [innerText]="'SDK.CookiesBanner.Policy' | translate"></button>
+      <ddp-privacy-policy-button [className]="'cookiesBanner--link policy'"></ddp-privacy-policy-button>
       <span translate>SDK.CookiesBanner.Text_After_Policy_Link</span>
     </div>
-    <button class="cookiesBanner--link"
-            (click)="openPreferences()"
-            [innerText]="'SDK.CookiesBanner.Preferences' | translate"></button>
+    <ddp-cookies-preferences-button [className]="'CookieButton--Preferences col-lg-4 col-md-4 col-sm-8 col-xs-8'"
+                                    [privacyPolicyLink]="true">
+    </ddp-cookies-preferences-button>
     <button class="Button CookieButton--Reject col-lg-4 col-md-4 col-sm-8 col-xs-8"
-            (click)="reject()"
+            (click)="cookiesService.updatePreferences(statuses.defaultReject)"
             [innerText]="'SDK.CookiesBanner.Reject' | translate">
     </button>
     <button class="Button CookieButton--Accept col-lg-4 col-md-4 col-sm-8 col-xs-8"
-            (click)="accept()"
+            (click)="cookiesService.updatePreferences(statuses.defaultAccept)"
             [innerText]="'SDK.CookiesBanner.Accept' | translate">
     </button>
   </div>`
 })
 export class CookiesBannerComponent {
-  constructor(private cookiesService: CookiesManagementService,
-              public dialog: MatDialog,
-              @Inject('ddp.config') private configuration: ConfigurationService) {
-  }
+  public statuses = ConsentStatuses;
 
-  accept(): void {
-    this.cookiesService.acceptCookies();
-  }
-
-  reject(): void {
-    this.cookiesService.rejectNotFunctionalCookies();
-  }
-
-  openPreferences(): void {
-    this.dialog.open(CookiesPreferencesModalComponent, {
-      width: '740px',
-      data: this.configuration.cookies,
-      autoFocus: false,
-      disableClose: true,
-      scrollStrategy: new NoopScrollStrategy()
-    });
-  }
-
-  openPolicy(): void {
-    this.dialog.open(PrivacyPolicyModalComponent, {
-      width: '740px',
-      data: new PrivacyModalData(this.configuration.usePrionPrivacyPolicyTemplate),
-      autoFocus: false,
-      disableClose: false,
-      scrollStrategy: new NoopScrollStrategy()
-    });
+  constructor(public cookiesService: CookiesManagementService) {
   }
 }

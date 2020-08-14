@@ -1,94 +1,102 @@
 import { Inject, Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigurationService } from './configuration.service';
 import { AnalyticsManagementService } from './analyticsManagement.service';
-import { CookiesTypes } from '../models/cookies';
+import { ConsentStatuses, CookiesConsentStatuses, CookiesPreferences, CookiesTypes } from '../models/cookies';
+import { SessionMementoService } from './sessionMemento.service';
+import { LoggingService } from './logging.service';
 
 @Injectable()
 export class CookiesManagementService {
-  private cookiesTypes: Array<CookiesTypes>;
-  private readonly policyStorageName: string;
-  private hasToSetCookiesPolicy: BehaviorSubject<boolean> =  new BehaviorSubject(null);
+  private consent: CookiesPreferences;
+  private readonly cookiesTypes: Array<CookiesTypes>;
+  private readonly cookiesConsentStorageName: string;
+  private readonly isAuthenticated: boolean;
+  private hasToSetCookiesPreferences: BehaviorSubject<boolean> =  new BehaviorSubject(null);
 
-  constructor(private cookie: CookieService,
-              private analytics: AnalyticsManagementService,
-              @Inject('ddp.config') private configuration: ConfigurationService) {
+  constructor(private analytics: AnalyticsManagementService,
+              @Inject('ddp.config') private configuration: ConfigurationService,
+              private session: SessionMementoService,
+              private logger: LoggingService) {
     this.cookiesTypes = this.configuration.cookies.cookies.map(x => x.type).filter(x => x !== 'Functional');
-    this.policyStorageName = this.configuration.studyGuid + '_cookies_consent';
+    this.cookiesConsentStorageName = this.configuration.studyGuid + '_cookies_consent';
+    this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 
-  public checkCookiesPolicy(): void {
-    if (this.getConsentDecision()) {
-      this.hasToSetCookiesPolicy.next(false);
-      this.followPolicy();
+  public checkCookiesConsent(): void {
+    // if no cookies to reject -> do nothing
+    if (this.cookiesTypes.length === 0) {
       return;
     }
 
-    this.checkNeedToSetCookiesPolicy();
-    if (this.hasToSetCookiesPolicy && !localStorage.getItem(this.policyStorageName)) {
-      this.setDefaultPreferences();
+    this.setConsent();
+
+    if (this.consent.decision) {
+      this.dismissBanner();
+      this.followConsent();
+      return;
+    } else {
+      this.showBanner();
     }
   }
 
-  // if there are other cookies than functional and no consent decision was made and -> need to set Policy
-  private checkNeedToSetCookiesPolicy(): void {
-    this.cookiesTypes.length && !this.getConsentDecision()
-      ? this.hasToSetCookiesPolicy.next(true)
-      : this.hasToSetCookiesPolicy.next(false);
+  private setConsent(): void {
+    const localStorageConsent = this.getLocalStorageConsent();
+    localStorageConsent ? this.consent = localStorageConsent : this.setDefaultConsent();
   }
 
-  private getConsentDecision(): boolean {
-    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
-    return policy ? policy.consent_decision : false;
+  private getLocalStorageConsent(): CookiesPreferences   {
+    return JSON.parse(localStorage.getItem(this.cookiesConsentStorageName));
   }
 
-  private followPolicy(): void {
-    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
-    policy.cookies['Analytical'] ? this.analytics.trackAnalytics() : this.analytics.doNotTrackAnalytics();
+  private setDefaultConsent(): void {
+    this.consent = { decision: false, status: 'default_reject', cookies: {} };
+    this.cookiesTypes.forEach(x => this.consent.cookies[x] = null);
+    this.updateLocalStorageConsent();
   }
 
-  private setDefaultPreferences(): void {
-    const policy = { consent_decision: false, consent_status: false, cookies: {} };
-    this.cookiesTypes.forEach(x => policy.cookies[x] = null);
-    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
+  private updateLocalStorageConsent(): void {
+    localStorage.setItem(this.cookiesConsentStorageName, JSON.stringify(this.consent));
   }
 
-  public acceptCookies(): void {
-    this.hasToSetCookiesPolicy.next(false);
-    this.updateConsentStatus(true);
-    if (this.checkDefaultAcceptance())  {
-      this.updateCookiesAcceptance(true);
-      this.analytics.trackAnalytics();
-    }
+  private followConsent(): void {
+    this.consent.cookies['Analytical'] ? this.analytics.trackAnalytics() : this.analytics.doNotTrackAnalytics();
   }
 
-  public rejectNotFunctionalCookies(): void {
-    this.hasToSetCookiesPolicy.next(false);
-    this.updateConsentStatus(false);
-    this.updateCookiesAcceptance(false);
-    this.analytics.doNotTrackAnalytics();
+  private dismissBanner(): void {
+    this.hasToSetCookiesPreferences.next(false);
   }
 
-  private updateConsentStatus(value: boolean): void {
-    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
-    policy.consent_status = value;
-    policy.consent_decision = true;
-    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
+  private showBanner(): void {
+    this.hasToSetCookiesPreferences.next(true);
   }
 
-  private checkDefaultAcceptance(): boolean {
-    const cookiesAcceptance = Object.values(JSON.parse(localStorage.getItem(this.policyStorageName)).cookies);
-    return cookiesAcceptance.every(x => x === null);
+  public getHasToSetCookiesPreferences(): BehaviorSubject<boolean> {
+    return this.hasToSetCookiesPreferences;
   }
 
-  private updateCookiesAcceptance(value): void {
-    const policy = JSON.parse(localStorage.getItem(this.policyStorageName));
-    this.cookiesTypes.forEach(x => policy.cookies[x] = value);
-    localStorage.setItem(this.policyStorageName, JSON.stringify(policy));
+  public getCurrentCookiesAcceptance(): any {
+    return this.consent.cookies;
   }
 
-  public getHasToSetCookiesPolicy(): BehaviorSubject<boolean> {
-    return this.hasToSetCookiesPolicy;
+  public updatePreferences(status: CookiesConsentStatuses, cookies?: any): void {
+    this.dismissBanner();
+    this.updateConsent(status, cookies);
+    this.updateLocalStorageConsent();
+    this.followConsent();
+    this.logConsentUpdate();
+  }
+
+  private updateConsent(status: CookiesConsentStatuses, cookies?: any): void {
+    this.consent.decision = true;
+    this.consent.status = status;
+    cookies
+      ? this.consent.cookies = cookies
+      : this.cookiesTypes.forEach(x => this.consent.cookies[x] = status === ConsentStatuses.defaultAccept);
+  }
+
+  private logConsentUpdate(): void {
+    const loggerEvent = 'Cookies preferences update event occured. Status: ' + this.consent.status;
+    this.logger.logEvent('Cookies Management Service', loggerEvent);
   }
 }

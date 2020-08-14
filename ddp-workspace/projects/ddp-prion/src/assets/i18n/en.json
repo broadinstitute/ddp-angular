@@ -476,29 +476,54 @@
       "Details": "Cookie Details",
       "Name": "Name",
       "Description": "Description",
-      "Expiration": "Expiration",
+      "Duration": "Duration",
       "Policy": "Privacy policy",
       "Submit": "Submit Preferences",
       "CookieName": {
-        "auth0": "auth0",
-        "pepper": "pepper platform",
-        "tcell": "tcell",
+        "auth0": "Auth0:",
+        "auth0_com.auth0.auth": "com.auth0.auth.#",
+        "auth0_auth0": "auth0",
+        "auth0_auth0_compat": "auth0_compat",
+        "auth0_did": "did",
+        "auth0_did_compat": "did_compat",
+        "pepper": "Pepper:",
+        "pepper_cookie": "prion_cookies_consent",
+        "pepper_session_key": "session_key",
+        "pepper_token": "token",
+        "pepper_studyLanguage": "studyLanguage",
+        "pepper_nextUrl": "nextUrl",
+        "pepper_auth": "localAuthParams",
+        "tcell": "Tcell:",
+        "tcell_agent_session_id": "tcell_agent_session_id",
+        "tcell_agent_policy_cache": "tcell_agent_policy_cache",
+        "google_analytics": "Google Analytics:",
         "ga": "_ga",
         "gid": "_gid",
-        "gat": "_gat"
+        "gat": "_gat",
+        "gat_platform": "_gat_platform"
       },
       "CookieDescription": {
-        "authorization": "user authorization",
-        "identification": "user identification",
+        "authentication": "authentication",
+        "authorization": "authorization",
+        "identification": "identification",
+        "navigation": "navigation helper",
         "grouping_behavior": "grouping user behavior",
-        "throttling": "throttling requests to increase the efficiency of network calls"
+        "throttling": "throttling to increase the efficiency of analytics collection",
+        "security": "security",
+        "cookie": "cookie preferences",
+        "language": "language preferences",
+        "session": "handles user sessions",
+        "ua_identifier": "the identifier for a device/user agent"
       },
-      "CookieExpiration": {
-        "various": "various",
+      "CookieDuration": {
         "session": "session",
+        "1year": "1 year",
         "2years": "2 years",
         "24hours": "24 hours",
-        "10minutes": "10 minutes"
+        "3days": "3 days",
+        "10minutes": "10 minutes",
+        "30minutes": "30 minutes",
+        "persistent": "persistent"
       }
     },
     "PrivacyPolicy": {
