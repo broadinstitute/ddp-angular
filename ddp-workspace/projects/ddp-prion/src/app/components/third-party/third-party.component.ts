@@ -31,7 +31,7 @@ import { Component } from '@angular/core';
       </ul>
       <p class="third-party--date">
         <span translate>App.ThirdParty.Last_updated</span>
-        <span>08/14/2020</span>
+        <span>8/14/2020</span>
       </p>
     </div>
     `
