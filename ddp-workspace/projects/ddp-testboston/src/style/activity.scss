@@ -365,7 +365,7 @@ ddp-activity-boolean-answer {
 ddp-activity-composite-answer {
     ddp-activity-numeric-answer {
         display: flex;
-        width: 10rem;
+        width: 8.5rem;
         box-sizing: border-box;
         padding-left: 40px;
         margin-right: -20px;
@@ -384,7 +384,7 @@ ddp-activity-composite-answer {
     }
 }
 
-@media only screen and (max-width:380px) {
+@media only screen and (max-width:330px) {
     ddp-activity-composite-answer {
         .ddp-answer-container {
             flex-direction: column !important;

@@ -16,7 +16,8 @@ import {
     LogLevel,
     ConfigurationService,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    QuestionType
 } from 'ddp-sdk';
 
 import {
@@ -96,6 +97,7 @@ sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'SYMPTOMS_SURVEY'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
