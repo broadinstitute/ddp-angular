@@ -477,29 +477,54 @@
       "Details": "he: Cookie Details",
       "Name": "he: Name",
       "Description": "he: Description",
-      "Expiration": "he: Expiration",
+      "Duration": "he:  Duration",
       "Policy": "he: Privacy policy",
       "Submit": "he: Submit Preferences",
       "CookieName": {
-        "auth0": "he: auth0",
-        "pepper": "he: pepper platform",
-        "tcell": "he: tcell",
+        "auth0": "he: Auth0:",
+        "auth0_com.auth0.auth": "he: com.auth0.auth.#",
+        "auth0_auth0": "he: auth0",
+        "auth0_auth0_compat": "he: auth0_compat",
+        "auth0_did": "he: did",
+        "auth0_did_compat": "he: did_compat",
+        "pepper": "he: Pepper:",
+        "pepper_cookie": "he: prion_cookies_consent",
+        "pepper_session_key": "he: session_key",
+        "pepper_token": "he: token",
+        "pepper_studyLanguage": "he: studyLanguage",
+        "pepper_nextUrl": "he: nextUrl",
+        "pepper_auth": "he: localAuthParams",
+        "tcell": "he: Tcell:",
+        "tcell_agent_session_id": "he: tcell_agent_session_id",
+        "tcell_agent_policy_cache": "he: tcell_agent_policy_cache",
+        "google_analytics": "he: Google Analytics:",
         "ga": "he: _ga",
         "gid": "he: _gid",
-        "gat": "he: _gat"
+        "gat": "he: _gat",
+        "gat_platform": "he: _gat_platform"
       },
       "CookieDescription": {
-        "authorization": "he: user authorization",
-        "identification": "he: user identification",
+        "authentication": "he: authentication",
+        "authorization": "he: authorization",
+        "identification": "he: identification",
+        "navigation": "he: navigation helper",
         "grouping_behavior": "he: grouping user behavior",
-        "throttling": "he: throttling requests to increase the efficiency of network calls"
+        "throttling": "he: throttling to increase the efficiency of analytics collection",
+        "security": "he: security",
+        "cookie": "he: cookie preferences",
+        "language": "he: language preferences",
+        "session": "he: handles user sessions",
+        "ua_identifier": "he: the identifier for a device/user agent"
       },
-      "CookieExpiration": {
-        "various": "he: various",
+      "CookieDuration": {
         "session": "he: session",
+        "1year": "he: 1 year",
         "2years": "he: 2 years",
         "24hours": "he: 24 hours",
-        "10minutes": "he: 10 minutes"
+        "3days": "he: 3 days",
+        "10minutes": "he: 10 minutes",
+        "30minutes": "he: 30 minutes",
+        "persistent": "he: persistent"
       }
     },
     "PrivacyPolicy": {

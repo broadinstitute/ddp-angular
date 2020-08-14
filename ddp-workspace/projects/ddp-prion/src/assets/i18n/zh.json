@@ -476,29 +476,54 @@
       "Details": "zh: Cookie Details",
       "Name": "zh: Name",
       "Description": "zh: Description",
-      "Expiration": "zh: Expiration",
+      "Duration": "zh:  Duration",
       "Policy": "zh: Privacy policy",
       "Submit": "zh: Submit Preferences",
       "CookieName": {
-        "auth0": "zh: auth0",
-        "pepper": "zh: pepper platform",
-        "tcell": "zh: tcell",
+        "auth0": "zh: Auth0:",
+        "auth0_com.auth0.auth": "zh: com.auth0.auth.#",
+        "auth0_auth0": "zh: auth0",
+        "auth0_auth0_compat": "zh: auth0_compat",
+        "auth0_did": "zh: did",
+        "auth0_did_compat": "zh: did_compat",
+        "pepper": "zh: Pepper:",
+        "pepper_cookie": "zh: prion_cookies_consent",
+        "pepper_session_key": "zh: session_key",
+        "pepper_token": "zh: token",
+        "pepper_studyLanguage": "zh: studyLanguage",
+        "pepper_nextUrl": "zh: nextUrl",
+        "pepper_auth": "zh: localAuthParams",
+        "tcell": "zh: Tcell:",
+        "tcell_agent_session_id": "zh: tcell_agent_session_id",
+        "tcell_agent_policy_cache": "zh: tcell_agent_policy_cache",
+        "google_analytics": "zh: Google Analytics:",
         "ga": "zh: _ga",
         "gid": "zh: _gid",
-        "gat": "zh: _gat"
+        "gat": "zh: _gat",
+        "gat_platform": "zh: _gat_platform"
       },
       "CookieDescription": {
-        "authorization": "zh: user authorization",
-        "identification": "zh: user identification",
+        "authentication": "zh: authentication",
+        "authorization": "zh: authorization",
+        "identification": "zh: identification",
+        "navigation": "zh: navigation helper",
         "grouping_behavior": "zh: grouping user behavior",
-        "throttling": "zh: throttling requests to increase the efficiency of network calls"
+        "throttling": "zh: throttling to increase the efficiency of analytics collection",
+        "security": "zh: security",
+        "cookie": "zh: cookie preferences",
+        "language": "zh: language preferences",
+        "session": "zh: handles user sessions",
+        "ua_identifier": "zh: the identifier for a device/user agent"
       },
-      "CookieExpiration": {
-        "various": "zh: various",
+      "CookieDuration": {
         "session": "zh: session",
+        "1year": "zh: 1 year",
         "2years": "zh: 2 years",
         "24hours": "zh: 24 hours",
-        "10minutes": "zh: 10 minutes"
+        "3days": "zh: 3 days",
+        "10minutes": "zh: 10 minutes",
+        "30minutes": "zh: 30 minutes",
+        "persistent": "zh: persistent"
       }
     },
     "PrivacyPolicy": {
