@@ -117,7 +117,11 @@ const routes: Routes = [
   {
     path: RouterResource.Console,
     component: ConsoleComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
   },
   {
     path: RouterResource.AccountActivated,
