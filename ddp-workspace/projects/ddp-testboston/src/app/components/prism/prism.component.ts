@@ -1,6 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CompositeDisposable, SubjectInvitationServiceAgent, DdpError, ErrorType, StudySubject, SessionMementoService } from 'ddp-sdk';
+import {
+  CompositeDisposable,
+  SubjectInvitationServiceAgent,
+  DdpError,
+  ErrorType,
+  StudySubject,
+  SessionMementoService,
+  LanguageService
+} from 'ddp-sdk';
 import { filter, tap, debounceTime, concatMap, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AppRoutes } from '../../app-routes';
 
@@ -21,6 +29,7 @@ export class PrismComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
 
   constructor(
+    private languageService: LanguageService,
     private sessionService: SessionMementoService,
     private subjectInvitation: SubjectInvitationServiceAgent) { }
 
@@ -30,6 +39,7 @@ export class PrismComponent implements OnInit, OnDestroy {
     this.initZipListener();
     this.initNotesListener();
     this.setInvitationIdInitialValue();
+    this.languageService.changeLanguage('en');
   }
 
   public ngOnDestroy(): void {

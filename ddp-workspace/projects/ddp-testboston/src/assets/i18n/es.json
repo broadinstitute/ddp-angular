@@ -182,32 +182,32 @@
           ]
         }
       ]
-  },
-  "TeamSection": {
-    "Title": "Nuestro equipo",
-    "Text": "Somos un equipo de infectólogas e investigadoras que deseamos tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades, de modo que podamos atender mejor a todos los pacientes. ",
-    "List": [
-      {
-        "Name": "Dra. Ann E. Woolley",
-        "Affiliations": "Profesora de Medicina",
-        "Info": "La Dra. Ann Woolley es profesora de Medicina e infectóloga de Brigham & Women’s Hospital y la Facultad de Medicina de Harvard. La Dra. Woolley obtuvo una licenciatura en Ingeniería Mecánica y Aeroespacial de la Universidad de Princeton en 2001 y un título de posgrado de estudios preparatorios de Medicina en la Universidad de Columbia. Más tarde, se formó en Salud Pública y en Medicina en la Facultad de Medicina de Mount Sinai en Nueva York. Con sus investigaciones centradas en los trasplantes, la hepatitis y las infecciones cardíacas, la Dra. Woolley ha demostrado métodos novedosos para utilizar sin riesgos los órganos de personas que antes no se consideraban donantes aptos. Gracias a su labor, ha sido posible reducir los plazos de espera para quienes necesitan trasplantes de órganos y lograr que más personas puedan optar por donar órganos y salvar vidas."
-      },
-      {
-        "Name": "Dra. Lisa A. Cosimi",
-        "Affiliations": "Profesora adjunta de Infectología de la Facultad de Medicina de Harvard, Global Health Equity (Equidad Mundial en Salud)",
-        "Info": "La Dra. Cosimi es médica adjunta de las divisiones de Equidad Mundial en Salud e Infectología de Brigham & Women’s Hospital. Además, se desempeña como profesora adjunta de Medicina en la Facultad de Medicina de Harvard. La Dra. Cosimi obtuvo una licenciatura en Economía de la Universidad Cornell en 1992 y una licenciatura en Medicina de la Facultad de Medicina Weill Cornell en 1996.  Finalizó su residencia de Medicina Interna y Atención Primaria en Massachusetts General Hospital y, posteriormente, se especializó en Infectología en el programa combinado de Partners.  Las investigaciones de la Dra. Cosimi se han centrado en formas de fortalecer los sistemas de salud y la calidad de la asistencia sanitaria en contextos donde los recursos son limitados. Su grupo, The Partnership for Health Advancement in Vietnam (HAIVN, Sociedad para la Promoción de la Salud en Vietnam), se ha asociado con el Ministerio de Salud, las universidades de medicina y los hospitales de Vietnam. Su objetivo es reformar y modernizar la educación de los trabajadores de la salud, así como mejorar la calidad de la atención sanitaria y el acceso a ella para los pacientes con VIH, tuberculosis y otras infecciones de reciente aparición en todo el país."
-      },
-      {
-        "Name": "Dra. Deborah T. Hung, PhD",
-        "Affiliations": "Profesora titular de Infectología, Neumología y Medicina Intensiva de la Facultad de Medicina de Harvard",
-        "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute of MIT and Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham and Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
-      }
-    ]
-  },
-  "MailingSection": {
-    "Title": "En la actualidad, TestBoston inscribe a los pacientes invitados de Brigham and Women’s Hospital. ",
-    "Text": "Si no recibió una invitación para participar en el estudio, pero le interesa estar al tanto de las novedades generales de TestBoston, inscríbase en nuestra lista para recibir un boletín:"
-  }
+    },
+    "TeamSection": {
+      "Title": "Nuestro equipo",
+      "Text": "Somos un equipo de infectólogas e investigadoras que deseamos tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades, de modo que podamos atender mejor a todos los pacientes. ",
+      "List": [
+        {
+          "Name": "Dra. Ann E. Woolley",
+          "Affiliations": "Profesora de Medicina",
+          "Info": "La Dra. Ann Woolley es profesora de Medicina e infectóloga de Brigham & Women’s Hospital y la Facultad de Medicina de Harvard. La Dra. Woolley obtuvo una licenciatura en Ingeniería Mecánica y Aeroespacial de la Universidad de Princeton en 2001 y un título de posgrado de estudios preparatorios de Medicina en la Universidad de Columbia. Más tarde, se formó en Salud Pública y en Medicina en la Facultad de Medicina de Mount Sinai en Nueva York. Con sus investigaciones centradas en los trasplantes, la hepatitis y las infecciones cardíacas, la Dra. Woolley ha demostrado métodos novedosos para utilizar sin riesgos los órganos de personas que antes no se consideraban donantes aptos. Gracias a su labor, ha sido posible reducir los plazos de espera para quienes necesitan trasplantes de órganos y lograr que más personas puedan optar por donar órganos y salvar vidas."
+        },
+        {
+          "Name": "Dra. Lisa A. Cosimi",
+          "Affiliations": "Profesora adjunta de Infectología de la Facultad de Medicina de Harvard, Global Health Equity (Equidad Mundial en Salud)",
+          "Info": "La Dra. Cosimi es médica adjunta de las divisiones de Equidad Mundial en Salud e Infectología de Brigham & Women’s Hospital. Además, se desempeña como profesora adjunta de Medicina en la Facultad de Medicina de Harvard. La Dra. Cosimi obtuvo una licenciatura en Economía de la Universidad Cornell en 1992 y una licenciatura en Medicina de la Facultad de Medicina Weill Cornell en 1996.  Finalizó su residencia de Medicina Interna y Atención Primaria en Massachusetts General Hospital y, posteriormente, se especializó en Infectología en el programa combinado de Partners.  Las investigaciones de la Dra. Cosimi se han centrado en formas de fortalecer los sistemas de salud y la calidad de la asistencia sanitaria en contextos donde los recursos son limitados. Su grupo, The Partnership for Health Advancement in Vietnam (HAIVN, Sociedad para la Promoción de la Salud en Vietnam), se ha asociado con el Ministerio de Salud, las universidades de medicina y los hospitales de Vietnam. Su objetivo es reformar y modernizar la educación de los trabajadores de la salud, así como mejorar la calidad de la atención sanitaria y el acceso a ella para los pacientes con VIH, tuberculosis y otras infecciones de reciente aparición en todo el país."
+        },
+        {
+          "Name": "Dra. Deborah T. Hung, PhD",
+          "Affiliations": "Profesora titular de Infectología, Neumología y Medicina Intensiva de la Facultad de Medicina de Harvard",
+          "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute of MIT and Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham and Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
+        }
+      ]
+    },
+    "MailingSection": {
+      "Title": "En la actualidad, TestBoston inscribe a los pacientes invitados de Brigham and Women’s Hospital. ",
+      "Text": "Si no recibió una invitación para participar en el estudio, pero le interesa estar al tanto de las novedades generales de TestBoston, inscríbase en nuestra lista para recibir un boletín:"
+    }
   },
   "PrequalPage": {
     "Title": "Primero, confirme si reúne los requisitos.",
@@ -241,7 +241,11 @@
   "Prism": {
     "ClearSearch": "Borrar",
     "Email": "DIRECCIÓN DE CORREO ELECTRÓNICO DEL PARTICIPANTE VOLUNTARIO",
-    "NoEmail": "NO APLICA",
+    "NoneListed": {
+      "Title": "None listed",
+      "Text": "If the participant wants to be able to login to the TestBoston site, please enable their TestBoston account",
+      "Link": "here"
+    },
     "Buttons": {
       "Enrollment": "Iniciar la inscripción",
       "Dashboard": "Ver el panel"
