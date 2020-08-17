@@ -297,6 +297,8 @@ import {
 })
 export class AtcpActivityComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() agreeConsent = false;
+  @Input() buttonWithArrow = false;
+
   public ActivityCodes = ActivityCodes;
   constructor(
       windowRef: WindowRef,

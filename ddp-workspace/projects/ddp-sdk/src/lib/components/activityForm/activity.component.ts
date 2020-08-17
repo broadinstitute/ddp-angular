@@ -2,14 +2,12 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Inject,
   Injector,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
@@ -27,7 +25,6 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
-import {ActivityForm} from "../../models/activity/activityForm";
 
 @Component({
     selector: 'ddp-activity',
@@ -203,7 +200,6 @@ import {ActivityForm} from "../../models/activity/activityForm";
 export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
-    @Input() buttonWithArrow = false;
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
