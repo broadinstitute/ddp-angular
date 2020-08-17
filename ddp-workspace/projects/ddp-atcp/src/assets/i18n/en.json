@@ -677,6 +677,10 @@
   "JoinUs": {
     "SignInButton": "Already registered? Sign In here"
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "You have to confirm your email address before continuing",
+    "EmailConfirmed": "Your email address has been successfully confirmed"
+  },
   "Statistics": {
     "Title": "The A-T Family Data Platform by the Numbers",
     "CountersFirst": {
