@@ -14,3 +14,5 @@ export const LoginLanding = 'login-landing';
 export const Auth = 'auth';
 export const PasswordResetDone = 'password-reset-done';
 export const SessionExpired = 'session-expired';
+export const AccountActivated = 'account-activated';
+export const AccountActivationRequired = 'account-activation-required';
