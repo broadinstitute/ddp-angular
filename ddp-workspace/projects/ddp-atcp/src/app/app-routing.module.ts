@@ -26,6 +26,10 @@ import { DataAccessComponent } from './components/data-access/data-access';
 import { DashBoardComponent } from './components/dashboard/dashboard';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { ConsoleComponent } from "./components/console/console";
+import {AccountActivatedComponent} from "./components/account-activation/accountActivated";
+import {
+  AccountActivationRequiredComponent
+} from "./components/account-activation/accountActivationRequired";
 
 const routes: Routes = [
   {
@@ -113,6 +117,16 @@ const routes: Routes = [
   {
     path: RouterResource.Console,
     component: ConsoleComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: RouterResource.AccountActivated,
+    component: AccountActivatedComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: RouterResource.AccountActivationRequired,
+    component: AccountActivationRequiredComponent,
     canActivate: [IrbGuard]
   },
   {
