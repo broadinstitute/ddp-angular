@@ -68,7 +68,8 @@ export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.dashboardUrl = RouterResource.Console;
 tkCfg.errorUrl = RouterResource.Error;
-
+tkCfg.infoEmail = 'support@atfamilies.org';
+tkCfg.phone = '+1 954-481-6611';
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
