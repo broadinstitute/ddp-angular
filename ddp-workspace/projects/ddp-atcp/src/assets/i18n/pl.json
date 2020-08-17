@@ -1,375 +1,379 @@
 {
-	"AboutInitiative": {
-		"FirstParagraph": {
-			"Text": "jest dziedziczną chorobą neurodegeneracyjną. Dziecko z A-T zaczyna cierpieć na postępujący zanik kontroli nad mięśniami w wieku około 2 lat. W wieku 9-10 lat dzieci z A-T są już zazwyczaj uzależnione od wózków inwalidzkich, a ich mowa staje się niewyraźna. Czytanie oraz połykanie również zaczyna sprawiać problemy. U około 30 procent dzieci z A-T rozwija się nowotwór, a większość z nich ma w jakimś stopniu problem z układem odpornościowym. Mimo że poprzez niwelację symptomów nastąpił postęp w przedłużaniu życia osób z A-T, choroba pozostaje niezwyciężona.",
-			"Title": "Zespół ataksja-teleangiektazja (A-T)"
-		},
-		"SecondParagraph": {
-			"TextOne": "U rodzeństwa z A-T można zauważyć więcej podobieństw w objawach klinicznych niż u dzieci, które obciążone są tymi samymi mutacjami, ale należą do innych rodzin. Dlatego naukowcy uważają, iż geny rodzinne, inne niż te, które wywołują A-T, mogą modyfikować wpływ A-T na pacjentów. Dodatkowo możliwe jest, że życie w różnych środowiskach, prowadzenie odmiennego trybu życia oraz stosowanie różnych diet może wpływać na zdrowie osób z A-T.",
-			"TextSecond": "Nie tak dawno zidentyfikowaliśmy kilka osób, które posiadają typowe, chorobotwórcze mutacje w ich genach A-T i nie wytwarzają białek A-T (tak jak inne osoby z A-T), a jednak ich objawy A-T są zadziwiająco łagodne. Jesteśmy dobrej myśli, że być może uda nam się wykryć zmiany w innych genach, które naprawiają bądź kompensują mutacje A-T u pacjentów z takimi \\\"wyjątkowo łagodnymi\\\" objawami. Gdyby tak było, badacze mogliby znaleźć nowe metody leczenia wszystkich osób z A-T. Jednakże najpierw musimy zebrać dane kliniczne i genetyczne od jak największej liczby osób z A-T.",
-			"TextThird": "W podobny sposób, porównując wywiady chorobowe oraz tryb życia różnych pacjentów z A-T, badacze będą w stanie określić, które strategie radzenia sobie z symptomami dają lepsze rezultaty zdrowotne. Najpierw jednak musimy uzyskać i połączyć dane od wielu pacjentów z A-T w jednym miejscu.",
-			"Title": "A-T dotyka każdego w inny sposób."
-		},
-		"ThirdParagraph": {
-			"Steps": [
-				{
-					"Name": "Zapisz się do platformy danych.",
-					"Text": "Kliknij „Dołącz do nas” i utwórz konto ze swoim imieniem i adresem e-mail. Po utworzeniu konta będziesz mieć możliwość zarejestrowania siebie (jeśli cierpisz na A-T) lub swojego dziecka/dzieci z A-T jako uczestnika naszej platformy danych poprzez wypełnienie krótkiego formularza."
-				},
-				{
-					"Name": "Udziel nam pozwolenia.",
-					"Steps": [
-						"przekazanie próbki śliny, którą każdy pacjent z A-T może nam wysłać do sekwencjonowania genomu;",
-						"pozyskanie dokumentacji medycznej pacjenta z A-T od lekarza i przekazanie jej badaczom;",
-						"przekazanie naukowcom dokumentacji medycznej przesłanej za pośrednictwem naszej platformy;",
-						"kontakt z tobą w przyszłości w sprawie kontynuacji badań."
-					],
-					"Text": "W trakcie rejestracji poprosimy cię o wypełnienie formularza zgody, który umożliwi nam dzielenie się\ntwoimi anonimowymi danymi z naukowcami.\nJeśli zechcesz, możesz również zezwolić nam na:"
-				},
-				{
-					"Name": "Opowiedz nam o sobie lub swoim dziecku.",
-					"Text": "Aby dołączyć do tej inicjatywy, należy odpowiedzieć na pytania dotyczące zdrowia osoby z A-T, konsultowanych lekarzy oraz historii choroby i wywiadu rodzinnego. Okresowo będziemy cię zapraszać do wypełnienia dodatkowych (opcjonalnych) ankiet na temat stanu zdrowia osoby z A-T (ankiet opracowanych przez badaczy, którzy będą analizować dane w celu lepszego zrozumienia A-T)."
-				},
-				{
-					"Name": "Prześlij nam próbkę śliny.",
-					"Text": "Jeśli zdecydujesz się wziąć udział w badaniu sekwencji genomu, prześlesz nam próbkę śliny w już zaadresowanej przesyłce, którą my ci dostarczymy."
-				},
-				{
-					"Name": "Przeanalizujemy DNA oraz dane medyczne.",
-					"Text": "Dokonamy analizy DNA w komórkach uzyskanych z próbki śliny. Żadne inne procedury nie będą wymagane. Połączymy wyniki analizy genetycznej twojej śliny oraz informacji medycznych przez ciebie dostarczonych w naszych ankietach internetowych."
-				},
-				{
-					"Name": "Przekażemy dane badaczom.",
-					"Text": "Po usunięciu informacji umożliwiających potencjalną identyfikację, informacje o zdrowiu i genomach zostaną udostępnione badaczom na całym świecie za pomocą bezpiecznej bazy danych z kontrolą dostępu. Dostęp do twoich danych będą mieli jedynie wykwalifikowani badacze, którzy uzyskali zezwolenie od Komitetu ds. Dostępu Danych, złożonego z członków rodzin osób z A-T, ale również doradców naukowych i medycznych.  Będziemy śledzić wszystkie badania wykorzystujące twoje informacje."
-				},
-				{
-					"Name": "Informacje zwrotne od ciebie mogą przyspieszyć prace badawcze.",
-					"Text": "Okresowo będziemy zapraszać do wypełnienia ankiet opracowanych przez badaczy, którzy analizują dane w celu lepszego zrozumienia A-T. Korzystając z tej platformy, będziemy mieli bezprecedensową możliwość szybkiego uzyskania odpowiedzi na dodatkowe pytania wprost od rodzin. Możliwość kontaktu z uczestnikami może znacząco wpłynąć na badania i skrócić drogę do nowych odkryć."
-				},
-				{
-					"Name": "Ucz się z nami przez cały czas.",
-					"Text": "To wyjątkowe połączenie informacji zdrowotnych i genetycznych może mieć kluczowe znaczenie dla opracowania metod leczenia, które nie byłyby możliwe bez twojej pomocy. Z pewnością będziemy na bieżąco informować cię o naszych wysiłkach i o najnowszych odkryciach możliwych dzięki twojemu uczestnictwu."
-				}
-			],
-			"SubTitle": "Oto jak działa platforma:",
-			"Text": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć.",
-			"Title": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T"
-		},
-		"Title": "O inicjatywie"
-	},
-	"AboutPage": {
-		"DataAccess": {
-			"Header": "Komitet ds. dostępu do danych",
-			"Text": "Dostęp do wszystkich informacji na platformie mają tylko wykwalifikowani badacze, którzy otrzymali zgodę komitetu ds. dostępu do danych. Komitet składa się z przedstawicieli rodzin z A-T rekrutowanych do naszej Rodzinnej Rady Nadzorczej, którzy to z kolei pozyskują ekspertów do naszej Medycznej i Naukowej Rady Doradczej.“ Daje to pewność, że każdy projekt badawczy jest zgodny z celami inicjatywy.  Rodzinna Rada Nadzorcza nadzoruje Medyczną i Naukową Radę Doradczą."
-		},
-		"Doctors": [
-			{
-				"Hospital": "profesor emerytowany genetyki medycznej –“ Uniwersytet Cambridge, Cambridge, Wielka Brytania oraz honorowy członek wydziału, Instytut Wellcome Trust Sanger, Hinxton, Wielka Brytania",
-				"Name": "Martin Bobrow",
-				"Rank": "lek."
-			},
-			{
-				"Hospital": "profesor genetyki medycznej, Uniwersytet Sapienza, Rzym, Włochy",
-				"Name": "Luciana Chessa"
-			},
-			{
-				"Hospital": "dyrektor oddziału pediatrii, Szpital Wesley, Queensland, Australia"
-			},
-			{
-				"Hospital": "profesor nadzwyczajny, Uniwersytet Federalny, São Paulo, Brazylia"
-			},
-			{
-				"Hospital": "profesor nadzwyczajny pediatrii i neurologii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
-			},
-			{
-				"Hospital": "dyrektor, Google Genomics, Mountain View, CA, USA"
-			},
-			{
-				"Hospital": "pediatria i biologia rozwojowa, Uniwersytet Medyczny i Stomatologiczny w Tokio, Japonia"
-			},
-			{
-				"Hospital": "profesor nadzwyczajny, Uniwersytet Queensland, Queensland, Australia"
-			},
-			{
-				"Hospital": "profesor, założyciel Onkologii Molekularnej, Uniwersytet Queensland, Brisbane, Australia"
-			},
-			{
-				"Hospital": "profesor pediatrii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
-			},
-			{
-				"Hospital": "immunohematologia dziecięca, Koordynator Francuskiego Ośrodka Referencyjnego ds. Pierwotnych Zaburzeń Odporności, Szpital Neckera, Paryż, Francja"
-			},
-			{
-				"Hospital": "neurolog dziecięcy, Centrum Medyczne Sheba, Ramat Gan, Izrael"
-			},
-			{
-				"Hospital": "główny inspektor danych, Broad Institute, Cambridge, MA, USA"
-			},
-			{
-				"Hospital": "Krajowy Ośrodek Chorób Rzadkich, Rzym, Włochy"
-			},
-			{
-				"Hospital": "koordynator naukowy, A-T Children’s Project, Coconut Creek, FL, USA"
-			},
-			{
-				"Hospital": "profesor genetyki człowieka, Uniwersytet Telawiwski, Ramat Aviv, Izrael"
-			},
-			{
-				"Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
-			},
-			{
-				"Hospital": "profesor genetyki, Uniwersytet Paris Descartes, oraz dziekan wydziału genetyki, Instytut Curie, Paryż, Francja"
-			},
-			{
-				"Hospital": "profesor nadzwyczajny, Uniwersytet Medyczny i Stomatologiczny Tokio, Tokio, Japonia"
-			},
-			{
-				"Hospital": "dyrektor wykonawczy, Public Population Project in Genomics and Society, Montreal, Kanada"
-			},
-			{
-				"Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
-			},
-			{
-				"Hospital": "kliniczny profesor nadzwyczajny, Uniwersytet w Nottingham, Nottingham, Wielka Brytania"
-			},
-			{
-				"Hospital": "szpital dziecięcy uniwersytetu im. Johanna Wolfganga Goethego, Frankfurt, Niemcy"
-			}
-		],
-		"FamilyOversight": {
-			"Header": "Rodzinna rada nadzorcza",
-			"Text": "Misją naszej platformy jest to, aby naukowcy mieli szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć. Aby mieć pewność, że nasza misja i działalność idzie w parze z tym, co najlepsze dla osób z A-T na całym świecie, powołaliśmy międzynarodową rodzinną radę nadzorczą.  Oto aktualna lista (w porządku alfabetycznym) członków rodzin pacjentów z A-T, którzy zgodzili się wejść w skład rady:"
-		},
-		"FinancialSupport": {
-			"Header": "Wsparcie finansowe ogólnoświatowej platformy danych stowarzyszenia rodzin z A-T",
-			"Text": {
-				"First": "Obecnie rozwój i działanie platformy są wspierane finansowo jedynie przez Ataxia-Telangiectasia Children’s Project, Inc., znany lepiej jako A-T Children's Project, który jest organizacją non-profit z siedzibą w Coconut Creek na Florydzie, USA. Zbiera ona środki na wsparcie i koordynację biomedycznych ośrodków badawczych, konferencji naukowych oraz ośrodków klinicznych, które dążą do opracowania form terapii podnoszących komfort życia osób z A-T.",
-				"Second": "Mimo że projekt ten został zainicjowany przez A-T Children’s Project, mamy nadzieję, iż organizacje A-T, klinicyści oraz rodziny z całego świata wesprą to przedsięwzięcie poprzez zachęcanie rodzin do wzięcia w nim udziału, pomoc w nadzorowaniu dostępu do danych oraz, o ile to możliwe, wsparcie finansowe."
-			}
-		},
-		"Hospitals": [
-			{
-				"Country": "Francja",
-				"Name": "Cedric Anchisi "
-			},
-			{
-				"Country": "Izrael",
-				"Name": "Orly Dror-Azuriel "
-			},
-			{
-				"Country": "Australia",
-				"Name": "Natalie Elkheir "
-			},
-			{
-				"Country": "Holandia",
-				"Name": "Rianne Kranendonk "
-			},
-			{
-				"Country": "Brazylia",
-				"Name": "Maria Angelica Lodovici "
-			},
-			{
-				"Country": "Stany Zjednoczone",
-				"Name": "Brad Margus "
-			},
-			{
-				"Country": "Wielka Brytania",
-				"Name": "Emily Read "
-			},
-			{
-				"Country": "Indie",
-				"Name": "Manoj Kumar Srivastwa "
-			},
-			{
-				"Country": "Kanada",
-				"Name": "Conrad Van Hierden "
-			},
-			{
-				"Country": "Hiszpania",
-				"Name": "Paxti Villen "
-			},
-			{
-				"Country": "Wielka Brytania",
-				"Name": "Lian Yarlett "
-			}
-		],
-		"PageTitle": "O nas",
-		"PlatformName": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T",
-		"ScientificBoard": {
-			"Header": "Naukowa i medyczna rada doradcza",
-			"Text": "Poza dążeniem do zapewnienia, że działania platformy zachęcają do udostępniania danych i to umożliwiają, jednocześnie zachowując bezpieczeństwo osób z A-T, Rodzinna Rada Nadzorcza wybrała i zaprosiła szanowanych naukowców i klinicystów do Medycznej i Naukowej Rady Doradczej, która służyć będzie fachową pomocą Rodzinnej Radzie Nadzorczej.  Oczekuje się, że do tej rady należeć będą nie tylko specjaliści w zakresie objawów klinicznych oraz biologii zespołu ataksja-teleangiektazja, ale również eksperci od analizowania dużych zbiorów danych, takich jak dane dotyczące sekwencji genomów, biostatystyki, interfejsu programowania aplikacji, bezpieczeństwa danych, kwestii regulacyjnych, etyki medycznej, kwestii prawnych oraz metod badawczych.  Oto aktualna alfabetyczna lista ekspertów, którzy wspaniałomyślnie zgodzili się działać w tej radzie:"
-		},
-		"Text": {
-			"First": " prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom do badań.",
-			"Second": ">Wybieramy strategicznych partnerów do różnych aspektów tej inicjatywy; jednym z nich jest Broad Institute MIT i Harvardu, który będzie przeprowadzał dla nas sekwencjonowanie genomów. Współpracujemy również z pracownikami A-T Children's Project, którzy zostali przeszkoleni do udzielania odpowiedzi dotyczących tej platformy oraz wysyłania zestawów do badania DNA rodzinom, które sobie tego zażyczą.",
-			"Third": "WMamy nadzieję, że Platforma w przyszłości będzie współpracować z kolejnymi organizacjami w celu uzyskania innych danych biologicznych lub informacji dotyczących stylu życia, takich jak na przykład korzystanie z technologii noszonych na ciele, po to, aby zyskać informacje o tym, jak osoba z A-T się porusza."
-		}
-	},
-	"Common": {
-		"Navigation": {
-			"AboutThisInitiative": "O inicjatywie",
-			"AboutUs": "O nas",
-			"JoinUs": "Dołącz do nas",
-			"Language": "Język",
-			"LearnMore": "Dowiedz się więcej",
-			"MyAccount": "Moje konto",
-			"Next": "Dalej",
-			"Previous": "Wstecz",
-			"SignIn": "Zaloguj się",
-			"YourParticipants": "Twoi uczestnicy"
-		}
-	},
-	"DataAccess": {
-		"Header": {
-			"Paragraph1": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć."
-		},
-		"OrganizationForm": {
-			"Country": "Kraj",
-			"State": "Stan/prowincja"
-		}
-	},
-	"HomePage": {
-		"IntroductionSection": {
-			"Text": {
-				"First": "Jeśli ty lub twoje dziecko cierpicie na A-T, możecie pomóc naukowcom dokonać nowych odkryć i przyspieszyć rozwój terapii.",
-				"Second": " Informacja genetyczna oraz stan zdrowia każdego pacjenta są niepowtarzalne i mogą mieć kluczowe znaczenie przy opracowywaniu nowych metod leczenia. Podziel się tą informacją, prześlij nam próbkę śliny do sekwencjonowania genomu i dołącz do nas na drodze do lepszego poznania A-T."
-			},
-			"Title": "Pomóż zmienić nasze rozumienie zespołu ataksja-teleangiektazja (A-T)."
-		},
-		"Participate": {
-			"Steps": {
-				"Fourth": {
-					"H3": "4. Uczmy się razem.",
-					"Text": {
-						"First": "Podzielimy się z tobą informacjami o najnowszych odkryciach możliwych dzięki twojemu uczestnictwu.",
-						"Second": " A jeśli się zgodzisz, być może skontaktujemy się w przyszłości, aby zadać więcej pytań o doświadczenia twoje bądź twego dziecka oraz zaprosić cię do udziału w kolejnych badaniach."
-					}
-				},
-				"One": {
-					"H2": "Jak możesz wziąć udział:",
-					"H3": "1. Utwórz konto.",
-					"Text": "Kliknij „Dołącz do nas” i wypełnij krótki formularz, aby zarejestrować siebie lub swoje dziecko z A-T w ramach naszej platformy danych."
-				},
-				"Second": {
-					"H3": "2. Udziel nam pozwolenia.",
-					"Text": "W trakcie rejestracji poprosimy cię o wypełnienie formularza zgody, który umożliwi nam dzielenie się\ntwoimi anonimowymi danymi z naukowcami.\nJeśli zechcesz, możesz również zezwolić nam na:",
-					"Ul": [
-						"przekazanie próbki śliny, którą każdy pacjent z A-T może nam wysłać do sekwencjonowania genomu;",
-						"pozyskanie dokumentacji medycznej pacjenta z A-T od lekarza i przekazanie jej badaczom;",
-						"przekazanie naukowcom dokumentacji medycznej przesłanej za pośrednictwem naszej platformy;",
-						"kontakt z tobą w przyszłości w sprawie kontynuacji badań."
-					]
-				},
-				"Third": {
-					"H3": "3. Podziel się swoimi spostrzeżeniami i przekaż próbkę śliny.",
-					"Text": "Wypełnij kwestionariusz internetowy o tym, jak A-T wpływa na ciebie lub twoje dziecko. Prześlemy ci także zestaw do pobrania śliny do sekwencjonowania genomu. Będzie również możliwe okresowe aktualizowanie historii choroby oraz doświadczeń przekazywanych za pośrednictwem platformy."
-				}
-			},
-			"Together": {
-				"H3": {
-					"First": "Razem jesteśmy w stanie wpłynąć na poprawę zdrowia dzieci i młodych dorosłych z A-T.",
-					"Second": "Zacznij już teraz!"
-				}
-			}
-		},
-		"SecondSection": {
-			"Title": "Dołącz do naszych poszukiwań i bądź na bieżąco z najnowszymi odkryciami."
-		}
-	},
-	"SDK": {
-		"CancelButton": "Anuluj",
-		"Dashboard": {
-			"Title": "Moja konsola"
-		},
-		"DoNotAssent": "Brak zgody",
-		"DoNotConsent": "Nie udzielono zgody",
-		"DownloadPdf": {
-			"Assent": {
-				"Download": "Pobierz kompletny formularz zgody osoby małoletniej"
-			},
-			"Consent": {
-				"Download": "Pobierz kompletny formularz zgody"
-			}
-		},
-		"Institutions": {
-			"Fields": {
-				"City": "Miejscowość"
-			}
-		},
-		"JoinUsButton": "Dołącz do nas",
-		"ManageParticipants": {
-			"ParticipantPlaceholder": "Uczestnik"
-		},
-		"NextButton": "Dalej",
-		"PreviousButton": "Wstecz",
-		"RegisterButton": "Zarejestruj się",
-		"SaveAndSubmit": "Zapisz i prześlij",
-		"SaveAndSubmitEnrollment": "Zapisz i wyślij formularz rejestracji",
-		"SignAndAssent": "Podpis i udzielenie zgody przez osobę małoletnią",
-		"SignAndConsent": "Podpis i udzielenie zgody",
-		"StartOrResume": "Rozpocznij/wznów",
-		"UserActivities": {
-			"ActivityActions": "Działania",
-			"ActivityStatus": "Status"
-		},
-		"UserMenu": {
-			"SignOutButton": "Wyloguj"
-		}
-	},
-	"Toolkit": {
-		"AgeUpThankYou": {
-			"EmailCollected": {
-				"TextPt2": "lub"
-			}
-		},
-		"Dashboard": {
-			"Actions": "Działania",
-			"AddSelf": "Dodaj samego siebie",
-			"EnrollmentStatus": "Status rekrutacji",
-			"NoData": "---",
-			"NoParticipants": "Brak uczestników",
-			"Participant": "Uczestnik",
-			"Text": "W naszej inicjatywie badawczej może wziąć udział każdy, u kogo rozpoznano A-T Zapisz się i przekaż dane medyczne i ewentualnie genetyczne, aby badacze poszerzyli wiedzę o A-T.",
-			"Title": "Dziękujemy za dołączenie do Ogólnoświatowej Platformy Danych Stowarzyszenia Rodzin z A-T"
-		},
-		"Dialogs": {
-			"JoinMailingList": {
-				"CancelButton": "Anuluj",
-				"Fields": {
-					"Email": {
-						"Placeholder": "Adres e-mail"
-					},
-					"FirstName": {
-						"Placeholder": "Imię"
-					},
-					"LastName": {
-						"Placeholder": "Nazwisko"
-					}
-				}
-			},
-			"SessionWillExpire": {
-				"Continue": "Dalej",
-				"SignOut": "Wyloguj"
-			}
-		},
-		"ErrorPage": {
-			"DefaultText": {
-				"TextPt1": "Jeżeli problemy będą nadal występować, skontaktuj się z "
-			},
-			"Title": "Niestety wystąpił błąd. Prosimy spróbować później."
-		}
-	},
-	"WorkflowProgress": {
-		"Consent": "Udzielenie zgody",
-		"ContactingPhysician": "Lekarz do kontaktu",
-		"GenomeStudy": "Badanie genomu",
-		"MedicalHistory": "Dokumentacja medyczna",
-		"Registration": "Rejestracja",
-		"ReviewSubmission": "Sprawdzenie i wysłanie",
-		"Statuses": {
-			"COMPLETE": "Wypełniono",
-			"CREATED": "Nie rozpoczęto",
-			"IN_PROGRESS": "W toku"
-		}
-	}
+  "AboutInitiative": {
+    "FirstParagraph": {
+      "Text": "jest dziedziczną chorobą neurodegeneracyjną. Dziecko z A-T zaczyna cierpieć na postępujący zanik kontroli nad mięśniami w wieku około 2 lat. W wieku 9-10 lat dzieci z A-T są już zazwyczaj uzależnione od wózków inwalidzkich, a ich mowa staje się niewyraźna. Czytanie oraz połykanie również zaczyna sprawiać problemy. U około 30 procent dzieci z A-T rozwija się nowotwór, a większość z nich ma w jakimś stopniu problem z układem odpornościowym. Mimo że poprzez niwelację symptomów nastąpił postęp w przedłużaniu życia osób z A-T, choroba pozostaje niezwyciężona.",
+      "Title": "Zespół ataksja-teleangiektazja (A-T)"
+    },
+    "SecondParagraph": {
+      "TextOne": "U rodzeństwa z A-T można zauważyć więcej podobieństw w objawach klinicznych niż u dzieci, które obciążone są tymi samymi mutacjami, ale należą do innych rodzin. Dlatego naukowcy uważają, iż geny rodzinne, inne niż te, które wywołują A-T, mogą modyfikować wpływ A-T na pacjentów. Dodatkowo możliwe jest, że życie w różnych środowiskach, prowadzenie odmiennego trybu życia oraz stosowanie różnych diet może wpływać na zdrowie osób z A-T.",
+      "TextSecond": "Nie tak dawno zidentyfikowaliśmy kilka osób, które posiadają typowe, chorobotwórcze mutacje w ich genach A-T i nie wytwarzają białek A-T (tak jak inne osoby z A-T), a jednak ich objawy A-T są zadziwiająco łagodne. Jesteśmy dobrej myśli, że być może uda nam się wykryć zmiany w innych genach, które naprawiają bądź kompensują mutacje A-T u pacjentów z takimi \\\"wyjątkowo łagodnymi\\\" objawami. Gdyby tak było, badacze mogliby znaleźć nowe metody leczenia wszystkich osób z A-T. Jednakże najpierw musimy zebrać dane kliniczne i genetyczne od jak największej liczby osób z A-T.",
+      "TextThird": "W podobny sposób, porównując wywiady chorobowe oraz tryb życia różnych pacjentów z A-T, badacze będą w stanie określić, które strategie radzenia sobie z symptomami dają lepsze rezultaty zdrowotne. Najpierw jednak musimy uzyskać i połączyć dane od wielu pacjentów z A-T w jednym miejscu.",
+      "Title": "A-T dotyka każdego w inny sposób."
+    },
+    "ThirdParagraph": {
+      "Steps": [
+        {
+          "Name": "Zapisz się do platformy danych.",
+          "Text": "Kliknij „Dołącz do nas” i utwórz konto ze swoim imieniem i adresem e-mail. Po utworzeniu konta będziesz mieć możliwość zarejestrowania siebie (jeśli cierpisz na A-T) lub swojego dziecka/dzieci z A-T jako uczestnika naszej platformy danych poprzez wypełnienie krótkiego formularza."
+        },
+        {
+          "Name": "Udziel nam pozwolenia.",
+          "Steps": [
+            "przekazanie próbki śliny, którą każdy pacjent z A-T może nam wysłać do sekwencjonowania genomu;",
+            "pozyskanie dokumentacji medycznej pacjenta z A-T od lekarza i przekazanie jej badaczom;",
+            "przekazanie naukowcom dokumentacji medycznej przesłanej za pośrednictwem naszej platformy;",
+            "kontakt z tobą w przyszłości w sprawie kontynuacji badań."
+          ],
+          "Text": "W trakcie rejestracji poprosimy cię o wypełnienie formularza zgody, który umożliwi nam dzielenie się\ntwoimi anonimowymi danymi z naukowcami.\nJeśli zechcesz, możesz również zezwolić nam na:"
+        },
+        {
+          "Name": "Opowiedz nam o sobie lub swoim dziecku.",
+          "Text": "Aby dołączyć do tej inicjatywy, należy odpowiedzieć na pytania dotyczące zdrowia osoby z A-T, konsultowanych lekarzy oraz historii choroby i wywiadu rodzinnego. Okresowo będziemy cię zapraszać do wypełnienia dodatkowych (opcjonalnych) ankiet na temat stanu zdrowia osoby z A-T (ankiet opracowanych przez badaczy, którzy będą analizować dane w celu lepszego zrozumienia A-T)."
+        },
+        {
+          "Name": "Prześlij nam próbkę śliny.",
+          "Text": "Jeśli zdecydujesz się wziąć udział w badaniu sekwencji genomu, prześlesz nam próbkę śliny w już zaadresowanej przesyłce, którą my ci dostarczymy."
+        },
+        {
+          "Name": "Przeanalizujemy DNA oraz dane medyczne.",
+          "Text": "Dokonamy analizy DNA w komórkach uzyskanych z próbki śliny. Żadne inne procedury nie będą wymagane. Połączymy wyniki analizy genetycznej twojej śliny oraz informacji medycznych przez ciebie dostarczonych w naszych ankietach internetowych."
+        },
+        {
+          "Name": "Przekażemy dane badaczom.",
+          "Text": "Po usunięciu informacji umożliwiających potencjalną identyfikację, informacje o zdrowiu i genomach zostaną udostępnione badaczom na całym świecie za pomocą bezpiecznej bazy danych z kontrolą dostępu. Dostęp do twoich danych będą mieli jedynie wykwalifikowani badacze, którzy uzyskali zezwolenie od Komitetu ds. Dostępu Danych, złożonego z członków rodzin osób z A-T, ale również doradców naukowych i medycznych.  Będziemy śledzić wszystkie badania wykorzystujące twoje informacje."
+        },
+        {
+          "Name": "Informacje zwrotne od ciebie mogą przyspieszyć prace badawcze.",
+          "Text": "Okresowo będziemy zapraszać do wypełnienia ankiet opracowanych przez badaczy, którzy analizują dane w celu lepszego zrozumienia A-T. Korzystając z tej platformy, będziemy mieli bezprecedensową możliwość szybkiego uzyskania odpowiedzi na dodatkowe pytania wprost od rodzin. Możliwość kontaktu z uczestnikami może znacząco wpłynąć na badania i skrócić drogę do nowych odkryć."
+        },
+        {
+          "Name": "Ucz się z nami przez cały czas.",
+          "Text": "To wyjątkowe połączenie informacji zdrowotnych i genetycznych może mieć kluczowe znaczenie dla opracowania metod leczenia, które nie byłyby możliwe bez twojej pomocy. Z pewnością będziemy na bieżąco informować cię o naszych wysiłkach i o najnowszych odkryciach możliwych dzięki twojemu uczestnictwu."
+        }
+      ],
+      "SubTitle": "Oto jak działa platforma:",
+      "Text": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć.",
+      "Title": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T"
+    },
+    "Title": "O inicjatywie"
+  },
+  "AboutPage": {
+    "DataAccess": {
+      "Header": "Komitet ds. dostępu do danych",
+      "Text": "Dostęp do wszystkich informacji na platformie mają tylko wykwalifikowani badacze, którzy otrzymali zgodę komitetu ds. dostępu do danych. Komitet składa się z przedstawicieli rodzin z A-T rekrutowanych do naszej Rodzinnej Rady Nadzorczej, którzy to z kolei pozyskują ekspertów do naszej Medycznej i Naukowej Rady Doradczej.“ Daje to pewność, że każdy projekt badawczy jest zgodny z celami inicjatywy.  Rodzinna Rada Nadzorcza nadzoruje Medyczną i Naukową Radę Doradczą."
+    },
+    "Doctors": [
+      {
+        "Hospital": "profesor emerytowany genetyki medycznej –“ Uniwersytet Cambridge, Cambridge, Wielka Brytania oraz honorowy członek wydziału, Instytut Wellcome Trust Sanger, Hinxton, Wielka Brytania",
+        "Name": "Martin Bobrow",
+        "Rank": "lek."
+      },
+      {
+        "Hospital": "profesor genetyki medycznej, Uniwersytet Sapienza, Rzym, Włochy",
+        "Name": "Luciana Chessa"
+      },
+      {
+        "Hospital": "dyrektor oddziału pediatrii, Szpital Wesley, Queensland, Australia"
+      },
+      {
+        "Hospital": "profesor nadzwyczajny, Uniwersytet Federalny, São Paulo, Brazylia"
+      },
+      {
+        "Hospital": "profesor nadzwyczajny pediatrii i neurologii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
+      },
+      {
+        "Hospital": "dyrektor, Google Genomics, Mountain View, CA, USA"
+      },
+      {
+        "Hospital": "pediatria i biologia rozwojowa, Uniwersytet Medyczny i Stomatologiczny w Tokio, Japonia"
+      },
+      {
+        "Hospital": "profesor nadzwyczajny, Uniwersytet Queensland, Queensland, Australia"
+      },
+      {
+        "Hospital": "profesor, założyciel Onkologii Molekularnej, Uniwersytet Queensland, Brisbane, Australia"
+      },
+      {
+        "Hospital": "profesor pediatrii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
+      },
+      {
+        "Hospital": "immunohematologia dziecięca, Koordynator Francuskiego Ośrodka Referencyjnego ds. Pierwotnych Zaburzeń Odporności, Szpital Neckera, Paryż, Francja"
+      },
+      {
+        "Hospital": "neurolog dziecięcy, Centrum Medyczne Sheba, Ramat Gan, Izrael"
+      },
+      {
+        "Hospital": "główny inspektor danych, Broad Institute, Cambridge, MA, USA"
+      },
+      {
+        "Hospital": "Krajowy Ośrodek Chorób Rzadkich, Rzym, Włochy"
+      },
+      {
+        "Hospital": "koordynator naukowy, A-T Children’s Project, Coconut Creek, FL, USA"
+      },
+      {
+        "Hospital": "profesor genetyki człowieka, Uniwersytet Telawiwski, Ramat Aviv, Izrael"
+      },
+      {
+        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
+      },
+      {
+        "Hospital": "profesor genetyki, Uniwersytet Paris Descartes, oraz dziekan wydziału genetyki, Instytut Curie, Paryż, Francja"
+      },
+      {
+        "Hospital": "profesor nadzwyczajny, Uniwersytet Medyczny i Stomatologiczny Tokio, Tokio, Japonia"
+      },
+      {
+        "Hospital": "dyrektor wykonawczy, Public Population Project in Genomics and Society, Montreal, Kanada"
+      },
+      {
+        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
+      },
+      {
+        "Hospital": "kliniczny profesor nadzwyczajny, Uniwersytet w Nottingham, Nottingham, Wielka Brytania"
+      },
+      {
+        "Hospital": "szpital dziecięcy uniwersytetu im. Johanna Wolfganga Goethego, Frankfurt, Niemcy"
+      }
+    ],
+    "FamilyOversight": {
+      "Header": "Rodzinna rada nadzorcza",
+      "Text": "Misją naszej platformy jest to, aby naukowcy mieli szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć. Aby mieć pewność, że nasza misja i działalność idzie w parze z tym, co najlepsze dla osób z A-T na całym świecie, powołaliśmy międzynarodową rodzinną radę nadzorczą.  Oto aktualna lista (w porządku alfabetycznym) członków rodzin pacjentów z A-T, którzy zgodzili się wejść w skład rady:"
+    },
+    "FinancialSupport": {
+      "Header": "Wsparcie finansowe ogólnoświatowej platformy danych stowarzyszenia rodzin z A-T",
+      "Text": {
+        "First": "Obecnie rozwój i działanie platformy są wspierane finansowo jedynie przez Ataxia-Telangiectasia Children’s Project, Inc., znany lepiej jako A-T Children's Project, który jest organizacją non-profit z siedzibą w Coconut Creek na Florydzie, USA. Zbiera ona środki na wsparcie i koordynację biomedycznych ośrodków badawczych, konferencji naukowych oraz ośrodków klinicznych, które dążą do opracowania form terapii podnoszących komfort życia osób z A-T.",
+        "Second": "Mimo że projekt ten został zainicjowany przez A-T Children’s Project, mamy nadzieję, iż organizacje A-T, klinicyści oraz rodziny z całego świata wesprą to przedsięwzięcie poprzez zachęcanie rodzin do wzięcia w nim udziału, pomoc w nadzorowaniu dostępu do danych oraz, o ile to możliwe, wsparcie finansowe."
+      }
+    },
+    "Hospitals": [
+      {
+        "Country": "Francja",
+        "Name": "Cedric Anchisi "
+      },
+      {
+        "Country": "Izrael",
+        "Name": "Orly Dror-Azuriel "
+      },
+      {
+        "Country": "Australia",
+        "Name": "Natalie Elkheir "
+      },
+      {
+        "Country": "Holandia",
+        "Name": "Rianne Kranendonk "
+      },
+      {
+        "Country": "Brazylia",
+        "Name": "Maria Angelica Lodovici "
+      },
+      {
+        "Country": "Stany Zjednoczone",
+        "Name": "Brad Margus "
+      },
+      {
+        "Country": "Wielka Brytania",
+        "Name": "Emily Read "
+      },
+      {
+        "Country": "Indie",
+        "Name": "Manoj Kumar Srivastwa "
+      },
+      {
+        "Country": "Kanada",
+        "Name": "Conrad Van Hierden "
+      },
+      {
+        "Country": "Hiszpania",
+        "Name": "Paxti Villen "
+      },
+      {
+        "Country": "Wielka Brytania",
+        "Name": "Lian Yarlett "
+      }
+    ],
+    "PageTitle": "O nas",
+    "PlatformName": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T",
+    "ScientificBoard": {
+      "Header": "Naukowa i medyczna rada doradcza",
+      "Text": "Poza dążeniem do zapewnienia, że działania platformy zachęcają do udostępniania danych i to umożliwiają, jednocześnie zachowując bezpieczeństwo osób z A-T, Rodzinna Rada Nadzorcza wybrała i zaprosiła szanowanych naukowców i klinicystów do Medycznej i Naukowej Rady Doradczej, która służyć będzie fachową pomocą Rodzinnej Radzie Nadzorczej.  Oczekuje się, że do tej rady należeć będą nie tylko specjaliści w zakresie objawów klinicznych oraz biologii zespołu ataksja-teleangiektazja, ale również eksperci od analizowania dużych zbiorów danych, takich jak dane dotyczące sekwencji genomów, biostatystyki, interfejsu programowania aplikacji, bezpieczeństwa danych, kwestii regulacyjnych, etyki medycznej, kwestii prawnych oraz metod badawczych.  Oto aktualna alfabetyczna lista ekspertów, którzy wspaniałomyślnie zgodzili się działać w tej radzie:"
+    },
+    "Text": {
+      "First": " prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom do badań.",
+      "Second": ">Wybieramy strategicznych partnerów do różnych aspektów tej inicjatywy; jednym z nich jest Broad Institute MIT i Harvardu, który będzie przeprowadzał dla nas sekwencjonowanie genomów. Współpracujemy również z pracownikami A-T Children's Project, którzy zostali przeszkoleni do udzielania odpowiedzi dotyczących tej platformy oraz wysyłania zestawów do badania DNA rodzinom, które sobie tego zażyczą.",
+      "Third": "WMamy nadzieję, że Platforma w przyszłości będzie współpracować z kolejnymi organizacjami w celu uzyskania innych danych biologicznych lub informacji dotyczących stylu życia, takich jak na przykład korzystanie z technologii noszonych na ciele, po to, aby zyskać informacje o tym, jak osoba z A-T się porusza."
+    }
+  },
+  "Common": {
+    "Navigation": {
+      "AboutThisInitiative": "O inicjatywie",
+      "AboutUs": "O nas",
+      "JoinUs": "Dołącz do nas",
+      "Language": "Język",
+      "LearnMore": "Dowiedz się więcej",
+      "MyAccount": "Moje konto",
+      "Next": "Dalej",
+      "Previous": "Wstecz",
+      "SignIn": "Zaloguj się",
+      "YourParticipants": "Twoi uczestnicy"
+    }
+  },
+  "DataAccess": {
+    "Header": {
+      "Paragraph1": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć."
+    },
+    "OrganizationForm": {
+      "Country": "Kraj",
+      "State": "Stan/prowincja"
+    }
+  },
+  "HomePage": {
+    "IntroductionSection": {
+      "Text": {
+        "First": "Jeśli ty lub twoje dziecko cierpicie na A-T, możecie pomóc naukowcom dokonać nowych odkryć i przyspieszyć rozwój terapii.",
+        "Second": " Informacja genetyczna oraz stan zdrowia każdego pacjenta są niepowtarzalne i mogą mieć kluczowe znaczenie przy opracowywaniu nowych metod leczenia. Podziel się tą informacją, prześlij nam próbkę śliny do sekwencjonowania genomu i dołącz do nas na drodze do lepszego poznania A-T."
+      },
+      "Title": "Pomóż zmienić nasze rozumienie zespołu ataksja-teleangiektazja (A-T)."
+    },
+    "Participate": {
+      "Steps": {
+        "Fourth": {
+          "H3": "4. Uczmy się razem.",
+          "Text": {
+            "First": "Podzielimy się z tobą informacjami o najnowszych odkryciach możliwych dzięki twojemu uczestnictwu.",
+            "Second": " A jeśli się zgodzisz, być może skontaktujemy się w przyszłości, aby zadać więcej pytań o doświadczenia twoje bądź twego dziecka oraz zaprosić cię do udziału w kolejnych badaniach."
+          }
+        },
+        "One": {
+          "H2": "Jak możesz wziąć udział:",
+          "H3": "1. Utwórz konto.",
+          "Text": "Kliknij „Dołącz do nas” i wypełnij krótki formularz, aby zarejestrować siebie lub swoje dziecko z A-T w ramach naszej platformy danych."
+        },
+        "Second": {
+          "H3": "2. Udziel nam pozwolenia.",
+          "Text": "W trakcie rejestracji poprosimy cię o wypełnienie formularza zgody, który umożliwi nam dzielenie się\ntwoimi anonimowymi danymi z naukowcami.\nJeśli zechcesz, możesz również zezwolić nam na:",
+          "Ul": [
+            "przekazanie próbki śliny, którą każdy pacjent z A-T może nam wysłać do sekwencjonowania genomu;",
+            "pozyskanie dokumentacji medycznej pacjenta z A-T od lekarza i przekazanie jej badaczom;",
+            "przekazanie naukowcom dokumentacji medycznej przesłanej za pośrednictwem naszej platformy;",
+            "kontakt z tobą w przyszłości w sprawie kontynuacji badań."
+          ]
+        },
+        "Third": {
+          "H3": "3. Podziel się swoimi spostrzeżeniami i przekaż próbkę śliny.",
+          "Text": "Wypełnij kwestionariusz internetowy o tym, jak A-T wpływa na ciebie lub twoje dziecko. Prześlemy ci także zestaw do pobrania śliny do sekwencjonowania genomu. Będzie również możliwe okresowe aktualizowanie historii choroby oraz doświadczeń przekazywanych za pośrednictwem platformy."
+        }
+      },
+      "Together": {
+        "H3": {
+          "First": "Razem jesteśmy w stanie wpłynąć na poprawę zdrowia dzieci i młodych dorosłych z A-T.",
+          "Second": "Zacznij już teraz!"
+        }
+      }
+    },
+    "SecondSection": {
+      "Title": "Dołącz do naszych poszukiwań i bądź na bieżąco z najnowszymi odkryciami."
+    }
+  },
+  "SDK": {
+    "CancelButton": "Anuluj",
+    "Dashboard": {
+      "Title": "Moja konsola"
+    },
+    "DoNotAssent": "Brak zgody",
+    "DoNotConsent": "Nie udzielono zgody",
+    "DownloadPdf": {
+      "Assent": {
+        "Download": "Pobierz kompletny formularz zgody osoby małoletniej"
+      },
+      "Consent": {
+        "Download": "Pobierz kompletny formularz zgody"
+      }
+    },
+    "Institutions": {
+      "Fields": {
+        "City": "Miejscowość"
+      }
+    },
+    "JoinUsButton": "Dołącz do nas",
+    "ManageParticipants": {
+      "ParticipantPlaceholder": "Uczestnik"
+    },
+    "NextButton": "Dalej",
+    "PreviousButton": "Wstecz",
+    "RegisterButton": "Zarejestruj się",
+    "SaveAndSubmit": "Zapisz i prześlij",
+    "SaveAndSubmitEnrollment": "Zapisz i wyślij formularz rejestracji",
+    "SignAndAssent": "Podpis i udzielenie zgody przez osobę małoletnią",
+    "SignAndConsent": "Podpis i udzielenie zgody",
+    "StartOrResume": "Rozpocznij/wznów",
+    "UserActivities": {
+      "ActivityActions": "Działania",
+      "ActivityStatus": "Status"
+    },
+    "UserMenu": {
+      "SignOutButton": "Wyloguj"
+    }
+  },
+  "Toolkit": {
+    "AgeUpThankYou": {
+      "EmailCollected": {
+        "TextPt2": "lub"
+      }
+    },
+    "Dashboard": {
+      "Actions": "Działania",
+      "AddSelf": "Dodaj samego siebie",
+      "EnrollmentStatus": "Status rekrutacji",
+      "NoData": "---",
+      "NoParticipants": "Brak uczestników",
+      "Participant": "Uczestnik",
+      "Text": "W naszej inicjatywie badawczej może wziąć udział każdy, u kogo rozpoznano A-T Zapisz się i przekaż dane medyczne i ewentualnie genetyczne, aby badacze poszerzyli wiedzę o A-T.",
+      "Title": "Dziękujemy za dołączenie do Ogólnoświatowej Platformy Danych Stowarzyszenia Rodzin z A-T"
+    },
+    "Dialogs": {
+      "JoinMailingList": {
+        "CancelButton": "Anuluj",
+        "Fields": {
+          "Email": {
+            "Placeholder": "Adres e-mail"
+          },
+          "FirstName": {
+            "Placeholder": "Imię"
+          },
+          "LastName": {
+            "Placeholder": "Nazwisko"
+          }
+        }
+      },
+      "SessionWillExpire": {
+        "Continue": "Dalej",
+        "SignOut": "Wyloguj"
+      }
+    },
+    "ErrorPage": {
+      "DefaultText": {
+        "TextPt1": "Jeżeli problemy będą nadal występować, skontaktuj się z "
+      },
+      "Title": "Niestety wystąpił błąd. Prosimy spróbować później."
+    }
+  },
+  "WorkflowProgress": {
+    "Consent": "Udzielenie zgody",
+    "ContactingPhysician": "Lekarz do kontaktu",
+    "GenomeStudy": "Badanie genomu",
+    "MedicalHistory": "Dokumentacja medyczna",
+    "Registration": "Rejestracja",
+    "ReviewSubmission": "Sprawdzenie i wysłanie",
+    "Statuses": {
+      "COMPLETE": "Wypełniono",
+      "CREATED": "Nie rozpoczęto",
+      "IN_PROGRESS": "W toku"
+    }
+  },
+  "AccountActivation": {
+    "AccountActivationRequired": "Aby kontynuować, musisz potwierdzić swój adres e-mail.",
+    "EmailConfirmed": "Twój adres e-mail został pomyślnie potwierdzony."
+  }
 }
