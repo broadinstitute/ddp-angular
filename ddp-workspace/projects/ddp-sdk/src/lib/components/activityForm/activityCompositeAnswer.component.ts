@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
 import { ActivityCompositeQuestionBlock } from '../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
@@ -7,6 +7,7 @@ import { ChildOrientation } from '../../models/activity/childOrientation';
 import { QuestionType } from '../../models/activity/questionType';
 import { ActivityDateQuestionBlock } from '../../models/activity/activityDateQuestionBlock';
 import { DateRenderMode } from '../../models/activity/dateRenderMode';
+import { ConfigurationService } from '../../services/configuration.service';
 import * as _ from 'underscore';
 
 // todo see if style in here can be moved to shared resource, like external CSS
@@ -71,6 +72,8 @@ export class ActivityCompositeAnswer implements OnChanges {
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
 
+    constructor(@Inject('ddp.config') public config: ConfigurationService) { }
+
     public ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
             if (propName === 'block') {
@@ -125,7 +128,7 @@ export class ActivityCompositeAnswer implements OnChanges {
         if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
             newQuestionBlock.placeholder = newQuestionBlock.question;
             newQuestionBlock.question = '';
-            if (childQuestionBlock.isRequired) {
+            if (childQuestionBlock.isRequired && this.showAsterisk(childQuestionBlock.questionType)) {
                 newQuestionBlock.placeholder += ' *';
             }
         }
@@ -145,7 +148,8 @@ export class ActivityCompositeAnswer implements OnChanges {
     private shouldSetPlaceholderToBeQuestionText(childQuestionBlock: ActivityQuestionBlock<any>): boolean {
         if (childQuestionBlock.question && !(childQuestionBlock.placeholder)) {
             return (childQuestionBlock.questionType === QuestionType.Text)
-                || (childQuestionBlock.questionType === QuestionType.Date);
+                || (childQuestionBlock.questionType === QuestionType.Date)
+                || (childQuestionBlock.questionType === QuestionType.Numeric);
         }
         return false;
     }
@@ -209,9 +213,14 @@ export class ActivityCompositeAnswer implements OnChanges {
     private deepClone<T>(block: T): T {
         return Object.create(Object.getPrototypeOf(block), Object.getOwnPropertyDescriptors(block));
     }
+
     // we will show labels if we have a question with a picklist date. Placeholder is not available
     private shouldSetLabelToBeQuestionText(childQuestionBlocks: ActivityQuestionBlock<any>[]): boolean {
         return childQuestionBlocks.filter(block => block.questionType === QuestionType.Date
             && (block as ActivityDateQuestionBlock).renderMode === DateRenderMode.Picklist).length > 0;
+    }
+
+    private showAsterisk(questionType: QuestionType): boolean {
+        return !this.config.compositeRequiredFieldExceptions.includes(questionType);
     }
 }
