@@ -62,7 +62,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
   private handleAuthError(error: any | null): void {
     if (error) {
       console.error(JSON.stringify(error));
-      if (JSON.parse(error).code === 'unauthorized') {
+      if (error.code === 'unauthorized') {
         this.router.navigateByUrl('account-activation-required');
         return;
       }
