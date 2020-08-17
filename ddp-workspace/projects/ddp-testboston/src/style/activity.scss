@@ -18,6 +18,10 @@
     font-family: 'PT Serif', sans-serif;
 }
 
+.PageContent-subtitle {
+    margin: 1rem 0;
+}
+
 // consent header
 .header-section {
     margin: 0 0 2rem 0;
@@ -360,4 +364,58 @@ ddp-activity-boolean-answer {
 .last-updated {
     display: flex;
     margin: 3rem 0;
+}
+
+// date time composite question, SYMPTOMS_SURVEY activity 
+@mixin date-time-numeric-answer {
+    display: flex;
+    width: 8.5rem;
+    box-sizing: border-box;
+}
+
+.numeric-answer- {
+    &SAMPLE_COLLECT_TIME_MIN {
+        padding-left: 20px;
+        padding-right: 20px;
+        @include date-time-numeric-answer;
+    }
+
+    &SAMPLE_COLLECT_TIME_HOUR {
+        padding-left: 40px;
+        @include date-time-numeric-answer;
+    }
+}
+
+.picklist-answer-SAMPLE_COLLECT_TIME_AM_PM {
+    .ddp-radio-group-column {
+        flex-direction: row !important;
+    }
+}
+
+.composite-answer-SAMPLE_COLLECT_TIME {
+    .ddp-answer-field {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width:355px) {
+    .composite-answer-SAMPLE_COLLECT_TIME {
+        .ddp-answer-container {
+            flex-direction: column !important;
+        }
+    }
+
+    .picklist-answer-SAMPLE_COLLECT_TIME_AM_PM,
+    .numeric-answer-SAMPLE_COLLECT_TIME_MIN {
+        padding-left: 40px;
+        padding-right: 0;
+    }
+}
+
+// household members question, COVID_SURVEY activity
+.numeric-answer-AGE {
+    display: flex;
+    width: 12.5rem;
+    margin-top: 0.5rem;
 }

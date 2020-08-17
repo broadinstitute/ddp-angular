@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
+import { QuestionType } from './../models/activity/questionType';
 
 @Injectable()
 export class ConfigurationService {
@@ -43,4 +44,6 @@ export class ConfigurationService {
     adminSessionExpiredUrl = 'admin-session-expired';
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
+    // if questions inside of composite questions shouldn't show asterisk at the end, add question type here
+    compositeRequiredFieldExceptions: QuestionType[] = [];
 }
