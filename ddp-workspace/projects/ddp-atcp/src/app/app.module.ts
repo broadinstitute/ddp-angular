@@ -46,6 +46,14 @@ import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferen
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
+import {
+  AccountActivatedComponent,
+} from './components/account-activation/accountActivated';
+import {
+  AccountActivationRequiredComponent
+} from './components/account-activation/accountActivationRequired';
+
+
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -128,7 +136,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     StatisticsComponent,
     ProgressBarComponent,
     ConsoleComponent,
-    ExtractTranslationPathsForArrayPipe
+    ExtractTranslationPathsForArrayPipe,
+    AccountActivatedComponent,
+    AccountActivationRequiredComponent
   ],
   entryComponents: [
     DashBoardComponent,
