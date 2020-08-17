@@ -366,6 +366,11 @@ ddp-activity-boolean-answer {
     margin: 3rem 0;
 }
 
+// required question
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
 // date time composite question, SYMPTOMS_SURVEY activity 
 @mixin date-time-numeric-answer {
     display: flex;
