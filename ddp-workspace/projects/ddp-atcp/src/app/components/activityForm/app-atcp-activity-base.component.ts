@@ -14,11 +14,11 @@ import {
   SubmissionManager,
   AnalyticsEventCategories,
   ActivityComponent,
-  CurrentActivityService,
   WindowRef,
   AnalyticsEventsService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
+import { CurrentActivityService } from '../../toolkit/services/currentActivity.service';
 import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
 import {
   delay,

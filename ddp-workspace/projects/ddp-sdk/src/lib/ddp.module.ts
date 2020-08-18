@@ -177,7 +177,6 @@ import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedi
 import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
-import {CurrentActivityService} from "./services/activity/currentActivity.service";
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -292,7 +291,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Title,
     RenewSessionNotifier,
     LanguageService,
-    CurrentActivityService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

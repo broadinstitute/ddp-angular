@@ -1,10 +1,9 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
-import {ActivityServiceAgent} from "../serviceAgents/activityServiceAgent.service";
-import {ActivityForm} from "../../models/activity/activityForm";
-import {filter, tap} from "rxjs/operators";
-import {ActivityProgressCalculationService} from "../activityProgressCalculation.service";
-import {ActivityCodes} from '../../constants/activityCodes';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ActivityServiceAgent, ActivityCodes } from 'ddp-sdk';
+import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
+import { filter, tap } from 'rxjs/operators';
+import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
 
 @Injectable()
 export class CurrentActivityService {
@@ -19,17 +18,24 @@ export class CurrentActivityService {
 
   public getActivity(studyGuid: Observable<string | null>,
                      activityGuid: Observable<string | null>): Observable<ActivityForm> {
-    return this.activityServiceAgent.getActivity(studyGuid, activityGuid).pipe(tap(x => this.saveCurrentActivity(x)));
+    return this.activityServiceAgent
+      .getActivity(studyGuid, activityGuid)
+      .pipe(tap(x => this.saveCurrentActivity(x)));
   }
 
-  public updateActivitySection(studyGuid: string, activityGuid: string, activity: ActivityForm, sectionIndex: number) {
+  public updateActivitySection(studyGuid: string,
+                               activityGuid: string,
+                               activity: ActivityForm,
+                               sectionIndex: number): void {
     if (activity.activityCode === ActivityCodes.MEDICAL_HISTORY) {
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);
-      this.activityServiceAgent.saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex).subscribe();
-      }
+      this.activityServiceAgent
+        .saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex)
+        .subscribe();
     }
+  }
 
-  public saveCurrentActivity(value) {
+  public saveCurrentActivity(value): void {
     this.activity.next(value);
   }
 

@@ -54,6 +54,7 @@ import {
 import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
+import { CurrentActivityService } from './toolkit/services/currentActivity.service';
 
 
 
@@ -149,6 +150,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DashBoardComponent,
   ],
   providers: [
+    CurrentActivityService,
     ActivityProgressCalculationService,
     {
       provide: 'ddp.config',
