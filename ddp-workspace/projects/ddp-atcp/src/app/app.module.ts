@@ -28,6 +28,7 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer';
 import { AboutUsComponent } from './components/about-us/about-us';
 import { HeaderComponent } from './components/header/header';
+import { AtcpActivityBaseComponent } from './components/activityForm/app-atcp-activity-base.component';
 import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
 import { MatMenuModule } from '@angular/material';
 import { Language, LanguagesProvider, LanguagesToken} from './providers/languages.provider';
@@ -129,6 +130,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     AboutInitiativeComponent,
     HeaderComponent,
+    AtcpActivityBaseComponent,
     AtcpActivityComponent,
     JoinUsComponent,
     DataAccessComponent,
