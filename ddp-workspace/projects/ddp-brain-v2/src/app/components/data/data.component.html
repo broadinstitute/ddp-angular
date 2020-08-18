@@ -1,0 +1,84 @@
+<main class="main">
+    <section class="section map-section">
+        <div class="content map-block">
+            <div class="introduction">
+                <div class="info">
+                    <h1 class="info__title" translate>DataPage.Title</h1>
+                    <p class="info__text" translate>DataPage.Text</p>
+                </div>
+                <picture>
+                    <source media="(max-width: 974px)" srcset="assets/images/map-small.png">
+                    <img class="image" src="assets/images/map.png" alt="The USA map">
+                </picture>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_medium snapshots-block">
+            <h2 translate>DataPage.Snapshots.Title</h2>
+            <div class="diagrams">
+                <div class="diagram">
+                    <img lazy-resource class="diagram__image" src="assets/images/diagnosis.png"
+                        [alt]="'DataPage.Snapshots.Type.Alt' | translate">
+                    <p class="diagram__link">
+                        <a class="Link" href="#" target="_blank" translate>DataPage.Snapshots.Type.Link</a>
+                    </p>
+                    <p class="diagram__data" translate>DataPage.Snapshots.Type.Date</p>
+                    <p translate>DataPage.Snapshots.Type.Text</p>
+                </div>
+                <div class="diagram">
+                    <img lazy-resource class="diagram__image" src="assets/images/initial.png"
+                        [alt]="'DataPage.Snapshots.Diagnosis.Alt' | translate">
+                    <p class="diagram__link">
+                        <a class="Link" href="#" target="_blank" translate>DataPage.Snapshots.Diagnosis.Link</a>
+                    </p>
+                    <p class="diagram__data" translate>DataPage.Snapshots.Diagnosis.Date</p>
+                    <p translate>DataPage.Snapshots.Diagnosis.Text</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section mailing-list-section">
+        <div class="content content_medium mailing-list-block">
+            <div class="mailing-list">
+                <p class="mailing-list__text" translate>DataPage.MailingList.Text</p>
+                <button class="button button_medium button_secondary mailing-list__button"
+                    (click)="openJoinMailingList()">{{'Common.Buttons.JoinMailingList' | translate}}</button>
+            </div>
+        </div>
+    </section>
+    <section class="section data-release-section">
+        <div class="content content_medium data-release-block">
+            <h2 translate>DataPage.DataRelease.Title</h2>
+            <p>
+                <span translate>DataPage.DataRelease.Text</span>
+                <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
+            </p>
+            <div class="diagrams">
+                <div class="diagram">
+                    <img lazy-resource class="diagram__image" src="assets/images/mbc-data.png"
+                        [alt]="'DataPage.DataRelease.MBC.Alt' | translate">
+                    <p>
+                        <a class="Link" href="#" target="_blank" translate>DataPage.DataRelease.MBC.Link</a>
+                    </p>
+                </div>
+                <div class="diagram diagram_data-release">
+                    <img lazy-resource class="diagram__image" src="assets/images/mpc-data.png"
+                        [alt]="'DataPage.DataRelease.MPC.Alt' | translate">
+                    <p>
+                        <a class="Link" href="#" target="_blank" translate>DataPage.DataRelease.MPC.Link</a>
+                    </p>
+                </div>
+            </div>
+            <div class="diagrams">
+                <div class="diagram">
+                    <img lazy-resource class="diagram__image" src="assets/images/angio-data.png"
+                        [alt]="'DataPage.DataRelease.Angio.Alt' | translate">
+                    <p>
+                        <a class="Link" href="#" target="_blank" translate>DataPage.DataRelease.Angio.Link</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

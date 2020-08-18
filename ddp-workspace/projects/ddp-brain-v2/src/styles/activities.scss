@@ -1,0 +1,6 @@
+@import '../app-theme.scss';
+
+// required question
+.ddp-required-question-prompt:after {
+    content: ' *';
+}

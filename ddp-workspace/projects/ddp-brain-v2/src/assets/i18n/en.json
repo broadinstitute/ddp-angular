@@ -32,7 +32,6 @@
         "BackToTop": "Back to top",
         "FAQs": "FAQs",
         "AboutUs": "About Us",
-        "MailingList": "Join Mailing List",
         "Data": "Data",
         "Dashboard": "Dashboard",
         "Menu": "Menu"
@@ -319,6 +318,44 @@
             "Text2": {
                 "Part1": "If you have any other questions, please email us at",
                 "Part2": "or call us at"
+            }
+        }
+    },
+    "DataPage": {
+        "Title": "We’re in the process of collecting data from participants across the United States and Canada.",
+        "Text": "In the meantime, our team will share data snapshots to provide the community with initial views of the collective dataset.",
+        "Snapshots": {
+            "Title": "Snapshots",
+            "Type": {
+                "Link": "Brain Tumor Diagnosis Type",
+                "Date": "[Date Published]",
+                "Text": "Patient-reported responses to the question: “When you were first diagnosed with brain cancer, what type was it?”",
+                "Alt": "Brain tumor diagnosis type diagram"
+            },
+            "Diagnosis": {
+                "Link": "Age at Initial Brain Cancer Diagnosis",
+                "Date": "[Date Published]",
+                "Text": "Calculated from response to the question: “When were you first diagnosed with brain cancer?” & patient-reported date of birth.",
+                "Alt": "Age at initial brain cancer diagnosis diagram"
+            }
+        },
+        "MailingList": {
+            "Text": "To receive data snapshots and updates on the data release"
+        },
+        "DataRelease": {
+            "Title": "What does a data release look like?",
+            "Text": "Below are links out to datasets from other Count Me In projects. This is what we’re working towards for the Brain Cancer Project. If you have questions about our data release process, please email us at",
+            "MBC": {
+                "Alt": "The Metastatic Breast Cancer Project data release diagram",
+                "Link": "The Metastatic Breast Cancer Project"
+            },
+            "MPC": {
+                "Alt": "The Metastatic Prostate Cancer Project data release diagram",
+                "Link": "The Metastatic Prostate Cancer Project"
+            },
+            "Angio": {
+                "Alt": "The Angiosarcoma Project data release diagram",
+                "Link": "The Angiosarcoma Project"
             }
         }
     },

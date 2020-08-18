@@ -22,6 +22,7 @@ import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { DataComponent } from './components/data/data.component';
 
 const routes: Routes = [
   {
@@ -116,6 +117,13 @@ const routes: Routes = [
   {
     path: AppRoutes.MoreDetails,
     component: FaqComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Data,
+    component: DataComponent,
     canActivate: [
       IrbGuard
     ]
