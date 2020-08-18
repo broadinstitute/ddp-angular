@@ -3,7 +3,7 @@
 @import '../../styles/buttons';
 
 .join-us {
-  ::ng-deep ddp-activity .PageLayout {
+  ::ng-deep app-atcp-activity-base .PageLayout {
     > div:first-child {
       padding: 0;
 

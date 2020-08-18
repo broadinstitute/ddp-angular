@@ -21,11 +21,11 @@ import {
       <div class="page-padding">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
-            <ddp-activity [studyGuid]="studyGuid"
+            <app-atcp-activity-base [studyGuid]="studyGuid"
                           [activityGuid]="instanceGuid"
                           (submit)="navigate($event)"
                           (stickySubtitle)="showStickySubtitle($event)" #activity>
-            </ddp-activity>
+            </app-atcp-activity-base>
             <div *ngIf="activity.isLoaded" class="helpHint align-center">
               <a (click)="signIn()" translate>JoinUs.SignInButton</a>
             </div>
