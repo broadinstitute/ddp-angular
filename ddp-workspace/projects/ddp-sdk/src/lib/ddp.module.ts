@@ -177,9 +177,8 @@ import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedi
 import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
-import {ActivityProgressBarComponent} from "./components/activityProgressBar.component";
 import {CurrentActivityService} from "./services/activity/currentActivity.service";
-import {ActivityProgressCalculationService} from "./services/activityProgressCalculation.service";
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -294,7 +293,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     RenewSessionNotifier,
     LanguageService,
     CurrentActivityService,
-    ActivityProgressCalculationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -338,7 +336,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
-    ActivityProgressBarComponent,
     InstitutionComponent,
     InstitutionsFormComponent,
     LoadingComponent,
@@ -399,8 +396,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
-    ActivityProgressBarComponent,
-
     InstitutionComponent,
     InstitutionsFormComponent,
 

@@ -1,17 +1,23 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {ActivityProgressCalculationService} from "../services/activityProgressCalculation.service";
+import {
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
+import {
+  ActivityProgressCalculationService
+} from '../services/activityProgressCalculation.service';
 
 @Component({
-  selector: 'ddp-activity-progress-bar',
+  selector: 'app-activity-progress-bar',
   template: `
-    <div class="ddp-activity-progress-bar">
+    <div class="app-activity-progress-bar">
       <span class="progress-title" translate>{{ title }}</span>
       <mat-progress-bar mode="determinate" value="{{ progress }}"></mat-progress-bar>
       <span class="progress-value">{{ progress }} %</span>
     </div>
-    `,
+  `,
   styles: [`
-    .ddp-activity-progress-bar {
+    .app-activity-progress-bar {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -37,7 +43,7 @@ export class ActivityProgressBarComponent implements OnInit {
 
   constructor(private activityProgressCalculationService: ActivityProgressCalculationService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.activityProgressCalculationService.getProgress().subscribe(x => {
       this.progress = x;
     });
