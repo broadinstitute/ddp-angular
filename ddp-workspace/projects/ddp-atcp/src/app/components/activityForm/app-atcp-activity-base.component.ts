@@ -1,15 +1,32 @@
 import {
   AfterViewInit,
   Component,
+  Inject,
+  Injector,
+  OnChanges,
   OnDestroy,
   OnInit,
+  Renderer2,
+  SimpleChange
 } from '@angular/core';
 import {
   SubmitAnnouncementService,
   SubmissionManager,
   AnalyticsEventCategories,
- ActivityComponent
+  ActivityComponent,
+  CurrentActivityService,
+  WindowRef,
+  AnalyticsEventsService,
 } from 'ddp-sdk';
+import { DOCUMENT } from '@angular/common';
+import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
+import {
+  delay,
+  map,
+  merge,
+  startWith,
+} from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-atcp-activity-base',
@@ -182,7 +199,82 @@ import {
     ],
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
-export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+
+  public currentActivityService: CurrentActivityService;
+
+  constructor(
+    windowRef: WindowRef,
+    renderer: Renderer2,
+    submitService: SubmitAnnouncementService,
+    analytics: AnalyticsEventsService,
+    @Inject(DOCUMENT) document: any,
+    // using Injector here as we get error using constructor injection
+    // in both child and parent classes
+    injector: Injector) {
+    super(windowRef, renderer, submitService, analytics, document, injector);
+    this.currentActivityService = injector.get(CurrentActivityService);
+  }
+
+  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
+    /* TODO: consider usage of this method in baseActivity.component.ts instead of current implementation.
+       This fixes issue with additional ngChange events
+    */
+    for (const propName in changes) {
+      if (propName === 'studyGuid' || propName === 'activityGuid') {
+        this.isLoaded = false;
+        this.resetValidationState();
+      }
+      // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
+      if (propName === 'studyGuid') {
+        this.studyGuidObservable.next(this.studyGuid);
+      } else if (propName === 'activityGuid') {
+        this.activityGuidObservable.next(this.activityGuid);
+      }
+    }
+  }
+  protected getActivity(): void {
+    const get = this.currentActivityService
+      .getActivity(this.studyGuidObservable, this.activityGuidObservable)
+      .subscribe(
+        x => {
+          if (!x) {
+            this.model = new ActivityForm();
+          } else {
+            this.model = x;
+            this.stickySubtitle.emit(this.model.subtitle);
+            this.activityCode.emit(this.model.activityCode);
+            this.initSteps();
+            this.isLoaded = true;
+          }
+
+          // combine the latest status updates from the form model
+          // and from the embedded components into one observable
+          const canSaveSub = combineLatest(
+            // update as we get responses from server
+            this.submissionManager.answerSubmissionResponse$.pipe(
+              // We don't automatically get model updates if
+              // local validation fails
+              // so trigger one when submit
+              merge(this.submitAttempted),
+              map(() => this.model.validate()),
+              // let's start with whatever it is the initial state of the form
+              startWith(this.model.validate())),
+            this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
+            .pipe(
+              map(status => status[0] && status[1]),
+              delay(1)
+            ).subscribe(this.isAllFormContentValid);
+
+          this.anchor.addNew(canSaveSub);
+        },
+        () => {
+          this.navigateToErrorPage();
+        }
+      );
+    this.anchor.addNew(get);
+  }
+
 
   public ngOnDestroy(): void {
     super.ngOnDestroy();
@@ -192,7 +284,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
   public navigateToConsole(): void {
     this.sendLastSectionAnalytics();
     this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    super.navigateToConsole();
+    this.router.navigateByUrl('/console');
   }
 
     public flush(): void {
