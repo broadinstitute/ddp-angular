@@ -10,8 +10,7 @@ import {
   LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent,
-  ActivitySection
+  AnalyticsEvent
 } from 'ddp-sdk';
 
 import {
