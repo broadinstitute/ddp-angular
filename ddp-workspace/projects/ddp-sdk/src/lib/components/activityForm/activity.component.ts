@@ -1,17 +1,15 @@
 import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Inject,
-  Injector,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  Renderer2,
-  ViewChild
+    AfterViewInit,
+    Component,
+    ElementRef,
+    HostListener,
+    Inject,
+    Injector,
+    Input,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    ViewChild
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BaseActivityComponent } from './baseActivity.component';
@@ -27,7 +25,6 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
-import {ActivityForm} from "../../models/activity/activityForm";
 
 @Component({
     selector: 'ddp-activity',
@@ -80,7 +77,7 @@ import {ActivityForm} from "../../models/activity/activityForm";
                     <!-- steps -->
                     <div class="row NoMargin" *ngIf="isStepped && showStepper">
                         <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="row WizardSteps-container">
+                            <div class="row">
                                 <ng-container *ngFor="let section of model.sections; let i = index">
                                     <ng-container *ngIf="section.visible">
                                         <div class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
@@ -137,17 +134,7 @@ import {ActivityForm} from "../../models/activity/activityForm";
                                 <div *ngIf="model.lastUpdatedText" class="LastUpdatedText">
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
-                                <div *ngIf="model.activityCode ==='PREQUAL'">
-                                    <button *ngIf="!model.readonly && isLoaded" #submitButton
-                                            [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                            class="BtnFilled BtnFilled--blue Btn-centered Btn-wide"
-                                            (click)="flush()"
-                                            (mouseenter)="mouseEnterOnSubmit()"
-                                            [innerHTML]="(isPageBusy | async)
-                                                                    ? ('SDK.SavingButton' | translate) : ('SDK.JoinUsButton' | translate)">
-                                    </button>
-                                </div>
-                                <div *ngIf="(!isStepped || isLastStep) && model.activityCode !=='PREQUAL'">
+                                <div *ngIf="!isStepped || isLastStep">
                                     <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
@@ -203,7 +190,6 @@ import {ActivityForm} from "../../models/activity/activityForm";
 export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
-    @Input() buttonWithArrow = false;
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
@@ -217,7 +203,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
-  constructor(
+    constructor(
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
@@ -276,7 +262,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnDestroy(): void {
         this.anchors.forEach(anchor => anchor.removeAll());
-        this.currentActivityService.saveCurrentActivity(null);
     }
 
     /**
@@ -299,12 +284,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
         super.close();
     }
-
-  public navigateToConsole(): void {
-    this.sendLastSectionAnalytics();
-    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    super.navigateToConsole();
-  }
 
     public flush(): void {
         this.sendLastSectionAnalytics();
@@ -339,7 +318,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.resetValidationState();
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
-              this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
             }
         }
     }
@@ -404,13 +382,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
     }
 
-    private sendLastSectionAnalytics(): void {
+    protected sendLastSectionAnalytics(): void {
         if (this.isStepped && this.isLastStep) {
             this.sendSectionAnalytics();
         }
     }
 
-    private sendActivityAnalytics(event: string): void {
+    protected sendActivityAnalytics(event: string): void {
         this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
