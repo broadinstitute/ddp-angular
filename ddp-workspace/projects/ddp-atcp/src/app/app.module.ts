@@ -8,9 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
-  BaseActivityComponent,
-  ActivitySection,
-  PatchAnswerResponse,
   DdpModule,
   LogLevel,
   ConfigurationService,

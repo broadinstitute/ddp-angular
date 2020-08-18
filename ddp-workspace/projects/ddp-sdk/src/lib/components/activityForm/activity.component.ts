@@ -382,13 +382,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
     }
 
-    private sendLastSectionAnalytics(): void {
+    protected sendLastSectionAnalytics(): void {
         if (this.isStepped && this.isLastStep) {
             this.sendSectionAnalytics();
         }
     }
 
-    private sendActivityAnalytics(event: string): void {
+    protected sendActivityAnalytics(event: string): void {
         this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
