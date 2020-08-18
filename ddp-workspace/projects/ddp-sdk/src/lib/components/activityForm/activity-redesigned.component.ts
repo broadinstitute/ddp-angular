@@ -1,12 +1,12 @@
 import {
-  AfterViewInit,
-  Component,
-  Inject,
-  Injector,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  Input
+    AfterViewInit,
+    Component,
+    Inject,
+    Injector,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    Input
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivityComponent } from './activity.component';
@@ -16,8 +16,8 @@ import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 
 @Component({
-  selector: 'ddp-activity-redesigned',
-  template: `
+    selector: 'ddp-activity-redesigned',
+    template: `
     <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
@@ -182,22 +182,22 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
             </div>
         </section>
     </main>`,
-  providers: [SubmitAnnouncementService, SubmissionManager]
+    providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() agreeConsent = false;
+    @Input() agreeConsent = false;
 
-  constructor(
-    windowRef: WindowRef,
-    renderer: Renderer2,
-    submitService: SubmitAnnouncementService,
-    analytics: AnalyticsEventsService,
-    @Inject(DOCUMENT) document: any,
-    injector: Injector) {
-    super(windowRef, renderer, submitService, analytics, document, injector);
-  }
+    constructor(
+        windowRef: WindowRef,
+        renderer: Renderer2,
+        submitService: SubmitAnnouncementService,
+        analytics: AnalyticsEventsService,
+        @Inject(DOCUMENT) document: any,
+        injector: Injector) {
+        super(windowRef, renderer, submitService, analytics, document, injector);
+    }
 
-  public isAgree(): boolean {
-    return this.model.formType === 'CONSENT' && this.agreeConsent;
-  }
+    public isAgree(): boolean {
+        return this.model.formType === 'CONSENT' && this.agreeConsent;
+    }
 }
