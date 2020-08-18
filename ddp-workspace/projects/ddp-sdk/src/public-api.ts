@@ -27,6 +27,10 @@ export * from './lib/models/activity/activityInstitutionBlock';
 export * from './lib/models/activity/MailAddressBlock';
 export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
+export * from './lib/models/activity/patchAnswerResponse';
+export * from './lib/models/activity/activitySection';
+export * from './lib/models/activity/blockType';
+export * from './lib/models/activity/abstractActivityQuestionBlock';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
@@ -80,7 +84,7 @@ export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/changeLanguageRedirect.component';
-
+export * from './lib/components/activityForm/baseActivity.component';
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';
 export * from './lib/guards/browser.guard';
@@ -88,3 +92,4 @@ export * from './lib/guards/irb.guard';
 
 export * from './lib/compositeDisposable';
 export * from './lib/constants/activityCodes';
+

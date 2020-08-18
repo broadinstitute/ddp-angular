@@ -1,33 +1,35 @@
 import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    HostListener,
-    Inject,
-    Injector,
-    Input,
-    OnDestroy,
-    OnInit,
-    Renderer2,
-    ViewChild
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BaseActivityComponent } from './baseActivity.component';
-import { WindowRef } from '../../services/windowRef';
-import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
-import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
-import { ActivitySection } from '../../models/activity/activitySection';
-import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
-import { CompositeDisposable } from '../../compositeDisposable';
+import {
+  BaseActivityComponent,
+  WindowRef,
+  SubmitAnnouncementService,
+  AnalyticsEventsService,
+  SubmissionManager,
+  PatchAnswerResponse,
+  ActivitySection,
+  AnalyticsEventCategories,
+  CompositeDisposable,
+  BlockType,
+  AbstractActivityQuestionBlock
+} from 'ddp-sdk';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { BlockType } from '../../models/activity/blockType';
-import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 
 @Component({
-    selector: 'ddp-activity',
+    selector: 'app-atcp-activity-base',
     template: `
         <div class="Wrapper">
             <div class="PageHeader">
@@ -134,7 +136,17 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                 <div *ngIf="model.lastUpdatedText" class="LastUpdatedText">
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
-                                <div *ngIf="!isStepped || isLastStep">
+                                <div *ngIf="model.activityCode ==='PREQUAL'">
+                                    <button *ngIf="!model.readonly && isLoaded" #submitButton
+                                            [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                            class="BtnFilled BtnFilled--blue Btn-centered Btn-wide"
+                                            (click)="flush()"
+                                            (mouseenter)="mouseEnterOnSubmit()"
+                                            [innerHTML]="(isPageBusy | async)
+                                                                    ? ('SDK.SavingButton' | translate) : ('SDK.JoinUsButton' | translate)">
+                                    </button>
+                                </div>
+                                <div *ngIf="(!isStepped || isLastStep) && model.activityCode !=='PREQUAL'">
                                     <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
@@ -187,7 +199,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
     ],
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
-export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AtcpActivityBaseComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
     @ViewChild('title', { static: true }) title: ElementRef;
@@ -203,7 +215,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
-    constructor(
+  constructor(
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
@@ -262,6 +274,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnDestroy(): void {
         this.anchors.forEach(anchor => anchor.removeAll());
+        this.currentActivityService.saveCurrentActivity(null);
     }
 
     /**
@@ -284,6 +297,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
         super.close();
     }
+
+  public navigateToConsole(): void {
+    this.sendLastSectionAnalytics();
+    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
+    super.navigateToConsole();
+  }
 
     public flush(): void {
         this.sendLastSectionAnalytics();
@@ -318,6 +337,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.resetValidationState();
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
+              this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
             }
         }
     }
