@@ -287,9 +287,20 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     this.router.navigateByUrl('/console');
   }
 
-    public flush(): void {
-        this.sendLastSectionAnalytics();
-        this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);
-        super.flush();
+  public incrementStep(): void {
+    const nextIndex = this.nextAvailableSectionIndex();
+    if (nextIndex !== -1) {
+      this.scrollToTop();
+      // enable any validation errors to be visible
+      this.validationRequested = true;
+      this.sendSectionAnalytics();
+      this.currentSection.validate();
+      if (this.currentSection.valid) {
+        this.resetValidationState();
+        this.currentSectionIndex = nextIndex;
+        this.visitedSectionIndexes[nextIndex] = true;
+        this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
+      }
     }
+  }
 }
