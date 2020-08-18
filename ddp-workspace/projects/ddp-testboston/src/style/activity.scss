@@ -343,7 +343,7 @@ ddp-activity-boolean-answer {
     }
 }
 
-// static content 
+// static content
 .static-header,
 .static-text {
     font-family: 'Nunito', sans-serif;
@@ -371,7 +371,7 @@ ddp-activity-boolean-answer {
     content: ' *';
 }
 
-// date time composite question, SYMPTOMS_SURVEY activity 
+// date time composite question, BASELINE_SYMPTOM activity
 @mixin date-time-numeric-answer {
     display: flex;
     width: 8.5rem;
@@ -418,7 +418,7 @@ ddp-activity-boolean-answer {
     }
 }
 
-// household members question, COVID_SURVEY activity
+// household members question, BASELINE_COVID activity
 .numeric-answer-AGE {
     display: flex;
     width: 12.5rem;

@@ -9,7 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppRoutes } from './app-routes';
-import { ActivityGuids } from './aсtivity-guids';
+import { ActivityGuids } from './activity-guids';
 
 import {
     DdpModule,
