@@ -149,7 +149,6 @@ import { AddressService } from '../../services/address.service';
       padding: 0;
       margin:0;
     }`],
-  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
