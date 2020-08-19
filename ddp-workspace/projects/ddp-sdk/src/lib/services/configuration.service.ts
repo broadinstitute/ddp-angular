@@ -46,4 +46,6 @@ export class ConfigurationService {
     dashboardPageUrl = 'dashboard';
     // if questions inside of composite questions shouldn't show asterisk at the end, add question type here
     compositeRequiredFieldExceptions: QuestionType[] = [];
+    // this property reflects offset from the top of the page when we scroll to invalid question
+    scrollToErrorOffset = 100;
 }
