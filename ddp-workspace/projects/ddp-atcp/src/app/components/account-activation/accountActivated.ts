@@ -24,7 +24,7 @@ export class AccountActivatedComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
       this.anchor.addNew(this.ngxTranslate.getTranslation('AccountActivation.EmailConfirmed')
-        .subscribe(translationResult => {
+        .subscribe((translationResult: string) => {
         this.communicationService
           .showMessageFromServer(new ServerMessage(translationResult,
             false));

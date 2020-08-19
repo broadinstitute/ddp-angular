@@ -15,8 +15,8 @@ import {environment} from "../../../environments/environment.prod";
 })
 export class AppComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
-  public isWelcomePage: boolean = false;
-  public isBasePage: boolean = false;
+  public isWelcomePage = false;
+  public isBasePage = false;
   public isDevMode: boolean = isDevMode();
 
   private readonly DIALOG_BASE_SETTINGS = {
