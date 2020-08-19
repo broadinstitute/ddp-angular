@@ -387,7 +387,7 @@ ddp-activity-boolean-answer {
 .composite-answer- {
 
     &SAMPLE_COLLECT_TIME,
-    &FOLLOWUP_SAMPLE_COLLECT_TIME {
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME {
         .ddp-answer-field {
             display: flex;
             align-items: center;
@@ -399,8 +399,8 @@ ddp-activity-boolean-answer {
 
     &SAMPLE_COLLECT_TIME_MIN,
     &SAMPLE_COLLECT_TIME_HOUR,
-    &FOLLOWUP_SAMPLE_COLLECT_TIME_HOUR,
-    &FOLLOWUP_SAMPLE_COLLECT_TIME_MIN {
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_HOUR,
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_MIN {
         .input-field {
             width: 6rem !important;
             padding-right: 2rem !important;
@@ -411,7 +411,7 @@ ddp-activity-boolean-answer {
 .picklist-answer- {
 
     &SAMPLE_COLLECT_TIME_AM_PM,
-    &FOLLOWUP_SAMPLE_COLLECT_TIME_AM_PM {
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_AM_PM {
         .ddp-radio-group-column {
             flex-direction: row !important;
         }
@@ -422,7 +422,7 @@ ddp-activity-boolean-answer {
     .composite-answer- {
 
         &SAMPLE_COLLECT_TIME,
-        &FOLLOWUP_SAMPLE_COLLECT_TIME {
+        &LONGITUDINAL_SAMPLE_COLLECT_TIME {
             .ddp-answer-container {
                 flex-direction: column !important;
             }
