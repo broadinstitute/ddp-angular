@@ -12,6 +12,7 @@ import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
 import { TranslateService } from '@ngx-translate/core';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -73,6 +74,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (!!this.userProfileDecorator) {
       this.userProfileDecorator.profile.preferredLanguage = language.code;
       this.userPreferencesServiceAgent.saveProfile(false, this.userProfileDecorator.profile)
+        .pipe(take(1))
         .subscribe((data: UserProfileDecorator) => {
             this.userProfileDecorator = data;
             this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
@@ -83,7 +85,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public runTranslator(languageCode: string): void {
-    this.translate.use(languageCode).subscribe(() => {
+    this.translate.use(languageCode)
+      .pipe(take(1))
+      .subscribe(() => {
       console.log(`Successfully initialized '${languageCode}' UI language.`);
     }, () => {
       console.error(`Problem with '${languageCode}' UI language initialization.

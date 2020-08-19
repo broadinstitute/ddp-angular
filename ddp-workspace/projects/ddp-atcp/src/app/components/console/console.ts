@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import {UserProfileDecorator, UserProfileServiceAgent} from "ddp-sdk";
-import {filter, first} from "rxjs/operators";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CompositeDisposable, UserProfileDecorator, UserProfileServiceAgent } from 'ddp-sdk';
+import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: `app-console`,
@@ -55,26 +55,35 @@ import {filter, first} from "rxjs/operators";
   </div>
   `
 })
-export class ConsoleComponent {
+export class ConsoleComponent implements OnDestroy, OnInit {
+  private anchor = new CompositeDisposable();
   displayedColumns: string[] = ['participant', 'enrollmentStatus', 'consoleActions'];
   dataSource: Array<any> = [];
   isLoaded = false;
   canAddSelf = false;
 
-  constructor( private userAgent: UserProfileServiceAgent ) {
+  constructor(private userAgent: UserProfileServiceAgent) {
   }
 
   public ngOnInit(): void {
-    this.userAgent.profile
+    this.anchor.addNew(this.userAgent.profile
       .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
       .subscribe((data: UserProfileDecorator) => {
         this.dataSource = [{
           participant: `${data.profile.firstName} ${data.profile.lastName}`,
           enrollmentStatus: data.profile.enrollmentStatus, // 'Submitted Enrollment/Pending Information'
-          consoleActions: data.profile.consoleActions // [{name: "View/Edit Profile", href: "/dashboard"}, {name: "Take additional tests", href: "/dashboard"}]
+          consoleActions: data.profile.consoleActions
+           /*
+           [{name: "View/Edit Profile", href: "/dashboard"},
+           {name: "Take additional tests", href: "/dashboard"}]
+           */
         }];
         this.canAddSelf = !data.profile.enrollmentStatus;
         this.isLoaded = true;
-      });
+      }));
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }

@@ -110,9 +110,9 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
     this.studyGuidObservable.next(this.studyGuid);
-    this.userAgent.profile
+    this.anchor.addNew(this.userAgent.profile
       .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
-      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName);
+      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName));
     this.getSteps();
   }
 
