@@ -5,6 +5,8 @@ export class MailAddressBlock extends ActivityBlock {
     public displayNumber: number | null;
     public titleText: string | null;
     public subtitleText: string | null;
+    public requireVerified: boolean;
+    public requirePhone: boolean;
 
     constructor(displayNumber: number) {
         super();

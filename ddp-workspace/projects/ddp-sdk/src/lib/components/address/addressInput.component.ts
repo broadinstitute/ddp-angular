@@ -131,7 +131,8 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
                  [name]="disableAutofill"
                  [attr.autocomplete]="autocompleteAttributeValue()"
                  formControlName="phone"
-                 uppercase>
+                 uppercase
+                 [required]="phoneRequired">
           <mat-error>{{getFieldErrorMessage('phone') | async}}</mat-error>
         </mat-form-field>
 
@@ -179,6 +180,10 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   set addressErrors(addressErrors: AddressError[]) {
     this.displayVerificationErrors(addressErrors);
   }
+
+  @Input()
+  phoneRequired: boolean = false;
+
   /**
    * Will emit event with address as it changes in form
    * If contents of form elements are modified we will emit null
