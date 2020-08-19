@@ -114,6 +114,7 @@ export class Auth0AdapterService implements OnDestroy {
             ...(additionalAuth0QueryParams && additionalAuth0QueryParams)
         };
         if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem('localAdminAuth', 'false');
             sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
         }
         this.webAuth.authorize(
