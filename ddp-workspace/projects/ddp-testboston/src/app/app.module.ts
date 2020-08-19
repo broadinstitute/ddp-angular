@@ -60,6 +60,7 @@ toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
+toolkitConfig.symptomSurveyUrl = AppRoutes.SymptomSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.activityUrl = AppRoutes.Activity;
@@ -67,6 +68,7 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.addressGuid = ActivityGuids.Address;
 toolkitConfig.consentGuid = ActivityGuids.Consent;
 toolkitConfig.covidSurveyGuid = ActivityGuids.Covid;
+toolkitConfig.symptomSurveyGuid = ActivityGuids.Symptom;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.phone = '617-525-4220';
 toolkitConfig.infoEmail = 'info@testboston.org';
@@ -93,11 +95,12 @@ sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
-sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'SYMPTOMS_SURVEY'];
+sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.scrollToErrorOffset = 130;
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
