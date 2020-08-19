@@ -22,14 +22,14 @@ export class CurrentActivityService {
     return this.activityServiceAgent.getActivity(studyGuid, activityGuid).pipe(tap(x => this.saveCurrentActivity(x)));
   }
 
-  public updateActivitySection(studyGuid: string, activityGuid: string, activity: ActivityForm, sectionIndex: number) {
+  public updateActivitySection(studyGuid: string, activityGuid: string, activity: ActivityForm, sectionIndex: number): void {
     if (activity.activityCode === ActivityCodes.MEDICAL_HISTORY) {
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);
       this.activityServiceAgent.saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex).subscribe();
       }
     }
 
-  public saveCurrentActivity(value) {
+  public saveCurrentActivity(value:  ActivityForm): void {
     this.activity.next(value);
   }
 

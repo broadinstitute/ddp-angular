@@ -45,7 +45,7 @@ export class ActivityProgressCalculationService {
     this.stepWeights.push(this.lastStepWeight);
   }
 
-  public updateProgress(activity, sectionIndex): void {
+  public updateProgress(activity: ActivityForm, sectionIndex: number): void {
     if (activity.activityCode === this.activityToShowProgress
           && this.shouldUpdate(sectionIndex)) {
       this.sectionIndex = sectionIndex;
@@ -53,7 +53,7 @@ export class ActivityProgressCalculationService {
     }
   }
 
-  private shouldUpdate(sectionIndex): boolean {
+  private shouldUpdate(sectionIndex: number): boolean {
     return sectionIndex > this.sectionIndex;
   }
 
