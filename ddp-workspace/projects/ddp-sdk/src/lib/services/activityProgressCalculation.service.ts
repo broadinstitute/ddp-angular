@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivityForm } from '../models/activity/activityForm';
-import { ActivityCodes } from 'ddp-sdk';
+import { ActivityCodes } from '../constants/activityCodes';
 
 @Injectable()
 export class ActivityProgressCalculationService {
