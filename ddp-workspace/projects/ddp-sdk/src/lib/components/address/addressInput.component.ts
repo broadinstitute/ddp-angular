@@ -173,6 +173,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   }
   @Input()
   country: string | null;
+  @Input()
+  phoneRequired = false;
 
   /**
    * Set the errors in the input component. If list is empty, errors will be cleared.
@@ -181,9 +183,6 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   set addressErrors(addressErrors: AddressError[]) {
     this.displayVerificationErrors(addressErrors);
   }
-
-  @Input()
-  phoneRequired = false;
 
   /**
    * Will emit event with address as it changes in form
