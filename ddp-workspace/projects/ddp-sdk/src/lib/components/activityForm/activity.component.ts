@@ -216,7 +216,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnInit(): void {
-        super.getActivity();
+        this.getActivity();
         const submitSub = this.submit.subscribe(response => this.submitService.announceSubmit(response));
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -374,7 +374,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    private sendSectionAnalytics(): void {
+    protected sendSectionAnalytics(): void {
         // Some sections don't have name, just send section number
         const sectionName = this.model.sections[this.currentSectionIndex].name ?
             this.model.sections[this.currentSectionIndex].name :
@@ -392,7 +392,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
-    private scrollToTop(): void {
+    protected scrollToTop(): void {
         this.windowRef.nativeWindow.scrollTo(0, 0);
     }
 
@@ -403,7 +403,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         });
     }
 
-    private nextAvailableSectionIndex(): number {
+    protected nextAvailableSectionIndex(): number {
         for (let index = this.currentSectionIndex + 1; index < this.model.sections.length; index++) {
             if (this.model.sections[index].visible) {
                 return index;
