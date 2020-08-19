@@ -335,8 +335,8 @@ export class AddressInputService implements OnDestroy {
       zip: new FormControl(''),
       state: new FormControl(''),
       city: new FormControl('', Validators.required),
-      phone: new FormControl(''),
-      guid: phoneRequired ? new FormControl('', Validators.required) : new FormControl(''),
+      phone: phoneRequired ? new FormControl('', Validators.required) : new FormControl(''),
+      guid: new FormControl('')
     }, { updateOn: 'blur' });
   }
 
