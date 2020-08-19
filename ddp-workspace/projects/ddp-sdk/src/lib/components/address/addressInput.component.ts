@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -20,6 +21,7 @@ import * as _ from 'underscore';
 import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AddressInputService } from '../address/addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
+import { AddressService } from '../../services/address.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -147,7 +149,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
       padding: 0;
       margin:0;
     }`],
-  providers: [AddressInputService],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -182,7 +184,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   }
 
   @Input()
-  phoneRequired: boolean = false;
+  phoneRequired = false;
 
   /**
    * Will emit event with address as it changes in form
@@ -204,13 +206,17 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   @ViewChild('street1', {static: true})
   street1Input: ElementRef;
 
+  public ais: AddressInputService;
+
   private ngUnsubscribe = new Subject();
 
   // See if we can continue making stuff in form observable as much as possible
   constructor(
     private countryService: CountryService,
-    public ais: AddressInputService,
+    private addressService: AddressService,
+    private cdr: ChangeDetectorRef,
     private ngxTranslate: NGXTranslateService) {
+    this.ais = new AddressInputService(this.countryService, this.addressService, this.cdr, this.phoneRequired);
   }
 
   ngOnInit(): void {

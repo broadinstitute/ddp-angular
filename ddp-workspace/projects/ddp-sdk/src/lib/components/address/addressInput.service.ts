@@ -51,7 +51,7 @@ export class AddressInputService implements OnDestroy {
   /**
    * The formgroup used by the input form
    */
-  readonly addressForm: FormGroup = this.createForm();
+  readonly addressForm: FormGroup;
   /**
    * Incoming addresses
    */
@@ -91,7 +91,9 @@ export class AddressInputService implements OnDestroy {
   ngUnsubscribe = new Subject<void>();
 
   constructor(private countryService: CountryService, private addressService: AddressService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef, phoneRequired: boolean) {
+    this.addressForm = this.createForm(phoneRequired);
+
     const countryCache = new BehaviorSubject<CountryCache>({});
     const countryCacheUpdates$ = new Subject<CountryAddressInfo>();
     // todo: can we factor this out as generic cache?
@@ -324,7 +326,7 @@ export class AddressInputService implements OnDestroy {
 
   }
 
-  createForm(): FormGroup {
+  createForm(phoneRequired: boolean): FormGroup {
     return new FormGroup({
       name: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
@@ -334,7 +336,7 @@ export class AddressInputService implements OnDestroy {
       state: new FormControl(''),
       city: new FormControl('', Validators.required),
       phone: new FormControl(''),
-      guid: new FormControl('')
+      guid: phoneRequired ? new FormControl('', Validators.required) : new FormControl(''),
     }, { updateOn: 'blur' });
   }
 
