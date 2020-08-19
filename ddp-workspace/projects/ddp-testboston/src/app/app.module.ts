@@ -100,6 +100,7 @@ sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.scrollToErrorOffset = 130;
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
