@@ -111,6 +111,8 @@
     line-height: 1.875rem;
     margin: 1rem 0;
     color: mat-color($app-theme, 2700);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
 }
 
 // close button
@@ -371,56 +373,66 @@ ddp-activity-boolean-answer {
     content: ' *';
 }
 
-// date time composite question, BASELINE_SYMPTOM activity
-@mixin date-time-numeric-answer {
-    display: flex;
-    width: 8.5rem;
-    box-sizing: border-box;
+// picklist characters counter 
+.ddp-helper {
+    font-size: 1.1rem;
+    margin: -1rem 0 0 0;
+}
+
+.ddp-counter-color {
+    color: mat-color($app-theme, 1700);
+}
+
+// date time composite question, BASELINE_SYMPTOM and FOLLOWUP_SURVEY activities
+.composite-answer- {
+
+    &SAMPLE_COLLECT_TIME,
+    &FOLLOWUP_SAMPLE_COLLECT_TIME {
+        .ddp-answer-field {
+            display: flex;
+            align-items: center;
+        }
+    }
 }
 
 .numeric-answer- {
-    &SAMPLE_COLLECT_TIME_MIN {
-        padding-left: 20px;
-        padding-right: 20px;
-        @include date-time-numeric-answer;
-    }
 
-    &SAMPLE_COLLECT_TIME_HOUR {
-        padding-left: 40px;
-        @include date-time-numeric-answer;
-    }
-}
-
-.picklist-answer-SAMPLE_COLLECT_TIME_AM_PM {
-    .ddp-radio-group-column {
-        flex-direction: row !important;
-    }
-}
-
-.composite-answer-SAMPLE_COLLECT_TIME {
-    .ddp-answer-field {
-        display: flex;
-        align-items: center;
-    }
-}
-
-@media only screen and (max-width:355px) {
-    .composite-answer-SAMPLE_COLLECT_TIME {
-        .ddp-answer-container {
-            flex-direction: column !important;
+    &SAMPLE_COLLECT_TIME_MIN,
+    &SAMPLE_COLLECT_TIME_HOUR,
+    &FOLLOWUP_SAMPLE_COLLECT_TIME_HOUR,
+    &FOLLOWUP_SAMPLE_COLLECT_TIME_MIN {
+        .input-field {
+            width: 6rem !important;
+            padding-right: 2rem !important;
         }
     }
+}
 
-    .picklist-answer-SAMPLE_COLLECT_TIME_AM_PM,
-    .numeric-answer-SAMPLE_COLLECT_TIME_MIN {
-        padding-left: 40px;
-        padding-right: 0;
+.picklist-answer- {
+
+    &SAMPLE_COLLECT_TIME_AM_PM,
+    &FOLLOWUP_SAMPLE_COLLECT_TIME_AM_PM {
+        .ddp-radio-group-column {
+            flex-direction: row !important;
+        }
+    }
+}
+
+@media only screen and (max-width:378px) {
+    .composite-answer- {
+
+        &SAMPLE_COLLECT_TIME,
+        &FOLLOWUP_SAMPLE_COLLECT_TIME {
+            .ddp-answer-container {
+                flex-direction: column !important;
+            }
+        }
     }
 }
 
 // household members question, BASELINE_COVID activity
-.numeric-answer-AGE {
+.numeric-answer-HOUSEHOLD_MEMBER_AGE {
     display: flex;
-    width: 12.5rem;
+    width: 13rem;
     margin-top: 0.5rem;
 }
