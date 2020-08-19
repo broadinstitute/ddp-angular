@@ -11,6 +11,7 @@ export const AppRoutes = {
     LocalAuth: 'auth',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
+    SymptomSurvey: 'symptom-survey',
     Dashboard: 'dashboard',
     Prism: 'prism',
     Password: 'password',

@@ -61,6 +61,17 @@ const routes: Routes = [
     }
   },
   {
+    path: AppRoutes.SymptomSurvey,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.Symptom
+    }
+  },
+  {
     path: AppRoutes.Address,
     component: ActivityPageRedesignedComponent,
     canActivate: [
