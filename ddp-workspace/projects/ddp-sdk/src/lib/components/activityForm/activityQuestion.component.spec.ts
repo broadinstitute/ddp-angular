@@ -9,6 +9,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { getTestScheduler, hot } from 'jasmine-marbles';
 import { By } from '@angular/platform-browser';
 import { ActivityLengthValidationRule } from '../../services/activity/validators/activityLengthValidationRule';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-activity-answer',
@@ -16,10 +17,10 @@ import { ActivityLengthValidationRule } from '../../services/activity/validators
     <div></div>`
 })
 class FakeActivityActivityAnswerComponent {
-  @Output()valueChanged = new EventEmitter();
-  @Input()block;
-  @Input()readonly;
-  @Input()validationRequested;
+  @Output() valueChanged = new EventEmitter();
+  @Input() block;
+  @Input() readonly;
+  @Input() validationRequested;
 }
 
 describe('ActivityQuestionComponent', () => {
@@ -30,15 +31,26 @@ describe('ActivityQuestionComponent', () => {
   const submissionManagerSpy = new SubmissionManager(null);
   let submissionResponseSpy: jasmine.Spy;
   let windowRefSpy: jasmine.SpyObj<WindowRef>;
+  let configServiceSpy: jasmine.SpyObj<ConfigurationService>;
 
   beforeEach(async(() => {
     windowRefSpy = jasmine.createSpyObj('WindowRef', ['nativeWindow']);
+    configServiceSpy = jasmine.createSpyObj('ddp.config', ['scrollToErrorOffset']);
     TestBed.configureTestingModule({
-      declarations: [ActivityQuestionComponent, ValidationMessage, FakeActivityActivityAnswerComponent],
-      providers: [{provide: SubmissionManager, useValue: submissionManagerSpy}, {provide: WindowRef, useValue: windowRefSpy}],
-      imports: [HttpClientTestingModule]
-    })
-      .compileComponents();
+      declarations: [
+        ActivityQuestionComponent,
+        ValidationMessage,
+        FakeActivityActivityAnswerComponent
+      ],
+      providers: [
+        { provide: SubmissionManager, useValue: submissionManagerSpy },
+        { provide: WindowRef, useValue: windowRefSpy },
+        { provide: 'ddp.config', useValue: configServiceSpy }
+      ],
+      imports: [
+        HttpClientTestingModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -58,7 +70,7 @@ describe('ActivityQuestionComponent', () => {
     expect(answerComponentFixture).toBeTruthy();
     expect(answerComponent).toBeTruthy();
   });
- it('expect block validation to appear and disappear',  fakeAsync(() => {
+  it('expect block validation to appear and disappear', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -90,7 +102,7 @@ describe('ActivityQuestionComponent', () => {
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
- it('expect block validation to appear and disappear some more',  fakeAsync(() => {
+  it('expect block validation to appear and disappear some more', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -110,7 +122,7 @@ describe('ActivityQuestionComponent', () => {
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
- it('expect patch response not to trigger message',  fakeAsync(() => {
+  it('expect patch response not to trigger message', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -124,9 +136,12 @@ describe('ActivityQuestionComponent', () => {
     expect(getValidationMessageFixture()).toBeFalsy();
     submissionResponseSpy.and.returnValue(
       hot('-a',
-        {a:
-            ({answers: [{stableId: block.stableId, answerGuid: '321'}],
-              blockVisibility: []})}));
+        {
+          a: ({
+            answers: [{ stableId: block.stableId, answerGuid: '321' }],
+            blockVisibility: []
+          })
+        }));
     component.ngOnInit();
     getTestScheduler().flush();
     fixture.detectChanges();
