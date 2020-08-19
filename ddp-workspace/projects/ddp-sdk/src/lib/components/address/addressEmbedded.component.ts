@@ -73,6 +73,7 @@ interface AddressSuggestion {
             [addressErrors]="addressErrors$ | async"
             [readonly]="isReadOnly$ | async"
             [country]="staticCountry$ | async"
+            [phoneRequired]="block.requirePhone"
             (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
     <ddp-validation-message
             *ngIf="(errorMessagesToDisplay$ | async).length > 0"
