@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-    selector: 'toolkit-server-message',
+    selector: 'app-server-message',
     template: `
       <div class="server-message-popup">
       <div class="server-message-popup-header">

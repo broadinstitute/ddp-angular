@@ -55,13 +55,15 @@ import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
 import { CurrentActivityService } from './sdk/services/currentActivity.service';
+import { MatButtonModule } from '@angular/material/button';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
-import {MatButtonModule} from "@angular/material/button";
+import { ServerMessageComponent } from './toolkit/dialogs/serverMessage.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -129,7 +131,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatCheckboxModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   declarations: [
     WelcomeComponent,
@@ -154,10 +157,12 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpAuth0CodeCallbackComponent,
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    ServerMessageComponent
   ],
   entryComponents: [
     DashBoardComponent,
+    ServerMessageComponent,
   ],
   providers: [
     CurrentActivityService,

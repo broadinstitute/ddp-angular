@@ -5,7 +5,7 @@ import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 import {CommunicationService, JoinMailingListComponent, SessionWillExpireComponent, WarningComponent} from 'toolkit';
 import { Router } from '@angular/router';
 import * as RouterResource from '../../router-resources';
-import {ServerMessageComponent} from "../../../../../toolkit/src/lib/components/dialogs/serverMessage.component";
+import { ServerMessageComponent } from '../../toolkit/dialogs/serverMessage.component';
 import {environment} from "../../../environments/environment.prod";
 
 @Component({
