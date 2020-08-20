@@ -32,6 +32,7 @@
 .infobox_dashboard {
     padding: 1.5rem 2rem;
     position: relative;
+    margin-bottom: 0;
 
     .close-button {
         position: absolute;
@@ -44,6 +45,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     color: mat-color($app-theme, 700);
+    margin: 0.5rem 0;
 }
 
 .invitation-code {

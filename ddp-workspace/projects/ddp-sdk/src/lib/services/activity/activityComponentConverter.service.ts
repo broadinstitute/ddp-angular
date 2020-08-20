@@ -26,6 +26,8 @@ export class ActivityComponentConverter {
         const block = new MailAddressBlock(inputBlock.displayNumber);
         block.titleText = inputBlock.component.parameters.titleText;
         block.subtitleText = inputBlock.component.parameters.subtitleText;
+        block.requireVerified = !!inputBlock.component.parameters.requireVerified;
+        block.requirePhone = !!inputBlock.component.parameters.requirePhone;
         return block;
     }
 

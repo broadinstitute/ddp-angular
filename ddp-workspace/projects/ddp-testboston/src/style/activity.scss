@@ -18,6 +18,10 @@
     font-family: 'PT Serif', sans-serif;
 }
 
+.PageContent-subtitle {
+    margin: 1rem 0;
+}
+
 // consent header
 .header-section {
     margin: 0 0 2rem 0;
@@ -107,6 +111,8 @@
     line-height: 1.875rem;
     margin: 1rem 0;
     color: mat-color($app-theme, 2700);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
 }
 
 // close button
@@ -339,7 +345,7 @@ ddp-activity-boolean-answer {
     }
 }
 
-// static content 
+// static content
 .static-header,
 .static-text {
     font-family: 'Nunito', sans-serif;
@@ -360,4 +366,73 @@ ddp-activity-boolean-answer {
 .last-updated {
     display: flex;
     margin: 3rem 0;
+}
+
+// required question
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
+// picklist characters counter 
+.ddp-helper {
+    font-size: 1.1rem;
+    margin: -1rem 0 0 0;
+}
+
+.ddp-counter-color {
+    color: mat-color($app-theme, 1700);
+}
+
+// date time composite question, BASELINE_SYMPTOM and LONGITUDINAL_COVID activities
+.composite-answer- {
+
+    &SAMPLE_COLLECT_TIME,
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME {
+        .ddp-answer-field {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.numeric-answer- {
+
+    &SAMPLE_COLLECT_TIME_MIN,
+    &SAMPLE_COLLECT_TIME_HOUR,
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_HOUR,
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_MIN {
+        .input-field {
+            width: 6rem !important;
+            padding-right: 2rem !important;
+        }
+    }
+}
+
+.picklist-answer- {
+
+    &SAMPLE_COLLECT_TIME_AM_PM,
+    &LONGITUDINAL_SAMPLE_COLLECT_TIME_AM_PM {
+        .ddp-radio-group-column {
+            flex-direction: row !important;
+        }
+    }
+}
+
+@media only screen and (max-width:378px) {
+    .composite-answer- {
+
+        &SAMPLE_COLLECT_TIME,
+        &LONGITUDINAL_SAMPLE_COLLECT_TIME {
+            .ddp-answer-container {
+                flex-direction: column !important;
+            }
+        }
+    }
+}
+
+// household members question, BASELINE_COVID activity
+.numeric-answer-HOUSEHOLD_MEMBER_AGE {
+    display: flex;
+    width: 13rem;
+    margin-top: 0.5rem;
 }

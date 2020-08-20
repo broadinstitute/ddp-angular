@@ -31,6 +31,7 @@ class FakeAddressInputComponent {
   @Output()valueChanged = new EventEmitter();
   @Input()addressErrors;
   @Input()country;
+  @Input()phoneRequired;
   @Input()
   set address(val: Address | null) {
     console.log('set address called with: %o', val);

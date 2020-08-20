@@ -1,6 +1,7 @@
 export const ActivityGuids = {
     Consent: 'CONSENT',
     Dashboard: 'DASHBOARD',
-    Covid: 'COVID_SURVEY',
+    Covid: 'BASELINE_COVID',
+    Symptom: 'BASELINE_SYMPTOM',
     Address: 'ADDRESS'
 };

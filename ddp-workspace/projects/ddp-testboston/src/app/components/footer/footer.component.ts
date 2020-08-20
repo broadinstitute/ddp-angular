@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { SessionMementoService, LanguageService } from 'ddp-sdk';
+import { SessionMementoService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { ScrollerService } from '../../services/scroller.service';
@@ -17,11 +17,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   public emailHref: string;
   public appRoutes = AppRoutes;
   public showLanguageColumn = true;
-  public language: string;
   private anchor: Subscription;
 
   constructor(
-    private languageService: LanguageService,
     private session: SessionMementoService,
     private scrollerService: ScrollerService,
     @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
@@ -31,7 +29,6 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
     this.emailHref = `mailto:${this.email}`;
-    this.languageListener();
   }
 
   public ngOnDestroy(): void {
@@ -52,12 +49,5 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   public handleLanguageVisibility(visible: boolean): void {
     this.showLanguageColumn = visible;
-  }
-
-  private languageListener(): void {
-    this.language = this.languageService.getCurrentLanguage();
-    this.anchor = this.languageService.onLanguageChange().subscribe((event) => {
-      this.language = event.lang;
-    });
   }
 }

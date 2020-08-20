@@ -9,14 +9,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppRoutes } from './app-routes';
-import { ActivityGuids } from './aсtivity-guids';
+import { ActivityGuids } from './activity-guids';
 
 import {
     DdpModule,
     LogLevel,
     ConfigurationService,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    QuestionType
 } from 'ddp-sdk';
 
 import {
@@ -59,6 +60,7 @@ toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
+toolkitConfig.symptomSurveyUrl = AppRoutes.SymptomSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.activityUrl = AppRoutes.Activity;
@@ -66,6 +68,7 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.addressGuid = ActivityGuids.Address;
 toolkitConfig.consentGuid = ActivityGuids.Consent;
 toolkitConfig.covidSurveyGuid = ActivityGuids.Covid;
+toolkitConfig.symptomSurveyGuid = ActivityGuids.Symptom;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.phone = '617-525-4220';
 toolkitConfig.infoEmail = 'info@testboston.org';
@@ -96,6 +99,8 @@ sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.scrollToErrorOffset = 130;
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
