@@ -9,7 +9,6 @@ import {
 
 import {
   ErrorRedesignedComponent,
-  LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginComponent,
   RedirectToLoginLandingRedesignedComponent,
@@ -30,6 +29,7 @@ import {
   AccountActivationRequiredComponent
 } from "./components/account-activation/accountActivationRequired";
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
+import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 
 const routes: Routes = [
   {
@@ -70,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: RouterResource.LoginLanding,
-    component: LoginLandingRedesignedComponent,
+    component: AtcpLoginLandingRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
