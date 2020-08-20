@@ -7,7 +7,7 @@ import {DataAccessServiceAgent} from "../../services/serviceAgents/dataAccessSer
 import {DataAccessRequestSuccessResult} from "../../models/dataAccessRequestSuccessResult";
 import {DataAccessRequestError} from "../../models/dataAccessRequestError";
 import { of } from "rxjs";
-import {delay} from "rxjs/operators";
+import {delay, take} from "rxjs/operators";
 import {ServerMessage} from "../../../../../toolkit/src/lib/models/serverMessage";
 
 @Component({
@@ -65,7 +65,9 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.dataAccessService.createNewDataAccessRequest(this.model, this.researcherBiosketch, this.studyGuid).subscribe(
+    this.dataAccessService.createNewDataAccessRequest(this.model, this.researcherBiosketch, this.studyGuid)
+      .pipe(take(1))
+      .subscribe(
       {
         next: value => this.showResponse(value) ,
         error: error => this.showError(error)
@@ -75,14 +77,20 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   private showResponse(dataAccessRequestSuccessResult: DataAccessRequestSuccessResult): void {
     this.communicationService.showMessageFromServer(new ServerMessage(dataAccessRequestSuccessResult.message, false));
-    of('').pipe(delay(3000)).subscribe(() => {
+    of('')
+      .pipe(take(1))
+      .pipe(delay(3000))
+      .subscribe(() => {
       this.communicationService.closeMessageFromServer();
     });
   }
 
   private showError(error: DataAccessRequestError): void {
     this.communicationService.showMessageFromServer(new ServerMessage(error.text, true));
-    of('').pipe(delay(3000)).subscribe(() => {
+    of('')
+      .pipe(take(1))
+      .pipe(delay(3000))
+      .subscribe(() => {
       this.communicationService.closeMessageFromServer();
     });
   }
