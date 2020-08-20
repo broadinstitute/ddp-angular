@@ -21,7 +21,7 @@ export class AccountActivationRequiredComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
      this.anchor.addNew(this.ngxTranslate.getTranslation('AccountActivation.AccountActivationRequired')
-        .subscribe(translationResult => {
+        .subscribe((translationResult: string) => {
             this.communicationService
               .showMessageFromServer(new ServerMessage(translationResult,
                 true));
