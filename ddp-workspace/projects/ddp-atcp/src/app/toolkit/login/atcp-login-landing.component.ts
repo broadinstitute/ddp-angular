@@ -1,29 +1,27 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { GovernedParticipantsServiceAgent, Participant } from 'ddp-sdk';
+import { GovernedParticipantsServiceAgent,
+  Participant,
+  SessionMementoService,
+  Auth0AdapterService,
+  ConfigurationService,
+  WorkflowServiceAgent,
+  LoggingService } from 'ddp-sdk';
 
-import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { WorkflowBuilderService, ToolkitConfigurationService } from 'toolkit';
 
 import { Subscription } from 'rxjs';
 import { filter, take, mergeMap, tap } from 'rxjs/operators';
 
-import {
-  SessionMementoService,
-  Auth0AdapterService,
-  ConfigurationService,
-  WorkflowServiceAgent
-} from 'ddp-sdk';
-
 @Component({
-  selector: 'toolkit-login-landing',
+  selector: 'app-atcp-login-landing',
   template: `
       <toolkit-common-landing></toolkit-common-landing>
   `
 })
-export class LoginLandingComponent implements OnInit, OnDestroy {
+export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
-
+  private LOG_SOURCE = 'AtcpLoginLandingComponent';
   constructor(
     private router: Router,
     private auth0: Auth0AdapterService,
@@ -31,6 +29,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
     private participantService: GovernedParticipantsServiceAgent,
     private workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
+    private log: LoggingService,
     @Inject('ddp.config') private config: ConfigurationService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
@@ -61,7 +60,11 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(error);
+      this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + JSON.stringify(error));
+      if (error.code === 'unauthorized') {
+        this.router.navigateByUrl('account-activation-required');
+        return;
+      }
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
