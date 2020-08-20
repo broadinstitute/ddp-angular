@@ -180,6 +180,7 @@ export class Auth0AdapterService implements OnDestroy {
                     error = JSON.parse(decodeURIComponent(err.errorDescription));
                 } catch (e) {
                     console.error('Problem decoding authentication error', e);
+                    console.error(err.errorDescription);
                 }
                 if (onErrorCallback && error) {
                     // We might encounter errors from Auth0 that is not in expected
