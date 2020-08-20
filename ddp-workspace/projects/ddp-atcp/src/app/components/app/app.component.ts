@@ -42,10 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private renewNotifier: RenewSessionNotifier) { }
 
   public ngOnInit(): void {
-    this.router.events.subscribe(() => {
+    this.anchor.addNew(this.router.events.subscribe(() => {
       this.isWelcomePage = this.router.url === '/';
       this.isBasePage = this.baseUrls.includes(this.router.url.substr(1).split('?')[0]);
-    });
+    }));
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();
     this.subscribeToMessagesFromServer();
