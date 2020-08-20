@@ -5,7 +5,18 @@ import { ToolkitConfigurationService } from "toolkit";
   selector: 'privacy-policy-full',
   template: `
     <prion-header currentRoute="/privacy-policy"></prion-header>
-    <prion-privacy-policy></prion-privacy-policy>
+    <div class="Container">
+      <article class="PageContent">
+        <div class="PageLayout row">
+          <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+            <section class="PageContent-section NoPadding">
+              <h1 class="PageContent-title" translate>SDK.PrivacyPolicy.Title</h1>
+              <prion-privacy-policy></prion-privacy-policy>
+            </section>
+          </div>
+        </div>
+      </article>
+    </div>
   `
 })
 export class PrivacyPolicyFullComponent implements OnInit {
