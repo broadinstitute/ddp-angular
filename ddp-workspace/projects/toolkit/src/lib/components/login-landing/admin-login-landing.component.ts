@@ -57,13 +57,13 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
   }
 
   private redirect(): void {
-    const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
+    const nextUrlFromStorage = sessionStorage.getItem('adminNextUrl');
     if (nextUrlFromStorage) {
-      // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
-      sessionStorage.removeItem('nextUrl');
+      // `adminNextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
+      sessionStorage.removeItem('adminNextUrl');
       this.router.navigateByUrl(nextUrlFromStorage);
     } else {
-      // No `nextUrl` set before going to auth0, go to admin dashboard next.
+      // No `adminNextUrl` set before going to auth0, go to admin dashboard next.
       this.router.navigateByUrl(this.toolkitConfiguration.adminDashboardUrl);
     }
   }
