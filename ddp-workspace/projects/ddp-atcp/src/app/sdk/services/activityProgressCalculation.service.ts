@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityForm } from '../models/activity/activityForm';
+import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
 import { ActivityCodes } from 'ddp-sdk';
 
 @Injectable()

@@ -46,13 +46,15 @@ import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-
+import { ActivityProgressBarComponent } from './sdk/components/activityProgressBar.component';
+import { ActivityProgressCalculationService } from './sdk/services/activityProgressCalculation.service';
 import {
   AccountActivatedComponent,
 } from './components/account-activation/accountActivated';
 import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
+import { CurrentActivityService } from './sdk/services/currentActivity.service';
 
 
 
@@ -141,12 +143,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ConsoleComponent,
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
-    AccountActivationRequiredComponent
+    AccountActivationRequiredComponent,
+    ActivityProgressBarComponent
   ],
   entryComponents: [
     DashBoardComponent,
   ],
   providers: [
+    CurrentActivityService,
+    ActivityProgressCalculationService,
     {
       provide: 'ddp.config',
       useValue: config
