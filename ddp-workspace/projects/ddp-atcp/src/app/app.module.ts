@@ -46,13 +46,15 @@ import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-
+import { ActivityProgressBarComponent } from './sdk/components/activityProgressBar.component';
+import { ActivityProgressCalculationService } from './sdk/services/activityProgressCalculation.service';
 import {
   AccountActivatedComponent,
 } from './components/account-activation/accountActivated';
 import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
+import { CurrentActivityService } from './sdk/services/currentActivity.service';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
@@ -145,6 +147,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
     AccountActivationRequiredComponent,
+    ActivityProgressBarComponent,
     AtcpAuth0CodeCallbackComponent,
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent
@@ -153,6 +156,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DashBoardComponent,
   ],
   providers: [
+    CurrentActivityService,
+    ActivityProgressCalculationService,
     {
       provide: 'ddp.config',
       useValue: config
