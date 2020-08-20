@@ -46,15 +46,15 @@ import {MatTableModule} from "@angular/material/table";
 import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { ActivityProgressBarComponent } from './toolkit/components/activityProgressBar.component';
-import { ActivityProgressCalculationService } from './toolkit/services/activityProgressCalculation.service';
+import { ActivityProgressBarComponent } from './sdk/components/activityProgressBar.component';
+import { ActivityProgressCalculationService } from './sdk/services/activityProgressCalculation.service';
 import {
   AccountActivatedComponent,
 } from './components/account-activation/accountActivated';
 import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
-import { CurrentActivityService } from './toolkit/services/currentActivity.service';
+import { CurrentActivityService } from './sdk/services/currentActivity.service';
 
 
 

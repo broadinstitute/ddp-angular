@@ -10,7 +10,7 @@ import {
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
 import { TranslateService } from '@ngx-translate/core';
-import { CurrentActivityService } from '../../toolkit/services/currentActivity.service';
+import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
 
 @Component({

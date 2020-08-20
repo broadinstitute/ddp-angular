@@ -18,7 +18,7 @@ import {
   AnalyticsEventsService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
-import { CurrentActivityService } from '../../toolkit/services/currentActivity.service';
+import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
 import {
   delay,
