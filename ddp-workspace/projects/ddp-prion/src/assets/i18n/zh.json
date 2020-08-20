@@ -154,7 +154,7 @@
       "Usage": {
         "email": "zh: as an email service",
         "authentication": "zh: as an authentication system to provide access to the Registry",
-        "security": "zh: as an Registry cloud firewall and runtime protection",
+        "security": "zh: as a Registry cloud firewall and runtime protection",
         "host": "zh: to host the Registry",
         "analytics": "zh: as an analytics tool"
       },
