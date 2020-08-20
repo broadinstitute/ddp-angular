@@ -59,7 +59,9 @@ import { CurrentActivityService } from './sdk/services/currentActivity.service';
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
-import {AtcpLoginLandingRedesignedComponent} from "./toolkit/login/atcp-login-landing-redesigned.component";
+import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
+import { FileUploaderComponent } from './sdk/components/file-uploader.component';
+import {MatButtonModule} from "@angular/material/button";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -126,7 +128,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatProgressBarModule,
     MatCheckboxModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonModule
   ],
   declarations: [
     WelcomeComponent,
@@ -150,7 +153,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ActivityProgressBarComponent,
     AtcpAuth0CodeCallbackComponent,
     AtcpLoginLandingComponent,
-    AtcpLoginLandingRedesignedComponent
+    AtcpLoginLandingRedesignedComponent,
+    FileUploaderComponent
   ],
   entryComponents: [
     DashBoardComponent,
