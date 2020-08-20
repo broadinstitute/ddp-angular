@@ -48,7 +48,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public isAssetsActivity = false;
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
-  private anchor;
+  private anchor = new CompositeDisposable();
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
               private userActivity: UserActivityServiceAgent,
@@ -80,7 +80,6 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     if (this.anchor) {
       this.anchor.removeAll();
     }
-    this.anchor = new CompositeDisposable();
     const useActivities = new UserActivitiesDataSource(
       this.userActivity,
       this.logger,
