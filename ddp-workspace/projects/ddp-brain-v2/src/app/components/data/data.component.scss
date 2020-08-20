@@ -45,17 +45,19 @@
 }
 
 .snapshots-block {
-    margin: 4rem auto;
+    margin: 4rem auto 1rem auto;
 }
 
 .diagrams {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 3rem;
 }
 
 .diagram {
     max-width: 430px;
+    margin-bottom: 3rem;
 
     &__image {
         max-width: 100%;
@@ -105,7 +107,7 @@
 }
 
 .data-release-block {
-    margin: 6rem auto;
+    margin: 6rem auto 3rem auto;
 }
 
 @media screen and (max-width: 974px) {
@@ -144,14 +146,6 @@
 
     .diagram {
         width: 100%;
-
-        &:first-child {
-            margin-bottom: 2rem;
-        }
-
-        &_data-release {
-            margin-top: 1rem;
-        }
     }
 
     .mailing-list {
