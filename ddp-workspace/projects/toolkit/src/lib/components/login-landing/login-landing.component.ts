@@ -14,6 +14,7 @@ import {
   ConfigurationService,
   WorkflowServiceAgent
 } from 'ddp-sdk';
+import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
 
 @Component({
   selector: 'toolkit-login-landing',
@@ -23,7 +24,7 @@ import {
 })
 export class LoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
-
+  private LOG_SOURCE = 'LoginLandingComponent';
   constructor(
     private router: Router,
     private auth0: Auth0AdapterService,
@@ -31,6 +32,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
     private participantService: GovernedParticipantsServiceAgent,
     private workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
+    private log: LoggingService,
     @Inject('ddp.config') private config: ConfigurationService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
@@ -61,7 +63,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(JSON.stringify(error));
+      this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + JSON.stringify(error));
       if (error.code === 'unauthorized') {
         this.router.navigateByUrl('account-activation-required');
         return;
