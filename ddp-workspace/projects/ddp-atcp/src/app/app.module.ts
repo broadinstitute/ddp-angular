@@ -54,6 +54,8 @@ import {
   AccountActivationRequiredComponent
 } from './components/account-activation/accountActivationRequired';
 
+// import of components prepared for SDK and Toolkit, but currently located in atcp project
+import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -141,7 +143,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ConsoleComponent,
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
-    AccountActivationRequiredComponent
+    AccountActivationRequiredComponent,
+    AtcpAuth0CodeCallbackComponent
   ],
   entryComponents: [
     DashBoardComponent,

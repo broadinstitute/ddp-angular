@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   AuthGuard,
   IrbGuard,
-  BrowserGuard,
-  Auth0CodeCallbackComponent
+  BrowserGuard
 } from 'ddp-sdk';
 
 import {
@@ -30,6 +29,7 @@ import {AccountActivatedComponent} from "./components/account-activation/account
 import {
   AccountActivationRequiredComponent
 } from "./components/account-activation/accountActivationRequired";
+import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 
 const routes: Routes = [
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: RouterResource.Auth,
-    component: Auth0CodeCallbackComponent,
+    component: AtcpAuth0CodeCallbackComponent,
     canActivate: [IrbGuard]
   },
   {
