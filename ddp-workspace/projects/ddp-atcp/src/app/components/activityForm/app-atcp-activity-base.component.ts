@@ -275,18 +275,6 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     this.anchor.addNew(get);
   }
 
-
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.currentActivityService.saveCurrentActivity(null);
-  }
-
-  public navigateToConsole(): void {
-    this.sendLastSectionAnalytics();
-    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    this.router.navigateByUrl('/console');
-  }
-
   public incrementStep(): void {
     const nextIndex = this.nextAvailableSectionIndex();
     if (nextIndex !== -1) {
@@ -302,5 +290,16 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
       }
     }
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.currentActivityService.saveCurrentActivity(null);
+  }
+
+  public navigateToConsole(): void {
+    this.sendLastSectionAnalytics();
+    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
+    this.router.navigateByUrl('/console');
   }
 }
