@@ -226,6 +226,9 @@ import {
               <p translate>SDK.PrivacyPolicy.EU.Text.P33</p>
               <p><span class="Accent" translate>SDK.PrivacyPolicy.EU.Text.P34Bold</span><span translate>SDK.PrivacyPolicy.EU.Text.P35</span>
               </p>
+              <div class="CenterDiv SpacedButtonDiv">
+                <ddp-data-request-button></ddp-data-request-button>
+              </div>
             </section>
           </div>
         </div>
