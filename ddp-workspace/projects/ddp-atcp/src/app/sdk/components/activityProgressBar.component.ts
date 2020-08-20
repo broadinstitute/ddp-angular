@@ -6,7 +6,7 @@ import {
 import {
   ActivityProgressCalculationService
 } from '../services/activityProgressCalculation.service';
-import {Subscription} from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-activity-progress-bar',
@@ -46,10 +46,10 @@ export class ActivityProgressBarComponent implements OnInit {
   constructor(private activityProgressCalculationService: ActivityProgressCalculationService) {}
 
   ngOnInit(): void {
-    const activityProgress = this.activityProgressCalculationService.getProgress().subscribe(x => {
+    const getActivityProgressSubs = this.activityProgressCalculationService.getProgress().subscribe(x => {
       this.progress = x;
     });
-    this.anchor.add(activityProgress);
+    this.anchor.add(getActivityProgressSubs);
   }
 
   public ngOnDestroy(): void {
