@@ -56,7 +56,10 @@ import {
 } from './components/account-activation/accountActivationRequired';
 import { CurrentActivityService } from './sdk/services/currentActivity.service';
 
-
+// import of components prepared for SDK and Toolkit, but currently located in atcp project
+import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
+import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
+import {AtcpLoginLandingRedesignedComponent} from "./toolkit/login/atcp-login-landing-redesigned.component";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -144,7 +147,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
     AccountActivationRequiredComponent,
-    ActivityProgressBarComponent
+    ActivityProgressBarComponent,
+    AtcpAuth0CodeCallbackComponent,
+    AtcpLoginLandingComponent,
+    AtcpLoginLandingRedesignedComponent
   ],
   entryComponents: [
     DashBoardComponent,
