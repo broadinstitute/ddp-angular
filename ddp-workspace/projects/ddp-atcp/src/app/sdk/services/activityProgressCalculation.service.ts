@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
-import { ActivityCodes } from 'ddp-sdk';
+import { ActivityForm, ActivityCodes } from 'ddp-sdk';
 
 @Injectable()
 export class ActivityProgressCalculationService {
@@ -45,7 +44,7 @@ export class ActivityProgressCalculationService {
     this.stepWeights.push(this.lastStepWeight);
   }
 
-  public updateProgress(activity, sectionIndex): void {
+  public updateProgress(activity: ActivityForm, sectionIndex: number): void {
     if (activity.activityCode === this.activityToShowProgress
           && this.shouldUpdate(sectionIndex)) {
       this.sectionIndex = sectionIndex;
@@ -53,7 +52,7 @@ export class ActivityProgressCalculationService {
     }
   }
 
-  private shouldUpdate(sectionIndex): boolean {
+  private shouldUpdate(sectionIndex: number): boolean {
     return sectionIndex > this.sectionIndex;
   }
 
