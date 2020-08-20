@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityServiceAgent, ActivityCodes } from 'ddp-sdk';
-import { ActivityForm } from '../../../../../ddp-sdk/src/lib/models/activity/activityForm';
+import { ActivityServiceAgent, ActivityCodes, ActivityForm } from 'ddp-sdk';
 import { filter, tap } from 'rxjs/operators';
 import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
 
