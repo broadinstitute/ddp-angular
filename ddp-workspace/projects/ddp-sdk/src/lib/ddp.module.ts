@@ -185,6 +185,11 @@ import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAg
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
+// Data Request components
+import { DataRequestButtonComponent } from './components/dataRequest/dataRequestButton.component';
+import { DataRequestModalComponent } from './components/dataRequest/dataRequestModal.component';
+import { DataRequestService } from './services/dataRequest.service';
+
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
   return {
@@ -290,6 +295,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SuggestionServiceAgent,
     IrbPasswordService,
     CookiesManagementService,
+    DataRequestService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
     UserInvitationServiceAgent,
@@ -373,7 +379,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesPreferencesButtonComponent,
     PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
-    PrionPrivacyPolicyComponent
+    PrionPrivacyPolicyComponent,
+    DataRequestButtonComponent,
+    DataRequestModalComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -443,14 +451,17 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesPreferencesButtonComponent,
     PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
-    PrionPrivacyPolicyComponent
+    PrionPrivacyPolicyComponent,
+    DataRequestButtonComponent,
+    DataRequestModalComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
     ManageParticipantsComponent,
     NewRequestMock,
     CookiesPreferencesModalComponent,
-    PrivacyPolicyModalComponent
+    PrivacyPolicyModalComponent,
+    DataRequestModalComponent
   ]
 })
 export class DdpModule { }
