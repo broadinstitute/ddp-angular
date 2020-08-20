@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import {
@@ -35,7 +35,7 @@ import {
     </div>
   `
 })
-export class JoinUsComponent implements OnInit {
+export class JoinUsComponent implements OnInit, OnDestroy {
   public SignIn: string;
   public id: string;
   public studyGuid: string;
@@ -113,5 +113,9 @@ export class JoinUsComponent implements OnInit {
 
   public signIn(): void {
     this.auth0.login();
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 }
