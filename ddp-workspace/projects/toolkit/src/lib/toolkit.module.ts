@@ -186,7 +186,9 @@ import {ServerMessageComponent} from "./components/dialogs/serverMessage.compone
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
     InstagramFeedLightwidgetPluginComponent,
-    TwitterTimelineWidgetComponent
+    TwitterTimelineWidgetComponent,
+    CommonLandingComponent,
+    CommonLandingRedesignedComponent
   ],
   entryComponents: [
     DisclaimerComponent,
