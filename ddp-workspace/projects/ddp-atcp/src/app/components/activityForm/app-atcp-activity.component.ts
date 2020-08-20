@@ -17,6 +17,7 @@ import {
   SubmissionManager,
   ActivityCodes
 } from 'ddp-sdk';
+import {AtcpActivityBaseComponent} from "./app-atcp-activity-base.component";
 
 @Component({
   selector: 'app-atcp-activity',
@@ -295,7 +296,7 @@ import {
       </main>`,
   providers: [SubmitAnnouncementService, SubmissionManager]
 })
-export class AtcpActivityComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AtcpActivityComponent extends AtcpActivityBaseComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() agreeConsent = false;
   @Input() buttonWithArrow = false;
 
