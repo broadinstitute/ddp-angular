@@ -9,6 +9,7 @@ import {
   WindowRef,
 } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
+import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'app-atcp-auth0-code-callback',
@@ -26,7 +27,8 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private windowRef: WindowRef,
-    private router: Router
+    private router: Router,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService
   ) {}
 
   public ngOnInit(): void {
@@ -39,13 +41,8 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
     );
     const authError = this.route.snapshot.queryParams['error'];
     if (authError) {
-      const authErrorDescription = this.route.snapshot.queryParams[
-        'error_description'
-      ];
-      if (JSON.parse(authErrorDescription).code === 'unauthorized') {
-        this.router.navigateByUrl('account-activation-required');
-        return;
-      }
+      this.handleAuthError();
+      return;
     }
     const authCode = this.route.snapshot.queryParams['code'];
 
@@ -124,6 +121,18 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
     const item = sessionStorage.getItem('localAdminAuth') || 'false';
     sessionStorage.removeItem('localAdminAuth');
     return JSON.parse(item);
+  }
+
+  private handleAuthError(): void {
+    const authErrorDescription = this.route.snapshot.queryParams[
+      'error_description'
+      ];
+    this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + authErrorDescription);
+    if (JSON.parse(authErrorDescription).code === 'unauthorized') {
+      this.router.navigateByUrl('account-activation-required');
+      return;
+    }
+    this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 }
 
