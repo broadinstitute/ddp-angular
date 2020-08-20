@@ -21,7 +21,7 @@ export class PrivacyPolicyButtonComponent {
 
   openPolicy(): void {
     this.dialog.open(PrivacyPolicyModalComponent, {
-      width: '740px',
+      width: '800px',
       data: new PrivacyModalData(this.configuration.usePrionPrivacyPolicyTemplate),
       autoFocus: false,
       disableClose: false,
