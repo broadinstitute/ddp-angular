@@ -17,7 +17,7 @@ import {
 
 import {
   ToolkitModule,
-  ToolkitConfigurationService
+  ToolkitConfigurationService, CommunicationService
 } from 'toolkit';
 
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -62,7 +62,8 @@ import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-call
 import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
-import { ServerMessageComponent } from './toolkit/dialogs/serverMessage.component';
+import { PopupMessageComponent } from './toolkit/dialogs/popupMessage.component';
+import { AtcpCommunicationService } from './toolkit/services/communication.service';
 import {MatDialogModule} from "@angular/material/dialog";
 
 const baseElt = document.getElementsByTagName('base');
@@ -158,15 +159,17 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
     FileUploaderComponent,
-    ServerMessageComponent
+    PopupMessageComponent
   ],
   entryComponents: [
     DashBoardComponent,
-    ServerMessageComponent,
+    PopupMessageComponent
   ],
   providers: [
     CurrentActivityService,
     ActivityProgressCalculationService,
+    CommunicationService,
+    AtcpCommunicationService,
     {
       provide: 'ddp.config',
       useValue: config
