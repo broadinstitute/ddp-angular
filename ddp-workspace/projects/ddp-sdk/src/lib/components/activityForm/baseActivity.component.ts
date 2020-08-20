@@ -22,7 +22,6 @@ import {
 } from 'rxjs/operators';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
-import {CurrentActivityService} from "../../services/activity/currentActivity.service";
 
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
@@ -46,13 +45,11 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     // flag to indicate to form to not allow data entry
     public dataEntryDisabled = false;
 
-    private studyGuidObservable: BehaviorSubject<string | null>;
-    private activityGuidObservable: BehaviorSubject<string | null>;
-    private anchor: CompositeDisposable;
+    protected studyGuidObservable: BehaviorSubject<string | null>;
+    protected activityGuidObservable: BehaviorSubject<string | null>;
+    protected anchor: CompositeDisposable;
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
-
-    public currentActivityService: CurrentActivityService;
 
     protected constructor(injector: Injector) {
         this.serviceAgent = injector.get(ActivityServiceAgent);
@@ -60,7 +57,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
         this.config = injector.get('ddp.config');
-        this.currentActivityService = injector.get(CurrentActivityService);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -70,15 +66,14 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
         for (const propName in changes) {
-            if (propName === 'studyGuid' || propName === 'activityGuid') {
-              this.isLoaded = false;
-              this.resetValidationState();
-            }
-            // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
             if (propName === 'studyGuid') {
                 this.studyGuidObservable.next(this.studyGuid);
             } else if (propName === 'activityGuid') {
                 this.activityGuidObservable.next(this.activityGuid);
+            }
+            if (propName === 'studyGuid' || propName === 'activityGuid') {
+                this.isLoaded = false;
+                this.resetValidationState();
             }
         }
     }
@@ -88,18 +83,18 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.currentActivityService
+        const get = this.serviceAgent
             .getActivity(this.studyGuidObservable, this.activityGuidObservable)
             .subscribe(
                 x => {
                     if (!x) {
                         this.model = new ActivityForm();
                     } else {
+                        this.isLoaded = true;
                         this.model = x;
                         this.stickySubtitle.emit(this.model.subtitle);
                         this.activityCode.emit(this.model.activityCode);
                         this.initSteps();
-                        this.isLoaded = true;
                     }
 
                     // combine the latest status updates from the form model
@@ -197,11 +192,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.router.navigateByUrl(this.config.dashboardPageUrl);
     }
 
-    public navigateToConsole(): void {
-      this.router.navigateByUrl('/console');
-    }
-
-    private initSteps(): void {
+    protected initSteps(): void {
         if (!this.model.isSomeSectionVisible()) {
             this.nextWorkflowActivity();
         } else if (this.model.sections.length > 1) {
