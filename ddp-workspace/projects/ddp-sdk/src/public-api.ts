@@ -27,6 +27,7 @@ export * from './lib/models/activity/activityInstitutionBlock';
 export * from './lib/models/activity/MailAddressBlock';
 export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
+export * from './lib/models/activity/activityForm';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
