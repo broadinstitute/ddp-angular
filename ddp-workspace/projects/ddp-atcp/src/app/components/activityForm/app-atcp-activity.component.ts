@@ -9,13 +9,13 @@ import {
   Renderer2
 } from '@angular/core';
 import {
-  ActivityCodes,
   AnalyticsEventsService,
   SubmissionManager,
   SubmitAnnouncementService,
   WindowRef
 } from 'ddp-sdk';
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
+import { ActivityCodes } from '../../sdk/constants/activityCodes';
 
 @Component({
   selector: 'app-atcp-activity',
