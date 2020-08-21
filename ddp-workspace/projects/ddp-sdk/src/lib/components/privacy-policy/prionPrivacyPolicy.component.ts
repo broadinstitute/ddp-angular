@@ -4,7 +4,8 @@ import {
 
 @Component({
   selector: 'prion-privacy-policy',
-  template: `    
+  template: `
+    <section class="PageContent-section">
       <h4 class="Subtitle Color--green" translate>SDK.PrivacyPolicy.Intro.Title</h4>
       <p><span translate>SDK.PrivacyPolicy.Intro.Text.P1</span><span class="Accent Underline" translate>SDK.PrivacyPolicy.Intro.Text.P2BoldUnderline</span><span
         translate>SDK.PrivacyPolicy.Intro.Text.P3</span><span class="Accent Underline" translate>SDK.PrivacyPolicy.Intro.Text.P4BoldUnderline</span><span
@@ -220,6 +221,7 @@ import {
       <p translate>SDK.PrivacyPolicy.EU.Text.P33</p>
       <p><span class="Accent" translate>SDK.PrivacyPolicy.EU.Text.P34Bold</span><span translate>SDK.PrivacyPolicy.EU.Text.P35</span>
       </p>
+    </section>
   `,
 })
 export class PrionPrivacyPolicyComponent {
