@@ -192,8 +192,8 @@ blockquote {
     background: $panache-green;
     border-left: 10px solid $fern-green;
 
-    .server-message-popup {
-      .server-message-popup-header {
+    .popup-message {
+      .popup-message-header {
         .close {
           position: absolute;
           right: 15px;
@@ -204,7 +204,7 @@ blockquote {
           border: 0;
         }
       }
-      .server-message-popup-content {
+      .popup-message-content {
 
       }
     }
@@ -220,8 +220,8 @@ blockquote {
     background: $dawn-pink;
     border-left: 10px solid $matrix-red;
 
-    .server-message-popup {
-      .server-message-popup-header {
+    .popup-message {
+      .popup-message-header {
         .close {
           position: absolute;
           right: 15px;
@@ -232,7 +232,7 @@ blockquote {
           border: 0;
         }
       }
-      .server-message-popup-content {
+      .popup-message-content {
 
       }
     }

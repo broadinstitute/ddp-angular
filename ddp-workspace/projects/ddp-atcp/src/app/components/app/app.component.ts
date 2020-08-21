@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation, isDevMode} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation, isDevMode } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
-import {CommunicationService, JoinMailingListComponent, SessionWillExpireComponent, WarningComponent} from 'toolkit';
+import { JoinMailingListComponent, SessionWillExpireComponent, WarningComponent } from 'toolkit';
 import { Router } from '@angular/router';
 import * as RouterResource from '../../router-resources';
-import {ServerMessageComponent} from "../../../../../toolkit/src/lib/components/dialogs/serverMessage.component";
+import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
+import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 import {environment} from "../../../environments/environment.prod";
 
 @Component({
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private communicationService: CommunicationService,
+    private communicationService: AtcpCommunicationService,
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier) { }
 
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }));
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();
-    this.subscribeToMessagesFromServer();
+    this.subscribeToPopupMessages();
   }
 
   public ngOnDestroy(): void {
@@ -72,9 +73,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.anchor.addNew(modalOpen).addNew(modalClose);
   }
 
-  private subscribeToMessagesFromServer(): void {
-    const modalOpen = this.communicationService.showMessageFromServer$.subscribe(textFromServer => {
-      this.dialog.open(ServerMessageComponent, {
+  private subscribeToPopupMessages(): void {
+    const modalOpen = this.communicationService.showPopupMessage$.subscribe(textFromServer => {
+      this.dialog.open(PopupMessageComponent, {
         id: 'ServerMessage',
         width: '100%',
         position: { top: '0px' },
@@ -86,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
         panelClass: textFromServer.isError ? 'server-error-modal-box' : 'server-modal-box'
       });
     });
-    const modalClose = this.communicationService.closeMessageFromServer$.subscribe(() => {
+    const modalClose = this.communicationService.closePopupMessage$.subscribe(() => {
       this.dialog.getDialogById('ServerMessage').close();
     });
     this.anchor.addNew(modalOpen).addNew(modalClose);
