@@ -1,23 +1,18 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   Inject,
   Injector,
-  OnDestroy,
+  Input, OnDestroy,
   OnInit,
-  Renderer2,
-  Input
+  Renderer2
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import {
-  ActivityComponent,
-  WindowRef,
-  SubmitAnnouncementService,
-  AnalyticsEventsService,
-  SubmissionManager,
-  ActivityCodes
+  ActivityCodes, AnalyticsEventsService,
+  SubmissionManager, SubmitAnnouncementService, WindowRef
 } from 'ddp-sdk';
-import {AtcpActivityBaseComponent} from "./app-atcp-activity-base.component";
+import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 
 @Component({
   selector: 'app-atcp-activity',
