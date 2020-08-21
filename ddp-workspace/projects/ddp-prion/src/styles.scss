@@ -3185,6 +3185,10 @@ p.Medium {
   flex-shrink: 1 !important;
 }
 
+.PrivacyPolicyFull section {
+  padding: 0;
+}
+
 .cookiesBanner {
   display: flex;
   flex-direction: row;
@@ -3344,13 +3348,6 @@ p.Medium {
   }
 }
 
-
-ddp-privacy-policy-modal {
-  section {
-    padding: 0 10px !important;
-  }
-}
-
 ddp-cookies-preferences-modal {
   .mat-tab-group {
     display: flex;
@@ -3434,6 +3431,12 @@ ddp-cookies-preferences-modal {
     .mat-row {
       border-bottom: none;
     }
+  }
+}
+
+ddp-privacy-policy-modal {
+  section {
+    padding: 0 10px !important;
   }
 }
 
