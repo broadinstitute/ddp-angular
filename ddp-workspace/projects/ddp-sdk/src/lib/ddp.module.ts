@@ -24,7 +24,6 @@ import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
 import { LanguageService } from './services/languageService.service';
-import { FileUploaderComponent } from './components/file-uploader.component';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -310,7 +309,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserActivitiesComponent,
     DashboardComponent,
     ChangeLanguageRedirectComponent,
-    FileUploaderComponent,
 
     // activity form
     ActivityComponent,
@@ -422,7 +420,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationPipe,
     TooltipComponent,
     SubjectPanelComponent,
-    FileUploaderComponent
   ],
   entryComponents: [
     UserPreferencesComponent,

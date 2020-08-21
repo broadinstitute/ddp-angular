@@ -45,13 +45,13 @@
         </div>
         <p><b>{{ ('DataAccess.ResearcherForm.Attachment') | translate }} *</b></p>
         <!-- TODO: add translation for buttonText and hintText-->
-        <ddp-file-uploader name="data_access_request[researcher_biosketch]"
-                 (fileChange)="onAttachmentChange($event)"
-                 isRequired="true"
-                 allowedExtensions="application/pdf"
-                 buttonText="Choose file"
-                 hintText="No file chosen"
-        ></ddp-file-uploader>
+        <app-file-uploader name="data_access_request[researcher_biosketch]"
+                           (fileChange)="onAttachmentChange($event)"
+                           isRequired="true"
+                           allowedExtensions="application/pdf"
+                           buttonText="Choose file"
+                           hintText="No file chosen"
+        ></app-file-uploader>
         <span class="error" *ngIf="fileSizeExceedsLimit" translate>
                 DataAccess.Dataset.Messages.FileSizeExceedsTheLimit
               </span>
