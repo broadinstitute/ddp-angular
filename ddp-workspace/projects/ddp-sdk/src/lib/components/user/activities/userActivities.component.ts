@@ -274,8 +274,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public showSummary(activityInstance: ActivityInstance): boolean {
-    if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) &&
-      activityInstance.statusCode === 'CREATED' && activityInstance.activitySummary) {
+    if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary) {
       return true;
     } else {
       return false;
