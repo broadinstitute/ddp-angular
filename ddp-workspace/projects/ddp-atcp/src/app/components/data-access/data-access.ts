@@ -2,13 +2,14 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
 import {DataAccessService} from "../../services/dataAccess.service";
 import { DataAccessParameters } from '../../models/dataAccessParameters';
-import {CommunicationService, ToolkitConfigurationService} from "toolkit";
+import { ToolkitConfigurationService } from "toolkit";
 import {DataAccessServiceAgent} from "../../services/serviceAgents/dataAccessServiceAgent.service";
 import {DataAccessRequestSuccessResult} from "../../models/dataAccessRequestSuccessResult";
 import {DataAccessRequestError} from "../../models/dataAccessRequestError";
 import { of } from "rxjs";
 import {delay, take} from "rxjs/operators";
-import {ServerMessage} from "../../../../../toolkit/src/lib/models/serverMessage";
+import { PopupMessage } from '../../toolkit/models/popupMessage';
+import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 
 @Component({
   selector: 'app-data-access',
@@ -76,28 +77,28 @@ export class DataAccessComponent implements OnInit, OnDestroy {
   }
 
   private showResponse(dataAccessRequestSuccessResult: DataAccessRequestSuccessResult): void {
-    this.communicationService.showMessageFromServer(new ServerMessage(dataAccessRequestSuccessResult.message, false));
+    this.communicationService.showPopupMessage(new PopupMessage(dataAccessRequestSuccessResult.message, false));
     of('')
       .pipe(take(1))
       .pipe(delay(3000))
       .subscribe(() => {
-      this.communicationService.closeMessageFromServer();
+      this.communicationService.closePopupMessage();
     });
   }
 
   private showError(error: DataAccessRequestError): void {
-    this.communicationService.showMessageFromServer(new ServerMessage(error.text, true));
+    this.communicationService.showPopupMessage(new PopupMessage(error.text, true));
     of('')
       .pipe(take(1))
       .pipe(delay(3000))
       .subscribe(() => {
-      this.communicationService.closeMessageFromServer();
+      this.communicationService.closePopupMessage();
     });
   }
 
   constructor(private ngxTranslate: NGXTranslateService,
               private dataAccessService: DataAccessService,
-              private communicationService: CommunicationService,
+              private communicationService: AtcpCommunicationService,
               @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
   }
 
