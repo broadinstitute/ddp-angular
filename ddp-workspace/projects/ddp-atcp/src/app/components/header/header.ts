@@ -5,7 +5,6 @@ import {
   NGXTranslateService,
   SessionMementoService,
   UserProfileDecorator,
-  ActivityCodes
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
@@ -13,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
 import { take } from 'rxjs/operators';
+import { ActivityCodes } from '../../sdk/constants/activityCodes';
 
 @Component({
   selector: 'app-header',

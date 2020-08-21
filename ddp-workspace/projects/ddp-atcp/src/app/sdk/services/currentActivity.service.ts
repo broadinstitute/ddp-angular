@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityServiceAgent, ActivityCodes, ActivityForm } from 'ddp-sdk';
+import { ActivityServiceAgent, ActivityForm } from 'ddp-sdk';
 import { filter, tap } from 'rxjs/operators';
 import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
+import { ActivityCodes } from '../constants/activityCodes';
 
 @Injectable()
 export class CurrentActivityService {
