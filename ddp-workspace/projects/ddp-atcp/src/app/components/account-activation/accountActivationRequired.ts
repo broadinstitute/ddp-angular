@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Auth0AdapterService, CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
-import { CommunicationService } from 'toolkit';
-import { ServerMessage } from '../../../../../toolkit/src/lib/models/serverMessage';
+import { PopupMessage } from '../../toolkit/models/popupMessage';
+import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 
 @Component({
     selector: 'app-account-activation-required',
@@ -16,14 +16,14 @@ export class AccountActivationRequiredComponent implements OnInit, OnDestroy {
         private httpClient: HttpClient,
         private route: ActivatedRoute,
         private auth0: Auth0AdapterService,
-        private communicationService: CommunicationService,
+        private communicationService: AtcpCommunicationService,
         private ngxTranslate: NGXTranslateService) { }
 
     public ngOnInit(): void {
      this.anchor.addNew(this.ngxTranslate.getTranslation('AccountActivation.AccountActivationRequired')
         .subscribe((translationResult: string) => {
             this.communicationService
-              .showMessageFromServer(new ServerMessage(translationResult,
+              .showPopupMessage(new PopupMessage(translationResult,
                 true));
         }));
     }
