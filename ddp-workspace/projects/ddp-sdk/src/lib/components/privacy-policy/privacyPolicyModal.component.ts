@@ -15,9 +15,7 @@ import { PrivacyModalData } from '../../models/privacyModalData';
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>
     <div *ngIf="data.usePrionTemplate" class="mat-dialog-content">
-      <section class="PageContent-section">
       <prion-privacy-policy></prion-privacy-policy>
-      </section>
     </div>
     <div *ngIf="!data.usePrionTemplate">
       <p>Please specify your template here...</p>
