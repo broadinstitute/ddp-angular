@@ -132,7 +132,7 @@ export class AddressInputService implements OnDestroy {
       // todo maybe some way to introduce derived updates and make it so state is updated atomically?
       this.addressForm.valueChanges.pipe(
         distinctUntilChanged((x, y) => _.isEqual(x, y)),
-        concatMap((formValue) => {
+        switchMap((formValue) => {
           return of(formValue['country']).pipe(
             cachingCountryInfoOp,
             map(countryInfo => ({ country: countryInfo ? countryInfo.code : '', countryInfo })),
@@ -147,7 +147,7 @@ export class AddressInputService implements OnDestroy {
 
       this.inputAddress$.pipe(
         filter(address => !!address),
-        concatMap((address) => {
+        switchMap((address) => {
           return of(address['country']).pipe(
             cachingCountryInfoOp,
             map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
