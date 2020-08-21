@@ -1,70 +1,55 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as RouterResource from './router-resources';
-import { AppRoutingModule } from './app-routing.module';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import {
-  DdpModule,
-  LogLevel,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent,
-} from 'ddp-sdk';
-
-import {
-  ToolkitModule,
-  ToolkitConfigurationService, CommunicationService
-} from 'toolkit';
-
+import { MatMenuModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-
-import { WelcomeComponent } from './components/welcome/welcome';
-import { AppComponent } from './components/app/app.component';
-import { FooterComponent } from './components/footer/footer';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule,
+  LogLevel
+} from 'ddp-sdk';
+import { CommunicationService, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
+import { AppRoutingModule } from './app-routing.module';
+import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { AboutUsComponent } from './components/about-us/about-us';
-import { HeaderComponent } from './components/header/header';
+import { AccountActivatedComponent } from './components/account-activation/accountActivated';
+import { AccountActivationRequiredComponent } from './components/account-activation/accountActivationRequired';
 import { AtcpActivityBaseComponent } from './components/activityForm/app-atcp-activity-base.component';
 import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
-import { MatMenuModule } from '@angular/material';
-import { Language, LanguagesProvider, LanguagesToken} from './providers/languages.provider';
-import { JoinUsComponent } from './components/join-us/join-us';
-import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
-import { DataAccessComponent } from './components/data-access/data-access';
+import { AppComponent } from './components/app/app.component';
+import { ConsoleComponent } from './components/console/console';
 import { DashBoardComponent } from './components/dashboard/dashboard';
-import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
-import { StatisticsComponent } from './components/statistics/statistics';
-import { ProgressBarComponent } from './components/progress-bar/progress-bar';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {ConsoleComponent} from "./components/console/console";
-import {MatTableModule} from "@angular/material/table";
-import {UserPreferencesServiceAgent} from "./services/serviceAgents/userPreferencesServiceAgent";
+import { DataAccessComponent } from './components/data-access/data-access';
+import { FooterComponent } from './components/footer/footer';
+import { HeaderComponent } from './components/header/header';
+import { JoinUsComponent } from './components/join-us/join-us';
 import { ExtractTranslationPathsForArrayPipe } from './components/Pipes/extractTranslationPathsForArrayPipe';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { ActivityProgressBarComponent } from './sdk/components/activityProgressBar.component';
-import { ActivityProgressCalculationService } from './sdk/services/activityProgressCalculation.service';
-import {
-  AccountActivatedComponent,
-} from './components/account-activation/accountActivated';
-import {
-  AccountActivationRequiredComponent
-} from './components/account-activation/accountActivationRequired';
-import { CurrentActivityService } from './sdk/services/currentActivity.service';
-import { MatButtonModule } from '@angular/material/button';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar';
+import { StatisticsComponent } from './components/statistics/statistics';
+import { WelcomeComponent } from './components/welcome/welcome';
+import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
+import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
+import * as RouterResource from './router-resources';
+import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
-import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
-import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
-import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
+import { ActivityProgressBarComponent } from './sdk/components/activityProgressBar.component';
+import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
+import { ActivityProgressCalculationService } from './sdk/services/activityProgressCalculation.service';
+import { CurrentActivityService } from './sdk/services/currentActivity.service';
 import { PopupMessageComponent } from './toolkit/dialogs/popupMessage.component';
+import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
+import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
 import { AtcpCommunicationService } from './toolkit/services/communication.service';
-import {MatDialogModule} from "@angular/material/dialog";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -96,7 +81,7 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
-config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode: "en";
+config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode : 'en';
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {

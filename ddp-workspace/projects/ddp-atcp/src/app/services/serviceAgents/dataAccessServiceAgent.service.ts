@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {LoggingService, ConfigurationService, LanguageService} from 'ddp-sdk';
+import { LoggingService, ConfigurationService, LanguageService } from 'ddp-sdk';
 import { ServiceAgent } from 'projects/ddp-sdk/src/lib/services/serviceAgents/serviceAgent.service';
-import {DataAccessParameters} from "../../models/dataAccessParameters";
+import { DataAccessParameters } from '../../models/dataAccessParameters';
 
 @Injectable()
 export class DataAccessServiceAgent extends ServiceAgent<any> {
@@ -15,7 +15,10 @@ export class DataAccessServiceAgent extends ServiceAgent<any> {
     super(configuration, http, logger, language);
   }
 
-  public createNewDataAccessRequest(dataAccessParameters: DataAccessParameters, researcher_biosketch: File, studyGuid: string): Observable<any> {
+  public createNewDataAccessRequest(
+      dataAccessParameters: DataAccessParameters,
+      researcher_biosketch: File,
+      studyGuid: string): Observable<any> {
     const dataAccessParametersJson = JSON.stringify(dataAccessParameters);
     const formData = new FormData();
     formData.append('dataAccessParameters', dataAccessParametersJson);

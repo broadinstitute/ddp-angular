@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import {
   AuthGuard,
-  IrbGuard,
-  BrowserGuard
-} from 'ddp-sdk';
 
+  BrowserGuard, IrbGuard
+} from 'ddp-sdk';
 import {
   ErrorRedesignedComponent,
   PasswordRedesignedComponent,
@@ -14,20 +12,17 @@ import {
   RedirectToLoginLandingRedesignedComponent,
   SessionExpiredRedesignedComponent
 } from 'toolkit';
-import * as RouterResource from './router-resources';
-
-import { WelcomeComponent } from './components/welcome/welcome';
-import { AboutUsComponent } from './components/about-us/about-us';
-import { JoinUsComponent } from './components/join-us/join-us';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
-import { DataAccessComponent } from './components/data-access/data-access';
+import { AboutUsComponent } from './components/about-us/about-us';
+import { AccountActivatedComponent } from './components/account-activation/accountActivated';
+import { AccountActivationRequiredComponent } from './components/account-activation/accountActivationRequired';
+import { ConsoleComponent } from './components/console/console';
 import { DashBoardComponent } from './components/dashboard/dashboard';
+import { DataAccessComponent } from './components/data-access/data-access';
+import { JoinUsComponent } from './components/join-us/join-us';
 import { StatisticsComponent } from './components/statistics/statistics';
-import { ConsoleComponent } from "./components/console/console";
-import {AccountActivatedComponent} from "./components/account-activation/accountActivated";
-import {
-  AccountActivationRequiredComponent
-} from "./components/account-activation/accountActivationRequired";
+import { WelcomeComponent } from './components/welcome/welcome';
+import * as RouterResource from './router-resources';
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 
