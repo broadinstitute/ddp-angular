@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { UserActivitiesDataSource } from '../../../../../ddp-sdk/src/lib/components/user/activities/userActivitiesDataSource';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   ActivityInstance,
@@ -8,7 +7,9 @@ import {
   LoggingService,
   UserActivityServiceAgent,
   UserProfileDecorator,
-  UserProfileServiceAgent, WindowRef
+  UserProfileServiceAgent,
+  WindowRef,
+  UserActivitiesDataSource
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 

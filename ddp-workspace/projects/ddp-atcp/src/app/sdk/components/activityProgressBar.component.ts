@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import {
   ActivityProgressCalculationService
@@ -38,7 +39,7 @@ import { Subscription } from 'rxjs';
     }
   `]
 })
-export class ActivityProgressBarComponent implements OnInit {
+export class ActivityProgressBarComponent implements OnInit, OnDestroy {
   private anchor: Subscription = new Subscription();
   @Input() title: string;
   progress: number;

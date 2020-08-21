@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DataAccessRequestSuccessResult } from '../models/dataAccessRequestSuccessResult';
 import { DataAccessRequestError } from '../models/dataAccessRequestError';
-import {DataAccessParameters} from "../models/dataAccessParameters";
+import { DataAccessParameters } from '../models/dataAccessParameters';
 
 @Injectable()
 export class DataAccessService {
