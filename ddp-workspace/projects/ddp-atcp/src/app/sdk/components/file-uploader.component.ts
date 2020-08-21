@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'ddp-file-uploader',
+  selector: 'app-file-uploader',
   template: `
     <div>
       <input #fileInput
