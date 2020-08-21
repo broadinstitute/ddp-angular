@@ -9,8 +9,11 @@ import {
   Renderer2
 } from '@angular/core';
 import {
-  ActivityCodes, AnalyticsEventsService,
-  SubmissionManager, SubmitAnnouncementService, WindowRef
+  ActivityCodes,
+  AnalyticsEventsService,
+  SubmissionManager,
+  SubmitAnnouncementService,
+  WindowRef
 } from 'ddp-sdk';
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 
