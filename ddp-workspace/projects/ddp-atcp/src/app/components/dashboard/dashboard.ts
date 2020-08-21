@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { UserActivitiesDataSource } from '../../../../../ddp-sdk/src/lib/components/user/activities/userActivitiesDataSource';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   ActivityInstance,
   ActivityResponse,
@@ -49,6 +49,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
   private anchor = new CompositeDisposable();
+  private getUserActivitiesSubs = new Subscription();
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
               private userActivity: UserActivityServiceAgent,
@@ -77,10 +78,10 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   }
 
   private getSteps(): void {
-    if (this.anchor) {
-      this.anchor.removeAll();
+    if (this.getUserActivitiesSubs) {
+      this.getUserActivitiesSubs.unsubscribe();
     }
-    const useActivities = new UserActivitiesDataSource(
+    this.getUserActivitiesSubs = new UserActivitiesDataSource(
       this.userActivity,
       this.logger,
       this.studyGuidObservable)
@@ -103,7 +104,6 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         }
         this.updateInstanceGuid(this.steps[currentActivityIndex]);
       });
-    this.anchor.addNew(useActivities);
   }
 
   public ngOnInit(): void {
@@ -125,6 +125,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.getUserActivitiesSubs.unsubscribe();
     this.anchor.removeAll();
   }
 }
