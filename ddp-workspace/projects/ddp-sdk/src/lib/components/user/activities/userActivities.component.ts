@@ -75,7 +75,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
                   class="padding-5"
                   [attr.data-ddp-test]="'activityStatus::' + element.instanceGuid">
             <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
-            <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_message': showSummary(element)}">
+            <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">
               <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
               <ng-container *ngIf="showQuestionCount(element)">
                 {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered': element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}

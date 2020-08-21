@@ -74,7 +74,7 @@
     .mat-header-cell,
     .dashboard-mobile-label {
         font-size: 1.125rem !important;
-        line-height: 1.75rem !important;
+        line-height: 1.5625rem !important;
     }
 
     .mat-header-cell:first-of-type,
@@ -107,7 +107,7 @@
             padding: 0 8px 0 0;
         }
 
-        &_message {
+        &_summary {
             align-items: end !important;
         }
     }
