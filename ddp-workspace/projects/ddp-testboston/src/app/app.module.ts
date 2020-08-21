@@ -97,11 +97,11 @@ sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
+sdkConfig.dashboardSummaryInsteadOfStatus = ['ADHOC_SYMPTOM'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 sdkConfig.scrollToErrorOffset = 130;
-sdkConfig.dashboardSummaryInsteadOfStatus = ['ADHOC_SYMPTOM'];
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
