@@ -1,13 +1,13 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
-import {DataAccessService} from "../../services/dataAccess.service";
+import { of } from 'rxjs';
+import { delay, take } from 'rxjs/operators';
+import { ToolkitConfigurationService } from 'toolkit';
 import { DataAccessParameters } from '../../models/dataAccessParameters';
-import { ToolkitConfigurationService } from "toolkit";
-import {DataAccessServiceAgent} from "../../services/serviceAgents/dataAccessServiceAgent.service";
-import {DataAccessRequestSuccessResult} from "../../models/dataAccessRequestSuccessResult";
-import {DataAccessRequestError} from "../../models/dataAccessRequestError";
-import { of } from "rxjs";
-import {delay, take} from "rxjs/operators";
+import { DataAccessRequestError } from '../../models/dataAccessRequestError';
+import { DataAccessRequestSuccessResult } from '../../models/dataAccessRequestSuccessResult';
+import { DataAccessService } from '../../services/dataAccess.service';
+import { DataAccessServiceAgent } from '../../services/serviceAgents/dataAccessServiceAgent.service';
 import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 

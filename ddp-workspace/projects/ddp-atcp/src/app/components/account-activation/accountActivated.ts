@@ -1,7 +1,7 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { Auth0AdapterService, CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
+import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
 import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { delay } from 'rxjs/operators';
 import { ToolkitConfigurationService } from 'toolkit';
@@ -15,8 +15,6 @@ export class AccountActivatedComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
 
   constructor(
-        private route: ActivatedRoute,
-        private auth0: Auth0AdapterService,
         private communicationService: AtcpCommunicationService,
         private ngxTranslate: NGXTranslateService,
         private router: Router,
