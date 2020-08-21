@@ -370,7 +370,6 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   public touchAllControls(): void {
     _.values(this.ais.addressForm.controls).forEach((control: FormControl) =>
         control.markAsTouched({ onlySelf: true }));
-    console.log('all controls touched');
   }
 
   public get disableAutofill(): string {
