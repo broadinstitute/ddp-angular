@@ -1,13 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation, isDevMode } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
-import { JoinMailingListComponent, SessionWillExpireComponent, WarningComponent } from 'toolkit';
+import { Component, isDevMode, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
+import { JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 import * as RouterResource from '../../router-resources';
 import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
-import {environment} from "../../../environments/environment.prod";
 
 @Component({
   selector: 'app-root',

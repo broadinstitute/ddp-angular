@@ -7,9 +7,9 @@ import {
   UserProfile,
   SessionMementoService,
   UserProfileDecorator,
-  LanguageService
+  LanguageService,
+  UserServiceAgent
 } from 'ddp-sdk';
-import { UserServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/userServiceAgent.service';
 import { catchError, filter, first, map } from 'rxjs/operators';
 
 
