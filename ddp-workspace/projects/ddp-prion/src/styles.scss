@@ -3185,6 +3185,10 @@ p.Medium {
   flex-shrink: 1 !important;
 }
 
+.PrivacyPolicyFull section {
+  padding: 0;
+}
+
 .cookiesBanner {
   display: flex;
   flex-direction: row;
@@ -3257,7 +3261,7 @@ p.Medium {
   }
 }
 
-.cookiesModal {
+.cookiesModal, .privacyModal {
   &--header {
     display: flex;
     flex-direction: row;
@@ -3430,8 +3434,14 @@ ddp-cookies-preferences-modal {
   }
 }
 
+ddp-privacy-policy-modal {
+  section {
+    padding: 0 10px !important;
+  }
+}
+
 @media only screen and (max-width: 1026px) {
-  .cookiesModal {
+  .cookiesModal, .privacyModal {
     &--logo {
       width: 186px;
     }
@@ -3439,7 +3449,7 @@ ddp-cookies-preferences-modal {
 }
 
 @media only screen and (max-width: 767px) {
-  .cookiesModal {
+  .cookiesModal, .privacyModal {
     &--header {
       position: relative;
       flex-direction: column;
@@ -3503,7 +3513,7 @@ ddp-cookies-preferences-modal {
 }
 
 @media only screen and (max-width: 450px) {
-  .cookiesModal {
+  .cookiesModal, .privacyModal {
     &--tabHeader,
     &--actions {
       flex-direction: column;
@@ -3549,6 +3559,10 @@ ddp-privacy-policy-modal {
     .col-lg-8, .col-md-10, .col-sm-12, .col-xs-12 {
       width: 100%;
     }
+  }
+
+  .mat-dialog-content {
+    border-top: 1px grey solid;
   }
 }
 
