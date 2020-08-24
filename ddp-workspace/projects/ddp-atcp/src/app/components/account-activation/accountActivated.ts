@@ -1,10 +1,9 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
+import { Auth0AdapterService, CompositeDisposable, NGXTranslateService, SessionMementoService } from 'ddp-sdk';
 import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { delay } from 'rxjs/operators';
-import { ToolkitConfigurationService } from 'toolkit';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 @Component({
     selector: 'app-account-activation',
@@ -18,7 +17,8 @@ export class AccountActivatedComponent implements OnInit, OnDestroy {
         private communicationService: AtcpCommunicationService,
         private ngxTranslate: NGXTranslateService,
         private router: Router,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+        private session: SessionMementoService,
+        private auth0: Auth0AdapterService) { }
 
     public ngOnInit(): void {
       this.anchor.addNew(this.ngxTranslate.getTranslation('AccountActivation.EmailConfirmed')
@@ -28,7 +28,12 @@ export class AccountActivatedComponent implements OnInit, OnDestroy {
             false));
           of('').pipe(delay(4000)).toPromise().then(() => {
             this.communicationService.closePopupMessage();
-            this.router.navigateByUrl(this.toolkitConfiguration.dashboardUrl);
+
+            const additionalParams = {};
+            if (this.session.isTemporarySession()) {
+              additionalParams['temp_user_guid'] = this.session.session.userGuid;
+            }
+            this.auth0.login(additionalParams);
           });
       }));
     }
