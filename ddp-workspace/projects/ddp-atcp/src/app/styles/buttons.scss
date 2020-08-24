@@ -91,6 +91,7 @@
 }
 
 .button_new-item {
+  @include bg-blue($important: '!important');
   font-size: 1.25rem;
 }
 
