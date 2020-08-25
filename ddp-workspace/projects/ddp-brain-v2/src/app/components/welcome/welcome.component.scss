@@ -153,21 +153,6 @@
     background-color: mat-color($app-theme, 650);
 }
 
-.learn-more-block {
-    margin: 3rem auto;
-}
-
-.learn-more {
-    display: flex;
-    align-items: center;
-
-    &__text {
-        font-size: 1.5rem;
-        line-height: 2rem;
-        margin-right: 7rem;
-    }
-}
-
 .partners-section {
     background-color: mat-color($app-theme, 500);
 }
@@ -326,15 +311,6 @@
         width: 100%;
         padding: 0;
         margin: 2rem 0 0 0;
-    }
-
-    .learn-more {
-        flex-direction: column;
-        align-items: flex-start;
-
-        &__text {
-            margin-right: 0;
-        }
     }
 
     .partners {
