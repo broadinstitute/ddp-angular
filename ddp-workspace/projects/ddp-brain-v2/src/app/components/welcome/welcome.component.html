@@ -39,7 +39,7 @@
                     <p translate>HomePage.About.Text2</p>
                     <a class="about__cmi" [href]="cmiUrl" target="_blank">
                         <img lazy-resource src="assets/images/logo-count-me-in.svg"
-                            [alt]="'HomePage.About.CMIAlt' | translate">
+                            [alt]="'Common.Alts.CMI' | translate">
                     </a>
                     <p>
                         <span translate>HomePage.About.Text3.Part1</span>
@@ -75,15 +75,7 @@
         </div>
     </section>
     <section class="section learn-more-section">
-        <div class="content content_wide learn-more-block">
-            <div class="learn-more">
-                <p class="learn-more__text" translate>HomePage.LearnMore.Text</p>
-                <a [routerLink]="'/' + appRoutes.MoreDetails"
-                    class="button button_medium button_secondary button_learn-more" translate>
-                    Common.Buttons.ViewFAQ
-                </a>
-            </div>
-        </div>
+        <app-learn-more-section></app-learn-more-section>
     </section>
     <section class="section partners-section">
         <div class="content content_wide partners-block">

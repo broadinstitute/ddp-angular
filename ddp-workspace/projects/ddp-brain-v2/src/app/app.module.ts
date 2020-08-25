@@ -27,6 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LearnMoreSectionComponent } from './components/learn-more-section/learn-more-section.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -101,7 +103,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HeaderComponent,
     FooterComponent,
     FaqComponent,
-    DataComponent
+    DataComponent,
+    AboutUsComponent,
+    LearnMoreSectionComponent
   ],
   imports: [
     BrowserModule,
