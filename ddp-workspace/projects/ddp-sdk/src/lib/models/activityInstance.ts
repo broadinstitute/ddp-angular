@@ -13,4 +13,5 @@ export interface ActivityInstance {
     readonly: boolean;
     numQuestions: number;
     numQuestionsAnswered: number;
+    excludeFromDisplay: boolean | null;
 }

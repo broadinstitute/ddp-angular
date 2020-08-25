@@ -150,7 +150,11 @@ import {
       <h4 class="Subtitle Color--green" translate>SDK.PrivacyPolicy.InformationRights.Title</h4>
       <p translate>SDK.PrivacyPolicy.InformationRights.Text.P1</p>
       <div class="CenterDiv SpacedButtonDiv">
-        <button translate>SDK.PrivacyPolicy.DataRequest</button>
+        <ddp-activity-in-modal-button
+          activityGuid="PRIONREQUEST"
+          modalName="dataRequest"
+          disabledTooltip="SDK.DataRequest.SignInTooltip"
+          text="SDK.DataRequest.DataRequest"></ddp-activity-in-modal-button>
       </div>
       <p translate>SDK.PrivacyPolicy.InformationRights.Text.P2</p>
       <h4 class="Subtitle Color--green" translate>SDK.PrivacyPolicy.Security.Title</h4>

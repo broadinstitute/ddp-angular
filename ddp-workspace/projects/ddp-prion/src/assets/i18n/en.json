@@ -541,6 +541,12 @@
         "persistent": "persistent"
       }
     },
+    "DataRequest": {
+      "DataRequest": "Data Request",
+      "SubmitRequest": "Submit Request",
+      "Okay": "Okay",
+      "SignInTooltip": "Please sign in to start a data access request"
+    },
     "PrivacyPolicy": {
       "Title": "Prion Registry Privacy Statement",
       "Intro": {

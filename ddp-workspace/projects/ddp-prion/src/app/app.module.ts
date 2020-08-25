@@ -79,6 +79,7 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.usePrionPrivacyPolicyTemplate = true;
+config.errorPageUrl = 'error';
 config.cookies = {
   cookies: [
     {

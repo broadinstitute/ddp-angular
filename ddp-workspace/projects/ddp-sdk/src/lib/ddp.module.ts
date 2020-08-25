@@ -184,6 +184,9 @@ import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedi
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+import { DataRequestModalComponent } from './components/dataRequest/dataRequestModal.component';
+import { NewActivityInModalComponent } from './components/activityForm/newActivityInModal/newActivityInModal.component';
+import { NewActivityInModalButtonComponent } from './components/activityForm/newActivityInModal/newActivityInModalButton.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -373,7 +376,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CookiesPreferencesButtonComponent,
     PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
-    PrionPrivacyPolicyComponent
+    PrionPrivacyPolicyComponent,
+
+    NewActivityInModalButtonComponent,
+    DataRequestModalComponent,
+    NewActivityInModalComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -450,7 +457,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ManageParticipantsComponent,
     NewRequestMock,
     CookiesPreferencesModalComponent,
-    PrivacyPolicyModalComponent
+    PrivacyPolicyModalComponent,
+    NewActivityInModalComponent
   ]
 })
 export class DdpModule { }

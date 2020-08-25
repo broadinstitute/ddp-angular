@@ -22,6 +22,7 @@ export class UserActivitiesDataSource extends DataSource<ActivityInstance> {
 
     public connect(): Observable<Array<ActivityInstance>> {
         return this.serviceAgent.getActivities(this.study).pipe(
+            map(x => x.filter(activity => activity.excludeFromDisplay !== true)),
             map(x => {
                 if (x == null) {
                     return new Array<ActivityInstance>();
