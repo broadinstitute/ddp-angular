@@ -3628,6 +3628,11 @@ app-third-party {
 
   &--request {
     padding: 0 40px;
+
+    textarea.mat-input-element {
+      border: 1px solid lightgray;
+      padding: 15px;
+    }
   }
 
   &--requestSubmitted {
