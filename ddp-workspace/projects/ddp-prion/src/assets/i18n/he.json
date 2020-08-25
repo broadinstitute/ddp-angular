@@ -542,6 +542,12 @@
         "persistent": "he: persistent"
       }
     },
+    "DataRequest": {
+      "DataRequest": "he: Data Request",
+      "SubmitRequest": "he: Submit Request",
+      "Okay": "he: Okay",
+      "SignInTooltip": "he: Please sign in to start a data access request"
+    },
     "PrivacyPolicy": {
       "Title": "he: Prion Registry Privacy Statement",
       "Intro": {
