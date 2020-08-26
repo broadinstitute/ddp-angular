@@ -47,6 +47,7 @@ export * from './lib/models/invitationType';
 export * from './lib/models/activity/questionType';
 
 export * from './lib/services/logging.service';
+export * from './lib/services/serviceAgents/serviceAgent.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
 export * from './lib/services/serviceAgents/activityServiceAgent.service';
 export * from './lib/services/browserContent.service';

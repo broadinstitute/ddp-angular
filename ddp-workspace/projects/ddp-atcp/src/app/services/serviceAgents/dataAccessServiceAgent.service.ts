@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoggingService, ConfigurationService, LanguageService } from 'ddp-sdk';
-import { ServiceAgent } from 'projects/ddp-sdk/src/lib/services/serviceAgents/serviceAgent.service';
+import { LoggingService, ConfigurationService, LanguageService, ServiceAgent } from 'ddp-sdk';
 import { DataAccessParameters } from '../../models/dataAccessParameters';
 
 @Injectable()
