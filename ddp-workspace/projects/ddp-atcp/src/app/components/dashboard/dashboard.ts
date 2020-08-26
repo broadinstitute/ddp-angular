@@ -98,7 +98,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
           //  TODO: temporary code instead line 92 until "personal information" will be implemented
           currentActivityIndex !== -1
             ? data[currentActivityIndex].statusCode = IN_PROGRESS
-            : currentActivityIndex = 6;
+            : currentActivityIndex = 0;
         }
         if (currentActivityIndex === -1) {
           currentActivityIndex = data.length - 1;
