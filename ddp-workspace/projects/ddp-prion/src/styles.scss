@@ -3633,6 +3633,11 @@ app-third-party {
       border: 1px solid lightgray;
       padding: 15px;
     }
+
+    .mat-dialog-content {
+      margin: 0;
+      padding: 0 0 0 15px;
+    }
   }
 
   &--requestSubmitted {
