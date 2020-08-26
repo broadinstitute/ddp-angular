@@ -225,6 +225,13 @@ import {
       <p translate>SDK.PrivacyPolicy.EU.Text.P33</p>
       <p><span class="Accent" translate>SDK.PrivacyPolicy.EU.Text.P34Bold</span><span translate>SDK.PrivacyPolicy.EU.Text.P35</span>
       </p>
+      <div class="CenterDiv SpacedButtonDiv">
+        <ddp-activity-in-modal-button
+          activityGuid="PRIONREQUEST"
+          modalName="DataRequestModalComponent"
+          disabledTooltip="SDK.DataRequest.SignInTooltip"
+          text="SDK.DataRequest.DataRequest"></ddp-activity-in-modal-button>
+      </div>
     </section>
   `,
 })
