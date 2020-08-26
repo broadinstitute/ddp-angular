@@ -13,7 +13,8 @@ import {
   LoginLandingRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
   WorkflowStartActivityRedesignedComponent,
-  PasswordRedesignedComponent
+  PasswordRedesignedComponent,
+  ErrorRedesignedComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -103,6 +104,13 @@ const routes: Routes = [
   {
     path: 'count-me-in',
     component: WorkflowStartActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Error,
+    component: ErrorRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
