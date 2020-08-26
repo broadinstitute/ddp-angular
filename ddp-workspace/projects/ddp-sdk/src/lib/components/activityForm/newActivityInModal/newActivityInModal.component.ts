@@ -8,7 +8,6 @@ import { ActivityInstanceGuid } from '../../../models/activityInstanceGuid';
 import { Observable, Subject  } from 'rxjs';
 import { map, share, takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DataRequestModalComponent } from '../../dataRequest/dataRequestModal.component';
 
 @Component({
   selector: 'ddp-new-activity-in-modal',
