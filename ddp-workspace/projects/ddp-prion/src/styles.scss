@@ -43,6 +43,7 @@ h3.Subtitle {
     line-height: 1.8rem;
     font-weight: 500;
     padding-top: 5px;
+    color: #717174;
 }
 
 h4.Subtitle {
@@ -57,6 +58,10 @@ p {
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 400 !important;
+}
+
+.StandardCaps {
+  text-transform: none !important;
 }
 
 .LegalAgePrompt {
@@ -972,14 +977,6 @@ button.Footer-link {
     max-width: 1200px !important;
 }
 
-.NoTopMargin {
-    margin-top: 0
-}
-
-.LeftNegMargin {
-    margin-left: -15px !important;
-}
-
 .WIRB {
     font-size: 0.8rem !important;
 }
@@ -1755,7 +1752,7 @@ ul {
      padding: 0 0 0 0;
      text-align: center;
      cursor: pointer;
-     width: calc(100% / 6);
+     width: calc(100% / 7);
  }
 
 .WizardSteps-background {
@@ -2080,7 +2077,7 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
     p {
         font-size: 1rem;
         line-height: 1.5rem;
-        font-weight: 400 !important;
+        font-weight: 400;
         color: mat-color($app-theme, 1700);
     }
 
@@ -2846,8 +2843,68 @@ p.ddp-helper {
     margin-bottom: 0 !important;
 }
 
+.NoTopMargin {
+  margin-top: 0
+}
+
+.LeftNegMargin {
+  margin-left: -15px !important;
+}
+
+.TopMargin10 {
+  width: 100%;
+  margin: 10px 0 0 0 !important;
+}
+
+.TopMargin20 {
+  width: 100%;
+  margin: 20px 0 0 0 !important;
+}
+
+.TopMargin30 {
+  width: 100%;
+  margin: 30px 0 0 0 !important;
+}
+
+.TopMargin40 {
+  width: 100%;
+  margin: 40px 0 0 0;
+}
+
+.BottomMargin10 {
+  margin-bottom: 10px !important;
+}
+
+.Margin10 {
+  margin-top: 10px;
+}
+
+.Margin20 {
+  margin-top: 20px;
+}
+
+.Margin30 {
+  margin-top: 30px;
+}
+
 .NoPadding {
-    padding: 0 !important;
+  padding: 0 !important;
+}
+
+.TopPadding10 {
+  padding-top: 10px !important;
+}
+
+.TopPadding20 {
+  padding-top: 20px !important;
+}
+
+.NoTopPadding {
+  padding-top: 0 !important;
+}
+
+.NoBottomPadding {
+  padding-bottom: 0 !important;
 }
 
 .Float--left {
@@ -2977,46 +3034,6 @@ p.Medium {
     text-align: center;
     display: block;
     width: 100%;
-}
-
-.TopPadding10 {
-  padding-top: 10px !important;
-}
-
-.TopMargin10 {
-    width: 100%;
-    margin: 10px 0 0 0 !important;
-}
-
-.TopMargin20 {
-    width: 100%;
-    margin: 20px 0 0 0 !important;
-}
-
-.TopMargin30 {
-    width: 100%;
-    margin: 30px 0 0 0 !important;
-}
-
-.TopMargin40 {
-    width: 100%;
-    margin: 40px 0 0 0;
-}
-
-.BottomMargin10 {
-  margin-bottom: 10px !important;
-}
-
-.Margin10 {
-    margin-top: 10px;
-}
-
-.Margin20 {
-    margin-top: 20px;
-}
-
-.Margin30 {
-    margin-top: 30px;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
