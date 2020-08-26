@@ -30,6 +30,6 @@ export class ExtractTranslationPathsForArrayPipe implements PipeTransform {
   }
 
   resolve(path, obj): any {
-    return path.split('.').reduce((prev, curr) => prev ? prev[curr] : null, obj || self);
+    return path.split('.').reduce((prev, curr) => prev ? prev[curr] : null, obj || '');
   }
 }
