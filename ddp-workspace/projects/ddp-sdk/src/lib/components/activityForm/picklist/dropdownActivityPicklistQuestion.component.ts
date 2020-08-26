@@ -42,7 +42,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
 
     <ng-container *ngIf="details.show">
-        <mat-form-field class="width">
+        <mat-form-field class="width ddp-option-details-field">
             <input matInput
                    (change)="detailTextChanged($event.target.value)"
                    (input)="updateCharactersLeftIndicator(details.stableId, $event.target.value)"
