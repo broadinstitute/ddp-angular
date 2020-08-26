@@ -26,6 +26,9 @@
       "toolkit": [
         "projects/toolkit/src/public-api"
       ],
+      "toolkit-prion": [
+        "projects/toolkit-prion/src/public-api"
+        ]
     }
   }
 }

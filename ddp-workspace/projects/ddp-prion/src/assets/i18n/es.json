@@ -1,0 +1,793 @@
+{
+  "App": {
+    "Home": "Hogar",
+    "FAQ": "Más detalles / preguntas frecuentes",
+    "About": "Sobre nosotros",
+    "Join": "Unirse a la lista de correos",
+    "Twitter": "Tweets por el registro de priones",
+    "Common": {
+      "JoinUs": "Únete a nosotros"
+    },
+    "Welcome": {
+      "WelcomeTitle": "Voluntario para la investigación para ayudar a combatir la enfermedad por priones",
+      "WelcomeText": "Únase al Registro de Priones, un registro en línea para personas afectadas o en riesgo de enfermedad por priones que desean encontrar oportunidades para participar en la investigación.",
+      "Intro": "Únete a nosotros en esta búsqueda",
+      "Closing": "Forma parte de este movimiento de investigación. Cambiemos el futuro juntos.",
+      "Participate": "Cómo funciona:",
+      "Steps": {
+        "FirstStep": {
+          "Title": "1. Registrarse",
+          "Text": "Haga clic en \"Únase a nosotros\" para crear una cuenta para usted o un ser querido con enfermedad priónica. Una vez que complete nuestro sencillo formulario de consentimiento en línea, ¡estará listo para comenzar!"
+        },
+        "SecondStep": {
+          "Title": "2. Cuéntanos acerca de tí",
+          "Text": "Se le pedirá que complete un breve cuestionario (menos de 10 minutos) sobre usted y su diagnóstico o riesgo."
+        },
+        "ThirdStep": {
+          "Title": "3. ¡Aprendamos juntos!",
+          "Text": "Una vez que complete su cuestionario, podrá ver los estudios de investigación en los que es elegible para participar y contactar a los investigadores para inscribirse. Si nos lo permite, también nos pondremos en contacto con usted para futuras oportunidades de investigación."
+        }
+      },
+      "ArrowAlt": "Flecha"
+    },
+    "StudyListing": {
+      "Columns": [
+        {
+          "title": "Nombre del estudio",
+          "name": "studyName",
+          "placeholder": "Filtrar por nombre"
+        },
+        {
+          "title": "Descripción del estudio",
+          "name": "description",
+          "placeholder": "Filtrar por descripción"
+        },
+        {
+          "title": "Investigador principal",
+          "name": "nameOfPI",
+          "placeholder": "Filtrar por PI"
+        },
+        {
+          "title": "Sitio de Estudio",
+          "name": "site",
+          "placeholder": "Filtrar por sitio"
+        },
+        {
+          "title": "Requisitos de elegibilidad",
+          "name": "eligibilityRequirements",
+          "placeholder": "Filtrar por elegibilidad"
+        },
+        {
+          "title": "Más información",
+          "name": "moreInfo",
+          "placeholder": ""
+        }
+      ],
+      "Rows": [
+        {
+          "studyName": "es: Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
+          "description": "es: The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "site": "es: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
+          "moreInfo":  "es: Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
+        },
+        {
+          "studyName": "es: Biomarkers in pre-symptomatic mutation carriers",
+          "description":"es: Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
+          "site": "es: Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
+          "eligibilityRequirements": "es: You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
+          "moreInfo":  "es: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+        },
+        {
+          "studyName": "es: Challenging the Huntington Disease Paradigm: Evaluation of Psychosocial Issues in Persons at-risk for Genetic Prion Disease",
+          "description": "es: The purpose of this descriptive study is to examine the psychosocial experience of being at-risk for a genetic prion disease.  Eligible participants for the study will include those who are in one of two groups: 1) those who are at-risk for inheriting a mutation based on family history, but have not undergone predictive testing and 2) those with a mutation confirmed by predictive testing, but who are not yet symptomatic. This anonymous online survey includes questions about psychological adaptation to genetic information and a general mental health assessment, as well as some open-ended questions about experiences of being at-risk and views on the predictive testing process. This study will aim to inform best practices in predictive testing and increase knowledge of the unique psychosocial experience of being at-risk for a genetic prion disease.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:alm14@case.edu\" ><strong>Dr. Anne Matthews</strong></a>",
+          "site": "es: Case Western Reserve University, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: <ol><li>Those who are 18 years of age or older.</li><li>Those who can read and understand English.</li><li>Those who are “at-risk” for a genetic prion disease, meaning that they have a relative affected with the disease.</li></ol>",
+          "moreInfo":  "es: <a target=\"_blank\" href=\"https://cwru.az1.qualtrics.com/jfe/form/SV_8euTkcJbwaVd2OV\">Survey here</a> and <a target=\"_blank\" href=\"{{bucketUrl}}/studies/williamson-HRP-506SBER-consent.pdf\">consent form here.</a>"
+        },
+        {
+          "studyName": "es: Early Diagnosis of Human Prion Disease",
+          "description": "es: The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
+          "site": "es: Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
+          "eligibilityRequirements": "es: Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
+          "moreInfo":  "es: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+        },
+        {
+          "studyName": "es: Teleneurology Assessment Program for CJD (TAPCJD)",
+          "description": "es: We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "site": "es: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
+          "eligibilityRequirements": "es: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
+          "moreInfo":  "es: Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+        },
+        {
+          "studyName": "es: Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
+          "description": "es: Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
+          "nameOfPI": "es: <a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
+          "site": "es: University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
+          "eligibilityRequirements": "es: Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
+          "moreInfo":  "es: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+        }
+      ],
+      "InputPlaceholder": "es: Filter all columns"
+    },
+    "LearnMore": {
+      "Title": "es: Learn more about Prion Registry",
+      "LearnMore": {
+        "Title": "es: Learn More",
+        "WhatIs": {
+          "Question": "es: What is prion disease?",
+          "Text": "es: Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+        },
+        "For": {
+          "Question": "es: What is this registry for?",
+          "Text": "es: In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+        },
+        "Participate": {
+          "Question": "es: Can I participate in this registry?",
+          "Text": "es: Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+        },
+        "Why": {
+          "Question": "es: Why would I want to participate in this registry?",
+          "Text": "es: Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+        },
+        "DoIHaveTo": {
+          "Question": "es: Do I have to participate in this registry?",
+          "Text": "es: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+        }
+      }
+    },
+    "ThirdParty": {
+      "Title": "es: List of Third-Party Tools",
+      "Description": "es: The Prion Registry leverages the following third-party tools that may receive information about a user:",
+      "Tools": {
+        "Sendgrid": "es: Sendgrid",
+        "Auth0": "es: Auth0",
+        "Tcell": "es: Tcell",
+        "Google_Cloud": "es: Google Cloud",
+        "Google_Analytics": "es: Google Analytics"
+      },
+      "Usage": {
+        "email": "es: as an email service",
+        "authentication": "es: as an authentication system to provide access to the Registry",
+        "security": "es: as a Registry cloud firewall and runtime protection",
+        "host": "es: to host the Registry",
+        "analytics": "es: as an analytics tool"
+      },
+      "Last_updated": "es: Last updated:"
+    }
+  },
+  "Toolkit": {
+    "Common": {
+      "Organization": "Prion",
+      "LogoAlt": "Prion Registry Logo",
+      "Home": "Hogar",
+      "LearnMore": "Aprende más",
+      "Dashboard": "Mi tablero",
+      "JoinUs": "Únete a nosotros"
+    },
+    "Footer": {
+      "BackToTop": "Volver arriba",
+      "PrivacyPolicy": "Política de privacidad",
+      "ContactUs": "Contacta con nosotros:",
+      "ContactMailTo": "mailto:info@prionregistry.org",
+      "ContactEmail": "info@prionregistry.org"
+    },
+    "Dashboard": {
+      "StudyListing": {
+        "ActivityName": "Listado de estudios",
+        "ActivityStatus": "Disponible",
+        "ActivityCreated": "-",
+        "ActivitySummary": "Estudios disponibles y cómo unirse a ellos",
+        "ActivityActions": "Ver"
+      }
+    },
+    "LoginLanding": {
+      "Text": "es: Please wait. You will be redirected to a destination soon..."
+    },
+    "Dialogs": {
+      "Disclaimer": {
+        "Title": "es: View Prion Registry Data",
+        "Text": "es: You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
+        "SubmitButton": "es: OK"
+      },
+      "JoinMailingList": {
+        "Title": "es: Stay informed!",
+        "Text": "es: Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "es: First Name *",
+            "Error": "es: First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "es: Last Name *",
+            "Error": "es: Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "es: Email Address *",
+            "Error": "es: Please enter a valid Email Address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "es: Email Confirmation (Reenter Email) *",
+            "Error": "es: Please enter a valid Email Address"
+          }
+        },
+        "CancelButton": "es: CANCEL",
+        "SubmitButton": "es: JOIN",
+        "Required": "es: * Required field",
+        "MatchEmailsError": "es: Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "es: We're sorry, but an error has occurred."
+      },
+      "SessionWillExpire": {
+        "Title": "es: Your session will time-out soon!",
+        "Text": "es: To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "es: Sign Out",
+        "Continue": "es: Continue",
+        "RenewalFailed": "es: Session renewal failed. Please log out and log back in again."
+      }
+    },
+    "Warning": {
+      "Title": "es: Download Chrome or Safari to Continue",
+      "Text1": "es: This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+      "Text2": "es: It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Text3": {
+        "Pt1": "es: Click the following links to download",
+        "Pt2": "es: or",
+        "Pt3": "es: Chrome and Safari are always free.",
+        "Chrome": "es: Chrome (for Mac & PC)",
+        "Safari": "es: Safari (for Mac)"
+      },
+      "SubmitButton": "es: OK"
+    },
+    "Password": {
+      "Title": "es: Please enter the password",
+      "Text": "es: Please enter your password",
+      "InputPlaceholder": "  ",
+      "SubmitButton": "es: Submit",
+      "PasswordWrongError": "es: Incorrect password. Please try again.",
+      "PasswordRequiredError": "es: Password is required",
+      "OtherError": "es: We're sorry, but an error has occurred.",
+      "PasswordField": {
+        "Error": "es: Password is required"
+      }
+    },
+    "ErrorPage": {
+      "Title": "es: We've encountered an error",
+      "Header": "es: We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "es: Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "es: ."
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "es: Your password reset link has expired."
+    },
+    "SessionExpired": {
+      "Text": {
+        "Pt1": "es: You were away for a while, so we logged you out as a security precaution.",
+        "Pt2": "es: Please log in again to return to the last page you were on."
+      },
+      "LogInButton": "es: Log In"
+    }
+  },
+  "SDK": {
+    "SubmitButton": "es: Submit",
+    "CloseButton": "es: Back to Dashboard",
+    "AddButton": "es: Add",
+    "CancelButton": "es: Cancel",
+    "NextButton": "es: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": "es:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+    "SavingButton": "es: Saving",
+    "EditButton": "es: Edit",
+    "ReviewButton": "es: View",
+    "ValidateError": "es: Please complete all required fields.",
+    "CommunicationError": "es: There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SaveError": "es: We're sorry but an error occurred.",
+    "ExportStudy": {
+      "Export": "es: EXPORT"
+    },
+    "Common": {
+      "LogoAlt": "es: Prion Registry"
+    },
+    "ListStudies": {
+      "StudyName": "es: Study Name",
+      "ParticipantCount": "es: Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "es: Workspace Name",
+      "WorkspaceNamespace": "es: Workspace Namespace"
+    },
+    "Login": {
+      "Login": "es: LOG IN",
+      "Logout": "es: LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "es: Sign In",
+      "SignOut": "es: Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "es: language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "es: Activity",
+      "Summary": "es: Summary",
+      "ActivityStatus": "es: Status",
+      "ActivityDate": "es: Created",
+      "ActivityActions": "es: Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "es: Governed participants",
+      "ParticipantPlaceholder": "es: Participant",
+      "ParticipantsList": "es: Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "es: Profile",
+      "ViewAs": "es: View As",
+      "ManageParticipants": "es: Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "es: User preferences",
+      "UserPreferencesGender": "es: Sex",
+      "UserPreferencesLocale": "es: Preferred language"
+    },
+    "Dashboard": {
+      "Title": "es: Welcome to the Prion Registry!",
+      "Text": "es: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+    },
+    "DatePicker": {
+      "Day": "es: Choose day...",
+      "Month": "es: Choose month...",
+      "Year": "es: Choose year...",
+      "January": "es: January",
+      "February": "es: February",
+      "March": "es: March",
+      "April": "es: April",
+      "May": "es: May",
+      "June": "es: June",
+      "July": "es: July",
+      "August": "es: August",
+      "September": "es: September",
+      "October": "es: October",
+      "November": "es: November",
+      "December": "es: December"
+    },
+    "UserMenu": {
+      "DashboardButton": "es: My Dashboard",
+      "SignOutButton": "es: Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "es: characters remaining",
+      "SingularForm": "es: character remaining"
+    },
+    "Title": {
+      "Default": "es: Prion Registry",
+      "Alert": "es: Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "es: Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "es: Physician Name",
+        "Institution": "es: Institution",
+        "InstitutionAny": "es: Institution (if any)",
+        "City": "es: City",
+        "State": "es: State"
+      },
+      "PhysicianValidation": "es: Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "es: Full Name",
+        "Country": "es: Country/Territory",
+        "Street1": "es: Street Address",
+        "Street2": "es: Apt/Floor #",
+        "State": {
+          "State": "es: State",
+          "Province": "es: Province",
+          "State/Province/Region": "es: State/Province/Region"
+        },
+        "City": "es: City",
+        "Phone": "es: Phone",
+        "Zip": {
+          "Zip Code": "es: Zip Code",
+          "Postal Code": "es: Postal Code",
+          "Zip/Postal Code": "es: Zip/Postal Code"
+        },
+        "Choose": "es: Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "es: We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "es: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "es: Suggested:",
+        "AsEntered": "es: As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "es: Invalid address.",
+        "CannotVerify": "es: Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "es: An unknown error occurred while verifying address.",
+        "FieldIsRequired": "es: {{field}} is required",
+        "FieldIsInvalid": "es: {{field}} has an invalid value",
+        "InvalidHouseNumber": "es: Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "es: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "es: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "es: The requested resource could not be found.",
+        "FORBIDDEN": "es: Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "es: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "es: Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "es: Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "es: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "es: This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "es: API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "es: At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "es: The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "es: Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "es: The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "es: The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "es: Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "es: Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "es: The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "es: Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "es: One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "es: Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "es: Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "es: Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "es: USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "es: International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "es: Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "es: Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "es: This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "es: No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "es: We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "es: We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "es: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "es: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "es: House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "es: We could not find the street number provided.",
+        "E.STREET.MISSING": "es: Street is missing.",
+        "E.STREET.INVALID": "es: Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "es: Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "es: Box number is invalid.",
+        "E.ADDRESS.INVALID": "es: Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "es: Zip not found.",
+        "E.ZIP.INVALID": "es: Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "es: Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "es: Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "es: Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "es: Dual address.",
+        "E.STREET.MAGNET": "es: Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "es: Unverifiable city / state.",
+        "E.STATE.INVALID": "es: Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "es: Invalid delivery address.",
+        "E.TIMED_OUT": "es: Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "es: The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "es: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "es: Information",
+    "CookiesBanner": {
+      "Text_Before_Policy_Link": "es: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
+      "Text_After_Policy_Link": "es: to learn more about the cookies we use.",
+      "Policy": "es: Privacy Policy",
+      "Preferences": "es: Manage Preferences",
+      "Reject": "es: Reject Cookies",
+      "Accept": "es: Accept Cookies"
+    },
+    "CookiesModal": {
+      "Title": "es: Manage Cookie Preferences",
+      "Privacy": "es: Your Privacy",
+      "Privacy_Text": "es: The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
+      "Functional": "es: Functional Cookies",
+      "Functional_Text": "es: These cookies provide necessary access, function, and security to the website.",
+      "Analytical": "es: Analytical Cookies",
+      "Reject": "es: Reject",
+      "Accept": "es: Accept",
+      "AlwaysOn": "es: Always On",
+      "Analytical_Text": "es: These cookies allow us to evaluate site usage, and improve site experience and performance.",
+      "Details": "es: Cookie Details",
+      "Name": "es: Name",
+      "Description": "es: Description",
+      "Duration": "es: Duration",
+      "Policy": "es: Privacy policy",
+      "Submit": "es: Submit Preferences",
+      "CookieName": {
+        "auth0": "es: Auth0:",
+        "auth0_com.auth0.auth": "es: com.auth0.auth.#",
+        "auth0_auth0": "es: auth0",
+        "auth0_auth0_compat": "es: auth0_compat",
+        "auth0_did": "es: did",
+        "auth0_did_compat": "es: did_compat",
+        "pepper": "es: Pepper:",
+        "pepper_cookie": "es: prion_cookies_consent",
+        "pepper_session_key": "es: session_key",
+        "pepper_token": "es: token",
+        "pepper_studyLanguage": "es: studyLanguage",
+        "pepper_nextUrl": "es: nextUrl",
+        "pepper_auth": "es: localAuthParams",
+        "tcell": "es: Tcell:",
+        "tcell_agent_session_id": "es: tcell_agent_session_id",
+        "tcell_agent_policy_cache": "es: tcell_agent_policy_cache",
+        "google_analytics": "es: Google Analytics:",
+        "ga": "es: _ga",
+        "gid": "es: _gid",
+        "gat": "es: _gat",
+        "gat_platform": "es: _gat_platform"
+      },
+      "CookieDescription": {
+        "authentication": "es: authentication",
+        "authorization": "es: authorization",
+        "identification": "es: identification",
+        "navigation": "es: navigation helper",
+        "grouping_behavior": "es: grouping user behavior",
+        "throttling": "es: throttling to increase the efficiency of analytics collection",
+        "security": "es: security",
+        "cookie": "es: cookie preferences",
+        "language": "es: language preferences",
+        "session": "es: handles user sessions",
+        "ua_identifier": "es: the identifier for a device/user agent"
+      },
+      "CookieDuration": {
+        "session": "es: session",
+        "1year": "es: 1 year",
+        "2years": "es: 2 years",
+        "24hours": "es: 24 hours",
+        "3days": "es: 3 days",
+        "10minutes": "es: 10 minutes",
+        "30minutes": "es: 30 minutes",
+        "persistent": "es: persistent"
+      }
+    },
+    "PrivacyPolicy": {
+      "Title": "es: Prion Registry Privacy Statement",
+      "Intro": {
+        "Title": "es: Last Updated: July 28, 2020",
+        "Text": {
+          "P1": "es: The Prion Registry has been developed by the Broad Institute of MIT and Harvard (“",
+          "P2BoldUnderline": "Broad Institute",
+          "P3": "es: ”) in collaboration with the Prion Registry Consortium. We deeply value your privacy. This Privacy Statement (“",
+          "P4BoldUnderline": "es: Policy",
+          "P5": "es: ”) provides important information about how the Prion Registry collects and uses your personal information. ",
+          "P6Bold": "es: Please make sure you review this Policy before submitting your information to the Prion Registry. If you have any questions about this Policy, please contact us at the addresses listed at the end of this Policy."
+        }
+      },
+      "Who": {
+        "Title": "es: 1. Who is the Prion Registry?",
+        "Text": {
+          "P1": "es: The Prion Registry is an online registry, maintained by scientists and prion disease patient advocates at the Broad Institute, for people affected by or at risk for prion disease who want to find opportunities to participate in research. Our ultimate goal is to further the development of life-saving therapies to cure, treat, prevent, or delay prion disease. We created this Registry to make it easier for patients to:",
+          "P2Number": {
+            "1": "es: be counted,",
+            "2": "es: find research studies to participate in, and",
+            "3": "es: share their data with researchers."
+          },
+          "P3": "es: This Registry will also help qualified researchers recruit study participants and gather data. For more information on the Prion Registry, please see ",
+          "P4Link": "es: PrionRegistry.org",
+          "P5": "es: . For more information on the Broad Institute, please see ",
+          "P6Link": "https://www.broadinstitute.org/about-us",
+          "P7": ". ",
+          "P8": "es: Please note that the Registry may link to other websites that are not affiliated with us or the Research Project (“",
+          "P9Bold": "es: Third-Party Sites",
+          "P10": "es: ”). We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites. You should make sure you review the privacy policies for those Third-Party Sites before providing them any of your information."
+        }
+      },
+      "Purpose": {
+        "Title": "es: 2. What is the purpose and scope of this Policy?",
+        "Text": {
+          "P1": "es: This Policy describes the information we collect from users of the Registry, the purposes for collecting that information, how we use that information, and with whom we share that information.   It applies to users who are patients enrolled in our Research Projects (“",
+          "P2Bold": "es: Participant Users",
+          "P3": "es: ”), and those users who are not enrolled in any Research Project and are using the Registry for general informational purposes or because they are interested in participating in a future research project (“",
+          "P4Bold": "es: General Users",
+          "P5": "es: ”).  We will refer to all users, including Participant Users and General Users, in this Policy as “",
+          "P6Bold": "es: you",
+          "P7": "es: ” or “",
+          "P8Bold": "es: your",
+          "P9": "”."
+        }
+      },
+      "Use": {
+        "Title": "es: 3. If I use the Registry, am I agreeing to this Policy?",
+        "Text": "es: Yes.  However, your use of and contribution of information to the Registry is entirely voluntary and you have certain rights to control use of your information as described below.   If you decide to use the Registry, you are agreeing that we can use your information as described in this Policy."
+      },
+      "HowCollect": {
+        "Title": "es: 4. How do we collect information from you?",
+        "Text": {
+          "P1": "es: We collect information about you in two ways.",
+          "P2": "es: First, we collect certain information from you ",
+          "P3Underline": "es: when you provide it to us directly.",
+          "P4": "es:  Specifically, we collect information about you when you: ",
+
+          "P5Underline": "es: Create a Prion Registry account and profile",
+          "P6": "es:  through our website.",
+          "P7Underline": "es: Participate in the Registry",
+          "P8": "es:  by providing us information about you and your experiences with prion disease.  For example, the medical questionnaire in our Registry will ask you a series of questions about your demographics, current prion disease status, willingness to be contacted for trials, past trial participation, zip code and contact information.  Please note that you are not required to answer any question.",
+          "P9Underline": "es: Respond to notifications of research opportunities",
+          "P10": "es: , surveys and other communications we may send to you.",
+          "P11Underline": "es: Communicate with us",
+          "P12": "es:  (e.g. by email).",
+
+          "P13": "es: Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
+
+          "P14": "es: When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
+          "P15": "es: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+        }
+      },
+      "WhatCollect": {
+        "Title": "es: 5. What kind of information do we collect?",
+        "Text": {
+          "P1BoldUnderline": "es: Personal Information",
+          "P2": "es: : Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
+          "P3BoldUnderline": "es: Medical and research-related information",
+          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
+          "P5BoldUnderline": "es: Registry Usage Information",
+          "P6": "es: : Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
+          "P7BoldUnderline": "es: Device Information",
+          "P8": "es: : Information that relates to a particular computer, mobile device, or other device (e.g. iPad) that you use to access the Registry. Device information includes your IP address (which is a number assigned by an internet service provider to the computer you use to access the Internet), a device ID (which is a number assigned to a mobile phone by the device manufacturer), or the type of operating system or web browser used to access the Registry.\n"
+        }
+      },
+      "Cookies": {
+        "Title": "es: 6. Do we use cookies and other tracking technologies?",
+        "Text": {
+          "P1": "es: Yes.  We use cookies for various purposes, such as to make it easier for you to navigate our Registry, to enable a faster log-in process or to better understand user interactions with the Registry.  There are two types of cookies: session and persistent cookies.",
+          "P2Underline": "es: Session Cookies",
+          "P3": "es: .  Session cookies exist only during a session.  They disappear from your computer or device when you close your browser or turn off your computer or device.  We use Session Cookies to allow our systems to uniquely identify you during a session or while you are logged in to the Registry.  This allows us to process your communications and requests and verify your identity after you have logged in and as you move through our Registry, and to optimize your experience in using the Registry.",
+          "P4Underline": "es: Persistent Cookies",
+          "P5": "es: .  Persistent Cookies remain on your computer or device after you have closed your browser or the Registry or turned off your computer or mobile device.  We use persistent cookies to track aggregate and statistical information about user activity on our Registry (see “Tracking Technologies” below).",
+          "P6Bold": "es: Disabling Cookies.",
+          "P7": "es:   You may opt-out of non-essential cookies by selecting “Reject Cookies” or by clicking on “Manage Preferences” in the prompt asking whether you accept the use of cookies. Non-essential cookies are those that allow us to monitor site usage and improve the site, such as Google Analytics. Other cookies, however, are essential to the website’s functionality, including those cookies that allow you to stay logged into the site while you use it. The only way to opt out of these essential cookies is to not join the site.",
+          "P8": "es: You may also view and manage your cookie preferences by clicking on the button below.",
+          "P9Bold": "es: Tracking Technologies.",
+          "P10": "es:   We use automated devices, applications, and analytic tools such as Google Analytics, to evaluate usage of our Registry and improve our user experience and performance.  We may also use third-party tracking technologies, such as tCell, to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services.  We do not share your personal information with these third parties.",
+          "P11Bold": "es: Do Not Track Signals. ",
+          "P12": "es: We respond to browser-level Do Not Track (“",
+          "P13BoldUnderline": "es: DNT",
+          "P14": "es: ”) signals by disabling optional tracking technologies such as Google Analytics, however, we do not disable tracking that is essential to the website’s functionality, such as cookies that allow you to stay logged in. For information about DNT, visit ",
+          "P15Link": "www.allaboutdnt.org",
+          "P16": "."
+        }
+      },
+      "CookiePreferences": "es: Cookie Preferences",
+      "HowUse": {
+        "Title": "es: 6. How do we use your information?",
+        "Text": {
+          "P1": "es: We use your data for the following purposes only:",
+          "P2BoldUnderline": "es: Identify Research Opportunities.",
+          "P3": "es:  We use the information you provide about yourself, your medical condition, and experiences to identify opportunities for you to participate in research. If you agree, you may choose to be contacted about future research studies and/or clinical trials in which you may be eligible to participate. You may also choose not to receive these invitations or decline to participate in future studies. Please note that the research studies with whom we partner only receive aggregate, de-identified data from our participants unless you enter into a separate research consent with them. This aggregate data does not identify you personally.",
+          "P4BoldUnderline": "es: Provide the Registry and Communicate with You.",
+          "P5": "es:  We, together with our collaborators, vendors, and service providers, use your information to operate the Registry, respond to your inquiries, notify you of research opportunities, ask you to periodically update your profile and health status, and for other communication purposes.",
+          "P6BoldUnderline": "es: Perform and promote research.",
+          "P7": "es:  We will use the information you provide to generate de-identified, aggregate descriptive statistics, such as the number of people interested in participating in prion disease research in a given geographic area. These statistics may be used to perform research, such as characterizing the prevalence of prion disease, or to promote prion disease research, for example, by securing funding or collaborations. As part of this work, we may use the information you provide to verify the accuracy of the Registry data, develop scientific publications, and answer questions from IRBs, IECs or government or regulatory agencies.",
+          "P8BoldUnderline": "es: Personalize Your Experience.",
+          "P9": "es:  We use your information to tailor the content and information that we may send or display to you, to offer location customization, and personalized help and instructions, and to otherwise personalize your experiences while you are using the Registry.",
+          "P10BoldUnderline": "es: Develop and Improve Our Registry.",
+          "P11": "es:  We use your information to ensure our Registry is working as intended, to better understand how users access and use our Registry, both on an aggregated and individualized basis, to understand the features that our Registry find valuable, make improvements to our Registry, to develop new features and applications, and for other research and analytical purposes."
+        }
+      },
+      "ShareWith": {
+        "Title": "es: 7. With whom do we share your information?",
+        "Text": {
+          "P1": "es: The Prion Registry does not sell or share your information for marketing purposes, but we may share your information in the following ways: ",
+          "P2BoldUnderline": "es: Research Partners.",
+          "P3": "es:   After removing your name and any other readily identifiable information, Registry staff may share statistics regarding de-identified data with researchers or organizations interested in launching research studies. For example, staff may provide information regarding the number of individuals in the registry who qualify for a potential research study, based on age, genetic mutation status, location, and/or other information. This information could be used to help design a study or secure funding or collaboration commitments. Qualified researchers who have received approval from an ethics committee will also be able to post studies for which you will be notified of your eligibility. An ethics committee is a group that independently reviews and watches over all research studies involving people. The board follows local laws and codes of ethics to make sure that the rights and welfare of people taking part in research studies are protected. ",
+          "P4Bold": "es: It will then be your choice whether to contact these researchers and share your identity in order to enroll in their studies; researchers will not be able to directly view your contact information in the registry.",
+          "P5BoldUnderline": "es: Vendors and Service Providers.",
+          "P6": "es:   We use various third-party vendors and service providers that assist us in providing the Registry.  For example, we may use third-party vendors to store and authenticate account credentials, store and analyze system logs, send email communications, and for hosting and storing information collected through our Registry.  We may need to share your information with these vendors and service providers to enable them to provide these services to us.  These service providers and vendors are required to only use your information to provide their services to us and in a manner consistent with this Policy.",
+          "P7BoldUnderline": "es: Legal and Safety Reasons.",
+          "P8": "es:   We may be required, by law, to disclose your personal information to third parties, such as in the following situations:",
+          "P9": "es: In response to a request by law enforcement;",
+          "P10": "es: In response to legal process, such as a subpoena, a request for discovery in a civil proceeding, or in response to a court order.",
+          "P11": "es: We may also access, preserve, and disclose your personal information to enforce the terms of use for the Registry and protect your, our, or others’ rights, property, or safety.",
+          "P12BoldUnderline": "es: Reorganization, Sale or Merger.",
+          "P13": "es:   Broad Institute may be involved in a business transaction where its ownership or assets are transferred or sold to another legal entity.  This can happen in a merger with another legal entity, an acquisition by another legal entity, a corporate reorganization, or a legal proceeding (e.g. bankruptcy or receivership), where a trustee or other takes over control of the entity.  In each of these situations, your information may be transferred as part of such a transaction as permitted by law and/or contract. The successor in interest will continue to be bound by the terms of this Policy.",
+          "P14BoldUnderline": "es: With Your Consent.",
+          "P15": "es:   We may ask you from time to time to give us permission to share your information with other third parties not described in this section.  In each case, we will describe that third party and the purpose for sharing your information.",
+          "P16BoldUnderline": "es: Aggregate and De-Identified Information.",
+          "P17": "es:   We may share aggregate or de-identified information about users and their use of the Registry with third parties and publicly for reporting, funding applications, research, or similar purposes.  This information will not identify you personally."
+        }
+      },
+      "ThirdParty": {
+        "Title": "es: 8. What about Third-Party Sites?",
+        "Text": {
+          "P1": "es: The Registry may link to other websites that are not affiliated with us (“",
+          "P2BoldUnderline": "es: Third-Party Sites",
+          "P3": "es: ”).  We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites.  For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry. Other sites may have different privacy practices. You should make sure you review the privacy policies of those Third-Party Sites before providing any of your information to them."
+        }
+      },
+      "OtherUsers": {
+        "Title": "es: 9. Can other users see my information?",
+        "Text": "es: Users will not be able to post content that is visible to any other users of the Registry.  Your information will only be made available to us, our research partners, our service providers and vendors, and the other third parties listed in Section 7."
+      },
+      "InformationRights": {
+        "Title": "es: 10. What rights do I have with respect to my information?",
+        "Text": {
+          "P1": "es: Registered users can request to update, receive a copy of, or delete information submitted to the Registry by clicking on the button below:",
+          "P2": "es: We will respond to any user request as soon as we reasonably can, and within the time and in the manner required by law.   We may request additional information from you to verify the request.  We may not be able to accommodate all requests; for example, we may be unable to accommodate a deletion request if we are required to maintain information under law or a legal obligation or if information is used as part of a published study."
+        }
+      },
+      "DataRequest": "es: Data Request",
+      "Security": {
+        "Title": "es: 11. What kind of security does the Registry use to protect my information?",
+        "Text": {
+          "P1": "es: We use reasonable security to protect the information we collect from users. These safeguards encompass administrative, technical, and physical procedures and controls, including:",
+          "P2": "es: encryption of information in transit and at rest on servers;",
+          "P3": "es: threat and risk assessments;",
+          "P4": "es: system monitoring;",
+          "P5": "es: access control;",
+          "P6": "es: privacy and security training;",
+          "P7": "es: secure destruction of records.",
+          "P8": "es: However, we cannot guarantee the security of information we collect or any transmission of information over the Internet.  For this reason, you should make sure that you keep your profile account on the Registry confidential, including any user identification or password.  You should also notify us immediately if there has been any unauthorized use of your account."
+        }
+      },
+      "Children": {
+        "Title": "es: 12. Do you collect personal information from children?",
+        "Text": "es: The Registry is not designed or intended for use by individuals under the legal age of majority in their location of residence, and we do not knowingly collect information from such individuals. If we become aware that we have information for minors, we will promptly delete it. Anyone who believes that we may have such information from individuals under the legal age of majority should contact us at the addresses provided below."
+      },
+      "Country": {
+        "Title": "es: 13. Is there any transfer of personal information from one country to another?",
+        "Text": "es: We store and process the information you provide on servers in the United States.  If you are a user of the Registry, you agree to the transfer of your information to the United States and acknowledge that the laws in the United States may offer less protection to your information than the laws where you live."
+      },
+      "Contact": {
+        "Title": "es: 14. Whom do I contact if I have a question or request?",
+        "Text": {
+          "P1": "es: You may contact us at the addresses below if you have any questions or complaints about information practices or this Policy:",
+          "P2Bold": "Broad Institute:",
+          "P3": "es: By email to: info@prionregistry.org",
+          "P4": "es: By mail to:",
+          "P5": "The Broad Institute of MIT and Harvard",
+          "P6": "es: 415 Main St.",
+          "P7": "es: Cambridge, MA 02142,",
+          "P8": "es: United States"
+        }
+      },
+      "Update": {
+        "Title": "es: 15. Will you update or change this Policy?",
+        "Text": {
+          "P1": "es: We may modify this Policy from time to time, and you can see when the last update was by looking at the “Last Updated” date at the top of this page. If you object to any changes, you may stop accessing the Registry. Your continued use of the Registry after we post an updated Policy means that you acknowledge the updated Policy following the date it takes effect.",
+          "P2": "es: As a general practice, we will not use your personal information for uses or purposes that are significantly different from those described in this Policy.  However, from time to time, we may need to use your information for uses not previously disclosed in this Policy.  If this should happen, we will use reasonable efforts to notify you and obtain your consent to such new uses as required by law."
+        }
+      },
+      "EU": {
+        "Title": "es: 16. Notice to Residents of the European Union",
+        "Text": {
+          "P1": "es: This section outlines certain additional information that we are obligated to provide to data subjects of the European Union pursuant to the European Union General Data Protection Regulation 2016/679 and its amendments (“",
+          "P2BoldUnderline": "es: GDPR",
+          "P3": "es: ”).  We act as a data controller under the GDPR for the personal data that we collect from users of the Registry.  For such personal data, we rely on the following legal bases for processing such information:",
+          "P4Bold": "es: Legitimate interests. ",
+          "P5": "es: We may use your personal data for our legitimate interests provided that our legitimate interests are not outweighed by any prejudice or harm to your interests, rights and freedoms, including:",
+          "P6": "es: improving our products and services and the content on Registry (for example to manage the Registry, improve the Registry, and better tailor the features, performance and support of the Registry);",
+          "P7": "es: operating and administering the Registry;",
+          "P8": "es: promoting the safety and security of the Registry;",
+          "P9": "es: fulfilling your requests and communicating with you when you contact us; and ",
+          "P10": "es: promoting the Registry.",
+          "P11Bold": "es: Consent. ",
+          "P12": "es: In some cases, you will give us consent to use your personal data for a specific purpose.  For example, we will rely on your consent to use technical information such as cookie data and health information to identify relevant research studies.",
+          "P13Bold": "es: Legal obligations. ",
+          "P14": "es: We may be required to process your personal data to comply with our legal obligations.",
+          "P15Bold": "es: Data Retention. ",
+          "P16": "es: We retain personal information about you for the time necessary to accomplish the purpose for which such information was collected, usually for any period thereafter as legally required or permitted by applicable law.  Our retention policies reflect applicable statute of limitation periods and legal requirements.",
+          "P17Bold": "es: EU Data Subject Rights. ",
+          "P18": "es: Data subjects of the European Union have the following rights:",
+          "P19Bold": "es: The right to be informed - ",
+          "P20": "es: You have the right to be informed about the collection and use of your personal data.",
+          "P21Bold": "es: The right to access - ",
+          "P22": "es: You have the right to request copies of your personal data.",
+          "P23Bold": "es: The right to rectification - ",
+          "P24": "es: You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete information that you believe is incomplete.",
+          "P25Bold": "es: The right to erasure - ",
+          "P26": "es: You have the right to request that we erase your personal data, under certain conditions.",
+          "P27Bold": "es: The right to restrict processing - ",
+          "P28": "es: You have the right to request that we erase your personal data, under certain conditions.",
+          "P29Bold": "es: The right to object to processing - ",
+          "P30": "es: You have the right to object to our processing of your personal data, under certain circumstances.",
+          "P31Bold": "es: The right to data portability - ",
+          "P32": "es: You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.",
+          "P33": "es: If you believe our processing of your personal data violates data protection laws, you have a legal right to lodge a complaint with a supervisory authority responsible for data protection.  You may do so in the EU member state of your habitual residence, your place of work or the place of the alleged violation.",
+          "P34Bold": "es: Submitting Requests: ",
+          "P35": "es: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
+        }
+      }
+    }
+  }
+}
