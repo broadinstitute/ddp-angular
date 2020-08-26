@@ -306,10 +306,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    public incrementStep(): void {
+    public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            this.scrollToTop();
+            if (scroll) {
+              this.scrollToTop();
+            }
+
             // enable any validation errors to be visible
             this.validationRequested = true;
             this.sendSectionAnalytics();

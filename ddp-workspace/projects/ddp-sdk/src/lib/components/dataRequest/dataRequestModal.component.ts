@@ -66,7 +66,7 @@ export class DataRequestModalComponent extends ActivityComponent implements OnIn
 
   public submitDataRequest(): void {
     this.flush();
-    this.incrementStep();
+    this.incrementStep(false);
   }
 
   public closeModal(): void {
