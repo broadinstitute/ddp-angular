@@ -1,27 +1,43 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+//Angular imports
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCATION_INITIALIZED } from '@angular/common';
-import { AppRoutingModule } from './app-routing.module';
+import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from "@angular/material";
 
+//External library imports
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-  DdpModule,
-  LogLevel,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent
-} from 'ddp-sdk';
+//SDK imports
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 
-import {
-  ToolkitModule,
-  ToolkitConfigurationService,
-  AppComponent
-} from 'toolkit';
+//Toolkit imports
+import { ToolkitModule } from "toolkit";
 
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+//Toolkit-prion imports
+import { PrionToolkitConfigurationService,
+  ToolkitPrionModule,
+  PrionAppComponent
+} from "toolkit-prion";
+
+//Local imports
+import { AppRoutingModule } from './app-routing.module';
+import { WelcomeComponent } from "./components/welcome/welcome.component";
+import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
+import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
+import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
+import { PrivacyPolicyFullComponent } from "./components/privacy-policy/privacy-policy-full.component";
+import { ThirdPartyComponent } from "./components/third-party/third-party.component";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -34,35 +50,18 @@ declare const DDP_ENV: any;
 
 declare const ga: Function;
 
-export const tkCfg = new ToolkitConfigurationService();
+export const tkCfg = new PrionToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.aboutYouGuid = 'ANGIOABOUTYOU';
-tkCfg.consentGuid = 'ANGIOCONSENT';
-tkCfg.releaseGuid = 'ANGIORELEASE';
+tkCfg.consentGuid = 'PRIONCONSENT';
+tkCfg.releaseGuid = 'PRIONMEDICAL';
 tkCfg.dashboardGuid = 'DASHBOARD';
-tkCfg.lovedOneThankYouGuid = 'THANK_YOU';
-tkCfg.aboutYouUrl = 'about-you';
-tkCfg.lovedOneUrl = 'loved-one';
 tkCfg.consentUrl = 'consent';
 tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
-tkCfg.stayInformedUrl = 'stay-informed';
-tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
-tkCfg.internationalPatientsUrl = 'international-patients';
-tkCfg.moreDetailsUrl = 'more-details';
-tkCfg.phone = '857-500-6264';
-tkCfg.infoEmail = 'info@ascproject.org';
-tkCfg.dataEmail = 'data@ascproject.org';
-tkCfg.twitterAccountId = 'ASCaProject';
-tkCfg.facebookGroupId = 'groups/1556795987968214';
-tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=angs_project_painter_2018#summary';
-tkCfg.countMeInUrl = 'https://joincountmein.org/';
-tkCfg.showDataRelease = false;
-tkCfg.showInfoForPhysicians = false;
-tkCfg.showBlog = false;
-tkCfg.blogUrl = '';
+tkCfg.assetsBucketUrl = 'https://storage.googleapis.com/' + DDP_ENV.assetsBucketName;
+tkCfg.infoEmail = 'help@prionregistry.org';
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -79,6 +78,128 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.usePrionPrivacyPolicyTemplate = true;
+config.cookies = {
+  cookies: [
+    {
+      type: 'Functional',
+      actions: null,
+      list: [
+        {
+          name: 'auth0',
+          description: null,
+          duration: null
+        },
+        {
+          name: 'auth0_com.auth0.auth',
+          description: 'authorization',
+          duration: '30minutes'
+        },
+        {
+          name: 'auth0_auth0',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_auth0_compat',
+          description: 'session',
+          duration: '3days'
+        },
+        {
+          name: 'auth0_did',
+          description: 'ua_identifier',
+          duration: '1year'
+        },
+        {
+          name: 'auth0_did_compat',
+          description: 'ua_identifier',
+          duration: '1year'
+        },
+        {
+          name: 'pepper',
+          description: null,
+          duration: null
+        },
+        {
+          name: 'pepper_session_key',
+          description: 'authentication',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_token',
+          description: 'authentication',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_cookie',
+          description: 'cookie',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_studyLanguage',
+          description: 'language',
+          duration: 'persistent'
+        },
+        {
+          name: 'pepper_nextUrl',
+          description: 'navigation',
+          duration: 'session'
+        },
+        {
+          name: 'pepper_auth',
+          description: 'authentication',
+          duration: 'session'
+        },
+        {
+          name: 'tcell',
+          description: null,
+          duration: null
+        },
+        {
+          name: 'tcell_agent_session_id',
+          description: 'security',
+          duration: 'persistent'
+        },
+        {
+          name: 'tcell_agent_policy_cache',
+          description: 'security',
+          duration: 'persistent'
+        }
+      ]
+    },
+    {
+      type: 'Analytical',
+      actions: ['Accept', 'Reject'],
+      list: [
+        {
+          name: 'google_analytics',
+          description: null,
+          duration: null
+        },
+        {
+          name: 'ga',
+          description: 'identification',
+          duration: '2years'
+        },
+        {
+          name: 'gid',
+          description: 'grouping_behavior',
+          duration: '24hours'
+        },
+        {
+          name: 'gat',
+          description: 'throttling',
+          duration: '10minutes'
+        },
+        {
+          name: 'gat_platform',
+          description: 'throttling',
+          duration: '10minutes'
+        }
+      ]
+    }
+  ]
+};
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
@@ -102,12 +223,31 @@ export function translateFactory(translate: TranslateService, injector: Injector
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitModule
+    ToolkitPrionModule,
+    ToolkitModule,
+    FlexModule,
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatProgressBarModule,
+    MatTableModule
   ],
   declarations: [
     WelcomeComponent,
-    MoreDetailsComponent,
-    AboutUsComponent
+    LearnMoreComponent,
+    StudyListingComponent,
+    RedirectJoinComponent,
+    PrivacyPolicyFullComponent,
+    ThirdPartyComponent
   ],
   providers: [
     {
@@ -128,7 +268,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [PrionAppComponent]
 })
 export class AppModule {
   constructor(private analytics: AnalyticsEventsService) {

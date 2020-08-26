@@ -13,6 +13,14 @@ import { NGXTranslateService } from './services/internationalization/ngxTranslat
 
 // CookieService
 import { CookieModule } from 'ngx-cookie';
+import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
+import { CookiesManagementService } from './services/cookiesManagement.service';
+import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
+import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
+import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
+import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
+import { AnalyticsManagementService } from './services/analyticsManagement.service';
 
 // Angular JWT
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -171,9 +179,9 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
-import { LanguageSelectorComponent } from "./components/languageSelector.component";
-import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedirect.component";
-import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
+import { LanguageSelectorComponent } from './components/languageSelector.component';
+import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
+import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
@@ -251,6 +259,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LoggingService,
     SessionMementoService,
     AnalyticsEventsService,
+    AnalyticsManagementService,
     UserActivityServiceAgent,
     SubjectInvitationServiceAgent,
     UserProfileServiceAgent,
@@ -280,6 +289,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NGXTranslateService,
     SuggestionServiceAgent,
     IrbPasswordService,
+    CookiesManagementService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
     UserInvitationServiceAgent,
@@ -356,7 +366,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+
+    CookiesBannerComponent,
+    CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
+    PrivacyPolicyButtonComponent,
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -419,12 +436,21 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+
+    CookiesBannerComponent,
+    CookiesPreferencesModalComponent,
+    CookiesPreferencesButtonComponent,
+    PrivacyPolicyButtonComponent,
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent
   ],
   entryComponents: [
     UserPreferencesComponent,
     ManageParticipantsComponent,
-    NewRequestMock
+    NewRequestMock,
+    CookiesPreferencesModalComponent,
+    PrivacyPolicyModalComponent
   ]
 })
 export class DdpModule { }
