@@ -3607,8 +3607,15 @@ app-third-party {
   margin-left: 5px;
   padding: 12px;
   color: #FFFFFF;
-  background: rgba(#F2B816, 0.8);
+  background: #F2B816;
   border-radius: 3px;
+}
+
+@media only screen and (max-width: 767px) {
+  .NewActivityButton:disabled:hover:after {
+    left: -40px;
+    top: 55px;
+  }
 }
 
 .NewActivityButton:disabled {
