@@ -152,7 +152,7 @@ import {
       <div class="CenterDiv SpacedButtonDiv">
         <ddp-activity-in-modal-button
           activityGuid="PRIONREQUEST"
-          modalName="dataRequest"
+          modalName="DataRequestModalComponent"
           disabledTooltip="SDK.DataRequest.SignInTooltip"
           text="SDK.DataRequest.DataRequest"></ddp-activity-in-modal-button>
       </div>

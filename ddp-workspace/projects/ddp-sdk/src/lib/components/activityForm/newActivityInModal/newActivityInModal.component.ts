@@ -13,7 +13,7 @@ import { DataRequestModalComponent } from '../../dataRequest/dataRequestModal.co
 @Component({
   selector: 'ddp-new-activity-in-modal',
   template: `
-    <ng-container *ngIf="this.data.modalName === 'dataRequest'">
+    <ng-container *ngIf="this.data.modalName === 'DataRequestModalComponent'">
       <ddp-data-request-modal [studyGuid]="studyGuid"
                               [activityGuid]="(activityInstance$ | async)?.instanceGuid">
       </ddp-data-request-modal>
@@ -32,7 +32,7 @@ export class NewActivityInModalComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   constructor(
-    public dialogRef: MatDialogRef<DataRequestModalComponent>,
+    public dialogRef: MatDialogRef<NewActivityInModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private serviceAgent: ActivityServiceAgent,
     private userActivityServiceAgent: UserActivityServiceAgent,
