@@ -4,65 +4,65 @@ import { CookiesManagementService } from '../../../services/cookiesManagement.se
 import { ConsentStatuses } from '../../../models/cookies';
 
 @Component({
-  selector: 'ddp-cookies-preferences-modal',
+  selector: 'toolkit-cookies-preferences-modal',
   template: `
     <div class="cookiesModal cookiesModal--header">
       <img class="cookiesModal--logo" lazy-resource
            src="/assets/images/project-logo-dark.svg"
-           [attr.alt]="'SDK.Common.LogoAlt' | translate">
-      <h1 class="PageContent-title" translate>SDK.CookiesModal.Title</h1>
+           [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
+      <h1 class="PageContent-title" translate>Toolkit.CookiesModal.Title</h1>
       <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
     </div>
     <div>
       <mat-tab-group>
-        <mat-tab [label]="'SDK.CookiesModal.Privacy' | translate">
+        <mat-tab [label]="'Toolkit.CookiesModal.Privacy' | translate">
           <div class="cookiesModal--tabHeader">
-            <h4 translate>SDK.CookiesModal.Privacy</h4>
+            <h4 translate>Toolkit.CookiesModal.Privacy</h4>
           </div>
-          <p translate>SDK.CookiesModal.Privacy_Text</p>
+          <p translate>Toolkit.CookiesModal.Privacy_Text</p>
         </mat-tab>
         <!-- Create tabs for all cookie types -->
-        <mat-tab *ngFor="let cookie of data.cookies.cookies" [label]="'SDK.CookiesModal.' + cookie.type | translate">
+        <mat-tab *ngFor="let cookie of data.cookies.data" [label]="'Toolkit.CookiesModal.' + cookie.type | translate">
           <section>
             <div class="cookiesModal--tabHeader">
-              <h4 translate>{{ 'SDK.CookiesModal.' + cookie.type }}</h4>
+              <h4 translate>{{ 'Toolkit.CookiesModal.' + cookie.type }}</h4>
               <div  class="cookiesModal--tabActions">
                 <mat-radio-group *ngIf="cookie.actions" aria-label="Select an option"
                                  (change)="this.onChange(cookie.type, $event.value)">
                   <mat-radio-button value="Accept" [checked]="this.cookies[cookie.type]">
-                    <span translate>SDK.CookiesModal.Accept</span>
+                    <span translate>Toolkit.CookiesModal.Accept</span>
                   </mat-radio-button>
                   <mat-radio-button value="Reject" [checked]="!this.cookies[cookie.type]">
-                    <span translate>SDK.CookiesModal.Reject</span>
+                    <span translate>Toolkit.CookiesModal.Reject</span>
                   </mat-radio-button>
                 </mat-radio-group>
-                <p *ngIf="!cookie.actions" translate>SDK.CookiesModal.AlwaysOn</p>
+                <p *ngIf="!cookie.actions" translate>Toolkit.CookiesModal.AlwaysOn</p>
               </div>
             </div>
-            <p translate>{{ 'SDK.CookiesModal.' + cookie.type + '_Text'}}</p>
+            <p translate>{{ 'Toolkit.CookiesModal.' + cookie.type + '_Text'}}</p>
           </section>
           <section *ngIf="cookie.list" class="cookiesModal--tabTable">
-            <h4 class="cookiesModal--tableHeader" translate>SDK.CookiesModal.Details</h4>
+            <h4 class="cookiesModal--tableHeader" translate>Toolkit.CookiesModal.Details</h4>
             <mat-table [dataSource]="cookie.list" class="mat-elevation-z0">
               <!-- Name Column -->
               <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Name</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef translate>Toolkit.CookiesModal.Name</mat-header-cell>
                 <mat-cell *matCellDef="let element" translate>
-                  {{'SDK.CookiesModal.CookieName.' + element.name}}
+                  {{'Toolkit.CookiesModal.CookieName.' + element.name}}
                 </mat-cell>
               </ng-container>
               <!-- Description Column -->
               <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Description</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef translate>Toolkit.CookiesModal.Description</mat-header-cell>
                 <mat-cell *matCellDef="let element" translate>
-                  {{element.description ? 'SDK.CookiesModal.CookieDescription.' + element.description : null}}
+                  {{element.description ? 'Toolkit.CookiesModal.CookieDescription.' + element.description : null}}
                 </mat-cell>
               </ng-container>
               <!-- Duration Column -->
               <ng-container matColumnDef="duration">
-                <mat-header-cell *matHeaderCellDef translate>SDK.CookiesModal.Duration </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef translate>Toolkit.CookiesModal.Duration </mat-header-cell>
                 <mat-cell *matCellDef="let element" translate>
-                  {{element.duration ? 'SDK.CookiesModal.CookieDuration.' + element.duration : null}}
+                  {{element.duration ? 'Toolkit.CookiesModal.CookieDuration.' + element.duration : null}}
                 </mat-cell>
               </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -74,10 +74,11 @@ import { ConsentStatuses } from '../../../models/cookies';
       </mat-tab-group>
     </div>
     <div mat-dialog-actions class="cookiesModal--actions">
-      <ddp-privacy-policy-button *ngIf="this.data.privacyPolicyLink" [className]="'cookiesModal--link'"></ddp-privacy-policy-button>
+      <toolkit-privacy-policy-button *ngIf="this.data.privacyPolicyLink" [className]="'cookiesModal--link'">
+      </toolkit-privacy-policy-button>
       <button class="Button Button--primary col-lg-4 col-md-4 col-sm-8 col-xs-12"
               (click)="submit()"
-              [innerText]="'SDK.CookiesModal.Submit' | translate">
+              [innerText]="'Toolkit.CookiesModal.Submit' | translate">
       </button>
     </div>`,
 })

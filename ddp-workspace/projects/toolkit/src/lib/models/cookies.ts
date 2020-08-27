@@ -7,7 +7,7 @@ export interface Cookie {
 export type CookiesTypes = 'Functional' | 'Analytical';
 
 export interface Cookies {
-  cookies: Array<{
+  data: Array<{
     type: CookiesTypes;
     actions: ['Accept', 'Reject'] | null;
     list: Array<Cookie>;
