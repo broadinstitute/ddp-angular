@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ConfigurationService } from './configuration.service';
-import { AnalyticsManagementService } from './analyticsManagement.service';
+import { SessionMementoService, LoggingService  } from 'ddp-sdk';
+import { ToolkitConfigurationService } from './toolkitConfiguration.service';
+import { AnalyticsManagementService  } from './analyticsManagement.service';
 import { ConsentStatuses, CookiesConsentStatuses, CookiesPreferences, CookiesTypes } from '../models/cookies';
-import { SessionMementoService } from './sessionMemento.service';
-import { LoggingService } from './logging.service';
 
 @Injectable()
 export class CookiesManagementService {
@@ -14,12 +13,12 @@ export class CookiesManagementService {
   private readonly isAuthenticated: boolean;
   private hasToSetCookiesPreferences: BehaviorSubject<boolean> =  new BehaviorSubject(null);
 
-  constructor(private analytics: AnalyticsManagementService,
-              @Inject('ddp.config') private configuration: ConfigurationService,
+  constructor(@Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
+              private analytics: AnalyticsManagementService,
               private session: SessionMementoService,
               private logger: LoggingService) {
-    this.cookiesTypes = this.configuration.cookies.cookies.map(x => x.type).filter(x => x !== 'Functional');
-    this.cookiesConsentStorageName = this.configuration.studyGuid + '_cookies_consent';
+    this.cookiesTypes = this.config.cookies.data.map(x => x.type).filter(x => x !== 'Functional');
+    this.cookiesConsentStorageName = this.config.studyGuid + '_cookies_consent';
     this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 

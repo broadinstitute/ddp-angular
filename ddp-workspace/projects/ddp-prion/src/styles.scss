@@ -3604,3 +3604,121 @@ app-third-party {
     padding: 5px 0;
   }
 }
+
+.NewActivityButton,
+.NewActivityButton:active,
+.NewActivityButton:hover {
+  position: relative;
+  border: 1px solid #82B547 !important;
+  background-color: #82B547 !important;
+  color: #ffffff !important;
+}
+
+.NewActivityButton:disabled:hover:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 180px;
+  top: -10px;
+  width: 220px;
+  margin-left: 5px;
+  padding: 12px;
+  color: #FFFFFF;
+  background: #F2B816;
+  border-radius: 3px;
+}
+
+@media only screen and (max-width: 767px) {
+  .NewActivityButton:disabled:hover:after {
+    left: -40px;
+    top: 55px;
+  }
+}
+
+.NewActivityButton:disabled {
+  border: 1px solid #9E9E9E !important;
+  background-color: #9E9E9E !important;
+  color: #ffffff !important;
+}
+
+.DataRequestModal {
+  &--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  &--request {
+    padding: 0 40px;
+
+    textarea.mat-input-element {
+      border: 1px solid lightgray;
+      padding: 15px;
+    }
+
+    .mat-dialog-content {
+      margin: 0;
+      padding: 0 0 0 15px;
+    }
+
+    .ddp-radio-group-column {
+      padding: 0 0 0 10px;
+    }
+  }
+
+  &--requestSubmitted {
+    padding: 50px 40px 0 40px;
+
+    .mat-dialog-content {
+      padding: 0 100px 50px 100px;
+      text-align: center;
+    }
+
+    .mat-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    .material-icons {
+      display: block;
+      margin: 0 auto;
+      font-size: 45px;
+      color: #82B547;
+    }
+  }
+
+  &--submit,
+  &--submit:active,
+  &--submit:hover {
+    position: relative;
+    border: 1px solid #82B547 !important;
+    background-color: #82B547 !important;
+    color: #ffffff !important;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .DataRequestModal {
+    &--header {
+      padding-left: 0;
+    }
+
+    &--request {
+      padding: 0;
+    }
+
+    &--requestSubmitted {
+      p {
+        padding: 0 10px 50px 10px;
+      }
+    }
+  }
+}
+
+.CenterChild {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}

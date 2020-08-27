@@ -272,203 +272,7 @@
         "Pt2": "es: Please log in again to return to the last page you were on."
       },
       "LogInButton": "es: Log In"
-    }
-  },
-  "SDK": {
-    "SubmitButton": "es: Submit",
-    "CloseButton": "es: Back to Dashboard",
-    "AddButton": "es: Add",
-    "CancelButton": "es: Cancel",
-    "NextButton": "es: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
-    "PreviousButton": "es:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
-    "SavingButton": "es: Saving",
-    "EditButton": "es: Edit",
-    "ReviewButton": "es: View",
-    "ValidateError": "es: Please complete all required fields.",
-    "CommunicationError": "es: There was a problem saving your data. Please check the form and your answers before submitting.",
-    "SaveError": "es: We're sorry but an error occurred.",
-    "ExportStudy": {
-      "Export": "es: EXPORT"
     },
-    "Common": {
-      "LogoAlt": "es: Prion Registry"
-    },
-    "ListStudies": {
-      "StudyName": "es: Study Name",
-      "ParticipantCount": "es: Participant Count"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "es: Workspace Name",
-      "WorkspaceNamespace": "es: Workspace Namespace"
-    },
-    "Login": {
-      "Login": "es: LOG IN",
-      "Logout": "es: LOG OUT"
-    },
-    "SignInOut": {
-      "SignIn": "es: Sign In",
-      "SignOut": "es: Sign Out"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "es: language selection"
-    },
-    "UserActivities": {
-      "ActivityName": "es: Activity",
-      "Summary": "es: Summary",
-      "ActivityStatus": "es: Status",
-      "ActivityDate": "es: Created",
-      "ActivityActions": "es: Actions"
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "es: Governed participants",
-      "ParticipantPlaceholder": "es: Participant",
-      "ParticipantsList": "es: Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "es: Profile",
-      "ViewAs": "es: View As",
-      "ManageParticipants": "es: Manage participants"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "es: User preferences",
-      "UserPreferencesGender": "es: Sex",
-      "UserPreferencesLocale": "es: Preferred language"
-    },
-    "Dashboard": {
-      "Title": "es: Welcome to the Prion Registry!",
-      "Text": "es: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
-    },
-    "DatePicker": {
-      "Day": "es: Choose day...",
-      "Month": "es: Choose month...",
-      "Year": "es: Choose year...",
-      "January": "es: January",
-      "February": "es: February",
-      "March": "es: March",
-      "April": "es: April",
-      "May": "es: May",
-      "June": "es: June",
-      "July": "es: July",
-      "August": "es: August",
-      "September": "es: September",
-      "October": "es: October",
-      "November": "es: November",
-      "December": "es: December"
-    },
-    "UserMenu": {
-      "DashboardButton": "es: My Dashboard",
-      "SignOutButton": "es: Sign Out"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "es: characters remaining",
-      "SingularForm": "es: character remaining"
-    },
-    "Title": {
-      "Default": "es: Prion Registry",
-      "Alert": "es: Your session will time-out soon"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "es: Please enter a valid email"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "es: Physician Name",
-        "Institution": "es: Institution",
-        "InstitutionAny": "es: Institution (if any)",
-        "City": "es: City",
-        "State": "es: State"
-      },
-      "PhysicianValidation": "es: Please fill out all required fields"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "es: Full Name",
-        "Country": "es: Country/Territory",
-        "Street1": "es: Street Address",
-        "Street2": "es: Apt/Floor #",
-        "State": {
-          "State": "es: State",
-          "Province": "es: Province",
-          "State/Province/Region": "es: State/Province/Region"
-        },
-        "City": "es: City",
-        "Phone": "es: Phone",
-        "Zip": {
-          "Zip Code": "es: Zip Code",
-          "Postal Code": "es: Postal Code",
-          "Zip/Postal Code": "es: Zip/Postal Code"
-        },
-        "Choose": "es: Choose {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "es: We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "es: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "es: Suggested:",
-        "AsEntered": "es: As Entered:"
-      },
-      "Error": {
-        "InvalidAddress": "es: Invalid address.",
-        "CannotVerify": "es: Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "es: An unknown error occurred while verifying address.",
-        "FieldIsRequired": "es: {{field}} is required",
-        "FieldIsInvalid": "es: {{field}} has an invalid value",
-        "InvalidHouseNumber": "es: Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "es: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "es: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "es: The requested resource could not be found.",
-        "FORBIDDEN": "es: Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "es: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "es: Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "es: Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "es: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "es: This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "es: API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "es: At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "es: The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "es: Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "es: The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "es: The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "es: Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "es: Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "es: The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "es: Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "es: One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "es: Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "es: Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "es: Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "es: USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "es: International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "es: Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "es: Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "es: This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "es: No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "es: We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "es: We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "es: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "es: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "es: House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "es: We could not find the street number provided.",
-        "E.STREET.MISSING": "es: Street is missing.",
-        "E.STREET.INVALID": "es: Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "es: Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "es: Box number is invalid.",
-        "E.ADDRESS.INVALID": "es: Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "es: Zip not found.",
-        "E.ZIP.INVALID": "es: Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "es: Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "es: Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "es: Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "es: Dual address.",
-        "E.STREET.MAGNET": "es: Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "es: Unverifiable city / state.",
-        "E.STATE.INVALID": "es: Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "es: Invalid delivery address.",
-        "E.TIMED_OUT": "es: Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "es: The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "es: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-      }
-    },
-    "TooltipAlt": "es: Information",
     "CookiesBanner": {
       "Text_Before_Policy_Link": "es: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
       "Text_After_Policy_Link": "es: to learn more about the cookies we use.",
@@ -788,6 +592,208 @@
           "P35": "es: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
         }
       }
+    },
+    "DataRequest": {
+      "DataRequest": "es: Data Request",
+      "SubmitRequest": "es: Submit Request",
+      "Okay": "es: Okay",
+      "SignInTooltip": "es: Please sign in to start a data access request"
     }
+  },
+  "SDK": {
+    "SubmitButton": "es: Submit",
+    "CloseButton": "es: Back to Dashboard",
+    "AddButton": "es: Add",
+    "CancelButton": "es: Cancel",
+    "NextButton": "es: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": "es:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+    "SavingButton": "es: Saving",
+    "EditButton": "es: Edit",
+    "ReviewButton": "es: View",
+    "ValidateError": "es: Please complete all required fields.",
+    "CommunicationError": "es: There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SaveError": "es: We're sorry but an error occurred.",
+    "ExportStudy": {
+      "Export": "es: EXPORT"
+    },
+    "Common": {
+      "LogoAlt": "es: Prion Registry"
+    },
+    "ListStudies": {
+      "StudyName": "es: Study Name",
+      "ParticipantCount": "es: Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "es: Workspace Name",
+      "WorkspaceNamespace": "es: Workspace Namespace"
+    },
+    "Login": {
+      "Login": "es: LOG IN",
+      "Logout": "es: LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "es: Sign In",
+      "SignOut": "es: Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "es: language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "es: Activity",
+      "Summary": "es: Summary",
+      "ActivityStatus": "es: Status",
+      "ActivityDate": "es: Created",
+      "ActivityActions": "es: Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "es: Governed participants",
+      "ParticipantPlaceholder": "es: Participant",
+      "ParticipantsList": "es: Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "es: Profile",
+      "ViewAs": "es: View As",
+      "ManageParticipants": "es: Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "es: User preferences",
+      "UserPreferencesGender": "es: Sex",
+      "UserPreferencesLocale": "es: Preferred language"
+    },
+    "Dashboard": {
+      "Title": "es: Welcome to the Prion Registry!",
+      "Text": "es: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+    },
+    "DatePicker": {
+      "Day": "es: Choose day...",
+      "Month": "es: Choose month...",
+      "Year": "es: Choose year...",
+      "January": "es: January",
+      "February": "es: February",
+      "March": "es: March",
+      "April": "es: April",
+      "May": "es: May",
+      "June": "es: June",
+      "July": "es: July",
+      "August": "es: August",
+      "September": "es: September",
+      "October": "es: October",
+      "November": "es: November",
+      "December": "es: December"
+    },
+    "UserMenu": {
+      "DashboardButton": "es: My Dashboard",
+      "SignOutButton": "es: Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "es: characters remaining",
+      "SingularForm": "es: character remaining"
+    },
+    "Title": {
+      "Default": "es: Prion Registry",
+      "Alert": "es: Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "es: Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "es: Physician Name",
+        "Institution": "es: Institution",
+        "InstitutionAny": "es: Institution (if any)",
+        "City": "es: City",
+        "State": "es: State"
+      },
+      "PhysicianValidation": "es: Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "es: Full Name",
+        "Country": "es: Country/Territory",
+        "Street1": "es: Street Address",
+        "Street2": "es: Apt/Floor #",
+        "State": {
+          "State": "es: State",
+          "Province": "es: Province",
+          "State/Province/Region": "es: State/Province/Region"
+        },
+        "City": "es: City",
+        "Phone": "es: Phone",
+        "Zip": {
+          "Zip Code": "es: Zip Code",
+          "Postal Code": "es: Postal Code",
+          "Zip/Postal Code": "es: Zip/Postal Code"
+        },
+        "Choose": "es: Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "es: We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "es: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "es: Suggested:",
+        "AsEntered": "es: As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "es: Invalid address.",
+        "CannotVerify": "es: Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "es: An unknown error occurred while verifying address.",
+        "FieldIsRequired": "es: {{field}} is required",
+        "FieldIsInvalid": "es: {{field}} has an invalid value",
+        "InvalidHouseNumber": "es: Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "es: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "es: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "es: The requested resource could not be found.",
+        "FORBIDDEN": "es: Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "es: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "es: Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "es: Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "es: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "es: This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "es: API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "es: At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "es: The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "es: Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "es: The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "es: The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "es: Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "es: Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "es: The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "es: Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "es: One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "es: Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "es: Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "es: Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "es: USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "es: International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "es: Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "es: Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "es: This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "es: No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "es: We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "es: We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "es: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "es: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "es: House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "es: We could not find the street number provided.",
+        "E.STREET.MISSING": "es: Street is missing.",
+        "E.STREET.INVALID": "es: Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "es: Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "es: Box number is invalid.",
+        "E.ADDRESS.INVALID": "es: Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "es: Zip not found.",
+        "E.ZIP.INVALID": "es: Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "es: Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "es: Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "es: Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "es: Dual address.",
+        "E.STREET.MAGNET": "es: Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "es: Unverifiable city / state.",
+        "E.STATE.INVALID": "es: Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "es: Invalid delivery address.",
+        "E.TIMED_OUT": "es: Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "es: The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "es: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "es: Information"
   }
 }

@@ -9,7 +9,7 @@ import { ToolkitConfigurationService } from "toolkit";
       <article class="PageContent">
         <div class="PageLayout row">
           <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
-              <h1 class="PageContent-title" translate>SDK.PrivacyPolicy.Title</h1>
+              <h1 class="PageContent-title" translate>Toolkit.PrivacyPolicy.Title</h1>
               <prion-privacy-policy></prion-privacy-policy>
           </div>
         </div>

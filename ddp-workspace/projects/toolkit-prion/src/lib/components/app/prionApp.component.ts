@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { BrowserContentService, CookiesManagementService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
+import { BrowserContentService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
 import { MatDialog } from "@angular/material";
 import { Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
@@ -8,7 +8,8 @@ import {
   CommunicationService,
   SessionWillExpireComponent,
   ToolkitConfigurationService,
-  WarningComponent
+  WarningComponent,
+  CookiesManagementService
 } from "toolkit";
 
 
@@ -20,7 +21,7 @@ import {
         <router-outlet></router-outlet>
       </div>
       <prion-footer></prion-footer>
-      <ddp-cookies-banner *ngIf="showCookiesBanner"></ddp-cookies-banner>
+      <toolkit-cookies-banner *ngIf="showCookiesBanner"></toolkit-cookies-banner>
     `
 })
 export class PrionAppComponent implements OnInit, OnDestroy {

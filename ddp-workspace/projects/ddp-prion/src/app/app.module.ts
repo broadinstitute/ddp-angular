@@ -62,25 +62,9 @@ tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.assetsBucketUrl = 'https://storage.googleapis.com/' + DDP_ENV.assetsBucketName;
 tkCfg.infoEmail = 'help@prionregistry.org';
-
-export const config = new ConfigurationService();
-config.backendUrl = DDP_ENV.basePepperUrl;
-config.auth0Domain = DDP_ENV.auth0Domain;
-config.auth0ClientId = DDP_ENV.auth0ClientId;
-config.studyGuid = DDP_ENV.studyGuid;
-config.logLevel = LogLevel.Info;
-config.baseUrl = location.origin + base;
-config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
-config.loginLandingUrl = DDP_ENV.loginLandingUrl;
-config.auth0CodeRedirect = location.origin + base + 'auth';
-config.localRegistrationUrl = config.backendUrl + '/pepper/v1/register';
-config.doLocalRegistration = DDP_ENV.doLocalRegistration;
-config.mapsApiKey = DDP_ENV.mapsApiKey;
-config.auth0Audience = DDP_ENV.auth0Audience;
-config.projectGAToken = DDP_ENV.projectGAToken;
-config.usePrionPrivacyPolicyTemplate = true;
-config.cookies = {
-  cookies: [
+tkCfg.usePrionPrivacyPolicyTemplate = true;
+tkCfg.cookies = {
+  data: [
     {
       type: 'Functional',
       actions: null,
@@ -200,6 +184,22 @@ config.cookies = {
     }
   ]
 };
+
+export const config = new ConfigurationService();
+config.backendUrl = DDP_ENV.basePepperUrl;
+config.auth0Domain = DDP_ENV.auth0Domain;
+config.auth0ClientId = DDP_ENV.auth0ClientId;
+config.studyGuid = DDP_ENV.studyGuid;
+config.logLevel = LogLevel.Info;
+config.baseUrl = location.origin + base;
+config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
+config.loginLandingUrl = DDP_ENV.loginLandingUrl;
+config.auth0CodeRedirect = location.origin + base + 'auth';
+config.localRegistrationUrl = config.backendUrl + '/pepper/v1/register';
+config.doLocalRegistration = DDP_ENV.doLocalRegistration;
+config.mapsApiKey = DDP_ENV.mapsApiKey;
+config.auth0Audience = DDP_ENV.auth0Audience;
+config.projectGAToken = DDP_ENV.projectGAToken;
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
