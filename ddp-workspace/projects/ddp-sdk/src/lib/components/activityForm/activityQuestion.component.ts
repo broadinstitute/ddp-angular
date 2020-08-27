@@ -14,7 +14,7 @@ import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs
       <div class="ddp-activity-question" #scrollAnchor>
           <ddp-activity-answer
                   [block]="block"
-                  [readonly]="readonly"
+                  [readonly]="isReadonly"
                   [validationRequested]="validationRequested$ | async"
                   (valueChanged)="enteredValue$.next($event)">
           </ddp-activity-answer>
@@ -46,6 +46,10 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Inject('ddp.config') public config: ConfigurationService,
     private submissionManager: SubmissionManager,
     private windowRef: WindowRef) {
+  }
+
+  get isReadonly(): boolean {
+    return this.readonly || this.block.readonly;
   }
 
   public ngOnInit(): void {
