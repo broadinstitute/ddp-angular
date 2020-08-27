@@ -19,7 +19,7 @@
     "Q&A": "Kesyon ak repons",
     "WhoWeAre": "Kimoun nou ye",
     "StayInformed": "Rete enfòme",
-    "KitInstructions": "Machasuiv pou kit",
+    "Help": "Help",
     "Dashboard": "Dach mwen an",
     "Menu": "Meni",
     "Invitation": "Kòd envitasyon",
@@ -289,6 +289,22 @@
       "Error": "Tanpri, mete yon adrès imèl ki valab"
     },
     "Button": "Suivan"
+  },
+  "Help": {
+    "Title": "Help Center",
+    "Text": {
+      "Part1": "If you have further questions, please reach out to study staff by emailing",
+      "Part2": "or"
+    },
+    "Collect": {
+      "Title": "How to collect your samples",
+      "Link": "Sample Collection Instructions",
+      "Alt": "PDF file icon"
+    },
+    "UPS": {
+      "Title": "UPS locations and Hours of Operation",
+      "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
+    }
   },
   "Toolkit": {
     "Dashboard": {

@@ -43,6 +43,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { PrismComponent } from './components/prism/prism.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
+import { HelpComponent } from './components/help/help.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -129,7 +130,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
-        EnrollmentComponent
+        EnrollmentComponent,
+        HelpComponent
     ],
     imports: [
         BrowserModule,

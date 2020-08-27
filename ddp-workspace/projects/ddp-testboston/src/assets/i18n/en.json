@@ -19,7 +19,7 @@
     "Q&A": "Q&A",
     "WhoWeAre": "Who We Are",
     "StayInformed": "Stay Informed",
-    "KitInstructions": "Kit Instructions",
+    "Help": "Help",
     "Dashboard": "My Dashboard",
     "Menu": "Menu",
     "Invitation": "Invitation Code",
@@ -289,6 +289,22 @@
       "Error": "Please enter valid email address"
     },
     "Button": "Next"
+  },
+  "Help": {
+    "Title": "Help Center",
+    "Text": {
+      "Part1": "If you have further questions, please reach out to study staff by emailing",
+      "Part2": "or"
+    },
+    "Collect": {
+      "Title": "How to collect your samples",
+      "Link": "Sample Collection Instructions",
+      "Alt": "PDF file icon"
+    },
+    "UPS": {
+      "Title": "UPS locations and Hours of Operation",
+      "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
+    }
   },
   "Toolkit": {
     "Dashboard": {

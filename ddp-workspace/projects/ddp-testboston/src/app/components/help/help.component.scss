@@ -1,0 +1,34 @@
+@import '../../../app-theme.scss';
+
+.help-block {
+    margin: 3rem 0 10rem 0;
+}
+
+.sub-title {
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.placeholder {
+    width: 100%;
+    height: 400px;
+    margin: 2.5rem 0;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf {
+    display: flex;
+    align-items: center;
+    font-size: 1.625rem;
+    line-height: 2.0625rem;
+    text-decoration: underline;
+    color: mat-color($app-theme, 1200);
+    font-weight: 600;
+
+    &__image {
+        margin-right: 5px;
+    }
+}

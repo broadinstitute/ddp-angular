@@ -32,9 +32,9 @@
             </ul>
         </nav>
         <div class="static-menu">
-            <a class="header-link static-menu__item" href="kit-instructions.pdf" target="_blank" translate>
-                <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
-                Navigation.KitInstructions
+            <a class="header-link static-menu__item" [routerLink]="'/' + appRoutes.UPS"
+                routerLinkActive="header-link_active" translate>
+                Navigation.Help
             </a>
             <div class="static-menu__item" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
@@ -90,9 +90,9 @@
             </ng-container>
             <div class="menu_mobile-buttons">
                 <li class="menu__item">
-                    <a class="header-link" href="kit-instructions.pdf" target="_blank" translate>
-                        <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
-                        Navigation.KitInstructions
+                    <a class="header-link" [routerLink]="'/' + appRoutes.UPS" routerLinkActive="header-link_active"
+                        translate>
+                        Navigation.Help
                     </a>
                 </li>
                 <li class="menu__item" *ngIf="isAuthenticated">
