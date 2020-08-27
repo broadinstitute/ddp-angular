@@ -45,7 +45,6 @@ export * from './lib/models/dashboardColumns';
 export * from './lib/models/studySubject';
 export * from './lib/models/invitationType';
 export * from './lib/models/activity/questionType';
-export * from './lib/models/cookies';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
@@ -80,7 +79,8 @@ export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/userServiceAgent.service';
-export * from './lib/services/cookiesManagement.service';
+export * from './lib/services/submitAnnouncement.service';
+export * from './lib/services/serviceAgents/submissionManager.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
