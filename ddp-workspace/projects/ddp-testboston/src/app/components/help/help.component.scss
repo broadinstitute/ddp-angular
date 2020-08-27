@@ -1,7 +1,11 @@
 @import '../../../app-theme.scss';
 
+.help-section {
+    background-color: mat-color($app-theme, 3200);
+}
+
 .help-block {
-    margin: 3rem 0 10rem 0;
+    margin: 5rem 0 10rem 0;
 }
 
 .sub-title {
