@@ -272,203 +272,7 @@
         "Pt2": "zh: Please log in again to return to the last page you were on."
       },
       "LogInButton": "zh: Log In"
-    }
-  },
-  "SDK": {
-    "SubmitButton": "zh: Submit",
-    "CloseButton": "zh: Back to Dashboard",
-    "AddButton": "zh: Add",
-    "CancelButton": "zh: Cancel",
-    "NextButton": "zh: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
-    "PreviousButton": "zh:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
-    "SavingButton": "zh: Saving",
-    "EditButton": "zh: Edit",
-    "ReviewButton": "zh: View",
-    "ValidateError": "zh: Please complete all required fields.",
-    "CommunicationError": "zh: There was a problem saving your data. Please check the form and your answers before submitting.",
-    "SaveError": "zh: We're sorry but an error occurred.",
-    "ExportStudy": {
-      "Export": "zh: EXPORT"
     },
-    "Common": {
-      "LogoAlt": "zh: Prion Registry"
-    },
-    "ListStudies": {
-      "StudyName": "zh: Study Name",
-      "ParticipantCount": "zh: Participant Count"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "zh: Workspace Name",
-      "WorkspaceNamespace": "zh: Workspace Namespace"
-    },
-    "Login": {
-      "Login": "zh: LOG IN",
-      "Logout": "zh: LOG OUT"
-    },
-    "SignInOut": {
-      "SignIn": "zh: Sign In",
-      "SignOut": "zh: Sign Out"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "zh: language selection"
-    },
-    "UserActivities": {
-      "ActivityName": "zh: Activity",
-      "Summary": "zh: Summary",
-      "ActivityStatus": "zh: Status",
-      "ActivityDate": "zh: Created",
-      "ActivityActions": "zh: Actions"
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "zh: Governed participants",
-      "ParticipantPlaceholder": "zh: Participant",
-      "ParticipantsList": "zh: Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "zh: Profile",
-      "ViewAs": "zh: View As",
-      "ManageParticipants": "zh: Manage participants"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "zh: User preferences",
-      "UserPreferencesGender": "zh: Sex",
-      "UserPreferencesLocale": "zh: Preferred language"
-    },
-    "Dashboard": {
-      "Title": "zh: Welcome to the Prion Registry!",
-      "Text": "zh: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
-    },
-    "DatePicker": {
-      "Day": "zh: Choose day...",
-      "Month": "zh: Choose month...",
-      "Year": "zh: Choose year...",
-      "January": "zh: January",
-      "February": "zh: February",
-      "March": "zh: March",
-      "April": "zh: April",
-      "May": "zh: May",
-      "June": "zh: June",
-      "July": "zh: July",
-      "August": "zh: August",
-      "September": "zh: September",
-      "October": "zh: October",
-      "November": "zh: November",
-      "December": "zh: December"
-    },
-    "UserMenu": {
-      "DashboardButton": "zh: My Dashboard",
-      "SignOutButton": "zh: Sign Out"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "zh: characters remaining",
-      "SingularForm": "zh: character remaining"
-    },
-    "Title": {
-      "Default": "zh: Prion Registry",
-      "Alert": "zh: Your session will time-out soon"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "zh: Please enter a valid email"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "zh: Physician Name",
-        "Institution": "zh: Institution",
-        "InstitutionAny": "zh: Institution (if any)",
-        "City": "zh: City",
-        "State": "zh: State"
-      },
-      "PhysicianValidation": "zh: Please fill out all required fields"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "zh: Full Name",
-        "Country": "zh: Country/Territory",
-        "Street1": "zh: Street Address",
-        "Street2": "zh: Apt/Floor #",
-        "State": {
-          "State": "zh: State",
-          "Province": "zh: Province",
-          "State/Province/Region": "zh: State/Province/Region"
-        },
-        "City": "zh: City",
-        "Phone": "zh: Phone",
-        "Zip": {
-          "Zip Code": "zh: Zip Code",
-          "Postal Code": "zh: Postal Code",
-          "Zip/Postal Code": "zh: Zip/Postal Code"
-        },
-        "Choose": "zh: Choose {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "zh: We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "zh: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "zh: Suggested:",
-        "AsEntered": "zh: As Entered:"
-      },
-      "Error": {
-        "InvalidAddress": "zh: Invalid address.",
-        "CannotVerify": "zh: Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "zh: An unknown error occurred while verifying address.",
-        "FieldIsRequired": "zh: {{field}} is required",
-        "FieldIsInvalid": "zh: {{field}} has an invalid value",
-        "InvalidHouseNumber": "zh: Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "zh: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "zh: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "zh: The requested resource could not be found.",
-        "FORBIDDEN": "zh: Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "zh: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "zh: Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "zh: Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "zh: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "zh: This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "zh: API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "zh: At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "zh: The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "zh: Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "zh: The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "zh: The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "zh: Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "zh: Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "zh: The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "zh: Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "zh: One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "zh: Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "zh: Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "zh: Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "zh: USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "zh: International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "zh: Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "zh: Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "zh: This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "zh: No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "zh: We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "zh: We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "zh: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "zh: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "zh: House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "zh: We could not find the street number provided.",
-        "E.STREET.MISSING": "zh: Street is missing.",
-        "E.STREET.INVALID": "zh: Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "zh: Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "zh: Box number is invalid.",
-        "E.ADDRESS.INVALID": "zh: Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "zh: Zip not found.",
-        "E.ZIP.INVALID": "zh: Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "zh: Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "zh: Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "zh: Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "zh: Dual address.",
-        "E.STREET.MAGNET": "zh: Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "zh: Unverifiable city / state.",
-        "E.STATE.INVALID": "zh: Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "zh: Invalid delivery address.",
-        "E.TIMED_OUT": "zh: Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "zh: The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "zh: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-      }
-    },
-    "TooltipAlt": "zh: Information",
     "CookiesBanner": {
       "Text_Before_Policy_Link": "zh: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
       "Text_After_Policy_Link": "zh: to learn more about the cookies we use.",
@@ -788,6 +592,208 @@
           "P35": "zh: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
         }
       }
+    },
+    "DataRequest": {
+      "DataRequest": "zh: Data Request",
+      "SubmitRequest": "zh: Submit Request",
+      "Okay": "zh: Okay",
+      "SignInTooltip": "zh: Please sign in to start a data access request"
     }
+  },
+  "SDK": {
+    "SubmitButton": "zh: Submit",
+    "CloseButton": "zh: Back to Dashboard",
+    "AddButton": "zh: Add",
+    "CancelButton": "zh: Cancel",
+    "NextButton": "zh: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": "zh:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
+    "SavingButton": "zh: Saving",
+    "EditButton": "zh: Edit",
+    "ReviewButton": "zh: View",
+    "ValidateError": "zh: Please complete all required fields.",
+    "CommunicationError": "zh: There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SaveError": "zh: We're sorry but an error occurred.",
+    "ExportStudy": {
+      "Export": "zh: EXPORT"
+    },
+    "Common": {
+      "LogoAlt": "zh: Prion Registry"
+    },
+    "ListStudies": {
+      "StudyName": "zh: Study Name",
+      "ParticipantCount": "zh: Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "zh: Workspace Name",
+      "WorkspaceNamespace": "zh: Workspace Namespace"
+    },
+    "Login": {
+      "Login": "zh: LOG IN",
+      "Logout": "zh: LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "zh: Sign In",
+      "SignOut": "zh: Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "zh: language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "zh: Activity",
+      "Summary": "zh: Summary",
+      "ActivityStatus": "zh: Status",
+      "ActivityDate": "zh: Created",
+      "ActivityActions": "zh: Actions"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "zh: Governed participants",
+      "ParticipantPlaceholder": "zh: Participant",
+      "ParticipantsList": "zh: Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "zh: Profile",
+      "ViewAs": "zh: View As",
+      "ManageParticipants": "zh: Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "zh: User preferences",
+      "UserPreferencesGender": "zh: Sex",
+      "UserPreferencesLocale": "zh: Preferred language"
+    },
+    "Dashboard": {
+      "Title": "zh: Welcome to the Prion Registry!",
+      "Text": "zh: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+    },
+    "DatePicker": {
+      "Day": "zh: Choose day...",
+      "Month": "zh: Choose month...",
+      "Year": "zh: Choose year...",
+      "January": "zh: January",
+      "February": "zh: February",
+      "March": "zh: March",
+      "April": "zh: April",
+      "May": "zh: May",
+      "June": "zh: June",
+      "July": "zh: July",
+      "August": "zh: August",
+      "September": "zh: September",
+      "October": "zh: October",
+      "November": "zh: November",
+      "December": "zh: December"
+    },
+    "UserMenu": {
+      "DashboardButton": "zh: My Dashboard",
+      "SignOutButton": "zh: Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "zh: characters remaining",
+      "SingularForm": "zh: character remaining"
+    },
+    "Title": {
+      "Default": "zh: Prion Registry",
+      "Alert": "zh: Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "zh: Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "zh: Physician Name",
+        "Institution": "zh: Institution",
+        "InstitutionAny": "zh: Institution (if any)",
+        "City": "zh: City",
+        "State": "zh: State"
+      },
+      "PhysicianValidation": "zh: Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "zh: Full Name",
+        "Country": "zh: Country/Territory",
+        "Street1": "zh: Street Address",
+        "Street2": "zh: Apt/Floor #",
+        "State": {
+          "State": "zh: State",
+          "Province": "zh: Province",
+          "State/Province/Region": "zh: State/Province/Region"
+        },
+        "City": "zh: City",
+        "Phone": "zh: Phone",
+        "Zip": {
+          "Zip Code": "zh: Zip Code",
+          "Postal Code": "zh: Postal Code",
+          "Zip/Postal Code": "zh: Zip/Postal Code"
+        },
+        "Choose": "zh: Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "zh: We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "zh: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "zh: Suggested:",
+        "AsEntered": "zh: As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "zh: Invalid address.",
+        "CannotVerify": "zh: Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "zh: An unknown error occurred while verifying address.",
+        "FieldIsRequired": "zh: {{field}} is required",
+        "FieldIsInvalid": "zh: {{field}} has an invalid value",
+        "InvalidHouseNumber": "zh: Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "zh: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "zh: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "zh: The requested resource could not be found.",
+        "FORBIDDEN": "zh: Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "zh: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "zh: Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "zh: Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "zh: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "zh: This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "zh: API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "zh: At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "zh: The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "zh: Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "zh: The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "zh: The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "zh: Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "zh: Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "zh: The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "zh: Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "zh: One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "zh: Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "zh: Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "zh: Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "zh: USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "zh: International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "zh: Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "zh: Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "zh: This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "zh: No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "zh: We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "zh: We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "zh: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "zh: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "zh: House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "zh: We could not find the street number provided.",
+        "E.STREET.MISSING": "zh: Street is missing.",
+        "E.STREET.INVALID": "zh: Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "zh: Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "zh: Box number is invalid.",
+        "E.ADDRESS.INVALID": "zh: Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "zh: Zip not found.",
+        "E.ZIP.INVALID": "zh: Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "zh: Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "zh: Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "zh: Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "zh: Dual address.",
+        "E.STREET.MAGNET": "zh: Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "zh: Unverifiable city / state.",
+        "E.STATE.INVALID": "zh: Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "zh: Invalid delivery address.",
+        "E.TIMED_OUT": "zh: Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "zh: The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "zh: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "zh: Information"
   }
 }

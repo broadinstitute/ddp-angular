@@ -10,6 +10,8 @@ import {
   BrowserGuard
 } from 'ddp-sdk';
 
+import { CookiesConsentGuard } from 'toolkit';
+
 import {
   PrionDashboardComponent,
   PrionActivityPageComponent,
@@ -36,6 +38,7 @@ const routes: Routes = [
     component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ],
@@ -48,6 +51,7 @@ const routes: Routes = [
     component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ],
@@ -58,13 +62,17 @@ const routes: Routes = [
   {
     path: '3rd-party',
     component: ThirdPartyComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'study-listing',
     component: StudyListingComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
@@ -74,6 +82,7 @@ const routes: Routes = [
     component: PrionDashboardComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
@@ -88,6 +97,7 @@ const routes: Routes = [
     component: PrionActivityComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
@@ -95,28 +105,41 @@ const routes: Routes = [
   {
     path: 'login-landing',
     component: PrionLoginLandingComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'login-landing/:mode',
     component: PrionRedirectToAuth0LoginComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'redirect-join',
     component: RedirectJoinComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'change-language-redirect',
     component: ChangeLanguageRedirectComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'start-study',
     component: PrionWorkflowStartActivityComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
@@ -124,29 +147,42 @@ const routes: Routes = [
   {
     path: 'error',
     component: PrionErrorComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'learn-more',
     component: LearnMoreComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'privacy-policy',
     component: PrivacyPolicyFullComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'password-reset-done',
     component: PrionRedirectToLoginLandingComponent,
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'session-expired',
     component: PrionSessionExpiredComponent,
     canActivate: [
       IrbGuard,
-      BrowserGuard
+      BrowserGuard,
+      CookiesConsentGuard
     ]
   },
   {
@@ -157,7 +193,10 @@ const routes: Routes = [
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: '**',
