@@ -14,6 +14,7 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
   WorkflowStartActivityRedesignedComponent,
   PasswordRedesignedComponent,
+  ErrorRedesignedComponent,
   HeaderActionGuard
 } from 'toolkit';
 
@@ -105,6 +106,13 @@ const routes: Routes = [
   {
     path: AppRoutes.CountMeIn,
     component: WorkflowStartActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Error,
+    component: ErrorRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
