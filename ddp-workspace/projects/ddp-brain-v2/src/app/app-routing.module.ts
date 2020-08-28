@@ -14,17 +14,19 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
   WorkflowStartActivityRedesignedComponent,
   PasswordRedesignedComponent,
-  ErrorRedesignedComponent
+  ErrorRedesignedComponent,
+  HeaderActionGuard
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
 import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 const routes: Routes = [
   {
-    path: 'about-you',
+    path: AppRoutes.AboutYou,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -35,7 +37,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'consent',
+    path: AppRoutes.Consent,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -46,7 +48,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'release-survey',
+    path: AppRoutes.Release,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -57,7 +59,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'dashboard',
+    path: AppRoutes.Dashboard,
     component: DashboardRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -65,14 +67,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'auth',
+    path: AppRoutes.LocalAuth,
     component: Auth0CodeCallbackComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'activity/:id',
+    path: AppRoutes.ActivityId,
     component: ActivityRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -80,7 +82,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'activity-link/:id',
+    path: AppRoutes.ActivityLinkId,
     component: ActivityRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -88,21 +90,21 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'login-landing',
+    path: AppRoutes.LoginLanding,
     component: LoginLandingRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'login-landing/:mode',
+    path: AppRoutes.LoginLandingMode,
     component: RedirectToAuth0LoginRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'count-me-in',
+    path: AppRoutes.CountMeIn,
     component: WorkflowStartActivityRedesignedComponent,
     canActivate: [
       IrbGuard
@@ -116,8 +118,25 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'password',
+    path: AppRoutes.Password,
     component: PasswordRedesignedComponent
+  },
+  {
+    path: AppRoutes.MoreDetails,
+    component: FaqComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.JoinList,
+    component: WelcomeComponent,
+    canActivate: [
+      HeaderActionGuard
+    ],
+    data: {
+      openJoinDialog: true
+    }
   },
   {
     path: '',
