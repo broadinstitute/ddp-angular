@@ -17,5 +17,6 @@ export const AppRoutes = {
     AboutUs: 'about-us',
     Data: 'data',
     MoreDetails: 'more-details',
+    StayInformed: 'stay-informed',
     JoinList: 'join-list'
 };

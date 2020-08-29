@@ -6,6 +6,7 @@ import {
   AuthGuard,
   Auth0CodeCallbackComponent
 } from 'ddp-sdk';
+
 import {
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
@@ -14,6 +15,7 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
   WorkflowStartActivityRedesignedComponent,
   PasswordRedesignedComponent,
+  StayInformedRedesignedComponent,
   ErrorRedesignedComponent,
   HeaderActionGuard
 } from 'toolkit';
@@ -106,6 +108,13 @@ const routes: Routes = [
   {
     path: AppRoutes.CountMeIn,
     component: WorkflowStartActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.StayInformed,
+    component: StayInformedRedesignedComponent,
     canActivate: [
       IrbGuard
     ]

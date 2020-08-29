@@ -53,6 +53,7 @@ toolkitConfig.releaseUrl = AppRoutes.Release;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
+toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braincancerproject.org';
 toolkitConfig.dataEmail = 'data@braincancerproject.org';
