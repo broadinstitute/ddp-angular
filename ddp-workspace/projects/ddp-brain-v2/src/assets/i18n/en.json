@@ -7,7 +7,8 @@
             },
             "LearnMore": "Learn More",
             "ViewFAQ": "View FAQ page",
-            "JoinMailingList": "Join Mailing List"
+            "JoinMailingList": "Join Mailing List",
+            "ReturnHome": "Return home"
         },
         "CMI": "Count Me In"
     },
@@ -365,6 +366,10 @@
             "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
             "PasswordRequiredError": "Password is required"
+        },
+        "StayInformed": {
+            "Title": "Stay informed",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email"
         },
         "ErrorPage": {
             "Title": "We've encountered an error",
