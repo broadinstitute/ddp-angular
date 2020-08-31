@@ -30,6 +30,7 @@ import { DataComponent } from './components/data/data.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ModalImageComponent } from './components/modal-image/modal-image.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -101,7 +102,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HeaderComponent,
     FooterComponent,
     FaqComponent,
-    DataComponent
+    DataComponent,
+    ModalImageComponent
   ],
   imports: [
     BrowserModule,

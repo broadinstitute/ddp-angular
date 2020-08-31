@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
+import { ModalImageComponent } from '../modal-image/modal-image.component';
 
 @Component({
   selector: 'app-data',
@@ -8,6 +9,7 @@ import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 })
 export class DataComponent implements OnInit {
   infoEmail: string;
+  @ViewChild('modalImage', { static: false }) public modalImage: ModalImageComponent;
 
   constructor(
     private communicationService: CommunicationService,
