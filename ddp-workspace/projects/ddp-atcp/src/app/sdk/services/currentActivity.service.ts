@@ -15,7 +15,6 @@ export class CurrentActivityService implements OnDestroy {
     this.anchor
       .addNew(this.activity
       .pipe(filter(x => x !== null))
-      .pipe(take(1))
       .subscribe(x => this.activityProgressCalculationService.setProgress(x)));
   }
 
