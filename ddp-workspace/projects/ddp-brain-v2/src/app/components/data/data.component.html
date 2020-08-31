@@ -16,9 +16,9 @@
     <section class="section">
         <div class="content content_medium snapshots-block">
             <h2 translate>DataPage.Snapshots.Title</h2>
-            <div class="diagrams">
+            <div class="diagrams" (click)="modalImage.openModal($event)">
                 <ng-container *ngFor="let diagram of 'DataPage.Snapshots.Diagrams' | translate">
-                    <div class="diagram">
+                    <div class="diagram diagram_modal">
                         <img lazy-resource class="diagram__image" [src]="diagram.Image" [alt]="diagram.Alt">
                         <p class="diagram__link">
                             <a class="Link" href="#" target="_blank">{{diagram.Link}}</a>
@@ -59,3 +59,5 @@
         </div>
     </section>
 </main>
+
+<app-modal-image #modalImage></app-modal-image>
