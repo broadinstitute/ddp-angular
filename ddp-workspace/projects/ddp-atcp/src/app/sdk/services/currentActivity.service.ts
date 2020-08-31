@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivityServiceAgent, ActivityForm } from 'ddp-sdk';
-import { filter, tap } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
 import { ActivityCodes } from '../constants/activityCodes';
 
@@ -13,6 +13,7 @@ export class CurrentActivityService {
               private activityProgressCalculationService: ActivityProgressCalculationService) {
     this.activity
       .pipe(filter(x => x !== null))
+      .pipe(take(1))
       .subscribe(x => this.activityProgressCalculationService.setProgress(x));
   }
 
@@ -20,6 +21,7 @@ export class CurrentActivityService {
                      activityGuid: Observable<string | null>): Observable<ActivityForm> {
     return this.activityServiceAgent
       .getActivity(studyGuid, activityGuid)
+      .pipe(take(1))
       .pipe(tap(x => this.saveCurrentActivity(x)));
   }
 
@@ -31,6 +33,7 @@ export class CurrentActivityService {
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);
       this.activityServiceAgent
         .saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex)
+        .pipe(take(1))
         .subscribe();
     }
   }
