@@ -324,13 +324,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    public decrementStep(): void {
+    public decrementStep(scroll: boolean = true): void {
         const previousIndex = this.previousAvailableSectionIndex();
         if (previousIndex !== -1) {
             // if we move forwards or backwards, let's reset our validation display
             this.resetValidationState();
             this.currentSectionIndex = previousIndex;
+          if (scroll) {
             this.scrollToTop();
+          }
         }
     }
 
