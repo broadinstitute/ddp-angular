@@ -3640,7 +3640,7 @@ app-third-party {
   color: #ffffff !important;
 }
 
-.DataRequestModal {
+.ModalActivity {
   &--header {
     display: flex;
     flex-direction: row;
@@ -3699,7 +3699,7 @@ app-third-party {
 }
 
 @media only screen and (max-width: 450px) {
-  .DataRequestModal {
+  .ModalActivity {
     &--header {
       padding-left: 0;
     }

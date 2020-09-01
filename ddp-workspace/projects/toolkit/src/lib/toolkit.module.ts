@@ -67,9 +67,9 @@ import { CookiesConsentGuard } from './guards/cookiesConsent.guard';
 import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
-import { NewActivityInModalButtonComponent } from './components/activity/new-activity-in-modal-button.component';
-import { NewActivityInModalComponent } from './components/activity/new-activity-in-modal.component';
-import { DataRequestComponent } from './components/activity/data-request-activity.component';
+import { NewModalActivityButtonComponent } from './components/activity/new-modal-activity-button.component';
+import { NewModalActivityComponent } from './components/activity/new-modal-activity.component';
+import { ModalActivityComponent } from './components/activity/modal-activity.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -174,9 +174,9 @@ import { MatRadioModule } from '@angular/material/radio';
     PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
-    NewActivityInModalButtonComponent,
-    NewActivityInModalComponent,
-    DataRequestComponent
+    NewModalActivityButtonComponent,
+    NewModalActivityComponent,
+    ModalActivityComponent
   ],
   exports: [
     FooterComponent,
@@ -226,7 +226,7 @@ import { MatRadioModule } from '@angular/material/radio';
     SessionWillExpireComponent,
     CookiesPreferencesModalComponent,
     PrivacyPolicyModalComponent,
-    NewActivityInModalComponent
+    NewModalActivityComponent
   ]
 })
 export class ToolkitModule {
