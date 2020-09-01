@@ -50,7 +50,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
                 [innerText]="data.nextButtonText | translate"></button>
 
         <button *ngIf="isLastStep && !data.showFinalConfirmation"
-                (click)="this.dialogRef.close()"
+                (click)="close()"
                 class="Button ModalActivity--submit col-lg-6 col-md-6 col-sm-6 col-xs-12"
                 [innerText]="data.submitButtonText | translate"></button>
 
@@ -61,7 +61,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
                 [innerText]="data.submitButtonText | translate"></button>
 
         <button *ngIf="isLastStep && data.showFinalConfirmation"
-                (click)="this.dialogRef.close()"
+                (click)="close()"
                 class="Button ModalActivity--submit col-lg-6 col-md-6 col-sm-6 col-xs-12"
                 [innerText]="data.confirmationButtonText | translate"></button>
       </div>
@@ -84,5 +84,10 @@ export class ModalActivityComponent extends ActivityComponent implements OnInit,
 
   public get isStepBeforeLast(): boolean {
     return this.currentSectionIndex === this.model.sections.length - 2;
+  }
+
+  public close(): void {
+    this.flush();
+    this.dialogRef.close();
   }
 }

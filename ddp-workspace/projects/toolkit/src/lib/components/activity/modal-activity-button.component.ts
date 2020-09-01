@@ -5,7 +5,7 @@ import { SessionMementoService } from 'ddp-sdk';
 import { NewModalActivityComponent } from './new-modal-activity.component';
 
 @Component({
-  selector: 'toolkit-new-modal-activity-button',
+  selector: 'toolkit-modal-activity-button',
   template: `
     <button (click)="launchActivity()"
             class="Button NewActivityButton"
@@ -14,7 +14,7 @@ import { NewModalActivityComponent } from './new-modal-activity.component';
             [innerText]="buttonText | translate">
     </button>`
 })
-export class NewModalActivityButtonComponent {
+export class ModalActivityButtonComponent {
   @Input() disabledTooltip: string;
   @Input() buttonText: string;
 
@@ -38,11 +38,13 @@ export class NewModalActivityButtonComponent {
       width: '740px',
       data: {
         activityGuid: this.activityGuid,
-        nextButtonText: this.nextButtonText,
-        prevButtonText: this.prevButtonText,
-        submitButtonText: this.submitButtonText,
-        showFinalConfirmation: this.showFinalConfirmation,
-        confirmationButtonText: this.confirmationButtonText
+        activityDetails: {
+          nextButtonText: this.nextButtonText,
+          prevButtonText: this.prevButtonText,
+          submitButtonText: this.submitButtonText,
+          showFinalConfirmation: this.showFinalConfirmation,
+          confirmationButtonText: this.confirmationButtonText
+        }
       },
       autoFocus: false,
       disableClose: true,
