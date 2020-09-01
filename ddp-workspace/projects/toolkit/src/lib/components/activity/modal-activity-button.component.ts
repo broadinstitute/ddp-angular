@@ -7,7 +7,7 @@ import { NewModalActivityComponent } from './new-modal-activity.component';
 @Component({
   selector: 'toolkit-modal-activity-button',
   template: `
-    <button (click)="launchActivity()"
+    <button (click)="openModal()"
             class="Button NewActivityButton"
             [disabled]="!isAuthenticated"
             [attr.data-tooltip]="disabledTooltip | translate"
@@ -33,7 +33,7 @@ export class ModalActivityButtonComponent {
     this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 
-  launchActivity(): void {
+  openModal(): void {
     this.dialog.open(NewModalActivityComponent, {
       width: '740px',
       data: {
