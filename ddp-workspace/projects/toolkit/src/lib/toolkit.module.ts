@@ -67,7 +67,7 @@ import { CookiesConsentGuard } from './guards/cookiesConsent.guard';
 import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
-import { NewModalActivityButtonComponent } from './components/activity/new-modal-activity-button.component';
+import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
 import { NewModalActivityComponent } from './components/activity/new-modal-activity.component';
 import { ModalActivityComponent } from './components/activity/modal-activity.component';
 
@@ -174,7 +174,7 @@ import { MatRadioModule } from '@angular/material/radio';
     PrivacyPolicyButtonComponent,
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
-    NewModalActivityButtonComponent,
+    ModalActivityButtonComponent,
     NewModalActivityComponent,
     ModalActivityComponent
   ],

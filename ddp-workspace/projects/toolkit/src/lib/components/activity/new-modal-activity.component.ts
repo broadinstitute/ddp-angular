@@ -5,14 +5,13 @@ import { LoggingService, UserActivityServiceAgent, ActivityServiceAgent, Activit
 import { Observable, Subject  } from 'rxjs';
 import { map, share, takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ModalActivityData } from '../../models/modalActivityData';
 
 @Component({
   selector: 'toolkit-new-modal-activity',
   template: `
     <toolkit-modal-activity [studyGuid]="config.studyGuid"
                             [activityGuid]="(activityInstance$ | async)?.instanceGuid"
-                            [data]="data">
+                            [data]="data.activityDetails">
     </toolkit-modal-activity>
   `
 })
@@ -22,7 +21,7 @@ export class NewModalActivityComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<NewModalActivityComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ModalActivityData,
+    @Inject(MAT_DIALOG_DATA) public data,
     private serviceAgent: ActivityServiceAgent,
     private userActivityServiceAgent: UserActivityServiceAgent,
     private router: Router,
@@ -32,7 +31,7 @@ export class NewModalActivityComponent implements OnInit, OnDestroy {
   }
 
   private createActivityInstance(): void {
-    const newActivityInstance$: Observable<ActivityInstanceGuid | null> = this.serviceAgent
+    this.activityInstance$ = this.serviceAgent
     .createInstance(this.config.studyGuid, this.data.activityGuid).pipe(
       map(x => {
         if (x) {
@@ -42,9 +41,8 @@ export class NewModalActivityComponent implements OnInit, OnDestroy {
             + this.data.activityGuid, 'Creating new activity instance in modal');
           return null;
         }
-      }));
-
-    this.activityInstance$ = newActivityInstance$.pipe(share());
+      }))
+    .pipe(share());
   }
 
   public ngOnInit(): void {

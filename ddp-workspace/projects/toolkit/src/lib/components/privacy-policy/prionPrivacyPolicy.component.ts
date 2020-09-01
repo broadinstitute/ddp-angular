@@ -153,13 +153,13 @@ import {
       <h4 class="Subtitle Color--green" translate>Toolkit.PrivacyPolicy.InformationRights.Title</h4>
       <p translate>Toolkit.PrivacyPolicy.InformationRights.Text.P1</p>
       <div class="CenterDiv SpacedButtonDiv">
-        <toolkit-new-modal-activity-button
+        <toolkit-modal-activity-button
           activityGuid="PRIONREQUEST"
           submitButtonText="Toolkit.DataRequest.SubmitRequest"
           showFinalConfirmation="true"
           confirmationButtonText="Toolkit.DataRequest.Okay"
           disabledTooltip="Toolkit.DataRequest.SignInTooltip"
-          buttonText="Toolkit.DataRequest.DataRequest"></toolkit-new-modal-activity-button>
+          buttonText="Toolkit.DataRequest.DataRequest"></toolkit-modal-activity-button>
       </div>
       <p translate>Toolkit.PrivacyPolicy.InformationRights.Text.P2</p>
       <h4 class="Subtitle Color--green" translate>Toolkit.PrivacyPolicy.Security.Title</h4>
@@ -231,13 +231,13 @@ import {
       <p><span class="Accent" translate>Toolkit.PrivacyPolicy.EU.Text.P34Bold</span><span translate>Toolkit.PrivacyPolicy.EU.Text.P35</span>
       </p>
       <div class="CenterDiv SpacedButtonDiv">
-        <toolkit-new-modal-activity-button
+        <toolkit-modal-activity-button
           activityGuid="PRIONREQUEST"
           submitButtonText="Toolkit.DataRequest.SubmitRequest"
           showFinalConfirmation="true"
           confirmationButtonText="Toolkit.DataRequest.Okay"
           disabledTooltip="Toolkit.DataRequest.SignInTooltip"
-          buttonText="Toolkit.DataRequest.DataRequest"></toolkit-new-modal-activity-button>
+          buttonText="Toolkit.DataRequest.DataRequest"></toolkit-modal-activity-button>
       </div>
     </section>
   `,
