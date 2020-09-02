@@ -5,8 +5,7 @@ import {
   ActivityInstanceGuid,
   ActivityServiceAgent,
   LoggingService,
-  SessionMementoService,
-  UserActivityServiceAgent
+  SessionMementoService
 } from 'ddp-sdk';
 import { map, share, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -51,7 +50,6 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog,
               private session: SessionMementoService,
               private serviceAgent: ActivityServiceAgent,
-              private userActivityServiceAgent: UserActivityServiceAgent,
               private router: Router,
               private logger: LoggingService,
               @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
