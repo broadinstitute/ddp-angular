@@ -3336,6 +3336,10 @@ p.Medium {
     font-weight: bold;
   }
 
+  &--tabTable .mat-table {
+    max-height: 250px;
+  }
+
   &--cookieSource:not(:first-of-type) {
     border-top: 1px solid #e0e0e0;
   }
@@ -3365,7 +3369,7 @@ p.Medium {
   }
 }
 
-ddp-cookies-preferences-modal {
+tookit-cookies-preferences-modal {
   .mat-tab-group {
     display: flex;
     flex-direction: row;
@@ -3451,7 +3455,7 @@ ddp-cookies-preferences-modal {
   }
 }
 
-ddp-privacy-policy-modal {
+toolkit-privacy-policy-modal {
   section {
     padding: 0 10px !important;
   }
@@ -3482,13 +3486,13 @@ ddp-privacy-policy-modal {
     &--actions {
       flex-direction: column;
 
-      ddp-privacy-policy-button {
+      toolkit-privacy-policy-button {
         margin: 20px 0;
       }
     }
   }
 
-  ddp-cookies-preferences-modal {
+  toolkit-cookies-preferences-modal {
     .mat-tab-group {
       flex-direction: column;
     }
@@ -3541,7 +3545,7 @@ ddp-privacy-policy-modal {
     }
   }
 
-  ddp-cookies-preferences-modal {
+  toolkit-cookies-preferences-modal {
     .PageContent-title {
       font-size: 1.35rem;
     }
@@ -3564,7 +3568,7 @@ ddp-privacy-policy-modal {
   }
 }
 
-ddp-privacy-policy-modal {
+toolkit-privacy-policy-modal {
   .Container, .PageContent {
     background: transparent;
   }
@@ -3584,7 +3588,7 @@ ddp-privacy-policy-modal {
 }
 
 @media only screen and (max-width: 767px) {
-  ddp-privacy-policy-modal {
+  toolkit-privacy-policy-modal {
     .mat-dialog-content {
       max-height: 100%;
     }
