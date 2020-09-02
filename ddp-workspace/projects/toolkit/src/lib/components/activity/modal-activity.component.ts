@@ -8,7 +8,7 @@ import {
   Renderer2
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager } from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
 
@@ -20,7 +20,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
     </div>
     <div class="ModalActivity--header" *ngIf="model && isLoaded">
       <h1 class="PageContent-title" [innerHTML]="model.title"></h1>
-      <button mat-icon-button (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
+      <button mat-icon-button (click)="this.dialog.closeAll()"><mat-icon>close</mat-icon></button>
     </div>
     <div [ngClass]="{'ModalActivity--request' : !isLastStep, 'ModalActivity--requestSubmitted' : isLastStep}"
          *ngIf="model && isLoaded">
@@ -68,17 +68,16 @@ import { ModalActivityData } from '../../models/modalActivityData';
     </div>`,
   providers: [SubmitAnnouncementService, SubmissionManager]
 })
-export class ModalActivityComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ModalActivityComponent extends ActivityComponent implements AfterViewInit, OnDestroy, OnInit {
   @Input() data: ModalActivityData;
 
-  constructor(
-    public dialogRef: MatDialogRef<ModalActivityComponent>,
-    windowRef: WindowRef,
-    renderer: Renderer2,
-    submitService: SubmitAnnouncementService,
-    analytics: AnalyticsEventsService,
-    @Inject(DOCUMENT) document: any,
-    injector: Injector) {
+  constructor(public dialog: MatDialog,
+              windowRef: WindowRef,
+              renderer: Renderer2,
+              submitService: SubmitAnnouncementService,
+              analytics: AnalyticsEventsService,
+              @Inject(DOCUMENT) document: any,
+              injector: Injector) {
     super(windowRef, renderer, submitService, analytics, document, injector);
   }
 
@@ -88,6 +87,6 @@ export class ModalActivityComponent extends ActivityComponent implements OnInit,
 
   public close(): void {
     this.flush();
-    this.dialogRef.close();
+    this.dialog.closeAll();
   }
 }
