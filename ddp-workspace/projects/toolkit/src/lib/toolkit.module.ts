@@ -68,7 +68,6 @@ import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privac
 import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
-import { NewModalActivityComponent } from './components/activity/new-modal-activity.component';
 import { ModalActivityComponent } from './components/activity/modal-activity.component';
 
 // Guards
@@ -176,7 +175,6 @@ import { MatRadioModule } from '@angular/material/radio';
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
     ModalActivityButtonComponent,
-    NewModalActivityComponent,
     ModalActivityComponent
   ],
   exports: [
@@ -229,7 +227,7 @@ import { MatRadioModule } from '@angular/material/radio';
     SessionWillExpireComponent,
     CookiesPreferencesModalComponent,
     PrivacyPolicyModalComponent,
-    NewModalActivityComponent
+    ModalActivityComponent
   ]
 })
 export class ToolkitModule {
