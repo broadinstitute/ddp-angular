@@ -133,6 +133,10 @@
         .mat-cell:first-of-type {
             padding-left: 0px !important;
         }
+
+        .mat-column-status {
+            align-items: end !important;
+        }
     }
 }
 

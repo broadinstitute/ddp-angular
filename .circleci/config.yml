@@ -481,6 +481,11 @@ workflows:
     when: << pipeline.parameters.do-builds >>
     jobs:
       - build-and-deploy-job:
+          filters:
+            branches:
+              ignore:
+                - /^rc.*/
+                - /^hotfix.*/
           study_key: << pipeline.parameters.study_key >>
 
   launch-all-app-builds-workflow:
