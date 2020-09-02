@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import {
@@ -8,7 +8,6 @@ import {
   SessionMementoService,
   UserActivityServiceAgent
 } from 'ddp-sdk';
-import { NewModalActivityComponent } from './new-modal-activity.component';
 import { map, share, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
@@ -22,11 +21,18 @@ import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
             [disabled]="!isAuthenticated"
             [attr.data-tooltip]="disabledTooltip | translate"
             [innerText]="buttonText | translate">
-    </button>`
+    </button>
+    <ng-template #modal let-data>
+      <toolkit-modal-activity [studyGuid]="this.config.studyGuid"
+                              [activityGuid]="this.instanceGuid.getValue()"
+                              [data]="data"></toolkit-modal-activity>
+    </ng-template>
+  `
 })
 export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   @Input() disabledTooltip: string;
   @Input() buttonText: string;
+  public isAuthenticated: boolean;
 
   // data for new activity instance
   @Input() activityGuid: string;
@@ -36,12 +42,11 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   @Input() showFinalConfirmation: boolean;
   @Input() confirmationButtonText: string;
 
-  public isAuthenticated: boolean;
-
   public instanceGuid = new BehaviorSubject(null);
   public activityInstance$: Observable<ActivityInstanceGuid | null>;
   private ngUnsubscribe = new Subject();
   private anchor: Subscription = new Subscription();
+  @ViewChild('modal', {static: true}) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
               private session: SessionMementoService,
@@ -69,17 +74,15 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   }
 
   private openModal(): void {
-    this.dialog.open(NewModalActivityComponent, {
-      width: '740px',
+    this.dialog.open(this.modalRef, {
       data: {
-        studyGuid: this.config.studyGuid,
-        instanceGuid: this.instanceGuid.getValue(),
         nextButtonText: this.nextButtonText,
         prevButtonText: this.prevButtonText,
         submitButtonText: this.submitButtonText,
         showFinalConfirmation: this.showFinalConfirmation,
         confirmationButtonText: this.confirmationButtonText
       },
+      width: '740px',
       autoFocus: false,
       disableClose: true,
       scrollStrategy: new NoopScrollStrategy()
