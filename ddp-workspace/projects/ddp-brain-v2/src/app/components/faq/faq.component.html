@@ -23,9 +23,10 @@
                 <h2 class="faq-block__title">{{section.Title}}</h2>
                 <mat-accordion hideToggle="true" multi="true" displayMode="flat">
                     <ng-container *ngFor="let item of section.Items">
-                        <mat-expansion-panel>
+                        <mat-expansion-panel #panel>
                             <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
-                                <mat-icon class="faq-block__icon">add</mat-icon>
+                                <mat-icon class="faq-block__icon" *ngIf="!panel.expanded">add</mat-icon>
+                                <mat-icon class="faq-block__icon" *ngIf="panel.expanded">clear</mat-icon>
                                 <p class="faq-block__question no-margin">{{item.Question}}</p>
                             </mat-expansion-panel-header>
                             <ng-template matExpansionPanelContent>
