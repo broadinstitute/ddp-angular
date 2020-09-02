@@ -104,6 +104,13 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
       }))
     .pipe(share());
 
-    this.activityInstance$.pipe(takeUntil(this.ngUnsubscribe)).subscribe();
+    this.activityInstance$.pipe(
+      takeUntil(this.ngUnsubscribe))
+    .subscribe(activityInstance => {
+      if (!activityInstance) {
+        this.dialog.closeAll();
+        this.router.navigateByUrl(this.config.errorUrl);
+      }
+    });
   }
 }
