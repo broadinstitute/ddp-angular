@@ -39,7 +39,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.AboutYou
     }
   },
   {
@@ -50,7 +50,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Consent
     }
   },
   {
@@ -61,7 +61,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Release
     }
   },
   {
