@@ -1,10 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   Inject,
   Injector, Input,
-  OnDestroy,
-  OnInit,
   Renderer2
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -68,7 +65,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
     </div>`,
   providers: [SubmitAnnouncementService, SubmissionManager]
 })
-export class ModalActivityComponent extends ActivityComponent implements AfterViewInit, OnDestroy, OnInit {
+export class ModalActivityComponent extends ActivityComponent {
   @Input() data: ModalActivityData;
 
   constructor(public dialog: MatDialog,
