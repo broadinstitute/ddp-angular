@@ -7,7 +7,8 @@ import { startWith } from 'rxjs/operators';
 @Injectable()
 export class LanguageService {
     private profileLanguageUpdateNotifier: Subject<void>;
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService, private studyPopup: StudyDisplayLanguagePopupServiceAgent,
+                private profile: UserProfileServiceAgent) {
       this.profileLanguageUpdateNotifier = new Subject<void>();
       this.profileLanguageUpdateNotifier.next();
     }
@@ -66,5 +67,17 @@ export class LanguageService {
         }
 
         return false;
+    }
+
+    public shouldDisplayLanguagePopup(studyGuid: string): Observable<Boolean> {
+      let studyDisplayObservable: Observable<Boolean> = this.studyPopup.getStudyDisplayLanguagePopup(studyGuid);
+      let userNotDisplayObservable: Observable<Boolean> = this.profile.profile
+        .pipe(
+          map((decorator: UserProfileDecorator) => {
+            return decorator.profile.skipLanguagePopup;
+          }));
+
+      return zip(studyDisplayObservable, userNotDisplayObservable)
+        .pipe(map(([study, user]) => study && user));
     }
 }

@@ -9,4 +9,5 @@ export class UserProfile {
     public lastName: string | null;
     public enrollmentStatus: string | null;
     public consoleActions: Array<{ name: string, href: string }> | null;
+    public skipLanguagePopup: boolean | null;
 }
