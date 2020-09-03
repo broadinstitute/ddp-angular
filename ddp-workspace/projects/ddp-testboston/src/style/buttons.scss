@@ -179,8 +179,10 @@
 
 .footer {
     .SimpleButton {
+        display: flex;
         font-size: 16px;
-        line-height: 33px;
+        line-height: 25px;
+        margin-bottom: 8px;
         color: mat-color($app-theme, 100);
     }
 }
@@ -206,7 +208,7 @@ ddp-language-selector {
     .SimpleButton {
         display: flex;
         align-items: center;
-        height: 33px;
+        height: 25px;
     }
 
     .SimpleButton:focus,
