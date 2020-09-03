@@ -304,7 +304,8 @@
     "UPS": {
       "Title": "UPS locations and Hours of Operation",
       "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
-    }
+    },
+    "Placeholder": "Placeholder"
   },
   "Toolkit": {
     "Dashboard": {

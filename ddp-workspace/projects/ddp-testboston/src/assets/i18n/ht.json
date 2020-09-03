@@ -19,7 +19,7 @@
     "Q&A": "Kesyon ak repons",
     "WhoWeAre": "Kimoun nou ye",
     "StayInformed": "Rete enfòme",
-    "Help": "Help",
+    "Help": "[HT] Help",
     "Dashboard": "Dach mwen an",
     "Menu": "Meni",
     "Invitation": "Kòd envitasyon",
@@ -291,20 +291,21 @@
     "Button": "Suivan"
   },
   "Help": {
-    "Title": "Help Center",
+    "Title": "[HT] Help Center",
     "Text": {
-      "Part1": "If you have further questions, please reach out to study staff by emailing",
+      "Part1": "[HT] If you have further questions, please reach out to study staff by emailing",
       "Part2": "or"
     },
     "Collect": {
-      "Title": "How to collect your samples",
-      "Link": "Sample Collection Instructions",
-      "Alt": "PDF file icon"
+      "Title": "[HT] How to collect your samples",
+      "Link": "[HT] Sample Collection Instructions",
+      "Alt": "[HT] PDF file icon"
     },
     "UPS": {
-      "Title": "UPS locations and Hours of Operation",
-      "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
-    }
+      "Title": "[HT] UPS locations and Hours of Operation",
+      "Text": "[HT] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
+    },
+    "Placeholder": "[HT] Placeholder"
   },
   "Toolkit": {
     "Dashboard": {

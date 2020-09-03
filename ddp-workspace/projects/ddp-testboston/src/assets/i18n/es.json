@@ -291,20 +291,21 @@
     "Button": "Siguiente"
   },
   "Help": {
-    "Title": "Help Center",
+    "Title": "[ES] Help Center",
     "Text": {
-      "Part1": "If you have further questions, please reach out to study staff by emailing",
+      "Part1": "[ES] If you have further questions, please reach out to study staff by emailing",
       "Part2": "or"
     },
     "Collect": {
-      "Title": "How to collect your samples",
-      "Link": "Sample Collection Instructions",
-      "Alt": "PDF file icon"
+      "Title": "[ES] How to collect your samples",
+      "Link": "[ES] Sample Collection Instructions",
+      "Alt": "[ES] PDF file icon"
     },
     "UPS": {
-      "Title": "UPS locations and Hours of Operation",
-      "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
-    }
+      "Title": "[ES] UPS locations and Hours of Operation",
+      "Text": "[ES] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
+    },
+    "Placeholder": "[ES] Placeholder"
   },
   "Toolkit": {
     "Dashboard": {
@@ -355,7 +356,7 @@
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
     "AgreeButton": "Acepto",
-    "ReportButton": "Report",
+    "ReportButton": "[ES] Report",
     "NotAgreeButton": "Todavía no quiero aceptar",
     "ValidateError": "No se puede continuar con el proceso. Revise los mensajes del formulario para obtener más información.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
