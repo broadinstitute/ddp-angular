@@ -59,12 +59,12 @@ export class LanguageService {
     }
 
     public changeLanguage(languageCode: string): boolean {
-      if (this.canUseLanguage(languageCode)) {
-        this.translate.use(languageCode);
-        localStorage.setItem('studyLanguage', languageCode);
-        return true;
-      }
+        if (this.canUseLanguage(languageCode)) {
+            localStorage.setItem('studyLanguage', languageCode);
+            this.translate.use(languageCode);
+            return true;
+        }
 
-      return false;
+        return false;
     }
 }
