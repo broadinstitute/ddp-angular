@@ -2,9 +2,10 @@ import { Component, Inject, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Auth0AdapterService, InvitationServiceAgent, DdpError, ErrorType } from 'ddp-sdk';
-import { Subscription } from 'rxjs';
-import { take, finalize } from 'rxjs/operators';
-import { RecaptchaComponent } from 'ng-recaptcha';
+import { merge, of, Subscription } from 'rxjs';
+import { take, filter } from 'rxjs/operators';
+import { RECAPTCHA_LANGUAGE, RecaptchaComponent } from 'ng-recaptcha';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'user-registration-prequal',
@@ -22,13 +23,25 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   public isLoading = false;
   private anchor: Subscription;
   @ViewChild('captcha', { static: false }) private captcha: RecaptchaComponent;
+  private subscription: Subscription;
 
   constructor(
     private auth0: Auth0AdapterService,
     private invitationService: InvitationServiceAgent,
-    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) { }
+    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
+    @Inject(RECAPTCHA_LANGUAGE) private recaptchaLanguage,
+    private translateService: TranslateService) { }
 
   public ngOnInit(): void {
+    // recaptcha language can only be initialized only once globally
+    // if there is a language mismatch or the language is changed we need to force
+    // a reload of application to initialize recaptcha with the same language as the translation service
+    this.subscription = merge(
+        of(this.translateService.currentLang).pipe(filter(currentLang => currentLang !== this.recaptchaLanguage)),
+        this.translateService.onLangChange.asObservable()
+    ).subscribe(() => {
+      window.location.reload();
+    });
     this.phone = this.config.phone;
     this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
@@ -38,6 +51,7 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.anchor.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   public onSubmit(): void {
