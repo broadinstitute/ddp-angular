@@ -339,7 +339,7 @@
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
     "AgreeButton": "Acepto",
-    "ReportButton": "Report",
+    "ReportButton": "[ES] Report",
     "NotAgreeButton": "Todavía no quiero aceptar",
     "ValidateError": "No se puede continuar con el proceso. Revise los mensajes del formulario para obtener más información.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
