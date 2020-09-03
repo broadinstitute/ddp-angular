@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { isNullOrUndefined } from "util";
-import { Observable, Subject } from "rxjs";
-import { startWith } from "rxjs/operators";
+import { isNullOrUndefined } from 'util';
+import { Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Injectable()
 export class LanguageService {
@@ -32,7 +32,7 @@ export class LanguageService {
     }
 
     public useStoredLanguage(): string {
-      let loadedCode: string = localStorage.getItem('studyLanguage');
+      const loadedCode: string = localStorage.getItem('studyLanguage');
       if (this.changeLanguage(loadedCode)) {
         return loadedCode;
       }
@@ -41,7 +41,7 @@ export class LanguageService {
 
     public getProfileLanguageUpdateNotifier(): Observable<void> {
       return this.profileLanguageUpdateNotifier.asObservable().pipe(
-        startWith(<void>null)); //Make sure anything that updates when the language updates gets an initial value!
+        startWith(null as void)); // Make sure anything that updates when the language updates gets an initial value!
     }
 
     public notifyOfProfileLanguageUpdate(): void {
@@ -52,8 +52,7 @@ export class LanguageService {
       if (this.canUseLanguage(languageCode)) {
         localStorage.setItem('studyLanguage', languageCode);
         return this.translate.use(languageCode).toPromise();
-      }
-      else {
+      } else {
         console.log(`Error: cannot use language ${languageCode}`);
         return null;
       }
