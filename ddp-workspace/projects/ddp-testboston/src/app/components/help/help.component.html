@@ -3,13 +3,8 @@
         <div class="content">
             <div class="help-block">
                 <h1 class="center" translate>Help.Title</h1>
-                <p>
-                    <span translate>Help.Text.Part1</span>
-                    <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>
-                    <span translate>Help.Text.Part2</span>
-                    <a class="Link Link_semi-bold" [href]="emailHref">{{email}}</a>.
-                <p>
                 <h2 class="sub-title" translate>Help.Collect.Title</h2>
+                <p translate>Help.Collect.Text</p>
                 <a class="pdf" href="kit-instructions.pdf" target="_blank">
                     <img class="pdf__image" src="assets/images/pdf.png" [alt]="'Help.Collect.Alt' | translate">
                     <span translate>Help.Collect.Link</span>
@@ -17,17 +12,37 @@
                 <div class="placeholder">
                     <p translate>Help.Placeholder</p>
                 </div>
-                <h2 class="sub-title" translate>Help.UPS.Title</h2>
-                <p translate>Help.UPS.Text</p>
+                <h2 class="sub-title" translate>Help.Return.Title</h2>
+                <p translate>Help.Return.Text</p>
+                <h3 class="step-title" translate>Help.Return.Step1.Title</h3>
+                <p class="no-margin-top">
+                    <span translate>Help.Return.Step1.Text.Part1</span>
+                    <a class="Link Link_semi-bold" href="https://www.ups.com/dropoff/"
+                        target="_blank">www.ups.com/dropoff</a>.
+                    <span translate>Help.Return.Step1.Text.Part2</span>
+                </p>
                 <div class="placeholder">
                     <p translate>Help.Placeholder</p>
                 </div>
+                <h3 class="step-title" translate>Help.Return.Step2.Title</h3>
+                <p class="no-margin-top" translate>Help.Return.Step2.Text</p>
                 <div class="placeholder">
                     <p translate>Help.Placeholder</p>
                 </div>
-                <div class="placeholder">
-                    <p translate>Help.Placeholder</p>
-                </div>
+                <h2 class="sub-title" translate>Help.Pickup.Title</h2>
+                <p>
+                    <span translate>Help.Pickup.Text.Part1</span>
+                    <a class="Link Link_semi-bold" href="tel:1-844-487-7522">1-844-487-7522</a>.
+                    <span translate>Help.Pickup.Text.Part2</span>
+                    <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>.
+                </p>
+                <h2 class="sub-title" translate>Help.Questions.Title</h2>
+                <p>
+                    <span translate>Help.Questions.Text.Part1</span>
+                    <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>
+                    <span translate>Help.Questions.Text.Part2</span>
+                    <a class="Link Link_semi-bold" [href]="emailHref">{{email}}</a>.
+                <p>
             </div>
         </div>
     </section>

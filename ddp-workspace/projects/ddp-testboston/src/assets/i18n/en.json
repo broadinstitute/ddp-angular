@@ -292,18 +292,40 @@
   },
   "Help": {
     "Title": "Help Center",
-    "Text": {
-      "Part1": "If you have further questions, please reach out to study staff by emailing",
-      "Part2": "or"
-    },
     "Collect": {
       "Title": "How to collect your samples",
+      "Text": "It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
       "Link": "Sample Collection Instructions",
       "Alt": "PDF file icon"
     },
-    "UPS": {
-      "Title": "UPS locations and Hours of Operation",
-      "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi sapien, fringilla non lacus id."
+    "Return": {
+      "Title": "How to return your samples",
+      "Text": "Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Step1": {
+        "Title": "Step 1:",
+        "Text": {
+          "Part1": "Click",
+          "Part2": "Type your zip code and click on “See All Options”."
+        }
+      },
+      "Step2": {
+        "Title": "Step 2:",
+        "Text": "Under location Type, check the boxes for \"The UPS Store®\" and \"UPS Drop Box\". Then click the search icon."
+      }
+    },
+    "Pickup": {
+      "Title": "UPS home pickup",
+      "Text": {
+        "Part1": "You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
+        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+      }
+    },
+    "Questions": {
+      "Title": "Still have questions?",
+      "Text": {
+        "Part1": "If you have further questions, please reach out to study staff by emailing",
+        "Part2": "or"
+      }
     },
     "Placeholder": "Placeholder"
   },
