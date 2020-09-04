@@ -10,7 +10,7 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
     <button (click)="openModal()"
             class="SimpleButton"
             [disabled]="!isAuthenticated">
-      Language Preferences
+      Pref
     </button>
     <ng-template #modal>
       <div mat-dialog-content class="popup">
@@ -49,7 +49,7 @@ export class PopupWithCheckboxComponent {
       disableClose: true,
       panelClass: 'toolkit-popup-with-checkbox',
       backdropClass: 'toolkit-popup-with-checkbox',
-      position: {top: '100px', right: '70px'},
+      position: {top: '100px', left: 'calc(50% - 150px)'},
       scrollStrategy: new NoopScrollStrategy()
     });
   }
