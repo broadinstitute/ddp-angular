@@ -228,6 +228,11 @@
         "SignOut": "es: Sign Out",
         "Continue": "es: Continue",
         "RenewalFailed": "es: Session renewal failed. Please log out and log back in again."
+      },
+      "LanguagePreferences": {
+        "Text": "es: Changing the language preference will also change the language used for e-mail communications.",
+        "CheckboxText": "es: Don't show this again",
+        "ButtonText": "es: OK"
       }
     },
     "Warning": {

@@ -69,6 +69,7 @@ import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacy
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
 import { ModalActivityComponent } from './components/activity/modal-activity.component';
+import { PopupWithCheckboxComponent } from './components/dialogs/popupWithCheckbox.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -88,6 +89,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -111,7 +113,8 @@ import { MatRadioModule } from '@angular/material/radio';
     TranslateModule,
     MatTabsModule,
     MatTableModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [
     CommunicationService,
@@ -175,7 +178,8 @@ import { MatRadioModule } from '@angular/material/radio';
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
     ModalActivityButtonComponent,
-    ModalActivityComponent
+    ModalActivityComponent,
+    PopupWithCheckboxComponent
   ],
   exports: [
     FooterComponent,
@@ -217,7 +221,8 @@ import { MatRadioModule } from '@angular/material/radio';
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     CookiesBannerComponent,
-    PrionPrivacyPolicyComponent
+    PrionPrivacyPolicyComponent,
+    PopupWithCheckboxComponent
   ],
   entryComponents: [
     DisclaimerComponent,
@@ -227,7 +232,8 @@ import { MatRadioModule } from '@angular/material/radio';
     SessionWillExpireComponent,
     CookiesPreferencesModalComponent,
     PrivacyPolicyModalComponent,
-    ModalActivityComponent
+    ModalActivityComponent,
+    PopupWithCheckboxComponent
   ]
 })
 export class ToolkitModule {
