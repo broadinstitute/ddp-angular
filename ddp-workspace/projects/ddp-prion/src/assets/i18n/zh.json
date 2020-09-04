@@ -228,6 +228,11 @@
         "SignOut": "zh: Sign Out",
         "Continue": "zh: Continue",
         "RenewalFailed": "zh: Session renewal failed. Please log out and log back in again."
+      },
+      "LanguagePreferences": {
+        "Text": "zh: Changing the language preference will also change the language used for e-mail communications.",
+        "CheckboxText": "zh: Don't show this again",
+        "ButtonText": "zh: OK"
       }
     },
     "Warning": {

@@ -171,6 +171,17 @@ a:focus {
     color: #ffffff !important;
 }
 
+.Button--primaryNeutralWithFocus,
+.Button--primaryNeutralWithFocus:active {
+  border: 2px solid #9E9E9E !important;
+  background-color: #9E9E9E !important;
+  color: #ffffff !important;
+}
+
+.Button--primaryNeutralWithFocus:focus {
+  border: 2px solid #F2B816 !important;
+}
+
 .Button--primaryGoogle {
     border: 1px solid #db4437 !important;
     background-color: #db4437 !important;
@@ -3725,4 +3736,49 @@ app-third-party {
   justify-content: center;
   align-items: center;
   padding: 100px 0;
+}
+
+toolkit-popup-with-checkbox {
+  .SimpleButton {
+    margin-top: 0;
+  }
+}
+
+.toolkit-popup-with-checkbox {
+  .SimpleButton {
+    margin-top: 0;
+  }
+
+  .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.1;
+  }
+
+  .popup {
+    &--text {
+      font-size: 0.8rem;
+    }
+
+    &--checkboxText {
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    &--actions {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        padding: 5px 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .cdk-overlay-pane.toolkit-popup-with-checkbox {
+    width: 300px !important;
+    max-height: 200px !important;
+    margin-top: 50% !important;
+    margin-right: calc(50% - 150px) !important;
+  }
 }

@@ -32,6 +32,14 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
             <li class="Nav-item">
               <ddp-language-selector></ddp-language-selector>
             </li>
+            <li class="Nav-item">
+              <span class="Nav-itemLink">
+                <toolkit-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                                             checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
+                                             buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText"
+                ></toolkit-popup-with-checkbox>
+              </span>
+            </li>
             <li *ngIf="isLoggedIn()" class="Nav-item">
                         <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}" translate>
                             Toolkit.Common.Dashboard

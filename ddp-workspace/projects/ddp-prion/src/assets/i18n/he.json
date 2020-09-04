@@ -229,6 +229,11 @@
         "SignOut": "he: Sign Out",
         "Continue": "he: Continue",
         "RenewalFailed": "he: Session renewal failed. Please log out and log back in again."
+      },
+      "LanguagePreferences": {
+        "Text": "he: Changing the language preference will also change the language used for e-mail communications.",
+        "CheckboxText": "he: Don't show this again",
+        "ButtonText": "he: OK"
       }
     },
     "Warning": {
