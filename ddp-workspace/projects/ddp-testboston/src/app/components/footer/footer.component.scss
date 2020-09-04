@@ -2,8 +2,10 @@
 
 @mixin font {
     font-size: 16px;
-    line-height: 33px;
+    line-height: 25px;
     color: mat-color($app-theme, 100);
+    margin-bottom: 8px;
+    display: flex;
 }
 
 .footer {
