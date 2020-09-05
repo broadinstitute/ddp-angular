@@ -296,7 +296,9 @@
       "Title": "[ES] How to collect your samples",
       "Text": "[ES] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
       "Link": "[ES] Sample Collection Instructions",
-      "Alt": "[ES] PDF file icon"
+      "IconAlt": "[ES] PDF file icon",
+      "IframeTitle": "[ES] Nasal swab kit directions",
+      "Video": "https://player.vimeo.com/video/440526812"
     },
     "Return": {
       "Title": "[ES] How to return your samples",
@@ -306,11 +308,13 @@
         "Text": {
           "Part1": "[ES] Click",
           "Part2": "Type your zip code and click on “See All Options”."
-        }
+        },
+        "ImageAlt": "[ES] UPS locations instruction, your location"
       },
       "Step2": {
         "Title": "[ES] Step 2:",
-        "Text": "[ES] Under location Type, check the boxes for \"The UPS Store®\" and \"UPS Drop Box\". Then click the search icon."
+        "Text": "[ES] Under location Type, check the boxes for \"The UPS Store®\" and \"UPS Drop Box\". Then click the search icon.",
+        "ImageAlt": "[ES] UPS locations instruction, UPS boxes"
       }
     },
     "Pickup": {
@@ -327,7 +331,7 @@
         "Part2": "or"
       }
     },
-    "Placeholder": "[ES] Placeholder"
+    "ArrowAlt": "[ES] Arrow"
   },
   "Toolkit": {
     "Dashboard": {
