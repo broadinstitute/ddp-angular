@@ -172,7 +172,12 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     this.ais.inputIsReadOnly$.next(val);
   }
   @Input()
-  country: string | null;
+  set country(countryCode: string | null) {
+    this.ais.defaultCountryCode$.next(countryCode);
+  }
+  get country(): string | null {
+    return this.ais.defaultCountryCode$.getValue();
+  }
   @Input()
   phoneRequired = false;
 
@@ -244,6 +249,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
 
     this.valueChanged.subscribe((address) => console.debug('the address we got was:' + JSON.stringify(address)));
     this.componentBusy.subscribe((isBusy) => console.debug('is busy?:' + isBusy));
+
     this.setupBlockChromeStreet1Autofill();
 
   }

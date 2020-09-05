@@ -56,6 +56,8 @@ export class AddressInputService implements OnDestroy {
    * Incoming addresses
    */
   readonly inputAddress$ = new BehaviorSubject<Address | null>(null);
+
+  readonly defaultCountryCode$ = new BehaviorSubject<string | null>(null);
   /**
    * Set component to readonly mode
    */
@@ -92,6 +94,7 @@ export class AddressInputService implements OnDestroy {
 
   constructor(private countryService: CountryService, private addressService: AddressService,
               private cdr: ChangeDetectorRef, phoneRequired: boolean) {
+
     this.addressForm = this.createForm(phoneRequired);
 
     const countryCache = new BehaviorSubject<CountryCache>({});
@@ -144,6 +147,13 @@ export class AddressInputService implements OnDestroy {
       this.inputIsReadOnly$.pipe(
         distinctUntilChanged(),
         map(val => ({ isReadOnly: val }))),
+
+      this.defaultCountryCode$.pipe(
+          cachingCountryInfoOp,
+          map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
+          map(countryInfoState => ({formData: new Address({country: countryInfoState.country}),
+            ...countryInfoState, formDataSource: 'INPUT' }))
+      ),
 
       this.inputAddress$.pipe(
         filter(address => !!address),
