@@ -131,7 +131,7 @@
         {
           "Question": "¿Por qué no me pueden dar el resultado de la prueba de anticuerpos?",
           "Paragraphs": [
-            "Dado que la prueba de anticuerpos se realizará en un laboratorio de investigaciones (un centro donde se realizan investigaciones, experimentos y mediciones científicos o tecnológicos) y no en un laboratorio clínico (es decir, un laboratorio donde se suelen analizar muestras clínicas para obtener información sobre la salud de un paciente), no podemos entregarle directamente a usted los resultados de la prueba de anticuerpos de la investigación. "
+            "Dado que la prueba de anticuerpos se realizará en un laboratorio de investigaciones (un centro donde se realizan investigaciones, experimentos y mediciones de orden científico o tecnológico) y no en un laboratorio clínico (es decir, un laboratorio donde se suelen analizar muestras clínicas para obtener información sobre la salud de un paciente), no podemos entregarle directamente a usted los resultados de la prueba de anticuerpos de la investigación. "
           ]
         },
         {
@@ -177,15 +177,15 @@
           "Bullets": [
             "<strong>Los Centros para el Control y la Prevención de Enfermedades (CDC) de EE. UU.:</strong> los CDC han creado una <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">página sobre coronavirus</a> con una serie de recursos para obtener información sobre los síntomas de COVID-19, cómo protegerse y las directivas nacionales más actuales.",
             "<strong>Información fácil de leer con imágenes:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">cómo cuidarse o cuidar de un familiar con COVID-19</a>.",
-            "<strong>Residentes de Massachusetts:</strong> puede llamar a la línea directa del Departamento de Salud de Massachusetts (DPH) al <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> o al <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a> todos los días, las 24 horas. <strong>Teletipo/Teléfono para sordos</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Consulte también el siguiente sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-            "<strong>Residentes de Boston:</strong> encuentre información confiable en la Comisión de Salud Pública de Boston, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Consulte también el sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+            "<strong>Residentes de Massachusetts:</strong> puede llamar a la línea directa del Departamento de Salud de Massachusetts (DPH) al <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> o al <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a> todos los días, las 24 horas. <strong>Teletipo/Teléfono para sordos</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Consulte también el siguiente sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a> (en inglés).",
+            "<strong>Residentes de Boston:</strong> encuentre información confiable en la Comisión de Salud Pública de Boston, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Consulte también el sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a> (en inglés)."
           ]
         }
       ]
     },
     "TeamSection": {
       "Title": "Nuestro equipo",
-      "Text": "Somos un equipo de infectólogas e investigadoras que deseamos tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades, de modo que podamos atender mejor a todos los pacientes. ",
+      "Text": "Somos un equipo de infectólogas e investigadoras que desea tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades para poder atender mejor a todos los pacientes. ",
       "List": [
         {
           "Name": "Dra. Ann E. Woolley",
@@ -339,7 +339,7 @@
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
     "AgreeButton": "Acepto",
-    "ReportButton": "Report",
+    "ReportButton": "[ES] Report",
     "NotAgreeButton": "Todavía no quiero aceptar",
     "ValidateError": "No se puede continuar con el proceso. Revise los mensajes del formulario para obtener más información.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",

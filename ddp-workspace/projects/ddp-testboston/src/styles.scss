@@ -129,7 +129,7 @@ li {
     }
 
     &_no-wrap {
-        white-space: initial;
+        white-space: initial !important;
     }
 
     &_semi-bold {
