@@ -21,9 +21,8 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   public error: DdpError | null = null;
   public errorType = ErrorType;
   public isLoading = false;
-  private anchor: Subscription;
   @ViewChild('captcha', { static: false }) private captcha: RecaptchaComponent;
-  private subscription: Subscription;
+  private anchor = new Subscription();
 
   constructor(
     private auth0: Auth0AdapterService,
@@ -36,12 +35,12 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
     // recaptcha language can only be initialized only once globally
     // if there is a language mismatch or the language is changed we need to force
     // a reload of application to initialize recaptcha with the same language as the translation service
-    this.subscription = merge(
+    this.anchor.add(merge(
         of(this.translateService.currentLang).pipe(filter(currentLang => currentLang !== this.recaptchaLanguage)),
         this.translateService.onLangChange.asObservable()
     ).subscribe(() => {
       window.location.reload();
-    });
+    }));
     this.phone = this.config.phone;
     this.email = this.config.infoEmail;
     this.phoneHref = `tel:${this.phone}`;
@@ -51,7 +50,6 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.anchor.unsubscribe();
-    this.subscription.unsubscribe();
   }
 
   public onSubmit(): void {
@@ -78,9 +76,9 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
       adult: new FormControl(null, [Validators.required]),
       recaptchaToken: new FormControl(null, Validators.required)
     });
-    this.anchor = this.formGroup.valueChanges.subscribe(() => {
+    this.anchor.add(this.formGroup.valueChanges.subscribe(() => {
       this.error = null;
-    });
+    }));
   }
 
   private checkInvitation(invitationId: string, recaptchaToken: string, zip: string): void {
