@@ -384,7 +384,7 @@
     "AgreeButton": "Mwen aksepte",
     "ReportButton": "[HT] Report",
     "NotAgreeButton": "Mwen pa pare pou aksepte",
-    "ValidateError": "Soumisyon an pa kapab kontinye. Tanpri, egzamine mesaj yo ki nan fòmilè a pou w jwenn plis detay.",
+    "ValidateError": "[HT] Please complete all required fields.",
     "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
     "SaveError": "Nou regrèt sa, gen yon erè ki rive",
     "ExportStudy": {

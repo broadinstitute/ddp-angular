@@ -384,7 +384,7 @@
     "AgreeButton": "I agree",
     "ReportButton": "Report",
     "NotAgreeButton": "I'm not ready to agree",
-    "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+    "ValidateError": "Please complete all required fields.",
     "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
     "SaveError": "We're sorry but an error occurred",
     "ExportStudy": {
