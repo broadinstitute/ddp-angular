@@ -22,14 +22,21 @@
     margin-top: 2.5rem;
 }
 
-.placeholder {
-    width: 100%;
-    height: 400px;
+.instructions {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
     margin: 2.5rem 0;
-    background-color: gainsboro;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    &__iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .pdf {
@@ -43,5 +50,154 @@
 
     &__image {
         margin-right: 5px;
+    }
+}
+
+.step {
+    margin: 2.5rem 0;
+    position: relative;
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        border: 1px solid mat-color($app-theme, 1000);
+        max-width: 700px;
+        box-sizing: border-box;
+    }
+
+    &__arrow {
+        position: absolute;
+        max-width: 10%;
+
+        &_step-1-first-desktop {
+            top: 31%;
+            left: -8.5%;
+        }
+
+        &_step-1-second-desktop {
+            top: 63.5%;
+            left: -8.5%;
+        }
+
+        &_step-2-first {
+            top: 27.5%;
+            left: 32.5%;
+        }
+
+        &_step-2-second-desktop {
+            top: 72.5%;
+            left: -8.5%;
+        }
+
+        &_step-2-third-desktop {
+            top: 86.5%;
+            left: -8.5%;
+        }
+
+        &_step-1-first-mobile,
+        &_step-1-second-mobile,
+        &_step-2-second-mobile,
+        &_step-2-third-mobile {
+            display: none;
+        }
+    }
+
+    &__cube {
+        position: absolute;
+        max-width: 10%;
+        width: 6%;
+        height: 8%;
+        border-radius: 5px;
+        border: 2px solid mat-color($app-theme, 2000);
+        background-color: mat-color($app-theme, 3900);
+        color: mat-color($app-theme, 100);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &_step-1-first {
+            top: 33.5%;
+            left: -16%;
+        }
+
+        &_step-1-second {
+            top: 66.5%;
+            left: -16%;
+        }
+
+        &_step-2-first {
+            top: 30.5%;
+            left: 43.5%;
+        }
+
+        &_step-2-second {
+            top: 75.5%;
+            left: -16%;
+        }
+
+        &_step-2-third {
+            top: 89.5%;
+            left: -16%;
+        }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .step {
+        &__arrow {
+            &_step-1-first-mobile {
+                display: initial;
+                top: 31%;
+                left: 9.5%;
+            }
+
+            &_step-1-second-mobile {
+                display: initial;
+                top: 63%;
+                left: 17.5%;
+            }
+
+            &_step-2-second-mobile {
+                display: initial;
+                top: 72.5%;
+                left: 17.5%;
+            }
+
+            &_step-2-third-mobile {
+                display: initial;
+                top: 86.5%;
+                left: 15.5%;
+            }
+
+            &_step-1-first-desktop,
+            &_step-1-second-desktop,
+            &_step-2-second-desktop,
+            &_step-2-third-desktop {
+                display: none;
+            }
+        }
+
+        &__cube {
+            &_step-1-first {
+                top: 34%;
+                left: 21%;
+            }
+
+            &_step-1-second {
+                top: 66%;
+                left: 29%;
+            }
+
+            &_step-2-second {
+                top: 75%;
+                left: 29%;
+            }
+
+            &_step-2-third {
+                top: 90%;
+                left: 27%;
+            }
+        }
     }
 }
