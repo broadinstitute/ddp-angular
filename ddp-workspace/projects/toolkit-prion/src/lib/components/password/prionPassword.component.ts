@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { PasswordComponent } from "toolkit";
-import { FormBuilder } from "@angular/forms";
-import { IrbPasswordService } from "ddp-sdk";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { PasswordComponent } from 'toolkit';
+import { FormBuilder } from '@angular/forms';
+import { IrbPasswordService } from 'ddp-sdk';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'prion-password',

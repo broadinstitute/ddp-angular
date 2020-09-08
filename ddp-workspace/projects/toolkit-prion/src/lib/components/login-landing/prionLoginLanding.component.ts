@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginLandingComponent, ToolkitConfigurationService, WorkflowBuilderService } from "toolkit";
+import { LoginLandingComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import {
   Auth0AdapterService,
   ConfigurationService,
   GovernedParticipantsServiceAgent,
   SessionMementoService,
   WorkflowServiceAgent
-} from "ddp-sdk";
+} from 'ddp-sdk';
 
 @Component({
   selector: 'prion-login-landing',
-  template: `    
-      <prion-common-landing></prion-common-landing>    
+  template: `
+      <prion-common-landing></prion-common-landing>
   `
 })
 export class PrionLoginLandingComponent extends LoginLandingComponent implements OnInit, OnDestroy {

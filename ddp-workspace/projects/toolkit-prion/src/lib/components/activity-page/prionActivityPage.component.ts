@@ -1,7 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { ActivityServiceAgent, LoggingService, UserActivityServiceAgent } from "ddp-sdk";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderService } from "toolkit";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivityServiceAgent, LoggingService, UserActivityServiceAgent } from 'ddp-sdk';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 @Component({
     selector: 'prion-activity-page',

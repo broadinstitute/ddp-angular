@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 
 declare const DDP_ENV: any;
-declare const ga: Function;
+declare const ga: (w, x?, y?, z?) => {};
 
 @Injectable()
 export class AnalyticsManagementService {

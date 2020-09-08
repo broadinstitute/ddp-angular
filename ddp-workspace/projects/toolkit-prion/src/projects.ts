@@ -11,7 +11,7 @@ export * from './lib/components/dashboard/prionDashboard.component';
 export * from './lib/components/error/prionError.component';
 export * from './lib/components/footer/prionFooter.component';
 export * from './lib/components/header/prionHeader.component';
-export * from './lib/components/login-landing/prionLoginLanding.component'
+export * from './lib/components/login-landing/prionLoginLanding.component';
 export * from './lib/components/password/prionPassword.component';
 export * from './lib/components/redirect-to-auth0-login/prionRedirectToAuth0Login.component';
 export * from './lib/components/redirect-to-login-landing/prionRedirectToLoginLanding.component';

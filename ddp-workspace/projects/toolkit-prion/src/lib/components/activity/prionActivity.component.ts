@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { ActivityComponent, ToolkitConfigurationService, WorkflowBuilderService } from "toolkit";
-import { ActivatedRoute } from "@angular/router";
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivityComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'prion-activity',

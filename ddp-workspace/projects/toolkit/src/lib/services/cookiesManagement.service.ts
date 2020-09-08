@@ -95,7 +95,7 @@ export class CookiesManagementService {
   }
 
   private logConsentUpdate(): void {
-    const loggerEvent = 'Cookies preferences update event occured. Status: ' + this.consent.status;
+    const loggerEvent = 'Cookies preferences update event occurred. Status: ' + this.consent.status;
     this.logger.logEvent('Cookies Management Service', loggerEvent);
   }
 }
