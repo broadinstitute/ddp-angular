@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LanguageService, NGXTranslateService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Subscription, merge, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-help',
@@ -13,8 +13,6 @@ import { switchMap } from 'rxjs/operators';
 export class HelpComponent implements OnInit, OnDestroy {
   public phone: string;
   public email: string;
-  public phoneHref: string;
-  public emailHref: string;
   public video: SafeResourceUrl;
   private anchor: Subscription;
 
@@ -27,8 +25,6 @@ export class HelpComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.phone = this.config.phone;
     this.email = this.config.infoEmail;
-    this.phoneHref = `tel:${this.phone}`;
-    this.emailHref = `mailto:${this.email}`;
     this.languageListener();
   }
 
@@ -41,9 +37,11 @@ export class HelpComponent implements OnInit, OnDestroy {
       of(null),
       this.languageService.onLanguageChange()
     ).pipe(
-      switchMap(() => this.translate.getTranslation('Help.Collect.Video'))
-    ).subscribe(url => {
-      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      switchMap(() => this.translate.getTranslation('Help.Collect.Video')),
+      distinctUntilChanged((previous, current) => previous === current),
+      map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+    ).subscribe(safeUrl => {
+      this.video = safeUrl;
     });
   }
 }

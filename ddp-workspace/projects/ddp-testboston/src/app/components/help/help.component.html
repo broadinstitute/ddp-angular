@@ -69,15 +69,15 @@
                     <span translate>Help.Pickup.Text.Part1</span>
                     <a class="Link Link_semi-bold" href="tel:1-844-487-7522">1-844-487-7522</a>.
                     <span translate>Help.Pickup.Text.Part2</span>
-                    <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>.
+                    <a class="Link Link_semi-bold" [href]="'tel:' + phone">{{phone}}</a>.
                 </p>
 
                 <h2 class="sub-title" translate>Help.Questions.Title</h2>
                 <p>
                     <span translate>Help.Questions.Text.Part1</span>
-                    <a class="Link Link_semi-bold" [href]="phoneHref">{{phone}}</a>
+                    <a class="Link Link_semi-bold" [href]="'tel:' + phone">{{phone}}</a>
                     <span translate>Help.Questions.Text.Part2</span>
-                    <a class="Link Link_semi-bold" [href]="emailHref">{{email}}</a>.
+                    <a class="Link Link_semi-bold" [href]="'mailto:' + email">{{email}}</a>.
                 <p>
             </div>
         </div>
