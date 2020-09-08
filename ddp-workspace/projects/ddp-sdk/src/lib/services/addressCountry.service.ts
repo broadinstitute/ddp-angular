@@ -56,7 +56,6 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     }
 
     private initializeAllCountryInfoSummaries(): void {
-      console.log('initializeAllCountryINfosums');
         this.anchor = this.getObservable('/addresscountries').pipe(
             map((data: any) => {
                 if (data) {
@@ -65,7 +64,6 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
                     return [];
                 }
             }),
-          tap((data) => console.log('initializeAllCountryInfosums got allcedss' + data.length))
         ).subscribe(this.allCountryInfoSummariesSubject$);
     }
 }

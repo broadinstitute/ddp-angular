@@ -72,7 +72,7 @@ interface AddressSuggestion {
                 [address]="inputAddress$ | async"
                 [addressErrors]="verifyFieldErrors$ | async"
                 [readonly]="isReadOnly$ | async"
-                [country]="staticCountry$ | async"
+                [country]="country"
                 [phoneRequired]="block.requirePhone"
                 (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
         <ddp-validation-message
@@ -193,7 +193,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   public isReadOnly$: Observable<boolean>;
   public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
   public generateTaggedAddress = generateTaggedAddress;
-  public staticCountry$: Observable<string | null>;
 
 
   private ngUnsubscribe = new Subject();
@@ -282,19 +281,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
               busyCounter$.next(-1);
           }),
       );
-
-    this.staticCountry$ = this.inputAddress$.pipe(
-        map(address => {
-          // ok to look at country at ngOnInit. We don't want to do this more than once
-          if ((this.country && (!(address) || (address.country === this.country)))) {
-            return this.country;
-          } else {
-            return null;
-          }
-        }),
-        distinctUntilChanged(),
-        shareReplay()
-    );
 
     // derived observables
 
