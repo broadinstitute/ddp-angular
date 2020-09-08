@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NGXTranslateService } from 'ddp-sdk';
-import { RedirectToLoginLandingComponent } from "toolkit";
+import { RedirectToLoginLandingComponent } from 'toolkit';
 
 @Component({
   selector: 'toolkit-redirect-to-login-landing',

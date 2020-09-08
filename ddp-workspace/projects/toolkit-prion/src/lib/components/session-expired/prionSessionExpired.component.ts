@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Auth0AdapterService } from 'ddp-sdk';
-import { SessionExpiredComponent } from "toolkit";
+import { SessionExpiredComponent } from 'toolkit';
 
 @Component({
   selector: 'prion-session-expired',

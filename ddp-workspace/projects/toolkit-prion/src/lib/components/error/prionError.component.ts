@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { ErrorComponent, ToolkitConfigurationService } from "toolkit";
+import { ErrorComponent, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'prion-error',
