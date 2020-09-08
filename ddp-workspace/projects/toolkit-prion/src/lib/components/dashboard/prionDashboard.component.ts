@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
-import { TranslateService } from "@ngx-translate/core";
-import { DashboardComponent, ToolkitConfigurationService } from "toolkit";
+import { TranslateService } from '@ngx-translate/core';
+import { DashboardComponent, ToolkitConfigurationService } from 'toolkit';
 
 export interface StaticActivity {
   name: string;
@@ -49,12 +49,15 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                   <ddp-dashboard [studyGuid]="studyGuid"
                                  (open)="navigate($event)">
                   </ddp-dashboard>
-                  <mat-table #table [dataSource]="dataSource" data-ddp-test="staticActivitiesTable" class="ddp-dashboard ddp-dashboard-static dataTable">
+                  <mat-table [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
+                             class="ddp-dashboard ddp-dashboard-static dataTable">
                     <!-- Activity Column -->
                     <ng-container matColumnDef="name">
-                      <mat-header-cell *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></mat-header-cell>
+                      <mat-header-cell *matHeaderCellDef
+                                       [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></mat-header-cell>
                       <mat-cell *matCellDef="let element" class="padding-5">
-                        <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
+                        <span class="dashboard-mobile-label"
+                              [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
                         <button class="dashboard-activity-button Link"
                                 [attr.data-ddp-test]="'activityName::' + translator.instant(element.name)"
                                 (click)="navigateToUrl(element.url)" translate>{{ element.name }}</button>
@@ -65,9 +68,10 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                       <mat-header-cell *matHeaderCellDef></mat-header-cell>
                       <mat-cell *matCellDef="let element"
                                 class="padding-5"
-                                [attr.data-ddp-test]="'activitySummary::' + 
+                                [attr.data-ddp-test]="'activitySummary::' +
                                           translator.instant(element.summary)">
-                        <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.Summary' | translate"></span>
+                        <span class="dashboard-mobile-label"
+                              [innerHTML]="'SDK.UserActivities.Summary' | translate"></span>
                         <div class="dashboard-status-container" translate>
                           {{element.summary}}
                         </div>
@@ -78,9 +82,10 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                       <mat-header-cell *matHeaderCellDef></mat-header-cell>
                       <mat-cell *matCellDef="let element"
                                 class="padding-5"
-                                [attr.data-ddp-test]="'activityCreated::' + 
+                                [attr.data-ddp-test]="'activityCreated::' +
                                           translator.instant(element.created)">
-                        <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityDate' | translate"></span>
+                        <span class="dashboard-mobile-label"
+                              [innerHTML]="'SDK.UserActivities.ActivityDate' | translate"></span>
                         <div class="dashboard-status-container" translate>
                           {{element.created}}
                         </div>
@@ -88,12 +93,14 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                     </ng-container>
                     <!-- Status Column -->
                     <ng-container matColumnDef="status">
-                      <mat-header-cell *matHeaderCellDef [innerHTML]="'SDK.UserActivities.Status' | translate"></mat-header-cell>
+                      <mat-header-cell *matHeaderCellDef
+                                       [innerHTML]="'SDK.UserActivities.Status' | translate"></mat-header-cell>
                       <mat-cell *matCellDef="let element"
                                 class="padding-5"
-                                [attr.data-ddp-test]="'activityStatus::' + 
+                                [attr.data-ddp-test]="'activityStatus::' +
                                           translator.get(element.status)">
-                        <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
+                        <span class="dashboard-mobile-label"
+                              [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
                         <div class="dashboard-status-container" translate>
                           {{element.status}}
                         </div>
@@ -104,7 +111,8 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                       <mat-header-cell *matHeaderCellDef></mat-header-cell>
                       <mat-cell *matCellDef="let element"
                                 [attr.data-ddp-test]="'activityActions::' + element.readOnly">
-                        <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityActions' | translate"></span>
+                        <span class="dashboard-mobile-label"
+                              [innerHTML]="'SDK.UserActivities.ActivityActions' | translate"></span>
                         <button class="ButtonFilled Button--cell button button_small button_primary"
                                 (click)="navigateToUrl(element.url)" translate>{{ element.actions }}</button>
                       </mat-cell>
@@ -129,15 +137,15 @@ export class PrionDashboardComponent extends DashboardComponent implements OnIni
         @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
         super(_router, _announcements, _toolkitConfiguration);
-    }
+  }
 
-    public ngOnInit(): void {
-      super.ngOnInit();
-    }
+  public ngOnInit(): void {
+    super.ngOnInit();
+  }
 
-    public ngOnDestroy(): void {
-      super.ngOnDestroy();
-    }
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 
   public navigateToUrl(url: string): void {
     this._router.navigateByUrl(url);

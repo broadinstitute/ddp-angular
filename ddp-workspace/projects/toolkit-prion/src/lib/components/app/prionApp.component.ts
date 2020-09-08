@@ -1,16 +1,16 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { BrowserContentService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from "ddp-sdk";
-import { MatDialog } from "@angular/material";
-import { Subscription } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
-import { NoopScrollStrategy } from "@angular/cdk/overlay";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { BrowserContentService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from 'ddp-sdk';
+import { MatDialog } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import {
   CommunicationService,
   SessionWillExpireComponent,
   ToolkitConfigurationService,
   WarningComponent,
   CookiesManagementService
-} from "toolkit";
+} from 'toolkit';
 
 
 @Component({

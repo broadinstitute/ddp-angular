@@ -8,7 +8,7 @@ import {
   SessionMementoService,
   WindowRef
 } from 'ddp-sdk';
-import { CommunicationService, HeaderComponent, ToolkitConfigurationService } from "toolkit";
+import { CommunicationService, HeaderComponent, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'prion-header',
@@ -63,7 +63,7 @@ export class PrionHeaderComponent extends HeaderComponent implements OnInit {
   public isScrolled = false;
   public unsupportedBrowser: boolean;
   @Input() noBackground = false;
-  @Input() currentRoute: string = '';
+  @Input() currentRoute = '';
 
   constructor(
     private _communicationService: CommunicationService,
@@ -84,13 +84,13 @@ export class PrionHeaderComponent extends HeaderComponent implements OnInit {
   }
 
   public clickDashboard(): void {
-    if (this.isLoggedIn()){
+    if (this.isLoggedIn()) {
       this._router.navigateByUrl('dashboard');
     }
   }
 
   public clickJoinUs(): void {
-    if (!this.isLoggedIn()){
+    if (!this.isLoggedIn()) {
       sessionStorage.setItem('nextUrl', 'start-study');
       this._auth0Adapter.signup();
     }

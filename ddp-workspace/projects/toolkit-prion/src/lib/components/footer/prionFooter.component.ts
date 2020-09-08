@@ -6,8 +6,8 @@ import {
   SessionMementoService,
   WindowRef
 } from 'ddp-sdk';
-import { Router } from "@angular/router";
-import { FooterComponent, ToolkitConfigurationService } from "toolkit";
+import { Router } from '@angular/router';
+import { FooterComponent, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'prion-footer',
@@ -33,9 +33,6 @@ import { FooterComponent, ToolkitConfigurationService } from "toolkit";
           <button (click)="goToTop()" class="Footer-link"><i class="fas fa-arrow-up Footer-arrow"></i><span translate>Toolkit.Footer.BackToTop</span></button>
         </p>
       </div>
-
-
-
     </footer>
   `
 })
@@ -56,13 +53,13 @@ export class PrionFooterComponent extends FooterComponent implements OnInit {
   }
 
   public clickDashboard(): void {
-    if (this.isLoggedIn()){
+    if (this.isLoggedIn()) {
       this._router.navigateByUrl('dashboard');
     }
   }
 
   public clickJoinUs(): void {
-    if (!this.isLoggedIn()){
+    if (!this.isLoggedIn()) {
       sessionStorage.setItem('nextUrl', 'start-study');
       this._auth0Adapter.signup();
     }

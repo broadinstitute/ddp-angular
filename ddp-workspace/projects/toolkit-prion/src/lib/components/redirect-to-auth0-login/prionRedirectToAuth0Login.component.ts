@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RedirectToAuth0LoginComponent } from "toolkit";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Auth0AdapterService } from "ddp-sdk";
+import { RedirectToAuth0LoginComponent } from 'toolkit';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Auth0AdapterService } from 'ddp-sdk';
 
 @Component({
   selector: 'prion-redirect-to-auth0-login',
