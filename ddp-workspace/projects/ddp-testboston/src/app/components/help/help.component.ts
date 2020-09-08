@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LanguageService, NGXTranslateService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Subscription, merge, of } from 'rxjs';
-import { switchMap, map, distinctUntilChanged } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-help',
@@ -38,7 +38,6 @@ export class HelpComponent implements OnInit, OnDestroy {
       this.languageService.onLanguageChange()
     ).pipe(
       switchMap(() => this.translate.getTranslation('Help.Collect.Video')),
-      distinctUntilChanged((previous, current) => previous === current),
       map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
     ).subscribe(safeUrl => {
       this.video = safeUrl;
