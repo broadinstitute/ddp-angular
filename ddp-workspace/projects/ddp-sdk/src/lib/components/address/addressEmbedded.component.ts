@@ -154,7 +154,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
    * Use if we want to limit country to be only one. Country field will not be shown
    */
   @Input()
-  public country: string | null;
+  public country: string | null = null;
 
   /**
    * Will emit an address whenever it is saved
