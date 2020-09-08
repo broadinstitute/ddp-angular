@@ -1,4 +1,4 @@
-//Angular imports
+// Angular imports
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
@@ -13,31 +13,31 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTableModule } from "@angular/material";
+import { MatTableModule } from '@angular/material';
 
-//External library imports
+// External library imports
 import { TranslateService } from '@ngx-translate/core';
 
-//SDK imports
+// SDK imports
 import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 
-//Toolkit imports
-import { ToolkitModule } from "toolkit";
+// Toolkit imports
+import { ToolkitModule } from 'toolkit';
 
-//Toolkit-prion imports
+// Toolkit-prion imports
 import { PrionToolkitConfigurationService,
   ToolkitPrionModule,
   PrionAppComponent
-} from "toolkit-prion";
+} from 'toolkit-prion';
 
-//Local imports
+// Local imports
 import { AppRoutingModule } from './app-routing.module';
-import { WelcomeComponent } from "./components/welcome/welcome.component";
-import { LearnMoreComponent } from "./components/learn-more/learn-more.component";
-import { StudyListingComponent } from "./components/study-listing-component/study-listing.component";
-import { RedirectJoinComponent } from "./components/redirect-join/redirect-join.component";
-import { PrivacyPolicyFullComponent } from "./components/privacy-policy/privacy-policy-full.component";
-import { ThirdPartyComponent } from "./components/third-party/third-party.component";
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { LearnMoreComponent } from './components/learn-more/learn-more.component';
+import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
+import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
+import { PrivacyPolicyFullComponent } from './components/privacy-policy/privacy-policy-full.component';
+import { ThirdPartyComponent } from './components/third-party/third-party.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -48,7 +48,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (a, b) => void;
 
 export const tkCfg = new PrionToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -201,7 +201,7 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
