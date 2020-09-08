@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
-import { ConfigurationService, LoggingService } from 'ddp-sdk';
+import { ConfigurationService } from '../configuration.service';
+import { LoggingService } from '../logging.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
