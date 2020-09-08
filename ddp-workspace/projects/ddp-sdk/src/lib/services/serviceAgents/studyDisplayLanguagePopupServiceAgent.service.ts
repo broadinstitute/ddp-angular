@@ -1,11 +1,11 @@
-import { Inject, Injectable } from "@angular/core";
-import { NotAuthenticatedServiceAgent } from "./notAuthenticatedServiceAgent.service";
-import { ConfigurationService, LoggingService } from "ddp-sdk";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Inject, Injectable } from '@angular/core';
+import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
+import { ConfigurationService, LoggingService } from 'ddp-sdk';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class StudyDisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAgent<Boolean> {
+export class StudyDisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAgent<boolean> {
   constructor(
     @Inject('ddp.config') configuration: ConfigurationService,
     http: HttpClient,
@@ -13,7 +13,7 @@ export class StudyDisplayLanguagePopupServiceAgent extends NotAuthenticatedServi
     super(configuration, http, logger);
   }
 
-  public getStudyDisplayLanguagePopup(studyGuid: string): Observable<Boolean> {
+  public getStudyDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
     return this.getObservable(`/studies/${studyGuid}/display-language-popup`);
   }
 }

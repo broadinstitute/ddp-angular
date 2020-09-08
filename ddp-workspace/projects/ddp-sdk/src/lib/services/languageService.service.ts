@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { isNullOrUndefined } from 'util';
-import { Observable, Subject } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { Observable, Subject, zip } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { UserProfileDecorator } from '../models/userProfileDecorator';
+import { StudyDisplayLanguagePopupServiceAgent } from './serviceAgents/studyDisplayLanguagePopupServiceAgent.service';
+import { UserProfileServiceAgent } from './serviceAgents/userProfileServiceAgent.service';
 
 @Injectable()
 export class LanguageService {
@@ -69,9 +72,9 @@ export class LanguageService {
         return false;
     }
 
-    public shouldDisplayLanguagePopup(studyGuid: string): Observable<Boolean> {
-      let studyDisplayObservable: Observable<Boolean> = this.studyPopup.getStudyDisplayLanguagePopup(studyGuid);
-      let userNotDisplayObservable: Observable<Boolean> = this.profile.profile
+    public shouldDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
+      const studyDisplayObservable: Observable<boolean> = this.studyPopup.getStudyDisplayLanguagePopup(studyGuid);
+      const userNotDisplayObservable: Observable<boolean> = this.profile.profile
         .pipe(
           map((decorator: UserProfileDecorator) => {
             return decorator.profile.skipLanguagePopup;
