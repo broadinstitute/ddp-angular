@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from "toolkit";
+import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: 'learn-more',
+    selector: 'app-learn-more',
     template: `
     <prion-header currentRoute="/learn-more"></prion-header>
     <div class="Container">

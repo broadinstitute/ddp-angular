@@ -1,4 +1,4 @@
-import { StudyInfo } from "./study-info";
+import { StudyInfo } from './study-info';
 
 export class FilterInfo {
   public columnIndex: number;

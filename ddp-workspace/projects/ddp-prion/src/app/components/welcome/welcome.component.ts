@@ -9,9 +9,8 @@ import {
 } from 'ddp-sdk';
 
 @Component({
-    selector: 'welcome',
-    template: `
-    <prion-header noBackground="true"></prion-header>
+    selector: 'app-welcome',
+    template: `<prion-header noBackground="true"></prion-header>
     <div class="Container NoPadding">
       <a id="topView"></a>
         <div class="Landing-image">
@@ -26,7 +25,7 @@ import {
             <a (click)="scrollTo(secondView)"><img src="./assets/images/white-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
           </div>
         </div>
-        
+
         <div class="FullWidth">
             <div class="row NoMargin">
                 <a #secondView></a>
@@ -44,7 +43,7 @@ import {
         <div class="CenterDiv">
             <a *ngIf="true" (click)="scrollToWithAdjust(thirdView, 100)" class="Arrow"><img src="/assets/images/yellow-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
         </div>
-    
+
         <div class="FullWidth">
             <div class="row NoMargin">
               <a #thirdView></a>
@@ -80,7 +79,7 @@ import {
         <div class="CenterDiv">
           <a *ngIf="true" (click)="scrollTo(fourthView)" class="Arrow"><img src="/assets/images/yellow-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
         </div>
-    
+
         <div class="FullWidth">
             <div class="row NoMargin">
               <a #fourthView></a>
@@ -94,7 +93,7 @@ import {
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     `
 })
 export class WelcomeComponent implements OnInit {

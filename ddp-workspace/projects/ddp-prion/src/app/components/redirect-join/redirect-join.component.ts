@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventsService, Auth0AdapterService, BrowserContentService, WindowRef } from "ddp-sdk";
+import { AnalyticsEventsService, Auth0AdapterService, BrowserContentService, WindowRef } from 'ddp-sdk';
 
 @Component({
   selector: 'app-redirect-join',
