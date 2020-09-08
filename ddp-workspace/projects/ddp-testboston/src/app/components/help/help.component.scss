@@ -79,25 +79,25 @@
             left: -8.5%;
         }
 
-        &_step-2-first {
-            top: 27.5%;
-            left: 32.5%;
-        }
-
-        &_step-2-second-desktop {
+        &_step-2-first-desktop {
             top: 72.5%;
             left: -8.5%;
         }
 
-        &_step-2-third-desktop {
+        &_step-2-second-desktop {
             top: 86.5%;
             left: -8.5%;
         }
 
+        &_step-2-third {
+            top: 27.5%;
+            left: 32.5%;
+        }
+
         &_step-1-first-mobile,
         &_step-1-second-mobile,
-        &_step-2-second-mobile,
-        &_step-2-third-mobile {
+        &_step-2-first-mobile,
+        &_step-2-second-mobile {
             display: none;
         }
     }
@@ -127,18 +127,18 @@
         }
 
         &_step-2-first {
-            top: 30.5%;
-            left: 44%;
-        }
-
-        &_step-2-second {
             top: 75.5%;
             left: -16%;
         }
 
-        &_step-2-third {
+        &_step-2-second {
             top: 89.5%;
             left: -16%;
+        }
+
+        &_step-2-third {
+            top: 30.5%;
+            left: 44%;
         }
     }
 }
@@ -158,13 +158,13 @@
                 left: 17.5%;
             }
 
-            &_step-2-second-mobile {
+            &_step-2-first-mobile {
                 display: initial;
                 top: 72.5%;
                 left: 17.5%;
             }
 
-            &_step-2-third-mobile {
+            &_step-2-second-mobile {
                 display: initial;
                 top: 86.5%;
                 left: 15.5%;
@@ -172,8 +172,8 @@
 
             &_step-1-first-desktop,
             &_step-1-second-desktop,
-            &_step-2-second-desktop,
-            &_step-2-third-desktop {
+            &_step-2-first-desktop,
+            &_step-2-second-desktop {
                 display: none;
             }
         }
@@ -189,12 +189,12 @@
                 left: 29%;
             }
 
-            &_step-2-second {
+            &_step-2-first {
                 top: 75%;
                 left: 29%;
             }
 
-            &_step-2-third {
+            &_step-2-second {
                 top: 90%;
                 left: 27%;
             }
