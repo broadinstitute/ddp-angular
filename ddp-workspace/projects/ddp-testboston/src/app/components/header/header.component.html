@@ -1,6 +1,6 @@
 <header *ngIf="!isAdmin" class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
-        <a class="project-logo" routerLink="/">
+        <a class="project-logo" routerLink="/" (click)="closeMenu()">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
                 [alt]="'Navigation.LogoAlt' | translate">
         </a>
@@ -13,13 +13,14 @@
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link Link_no-wrap" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
+                        translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link Link_no-wrap" routerLink="/" fragment="who-we-are" (click)="scrollToAnchor('who-we-are')"
-                        translate>
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="who-we-are"
+                        (click)="scrollToAnchor('who-we-are')" translate>
                         Navigation.WhoWeAre
                     </a>
                 </li>
@@ -91,7 +92,7 @@
             <div class="menu_mobile-buttons">
                 <li class="menu__item">
                     <a class="header-link" [routerLink]="'/' + appRoutes.UPS" routerLinkActive="header-link_active"
-                        translate>
+                        (click)="closeMenu()" translate>
                         Navigation.Help
                     </a>
                 </li>
