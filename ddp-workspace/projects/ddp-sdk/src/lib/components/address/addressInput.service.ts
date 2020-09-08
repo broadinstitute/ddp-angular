@@ -232,8 +232,6 @@ export class AddressInputService implements OnDestroy {
       filter((compState) => compState.formDataSource === 'COMPONENT'),
       // only care about changes
       distinctUntilChanged((x, y) => _.isEqual(x.formData, y.formData)),
-      // but don't care about initial state
-      skip(1),
       map(compState => this.buildAddressFromFormData(compState.formData, compState.countryInfo)),
       distinctUntilChanged((x, y) => _.isEqual(x, y)),
       share());
