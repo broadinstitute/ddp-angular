@@ -1,14 +1,13 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatTable } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
-import { PrionToolkitConfigurationService } from "toolkit-prion";
-import { Column } from "../../models/study-listing/column";
-import { StudyListingDataSource } from "./study-listing-data-source";
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+import { PrionToolkitConfigurationService } from 'toolkit-prion';
+import { Column } from '../../models/study-listing/column';
+import { StudyListingDataSource } from './study-listing-data-source';
 
 @Component({
-  selector: 'study-listing',
-  template: `
-    <prion-header></prion-header>
+  selector: 'app-study-listing',
+  template: `<prion-header></prion-header>
     <div class="Container">
       <article class="PageContent">
         <div class="PageLayout">
@@ -17,7 +16,7 @@ import { StudyListingDataSource } from "./study-listing-data-source";
               <section class="PageContent-section">
                 <div class="row">
                   <div class="col-md-4">
-                    <input class="form-control study-listing-filter study-listing-filter-all" matInput 
+                    <input class="form-control study-listing-filter study-listing-filter-all" matInput
                            (keyup)="applyFilter($event)" [placeholder]="'App.StudyListing.InputPlaceholder' | translate">
                   </div>
                 </div>
@@ -33,7 +32,7 @@ import { StudyListingDataSource } from "./study-listing-data-source";
                   </ng-container>
                   <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
                     <th mat-header-cell *matHeaderCellDef class="filter-cell">
-                      <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col" 
+                      <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col"
                              matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterInfo.filterPlaceholder | translate">
                     </th>
                   </ng-container>
@@ -47,7 +46,6 @@ import { StudyListingDataSource } from "./study-listing-data-source";
         </div>
       </article>
     </div>
-    
   `
 })
 export class StudyListingComponent implements OnInit {
@@ -59,11 +57,11 @@ export class StudyListingComponent implements OnInit {
   public columns: Column[];
   public sortArrows: number[];
 
-  @ViewChild(MatTable, {static:false})
+  @ViewChild(MatTable, {static: false})
   private table: MatTable<any>;
 
   public constructor(private translator: TranslateService,
-                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration:PrionToolkitConfigurationService) {
+                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: PrionToolkitConfigurationService) {
   }
 
   public ngOnInit(): void {
@@ -83,34 +81,32 @@ export class StudyListingComponent implements OnInit {
   }
 
   public applyFilter(event): void {
-    let generalFilterString: string = (event.target as HTMLInputElement).value;
+    const generalFilterString: string = (event.target as HTMLInputElement).value;
     this.dataSource.addFilter(generalFilterString);
   }
 
   public applyColumnFilter(column: number, event: Event): void {
     if (this.columns[column].filterInfo.canFilter) {
-      let filterString: string = (event.target as HTMLInputElement).value;
+      const filterString: string = (event.target as HTMLInputElement).value;
       this.columns[column].filterInfo.addFilter(filterString);
       this.dataSource.addColumnFilters(this.columns.map(x => x.filterInfo));
     }
   }
 
-  public sortByCol(colIndex: number) {
-    if ([0,2,3,4].includes(colIndex)) {
-      //First clear existing sorts if necessary
+  public sortByCol(colIndex: number): void {
+    if ([0, 2, 3, 4].includes(colIndex)) {
+      // First clear existing sorts if necessary
       if (this.dataSource.shouldSort && this.dataSource.sortIndex !== colIndex) {
         this.sortArrows[this.dataSource.sortIndex] = 0;
       }
 
-      if (this.dataSource.shouldSort && this.dataSource.sortIndex === colIndex ) {
+      if (this.dataSource.shouldSort && this.dataSource.sortIndex === colIndex) {
         if ('asc' === this.dataSource.sortDir) {
           this.dataSource.addSort(true, colIndex, 'desc');
-        }
-        else {
+        } else {
           this.dataSource.addSort(false, -1, null);
         }
-      }
-      else {
+      } else {
         this.dataSource.addSort(true, colIndex, 'asc');
       }
 

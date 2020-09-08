@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from "toolkit";
+import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-  selector: 'privacy-policy-full',
+  selector: 'app-privacy-policy-full',
   template: `
     <prion-header currentRoute="/privacy-policy"></prion-header>
     <div class="Container PrivacyPolicyFull">

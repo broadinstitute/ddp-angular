@@ -1,4 +1,4 @@
-import { FilterInfo } from "./filter-info";
+import { FilterInfo } from './filter-info';
 
 export class Column {
   columnName: string;

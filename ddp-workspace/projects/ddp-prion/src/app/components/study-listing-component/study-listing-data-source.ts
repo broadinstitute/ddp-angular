@@ -1,14 +1,14 @@
-import { StudyInfo } from "../../models/study-listing/study-info";
-import { DataSource } from "@angular/cdk/table";
-import { BehaviorSubject } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
-import { FilterInfo } from "../../models/study-listing/filter-info";
+import { StudyInfo } from '../../models/study-listing/study-info';
+import { DataSource } from '@angular/cdk/table';
+import { BehaviorSubject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { FilterInfo } from '../../models/study-listing/filter-info';
 
 export class StudyListingDataSource extends DataSource<StudyInfo> {
   private baseData: StudyInfo[] = null;
   private filterBy: string = null;
-  shouldSort: boolean = false;
-  sortIndex: number = -1;
+  shouldSort = false;
+  sortIndex = -1;
   sortDir: string = null;
   dataSubj: BehaviorSubject<StudyInfo[]>;
 
@@ -22,20 +22,24 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
     this.translator.onLangChange.subscribe(() => this.updateTranslations());
   }
 
+  private static compare(a: string, b: string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
   connect(): BehaviorSubject<StudyInfo[]> {
     return this.dataSubj;
   }
 
   disconnect(): void { }
 
-  updateDataProcessing() {
+  updateDataProcessing(): void {
     let data = this.baseData.filter(x => this.rowMatchesFilter(x));
     data = data.filter(x => this.rowMeetsColumnFilters(x));
     data = this.sortData(data);
     this.dataSubj.next(data);
   }
 
-  updateTranslations() {
+  updateTranslations(): void {
     this.baseData = (this.translator.instant('App.StudyListing.Rows') as StudyInfo[])
       .map(x => new StudyInfo(x.studyName, x.description, x.nameOfPI, x.site, x.eligibilityRequirements,
         x.moreInfo.replace('{{bucketUrl}}', this.bucketUrl)));
@@ -49,17 +53,16 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
     this.updateDataProcessing();
   }
 
-  public addFilter(filterBy: string) {
+  public addFilter(filterBy: string): void {
     if (filterBy !== null && filterBy !== undefined && filterBy.length > 0) {
       this.filterBy = filterBy.toLowerCase();
-    }
-    else {
+    } else {
       this.filterBy = null;
     }
     this.updateDataProcessing();
   }
 
-  public addColumnFilters(columnFilters: FilterInfo[]) {
+  public addColumnFilters(columnFilters: FilterInfo[]): void {
     this.columnFilters = columnFilters;
     this.updateDataProcessing();
   }
@@ -73,8 +76,8 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
   }
 
   private rowMeetsColumnFilters(row: StudyInfo): boolean {
-    let validFilters: FilterInfo[] = this.columnFilters.filter(x => x.canFilter && x.isFiltered);
-    return validFilters.length == 0 || validFilters.every(x => x.studyInfoIsMatch(row));
+    const validFilters: FilterInfo[] = this.columnFilters.filter(x => x.canFilter && x.isFiltered);
+    return validFilters.length === 0 || validFilters.every(x => x.studyInfoIsMatch(row));
   }
 
   private sortData(rows: StudyInfo[]): StudyInfo[] {
@@ -85,9 +88,5 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
       });
     }
     return rows;
-  }
-
-  private static compare(a: string, b: string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
