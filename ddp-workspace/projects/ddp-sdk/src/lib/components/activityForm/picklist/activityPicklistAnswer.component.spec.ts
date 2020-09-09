@@ -19,7 +19,7 @@ import { QuestionPromptComponent } from '../questionPrompt.component';
 import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 
-fdescribe('ActivityPicklistAnswer', () => {
+describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
         picklistLabel: '',
         picklistOptions: [
