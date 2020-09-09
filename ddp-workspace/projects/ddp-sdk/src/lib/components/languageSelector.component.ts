@@ -1,4 +1,13 @@
-import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { CompositeDisposable } from '../compositeDisposable';
 import { UserProfile } from '../models/userProfile';
 import { StudyLanguage } from '../models/studyLanguage';
@@ -10,6 +19,8 @@ import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceA
 import { isNullOrUndefined } from 'util';
 import { iif, Observable, of, Subscription } from 'rxjs';
 import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
+import { DisplayLanguagePopupServiceAgent } from '../services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -27,6 +38,11 @@ import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
       <mat-menu #menu="matMenu" class="language-menu">
         <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
       </mat-menu>
+      <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                                   checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
+                                   buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+
+      </ddp-popup-with-checkbox>
     </div>
   `
 })
@@ -39,13 +55,15 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private studyLanguages: StudyLanguage[];
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
+  @ViewChild(PopupWithCheckboxComponent, {static: false}) private popup: PopupWithCheckboxComponent;
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
     private language: LanguageService,
     private profileServiceAgent: UserProfileServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
-    private session: SessionMementoService) { }
+    private session: SessionMementoService,
+    private displayPop: DisplayLanguagePopupServiceAgent) { }
 
   public ngOnInit(): void {
     this.anchor = new CompositeDisposable();
@@ -96,11 +114,26 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.language.changeLanguage(lang.languageCode);
         if (this.session.isAuthenticatedSession()) {
           this.updateProfileLanguage();
+          this.displayPop.shouldDisplayLanguagePopup(this.config.studyGuid).subscribe(obs => {
+            if (obs) {
+              console.log('LAUNCHING');
+              this.launchPopup();
+            } else {
+              // TODO: TEMP
+              console.log('not launching');
+            }
+          });
         }
       }
     } else {
       console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
     }
+  }
+
+  private launchPopup(): void {
+    // TODO: TEMP
+    console.log('launching popup');
+    this.popup.openModal();
   }
 
   // Update the language in the profile to the current language

@@ -1,17 +1,11 @@
-import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { SessionMementoService } from 'ddp-sdk';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { SessionMementoService } from '../services/sessionMemento.service';
 
 @Component({
-  selector: 'toolkit-popup-with-checkbox',
+  selector: 'ddp-popup-with-checkbox',
   template: `
-    <button (click)="openModal()"
-            class="SimpleButton"
-            [disabled]="!isAuthenticated">
-      Pref
-    </button>
     <ng-template #modal>
       <div mat-dialog-content class="popup">
         <p class="popup--text" [innerHTML]="text | translate"></p>
@@ -37,8 +31,7 @@ export class PopupWithCheckboxComponent {
   @ViewChild('modal', {static: true}) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
-              private session: SessionMementoService,
-              @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
+              private session: SessionMementoService) {
     this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 
@@ -47,8 +40,8 @@ export class PopupWithCheckboxComponent {
       maxWidth: '400px',
       autoFocus: false,
       disableClose: true,
-      panelClass: 'toolkit-popup-with-checkbox',
-      backdropClass: 'toolkit-popup-with-checkbox',
+      panelClass: 'ddp-popup-with-checkbox',
+      backdropClass: 'ddp-popup-with-checkbox',
       position: {top: '100px', left: 'calc(50% - 150px)'},
       scrollStrategy: new NoopScrollStrategy()
     });

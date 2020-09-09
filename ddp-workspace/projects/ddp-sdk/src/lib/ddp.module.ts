@@ -174,8 +174,10 @@ import { InvitationCodeFormatterDirective } from './directives/invitationCodeFor
 import { LanguageSelectorComponent } from './components/languageSelector.component';
 import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
+import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -290,6 +292,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Title,
     RenewSessionNotifier,
     LanguageService,
+    DisplayLanguagePopupServiceAgent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -309,6 +312,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserActivitiesComponent,
     DashboardComponent,
     ChangeLanguageRedirectComponent,
+    PopupWithCheckboxComponent,
 
     // activity form
     ActivityComponent,
@@ -370,6 +374,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserActivitiesComponent,
     DashboardComponent,
     ChangeLanguageRedirectComponent,
+    PopupWithCheckboxComponent,
 
     ActivityComponent,
     ActivityRedesignedComponent,

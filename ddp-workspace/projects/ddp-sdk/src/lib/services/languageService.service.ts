@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { isNullOrUndefined } from 'util';
-import { Observable, Subject, zip } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { UserProfileDecorator } from '../models/userProfileDecorator';
-import { StudyDisplayLanguagePopupServiceAgent } from './serviceAgents/studyDisplayLanguagePopupServiceAgent.service';
-import { UserProfileServiceAgent } from './serviceAgents/userProfileServiceAgent.service';
+import { Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Injectable()
 export class LanguageService {
     private profileLanguageUpdateNotifier: Subject<void>;
-    constructor(private translate: TranslateService, private studyPopup: StudyDisplayLanguagePopupServiceAgent,
-                private profile: UserProfileServiceAgent) {
+    constructor(private translate: TranslateService) {
       this.profileLanguageUpdateNotifier = new Subject<void>();
       this.profileLanguageUpdateNotifier.next();
     }
@@ -68,19 +64,6 @@ export class LanguageService {
             this.translate.use(languageCode);
             return true;
         }
-
         return false;
-    }
-
-    public shouldDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
-      const studyDisplayObservable: Observable<boolean> = this.studyPopup.getStudyDisplayLanguagePopup(studyGuid);
-      const userNotDisplayObservable: Observable<boolean> = this.profile.profile
-        .pipe(
-          map((decorator: UserProfileDecorator) => {
-            return decorator.profile.skipLanguagePopup;
-          }));
-
-      return zip(studyDisplayObservable, userNotDisplayObservable)
-        .pipe(map(([study, user]) => study && user));
     }
 }
