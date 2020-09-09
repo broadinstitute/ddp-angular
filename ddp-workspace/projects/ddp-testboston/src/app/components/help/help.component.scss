@@ -22,6 +22,12 @@
     margin-top: 2.5rem;
 }
 
+.search {
+    display: inline-flex;
+    vertical-align: text-top;
+    height: 1.5rem;
+}
+
 .instructions {
     position: relative;
     padding-bottom: 56.25%;
@@ -40,7 +46,7 @@
 }
 
 .pdf {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-size: 1.625rem;
     line-height: 2.0625rem;

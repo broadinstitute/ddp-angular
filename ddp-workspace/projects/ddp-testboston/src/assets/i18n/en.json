@@ -307,13 +307,13 @@
         "Title": "Step 1:",
         "Text": {
           "Part1": "Click",
-          "Part2": "Type your zip code and click on “See All Options”."
+          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
         },
         "ImageAlt": "UPS locations instruction, your location"
       },
       "Step2": {
         "Title": "Step 2:",
-        "Text": "Under Location Type, check the boxes for \"The UPS Store®\" and \"UPS Drop Box\". Then click the search icon.",
+        "Text": "Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
         "ImageAlt": "UPS locations instruction, UPS boxes"
       }
     },
@@ -331,7 +331,8 @@
         "Part2": "or"
       }
     },
-    "ArrowAlt": "Arrow"
+    "ArrowAlt": "Arrow",
+    "SearchAlt": "Search icon"
   },
   "Toolkit": {
     "Dashboard": {

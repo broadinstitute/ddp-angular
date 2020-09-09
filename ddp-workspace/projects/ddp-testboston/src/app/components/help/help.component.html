@@ -23,7 +23,7 @@
                     <span translate>Help.Return.Step1.Text.Part1</span>
                     <a class="Link Link_semi-bold" href="https://www.ups.com/dropoff/"
                         target="_blank">www.ups.com/dropoff</a>.
-                    <span translate>Help.Return.Step1.Text.Part2</span>
+                    <span [innerHtml]="'Help.Return.Step1.Text.Part2' | translate"></span>
                 </p>
                 <div class="step">
                     <img class="step__image" src="assets/images/step-1.png"
@@ -42,7 +42,10 @@
                         [alt]="'Help.ArrowAlt' | translate">
                 </div>
                 <h3 class="step-title" translate>Help.Return.Step2.Title</h3>
-                <p class="no-margin-top" translate>Help.Return.Step2.Text</p>
+                <p class="no-margin-top step-2-text">
+                    <span [innerHtml]="'Help.Return.Step2.Text' | translate"></span>
+                    <img class="search" src="assets/images/search.png" [alt]="'Help.SearchAlt' | translate">.
+                </p>
                 <div class="step">
                     <img class="step__image" src="assets/images/step-2.png"
                         [alt]="'Help.Return.Step2.ImageAlt' | translate">
