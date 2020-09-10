@@ -382,6 +382,8 @@
     "EditButton": "Continuar",
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
+    "OpenButton": "[ES] Open",
+    "StartButton": "[ES] Start",
     "AgreeButton": "Acepto",
     "ReportButton": "[ES] Report",
     "NotAgreeButton": "Todavía no quiero aceptar",
