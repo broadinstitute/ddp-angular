@@ -48,7 +48,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: (a, b) => void;
+declare const ga: (...args: any[]) => void;
 
 export const tkCfg = new PrionToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
