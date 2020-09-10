@@ -17,6 +17,8 @@ dispatch:
     service: pepper-api-spec
   - url: "pepper.datadonationplatform.org/*"
     service: pepper-backend
+  - url: "dsm.datadonationplatform.org/ddp/*"
+    service: study-manager-backend
   - url: "dsm.datadonationplatform.org/api/*"
     service: study-manager-backend
   - url: "dsm.datadonationplatform.org/app/*"
