@@ -149,6 +149,8 @@ export class AddressInputService implements OnDestroy {
         map(val => ({ isReadOnly: val }))),
 
       this.defaultCountryCode$.pipe(
+          // The form needs to be updated too!
+          tap(countryCode => this.addressForm.patchValue({country: countryCode}, {onlySelf: true, emitEvent: false})),
           cachingCountryInfoOp,
           map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
           map(countryInfoState => ({formData: new Address({country: countryInfoState.country}),
