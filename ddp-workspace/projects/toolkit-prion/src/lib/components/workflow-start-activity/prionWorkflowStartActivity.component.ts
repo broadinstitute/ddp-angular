@@ -7,7 +7,7 @@ import {
   WorkflowServiceAgent,
   WindowRef
 } from 'ddp-sdk';
-import { ToolkitConfigurationService, WorkflowBuilderService, WorkflowStartActivityComponent } from "toolkit";
+import { ToolkitConfigurationService, WorkflowBuilderService, WorkflowStartActivityComponent } from 'toolkit';
 
 @Component({
   selector: 'prion-workflow-start-activity',
