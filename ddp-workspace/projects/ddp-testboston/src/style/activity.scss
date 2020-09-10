@@ -113,7 +113,6 @@
     margin: 2rem 0;
 }
 
-
 // error message
 .ErrorMessage {
     font-size: 1.25rem;
@@ -394,6 +393,11 @@ ddp-activity-boolean-answer {
 // required question
 .ddp-required-question-prompt:after {
     content: ' *';
+}
+
+// material dropdown
+.mat-select-value {
+    color: mat-color($app-theme, 900) !important;
 }
 
 // picklist characters counter 

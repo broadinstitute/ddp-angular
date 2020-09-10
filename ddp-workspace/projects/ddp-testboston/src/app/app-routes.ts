@@ -19,5 +19,6 @@ export const AppRoutes = {
     AdminSessionExpired: 'admin-session-expired',
     Address: 'mailing-address',
     PasswordResetDone: 'password-reset-done',
-    EnrollSubject: 'enrollment'
+    EnrollSubject: 'enrollment',
+    UPS: 'ups'
 };

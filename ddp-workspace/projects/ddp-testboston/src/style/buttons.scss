@@ -173,7 +173,6 @@
 .header {
     .SimpleButton {
         font-size: 16px;
-        line-height: 33px;
     }
 }
 
@@ -190,7 +189,6 @@
 .overlay {
     .SimpleButton {
         font-size: 1.875rem;
-        line-height: 2.25rem;
     }
 }
 
@@ -208,7 +206,6 @@ ddp-language-selector {
     .SimpleButton {
         display: flex;
         align-items: center;
-        height: 25px;
     }
 
     .SimpleButton:focus,
