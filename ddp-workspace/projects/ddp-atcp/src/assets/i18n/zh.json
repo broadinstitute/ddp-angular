@@ -210,7 +210,9 @@
       "Next": "下一个",
       "Previous": "上一个",
       "SignIn": "签到",
-      "YourParticipants": "您的参与者"
+      "YourParticipants": "您的参与者",
+      "ForResearchers": "研究员",
+      "DataAccessRequest": "数据访问请求"
     }
   },
   "DataAccess": {

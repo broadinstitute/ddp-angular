@@ -210,7 +210,9 @@
       "Next": "次へ",
       "Previous": "前へ",
       "SignIn": "サインイン",
-      "YourParticipants": "参加者"
+      "YourParticipants": "参加者",
+      "ForResearchers": "研究者向け",
+      "DataAccessRequest": "データアクセスリクエスト"
     }
   },
   "DataAccess": {

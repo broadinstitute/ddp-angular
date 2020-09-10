@@ -210,7 +210,9 @@
       "Next": "Suivant",
       "Previous": "Précédent",
       "SignIn": "Connexion",
-      "YourParticipants": "Vos participants"
+      "YourParticipants": "Vos participants",
+      "ForResearchers": "Pour les Chercheurs",
+      "DataAccessRequest": "Demande d'accès aux données"
     }
   },
   "DataAccess": {
