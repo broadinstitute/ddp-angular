@@ -51,8 +51,9 @@
                             routerLinkActive="footer-link_active" translate>Navigation.Invitation</a>
                     </li>
                     <li>
-                        <a class="Link Link_no-wrap footer-link" href="kit-instructions.pdf" target="_blank" translate>
-                            Navigation.KitInstructions
+                        <a class="Link footer-link" [routerLink]="'/' + appRoutes.UPS"
+                            routerLinkActive="footer-link_active" translate>
+                            Navigation.Help
                         </a>
                     </li>
                 </ul>

@@ -19,7 +19,7 @@
     "Q&A": "Q&A",
     "WhoWeAre": "Who We Are",
     "StayInformed": "Stay Informed",
-    "KitInstructions": "Kit Instructions",
+    "Help": "Help",
     "Dashboard": "My Dashboard",
     "Menu": "Menu",
     "Invitation": "Invitation Code",
@@ -289,6 +289,50 @@
       "Error": "Please enter valid email address"
     },
     "Button": "Next"
+  },
+  "Help": {
+    "Title": "Help Center",
+    "Collect": {
+      "Title": "How to collect your samples",
+      "Text": "It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
+      "Link": "Sample Collection Instructions",
+      "IconAlt": "PDF file icon",
+      "IframeTitle": "Nasal swab kit directions",
+      "Video": "https://player.vimeo.com/video/440526812"
+    },
+    "Return": {
+      "Title": "How to return your samples",
+      "Text": "Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Step1": {
+        "Title": "Step 1:",
+        "Text": {
+          "Part1": "Click",
+          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+        },
+        "ImageAlt": "UPS locations instruction, your location"
+      },
+      "Step2": {
+        "Title": "Step 2:",
+        "Text": "Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
+        "ImageAlt": "UPS locations instruction, UPS boxes"
+      }
+    },
+    "Pickup": {
+      "Title": "UPS home pickup",
+      "Text": {
+        "Part1": "You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
+        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+      }
+    },
+    "Questions": {
+      "Title": "Still have questions?",
+      "Text": {
+        "Part1": "If you have further questions, please reach out to study staff by emailing",
+        "Part2": "or"
+      }
+    },
+    "ArrowAlt": "Arrow",
+    "SearchAlt": "Search icon"
   },
   "Toolkit": {
     "Dashboard": {
