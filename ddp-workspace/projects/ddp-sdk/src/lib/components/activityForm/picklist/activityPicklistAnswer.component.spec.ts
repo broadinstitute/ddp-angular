@@ -1,7 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -9,15 +8,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
+import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
+import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
-import { of } from 'rxjs';
 import { ActivityPicklistAnswer } from './activityPicklistAnswer.component';
 import { QuestionPromptComponent } from '../questionPrompt.component';
 import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
+import { of } from 'rxjs';
 
 describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
