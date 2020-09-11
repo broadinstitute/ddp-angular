@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { SessionMementoService } from '../services/sessionMemento.service';
+import { DisplayLanguagePopupServiceAgent } from '../services/serviceAgents/displayLanguagePopupServiceAgent.service';
 
 @Component({
   selector: 'ddp-popup-with-checkbox',
@@ -31,7 +32,8 @@ export class PopupWithCheckboxComponent {
   @ViewChild('modal', {static: true}) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
-              private session: SessionMementoService) {
+              private session: SessionMementoService,
+              private popupAgent: DisplayLanguagePopupServiceAgent) {
     this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 
@@ -47,8 +49,11 @@ export class PopupWithCheckboxComponent {
     });
   }
 
-  public close(languageConfirmed: boolean): void  {
-    console.log(languageConfirmed);
+  public close(skipFuturePopups: boolean): void  {
+    if (skipFuturePopups) {
+      this.popupAgent.setUserDoNotDisplayLanguagePopup(skipFuturePopups);
+    }
+
     this.dialog.closeAll();
   }
 }

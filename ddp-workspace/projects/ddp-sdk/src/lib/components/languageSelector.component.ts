@@ -1,26 +1,17 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild
-} from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { iif, Observable, of, Subscription } from 'rxjs';
+import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
+import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
 import { CompositeDisposable } from '../compositeDisposable';
-import { UserProfile } from '../models/userProfile';
 import { StudyLanguage } from '../models/studyLanguage';
+import { UserProfile } from '../models/userProfile';
 import { ConfigurationService } from '../services/configuration.service';
 import { LanguageService } from '../services/languageService.service';
 import { SessionMementoService } from '../services/sessionMemento.service';
-import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
-import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
-import { isNullOrUndefined } from 'util';
-import { iif, Observable, of, Subscription } from 'rxjs';
-import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
 import { DisplayLanguagePopupServiceAgent } from '../services/serviceAgents/displayLanguagePopupServiceAgent.service';
-import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
+import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
+import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -114,15 +105,12 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.language.changeLanguage(lang.languageCode);
         if (this.session.isAuthenticatedSession()) {
           this.updateProfileLanguage();
-          this.displayPop.shouldDisplayLanguagePopup(this.config.studyGuid).subscribe(obs => {
+          const sub = this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid).subscribe(obs => {
             if (obs) {
-              console.log('LAUNCHING');
               this.launchPopup();
-            } else {
-              // TODO: TEMP
-              console.log('not launching');
             }
           });
+          this.anchor.addNew(sub);
         }
       }
     } else {
@@ -131,8 +119,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private launchPopup(): void {
-    // TODO: TEMP
-    console.log('launching popup');
     this.popup.openModal();
   }
 

@@ -1,15 +1,18 @@
 import { Inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
 import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable, zip } from 'rxjs';
-import { UserProfileDecorator } from '../../models/userProfileDecorator';
+import { UserProfile } from '../../models/userProfile';
 import { UserProfileServiceAgent } from './userProfileServiceAgent.service';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAgent<boolean> {
+  private userDoNotDisplayObsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private gotInitialProfileValue = false;
+
   constructor(
     @Inject('ddp.config') configuration: ConfigurationService,
     http: HttpClient,
@@ -18,27 +21,33 @@ export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAge
     super(configuration, http, logger);
   }
 
-  // TODO: Tap is temporary but demonstrates that for some reason this is outputting false instead of true...
   private getStudyDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
-    return this.getObservable(`/studies/${studyGuid}/display-language-popup`)
-      .pipe(tap(x => {
-      console.log('tapping' + x);
-    }));
+    return this.getObservable(`/studies/${studyGuid}/display-language-popup`);
   }
 
   private getUserNotDisplayLanguagePopup(): Observable<boolean> {
-    return this.profile.profile
-      .pipe(
-        map((decorator: UserProfileDecorator) => {
-          return decorator.profile.skipLanguagePopup;
-        }));
+    if (!this.gotInitialProfileValue) {
+      // Make sure we return the starting value from the profile
+      this.profile.profile.subscribe(res => this.userDoNotDisplayObsSource.next(res.profile.skipLanguagePopup));
+    }
+    return this.userDoNotDisplayObsSource;
   }
 
-  public shouldDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
+  public setUserDoNotDisplayLanguagePopup(userDoNotDisplay: boolean): void {
+    // Update the value in the profile
+    const userProfile = new UserProfile();
+    userProfile.skipLanguagePopup = userDoNotDisplay;
+    this.profile.updateProfile(userProfile).subscribe();
+
+    // Update our cached value
+    this.userDoNotDisplayObsSource.next(userDoNotDisplay);
+  }
+
+  public getShouldDisplayLanguagePopup(studyGuid: string): Observable<boolean> {
     const studyDisplayObservable: Observable<boolean> = this.getStudyDisplayLanguagePopup(studyGuid);
     const userNotDisplayObservable: Observable<boolean> = this.getUserNotDisplayLanguagePopup();
 
     return zip(studyDisplayObservable, userNotDisplayObservable)
-      .pipe(map(([study, user]) => study && !user));
+      .pipe(map(([displayForStudy, doNotDisplayForUser]) => displayForStudy && !doNotDisplayForUser));
   }
 }
