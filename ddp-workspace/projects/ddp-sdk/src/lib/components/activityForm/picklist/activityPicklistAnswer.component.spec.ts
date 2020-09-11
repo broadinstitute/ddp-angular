@@ -21,7 +21,6 @@ import { of } from 'rxjs';
 
 describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
-        picklistLabel: '',
         picklistOptions: [
             {
                 stableId: 'AAA',
@@ -34,9 +33,7 @@ describe('ActivityPicklistAnswer', () => {
             }
         ],
         picklistGroups: [],
-        answer: [],
-        renderMode: '',
-        selectMode: ''
+        answer: null
     } as ActivityPicklistQuestionBlock;
 
     @Component({
