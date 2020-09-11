@@ -48,7 +48,6 @@ describe('ActivityPicklistAnswer', () => {
     })
     class TestHostComponent {
         block = questionBlock;
-
         onChange(value: any): void { }
     }
 
@@ -124,51 +123,45 @@ describe('ActivityPicklistAnswer', () => {
         expect(prompt.length).toBe(1);
     });
 
-    describe('RadioButtonsActivityPicklistQuestion', () => {
-        it('Should render RadioButtonsActivityPicklistQuestion', () => {
-            component.block = {
-                ...questionBlock,
-                renderMode: 'LIST',
-                selectMode: 'SINGLE'
-            } as ActivityPicklistQuestionBlock;
-            fixture.detectChanges();
-            const question = debugElement.queryAll(By.css('ddp-activity-radiobuttons-picklist-question'));
-            expect(question.length).toBe(1);
-        });
+    it('Should render RadioButtonsActivityPicklistQuestion', () => {
+        component.block = {
+            ...questionBlock,
+            renderMode: 'LIST',
+            selectMode: 'SINGLE'
+        } as ActivityPicklistQuestionBlock;
+        fixture.detectChanges();
+        const question = debugElement.queryAll(By.css('ddp-activity-radiobuttons-picklist-question'));
+        expect(question.length).toBe(1);
     });
 
-    describe('CheckboxesActivityPicklistQuestion', () => {
-        it('Should render CheckboxesActivityPicklistQuestion  in SINGLE mode', () => {
-            component.block = {
-                ...questionBlock,
-                renderMode: 'LIST',
-                selectMode: 'MULTIPLE'
-            } as ActivityPicklistQuestionBlock;
-            fixture.detectChanges();
-            const question = debugElement.queryAll(By.css('ddp-activity-checkboxes-picklist-question'));
-            expect(question.length).toBe(1);
-        });
-
-        it('Should render RadioButtonsActivityPicklistQuestion in CHECKBOX_LIST mode', () => {
-            component.block = {
-                ...questionBlock,
-                renderMode: 'CHECKBOX_LIST'
-            } as ActivityPicklistQuestionBlock;
-            fixture.detectChanges();
-            const question = debugElement.queryAll(By.css('ddp-activity-checkboxes-picklist-question'));
-            expect(question.length).toBe(1);
-        });
+    it('Should render CheckboxesActivityPicklistQuestion  in SINGLE mode', () => {
+        component.block = {
+            ...questionBlock,
+            renderMode: 'LIST',
+            selectMode: 'MULTIPLE'
+        } as ActivityPicklistQuestionBlock;
+        fixture.detectChanges();
+        const question = debugElement.queryAll(By.css('ddp-activity-checkboxes-picklist-question'));
+        expect(question.length).toBe(1);
     });
 
-    describe('DropdownActivityPicklistQuestion', () => {
-        it('Should render DropdownActivityPicklistQuestion', () => {
-            component.block = {
-                ...questionBlock,
-                renderMode: 'DROPDOWN'
-            } as ActivityPicklistQuestionBlock;
-            fixture.detectChanges();
-            const question = debugElement.queryAll(By.css('ddp-activity-dropdown-picklist-question'));
-            expect(question.length).toBe(1);
-        });
+    it('Should render RadioButtonsActivityPicklistQuestion in CHECKBOX_LIST mode', () => {
+        component.block = {
+            ...questionBlock,
+            renderMode: 'CHECKBOX_LIST'
+        } as ActivityPicklistQuestionBlock;
+        fixture.detectChanges();
+        const question = debugElement.queryAll(By.css('ddp-activity-checkboxes-picklist-question'));
+        expect(question.length).toBe(1);
+    });
+
+    it('Should render DropdownActivityPicklistQuestion', () => {
+        component.block = {
+            ...questionBlock,
+            renderMode: 'DROPDOWN'
+        } as ActivityPicklistQuestionBlock;
+        fixture.detectChanges();
+        const question = debugElement.queryAll(By.css('ddp-activity-dropdown-picklist-question'));
+        expect(question.length).toBe(1);
     });
 });
