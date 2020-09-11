@@ -90,7 +90,7 @@ describe('ActivityPicklistAnswer', () => {
         debugElement = fixture.debugElement;
     }));
 
-    it('Should not render any questions', () => {
+    it('should not render any questions', () => {
         component.block = {
             ...questionBlock,
             question: '',
@@ -109,7 +109,7 @@ describe('ActivityPicklistAnswer', () => {
         expect(questions.length).toBe(0);
     });
 
-    it('Should render prompt and question', () => {
+    it('should render prompt and question', () => {
         component.block = {
             ...questionBlock,
             question: 'Random question',
@@ -123,7 +123,7 @@ describe('ActivityPicklistAnswer', () => {
         expect(prompt.length).toBe(1);
     });
 
-    it('Should render RadioButtonsActivityPicklistQuestion', () => {
+    it('should render RadioButtonsActivityPicklistQuestion', () => {
         component.block = {
             ...questionBlock,
             renderMode: 'LIST',
@@ -134,7 +134,7 @@ describe('ActivityPicklistAnswer', () => {
         expect(question.length).toBe(1);
     });
 
-    it('Should render CheckboxesActivityPicklistQuestion  in SINGLE mode', () => {
+    it('should render CheckboxesActivityPicklistQuestion  in SINGLE mode', () => {
         component.block = {
             ...questionBlock,
             renderMode: 'LIST',
@@ -145,7 +145,7 @@ describe('ActivityPicklistAnswer', () => {
         expect(question.length).toBe(1);
     });
 
-    it('Should render RadioButtonsActivityPicklistQuestion in CHECKBOX_LIST mode', () => {
+    it('should render RadioButtonsActivityPicklistQuestion in CHECKBOX_LIST mode', () => {
         component.block = {
             ...questionBlock,
             renderMode: 'CHECKBOX_LIST'
@@ -155,7 +155,7 @@ describe('ActivityPicklistAnswer', () => {
         expect(question.length).toBe(1);
     });
 
-    it('Should render DropdownActivityPicklistQuestion', () => {
+    it('should render DropdownActivityPicklistQuestion', () => {
         component.block = {
             ...questionBlock,
             renderMode: 'DROPDOWN'
