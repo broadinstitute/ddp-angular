@@ -56,7 +56,10 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
     let debugElement: DebugElement;
     const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
     ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of(['Singular Translation', 'Plural Translation']);
+        return of({
+            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
+            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
+        });
     });
     const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
     configServiceSpy.tooltipIconUrl.and.callFake(() => {
