@@ -96,14 +96,18 @@ sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
-sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM'];
+sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM', 'RESULT_REPORT'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
-sdkConfig.dashboardSummaryInsteadOfStatus = ['ADHOC_SYMPTOM'];
+sdkConfig.dashboardActivitiesStartedStatuses = ['CREATED'];
+sdkConfig.dashboardSummaryInsteadOfStatus = ['ADHOC_SYMPTOM', 'RESULT_REPORT'];
+sdkConfig.dashboardReportActivities = ['RESULT_REPORT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 sdkConfig.scrollToErrorOffset = 130;
+
 const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
+
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
