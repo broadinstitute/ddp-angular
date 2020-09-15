@@ -19,7 +19,7 @@
     "Q&A": "Preguntas y respuestas",
     "WhoWeAre": "Quiénes somos",
     "StayInformed": "Noticias y novedades",
-    "KitInstructions": "Instrucciones para el kit",
+    "Help": "[ES] Help",
     "Dashboard": "Mi panel",
     "Menu": "Menú",
     "Invitation": "Código de invitación",
@@ -131,7 +131,7 @@
         {
           "Question": "¿Por qué no me pueden dar el resultado de la prueba de anticuerpos?",
           "Paragraphs": [
-            "Dado que la prueba de anticuerpos se realizará en un laboratorio de investigaciones (un centro donde se realizan investigaciones, experimentos y mediciones científicos o tecnológicos) y no en un laboratorio clínico (es decir, un laboratorio donde se suelen analizar muestras clínicas para obtener información sobre la salud de un paciente), no podemos entregarle directamente a usted los resultados de la prueba de anticuerpos de la investigación. "
+            "Dado que la prueba de anticuerpos se realizará en un laboratorio de investigaciones (un centro donde se realizan investigaciones, experimentos y mediciones de orden científico o tecnológico) y no en un laboratorio clínico (es decir, un laboratorio donde se suelen analizar muestras clínicas para obtener información sobre la salud de un paciente), no podemos entregarle directamente a usted los resultados de la prueba de anticuerpos de la investigación. "
           ]
         },
         {
@@ -177,15 +177,15 @@
           "Bullets": [
             "<strong>Los Centros para el Control y la Prevención de Enfermedades (CDC) de EE. UU.:</strong> los CDC han creado una <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">página sobre coronavirus</a> con una serie de recursos para obtener información sobre los síntomas de COVID-19, cómo protegerse y las directivas nacionales más actuales.",
             "<strong>Información fácil de leer con imágenes:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">cómo cuidarse o cuidar de un familiar con COVID-19</a>.",
-            "<strong>Residentes de Massachusetts:</strong> puede llamar a la línea directa del Departamento de Salud de Massachusetts (DPH) al <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> o al <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a> todos los días, las 24 horas. <strong>Teletipo/Teléfono para sordos</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Consulte también el siguiente sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-            "<strong>Residentes de Boston:</strong> encuentre información confiable en la Comisión de Salud Pública de Boston, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Consulte también el sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+            "<strong>Residentes de Massachusetts:</strong> puede llamar a la línea directa del Departamento de Salud de Massachusetts (DPH) al <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> o al <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a> todos los días, las 24 horas. <strong>Teletipo/Teléfono para sordos</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Consulte también el siguiente sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a> (en inglés).",
+            "<strong>Residentes de Boston:</strong> encuentre información confiable en la Comisión de Salud Pública de Boston, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Consulte también el sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a> (en inglés)."
           ]
         }
       ]
     },
     "TeamSection": {
       "Title": "Nuestro equipo",
-      "Text": "Somos un equipo de infectólogas e investigadoras que deseamos tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades, de modo que podamos atender mejor a todos los pacientes. ",
+      "Text": "Somos un equipo de infectólogas e investigadoras que desea tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades para poder atender mejor a todos los pacientes. ",
       "List": [
         {
           "Name": "Dra. Ann E. Woolley",
@@ -290,6 +290,50 @@
     },
     "Button": "Siguiente"
   },
+  "Help": {
+    "Title": "[ES] Help Center",
+    "Collect": {
+      "Title": "[ES] How to collect your samples",
+      "Text": "[ES] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
+      "Link": "[ES] Sample Collection Instructions",
+      "IconAlt": "[ES] PDF file icon",
+      "IframeTitle": "[ES] Nasal swab kit directions",
+      "Video": "https://player.vimeo.com/video/440526812"
+    },
+    "Return": {
+      "Title": "[ES] How to return your samples",
+      "Text": "[ES] Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Step1": {
+        "Title": "[ES] Step 1:",
+        "Text": {
+          "Part1": "[ES] Click",
+          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+        },
+        "ImageAlt": "[ES] UPS locations instruction, your location"
+      },
+      "Step2": {
+        "Title": "[ES] Step 2:",
+        "Text": "[ES] Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
+        "ImageAlt": "[ES] UPS locations instruction, UPS boxes"
+      }
+    },
+    "Pickup": {
+      "Title": "[ES] UPS home pickup",
+      "Text": {
+        "Part1": "[ES] You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
+        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+      }
+    },
+    "Questions": {
+      "Title": "[ES] Still have questions?",
+      "Text": {
+        "Part1": "[ES] If you have further questions, please reach out to study staff by emailing",
+        "Part2": "or"
+      }
+    },
+    "ArrowAlt": "[ES] Arrow",
+    "SearchAlt": "[ES] Search icon"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Panel",
@@ -338,10 +382,12 @@
     "EditButton": "Continuar",
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
+    "OpenButton": "[ES] Open",
+    "StartButton": "[ES] Start",
     "AgreeButton": "Acepto",
-    "ReportButton": "Report",
+    "ReportButton": "[ES] Report",
     "NotAgreeButton": "Todavía no quiero aceptar",
-    "ValidateError": "No se puede continuar con el proceso. Revise los mensajes del formulario para obtener más información.",
+    "ValidateError": "[ES] Please complete all required fields.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
     "SaveError": "Lamentablemente, se produjo un error.",
     "ExportStudy": {

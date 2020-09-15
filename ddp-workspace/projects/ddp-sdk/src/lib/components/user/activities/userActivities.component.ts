@@ -11,6 +11,7 @@ import {
   Inject
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { UserActivitiesDataSource } from './userActivitiesDataSource';
 import { ActivityInstanceState } from '../../../models/activity/activityInstanceState';
 import { LoggingService } from '../../../services/logging.service';
@@ -19,10 +20,10 @@ import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAge
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
 import { DashboardColumns } from '../../../models/dashboardColumns';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { tap, mergeMap } from 'rxjs/operators';
 import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { BehaviorSubject, Subscription, of } from 'rxjs';
+import { tap, mergeMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-user-activities',
@@ -76,7 +77,9 @@ import { ConfigurationService } from '../../../services/configuration.service';
                   [attr.data-ddp-test]="'activityStatus::' + element.instanceGuid">
             <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
             <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">
-              <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
+              <ng-container *ngIf="element.icon">
+                <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
+              </ng-container>
               <ng-container *ngIf="showQuestionCount(element)">
                 {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered': element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}
               </ng-container>
@@ -199,6 +202,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private serviceAgent: UserActivityServiceAgent,
     private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
     private logger: LoggingService,
+    private activityServiceAgent: ActivityServiceAgent,
     private analytics: AnalyticsEventsService,
     @Inject('ddp.config') private config: ConfigurationService,
     public domSanitizationService: DomSanitizer) {
@@ -243,9 +247,14 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public openActivity(guid: string, code: string): void {
-    this.logger.logEvent('UserActivitiesComponent', `Activity clicked: ${guid}`);
-    this.doAnalytics(code);
-    this.open.emit(guid);
+    const response$ = this.isReportActivity(code) ? this.activityServiceAgent.flushForm(this.config.studyGuid, guid) : of(null);
+    response$.pipe(
+      take(1)
+    ).subscribe(() => {
+      this.logger.logEvent('UserActivitiesComponent', `Activity clicked: ${guid}`);
+      this.doAnalytics(code);
+      this.open.emit(guid);
+    });
   }
 
   public getState(code: string): string {
@@ -273,6 +282,14 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     return this.config.dashboardActivitiesCompletedStatuses.includes(statusCode);
   }
 
+  public isNewActivity(statusCode: string): boolean {
+    return this.config.dashboardActivitiesStartedStatuses.includes(statusCode);
+  }
+
+  public isReportActivity(activityCode: string): boolean {
+    return this.config.dashboardReportActivities.includes(activityCode);
+  }
+
   public showSummary(activityInstance: ActivityInstance): boolean {
     if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary) {
       return true;
@@ -284,8 +301,12 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   public getButtonTranslate(activityInstance: ActivityInstance): string {
     if (this.isActivityCompleted(activityInstance.statusCode)) {
       return 'SDK.CompleteButton';
+    } else if (this.isReportActivity(activityInstance.activityCode)) {
+      return 'SDK.OpenButton';
     } else if (this.showSummary(activityInstance)) {
       return 'SDK.ReportButton';
+    } else if (this.isNewActivity(activityInstance.statusCode)) {
+      return 'SDK.StartButton';
     } else {
       return 'SDK.EditButton';
     }

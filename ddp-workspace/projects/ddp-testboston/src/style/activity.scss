@@ -113,7 +113,6 @@
     margin: 2rem 0;
 }
 
-
 // error message
 .ErrorMessage {
     font-size: 1.25rem;
@@ -297,9 +296,23 @@ ddp-activity-boolean-answer {
 
 .date-field {
     .mat-form-field-label {
-        font-size: 18px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
         color: mat-color($app-theme, 700) !important;
+        text-overflow: unset !important;
+        overflow: initial !important;
+    }
+
+    .mat-form-field-label-wrapper {
+        overflow: initial !important;
+    }
+}
+
+@media only screen and (max-width:380px) {
+    .date-field {
+        .mat-form-field-label {
+            font-size: 16px !important;
+        }
     }
 }
 
@@ -380,6 +393,11 @@ ddp-activity-boolean-answer {
 // required question
 .ddp-required-question-prompt:after {
     content: ' *';
+}
+
+// material dropdown
+.mat-select-value {
+    color: mat-color($app-theme, 900) !important;
 }
 
 // picklist characters counter 

@@ -66,12 +66,16 @@ body {
     margin: 0 auto;
     padding: 0 1.5625rem;
 
-    &_tight {
-        max-width: 800px;
-    }
-
     &_wide {
         max-width: 1200px;
+    }
+
+    &_medium {
+        max-width: 1000px;
+    }
+
+    &_tight {
+        max-width: 800px;
     }
 }
 
@@ -156,4 +160,10 @@ p {
 
 .italic {
     font-style: italic;
+}
+
+@media only screen and (max-width: 480px) {
+    .content {
+        padding: 0 1rem;
+    }
 }
