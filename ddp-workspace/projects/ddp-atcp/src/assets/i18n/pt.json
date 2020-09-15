@@ -2,7 +2,7 @@
   "AboutInitiative": {
     "FirstParagraph": {
       "Text": "é uma doença neurodegenerativa herdada. Uma criança com A-T começa a sofrer perda progressiva do controle dos músculos por volta dos dois anos de idade. Por volta dos nove ou dez anos de idade, crianças com A-T em geral ficam dependentes da cadeira de rodas e sua fala se torna arrastada. Também se torna difícil ler e engolir. Cerca de 30% das crianças com A-T desenvolvem câncer, e a maioria delas apresenta algum grau de problemas com o sistema imunológico. Ainda que tenha sido feito progresso no sentido de estender a vida de pessoas com A-T mediante manejo dos sintomas, a doença permanece implacável.",
-      "Title": "ataxia-telangiectasia (A-T)"
+      "Title": "Ataxia-telangiectasia (A-T)"
     },
     "SecondParagraph": {
       "TextOne": "Irmãos com A-T parecem compartilhar mais características clínicas do que crianças com A-T portadoras das mesmas mutações, mas que pertencem a famílias diferentes. Os cientistas, portanto, acreditam que os genes \\\" de uma família, exceto o gene que causa a A-T \\\", podem afetar como a A-T acomete os pacientes. Além disso, é possível que viver em diferentes ambientes, seguir estilos de vida diferentes e consumir dietas diferentes possa afetar a saúde de pessoas com A-T.",
@@ -60,11 +60,11 @@
   "AboutPage": {
     "DataAccess": {
       "Header": "Comitê de Acesso a Dados",
-      "Text": "As informações da Global A-T Family Data Platform somente podem ser acessadas por investigadores qualificados autorizados pelo Comitê de Acesso a Dados. Esse comitê é composto por representantes de famílias com A-T recrutados do nosso Conselho Familiar de Supervisão que, por sua vez, recrutam especialistas para nosso Conselho Consultivo Científico e Médico –“ o que garante que o projeto de cada pesquisador seja consistente com as metas dessa iniciativa.  O Conselho Familiar de Supervisão supervisionará o Conselho Consultivo Científico e Médico."
+      "Text": "As informações da Global A-T Family Data Platform somente podem ser acessadas por investigadores qualificados autorizados pelo Comitê de Acesso a Dados. Esse comitê é composto por representantes de famílias com A-T recrutados do nosso Conselho Familiar de Supervisão que, por sua vez, recrutam especialistas para nosso Conselho Consultivo Científico e Médico – o que garante que o projeto de cada pesquisador seja consistente com as metas dessa iniciativa.  O Conselho Familiar de Supervisão supervisionará o Conselho Consultivo Científico e Médico."
     },
     "Doctors": [
       {
-        "Hospital": "professor emérito de genética médica –“ Universidade de Cambridge, Cambridge, Reino Unido, e professor honorário do Wellcome Trust Sanger Institute, Hinxton, Reino Unido",
+        "Hospital": "professor emérito de genética médica – Universidade de Cambridge, Cambridge, Reino Unido, e professor honorário do Wellcome Trust Sanger Institute, Hinxton, Reino Unido",
         "Name": "Martin Bobrow",
         "Rank": "Dr."
       },
