@@ -30,11 +30,18 @@ export class CurrentActivityService implements OnDestroy {
                                activity: ActivityForm,
                                sectionIndex: number): void {
     if (activity.activityCode === ActivityCodes.MEDICAL_HISTORY) {
+      const initialSectionIndex = activity.sectionIndex;
+
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);
-      this.anchor.addNew(this.activityServiceAgent
-        .saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex)
-        .pipe(take(1))
-        .subscribe());
+
+      if (sectionIndex > initialSectionIndex) {
+        this.anchor.addNew(
+          this.activityServiceAgent
+            .saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex)
+            .pipe(take(1))
+            .subscribe()
+        );
+      }
     }
   }
 
