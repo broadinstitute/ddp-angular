@@ -210,7 +210,9 @@
       "Next": "Следующий",
       "Previous": "Предыдущий",
       "SignIn": "Войти",
-      "YourParticipants": "Ваши участники"
+      "YourParticipants": "Ваши участники",
+      "ForResearchers": "Исследователям",
+      "DataAccessRequest": "Запрос на доступ к данным"
     }
   },
   "DataAccess": {
