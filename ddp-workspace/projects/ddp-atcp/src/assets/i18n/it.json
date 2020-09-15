@@ -60,7 +60,7 @@
   "AboutPage": {
     "DataAccess": {
       "Header": "Comitato per l'accesso ai dati",
-      "Text": "Alle informazioni presenti sulla Piattaforma globale di dati sulle famiglie con A-T possono accedere soltanto ricercatori qualificati che hanno ricevuto apposita autorizzazione dal Comitato per l'accesso ai dati. Questo comitato è composto da rappresentanti delle famiglie con A-T reclutati per il nostro Comitato familiare di supervisione, che a loro volta reclutano specialisti per il nostro Comitato consultivo scientifico e medico;“ in tal modo viene garantito che il progetto di ciascun ricercatore sia coerente con le finalità di questa iniziativa.  Il Comitato familiare di supervisione ha compiti di supervisione sull'attività del Comitato consultivo scientifico e medico."
+      "Text": "Alle informazioni presenti sulla Piattaforma globale di dati sulle famiglie con A-T possono accedere soltanto ricercatori qualificati che hanno ricevuto apposita autorizzazione dal Comitato per l'accesso ai dati. Questo comitato è composto da rappresentanti delle famiglie con A-T reclutati per il nostro Comitato familiare di supervisione, che a loro volta reclutano specialisti per il nostro Comitato consultivo scientifico e medico; in tal modo viene garantito che il progetto di ciascun ricercatore sia coerente con le finalità di questa iniziativa.  Il Comitato familiare di supervisione ha compiti di supervisione sull'attività del Comitato consultivo scientifico e medico."
     },
     "Doctors": [
       {
@@ -258,7 +258,7 @@
         },
         "Third": {
           "H3": "3. Condividi la tua esperienza e un campione di saliva",
-          "Text": "Compila un questionario online sul modo in cui l'A-T influisce sulla tua vita o su quella di tuo/a figlio/a. Ti invieremo anche un kit per la raccolta di un campione di saliva per il sequenziamento del genoma. Inoltre, potrai aggiornare periodicamente la documentazione relativa alla tua storia clinica e le esperienze che hai condiviso con la piattaforma."
+          "Text": "Compila un questionario online sul modo in cui l'A-T influisce sulla tua vita o su quella di tuo figlio o tua figlia. Ti invieremo anche un kit per la raccolta di un campione di saliva per il sequenziamento del genoma. Inoltre, potrai aggiornare periodicamente la documentazione relativa alla tua storia clinica e le esperienze che hai condiviso con la piattaforma."
         }
       },
       "Together": {
