@@ -25,8 +25,12 @@ import { AppComponent } from './components/app/app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { DataComponent } from './components/data/data.component';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ModalImageComponent } from './components/modal-image/modal-image.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -51,6 +55,7 @@ toolkitConfig.releaseUrl = AppRoutes.Release;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
+toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braincancerproject.org';
 toolkitConfig.dataEmail = 'data@braincancerproject.org';
@@ -96,14 +101,18 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppComponent,
     WelcomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FaqComponent,
+    DataComponent,
+    ModalImageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [
     {

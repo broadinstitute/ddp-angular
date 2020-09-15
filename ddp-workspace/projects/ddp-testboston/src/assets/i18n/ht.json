@@ -19,7 +19,7 @@
     "Q&A": "Kesyon ak repons",
     "WhoWeAre": "Kimoun nou ye",
     "StayInformed": "Rete enfòme",
-    "KitInstructions": "Machasuiv pou kit",
+    "Help": "[HT] Help",
     "Dashboard": "Dach mwen an",
     "Menu": "Meni",
     "Invitation": "Kòd envitasyon",
@@ -290,6 +290,50 @@
     },
     "Button": "Suivan"
   },
+  "Help": {
+    "Title": "[HT] Help Center",
+    "Collect": {
+      "Title": "[HT] How to collect your samples",
+      "Text": "[HT] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
+      "Link": "[HT] Sample Collection Instructions",
+      "IconAlt": "[HT] PDF file icon",
+      "IframeTitle": "[HT] Nasal swab kit directions",
+      "Video": "https://player.vimeo.com/video/440526812"
+    },
+    "Return": {
+      "Title": "[HT] How to return your samples",
+      "Text": "[HT] Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Step1": {
+        "Title": "[HT] Step 1:",
+        "Text": {
+          "Part1": "[HT] Click",
+          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+        },
+        "ImageAlt": "[HT] UPS locations instruction, your location"
+      },
+      "Step2": {
+        "Title": "[HT] Step 2:",
+        "Text": "[HT] Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
+        "ImageAlt": "[HT] UPS locations instruction, UPS boxes"
+      }
+    },
+    "Pickup": {
+      "Title": "[HT] UPS home pickup",
+      "Text": {
+        "Part1": "[HT] You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
+        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+      }
+    },
+    "Questions": {
+      "Title": "[HT] Still have questions?",
+      "Text": {
+        "Part1": "[HT] If you have further questions, please reach out to study staff by emailing",
+        "Part2": "or"
+      }
+    },
+    "ArrowAlt": "[HT] Arrow",
+    "SearchAlt": "[HT] Search icon"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Dach",
@@ -338,9 +382,12 @@
     "EditButton": "Kontinye",
     "CompleteButton": "Modifye",
     "ReviewButton": "Gade",
+    "OpenButton": "[HT] Open",
+    "StartButton": "[HT] Start",
     "AgreeButton": "Mwen aksepte",
+    "ReportButton": "[HT] Report",
     "NotAgreeButton": "Mwen pa pare pou aksepte",
-    "ValidateError": "Soumisyon an pa kapab kontinye. Tanpri, egzamine mesaj yo ki nan fòmilè a pou w jwenn plis detay.",
+    "ValidateError": "[HT] Please complete all required fields.",
     "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
     "SaveError": "Nou regrèt sa, gen yon erè ki rive",
     "ExportStudy": {
@@ -418,7 +465,7 @@
       "SingularForm": "karaktè ki rete"
     },
     "Title": {
-      "Default": "TestBoston ",
+      "Default": "TestBoston",
       "Alert": "Sesyon ou an pral ekspire trè byento"
     },
     "EmailEntry": {

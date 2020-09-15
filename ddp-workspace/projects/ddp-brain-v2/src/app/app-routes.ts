@@ -16,5 +16,7 @@ export const AppRoutes = {
     CountMeIn: 'count-me-in',
     AboutUs: 'about-us',
     Data: 'data',
-    MoreDetails: 'more-details'
+    MoreDetails: 'more-details',
+    StayInformed: 'stay-informed',
+    JoinList: 'join-list'
 };

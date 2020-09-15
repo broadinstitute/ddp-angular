@@ -71,13 +71,10 @@
     align-items: center;
     font-weight: 600;
     font-size: 16px;
-    line-height: 33px;
+    line-height: 23px;
     white-space: nowrap;
+    margin: 5px 0 5px 0;
     color: mat-color($app-theme, 1300);
-
-    &__icon {
-        margin-right: 0.2rem;
-    }
 }
 
 .header-link:link,

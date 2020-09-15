@@ -171,7 +171,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Audience'] = "testboston.us.auth0.com";
         DDP_ENV['auth0ClientId'] = "hii1V1gRutoFYUbVOoYQSISbdzVeDEXf";
         DDP_ENV['adminClientId'] = "5LE9MyQ4fQqpj0PoKGnzy2DAiwol7oGN";
-        DDP_ENV['projectGAToken'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "UA-176066310-1";
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
         DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{end}}

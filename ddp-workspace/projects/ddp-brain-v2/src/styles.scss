@@ -4,6 +4,8 @@
 @import './styles/dialogs.scss';
 @import './styles/password.scss';
 @import './styles/static-page.scss';
+@import './styles/stay-informed.scss';
+@import './styles/activities.scss';
 
 html,
 body {
@@ -48,18 +50,31 @@ body {
 
 .section {
     width: 100%;
+
+    &_last {
+        margin-bottom: 2rem;
+    }
+}
+
+.section-title {
+    text-align: center;
+    margin: 4.375rem 0;
 }
 
 .content {
     margin: 0 auto;
     padding: 0 1.5625rem;
 
-    &_tight {
+    &_wide {
+        max-width: 1200px;
+    }
+
+    &_medium {
         max-width: 1000px;
     }
 
-    &_wide {
-        max-width: 1200px;
+    &_tight {
+        max-width: 800px;
     }
 }
 
@@ -90,7 +105,6 @@ h2 {
     line-height: 3.125rem;
 }
 
-a,
 ol li,
 ul li,
 p {
@@ -102,6 +116,10 @@ p {
     font-family: 'Untitled-Sans-Medium', sans-serif;
     color: mat-color($app-theme, 250);
     text-decoration: none;
+
+    &_italic {
+        font-style: italic;
+    }
 }
 
 .Link:hover {
@@ -137,4 +155,14 @@ p {
 
 .medium {
     font-family: 'Untitled-Sans-Medium', sans-serif;
+}
+
+.italic {
+    font-style: italic;
+}
+
+@media only screen and (max-width: 480px) {
+    .content {
+        padding: 0 1rem;
+    }
 }
