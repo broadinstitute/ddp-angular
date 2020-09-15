@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "mit Hinweisen zur Aktivierung Ihres Kontos wurde an Ihre E-Mail-Adresse gesendet.",
+    "checkEmail": "Fast geschafft! Eine E-Mail ",
+    "stillWaiting": "Sie haben noch keine E-Mail erhalten?",
+    "title": "Kontoaktivierung"
+  },
+  "common": {
+    "alreadyRegistered": "Bereits registriert? Hier anmelden",
+    "confirmNewPassword": {
+      "label": "Neues Kennwort bestätigen"
+    },
+    "email": {
+      "whoseEmail": "Wessen E-Mail-Adresse gebe ich ein?",
+      "whoseEmailTooltip": "Wenn Sie ein Elternteil/Erziehungsberechtigter eines oder mehrerer Kinder mit AT sind, verwenden Sie Ihre eigene E-Mail-Adresse.  Wir verwenden diese E-Mail-Adresse zur Kommunikation über alle Teilnehmer, die Sie auf der Plattform für globale Daten von AT-Familien registriert haben."
+    },
+    "forgotPassword": "Kennwort vergessen?",
+    "joinUs": "Mitglied werden",
+    "or": "oder",
+    "password": {
+      "label": "Kennwort"
+    },
+    "reenter": {
+      "label": "Kennwort erneut eingeben"
+    },
+    "resendInstructions": "Bestätigungsanweisungen erneut senden",
+    "resetPassword": {
+      "label": "Neues Kennwort"
+    },
+    "signin": "Anmelden",
+    "signinWithGoogle": "Anmelden mit Google"
+  },
+  "forgotPassword": {
+    "enterEmail": "Geben Sie erneut Ihre E-Mail-Adresse ein, damit wir Ihnen die Anweisungen zum Zurücksetzen des Kennworts zusenden können.",
+    "submit": "Anweisungen zum Zurücksetzen des Kennworts zusenden",
+    "title": "Kennwort vergessen?"
+  },
+  "header": {
+    "aboutThisInitiative": "Über diese Initiative",
+    "aboutUs": "Über uns",
+    "joinUs": "Mitglied werden",
+    "language": "Sprache",
+    "learnMore": "Mehr erfahren",
+    "signIn": "Anmelden"
+  },
+  "login": {
+    "title": "Sie können sich mit Ihrer E-Mail-Adresse oder mit Ihrem Google-Konto bei der Plattform für globale Daten von AT-Familien-Datenplattform anmelden.",
+    "useEmail": "Mit Ihrer E-Mail-Adresse:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Ihr Kennwort wurde erfolgreich geändert.",
+    "YouWillGetInstructions": "Sie erhalten in wenigen Minuten eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Kennworts."
+  },
+  "resendInstructions": {
+    "subTitle": "Wenn Sie Ihre Bestätigungsanweisungen nicht erhalten haben, geben Sie Ihre E-Mail-Adresse ein, um eine neue Bestätigungs-E-Mail zu generieren.",
+    "submit": "Bestätigungsanweisungen erneut senden",
+    "title": "Bestätigungsanweisungen erneut senden"
+  },
+  "resetPassword": {
+    "submit": "Mein Kennwort ändern",
+    "title": "Ändern Sie Ihr Kennwort"
+  },
+  "signUp": {
+    "createAccountBtn": "Konto erstellen",
+    "createAccountWithGoogleBtn": "Konto mit Google erstellen",
+    "emailLabel": "E-Mail-Adresse",
+    "googleEmail": "E-Mail-Adresse bei Google",
+    "passwordHint": "(mindestens 8 Zeichen)",
+    "subTitle": "Sie können sich mit Ihrer E-Mail-Adresse durch die Erstellung eines Kennworts oder mit Ihrem Google-Konto bei der Plattform anmelden. Wir verwenden diese E-Mail-Adresse zur Kommunikation in Bezug auf die Plattform für globale Daten von AT-Familien.",
+    "subtitleWithEmail": "Verwenden Sie Ihre E-Mail-Adresse",
+    "title": "Konto erstellen",
+    "useGoogle": "Verwenden Sie Ihr Google-Konto"
+  },
+  "title": "Plattform für globale Daten von AT-Familien | Benachrichtigung bei Kontoaktivierung"
+}

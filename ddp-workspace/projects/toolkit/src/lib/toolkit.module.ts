@@ -74,6 +74,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -182,7 +183,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
     InstagramFeedLightwidgetPluginComponent,
-    TwitterTimelineWidgetComponent
+    TwitterTimelineWidgetComponent,
+    CommonLandingComponent,
+    CommonLandingRedesignedComponent
   ],
   entryComponents: [
     DisclaimerComponent,
