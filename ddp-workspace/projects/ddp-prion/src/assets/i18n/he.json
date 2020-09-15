@@ -421,7 +421,7 @@
           "P13": "he: Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
 
           "P14": "he: When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
-          "P15": "he: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+          "P15": "he: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics and MixPanel, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
         }
       },
       "WhatCollect": {
@@ -588,7 +588,7 @@
           "P25Bold": "he: The right to erasure - ",
           "P26": "he: You have the right to request that we erase your personal data, under certain conditions.",
           "P27Bold": "he: The right to restrict processing - ",
-          "P28": "he: You have the right to request that we erase your personal data, under certain conditions.",
+          "P28": "he: You have the right to request that we restrict the processing of your personal data, under certain conditions.",
           "P29Bold": "he: The right to object to processing - ",
           "P30": "he: You have the right to object to our processing of your personal data, under certain circumstances.",
           "P31Bold": "he: The right to data portability - ",

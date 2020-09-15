@@ -230,15 +230,6 @@ import {
       <p translate>Toolkit.PrivacyPolicy.EU.Text.P33</p>
       <p><span class="Accent" translate>Toolkit.PrivacyPolicy.EU.Text.P34Bold</span><span translate>Toolkit.PrivacyPolicy.EU.Text.P35</span>
       </p>
-      <div class="CenterDiv SpacedButtonDiv">
-        <toolkit-modal-activity-button
-          activityGuid="PRIONREQUEST"
-          submitButtonText="Toolkit.DataRequest.SubmitRequest"
-          showFinalConfirmation="true"
-          confirmationButtonText="Toolkit.DataRequest.Okay"
-          disabledTooltip="Toolkit.DataRequest.SignInTooltip"
-          buttonText="Toolkit.DataRequest.DataRequest"></toolkit-modal-activity-button>
-      </div>
     </section>
   `,
 })
