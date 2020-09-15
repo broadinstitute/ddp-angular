@@ -67,7 +67,7 @@ import { tap, mergeMap, take } from 'rxjs/operators';
           {{ element.createdAt | date: 'MM/dd/yyyy' }}
         </mat-cell>
       </ng-container>
-      
+
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate">

@@ -1,0 +1,11 @@
+<div class="progress-bar-container">
+  <div class="line"></div>
+  <ul class="nav nav-pills">
+    <li class="item"
+        *ngFor="let name of tabs; let i = index;"
+        (click)="setActiveTab($event, i)"
+        [ngClass]="{'active' : active >= i}">
+      <a href="#" class="dot"></a>
+    </li>
+  </ul>
+</div>

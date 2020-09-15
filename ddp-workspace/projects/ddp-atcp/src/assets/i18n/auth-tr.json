@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "Hesabınızı etkinleştirmek için talimatlar içeren bir e-posta gönderildi.",
+    "checkEmail": "Neredeyse bitti! Lütfen e-postanızı kontrol edin: ",
+    "stillWaiting": "Halen e-postayı mı bekliyorsunuz?",
+    "title": "Hesabı Etkinleştir"
+  },
+  "common": {
+    "alreadyRegistered": "Kayıt yaptınız mı? Burada Oturum Açın",
+    "confirmNewPassword": {
+      "label": "Yeni şifreyi doğrula"
+    },
+    "email": {
+      "whoseEmail": "Kimin e-postasını girmeliyim?",
+      "whoseEmailTooltip": "A-T'li bir çocuğun/çocukların ebeveyni/vasisi iseniz kendi e-posta adresinizi kullanın.  Global A-T Aile Veri Platformunda kaydettiğiniz kişiler için sizinle iletişim kurmak üzere bu adresi kullanacağız."
+    },
+    "forgotPassword": "Şifrenizi mi unuttunuz?",
+    "joinUs": "Bize Katılın",
+    "or": "veya",
+    "password": {
+      "label": "Şifre"
+    },
+    "reenter": {
+      "label": "Şifreyi tekrar girin"
+    },
+    "resendInstructions": "Doğrulama talimatını tekrar gönder",
+    "resetPassword": {
+      "label": "Yeni şifre"
+    },
+    "signin": "Oturum Aç",
+    "signinWithGoogle": "Google ile Oturum Aç"
+  },
+  "forgotPassword": {
+    "enterEmail": "Lütfen e-posta adresinizi girin, size şifre sıfırlama talimatı gönderelim.",
+    "submit": "Bana şifre sıfırlama talimatı gönder",
+    "title": "Şifrenizi mi unuttunuz?"
+  },
+  "header": {
+    "aboutThisInitiative": "Bu Girişim Hakkında",
+    "aboutUs": "Hakkımızda",
+    "joinUs": "Bize Katılın",
+    "language": "Dil",
+    "learnMore": "Daha Fazla Bilgi",
+    "signIn": "Oturum Aç"
+  },
+  "login": {
+    "title": "Global A-T Aile Veri Platformunda e-posta adresiniz veya Google hesabınızı kullanarak oturum açabilirsiniz.",
+    "useEmail": "E-posta adresinizi kullanın:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Şifreniz başarıyla değiştirildi.",
+    "YouWillGetInstructions": "Birkaç dakika içinde şifrenizi sıfırlama talimatı içeren bir e-posta alacaksınız."
+  },
+  "resendInstructions": {
+    "subTitle": "Doğrulama talimatını almadıysanız yeni bir doğrulama e-postası oluşturmak için e-posta adresinizi girebilirsiniz.",
+    "submit": "Doğrulama talimatını tekrar gönder",
+    "title": "Doğrulama talimatını tekrar gönder"
+  },
+  "resetPassword": {
+    "submit": "Şifremi değiştir",
+    "title": "Şifrenizi değiştirin"
+  },
+  "signUp": {
+    "createAccountBtn": "Hesap Oluştur",
+    "createAccountWithGoogleBtn": "Google hesabınızı kullanın",
+    "emailLabel": "E-posta adresi",
+    "googleEmail": "Google e-posta adresi",
+    "passwordHint": "(en az 8 karakter)",
+    "subTitle": "Platformda e-posta adresinizle bir şifre oluşturarak veya Google hesabınızla oturum açabilirsiniz. Bu e-posta adresinizi Global A-T Aile Veri Platformu hakkında sizinle iletişim kurmak için kullanacağız.",
+    "subtitleWithEmail": "E-posta adresinizi kullanın",
+    "title": "E-posta adresinizi kullanın",
+    "useGoogle": "Google hesabınızı kullanın"
+  },
+  "title": "Global A-T Aile Veri Platformu | Hesap Etkinleştirme Duyurusu"
+}
