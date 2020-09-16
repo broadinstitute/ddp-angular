@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
         </div>
     </ng-container>`
 })
-export class PrionActivityComponent extends ActivityComponent implements OnInit {
+export class PrionActivityComponent extends ActivityComponent  {
   public id: string;
   public studyGuid: string;
 
