@@ -186,21 +186,72 @@
     "TeamSection": {
       "Title": "Nuestro equipo",
       "Text": "Somos un equipo de infectólogas e investigadoras que desea tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades para poder atender mejor a todos los pacientes. ",
-      "List": [
+      "PIs": [
         {
-          "Name": "Dra. Ann E. Woolley",
-          "Affiliations": "Profesora de Medicina",
-          "Info": "La Dra. Ann Woolley es profesora de Medicina e infectóloga de Brigham & Women’s Hospital y la Facultad de Medicina de Harvard. La Dra. Woolley obtuvo una licenciatura en Ingeniería Mecánica y Aeroespacial de la Universidad de Princeton en 2001 y un título de posgrado de estudios preparatorios de Medicina en la Universidad de Columbia. Más tarde, se formó en Salud Pública y en Medicina en la Facultad de Medicina de Mount Sinai en Nueva York. Con sus investigaciones centradas en los trasplantes, la hepatitis y las infecciones cardíacas, la Dra. Woolley ha demostrado métodos novedosos para utilizar sin riesgos los órganos de personas que antes no se consideraban donantes aptos. Gracias a su labor, ha sido posible reducir los plazos de espera para quienes necesitan trasplantes de órganos y lograr que más personas puedan optar por donar órganos y salvar vidas."
+          "Name": "[ES] Ann E. Woolley, MD, MPH",
+          "Affiliations": "[ES] Associate Physician, Infectious Diseases, Brigham and Women’s Hospital; Instructor of Medicine, Harvard Medical School",
+          "Info": "[ES] Dr. Ann Woolley is the Associate Clinical Director for Solid Organ Transplant Infectious Diseases at Brigham and Women’s Hospital and a Clinical Investigator whose research focuses on expanding treatment and diagnostics."
         },
         {
-          "Name": "Dra. Lisa A. Cosimi",
-          "Affiliations": "Profesora adjunta de Infectología de la Facultad de Medicina de Harvard, Global Health Equity (Equidad Mundial en Salud)",
-          "Info": "La Dra. Cosimi es médica adjunta de las divisiones de Equidad Mundial en Salud e Infectología de Brigham & Women’s Hospital. Además, se desempeña como profesora adjunta de Medicina en la Facultad de Medicina de Harvard. La Dra. Cosimi obtuvo una licenciatura en Economía de la Universidad Cornell en 1992 y una licenciatura en Medicina de la Facultad de Medicina Weill Cornell en 1996.  Finalizó su residencia de Medicina Interna y Atención Primaria en Massachusetts General Hospital y, posteriormente, se especializó en Infectología en el programa combinado de Partners.  Las investigaciones de la Dra. Cosimi se han centrado en formas de fortalecer los sistemas de salud y la calidad de la asistencia sanitaria en contextos donde los recursos son limitados. Su grupo, The Partnership for Health Advancement in Vietnam (HAIVN, Sociedad para la Promoción de la Salud en Vietnam), se ha asociado con el Ministerio de Salud, las universidades de medicina y los hospitales de Vietnam. Su objetivo es reformar y modernizar la educación de los trabajadores de la salud, así como mejorar la calidad de la atención sanitaria y el acceso a ella para los pacientes con VIH, tuberculosis y otras infecciones de reciente aparición en todo el país."
+          "Name": "[ES] Lisa A. Cosimi, MD",
+          "Affiliations": "[ES] Associate Physician, Infectious Diseases & Global Health Equity, Brigham and Women’s Hospital; Assistant Professor, Harvard Medical School",
+          "Info": "[ES] Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Her research focuses on ways to strengthen health systems and the quality of healthcare in resource-limited settings."
         },
         {
-          "Name": "Dra. Deborah T. Hung, PhD",
-          "Affiliations": "Profesora titular de Infectología, Neumología y Medicina Intensiva de la Facultad de Medicina de Harvard",
-          "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute of MIT and Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham and Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
+          "Name": "[ES] Deborah T. Hung, MD, PhD",
+          "Affiliations": "[ES] Professor, Harvard Medical School; Core faculty member and Co-director, Infectious Disease and Microbiome Program, Broad Institute",
+          "Info": "[ES] Dr. Deborah Hung is a physician scientist at the Broad Institute, Harvard Medical School and Massachusetts General Hospital who studies infectious diseases and is an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital."
+        }
+      ],
+      "Others": [
+        {
+          "Title": "[ES] Administrative Team, Broad Institute",
+          "Members": [
+            "[ES] Andrea Saltzman, Director, Office of Research Subject Protection",
+            "[ES] Marissa Jenko, MS, Administrative Lead",
+            "[ES] Paul Tyman, Administrative Assistant",
+            "[ES] Sarah Winnicki, Project Manager II",
+            "[ES] Sharon Wong, PhD, Associate Director - Infectious Disease and Microbiome Program"
+          ]
+        },
+        {
+          "Title": "[ES] Engineering Team, Broad Institute",
+          "Members": [
+            "[ES] Andrew Zimmer, Director, Data Donation Platform",
+            "[ES] Anna Hupalowska, Illustration & Data Visualization Designer",
+            "[ES] Erin Gwozdz, UX/UI Designer",
+            "[ES] Jen Lapan, Principal Software Product Manager",
+            "[ES] Kiara Westbrooks, Software Engineer",
+            "[ES] Marco Ocana, Principal Software Engineer",
+            "[ES] Pavel Sidorenko, Software Engineer",
+            "[ES] Pegah Taheri, Software Engineer",
+            "[ES] Sampath Settipalli, Senior Software Engineer",
+            "[ES] Simone Maiwald, Software Engineering Manager",
+            "[ES] Yufeng Wang, Senior Software Engineer"
+          ]
+        },
+        {
+          "Title": "[ES] Clinical Team, Brigham and Women’s Hospital",
+          "Members": [
+            "[ES] Andy Kim, BS, Research Coordinator",
+            "[ES] Hannah Laibinis, Intern",
+            "[ES] Henry Manigat, Translator",
+            "[ES] Henry Rutherford, BA, Research Coordinator",
+            "[ES] Himaja Nagireddy, HSPH MS Candidate, Intern",
+            "[ES] Sarah Naz-McLean, MSc, Program Manager",
+            "[ES] Tina Wang, Translator",
+            "[ES] Yilu Ma, Translator"
+          ]
+        },
+        {
+          "Title": "[ES] Additional Partners",
+          "Members": [
+            "[ES] Microbial Omics Core (MOC), Broad Institute",
+            "[ES] Clinical Research Sequencing Platform (CRSP), Broad Institute",
+            "[ES] Mascon Medical",
+            "[ES] GBF",
+            "[ES] UPS"
+          ]
         }
       ]
     },
