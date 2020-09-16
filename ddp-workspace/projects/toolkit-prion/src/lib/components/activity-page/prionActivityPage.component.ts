@@ -18,7 +18,7 @@ import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderServ
         </div>
      </ng-container>`
 })
-export class PrionActivityPageComponent extends ActivityPageComponent implements OnInit, OnDestroy {
+export class PrionActivityPageComponent extends ActivityPageComponent  {
 
     constructor(
         private _serviceAgent: ActivityServiceAgent,
