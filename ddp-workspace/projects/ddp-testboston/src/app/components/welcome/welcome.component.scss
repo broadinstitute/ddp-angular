@@ -152,8 +152,7 @@
 
     &__name {
         color: mat-color($app-theme, 700);
-        font-size: 1.375rem;
-        font-weight: 600;
+        font-size: 1.25rem;
         @include member;
     }
 }
