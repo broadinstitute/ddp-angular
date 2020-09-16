@@ -178,7 +178,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 of({ joinDialogOpen: false }) :
                 merge(
                     dialog.afterClosed().pipe(map(() => ({ joinDialogOpen: false }))),
-                    dialog.afterOpen().pipe(map(() => ({ joinDialogOpen: true })))
+                    dialog.afterOpened().pipe(map(() => ({ joinDialogOpen: true })))
                 )),
             distinctUntilChanged()
         );
@@ -245,6 +245,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.closeNav();
+                if (event.url.includes(this.toolkitConfiguration.mailingListDialogUrl)) {
+                    this.communicationService.openJoinDialog();
+                }
             }
         });
     }

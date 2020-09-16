@@ -53,5 +53,6 @@ export * from './lib/components/age-up/verifyAgeUpPage.component';
 export * from './lib/components/age-up/acceptAgeUpPage.component';
 export * from './lib/components/thank-you/age-up-thank-you.component';
 export * from './lib/components/twitter-widget/twitter-timeline-widget.component';
+export * from './lib/components/app/app-redesigned-base.component';
 
 export * from './lib/guards/headerAction.guard';

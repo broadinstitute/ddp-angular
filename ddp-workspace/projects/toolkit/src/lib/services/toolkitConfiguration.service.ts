@@ -51,6 +51,7 @@ export class ToolkitConfigurationService {
     symptomSurveyUrl: string;
     addressUrl: string;
     adminDashboardUrl: string | null = null;
+    mailingListDialogUrl: string;
 
     // Social media and contacts
     phone: string;

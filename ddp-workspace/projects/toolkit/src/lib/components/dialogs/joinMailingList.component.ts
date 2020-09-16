@@ -101,6 +101,8 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
             if (isSubmitted) {
                 this.communicationService.closeSidePanel();
                 this.router.navigateByUrl(this.stayInformedUrl);
+            } else if (this.router.url.includes(this.toolkitConfiguration.mailingListDialogUrl)) {
+                this.router.navigateByUrl('/');
             }
         });
     }

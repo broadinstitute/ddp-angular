@@ -18,5 +18,6 @@ export const AppRoutes = {
     Data: 'data',
     MoreDetails: 'more-details',
     StayInformed: 'stay-informed',
-    JoinList: 'join-list'
+    JoinList: 'join-list',
+    MailingList: 'MailingList'
 };
