@@ -186,21 +186,72 @@
     "TeamSection": {
       "Title": "Our Team",
       "Text": "We are a team of infectious disease doctors and researchers who want to better understand how COVID-19 is affecting individuals and communities so we can better serve all patients. ",
-      "List": [
+      "PIs": [
         {
-          "Name": "Ann E. Woolley, MD",
-          "Affiliations": "Instructor in Medicine",
-          "Info": "Dr. Ann Woolley is an Instructor in Medicine and an Infectious disease physician at Brigham & Women’s Hospital and Harvard Medical School. Dr. Woolley received a B.S. in mechanical and aerospace engineering from Princeton University in 2001 and a postbaccalaureate certificate in premedical studies from Columbia University before training in both public health and medicine at the Mount Sinai School of Medicine in New York. With a focus on transplant, hepatitis, and cardiac infections, Dr. Woolley’s research has demonstrated novel methods to safely use organs from individuals previously thought to be unsuitable donors. Her work has resulted in shorter wait times for individuals in need of organ donation, and in more individuals being able to choose to become lifesaving organ donors."
+          "Name": "Ann E. Woolley, MD, MPH",
+          "Affiliations": "Associate Physician, Infectious Diseases, Brigham and Women’s Hospital; Instructor of Medicine, Harvard Medical School",
+          "Info": "Dr. Ann Woolley is the Associate Clinical Director for Solid Organ Transplant Infectious Diseases at Brigham and Women’s Hospital and a Clinical Investigator whose research focuses on expanding treatment and diagnostics."
         },
         {
           "Name": "Lisa A. Cosimi, MD",
-          "Affiliations": "Assistant Professor, Harvard Medical School Infectious Disease, Global Health Equity",
-          "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Dr. Cosimi received a B.A. in Economics from Cornell University in 1992 and M.D. from the Weill Cornell Medical College in 1996.  She completed her residency in Internal Medicine and Primary Care at the Massachusetts General Hospital and Infectious Disease training at the Partners combined fellowship program.  Dr. Cosimi’s research has focused on ways to strengthen health systems and the quality of healthcare in resource-limited settings. Her group, The Partnership for Health Advancement in Vietnam (HAIVN), has partnered with Vietnam’s Ministry of Health, Medical Universities and hospitals to reform and modernize health care worker education, and improve quality and access to health care for HIV, tuberculosis and other emerging infections throughout the country."
+          "Affiliations": "Associate Physician, Infectious Diseases & Global Health Equity, Brigham and Women’s Hospital; Assistant Professor, Harvard Medical School",
+          "Info": "Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Her research focuses on ways to strengthen health systems and the quality of healthcare in resource-limited settings."
         },
         {
           "Name": "Deborah T. Hung, MD, PhD",
-          "Affiliations": "Associate Professor, Harvard Medical School Infectious Disease, Pulmonary and Critical Care",
-          "Info": "Dr. Deborah Hung is Professor of Genetics at Massachusetts General Hospital and Harvard Medical School, a Core Faculty Member and Co-Director of the Infectious Disease and Microbiome Program at the Broad Institute of MIT and Harvard, and an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital. She works at the interface of chemical biology, genomics, and bacterial pathogenesis to establish new paradigms for an antibiotic based on the essential biology required for a pathogen to cause disease within the host. Using her training as a synthetic chemist, bacterial geneticist, and clinical physician, she explores approaches to disrupting the pathogen-host interaction."
+          "Affiliations": "Professor, Harvard Medical School; Core faculty member and Co-director, Infectious Disease and Microbiome Program, Broad Institute",
+          "Info": "Dr. Deborah Hung is a physician scientist at the Broad Institute, Harvard Medical School and Massachusetts General Hospital who studies infectious diseases and is an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital."
+        }
+      ],
+      "Others": [
+        {
+          "Title": "Administrative Team, Broad Institute",
+          "Members": [
+            "Andrea Saltzman, Director, Office of Research Subject Protection",
+            "Marissa Jenko, MS, Administrative Lead",
+            "Paul Tyman, Administrative Assistant",
+            "Sarah Winnicki, Project Manager II",
+            "Sharon Wong, PhD, Associate Director- Infectious Disease and Microbiome Program"
+          ]
+        },
+        {
+          "Title": "Engineering Team, Broad Institute",
+          "Members": [
+            "Andrew Zimmer, Director, Data Donation Platform",
+            "Anna Hupalowska, Illustration & Data Visualization Designer",
+            "Erin Gwozdz, UX/UI Designer",
+            "Jen Lapan, Principal Software Product Manager",
+            "Kiara Westbrooks, Software Engineer",
+            "Marco Ocana, Principal Software Engineer",
+            "Pavel Sidorenko, Software Engineer",
+            "Pegah Taheri, Software Engineer",
+            "Sampath Settipalli, Senior Software Engineer",
+            "Simone Maiwald, Software Engineering Manager",
+            "Yufeng Wang, Senior Software Engineer"
+          ]
+        },
+        {
+          "Title": "Clinical Team, Brigham and Women’s Hospital",
+          "Members": [
+            "Andy Kim, BS, Research Coordinator",
+            "Hannah Laibinis, Intern",
+            "Henry Manigat, Translator",
+            "Henry Rutherford, BA, Research Coordinator",
+            "Himaja Nagireddy, HSPH MS Candidate, Intern",
+            "Sarah Naz-McLean, MSc, Program Manager",
+            "Tina Wang, Translator",
+            "Yilu Ma, Translator"
+          ]
+        },
+        {
+          "Title": "Additional Partners",
+          "Members": [
+            "Microbial Omics Core (MOC), Broad Institute",
+            "Clinical Research Sequencing Platform (CRSP), Broad Institute",
+            "Mascon Medical",
+            "GBF",
+            "UPS"
+          ]
         }
       ]
     },

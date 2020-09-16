@@ -64,11 +64,19 @@
             <h2 class="semi-bold" translate>HomePage.TeamSection.Title</h2>
             <p translate>HomePage.TeamSection.Text</p>
             <ul class="team-list">
-                <li class="member" *ngFor="let teammate of 'HomePage.TeamSection.List' | translate">
-                    <h5 class="member__title">{{teammate.Name}}</h5>
-                    <p class="member__affiliations">{{teammate.Affiliations}}</p>
-                    <p class="member__info">{{teammate.Info}}</p>
+                <li class="pi" *ngFor="let teammate of 'HomePage.TeamSection.PIs' | translate">
+                    <h5 class="pi__title">{{teammate.Name}}</h5>
+                    <p class="pi__affiliations">{{teammate.Affiliations}}</p>
+                    <p class="pi__info">{{teammate.Info}}</p>
                 </li>
+            </ul>
+            <ul class="team-list" *ngFor="let group of 'HomePage.TeamSection.Others' | translate">
+                <div class="others">
+                    <h5 class="others__title">{{group.Title}}</h5>
+                    <li class="others__item" *ngFor="let member of group.Members">
+                        <p class="others__name">{{member}}</p>
+                    </li>
+                </div>
             </ul>
         </div>
     </section>
