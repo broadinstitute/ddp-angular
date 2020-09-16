@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "We want to help our city safely get back to work.",
-      "Text": "TestBoston is a COVID-19 research study supported by Brigham and Women's Hospital, Mass General Brigham (formerly Partners Healthcare), and the Broad Institute of MIT and Harvard.",
+      "Title": "We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.",
+      "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard.",
       "Code": "Enter my invitation code",
-      "NoCode": "I was not invited, can I participate?"
+      "NoCode": "I don't have an invitation code"
     },
     "AboutSection": {
       "Title": "About the Study",
@@ -95,19 +95,19 @@
         {
           "Question": "Will I get a COVID-19 test if I join the study?",
           "Paragraphs": [
-            "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for  COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home self-testing kit within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab of the front of your nose tests if you have COVID-19 right now. The finger prick tests if you have antibodies to COVID-19 (meaning that you were exposed to the virus in the past). If you agree to be re-tested, and are eligible for the longer study, we will send you kits to repeat these tests every month for 5 additional months."
+            "Yes. If you received an invitation to join the study and you decide to enroll, you will be tested for COVID-19. However, enrollment space is limited and will be filled on a first-come, first served basis. If you enroll, you will receive a home-testing kit containing two tests within approximately one week of joining the study. The home test kit will contain a virology test kit (nasal swab) and an antibody test kit (finger prick), with instructions on how to collect and return your samples to our lab for testing. The nasal swab detects if you have active COVID-19. The finger prick tests if you have antibodies to COVID-19 (meaning that you had the virus in the past). If you also agree to join the longitudinal study, we will send you kits to repeat these tests every month for 5 additional months."
           ]
         },
         {
-          "Question": "Will I receive the results of my tests?",
+          "Question": "Will I receive my results?",
           "Paragraphs": [
-            "You will receive the results of the virology test. We are not currently permitted to give you the results of your antibody test. We will report aggregate results (your results combined with other research participants' results) to the Massachusetts Department of Public Health and other key stakeholders in public health to know what percent of study participants had a positive antibody, and to help us better understand the prevalence, or how widespread COVID-19 is."
+            "You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private."
           ]
         },
         {
           "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
           "Paragraphs": [
-            "No. Anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past). You may also enroll if you have had COVID-19 in the past."
+            "No - anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past)."
           ]
         },
         {
@@ -123,18 +123,6 @@
           ]
         },
         {
-          "Question": "How long does it take to find out the test result?",
-          "Paragraphs": [
-            "You should expect to receive your virology result within 72 hours after the sample is received in the lab."
-          ]
-        },
-        {
-          "Question": "Why can’t you give me the antibody test result?",
-          "Paragraphs": [
-            "Because the antibody test will be performed in a research laboratory (a facility in which scientific research, experiments, and measurement may be performed) and not a clinical laboratory (a laboratory where tests are usually done on clinical specimens in order to obtain information about the health of a patient), we cannot directly release results from the research antibody test to you. "
-          ]
-        },
-        {
           "Question": "Is it free to participate in TestBoston?",
           "Paragraphs": [
             "Yes. There is no charge to participate in TestBoston."
@@ -143,7 +131,7 @@
         {
           "Question": "What will I have to do if I join the study?",
           "Paragraphs": [
-            "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants will also be asked if they would like to be tested monthly for COVID-19 for the next 5 months. The test collections are a nasal swab from the front of your nose and a finger prick blood spot."
+            "Participants in TestBoston are asked to fill out a short survey about COVID-19 and perform two simple COVID-19 sample collections on themselves at home. Participants are asked to return the kits to us in a pre-paid box for processing. Participants may also volunteer to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot."
           ]
         },
         {
@@ -161,24 +149,14 @@
         {
           "Question": "Who is running this study?",
           "Paragraphs": [
-            "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital, Mass General Brigham (MGB, formerly Partners Healthcare), and the Broad Institute of MIT and Harvard. The people leading the study are Dr. Lisa Cosimi,  Dr. Ann Woolley, and Dr. Deborah Hung. All the doctors are infectious disease clinicians at Brigham and Women’s Hospital.",
-            "MGB is the largest healthcare system in the Boston area. Its hospitals include Brigham and Women’s and Massachusetts General Hospital. The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
+            "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard. The people leading the study are infectious disease doctors at Brigham and Women’s Hospital.",
+            "The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
           ]
         },
         {
           "Question": "How long will the study last?",
           "Paragraphs": [
-            "Participants in the study can decide to stop being in the study at any time. Individuals who participate in the entire study can expect to complete the study after 6 months."
-          ]
-        },
-        {
-          "Question": "Where can I find more information about COVID 19?",
-          "Paragraphs": [],
-          "Bullets": [
-            "<strong>The US Centers for Disease Control and Prevention (CDC):</strong> The CDC has assembled a <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">Coronavirus homepage</a> with a number of resources to learn about COVID-19 symptoms, how to protect yourself, and the most up to date national policies.",
-            "<strong>Easy-to-read information with pictures:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Caring for Yourself or a Family Member with COVID-19</a>.",
-            "<strong>Massachusetts residents:</strong> The Massachusetts Department of Public Health (DPH) Hotline can be reached at <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> or at <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 hours per day, 7 days per week. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-            "<strong>Boston residents:</strong> Find reliable information at the Boston Public Health Commission, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Also check the website: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+            "The study can last up to 6 months. Participants can decide to stop being in the study at any time."
           ]
         }
       ]

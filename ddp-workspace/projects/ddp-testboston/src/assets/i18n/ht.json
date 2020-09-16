@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "Nou vle ede vil nou a retounen travay an tout sekirite.",
-      "Text": "TestBoston se yon etid rechèch sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard.",
+      "Title": "[HT: We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.]",
+      "Text": "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital ak Broad Institute of MIT and Harvard.",
       "Code": "Mete kòd envitasyon mwen an",
-      "NoCode": "Yo pa t envite m, èske m kapab patisipe?"
+      "NoCode": "[HT: I don't have an invitation code]"
     },
     "AboutSection": {
       "Title": "Apwopo etid la",
@@ -95,19 +95,19 @@
         {
           "Question": "Èske mwen pral fè yon tès pou COVID-19 si mwen antre nan etid la?",
           "Paragraphs": [
-            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, ou pral resevwa yon kit pou pran tès la lakay ou oumenm nan apeprè yon semèn apre ou antre nan etid la. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. Aplikatè nan devan nen w lan teste si w gen COVID-19 aktyèlman. Tès pou pike dwèt la teste si w gen antikò COVID-19 (ki vle di ou te ekspoze nan viris la avan sa). Si w aksepte pou w refè yon tès, epi w kalifye pou etid pi long lan, n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
+            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, [HT: you will receive a home-testing kit containing two tests within approximately one week of joining the study]. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. [HT: The nasal swab detects if you have active COVID-19.] Tès pou pike dwèt la teste si w gen antikò COVID-19 ([HT: meaning that you had the virus in the past]). [HT: If you also agree to join the longitudinal study], n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
           ]
         },
         {
-          "Question": "Èske m ap resevwa rezilta tès mwen yo?",
+          "Question": "[HT: Will I receive my results?]",
           "Paragraphs": [
-            "Ou pral resevwa rezilta tès viral viwoloji a. Nou pa otorize aktyèlman pou n ba ou rezilta tès antikò ou yo. Nou pral rapòte rezilta yo an gwoup (rezilta ou yo melanje avèk rezilta lòt patisipan rechèch yo) bay Depatman Sante Piblik Massachusetts ak bay lòt pati konsène kle yo nan sante piblik pou konnen ki pousantaj nan patisipan etid yo ki te gen yon antikò pozitif, ak pou ede nou konprann prevalans lan pi byen, oswa nan ki pwen COVID-19 lan pwopaje toupatou."
+            "[HT: You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private.]"
           ]
         },
         {
           "Question": "Èske TestBoston se sèlman pou moun ki gen sentòm COVID-19?",
           "Paragraphs": [
-            "Non. Nou envite tout moun ki te resevwa yon envitasyon pou yo patisipe nan TestBoston pou li enskri nan etid la, kèlkeswa si wi ou non ou gen sentòm (oswa ou te janm gen sentòm anvan sa). Ou gendwa enskri tou si w te gen COVID-19 anvan sa."
+            "Non - nou envite tout moun ki te resevwa yon envitasyon pou yo patisipe nan TestBoston pou li enskri nan etid la, kèlkeswa si wi ou non ou gen sentòm (oswa ou te janm gen sentòm anvan sa)."
           ]
         },
         {
@@ -123,18 +123,6 @@
           ]
         },
         {
-          "Question": "Konbyen tan sa pran pou w konnen rezilta tès la?",
-          "Paragraphs": [
-            "Ou dwe espere resevwa rezilta viwoloji ou a sou 72 èdtan apre yo te resevwa echantiyon an nan laboratwa a."
-          ]
-        },
-        {
-          "Question": "Poukisa ou pa ka ban m rezilta tès antikò a?",
-          "Paragraphs": [
-            "Piske tès antikò yo pral fèt nan yon laboratwa rechèch (yon etablisman kote yo gendwa reyalize rechèch syantifik, eksperyans, ak mezi) epi se pa nan yon laboratwa klinik (yon laboratwa kote yo fè tès òdinèman sou echantiyon klinik pou jwenn enfòmasyon sou sante yon pasyan), nou pa kapab kominike ba ou dirèkteman rezilta ki soti nan tès antikò rechèch yo. "
-          ]
-        },
-        {
           "Question": "Èske li gratis pou patisipe nan TestBoston?",
           "Paragraphs": [
             "Wi. Pa gen okenn frè pou w peye pou w patisipe nan TestBoston."
@@ -143,7 +131,7 @@
         {
           "Question": "Kisa mwen pral dwe fè si mwen antre nan etid la?",
           "Paragraphs": [
-            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. Nou pral mande patisipan yo tou si yo ta renmen fè tès chak mwa pou COVID-19 pandan 5 pwochen mwa yo. Kòlèk pou tès yo se yon prelèvman echantiyon avèk aplikatè nan devan nen ak yon pike nan pwent dwèt pou pran san."
+            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. [HT: Participants may also volunteer to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot.]"
           ]
         },
         {
@@ -161,24 +149,14 @@
         {
           "Question": "Kiyès k ap dirije etid sa a?",
           "Paragraphs": [
-            "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (MGB, ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard. Moun k ap dirije etid la se Doktè Lisa Cosimi, Doktè Ann Woolley, ak Doktè Deborah Hung. Tout doktè yo se klinisyen maladi enfektyez nan Brigham and Women’s Hospital.",
-            "MGB se pi gwo sistèm swen sante nan zòn Boston lan. Lopital li yo gen ladan yo Brigham and Women’s ak Massachusetts General Hospital. Broad Institute se yon enstiti rechèch inivèsitè premye plan ki chita nan Cambridge. Broad Institute reyalize plizyè milye tès COVID-19 chak jou pou Depatman Sante yo nan tout Massachusetts, ansanm ak pou divès etid sou COVID-19 nan Massachusetts."
+            "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital ak Broad Institute of MIT and Harvard. Moun k ap dirije etid la se doktè maladi enfektyez nan Brigham and Women’s Hospital.",
+            "Broad Institute se yon enstiti rechèch inivèsitè premye plan ki chita nan Cambridge. Broad Institute reyalize plizyè milye tès COVID-19 chak jou pou Depatman Sante yo nan tout Massachusetts, ansanm ak pou divès etid sou COVID-19 nan Massachusetts."
           ]
         },
         {
           "Question": "Konbyen tan etid la ap dire?",
           "Paragraphs": [
-            "Patisipan nan etid la kapab, nenpòt lè, deside sispann patisipe nan etid. Moun ki patisipe nan etid la annantye ka atann pou yo fini etid la apre 6 mwa."
-          ]
-        },
-        {
-          "Question": "Kikote mwen kapab jwenn plis enfòmasyon sou COVID 19?",
-          "Paragraphs": [],
-          "Bullets": [
-            "<strong>Sant pou Kontwòl ak Prevansyon Maladi Etazini (CDC):</strong> CDC a te kreye yon paj <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">dakèy pou kowonaviris</a> ki gen yon kantite resous pou aprann plis sou sentòm COVID-19, fason pou pwoteje tèt ou, ak politik nasyonal ki pi ajou yo.",
-            "<strong>Enfòmasyon ki fasil-pou-li avèk imaj:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Fason pou pran swen tèt ou oswa yon manm fanmi ki gen COVID-19</a>.",
-            "<strong>Rezidan Massachusetts yo:</strong> Ou ka kontakte liy dirèk Depatman sante piblik Massachusetts (DPH) la swa nan <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> oswa nan <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 èdtan pa jou, 7 jou pa semèn. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>.  Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-            "<strong>Rezidan Boston yo:</strong> Jwenn enfòmasyon fyab nan Komisyon sante piblik Boston lan, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+            "[HT: The study can last up to 6 months. Participants in the study can decide to stop being in the study at any time.]"
           ]
         }
       ]
