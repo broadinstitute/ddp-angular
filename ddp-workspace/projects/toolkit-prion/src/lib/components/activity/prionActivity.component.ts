@@ -20,7 +20,6 @@ import { ActivatedRoute } from '@angular/router';
 export class PrionActivityComponent extends ActivityComponent implements OnInit {
   public id: string;
   public studyGuid: string;
-  public useRedesign: boolean;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
