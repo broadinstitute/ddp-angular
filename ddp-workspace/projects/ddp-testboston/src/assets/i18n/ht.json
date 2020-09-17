@@ -19,7 +19,7 @@
     "Q&A": "Kesyon ak repons",
     "WhoWeAre": "Kimoun nou ye",
     "StayInformed": "Rete enfòme",
-    "Help": "[HT] Help",
+    "Help": "Ede",
     "Dashboard": "Dach mwen an",
     "Menu": "Meni",
     "Invitation": "Kòd envitasyon",
@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "[HT: We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.]",
+      "Title": "Nou vle ede kominote nou yo epi aprann plis sou compòtman enfeksyon COVID-19 nan zòn Boston an.",
       "Text": "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital ak Broad Institute of MIT and Harvard.",
       "Code": "Mete kòd envitasyon mwen an",
-      "NoCode": "[HT: I don't have an invitation code]"
+      "NoCode": "Mwen pa gen yon kòd envitasyon"
     },
     "AboutSection": {
       "Title": "Apwopo etid la",
@@ -95,13 +95,13 @@
         {
           "Question": "Èske mwen pral fè yon tès pou COVID-19 si mwen antre nan etid la?",
           "Paragraphs": [
-            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, [HT: you will receive a home-testing kit containing two tests within approximately one week of joining the study]. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. [HT: The nasal swab detects if you have active COVID-19.] Tès pou pike dwèt la teste si w gen antikò COVID-19 ([HT: meaning that you had the virus in the past]). [HT: If you also agree to join the longitudinal study], n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
+            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, aprè yon semèn lèw fin enskri pou ou patisipe nan etid la, ou gen pou ou resevwa yon ti pake ki gen 2 tès ke ou ka pran lakay ou. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. Prelèvman nan nen pèmèt nou detekte si ou gen tras COVID-19. Tès pou pike dwèt la teste si w gen antikò COVID-19 (sa vle di ke ou te gen viris la avan sa). Si ou dakò pou ou patisipe nan pati etid kap dire plis la, n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
           ]
         },
         {
-          "Question": "[HT: Will I receive my results?]",
+          "Question": "Èske m’ap resevwa rezilta tès mwen yo?",
           "Paragraphs": [
-            "[HT: You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private.]"
+            "Ou ap resevwa rezilta tès ki gen rapò ak etid la. Ou pap resevwa rezilta tès antikò ou a. Rezilta yo la pou ede responsab sante piblik. Lè yo rapòte rezilta yo, se yon rezime enfòmasyon demografik jeneral ki ap pibliye. Idantite w ap rete kache."
           ]
         },
         {
@@ -131,7 +131,7 @@
         {
           "Question": "Kisa mwen pral dwe fè si mwen antre nan etid la?",
           "Paragraphs": [
-            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. [HT: Participants may also volunteer to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot.]"
+            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. Tout Patisipan yo ka sèvi kòm volontè pou repete pwosesis sa a chak mwa pandan 5 mwa anplis. Koleksyon tès yo se yon prelèvman nan nen ak yon ti tach san pike nan  dwèt."
           ]
         },
         {
@@ -156,7 +156,7 @@
         {
           "Question": "Konbyen tan etid la ap dire?",
           "Paragraphs": [
-            "[HT: The study can last up to 6 months. Participants in the study can decide to stop being in the study at any time.]"
+            "Etid sa ka dire jiska 6 mwa.Tout Patisipan ki nan etid sa ka deside sispann patisipe  nan etid la nan nenpòt ki lè."
           ]
         }
       ]
@@ -166,19 +166,19 @@
       "Text": "Nou se yon ekip doktè ak chèchè nan domèn maladi enfektyez ki vle konprann pi byen fason COVID-19 afekte moun ak kominote yo pou nou kapab sèvi tout pasyan yo pi byen. ",
       "PIs": [
         {
-          "Name": "[HT] Ann E. Woolley, MD, MPH",
-          "Affiliations": "[HT] Associate Physician, Infectious Diseases, Brigham and Women’s Hospital; Instructor of Medicine, Harvard Medical School",
-          "Info": "[HT] Dr. Ann Woolley is the Associate Clinical Director for Solid Organ Transplant Infectious Diseases at Brigham and Women’s Hospital and a Clinical Investigator whose research focuses on expanding treatment and diagnostics."
+          "Name": "Ann E. Woolley, MD, MPH",
+          "Affiliations": "Doktè ki Asosye, ak Maladi enfeksyon, se nan Brigham and Women’s Hospital; se yon instriktè Medsin,nan Harvard Medical School ",
+          "Info": "Doktè Ann Woolley se li ki asosye Direktè klinik la pou transplantasyon ògàn solid maladi enfeksyon nan Brigham and Women’s Hospital ak yon Envestigatè nan klinik ki ap fè rechèch konsantre sou agrandi tretman ak dyagnostik."
         },
         {
-          "Name": "[HT] Lisa A. Cosimi, MD",
-          "Affiliations": "[HT] Associate Physician, Infectious Diseases & Global Health Equity, Brigham and Women’s Hospital; Assistant Professor, Harvard Medical School",
-          "Info": "[HT] Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Her research focuses on ways to strengthen health systems and the quality of healthcare in resource-limited settings."
+          "Name": "Lisa A. Cosimi, MD",
+          "Affiliations": "Doktè ki Asosye ak Maladi enfeksyon & Global Health Equity, Brigham and Women’s Hospital Li Asistan Pwofesè, Harvard Medical School ",
+          "Info": "Dr Cosimi se yon Doktè ki Asosye nan Divizyon Ekite Sante Global & Maladi enfeksyon nan Brigham and Women’s Hospital epi li se yon Asistan Pwofesè nan Medsin nan Harvard Medical School. Rechèch sa li konsantre sèlman sou fason yo ranfòse sistèm sante ak bon jan kalite de swen sante nan anviwònman resous-limite."
         },
         {
-          "Name": "[HT] Deborah T. Hung, MD, PhD",
-          "Affiliations": "[HT] Professor, Harvard Medical School; Core faculty member and Co-director, Infectious Disease and Microbiome Program, Broad Institute",
-          "Info": "[HT] Dr. Deborah Hung is a physician scientist at the Broad Institute, Harvard Medical School and Massachusetts General Hospital who studies infectious diseases and is an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital."
+          "Name": "Deborah T. Hung, MD, PhD",
+          "Affiliations": "Pwofesè, Harvard Medical School; Li se manm inpòtan nan fakilte a epi li se ko-direktè, Maladi enfeksyon ak Pwogram mikrobyom, Broad Institute",
+          "Info": "Doktè Deborah Hung se yon doktè ki fè anpil rechèch sou syans li nan Broad Institute, Harvard Medical School ak Massachusetts General Hospital ki etidye maladi enfeksyon epi li se yon doktè k ap patisipe nan maladi enfeksyon ak poumon ak medikaman swen kritik nan Brigham and Women’s Hospital."
         }
       ],
       "Others": [
@@ -193,7 +193,7 @@
           ]
         },
         {
-          "Title": "[HT] Engineering Team, Broad Institute",
+          "Title": "Ekip Jeni, Broad Institute",
           "Members": [
             "Andrew Zimmer, Direktè, platfòm Don Done",
             "Anna Hupalowska, Ilistrasyon ak Done vizyalizasyon Designer",
@@ -325,23 +325,23 @@
     "Button": "Suivan"
   },
   "Help": {
-    "Title": "[HT] Help Center",
+    "Title": "Sant Èd",
     "Collect": {
-      "Title": "[HT] How to collect your samples",
-      "Text": "[HT] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
+      "Title": "Kouman kolekte echantiyon ou yo",
+      "Text": "Li enpòtan pou pran tès ou a epi voye li tounen nan menm jou a, Lendi oswa jiska Jedi. Sa yo se jou yo ki Enstiti a Broad pral trete echantiyon TestBoston.",
       "Link": "[HT] Sample Collection Instructions",
       "IconAlt": "[HT] PDF file icon",
       "IframeTitle": "[HT] Nasal swab kit directions",
       "Video": "https://player.vimeo.com/video/440526812"
     },
     "Return": {
-      "Title": "[HT] How to return your samples",
-      "Text": "[HT] Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Title": "Ki jan yo retounen echantiyon ou yo",
+      "Text": "Echantiyon tès ou yo dwe retounen via UPS nan menm jou ou pran tès ou an. Drop twous tès ou a nan swa yon ofisyèl UPS Store oswa nan yon UPS Drop Box. Ou ka mande tou yon UPS pick-up pou kay ou si ou gen yon kote ki an sekirite pou kite pakè ou deyò pou chofè UPS la.",
       "Step1": {
         "Title": "[HT] Step 1:",
         "Text": {
           "Part1": "[HT] Click",
-          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+          "Part2": "Tape kòd postal ou epi klike sou “<span class=\"bold\">See All Options</span>”."
         },
         "ImageAlt": "[HT] UPS locations instruction, your location"
       },
@@ -354,14 +354,14 @@
     "Pickup": {
       "Title": "[HT] UPS home pickup",
       "Text": {
-        "Part1": "[HT] You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
-        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+        "Part1": "Ou ka elijib pou UPS lakay pickup si ou ka san danje kite pake ou nan yon plas kote UPS chofè kapab jwenn aksè li. Orè yon pickup lè w rele",
+        "Part2": "Si ou gen nenpòt difikilte pou retounen twous ou nan UPS, tanpri kontakte ekip etid la"
       }
     },
     "Questions": {
-      "Title": "[HT] Still have questions?",
+      "Title": "Toujou gen kesyon?",
       "Text": {
-        "Part1": "[HT] If you have further questions, please reach out to study staff by emailing",
+        "Part1": "Si ou gen plis kesyon, tanpri kontakte anplwaye etid la pa imèl",
         "Part2": "or"
       }
     },
