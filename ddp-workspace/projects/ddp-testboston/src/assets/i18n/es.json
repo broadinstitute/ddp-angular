@@ -340,13 +340,13 @@
         "Title": "Paso 1:",
         "Text": {
           "Part1": "Hacer clic",
-          "Part2": "Escriba su código postal y haga clic en “Ver Todas Las Opciones”."
+          "Part2": "Escriba su código postal y haga clic en “<span class=\"bold\">Ver Todas Las Opciones</span>”."
         },
         "ImageAlt": "Instrucciones de ubicación de UPS, su ubicación"
       },
       "Step2": {
         "Title": "Paso 2:",
-        "Text": "En Tipo de Ubicación, marque los casilleros de \"Tienda Oficial UPS®\" y \"Buzón de Entrega de UPS\". Luego haga clic en el ícono de búsqueda.",
+        "Text": "En Tipo de Ubicación, marque los casilleros de “<span class=\"bold\">Tienda Oficial UPS®</span>” y “<span class=\"bold\">Buzón de Entrega de UPS</span>”. Luego haga clic en el ícono de búsqueda.",
         "ImageAlt": "Instrucciones de ubicación de UPS, Cajas de UPS"
       }
     },
