@@ -3,12 +3,13 @@ import { MatSelectChange } from '@angular/material/select';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { ActivityPicklistDetails } from './../../../models/activity/activityPicklistDetails';
+import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <ng-container *ngIf="block.selectMode == 'MULTIPLE'; then matSelect else nativeSelect">
+    <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
     </ng-container>
 
     <ng-template #matSelect>
@@ -64,6 +65,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 })
 export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
     public details: ActivityPicklistDetails;
+    public readonly SELECT_MODE = PicklistSelectMode;
     /**
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
      */
