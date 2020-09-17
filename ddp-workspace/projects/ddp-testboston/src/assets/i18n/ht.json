@@ -330,29 +330,29 @@
       "Title": "Kouman kolekte echantiyon ou yo",
       "Text": "Li enpòtan pou pran tès ou a epi voye li tounen nan menm jou a, Lendi oswa jiska Jedi. Sa yo se jou yo ki Enstiti a Broad pral trete echantiyon TestBoston.",
       "Link": "Enstriksyon Koleksyon Echantiyon",
-      "IconAlt": "[HT] PDF file icon",
-      "IframeTitle": "[HT] Nasal swab kit directions",
+      "IconAlt": "PDF dosye icon",
+      "IframeTitle": "Direksyon twous prelèvman nen yo",
       "Video": "https://player.vimeo.com/video/440526812"
     },
     "Return": {
       "Title": "Ki jan yo retounen echantiyon ou yo",
       "Text": "Echantiyon tès ou yo dwe retounen via UPS nan menm jou ou pran tès ou an. Drop twous tès ou a nan swa yon ofisyèl UPS Store oswa nan yon UPS Drop Box. Ou ka mande tou yon UPS pick-up pou kay ou si ou gen yon kote ki an sekirite pou kite pakè ou deyò pou chofè UPS la.",
       "Step1": {
-        "Title": "[HT] Step 1:",
+        "Title": "Etap 1:",
         "Text": {
-          "Part1": "[HT] Click",
+          "Part1": "Klike",
           "Part2": "Tape kòd postal ou epi klike sou “<span class=\"bold\">See All Options</span>”."
         },
-        "ImageAlt": "[HT] UPS locations instruction, your location"
+        "ImageAlt": "UPS enstriksyon kote, kote ou ye"
       },
       "Step2": {
-        "Title": "[HT] Step 2:",
-        "Text": "[HT] Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
-        "ImageAlt": "[HT] UPS locations instruction, UPS boxes"
+        "Title": "Etap 2:",
+        "Text": "Anba “<span class=\"bold\">Location Type</span>”, tcheke ti bwat yo pou “<span class=\"bold\">The UPS Store®</span>” ak “<span class=\"bold\">UPS Drop Box</span>”. Lè sa a, klike sou ikòn rechèch la",
+        "ImageAlt": "UPS enstriksyon kote, bwat UPS"
       }
     },
     "Pickup": {
-      "Title": "[HT] UPS home pickup",
+      "Title": "UPS lakay pickup",
       "Text": {
         "Part1": "Ou ka elijib pou UPS lakay pickup si ou ka san danje kite pake ou nan yon plas kote UPS chofè kapab jwenn aksè li. Orè yon pickup lè w rele",
         "Part2": "Si ou gen nenpòt difikilte pou retounen twous ou nan UPS, tanpri kontakte ekip etid la"
@@ -365,8 +365,8 @@
         "Part2": "or"
       }
     },
-    "ArrowAlt": "[HT] Arrow",
-    "SearchAlt": "[HT] Search icon"
+    "ArrowAlt": "Flèch",
+    "SearchAlt": "Rechèch icon"
   },
   "Toolkit": {
     "Dashboard": {
