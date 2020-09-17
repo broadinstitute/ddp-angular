@@ -204,6 +204,7 @@
             "Pavel Sidorenko, Software Engineer",
             "Pegah Taheri, Software Engineer",
             "Sampath Settipalli, Senior Software Engineer",
+            "Scott Sassone, Manager, Video Production",
             "Simone Maiwald, Software Engineering Manager",
             "Yufeng Wang, Senior Software Engineer"
           ]
@@ -212,6 +213,7 @@
           "Title": "Clinical Team, Brigham and Women’s Hospital",
           "Members": [
             "Andy Kim, BS, Research Coordinator",
+            "Christina Kelly, Research Assistant",
             "Hannah Laibinis, Intern",
             "Henry Manigat, Translator",
             "Henry Rutherford, BA, Research Coordinator",
@@ -224,10 +226,13 @@
         {
           "Title": "Additional Partners",
           "Members": [
-            "Microbial Omics Core (MOC), Broad Institute",
             "Clinical Research Sequencing Platform (CRSP), Broad Institute",
-            "Mascon Medical",
             "GBF",
+            "Joel Ceide, Translator",
+            "Language Scientific",
+            "Mascon Medical",
+            "Microbial Omics Core (MOC), Broad Institute",
+            "Nadya Lopez Zalba, Translator",
             "UPS"
           ]
         }
