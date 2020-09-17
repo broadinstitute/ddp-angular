@@ -1,0 +1,23 @@
+<section class="statistics page-padding">
+  <h1 translate>Statistics.Title</h1>
+  <h2 translate>Statistics.CountersFirst.Title</h2>
+  <ul class="counters">
+    <li *ngFor="let data of countersFirst">
+      <div>{{ data.Number }}</div>
+      <span class="pre-line">{{ data.Text }}</span>
+    </li>
+  </ul>
+  <ul class="counters">
+    <li *ngFor="let data of countersSecond">
+      <div>{{ data.Number }}</div>
+      <span class="pre-line">{{ data.Text }}</span>
+    </li>
+  </ul>
+  <p translate>Statistics.CountersThird.Title</p>
+  <ul class="countries">
+    <li *ngFor="let data of countersThird">
+      <hr class="hor-bar" [style.width]="data.Width ? data.Width : '1px'">
+      <p><span class="emoji">{{ data.Emoji }}</span> <span class="pre-line">{{ data.Name }}</span></p>
+    </li>
+  </ul>
+</section>

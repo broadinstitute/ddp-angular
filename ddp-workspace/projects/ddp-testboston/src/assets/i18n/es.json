@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "Queremos contribuir a que la gente de nuestra ciudad pueda volver a trabajar sin riesgos.",
-      "Text": "TestBoston es un estudio de investigación de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (antes Partners Healthcare) y Broad Institute of MIT and Harvard.",
+      "Title": "[ES: We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.]",
+      "Text": "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital y Broad Institute of MIT and Harvard.",
       "Code": "Ingresar mi código de invitación",
-      "NoCode": "No me invitaron. ¿Puedo participar?"
+      "NoCode": "[ES: I don't have an invitation code]"
     },
     "AboutSection": {
       "Title": "El estudio",
@@ -95,19 +95,19 @@
         {
           "Question": "¿Me realizarán una prueba de COVID-19 si me incorporo al estudio?",
           "Paragraphs": [
-            "Sí. Si recibió una invitación para incorporarse al estudio y decide inscribirse, le realizarán una prueba para detectar COVID-19. Sin embargo, las vacantes son limitadas y se ocuparán por orden de inscripción. Si se inscribe, recibirá un kit para realizarse una prueba hogareña de detección alrededor de una semana después de incorporarse al estudio. El kit de pruebas hogareñas incluye un kit de detección del virus (hisopo nasal) y un kit de detección de anticuerpos (pinchazo en el dedo) con instrucciones para recolectar sus muestras y enviarlas a nuestro laboratorio para que las analicen. El hisopado de la parte delantera de la nariz permite detectar si tiene COVID-19. Con el pinchazo en el dedo se puede detectar si tiene anticuerpos de COVID-19 (lo que indicaría que estuvo en contacto con el virus anteriormente). Si acepta volver a realizarse la prueba y reúne las condiciones para el estudio más largo, le enviaremos kits para que repita estas pruebas todos los meses durante cinco meses más."
+            "Sí. Si recibió una invitación para incorporarse al estudio y decide inscribirse, le realizarán una prueba para detectar COVID-19. Sin embargo, las vacantes son limitadas y se ocuparán por orden de inscripción. Si se inscribe, [ES: you will receive a home-testing kit containing two tests within approximately one week of joining the study]. El kit de pruebas hogareñas incluye un kit de detección del virus (hisopo nasal) y un kit de detección de anticuerpos (pinchazo en el dedo) con instrucciones para recolectar sus muestras y enviarlas a nuestro laboratorio para que las analicen. [ES: The nasal swab detects if you have active COVID-19.] Con el pinchazo en el dedo se puede detectar si tiene anticuerpos de COVID-19 ([ES: meaning that you had the virus in the past]). [ES: If you also agree to join the longitudinal study], le enviaremos kits para que repita estas pruebas todos los meses durante cinco meses más."
           ]
         },
         {
-          "Question": "¿Cuándo recibiré los resultados de mis pruebas?",
+          "Question": "[ES: Will I receive my results?]",
           "Paragraphs": [
-            "Recibirá los resultados de la prueba de detección del virus. En este momento no tenemos permiso para darle los resultados de su prueba de anticuerpos. Presentaremos un resumen de los resultados (sus resultados combinados con los de otros participantes de la investigación) al Departamento de Salud Pública de Massachusetts y otras partes interesadas clave del sector de salud pública. Nuestro objetivo es conocer el porcentaje de participantes del estudio que tienen un anticuerpo positivo y contar con una noción más clara de la prevalencia, o la cantidad de personas contagiadas, de COVID-19."
+            "[ES: You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private.]"
           ]
         },
         {
           "Question": "¿TestBoston es solamente para las personas que tienen síntomas de COVID-19?",
           "Paragraphs": [
-            "No. Cualquier persona que haya recibido una invitación para participar en TestBoston puede inscribirse en el estudio, independientemente de que haya tenido síntomas o no (o de que haya tenido síntomas antes). También puede inscribirse si ya tuvo COVID-19."
+            "No - cualquier persona que haya recibido una invitación para participar en TestBoston puede inscribirse en el estudio, independientemente de que haya tenido síntomas o no (o de que haya tenido síntomas antes)."
           ]
         },
         {
@@ -123,18 +123,6 @@
           ]
         },
         {
-          "Question": "¿En cuánto tiempo recibiré el resultado de la prueba?",
-          "Paragraphs": [
-            "Recibirá el resultado de la prueba de detección del virus dentro de las 72 horas posteriores a la recepción de la muestra en el laboratorio."
-          ]
-        },
-        {
-          "Question": "¿Por qué no me pueden dar el resultado de la prueba de anticuerpos?",
-          "Paragraphs": [
-            "Dado que la prueba de anticuerpos se realizará en un laboratorio de investigaciones (un centro donde se realizan investigaciones, experimentos y mediciones de orden científico o tecnológico) y no en un laboratorio clínico (es decir, un laboratorio donde se suelen analizar muestras clínicas para obtener información sobre la salud de un paciente), no podemos entregarle directamente a usted los resultados de la prueba de anticuerpos de la investigación. "
-          ]
-        },
-        {
           "Question": "¿La participación en TestBoston es gratuita?",
           "Paragraphs": [
             "Sí. Puede participar en TestBoston sin cargo."
@@ -143,7 +131,7 @@
         {
           "Question": "¿Qué tendré que hacer si me incorporo al estudio?",
           "Paragraphs": [
-            "Los participantes de TestBoston responden una breve encuesta sobre COVID-19 y toman dos muestras fáciles de obtener en su casa. Luego, deben enviarnos los kits en una caja con porte prepagado para que los analicemos. Asimismo, deben confirmar si desean realizarse pruebas mensuales de COVID-19 durante los siguientes cinco meses. Las muestras que se recogen para la prueba son un hisopado de la parte delantera de la nariz y unas gotas de sangre obtenidas con un pinchazo en un dedo."
+            "Los participantes de TestBoston responden una breve encuesta sobre COVID-19 y toman dos muestras fáciles de obtener en su casa. Luego, deben enviarnos los kits en una caja con porte prepagado para que los analicemos. [ES: Participants may also volunteer to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot.]"
           ]
         },
         {
@@ -161,24 +149,14 @@
         {
           "Question": "¿Quién realiza este estudio?",
           "Paragraphs": [
-            "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital, Mass General Brigham (MGB, antes Partners Healthcare) y Broad Institute of MIT and Harvard. Las personas que dirigen el estudio son la Dra. Lisa Cosimi,  la Dra. Ann Woolley y la Dra. Deborah Hung. Todas ellas son infectólogas de Brigham and Women’s Hospital.",
-            "MGB es el sistema sanitario más grande de la zona de Boston. Entre sus hospitales se cuentan Brigham and Women’s y Massachusetts General Hospital. Broad Institute es un destacado instituto de investigaciones académicas ubicado en Cambridge. Broad Institute realiza miles de pruebas diarias de COVID-19 para los departamentos de Salud de Massachusetts, así como para distintos estudios de COVID-19 que se llevan a cabo en este estado."
+            "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital y Broad Institute of MIT and Harvard. Las personas que dirigen el estudio son infectólogas de Brigham and Women’s Hospital.",
+            "Broad Institute es un destacado instituto de investigaciones académicas ubicado en Cambridge. Broad Institute realiza miles de pruebas diarias de COVID-19 para los departamentos de Salud de Massachusetts, así como para distintos estudios de COVID-19 que se llevan a cabo en este estado."
           ]
         },
         {
           "Question": "¿Cuánto durará el estudio?",
           "Paragraphs": [
-            "Los participantes del estudio pueden abandonarlo en cualquier momento. Quienes participen en la totalidad del estudio lo finalizarán al cabo de seis meses."
-          ]
-        },
-        {
-          "Question": "¿Dónde puedo encontrar más información sobre COVID-19?",
-          "Paragraphs": [],
-          "Bullets": [
-            "<strong>Los Centros para el Control y la Prevención de Enfermedades (CDC) de EE. UU.:</strong> los CDC han creado una <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">página sobre coronavirus</a> con una serie de recursos para obtener información sobre los síntomas de COVID-19, cómo protegerse y las directivas nacionales más actuales.",
-            "<strong>Información fácil de leer con imágenes:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">cómo cuidarse o cuidar de un familiar con COVID-19</a>.",
-            "<strong>Residentes de Massachusetts:</strong> puede llamar a la línea directa del Departamento de Salud de Massachusetts (DPH) al <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> o al <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a> todos los días, las 24 horas. <strong>Teletipo/Teléfono para sordos</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>. Consulte también el siguiente sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a> (en inglés).",
-            "<strong>Residentes de Boston:</strong> encuentre información confiable en la Comisión de Salud Pública de Boston, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Consulte también el sitio web: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a> (en inglés)."
+            "[ES: The study can last up to 6 months. Participants in the study can decide to stop being in the study at any time.]"
           ]
         }
       ]
@@ -186,21 +164,72 @@
     "TeamSection": {
       "Title": "Nuestro equipo",
       "Text": "Somos un equipo de infectólogas e investigadoras que desea tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades para poder atender mejor a todos los pacientes. ",
-      "List": [
+      "PIs": [
         {
-          "Name": "Dra. Ann E. Woolley",
-          "Affiliations": "Profesora de Medicina",
-          "Info": "La Dra. Ann Woolley es profesora de Medicina e infectóloga de Brigham & Women’s Hospital y la Facultad de Medicina de Harvard. La Dra. Woolley obtuvo una licenciatura en Ingeniería Mecánica y Aeroespacial de la Universidad de Princeton en 2001 y un título de posgrado de estudios preparatorios de Medicina en la Universidad de Columbia. Más tarde, se formó en Salud Pública y en Medicina en la Facultad de Medicina de Mount Sinai en Nueva York. Con sus investigaciones centradas en los trasplantes, la hepatitis y las infecciones cardíacas, la Dra. Woolley ha demostrado métodos novedosos para utilizar sin riesgos los órganos de personas que antes no se consideraban donantes aptos. Gracias a su labor, ha sido posible reducir los plazos de espera para quienes necesitan trasplantes de órganos y lograr que más personas puedan optar por donar órganos y salvar vidas."
+          "Name": "[ES] Ann E. Woolley, MD, MPH",
+          "Affiliations": "[ES] Associate Physician, Infectious Diseases, Brigham and Women’s Hospital; Instructor of Medicine, Harvard Medical School",
+          "Info": "[ES] Dr. Ann Woolley is the Associate Clinical Director for Solid Organ Transplant Infectious Diseases at Brigham and Women’s Hospital and a Clinical Investigator whose research focuses on expanding treatment and diagnostics."
         },
         {
-          "Name": "Dra. Lisa A. Cosimi",
-          "Affiliations": "Profesora adjunta de Infectología de la Facultad de Medicina de Harvard, Global Health Equity (Equidad Mundial en Salud)",
-          "Info": "La Dra. Cosimi es médica adjunta de las divisiones de Equidad Mundial en Salud e Infectología de Brigham & Women’s Hospital. Además, se desempeña como profesora adjunta de Medicina en la Facultad de Medicina de Harvard. La Dra. Cosimi obtuvo una licenciatura en Economía de la Universidad Cornell en 1992 y una licenciatura en Medicina de la Facultad de Medicina Weill Cornell en 1996.  Finalizó su residencia de Medicina Interna y Atención Primaria en Massachusetts General Hospital y, posteriormente, se especializó en Infectología en el programa combinado de Partners.  Las investigaciones de la Dra. Cosimi se han centrado en formas de fortalecer los sistemas de salud y la calidad de la asistencia sanitaria en contextos donde los recursos son limitados. Su grupo, The Partnership for Health Advancement in Vietnam (HAIVN, Sociedad para la Promoción de la Salud en Vietnam), se ha asociado con el Ministerio de Salud, las universidades de medicina y los hospitales de Vietnam. Su objetivo es reformar y modernizar la educación de los trabajadores de la salud, así como mejorar la calidad de la atención sanitaria y el acceso a ella para los pacientes con VIH, tuberculosis y otras infecciones de reciente aparición en todo el país."
+          "Name": "[ES] Lisa A. Cosimi, MD",
+          "Affiliations": "[ES] Associate Physician, Infectious Diseases & Global Health Equity, Brigham and Women’s Hospital; Assistant Professor, Harvard Medical School",
+          "Info": "[ES] Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Her research focuses on ways to strengthen health systems and the quality of healthcare in resource-limited settings."
         },
         {
-          "Name": "Dra. Deborah T. Hung, PhD",
-          "Affiliations": "Profesora titular de Infectología, Neumología y Medicina Intensiva de la Facultad de Medicina de Harvard",
-          "Info": "La Dra. Deborah Hung es profesora de Genética en Massachusetts General Hospital y en la Facultad de Medicina de Harvard. Además, integra el cuerpo docente principal y es codirectora del programa de Infectología y Microbioma de Broad Institute of MIT and Harvard. Asimismo, se desempeña como especialista en Infectología, Neumología y Medicina Intensiva en Brigham and Women’s Hospital. Trabaja en la relación entre la bioquímica, la genómica y la patogenia bacteriana con el fin de definir nuevos paradigmas para los antibióticos, a partir de la biología esencial necesaria para que un microrganismo patógeno cause una enfermedad en un anfitrión. Aplicando su formación en los campos de la síntesis química, la genética bacteriana y la medicina clínica, la Dra. Hung estudia métodos para alterar la interacción entre los microrganismos patógenos y sus anfitriones."
+          "Name": "[ES] Deborah T. Hung, MD, PhD",
+          "Affiliations": "[ES] Professor, Harvard Medical School; Core faculty member and Co-director, Infectious Disease and Microbiome Program, Broad Institute",
+          "Info": "[ES] Dr. Deborah Hung is a physician scientist at the Broad Institute, Harvard Medical School and Massachusetts General Hospital who studies infectious diseases and is an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital."
+        }
+      ],
+      "Others": [
+        {
+          "Title": "[ES] Administrative Team, Broad Institute",
+          "Members": [
+            "[ES] Andrea Saltzman, Director, Office of Research Subject Protection",
+            "[ES] Marissa Jenko, MS, Administrative Lead",
+            "[ES] Paul Tyman, Administrative Assistant",
+            "[ES] Sarah Winnicki, Project Manager II",
+            "[ES] Sharon Wong, PhD, Associate Director - Infectious Disease and Microbiome Program"
+          ]
+        },
+        {
+          "Title": "[ES] Engineering Team, Broad Institute",
+          "Members": [
+            "[ES] Andrew Zimmer, Director, Data Donation Platform",
+            "[ES] Anna Hupalowska, Illustration & Data Visualization Designer",
+            "[ES] Erin Gwozdz, UX/UI Designer",
+            "[ES] Jen Lapan, Principal Software Product Manager",
+            "[ES] Kiara Westbrooks, Software Engineer",
+            "[ES] Marco Ocana, Principal Software Engineer",
+            "[ES] Pavel Sidorenko, Software Engineer",
+            "[ES] Pegah Taheri, Software Engineer",
+            "[ES] Sampath Settipalli, Senior Software Engineer",
+            "[ES] Simone Maiwald, Software Engineering Manager",
+            "[ES] Yufeng Wang, Senior Software Engineer"
+          ]
+        },
+        {
+          "Title": "[ES] Clinical Team, Brigham and Women’s Hospital",
+          "Members": [
+            "[ES] Andy Kim, BS, Research Coordinator",
+            "[ES] Hannah Laibinis, Intern",
+            "[ES] Henry Manigat, Translator",
+            "[ES] Henry Rutherford, BA, Research Coordinator",
+            "[ES] Himaja Nagireddy, HSPH MS Candidate, Intern",
+            "[ES] Sarah Naz-McLean, MSc, Program Manager",
+            "[ES] Tina Wang, Translator",
+            "[ES] Yilu Ma, Translator"
+          ]
+        },
+        {
+          "Title": "[ES] Additional Partners",
+          "Members": [
+            "[ES] Microbial Omics Core (MOC), Broad Institute",
+            "[ES] Clinical Research Sequencing Platform (CRSP), Broad Institute",
+            "[ES] Mascon Medical",
+            "[ES] GBF",
+            "[ES] UPS"
+          ]
         }
       ]
     },
