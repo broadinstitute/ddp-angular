@@ -7,7 +7,7 @@ import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAg
 import { ActivityAgreementAnswer } from './activityAgreementAnswer.component';
 import { FormsModule } from '@angular/forms';
 
-fdescribe('ActivityAgreementAnswer', () => {
+describe('ActivityAgreementAnswer', () => {
     const questionBlock = {
         answer: null,
         isRequired: false,
@@ -49,9 +49,46 @@ fdescribe('ActivityAgreementAnswer', () => {
         fixture = TestBed.createComponent(ActivityAgreementAnswer);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
+        component.block = questionBlock;
+        fixture.detectChanges();
     }));
 
     it('should create component', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should render checkbox and question', () => {
+        const text = debugElement.queryAll(By.css('.ddp-agreement-text'));
+        const checkbox = debugElement.queryAll(By.css('mat-checkbox'));
+        expect(checkbox.length).toBe(1);
+        expect(text.length).toBe(1);
+        expect(text[0].properties.innerHTML).toBe(questionBlock.question);
+    });
+
+    it('should not add ddp-required-question-prompt css class if question is not required', () => {
+        component.block.isRequired = false;
+        fixture.detectChanges();
+        const required = debugElement.queryAll(By.css('.ddp-required-question-prompt'));
+        expect(required.length).toBe(0);
+    });
+
+    it('should add ddp-required-question-prompt css class if question is required', () => {
+        component.block.isRequired = true;
+        fixture.detectChanges();
+        const required = debugElement.queryAll(By.css('.ddp-required-question-prompt'));
+        expect(required.length).toBe(1);
+    });
+
+    it('should change answer by click', () => {
+        component.block.answer = false;
+        fixture.detectChanges();
+        const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
+        const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
+        inputElement.click();
+        fixture.detectChanges();
+        expect(inputElement.checked).toBe(true);
+        inputElement.click();
+        fixture.detectChanges();
+        expect(inputElement.checked).toBe(false);
     });
 });
