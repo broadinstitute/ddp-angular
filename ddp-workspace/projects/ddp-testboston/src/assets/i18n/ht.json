@@ -183,52 +183,55 @@
       ],
       "Others": [
         {
-          "Title": "[HT] Administrative Team, Broad Institute",
+          "Title": "Ekip Administratif, Broad Institute",
           "Members": [
-            "[HT] Andrea Saltzman, Director, Office of Research Subject Protection",
-            "[HT] Marissa Jenko, MS, Administrative Lead",
-            "[HT] Paul Tyman, Administrative Assistant",
-            "[HT] Sarah Winnicki, Project Manager II",
-            "[HT] Sharon Wong, PhD, Associate Director - Infectious Disease and Microbiome Program"
+            "Andrea Saltzman, Direktè, Biwo Pwoteksyon Sijè Rechèch",
+            "Marissa Jenko, MS, Plon Administratif",
+            "Paul Tyman, se yon nan asistan Administratif yo",
+            "Sarah Winnicki, se ki dezyèm Manadjèse tout Pwojè",
+            "Sharon Wong, PhD, Direktè Asosye - Pwogram Maladi enfeksyon ak mikrobyom"
           ]
         },
         {
           "Title": "[HT] Engineering Team, Broad Institute",
           "Members": [
-            "[HT] Andrew Zimmer, Director, Data Donation Platform",
-            "[HT] Anna Hupalowska, Illustration & Data Visualization Designer",
-            "[HT] Erin Gwozdz, UX/UI Designer",
-            "[HT] Jen Lapan, Principal Software Product Manager",
-            "[HT] Kiara Westbrooks, Software Engineer",
-            "[HT] Marco Ocana, Principal Software Engineer",
-            "[HT] Pavel Sidorenko, Software Engineer",
-            "[HT] Pegah Taheri, Software Engineer",
-            "[HT] Sampath Settipalli, Senior Software Engineer",
-            "[HT] Simone Maiwald, Software Engineering Manager",
-            "[HT] Yufeng Wang, Senior Software Engineer"
+            "Andrew Zimmer, Direktè, platfòm Don Done",
+            "Anna Hupalowska, Ilistrasyon ak Done vizyalizasyon Designer",
+            "Erin Gwozdz, Itilizatè Eksperyans ak Itilizatè Entèfas Designer",
+            "Jen Lapan, Direktè pwodwi lojisyèl direktè lekòl la",
+            "Kiara Westbrooks, Enjenyè lojisyèl",
+            "Marco Ocana, Enjenyè Direktè Lojisyèl",
+            "Pavel Sidorenko, Enjenyè lojisyèl",
+            "Pegah Taheri, Enjenyè lojisyèl",
+            "Sampath Settipalli, Granmoun aje enjenyè lojisyèl",
+            "Simone Maiwald, Manadjè Jeni lojisyèl",
+            "Yufeng Wang, Granmoun aje enjenyè lojisyèl  "
           ]
         },
         {
-          "Title": "[HT] Clinical Team, Brigham and Women’s Hospital",
+          "Title": "Ekip nan klinik, Brigham and Women’s Hospital",
           "Members": [
-            "[HT] Andy Kim, BS, Research Coordinator",
-            "[HT] Hannah Laibinis, Intern",
-            "[HT] Henry Manigat, Translator",
-            "[HT] Henry Rutherford, BA, Research Coordinator",
-            "[HT] Himaja Nagireddy, HSPH MS Candidate, Intern",
-            "[HT] Sarah Naz-McLean, MSc, Program Manager",
-            "[HT] Tina Wang, Translator",
-            "[HT] Yilu Ma, Translator"
+            "Andy Kim, BS, Koòdonatè Rechèch",
+            "Hannah Laibinis, Entèn",
+            "Henry Manigat, Tradiktè",
+            "Henry Rutherford, BA, Koòdonatè Rechèch",
+            "Himaja Nagireddy, HSPH MS Kandida, Entèn",
+            "Sarah Naz-McLean, MSc, Manadjè Pwogram lan",
+            "Tina Wang, Tradiktè",
+            "Yilu Ma, Tradiktè"
           ]
         },
         {
-          "Title": "[HT] Additional Partners",
+          "Title": "Lòt Patnè",
           "Members": [
-            "[HT] Microbial Omics Core (MOC), Broad Institute",
-            "[HT] Clinical Research Sequencing Platform (CRSP), Broad Institute",
-            "[HT] Mascon Medical",
-            "[HT] GBF",
-            "[HT] UPS"
+            "Klinik rechèch sa se sou sekans Platfòm (CRSP), Broad institi a li ye",
+            "GBF",
+            "Joel Ceide, Tradiktè",
+            "Language Scientific",
+            "Mascon Medical",
+            "Microbial Omics Core (MOC), Broad Institute",
+            "Nadya Lopez Zalba, Tradiktè",
+            "UPS"
           ]
         }
       ]

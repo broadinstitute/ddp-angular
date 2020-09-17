@@ -19,7 +19,7 @@
     "Q&A": "Preguntas y respuestas",
     "WhoWeAre": "Quiénes somos",
     "StayInformed": "Noticias y novedades",
-    "Help": "[ES] Help",
+    "Help": "Ayuda",
     "Dashboard": "Mi panel",
     "Menu": "Menú",
     "Invitation": "Código de invitación",
@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "[ES: We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.]",
+      "Title": "Queremos ayudar a nuestras comunidades a comprender más acerca de los patrones de contagio de COVID-19 en el área de Boston.",
       "Text": "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital y Broad Institute of MIT and Harvard.",
       "Code": "Ingresar mi código de invitación",
-      "NoCode": "[ES: I don't have an invitation code]"
+      "NoCode": "No tengo un código de invitación"
     },
     "AboutSection": {
       "Title": "El estudio",
@@ -95,13 +95,13 @@
         {
           "Question": "¿Me realizarán una prueba de COVID-19 si me incorporo al estudio?",
           "Paragraphs": [
-            "Sí. Si recibió una invitación para incorporarse al estudio y decide inscribirse, le realizarán una prueba para detectar COVID-19. Sin embargo, las vacantes son limitadas y se ocuparán por orden de inscripción. Si se inscribe, [ES: you will receive a home-testing kit containing two tests within approximately one week of joining the study]. El kit de pruebas hogareñas incluye un kit de detección del virus (hisopo nasal) y un kit de detección de anticuerpos (pinchazo en el dedo) con instrucciones para recolectar sus muestras y enviarlas a nuestro laboratorio para que las analicen. [ES: The nasal swab detects if you have active COVID-19.] Con el pinchazo en el dedo se puede detectar si tiene anticuerpos de COVID-19 ([ES: meaning that you had the virus in the past]). [ES: If you also agree to join the longitudinal study], le enviaremos kits para que repita estas pruebas todos los meses durante cinco meses más."
+            "Sí. Si recibió una invitación para incorporarse al estudio y decide inscribirse, le realizarán una prueba para detectar COVID-19. Sin embargo, las vacantes son limitadas y se ocuparán por orden de inscripción. Si se inscribe, Usted recibirá un kit de detección conteniendo dos exámenes aproximadamente una semana después de haberse unido al estudio. El kit de pruebas hogareñas incluye un kit de detección del virus (hisopo nasal) y un kit de detección de anticuerpos (pinchazo en el dedo) con instrucciones para recolectar sus muestras y enviarlas a nuestro laboratorio para que las analicen. El hisopado nasal detecta si usted tiene COVID-19 activo. Con el pinchazo en el dedo se puede detectar si tiene anticuerpos de COVID-19 (significa que usted tuvo el virus en el pasado). Si usted también acepta unirse al estudio longitudinal, le enviaremos kits para que repita estas pruebas todos los meses durante cinco meses más."
           ]
         },
         {
-          "Question": "[ES: Will I receive my results?]",
+          "Question": "¿Recibiré mis resultados?",
           "Paragraphs": [
-            "[ES: You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private.]"
+            "Usted recibirá los resultados de la prueba de detección del virus. Usted no recibirá los resultados del examen de detección de anticuerpos. Los resultados ayudarán a la toma de decisiones relacionadas con la salud pública. Cuando los resultados sean reportados, se publicarán como un resumen de datos con información demográfica básica. Su identidad permanecerá confidencial."
           ]
         },
         {
@@ -131,7 +131,7 @@
         {
           "Question": "¿Qué tendré que hacer si me incorporo al estudio?",
           "Paragraphs": [
-            "Los participantes de TestBoston responden una breve encuesta sobre COVID-19 y toman dos muestras fáciles de obtener en su casa. Luego, deben enviarnos los kits en una caja con porte prepagado para que los analicemos. [ES: Participants may also volunteer to repeat this process each month for 5 additional months. The test collections are a nasal swab and a finger prick blood spot.]"
+            "Los participantes de TestBoston responden una breve encuesta sobre COVID-19 y toman dos muestras fáciles de obtener en su casa. Luego, deben enviarnos los kits en una caja con porte prepagado para que los analicemos. Los participantes también pueden ofrecerse voluntariamente para repetir el proceso una vez por mes durante un periodo de 5 meses adicionales. Los exámenes de detección consisten en un hisopado nasal y una punción en el dedo para obtener una muestra de sangre."
           ]
         },
         {
@@ -156,7 +156,7 @@
         {
           "Question": "¿Cuánto durará el estudio?",
           "Paragraphs": [
-            "[ES: The study can last up to 6 months. Participants in the study can decide to stop being in the study at any time.]"
+            "El estudio puede durar hasta 6 meses. Los participantes pueden decidir dejar de formar parte del estudio en cualquier momento."
           ]
         }
       ]
@@ -166,69 +166,71 @@
       "Text": "Somos un equipo de infectólogas e investigadoras que desea tener una noción más clara de cómo COVID-19 afecta a cada persona y a las comunidades para poder atender mejor a todos los pacientes. ",
       "PIs": [
         {
-          "Name": "[ES] Ann E. Woolley, MD, MPH",
-          "Affiliations": "[ES] Associate Physician, Infectious Diseases, Brigham and Women’s Hospital; Instructor of Medicine, Harvard Medical School",
-          "Info": "[ES] Dr. Ann Woolley is the Associate Clinical Director for Solid Organ Transplant Infectious Diseases at Brigham and Women’s Hospital and a Clinical Investigator whose research focuses on expanding treatment and diagnostics."
+          "Name": "Ann E. Woolley, MD, MPH",
+          "Affiliations": "Médica Asociada, Enfermedades Infecciosas, Brigham and Women’s Hospital; Instructora de Medicina, Facultad de Medicina de Harvard",
+          "Info": "Dra. Ann Woolley es la Directora Clínica Asociada de Enfermedades Infecciosas en Trasplantes de Órganos Sólidos en Brigham and Women’s Hospital e Investigadora Clínica enfocada en la expansión de diagnósticos y tratamientos."
         },
         {
-          "Name": "[ES] Lisa A. Cosimi, MD",
-          "Affiliations": "[ES] Associate Physician, Infectious Diseases & Global Health Equity, Brigham and Women’s Hospital; Assistant Professor, Harvard Medical School",
-          "Info": "[ES] Dr. Cosimi is an Associate Physician in the Divisions of Global Health Equity & Infectious Diseases at Brigham & Women’s Hospital, and Assistant Professor of Medicine at Harvard Medical School. Her research focuses on ways to strengthen health systems and the quality of healthcare in resource-limited settings."
+          "Name": "Lisa A. Cosimi, MD",
+          "Affiliations": "Médica Asociada, Enfermedades Infecciosas y Equidad Sanitaria Global, Brigham and Women’s Hospital; Profesora Adjunta, Facultad de Medicina de Harvard",
+          "Info": "Dra. Cosimi es Médica Asociada en las Divisiones de Equidad Sanitaria Global y Enfermedades Infecciosas en Brigham and Women’s Hospital, y Profesora Adjunta en la Facultad de Medicina de Harvard. Su investigación se centra en las maneras de fortalecer los sistemas de salud y la calidad de la atención médica en entornos de recursos limitados."
         },
         {
-          "Name": "[ES] Deborah T. Hung, MD, PhD",
-          "Affiliations": "[ES] Professor, Harvard Medical School; Core faculty member and Co-director, Infectious Disease and Microbiome Program, Broad Institute",
-          "Info": "[ES] Dr. Deborah Hung is a physician scientist at the Broad Institute, Harvard Medical School and Massachusetts General Hospital who studies infectious diseases and is an attending physician in infectious diseases and pulmonary & critical care medicine at Brigham and Women’s Hospital."
+          "Name": "Deborah T. Hung, MD, PhD",
+          "Affiliations": "Profesora de la Facultad de Medicina de Harvard; Miembro principal de la facultad y Codirectora, Programa de Microbioma y Enfermedades Infecciosas, Broad Institute",
+          "Info": "Dra. Deborah Hung es médica científica en Broad Institute, Escuela de Medicina de Harvard y en el Hospital General de Massachusetts, estudia enfermedades infecciosas y es médica interviniente en enfermedades infecciosas, medicina pulmonar y cuidados intensivos en el Brigham and Women’s Hospital."
         }
       ],
       "Others": [
         {
-          "Title": "[ES] Administrative Team, Broad Institute",
+          "Title": "Equipo Administrativo, Broad Institute",
           "Members": [
-            "[ES] Andrea Saltzman, Director, Office of Research Subject Protection",
-            "[ES] Marissa Jenko, MS, Administrative Lead",
-            "[ES] Paul Tyman, Administrative Assistant",
-            "[ES] Sarah Winnicki, Project Manager II",
-            "[ES] Sharon Wong, PhD, Associate Director - Infectious Disease and Microbiome Program"
+            "Andrea Saltzman, Directora, Oficina de Investigación en Protección de Sujetos",
+            "Marissa Jenko, MS, Líder Administrativa",
+            "Paul Tyman, Asistente Administrativo",
+            "Sarah Winnicki, Gerente de Proyecto II",
+            "Sharon Wong, PhD, Director Asociado - Programa de Microbioma y Enfermedades Infecciosas"
           ]
         },
         {
-          "Title": "[ES] Engineering Team, Broad Institute",
+          "Title": "Equipo de Ingeniería, Broad Institute",
           "Members": [
-            "[ES] Andrew Zimmer, Director, Data Donation Platform",
-            "[ES] Anna Hupalowska, Illustration & Data Visualization Designer",
-            "[ES] Erin Gwozdz, UX/UI Designer",
-            "[ES] Jen Lapan, Principal Software Product Manager",
-            "[ES] Kiara Westbrooks, Software Engineer",
-            "[ES] Marco Ocana, Principal Software Engineer",
-            "[ES] Pavel Sidorenko, Software Engineer",
-            "[ES] Pegah Taheri, Software Engineer",
-            "[ES] Sampath Settipalli, Senior Software Engineer",
-            "[ES] Simone Maiwald, Software Engineering Manager",
-            "[ES] Yufeng Wang, Senior Software Engineer"
+            "Andrew Zimmer, Director, Plataforma de Donación de Datos",
+            "Anna Hupalowska, Ilustradora y Diseñadora de Visualización de Datos",
+            "Erin Gwozdz, Diseñador de Experiencia e Interfaz de Usuario",
+            "Jen Lapan, Gerente Principal de de Productos de Software",
+            "Kiara Westbrooks, Ingeniera en Software",
+            "Marco Ocana, Ingeniero Principal en Software",
+            "Pavel Sidorenko, Ingeniero en Software",
+            "Pegah Taheri, Ingeniera en Software",
+            "Sampath Settipalli, Ingeniero Superior en Software",
+            "Simone Maiwald, Gerente de Ingeniería en Software",
+            "Yufeng Wang, Ingeniero Principal en Software"
           ]
         },
         {
-          "Title": "[ES] Clinical Team, Brigham and Women’s Hospital",
+          "Title": "Equipo Clínico, Brigham and Women’s Hospital",
           "Members": [
-            "[ES] Andy Kim, BS, Research Coordinator",
-            "[ES] Hannah Laibinis, Intern",
-            "[ES] Henry Manigat, Translator",
-            "[ES] Henry Rutherford, BA, Research Coordinator",
-            "[ES] Himaja Nagireddy, HSPH MS Candidate, Intern",
-            "[ES] Sarah Naz-McLean, MSc, Program Manager",
-            "[ES] Tina Wang, Translator",
-            "[ES] Yilu Ma, Translator"
+            "Andy Kim, BS, Coordinador de Investigación",
+            "Hannah Laibinis, Pasante",
+            "Henry Manigat, Traductor",
+            "Henry Rutherford, BA, Coordinador de Investigación",
+            "Himaja Nagireddy, Candidata a HSPH MS, Pasante",
+            "Sarah Naz-McLean, MSc, Directora del Programa",
+            "Tina Wang, Traductora",
+            "Yilu Ma, Traductor"
           ]
         },
         {
-          "Title": "[ES] Additional Partners",
+          "Title": "Socios Adicionales",
           "Members": [
-            "[ES] Microbial Omics Core (MOC), Broad Institute",
-            "[ES] Clinical Research Sequencing Platform (CRSP), Broad Institute",
-            "[ES] Mascon Medical",
-            "[ES] GBF",
-            "[ES] UPS"
+            "Plataforma de Secuenciación de Investigación Clínica (CRSP), Broad Institute",
+            "GBF",
+            "Joel Ceide, Traductora",
+            "Language Scientific",
+            "Mascon Medical",
+            "Microbial Omics Core (MOC), Broad Institute",
+            "UPS"
           ]
         }
       ]
@@ -320,47 +322,47 @@
     "Button": "Siguiente"
   },
   "Help": {
-    "Title": "[ES] Help Center",
+    "Title": "Centro de Ayuda",
     "Collect": {
-      "Title": "[ES] How to collect your samples",
-      "Text": "[ES] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
-      "Link": "[ES] Sample Collection Instructions",
-      "IconAlt": "[ES] PDF file icon",
-      "IframeTitle": "[ES] Nasal swab kit directions",
+      "Title": "Cómo recolectar su muestra",
+      "Text": "Es importante realizar el examen y enviarlo el mismo día, de lunes a jueves. Estos son los días en que Broad procesa las muestras de TestBoston.",
+      "Link": "Instrucciones de Recolección de Muestras",
+      "IconAlt": "Ícono de archivo PDF ",
+      "IframeTitle": "Instrucciones del kit de hisopado nasal",
       "Video": "https://player.vimeo.com/video/440526812"
     },
     "Return": {
-      "Title": "[ES] How to return your samples",
-      "Text": "[ES] Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Title": "Cómo devolver las muestras",
+      "Text": "Sus muestras deben devolverse a través de UPS el mismo día en que usted se realiza el examen. Deje su kit de detección ya sea en una Tienda Oficial de UPS o en un Buzón de Entrega de UPS. Usted puede también solicitar que UPS recoja el paquete por su domicilio si es que usted cuenta con un lugar seguro para dejar su paquete afuera para el conductor de UPS.",
       "Step1": {
-        "Title": "[ES] Step 1:",
+        "Title": "Paso 1:",
         "Text": {
-          "Part1": "[ES] Click",
-          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+          "Part1": "Hacer clic",
+          "Part2": "Escriba su código postal y haga clic en “Ver Todas Las Opciones”."
         },
-        "ImageAlt": "[ES] UPS locations instruction, your location"
+        "ImageAlt": "Instrucciones de ubicación de UPS, su ubicación"
       },
       "Step2": {
-        "Title": "[ES] Step 2:",
-        "Text": "[ES] Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
-        "ImageAlt": "[ES] UPS locations instruction, UPS boxes"
+        "Title": "Paso 2:",
+        "Text": "En Tipo de Ubicación, marque los casilleros de \"Tienda Oficial UPS®\" y \"Buzón de Entrega de UPS\". Luego haga clic en el ícono de búsqueda.",
+        "ImageAlt": "Instrucciones de ubicación de UPS, Cajas de UPS"
       }
     },
     "Pickup": {
-      "Title": "[ES] UPS home pickup",
+      "Title": "UPS recolección a domicilio",
       "Text": {
-        "Part1": "[ES] You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
-        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+        "Part1": "Usted puede ser elegible para la recolección a domicilio de UPS si es que usted cuenta con un lugar seguro para dejar su paquete donde los conductores de UPS puedan acceder a él. Programe la recolección llamando",
+        "Part2": "Si tiene algún inconveniente para devolver su kit a través de UPS, por favor comuníquese con el equipo de investigación"
       }
     },
     "Questions": {
-      "Title": "[ES] Still have questions?",
+      "Title": "¿Aún tiene preguntas?",
       "Text": {
-        "Part1": "[ES] If you have further questions, please reach out to study staff by emailing",
-        "Part2": "or"
+        "Part1": "Si usted tiene preguntas adicionales, comuníquese con el personal del estudio enviando un correo electrónico",
+        "Part2": "o"
       }
     },
-    "ArrowAlt": "[ES] Arrow",
+    "ArrowAlt": "Flecha",
     "SearchAlt": "[ES] Search icon"
   },
   "Toolkit": {
