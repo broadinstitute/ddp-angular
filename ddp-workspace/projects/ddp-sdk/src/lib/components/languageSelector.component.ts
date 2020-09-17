@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { iif, Observable, of, Subscription } from 'rxjs';
-import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
+import { iif, Observable, of, Subscription, zip } from 'rxjs';
+import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
 import { CompositeDisposable } from '../compositeDisposable';
@@ -102,33 +102,36 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     if (this.language.canUseLanguage(lang.languageCode)) {
       this.currentLanguage = lang;
       if (this.language.getCurrentLanguage() !== lang.languageCode) {
-        this.language.changeLanguage(lang.languageCode);
+        const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
+        let sub;
         if (this.session.isAuthenticatedSession()) {
-          this.updateProfileLanguage();
-          const sub = this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid).subscribe(obs => {
-            if (obs) {
-              this.launchPopup();
-            }
-          });
-          this.anchor.addNew(sub);
+          sub = this.launchPopup(zip(this.updateProfileLanguage(), langObs));
+        } else {
+          sub = langObs.subscribe();
         }
+        this.anchor.addNew(sub);
       }
     } else {
       console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
     }
   }
 
-  private launchPopup(): void {
-    this.popup.openModal();
+  private launchPopup(languageChangeCompleteObservable: Observable<any>): Subscription {
+    return languageChangeCompleteObservable // Wait for page translation
+      .pipe(concatMap(() => this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid)))
+      .subscribe(shouldDisp => {
+        if (shouldDisp) { // If we should display the popup
+          this.popup.openModal(); // Display the popup!
+        }
+      });
   }
 
   // Update the language in the profile to the current language
-  private updateProfileLanguage(): void {
+  private updateProfileLanguage(): Observable<any> {
     const profileModifications: UserProfile = new UserProfile();
     profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-    const updateProfileObservable: Observable<any> = this.profileServiceAgent.updateProfile(profileModifications);
-    const sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
-    this.anchor.addNew(sub);
+    return this.profileServiceAgent.updateProfile(profileModifications)
+      .pipe(tap(() => this.language.notifyOfProfileLanguageUpdate()));
   }
 
   // Find the current language and return true if successful or false otherwise

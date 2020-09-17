@@ -175,9 +175,8 @@ import { LanguageSelectorComponent } from './components/languageSelector.compone
 import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
-
-import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {

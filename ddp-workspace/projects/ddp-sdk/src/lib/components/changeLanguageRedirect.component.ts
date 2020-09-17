@@ -40,15 +40,15 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         this.languageService.addLanguages(this.supportedLanguages.map(x => x.languageCode));
 
         // Try to switch to the specified language
-        const langChangePromise: Promise<any> = this.languageService.changeLanguagePromise(this.lang);
-        langChangePromise.catch(reason => {
-          console.error(`Could not change language to ${this.lang}: ${reason}.`);
-        }).then(() => {
+        const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
+        langChangeObservable.subscribe(() => {
           console.log(`Changed language to ${this.languageService.getCurrentLanguage()}`);
-        }).finally(() => {
+        }, (err) => {
+          console.error(`Could not change language to ${this.lang}: ${err}.`);
+        }, () => {
           // Do the redirect
           this.router.navigate([this.dest], {relativeTo: this.route.root});
-          });
+        });
       });
   }
 
