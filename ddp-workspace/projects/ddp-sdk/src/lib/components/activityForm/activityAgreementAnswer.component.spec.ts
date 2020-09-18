@@ -86,7 +86,9 @@ describe('ActivityAgreementAnswer', () => {
         const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
         inputElement.click();
         expect(inputElement.checked).toBe(true);
+        expect(component.block.answer).toBe(true);
         inputElement.click();
         expect(inputElement.checked).toBe(false);
+        expect(component.block.answer).toBe(false);
     });
 });
