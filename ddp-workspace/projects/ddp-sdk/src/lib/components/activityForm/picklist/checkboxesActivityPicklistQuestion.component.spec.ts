@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -91,7 +91,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
         return '/path/';
     });
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,
@@ -103,14 +103,15 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
-                { provide: 'ddp.config', useValue: configServiceSpy }],
+                { provide: 'ddp.config', useValue: configServiceSpy }
+            ],
             declarations: [
                 TestHostComponent,
                 CheckboxesActivityPicklistQuestion,
                 TooltipComponent
             ]
         }).compileComponents();
-    }));
+    });
 
     describe('test as a class', () => {
         beforeEach(() => {
