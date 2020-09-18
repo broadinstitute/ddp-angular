@@ -14,7 +14,7 @@ references:
   study_keys: &study_keys
     "osteo brain brain-v2 angio mbc testboston mpc prion atcp rarex"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp"
+      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
