@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivityServiceAgent, LoggingService, UserActivityServiceAgent } from 'ddp-sdk';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
@@ -18,7 +18,7 @@ import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderServ
         </div>
      </ng-container>`
 })
-export class PrionActivityPageComponent extends ActivityPageComponent  {
+export class PrionActivityPageComponent extends ActivityPageComponent {
 
     constructor(
         private _serviceAgent: ActivityServiceAgent,

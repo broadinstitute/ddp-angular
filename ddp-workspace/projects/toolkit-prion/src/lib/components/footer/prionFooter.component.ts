@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   AnalyticsEventsService,
@@ -36,7 +36,7 @@ import { FooterComponent, ToolkitConfigurationService } from 'toolkit';
     </footer>
   `
 })
-export class PrionFooterComponent extends FooterComponent implements OnInit {
+export class PrionFooterComponent extends FooterComponent {
   constructor(
     private _router: Router,
     private _dialog: MatDialog,

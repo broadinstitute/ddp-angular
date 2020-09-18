@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
-import { ConsentStatuses } from '../../../models/cookies';
+import { ConsentStatuses } from '../../../models/cookies/consentStatuses';
 
 @Component({
   selector: 'toolkit-cookies-preferences-modal',

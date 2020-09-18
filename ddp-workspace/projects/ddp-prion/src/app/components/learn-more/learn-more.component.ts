@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-learn-more',
@@ -33,11 +32,8 @@ import { ToolkitConfigurationService } from 'toolkit';
     </div>
     `
 })
-export class LearnMoreComponent implements OnInit {
+export class LearnMoreComponent {
 
-    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor() { }
 
-    public ngOnInit(): void {
-
-    }
 }

@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NGXTranslateService } from 'ddp-sdk';
 import { RedirectToLoginLandingComponent } from 'toolkit';
 
@@ -19,7 +19,7 @@ import { RedirectToLoginLandingComponent } from 'toolkit';
   `
 })
 
-export class PrionRedirectToLoginLandingComponent extends RedirectToLoginLandingComponent implements OnInit {
+export class PrionRedirectToLoginLandingComponent extends RedirectToLoginLandingComponent {
   public errorText: string;
 
   constructor(

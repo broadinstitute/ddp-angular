@@ -3,7 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 import { SessionMementoService, LoggingService  } from 'ddp-sdk';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
 import { AnalyticsManagementService  } from './analyticsManagement.service';
-import { ConsentStatuses, CookiesConsentStatuses, CookiesPreferences, CookiesTypes } from '../models/cookies';
+import { CookiesTypes } from '../models/cookies/cookiesType';
+import { ConsentStatuses } from '../models/cookies/consentStatuses';
+import { CookiesPreferences } from '../models/cookies/cookiesPreferences';
+import { CookiesConsentStatuses } from '../models/cookies/cookiesConsentStatuses';
 
 @Injectable()
 export class CookiesManagementService {

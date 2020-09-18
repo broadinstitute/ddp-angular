@@ -15,7 +15,6 @@ import { CookiesConsentGuard } from 'toolkit';
 import {
   PrionDashboardComponent,
   PrionActivityPageComponent,
-  PrionActivityComponent,
   PrionWorkflowStartActivityComponent,
   PrionErrorComponent,
   PrionSessionExpiredComponent,
@@ -94,7 +93,7 @@ const routes: Routes = [
   },
   {
     path: 'activity/:id',
-    component: PrionActivityComponent,
+    component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
       CookiesConsentGuard,

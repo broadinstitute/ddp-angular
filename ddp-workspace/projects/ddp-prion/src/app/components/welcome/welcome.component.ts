@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AnalyticsEventActions,
-  AnalyticsEventCategories,
   AnalyticsEventsService,
   Auth0AdapterService,
   BrowserContentService,
@@ -152,6 +151,6 @@ export class WelcomeComponent implements OnInit {
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
+        this.analytics.emitCustomEvent('clickedJoinUs', AnalyticsEventActions.FromMainPage);
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DashboardColumns } from 'ddp-sdk';
-import { Cookies } from '../models/cookies';
+import { Cookies } from '../models/cookies/cookies';
 
 @Injectable()
 export class ToolkitConfigurationService {

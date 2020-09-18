@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { TranslateService } from '@ngx-translate/core';
@@ -127,7 +127,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
         </article>
       </div>`
 })
-export class PrionDashboardComponent extends DashboardComponent implements OnInit, OnDestroy {
+export class PrionDashboardComponent extends DashboardComponent {
   public dataSource = STATIC_ACTIVITIES;
   public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
 
@@ -137,14 +137,6 @@ export class PrionDashboardComponent extends DashboardComponent implements OnIni
         @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
         super(_router, _announcements, _toolkitConfiguration);
-  }
-
-  public ngOnInit(): void {
-    super.ngOnInit();
-  }
-
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
   }
 
   public navigateToUrl(url: string): void {

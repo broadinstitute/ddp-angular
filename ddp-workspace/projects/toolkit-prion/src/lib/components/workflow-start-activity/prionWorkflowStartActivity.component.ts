@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
 import {
   ConfigurationService,
@@ -25,7 +25,7 @@ import { ToolkitConfigurationService, WorkflowBuilderService, WorkflowStartActiv
         </div>
 </ng-container>`
 })
-export class PrionWorkflowStartActivityComponent extends WorkflowStartActivityComponent implements OnInit, OnDestroy {
+export class PrionWorkflowStartActivityComponent extends WorkflowStartActivityComponent {
 
   constructor(
     private _workflowBuilder: WorkflowBuilderService,

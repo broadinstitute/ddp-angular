@@ -3,7 +3,6 @@
  */
 
 export * from './lib/toolkit.module';
-export * from './lib/components/activity/prionActivity.component';
 export * from './lib/components/activity-page/prionActivityPage.component';
 export * from './lib/components/app/prionApp.component';
 export * from './lib/components/common-landing/prionCommonLanding.component';

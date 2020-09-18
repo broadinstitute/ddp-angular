@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -66,7 +66,7 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
     </header>
   `
 })
-export class PrionHeaderComponent extends HeaderComponent implements OnInit {
+export class PrionHeaderComponent extends HeaderComponent {
   @Input() showButtons = false;
   public isScrolled = false;
   public unsupportedBrowser: boolean;

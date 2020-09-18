@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PasswordComponent } from 'toolkit';
 import { FormBuilder } from '@angular/forms';
 import { IrbPasswordService } from 'ddp-sdk';
@@ -30,7 +30,7 @@ import { Router } from '@angular/router';
   </div>
   `
 })
-export class PrionPasswordComponent extends PasswordComponent implements OnInit {
+export class PrionPasswordComponent extends PasswordComponent {
 
   constructor(
     private _formBuilder: FormBuilder,

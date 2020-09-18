@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CookiesManagementService } from '../../../services/cookiesManagement.service';
-import { ConsentStatuses } from '../../../models/cookies';
+import { ConsentStatuses } from '../../../models/cookies/consentStatuses';
 
 @Component({
   selector: 'toolkit-cookies-banner',

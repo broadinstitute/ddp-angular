@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService } from 'toolkit';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-privacy-policy-full',
@@ -17,10 +16,6 @@ import { ToolkitConfigurationService } from 'toolkit';
     </div>
   `
 })
-export class PrivacyPolicyFullComponent implements OnInit {
-  constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
-
-  public ngOnInit(): void {
-
-  }
+export class PrivacyPolicyFullComponent {
+  constructor() { }
 }

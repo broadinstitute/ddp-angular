@@ -37,7 +37,7 @@ export class RedirectJoinComponent implements OnInit {
     }
   }
   private doAnalytics(): void {
-    this.analytics.emitCustomEvent('clickedCountMeIn', 'fromMainPage');
+    this.analytics.emitCustomEvent('clickedJoinUs', 'fromMainPage');
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginLandingComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import {
@@ -15,7 +15,7 @@ import {
       <prion-common-landing></prion-common-landing>
   `
 })
-export class PrionLoginLandingComponent extends LoginLandingComponent implements OnInit, OnDestroy {
+export class PrionLoginLandingComponent extends LoginLandingComponent {
   constructor(
     private _router: Router,
     private _auth0: Auth0AdapterService,
