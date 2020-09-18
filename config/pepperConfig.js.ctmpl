@@ -184,4 +184,12 @@ var DDP_ENV = {
         DDP_ENV['auth0Audience'] = "prion-dev.auth0.com"
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
     {{end}}
+ {{end}}
+ {{if eq $study_guid "rarex"}}
+     {{if eq $environment "dev"}}
+         DDP_ENV['auth0ClientId'] = "gE6vFadpN49ajn76zdSW5FiCqz4aUdlJ";
+         DDP_ENV['auth0Domain'] = "rarex-dev.us.auth0.com";
+         DDP_ENV['auth0Audience'] = "rarex-dev.us.auth0.com";
+         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+     {{end}}
 {{end}}
