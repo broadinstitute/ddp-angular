@@ -1,0 +1,10 @@
+{
+  "components": {
+    "header": {
+      "title": "RARE-X"
+    }
+  },
+  "pages": {
+    "welcome": "Welcome Page"
+  }
+}

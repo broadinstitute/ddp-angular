@@ -1,0 +1,17 @@
+@import '../app-theme.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100vh;
+  overflow-y: auto;
+}

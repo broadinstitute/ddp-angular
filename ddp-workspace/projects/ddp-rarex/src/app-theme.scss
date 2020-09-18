@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+@import './styles/variables';
+
+@include mat-core();
+
+$mat-primary: (
+  50: #ffffff,
+  100: $color-secondary-teal,
+  200: #ffffff,
+  250: #ffffff,
+  300: $color-secondary-blue,
+  350: #ffffff,
+  400: #ffffff,
+  450: #ffffff,
+  500: $color-primary,
+  550: #ffffff,
+  600: #ffffff,
+  650: #ffffff,
+  700: $color-tertiary-red,
+  750: #ffffff,
+  800: #ffffff,
+  850: #ffffff,
+  900: $color-tertiary-orange,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    250: #000000,
+    300: #000000,
+    350: #000000,
+    400: #000000,
+    450: #000000,
+    500: #000000,
+    550: #000000,
+    600: #000000,
+    650: #000000,
+    700: #000000,
+    750: #000000,
+    800: #000000,
+    850: #000000,
+    900: #000000
+  )
+);
+
+$app-theme: mat-palette($mat-primary);
