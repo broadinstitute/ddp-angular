@@ -209,7 +209,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
         console.log(`Successfully initialized '${locale}' language as default.`);
-      }, err => {
+      }, () => {
         console.error(`Problem with '${locale}' language initialization.`);
       }, () => {
         resolve(null);

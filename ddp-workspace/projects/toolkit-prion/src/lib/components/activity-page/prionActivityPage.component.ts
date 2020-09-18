@@ -1,7 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { ActivityServiceAgent, LoggingService, UserActivityServiceAgent } from 'ddp-sdk';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
+import { Component } from '@angular/core';
+import { ActivityPageComponent } from 'toolkit';
 
 @Component({
     selector: 'prion-activity-page',
@@ -19,17 +17,5 @@ import { ActivityPageComponent, ToolkitConfigurationService, WorkflowBuilderServ
      </ng-container>`
 })
 export class PrionActivityPageComponent extends ActivityPageComponent {
-
-    constructor(
-        private _serviceAgent: ActivityServiceAgent,
-        private _userActivityServiceAgent: UserActivityServiceAgent,
-        private _router: Router,
-        private _activatedRoute: ActivatedRoute,
-        private _workflowBuilder: WorkflowBuilderService,
-        private _logger: LoggingService,
-        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
-        super(_serviceAgent, _userActivityServiceAgent, _router, _activatedRoute, _workflowBuilder, _logger, _toolkitConfiguration);
-    }
-
 
 }
