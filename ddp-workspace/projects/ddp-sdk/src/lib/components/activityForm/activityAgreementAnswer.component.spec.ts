@@ -85,10 +85,10 @@ describe('ActivityAgreementAnswer', () => {
         const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
         const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
         inputElement.click();
-        fixture.detectChanges();
         expect(inputElement.checked).toBe(true);
+        expect(component.block.answer).toBe(true);
         inputElement.click();
-        fixture.detectChanges();
         expect(inputElement.checked).toBe(false);
+        expect(component.block.answer).toBe(false);
     });
 });
