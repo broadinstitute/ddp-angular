@@ -17,8 +17,8 @@
     },
     "Header": {
         "Logo": {
-            "Title": "Brain Cancer<br>Project",
-            "Alt": "Brain Cancer Project logo"
+            "Title": "Brain Tumor<br>Project",
+            "Alt": "Brain Tumor Project logo"
         }
     },
     "Footer": {
@@ -28,7 +28,7 @@
         "Twitter": "Twitter",
         "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States",
         "Text": {
-            "Part1": "The Brain Cancer Project is part of",
+            "Part1": "The Brain Tumor Project is part of",
             "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
         }
     },
@@ -55,7 +55,7 @@
         },
         "About": {
             "Title": "What’s this project about?",
-            "Text1": "The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
+            "Text1": "The Brain Tumor Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
             "Text2": "Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
             "Text3": {
                 "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
@@ -148,7 +148,7 @@
                     }
                 ]
             ],
-            "Text": "For more information on how to become a partner for the Brain Cancer Project, contact the team at"
+            "Text": "For more information on how to become a partner for the Brain Tumor Project, contact the team at"
         },
         "StayInformed": {
             "Title": "Stay informed",
@@ -166,7 +166,7 @@
     "FaqPage": {
         "Title": "Frequently Asked Questions",
         "Intro": {
-            "Text1": "The Brain Cancer Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+            "Text1": "The Brain Tumor Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
             "Text2": {
                 "Part1": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
                 "Part2": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
@@ -218,7 +218,7 @@
                     {
                         "Question": "After I provide my information, will I be asked to share a small portion of my tumor tissue and medical records?",
                         "Paragraphs": [
-                            "We will be asking for informed consent from all patients with brain cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Cancer Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
+                            "We will be asking for informed consent from all patients with brain cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Tumor Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
                         ]
                     },
                     {
@@ -253,7 +253,7 @@
                     {
                         "Question": "If I'm part of another study, can you use that genomic data instead of me submitting my samples for analysis?",
                         "Paragraphs": [
-                            "No. In order for you to contribute genomic data to the Brain Cancer Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
+                            "No. In order for you to contribute genomic data to the Brain Tumor Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
                         ]
                     },
                     {
@@ -298,13 +298,13 @@
                 "Title": "I am a member of the community who would like to get involved",
                 "Items": [
                     {
-                        "Question": "How can I spread the word about the Brain Cancer Project?",
+                        "Question": "How can I spread the word about the Brain Tumor Project?",
                         "Paragraphs": [
                             "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@braincancerproject.org\">info@braincancerproject.org</a> or call us at <a class=\"Link\" href=\"tel:651-229-3480\">651-229-3480</a>."
                         ]
                     },
                     {
-                        "Question": "How can I receive updates on the Brain Cancer Project?",
+                        "Question": "How can I receive updates on the Brain Tumor Project?",
                         "Paragraphs": [
                             "If you would like updates on the project, please <a class=\"Link\" href=\"/join-list\">sign up for our mailing list</a>."
                         ]
@@ -316,7 +316,7 @@
             "Title": "Do you have other questions?",
             "Text1": {
                 "Part1": "You can access a 1 page printable information sheet about the project linked here:",
-                "Part2": "The Brain Cancer Project"
+                "Part2": "The Brain Tumor Project"
             },
             "Text2": {
                 "Part1": "If you have any other questions, please email us at",
@@ -351,7 +351,7 @@
         },
         "DataRelease": {
             "Title": "What does a data release look like?",
-            "Text": "Below are links out to datasets from other Count Me In projects. This is what we’re working towards for the Brain Cancer Project. If you have questions about our data release process, please email us at",
+            "Text": "Below are links out to datasets from other Count Me In projects. This is what we’re working towards for the Brain Tumor Project. If you have questions about our data release process, please email us at",
             "Diagrams": [
                 {
                     "Alt": "The Metastatic Breast Cancer Project data release diagram",
@@ -376,17 +376,17 @@
             "Title": "About Us",
             "HeroImgAlt": "Broad hero",
             "Text": {
-                "Main": "The <span class=\"regular\">Brain Cancer Project</span> is part of <span class=\"regular italic\">Count Me In</span>, a nonprofit organization that <span class=\"regular\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
+                "Main": "The <span class=\"regular\">Brain Tumor Project</span> is part of <span class=\"regular italic\">Count Me In</span>, a nonprofit organization that <span class=\"regular\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
                 "Link": "Visit <span class=\"italic\">Count Me In</span> website"
             }
         },
         "CMI": {
             "Paragraph1": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization.",
-            "Paragraph2": "The Brain Cancer Project has been designed and implemented collaboratively with brain cancer patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+            "Paragraph2": "The Brain Tumor Project has been designed and implemented collaboratively with brain cancer patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
         "PAC": {
             "Title": "Project Advisory Council",
-            "Text": "The Brain Cancer Project Advisory Council (PAC) is made up of <span class=\"medium\">patients, advocates, caregivers,</span> and <span class=\"medium\">loved ones</span> who have been impacted by brain cancer. The PAC meets regularly with the project operations team via video calls to <span class=\"medium\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
+            "Text": "The Brain Tumor Project Advisory Council (PAC) is made up of <span class=\"medium\">patients, advocates, caregivers,</span> and <span class=\"medium\">loved ones</span> who have been impacted by brain cancer. The PAC meets regularly with the project operations team via video calls to <span class=\"medium\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
             "Members": [
                 {
                     "Name": "Charlie Blotner",
@@ -677,7 +677,7 @@
         },
         "Dashboard": {
             "Title": "My Dashboard",
-            "Text": "The dashboard below describes each Brain Cancer Project form and its status."
+            "Text": "The dashboard below describes each Brain Tumor Project form and its status."
         },
         "DatePicker": {
             "Day": "Choose day...",
@@ -705,7 +705,7 @@
             "SingularForm": "character remaining"
         },
         "Title": {
-            "Default": "Brain Cancer Project",
+            "Default": "Brain Tumor Project",
             "Alert": "Your session will time-out soon"
         },
         "EmailEntry": {
