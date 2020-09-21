@@ -7,7 +7,7 @@ import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAg
 import { ActivityAgreementAnswer } from './activityAgreementAnswer.component';
 import { FormsModule } from '@angular/forms';
 
-describe('ActivityAgreementAnswer', () => {
+fdescribe('ActivityAgreementAnswer', () => {
     const questionBlock = {
         answer: null,
         isRequired: false,
@@ -87,6 +87,13 @@ describe('ActivityAgreementAnswer', () => {
         inputElement.click();
         expect(inputElement.checked).toBe(true);
         expect(component.block.answer).toBe(true);
+    });
+
+    it('should change answer by click', () => {
+        component.block.answer = true;
+        fixture.detectChanges();
+        const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
+        const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
         inputElement.click();
         expect(inputElement.checked).toBe(false);
         expect(component.block.answer).toBe(false);
