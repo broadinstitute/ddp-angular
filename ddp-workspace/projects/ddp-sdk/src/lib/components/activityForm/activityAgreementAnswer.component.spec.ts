@@ -80,22 +80,16 @@ describe('ActivityAgreementAnswer', () => {
     });
 
     it('should change answer by click', () => {
-        component.block.answer = false;
+        component.block = {
+            answer: false,
+            isRequired: false,
+            question: 'I am agree!'
+        } as ActivityAgreementQuestionBlock;
         fixture.detectChanges();
         const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
         const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
         inputElement.click();
         expect(inputElement.checked).toBe(true);
         expect(component.block.answer).toBe(true);
-    });
-
-    it('should change answer by click', () => {
-        component.block.answer = true;
-        fixture.detectChanges();
-        const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
-        const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
-        inputElement.click();
-        expect(inputElement.checked).toBe(false);
-        expect(component.block.answer).toBe(false);
     });
 });
