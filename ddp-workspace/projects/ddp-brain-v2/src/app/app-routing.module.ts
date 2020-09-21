@@ -156,6 +156,11 @@ const routes: Routes = [
     }
   },
   {
+    path: AppRoutes.MailingList,
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
+  },
+  {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
