@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -66,7 +66,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
         return '/path/';
     });
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,
@@ -86,7 +86,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 TooltipComponent
             ]
         }).compileComponents();
-    }));
+    });
 
     describe('test as a class', () => {
         beforeEach(() => {
