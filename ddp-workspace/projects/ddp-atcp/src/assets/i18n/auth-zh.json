@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "电子邮件已发送到那里，并附有指导信息以激活您的帐户。",
+    "checkEmail": "您几乎完成了！ 请查看您的邮箱： ",
+    "stillWaiting": "还在等您的电子邮件？",
+    "title": "帐号激活"
+  },
+  "common": {
+    "alreadyRegistered": "已经注册？ 在这里登录",
+    "confirmNewPassword": {
+      "label": "确认新密码"
+    },
+    "email": {
+      "whoseEmail": "我应该输入哪些电子邮箱？",
+      "whoseEmailTooltip": "如果您是A-T的孩子（们）的父母/法定监护人，请使用您自己的电子邮箱地址。  我们将使用此地址与您在全球A-T成员数据平台中注册的任何人对应。"
+    },
+    "forgotPassword": "忘记密码了吗？",
+    "joinUs": "加入我们",
+    "or": "或",
+    "password": {
+      "label": "密码"
+    },
+    "reenter": {
+      "label": "重新输入密码"
+    },
+    "resendInstructions": "重新发送确认说明",
+    "resetPassword": {
+      "label": "新密码"
+    },
+    "signin": "签到",
+    "signinWithGoogle": "用Google登录"
+  },
+  "forgotPassword": {
+    "enterEmail": "请输入您的电子邮箱地址，我们将向您发送密码重置说明。",
+    "submit": "发给我密码重置说明。",
+    "title": "忘记密码了吗？"
+  },
+  "header": {
+    "aboutThisInitiative": "关于这个计划",
+    "aboutUs": "关于我们",
+    "joinUs": "加入我们",
+    "language": "语言",
+    "learnMore": "了解更多",
+    "signIn": "签到"
+  },
+  "login": {
+    "title": "您可以使用您的电子邮箱地址或您的Google帐户登录全球A-T成员数据平台。",
+    "useEmail": "使用您的电子邮箱地址"
+  },
+  "modal": {
+    "SuccessChangedPassword": "您的密码已成功更改。",
+    "YouWillGetInstructions": "您将在几分钟内收到一封电子邮件，说明如何重新设置您的密码。"
+  },
+  "resendInstructions": {
+    "subTitle": "如果您没有收到确认说明，您可以输入电子邮箱地址以产生另一个确认电子邮件。",
+    "submit": "重新发送确认说明",
+    "title": "重新发送确认说明"
+  },
+  "resetPassword": {
+    "submit": "更改我的密码",
+    "title": "更改您的密码"
+  },
+  "signUp": {
+    "createAccountBtn": "创建一个帐户",
+    "createAccountWithGoogleBtn": "使用您的Google帐户",
+    "emailLabel": "电子邮箱地址：",
+    "googleEmail": "Google电子邮箱地址",
+    "passwordHint": "（最少8个字符）",
+    "subTitle": "您可以使用您的电子邮箱地址登录平台，方法是创建密码或使用您的Google帐户。 我们将使用此电子邮箱地址与您就全球A-T成员数据平台进行沟通。",
+    "subtitleWithEmail": "使用您的电子邮箱地址",
+    "title": "使用您的电子邮箱地址",
+    "useGoogle": "使用您的Google帐户"
+  },
+  "title": "全球A-T成员数据平台|激活帐户通知"
+}

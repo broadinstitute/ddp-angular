@@ -35,7 +35,8 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
                       <span translate>Toolkit.ErrorPage.DefaultText.TextPt1</span>
                       <a [href]="emailHref" class="Link">{{ email }}</a>
                       <span translate>Toolkit.ErrorPage.DefaultText.TextPt2</span>
-                      <a [href]="phoneHref" class="Link">{{ phone }}</a>.
+                      <a [href]="phoneHref" class="Link" *ngIf="phone">{{ phone }}</a>
+                      <span *ngIf="phone">.</span>
                     </ng-container>
                   </div>
                 </section>

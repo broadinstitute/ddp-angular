@@ -61,6 +61,7 @@ tkCfg.bloodConsentUrl = 'blood-consent';
 tkCfg.bloodReleaseUrl = 'blood-release-survey';
 tkCfg.followupUrl = 'followup';
 tkCfg.internationalPatientsUrl = 'international-patients';
+tkCfg.mailingListDialogUrl = 'MailingList';
 tkCfg.phone = '617-800-1622';
 tkCfg.infoEmail = 'info@mbcproject.org';
 tkCfg.dataEmail = 'data@mbcproject.org';

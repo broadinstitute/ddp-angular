@@ -27,6 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LearnMoreSectionComponent } from './components/learn-more-section/learn-more-section.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -56,6 +58,7 @@ toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
+toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braincancerproject.org';
 toolkitConfig.dataEmail = 'data@braincancerproject.org';
@@ -104,7 +107,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     FooterComponent,
     FaqComponent,
     DataComponent,
-    ModalImageComponent
+    AboutUsComponent,
+    ModalImageComponent,
+    LearnMoreSectionComponent
   ],
   imports: [
     BrowserModule,

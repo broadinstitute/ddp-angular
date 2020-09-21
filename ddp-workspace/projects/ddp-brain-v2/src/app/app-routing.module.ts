@@ -30,6 +30,7 @@ import { ActivityGuids } from './aсtivity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -150,6 +151,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.AboutUs,
+    component: AboutUsComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.JoinList,
     component: WelcomeComponent,
     canActivate: [
@@ -199,6 +207,11 @@ const routes: Routes = [
     canActivate: [
       IrbGuard
     ]
+  },
+  {
+    path: AppRoutes.MailingList,
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: '',

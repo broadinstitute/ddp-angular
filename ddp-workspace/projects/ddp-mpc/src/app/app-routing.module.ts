@@ -175,6 +175,11 @@ const routes: Routes = [
     component: PasswordComponent
   },
   {
+    path: 'MailingList',
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
+  },
+  {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',

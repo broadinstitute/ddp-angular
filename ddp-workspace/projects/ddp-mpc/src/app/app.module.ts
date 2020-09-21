@@ -51,6 +51,7 @@ toolkitConfig.activityUrl = 'activity';
 toolkitConfig.errorUrl = 'error';
 toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.internationalPatientsUrl = 'international-patients';
+toolkitConfig.mailingListDialogUrl = 'MailingList';
 toolkitConfig.phone = '651-293-5029';
 toolkitConfig.infoEmail = 'info@mpcproject.org';
 toolkitConfig.dataEmail = 'data@mpcproject.org'

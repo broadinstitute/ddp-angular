@@ -177,6 +177,7 @@ import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAg
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
+
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
   return {
@@ -391,7 +392,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
-
     InstitutionComponent,
     InstitutionsFormComponent,
 
@@ -419,7 +419,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
   ],
   entryComponents: [
     UserPreferencesComponent,
