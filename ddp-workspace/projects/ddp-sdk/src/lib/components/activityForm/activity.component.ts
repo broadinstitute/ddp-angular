@@ -135,7 +135,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
                                 <div *ngIf="!isStepped || isLastStep">
-                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
+                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="flush()"
@@ -143,21 +143,21 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                             [innerHTML]="(isPageBusy | async)
                                                                 ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                                     </button>
-                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary"
+                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary" id="closeButton"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="close()"
                                             [innerHTML]="'SDK.CloseButton' | translate">
                                     </button>
                                 </div>
                                 <div *ngIf="isLoaded && isStepped" class="ConsentButtons">
-                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary"
+                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary" id="prevButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled ButtonFilled--neutral"
                                             (click)="decrementStep()"
                                             [innerHTML]="'SDK.PreviousButton' | translate">
                                     </button>
                                     <div class="NextButton">
-                                        <button *ngIf="!isLastStep" mat-raised-button color="primary"
+                                        <button *ngIf="!isLastStep" mat-raised-button color="primary" id="nextButton"
                                                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                                 class="margin-5 ButtonFilled"
                                                 (click)="incrementStep()"
@@ -306,10 +306,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    public incrementStep(): void {
+    public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            this.scrollToTop();
+            if (scroll) {
+              this.scrollToTop();
+            }
             // enable any validation errors to be visible
             this.validationRequested = true;
             this.sendSectionAnalytics();
@@ -322,13 +324,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    public decrementStep(): void {
+    public decrementStep(scroll: boolean = true): void {
         const previousIndex = this.previousAvailableSectionIndex();
         if (previousIndex !== -1) {
             // if we move forwards or backwards, let's reset our validation display
             this.resetValidationState();
             this.currentSectionIndex = previousIndex;
+          if (scroll) {
             this.scrollToTop();
+          }
         }
     }
 
