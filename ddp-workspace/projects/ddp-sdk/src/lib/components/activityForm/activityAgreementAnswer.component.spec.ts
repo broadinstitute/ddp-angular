@@ -7,7 +7,7 @@ import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAg
 import { ActivityAgreementAnswer } from './activityAgreementAnswer.component';
 import { FormsModule } from '@angular/forms';
 
-fdescribe('ActivityAgreementAnswer', () => {
+describe('ActivityAgreementAnswer', () => {
     const questionBlock = {
         answer: null,
         isRequired: false,
