@@ -37,6 +37,7 @@ import { PrionFooterComponent } from './components/footer/prionFooter.component'
 import { PrionHeaderComponent } from './components/header/prionHeader.component';
 import { PrionActivityPageComponent } from './components/activity-page/prionActivityPage.component';
 import { PrionWorkflowStartActivityComponent } from './components/workflow-start-activity/prionWorkflowStartActivity.component';
+import { PrionActivityComponent } from './components/activity/prionActivity.component';
 import { PrionDashboardComponent } from './components/dashboard/prionDashboard.component';
 import { PrionErrorComponent } from './components/error/prionError.component';
 import { PrionPasswordComponent } from './components/password/prionPassword.component';
@@ -75,6 +76,7 @@ import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-aut
     MatProgressBar
   ],
   declarations: [
+    PrionActivityComponent,
     PrionActivityPageComponent,
     PrionAppComponent,
     PrionCommonLandingComponent,
@@ -92,6 +94,7 @@ import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-aut
   exports: [
     ActivityLinkComponent,
     LoginLandingComponent,
+    PrionActivityComponent,
     PrionActivityPageComponent,
     PrionAppComponent,
     PrionDashboardComponent,
