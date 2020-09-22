@@ -17,7 +17,11 @@ import {
   PasswordRedesignedComponent,
   StayInformedRedesignedComponent,
   ErrorRedesignedComponent,
-  HeaderActionGuard
+  HeaderActionGuard,
+  RedirectToLoginLandingRedesignedComponent,
+  AgeUpThankYou,
+  VerifyAgeUpPageComponent,
+  AcceptAgeUpPageComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -37,7 +41,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.AboutYou
     }
   },
   {
@@ -48,7 +52,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Consent
     }
   },
   {
@@ -59,7 +63,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Release
     }
   },
   {
@@ -162,6 +166,47 @@ const routes: Routes = [
     data: {
       openJoinDialog: true
     }
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.ThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      verify: true
+    }
+  },
+  {
+    path: AppRoutes.ProxyThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      collect: true
+    }
+  },
+  {
+    path: AppRoutes.Verify,
+    component: VerifyAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Accept,
+    component: AcceptAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
   },
   {
     path: AppRoutes.MailingList,

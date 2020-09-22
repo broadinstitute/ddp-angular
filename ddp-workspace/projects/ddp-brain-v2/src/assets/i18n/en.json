@@ -617,6 +617,16 @@
                 "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
                 "TextPt2": "or call us at"
             }
+        },
+        "AgeUpThankYou": {
+            "Title": "Thank you!",
+            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "or",
+                "Button": "Go to Dashboard"
+            },
+            "ImageAlt": "Email sent"
         }
     },
     "SDK": {

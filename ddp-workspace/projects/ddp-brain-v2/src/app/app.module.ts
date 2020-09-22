@@ -47,9 +47,9 @@ declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.aboutYouGuid = '';
-toolkitConfig.consentGuid = '';
-toolkitConfig.releaseGuid = '';
+toolkitConfig.aboutYouGuid = ActivityGuids.AboutYou;
+toolkitConfig.consentGuid = ActivityGuids.Consent;
+toolkitConfig.releaseGuid = ActivityGuids.Release;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.aboutYouUrl = AppRoutes.AboutYou;
 toolkitConfig.consentUrl = AppRoutes.Consent;

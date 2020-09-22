@@ -19,5 +19,9 @@ export const AppRoutes = {
     MoreDetails: 'more-details',
     StayInformed: 'stay-informed',
     JoinList: 'join-list',
+    ThankYou: 'thank-you',
+    ProxyThankYou: 'proxy-thank-you',
+    Verify: 'verify',
+    Accept: 'accept',
     MailingList: 'MailingList'
 };
