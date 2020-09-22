@@ -23,5 +23,5 @@ export const AppRoutes = {
     ProxyThankYou: 'proxy-thank-you',
     Verify: 'verify',
     Accept: 'accept',
-    MailingList: 'MailingList'
+    MailingList: 'updates'
 };

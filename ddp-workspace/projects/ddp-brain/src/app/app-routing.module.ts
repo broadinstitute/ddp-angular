@@ -160,7 +160,7 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
-        path: 'MailingList',
+        path: 'updates',
         component: WelcomeComponent,
         canActivate: [IrbGuard]
     },
