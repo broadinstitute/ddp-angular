@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'welcome',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  constructor() { }
+  constructor(private headerConfig: HeaderConfigurationService) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    this.headerConfig.setupDefaultHeader();
+  }
 }
