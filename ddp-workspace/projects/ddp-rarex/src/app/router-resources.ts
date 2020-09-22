@@ -1,4 +1,5 @@
 export enum RoutePaths {
   Welcome = '',
-  Password = 'password'
+  Password = 'password',
+  ShareMyData = 'share-my-data'
 }

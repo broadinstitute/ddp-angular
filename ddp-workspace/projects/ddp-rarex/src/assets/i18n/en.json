@@ -2,6 +2,17 @@
   "pages": {
     "welcome": "Welcome Page"
   },
+  "WorkflowProgress": {
+    "AboutYou": "About You",
+    "LegacySurvey": "Legacy Survey",
+    "Consent": "Consent Form",
+    "Assent": "Assent Form",
+    "MedicalRelease": "Medical Release",
+    "DemographicsSurvey": "Demographics Survey",
+    "MedicalBackgroundSurvey": "Medical Background Survey",
+    "NeurodevelopmentSurvey": "Neurodevelopment Survey",
+    "QualityOfLifeSurvey": "Quality of Life Survey"
+  },
   "Toolkit": {
     "Password": {
       "Title": "Please enter the password",
@@ -13,10 +24,21 @@
   },
   "Common": {
     "Buttons": {
+      "ShareMyData": "I want to share my data",
       "Submit": {
         "Title": "Submit",
         "AriaLabel": "Submit button"
       }
     }
+  },
+  "SDK": {
+    "SignInOut": {
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
+    },
+    "SubmitButton": "Submit",
+    "NextButton": "Next",
+    "PreviousButton": "Back",
+    "SavingButton": "Saving"
   }
 }

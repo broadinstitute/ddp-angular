@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
+import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -81,7 +82,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WelcomeComponent,
     AppComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    WorkflowProgressComponent
   ],
   providers: [
     {

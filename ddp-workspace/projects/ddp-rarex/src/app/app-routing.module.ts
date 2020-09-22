@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IrbGuard } from 'ddp-sdk';
+import { BrowserGuard, IrbGuard } from 'ddp-sdk';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RoutePaths } from './router-resources';
-import { PasswordRedesignedComponent } from 'toolkit';
+import { PasswordRedesignedComponent, WorkflowStartActivityRedesignedComponent } from 'toolkit';
 
 const routes: Routes = [
+    {
+      path: RoutePaths.ShareMyData,
+      component: WorkflowStartActivityRedesignedComponent,
+      canActivate: [
+        IrbGuard,
+        BrowserGuard
+      ],
+      data: {
+        activityGuid: 'PREQUAL'
+      }
+    },
     {
       path: RoutePaths.Password,
       component: PasswordRedesignedComponent
