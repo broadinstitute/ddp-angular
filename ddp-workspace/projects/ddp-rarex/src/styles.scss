@@ -4,5 +4,8 @@
 @import './styles/base';
 @import './styles/typography';
 @import './styles/common';
+@import './styles/static-page.scss';
+@import './styles/password.scss';
+@import './styles/buttons.scss';
 
 @include mat-core($app-typography);

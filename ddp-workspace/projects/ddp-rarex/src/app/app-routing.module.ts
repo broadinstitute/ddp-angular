@@ -5,13 +5,18 @@ import { IrbGuard } from 'ddp-sdk';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RoutePaths } from './router-resources';
+import { PasswordRedesignedComponent } from 'toolkit';
 
 const routes: Routes = [
+    {
+      path: RoutePaths.Password,
+      component: PasswordRedesignedComponent
+    },
     {
         path: RoutePaths.Welcome,
         component: WelcomeComponent,
         pathMatch: 'full',
-        // canActivate: [IrbGuard]
+        canActivate: [IrbGuard]
     },
     {
         path: '**',

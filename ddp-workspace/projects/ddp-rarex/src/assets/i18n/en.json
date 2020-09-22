@@ -1,10 +1,22 @@
 {
-  "components": {
-    "header": {
-      "title": "RARE-X"
-    }
-  },
   "pages": {
     "welcome": "Welcome Page"
+  },
+  "Toolkit": {
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password *",
+      "InputPlaceholder": "Password",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "PasswordRequiredError": "Password is required"
+    }
+  },
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit button"
+      }
+    }
   }
 }
