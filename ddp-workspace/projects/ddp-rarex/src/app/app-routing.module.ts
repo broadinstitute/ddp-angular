@@ -6,9 +6,9 @@ import {Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard} from 'ddp
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RoutePaths } from './router-resources';
 import {
-  ActivityPageRedesignedComponent, DashboardRedesignedComponent,
+  ActivityPageRedesignedComponent, ActivityRedesignedComponent, DashboardRedesignedComponent,
   LoginLandingRedesignedComponent,
-  PasswordRedesignedComponent,
+  PasswordRedesignedComponent, RedirectToAuth0LoginRedesignedComponent,
   WorkflowStartActivityRedesignedComponent
 } from 'toolkit';
 
@@ -28,6 +28,11 @@ const routes: Routes = [
       canActivate: [IrbGuard]
     },
     {
+      path: RoutePaths.LoginLandingWithMode,
+      component: RedirectToAuth0LoginRedesignedComponent,
+      canActivate: [IrbGuard]
+    },
+    {
       path: RoutePaths.Consent,
       component: ActivityPageRedesignedComponent,
       canActivate: [
@@ -37,6 +42,30 @@ const routes: Routes = [
       ],
       data: {
         activityGuid: 'CONSENT'
+      }
+    },
+    {
+      path: RoutePaths.ConsentAssent,
+      component: ActivityPageRedesignedComponent,
+      canActivate: [
+        IrbGuard,
+        BrowserGuard,
+        AuthGuard
+      ],
+      data: {
+        activityGuid: 'CONSENT_ASSENT'
+      }
+    },
+    {
+      path: RoutePaths.ParentalConsent,
+      component: ActivityPageRedesignedComponent,
+      canActivate: [
+        IrbGuard,
+        BrowserGuard,
+        AuthGuard
+      ],
+      data: {
+        activityGuid: 'PARENTAL_CONSENT'
       }
     },
     {
@@ -67,6 +96,15 @@ const routes: Routes = [
       path: RoutePaths.Auth,
       component: Auth0CodeCallbackComponent,
       canActivate: [IrbGuard]
+    },
+    {
+      path: RoutePaths.Activity,
+      component: ActivityRedesignedComponent,
+      canActivate: [
+        IrbGuard,
+        BrowserGuard,
+        AuthGuard
+      ]
     },
     {
       path: RoutePaths.ShareMyData,
