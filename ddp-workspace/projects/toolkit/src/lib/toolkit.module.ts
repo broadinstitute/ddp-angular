@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { RouterModule, Router, NavigationEnd, UrlSerializer } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Modules
@@ -13,7 +13,6 @@ import { WorkflowBuilderService } from './services/workflowBuilder.service';
 import { CommunicationService } from './services/communication.service';
 import { ToolkitConfigurationService } from './services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from './services/headerConfiguration.service';
-import { LowerCaseUrlSerializer } from './services/lowerCaseUrlSerializer.service';
 
 // Components
 import { HeaderComponent } from './components/header/header.component';
@@ -126,11 +125,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HeaderActionGuard,
     CookiesConsentGuard,
     CookiesManagementService,
-    AnalyticsManagementService,
-    {
-      provide: UrlSerializer,
-      useClass: LowerCaseUrlSerializer
-    }
+    AnalyticsManagementService
   ],
   declarations: [
     FooterComponent,
