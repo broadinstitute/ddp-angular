@@ -16,3 +16,14 @@
 .ddp-required-question-prompt:after {
     content: ' *';
 }
+
+// buttons layout
+.activity-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0 0 0;
+}
+
+.button_right {
+    margin-left: auto;
+}
