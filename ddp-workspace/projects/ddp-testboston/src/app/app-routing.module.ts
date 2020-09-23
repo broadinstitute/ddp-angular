@@ -207,7 +207,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: AppRoutes.UPS.toUpperCase(),
+    path: AppRoutes.UPS_UPPER,
     redirectTo: AppRoutes.UPS
   },
   {

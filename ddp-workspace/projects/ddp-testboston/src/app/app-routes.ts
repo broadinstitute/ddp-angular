@@ -20,5 +20,6 @@ export const AppRoutes = {
     Address: 'mailing-address',
     PasswordResetDone: 'password-reset-done',
     EnrollSubject: 'enrollment',
-    UPS: 'ups'
+    UPS: 'ups',
+    UPS_UPPER: 'UPS'
 };
