@@ -32,7 +32,6 @@ import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileSe
       <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
                                    checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
                                    buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
-
       </ddp-popup-with-checkbox>
     </div>
   `
