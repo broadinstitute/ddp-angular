@@ -249,7 +249,7 @@ const routes: Routes = [
         data: { openJoinDialog: true }
     },
     {
-        path: 'MailingList',
+        path: 'updates',
         component: WelcomeComponent,
         canActivate: [IrbGuard]
     },

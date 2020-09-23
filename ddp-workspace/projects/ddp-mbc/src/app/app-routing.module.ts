@@ -224,7 +224,7 @@ const routes: Routes = [
         component: PasswordComponent
     },
     {
-        path: 'MailingList',
+        path: 'updates',
         component: WelcomeComponent,
         canActivate: [IrbGuard]
     },
