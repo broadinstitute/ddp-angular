@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieOptions, CookieService } from 'ngx-cookie';
 
 declare const DDP_ENV: any;
 declare const ga: (...args: any[]) => {};
@@ -62,5 +62,12 @@ export class AnalyticsManagementService {
     this.cookie.remove('_gid');
     this.cookie.remove('_gat');
     this.cookie.remove('_gat_platform');
+
+    // Sometimes Google Analytics adds a '.' prefix to the domain
+    const prefixedOptions: CookieOptions = {domain: '.' + document.location.hostname};
+    this.cookie.remove('_ga', prefixedOptions);
+    this.cookie.remove('_gid', prefixedOptions);
+    this.cookie.remove('_gat', prefixedOptions);
+    this.cookie.remove('_gat_platform', prefixedOptions);
   }
 }
