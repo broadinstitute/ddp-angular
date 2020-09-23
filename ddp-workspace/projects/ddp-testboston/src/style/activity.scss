@@ -238,6 +238,11 @@
 
     .mat-radio-label {
         align-items: normal !important;
+        width: inherit !important;
+    }
+
+    .mat-list-text {
+        width: inherit !important;
     }
 
     .mat-radio-container {
