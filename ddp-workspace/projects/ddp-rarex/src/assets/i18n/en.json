@@ -44,6 +44,7 @@
     },
     "SubmitButton": "Submit",
     "NextButton": "Next",
+    "CloseButton": "Close",
     "PreviousButton": "Back",
     "SavingButton": "Saving",
     "EditButton": "View/Edit",
