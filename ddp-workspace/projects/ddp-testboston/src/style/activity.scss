@@ -238,6 +238,11 @@
 
     .mat-radio-label {
         align-items: normal !important;
+        width: inherit !important;
+    }
+
+    .mat-list-text {
+        width: inherit !important;
     }
 
     .mat-radio-container {
@@ -410,6 +415,29 @@ ddp-activity-boolean-answer {
     color: mat-color($app-theme, 1700);
 }
 
+// native dropdown
+select {
+    font-size: 1.375rem;
+    color: mat-color($app-theme, 900);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 0;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .42);
+    border-radius: 0;
+    height: 2.65rem;
+    transition: all .3s;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+select:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
+    cursor: auto;
+}
+
 // date time composite question, BASELINE_SYMPTOM and LONGITUDINAL_COVID activities
 .composite-answer- {
 
@@ -462,4 +490,11 @@ ddp-activity-boolean-answer {
     display: flex;
     width: 13rem;
     margin-top: 0.5rem;
+}
+
+// your current occupation question, BASELINE_COVID activity
+.picklist-answer-OCCUPATION {
+    .ddp-option-details-field {
+        margin-top: 15px;
+    }
 }
