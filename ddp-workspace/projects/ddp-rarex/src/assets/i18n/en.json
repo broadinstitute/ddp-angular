@@ -46,6 +46,8 @@
     "NextButton": "Next",
     "PreviousButton": "Back",
     "SavingButton": "Saving",
+    "EditButton": "View/Edit",
+    "ReviewButton": "View",
     "UserActivities": {
       "ActivityName": "Form",
       "Summary": "Summary",

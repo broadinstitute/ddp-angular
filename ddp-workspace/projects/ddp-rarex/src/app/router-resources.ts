@@ -1,10 +1,11 @@
 export enum RoutePaths {
   Welcome = '',
   Password = 'password',
+  Auth = 'auth',
+  LoginLanding = 'login-landing',
+  LoginLandingWithMode = 'login-landing/:mode',
   ShareMyData = 'share-my-data',
   Dashboard = 'dashboard',
-  LoginLanding = 'login-landing',
-  Auth = 'auth',
   Activity = 'activity',
   Activities = 'activity/:id',
 }

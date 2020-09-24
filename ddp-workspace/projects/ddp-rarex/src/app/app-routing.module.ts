@@ -7,6 +7,7 @@ import {
   DashboardRedesignedComponent,
   LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
+  RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -40,6 +41,11 @@ const routes: Routes = [
       IrbGuard,
       BrowserGuard
     ]
+  },
+  {
+    path: RoutePaths.LoginLandingWithMode,
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: RoutePaths.LoginLanding,
