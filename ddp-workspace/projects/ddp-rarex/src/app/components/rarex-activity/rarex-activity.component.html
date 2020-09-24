@@ -1,0 +1,151 @@
+<!-- article content -->
+<ddp-loader *ngIf="!isLoaded"></ddp-loader>
+
+<article *ngIf="isLoaded" [ngClass]="{'PageContent': isLoaded}">
+  <div class="PageLayout">
+    <div class="row NoMargin">
+      <div *ngIf="shouldShowReadonlyHint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="PageContent-infobox NoMargin" [innerHTML]="model.readonlyHint"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- introduction section -->
+        <!-- Check model not null and not undefined. Open to race condition -->
+        <ng-container *ngIf="model && model.introduction">
+          <ddp-activity-section
+            [section]="model.introduction"
+            [readonly]="model.readonly || dataEntryDisabled"
+            [validationRequested]="validationRequested"
+            [studyGuid]="studyGuid"
+            [activityGuid]="activityGuid"
+            (visibilityChanged)="updateVisibility($event)"
+            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
+            (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)"
+          ></ddp-activity-section>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- steps -->
+    <div class="row NoMargin" *ngIf="isStepped && showStepper">
+      <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <ng-container *ngFor="let section of model.sections; let i = index">
+            <ng-container *ngIf="section.visible">
+              <div
+                class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
+                (click)="jumpStep(i)"
+                [class.active]="isActive(i)"
+                [class.completed]="isCompleted(i)"
+              >
+                <div class="WizardSteps-img">
+                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
+                </div>
+                <div class="WizardSteps-background">
+                  <div class="WizardSteps-title">{{section.name}}</div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="model">
+      <div class="row NoMargin">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <ddp-activity-section
+            [section]="currentSection"
+            [readonly]="model.readonly || dataEntryDisabled"
+            [validationRequested]="validationRequested"
+            [studyGuid]="studyGuid"
+            [activityGuid]="activityGuid"
+            (visibilityChanged)="updateVisibility($event)"
+            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
+            (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)"
+          ></ddp-activity-section>
+        </div>
+      </div>
+
+      <div class="row NoMargin">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!-- closing section -->
+          <ng-container *ngIf="model.closing">
+            <ddp-activity-section
+              [section]="model.closing"
+              [readonly]="model.readonly || dataEntryDisabled"
+              [validationRequested]="validationRequested"
+              [studyGuid]="studyGuid"
+              [activityGuid]="activityGuid"
+              (visibilityChanged)="updateVisibility($event)"
+              (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
+              (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)"
+            ></ddp-activity-section>
+          </ng-container>
+
+          <ng-container *ngIf="shouldShowReadonlyHint">
+            <div class="PageContent-infobox topMarginMedium" [innerHTML]="model.readonlyHint"></div>
+          </ng-container>
+
+          <div *ngIf="model.lastUpdatedText" class="LastUpdatedText">
+            <span>{{model.lastUpdatedText}}</span>
+          </div>
+
+          <div *ngIf="isLoaded" class="activity__btn-section">
+            <div *ngIf="isStepped && !isFirstStep" class="activity__btn-section__left">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                (click)="decrementStep()"
+                [innerHTML]="'SDK.PreviousButton' | translate"
+              ></button>
+            </div>
+
+            <div class="activity__btn-section__right">
+              <button
+                *ngIf="!isLastStep"
+                mat-raised-button
+                color="primary"
+                [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                (click)="incrementStep()"
+                [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
+              ></button>
+
+              <ng-container *ngIf="isLastStep">
+                <button
+                  *ngIf="model.readonly"
+                  mat-raised-button
+                  color="primary"
+                  (click)="close()"
+                  [innerHTML]="'SDK.CloseButton' | translate"
+                ></button>
+
+                <button
+                  *ngIf="!model.readonly"
+                  mat-raised-button
+                  color="primary"
+                  #submitButton
+                  [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                  (click)="flush()"
+                  (mouseenter)="mouseEnterOnSubmit()"
+                  [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)"
+                ></button>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
+            <span translate>SDK.ValidateError</span>
+          </div>
+
+          <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
+            <span translate>SDK.CommunicationError</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</article>

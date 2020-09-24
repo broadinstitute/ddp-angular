@@ -4,8 +4,7 @@ export enum RoutePaths {
   ShareMyData = 'share-my-data',
   Dashboard = 'dashboard',
   LoginLanding = 'login-landing',
-  Consent = 'consent',
-  Demographics = 'demographics',
-  MedicalBackground = 'medical-background',
-  Auth = 'auth'
+  Auth = 'auth',
+  Activity = 'activity',
+  Activities = 'activity/:id',
 }

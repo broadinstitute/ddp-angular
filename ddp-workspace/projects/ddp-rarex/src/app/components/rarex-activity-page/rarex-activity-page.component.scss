@@ -1,0 +1,26 @@
+.rarex-activity-page {
+  display: flex;
+
+  padding: 2rem 4rem;
+
+  @media only screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
+
+  &__progress-container {
+    width: 20rem;
+
+    margin-right: 4rem;
+  }
+
+  &__activity-container {
+    flex: 1;
+    height: calc(100vh - 6.25rem - 4rem);
+
+    overflow: auto;
+  }
+}
+
+.active {
+  font-weight: bold;
+}

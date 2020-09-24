@@ -1,4 +1,4 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import {
   AnalyticsEventActions,
   AnalyticsEventCategories,
@@ -6,7 +6,7 @@ import {
   SessionMementoService,
   WindowRef
 } from 'ddp-sdk';
-import {CommunicationService, HeaderConfigurationService} from 'toolkit';
+import { CommunicationService, HeaderConfigurationService } from 'toolkit';
 import { NavigationEnd, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 

@@ -1,6 +1,7 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonModule } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -19,9 +20,13 @@ import {
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
+import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
+import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { AppRoutingModule } from './app-routing.module';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { RoutePaths } from './router-resources';
+import { AppRoutingModule } from './app-routing.module';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -36,6 +41,7 @@ declare const ga: Function;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
+tkCfg.activityUrl = RoutePaths.Activity;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -76,14 +82,18 @@ export function translateFactory(translate: TranslateService, injector: Injector
     CommonModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitModule
+    ToolkitModule,
+    MatButtonModule
   ],
   declarations: [
     WelcomeComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    WorkflowProgressComponent
+    WorkflowProgressComponent,
+    RarexActivityPageComponent,
+    RarexActivityComponent,
+    ShareMyDataComponent,
   ],
   providers: [
     {
