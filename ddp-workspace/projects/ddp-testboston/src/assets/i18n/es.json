@@ -365,7 +365,7 @@
       }
     },
     "ArrowAlt": "Flecha",
-    "SearchAlt": "Icono de búsqueda"
+    "SearchAlt": "Ícono de búsqueda"
   },
   "Toolkit": {
     "Dashboard": {
@@ -415,12 +415,12 @@
     "EditButton": "Continuar",
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
-    "OpenButton": "[ES] Open",
-    "StartButton": "[ES] Start",
+    "OpenButton": "Abrir",
+    "StartButton": "Comenzar",
     "AgreeButton": "Acepto",
-    "ReportButton": "[ES] Report",
+    "ReportButton": "Reportar",
     "NotAgreeButton": "Todavía no quiero aceptar",
-    "ValidateError": "[ES] Please complete all required fields.",
+    "ValidateError": "Por favor complete todos los campos requeridos.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
     "SaveError": "Lamentablemente, se produjo un error.",
     "ExportStudy": {
