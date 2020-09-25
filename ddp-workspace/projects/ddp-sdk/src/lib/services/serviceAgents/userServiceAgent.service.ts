@@ -4,6 +4,7 @@ import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
+import { LanguageService } from '../languageService.service';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -16,8 +17,9 @@ export class UserServiceAgent<TEntity> extends SessionServiceAgent<TEntity> impl
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
         this.anchor = session.sessionObservable.pipe(
             filter(x => x !== null),
             map(x => {

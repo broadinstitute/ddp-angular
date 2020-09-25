@@ -51,11 +51,13 @@ export class AddressInputService implements OnDestroy {
   /**
    * The formgroup used by the input form
    */
-  readonly addressForm: FormGroup = this.createForm();
+  readonly addressForm: FormGroup;
   /**
    * Incoming addresses
    */
   readonly inputAddress$ = new BehaviorSubject<Address | null>(null);
+
+  readonly defaultCountryCode$ = new BehaviorSubject<string | null>(null);
   /**
    * Set component to readonly mode
    */
@@ -91,7 +93,10 @@ export class AddressInputService implements OnDestroy {
   ngUnsubscribe = new Subject<void>();
 
   constructor(private countryService: CountryService, private addressService: AddressService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef, phoneRequired: boolean) {
+
+    this.addressForm = this.createForm(phoneRequired);
+
     const countryCache = new BehaviorSubject<CountryCache>({});
     const countryCacheUpdates$ = new Subject<CountryAddressInfo>();
     // todo: can we factor this out as generic cache?
@@ -130,7 +135,7 @@ export class AddressInputService implements OnDestroy {
       // todo maybe some way to introduce derived updates and make it so state is updated atomically?
       this.addressForm.valueChanges.pipe(
         distinctUntilChanged((x, y) => _.isEqual(x, y)),
-        concatMap((formValue) => {
+        switchMap((formValue) => {
           return of(formValue['country']).pipe(
             cachingCountryInfoOp,
             map(countryInfo => ({ country: countryInfo ? countryInfo.code : '', countryInfo })),
@@ -143,9 +148,18 @@ export class AddressInputService implements OnDestroy {
         distinctUntilChanged(),
         map(val => ({ isReadOnly: val }))),
 
+      this.defaultCountryCode$.pipe(
+          // The form needs to be updated too!
+          tap(countryCode => this.addressForm.patchValue({country: countryCode}, {onlySelf: true, emitEvent: false})),
+          cachingCountryInfoOp,
+          map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
+          map(countryInfoState => ({formData: new Address({country: countryInfoState.country}),
+            ...countryInfoState, formDataSource: 'INPUT' }))
+      ),
+
       this.inputAddress$.pipe(
         filter(address => !!address),
-        concatMap((address) => {
+        switchMap((address) => {
           return of(address['country']).pipe(
             cachingCountryInfoOp,
             map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
@@ -220,8 +234,6 @@ export class AddressInputService implements OnDestroy {
       filter((compState) => compState.formDataSource === 'COMPONENT'),
       // only care about changes
       distinctUntilChanged((x, y) => _.isEqual(x.formData, y.formData)),
-      // but don't care about initial state
-      skip(1),
       map(compState => this.buildAddressFromFormData(compState.formData, compState.countryInfo)),
       distinctUntilChanged((x, y) => _.isEqual(x, y)),
       share());
@@ -324,7 +336,7 @@ export class AddressInputService implements OnDestroy {
 
   }
 
-  createForm(): FormGroup {
+  createForm(phoneRequired: boolean): FormGroup {
     return new FormGroup({
       name: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
@@ -333,7 +345,7 @@ export class AddressInputService implements OnDestroy {
       zip: new FormControl(''),
       state: new FormControl(''),
       city: new FormControl('', Validators.required),
-      phone: new FormControl(''),
+      phone: phoneRequired ? new FormControl('', Validators.required) : new FormControl(''),
       guid: new FormControl('')
     }, { updateOn: 'blur' });
   }

@@ -2,56 +2,68 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommunicationAspect } from './../communicationAspect.service';
 import { ConfigurationService } from './../configuration.service';
+import { LanguageService } from './../languageService.service'
 import { LoggingService } from './../logging.service';
 import { CommunicationException } from './../../models/exceptions/communicationException';
 import { beforeMethod } from 'kaop-ts';
 import { Observable, of, throwError } from 'rxjs';
-import { flatMap, catchError, map, filter } from 'rxjs/operators';
+import { flatMap, catchError, map, filter, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceAgent<TEntity> {
     constructor(
         @Inject('ddp.config') protected configuration: ConfigurationService,
         private http: HttpClient,
-        private logger: LoggingService) { }
+        private logger: LoggingService,
+        private language: LanguageService) { }
 
     @beforeMethod(CommunicationAspect.intrcept)
     protected getObservable(
         path: string,
         options: any = {},
         unrecoverableStatuses: Array<number> = []): Observable<TEntity | null> {
-        const url = this.getBackendUrl() + path;
-        return this.getHeaders(options).pipe(
-            flatMap(x => {
-                if (x == null) {
-                    this.logger.logError('serviceAgent.get::' + path, 'Authorization required');
-                    return of(null);
+      const url = this.getBackendUrl() + path;
+      const getObservable: Observable<TEntity | null> = this.getHeaders(options).pipe(
+        flatMap(x => {
+          if (x == null) {
+            this.logger.logError('serviceAgent.get::' + path, 'Authorization required');
+            return of(null);
+          }
+          return this.http.get(
+            url,
+            {
+              ...x.params ? { params: x.params } : {},
+              headers: x.headers,
+              observe: x.observe,
+              responseType: x.responseType,
+              withCredentials: x.withCredentials
+            }).pipe(
+            catchError((error: any) => {
+              console.log('there is an error');
+              if (error && error.status) {
+                if (unrecoverableStatuses.indexOf(error.status) > -1) {
+                  return throwError(error);
                 }
-                return this.http.get(
-                    url,
-                    {
-                        ...x.params ? { params: x.params } : {},
-                        headers: x.headers,
-                        observe: x.observe,
-                        responseType: x.responseType,
-                        withCredentials: x.withCredentials
-                    }).pipe(
-                        catchError((error: any) => {
-                          console.log('there is an error');
-                            if (error && error.status) {
-                                if (unrecoverableStatuses.indexOf(error.status) > -1) {
-                                    return throwError(error);
-                                }
-                            }
-                            const exception = new CommunicationException('HTTP GET: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
-                            return of(null);
-                        }),
-                        map(data => data && data['body']),
-                        map((data: TEntity) => data)
-                    );
-            })
+              }
+              const exception = new CommunicationException('HTTP GET: ' + url, error);
+              this.logger.logException('serviceAgent', exception);
+              return of(null);
+            }),
+            map(data => data && data['body']),
+            map((data: TEntity) => data)
+          );
+        })
+      );
+
+      if (this.language) {
+        //For instances that get user text, call the main getObservable when the profile language changes
+        return this.language.getProfileLanguageUpdateNotifier().pipe(
+          switchMap(() => getObservable)
         );
+      }
+      else {
+        return getObservable;
+      }
     }
 
     @beforeMethod(CommunicationAspect.intrcept)

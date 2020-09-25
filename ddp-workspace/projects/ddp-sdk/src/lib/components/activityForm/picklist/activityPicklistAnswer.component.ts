@@ -10,29 +10,23 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
     <ddp-question-prompt [block]="block"></ddp-question-prompt>
     <div>
         <ddp-activity-radiobuttons-picklist-question
-            *ngIf="block.selectMode == SELECT_MODE.SINGLE && block.renderMode == RENDER_MODE.LIST"
+            *ngIf="block.selectMode === SELECT_MODE.SINGLE && block.renderMode === RENDER_MODE.LIST"
             [block]="block"
             [readonly]="readonly"
             (valueChanged)="valueChanged.emit($event)">
         </ddp-activity-radiobuttons-picklist-question>
         <ddp-activity-checkboxes-picklist-question
-            *ngIf="block.selectMode == SELECT_MODE.MULTIPLE && block.renderMode == RENDER_MODE.LIST"
+            *ngIf="block.selectMode === SELECT_MODE.MULTIPLE && block.renderMode === RENDER_MODE.LIST || block.renderMode === RENDER_MODE.CHECKBOX_LIST"
             [block]="block"
             [readonly]="readonly"
             (valueChanged)="valueChanged.emit($event)">
         </ddp-activity-checkboxes-picklist-question>
         <ddp-activity-dropdown-picklist-question
-            *ngIf="block.renderMode == RENDER_MODE.DROPDOWN"
+            *ngIf="block.renderMode === RENDER_MODE.DROPDOWN"
             [block]="block"
             [readonly]="readonly"
             (valueChanged)="valueChanged.emit($event)">
         </ddp-activity-dropdown-picklist-question>
-        <ddp-activity-checkboxes-picklist-question
-            *ngIf="block.renderMode == RENDER_MODE.CHECKBOX_LIST"
-            [block]="block"
-            [readonly]="readonly"
-            (valueChanged)="valueChanged.emit($event)">
-        </ddp-activity-checkboxes-picklist-question>
     <div>`
 })
 export class ActivityPicklistAnswer {

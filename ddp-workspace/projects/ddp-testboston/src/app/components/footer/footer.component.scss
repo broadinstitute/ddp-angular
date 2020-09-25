@@ -2,8 +2,10 @@
 
 @mixin font {
     font-size: 16px;
-    line-height: 33px;
+    line-height: 25px;
     color: mat-color($app-theme, 100);
+    margin-bottom: 8px;
+    display: flex;
 }
 
 .footer {
@@ -22,6 +24,10 @@
     justify-content: space-between;
     width: 100%;
     padding: 1.5rem 0;
+
+    &_simple {
+        justify-content: space-around;
+    }
 }
 
 .column {
@@ -49,17 +55,6 @@
     }
 }
 
-// replace with real language selector component styles when when it is done
-.language {
-    @include font;
-    font-weight: 600;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-}
-
-// replace with real language selector component styles when when it is done
-
 @media only screen and (max-width: 768px) {
     .footer {
         height: 45rem;
@@ -71,6 +66,10 @@
 
     .wrapper {
         flex-direction: column;
+
+        &_simple {
+            justify-content: space-between;
+        }
     }
 
     .list {

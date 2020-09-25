@@ -1,34 +1,30 @@
 <footer *ngIf="!isAdmin" class="footer">
     <div class="footer-content">
-        <div class="wrapper">
+        <div class="wrapper" [ngClass]="{'wrapper_simple': !showLanguageColumn}">
             <nav class="column">
                 <p class="column__title" translate>Navigation.Titles.TestBoston</p>
                 <ul class="list list_extended">
                     <div class="list__column">
                         <li>
-                            <a class="Link footer-link" routerLink="/" translate>Navigation.Home</a>
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" translate>Navigation.Home</a>
                         </li>
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="about-the-study"
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="about-the-study"
                                 (click)="scrollToAnchor('about-the-study')" translate>Navigation.About</a>
                         </li>
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
-                                translate>Navigation.Q&A</a>
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="q&a"
+                                (click)="scrollToAnchor('q&a')" translate>Navigation.Q&A</a>
                         </li>
                     </div>
                     <div class="list__column">
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="who-we-are"
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="who-we-are"
                                 (click)="scrollToAnchor('who-we-are')" translate>Navigation.WhoWeAre</a>
                         </li>
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="stay-informed"
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="stay-informed"
                                 (click)="scrollToAnchor('stay-informed')" translate>Navigation.StayInformed</a>
-                        </li>
-                        <li>
-                            <a class="Link footer-link" [routerLink]="'/' + appRoutes.Privacy"
-                                routerLinkActive="footer-link_active" translate>Navigation.Privacy</a>
                         </li>
                     </div>
                 </ul>
@@ -37,10 +33,10 @@
                 <p class="column__title" translate>Navigation.Titles.ContactUs</p>
                 <ul class="list">
                     <li>
-                        <a class="Link footer-link" [href]="phoneHref">{{phone}}</a>
+                        <a class="Link Link_no-wrap footer-link" [href]="phoneHref">{{phone}}</a>
                     </li>
                     <li>
-                        <a class="Link footer-link" [href]="emailHref">{{email}}</a>
+                        <a class="Link Link_no-wrap footer-link" [href]="emailHref">{{email}}</a>
                     </li>
                 </ul>
             </div>
@@ -51,26 +47,22 @@
                         <ddp-sign-in-out></ddp-sign-in-out>
                     </li>
                     <li *ngIf="!isAuthenticated">
-                        <a class="Link footer-link" [routerLink]="'/' + appRoutes.Join"
+                        <a class="Link Link_no-wrap footer-link" [routerLink]="'/' + appRoutes.Join"
                             routerLinkActive="footer-link_active" translate>Navigation.Invitation</a>
                     </li>
                     <li>
-                        <a class="Link footer-link" href="kit-instructions.pdf" download translate>
-                            Navigation.KitInstructions
+                        <a class="Link footer-link" [routerLink]="'/' + appRoutes.UPS"
+                            routerLinkActive="footer-link_active" translate>
+                            Navigation.Help
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="column">
+            <div *ngIf="showLanguageColumn" class="column">
                 <p class="column__title" translate>Navigation.Titles.Language</p>
                 <ul class="list">
                     <li>
-                        <!-- replace with real language selector component when when it is done -->
-                        <div class="language">
-                            <mat-icon class="language-icon" style="margin-right: 0.2rem;">language</mat-icon>
-                            <span>English</span>
-                        </div>
-                        <!-- replace with real language selector component when when it is done -->
+                        <ddp-language-selector (isVisible)="handleLanguageVisibility($event)"></ddp-language-selector>
                     </li>
                 </ul>
             </div>

@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "Na podany adres został wysłany e-mail z instrukcjami dotyczącymi aktywacji konta.",
+    "checkEmail": "To już prawie wszystko! Sprawdź swoją skrzynkę pocztową: ",
+    "stillWaiting": "Nadal nie otrzymałeś e-maila?",
+    "title": "Aktywacja konta"
+  },
+  "common": {
+    "alreadyRegistered": "Już się zarejestrowałeś? Zaloguj się",
+    "confirmNewPassword": {
+      "label": "Potwierdź nowe hasło"
+    },
+    "email": {
+      "whoseEmail": "Czyj e-mail mam wpisać?",
+      "whoseEmailTooltip": "Jeżeli jesteś rodzicem/opiekunem prawnym dziecka (dzieci) chorych na A-T, użyj swojego adresu e-mail.  Ten adres e-mail będzie wykorzystywany do komunikacji z tobą dotyczącej każdej osoby, którą zarejestrujesz w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T."
+    },
+    "forgotPassword": "Nie pamiętasz hasła?",
+    "joinUs": "Dołącz do nas",
+    "or": "lub",
+    "password": {
+      "label": "Hasło"
+    },
+    "reenter": {
+      "label": "Wprowadź hasło ponownie"
+    },
+    "resendInstructions": "Ponownie wyślij instrukcje dotyczące potwierdzenia",
+    "resetPassword": {
+      "label": "Nowe hasło"
+    },
+    "signin": "Zaloguj się",
+    "signinWithGoogle": "Zaloguj się poprzez Google"
+  },
+  "forgotPassword": {
+    "enterEmail": "Wpisz swój adres e-mail. Wyślemy wtedy instrukcje dotyczące zmiany hasła.",
+    "submit": "Proszę o przesłanie instrukcji dotyczących zmiany hasła",
+    "title": "Nie pamiętasz hasła?"
+  },
+  "header": {
+    "aboutThisInitiative": "O inicjatywie",
+    "aboutUs": "O nas",
+    "joinUs": "Dołącz do nas",
+    "language": "Język",
+    "learnMore": "Dowiedz się więcej",
+    "signIn": "Zaloguj się"
+  },
+  "login": {
+    "title": "Możesz zalogować się na Ogólnoświatową Platformę Danych Stowarzyszenia Rodzin z A-T za pomocą swojego adresu e-mail lub poprzez konto Google.",
+    "useEmail": "Użyj swojego adresu e-mail:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Twoje hasło zostało pomyślnie zmienione.",
+    "YouWillGetInstructions": "W ciągu kilku minut otrzymasz e-mail z instrukcjami dotyczącymi zmiany hasła."
+  },
+  "resendInstructions": {
+    "subTitle": "Jeżeli nie otrzymałeś instrukcji dotyczących potwierdzenia, możesz wpisać adres e-mail, aby otrzymać kolejny e-mail z potwierdzeniem.",
+    "submit": "Ponownie wyślij instrukcje dotyczące potwierdzenia",
+    "title": "Ponownie wyślij instrukcje dotyczące potwierdzenia"
+  },
+  "resetPassword": {
+    "submit": "Chcę zmienić hasło",
+    "title": "Zmień hasło"
+  },
+  "signUp": {
+    "createAccountBtn": "Utwórz konto",
+    "createAccountWithGoogleBtn": "Użyj swojego konta Google",
+    "emailLabel": "Adres e-mail",
+    "googleEmail": "Adres e-mail Google",
+    "passwordHint": "(co najmniej 8 znaków)",
+    "subTitle": "Możesz zalogować się na platformę za pomocą swojego adresu e-mail i tworząc hasło lub poprzez konto Google. Ten adres e-mail będzie wykorzystywany do komunikacji z tobą dotyczącej Ogólnoświatowej Platformy Danych Stowarzyszenia Rodzin z A-T.",
+    "subtitleWithEmail": "Użyj swojego adresu e-mail",
+    "title": "Utwórz konto.",
+    "useGoogle": "Użyj swojego konta Google"
+  },
+  "title": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T | Powiadomienie o aktywacji konta"
+}

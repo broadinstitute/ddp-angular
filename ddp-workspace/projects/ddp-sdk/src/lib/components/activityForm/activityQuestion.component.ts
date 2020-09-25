@@ -1,16 +1,17 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, Inject } from '@angular/core';
 import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlock';
 import { WindowRef } from '../../services/windowRef';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-activity-question',
   template: `
-      <div class="ddp-activity-question" #scrollAnchor>
+      <div class="ddp-activity-question" #scrollAnchor [ngClass]="getQuestionClass(block)">
           <ddp-activity-answer
                   [block]="block"
                   [readonly]="readonly"
@@ -42,6 +43,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
+    @Inject('ddp.config') public config: ConfigurationService,
     private submissionManager: SubmissionManager,
     private windowRef: WindowRef) {
   }
@@ -69,7 +71,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
       this.block.serverValidationMessages$.pipe(startWith(this.block.serverValidationMessages)),
       localValidatorMsg$]
     ).pipe(
-        // delay() needed to "prevent expression has changed after it was checked error"
+      // delay() needed to "prevent expression has changed after it was checked error"
       delay(0),
       map(([serverMsg, localMsg]) => {
         const msgs: string[] = [];
@@ -97,7 +99,8 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     this.validationRequested$.pipe(
       filter(validationRequested => validationRequested && this.block.scrollTo),
       tap(() => {
-        const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top + this.windowRef.nativeWindow.scrollY - 100;
+        const headerOffset = this.config.scrollToErrorOffset;
+        const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top + this.windowRef.nativeWindow.scrollY - headerOffset;
         this.windowRef.nativeWindow.scrollTo({
           top,
           behavior: 'smooth'
@@ -106,6 +109,10 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.ngUnsubscribe)
     ).subscribe();
+  }
+
+  public getQuestionClass(block: ActivityQuestionBlock<any>): string {
+    return 'Question--' + block.questionType;
   }
 
   public ngOnDestroy(): void {

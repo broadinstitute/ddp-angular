@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "Le hemos enviado un correo electrónico con instrucciones para activar su cuenta.",
+    "checkEmail": "¡Ya está casi listo! Controle su correo electrónico ",
+    "stillWaiting": "¿Aún no recibió el correo electrónico?",
+    "title": "Activación de la cuenta"
+  },
+  "common": {
+    "alreadyRegistered": "¿Ya está registrado? Inicie sesión aquí",
+    "confirmNewPassword": {
+      "label": "Confirmar la contraseña nueva"
+    },
+    "email": {
+      "whoseEmail": "¿Qué correo electrónico debo ingresar?",
+      "whoseEmailTooltip": "Si es padre/madre o tutor legal de uno o varios niños con A-T, use su propia dirección de correo electrónico.  Usaremos esta dirección para comunicarnos con usted acerca de todas las personas que registre en la Plataforma global de datos para familias con A-T."
+    },
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "joinUs": "Únase a nosotros",
+    "or": "o",
+    "password": {
+      "label": "Contraseña"
+    },
+    "reenter": {
+      "label": "Vuelva a escribir la contraseña"
+    },
+    "resendInstructions": "Volver a enviar las instrucciones de confirmación",
+    "resetPassword": {
+      "label": "Contraseña nueva"
+    },
+    "signin": "Iniciar sesión",
+    "signinWithGoogle": "Iniciar sesión con Google"
+  },
+  "forgotPassword": {
+    "enterEmail": "Ingrese su dirección de correo electrónico y le enviaremos instrucciones para restablecer la contraseña.",
+    "submit": "Enviarme instrucciones para restablecer la contraseña",
+    "title": "¿Olvidó su contraseña?"
+  },
+  "header": {
+    "aboutThisInitiative": "Acerca de esta iniciativa",
+    "aboutUs": "Acerca de nosotros",
+    "joinUs": "Únase a nosotros",
+    "language": "Idioma",
+    "learnMore": "Más información",
+    "signIn": "Iniciar sesión"
+  },
+  "login": {
+    "title": "Puede iniciar sesión en la Plataforma global de datos para familias con A-T con su dirección de correo electrónico o su cuenta de Google.",
+    "useEmail": "Use su dirección de correo electrónico:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Su contraseña se cambió correctamente.",
+    "YouWillGetInstructions": "Recibirá un correo electrónico con instrucciones para restablecer su contraseña dentro de unos minutos."
+  },
+  "resendInstructions": {
+    "subTitle": "Si no recibió las instrucciones de confirmación, puede ingresar su dirección de correo electrónico para generar otro correo de confirmación.",
+    "submit": "Volver a enviar las instrucciones de confirmación",
+    "title": "Volver a enviar las instrucciones de confirmación"
+  },
+  "resetPassword": {
+    "submit": "Cambiar mi contraseña",
+    "title": "Cambiar la contraseña"
+  },
+  "signUp": {
+    "createAccountBtn": "Crear cuenta",
+    "createAccountWithGoogleBtn": "Use su cuenta de Google",
+    "emailLabel": "Dirección de correo electrónico",
+    "googleEmail": "Dirección de correo electrónico de Google",
+    "passwordHint": "(8 caracteres como mínimo)",
+    "subTitle": "Puede iniciar sesión en la Plataforma con su dirección de correo electrónico y crear una contraseña, o con su cuenta de Google. Usaremos esta dirección de correo electrónico para comunicarnos con usted acerca de la Plataforma global de datos para familias con A-T.",
+    "subtitleWithEmail": "Use su dirección de correo electrónico",
+    "title": "Cree una cuenta",
+    "useGoogle": "Use su cuenta de Google"
+  },
+  "title": "Plataforma global de datos para familias con A-T | Notificación para activar cuenta"
+}

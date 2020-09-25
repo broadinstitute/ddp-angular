@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith } from 'rxjs/operators';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -92,8 +92,9 @@ export class SessionMementoService implements OnDestroy {
         locale: string,
         expiresAtInSeconds: number,
         participantGuid: string | null = null,
-        isAdmin: boolean = false): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin);
+        isAdmin: boolean = false,
+        invitationId: string | null = null): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin, invitationId);
         this.updateSession(session);
     }
 
@@ -115,6 +116,15 @@ export class SessionMementoService implements OnDestroy {
         }
         const session = this.session;
         session.participantGuid = guid;
+        this.updateSession(session);
+    }
+
+    public setInvitationId(invitationId: string): void {
+        if (this.session === null) {
+            return;
+        }
+        const session = this.session;
+        session.invitationId = invitationId;
         this.updateSession(session);
     }
 

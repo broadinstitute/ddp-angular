@@ -9,14 +9,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppRoutes } from './app-routes';
-import { ActivityGuids } from './aсtivity-guids';
+import { ActivityGuids } from './activity-guids';
 
 import {
     DdpModule,
     LogLevel,
     ConfigurationService,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    QuestionType,
 } from 'ddp-sdk';
 
 import {
@@ -39,9 +40,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { RECAPTCHA_LANGUAGE, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { PrismComponent } from './components/prism/prism.component';
+import { EnrollmentComponent } from './components/enrollment/enrollment.component';
+import { HelpComponent } from './components/help/help.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -59,15 +61,17 @@ toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.addressUrl = AppRoutes.Address;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.covidSurveyUrl = AppRoutes.CovidSurvey;
+toolkitConfig.symptomSurveyUrl = AppRoutes.SymptomSurvey;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
-toolkitConfig.adminDashboardUrl = AppRoutes.CrcDashboard;
+toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.addressGuid = ActivityGuids.Address;
 toolkitConfig.consentGuid = ActivityGuids.Consent;
 toolkitConfig.covidSurveyGuid = ActivityGuids.Covid;
+toolkitConfig.symptomSurveyGuid = ActivityGuids.Symptom;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
-toolkitConfig.phone = '617-525-8418';
+toolkitConfig.phone = '617-525-4220';
 toolkitConfig.infoEmail = 'info@testboston.org';
 toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 toolkitConfig.agreeConsent = true;
@@ -92,19 +96,27 @@ sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
-sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
+sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM', 'RESULT_REPORT'];
+sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
+sdkConfig.dashboardActivitiesStartedStatuses = ['CREATED'];
+sdkConfig.dashboardSummaryInsteadOfStatus = ['ADHOC_SYMPTOM', 'RESULT_REPORT'];
+sdkConfig.dashboardReportActivities = ['RESULT_REPORT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
+sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.scrollToErrorOffset = 130;
+
+const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
 
 export function translateFactory(translate: TranslateService, injector: Injector): any {
     return () => new Promise<any>((resolve: any) => {
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
-            const locale = 'en';
-            translate.setDefaultLang(locale);
-            translate.use(locale).subscribe(() => {
-                console.log(`Successfully initialized '${locale}' language as default.`);
+            translate.setDefaultLang(initialLanguageCode);
+            translate.use(initialLanguageCode).subscribe(() => {
+                console.log(`Successfully initialized '${initialLanguageCode}' language as default.`);
             }, () => {
-                console.error(`Problem with '${locale}' language initialization.`);
+                console.error(`Problem with '${initialLanguageCode}' language initialization.`);
             }, () => {
                 resolve(null);
             });
@@ -120,8 +132,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
         WelcomeComponent,
         MailingListComponent,
         UserRegistrationPrequalComponent,
-        CrcDashboardComponent,
-        PrivacyPolicyComponent
+        PrismComponent,
+        EnrollmentComponent,
+        HelpComponent
     ],
     imports: [
         BrowserModule,
@@ -159,6 +172,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
                 Injector
             ],
             multi: true
+        },
+        {
+            provide: RECAPTCHA_LANGUAGE,
+            useValue: initialLanguageCode,
         }
     ],
     bootstrap: [AppComponent]

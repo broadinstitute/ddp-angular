@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutes } from './app-routes';
-import { ActivityGuids } from './aсtivity-guids';
+import { ActivityGuids } from './activity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
-import { CrcDashboardComponent } from './components/crc-dashboard/crc-dashboard.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { PrismComponent } from './components/prism/prism.component';
+import { EnrollmentComponent } from './components/enrollment/enrollment.component';
+import { HelpComponent } from './components/help/help.component';
 
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
   AdminAuthGuard,
+  ChangeLanguageRedirectComponent,
   IrbGuard
 } from 'ddp-sdk';
 
@@ -60,6 +62,17 @@ const routes: Routes = [
     }
   },
   {
+    path: AppRoutes.SymptomSurvey,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.Symptom
+    }
+  },
+  {
     path: AppRoutes.Address,
     component: ActivityPageRedesignedComponent,
     canActivate: [
@@ -95,6 +108,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.LanguageRedirect,
+    component: ChangeLanguageRedirectComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.LoginLanding,
     component: LoginLandingRedesignedComponent,
     canActivate: [
@@ -116,8 +136,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: AppRoutes.CrcDashboard,
-    component: CrcDashboardComponent,
+    path: AppRoutes.Prism,
+    component: PrismComponent,
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.EnrollSubject,
+    component: EnrollmentComponent,
     canActivate: [
       IrbGuard,
       AdminAuthGuard
@@ -145,6 +173,21 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.UPS,
+    component: HelpComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.AdminSessionExpired,
+    component: SessionExpiredRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ],
+    data: { isAdmin: true }
+  },
+  {
     path: AppRoutes.Password,
     component: PasswordRedesignedComponent
   },
@@ -156,19 +199,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: AppRoutes.Privacy,
-    component: PrivacyPolicyComponent,
-    canActivate: [
-      IrbGuard
-    ]
-  },
-  {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
     canActivate: [
       IrbGuard
     ]
+  },
+  {
+    path: AppRoutes.UPS_UPPER,
+    redirectTo: AppRoutes.UPS
   },
   {
     path: '**',

@@ -74,7 +74,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl(nextUrlFromStorage);
     } else {
       // No `nextUrl` set before going to auth0, query the workflow service to get where to go next.
-      this.workflowService.getNext(this.config.studyGuid)
+      this.workflowService.getNext()
         .pipe(take(1))
         .subscribe(response => response && this.workflowBuilder.getCommand(response).execute());
     }

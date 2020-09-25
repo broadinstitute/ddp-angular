@@ -173,14 +173,15 @@
 .header {
     .SimpleButton {
         font-size: 16px;
-        line-height: 33px;
     }
 }
 
 .footer {
     .SimpleButton {
+        display: flex;
         font-size: 16px;
-        line-height: 33px;
+        line-height: 25px;
+        margin-bottom: 8px;
         color: mat-color($app-theme, 100);
     }
 }
@@ -188,7 +189,6 @@
 .overlay {
     .SimpleButton {
         font-size: 1.875rem;
-        line-height: 2.25rem;
     }
 }
 
@@ -198,5 +198,40 @@
             font-size: 1.5rem;
             line-height: 2.1rem;
         }
+    }
+}
+
+// language selector
+ddp-language-selector {
+    .SimpleButton {
+        display: flex;
+        align-items: center;
+    }
+
+    .SimpleButton:focus,
+    .SimpleButton:hover {
+        text-decoration: none;
+    }
+
+    .ddp-globe {
+        stroke: mat-color($app-theme, 1300);
+        fill: transparent;
+        vertical-align: middle;
+        margin-right: 0.2rem;
+    }
+}
+
+.footer {
+    .ddp-globe {
+        stroke: mat-color($app-theme, 100);
+    }
+}
+
+.language-menu {
+    .mat-menu-item {
+        font-size: 16px !important;
+        line-height: 33px !important;
+        font-weight: 600 !important;
+        color: mat-color($app-theme, 1300) !important;
     }
 }
