@@ -50,6 +50,7 @@ tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.moreDetailsUrl = 'more-details';
 tkCfg.internationalPatientsUrl = 'international-patients';
+tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-229-3480';
 tkCfg.infoEmail = 'info@braincancerproject.org';
 tkCfg.dataEmail = 'data@braincancerproject.org';

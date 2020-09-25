@@ -17,7 +17,11 @@ import {
   PasswordRedesignedComponent,
   StayInformedRedesignedComponent,
   ErrorRedesignedComponent,
-  HeaderActionGuard
+  HeaderActionGuard,
+  RedirectToLoginLandingRedesignedComponent,
+  AgeUpThankYou,
+  VerifyAgeUpPageComponent,
+  AcceptAgeUpPageComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -26,6 +30,7 @@ import { ActivityGuids } from './aсtivity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -36,7 +41,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.AboutYou
     }
   },
   {
@@ -47,7 +52,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Consent
     }
   },
   {
@@ -58,7 +63,7 @@ const routes: Routes = [
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Release
     }
   },
   {
@@ -146,6 +151,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: AppRoutes.AboutUs,
+    component: AboutUsComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
     path: AppRoutes.JoinList,
     component: WelcomeComponent,
     canActivate: [
@@ -154,6 +166,52 @@ const routes: Routes = [
     data: {
       openJoinDialog: true
     }
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.ThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      verify: true
+    }
+  },
+  {
+    path: AppRoutes.ProxyThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      collect: true
+    }
+  },
+  {
+    path: AppRoutes.Verify,
+    component: VerifyAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Accept,
+    component: AcceptAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.MailingList,
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: '',

@@ -92,6 +92,7 @@ var DDP_ENV = {
     {{end}}
 {{end}}
 
+
 {{if eq $study_guid "cmi-mbc"}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "qTF3AZlx12Dg7AZ3fCcC7b0Nj7JarNcz";
@@ -175,7 +176,8 @@ var DDP_ENV = {
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
         DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
     {{end}}
- {{end}}
+{{end}}
+
 {{if eq $study_guid "PRION"}}
     {{if eq $environment "dev"}}
         DDP_ENV['assetsBucketName'] = "dev-prion-assets";
@@ -183,13 +185,23 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "prion-dev.auth0.com"
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-172530202-1";
     {{end}}
- {{end}}
- {{if eq $study_guid "rarex"}}
-     {{if eq $environment "dev"}}
-         DDP_ENV['auth0ClientId'] = "gE6vFadpN49ajn76zdSW5FiCqz4aUdlJ";
-         DDP_ENV['auth0Domain'] = "rarex-dev.us.auth0.com";
-         DDP_ENV['auth0Audience'] = "rarex-dev.us.auth0.com";
-         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-     {{end}}
+    {{if eq $environment "prod"}}
+        DDP_ENV['assetsBucketName'] = "prod-prion-assets";
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0Domain'] = "fixme-not-set";
+        DDP_ENV['auth0Audience'] = "fixme-not-set"
+        DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-172530202-1";
+    {{end}}
+{{end}}
+
+{{if eq $study_guid "rarex"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "gE6vFadpN49ajn76zdSW5FiCqz4aUdlJ";
+        DDP_ENV['auth0Domain'] = "rarex-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rarex-dev.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{end}}
 {{end}}

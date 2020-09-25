@@ -1,6 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivityTextQuestionBlock, WindowRef } from 'ddp-sdk';
+import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { WindowRef } from '../../services/windowRef';
 import { InputType } from '../../models/activity/inputType';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationMessage } from '../validationMessage.component';

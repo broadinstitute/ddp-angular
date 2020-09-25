@@ -1,3 +1,6 @@
 export const ActivityGuids = {
-    Dashboard: 'DASHBOARD'
+    Dashboard: 'DASHBOARD',
+    AboutYou: '',
+    Consent: '',
+    Release: ''
 };

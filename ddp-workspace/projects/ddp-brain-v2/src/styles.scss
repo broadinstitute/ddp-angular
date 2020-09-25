@@ -5,6 +5,7 @@
 @import './styles/password.scss';
 @import './styles/static-page.scss';
 @import './styles/stay-informed.scss';
+@import './styles/age-up-thank-you.scss';
 @import './styles/activities.scss';
 
 html,
@@ -147,6 +148,10 @@ p {
 
 .center {
     text-align: center;
+}
+
+.light {
+    font-family: 'Untitled-Sans-Light', sans-serif;
 }
 
 .regular {
