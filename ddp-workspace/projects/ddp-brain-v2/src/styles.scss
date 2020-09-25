@@ -8,6 +8,9 @@
 @import './styles/age-up-thank-you.scss';
 @import './styles/activities.scss';
 
+$custom-typography: mat-typography-config($font-family: 'Untitled-Sans-Regular');
+@include mat-core($custom-typography);
+
 html,
 body {
     margin: 0;
