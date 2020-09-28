@@ -31,7 +31,8 @@ class FakeAddressInputComponent {
   private _readonly = false;
   @Output() valueChanged = new EventEmitter();
   @Input() addressErrors;
-  @Input() country;
+  @Input() country = null;
+  @Input() phoneRequired;
   @Input()
   set address(val: Address | null) {
     console.log('set address called with: %o', val);
@@ -478,14 +479,7 @@ describe('AddressEmbeddedComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    expect(childComponent.country).toBeNull();
-    component.activityGuid = '123';
-    component.country = 'CA';
-    tempAddress = new Address({ country: 'CA' });
-    addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(childComponent.country).toBe('CA');
+    expect(childComponent.country).toBe('US');
   }));
 
   it('test component busy output', fakeAsync(() => {

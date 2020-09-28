@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { LOCATION_INITIALIZED } from '@angular/common';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -22,7 +23,16 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LearnMoreSectionComponent } from './components/learn-more-section/learn-more-section.component';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ModalImageComponent } from './components/modal-image/modal-image.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -33,13 +43,13 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.aboutYouGuid = '';
-toolkitConfig.consentGuid = '';
-toolkitConfig.releaseGuid = '';
+toolkitConfig.aboutYouGuid = ActivityGuids.AboutYou;
+toolkitConfig.consentGuid = ActivityGuids.Consent;
+toolkitConfig.releaseGuid = ActivityGuids.Release;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
 toolkitConfig.aboutYouUrl = AppRoutes.AboutYou;
 toolkitConfig.consentUrl = AppRoutes.Consent;
@@ -47,6 +57,8 @@ toolkitConfig.releaseUrl = AppRoutes.Release;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
+toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
+toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braincancerproject.org';
 toolkitConfig.dataEmail = 'data@braincancerproject.org';
@@ -90,13 +102,22 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HeaderComponent,
+    FooterComponent,
+    FaqComponent,
+    DataComponent,
+    AboutUsComponent,
+    ModalImageComponent,
+    LearnMoreSectionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DdpModule,
-    ToolkitModule
+    ToolkitModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [
     {

@@ -173,14 +173,15 @@
 .header {
     .SimpleButton {
         font-size: 16px;
-        line-height: 33px;
     }
 }
 
 .footer {
     .SimpleButton {
+        display: flex;
         font-size: 16px;
-        line-height: 33px;
+        line-height: 25px;
+        margin-bottom: 8px;
         color: mat-color($app-theme, 100);
     }
 }
@@ -188,7 +189,6 @@
 .overlay {
     .SimpleButton {
         font-size: 1.875rem;
-        line-height: 2.25rem;
     }
 }
 
@@ -206,7 +206,6 @@ ddp-language-selector {
     .SimpleButton {
         display: flex;
         align-items: center;
-        height: 33px;
     }
 
     .SimpleButton:focus,

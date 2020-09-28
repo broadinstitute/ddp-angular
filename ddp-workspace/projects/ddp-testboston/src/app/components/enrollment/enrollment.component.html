@@ -17,7 +17,8 @@
                     <mat-form-field class="field" floatLabel="never">
                         <input matInput formControlName="firstName"
                             [placeholder]="'Enrollment.FirstName.Placeholder' | translate">
-                        <mat-error *ngIf="fieldHasError('firstName', 'required')">
+                        <mat-error
+                            *ngIf="fieldHasError('firstName', 'required') || fieldHasError('firstName', 'pattern')">
                             {{'Enrollment.FirstName.Error' | translate}}
                         </mat-error>
                     </mat-form-field>
@@ -25,7 +26,8 @@
                     <mat-form-field class="field" floatLabel="never">
                         <input matInput formControlName="lastName"
                             [placeholder]="'Enrollment.LastName.Placeholder' | translate">
-                        <mat-error *ngIf="fieldHasError('lastName', 'required')">
+                        <mat-error
+                            *ngIf="fieldHasError('lastName', 'required') || fieldHasError('lastName', 'pattern')">
                             {{'Enrollment.LastName.Error' | translate}}
                         </mat-error>
                     </mat-form-field>

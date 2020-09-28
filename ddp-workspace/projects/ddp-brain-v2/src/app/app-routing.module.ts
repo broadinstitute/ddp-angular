@@ -6,56 +6,68 @@ import {
   AuthGuard,
   Auth0CodeCallbackComponent
 } from 'ddp-sdk';
+
 import {
   ActivityPageRedesignedComponent,
   DashboardRedesignedComponent,
   ActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
-  WorkflowStartActivityRedesignedComponent
+  WorkflowStartActivityRedesignedComponent,
+  PasswordRedesignedComponent,
+  StayInformedRedesignedComponent,
+  ErrorRedesignedComponent,
+  HeaderActionGuard,
+  RedirectToLoginLandingRedesignedComponent,
+  AgeUpThankYou,
+  VerifyAgeUpPageComponent,
+  AcceptAgeUpPageComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
 import { ActivityGuids } from './aсtivity-guids';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
   {
-    path: 'about-you',
+    path: AppRoutes.AboutYou,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.AboutYou
     }
   },
   {
-    path: 'consent',
+    path: AppRoutes.Consent,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Consent
     }
   },
   {
-    path: 'release-survey',
+    path: AppRoutes.Release,
     component: ActivityPageRedesignedComponent,
     canActivate: [
       IrbGuard,
       AuthGuard
     ],
     data: {
-      activityGuid: ''
+      activityGuid: ActivityGuids.Release
     }
   },
   {
-    path: 'dashboard',
+    path: AppRoutes.Dashboard,
     component: DashboardRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -63,14 +75,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'auth',
+    path: AppRoutes.LocalAuth,
     component: Auth0CodeCallbackComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'activity/:id',
+    path: AppRoutes.ActivityId,
     component: ActivityRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -78,7 +90,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'activity-link/:id',
+    path: AppRoutes.ActivityLinkId,
     component: ActivityRedesignedComponent,
     canActivate: [
       IrbGuard,
@@ -86,25 +98,120 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'login-landing',
+    path: AppRoutes.LoginLanding,
     component: LoginLandingRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'login-landing/:mode',
+    path: AppRoutes.LoginLandingMode,
     component: RedirectToAuth0LoginRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
   },
   {
-    path: 'count-me-in',
+    path: AppRoutes.CountMeIn,
     component: WorkflowStartActivityRedesignedComponent,
     canActivate: [
       IrbGuard
     ]
+  },
+  {
+    path: AppRoutes.StayInformed,
+    component: StayInformedRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Error,
+    component: ErrorRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Password,
+    component: PasswordRedesignedComponent
+  },
+  {
+    path: AppRoutes.MoreDetails,
+    component: FaqComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Data,
+    component: DataComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.AboutUs,
+    component: AboutUsComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.JoinList,
+    component: WelcomeComponent,
+    canActivate: [
+      HeaderActionGuard
+    ],
+    data: {
+      openJoinDialog: true
+    }
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.ThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      verify: true
+    }
+  },
+  {
+    path: AppRoutes.ProxyThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      collect: true
+    }
+  },
+  {
+    path: AppRoutes.Verify,
+    component: VerifyAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Accept,
+    component: AcceptAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.MailingList,
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: '',

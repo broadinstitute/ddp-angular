@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { Observable, Subject } from "rxjs";
-import { startWith } from "rxjs/operators";
+import { Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Injectable()
 export class LanguageService {
   private profileLanguageUpdateNotifier: Subject<void>;
+
   constructor(private translate: TranslateService) {
     this.profileLanguageUpdateNotifier = new Subject<void>();
     this.profileLanguageUpdateNotifier.next();
@@ -31,7 +32,7 @@ export class LanguageService {
   }
 
   public useStoredLanguage(): string {
-    let loadedCode: string = localStorage.getItem('studyLanguage');
+    const loadedCode: string = localStorage.getItem('studyLanguage');
     if (this.changeLanguage(loadedCode)) {
       return loadedCode;
     }
@@ -40,7 +41,7 @@ export class LanguageService {
 
   public getProfileLanguageUpdateNotifier(): Observable<void> {
     return this.profileLanguageUpdateNotifier.asObservable().pipe(
-      startWith(<void>null)); //Make sure anything that updates when the language updates gets an initial value!
+      startWith(null as void)); // Make sure anything that updates when the language updates gets an initial value!
   }
 
   public notifyOfProfileLanguageUpdate(): void {
@@ -51,8 +52,7 @@ export class LanguageService {
     if (this.canUseLanguage(languageCode)) {
       localStorage.setItem('studyLanguage', languageCode);
       return this.translate.use(languageCode).toPromise();
-    }
-    else {
+    } else {
       console.log(`Error: cannot use language ${languageCode}`);
       return null;
     }
@@ -60,8 +60,8 @@ export class LanguageService {
 
   public changeLanguage(languageCode: string): boolean {
     if (this.canUseLanguage(languageCode)) {
-      this.translate.use(languageCode);
       localStorage.setItem('studyLanguage', languageCode);
+      this.translate.use(languageCode);
       return true;
     }
 

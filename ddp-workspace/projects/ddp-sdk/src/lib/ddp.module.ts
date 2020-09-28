@@ -171,11 +171,12 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
-import { LanguageSelectorComponent } from "./components/languageSelector.component";
-import { ChangeLanguageRedirectComponent } from "./components/changeLanguageRedirect.component";
-import { LanguageServiceAgent } from "./services/serviceAgents/languageServiceAgent.service";
+import { LanguageSelectorComponent } from './components/languageSelector.component';
+import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
+import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -391,7 +392,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
-
     InstitutionComponent,
     InstitutionsFormComponent,
 

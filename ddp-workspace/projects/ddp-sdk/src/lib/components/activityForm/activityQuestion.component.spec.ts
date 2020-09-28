@@ -1,6 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivityTextQuestionBlock, WindowRef } from 'ddp-sdk';
+import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { WindowRef } from '../../services/windowRef';
 import { InputType } from '../../models/activity/inputType';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationMessage } from '../validationMessage.component';
@@ -9,6 +10,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { getTestScheduler, hot } from 'jasmine-marbles';
 import { By } from '@angular/platform-browser';
 import { ActivityLengthValidationRule } from '../../services/activity/validators/activityLengthValidationRule';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-activity-answer',
@@ -30,15 +32,26 @@ describe('ActivityQuestionComponent', () => {
   const submissionManagerSpy = new SubmissionManager(null);
   let submissionResponseSpy: jasmine.Spy;
   let windowRefSpy: jasmine.SpyObj<WindowRef>;
+  let configServiceSpy: jasmine.SpyObj<ConfigurationService>;
 
   beforeEach(async(() => {
     windowRefSpy = jasmine.createSpyObj('WindowRef', ['nativeWindow']);
+    configServiceSpy = jasmine.createSpyObj('ddp.config', ['scrollToErrorOffset']);
     TestBed.configureTestingModule({
-      declarations: [ActivityQuestionComponent, ValidationMessage, FakeActivityActivityAnswerComponent],
-      providers: [{ provide: SubmissionManager, useValue: submissionManagerSpy }, { provide: WindowRef, useValue: windowRefSpy }],
-      imports: [HttpClientTestingModule]
-    })
-      .compileComponents();
+      declarations: [
+        ActivityQuestionComponent,
+        ValidationMessage,
+        FakeActivityActivityAnswerComponent
+      ],
+      providers: [
+        { provide: SubmissionManager, useValue: submissionManagerSpy },
+        { provide: WindowRef, useValue: windowRefSpy },
+        { provide: 'ddp.config', useValue: configServiceSpy }
+      ],
+      imports: [
+        HttpClientTestingModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -126,11 +139,10 @@ describe('ActivityQuestionComponent', () => {
     submissionResponseSpy.and.returnValue(
       hot('-a',
         {
-          a:
-            ({
-              answers: [{ stableId: block.stableId, answerGuid: '321' }],
-              blockVisibility: []
-            })
+          a: ({
+            answers: [{ stableId: block.stableId, answerGuid: '321' }],
+            blockVisibility: []
+          })
         }));
     component.ngOnInit();
     getTestScheduler().flush();

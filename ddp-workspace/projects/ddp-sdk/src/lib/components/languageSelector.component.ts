@@ -22,7 +22,7 @@ import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
         <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
         <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
       </button>
-      
+
       <mat-menu #menu="matMenu" class="language-menu">
         <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
       </mat-menu>
@@ -37,7 +37,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   public iconURL: string;
   private studyLanguages: StudyLanguage[] = [];
   private anchor: CompositeDisposable;
-  private readonly defaultIconUrl: string = "assets/images/globe.svg#Language-Selector-3";
+  private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
@@ -53,7 +53,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     const sub = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).pipe(
       mergeMap(studyLanguages => {
         if (studyLanguages) {
-          //Only use language selector if multiple languages are configured!
+          // Only use language selector if multiple languages are configured!
           if (studyLanguages.length > 1) {
             this.studyLanguages = studyLanguages;
             this.language.addLanguages(this.studyLanguages.map(language => language.languageCode));
@@ -99,28 +99,28 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
-  //Update the language in the profile to the current language
+  // Update the language in the profile to the current language
   private updateProfileLanguage(): void {
-    let profileModifications: UserProfile = new UserProfile();
+    const profileModifications: UserProfile = new UserProfile();
     profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-    let updateProfileObservable: Observable<any> = this.profileServiceAgent.updateProfile(profileModifications);
-    let sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
+    const updateProfileObservable: Observable<any> = this.profileServiceAgent.updateProfile(profileModifications);
+    const sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
     this.anchor.addNew(sub);
   }
 
-  //Find the current language and return true if successful or false otherwise
+  // Find the current language and return true if successful or false otherwise
   public findCurrentLanguage(): Observable<boolean> {
-    //Check for a language in the profile
-    let profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
+    // Check for a language in the profile
+    const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
 
-    //Use the current language if it exists or check for a stored language
-    let currentStoredLangObservable: Observable<StudyLanguage> = this.getCurrentStoredLangObservable();
+    // Use the current language if it exists or check for a stored language
+    const currentStoredLangObservable: Observable<StudyLanguage> = this.getCurrentStoredLangObservable();
 
-    //Check for a default language
-    let defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
+    // Check for a default language
+    const defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
 
-    //Create an observable that will check each applicable option and return the first valid language found, if any
-    let langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
+    // Create an observable that will check each applicable option and return the first valid language found, if any
+    const langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
       flatMap(profileLang => {
         return this.getNextObservable(profileLang, currentStoredLangObservable);
       }),
@@ -129,7 +129,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       })
     );
 
-    //Return an observable that uses langObservable to get the language and if found, sets the language and
+    // Return an observable that uses langObservable to get the language and if found, sets the language and
     // returns true, or otherwise logs an error and returns false
     return langObservable.pipe(map(language => {
       if (this.foundLanguage(language)) {
@@ -152,14 +152,14 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   private getCurrentStoredLangObservable(): Observable<StudyLanguage> {
     return new Observable<StudyLanguage>(subscriber => {
-      //Use the current language if it exists
+      // Use the current language if it exists
       if (this.currentLanguage) {
         subscriber.next(this.currentLanguage);
       } else {
-        //Check for a stored language
-        let loadedCode: string = this.language.useStoredLanguage();
+        // Check for a stored language
+        const loadedCode: string = this.language.useStoredLanguage();
         if (loadedCode) {
-          let lang: StudyLanguage = this.studyLanguages.find(studyLang => studyLang.languageCode === loadedCode);
+          const lang: StudyLanguage = this.studyLanguages.find(studyLang => studyLang.languageCode === loadedCode);
           subscriber.next(lang ? lang : null);
         } else {
           subscriber.next(null);
@@ -170,7 +170,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private getProfileLangObservable(): Observable<StudyLanguage> {
-    let profileLangObservable: Observable<StudyLanguage> = this.profileServiceAgent.profile
+    const profileLangObservable: Observable<StudyLanguage> = this.profileServiceAgent.profile
       .pipe(map(profileDecorator => {
         if (profileDecorator && profileDecorator.profile.preferredLanguage) {
           return this.studyLanguages.find(studyLang => studyLang.languageCode === profileDecorator.profile.preferredLanguage);
@@ -183,7 +183,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   private getDefaultLangObservable(): Observable<StudyLanguage> {
     return new Observable<StudyLanguage>(subscriber => {
-      let lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
+      const lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
       if (lang) {
         subscriber.next(lang);
       } else {

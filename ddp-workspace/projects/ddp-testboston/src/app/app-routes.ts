@@ -11,6 +11,7 @@ export const AppRoutes = {
     LocalAuth: 'auth',
     Consent: 'consent',
     CovidSurvey: 'covid-survey',
+    SymptomSurvey: 'symptom-survey',
     Dashboard: 'dashboard',
     Prism: 'prism',
     Password: 'password',
@@ -18,5 +19,7 @@ export const AppRoutes = {
     AdminSessionExpired: 'admin-session-expired',
     Address: 'mailing-address',
     PasswordResetDone: 'password-reset-done',
-    EnrollSubject: 'enrollment'
+    EnrollSubject: 'enrollment',
+    UPS: 'ups',
+    UPS_UPPER: 'UPS'
 };

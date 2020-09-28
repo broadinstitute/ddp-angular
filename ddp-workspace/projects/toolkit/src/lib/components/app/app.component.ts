@@ -246,6 +246,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.closeNav();
+                if (event.url.includes(this.toolkitConfiguration.mailingListDialogUrl)) {
+                    this.communicationService.openJoinDialog();
+                }
             }
         });
     }

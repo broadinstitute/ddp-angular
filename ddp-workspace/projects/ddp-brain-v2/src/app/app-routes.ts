@@ -15,5 +15,13 @@ export const AppRoutes = {
     PasswordResetDone: 'password-reset-done',
     CountMeIn: 'count-me-in',
     AboutUs: 'about-us',
-    Data: 'data'
+    Data: 'data',
+    MoreDetails: 'more-details',
+    StayInformed: 'stay-informed',
+    JoinList: 'join-list',
+    ThankYou: 'thank-you',
+    ProxyThankYou: 'proxy-thank-you',
+    Verify: 'verify',
+    Accept: 'accept',
+    MailingList: 'updates'
 };

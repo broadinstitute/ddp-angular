@@ -1,30 +1,31 @@
 <header *ngIf="!isAdmin" class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
-        <a class="project-logo" routerLink="/">
+        <a class="project-logo" routerLink="/" (click)="closeMenu()">
             <img class="project-logo__img" src="assets/images/logo-testboston.png"
                 [alt]="'Navigation.LogoAlt' | translate">
         </a>
         <nav class="nav">
             <ul *ngIf="headerConfig.showMainButtons" class="navigation">
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="about-the-study"
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="about-the-study"
                         (click)="scrollToAnchor('about-the-study')" translate>
                         Navigation.About
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')" translate>
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
+                        translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="who-we-are" (click)="scrollToAnchor('who-we-are')"
-                        translate>
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="who-we-are"
+                        (click)="scrollToAnchor('who-we-are')" translate>
                         Navigation.WhoWeAre
                     </a>
                 </li>
                 <li class="navigation__item">
-                    <a class="header-link" routerLink="/" fragment="stay-informed"
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="stay-informed"
                         (click)="scrollToAnchor('stay-informed')" translate>
                         Navigation.StayInformed
                     </a>
@@ -32,9 +33,9 @@
             </ul>
         </nav>
         <div class="static-menu">
-            <a class="header-link static-menu__item" [href]="language + '/kit-instructions.pdf'" target="_blank" translate>
-                <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
-                Navigation.KitInstructions
+            <a class="header-link static-menu__item" [routerLink]="'/' + appRoutes.UPS"
+                routerLinkActive="header-link_active" translate>
+                Navigation.Help
             </a>
             <div class="static-menu__item" *ngIf="isAuthenticated">
                 <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
@@ -59,7 +60,7 @@
     </div>
 </header>
 
-<div #overlay class="overlay">
+<div *ngIf="!isAdmin" #overlay class="overlay">
     <nav class="overlay-content">
         <ul #menu class="menu">
             <ng-container>
@@ -90,9 +91,9 @@
             </ng-container>
             <div class="menu_mobile-buttons">
                 <li class="menu__item">
-                    <a class="header-link" [href]="language + '/kit-instructions.pdf'" target="_blank" translate>
-                        <img src="assets/images/instructions.svg" alt="Download" class="header-link__icon">
-                        Navigation.KitInstructions
+                    <a class="header-link" [routerLink]="'/' + appRoutes.UPS" routerLinkActive="header-link_active"
+                        (click)="closeMenu()" translate>
+                        Navigation.Help
                     </a>
                 </li>
                 <li class="menu__item" *ngIf="isAuthenticated">

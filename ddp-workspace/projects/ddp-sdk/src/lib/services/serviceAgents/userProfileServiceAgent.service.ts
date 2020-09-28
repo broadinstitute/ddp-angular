@@ -28,7 +28,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
                 return new UserProfileDecorator(x);
             }),
             catchError(e => {
-                if (e.error && e.error.errorCode && e.error.errorCode === 'MISSING_PROFILE') {
+                if (e.error && e.error.code && e.error.code === 'MISSING_PROFILE') {
                     return of(new UserProfileDecorator());
                 }
                 return throwError(e);
@@ -48,7 +48,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     }
 
     public updateProfile(profile: UserProfile): Observable<any> {
-        //Save non-null profile attributes
+        // save non-null profile attributes
         let profileChanges: object = {};
         for (let key of Object.keys(profile)) {
             if (profile[key]) {

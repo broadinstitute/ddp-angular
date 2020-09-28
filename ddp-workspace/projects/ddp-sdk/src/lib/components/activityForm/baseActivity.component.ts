@@ -48,9 +48,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     // flag to indicate to form to not allow data entry
     public dataEntryDisabled = false;
 
-    private studyGuidObservable: BehaviorSubject<string | null>;
-    private activityGuidObservable: BehaviorSubject<string | null>;
-    private anchor: CompositeDisposable;
+    protected studyGuidObservable: BehaviorSubject<string | null>;
+    protected activityGuidObservable: BehaviorSubject<string | null>;
+    protected anchor: CompositeDisposable;
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
 
@@ -195,7 +195,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.router.navigateByUrl(this.config.dashboardPageUrl);
     }
 
-    private initSteps(): void {
+    protected initSteps(): void {
         if (!this.model.isSomeSectionVisible()) {
             this.nextWorkflowActivity();
         } else if (this.model.sections.length > 1) {

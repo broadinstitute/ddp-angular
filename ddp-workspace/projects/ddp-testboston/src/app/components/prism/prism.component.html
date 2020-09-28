@@ -78,9 +78,19 @@
                     <ng-container *ngIf="studySubject && studySubject.userGuid">
                         <div class="info-block">
                             <p class="info-block__title" translate>Prism.Email</p>
-                            <p class="info-block__text">
-                                {{studySubject.userLoginEmail ? studySubject.userLoginEmail : 'Prism.NoEmail' | translate}}
+                            <p class="info-block__text" *ngIf="studySubject.userLoginEmail; else none">
+                                {{studySubject.userLoginEmail}}
                             </p>
+                            <ng-template #none>
+                                <div class="none-listed">
+                                    <h2 class="none-listed__title" translate>Prism.NoneListed.Title</h2>
+                                    <p class="none-listed__text">
+                                        <span translate>Prism.NoneListed.Text</span>
+                                        <a class="Link none-listed__link" [routerLink]="'/' + appRoutes.EnrollSubject"
+                                            translate>Prism.NoneListed.Link</a>.
+                                    </p>
+                                </div>
+                            </ng-template>
                         </div>
                         <div class="navigate">
                             <a class="button button_primary" [routerLink]="'/' + appRoutes.Dashboard" translate>

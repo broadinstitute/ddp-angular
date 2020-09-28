@@ -56,6 +56,20 @@ import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpi
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 import { AgeUpThankYou } from './components/thank-you/age-up-thank-you.component';
+import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
+import { CookiesManagementService } from './services/cookiesManagement.service';
+import { AnalyticsManagementService } from './services/analyticsManagement.service';
+import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
+import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
+import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { CookiesConsentGuard } from './guards/cookiesConsent.guard';
+import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
+import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
+import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
+import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
+import { ModalActivityComponent } from './components/activity/modal-activity.component';
+import { PopupWithCheckboxComponent } from './components/dialogs/popupWithCheckbox.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -71,8 +85,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 
 @NgModule({
   imports: [
@@ -91,7 +109,12 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     MatSidenavModule,
     MatButtonModule,
     MatProgressBarModule,
-    DdpModule
+    DdpModule,
+    TranslateModule,
+    MatTabsModule,
+    MatTableModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [
     CommunicationService,
@@ -99,7 +122,10 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     HeaderConfigurationService,
     WorkflowBuilderService,
     WorkflowMapperService,
-    HeaderActionGuard
+    HeaderActionGuard,
+    CookiesConsentGuard,
+    CookiesManagementService,
+    AnalyticsManagementService
   ],
   declarations: [
     FooterComponent,
@@ -143,7 +169,17 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent,
+    CookiesBannerComponent,
+    CookiesPreferencesButtonComponent,
+    CookiesPreferencesModalComponent,
+    PrivacyPolicyButtonComponent,
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent,
+    ModalActivityButtonComponent,
+    ModalActivityComponent,
+    PopupWithCheckboxComponent
   ],
   exports: [
     FooterComponent,
@@ -180,8 +216,14 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
-  ]
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent,
+    CommonLandingComponent,
+    CommonLandingRedesignedComponent,
+    CookiesBannerComponent,
+    PrionPrivacyPolicyComponent,
+    PopupWithCheckboxComponent
+  ],
 })
 export class ToolkitModule {
   constructor(

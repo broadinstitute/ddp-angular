@@ -54,6 +54,7 @@ tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
 tkCfg.internationalPatientsUrl = 'international-patients';
 tkCfg.moreDetailsUrl = 'more-details';
+tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '857-500-6264';
 tkCfg.infoEmail = 'info@ascproject.org';
 tkCfg.dataEmail = 'data@ascproject.org';
