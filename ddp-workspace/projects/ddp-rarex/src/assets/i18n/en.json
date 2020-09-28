@@ -2,6 +2,13 @@
   "Header": {
     "PoweredBy": "Powered by"
   },
+  "Footer": {
+    "Links": {
+      "Home": "Home",
+      "TermsAndConditions": "Terms and Conditions",
+      "PrivacyPolicy": "Privacy Policy"
+    }
+  },
   "pages": {
     "welcome": "Welcome Page"
   },

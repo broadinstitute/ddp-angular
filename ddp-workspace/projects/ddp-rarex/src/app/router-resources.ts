@@ -8,4 +8,6 @@ export enum RoutePaths {
   Dashboard = 'dashboard',
   Activity = 'activity',
   Activities = 'activity/:id',
+  TermsAndConditions = 'terms-and-conditions',
+  PrivacyPolicy = 'privacy-policy'
 }
