@@ -19,6 +19,12 @@
       "path": "./projects/toolkit/tsconfig.spec.json"
     },
     {
+      "path": "./projects/toolkit-prion/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/toolkit-prion/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/ddp-angio/tsconfig.app.json"
     },
     {
@@ -29,6 +35,18 @@
     },
     {
       "path": "./projects/ddp-brain/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-brain-v2/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-brain-v2/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-mpc/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-mpc/tsconfig.spec.json"
     },
     {
       "path": "./projects/ddp-mbc/tsconfig.app.json"

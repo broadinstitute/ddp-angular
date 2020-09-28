@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { PrionToolkitConfigurationService } from 'toolkit-prion';
 import { Column } from '../../models/study-listing/column';
@@ -57,11 +57,11 @@ export class StudyListingComponent implements OnInit {
   public columns: Column[];
   public sortArrows: number[];
 
-  @ViewChild(MatTable, {static: false})
+  @ViewChild(MatTable, { static: false })
   private table: MatTable<any>;
 
   public constructor(private translator: TranslateService,
-                     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: PrionToolkitConfigurationService) {
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: PrionToolkitConfigurationService) {
   }
 
   public ngOnInit(): void {
