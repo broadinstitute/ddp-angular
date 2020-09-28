@@ -1,4 +1,7 @@
 {
+  "Header": {
+    "PoweredBy": "Powered by"
+  },
   "pages": {
     "welcome": "Welcome Page"
   },
