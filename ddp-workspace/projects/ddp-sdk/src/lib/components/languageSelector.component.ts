@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { iif, Observable, of, Subscription, zip } from 'rxjs';
+import { iif, Observable, of, Subscription } from 'rxjs';
 import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
@@ -104,7 +104,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
         let sub;
         if (this.session.isAuthenticatedSession()) {
-          sub = this.launchPopup(zip(this.updateProfileLanguage(), langObs));
+          sub = this.launchPopup();
+          const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
+          this.anchor.addNew(sub2);
         } else {
           sub = langObs.subscribe();
         }
@@ -115,10 +117,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
-  private launchPopup(languageChangeCompleteObservable: Observable<any>): Subscription {
-    return languageChangeCompleteObservable // Wait for page translation
-      .pipe(concatMap(() => this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid)))
-      .subscribe(shouldDisp => {
+  private launchPopup(): Subscription {
+    return this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid)
+        .subscribe(shouldDisp => {
         if (shouldDisp) { // If we should display the popup
           this.popup.openModal(); // Display the popup!
         }
