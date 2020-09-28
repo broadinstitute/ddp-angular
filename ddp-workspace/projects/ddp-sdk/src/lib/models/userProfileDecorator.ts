@@ -15,7 +15,7 @@ export class UserProfileDecorator {
             this.profile.preferredLanguage = existingProfile.preferredLanguage;
             this.profile.firstName = existingProfile.firstName;
             this.profile.lastName = existingProfile.lastName;
-            this.profile.skipLanguagePopup = existingProfile.skipLanguagePopup;
+            this.profile.shouldSkipLanguagePopup = existingProfile.shouldSkipLanguagePopup;
         } else {
             this.profile = new UserProfile();
         }

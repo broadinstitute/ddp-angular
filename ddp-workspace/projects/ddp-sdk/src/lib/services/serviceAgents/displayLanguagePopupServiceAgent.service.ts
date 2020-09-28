@@ -28,7 +28,7 @@ export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAge
   private getUserNotDisplayLanguagePopup(): Observable<boolean> {
     if (!this.gotInitialProfileValue) {
       // Make sure we return the starting value from the profile
-      this.profile.profile.subscribe(res => this.userDoNotDisplayObsSource.next(res.profile.skipLanguagePopup));
+      this.profile.profile.subscribe(res => this.userDoNotDisplayObsSource.next(res.profile.shouldSkipLanguagePopup));
     }
     return this.userDoNotDisplayObsSource;
   }
@@ -36,7 +36,7 @@ export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAge
   public setUserDoNotDisplayLanguagePopup(userDoNotDisplay: boolean): void {
     // Update the value in the profile
     const userProfile = new UserProfile();
-    userProfile.skipLanguagePopup = userDoNotDisplay;
+    userProfile.shouldSkipLanguagePopup = userDoNotDisplay;
     this.profile.updateProfile(userProfile).subscribe();
 
     // Update our cached value
