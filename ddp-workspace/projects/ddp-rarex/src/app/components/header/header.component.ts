@@ -12,6 +12,8 @@ import {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  naa10FoundationLink = 'https://www.naa10.org/';
+
   constructor(
     private session: SessionMementoService,
     private analytics: AnalyticsEventsService

@@ -1,5 +1,9 @@
 {
   "Header": {
+    "Alts": {
+      "Logo": "The NAA10 Foundation",
+      "Rarex": "RARE-X"
+    },
     "PoweredBy": "Powered by"
   },
   "Footer": {
