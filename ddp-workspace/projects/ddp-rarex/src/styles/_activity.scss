@@ -99,35 +99,13 @@
 
 // activity lists
 .ddp-list {
-    padding: 0 0 0 1.5rem;
-}
-
-.ddp-li {
-    font-weight: 600;
-}
-
-.ddp-block-title-bold {
-    font-weight: 600;
-}
-
-.ddp-block-body {
-    font-size: 1.375rem;
-    line-height: 2.25rem;
-    color: mat-color($app-theme, 700);
-    margin: 1rem 0 1rem -1.5625rem;
-    font-weight: 400;
+    list-style: none;
 }
 
 .ddp-simple-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
-
-    .ddp-question-prompt {
-        font-size: 1.375rem;
-        line-height: 2.25rem;
-        font-family: inherit;
-    }
 }
 
 .ul-flat-list {
@@ -208,19 +186,6 @@
     border-radius: 8px;
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
-}
-
-// consent agree question
-.consent-agree {
-    margin: 0rem 0 -1.5rem 0;
-}
-
-// question text
-.ddp-question-prompt {
-    font-family: 'Source Serif Pro', serif;
-    font-size: 1.5rem;
-    line-height: 2.875rem;
-    margin: 1.5rem 0 0.5rem 0;
 }
 
 .ddp-required-question-prompt:after {
@@ -404,4 +369,53 @@ ddp-activity-composite-answer {
       margin-left: auto;
     }
   }
+}
+
+.rarex-activity {
+  a {
+    color: mat-color($app-theme, 250);
+  }
+}
+
+.ddp-question-prompt {
+  font-family: inherit;
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.ddp-block-title-bold {
+  font-weight: bold;
+}
+
+.ddp-block-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: mat-color($app-theme, 200);
+}
+
+.ddp-li {
+  margin: 1rem 0;
+
+  font-size: 1.2rem;
+}
+
+.ol-flat-list {
+  color: mat-color($app-theme, 200);
+}
+
+.mat-raised-button:disabled {
+  background-color: mat-color($app-theme, 300) !important;
+  color: white !important;
+  opacity: 0.8;
+
+  cursor: not-allowed;
+  transition: all 0.2s ease;
+}
+
+.activity-spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 6rem;
 }

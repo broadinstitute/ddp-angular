@@ -1,7 +1,9 @@
-<!-- article content -->
-<ddp-loader *ngIf="!isLoaded"></ddp-loader>
+<div *ngIf="!isLoaded" class="activity-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<article *ngIf="isLoaded" [ngClass]="{'PageContent': isLoaded}">
+<!-- article content -->
+<article *ngIf="isLoaded" class="rarex-activity" [ngClass]="{'PageContent': isLoaded}">
   <div class="PageLayout">
     <div class="row NoMargin">
       <div *ngIf="shouldShowReadonlyHint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -27,28 +29,54 @@
     </div>
 
     <!-- steps -->
-    <div class="row NoMargin" *ngIf="isStepped && showStepper">
-      <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-          <ng-container *ngFor="let section of model.sections; let i = index">
-            <ng-container *ngIf="section.visible">
-              <div
-                class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                (click)="jumpStep(i)"
-                [class.active]="isActive(i)"
-                [class.completed]="isCompleted(i)"
-              >
-                <div class="WizardSteps-img">
-                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
+<!--    <div class="row NoMargin" *ngIf="isStepped && showStepper">-->
+<!--      <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--        <div class="row">-->
+<!--          <ng-container *ngFor="let section of model.sections; let i = index">-->
+<!--            <ng-container *ngIf="section.visible">-->
+<!--              <div-->
+<!--                class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"-->
+<!--                (click)="jumpStep(i)"-->
+<!--                [class.active]="isActive(i)"-->
+<!--                [class.completed]="isCompleted(i)"-->
+<!--              >-->
+<!--                <div class="WizardSteps-img">-->
+<!--                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">-->
+<!--                </div>-->
+<!--                <div class="WizardSteps-background">-->
+<!--                  <div class="WizardSteps-title">{{section.name}}</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </ng-container>-->
+<!--          </ng-container>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div *ngIf="isStepped && showStepper" class="activity-stepper">
+      <ol class="activity-stepper__stepper-list stepper-list">
+        <ng-container *ngFor="let section of model.sections; let i = index; let last = last">
+          <ng-container *ngIf="section.visible">
+            <li
+              class="stepper-list__item"
+              (click)="jumpStep(i)"
+              [class.stepper-list__item--active]="isActive(i)"
+              [class.stepper-list__item--completed]="isCompleted(i)"
+            >
+              <div class="stepper-step">
+                <div class="stepper-step__icon">
+                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)" />
                 </div>
-                <div class="WizardSteps-background">
-                  <div class="WizardSteps-title">{{section.name}}</div>
-                </div>
+
+                <span class="stepper-step__title">
+                  {{ section.name }}
+                </span>
               </div>
-            </ng-container>
+            </li>
+            <li *ngIf="!last" class="stepper-list__item--divider"></li>
           </ng-container>
-        </div>
-      </div>
+        </ng-container>
+      </ol>
     </div>
 
     <ng-container *ngIf="model">

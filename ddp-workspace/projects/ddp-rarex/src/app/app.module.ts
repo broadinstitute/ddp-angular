@@ -1,7 +1,7 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -83,7 +83,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AppRoutingModule,
     DdpModule,
     ToolkitModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     WelcomeComponent,

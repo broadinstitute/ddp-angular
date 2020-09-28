@@ -1,0 +1,51 @@
+@import '../../../app-theme';
+
+.activity-stepper {
+  margin: 0.5rem 0;
+
+  &__stepper-list {}
+}
+
+.stepper-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &--divider {
+      flex: 1;
+      height: 1px;
+
+      margin: 0 1rem;
+
+      background-color: mat-color($app-theme, 300);
+    }
+
+    &--active {
+      text-decoration: underline;
+    }
+
+    &--active,
+    &--completed {
+      cursor: pointer;
+    }
+  }
+}
+
+.stepper-step {
+  display: flex;
+  align-items: center;
+
+  padding: 0.8rem 1.2rem;
+
+  border-radius: 3px;
+  transition: background-color .2s ease;
+
+  &:hover {
+    background-color: rgba(mat-color($app-theme, 300), 0.1);
+  }
+}

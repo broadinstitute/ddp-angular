@@ -1,7 +1,12 @@
+@import '../app-theme.scss';
+
 ol li,
 ul li,
 p {
-    font-size: 1.375rem;
+  margin: 0.5rem 0;
+
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 h1 {
@@ -26,4 +31,16 @@ h5 {
 
 h6 {
   font-size: 1rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.consent-agree {
+  font-size: 1.2rem;
 }
