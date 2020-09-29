@@ -174,6 +174,7 @@ import { InvitationCodeFormatterDirective } from './directives/invitationCodeFor
 import { LanguageSelectorComponent } from './components/languageSelector.component';
 import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
+import { ActivitiesLoadNotificationService } from './services/activities-load-notification.service';
 
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 
@@ -290,6 +291,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Title,
     RenewSessionNotifier,
     LanguageService,
+    ActivitiesLoadNotificationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

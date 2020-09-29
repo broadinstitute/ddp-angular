@@ -24,17 +24,18 @@ import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { tap, mergeMap, take } from 'rxjs/operators';
+import { ActivitiesLoadNotificationService } from '../../../services/activities-load-notification.service';
 
 @Component({
   selector: 'ddp-user-activities',
   template: `
     <div [hidden]="!loaded">
-    <mat-table #table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
+    <mat-table #table [dataSource]="dataSource"  data-ddp-test="activitiesTable" class="ddp-dashboard">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate">
         </mat-header-cell>
-        <mat-cell *matCellDef="let element" class="padding-5">
+        <mat-cell *matCellDef="let element"  class="padding-5">
           <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
           <button class="dashboard-activity-button Link"
                 [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
@@ -195,7 +196,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   public dataSource: UserActivitiesDataSource;
   public loaded = false;
   private states: Array<ActivityInstanceState> | null = null;
-  private studyGuidObservable: BehaviorSubject<string | null>;
+  private readonly studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
 
   constructor(
@@ -205,7 +206,8 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private activityServiceAgent: ActivityServiceAgent,
     private analytics: AnalyticsEventsService,
     @Inject('ddp.config') private config: ConfigurationService,
-    public domSanitizationService: DomSanitizer) {
+    public domSanitizationService: DomSanitizer,
+    private loadNotificationService: ActivitiesLoadNotificationService) {
     this.studyGuidObservable = new BehaviorSubject<string | null>(null);
   }
 
@@ -226,7 +228,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           mergeMap(x => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
-        ).subscribe(x => this.loaded = !x);
+        ).subscribe(x => {
+          this.loaded = !x;
+          this.loadNotificationService.addLoadNotification(!x);
+        });
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -244,6 +249,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
 
   public ngOnDestroy(): void {
     this.loadingAnchor.unsubscribe();
+    this.loadNotificationService.addLoadNotification(false);
   }
 
   public openActivity(guid: string, code: string): void {
