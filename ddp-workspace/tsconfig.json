@@ -43,6 +43,12 @@
       "path": "./projects/ddp-brain-v2/tsconfig.spec.json"
     },
     {
+      "path": "./projects/ddp-atcp/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-atcp/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/ddp-mpc/tsconfig.app.json"
     },
     {

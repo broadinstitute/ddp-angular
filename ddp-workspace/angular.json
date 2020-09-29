@@ -259,7 +259,7 @@
             "main": "projects/ddp-atcp/src/main.ts",
             "polyfills": "projects/ddp-atcp/src/polyfills.ts",
             "tsConfig": "projects/ddp-atcp/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ddp-atcp/src/favicon.ico",
               "projects/ddp-atcp/src/favicon-alert.ico",
@@ -282,8 +282,7 @@
               {
                 "glob": "main.css",
                 "input": "projects/ddp-atcp/src/auth0/compiled/auth0-styles/",
-                "output": "assets/auth0-styles",
-
+                "output": "assets/auth0-styles"
               }
             ],
             "styles": [
@@ -295,8 +294,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
-            "es5BrowserSupport": true
+            ]
           },
           "configurations": {
             "production": {
@@ -311,19 +309,28 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
                 }
               ]
             },
             "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
               "tsConfig": "projects/ddp-atcp/tsconfig.es5.json"
             }
           }
@@ -1690,9 +1697,9 @@
       }
     },
     "toolkit-prion": {
-      "projectType": "library",
       "root": "projects/toolkit-prion",
       "sourceRoot": "projects/toolkit-prion/src",
+      "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
@@ -1700,6 +1707,11 @@
           "options": {
             "tsConfig": "projects/toolkit-prion/tsconfig.lib.json",
             "project": "projects/toolkit-prion/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/toolkit-prion/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
