@@ -1,5 +1,5 @@
-<div class="rarex-activity-page">
-  <div class="rarex-activity-page__progress-container">
+<div class="rarex-activity-page container">
+  <div *ngIf="isConsentComplete" class="rarex-activity-page__progress-container">
     <ul>
       <li *ngFor="let activityStep of activities" [class.active]="activityStep.instanceGuid === instanceGuid">
         {{ activityStep.activityName }}

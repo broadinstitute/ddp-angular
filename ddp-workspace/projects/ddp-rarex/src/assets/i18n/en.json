@@ -1,12 +1,15 @@
 {
   "Header": {
     "Alts": {
-      "Logo": "The NAA10 Foundation",
-      "Rarex": "RARE-X"
+      "Logo": "The NAA10 Foundation"
     },
     "PoweredBy": "Powered by"
   },
   "Footer": {
+    "PoweredBy": {
+      "Text": "Powered by",
+      "LogoAlt": "RARE-X"
+    },
     "Links": {
       "Home": "Home",
       "TermsAndConditions": "Terms and Conditions",

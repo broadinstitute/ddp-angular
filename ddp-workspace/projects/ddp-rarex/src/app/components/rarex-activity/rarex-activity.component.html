@@ -28,31 +28,6 @@
       </div>
     </div>
 
-    <!-- steps -->
-<!--    <div class="row NoMargin" *ngIf="isStepped && showStepper">-->
-<!--      <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--        <div class="row">-->
-<!--          <ng-container *ngFor="let section of model.sections; let i = index">-->
-<!--            <ng-container *ngIf="section.visible">-->
-<!--              <div-->
-<!--                class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"-->
-<!--                (click)="jumpStep(i)"-->
-<!--                [class.active]="isActive(i)"-->
-<!--                [class.completed]="isCompleted(i)"-->
-<!--              >-->
-<!--                <div class="WizardSteps-img">-->
-<!--                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">-->
-<!--                </div>-->
-<!--                <div class="WizardSteps-background">-->
-<!--                  <div class="WizardSteps-title">{{section.name}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </ng-container>-->
-<!--          </ng-container>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
     <div *ngIf="isStepped && showStepper" class="activity-stepper">
       <ol class="activity-stepper__stepper-list stepper-list">
         <ng-container *ngFor="let section of model.sections; let i = index; let last = last">
@@ -122,8 +97,7 @@
           <div *ngIf="isLoaded" class="activity__btn-section">
             <div *ngIf="isStepped && !isFirstStep" class="activity__btn-section__left">
               <button
-                mat-raised-button
-                color="primary"
+                class="button button_medium button_primary"
                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                 (click)="decrementStep()"
                 [innerHTML]="'SDK.PreviousButton' | translate"
@@ -133,8 +107,7 @@
             <div class="activity__btn-section__right">
               <button
                 *ngIf="!isLastStep"
-                mat-raised-button
-                color="primary"
+                class="button button_medium button_primary"
                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                 (click)="incrementStep()"
                 [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
@@ -143,16 +116,14 @@
               <ng-container *ngIf="isLastStep">
                 <button
                   *ngIf="model.readonly"
-                  mat-raised-button
-                  color="primary"
+                  class="button button_medium button_primary"
                   (click)="close()"
                   [innerHTML]="'SDK.CloseButton' | translate"
                 ></button>
 
                 <button
                   *ngIf="!model.readonly"
-                  mat-raised-button
-                  color="primary"
+                  class="button button_medium button_primary"
                   #submitButton
                   [disabled]="(isPageBusy | async) || dataEntryDisabled"
                   (click)="flush()"
