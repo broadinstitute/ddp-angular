@@ -1,18 +1,18 @@
 <div class="rarex-activity-page">
   <div class="rarex-activity-page__progress-container">
     <ul>
-      <li *ngFor="let activityStep of activities" [class.active]="activityStep.instanceGuid === activityGuid">
+      <li *ngFor="let activityStep of activities" [class.active]="activityStep.instanceGuid === instanceGuid">
         {{ activityStep.activityName }}
       </li>
     </ul>
   </div>
 
-  <div class="rarex-activity-page__activity-container" #activityContainer>
+  <div class="rarex-activity-page__activity-container">
     <app-rarex-activity
+      *ngIf="isActivityShown"
       [studyGuid]="studyGuid"
-      [activityGuid]="activityGuid"
+      [activityGuid]="instanceGuid"
       (submit)="onSubmit($event)"
-      (sectionChanged)="onSectionChanged()"
     ></app-rarex-activity>
   </div>
 </div>

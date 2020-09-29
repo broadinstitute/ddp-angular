@@ -22,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
+import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
@@ -94,6 +95,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WorkflowProgressComponent,
     RarexActivityPageComponent,
     RarexActivityComponent,
+    RarexActivityRedirectComponent,
     ShareMyDataComponent,
   ],
   providers: [

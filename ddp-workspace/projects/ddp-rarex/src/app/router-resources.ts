@@ -7,7 +7,14 @@ export enum RoutePaths {
   ShareMyData = 'share-my-data',
   Dashboard = 'dashboard',
   Activity = 'activity',
-  Activities = 'activity/:id',
+  Activities = 'activity/:instanceGuid',
   TermsAndConditions = 'terms-and-conditions',
-  PrivacyPolicy = 'privacy-policy'
+  PrivacyPolicy = 'privacy-policy',
+  Survey = 'survey',
+  // Activities
+  Consent = 'consent',
+  Demographics = 'demographics',
+  GeneralMedicalBackgroundSurvey = 'general-medical-background',
+  GeneralNeuroDevelopment = 'general-neuro-development',
+  QualityOfLife = 'quality-of-life'
 }
