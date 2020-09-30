@@ -1,10 +1,6 @@
 <div class="rarex-activity-page container">
   <div *ngIf="isConsentComplete" class="rarex-activity-page__progress-container">
-    <ul>
-      <li *ngFor="let activityStep of activities" [class.active]="activityStep.instanceGuid === instanceGuid">
-        {{ activityStep.activityName }}
-      </li>
-    </ul>
+    <app-workflow-progress [activityList]="activities" [instanceGuid]="instanceGuid"></app-workflow-progress>
   </div>
 
   <div class="rarex-activity-page__activity-container">
