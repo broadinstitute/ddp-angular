@@ -9,43 +9,36 @@
 .stepper-list {
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
 
   list-style: none;
 
   &__item {
-    display: flex;
-    align-items: center;
+    margin: 0.5em 0;
 
-    &--divider {
-      flex: 1;
-      height: 1px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    opacity: 0.45;
 
-      margin: 0 1rem;
+    transition: opacity 0.3s ease, color .3s ease;
 
-      background-color: mat-color($app-theme, 300);
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+
+    &--completed {
+      opacity: 0.75;
+      cursor: pointer;
+    }
+
+    &--incomplete {
+      cursor: not-allowed;
     }
 
     &--active {
-      text-decoration: underline;
+      color: black;
+      opacity: 1;
     }
-
-    &--active,
-    &--completed {
-      cursor: pointer;
-    }
-  }
-}
-
-.stepper-step {
-  display: flex;
-  align-items: center;
-
-  padding: 0.8rem 1.2rem;
-
-  border-radius: 3px;
-  transition: background-color .2s ease;
-
-  &:hover {
-    background-color: rgba(mat-color($app-theme, 300), 0.1);
   }
 }

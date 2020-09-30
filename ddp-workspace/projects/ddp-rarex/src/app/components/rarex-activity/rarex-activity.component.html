@@ -30,25 +30,17 @@
 
     <div *ngIf="isStepped && showStepper" class="activity-stepper">
       <ol class="activity-stepper__stepper-list stepper-list">
-        <ng-container *ngFor="let section of model.sections; let i = index; let last = last">
+        <ng-container *ngFor="let section of model.sections; let i = index">
           <ng-container *ngIf="section.visible">
             <li
               class="stepper-list__item"
               (click)="jumpStep(i)"
               [class.stepper-list__item--active]="isActive(i)"
               [class.stepper-list__item--completed]="isCompleted(i)"
+              [class.stepper-list__item--incomplete]="!isCompleted(i)"
             >
-              <div class="stepper-step">
-                <div class="stepper-step__icon">
-                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)" />
-                </div>
-
-                <span class="stepper-step__title">
-                  {{ section.name }}
-                </span>
-              </div>
+              {{ section.name }}
             </li>
-            <li *ngIf="!last" class="stepper-list__item--divider"></li>
           </ng-container>
         </ng-container>
       </ol>
