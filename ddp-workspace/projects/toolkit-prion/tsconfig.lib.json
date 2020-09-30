@@ -15,21 +15,7 @@
     "lib": [
       "dom",
       "es2018"
-    ],
-    "paths": {
-      "ddp-sdk": [
-        "dist/ddp-sdk"
-      ],
-      "ddp-sdk/*": [
-        "dist/ddp-sdk/*"
-      ],
-      "toolkit": [
-        "dist/toolkit"
-      ],
-      "toolkit/*": [
-        "dist/toolkit/*"
-      ]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
