@@ -3,10 +3,14 @@
 ol li,
 ul li,
 p {
-  margin: 0.5rem 0;
+  margin: 1em 0;
 
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.25rem;
+  line-height: 1.95rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: black;
 }
 
 h1 {
@@ -38,9 +42,14 @@ h6 {
 }
 
 .bold {
+  color: black;
   font-weight: bold;
 }
 
 .consent-agree {
-  font-size: 1.2rem;
+  margin: 1.25rem 0;
+
+  font-size: 1.35rem;
+  color: black;
+  font-weight: bold;
 }

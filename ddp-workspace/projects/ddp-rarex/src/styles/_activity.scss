@@ -98,16 +98,6 @@
 }
 
 // activity lists
-.ddp-list {
-    list-style: none;
-}
-
-.ddp-simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
 .ul-flat-list {
     margin: 0;
     padding: 0;
@@ -124,15 +114,6 @@
 
     p::before {
         content: "— ";
-    }
-}
-
-.ol-flat-list {
-    font-weight: 600;
-    color: mat-color($app-theme, 200);
-
-    p {
-        color: mat-color($app-theme, 700);
     }
 }
 
@@ -373,44 +354,51 @@ ddp-activity-composite-answer {
 
 .rarex-activity {
   a {
-    color: mat-color($app-theme, 250);
+    color: mat-color($app-theme, 300);
   }
 }
 
+.ddp-list {
+  padding: 0 0 0 1.5rem;
+}
+
+.ddp-simple-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
 .ddp-question-prompt {
-  font-family: inherit;
-  font-size: 1.5rem;
-  line-height: 1.875rem;
   margin: 1.5rem 0 0.5rem 0;
+
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.95rem;
+  color: black;
 }
 
 .ddp-block-title-bold {
   font-weight: bold;
+  color: black;
 }
 
 .ddp-block-body {
-  font-size: 1rem;
-  line-height: 1.5;
+  margin: 1rem 0 1rem -1.5rem;
+
+  font-size: 1.25rem;
+  line-height: 1.95rem;
   color: mat-color($app-theme, 200);
-}
-
-.ddp-li {
-  margin: 1rem 0;
-
-  font-size: 1.2rem;
 }
 
 .ol-flat-list {
+  padding: 0 0 0 1.5rem;
   color: mat-color($app-theme, 200);
-}
 
-.mat-raised-button:disabled {
-  background-color: mat-color($app-theme, 300) !important;
-  color: white !important;
-  opacity: 0.8;
-
-  cursor: not-allowed;
-  transition: all 0.2s ease;
+  & > li > span:first-child {
+    color: black;
+    font-weight: bold;
+  }
 }
 
 .activity-spinner {
