@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Injectable, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Inject, Injectable, OnDestroy } from '@angular/core';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
-import { BehaviorSubject, merge, Observable, of, pipe, Subject, UnaryFunction, zip } from 'rxjs';
+import { BehaviorSubject, merge, Observable, of, pipe, Subject, UnaryFunction } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -14,7 +14,6 @@ import {
   scan,
   share,
   shareReplay,
-  skip,
   startWith,
   switchMap,
   take,
@@ -92,10 +91,13 @@ export class AddressInputService implements OnDestroy {
 
   ngUnsubscribe = new Subject<void>();
 
-  constructor(private countryService: CountryService, private addressService: AddressService,
-              private cdr: ChangeDetectorRef, phoneRequired: boolean) {
+  constructor(
+    private countryService: CountryService,
+    private addressService: AddressService,
+    private cdr: ChangeDetectorRef,
+    @Inject(Boolean) private phoneRequired: boolean) {
 
-    this.addressForm = this.createForm(phoneRequired);
+    this.addressForm = this.createForm(this.phoneRequired);
 
     const countryCache = new BehaviorSubject<CountryCache>({});
     const countryCacheUpdates$ = new Subject<CountryAddressInfo>();
@@ -103,8 +105,8 @@ export class AddressInputService implements OnDestroy {
 
     countryCacheUpdates$.pipe(
       map(country => ({
-          [country.code]: country
-        }
+        [country.code]: country
+      }
       )),
       scan((cacheMap: CountryCache, codeToCountry) =>
         ({ ...cacheMap, ...codeToCountry }), {}),
@@ -149,12 +151,14 @@ export class AddressInputService implements OnDestroy {
         map(val => ({ isReadOnly: val }))),
 
       this.defaultCountryCode$.pipe(
-          // The form needs to be updated too!
-          tap(countryCode => this.addressForm.patchValue({country: countryCode}, {onlySelf: true, emitEvent: false})),
-          cachingCountryInfoOp,
-          map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
-          map(countryInfoState => ({formData: new Address({country: countryInfoState.country}),
-            ...countryInfoState, formDataSource: 'INPUT' }))
+        // The form needs to be updated too!
+        tap(countryCode => this.addressForm.patchValue({ country: countryCode }, { onlySelf: true, emitEvent: false })),
+        cachingCountryInfoOp,
+        map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
+        map(countryInfoState => ({
+          formData: new Address({ country: countryInfoState.country }),
+          ...countryInfoState, formDataSource: 'INPUT'
+        }))
       ),
 
       this.inputAddress$.pipe(
@@ -163,7 +167,7 @@ export class AddressInputService implements OnDestroy {
           return of(address['country']).pipe(
             cachingCountryInfoOp,
             map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
-            map(countryInfoState => ({formData: address, ...countryInfoState, formDataSource: 'INPUT' }))
+            map(countryInfoState => ({ formData: address, ...countryInfoState, formDataSource: 'INPUT' }))
           );
         })
       )
@@ -253,11 +257,11 @@ export class AddressInputService implements OnDestroy {
     const cancelableFormAddress$ = street1Changed$.pipe(withLatestFrom(formAddress$)).pipe(
       concatMap(([streetChanged, address]) =>
         of(streetChanged).pipe(
-            delay(streetChanged ? 3000 : 0),
-            mapTo(address),
-            // If autocomplete address has come in during our delay, we don't emit the form address
-            takeUntil(this.googleAutocompleteAddress$),
-            take(1)
+          delay(streetChanged ? 3000 : 0),
+          mapTo(address),
+          // If autocomplete address has come in during our delay, we don't emit the form address
+          takeUntil(this.googleAutocompleteAddress$),
+          take(1)
         )),
       share());
 
@@ -333,7 +337,6 @@ export class AddressInputService implements OnDestroy {
       addressInputUpdates$
     ).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();
-
   }
 
   createForm(phoneRequired: boolean): FormGroup {
@@ -413,6 +416,4 @@ export class AddressInputService implements OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
-
 }
