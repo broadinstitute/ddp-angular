@@ -43,6 +43,7 @@ declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.activityUrl = RoutePaths.Activity;
+tkCfg.dashboardUrl = RoutePaths.Dashboard;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;

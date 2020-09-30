@@ -3,6 +3,10 @@
 .dashboard-title-section {
   padding: 2rem 0;
   background-color: mat-color($app-theme, 350);
+
+  &__title {
+    color: white;
+  }
 }
 
 .dashboard-section {
