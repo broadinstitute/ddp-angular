@@ -1,6 +1,7 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription, of } from 'rxjs';
+import { Component, Inject, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { tap, take } from 'rxjs/operators';
 
 import {
   ActivityResponse,
@@ -8,9 +9,13 @@ import {
   CompositeDisposable,
   LoggingService,
   UserActivityServiceAgent,
-  UserActivitiesDataSource,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
+
+import { CurrentActivityService } from '../../services/current-activity.service';
+import { ActivityCodes } from '../../constants/activity-codes';
+import { ActivityStatusCodes } from '../../constants/activity-status-codes';
+import { RoutePaths } from '../../router-resources';
 
 @Component({
   selector: 'app-rarex-activity-page',
@@ -19,16 +24,18 @@ import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 })
 export class RarexActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
-  activityGuid: string;
+  instanceGuid: string;
   activities: ActivityInstance[];
+  isConsentComplete: boolean;
+  isActivityShown = true;
 
-  private _userActivitesSub: Subscription;
   private _anchor = new CompositeDisposable();
-
-  @ViewChild('activityContainer', { static: false }) private _activityContainerRef: ElementRef;
 
   constructor(
     private readonly _route: ActivatedRoute,
+    private readonly _router: Router,
+    private readonly _cdr: ChangeDetectorRef,
+    private readonly _currentActivity: CurrentActivityService,
     private readonly _userActivites: UserActivityServiceAgent,
     private readonly _logger: LoggingService,
     private readonly _workflowBuilder: WorkflowBuilderService,
@@ -37,14 +44,16 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.studyGuid = this._toolkitConfiguration.studyGuid;
+    const activityInstance = this._currentActivity.activity$.getValue();
 
-    this._anchor.addNew(
-      this._route.params.subscribe(data => {
-        this.activityGuid = data.id;
-      })
-    );
+    if (!activityInstance) {
+      this._router.navigateByUrl(RoutePaths.Dashboard);
 
-    this.getActivities();
+      return;
+    }
+
+    this.getActivities().pipe(take(1)).subscribe();
+    this.instanceGuid = activityInstance.instanceGuid;
   }
 
   ngOnDestroy(): void {
@@ -53,8 +62,10 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
   onSubmit(activityResponse: ActivityResponse): void {
     if (activityResponse && activityResponse.instanceGuid) {
-      this.activityGuid = activityResponse.instanceGuid;
-      this.getActivities();
+      this.resetActivityComponent();
+
+      this.instanceGuid = activityResponse.instanceGuid;
+      this.getActivities().pipe(take(1)).subscribe();
 
       return;
     }
@@ -64,23 +75,22 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
       .execute();
   }
 
-  onSectionChanged() {
-    this._activityContainerRef.nativeElement.scrollTo(0, 0);
+  private getActivities(): Observable<ActivityInstance[]> {
+    return this._userActivites.getActivities(of(this.studyGuid)).pipe(
+      tap(activities => {
+        if (!activities) return;
+
+        this.activities = activities;
+
+        const consentActivity = activities.find(activity => activity.activityCode === ActivityCodes.CONSENT);
+        this.isConsentComplete = consentActivity ? consentActivity.statusCode === ActivityStatusCodes.COMPLETE : false;
+      })
+    );
   }
 
-  private getActivities(): void {
-    if (this._userActivitesSub) {
-      this._userActivitesSub.unsubscribe();
-    }
-
-    this._userActivitesSub = new UserActivitiesDataSource(
-      this._userActivites,
-      this._logger,
-      of(this.studyGuid)
-    )
-      .connect()
-      .subscribe(activities => {
-        this.activities = activities;
-      });
+  private resetActivityComponent(): void {
+    this.isActivityShown = false;
+    this._cdr.detectChanges();
+    this.isActivityShown = true;
   }
 }

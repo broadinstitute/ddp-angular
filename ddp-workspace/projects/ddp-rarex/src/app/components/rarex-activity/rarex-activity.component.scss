@@ -1,0 +1,44 @@
+@import '../../../app-theme';
+
+.activity-stepper {
+  margin: 0.5rem 0;
+
+  &__stepper-list {}
+}
+
+.stepper-list {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+
+  list-style: none;
+
+  &__item {
+    margin: 0.5em 0;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    opacity: 0.45;
+
+    transition: opacity 0.3s ease, color .3s ease;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+
+    &--completed {
+      opacity: 0.75;
+      cursor: pointer;
+    }
+
+    &--incomplete {
+      cursor: not-allowed;
+    }
+
+    &--active {
+      color: black;
+      opacity: 1;
+    }
+  }
+}

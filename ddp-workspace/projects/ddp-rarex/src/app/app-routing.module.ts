@@ -12,18 +12,89 @@ import {
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
+import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
+import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 
 const routes: Routes = [
   {
     path: RoutePaths.Activities,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: RoutePaths.Survey,
     component: RarexActivityPageComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
       AuthGuard
     ]
+  },
+  {
+    path: RoutePaths.Consent,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityCode: ActivityCodes.CONSENT
+    }
+  },
+  {
+    path: RoutePaths.Demographics,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityCode: ActivityCodes.DEMOGRAPHICS
+    }
+  },
+  {
+    path: RoutePaths.GeneralMedicalBackgroundSurvey,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityCode: ActivityCodes.GENERAL_MEDICAL_BACKGROUND_SURVEY
+    }
+  },
+  {
+    path: RoutePaths.GeneralNeuroDevelopment,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityCode: ActivityCodes.GENERAL_NEURO_DEVELOPMENT
+    }
+  },
+  {
+    path: RoutePaths.QualityOfLife,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityCode: ActivityCodes.QUALITY_OF_LIFE
+    }
   },
   {
     path: RoutePaths.Dashboard,

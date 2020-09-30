@@ -1,7 +1,9 @@
-<!-- article content -->
-<ddp-loader *ngIf="!isLoaded"></ddp-loader>
+<div *ngIf="!isLoaded" class="activity-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<article *ngIf="isLoaded" [ngClass]="{'PageContent': isLoaded}">
+<!-- article content -->
+<article *ngIf="isLoaded" class="rarex-activity" [ngClass]="{'PageContent': isLoaded}">
   <div class="PageLayout">
     <div class="row NoMargin">
       <div *ngIf="shouldShowReadonlyHint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -26,29 +28,22 @@
       </div>
     </div>
 
-    <!-- steps -->
-    <div class="row NoMargin" *ngIf="isStepped && showStepper">
-      <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-          <ng-container *ngFor="let section of model.sections; let i = index">
-            <ng-container *ngIf="section.visible">
-              <div
-                class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                (click)="jumpStep(i)"
-                [class.active]="isActive(i)"
-                [class.completed]="isCompleted(i)"
-              >
-                <div class="WizardSteps-img">
-                  <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
-                </div>
-                <div class="WizardSteps-background">
-                  <div class="WizardSteps-title">{{section.name}}</div>
-                </div>
-              </div>
-            </ng-container>
+    <div *ngIf="isStepped && showStepper" class="activity-stepper">
+      <ol class="activity-stepper__stepper-list stepper-list">
+        <ng-container *ngFor="let section of model.sections; let i = index">
+          <ng-container *ngIf="section.visible">
+            <li
+              class="stepper-list__item"
+              (click)="jumpStep(i)"
+              [class.stepper-list__item--active]="isActive(i)"
+              [class.stepper-list__item--completed]="isCompleted(i)"
+              [class.stepper-list__item--incomplete]="!isCompleted(i)"
+            >
+              {{ section.name }}
+            </li>
           </ng-container>
-        </div>
-      </div>
+        </ng-container>
+      </ol>
     </div>
 
     <ng-container *ngIf="model">
@@ -94,8 +89,7 @@
           <div *ngIf="isLoaded" class="activity__btn-section">
             <div *ngIf="isStepped && !isFirstStep" class="activity__btn-section__left">
               <button
-                mat-raised-button
-                color="primary"
+                class="button button_medium button_primary"
                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                 (click)="decrementStep()"
                 [innerHTML]="'SDK.PreviousButton' | translate"
@@ -105,8 +99,7 @@
             <div class="activity__btn-section__right">
               <button
                 *ngIf="!isLastStep"
-                mat-raised-button
-                color="primary"
+                class="button button_medium button_primary"
                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                 (click)="incrementStep()"
                 [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
@@ -115,16 +108,14 @@
               <ng-container *ngIf="isLastStep">
                 <button
                   *ngIf="model.readonly"
-                  mat-raised-button
-                  color="primary"
+                  class="button button_medium button_primary"
                   (click)="close()"
                   [innerHTML]="'SDK.CloseButton' | translate"
                 ></button>
 
                 <button
                   *ngIf="!model.readonly"
-                  mat-raised-button
-                  color="primary"
+                  class="button button_medium button_primary"
                   #submitButton
                   [disabled]="(isPageBusy | async) || dataEntryDisabled"
                   (click)="flush()"

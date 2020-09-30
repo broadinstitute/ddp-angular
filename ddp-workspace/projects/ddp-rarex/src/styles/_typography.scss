@@ -1,7 +1,16 @@
+@import '../app-theme.scss';
+
 ol li,
 ul li,
 p {
-    font-size: 1.375rem;
+  margin: 1em 0;
+
+  font-size: 1.25rem;
+  line-height: 1.95rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: black;
 }
 
 h1 {
@@ -26,4 +35,21 @@ h5 {
 
 h6 {
   font-size: 1rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bold {
+  color: black;
+  font-weight: bold;
+}
+
+.consent-agree {
+  margin: 1.25rem 0;
+
+  font-size: 1.35rem;
+  color: black;
+  font-weight: bold;
 }

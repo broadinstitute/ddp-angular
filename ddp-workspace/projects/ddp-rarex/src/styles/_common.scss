@@ -2,7 +2,7 @@
   max-width: 1200px;
 
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2.4rem;
 }
 
 .main {
@@ -18,7 +18,7 @@
 
 .content {
   margin: 0 auto;
-  padding: 0 1.5625rem;
+  padding: 0 2.4rem;
 }
 
 .content_wide {
@@ -26,9 +26,17 @@
 }
 
 .content_medium {
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 .content_tight {
   max-width: 700px;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.no-margin {
+  margin: 0;
 }

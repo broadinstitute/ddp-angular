@@ -1,15 +1,14 @@
 @import '../../../app-theme';
 
 .main-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 3.5rem;
-
-  padding: 0 1rem;
-
   background-color: mat-color($app-theme, 300);
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 2.4rem;
+  }
 }
 
 .nav-list {
@@ -18,8 +17,10 @@
   list-style: none;
 
   &__item {
+    margin: 0;
+
     &:not(:last-child) {
-      margin-right: 7rem;
+      margin-right: 2.4rem;
     }
   }
 
@@ -31,5 +32,22 @@
     &:hover, focus {
       opacity: 0.8;
     }
+  }
+}
+
+.powered-by {
+  &__text {
+    margin: 0;
+
+    color: white;
+  }
+
+  &__img-container {
+    height: 4rem;
+  }
+
+  &__img {
+    display: block;
+    height: 100%;
   }
 }

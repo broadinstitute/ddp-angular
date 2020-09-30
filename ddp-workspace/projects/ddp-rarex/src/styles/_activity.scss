@@ -98,38 +98,6 @@
 }
 
 // activity lists
-.ddp-list {
-    padding: 0 0 0 1.5rem;
-}
-
-.ddp-li {
-    font-weight: 600;
-}
-
-.ddp-block-title-bold {
-    font-weight: 600;
-}
-
-.ddp-block-body {
-    font-size: 1.375rem;
-    line-height: 2.25rem;
-    color: mat-color($app-theme, 700);
-    margin: 1rem 0 1rem -1.5625rem;
-    font-weight: 400;
-}
-
-.ddp-simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    .ddp-question-prompt {
-        font-size: 1.375rem;
-        line-height: 2.25rem;
-        font-family: inherit;
-    }
-}
-
 .ul-flat-list {
     margin: 0;
     padding: 0;
@@ -146,15 +114,6 @@
 
     p::before {
         content: "— ";
-    }
-}
-
-.ol-flat-list {
-    font-weight: 600;
-    color: mat-color($app-theme, 200);
-
-    p {
-        color: mat-color($app-theme, 700);
     }
 }
 
@@ -206,21 +165,7 @@
 .infobox {
     border: 2px solid mat-color($app-theme, 250);
     border-radius: 8px;
-    background-color: rgba(113, 84, 255, 0.06);
-    padding: 1rem;
-}
-
-// consent agree question
-.consent-agree {
-    margin: 0rem 0 -1.5rem 0;
-}
-
-// question text
-.ddp-question-prompt {
-    font-family: 'Source Serif Pro', serif;
-    font-size: 1.5rem;
-    line-height: 2.875rem;
-    margin: 1.5rem 0 0.5rem 0;
+    padding: 0 1.6rem;
 }
 
 .ddp-required-question-prompt:after {
@@ -398,10 +343,66 @@ ddp-activity-composite-answer {
   &__btn-section {
     display: flex;
 
-    margin-top: 1rem;
+    margin-top: 2rem;
 
     &__right {
       margin-left: auto;
     }
   }
+}
+
+.rarex-activity {
+  a {
+    color: mat-color($app-theme, 300);
+  }
+}
+
+.ddp-list {
+  padding: 0 0 0 1.5rem;
+}
+
+.ddp-simple-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.ddp-question-prompt {
+  margin: 1.5rem 0 0.5rem 0;
+
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.95rem;
+  color: black;
+}
+
+.ddp-block-title-bold {
+  font-weight: bold;
+  color: black;
+}
+
+.ddp-block-body {
+  margin: 1rem 0 1rem -1.5rem;
+
+  font-size: 1.25rem;
+  line-height: 1.95rem;
+  color: mat-color($app-theme, 200);
+}
+
+.ol-flat-list {
+  padding: 0 0 0 1.5rem;
+  color: mat-color($app-theme, 200);
+
+  & > li > span:first-child {
+    color: black;
+    font-weight: bold;
+  }
+}
+
+.activity-spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 6rem;
 }

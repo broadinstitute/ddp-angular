@@ -1,55 +1,79 @@
-@import '../../../app-theme.scss';
+@import '../../../app-theme';
 
-ul {
+.workflow-progress {
+  list-style: none;
+  position: sticky;
+  top: 2.4rem;
+
+  &__item {
+    margin: 0;
+  }
+
+  &__divider {
+    width: 2px;
+    height: 1.6rem;
+
+    margin: 0.5rem 0 0.5rem 20px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    &--active {
+      background-color: mat-color($app-theme, 350);
+    }
+
+    &--complete {
+      background-color: mat-color($app-theme, 250);
+    }
+  }
+}
+
+.workflow-progress-step {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
-  padding: 0;
-}
 
-li {
-  text-align: center;
-  display: flex;
-  align-items: center;
-}
+  &__circle {
+    width: 42px;
+    height: 42px;
 
-.workflow-step {
-  font-size: 1rem;
-  line-height: 1.625rem;
-}
+    margin-right: 1.6rem;
 
-.workflow-content {
-  display: flex;
-  align-items: center;
-}
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 21px;
 
-.workflow-content__circle {
-  border-radius: 50%;
-  background-color: mat-color($app-theme, 750);
-  color: mat-color($app-theme, 100);
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-}
+    &--complete {
+      border-color: mat-color($app-theme, 250);
+      background-color: mat-color($app-theme, 250);
+    }
 
-.workflow-content__text {
-  padding: 0 0 0 5px;
-  white-space: nowrap;
-  color: mat-color($app-theme, 700);
-}
+    &--active {
+      border-color: mat-color($app-theme, 350);
+      background-color: mat-color($app-theme, 350);
+    }
+  }
 
-.workflow-content__text_current {
-  color: mat-color($app-theme, 200);
-}
+  &__text-container {
+    display: flex;
+    flex-direction: column;
 
-.workflow-content__circle_current {
-  background-color: mat-color($app-theme, 250);
-}
+    opacity: 0.5;
 
-.workflow-divider {
-  flex-grow: 1;
-  border-top: 2px solid mat-color($app-theme, 800);
-  margin: 0 10px;
-  max-width: 60px;
+    &--text-black {
+      opacity: 1;
+    }
+  }
+
+  &__step-count {
+    font-size: 0.8rem;
+    line-height: 1;
+    color: black;
+    text-transform: uppercase;
+  }
+
+  &__step-name {
+    margin: 0;
+
+    font-size: 1.2rem;
+    color: black;
+  }
 }

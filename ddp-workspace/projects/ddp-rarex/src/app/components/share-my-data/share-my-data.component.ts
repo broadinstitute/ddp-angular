@@ -45,7 +45,7 @@ export class ShareMyDataComponent implements OnInit {
     if (this._session.isTemporarySession() && !activityResponse.allowUnauthenticated)  {
       response = new ActivityResponse('REGISTRATION');
 
-      sessionStorage.setItem('nextUrl', RoutePaths.Dashboard);
+      sessionStorage.setItem('nextUrl', RoutePaths.Consent);
     }
 
     this._workflowBuilder.getCommand(response).execute();
