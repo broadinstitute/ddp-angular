@@ -51,6 +51,10 @@
     &:hover {
       color: mat-color($app-theme, 650);
       text-decoration: underline;
+
+      svg g g {
+        stroke: mat-color($app-theme, 650);
+      }
     }
 
     &:focus {

@@ -115,6 +115,7 @@
   color: white;
   text-transform: uppercase;
   text-decoration: none;
+  text-align: center;
 
   border: none;
   cursor: pointer;
@@ -161,4 +162,8 @@
       outline: none;
     }
   }
+}
+
+.dashboard-content .button {
+  width: 100%;
 }
