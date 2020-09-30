@@ -89,7 +89,6 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   }
 
   private resetActivityComponent(): void {
-    console.log('Reseting')
     this.isActivityShown = false;
     this._cdr.detectChanges();
     this.isActivityShown = true;

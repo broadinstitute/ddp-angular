@@ -3,8 +3,7 @@ import { HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent implements OnInit {
   constructor(private headerConfig: HeaderConfigurationService) { }

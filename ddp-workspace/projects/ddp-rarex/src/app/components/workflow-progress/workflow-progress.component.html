@@ -27,7 +27,9 @@
       *ngIf="!isLast"
       class="workflow-progress__divider"
       [class.workflow-progress__divider--complete]="activityList[i + 1].statusCode === CompleteStatusCode"
-      [class.workflow-progress__divider--active]="activityList[i + 1].instanceGuid === instanceGuid"
+      [class.workflow-progress__divider--active]="
+        activityList[i + 1].instanceGuid === instanceGuid && activityList[i].statusCode === CompleteStatusCode
+      "
     ></li>
   </ng-container>
 </ul>
