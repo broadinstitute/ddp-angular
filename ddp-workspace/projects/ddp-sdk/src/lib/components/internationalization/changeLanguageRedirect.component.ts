@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { StudyLanguage } from '../models/studyLanguage';
-import { ConfigurationService } from '../services/configuration.service';
-import { LanguageService } from '../services/languageService.service';
-import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
+import { StudyLanguage } from '../../models/studyLanguage';
+import { ConfigurationService } from '../../services/configuration.service';
+import { LanguageService } from '../../services/internationalization/languageService.service';
+import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 
 @Component({
   selector: 'ddp-change-language-redirect',

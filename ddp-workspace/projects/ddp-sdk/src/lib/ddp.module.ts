@@ -23,7 +23,7 @@ import { SessionMementoService } from './services/sessionMemento.service';
 import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
-import { LanguageService } from './services/languageService.service';
+import { LanguageService } from './services/internationalization/languageService.service';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -171,8 +171,8 @@ import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
-import { LanguageSelectorComponent } from './components/languageSelector.component';
-import { ChangeLanguageRedirectComponent } from './components/changeLanguageRedirect.component';
+import { LanguageSelectorComponent } from './components/internationalization/languageSelector.component';
+import { ChangeLanguageRedirectComponent } from './components/internationalization/changeLanguageRedirect.component';
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';

@@ -2,16 +2,16 @@ import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, View
 import { iif, Observable, of, Subscription } from 'rxjs';
 import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
-import { PopupWithCheckboxComponent } from './popupWithCheckbox.component';
-import { CompositeDisposable } from '../compositeDisposable';
-import { StudyLanguage } from '../models/studyLanguage';
-import { UserProfile } from '../models/userProfile';
-import { ConfigurationService } from '../services/configuration.service';
-import { LanguageService } from '../services/languageService.service';
-import { SessionMementoService } from '../services/sessionMemento.service';
-import { DisplayLanguagePopupServiceAgent } from '../services/serviceAgents/displayLanguagePopupServiceAgent.service';
-import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
-import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
+import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
+import { CompositeDisposable } from '../../compositeDisposable';
+import { StudyLanguage } from '../../models/studyLanguage';
+import { UserProfile } from '../../models/userProfile';
+import { ConfigurationService } from '../../services/configuration.service';
+import { LanguageService } from '../../services/internationalization/languageService.service';
+import { SessionMementoService } from '../../services/sessionMemento.service';
+import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
+import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 
 @Component({
   selector: 'ddp-language-selector',

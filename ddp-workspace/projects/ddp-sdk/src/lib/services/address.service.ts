@@ -4,7 +4,7 @@ import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
-import { LanguageService } from "./languageService.service";
+import { LanguageService } from './internationalization/languageService.service';
 import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
 import { Observable, throwError } from 'rxjs';
