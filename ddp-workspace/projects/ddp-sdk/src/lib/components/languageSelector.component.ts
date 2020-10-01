@@ -118,7 +118,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private launchPopup(): Subscription {
-    return this.displayPop.getShouldDisplayLanguagePopup(this.config.studyGuid)
+    return this.displayPop.getShouldDisplayLanguagePopup()
         .subscribe(shouldDisp => {
         if (shouldDisp) { // If we should display the popup
           this.popup.openModal(); // Display the popup!

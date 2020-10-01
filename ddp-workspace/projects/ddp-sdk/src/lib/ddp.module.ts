@@ -177,6 +177,7 @@ import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAg
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -292,6 +293,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     RenewSessionNotifier,
     LanguageService,
     DisplayLanguagePopupServiceAgent,
+    StudyDetailServiceAgent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
