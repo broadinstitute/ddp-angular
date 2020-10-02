@@ -7,12 +7,13 @@ import { LogLevel } from '../models/logLevel';
 import { DdpException } from './../models/exceptions/ddpException';
 import { take } from 'rxjs/operators';
 
-describe('LoggingService', () => {
+fdescribe('LoggingService', () => {
     let service: LoggingService;
     const config = new ConfigurationService();
     const exceptionDispatcherServiceSpy: jasmine.SpyObj<ExceptionDispatcher> = jasmine.createSpyObj('ExceptionDispatcher', ['consume']);
 
     const SOURCE = 'LoggingService Test';
+    const DEBUG_EVENT = 'Debug Event';
     const SIMPLE_EVENT = 'Simple Event';
     const WARNING_EVENT = 'Warning Event';
     const ERROR_EVENT = 'Error Event';
@@ -38,8 +39,34 @@ describe('LoggingService', () => {
 
     it('should log all types of events', () => {
         const config = new ConfigurationService();
+        config.logLevel = LogLevel.Debug;
+        service = new LoggingService(exceptionDispatcherServiceSpy, config);
+
+        console.debug = jasmine.createSpy('debug');
+        service.logDebug(SOURCE, DEBUG_EVENT);
+        expect(console.debug).toHaveBeenCalledWith(createMessage(SOURCE, DEBUG_EVENT));
+
+        console.log = jasmine.createSpy('log');
+        service.logEvent(SOURCE, SIMPLE_EVENT);
+        expect(console.log).toHaveBeenCalledWith(createMessage(SOURCE, SIMPLE_EVENT));
+
+        console.warn = jasmine.createSpy('warn');
+        service.logWarning(SOURCE, WARNING_EVENT);
+        expect(console.warn).toHaveBeenCalledWith(createMessage(SOURCE, WARNING_EVENT));
+
+        console.error = jasmine.createSpy('error');
+        service.logError(SOURCE, ERROR_EVENT);
+        expect(console.error).toHaveBeenCalledWith(createMessage(SOURCE, ERROR_EVENT));
+    });
+
+    it('should log only Info, Warning and Error events', () => {
+        const config = new ConfigurationService();
         config.logLevel = LogLevel.Info;
         service = new LoggingService(exceptionDispatcherServiceSpy, config);
+
+        console.debug = jasmine.createSpy('debug');
+        service.logDebug(SOURCE, DEBUG_EVENT);
+        expect(console.debug).not.toHaveBeenCalled();
 
         console.log = jasmine.createSpy('log');
         service.logEvent(SOURCE, SIMPLE_EVENT);
@@ -59,6 +86,10 @@ describe('LoggingService', () => {
         config.logLevel = LogLevel.Warning;
         service = new LoggingService(exceptionDispatcherServiceSpy, config);
 
+        console.debug = jasmine.createSpy('debug');
+        service.logDebug(SOURCE, DEBUG_EVENT);
+        expect(console.debug).not.toHaveBeenCalled();
+
         console.log = jasmine.createSpy('log');
         service.logEvent(SOURCE, SIMPLE_EVENT);
         expect(console.log).not.toHaveBeenCalled();
@@ -76,6 +107,10 @@ describe('LoggingService', () => {
         const config = new ConfigurationService();
         config.logLevel = LogLevel.Error;
         service = new LoggingService(exceptionDispatcherServiceSpy, config);
+
+        console.debug = jasmine.createSpy('debug');
+        service.logDebug(SOURCE, DEBUG_EVENT);
+        expect(console.debug).not.toHaveBeenCalled();
 
         console.log = jasmine.createSpy('log');
         service.logEvent(SOURCE, SIMPLE_EVENT);

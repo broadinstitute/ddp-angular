@@ -22,8 +22,16 @@ export class LoggingService implements OnDestroy {
         this.anchor.unsubscribe();
     }
 
+    public logDebug(source: string, event: any): void {
+        this.logMessage(LogLevel.Debug, source, event);
+    }
+
     public logEvent(source: string, event: any): void {
         this.logMessage(LogLevel.Info, source, event);
+    }
+
+    public logWarning(source: string, event: any): void {
+        this.logMessage(LogLevel.Warning, source, event);
     }
 
     public logError(source: string, event: any): void {
@@ -35,10 +43,6 @@ export class LoggingService implements OnDestroy {
         this.logError(source, exception);
     }
 
-    public logWarning(source: string, event: any): void {
-        this.logMessage(LogLevel.Warning, source, event);
-    }
-
     public getSubscription(): Observable<LogEvent> {
         return this.subjectSource.asObservable().pipe(
             filter(event => event.level >= this.config.logLevel)
@@ -48,6 +52,7 @@ export class LoggingService implements OnDestroy {
     private initEventsListener(): void {
         this.anchor = this.getSubscription().subscribe(event => {
             switch (event.level) {
+                case LogLevel.Debug: console.debug(`${event.message}::${event.context}`); break;
                 case LogLevel.Info: console.log(`${event.message}::${event.context}`); break;
                 case LogLevel.Warning: console.warn(`${event.message}::${event.context}`); break;
                 case LogLevel.Error: console.error(`${event.message}::${event.context}`); break;
