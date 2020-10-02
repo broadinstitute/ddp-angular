@@ -3,7 +3,7 @@ import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActi
 import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import * as _ from 'underscore';
-import { MailAddressBlock } from 'ddp-sdk';
+import { MailAddressBlock, LoggingService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
@@ -19,7 +19,9 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   public block: MailAddressBlock;
 
 
-  constructor(private activityService: UserActivityServiceAgent,
+  constructor(
+    private logger: LoggingService,
+    private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
     this.anchor = new CompositeDisposable();
     const block = new MailAddressBlock(1);
@@ -32,9 +34,9 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
     const get = this.activityService.getActivities(new BehaviorSubject('TESTSTUDY1')).subscribe((result) => {
       if (result && _.isArray(result) && result.length > 0) {
         this.activityInstanceGuid = result[0].instanceGuid;
-        console.log('Got an activityIntanceGuid:' + this.activityInstanceGuid);
+        this.logger.logEvent('AddressEmbeddedSandboxComponent', `Got an activityIntanceGuid: ${this.activityInstanceGuid}`);
       } else {
-        console.log('Could not find and activity');
+        this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Could not find and activity');
       }
     });
     this.anchor.addNew(get);
@@ -50,23 +52,24 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
 
   public deleteTempAddress(): void {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
-      () => console.log('temp address deleted'));
+      () => this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Temp address deleted'));
     this.anchor.addNew(del);
   }
 
   public toggleReadOnly() {
     this.isReadOnly = !(this.isReadOnly);
-    console.log("readonly has been toggled to :" + this.isReadOnly);
+    this.logger.logEvent('AddressEmbeddedSandboxComponent', `Readonly has been toggled to : ${this.isReadOnly}`);
   }
 
   public setBogusAddress(): void {
-    this.bogusAddress = {name : (Math.random() + ''),
-      street1 : (Math.random() + ''),
-      street2 : (Math.random() + ''),
-      city : (Math.random() + ''),
-      state : (Math.random() + ''),
-      zip : (Math.random() + ''),
-      country : 'US',
+    this.bogusAddress = {
+      name: (Math.random() + ''),
+      street1: (Math.random() + ''),
+      street2: (Math.random() + ''),
+      city: (Math.random() + ''),
+      state: (Math.random() + ''),
+      zip: (Math.random() + ''),
+      country: 'US',
       phone: (Math.random() + '')
     };
   }
@@ -79,7 +82,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
         } else {
           return empty();
         }
-      })).subscribe(() => console.log('address was deleted'));
+      })).subscribe(() => this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Address was deleted'));
     this.anchor.addNew(address);
   }
 }

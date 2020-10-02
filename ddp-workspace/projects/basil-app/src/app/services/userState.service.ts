@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent } from 'ddp-sdk';
+import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent, LoggingService } from 'ddp-sdk';
 import { UserState } from '../model/userState';
 import { Observable, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
@@ -11,6 +11,7 @@ export class UserStateService {
     private _state: UserState;
 
     constructor(
+        private logger: LoggingService,
         private session: SessionMementoService,
         private activityServiceAgent: UserActivityServiceAgent,
         private consentServiceAgent: ConsentServiceAgent) {
@@ -40,7 +41,7 @@ export class UserStateService {
                     }
                 },
                 (s: any, x: any) => {
-                    console.log(s);
+                    this.logger.logEvent('UserStateService', s);
                     return {
                         session: s != null,
                         consent: x.consent,

@@ -8,7 +8,8 @@ import {
   ActivityTextQuestionBlock,
   ActivityDateQuestionBlock,
   DateRenderMode,
-  ActivityAgreementQuestionBlock
+  ActivityAgreementQuestionBlock,
+  LoggingService
 } from 'ddp-sdk';
 
 interface ActivityRule {
@@ -24,7 +25,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
 
   private questionRules: ActivityRule[];
 
-  constructor() {
+  constructor(private logger: LoggingService) {
     super();
     this.initializeQuestionRules();
 
@@ -153,7 +154,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       questionBlock = block.func(question);
     } else {
       // TODO throw an Exception here?
-      console.warn(`Received question of type ${question.questionType} that we do not know how to handle`);
+      this.logger.logWarning('CompositeQuestionComponent', `Received question of type ${question.questionType} that we do not know how to handle`);
       return null;
     }
     questionBlock.question = question.question;
