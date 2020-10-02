@@ -11,7 +11,8 @@ import {
   DdpModule,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -95,16 +96,16 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
+        logger.logEvent('AppModule', `Successfully initialized '${locale}' language as default.`);
       }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logError('AppModule', `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -155,7 +156,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     },

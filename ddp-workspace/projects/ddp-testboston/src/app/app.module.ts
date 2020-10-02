@@ -17,6 +17,7 @@ import {
     AnalyticsEventsService,
     AnalyticsEvent,
     QuestionType,
+    LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -107,15 +108,16 @@ sdkConfig.scrollToErrorOffset = 130;
 
 const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
 
-export function translateFactory(translate: TranslateService, injector: Injector): any {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
     return () => new Promise<any>((resolve: any) => {
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
-            translate.setDefaultLang(initialLanguageCode);
-            translate.use(initialLanguageCode).subscribe(() => {
-                console.log(`Successfully initialized '${initialLanguageCode}' language as default.`);
-            }, () => {
-                console.error(`Problem with '${initialLanguageCode}' language initialization.`);
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                logger.logEvent('AppModule', `Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                logger.logError('AppModule', `Problem with '${locale}' language initialization: ${err}`);
             }, () => {
                 resolve(null);
             });
@@ -168,7 +170,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
             useFactory: translateFactory,
             deps: [
                 TranslateService,
-                Injector
+                Injector,
+                LoggingService
             ],
             multi: true
         },

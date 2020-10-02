@@ -19,7 +19,7 @@ import { MatTableModule } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 // SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule } from 'ddp-sdk';
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
 
 // Toolkit imports
 import { ToolkitModule } from 'toolkit';
@@ -202,16 +202,16 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
-      }, () => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logEvent('AppModule', `Successfully initialized '${locale}' language as default.`);
+      }, err => {
+        logger.logError('AppModule', `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -264,7 +264,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     }
