@@ -7,7 +7,7 @@ import { LogLevel } from '../models/logLevel';
 import { DdpException } from './../models/exceptions/ddpException';
 import { take } from 'rxjs/operators';
 
-fdescribe('LoggingService', () => {
+describe('LoggingService', () => {
     let service: LoggingService;
     const config = new ConfigurationService();
     const exceptionDispatcherServiceSpy: jasmine.SpyObj<ExceptionDispatcher> = jasmine.createSpyObj('ExceptionDispatcher', ['consume']);
