@@ -63,7 +63,7 @@ export class ParticipantProfileComponent implements OnDestroy {
             mergeMap(x => {
                 return this.serviceAgent.getList();
             }, (x, y) => y),
-            tap(x => this.logger.logEvent('ParticipantProfile', `data loaded: ${JSON.stringify(x)}`))
+            tap(x => this.logger.logEvent('ParticipantProfileComponent', `data loaded: ${JSON.stringify(x)}`))
         ).subscribe(x => this.participants = x);
         this.reloadingSubject.next();
         this.session.sessionObservable

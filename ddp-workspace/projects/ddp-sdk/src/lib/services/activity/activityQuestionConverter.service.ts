@@ -140,7 +140,7 @@ export class ActivityQuestionConverter {
             questionBlock = builder.func(questionJson);
         } else {
             this.logger.logError(
-                `ActivityConverter.ActivityQuestionConverter`,
+                `ActivityQuestionConverter`,
                 `Received question of type ${questionJson.questionType} that we do not know how to handle`);
             return null;
         }

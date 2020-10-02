@@ -16,7 +16,7 @@ export class ActivityComponentConverter {
             return this.buildInstitutionComponent(inputBlock);
         } else {
             this.logger.logError(
-                `ActivityConverter.ActivityComponentConverter`,
+                `ActivityComponentConverter`,
                 `Received component of type ${inputBlock.component.componentType} that we do not know how to handle`);
         }
         return null;

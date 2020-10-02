@@ -40,7 +40,7 @@ export class UserProfileBusService implements OnDestroy {
                 if (profile) {
                     self.profile.next(new UserProfileDto(profile.name));
                 } else if (err) {
-                    this.log.logError('auth0Adapter.getProfile', err);
+                    this.log.logError('UserProfileBusService', err);
                 }
             });
     }

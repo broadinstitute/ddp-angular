@@ -43,7 +43,7 @@ export class ActivitySuggestionBuilder {
             return builder.func(questionJson.suggestions);
         } else {
             this.logger.logError(
-                `ActivityConverter.ActivitySuggestionsBuilder`,
+                `ActivitySuggestionsBuilder`,
                 `Received suggestion of type ${questionJson.suggestionType} that we do not know how to handle`);
             return null;
         }

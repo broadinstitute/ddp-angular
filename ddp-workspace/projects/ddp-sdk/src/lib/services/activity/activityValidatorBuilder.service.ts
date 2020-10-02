@@ -53,7 +53,7 @@ export class ActivityValidatorBuilder {
                 rules.push(rule);
             } else {
                 this.logger.logError(
-                    `ActivityConverter.ActivityValidatorBuilder`,
+                    `ActivityValidatorBuilder`,
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }

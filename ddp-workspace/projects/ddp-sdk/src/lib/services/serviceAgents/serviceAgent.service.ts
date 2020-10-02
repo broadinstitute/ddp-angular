@@ -22,48 +22,48 @@ export class ServiceAgent<TEntity> {
         path: string,
         options: any = {},
         unrecoverableStatuses: Array<number> = []): Observable<TEntity | null> {
-      const url = this.getBackendUrl() + path;
-      const getObservable: Observable<TEntity | null> = this.getHeaders(options).pipe(
-        flatMap(x => {
-          if (x == null) {
-            this.logger.logError('serviceAgent.get::' + path, 'Authorization required');
-            return of(null);
-          }
-          return this.http.get(
-            url,
-            {
-              ...x.params ? { params: x.params } : {},
-              headers: x.headers,
-              observe: x.observe,
-              responseType: x.responseType,
-              withCredentials: x.withCredentials
-            }).pipe(
-            catchError((error: any) => {
-              console.log('there is an error');
-              if (error && error.status) {
-                if (unrecoverableStatuses.indexOf(error.status) > -1) {
-                  return throwError(error);
+        const url = this.getBackendUrl() + path;
+        const getObservable: Observable<TEntity | null> = this.getHeaders(options).pipe(
+            flatMap(x => {
+                if (x == null) {
+                    this.logger.logError('ServiceAgent.get::' + path, 'Authorization required');
+                    return of(null);
                 }
-              }
-              const exception = new CommunicationException('HTTP GET: ' + url, error);
-              this.logger.logException('serviceAgent', exception);
-              return of(null);
-            }),
-            map(data => data && data['body']),
-            map((data: TEntity) => data)
-          );
-        })
-      );
-
-      if (this.language) {
-        //For instances that get user text, call the main getObservable when the profile language changes
-        return this.language.getProfileLanguageUpdateNotifier().pipe(
-          switchMap(() => getObservable)
+                return this.http.get(
+                    url,
+                    {
+                        ...x.params ? { params: x.params } : {},
+                        headers: x.headers,
+                        observe: x.observe,
+                        responseType: x.responseType,
+                        withCredentials: x.withCredentials
+                    }).pipe(
+                        catchError((error: any) => {
+                            console.log('there is an error');
+                            if (error && error.status) {
+                                if (unrecoverableStatuses.indexOf(error.status) > -1) {
+                                    return throwError(error);
+                                }
+                            }
+                            const exception = new CommunicationException('HTTP GET: ' + url, error);
+                            this.logger.logException('ServiceAgent', exception);
+                            return of(null);
+                        }),
+                        map(data => data && data['body']),
+                        map((data: TEntity) => data)
+                    );
+            })
         );
-      }
-      else {
-        return getObservable;
-      }
+
+        if (this.language) {
+            //For instances that get user text, call the main getObservable when the profile language changes
+            return this.language.getProfileLanguageUpdateNotifier().pipe(
+                switchMap(() => getObservable)
+            );
+        }
+        else {
+            return getObservable;
+        }
     }
 
     @beforeMethod(CommunicationAspect.intrcept)
@@ -76,7 +76,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.post::' + path, 'Authorization required');
+                    this.logger.logError('ServiceAgent.post::' + path, 'Authorization required');
                     return of(null);
                 }
                 return this.http.post(
@@ -90,7 +90,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP POST: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logException('ServiceAgent', exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -112,7 +112,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.patch::' + path, 'Authorization required');
+                    this.logger.logError('ServiceAgent.patch::' + path, 'Authorization required');
                     if (throwErrorObject) {
                         return throwError(new Error('No user session available'));
                     } else {
@@ -130,7 +130,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP PATCH: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logException('ServiceAgent', exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -153,7 +153,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.put::' + path, 'Authorization required');
+                    this.logger.logError('ServiceAgent.put::' + path, 'Authorization required');
                     return of(null);
                 }
                 return this.http.put(
@@ -167,7 +167,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP PUT: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logException('ServiceAgent', exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -189,7 +189,7 @@ export class ServiceAgent<TEntity> {
             filter(x => x != null),
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.delete::' + path, 'Authorization required');
+                    this.logger.logError('ServiceAgent.delete::' + path, 'Authorization required');
                     return of(null);
                 }
                 return this.http.delete(
@@ -202,7 +202,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP DELETE: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logException('ServiceAgent', exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -215,15 +215,14 @@ export class ServiceAgent<TEntity> {
     }
 
     protected getHeaders(options: any): Observable<any> {
-      console.log('about to get the headers');
-      const headers = Object.assign({
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-        withCredentials: false,
-        observe: 'response',
-        responseType: 'json'
-      }, options);
-
-      console.log('the headers are:' + JSON.stringify(headers));
+        this.logger.logEvent('ServiceAgent', 'About to get the headers')
+        const headers = Object.assign({
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+            withCredentials: false,
+            observe: 'response',
+            responseType: 'json'
+        }, options);
+        this.logger.logEvent('ServiceAgent', `The headers are: ${JSON.stringify(headers)}`)
         return of(headers);
     }
 

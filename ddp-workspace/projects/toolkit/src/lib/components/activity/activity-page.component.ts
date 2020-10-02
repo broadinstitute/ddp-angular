@@ -58,12 +58,12 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
                         if (activityInstance) {
                             return activityInstance;
                         } else {
-                            this.logger.logError('Could not find activity instance summary for study activity id: ' + this.activityGuid,
+                            this.logger.logError('ActivityPageComponent.Could not find activity instance summary for study activity id: ' + this.activityGuid,
                                 'Loading prequalifier activity instance');
                             return null;
                         }
                     } else {
-                        this.logger.logError('Could not get the activities for study: ' + this.studyGuid,
+                        this.logger.logError('ActivityPageComponent.Could not get the activities for study: ' + this.studyGuid,
                             'Loading prequalifier activity instance');
                     }
                     return null;
@@ -75,7 +75,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
                         if (x) {
                             return x;
                         } else {
-                            this.logger.logError('Could not create the activity instance for study activity guid:' + this.activityGuid,
+                            this.logger.logError('ActivityPageComponent.Could not create the activity instance for study activity guid:' + this.activityGuid,
                                 'Creating prequalifier activity instance');
                             return null;
                         }
