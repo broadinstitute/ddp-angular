@@ -15,8 +15,7 @@ var DDP_ENV = {
 };
 
 {{if eq $environment "dev"}}
-    DDP_ENV['logLevel'] = "1";
-    DDP_ENV['level'] = 1;
+    DDP_ENV['logLevel'] = 1;
 {{else if eq $environment "test"}}
     DDP_ENV['logLevel'] = 1;
 {{else if eq $environment "staging"}}
