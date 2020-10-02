@@ -12,7 +12,7 @@ fdescribe('LoggingService', () => {
     const config = new ConfigurationService();
     const exceptionDispatcherServiceSpy: jasmine.SpyObj<ExceptionDispatcher> = jasmine.createSpyObj('ExceptionDispatcher', ['consume']);
 
-    const SOURCE = 'LoggingService Test';
+    const SOURCE = 'Logging Service Test';
     const DEBUG_EVENT = 'Debug Event';
     const SIMPLE_EVENT = 'Simple Event';
     const WARNING_EVENT = 'Warning Event';
