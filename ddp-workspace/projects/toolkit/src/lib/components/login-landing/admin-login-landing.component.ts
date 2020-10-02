@@ -9,7 +9,8 @@ import { filter, take } from 'rxjs/operators';
 import {
   SessionMementoService,
   Auth0AdapterService,
-  ConfigurationService
+  ConfigurationService,
+  LoggingService
 } from 'ddp-sdk';
 
 @Component({
@@ -23,6 +24,7 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private logger: LoggingService,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
     @Inject('ddp.config') private config: ConfigurationService,
@@ -51,7 +53,7 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(error);
+      this.logger.logError('AdminLoginLandingComponent', error);
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }

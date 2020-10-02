@@ -12,7 +12,8 @@ import {
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
+  LoggingService
 } from 'ddp-sdk';
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private logger: LoggingService,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
     private participantService: GovernedParticipantsServiceAgent,
@@ -61,7 +63,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(error);
+      this.logger.logError('LoginLandingComponent', error);
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }

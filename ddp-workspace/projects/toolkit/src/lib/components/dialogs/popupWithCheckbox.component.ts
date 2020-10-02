@@ -1,7 +1,7 @@
 import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { SessionMementoService } from 'ddp-sdk';
+import { SessionMementoService, LoggingService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 @Component({
@@ -34,11 +34,12 @@ export class PopupWithCheckboxComponent {
   @Input() buttonText: string;
 
   public isAuthenticated: boolean;
-  @ViewChild('modal', {static: true}) private modalRef: TemplateRef<any>;
+  @ViewChild('modal', { static: true }) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
-              private session: SessionMementoService,
-              @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
+    private logger: LoggingService,
+    private session: SessionMementoService,
+    @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
     this.isAuthenticated = this.session.isAuthenticatedSession();
   }
 
@@ -49,13 +50,13 @@ export class PopupWithCheckboxComponent {
       disableClose: true,
       panelClass: 'toolkit-popup-with-checkbox',
       backdropClass: 'toolkit-popup-with-checkbox',
-      position: {top: '100px', left: 'calc(50% - 150px)'},
+      position: { top: '100px', left: 'calc(50% - 150px)' },
       scrollStrategy: new NoopScrollStrategy()
     });
   }
 
-  public close(languageConfirmed: boolean): void  {
-    console.log(languageConfirmed);
+  public close(languageConfirmed: boolean): void {
+    this.logger.logEvent('PopupWithCheckboxComponent', languageConfirmed);
     this.dialog.closeAll();
   }
 }
