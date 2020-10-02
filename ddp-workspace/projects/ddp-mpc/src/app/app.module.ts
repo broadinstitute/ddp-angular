@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
-  LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent
@@ -68,7 +67,7 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
-sdkConfig.logLevel = LogLevel.Info;
+sdkConfig.logLevel = DDP_ENV.logLevel;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
