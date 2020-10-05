@@ -136,11 +136,11 @@
 
 // error message
 .ErrorMessage {
-    font-size: 1.25rem;
-    line-height: 1.875rem;
-    margin: 1rem 0;
-    color: mat-color($app-theme, 500);
-    border-top: 1px solid mat-color($app-theme, 500);
+  margin: 0.5rem 0;
+
+  font-size: 1.25rem;
+  line-height: 1.95rem;
+  color: mat-color($app-theme, 500);
 }
 
 
