@@ -55,6 +55,7 @@
     }
   },
   "SDK": {
+    "TooltipAlt": "Information",
     "SignInOut": {
       "SignIn": "Log In",
       "SignOut": "Log Out"
