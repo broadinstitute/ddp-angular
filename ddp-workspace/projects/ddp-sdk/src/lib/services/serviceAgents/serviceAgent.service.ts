@@ -39,7 +39,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            console.log('there is an error');
+                            this.logger.logError('ServiceAgent', 'There is an error');
                             if (error && error.status) {
                                 if (unrecoverableStatuses.indexOf(error.status) > -1) {
                                     return throwError(error);

@@ -5,6 +5,7 @@ import { map, take } from 'rxjs/operators';
 import { StudyLanguage } from '../models/studyLanguage';
 import { ConfigurationService } from '../services/configuration.service';
 import { LanguageService } from '../services/languageService.service';
+import { LoggingService } from '../services/logging.service';
 import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class ChangeLanguageRedirectComponent implements OnInit {
     private languageServiceAgent: LanguageServiceAgent,
     private route: ActivatedRoute,
     private router: Router,
+    private logger: LoggingService,
     @Inject('ddp.config') private config: ConfigurationService) {
   }
 
@@ -42,19 +44,19 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         // Try to switch to the specified language
         const langChangePromise: Promise<any> = this.languageService.changeLanguagePromise(this.lang);
         langChangePromise.catch(reason => {
-          console.error(`Could not change language to ${this.lang}: ${reason}.`);
+          this.logger.logError('ChangeLanguageRedirectComponent', `Could not change language to ${this.lang}: ${reason}.`);
         }).then(() => {
-          console.log(`Changed language to ${this.languageService.getCurrentLanguage()}`);
+          this.logger.logEvent('ChangeLanguageRedirectComponent', `Changed language to ${this.languageService.getCurrentLanguage()}`);
         }).finally(() => {
           // Do the redirect
-          this.router.navigate([this.dest], {relativeTo: this.route.root});
-          });
+          this.router.navigate([this.dest], { relativeTo: this.route.root });
+        });
       });
   }
 
   private getSupportedLanguagesPromise(): Promise<void> {
     return this.getPromiseFromObservable(this.languageServiceAgent.getConfiguredLanguages(this.config.studyGuid),
-      (languages => {this.supportedLanguages = languages; }));
+      (languages => { this.supportedLanguages = languages; }));
   }
 
   private getQueryParamInfo(): Promise<void> {
@@ -62,13 +64,13 @@ export class ChangeLanguageRedirectComponent implements OnInit {
       if (queryParams.has('language')) {
         this.lang = queryParams.get('language');
       } else {
-        console.error('Missing language query parameter!');
+        this.logger.logError('ChangeLanguageRedirectComponent', 'Missing language query parameter!');
       }
 
       if (queryParams.has('destination')) {
         this.dest = queryParams.get('destination');
       } else {
-        console.error('Missing destination query parameter!');
+        this.logger.logError('ChangeLanguageRedirectComponent', 'Missing destination query parameter!');
       }
     }));
   }

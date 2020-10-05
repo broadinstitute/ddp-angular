@@ -5,6 +5,7 @@ import {
   NGXTranslateService,
   SessionMementoService,
   UserProfileDecorator,
+  LoggingService
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
 import { Language, LanguagesToken } from '../../providers/languages.provider';
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
+              private logger: LoggingService,
               private ngxTranslate: NGXTranslateService,
               private translate: TranslateService,
               private currentActivityService: CurrentActivityService,
@@ -52,9 +54,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     const currentActivity$ = this.currentActivityService.getCurrentActivity().subscribe(x => {
       x && x.activityCode === this.activityToShowProgress
-      ? this.isProgressBarVisible = true
+        ? this.isProgressBarVisible = true
         : this.isProgressBarVisible = false;
-      });
+    });
     this.anchor.addNew(currentActivity$);
   }
 
@@ -76,8 +78,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userPreferencesServiceAgent.saveProfile(false, this.userProfileDecorator.profile)
         .pipe(take(1))
         .subscribe((data: UserProfileDecorator) => {
-            this.userProfileDecorator = data;
-            this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
+          this.userProfileDecorator = data;
+          this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
         });
     } else {
       this.runTranslator(language.code);
@@ -88,11 +90,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.translate.use(languageCode)
       .pipe(take(1))
       .subscribe(() => {
-      console.log(`Successfully initialized '${languageCode}' UI language.`);
-    }, () => {
-      console.error(`Problem with '${languageCode}' UI language initialization.
-      Default '${this.configuration.defaultLanguageCode}' UI language is used`);
-      this.translate.use(this.configuration.defaultLanguageCode);
-    });
+        this.logger.logEvent('HeaderComponent', `Successfully initialized '${languageCode}' UI language.`);
+      }, () => {
+        this.logger.logError('HeaderComponent', `Problem with '${languageCode}' UI language initialization.
+        Default '${this.configuration.defaultLanguageCode}' UI language is used`);
+        this.translate.use(this.configuration.defaultLanguageCode);
+      });
   }
 }

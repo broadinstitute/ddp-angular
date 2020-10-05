@@ -10,6 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { LoggingService } from '../../services/logging.service';
 
 
 @Directive({
@@ -38,6 +39,7 @@ describe('AddressInputComponent', () => {
           word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
           'label1');
     });
+    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug']);
 
     TestBed.configureTestingModule({
       declarations: [ AddressInputComponent, FakeAddressGoogleAutocomplete ],
@@ -45,6 +47,7 @@ describe('AddressInputComponent', () => {
         {provide: CountryService, useValue: countryServiceSpy},
         {provide: AddressService, useValue: addressServiceSpy},
         {provide: NGXTranslateService, useValue: translateServiceSpy},
+        {provide: LoggingService, useValue: loggingServiceSpy},
         AddressInputService],
       imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatInputModule, NoopAnimationsModule, TranslateTestingModule],
       // schemas needed to avoid problems with google autocomplete directive attributes in input element

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie';
 import { ConfigurationService } from './configuration.service';
@@ -10,12 +10,16 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
+    private log: LoggingService;
+
     constructor(
         @Inject('ddp.config') _configuration: ConfigurationService,
         private cookie: CookieService,
         _http: HttpClient,
-        _logger: LoggingService) {
+        _logger: LoggingService,
+        injector: Injector) {
         super(_configuration, _http, _logger);
+        this.log = injector.get(LoggingService);
     }
 
     public checkPassword(password: string): Observable<boolean> {
@@ -40,11 +44,11 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
     public handleError(error: HttpErrorResponse): Observable<boolean> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
+            this.log.logError('IrbPasswordService', `An error occurred: ${error.error.message}`);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
+            this.log.logError('IrbPasswordService', `Backend returned code ${error.status}, body was: ${error.error}`);
         }
         return of(false);
     }

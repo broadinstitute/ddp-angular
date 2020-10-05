@@ -3,11 +3,14 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { isNullOrUndefined } from 'util';
 import { Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { LoggingService } from './logging.service';
 
 @Injectable()
 export class LanguageService {
     private profileLanguageUpdateNotifier: Subject<void>;
-    constructor(private translate: TranslateService) {
+    constructor(
+      private logger: LoggingService,
+      private translate: TranslateService) {
       this.profileLanguageUpdateNotifier = new Subject<void>();
       this.profileLanguageUpdateNotifier.next();
     }
@@ -53,7 +56,7 @@ export class LanguageService {
         localStorage.setItem('studyLanguage', languageCode);
         return this.translate.use(languageCode).toPromise();
       } else {
-        console.log(`Error: cannot use language ${languageCode}`);
+        this.logger.logError('LanguageService', `Error: cannot use language ${languageCode}`);
         return null;
       }
     }

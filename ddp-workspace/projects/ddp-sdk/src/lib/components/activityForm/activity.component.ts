@@ -25,6 +25,7 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
     selector: 'ddp-activity',
@@ -204,6 +205,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
 
     constructor(
+        private logger: LoggingService,
         private windowRef: WindowRef,
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
@@ -225,7 +227,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.updateServerValidationMessages(response);
             },
             (error) => {
-                console.log('There has been unexpected error: ' + JSON.stringify(error, Object.getOwnPropertyNames(error)));
+                this.logger.logError('ActivityComponent',
+                    `There has been unexpected error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
                 this.navigateToErrorPage();
             }
         );
@@ -238,7 +241,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
         // Get notified of failure patching. Submission Manager has given up.
         const subErrSub = this.submissionManager.answerSubmissionFailure$.subscribe((error) => {
-            console.log('There was an error during submission:\n' + JSON.stringify(error, Object.getOwnPropertyNames(error)));
+            this.logger.logError('ActivityComponent',
+                `There was an error during submission: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
             return this.navigateToErrorPage();
         });
 
@@ -310,7 +314,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
             if (scroll) {
-              this.scrollToTop();
+                this.scrollToTop();
             }
             // enable any validation errors to be visible
             this.validationRequested = true;
@@ -330,9 +334,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             // if we move forwards or backwards, let's reset our validation display
             this.resetValidationState();
             this.currentSectionIndex = previousIndex;
-          if (scroll) {
-            this.scrollToTop();
-          }
+            if (scroll) {
+                this.scrollToTop();
+            }
         }
     }
 

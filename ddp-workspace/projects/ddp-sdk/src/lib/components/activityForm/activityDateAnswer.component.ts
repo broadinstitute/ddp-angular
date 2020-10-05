@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivityDateQuestionBlock } from '../../models/activity/activityDateQuestionBlock';
 import { DateField } from '../../models/activity/dateField';
 import { DatePickerValue } from '../../models/datePickerValue';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
     selector: 'ddp-activity-date-answer',
@@ -28,6 +29,8 @@ export class ActivityDateAnswer {
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<DatePickerValue> = new EventEmitter();
 
+    constructor(private logger: LoggingService) { }
+
     public handleChange(value: DatePickerValue | null): void {
         if (value == null) {
             return;
@@ -39,7 +42,7 @@ export class ActivityDateAnswer {
         };
         // Assign answer value and trigger validations.
         this.block.answer = dateValue;
-        console.log(`value ${JSON.stringify(dateValue)}`);
+        this.logger.logEvent('ActivityDateAnswer', `value ${JSON.stringify(dateValue)}`);
         // Emit answer value and trigger patch api call.
         this.valueChanged.emit(dateValue);
     }

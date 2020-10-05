@@ -10,12 +10,12 @@ export class Auth0RenewService {
     }
 
     public parseHash(auth0Hash: string): void {
-        console.log('parsing auth0 hash ' + auth0Hash);
+        this.log.logEvent('Auth0RenewService', `Parsing auth0 hash: ${auth0Hash}`);
         this.adapter.webAuth.parseHash(auth0Hash, (err, response) => {
             if (err) {
-                console.log('Error parsing auth0 jwt ' + auth0Hash + ' from hash', err);
+                this.log.logError('Auth0RenewService', `Error parsing auth0 jwt ${auth0Hash} from hash. Error: ${err}`);
             } else {
-                console.log('Renewed auth', response);
+                this.log.logEvent('Auth0RenewService', `Renewed auth: ${response}`);
                 this.adapter.setSession(response);
             }
         });

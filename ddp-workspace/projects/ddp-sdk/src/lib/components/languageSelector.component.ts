@@ -10,6 +10,7 @@ import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceA
 import { isNullOrUndefined } from 'util';
 import { iif, Observable, of, Subscription } from 'rxjs';
 import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
+import { LoggingService } from '../services/logging.service';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -43,6 +44,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   constructor(
     private serviceAgent: LanguageServiceAgent,
     private language: LanguageService,
+    private logger: LoggingService,
     private profileServiceAgent: UserProfileServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
     private session: SessionMementoService) { }
@@ -63,7 +65,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             return of(false);
           }
         } else {
-          console.error('Error: no configured language list was returned.');
+          this.logger.logError('LanguageSelectorComponent', 'Error: no configured language list was returned.');
           return of(false);
         }
       })
@@ -99,7 +101,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         }
       }
     } else {
-      console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
+      this.logger.logError('LanguageSelectorComponent',
+        `Error: The specified language: ${JSON.stringify(lang)} is not configured for the study.`);
     }
   }
 
@@ -140,7 +143,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.changeLanguage(language);
         return true;
       } else {
-        console.error('Error: no stored, profile, or default language found');
+        this.logger.logError('LanguageSelectorComponent', 'Error: no stored, profile, or default language found.');
         return false;
       }
     }));

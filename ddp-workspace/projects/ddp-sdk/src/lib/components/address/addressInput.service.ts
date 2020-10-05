@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Injectable, OnDestroy } from '@angular/core';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
-import { BehaviorSubject, merge, Observable, of, pipe, Subject, UnaryFunction, zip } from 'rxjs';
+import { BehaviorSubject, merge, Observable, of, pipe, Subject, UnaryFunction } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -14,7 +14,6 @@ import {
   scan,
   share,
   shareReplay,
-  skip,
   startWith,
   switchMap,
   take,
@@ -27,6 +26,7 @@ import { CountryService } from '../../services/addressCountry.service';
 import * as _ from 'underscore';
 import { Address } from '../../models/address';
 import { AddressService } from '../../services/address.service';
+import { LoggingService } from '../../services/logging.service';
 
 
 type CountryCache = Record<string, CountryAddressInfo>;
@@ -92,8 +92,12 @@ export class AddressInputService implements OnDestroy {
 
   ngUnsubscribe = new Subject<void>();
 
-  constructor(private countryService: CountryService, private addressService: AddressService,
-              private cdr: ChangeDetectorRef, phoneRequired: boolean) {
+  constructor(
+    private logger: LoggingService,
+    private countryService: CountryService, 
+    private addressService: AddressService,
+    private cdr: ChangeDetectorRef, 
+    phoneRequired: boolean) {
 
     this.addressForm = this.createForm(phoneRequired);
 
@@ -273,7 +277,7 @@ export class AddressInputService implements OnDestroy {
       concatMap(([googleAddress, componentState]) =>
         this.addressService.verifyAddress(googleAddress).pipe(
           catchError(() => {
-            console.debug('had an error calling easypost');
+            this.logger.logDebug('AddressInputService', 'Had an error calling easypost');
             return of(googleAddress);
           }),
           map(verifyResponse => new Address({ ...verifyResponse, ...{ guid: componentState.formData.guid } }))
@@ -396,7 +400,7 @@ export class AddressInputService implements OnDestroy {
   }
 
   private buildAutoCompleteAddress(autocompleteAddress: Address, name: string, phone: string): Address {
-    console.debug('Processing showAutomcoplete with:' + JSON.stringify(autocompleteAddress));
+    this.logger.logDebug('AddressInputService', `Processing showAutomcoplete with: ${JSON.stringify(autocompleteAddress)}`);
 
     const localAutocompleteAddress = new Address(autocompleteAddress);
     // capitalize incoming text
