@@ -1,49 +1,19 @@
 <header class="main-header">
-  <div class="main-header__container container">
+  <div class="main-header__container">
     <a class="main-header__logo logo" [href]="naa10FoundationLink" target="_blank">
       <img
-        src="assets/images/naa10-foundation-logo.png"
-        [alt]="'Header.Alts.Logo' | translate"
+        src="assets/images/naa10-foundation-logo-transparent.png"
         class="logo__img"
+        [alt]="'Header.Alts.Logo' | translate"
       />
     </a>
 
-    <nav class="main-header__nav">
-      <ul class="nav-list">
-        <li class="nav-list__item">
-          <ddp-sign-in-out></ddp-sign-in-out>
-        </li>
-
-        <li *ngIf="isAuthenticated" class="nav-list__item">
-          <a routerLink="dashboard" routerLinkActive="nav-list__link--active" class="nav-list__link nav-list__link--dashboard">
-            <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
-                 stroke-linejoin="round">
-                <g class="dashboard-icon_color" transform="translate(-385.000000, -41.000000)" stroke="#000000"
-                   stroke-width="1.5">
-                  <g transform="translate(386.000000, 40.000000)">
-                    <g transform="translate(0.000000, 2.000000)">
-                      <circle cx="10" cy="8.125" r="4.375"></circle>
-                      <path
-                        d="M15.7608333,17.3966667 C14.2362899,15.8625492 12.1628105,14.9998815 10,14.9998815 C7.83718949,14.9998815 5.76371015,15.8625492 4.23916667,17.3966667">
-                      </path>
-                      <circle cx="10" cy="10" r="9.375"></circle>
-                    </g>
-                  </g>
-                </g>
-              </g>
-            </svg>
-            <span translate>Common.Navigation.Dashboard</span>
-          </a>
-        </li>
-
-        <li *ngIf="!isAuthenticated" class="nav-list__item">
-          <a routerLink="share-my-data" class="button button_medium button_secondary" (click)="sendAnalytics()" translate>
-            Common.Buttons.ShareMyData
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div class="main-header__powered-by powered-by">
+      <img
+        class="powered-by__img"
+        src="assets/images/powered-by-rarex.png"
+        [alt]="'Header.Alts.PoweredBy' | translate"
+      />
+    </div>
   </div>
 </header>

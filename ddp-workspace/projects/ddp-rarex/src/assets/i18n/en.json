@@ -1,20 +1,19 @@
 {
   "Header": {
     "Alts": {
-      "Logo": "The NAA10 Foundation"
-    },
-    "PoweredBy": "Powered by"
+      "Logo": "The NAA10 Foundation",
+      "PoweredBy": "Powered by RARE-X"
+    }
   },
   "Footer": {
-    "PoweredBy": {
-      "Text": "Powered by",
-      "LogoAlt": "RARE-X"
-    },
     "Links": {
       "Home": "Home",
       "TermsAndConditions": "Terms and Conditions",
       "PrivacyPolicy": "Privacy Policy"
     }
+  },
+  "TopBar": {
+    "Text": "Patients' Data Powering Progress"
   },
   "pages": {
     "welcome": "Welcome Page"

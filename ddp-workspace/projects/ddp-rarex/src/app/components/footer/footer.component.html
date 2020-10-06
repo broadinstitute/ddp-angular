@@ -1,29 +1,13 @@
 <footer class="main-footer">
-  <div class="main-footer__container container">
-    <nav class="main-footer__nav">
-      <ul class="nav-list">
-        <li *ngFor="let link of navLinks" class="nav-list__item">
-          <a
-            [routerLink]="link.routePath"
-            class="nav-list__link"
-            translate
-          >{{ link.translationKey }}</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="main-footer__powered-by powered-by">
-      <p class="powered-by__text" translate>
-        Footer.PoweredBy.Text
-      </p>
-
-      <div class="powered-by__img-container">
-        <img
-          src="assets/images/rarex-logo-dark-transparent.png"
-          [alt]="'Footer.PoweredBy.LogoAlt' | translate"
-          class="powered-by__img"
-        />
-      </div>
-    </div>
-  </div>
+  <nav class="main-footer__nav">
+    <ul class="nav-list">
+      <li *ngFor="let link of navLinks" class="nav-list__item">
+        <a
+          [routerLink]="link.routePath"
+          class="nav-list__link"
+          translate
+        >{{ link.translationKey }}</a>
+      </li>
+    </ul>
+  </nav>
 </footer>

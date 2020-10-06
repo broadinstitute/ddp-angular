@@ -7,15 +7,30 @@
     display: flex;
     align-items: center;
 
-    padding: 1.2rem 2.4rem;
+    padding: 1.2rem;
+
+    @media only screen and (max-width: 600px) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
   }
 
   &__logo {
-    height: 7rem;
+    height: 7.4rem;
+
+    @media only screen and (max-width: 480px) {
+      height: 5.2rem;
+    }
   }
 
-  &__nav {
+  &__powered-by {
+    align-self: flex-end;
     margin-left: auto;
+    height: 3.6rem;
+
+    @media only screen and (max-width: 480px) {
+      height: 2.4rem;
+    }
   }
 }
 
@@ -26,51 +41,9 @@
   }
 }
 
-.nav-list {
-  display: flex;
-  align-items: center;
-
-  list-style: none;
-
-  &__item {
-    &:not(:last-child) {
-      margin-right: 2.8125rem;
-    }
-  }
-
-  &__link {
-    text-decoration: none;
-    font-size: 1.0625rem;
-    line-height: 1.375rem;
-    font-family: inherit;
-    white-space: nowrap;
-    color: mat-color($app-theme, 200);
-
-    cursor: pointer;
-
-    &:hover {
-      color: mat-color($app-theme, 650);
-      text-decoration: underline;
-
-      svg g g {
-        stroke: mat-color($app-theme, 650);
-      }
-    }
-
-    &:focus {
-      text-decoration: underline;
-    }
-
-    &--dashboard {
-      display: flex;
-      align-items: center;
-
-      span { margin-left: 0.35rem; }
-    }
-
-    &--active {
-      font-weight: bold;
-      text-decoration: underline;
-    }
+.powered-by {
+  &__img {
+    display: block;
+    height: 100%;
   }
 }

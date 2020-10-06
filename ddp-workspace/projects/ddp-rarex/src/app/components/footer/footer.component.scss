@@ -1,27 +1,28 @@
 @import '../../../app-theme';
 
 .main-footer {
+  padding: 0.8rem 1.2rem;
+
   background-color: mat-color($app-theme, 300);
 
-  &__container {
-    display: flex;
-    justify-content: space-between;
-
-    padding: 2.4rem;
+  &__nav {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
 .nav-list {
   display: flex;
+  justify-content: space-between;
 
   list-style: none;
 
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+
   &__item {
     margin: 0;
-
-    &:not(:last-child) {
-      margin-right: 2.4rem;
-    }
   }
 
   &__link {
@@ -32,22 +33,5 @@
     &:hover, focus {
       opacity: 0.8;
     }
-  }
-}
-
-.powered-by {
-  &__text {
-    margin: 0;
-
-    color: white;
-  }
-
-  &__img-container {
-    height: 4rem;
-  }
-
-  &__img {
-    display: block;
-    height: 100%;
   }
 }
