@@ -1,7 +1,7 @@
 @import '../../../app-theme';
 
 .activity-stepper {
-  margin: 0.5rem 0;
+  margin: 1.75rem 0;
 
   &__stepper-list {}
 }
@@ -9,27 +9,62 @@
 .stepper-list {
   display: flex;
   align-items: center;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
 
   list-style: none;
 
   &__item {
-    margin: 0.5em 0;
+    flex: 1;
+    height: 2.4rem;
 
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    opacity: 0.45;
+    position: relative;
 
-    transition: opacity 0.3s ease, color .3s ease;
+    font-size: 0;
+    line-height: 0;
 
-    &:not(:last-child) {
-      margin-right: 1.5rem;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+
+      display: block;
+      width: 100%;
+      height: 2px;
+
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+
+      background-color: mat-color($app-theme, 650);
+      transition: background-color 0.2s ease;
+    }
+
+    &::after {
+      content: '';
+
+      display: block;
+      width: 2.4rem;
+      height: 2.4rem;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      background-color: mat-color($app-theme, 650);
+      border-radius: 1.2rem;
+      transition: background-color .2s ease;
     }
 
     &--completed {
-      opacity: 0.75;
-      cursor: pointer;
+      &::before {
+        background-color: mat-color($app-theme, 300);
+      }
+
+      &::after {
+        background-color: mat-color($app-theme, 300);
+      }
     }
 
     &--incomplete {
@@ -37,8 +72,13 @@
     }
 
     &--active {
-      color: black;
-      opacity: 1;
+      &::before {
+        background-color: mat-color($app-theme, 350);
+      }
+
+      &::after {
+        background-color: mat-color($app-theme, 350);
+      }
     }
   }
 }
