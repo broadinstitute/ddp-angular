@@ -22,6 +22,7 @@ import * as _ from 'underscore';
 @Injectable()
 export class ActivityValidatorBuilder {
     private rules: Array<ValidationRuleFactoryMapping>;
+    private readonly LOG_SOURCE = 'ActivityValidatorBuilder';
 
     constructor(
         private dateService: DateService,
@@ -52,8 +53,7 @@ export class ActivityValidatorBuilder {
                 _.isBoolean(validationJson.allowSave) && (rule.allowSave = validationJson.allowSave);
                 rules.push(rule);
             } else {
-                this.logger.logError(
-                    `ActivityValidatorBuilder`,
+                this.logger.logError(this.LOG_SOURCE,
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }

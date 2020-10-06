@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
   activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  private readonly LOG_SOURCE = 'HeaderComponent';
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
@@ -90,9 +91,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.translate.use(languageCode)
       .pipe(take(1))
       .subscribe(() => {
-        this.logger.logEvent('HeaderComponent', `Successfully initialized '${languageCode}' UI language.`);
+        this.logger.logEvent(this.LOG_SOURCE, `Successfully initialized '${languageCode}' UI language.`);
       }, () => {
-        this.logger.logError('HeaderComponent', `Problem with '${languageCode}' UI language initialization.
+        this.logger.logError(this.LOG_SOURCE, `Problem with '${languageCode}' UI language initialization.
         Default '${this.configuration.defaultLanguageCode}' UI language is used`);
         this.translate.use(this.configuration.defaultLanguageCode);
       });

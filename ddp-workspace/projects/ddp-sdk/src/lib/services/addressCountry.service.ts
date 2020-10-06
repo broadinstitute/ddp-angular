@@ -17,6 +17,7 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     private allCountryInfoSummariesSubject$: ReplaySubject<CountryAddressInfoSummary[]> = new ReplaySubject();
     private anchor: Subscription;
     private log: LoggingService;
+    private readonly LOGGER_SOURCE = 'CountryService';
 
     constructor(
         session: SessionMementoService,
@@ -54,7 +55,7 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     }
 
     public findAllCountryInfoSummaries(): Observable<CountryAddressInfoSummary[]> {
-        this.log.logEvent('CountryService', 'Find all countryinfo summaries.');
+        this.log.logEvent(this.LOGGER_SOURCE, 'Find all countryinfo summaries.');
         return this.allCountryInfoSummariesSubject$.asObservable();
     }
 

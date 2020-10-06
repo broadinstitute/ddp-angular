@@ -28,6 +28,7 @@ export class ActivityDateAnswer {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<DatePickerValue> = new EventEmitter();
+    private readonly LOG_SOURCE = 'ActivityDateAnswer';
 
     constructor(private logger: LoggingService) { }
 
@@ -42,7 +43,7 @@ export class ActivityDateAnswer {
         };
         // Assign answer value and trigger validations.
         this.block.answer = dateValue;
-        this.logger.logEvent('ActivityDateAnswer', `value ${JSON.stringify(dateValue)}`);
+        this.logger.logEvent(this.LOG_SOURCE, `value ${JSON.stringify(dateValue)}`);
         // Emit answer value and trigger patch api call.
         this.valueChanged.emit(dateValue);
     }

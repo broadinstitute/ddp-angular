@@ -28,6 +28,7 @@ export class Auth0AdapterService implements OnDestroy {
     public webAuth: any;
     public adminWebAuth: any | null;
     private ngUnsubscribe = new Subject<any>();
+    private readonly LOG_SOURCE = 'Auth0AdapterService';
 
     constructor(
         @Inject('ddp.config') private configuration: ConfigurationService,
@@ -41,13 +42,13 @@ export class Auth0AdapterService implements OnDestroy {
         private language: LanguageService) {
         const doLocalRegistration = configuration.doLocalRegistration;
         if (doLocalRegistration) {
-            this.log.logEvent('Auth0AdapterService', 'issuing code-based auth');
+            this.log.logEvent(this.LOG_SOURCE, 'issuing code-based auth');
             this.webAuth = this.createLocalWebAuth(this.configuration.auth0ClientId);
             if (this.configuration.adminClientId !== null) {
                 this.adminWebAuth = this.createLocalWebAuth(this.configuration.adminClientId);
             }
         } else {
-            this.log.logEvent('Auth0AdapterService', 'logging in via token');
+            this.log.logEvent(this.LOG_SOURCE, 'logging in via token');
             this.webAuth = this.createWebAuth(this.configuration.auth0ClientId, this.configuration.loginLandingUrl);
             if (this.configuration.adminClientId !== null) {
                 this.adminWebAuth = this.createWebAuth(this.configuration.adminClientId, this.configuration.adminLoginLandingUrl);
@@ -119,7 +120,7 @@ export class Auth0AdapterService implements OnDestroy {
         }
         this.webAuth.authorize(
             auth0Params,
-            () => this.log.logError('Auth0AdapterService.showAuth0Modal', 'auth0 error'));
+            () => this.log.logError(`${this.LOG_SOURCE}.showAuth0Modal`, 'auth0 error'));
     }
 
     /**
@@ -172,15 +173,15 @@ export class Auth0AdapterService implements OnDestroy {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
-                this.log.logEvent('Auth0AdapterService.handleAuthentication', authResult);
+                this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication`, authResult);
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
-                this.log.logError('Auth0AdapterService.handleAuthentication', err);
+                this.log.logError(`${this.LOG_SOURCE}.handleAuthentication`, err);
                 let error = null;
                 try {
                     error = JSON.parse(decodeURIComponent(err.errorDescription));
                 } catch (e) {
-                    this.log.logError('Auth0AdapterService.handleAuthentication.Problem decoding authentication error', e);
+                    this.log.logError(`${this.LOG_SOURCE}.handleAuthentication.Problem decoding authentication error`, e);
                 }
                 if (onErrorCallback && error) {
                     // We might encounter errors from Auth0 that is not in expected
@@ -203,7 +204,7 @@ export class Auth0AdapterService implements OnDestroy {
         }
         this.adminWebAuth.authorize(
             auth0Params,
-            () => this.log.logError('Auth0AdapterService.adminLogin', 'auth0 error'));
+            () => this.log.logError(`${this.LOG_SOURCE}.adminLogin`, 'auth0 error'));
     }
 
     public handleAdminAuthentication(onErrorCallback?: (e: any | null) => void): void {
@@ -214,15 +215,15 @@ export class Auth0AdapterService implements OnDestroy {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult, true);
-                this.log.logEvent('Auth0AdapterService.handleAdminAuthentication', authResult);
+                this.log.logEvent(`${this.LOG_SOURCE}.handleAdminAuthentication`, authResult);
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
-                this.log.logError('Auth0AdapterService.handleAdminAuthentication', err);
+                this.log.logError(`${this.LOG_SOURCE}.handleAdminAuthentication`, err);
                 let error = null;
                 try {
                     error = JSON.parse(decodeURIComponent(err.errorDescription));
                 } catch (e) {
-                    this.log.logError('Auth0AdapterService.handleAdminAuthentication.Problem decoding authentication error', e);
+                    this.log.logError(`${this.LOG_SOURCE}.handleAdminAuthentication.Problem decoding authentication error`, e);
                 }
                 if (onErrorCallback && error) {
                     // We might encounter errors from Auth0 that is not in expected
@@ -235,13 +236,13 @@ export class Auth0AdapterService implements OnDestroy {
 
     public setSession(authResult, isAdmin: boolean = false): void {
         const decodedJwt = this.jwtHelper.decodeToken(authResult.idToken);
-        this.log.logEvent('Auth0AdapterService', `authResult: ${decodedJwt}`);
+        this.log.logEvent(this.LOG_SOURCE, `authResult: ${decodedJwt}`);
         const userGuid = decodedJwt['https://datadonationplatform.org/uid'];
 
         if (!userGuid) {
-            this.log.logError('Auth0AdapterService', `No user guid found in jwt: ${JSON.stringify(decodedJwt)}`);
+            this.log.logError(this.LOG_SOURCE, `No user guid found in jwt: ${JSON.stringify(decodedJwt)}`);
         } else {
-            this.log.logEvent('Auth0AdapterService', `Logged in user: ${userGuid}`);
+            this.log.logEvent(this.LOG_SOURCE, `Logged in user: ${userGuid}`);
         }
         let locale = decodedJwt['locale'];
         if (locale == null) {
@@ -256,7 +257,7 @@ export class Auth0AdapterService implements OnDestroy {
             decodedJwt['exp'] as number,
             authResult.participantGuid,
             isAdmin);
-        this.log.logEvent('Auth0AdapterService',
+        this.log.logEvent(this.LOG_SOURCE,
             `Successfully updated session token: ${JSON.stringify(decodedJwt)}`);
     }
 
@@ -265,7 +266,7 @@ export class Auth0AdapterService implements OnDestroy {
         const wasAdmin = this.session.session.isAdmin;
         // Remove tokens and expiry time from localStorage
         this.session.clear();
-        this.log.logEvent('Auth0AdapterService', 'logout');
+        this.log.logEvent(this.LOG_SOURCE, 'logout');
         this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
         const returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;
         if (wasAdmin) {

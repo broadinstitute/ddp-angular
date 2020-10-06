@@ -40,6 +40,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private studyLanguages: StudyLanguage[];
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
+  private readonly LOG_SOURCE = 'LanguageSelectorComponent';
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
@@ -65,7 +66,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             return of(false);
           }
         } else {
-          this.logger.logError('LanguageSelectorComponent', 'Error: no configured language list was returned.');
+          this.logger.logError(this.LOG_SOURCE, 'Error: no configured language list was returned.');
           return of(false);
         }
       })
@@ -101,7 +102,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         }
       }
     } else {
-      this.logger.logError('LanguageSelectorComponent',
+      this.logger.logError(this.LOG_SOURCE,
         `Error: The specified language: ${JSON.stringify(lang)} is not configured for the study.`);
     }
   }
@@ -143,7 +144,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.changeLanguage(language);
         return true;
       } else {
-        this.logger.logError('LanguageSelectorComponent', 'Error: no stored, profile, or default language found.');
+        this.logger.logError(this.LOG_SOURCE, 'Error: no stored, profile, or default language found.');
         return false;
       }
     }));

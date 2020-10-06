@@ -201,7 +201,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
   private stateSubscription: Subscription;
   private validationRequested$: Subject<boolean> = new Subject<boolean>();
-
+  private readonly LOG_SOURCE = 'AddressEmbeddedComponent'; 
 
   constructor(
     private addressService: AddressService,
@@ -232,7 +232,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
       scan((acc: ComponentState, update) => ({ ...acc, ...update })),
-      tap(state =>  this.logger.logDebug('AddressEmbeddedComponent', `New embeddedComponentState$=${state}`)),
+      tap(state =>  this.logger.logDebug(this.LOG_SOURCE, `New embeddedComponentState$=${state}`)),
       shareReplay(1)
     );
     this.stateSubscription = this.state$.pipe(
@@ -425,7 +425,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
         catchError((error) => {
-          this.logger.logWarning('AddressEmbeddedComponent', `There was a problems saving temp address: ${error}`);
+          this.logger.logWarning(this.LOG_SOURCE, `There was a problems saving temp address: ${error}`);
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
@@ -502,7 +502,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
         catchError(() => {
-          this.logger.logDebug('AddressEmbeddedComponent', 'Temp delete failed. This is OK.');
+          this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
@@ -646,7 +646,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => {
           this.ngUnsubscribe.next();
           this.ngUnsubscribe.complete();
-          this.logger.logDebug('AddressEmbeddedComponent', 'Unsubscribe completed.');
+          this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
         }),
         take(1)
     ).subscribe();

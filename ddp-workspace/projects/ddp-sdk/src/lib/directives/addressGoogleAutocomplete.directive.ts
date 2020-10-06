@@ -27,6 +27,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     private scriptLoader$: Observable<any>;
     private countryCode$: Subject<string> = new Subject();
     private ngUnsubscribe = new Subject();
+    private readonly LOG_SOURCE = 'AddressGoogleAutocompleteDirective';
 
     constructor(private autocompleteInput: ElementRef,
         private scriptLoader: ScriptLoaderService,
@@ -46,7 +47,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
                     this.setupAutocomplete();
                 }
             },
-            () => this.logger.logWarning('AddressGoogleAutocompleteDirective', 'Could not load google-maps-places script.'));
+            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.'));
         // making sure that any countryCodes handled AFTER scriptloader has processed
         this.scriptLoader$.pipe(concat(this.countryCode$), skip(1), takeUntil(this.ngUnsubscribe)).subscribe((countryCode) => {
             const restrictions = this.buildAutocompleteComponentRestrictions();

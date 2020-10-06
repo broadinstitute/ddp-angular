@@ -12,6 +12,7 @@ export class ActivitySandboxComponent implements OnDestroy {
     public stepper = false;
     public totalCount = 0;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'ActivitySandboxComponent';
 
     constructor(
         private logger: LoggingService,
@@ -33,6 +34,6 @@ export class ActivitySandboxComponent implements OnDestroy {
 
     public handleLoadResponse(event) {
         // FIXME: do something with event or remove this from template
-        this.logger.logEvent('ActivitySandboxComponent', event);
+        this.logger.logEvent(this.LOG_SOURCE, event);
     }
 }

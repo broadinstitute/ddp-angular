@@ -8,6 +8,8 @@ import { LoggingService } from './logging.service';
 @Injectable()
 export class LanguageService {
     private profileLanguageUpdateNotifier: Subject<void>;
+    private readonly LOG_SOURCE = 'LanguageService';
+
     constructor(
       private logger: LoggingService,
       private translate: TranslateService) {
@@ -56,7 +58,7 @@ export class LanguageService {
         localStorage.setItem('studyLanguage', languageCode);
         return this.translate.use(languageCode).toPromise();
       } else {
-        this.logger.logError('LanguageService', `Error: cannot use language ${languageCode}`);
+        this.logger.logError(this.LOG_SOURCE, `Error: cannot use language ${languageCode}`);
         return null;
       }
     }

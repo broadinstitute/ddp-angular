@@ -91,6 +91,7 @@ export class AddressInputService implements OnDestroy {
   readonly stateLabel$: Observable<string>;
 
   ngUnsubscribe = new Subject<void>();
+  private readonly LOG_SOURCE = 'AddressInputService';
 
   constructor(
     private logger: LoggingService,
@@ -277,7 +278,7 @@ export class AddressInputService implements OnDestroy {
       concatMap(([googleAddress, componentState]) =>
         this.addressService.verifyAddress(googleAddress).pipe(
           catchError(() => {
-            this.logger.logDebug('AddressInputService', 'Had an error calling easypost');
+            this.logger.logDebug(this.LOG_SOURCE, 'Had an error calling easypost');
             return of(googleAddress);
           }),
           map(verifyResponse => new Address({ ...verifyResponse, ...{ guid: componentState.formData.guid } }))
@@ -400,7 +401,7 @@ export class AddressInputService implements OnDestroy {
   }
 
   private buildAutoCompleteAddress(autocompleteAddress: Address, name: string, phone: string): Address {
-    this.logger.logDebug('AddressInputService', `Processing showAutomcoplete with: ${JSON.stringify(autocompleteAddress)}`);
+    this.logger.logDebug(this.LOG_SOURCE, `Processing showAutomcoplete with: ${JSON.stringify(autocompleteAddress)}`);
 
     const localAutocompleteAddress = new Address(autocompleteAddress);
     // capitalize incoming text

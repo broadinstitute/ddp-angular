@@ -34,6 +34,7 @@ export class PopupWithCheckboxComponent {
   @Input() buttonText: string;
 
   public isAuthenticated: boolean;
+  private readonly LOG_SOURCE = 'PopupWithCheckboxComponent';
   @ViewChild('modal', { static: true }) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
@@ -56,7 +57,7 @@ export class PopupWithCheckboxComponent {
   }
 
   public close(languageConfirmed: boolean): void {
-    this.logger.logEvent('PopupWithCheckboxComponent', languageConfirmed);
+    this.logger.logEvent(this.LOG_SOURCE, languageConfirmed);
     this.dialog.closeAll();
   }
 }

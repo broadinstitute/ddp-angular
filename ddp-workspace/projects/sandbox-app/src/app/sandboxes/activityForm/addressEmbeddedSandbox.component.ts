@@ -17,7 +17,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   public bogusAddress = null;
   private anchor: CompositeDisposable;
   public block: MailAddressBlock;
-
+  private readonly LOG_SOURCE = 'AddressEmbeddedSandboxComponent';
 
   constructor(
     private logger: LoggingService,
@@ -34,9 +34,9 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
     const get = this.activityService.getActivities(new BehaviorSubject('TESTSTUDY1')).subscribe((result) => {
       if (result && _.isArray(result) && result.length > 0) {
         this.activityInstanceGuid = result[0].instanceGuid;
-        this.logger.logEvent('AddressEmbeddedSandboxComponent', `Got an activityIntanceGuid: ${this.activityInstanceGuid}`);
+        this.logger.logEvent(this.LOG_SOURCE, `Got an activityIntanceGuid: ${this.activityInstanceGuid}`);
       } else {
-        this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Could not find and activity');
+        this.logger.logEvent(this.LOG_SOURCE, 'Could not find and activity');
       }
     });
     this.anchor.addNew(get);
@@ -52,13 +52,13 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
 
   public deleteTempAddress(): void {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
-      () => this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Temp address deleted'));
+      () => this.logger.logEvent(this.LOG_SOURCE, 'Temp address deleted'));
     this.anchor.addNew(del);
   }
 
   public toggleReadOnly() {
     this.isReadOnly = !(this.isReadOnly);
-    this.logger.logEvent('AddressEmbeddedSandboxComponent', `Readonly has been toggled to : ${this.isReadOnly}`);
+    this.logger.logEvent(this.LOG_SOURCE, `Readonly has been toggled to : ${this.isReadOnly}`);
   }
 
   public setBogusAddress(): void {
@@ -82,7 +82,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
         } else {
           return empty();
         }
-      })).subscribe(() => this.logger.logEvent('AddressEmbeddedSandboxComponent', 'Address was deleted'));
+      })).subscribe(() => this.logger.logEvent(this.LOG_SOURCE, 'Address was deleted'));
     this.anchor.addNew(address);
   }
 }

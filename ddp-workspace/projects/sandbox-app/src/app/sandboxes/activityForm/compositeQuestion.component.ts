@@ -22,7 +22,7 @@ interface ActivityRule {
   templateUrl: 'compositeQuestion.component.html'
 })
 export class CompositeQuestionComponent extends QuestionComponent<ActivityCompositeQuestionBlock> implements OnInit {
-
+  private readonly LOG_SOURCE = 'CompositeQuestionComponent';
   private questionRules: ActivityRule[];
 
   constructor(private logger: LoggingService) {
@@ -154,7 +154,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
       questionBlock = block.func(question);
     } else {
       // TODO throw an Exception here?
-      this.logger.logWarning('CompositeQuestionComponent', `Received question of type ${question.questionType} that we do not know how to handle`);
+      this.logger.logWarning(this.LOG_SOURCE, `Received question of type ${question.questionType} that we do not know how to handle`);
       return null;
     }
     questionBlock.question = question.question;

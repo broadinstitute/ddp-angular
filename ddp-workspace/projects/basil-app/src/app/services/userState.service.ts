@@ -9,6 +9,7 @@ export class UserStateService {
     public studyGuid = 'TESTSTUDY1';
     private consentCode = '1S2G7MIPZT';
     private _state: UserState;
+    private readonly LOG_SOURCE = 'UserStateService';
 
     constructor(
         private logger: LoggingService,
@@ -41,7 +42,7 @@ export class UserStateService {
                     }
                 },
                 (s: any, x: any) => {
-                    this.logger.logEvent('UserStateService', s);
+                    this.logger.logEvent(this.LOG_SOURCE, s);
                     return {
                         session: s != null,
                         consent: x.consent,

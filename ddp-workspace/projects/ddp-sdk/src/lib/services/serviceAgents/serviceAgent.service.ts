@@ -11,6 +11,8 @@ import { flatMap, catchError, map, filter, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceAgent<TEntity> {
+    private readonly LOG_SOURCE = 'ServiceAgent';
+
     constructor(
         @Inject('ddp.config') protected configuration: ConfigurationService,
         private http: HttpClient,
@@ -26,7 +28,7 @@ export class ServiceAgent<TEntity> {
         const getObservable: Observable<TEntity | null> = this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('ServiceAgent.get::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.get::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.get(
@@ -39,14 +41,14 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError('ServiceAgent', 'There is an error');
+                            this.logger.logError(this.LOG_SOURCE, 'There is an error');
                             if (error && error.status) {
                                 if (unrecoverableStatuses.indexOf(error.status) > -1) {
                                     return throwError(error);
                                 }
                             }
                             const exception = new CommunicationException('HTTP GET: ' + url, error);
-                            this.logger.logException('ServiceAgent', exception);
+                            this.logger.logException(this.LOG_SOURCE, exception);
                             return of(null);
                         }),
                         map(data => data && data['body']),
@@ -76,7 +78,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('ServiceAgent.post::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.post::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.post(
@@ -90,7 +92,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP POST: ' + url, error);
-                            this.logger.logException('ServiceAgent', exception);
+                            this.logger.logException(this.LOG_SOURCE, exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -112,7 +114,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('ServiceAgent.patch::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.patch::${path}`, 'Authorization required');
                     if (throwErrorObject) {
                         return throwError(new Error('No user session available'));
                     } else {
@@ -130,7 +132,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP PATCH: ' + url, error);
-                            this.logger.logException('ServiceAgent', exception);
+                            this.logger.logException(this.LOG_SOURCE, exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -153,7 +155,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('ServiceAgent.put::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.put::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.put(
@@ -167,7 +169,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP PUT: ' + url, error);
-                            this.logger.logException('ServiceAgent', exception);
+                            this.logger.logException(this.LOG_SOURCE, exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -189,7 +191,7 @@ export class ServiceAgent<TEntity> {
             filter(x => x != null),
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('ServiceAgent.delete::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.delete::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.delete(
@@ -202,7 +204,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             const exception = new CommunicationException('HTTP DELETE: ' + url, error);
-                            this.logger.logException('ServiceAgent', exception);
+                            this.logger.logException(this.LOG_SOURCE, exception);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -215,14 +217,14 @@ export class ServiceAgent<TEntity> {
     }
 
     protected getHeaders(options: any): Observable<any> {
-        this.logger.logEvent('ServiceAgent', 'About to get the headers')
+        this.logger.logEvent(this.LOG_SOURCE, 'About to get the headers')
         const headers = Object.assign({
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             withCredentials: false,
             observe: 'response',
             responseType: 'json'
         }, options);
-        this.logger.logEvent('ServiceAgent', `The headers are: ${JSON.stringify(headers)}`)
+        this.logger.logEvent(this.LOG_SOURCE, `The headers are: ${JSON.stringify(headers)}`)
         return of(headers);
     }
 

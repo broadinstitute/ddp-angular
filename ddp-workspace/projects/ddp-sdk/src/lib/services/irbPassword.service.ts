@@ -11,6 +11,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable()
 export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
     private log: LoggingService;
+    private readonly LOGGER_SOURCE = 'IrbPasswordService';
 
     constructor(
         @Inject('ddp.config') _configuration: ConfigurationService,
@@ -44,11 +45,11 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
     public handleError(error: HttpErrorResponse): Observable<boolean> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            this.log.logError('IrbPasswordService', `An error occurred: ${error.error.message}`);
+            this.log.logError(this.LOGGER_SOURCE, `An error occurred: ${error.error.message}`);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            this.log.logError('IrbPasswordService', `Backend returned code ${error.status}, body was: ${error.error}`);
+            this.log.logError(this.LOGGER_SOURCE, `Backend returned code ${error.status}, body was: ${error.error}`);
         }
         return of(false);
     }

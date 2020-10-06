@@ -16,6 +16,7 @@ import { catchError, filter, first, map } from 'rxjs/operators';
 @Injectable()
 export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
   private log: LoggingService;
+  private readonly LOGGER_SOURCE = 'UserPreferencesServiceAgent';
 
   constructor(
     session: SessionMementoService,
@@ -52,7 +53,7 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
       profile.preferredLanguage = this.configuration.defaultLanguageCode;
       return this.postObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(catchError(e => {
-          this.log.logError('UserPreferencesServiceAgent', `Error occurred on user profile creation: ${JSON.stringify(e)}`);
+          this.log.logError(this.LOGGER_SOURCE, `Error occurred on user profile creation: ${JSON.stringify(e)}`);
           return throwError(e);
         }));
     } else {

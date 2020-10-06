@@ -21,6 +21,7 @@ import {
 })
 export class AdminLoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
+  private readonly LOG_SOURCE = 'AdminLoginLandingComponent';
 
   constructor(
     private router: Router,
@@ -53,7 +54,7 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      this.logger.logError('AdminLoginLandingComponent', error);
+      this.logger.logError(this.LOG_SOURCE, error);
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }

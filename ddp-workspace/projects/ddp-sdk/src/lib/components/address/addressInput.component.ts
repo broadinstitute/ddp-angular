@@ -165,7 +165,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    */
   @Input()
   set address(address: Address) {
-    this.logger.logDebug('AddressInputComponent', `Setting address: ${JSON.stringify(address)}`);
+    this.logger.logDebug(this.LOG_SOURCE, `Setting address: ${JSON.stringify(address)}`);
     this.ais.inputAddress$.next(address);
   }
   @Input()
@@ -213,6 +213,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   public ais: AddressInputService;
 
   private ngUnsubscribe = new Subject();
+  private readonly LOG_SOURCE = 'AddressInputComponent';
 
   // See if we can continue making stuff in form observable as much as possible
   constructor(
@@ -249,8 +250,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     ).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();
 
-    this.valueChanged.subscribe((address) => this.logger.logDebug('AddressInputComponent', `The address we got was: ${JSON.stringify(address)}`));
-    this.componentBusy.subscribe((isBusy) => this.logger.logDebug('AddressInputComponent', `Is busy? ${isBusy}`));
+    this.valueChanged.subscribe((address) => this.logger.logDebug(this.LOG_SOURCE, `The address we got was: ${JSON.stringify(address)}`));
+    this.componentBusy.subscribe((isBusy) => this.logger.logDebug(this.LOG_SOURCE, `Is busy? ${isBusy}`));
 
     this.setupBlockChromeStreet1Autofill();
 

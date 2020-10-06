@@ -9,6 +9,8 @@ import { Auth0RenewService, Auth0AdapterService, LoggingService } from 'ddp-sdk'
 </button>`
 })
 export class SilentRenewComponent implements OnInit {
+  private readonly LOG_SOURCE = 'SilentRenewComponent';
+
   constructor(
     private logger: LoggingService,
     private auth0: Auth0RenewService,
@@ -16,7 +18,7 @@ export class SilentRenewComponent implements OnInit {
 
   public ngOnInit(): void {
     if (window.location.hash) {
-      this.logger.logEvent('SilentRenewComponent', `Loading silent renew callback: ${window.location.hash}`);
+      this.logger.logEvent(this.LOG_SOURCE, `Loading silent renew callback: ${window.location.hash}`);
       this.auth0.parseHash(window.location.hash);
     }
   }

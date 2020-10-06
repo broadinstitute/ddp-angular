@@ -14,6 +14,7 @@ export class CookiesManagementService {
   private readonly cookiesTypes: Array<CookiesTypes>;
   private readonly cookiesConsentStorageName: string;
   private readonly isAuthenticated: boolean;
+  private readonly LOG_SOURCE = 'CookiesManagementService';
   private hasToSetCookiesPreferences: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor(@Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
@@ -99,6 +100,6 @@ export class CookiesManagementService {
 
   private logConsentUpdate(): void {
     const loggerEvent = 'Cookies preferences update event occurred. Status: ' + this.consent.status;
-    this.logger.logEvent('CookiesManagementService', loggerEvent);
+    this.logger.logEvent(this.LOG_SOURCE, loggerEvent);
   }
 }

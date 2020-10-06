@@ -45,6 +45,7 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   public activityInstance$: Observable<ActivityInstanceGuid | null>;
   private ngUnsubscribe = new Subject();
   private anchor: Subscription = new Subscription();
+  private readonly LOG_SOURCE = 'ModalActivityButtonComponent';
   @ViewChild('modal', { static: true }) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
@@ -95,8 +96,8 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
             this.instanceGuid.next(x.instanceGuid);
             return x;
           } else {
-            this.logger.logError('ModalActivityButtonComponent.Could not create the activity instance for study activity guid:'
-              + this.activityGuid, 'Creating new activity instance in modal');
+            this.logger.logError(`${this.LOG_SOURCE}.Could not create the activity instance for study activity guid: ${this.activityGuid}`,
+              'Creating new activity instance in modal');
             return null;
           }
         }))

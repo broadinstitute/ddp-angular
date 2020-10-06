@@ -15,6 +15,7 @@ import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceA
 export class ChangeLanguageRedirectComponent implements OnInit {
   private lang: string = null;
   private supportedLanguages: StudyLanguage[] = null;
+  private readonly LOG_SOURCE = 'ChangeLanguageRedirectComponent';
 
   // The destination to redirect to, relative to the main site
   private dest: string = null;
@@ -44,9 +45,9 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         // Try to switch to the specified language
         const langChangePromise: Promise<any> = this.languageService.changeLanguagePromise(this.lang);
         langChangePromise.catch(reason => {
-          this.logger.logError('ChangeLanguageRedirectComponent', `Could not change language to ${this.lang}: ${reason}.`);
+          this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}: ${reason}.`);
         }).then(() => {
-          this.logger.logEvent('ChangeLanguageRedirectComponent', `Changed language to ${this.languageService.getCurrentLanguage()}`);
+          this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
         }).finally(() => {
           // Do the redirect
           this.router.navigate([this.dest], { relativeTo: this.route.root });
@@ -64,13 +65,13 @@ export class ChangeLanguageRedirectComponent implements OnInit {
       if (queryParams.has('language')) {
         this.lang = queryParams.get('language');
       } else {
-        this.logger.logError('ChangeLanguageRedirectComponent', 'Missing language query parameter!');
+        this.logger.logError(this.LOG_SOURCE, 'Missing language query parameter!');
       }
 
       if (queryParams.has('destination')) {
         this.dest = queryParams.get('destination');
       } else {
-        this.logger.logError('ChangeLanguageRedirectComponent', 'Missing destination query parameter!');
+        this.logger.logError(this.LOG_SOURCE, 'Missing destination query parameter!');
       }
     }));
   }

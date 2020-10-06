@@ -80,14 +80,15 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        logger.logEvent('AppModule', `Successfully initialized '${locale}' language as default.`);
+        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
       }, err => {
-        logger.logError('AppModule', `Problem with '${locale}' language initialization: ${err}`);
+        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });

@@ -203,6 +203,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     // one subject per section
     public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
+    private readonly LOG_SOURCE = 'ActivityComponent';
 
     constructor(
         private logger: LoggingService,
@@ -227,7 +228,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.updateServerValidationMessages(response);
             },
             (error) => {
-                this.logger.logError('ActivityComponent',
+                this.logger.logError(this.LOG_SOURCE,
                     `There has been unexpected error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
                 this.navigateToErrorPage();
             }
