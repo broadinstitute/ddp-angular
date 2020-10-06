@@ -30,12 +30,12 @@ import { ActivitiesLoadNotificationService } from '../../../services/activities-
   selector: 'ddp-user-activities',
   template: `
     <div [hidden]="!loaded">
-    <mat-table #table [dataSource]="dataSource"  data-ddp-test="activitiesTable" class="ddp-dashboard">
+    <mat-table #table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate">
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"  class="padding-5">
+        <mat-cell *matCellDef="let element" class="padding-5">
           <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
           <button class="dashboard-activity-button Link"
                 [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
@@ -196,7 +196,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   public dataSource: UserActivitiesDataSource;
   public loaded = false;
   private states: Array<ActivityInstanceState> | null = null;
-  private readonly studyGuidObservable: BehaviorSubject<string | null>;
+  private studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
 
   constructor(
