@@ -10,7 +10,6 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
@@ -106,14 +105,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: RoutePaths.ShareMyData,
-    component: ShareMyDataComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard
-    ]
-  },
-  {
     path: RoutePaths.LoginLandingWithMode,
     component: RedirectToAuth0LoginRedesignedComponent,
     canActivate: [IrbGuard]
@@ -134,7 +125,7 @@ const routes: Routes = [
   },
   {
       path: RoutePaths.Welcome,
-      component: WelcomeComponent,
+      component: ShareMyDataComponent,
       pathMatch: 'full',
       canActivate: [IrbGuard]
   },

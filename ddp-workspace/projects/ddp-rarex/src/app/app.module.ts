@@ -25,7 +25,6 @@ import { RarexActivityPageComponent } from './components/rarex-activity-page/rar
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
@@ -91,7 +90,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatProgressSpinnerModule
   ],
   declarations: [
-    WelcomeComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
