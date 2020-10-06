@@ -4,7 +4,6 @@ export enum RoutePaths {
   Auth = 'auth',
   LoginLanding = 'login-landing',
   LoginLandingWithMode = 'login-landing/:mode',
-  ShareMyData = 'share-my-data',
   Dashboard = 'dashboard',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
