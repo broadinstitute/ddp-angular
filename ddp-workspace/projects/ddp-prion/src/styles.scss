@@ -573,61 +573,86 @@ input.mat-input-element.study-listing-filter {
   margin-top: 0;
 }
 
-//Inside the table
+.scroll-table-container {
+    overflow: scroll;
+}
+
 .study-listing-table {
-  table-layout: fixed;
-  overflow-wrap: break-word;
+    table-layout: fixed;
+    overflow-wrap: break-word;
 
-  //Add color striping
-  .filter-row, tbody>tr:nth-of-type(even) {
-    background-color: #f9f9f9;
-  }
+    //Add color striping
+    .filter-row, tbody>tr:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
 
-  //Longer second column
-  th:nth-of-type(2) {
-    width: 30%;
-  }
+    //Longer second column
+    th:nth-of-type(2) {
+        width: 30%;
+    }
 
-  //Make cell padding consistent
-  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type,
-  th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type
-  {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
+    //Make cell padding consistent
+    th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type,
+    th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type
+    {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
 
-  //Table headers
-  th {
-    font-weight: bold;
-    font-size: 15px;
-    color: #333;
-  }
+    //Table headers
+    th {
+        font-weight: bold;
+        font-size: 15px;
+        color: #333;
+    }
 
-  tr.mat-header-row {
-    height: unset;
-  }
+    tr.mat-header-row {
+        height: unset;
+    }
 
-  //Filter header row
-  .study-listing-filter-col {
-    width: auto;
-  }
+    //Filter header row
+    .study-listing-filter-col {
+        width: auto;
+    }
 
-  .filter-cell {
-    border-bottom-width: 1px;
-  }
+    .filter-cell {
+        border-bottom-width: 1px;
+    }
 
-  //Table body
-  td {
-    display: table-cell;
-  }
+    //Table body
+    td {
+        display: table-cell;
+    }
 
-  .mat-cell {
-    font-size: 15px;
-  }
+    .mat-cell {
+        font-size: 15px;
+    }
 
-  dt {
-    font-weight: 400;
-  }
+    dt {
+        font-weight: 400;
+    }
+}
+
+//Inside the table
+@media only screen and (max-width: 767px) {
+    .scroll-table-container {
+        width: 662px !important;
+    }
+
+    .study-listing-table {
+        th:nth-of-type(2) {
+            width: 20% !important;
+        }
+        th:nth-of-type(3) {
+            width: 16% !important;
+        }
+        th:nth-of-type(5) {
+            width: 20% !important;
+        }
+        th:nth-of-type(6) {
+            width: 16% !important;
+        }
+    }
 }
 
 .ddp-dashboard {
@@ -3178,7 +3203,7 @@ p.Medium {
     padding: 0 0 12px 0;
   }
 
-  .mat-header-row {
+  .ddp-dashboard .mat-header-row {
     display: none;
   }
 
