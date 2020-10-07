@@ -24,7 +24,6 @@
   }
 
   &__powered-by {
-    align-self: flex-end;
     margin-left: auto;
   }
 }
@@ -49,7 +48,7 @@
   }
 
   &__img {
-    height: 2.8rem;
+    height: 3.2rem;
 
     @media only screen and (max-width: 480px) {
       height: 2.4rem;
