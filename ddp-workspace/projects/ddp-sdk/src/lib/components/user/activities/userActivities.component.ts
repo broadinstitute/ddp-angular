@@ -24,13 +24,12 @@ import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { tap, mergeMap, take } from 'rxjs/operators';
-import { ActivitiesLoadNotificationService } from '../../../services/activities-load-notification.service';
 
 @Component({
   selector: 'ddp-user-activities',
   template: `
     <div [hidden]="!loaded">
-    <mat-table #table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
+    <mat-table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate">
@@ -193,6 +192,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   @Input() studyGuid: string;
   @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
+  @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public dataSource: UserActivitiesDataSource;
   public loaded = false;
   private states: Array<ActivityInstanceState> | null = null;
@@ -206,8 +206,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private activityServiceAgent: ActivityServiceAgent,
     private analytics: AnalyticsEventsService,
     @Inject('ddp.config') private config: ConfigurationService,
-    public domSanitizationService: DomSanitizer,
-    private loadNotificationService: ActivitiesLoadNotificationService) {
+    public domSanitizationService: DomSanitizer) {
     this.studyGuidObservable = new BehaviorSubject<string | null>(null);
   }
 
@@ -230,7 +229,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // 'loaded' flag
         ).subscribe(x => {
           this.loaded = !x;
-          this.loadNotificationService.addLoadNotification(!x);
+          this.loadedEvent.emit(this.loaded);
         });
   }
 
@@ -249,7 +248,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
 
   public ngOnDestroy(): void {
     this.loadingAnchor.unsubscribe();
-    this.loadNotificationService.addLoadNotification(false);
+    this.loadedEvent.emit(false);
   }
 
   public openActivity(guid: string, code: string): void {

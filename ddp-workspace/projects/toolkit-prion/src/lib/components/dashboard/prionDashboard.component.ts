@@ -1,8 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { AnnouncementsServiceAgent, ActivitiesLoadNotificationService } from 'ddp-sdk';
 import { TranslateService } from '@ngx-translate/core';
+import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { DashboardComponent, ToolkitConfigurationService } from 'toolkit';
 
 export interface StaticActivity {
@@ -21,7 +20,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
     created: 'Toolkit.Dashboard.StudyListing.ActivityCreated',
     summary: 'Toolkit.Dashboard.StudyListing.ActivitySummary',
     actions: 'Toolkit.Dashboard.StudyListing.ActivityActions',
-    readOnly: 'notApplicable',
+    readOnly: 'true',
     url: 'study-listing'}
 ];
 
@@ -48,7 +47,8 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                 </ng-container>
                 <section class="PageContent-section">
                   <ddp-dashboard [studyGuid]="studyGuid"
-                                 (open)="navigate($event)">
+                                 (open)="navigate($event)"
+                                 (loadedEvent)="loadStaticActivities($event)">
                   </ddp-dashboard>
                   <mat-table *ngIf="this.displayStaticActivities" [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
                              class="ddp-dashboard ddp-dashboard-static dataTable">
@@ -128,39 +128,28 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
         </article>
       </div>`
 })
-export class PrionDashboardComponent extends DashboardComponent implements OnInit, OnDestroy {
+export class PrionDashboardComponent extends DashboardComponent implements OnInit {
   public dataSource = STATIC_ACTIVITIES;
   public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
-  public dataLoaded: Observable<boolean>;
   public displayStaticActivities = false;
-  private sub: Subscription;
 
   constructor(
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
         @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
-        public translator: TranslateService,
-        private dashboardService: ActivitiesLoadNotificationService) {
+        public translator: TranslateService) {
         super(_router, _announcements, _toolkitConfiguration);
   }
 
   public ngOnInit(): void {
     super.ngOnInit();
-    this.displayStaticActivities = false;
-    this.dataLoaded = this.dashboardService.getActivityLoadNotifier();
-    this.sub = this.dataLoaded.subscribe(value => {
-      this.displayStaticActivities = value;
-    });
-  }
-
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 
   public navigateToUrl(url: string): void {
     this._router.navigateByUrl(url);
+  }
+
+  public loadStaticActivities(shouldLoad: boolean): void {
+    this.displayStaticActivities = shouldLoad;
   }
 }

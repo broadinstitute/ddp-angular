@@ -81,7 +81,6 @@ export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/userServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
-export * from './lib/services/activities-load-notification.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
