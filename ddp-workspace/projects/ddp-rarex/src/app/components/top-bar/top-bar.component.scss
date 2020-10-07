@@ -1,9 +1,9 @@
-@import '../../../app-theme';
+@import "../../../app-theme";
 
 .top-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   padding: 0.6rem 1.2rem;
 
@@ -12,13 +12,6 @@
   @media only screen and (max-width: 480px) {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  &__text {
-    margin: 0;
-
-    font-size: 1.125rem;
-    color: mat-color($app-theme, 450);
   }
 }
 
