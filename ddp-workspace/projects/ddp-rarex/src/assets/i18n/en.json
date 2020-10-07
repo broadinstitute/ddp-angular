@@ -3,7 +3,8 @@
     "Alts": {
       "Logo": "The NAA10 Foundation",
       "PoweredBy": "Powered by RARE-X"
-    }
+    },
+    "Catchphrase": "Patients' Data Powering Progress"
   },
   "Footer": {
     "Links": {
@@ -11,9 +12,6 @@
       "TermsAndConditions": "Terms and Conditions",
       "PrivacyPolicy": "Privacy Policy"
     }
-  },
-  "TopBar": {
-    "Text": "Patients' Data Powering Progress"
   },
   "pages": {
     "welcome": "Welcome Page"
