@@ -15,5 +15,7 @@ export enum RoutePaths {
   Demographics = 'demographics',
   GeneralMedicalBackgroundSurvey = 'general-medical-background',
   GeneralNeuroDevelopment = 'general-neuro-development',
-  QualityOfLife = 'quality-of-life'
+  QualityOfLife = 'quality-of-life',
+  ParentalConsent = 'parental-consent',
+  ConsentAssent = 'consent-assent',
 }

@@ -96,6 +96,30 @@ const routes: Routes = [
     }
   },
   {
+    path: RoutePaths.ParentalConsent,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard,
+    ],
+    data: {
+      activityCode: ActivityCodes.PARENTAL_CONSENT,
+    },
+  },
+  {
+    path: RoutePaths.ConsentAssent,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard,
+    ],
+    data: {
+      activityCode: ActivityCodes.CONSENT_ASSENT,
+    },
+  },
+  {
     path: RoutePaths.Dashboard,
     component: DashboardRedesignedComponent,
     canActivate: [
