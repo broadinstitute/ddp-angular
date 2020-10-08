@@ -47,11 +47,15 @@
     color: mat-color($app-theme, 300);
   }
 
-  &__img {
+  &__link {
     height: 3.2rem;
 
     @media only screen and (max-width: 480px) {
       height: 2.4rem;
     }
+  }
+
+  &__img {
+    height: 100%;
   }
 }
