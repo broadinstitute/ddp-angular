@@ -7,12 +7,13 @@ import { StudyListingDataSource } from './study-listing-data-source';
 
 @Component({
   selector: 'app-study-listing',
-  template: `<prion-header></prion-header>
+  template: `<prion-header currentRoute="/study-listing"></prion-header>
     <div class="Container">
       <article class="PageContent">
         <div class="PageLayout">
           <div class="row NoMargin">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <h1 class="PageContent-title" translate>App.StudyListing.Title</h1>
               <section class="PageContent-section">
                 <div class="row">
                   <div class="col-md-4">
