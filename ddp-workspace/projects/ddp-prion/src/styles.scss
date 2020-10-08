@@ -574,7 +574,7 @@ input.mat-input-element.study-listing-filter {
 }
 
 .scroll-table-container {
-    overflow: scroll;
+    overflow: auto !important;
 }
 
 .study-listing-table {
@@ -635,7 +635,7 @@ input.mat-input-element.study-listing-filter {
 
 //Inside the table
 @media only screen and (max-width: 767px) {
-    .scroll-table-container {
+    .table-container {
         width: 662px !important;
     }
 
@@ -991,6 +991,15 @@ button.Footer-link {
     overflow: hidden;
     box-shadow: 1px 1px 5px #9E9E9E;
 }
+/*
+.ScrollContainer {
+    overflow: auto;
+}
+
+.NoScrollContainer {
+    overflow: hidden;
+}
+*/
 
 .PageHeader {
     height: auto;

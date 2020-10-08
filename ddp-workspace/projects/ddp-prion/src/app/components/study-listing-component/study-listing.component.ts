@@ -8,7 +8,7 @@ import { StudyListingDataSource } from './study-listing-data-source';
 @Component({
   selector: 'app-study-listing',
   template: `<prion-header></prion-header>
-    <div class="Container">
+    <div class="Container table-container">
       <article class="PageContent">
         <div class="PageLayout">
           <div class="row NoMargin">
