@@ -5,7 +5,7 @@ import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { ActivityInstance } from '../../models/activityInstance';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
