@@ -666,6 +666,11 @@ input.mat-input-element.study-listing-filter {
     z-index: 1000;
 }
 
+.Header--home {
+    background: transparent !important;
+    position: absolute;
+}
+
 .Header-background {
     position: relative;
     padding: 30px 80px 20px 80px;
@@ -679,14 +684,28 @@ input.mat-input-element.study-listing-filter {
     width: 100%;
 }
 
-.Header--home {
-    background: transparent !important;
-    position: absolute;
+.navbar-nav {
+    float: right !important;
+    width: 649px;
 }
 
-@media only screen and (min-width: 993px) and (max-width: 1200px) {
+@media only screen and (min-width: 1027px) and (max-width: 1200px) {
     .Header-background {
         padding: 30px 40px 20px 80px !important;
+    }
+    .navbar-nav {
+        float: right !important;
+        width: 649px;
+    }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1026px) {
+    .Header-background {
+        padding: 30px 40px 20px 80px !important;
+    }
+    .navbar-nav {
+        float: right !important;
+        width: 584px;
     }
 }
 
@@ -701,7 +720,7 @@ input.mat-input-element.study-listing-filter {
         padding: 0 25px 10px 25px !important;
     }
     .navbar-nav {
-        max-width: 434px !important;
+        width: 415px !important;
     }
 }
 
