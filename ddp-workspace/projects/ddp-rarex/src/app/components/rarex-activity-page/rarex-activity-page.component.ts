@@ -28,6 +28,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   activities: ActivityInstance[];
   isConsentComplete: boolean;
   isActivityShown = true;
+  isFetchingActivities = false;
 
   private _anchor = new CompositeDisposable();
 
@@ -76,13 +77,23 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
+    this.isFetchingActivities = true;
+
     return this._userActivites.getActivities(of(this.studyGuid)).pipe(
       tap(activities => {
+        this.isFetchingActivities = false;
+
         if (!activities) return;
 
         this.activities = activities;
 
-        const consentActivity = activities.find(activity => activity.activityCode === ActivityCodes.CONSENT);
+        const consentActivity = activities.find(
+          activity => (
+            activity.activityCode === ActivityCodes.CONSENT ||
+            activity.activityCode === ActivityCodes.PARENTAL_CONSENT ||
+            activity.activityCode === ActivityCodes.CONSENT_ASSENT
+          )
+        );
         this.isConsentComplete = consentActivity ? consentActivity.statusCode === ActivityStatusCodes.COMPLETE : false;
       })
     );

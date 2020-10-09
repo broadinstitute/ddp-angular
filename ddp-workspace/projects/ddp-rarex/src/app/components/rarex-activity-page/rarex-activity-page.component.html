@@ -1,11 +1,11 @@
 <div class="rarex-activity-page container">
-  <div *ngIf="isConsentComplete" class="rarex-activity-page__progress-container">
+  <div *ngIf="isConsentComplete && !isFetchingActivities && isActivityShown" class="rarex-activity-page__progress-container">
     <app-workflow-progress [activityList]="activities" [instanceGuid]="instanceGuid"></app-workflow-progress>
   </div>
 
   <div class="rarex-activity-page__activity-container">
     <app-rarex-activity
-      *ngIf="isActivityShown"
+      *ngIf="isActivityShown && !isFetchingActivities"
       [studyGuid]="studyGuid"
       [activityGuid]="instanceGuid"
       (submit)="onSubmit($event)"
