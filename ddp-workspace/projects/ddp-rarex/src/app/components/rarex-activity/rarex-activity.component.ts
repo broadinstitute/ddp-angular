@@ -18,8 +18,4 @@ export class RarexActivityComponent extends ActivityComponent {
 
     this.sectionChanged.emit();
   }
-
-  public get showStepper(): boolean {
-    return this.model.activityCode === ActivityCodes.CONSENT || this.model.sections.some(section => section.name || section.icons.length);
-  }
 }
