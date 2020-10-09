@@ -1,6 +1,10 @@
 <div class="rarex-activity-page container">
   <div *ngIf="isConsentComplete && !isFetchingActivities && isActivityShown" class="rarex-activity-page__progress-container">
-    <app-workflow-progress [activityList]="activities" [instanceGuid]="instanceGuid"></app-workflow-progress>
+    <app-workflow-progress
+      [activityList]="activities"
+      [instanceGuid]="instanceGuid"
+      (changeActivity)="onChangeActivity($event)"
+    ></app-workflow-progress>
   </div>
 
   <div class="rarex-activity-page__activity-container">

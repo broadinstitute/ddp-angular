@@ -76,6 +76,11 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
       .execute();
   }
 
+  onChangeActivity(activity: ActivityInstance) {
+    this.instanceGuid = activity.instanceGuid;
+    this.resetActivityComponent();
+  }
+
   private getActivities(): Observable<ActivityInstance[]> {
     this.isFetchingActivities = true;
 

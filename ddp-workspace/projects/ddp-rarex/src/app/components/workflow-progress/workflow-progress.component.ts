@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance } from 'ddp-sdk';
 
@@ -10,8 +10,13 @@ import { ActivityStatusCodes } from '../../constants/activity-status-codes';
   styleUrls: ['./workflow-progress.component.scss']
 })
 export class WorkflowProgressComponent {
-  CompleteStatusCode = ActivityStatusCodes.COMPLETE;
-
   @Input() activityList: ActivityInstance[] = [];
   @Input() instanceGuid: string;
+  @Output() changeActivity = new EventEmitter<ActivityInstance>();
+
+  CompleteStatusCode = ActivityStatusCodes.COMPLETE;
+
+  onWorkflowItemClick(activity: ActivityInstance) {
+    this.changeActivity.emit(activity);
+  }
 }
