@@ -200,6 +200,7 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.dashboardActivitiesStartedStatuses = ['CREATED'];
 
 export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
