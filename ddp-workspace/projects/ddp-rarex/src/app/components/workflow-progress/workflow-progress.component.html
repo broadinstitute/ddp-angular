@@ -1,6 +1,6 @@
 <ul class="workflow-progress">
   <ng-container *ngFor="let activity of activityList; let i = index; let isLast = last">
-    <li class="workflow-progress__item">
+    <li class="workflow-progress__item" (click)="onWorkflowItemClick(activity)">
       <div class="workflow-progress-step">
         <div
           class="workflow-progress-step__circle"

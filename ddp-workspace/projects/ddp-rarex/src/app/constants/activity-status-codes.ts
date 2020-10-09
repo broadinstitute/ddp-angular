@@ -1,4 +1,5 @@
 export enum ActivityStatusCodes {
   CREATED = 'CREATED',
-  COMPLETE = 'COMPLETE'
+  COMPLETE = 'COMPLETE',
+  IN_PROGRESS = 'IN_PROGRESS',
 }
