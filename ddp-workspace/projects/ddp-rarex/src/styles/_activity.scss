@@ -406,3 +406,23 @@ ddp-activity-composite-answer {
 
   margin-top: 6rem;
 }
+
+.ddp-learn-more {
+  summary {
+    color: mat-color($app-theme, 300);
+
+    cursor: pointer;
+    list-style: none;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+
+      outline: none;
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+}
