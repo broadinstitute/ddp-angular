@@ -1,5 +1,5 @@
 export enum RoutePaths {
-  Welcome = '',
+  Index = '',
   Password = 'password',
   Auth = 'auth',
   LoginLanding = 'login-landing',
@@ -7,6 +7,7 @@ export enum RoutePaths {
   Dashboard = 'dashboard',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
+  Home = 'home',
   TermsAndConditions = 'terms-and-conditions',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',
