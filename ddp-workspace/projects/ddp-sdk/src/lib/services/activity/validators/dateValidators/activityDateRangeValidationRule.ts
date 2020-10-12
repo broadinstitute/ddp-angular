@@ -15,7 +15,7 @@ export class ActivityDateRangeValidationRule extends ActivityAbstractValidationR
         if (this.question.answer != null) {
             const dateQuestion = this.question as ActivityDateQuestionBlock;
             const value = this.question.answer as DatePickerValue;
-            if (dateQuestion.isSpecifiedFieldsPresent(value)) {
+            if (dateQuestion.isSpecifiedFieldsPresent(value) || dateQuestion.hasRequiredFields(value)) {
                 const valid = this.isWithinRange(this.question.answer);
                 this.result = (valid ? null : this.message);
                 return valid;

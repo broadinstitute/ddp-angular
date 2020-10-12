@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
+import { LanguageService } from './internationalization/languageService.service';
 import { SessionServiceAgent } from './serviceAgents/sessionServiceAgent.service';
 import { CountryAddressInfoSummary } from '../models/countryAddressInfoSummary';
 import { CountryAddressInfo } from '../models/countryAddressInfo';
-import { Observable, ReplaySubject } from 'rxjs';
-import { Subscription } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -20,8 +20,9 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
-        super(session, configuration, http, logger);
+        logger: LoggingService,
+        _language: LanguageService) {
+        super(session, configuration, http, logger, _language);
         this.initializeAllCountryInfoSummaries();
     }
 
@@ -49,6 +50,7 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     }
 
     public findAllCountryInfoSummaries(): Observable<CountryAddressInfoSummary[]> {
+        console.log('find all countryinfo summaries');
         return this.allCountryInfoSummariesSubject$.asObservable();
     }
 
@@ -60,7 +62,7 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
                 } else {
                     return [];
                 }
-            })
+            }),
         ).subscribe(this.allCountryInfoSummariesSubject$);
     }
 }

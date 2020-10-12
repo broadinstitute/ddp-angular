@@ -1,4 +1,4 @@
-import { DdpModule, ConfigurationService, Auth0CodeCallbackComponent, LogLevel } from 'ddp-sdk';
+import { Auth0CodeCallbackComponent, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -48,12 +48,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { FireCloudStudiesSandboxComponent } from './sandboxes/firecloudStudiesSandbox.component';
 
-import { AddressEntrySandboxComponent } from './sandboxes/addressEntrySandbox.component';
-import { AddressConfirmSandboxComponent } from './sandboxes/addressConfirmSandbox.component';
 import { InstitutionInfoComponent } from './sandboxes/activityForm/institutionInfo.component';
 import { AgreementInfoComponent } from './sandboxes/activityForm/agreementInfo.component';
 import { EssayInfoComponent } from './sandboxes/activityForm/essayInfo.component';
 import { AddressEmbeddedSandboxComponent } from './sandboxes/activityForm/addressEmbeddedSandbox.component';
+import { LoginLandingComponent, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 
 const baseElt = document.getElementsByTagName('base');
 let base = '';
@@ -80,9 +79,37 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
+export const tkCfg = new ToolkitConfigurationService();
+tkCfg.studyGuid = DDP_ENV.studyGuid;
+tkCfg.aboutYouGuid = 'ABOUTYOU';
+tkCfg.consentGuid = 'CONSENT';
+tkCfg.releaseGuid = 'RELEASE';
+tkCfg.dashboardGuid = 'DASHBOARD';
+tkCfg.aboutYouUrl = 'about-you';
+tkCfg.aboutUsUrl = 'about-us';
+tkCfg.consentUrl = 'consent';
+tkCfg.releaseUrl = 'release-survey';
+tkCfg.dashboardUrl = 'dashboard';
+tkCfg.activityUrl = 'activity';
+tkCfg.errorUrl = 'error';
+tkCfg.stayInformedUrl = 'stay-informed';
+tkCfg.moreDetailsUrl = 'more-details';
+tkCfg.internationalPatientsUrl = 'international-patients';
+tkCfg.phone = '651-229-3480';
+tkCfg.infoEmail = 'info@braincancerproject.org';
+tkCfg.dataEmail = 'data@braincancerproject.org';
+tkCfg.twitterAccountId = 'BrainCancerProj';
+tkCfg.facebookGroupId = 'braincancerproject';
+tkCfg.countMeInUrl = 'https://joincountmein.org/';
+tkCfg.showDataRelease = false;
+tkCfg.showInfoForPhysicians = true;
+tkCfg.showBlog = false;
+tkCfg.blogUrl = '';
+
 const appRoutes: Routes = [
   { path: 'fireCloudStudies', component: FireCloudStudiesSandboxComponent },
   { path: 'silentRenew', component: SilentRenewComponent },
+  { path: 'login-landing', component: LoginLandingComponent },
   { path: '', component: DefaultComponent },
   { path: 'login', component: LoginSandboxComponent },
   { path: 'userprofile', component: UserProfileSandboxComponent },
@@ -99,8 +126,6 @@ const appRoutes: Routes = [
   { path: 'physician-info', component: PhysicianInfoComponent },
   { path: 'readonly-activity-form', component: ReadonlyActivityFormComponent },
   { path: 'auth', component: Auth0CodeCallbackComponent },
-  { path: 'address', component: AddressEntrySandboxComponent },
-  { path: 'address/confirm', component: AddressConfirmSandboxComponent },
   { path: 'institution-info', component: InstitutionInfoComponent },
   { path: 'paged-activity', component: PagedActivityComponent },
   { path: 'agreement-info', component: AgreementInfoComponent },
@@ -120,8 +145,6 @@ declare let ga: Function;
     UserProfileSandboxComponent,
     ParticipantProfileSandboxComponent,
     ActivitiesListSandboxComponent,
-    AddressEntrySandboxComponent,
-    AddressConfirmSandboxComponent,
     AddressEmbeddedSandboxComponent,
     ActivitySandboxComponent,
     ActivitySandboxComponent,
@@ -147,6 +170,7 @@ declare let ga: Function;
     ),
     BrowserModule,
     DdpModule,
+    ToolkitModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule,
     MatGridListModule, MatInputModule, MatRadioModule, MatSidenavModule,
     MatExpansionModule, MatListModule, MatSlideToggleModule, MatSelectModule,
@@ -154,7 +178,11 @@ declare let ga: Function;
     FormsModule, FlexLayoutModule, OverlayModule
   ],
   providers: [
-    { provide: 'ddp.config', useValue: config }
+    { provide: 'ddp.config', useValue: config },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: tkCfg
+    }
   ],
   bootstrap: [AppComponent]
 })

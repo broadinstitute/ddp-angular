@@ -135,7 +135,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
                                 <div *ngIf="!isStepped || isLastStep">
-                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton
+                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="flush()"
@@ -143,21 +143,21 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
                                             [innerHTML]="(isPageBusy | async)
                                                                 ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                                     </button>
-                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary"
+                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary" id="closeButton"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="close()"
                                             [innerHTML]="'SDK.CloseButton' | translate">
                                     </button>
                                 </div>
                                 <div *ngIf="isLoaded && isStepped" class="ConsentButtons">
-                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary"
+                                    <button *ngIf="!isFirstStep" mat-raised-button color="primary" id="prevButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled ButtonFilled--neutral"
                                             (click)="decrementStep()"
                                             [innerHTML]="'SDK.PreviousButton' | translate">
                                     </button>
                                     <div class="NextButton">
-                                        <button *ngIf="!isLastStep" mat-raised-button color="primary"
+                                        <button *ngIf="!isLastStep" mat-raised-button color="primary" id="nextButton"
                                                 [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                                 class="margin-5 ButtonFilled"
                                                 (click)="incrementStep()"
@@ -216,7 +216,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnInit(): void {
-        super.getActivity();
+        this.getActivity();
         const submitSub = this.submit.subscribe(response => this.submitService.announceSubmit(response));
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -301,15 +301,17 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public jumpStep(step: number): void {
         if (this.visitedSectionIndexes[step]) {
-            this.scrollToTop();
+            this.smoothScrollToTop();
             this.currentSectionIndex = step;
         }
     }
 
-    public incrementStep(): void {
+    public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            this.scrollToTop();
+            if (scroll) {
+              this.scrollToTop();
+            }
             // enable any validation errors to be visible
             this.validationRequested = true;
             this.sendSectionAnalytics();
@@ -322,13 +324,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    public decrementStep(): void {
+    public decrementStep(scroll: boolean = true): void {
         const previousIndex = this.previousAvailableSectionIndex();
         if (previousIndex !== -1) {
             // if we move forwards or backwards, let's reset our validation display
             this.resetValidationState();
             this.currentSectionIndex = previousIndex;
+          if (scroll) {
             this.scrollToTop();
+          }
         }
     }
 
@@ -374,7 +378,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    private sendSectionAnalytics(): void {
+    protected sendSectionAnalytics(): void {
         // Some sections don't have name, just send section number
         const sectionName = this.model.sections[this.currentSectionIndex].name ?
             this.model.sections[this.currentSectionIndex].name :
@@ -382,21 +386,28 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.analytics.emitCustomEvent(this.model.activityCode, sectionName);
     }
 
-    private sendLastSectionAnalytics(): void {
+    protected sendLastSectionAnalytics(): void {
         if (this.isStepped && this.isLastStep) {
             this.sendSectionAnalytics();
         }
     }
 
-    private sendActivityAnalytics(event: string): void {
+    protected sendActivityAnalytics(event: string): void {
         this.analytics.emitCustomEvent(event, this.model.activityCode);
     }
 
-    private scrollToTop(): void {
+    protected scrollToTop(): void {
         this.windowRef.nativeWindow.scrollTo(0, 0);
     }
 
-    private nextAvailableSectionIndex(): number {
+    private smoothScrollToTop(): void {
+        this.windowRef.nativeWindow.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    protected nextAvailableSectionIndex(): number {
         for (let index = this.currentSectionIndex + 1; index < this.model.sections.length; index++) {
             if (this.model.sections[index].visible) {
                 return index;

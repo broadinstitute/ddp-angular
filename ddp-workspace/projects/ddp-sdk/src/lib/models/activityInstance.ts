@@ -7,8 +7,12 @@ export interface ActivityInstance {
     activitySubtype: string;
     activityCode: string;
     activitySummary: string;
+    activityDescription: string;
     statusCode: string;
     icon: string;
     createdAt: number;
     readonly: boolean;
+    numQuestions: number;
+    numQuestionsAnswered: number;
+    isFollowup: boolean;
 }

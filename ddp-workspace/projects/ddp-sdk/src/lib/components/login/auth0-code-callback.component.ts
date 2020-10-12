@@ -33,26 +33,37 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
             this.log.logEvent(this.LOG_SOURCE, 'Will login to ' + this.configuration.localRegistrationUrl + ' using code ' + authCode);
 
             const params = this.consumeLocalAuthParams();
+            const isAdmin = this.consumeLocalAdminAuth();
             const registrationPayload = {
-                auth0ClientId: this.configuration.auth0ClientId,
+                auth0ClientId: isAdmin ? this.configuration.adminClientId : this.configuration.auth0ClientId,
                 studyGuid: this.configuration.studyGuid,
                 auth0Code: authCode,
                 redirectUri: this.configuration.auth0CodeRedirect,
+                ...(params['mode'] && {
+                    mode: params['mode']
+                }),
                 ...(params['temp_user_guid'] && {
                     tempUserGuid: params['temp_user_guid']
                 }),
                 ...(params['invitation_id'] && {
                     invitationId: params['invitation_id']
+                }),
+                ...(params['time_zone'] && {
+                    timeZone: params['time_zone']
+                }),
+                ...(params['language'] && {
+                    languageCode: params['language']
                 })
             };
 
+            const nextUrl = isAdmin ? this.configuration.adminLoginLandingUrl : this.configuration.loginLandingUrl;
             this.anchor = this.httpClient.post<LocalRegistrationResponse>(this.configuration.localRegistrationUrl, registrationPayload)
                 .subscribe(registrationResponse => {
                 console.log(registrationResponse);
-                this.log.logEvent(this.LOG_SOURCE, 'Now redirecting to ' + this.configuration.loginLandingUrl + ' with id token '
+                this.log.logEvent(this.LOG_SOURCE, 'Now redirecting to ' + nextUrl + ' with id token '
                     + registrationResponse.idToken);
-                this.adapter.setSession(registrationResponse);
-                this.windowRef.nativeWindow.location.href = this.configuration.loginLandingUrl;
+                this.adapter.setSession(registrationResponse, isAdmin);
+                this.windowRef.nativeWindow.location.href = nextUrl;
             });
         } else {
             throw new Error('No auth code present in url.');
@@ -67,6 +78,12 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
         const params = sessionStorage.getItem('localAuthParams') || '{}';
         sessionStorage.removeItem('localAuthParams');
         return JSON.parse(params);
+    }
+
+    private consumeLocalAdminAuth(): boolean {
+        const item = sessionStorage.getItem('localAdminAuth') || 'false';
+        sessionStorage.removeItem('localAdminAuth');
+        return JSON.parse(item);
     }
 }
 

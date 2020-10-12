@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "Um e-mail foi enviado para esse endereço com as instruções para você ativar sua conta.",
+    "checkEmail": "Você está quase lá! Verifique seu e-mail: ",
+    "stillWaiting": "Ainda está esperando o e-mail?",
+    "title": "Ativação da conta"
+  },
+  "common": {
+    "alreadyRegistered": "Já registrado? Registre-se aqui",
+    "confirmNewPassword": {
+      "label": "Comfirmar senha nova"
+    },
+    "email": {
+      "whoseEmail": "Devo informar o e-mail de quem?",
+      "whoseEmailTooltip": "Caso você seja pai ou mãe/responsável legal de uma criança ou crianças com A-T, use o seu próprio endereço de e-mail.  Usaremos este endereço de e-mail para nos comunicarmos com você sobre qualquer pessoa que você registrar na Global A-T Family Data Platform."
+    },
+    "forgotPassword": "Esqueceu sua senha?",
+    "joinUs": "Junte-se a nós",
+    "or": "ou",
+    "password": {
+      "label": "Senha"
+    },
+    "reenter": {
+      "label": "Digite a senha novamente"
+    },
+    "resendInstructions": "Reenviar instruções para confirmação",
+    "resetPassword": {
+      "label": "Senha nova"
+    },
+    "signin": "Login",
+    "signinWithGoogle": "Fazer login com o Google"
+  },
+  "forgotPassword": {
+    "enterEmail": "Informe o seu endereço de e-mail para enviarmos as instruções para redefinição de senha para você.",
+    "submit": "Envie-me instruções para redefinição da senha",
+    "title": "Esqueceu sua senha?"
+  },
+  "header": {
+    "aboutThisInitiative": "Sobre esta iniciativa",
+    "aboutUs": "Sobre nós",
+    "joinUs": "Junte-se a nós",
+    "language": "Idioma",
+    "learnMore": "Descubra mais",
+    "signIn": "Registre-se"
+  },
+  "login": {
+    "title": "Você pode fazer login na Global A-T Family Data Platform usando seu endereço de e-mail ou sua conta no Google.",
+    "useEmail": "Usar seu endereço de e-mail:"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Sua senha foi alterada.",
+    "YouWillGetInstructions": "Você receberá em alguns minutos um e-mail com instruções para redefinição da sua senha."
+  },
+  "resendInstructions": {
+    "subTitle": "Caso não tenha recebido suas instruções para confirmação, você pode informar seu endereço de e-mail para gerar outro e-mail de confirmação.",
+    "submit": "Reenviar instruções para confirmação",
+    "title": "Reenviar instruções para confirmação"
+  },
+  "resetPassword": {
+    "submit": "Alterar minha senha",
+    "title": "Altere sua senha"
+  },
+  "signUp": {
+    "createAccountBtn": "Criar conta",
+    "createAccountWithGoogleBtn": "Usar sua conta no Google",
+    "emailLabel": "Endereço de e-mail",
+    "googleEmail": "Endereço de e-mail no Google",
+    "passwordHint": "(mínimo de 8 caracteres)",
+    "subTitle": "Você pode fazer login na plataforma com seu endereço de e-mail criando uma senha ou com sua conta no Google. Usaremos este endereço de e-mail para nos comunicarmos com você sobre a Global A-T Family Data Platform.",
+    "subtitleWithEmail": "Usar seu endereço de e-mail",
+    "title": "Usar seu endereço de e-mail",
+    "useGoogle": "Usar sua conta no Google"
+  },
+  "title": "Global A-T Family Data Platform | Ativar notificação de conta"
+}

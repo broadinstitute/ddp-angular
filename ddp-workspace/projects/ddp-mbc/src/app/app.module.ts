@@ -23,6 +23,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { PartnersComponent } from './components/partners/partners.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -60,6 +61,7 @@ tkCfg.bloodConsentUrl = 'blood-consent';
 tkCfg.bloodReleaseUrl = 'blood-release-survey';
 tkCfg.followupUrl = 'followup';
 tkCfg.internationalPatientsUrl = 'international-patients';
+tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '617-800-1622';
 tkCfg.infoEmail = 'info@mbcproject.org';
 tkCfg.dataEmail = 'data@mbcproject.org';
@@ -117,7 +119,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     DataReleaseComponent,
     MoreDetailsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PartnersComponent
   ],
   providers: [
     {

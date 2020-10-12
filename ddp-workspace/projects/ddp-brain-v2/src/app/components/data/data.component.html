@@ -1,0 +1,64 @@
+<main class="main">
+    <section class="section map-section">
+        <div class="content map-block">
+            <div class="introduction">
+                <div class="info">
+                    <h1 class="info__title" translate>DataPage.Title</h1>
+                    <p class="info__text" translate>DataPage.Text</p>
+                </div>
+                <picture>
+                    <source media="(max-width: 974px)" srcset="assets/images/map-small.png">
+                    <img class="image" src="assets/images/map.png" alt="The USA map">
+                </picture>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="content content_medium snapshots-block">
+            <h2 translate>DataPage.Snapshots.Title</h2>
+            <div class="diagrams" (click)="modalImage.openModal($event)">
+                <ng-container *ngFor="let diagram of 'DataPage.Snapshots.Diagrams' | translate">
+                    <div class="diagram">
+                        <img lazy-resource class="diagram__image diagram__image_modal" [src]="diagram.Image"
+                            [alt]="diagram.Alt">
+                        <p class="diagram__link">
+                            <a class="Link" href="#" target="_blank">{{diagram.Link}}</a>
+                        </p>
+                        <p class="diagram__data">{{diagram.Date}}</p>
+                        <p>{{diagram.Text}}</p>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+    <section class="section mailing-list-section">
+        <div class="content content_medium mailing-list-block">
+            <div class="mailing-list">
+                <p class="mailing-list__text" translate>DataPage.MailingList.Text</p>
+                <button class="button button_medium button_secondary mailing-list__button"
+                    (click)="openJoinMailingList()">{{'Common.Buttons.JoinMailingList' | translate}}</button>
+            </div>
+        </div>
+    </section>
+    <section class="section data-release-section">
+        <div class="content content_medium data-release-block">
+            <h2 translate>DataPage.DataRelease.Title</h2>
+            <p>
+                <span translate>DataPage.DataRelease.Text</span>
+                <a class="Link" [href]="'mailto:' + infoEmail">{{infoEmail}}</a>.
+            </p>
+            <div class="diagrams">
+                <ng-container *ngFor="let diagram of 'DataPage.DataRelease.Diagrams' | translate">
+                    <div class="diagram">
+                        <img lazy-resource class="diagram__image" [src]="diagram.Image" [alt]="diagram.Alt">
+                        <p>
+                            <a class="Link" href="#" target="_blank">{{diagram.Link}}</a>
+                        </p>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</main>
+
+<app-modal-image #modalImage></app-modal-image>

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { ActivityPicklistDetails } from './../../../models/activity/activityPicklistDetails';
+import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <ng-container *ngIf="block.selectMode == 'MULTIPLE'; then matSelect else nativeSelect">
+    <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
     </ng-container>
 
     <ng-template #matSelect>
@@ -41,7 +42,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
 
     <ng-container *ngIf="details.show">
-        <mat-form-field class="width">
+        <mat-form-field class="width ddp-option-details-field">
             <input matInput
                    (change)="detailTextChanged($event.target.value)"
                    (input)="updateCharactersLeftIndicator(details.stableId, $event.target.value)"
@@ -62,8 +63,9 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
         }
     `]
 })
-export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion {
+export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
     public details: ActivityPicklistDetails;
+    public readonly SELECT_MODE = PicklistSelectMode;
     /**
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
      */
@@ -72,6 +74,10 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
     constructor(private translate: NGXTranslateService) {
         super(translate);
         this.details = new ActivityPicklistDetails();
+    }
+
+    public ngOnInit(): void {
+        this.exclusiveChosen = this.hasSelectedExclusiveOption();
     }
 
     public setMaterialSelected(): Array<string> | string {

@@ -1,0 +1,101 @@
+<div class="container" [ngClass]="{'container_center': !showSurvey}">
+    <ng-container *ngIf="showSurvey">
+        <div class="title">
+            <h3 class="title__text center" translate>MailingList.Title</h3>
+        </div>
+        <form class="mailing-list" [formGroup]="mailingListForm" (ngSubmit)="onSubmit()">
+            <p class="mailing-list__question" translate>MailingList.Questions.Adult</p>
+            <mat-radio-group class="mailing-list__group mailing-list__group_two" formControlName="adult">
+                <mat-radio-button class="mailing-list__item" value="true">
+                    {{'MailingList.Answers.Yes' | translate}}
+                </mat-radio-button>
+                <mat-radio-button value="false">
+                    {{'MailingList.Answers.No' | translate}}
+                </mat-radio-button>
+                <mat-error class="mailing-list__error" *ngIf="fieldHasError('adult', 'required')">
+                    {{'MailingList.Validations.RequiredOption' | translate}}
+                </mat-error>
+            </mat-radio-group>
+
+            <p class="mailing-list__question" translate>MailingList.Questions.Patient</p>
+            <mat-radio-group class="mailing-list__group mailing-list__group_three" formControlName="bwhPatient">
+                <mat-radio-button class="mailing-list__item" value="true">
+                    {{'MailingList.Answers.Yes' | translate}}
+                </mat-radio-button>
+                <mat-radio-button class="mailing-list__item" value="false">
+                    {{'MailingList.Answers.No' | translate}}
+                </mat-radio-button>
+                <mat-radio-button value="null">
+                    {{'MailingList.Answers.NoAnswer' | translate}}
+                </mat-radio-button>
+                <mat-error class="mailing-list__error" *ngIf="fieldHasError('bwhPatient', 'required')">
+                    {{'MailingList.Validations.RequiredOption' | translate}}
+                </mat-error>
+            </mat-radio-group>
+
+            <p class="mailing-list__question mailing-list__question_last" translate>MailingList.Questions.Email</p>
+            <mat-form-field class="mailing-list__input">
+                <mat-label>{{'MailingList.EmailLabel' | translate}}</mat-label>
+                <input matInput [placeholder]="'MailingList.EmailPlaceholder' | translate" formControlName="email"
+                    type="email">
+                <mat-error *ngIf="fieldHasError('email', 'pattern') && !fieldHasError('email', 'required')">
+                    {{'MailingList.Validations.InvalidEmail' | translate}}
+                </mat-error>
+                <mat-error *ngIf="fieldHasError('email', 'required')">
+                    {{'MailingList.Validations.RequiredEmail' | translate}}
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mailing-list__button">
+                <button class="button button_additional" type="submit"
+                    [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
+                    {{'Common.Buttons.Submit.Title' | translate}}
+                </button>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="thankYou">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('thankYou')">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <div class="mailing-list mailing-list_result">
+            <h3 class="center no-margin mailing-list__title" translate>MailingList.ThankYouBlock.Title</h3>
+            <p class="center" translate>MailingList.ThankYouBlock.Text</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="sorry">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('sorry')">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <div class="mailing-list mailing-list_result">
+            <h3 class="center no-margin mailing-list__title" translate>MailingList.SorryBlock.Title</h3>
+            <p class="center">
+                <span translate>MailingList.SorryBlock.Text.Part1</span>
+                <a class="Link Link_bold" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
+                    translate>MailingList.SorryBlock.Text.Part2</a>
+                <span translate>MailingList.SorryBlock.Text.Part3</span>
+            </p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="error">
+        <button class="mailing-list__close" mat-icon-button (click)="onClose('error')">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <div class="mailing-list mailing-list_result">
+            <h3 class="center no-margin mailing-list__title" translate>Toolkit.ErrorPage.Text</h3>
+            <p class="center">
+                <span translate>Toolkit.ErrorPage.DefaultText.TextPt1</span>
+                <a [href]="emailHref" class="Link Link_bold">{{email}}</a>
+                <span translate>Toolkit.ErrorPage.DefaultText.TextPt2</span>
+                <a [href]="phoneHref" class="Link Link_bold">{{phone}}</a>.
+            </p>
+        </div>
+    </ng-container>
+</div>

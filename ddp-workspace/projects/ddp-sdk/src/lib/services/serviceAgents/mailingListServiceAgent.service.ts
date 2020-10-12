@@ -15,7 +15,7 @@ export class MailingListServiceAgent extends NotAuthenticatedServiceAgent<any> {
         super(configuration, http, logger);
     }
 
-    public addPerson(person: Person): Observable<any> {
+    public join(person: Person): Observable<any> {
         return this.postObservable(`/mailing-list`, JSON.stringify(person));
     }
 }

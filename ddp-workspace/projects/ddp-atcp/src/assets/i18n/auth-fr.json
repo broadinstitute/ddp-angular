@@ -1,0 +1,75 @@
+{
+  "activateAccount": {
+    "activateAccount": "Un message contenant les instructions d’activation de votre compte vous a été envoyé.",
+    "checkEmail": "Vous avez presque fini ! Merci de consulter vos e-mails : ",
+    "stillWaiting": "Vous ne l’avez toujours pas reçu ?",
+    "title": "Activation du compte"
+  },
+  "common": {
+    "alreadyRegistered": "Déjà enregistré ? Connectez-vous ici",
+    "confirmNewPassword": {
+      "label": "Confirmer le nouveau mot de passe"
+    },
+    "email": {
+      "whoseEmail": "L’adresse e-mail de qui dois-je saisir ?",
+      "whoseEmailTooltip": "Si vous êtes le parent ou le tuteur légal d’un enfant AT, utilisez votre propre adresse e-mail.  Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet des participants que vous avez enregistrés sur la plateforme de données internationale sur les familles AT."
+    },
+    "forgotPassword": "Mot de passe oublié ?",
+    "joinUs": "Nous rejoindre",
+    "or": "ou",
+    "password": {
+      "label": "Mot de passe"
+    },
+    "reenter": {
+      "label": "Saisir de nouveau le mot de passe"
+    },
+    "resendInstructions": "Renvoyer les instructions de confirmation",
+    "resetPassword": {
+      "label": "Nouveau mot de passe"
+    },
+    "signin": "Connexion",
+    "signinWithGoogle": "Connexion avec Google"
+  },
+  "forgotPassword": {
+    "enterEmail": "Veuillez saisir votre adresse e-mail et nous vous enverrons les instructions de réinitialisation de votre mot de passe.",
+    "submit": "Envoyer les instructions de réinitialisation du mot de passe",
+    "title": "Mot de passe oublié ?"
+  },
+  "header": {
+    "aboutThisInitiative": "Au sujet de cette initiative",
+    "aboutUs": "Qui sommes-nous ?",
+    "joinUs": "Nous rejoindre",
+    "language": "Langue",
+    "learnMore": "En savoir plus",
+    "signIn": "Connexion"
+  },
+  "login": {
+    "title": "Vous pouvez vous connecter à la plateforme de données internationale sur les familles AT avec votre adresse e-mail ou votre compte Google.",
+    "useEmail": "Utilisez votre adresse e-mail :"
+  },
+  "modal": {
+    "SuccessChangedPassword": "Votre mot de passe a été changé.",
+    "YouWillGetInstructions": "Vous recevrez un e-mail contenant les instructions de réinitialisation de votre mot de passe dans quelques minutes."
+  },
+  "resendInstructions": {
+    "subTitle": "Si vous n’avez pas reçu les instructions de confirmation, vous pouvez saisir votre adresse e-mail pour générer un autre e-mail de confirmation.",
+    "submit": "Renvoyer les instructions de confirmation",
+    "title": "Renvoyer les instructions de confirmation"
+  },
+  "resetPassword": {
+    "submit": "Changer mon mot de passe",
+    "title": "Changez votre mot de passe"
+  },
+  "signUp": {
+    "createAccountBtn": "Créer un compte",
+    "createAccountWithGoogleBtn": "Utilisez votre compte Google",
+    "emailLabel": "Adresse e-mail",
+    "googleEmail": "Adresse e-mail Google",
+    "passwordHint": "(8 caractères minimum)",
+    "subTitle": "Vous pouvez vous connecter à la plateforme avec votre adresse e-mail, en créant un mot de passe, ou avec votre compte Google. Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet de la plateforme de données internationale sur les familles AT.",
+    "subtitleWithEmail": "Utilisez votre adresse e-mail",
+    "title": "Créer un compte",
+    "useGoogle": "Utilisez votre compte Google"
+  },
+  "title": "Plateforme de données internationale sur les familles AT | Activer les notifications de compte "
+}

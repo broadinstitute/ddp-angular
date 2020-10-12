@@ -26,7 +26,7 @@ export class ActivityLinkComponent implements OnInit {
     public ngOnInit(): void {
         this.activatedRoute.params.subscribe(x => {
             if (x.id === this.ACTIVITY_ID_PLACEHOLDER) {
-                this.workflowService.getNext(this.toolkitConfiguration.studyGuid)
+                this.workflowService.getNext()
                     .pipe(take(1))
                     .subscribe(response => response && this.workflowBuilder.getCommand(response).execute());
             } else {

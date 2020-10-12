@@ -126,6 +126,35 @@ RUN npm install --global $ANGULAR_CLI
 COPY . /opt/build-utils
 RUN npm install -g /opt/build-utils/sheetappend
 
+# installation of chrome adapted from https://github.com/Zenika/alpine-chrome/blob/master/Dockerfile
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/main" >> /etc/apk/repositories \
+    && apk upgrade -U -a \
+    && apk add --no-cache \
+    libstdc++ \
+    chromium \
+    harfbuzz \
+    nss \
+    freetype \
+    ttf-freefont \
+    && rm -rf /var/cache/* \
+    && mkdir /var/cache/apk
+
+# Add Chrome as a user
+RUN mkdir -p /usr/src/app \
+    && adduser -D chrome \
+    && chown -R chrome:chrome /usr/src/app
+# Run Chrome as non-privileged
+USER chrome
+WORKDIR /usr/src/app
+
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/lib/chromium/
+
+USER root
+
 # keep track of git hash
 ARG GIT_SHA
 RUN echo $GIT_SHA > git_sha.txt

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivityTextQuestionBlock, WindowRef } from 'ddp-sdk';
+import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { WindowRef } from '../../services/windowRef';
 import { InputType } from '../../models/activity/inputType';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationMessage } from '../validationMessage.component';
@@ -9,6 +10,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { getTestScheduler, hot } from 'jasmine-marbles';
 import { By } from '@angular/platform-browser';
 import { ActivityLengthValidationRule } from '../../services/activity/validators/activityLengthValidationRule';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-activity-answer',
@@ -16,10 +18,10 @@ import { ActivityLengthValidationRule } from '../../services/activity/validators
     <div></div>`
 })
 class FakeActivityActivityAnswerComponent {
-  @Output()valueChanged = new EventEmitter();
-  @Input()block;
-  @Input()readonly;
-  @Input()validationRequested;
+  @Output() valueChanged = new EventEmitter();
+  @Input() block;
+  @Input() readonly;
+  @Input() validationRequested;
 }
 
 describe('ActivityQuestionComponent', () => {
@@ -30,15 +32,26 @@ describe('ActivityQuestionComponent', () => {
   const submissionManagerSpy = new SubmissionManager(null);
   let submissionResponseSpy: jasmine.Spy;
   let windowRefSpy: jasmine.SpyObj<WindowRef>;
+  let configServiceSpy: jasmine.SpyObj<ConfigurationService>;
 
   beforeEach(async(() => {
     windowRefSpy = jasmine.createSpyObj('WindowRef', ['nativeWindow']);
+    configServiceSpy = jasmine.createSpyObj('ddp.config', ['scrollToErrorOffset']);
     TestBed.configureTestingModule({
-      declarations: [ActivityQuestionComponent, ValidationMessage, FakeActivityActivityAnswerComponent],
-      providers: [{provide: SubmissionManager, useValue: submissionManagerSpy}, {provide: WindowRef, useValue: windowRefSpy}],
-      imports: [HttpClientTestingModule]
-    })
-      .compileComponents();
+      declarations: [
+        ActivityQuestionComponent,
+        ValidationMessage,
+        FakeActivityActivityAnswerComponent
+      ],
+      providers: [
+        { provide: SubmissionManager, useValue: submissionManagerSpy },
+        { provide: WindowRef, useValue: windowRefSpy },
+        { provide: 'ddp.config', useValue: configServiceSpy }
+      ],
+      imports: [
+        HttpClientTestingModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -58,17 +71,20 @@ describe('ActivityQuestionComponent', () => {
     expect(answerComponentFixture).toBeTruthy();
     expect(answerComponent).toBeTruthy();
   });
-  it('expect block validation to appear and disappear',  fakeAsync(() => {
+  it('expect block validation to appear and disappear', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
     component.block = block;
     component.ngOnInit();
+    // these tick(1) needed because of delay(0) used in message observable definition
+    tick(1);
     fixture.detectChanges();
     // we start with no message
     expect(getValidationMessageFixture()).toBeFalsy();
     block.serverValidationMessages = ['Message!!!'];
     component.block = block;
+    tick(1);
     fixture.detectChanges();
 
     // we have a message from initial load
@@ -77,16 +93,17 @@ describe('ActivityQuestionComponent', () => {
     fixture.detectChanges();
 
     block.serverValidationMessages = [];
-
+    tick(1);
     fixture.detectChanges();
     // triggered internal validation. Since Validation rules exist, message is cleared
     expect(getValidationMessageFixture()).toBeFalsy();
     block.serverValidationMessages = ['Wrong!!!'];
+    tick(1);
     fixture.detectChanges();
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
-  it('expect block validation to appear and disappear some more',  fakeAsync(() => {
+  it('expect block validation to appear and disappear some more', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -95,16 +112,18 @@ describe('ActivityQuestionComponent', () => {
     rule.message = 'Too long!';
     block.validators.push(rule);
     component.ngOnInit();
+    tick(1);
     fixture.detectChanges();
     // we start with no message
     expect(getValidationMessageFixture()).toBeFalsy();
     block.answer = 'Too long an answer';
     component.validationRequested = true;
+    tick(1);
     fixture.detectChanges();
     expect(getValidationMessageFixture()).toBeTruthy();
   }));
 
-  it('expect patch response not to trigger message',  fakeAsync(() => {
+  it('expect patch response not to trigger message', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
@@ -118,13 +137,16 @@ describe('ActivityQuestionComponent', () => {
     expect(getValidationMessageFixture()).toBeFalsy();
     submissionResponseSpy.and.returnValue(
       hot('-a',
-        {a:
-            ({answers: [{stableId: block.stableId, answerGuid: '321'}],
-              blockVisibility: []})}));
+        {
+          a: ({
+            answers: [{ stableId: block.stableId, answerGuid: '321' }],
+            blockVisibility: []
+          })
+        }));
     component.ngOnInit();
     getTestScheduler().flush();
-    tick();
     fixture.detectChanges();
+    tick(1);
     expect(getValidationMessageFixture()).toBeFalsy();
   }));
 

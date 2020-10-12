@@ -16,7 +16,7 @@ export class GalleryComponent implements OnInit {
   constructor(private translate: NGXTranslateService) { }
 
   public ngOnInit(): void {
-    this.translate.getTranslation(this.translateSource).pipe(
+    this.translate.getTranslationObject(this.translateSource).pipe(
       take(1)
     ).subscribe((gallery: Array<GalleryItem>) => {
       this.gallery = gallery;
