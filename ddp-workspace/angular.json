@@ -264,8 +264,7 @@
               {
                 "glob": "main.css",
                 "input": "projects/ddp-atcp/src/auth0/compiled/auth0-styles/",
-                "output": "assets/auth0-styles",
-
+                "output": "assets/auth0-styles"
               }
             ],
             "styles": [
@@ -1206,6 +1205,7 @@
             "assets": [
               "projects/ddp-testboston/src/favicon.ico",
               "projects/ddp-testboston/src/favicon-alert.ico",
+              "projects/ddp-testboston/src/robots.txt",
               "projects/ddp-testboston/src/assets",
               {
                 "glob": "**/*",
@@ -1285,6 +1285,7 @@
             "assets": [
               "projects/ddp-testboston/src/favicon.ico",
               "projects/ddp-testboston/src/favicon-alert.ico",
+              "projects/ddp-testboston/src/robots.txt",
               "projects/ddp-testboston/src/assets",
               {
                 "glob": "*.pdf",
