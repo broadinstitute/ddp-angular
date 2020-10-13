@@ -34,10 +34,10 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
             </li>
             <li class="Nav-item">
               <span class="Nav-itemLink">
-                <toolkit-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
                                              checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
-                                             buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText"
-                ></toolkit-popup-with-checkbox>
+                                             buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+                </ddp-popup-with-checkbox>
               </span>
             </li>
             <li *ngIf="isLoggedIn()" class="Nav-item">

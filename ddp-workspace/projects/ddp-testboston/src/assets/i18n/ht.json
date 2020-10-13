@@ -366,7 +366,7 @@
       }
     },
     "ArrowAlt": "Flèch",
-    "SearchAlt": "Rechèch icon"
+    "SearchAlt": "Ti snbòl pou w fè rechèch la"
   },
   "Toolkit": {
     "Dashboard": {
@@ -416,12 +416,12 @@
     "EditButton": "Kontinye",
     "CompleteButton": "Modifye",
     "ReviewButton": "Gade",
-    "OpenButton": "[HT] Open",
-    "StartButton": "[HT] Start",
+    "OpenButton": "Ouvri bouton an",
+    "StartButton": "Kòmanse",
     "AgreeButton": "Mwen aksepte",
-    "ReportButton": "[HT] Report",
+    "ReportButton": "Pez bouton rapò a",
     "NotAgreeButton": "Mwen pa pare pou aksepte",
-    "ValidateError": "[HT] Please complete all required fields.",
+    "ValidateError": "Tanpri li obligattwa pou w ta ranpli tout chan enfòma syon yo.",
     "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
     "SaveError": "Nou regrèt sa, gen yon erè ki rive",
     "ExportStudy": {

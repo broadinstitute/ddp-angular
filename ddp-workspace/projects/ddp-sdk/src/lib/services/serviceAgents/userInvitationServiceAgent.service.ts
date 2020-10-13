@@ -5,7 +5,7 @@ import { LoggingService } from '../logging.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { Invitation } from '../../models/invitation';
 import { ConfigurationService } from '../configuration.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Observable } from 'rxjs';
 
 @Injectable()

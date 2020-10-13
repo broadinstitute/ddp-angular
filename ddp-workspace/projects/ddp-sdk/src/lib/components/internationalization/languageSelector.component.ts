@@ -1,16 +1,18 @@
-import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
-import { CompositeDisposable } from '../compositeDisposable';
-import { UserProfile } from '../models/userProfile';
-import { StudyLanguage } from '../models/studyLanguage';
-import { ConfigurationService } from '../services/configuration.service';
-import { LanguageService } from '../services/languageService.service';
-import { SessionMementoService } from '../services/sessionMemento.service';
-import { UserProfileServiceAgent } from '../services/serviceAgents/userProfileServiceAgent.service';
-import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
-import { isNullOrUndefined } from 'util';
+import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { iif, Observable, of, Subscription } from 'rxjs';
-import { flatMap, map, mergeMap, filter } from 'rxjs/operators';
-import { LoggingService } from '../services/logging.service';
+import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
+import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
+import { CompositeDisposable } from '../../compositeDisposable';
+import { StudyLanguage } from '../../models/studyLanguage';
+import { UserProfile } from '../../models/userProfile';
+import { ConfigurationService } from '../../services/configuration.service';
+import { LanguageService } from '../../services/internationalization/languageService.service';
+import { SessionMementoService } from '../../services/sessionMemento.service';
+import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
+import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -28,6 +30,10 @@ import { LoggingService } from '../services/logging.service';
       <mat-menu #menu="matMenu" class="language-menu">
         <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
       </mat-menu>
+      <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                                   checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
+                                   buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+      </ddp-popup-with-checkbox>
     </div>
   `
 })
@@ -41,6 +47,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
   private readonly LOG_SOURCE = 'LanguageSelectorComponent';
+  @ViewChild(PopupWithCheckboxComponent, { static: false }) private popup: PopupWithCheckboxComponent;
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
@@ -48,7 +55,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     private logger: LoggingService,
     private profileServiceAgent: UserProfileServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
-    private session: SessionMementoService) { }
+    private session: SessionMementoService,
+    private displayPop: DisplayLanguagePopupServiceAgent) { }
 
   public ngOnInit(): void {
     this.anchor = new CompositeDisposable();
@@ -96,10 +104,16 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     if (this.language.canUseLanguage(lang.languageCode)) {
       this.currentLanguage = lang;
       if (this.language.getCurrentLanguage() !== lang.languageCode) {
-        this.language.changeLanguage(lang.languageCode);
+        const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
+        let sub;
         if (this.session.isAuthenticatedSession()) {
-          this.updateProfileLanguage();
+          sub = this.launchPopup();
+          const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
+          this.anchor.addNew(sub2);
+        } else {
+          sub = langObs.subscribe();
         }
+        this.anchor.addNew(sub);
       }
     } else {
       this.logger.logError(this.LOG_SOURCE,
@@ -107,13 +121,21 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
+  private launchPopup(): Subscription {
+    return this.displayPop.getShouldDisplayLanguagePopup()
+      .subscribe(shouldDisp => {
+        if (shouldDisp) { // If we should display the popup
+          this.popup.openModal(); // Display the popup!
+        }
+      });
+  }
+
   // Update the language in the profile to the current language
-  private updateProfileLanguage(): void {
+  private updateProfileLanguage(): Observable<any> {
     const profileModifications: UserProfile = new UserProfile();
     profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-    const updateProfileObservable: Observable<any> = this.profileServiceAgent.updateProfile(profileModifications);
-    const sub: Subscription = updateProfileObservable.subscribe(() => this.language.notifyOfProfileLanguageUpdate());
-    this.anchor.addNew(sub);
+    return this.profileServiceAgent.updateProfile(profileModifications)
+      .pipe(tap(() => this.language.notifyOfProfileLanguageUpdate()));
   }
 
   // Find the current language and return true if successful or false otherwise

@@ -4,7 +4,7 @@ import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
