@@ -14,7 +14,7 @@ interface NavLink {
 })
 export class FooterComponent implements OnInit {
   navLinks: NavLink[] = [
-    { translationKey: 'Footer.Links.Home', routePath: RoutePaths.Welcome },
+    { translationKey: 'Footer.Links.Home', routePath: RoutePaths.Home },
     { translationKey: 'Footer.Links.TermsAndConditions', routePath: RoutePaths.TermsAndConditions },
     { translationKey: 'Footer.Links.PrivacyPolicy', routePath: RoutePaths.PrivacyPolicy }
   ];

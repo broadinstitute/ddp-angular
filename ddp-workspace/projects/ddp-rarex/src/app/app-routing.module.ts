@@ -10,10 +10,10 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
+import { HomePageComponent, TermsConditionsPageComponent, PrivacyPolicyPageComponent } from './components/static';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 
@@ -97,20 +97,36 @@ const routes: Routes = [
     }
   },
   {
+    path: RoutePaths.ParentalConsent,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard,
+    ],
+    data: {
+      activityCode: ActivityCodes.PARENTAL_CONSENT,
+    },
+  },
+  {
+    path: RoutePaths.ConsentAssent,
+    component: RarexActivityRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard,
+    ],
+    data: {
+      activityCode: ActivityCodes.CONSENT_ASSENT,
+    },
+  },
+  {
     path: RoutePaths.Dashboard,
     component: DashboardRedesignedComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard,
       AuthGuard
-    ]
-  },
-  {
-    path: RoutePaths.ShareMyData,
-    component: ShareMyDataComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard
     ]
   },
   {
@@ -133,8 +149,29 @@ const routes: Routes = [
     component: PasswordRedesignedComponent
   },
   {
-      path: RoutePaths.Welcome,
-      component: WelcomeComponent,
+    path: RoutePaths.PrivacyPolicy,
+    component: PrivacyPolicyPageComponent,
+    canActivate: [
+      IrbGuard,
+    ]
+  },
+  {
+    path: RoutePaths.TermsAndConditions,
+    component: TermsConditionsPageComponent,
+    canActivate: [
+      IrbGuard,
+    ]
+  },
+  {
+    path: RoutePaths.Home,
+    component: HomePageComponent,
+    canActivate: [
+      IrbGuard,
+    ]
+  },
+  {
+      path: RoutePaths.Index,
+      component: ShareMyDataComponent,
       pathMatch: 'full',
       canActivate: [IrbGuard]
   },

@@ -24,8 +24,10 @@ import { RarexActivityComponent } from './components/rarex-activity/rarex-activi
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HomePageComponent, PrivacyPolicyPageComponent, TermsConditionsPageComponent } from './components/static';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -44,6 +46,12 @@ export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.activityUrl = RoutePaths.Activity;
 tkCfg.dashboardUrl = RoutePaths.Dashboard;
+tkCfg.consentUrl = RoutePaths.Consent;
+tkCfg.parentalConsentUrl = RoutePaths.ParentalConsent;
+tkCfg.consentAssentUrl = RoutePaths.ConsentAssent;
+tkCfg.consentGuid = ActivityCodes.CONSENT;
+tkCfg.parentalConsentGuid = ActivityCodes.PARENTAL_CONSENT;
+tkCfg.consentAssentGuid = ActivityCodes.CONSENT_ASSENT;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -60,6 +68,7 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.tooltipIconUrl = 'assets/images/info.png';
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
@@ -89,7 +98,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatProgressSpinnerModule
   ],
   declarations: [
-    WelcomeComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
@@ -98,6 +106,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     RarexActivityComponent,
     RarexActivityRedirectComponent,
     ShareMyDataComponent,
+    TopBarComponent,
+    HomePageComponent,
+    PrivacyPolicyPageComponent,
+    TermsConditionsPageComponent,
   ],
   providers: [
     {

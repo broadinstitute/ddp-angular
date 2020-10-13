@@ -1,0 +1,40 @@
+@import "../../../app-theme";
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0.6rem 1.2rem;
+
+  background-color: mat-color($app-theme, 300);
+
+  @media only screen and (max-width: 480px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  @media only screen and (max-width: 480px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-right: 2.4rem;
+
+      @media only screen and (max-width: 480px) {
+        margin-right: 0;
+      }
+    }
+  }
+}

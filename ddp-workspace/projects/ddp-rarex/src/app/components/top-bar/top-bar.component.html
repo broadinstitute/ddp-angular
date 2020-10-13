@@ -1,0 +1,14 @@
+<div class="top-bar">
+  <nav class="top-bar__nav">
+    <ul class="nav-list">
+      <li *ngIf="isAuthenticated" class="nav-list__item">
+        <a [routerLink]="routes.Dashboard" class="SimpleButton" translate>
+          Common.Navigation.Dashboard
+        </a>
+      </li>
+      <li class="nav-list__item">
+        <ddp-sign-in-out></ddp-sign-in-out>
+      </li>
+    </ul>
+  </nav>
+</div>

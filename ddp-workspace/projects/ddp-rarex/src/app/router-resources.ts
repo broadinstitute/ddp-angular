@@ -1,13 +1,13 @@
 export enum RoutePaths {
-  Welcome = '',
+  Index = '',
   Password = 'password',
   Auth = 'auth',
   LoginLanding = 'login-landing',
   LoginLandingWithMode = 'login-landing/:mode',
-  ShareMyData = 'share-my-data',
   Dashboard = 'dashboard',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
+  Home = 'home',
   TermsAndConditions = 'terms-and-conditions',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',
@@ -16,5 +16,7 @@ export enum RoutePaths {
   Demographics = 'demographics',
   GeneralMedicalBackgroundSurvey = 'general-medical-background',
   GeneralNeuroDevelopment = 'general-neuro-development',
-  QualityOfLife = 'quality-of-life'
+  QualityOfLife = 'quality-of-life',
+  ParentalConsent = 'parental-consent',
+  ConsentAssent = 'consent-assent',
 }

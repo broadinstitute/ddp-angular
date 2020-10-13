@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
   AnalyticsEventActions,
   AnalyticsEventCategories,
@@ -12,7 +13,8 @@ import {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  naa10FoundationLink = 'https://www.naa10.org/';
+  readonly naa10FoundationLink = 'https://www.naa10.org/';
+  readonly rarexLink = 'https://rare-x.org/';
 
   constructor(
     private session: SessionMementoService,

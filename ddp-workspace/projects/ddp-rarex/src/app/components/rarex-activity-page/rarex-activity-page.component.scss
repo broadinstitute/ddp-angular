@@ -1,7 +1,7 @@
 .rarex-activity-page {
   display: flex;
 
-  padding: 2rem 4rem;
+  padding: 2.4rem 1.2rem;
 
   @media only screen and (max-width: 1024px) {
     flex-direction: column;
@@ -11,6 +11,12 @@
     width: 20rem;
 
     margin-right: 4rem;
+
+    @media only screen and (max-width: 1024px) {
+      width: auto;
+
+      margin-right: 0;
+    }
   }
 
   &__activity-container {

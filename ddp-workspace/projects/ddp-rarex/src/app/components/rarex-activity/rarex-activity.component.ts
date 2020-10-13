@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 import { ActivityComponent, SubmitAnnouncementService, SubmissionManager } from 'ddp-sdk';
 
+import { ActivityCodes } from '../../constants/activity-codes';
+
 @Component({
   selector: 'app-rarex-activity',
   templateUrl: './rarex-activity.component.html',

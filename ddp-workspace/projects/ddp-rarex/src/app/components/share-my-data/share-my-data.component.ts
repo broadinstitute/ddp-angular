@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 
 import {
@@ -11,8 +10,6 @@ import {
 } from 'ddp-sdk';
 
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
-
-import { RoutePaths } from '../../router-resources';
 
 @Component({
   selector: 'app-share-my-data',
@@ -30,7 +27,6 @@ export class ShareMyDataComponent implements OnInit {
     private _temporaryUserService: TemporaryUserServiceAgent,
     private _workflow: WorkflowServiceAgent,
     private _workflowBuilder: WorkflowBuilderService,
-    private _router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -44,8 +40,6 @@ export class ShareMyDataComponent implements OnInit {
 
     if (this._session.isTemporarySession() && !activityResponse.allowUnauthenticated)  {
       response = new ActivityResponse('REGISTRATION');
-
-      sessionStorage.setItem('nextUrl', RoutePaths.Consent);
     }
 
     this._workflowBuilder.getCommand(response).execute();
@@ -53,12 +47,11 @@ export class ShareMyDataComponent implements OnInit {
 
   private fetchActivity(): void {
     if (this._session.isAuthenticatedSession()) {
-      this._router.navigateByUrl(RoutePaths.Dashboard);
-
-      return;
-    }
-
-    this._temporaryUserService
+      this._workflow.getNext().subscribe(response => {
+        this._workflowBuilder.getCommand(response).execute();
+      });
+    } else {
+      this._temporaryUserService
         .createTemporaryUser(this._configuration.auth0ClientId)
         .pipe(
           filter(x => x !== null),
@@ -71,5 +64,6 @@ export class ShareMyDataComponent implements OnInit {
             this.activityGuid = response.instanceGuid;
           }
         });
+    }
   }
 }

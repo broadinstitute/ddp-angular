@@ -38,9 +38,7 @@
               [class.stepper-list__item--active]="isActive(i)"
               [class.stepper-list__item--completed]="isCompleted(i)"
               [class.stepper-list__item--incomplete]="!isCompleted(i)"
-            >
-              {{ section.name }}
-            </li>
+            >{{ section.name }}</li>
           </ng-container>
         </ng-container>
       </ol>
