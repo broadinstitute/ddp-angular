@@ -85,7 +85,7 @@
     cursor: initial;
     color: mat-color($app-theme, 650);
     color: #bbbbbe;
-    font-family: 'Untitled-Sans-Regular', sans-serif !important;
+    font-family: 'Source Serif Pro', serif !important;
 }
 
 .activity-step.completed {
@@ -426,6 +426,7 @@ select:disabled {
 
 .composite-answer-CHILD_BRAIN_CANCER_GRADE_CHANGED_LIST,
 .composite-answer-BRAIN_CANCER_GRADE_CHANGED_LIST {
+
     .picklist-answer-CHILD_OTHER_BRAIN_CANCER_GRADE,
     .picklist-answer-OTHER_BRAIN_CANCER_GRADE {
         select {
