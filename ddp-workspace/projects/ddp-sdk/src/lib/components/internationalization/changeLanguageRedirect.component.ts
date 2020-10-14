@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { StudyLanguage } from '../models/studyLanguage';
-import { ConfigurationService } from '../services/configuration.service';
-import { LanguageService } from '../services/languageService.service';
-import { LanguageServiceAgent } from '../services/serviceAgents/languageServiceAgent.service';
+import { StudyLanguage } from '../../models/studyLanguage';
+import { ConfigurationService } from '../../services/configuration.service';
+import { LanguageService } from '../../services/internationalization/languageService.service';
+import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 
 @Component({
   selector: 'ddp-change-language-redirect',
@@ -40,15 +40,15 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         this.languageService.addLanguages(this.supportedLanguages.map(x => x.languageCode));
 
         // Try to switch to the specified language
-        const langChangePromise: Promise<any> = this.languageService.changeLanguagePromise(this.lang);
-        langChangePromise.catch(reason => {
-          console.error(`Could not change language to ${this.lang}: ${reason}.`);
-        }).then(() => {
+        const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
+        langChangeObservable.subscribe(() => {
           console.log(`Changed language to ${this.languageService.getCurrentLanguage()}`);
-        }).finally(() => {
+        }, (err) => {
+          console.error(`Could not change language to ${this.lang}: ${err}.`);
+        }, () => {
           // Do the redirect
           this.router.navigate([this.dest], {relativeTo: this.route.root});
-          });
+        });
       });
   }
 

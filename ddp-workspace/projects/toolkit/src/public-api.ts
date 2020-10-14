@@ -27,7 +27,6 @@ export * from './lib/components/dialogs/joinMailingList.component';
 export * from './lib/components/dialogs/resendEmail.component';
 export * from './lib/components/dialogs/sessionWillExpire.component';
 export * from './lib/components/dialogs/warning.component';
-export * from './lib/components/dialogs/popupWithCheckbox.component';
 export * from './lib/components/error/error.component';
 export * from './lib/components/error/error-redesigned.component';
 export * from './lib/components/footer/footer.component';
