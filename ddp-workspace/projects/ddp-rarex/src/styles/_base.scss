@@ -20,7 +20,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  line-height: 1.4;
+  line-height: 1.5;
   color: $color-text;
 }
 
@@ -31,4 +31,8 @@ a {
 
 a:focus {
   text-decoration: underline;
+}
+
+span p {
+  display: inline;
 }
