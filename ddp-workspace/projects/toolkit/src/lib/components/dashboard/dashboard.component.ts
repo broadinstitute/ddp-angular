@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
@@ -40,7 +40,8 @@ import { filter, map } from 'rxjs/operators';
                             </ng-container>
                             <section class="PageContent-section">
                                 <ddp-dashboard [studyGuid]="studyGuid"
-                                               (open)="navigate($event)">
+                                               (open)="navigate($event)"
+                                               (loadedEvent)="load($event)">
                                 </ddp-dashboard>
                             </section>
                         </div>
@@ -53,6 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
     private anchor: Subscription = new Subscription();
+    @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
         private router: Router,
@@ -83,5 +85,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public navigate(id: string): void {
         this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
+    }
+
+    public load(loaded: boolean): void {
+        this.loadedEvent.emit(loaded);
     }
 }

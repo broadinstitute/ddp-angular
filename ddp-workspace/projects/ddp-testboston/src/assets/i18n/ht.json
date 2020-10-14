@@ -172,8 +172,8 @@
         },
         {
           "Name": "Lisa A. Cosimi, MD",
-          "Affiliations": "Doktè ki Asosye ak Maladi enfeksyon & Global Health Equity, Brigham and Women’s Hospital Li Asistan Pwofesè, Harvard Medical School ",
-          "Info": "Dr Cosimi se yon Doktè ki Asosye nan Divizyon Ekite Sante Global & Maladi enfeksyon nan Brigham and Women’s Hospital epi li se yon Asistan Pwofesè nan Medsin nan Harvard Medical School. Rechèch sa li konsantre sèlman sou fason yo ranfòse sistèm sante ak bon jan kalite de swen sante nan anviwònman resous-limite."
+          "Affiliations": "Doktè ki Asosye, Brigham and Women’s Hospital; Asistan Pwofesè, Harvard Medical School",
+          "Info": "Dr. Cosimi se yon doktè asosye nan Brigham and Women’s Hospital Brigham, ki gen travay nan divizyon Global sou Tretman Egal Ego Sante ak Maladi enfeksyon konsantre sou ranfòse sistèm sante ak bon jan kalite a nan swen sante nan anviwònman resous-limite."
         },
         {
           "Name": "Deborah T. Hung, MD, PhD",
@@ -366,7 +366,7 @@
       }
     },
     "ArrowAlt": "Flèch",
-    "SearchAlt": "Rechèch icon"
+    "SearchAlt": "Ti snbòl pou w fè rechèch la"
   },
   "Toolkit": {
     "Dashboard": {
@@ -416,12 +416,12 @@
     "EditButton": "Kontinye",
     "CompleteButton": "Modifye",
     "ReviewButton": "Gade",
-    "OpenButton": "[HT] Open",
-    "StartButton": "[HT] Start",
+    "OpenButton": "Ouvri bouton an",
+    "StartButton": "Kòmanse",
     "AgreeButton": "Mwen aksepte",
-    "ReportButton": "[HT] Report",
+    "ReportButton": "Pez bouton rapò a",
     "NotAgreeButton": "Mwen pa pare pou aksepte",
-    "ValidateError": "[HT] Please complete all required fields.",
+    "ValidateError": "Tanpri li obligattwa pou w ta ranpli tout chan enfòma syon yo.",
     "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
     "SaveError": "Nou regrèt sa, gen yon erè ki rive",
     "ExportStudy": {

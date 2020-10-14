@@ -75,9 +75,6 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.UsedUp.Question</h2>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.UsedUp.Section1</p>
 
-                        <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.UsedUp.Question</h2>
-                        <p class="PageContent-text" translate>MoreDetails.FAQ.UsedUp.Section1</p>
-
                         <h2 class="PageContent-subtitle" translate>MoreDetails.FAQ.Analyzed.Question</h2>
                         <p class="PageContent-text" translate>MoreDetails.FAQ.Analyzed.Section1</p>
 

@@ -172,8 +172,8 @@
         },
         {
           "Name": "Lisa A. Cosimi, MD",
-          "Affiliations": "Médica Asociada, Enfermedades Infecciosas y Equidad Sanitaria Global, Brigham and Women’s Hospital; Profesora Adjunta, Facultad de Medicina de Harvard",
-          "Info": "Dra. Cosimi es Médica Asociada en las Divisiones de Equidad Sanitaria Global y Enfermedades Infecciosas en Brigham and Women’s Hospital, y Profesora Adjunta en la Facultad de Medicina de Harvard. Su investigación se centra en las maneras de fortalecer los sistemas de salud y la calidad de la atención médica en entornos de recursos limitados."
+          "Affiliations": "Médica Asociada, Brigham and Women’s Hospital; Profesora Adjunta, Facultad de Medicina de Harvard ",
+          "Info": "Dra. Cosimi es Médica Asociada en Brigham and Women’s Hospital, su trabajo en las divisiones de Equidad Sanitaria Global y Enfermedades Infecciosas se centra en fortalecer los sistemas de salud y la calidad de la atención médica en entornos de recursos limitados."
         },
         {
           "Name": "Deborah T. Hung, MD, PhD",
@@ -232,6 +232,7 @@
             "Language Scientific",
             "Mascon Medical",
             "Microbial Omics Core (MOC), Broad Institute",
+            "Nadya Lopez Zalba, Traductora",
             "UPS"
           ]
         }
@@ -365,7 +366,7 @@
       }
     },
     "ArrowAlt": "Flecha",
-    "SearchAlt": "Icono de búsqueda"
+    "SearchAlt": "Ícono de búsqueda"
   },
   "Toolkit": {
     "Dashboard": {
@@ -415,12 +416,12 @@
     "EditButton": "Continuar",
     "CompleteButton": "Editar",
     "ReviewButton": "Ver",
-    "OpenButton": "[ES] Open",
-    "StartButton": "[ES] Start",
+    "OpenButton": "Abrir",
+    "StartButton": "Comenzar",
     "AgreeButton": "Acepto",
-    "ReportButton": "[ES] Report",
+    "ReportButton": "Reportar",
     "NotAgreeButton": "Todavía no quiero aceptar",
-    "ValidateError": "[ES] Please complete all required fields.",
+    "ValidateError": "Por favor complete todos los campos requeridos.",
     "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
     "SaveError": "Lamentablemente, se produjo un error.",
     "ExportStudy": {

@@ -174,8 +174,8 @@
         "ActivityName": "Study Listing",
         "ActivityStatus": "Available",
         "ActivityCreated": "-",
-        "ActivitySummary": "Available studies and how to join them",
-        "ActivityActions": "View"
+        "ActivitySummary": "Available for you to review and volunteer",
+        "ActivityActions": "Review"
       }
     },
     "LoginLanding": {
@@ -605,7 +605,8 @@
     "NextButton": "Next <span class=\"Icon fa fa-chevron-right\"></span> ",
     "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> Prev",
     "SavingButton": "Saving",
-    "EditButton": "Edit",
+    "EditButton": "Continue",
+    "StartButton": "Start",
     "ReviewButton": "View",
     "ValidateError": "Please complete all required fields.",
     "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
