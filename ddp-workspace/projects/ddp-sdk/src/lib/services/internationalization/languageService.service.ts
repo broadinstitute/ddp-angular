@@ -48,10 +48,10 @@ export class LanguageService {
       this.profileLanguageUpdateNotifier.next();
     }
 
-    public changeLanguagePromise(languageCode: string): Promise<any> {
+    public changeLanguageObservable(languageCode: string): Observable<any> {
       if (this.canUseLanguage(languageCode)) {
         localStorage.setItem('studyLanguage', languageCode);
-        return this.translate.use(languageCode).toPromise();
+        return this.translate.use(languageCode);
       } else {
         console.log(`Error: cannot use language ${languageCode}`);
         return null;
@@ -59,12 +59,7 @@ export class LanguageService {
     }
 
     public changeLanguage(languageCode: string): boolean {
-        if (this.canUseLanguage(languageCode)) {
-            localStorage.setItem('studyLanguage', languageCode);
-            this.translate.use(languageCode);
-            return true;
-        }
-
-        return false;
+      const obs = this.changeLanguageObservable(languageCode);
+      return obs !== null;
     }
 }

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommunicationAspect } from './../communicationAspect.service';
 import { ConfigurationService } from './../configuration.service';
-import { LanguageService } from './../languageService.service'
+import { LanguageService } from '../internationalization/languageService.service';
 import { LoggingService } from './../logging.service';
 import { CommunicationException } from './../../models/exceptions/communicationException';
 import { beforeMethod } from 'kaop-ts';
@@ -56,12 +56,11 @@ export class ServiceAgent<TEntity> {
       );
 
       if (this.language) {
-        //For instances that get user text, call the main getObservable when the profile language changes
+        // For instances that get user text, call the main getObservable when the profile language changes
         return this.language.getProfileLanguageUpdateNotifier().pipe(
           switchMap(() => getObservable)
         );
-      }
-      else {
+      } else {
         return getObservable;
       }
     }

@@ -29,7 +29,7 @@ import { tap, mergeMap, take } from 'rxjs/operators';
   selector: 'ddp-user-activities',
   template: `
     <div [hidden]="!loaded">
-    <mat-table #table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
+    <mat-table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate">
@@ -192,6 +192,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   @Input() studyGuid: string;
   @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
+  @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public dataSource: UserActivitiesDataSource;
   public loaded = false;
   private states: Array<ActivityInstanceState> | null = null;
@@ -226,7 +227,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           mergeMap(x => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
-        ).subscribe(x => this.loaded = !x);
+        ).subscribe(x => {
+          this.loaded = !x;
+          this.loadedEvent.emit(this.loaded);
+        });
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -244,6 +248,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
 
   public ngOnDestroy(): void {
     this.loadingAnchor.unsubscribe();
+    this.loadedEvent.emit(false);
   }
 
   public openActivity(guid: string, code: string): void {

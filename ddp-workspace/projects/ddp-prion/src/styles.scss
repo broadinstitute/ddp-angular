@@ -3740,13 +3740,13 @@ app-third-party {
   padding: 100px 0;
 }
 
-toolkit-popup-with-checkbox {
+ddp-popup-with-checkbox {
   .SimpleButton {
     margin-top: 0;
   }
 }
 
-.toolkit-popup-with-checkbox {
+.ddp-popup-with-checkbox {
   .SimpleButton {
     margin-top: 0;
   }
@@ -3777,13 +3777,13 @@ toolkit-popup-with-checkbox {
 }
 
 @media only screen and (max-width: 824px) {
-  .cdk-overlay-pane.toolkit-popup-with-checkbox {
+  .cdk-overlay-pane.ddp-popup-with-checkbox {
     margin-top: 150px !important;
   }
 }
 
 @media only screen and (max-width: 767px) {
-  .cdk-overlay-pane.toolkit-popup-with-checkbox {
+  .cdk-overlay-pane.ddp-popup-with-checkbox {
     width: 300px !important;
     max-height: 170px !important;
     margin-top: 50% !important;

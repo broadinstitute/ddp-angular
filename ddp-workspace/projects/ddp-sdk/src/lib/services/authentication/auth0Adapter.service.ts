@@ -1,7 +1,7 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionMementoService } from '../sessionMemento.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { WindowRef } from '../windowRef';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
@@ -87,7 +87,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private createLocalWebAuth(clientId: string): any {
-        // TOOD see audience in createWebAuth()
+        // TODO see audience in createWebAuth()
         let audience = 'https://' + this.configuration.auth0Domain;
         if (!_.isUndefined(this.configuration.auth0Audience)) {
             audience = 'https://' + this.configuration.auth0Audience;

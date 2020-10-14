@@ -69,7 +69,6 @@ import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacy
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
 import { ModalActivityComponent } from './components/activity/modal-activity.component';
-import { PopupWithCheckboxComponent } from './components/dialogs/popupWithCheckbox.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -178,8 +177,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
     ModalActivityButtonComponent,
-    ModalActivityComponent,
-    PopupWithCheckboxComponent
+    ModalActivityComponent
   ],
   exports: [
     FooterComponent,
@@ -221,8 +219,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     CookiesBannerComponent,
-    PrionPrivacyPolicyComponent,
-    PopupWithCheckboxComponent
+    PrionPrivacyPolicyComponent
   ],
   entryComponents: [
     DisclaimerComponent,
@@ -232,8 +229,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SessionWillExpireComponent,
     CookiesPreferencesModalComponent,
     PrivacyPolicyModalComponent,
-    ModalActivityComponent,
-    PopupWithCheckboxComponent
+    ModalActivityComponent
   ]
 })
 export class ToolkitModule {
