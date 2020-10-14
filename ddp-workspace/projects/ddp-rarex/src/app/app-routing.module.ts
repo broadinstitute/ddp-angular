@@ -13,7 +13,7 @@ import {
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
-import { HomePageComponent, TermsConditionsPageComponent, PrivacyPolicyPageComponent } from './components/static';
+import { TermsConditionsPageComponent, PrivacyPolicyPageComponent } from './components/static';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 
@@ -158,13 +158,6 @@ const routes: Routes = [
   {
     path: RoutePaths.TermsAndConditions,
     component: TermsConditionsPageComponent,
-    canActivate: [
-      IrbGuard,
-    ]
-  },
-  {
-    path: RoutePaths.Home,
-    component: HomePageComponent,
     canActivate: [
       IrbGuard,
     ]

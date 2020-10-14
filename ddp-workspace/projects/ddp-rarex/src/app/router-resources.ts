@@ -7,7 +7,6 @@ export enum RoutePaths {
   Dashboard = 'dashboard',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
-  Home = 'home',
   TermsAndConditions = 'terms-and-conditions',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',

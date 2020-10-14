@@ -5,6 +5,7 @@ import { RoutePaths } from '../../router-resources';
 interface NavLink {
   translationKey: string;
   routePath: string;
+  external?: boolean;
 }
 
 @Component({
@@ -13,8 +14,9 @@ interface NavLink {
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  readonly rarexUrl = 'https://rare-x.org/';
   navLinks: NavLink[] = [
-    { translationKey: 'Footer.Links.Home', routePath: RoutePaths.Home },
+    { translationKey: 'Footer.Links.Home', routePath: this.rarexUrl, external: true },
     { translationKey: 'Footer.Links.TermsAndConditions', routePath: RoutePaths.TermsAndConditions },
     { translationKey: 'Footer.Links.PrivacyPolicy', routePath: RoutePaths.PrivacyPolicy }
   ];
