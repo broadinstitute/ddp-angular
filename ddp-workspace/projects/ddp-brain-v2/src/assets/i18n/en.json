@@ -563,6 +563,9 @@
         }
     },
     "Toolkit": {
+        "Dashboard": {
+            "Title": "My Dashboard"
+        },
         "Dialogs": {
             "JoinMailingList": {
                 "Title": "Stay informed",
