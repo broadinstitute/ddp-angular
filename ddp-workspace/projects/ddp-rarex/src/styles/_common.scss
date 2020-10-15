@@ -5,15 +5,15 @@
   padding: 0 2.4rem;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100%;
-}
-
 .section {
   width: 100%;
+}
+
+.section-spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 6rem;
 }
 
 .content {
