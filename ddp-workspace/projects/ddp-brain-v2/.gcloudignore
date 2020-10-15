@@ -1,8 +1,0 @@
-# Files to be ignored during Google Cloud deployment
-e2e/
-node_modules/
-src/
-^(.*/)?\..*$
-^(.*/)?.*\.md$
-^(.*/)?.*\.yaml$
-^LICENSE
