@@ -14,32 +14,34 @@ import { StudyListingDataSource } from './study-listing-data-source';
           <div class="row NoMargin">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <section class="PageContent-section">
-                <div class="row">
-                  <div class="col-md-4">
-                    <input class="form-control study-listing-filter study-listing-filter-all" matInput
-                           (keyup)="applyFilter($event)" [placeholder]="'App.StudyListing.InputPlaceholder' | translate">
+                <div class="scroll-table-container">
+                  <div class="row study-listing-filter-all-container">
+                    <div class="col-md-4">
+                      <input class="form-control study-listing-filter study-listing-filter-all" matInput
+                             (keyup)="applyFilter($event)" [placeholder]="'App.StudyListing.InputPlaceholder' | translate">
+                    </div>
                   </div>
+                  <br/>
+                  <table mat-table [dataSource]="dataSource"  class="table dataTable table-bordered table--studyListing">
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
+                      <th mat-header-cell *matHeaderCellDef (click)="sortByCol(i)">
+                        <span translate [innerHTML]="columns[i].columnTitleKey"></span>
+                        <i class="pull-right fa fa-chevron-up" *ngIf="sortArrows[i] === 1"></i>
+                        <i class="pull-right fa fa-chevron-down" *ngIf="sortArrows[i] === 2"></i>
+                      </th>
+                      <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
+                    </ng-container>
+                    <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
+                      <th mat-header-cell *matHeaderCellDef class="filter-cell">
+                        <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col"
+                               matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterInfo.filterPlaceholder | translate">
+                      </th>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+                    <tr mat-header-row *matHeaderRowDef="filterColumns" class="filter-row"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                  </table>
                 </div>
-                <br/>
-                <table mat-table [dataSource]="dataSource"  class="table dataTable table-bordered study-listing-table">
-                  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortByCol(i)">
-                      <span translate [innerHTML]="columns[i].columnTitleKey"></span>
-                      <i class="pull-right fa fa-chevron-up" *ngIf="sortArrows[i] === 1"></i>
-                      <i class="pull-right fa fa-chevron-down" *ngIf="sortArrows[i] === 2"></i>
-                    </th>
-                    <td mat-cell *matCellDef="let element" [innerHTML]="element[column]"></td>
-                  </ng-container>
-                  <ng-container [matColumnDef]="column" *ngFor="let column of filterColumns; index as i">
-                    <th mat-header-cell *matHeaderCellDef class="filter-cell">
-                      <input *ngIf="columns[i].filterInfo.canFilter" class="form-control study-listing-filter study-listing-filter-col"
-                             matInput (keyup)="applyColumnFilter(i, $event)" [placeholder]="columns[i].filterInfo.filterPlaceholder | translate">
-                    </th>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-header-row *matHeaderRowDef="filterColumns" class="filter-row"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
               </section>
             </div>
           </div>

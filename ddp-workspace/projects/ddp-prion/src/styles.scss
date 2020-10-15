@@ -565,6 +565,10 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
+.scroll-table-container {
+    overflow: auto;
+}
+
 //Study Listing Table
 //All filters (top and column filters)
 input.mat-input-element.study-listing-filter {
@@ -573,19 +577,30 @@ input.mat-input-element.study-listing-filter {
   margin-top: 0;
 }
 
-//Inside the table
-.study-listing-table {
+.study-listing-filter-all-container {
+    min-width: 660px;
+}
+
+.table--studyListing {
   table-layout: fixed;
   overflow-wrap: break-word;
+  min-width: 720px;
 
   //Add color striping
   .filter-row, tbody>tr:nth-of-type(even) {
     background-color: #f9f9f9;
   }
 
-  //Longer second column
-  th:nth-of-type(2) {
-    width: 30%;
+  .header-row {
+      th:nth-of-type(2) {
+          width: 22%;
+      }
+      th:nth-of-type(3) {
+          width: 15%;
+      }
+      th:nth-of-type(5) {
+          width: 20%;
+      }
   }
 
   //Make cell padding consistent
@@ -779,7 +794,7 @@ input.mat-input-element.study-listing-filter {
   padding: 12px 30px !important;
 }
 
-button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
+button[data-ddp-test="signInButton"], button[ data-ddp-test="signOutButton"] {
   margin-top: 0;
 }
 
@@ -3178,7 +3193,7 @@ p.Medium {
     padding: 0 0 12px 0;
   }
 
-  .mat-header-row {
+  .ddp-dashboard .mat-header-row {
     display: none;
   }
 
