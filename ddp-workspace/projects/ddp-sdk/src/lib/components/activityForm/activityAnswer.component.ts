@@ -9,6 +9,7 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
     selector: 'ddp-activity-answer',
     template: `
     <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block) && block.shown"
+                                 [class]="'boolean-answer-' + block.stableId"
                                  [block]="block"
                                  [readonly]="readonly"
                                  (valueChanged)="onChange($event)">
