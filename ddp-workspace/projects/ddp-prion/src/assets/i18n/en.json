@@ -31,6 +31,7 @@
       "ArrowAlt": "Arrow"
     },
     "StudyListing": {
+      "Title": "Study Listing",
       "Columns": [
         {
           "title": "Study Name",
@@ -160,7 +161,8 @@
       "Home": "Home",
       "LearnMore": "Learn More",
       "Dashboard": "My Dashboard",
-      "JoinUs": "Join Us"
+      "JoinUs": "Join Us",
+      "StudyListing": "Study Listing"
     },
     "Footer": {
       "BackToTop": "Back to top",
