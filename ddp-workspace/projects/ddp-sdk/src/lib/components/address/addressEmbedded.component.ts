@@ -232,7 +232,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
       scan((acc: ComponentState, update) => ({ ...acc, ...update })),
-      tap(state =>  this.logger.logDebug(this.LOG_SOURCE, `New embeddedComponentState$=${state}`)),
+      tap(state =>  this.logger.logDebug(`${this.LOG_SOURCE}. New embeddedComponentState$=%o`, state)),
       shareReplay(1)
     );
     this.stateSubscription = this.state$.pipe(

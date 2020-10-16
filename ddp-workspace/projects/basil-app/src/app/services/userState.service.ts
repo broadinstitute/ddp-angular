@@ -42,7 +42,7 @@ export class UserStateService {
                     }
                 },
                 (s: any, x: any) => {
-                    this.logger.logEvent(this.LOG_SOURCE, s);
+                    this.logger.logEvent(`${this.LOG_SOURCE} %o`, s);
                     return {
                         session: s != null,
                         consent: x.consent,

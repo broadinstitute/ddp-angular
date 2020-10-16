@@ -12,7 +12,7 @@ export class LoggingService {
 
     public logWarning = this.showEvent(LogLevel.Warning) ? console.warn.bind(window.console) : () => { };
 
-    public logError = this.showEvent(LogLevel.Error) ? console.warn.bind(window.console) : () => { };
+    public logError = this.showEvent(LogLevel.Error) ? console.error.bind(window.console) : () => { };
 
     private showEvent(level: LogLevel): boolean {
         return this.config.logLevel <= level;

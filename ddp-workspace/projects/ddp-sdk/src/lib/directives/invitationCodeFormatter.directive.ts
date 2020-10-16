@@ -27,6 +27,7 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
         private elementRef: ElementRef<HTMLInputElement>) {
         this.setModelValue(elementRef.nativeElement.value);
         this.formatter = new InvitationCodeInputFormatter(this.logger);
+        this.logger.logDebug(`${this.LOG_SOURCE}. Created directive on %o`, elementRef);
     }
 
     setModelValue(newValue: string | null): void {
@@ -36,7 +37,7 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
     @Input('value')
     set value(value: string | null) {
         value = value == null ? '' : value;
-        this.logger.logDebug(this.LOG_SOURCE, `Set value was called with value: ${value}`);
+        this.logger.logDebug(`${this.LOG_SOURCE} %s`, `Set value was called with value ${value}`);
         const cleanedInputState = this.formatter.cleanupInput(value, this.elementRef.nativeElement.selectionStart);
         this.setModelValue(cleanedInputState.value);
         const formattedState = this.formatter.addSeparator(cleanedInputState.value, cleanedInputState.selectionStart, this.isBackspace);
@@ -47,13 +48,13 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
 
 
     get value(): string | null {
-        this.logger.logDebug(this.LOG_SOURCE, `Get value got called and we returning: ${this._value}`);
+        this.logger.logDebug(`${this.LOG_SOURCE} %s`, `Get value got called and we returning ${this._value}`);
         return this._value;
     }
 
     @HostListener('input', ['$event.target.value'])
     onInput(value): void {
-        this.logger.logDebug(this.LOG_SOURCE, `onInput called with: ${value}`);
+        this.logger.logDebug(`${this.LOG_SOURCE} %s`, `onInput called with ${value}`);
         this.value = value;
         this._onChange(this._value);
     }
@@ -76,25 +77,25 @@ export class InvitationCodeFormatterDirective implements ControlValueAccessor {
 
     // part of implementing ControlValueAccessor used by ngControls on form modules
     writeValue(obj: any): void {
-        this.logger.logDebug(this.LOG_SOURCE, `Write value called with: ${JSON.stringify(obj)}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. Write value called with %s`, obj);
         this.value = obj;
     }
 
     // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnChange(fn: any): void {
-        this.logger.logDebug(this.LOG_SOURCE, `registerOnChange called with: ${JSON.stringify(fn)}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. registerOnChange called with %o`, fn);
         this._onChange = fn;
     }
 
     // part of implementing ControlValueAccessor used by ngControls on form modules
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
-        this.logger.logDebug(this.LOG_SOURCE, `registerOnTouched called with: ${JSON.stringify(fn)}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. registerOnTouched called with %o`, fn);
     }
 
     // part of implementing ControlValueAccessor used by ngControls on form modules
     setDisabledState?(isDisabled: boolean): void {
-        this.logger.logDebug(this.LOG_SOURCE, `setDisabledState: ${isDisabled}`);
-        this.logger.logDebug(this.LOG_SOURCE, 'setDisabledState not implemented');
+        this.logger.logDebug(`${this.LOG_SOURCE}. setDisabledState %o`, isDisabled);
+        this.logger.logDebug(`${this.LOG_SOURCE} %s`, 'setDisabledState not implemented');
     }
 }

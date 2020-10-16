@@ -18,7 +18,7 @@ export class SilentRenewComponent implements OnInit {
 
   public ngOnInit(): void {
     if (window.location.hash) {
-      this.logger.logEvent(this.LOG_SOURCE, `Loading silent renew callback: ${window.location.hash}`);
+      this.logger.logEvent(`${this.LOG_SOURCE}. Loading silent renew callback: %s`, window.location.hash);
       this.auth0.parseHash(window.location.hash);
     }
   }

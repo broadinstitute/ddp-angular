@@ -13,9 +13,9 @@ export class InvitationCodeInputFormatter {
 
     cleanupInput = (value: string, selectionStart: number): TextInputState => {
         let currentState = this.toUppercase(value, selectionStart);
-        this.logger.logDebug(this.LOG_SOURCE, `The state after uppercase is ${currentState}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. The state after uppercase is %o`, currentState);
         currentState = this.filter(currentState.value, currentState.selectionStart);
-        this.logger.logDebug(this.LOG_SOURCE, `The state after filter is ${currentState}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. The state after filter is %o`, currentState);
         currentState = this.truncate(currentState.value, currentState.selectionStart);
         return currentState;
     }
@@ -28,12 +28,12 @@ export class InvitationCodeInputFormatter {
             const currentChunk = value.substr(pos, this.CHUNK_SIZE);
             formattedString = formattedString.concat(currentChunk);
             pos += currentChunk.length;
-            this.logger.logDebug(this.LOG_SOURCE, `Pos after appending chunk: ${pos}`);
+            this.logger.logDebug(`${this.LOG_SOURCE}. Position after appending chunk %d`, pos);
             // do we add separator? if we have more characters to go in value or if there is room in field
             // for more after entering full chunk e.g,: 1234 - 5678 -
             if (pos < value.length ||
                 (currentChunk.length === this.CHUNK_SIZE && formattedString.length < this.DISPLAY_INPUT_MAX_LEN)) {
-                this.logger.logDebug(this.LOG_SOURCE, `Appending separator. is this backspace? ${isBackSpace}`);
+                this.logger.logDebug(`${this.LOG_SOURCE}. Appending separator. Is this backspace? %s`, isBackSpace);
                 formattedString = formattedString.concat(this.SEPARATOR);
                 // we adding charqcters so we might have to move the insertion point forward
                 // if we at borderline when adding characters, we jump the cursor no next chunk
@@ -51,7 +51,7 @@ export class InvitationCodeInputFormatter {
     format = (inputState: TextInputState): TextInputState => {
         let currentState = this.cleanupInput(inputState.value, inputState.selectionStart);
         currentState = this.addSeparator(currentState.value, currentState.selectionStart, inputState.isBackSpace);
-        this.logger.logDebug(this.LOG_SOURCE, `The state after addSeparator is ${currentState}`);
+        this.logger.logDebug(`${this.LOG_SOURCE}. The state after addSeparator is %o`, currentState);
         return currentState;
     }
 

@@ -91,9 +91,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.translate.use(languageCode)
       .pipe(take(1))
       .subscribe(() => {
-        this.logger.logEvent(this.LOG_SOURCE, `Successfully initialized '${languageCode}' UI language.`);
+        this.logger.logEvent(`${this.LOG_SOURCE} %s`, `Successfully initialized '${languageCode}' UI language.`);
       }, () => {
-        this.logger.logError(this.LOG_SOURCE, `Problem with '${languageCode}' UI language initialization.
+        this.logger.logError(`${this.LOG_SOURCE} %s`, `Problem with '${languageCode}' UI language initialization.
         Default '${this.configuration.defaultLanguageCode}' UI language is used`);
         this.translate.use(this.configuration.defaultLanguageCode);
       });
