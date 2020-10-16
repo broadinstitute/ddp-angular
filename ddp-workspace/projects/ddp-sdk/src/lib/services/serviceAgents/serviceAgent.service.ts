@@ -41,14 +41,12 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, 'There is an error.');
                             if (error && error.status) {
                                 if (unrecoverableStatuses.indexOf(error.status) > -1) {
                                     return throwError(error);
                                 }
                             }
-                            const exception = new CommunicationException('HTTP GET: ' + url, error);
-                            this.logger.logException(this.LOG_SOURCE, exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. Error: ${error}`);
                             return of(null);
                         }),
                         map(data => data && data['body']),
@@ -90,8 +88,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP POST: ' + url, error);
-                            this.logger.logException(this.LOG_SOURCE, exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -130,8 +127,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP PATCH: ' + url, error);
-                            this.logger.logException(this.LOG_SOURCE, exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -167,8 +163,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP PUT: ' + url, error);
-                            this.logger.logException(this.LOG_SOURCE, exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -202,8 +197,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP DELETE: ' + url, error);
-                            this.logger.logException(this.LOG_SOURCE, exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
