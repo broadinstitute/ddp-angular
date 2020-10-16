@@ -5,7 +5,7 @@ import { ConfigurationService } from '../configuration.service';
 import { UserServiceAgent } from './userServiceAgent.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { AnnouncementMessage } from '../../models/announcementMessage';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Observable } from 'rxjs';
 
 @Injectable()

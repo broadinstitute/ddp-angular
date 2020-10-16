@@ -160,6 +160,11 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
+        path: 'updates',
+        component: WelcomeComponent,
+        canActivate: [IrbGuard]
+    },
+    {
         path: '',
         component: WelcomeComponent,
         pathMatch: 'full',

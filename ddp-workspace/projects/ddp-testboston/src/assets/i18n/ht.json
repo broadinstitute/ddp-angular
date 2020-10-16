@@ -19,7 +19,7 @@
     "Q&A": "Kesyon ak repons",
     "WhoWeAre": "Kimoun nou ye",
     "StayInformed": "Rete enfòme",
-    "Help": "[HT] Help",
+    "Help": "Ede",
     "Dashboard": "Dach mwen an",
     "Menu": "Meni",
     "Invitation": "Kòd envitasyon",
@@ -64,10 +64,10 @@
   },
   "HomePage": {
     "IntroSection": {
-      "Title": "Nou vle ede vil nou a retounen travay an tout sekirite.",
-      "Text": "TestBoston se yon etid rechèch sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard.",
+      "Title": "Nou vle ede kominote nou yo epi aprann plis sou compòtman enfeksyon COVID-19 nan zòn Boston an.",
+      "Text": "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital ak Broad Institute of MIT and Harvard.",
       "Code": "Mete kòd envitasyon mwen an",
-      "NoCode": "Yo pa t envite m, èske m kapab patisipe?"
+      "NoCode": "Mwen pa gen yon kòd envitasyon"
     },
     "AboutSection": {
       "Title": "Apwopo etid la",
@@ -95,19 +95,19 @@
         {
           "Question": "Èske mwen pral fè yon tès pou COVID-19 si mwen antre nan etid la?",
           "Paragraphs": [
-            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, ou pral resevwa yon kit pou pran tès la lakay ou oumenm nan apeprè yon semèn apre ou antre nan etid la. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. Aplikatè nan devan nen w lan teste si w gen COVID-19 aktyèlman. Tès pou pike dwèt la teste si w gen antikò COVID-19 (ki vle di ou te ekspoze nan viris la avan sa). Si w aksepte pou w refè yon tès, epi w kalifye pou etid pi long lan, n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
+            "Wi. Si w te resevwa yon envitasyon pou w patisipe nan etid la epi w deside enskri, ou pral fè tès pou COVID-19. Sepandan, plas yo limite pou enskripsyon epi yo pral ranpli l nan lòd kilès ki rive anvan. Si w enskri, aprè yon semèn lèw fin enskri pou ou patisipe nan etid la, ou gen pou ou resevwa yon ti pake ki gen 2 tès ke ou ka pran lakay ou. Kit tès lakay la pral gen ladan yon kit tès viwoloji (aplikatè nan nen) ak yon kit tès antikò (pou pike dwèt ou), avèk machasuiv sou fason pou pran echantiyon ou yo epi voye yo tounen nan laboratwa nou a pou tès. Prelèvman nan nen pèmèt nou detekte si ou gen tras COVID-19. Tès pou pike dwèt la teste si w gen antikò COVID-19 (sa vle di ke ou te gen viris la avan sa). Si ou dakò pou ou patisipe nan pati etid kap dire plis la, n ap voye kit pou ou pou w refè tès sa yo chak mwa pandan 5 mwa anplis."
           ]
         },
         {
-          "Question": "Èske m ap resevwa rezilta tès mwen yo?",
+          "Question": "Èske m’ap resevwa rezilta tès mwen yo?",
           "Paragraphs": [
-            "Ou pral resevwa rezilta tès viral viwoloji a. Nou pa otorize aktyèlman pou n ba ou rezilta tès antikò ou yo. Nou pral rapòte rezilta yo an gwoup (rezilta ou yo melanje avèk rezilta lòt patisipan rechèch yo) bay Depatman Sante Piblik Massachusetts ak bay lòt pati konsène kle yo nan sante piblik pou konnen ki pousantaj nan patisipan etid yo ki te gen yon antikò pozitif, ak pou ede nou konprann prevalans lan pi byen, oswa nan ki pwen COVID-19 lan pwopaje toupatou."
+            "Ou ap resevwa rezilta tès ki gen rapò ak etid la. Ou pap resevwa rezilta tès antikò ou a. Rezilta yo la pou ede responsab sante piblik. Lè yo rapòte rezilta yo, se yon rezime enfòmasyon demografik jeneral ki ap pibliye. Idantite w ap rete kache."
           ]
         },
         {
           "Question": "Èske TestBoston se sèlman pou moun ki gen sentòm COVID-19?",
           "Paragraphs": [
-            "Non. Nou envite tout moun ki te resevwa yon envitasyon pou yo patisipe nan TestBoston pou li enskri nan etid la, kèlkeswa si wi ou non ou gen sentòm (oswa ou te janm gen sentòm anvan sa). Ou gendwa enskri tou si w te gen COVID-19 anvan sa."
+            "Non - nou envite tout moun ki te resevwa yon envitasyon pou yo patisipe nan TestBoston pou li enskri nan etid la, kèlkeswa si wi ou non ou gen sentòm (oswa ou te janm gen sentòm anvan sa)."
           ]
         },
         {
@@ -123,18 +123,6 @@
           ]
         },
         {
-          "Question": "Konbyen tan sa pran pou w konnen rezilta tès la?",
-          "Paragraphs": [
-            "Ou dwe espere resevwa rezilta viwoloji ou a sou 72 èdtan apre yo te resevwa echantiyon an nan laboratwa a."
-          ]
-        },
-        {
-          "Question": "Poukisa ou pa ka ban m rezilta tès antikò a?",
-          "Paragraphs": [
-            "Piske tès antikò yo pral fèt nan yon laboratwa rechèch (yon etablisman kote yo gendwa reyalize rechèch syantifik, eksperyans, ak mezi) epi se pa nan yon laboratwa klinik (yon laboratwa kote yo fè tès òdinèman sou echantiyon klinik pou jwenn enfòmasyon sou sante yon pasyan), nou pa kapab kominike ba ou dirèkteman rezilta ki soti nan tès antikò rechèch yo. "
-          ]
-        },
-        {
           "Question": "Èske li gratis pou patisipe nan TestBoston?",
           "Paragraphs": [
             "Wi. Pa gen okenn frè pou w peye pou w patisipe nan TestBoston."
@@ -143,7 +131,7 @@
         {
           "Question": "Kisa mwen pral dwe fè si mwen antre nan etid la?",
           "Paragraphs": [
-            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. Nou pral mande patisipan yo tou si yo ta renmen fè tès chak mwa pou COVID-19 pandan 5 pwochen mwa yo. Kòlèk pou tès yo se yon prelèvman echantiyon avèk aplikatè nan devan nen ak yon pike nan pwent dwèt pou pran san."
+            "Nou mande pou patisipan yo nan TestBoston ranpli yon sondaj kout sou COVID-19 ak fè de kòlèk echantiyon COVID-19 senp sou tèt yo lakay yo. Nou mande patisipan yo pou yo voye kit yo tounen ban nou nan yon bwat peye davans pou tretman. Tout Patisipan yo ka sèvi kòm volontè pou repete pwosesis sa a chak mwa pandan 5 mwa anplis. Koleksyon tès yo se yon prelèvman nan nen ak yon ti tach san pike nan  dwèt."
           ]
         },
         {
@@ -161,24 +149,14 @@
         {
           "Question": "Kiyès k ap dirije etid sa a?",
           "Paragraphs": [
-            "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital, Mass General Brigham (MGB, ki te otrefwa Partners Healthcare), ak Broad Institute of MIT and Harvard. Moun k ap dirije etid la se Doktè Lisa Cosimi, Doktè Ann Woolley, ak Doktè Deborah Hung. Tout doktè yo se klinisyen maladi enfektyez nan Brigham and Women’s Hospital.",
-            "MGB se pi gwo sistèm swen sante nan zòn Boston lan. Lopital li yo gen ladan yo Brigham and Women’s ak Massachusetts General Hospital. Broad Institute se yon enstiti rechèch inivèsitè premye plan ki chita nan Cambridge. Broad Institute reyalize plizyè milye tès COVID-19 chak jou pou Depatman Sante yo nan tout Massachusetts, ansanm ak pou divès etid sou COVID-19 nan Massachusetts."
+            "TestBoston se yon etid sou COVID-19 ki gen soutyen Brigham and Women's Hospital ak Broad Institute of MIT and Harvard. Moun k ap dirije etid la se doktè maladi enfektyez nan Brigham and Women’s Hospital.",
+            "Broad Institute se yon enstiti rechèch inivèsitè premye plan ki chita nan Cambridge. Broad Institute reyalize plizyè milye tès COVID-19 chak jou pou Depatman Sante yo nan tout Massachusetts, ansanm ak pou divès etid sou COVID-19 nan Massachusetts."
           ]
         },
         {
           "Question": "Konbyen tan etid la ap dire?",
           "Paragraphs": [
-            "Patisipan nan etid la kapab, nenpòt lè, deside sispann patisipe nan etid. Moun ki patisipe nan etid la annantye ka atann pou yo fini etid la apre 6 mwa."
-          ]
-        },
-        {
-          "Question": "Kikote mwen kapab jwenn plis enfòmasyon sou COVID 19?",
-          "Paragraphs": [],
-          "Bullets": [
-            "<strong>Sant pou Kontwòl ak Prevansyon Maladi Etazini (CDC):</strong> CDC a te kreye yon paj <a class=\"Link Link_semi-bold\" href=\"https://www.cdc.gov/coronavirus/2019-ncov/index.html\" target=\"_blank\">dakèy pou kowonaviris</a> ki gen yon kantite resous pou aprann plis sou sentòm COVID-19, fason pou pwoteje tèt ou, ak politik nasyonal ki pi ajou yo.",
-            "<strong>Enfòmasyon ki fasil-pou-li avèk imaj:</strong> <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"https://www.healthwise.net/partnersmychart/Content/StdDocument.aspx?DOCHWID=custom.partners.covidfamily\" target=\"_blank\">Fason pou pran swen tèt ou oswa yon manm fanmi ki gen COVID-19</a>.",
-            "<strong>Rezidan Massachusetts yo:</strong> Ou ka kontakte liy dirèk Depatman sante piblik Massachusetts (DPH) la swa nan <a class=\"Link Link_semi-bold\" href=\"tel:617-983-6800\">617-983-6800</a> oswa nan <a class=\"Link Link_semi-bold\" href=\"tel:211\">211</a>, 24 èdtan pa jou, 7 jou pa semèn. <strong>TTY/TDD</strong> <a class=\"Link Link_semi-bold\" href=\"tel:617-624-6001\">617-624-6001</a>.  Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.mass.gov/resource/information-on-the-outbreak-of-coronavirus-disease-2019-covid-19\" target=\"_blank\">Massachusetts DPH</a>.",
-            "<strong>Rezidan Boston yo:</strong> Jwenn enfòmasyon fyab nan Komisyon sante piblik Boston lan, <a class=\"Link Link_semi-bold\" href=\"tel:617-534-5395\">617-534-5395</a>. Epitou tcheke sitwèb la: <a class=\"Link Link_semi-bold\" href=\"https://www.bphc.org/onlinenewsroom/Blog/Lists/Posts/Post.aspx?List=24ee0d58-2a85-4a4a-855b-f5af9d781627&ID=1282&RootFolder=%2Fonlinenewsroom%2FBlog%2FLists%2FPosts&Source=https%3A%2F%2Fwww.bphc.org%2FPages%2Fdefault.aspx&Web=03126e14-4972-4333-b8a3-800cbc1cafce\" target=\"_blank\">BPHC</a>."
+            "Etid sa ka dire jiska 6 mwa.Tout Patisipan ki nan etid sa ka deside sispann patisipe  nan etid la nan nenpòt ki lè."
           ]
         }
       ]
@@ -186,21 +164,77 @@
     "TeamSection": {
       "Title": "Ekip nou an",
       "Text": "Nou se yon ekip doktè ak chèchè nan domèn maladi enfektyez ki vle konprann pi byen fason COVID-19 afekte moun ak kominote yo pou nou kapab sèvi tout pasyan yo pi byen. ",
-      "List": [
+      "PIs": [
         {
-          "Name": "Doktè Ann E. Woolley, MD",
-          "Affiliations": "Enstriktè nan medsin",
-          "Info": "Doktè Ann Woolley se yon enstriktè nan medsin ak yon doktè nan domèn maladi enfektyez nan Brigham & Women’s Hospital ak Harvard Medical School. Doktè Woolley te resevwa yon BS nan jeni mekanik ak ayewospasyal nan Princeton University nan ane 2001 ak yon sètifika pòs-bakaloreya nan etid premedikal nan Columbia University anvan fòmasyon nan sante piblik ak nan medsin nan Mount Sinai School of medicine nan New York. Avèk yon konsantrasyon sou transplantasyon, epatit, ak enfeksyon kadyak, rechèch Doktè Woolley te demontre nouvo metòd pou itilize an tout sekirite ògàn moun ki konsidere kòm donatè men ki pa t apwopriye oparavan. Travay li te pèmèt rakousi tan datant pou moun ki bezwen don ògàn, epi pèmèt plis moun kapab chwazi pou yo vin donatè ògàn pou sove lavi."
+          "Name": "Ann E. Woolley, MD, MPH",
+          "Affiliations": "Doktè ki Asosye, ak Maladi enfeksyon, se nan Brigham and Women’s Hospital; se yon instriktè Medsin,nan Harvard Medical School ",
+          "Info": "Doktè Ann Woolley se li ki asosye Direktè klinik la pou transplantasyon ògàn solid maladi enfeksyon nan Brigham and Women’s Hospital ak yon Envestigatè nan klinik ki ap fè rechèch konsantre sou agrandi tretman ak dyagnostik."
         },
         {
-          "Name": "Doktè Lisa A. Cosimi, MD",
-          "Affiliations": "Asistan pwofesè, maladi enfektyèz nan Harvard Medical School, Global Health Equity",
-          "Info": "Doktè Cosimi se yon medsen asosye nan Global Health Equity & Incetuous Disease nan Brigham & Women’s Hospital, ak pwofesè adjwen nan medsin nan Harvard Medical School. Doktè Cosimi te resevwa yon BA nan ekonomi nan Cornell University an 1992 ak doktora an medsin nan Weill Cornell Medical College an 1996.  Li te fè rezidans li nan medsin entèn ak swen primè nan Massachusetts General Hospital epi fòmasyon nan maladi enfektyez nan pwogram bous konbine Partners.  Rechèch Doktè Cosimi te konsantre sou fason pou ranfòse sistèm sante yo ak kalite swen sante yo nan anviwònman ki gen resous limite. Gwoup li a, Partnership for Health Advancement in Vietnam (HAIVN), te asosye avèk Ministè Sante Vyetnam, Inivèsite Medikal ak lopital yo pou refòme ak modènize edikasyon travayè swen sante, ak amelyore kalite ak aksè nan swen sante pou VIH, tibèkiloz ak lòt enfeksyon k ap parèt nan tout peyi a."
+          "Name": "Lisa A. Cosimi, MD",
+          "Affiliations": "Doktè ki Asosye, Brigham and Women’s Hospital; Asistan Pwofesè, Harvard Medical School",
+          "Info": "Dr. Cosimi se yon doktè asosye nan Brigham and Women’s Hospital Brigham, ki gen travay nan divizyon Global sou Tretman Egal Ego Sante ak Maladi enfeksyon konsantre sou ranfòse sistèm sante ak bon jan kalite a nan swen sante nan anviwònman resous-limite."
         },
         {
-          "Name": "Doktè Deborah T. Hung, MD, PhD",
-          "Affiliations": "Pwofesè agreje, maladi enfektyez, swen pilmonè, ak swen entansif nan Harvard Medical School",
-          "Info": "Doktè Deborah Hung se pwofesè nan jenetik nan Massachusetts General Hospital Harvard Medical School, yon manm prensipal fakilte a ak ko-direktris pwogram maladi enfektyez ak mikwobyòm nan Broad Institute of MIT and Harvard, epi yon medsen tretan nan maladi enfektyez ak medsin swen pilmonè ak swen entansif nan Brigham and Women’s Hospital. Li travay nan entèfas byoloji chimik, jenomik, ak patojenèz bakteryèn pou etabli nouvo paradigm pou yon antibyotik baze sou biyoloji esansyèl ki nesesè pou yon patojèn lakòz maladi kay moun li antre sou li an. Avèk itilizasyon fòmasyon li kòm chimis sentetik, jenetisyen bakteryèn, ak medsen klinik, li eksplore apwòch pou deranje entèraksyon an patojèn-ot."
+          "Name": "Deborah T. Hung, MD, PhD",
+          "Affiliations": "Pwofesè, Harvard Medical School; Li se manm inpòtan nan fakilte a epi li se ko-direktè, Maladi enfeksyon ak Pwogram mikrobyom, Broad Institute",
+          "Info": "Doktè Deborah Hung se yon doktè ki fè anpil rechèch sou syans li nan Broad Institute, Harvard Medical School ak Massachusetts General Hospital ki etidye maladi enfeksyon epi li se yon doktè k ap patisipe nan maladi enfeksyon ak poumon ak medikaman swen kritik nan Brigham and Women’s Hospital."
+        }
+      ],
+      "Others": [
+        {
+          "Title": "Ekip Administratif, Broad Institute",
+          "Members": [
+            "Andrea Saltzman, Direktè, Biwo Pwoteksyon Sijè Rechèch",
+            "Marissa Jenko, MS, Plon Administratif",
+            "Paul Tyman, se yon nan asistan Administratif yo",
+            "Sarah Winnicki, se ki dezyèm Manadjèse tout Pwojè",
+            "Sharon Wong, PhD, Direktè Asosye - Pwogram Maladi enfeksyon ak mikrobyom"
+          ]
+        },
+        {
+          "Title": "Ekip Jeni, Broad Institute",
+          "Members": [
+            "Andrew Zimmer, Direktè, platfòm Don Done",
+            "Anna Hupalowska, Ilistrasyon ak Done vizyalizasyon Designer",
+            "Erin Gwozdz, Itilizatè Eksperyans ak Itilizatè Entèfas Designer",
+            "Jen Lapan, Direktè pwodwi lojisyèl direktè lekòl la",
+            "Kiara Westbrooks, Enjenyè lojisyèl",
+            "Marco Ocana, Enjenyè Direktè Lojisyèl",
+            "Pavel Sidorenko, Enjenyè lojisyèl",
+            "Pegah Taheri, Enjenyè lojisyèl",
+            "Sampath Settipalli, Granmoun aje enjenyè lojisyèl",
+            "Scott Sassone, Manadjè, Pwodiksyon Videyo",
+            "Simone Maiwald, Manadjè Jeni lojisyèl",
+            "Yufeng Wang, Granmoun aje enjenyè lojisyèl  "
+          ]
+        },
+        {
+          "Title": "Ekip nan klinik, Brigham and Women’s Hospital",
+          "Members": [
+            "Andy Kim, BS, Koòdonatè Rechèch",
+            "Christina Kelly, Asistan Rechèch",
+            "Hannah Laibinis, Entèn",
+            "Henry Manigat, Tradiktè",
+            "Henry Rutherford, BA, Koòdonatè Rechèch",
+            "Himaja Nagireddy, HSPH MS Kandida, Entèn",
+            "Sarah Naz-McLean, MSc, Manadjè Pwogram lan",
+            "Tina Wang, Tradiktè",
+            "Yilu Ma, Tradiktè"
+          ]
+        },
+        {
+          "Title": "Lòt Patnè",
+          "Members": [
+            "Klinik rechèch sa se sou sekans Platfòm (CRSP), Broad institi a li ye",
+            "GBF",
+            "Joel Ceide, Tradiktè",
+            "Language Scientific",
+            "Mascon Medical",
+            "Microbial Omics Core (MOC), Broad Institute",
+            "Nadya Lopez Zalba, Tradiktè",
+            "UPS"
+          ]
         }
       ]
     },
@@ -291,48 +325,48 @@
     "Button": "Suivan"
   },
   "Help": {
-    "Title": "[HT] Help Center",
+    "Title": "Sant Èd",
     "Collect": {
-      "Title": "[HT] How to collect your samples",
-      "Text": "[HT] It's important to take your test and send it back on the same day, Monday or through Thursday. These are the days that the Broad Institute will process TestBoston samples.",
-      "Link": "[HT] Sample Collection Instructions",
-      "IconAlt": "[HT] PDF file icon",
-      "IframeTitle": "[HT] Nasal swab kit directions",
+      "Title": "Kouman kolekte echantiyon ou yo",
+      "Text": "Li enpòtan pou pran tès ou a epi voye li tounen nan menm jou a, Lendi jiska Jedi. Sa yo se jou yo ki Enstiti a Broad pral trete echantiyon TestBoston.",
+      "Link": "Enstriksyon Koleksyon Echantiyon",
+      "IconAlt": "PDF dosye icon",
+      "IframeTitle": "Direksyon twous prelèvman nen yo",
       "Video": "https://player.vimeo.com/video/440526812"
     },
     "Return": {
-      "Title": "[HT] How to return your samples",
-      "Text": "[HT] Your test samples must be returned via UPS on the same day you take your test. Drop your test kit at either an official UPS Store or in a UPS Drop Box. You can also request a UPS pick-up for your home if you have a safe place to leave your package outside for the UPS driver.",
+      "Title": "Ki jan yo retounen echantiyon ou yo",
+      "Text": "Echantiyon tès ou yo dwe retounen via UPS nan menm jou ou pran tès ou an. Drop twous tès ou a nan swa yon ofisyèl UPS Store oswa nan yon UPS Drop Box. Ou ka mande tou yon UPS pick-up pou kay ou si ou gen yon kote ki an sekirite pou kite pakè ou deyò pou chofè UPS la.",
       "Step1": {
-        "Title": "[HT] Step 1:",
+        "Title": "Etap 1:",
         "Text": {
-          "Part1": "[HT] Click",
-          "Part2": "Type your zip code and click on “<span class=\"bold\">See All Options</span>”."
+          "Part1": "Klike",
+          "Part2": "Tape kòd postal ou epi klike sou “<span class=\"bold\">See All Options</span>”."
         },
-        "ImageAlt": "[HT] UPS locations instruction, your location"
+        "ImageAlt": "UPS enstriksyon kote, kote ou ye"
       },
       "Step2": {
-        "Title": "[HT] Step 2:",
-        "Text": "[HT] Under “<span class=\"bold\">Location Type</span>”, check the boxes for “<span class=\"bold\">The UPS Store®</span>” and “<span class=\"bold\">UPS Drop Box</span>”. Then click the search icon",
-        "ImageAlt": "[HT] UPS locations instruction, UPS boxes"
+        "Title": "Etap 2:",
+        "Text": "Anba “<span class=\"bold\">Location Type</span>”, tcheke ti bwat yo pou “<span class=\"bold\">The UPS Store®</span>” ak “<span class=\"bold\">UPS Drop Box</span>”. Lè sa a, klike sou ikòn rechèch la",
+        "ImageAlt": "UPS enstriksyon kote, bwat UPS"
       }
     },
     "Pickup": {
-      "Title": "[HT] UPS home pickup",
+      "Title": "UPS lakay pickup",
       "Text": {
-        "Part1": "[HT] You may be eligible for UPS home pickup if you can safely leave your package in a place where UPS drivers can access it. Schedule a pickup by calling",
-        "Part2": "If you have any difficulty returning your kit through UPS, please contact the study team"
+        "Part1": "Ou ka elijib pou UPS lakay pickup si ou ka san danje kite pake ou nan yon plas kote UPS chofè kapab jwenn aksè li. Orè yon pickup lè w rele",
+        "Part2": "Si ou gen nenpòt difikilte pou retounen twous ou nan UPS, tanpri kontakte ekip etid la"
       }
     },
     "Questions": {
-      "Title": "[HT] Still have questions?",
+      "Title": "Toujou gen kesyon?",
       "Text": {
-        "Part1": "[HT] If you have further questions, please reach out to study staff by emailing",
+        "Part1": "Si ou gen plis kesyon, tanpri kontakte anplwaye etid la pa imèl",
         "Part2": "or"
       }
     },
-    "ArrowAlt": "[HT] Arrow",
-    "SearchAlt": "[HT] Search icon"
+    "ArrowAlt": "Flèch",
+    "SearchAlt": "Ti snbòl pou w fè rechèch la"
   },
   "Toolkit": {
     "Dashboard": {
@@ -382,12 +416,12 @@
     "EditButton": "Kontinye",
     "CompleteButton": "Modifye",
     "ReviewButton": "Gade",
-    "OpenButton": "[HT] Open",
-    "StartButton": "[HT] Start",
+    "OpenButton": "Ouvri bouton an",
+    "StartButton": "Kòmanse",
     "AgreeButton": "Mwen aksepte",
-    "ReportButton": "[HT] Report",
+    "ReportButton": "Pez bouton rapò a",
     "NotAgreeButton": "Mwen pa pare pou aksepte",
-    "ValidateError": "[HT] Please complete all required fields.",
+    "ValidateError": "Tanpri li obligattwa pou w ta ranpli tout chan enfòma syon yo.",
     "CommunicationError": "Te gen yon pwoblèm pou anrejistre done ou yo. Tanpri, tcheke fòmilè an ak repons ou yo anvan w soumèt yo",
     "SaveError": "Nou regrèt sa, gen yon erè ki rive",
     "ExportStudy": {

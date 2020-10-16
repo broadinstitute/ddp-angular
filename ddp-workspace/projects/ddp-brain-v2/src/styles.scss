@@ -5,7 +5,12 @@
 @import './styles/password.scss';
 @import './styles/static-page.scss';
 @import './styles/stay-informed.scss';
+@import './styles/age-up-thank-you.scss';
 @import './styles/activities.scss';
+@import './styles/dashboard.scss';
+
+$custom-typography: mat-typography-config($font-family: 'Untitled-Sans-Regular');
+@include mat-core($custom-typography);
 
 html,
 body {
@@ -135,6 +140,12 @@ p {
     margin: 0;
 }
 
+.only-margin-bottom {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .h2-big {
     font-size: 2.5rem;
     line-height: 3.125rem;
@@ -149,12 +160,24 @@ p {
     text-align: center;
 }
 
+.light {
+    font-family: 'Untitled-Sans-Light', sans-serif;
+}
+
 .regular {
     font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
+.bold,
 .medium {
     font-family: 'Untitled-Sans-Medium', sans-serif;
+}
+
+.normal {
+    font-family: 'Untitled-Sans-Regular', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
 }
 
 .italic {

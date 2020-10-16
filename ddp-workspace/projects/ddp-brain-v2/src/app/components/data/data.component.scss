@@ -59,15 +59,15 @@
     max-width: 430px;
     margin-bottom: 3rem;
 
-    &_modal {
-        cursor: pointer;
-    }
-
     &__image {
         max-width: 100%;
         height: auto;
         border: 2px solid mat-color($app-theme, 900);
         border-radius: 7px;
+
+        &_modal {
+            cursor: pointer;
+        }
     }
 
     &__link {

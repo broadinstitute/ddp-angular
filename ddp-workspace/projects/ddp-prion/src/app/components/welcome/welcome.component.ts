@@ -1,149 +1,135 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
+import {
+  AnalyticsEventActions,
+  AnalyticsEventsService,
+  Auth0AdapterService,
+  BrowserContentService,
+  WindowRef
+} from 'ddp-sdk';
 
 @Component({
-    selector: 'welcome',
-    template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
-    <div class="Wrapper">
-        <a id="topView"></a>
-        <div class="Intro-image">
-            <div class="Intro-imageSpan" role="img" aria-label="Angiosarcoma Homepage Image">
-                <span class="Intro-imageInner"></span>
-                <div *ngIf="showArrow" class="Intro-arrow">
-                    <a (click)="scrollTo(secondView)"><img src="./assets/images/arrow.svg" alt="Arrow"></a>
+    selector: 'app-welcome',
+    template: `<prion-header noBackground="true"></prion-header>
+    <div class="Container NoPadding">
+      <a id="topView"></a>
+        <div class="Landing-image">
+          <div class="Landing-content col-lg-6 col-md-6 col-sm-8 col-xs-12">
+            <h1 class="Title" translate>App.Welcome.WelcomeTitle</h1>
+            <p translate>App.Welcome.WelcomeText</p>
+            <div class="row">
+              <a (click)="clickJoinUs()" class="Button Button--primaryDarkYellow col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-sm-offset-2" translate>App.Common.JoinUs</a>
+            </div>
+          </div>
+          <div *ngIf="true" class="Intro-arrow">
+            <a (click)="scrollTo(secondView)"><img src="./assets/images/white-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
+          </div>
+        </div>
+
+        <div class="FullWidth">
+            <div class="row NoMargin">
+                <a #secondView></a>
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title Aligned--center" translate>App.Welcome.Intro</h1>
+                        <div class="row Margin20">
+                            <a (click)="clickJoinUs()" class="Button Button--primaryYellow col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-1 col-xs-8 col-sm-offset-2" translate>App.Common.JoinUs</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="Intro-footer row">
-            <img src="./assets/images/logo-broad-institute.svg" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.svg" class="Intro-footerLogos" alt="Dana Farber Logo">
+        <div class="CenterDiv">
+            <a *ngIf="true" (click)="scrollToWithAdjust(thirdView, 100)" class="Arrow"><img src="/assets/images/yellow-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
         </div>
 
-        <div class="Intro row">
-            <section class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title" translate>
-                    Toolkit.Welcome.WelcomeTitle
-                </h1>
-                <p class="Message-text" translate>
-                    Toolkit.Welcome.WelcomeText
-                </p>
-            </section>
-        </div>
-
-        <div class="row">
-            <a #secondView></a>
-            <section class="Message Message--intro col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title Message-title--intro" translate>
-                    Toolkit.Welcome.Intro
-                </h1>
-                <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                    Toolkit.Common.CountMeInButton
-                </a>
-            </section>
-        </div>
-
-        <div class="row">
-            <div class="Separator Separator--small"></div>
-        </div>
-
-        <div class="row">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                <h1 class="Message-title" translate>
-                    Toolkit.Welcome.Participate
-                </h1>
-            </section>
-        </div>
-
-        <div class="row">
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-1.svg" class="Message-stepImage" alt="Step 1">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.FirstStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.FirstStep.Subtitle
-                </h2>
-                <p class="Message-stepText">
-                    <span translate>Toolkit.Welcome.Steps.FirstStep.TextPt1</span>
-                    <a [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="Color--orange" translate> Toolkit.Welcome.Steps.FirstStep.Link </a>
-                    <span translate>Toolkit.Welcome.Steps.FirstStep.TextPt2</span>
-                </p>
-            </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-2.svg" class="Message-stepImage" alt="Step 2">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.SecondStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.SecondStep.Subtitle
-                </h2>
-                <p class="Message-stepText" [innerHTML]="'Toolkit.Welcome.Steps.SecondStep.Text' | translate">
-                </p>
-            </div>
-            <div class="Message-step col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img lazy-resource src="./assets/images/step-3.svg" class="Message-stepImage" alt="Step 3">
-                <h1 class="Message-stepTitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Title
-                </h1>
-                <h2 class="Message-stepSubtitle NoMargin" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Subtitle
-                </h2>
-                <p class="Message-stepText" translate>
-                    Toolkit.Welcome.Steps.ThirdStep.Text
-                </p>
+        <div class="FullWidth">
+            <div class="row NoMargin">
+              <a #thirdView></a>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12" translate>App.Welcome.Participate</h1>
+                        <div class="row Margin20">
+                            <img alt="Step 1" src="/assets/images/step-1.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>App.Welcome.Steps.FirstStep.Title</h2>
+                                <p translate>App.Welcome.Steps.FirstStep.Text</p>
+                            </div>
+                        </div>
+                        <div class="row Margin20">
+                            <img alt="Step 2" src="/assets/images/step-2.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>App.Welcome.Steps.SecondStep.Title</h2>
+                                <p translate>App.Welcome.Steps.SecondStep.Text</p>
+                            </div>
+                        </div>
+                        <div class="row Margin20">
+                            <img alt="Step 3" src="/assets/images/step-3.svg" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 HomeSteps" />
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <h2 class="Title Color--green" translate>App.Welcome.Steps.ThirdStep.Title</h2>
+                                <p translate>App.Welcome.Steps.ThirdStep.Text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="Separator Separator--small"></div>
+        <div class="CenterDiv">
+          <a *ngIf="true" (click)="scrollTo(fourthView)" class="Arrow"><img src="/assets/images/yellow-arrow.svg" [attr.alt]="'App.Welcome.ArrowAlt' | translate"></a>
         </div>
 
-        <div class="row row--moreBottomMargin">
-            <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <h1 class="Message-title Message-title--intro" translate>
-                    Toolkit.Welcome.Closing
-                </h1>
-                <a href [routerLink]="unsupportedBrowser ? null : '/count-me-in'" (click)="clickCountMeIn()" class="ButtonBordered ButtonBordered--orange Button--countMeIn" translate>
-                    Toolkit.Common.CountMeInButton
-                </a>
-            </section>
+        <div class="FullWidth">
+            <div class="row NoMargin">
+              <a #fourthView></a>
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="Message-content">
+                        <h1 class="Title Aligned--center" translate>App.Welcome.Closing</h1>
+                        <div class="row Margin20">
+                            <a (click)="clickJoinUs()" class="Button Button--primaryYellow col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-1 col-xs-8 col-sm-offset-2" translate>App.Common.JoinUs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
     `
 })
 export class WelcomeComponent implements OnInit {
     public unsupportedBrowser: boolean;
-    private readonly HEADER_HEIGHT: number = 70;
 
     constructor(
         private windowRef: WindowRef,
         private analytics: AnalyticsEventsService,
-        private browserContent: BrowserContentService) { }
+        private browserContent: BrowserContentService, private auth0Adapter: Auth0AdapterService) { }
 
     public ngOnInit(): void {
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
     }
 
-    public clickCountMeIn(): void {
+    public clickJoinUs(): void {
+      sessionStorage.setItem('nextUrl', 'start-study');
+      this.auth0Adapter.signup();
         this.doAnalytics();
         if (this.unsupportedBrowser) {
             this.browserContent.emitWarningEvent();
         }
     }
 
-    public get showArrow(): boolean {
-        return this.windowRef.nativeWindow.pageYOffset <= this.HEADER_HEIGHT;
-    }
-
     public scrollTo(target: any): void {
         this.isIE ? this.simpleScrolling(target) : this.smoothScrolling(target);
     }
 
+    public scrollToWithAdjust(target: any, offsetAdjust: number): void {
+      this.isIE ? this.simpleScrollingWithAdjust(target, offsetAdjust) : this.smoothScrollingWithAdjust(target, offsetAdjust);
+    }
+
     private simpleScrolling(target: any): void {
         this.windowRef.nativeWindow.scrollTo(0, target.offsetTop);
+    }
+
+    private simpleScrollingWithAdjust(target: any, offsetAdjust: number): void {
+      this.windowRef.nativeWindow.scrollTo(0, target.offsetTop + offsetAdjust);
     }
 
     private smoothScrolling(target: any): void {
@@ -153,11 +139,18 @@ export class WelcomeComponent implements OnInit {
         });
     }
 
+    private smoothScrollingWithAdjust(target: any, offsetAdjust: number): void {
+      this.windowRef.nativeWindow.scrollTo({
+        top: target.offsetTop + offsetAdjust,
+        behavior: 'smooth'
+      });
+    }
+
     private get isIE(): boolean {
         return this.browserContent.unsupportedBrowser();
     }
 
     private doAnalytics(): void {
-        this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromMainPage);
+        this.analytics.emitCustomEvent('clickedJoinUs', AnalyticsEventActions.FromMainPage);
     }
 }

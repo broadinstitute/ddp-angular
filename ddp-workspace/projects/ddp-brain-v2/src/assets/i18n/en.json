@@ -10,6 +10,9 @@
             "JoinMailingList": "Join Mailing List",
             "ReturnHome": "Return home"
         },
+        "Alts": {
+            "CMI": "Count Me In logo"
+        },
         "CMI": "Count Me In"
     },
     "Header": {
@@ -37,6 +40,9 @@
         "Dashboard": "Dashboard",
         "Menu": "Menu"
     },
+    "LearnMoreSection": {
+        "Text": "To learn more about participation, eligibility criteria and more"
+    },
     "HomePage": {
         "Introduction": {
             "Title": "Help transform our understanding of Brain Cancer",
@@ -54,8 +60,7 @@
             "Text3": {
                 "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
                 "Part2": "visit our site"
-            },
-            "CMIAlt": "Count Me In logo"
+            }
         },
         "Participation": {
             "Title": "What does participation look like?",
@@ -97,9 +102,6 @@
                     }
                 ]
             ]
-        },
-        "LearnMore": {
-            "Text": "To learn more about participation, eligibility criteria and more"
         },
         "Partners": {
             "Title": "Partners",
@@ -369,7 +371,201 @@
             ]
         }
     },
+    "AboutUsPage": {
+        "Introduction": {
+            "Title": "About Us",
+            "HeroImgAlt": "Broad hero",
+            "Text": {
+                "Main": "The <span class=\"regular\">Brain Cancer Project</span> is part of <span class=\"regular italic\">Count Me In</span>, a nonprofit organization that <span class=\"regular\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
+                "Link": "Visit <span class=\"italic\">Count Me In</span> website"
+            }
+        },
+        "CMI": {
+            "Paragraph1": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization.",
+            "Paragraph2": "The Brain Cancer Project has been designed and implemented collaboratively with brain cancer patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+        },
+        "PAC": {
+            "Title": "Project Advisory Council",
+            "Text": "The Brain Cancer Project Advisory Council (PAC) is made up of <span class=\"medium\">patients, advocates, caregivers,</span> and <span class=\"medium\">loved ones</span> who have been impacted by brain cancer. The PAC meets regularly with the project operations team via video calls to <span class=\"medium\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
+            "Members": [
+                {
+                    "Name": "Charlie Blotner",
+                    "Bio": [
+                        "Charlie Blotner is a hospice social worker in Seattle, WA. Intercommunity knowledge serves as an access point to guide his practice interfacing with chronic illness communities. He is passionate about equitable involvement in the research process, and believes the data we currently have about brain cancer is not representative of all of its patients across lived experiences. Above all, Charlie is dedicated to helping people be better informed about their health, research, policy, and the future implications of their disease. Currently, Charlie is enjoying all that life with stable scans has to offer."
+                    ],
+                    "Image": "assets/images/council-charlie-blotner.jpg",
+                    "Alt": "Charlie Blotner photo"
+                },
+                {
+                    "Name": "Amanda Haddock",
+                    "Bio": [
+                        "Amanda Haddock’s son died from brain cancer at the age of 18. Since his diagnosis, she has been a fierce advocate for collaborative research with a more recent focus on data sharing in particular. She co-founded Dragon Master Foundation in 2013 as a way to expedite funding directly to a web-based research platform for big data cancer research, now known as Cavatica.org. Based in Wichita, Kansas, Amanda is proud of the fact that researchers around the world can access the data that has been compiled through this project. She won the Champion of Change Award for Precision Medicine from the White House, and she serves as Liaison to the Children’s Brain Tumor Tissue Collaborative’s Scientific Committee. Amanda’s time is spent helping researchers find pathways to collaborate, helping families understand their vital role in research, and helping everyone remember that time is of the essence."
+                    ],
+                    "Image": "",
+                    "Alt": ""
+                },
+                {
+                    "Name": "Adam Hayden",
+                    "Bio": [
+                        "Adam Hayden is a philosopher of science, a champion of humanities-informed practices in medical education and clinical care, and a person living with brain cancer (glioblastoma). He serves on multiple national advisory councils and committees focused on patient engagement and advocacy and co-moderates a monthly social media chat and a virtual support group for the brain tumor community. He is a co-investigator for the Brain Cancer Quality of Life Collaborative, and he serves his university as Research Assistant to the Department of Philosophy, Indiana University School of Liberal Arts at IUPUI."
+                    ],
+                    "Image": "assets/images/council-adam-hayden.jpg",
+                    "Alt": "Adam Hayden photo"
+                },
+                {
+                    "Name": "Meta Laabs",
+                    "Bio": [
+                        "Meta Laabs is a retired university administrator, living now in Asheville North Carolina. Meta's husband, Albert Laabs is a GBM survivor. His surgery was in Memphis in 2009 at age 53. He participated in a vaccine clinical trial (ATTAC) at Preston Robert Tisch Brain Tumor Center at Duke University. He is a continuing patient there for MRI checkups, but has had no recurrences. His tumor was in his cerebellum and he has balance and stamina issues, but no restrictions or impairments. Meta's son Mark Laabs is an Ocular Melanoma survivor, after being diagnosed while living in China in 2012 at age 29. He has been a patient at Wills Eye Institute, Jefferson Memorial Hospital in Philadelphia, University of Virginia (clinical trial) and Duke University. Mark lost vision in one eye but is a successful business owner and founded (and is CEO of) the Rare Cancer Research Foundation."
+                    ],
+                    "Image": "assets/images/council-meta-laabs.jpg",
+                    "Alt": "Meta Laabs photo"
+                },
+                {
+                    "Name": "Sabine Schwab",
+                    "Bio": [
+                        "Sabine Schwab is a former researcher with a Ph.D. in Economics and Social Sciences, international project manager in the life science and photonics industry and German expatriate. She made the conscious decision to end her career in 2014 after being diagnosed with brain cancer (Anaplastic Astrocytoma) and focuses on healthcare advocacy since then. Sabine sits on various national boards and patient advisory councils for the (brain) cancer community and is co-moderator for the monthly brain tumor social media chat on Twitter. In her free time, Sabine enjoys photography and traveling with her husband and five-year old daughter. She is an avid yogi and rock climber."
+                    ],
+                    "Image": "assets/images/council-sabine-schwab.jpg",
+                    "Alt": "Sabine Schwab photo"
+                },
+                {
+                    "Name": "Susie Wilson and Guy Lipof",
+                    "Bio": [
+                        "Susie and Guy live in Austin, TX. Their experience with brain cancer started in 1999, just two months after their second child was born. Susie had surgery at MD Anderson Cancer Center and enrolled in a Phase 2 Clinical Trial that has become standard of care. After five years without recurrence, they took advantage of an expat opportunity in Cambridge, UK. Upon returning to Austin, Susie’s brain cancer recurred as a Secondary Glioblastoma. Susie’s dream in 1999 was for her kids to know her, which she exceeded helping them grow-up, celebrating high school graduations and now attending university.",
+                        "Guy works in the tech industry. Motivated by their experiences with brain cancer, he joined IBM's Watson division focusing on healthcare and life sciences. He is now part of IBM Watson Health working on oncology and genomics solutions."
+                    ],
+                    "Image": "assets/images/council-susie-wilson-guy-lipof.jpg",
+                    "Alt": "Susie Wilson and Guy Lipof photo"
+                }
+            ]
+        },
+        "SAC": {
+            "Title": "Scientific Advisory Council",
+            "Members": [
+                {
+                    "Name": "Terri S. Armstrong, Ph.D.",
+                    "Affiliations": [
+                        "National Cancer Institute Center for Cancer Research",
+                        "National Institutes of Health"
+                    ],
+                    "Url": "https://ccr.cancer.gov/Neuro-Oncology-Branch/terri-s-armstrong",
+                    "Image": "assets/images/SAC-Armstrong.jpg",
+                    "Alt": "Terri S. Armstrong photo"
+                },
+                {
+                    "Name": "Pratiti (Mimi) Bandopadhayay, M.B.B.S., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "http://bandolab.org/",
+                    "Image": "assets/images/SAC-Bandopadhayay.jpg",
+                    "Alt": "Pratiti (Mimi) Bandopadhayay photo"
+                },
+                {
+                    "Name": "Bradley E. Bernstein, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Massachusetts General Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "http://bernstein.mgh.harvard.edu/",
+                    "Image": "assets/images/SAC-Bernstein.jpg",
+                    "Alt": "Bradley E. Bernstein photo"
+                },
+                {
+                    "Name": "Rameen Beroukhim, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "http://beroukhimlab.org/",
+                    "Image": "assets/images/SAC-Beroukhim.jpg",
+                    "Alt": "Rameen Beroukhim photo"
+                },
+                {
+                    "Name": "Wenya Linda Bi, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "http://skullbase.bwh.harvard.edu/",
+                    "Image": "assets/images/SAC-Bi.jpg",
+                    "Alt": "Wenya Linda Bi photo"
+                },
+                {
+                    "Name": "Mariella G. Filbin, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "https://filbinlab.dana-farber.org/",
+                    "Image": "assets/images/SAC-Filbrin.jpg",
+                    "Alt": "Mariella G. Filbin photo"
+                },
+                {
+                    "Name": "Jason T. Huse, M.D., Ph.D.",
+                    "Affiliations": [
+                        "University of Texas MD Anderson Cancer Center"
+                    ],
+                    "Url": "https://www.mdanderson.org/research/departments-labs-institutes/labs/huse-laboratory.html",
+                    "Image": "assets/images/SAC-Huse.jpg",
+                    "Alt": "Jason T. Huse photo"
+                },
+                {
+                    "Name": "Keith Ligon, M.D., Ph.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "https://ligonlab.dana-farber.org/",
+                    "Image": "assets/images/SAC-Ligon.jpg",
+                    "Alt": "Keith Ligon photo"
+                },
+                {
+                    "Name": "Roel Verhaak, Ph.D.",
+                    "Affiliations": [
+                        "Jackson Laboratory for Genomic Medicine"
+                    ],
+                    "Url": "https://www.jax.org/research-and-faculty/research-labs/the-verhaak-lab",
+                    "Image": "assets/images/SAC-Verhaak.jpg",
+                    "Alt": "Roel Verhaak photo"
+                },
+                {
+                    "Name": "Patrick Y. Wen, M.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "http://www.dfhcc.harvard.edu/insider/member-detail/member/patrick-y-wen-md/",
+                    "Image": "assets/images/SAC-Wen.jpg",
+                    "Alt": "Patrick Y. Wen photo"
+                },
+                {
+                    "Name": "W. K. Alfred Yung, M.D.",
+                    "Affiliations": [
+                        "University of Texas MD Anderson Cancer Center"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/SAC-Yung.jpg",
+                    "Alt": "W. K. Alfred Yung photo"
+                }
+            ]
+        }
+    },
     "Toolkit": {
+        "Dashboard": {
+            "Title": "My Dashboard"
+        },
         "Dialogs": {
             "JoinMailingList": {
                 "Title": "Stay informed",
@@ -424,6 +620,16 @@
                 "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
                 "TextPt2": "or call us at"
             }
+        },
+        "AgeUpThankYou": {
+            "Title": "Thank you!",
+            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "or",
+                "Button": "Go to Dashboard"
+            },
+            "ImageAlt": "Email sent"
         }
     },
     "SDK": {

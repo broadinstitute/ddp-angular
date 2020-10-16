@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DashboardColumns } from 'ddp-sdk';
+import { Cookies } from '../models/cookies/cookies';
 
 @Injectable()
 export class ToolkitConfigurationService {
@@ -51,6 +52,7 @@ export class ToolkitConfigurationService {
     symptomSurveyUrl: string;
     addressUrl: string;
     adminDashboardUrl: string | null = null;
+    mailingListDialogUrl: string;
 
     // Social media and contacts
     phone: string;
@@ -73,4 +75,7 @@ export class ToolkitConfigurationService {
     // Keys and tokens
     recaptchaSiteClientKey: string;
     lightswitchInstagramWidgetId: string;
+
+    cookies: Cookies | null;
+    usePrionPrivacyPolicyTemplate: boolean;
 }

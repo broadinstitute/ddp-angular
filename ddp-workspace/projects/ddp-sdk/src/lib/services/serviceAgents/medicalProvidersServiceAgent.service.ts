@@ -7,7 +7,7 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { ActivityInstitution } from '../../models/activity/activityInstitution';
 import { ActivityInstitutionForm } from '../../models/activity/activityInstitutionForm';
 import { MedicalProviderResponse } from '../../models/medicalProviderResponse';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
