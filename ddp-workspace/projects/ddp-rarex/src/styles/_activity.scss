@@ -291,3 +291,16 @@ select:disabled {
     border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
     cursor: auto;
 }
+
+.consent-download {
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 0.6rem;
+
+  background-color: mat-color($app-theme, 100);
+
+  text-align: center;
+
+  &__link {
+    color: darken(mat-color($app-theme, 350), 15%) !important;
+  }
+}
