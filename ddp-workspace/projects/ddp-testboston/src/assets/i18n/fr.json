@@ -137,7 +137,7 @@
         {
           "Question": "Ma famille peut-elle participer à l’étude TestBoston ?",
           "Paragraphs": [
-            "À l’heure actuelle, seuls les patients de Brigham and Women’s ayant été sélectionnés au hasard peuvent participer à l’étude TestBoston. Si plus d’une personne de votre foyer a reçu une lettre d’invitation, vous pouvez tous les deux participer à l’étude si vous le souhaitez. Si vous n’avez pas reçu d’invitation, mais que vous souhaiteriez rester informé(e) de l’avancement de l’étude, vous pouvez tout à fait <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">vous inscrire à la liste de diffusion de l’étude TestBoston</a>."
+            "À l’heure actuelle, seuls les patients de Brigham and Women’s ayant été sélectionnés au hasard peuvent participer à l’étude TestBoston. Si plus d’une personne de votre foyer a reçu une lettre d’invitation, vous pouvez tous les deux participer à l’étude si vous le souhaitez. Si vous n’avez pas reçu d’invitation, mais que vous souhaiteriez rester informé(e) de l’avancement de l’étude, vous pouvez tout à fait <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">vous inscrire à la liste de diffusion de l’étude TestBoston</a>."
           ]
         },
         {

@@ -137,7 +137,7 @@
         {
           "Question": "我的家人可以参与 TestBoston 吗？",
           "Paragraphs": [
-            "目前，只有收到随机生成的受邀的布莱根妇女医院的患者才能参与 TestBoston 研究。如果您家中有超过一人收到邀请，那么收到邀请的人均可以选择参与研究。如果您没有收到邀请，但有兴趣随时了解研究进展，欢迎<a class=\"Link Link_semi-bold\" href=\"#stay-informed\">加入 TestBoston 邮件列表</a>。"
+            "目前，只有收到随机生成的受邀的布莱根妇女医院的患者才能参与 TestBoston 研究。如果您家中有超过一人收到邀请，那么收到邀请的人均可以选择参与研究。如果您没有收到邀请，但有兴趣随时了解研究进展，欢迎<a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">加入 TestBoston 邮件列表</a>。"
           ]
         },
         {

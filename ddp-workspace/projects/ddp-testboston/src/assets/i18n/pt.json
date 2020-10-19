@@ -137,7 +137,7 @@
         {
           "Question": "A minha família pode participar no TestBoston?",
           "Paragraphs": [
-            "Neste momento, apenas os doentes do Brigham and Women que recebam convites gerados aleatoriamente podem participar no TestBoston. Se mais do que uma pessoa do seu agregado familiar tiver recebido um convite, então podem participar ambos no estudo, se quiserem. Se não tiver recebido um convite mas estiver interessado em manter-se a par do progresso do estudo, pode <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">entrar para a lista de destinatários do TestBoston</a>."
+            "Neste momento, apenas os doentes do Brigham and Women que recebam convites gerados aleatoriamente podem participar no TestBoston. Se mais do que uma pessoa do seu agregado familiar tiver recebido um convite, então podem participar ambos no estudo, se quiserem. Se não tiver recebido um convite mas estiver interessado em manter-se a par do progresso do estudo, pode <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">entrar para a lista de destinatários do TestBoston</a>."
           ]
         },
         {

@@ -137,7 +137,7 @@
         {
           "Question": "Gia đình tôi có thể tham gia TestBoston không?",
           "Paragraphs": [
-            "Hiện tại, chỉ những bệnh nhân của Brigham & Women’s nhận được thư mời ngẫu nhiên mới có thể tham gia TestBoston. Nếu nhiều người trong gia đình quý vị nhận được thư mời, thì những người nhận được thư mời đều có thể tham gia nghiên cứu nếu muốn. Nếu quý vị không nhận được thư mời, nhưng quý vị muốn biết thông tin về tiến triển của nghiên cứu, quý vị có thể <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">tham gia danh mục gửi thư của TestBoston</a>."
+            "Hiện tại, chỉ những bệnh nhân của Brigham & Women’s nhận được thư mời ngẫu nhiên mới có thể tham gia TestBoston. Nếu nhiều người trong gia đình quý vị nhận được thư mời, thì những người nhận được thư mời đều có thể tham gia nghiên cứu nếu muốn. Nếu quý vị không nhận được thư mời, nhưng quý vị muốn biết thông tin về tiến triển của nghiên cứu, quý vị có thể <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">tham gia danh mục gửi thư của TestBoston</a>."
           ]
         },
         {
