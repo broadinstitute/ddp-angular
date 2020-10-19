@@ -500,7 +500,10 @@
     },
     "Title": {
       "Default": "TestBoston",
-      "Alert": "ستنتهي مهلة جلستك قريبًا"
+      "Alert": "ستنتهي مهلة جلستك قريبًا",
+      "Dashboard": "TestBoston Participant Dashboard",
+      "UPS": "Covid at-home test and shipping instructions for TestBoston",
+      "Home": "TestBoston - The at-home COVID-19 testing study"
     },
     "EmailEntry": {
       "InvalidEmail": "يُرجى إدخال بريد إلكتروني صالح"
