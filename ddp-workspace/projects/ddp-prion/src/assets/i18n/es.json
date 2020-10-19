@@ -31,6 +31,7 @@
       "ArrowAlt": "Flecha"
     },
     "StudyListing": {
+      "Title": "Study Listing (es)",
       "Columns": [
         {
           "title": "Nombre del estudio",
@@ -160,7 +161,8 @@
       "Home": "Hogar",
       "LearnMore": "Aprende más",
       "Dashboard": "Mi tablero",
-      "JoinUs": "Únete a nosotros"
+      "JoinUs": "Únete a nosotros",
+      "StudyListing": "(es)Study Listing"
     },
     "Footer": {
       "BackToTop": "Volver arriba",

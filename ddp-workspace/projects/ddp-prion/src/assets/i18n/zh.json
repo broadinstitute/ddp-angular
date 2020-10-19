@@ -31,6 +31,7 @@
       "ArrowAlt": "箭頭"
     },
     "StudyListing": {
+      "Title": "(zh)Study Listing",
       "Columns": [
         {
           "title": "研究名稱",
@@ -160,7 +161,8 @@
       "Home": "家",
       "LearnMore": "學到更多",
       "Dashboard": "我的儀表板",
-      "JoinUs": "加入我們"
+      "JoinUs": "加入我們",
+      "StudyListing": "(zh)Study Listing"
     },
     "Footer": {
       "BackToTop": "回到頂部",

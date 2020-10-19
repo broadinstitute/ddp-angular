@@ -72,9 +72,7 @@ const routes: Routes = [
     component: StudyListingComponent,
     canActivate: [
       IrbGuard,
-      CookiesConsentGuard,
-      BrowserGuard,
-      AuthGuard
+      CookiesConsentGuard
     ]
   },
   {
