@@ -52,6 +52,7 @@ tkCfg.consentAssentUrl = RoutePaths.ConsentAssent;
 tkCfg.consentGuid = ActivityCodes.CONSENT;
 tkCfg.parentalConsentGuid = ActivityCodes.PARENTAL_CONSENT;
 tkCfg.consentAssentGuid = ActivityCodes.CONSENT_ASSENT;
+tkCfg.dashboardDisplayedColumns = ['name', 'summary', 'date', 'status', 'actions'];
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -69,6 +70,8 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.tooltipIconUrl = 'assets/images/info.png';
+config.dashboardShowQuestionCount = true;
+config.dashboardShowQuestionCountExceptions = [ActivityCodes.CONSENT, ActivityCodes.CONSENT_ASSENT];
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
