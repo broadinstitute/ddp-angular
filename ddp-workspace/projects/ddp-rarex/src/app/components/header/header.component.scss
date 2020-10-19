@@ -10,7 +10,7 @@
     padding: 1.2rem;
 
     @media only screen and (max-width: 600px) {
-      align-items: flex-start;
+      align-items: center;
       flex-direction: column;
     }
   }
@@ -25,6 +25,10 @@
 
   &__powered-by {
     margin-left: auto;
+
+    @media only screen and (max-width: 600px) {
+      margin-left: 0;
+    }
   }
 }
 
@@ -36,23 +40,16 @@
 }
 
 .powered-by {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-end;
+  align-self: flex-end;
 
-  &__catchphrase {
-    margin: 0;
+  height: 3.2rem;
 
-    font-size: 1.0625rem;
-    color: mat-color($app-theme, 300);
+  @media only screen and (max-width: 600px) {
+    align-self: center;
   }
 
-  &__link {
-    height: 3.2rem;
-
-    @media only screen and (max-width: 480px) {
-      height: 2.4rem;
-    }
+  @media only screen and (max-width: 480px) {
+    height: 2.4rem;
   }
 
   &__img {
