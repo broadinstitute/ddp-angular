@@ -21,10 +21,11 @@
                     <div class="diagram">
                         <img lazy-resource class="diagram__image diagram__image_modal" [src]="diagram.Image"
                             [alt]="diagram.Alt">
-                        <p class="diagram__link">
-                            <a class="Link" href="#" target="_blank">{{diagram.Link}}</a>
+                        <p class="diagram__title">
+                            {{diagram.Title}}
                         </p>
-                        <p class="diagram__data">{{diagram.Date}}</p>
+                        <!-- For now this date should be hidden -->
+                        <!-- <p class="diagram__data">{{diagram.Date}}</p> -->
                         <p>{{diagram.Text}}</p>
                     </div>
                 </ng-container>
@@ -52,7 +53,7 @@
                     <div class="diagram">
                         <img lazy-resource class="diagram__image" [src]="diagram.Image" [alt]="diagram.Alt">
                         <p>
-                            <a class="Link" href="#" target="_blank">{{diagram.Link}}</a>
+                            <a class="Link" [href]="diagram.Url" target="_blank">{{diagram.Link}}</a>
                         </p>
                     </div>
                 </ng-container>

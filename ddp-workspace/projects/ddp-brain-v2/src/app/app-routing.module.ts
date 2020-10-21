@@ -45,6 +45,50 @@ const routes: Routes = [
     }
   },
   {
+    path: AppRoutes.AboutChild,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.AboutChild
+    }
+  },
+  {
+    path: AppRoutes.ConsentAssent,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ConsentAssent
+    }
+  },
+  {
+    path: AppRoutes.ParentalConsent,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ParentalConsent
+    }
+  },
+  {
+    path: AppRoutes.ReleaseMinor,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ReleaseMinor
+    }
+  },
+  {
     path: AppRoutes.Consent,
     component: ActivityPageRedesignedComponent,
     canActivate: [

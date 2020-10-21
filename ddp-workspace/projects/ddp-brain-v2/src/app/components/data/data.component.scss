@@ -70,7 +70,9 @@
         }
     }
 
-    &__link {
+    &__title {
+        color: mat-color($app-theme, 250);
+        font-family: 'Untitled-Sans-Medium', sans-serif;
         margin-bottom: 0;
     }
 
