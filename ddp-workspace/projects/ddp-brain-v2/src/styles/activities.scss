@@ -462,3 +462,18 @@ select:disabled {
         }
     }
 }
+
+// race categories question 
+.picklist-answer-RACE_AMERICANINDIAN_ALASKAN,
+.picklist-answer-RACE_ASIAN,
+.picklist-answer-RACE_BLACK_AFRICAN_AMERICAN,
+.picklist-answer-RACE_HISPANIC_LATINO_SPANISH,
+.picklist-answer-RACE_MIDDLE_EASTERN_NORTH_AFRICAN,
+.picklist-answer-RACE_HAWAIIAN_NATIVE_ISLANDER,
+.picklist-answer-RACE_WHITE {
+
+    .mat-list,
+    .ddp-question-prompt {
+        margin-left: 3rem;
+    }
+}
