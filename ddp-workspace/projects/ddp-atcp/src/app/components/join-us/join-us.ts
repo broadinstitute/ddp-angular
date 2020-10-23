@@ -104,7 +104,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   }
 
   private convertWorkflowResponse(response: ActivityResponse): ActivityResponse {
-    if (this.session.isTemporarySession() && (response.allowUnauthenticated === false)) {
+    if (this.session.isTemporarySession() && !response.allowUnauthenticated) {
       return new ActivityResponse('REGISTRATION');
     } else {
       return response;
