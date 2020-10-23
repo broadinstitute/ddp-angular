@@ -1,4 +1,11 @@
 {
+  "Activities": {
+    "StatusCodes": {
+      "CREATED": "New",
+      "IN_PROGRESS": "In Progress",
+      "COMPLETE": "Complete"
+    }
+  },
   "Header": {
     "Alts": {
       "Logo": "The NAA10 Foundation",

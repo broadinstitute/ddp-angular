@@ -26,7 +26,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
   activities: ActivityInstance[];
-  isConsentComplete: boolean;
+  isWorkflowProgressShown: boolean;
   isActivityShown = true;
   isFetchingActivities = false;
 
@@ -92,14 +92,12 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
         this.activities = activities;
 
-        const consentActivity = activities.find(
-          activity => (
-            activity.activityCode === ActivityCodes.CONSENT ||
-            activity.activityCode === ActivityCodes.PARENTAL_CONSENT ||
-            activity.activityCode === ActivityCodes.CONSENT_ASSENT
-          )
+        const demographicsActivity = activities.find(
+          activity => activity.activityCode === ActivityCodes.DEMOGRAPHICS
         );
-        this.isConsentComplete = consentActivity ? consentActivity.statusCode === ActivityStatusCodes.COMPLETE : false;
+
+        this.isWorkflowProgressShown =
+          demographicsActivity ? demographicsActivity.statusCode === ActivityStatusCodes.COMPLETE : false;
       })
     );
   }

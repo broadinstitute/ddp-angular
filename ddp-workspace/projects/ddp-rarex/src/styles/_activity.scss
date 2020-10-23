@@ -11,7 +11,7 @@
   }
 
   .ErrorMessageItem {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
     color: mat-color($app-theme, 500);
     margin: .3rem 0;
     padding: 0 0 0 0;
@@ -26,28 +26,29 @@
   &__title {
     margin: 1.5rem 0;
 
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-family: inherit;
     font-weight: bold;
     color: black;
   }
 
   &__subtitle {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
   }
 }
 
 ddp-activity-content {
   & > div:first-of-type:not(.ddp-content) {
-    margin: 1.5rem 0;
+    margin: 1em 0;
 
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: bold;
     color: black;
   }
 
   & > .ddp-content {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.65rem;
   }
 
   ul, ol {
@@ -69,16 +70,21 @@ ddp-activity-content {
 }
 
 .ddp-question-prompt {
-  margin: 1.5rem 0 0.5rem 0;
+  margin: 1.5em 0 0.25em 0;
 
   font-family: inherit;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  line-height: 1.95rem;
+  line-height: 1.65rem;
   color: black;
 
   p {
     margin: 0;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.65rem;
+    color: black;
   }
 }
 
@@ -126,7 +132,7 @@ ddp-activity-composite-answer {
 }
 
 .ddp-radio-group-column .mat-radio-container {
-  top: 4px;
+  top: 3px;
 }
 
 .ddp-learn-more {
@@ -188,23 +194,35 @@ ddp-activity-composite-answer {
   }
 }
 
+.subject__block {
+  display: flex;
+  align-items: center;
+
+  .static-header {
+    margin-right: 1em;
+
+    font-weight: bold;
+    color: black;
+  }
+}
+
 // General styles
 .ErrorMessage {
   margin: 0.5rem 0;
 
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
   line-height: 1.5;
   color: mat-color($app-theme, 500);
 }
 
 // Material styles
 .mat-error {
-  font-size: 0.9rem;
+  font-size: 1.0625rem;
 }
 
 .mat-form-field-infix {
   color: mat-color($app-theme, 200);
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
 }
 
 .mat-list .mat-list-item .mat-list-item-content {
@@ -218,8 +236,8 @@ ddp-activity-composite-answer {
 
 .mat-checkbox-label,
 .mat-radio-label-content {
-  font-size: 1.25rem;
-  line-height: 1.5 !important;
+  font-size: 1.0625rem;
+  line-height: 1.65rem !important;
   color: mat-color($app-theme, 700);
 }
 
@@ -229,7 +247,7 @@ ddp-activity-composite-answer {
 
   margin-top: 0 !important;
 
-  top: 4px;
+  top: 3px;
 }
 
 .mat-radio-label-content {
@@ -264,7 +282,7 @@ ddp-activity-composite-answer {
 
 // native dropdown
 select {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
     color: mat-color($app-theme, 700);
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance } from 'ddp-sdk';
 
@@ -7,7 +7,8 @@ import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 @Component({
   selector: 'app-workflow-progress',
   templateUrl: './workflow-progress.component.html',
-  styleUrls: ['./workflow-progress.component.scss']
+  styleUrls: ['./workflow-progress.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkflowProgressComponent {
   @Input() activityList: ActivityInstance[] = [];
@@ -16,7 +17,9 @@ export class WorkflowProgressComponent {
 
   CompleteStatusCode = ActivityStatusCodes.COMPLETE;
 
-  onWorkflowItemClick(activity: ActivityInstance) {
-    this.changeActivity.emit(activity);
+  onWorkflowItemClick(activity: ActivityInstance): void {
+    if (activity.instanceGuid !== this.instanceGuid) {
+      this.changeActivity.emit(activity);
+    }
   }
 }

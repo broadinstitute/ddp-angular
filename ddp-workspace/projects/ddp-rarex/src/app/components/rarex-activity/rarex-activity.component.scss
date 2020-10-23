@@ -2,8 +2,6 @@
 
 .activity-stepper {
   margin: 1.75rem 0;
-
-  &__stepper-list {}
 }
 
 .stepper-list {
@@ -44,8 +42,8 @@
       content: '';
 
       display: block;
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 24px;
+      height: 24px;
 
       position: absolute;
       top: 50%;
@@ -53,7 +51,7 @@
       transform: translate(-50%, -50%);
 
       background-color: mat-color($app-theme, 650);
-      border-radius: 1.2rem;
+      border-radius: 12px;
       transition: background-color .2s ease;
     }
 

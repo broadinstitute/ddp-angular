@@ -1,29 +1,36 @@
 .rarex-activity-page {
   display: flex;
 
-  padding: 2.4rem 1.2rem;
+  max-width: 42rem;
 
-  @media only screen and (max-width: 1024px) {
+  margin: 1.2rem auto 2.4rem auto;
+
+  position: relative;
+
+  @media only screen and (max-width: 1400px) {
     flex-direction: column;
   }
 
+  @media only screen and (max-width: 600px) {
+    padding: 0 1.2rem;
+  }
+
   &__progress-container {
-    width: 20rem;
+    height: 100%;
 
-    margin-right: 4rem;
+    position: absolute;
+    top: 1em;
 
-    @media only screen and (max-width: 1024px) {
-      width: auto;
+    transform: translateX(-100%);
 
-      margin-right: 0;
+    @media only screen and (max-width: 1400px) {
+      position: static;
+
+      transform: translateX(0);
     }
   }
 
   &__activity-container {
     flex: 1;
   }
-}
-
-.active {
-  font-weight: bold;
 }
