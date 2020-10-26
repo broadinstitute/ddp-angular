@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { OperatorServiceAgent } from './operatorServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
@@ -18,8 +18,11 @@ export class GovernedParticipantsServiceAgent extends OperatorServiceAgent<any> 
         super(session, configuration, http, logger);
     }
 
-    public add(alias: string): Observable<void> {
-        return this.postObservable(`/participants`, { alias });
+    public addParticipant(
+      studyGuid: string,
+      body: Record<string, any> = {},
+    ): Observable<HttpResponse<{ ddpUserGuid: string }>> {
+        return this.postObservable(`/studies/${studyGuid}/participants`, body);
     }
 
     public getList(): Observable<Array<Participant>> {

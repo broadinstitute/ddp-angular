@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SessionMementoService } from '../../services/sessionMemento.service';
 import { GovernedParticipantsServiceAgent } from '../../services/serviceAgents/governedParticipantsServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import { Participant } from '../../models/participant';
 import { Subject, Subscription } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
@@ -55,6 +56,7 @@ export class ManageParticipantsComponent implements OnDestroy {
     private anchor: Subscription;
 
     constructor(
+        @Inject('ddp.config') private config: ConfigurationService,
         private serviceAgent: GovernedParticipantsServiceAgent,
         private logger: LoggingService,
         private session: SessionMementoService,
@@ -77,7 +79,10 @@ export class ManageParticipantsComponent implements OnDestroy {
     }
 
     public add(): void {
-        this.serviceAgent.add(this.currentParticipant).pipe(
+        this.serviceAgent.addParticipant(
+          this.config.studyGuid,
+          { alias: this.currentParticipant },
+        ).pipe(
             tap(x => this.logger.logEvent('ManageParticipantsComponent', 'Participant added'))
         ).subscribe(() => this.reloadingSubject.next());
         this.currentParticipant = '';
