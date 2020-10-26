@@ -6,4 +6,6 @@ export interface ActivityPicklistOption {
     exclusive: boolean;
     tooltip: string | null;
     groupId: string | null;
+    subPicklistOptionsLabel: string | null;
+    subPicklistOptions: Array<ActivityPicklistOption> | null;
 }

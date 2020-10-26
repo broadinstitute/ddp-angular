@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
@@ -38,6 +38,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
               <span [innerHTML]="option.optionLabel"></span>
                 <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
             </mat-checkbox>
+
             <ng-container *ngIf="option.allowDetails && getOptionSelection(option.stableId)">
                 <mat-form-field matLine>
                     <input matInput
@@ -55,6 +56,14 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                 </p>
             </ng-container>
         </mat-list-item>
+
+        <div class="ddp-sub-picklist" *ngIf="option.subPicklistOptions && option.subPicklistOptions.length && getOptionSelection(option.stableId)">
+            <p class="ddp-sub-picklist__title" *ngIf="option.subPicklistOptionsLabel">{{option.subPicklistOptionsLabel}}</p>
+            <ng-container *ngFor="let subOption of option.subPicklistOptions">
+                <ng-container *ngTemplateOutlet="item; context: {option: subOption}">
+                </ng-container>
+            </ng-container>
+        </div>
     </ng-template>
     `,
     styles: [`
@@ -81,22 +90,13 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     }
     `]
 })
-export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
-    /**
-     * If an option is marked exclusive, then when it's selected all other options should be de-selected.
-     */
-    private exclusiveChosen = false;
-
+export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQuestion {
     // map of question stableId + option stable id -> detail text used to save detail text
     // in browser even when option is not selected
     private cachedDetailTextForQuestionAndOption: Record<string, string> = {};
 
     constructor(private translate: NGXTranslateService) {
         super(translate);
-    }
-
-    public ngOnInit(): void {
-        this.exclusiveChosen = this.hasSelectedExclusiveOption();
     }
 
     public setDetailText(id: string): string | null {
@@ -149,20 +149,13 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
-        if (exclusive) {
+        if (exclusive || this.hasSelectedExclusiveOption() || this.isOneAnswerAllowed(value)) {
             this.block.answer = [];
-            this.exclusiveChosen = true;
-        } else if (!exclusive && this.exclusiveChosen) {
-            this.block.answer = [];
-            this.exclusiveChosen = false;
         }
         const answer = {} as ActivityPicklistAnswerDto;
         answer.stableId = stableId;
         answer.detail = this.setDetailText(stableId);
         if (value) {
-            if (this.block.selectMode === PicklistSelectMode.SINGLE) {
-                this.block.answer = [];
-            }
             this.block.answer.push(answer);
         } else {
             const index = this.answerIndex(stableId);
@@ -185,6 +178,10 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
             });
         }
         return index;
+    }
+
+    private isOneAnswerAllowed(answer: boolean): boolean {
+        return answer && this.block.selectMode === PicklistSelectMode.SINGLE;
     }
 
     /**
