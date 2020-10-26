@@ -137,7 +137,7 @@
         {
           "Question": "Can my family join TestBoston?",
           "Paragraphs": [
-            "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
+            "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
           ]
         },
         {
