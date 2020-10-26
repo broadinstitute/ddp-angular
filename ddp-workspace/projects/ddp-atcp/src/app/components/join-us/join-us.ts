@@ -66,10 +66,8 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
   private fetchActivity(): void {
     if (this.session.isAuthenticatedSession()) {
-      this.workflow.getStart().pipe(take(1)).subscribe((response: ActivityResponse | null) => {
-        if (response && response.instanceGuid) {
-          this.instanceGuid = response.instanceGuid;
-        }
+      this.workflow.getNext().pipe(take(1)).subscribe(activityResponse => {
+        this.workflowBuilder.getCommand(activityResponse).execute();
       });
     } else {
       this.temporaryUserService.createTemporaryUser(this.configuration.auth0ClientId).pipe(

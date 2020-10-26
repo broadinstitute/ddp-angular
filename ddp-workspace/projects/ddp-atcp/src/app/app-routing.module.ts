@@ -18,6 +18,7 @@ import { AccountActivatedComponent } from './components/account-activation/accou
 import { AccountActivationRequiredComponent } from './components/account-activation/accountActivationRequired';
 import { ConsoleComponent } from './components/console/console';
 import { DashBoardComponent } from './components/dashboard/dashboard';
+import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { DataAccessComponent } from './components/data-access/data-access';
 import { JoinUsComponent } from './components/join-us/join-us';
 import { StatisticsComponent } from './components/statistics/statistics';
@@ -48,6 +49,15 @@ const routes: Routes = [
       IrbGuard,
       BrowserGuard,
       AuthGuard
+    ]
+  },
+  {
+    path: RouterResource.ParticipantList,
+    component: ParticipantListComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard,
     ]
   },
   {

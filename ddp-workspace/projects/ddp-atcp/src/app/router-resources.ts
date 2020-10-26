@@ -16,3 +16,4 @@ export const PasswordResetDone = 'password-reset-done';
 export const SessionExpired = 'session-expired';
 export const AccountActivated = 'account-activated';
 export const AccountActivationRequired = 'account-activation-required';
+export const ParticipantList = 'participants';

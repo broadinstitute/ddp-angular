@@ -36,6 +36,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { WelcomeComponent } from './components/welcome/welcome';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
+import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
@@ -63,6 +64,7 @@ declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.dashboardUrl = RouterResource.Console;
+tkCfg.participantListUrl = RouterResource.ParticipantList;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
@@ -144,7 +146,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
     FileUploaderComponent,
-    PopupMessageComponent
+    PopupMessageComponent,
+    ParticipantListComponent,
   ],
   entryComponents: [
     DashBoardComponent,
