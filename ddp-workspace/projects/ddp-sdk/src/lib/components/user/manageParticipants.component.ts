@@ -77,7 +77,7 @@ export class ManageParticipantsComponent implements OnDestroy {
     }
 
     public add(): void {
-        this.serviceAgent.add(this.currentParticipant).pipe(
+        this.serviceAgent.addParticipant(this.currentParticipant).pipe(
             tap(x => this.logger.logEvent('ManageParticipantsComponent', 'Participant added'))
         ).subscribe(() => this.reloadingSubject.next());
         this.currentParticipant = '';
