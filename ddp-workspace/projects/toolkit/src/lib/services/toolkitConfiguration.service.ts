@@ -53,6 +53,7 @@ export class ToolkitConfigurationService {
     addressUrl: string;
     adminDashboardUrl: string | null = null;
     mailingListDialogUrl: string;
+    participantListUrl: string;
 
     // Social media and contacts
     phone: string;
