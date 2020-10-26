@@ -101,7 +101,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
 
     public setDetailText(id: string): string | null {
         let text: string | null = null;
-        const questionOptionDetailKey = this.getQuestionOptionDetailKey(id);
+        const questionOptionDetailKey = this.getQuestionOptionKey(id);
         if (this.block.answer) {
             this.block.answer.filter((item) => {
                 return item.stableId === id;
@@ -125,7 +125,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
             this.block.answer.forEach((item, i) => {
                 if (item.stableId === id) {
                     this.block.answer[i].detail = value;
-                    this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionDetailKey(id)] = value;
+                    this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionKey(id)] = value;
                 }
             });
             this.valueChanged.emit(this.block.answer);
@@ -145,23 +145,16 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
     }
 
     public optionChanged(value: boolean, option: ActivityPicklistOption): void {
-        const { exclusive, stableId } = option;
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
-        if (exclusive || this.hasSelectedExclusiveOption() || this.isOneAnswerAllowed(value)) {
-            this.block.answer = [];
-        }
-        const answer = {} as ActivityPicklistAnswerDto;
-        answer.stableId = stableId;
-        answer.detail = this.setDetailText(stableId);
-        if (value) {
-            this.block.answer.push(answer);
+        const simpleOption = this.block.picklistOptions.includes(option);
+        if (simpleOption) {
+            this.optionSelected(value, option);
         } else {
-            const index = this.answerIndex(stableId);
-            this.block.answer.splice(index, 1);
+            this.subOptionSelected(value, option);
         }
-        this.valueChanged.emit(this.block.answer);
+        // this.valueChanged.emit(this.block.answer);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
@@ -188,7 +181,61 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
      * Makes a key of question stable id and option stable id
      * to squirrel away the detail text when value is unselected
      */
-    private getQuestionOptionDetailKey(optionStableId: string): string {
+    private getQuestionOptionKey(optionStableId: string): string {
         return this.block.stableId + '.' + optionStableId;
+    }
+
+    private optionSelected(value: boolean, option: ActivityPicklistOption): void {
+        const { exclusive, stableId } = option;
+        if (exclusive || this.hasSelectedExclusiveOption() || this.isOneAnswerAllowed(value)) {
+            this.block.answer = [];
+        }
+        const answer = {} as ActivityPicklistAnswerDto;
+        answer.stableId = stableId;
+        answer.detail = this.setDetailText(stableId);
+        if (value) {
+            this.block.answer.push(answer);
+        } else {
+            const index = this.answerIndex(stableId);
+            this.block.answer.splice(index, 1);
+            this.block.answer = this.removeSubAnswers(option);
+        }
+    }
+
+    private subOptionSelected(value: boolean, option: ActivityPicklistOption): void {
+        const { exclusive, stableId } = option;
+        const parentOption = this.block.picklistOptions.find(item => item.subPicklistOptions ? item.subPicklistOptions.includes(option) : []);
+        if (exclusive || this.hasSelectedExclusiveSubOption(parentOption.subPicklistOptions)) {
+            const subOptionsIds = parentOption.subPicklistOptions.map(item => item.stableId);
+            this.block.answer = this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
+        }
+        const answer = {} as ActivityPicklistAnswerDto;
+        answer.stableId = stableId;
+        answer.detail = this.setDetailText(stableId);
+        if (value) {
+            this.block.answer.push(answer);
+        } else {
+            const index = this.answerIndex(stableId);
+            if (index > -1) {
+                this.block.answer.splice(index, 1);
+            }
+        }
+    }
+
+    private hasSelectedExclusiveSubOption(options: Array<ActivityPicklistOption>): boolean {
+        let hasExclusive = false;
+        hasExclusive = this.block.answer.some(selected => {
+            const option = options.find(option => option.stableId === selected.stableId);
+            return option && option.exclusive;
+        });
+        return hasExclusive;
+    }
+
+    private removeSubAnswers(option: ActivityPicklistOption): Array<ActivityPicklistAnswerDto> {
+        if (option.subPicklistOptions && option.subPicklistOptions.length) {
+            const subOptionsIds = option.subPicklistOptions.map(item => item.stableId);
+            return this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
+        }
+        return this.block.answer;
     }
 }
