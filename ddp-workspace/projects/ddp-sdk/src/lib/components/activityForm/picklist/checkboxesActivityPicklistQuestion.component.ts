@@ -57,9 +57,9 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
             </ng-container>
         </mat-list-item>
 
-        <div class="ddp-sub-picklist" *ngIf="option.subPicklistOptions && option.subPicklistOptions.length && getOptionSelection(option.stableId)">
-            <p class="ddp-sub-picklist__title" *ngIf="option.subPicklistOptionsLabel">{{option.subPicklistOptionsLabel}}</p>
-            <ng-container *ngFor="let subOption of option.subPicklistOptions">
+        <div class="ddp-sub-picklist" *ngIf="option.nestedPicklistOptions && option.nestedPicklistOptions.length && getOptionSelection(option.stableId)">
+            <p class="ddp-sub-picklist__title" *ngIf="option.nestedOptionsLabelTemplate">{{option.nestedOptionsLabelTemplate}}</p>
+            <ng-container *ngFor="let subOption of option.nestedPicklistOptions">
                 <ng-container *ngTemplateOutlet="item; context: {option: subOption}">
                 </ng-container>
             </ng-container>
@@ -204,9 +204,9 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
 
     private subOptionSelected(value: boolean, option: ActivityPicklistOption): void {
         const { exclusive, stableId } = option;
-        const parentOption = this.block.picklistOptions.find(item => item.subPicklistOptions ? item.subPicklistOptions.includes(option) : []);
-        if (exclusive || this.hasSelectedExclusiveSubOption(parentOption.subPicklistOptions)) {
-            const subOptionsIds = parentOption.subPicklistOptions.map(item => item.stableId);
+        const parentOption = this.block.picklistOptions.find(item => item.nestedPicklistOptions ? item.nestedPicklistOptions.includes(option) : []);
+        if (exclusive || this.hasSelectedExclusiveSubOption(parentOption.nestedPicklistOptions)) {
+            const subOptionsIds = parentOption.nestedPicklistOptions.map(item => item.stableId);
             this.block.answer = this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
         }
         const answer = {} as ActivityPicklistAnswerDto;
@@ -232,8 +232,8 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
     }
 
     private removeSubAnswers(option: ActivityPicklistOption): Array<ActivityPicklistAnswerDto> {
-        if (option.subPicklistOptions && option.subPicklistOptions.length) {
-            const subOptionsIds = option.subPicklistOptions.map(item => item.stableId);
+        if (option.nestedPicklistOptions && option.nestedPicklistOptions.length) {
+            const subOptionsIds = option.nestedPicklistOptions.map(item => item.stableId);
             return this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
         }
         return this.block.answer;
