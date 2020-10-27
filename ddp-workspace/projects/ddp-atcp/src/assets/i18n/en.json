@@ -446,7 +446,8 @@
     "ManageParticipants": {
       "GovernedParticipants": "Governed participants",
       "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
+      "ParticipantsList": "Participants",
+      "AddParticipant": "Add a Participant"
     },
     "ParticipantProfile": {
       "OpenProfile": "Profile",
@@ -524,6 +525,13 @@
       "Self": "Self",
       "NoParticipants": "No participants yet",
       "AddSelf": "Add self"
+    },
+    "ParticipantList": {
+      "ParticipantActions": {
+        "Start": "Start",
+        "Continue": "Continue",
+        "ViewProfile": "View Profile"
+      }
     },
     "ErrorPage": {
       "Title": "We're sorry, but an error occurred. Please try again later.",

@@ -12,6 +12,17 @@
   @media (min-width: $desktop) {
     width: 70%;
   }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+
+    padding: 2rem 0;
+  }
+
+  .ButtonFilled--green {
+    margin-left: 0;
+  }
 }
 
 .participants-table {
