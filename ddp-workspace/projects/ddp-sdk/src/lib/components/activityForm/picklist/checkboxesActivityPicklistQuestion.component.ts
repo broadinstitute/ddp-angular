@@ -131,7 +131,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
                     this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionKey(id)] = value;
                 }
             });
-            // this.valueChanged.emit(this.block.answer);
+            this.valueChanged.emit(this.block.answer);
         }
     }
 
@@ -161,7 +161,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         } else {
             this.nestedOptionSelected(value, option);
         }
-        // this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit(this.block.answer);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
