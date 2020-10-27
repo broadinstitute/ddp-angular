@@ -34,7 +34,8 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [checked]="getOptionSelection(option.stableId)"
                           [disabled]="readonly"
                           [disableRipple]="true"
-                          (change)="optionChanged($event.checked, option); option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
+                          (change)="optionChanged($event.checked, option); 
+                                    option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
               <span [innerHTML]="option.optionLabel"></span>
                 <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
             </mat-checkbox>
@@ -57,10 +58,12 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
             </ng-container>
         </mat-list-item>
 
-        <div class="ddp-sub-picklist" *ngIf="option.nestedPicklistOptions && option.nestedPicklistOptions.length && getOptionSelection(option.stableId)">
-            <p class="ddp-sub-picklist__title" *ngIf="option.nestedOptionsLabelTemplate">{{option.nestedOptionsLabelTemplate}}</p>
-            <ng-container *ngFor="let subOption of option.nestedPicklistOptions">
-                <ng-container *ngTemplateOutlet="item; context: {option: subOption}">
+        <div class="ddp-nested-picklist" *ngIf="showNestedPicklist(option)">
+            <p class="ddp-nested-picklist__title" *ngIf="option.nestedOptionsLabel">
+                {{option.nestedOptionsLabel}}
+            </p>
+            <ng-container *ngFor="let nestedOption of option.nestedPicklistOptions">
+                <ng-container *ngTemplateOutlet="item; context: {option: nestedOption}">
                 </ng-container>
             </ng-container>
         </div>
@@ -144,21 +147,32 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         return selected;
     }
 
+    public showNestedPicklist(option: ActivityPicklistOption): boolean {
+        return option.nestedPicklistOptions && option.nestedPicklistOptions.length && this.getOptionSelection(option.stableId);
+    }
+
     public optionChanged(value: boolean, option: ActivityPicklistOption): void {
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
-        const regularOption = this.block.picklistOptions.includes(option);
-        if (regularOption) {
-            this.optionSelected(value, option);
+        const isParentOption = this.block.picklistOptions.includes(option);
+        if (isParentOption) {
+            this.parentOptionSelected(value, option);
         } else {
-            this.subOptionSelected(value, option);
+            this.nestedOptionSelected(value, option);
         }
         this.valueChanged.emit(this.block.answer);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
         return new Array<ActivityPicklistAnswerDto>();
+    }
+
+    private createAnswerDto(stableId: string): ActivityPicklistAnswerDto {
+        const answer = {} as ActivityPicklistAnswerDto;
+        answer.stableId = stableId;
+        answer.detail = this.setDetailText(stableId);
+        return answer;
     }
 
     private answerIndex(id: string): number {
@@ -185,33 +199,29 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         return this.block.stableId + '.' + optionStableId;
     }
 
-    private optionSelected(value: boolean, option: ActivityPicklistOption): void {
+    private parentOptionSelected(value: boolean, option: ActivityPicklistOption): void {
         const { exclusive, stableId } = option;
         if (exclusive || this.hasSelectedExclusiveOption() || this.isOneAnswerAllowed(value)) {
             this.block.answer = [];
         }
-        const answer = {} as ActivityPicklistAnswerDto;
-        answer.stableId = stableId;
-        answer.detail = this.setDetailText(stableId);
+        const answer = this.createAnswerDto(stableId);
         if (value) {
             this.block.answer.push(answer);
         } else {
             const index = this.answerIndex(stableId);
             this.block.answer.splice(index, 1);
-            this.block.answer = this.removeSubAnswers(option);
+            this.block.answer = this.removeNestedOptionsAnswers(option);
         }
     }
 
-    private subOptionSelected(value: boolean, option: ActivityPicklistOption): void {
+    private nestedOptionSelected(value: boolean, option: ActivityPicklistOption): void {
         const { exclusive, stableId } = option;
         const parentOption = this.block.picklistOptions.find(item => item.nestedPicklistOptions ? item.nestedPicklistOptions.includes(option) : []);
-        if (exclusive || this.hasSelectedExclusiveSubOption(parentOption.nestedPicklistOptions)) {
-            const subOptionsIds = parentOption.nestedPicklistOptions.map(item => item.stableId);
-            this.block.answer = this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
+        if (exclusive || this.hasSelectedExclusiveNestedOption(parentOption.nestedPicklistOptions)) {
+            const nestedOptionsIds = parentOption.nestedPicklistOptions.map(item => item.stableId);
+            this.block.answer = this.block.answer.filter(answer => !nestedOptionsIds.includes(answer.stableId));
         }
-        const answer = {} as ActivityPicklistAnswerDto;
-        answer.stableId = stableId;
-        answer.detail = this.setDetailText(stableId);
+        const answer = this.createAnswerDto(stableId);
         if (value) {
             this.block.answer.push(answer);
         } else {
@@ -222,19 +232,19 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         }
     }
 
-    private hasSelectedExclusiveSubOption(options: Array<ActivityPicklistOption>): boolean {
+    private hasSelectedExclusiveNestedOption(options: Array<ActivityPicklistOption>): boolean {
         let hasExclusive = false;
-        hasExclusive = this.block.answer.some(selected => {
-            const option = options.find(option => option.stableId === selected.stableId);
+        hasExclusive = this.block.answer.some(answer => {
+            const option = options.find(option => option.stableId === answer.stableId);
             return option && option.exclusive;
         });
         return hasExclusive;
     }
 
-    private removeSubAnswers(option: ActivityPicklistOption): Array<ActivityPicklistAnswerDto> {
+    private removeNestedOptionsAnswers(option: ActivityPicklistOption): Array<ActivityPicklistAnswerDto> {
         if (option.nestedPicklistOptions && option.nestedPicklistOptions.length) {
-            const subOptionsIds = option.nestedPicklistOptions.map(item => item.stableId);
-            return this.block.answer.filter(answer => !subOptionsIds.includes(answer.stableId));
+            const nestedOptionsIds = option.nestedPicklistOptions.map(item => item.stableId);
+            return this.block.answer.filter(answer => !nestedOptionsIds.includes(answer.stableId));
         }
         return this.block.answer;
     }
