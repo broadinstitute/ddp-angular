@@ -132,11 +132,11 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         }
     }
 
-    public getOptionSelection(id: string): boolean {
+    public getOptionSelection(stableId: string): boolean {
         let selected = false;
         if (this.block.answer) {
             this.block.answer.forEach((item) => {
-                if (item.stableId === id) {
+                if (item.stableId === stableId) {
                     selected = true;
                 }
             });
@@ -148,13 +148,13 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
-        const simpleOption = this.block.picklistOptions.includes(option);
-        if (simpleOption) {
+        const regularOption = this.block.picklistOptions.includes(option);
+        if (regularOption) {
             this.optionSelected(value, option);
         } else {
             this.subOptionSelected(value, option);
         }
-        // this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit(this.block.answer);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
