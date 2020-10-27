@@ -52,8 +52,8 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                 </mat-form-field>
                 <p *ngIf="!readonly" matLine class="ddp-helper">
                     <span class="ddp-counter-color">
-                        {{ questionIdToCharactersLeft[option.stableId] }}
-                    </span>{{ questionIdToCharacterLeftMsg[option.stableId] }}
+                        {{questionIdToCharactersLeft[option.stableId]}}
+                    </span>{{questionIdToCharacterLeftMsg[option.stableId]}}
                 </p>
             </ng-container>
         </mat-list-item>
@@ -131,7 +131,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
                     this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionKey(id)] = value;
                 }
             });
-            this.valueChanged.emit(this.block.answer);
+            // this.valueChanged.emit(this.block.answer);
         }
     }
 
@@ -161,7 +161,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         } else {
             this.nestedOptionSelected(value, option);
         }
-        this.valueChanged.emit(this.block.answer);
+        // this.valueChanged.emit(this.block.answer);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
@@ -196,7 +196,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
      * to squirrel away the detail text when value is unselected
      */
     private getQuestionOptionKey(optionStableId: string): string {
-        return this.block.stableId + '.' + optionStableId;
+        return `${this.block.stableId}.${optionStableId}`;
     }
 
     private parentOptionSelected(value: boolean, option: ActivityPicklistOption): void {
