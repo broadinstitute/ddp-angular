@@ -1,4 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import {
   CompositeDisposable,
   ConfigurationService,
@@ -13,6 +14,7 @@ import { CurrentActivityService } from '../../sdk/services/currentActivity.servi
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
 import { take } from 'rxjs/operators';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
   activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  isMultiGoverned: boolean;
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
@@ -33,7 +36,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private translate: TranslateService,
               private currentActivityService: CurrentActivityService,
               @Inject('ddp.config') private configuration: ConfigurationService,
-              private userPreferencesServiceAgent: UserPreferencesServiceAgent) {
+              private userPreferencesServiceAgent: UserPreferencesServiceAgent,
+              private multiGovernedUserService: MultiGovernedUserService) {
   }
 
   public ngOnInit(): void {
@@ -56,6 +60,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         : this.isProgressBarVisible = false;
       });
     this.anchor.addNew(currentActivity$);
+
+    this.multiGovernedUserService.isMultiGoverned$
+      .pipe(
+        filter(value => value !== null),
+        take(1),
+      )
+      .subscribe(isMultiGoverned => {
+        this.isMultiGoverned = isMultiGoverned;
+      });
   }
 
   public get isAuthenticated(): boolean {

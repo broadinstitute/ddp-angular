@@ -40,6 +40,7 @@ import { ParticipantListComponent } from './components/participant-list/particip
 import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
+import { MultiGovernedUserService } from './services/multi-governed-user.service';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -158,6 +159,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ActivityProgressCalculationService,
     CommunicationService,
     AtcpCommunicationService,
+    MultiGovernedUserService,
     {
       provide: 'ddp.config',
       useValue: config

@@ -1,8 +1,8 @@
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { Component, isDevMode, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, isDevMode, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
+import { CompositeDisposable, RenewSessionNotifier, SessionMementoService } from 'ddp-sdk';
 import { JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 import * as RouterResource from '../../router-resources';
 import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
@@ -39,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private communicationService: AtcpCommunicationService,
     private dialog: MatDialog,
-    private renewNotifier: RenewSessionNotifier) { }
+    private renewNotifier: RenewSessionNotifier,
+    private session: SessionMementoService,
+  ) { }
 
   public ngOnInit(): void {
     this.anchor.addNew(this.router.events.subscribe(() => {
@@ -90,5 +92,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dialog.getDialogById('ServerMessage').close();
     });
     this.anchor.addNew(modalOpen).addNew(modalClose);
+  }
+
+  @HostListener('window:beforeunload')
+  private beforeUnload(): void {
+    this.session.setParticipant(null);
   }
 }
