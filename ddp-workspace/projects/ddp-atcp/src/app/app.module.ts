@@ -1,5 +1,6 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {
   AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule,
   LogLevel
@@ -50,6 +51,7 @@ import { PopupMessageComponent } from './toolkit/dialogs/popupMessage.component'
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
 import { AtcpCommunicationService } from './toolkit/services/communication.service';
+import { AppTranslateLoader } from './translate.loader';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -118,7 +120,14 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatTableModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: AppTranslateLoader,
+        deps: [HttpClient],
+      }
+    })
   ],
   declarations: [
     WelcomeComponent,
