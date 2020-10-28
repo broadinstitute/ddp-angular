@@ -250,7 +250,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private changeDocumentLanguage(direction: string, languageCode: string): void {
-    const html = this.document.getElementsByTagName('html')[0];
+    const html = this.document.querySelector('html');
     html.setAttribute('dir', direction);
     html.setAttribute('lang', languageCode);
   }
