@@ -104,7 +104,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
 
     public setDetailText(id: string): string | null {
         let text: string | null = null;
-        const questionOptionDetailKey = this.getQuestionOptionKey(id);
+        const questionOptionDetailKey = this.getQuestionOptionDetailKey(id);
         if (this.block.answer) {
             this.block.answer.filter((item) => {
                 return item.stableId === id;
@@ -128,7 +128,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
             this.block.answer.forEach((item, i) => {
                 if (item.stableId === id) {
                     this.block.answer[i].detail = value;
-                    this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionKey(id)] = value;
+                    this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionDetailKey(id)] = value;
                 }
             });
             this.valueChanged.emit(this.block.answer);
@@ -195,7 +195,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
      * Makes a key of question stable id and option stable id
      * to squirrel away the detail text when value is unselected
      */
-    private getQuestionOptionKey(optionStableId: string): string {
+    private getQuestionOptionDetailKey(optionStableId: string): string {
         return `${this.block.stableId}.${optionStableId}`;
     }
 
