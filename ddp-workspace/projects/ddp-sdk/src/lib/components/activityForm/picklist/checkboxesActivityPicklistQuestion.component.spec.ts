@@ -7,7 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
@@ -24,7 +24,9 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                 detailLabel: '',
                 exclusive: true,
                 groupId: null,
-                tooltip: 'Helper text'
+                tooltip: 'Helper text',
+                nestedOptionsLabel: null,
+                nestedPicklistOptions: null
             }
         ],
         picklistGroups: [
@@ -38,7 +40,9 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         detailLabel: '',
                         exclusive: false,
                         groupId: 'category_1',
-                        tooltip: null
+                        tooltip: null,
+                        nestedOptionsLabel: null,
+                        nestedPicklistOptions: null
                     }
                 ]
             },
@@ -52,7 +56,9 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         detailLabel: '',
                         exclusive: false,
                         groupId: 'category_2',
-                        tooltip: null
+                        tooltip: null,
+                        nestedOptionsLabel: null,
+                        nestedPicklistOptions: null
                     }
                 ]
             }
@@ -181,6 +187,69 @@ describe('CheckboxesActivityPicklistQuestion', () => {
             component.optionChanged(true, questionBlock.picklistOptions[0]);
             component.detailTextChanged('Text', 'AAA');
             expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: 'Text' }]);
+        });
+
+        it('should render nested picklist', () => {
+            questionBlock.picklistOptions[0].nestedOptionsLabel = 'Nested label';
+            questionBlock.picklistOptions[0].nestedPicklistOptions = [
+                {
+                    stableId: 'FFF',
+                    optionLabel: 'Nested text 1',
+                    allowDetails: false,
+                    detailLabel: '',
+                    exclusive: false,
+                    groupId: null,
+                    tooltip: null,
+                    nestedOptionsLabel: null,
+                    nestedPicklistOptions: null
+                },
+                {
+                    stableId: 'ZZZ',
+                    optionLabel: 'Nested text 2',
+                    allowDetails: false,
+                    detailLabel: '',
+                    exclusive: true,
+                    groupId: null,
+                    tooltip: null,
+                    nestedOptionsLabel: null,
+                    nestedPicklistOptions: null
+                }
+            ];
+            fixture.detectChanges();
+
+            const checkbox = debugElement.queryAll(By.css('mat-checkbox'))[0];
+            const inputElement = checkbox.nativeElement.querySelector('input') as HTMLInputElement;
+            inputElement.click();
+            fixture.detectChanges();
+            const checkboxes = debugElement.queryAll(By.css('mat-checkbox'));
+            const nestedPicklist = debugElement.queryAll(By.css('.ddp-nested-picklist'));
+            const title = debugElement.queryAll(By.css('.ddp-nested-picklist__title'));
+
+            expect(nestedPicklist.length).toBe(1);
+            expect(title.length).toBe(1);
+            expect(title[0].nativeElement.innerText).toBe('Nested label');
+            expect(checkboxes.length).toBe(5);
+            expect(component.block.answer).toEqual([{ stableId: 'AAA', detail: null }]);
+
+            const nestedInputElement1 = checkboxes[1].nativeElement.querySelector('input') as HTMLInputElement;
+            nestedInputElement1.click();
+            expect(component.block.answer).toEqual([
+                { stableId: 'AAA', detail: null },
+                { stableId: 'FFF', detail: null }
+            ]);
+
+            const nestedInputElement2 = checkboxes[2].nativeElement.querySelector('input') as HTMLInputElement;
+            nestedInputElement2.click();
+            expect(component.block.answer).toEqual([
+                { stableId: 'AAA', detail: null },
+                { stableId: 'ZZZ', detail: null }
+            ]);
+
+            inputElement.click();
+            fixture.detectChanges();
+            const answers = debugElement.queryAll(By.css('mat-checkbox'));
+            expect(component.block.answer).toEqual([]);
+            expect(answers.length).toBe(3);
         });
     });
 });

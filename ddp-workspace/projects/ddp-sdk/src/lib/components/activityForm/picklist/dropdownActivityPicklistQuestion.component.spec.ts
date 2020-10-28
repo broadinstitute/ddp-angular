@@ -5,7 +5,7 @@ import { TooltipComponent } from '../../tooltip.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
@@ -22,7 +22,9 @@ describe('DropdownActivityPicklistQuestion', () => {
                 detailLabel: '',
                 exclusive: false,
                 groupId: null,
-                tooltip: null
+                tooltip: null,
+                nestedOptionsLabel: null,
+                nestedPicklistOptions: null
             },
             {
                 stableId: 'BBB',
@@ -31,7 +33,9 @@ describe('DropdownActivityPicklistQuestion', () => {
                 detailLabel: '',
                 exclusive: false,
                 groupId: null,
-                tooltip: null
+                tooltip: null,
+                nestedOptionsLabel: null,
+                nestedPicklistOptions: null
             },
             {
                 stableId: 'CCC',
@@ -40,7 +44,9 @@ describe('DropdownActivityPicklistQuestion', () => {
                 detailLabel: '',
                 exclusive: true,
                 groupId: null,
-                tooltip: null
+                tooltip: null,
+                nestedOptionsLabel: null,
+                nestedPicklistOptions: null
             }
         ],
         picklistGroups: [],
