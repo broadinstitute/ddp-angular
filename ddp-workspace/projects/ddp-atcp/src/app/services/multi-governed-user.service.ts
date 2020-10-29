@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { map, filter, pluck, switchMap, take } from 'rxjs/operators';
 
 import {
+  ActivityPicklistQuestionBlock,
   ActivityServiceAgent,
+  PrequalifierServiceAgent,
   ConfigurationService,
   SessionMementoService,
 } from 'ddp-sdk';
@@ -16,7 +18,8 @@ export class MultiGovernedUserService {
   private readonly CHILD_DIAGNOSED_STABLE_ID = 'CHILD_DIAGNOSED';
 
   constructor(
-    private readonly activityAgent: ActivityServiceAgent,
+    private prequalifierAgent: PrequalifierServiceAgent,
+    private activityAgent: ActivityServiceAgent,
     private readonly session: SessionMementoService,
     @Inject('ddp.config') private readonly config: ConfigurationService
   ) {
@@ -26,33 +29,52 @@ export class MultiGovernedUserService {
   private checkIfMultiGoverned(): void {
     this.session.sessionObservable
       .pipe(
-        filter(profile => (profile !== null && !this.session.isTemporarySession())),
+        filter(
+          profile => profile !== null && !this.session.isTemporarySession()
+        ),
         take(1),
         switchMap(() =>
-          this.activityAgent.getAnswerByQuestionStableId(
-            this.config.studyGuid,
-            this.PREQUAL_SELF_DESCRIBE_STABLE_ID
+          this.prequalifierAgent.getPrequalifier(this.config.studyGuid)
+        ),
+        switchMap(instanceGuid =>
+          this.activityAgent.getActivity(
+            of(this.config.studyGuid),
+            of(instanceGuid)
           )
-        )
-      )
-      .subscribe(response => {
-        if (!response) {
-          console.error(
-            'Cannot determine type of user, the response is',
-            response
-          );
+        ),
+        pluck('sections'),
+        map(sections => {
+          if (!sections.length) {
+            return throwError("Prequalifier doesn't have any sections");
+          }
 
+          return sections[0];
+        })
+      )
+      .subscribe(activitySection => {
+        if (activitySection instanceof Observable) {
           return;
         }
 
-        if (response.value instanceof Array && response.value[0].stableId) {
-          const stableId = response.value[0].stableId;
+        const selfDescribeBlock = activitySection.blocks.find(
+          block =>
+            block instanceof ActivityPicklistQuestionBlock &&
+            block.stableId === this.PREQUAL_SELF_DESCRIBE_STABLE_ID
+        );
 
-          if (stableId === this.CHILD_DIAGNOSED_STABLE_ID) {
-            this.isMultiGoverned$.next(true);
-          } else {
-            this.isMultiGoverned$.next(false);
-          }
+        if (!selfDescribeBlock) {
+          console.error(
+            `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`
+          );
+        }
+
+        const answer = (selfDescribeBlock as ActivityPicklistQuestionBlock)
+          .answer[0];
+
+        if (answer && answer.stableId) {
+          this.isMultiGoverned$.next(
+            answer.stableId === this.CHILD_DIAGNOSED_STABLE_ID
+          );
         }
       });
   }
