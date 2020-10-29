@@ -13,7 +13,6 @@ import { combineLatest, flatMap, catchError, map, switchMap } from 'rxjs/operato
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
-import { ActivityAnswerResponse } from '../../models/activityAnswerResponse';
 
 @Injectable()
 export class ActivityServiceAgent extends UserServiceAgent<any> {
@@ -92,12 +91,5 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
 
     return this.patchObservable(`/studies/${studyGuid}/activities/${activityGuid}`, payload).pipe(
       map(httpResponse => httpResponse));
-    }
-
-    public getAnswerByQuestionStableId(
-      studyGuid: string,
-      questionStableId: string
-    ): Observable<ActivityAnswerResponse> {
-        return this.getObservable(`/studies/${studyGuid}/answers/${questionStableId}`);
     }
 }
