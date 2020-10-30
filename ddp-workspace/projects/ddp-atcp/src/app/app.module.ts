@@ -25,8 +25,9 @@ import { AccountActivationRequiredComponent } from './components/account-activat
 import { AtcpActivityBaseComponent } from './components/activityForm/app-atcp-activity-base.component';
 import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
 import { AppComponent } from './components/app/app.component';
-import { ConsoleComponent } from './components/console/console';
-import { DashBoardComponent } from './components/dashboard/dashboard';
+import { SurveyComponent } from './components/survey/survey.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { DataAccessComponent } from './components/data-access/data-access';
 import { FooterComponent } from './components/footer/footer';
 import { HeaderComponent } from './components/header/header';
@@ -64,7 +65,7 @@ declare let DDP_ENV: any;
 declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.dashboardUrl = RouterResource.Console;
+tkCfg.dashboardUrl = RouterResource.Dashboard;
 tkCfg.participantListUrl = RouterResource.ParticipantList;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
@@ -134,11 +135,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpActivityComponent,
     JoinUsComponent,
     DataAccessComponent,
-    DashBoardComponent,
+    SurveyComponent,
     WorkflowProgressComponent,
     StatisticsComponent,
     ProgressBarComponent,
-    ConsoleComponent,
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
     AccountActivationRequiredComponent,
@@ -149,11 +149,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     FileUploaderComponent,
     PopupMessageComponent,
     ParticipantListComponent,
+    DashboardComponent,
+    UserActivitiesComponent,
   ],
-  entryComponents: [
-    DashBoardComponent,
-    PopupMessageComponent
-  ],
+  entryComponents: [PopupMessageComponent],
   providers: [
     CurrentActivityService,
     ActivityProgressCalculationService,

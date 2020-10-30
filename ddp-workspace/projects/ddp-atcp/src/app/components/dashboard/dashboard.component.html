@@ -1,0 +1,21 @@
+<div class="self-dashboard">
+  <h1 class="title title--grey" translate>Toolkit.Dashboard.Title</h1>
+  <h2 class="subtitle subtitle--light" translate>Toolkit.Dashboard.Text</h2>
+  <h2 class="title title--green" translate>SDK.Dashboard.Title</h2>
+
+  <div
+    *ngIf="isLoading; else userActivities"
+    class="self-dashboard__spinner-container"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-template #userActivities>
+    <atcp-user-activities
+      [activities]="activities"
+      (startActivity)="onStartActivity($event)"
+      (continueActivity)="onContinueActivity($event)"
+      (viewActivity)="onViewActivity($event)"
+    ></atcp-user-activities>
+  </ng-template>
+</div>

@@ -13,7 +13,7 @@
       "Previous": "Previous",
       "Next": "Next",
       "MyAccount": "My Account",
-      "MyConsole": "My Console",
+      "MyDashboard": "My Dashboard",
       "YourParticipants": "Your Participants",
       "Submit": "Submit",
       "MedicalHistoryQuestionnaire": "Medical History Questionnaire"
@@ -393,7 +393,7 @@
     "Statuses": {
       "COMPLETE": "Completed",
       "IN_PROGRESS": "In Progress",
-      "CREATED": "Not Started"
+      "CREATED": "New"
     }
   },
   "SDK": {
@@ -461,8 +461,9 @@
       "UserPreferencesLocale": "Preferred language"
     },
     "Dashboard": {
-      "Title": "My Console",
-      "Text": ""
+      "Title": "My Dashboard",
+      "Text": "",
+      "QuestionCount": "{{ answered }} / {{ total }} Answered"
     },
     "DatePicker": {
       "Day": "Choose day...",
@@ -516,6 +517,11 @@
     }
   },
   "Toolkit": {
+    "ActivityActions": {
+      "Start": "Start",
+      "Continue": "Continue",
+      "ViewEdit": "View / Edit"
+    },
     "Dashboard": {
       "Title": "Thank you for joining the Global A-T Family Data Platform!",
       "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T.",
@@ -782,7 +788,29 @@
       ]
     }
   },
-  "DashBoard": {
-    "EnrollmentProcess": "Enrollment Process"
+  "Components": {
+    "UserActivities": {
+      "Columns": {
+        "Name": "Form",
+        "Summary": "Summary",
+        "CreatedAt": "Created",
+        "Status": "Status",
+        "Actions": "Actions"
+      },
+      "ActivityStatus": {
+        "CREATED": "New",
+        "IN_PROGRESS": "In Progress",
+        "COMPLETE": "Complete"
+      },
+      "ActivityActions": {
+        "Start": "Start",
+        "Continue": "Continue",
+        "ViewEdit": "View / Edit"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} Answered"
+    },
+    "Survey": {
+      "Title": "Enrollment Process"
+    }
   }
 }
