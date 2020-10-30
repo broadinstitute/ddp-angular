@@ -24,7 +24,7 @@ describe('DropdownActivityPicklistQuestion', () => {
                 groupId: null,
                 tooltip: null,
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             },
             {
                 stableId: 'BBB',
@@ -35,7 +35,7 @@ describe('DropdownActivityPicklistQuestion', () => {
                 groupId: null,
                 tooltip: null,
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             },
             {
                 stableId: 'CCC',
@@ -46,7 +46,7 @@ describe('DropdownActivityPicklistQuestion', () => {
                 groupId: null,
                 tooltip: null,
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             }
         ],
         picklistGroups: [],

@@ -7,5 +7,5 @@ export interface ActivityPicklistOption {
     tooltip: string | null;
     groupId: string | null;
     nestedOptionsLabel: string | null;
-    nestedPicklistOptions: Array<ActivityPicklistOption> | null;
+    nestedOptions: Array<ActivityPicklistOption> | null;
 }

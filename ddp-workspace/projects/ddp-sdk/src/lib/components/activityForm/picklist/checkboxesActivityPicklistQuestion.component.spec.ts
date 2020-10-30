@@ -26,7 +26,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                 groupId: null,
                 tooltip: 'Helper text',
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             }
         ],
         picklistGroups: [
@@ -42,7 +42,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         groupId: 'category_1',
                         tooltip: null,
                         nestedOptionsLabel: null,
-                        nestedPicklistOptions: null
+                        nestedOptions: null
                     }
                 ]
             },
@@ -58,7 +58,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                         groupId: 'category_2',
                         tooltip: null,
                         nestedOptionsLabel: null,
-                        nestedPicklistOptions: null
+                        nestedOptions: null
                     }
                 ]
             }
@@ -191,7 +191,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
 
         it('should render nested picklist', () => {
             questionBlock.picklistOptions[0].nestedOptionsLabel = 'Nested label';
-            questionBlock.picklistOptions[0].nestedPicklistOptions = [
+            questionBlock.picklistOptions[0].nestedOptions = [
                 {
                     stableId: 'FFF',
                     optionLabel: 'Nested text 1',
@@ -201,7 +201,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                     groupId: null,
                     tooltip: null,
                     nestedOptionsLabel: null,
-                    nestedPicklistOptions: null
+                    nestedOptions: null
                 },
                 {
                     stableId: 'ZZZ',
@@ -212,7 +212,7 @@ describe('CheckboxesActivityPicklistQuestion', () => {
                     groupId: null,
                     tooltip: null,
                     nestedOptionsLabel: null,
-                    nestedPicklistOptions: null
+                    nestedOptions: null
                 }
             ];
             fixture.detectChanges();

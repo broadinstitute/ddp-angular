@@ -24,7 +24,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 detailLabel: '',
                 tooltip: 'Helper text',
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             },
             {
                 stableId: 'BBB',
@@ -33,7 +33,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 detailLabel: '',
                 tooltip: null,
                 nestedOptionsLabel: null,
-                nestedPicklistOptions: null
+                nestedOptions: null
             }
         ],
         renderMode: 'LIST',
