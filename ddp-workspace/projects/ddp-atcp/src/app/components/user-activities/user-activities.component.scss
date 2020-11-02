@@ -3,6 +3,10 @@
 
   font-family: 'Lato', sans-serif;
 
+  &--opaque {
+    background-color: #fafafa;
+  }
+
   &__row {
     &--disabled {
       opacity: 0.7;

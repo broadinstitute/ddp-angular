@@ -22,6 +22,7 @@ export class UserActivitiesComponent {
     'questionCount',
     'actions',
   ];
+  @Input() opaque: boolean = false;
   @Output() startActivity = new EventEmitter<string>();
   @Output() continueActivity = new EventEmitter<string>();
   @Output() viewActivity = new EventEmitter<string>();

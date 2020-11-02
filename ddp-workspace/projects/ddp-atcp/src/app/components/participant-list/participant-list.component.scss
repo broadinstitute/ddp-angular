@@ -1,17 +1,9 @@
 @import "../../styles/_variables.scss";
 
-.participant-list {
-  padding: 30px 20px 40px 20px;
+.participants {
+  max-width: 1200px;
 
-  @media (min-width: $tablet-width) {
-    padding: 0;
-    margin: 30px 40px 40px 40px;
-    width: 83%;
-  }
-
-  @media (min-width: $desktop) {
-    width: 70%;
-  }
+  padding: 1.2rem 3.6rem;
 
   .spinner-container {
     display: flex;
@@ -68,5 +60,24 @@
 
   .BtnFilled:last-of-type {
     margin: 0;
+  }
+}
+
+.participant-list {
+  padding: 0;
+
+  list-style: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+
+  &__item {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+
+    &--placeholder {
+      padding: 0.8rem 1.2rem;
+
+      font-weight: bold;
+      font-style: italic;
+      opacity: 0.6;
+    }
   }
 }

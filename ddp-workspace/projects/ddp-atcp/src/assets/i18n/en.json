@@ -789,6 +789,16 @@
     }
   },
   "Components": {
+    "ParticipantList": {
+      "NoParticipants": "No participants yet"
+    },
+    "ParticipantListItem": {
+      "SurveysToComplete": {
+        "Plural": "{{ count }} surveys to complete",
+        "Singular": "{{ count }} survey to complete"
+      },
+      "Expand": "Expand"
+    },
     "UserActivities": {
       "Columns": {
         "Name": "Form",

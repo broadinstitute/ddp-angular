@@ -2,6 +2,7 @@
   *ngIf="activities"
   mat-table
   class="user-activities-table"
+  [class.user-activities-table--opaque]="opaque"
   [dataSource]="activities"
 >
   <ng-container matColumnDef="activityName">

@@ -42,6 +42,7 @@ import { Language, LanguagesProvider, LanguagesToken } from './providers/languag
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 import { MultiGovernedUserService } from './services/multi-governed-user.service';
+import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -149,6 +150,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     FileUploaderComponent,
     PopupMessageComponent,
     ParticipantListComponent,
+    ParticipantListItem,
     DashboardComponent,
     UserActivitiesComponent,
   ],
