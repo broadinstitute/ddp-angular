@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain brain-v2 angio mbc testboston mpc prion atcp rgp"
+    "osteo brain angio mbc testboston mpc prion atcp rgp"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rgp"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rgp"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
@@ -431,8 +431,6 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: testboston
       - conditionally-launch-build-and-store:
-          study_key: brain-v2
-      - conditionally-launch-build-and-store:
           study_key: mpc
       - conditionally-launch-build-and-store:
           study_key: atcp
@@ -535,9 +533,6 @@ workflows:
           study_key: testboston
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
-          study_key: brain-v2
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
           study_key: mpc
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -570,9 +565,6 @@ workflows:
       - build-and-deploy-job:
           name: testboston-nightly
           study_key: testboston
-      - build-and-deploy-job:
-          name: brain-v2-nightly
-          study_key: brain-v2
       - build-and-deploy-job:
           name: mpc-nightly
           study_key: mpc
