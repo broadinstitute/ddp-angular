@@ -24,6 +24,8 @@ import { WelcomeComponent } from './components/welcome/welcome';
 import * as RouterResource from './router-resources';
 import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-callback.component';
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
+import { SelfEnrolledUserGuard } from './guards/self-enrolled-user.guard';
+import { MultiGovernedUserGuard } from './guards/multi-governed-user.guard';
 
 const routes: Routes = [
   {
@@ -39,12 +41,12 @@ const routes: Routes = [
   {
     path: RouterResource.Dashboard,
     component: DashboardComponent,
-    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard, SelfEnrolledUserGuard],
   },
   {
     path: RouterResource.ParticipantList,
     component: ParticipantListComponent,
-    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard, MultiGovernedUserGuard],
   },
   {
     path: RouterResource.PasswordResetDone,
