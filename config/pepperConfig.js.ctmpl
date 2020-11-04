@@ -195,3 +195,19 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "UA-172530202-1";
     {{end}}
 {{end}}
+
+{{if eq $study_guid "rgp"}}
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{else if eq $environment "test"}}
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{else if eq $environment "staging"}}
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{else if eq $environment "prod"}}
+        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{end}}
+{{end}}

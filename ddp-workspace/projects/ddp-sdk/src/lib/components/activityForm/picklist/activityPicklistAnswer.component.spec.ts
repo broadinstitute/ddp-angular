@@ -10,7 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
 import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
-import { ActivityPicklistQuestionBlock } from './../../../models/activity/activityPicklistQuestionBlock';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityPicklistAnswer } from './activityPicklistAnswer.component';

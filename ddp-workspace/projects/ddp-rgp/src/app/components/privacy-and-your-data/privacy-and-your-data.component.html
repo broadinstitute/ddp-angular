@@ -1,0 +1,134 @@
+<div class="FullWidth">
+    <div class="PrivacyData-imageContainer">
+        <div class="PrivacyData-image" role="img" [attr.aria-label]="'PrivacyAndYourDataPage.ImageAlt' | translate">
+        </div>
+    </div>
+</div>
+
+<div class="PageHeader-background Background--blue alt">
+    <div class="PageLayout">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="PageHeader-title" translate>PrivacyAndYourDataPage.Title</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Wrapper row">
+    <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
+
+        <p class="Paragraph TopMargin50" [innerHTML]="'PrivacyAndYourDataPage.Intro' | translate"></p>
+
+        <hr class="HorizontalLine">
+
+        <h2 class="Title Color--blue" translate>PrivacyAndYourDataPage.DataSharing.Title</h2>
+        <p class="Paragraph TopMargin25" translate>PrivacyAndYourDataPage.DataSharing.Text1</p>
+
+        <p class="Paragraph" [innerHTML]="'PrivacyAndYourDataPage.DataSharing.Text2' | translate"></p>
+
+        <a (click)="isShareVariantCollapsed = !isShareVariantCollapsed" class="Panel">
+            <h3 class="Panel-title TopMargin50" translate>
+                PrivacyAndYourDataPage.VariantInformation.Title
+                <i class="fa Panel-icon"
+                    [ngClass]="{'fa-chevron-down': isShareVariantCollapsed, 'fa-chevron-up': !isShareVariantCollapsed}"
+                    aria-hidden="true"></i>
+            </h3>
+        </a>
+        <div class="Panel-content" [collapse]="isShareVariantCollapsed">
+            <p class="Paragraph TopMargin25">
+                <span translate>PrivacyAndYourDataPage.VariantInformation.Paragraph1.Text1</span>
+                <a class="Link" href="http://www.matchmakerexchange.org/" target="_blank"
+                    translate>PrivacyAndYourDataPage.VariantInformation.Paragraph1.Text2</a>,
+                <span translate>PrivacyAndYourDataPage.VariantInformation.Paragraph1.Text3</span>
+            </p>
+
+            <p class="Paragraph">
+                <span translate>PrivacyAndYourDataPage.VariantInformation.Paragraph2.Text1</span>
+                <a class="Link" href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank"
+                    translate>PrivacyAndYourDataPage.VariantInformation.Paragraph2.Text2</a>.
+                <span translate>PrivacyAndYourDataPage.VariantInformation.Paragraph2.Text3</span>
+            </p>
+        </div>
+        <hr class="List-line">
+
+        <a (click)="isShareGenoCollapsed = !isShareGenoCollapsed" class="Panel">
+            <h3 class="Panel-title" translate>
+                PrivacyAndYourDataPage.GenomicInformation.Title
+                <i class="fa Panel-icon"
+                    [ngClass]="{'fa-chevron-down': isShareGenoCollapsed, 'fa-chevron-up': !isShareGenoCollapsed}"
+                    aria-hidden="true"></i>
+            </h3>
+        </a>
+        <div class="Panel-content" [collapse]="isShareGenoCollapsed">
+            <p class="Paragraph TopMargin25">
+                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text1</span>
+                (<a class="Link" href="https://duos.broadinstitute.org/#/home" target="_blank"
+                    translate>PrivacyAndYourDataPage.GenomicInformation.Text2</a>).
+                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text3</span>
+                <a class="Link"
+                    href="https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/"
+                    target="_blank" translate>PrivacyAndYourDataPage.GenomicInformation.Text4</a>.
+                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text5</span>
+            </p>
+        </div>
+
+        <hr class="List-line">
+
+        <h2 class="Title Color--blue" translate>PrivacyAndYourDataPage.Privacy.Title</h2>
+        <p class="Paragraph TopMargin25" translate>PrivacyAndYourDataPage.Privacy.Text</p>
+
+        <a (click)="isStoredCollapsed = !isStoredCollapsed" class="Panel">
+            <h3 class="Panel-title TopMargin50" translate>
+                PrivacyAndYourDataPage.Stored.Question
+                <i class="fa Panel-icon"
+                    [ngClass]="{'fa-chevron-down': isStoredCollapsed, 'fa-chevron-up': !isStoredCollapsed}"
+                    aria-hidden="true"></i>
+            </h3>
+        </a>
+        <div class="Panel-content" [collapse]="isStoredCollapsed">
+            <p class="Paragraph TopMargin25" translate>
+                PrivacyAndYourDataPage.Stored.Answer
+            </p>
+        </div>
+
+        <hr class="List-line">
+
+        <a (click)="isPersonalInfoCollapsed = !isPersonalInfoCollapsed" class="Panel">
+            <h3 class="Panel-title" translate>
+                PrivacyAndYourDataPage.Shared.Question
+                <i class="fa Panel-icon"
+                    [ngClass]="{'fa-chevron-down': isPersonalInfoCollapsed, 'fa-chevron-up': !isPersonalInfoCollapsed}"
+                    aria-hidden="true"></i>
+            </h3>
+        </a>
+        <div class="Panel-content" [collapse]="isPersonalInfoCollapsed">
+            <p class="Paragraph TopMargin25" [innerHTML]="'PrivacyAndYourDataPage.Shared.Answer' | translate"></p>
+        </div>
+
+        <hr class="List-line">
+
+        <a (click)="isProfitOffCollapsed = !isProfitOffCollapsed" class="Panel">
+            <h3 class="Panel-title" translate>
+                PrivacyAndYourDataPage.Profit.Question
+                <i class="fa Panel-icon"
+                    [ngClass]="{'fa-chevron-down': isProfitOffCollapsed, 'fa-chevron-up': !isProfitOffCollapsed}"
+                    aria-hidden="true"></i>
+            </h3>
+        </a>
+        <div class="Panel-content" [collapse]="isProfitOffCollapsed">
+            <p class="Paragraph TopMargin25" translate>
+                PrivacyAndYourDataPage.Profit.Answer
+            </p>
+        </div>
+
+        <hr class="List-line">
+
+        <p class="Paragraph TopMargin50">
+            <span translate>PrivacyAndYourDataPage.Ending.Text1</span>
+            <a [href]="emailHref" class="Link">{{email}}</a>
+            <span translate>PrivacyAndYourDataPage.Ending.Text2</span>
+            <a [href]="phoneHref" class="Link">{{phone}}</a>.
+        </p>
+    </div>
+</div>

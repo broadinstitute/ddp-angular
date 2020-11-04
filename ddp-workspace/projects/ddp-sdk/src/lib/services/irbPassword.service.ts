@@ -5,7 +5,7 @@ import { ConfigurationService } from './configuration.service';
 import { NotAuthenticatedServiceAgent } from './serviceAgents/notAuthenticatedServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { PasswordCheckResult } from './../models/passwordCheckResult';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
         super(_configuration, _http, _logger);
     }
 
-    public checkPassword(password: string): Observable<boolean> {
+    public checkPassword(password: string): Observable<boolean | HttpErrorResponse> {
         const ddpCfg = this._configuration;
         const studyGuid = ddpCfg.studyGuid;
         return this.postObservable(`/studies/${studyGuid}/irb-password-check`, { password }, {}, true).pipe(
@@ -37,7 +37,7 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
         return this.checkPassword('').pipe(map(loggedIn => !loggedIn));
     }
 
-    public handleError(error: HttpErrorResponse): Observable<boolean> {
+    public handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             console.error('An error occurred:', error.error.message);
@@ -46,7 +46,7 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
             // The response body may contain clues as to what went wrong,
             console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
         }
-        return of(false);
+        return throwError(error);
     }
 
     public isIrbAuthenticated(): boolean {
