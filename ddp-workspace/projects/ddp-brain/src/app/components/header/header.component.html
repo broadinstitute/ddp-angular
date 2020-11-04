@@ -1,6 +1,6 @@
 <header class="header" [ngClass]="{'header_shadow': isPageScrolled && !isMenuOpened}">
     <div class="header-content">
-        <a class="project-logo" routerLink="/">
+        <a class="project-logo" routerLink="/" (click)="closeMenu()">
             <img class="project-logo__img" src="assets/images/logo-brain.svg" [alt]="'Header.Logo.Alt' | translate">
             <p class="project-logo__text" [innerHTML]="'Header.Logo.Title' | translate"></p>
         </a>
@@ -37,7 +37,7 @@
             </ng-container>
             <ddp-sign-in-out *ngIf="headerConfig.showLoginButton" class="side-menu__auth"></ddp-sign-in-out>
             <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" [routerLink]="'/' + appRoutes.CountMeIn"
-                class="button button_small button_primary regular cmi" translate>Common.CMI</a>
+                class="button button_small button_primary regular cmi" (click)="closeMenu()" translate>Common.CMI</a>
         </div>
         <div class="menu-button">
             <ng-container *ngIf="!isMenuOpened">
@@ -93,14 +93,14 @@
             </li>
             <li *ngIf="!isAuthenticated && headerConfig.showCmiButton" class="menu__item menu__item_cmi">
                 <a [routerLink]="'/' + appRoutes.CountMeIn" class="button button_small button_primary regular"
-                    translate>Common.CMI</a>
+                    (click)="closeMenu()" translate>Common.CMI</a>
             </li>
         </ul>
     </nav>
 </div>
 
 <ng-template #dashboardButton>
-    <a class="header-link header-link_dashboard" [routerLink]="'/' + appRoutes.Dashboard"
+    <a class="header-link header-link_dashboard" [routerLink]="'/' + appRoutes.Dashboard" (click)="closeMenu()"
         routerLinkActive="header-link_active">
         <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
