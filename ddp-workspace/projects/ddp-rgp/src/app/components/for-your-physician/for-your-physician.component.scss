@@ -1,0 +1,40 @@
+.Button--downloadPDF,
+.Button--downloadPDF:active,
+.Button--downloadPDF:focus {
+    border: 2px solid #ffffff !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    float: right;
+    box-shadow: none;
+    font-size: 1rem;
+    margin-top: -10px;
+}
+
+.Button--downloadPDF:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25) !important;
+}
+
+.Button--downloadPDF i {
+    padding-left: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .Button--downloadPDF,
+    .Button--downloadPDF:active,
+    .Button--downloadPDF:focus {
+        padding: 0 !important;
+        max-height: 40px !important;
+        max-width: 40px !important;
+        min-width: 40px !important;
+        margin-top: -5px;
+    }
+
+    .Button--downloadPDF span {
+        display: none;
+    }
+
+    .Button--downloadPDF i {
+        padding-left: 0;
+    }
+}

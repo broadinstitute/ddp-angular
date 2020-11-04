@@ -1,0 +1,37 @@
+@media only screen and (max-width: 767px) {
+  .Landing-image.Landing-imageCraniofacial {
+    background-image: url(/assets/images/craniofacial-image-sm.jpg);
+    width: 767px;
+    height: 510px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Landing-image.Landing-imageCraniofacial {
+    background-image: url(/assets/images/craniofacial-image-md.jpg);
+    width: 1024px;
+    height: 682px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+  .Landing-image.Landing-imageCraniofacial {
+    background-image: url(/assets/images/craniofacial-image-lg.jpg);
+    width: 1920px;
+    height: 1100px;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+  .Landing-image.Landing-imageCraniofacial {
+    background-image: url(/assets/images/craniofacial-image-xl.jpg);
+    width: 3000px;
+    height: 1719px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  h2.Landing-titleCraniofacial {
+    color: white;
+  }
+}

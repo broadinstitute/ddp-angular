@@ -1,0 +1,872 @@
+.Home-imageContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.Home-image {
+    display: flex;
+    max-width: 400%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    animation: slide 13s infinite;
+    animation-timing-function: ease-in-out;
+    animation-duration: 13s;
+}
+
+@keyframes slide {
+    0% {
+        margin-left: 0
+    }
+
+    25% {
+        margin-left: 0
+    }
+
+    35% {
+        margin-left: -100%
+    }
+
+    55% {
+        margin-left: -100%
+    }
+
+    65% {
+        margin-left: -200%
+    }
+
+    90% {
+        margin-left: -200%
+    }
+
+    98% {
+        margin-left: -300%
+    }
+
+    100% {
+        margin-left: -300%
+    }
+}
+
+.Home-image .Home-slide {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #FFFFFF;
+}
+
+@media only screen and (max-width: 767px) {
+    .Home-imageContainer {
+        padding: 66.6% 0 0 0;
+        /* sm 66.6% = 100 / (w / h) = 100 / (767 / 510) */
+    }
+
+    .Home-image .Home-slide {
+        width: 767px;
+        height: 510px;
+    }
+
+    .Home-image .slide-1,
+    .Home-image .slide-1b {
+        background-image: url(/assets/images/home-image-sm.jpg);
+    }
+
+    .Home-image .slide-2 {
+        background-image: url(/assets/images/lgmd-centered-image-sm.jpg);
+    }
+
+    .Home-image .slide-3 {
+        background-image: url(/assets/images/craniofacial-centered-image-sm.jpg);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Home-imageContainer {
+        padding: 66.6% 0 0 0;
+        /*md 66.6% = 100 / (w / h) = 100 / (1024 / 682) */
+    }
+
+    .Home-image .Home-slide {
+        width: 1024px;
+        height: 682px;
+    }
+
+    .Home-image .slide-1,
+    .Home-image .slide-1b {
+        background-image: url(/assets/images/home-image-md.jpg);
+    }
+
+    .Home-image .slide-2 {
+        background-image: url(/assets/images/lgmd-centered-image-md.jpg);
+    }
+
+    .Home-image .slide-3 {
+        background-image: url(/assets/images/craniofacial-centered-image-md.jpg);
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .Home-imageContainer {
+        padding: 57.4% 0 0 0;
+        /*lg 57.4% = 100 / (w / h) = 100 / (1920 / 1100) */
+    }
+
+    .Home-image .Home-slide {
+        width: 1920px;
+        height: 1100px;
+    }
+
+    .Home-image .slide-1,
+    .Home-image .slide-1b {
+        background-image: url(/assets/images/home-image-lg.jpg);
+    }
+
+    .Home-image .slide-2 {
+        background-image: url(/assets/images/lgmd-centered-image-lg.jpg);
+    }
+
+    .Home-image .slide-3 {
+        background-image: url(/assets/images/craniofacial-centered-image-lg.jpg);
+    }
+}
+
+@media only screen and (min-width: 1921px) {
+    .Home-imageContainer {
+        padding: 57.4% 0 0 0;
+        /*xl 57.4% = 100 / (w / h) = 100 / (3000 / 1719) */
+    }
+
+    .Home-image .Home-slide {
+        width: 3000px;
+        height: 1719px;
+    }
+
+    .Home-image .slide-1,
+    .Home-image .slide-1b {
+        background-image: url(/assets/images/home-image-xl.jpg);
+    }
+
+    .Home-image .slide-2 {
+        background-image: url(/assets/images/lgmd-centered-image-xl.jpg);
+    }
+
+    .Home-image .slide-3 {
+        background-image: url(/assets/images/craniofacial-centered-image-xl.jpg);
+    }
+}
+
+.Home-message {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    margin: 0 0 0 25%;
+    display: inline-block;
+    background-color: #E8702A;
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1.Home-title {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 3rem;
+    font-weight: 300;
+    padding: 30px 40px 40px 40px;
+}
+
+h2.Home-title {
+    color: black;
+    text-align: center;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 300;
+}
+
+.Home-text {
+    color: black;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Home-message {
+        margin-top: 35%;
+    }
+
+    h1.Home-title,
+    h2.Home-title {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+
+    .Home-text {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 2499px) {
+    .Home-message {
+        margin-top: 40%;
+    }
+
+    h1.Home-title,
+    h2.Home-title {
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+
+    .Home-text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .Home-message {
+        position: relative;
+        margin-top: 0;
+        left: 15px;
+        top: -1px;
+        margin: 0;
+        color: #FFFFFF;
+        padding: 0;
+        width: calc(100% - 30px);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1919px) {
+    h1.Home-title {
+        font-size: 1.6rem;
+        line-height: 2.5rem;
+    }
+
+    h2.Home-title {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .Home-text {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+
+    .Home-message {
+        margin-top: 30%;
+        margin-left: 16%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .Home-message {
+        margin-left: 25%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1.Home-title {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        padding: 30px 20px;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+    }
+
+    h2.Home-title {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .Home-text {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+
+    .Home-message {
+        margin-top: 35%;
+        margin: 0;
+        left: 15px;
+        width: calc(100% - 30px);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    h1.Home-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: #FFFFFF;
+        text-shadow: none;
+    }
+
+    h2.Home-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .Home-text {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .Home-message {
+        position: relative;
+        margin-top: 0;
+        left: 15px;
+        top: -1px;
+        margin: 0;
+        color: #FFFFFF;
+        padding: 0;
+        width: calc(100% - 30px);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+    }
+}
+
+.Home-logos {
+    margin: 0 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 80px;
+    width: 263px;
+}
+
+.Home-logoMGH {
+    background: url(/assets/images/massachusetts-general-hospital-logo.png) no-repeat;
+}
+
+.Home-logoBroad {
+    background: url(/assets/images/broad-institute-logo.svg) no-repeat;
+}
+
+.Home-logoBWH {
+    background: url(/assets/images/brigham-and-women-hospital-logo.png) no-repeat;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Home-logos {
+        height: 97px;
+        width: 321px;
+        background-size: 321px 97px;
+    }
+
+    .Home-logoMGH {
+        background: url(/assets/images/massachusetts-general-hospital-logo_xl.png) no-repeat;
+    }
+
+    .Home-logoBWH {
+        background: url(/assets/images/brigham-and-women-hospital-logo_xl.png) no-repeat;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Home-logos {
+        height: 65px;
+        width: 214px;
+        background-size: 214px 65px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Home-logos {
+        height: 50px;
+        width: 165px;
+        background-size: 165px 50px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+    h1.Home-title[_ngcontent-c3] {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+}
+
+.Home-illustration {
+    text-align: center;
+    margin: 100px auto 75px auto;
+}
+
+.Home-dnaIllustration {
+    width: 100%;
+    margin: 100px 0;
+}
+
+@media only screen and (min-width: 2500px) {
+
+    .Home-illustration,
+    .Home-dnaIllustration {
+        margin: 150px auto 125px auto;
+    }
+
+    .Home-illustration {
+        height: 175px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
+    .Home-illustration,
+    .Home-dnaIllustration {
+        width: 100%;
+        margin: 50px auto;
+    }
+
+    .Home-dnaIllustration {
+        background-size: 450px 50px;
+    }
+}
+
+.Home-article,
+.Home-articleLast {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+.Home-articleImage {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+}
+
+.Home-articleText {
+    display: inline-block;
+    padding: 150px 75px 0 75px;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Home-articleText {
+        padding: 225px 100px 0 100px;
+    }
+
+    .Home-articleLast {
+        padding-bottom: 200px;
+    }
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 2499px) {
+    .Home-articleText {
+        padding: 200px 100px 0 100px;
+    }
+
+    .Home-articleLast {
+        padding-bottom: 200px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1919px) {
+    .Home-articleText {
+        padding: 100px 50px 0 50px;
+    }
+
+    .Home-articleLast {
+        padding-bottom: 125px;
+    }
+}
+
+@media (min-width: 951px) and (max-width: 1024px) {
+    .Home-articleText {
+        padding: 75px 50px 0 50px;
+    }
+
+    .Home-articleLast {
+        padding-bottom: 100px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 950px) {
+    .Home-articleText {
+        padding: 50px 60px 0 60px;
+    }
+
+    .Home-articleLast {
+        padding-bottom: 100px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Home-articleText {
+        padding: 40px 50px 50px 50px;
+    }
+}
+
+.Home-stepImage {
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 196px;
+    width: 328px;
+}
+
+.Home-stepImage01 {
+    background: url(/assets/images/01-step-illustration.svg) no-repeat;
+}
+
+.Home-stepImage02 {
+    background: url(/assets/images/02-step-illustration.svg) no-repeat;
+}
+
+.Home-stepImage03 {
+    background: url(/assets/images/03-step-illustration.svg) no-repeat;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Home-stepImage {
+        height: 294px;
+        width: 492px;
+        background-size: 492px 294px;
+    }
+}
+
+.Home-stepTitle {
+    color: #444444;
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 700;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.Home-stepText {
+    color: black;
+    font-size: 1.1rem;
+    line-height: 1.7rem;
+    font-weight: 300;
+    margin-top: 20px;
+    text-align: left;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .Home-stepImage {
+        height: 138px;
+        width: 230px;
+        background-size: 230px 138px;
+    }
+
+    .Home-stepTitle {
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Home-step {
+        text-align: center;
+        display: block;
+        width: 100%;
+        margin-bottom: 50px
+    }
+
+    .Home-stepTitle {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-top: 20px;
+    }
+
+    .Home-stepTitle,
+    .Home-stepText {
+        text-align: left;
+    }
+}
+
+.Home-quoteText {
+    color: #ffffff;
+    text-align: right;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.Home-quoteSignature {
+    color: #ffffff;
+    text-align: right;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .Home-quoteText {
+        font-size: 1.5rem;
+        line-height: 2.1rem;
+    }
+
+    .Home-quoteSignature {
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+}
+
+/** Partner logos **/
+.Home-partners {
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 153px;
+    background-size: cover !important;
+}
+
+.Home-partnerRDUF {
+    background: url(/assets/images/rare-disease-united-foundation.png) no-repeat;
+    width: 165px;
+}
+
+.Home-partnerNOFRDD {
+    background: url(/assets/images/national-organization-for-rare-disorders.png) no-repeat;
+    width: 404px;
+}
+
+.Home-partnerSNS {
+    background: url(/assets/images/sweet-nectar-society.png) no-repeat;
+    width: 404px;
+}
+
+.Home-partnerRUNMyDNA {
+    background: url(/assets/images/run-my-dna.png) no-repeat;
+    width: 404px;
+}
+
+.Home-partnerSWAN {
+    background: url(/assets/images/syndromes-without-a-name.png) no-repeat;
+    width: 224px;
+}
+
+.Home-partnerSBD {
+    background: url(/assets/images/same-but-different-cic.png) no-repeat;
+    width: 165px;
+}
+
+.Home-partnerRare {
+    background: url(/assets/images/rare-science-accelerating-cures-for-rare-kids.png) no-repeat;
+    width: 284px;
+}
+
+.Home-partnerRUN {
+    background: url(/assets/images/rare-undiagnosed-network.png) no-repeat;
+    width: 239px;
+}
+
+.Home-partnerUROurHope {
+    background: url(/assets/images/ur-our-hope.png) no-repeat;
+    width: 315px;
+}
+
+.Home-partnerMyGene2 {
+    background: url(/assets/images/my-gene-2.png) no-repeat;
+    width: 315px;
+}
+
+.Home-partnerPatientWorthy {
+    background: url(/assets/images/patient-worthy.png) no-repeat;
+    width: 230px;
+}
+
+.Home-partnerTGPP {
+    background: url(/assets/images/the-giving-picture-project.png) center center no-repeat;
+    width: 200px;
+    height: 200px;
+    background-size: contain !important;
+}
+
+.Home-partnerAOA {
+    background: url(/assets/images/aware-of-angels.png) no-repeat;
+    width: 165px;
+}
+
+.Home-partnerGlobalGenes {
+    background: url(/assets/images/global-genes.png) no-repeat;
+    width: 171px;
+}
+
+.Home-partnerMDA {
+    background: url(/assets/images/muscular-dystrophy-association-logo.svg) no-repeat;
+    width: 330px;
+    height: 60px !important;
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 1350px) {
+    .Home-partners {
+        height: 125px;
+    }
+
+    .Home-partnerRDUF,
+    .Home-partnerSBD,
+    .Home-partnerAOA {
+        width: 135px;
+    }
+
+    .Home-partnerNOFRDD,
+    .Home-partnerRUNMyDNA,
+    .Home-partnerSNS {
+        width: 330px;
+    }
+
+    .Home-partnerSWAN {
+        width: 184px;
+    }
+
+    .Home-partnerRUN {
+        width: 196px;
+    }
+
+    .Home-partnerRare {
+        width: 231px;
+    }
+
+    .Home-partnerUROurHope,
+    .Home-partnerMyGene2 {
+        width: 258px;
+    }
+
+    .Home-partnerGlobalGenes {
+        width: 140px;
+    }
+
+    .Home-partnerPatientWorthy {
+        width: 190px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .Home-partners {
+        height: 100px;
+    }
+
+    .Home-partnerRDUF,
+    .Home-partnerSBD,
+    .Home-partnerAOA {
+        width: 108px;
+    }
+
+    .Home-partnerNOFRDD,
+    .Home-partnerRUNMyDNA,
+    .Home-partnerSNS {
+        width: 264px;
+    }
+
+    .Home-partnerSWAN {
+        width: 147px;
+    }
+
+    .Home-partnerRUN {
+        width: 156px;
+    }
+
+    .Home-partnerRare {
+        width: 185px;
+    }
+
+    .Home-partnerUROurHope,
+    .Home-partnerMyGene2 {
+        width: 206px;
+    }
+
+    .Home-partnerGlobalGenes {
+        width: 112px;
+    }
+
+    .Home-partnerMDA {
+        width: 200px;
+        height: 36px !important;
+    }
+
+    .Home-partnerPatientWorthy {
+        width: 150px;
+    }
+
+    .Home-partners.Home-partnerTGPP {
+        height: 130px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Home-partnerMDA {
+        width: 195px;
+        height: 36px !important;
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+}
+
+/** Partners section **/
+.PartnersSection {
+    padding: 0 100px 75px 100px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .PartnersSection {
+        padding: 0 50px 50px 50px;
+    }
+}
+
+/** Margins **/
+.Margin--25 {
+    margin-top: 25px;
+}
+
+.Margin--50 {
+    margin-top: 50px;
+}
+
+.Margin--75 {
+    margin-top: 75px;
+}
+
+.Margin--200 {
+    margin-top: 200px;
+}
+
+@media only screen and (min-width: 2500px) {
+    .Margin--50 {
+        margin-top: 100px;
+    }
+
+    .Margin--75 {
+        margin-top: 125px;
+    }
+
+    .Margin--200 {
+        margin-top: 250px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .Margin--50 {
+        margin-top: 30px;
+    }
+
+    .Margin--75 {
+        margin-top: 50px;
+    }
+
+    .Margin--200 {
+        margin-top: 100px;
+    }
+}
