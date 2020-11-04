@@ -7,6 +7,8 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { Participant } from '../../models/participant';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { AddParticipantPayload } from '../../models/addParticipantPayload';
+import { AddParticipantResponse } from '../../models/addParticipantResponse';
 
 @Injectable()
 export class GovernedParticipantsServiceAgent extends OperatorServiceAgent<any> {
@@ -20,9 +22,12 @@ export class GovernedParticipantsServiceAgent extends OperatorServiceAgent<any> 
 
     public addParticipant(
       studyGuid: string,
-      body: Record<string, any> = {},
-    ): Observable<HttpResponse<{ ddpUserGuid: string }>> {
-        return this.postObservable(`/studies/${studyGuid}/participants`, body);
+      body: AddParticipantPayload = {},
+    ): Observable<string> {
+        return this.postObservable(`/studies/${studyGuid}/participants`, body)
+          .pipe(
+            map((response: HttpResponse<AddParticipantResponse>) => response.body.ddpUserGuid),
+          );
     }
 
     public getList(): Observable<Array<Participant>> {
