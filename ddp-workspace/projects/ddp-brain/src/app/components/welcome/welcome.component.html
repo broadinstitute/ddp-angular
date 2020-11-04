@@ -64,8 +64,11 @@
                                 </p>
                                 <p class="participation__title">{{step.Title}}</p>
                                 <p>{{step.Text}}</p>
-                                <p>
-                                    <a class="Link" [href]="step.Link" target="_blank">{{step.LinkText}}</a>
+                                <p class="participation__links">
+                                    <ng-container *ngFor="let link of step.Links; let last = last">
+                                        <a class="Link" [href]="link.Asset" target="_blank">{{link.Text}}</a>
+                                        <span *ngIf="!last">/</span>
+                                    </ng-container>
                                 </p>
                             </div>
                         </div>
