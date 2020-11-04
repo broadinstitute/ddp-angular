@@ -72,7 +72,7 @@
                         "Title": "Provide Consent",
                         "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
                         "LinkText": "Preview the consent form",
-                        "Link": "consent.pdf"
+                        "Link": "consent_form.pdf"
                     },
                     {
                         "Number": "STEP 2",
@@ -80,7 +80,7 @@
                         "Title": "Tell us where you’ve been treated",
                         "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
                         "LinkText": "Preview the medical release",
-                        "Link": "release.pdf"
+                        "Link": "medical_release_form.pdf"
                     }
                 ],
                 [
@@ -98,7 +98,7 @@
                         "Title": "Provide a saliva and/or blood sample",
                         "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.",
                         "LinkText": "See the kits",
-                        "Link": "kits.pdf"
+                        "Link": "assets/images/kit_instructions.jpg"
                     }
                 ]
             ]
@@ -331,14 +331,14 @@
             "Title": "Snapshots",
             "Diagrams": [
                 {
-                    "Link": "Brain Tumor Diagnosis Type",
+                    "Title": "Brain Tumor Diagnosis Type",
                     "Date": "[Date Published]",
                     "Text": "Patient-reported responses to the question: “When you were first diagnosed with brain cancer, what type was it?”",
                     "Image": "assets/images/diagnosis.png",
                     "Alt": "Brain tumor diagnosis type diagram"
                 },
                 {
-                    "Link": "Age at Initial Brain Cancer Diagnosis",
+                    "Title": "Age at Initial Brain Cancer Diagnosis",
                     "Date": "[Date Published]",
                     "Text": "Calculated from response to the question: “When were you first diagnosed with brain cancer?” & patient-reported date of birth.",
                     "Image": "assets/images/initial.png",
@@ -356,16 +356,19 @@
                 {
                     "Alt": "The Metastatic Breast Cancer Project data release diagram",
                     "Link": "The Metastatic Breast Cancer Project",
+                    "Url": "https://mbcproject.org/data-release",
                     "Image": "assets/images/mbc-data.png"
                 },
                 {
                     "Alt": "The Metastatic Prostate Cancer Project data release diagram",
                     "Link": "The Metastatic Prostate Cancer Project",
+                    "Url": "https://mpcproject.org/data-release",
                     "Image": "assets/images/mpc-data.png"
                 },
                 {
                     "Alt": "The Angiosarcoma Project data release diagram",
                     "Link": "The Angiosarcoma Project",
+                    "Url": "https://ascproject.org/data-release",
                     "Image": "assets/images/angio-data.png"
                 }
             ]
