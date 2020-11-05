@@ -351,6 +351,9 @@ select:disabled {
     color: mat-color($app-theme, 700) !important;
 }
 
+.mat-form-field-label {
+    font-size: 1.0rem !important;
+}
 // input
 .mat-form-field-infix {
     font-size: 1.2rem;
