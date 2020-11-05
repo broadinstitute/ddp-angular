@@ -61,7 +61,7 @@ import { Participant } from './participant-list.component';
         display: flex;
         align-items: center;
 
-        padding: 0.8rem 1.2rem;
+        padding: 0.9rem 1.2rem;
       }
 
       .participant-expandable__name {
@@ -120,6 +120,8 @@ import { Participant } from './participant-list.component';
       }
 
       .participant-expandable__activities {
+        margin-bottom: -1px;
+
         background-color: black;
       }
     `,
