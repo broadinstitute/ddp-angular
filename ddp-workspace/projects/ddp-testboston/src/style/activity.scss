@@ -113,6 +113,11 @@
     margin: 2rem 0;
 }
 
+// a message that is very important
+.RedMessage {
+    color: mat-color($app-theme, 2700);
+}
+
 // error message
 .ErrorMessage {
     font-size: 1.25rem;
@@ -405,7 +410,7 @@ ddp-activity-boolean-answer {
     color: mat-color($app-theme, 900) !important;
 }
 
-// picklist characters counter 
+// picklist characters counter
 .ddp-helper {
     font-size: 1.1rem;
     margin: -1rem 0 0 0;
