@@ -15,5 +15,5 @@ export const SessionExpired = 'session-expired';
 export const AccountActivated = 'account-activated';
 export const AccountActivationRequired = 'account-activation-required';
 export const ParticipantList = 'participants';
-export const ActivityId = 'activity/:id';
+export const ActivityId = 'activity/:instanceGuid';
 export const LoginLandingMode = 'login-landing/:mode';

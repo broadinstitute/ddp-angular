@@ -43,6 +43,7 @@ import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 import { MultiGovernedUserService } from './services/multi-governed-user.service';
 import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -71,6 +72,7 @@ tkCfg.participantListUrl = RouterResource.ParticipantList;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
+tkCfg.activityUrl = 'activity';
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
@@ -153,6 +155,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ParticipantListItem,
     DashboardComponent,
     UserActivitiesComponent,
+    ActivityRedirectComponent,
   ],
   entryComponents: [PopupMessageComponent],
   providers: [

@@ -26,6 +26,7 @@ import { AtcpAuth0CodeCallbackComponent } from './sdk/login/atcp-auth0-code-call
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { SelfEnrolledUserGuard } from './guards/self-enrolled-user.guard';
 import { MultiGovernedUserGuard } from './guards/multi-governed-user.guard';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: RouterResource.Statistics,
     component: StatisticsComponent,
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+  },
+  {
+    path: RouterResource.ActivityId,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
