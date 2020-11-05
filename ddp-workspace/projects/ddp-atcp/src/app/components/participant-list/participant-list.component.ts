@@ -16,12 +16,6 @@ import {
 import { ActivityService } from '../../services/activity.service';
 import * as RouterResources from '../../router-resources';
 
-enum ParticipantActions {
-  Start = 'Start',
-  Continue = 'Continue',
-  ViewProfile = 'ViewProfile',
-}
-
 export interface Participant {
   guid: string;
   profile: UserProfile;
@@ -58,7 +52,7 @@ export class ParticipantListComponent implements OnInit {
       .addParticipant(this.config.studyGuid)
       .pipe(
         take(1),
-        tap(response => this.session.setParticipant(response.body.ddpUserGuid)),
+        tap(participantGuid => this.session.setParticipant(participantGuid)),
         switchMap(() => this.workflowAgent.fromParticipantList())
       )
       .subscribe(() => {
