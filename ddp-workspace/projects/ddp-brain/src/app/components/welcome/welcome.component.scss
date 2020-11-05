@@ -123,6 +123,11 @@
         font-size: 1.625rem;
         line-height: 2rem;
     }
+
+    &__links {
+        display: inline;
+        color: mat-color($app-theme, 250);
+    }
 }
 
 .step {
