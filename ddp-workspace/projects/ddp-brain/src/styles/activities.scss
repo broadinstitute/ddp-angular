@@ -463,6 +463,10 @@ select:disabled {
     }
 }
 
+.ddp-textarea {
+    max-height: 10rem !important;
+}
+
 // nested picklist
 .ddp-nested-picklist {
     margin-left: 3rem;
