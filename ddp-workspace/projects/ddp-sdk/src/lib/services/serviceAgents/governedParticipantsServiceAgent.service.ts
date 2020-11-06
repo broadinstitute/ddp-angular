@@ -30,13 +30,6 @@ export class GovernedParticipantsServiceAgent extends OperatorServiceAgent<any> 
           );
     }
 
-    public getList(): Observable<Array<Participant>> {
-        return this.getObservable(`/participants`).pipe(
-            filter(x => x != null),
-            map(x => x.participants)
-        );
-    }
-
     public getGovernedStudyParticipants(studyGuid: string): Observable<Array<Participant>> {
         return this.getObservable(`/studies/${studyGuid}/participants`);
     }
