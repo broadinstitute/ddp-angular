@@ -66,8 +66,8 @@
     "IntroSection": {
       "Title": "We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.",
       "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard.",
-      "Code": "I have a code",
-      "NoCode": "I need a code"
+      "Code": "I have an invitation code",
+      "NoCode": "I don’t have an invitation code and want to join the study"
     },
     "AboutSection": {
       "Title": "About the Study",
