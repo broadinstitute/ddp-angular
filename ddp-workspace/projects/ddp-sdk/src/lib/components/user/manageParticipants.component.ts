@@ -5,7 +5,7 @@ import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { Participant } from '../../models/participant';
 import { Subject, Subscription } from 'rxjs';
-import { tap, mergeMap, switchMap } from 'rxjs/operators';
+import { tap, mergeMap, concatMap, take } from 'rxjs/operators';
 import { AddParticipantPayload } from '../../models/addParticipantPayload';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 
@@ -23,7 +23,7 @@ import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfil
     <mat-list style="margin-bottom:10px">
         <h3 mat-subheader translate>SDK.ManageParticipants.ParticipantsList</h3>
         <mat-list-item *ngFor="let participant of participants" class="card-1">
-            {{ participant.alias }}
+            {{ participant.userProfile.firstName }} {{ participant.userProfile.lastName }}
         </mat-list-item>
     </mat-list>
   </mat-dialog-content>
@@ -66,7 +66,7 @@ export class ManageParticipantsComponent implements OnDestroy {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
             tap(x => this.logger.logEvent('ManageParticipantsComponent', 'data loading...')),
-            mergeMap(x => this.serviceAgent.getList()),
+            mergeMap(x => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
             tap(x => this.logger.logEvent('ManageParticipantsComponent', `data loaded: ${JSON.stringify(x)}`)))
             .subscribe(x => {
                 this.participants = x;
@@ -90,11 +90,12 @@ export class ManageParticipantsComponent implements OnDestroy {
 
         this.userProfile.profile
             .pipe(
-                switchMap(user => this.serviceAgent.addParticipant(this.config.studyGuid, {
+                concatMap(user => this.serviceAgent.addParticipant(this.config.studyGuid, {
                     ...payload,
                     languageCode: user.profile.preferredLanguage,
                 })),
                 tap(() => this.logger.logEvent('ManageParticipantsComponent', 'Participant added')),
+                take(1),
             )
             .subscribe(() => {
                 this.reloadingSubject.next();
