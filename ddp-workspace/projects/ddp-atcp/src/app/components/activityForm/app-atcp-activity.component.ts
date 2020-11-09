@@ -285,7 +285,7 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
 
                         <ng-container *ngIf="isLoaded && model.activityCode === ActivityCodes.FEEDING">
                             <button
-                                *ngIf="!model.readonly"
+                                *ngIf="!model.readonly && isLastStep"
                                 class="button ButtonFilled ButtonFilled--green button_right"
                                 [disabled]="isPageBusy | async"
                                 (click)="model.readonly ? navigateToConsole() : flush()"
