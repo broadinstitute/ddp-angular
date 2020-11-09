@@ -1,0 +1,122 @@
+.Background--blue.alt {
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+    width: auto;
+    text-align: center;
+    margin-top: -100px;
+    right: 0;
+    margin-right: 100px;
+}
+
+.Background--blue.alt .PageHeader-title {
+    margin: 45px 0;
+}
+
+.Gradient-overlay {
+    display: block;
+    width: 100%;
+    height: 89px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
+}
+
+.DataSharing-imageContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.DataSharing-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.DataSharing-box {
+    width: 45% !important;
+    margin: 0 100px 0 auto !important;
+}
+
+.Panel-titleLink {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #E8702A;
+}
+
+.Panel-titleLink:hover {
+    color: #0EA7B5 !important;
+}
+
+.Panel-content .Paragraph {
+    padding-left: 50px;
+}
+
+@media only screen and (min-width: 1921px) {
+    .DataSharing-imageContainer {
+        padding: 50% 0 0 0;
+        /* xl 50% = 100 / (w / h) = 100 / (3000 / 1490) */
+    }
+
+    .DataSharing-image {
+        background-image: url(/assets/images/data-sharing-researchers-xl.jpg);
+        width: 3000px;
+        height: 1490px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .DataSharing-imageContainer {
+        padding: 43% 0 0 0;
+        /* lg 43% = 100 / (w / h) = 100 / (1920 / 820) */
+    }
+
+    .DataSharing-image {
+        background-image: url(/assets/images/data-sharing-researchers-lg.jpg);
+        width: 1920px;
+        height: 820px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .DataSharing-imageContainer {
+        padding: 43% 0 0 0;
+        /* md 43% = 100 / (w / h) = 100 / (1024 / 438) */
+    }
+
+    .DataSharing-image {
+        background-image: url(/assets/images/data-sharing-researchers-md.jpg);
+        width: 1024px;
+        height: 438px;
+    }
+
+    .Panel-content .Paragraph {
+        padding-left: 25px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .DataSharing-imageContainer {
+        padding: 50% 0 0 0;
+        /* sm 50% = 100 / (w / h) = 100 / (767 / 381) */
+    }
+
+    .DataSharing-image {
+        background-image: url(/assets/images/data-sharing-researchers-sm.jpg);
+        width: 767px;
+        height: 381px;
+    }
+
+    .Panel-content .Paragraph {
+        padding-left: 0;
+    }
+}
