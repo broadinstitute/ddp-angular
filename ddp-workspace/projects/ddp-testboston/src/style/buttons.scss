@@ -94,6 +94,10 @@
     &_basic {
         color: mat-color($app-theme, 2600);
         background-color: mat-color($app-theme, 300);
+        white-space: nowrap;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right:20px;
 
         &:hover {
             background-color: mat-color($app-theme, 200);
@@ -109,6 +113,7 @@
     // underlined button
     &_underline {
         text-decoration: underline;
+        padding: 0 10px;
 
         &:focus,
         &:hover {
