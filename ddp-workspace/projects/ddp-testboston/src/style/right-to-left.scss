@@ -1,0 +1,280 @@
+html[dir='rtl'] {
+
+    // header 
+    .nav {
+        margin-left: initial !important;
+        margin-right: 5rem;
+    }
+
+    .navigation {
+        &__item {
+            margin-right: initial !important;
+            margin-left: 1.8rem;
+        }
+    }
+
+    .static-menu {
+        &__item {
+            margin-right: initial !important;
+            margin-left: 1.8rem;
+        }
+    }
+
+    .menu-button {
+        margin-left: initial !important;
+        margin-right: 1.8rem;
+    }
+
+    .menu {
+        padding: 0 1.5625rem 0 0 !important;
+
+        &__item {
+            .header-link__icon {
+                padding-right: initial !important;
+                padding-left: 0.3rem;
+            }
+        }
+    }
+
+    .header-link__dashboard {
+        margin: 0 0 0 0.2rem !important;
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .nav {
+            margin-left: initial !important;
+            margin-right: 2.5rem;
+        }
+    }
+
+    @media only screen and (max-width: 1370px) {
+
+        .static-menu__item,
+        .navigation__item {
+            margin-right: initial !important;
+            margin-left: 1.5rem;
+        }
+    }
+
+    @media only screen and (max-width: 1290px) {
+        .nav {
+            margin-left: initial !important;
+            margin-right: 2.5rem;
+        }
+    }
+
+    // footer
+    @media only screen and (max-width: 768px) {
+        .list {
+            &__column:first-child {
+                margin: 0 0 0 4rem !important;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .list {
+            &__column:first-child {
+                margin: 0 0 0 2rem !important;
+            }
+        }
+    }
+
+    // help
+    .pdf {
+        &__image {
+            margin-right: initial !important;
+            margin-left: 5px;
+        }
+    }
+
+    // mailing list 
+    .mailing-list {
+        &__group {
+            margin-left: initial !important;
+            margin-right: 1rem;
+        }
+
+        &__item {
+            margin: 0 0 0 1.5rem !important;
+        }
+
+        &__input {
+            margin-left: initial !important;
+            margin-right: 1rem;
+        }
+    }
+
+    // user registration
+    .invitation-form {
+        &__info {
+            margin-left: initial !important;
+            margin-right: 5px;
+        }
+    }
+
+    .age {
+        &__item {
+            margin-right: initial !important;
+            margin-left: 1.5rem;
+        }
+    }
+
+    // home
+    .rtl {
+        unicode-bidi: embed;
+    }
+
+    .invitation {
+        .button:last-child {
+            margin-left: initial !important;
+            margin-right: 0.1rem;
+        }
+    }
+
+    .about-list {
+        &__item {
+            .dot {
+                margin-right: initial !important;
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .faq-panel-list {
+        margin: 1rem 1.375rem 1rem 0 !important;
+    }
+
+    .question-block {
+        &__icon {
+            margin: 0 0 0 1rem !important;
+        }
+    }
+
+    ::ng-deep .mat-expansion-panel-body {
+        padding: 0 calc(2rem + 24px) 1rem 1rem !important;
+    }
+
+    @media only screen and (max-width: 580px) {
+        .invitation {
+            .button:last-child {
+                margin-left: initial !important;
+                margin-right: 0;
+            }
+        }
+    }
+
+    // buttons
+    .button {
+        &__spinner {
+            margin-left: initial !important;
+            margin-right: 5px;
+        }
+
+        &__icon {
+            margin-right: initial !important;
+            margin-left: 5px;
+        }
+    }
+
+    ddp-language-selector {
+        .ddp-globe {
+            margin-right: initial !important;
+            margin-left: 0.2rem;
+        }
+    }
+
+    // dashboard
+    .ddp-dashboard {
+
+        .mat-header-cell:first-of-type,
+        .mat-cell:first-of-type {
+            padding-left: initial !important;
+            padding-right: 10px !important;
+        }
+
+        .mat-header-cell:last-of-type,
+        .mat-cell:last-of-type {
+            padding-right: initial !important;
+            padding-left: 10px !important;
+        }
+
+        .dashboard-status-container {
+            &__img {
+                padding: 0 0 0 8px !important;
+            }
+        }
+
+        @media only screen and(max-width: 650px) {
+
+            .mat-header-cell:first-of-type,
+            .mat-cell:first-of-type {
+                padding-left: initial !important;
+                padding-right: 0px !important;
+            }
+        }
+    }
+
+    // activity
+    // list 
+    .ddp-list {
+        list-style: arabic-indic;
+    }
+
+    // consent header
+    .activity-header {
+        &__icon {
+            margin-right: initial !important;
+            margin-left: 0.5rem;
+        }
+    }
+
+    // buttons layout
+    .activity-buttons {
+        .button {
+            &_right {
+                margin-left: initial !important;
+                margin-right: auto;
+            }
+        }
+    }
+
+    ddp-activity-boolean-answer {
+        .example-radio-group {
+
+            mat-radio-button {
+                margin: 5px 5px 5px 30px !important;
+            }
+        }
+    }
+
+    .mat-list-item-content {
+        padding-left: initial !important;
+        padding-right: 5px !important;
+    }
+
+    .ddp-answer-container {
+        .native-select {
+            margin-right: initial !important;
+            margin-left: 2rem;
+        }
+
+        .native-select:last-child {
+            margin-right: initial !important;
+            margin-left: 0;
+        }
+    }
+
+    .numeric-answer- {
+
+        &SAMPLE_COLLECT_TIME_MIN,
+        &SAMPLE_COLLECT_TIME_HOUR,
+        &LONGITUDINAL_SAMPLE_COLLECT_TIME_HOUR,
+        &LONGITUDINAL_SAMPLE_COLLECT_TIME_MIN {
+            .input-field {
+                padding-right: initial !important;
+                padding-left: 2rem !important;
+            }
+        }
+    }
+}

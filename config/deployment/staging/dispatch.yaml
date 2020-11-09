@@ -11,8 +11,6 @@ dispatch:
     service: testboston
   - url: "mpc.staging.datadonationplatform.org/*"
     service: mpc
-  - url: "brain-v2.staging.datadonationplatform.org/*"
-    service: brain-v2
   - url: "pepper-staging.datadonationplatform.org/docs*"
     service: pepper-api-spec
   - url: "pepper-staging.datadonationplatform.org/spec/*"
