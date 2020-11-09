@@ -1,0 +1,24 @@
+<div class="survey">
+  <div class="page-padding">
+    <h1 *ngIf="userFirstName">
+      {{ userFirstName }}'s
+      <span translate>Components.Survey.Title</span>
+    </h1>
+
+    <div class="workdir" [ngClass]="{ 'is-assent': isAssentActivity }">
+      <app-workflow-progress
+        [steps]="activities"
+        [instanceGuid]="instanceGuid"
+        (onChangeActivity)="onChangeActivity($event)"
+      ></app-workflow-progress>
+
+      <app-atcp-activity
+        *ngIf="isActivityShown"
+        [studyGuid]="studyGuid"
+        [buttonWithArrow]="true"
+        [activityGuid]="instanceGuid"
+        (submit)="onSubmit($event)"
+      ></app-atcp-activity>
+    </div>
+  </div>
+</div>

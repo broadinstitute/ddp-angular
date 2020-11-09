@@ -50,6 +50,15 @@
         max-width: 21px;
       }
 
+      &.current {
+        color: $blue;
+        cursor: pointer;
+
+        &::after, &::before {
+          background-color: $blue;
+        }
+      }
+
       &.in-complete {
         @include c-green();
         color: $green;

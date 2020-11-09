@@ -2,7 +2,7 @@
 @import '../../styles/brushes';
 @import '../../styles/typography';
 
-.dashboard {
+.survey {
 
   ::ng-deep {
     .ddp-required-question-prompt {
@@ -109,7 +109,7 @@
       }
     }
 
-    &.is-assets {
+    &.is-assent {
 
       app-atcp-activity {
 
