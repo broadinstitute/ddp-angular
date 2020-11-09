@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { GovernedParticipantsServiceAgent, Participant } from 'ddp-sdk';
 
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
@@ -12,7 +11,9 @@ import {
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
+  GovernedParticipantsServiceAgent,
+  Participant
 } from 'ddp-sdk';
 
 @Component({

@@ -16,6 +16,7 @@ import {
 } from 'ddp-sdk';
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 @Component({
   selector: 'app-atcp-activity',
@@ -279,6 +280,29 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
                                          'ButtonFilled ButtonFilled--kids ButtonFilled--light-green' : model.activityCode === ActivityCodes.ASSENT}"
                                     (click)="navigateToConsole()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="isLoaded && model.activityCode === ActivityCodes.FEEDING">
+                            <button
+                                *ngIf="!model.readonly && isLastStep"
+                                class="button ButtonFilled ButtonFilled--green button_right"
+                                [disabled]="isPageBusy | async"
+                                (click)="model.readonly ? navigateToConsole() : flush()"
+                            >
+                                <ng-container *ngIf="(isPageBusy | async); else feedingActivityControls">
+                                    {{ 'SDK.SavingButton' | translate }}
+                                </ng-container>
+
+                                <ng-template #feedingActivityControls>
+                                    <ng-container *ngIf="!model.readonly">
+                                        {{ 'SDK.SubmitButton' | translate }}
+                                    </ng-container>
+
+                                    <ng-container *ngIf="model.readonly">
+                                        {{ 'SDK.CloseButton' | translate }}
+                                    </ng-container>
+                                </ng-template>
                             </button>
                         </ng-container>
                     </div>

@@ -137,7 +137,7 @@
         {
           "Question": "¿Mi familia puede participar en TestBoston?",
           "Paragraphs": [
-            "En este momento, solo pueden participar en TestBoston los pacientes de Brigham and Women’s que reciban invitaciones generadas al azar. Si más de una persona de su familia recibió una carta de invitación, ambos pueden incorporarse al estudio si así lo desean. Si no recibió una invitación, pero le interesa estar al tanto de los avances del estudio, puede <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">inscribirse en la lista de correo de TestBoston</a>."
+            "En este momento, solo pueden participar en TestBoston los pacientes de Brigham and Women’s que reciban invitaciones generadas al azar. Si más de una persona de su familia recibió una carta de invitación, ambos pueden incorporarse al estudio si así lo desean. Si no recibió una invitación, pero le interesa estar al tanto de los avances del estudio, puede <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">inscribirse en la lista de correo de TestBoston</a>."
           ]
         },
         {

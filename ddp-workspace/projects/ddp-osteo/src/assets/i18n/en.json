@@ -466,6 +466,7 @@
             "Text": "Please enter your password *",
             "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred.",
             "PasswordRequiredError": "Password is required"
         },
         "StayInformed": {

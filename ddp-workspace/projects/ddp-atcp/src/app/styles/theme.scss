@@ -108,7 +108,12 @@ $app-warn: mat-palette($md-warn, 900, A400, A500);
 
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
+$app-typography: mat-typography-config(
+  $font-family: 'Lato, sans-serif',
+);
+
 @include angular-material-theme($app-theme);
+@include angular-material-typography($app-typography);
 
 .validation-div {
     color: mat-color($app-warn);

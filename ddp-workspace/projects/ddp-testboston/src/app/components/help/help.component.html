@@ -6,7 +6,7 @@
 
                 <h2 class="sub-title" translate>Help.Collect.Title</h2>
                 <p translate>Help.Collect.Text</p>
-                <a class="pdf" href="kit-instructions.pdf" target="_blank">
+                <a class="pdf" [href]="language + '/kit-instructions.pdf'" target="_blank">
                     <img class="pdf__image" src="assets/images/pdf.png" [alt]="'Help.Collect.IconAlt' | translate">
                     <span translate>Help.Collect.Link</span>
                 </a>
@@ -70,15 +70,15 @@
                 <h2 class="sub-title" translate>Help.Pickup.Title</h2>
                 <p>
                     <span translate>Help.Pickup.Text.Part1</span>
-                    <a class="Link Link_semi-bold" href="tel:1-844-487-7522">1-844-487-7522</a>.
+                    <a class="Link Link_semi-bold Link_phone" href="tel:1-844-487-7522">1-844-487-7522</a>.
                     <span translate>Help.Pickup.Text.Part2</span>
-                    <a class="Link Link_semi-bold" [href]="'tel:' + phone">{{phone}}</a>.
+                    <a class="Link Link_semi-bold Link_phone" [href]="'tel:' + phone">{{phone}}</a>.
                 </p>
 
                 <h2 class="sub-title" translate>Help.Questions.Title</h2>
                 <p>
                     <span translate>Help.Questions.Text.Part1</span>
-                    <a class="Link Link_semi-bold" [href]="'tel:' + phone">{{phone}}</a>
+                    <a class="Link Link_semi-bold Link_phone" [href]="'tel:' + phone">{{phone}}</a>
                     <span translate>Help.Questions.Text.Part2</span>
                     <a class="Link Link_semi-bold" [href]="'mailto:' + email">{{email}}</a>.
                 <p>

@@ -20,12 +20,16 @@ import {
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
+import * as RouterResources from '../../router-resources';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 import {
   delay,
+  filter,
   map,
   merge,
   startWith,
+  take,
 } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
@@ -201,8 +205,10 @@ import { combineLatest } from 'rxjs';
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
-
+  public isMultiGoverned: boolean;
   public currentActivityService: CurrentActivityService;
+
+  private multiGovernedUserService: MultiGovernedUserService;
 
   constructor(
     windowRef: WindowRef,
@@ -215,6 +221,18 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     injector: Injector) {
     super(windowRef, renderer, submitService, analytics, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
+    this.multiGovernedUserService = injector.get(MultiGovernedUserService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
+    this.multiGovernedUserService.isMultiGoverned$.pipe(
+      filter(isMultiGoverned => isMultiGoverned !== null),
+      take(1),
+    ).subscribe(isMultiGoverned => {
+      this.isMultiGoverned = isMultiGoverned;
+    });
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -301,6 +319,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
   public navigateToConsole(): void {
     this.sendLastSectionAnalytics();
     this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    this.router.navigateByUrl('/console');
+
+    this.router.navigateByUrl(this.isMultiGoverned ? RouterResources.ParticipantList : RouterResources.Dashboard);
   }
 }

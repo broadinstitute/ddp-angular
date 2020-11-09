@@ -25,8 +25,9 @@ import { AccountActivationRequiredComponent } from './components/account-activat
 import { AtcpActivityBaseComponent } from './components/activityForm/app-atcp-activity-base.component';
 import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
 import { AppComponent } from './components/app/app.component';
-import { ConsoleComponent } from './components/console/console';
-import { DashBoardComponent } from './components/dashboard/dashboard';
+import { SurveyComponent } from './components/survey/survey.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { DataAccessComponent } from './components/data-access/data-access';
 import { FooterComponent } from './components/footer/footer';
 import { HeaderComponent } from './components/header/header';
@@ -36,9 +37,13 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { WelcomeComponent } from './components/welcome/welcome';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
+import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
+import { MultiGovernedUserService } from './services/multi-governed-user.service';
+import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -62,10 +67,12 @@ declare let DDP_ENV: any;
 declare const ga: Function;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.dashboardUrl = RouterResource.Console;
+tkCfg.dashboardUrl = RouterResource.Dashboard;
+tkCfg.participantListUrl = RouterResource.ParticipantList;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
+tkCfg.activityUrl = 'activity';
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
@@ -131,11 +138,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpActivityComponent,
     JoinUsComponent,
     DataAccessComponent,
-    DashBoardComponent,
+    SurveyComponent,
     WorkflowProgressComponent,
     StatisticsComponent,
     ProgressBarComponent,
-    ConsoleComponent,
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
     AccountActivationRequiredComponent,
@@ -144,17 +150,20 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
     FileUploaderComponent,
-    PopupMessageComponent
+    PopupMessageComponent,
+    ParticipantListComponent,
+    ParticipantListItem,
+    DashboardComponent,
+    UserActivitiesComponent,
+    ActivityRedirectComponent,
   ],
-  entryComponents: [
-    DashBoardComponent,
-    PopupMessageComponent
-  ],
+  entryComponents: [PopupMessageComponent],
   providers: [
     CurrentActivityService,
     ActivityProgressCalculationService,
     CommunicationService,
     AtcpCommunicationService,
+    MultiGovernedUserService,
     {
       provide: 'ddp.config',
       useValue: config

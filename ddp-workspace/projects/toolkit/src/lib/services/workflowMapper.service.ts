@@ -17,6 +17,8 @@ export class WorkflowMapperService {
         if (activityResponse.next === this.toolkitConfiguration.dashboardGuid || activityResponse.next === WorkflowState.DASHBOARD
             || activityResponse.next === WorkflowState.UNKNOWN) {
             return new UrlWorkflowAction(this.toolkitConfiguration.dashboardUrl);
+        } else if (activityResponse.next === WorkflowState.PARTICIPANT_LIST) {
+            return new UrlWorkflowAction(this.toolkitConfiguration.participantListUrl);
         } else if (activityResponse.next === this.toolkitConfiguration.lovedOneThankYouGuid
             || activityResponse.next === WorkflowState.THANK_YOU) {
             return new UrlWorkflowAction(this.toolkitConfiguration.lovedOneThankYouUrl);
@@ -44,6 +46,8 @@ export class WorkflowMapperService {
                 return new UrlWorkflowAction(this.toolkitConfiguration.aboutYouUrl);
             case this.toolkitConfiguration.aboutChildGuid:
                 return new UrlWorkflowAction(this.toolkitConfiguration.aboutChildUrl);
+            case this.toolkitConfiguration.aboutFamilyGuid:
+                return new UrlWorkflowAction(this.toolkitConfiguration.aboutFamily);
             case this.toolkitConfiguration.consentGuid:
                 return new UrlWorkflowAction(this.toolkitConfiguration.consentUrl);
             case this.toolkitConfiguration.consentAssentGuid:

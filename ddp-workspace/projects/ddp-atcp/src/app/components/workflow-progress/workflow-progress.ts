@@ -31,8 +31,28 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
     this.anchor.addNew(translate$);
   }
 
+  public get currentActivity(): ActivityInstance {
+    if (!this.steps) {
+      return null;
+    }
+
+    const inProgressActivity = this.steps.find(
+      activity => activity.statusCode === IN_PROGRESS
+    );
+
+    if (inProgressActivity) return inProgressActivity;
+
+    const createdActivity = this.steps.find(
+      activity => activity.statusCode === CREATED
+    );
+
+    if (createdActivity) return createdActivity;
+
+    return null;
+  }
+
   public changeActivity(step: ActivityInstance): void {
-    if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS) {
+    if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS || step === this.currentActivity) {
       this.onChangeActivity.emit(step);
     }
   }
