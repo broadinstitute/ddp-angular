@@ -66,8 +66,8 @@
     "IntroSection": {
       "Title": "Queremos ayudar a nuestras comunidades a comprender más acerca de los patrones de contagio de COVID-19 en el área de Boston.",
       "Text": "TestBoston es un estudio de COVID-19 patrocinado por Brigham and Women's Hospital y Broad Institute of MIT and Harvard.",
-      "Code": "Ingresar mi código de invitación",
-      "NoCode": "No tengo un código de invitación"
+      "Code": "Tengo un código de invitación",
+      "NoCode": "No tengo un código de invitación pero quiero participar en el estudio"
     },
     "AboutSection": {
       "Title": "El estudio",
