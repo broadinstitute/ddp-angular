@@ -45,6 +45,7 @@ export * from './lib/components/stay-informed/stay-informed-redesigned.component
 export * from './lib/components/warning-message/warning-message.component';
 export * from './lib/components/activity/activity-link.component';
 export * from './lib/components/international-patients/internationalPatients.component';
+export * from './lib/components/international-patients/internationalPatientsRedesigned.component';
 export * from './lib/components/session-expired/session-expired.component';
 export * from './lib/components/session-expired/session-expired-redesigned.component';
 export * from './lib/components/redirect-to-auth0-login/redirect-to-auth0-login.component';

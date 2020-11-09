@@ -8,6 +8,7 @@
 @import './styles/age-up-thank-you.scss';
 @import './styles/activities.scss';
 @import './styles/dashboard.scss';
+@import './styles/international-patients.scss';
 
 $custom-typography: mat-typography-config($font-family: 'Untitled-Sans-Regular');
 @include mat-core($custom-typography);

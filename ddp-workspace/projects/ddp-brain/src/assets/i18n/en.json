@@ -586,6 +586,14 @@
         }
     },
     "Toolkit": {
+        "InternationalPatients": {
+            "Title": "Information for International Patients",
+            "ThankYou": {
+                "TextPt1": "Thank you for your interest in joining the Brain Cancer Project. Currently, the Brain Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
+                "TextPt2": "or"
+            },
+            "Understand": "We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+        },
         "Dashboard": {
             "Title": "My Dashboard"
         },

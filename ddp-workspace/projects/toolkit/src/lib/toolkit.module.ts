@@ -48,6 +48,7 @@ import { WarningMessageComponent } from './components/warning-message/warning-me
 import { AppComponent } from './components/app/app.component';
 import { ActivityLinkComponent } from './components/activity/activity-link.component';
 import { InternationalPatientsComponent } from './components/international-patients/internationalPatients.component';
+import { InternationalPatientsRedesignedComponent } from './components/international-patients/internationalPatientsRedesigned.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { SessionExpiredRedesignedComponent } from './components/session-expired/session-expired-redesigned.component';
 import { RedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/redirect-to-auth0-login.component';
@@ -160,6 +161,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AppComponent,
     ActivityLinkComponent,
     InternationalPatientsComponent,
+    InternationalPatientsRedesignedComponent,
     SessionExpiredComponent,
     SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,
@@ -207,6 +209,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AppComponent,
     ActivityLinkComponent,
     InternationalPatientsComponent,
+    InternationalPatientsRedesignedComponent,
     SessionExpiredComponent,
     SessionExpiredRedesignedComponent,
     RedirectToAuth0LoginComponent,

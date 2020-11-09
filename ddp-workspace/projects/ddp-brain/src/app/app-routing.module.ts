@@ -21,7 +21,8 @@ import {
   RedirectToLoginLandingRedesignedComponent,
   AgeUpThankYou,
   VerifyAgeUpPageComponent,
-  AcceptAgeUpPageComponent
+  AcceptAgeUpPageComponent,
+  InternationalPatientsRedesignedComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -255,6 +256,11 @@ const routes: Routes = [
   {
     path: AppRoutes.MailingList,
     component: WelcomeComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: AppRoutes.InternationalPatients,
+    component: InternationalPatientsRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
