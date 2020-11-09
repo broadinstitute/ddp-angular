@@ -3,11 +3,14 @@
         <div class="content intro-block">
             <h1 class="intro-block__title semi-bold center" translate>HomePage.IntroSection.Title</h1>
             <p class="intro-block__text" translate>HomePage.IntroSection.Text</p>
-            <div *ngIf="!isAuthenticated" class="invitation">
-                <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
-                    translate>HomePage.IntroSection.Code</a>
-                <a class="button button_simple button_underline" routerLink="/" fragment="stay-informed"
-                    (click)="scrollToAnchor('stay-informed')" translate>HomePage.IntroSection.NoCode</a>
+            <div *ngIf="!isAuthenticated" class="invitation" style="display:flex;justify-content:center;">
+                <div style="padding-left:2px;padding-right:20px;">
+                  <a class="button button_basic" [routerLink]="'/' + appRoutes.Join"
+                     translate style="white-space: nowrap;padding-left:10px; padding-right:10px;">HomePage.IntroSection.Code</a>
+                </div>
+                <a style="padding:0px 20px 0px 2px;" class="button button_simple button_underline" href="https://rally.partners.org/study/testboston"
+                   target="_blank"
+                   translate>HomePage.IntroSection.NoCode</a>
             </div>
         </div>
     </section>
@@ -73,14 +76,6 @@
                     </li>
                 </div>
             </ul>
-        </div>
-    </section>
-    <section class="section mailing-list-section">
-        <div id="stay-informed" class="anchor"></div>
-        <div class="content mailing-list-block">
-            <h2 class="semi-bold" [innerHTML]="'HomePage.MailingSection.Title' | translate"></h2>
-            <p class="mailing-list-block__text" translate>HomePage.MailingSection.Text</p>
-            <app-mailing-list></app-mailing-list>
         </div>
     </section>
 </main>
