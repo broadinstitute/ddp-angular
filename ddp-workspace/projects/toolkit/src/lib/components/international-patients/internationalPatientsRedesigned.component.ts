@@ -20,7 +20,7 @@ import { InternationalPatientsComponent } from './internationalPatients.componen
                         <span translate>Toolkit.InternationalPatients.ThankYou.TextPt2</span>
                         <a [href]="phoneHref" class="Link">{{phone}}</a>.
                     </p>
-                    <p translate>Toolkit.InternationalPatients.Understand</p>s
+                    <p translate>Toolkit.InternationalPatients.Understand</p>
                 </div>
             </div>
         </section>
