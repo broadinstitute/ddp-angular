@@ -60,7 +60,7 @@ tkCfg.infoEmail = 'info@ascproject.org';
 tkCfg.dataEmail = 'data@ascproject.org';
 tkCfg.twitterAccountId = 'ASCaProject';
 tkCfg.facebookGroupId = 'groups/1556795987968214';
-tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=angs_project_painter_2018#summary';
+tkCfg.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=angs_painter_2020';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;
 tkCfg.showInfoForPhysicians = true;

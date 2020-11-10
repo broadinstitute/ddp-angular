@@ -878,6 +878,13 @@ ul {
     text-align: left;
 }
 
+.PageContent-text {
+    &__important {
+        color: black;
+        font-weight: 400;
+    }
+}
+
 .PageContent-image {
     width: 100%;
     height: auto;
