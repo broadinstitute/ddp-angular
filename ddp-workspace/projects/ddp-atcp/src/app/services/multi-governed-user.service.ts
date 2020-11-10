@@ -30,7 +30,7 @@ export class MultiGovernedUserService {
     this.session.sessionObservable
       .pipe(
         filter(
-          profile => profile !== null && !this.session.isTemporarySession()
+          profile => profile !== null && this.session.isAuthenticatedSession()
         ),
         take(1),
         switchMap(() =>
