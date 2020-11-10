@@ -7,6 +7,7 @@ import { JoinMailingListComponent, SessionWillExpireComponent } from 'toolkit';
 import * as RouterResource from '../../router-resources';
 import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private renewNotifier: RenewSessionNotifier,
     private session: SessionMementoService,
+    private multiGovernedUserService: MultiGovernedUserService,
   ) { }
 
   public ngOnInit(): void {
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();
     this.subscribeToPopupMessages();
+    this.multiGovernedUserService.checkIfMultiGoverned();
   }
 
   public ngOnDestroy(): void {

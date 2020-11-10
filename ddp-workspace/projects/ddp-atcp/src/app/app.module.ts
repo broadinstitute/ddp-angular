@@ -41,7 +41,6 @@ import { ParticipantListComponent } from './components/participant-list/particip
 import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
-import { MultiGovernedUserService } from './services/multi-governed-user.service';
 import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 
@@ -163,7 +162,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ActivityProgressCalculationService,
     CommunicationService,
     AtcpCommunicationService,
-    MultiGovernedUserService,
     {
       provide: 'ddp.config',
       useValue: config

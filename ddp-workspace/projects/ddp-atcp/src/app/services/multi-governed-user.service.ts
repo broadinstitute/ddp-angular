@@ -10,7 +10,9 @@ import {
   SessionMementoService,
 } from 'ddp-sdk';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MultiGovernedUserService {
   public readonly isMultiGoverned$ = new BehaviorSubject<boolean | null>(null);
 
@@ -22,11 +24,9 @@ export class MultiGovernedUserService {
     private activityAgent: ActivityServiceAgent,
     private readonly session: SessionMementoService,
     @Inject('ddp.config') private readonly config: ConfigurationService
-  ) {
-    this.checkIfMultiGoverned();
-  }
+  ) {}
 
-  private checkIfMultiGoverned(): void {
+  public checkIfMultiGoverned(): void {
     this.session.sessionObservable
       .pipe(
         filter(
