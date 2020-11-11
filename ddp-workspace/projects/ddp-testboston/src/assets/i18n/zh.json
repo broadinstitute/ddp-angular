@@ -1,0 +1,612 @@
+{
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "提交",
+        "AriaLabel": "“提交”按钮"
+      },
+      "Login": {
+        "Title": "登录",
+        "AriaLabel": "“登录”按钮"
+      }
+    }
+  },
+  "Navigation": {
+    "LogoAlt": "TestBoston 徽标",
+    "CRCLogoSubtitle": "受试者支持界面",
+    "Home": "主页",
+    "About": "研究简介",
+    "Q&A": "问答",
+    "WhoWeAre": "我们是谁",
+    "StayInformed": "获取最新信息",
+    "Help": "帮助",
+    "Dashboard": "我的控制面板",
+    "Menu": "菜单",
+    "Invitation": "邀请代码",
+    "Titles": {
+      "TestBoston": "TestBoston",
+      "ContactUs": "联系我们",
+      "Participation": "参与",
+      "Language": "语言"
+    }
+  },
+  "MailingList": {
+    "Title": "邮件列表",
+    "Questions": {
+      "Adult": "1. 您是否年满 18 岁？",
+      "Patient": "2. 您是布莱根妇女医院的患者吗？",
+      "Email": "3. 与您联系的最佳电子邮件地址是什么？"
+    },
+    "Answers": {
+      "Yes": "是",
+      "No": "否",
+      "NoAnswer": "不愿回答"
+    },
+    "Validations": {
+      "RequiredOption": "请选择一个选项",
+      "RequiredEmail": "请输入您的电子邮件地址",
+      "InvalidEmail": "请输入一个有效的电子邮件地址"
+    },
+    "EmailLabel": "输入电子邮件地址",
+    "EmailPlaceholder": "example@example.com",
+    "ThankYouBlock": {
+      "Title": "您成功完成操作！",
+      "Text": "感谢您注册 TestBoston 邮件列表。"
+    },
+    "SorryBlock": {
+      "Title": "很抱歉，您似乎没有资格加入。",
+      "Text": {
+        "Part1": "您必须年满 18 岁才能加入 TestBoston 邮件列表。请阅读我们的",
+        "Part2": "常见问题",
+        "Part3": "以获取更多的信息。"
+      }
+    }
+  },
+  "HomePage": {
+    "IntroSection": {
+      "Title": "我们希望能够帮助我们的社区，并更多地了解波士顿地区 COVID-19 的感染模式。",
+      "Text": "TestBoston 是一项由布莱根妇女医院 (Brigham and Women's Hospital) 和麻省理工学院和哈佛大学博德研究所 (Broad Institute of MIT and Harvard) 支持的 COVID-19 研究。",
+      "Code": "输入邀请代码",
+      "NoCode": "我没有邀请代码"
+    },
+    "AboutSection": {
+      "Title": "研究简介",
+      "Text": "我们的目标是观察马萨诸塞州 COVID-19 感染率随时间变化的趋势。一些社区的感染率高于其他社区。有些人感染了 COVID-19，但没有出现症状。我们希望，我们的研究将帮助我们更好地了解 COVID-19，并在未来为 COVID 患者和非 COVID 患者提供帮助。",
+      "Questions": {
+        "Title": "我们试图回答的问题：",
+        "List": [
+          "COVID-19 感染在我们社区中的发生率是多少？",
+          "无症状性 COVID-19 感染的发生率是多少？",
+          "人群在感染 COVID-19 后会获得对该病毒的免疫力吗？",
+          "研究者如何对众多的居家受试者进行测试？"
+        ]
+      }
+    },
+    "FaqSection": {
+      "Title": "有关 TestBoston 的常见问题解答",
+      "Text": "如果您对 TestBoston 存有疑问，您也可以打电话或发邮件联系我们的研究人员：",
+      "Items": [
+        {
+          "Question": "任何人都可以加入该研究吗？",
+          "Paragraphs": [
+            "TestBoston 对大波士顿地区随机挑选的成年居民开放，这些人需要在过去一年中在布莱根妇女医院接受过至少一次的治疗。每位随机选择的患者将通过邮政信函或电子邮件收到参与研究的邀请。"
+          ]
+        },
+        {
+          "Question": "如果我加入研究，是否会为我进行 COVID-19 检测？",
+          "Paragraphs": [
+            "是的。如果您收到加入研究的邀请，并决定加入研究，我们将为您进行 COVID-19 检测。但是，由于注册名额有限，将按照“先到者优先接受服务原则”注册研究参与者。如果您报名参与，您将在加入研究约一周内收到包含两项测试的家庭检测试剂盒。家庭检测试剂盒将包含病毒学检测试剂盒（鼻拭子采样）和抗体检测试剂盒（手指血采样），以及有关如何收集样本并将样本寄回我们的实验室以进行测试的说明。鼻拭子检测您是否存在活性 COVID-19 病毒。手指血检测您是否产生了 COVID-19 抗体（这意味着您之前感染过该病毒）。如果您也同意参与纵向研究，我们将为您提供更多的试剂盒，让您在接下来的 5 个月里每个月重复这些测试。"
+          ]
+        },
+        {
+          "Question": "我会收到检测结果吗？",
+          "Paragraphs": [
+            "您将收到为您进行的病毒检测的研究结果。您将不会收到为您进行的抗体检测的结果。研究结果将为公共卫生决策提供依据。报告结果时，将以数据摘要的形式发布结果，并注明基本的人口统计信息。您的身份将保密。"
+          ]
+        },
+        {
+          "Question": "TestBoston 是否仅针对出现 COVID-19 症状的人？",
+          "Paragraphs": [
+            "不是 - 不论您是否出现症状（或曾经出现过症状），任何受邀参与 TestBoston 的人都可以参与研究。"
+          ]
+        },
+        {
+          "Question": "为参与研究，我是否需要出行？",
+          "Paragraphs": [
+            "不需要。TestBoston 是一项基于家庭的研究。TestBoston 研究的参与者不需要前往诊所、医院或医生办公室。参与者将在线回答简短的调查，并在家中收到 COVID-19 采样试剂盒，之后这些试剂盒将寄回到我们的实验室。"
+          ]
+        },
+        {
+          "Question": "医生、护士或研究人员是否会到我的家中为我进行测试？",
+          "Paragraphs": [
+            "不会。您将通过邮件接收样本采集试剂盒，并且自己完成鼻拭子和手指血测试。如有任何疑问，您可以随时通过电话或电子邮件与研究小组联系。"
+          ]
+        },
+        {
+          "Question": "参与 TestBoston 是否免费？",
+          "Paragraphs": [
+            "是的。参与 TestBoston 不会向您收取费用。"
+          ]
+        },
+        {
+          "Question": "如果我参与研究，我需要做些什么？",
+          "Paragraphs": [
+            "TestBoston 的参与者需要填写一份有关 COVID-19 的简短调查，并在家中对自己进行两次简单的 COVID-19 采样。参与者需要将试剂盒放在一个预先付费的盒子里寄送给我们，以进行下一步的样本处理。参与者也可以自愿每月重复此过程，以完成额外 5 个月的采样。测试采样为鼻拭子和手指血。"
+          ]
+        },
+        {
+          "Question": "我的家人可以参与 TestBoston 吗？",
+          "Paragraphs": [
+            "目前，只有收到随机生成的受邀的布莱根妇女医院的患者才能参与 TestBoston 研究。如果您家中有超过一人收到邀请，那么收到邀请的人均可以选择参与研究。如果您没有收到邀请，但有兴趣随时了解研究进展，欢迎<a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">加入 TestBoston 邮件列表</a>。"
+          ]
+        },
+        {
+          "Question": "我可以把我的邀请代码给别人用吗？",
+          "Paragraphs": [
+            "不可以。邀请代码只能由信件收件人使用。"
+          ]
+        },
+        {
+          "Question": "研究的主办方是谁？",
+          "Paragraphs": [
+            "TestBoston 是一项由布莱根妇女医院 (Brigham and Women's Hospital) 和麻省理工学院和哈佛大学博德研究所 (Broad Institute of MIT and Harvard) 支持的 COVID-19 研究。主导该研究的人员是布莱根妇女医院的传染病医生。",
+            "博德研究所是一家位于剑桥的领先学术研究机构。博德研究所每天为马萨诸塞州的卫生部门以及马萨诸塞州的多种 COVID-19 研究进行数千次的 COVID-19 检测。"
+          ]
+        },
+        {
+          "Question": "研究将持续多长时间？",
+          "Paragraphs": [
+            "该研究可持续长达 6 个月。参与者可随时决定终止参与研究。"
+          ]
+        }
+      ]
+    },
+    "TeamSection": {
+      "Title": "我们的团队",
+      "Text": "我们是一支由传染病医生和研究人员组成的团队，他们希望更好地了解 COVID-19 如何影响个人和社区，以便为所有患者提供更好的服务。",
+      "PIs": [
+        {
+          "Name": "Ann E. Woolley，医学博士、公共卫生硕士",
+          "Affiliations": "布莱根妇女医院传染病科副医师；哈佛医学院医学讲师",
+          "Info": "Ann Woolley 博士是布莱根妇女医院实体器官移植传染病学的临床副主任，也是一名临床研究人员，其研究重点是扩大治疗和诊断的应用。"
+        },
+        {
+          "Name": "Lisa A. Cosimi，医学博士",
+          "Affiliations": "布莱根妇女医院副医师；哈佛医学院助理教授",
+          "Info": "Cosimi 博士是布莱根妇女医院的副医师，他在全球卫生公平和传染病部门的工作重点是加强资源有限环境下的卫生系统和卫生保健质量。"
+        },
+        {
+          "Name": "Deborah T. Hung，医学博士、科研博士",
+          "Affiliations": "哈佛医学院教授；博德研究所传染病和微生物组计划的核心教员兼联合主任",
+          "Info": "Deborah Hung 博士是博德研究所、哈佛大学医学院和马萨诸塞州总医院的医师科学家，他的研究方向为传染病，是布莱根妇女医院传染病以及肺病和重症监护医学的主治医师。"
+        }
+      ],
+      "Others": [
+        {
+          "Title": "管理团队，博德研究所",
+          "Members": [
+            "Andrea Saltzman，研究受试者保护办公室主任",
+            "Marissa Jenko，硕士，行政主管",
+            "Paul Tyman，行政助理",
+            "Sarah Winnicki，项目经理 II",
+            "Sharon Wong，科研博士，传染病和微生物组计划副主任"
+          ]
+        },
+        {
+          "Title": "工程团队，博德研究所",
+          "Members": [
+            "Andrew Zimmer，数据捐赠平台主任",
+            "Anna Hupalowska，插图和数据可视化设计师",
+            "Erin Gwozdz，UX/UI 设计师",
+            "Jen Lapan，首席软件产品经理",
+            "Kiara Westbrooks，软件工程师",
+            "Marco Ocana，首席软件工程师",
+            "Pavel Sidorenko，软件工程师",
+            "Pegah Taheri，软件工程师",
+            "Sampath Settipalli，高级软件工程师",
+            "Scott Sassone，视频制作经理",
+            "Simone Maiwald，软件工程经理",
+            "Yufeng Wang，高级软件工程师"
+          ]
+        },
+        {
+          "Title": "临床团队，布莱根妇女医院",
+          "Members": [
+            "Andy Kim，理学学士，研究协调员",
+            "Christina Kelly，研究助理",
+            "Hannah Laibinis，实习生",
+            "Henry Manigat，翻译",
+            "Henry Rutherford，文学学士，研究协调员",
+            "Himaja Nagireddy，哈佛大学公共卫生学院理学硕士研究生，实习生",
+            "Sarah Naz-McLean，理学硕士，研究协调员",
+            "Tina Wang，翻译",
+            "Yilu Ma，翻译"
+          ]
+        },
+        {
+          "Title": "其他合作伙伴",
+          "Members": [
+            "博德研究所临床研究测序平台 (CRSP)",
+            "GBF",
+            "Joel Ceide，翻译",
+            "Language Scientific",
+            "Mascon Medical",
+            "博德研究所微生物组学核心实验室 (MOC)",
+            "Nadya Lopez Zalba，翻译",
+            "UPS"
+          ]
+        }
+      ]
+    },
+    "MailingSection": {
+      "Title": "目前，TestBoston 正在招募布莱根妇女医院的特邀患者。",
+      "Text": "如果您没有收到加入研究的邀请，但有兴趣了解最新的有关 TestBoston 的一般信息，请加入我们的新闻通讯列表："
+    }
+  },
+  "PrequalPage": {
+    "Title": "首先，确认您的资格",
+    "InvitationCode": {
+      "Question": "输入您的邀请代码",
+      "TooltipAlt": "信息图标",
+      "Tooltip": "如果您收到来自您医生的纸质或电子邮件邀请函，则在信件顶部包含有 12 位数字的邀请代码。",
+      "Placeholder": "输入邀请代码",
+      "Error": {
+        "Part1": "您输入的代码无效。请检查您的代码，然后重试。您可以随时联系 TestBoston 研究人员以寻求帮助：",
+        "Part2": "或者"
+      }
+    },
+    "Zip": {
+      "Question": "您的邮政编码是什么？",
+      "Placeholder": "输入邮政编码",
+      "Error": "很抱歉。该邮政编码位于 TestBoston 研究区之外。请检查您输入的邮政编码，然后重试。"
+    },
+    "Adult": {
+      "Question": "您是否年满 18 岁？",
+      "Yes": "是",
+      "No": "否",
+      "Error": {
+        "Part1": "很抱歉，您似乎没有资格加入。您必须年满 18 岁才能加入 TestBoston 研究。请阅读我们的",
+        "Part2": "常见问题",
+        "Part3": "以获取更多的信息。"
+      }
+    },
+    "Error": "抱歉，发生了错误。请稍后重试。"
+  },
+  "Prism": {
+    "ClearSearch": "清除",
+    "Email": "受试者电子邮件地址",
+    "NoneListed": {
+      "Title": "未列出",
+      "Text": "如果受试者想要登录 TestBoston 网站，请启用其 TestBoston 帐户",
+      "Link": "此处"
+    },
+    "Buttons": {
+      "Enrollment": "开始注册",
+      "Dashboard": "查看控制面板"
+    },
+    "Notes": "受试者注释",
+    "NotesPlaceholder": "开始键入...",
+    "NotesError": "很抱歉，您的注释没有保存。请稍后重试。",
+    "Steps": {
+      "Step1": {
+        "Title": "输入受试者的 12 位邀请代码",
+        "Subtitle": "如果代码未知，请访问 Brigham 链接文件，并使用受试者姓名检索代码。",
+        "Placeholder": "输入邀请代码",
+        "Error": "找不到代码"
+      },
+      "Step2": {
+        "Title": "检查邮政编码",
+        "Placeholder": "输入邮政编码",
+        "Error": "邮政编码无效",
+        "Success": "邮政编码有效"
+      },
+      "Step3": {
+        "Title": "在开始注册之前，口头确认受试者年满 18 岁。"
+      }
+    }
+  },
+  "Enrollment": {
+    "Title": "帐户设置",
+    "FirstName": {
+      "Text": "受试者的名字",
+      "Placeholder": "输入名字",
+      "Error": "请输入受试者的名字"
+    },
+    "LastName": {
+      "Text": "受试者的姓氏",
+      "Placeholder": "输入姓氏",
+      "Error": "请输入受试者的姓氏"
+    },
+    "Email": {
+      "Text": "受试者的电子邮件地址（可选）",
+      "Placeholder": "example@example.com",
+      "Error": "请输入有效的电子邮件地址"
+    },
+    "Button": "下一步"
+  },
+  "Help": {
+    "Title": "帮助中心",
+    "Collect": {
+      "Title": "如何采集您的样本",
+      "Text": "非常重要的是，请在完成测试的当天寄回样本（周一至周四）。博德研究所将在周一至周四处理 TestBoston 样本。",
+      "Link": "采样说明",
+      "IconAlt": "PDF 文件图标",
+      "IframeTitle": "鼻拭子试剂盒使用说明",
+      "Video": "https://player.vimeo.com/video/440526812"
+    },
+    "Return": {
+      "Title": "如何寄回您的样本",
+      "Text": "您必须在进行测试的当天通过 UPS 寄回测试样本。将您的测试试剂盒交给官方 UPS 商店或放在 UPS 投递箱中。如果您有一个安全的地方可将包裹放在屋外，您也可以请求 UPS 上门取件服务，UPS 驾驶员将上门收集您的包裹。",
+      "Step1": {
+        "Title": "第 1 步：",
+        "Text": {
+          "Part1": "单击",
+          "Part2": "输入您的邮政编码，然后单击“<span class=\"bold\">查看所有选项 (See All Options)</span>”。"
+        },
+        "ImageAlt": "UPS 位置说明，您的位置"
+      },
+      "Step2": {
+        "Title": "第 2 步：",
+        "Text": "在“<span class=\"bold\">位置类型 (Location Type)</span>”下，选中“<span class=\"bold\">UPS 店铺 (The UPS Store®)</span>”和“<span class=\"bold\">UPS 投递箱 (UPS Drop Box)</span>”复选框。然后点击搜索图标",
+        "ImageAlt": "UPS 位置说明，UPS 箱"
+      }
+    },
+    "Pickup": {
+      "Title": "UPS 上门收件服务",
+      "Text": {
+        "Part1": "如果您可以将包裹放在 UPS 驾驶员可以访问的安全位置，则可能有资格获取 UPS 上门收件服务。请致电安排收件服务",
+        "Part2": "如果您在通过 UPS 寄回试剂盒时遇到任何困难，请联系研究团队"
+      }
+    },
+    "Questions": {
+      "Title": "还有其他问题吗？",
+      "Text": {
+        "Part1": "如果您还有其他问题，请通过电子邮件与研究人员联系",
+        "Part2": "或者"
+      }
+    },
+    "ArrowAlt": "箭头",
+    "SearchAlt": "搜索图标"
+  },
+  "Toolkit": {
+    "Dashboard": {
+      "Title": "控制面板",
+      "Invitation": {
+        "InvitationCode": "邀请代码：",
+        "Message": "请使用查找工具管理参与者。",
+        "Button": "转到"
+      }
+    },
+    "Password": {
+      "Title": "请输入密码",
+      "Text": "请输入您的密码*",
+      "InputPlaceholder": "密码",
+      "PasswordWrongError": "密码不正确。请再试一次。",
+      "PasswordRequiredError": "需要密码"
+    },
+    "ErrorPage": {
+      "Title": "我们遇到了一个错误",
+      "Text": "抱歉，发生了错误。",
+      "DefaultText": {
+        "TextPt1": "请稍后重试。如果问题仍然存在，请给我们发送电子邮件",
+        "TextPt2": "或致电我们"
+      }
+    },
+    "SessionExpired": {
+      "Text": "您离开了一段时间，出于安全考虑，我们将您退出了系统。请再次登录以返回到您上次访问的页面。"
+    },
+    "Dialogs": {
+      "SessionWillExpire": {
+        "Title": "您的会话即将超时",
+        "Text": "由于您离开了一段时间，为保护隐私，我们会将您退出系统。点击“继续 (Continue)”保持登录状态。如果您已经完成操作，请点击“退出 (Sign Out)”。",
+        "SignOut": "退出",
+        "Continue": "继续",
+        "RenewalFailed": "会话更新失败。请退出并再次登录。"
+      }
+    }
+  },
+  "SDK": {
+    "SubmitButton": "提交",
+    "CloseButton": "关闭",
+    "AddButton": "添加",
+    "CancelButton": "取消",
+    "NextButton": "下一步",
+    "PreviousButton": "上一步",
+    "SavingButton": "保存",
+    "EditButton": "继续",
+    "CompleteButton": "编辑",
+    "ReviewButton": "查看",
+    "OpenButton": "打开",
+    "StartButton": "开始",
+    "AgreeButton": "我同意",
+    "ReportButton": "报告",
+    "NotAgreeButton": "我还没准备好签署同意",
+    "ValidateError": "请填写所有必填字段。",
+    "CommunicationError": "保存您的数据时出现问题。提交前请检查表格和您的答案",
+    "SaveError": "抱歉，发生了错误",
+    "ExportStudy": {
+      "Export": "导出"
+    },
+    "ListStudies": {
+      "StudyName": "研究名称",
+      "ParticipantCount": "参与者人数"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "工作区名称",
+      "WorkspaceNamespace": "工作区命名空间"
+    },
+    "Login": {
+      "Login": "登录",
+      "Logout": "退出"
+    },
+    "SignInOut": {
+      "SignIn": "登录",
+      "SignOut": "退出"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "语言选择"
+    },
+    "UserActivities": {
+      "ActivityName": "表单",
+      "Summary": "总结",
+      "ActivityStatus": "状态",
+      "ActivityDate": "已创建",
+      "ActivityActions": "操作",
+      "ActivityQuestionCount": "已解答 {{questionsAnswered}} 题，共 {{questionTotal}} 题"
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "受管参与者",
+      "ParticipantPlaceholder": "参与者",
+      "ParticipantsList": "参与者"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "个人资料",
+      "ViewAs": "查看形式",
+      "ManageParticipants": "管理参与者"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "用户偏好",
+      "UserPreferencesGender": "性别",
+      "UserPreferencesLocale": "首选语言"
+    },
+    "Dashboard": {
+      "Title": "我的控制面板",
+      "Text": "以下的控制面板描述了每个 TestBoston 表单及其状态。"
+    },
+    "DatePicker": {
+      "Day": "选择日...",
+      "Month": "选择月...",
+      "Year": "选择年...",
+      "January": "一月",
+      "February": "二月",
+      "March": "三月",
+      "April": "四月",
+      "May": "五月",
+      "June": "六月",
+      "July": "七月",
+      "August": "八月",
+      "September": "九月",
+      "October": "十月",
+      "November": "十一月",
+      "December": "十二月"
+    },
+    "UserMenu": {
+      "DashboardButton": "控制面板",
+      "SignOutButton": "签退"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "剩余字符",
+      "SingularForm": "剩余字符"
+    },
+    "Title": {
+      "Default": "TestBoston",
+      "Alert": "您的会话即将超时"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "请输入一个有效的电子邮件"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "医师姓名",
+        "Institution": "机构",
+        "InstitutionAny": "机构（如果有）",
+        "City": "城市",
+        "State": "州"
+      },
+      "PhysicianValidation": "请填写所有必填字段"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "全名",
+        "Country": "国家/地区",
+        "Street1": "街道地址",
+        "Street2": "公寓/楼层号",
+        "State": {
+          "State": "州",
+          "Province": "省",
+          "State/Province/Region": "州/省/地区"
+        },
+        "City": "城市",
+        "Phone": "电话",
+        "Zip": {
+          "Zip Code": "邮政编码",
+          "Postal Code": "邮政编号",
+          "Zip/Postal Code": "邮政编码/编号"
+        },
+        "Choose": "选择 {{field}}..."
+      },
+      "Suggestion": {
+        "Title": "我们已经检查了您的地址条目，并提出有助于确保送货的建议的更改。",
+        "Subtitle": "点击“建议的 (Suggested)”以更新表单。您将可以点击“按输入 (As entered)”以恢复原始输入。",
+        "Suggested": "建议的：",
+        "AsEntered": "按输入："
+      },
+      "Error": {
+        "InvalidAddress": "无效地址。",
+        "CannotVerify": "无法验证地址，请仔细检查您的地址。",
+        "UnknownVerifyError": "验证地址时发生未知错误。",
+        "FieldIsRequired": "{{field}} 为必填项",
+        "FieldIsInvalid": "{{field}} 包含无效值",
+        "InvalidHouseNumber": "找不到街道号码",
+        "INTERNAL_SERVER_ERROR": "很抱歉，出现了错误。如果问题仍然存在，请通过 support@easypost.com 与我们联系。",
+        "NOT_ACCEPTABLE": "由请求标识的资源仅能够生成响应实体，根据请求中发送的接受标头，该响应实体含有不可接受的内容特征。",
+        "NOT_FOUND": "找不到请求的资源。",
+        "FORBIDDEN": "无法访问请求的资源。",
+        "PAYMENT_REQUIRED": "资金不足。请访问 http://www.easypost.com/account/billing 以检查您的结算设置。",
+        "UNAUTHORIZED": "无法访问请求的资源，授权失败。",
+        "BAD_REQUEST": "请求格式错误。请检查内容，然后重试。",
+        "PAYMENT_GATEWAY.ERROR": "付款处理器无法处理该请求。如果问题仍然存在，请重试或通过 support@easypost.com 与我们联系。",
+        "MODE.UNAUTHORIZED": "此资源需要生产 API 密钥才能访问。",
+        "MODE.CONFLICT": "API 密钥模式与参数模式冲突。",
+        "DATE.PARSE.FAILURE": "至少一个日期格式不正确，无法解析。",
+        "PARAMETER.FORBIDDEN": "由于参数中存在禁止的属性，因此无法完成请求。",
+        "PARAMETER.REQUIRED": "缺少必需的参数。",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "传递的参数包含无效字符。",
+        "ADDRESS.PARAMETERS.INVALID": "用于创建地址的传递的参数丢失或无效。",
+        "ADDRESS.COUNTRY.INVALID": "“国家 (country)”无效，请提供 2 个字符的 ISO 国家代码。",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "找不到地址。",
+        "ADDRESS.VERIFICATION.FAILURE": "无法验证该地址。",
+        "ADDRESS.VERIFY.UNAVAILABLE": "地址验证不可用。请再试一次。",
+        "ADDRESS.VERIFICATION.INVALID": "所选的验证之一无效。",
+        "ADDRESS.VERIFY.FAILURE": "无法验证地址。",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "无法使用提供的运营商验证地址。",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "由于上游服务没有响应，因此无法进行地址验证。请再试一次。",
+        "ADDRESS.VERIFY.ONLY_US": "USPS 只能验证美国地址。",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "此帐户未启用国际验证。请联系 support@easypost.com。",
+        "ADDRESS.VERIFY.MISSING_STREET": "提供的地址数据不足。必须提供街道。",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "提供的地址数据不足。必须提供城市、州或邮编。",
+        "E.COUNTRY.UNSUPPORTED": "此模式中不支持该国家。在生产模式下尝试。",
+        "E.ENGINE.UNAVAILABLE": "没有可服务于该国家的验证引擎。请稍后再试。",
+        "E.QUERY.UNANSWERABLE": "我们无法提供该国家足够的数据来满足此请求。请稍后再试。",
+        "E.ADDRESS.NOT_FOUND": "我们找不到输入的地址。",
+        "E.SECONDARY_INFORMATION.INVALID": "辅助信息无效（公寓/套房号）。请注意，这可能会在成功请求后显示为错误。",
+        "E.SECONDARY_INFORMATION.MISSING": "辅助信息缺失（公寓/套房号）。请注意，这可能会在成功请求后显示为错误。",
+        "E.HOUSE_NUMBER.MISSING": "门牌号码缺失。",
+        "E.HOUSE_NUMBER.INVALID": "我们找不到提供的街道号码。",
+        "E.STREET.MISSING": "街道缺失。",
+        "E.STREET.INVALID": "街道无效。",
+        "E.BOX_NUMBER.MISSING": "邮箱号缺失。",
+        "E.BOX_NUMBER.INVALID": "邮箱号无效。",
+        "E.ADDRESS.INVALID": "城市/州/邮政编码无效。",
+        "E.ZIP.NOT_FOUND": "找不到邮政编码。",
+        "E.ZIP.INVALID": "邮政编码无效。",
+        "E.ZIP.PLUS4.NOT_FOUND": "找不到邮政编码 + 4。",
+        "E.ADDRESS.MULTIPLE": "相同的邮政编码找到多个地址。",
+        "E.ADDRESS.INSUFFICIENT": "地址数据不足/不正确。",
+        "E.ADDRESS.DUAL": "双地址。",
+        "E.STREET.MAGNET": "街道地址不明确。",
+        "E.CITY_STATE.INVALID": "无法验证城市/州。",
+        "E.STATE.INVALID": "州无效。",
+        "E.ADDRESS.DELIVERY.INVALID": "收货地址无效。",
+        "E.TIMED_OUT": "超出最大超时时间。",
+        "E.TIME_ZONE.UNAVAILABLE": "时区服务当前不可用。",
+        "E.PO_BOX.INTERNATIONAL": "无法验证国际邮政信箱。请注意，这可能会在成功请求后显示为错误。"
+      }
+    },
+    "TooltipAlt": "信息",
+    "SubjectPanel": {
+      "Link": "返回受试者查找",
+      "Text": "受试者邀请代码："
+    }
+  }
+}

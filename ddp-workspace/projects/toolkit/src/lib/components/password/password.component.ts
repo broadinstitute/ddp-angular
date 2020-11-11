@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IrbPasswordService } from 'ddp-sdk';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-password',
@@ -31,6 +32,7 @@ import { IrbPasswordService } from 'ddp-sdk';
                                     <mat-form-field>
                                         <input matInput
                                             type="password"
+                                            (change)="hideErrors()"
                                             formControlName="password"
                                             maxLength="200">
                                             <mat-error *ngIf="isValid('password')" translate>Toolkit.Password.PasswordField.Error</mat-error>
@@ -41,6 +43,9 @@ import { IrbPasswordService } from 'ddp-sdk';
                                     </button>
                                     <div *ngIf="isPasswordWrong" class="ErrorMessage">
                                         <span translate>Toolkit.Password.PasswordWrongError</span>
+                                    </div>
+                                    <div *ngIf="isCommunicationError" class="ErrorMessage">
+                                        <span translate>Toolkit.Password.OtherError</span>
                                     </div>
                                 </form>
                             </section>
@@ -54,6 +59,7 @@ import { IrbPasswordService } from 'ddp-sdk';
 export class PasswordComponent implements OnInit {
     public passwordForm: FormGroup;
     public isPasswordWrong = false;
+    public isCommunicationError = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -65,7 +71,7 @@ export class PasswordComponent implements OnInit {
     }
 
     public submitForm(): void {
-        this.isPasswordWrong = false;
+        this.hideErrors();
         const password = this.passwordForm.controls['password'].value;
         const controls = this.passwordForm.controls;
         if (this.passwordForm.invalid) {
@@ -73,15 +79,25 @@ export class PasswordComponent implements OnInit {
 
             return;
         }
-        this.irbPassword.checkPassword(password).subscribe(
-            x => {
-                if (x) {
+        this.irbPassword.checkPassword(password).pipe(
+            take(1)
+        ).subscribe(
+            response => {
+                if (response) {
                     this.router.navigateByUrl('');
                 } else {
                     this.isPasswordWrong = true;
                 }
+            },
+            error => {
+                this.isCommunicationError = true;
             }
         );
+    }
+
+    public hideErrors(): void {
+        this.isPasswordWrong = false;
+        this.isCommunicationError = false;
     }
 
     public isValid(controlName: string): boolean {

@@ -105,6 +105,7 @@ sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 sdkConfig.scrollToErrorOffset = 130;
+sdkConfig.rtlLanguages = ['ar'];
 
 const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
 
