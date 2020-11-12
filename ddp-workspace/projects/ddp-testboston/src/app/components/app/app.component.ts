@@ -36,12 +36,15 @@ export class AppComponent implements OnInit, OnDestroy {
     if (element.className.includes('scrollable')) {
       const id = element.classList[element.classList.length - 1];
       const step = document.getElementById(id);
-      const headerHeight = 7.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
-      const top = step.getBoundingClientRect().top + window.scrollY - headerHeight;
-      window.scrollTo({
-        top,
-        behavior: 'smooth'
-      });
+      if (step) {
+        const HEADER_HEIGHT_REM = 7.5;
+        const headerHeightPx = HEADER_HEIGHT_REM * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const top = step.getBoundingClientRect().top + window.scrollY - headerHeightPx;
+        window.scrollTo({
+          top,
+          behavior: 'smooth'
+        });
+      }
     }
   }
 
