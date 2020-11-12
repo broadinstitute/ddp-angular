@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import {
@@ -10,8 +16,10 @@ import {
   TemporaryUser,
   TemporaryUserServiceAgent,
   WindowRef,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
 } from 'ddp-sdk';
+
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 @Component({
   selector: `app-join-us`,
@@ -21,10 +29,13 @@ import {
       <div class="page-padding">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
-            <app-atcp-activity-base [studyGuid]="studyGuid"
-                          [activityGuid]="instanceGuid"
-                          (submit)="navigate($event)"
-                          (stickySubtitle)="showStickySubtitle($event)" #activity>
+            <app-atcp-activity-base
+              [studyGuid]="studyGuid"
+              [activityGuid]="instanceGuid"
+              (submit)="navigate($event)"
+              (stickySubtitle)="showStickySubtitle($event)"
+              #activity
+            >
             </app-atcp-activity-base>
             <div *ngIf="activity.isLoaded" class="helpHint align-center">
               <a (click)="signIn()" translate>JoinUs.SignInButton</a>
@@ -33,7 +44,7 @@ import {
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class JoinUsComponent implements OnInit, OnDestroy {
   public SignIn: string;
@@ -44,18 +55,25 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   public show = true;
   private anchor: CompositeDisposable = new CompositeDisposable();
 
-  constructor(private cdr: ChangeDetectorRef,
-              @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
-              @Inject('ddp.config') private configuration: ConfigurationService,
-              private windowRef: WindowRef,
-              private workflowBuilder: WorkflowBuilderService,
-              private session: SessionMementoService,
-              private temporaryUserService: TemporaryUserServiceAgent,
-              private workflow: WorkflowServiceAgent,
-              private auth0: Auth0AdapterService) {
-  }
+  constructor(
+    private multiGovernedUserService: MultiGovernedUserService,
+    private cdr: ChangeDetectorRef,
+    @Inject('toolkit.toolkitConfig')
+    private toolkitConfiguration: ToolkitConfigurationService,
+    @Inject('ddp.config') private configuration: ConfigurationService,
+    private windowRef: WindowRef,
+    private workflowBuilder: WorkflowBuilderService,
+    private session: SessionMementoService,
+    private temporaryUserService: TemporaryUserServiceAgent,
+    private workflow: WorkflowServiceAgent,
+    private auth0: Auth0AdapterService
+  ) {}
 
   public ngOnInit(): void {
+    if (this.session.isAuthenticatedSession()) {
+      this.multiGovernedUserService.navigateToDashboard();
+    }
+
     this.studyGuid = this.toolkitConfiguration.studyGuid;
     this.fetchActivity();
   }
@@ -66,20 +84,26 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
   private fetchActivity(): void {
     if (this.session.isAuthenticatedSession()) {
-      this.workflow.getNext().pipe(take(1)).subscribe(activityResponse => {
-        this.workflowBuilder.getCommand(activityResponse).execute();
-      });
+      this.workflow
+        .getNext()
+        .pipe(take(1))
+        .subscribe(activityResponse => {
+          this.workflowBuilder.getCommand(activityResponse).execute();
+        });
     } else {
-      this.temporaryUserService.createTemporaryUser(this.configuration.auth0ClientId).pipe(
-        filter(x => x !== null),
-        map((user: TemporaryUser) => this.session.setTemporarySession(user)),
-        mergeMap(() => this.workflow.getStart()),
-        take(1)
-      ).subscribe((response: ActivityResponse | null) => {
-        if (response && response.instanceGuid) {
-          this.instanceGuid = response.instanceGuid;
-        }
-      });
+      this.temporaryUserService
+        .createTemporaryUser(this.configuration.auth0ClientId)
+        .pipe(
+          filter(x => x !== null),
+          map((user: TemporaryUser) => this.session.setTemporarySession(user)),
+          mergeMap(() => this.workflow.getStart()),
+          take(1)
+        )
+        .subscribe((response: ActivityResponse | null) => {
+          if (response && response.instanceGuid) {
+            this.instanceGuid = response.instanceGuid;
+          }
+        });
     }
   }
 
@@ -94,15 +118,20 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
   public navigate(response: ActivityResponse): void {
     const convertedResponse = this.convertWorkflowResponse(response);
-    const sub = this.workflowBuilder.getCommand(convertedResponse).execute().subscribe(() => {
-      this.resetActivityComponent();
-      this.fetchActivity();
-    });
+    const sub = this.workflowBuilder
+      .getCommand(convertedResponse)
+      .execute()
+      .subscribe(() => {
+        this.resetActivityComponent();
+        this.fetchActivity();
+      });
     this.anchor.addNew(sub);
   }
 
-  private convertWorkflowResponse(response: ActivityResponse): ActivityResponse {
-    if (this.session.isTemporarySession() && !response.allowUnauthenticated) {
+  private convertWorkflowResponse(
+    response: ActivityResponse
+  ): ActivityResponse {
+    if (!response.allowUnauthenticated) {
       return new ActivityResponse('REGISTRATION');
     } else {
       return response;

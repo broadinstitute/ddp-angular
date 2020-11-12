@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, filter, pluck, switchMap, take } from 'rxjs/operators';
 
@@ -10,6 +11,8 @@ import {
   SessionMementoService,
 } from 'ddp-sdk';
 
+import * as RouterResources from '../router-resources';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,9 +23,10 @@ export class MultiGovernedUserService {
   private readonly CHILD_DIAGNOSED_STABLE_ID = 'CHILD_DIAGNOSED';
 
   constructor(
+    private router: Router,
     private prequalifierAgent: PrequalifierServiceAgent,
     private activityAgent: ActivityServiceAgent,
-    private readonly session: SessionMementoService,
+    private session: SessionMementoService,
     @Inject('ddp.config') private readonly config: ConfigurationService
   ) {}
 
@@ -77,5 +81,21 @@ export class MultiGovernedUserService {
           );
         }
       });
+  }
+
+  public navigateToDashboard(): void {
+    const isMultiGoverned = this.isMultiGoverned$.getValue();
+
+    if (isMultiGoverned === null) {
+      console.log('Cannot determine type of user, redirecting to home page');
+
+      this.router.navigateByUrl(RouterResources.Welcome);
+    } else {
+      this.router.navigateByUrl(
+        isMultiGoverned
+          ? RouterResources.ParticipantList
+          : RouterResources.Dashboard
+      );
+    }
   }
 }
