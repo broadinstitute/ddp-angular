@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { ToolkitConfigurationService, JoinMailingListComponent } from 'toolkit';
+import { ToolkitConfigurationService } from 'toolkit';
+import { JoinMailingListComponent } from '../join-mailing-list/join-mailing-list.component';
 
 @Component({
   selector: 'app-thank-you',

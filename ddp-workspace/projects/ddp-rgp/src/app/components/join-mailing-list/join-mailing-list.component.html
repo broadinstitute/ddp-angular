@@ -1,0 +1,56 @@
+<div class="title">
+    <h1 class="title no-margin" translate>Toolkit.Dialogs.JoinMailingList.Title</h1>
+</div>
+<div>
+    <p class="Modal-text" [innerHTML]="'Toolkit.Dialogs.JoinMailingList.Text' | translate"></p>
+    <form [formGroup]="joinForm">
+        <div class="JoinDialogGroupFields">
+            <mat-form-field class="JoinDialogNameField JoinField--margin">
+                <input matInput
+                       maxLength="200"
+                       placeholder="{{'Toolkit.Dialogs.JoinMailingList.Fields.FirstName.Placeholder' | translate}}"
+                       formControlName="firstName">
+                <mat-error *ngIf="isValid('firstName')" translate>Toolkit.Dialogs.JoinMailingList.Fields.FirstName.Error</mat-error>
+            </mat-form-field>
+            <mat-form-field class="JoinDialogLastnameField JoinField--margin">
+                <input matInput
+                       maxLength="200"
+                       placeholder="{{'Toolkit.Dialogs.JoinMailingList.Fields.LastName.Placeholder' | translate}}"
+                       formControlName="lastName">
+                <mat-error *ngIf="isValid('lastName')" translate>Toolkit.Dialogs.JoinMailingList.Fields.LastName.Error</mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field class="JoinDialogFiled JoinField--margin">
+            <input matInput
+                   maxLength="200"
+                   placeholder="{{'Toolkit.Dialogs.JoinMailingList.Fields.Email.Placeholder' | translate}}"
+                   formControlName="email">
+            <mat-error *ngIf="isValid('email')" translate>Toolkit.Dialogs.JoinMailingList.Fields.Email.Error</mat-error>
+        </mat-form-field>
+        <mat-form-field class="JoinDialogFiled JoinField--margin">
+            <input matInput
+                   maxLength="200"
+                   placeholder="{{'Toolkit.Dialogs.JoinMailingList.Fields.ConfirmEmail.Placeholder' | translate}}"
+                   formControlName="confirmEmail">
+            <mat-error *ngIf="isValid('confirmEmail')" translate>Toolkit.Dialogs.JoinMailingList.Fields.ConfirmEmail.Error</mat-error>
+        </mat-form-field>
+        <div class="Italic Color--neutral" translate>Toolkit.Dialogs.JoinMailingList.Required</div>
+        <div *ngIf="isEmailsDifferent" class="ErrorMessage">
+            <span translate>Toolkit.Dialogs.JoinMailingList.MatchEmailsError</span>
+        </div>
+        <div *ngIf="isLoadingError" class="ErrorMessage">
+            <span translate>Toolkit.Dialogs.JoinMailingList.LoadingError</span>
+        </div>
+    </form>
+</div>
+<div align="end" class="row NoMargin">
+    <button (click)="closeDialog()"
+            class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
+            [innerHTML]="'Toolkit.Dialogs.JoinMailingList.CancelButton' | translate">
+    </button>
+    <button (click)="submitForm()"
+            [disabled]="joinButtonDisabled"
+            class="ButtonFilled Button--rect button button_small button_primary"
+            [innerHTML]="'Toolkit.Dialogs.JoinMailingList.SubmitButton' | translate">
+    </button>
+</div>
