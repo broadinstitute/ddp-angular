@@ -199,10 +199,16 @@
       "Third": "私たちは将来、グローバル A-T ファミリーデータプラットフォームが、 たとえばA-T患者がどのような動きをするかといった情報を捉える装着型技術を使用した際に得られる別のタイプの生物学的およびライフスタイルデータを集めるために、他の団体とさらに提携することを想定しています。"
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "続ける前にEメールアドレスを確認する必要があります。",
+    "EmailConfirmed": "Eメールアドレスが確認されました。"
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "このイニシアチブについて",
       "AboutUs": "組織概要",
+      "DataAccessRequest": "データアクセスリクエスト",
+      "ForResearchers": "研究者向け",
       "JoinUs": "参加する",
       "Language": "言語",
       "LearnMore": "さらに詳しく",
@@ -210,9 +216,7 @@
       "Next": "次へ",
       "Previous": "前へ",
       "SignIn": "サインイン",
-      "YourParticipants": "参加者",
-      "ForResearchers": "研究者向け",
-      "DataAccessRequest": "データアクセスリクエスト"
+      "YourParticipants": "参加者"
     }
   },
   "DataAccess": {
@@ -368,9 +372,5 @@
       "CREATED": "まだ開始していません",
       "IN_PROGRESS": "進行中"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "続ける前にEメールアドレスを確認する必要があります。",
-    "EmailConfirmed": "Eメールアドレスが確認されました。"
   }
 }

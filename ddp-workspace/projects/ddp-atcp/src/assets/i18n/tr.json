@@ -199,10 +199,16 @@
       "Third": "Gelecekte Global A-T Aile Veri Platformunun, A-T'li bir hastanın nasıl hareket ettiği konusunda bilgi toplamak için giyilebilir teknolojiler kullanmak gibi diğer türlerde biyolojik ve yaşam tarzıyla ilgili verileri toplamak amacıyla başka kurumlarla işbirliği yapmasını bekliyoruz."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
+    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "Bu girişim hakkında",
       "AboutUs": "Hakkımızda",
+      "DataAccessRequest": "Veri Erişim İsteği",
+      "ForResearchers": "Araştırmacı",
       "JoinUs": "Bize Katılın",
       "Language": "Dil",
       "LearnMore": "Daha Fazla Bilgi",
@@ -210,9 +216,7 @@
       "Next": "Sonraki",
       "Previous": "Önceki",
       "SignIn": "Oturum Aç",
-      "YourParticipants": "Katılımcılarınız",
-      "ForResearchers": "Araştırmacı",
-      "DataAccessRequest": "Veri Erişim İsteği"
+      "YourParticipants": "Katılımcılarınız"
     }
   },
   "DataAccess": {
@@ -368,9 +372,5 @@
       "CREATED": "Henüz Başlanmadı",
       "IN_PROGRESS": "İşlemde"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
-    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
   }
 }

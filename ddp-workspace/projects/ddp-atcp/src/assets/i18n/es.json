@@ -199,10 +199,16 @@
       "Third": "WEsperamos que, en el futuro, la Plataforma global de datos para familias con A-T se asocie con más organizaciones para recopilar otro tipo de datos biológicos y de estilo de vida, como el uso de tecnologías para vestir y capturar información sobre cómo se mueve una persona con A-T."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Debe confirmar su dirección de correo electrónico antes de continuar.",
+    "EmailConfirmed": "Su dirección de correo electrónico se confirmó correctamente."
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "Acerca de esta iniciativa",
       "AboutUs": "Acerca de nosotros",
+      "DataAccessRequest": "Solicitud de acceso a datos",
+      "ForResearchers": "Para Investigadores",
       "JoinUs": "Únase a nosotros",
       "Language": "Idioma",
       "LearnMore": "Más información",
@@ -210,9 +216,7 @@
       "Next": "Siguiente",
       "Previous": "Ant",
       "SignIn": "Iniciar sesión",
-      "YourParticipants": "Sus participantes",
-      "ForResearchers": "Para Investigadores",
-      "DataAccessRequest": "Solicitud de acceso a datos"
+      "YourParticipants": "Sus participantes"
     }
   },
   "DataAccess": {
@@ -368,9 +372,5 @@
       "CREATED": "No comenzado",
       "IN_PROGRESS": "En curso"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Debe confirmar su dirección de correo electrónico antes de continuar.",
-    "EmailConfirmed": "Su dirección de correo electrónico se confirmó correctamente."
   }
 }

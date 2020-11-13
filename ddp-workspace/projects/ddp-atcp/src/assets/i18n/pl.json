@@ -199,10 +199,16 @@
       "Third": "WMamy nadzieję, że Platforma w przyszłości będzie współpracować z kolejnymi organizacjami w celu uzyskania innych danych biologicznych lub informacji dotyczących stylu życia, takich jak na przykład korzystanie z technologii noszonych na ciele, po to, aby zyskać informacje o tym, jak osoba z A-T się porusza."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Aby kontynuować, musisz potwierdzić swój adres e-mail.",
+    "EmailConfirmed": "Twój adres e-mail został pomyślnie potwierdzony."
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "O inicjatywie",
       "AboutUs": "O nas",
+      "DataAccessRequest": "Żądanie dostępu do danych",
+      "ForResearchers": "Dla Naukowców",
       "JoinUs": "Dołącz do nas",
       "Language": "Język",
       "LearnMore": "Dowiedz się więcej",
@@ -210,9 +216,7 @@
       "Next": "Dalej",
       "Previous": "Wstecz",
       "SignIn": "Zaloguj się",
-      "YourParticipants": "Twoi uczestnicy",
-      "ForResearchers": "Dla Naukowców",
-      "DataAccessRequest": "Żądanie dostępu do danych"
+      "YourParticipants": "Twoi uczestnicy"
     }
   },
   "DataAccess": {
@@ -367,9 +371,5 @@
       "CREATED": "Nie rozpoczęto",
       "IN_PROGRESS": "W toku"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Aby kontynuować, musisz potwierdzić swój adres e-mail.",
-    "EmailConfirmed": "Twój adres e-mail został pomyślnie potwierdzony."
   }
 }

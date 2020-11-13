@@ -21,16 +21,15 @@ import { Participant } from './participant-list.component';
           *ngIf="surveysToCompleteCount"
           class="participant-expandable__status"
         >
-          <ng-container *ngIf="surveysToCompleteCount === 1; else pluralSurveyCount">
-            {{
-              'Components.ParticipantListItem.SurveysToComplete.Singular'
-                | translate: { count: surveysToCompleteCount }
-            }}
+          <ng-container
+            *ngIf="surveysToCompleteCount === 1; else pluralSurveyCount"
+          >
+            {{ 'SDK.UserActivities.SurveysToComplete.Singular' | translate }}
           </ng-container>
 
           <ng-template #pluralSurveyCount>
             {{
-              'Components.ParticipantListItem.SurveysToComplete.Plural'
+              'SDK.UserActivities.SurveysToComplete.Plural'
                 | translate: { count: surveysToCompleteCount }
             }}
           </ng-template>
@@ -40,7 +39,7 @@ import { Participant } from './participant-list.component';
           class="participant-expandable__control"
           (click)="expanded = !expanded"
         >
-          <span>{{ 'Components.ParticipantListItem.Expand' | translate }}</span>
+          <span>{{ 'Common.Buttons.Expand.Title' | translate }}</span>
         </button>
       </div>
 

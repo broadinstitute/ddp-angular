@@ -199,10 +199,16 @@
       "Third": "我们预计，未来，全球A-T成员数据平台将与其他组织合作，收集其他类型的生物和生活方式数据，例如使用可穿戴技术来获取有关A-T人员移动的信息。"
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "您必须先确认您的电子邮箱地址才能继续。",
+    "EmailConfirmed": "您的电子邮箱地址已成功确认。"
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "关于这个计划",
       "AboutUs": "关于我们",
+      "DataAccessRequest": "数据访问请求",
+      "ForResearchers": "研究员",
       "JoinUs": "加入我们",
       "Language": "语言",
       "LearnMore": "了解更多",
@@ -210,9 +216,7 @@
       "Next": "下一个",
       "Previous": "上一个",
       "SignIn": "签到",
-      "YourParticipants": "您的参与者",
-      "ForResearchers": "研究员",
-      "DataAccessRequest": "数据访问请求"
+      "YourParticipants": "您的参与者"
     }
   },
   "DataAccess": {
@@ -367,9 +371,5 @@
       "CREATED": "没有开始",
       "IN_PROGRESS": "进行中"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "您必须先确认您的电子邮箱地址才能继续。",
-    "EmailConfirmed": "您的电子邮箱地址已成功确认。"
   }
 }

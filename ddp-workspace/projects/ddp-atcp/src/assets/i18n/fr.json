@@ -199,10 +199,16 @@
       "Third": "WNous souhaitons collaborer avec d’autres organisations pour recueillir d’autres types de données biologiques et liées au mode de vie, par exemple grâce à l’utilisation de vêtements intelligents qui permettent de recueillir des informations sur la façon dont une personne atteinte d'AT se déplace."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Vous devez confirmer votre adresse e-mail pour poursuivre.",
+    "EmailConfirmed": "Votre adresse e-mail a été confirmée."
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "Au sujet de cette initiative",
       "AboutUs": "À notre sujet",
+      "DataAccessRequest": "Demande d'accès aux données",
+      "ForResearchers": "Pour les Chercheurs",
       "JoinUs": "Nous rejoindre",
       "Language": "Langue",
       "LearnMore": "En savoir plus",
@@ -210,9 +216,7 @@
       "Next": "Suivant",
       "Previous": "Précédent",
       "SignIn": "Connexion",
-      "YourParticipants": "Vos participants",
-      "ForResearchers": "Pour les Chercheurs",
-      "DataAccessRequest": "Demande d'accès aux données"
+      "YourParticipants": "Vos participants"
     }
   },
   "DataAccess": {
@@ -368,9 +372,5 @@
       "CREATED": "Non commencé",
       "IN_PROGRESS": "En cours"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Vous devez confirmer votre adresse e-mail pour poursuivre.",
-    "EmailConfirmed": "Votre adresse e-mail a été confirmée."
   }
 }

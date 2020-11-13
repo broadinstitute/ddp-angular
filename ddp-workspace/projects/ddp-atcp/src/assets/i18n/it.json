@@ -199,10 +199,16 @@
       "Third": "WCi auguriamo che in futuro la Piattaforma globale di dati sulle famiglie con A-T possa collaborare con altre organizzazioni al fine di raccogliere altri tipi di dati biologici e sullo stile di vita, utilizzando ad esempio tecnologie indossabili per acquisire informazioni su come si muovono le persone affette da A-T."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Devi confermare il tuo indirizzo di posta elettronica prima di continuare.",
+    "EmailConfirmed": "Il tuo indirizzo di posta elettronica è stato confermato con successo."
+  },
   "Common": {
     "Navigation": {
       "AboutThisInitiative": "Informazioni su questa iniziativa",
       "AboutUs": "Chi siamo",
+      "DataAccessRequest": "Richiesta di accesso ai dati",
+      "ForResearchers": "Per i Ricercatori",
       "JoinUs": "Unisciti a noi",
       "Language": "Lingua",
       "LearnMore": "Per saperne di più",
@@ -210,9 +216,7 @@
       "Next": "Avanti",
       "Previous": "Indietro",
       "SignIn": "Accedi",
-      "YourParticipants": "I tuoi partecipanti",
-      "ForResearchers": "Per i Ricercatori",
-      "DataAccessRequest": "Richiesta di accesso ai dati"
+      "YourParticipants": "I tuoi partecipanti"
     }
   },
   "DataAccess": {
@@ -367,9 +371,5 @@
       "CREATED": "Non iniziato",
       "IN_PROGRESS": "In corso"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Devi confermare il tuo indirizzo di posta elettronica prima di continuare.",
-    "EmailConfirmed": "Il tuo indirizzo di posta elettronica è stato confermato con successo."
   }
 }
