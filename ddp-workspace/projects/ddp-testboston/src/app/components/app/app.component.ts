@@ -34,8 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public scrollToStep(event: MouseEvent): void {
     const element = event.target as HTMLElement;
     if (element.className.includes('scrollable')) {
-      const id = element.classList[element.classList.length - 1];
-      const step = document.getElementById(id);
+      const anchor = `anchor-${element.classList[element.classList.length - 1]}`;
+      const step = document.getElementsByClassName(anchor)[0];
       if (step) {
         const HEADER_HEIGHT_REM = 7.5;
         const headerHeightPx = HEADER_HEIGHT_REM * parseFloat(getComputedStyle(document.documentElement).fontSize);
