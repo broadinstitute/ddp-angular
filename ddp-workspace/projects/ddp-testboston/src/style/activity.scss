@@ -22,6 +22,10 @@
     margin: 1rem 0;
 }
 
+.serif-font {
+    font-family: 'PT Serif', sans-serif;
+}
+
 // consent header
 .header-section {
     margin: 0 0 2rem 0;
@@ -111,6 +115,27 @@
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
     margin: 2rem 0;
+}
+
+// a box that calls out important information
+.callout-box {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 3px;
+    background-color: rgba(252, 246, 224, 1);
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+// a box that provides a fixed-height scroll
+.scroll-box {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 2rem 0;
+    height: 300px;
+    overflow-y: scroll;
+    line-height: 1.3rem;
+    font-family: monospace;
 }
 
 // error message
@@ -405,7 +430,7 @@ ddp-activity-boolean-answer {
     color: mat-color($app-theme, 900) !important;
 }
 
-// picklist characters counter 
+// picklist characters counter
 .ddp-helper {
     font-size: 1.1rem;
     margin: -1rem 0 0 0;
