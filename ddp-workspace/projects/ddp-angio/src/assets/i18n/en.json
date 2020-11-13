@@ -121,7 +121,7 @@
                 "Paragraph4": "This unprecedented work of the ASCproject to partner with patients to obtain tumor samples, saliva, blood, and medical records has enabled discoveries, which in turn led to a publication, “The Angiosarcoma Project: enabling genomic and clinical discoveries in rare cancer through patient partnered research,” published in Nature Medicine in February 2020.  Click here to view the publication:",
                 "Paragraph5": "To everyone taking part in the ASCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data.",
                 "Paragraph6": "Below you can find additional details and FAQ about ASCproject data and where it has been released. To date, the ASCproject has made data available in the cBioPortal for Cancer Genomics (cBioPortal) and the NCI Genomic Data Commons (GDC).",
-                "Paragraph7": "We have data freely available in different databases in order to drive discoveries. Some data, that contains information on the mutations within a person's tumor as well as de-identified clinical data are housed in cBioPortal, which doesn't require a login. This data is used by the biomedical community to understand cancer genomics. In addition, we work with the GDC to house the raw, underlying genomic data which is still freely available, but has additional layers of protection since it contains genetic information that is more detailed about the individual participants."
+                "Paragraph7": "We have data freely available in different databases in order to drive discoveries. Some data, that contains information on the mutations within a person's tumor as well as de-identified clinical data are housed in cBioPortal, which doesn't require a login. This data is used by the biomedical community to understand cancer genomics. In addition, we work with the GDC to house the raw, underling genomic data which is still freely available, but has additional layers of protection and access control since it contains genetic information that is more details about the individual participants."
             },
             "cBioPortal": {
                 "Title": "The ASCproject Data on cBioPortal",
@@ -142,7 +142,7 @@
             },
             "GDC": {
                 "Title": "The ASCproject Data in the NCI Genomic Data Commons (GDC)",
-                "Paragraph1": "The Genomic Data Commons (GDC) is a research program from the National Cancer Institute, which provides a data repository to share data across cancer genomic studies. We have provided the GDC with genomic data from the Angiosarcoma Project, including whole exome sequencing (WES) and RNA sequencing. The GDC has harmonized these DNA sequencing files through their established analysis pipelines. The harmonized genomic data and unprocessed genomic data is available in the GDC Data Portal, along with limited clinical information.",
+                "Paragraph1": "The Genomic Data Commons (GDC) is a research program from the National Cancer Institute, which provides a data repository to share data across cancer genomic studies. We have provided the GDC with genomic data from the Angiosarcoma Project, including WES and RNA sequencing. The GDC has harmonized these DNA sequencing files through their established analysis pipelines. The harmonized genomic data and unprocessed genomic data is available in the GDC Data Portal, along with limited clinical information.",
                 "Paragraph2": {
                     "Part1": "Genomic data in GDC is protected and those who wish to use it must request access. To learn more about the CMI Data available in GDC visit the",
                     "Link": "Count Me In data source",
@@ -174,7 +174,7 @@
                             "SubList": []
                         },
                         {
-                            "Text": "Sample types include saliva and blood for germline or normal DNA, FFPE and circulating tumor DNA (cfDNA) as tumor samples, and RNA derived from FFPE tumor samples",
+                            "Text": "Sample types include saliva and blood for germline or normal DNA, FFPE and cell-free DNA (cfDNA) from tumor samples, and RNA derived from FFPE tumor samples",
                             "SubList": []
                         },
                         {

@@ -874,13 +874,13 @@ ul {
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
     text-align: left;
 }
 
 .PageContent-text {
     &__important {
-        color: black;
+        color: mat-color($app-theme, 1000);
         font-weight: 400;
     }
 }
@@ -903,7 +903,7 @@ ul {
 .PageContent-title {
     font-size: 1.4rem;
     color: mat-color($app-theme, 800);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.33;
     margin: 2.1rem 0 1.3rem 0;
 }
