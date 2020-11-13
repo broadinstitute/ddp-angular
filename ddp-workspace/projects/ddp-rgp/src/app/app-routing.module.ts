@@ -27,6 +27,7 @@ import {
   Auth0CodeCallbackComponent,
   AuthGuard
 } from 'ddp-sdk';
+import { ActivityRedesignedComponent } from 'toolkit';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
 // The Angular compiler complains if you try to create a function that returns a generic version of
@@ -147,19 +148,8 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'about-your-family',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
-    canActivate: [
-      AuthGuard,
-      IrbGuard
-    ],
-    data: {
-      activityGuid: '' // To be defined later
-    }
-  },
-  {
     path: 'activity/:id',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
     canActivate: [
       AuthGuard,
       IrbGuard
@@ -167,7 +157,7 @@ const routes: Routes = [
   },
   {
     path: 'activity-link/:id',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
     canActivate: [
       AuthGuard,
       IrbGuard
