@@ -232,6 +232,12 @@
     }
 }
 
+.scrollable {
+    &:hover {
+        cursor: pointer !important;
+    }
+}
+
 @media only screen and (max-width: 620px) {
     .activity-steps {
         padding: 1rem 0;
