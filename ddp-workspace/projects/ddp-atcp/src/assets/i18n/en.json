@@ -64,109 +64,109 @@
     },
     "Doctors": [
       {
-        "Hospital": "de_Emeritus Professor of Medical Genetics – University of Cambridge, Cambridge, United Kingdom and Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, UK",
+        "Hospital": "Emeritus Professor of Medical Genetics – University of Cambridge, Cambridge, United Kingdom and Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, UK",
         "Name": "Martin Bobrow",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Professor of Medical Genetics, Sapienza University, Roma, Italy",
+        "Hospital": "Professor of Medical Genetics, Sapienza University, Roma, Italy",
         "Name": "Luciana Chessa",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_Medical Director of Paediatrics, Wesley Hospital, Queensland, Australia",
+        "Hospital": "Medical Director of Paediatrics, Wesley Hospital, Queensland, Australia",
         "Name": "David Coman",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Associate Professor of Pediatrics and Neurology, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Hospital": "Associate Professor of Pediatrics and Neurology, Johns Hopkins Children’s Center, Baltimore, MD, USA",
         "Name": "Thomas Crawford",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Director, Google Genomics, Mountain View, CA, USA",
+        "Hospital": "Director, Google Genomics, Mountain View, CA, USA",
         "Name": "David Glazer",
         "Rank": ""
       },
       {
-        "Hospital": "de_Pediatrics and Developmental Biology, Tokyo Medical and Dental University, Japan",
+        "Hospital": "Pediatrics and Developmental Biology, Tokyo Medical and Dental University, Japan",
         "Name": "Setsuko Hasegawa",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Associate Professor, The University of Queensland, Queensland, Australia",
+        "Hospital": "Associate Professor, The University of Queensland, Queensland, Australia",
         "Name": "Lutz Krause",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australia",
+        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australia",
         "Name": "Martin Lavin",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Professor of Pediatrics, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Hospital": "Professor of Pediatrics, Johns Hopkins Children’s Center, Baltimore, MD, USA",
         "Name": "Howard Lederman",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_Pediatric Immuno-Hematology, Co-coordinator of The French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, France",
+        "Hospital": "Pediatric Immuno-Hematology, Co-coordinator of The French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, France",
         "Name": "Nizar Mahlaoui",
-        "Rank": "de_MD, MSc, MPH"
+        "Rank": "MD, MSc, MPH"
       },
       {
-        "Hospital": "de_Pediatric Neurologist, Sheba Medical Center, Ramat Gan, Israel",
+        "Hospital": "Pediatric Neurologist, Sheba Medical Center, Ramat Gan, Israel",
         "Name": "Andreea Nissenkorn",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Chief Data Officer, Broad Institute, Cambridge, MA, USA",
+        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA",
         "Name": "Anthony Philippakis",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_National Centre for Rare Diseases, Rome, Italy",
+        "Hospital": "National Centre for Rare Diseases, Rome, Italy",
         "Name": "Agata Polizzi",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_Professor of Human Genetics, Tel Aviv University, Ramat Aviv, Israel",
+        "Hospital": "Professor of Human Genetics, Tel Aviv University, Ramat Aviv, Israel",
         "Name": "Yosef Shiloh",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK",
+        "Hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK",
         "Name": "Grant Stewart",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Professor of Genetics, Paris Descartes University and Head of the Genetics Department, Institut Curie, Paris, France",
+        "Hospital": "Professor of Genetics, Paris Descartes University and Head of the Genetics Department, Institut Curie, Paris, France",
         "Name": "Dominique Stoppa-Lyonnet",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_Associate Professor, Tokyo Medical and Dental University, Tokyo, Japan",
+        "Hospital": "Associate Professor, Tokyo Medical and Dental University, Tokyo, Japan",
         "Name": "Masatoshi Takagi",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "de_Executive Director, Public Population Project in Genomics and Society, Montreal, Canada",
+        "Hospital": "Executive Director, Public Population Project in Genomics and Society, Montreal, Canada",
         "Name": "Anne-Marie Tassé",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK",
+        "Hospital": "Professor of Cancer Genetics, University of Birmingham Medical School, Birmingham, UK",
         "Name": "A. Malcolm Taylor",
-        "Rank": "de_PhD"
+        "Rank": "PhD"
       },
       {
-        "Hospital": "de_Clinical Associate Professor, University of Nottingham, Nottingham, UK",
+        "Hospital": "Clinical Associate Professor, University of Nottingham, Nottingham, UK",
         "Name": "William Whitehouse",
-        "Rank": "de_MD"
+        "Rank": "MD"
       },
       {
-        "Hospital": "de_Children’s Hospital of Johann Wolfgang Goethe University, Frankfurt, Germany",
+        "Hospital": "Children’s Hospital of Johann Wolfgang Goethe University, Frankfurt, Germany",
         "Name": "Stefan Zielen",
-        "Rank": "de_MD, PhD"
+        "Rank": "MD, PhD"
       }
     ],
     "FamilyOversight": {
@@ -244,14 +244,11 @@
   },
   "Common": {
     "Buttons": {
-      "Expand": {
-        "Title": "Expand"
-      },
-      "Login": {
-        "Title": "LOG IN"
-      },
       "Submit": {
         "Title": "Submit"
+      },
+      "Expand": {
+        "Title": "Expand"
       }
     },
     "Navigation": {
@@ -453,7 +450,6 @@
     "SignInButton": "Already registered? Sign In here"
   },
   "SDK": {
-    "AddButton": "ADD",
     "CancelButton": "Cancel",
     "CloseButton": "Close",
     "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
@@ -492,63 +488,25 @@
         "Download": "Download Complete Consent Form"
       }
     },
-    "EditButton": "View/Edit",
-    "EmailEntry": {
-      "InvalidEmail": "Please enter a valid email"
-    },
-    "ExportStudy": {
-      "Export": "EXPORT"
-    },
-    "Institutions": {
-      "Fields": {
-        "City": "City",
-        "Institution": "Institution",
-        "InstitutionAny": "Institution (if any)",
-        "Name": "Physician Name",
-        "State": "State"
-      },
-      "PhysicianValidation": "Please fill out all required fields"
-    },
     "JoinUsButton": "Join Us",
-    "ListStudies": {
-      "ParticipantCount": "Participant Count",
-      "StudyName": "Study Name"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Workspace Name",
-      "WorkspaceNamespace": "Workspace Namespace"
-    },
-    "Login": {
-      "Login": "LOG IN",
-      "Logout": "LOG OUT"
-    },
     "ManageParticipants": {
       "AddParticipant": "Add a Participant",
-      "GovernedParticipants": "Governed participants",
       "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
+      "ParticipantsList": "Family members who have A-T"
     },
     "NextButton": "Next",
-    "ParticipantProfile": {
-      "ManageParticipants": "Manage participants",
-      "OpenProfile": "Profile",
-      "ViewAs": "View As"
-    },
     "PreviousButton": "Prev",
     "RegisterButton": "Register",
-    "ReviewButton": "View",
     "SaveAndSubmit": "Save & Submit",
     "SaveAndSubmitEnrollment": "Save & Submit Enrollment",
-    "SaveError": "We're sorry but an error occurred",
     "SavingButton": "Saving",
     "SignAndAssent": "Sign & Assent",
     "SignAndConsent": "Sign & Consent",
-    "SignInOut": {
-      "SignIn": "Log In",
-      "SignOut": "Log Out"
-    },
     "StartOrResume": "Start/Resume",
     "SubmitButton": "Submit",
+    "SignInOut": {
+      "SignOut": "Sign Out"
+    },
     "Title": {
       "Alert": "Your session will time-out soon",
       "Default": "The Global A-T Family Data Platform"
@@ -571,7 +529,6 @@
       }
     },
     "UserMenu": {
-      "DashboardButton": "Dashboard",
       "SignOutButton": "Sign Out"
     },
     "UserPreferences": {
@@ -581,130 +538,9 @@
     },
     "ValidateError": "Submission cannot proceed. Please review messages in form for details."
   },
-  "Statistics": {
-    "CountersFirst": {
-      "List": [
-        {
-          "Number": 1958,
-          "Text": "Total number of participants"
-        },
-        {
-          "Number": 23,
-          "Text": "Countries represented"
-        },
-        {
-          "Number": 913,
-          "Text": "People participating \n in the genome study"
-        },
-        {
-          "Number": 820,
-          "Text": "Sample collection kits sent out \n in total"
-        }
-      ],
-      "Title": "Enrollment statistics as of December 2019:"
-    },
-    "CountersSecond": [
-      {
-        "Number": 425,
-        "Text": "Children enrolled \n by their parents"
-      },
-      {
-        "Number": 389,
-        "Text": "Sign-ups to stay informed \n about the initiative"
-      },
-      {
-        "Number": 258,
-        "Text": "Self-enrolled participants"
-      }
-    ],
-    "CountersThird": {
-      "List": [
-        {
-          "Emoji": "🇺🇸",
-          "Name": "United States",
-          "Width": "50px"
-        },
-        {
-          "Emoji": "🇨🇦",
-          "Name": "Canada",
-          "Width": "30px"
-        },
-        {
-          "Emoji": "🇦🇩",
-          "Name": "Andorra",
-          "Width": "7px"
-        },
-        {
-          "Emoji": "🇦🇪",
-          "Name": "United Arab Emirates"
-        },
-        {
-          "Emoji": "🇦🇫",
-          "Name": "Afghanistan"
-        },
-        {
-          "Emoji": "🇦🇬",
-          "Name": "Antigua & Barbuda"
-        },
-        {
-          "Emoji": "🇦🇮",
-          "Name": "Anguilla"
-        },
-        {
-          "Emoji": "🇦🇱",
-          "Name": "Albania"
-        },
-        {
-          "Emoji": "🇦🇲",
-          "Name": "Armenia"
-        },
-        {
-          "Emoji": "🇦🇴",
-          "Name": "Angola"
-        },
-        {
-          "Emoji": "🇦🇷",
-          "Name": "Argentina"
-        },
-        {
-          "Emoji": "🇦🇸",
-          "Name": "American Samoa"
-        },
-        {
-          "Emoji": "🇦🇹",
-          "Name": "Austria"
-        },
-        {
-          "Emoji": "🇦🇺",
-          "Name": "Australia"
-        },
-        {
-          "Emoji": "🇦🇼",
-          "Name": "Aruba"
-        },
-        {
-          "Emoji": "🇦🇽",
-          "Name": "Åland Islands"
-        },
-        {
-          "Emoji": "🇦🇿",
-          "Name": "Azerbaijan"
-        },
-        {
-          "Emoji": "🇧🇦",
-          "Name": "Bosnia & Herzegovina"
-        },
-        {
-          "Emoji": "🇧🇧",
-          "Name": "Barbados"
-        }
-      ],
-      "Title": "Countries represented"
-    },
-    "Title": "The A-T Family Data Platform by the Numbers"
-  },
   "Survey": {
-    "Title": "Enrollment Process"
+    "Self": "Enrollment Process",
+    "NewParticipant": "New Participant's Enrollment Process"
   },
   "Toolkit": {
     "ActivityActions": {
@@ -719,7 +555,6 @@
       "NoData": "---",
       "NoParticipants": "No participants yet",
       "Participant": "Participant",
-      "Self": "Self",
       "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T.",
       "Title": "Thank you for joining the Global A-T Family Data Platform!"
     },
@@ -768,13 +603,6 @@
       },
       "Text": "",
       "Title": "We're sorry, but an error occurred. Please try again later."
-    },
-    "ParticipantList": {
-      "ParticipantActions": {
-        "Continue": "Continue",
-        "Start": "Start",
-        "ViewProfile": "View Profile"
-      }
     },
     "Password": {
       "InputPlaceholder": "Password",

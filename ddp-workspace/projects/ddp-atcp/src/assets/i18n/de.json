@@ -70,64 +70,103 @@
       },
       {
         "Hospital": "Professor für medizinische Genetik, Sapienza Universität, Rom, Italien",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien"
+        "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien",
+        "Name": "David Coman",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Name": "Thomas Crawford",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA"
+        "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan"
+        "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien"
+        "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien"
+        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Name": "Howard Lederman",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich"
+        "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "Dr. med., MSc, MPH"
       },
       {
-        "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel"
+        "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA"
+        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA",
+        "Name": "Anthony Philippakis",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien"
+        "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien",
+        "Name": "Agata Polizzi",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel"
+        "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien"
+        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich"
+        "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan"
+        "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan",
+        "Name": "Masatoshi Takagi",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada"
+        "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien"
+        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien"
+        "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien",
+        "Name": "William Whitehouse",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland"
+        "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland",
+        "Name": "Stefan Zielen",
+        "Rank": "Dr. med., PhD"
       }
     ],
     "FamilyOversight": {
@@ -205,14 +244,11 @@
   },
   "Common": {
     "Buttons": {
-      "Expand": {
-        "Title": "de_Expand"
-      },
-      "Login": {
-        "Title": "de_LOG IN"
-      },
       "Submit": {
         "Title": "de_Submit"
+      },
+      "Expand": {
+        "Title": "de_Expand"
       }
     },
     "Navigation": {
@@ -223,7 +259,7 @@
       "JoinUs": "Mitglied werden",
       "Language": "Sprache",
       "LearnMore": "Mehr erfahren",
-      "MedicalHistoryQuestionnaire": "de_Medical History Questionnaire",
+      "MedicalHistoryQuestionnaire": "Krankengeschichte",
       "MyAccount": "Mein Konto",
       "MyDashboard": "de_My Dashboard",
       "Next": "Weiter",
@@ -410,12 +446,37 @@
       "Title": "Bleiben Sie informiert über die neuesten Entdeckungen und Entwicklungen im Bereich AT."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Bereits registriert? Hier anmelden"
+  },
   "SDK": {
-    "AddButton": "de_ADD",
     "CancelButton": "Abbrechen",
     "CloseButton": "de_Close",
+    "CommunicationError": "de_There was a problem saving your data. Please check the form and your answers before submitting",
     "Dashboard": {
+      "Text": "",
       "Title": "Mein Gerät"
+    },
+    "DatePicker": {
+      "April": "de_April",
+      "August": "de_August",
+      "Day": "de_Choose day...",
+      "December": "de_December",
+      "February": "de_February",
+      "January": "de_January",
+      "July": "de_July",
+      "June": "de_June",
+      "March": "de_March",
+      "May": "de_May",
+      "Month": "de_Choose month...",
+      "November": "de_November",
+      "October": "de_October",
+      "September": "de_September",
+      "Year": "de_Choose year..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "de_characters remaining",
+      "SingularForm": "de_character remaining"
     },
     "DoNotAssent": "Stimme nicht zu",
     "DoNotConsent": "Ich gebe mein Einverständnis nicht",
@@ -427,20 +488,15 @@
         "Download": "Vollständige Einverständniserklärung herunterladen"
       }
     },
-    "EditButton": "de_Edit",
-    "Institutions": {
-      "Fields": {
-        "City": "Ort"
-      }
-    },
     "JoinUsButton": "Mitglied werden",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Teilnehmer"
+      "AddParticipant": "Teilnehmer hinzufügen",
+      "ParticipantPlaceholder": "Teilnehmer",
+      "ParticipantsList": "Familienmitglieder mit AT"
     },
     "NextButton": "Weiter",
     "PreviousButton": "Zurück",
     "RegisterButton": "Registrieren",
-    "ReviewButton": "de_Review",
     "SaveAndSubmit": "Speichern und einreichen",
     "SaveAndSubmitEnrollment": "Speichern und Registrierung einreichen",
     "SavingButton": "de_Saving",
@@ -448,20 +504,49 @@
     "SignAndConsent": "Unterzeichnen und Einverständnis",
     "StartOrResume": "Starten/Fortsetzen",
     "SubmitButton": "de_Submit",
+    "SignInOut": {
+      "SignOut": "Abmelden"
+    },
+    "Title": {
+      "Alert": "de_Your session will time-out soon",
+      "Default": "de_The Global A-T Family Data Platform"
+    },
     "UserActivities": {
       "ActivityActions": "Aktionen",
-      "ActivityStatus": "Status"
+      "ActivityDate": "de_Created",
+      "ActivityName": "de_Form",
+      "ActivityStatus": "Status",
+      "ActivityStatuses": {
+        "COMPLETE": "Ausgefüllt",
+        "CREATED": "Nicht begonnen",
+        "IN_PROGRESS": "In Arbeit"
+      },
+      "QuestionCount": "de_{{ answered }} / {{ total }} Answered",
+      "Summary": "de_Summary",
+      "SurveysToComplete": {
+        "Plural": "de_{{ count }} surveys to complete",
+        "Singular": "de_{{ count }} survey to complete"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Abmelden"
     },
-    "ValidateError": "de_"
+    "UserPreferences": {
+      "UserPreferencesGender": "de_Sex",
+      "UserPreferencesLocale": "de_Preferred language",
+      "UserPreferencesTitle": "de_User preferences"
+    },
+    "ValidateError": "de_Submission cannot proceed. Please review messages in form for details."
+  },
+  "Survey": {
+    "Self": "{{ firstName }}-Registrierungsprozess",
+    "NewParticipant": "New Participant-Registrierungsprozess"
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "oder"
-      }
+    "ActivityActions": {
+      "Continue": "de_Continue",
+      "Start": "de_Start",
+      "ViewEdit": "de_View / Edit"
     },
     "Dashboard": {
       "Actions": "Aktionen",
@@ -477,28 +562,61 @@
       "JoinMailingList": {
         "CancelButton": "Abbrechen",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "de_Please enter a valid email address",
+            "Placeholder": "de_Email confirmation *"
+          },
           "Email": {
+            "Error": "de_Please enter a valid email address",
             "Placeholder": "E-Mail-Adresse"
           },
           "FirstName": {
+            "Error": "de_First Name is required",
             "Placeholder": "Vorname"
           },
           "LastName": {
+            "Error": "de_Last Name is required",
             "Placeholder": "Nachname"
           }
-        }
+        },
+        "LoadingError": "de_We're sorry, but an error has occurred.",
+        "MatchEmailsError": "de_Please ensure that both email fields are filled in and that the addresses match.",
+        "Required": "",
+        "SubmitButton": "de_Join",
+        "Text": "de_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
+        "Title": "de_Stay informed"
       },
       "SessionWillExpire": {
         "Continue": "Weiter",
-        "SignOut": "Abmelden"
+        "SignOut": "Abmelden",
+        "Text": "de_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "Title": "de_Your session will time-out soon"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "de_Your password reset link has expired."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Wenden Sie sich an den ",
         "TextPt2": ", wenn weiterhin Probleme auftreten."
       },
+      "Text": "",
       "Title": "Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut."
+    },
+    "Password": {
+      "InputPlaceholder": "de_Password",
+      "PasswordRequiredError": "de_Password is required",
+      "PasswordWrongError": "de_Incorrect password. Please try again.",
+      "Text": "de_Please enter your password *",
+      "Title": "de_Please enter the password"
+    },
+    "SessionExpired": {
+      "Text": "de_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "StayInformed": {
+      "Text": "de_Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
+      "Title": "de_Stay informed"
     }
   },
   "WorkflowProgress": {
