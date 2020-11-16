@@ -3,7 +3,6 @@ import { filter } from 'rxjs/operators';
 import {
   CompositeDisposable,
   ConfigurationService,
-  NGXTranslateService,
   SessionMementoService,
   UserProfileDecorator,
 } from 'ddp-sdk';
@@ -23,7 +22,6 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
-  public SignIn: string;
   private anchor = new CompositeDisposable();
   private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
@@ -32,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
-              private ngxTranslate: NGXTranslateService,
               private translate: TranslateService,
               private currentActivityService: CurrentActivityService,
               @Inject('ddp.config') private configuration: ConfigurationService,
@@ -41,10 +38,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const translate$ = this.ngxTranslate.getTranslation('Common.Navigation.SignIn')
-      .subscribe((SignIn: string) => this.SignIn = SignIn);
-    this.anchor.addNew(translate$);
-
     const userProfileSubs$ = this.userPreferencesServiceAgent.profile
       .subscribe((data: UserProfileDecorator) => {
         if (!!data && this.isAuthenticated) {
@@ -75,26 +68,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.session.isAuthenticatedSession();
   }
 
-  public trackByFn(indx: number): number {
-    return indx;
-  }
-
   public ngOnDestroy(): void {
     this.anchor.removeAll();
-  }
-
-  public changeLanguage(language: Language): void {
-    if (!!this.userProfileDecorator) {
-      this.userProfileDecorator.profile.preferredLanguage = language.code;
-      this.userPreferencesServiceAgent.saveProfile(false, this.userProfileDecorator.profile)
-        .pipe(take(1))
-        .subscribe((data: UserProfileDecorator) => {
-            this.userProfileDecorator = data;
-            this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
-        });
-    } else {
-      this.runTranslator(language.code);
-    }
   }
 
   public runTranslator(languageCode: string): void {
