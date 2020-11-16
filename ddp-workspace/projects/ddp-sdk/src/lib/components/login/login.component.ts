@@ -32,6 +32,7 @@ export class LoginComponent implements OnDestroy, OnInit {
   public loginText: string;
   public logoutText: string;
   private anchor: Subscription;
+  private readonly LOG_SOURCE = 'LoginComponent';
 
   constructor(
     private session: SessionMementoService,
@@ -70,7 +71,7 @@ export class LoginComponent implements OnDestroy, OnInit {
 
   public doLogout(): void {
     this.auth0.logout();
-    this.logger.logEvent('LoginComponent', 'Logout event occured');
+    this.logger.logEvent(this.LOG_SOURCE, 'Logout event occurred');
     this.logout.emit();
   }
 

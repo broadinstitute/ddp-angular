@@ -13,6 +13,7 @@ import { SessionMementoService } from '../../services/sessionMemento.service';
 import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/displayLanguagePopupServiceAgent.service';
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -46,11 +47,13 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private studyLanguages: StudyLanguage[];
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
+  private readonly LOG_SOURCE = 'LanguageSelectorComponent';
   @ViewChild(PopupWithCheckboxComponent, { static: false }) private popup: PopupWithCheckboxComponent;
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
     private language: LanguageService,
+    private logger: LoggingService,
     private profileServiceAgent: UserProfileServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
     private session: SessionMementoService,
@@ -74,7 +77,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             return of(false);
           }
         } else {
-          console.error('Error: no configured language list was returned.');
+          this.logger.logError(this.LOG_SOURCE, 'Error: no configured language list was returned.');
           return of(false);
         }
       })
@@ -116,7 +119,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.anchor.addNew(sub);
       }
     } else {
-      console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
+      this.logger.logError(this.LOG_SOURCE,
+        `Error: The specified language: ${JSON.stringify(lang)} is not configured for the study.`);
     }
   }
 
@@ -165,7 +169,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.changeLanguage(language);
         return true;
       } else {
-        console.error('Error: no stored, profile, or default language found');
+        this.logger.logError(this.LOG_SOURCE, 'Error: no stored, profile, or default language found.');
         return false;
       }
     }));

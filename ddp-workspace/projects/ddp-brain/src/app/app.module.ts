@@ -9,10 +9,10 @@ import { ActivityGuids } from './aсtivity-guids';
 
 import {
   DdpModule,
-  LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -71,7 +71,7 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
-sdkConfig.logLevel = LogLevel.Info;
+sdkConfig.logLevel = DDP_ENV.logLevel;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
@@ -82,16 +82,17 @@ sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
+        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
       }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -133,7 +134,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     },

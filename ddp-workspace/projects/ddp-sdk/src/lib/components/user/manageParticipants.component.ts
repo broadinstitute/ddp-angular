@@ -1,6 +1,5 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 import { GovernedParticipantsServiceAgent } from '../../services/serviceAgents/governedParticipantsServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
 import { Participant } from '../../models/participant';
@@ -53,18 +52,18 @@ export class ManageParticipantsComponent implements OnDestroy {
     public participants: Array<Participant>;
     private reloadingSubject: Subject<void>;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'ManageParticipantsComponent';
 
     constructor(
         private serviceAgent: GovernedParticipantsServiceAgent,
         private logger: LoggingService,
-        private session: SessionMementoService,
         public dialogRef: MatDialogRef<ManageParticipantsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
-            tap(x => this.logger.logEvent('ManageParticipantsComponent', 'data loading...')),
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, 'data loading...')),
             mergeMap(x => this.serviceAgent.getList(), (x, y) => y),
-            tap(x => this.logger.logEvent('ManageParticipantsComponent', `data loaded: ${JSON.stringify(x)}`)))
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`)))
             .subscribe(x => {
                 this.participants = x;
                 this.loaded = true;
@@ -78,7 +77,7 @@ export class ManageParticipantsComponent implements OnDestroy {
 
     public add(): void {
         this.serviceAgent.add(this.currentParticipant).pipe(
-            tap(x => this.logger.logEvent('ManageParticipantsComponent', 'Participant added'))
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, 'Participant added'))
         ).subscribe(() => this.reloadingSubject.next());
         this.currentParticipant = '';
         this.canSave = true;
