@@ -1,3 +1,4 @@
+import { Injector } from '@angular/core';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -18,7 +19,7 @@ describe('IrbPasswordService', () => {
     const cookieServiceSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('CookieService', ['put']);
     // called within the parent class
     const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException', 'logEvent', 'logError']);
-    const injectorSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('Injector', ['get']);
+    const injectorSpy: jasmine.SpyObj<Injector> = jasmine.createSpyObj('Injector', ['get']);
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -55,6 +56,7 @@ describe('IrbPasswordService', () => {
             expect(handleErrorSpy).not.toHaveBeenCalled();
             done();
         });
+
         // mock backend request
         const request = httpTestingController.expectOne(mockRequestUrl);
         request.flush({

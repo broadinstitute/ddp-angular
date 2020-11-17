@@ -102,7 +102,7 @@ export * from './lib/components/login/redirectToAuth0Login.component';
 export * from './lib/components/user/manageParticipants.component';
 export * from './lib/components/user/userMenu.component';
 export * from './lib/components/user/activities/userActivities.component';
-export * from './lib/components/languageSelector.component';
+export * from './lib/components/internationalization/languageSelector.component';
 export * from './lib/components/behaviors/loader.component';
 export * from './lib/components/behaviors/loading.component';
 export * from './lib/components/activityForm/institutions/institutionsForm.component';
