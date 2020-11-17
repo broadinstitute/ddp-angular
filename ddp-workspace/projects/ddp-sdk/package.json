@@ -27,6 +27,7 @@
     "jquery": "3.5.1",
     "kaop-ts": "3.1.2",
     "ng-recaptcha": "6.0.2",
+    "ngx-bootstrap": "5.5.0",
     "ngx-cookie": "4.1.2",
     "npm-sass": "2.3.0",
     "package": "1.0.1",

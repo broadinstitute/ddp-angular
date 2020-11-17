@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SessionMementoService, LoggingService  } from 'ddp-sdk';
+import { SessionMementoService, LoggingService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
-import { AnalyticsManagementService  } from './analyticsManagement.service';
+import { AnalyticsManagementService } from './analyticsManagement.service';
 import { CookiesTypes } from '../models/cookies/cookiesType';
 import { ConsentStatuses } from '../models/cookies/consentStatuses';
 import { CookiesPreferences } from '../models/cookies/cookiesPreferences';
@@ -14,7 +14,8 @@ export class CookiesManagementService {
   private readonly cookiesTypes: Array<CookiesTypes>;
   private readonly cookiesConsentStorageName: string;
   private readonly isAuthenticated: boolean;
-  private hasToSetCookiesPreferences: BehaviorSubject<boolean> =  new BehaviorSubject(null);
+  private readonly LOG_SOURCE = 'CookiesManagementService';
+  private hasToSetCookiesPreferences: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor(@Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService,
               private analytics: AnalyticsManagementService,
@@ -47,7 +48,7 @@ export class CookiesManagementService {
     localStorageConsent ? this.consent = localStorageConsent : this.setDefaultConsent();
   }
 
-  private getLocalStorageConsent(): CookiesPreferences   {
+  private getLocalStorageConsent(): CookiesPreferences {
     return JSON.parse(localStorage.getItem(this.cookiesConsentStorageName));
   }
 
@@ -99,6 +100,6 @@ export class CookiesManagementService {
 
   private logConsentUpdate(): void {
     const loggerEvent = 'Cookies preferences update event occurred. Status: ' + this.consent.status;
-    this.logger.logEvent('Cookies Management Service', loggerEvent);
+    this.logger.logEvent(this.LOG_SOURCE, loggerEvent);
   }
 }

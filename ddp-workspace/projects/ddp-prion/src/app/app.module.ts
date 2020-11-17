@@ -19,13 +19,14 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 
 // SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LogLevel } from 'ddp-sdk';
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
 
 // Toolkit imports
 import { ToolkitModule } from 'toolkit';
 
 // Toolkit-prion imports
-import { PrionToolkitConfigurationService,
+import {
+  PrionToolkitConfigurationService,
   ToolkitPrionModule,
   PrionAppComponent
 } from 'toolkit-prion';
@@ -190,7 +191,7 @@ config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
 config.studyGuid = DDP_ENV.studyGuid;
-config.logLevel = LogLevel.Info;
+config.logLevel = DDP_ENV.logLevel;
 config.baseUrl = location.origin + base;
 config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 config.loginLandingUrl = DDP_ENV.loginLandingUrl;
@@ -200,17 +201,19 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.dashboardActivitiesStartedStatuses = ['CREATED'];
 
-export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
-      }, () => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+      }, err => {
+        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -263,7 +266,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     }

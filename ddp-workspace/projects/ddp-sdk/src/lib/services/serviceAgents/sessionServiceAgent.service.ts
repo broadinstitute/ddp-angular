@@ -4,7 +4,7 @@ import { ServiceAgent } from './serviceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { Observable, of } from 'rxjs';
 import { flatMap, take } from 'rxjs/operators';
 

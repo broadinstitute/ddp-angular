@@ -16,12 +16,13 @@ import { CountryAddressInfoSummary } from '../../models/countryAddressInfoSummar
 import { Address } from '../../models/address';
 import { AddressError } from '../../models/addressError';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
-import { merge, Observable, of, Subject, zip } from 'rxjs';
+import { merge, Observable, of, Subject } from 'rxjs';
 import * as _ from 'underscore';
 import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AddressInputService } from '../address/addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { AddressService } from '../../services/address.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -164,7 +165,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
    */
   @Input()
   set address(address: Address) {
-    console.debug('setting address:' + JSON.stringify(address));
+    this.logger.logDebug(this.LOG_SOURCE, `Setting address: ${JSON.stringify(address)}`);
     this.ais.inputAddress$.next(address);
   }
   @Input()
@@ -212,14 +213,16 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   public ais: AddressInputService;
 
   private ngUnsubscribe = new Subject();
+  private readonly LOG_SOURCE = 'AddressInputComponent';
 
   // See if we can continue making stuff in form observable as much as possible
   constructor(
+    private logger: LoggingService,
     private countryService: CountryService,
     private addressService: AddressService,
     private cdr: ChangeDetectorRef,
     private ngxTranslate: NGXTranslateService) {
-    this.ais = new AddressInputService(this.countryService, this.addressService, this.cdr, this.phoneRequired);
+    this.ais = new AddressInputService(this.logger, this.countryService, this.addressService, this.cdr, this.phoneRequired);
   }
 
   ngOnInit(): void {
@@ -247,8 +250,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     ).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();
 
-    this.valueChanged.subscribe((address) => console.debug('the address we got was:' + JSON.stringify(address)));
-    this.componentBusy.subscribe((isBusy) => console.debug('is busy?:' + isBusy));
+    this.valueChanged.subscribe((address) => this.logger.logDebug(this.LOG_SOURCE, `The address we got was: ${JSON.stringify(address)}`));
+    this.componentBusy.subscribe((isBusy) => this.logger.logDebug(this.LOG_SOURCE, `Is busy? ${isBusy}`));
 
     this.setupBlockChromeStreet1Autofill();
 

@@ -34,10 +34,10 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
             </li>
             <li class="Nav-item">
               <span class="Nav-itemLink">
-                <toolkit-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
                                              checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
-                                             buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText"
-                ></toolkit-popup-with-checkbox>
+                                             buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+                </ddp-popup-with-checkbox>
               </span>
             </li>
             <li *ngIf="isLoggedIn()" class="Nav-item">
@@ -48,6 +48,11 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
             <li class="Nav-item">
                         <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/learn-more'}" translate>
                             Toolkit.Common.LearnMore
+                        </span>
+            </li>
+            <li class="Nav-item">
+                        <span (click)="clickStudyListing()" id="Study Listing" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/study-listing'}" translate>
+                            Toolkit.Common.StudyListing
                         </span>
             </li>
             <li class="Nav-item">
@@ -106,5 +111,9 @@ export class PrionHeaderComponent extends HeaderComponent {
 
   public clickLearnMore(): void {
     this._router.navigateByUrl('/learn-more');
+  }
+
+  public clickStudyListing(): void {
+    this._router.navigateByUrl('/study-listing');
   }
 }

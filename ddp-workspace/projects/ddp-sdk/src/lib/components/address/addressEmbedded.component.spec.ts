@@ -19,6 +19,7 @@ import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -80,6 +81,7 @@ describe('AddressEmbeddedComponent', () => {
         return of(null);
       }
     });
+    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning']);
     const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
     // @ts-ignore
     translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
@@ -93,7 +95,8 @@ describe('AddressEmbeddedComponent', () => {
       providers: [
         { provide: AddressService, useValue: addressServiceSpy },
         { provide: SubmitAnnouncementService, useValue: submitAnnounceService },
-        { provide: NGXTranslateService, useValue: translateServiceSpy }
+        { provide: NGXTranslateService, useValue: translateServiceSpy },
+        { provide: LoggingService, useValue: loggingServiceSpy }
       ],
       imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
     })

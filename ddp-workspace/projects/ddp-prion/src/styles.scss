@@ -565,6 +565,10 @@ mat-icon.ddp-dropdown-arrow {
     clear: both;
 }
 
+.scroll-table-container {
+    overflow: auto;
+}
+
 //Study Listing Table
 //All filters (top and column filters)
 input.mat-input-element.study-listing-filter {
@@ -573,19 +577,30 @@ input.mat-input-element.study-listing-filter {
   margin-top: 0;
 }
 
-//Inside the table
-.study-listing-table {
+.study-listing-filter-all-container {
+    min-width: 660px;
+}
+
+.table--studyListing {
   table-layout: fixed;
   overflow-wrap: break-word;
+  min-width: 720px;
 
   //Add color striping
   .filter-row, tbody>tr:nth-of-type(even) {
     background-color: #f9f9f9;
   }
 
-  //Longer second column
-  th:nth-of-type(2) {
-    width: 30%;
+  .header-row {
+      th:nth-of-type(2) {
+          width: 22%;
+      }
+      th:nth-of-type(3) {
+          width: 15%;
+      }
+      th:nth-of-type(5) {
+          width: 20%;
+      }
   }
 
   //Make cell padding consistent
@@ -666,6 +681,11 @@ input.mat-input-element.study-listing-filter {
     z-index: 1000;
 }
 
+.Header--home {
+    background: transparent !important;
+    position: absolute;
+}
+
 .Header-background {
     position: relative;
     padding: 30px 80px 20px 80px;
@@ -679,20 +699,43 @@ input.mat-input-element.study-listing-filter {
     width: 100%;
 }
 
-.Header--home {
-    background: transparent !important;
-    position: absolute;
+.navbar-nav {
+    float: right !important;
+    width: 660px;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (min-width: 1027px) and (max-width: 1200px) {
+    .Header-background {
+        padding: 30px 40px 20px 80px !important;
+    }
+    .navbar-nav {
+        float: right !important;
+        width: 660px;
+    }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1026px) {
+    .Header-background {
+        padding: 30px 40px 20px 80px !important;
+    }
+    .navbar-nav {
+        float: right !important;
+        width: 584px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
     .Header-background {
         padding: 25px 0 0 0 !important;
     }
     .navbar-header {
-        padding: 0 25px 25px 25px !important;
+        padding: 0 10px 25px 25px !important;
     }
     .navbar-collapse {
         padding: 0 25px 10px 25px !important;
+    }
+    .navbar-nav {
+        width: 415px !important;
     }
 }
 
@@ -779,7 +822,7 @@ input.mat-input-element.study-listing-filter {
   padding: 12px 30px !important;
 }
 
-button[data-ddp-test="signInButton"], button[data-ddp-test="signOutButton"] {
+button[data-ddp-test="signInButton"], button[ data-ddp-test="signOutButton"] {
   margin-top: 0;
 }
 
@@ -3178,7 +3221,7 @@ p.Medium {
     padding: 0 0 12px 0;
   }
 
-  .mat-header-row {
+  .ddp-dashboard .mat-header-row {
     display: none;
   }
 
@@ -3740,13 +3783,13 @@ app-third-party {
   padding: 100px 0;
 }
 
-toolkit-popup-with-checkbox {
+ddp-popup-with-checkbox {
   .SimpleButton {
     margin-top: 0;
   }
 }
 
-.toolkit-popup-with-checkbox {
+.ddp-popup-with-checkbox {
   .SimpleButton {
     margin-top: 0;
   }
@@ -3777,13 +3820,13 @@ toolkit-popup-with-checkbox {
 }
 
 @media only screen and (max-width: 824px) {
-  .cdk-overlay-pane.toolkit-popup-with-checkbox {
+  .cdk-overlay-pane.ddp-popup-with-checkbox {
     margin-top: 150px !important;
   }
 }
 
 @media only screen and (max-width: 767px) {
-  .cdk-overlay-pane.toolkit-popup-with-checkbox {
+  .cdk-overlay-pane.ddp-popup-with-checkbox {
     width: 300px !important;
     max-height: 170px !important;
     margin-top: 50% !important;

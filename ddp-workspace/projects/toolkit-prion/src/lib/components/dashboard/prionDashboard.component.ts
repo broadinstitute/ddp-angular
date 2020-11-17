@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { TranslateService } from '@ngx-translate/core';
+import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { DashboardComponent, ToolkitConfigurationService } from 'toolkit';
 
 export interface StaticActivity {
@@ -20,7 +20,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
     created: 'Toolkit.Dashboard.StudyListing.ActivityCreated',
     summary: 'Toolkit.Dashboard.StudyListing.ActivitySummary',
     actions: 'Toolkit.Dashboard.StudyListing.ActivityActions',
-    readOnly: 'notApplicable',
+    readOnly: 'true',
     url: 'study-listing'}
 ];
 
@@ -47,9 +47,10 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                 </ng-container>
                 <section class="PageContent-section">
                   <ddp-dashboard [studyGuid]="studyGuid"
-                                 (open)="navigate($event)">
+                                 (open)="navigate($event)"
+                                 (loadedEvent)="loadStaticActivities($event)">
                   </ddp-dashboard>
-                  <mat-table [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
+                  <mat-table *ngIf="this.displayStaticActivities" [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
                              class="ddp-dashboard ddp-dashboard-static dataTable">
                     <!-- Activity Column -->
                     <ng-container matColumnDef="name">
@@ -127,9 +128,10 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
         </article>
       </div>`
 })
-export class PrionDashboardComponent extends DashboardComponent {
+export class PrionDashboardComponent extends DashboardComponent implements OnInit {
   public dataSource = STATIC_ACTIVITIES;
   public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
+  public displayStaticActivities = false;
 
   constructor(
         private _router: Router,
@@ -139,7 +141,15 @@ export class PrionDashboardComponent extends DashboardComponent {
         super(_router, _announcements, _toolkitConfiguration);
   }
 
+  public ngOnInit(): void {
+    super.ngOnInit();
+  }
+
   public navigateToUrl(url: string): void {
     this._router.navigateByUrl(url);
+  }
+
+  public loadStaticActivities(shouldLoad: boolean): void {
+    this.displayStaticActivities = shouldLoad;
   }
 }

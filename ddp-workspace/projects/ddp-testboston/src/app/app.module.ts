@@ -13,11 +13,11 @@ import { ActivityGuids } from './activity-guids';
 
 import {
     DdpModule,
-    LogLevel,
     ConfigurationService,
     AnalyticsEventsService,
     AnalyticsEvent,
     QuestionType,
+    LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -84,7 +84,7 @@ sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.adminClientId = DDP_ENV.adminClientId;
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
-sdkConfig.logLevel = LogLevel.Info;
+sdkConfig.logLevel = DDP_ENV.logLevel;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
@@ -106,18 +106,21 @@ sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 sdkConfig.scrollToErrorOffset = 130;
+sdkConfig.rtlLanguages = ['ar'];
 
 const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
 
-export function translateFactory(translate: TranslateService, injector: Injector): any {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
     return () => new Promise<any>((resolve: any) => {
+        const LOG_SOURCE = 'AppModule';
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
-            translate.setDefaultLang(initialLanguageCode);
-            translate.use(initialLanguageCode).subscribe(() => {
-                console.log(`Successfully initialized '${initialLanguageCode}' language as default.`);
-            }, () => {
-                console.error(`Problem with '${initialLanguageCode}' language initialization.`);
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
             }, () => {
                 resolve(null);
             });
@@ -170,7 +173,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
             useFactory: translateFactory,
             deps: [
                 TranslateService,
-                Injector
+                Injector,
+                LoggingService
             ],
             multi: true
         },
