@@ -55,6 +55,7 @@ export class ManageParticipantsComponent implements OnDestroy {
     public participants: Array<Participant>;
     private reloadingSubject: Subject<void>;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'ManageParticipantsComponent';
 
     constructor(
         @Inject('ddp.config') private config: ConfigurationService,
@@ -65,9 +66,9 @@ export class ManageParticipantsComponent implements OnDestroy {
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
-            tap(x => this.logger.logEvent('ManageParticipantsComponent', 'data loading...')),
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, 'data loading...')),
             mergeMap(x => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
-            tap(x => this.logger.logEvent('ManageParticipantsComponent', `data loaded: ${JSON.stringify(x)}`)))
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`)))
             .subscribe(x => {
                 this.participants = x;
                 this.loaded = true;
@@ -94,7 +95,7 @@ export class ManageParticipantsComponent implements OnDestroy {
                     ...payload,
                     languageCode: user.profile.preferredLanguage,
                 })),
-                tap(() => this.logger.logEvent('ManageParticipantsComponent', 'Participant added')),
+                tap(() => this.logger.logEvent(this.LOG_SOURCE, 'Participant added')),
                 take(1),
             )
             .subscribe(() => {

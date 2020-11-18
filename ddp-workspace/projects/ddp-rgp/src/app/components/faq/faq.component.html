@@ -1,0 +1,134 @@
+<div class="PageHeader">
+  <div class="PageHeader-background Background--orange">
+    <div class="row PageLayout">
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h1 class="PageHeader-title" translate>FaqPage.Title</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="Wrapper row" routeTransformer>
+  <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
+    <p class="Paragraph">
+      <span translate>FaqPage.Intro.Text1</span>
+      <a [href]="emailHref" class="Link">{{email}}</a>
+      <span translate>FaqPage.Intro.Text2</span>
+      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+    </p>
+
+    <a (click)="isGeneralCollapsed = !isGeneralCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.General.Title
+        <i class="fa Panel-icon"
+          [ngClass]="{'fa-chevron-down': isGeneralCollapsed, 'fa-chevron-up': !isGeneralCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isGeneralCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.General.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isBeforeCollapsed = !isBeforeCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Before.Title
+        <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isBeforeCollapsed, 'fa-chevron-up': !isBeforeCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isBeforeCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Before.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isProcessCollapsed = !isProcessCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Process.Title
+        <i class="fa Panel-icon"
+          [ngClass]="{'fa-chevron-down': isProcessCollapsed, 'fa-chevron-up': !isProcessCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isProcessCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Process.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isCollectionCollapsed = !isCollectionCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Collection.Title
+        <i class="fa Panel-icon"
+          [ngClass]="{'fa-chevron-down': isCollectionCollapsed, 'fa-chevron-up': !isCollectionCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isCollectionCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Collection.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isReturnCollapsed = !isReturnCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Return.Title
+        <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isReturnCollapsed, 'fa-chevron-up': !isReturnCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isReturnCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Return.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isDataCollapsed = !isDataCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Data.Title
+        <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isDataCollapsed, 'fa-chevron-up': !isDataCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isDataCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Data.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+
+    <a (click)="isSpreadCollapsed = !isSpreadCollapsed" class="Panel">
+      <h3 class="Panel-title" translate>FaqPage.Spread.Title
+        <i class="fa Panel-icon" [ngClass]="{'fa-chevron-down': isSpreadCollapsed, 'fa-chevron-up': !isSpreadCollapsed}"
+          aria-hidden="true"></i>
+      </h3>
+    </a>
+    <div [collapse]="isSpreadCollapsed">
+      <ng-container *ngFor="let question of 'FaqPage.Spread.Questions' | translate">
+        <ng-container *ngTemplateOutlet="item; context: {question: question}">
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr class="List-line">
+  </div>
+</div>
+
+<ng-template #item let-question="question">
+  <p class="Subheading" [innerHTML]="question.question"></p>
+  <ng-container *ngFor="let answer of question.answers">
+    <p class="Paragraph" [innerHTML]="answer"></p>
+  </ng-container>
+</ng-template>

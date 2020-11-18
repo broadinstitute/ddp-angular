@@ -1,0 +1,24 @@
+.Dashboard-container {
+    font-weight: 300;
+}
+
+.infobox {
+    border: 2px solid #e8702a;
+    border-radius: 8px;
+    background-color: rgba(113, 84, 255, 0.06);
+    padding: 1rem;
+}
+
+.infobox_dashboard {
+    padding: 1.5rem 2rem;
+    position: relative;
+
+    .close-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

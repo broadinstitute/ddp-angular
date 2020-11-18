@@ -45,7 +45,8 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
   public activityInstance$: Observable<ActivityInstanceGuid | null>;
   private ngUnsubscribe = new Subject();
   private anchor: Subscription = new Subscription();
-  @ViewChild('modal', {static: true}) private modalRef: TemplateRef<any>;
+  private readonly LOG_SOURCE = 'ModalActivityButtonComponent';
+  @ViewChild('modal', { static: true }) private modalRef: TemplateRef<any>;
 
   constructor(public dialog: MatDialog,
               private session: SessionMementoService,
@@ -89,26 +90,26 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
 
   public createActivityInstance(): void {
     this.activityInstance$ = this.serviceAgent
-    .createInstance(this.config.studyGuid, this.activityGuid).pipe(
-      map(x => {
-        if (x) {
-          this.instanceGuid.next(x.instanceGuid);
-          return x;
-        } else {
-          this.logger.logError('Could not create the activity instance for study activity guid:'
-            + this.activityGuid, 'Creating new activity instance in modal');
-          return null;
-        }
-      }))
-    .pipe(share());
+      .createInstance(this.config.studyGuid, this.activityGuid).pipe(
+        map(x => {
+          if (x) {
+            this.instanceGuid.next(x.instanceGuid);
+            return x;
+          } else {
+            this.logger.logError(`${this.LOG_SOURCE}.Could not create the activity instance for study activity guid: ${this.activityGuid}`,
+              'Creating new activity instance in modal');
+            return null;
+          }
+        }))
+      .pipe(share());
 
     this.activityInstance$.pipe(
       takeUntil(this.ngUnsubscribe))
-    .subscribe(activityInstance => {
-      if (!activityInstance) {
-        this.dialog.closeAll();
-        this.router.navigateByUrl(this.config.errorUrl);
-      }
-    });
+      .subscribe(activityInstance => {
+        if (!activityInstance) {
+          this.dialog.closeAll();
+          this.router.navigateByUrl(this.config.errorUrl);
+        }
+      });
   }
 }

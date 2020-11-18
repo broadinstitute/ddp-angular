@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { iif, Observable, of, Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { iif, Observable, of, Subscription, merge } from 'rxjs';
 import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
@@ -12,6 +13,7 @@ import { SessionMementoService } from '../../services/sessionMemento.service';
 import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/displayLanguagePopupServiceAgent.service';
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-language-selector',
@@ -45,20 +47,24 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private studyLanguages: StudyLanguage[];
   private anchor: CompositeDisposable;
   private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
-  @ViewChild(PopupWithCheckboxComponent, {static: false}) private popup: PopupWithCheckboxComponent;
+  private readonly LOG_SOURCE = 'LanguageSelectorComponent';
+  @ViewChild(PopupWithCheckboxComponent, { static: false }) private popup: PopupWithCheckboxComponent;
 
   constructor(
     private serviceAgent: LanguageServiceAgent,
     private language: LanguageService,
+    private logger: LoggingService,
     private profileServiceAgent: UserProfileServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
     private session: SessionMementoService,
+    @Inject(DOCUMENT) private document: Document,
     private displayPop: DisplayLanguagePopupServiceAgent) { }
 
   public ngOnInit(): void {
     this.anchor = new CompositeDisposable();
     this.iconURL = this.config.languageSelectorIconURL ? this.config.languageSelectorIconURL : this.defaultIconUrl;
     this.currentLanguageListener();
+    this.i18nListener();
     const sub = this.serviceAgent.getConfiguredLanguages(this.config.studyGuid).pipe(
       mergeMap(studyLanguages => {
         if (studyLanguages) {
@@ -71,7 +77,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             return of(false);
           }
         } else {
-          console.error('Error: no configured language list was returned.');
+          this.logger.logError(this.LOG_SOURCE, 'Error: no configured language list was returned.');
           return of(false);
         }
       })
@@ -113,13 +119,14 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.anchor.addNew(sub);
       }
     } else {
-      console.error('Error: The specified language: ' + JSON.stringify(lang) + ' is not configured for the study.');
+      this.logger.logError(this.LOG_SOURCE,
+        `Error: The specified language: ${JSON.stringify(lang)} is not configured for the study.`);
     }
   }
 
   private launchPopup(): Subscription {
     return this.displayPop.getShouldDisplayLanguagePopup()
-        .subscribe(shouldDisp => {
+      .subscribe(shouldDisp => {
         if (shouldDisp) { // If we should display the popup
           this.popup.openModal(); // Display the popup!
         }
@@ -162,7 +169,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.changeLanguage(language);
         return true;
       } else {
-        console.error('Error: no stored, profile, or default language found');
+        this.logger.logError(this.LOG_SOURCE, 'Error: no stored, profile, or default language found.');
         return false;
       }
     }));
@@ -233,5 +240,22 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       });
     });
     this.anchor.addNew(sub);
+  }
+
+  private i18nListener(): void {
+    const sub = merge(
+      of(this.language.getCurrentLanguage()),
+      this.language.onLanguageChange().pipe(map(event => event.lang))
+    ).subscribe(languageCode => {
+      const direction = this.config.rtlLanguages.includes(languageCode) ? 'rtl' : 'ltr';
+      this.changeDocumentLanguage(direction, languageCode);
+    });
+    this.anchor.addNew(sub);
+  }
+
+  private changeDocumentLanguage(direction: string, languageCode: string): void {
+    const html = this.document.querySelector('html');
+    html.setAttribute('dir', direction);
+    html.setAttribute('lang', languageCode);
   }
 }

@@ -1,0 +1,57 @@
+<div class="PageHeader">
+  <div class="PageHeader-background Background--orange">
+    <div class="row PageLayout">
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h1 class="PageHeader-title" translate>ForYourPhysicianPage.Title
+          <a href="/assets/pdf/RGP-for-your-physician.pdf" mat-raised-button id='downloadPDF' name='downloadPDF'
+            class="Button Button--downloadPDF" download><span translate>ForYourPhysicianPage.DownloadPDF</span><i
+              class="fa fa-download" aria-hidden="true"></i></a>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="Wrapper row">
+  <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container">
+    <p class="Paragraph" translate>ForYourPhysicianPage.Intro</p>
+    <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.HowItWorks.Title</h3>
+
+    <ng-container *ngFor="let paragraph of 'ForYourPhysicianPage.HowItWorks.Paragraphs' | translate">
+      <p class="Paragraph" [innerHTML]="paragraph"></p>
+    </ng-container>
+
+    <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.EligibilityCriteria.Title</h3>
+
+    <ng-container *ngFor="let list of 'ForYourPhysicianPage.EligibilityCriteria.Lists' | translate; let last = last">
+      <p class="Paragraph{{last ? ' TopMargin25': ''}}" [innerHTML]="list.Title"></p>
+      <ul>
+        <ng-container *ngFor="let item of list.Items">
+          <li class="List-li">{{item}}</li>
+        </ng-container>
+      </ul>
+    </ng-container>
+
+    <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.Help.Title</h3>
+    <p class="Paragraph" [innerHTML]="'ForYourPhysicianPage.Help.Text' | translate"></p>
+
+    <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.Role.Title</h3>
+    <p class="Paragraph" translate>ForYourPhysicianPage.Role.Text1</p>
+
+    <p class="Paragraph" translate>ForYourPhysicianPage.Role.Text2</p>
+    <ul>
+      <li class="List-li" translate>ForYourPhysicianPage.Role.Item1</li>
+      <li class="List-li" translate>ForYourPhysicianPage.Role.Item2</li>
+    </ul>
+
+    <h3 class="Subtitle TopMargin25" translate>ForYourPhysicianPage.Role.ThankYou</h3>
+
+    <hr class="HorizontalLine">
+
+    <ul class="List--noStyle">
+      <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.Contact</h3>
+      <li class="List-li" i18n><a href="http://raregenomes.org" target="_blank" class="Link">www.raregenomes.org</a>
+      </li>
+      <li class="List-li"><a [href]="phoneHref" class="Link">{{phone}}</a></li>
+    </ul>
+  </div>
+</div>

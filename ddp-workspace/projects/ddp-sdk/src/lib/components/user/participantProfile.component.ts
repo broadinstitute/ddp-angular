@@ -48,6 +48,7 @@ export class ParticipantProfileComponent implements OnDestroy {
     private profileSubscription: Subscription;
     private reloadingSubject: Subject<void>;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'ParticipantProfileComponent';
 
     constructor(
         @Inject('ddp.config') private config: ConfigurationService,
@@ -65,7 +66,7 @@ export class ParticipantProfileComponent implements OnDestroy {
             mergeMap(x => {
                 return this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid);
             }),
-            tap(x => this.logger.logEvent('ParticipantProfile', `data loaded: ${JSON.stringify(x)}`))
+            tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`))
         ).subscribe(x => this.participants = x);
         this.reloadingSubject.next();
         this.session.sessionObservable

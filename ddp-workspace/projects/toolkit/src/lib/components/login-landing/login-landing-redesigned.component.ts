@@ -10,7 +10,8 @@ import {
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
+  LoggingService
 } from 'ddp-sdk';
 
 @Component({
@@ -22,6 +23,7 @@ import {
 export class LoginLandingRedesignedComponent extends LoginLandingComponent {
   constructor(
     private _router: Router,
+    private _logger: LoggingService,
     private _auth0: Auth0AdapterService,
     private _sessionService: SessionMementoService,
     private _participantService: GovernedParticipantsServiceAgent,
@@ -30,6 +32,7 @@ export class LoginLandingRedesignedComponent extends LoginLandingComponent {
     @Inject('ddp.config') private _config: ConfigurationService,
     @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
     super(_router,
+      _logger,
       _auth0,
       _sessionService,
       _participantService,
