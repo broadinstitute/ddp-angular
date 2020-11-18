@@ -55,77 +55,7 @@ import { Participant } from './participant-list.component';
       </div>
     </div>
   `,
-  styles: [
-    `
-      .participant-expandable__header {
-        display: flex;
-        align-items: center;
-
-        padding: 0.9rem 1.2rem;
-      }
-
-      .participant-expandable__name {
-        margin-right: auto;
-
-        font-weight: bold;
-        opacity: 0.8;
-      }
-
-      .participant-expandable__status {
-        display: flex;
-        align-items: center;
-
-        font-style: italic;
-        opacity: 0.6;
-
-        margin-right: 1rem;
-      }
-
-      .participant-expandable__status::before {
-        content: '';
-
-        width: 8px;
-        height: 8px;
-
-        margin-right: 6px;
-
-        background-color: #5c7a36;
-        border-radius: 4px;
-      }
-
-      .participant-expandable__control {
-        display: flex;
-        align-items: center;
-
-        font-family: inherit;
-        font-weight: bold;
-        color: #4274bc;
-
-        background-color: transparent;
-        border: none;
-      }
-
-      .participant-expandable__control::after {
-        content: '';
-
-        width: 12px;
-        height: 10px;
-
-        margin-top: -4px;
-        margin-left: 4px;
-
-        background-image: url('assets/images/blue-arrow.svg');
-        background-position: center;
-        background-size: cover;
-      }
-
-      .participant-expandable__activities {
-        margin-bottom: -1px;
-
-        background-color: black;
-      }
-    `,
-  ],
+  styleUrls: ['./participant-list-item.component.scss'],
 })
 export class ParticipantListItem {
   @Input() participant: Participant;

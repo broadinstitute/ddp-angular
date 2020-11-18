@@ -9,6 +9,7 @@ import {
   PrequalifierServiceAgent,
   ConfigurationService,
   SessionMementoService,
+  LoggingService,
 } from 'ddp-sdk';
 
 import * as RouterResources from '../router-resources';
@@ -21,12 +22,14 @@ export class MultiGovernedUserService {
 
   private readonly PREQUAL_SELF_DESCRIBE_STABLE_ID = 'PREQUAL_SELF_DESCRIBE';
   private readonly CHILD_DIAGNOSED_STABLE_ID = 'CHILD_DIAGNOSED';
+  private readonly LOG_SOURCE = 'MultiGovernedUserService';
 
   constructor(
     private router: Router,
     private prequalifierAgent: PrequalifierServiceAgent,
     private activityAgent: ActivityServiceAgent,
     private session: SessionMementoService,
+    private loggingService: LoggingService,
     @Inject('ddp.config') private readonly config: ConfigurationService
   ) {}
 
@@ -87,7 +90,7 @@ export class MultiGovernedUserService {
     const isMultiGoverned = this.isMultiGoverned$.getValue();
 
     if (isMultiGoverned === null) {
-      console.log('Cannot determine type of user, redirecting to home page');
+      this.loggingService.logEvent(this.LOG_SOURCE, 'Cannot determine type of user, redirecting to home page');
 
       this.router.navigateByUrl(RouterResources.Welcome);
     } else {
