@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserProfileDto } from '../../models/userProfileDto';
 import { UserProfileBusService } from '../../services/userProfileBus.service';
@@ -10,6 +10,7 @@ import { ManageParticipantsComponent } from './manageParticipants.component';
 import { Participant } from '../../models/participant';
 import { Subject, Subscription } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
     selector: 'ddp-participant-profile',
@@ -29,7 +30,7 @@ import { mergeMap, tap } from 'rxjs/operators';
     <button mat-menu-item *ngFor="let participant of participants" (click)="select(participant.userGuid)">
         <mat-icon *ngIf="isSelected(participant.userGuid); else elseBlock">radio_button_checked</mat-icon>
         <ng-template #elseBlock><mat-icon>radio_button_unchecked</mat-icon></ng-template>
-        {{ participant.alias }}
+        {{ participant.userProfile?.firstName }} {{ participant.userProfile?.lastName }}
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item
@@ -50,6 +51,7 @@ export class ParticipantProfileComponent implements OnDestroy {
     private readonly LOG_SOURCE = 'ParticipantProfileComponent';
 
     constructor(
+        @Inject('ddp.config') private config: ConfigurationService,
         private serviceAgent: GovernedParticipantsServiceAgent,
         private logger: LoggingService,
         public userProfile: UserProfileBusService,
@@ -62,8 +64,8 @@ export class ParticipantProfileComponent implements OnDestroy {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
             mergeMap(x => {
-                return this.serviceAgent.getList();
-            }, (x, y) => y),
+                return this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid);
+            }),
             tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`))
         ).subscribe(x => this.participants = x);
         this.reloadingSubject.next();
