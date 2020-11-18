@@ -28,16 +28,15 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private windowRef: WindowRef,
     private router: Router,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService
-  ) {}
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     this.log.logEvent(
       this.LOG_SOURCE,
       'post-auth0 callback code for ' +
-        this.windowRef.nativeWindow.location +
-        ':' +
-        location.hash
+      this.windowRef.nativeWindow.location +
+      ':' +
+      location.hash
     );
     const authError = this.route.snapshot.queryParams['error'];
     if (authError) {
@@ -50,9 +49,9 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
       this.log.logEvent(
         this.LOG_SOURCE,
         'Will login to ' +
-          this.configuration.localRegistrationUrl +
-          ' using code ' +
-          authCode
+        this.configuration.localRegistrationUrl +
+        ' using code ' +
+        authCode
       );
       const params = this.consumeLocalAuthParams();
       const isAdmin = this.consumeLocalAdminAuth();
@@ -89,13 +88,13 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
           registrationPayload
         )
         .subscribe((registrationResponse) => {
-          console.log(registrationResponse);
+          this.log.logEvent(this.LOG_SOURCE, registrationResponse);
           this.log.logEvent(
             this.LOG_SOURCE,
             'Now redirecting to ' +
-              nextUrl +
-              ' with id token ' +
-              registrationResponse.idToken
+            nextUrl +
+            ' with id token ' +
+            registrationResponse.idToken
           );
           this.adapter.setSession(registrationResponse, isAdmin);
           this.windowRef.nativeWindow.location.href = nextUrl;
@@ -126,7 +125,7 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
   private handleAuthError(): void {
     const authErrorDescription = this.route.snapshot.queryParams[
       'error_description'
-      ];
+    ];
     this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + authErrorDescription);
     if (JSON.parse(authErrorDescription).code === 'unauthorized') {
       this.router.navigateByUrl('account-activation-required');

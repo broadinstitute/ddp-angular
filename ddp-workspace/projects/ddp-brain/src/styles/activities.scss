@@ -354,6 +354,7 @@ select:disabled {
 .mat-form-field-label {
     font-size: 1.0rem !important;
 }
+
 // input
 .mat-form-field-infix {
     font-size: 1.2rem;
@@ -479,5 +480,18 @@ select:disabled {
         font-family: 'Source Serif Pro', serif;
         font-size: 1.2rem;
         line-height: 2rem;
+    }
+}
+
+.picklist-answer-WHO_FILLING {
+
+    .mat-radio-container {
+        margin-top: 0.3rem;
+    }
+
+    .mat-checkbox-label,
+    .mat-radio-label-content {
+        font-size: 1.2rem;
+        line-height: 1.9rem !important;
     }
 }

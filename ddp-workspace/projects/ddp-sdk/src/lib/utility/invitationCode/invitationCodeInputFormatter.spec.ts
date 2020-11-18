@@ -1,11 +1,13 @@
 import { InvitationCodeInputFormatter } from './invitationCodeInputFormatter';
 import { TextInputState } from '../../models/textInputState';
+import { LoggingService } from '../../services/logging.service';
 
 type Formatter = (inputState: TextInputState) => TextInputState;
 
 describe('InvitationCodeFormatterDirective', () => {
-    const formatterObject = new InvitationCodeInputFormatter();
-    const formatter: Formatter = new InvitationCodeInputFormatter().format;
+    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug']);
+    const formatterObject = new InvitationCodeInputFormatter(loggingServiceSpy);
+    const formatter: Formatter = new InvitationCodeInputFormatter(loggingServiceSpy).format;
 
     beforeAll(() => {
     });

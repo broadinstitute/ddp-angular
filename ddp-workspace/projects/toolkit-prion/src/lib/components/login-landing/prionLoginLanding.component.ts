@@ -5,6 +5,7 @@ import {
   Auth0AdapterService,
   ConfigurationService,
   GovernedParticipantsServiceAgent,
+  LoggingService,
   SessionMementoService,
   WorkflowServiceAgent
 } from 'ddp-sdk';
@@ -18,6 +19,7 @@ import {
 export class PrionLoginLandingComponent extends LoginLandingComponent {
   constructor(
     private _router: Router,
+    private _logger: LoggingService,
     private _auth0: Auth0AdapterService,
     private _sessionService: SessionMementoService,
     private _participantService: GovernedParticipantsServiceAgent,
@@ -25,7 +27,7 @@ export class PrionLoginLandingComponent extends LoginLandingComponent {
     private _workflowBuilder: WorkflowBuilderService,
     @Inject('ddp.config') private _config: ConfigurationService,
     @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
-    super(_router, _auth0, _sessionService, _participantService, _workflowService, _workflowBuilder, _config,
+    super(_router, _logger, _auth0, _sessionService, _participantService, _workflowService, _workflowBuilder, _config,
       _toolkitConfiguration);
   }
 }

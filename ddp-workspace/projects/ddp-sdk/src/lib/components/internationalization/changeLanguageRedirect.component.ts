@@ -6,6 +6,7 @@ import { StudyLanguage } from '../../models/studyLanguage';
 import { ConfigurationService } from '../../services/configuration.service';
 import { LanguageService } from '../../services/internationalization/languageService.service';
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
+import { LoggingService } from '../../services/logging.service';
 
 @Component({
   selector: 'ddp-change-language-redirect',
@@ -14,6 +15,7 @@ import { LanguageServiceAgent } from '../../services/serviceAgents/languageServi
 export class ChangeLanguageRedirectComponent implements OnInit {
   private lang: string = null;
   private supportedLanguages: StudyLanguage[] = null;
+  private readonly LOG_SOURCE = 'ChangeLanguageRedirectComponent';
 
   // The destination to redirect to, relative to the main site
   private dest: string = null;
@@ -23,6 +25,7 @@ export class ChangeLanguageRedirectComponent implements OnInit {
     private languageServiceAgent: LanguageServiceAgent,
     private route: ActivatedRoute,
     private router: Router,
+    private logger: LoggingService,
     @Inject('ddp.config') private config: ConfigurationService) {
   }
 
@@ -42,19 +45,19 @@ export class ChangeLanguageRedirectComponent implements OnInit {
         // Try to switch to the specified language
         const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
         langChangeObservable.subscribe(() => {
-          console.log(`Changed language to ${this.languageService.getCurrentLanguage()}`);
+          this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
         }, (err) => {
-          console.error(`Could not change language to ${this.lang}: ${err}.`);
+          this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}: ${err}.`);
         }, () => {
           // Do the redirect
-          this.router.navigate([this.dest], {relativeTo: this.route.root});
+          this.router.navigate([this.dest], { relativeTo: this.route.root });
         });
       });
   }
 
   private getSupportedLanguagesPromise(): Promise<void> {
     return this.getPromiseFromObservable(this.languageServiceAgent.getConfiguredLanguages(this.config.studyGuid),
-      (languages => {this.supportedLanguages = languages; }));
+      (languages => { this.supportedLanguages = languages; }));
   }
 
   private getQueryParamInfo(): Promise<void> {
@@ -62,13 +65,13 @@ export class ChangeLanguageRedirectComponent implements OnInit {
       if (queryParams.has('language')) {
         this.lang = queryParams.get('language');
       } else {
-        console.error('Missing language query parameter!');
+        this.logger.logError(this.LOG_SOURCE, 'Missing language query parameter!');
       }
 
       if (queryParams.has('destination')) {
         this.dest = queryParams.get('destination');
       } else {
-        console.error('Missing destination query parameter!');
+        this.logger.logError(this.LOG_SOURCE, 'Missing destination query parameter!');
       }
     }));
   }

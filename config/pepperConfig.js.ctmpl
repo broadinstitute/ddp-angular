@@ -14,6 +14,17 @@ var DDP_ENV = {
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
 
+// Log levels: 1 - debug; 2 - info; 3 - warning; 4 - error. E.g. 1 includes debug level and higher, 2 includes info and higher, etc.
+{{if eq $environment "dev"}}
+    DDP_ENV['logLevel'] = 1;
+{{else if eq $environment "test"}}
+    DDP_ENV['logLevel'] = 1;
+{{else if eq $environment "staging"}}
+    DDP_ENV['logLevel'] = 1;
+{{else if eq $environment "prod"}}
+    DDP_ENV['logLevel'] = 2;
+{{end}}
+
 {{if ne $environment "prod"}}
     DDP_ENV['tcellappid'] = "DDPnonprod-Vtzu0";
     DDP_ENV['tcellapikey'] = "AQQBBAFQRfEEcVxKDIp5-H_LGp_x5Ykr_7xkQKq_rgn_P58IWs8oBu7BroR_bLLIuwLERH8";
@@ -110,10 +121,10 @@ var DDP_ENV = {
 
 {{if eq $study_guid "atcp"}}
    {{if eq $environment "local"}}
-          DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
-          DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
-          DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
-          DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
+        DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
+        DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
     {{else if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "7HzrckGgnPAO7UqDbcuUb9QoTc3V2eHa";
         DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
@@ -197,17 +208,39 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "rgp"}}
+    {{if eq $environment "local"}}
+        DDP_ENV['auth0ClientId'] = "Bal2RZDbCcWHV5W2QgenIWRRN31GGO52";
+        DDP_ENV['auth0Domain'] = "rgp-dev.auth0.com";
+        DDP_ENV['auth0Audience'] = "rgp-dev.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{end}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0ClientId'] = "cbI1pq5iRnb4jz4K2atiOmuwGuObaPn1";
+        DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
+        DDP_ENV['auth0Audience'] = "prion-dev.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{else if eq $environment "test"}}
+    {{end}}
+    {{if eq $environment "test"}}
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0Domain'] = "fixme-not-set";
+        DDP_ENV['auth0Audience'] = "fixme-not-set";
+        DDP_ENV['basePepperUrl'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{else if eq $environment "staging"}}
+    {{end}}
+    {{if eq $environment "staging"}}
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0Domain'] = "fixme-not-set";
+        DDP_ENV['auth0Audience'] = "fixme-not-set";
+        DDP_ENV['basePepperUrl'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{else if eq $environment "prod"}}
+    {{end}}
+    {{if eq $environment "prod"}}
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0Domain'] = "fixme-not-set";
+        DDP_ENV['auth0Audience'] = "fixme-not-set";
+        DDP_ENV['basePepperUrl'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
 {{end}}

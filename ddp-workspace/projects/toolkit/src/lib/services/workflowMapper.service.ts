@@ -9,6 +9,8 @@ import { ActivityResponse, LoggingService } from 'ddp-sdk';
 
 @Injectable()
 export class WorkflowMapperService {
+    private readonly LOG_SOURCE = 'WorkflowMapperService';
+
     constructor(
         private logger: LoggingService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
@@ -17,6 +19,8 @@ export class WorkflowMapperService {
         if (activityResponse.next === this.toolkitConfiguration.dashboardGuid || activityResponse.next === WorkflowState.DASHBOARD
             || activityResponse.next === WorkflowState.UNKNOWN) {
             return new UrlWorkflowAction(this.toolkitConfiguration.dashboardUrl);
+        } else if (activityResponse.next === WorkflowState.PARTICIPANT_LIST) {
+            return new UrlWorkflowAction(this.toolkitConfiguration.participantListUrl);
         } else if (activityResponse.next === this.toolkitConfiguration.lovedOneThankYouGuid
             || activityResponse.next === WorkflowState.THANK_YOU) {
             return new UrlWorkflowAction(this.toolkitConfiguration.lovedOneThankYouUrl);
@@ -32,7 +36,7 @@ export class WorkflowMapperService {
         } else if (activityResponse.next === WorkflowState.REGISTRATION) {
             return new RegistrationWorkflowAction();
         } else {
-            this.logger.logWarning('WorkflowMapperService',
+            this.logger.logWarning(this.LOG_SOURCE,
                 `Unknown server routing: ${JSON.stringify(activityResponse)}`);
         }
         return new UrlWorkflowAction('');

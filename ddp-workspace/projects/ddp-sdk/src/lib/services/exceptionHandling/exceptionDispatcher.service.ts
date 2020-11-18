@@ -3,7 +3,5 @@ import { DdpException } from '../../models/exceptions/ddpException';
 
 @Injectable()
 export class ExceptionDispatcher {
-    public consume(excpetion: DdpException): void {
-        console.log('consumed');
-    }
+    public consume(exception: DdpException): void { }
 }

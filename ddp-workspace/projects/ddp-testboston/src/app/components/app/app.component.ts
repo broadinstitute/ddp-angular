@@ -31,6 +31,23 @@ export class AppComponent implements OnInit, OnDestroy {
     this.anchor.removeAll();
   }
 
+  public scrollToStep(event: MouseEvent): void {
+    const element = event.target as HTMLElement;
+    if (element.className.includes('scrollable')) {
+      const anchor = `anchor-${element.classList[element.classList.length - 1]}`;
+      const step = document.getElementsByClassName(anchor)[0];
+      if (step) {
+        const HEADER_HEIGHT_REM = 7.5;
+        const headerHeightPx = HEADER_HEIGHT_REM * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const top = step.getBoundingClientRect().top + window.scrollY - headerHeightPx;
+        window.scrollTo({
+          top,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
+
   private initSessionExpiredDialogListener(): void {
     const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
       this.dialog.open(SessionWillExpireComponent, { ...this.DIALOG_BASE_SETTINGS, disableClose: true });
