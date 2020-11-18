@@ -198,6 +198,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   private states: Array<ActivityInstanceState> | null = null;
   private studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
+  private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
   constructor(
     private serviceAgent: UserActivityServiceAgent,
@@ -236,7 +237,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
     for (const propName in changes) {
       if (propName === 'studyGuid') {
-        this.logger.logEvent('UserActivitiesComponent', `studyChanged: ${this.studyGuid}`);
+        this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
         this.studyGuidObservable.next(this.studyGuid);
       }
     }
@@ -256,7 +257,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     response$.pipe(
       take(1)
     ).subscribe(() => {
-      this.logger.logEvent('UserActivitiesComponent', `Activity clicked: ${guid}`);
+      this.logger.logEvent(this.LOG_SOURCE, `Activity clicked: ${guid}`);
       this.doAnalytics(code);
       this.open.emit(guid);
     });

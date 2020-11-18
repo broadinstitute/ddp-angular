@@ -39,7 +39,7 @@ import { CraniofacialComponent } from './components/craniofacial/craniofacial.co
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
-import { CountMeInComponent } from './components/count-me-in/count-me-in.component';
+import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
@@ -64,7 +64,7 @@ export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.aboutFamily = 'about-your-family';
 toolkitConfig.dashboardUrl = 'dashboard';
-toolkitConfig.aboutFamilyGuid = ''; // To be defined later 
+toolkitConfig.aboutFamilyGuid = ''; // To be defined later
 toolkitConfig.dashboardGuid = 'DASHBOARD';
 toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.activityUrl = 'activity';
@@ -93,7 +93,7 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
@@ -102,7 +102,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       translate.use(locale).subscribe(() => {
         console.log(`Successfully initialized '${locale}' language as default.`);
       }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        console.error(`Problem with '${locale}' language initialization: ${err}.`);
       }, () => {
         resolve(null);
       });
@@ -130,7 +130,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ThankYouComponent,
     StayInformedComponent,
     ErrorComponent,
-    CountMeInComponent,
+    TellUsYourStoryComponent,
     Auth0LandingComponent,
     Auth0RedirectComponent,
     RedirectToAuth0Landing,

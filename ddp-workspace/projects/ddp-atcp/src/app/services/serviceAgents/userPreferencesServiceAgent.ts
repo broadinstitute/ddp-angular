@@ -1,5 +1,5 @@
 import { Observable, of, throwError } from 'rxjs';
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   LoggingService,
@@ -15,13 +15,18 @@ import { catchError, filter, first, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
+  private log: LoggingService;
+  private readonly LOGGER_SOURCE = 'UserPreferencesServiceAgent';
+
   constructor(
     session: SessionMementoService,
     @Inject('ddp.config') configuration: ConfigurationService,
     http: HttpClient,
     logger: LoggingService,
-    _language: LanguageService) {
+    _language: LanguageService,
+    injector: Injector) {
     super(session, configuration, http, logger, _language);
+    this.log = injector.get(LoggingService);
   }
 
   public get profile(): Observable<UserProfileDecorator> {
@@ -48,7 +53,7 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
       profile.preferredLanguage = this.configuration.defaultLanguageCode;
       return this.postObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(catchError(e => {
-          console.error('Error occured on user profile creation: ' + JSON.stringify(e));
+          this.log.logError(this.LOGGER_SOURCE, `Error occurred on user profile creation: ${JSON.stringify(e)}`);
           return throwError(e);
         }));
     } else {

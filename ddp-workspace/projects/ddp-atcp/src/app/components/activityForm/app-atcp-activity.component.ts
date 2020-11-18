@@ -12,7 +12,8 @@ import {
   AnalyticsEventsService,
   SubmissionManager,
   SubmitAnnouncementService,
-  WindowRef
+  WindowRef,
+  LoggingService
 } from 'ddp-sdk';
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
@@ -316,7 +317,7 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
             </div>
         </section>
       </main>`,
-  providers: [SubmitAnnouncementService, SubmissionManager]
+    providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class AtcpActivityComponent extends AtcpActivityBaseComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() agreeConsent = false;
@@ -324,13 +325,14 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
 
   public ActivityCodes = ActivityCodes;
   constructor(
+      logger: LoggingService,
       windowRef: WindowRef,
       renderer: Renderer2,
       submitService: SubmitAnnouncementService,
       analytics: AnalyticsEventsService,
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
-      super(windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, document, injector);
   }
 
   public isAgree(): boolean {

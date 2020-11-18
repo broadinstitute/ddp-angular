@@ -5,6 +5,10 @@
                 "Title": "Submit",
                 "AriaLabel": "Submit button"
             },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
+            },
             "LearnMore": "Learn More",
             "ViewFAQ": "View FAQ page",
             "JoinMailingList": "Join Mailing List",
@@ -73,7 +77,7 @@
                         "Text": "This document is several pages, but take your time. Your progress will be automatically saved so you can come back to it later.",
                         "Links": [
                             {
-                                "Text": "Preview the Consent Form",
+                                "Text": "Preview the consent form",
                                 "Asset": "consent_form.pdf"
                             }
                         ]
@@ -85,7 +89,7 @@
                         "Text": "We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
                         "Links": [
                             {
-                                "Text": "Preview the Medical Release",
+                                "Text": "Preview the medical release",
                                 "Asset": "medical_release_form.pdf"
                             }
                         ]
@@ -99,11 +103,11 @@
                         "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
                         "Links": [
                             {
-                                "Text": "Preview the Adult surveys",
+                                "Text": "Preview the adult surveys",
                                 "Asset": "surveys.pdf"
                             },
                             {
-                                "Text": "Pediatric surveys",
+                                "Text": "pediatric surveys",
                                 "Asset": "pediatric_surveys.pdf"
                             }
                         ]
@@ -156,7 +160,7 @@
                     },
                     {
                         "Website": "http://www.targetcancerfoundation.org/",
-                        "Logo": "assets/images/TCF-logo.png",
+                        "Logo": "assets/images/TargetCancer-logo.png",
                         "Alt": "Target Cancer Foundation logo"
                     }
                 ],
@@ -588,6 +592,9 @@
     "Toolkit": {
         "Dashboard": {
             "Title": "My Dashboard"
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
         },
         "Dialogs": {
             "JoinMailingList": {

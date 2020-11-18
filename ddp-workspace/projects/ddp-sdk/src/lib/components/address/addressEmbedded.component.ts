@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -43,6 +42,7 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 import { extract } from '../../utility/rxjsoperator/extract';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
+import { LoggingService } from '../../services/logging.service';
 
 interface ComponentState {
   isReadOnly: boolean;
@@ -201,11 +201,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
   private stateSubscription: Subscription;
   private validationRequested$: Subject<boolean> = new Subject<boolean>();
-
+  private readonly LOG_SOURCE = 'AddressEmbeddedComponent'; 
 
   constructor(
     private addressService: AddressService,
-    private cdr: ChangeDetectorRef,
+    private logger: LoggingService,
     private ngxTranslate: NGXTranslateService,
     @Optional() private submitService: SubmitAnnouncementService
   ) {
@@ -232,7 +232,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
       scan((acc: ComponentState, update) => ({ ...acc, ...update })),
-      tap(state =>  console.debug('New embeddedComponentState$=%o', state)),
+      tap(state =>  this.logger.logDebug(`${this.LOG_SOURCE}. New embeddedComponentState$=%o`, state)),
       shareReplay(1)
     );
     this.stateSubscription = this.state$.pipe(
@@ -425,7 +425,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
         catchError((error) => {
-          console.warn('there was a problems saving temp address:' + error);
+          this.logger.logWarning(this.LOG_SOURCE, `There was a problems saving temp address: ${error}`);
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
@@ -502,7 +502,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
         catchError(() => {
-          console.debug('temp delete failed. This is OK');
+          this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
@@ -646,10 +646,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => {
           this.ngUnsubscribe.next();
           this.ngUnsubscribe.complete();
-          console.debug('unsubscribe completed');
+          this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
         }),
         take(1)
     ).subscribe();
   }
 }
-

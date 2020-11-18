@@ -11,10 +11,9 @@ import {
 import { TranslateDirective, TranslateLoader, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
-
 const translations: any = {};
 
-class FakeLoader implements TranslateLoader {
+export class FakeLoader implements TranslateLoader {
     getTranslation(lang: string): Observable<any> {
         return of(translations);
     }
@@ -77,6 +76,4 @@ export class TranslateServiceStub {
         TranslateMockDirective
     ]
 })
-export class TranslateTestingModule {
-
-}
+export class TranslateTestingModule { }

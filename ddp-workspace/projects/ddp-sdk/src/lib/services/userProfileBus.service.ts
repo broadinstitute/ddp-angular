@@ -11,6 +11,7 @@ import { Session } from '../models/session';
 export class UserProfileBusService implements OnDestroy {
     private readonly profile: BehaviorSubject<UserProfileDto | null>;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'UserProfileBusService';
 
     constructor(
         private session: SessionMementoService,
@@ -40,7 +41,7 @@ export class UserProfileBusService implements OnDestroy {
                 if (profile) {
                     self.profile.next(new UserProfileDto(profile.name));
                 } else if (err) {
-                    this.log.logError('auth0Adapter.getProfile', err);
+                    this.log.logError(this.LOG_SOURCE, err);
                 }
             });
     }

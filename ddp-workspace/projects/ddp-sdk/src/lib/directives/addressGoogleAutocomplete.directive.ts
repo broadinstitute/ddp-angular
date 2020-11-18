@@ -5,6 +5,7 @@ import { Address } from '../models/address';
 import { ConfigurationService } from '../services/configuration.service';
 import { Observable, Subject } from 'rxjs';
 import { concat, share, skip, takeUntil } from 'rxjs/operators';
+import { LoggingService } from '../services/logging.service';
 import * as _ from 'underscore';
 import Autocomplete = google.maps.places.Autocomplete;
 import PlaceResult = google.maps.places.PlaceResult;
@@ -26,9 +27,11 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     private scriptLoader$: Observable<any>;
     private countryCode$: Subject<string> = new Subject();
     private ngUnsubscribe = new Subject();
+    private readonly LOG_SOURCE = 'AddressGoogleAutocompleteDirective';
 
     constructor(private autocompleteInput: ElementRef,
         private scriptLoader: ScriptLoaderService,
+        private logger: LoggingService,
         @Inject('ddp.config') private configService: ConfigurationService) {
         this.scriptLoader$ = this.scriptLoader
             .load({
@@ -44,7 +47,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
                     this.setupAutocomplete();
                 }
             },
-            () => console.warn('Could not load google-maps-places script'));
+            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.'));
         // making sure that any countryCodes handled AFTER scriptloader has processed
         this.scriptLoader$.pipe(concat(this.countryCode$), skip(1), takeUntil(this.ngUnsubscribe)).subscribe((countryCode) => {
             const restrictions = this.buildAutocompleteComponentRestrictions();
