@@ -7,7 +7,7 @@ USER root
 
 # Setting up Node
 # Adapted from official Node Dockerfile https://github.com/nodejs/docker-node/blob/master/10/alpine3.11/Dockerfile
-ENV NODE_VERSION 10.20.0
+ENV NODE_VERSION 12.16.1
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
@@ -119,7 +119,7 @@ RUN apk  --no-cache add \
     && rm -rf /var/cache/apk/*
 
 # Setting up Angular CLI globally
-ENV ANGULAR_CLI @angular/cli@8.3.23
+ENV ANGULAR_CLI @angular/cli@10.1.3
 RUN npm install --global $ANGULAR_CLI
 
 # Copy and build-utils
