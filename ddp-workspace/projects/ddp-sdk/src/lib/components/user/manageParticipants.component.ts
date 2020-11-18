@@ -2,9 +2,12 @@ import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GovernedParticipantsServiceAgent } from '../../services/serviceAgents/governedParticipantsServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import { Participant } from '../../models/participant';
 import { Subject, Subscription } from 'rxjs';
-import { tap, mergeMap } from 'rxjs/operators';
+import { tap, mergeMap, concatMap, take } from 'rxjs/operators';
+import { AddParticipantPayload } from '../../models/addParticipantPayload';
+import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 
 @Component({
     selector: 'ddp-manage-participants',
@@ -20,7 +23,7 @@ import { tap, mergeMap } from 'rxjs/operators';
     <mat-list style="margin-bottom:10px">
         <h3 mat-subheader translate>SDK.ManageParticipants.ParticipantsList</h3>
         <mat-list-item *ngFor="let participant of participants" class="card-1">
-            {{ participant.alias }}
+            {{ participant.userProfile?.firstName }} {{ participant.userProfile?.lastName }}
         </mat-list-item>
     </mat-list>
   </mat-dialog-content>
@@ -55,14 +58,16 @@ export class ManageParticipantsComponent implements OnDestroy {
     private readonly LOG_SOURCE = 'ManageParticipantsComponent';
 
     constructor(
+        @Inject('ddp.config') private config: ConfigurationService,
         private serviceAgent: GovernedParticipantsServiceAgent,
+        private userProfile: UserProfileServiceAgent,
         private logger: LoggingService,
         public dialogRef: MatDialogRef<ManageParticipantsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
             tap(x => this.logger.logEvent(this.LOG_SOURCE, 'data loading...')),
-            mergeMap(x => this.serviceAgent.getList(), (x, y) => y),
+            mergeMap(x => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
             tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`)))
             .subscribe(x => {
                 this.participants = x;
@@ -76,10 +81,27 @@ export class ManageParticipantsComponent implements OnDestroy {
     }
 
     public add(): void {
-        this.serviceAgent.add(this.currentParticipant).pipe(
-            tap(x => this.logger.logEvent(this.LOG_SOURCE, 'Participant added'))
-        ).subscribe(() => this.reloadingSubject.next());
-        this.currentParticipant = '';
-        this.canSave = true;
+        const [firstName, lastName] = this.currentParticipant.split(' ');
+        const payload: AddParticipantPayload = {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        };
+
+        if (firstName) payload.firstName = firstName;
+        if (lastName) payload.lastName = lastName;
+
+        this.userProfile.profile
+            .pipe(
+                concatMap(user => this.serviceAgent.addParticipant(this.config.studyGuid, {
+                    ...payload,
+                    languageCode: user.profile.preferredLanguage,
+                })),
+                tap(() => this.logger.logEvent(this.LOG_SOURCE, 'Participant added')),
+                take(1),
+            )
+            .subscribe(() => {
+                this.reloadingSubject.next();
+                this.currentParticipant = '';
+                this.canSave = true;
+            });
     }
 }
