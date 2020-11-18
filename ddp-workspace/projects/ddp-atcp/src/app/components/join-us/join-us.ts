@@ -17,6 +17,7 @@ import {
   TemporaryUserServiceAgent,
   WindowRef,
   WorkflowServiceAgent,
+  LoggingService,
 } from 'ddp-sdk';
 
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
@@ -66,7 +67,8 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     private session: SessionMementoService,
     private temporaryUserService: TemporaryUserServiceAgent,
     private workflow: WorkflowServiceAgent,
-    private auth0: Auth0AdapterService
+    private auth0: Auth0AdapterService,
+    private loggingService: LoggingService,
   ) {}
 
   public ngOnInit(): void {
@@ -131,8 +133,17 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   private convertWorkflowResponse(
     response: ActivityResponse
   ): ActivityResponse {
+    this.loggingService.logEvent('Received a response after submitting prequal', response);
+
     if (!response.allowUnauthenticated) {
-      return new ActivityResponse('REGISTRATION');
+      const registrationActivityResponse = new ActivityResponse('REGISTRATION');
+
+      this.loggingService.logEvent(`
+        Activity response doesn't allow unauthenticated users to proceed,
+        creating a REGISTRATION type activity response
+      `, registrationActivityResponse);
+
+      return registrationActivityResponse;
     } else {
       return response;
     }

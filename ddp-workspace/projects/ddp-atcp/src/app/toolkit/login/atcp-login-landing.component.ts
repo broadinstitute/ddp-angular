@@ -1,23 +1,21 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { GovernedParticipantsServiceAgent,
-  Participant,
+import {
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
   WorkflowServiceAgent,
-  LoggingService } from 'ddp-sdk';
+  LoggingService,
+} from 'ddp-sdk';
 
 import { WorkflowBuilderService, ToolkitConfigurationService } from 'toolkit';
 
 import { Subscription } from 'rxjs';
-import { filter, take, mergeMap, tap } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-atcp-login-landing',
-  template: `
-      <toolkit-common-landing></toolkit-common-landing>
-  `
+  template: ` <toolkit-common-landing></toolkit-common-landing> `,
 })
 export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
@@ -26,12 +24,13 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
     private router: Router,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
-    private participantService: GovernedParticipantsServiceAgent,
     private workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
     private log: LoggingService,
     @Inject('ddp.config') private config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    @Inject('toolkit.toolkitConfig')
+    private toolkitConfiguration: ToolkitConfigurationService
+  ) {}
 
   public ngOnInit(): void {
     if (!this.config.doLocalRegistration && location.hash) {
@@ -43,14 +42,14 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
     }
 
     // Subscribe to session observable, so once auth session is set, then we redirect.
-    this.anchor = this.sessionService.sessionObservable.pipe(
-      filter(session => session !== null && !!session.idToken),
-      take(1),
-      mergeMap(() => this.participantService.getGovernedStudyParticipants(this.config.studyGuid)),
-      tap(participants => this.setFirstParticipant(participants))
-    ).subscribe(() => {
-      this.redirect();
-    });
+    this.anchor = this.sessionService.sessionObservable
+      .pipe(
+        filter(session => session !== null && !!session.idToken),
+        take(1)
+      )
+      .subscribe(() => {
+        this.redirect();
+      });
   }
 
   public ngOnDestroy(): void {
@@ -60,7 +59,10 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + JSON.stringify(error));
+      this.log.logEvent(
+        this.LOG_SOURCE,
+        'auth error occured: ' + JSON.stringify(error)
+      );
       if (error.code === 'unauthorized') {
         this.router.navigateByUrl('account-activation-required');
         return;
@@ -77,16 +79,13 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl(nextUrlFromStorage);
     } else {
       // No `nextUrl` set before going to auth0, query the workflow service to get where to go next.
-      this.workflowService.getNext()
+      this.workflowService
+        .getNext()
         .pipe(take(1))
-        .subscribe(response => response && this.workflowBuilder.getCommand(response).execute());
-    }
-  }
-
-  private setFirstParticipant(participants: Array<Participant>): void {
-    if (participants && participants.length) {
-      const participantGuid = participants[0].userGuid;
-      this.sessionService.setParticipant(participantGuid);
+        .subscribe(
+          response =>
+            response && this.workflowBuilder.getCommand(response).execute()
+        );
     }
   }
 }
