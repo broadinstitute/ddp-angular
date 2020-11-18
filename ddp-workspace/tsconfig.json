@@ -37,10 +37,10 @@
       "path": "./projects/ddp-brain/tsconfig.spec.json"
     },
     {
-      "path": "./projects/ddp-brain-v2/tsconfig.app.json"
+      "path": "./projects/ddp-rgp/tsconfig.app.json"
     },
     {
-      "path": "./projects/ddp-brain-v2/tsconfig.spec.json"
+      "path": "./projects/ddp-rgp/tsconfig.spec.json"
     },
     {
       "path": "./projects/ddp-atcp/tsconfig.app.json"

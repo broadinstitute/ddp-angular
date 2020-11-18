@@ -1588,7 +1588,11 @@
     },
     "ddp-rgp": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/ddp-rgp",
       "sourceRoot": "projects/ddp-rgp/src",
       "prefix": "app",
@@ -1601,7 +1605,7 @@
             "main": "projects/ddp-rgp/src/main.ts",
             "polyfills": "projects/ddp-rgp/src/polyfills.ts",
             "tsConfig": "projects/ddp-rgp/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ddp-rgp/src/favicon.ico",
               "projects/ddp-rgp/src/favicon-alert.ico",
@@ -1621,8 +1625,7 @@
               "projects/ddp-rgp/src/theme.scss",
               "projects/ddp-rgp/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1637,19 +1640,28 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
                 }
               ]
             },
             "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
               "tsConfig": "projects/ddp-rgp/tsconfig.es5.json"
             }
           }
