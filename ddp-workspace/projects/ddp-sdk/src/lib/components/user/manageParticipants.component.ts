@@ -23,7 +23,7 @@ import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfil
     <mat-list style="margin-bottom:10px">
         <h3 mat-subheader translate>SDK.ManageParticipants.ParticipantsList</h3>
         <mat-list-item *ngFor="let participant of participants" class="card-1">
-            {{ participant.userProfile.firstName }} {{ participant.userProfile.lastName }}
+            {{ participant.userProfile?.firstName }} {{ participant.userProfile?.lastName }}
         </mat-list-item>
     </mat-list>
   </mat-dialog-content>

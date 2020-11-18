@@ -30,7 +30,7 @@ import { ConfigurationService } from '../../services/configuration.service';
     <button mat-menu-item *ngFor="let participant of participants" (click)="select(participant.userGuid)">
         <mat-icon *ngIf="isSelected(participant.userGuid); else elseBlock">radio_button_checked</mat-icon>
         <ng-template #elseBlock><mat-icon>radio_button_unchecked</mat-icon></ng-template>
-        {{ participant.userProfile.firstName }} {{ participant.userProfile.lastName }}
+        {{ participant.userProfile?.firstName }} {{ participant.userProfile?.lastName }}
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item
