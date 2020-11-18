@@ -119,7 +119,7 @@ RUN apk  --no-cache add \
     && rm -rf /var/cache/apk/*
 
 # Setting up Angular CLI globally
-ENV ANGULAR_CLI @angular/cli@10.1.3
+ENV ANGULAR_CLI @angular/cli@10.2.0
 RUN npm install --global $ANGULAR_CLI
 
 # Copy and build-utils
