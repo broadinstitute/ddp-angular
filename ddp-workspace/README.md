@@ -1,11 +1,11 @@
 # DDP-Workspace
 # DataDonationPlatform Angular SDK and Toolkit libraries; basil-app, sandbox-app sample apps; ddp-angio, ddp-brain, ddp-mbc apps
 
-These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Initial steps
 ```
-nvm use 10.16.0
+nvm use 12.16.1
 npm install -g @angular/cli@10.2.0
 npm install
 ```
@@ -22,12 +22,14 @@ ng serve sandbox-app
 DDP apps:
 ```
 ng serve ddp-angio
+ng serve ddp-atcp
 ng serve ddp-brain
 ng serve ddp-mbc
-ng serve ddp-osteo
-ng serve ddp-testboston
 ng serve ddp-mpc
+ng serve ddp-osteo
+ng serve ddp-prion
 ng serve ddp-rgp
+ng serve ddp-testboston
 ```
 
 By default `ng serve` returns ES2015 files, these files are incompatible with Internet Explorer 11 in order to open app in IE11, you need to add additional param for `ng serve` and generate ES5 files, run `ng serve ddp-angio --configuration es5`
