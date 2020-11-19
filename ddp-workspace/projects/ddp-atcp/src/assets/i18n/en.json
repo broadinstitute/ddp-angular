@@ -551,7 +551,7 @@
     "Subtitle": "Countries represented"
   },
   "Survey": {
-    "Self": "Enrollment Process",
+    "Self": "{{ firstName }}'s Enrollment Process",
     "NewParticipant": "New Participant's Enrollment Process"
   },
   "Toolkit": {

@@ -551,8 +551,8 @@
     "Subtitle": "ru_Countries represented"
   },
   "Survey": {
-    "Self": "{{ firstName }}-Registrierungsprozess",
-    "NewParticipant": "New Participant-Registrierungsprozess"
+    "Self": "Процесс регистрации {{ firstName }}",
+    "NewParticipant": "Процесс регистрации New Participant"
   },
   "Toolkit": {
     "ActivityActions": {

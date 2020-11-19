@@ -17,7 +17,8 @@ import {
   WindowRef,
   AnalyticsEventsService,
   ActivityForm,
-  LoggingService
+  LoggingService,
+  LanguageService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
@@ -210,6 +211,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
   public currentActivityService: CurrentActivityService;
 
   private multiGovernedUserService: MultiGovernedUserService;
+  private languageService: LanguageService;
 
   constructor(
     logger: LoggingService,
@@ -224,6 +226,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     super(logger, windowRef, renderer, submitService, analytics, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
     this.multiGovernedUserService = injector.get(MultiGovernedUserService);
+    this.languageService = injector.get(LanguageService);
   }
 
   ngOnInit(): void {
@@ -235,6 +238,16 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     ).subscribe(isMultiGoverned => {
       this.isMultiGoverned = isMultiGoverned;
     });
+
+    this.anchor.addNew(
+      this.languageService.getProfileLanguageUpdateNotifier()
+        .subscribe((value: null | undefined) => {
+          if (value === undefined) {
+            // User manually changed preferred language
+            this.isLoaded = false;
+          }
+        })
+    );
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
