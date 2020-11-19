@@ -582,6 +582,10 @@ input.mat-input-element.study-listing-filter {
   margin-top: 0;
 }
 
+.study-listing-filter {
+ //TODO: Hebrew
+}
+
 .study-listing-filter-all-container {
     min-width: 660px;
 }
@@ -704,10 +708,6 @@ input.mat-input-element.study-listing-filter {
     width: 100%;
 }
 
-html[dir='rtl'] {
-    /* TODO: Hebrew adjustments */
-}
-
 .navbar-nav {
     float: right !important;
     width: 660px;
@@ -718,6 +718,9 @@ html[lang='es'] .navbar-nav {
 }
 
 @media only screen and (min-width: 1027px) and (max-width: 1200px) {
+    html[dir='rtl'] .Header-background {
+        padding: 30px 80px 20px 40px !important;
+    }
     .Header-background {
         padding: 30px 40px 20px 80px !important;
     }
@@ -730,6 +733,9 @@ html[lang='es'] .navbar-nav {
 }
 
 @media only screen and (min-width: 993px) and (max-width: 1026px) {
+    html[dir='rtl'] .Header-background {
+        padding: 30px 80px 20px 40px !important;
+    }
     .Header-background {
         padding: 30px 40px 20px 80px !important;
     }
@@ -760,6 +766,9 @@ html[lang='es'] .navbar-nav {
     html[lang='zh'] .navbar-nav {
         width: 340px !important;
     }
+    html[dir="rtl"] .navbar-nav {
+        width: 400px !important;
+    }
     .navbar-nav {
         width: 415px !important;
     }
@@ -769,11 +778,11 @@ html[lang='es'] .navbar-nav {
 @media only screen and (min-width: 768px) {
     html[dir='rtl'] .navbar-header {
         float: right !important;
-        padding: 0 25px 25px 20px !important;
     }
 
     html[dir='rtl'] .navbar-nav {
         float: left !important;
+        padding-right: 0;
     }
 }
 
@@ -863,7 +872,11 @@ html[lang='es'] .navbar-nav {
 }
 
 .Nav-item:first-of-type {
-  padding-left: 20px !important;
+    padding-left: 20px !important;
+}
+
+html[dir='rtl'] .Nav-item:first-of-type {
+    padding-left: 0 !important;
 }
 
 #JoinUsLink {
@@ -2200,6 +2213,10 @@ p.ddp-question-prompt{
   margin-bottom: 0 !important;
 }
 
+html[dir='rtl'] .BulletItem {
+    text-align: right;
+}
+
 .BulletItem {
   display: list-item;
   list-style-type: disc;
@@ -2293,6 +2310,10 @@ p.Input-label {
 
 .ddp-textarea {
     height: 1.5rem !important;
+}
+
+html[dir='rtl'] .ddp-answer-container {
+    flex-direction: row-reverse;
 }
 
 .ddp-answer-container {
@@ -2421,6 +2442,10 @@ ddp-activity-composite-answer .ddp-answer-container {
 .ddp-picklist-group-title {
     font-size: 1.25rem;
     font-weight: 500;
+}
+
+html[dir='rtl'] .example-radio-group {
+    flex-direction: row-reverse;
 }
 
 .example-radio-group {
@@ -3310,6 +3335,10 @@ p.Medium {
   padding: 0;
 }
 
+html[dir='rtl'] .cookiesBanner {
+    flex-direction: row-reverse;
+}
+
 .cookiesBanner {
   display: flex;
   flex-direction: row;
@@ -3380,6 +3409,21 @@ p.Medium {
   .cookiesBanner {
     padding: 15px;
   }
+}
+
+html[dir='rtl'] .cookiesModal.cookiesModal--header,
+html[dir='rtl'] .privacyModal.privacyModal--header {
+    flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .cookiesModal.cookiesModal--actions,
+html[dir='rtl'] .privacyModal.privacyModal--header {
+    flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .cookiesModal.cookiesModal--tabHeader,
+html[dir='rtl'] .privacyModal.privacyModal--tabHeader {
+    flex-direction: row-reverse;
 }
 
 .cookiesModal, .privacyModal {
@@ -3472,6 +3516,13 @@ p.Medium {
     }
   }
 }
+
+html[dir='rtl'] .toolkit-cookies-preferences-modal .mat-tab-group,
+html[dir='rtl'] .toolkit-cookies-preferences-modal .mat-radio-group
+{
+    flex-direction: row-reverse;
+}
+
 
 toolkit-cookies-preferences-modal {
   .mat-tab-group {
@@ -3596,6 +3647,11 @@ toolkit-privacy-policy-modal {
     }
   }
 
+  html[dir='rtl'] .toolkit-cookies-preferences-modal .mat-tab-labels,
+  html[dir='rtl'] .toolkit-cookies-preferences-modal .mat-tab-labels {
+      flex-direction: row-reverse;
+  }
+
   toolkit-cookies-preferences-modal {
     .mat-tab-group {
       flex-direction: column;
@@ -3672,6 +3728,10 @@ toolkit-privacy-policy-modal {
   }
 }
 
+html[dir='rtl'] .mat-dialog-container {
+    direction: rtl;
+}
+
 toolkit-privacy-policy-modal {
   .Container, .PageContent {
     background: transparent;
@@ -3746,6 +3806,10 @@ app-third-party {
   border: 1px solid #9E9E9E !important;
   background-color: #9E9E9E !important;
   color: #ffffff !important;
+}
+
+html[dir='rtl'] .ModalActivity.header {
+    flex-direction: row-reverse;
 }
 
 .ModalActivity {
