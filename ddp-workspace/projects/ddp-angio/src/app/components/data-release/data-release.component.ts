@@ -19,6 +19,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                 </div>
             </div>
         </div>
+
         <article class="PageContent">
             <div class="PageLayout">
                 <div class="row NoMargin">
@@ -67,6 +68,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                         <li class="PageContent-text PageContent-text-list">{{item}}</li>        
                                     </ng-container>
                                 </ul>
+
                                 <h2 class="PageContent-title" translate>Toolkit.DataRelease.GDC.Title</h2>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.GDC.Paragraph1</p>
                                 <p class="PageContent-text">
@@ -88,6 +90,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                     <h2 class="PageContent-subtitle">{{item.Question}}</h2>
                                     <p class="PageContent-text">{{item.Answer}}</p> 
                                 </ng-container>
+
                                 <h2 class="PageContent-title" translate>Toolkit.DataRelease.FAQ.Title</h2>
                                 <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Dataset.Question</h2>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Dataset.Answer</p>
@@ -188,16 +191,20 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
         .PageContent-title, .PageContent-subtitle {
             color: black;
         }
+
         .PageContent-ul li, ul li.PageContent-text {
             padding: 0;
             margin: 10px 0;
         }
+
         .margin-top {
             margin: 20px 0 0 0;
         }
+
         .margin-top-bottom {
             margin: 20px 0;
         }
+
         .PageContent {
             padding: 50px 0 20px 0;
         }
