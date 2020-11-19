@@ -13,7 +13,7 @@ export class AdminAuthGuard implements CanActivate {
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const isLoggedIn = this.session.isAuthenticatedAdminSession();
     if (!isLoggedIn) {
-      sessionStorage.setItem('nextUrl', state.url);
+      sessionStorage.setItem('adminNextUrl', state.url);
       this.auth0.adminLogin();
     }
     return isLoggedIn;

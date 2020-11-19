@@ -111,128 +111,136 @@
         },
         "DataRelease": {
             "Title": "ASCproject Data",
-            "ViewDataButton": "VIEW THE ASCPROJECT DATA",
-            "ViewDataBrowser": "VIEW THE ASCPROJECT PATIENT DATA BROWSER",
+            "ViewDataButton": "VIEW THE ASC PROJECT DATA ON CBIOPORTAL",
             "ViewPaperButton": "VIEW OUR PUBLISHED RESEARCH ON THE ASCPROJECT",
-            "MainText": {
-                "Section1": "The ASCproject has released data that is publicly available in cBioPortal. This data is being released as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
-                "Section2": "We have focused our efforts on generating and releasing this data so that the entire research community can have access to it. As we generate more data over time, we anticipate that this will accelerate discoveries in angiosarcoma.",
-                "Section3": "To everybody who is taking part in the ASCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data."
+            "ViewDataInGDC": "VIEW THE ASCPROJECT DATA IN GDC",
+            "Intro": {
+                "Paragraph1": "The goal of publicly releasing ASCproject data is to share clinical, genomic, molecular, and patient-reported data on angiosarcoma. Sharing this data enables researchers across the globe to drive their research forward, which we hope will accelerate discoveries and the development of new treatment strategies in this exceedingly rare cancer.",
+                "Paragraph2": "The ASCproject is an ongoing research initiative. The project will continue to enroll patients and request saliva, blood, and tissue samples indefinitely. The ASCproject publicly releases data as it is generated, and as the project continues to enroll patients, more data will be added regularly.",
+                "Paragraph3": "This page is dedicated to describing the data that we’ve collected and how we’ve distributed it. If you’re a patient or a researcher and have questions about the data, please reach out to",
+                "Paragraph4": "This unprecedented work of the ASCproject to partner with patients to obtain tumor samples, saliva, blood, and medical records has enabled discoveries, which in turn led to a publication, “The Angiosarcoma Project: enabling genomic and clinical discoveries in rare cancer through patient partnered research,” published in Nature Medicine in February 2020.  Click here to view the publication:",
+                "Paragraph5": "To everyone taking part in the ASCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data.",
+                "Paragraph6": "Below you can find additional details and FAQ about ASCproject data and where it has been released. To date, the ASCproject has made data available in the cBioPortal for Cancer Genomics (cBioPortal) and the NCI Genomic Data Commons (GDC).",
+                "Paragraph7": "We have data freely available in different databases in order to drive discoveries. Some data, that contains information on the mutations within a person's tumor as well as de-identified clinical data are housed in cBioPortal, which doesn't require a login. This data is used by the biomedical community to understand cancer genomics. In addition, we work with the GDC to house the raw, underling genomic data which is still freely available, but has additional layers of protection and access control since it contains genetic information that is more details about the individual participants."
             },
-            "InformationList": {
-                "Title": "Below, you will find the following information:",
-                "Item1": "Link to the ASCproject data",
-                "Item2": "Additional information about this data release",
-                "Item3": "List of common terms used in this research",
-                "Item4": "Link to the methods used to generate this data"
-            },
-            "Contact": {
-                "TextPt1": "Please feel free to contact us at",
-                "TextPt2": "with any questions and include “Data Release” in your email subject line. This page will be updated regularly with additional information."
-            },
-            "BioPortal": {
+            "cBioPortal": {
                 "Title": "The ASCproject Data on cBioPortal",
-                "Link": "Visit cBioPortal to explore the ASCproject data"
+                "Paragraph1": "The ASCproject data on cBioPortal includes clinical, genomic, and patient-reported data. The genomic data in cBioPortal has been analyzed by our team and includes mutations, insertions/deletions, amplifications from whole exome sequencing (WES) on tumor samples.",
+                "Paragraph2": "The ASCproject July 2020 provisional dataset is derived from 83 samples, including tumor specimens (FFPE and cfDNA) from 62 angiosarcoma patients subjected to WES (along with matched germline WES). This study includes genomic data, patient-reported data (pre-pended as PRD), medical record data (MedR), and pathology report data (PATH).",
+                "Paragraph3": {
+                    "Part1": "Please note, an archived dataset version from the ASCproject is also available in cBioPortal. This data set was used in the analysis for our publication, “The Angiosarcoma Project: enabling genomic and clinical discoveries in rare cancer through patient partnered research” and has been designated on cBioPortal as",
+                    "Link": "“The Angiosarcoma Project - Count Me In (Nature Medicine, 2020)”",
+                    "Part2": "Samples within this “ASCproject cBioPortal data version Nature Medicine 2020” dataset continue to be included as part of subsequent ASCproject cBioPortal provisional datasets."
+                },
+                "Paragraph4": "Data elements included in cBioPortal:",
+                "List": [
+                    "Genomic Information: WES information for each tumor sample, including mutations, small insertions/deletions, amplifications, and deletions for more than 20,000 genes.",
+                    "Medical Record (MedR): Anonymized information about diagnosis that was abstracted from patients’ medical records.",
+                    "Pathology (PATH): Detailed histologic information about each sample was abstracted by an expert pathologist who reviewed each sample after it was acquired by the ASCproject.",
+                    "Patient-reported (PRD): Answers to an optional 17-question survey for participants about their experiences with angiosarcoma."
+                ]
             },
-            "AdditionalInfoTitle": "Additional Information About the Genomic Data Release",
-            "Goal": {
-                "Title": "What is the goal of this data release?",
-                "Text": "The goal of this public data release is to share clinical, genomic, molecular, and patient-reported data on angiosarcoma to accelerate discoveries and the development of new treatment strategies in this exceedingly rare cancer. Our goal is to add new data to the collection every 6 months."
-            },
-            "Difference": {
-                "Title": "What makes this data different from what is found in existing studies?",
-                "Text": "The collection of data in this release is different for several reasons:",
-                "ReasonsList": {
-                    "Item1": "ALL patients included in the study have angiosarcoma.",
-                    "Item2": {
-                        "Main": "Data for every patient includes:",
-                        "SubItem1": "Whole Exome Sequencing (WES) on all samples (as compared to a targeted sequencing panel or other more limited testing)",
-                        "SubItem2": "Samples annotated with demographic, diagnostic, and pathology data (we plan to add more clinical data to subsequent data releases)",
-                        "SubItem3": "Samples annotated with patient-reported data from the ASCproject enrollment survey"
+            "GDC": {
+                "Title": "The ASCproject Data in the NCI Genomic Data Commons (GDC)",
+                "Paragraph1": "The Genomic Data Commons (GDC) is a research program from the National Cancer Institute, which provides a data repository to share data across cancer genomic studies. We have provided the GDC with genomic data from the Angiosarcoma Project, including WES and RNA sequencing. The GDC has harmonized these DNA sequencing files through their established analysis pipelines. The harmonized genomic data and unprocessed genomic data is available in the GDC Data Portal, along with limited clinical information.",
+                "Paragraph2": {
+                    "Part1": "Genomic data in GDC is protected and those who wish to use it must request access. To learn more about the CMI Data available in GDC visit the",
+                    "Link": "Count Me In data source",
+                    "Part2": "page."
+                },
+                "Questions": [
+                    {
+                        "Question": "How can I connect ASCproject data in both repositories for research?",
+                        "Answer": "Many samples and patients from the ASCproject are shared in both cBioPortal and the GDC, though each repository uses different sample and patient IDs. In order to connect ASCproject data elements across repositories, there is a key file provided in GDC. This file provides a link in between the PATIENT_ID used in the GDC and the Patient_IDs provided for the same patients/samples in cBioPortal."
                     },
-                    "Item3": "All of this data has been generated through direct partnership with patients"
-                }
-            },
-            "Additional": {
-                "Title": "Will the ASCproject generate and release additional data?",
-                "TextPt1": "Yes, the ASCproject is an ongoing research initiative. The project will continue to enroll patients and request saliva, blood, and tissue samples indefinitely. Our goal is to release additional data every 6 months as it is generated. We have already had two data releases in 2018.",
-                "TextPt2": "We also will be adding additional clinical fields, captured from patient medical records, as we learn more about what information is most valuable to the research community. In upcoming releases, we plan on adding additional fields including:",
-                "FieldsList": {
-                    "Item1": "Treatment information",
-                    "Item2": "Information on location of metastatic sites",
-                    "Item3": "Other cancer diagnoses",
-                    "Item4": "Surgery information",
-                    "Item5": "Previous radiation therapy"
-                }
-            },
-            "DataIncluded": {
-                "Title": "What data elements are included?",
-                "Text": "Data is included for the following categories:",
-                "DataList": {
-                    "Item1": "Genomic Information<br>Whole Exome Sequencing (WES) information for each tumor sample, including mutations, small insertions/deletions, amplifications, and deletions.",
-                    "Item2": "Medical Record (MedR): All information that was derived from a medical record is denoted with the prefix MedR<br>Information about diagnosis that was abstracted from patients’ medical records.",
-                    "Item3": "Pathology (PATH): All information regarding pathology is denoted with the prefix PATH<br>Detailed histologic information about each sample was abstracted by an expert pathologist who reviewed each sample after it was acquired by the ASCproject.",
-                    "Item4": "Patient-reported (PRD): All patient-reported data elements are denoted with the prefix PRD<br>Every patient that registered for the study had the option of completing a 17-question survey about their experiences with angiosarcoma. Thirteen questions from this survey have been abstracted for inclusion. These responses have been cleaned and formatted to prevent individual identification without altering scientific utility."
-                }
-            },
-            "Resources": {
-                "Title": "Are there resources to define the terminology used in this data release?",
-                "TextPt1": "At the",
-                "TextPt2": "page are The National Cancer Institute’s comprehensive dictionary of clinical terms, as well as definitions of some common genomic terms.",
-                "Link": "bottom of this"
-            },
-            "Cite": {
-                "Title": "How should this data be cited?",
-                "TextPt1": "We encourage use of this data for your research studies and publications. To help us track data usage, we kindly ask that you send us an email at",
-                "TextPt2": "to let us know whenever you have published or presented work using or referencing this dataset. We also request that you please include the following attribution: \"The results included here include the use of data from The Angiosarcoma Project (https://ascproject.org/), a project of Count Me In (https://joincountmein.org/).\""
-            },
-            "Unknown": {
-                "Title": "Why are some attributes “Unknown” for some cases and not for others?",
-                "Text": "All of the clinical information that is gathered comes directly from medical records or pathology reports. If the complete report or record that was received did not explicitly contain the information, the field was marked as “Unknown” in order to ensure accuracy."
-            },
-            "Samples": {
-                "Title": "Why are there more samples than patients?",
-                "Text": "For some patients, we were able to obtain multiple biopsy samples. Multiple biopsy samples are requested in cases where having multiple biopsies can help answer an important scientific question and where there is ample tissue available for research while still ensuring that tissue is left behind for future clinical use."
-            },
-            "Sequence": {
-                "Title": "Will everyone who registers for this study have their tumor sequenced?",
-                "Text": "As of September 2018, over 338 women and men with angiosarcoma have registered for the project and over 125 loved ones have filled out a survey on behalf of a loved one who passed away from the disease. Of these registrants, over 286 have provided consent. Approximately 174 patients have sent in saliva kits. Medical records and tumor samples are being requested for everyone who has signed the consent form that allows for tissue acquisition and who lives in the USA or Canada. Obtaining medical records and tissue samples is a manual process involving faxes, phone calls, and additional follow up. The ultimate goal is to obtain medical records and tumors from as many consenting patients as possible, and to release new data in 6 month intervals as it is generated."
-            },
-            "Inform": {
-                "Title": "Can I use this data to inform my clinical care?",
-                "Text": "This data is intended to be used for research purposes only. Genomic data included in this study is generated in a research lab, not in a clinical lab. All annotations have been de-identified. Therefore, this data cannot be used to inform clinical decision-making. Some of the data has been intentionally altered to protect confidentiality in a way that does not affect data integrity (for example, Age at Diagnosis has been binned in 5 year intervals)."
-            },
-            "Appendices": {
-                "Title": "Appendices",
-                "AppendicesList": {
-                    "Item1": {
-                        "Link": "Methods",
-                        "Text": "Detailed methods for how these data were generated and analyzed."
-                    },
-                    "Item2": {
-                        "Link": "About You Survey",
-                        "Text": "The 17 question enrollment survey."
-                    },
-                    "Item3": {
-                        "Link": "Consent and Release",
-                        "Text": "Forms documenting informed consent and contact information."
-                    },
-                    "Item4": {
-                        "Link": "Saliva Sample Instructions",
-                        "Text": "Included in each saliva kit."
-                    },
-                    "Item5": {
-                        "Link": "Blood Sample Instructions",
-                        "Text": "Included in each blood sample kit."
+                    {
+                        "Question": "Why are some data elements available for some cases and not for others?",
+                        "Answer": "All of the clinical information that is gathered comes directly from medical records or pathology reports. If the report or record that was received did not explicitly contain the information, the field was marked as “Unknown” or “N/A” in order to ensure accuracy. For patient-reported data, if the field was not completed by a patient, the field is marked as “Not Reported.”"
                     }
-                }
+                ]
             },
-            "Glossary": {
-                "Title": "Glossary",
-                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
-                "Additional": {
-                    "TextPt1": "If there are additional terms that you would like defined that are not included in the National Cancer Institute Dictionary, please send an email to",
-                    "TextPt2": "and include “New Glossary Term:” in your email subject line. We will be creating a glossary to define some of the genomics terms seen on cBioPortal."
+            "FAQ": {
+                "Title": "Additional FAQ About ASCproject Data",
+                "Dataset": {
+                    "Question": "What is unique about the ASCproject dataset?",
+                    "Answer": "The collection of data in this release is different for several reasons:",
+                    "List": [
+                        {
+                            "Text": "ALL patients included in the study have angiosarcoma",
+                            "SubList": []
+                        },
+                        {
+                            "Text": "All of this data has been generated through direct partnership with patients",
+                            "SubList": []
+                        },
+                        {
+                            "Text": "Sample types include saliva and blood for germline or normal DNA, FFPE and cell-free DNA (cfDNA) from tumor samples, and RNA derived from FFPE tumor samples",
+                            "SubList": []
+                        },
+                        {
+                            "Text": "Data for patients may include the following elements:",
+                            "SubList": [
+                                "Whole Exome Sequencing (WES) on all samples (as compared to a targeted sequencing panel or other more limited testing)",
+                                "Demographic, diagnostic, and pathology data from medical records and pathology reports",
+                                "Additional clinical data including treatment information (including previous radiation), location of metastatic sites, other cancer diagnoses, and surgeries from medical records",
+                                "Patient-reported data from the ASCproject surveys"
+                            ]
+                        }
+                    ]
+                },
+                "ClinicalCare": {
+                    "Question": "As a participant in the project, can I use this data to inform my clinical care?",
+                    "Answer": "This data is for research purposes only. Genomic data included in this study is generated in a research lab, not in a clinical lab. All samples have been de-identified. Therefore, this data cannot be used to inform clinical decision-making. Some of the data has been intentionally altered to protect confidentiality in a way that does not affect data integrity (for example, Age at Diagnosis has been binned in 5 year intervals)."
+                },
+                "Samples": {
+                    "Question": "Why are there more samples than patients?",
+                    "Answer": "For some patients, we are able to obtain multiple biopsy samples. Multiple biopsy samples are requested in cases where there is ample tissue available for research, while still ensuring that tissue is available for future clinical use."
+                },
+                "Methods": {
+                    "Question": "How can I learn more about the methods used to generate ASCproject data?",
+                    "Answer": {
+                        "Part1": "As the study staff is consistently improving and updating our project processes and analytical pipelines, please feel free to contact us",
+                        "Part2": "to learn more about the current methods of the ASCproject."
+                    }
+                },
+                "Cited": {
+                    "Question": "How should this data be cited or attributed for presentations or publications?",
+                    "Answer1": "We encourage use of this data for your research studies and publications. To cite the Angiosarcoma Project, please include a citation for the ASCproject manuscript [Nat Med. 2020 Feb;26(2):181-187; doi: 10.1038/s41591-019-0749-z].",
+                    "Answer2": {
+                        "Part1": "Note, this manuscript utilized the archived dataset",
+                        "Link": "“ASCproject cBioPortal data version Nature Medicine 2020”",
+                        "Part2": "the samples of which continue to be part of the subsequent ASCproject cBioPortal provisional datasets."
+                    },
+                    "Answer3": "Given that we release ASCproject data in different platforms and recurrently within the same platform, we would kindly request that in a methods section you indicate which specific version of the ASCproject dataset (platform and release date) was utilized. (ie., \"ASCproject cBioPortal data version July 2020\"). Please let us know if you have any questions."
+                },
+                "Appendices": {
+                    "Title": "Appendices",
+                    "List": [
+                        {
+                            "Link": "About You Survey",
+                            "Text": "The 17 question enrollment survey.",
+                            "PDF": "AboutYouSurvey.pdf"
+                        },
+                        {
+                            "Link": "Consent and Release",
+                            "Text": "Forms documenting informed consent and contact information.",
+                            "PDF": "ConsentAndRelease.pdf"
+                        },
+                        {
+                            "Link": "Saliva Sample Instructions",
+                            "Text": "Included in each saliva kit.",
+                            "PDF": "SalivaSampleInstructions.pdf"
+                        },
+                        {
+                            "Link": "Blood Sample Instructions",
+                            "Text": "Included in each blood sample kit.",
+                            "PDF": "BloodSampleInstructions.pdf"
+                        }
+                    ]
+                },
+                "Terminology": {
+                    "Title": "Resources to define terminology used in ASCproject data",
+                    "Text": "Here is a glossary from The National Cancer Institute’s comprehensive dictionary of clinical terms, as well as definitions of some common genomic terms."
                 }
             },
             "DataBrowser": {

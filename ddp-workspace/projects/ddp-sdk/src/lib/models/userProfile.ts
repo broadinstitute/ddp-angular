@@ -7,4 +7,7 @@ export class UserProfile {
     public preferredLanguage: string | null;
     public firstName: string | null;
     public lastName: string | null;
+    public enrollmentStatus: string | null;
+    public consoleActions: Array<{ name: string; href: string }> | null;
+    public skipLanguagePopup: boolean | null;
 }

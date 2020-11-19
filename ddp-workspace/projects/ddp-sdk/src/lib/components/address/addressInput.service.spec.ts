@@ -3,10 +3,10 @@ import { AddressInputService } from './addressInput.service';
 import { CountryService } from '../../services/addressCountry.service';
 import { AddressService } from '../../services/address.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { combineLatest, of, timer } from 'rxjs';
-import { bufferCount, combineAll, skip, startWith, tap } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { bufferCount } from 'rxjs/operators';
 import { Address } from '../../models/address';
-import { fail } from 'assert';
+import { LoggingService } from '../../services/logging.service';
 
 
 describe('AddressInputService', () => {
@@ -14,6 +14,7 @@ describe('AddressInputService', () => {
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let addressServiceSpy: jasmine.SpyObj<AddressService>;
   let cdrSpy: jasmine.SpyObj<ChangeDetectorRef>;
+  let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
   beforeEach(() => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['findCountryInfoByCode']);
     countryServiceSpy.findCountryInfoByCode.and.callFake((arg) => {
@@ -29,8 +30,9 @@ describe('AddressInputService', () => {
     });
     addressServiceSpy = jasmine.createSpyObj('AddressService', ['verifyAddress']);
     cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
+    loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logDebug']);
     TestBed.configureTestingModule({});
-    ais = new AddressInputService(countryServiceSpy, addressServiceSpy, cdrSpy);
+    ais = new AddressInputService(loggingServiceSpy, countryServiceSpy, addressServiceSpy, cdrSpy, false);
   });
 
   it('should be created', () => {

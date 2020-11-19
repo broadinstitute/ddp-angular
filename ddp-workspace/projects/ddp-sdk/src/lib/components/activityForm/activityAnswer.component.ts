@@ -9,6 +9,7 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
     selector: 'ddp-activity-answer',
     template: `
     <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block) && block.shown"
+                                 [class]="'boolean-answer-' + block.stableId"
                                  [block]="block"
                                  [readonly]="readonly"
                                  (valueChanged)="onChange($event)">
@@ -19,11 +20,13 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
                               (valueChanged)="onChange($event)">
     </ddp-activity-text-answer>
     <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) && block.shown"
+                                 [class]="'numeric-answer-' + block.stableId"
                                  [block]="block"
                                  [readonly]="readonly"
                                  (valueChanged)="onChange($event)">
     </ddp-activity-numeric-answer>
     <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block) && block.shown"
+                                  [class]="'picklist-answer-' + block.stableId"
                                   [block]="block"
                                   [readonly]="readonly"
                                   (valueChanged)="onChange($event)">
@@ -35,6 +38,7 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
                               (valueChanged)="onChange($event)">
     </ddp-activity-date-answer>
     <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block) && block.shown"
+                                   [class]="'composite-answer-' + block.stableId"
                                    [block]="block"
                                    [readonly]="readonly"
                                    [validationRequested]="validationRequested"

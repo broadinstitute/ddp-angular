@@ -1,89 +1,86 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import {
   Auth0CodeCallbackComponent,
   AuthGuard,
+  ChangeLanguageRedirectComponent,
   IrbGuard,
   BrowserGuard
 } from 'ddp-sdk';
 
+import { CookiesConsentGuard } from 'toolkit';
+
 import {
-  ActivityPageComponent,
-  ActivityComponent,
-  DashboardComponent,
-  LoginLandingComponent,
-  ErrorComponent,
-  StayInformedComponent,
-  PasswordComponent,
-  RedirectToLoginLandingComponent,
-  WorkflowStartActivityComponent,
-  InternationalPatientsComponent,
-  SessionExpiredComponent,
-  LovedOneThankYouComponent,
-  RedirectToAuth0LoginComponent
-} from 'toolkit';
+  PrionDashboardComponent,
+  PrionActivityPageComponent,
+  PrionActivityComponent,
+  PrionWorkflowStartActivityComponent,
+  PrionErrorComponent,
+  PrionSessionExpiredComponent,
+  PrionPasswordComponent,
+  PrionLoginLandingComponent,
+  PrionRedirectToAuth0LoginComponent,
+  PrionRedirectToLoginLandingComponent
+} from 'toolkit-prion';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LearnMoreComponent } from './components/learn-more/learn-more.component';
+import { StudyListingComponent } from './components/study-listing-component/study-listing.component';
+import { RedirectJoinComponent } from './components/redirect-join/redirect-join.component';
+import { PrivacyPolicyFullComponent } from './components/privacy-policy/privacy-policy-full.component';
+import { ThirdPartyComponent } from './components/third-party/third-party.component';
 
 const routes: Routes = [
   {
-    path: 'about-you',
-    component: ActivityPageComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
-    data: {
-      activityGuid: 'ANGIOABOUTYOU',
-      createActivityInstance: true
-    }
-  },
-  {
     path: 'consent',
-    component: ActivityPageComponent,
+    component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ],
     data: {
-      activityGuid: 'ANGIOCONSENT'
+      activityGuid: 'PRIONCONSENT'
     }
   },
   {
-    path: 'release-survey',
-    component: ActivityPageComponent,
+    path: 'medical',
+    component: PrionActivityPageComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ],
     data: {
-      activityGuid: 'ANGIORELEASE'
+      activityGuid: 'PRIONMEDICAL'
     }
   },
   {
-    path: 'loved-one',
-    component: ActivityPageComponent,
+    path: '3rd-party',
+    component: ThirdPartyComponent,
     canActivate: [
       IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
-    data: {
-      activityGuid: 'ANGIOLOVEDONE',
-      createActivityInstance: true
-    }
+      CookiesConsentGuard
+    ]
+  },
+  {
+    path: 'study-listing',
+    component: StudyListingComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: PrionDashboardComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
@@ -95,83 +92,109 @@ const routes: Routes = [
   },
   {
     path: 'activity/:id',
-    component: ActivityComponent,
+    component: PrionActivityComponent,
     canActivate: [
       IrbGuard,
+      CookiesConsentGuard,
       BrowserGuard,
       AuthGuard
     ]
   },
   {
     path: 'login-landing',
-    component: LoginLandingComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'login-landing/:mode',
-    component: RedirectToAuth0LoginComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'count-me-in',
-    component: WorkflowStartActivityComponent,
+    component: PrionLoginLandingComponent,
     canActivate: [
       IrbGuard,
-      BrowserGuard
+      CookiesConsentGuard
     ]
   },
   {
-    path: 'about-us',
-    component: AboutUsComponent,
-    canActivate: [IrbGuard]
+    path: 'login-landing/:mode',
+    component: PrionRedirectToAuth0LoginComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
+  },
+  {
+    path: 'redirect-join',
+    component: RedirectJoinComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
+  },
+  {
+    path: 'change-language-redirect',
+    component: ChangeLanguageRedirectComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
+  },
+  {
+    path: 'start-study',
+    component: PrionWorkflowStartActivityComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
   },
   {
     path: 'error',
-    component: ErrorComponent,
-    canActivate: [IrbGuard]
+    component: PrionErrorComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
-    path: 'more-details',
-    component: MoreDetailsComponent,
-    canActivate: [IrbGuard]
+    path: 'learn-more',
+    component: LearnMoreComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
-    path: 'stay-informed',
-    component: StayInformedComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'loved-one-thank-you',
-    component: LovedOneThankYouComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'international-patients',
-    component: InternationalPatientsComponent,
-    canActivate: [IrbGuard]
+    path: 'privacy-policy',
+    component: PrivacyPolicyFullComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'password-reset-done',
-    component: RedirectToLoginLandingComponent,
-    canActivate: [IrbGuard]
+    component: PrionRedirectToLoginLandingComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: 'session-expired',
-    component: SessionExpiredComponent,
+    component: PrionSessionExpiredComponent,
     canActivate: [
       IrbGuard,
-      BrowserGuard
+      BrowserGuard,
+      CookiesConsentGuard
     ]
   },
   {
     path: 'password',
-    component: PasswordComponent
+    component: PrionPasswordComponent
   },
   {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
-    canActivate: [IrbGuard]
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard
+    ]
   },
   {
     path: '**',

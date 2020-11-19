@@ -4,7 +4,7 @@ import { ActivityBooleanQuestionBlock } from '../../models/activity/activityBool
 @Component({
     selector: 'ddp-activity-boolean-answer',
     template: `
-        <ddp-question-prompt [block]="block"></ddp-question-prompt>
+    <ddp-question-prompt [block]="block"></ddp-question-prompt>
     <div>
         <mat-radio-group class="example-radio-group"
                         [(ngModel)]="block.answer"

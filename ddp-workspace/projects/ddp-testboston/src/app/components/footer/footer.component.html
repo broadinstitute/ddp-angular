@@ -6,25 +6,21 @@
                 <ul class="list list_extended">
                     <div class="list__column">
                         <li>
-                            <a class="Link footer-link" routerLink="/" translate>Navigation.Home</a>
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" translate>Navigation.Home</a>
                         </li>
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="about-the-study"
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="about-the-study"
                                 (click)="scrollToAnchor('about-the-study')" translate>Navigation.About</a>
-                        </li>
-                        <li>
-                            <a class="Link footer-link" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
-                                translate>Navigation.Q&A</a>
                         </li>
                     </div>
                     <div class="list__column">
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="who-we-are"
-                                (click)="scrollToAnchor('who-we-are')" translate>Navigation.WhoWeAre</a>
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="q&a"
+                                (click)="scrollToAnchor('q&a')" translate>Navigation.Q&A</a>
                         </li>
                         <li>
-                            <a class="Link footer-link" routerLink="/" fragment="stay-informed"
-                                (click)="scrollToAnchor('stay-informed')" translate>Navigation.StayInformed</a>
+                            <a class="Link Link_no-wrap footer-link" routerLink="/" fragment="who-we-are"
+                                (click)="scrollToAnchor('who-we-are')" translate>Navigation.WhoWeAre</a>
                         </li>
                     </div>
                 </ul>
@@ -33,10 +29,10 @@
                 <p class="column__title" translate>Navigation.Titles.ContactUs</p>
                 <ul class="list">
                     <li>
-                        <a class="Link footer-link" [href]="phoneHref">{{phone}}</a>
+                        <a class="Link Link_no-wrap Link-phone footer-link" [href]="phoneHref">{{phone}}</a>
                     </li>
                     <li>
-                        <a class="Link footer-link" [href]="emailHref">{{email}}</a>
+                        <a class="Link Link_no-wrap footer-link" [href]="emailHref">{{email}}</a>
                     </li>
                 </ul>
             </div>
@@ -47,13 +43,13 @@
                         <ddp-sign-in-out></ddp-sign-in-out>
                     </li>
                     <li *ngIf="!isAuthenticated">
-                        <a class="Link footer-link" [routerLink]="'/' + appRoutes.Join"
+                        <a class="Link Link_no-wrap footer-link" [routerLink]="'/' + appRoutes.Join"
                             routerLinkActive="footer-link_active" translate>Navigation.Invitation</a>
                     </li>
                     <li>
-                        <a class="Link footer-link" [href]="language + '/kit-instructions.pdf'" target="_blank"
-                            translate>
-                            Navigation.KitInstructions
+                        <a class="Link footer-link" [routerLink]="'/' + appRoutes.UPS"
+                            routerLinkActive="footer-link_active" translate>
+                            Navigation.Help
                         </a>
                     </li>
                 </ul>

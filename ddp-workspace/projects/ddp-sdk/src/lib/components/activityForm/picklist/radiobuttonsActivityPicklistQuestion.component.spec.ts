@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -22,14 +22,18 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 optionLabel: 'I have received medications',
                 allowDetails: true,
                 detailLabel: '',
-                tooltip: 'Helper text'
+                tooltip: 'Helper text',
+                nestedOptionsLabel: null,
+                nestedOptions: null
             },
             {
                 stableId: 'BBB',
                 optionLabel: 'I have not received any medications',
                 allowDetails: false,
                 detailLabel: '',
-                tooltip: null
+                tooltip: null,
+                nestedOptionsLabel: null,
+                nestedOptions: null
             }
         ],
         renderMode: 'LIST',
@@ -56,14 +60,17 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
     let debugElement: DebugElement;
     const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
     ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of(['Singular Translation', 'Plural Translation']);
+        return of({
+            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
+            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
+        });
     });
     const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
     configServiceSpy.tooltipIconUrl.and.callFake(() => {
         return '/path/';
     });
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,
@@ -83,7 +90,7 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 TooltipComponent
             ]
         }).compileComponents();
-    }));
+    });
 
     describe('test as a class', () => {
         beforeEach(() => {

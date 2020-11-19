@@ -9,7 +9,8 @@ import { filter, take } from 'rxjs/operators';
 import {
   SessionMementoService,
   Auth0AdapterService,
-  ConfigurationService
+  ConfigurationService,
+  LoggingService
 } from 'ddp-sdk';
 
 @Component({
@@ -20,9 +21,11 @@ import {
 })
 export class AdminLoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
+  private readonly LOG_SOURCE = 'AdminLoginLandingComponent';
 
   constructor(
     private router: Router,
+    private logger: LoggingService,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
     @Inject('ddp.config') private config: ConfigurationService,
@@ -51,19 +54,19 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(error);
+      this.logger.logError(this.LOG_SOURCE, error);
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 
   private redirect(): void {
-    const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
+    const nextUrlFromStorage = sessionStorage.getItem('adminNextUrl');
     if (nextUrlFromStorage) {
-      // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
-      sessionStorage.removeItem('nextUrl');
+      // `adminNextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
+      sessionStorage.removeItem('adminNextUrl');
       this.router.navigateByUrl(nextUrlFromStorage);
     } else {
-      // No `nextUrl` set before going to auth0, go to admin dashboard next.
+      // No `adminNextUrl` set before going to auth0, go to admin dashboard next.
       this.router.navigateByUrl(this.toolkitConfiguration.adminDashboardUrl);
     }
   }

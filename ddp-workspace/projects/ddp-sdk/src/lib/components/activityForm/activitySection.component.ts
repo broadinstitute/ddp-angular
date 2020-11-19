@@ -64,6 +64,7 @@ import { ConfigurationService } from '../../services/configuration.service';
                                           [readonly]="readonly"
                                           [activityGuid]="activityGuid"
                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
+                                          [validationRequested]="validationRequested"
                                           (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-address-embedded>
                 </div>

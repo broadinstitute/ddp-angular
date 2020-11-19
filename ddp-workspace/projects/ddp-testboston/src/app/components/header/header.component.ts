@@ -1,6 +1,6 @@
-import { Component, HostListener, Inject, ViewChild, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, Inject, ViewChild, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { SessionMementoService, WindowRef, LanguageService } from 'ddp-sdk';
+import { SessionMementoService, WindowRef } from 'ddp-sdk';
 import { HeaderConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { ScrollerService } from '../../services/scroller.service';
@@ -11,28 +11,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnDestroy {
   public isPageScrolled = false;
   public isMenuOpened = false;
   public languageSelectorShown = true;
   public appRoutes = AppRoutes;
-  public language: string;
   private anchor: Subscription;
   @ViewChild('overlay', { static: false }) private overlay: ElementRef;
   @ViewChild('menu', { static: false }) private menu: ElementRef;
 
   constructor(
-    private languageService: LanguageService,
     private renderer: Renderer2,
     private session: SessionMementoService,
     private window: WindowRef,
     private scrollerService: ScrollerService,
     public headerConfig: HeaderConfigurationService,
     @Inject(DOCUMENT) private document: Document) { }
-
-  public ngOnInit(): void {
-    this.languageListener();
-  }
 
   public ngOnDestroy(): void {
     this.anchor.unsubscribe()
@@ -93,12 +87,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @HostListener('window: resize') public onWindowResize(): void {
     this.closeMenu();
-  }
-
-  private languageListener(): void {
-    this.language = this.languageService.getCurrentLanguage();
-    this.anchor = this.languageService.onLanguageChange().subscribe((event) => {
-      this.language = event.lang;
-    });
   }
 }

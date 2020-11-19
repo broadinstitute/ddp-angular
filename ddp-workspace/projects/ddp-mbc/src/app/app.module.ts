@@ -7,10 +7,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
-  LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -61,6 +61,7 @@ tkCfg.bloodConsentUrl = 'blood-consent';
 tkCfg.bloodReleaseUrl = 'blood-release-survey';
 tkCfg.followupUrl = 'followup';
 tkCfg.internationalPatientsUrl = 'international-patients';
+tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '617-800-1622';
 tkCfg.infoEmail = 'info@mbcproject.org';
 tkCfg.dataEmail = 'data@mbcproject.org';
@@ -79,7 +80,7 @@ config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
 config.studyGuid = tkCfg.studyGuid;
-config.logLevel = LogLevel.Info;
+config.logLevel = DDP_ENV.logLevel;
 config.baseUrl = location.origin + base;
 config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 config.loginLandingUrl = DDP_ENV.loginLandingUrl;
@@ -90,16 +91,17 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
+        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
       }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -135,7 +137,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     }

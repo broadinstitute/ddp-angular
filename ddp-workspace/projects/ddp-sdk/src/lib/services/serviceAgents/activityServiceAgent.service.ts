@@ -5,7 +5,7 @@ import { UserServiceAgent } from './userServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { ActivityInstanceGuid } from '../../models/activityInstanceGuid';
 import { Observable, of, throwError } from 'rxjs';
@@ -84,5 +84,12 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         return this.postObservable(`/studies/${studyGuid}/activities`, { activityCode }).pipe(
             map(x => !!x ? x.body as ActivityInstanceGuid : null)
         );
+    }
+
+  public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
+    const payload = { index };
+
+    return this.patchObservable(`/studies/${studyGuid}/activities/${activityGuid}`, payload).pipe(
+      map(httpResponse => httpResponse));
     }
 }

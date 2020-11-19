@@ -8,7 +8,7 @@ import { UserProfile } from '../../models/userProfile';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { isNullOrUndefined } from "util";
+import { isNullOrUndefined } from 'util';
 
 @Injectable()
 export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
@@ -29,7 +29,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
                 return new UserProfileDecorator(x);
             }),
             catchError(e => {
-                if (e.error && e.error.errorCode && e.error.errorCode === 'MISSING_PROFILE') {
+                if (e.error && e.error.code && e.error.code === 'MISSING_PROFILE') {
                     return of(new UserProfileDecorator());
                 }
                 return throwError(e);
@@ -39,7 +39,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
 
     public saveProfile(isNew: boolean, profile: UserProfile): Observable<any> {
         if (!profile.preferredLanguage) {
-          profile.preferredLanguage = 'en';
+            profile.preferredLanguage = 'en';
         }
         if (isNew) {
             return this.postObservable('/profile', JSON.stringify(profile));
@@ -49,14 +49,14 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     }
 
     public updateProfile(profile: UserProfile): Observable<any> {
-      //Save non-null profile attributes
-      let profileChanges: object = {};
-      for (let key of Object.keys(profile)) {
-        if (!isNullOrUndefined(profile[key])) {
-          profileChanges[key] = profile[key];
+        // save non-null profile attributes
+        let profileChanges: object = {};
+        for (let key of Object.keys(profile)) {
+            if (!isNullOrUndefined(profile[key])) {
+                profileChanges[key] = profile[key];
+            }
         }
-      }
-      return this.patchObservable('/profile', JSON.stringify(profileChanges));
+        return this.patchObservable('/profile', JSON.stringify(profileChanges));
     }
 
     private createProfile(profile: UserProfile): Observable<any> {
