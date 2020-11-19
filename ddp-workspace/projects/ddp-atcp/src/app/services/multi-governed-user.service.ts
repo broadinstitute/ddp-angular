@@ -49,6 +49,7 @@ export class MultiGovernedUserService {
             of(instanceGuid)
           )
         ),
+        take(1),
         pluck('sections'),
         map(sections => {
           if (!sections.length) {
@@ -90,7 +91,10 @@ export class MultiGovernedUserService {
     const isMultiGoverned = this.isMultiGoverned$.getValue();
 
     if (isMultiGoverned === null) {
-      this.loggingService.logEvent(this.LOG_SOURCE, 'Cannot determine type of user, redirecting to home page');
+      this.loggingService.logEvent(
+        this.LOG_SOURCE,
+        'Cannot determine type of user, redirecting to home page'
+      );
 
       this.router.navigateByUrl(RouterResources.Welcome);
     } else {
