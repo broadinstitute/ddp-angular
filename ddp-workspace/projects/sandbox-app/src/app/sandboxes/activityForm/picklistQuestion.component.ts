@@ -25,7 +25,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                     detailLabel: 'Why?',
                     exclusive: true,
                     groupId: null,
-                    tooltip: null
+                    tooltip: null,
+                    nestedOptionsLabel: null,
+                    nestedOptions: []
                 }
             ],
             groups: [
@@ -39,7 +41,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'CCC',
@@ -48,7 +52,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'DDD',
@@ -57,7 +63,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'EEE',
@@ -66,7 +74,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'FFF',
@@ -75,7 +85,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'HHH',
@@ -84,7 +96,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'III',
@@ -93,7 +107,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'KKK',
@@ -102,7 +118,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'LLL',
@@ -111,7 +129,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'MMM',
@@ -120,7 +140,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'NNN',
@@ -129,7 +151,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_1',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         }
                     ]
                 },
@@ -143,7 +167,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_2',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'PPP',
@@ -152,7 +178,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_2',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'QQQ',
@@ -161,7 +189,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_2',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         },
                         {
                             stableId: 'RRR',
@@ -170,7 +200,9 @@ export class PicklistQuestionComponent extends QuestionComponent<ActivityPicklis
                             detailLabel: null,
                             exclusive: false,
                             groupId: 'category_2',
-                            tooltip: null
+                            tooltip: null,
+                            nestedOptionsLabel: null,
+                            nestedOptions: []
                         }
                     ]
                 }

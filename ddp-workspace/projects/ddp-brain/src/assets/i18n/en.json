@@ -169,6 +169,11 @@
                         "Website": "https://carsonlesliefoundation.org/",
                         "Logo": "assets/images/CLF-logo.png",
                         "Alt": "The Carson Leslie Foundation logo"
+                    },
+                    {
+                        "Website": "https://www.cern-foundation.org/",
+                        "Logo": "assets/images/CERN-logo.png",
+                        "Alt": "CERN Foundation logo"
                     }
                 ]
             ],
