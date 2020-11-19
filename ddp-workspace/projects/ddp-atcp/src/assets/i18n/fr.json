@@ -70,64 +70,103 @@
       },
       {
         "Hospital": "Professeure de génétique médicale de l’université Sapienza, Rome, Italie",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Directeur médical de pédiatrie de l’hôpital Wesley, Queensland, Australie"
+        "Hospital": "Directeur médical de pédiatrie de l’hôpital Wesley, Queensland, Australie",
+        "Name": "David Coman",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Professeur agrégé de pédiatrie et de neurologie du Johns Hopkins Children Center, Baltimore, MD, États-Unis"
+        "Hospital": "Professeur agrégé de pédiatrie et de neurologie du Johns Hopkins Children Center, Baltimore, MD, États-Unis",
+        "Name": "Thomas Crawford",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Directeur de Google Genomics, Mountain View, CA, États-Unis"
+        "Hospital": "Directeur de Google Genomics, Mountain View, CA, États-Unis",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Professeure de pédiatrie et de biologie du développement de l’université médicale et dentaire, Tokyo, Japon"
+        "Hospital": "Professeure de pédiatrie et de biologie du développement de l’université médicale et dentaire, Tokyo, Japon",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Professeur agrégé de l’université de Queensland, Queensland, Australie"
+        "Hospital": "Professeur agrégé de l’université de Queensland, Queensland, Australie",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeur de la fondation d’oncologie moléculaire de l’université de Queensland, Brisbane, Australie"
+        "Hospital": "Professeur de la fondation d’oncologie moléculaire de l’université de Queensland, Brisbane, Australie",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeur de pédiatrie du Johns Hopkins Children’s Center, Baltimore, MD, États-Unis"
+        "Hospital": "Professeur de pédiatrie du Johns Hopkins Children’s Center, Baltimore, MD, États-Unis",
+        "Name": "Howard Lederman",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Immuno-hématologie pédiatrique, co-coordinateur du centre de référence français de l’immunodéficience primaire, Hôpital Necker, Paris, France"
+        "Hospital": "Immuno-hématologie pédiatrique, co-coordinateur du centre de référence français de l’immunodéficience primaire, Hôpital Necker, Paris, France",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "MD, MSc, MPH"
       },
       {
-        "Hospital": "Neurologue pédiatrique du Sheba Medical Center, Ramat Gan, Israël"
+        "Hospital": "Neurologue pédiatrique du Sheba Medical Center, Ramat Gan, Israël",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Directeur des données du Broad Institute, Cambridge, MA, États-Unis"
+        "Hospital": "Directeur des données du Broad Institute, Cambridge, MA, États-Unis",
+        "Name": "Anthony Philippakis",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Centre national pour les maladies rares, Rome, Italie"
+        "Hospital": "Centre national pour les maladies rares, Rome, Italie",
+        "Name": "Agata Polizzi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Professeur de génétique humaine de l’université de Tel-Aviv, Ramat Aviv, Israël"
+        "Hospital": "Professeur de génétique humaine de l’université de Tel-Aviv, Ramat Aviv, Israël",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni"
+        "Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeure de génétique de l’université Paris Descartes et chef du service de génétique de l’Institut Marie Curie, Paris, France"
+        "Hospital": "Professeure de génétique de l’université Paris Descartes et chef du service de génétique de l’Institut Marie Curie, Paris, France",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Professeur agrégé de l’université médicale et dentaire, Tokyo, Japon"
+        "Hospital": "Professeur agrégé de l’université médicale et dentaire, Tokyo, Japon",
+        "Name": "Masatoshi Takagi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Directrice du projet public de génomique des populations, Montréal, Canada"
+        "Hospital": "Directrice du projet public de génomique des populations, Montréal, Canada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni"
+        "Hospital": "Professeur de génétique du cancer de l’université de Birmingham Medical School, Birmingham, Royaume-Uni",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professeur agrégé de clinique de l’université de Nottingham, Nottingham, Royaume-Uni"
+        "Hospital": "Professeur agrégé de clinique de l’université de Nottingham, Nottingham, Royaume-Uni",
+        "Name": "William Whitehouse",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Hôpital pour enfants de l’université Johann Wolfgang Goethe, Francfort, Allemagne"
+        "Hospital": "Hôpital pour enfants de l’université Johann Wolfgang Goethe, Francfort, Allemagne",
+        "Name": "Stefan Zielen",
+        "Rank": "MD, PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,164 @@
       "Third": "WNous souhaitons collaborer avec d’autres organisations pour recueillir d’autres types de données biologiques et liées au mode de vie, par exemple grâce à l’utilisation de vêtements intelligents qui permettent de recueillir des informations sur la façon dont une personne atteinte d'AT se déplace."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Vous devez confirmer votre adresse e-mail pour poursuivre.",
+    "EmailConfirmed": "Votre adresse e-mail a été confirmée."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "fr_Submit"
+      },
+      "Expand": {
+        "Title": "fr_Expand"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Au sujet de cette initiative",
       "AboutUs": "À notre sujet",
+      "DataAccessRequest": "Demande d'accès aux données",
+      "ForResearchers": "Pour les Chercheurs",
       "JoinUs": "Nous rejoindre",
       "Language": "Langue",
       "LearnMore": "En savoir plus",
+      "MedicalHistoryQuestionnaire": "Antécédents médicaux",
       "MyAccount": "Mon Compte",
+      "MyDashboard": "fr_My Dashboard",
       "Next": "Suivant",
       "Previous": "Précédent",
       "SignIn": "Connexion",
-      "YourParticipants": "Vos participants",
-      "ForResearchers": "Pour les Chercheurs",
-      "DataAccessRequest": "Demande d'accès aux données"
+      "Statistics": "fr_Statistics",
+      "Submit": "fr_Submit",
+      "YourParticipants": "Vos participants"
     }
   },
   "DataAccess": {
+    "Assurances": {
+      "AssuranceList": [
+        "fr_Data will only be used for approved research.",
+        "fr_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
+        "fr_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
+        "fr_All applicable laws and local institutional policies will be followed.",
+        "fr_Data will not be sold or shared with third parties.",
+        "fr_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
+        "fr_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
+        "fr_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
+        "fr_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
+        "fr_These assurances will be agreed to annually."
+      ],
+      "Controls": {
+        "ApplyingSignature": {
+          "Label": "fr_Signature of Applying Researcher"
+        },
+        "Date": {
+          "Label": "fr_Date"
+        }
+      },
+      "Paragraph1": "fr_I agree to the following assurances:",
+      "Title": "fr_Assurances Statement"
+    },
+    "Dataset": {
+      "Controls": {
+        "Genomic": {
+          "Label": "fr_Genomic Data"
+        },
+        "Survey": {
+          "Label": "fr_Clinical Survey Data"
+        }
+      },
+      "Messages": {
+        "FileSizeExceedsTheLimit": "fr_File size exceeds the limit",
+        "ResearcherBiosketch": "fr_Researcher biosketch cannot be empty.",
+        "ResearcherEmail": "fr_Researcher email cannot be empty.",
+        "ResearcherName": "fr_Researcher name cannot be empty.",
+        "ResearcherOrgAddress": "fr_Org address 1 cannot be empty.",
+        "ResearcherOrgCity": "fr_Org city cannot be empty.",
+        "ResearcherOrgCountry": "fr_Org country cannot be empty.",
+        "ResearcherOrgName": "fr_Org name cannot be empty.",
+        "ResearcherOrgZip": "fr_Org zip cannot be empty.",
+        "ResearcherPhone": "fr_Researcher phone cannot include letters.",
+        "ResearcherProjectDescription": "fr_Project description cannot be empty.",
+        "ResearcherSign": "fr_Researcher signature cannot be empty.",
+        "ResearcherUse": "fr_Research use cannot be empty."
+      },
+      "SubTitle1": "fr_Select all applicable options.",
+      "SubTitle2": "fr_Specific Requests",
+      "Text1": "fr_Please state the disease area(s), if any, that this study focuses on.",
+      "Title": "fr_Dataset(s) requested"
+    },
     "Header": {
-      "Paragraph1": "La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes."
+      "Paragraph1": "La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes.",
+      "Paragraph2": "fr_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
+      "Paragraph3": "fr_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
+      "Paragraph4": "fr_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
+      "Paragraph5": "fr_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
+      "Title": "fr_Data Access Request"
     },
     "OrganizationForm": {
+      "Address1": "fr_Address 1",
+      "Address2": "fr_Address 2",
+      "City": "fr_City/Town",
       "Country": "Pays",
-      "State": "État/province"
+      "Department": "fr_Department",
+      "Name": "fr_Organization Name",
+      "State": "État/province",
+      "Title": "fr_Organization Information",
+      "Zip": "fr_Zip/Postal Code"
+    },
+    "ResearcherForm": {
+      "Attachment": "fr_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
+      "Email": "fr_Email",
+      "Name": "fr_Name",
+      "Phone": "fr_Phone",
+      "Title": "fr_Researcher Information"
+    },
+    "ResearchProject": {
+      "Article1": {
+        "Paragraph": "fr_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
+        "Title": "fr_Descriptive Title of Project"
+      },
+      "Article2": {
+        "Paragraph": "fr_Collaborators at different institutions from the PI must complete a separate DAR form.",
+        "Title": "fr_Names and Institutions of Collaborators"
+      },
+      "Article3": {
+        "Paragraph": "fr_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
+        "Title": "fr_Research Use Statement"
+      },
+      "Title": "fr_Research Project Overview"
+    },
+    "TypeResearch": {
+      "Controls": {
+        "Label": "fr_Controls",
+        "Paragraph": "fr_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
+      },
+      "Describe": {
+        "Label": "fr_Please describe"
+      },
+      "DisableStudy": {
+        "Label": "fr_Disease study",
+        "Paragraph": "fr_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
+      },
+      "MethodDevelopment": {
+        "Label": "fr_Methods development and validation studies",
+        "Paragraph": "fr_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
+      },
+      "Other": {
+        "Label": "fr_Other"
+      },
+      "Population": {
+        "Label": "fr_Population structure or normal variation studies",
+        "Paragraph": "fr_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
+      },
+      "SubTitle": "fr_Select all applicable options.",
+      "Title": "fr_Type of Research"
+    }
+  },
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +446,37 @@
       "Title": "Rejoignez-nous et restez informé(e) des dernières découvertes."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Déjà enregistré ? Connectez-vous ici"
+  },
   "SDK": {
     "CancelButton": "Annuler",
+    "CloseButton": "fr_Close",
+    "CommunicationError": "fr_There was a problem saving your data. Please check the form and your answers before submitting",
     "Dashboard": {
+      "Text": "",
       "Title": "Ma console"
+    },
+    "DatePicker": {
+      "April": "fr_April",
+      "August": "fr_August",
+      "Day": "fr_Choose day...",
+      "December": "fr_December",
+      "February": "fr_February",
+      "January": "fr_January",
+      "July": "fr_July",
+      "June": "fr_June",
+      "March": "fr_March",
+      "May": "fr_May",
+      "Month": "fr_Choose month...",
+      "November": "fr_November",
+      "October": "fr_October",
+      "September": "fr_September",
+      "Year": "fr_Choose year..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "fr_characters remaining",
+      "SingularForm": "fr_character remaining"
     },
     "DoNotAssent": "Ne donne pas mon assentiment",
     "DoNotConsent": "Ne donne pas mon consentement",
@@ -287,36 +488,65 @@
         "Download": "Télécharger le formulaire de consentement complet"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Ville"
-      }
-    },
     "JoinUsButton": "Nous rejoindre",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Participant"
+      "AddParticipant": "Ajouter un participant",
+      "ParticipantPlaceholder": "Participant",
+      "ParticipantsList": "Membres de la famille atteints d’AT"
     },
     "NextButton": "Suivant",
     "PreviousButton": "Précédent",
     "RegisterButton": "S’enregistrer",
     "SaveAndSubmit": "Enregistrer et soumettre",
     "SaveAndSubmitEnrollment": "Enregistrer et soumettre l’inscription",
+    "SavingButton": "fr_Saving",
     "SignAndAssent": "Signature et assentiment",
     "SignAndConsent": "Signature et consentement",
     "StartOrResume": "Commencer/reprendre",
+    "SubmitButton": "fr_Submit",
+    "SignInOut": {
+      "SignOut": "Déconnexion"
+    },
+    "Title": {
+      "Alert": "fr_Your session will time-out soon",
+      "Default": "fr_The Global A-T Family Data Platform"
+    },
     "UserActivities": {
       "ActivityActions": "Actions",
-      "ActivityStatus": "Statut"
+      "ActivityDate": "fr_Created",
+      "ActivityName": "fr_Form",
+      "ActivityStatus": "Statut",
+      "ActivityStatuses": {
+        "COMPLETE": "Rempli",
+        "CREATED": "Non commencé",
+        "IN_PROGRESS": "En cours"
+      },
+      "QuestionCount": "fr_{{ answered }} / {{ total }} Answered",
+      "Summary": "fr_Summary",
+      "SurveysToComplete": {
+        "Plural": "fr_{{ count }} surveys to complete",
+        "Singular": "fr_{{ count }} survey to complete"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Déconnexion"
-    }
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "fr_Sex",
+      "UserPreferencesLocale": "fr_Preferred language",
+      "UserPreferencesTitle": "fr_User preferences"
+    },
+    "ValidateError": "fr_Submission cannot proceed. Please review messages in form for details."
+  },
+  "Survey": {
+    "Self": "{{ firstName }} - processus d’inscription",
+    "NewParticipant": "New Participant - processus d’inscription"
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "ou"
-      }
+    "ActivityActions": {
+      "Continue": "fr_Continue",
+      "Start": "fr_Start",
+      "ViewEdit": "fr_View / Edit"
     },
     "Dashboard": {
       "Actions": "Actions",
@@ -332,28 +562,61 @@
       "JoinMailingList": {
         "CancelButton": "Annuler",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "fr_Please enter a valid email address",
+            "Placeholder": "fr_Email confirmation *"
+          },
           "Email": {
+            "Error": "fr_Please enter a valid email address",
             "Placeholder": "Adresse e-mail"
           },
           "FirstName": {
+            "Error": "fr_First Name is required",
             "Placeholder": "Prénom"
           },
           "LastName": {
+            "Error": "fr_Last Name is required",
             "Placeholder": "Nom"
           }
-        }
+        },
+        "LoadingError": "fr_We're sorry, but an error has occurred.",
+        "MatchEmailsError": "fr_Please ensure that both email fields are filled in and that the addresses match.",
+        "Required": "",
+        "SubmitButton": "fr_Join",
+        "Text": "fr_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
+        "Title": "fr_Stay informed"
       },
       "SessionWillExpire": {
         "Continue": "Continuer",
-        "SignOut": "Déconnexion"
+        "SignOut": "Déconnexion",
+        "Text": "fr_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "Title": "fr_Your session will time-out soon"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "fr_Your password reset link has expired."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Veuillez contacter l’",
         "TextPt2": " en cas de problème."
       },
+      "Text": "",
       "Title": "Une erreur est survenue. Veuillez réessayer plus tard."
+    },
+    "Password": {
+      "InputPlaceholder": "fr_Password",
+      "PasswordRequiredError": "fr_Password is required",
+      "PasswordWrongError": "fr_Incorrect password. Please try again.",
+      "Text": "fr_Please enter your password *",
+      "Title": "fr_Please enter the password"
+    },
+    "SessionExpired": {
+      "Text": "fr_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "StayInformed": {
+      "Text": "fr_Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
+      "Title": "fr_Stay informed"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +631,5 @@
       "CREATED": "Non commencé",
       "IN_PROGRESS": "En cours"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Vous devez confirmer votre adresse e-mail pour poursuivre.",
-    "EmailConfirmed": "Votre adresse e-mail a été confirmée."
   }
 }

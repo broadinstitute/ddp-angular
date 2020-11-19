@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "डेटा प्लेटफॉर्म में नामांकन करें",
-          "Text": "\\\"हमसे जुड़ें\\\" पर क्लिक करें और अपने नाम और ईमेल पते के साथ एक खाता बनाएँ। जैसे ही आप अपना खाता बना लेते हैं, तो आप एक संक्षिप्त प्रपत्र भर कर स्वयं (यदि आपको ए-टी है) को या अपने ए-टी से पीड़ित बच्चे(च्चों) को हमारे डेटा प्लेटफॉर्म में प्रतिभागियों के रूप में पंजीकृत कर पाएंगे।"
+          "Text": "\"हमसे जुड़ें\" पर क्लिक करें और अपने नाम और ईमेल पते के साथ एक खाता बनाएँ। जैसे ही आप अपना खाता बना लेते हैं, तो आप एक संक्षिप्त प्रपत्र भर कर स्वयं (यदि आपको ए-टी है) को या अपने ए-टी से पीड़ित बच्चे(च्चों) को हमारे डेटा प्लेटफॉर्म में प्रतिभागियों के रूप में पंजीकृत कर पाएंगे।"
         },
         {
           "Name": "हमें अनुमति दें",
@@ -70,64 +70,113 @@
       },
       {
         "Hospital": "प्रोफेसर ऑफ़ मेडिकल जेनेटिक्स, सैपीएनज़ा विश्वविद्यालय, रोमा, इटली ",
-        "Name": "लूसियाना चेसा"
+        "Name": "लूसियाना चेसा",
+        "Rank": "एमडी, पीएचडी"
       },
       {
-        "Hospital": "मेडिकल डायरेक्टर ऑफ़ पेडियाट्रिक्स, वेस्ले हॉस्पिटल, क्वींसलैंड, ऑस्ट्रेलिया"
+        "Hospital": "मेडिकल डायरेक्टर ऑफ़ पेडियाट्रिक्स, वेस्ले हॉस्पिटल, क्वींसलैंड, ऑस्ट्रेलिया",
+        "Name": "डेविड कॉमन",
+        "Rank": "एमडी"
       },
       {
-        "Hospital": "एसोसिएट प्रोफेसर ऑफ पीडियाट्रिक्स एंड न्यूरोलॉजी, जॉन्स हॉपकिंस चिल्ड्रन सेंटर, बाल्टीमोर, एमडी, यूएसए"
+        "Hospital": "एसोसिएट प्रोफेसर, फेडरल यूनिवर्सिटी, साओ पाउलो, ब्राजील ",
+        "Name": "बीट्रिज़ टेवेरेस कोस्टा कार्वाल्हो",
+        "Rank": "एमडी"
       },
       {
-        "Hospital": " निदेशक, गूगल जीनोमिक्स, माउंटेन व्यू, सीए, यूएसए "
+        "Hospital": "एसोसिएट प्रोफेसर ऑफ पीडियाट्रिक्स एंड न्यूरोलॉजी, जॉन्स हॉपकिंस चिल्ड्रन सेंटर, बाल्टीमोर, एमडी, यूएसए",
+        "Name": "थॉमस क्रॉफर्ड",
+        "Rank": "एमडी"
       },
       {
-        "Hospital": " पीडियाट्रिक्स एंड डेवलपमेंटल बायोलोजी, टोक्यो मेडिकल एंड डेंटल यूनिवर्सिटी, जापान"
+        "Hospital": "निदेशक, गूगल जीनोमिक्स, माउंटेन व्यू, सीए, यूएसए ",
+        "Name": "डेविड ग्लेज़र",
+        "Rank": ""
       },
       {
-        "Hospital": "एसोसिएट प्रोफेसर, क्वींसलैंड विश्वविद्यालय, क्वींसलैंड, ऑस्ट्रेलिया"
+        "Hospital": "पीडियाट्रिक्स एंड डेवलपमेंटल बायोलोजी, टोक्यो मेडिकल एंड डेंटल यूनिवर्सिटी, जापान",
+        "Name": "सेट्सुको हसेगावा",
+        "Rank": "एमडी"
       },
       {
-        "Hospital": "फाउंडेशन प्रोफेसर ऑफ़ मॉलिक्यूलर ओन्कोलॉजी, क्वींसलैंड विश्वविद्यालय, ब्रिस्बेन, ऑस्ट्रेलिया "
+        "Hospital": "एसोसिएट प्रोफेसर, क्वींसलैंड विश्वविद्यालय, क्वींसलैंड, ऑस्ट्रेलिया",
+        "Name": "लुत्ज़ क्रूज़",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "प्रोफेसर ऑफ़ पीडियाट्रिक्स, जॉन्स हॉपकिन्स चिल्ड्रन सेंटर, बाल्टीमोर, एमडी, यूएसए,"
+        "Hospital": "फाउंडेशन प्रोफेसर ऑफ़ मॉलिक्यूलर ओन्कोलॉजी, क्वींसलैंड विश्वविद्यालय, ब्रिस्बेन, ऑस्ट्रेलिया",
+        "Name": "मार्टिन लैविन",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "पीडियाट्रिक इम्यूनो-हेमेटोलॉजी, को-कोऑर्डिनेटर ऑफ फ़्रेंच रेफरेंस सेंटर फॉर प्राइमरी इम्यूनोडेफिशियेंसी, नेकर हॉस्पिटल, पेरिस, फ्रांस "
+        "Hospital": "प्रोफेसर ऑफ़ पीडियाट्रिक्स, जॉन्स हॉपकिन्स चिल्ड्रन सेंटर, बाल्टीमोर, एमडी, यूएसए,",
+        "Name": "हावर्ड लेडरमैन",
+        "Rank": "एमडी, पीएचडी"
       },
       {
-        "Hospital": "पीडियाट्रिक न्यूरोलॉजिस्ट, शेबा मेडिकल सेंटर, रामात गण, इज़राइल"
+        "Hospital": "पीडियाट्रिक इम्यूनो-हेमेटोलॉजी, को-कोऑर्डिनेटर ऑफ फ़्रेंच रेफरेंस सेंटर फॉर प्राइमरी इम्यूनोडेफिशियेंसी, नेकर हॉस्पिटल, पेरिस, फ्रांस ",
+        "Name": "निजर महालाउ",
+        "Rank": "एमडी, एमएससी, एमपीएच "
       },
       {
-        "Hospital": "चीफ डाटा ऑफिसर, ब्रॉड इंस्टीट्यूट, कैम्ब्रिज, एमए, यूएसए"
+        "Hospital": "पीडियाट्रिक न्यूरोलॉजिस्ट, शेबा मेडिकल सेंटर, रामात गण, इज़राइल",
+        "Name": "एंड्रिया निसेनकोर्न",
+        "Rank": "एमडी"
       },
       {
-        "Hospital": "नेशनल सेंटर फॉर रेयर डिजीज, रोम, इटली "
+        "Hospital": "चीफ डाटा ऑफिसर, ब्रॉड इंस्टीट्यूट, कैम्ब्रिज, एमए, यूएसए",
+        "Name": "एंथनी फिलिपकिस",
+        "Rank": "एमडी, पीएचडी"
       },
       {
-        "Hospital": "प्रोफेसर ऑफ़ ह्यूमन जेनेटिक्स, तेल अवीव यूनिवर्सिटी, रामात अवीव, इज़राइल "
+        "Hospital": "नेशनल सेंटर फॉर रेयर डिजीज, रोम, इटली",
+        "Name": "एगाटा पोलिज़ी",
+        "Rank": "एमडी, पीएचडी"
       },
       {
-        "Hospital": "प्रोफेसर ऑफ़ कैंसर जेनेटिक्स, यूनिवर्सिटी ऑफ़ बर्मिंघम मेडिकल स्कूल, बर्मिंघम, यूके "
+        "Hospital": "साइंस कोऑर्डिनेटर, ए-टी चिल्ड्रन्स प्रोजेक्ट, कोकोनट क्रीक, एफएल, यूएसए",
+        "Name": "सिंथिया रोथब्लम-ओवियत",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "प्रोफेसर ऑफ़ जेनेटिक्स, पेरिस डेस्कार्टेस यूनिवर्सिटी और हेड ऑफ़ जेनेटिक्स डिपार्टमेंट, इंस्टीट्यूट क्यूरी, पेरिस, फ्रांस "
+        "Hospital": "प्रोफेसर ऑफ़ ह्यूमन जेनेटिक्स, तेल अवीव यूनिवर्सिटी, रामात अवीव, इज़राइल",
+        "Name": "योसेफ शिलोह",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "एसोसिएट प्रोफेसर, टोक्यो मेडिकल एंड डेंटल यूनिवर्सिटी, टोक्यो, जापान "
+        "Hospital": "प्रोफेसर ऑफ़ कैंसर जेनेटिक्स, यूनिवर्सिटी ऑफ़ बर्मिंघम मेडिकल स्कूल, बर्मिंघम, यूके",
+        "Name": "ग्रांट स्टीवर्ट",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "एग्जीक्यूटिव डायरेक्टर, पब्लिक पॉपुलेशन प्रोजेक्ट इन जीनोमिक्स एंड सोसाइटी, मॉन्ट्रियल, कनाडा"
+        "Hospital": "प्रोफेसर ऑफ़ जेनेटिक्स, पेरिस डेस्कार्टेस यूनिवर्सिटी और हेड ऑफ़ जेनेटिक्स डिपार्टमेंट, इंस्टीट्यूट क्यूरी, पेरिस, फ्रांस",
+        "Name": "डोमिनिक स्टॉपपा-लियोनेट",
+        "Rank": "एमडी , पीएचडी"
       },
       {
-        "Hospital": "प्रोफेसर ऑफ़ कैंसर जेनेटिक्स, यूनिवर्सिटी ऑफ़ बर्मिंघम मेडिकल स्कूल, बर्मिंघम, यूके "
+        "Hospital": "एसोसिएट प्रोफेसर, टोक्यो मेडिकल एंड डेंटल यूनिवर्सिटी, टोक्यो, जापान",
+        "Name": "मसातोशी ताकागी",
+        "Rank": "एमडी, पीएचडी "
       },
       {
-        "Hospital": " क्लिनिकल एसोसिएट प्रोफेसर, यूनिवर्सिटी ऑफ नॉटिंघम, नॉटिंघम, यूके"
+        "Hospital": "एग्जीक्यूटिव डायरेक्टर, पब्लिक पॉपुलेशन प्रोजेक्ट इन जीनोमिक्स एंड सोसाइटी, मॉन्ट्रियल, कनाडा",
+        "Name": "एने-मैरी टेसे",
+        "Rank": "पीएचडी"
       },
       {
-        "Hospital": "चिल्ड्रन्स हॉस्पिटल ऑफ़ जोहान वुल्फगैंग गोएथे यूनिवर्सिटी, फ्रैंकफर्ट, जर्मनी"
+        "Hospital": "प्रोफेसर ऑफ़ कैंसर जेनेटिक्स, यूनिवर्सिटी ऑफ़ बर्मिंघम मेडिकल स्कूल, बर्मिंघम, यूके",
+        "Name": "। मैल्कम टेलर",
+        "Rank": "पीएचडी"
+      },
+      {
+        "Hospital": "क्लिनिकल एसोसिएट प्रोफेसर, यूनिवर्सिटी ऑफ नॉटिंघम, नॉटिंघम, यूके",
+        "Name": "विल्लियम व्हाइटहाउस",
+        "Rank": "एमडी"
+      },
+      {
+        "Hospital": "चिल्ड्रन्स हॉस्पिटल ऑफ़ जोहान वुल्फगैंग गोएथे यूनिवर्सिटी, फ्रैंकफर्ट, जर्मनी",
+        "Name": "स्टेफान ज़ीलन",
+        "Rank": "एमडी, पीएचडी"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +248,164 @@
       "Third": "हम उम्मीद करते हैं कि भविष्य में, ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म जैविक एवं जीवनशैली संबंधी डेटा, जैसे ए-टी से पीड़ित व्यक्ति के चलने के ढंग के बारे में जानकारी प्राप्त करने के लिए पहनी जाने वाली तकनीकों का उपयोग करना, एकत्र करने के लिए अतिरिक्त संगठनों के साथ भागीदारी करेगा।"
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "जारी रखने से पहले आपको अपने ईमेल पते की पुष्टि करनी होगी।",
+    "EmailConfirmed": "आपके ईमेल पते की सफलतापूर्वक पुष्टि कर ली गई है। "
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "hi_Submit"
+      },
+      "Expand": {
+        "Title": "hi_Expand"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "इस पहल के बारे में",
       "AboutUs": "हमारे बारे में",
+      "DataAccessRequest": "डेटा एक्सेस अनुरोध",
+      "ForResearchers": "शोधकर्ताओं के लिए",
       "JoinUs": "हमसे जुड़ें",
       "Language": "भाषा",
       "LearnMore": "और जानें",
+      "MedicalHistoryQuestionnaire": "चिकित्सीय इतिहास",
       "MyAccount": "मेरा खाता",
+      "MyDashboard": "hi_My Dashboard",
       "Next": "अगला",
       "Previous": "पिछला",
       "SignIn": "साइन इन करें",
-      "YourParticipants": "आपके प्रतिभागी",
-      "ForResearchers": "शोधकर्ताओं के लिए",
-      "DataAccessRequest": "डेटा एक्सेस अनुरोध"
+      "Statistics": "hi_Statistics",
+      "Submit": "hi_Submit",
+      "YourParticipants": "आपके प्रतिभागी"
     }
   },
   "DataAccess": {
+    "Assurances": {
+      "AssuranceList": [
+        "hi_Data will only be used for approved research.",
+        "hi_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
+        "hi_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
+        "hi_All applicable laws and local institutional policies will be followed.",
+        "hi_Data will not be sold or shared with third parties.",
+        "hi_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
+        "hi_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
+        "hi_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
+        "hi_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
+        "hi_These assurances will be agreed to annually."
+      ],
+      "Controls": {
+        "ApplyingSignature": {
+          "Label": "hi_Signature of Applying Researcher"
+        },
+        "Date": {
+          "Label": "hi_Date"
+        }
+      },
+      "Paragraph1": "hi_I agree to the following assurances:",
+      "Title": "hi_Assurances Statement"
+    },
+    "Dataset": {
+      "Controls": {
+        "Genomic": {
+          "Label": "hi_Genomic Data"
+        },
+        "Survey": {
+          "Label": "hi_Clinical Survey Data"
+        }
+      },
+      "Messages": {
+        "FileSizeExceedsTheLimit": "hi_File size exceeds the limit",
+        "ResearcherBiosketch": "hi_Researcher biosketch cannot be empty.",
+        "ResearcherEmail": "hi_Researcher email cannot be empty.",
+        "ResearcherName": "hi_Researcher name cannot be empty.",
+        "ResearcherOrgAddress": "hi_Org address 1 cannot be empty.",
+        "ResearcherOrgCity": "hi_Org city cannot be empty.",
+        "ResearcherOrgCountry": "hi_Org country cannot be empty.",
+        "ResearcherOrgName": "hi_Org name cannot be empty.",
+        "ResearcherOrgZip": "hi_Org zip cannot be empty.",
+        "ResearcherPhone": "hi_Researcher phone cannot include letters.",
+        "ResearcherProjectDescription": "hi_Project description cannot be empty.",
+        "ResearcherSign": "hi_Researcher signature cannot be empty.",
+        "ResearcherUse": "hi_Research use cannot be empty."
+      },
+      "SubTitle1": "hi_Select all applicable options.",
+      "SubTitle2": "hi_Specific Requests",
+      "Text1": "hi_Please state the disease area(s), if any, that this study focuses on.",
+      "Title": "hi_Dataset(s) requested"
+    },
     "Header": {
-      "Paragraph1": "ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म एक रोगी-संचालित प्रयास है, जिसकी देखरेख दुनिया भर में मौजूद ए-टी परिवारों एवं विशेषज्ञों द्वारा की जाती है, जिसके माध्यम से ए-टी से पीड़ित लोगों की स्वास्थ्य संबंधी जानकारी, उनके आनुवंशिक एवं संभावित अन्य प्रकार के डेटा को शोधकर्ताओं के साथ साझा किया जा सकता है। यह प्लेटफॉर्म शोधकर्ताओं को दुनिया भर से आए महत्वपूर्ण रोगी डेटा तक त्वरित, सुरक्षित एवं कुशल रूप से पहुँच बनाने में सक्षम बनाता है, जिससे नई खोजों में मदद मिलने की उम्मीद है।"
+      "Paragraph1": "ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म एक रोगी-संचालित प्रयास है, जिसकी देखरेख दुनिया भर में मौजूद ए-टी परिवारों एवं विशेषज्ञों द्वारा की जाती है, जिसके माध्यम से ए-टी से पीड़ित लोगों की स्वास्थ्य संबंधी जानकारी, उनके आनुवंशिक एवं संभावित अन्य प्रकार के डेटा को शोधकर्ताओं के साथ साझा किया जा सकता है। यह प्लेटफॉर्म शोधकर्ताओं को दुनिया भर से आए महत्वपूर्ण रोगी डेटा तक त्वरित, सुरक्षित एवं कुशल रूप से पहुँच बनाने में सक्षम बनाता है, जिससे नई खोजों में मदद मिलने की उम्मीद है।",
+      "Paragraph2": "hi_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
+      "Paragraph3": "hi_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
+      "Paragraph4": "hi_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
+      "Paragraph5": "hi_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
+      "Title": "hi_Data Access Request"
     },
     "OrganizationForm": {
+      "Address1": "hi_Address 1",
+      "Address2": "hi_Address 2",
+      "City": "hi_City/Town",
       "Country": "देश",
-      "State": "राज्य/प्रांत"
+      "Department": "hi_Department",
+      "Name": "hi_Organization Name",
+      "State": "राज्य/प्रांत",
+      "Title": "hi_Organization Information",
+      "Zip": "hi_Zip/Postal Code"
+    },
+    "ResearcherForm": {
+      "Attachment": "hi_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
+      "Email": "hi_Email",
+      "Name": "hi_Name",
+      "Phone": "hi_Phone",
+      "Title": "hi_Researcher Information"
+    },
+    "ResearchProject": {
+      "Article1": {
+        "Paragraph": "hi_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
+        "Title": "hi_Descriptive Title of Project"
+      },
+      "Article2": {
+        "Paragraph": "hi_Collaborators at different institutions from the PI must complete a separate DAR form.",
+        "Title": "hi_Names and Institutions of Collaborators"
+      },
+      "Article3": {
+        "Paragraph": "hi_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
+        "Title": "hi_Research Use Statement"
+      },
+      "Title": "hi_Research Project Overview"
+    },
+    "TypeResearch": {
+      "Controls": {
+        "Label": "hi_Controls",
+        "Paragraph": "hi_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
+      },
+      "Describe": {
+        "Label": "hi_Please describe"
+      },
+      "DisableStudy": {
+        "Label": "hi_Disease study",
+        "Paragraph": "hi_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
+      },
+      "MethodDevelopment": {
+        "Label": "hi_Methods development and validation studies",
+        "Paragraph": "hi_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
+      },
+      "Other": {
+        "Label": "hi_Other"
+      },
+      "Population": {
+        "Label": "hi_Population structure or normal variation studies",
+        "Paragraph": "hi_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
+      },
+      "SubTitle": "hi_Select all applicable options.",
+      "Title": "hi_Type of Research"
+    }
+  },
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +456,37 @@
       "Title": "इस खोज के संबंध में हमसे जुड़ें और नवीनतम निष्कर्षों के बारे में जानकारी प्राप्त करें।"
     }
   },
+  "JoinUs": {
+    "SignInButton": "पहले से पंजीकृत हैं? यहां साइन इन करें"
+  },
   "SDK": {
     "CancelButton": "रद्द करें",
+    "CloseButton": "hi_Close",
+    "CommunicationError": "hi_There was a problem saving your data. Please check the form and your answers before submitting",
     "Dashboard": {
+      "Text": "",
       "Title": "मेरा कंसोल"
+    },
+    "DatePicker": {
+      "April": "hi_April",
+      "August": "hi_August",
+      "Day": "hi_Choose day...",
+      "December": "hi_December",
+      "February": "hi_February",
+      "January": "hi_January",
+      "July": "hi_July",
+      "June": "hi_June",
+      "March": "hi_March",
+      "May": "hi_May",
+      "Month": "hi_Choose month...",
+      "November": "hi_November",
+      "October": "hi_October",
+      "September": "hi_September",
+      "Year": "hi_Choose year..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "hi_characters remaining",
+      "SingularForm": "hi_character remaining"
     },
     "DoNotAssent": "स्वीकृति न दें",
     "DoNotConsent": "सहमति न दें",
@@ -287,36 +498,65 @@
         "Download": "पूर्ण सहमति प्रपत्र डाउनलोड करें"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "शहर"
-      }
-    },
     "JoinUsButton": "हमसे जुड़ें",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "प्रतिभागी"
+      "AddParticipant": "एक प्रतिभागी जोड़ें",
+      "ParticipantPlaceholder": "प्रतिभागी",
+      "ParticipantsList": "परिवार के सदस्य, जो ए-टी से पीड़ित हैं"
     },
     "NextButton": "अगला",
     "PreviousButton": "पिछला",
     "RegisterButton": "पंजीकृत करें",
     "SaveAndSubmit": "सहेजें और प्रस्तुत करें",
     "SaveAndSubmitEnrollment": "नामांकन सहेजें एवं प्रस्तुत करें",
+    "SavingButton": "hi_Saving",
     "SignAndAssent": "हस्ताक्षर करें और स्वीकृति दें",
     "SignAndConsent": "हस्ताक्षर करें और सहमति दें",
     "StartOrResume": "आरंभ करें/पुनः शुरू करें",
+    "SubmitButton": "hi_Submit",
+    "SignInOut": {
+      "SignOut": "साइन आउट करें"
+    },
+    "Title": {
+      "Alert": "hi_Your session will time-out soon",
+      "Default": "hi_The Global A-T Family Data Platform"
+    },
     "UserActivities": {
       "ActivityActions": "कार्रवाइयाँ",
-      "ActivityStatus": "प्रास्थिति"
+      "ActivityDate": "hi_Created",
+      "ActivityName": "hi_Form",
+      "ActivityStatus": "प्रास्थिति",
+      "ActivityStatuses": {
+        "COMPLETE": "पूर्ण",
+        "CREATED": "शुरू नहीं हुआ",
+        "IN_PROGRESS": "प्रगति अधीन"
+      },
+      "QuestionCount": "hi_{{ answered }} / {{ total }} Answered",
+      "Summary": "hi_Summary",
+      "SurveysToComplete": {
+        "Plural": "hi_{{ count }} surveys to complete",
+        "Singular": "hi_{{ count }} survey to complete"
+      }
     },
     "UserMenu": {
       "SignOutButton": "साइन आउट करें"
-    }
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "hi_Sex",
+      "UserPreferencesLocale": "hi_Preferred language",
+      "UserPreferencesTitle": "hi_User preferences"
+    },
+    "ValidateError": "hi_Submission cannot proceed. Please review messages in form for details."
+  },
+  "Survey": {
+    "Self": "{{ firstName }} की नामांकन प्रक्रिया",
+    "NewParticipant": "{{ firstName }} की नामांकन प्रक्रिया"
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "या"
-      }
+    "ActivityActions": {
+      "Continue": "hi_Continue",
+      "Start": "hi_Start",
+      "ViewEdit": "hi_View / Edit"
     },
     "Dashboard": {
       "Actions": "कार्रवाइयाँ",
@@ -332,28 +572,61 @@
       "JoinMailingList": {
         "CancelButton": "रद्द करें",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "hi_Please enter a valid email address",
+            "Placeholder": "hi_Email confirmation *"
+          },
           "Email": {
+            "Error": "hi_Please enter a valid email address",
             "Placeholder": "ईमेल पता"
           },
           "FirstName": {
+            "Error": "hi_First Name is required",
             "Placeholder": "्रथम नाम"
           },
           "LastName": {
+            "Error": "hi_Last Name is required",
             "Placeholder": "अंतिम नाम"
           }
-        }
+        },
+        "LoadingError": "hi_We're sorry, but an error has occurred.",
+        "MatchEmailsError": "hi_Please ensure that both email fields are filled in and that the addresses match.",
+        "Required": "",
+        "SubmitButton": "hi_Join",
+        "Text": "hi_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
+        "Title": "hi_Stay informed"
       },
       "SessionWillExpire": {
         "Continue": "जारी रखें",
-        "SignOut": "साइन आउट करें"
+        "SignOut": "साइन आउट करें",
+        "Text": "hi_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "Title": "hi_Your session will time-out soon"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "hi_Your password reset link has expired."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "यदि आपको कठिनाइयों का अनुभव होना जारी रहता है तो कृपया ",
         "TextPt2": " से संपर्क करें।"
       },
+      "Text": "",
       "Title": "हमें खेद है, किंतु एक त्रुटि हुई। कृपया बाद में पुन: प्रयास करें।"
+    },
+    "Password": {
+      "InputPlaceholder": "hi_Password",
+      "PasswordRequiredError": "hi_Password is required",
+      "PasswordWrongError": "hi_Incorrect password. Please try again.",
+      "Text": "hi_Please enter your password *",
+      "Title": "hi_Please enter the password"
+    },
+    "SessionExpired": {
+      "Text": "hi_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "StayInformed": {
+      "Text": "hi_Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
+      "Title": "hi_Stay informed"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +641,5 @@
       "CREATED": "शुरू नहीं हुआ",
       "IN_PROGRESS": "प्रगति अधीन"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "जारी रखने से पहले आपको अपने ईमेल पते की पुष्टि करनी होगी।",
-    "EmailConfirmed": "आपके ईमेल पते की सफलतापूर्वक पुष्टि कर ली गई है। "
   }
 }

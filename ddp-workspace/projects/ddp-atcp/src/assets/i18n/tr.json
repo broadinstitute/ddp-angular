@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "Veri Platformuna kaydolun",
-          "Text": "\\\"Bize Katılın\\\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
+          "Text": "\"Bize Katılın\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
         },
         {
           "Name": "Bize izin verin",
@@ -65,69 +65,108 @@
     "Doctors": [
       {
         "Hospital": "Tıbbi Genetik Emeritus Profesörü – Cambridge Üniversitesi, Cambridge, Birleşik Krallık ve Onursal Öğretim Üyesi, Wellcome Trust Sanger Enstitüsü, Hinxton, Birleşik Krallık",
-        "Name": "Martin Bobrow",
-        "Rank": "Dr."
+        "Name": "Dr. Martin Bobrow",
+        "Rank": ""
       },
       {
         "Hospital": "Tıbbi Genetik Profesörü, Sapienza Üniversitesi, Roma, İtalya",
-        "Name": "Luciana Chessa"
+        "Name": "Dr. Luciana Chessa",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatri Tıbbi Müdürü, Wesley Hastanesi, Queensland, Avustralya"
+        "Hospital": "Pediatri Tıbbi Müdürü, Wesley Hastanesi, Queensland, Avustralya",
+        "Name": "Dr. David Coman",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatri ve Nöroloji Doçenti, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD."
+        "Hospital": "Pediatri ve Nöroloji Doçenti, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD.",
+        "Name": "Dr. Thomas Crawford",
+        "Rank": ""
       },
       {
-        "Hospital": "Müdür, Google Genomics, Mountain View, CA, ABD"
+        "Hospital": "Müdür, Google Genomics, Mountain View, CA, ABD",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatrik ve Gelişimsel Biyoloji, Tokyo Tıp ve Diş Hekimliği Üniversitesi, Japonya"
+        "Hospital": "Pediatrik ve Gelişimsel Biyoloji, Tokyo Tıp ve Diş Hekimliği Üniversitesi, Japonya",
+        "Name": "Dr. Setsuko Hasegawa",
+        "Rank": ""
       },
       {
-        "Hospital": "Doçent, Queensland Üniversitesi, Queensland, Avustralya"
+        "Hospital": "Doçent, Queensland Üniversitesi, Queensland, Avustralya",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Moleküler Onkoloji Kurucu Profesörü, Queensland Üniversitesi, Brisbane, Avustralya"
+        "Hospital": "Moleküler Onkoloji Kurucu Profesörü, Queensland Üniversitesi, Brisbane, Avustralya",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Pediatrik İmmunohematoloji, Primer İmmünyetmezlikler için Fransız Referans Merkezi Koordinatörü, Necker Hastanesi, Paris, Fransa"
+        "Hospital": "Pediatri Profesörü, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD",
+        "Name": "Dr. Howard Lederman",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Pediatrik Nörolog, Sheba Tıp Merkezi, Ramat Gan, İsrail"
+        "Hospital": "Pediatrik İmmunohematoloji, Primer İmmünyetmezlikler için Fransız Referans Merkezi Koordinatörü, Necker Hastanesi, Paris, Fransa",
+        "Name": "Dr. Nizar Mahlaoui",
+        "Rank": "MSc, MPH"
       },
       {
-        "Hospital": "Baş Veri Görevlisi, Broad Enstitüsü, Cambridge, MA, ABD"
+        "Hospital": "Pediatrik Nörolog, Sheba Tıp Merkezi, Ramat Gan, İsrail",
+        "Name": "Dr. Andreea Nissenkorn",
+        "Rank": ""
       },
       {
-        "Hospital": "Ulusal Nadir Hastalıklar Merkezi, Roma, İtalya"
+        "Hospital": "Baş Veri Görevlisi, Broad Enstitüsü, Cambridge, MA, ABD",
+        "Name": "Dr. Anthony Philippakis",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Bilim Koordinatörü, A-T Çocuk Projesi, Coconut Creek, FL, ABD"
+        "Hospital": "Ulusal Nadir Hastalıklar Merkezi, Roma, İtalya",
+        "Name": "Dr. Agata Polizzi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "İnsan Genetiği Profesörü, Tel Aviv University, Ramat Aviv, İsrail"
+        "Hospital": "İnsan Genetiği Profesörü, Tel Aviv University, Ramat Aviv, İsrail",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Genetik Profesörü, Paris Descartes Üniversitesi ve Genetik Bölümü Başkanı, Curie Enstitüsü, Paris, Fransa"
+        "Hospital": "Genetik Profesörü, Paris Descartes Üniversitesi ve Genetik Bölümü Başkanı, Curie Enstitüsü, Paris, Fransa",
+        "Name": "Dr. Dominique Stoppa-Lyonnet",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Doçent, Tokyo Tıp ve Diş Hekimliği Üniversitesi Tokyo, Japonya"
+        "Hospital": "Doçent, Tokyo Tıp ve Diş Hekimliği Üniversitesi Tokyo, Japonya",
+        "Name": "Dr. Masatoshi Takagi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Yönetici Müdür, Genomik ve Toplum için Kamusal Popülasyon Projesi, Montreal, Kanada"
+        "Hospital": "Yönetici Müdür, Genomik ve Toplum için Kamusal Popülasyon Projesi, Montreal, Kanada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Klinik Doçent, Nottingham Üniversitesi, Nottingham, Birleşik Krallık"
+        "Hospital": "Klinik Doçent, Nottingham Üniversitesi, Nottingham, Birleşik Krallık",
+        "Name": "Dr. William Whitehouse",
+        "Rank": ""
       },
       {
-        "Hospital": "Johann Wolfgang Goethe Üniversitesi Çocuk Hastanesi, Frankfurt, Almanya"
+        "Hospital": "Johann Wolfgang Goethe Üniversitesi Çocuk Hastanesi, Frankfurt, Almanya",
+        "Name": "Dr. Stefan Zielen",
+        "Rank": "PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,164 @@
       "Third": "Gelecekte Global A-T Aile Veri Platformunun, A-T'li bir hastanın nasıl hareket ettiği konusunda bilgi toplamak için giyilebilir teknolojiler kullanmak gibi diğer türlerde biyolojik ve yaşam tarzıyla ilgili verileri toplamak amacıyla başka kurumlarla işbirliği yapmasını bekliyoruz."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
+    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "tr_Submit"
+      },
+      "Expand": {
+        "Title": "tr_Expand"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Bu girişim hakkında",
       "AboutUs": "Hakkımızda",
+      "DataAccessRequest": "Veri Erişim İsteği",
+      "ForResearchers": "Araştırmacı",
       "JoinUs": "Bize Katılın",
       "Language": "Dil",
       "LearnMore": "Daha Fazla Bilgi",
+      "MedicalHistoryQuestionnaire": "Tıbbi Öykü",
       "MyAccount": "Hesabım",
+      "MyDashboard": "tr_My Dashboard",
       "Next": "Sonraki",
       "Previous": "Önceki",
       "SignIn": "Oturum Aç",
-      "YourParticipants": "Katılımcılarınız",
-      "ForResearchers": "Araştırmacı",
-      "DataAccessRequest": "Veri Erişim İsteği"
+      "Statistics": "tr_Statistics",
+      "Submit": "tr_Submit",
+      "YourParticipants": "Katılımcılarınız"
     }
   },
   "DataAccess": {
+    "Assurances": {
+      "AssuranceList": [
+        "tr_Data will only be used for approved research.",
+        "tr_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
+        "tr_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
+        "tr_All applicable laws and local institutional policies will be followed.",
+        "tr_Data will not be sold or shared with third parties.",
+        "tr_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
+        "tr_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
+        "tr_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
+        "tr_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
+        "tr_These assurances will be agreed to annually."
+      ],
+      "Controls": {
+        "ApplyingSignature": {
+          "Label": "tr_Signature of Applying Researcher"
+        },
+        "Date": {
+          "Label": "tr_Date"
+        }
+      },
+      "Paragraph1": "tr_I agree to the following assurances:",
+      "Title": "tr_Assurances Statement"
+    },
+    "Dataset": {
+      "Controls": {
+        "Genomic": {
+          "Label": "tr_Genomic Data"
+        },
+        "Survey": {
+          "Label": "tr_Clinical Survey Data"
+        }
+      },
+      "Messages": {
+        "FileSizeExceedsTheLimit": "tr_File size exceeds the limit",
+        "ResearcherBiosketch": "tr_Researcher biosketch cannot be empty.",
+        "ResearcherEmail": "tr_Researcher email cannot be empty.",
+        "ResearcherName": "tr_Researcher name cannot be empty.",
+        "ResearcherOrgAddress": "tr_Org address 1 cannot be empty.",
+        "ResearcherOrgCity": "tr_Org city cannot be empty.",
+        "ResearcherOrgCountry": "tr_Org country cannot be empty.",
+        "ResearcherOrgName": "tr_Org name cannot be empty.",
+        "ResearcherOrgZip": "tr_Org zip cannot be empty.",
+        "ResearcherPhone": "tr_Researcher phone cannot include letters.",
+        "ResearcherProjectDescription": "tr_Project description cannot be empty.",
+        "ResearcherSign": "tr_Researcher signature cannot be empty.",
+        "ResearcherUse": "tr_Research use cannot be empty."
+      },
+      "SubTitle1": "tr_Select all applicable options.",
+      "SubTitle2": "tr_Specific Requests",
+      "Text1": "tr_Please state the disease area(s), if any, that this study focuses on.",
+      "Title": "tr_Dataset(s) requested"
+    },
     "Header": {
-      "Paragraph1": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır."
+      "Paragraph1": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır.",
+      "Paragraph2": "tr_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
+      "Paragraph3": "tr_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
+      "Paragraph4": "tr_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
+      "Paragraph5": "tr_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
+      "Title": "tr_Data Access Request"
     },
     "OrganizationForm": {
+      "Address1": "tr_Address 1",
+      "Address2": "tr_Address 2",
+      "City": "tr_City/Town",
       "Country": "Ülke",
-      "State": "İl"
+      "Department": "tr_Department",
+      "Name": "tr_Organization Name",
+      "State": "İl",
+      "Title": "tr_Organization Information",
+      "Zip": "tr_Zip/Postal Code"
+    },
+    "ResearcherForm": {
+      "Attachment": "tr_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
+      "Email": "tr_Email",
+      "Name": "tr_Name",
+      "Phone": "tr_Phone",
+      "Title": "tr_Researcher Information"
+    },
+    "ResearchProject": {
+      "Article1": {
+        "Paragraph": "tr_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
+        "Title": "tr_Descriptive Title of Project"
+      },
+      "Article2": {
+        "Paragraph": "tr_Collaborators at different institutions from the PI must complete a separate DAR form.",
+        "Title": "tr_Names and Institutions of Collaborators"
+      },
+      "Article3": {
+        "Paragraph": "tr_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
+        "Title": "tr_Research Use Statement"
+      },
+      "Title": "tr_Research Project Overview"
+    },
+    "TypeResearch": {
+      "Controls": {
+        "Label": "tr_Controls",
+        "Paragraph": "tr_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
+      },
+      "Describe": {
+        "Label": "tr_Please describe"
+      },
+      "DisableStudy": {
+        "Label": "tr_Disease study",
+        "Paragraph": "tr_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
+      },
+      "MethodDevelopment": {
+        "Label": "tr_Methods development and validation studies",
+        "Paragraph": "tr_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
+      },
+      "Other": {
+        "Label": "tr_Other"
+      },
+      "Population": {
+        "Label": "tr_Population structure or normal variation studies",
+        "Paragraph": "tr_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
+      },
+      "SubTitle": "tr_Select all applicable options.",
+      "Title": "tr_Type of Research"
+    }
+  },
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +446,37 @@
       "Title": "Bu arayışta bize katılıp son bulgulardan haberdar olun."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Kayıt yaptınız mı? Burada Oturum Açın"
+  },
   "SDK": {
     "CancelButton": "İptal",
+    "CloseButton": "tr_Close",
+    "CommunicationError": "tr_There was a problem saving your data. Please check the form and your answers before submitting",
     "Dashboard": {
+      "Text": "",
       "Title": "Konsolum"
+    },
+    "DatePicker": {
+      "April": "tr_April",
+      "August": "tr_August",
+      "Day": "tr_Choose day...",
+      "December": "tr_December",
+      "February": "tr_February",
+      "January": "tr_January",
+      "July": "tr_July",
+      "June": "tr_June",
+      "March": "tr_March",
+      "May": "tr_May",
+      "Month": "tr_Choose month...",
+      "November": "tr_November",
+      "October": "tr_October",
+      "September": "tr_September",
+      "Year": "tr_Choose year..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "tr_characters remaining",
+      "SingularForm": "tr_character remaining"
     },
     "DoNotAssent": "Olur Vermiyorum",
     "DoNotConsent": "Olur Vermiyorum",
@@ -287,36 +488,65 @@
         "Download": "Tüm Olur Formunu İndir"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "İlçe"
-      }
-    },
     "JoinUsButton": "Bize Katılın",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Katılımcı"
+      "AddParticipant": "Bir Katılımcı Ekleyin",
+      "ParticipantPlaceholder": "Katılımcı",
+      "ParticipantsList": "A-T'li aile üyeleri"
     },
     "NextButton": "Sonraki",
     "PreviousButton": "Önceki",
     "RegisterButton": "Kaydol",
     "SaveAndSubmit": "Kaydet ve Gönder",
     "SaveAndSubmitEnrollment": "Kaydet ve Çalışmaya Kaydı Gönder",
+    "SavingButton": "tr_Saving",
     "SignAndAssent": "İmza ve Olur",
     "SignAndConsent": "İmza ve Olur",
     "StartOrResume": "Başla/Devam Et",
+    "SubmitButton": "tr_Submit",
+    "SignInOut": {
+      "SignOut": "Oturumu Kapat"
+    },
+    "Title": {
+      "Alert": "tr_Your session will time-out soon",
+      "Default": "tr_The Global A-T Family Data Platform"
+    },
     "UserActivities": {
       "ActivityActions": "Eylemler",
-      "ActivityStatus": "Durum"
+      "ActivityDate": "tr_Created",
+      "ActivityName": "tr_Form",
+      "ActivityStatus": "Durum",
+      "ActivityStatuses": {
+        "COMPLETE": "Tamamlandı",
+        "CREATED": "Henüz Başlanmadı",
+        "IN_PROGRESS": "İşlemde"
+      },
+      "QuestionCount": "tr_{{ answered }} / {{ total }} Answered",
+      "Summary": "tr_Summary",
+      "SurveysToComplete": {
+        "Plural": "tr_{{ count }} surveys to complete",
+        "Singular": "tr_{{ count }} survey to complete"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Oturumu Kapat"
-    }
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "tr_Sex",
+      "UserPreferencesLocale": "tr_Preferred language",
+      "UserPreferencesTitle": "tr_User preferences"
+    },
+    "ValidateError": "tr_Submission cannot proceed. Please review messages in form for details."
+  },
+  "Survey": {
+    "Self": "{{ firstName }} Kayıt Süreci",
+    "NewParticipant": "New Participant Kayıt Süreci"
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "veya"
-      }
+    "ActivityActions": {
+      "Continue": "tr_Continue",
+      "Start": "tr_Start",
+      "ViewEdit": "tr_View / Edit"
     },
     "Dashboard": {
       "Actions": "Eylemler",
@@ -332,28 +562,61 @@
       "JoinMailingList": {
         "CancelButton": "İptal",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "tr_Please enter a valid email address",
+            "Placeholder": "tr_Email confirmation *"
+          },
           "Email": {
+            "Error": "tr_Please enter a valid email address",
             "Placeholder": "E-posta adresi"
           },
           "FirstName": {
+            "Error": "tr_First Name is required",
             "Placeholder": "Adı"
           },
           "LastName": {
+            "Error": "tr_Last Name is required",
             "Placeholder": "Soyadı"
           }
-        }
+        },
+        "LoadingError": "tr_We're sorry, but an error has occurred.",
+        "MatchEmailsError": "tr_Please ensure that both email fields are filled in and that the addresses match.",
+        "Required": "",
+        "SubmitButton": "tr_Join",
+        "Text": "tr_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
+        "Title": "tr_Stay informed"
       },
       "SessionWillExpire": {
         "Continue": "Devam",
-        "SignOut": "Oturumu Kapat"
+        "SignOut": "Oturumu Kapat",
+        "Text": "tr_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "Title": "tr_Your session will time-out soon"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "tr_Your password reset link has expired."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Sorun yaşamaya devam ederseniz lütfen ",
         "TextPt2": " site yöneticisiyle irtibat kurun."
       },
+      "Text": "",
       "Title": "Üzgünüz ama bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+    },
+    "Password": {
+      "InputPlaceholder": "tr_Password",
+      "PasswordRequiredError": "tr_Password is required",
+      "PasswordWrongError": "tr_Incorrect password. Please try again.",
+      "Text": "tr_Please enter your password *",
+      "Title": "tr_Please enter the password"
+    },
+    "SessionExpired": {
+      "Text": "tr_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "StayInformed": {
+      "Text": "tr_Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
+      "Title": "tr_Stay informed"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +631,5 @@
       "CREATED": "Henüz Başlanmadı",
       "IN_PROGRESS": "İşlemde"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
-    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
   }
 }
