@@ -543,6 +543,18 @@
     },
     "ValidateError": "zh_Submission cannot proceed. Please review messages in form for details."
   },
+  "Statistics": {
+    "Title": "zh_The A-T Family Data Platform by the Numbers",
+    "CountList": {
+      "totalParticipantsCount": "zh_Total number of participants",
+      "countriesCount": "zh_Countries represented",
+      "genomeStudyParticipantsCount": "zh_People participating in the genome study",
+      "kitsCount": "zh_Sample collection kits sent out in total",
+      "governedParticipantsCount": "zh_Children enrolled by their parents",
+      "selfEnrolledParticipantsCount": "zh_Self-enrolled participants"
+    },
+    "Subtitle": "zh_Countries represented"
+  },
   "Survey": {
     "Self": "{{ firstName }}的注册程序",
     "NewParticipant": "New Participant的注册程序"

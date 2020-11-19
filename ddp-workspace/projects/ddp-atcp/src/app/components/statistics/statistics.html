@@ -11,12 +11,16 @@
           <span class="statistic__count">
             {{ formattedStatistics[statistic] }}
           </span>
-          <p class="statistic__description">{{ statistic }}</p>
+          <p class="statistic__description">
+            {{ ('Statistics.CountList.' + statistic) | translate }}
+          </p>
         </div>
       </li>
     </ul>
 
-    <h2 class="subtitle subtitle--light">Countries represented</h2>
+    <h2 class="subtitle subtitle--light">
+      {{ 'Statistics.Subtitle' | translate }}
+    </h2>
 
     <ul
       *ngIf="formattedStatistics.countriesDistribution.length"

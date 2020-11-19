@@ -538,6 +538,18 @@
     },
     "ValidateError": "de_Submission cannot proceed. Please review messages in form for details."
   },
+  "Statistics": {
+    "Title": "de_The A-T Family Data Platform by the Numbers",
+    "CountList": {
+      "totalParticipantsCount": "de_Total number of participants",
+      "countriesCount": "de_Countries represented",
+      "genomeStudyParticipantsCount": "de_People participating in the genome study",
+      "kitsCount": "de_Sample collection kits sent out in total",
+      "governedParticipantsCount": "de_Children enrolled by their parents",
+      "selfEnrolledParticipantsCount": "de_Self-enrolled participants"
+    },
+    "Subtitle": "de_Countries represented"
+  },
   "Survey": {
     "Self": "{{ firstName }}-Registrierungsprozess",
     "NewParticipant": "New Participant-Registrierungsprozess"

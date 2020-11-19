@@ -34,7 +34,7 @@ interface FormattedStatistics {
 export class StatisticsComponent implements OnInit, OnDestroy {
   public formattedStatistics: FormattedStatistics;
   public isLoading: boolean;
-  public statisticListItems = [
+  public statisticListItems: (keyof FormattedStatistics)[] = [
     'totalParticipantsCount',
     'countriesCount',
     'genomeStudyParticipantsCount',

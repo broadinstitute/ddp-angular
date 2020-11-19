@@ -548,6 +548,18 @@
     },
     "ValidateError": "hi_Submission cannot proceed. Please review messages in form for details."
   },
+  "Statistics": {
+    "Title": "hi_The A-T Family Data Platform by the Numbers",
+    "CountList": {
+      "totalParticipantsCount": "hi_Total number of participants",
+      "countriesCount": "hi_Countries represented",
+      "genomeStudyParticipantsCount": "hi_People participating in the genome study",
+      "kitsCount": "hi_Sample collection kits sent out in total",
+      "governedParticipantsCount": "hi_Children enrolled by their parents",
+      "selfEnrolledParticipantsCount": "hi_Self-enrolled participants"
+    },
+    "Subtitle": "hi_Countries represented"
+  },
   "Survey": {
     "Self": "{{ firstName }} की नामांकन प्रक्रिया",
     "NewParticipant": "{{ firstName }} की नामांकन प्रक्रिया"

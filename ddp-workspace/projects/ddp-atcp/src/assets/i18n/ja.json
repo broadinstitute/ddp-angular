@@ -538,6 +538,18 @@
     },
     "ValidateError": "ja_Submission cannot proceed. Please review messages in form for details."
   },
+  "Statistics": {
+    "Title": "ja_The A-T Family Data Platform by the Numbers",
+    "CountList": {
+      "totalParticipantsCount": "ja_Total number of participants",
+      "countriesCount": "ja_Countries represented",
+      "genomeStudyParticipantsCount": "ja_People participating in the genome study",
+      "kitsCount": "ja_Sample collection kits sent out in total",
+      "governedParticipantsCount": "ja_Children enrolled by their parents",
+      "selfEnrolledParticipantsCount": "ja_Self-enrolled participants"
+    },
+    "Subtitle": "ja_Countries represented"
+  },
   "Survey": {
     "Self": "{{ firstName }} の登録プロセス",
     "NewParticipant": "New Participant の登録プロセス"
