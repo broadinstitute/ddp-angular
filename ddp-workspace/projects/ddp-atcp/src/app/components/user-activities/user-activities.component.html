@@ -11,7 +11,7 @@
       *matHeaderCellDef
       class="user-activities-table__cell user-activities-table__cell--header"
     >
-      {{ 'Components.UserActivities.Columns.Name' | translate }}
+      {{ 'SDK.UserActivities.ActivityName' | translate }}
     </th>
     <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
       {{ activity.activityName }}
@@ -24,7 +24,7 @@
       *matHeaderCellDef
       class="user-activities-table__cell user-activities-table__cell--header"
     >
-      {{ 'Components.UserActivities.Columns.Summary' | translate }}
+      {{ 'SDK.UserActivities.Summary' | translate }}
     </th>
     <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
       {{ activity.activitySummary }}
@@ -37,7 +37,7 @@
       *matHeaderCellDef
       class="user-activities-table__cell user-activities-table__cell--header"
     >
-      {{ 'Components.UserActivities.Columns.CreatedAt' | translate }}
+      {{ 'SDK.UserActivities.ActivityDate' | translate }}
     </th>
     <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
       {{ activity.createdAt | date: 'MM / dd' }}
@@ -50,12 +50,12 @@
       *matHeaderCellDef
       class="user-activities-table__cell user-activities-table__cell--header"
     >
-      {{ 'Components.UserActivities.Columns.Status' | translate }}
+      {{ 'SDK.UserActivities.ActivityStatus' | translate }}
     </th>
     <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
       <ng-container *ngIf="showQuestionCount(activity); else activityStatus">
         {{
-          'Components.UserActivities.QuestionCount'
+          'SDK.UserActivities.QuestionCount'
             | translate
               : {
                   answered: activity.numQuestionsAnswered,
@@ -66,7 +66,7 @@
 
       <ng-template #activityStatus>
         {{
-          'Components.UserActivities.ActivityStatus.' + activity.statusCode
+          'SDK.UserActivities.ActivityStatuses.' + activity.statusCode
             | translate
         }}
       </ng-template>
@@ -79,7 +79,7 @@
       *matHeaderCellDef
       class="user-activities-table__cell user-activities-table__cell--header"
     >
-      {{ 'Components.UserActivities.Columns.Actions' | translate }}
+      {{ 'SDK.UserActivities.ActivityActions' | translate }}
     </th>
     <td
       mat-cell
@@ -94,7 +94,7 @@
         class="BtnFilled BtnFilled--blue"
         (click)="startActivity.emit(activity.instanceGuid)"
       >
-        {{ 'Components.UserActivities.ActivityActions.Start' | translate }}
+        {{ 'Toolkit.ActivityActions.Start' | translate }}
       </button>
 
       <button
@@ -105,7 +105,7 @@
         class="BtnFilled BtnFilled--blue"
         (click)="continueActivity.emit(activity.instanceGuid)"
       >
-        {{ 'Components.UserActivities.ActivityActions.Continue' | translate }}
+        {{ 'Toolkit.ActivityActions.Continue' | translate }}
       </button>
 
       <button
@@ -113,7 +113,7 @@
         class="BtnFilled BtnFilled--blue"
         (click)="viewActivity.emit(activity.instanceGuid)"
       >
-        {{ 'Components.UserActivities.ActivityActions.ViewEdit' | translate }}
+        {{ 'Toolkit.ActivityActions.ViewEdit' | translate }}
       </button>
     </td>
   </ng-container>

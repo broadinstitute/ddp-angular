@@ -1,23 +1,47 @@
 <section class="statistics page-padding">
   <h1 translate>Statistics.Title</h1>
-  <h2 translate>Statistics.CountersFirst.Title</h2>
-  <ul class="counters">
-    <li *ngFor="let data of countersFirst">
-      <div>{{ data.Number }}</div>
-      <span class="pre-line">{{ data.Text }}</span>
-    </li>
-  </ul>
-  <ul class="counters">
-    <li *ngFor="let data of countersSecond">
-      <div>{{ data.Number }}</div>
-      <span class="pre-line">{{ data.Text }}</span>
-    </li>
-  </ul>
-  <p translate>Statistics.CountersThird.Title</p>
-  <ul class="countries">
-    <li *ngFor="let data of countersThird">
-      <hr class="hor-bar" [style.width]="data.Width ? data.Width : '1px'">
-      <p><span class="emoji">{{ data.Emoji }}</span> <span class="pre-line">{{ data.Name }}</span></p>
-    </li>
-  </ul>
+
+  <ng-container *ngIf="!isLoading; else loading">
+    <ul class="statistics-list">
+      <li
+        *ngFor="let statistic of statisticListItems"
+        class="statistics-list__item"
+      >
+        <div class="statistic">
+          <span class="statistic__count">
+            {{ formattedStatistics[statistic] }}
+          </span>
+          <p class="statistic__description">
+            {{ ('Statistics.CountList.' + statistic) | translate }}
+          </p>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="subtitle subtitle--light">
+      {{ 'Statistics.Subtitle' | translate }}
+    </h2>
+
+    <ul
+      *ngIf="formattedStatistics.countriesDistribution.length"
+      class="countries-distribution"
+    >
+      <li
+        *ngFor="let dist of formattedStatistics.countriesDistribution"
+        class="countries-distribution__item"
+      >
+        <div class="distribution">
+          <div class="distribution__bar" [style.width.px]="dist.barWidth"></div>
+
+          <span class="distribution__emoji"> {{ dist.emoji }} </span>
+
+          {{ dist.countryName }}
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </section>

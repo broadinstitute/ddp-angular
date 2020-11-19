@@ -1,8 +1,12 @@
 <div class="survey">
   <div class="page-padding">
-    <h1 *ngIf="userFirstName">
-      {{ userFirstName }}'s
-      <span translate>Components.Survey.Title</span>
+    <h1>
+      <ng-container *ngIf="userFirstName; else newParticipant">
+        {{ 'Survey.Self' | translate: { firstName: userFirstName } }}
+      </ng-container>
+      <ng-template #newParticipant>
+        {{ 'Survey.NewParticipant' | translate }}
+      </ng-template>
     </h1>
 
     <div class="workdir" [ngClass]="{ 'is-assent': isAssentActivity }">
