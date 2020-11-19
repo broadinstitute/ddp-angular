@@ -41,6 +41,9 @@ javascript config files.  You must build these config files from the top-level d
 ./build-study.sh [version] [env] osteo CMI-OSTEO --config
 ./build-study.sh [version] [env] testboston testboston --config
 ./build-study.sh [version] [env] mpc cmi-mpc --config
+./build-study.sh [version] [env] atcp atcp --config
+./build-study.sh [version] [env] rgp rgp --config
+./build-study.sh [version] [env] prion PRION --config
 ```
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
