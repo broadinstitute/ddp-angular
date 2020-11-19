@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
+import { CompositeDisposable, LanguageService } from 'ddp-sdk';
+
 import {
   StatisticsServiceAgent,
   Statistic,
@@ -47,13 +49,30 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private readonly DISTRIBUTION_LIST_WIDTH = 240;
   private readonly DISTRIBUTION_BAR_MIN_WIDTH = 20;
 
-  constructor(private statisticsService: StatisticsServiceAgent) {}
+  private readonly anchor = new CompositeDisposable();
+
+  constructor(
+    private statisticsService: StatisticsServiceAgent,
+    private languageService: LanguageService
+  ) {}
 
   public ngOnInit(): void {
     this.getStatistics();
+
+    this.anchor.addNew(
+      this.languageService
+        .getProfileLanguageUpdateNotifier()
+        .subscribe((value: null | undefined) => {
+          if (value === undefined) {
+            this.getStatistics();
+          }
+        })
+    );
   }
 
-  public ngOnDestroy(): void {}
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
+  }
 
   private getStatistics(): void {
     this.isLoading = true;
