@@ -3,12 +3,14 @@ import {
   Component,
   Inject,
   Injector,
+  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
   SimpleChange
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   SubmitAnnouncementService,
   SubmissionManager,
@@ -207,11 +209,14 @@ import { combineLatest } from 'rxjs';
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  @Input() isPrequal = false;
+
   public isMultiGoverned: boolean;
   public currentActivityService: CurrentActivityService;
 
   private multiGovernedUserService: MultiGovernedUserService;
   private languageService: LanguageService;
+  private translateService: TranslateService;
 
   constructor(
     logger: LoggingService,
@@ -227,6 +232,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     this.currentActivityService = injector.get(CurrentActivityService);
     this.multiGovernedUserService = injector.get(MultiGovernedUserService);
     this.languageService = injector.get(LanguageService);
+    this.translateService = injector.get(TranslateService);
   }
 
   ngOnInit(): void {
@@ -248,6 +254,10 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
           }
         })
     );
+
+    if (this.isPrequal) {
+      this.setupPrequalLangListener();
+    }
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -328,6 +338,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
 
   public ngOnDestroy(): void {
     super.ngOnDestroy();
+    this.anchor.removeAll();
     this.currentActivityService.saveCurrentActivity(null);
   }
 
@@ -336,5 +347,21 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
 
     this.router.navigateByUrl(this.isMultiGoverned ? RouterResources.ParticipantList : RouterResources.Dashboard);
+  }
+
+  private setupPrequalLangListener(): void {
+    let prevLang = this.translateService.currentLang;
+
+    this.anchor.addNew(
+      this.translateService.onLangChange
+        .pipe(
+          filter(e => e.lang !== prevLang)
+        )
+        .subscribe(e => {
+          prevLang = e.lang;
+
+          this.getActivity();
+        })
+    );
   }
 }

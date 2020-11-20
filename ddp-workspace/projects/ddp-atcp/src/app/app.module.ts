@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
@@ -94,9 +94,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     const language: Language[] = injector.get(LanguagesToken, Promise.resolve(null));
+    const languageService = injector.get(LanguageService, Promise.resolve(null));
     locationInitialized.then(() => {
       translate.addLangs(language.map(x => x.code));
-      const locale = config.defaultLanguageCode;
+      const locale = languageService.getAppLanguageCode();
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
         logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);

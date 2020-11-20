@@ -33,6 +33,7 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
             <app-atcp-activity-base
               [studyGuid]="studyGuid"
               [activityGuid]="instanceGuid"
+              [isPrequal]="true"
               (submit)="navigate($event)"
               (stickySubtitle)="showStickySubtitle($event)"
               #activity
