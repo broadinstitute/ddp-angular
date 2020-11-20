@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { isNullOrUndefined } from 'util';
 import { Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { LoggingService } from '../logging.service';
+import { SessionMementoService } from '../sessionMemento.service';
+import { ConfigurationService } from '../configuration.service';
 
 @Injectable()
 export class LanguageService {
@@ -12,7 +14,9 @@ export class LanguageService {
 
   constructor(
     private logger: LoggingService,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private session: SessionMementoService,
+    @Inject('ddp.config') private config: ConfigurationService) {
     this.profileLanguageUpdateNotifier = new Subject<void>();
     this.profileLanguageUpdateNotifier.next();
   }
@@ -56,6 +60,7 @@ export class LanguageService {
   public changeLanguageObservable(languageCode: string): Observable<any> {
     if (this.canUseLanguage(languageCode)) {
       localStorage.setItem('studyLanguage', languageCode);
+      this.session.updateSessionLocale(languageCode);
       return this.translate.use(languageCode);
     } else {
       this.logger.logError(this.LOG_SOURCE, `Error: cannot use language ${languageCode}`);
@@ -66,5 +71,12 @@ export class LanguageService {
   public changeLanguage(languageCode: string): boolean {
     const obs = this.changeLanguageObservable(languageCode);
     return obs !== null;
+  }
+
+  public getAppLanguageCode(): string {
+    return this.translate.currentLang ||
+      (this.session.session && this.session.session.locale) ||
+      localStorage.getItem('studyLanguage') ||
+      this.config.defaultLanguageCode;
   }
 }
