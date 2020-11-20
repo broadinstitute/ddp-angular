@@ -116,19 +116,6 @@ export class SessionMementoService implements OnDestroy {
         this.sessionSubject.next(session);
     }
 
-    public updateSessionLocale(languageCode: string): void {
-      if (this.session === null) {
-        return;
-      }
-
-      const updatedSession = Object.assign({}, this.session, { locale: languageCode });
-
-      localStorage.setItem(this.SESSION_KEY, JSON.stringify(updatedSession));
-      localStorage.setItem(this.TOKEN_KEY, updatedSession.idToken);
-
-      this.sessionSubject.next(updatedSession);
-    }
-
     public setParticipant(guid: string): void {
         if (this.session === null) {
             return;
