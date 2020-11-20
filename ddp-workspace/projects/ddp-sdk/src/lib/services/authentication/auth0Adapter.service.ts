@@ -246,7 +246,7 @@ export class Auth0AdapterService implements OnDestroy {
         }
         let locale = decodedJwt['locale'];
         if (locale == null) {
-            locale = 'en';
+            locale = this.language.getAppLanguageCode();
         }
         this.session.setSession(
             authResult.accessToken,
