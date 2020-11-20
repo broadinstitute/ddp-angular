@@ -1,8 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
 import { filter, map, mergeMap, startWith } from 'rxjs/operators';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -21,7 +23,10 @@ export class SessionMementoService implements OnDestroy {
     private notificationSubscription: Subscription;
     private anchor: Subscription = new Subscription();
 
-    constructor() {
+    constructor(
+      private translateService: TranslateService,
+      @Inject('ddp.config') private config: ConfigurationService
+    ) {
         this.observeSessionExpiration();
         this.observeSessionStatus();
         // listen for storage events. Only get notified of storage changes in other tabs
@@ -100,7 +105,8 @@ export class SessionMementoService implements OnDestroy {
 
     public setTemporarySession(user: TemporaryUser): void {
         const expiresAtInMsec = new Date(user.expiresAt).getTime();
-        const session = new Session('', '', user.userGuid, 'en', expiresAtInMsec);
+        const locale = this.translateService.currentLang || this.config.defaultLanguageCode || 'en';
+        const session = new Session('', '', user.userGuid, locale, expiresAtInMsec);
         this.updateSession(session);
     }
 
@@ -108,6 +114,19 @@ export class SessionMementoService implements OnDestroy {
         localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
         localStorage.setItem(this.TOKEN_KEY, session.idToken);
         this.sessionSubject.next(session);
+    }
+
+    public updateSessionLocale(languageCode: string): void {
+      if (this.session === null) {
+        return;
+      }
+
+      const updatedSession = Object.assign({}, this.session, { locale: languageCode });
+
+      localStorage.setItem(this.SESSION_KEY, JSON.stringify(updatedSession));
+      localStorage.setItem(this.TOKEN_KEY, updatedSession.idToken);
+
+      this.sessionSubject.next(updatedSession);
     }
 
     public setParticipant(guid: string): void {
