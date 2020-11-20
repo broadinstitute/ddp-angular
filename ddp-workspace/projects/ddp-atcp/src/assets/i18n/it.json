@@ -552,7 +552,10 @@
   },
   "Survey": {
     "Self": "Processo di arruolamento di {{ firstName }}",
-    "NewParticipant": "Processo di arruolamento di New Participant"
+    "NewParticipant": "Processo di arruolamento di New Participant",
+    "ThankYouPopup": {
+      "Text": "it_Thank you for submitting the survey"
+    }
   },
   "Toolkit": {
     "ActivityActions": {

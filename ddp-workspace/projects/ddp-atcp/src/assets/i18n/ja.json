@@ -552,7 +552,10 @@
   },
   "Survey": {
     "Self": "{{ firstName }} の登録プロセス",
-    "NewParticipant": "New Participant の登録プロセス"
+    "NewParticipant": "New Participant の登録プロセス",
+    "ThankYouPopup": {
+      "Text": "ja_Thank you for submitting the survey"
+    }
   },
   "Toolkit": {
     "ActivityActions": {

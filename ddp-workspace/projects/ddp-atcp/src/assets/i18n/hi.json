@@ -562,7 +562,10 @@
   },
   "Survey": {
     "Self": "{{ firstName }} की नामांकन प्रक्रिया",
-    "NewParticipant": "{{ firstName }} की नामांकन प्रक्रिया"
+    "NewParticipant": "{{ firstName }} की नामांकन प्रक्रिया",
+    "ThankYouPopup": {
+      "Text": "hi_Thank you for submitting the survey"
+    }
   },
   "Toolkit": {
     "ActivityActions": {

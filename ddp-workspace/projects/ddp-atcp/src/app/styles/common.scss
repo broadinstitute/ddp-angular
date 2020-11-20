@@ -239,6 +239,21 @@ blockquote {
   }
 }
 
+.thank-you-popup {
+  .popup-message-text {
+    margin: 0;
+  }
+
+  .popup-message {
+    position: relative;
+
+    .mat-icon {
+      right: 0 !important;
+      top: 0 !important;
+    }
+  }
+}
+
 .c-black {
   @include c-black();
 }

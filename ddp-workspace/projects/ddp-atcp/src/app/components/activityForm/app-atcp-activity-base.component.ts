@@ -216,7 +216,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
 
   private multiGovernedUserService: MultiGovernedUserService;
   private languageService: LanguageService;
-  private translateService: TranslateService;
+  protected translateService: TranslateService;
 
   constructor(
     logger: LoggingService,

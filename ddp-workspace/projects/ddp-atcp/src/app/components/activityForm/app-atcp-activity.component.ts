@@ -8,6 +8,7 @@ import {
   OnInit,
   Renderer2
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {
   AnalyticsEventsService,
   SubmissionManager,
@@ -17,7 +18,9 @@ import {
 } from 'ddp-sdk';
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
-import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
+import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-atcp-activity',
@@ -289,7 +292,7 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
                                 *ngIf="!model.readonly && isLastStep"
                                 class="button ButtonFilled ButtonFilled--green button_right"
                                 [disabled]="isPageBusy | async"
-                                (click)="model.readonly ? navigateToConsole() : flush()"
+                                (click)="onSubmitFeedingSurvey()"
                             >
                                 <ng-container *ngIf="(isPageBusy | async); else feedingActivityControls">
                                     {{ 'SDK.SavingButton' | translate }}
@@ -324,6 +327,9 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
   @Input() buttonWithArrow = false;
 
   public ActivityCodes = ActivityCodes;
+
+  private matDialog: MatDialog;
+
   constructor(
       logger: LoggingService,
       windowRef: WindowRef,
@@ -333,9 +339,44 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
     super(logger, windowRef, renderer, submitService, analytics, document, injector);
+
+    this.matDialog = injector.get(MatDialog);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
   }
 
   public isAgree(): boolean {
       return this.model.formType === 'CONSENT' && this.agreeConsent;
+  }
+
+  public onSubmitFeedingSurvey(): void {
+    if (this.model.readonly) {
+      this.navigateToConsole();
+    } else {
+      this.showThankYouPopup();
+      this.flush();
+    }
+  }
+
+  private showThankYouPopup(): void {
+    const dialogRef = this.matDialog.open(PopupMessageComponent, {
+      width: '100%',
+      position: {
+        top: '0px',
+      },
+      data: {
+        text: this.translateService.instant('Survey.ThankYouPopup.Text'),
+      },
+      autoFocus: false,
+      scrollStrategy: new NoopScrollStrategy(),
+      panelClass: ['server-modal-box', 'thank-you-popup'],
+
+    });
+
+    dialogRef.afterOpened().pipe(delay(2000)).subscribe(() => {
+      dialogRef.close();
+    });
   }
 }

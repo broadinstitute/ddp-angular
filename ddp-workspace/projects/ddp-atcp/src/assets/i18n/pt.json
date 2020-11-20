@@ -552,7 +552,10 @@
   },
   "Survey": {
     "Self": "{{ firstName }}- processo de inscrição",
-    "NewParticipant": "New Participant- processo de inscrição"
+    "NewParticipant": "New Participant- processo de inscrição",
+    "ThankYouPopup": {
+      "Text": "pt_Thank you for submitting the survey"
+    }
   },
   "Toolkit": {
     "ActivityActions": {

@@ -557,7 +557,10 @@
   },
   "Survey": {
     "Self": "{{ firstName }}的注册程序",
-    "NewParticipant": "New Participant的注册程序"
+    "NewParticipant": "New Participant的注册程序",
+    "ThankYouPopup": {
+      "Text": "zh_Thank you for submitting the survey"
+    }
   },
   "Toolkit": {
     "ActivityActions": {
