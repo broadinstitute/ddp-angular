@@ -60,7 +60,13 @@ export class LanguageService {
   public changeLanguageObservable(languageCode: string): Observable<any> {
     if (this.canUseLanguage(languageCode)) {
       localStorage.setItem('studyLanguage', languageCode);
-      this.session.updateSessionLocale(languageCode);
+
+      if (this.session.session !== null) {
+        this.session.updateSession(
+          Object.assign({}, this.session.session, { locale: languageCode })
+        );
+      }
+
       return this.translate.use(languageCode);
     } else {
       this.logger.logError(this.LOG_SOURCE, `Error: cannot use language ${languageCode}`);
