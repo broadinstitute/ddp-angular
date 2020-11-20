@@ -83,6 +83,7 @@ export class LanguageService {
     return this.translate.currentLang ||
       (this.session.session && this.session.session.locale) ||
       localStorage.getItem('studyLanguage') ||
-      this.config.defaultLanguageCode;
+      this.config.defaultLanguageCode ||
+      'en';
   }
 }
