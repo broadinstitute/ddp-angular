@@ -17,7 +17,7 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-@media only screen and (min-width: 1026px) {
+@media only screen and (min-width: 1027px) {
     html{
         font-size: 18px !important;
     }
@@ -724,8 +724,11 @@ html[lang='es'] .navbar-nav {
     .Header-background {
         padding: 30px 40px 20px 80px !important;
     }
+    html[lang="he"] .Nav-item.Nav-item-JoinUs {
+        padding-left: 20px;
+    }
     html[lang="es"] .navbar-nav {
-        width: 486px;
+        width: 500px;
     }
     .navbar-nav {
         width: 660px;
@@ -741,6 +744,9 @@ html[lang='es'] .navbar-nav {
     }
     html[lang="es"] .navbar-nav {
         width: 486px;
+    }
+    html[lang='he'] .navbar-nav {
+        width: 640px;
     }
     .navbar-nav {
         width: 584px;
@@ -962,6 +968,10 @@ button[data-ddp-test="signInButton"], button[ data-ddp-test="signOutButton"] {
   height: 90px;
 }
 
+html[dir='rtl'] .Footer-left {
+    float: right;
+}
+
 p.Footer-contact {
   font-size: 0.9rem !important;
   color: #727272 !important;
@@ -973,6 +983,10 @@ p.Footer-contact {
 .Footer-links {
   height: 90px;
   padding: 31px 0 0;
+}
+
+html[dir='rtl'] .Footer-links {
+    float: right !important;
 }
 
 .Footer-text {
@@ -996,6 +1010,10 @@ p.Footer-contact {
   border: none;
   border-image-width: 0;
   white-space: nowrap;
+}
+
+html[dir='rtl'] .Footer-link {
+    text-align: right;
 }
 
 .Footer-link:hover, .Footer-link .SimpleButton:hover {
@@ -1083,6 +1101,10 @@ button.Footer-link {
     -webkit-box-shadow: none;
     box-shadow: none;
     z-index: 100;
+}
+
+html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
+  float: right;
 }
 
 .PageLayout {
@@ -1863,6 +1885,10 @@ ul {
     margin-bottom: 5px;
 }
 
+html[dir='rtl'] .WizardStepsContainer {
+    display: flex;
+}
+
 .WizardSteps {
      position: relative;
      margin: 24px 0 24px 0;
@@ -2011,6 +2037,10 @@ ul {
 
 .PageContent-text-dashboard {
     font-size: 1rem !important;
+}
+
+html[dir='rtl'] .PageContent-text-dashboard {
+    text-align: right;
 }
 
 .PageContent-text br {
@@ -2444,9 +2474,9 @@ ddp-activity-composite-answer .ddp-answer-container {
     font-weight: 500;
 }
 
-html[dir='rtl'] .example-radio-group {
+/*html[dir='rtl'] .example-radio-group {
     flex-direction: row-reverse;
-}
+}*/
 
 .example-radio-group {
     display: flex;
