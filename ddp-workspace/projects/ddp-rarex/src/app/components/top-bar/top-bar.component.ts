@@ -11,6 +11,7 @@ import { RoutePaths } from '../../router-resources';
 })
 export class TopBarComponent {
   readonly routes = RoutePaths;
+  readonly rarexLink = 'https://rare-x.org/';
 
   constructor(private readonly _session: SessionMementoService) {}
 
