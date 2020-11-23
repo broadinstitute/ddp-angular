@@ -104,7 +104,6 @@ export class SurveyComponent implements OnInit {
 
   private getActivities(): Observable<ActivityInstance[]> {
     return this.userActivityAgent.getActivities(of(this.config.studyGuid)).pipe(
-      take(1),
       tap(activities => {
         this.activities = activities;
       })
