@@ -51,6 +51,11 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
                         </span>
             </li>
             <li class="Nav-item">
+                        <span (click)="clickStudyListing()" id="Study Listing" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/study-listing'}" translate>
+                            Toolkit.Common.StudyListing
+                        </span>
+            </li>
+            <li class="Nav-item">
                         <span id="Sign In Out" class="Nav-itemLink">
                             <ddp-sign-in-out></ddp-sign-in-out>
                         </span>
@@ -106,5 +111,9 @@ export class PrionHeaderComponent extends HeaderComponent {
 
   public clickLearnMore(): void {
     this._router.navigateByUrl('/learn-more');
+  }
+
+  public clickStudyListing(): void {
+    this._router.navigateByUrl('/study-listing');
   }
 }

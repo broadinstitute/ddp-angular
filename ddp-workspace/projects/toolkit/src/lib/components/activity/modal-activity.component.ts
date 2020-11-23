@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager } from 'ddp-sdk';
+import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager, LoggingService } from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
 
 @Component({
@@ -69,13 +69,14 @@ export class ModalActivityComponent extends ActivityComponent {
   @Input() data: ModalActivityData;
 
   constructor(public dialog: MatDialog,
+              logger: LoggingService,
               windowRef: WindowRef,
               renderer: Renderer2,
               submitService: SubmitAnnouncementService,
               analytics: AnalyticsEventsService,
               @Inject(DOCUMENT) document: any,
               injector: Injector) {
-    super(windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, document, injector);
   }
 
   public get isStepBeforeLast(): boolean {

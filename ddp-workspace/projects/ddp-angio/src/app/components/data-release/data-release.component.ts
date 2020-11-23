@@ -2,19 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
-import { WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'data-release',
-    styles: [`
-    .PageContent-title, .PageContent-subtitle {
-        color: black;
-    }
-    .PageContent-ul li, ul li.PageContent-text {
-        padding: 0;
-        margin: 10px 0;
-    }
-    `],
     template: `
     <toolkit-header [showButtons]="false"></toolkit-header>
     <div class="Wrapper">
@@ -35,176 +25,115 @@ import { WindowRef } from 'ddp-sdk';
                 <div class="row NoMargin">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="PageContent-section">
-                            <div class="row NoMargin Left">
-                                <button mat-button color="primary"
-                                        class="ButtonFilled Button--rect"
-                                        (click)="openDisclaimerDialog()"
-                                        [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
-                                </button>
-                            </div>
                             <div class="row topMarginMedium">
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.MainText.Section1
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph1</p>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph2</p>
+                                <p class="PageContent-text">
+                                    <span translate>Toolkit.DataRelease.Intro.Paragraph3</span>
+                                    <a [href]="dataEmailHref" class="Link">{{dataEmail}}</a>.
                                 </p>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.MainText.Section2
-                                </p>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.MainText.Section3
-                                </p>
-
-                              <div class="row NoMargin Left">
-                                <a href="http://em.rdcu.be/ls/click?upn=1VX9wGiUV7k-2FG8imEHteF25Ol5yBjR8SA-2FhQtoXbTgU-3DgnoE_eYO6zdaQoUubxrJz-2BH2Zv38FHa3PI5OJUb9BGSLB-2BF6glT83ifBpYralVEDHtm8fUe-2Fn2THVk97Rxygjq3vwNUApHjpwIHPbAn8NGj-2B4k4IRyGmAQwVgdtIxzIPwH4I5t0r5oau6ZlrcVrlqp9-2FKg4-2FwNLNPuZX3HycTX0v1XpUk2lh15XEgnM6M0A5rOIG1YGhUUshXmSFLbpMQGgGKsQb6ejoYL1PsmMQEhEJu94850We9c0axfNJM1lsMxWGnC83WszbjBFZwZBjJ5KrqH09R57ssi7kp2rpSMCUNxrEZfn-2BdVj0614MEOChUvTOT"
-                                   target="_blank"
-                                   style="margin-top:20px;">
-                                  <button mat-button color="primary"
-                                          class="ButtonFilled Button--rect"
-                                          [innerHTML]="'Toolkit.DataRelease.ViewPaperButton' | translate">
-                                  </button>  
-                                </a>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph4</p>
+                                <div class="row Left margin-top-bottom">
+                                    <a href="http://em.rdcu.be/ls/click?upn=1VX9wGiUV7k-2FG8imEHteF25Ol5yBjR8SA-2FhQtoXbTgU-3DgnoE_eYO6zdaQoUubxrJz-2BH2Zv38FHa3PI5OJUb9BGSLB-2BF6glT83ifBpYralVEDHtm8fUe-2Fn2THVk97Rxygjq3vwNUApHjpwIHPbAn8NGj-2B4k4IRyGmAQwVgdtIxzIPwH4I5t0r5oau6ZlrcVrlqp9-2FKg4-2FwNLNPuZX3HycTX0v1XpUk2lh15XEgnM6M0A5rOIG1YGhUUshXmSFLbpMQGgGKsQb6ejoYL1PsmMQEhEJu94850We9c0axfNJM1lsMxWGnC83WszbjBFZwZBjJ5KrqH09R57ssi7kp2rpSMCUNxrEZfn-2BdVj0614MEOChUvTOT"
+                                       target="_blank">
+                                        <button mat-button color="primary"
+                                                class="ButtonFilled Button--rect"
+                                                [innerHTML]="'Toolkit.DataRelease.ViewPaperButton' | translate">
+                                        </button>  
+                                    </a>
+                                </div>
+                                <p class="PageContent-text PageContent-text__important" translate>Toolkit.DataRelease.Intro.Paragraph5</p>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph6</p>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph7</p>
                                 
-                              </div>
-                              
-                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.InformationList.Title</h2>
-                                <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item1</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item2</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item3</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.InformationList.Item4</li>
-                                </ul>
+                                <h2 class="PageContent-title" translate>Toolkit.DataRelease.cBioPortal.Title</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.cBioPortal.Paragraph1</p>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.cBioPortal.Paragraph2</p>
+                                <div class="row Left margin-top-bottom">
+                                    <button mat-button color="primary"
+                                            class="ButtonFilled Button--rect"
+                                            (click)="openDisclaimerDialog()"
+                                            [innerHTML]="'Toolkit.DataRelease.ViewDataButton' | translate">
+                                    </button>
+                                </div>
                                 <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Contact.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
-                                    <span translate>Toolkit.DataRelease.Contact.TextPt2</span>
+                                    <span translate>Toolkit.DataRelease.cBioPortal.Paragraph3.Part1</span>
+                                    <a class="Link" href="https://www.cbioportal.org/study/summary?id=angs_project_painter_2018" target="_blank" translate>
+                                        Toolkit.DataRelease.cBioPortal.Paragraph3.Link</a>.
+                                    <span translate>Toolkit.DataRelease.cBioPortal.Paragraph3.Part2</span>
                                 </p>
-                                <h2 class="PageContent-title" translate>Toolkit.DataRelease.BioPortal.Title</h2>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.cBioPortal.Paragraph4</h2>
+                                <ul class="PageContent-ul">
+                                    <ng-container *ngFor="let item of 'Toolkit.DataRelease.cBioPortal.List' | translate">
+                                        <li class="PageContent-text PageContent-text-list">{{item}}</li>        
+                                    </ng-container>
+                                </ul>
+
+                                <h2 class="PageContent-title" translate>Toolkit.DataRelease.GDC.Title</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.GDC.Paragraph1</p>
                                 <p class="PageContent-text">
-                                    <a class="Link" (click)="openDisclaimerDialog()" translate>Toolkit.DataRelease.BioPortal.Link</a>
+                                    <span translate>Toolkit.DataRelease.GDC.Paragraph2.Part1</span>
+                                    <a class="Link" href="https://gdc.cancer.gov/about-gdc/contributed-genomic-data-cancer-research/count-me-cmi" target="_blank" translate>
+                                        Toolkit.DataRelease.GDC.Paragraph2.Link</a>
+                                    <span translate>Toolkit.DataRelease.GDC.Paragraph2.Part2</span>
                                 </p>
-                                <h2 class="PageContent-title" translate>
-                                    Toolkit.DataRelease.AdditionalInfoTitle
-                                </h2>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Goal.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Goal.Text
-                                </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Difference.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Difference.Text
-                                </p>
+                                <div class="row Left margin-top">
+                                    <a href="https://portal.gdc.cancer.gov/projects/CMI-ASC"
+                                    target="_blank">
+                                        <button mat-button color="primary"
+                                                class="ButtonFilled Button--rect"
+                                                [innerHTML]="'Toolkit.DataRelease.ViewDataInGDC' | translate">
+                                        </button>
+                                    </a>
+                                </div>
+                                <ng-container *ngFor="let item of 'Toolkit.DataRelease.GDC.Questions' | translate">
+                                    <h2 class="PageContent-subtitle">{{item.Question}}</h2>
+                                    <p class="PageContent-text">{{item.Answer}}</p> 
+                                </ng-container>
+
+                                <h2 class="PageContent-title" translate>Toolkit.DataRelease.FAQ.Title</h2>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Dataset.Question</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Dataset.Answer</p>
                                 <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Difference.ReasonsList.Item1</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Difference.ReasonsList.Item2.Main</li>
-                                    <ul>
-                                        <li class="PageContent-text Sub-item" translate>Toolkit.DataRelease.Difference.ReasonsList.Item2.SubItem1</li>
-                                        <li class="PageContent-text Sub-item" translate>Toolkit.DataRelease.Difference.ReasonsList.Item2.SubItem2</li>
-                                        <li class="PageContent-text Sub-item" translate>Toolkit.DataRelease.Difference.ReasonsList.Item2.SubItem3</li>
-                                    </ul>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Difference.ReasonsList.Item3</li>
+                                    <ng-container *ngFor="let item of 'Toolkit.DataRelease.FAQ.Dataset.List' | translate">
+                                        <li class="PageContent-text PageContent-text-list">{{item.Text}}</li>
+                                        <ul *ngIf="item.SubList.length">
+                                            <ng-container *ngFor="let subItem of item.SubList">
+                                                <li class="PageContent-text Sub-item">{{subItem}}</li>
+                                            </ng-container>
+                                        </ul>
+                                    </ng-container>
                                 </ul>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Additional.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Additional.TextPt1
-                                </p>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Additional.TextPt2
-                                </p>
-                                <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item1</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item2</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item3</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item4</li>
-                                    <li class="PageContent-text PageContent-text-list" translate>Toolkit.DataRelease.Additional.FieldsList.Item5</li>
-                                </ul>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.DataIncluded.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.DataIncluded.Text
-                                </p>
-                                <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list" [innerHtml]="'Toolkit.DataRelease.DataIncluded.DataList.Item1' | translate"></li>
-                                    <li class="PageContent-text PageContent-text-list" [innerHtml]="'Toolkit.DataRelease.DataIncluded.DataList.Item2' | translate"></li>
-                                    <li class="PageContent-text PageContent-text-list" [innerHtml]="'Toolkit.DataRelease.DataIncluded.DataList.Item3' | translate"></li>
-                                    <li class="PageContent-text PageContent-text-list" [innerHtml]="'Toolkit.DataRelease.DataIncluded.DataList.Item4' | translate"></li>
-                                </ul>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Resources.Title
-                                </h2>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.ClinicalCare.Question</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.ClinicalCare.Answer</p>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Samples.Question</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Samples.Answer</p>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Methods.Question</h2>
                                 <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Resources.TextPt1</span>
-                                    <a (click)="scrollTo(glossary)" class="Link" translate> Toolkit.DataRelease.Resources.Link </a>
-                                    <span translate>Toolkit.DataRelease.Resources.TextPt2</span>
+                                    <span translate>Toolkit.DataRelease.FAQ.Methods.Answer.Part1</span>
+                                    <a [href]="dataEmailHref" class="Link">{{dataEmail}}</a>
+                                    <span translate>Toolkit.DataRelease.FAQ.Methods.Answer.Part2</span>
                                 </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Cite.Title
-                                </h2>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Cited.Question</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Cited.Answer1</p>
                                 <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Cite.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
-                                    <span translate>Toolkit.DataRelease.Cite.TextPt2</span>
+                                    <span translate>Toolkit.DataRelease.FAQ.Cited.Answer2.Part1</span>
+                                    <a href="https://www.cbioportal.org/study/summary?id=angs_project_painter_2018" class="Link" translate>
+                                        Toolkit.DataRelease.FAQ.Cited.Answer2.Link</a>,
+                                    <span translate>Toolkit.DataRelease.FAQ.Cited.Answer2.Part2</span>
                                 </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Unknown.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Unknown.Text
-                                </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Samples.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Samples.Text
-                                </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Sequence.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Sequence.Text
-                                </p>
-                                <h2 class="PageContent-subtitle" translate>
-                                    Toolkit.DataRelease.Inform.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Inform.Text
-                                </p>
-                                <h2 class="PageContent-title" translate>
-                                    Toolkit.DataRelease.Appendices.Title
-                                </h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Cited.Answer3</p>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Appendices.Title</h2>
                                 <ul class="PageContent-ul">
-                                    <li class="PageContent-text PageContent-text-list">
-                                        <a href="Methods.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item1.Link </a>
-                                        <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item1.Text</span>
-                                    </li>
-                                    <li class="PageContent-text PageContent-text-list">
-                                        <a href="AboutYouSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Link </a>
-                                        <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Text</span>
-                                    </li>
-                                    <li class="PageContent-text PageContent-text-list">
-                                        <a href="ConsentAndRelease.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item3.Link </a>
-                                        <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item3.Text</span>
-                                    </li>
-                                    <li class="PageContent-text PageContent-text-list">
-                                        <a href="SalivaSampleInstructions.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item4.Link </a>
-                                        <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item4.Text</span>
-                                    </li>
-                                    <li class="PageContent-text PageContent-text-list">
-                                        <a href="BloodSampleInstructions.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item5.Link </a>
-                                        <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item5.Text</span>
-                                    </li>
+                                    <ng-container *ngFor="let item of 'Toolkit.DataRelease.FAQ.Appendices.List' | translate">
+                                        <li class="PageContent-text PageContent-text-list">
+                                            <a [href]="item.PDF" target="_blank" class="Link">{{item.Link}}</a>
+                                            <span>{{item.Text}}</span>
+                                        </li>                             
+                                    </ng-container>
                                 </ul>
-                                <h2 #glossary class="PageContent-title" translate>
-                                    Toolkit.DataRelease.Glossary.Title
-                                </h2>
-                                <p class="PageContent-text" translate>
-                                    Toolkit.DataRelease.Glossary.Text
-                                </p>
+                                <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Terminology.Title</h2>
+                                <p class="PageContent-text" translate>Toolkit.DataRelease.FAQ.Terminology.Text</p>
                                 <div id="NCITermDictionaryWidgetEnglish">
                                     <iframe lazy-resource
                                             frameborder="0"
@@ -215,18 +144,31 @@ import { WindowRef } from 'ddp-sdk';
                                             style="width: 100%; height: 300px;">
                                     </iframe>
                                 </div>
-                                <p class="PageContent-text">
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt1</span>
-                                    <a [href]="dataEmailHref" class="Link"> {{ dataEmail }} </a>
-                                    <span translate>Toolkit.DataRelease.Glossary.Additional.TextPt2</span>
-                                </p>
                             </div>
                         </section>
                     </div>
                 </div>
             </div>
         </article>
-    </div>`
+    </div>`,
+    styles: [`
+        .PageContent-title, .PageContent-subtitle {
+            color: black;
+        }
+
+        .PageContent-ul li, ul li.PageContent-text {
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .margin-top {
+            margin: 20px 0 0 0;
+        }
+
+        .margin-top-bottom {
+            margin: 20px 0;
+        }
+    `],
 })
 export class DataReleaseComponent implements OnInit {
     public dataEmail: string;
@@ -234,17 +176,11 @@ export class DataReleaseComponent implements OnInit {
 
     constructor(
         private dialog: MatDialog,
-        private windowRef: WindowRef,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
         this.dataEmail = this.toolkitConfiguration.dataEmail;
         this.dataEmailHref = `mailto:${this.toolkitConfiguration.dataEmail}`;
-    }
-
-    public scrollTo(target): void {
-        target.scrollIntoView();
-        this.windowRef.nativeWindow.scrollBy(0, -100);
     }
 
     public openDisclaimerDialog(): void {

@@ -7,6 +7,7 @@ export class ToolkitConfigurationService {
     // GUIDs
     studyGuid: string;
     aboutYouGuid: string;
+    aboutFamilyGuid: string;
     aboutChildGuid: string;
     consentGuid: string;
     consentAssentGuid: string;
@@ -28,6 +29,7 @@ export class ToolkitConfigurationService {
     // URLs
     aboutUsUrl: string;
     aboutYouUrl: string;
+    aboutFamily: string;
     aboutChildUrl: string;
     lovedOneUrl: string;
     internationalPatientsUrl: string;
@@ -53,6 +55,7 @@ export class ToolkitConfigurationService {
     addressUrl: string;
     adminDashboardUrl: string | null = null;
     mailingListDialogUrl: string;
+    participantListUrl: string;
 
     // Social media and contacts
     phone: string;

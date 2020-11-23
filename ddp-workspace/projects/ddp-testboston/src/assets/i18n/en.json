@@ -66,8 +66,8 @@
     "IntroSection": {
       "Title": "We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.",
       "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard.",
-      "Code": "Enter my invitation code",
-      "NoCode": "I don't have an invitation code"
+      "Code": "I have an invitation code",
+      "NoCode": "I don’t have an invitation code and want to join the study"
     },
     "AboutSection": {
       "Title": "About the Study",
@@ -89,7 +89,7 @@
         {
           "Question": "Can anybody join this study?",
           "Paragraphs": [
-            "TestBoston is open to a randomly selected group of adult residents from the greater Boston area, who have received care at Brigham and Women’s Hospital at least once in the past year. Each randomly selected patient will receive an invitation to the study by postal mail or email."
+            "Yes. TestBoston is open to all adults in the greater Boston area. To volunteer, please fill in a brief screening survey <a class=\"Link Link_semi-bold\" href=\"https://rally.partners.org/study/testboston\" target=\"_blank\">here</a>. If you volunteer and are selected to participate, you will be emailed an invitation code to register."
           ]
         },
         {
@@ -101,13 +101,13 @@
         {
           "Question": "Will I receive my results?",
           "Paragraphs": [
-            "You will receive the research results of your viral test. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private."
+            "You will receive the research results of your viral test. These will be posted on your TestBoston.org dashboard every month within about 24-48 hours of your kit being sent back to us. You will not receive the results of your antibody test. Results will inform public health decision-making. When results are reported, they will be released as a data summary noting basic demographic information. Your identity will remain private."
           ]
         },
         {
           "Question": "Is TestBoston only for people experiencing COVID-19 symptoms?",
           "Paragraphs": [
-            "No - anyone who has received an invitation to participate in TestBoston is welcome to enroll in the study, regardless of whether or not you are experiencing symptoms (or has ever experienced symptoms in the past)."
+            "No - any adult resident of the greater Boston area is welcome to volunteer for the study, regardless of whether or not you are experiencing symptoms (or have ever experienced symptoms in the past)."
           ]
         },
         {
@@ -125,7 +125,7 @@
         {
           "Question": "Is it free to participate in TestBoston?",
           "Paragraphs": [
-            "Yes. There is no charge to participate in TestBoston."
+            "Yes. There is no charge to participate in TestBoston. We will pay for the kit, shipping costs and monthly testing--none of these services will be billed to your insurance."
           ]
         },
         {
@@ -137,13 +137,13 @@
         {
           "Question": "Can my family join TestBoston?",
           "Paragraphs": [
-            "Right now, only Brigham and Women’s patients who receive randomly-generated invitations can join TestBoston. If more than one person in your household has received an invitation letter, then you can both join the study if you choose. If you did not receive an invitation, but you are interested in staying informed of study progress, you are welcome to <a class=\"Link Link_semi-bold\" href=\"#stay-informed\">join the TestBoston mailing list</a>."
+            "Anyone interested in joining the study is asked to fill in a brief screening survey <a class=\"Link Link_semi-bold\" href=\"https://rally.partners.org/study/testboston\" target=\"_blank\">here</a>. Participants are randomly selected on an individual basis, which could mean that even if multiple family members from one household volunteer, only one person may be selected to participate."
           ]
         },
         {
           "Question": "Can I give my invitation code to someone else?",
           "Paragraphs": [
-            "No. The invitation code should only be used by the person that the letter is addressed to."
+            "No. Each invitation code should only be used by the person that the invitation letter is addressed to."
           ]
         },
         {

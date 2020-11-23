@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LanguageService, NGXTranslateService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Subscription, merge, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-help',
@@ -14,6 +14,7 @@ export class HelpComponent implements OnInit, OnDestroy {
   public phone: string;
   public email: string;
   public video: SafeResourceUrl;
+  public language: string;
   private anchor: Subscription;
 
   constructor(
@@ -37,6 +38,7 @@ export class HelpComponent implements OnInit, OnDestroy {
       of(null),
       this.languageService.onLanguageChange()
     ).pipe(
+      tap(() => this.language = this.languageService.getCurrentLanguage()),
       switchMap(() => this.translate.getTranslation('Help.Collect.Video')),
       map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
     ).subscribe(safeUrl => {

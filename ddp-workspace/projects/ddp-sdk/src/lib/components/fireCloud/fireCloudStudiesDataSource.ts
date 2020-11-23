@@ -5,6 +5,8 @@ import { LoggingService } from '../../services/logging.service';
 import { FireCloudServiceAgent } from '../../services/serviceAgents/fireCloudServiceAgent.service';
 
 export class FireCloudStudiesDataSource extends DataSource<Study> {
+    private readonly LOG_SOURCE = 'FireCloudStudiesDataSource';
+
     constructor(
         private serviceAgent: FireCloudServiceAgent,
         private logger: LoggingService) {
@@ -12,7 +14,7 @@ export class FireCloudStudiesDataSource extends DataSource<Study> {
     }
 
     public connect(): Observable<Array<Study>> {
-        this.logger.logEvent('FireCloudStudiesDataSource', 'querying studies');
+        this.logger.logEvent(this.LOG_SOURCE, 'querying studies');
 
         return this.serviceAgent.getStudies();
     }

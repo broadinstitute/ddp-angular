@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain brain-v2 angio mbc testboston mpc prion atcp rarex"
+    "osteo brain angio mbc testboston mpc prion atcp rgp rarex"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex"
+      "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rgp rarex"
   config_deployment_dir: &config_deployment_dir
       config/deployment
 
@@ -431,13 +431,13 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: testboston
       - conditionally-launch-build-and-store:
-          study_key: brain-v2
-      - conditionally-launch-build-and-store:
           study_key: mpc
       - conditionally-launch-build-and-store:
           study_key: atcp
       - conditionally-launch-build-and-store:
           study_key: rarex
+      - conditionally-launch-build-and-store:
+          study_key: rgp
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -535,9 +535,6 @@ workflows:
           study_key: testboston
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
-          study_key: brain-v2
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
           study_key: mpc
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -545,6 +542,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: rarex
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: rgp
 
   nightly:
     triggers:
@@ -571,9 +571,6 @@ workflows:
           name: testboston-nightly
           study_key: testboston
       - build-and-deploy-job:
-          name: brain-v2-nightly
-          study_key: brain-v2
-      - build-and-deploy-job:
           name: mpc-nightly
           study_key: mpc
       - build-and-deploy-job:
@@ -582,3 +579,6 @@ workflows:
       - build-and-deploy-job:
           name: rarex-nightly
           study_key: rarex
+      - build-and-deploy-job:
+          name: rgp-nightly
+          study_key: rgp

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfigurationService } from '../../services/configuration.service';
 import { Auth0AdapterService } from '../../services/authentication/auth0Adapter.service';
 import { LoggingService } from '../../services/logging.service';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 import { WindowRef } from '../../services/windowRef';
 import { Subscription } from 'rxjs';
 
@@ -13,13 +12,12 @@ import { Subscription } from 'rxjs';
     template: `<p>Registering with ddp...</p>`
 })
 export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
-    private LOG_SOURCE = 'Auth0CodeCallback';
+    private LOG_SOURCE = 'Auth0CodeCallbackComponent';
     private anchor: Subscription;
 
     constructor(
         @Inject('ddp.config') private configuration: ConfigurationService,
         private adapter: Auth0AdapterService,
-        private session: SessionMementoService,
         private log: LoggingService,
         private httpClient: HttpClient,
         private route: ActivatedRoute,
@@ -59,7 +57,7 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
             const nextUrl = isAdmin ? this.configuration.adminLoginLandingUrl : this.configuration.loginLandingUrl;
             this.anchor = this.httpClient.post<LocalRegistrationResponse>(this.configuration.localRegistrationUrl, registrationPayload)
                 .subscribe(registrationResponse => {
-                console.log(registrationResponse);
+                this.log.logEvent(this.LOG_SOURCE, registrationResponse);
                 this.log.logEvent(this.LOG_SOURCE, 'Now redirecting to ' + nextUrl + ' with id token '
                     + registrationResponse.idToken);
                 this.adapter.setSession(registrationResponse, isAdmin);

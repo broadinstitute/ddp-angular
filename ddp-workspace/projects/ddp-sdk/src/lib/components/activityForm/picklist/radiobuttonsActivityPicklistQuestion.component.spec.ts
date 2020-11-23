@@ -22,14 +22,18 @@ describe('RadioButtonsActivityPicklistQuestion', () => {
                 optionLabel: 'I have received medications',
                 allowDetails: true,
                 detailLabel: '',
-                tooltip: 'Helper text'
+                tooltip: 'Helper text',
+                nestedOptionsLabel: null,
+                nestedOptions: null
             },
             {
                 stableId: 'BBB',
                 optionLabel: 'I have not received any medications',
                 allowDetails: false,
                 detailLabel: '',
-                tooltip: null
+                tooltip: null,
+                nestedOptionsLabel: null,
+                nestedOptions: null
             }
         ],
         renderMode: 'LIST',
