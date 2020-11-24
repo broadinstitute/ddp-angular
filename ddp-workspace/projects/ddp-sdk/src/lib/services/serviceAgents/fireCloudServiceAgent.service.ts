@@ -49,7 +49,7 @@ export class FireCloudServiceAgent extends AdminServiceAgent<any> {
     }
 
     public exportStudy(studyGuid: string, fcWorkspaceNameSpace: string, fcWorkspace: string): Observable<any> {
-        const url = `/admin/studies/${studyGuid}/export`;
+        const url = `/studies/${studyGuid}/export`;
         return this.postObservable(url,
             {
                 workspaceNamespace: fcWorkspaceNameSpace,
@@ -67,14 +67,14 @@ export class FireCloudServiceAgent extends AdminServiceAgent<any> {
     }
 
     public getStudies(): Observable<Array<Study>> {
-        return this.getObservable(`/admin/studies`).pipe(
+        return this.getObservable(`/studies`).pipe(
             filter(x => x != null),
             map(x => x as Array<Study>)
         );
     }
 
     public getWorkspaces(): Observable<Array<FireCloudWorkspace>> {
-        return this.getObservable(`/admin/workspaces`).pipe(
+        return this.getObservable(`/workspaces`).pipe(
             filter(x => x != null),
             map(x => x as Array<FireCloudWorkspace>)
         );

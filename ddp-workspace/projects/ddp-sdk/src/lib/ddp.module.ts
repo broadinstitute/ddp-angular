@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
@@ -22,7 +23,7 @@ import { SessionMementoService } from './services/sessionMemento.service';
 import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
-import { LanguageService } from './services/languageService.service';
+import { LanguageService } from './services/internationalization/languageService.service';
 
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
@@ -39,6 +40,7 @@ import { ParticipantProfileComponent } from './components/user/participantProfil
 import { ManageParticipantsComponent } from './components/user/manageParticipants.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 import { IrbGuard } from './guards/irb.guard';
 import { BrowserGuard } from './guards/browser.guard';
 
@@ -68,7 +70,8 @@ import { ActivityQuestionConverter } from './services/activity/activityQuestionC
 import { ActivityComponentConverter } from './services/activity/activityComponentConverter.service';
 import { ActivityValidatorBuilder } from './services/activity/activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './services/activity/activitySuggestionBuilder.service';
-
+import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectInvitationServiceAgent.service';
+import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
@@ -109,9 +112,7 @@ import { DatePickerComponent } from './components/datePicker.component';
 
 import { ExceptionDispatcher } from './services/exceptionHandling/exceptionDispatcher.service';
 import { AddressInputComponent } from './components/address/addressInput.component';
-import { AddressEntryComponent } from './components/address/addressEntry.component';
 import { AddressEmbeddedComponent } from './components/address/addressEmbedded.component';
-import { AddressConfirmComponent } from './components/address/addressConfirm.component';
 
 import { VerifyAgeUpComponent } from './components/age-up/verifyAgeUp.component';
 import { AcceptAgeUpComponent } from './components/age-up/acceptAgeUp.component';
@@ -142,6 +143,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ScriptLoaderService } from './services/scriptLoader.service';
 import { AddressService } from './services/address.service';
@@ -158,14 +160,25 @@ import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAu
 import { ConditionalBlockComponent } from './components/activityForm/conditionalBlock.component';
 import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
+import { TooltipComponent } from './components/tooltip.component';
+import { SubjectPanelComponent } from './components/subjectPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
-import { InvitationsServiceAgent } from './services/serviceAgents/invitationsServiceAgent.service';
+import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
 import { RouteTransformerDirective } from './directives/routeTransformer.directive';
 
 import { RenewSessionNotifier } from './services/renewSessionNotifier.service';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+import { InvitationCodeFormatterDirective } from './directives/invitationCodeFormatter.directive';
+import { LanguageSelectorComponent } from './components/internationalization/languageSelector.component';
+import { ChangeLanguageRedirectComponent } from './components/internationalization/changeLanguageRedirect.component';
+import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
+import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
+import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { InvitationPipe } from './pipes/invitationFormatter.pipe';
+import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
   const getter = () => sessionService.token;
@@ -211,6 +224,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MatGridListModule,
     MatStepperModule,
     MatAutocompleteModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -225,10 +239,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         useFactory: jwtOptionsFactory,
         deps: [SessionMementoService]
       }
-    })
+    }),
+    RouterModule
   ],
   providers: [
     AuthGuard,
+    AdminAuthGuard,
     IrbGuard,
     BrowserGuard,
     Auth0AdapterService,
@@ -239,11 +255,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SessionMementoService,
     AnalyticsEventsService,
     UserActivityServiceAgent,
+    SubjectInvitationServiceAgent,
     UserProfileServiceAgent,
     ActivityServiceAgent,
     PrequalifierServiceAgent,
     GovernedParticipantsServiceAgent,
     ActivityInstanceStatusServiceAgent,
+    LanguageServiceAgent,
     MailingListServiceAgent,
     ActivityValidatorBuilder,
     ActivitySuggestionBuilder,
@@ -267,12 +285,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     IrbPasswordService,
     ResendEmailServiceAgent,
     AnnouncementsServiceAgent,
+    UserInvitationServiceAgent,
     BrowserContentService,
     TemporaryUserServiceAgent,
-    InvitationsServiceAgent,
+    InvitationServiceAgent,
     Title,
     RenewSessionNotifier,
     LanguageService,
+    DisplayLanguagePopupServiceAgent,
+    StudyDetailServiceAgent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -291,6 +312,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     UserPreferencesComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
+    PopupWithCheckboxComponent,
 
     // activity form
     ActivityComponent,
@@ -319,6 +342,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LoadingComponent,
     LoaderComponent,
     UserMenuComponent,
+    LanguageSelectorComponent,
     ManageParticipantsComponent,
     Auth0CodeCallbackComponent,
     RedirectToAuth0LoginComponent,
@@ -327,16 +351,18 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ExportStudyComponent,
     DatePickerComponent,
     AddressInputComponent,
-    AddressEntryComponent,
     AddressEmbeddedComponent,
-    AddressConfirmComponent,
     VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     InputRestrictionDirective,
     LazyLoadResourcesDirective,
     UpperCaseInputDirective,
     AddressGoogleAutocompleteDirective,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    InvitationCodeFormatterDirective,
+    InvitationPipe,
+    TooltipComponent,
+    SubjectPanelComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -348,6 +374,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ParticipantProfileComponent,
     UserActivitiesComponent,
     DashboardComponent,
+    ChangeLanguageRedirectComponent,
+    PopupWithCheckboxComponent,
 
     ActivityComponent,
     ActivityRedesignedComponent,
@@ -370,13 +398,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DropdownActivityPicklistQuestion,
     CheckboxesActivityPicklistQuestion,
     RadioButtonsActivityPicklistQuestion,
-
     InstitutionComponent,
     InstitutionsFormComponent,
 
     LoadingComponent,
     LoaderComponent,
     UserMenuComponent,
+    LanguageSelectorComponent,
     ManageParticipantsComponent,
     RedirectToAuth0LoginComponent,
     Auth0CodeCallbackComponent,
@@ -387,14 +415,17 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     AddressInputComponent,
     AddressEmbeddedComponent,
-    AddressEntryComponent,
-    AddressConfirmComponent,
     VerifyAgeUpComponent,
     AcceptAgeUpComponent,
     ValidationMessage,
     TranslateModule,
     LazyLoadResourcesDirective,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    UpperCaseInputDirective,
+    InvitationCodeFormatterDirective,
+    InvitationPipe,
+    TooltipComponent,
+    SubjectPanelComponent
   ],
   entryComponents: [
     UserPreferencesComponent,

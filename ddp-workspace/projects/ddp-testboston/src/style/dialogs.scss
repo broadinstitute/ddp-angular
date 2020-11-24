@@ -1,0 +1,25 @@
+.mat-dialog-container {
+    position: relative;
+
+    .mat-icon-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .button_secondary {
+        margin-right: 1rem;
+    }
+}
+
+h1.Modal-title {
+    padding-right: 2rem;
+}
+
+.Modal-progress {
+    margin: 5px 0;
+}
+
+.mat-progress-bar-buffer {
+    background-color: lightgray !important;
+}

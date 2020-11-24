@@ -60,8 +60,12 @@
                     <div class="sac-member">
                         <img lazy-resource class="sac-member__image" [src]="member.Image" [alt]="member.Alt">
                         <div>
-                            <a class="sac-member__link" [ngClass]="{'sac-member__link_disabled': !member.Url}"
-                                [href]="member.Url" target="_blank">{{member.Name}}</a>
+                            <ng-container *ngIf="member.Url; else text">
+                                <a class="sac-member__link" [href]="member.Url" target="_blank">{{member.Name}}</a>
+                            </ng-container>
+                            <ng-template #text>
+                                <p class="sac-member__text">{{member.Name}}</p>
+                            </ng-template>
                             <div class="affiliations">
                                 <ng-container *ngFor="let affiliation of member.Affiliations">
                                     <p class="no-margin affiliations__text">{{affiliation}}</p>

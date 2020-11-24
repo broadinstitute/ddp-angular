@@ -11,7 +11,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
         <main class="main">
             <section class="section static-page-title-section">
                 <div class="content content_tight">
-                    <h1 translate>Toolkit.Password.Title</h1>
+                    <h1 class="static-page-title-section__title" translate>Toolkit.Password.Title</h1>
                 </div>
             </section>
             <section class="section static-page-content-section">
@@ -22,6 +22,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                             <mat-form-field>
                                 <input matInput
                                     type="password"
+                                    (change)="hideErrors()"
                                     formControlName="password"
                                     [placeholder]="'Toolkit.Password.InputPlaceholder' | translate"
                                     maxLength="200">
@@ -33,6 +34,9 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
                             </div>
                             <div *ngIf="isPasswordWrong" class="ErrorMessage">
                                 <span translate>Toolkit.Password.PasswordWrongError</span>
+                            </div>
+                            <div *ngIf="isCommunicationError" class="ErrorMessage">
+                                <span translate>Toolkit.Password.OtherError</span>
                             </div>
                         </form>
                     </div>

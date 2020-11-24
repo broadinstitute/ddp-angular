@@ -9,6 +9,7 @@ export * from './lib/services/toolkitConfiguration.service';
 export * from './lib/services/workflowBuilder.service';
 export * from './lib/services/workflowMapper.service';
 export * from './lib/services/headerConfiguration.service';
+export * from './lib/services/cookiesManagement.service';
 
 export * from './lib/components/activity/activity.component';
 export * from './lib/components/activity/activity-redesigned.component';
@@ -32,6 +33,7 @@ export * from './lib/components/footer/footer.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/login-landing/login-landing.component';
 export * from './lib/components/login-landing/login-landing-redesigned.component';
+export * from './lib/components/login-landing/admin-login-landing.component';
 export * from './lib/components/thank-you/loved-one-thank-you.component';
 export * from './lib/components/thank-you/loved-one-thank-you-redesigned.component';
 export * from './lib/components/password/password.component';
@@ -51,5 +53,10 @@ export * from './lib/components/instagram-feed-lightwidget-plugin/instagram-feed
 export * from './lib/components/age-up/verifyAgeUpPage.component';
 export * from './lib/components/age-up/acceptAgeUpPage.component';
 export * from './lib/components/thank-you/age-up-thank-you.component';
+export * from './lib/components/twitter-widget/twitter-timeline-widget.component';
+export * from './lib/components/app/app-redesigned-base.component';
+export * from './lib/components/cookies/cookiesBanner/cookiesBanner.component';
+export * from './lib/components/privacy-policy/prionPrivacyPolicy.component';
 
 export * from './lib/guards/headerAction.guard';
+export * from './lib/guards/cookiesConsent.guard';

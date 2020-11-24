@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { UserActivityServiceAgent, AddressEmbeddedComponent, AddressService, CompositeDisposable } from 'ddp-sdk';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActivityServiceAgent } from 'ddp-sdk';
+import { BehaviorSubject, empty } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { empty } from 'rxjs';
 import * as _ from 'underscore';
+import { MailAddressBlock, LoggingService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
@@ -13,20 +13,30 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   @ViewChild(AddressEmbeddedComponent, { static: true }) addressComponent: AddressEmbeddedComponent;
   public activityInstanceGuid: string;
   public inputParameters = {};
+  public isReadOnly = true;
+  public bogusAddress = null;
   private anchor: CompositeDisposable;
+  public block: MailAddressBlock;
+  private readonly LOG_SOURCE = 'AddressEmbeddedSandboxComponent';
 
-  constructor(private activityService: UserActivityServiceAgent,
+  constructor(
+    private logger: LoggingService,
+    private activityService: UserActivityServiceAgent,
     private addressService: AddressService) {
     this.anchor = new CompositeDisposable();
+    const block = new MailAddressBlock(1);
+    block.titleText = 'The Title!!!';
+    block.subtitleText = 'The subtitle!!!';
+    this.block = block;
   }
 
   public ngOnInit(): void {
     const get = this.activityService.getActivities(new BehaviorSubject('TESTSTUDY1')).subscribe((result) => {
       if (result && _.isArray(result) && result.length > 0) {
         this.activityInstanceGuid = result[0].instanceGuid;
-        console.log('Got an activityIntanceGuid:' + this.activityInstanceGuid);
+        this.logger.logEvent(this.LOG_SOURCE, `Got an activityIntanceGuid: ${this.activityInstanceGuid}`);
       } else {
-        console.log('Could not find and activity');
+        this.logger.logEvent(this.LOG_SOURCE, 'Could not find and activity');
       }
     });
     this.anchor.addNew(get);
@@ -42,8 +52,26 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
 
   public deleteTempAddress(): void {
     const del = this.addressService.deleteTempAddress(this.activityInstanceGuid).subscribe(
-      () => console.log('temp address deleted'));
+      () => this.logger.logEvent(this.LOG_SOURCE, 'Temp address deleted'));
     this.anchor.addNew(del);
+  }
+
+  public toggleReadOnly() {
+    this.isReadOnly = !(this.isReadOnly);
+    this.logger.logEvent(this.LOG_SOURCE, `Readonly has been toggled to : ${this.isReadOnly}`);
+  }
+
+  public setBogusAddress(): void {
+    this.bogusAddress = {
+      name: (Math.random() + ''),
+      street1: (Math.random() + ''),
+      street2: (Math.random() + ''),
+      city: (Math.random() + ''),
+      state: (Math.random() + ''),
+      zip: (Math.random() + ''),
+      country: 'US',
+      phone: (Math.random() + '')
+    };
   }
 
   public deleteAddress(): void {
@@ -54,7 +82,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
         } else {
           return empty();
         }
-      })).subscribe(() => console.log('address was deleted'));
+      })).subscribe(() => this.logger.logEvent(this.LOG_SOURCE, 'Address was deleted'));
     this.anchor.addNew(address);
   }
 }

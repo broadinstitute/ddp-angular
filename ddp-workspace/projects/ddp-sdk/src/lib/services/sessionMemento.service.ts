@@ -1,8 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Session } from '../models/session';
 import { TemporaryUser } from '../models/temporaryUser';
 import { Observable, BehaviorSubject, Subscription, Subject, of, timer, fromEvent } from 'rxjs';
-import { filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, startWith } from 'rxjs/operators';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class SessionMementoService implements OnDestroy {
@@ -21,7 +23,10 @@ export class SessionMementoService implements OnDestroy {
     private notificationSubscription: Subscription;
     private anchor: Subscription = new Subscription();
 
-    constructor() {
+    constructor(
+      private translateService: TranslateService,
+      @Inject('ddp.config') private config: ConfigurationService
+    ) {
         this.observeSessionExpiration();
         this.observeSessionStatus();
         // listen for storage events. Only get notified of storage changes in other tabs
@@ -91,14 +96,17 @@ export class SessionMementoService implements OnDestroy {
         userGuid: string,
         locale: string,
         expiresAtInSeconds: number,
-        participantGuid: string | null = null): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid);
+        participantGuid: string | null = null,
+        isAdmin: boolean = false,
+        invitationId: string | null = null): void {
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin, invitationId);
         this.updateSession(session);
     }
 
     public setTemporarySession(user: TemporaryUser): void {
         const expiresAtInMsec = new Date(user.expiresAt).getTime();
-        const session = new Session('', '', user.userGuid, 'en', expiresAtInMsec);
+        const locale = this.translateService.currentLang || this.config.defaultLanguageCode || 'en';
+        const session = new Session('', '', user.userGuid, locale, expiresAtInMsec);
         this.updateSession(session);
     }
 
@@ -114,6 +122,15 @@ export class SessionMementoService implements OnDestroy {
         }
         const session = this.session;
         session.participantGuid = guid;
+        this.updateSession(session);
+    }
+
+    public setInvitationId(invitationId: string): void {
+        if (this.session === null) {
+            return;
+        }
+        const session = this.session;
+        session.invitationId = invitationId;
         this.updateSession(session);
     }
 
@@ -137,6 +154,10 @@ export class SessionMementoService implements OnDestroy {
         }
 
         return true;
+    }
+
+    public isAuthenticatedAdminSession(): boolean {
+        return this.isAuthenticatedSession() && this.sessionSubject.value.isAdmin;
     }
 
     public isTemporarySession(): boolean {

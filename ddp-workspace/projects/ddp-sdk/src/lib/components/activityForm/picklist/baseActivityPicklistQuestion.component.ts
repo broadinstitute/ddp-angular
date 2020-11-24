@@ -38,6 +38,22 @@ export class BaseActivityPicklistQuestion implements OnChanges, OnDestroy {
         this.anchor.unsubscribe();
     }
 
+    public hasSelectedExclusiveOption(): boolean {
+        const allOptions = new Map();
+        this.block.picklistGroups
+            .forEach(group => group.options
+                .forEach(option => allOptions.set(option.stableId, option)));
+        this.block.picklistOptions.forEach(option => allOptions.set(option.stableId, option));
+        let hasExclusive = false;
+        if (this.block.answer) {
+            hasExclusive = this.block.answer.some(selected => {
+                const option = allOptions.get(selected.stableId);
+                return option && option.exclusive;
+            });
+        }
+        return hasExclusive;
+    }
+
     public updateCharactersLeftIndicator(id: string, value?: string): void {
         const answer = (value || value === '') ? value : this.getSavedAnswer(id);
         let difference = this.block.detailMaxLength - answer.length;

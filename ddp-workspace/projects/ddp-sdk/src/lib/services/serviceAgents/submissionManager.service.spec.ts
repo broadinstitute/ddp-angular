@@ -137,7 +137,6 @@ describe('SubmissionManagerTest', () => {
 
         // Give the patch time to complete and let's observe what happened
         setTimeout(() => {
-            console.log('About to check stuff');
             expect(serviceAgent.saveAnswerSubmission.calls.count()).toBe(1);
             // initial value + our patch + our patch completed = 3 changes to status
             expect(returnedInProgressValues.length).toBe(3);
@@ -145,7 +144,7 @@ describe('SubmissionManagerTest', () => {
             expect(returnedInProgressValues[1].delay).toBeLessThan(httpCallDelay);
             expect(returnedInProgressValues[2].value).toBe(false);
             // the last status change should occur after the http call completed
-            expect(returnedInProgressValues[2].delay).toBeGreaterThan(httpCallDelay);
+            expect(returnedInProgressValues[2].delay).toBeGreaterThanOrEqual(httpCallDelay);
             console.log('Checks completed!');
             done();
         },         2000);

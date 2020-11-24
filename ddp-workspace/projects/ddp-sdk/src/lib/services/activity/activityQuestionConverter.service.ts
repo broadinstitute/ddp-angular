@@ -24,6 +24,7 @@ const DETAIL_MAXLENGTH = 500;
 @Injectable()
 export class ActivityQuestionConverter {
     private questionBuilders: Array<ActivityRule>;
+    private readonly LOG_SOURCE = 'ActivityQuestionConverter';
 
     constructor(
         private validatorBuilder: ActivityValidatorBuilder,
@@ -139,8 +140,7 @@ export class ActivityQuestionConverter {
         if (builder) {
             questionBlock = builder.func(questionJson);
         } else {
-            this.logger.logError(
-                `ActivityConverter.ActivityQuestionConverter`,
+            this.logger.logError(this.LOG_SOURCE,
                 `Received question of type ${questionJson.questionType} that we do not know how to handle`);
             return null;
         }
@@ -149,6 +149,7 @@ export class ActivityQuestionConverter {
         }
         questionBlock.question = questionJson.prompt;
         questionBlock.stableId = questionJson.stableId;
+        questionBlock.tooltip = questionJson.tooltip;
         questionBlock.displayNumber = displayNumber;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];

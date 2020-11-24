@@ -27,6 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardRedesignedComponent } from './components/dashboard/dashboard-redesigned.component';
 import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { LoginLandingRedesignedComponent } from './components/login-landing/login-landing-redesigned.component';
+import { AdminLoginLandingComponent } from './components/login-landing/admin-login-landing.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorRedesignedComponent } from './components/error/error-redesigned.component';
 import { DisclaimerComponent } from './components/dialogs/disclaimer.component';
@@ -55,6 +56,19 @@ import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpi
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
 import { AgeUpThankYou } from './components/thank-you/age-up-thank-you.component';
+import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
+import { CookiesManagementService } from './services/cookiesManagement.service';
+import { AnalyticsManagementService } from './services/analyticsManagement.service';
+import { CookiesBannerComponent } from './components/cookies/cookiesBanner/cookiesBanner.component';
+import { CookiesPreferencesButtonComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesButton.component';
+import { CookiesPreferencesModalComponent } from './components/cookies/cookiesPreferencesModal/cookiesPreferencesModal.component';
+import { CookiesConsentGuard } from './guards/cookiesConsent.guard';
+import { PrivacyPolicyButtonComponent } from './components/privacy-policy/privacyPolicyButton.component';
+import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacyPolicyModal.component';
+import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
+import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
+import { ModalActivityComponent } from './components/activity/modal-activity.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -69,7 +83,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @NgModule({
   imports: [
@@ -87,7 +107,13 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     MatDialogModule,
     MatSidenavModule,
     MatButtonModule,
-    DdpModule
+    MatProgressBarModule,
+    DdpModule,
+    TranslateModule,
+    MatTabsModule,
+    MatTableModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [
     CommunicationService,
@@ -95,7 +121,10 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     HeaderConfigurationService,
     WorkflowBuilderService,
     WorkflowMapperService,
-    HeaderActionGuard
+    HeaderActionGuard,
+    CookiesConsentGuard,
+    CookiesManagementService,
+    AnalyticsManagementService
   ],
   declarations: [
     FooterComponent,
@@ -110,6 +139,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
+    AdminLoginLandingComponent,
     CommonLandingComponent,
     CommonLandingRedesignedComponent,
     RedirectToLoginLandingComponent,
@@ -138,7 +168,16 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent,
+    CookiesBannerComponent,
+    CookiesPreferencesButtonComponent,
+    CookiesPreferencesModalComponent,
+    PrivacyPolicyButtonComponent,
+    PrivacyPolicyModalComponent,
+    PrionPrivacyPolicyComponent,
+    ModalActivityButtonComponent,
+    ModalActivityComponent
   ],
   exports: [
     FooterComponent,
@@ -153,6 +192,7 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     DashboardRedesignedComponent,
     LoginLandingComponent,
     LoginLandingRedesignedComponent,
+    AdminLoginLandingComponent,
     RedirectToLoginLandingComponent,
     RedirectToLoginLandingRedesignedComponent,
     ErrorComponent,
@@ -174,14 +214,22 @@ import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     AgeUpThankYou,
-    InstagramFeedLightwidgetPluginComponent
+    InstagramFeedLightwidgetPluginComponent,
+    TwitterTimelineWidgetComponent,
+    CommonLandingComponent,
+    CommonLandingRedesignedComponent,
+    CookiesBannerComponent,
+    PrionPrivacyPolicyComponent
   ],
   entryComponents: [
     DisclaimerComponent,
     JoinMailingListComponent,
     ResendEmailComponent,
     WarningComponent,
-    SessionWillExpireComponent
+    SessionWillExpireComponent,
+    CookiesPreferencesModalComponent,
+    PrivacyPolicyModalComponent,
+    ModalActivityComponent
   ]
 })
 export class ToolkitModule {

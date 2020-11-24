@@ -1,9 +1,4 @@
-
 dispatch:
-  - url: "pepper-dev.datadonationplatform.org/docs*"
-    service: pepper-api-spec
-  - url: "pepper-dev.datadonationplatform.org/spec/*"
-    service: pepper-api-spec
   - url: "angio.dev.datadonationplatform.org/*"
     service: angio
   - url: "mbc.dev.datadonationplatform.org/*"
@@ -12,8 +7,25 @@ dispatch:
     service: brain
   - url: "osteo.dev.datadonationplatform.org/*"
     service: osteo
-  - url: "pepper-backend.dev.datadonationplatform.org/*"
-    service: pepper-backend
+  - url: "testboston.dev.datadonationplatform.org/*"
+    service: testboston
+  - url: "mpc.dev.datadonationplatform.org/*"
+    service: mpc
+  - url: "pepper-dev.datadonationplatform.org/docs*"
+    service: pepper-api-spec
+  - url: "pepper-dev.datadonationplatform.org/spec/*"
+    service: pepper-api-spec
   - url: "pepper-dev.datadonationplatform.org/*"
     service: pepper-backend
-
+  - url: "dsm-dev.datadonationplatform.org/ddp/*"
+    service: study-manager-backend
+  - url: "dsm-dev.datadonationplatform.org/api/*"
+    service: study-manager-backend
+  - url: "dsm-dev.datadonationplatform.org/app/*"
+    service: study-manager-backend
+  - url: "dsm-dev.datadonationplatform.org/info/*"
+    service: study-manager-backend
+  - url: "dsm-dev.datadonationplatform.org/ui/*"
+    service: study-manager-backend
+  - url: "dsm-dev.datadonationplatform.org/*"
+    service: study-manager-ui

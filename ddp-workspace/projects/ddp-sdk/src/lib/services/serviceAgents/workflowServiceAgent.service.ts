@@ -14,22 +14,26 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService) {
-        super(session, configuration, http, logger);
+        super(session, configuration, http, logger, null);
     }
 
-    public byActivityCode(studyGuid: string, state: string, activityCode: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=${state}&activityCode=${activityCode}`, null);
+    public byActivityCode(state: string, activityCode: string): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&activityCode=${activityCode}`, null);
     }
 
-    public byInstanceGuid(studyGuid: string, state: string, instanceGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=${state}&instanceGuid=${instanceGuid}`, null);
+    public byInstanceGuid(state: string, instanceGuid: string): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&instanceGuid=${instanceGuid}`, null);
     }
 
-    public getNext(studyGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=RETURN_USER`, null);
+    public getNext(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=RETURN_USER`, null);
     }
 
-    public getStart(studyGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${studyGuid}/workflow?from=START`, null);
+    public getStart(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=START`, null);
+    }
+
+    public fromParticipantList(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=PARTICIPANT_LIST`, null);
     }
 }

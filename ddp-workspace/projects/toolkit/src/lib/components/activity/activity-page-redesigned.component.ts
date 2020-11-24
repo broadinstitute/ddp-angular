@@ -15,6 +15,7 @@ import {
     template: `
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="(activityInstance$ | async)?.instanceGuid"
+                                 [agreeConsent]="config.agreeConsent"
                                  (submit)="raiseSubmit($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">
@@ -29,7 +30,7 @@ export class ActivityPageRedesignedComponent extends ActivityPageComponent imple
         private _activatedRoute: ActivatedRoute,
         private _workflowBuilder: WorkflowBuilderService,
         private _logger: LoggingService,
-        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService) {
+        @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
         super(
             _serviceAgent,
             _userActivityServiceAgent,
@@ -37,7 +38,7 @@ export class ActivityPageRedesignedComponent extends ActivityPageComponent imple
             _activatedRoute,
             _workflowBuilder,
             _logger,
-            _toolkitConfiguration);
+            config);
     }
 
     public ngOnInit(): void {

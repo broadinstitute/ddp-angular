@@ -2,18 +2,22 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommunicationAspect } from './../communicationAspect.service';
 import { ConfigurationService } from './../configuration.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { LoggingService } from './../logging.service';
 import { CommunicationException } from './../../models/exceptions/communicationException';
 import { beforeMethod } from 'kaop-ts';
 import { Observable, of, throwError } from 'rxjs';
-import { flatMap, catchError, map, filter } from 'rxjs/operators';
+import { flatMap, catchError, map, filter, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceAgent<TEntity> {
+    private readonly LOG_SOURCE = 'ServiceAgent';
+
     constructor(
         @Inject('ddp.config') protected configuration: ConfigurationService,
         private http: HttpClient,
-        private logger: LoggingService) { }
+        private logger: LoggingService,
+        private language: LanguageService) { }
 
     @beforeMethod(CommunicationAspect.intrcept)
     protected getObservable(
@@ -21,10 +25,10 @@ export class ServiceAgent<TEntity> {
         options: any = {},
         unrecoverableStatuses: Array<number> = []): Observable<TEntity | null> {
         const url = this.getBackendUrl() + path;
-        return this.getHeaders(options).pipe(
+        const getObservable: Observable<TEntity | null> = this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.get::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.get::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.get(
@@ -42,8 +46,7 @@ export class ServiceAgent<TEntity> {
                                     return throwError(error);
                                 }
                             }
-                            const exception = new CommunicationException('HTTP GET: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. Error: ${error}`);
                             return of(null);
                         }),
                         map(data => data && data['body']),
@@ -51,6 +54,15 @@ export class ServiceAgent<TEntity> {
                     );
             })
         );
+
+        if (this.language) {
+            // For instances that get user text, call the main getObservable when the profile language changes
+            return this.language.getProfileLanguageUpdateNotifier().pipe(
+                switchMap(() => getObservable)
+            );
+        } else {
+            return getObservable;
+        }
     }
 
     @beforeMethod(CommunicationAspect.intrcept)
@@ -63,7 +75,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.post::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.post::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.post(
@@ -76,8 +88,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP POST: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -99,7 +110,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.patch::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.patch::${path}`, 'Authorization required');
                     if (throwErrorObject) {
                         return throwError(new Error('No user session available'));
                     } else {
@@ -116,8 +127,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP PATCH: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -140,7 +150,7 @@ export class ServiceAgent<TEntity> {
         return this.getHeaders(options).pipe(
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.put::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.put::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.put(
@@ -153,8 +163,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP PUT: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -176,7 +185,7 @@ export class ServiceAgent<TEntity> {
             filter(x => x != null),
             flatMap(x => {
                 if (x == null) {
-                    this.logger.logError('serviceAgent.delete::' + path, 'Authorization required');
+                    this.logger.logError(`${this.LOG_SOURCE}.delete::${path}`, 'Authorization required');
                     return of(null);
                 }
                 return this.http.delete(
@@ -188,8 +197,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            const exception = new CommunicationException('HTTP DELETE: ' + url, error);
-                            this.logger.logException('serviceAgent', exception);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. Error: ${error}`);
                             if (throwErrorObject) {
                                 return throwError(error);
                             } else {
@@ -202,12 +210,15 @@ export class ServiceAgent<TEntity> {
     }
 
     protected getHeaders(options: any): Observable<any> {
-        return of(Object.assign({
+        this.logger.logEvent(this.LOG_SOURCE, 'About to get the headers')
+        const headers = Object.assign({
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             withCredentials: false,
             observe: 'response',
             responseType: 'json'
-        }, options));
+        }, options);
+        this.logger.logEvent(this.LOG_SOURCE, `The headers are: ${JSON.stringify(headers)}`)
+        return of(headers);
     }
 
     protected getBackendUrl(): string {

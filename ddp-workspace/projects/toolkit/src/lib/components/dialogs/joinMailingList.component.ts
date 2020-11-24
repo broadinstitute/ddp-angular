@@ -78,6 +78,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
     private studyGuid: string;
     private stayInformedUrl: string;
     private anchor: CompositeDisposable;
+    private readonly EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
 
     constructor(
         private dialogRef: MatDialogRef<JoinMailingListComponent>,
@@ -100,6 +101,8 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
             if (isSubmitted) {
                 this.communicationService.closeSidePanel();
                 this.router.navigateByUrl(this.stayInformedUrl);
+            } else if (this.router.url.includes(this.toolkitConfiguration.mailingListDialogUrl)) {
+                this.router.navigateByUrl('/');
             }
         });
     }
@@ -126,7 +129,7 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         this.joinButtonDisabled = true;
         const person: Person = this.createPerson;
         this.analytics.emitCustomEvent(AnalyticsEventCategories.MailingList, AnalyticsEventActions.Join);
-        const addPerson = this.mailingService.addPerson(person).subscribe(
+        const addPerson = this.mailingService.join(person).subscribe(
             x => {
                 if (x) {
                     this.redirect();
@@ -147,8 +150,8 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         this.joinForm = this.formBuilder.group({
             firstName: [this.data.firstName ? this.data.firstName : '', Validators.required],
             lastName: [this.data.lastName ? this.data.lastName : '', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            confirmEmail: ['', [Validators.required, Validators.email]]
+            email: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEXP)]],
+            confirmEmail: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEXP)]]
         });
     }
 

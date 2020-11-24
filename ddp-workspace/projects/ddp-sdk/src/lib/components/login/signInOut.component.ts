@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
     </button>`
 })
 export class SignInOutComponent implements OnInit, OnDestroy {
+    @Input() signOutReturnToUrl: string = '';
     @Input() signInCaption: string;
     @Input() signOutCaption: string;
     @Input() isScrolled: boolean;
@@ -60,6 +61,6 @@ export class SignInOutComponent implements OnInit, OnDestroy {
     }
 
     public doSignOut(): void {
-        this.auth0.logout();
+        this.auth0.logout(this.signOutReturnToUrl);
     }
 }

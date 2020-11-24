@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { GovernedParticipantsServiceAgent, Participant } from 'ddp-sdk';
 
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
@@ -12,7 +11,10 @@ import {
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
+  LoggingService,
+  GovernedParticipantsServiceAgent,
+  Participant
 } from 'ddp-sdk';
 
 @Component({
@@ -23,9 +25,11 @@ import {
 })
 export class LoginLandingComponent implements OnInit, OnDestroy {
   private anchor: Subscription;
+  private readonly LOG_SOURCE = 'LoginLandingComponent';
 
   constructor(
     private router: Router,
+    private logger: LoggingService,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
     private participantService: GovernedParticipantsServiceAgent,
@@ -61,7 +65,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
 
   private handleAuthError(error: any | null): void {
     if (error) {
-      console.error(error);
+      this.logger.logError(this.LOG_SOURCE, error);
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
@@ -74,7 +78,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl(nextUrlFromStorage);
     } else {
       // No `nextUrl` set before going to auth0, query the workflow service to get where to go next.
-      this.workflowService.getNext(this.config.studyGuid)
+      this.workflowService.getNext()
         .pipe(take(1))
         .subscribe(response => response && this.workflowBuilder.getCommand(response).execute());
     }

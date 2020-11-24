@@ -9,10 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
-  LogLevel,
   ConfigurationService,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -27,7 +27,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
-import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -70,6 +69,7 @@ tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
+tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
 tkCfg.twitterAccountId = 'the_osproject';
@@ -85,7 +85,7 @@ config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
 config.studyGuid = DDP_ENV.studyGuid;
-config.logLevel = LogLevel.Info;
+config.logLevel = DDP_ENV.logLevel;
 config.baseUrl = location.origin + base;
 config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 config.loginLandingUrl = DDP_ENV.loginLandingUrl;
@@ -96,16 +96,17 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
-        console.log(`Successfully initialized '${locale}' language as default.`);
+        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
       }, err => {
-        console.error(`Problem with '${locale}' language initialization.`);
+        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
       }, () => {
         resolve(null);
       });
@@ -137,7 +138,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     FooterComponent,
     GalleryComponent,
-    TwitterTimelineWidgetComponent,
     AboutUsComponent,
     FaqComponent,
     HeaderComponent,
@@ -157,7 +157,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LoggingService
       ],
       multi: true
     },

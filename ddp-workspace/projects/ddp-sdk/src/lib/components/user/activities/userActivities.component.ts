@@ -1,5 +1,17 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChange, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChange,
+  Input,
+  Output,
+  EventEmitter,
+  AfterContentInit,
+  Inject
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { UserActivitiesDataSource } from './userActivitiesDataSource';
 import { ActivityInstanceState } from '../../../models/activity/activityInstanceState';
 import { LoggingService } from '../../../services/logging.service';
@@ -7,14 +19,17 @@ import { UserActivityServiceAgent } from '../../../services/serviceAgents/userAc
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { tap, mergeMap } from 'rxjs/operators';
+import { DashboardColumns } from '../../../models/dashboardColumns';
+import { ActivityInstance } from '../../../models/activityInstance';
+import { ConfigurationService } from '../../../services/configuration.service';
+import { BehaviorSubject, Subscription, of } from 'rxjs';
+import { tap, mergeMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ddp-user-activities',
   template: `
     <div [hidden]="!loaded">
-    <mat-table #table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
+    <mat-table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityName' | translate">
@@ -61,9 +76,19 @@ import { tap, mergeMap } from 'rxjs/operators';
                   class="padding-5"
                   [attr.data-ddp-test]="'activityStatus::' + element.instanceGuid">
             <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
-            <div class="dashboard-status-container">
-              <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
-              {{ getState(element.statusCode) }}
+            <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">
+              <ng-container *ngIf="element.icon">
+                <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
+              </ng-container>
+              <ng-container *ngIf="showQuestionCount(element)">
+                {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered': element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}
+              </ng-container>
+              <ng-container *ngIf="showSummary(element)">
+                {{ element.activitySummary }}
+              </ng-container>
+              <ng-container *ngIf="!showQuestionCount(element) && !showSummary(element)">
+                {{ getState(element.statusCode) }}
+              </ng-container>
             </div>
         </mat-cell>
       </ng-container>
@@ -77,7 +102,7 @@ import { tap, mergeMap } from 'rxjs/operators';
           <button *ngIf="!element.readonly"
                   class="ButtonFilled Button--cell button button_small button_primary"
                   (click)="openActivity(element.instanceGuid, element.activityCode)"
-                  [innerHTML]="'SDK.EditButton' | translate">
+                  [innerHTML]="getButtonTranslate(element) | translate">
           </button>
           <button *ngIf="element.readonly"
                   class="ButtonBordered ButtonBordered--orange Button--cell button button_small button_secondary"
@@ -165,19 +190,23 @@ import { tap, mergeMap } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
   @Input() studyGuid: string;
+  @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
-  public displayedColumns = ['name', 'summary', 'date', 'status', 'actions'];
+  @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public dataSource: UserActivitiesDataSource;
-  public loaded: boolean;
-  private states: Array<ActivityInstanceState> | null;
+  public loaded = false;
+  private states: Array<ActivityInstanceState> | null = null;
   private studyGuidObservable: BehaviorSubject<string | null>;
   private loadingAnchor: Subscription;
+  private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
   constructor(
     private serviceAgent: UserActivityServiceAgent,
     private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
     private logger: LoggingService,
+    private activityServiceAgent: ActivityServiceAgent,
     private analytics: AnalyticsEventsService,
+    @Inject('ddp.config') private config: ConfigurationService,
     public domSanitizationService: DomSanitizer) {
     this.studyGuidObservable = new BehaviorSubject<string | null>(null);
   }
@@ -196,18 +225,19 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // observable stream from main data source, so we will get
           // single final result when both statuses and activity
           // instances will be loaded
-          mergeMap(x => {
-            return this.dataSource.isNull;
-          }, (x, y) => y)
+          mergeMap(x => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
-        ).subscribe(x => this.loaded = !x);
+        ).subscribe(x => {
+          this.loaded = !x;
+          this.loadedEvent.emit(this.loaded);
+        });
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
     for (const propName in changes) {
       if (propName === 'studyGuid') {
-        this.logger.logEvent('UserActivitiesComponent', `studyChanged: ${this.studyGuid}`);
+        this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
         this.studyGuidObservable.next(this.studyGuid);
       }
     }
@@ -219,12 +249,18 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
 
   public ngOnDestroy(): void {
     this.loadingAnchor.unsubscribe();
+    this.loadedEvent.emit(false);
   }
 
   public openActivity(guid: string, code: string): void {
-    this.logger.logEvent('UserActivitiesComponent', `Activity clicked: ${guid}`);
-    this.doAnalytics(code);
-    this.open.emit(guid);
+    const response$ = this.isReportActivity(code) ? this.activityServiceAgent.flushForm(this.config.studyGuid, guid) : of(null);
+    response$.pipe(
+      take(1)
+    ).subscribe(() => {
+      this.logger.logEvent(this.LOG_SOURCE, `Activity clicked: ${guid}`);
+      this.doAnalytics(code);
+      this.open.emit(guid);
+    });
   }
 
   public getState(code: string): string {
@@ -233,6 +269,53 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     }
     const caption = this.states.find(x => x.code === code);
     return caption != null ? caption.name : '';
+  }
+
+  public showQuestionCount(activityInstance: ActivityInstance): boolean {
+    if (!this.config.dashboardShowQuestionCount ||
+      this.config.dashboardShowQuestionCountExceptions.includes(activityInstance.activityCode)) {
+      return false;
+    } else if (activityInstance.numQuestions === 0) {
+      return false;
+    } else if (activityInstance.statusCode === 'COMPLETE' && activityInstance.numQuestions === activityInstance.numQuestionsAnswered) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public isActivityCompleted(statusCode: string): boolean {
+    return this.config.dashboardActivitiesCompletedStatuses.includes(statusCode);
+  }
+
+  public isNewActivity(statusCode: string): boolean {
+    return this.config.dashboardActivitiesStartedStatuses.includes(statusCode);
+  }
+
+  public isReportActivity(activityCode: string): boolean {
+    return this.config.dashboardReportActivities.includes(activityCode);
+  }
+
+  public showSummary(activityInstance: ActivityInstance): boolean {
+    if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public getButtonTranslate(activityInstance: ActivityInstance): string {
+    if (this.isActivityCompleted(activityInstance.statusCode)) {
+      return 'SDK.CompleteButton';
+    } else if (this.isReportActivity(activityInstance.activityCode)) {
+      return 'SDK.OpenButton';
+    } else if (this.showSummary(activityInstance)) {
+      return 'SDK.ReportButton';
+    } else if (this.isNewActivity(activityInstance.statusCode)) {
+      return 'SDK.StartButton';
+    } else {
+      return 'SDK.EditButton';
+    }
   }
 
   private doAnalytics(action: string): void {
