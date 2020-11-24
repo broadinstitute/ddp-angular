@@ -1,0 +1,30 @@
+@import 'variables';
+
+.mat-table {
+  .mat-cell,
+  .mat-header-cell {
+    font-size: 1rem;
+  }
+
+  .mat-cell {
+    padding: 1rem 1.5rem 1rem 0;
+
+    color: $color-text;
+  }
+
+  .mat-column-activityStatus {
+    padding-left: 1.5rem;
+  }
+
+  .mat-column-activityActions {
+    width: 10rem;
+
+    button {
+      width: 100%;
+
+      & + button {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

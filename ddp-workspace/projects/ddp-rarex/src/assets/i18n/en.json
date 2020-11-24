@@ -80,12 +80,14 @@
       "SignIn": "Log In",
       "SignOut": "Log Out"
     },
+    "StartButton": "Start",
+    "ContinueButton": "Continue",
     "SubmitButton": "Submit",
     "NextButton": "Next",
     "CloseButton": "Close",
     "PreviousButton": "Back",
     "SavingButton": "Saving",
-    "EditButton": "View/Edit",
+    "EditButton": "Edit",
     "ReviewButton": "View",
     "UserActivities": {
       "ActivityName": "Form",
