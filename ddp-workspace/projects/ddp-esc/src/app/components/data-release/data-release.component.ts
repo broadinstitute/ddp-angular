@@ -34,10 +34,9 @@ import { ToolkitConfigurationService } from 'toolkit';
 
                         <h3 class="PageContent-subtitle" translate>DataRelease.DataUse.Text</h3>
                         <ul class="PageContent-ul">
-                            <li translate>DataRelease.DataUse.List.Item1</li>
-                            <li translate>DataRelease.DataUse.List.Item2</li>
-                            <li translate>DataRelease.DataUse.List.Item3</li>
-                            <li translate>DataRelease.DataUse.List.Item4</li>
+                            <ng-container *ngFor="let item of 'DataRelease.DataUse.List' | translate">
+                                <li>{{item}}</li>
+                            </ng-container>
                         </ul>
 
                         <p class="PageContent-text">
@@ -47,12 +46,13 @@ import { ToolkitConfigurationService } from 'toolkit';
 
                         <p class="PageContent-text" [innerHtml]="'DataRelease.ThankYou' | translate"></p>
 
-                        <div class="youtube-video">
-                            <iframe [title]="'DataRelease.Video' | translate" class="youtube-video__iframe"
-                                src="https://www.youtube.com/embed/APjftoToMQQ" frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                        </div>
+                        <p class="PageContent-text">
+                            <span translate>DataRelease.Video.Part1</span>
+                            <a href="https://www.youtube.com/watch?v=16sok49U564&feature=youtu.be" target="_blank" class="Link" translate>
+                                DataRelease.Video.Link
+                            </a>
+                            <span translate>DataRelease.Video.Part2</span>
+                        </p>
                     </section>
                 </div>
             </div>
