@@ -58,6 +58,23 @@
     }
   },
   "SDK": {
+    "DatePicker": {
+      "Day": "Day",
+      "Month": "Month",
+      "Year": "Year",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
     "TooltipAlt": "Information",
     "SignInOut": {
       "SignIn": "Log In",
@@ -90,7 +107,7 @@
         "Name": "Full Name",
         "Country": "Country/Territory",
         "Street1": "Street Address",
-        "Street2": "Apt/Floor #",
+        "Street2": "Apt/Floor #/Suite",
         "State": {
           "State": "State",
           "Province": "Province",
