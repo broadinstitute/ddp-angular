@@ -265,7 +265,7 @@
       "Next": "Sonraki",
       "Previous": "Önceki",
       "SignIn": "Oturum Aç",
-      "Statistics": "tr_Statistics",
+      "Statistics": "tr_Platform Statistics",
       "Submit": "tr_Submit",
       "YourParticipants": "Katılımcılarınız"
     }
@@ -543,8 +543,7 @@
     "CountList": {
       "totalParticipantsCount": "tr_Total number of participants",
       "countriesCount": "tr_Countries represented",
-      "genomeStudyParticipantsCount": "tr_People participating in the genome study",
-      "kitsCount": "tr_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "tr_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "tr_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "tr_Self-enrolled participants"
     },

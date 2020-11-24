@@ -265,7 +265,7 @@
       "Next": "次へ",
       "Previous": "前へ",
       "SignIn": "サインイン",
-      "Statistics": "ja_Statistics",
+      "Statistics": "ja_Platform Statistics",
       "Submit": "ja_Submit",
       "YourParticipants": "参加者"
     }
@@ -543,8 +543,7 @@
     "CountList": {
       "totalParticipantsCount": "ja_Total number of participants",
       "countriesCount": "ja_Countries represented",
-      "genomeStudyParticipantsCount": "ja_People participating in the genome study",
-      "kitsCount": "ja_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "ja_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "ja_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "ja_Self-enrolled participants"
     },

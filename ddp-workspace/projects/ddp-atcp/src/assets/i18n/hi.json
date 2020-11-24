@@ -275,7 +275,7 @@
       "Next": "अगला",
       "Previous": "पिछला",
       "SignIn": "साइन इन करें",
-      "Statistics": "hi_Statistics",
+      "Statistics": "hi_Platform Statistics",
       "Submit": "hi_Submit",
       "YourParticipants": "आपके प्रतिभागी"
     }
@@ -553,8 +553,7 @@
     "CountList": {
       "totalParticipantsCount": "hi_Total number of participants",
       "countriesCount": "hi_Countries represented",
-      "genomeStudyParticipantsCount": "hi_People participating in the genome study",
-      "kitsCount": "hi_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "hi_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "hi_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "hi_Self-enrolled participants"
     },

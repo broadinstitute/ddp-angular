@@ -38,7 +38,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     'totalParticipantsCount',
     'countriesCount',
     'genomeStudyParticipantsCount',
-    'kitsCount',
     'governedParticipantsCount',
     'selfEnrolledParticipantsCount',
   ];

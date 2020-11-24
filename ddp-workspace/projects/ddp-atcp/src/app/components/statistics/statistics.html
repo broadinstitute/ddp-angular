@@ -18,27 +18,29 @@
       </li>
     </ul>
 
-    <h2 class="subtitle subtitle--light">
-      {{ 'Statistics.Subtitle' | translate }}
-    </h2>
+    <ng-container *ngIf="formattedStatistics.countriesDistribution.length">
+      <h2 class="subtitle subtitle--light">
+        {{ 'Statistics.Subtitle' | translate }}
+      </h2>
 
-    <ul
-      *ngIf="formattedStatistics.countriesDistribution.length"
-      class="countries-distribution"
-    >
-      <li
-        *ngFor="let dist of formattedStatistics.countriesDistribution"
-        class="countries-distribution__item"
-      >
-        <div class="distribution">
-          <div class="distribution__bar" [style.width.px]="dist.barWidth"></div>
+      <ul class="countries-distribution">
+        <li
+          *ngFor="let dist of formattedStatistics.countriesDistribution"
+          class="countries-distribution__item"
+        >
+          <div class="distribution">
+            <div
+              class="distribution__bar"
+              [style.width.px]="dist.barWidth"
+            ></div>
 
-          <span class="distribution__emoji"> {{ dist.emoji }} </span>
+            <span class="distribution__emoji"> {{ dist.emoji }} </span>
 
-          {{ dist.countryName }}
-        </div>
-      </li>
-    </ul>
+            {{ dist.countryName }}
+          </div>
+        </li>
+      </ul>
+    </ng-container>
   </ng-container>
 
   <ng-template #loading>

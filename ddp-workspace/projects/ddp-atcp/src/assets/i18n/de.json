@@ -265,7 +265,7 @@
       "Next": "Weiter",
       "Previous": "Zurück",
       "SignIn": "Anmelden",
-      "Statistics": "de_Statistics",
+      "Statistics": "de_Platform Statistics",
       "Submit": "de_Submit",
       "YourParticipants": "Ihre Teilnehmer"
     }
@@ -543,8 +543,7 @@
     "CountList": {
       "totalParticipantsCount": "de_Total number of participants",
       "countriesCount": "de_Countries represented",
-      "genomeStudyParticipantsCount": "de_People participating in the genome study",
-      "kitsCount": "de_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "de_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "de_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "de_Self-enrolled participants"
     },

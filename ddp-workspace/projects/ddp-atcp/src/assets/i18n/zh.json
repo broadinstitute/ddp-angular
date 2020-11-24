@@ -270,7 +270,7 @@
       "Next": "下一个",
       "Previous": "上一个",
       "SignIn": "签到",
-      "Statistics": "zh_Statistics",
+      "Statistics": "zh_Platform Statistics",
       "Submit": "zh_Submit",
       "YourParticipants": "您的参与者"
     }
@@ -548,8 +548,7 @@
     "CountList": {
       "totalParticipantsCount": "zh_Total number of participants",
       "countriesCount": "zh_Countries represented",
-      "genomeStudyParticipantsCount": "zh_People participating in the genome study",
-      "kitsCount": "zh_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "zh_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "zh_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "zh_Self-enrolled participants"
     },

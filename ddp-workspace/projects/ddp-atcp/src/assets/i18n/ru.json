@@ -265,7 +265,7 @@
       "Next": "Следующий",
       "Previous": "Предыдущий",
       "SignIn": "Войти",
-      "Statistics": "ru_Statistics",
+      "Statistics": "ru_Platform Statistics",
       "Submit": "ru_Submit",
       "YourParticipants": "Ваши участники"
     }
@@ -543,8 +543,7 @@
     "CountList": {
       "totalParticipantsCount": "ru_Total number of participants",
       "countriesCount": "ru_Countries represented",
-      "genomeStudyParticipantsCount": "ru_People participating in the genome study",
-      "kitsCount": "ru_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "ru_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "ru_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "ru_Self-enrolled participants"
     },

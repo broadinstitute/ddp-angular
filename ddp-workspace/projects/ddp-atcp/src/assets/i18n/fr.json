@@ -265,7 +265,7 @@
       "Next": "Suivant",
       "Previous": "Précédent",
       "SignIn": "Connexion",
-      "Statistics": "fr_Statistics",
+      "Statistics": "fr_Platform Statistics",
       "Submit": "fr_Submit",
       "YourParticipants": "Vos participants"
     }
@@ -543,8 +543,7 @@
     "CountList": {
       "totalParticipantsCount": "fr_Total number of participants",
       "countriesCount": "fr_Countries represented",
-      "genomeStudyParticipantsCount": "fr_People participating in the genome study",
-      "kitsCount": "fr_Sample collection kits sent out in total",
+      "genomeStudyParticipantsCount": "fr_People consenting to participate in genome sequencing",
       "governedParticipantsCount": "fr_Children enrolled by their parents",
       "selfEnrolledParticipantsCount": "fr_Self-enrolled participants"
     },
