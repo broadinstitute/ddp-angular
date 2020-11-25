@@ -7,6 +7,7 @@ import { ActivityGuids } from './activity-guids';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
 
@@ -138,6 +139,14 @@ const routes: Routes = [
   {
     path: AppRoutes.Prism,
     component: PrismComponent,
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.PrismActivityLink,
+    component: PrismActivityLinkComponent,
     canActivate: [
       IrbGuard,
       AdminAuthGuard
