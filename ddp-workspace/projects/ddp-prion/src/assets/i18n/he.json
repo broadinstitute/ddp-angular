@@ -1,171 +1,171 @@
 {
   "App": {
-    "Home": "בית",
-    "FAQ": "פרטים נוספים / שאלות נפוצות",
-    "About": "עלינו",
-    "Join": "הצטרף לרשימת התפוצה",
-    "Twitter": "ציוצים לפי רישום פריון",
+    "Home": "דף בית",
+    "FAQ": "פרטים נוספים/שאלות נפוצות",
+    "About": "אודותינו",
+    "Join": "הצטרפו לרשימת הדיוור",
+    "Twitter": "ציוצים מ-Prion<br>Registry",
     "Common": {
-      "JoinUs": "הצטרף אלינו"
+      "JoinUs": "הצטרפו אלינו"
     },
     "Welcome": {
-      "WelcomeTitle": "התנדב למחקר כדי לסייע במאבק במחלות פריון",
-      "WelcomeText": "הצטרף לרישום Prion, רישום מקוון לאנשים שנפגעים ממחלת פריון או בסיכון להם, שרוצים למצוא הזדמנויות להשתתף במחקר.",
-      "Intro": "הצטרפו אלינו למסע זה",
-      "Closing": "להיות חלק מתנועת המחקר הזו. בואו נשנה את העתיד ביחד.",
+      "WelcomeTitle": "התנדבו למחקר כדי לעזור במאבק במחלת פריון",
+      "WelcomeText": "הצטרפו ל-Prion Registry, מאגר רישום מקוון לאנשים שנפגעו ממחלת פריון או נמצאים בסיכון לחלות בה, המחפשים הזדמנויות להשתתף במחקר.",
+      "Intro": "הצטרפו אלינו למסע",
+      "Closing": "בואו להיות חלק מתנועת מחקר זו. בואו נשנה את העתיד ביחד.",
       "Participate": "איך זה עובד:",
       "Steps": {
         "FirstStep": {
-          "Title": "1. להירשם",
-          "Text": "לחץ על \"הצטרף אלינו\" כדי ליצור חשבון לעצמך או לאדם אהוב עם מחלת פריון. לאחר שתמלא את טופס ההסכמה המקוון והקליל שלנו, תהיה מוכן להתחיל!"
+          "Title": "1. הירשמו",
+          "Text": "לחצו על 'הצטרפו אלינו' כדי ליצור חשבון עבורכם או עבור אדם אהוב החולה במחלת פריון. לאחר שתמלאו את טופס ההסכמה המקוון והפשוט שלנו, תהיו מוכנים להתחיל!"
         },
         "SecondStep": {
-          "Title": "2. ספר לנו על עצמך",
-          "Text": "תתבקש למלא שאלון קצר (פחות מעשר דקות) על עצמך ועל אבחנתך או הסיכון שלך."
+          "Title": "2. ספרו לנו על עצמכם",
+          "Text": "אתם תתבקשו למלא שאלון קצר (פחות מ-10 דקות) על עצמכם ועל האבחנה או הסיכון שלכם."
         },
         "ThirdStep": {
-          "Title": "3. בואו ללמוד ביחד!",
-          "Text": "לאחר השלמת השאלון, תוכל לצפות במחקרי מחקר שאתה זכאי להשתתף בהם וליצור קשר עם חוקרים כדי להירשם. אם תיתן לנו, ניצור איתך קשר בנוגע להזדמנויות מחקר עתידיות."
+          "Title": "3. בואו נלמד ביחד!",
+          "Text": "לאחר השלמת השאלון, תוכלו לראות מחקרים בהם אתם מתאימים להשתתף, וליצור קשר עם חוקרים כדי להירשם. אם תאפשרו לנו, אנו ניצור אתכם קשר גם בנוגע להזדמנויות עתידיות למחקרים."
         }
       },
-      "ArrowAlt": "חֵץ"
+      "ArrowAlt": "חץ"
     },
     "StudyListing": {
-      "Title": "(he)Study Listing",
+      "Title": "רשימת מחקרים",
       "Columns": [
         {
           "title": "שם המחקר",
           "name": "studyName",
-          "placeholder": "סנן לפי שם"
+          "placeholder": "מיין לפי שם"
         },
         {
           "title": "תיאור המחקר",
-          "name": "description",
-          "placeholder": "סנן לפי תיאור"
+          "name": "תיאור",
+          "placeholder": "מיין לפי תיאור"
         },
         {
           "title": "חוקר ראשי",
           "name": "nameOfPI",
-          "placeholder": "סנן לפי PI"
+          "placeholder": "מיין לפי חוקר ראשי"
         },
         {
-          "title": "אתר למידה",
-          "name": "site",
-          "placeholder": "סנן לפי אתר"
+          "title": "מרכז המחקר",
+          "name": "מרכז",
+          "placeholder": "מיין לפי מרכז"
         },
         {
-          "title": "דרישות זכאות",
+          "title": "דרישות התאמה",
           "name": "eligibilityRequirements",
-          "placeholder": "סנן לפי זכאות"
+          "placeholder": "מיין לפי התאמה"
         },
         {
-          "title": "עוד מידע",
+          "title": "למידע נוסף",
           "name": "moreInfo",
           "placeholder": ""
         }
       ],
       "Rows": [
         {
-          "studyName": "he: Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
-          "description": "he: The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
-          "nameOfPI": "he: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "he: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "he: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
-          "moreInfo":  "he: Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
+          "studyName": "הערכת ההדבקה ברקמות שאינן קשורות למערכת העצבים המרכזית בחולי פריון",
+          "description": "מטרת מחקר זה היא למצוא סמנים ביולוגיים אבחוניים ו/או הדבקה במספר רקמות הממוקמות מחוץ לנוזל המוח והשדרה.  הנבדקים יתבקשו לתת דגימות שיער, דם, שתן ומשטח עור.",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>בריאן אפלבי</strong></a>",
+          "site": "University Hospitals Cleveland Medical Center, קליבלנד, אוהיו, ארה\"ב",
+          "eligibilityRequirements": "אנשים העלולים להיות חולים במחלת פריון ושיש להם מחקר אבחוני אחד לפחות המרמז על המחלה (כגון נוזל המוח והשדרה, סריקת MRI של המוח, או אלקטרואנצפלוגרם, או נשאים א-סימפטומטיים של מחלת פריון, הגורמת למוטציות",
+          "moreInfo":  "למידע נוסף פנו אל פרן ליזמור, 216-464-6203, fml2@case.edu."
         },
         {
-          "studyName": "he: Biomarkers in pre-symptomatic mutation carriers",
-          "description":"he: Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
-          "nameOfPI": "he: <a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
-          "site": "he: Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
-          "eligibilityRequirements": "he: You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
-          "moreInfo":  "he: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+          "studyName": "סמנים ביולוגיים בנשאי מוטציות טרום סימפטומטיים",
+          "description":"המטרה שלנו היא להניח את היסודות לבחינת טיפולים עתידיים למחלת פריון באנשים הנמצאים בסיכון למחלת פריון גנטית -- לפני שהם מתחילים לחוות סימפטומים. המתנדבים הפוטנציאליים ישוחחו תחילה בטלפון עם צוות המחקר כדי לענות על שאלות, לאשר את התאמתם, ולאסוף מידע בסיסי אחר. עבור אנשים מתאימים המחליטים להשתתף, המחקר כולל שני ביקורים בבית החולים Massachusetts General Hospital בבוסטון, מסצ'וסטס, עם מרווח זמן של 8-16 שבועות בין הביקורים. ביקורי המחקר יכללו את הרכיבים הבאים, שיבוצעו על פני 1.5 ימים: בדיקה גופנית שגרתית, שאלוני בריאות, ניקור מותני, נטילת דם, סריקות הדמיית מוח, בדיקות קוגניטיביות. משתתפים מתאימים יקבלו תגמול ותמיכה כלכלית הכוללת עלויות נסיעה. כל השתתפות היא על בסיס התנדבותי לחלוטין.",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>סטיבן ארנולד</strong></a>",
+          "site": "<br/>General Hospital, בוסטון,<br/> מסצ'וסטס, ארה\"ב",
+          "eligibilityRequirements": "אתם עשויים להתאים למחקר זה אם אחד מהדברים הבאים חל לגביכם: <br/><ol><li> יש לכם היסטוריה משפחתית של מחלת פריון גנטית, כולל מחלת קרויצפלד-יעקב גנטית (CJD), חוסר שינה תורשתי קטלני (FFI), או תסמונת גרסטמן-שטראוסלר-שיינקר (GSS). הערה: אינכם צריכים לדעת את הסטטוס הגנטי שלכם כדי להשתתף.</li><li> קיבלתם בדיקות מנבאות המראות כי אתם נמצאים בסיכון לאחת מהמחלות הנ\"ל.</li><li> אתם מגיעים ממשפחה בה יש מחלת פריון גנטית, למרות שאתם עצמכם אינכם בסיכון</li><li> אתם רוצים להתנדב לקבוצת הביקורת</li></ol>בנוסף, על המשתתפים להיות:<dl ><dt>- בין הגילאים 18-85</dt><dt>- דוברי אנגלית שוטפת</dt></dl>",
+          "moreInfo":  "ראו <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, צרו קשר עם MGHPrionStudy@partners.org או התקשרו אל 617-643-2351 כדי להירשם"
         },
         {
-          "studyName": "he: Early Diagnosis of Human Prion Disease",
-          "description": "he: The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
-          "nameOfPI": "he: <a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
-          "site": "he: Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
-          "eligibilityRequirements": "he: Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
-          "moreInfo":  "he: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+          "studyName": "אבחון מוקדם של מחלת פריון בבני אדם",
+          "description": "המטרה העיקרית של מחקר זה היא לפתח ולבדוק שיטות להבחנה בין מחלת קרויצפלד-יעקב (CJD) למחלות אחרות וללמוד כיצד לאבחן CJD מוקדם ככל האפשר. מטרה משנית של מחקר זה היא ללמוד עוד על אופן ההתפתחות של CJD ומחלות נוירולוגיות אחרות בעלות מהלך מהיר, על ידי מחקר של מחלות אלה בכל מטופל לאורך זמן. מכיוון ש-CJD היא מחלה נדירה המתדרדרת במהירות, אבחון המחלה נעשה, לעיתים קרובות, בשלב מאוחר מאד של המחלה. מידת ההצלחה האפשרית של הטיפולים העתידיים ב-CJD תלויה בכך שהם יינתנו למטופלים מוקדם ככל האפשר, לפני שהמחלה מתדרדרת יותר מדי. לכן חשוב שנלמד כיצד לבצע אבחנה מדויקת מוקדם ככל האפשר.",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>מיכאל גשווינד </strong></a>",
+          "site": "Memory and Aging Center, University of California San Francisco (UCSF), סן פרנסיסקו, קליפורניה, ארה\"ב",
+          "eligibilityRequirements": "קריטריונים להכללה: על המטופלים להיות בני 18 ומעלה. עליהם לעמוד בקריטריונים החדשים של ארגון הבריאות העולמי ל-CJD, להיות בעלי היסטוריה משפחתית של מחלת פריון תורשתית בבני אדם, או היסטוריה של התדרדרות נוירולוגית מחמירה הגורמת לדמנציה או לליקוי תפקודי משמעותי, מנקודת הבסיס של המטופל לאורך שנתיים או פחות מתאריך הופעת התסמינים. עליהם לדאוג למודיע שיימצא בקשר קבוע עם הנבדק ויוכל לספק מידע על הנבדק. קריטריוני אי-הכללה: לא מסוגלים לעבור בדיקת MRI עקב התוויית נגד להליך זה (כגון קוצב לב, נשים בהריון). מטופלים עם HIV חיובי ידוע או מדוכאי חיסון.",
+          "moreInfo":  "ראו <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, צרו קשר עם אילי גולוביאטניקוב בטלפון מספר 415-476-2901 Aili.Golubjatnikov@ucsf.edu כדי להירשם"
         },
         {
-          "studyName": "he: Teleneurology Assessment Program for CJD (TAPCJD)",
-          "description": "he: We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
-          "nameOfPI": "he: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "he: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "he: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
-          "moreInfo":  "he: Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+          "studyName": "תוכנית הערכה טלנוירולוגית עבור CJD‏ (TAPCJD)",
+          "description": "אנו מגייסים אנשים העלולים להיות חולים במחלת פריון ויש להם מחקר אבחוני אחד לפחות המרמז על המחלה (כגון נוזל המוח והשדרה, סריקת MRI של המוח, או אלקטרואנצפלוגרם).  אנו נבצע ביקורים בקרה מקוונים עם החולה ועם עמית מחקר שיתקיימו בערך פעם בחודש.  המשתתפים יתבקשו לשתף את ההיסטוריה הרפואית והמשפחתית שלהם כמו גם לבצע מספר פעולות הערכה (כגון בדיקת זיכרון, בדיקה גופנית) באמצעות שימוש במחשב, בטלפון או בטאבלט האישי שלהם (בדומה ל-Skype או ל-Facetime).  מטרת הפרויקט היא לאסוף נתונים קליניים מתוקננים על מנת לעזור לשפר את האבחונים, המעקב והידע בנוגע למחלות אלה.",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>בריאן אפלבי</strong></a>",
+          "site": "University Hospitals Cleveland Medical Center, קליבלנד, אוהיו, ארה\"ב",
+          "eligibilityRequirements": "אנשים העלולים להיות חולים במחלת פריון ויש להם מחקר אבחוני אחד לפחות המרמז על המחלה (כגון נוזל המוח והשדרה, סריקת MRI של המוח, או אלקטרואנצפלוגרם",
+          "moreInfo":  "למידע נוסף צרו קשר עם  CJD Foundation, 800-659-1991, lori@cjdfoundation.org."
         },
         {
-          "studyName": "he: Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
-          "description": "he: Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
-          "nameOfPI": "he: <a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
-          "site": "he: University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
-          "eligibilityRequirements": "he: Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
-          "moreInfo":  "he: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+          "studyName": "נוגדנים טיפוליים נגד מחלות פריון מנשאי מוטציית PRNP",
+          "description": "צורות תורשתיות של מחלות פריון מתבטאות בדרך כלל בגיל מבוגר יותר, כך שחייבים להיות גורמים המונעים את התפשטותן בנשאי מוטציות צעירים. נוגדנים הפועלים כנגד הזנב הגמיש של פריונים הוכחו כמספקים הגנה בעכברים. החוקרים מתכננים לסקור נשאי מוטציות ובני משפחה שלא הושפעו גנטית לנוכחות של נוגדנים עצמיים כנגד פריון כדי לפתח תרכובות המגינות מפני נוגדנים עצמיים הנוצרים באופן אנדוגני.  ",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>אדריאנו אגוזי</strong></a>",
+          "site": "University of Zurich, Institute of Neuropathology, ציריך, שווייץ",
+          "eligibilityRequirements": "נשאי מוטציית PRNP מאומתים (סימפטומטיים + א-סימפטומטיים), ממשפחות עם מוטציות PRNP ללא סטטוס PRNP ידוע, בני משפחה עם PRNP מסוג wild-type מחולים עם מוטציות PRNP מאומתות",
+          "moreInfo":  "ראו <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, צרו קשר עם קרל פרונטזק  Karl.Frontzek@usz.ch כדי להירשם"
         }
       ],
-      "InputPlaceholder": "he: Filter all columns"
+      "InputPlaceholder": "מיין את כל הטורים"
     },
     "LearnMore": {
-      "Title": "he: Learn more about Prion Registry",
+      "Title": "למידע נוסף על Prion Registry",
       "LearnMore": {
-        "Title": "he: Learn More",
+        "Title": "למידע נוסף",
         "WhatIs": {
-          "Question": "he: What is prion disease?",
-          "Text": "he: Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+          "Question": "מהי מחלת פריון?",
+          "Text": "מחלת פריון היא מחלה ניוונית-עצבית הנגרמת על ידי חלבון במוח המקופל באופן לא תקין. היא מופיעה במספר תתי סוגים שונים בעלי שמות שונים, כגון מחלת קרויצפלד-יעקב (CJD), חוסר שינה תורשתי קטלני (FFI) ותסמונת גרסטמן-שטראוסלר-שיינקר (GSS)."
         },
         "For": {
-          "Question": "he: What is this registry for?",
-          "Text": "he: In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+          "Question": "מהי מטרתו של מאגר רישום זה?",
+          "Text": "על מנת לפתח טיפול או תרופה למחלת פריון, אנו זקוקים לאנשים שישתתפו במחקר. אך מחלת פריון היא מחלה נדירה -- היא פוגעת רק ב-1 מתוך 5,000 אנשים במהלך חייהם -- לכן קשה למצוא מספיק חולים כדי לאפשר את המחקר. מאגר הרישום מאפשר לאנשים שנפגעו ממחלת פריון, או שנמצאים בסיכון לחלות בה, ליצור קשר עם רופאים ומדענים המעוניינים לגייס נבדקים למחקרים."
         },
         "Participate": {
-          "Question": "he: Can I participate in this registry?",
-          "Text": "he: Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+          "Question": "האם אני יכול להצטרף למאגר רישום זה?",
+          "Text": "כן! למאגר רישום זה יש קטגוריות עבור כולם. אם אתם סימפטומטיים וחולים במחלת פריון עכשיו, מאגר רישום זה נועד עבורכם. אם אתם בריאים אך נמצאים בסיכון לחלות במחלה, מאגר רישום זה נועד עבורכם. אם אינכם נמצאים בסיכון אך פשוט רוצים לעזור באמצעות התנדבות לקבוצת הביקורת, מאגר רישום זה נועד גם עבורכם."
         },
         "Why": {
-          "Question": "he: Why would I want to participate in this registry?",
-          "Text": "he: Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+          "Question": "מדוע שארצה להשתתף במאגר רישום זה?",
+          "Text": "מחלת פריון אינה ניתנת לטיפול כיום -- לא קיימת תרופה שיכולה להחזיר לאחור, למנוע או לעכב את המחלה. אך המצב לא יישאר כך לנצח. אנו מאמינים כי הטיפול למחלת פריון אפשרי עוד בימינו. מדענים עובדים במרץ כדי להפוך זאת למציאות, אך מחקר על תאים ועל עכברים הוא מוגבל. על מנת לפתח טיפול, אנו זקוקים לאנשים שישתתפו במחקר."
         },
         "DoIHaveTo": {
-          "Question": "he: Do I have to participate in this registry?",
-          "Text": "he: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+          "Question": "האם אני חייב להצטרף למאגר רישום זה?",
+          "Text": "בהחלט לא! מאגר רישום זה הוא התנדבותי לגמרי. אם אתם חושבים שלעולם לא תרצו להשתתף במחקר, אל תירשמו. אם אינכם רוצים להשתתף במחקר היום, אך ייתכן שתרצו להשתתף בעתיד, תוכלו תמיד לחזור מאוחר יותר, או שתוכלו להירשם כעת אך לא להתגייס למחקר כרגע, אלא רק להישאר מעודכנים."
         }
       }
     },
     "ThirdParty": {
-      "Title": "he: List of Third-Party Tools",
-      "Description": "he: The Prion Registry leverages the following third-party tools that may receive information about a user:",
+      "Title": "רשימת כלים של צד שלישי",
+      "Description": "מאגר הרישום Prion Registry משתמש בכלי צד שלישי הבאים, העשויים לקבל מידע על משתמש:",
       "Tools": {
-        "Sendgrid": "he: Sendgrid",
-        "Auth0": "he: Auth0",
-        "Tcell": "he: Tcell",
-        "Google_Cloud": "he: Google Cloud",
-        "Google_Analytics": "he: Google Analytics"
+        "Sendgrid": "Sendgrid",
+        "Auth0": "Auth0",
+        "Tcell": "Tcell",
+        "Google_Cloud": "Google Cloud",
+        "Google_Analytics": "Google Analytics"
       },
       "Usage": {
-        "email": "he: as an email service",
-        "authentication": "he: as an authentication system to provide access to the Registry",
-        "security": "he: as a Registry cloud firewall and runtime protection",
-        "host": "he: to host the Registry",
-        "analytics": "he: as an analytics tool"
+        "email": "כשירות דוא\"ל",
+        "authentication": "כמערכת אימות כדי לספק גישה למאגר הרישום",
+        "security": "כהגנת זמן ריצה וחומת אש לענן מאגר הרישום",
+        "host": "לאחזקת מאגר הרישום",
+        "analytics": "ככלי ניתוח נתונים"
       },
-      "Last_updated": "he: Last updated:"
+      "Last_updated": "עדכון אחרון:"
     }
   },
   "Toolkit": {
     "Common": {
       "Organization": "Prion",
-      "LogoAlt": "Prion Registry סֵמֶל",
-      "Home": "בית",
-      "LearnMore": "למד עוד",
+      "LogoAlt": "סמל של Prion Registry",
+      "Home": "דף בית",
+      "LearnMore": "למידע נוסף",
       "Dashboard": "לוח המחוונים שלי",
-      "JoinUs": "הצטרף אלינו",
-      "StudyListing": "(he)Study Listing"
+      "JoinUs": "הצטרפו אלינו",
+      "StudyListing": "רשימת מחקרים"
     },
     "Footer": {
-      "BackToTop": "חזרה למעלה",
+      "BackToTop": "חזור לראש הדף",
       "PrivacyPolicy": "מדיניות פרטיות",
       "ContactUs": "צור קשר:",
       "ContactMailTo": "mailto:info@prionregistry.org",
@@ -173,626 +173,627 @@
     },
     "Dashboard": {
       "StudyListing": {
-        "ActivityName": "רישום לימודים",
+        "ActivityName": "רשימת מחקרים",
         "ActivityStatus": "זמין",
         "ActivityCreated": "-",
-        "ActivitySummary": "מחקרים זמינים וכיצד להצטרף אליהם",
-        "ActivityActions": "נוף"
+        "ActivitySummary": "זמין עבורכם לסקירה ולהתנדבות",
+        "ActivityActions": "סקירה"
       }
     },
     "LoginLanding": {
-      "Text": "he: Please wait. You will be redirected to a destination soon..."
+      "Text": "אנא המתינו. אתם תועברו ליעד בקרוב..."
     },
     "Dialogs": {
       "Disclaimer": {
-        "Title": "he: View Prion Registry Data",
-        "Text": "he: You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
-        "SubmitButton": "he: OK"
+        "Title": "צפו בנתוני Prion Registry",
+        "Text": "אתם עוזבים כעת את אתר האינטרנט של Prion Registry ותועברו אל cBioPortal. שימו לב שנתונים אלה נוצרו על ידי Prion Registry במחקר, לא במעבדה קלינית, הם נועדו למטרות מחקר בלבד ולא ניתן להשתמש בהם לצורך קבלת החלטות קליניות מיודעות.",
+        "SubmitButton": "אישור"
       },
       "JoinMailingList": {
-        "Title": "he: Stay informed!",
-        "Text": "he: Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Title": "הישארו מעודכנים!",
+        "Text": "ספקו לנו את כתובת הדוא\"ל שלכם להלן ואנו נעדכן אתכם בהתפתחויות.<br>תוכלו לבטל את הרשמתכם בכל עת.",
         "Fields": {
           "FirstName": {
-            "Placeholder": "he: First Name *",
-            "Error": "he: First Name is required"
+            "Placeholder": "שם פרטי *",
+            "Error": "חובה למלא שם פרטי"
           },
           "LastName": {
-            "Placeholder": "he: Last Name *",
-            "Error": "he: Last Name is required"
+            "Placeholder": "שם משפחה *",
+            "Error": "חובה למלא שם משפחה"
           },
           "Email": {
-            "Placeholder": "he: Email Address *",
-            "Error": "he: Please enter a valid Email Address"
+            "Placeholder": "כתובת דוא\"ל *",
+            "Error": "הזינו כתובת דוא\"ל חוקית"
           },
           "ConfirmEmail": {
-            "Placeholder": "he: Email Confirmation (Reenter Email) *",
-            "Error": "he: Please enter a valid Email Address"
+            "Placeholder": "אימות דוא\"ל (הזינו שוב את כתובת הדוא\"ל) *",
+            "Error": "הזינו כתובת דוא\"ל עדכנית"
           }
         },
-        "CancelButton": "he: CANCEL",
-        "SubmitButton": "he: JOIN",
-        "Required": "he: * Required field",
-        "MatchEmailsError": "he: Please ensure that both email fields are filled in and that the addresses match.",
-        "LoadingError": "he: We're sorry, but an error has occurred."
+        "CancelButton": "ביטול",
+        "SubmitButton": "הצטרף",
+        "Required": "* שדה חובה",
+        "MatchEmailsError": "וודאו ששני שדות הדוא\"ל מלאים ושהכתובות תואמות.",
+        "LoadingError": "מצטערים, אירעה שגיאה."
       },
       "SessionWillExpire": {
-        "Title": "he: Your session will time-out soon!",
-        "Text": "he: To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "SignOut": "he: Sign Out",
-        "Continue": "he: Continue",
-        "RenewalFailed": "he: Session renewal failed. Please log out and log back in again."
+        "Title": "ההפעלה שלכם תסתיים בקרוב!",
+        "Text": "על מנת להגן על פרטיותכם, המערכת עומדת להתנתק מכיוון שלא הייתם בסביבה במשך זמן מה. לחצו על 'המשך' כדי להישאר מחוברים. לחצו על 'יציאה' אם סיימתם לעכשיו.",
+        "SignOut": "יציאה",
+        "Continue": "המשך",
+        "RenewalFailed": "חידוש ההפעלה נכשל. עליכם להתנתק ולהתחבר מחדש."
       },
       "LanguagePreferences": {
-        "Text": "he: Changing the language preference will also change the language used for e-mail communications.",
-        "CheckboxText": "he: Don't show this again",
-        "ButtonText": "he: OK"
+        "Text": "שינוי העדפת השפה ישנה גם את השפה המשמשת להודעות בדוא\"ל.",
+        "CheckboxText": "לא להציג זאת שוב",
+        "ButtonText": "אישור"
       }
     },
     "Warning": {
-      "Title": "he: Download Chrome or Safari to Continue",
-      "Text1": "he: This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
-      "Text2": "he: It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Title": "הורידו את Chrome או Safari כדי להמשיך",
+      "Text1": "פרויקט זה נועד לשימוש עם דפדפני האינטרנט הבטוחים והפופולריים ביותר  -- Chrome ו-Safari.",
+      "Text2": "נראה שאתם משתמשים ב-Internet Explorer. עליכם להשתמש בדפדפן אחר כדי להצטרף לפרויקט. אנו ממליצים על שימוש ב-Chrome או Safari על מנת להבטיח חוויית שימוש חלקה ובטוחה באתר .",
       "Text3": {
-        "Pt1": "he: Click the following links to download",
-        "Pt2": "he: or",
-        "Pt3": "he: Chrome and Safari are always free.",
-        "Chrome": "he: Chrome (for Mac & PC)",
-        "Safari": "he: Safari (for Mac)"
+        "Pt1": "לחצו על הקישורים הבאים כדי להוריד",
+        "Pt2": "או",
+        "Pt3": "Chrome ו-Safari הם תמיד בחינם.",
+        "Chrome": "Chrome (עבור Mac ו-PC)",
+        "Safari": "Safari (עבור Mac)"
       },
-      "SubmitButton": "he: OK"
+      "SubmitButton": "אישור"
     },
     "Password": {
-      "Title": "he: Please enter the password",
-      "Text": "he: Please enter your password",
+      "Title": "הזינו את הסיסמה",
+      "Text": "הזינו את הסיסמה שלכם",
       "InputPlaceholder": "  ",
-      "SubmitButton": "he: Submit",
-      "PasswordWrongError": "he: Incorrect password. Please try again.",
-      "PasswordRequiredError": "he: Password is required",
-      "OtherError": "he: We're sorry, but an error has occurred.",
+      "SubmitButton": "שלח",
+      "PasswordWrongError": "סיסמה שגויה. נסו שוב.",
+      "PasswordRequiredError": "חובה למלא סיסמה",
+      "OtherError": "מצטערים, אירעה שגיאה.",
       "PasswordField": {
-        "Error": "he: Password is required"
+        "Error": "חובה למלא סיסמה"
       }
     },
     "ErrorPage": {
-      "Title": "he: We've encountered an error",
-      "Header": "he: We're sorry, but an error has occurred.",
+      "Title": "נתקלנו בשגיאה",
+      "Header": "מצטערים, אירעה שגיאה.",
       "DefaultText": {
-        "TextPt1": "he: Please wait a moment and retry. If the trouble persists, please email us at",
-        "TextPt2": "he: ."
+        "TextPt1": "המתינו רגע ונסו שוב. אם הבעיה נמשכת, שלחו לנו דוא\"ל לכתובת",
+        "TextPt2": "."
       }
     },
     "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "he: Your password reset link has expired."
+      "PASSWORD_RESET_LINK_EXPIRED": "פג תוקפו של הקישור לאיפוס הסיסמה שלכם."
     },
     "SessionExpired": {
       "Text": {
-        "Pt1": "he: You were away for a while, so we logged you out as a security precaution.",
-        "Pt2": "he: Please log in again to return to the last page you were on."
+        "Pt1": "ניתקנו אתכם מהמערכת מסיבות בטיחות מכיוון שלא הייתם בסביבה לזמן מה. ",
+        "Pt2": "התחברו שוב כדי לחזור לדף האחרון בו הייתם."
       },
-      "LogInButton": "he: Log In"
+      "LogInButton": "התחברו"
     },
     "CookiesBanner": {
-      "Text_Before_Policy_Link": "he: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
-      "Text_After_Policy_Link": "he: to learn more about the cookies we use.",
-      "Policy": "he: Privacy Policy",
-      "Preferences": "he: Manage Preferences",
-      "Reject": "he: Reject Cookies",
-      "Accept": "he: Accept Cookies"
+      "Text_Before_Policy_Link": "אנו משתמשים בקובצי cookie כדי להעריך את השימוש באתר, לשפר את הביצועים ולהבטיח תפקוד תקין של האתר. עיינו ב",
+      "Text_After_Policy_Link": "למידע נוסף על קובצי ה-cookie בהם אנו משתמשים.",
+      "Policy": "מדיניות הפרטיות שלנו",
+      "Preferences": "ניהול העדפות",
+      "Reject": "סירוב לקובצי cookie",
+      "Accept": "אישור קובצי cookie"
     },
     "CookiesModal": {
-      "Title": "he: Manage Cookie Preferences",
-      "Privacy": "he: Your Privacy",
-      "Privacy_Text": "he: The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
-      "Functional": "he: Functional Cookies",
-      "Functional_Text": "he: These cookies provide necessary access, function, and security to the website.",
-      "Analytical": "he: Analytical Cookies",
-      "Reject": "he: Reject",
-      "Accept": "he: Accept",
-      "AlwaysOn": "he: Always On",
-      "Analytical_Text": "he: These cookies allow us to evaluate site usage, and improve site experience and performance.",
-      "Details": "he: Cookie Details",
-      "Name": "he: Name",
-      "Description": "he: Description",
-      "Duration": "he:  Duration",
-      "Policy": "he: Privacy policy",
-      "Submit": "he: Submit Preferences",
+      "Title": "ניהול העדפות קובצי cookie",
+      "Privacy": "הפרטיות שלכם",
+      "Privacy_Text": "מאגר הרישום Prion Registry אוסף קובצי cookie למטרות תפקוד וניתוח. למידע נוסף ושינוי הגדרות ברירת המחדל של קובצי cookie ניתן ללחוץ על הלשוניות. לתשומת לבכם, קובצי cookie פונקציונליים הם חיוניים לתפקודו התקין של אתר האינטרנט.",
+      "Functional": "קובצי cookie פונקציונליים",
+      "Functional_Text": "קובצי cookie אלה מספקים גישה הכרחית, תפקוד ואבטחה לאתר האינטרנט.",
+      "Analytical": "קובצי cookie לצורכי ניתוח נתונים",
+      "Reject": "סירוב",
+      "Accept": "אישור",
+      "AlwaysOn": "פועל תמיד",
+      "Analytical_Text": "קובצי cookie אלה מאפשרים לנו להעריך את השימוש באתר ולשפר את החוויה והביצועים של האתר.",
+      "Details": "פרטי קובצי cookie",
+      "Name": "שם",
+      "Description": "תיאור",
+      "Duration": "משך זמן",
+      "Policy": "מדיניות פרטיות",
+      "Submit": "שלח העדפות",
       "CookieName": {
-        "auth0": "he: Auth0:",
-        "auth0_com.auth0.auth": "he: com.auth0.auth.#",
-        "auth0_auth0": "he: auth0",
-        "auth0_auth0_compat": "he: auth0_compat",
-        "auth0_did": "he: did",
-        "auth0_did_compat": "he: did_compat",
-        "pepper": "he: Pepper:",
-        "pepper_cookie": "he: prion_cookies_consent",
-        "pepper_session_key": "he: session_key",
-        "pepper_token": "he: token",
-        "pepper_studyLanguage": "he: studyLanguage",
-        "pepper_nextUrl": "he: nextUrl",
-        "pepper_auth": "he: localAuthParams",
-        "tcell": "he: Tcell:",
-        "tcell_agent_session_id": "he: tcell_agent_session_id",
-        "tcell_agent_policy_cache": "he: tcell_agent_policy_cache",
-        "google_analytics": "he: Google Analytics:",
-        "ga": "he: _ga",
-        "gid": "he: _gid",
-        "gat": "he: _gat",
-        "gat_platform": "he: _gat_platform"
+        "auth0": "Auth0:",
+        "auth0_com.auth0.auth": "com.auth0.auth.#",
+        "auth0_auth0": "auth0",
+        "auth0_auth0_compat": "auth0_compat",
+        "auth0_did": "did",
+        "auth0_did_compat": "did_compat",
+        "pepper": "Pepper:",
+        "pepper_cookie": "prion_cookies_consent",
+        "pepper_session_key": "session_key",
+        "pepper_token": "token",
+        "pepper_studyLanguage": "studyLanguage",
+        "pepper_nextUrl": "nextUrl",
+        "pepper_auth": "localAuthParams",
+        "tcell": "Tcell:",
+        "tcell_agent_session_id": "tcell_agent_session_id",
+        "tcell_agent_policy_cache": "tcell_agent_policy_cache",
+        "google_analytics": "Google Analytics:",
+        "ga": "_ga",
+        "gid": "_gid",
+        "gat": "_gat",
+        "gat_platform": "_gat_platform"
       },
       "CookieDescription": {
-        "authentication": "he: authentication",
-        "authorization": "he: authorization",
-        "identification": "he: identification",
-        "navigation": "he: navigation helper",
-        "grouping_behavior": "he: grouping user behavior",
-        "throttling": "he: throttling to increase the efficiency of analytics collection",
-        "security": "he: security",
-        "cookie": "he: cookie preferences",
-        "language": "he: language preferences",
-        "session": "he: handles user sessions",
-        "ua_identifier": "he: the identifier for a device/user agent"
+        "authentication": "אימות",
+        "authorization": "אישור",
+        "identification": "זיהוי",
+        "navigation": "מסייע הניווט",
+        "grouping_behavior": "קיבוץ התנהגות המשתמשים",
+        "throttling": "וויסות להגברת היעילות של איסוף ניתוח נתונים",
+        "security": "אבטחה",
+        "cookie": "העדפות קובצי cookie",
+        "language": "העדפות שפה",
+        "session": "מטפל בהפעלות משתמש",
+        "ua_identifier": "המזהה עבור סוכן משתמש/מכשיר"
       },
       "CookieDuration": {
-        "session": "he: session",
-        "1year": "he: 1 year",
-        "2years": "he: 2 years",
-        "24hours": "he: 24 hours",
-        "3days": "he: 3 days",
-        "10minutes": "he: 10 minutes",
-        "30minutes": "he: 30 minutes",
-        "persistent": "he: persistent"
+        "session": "הפעלה",
+        "1year": "שנה 1",
+        "2years": "שנתיים",
+        "24hours": "24 שעות",
+        "3days": "3 ימים",
+        "10minutes": "10 דקות",
+        "30minutes": "30 דקות",
+        "persistent": "מתמיד"
       }
     },
     "PrivacyPolicy": {
-      "Title": "he: Prion Registry Privacy Statement",
+      "Title": "הצהרת הפרטיות של Prion Registry",
       "Intro": {
-        "Title": "he: Last Updated: July 28, 2020",
+        "Title": "עדכון אחרון: 28 ביולי, 2020",
         "Text": {
-          "P1": "he: The Prion Registry has been developed by the Broad Institute of MIT and Harvard (“",
-          "P2BoldUnderline": "Broad Institute",
-          "P3": "he: ”) in collaboration with the Prion Registry Consortium. We deeply value your privacy. This Privacy Statement (“",
-          "P4BoldUnderline": "he: Policy",
-          "P5": "he: ”) provides important information about how the Prion Registry collects and uses your personal information. ",
-          "P6Bold": "he: Please make sure you review this Policy before submitting your information to the Prion Registry. If you have any questions about this Policy, please contact us at the addresses listed at the end of this Policy."
+          "P1": "מאגר הרישום Prion Registry פותח על ידי מכון ברוד של MIT והרווארד (\"",
+          "P2BoldUnderline": "מכון ברוד",
+          "P3": "\") בשיתוף פעולה עם Prion Registry Consortium. אנו מתייחסים בכובד ראש לפרטיות שלכם. הצהרת פרטיות זו (\"",
+          "P4BoldUnderline": "מדיניות",
+          "P5": "\") מספקת מידע חשוב על האופן בו Prion Registry אוסף ומשתמש במידע האישי שלכם. ",
+          "P6Bold": "הקפידו לעיין במדיניות זו לפני שליחת המידע שלכם ל-Prion Registry. אם יש לכם שאלות כלשהן על מדיניות זו, צרו קשר איתנו בכתובות המפורטות בסוף מדיניות זו."
         }
       },
       "Who": {
-        "Title": "he: 1. Who is the Prion Registry?",
+        "Title": "1. מהו Prion Registry?",
         "Text": {
-          "P1": "he: The Prion Registry is an online registry, maintained by scientists and prion disease patient advocates at the Broad Institute, for people affected by or at risk for prion disease who want to find opportunities to participate in research. Our ultimate goal is to further the development of life-saving therapies to cure, treat, prevent, or delay prion disease. We created this Registry to make it easier for patients to:",
+          "P1": "Prion Registry הוא מאגר רישום מקוון, המנוהל על ידי מדענים ומסייעים לחולים במחלת פריון במכון ברוד, עבור אנשים שנפגעו ממחלת פריון או נמצאים בסיכון לחלות בה, המחפשים הזדמנויות להשתתף במחקר. המטרה הסופית שלנו היא להמשיך בפיתוחם של טיפולים מצילי חיים כדי לרפא, לטפל, למנוע או לעכב את מחלת הפריון. יצרנו את מאגר הרישום הזה כדי להקל על חולים בפעולות הבאות:",
           "P2Number": {
-            "1": "he: be counted,",
-            "2": "he: find research studies to participate in, and",
-            "3": "he: share their data with researchers."
+            "1": "להיספר,",
+            "2": "למצוא מחקרים בהם הם יכולים להשתתף, וכן",
+            "3": "לשתף את המידע שלהם עם חוקרים."
           },
-          "P3": "he: This Registry will also help qualified researchers recruit study participants and gather data. For more information on the Prion Registry, please see ",
+          "P3": "מאגר רישום זה יעזור גם לחוקרים מוסמכים בגיוס משתתפים למחקר ובאיסוף מידע. למידע נוסף על Prion Registry, היכנסו אל",
           "P4Link": "PrionRegistry.org",
-          "P5": "he: . For more information on the Broad Institute, please see ",
+          "P5": ". למידע נוסף על מכון ברוד, היכנסו אל",
           "P6Link": "https://www.broadinstitute.org/about-us",
-          "P7": "he: . ",
-          "P8": "he: Please note that the Registry may link to other websites that are not affiliated with us or the Research Project (“",
-          "P9Bold": "he: Third-Party Sites",
-          "P10": "he: ”). We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites. You should make sure you review the privacy policies for those Third-Party Sites before providing them any of your information."
+          "P7": ". ",
+          "P8": "לתשומת לבכם, מאגר הרישום עשוי להביא קישורים לאתרי אינטרנט אחרים שאינם קשורים אלינו או לפרויקט המחקר (\"",
+          "P9Bold": "אתרי צד שלישי",
+          "P10": "\"). אנו עשויים להציע קישורים אלה לנוחותכם אך איננו אחראים לנוהלי הפרטיות של אתרי צד שלישי אלה. עליכם להקפיד לעיין במדיניות הפרטיות של אתרי צד שלישי אלה לפני שתספקו להם מידע כלשהו."
         }
       },
       "Purpose": {
-        "Title": "he: 2. What is the purpose and scope of this Policy?",
+        "Title": "2. מהי המטרה וההיקף של מדיניות זו?",
         "Text": {
-          "P1": "he: This Policy describes the information we collect from users of the Registry, the purposes for collecting that information, how we use that information, and with whom we share that information.   It applies to users who are patients enrolled in our Research Projects (“",
-          "P2Bold": "he: Participant Users",
-          "P3": "he: ”), and those users who are not enrolled in any Research Project and are using the Registry for general informational purposes or because they are interested in participating in a future research project (“",
-          "P4Bold": "he: General Users",
-          "P5": "he: ”).  We will refer to all users, including Participant Users and General Users, in this Policy as “",
-          "P6Bold": "he: you",
-          "P7": "he: ” or “",
-          "P8Bold": "he: your",
-          "P9": "he: ”."
+          "P1": "מדיניות זו מתארת את המידע שאנו אוספים ממשתמשים של מאגר הרישום, המטרות לשמן המידע נאסף, כיצד אנו משתמשים במידע זה, ועם מי אנו משתפים אותו.   היא חלה על משתמשים שהם חולים המגויסים לפרויקטי המחקר שלנו (\"",
+          "P2Bold": "משתמשים משתתפים",
+          "P3": "\"), ועל משתמשים שאינם מגוייסים לאף פרויקט מחקר ושמשתמשים במאגר הרישום למטרות מידע כללי או מכיוון שהם מעוניינים להשתתף בפרויקט מחקר עתידי (\"",
+          "P4Bold": "משתמשים כלליים",
+          "P5": "\").  אנו נתייחס לכל המשתמשים כולל משתמשים משתתפים ומשתמשים כלליים, במדיניות זו כאל '",
+          "P6Bold": "אתם",
+          "P7": "' או '",
+          "P8Bold": "שלכם",
+          "P9": "'."
         }
       },
       "Use": {
-        "Title": "he: 3. If I use the Registry, am I agreeing to this Policy?",
-        "Text": "he: Yes.  However, your use of and contribution of information to the Registry is entirely voluntary and you have certain rights to control use of your information as described below.   If you decide to use the Registry, you are agreeing that we can use your information as described in this Policy."
+        "Title": "3. אם אני משתמש במאגר הרישום, האם אני מסכים למדיניות זו?",
+        "Text": "כן.  עם זאת, השימוש שלכם ומתן המידע למאגר הרישום נעשים בהתנדבות בלבד ויש לכם זכויות מסוימות לשלוט בשימוש שנעשה במידע שלכם, כמתואר להלן.   אם תחליטו להשתמש במאגר הרישום, אתם מסכימים לכך שנוכל להשתמש במידע שלכם כמתואר במדיניות זו."
       },
       "HowCollect": {
-        "Title": "he: 4. How do we collect information from you?",
+        "Title": "4. כיצד אנו אוספים מכם מידע?",
         "Text": {
-          "P1": "he: We collect information about you in two ways.",
-          "P2": "he: First, we collect certain information from you ",
-          "P3Underline": "he: when you provide it to us directly.",
-          "P4": "he:  Specifically, we collect information about you when you: ",
+          "P1": "אנו אוספים מידע אודותיכם בשני אופנים.",
+          "P2": "תחילה, אנו אוספים מידע מסוים מכם",
+          "P3Underline": "כאשר אתם מספקים לנו אותו ישירות.",
+          "P4": "באופן ספציפי, אנו אוספים מידע עליכם כאשר אתם:",
 
-          "P5Underline": "he: Create a Prion Registry account and profile",
-          "P6": "he:  through our website.",
-          "P7Underline": "he: Participate in the Registry",
-          "P8": "he:  by providing us information about you and your experiences with prion disease.  For example, the medical questionnaire in our Registry will ask you a series of questions about your demographics, current prion disease status, willingness to be contacted for trials, past trial participation, zip code and contact information.  Please note that you are not required to answer any question.",
-          "P9Underline": "he: Respond to notifications of research opportunities",
-          "P10": "he: , surveys and other communications we may send to you.",
-          "P11Underline": "he: Communicate with us",
-          "P12": "he:  (e.g. by email).",
+          "P5Underline": "יוצרים חשבון ופרופיל Prion Registry",
+          "P6": "באמצעות אתר האינטרנט שלנו.",
+          "P7Underline": "הצטרפו למאגר הרישום",
+          "P8": " באמצעות מתן מידע עליכם ועל הניסיון שלכם עם מחלת פריון.  לדוגמה, השאלון הרפואי במאגר הרישום שלנו ישאל אתכם סדרה של שאלות על המצב הדמוגרפי שלכם, הסטטוס הנוכחי של מחלת הפריון שלכם, המוכנות שלכם ליצירת קשר מצידנו בנוגע למחקרים, השתתפות קודמת במחקרים, מיקוד ופרטי יצירת קשר.  לתשומת לבכם, אינכם נדרשים לענות על שאלות כלשהן.",
+          "P9Underline": "השיבו להודעות על הזדמנויות למחקר",
+          "P10": ", סקרים והודעות אחרות שאנו עשויים לשלוח לכם.",
+          "P11Underline": "תקשרו איתנו",
+          "P12": "(כגון באמצעות הדוא\"ל).",
 
-          "P13": "he: Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
+          "P13": "שנית, כאשר אתם נכנסים למאגר הרישום, אנו אוספים מידע באמצעות טכנולוגיות אוטומטיות מסוימות היוצרות ורושמות מידע באופן אוטומטי. לדוגמה:",
 
-          "P14": "he: When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
-          "P15": "he: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics and MixPanel, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+          "P14": "כאשר אתם מבקרים באתר האינטרנט של מאגר הרישום (בין אם באמצעות המחשב או המכשיר הנייד שלכם), אנו אוספים מידע מסוים באופן אוטומטי ומאחסנים אותו בקובצי יומן רישום. מידע זה עשוי לכלול כתובות IP, ספק שירותי האינטרנט, דפי יציאה/הפניה, חותמות זמן/שעה, נתוני זרם קליקים, זמני התחברות/התנתקות ומשך זמן השהיה במאגר הרישום. ",
+          "P15": "אנו משתמשים בקובצי cookie (קובצי טקסט קטנים הנשלחים על ידי המחשב שלכם בכל פעם שאתם מבקרים במאגר הרישום והם ייחודיים לחשבון או לדפדפן שלכם) למגוון מטרות, כולל כדי לעזור לנו להבין באיזו תדירות אתם משתמש במאגר הרישום, מהיכן אתם נכנסים למאגר המחקר ועל אירועים המתרחשים במאגר הרישום. אנו משתמשים בשילוב של כלים ושירותים כגון Google Analytics ו-MixPanel כדי להעריך ולשפר את מאגר הרישום שלנו.   אנו עשויים גם להשתמש בטכנולוגיות מעקב של צד שלישי כדי לזהות קוד זדוני או מתקפות על מאגר הרישום שלנו.  גופים אלה עשויים להשתמש בקובצי cookie ובטכנולוגיות מעקב אחרות כדי לבצע את השירותים שלהם."
         }
       },
       "WhatCollect": {
-        "Title": "he: 5. What kind of information do we collect?",
+        "Title": "5. איזה סוג של מידע אנו אוספים?",
         "Text": {
-          "P1BoldUnderline": "he: Personal Information",
-          "P2": "he: : Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
-          "P3BoldUnderline": "he: Medical and research-related information",
-          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
-          "P5BoldUnderline": "he: Registry Usage Information",
-          "P6": "he: : Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
-          "P7BoldUnderline": "he: Device Information",
-          "P8": "he: : Information that relates to a particular computer, mobile device, or other device (e.g. iPad) that you use to access the Registry. Device information includes your IP address (which is a number assigned by an internet service provider to the computer you use to access the Internet), a device ID (which is a number assigned to a mobile phone by the device manufacturer), or the type of operating system or web browser used to access the Registry.\n"
+          "P1BoldUnderline": "מידע אישי",
+          "P2": "מידע אשר בפני עצמו או בשילוב עם מידע אחר עשוי לשמש כדי לזהות, ליצור קשר או לאתר אתכם באופן מיידי.  לדוגמה: שמכם, המיקוד שלכם, סטטוס ההשתתפות שלכם במחקרים וכתובת הדוא\"ל שלכם, הם מידע אישי שאתם עשויים לספק לנו באמצעות השימוש במאגר הרישום.  אם אתם מספקים מידע אישי של מישהו אחר (לדוגמה, אתם שולחים מידע למאגר הרישום עבור מישהו אחר או מספקים פרטים על היסטוריה רפואית משפחתית שעשויה לזהות בן משפחה) עליכם ליידע אותם, במידת האפשר מבחינת כושר הבנתם, על כך שסיפקתם לנו את המידע.  אנו נשתמש במידע אישי זה בהתאם למדיניות זו ולחוקים החלים בלבד.",
+          "P3BoldUnderline": "מידע רפואי ומידע הקשור למחקר",
+          "P4":". השאלון הרפואי במאגר הרישום יבקש מכם מידע על הניסיון שלכם עם מחלת פריון ועל מוכנותכם להשתתף במחקר.",
+          "P5BoldUnderline": "פרטי שימוש במאגר הרישום",
+          "P6": ": מידע הקשור לשימוש שלכם במאגר הרישום, כולל הדפים בהם אתם מעיינים, הקישורים עליהם אתם לוחצים ומשך זמן הביקור שלכם במאגר הרישום.",
+          "P7BoldUnderline": "פרטי מכשיר",
+          "P8": ": מידע הקשור למחשב, מכשיר נייד או מכשיר מסוים אחר (כגון אייפד) בו אתם משתמשים כדי להיכנס למאגר הרישום. פרטי המכשיר כוללים את כתובת ה-IP שלכם (שהיא מספר המוקצה על ידי ספק שירותי האינטרנט למחשב בו אתם משתמשים כדי להיכנס לאינטרנט), מזהה מכשיר (שהוא מספר המוקצה לטלפון נייד על ידי יצרן המכשיר), או סוג מערכת ההפעלה או דפדפן האינטרנט המשמשים לכניסה למאגר הרישום.\n"
         }
       },
       "Cookies": {
-        "Title": "he: 6. Do we use cookies and other tracking technologies?",
+        "Title": "6. האם אנו משתמשים בקובצי cookie ובטכנולוגיות מעקב אחרות?",
         "Text": {
-          "P1": "he: Yes.  We use cookies for various purposes, such as to make it easier for you to navigate our Registry, to enable a faster log-in process or to better understand user interactions with the Registry.  There are two types of cookies: session and persistent cookies.",
-          "P2Underline": "he: Session Cookies",
-          "P3": "he: .  Session cookies exist only during a session.  They disappear from your computer or device when you close your browser or turn off your computer or device.  We use Session Cookies to allow our systems to uniquely identify you during a session or while you are logged in to the Registry.  This allows us to process your communications and requests and verify your identity after you have logged in and as you move through our Registry, and to optimize your experience in using the Registry.",
-          "P4Underline": "he: Persistent Cookies",
-          "P5": "he: .  Persistent Cookies remain on your computer or device after you have closed your browser or the Registry or turned off your computer or mobile device.  We use persistent cookies to track aggregate and statistical information about user activity on our Registry (see “Tracking Technologies” below).",
-          "P6Bold": "he: Disabling Cookies.",
-          "P7": "he:   You may opt-out of non-essential cookies by selecting “Reject Cookies” or by clicking on “Manage Preferences” in the prompt asking whether you accept the use of cookies. Non-essential cookies are those that allow us to monitor site usage and improve the site, such as Google Analytics. Other cookies, however, are essential to the website’s functionality, including those cookies that allow you to stay logged into the site while you use it. The only way to opt out of these essential cookies is to not join the site.",
-          "P8": "he: You may also view and manage your cookie preferences by clicking on the button below.",
-          "P9Bold": "he: Tracking Technologies.",
-          "P10": "he:   We use automated devices, applications, and analytic tools such as Google Analytics, to evaluate usage of our Registry and improve our user experience and performance.  We may also use third-party tracking technologies, such as tCell, to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services.  We do not share your personal information with these third parties.",
-          "P11Bold": "he: Do Not Track Signals. ",
-          "P12": "he: We respond to browser-level Do Not Track (“",
-          "P13BoldUnderline": "he: DNT",
-          "P14": "he: ”) signals by disabling optional tracking technologies such as Google Analytics, however, we do not disable tracking that is essential to the website’s functionality, such as cookies that allow you to stay logged in. For information about DNT, visit ",
+          "P1": "כן.  אנו משתמשים בקובצי cookie למגוון מטרות, כגון כדי להקל עליכם לנווט במאגר הרישום שלנו, לאפשר תהליך כניסה מהיר יותר או להבין טוב יותר אינטראקציות של משתמשים עם מאגר הרישום.  קיימים שני סוגים של קובצי cookie: קובצי cookie של הפעלה וקובצי cookie מתמידים.",
+          "P2Underline": "קובצי cookie של הפעלה",
+          "P3": ".  קובצי cookie של הפעלה קיימים רק בזמן הפעלה.  הם נעלמים מהמחשב או מהמכשיר כאשר אתם סוגרים את הדפדפן או מכבים את המחשב או המכשיר שלכם.  אנו משתמשים בקובצי cookie של הפעלה כדי לאפשר למערכות שלנו לזהות אתכם באופן ייחודי במהלך הפעלה או בזמן שאתם מחוברים למאגר הרישום.  כך מתאפשר לנו לעבד את התקשורות והבקשות שלכם ולאמת את זהותכם לאחר שהתחברתם ובזמן שאתם נמצאים בתוך מאגר הרישום, ולמטב את חוויית השימוש שלכם במאגר הרישום.",
+          "P4Underline": "קובצי cookie מתמידים",
+          "P5": ".  קובצי cookie מתמידים נשארים במחשב ובמכשיר שלכם לאחר שסגרתם את הדפדפן או את מאגר הרישום או שכיביתם את המחשב או המכשיר הנייד שלכם.  אנו משתמשים בקובצי cookie מתמידים כדי לעקוב אחרי מידע צבור ומידע סטטיסטי על פעילות משתמשים במאגר הרישום שלנו (עיינו ב'טכנולוגיות מעקב' להלן).",
+          "P6Bold": "השבתת קובצי cookie.",
+          "P7": "  באפשרותכם לבטל את הסכמתכם לשימוש בקובצי cookie שאינם חיוניים על ידי בחירה ב'דחיית קובצי cookie' או לחיצה על 'ניהול העדפות' בהודעה השואלת האם אתם מאשרים את השימוש בקובצי cookie. קובצי cookie שאינם חיוניים הם אלה המאפשרים לנו לנטר את השימוש באתר ולשפר את האתר, כגון Google Analytics. עם זאת, קובצי cookie אחרים הם חיוניים לתפקודו של האתר, כולל קובצי ה-cookie המאפשרים לכם להישאר מחוברים לאתר בזמן שאתם משתמשים בו. הדרך היחידה לבטל את הסכמתכם לקובצי cookie חיוניים אלה היא לא להצטרף לאתר.",
+          "P8": "באפשרותכם גם לראות ולנהל את העדפות קובצי ה-cookie שלכם בלחיצה על הלחצן להלן.",
+          "P9Bold": "טכנולוגיות מעקב.",
+          "P10": "  אנו משתמשים במכשירים אוטומטיים, יישומים וכלי ניתוח כגוןGoogle Analytics, כדי להעריך את השימוש במאגר הרישום שלנו ולשפר את חוויית המשתמש והביצועים שלנו.  אנו עשויים גם להשתמש בטכנולוגיות מעקב של צד שלישי, כגון tCell, כדי לזהות קוד זדוני או מתקפות על מאגר הרישום שלנו.  גופים אלה עשויים להשתמש בקובצי cookie ובטכנולוגיות מעקב אחרות כדי לבצע את השירותים שלהם.  איננו משתפים את מידע האישי שלכם עם צדדים שלישיים אלה.",
+          "P11Bold": "אותות אל תעקוב. ",
+          "P12": "אנו מגיבים לאותו אל תעקוב (\"",
+          "P13BoldUnderline": "DNT",
+          "P14": "\") ברמת הדפדפן באמצעות השבתת טכנולוגיות מעקב אופציונליות כגון Google Analytics, עם זאת איננו משביתים מעקב חיוני לתפקוד אתר האינטרנט, כגון קובצי cookie המאפשרים לכם להישאר מחוברים. למידע נוסף על DNT בקרו ב-",
           "P15Link": "www.allaboutdnt.org",
-          "P16": "he: ."
+          "P16": "."
         }
       },
-      "CookiePreferences": "he: Cookie Preferences",
+      "CookiePreferences": "העדפות קובצי cookie",
       "HowUse": {
-        "Title": "he: 6. How do we use your information?",
+        "Title": "6. כיצד אנו משתמשים במידע שלכם?",
         "Text": {
-          "P1": "he: We use your data for the following purposes only:",
-          "P2BoldUnderline": "he: Identify Research Opportunities.",
-          "P3": "he:  We use the information you provide about yourself, your medical condition, and experiences to identify opportunities for you to participate in research. If you agree, you may choose to be contacted about future research studies and/or clinical trials in which you may be eligible to participate. You may also choose not to receive these invitations or decline to participate in future studies. Please note that the research studies with whom we partner only receive aggregate, de-identified data from our participants unless you enter into a separate research consent with them. This aggregate data does not identify you personally.",
-          "P4BoldUnderline": "he: Provide the Registry and Communicate with You.",
-          "P5": "he:  We, together with our collaborators, vendors, and service providers, use your information to operate the Registry, respond to your inquiries, notify you of research opportunities, ask you to periodically update your profile and health status, and for other communication purposes.",
-          "P6BoldUnderline": "he: Perform and promote research.",
-          "P7": "he:  We will use the information you provide to generate de-identified, aggregate descriptive statistics, such as the number of people interested in participating in prion disease research in a given geographic area. These statistics may be used to perform research, such as characterizing the prevalence of prion disease, or to promote prion disease research, for example, by securing funding or collaborations. As part of this work, we may use the information you provide to verify the accuracy of the Registry data, develop scientific publications, and answer questions from IRBs, IECs or government or regulatory agencies.",
-          "P8BoldUnderline": "he: Personalize Your Experience.",
-          "P9": "he:  We use your information to tailor the content and information that we may send or display to you, to offer location customization, and personalized help and instructions, and to otherwise personalize your experiences while you are using the Registry.",
-          "P10BoldUnderline": "he: Develop and Improve Our Registry.",
-          "P11": "he:  We use your information to ensure our Registry is working as intended, to better understand how users access and use our Registry, both on an aggregated and individualized basis, to understand the features that our Registry find valuable, make improvements to our Registry, to develop new features and applications, and for other research and analytical purposes."
+          "P1": "אנו משתמשים בנתונים שלכם למטרות הבאות בלבד:",
+          "P2BoldUnderline": "זיהוי הזדמנויות למחקר.",
+          "P3": " אנו משתמשים במידע שאתם מספקים על עצמכם, מצבכם הרפואי והחוויות שלכם כדי לזהות הזדמנויות להשתתפותכם במחקר. אם אתם מסכימים, תוכלו לבחור שניצור אתכם קשר בנוגע למחקרים ו/או ניסויים קליניים עתידיים בהם אתם עשויים להימצא מתאימים להשתתף. תוכלו גם לבחור שלא לקבל הזמנות אלה או לסרב להשתתף במחקרים עתידיים. לתשומת לבכם, המחקרים עימם אנו משתפים פעולה מקבלים רק מידע צבור, שאינו ניתן לזיהוי, מהמשתתפים שלנו, אלא אם תחתמו עמם על הסכמה נפרדת למחקר. נתונים צבורים אלה אינם מזהים אתכם באופן אישי.",
+          "P4BoldUnderline": "לספק למאגר הרישום ולתקשר אתכם.",
+          "P5": "אנו, ביחד עם השותפים, הספקים, וספקי השירותים שלנו משתמשים במידע שלכם כדי להפעיל את מאגר הרישום, להשיב לשאלותיכם, ליידע אתכם על הזדמנויות למחקר, לבקש מכם לעדכן בקביעות את הפרופיל והסטטוס הרפואי שלכם ולמטרות תקשורות אחרות.",
+          "P6BoldUnderline": "לבצע ולקדם את המחקר.",
+          "P7": " אנו נשתמש במידע שתספקו לנו כדי ליצור סטטיסטיקות תיאוריות צבורות, שאינן מזוהות, כגון מספר האנשים המעוניינים להשתתף במחקר על מחלת פריון באזור גאוגרפי נתון. סטטיסטיקות אלה עשויות לשמש כדי לבצע מחקר, כגון אפיון השכיחות של מחלת פריון, או לקידום מחקר על מחלת פריון, לדוגמה על ידי השגת מימון או שיתוף פעולה. כחלק מעבודה זו אנו עשויים להשתמש במידע שאתם מספקים כדי לאמת את דיוק הנתונים של מאגר הרישום, לפתח פרסומים מדעיים, ולענות על שאלות מוועדות IRB או IEC או מסוכנויות ממשלתיות או רגולטוריות.",
+          "P8BoldUnderline": "להתאים אישית את החוויה שלכם.",
+          "P9": "אנו משתמשים במידע שלכם כדי להתאים את התוכן והמידע שאנו עשויים לשלוח או להציג לכם, כדי להציע התאמה על פי מיקום ועזרה מותאמת אישית ובאופן כללי להתאים אישית את החוויה שלכם בזמן שאתם משתמשים במאגר הרישום.",
+          "P10BoldUnderline": "לפתח ולשפר את מאגר הרישום שלנו.",
+          "P11": "אנו משתמשים במידע שלכם כדי להבטיח שמאגר הרישום שלנו פועל כמצופה, כדי להבין טוב יותר כיצד משתמשים ניגשים ומשתמשים במאגר הרישום שלנו, הן על בסיס אישי והן על בסיס צבור כדי להבין את התכונות המועילות בעיני המשתמשים שלנו, לבצע שינויים במאגר הרישום שלנו, לפתח תכונות ויישומים חדשים ולמטרות מחקר וניתוח אחרות."
         }
       },
       "ShareWith": {
-        "Title": "he: 7. With whom do we share your information?",
+        "Title": "7. עם מי אנו משתפים את המידע?",
         "Text": {
-          "P1": "he: The Prion Registry does not sell or share your information for marketing purposes, but we may share your information in the following ways: ",
-          "P2BoldUnderline": "he: Research Partners.",
-          "P3": "he:   After removing your name and any other readily identifiable information, Registry staff may share statistics regarding de-identified data with researchers or organizations interested in launching research studies. For example, staff may provide information regarding the number of individuals in the registry who qualify for a potential research study, based on age, genetic mutation status, location, and/or other information. This information could be used to help design a study or secure funding or collaboration commitments. Qualified researchers who have received approval from an ethics committee will also be able to post studies for which you will be notified of your eligibility. An ethics committee is a group that independently reviews and watches over all research studies involving people. The board follows local laws and codes of ethics to make sure that the rights and welfare of people taking part in research studies are protected. ",
-          "P4Bold": "he: It will then be your choice whether to contact these researchers and share your identity in order to enroll in their studies; researchers will not be able to directly view your contact information in the registry.",
-          "P5BoldUnderline": "he: Vendors and Service Providers.",
-          "P6": "he:   We use various third-party vendors and service providers that assist us in providing the Registry.  For example, we may use third-party vendors to store and authenticate account credentials, store and analyze system logs, send email communications, and for hosting and storing information collected through our Registry.  We may need to share your information with these vendors and service providers to enable them to provide these services to us.  These service providers and vendors are required to only use your information to provide their services to us and in a manner consistent with this Policy.",
-          "P7BoldUnderline": "he: Legal and Safety Reasons.",
-          "P8": "he:   We may be required, by law, to disclose your personal information to third parties, such as in the following situations:",
-          "P9": "he: In response to a request by law enforcement;",
-          "P10": "he: In response to legal process, such as a subpoena, a request for discovery in a civil proceeding, or in response to a court order.",
-          "P11": "he: We may also access, preserve, and disclose your personal information to enforce the terms of use for the Registry and protect your, our, or others’ rights, property, or safety.",
-          "P12BoldUnderline": "he: Reorganization, Sale or Merger.",
-          "P13": "he:   Broad Institute may be involved in a business transaction where its ownership or assets are transferred or sold to another legal entity.  This can happen in a merger with another legal entity, an acquisition by another legal entity, a corporate reorganization, or a legal proceeding (e.g. bankruptcy or receivership), where a trustee or other takes over control of the entity.  In each of these situations, your information may be transferred as part of such a transaction as permitted by law and/or contract. The successor in interest will continue to be bound by the terms of this Policy.",
-          "P14BoldUnderline": "he: With Your Consent.",
-          "P15": "he:   We may ask you from time to time to give us permission to share your information with other third parties not described in this section.  In each case, we will describe that third party and the purpose for sharing your information.",
-          "P16BoldUnderline": "he: Aggregate and De-Identified Information.",
-          "P17": "he:   We may share aggregate or de-identified information about users and their use of the Registry with third parties and publicly for reporting, funding applications, research, or similar purposes.  This information will not identify you personally."
+          "P1": "מאגר הרישום Prion Registry אינו מוכר או משתף את המידע שלכם למטרות שיווק, אך אנו עשויים לשתף את המידע שלכם באופנים הבאים: ",
+          "P2BoldUnderline": "שותפי מחקר:",
+          "P3": "  לאחר הסרת שמכם וכל מידע אחר הניתן לזיהוי מיידי, צוות המחקר עשוי לחלוק סטטיסטיקות בנוגע לנתונים שאינם ניתנים לזיהוי עם חוקרים או ארגונים המעוניינים בהשקת מחקרים. לדוגמה, הצוות עשוי לספק מידע בנוגע למספר האנשים במאגר הרישום המתאימים למחקר מסוים, על בסיס גיל, סטטוס של מוטציות גנטיות, מיקום ו/או מידע אחר. מידע זה יכול לשמש כדי לעזור לתכנן מחקר או להשיג מימון או התחייבויות לשיתוף פעולה. חוקרים מוסמכים שקיבלו אישור מוועדת אתיקה יוכלו גם לפרסם מחקרים לגביהם תעודכנו על התאמתכם. וועדת אתיקה היא קבוצה הבודקת ומנטרת באופן עצמאי בכל המחקרים הקשורים בבני אדם. הוועדה מצייתת לחוקים ולקודי אתיקה מקומיים כדי לוודא שזכויותיהם ורווחתם של האנשים המשתתפים במחקר מוגנות. ",
+          "P4Bold": "לאחר מכן תוכלו לבחור אם ליצור קשר עם חוקרים אלה ולשתף אותם בזהותכם כדי להתגייס למחקרים שלהם; החוקרים לא יוכלו לראות באופן ישיר את פרטי הקשר שלכם במאגר הרישום.",
+          "P5BoldUnderline": "ספקים וספקי שירות.",
+          "P6": "  אנו משתמשים במגוון ספקים וספקי שירות המסייעים לנו בהגשת מאגר הרישום.  לדוגמה, אנו עשויים להשתמש בספקי צד שלישי כדי לאחסן ולאמת הרשאות חשבון, לאחסן ולנתח יומני מערכת, לשלוח תקשורות דוא\"ל, וכן לצורך אירוח ואחסון מידע הנאסף באמצעות מאגר הרישום שלנו.  ייתכן שנצטרך לשתף את המידע שלך עם ספקים וספקי שירות אלה כדי לאפשר להם לספק לנו שירותים אלה.  ספקי שירות וספקים אלה נדרשים להשתמש במידע שלכם רק כדי לספק לנו את שירותיהם ובאופן התואם למדיניות זו.",
+          "P7BoldUnderline": "סיבות משפטיות וסיבות אבטחה.",
+          "P8": "ייתכן שנידרש, על פי חוק, לחשוף את המידע האישי שלכם לצדדים שלישיים, כגון במצבים הבאים:",
+          "P9": "במענה לבקשה של גופי אכיפת החוק;",
+          "P10": "במענה להליך משפטי, כגון זימון, בקשה לחשיפת מסמכים בהליך אזרחי, או במענה לצו של בית משפט.",
+          "P11": "אנו עשויים גם לגשת אל, לשמר ולחשוף את המידע האישי שלכם כדי לאכוף את תנאי השימוש עבור מאגר הרישום ולהגן על הזכויות, הרכוש או הבטיחות שלכם, שלנו או של אחרים.",
+          "P12BoldUnderline": "ארגון מחדש, מכירה או מיזוג.",
+          "P13": "  מכון ברוד עשויים להיות מעורבים בפעולות עסקיות בהן הבעלות או הנכסים שלהם יועברו או יימכרו לישות משפטית אחרת.  מצב זה יכול להתרחש במיזוג עם ישות משפטית אחרת, רכישה על ידי ישות משפטית אחרת, ארגון מחדש של החברה, או הליך משפטי (כגון פשיטת רגל או כינוס נכסים), בו נאמן או מישהו אחר לוקח את השליטה על הישות.  בכל אחד מהמצבים האלה, המידע שלכם עשוי להיות מועבר כחלק מפעולה זו ובהתאם למותר על פי חוק ו/או בהתאם לחוזה. יורש האינטרס ימשיך להיות כפוף לתנאי מדיניות זו.",
+          "P14BoldUnderline": "עם מתן ההסכמה מצידכם.",
+          "P15": "  אנו עשויים לבקש מכם, מעת לעת, לתת את הסכמתכם לשיתוף המידע שלכם עם צדדים שלישיים אחרים שאינם מוזכרים בסעיף זה.  בכל אחד מהמקרים, אנו נתאר את הצד השילשי המדובר ואת מטרת שיתוף המידע שלכם.",
+          "P16BoldUnderline": "מידע צבור שאינו ניתן לזיהוי.",
+          "P17": "  אנו עשויים לשתף מידע צבור שאינו ניתן לזיהוי על משתמשים ועל השימוש שלהם במאגר הרישום, עם צדדים שלישיים ובאופן ציבורי לצורכי דיווח, יישומי מימון, מחקר או למטרות דומות.  מידע זה לא יזהה אתכם באופן אישי."
         }
       },
       "ThirdParty": {
-        "Title": "he: 8. What about Third-Party Sites?",
+        "Title": "8. מה לגבי אתרים של צד שלישי?",
         "Text": {
-          "P1": "he: The Registry may link to other websites that are not affiliated with us (“",
-          "P2BoldUnderline": "he: Third-Party Sites",
-          "P3": "he: ”).  We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites.  For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry. Other sites may have different privacy practices. You should make sure you review the privacy policies of those Third-Party Sites before providing any of your information to them."
+          "P1": "מאגר הרישום עשוי להביא קישורים לאתרי אינטרנט אחרים שאינם קשורים אלינו (\"",
+          "P2BoldUnderline": "אתרי צד שלישי",
+          "P3": "\").  אנו עשויים להציע קישורים אלה לנוחותכם אך איננו אחראים לנוהלי הפרטיות של אתרי צד שלישי אלה.  לדוגמה, אנו משתמשים ב-Google Cloud כדי לארח את מאגר הרישום וב-Auth0 כמערכת אימות כדי לספק גישה למאגר הרישום. לאתרים אחרים עשויים להיות נוהלי פרטיות שונים. עליכם להקפיד לעיין במדיניות הפרטיות של אתרי צד שלישי אלה לפני שתספקו להם מידע כלשהו."
         }
       },
       "OtherUsers": {
-        "Title": "he: 9. Can other users see my information?",
-        "Text": "he: Users will not be able to post content that is visible to any other users of the Registry.  Your information will only be made available to us, our research partners, our service providers and vendors, and the other third parties listed in Section 7."
+        "Title": "9. האם משתמשים אחרים יכולים לראות את המידע שלי?",
+        "Text": "משתמשים לא יוכלו לפרסם תוכן שיהיה גלוי למשתמשים אחרים במאגר הרישום.  המידע שלכם יהיה זמין רק לנו, לשותפי המחקר שלנו, לספקי השירותים ולספקים שלנו ולצדדים שלישיים אחרים המפורטים בסעיף 7."
       },
       "InformationRights": {
-        "Title": "he: 10. What rights do I have with respect to my information?",
+        "Title": "10. אלו זכויות יש לי בנוגע למידע שלי?",
         "Text": {
-          "P1": "he: Registered users can request to update, receive a copy of, or delete information submitted to the Registry by clicking on the button below:",
-          "P2": "he: We will respond to any user request as soon as we reasonably can, and within the time and in the manner required by law.   We may request additional information from you to verify the request.  We may not be able to accommodate all requests; for example, we may be unable to accommodate a deletion request if we are required to maintain information under law or a legal obligation or if information is used as part of a published study."
+          "P1": "משתמשים רשומים יכולים לבקש לעדכן, לקבל עותק, או למחוק מידע שנשלח למאגר הרישום בלחיצה על הלחצן להלן:",
+          "P2": "אנו נשיב לכל בקשה של משתמש, ברגע שנוכל לעשות זאת במסגרת הזמן הסביר, ובמסגרת הזמן ובאופן הנדרשים על פי חוק.   אנו עשויים לבקש מכם מידע נוסף כדי לאמת את הבקשה.  ייתכן שלא נוכל להיענות לכל הבקשות: לדוגמה ייתכן שלא נוכל להיענות לבקשת מחיקה אם אנו נדרשים לשמור מידע בכפוף לחוק או למחויבות חוקית או אם המידע משמש כחלק ממחקר שפורסם."
         }
       },
-      "DataRequest": "he: Data Request",
+      "DataRequest": "בקשת נתונים",
       "Security": {
-        "Title": "he: 11. What kind of security does the Registry use to protect my information?",
+        "Title": "11. באיזה סוג של אבטחה משתמש מאגר הרישום כדי להגן על המידע שלי?",
         "Text": {
-          "P1": "he: We use reasonable security to protect the information we collect from users. These safeguards encompass administrative, technical, and physical procedures and controls, including:",
-          "P2": "he: encryption of information in transit and at rest on servers;",
-          "P3": "he: threat and risk assessments;",
-          "P4": "he: system monitoring;",
-          "P5": "he: access control;",
-          "P6": "he: privacy and security training;",
-          "P7": "he: secure destruction of records.",
-          "P8": "he: However, we cannot guarantee the security of information we collect or any transmission of information over the Internet.  For this reason, you should make sure that you keep your profile account on the Registry confidential, including any user identification or password.  You should also notify us immediately if there has been any unauthorized use of your account."
+          "P1": "אנו משתמשים באבטחה סבירה כדי להגן על המידע שאנו אוספים ממשתמשים. אמצעי הגנה אלה כוללים נהלים ובקרות אדמיניסטרטיביים, טכניים ופיזיים, כולל:",
+          "P2": "הצפנה של מידע הנמצא במעבר ובמנוחה בשרתים;",
+          "P3": "הערכת איומים וסיכונים;",
+          "P4": "ניטור המערכת;",
+          "P5": "בקרת גישה;",
+          "P6": "הכשרה בנושאי פרטיות ואבטחה;",
+          "P7": "השמדה מאובטחת של רשומות.",
+          "P8": "עם זאת, איננו יכולים להבטיח את אבטחת המידע שאנו אוספים או העברה כלשהי של מידע ברחבי האינטרנט.  מסיבה זו, עליכם להקפיד לשמור על חיסיון חשבון הפרופיל שלכם במאגר הרישום, כולל זיהוי משתמש או סיסמה כלשהם.  כמו כן עליכם ליידע אותנו באופן מיידי אם נעשה שימוש לא מאושר בחשבון שלכם."
         }
       },
       "Children": {
-        "Title": "he: 12. Do you collect personal information from children?",
-        "Text": "he: The Registry is not designed or intended for use by individuals under the legal age of majority in their location of residence, and we do not knowingly collect information from such individuals. If we become aware that we have information for minors, we will promptly delete it. Anyone who believes that we may have such information from individuals under the legal age of majority should contact us at the addresses provided below."
+        "Title": "12. האם אתם אוספים מידע אישי מילדים?",
+        "Text": "מאגר הרישום אינו מתוכנן או מיועד לשימוש על ידי אנשים מתחת לגיל הבגרות החוקי במקום מגוריהם, ואיננו אוספים במודע מידע ממשתמשים אלה. אם ייוודע לנו שיש בידינו מידע של קטינים, אנו נמחק אותו מיד. על כל אדם החושב שעלול להיות בידינו מידע כזה מאנשים מתחת לגיל הבגרות החוקי, ליצור איתנו קשר בכתובות המפורטות להלן."
       },
       "Country": {
-        "Title": "he: 13. Is there any transfer of personal information from one country to another?",
-        "Text": "he: We store and process the information you provide on servers in the United States.  If you are a user of the Registry, you agree to the transfer of your information to the United States and acknowledge that the laws in the United States may offer less protection to your information than the laws where you live."
+        "Title": "13. האם קיימת העברה של מידע אישי ממדינה למדינה?",
+        "Text": "אנו מאחסנים ומעבדים את המידע שאתם מספקים לנו בשרתים בארה\"ב.  אם אתם משתמשים הכלולים במאגר הרישום, אתם מסכימים להעברת המידע שלכם לארצות הברית ומכירים בכך שהחוקים בארה\"ב עשויים להציע הגנה פחותה על המידע שלכם, מאשר החוקים במקום מגוריכם."
       },
       "Contact": {
-        "Title": "he: 14. Whom do I contact if I have a question or request?",
+        "Title": "14. עם מי עליי ליצור קשר במקרה שיש לי שאלה או בקשה?",
         "Text": {
-          "P1": "he: You may contact us at the addresses below if you have any questions or complaints about information practices or this Policy:",
-          "P2Bold": "Broad Institute:",
-          "P3": "he: By email to: info@prionregistry.org",
-          "P4": "he: By mail to:",
+          "P1": "באפשרותכם ליצור איתנו קשר בכתובות להלן, אם יש לכם שאלות או תלונות על נהלים הקשורים למידע או על מדיניות זו:",
+          "P2Bold": "מכון ברוד",
+          "P3": "בדוא\"ל, אל: info@prionregistry.org",
+          "P4": "בדואר אל:",
           "P5": "The Broad Institute of MIT and Harvard",
-          "P6": "he: 415 Main St.",
-          "P7": "he: Cambridge, MA 02142,",
-          "P8": "he: United States"
+          "P6": "415 Main St.",
+          "P7": "Cambridge, MA 02142,",
+          "P8": "United States"
         }
       },
       "Update": {
-        "Title": "he: 15. Will you update or change this Policy?",
+        "Title": "15. האם תעדכנו או תשנו מדיניות זו?",
         "Text": {
-          "P1": "he: We may modify this Policy from time to time, and you can see when the last update was by looking at the “Last Updated” date at the top of this page. If you object to any changes, you may stop accessing the Registry. Your continued use of the Registry after we post an updated Policy means that you acknowledge the updated Policy following the date it takes effect.",
-          "P2": "he: As a general practice, we will not use your personal information for uses or purposes that are significantly different from those described in this Policy.  However, from time to time, we may need to use your information for uses not previously disclosed in this Policy.  If this should happen, we will use reasonable efforts to notify you and obtain your consent to such new uses as required by law."
+          "P1": "אנו עשויים לשנות מדיניות זו מעת לעת, ובאפשרותכם לראות מתי היה העדכון האחרון באמצעות בדיקה של תאריך ה'עדכון אחרון' בראש הדף הזה. אם אתם מתנגדים לשינויים כלשהם, באפשרותכם להפסיק להיכנס למאגר הרישום. המשך השימוש שלכם במאגר הרישום, לאחר שפרסמנו מדיניות מעודכנת, פירושו שאתם מסכימים למדיניות המעודכנת לאחר התאריך בו היא נכנסת לתוקף.",
+          "P2": "כנוהג כללי אנו לא נשתמש במידע האישי שלכם לשימושים או למטרות השונים באופן משמעותי מאלה המתוארים במדיניות זו.  עם זאת, מעת לעת, ייתכן שנצטרך להשתמש במידע שלכם לשימושים שלא פורטו קודם במדיניות זו.  במקרים אלה, אנו נעשה מאמץ סביר ליידע אתכם ולהשיג את הסכמתכם לשימושים חדשים אלה, כנדרש על פי חוק."
         }
       },
       "EU": {
-        "Title": "he: 16. Notice to Residents of the European Union",
+        "Title": "16. הודעה לתושבי האיחוד האירופי",
         "Text": {
-          "P1": "he: This section outlines certain additional information that we are obligated to provide to data subjects of the European Union pursuant to the European Union General Data Protection Regulation 2016/679 and its amendments (“",
-          "P2BoldUnderline": "he: GDPR",
-          "P3": "he: ”).  We act as a data controller under the GDPR for the personal data that we collect from users of the Registry.  For such personal data, we rely on the following legal bases for processing such information:",
-          "P4Bold": "he: Legitimate interests. ",
-          "P5": "he: We may use your personal data for our legitimate interests provided that our legitimate interests are not outweighed by any prejudice or harm to your interests, rights and freedoms, including:",
-          "P6": "he: improving our products and services and the content on Registry (for example to manage the Registry, improve the Registry, and better tailor the features, performance and support of the Registry);",
-          "P7": "he: operating and administering the Registry;",
-          "P8": "he: promoting the safety and security of the Registry;",
-          "P9": "he: fulfilling your requests and communicating with you when you contact us; and ",
-          "P10": "he: promoting the Registry.",
-          "P11Bold": "he: Consent. ",
-          "P12": "he: In some cases, you will give us consent to use your personal data for a specific purpose.  For example, we will rely on your consent to use technical information such as cookie data and health information to identify relevant research studies.",
-          "P13Bold": "he: Legal obligations. ",
-          "P14": "he: We may be required to process your personal data to comply with our legal obligations.",
-          "P15Bold": "he: Data Retention. ",
-          "P16": "he: We retain personal information about you for the time necessary to accomplish the purpose for which such information was collected, usually for any period thereafter as legally required or permitted by applicable law.  Our retention policies reflect applicable statute of limitation periods and legal requirements.",
-          "P17Bold": "he: EU Data Subject Rights. ",
-          "P18": "he: Data subjects of the European Union have the following rights:",
-          "P19Bold": "he: The right to be informed - ",
-          "P20": "he: You have the right to be informed about the collection and use of your personal data.",
-          "P21Bold": "he: The right to access - ",
-          "P22": "he: You have the right to request copies of your personal data.",
-          "P23Bold": "he: The right to rectification - ",
-          "P24": "he: You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete information that you believe is incomplete.",
-          "P25Bold": "he: The right to erasure - ",
-          "P26": "he: You have the right to request that we erase your personal data, under certain conditions.",
-          "P27Bold": "he: The right to restrict processing - ",
-          "P28": "he: You have the right to request that we restrict the processing of your personal data, under certain conditions.",
-          "P29Bold": "he: The right to object to processing - ",
-          "P30": "he: You have the right to object to our processing of your personal data, under certain circumstances.",
-          "P31Bold": "he: The right to data portability - ",
-          "P32": "he: You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.",
-          "P33": "he: If you believe our processing of your personal data violates data protection laws, you have a legal right to lodge a complaint with a supervisory authority responsible for data protection.  You may do so in the EU member state of your habitual residence, your place of work or the place of the alleged violation.",
-          "P34Bold": "he: Submitting Requests: ",
-          "P35": "he: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
+          "P1": "סעיף זה מתאר מידע נוסף מסוים אשר אנו מחויבים לספק לנושאי נתונים באיחוד האירופי בכפוף לאסדרה הכללית להגנה על מידע של האיחוד האירופי 2016/679 והתיקונים שלה (\"",
+          "P2BoldUnderline": "GDPR",
+          "P3": "\").  אנו פועלים כבקר מידע בכפוף ל-GDPR עבור המידע האישי שאנו אוספים ממשתמשי מאגר הרישום.  עבור נתונים אישיים אלה, אנו מסתמכים על הבסיס החוקי הבא לעיבוד מידע שכזה:",
+          "P4Bold": "אינטרסים לגיטימיים. ",
+          "P5": "אנו עשויים להשתמש בנתונים האישיים שלכם עבור האינטרסים הלגיטימיים שלנו בתנאי שהאינטרסים הלגיטימיים שלנו אינם מוכרעים על ידי פגיעה או נזק לאינטרסים, לזכויות או לחרויות שלכם, כולל: ",
+          "P6": "שיפור המוצרים, השירותים והתוכן שלנו במאגר הרישום (לדוגמה כדי לנהל את מאגר הרישום, לשפר את מאגר הרישום ולהתאים בצורה טובה יותר את התכונות, הביצועים והתמיכה של מאגר הרישום);",
+          "P7": "הפעלה וניהול של מאגר הרישום;",
+          "P8": "קידום הבטיחות והאבטחה של מאגר הרישום;",
+          "P9": "מילוי הבקשות שלכם ותקשור אתכם כאשר אתם יוצרים קשר איתנו; וכן",
+          "P10": "קידום מאגר הרישום.",
+          "P11Bold": "הסכמה. ",
+          "P12": "במקרים מסוימים אתם תתנו לנו את הסכמתכם להשתמש בנתונים האישיים שלכם למטרה מסוימת.  לדוגמה, אנו נסתמך על הסכמתכם להשתמש במידע טכני כגון נתוני קובץ cookie ומידע רפואי כדי לזהות מחקרים רלוונטיים.",
+          "P13Bold": "מחויבויות משפטיות. ",
+          "P14": "ייתכן שנידרש לעבד את הנתונים האישיים שלכם כדי לעמוד במחויבויות המשפטיות שלנו.",
+          "P15Bold": "שמירת נתונים. ",
+          "P16": "אנו שומרים מידע אישי אודותיכם למשך הזמן הנדרש להשגת המטרה לשמה נאסף המידע הזה, בדרך כלל לכל התקופה שלאחר מכן, כנדרש או מותר על פי החוק החל.   כללי מדיניות השמירה שלנו משקפים את תקופות ההתיישנות הרלוונטיות ודרישות חוקיות.",
+          "P17Bold": "זכויות נשואי מידע באיחוד האירופי. ",
+          "P18": "לנשואי מידע באיחוד האירופי עומדות הזכויות הבאות:",
+          "P19Bold": "הזכות לקבל מידע - ",
+          "P20": "יש לכם זכות להיות מיודעים בנוגע לאיסוף ולשימוש בנתונים האישיים שלכם.",
+          "P21Bold": "הזכות לגישה - ",
+          "P22": "יש לכם זכות לבקש העתקים של הנתונים האישיים שלכם.",
+          "P23Bold": "הזכות לתיקון - ",
+          "P24": "יש לכם זכות לבקש שנתקן מידע כלשהו אשר לדעתכם אינו מדויק. כמו כן יש לכם זכות לבקש שנשלים מידע אשר לדעתכם אינו מלא.",
+          "P25Bold": "הזכות למחיקה - ",
+          "P26": "יש לכם זכות לבקש שנמחק את הנתונים האישיים שלכם, בכפוף לתנאים מסוימים.",
+          "P27Bold": "הזכות להגבלת העיבוד - ",
+          "P28": "יש לכם זכות לבקש שנמחק את הנתונים האישיים שלכם, בכפוף לתנאים מסוימים.",
+          "P29Bold": "הזכות להתנגד לעיבוד - ",
+          "P30": "יש לכם זכות להתנגד לכך שנעבד את הנתונים שלכם, בכפוף לנסיבות מסוימות.",
+          "P31Bold": "הזכות לניידות נתונים - ",
+          "P32": "יש לכם זכות לבקש שנעביר את הנתונים שאספנו לארגון אחר, או ישירות אליכם, בכפוף לתנאים מסוימים.",
+          "P33": "אם לדעתכם עיבוד הנתונים האישיים שלכם מפר חוקי הגנת נתונים, יש לכם זכות חוקית להגיש תלונה לרשות המפקחת האחראית על הגנת נתונים.  באפשרותכם לעשות זאת במדינת האיחוד האירופי בה אתם מתגוררים, במקום עבודתכם או במקום ההפרה לכאורה.",
+          "P34Bold": "שליחת בקשות: ",
+          "P35": "נושאי נתונים באיחוד האירופי יכולים לשלוח בקשות בלחיצה על הלחצן 'בקשת נתונים' בסעיף 10 לעיל.  אנו נשיב לכל הבקשות האלה תוך 30 יום מקבלת כל המידע הנדרש לנו על מנת לפעול בקשר לבקשה, אלא אם קיימות נסיבות מקלות או בקשות מורכבות / רבות, ובמקרה זה ייתכן שייקח לנו עד 90 יום כדי להשיב.  אנו נודיע לכם אם המענה צפוי לקחת יותר מ-90 יום.  לתשומת לבכם, עם זאת, נתונים אישיים אלה עשויים להיות מוחרגים מזכויות אלה בהתאם לחוקי הגנת הנתונים הרלוונטיים.  בנוסף, אנו לא נשיב לבקשות כלשהן אלא אם נוכל לאמת כראוי את זהות המבקש. בנוסף, אם לדעתנו הבקשה מופרכת בעליל או מוגזמת, אנו עשויים לבקש שכר טרחה סביר לטיפול בבקשה או כדי לסרב לטפל בה."
         }
       }
     },
     "DataRequest": {
-      "DataRequest": "he: Data Request",
-      "SubmitRequest": "he: Submit Request",
-      "Okay": "he: Okay",
-      "SignInTooltip": "he: Please sign in to start a data access request"
+      "DataRequest": "בקשת נתונים",
+      "SubmitRequest": "שלח בקשה",
+      "Okay": "אישור",
+      "SignInTooltip": "היכנסו כדי להתחיל בקשה לגישה לנתונים"
     }
   },
   "SDK": {
-    "SubmitButton": "he: Submit",
-    "CloseButton": "he: Back to Dashboard",
-    "AddButton": "he: Add",
-    "CancelButton": "he: Cancel",
-    "NextButton": "he: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
-    "PreviousButton": "he:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
-    "SavingButton": "he: Saving",
-    "EditButton": "he: Edit",
-    "ReviewButton": "he: View",
-    "ValidateError": "he: Please complete all required fields.",
-    "CommunicationError": "he: There was a problem saving your data. Please check the form and your answers before submitting.",
-    "SaveError": "he: We're sorry but an error occurred.",
+    "SubmitButton": "שלח",
+    "CloseButton": "חזרה ללוח המחוונים",
+    "AddButton": "הוספה",
+    "CancelButton": "ביטול",
+    "NextButton": "הבא <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> הקודם",
+    "SavingButton": "שמירה",
+    "EditButton": "המשך",
+    "StartButton": "התחל",
+    "ReviewButton": "הצג",
+    "ValidateError": "השלימו את כל השדות הנדרשים.",
+    "CommunicationError": "נוצרה בעיה בשמירת הנתונים שלכם. בדקו את הטופס ואת התשובות שלכם לפני השליחה.",
+    "SaveError": "מצטערים, אירעה שגיאה.",
     "ExportStudy": {
-      "Export": "he: EXPORT"
+      "Export": "ייצוא"
     },
     "Common": {
-      "LogoAlt": "he: Prion Registry"
+      "LogoAlt": "Prion Registry"
     },
     "ListStudies": {
-      "StudyName": "he: Study Name",
-      "ParticipantCount": "he: Participant Count"
+      "StudyName": "שם המחקר",
+      "ParticipantCount": "מספר המשתתפים"
     },
     "ListWorkspaces": {
-      "WorkspaceName": "he: Workspace Name",
-      "WorkspaceNamespace": "he: Workspace Namespace"
+      "WorkspaceName": "שם סביבת העבודה",
+      "WorkspaceNamespace": "מרחב שמות סביבת העבודה"
     },
     "Login": {
-      "Login": "he: LOG IN",
-      "Logout": "he: LOG OUT"
+      "Login": "התחבר",
+      "Logout": "התנתק"
     },
     "SignInOut": {
-      "SignIn": "he: Sign In",
-      "SignOut": "he: Sign Out"
+      "SignIn": "כניסה",
+      "SignOut": "יציאה"
     },
     "LanguageSelector": {
-      "LanguageSelection": "he: language selection"
+      "LanguageSelection": "בחירת שפה"
     },
     "UserActivities": {
-      "ActivityName": "he: Activity",
-      "Summary": "he: Summary",
-      "ActivityStatus": "he: Status",
-      "ActivityDate": "he: Created",
-      "ActivityActions": "he: Actions"
+      "ActivityName": "פעילות",
+      "Summary": "סיכום",
+      "ActivityStatus": "סטטוס",
+      "ActivityDate": "נוצר",
+      "ActivityActions": "פעולות"
     },
     "ManageParticipants": {
-      "GovernedParticipants": "he: Governed participants",
-      "ParticipantPlaceholder": "he: Participant",
-      "ParticipantsList": "he: Participants"
+      "GovernedParticipants": "משתתפים מוסדרים",
+      "ParticipantPlaceholder": "משתתף",
+      "ParticipantsList": "משתתפים"
     },
     "ParticipantProfile": {
-      "OpenProfile": "he: Profile",
-      "ViewAs": "he: View As",
-      "ManageParticipants": "he: Manage participants"
+      "OpenProfile": "פרופיל",
+      "ViewAs": "הצג כ:",
+      "ManageParticipants": "נהל משתתפים"
     },
     "UserPreferences": {
-      "UserPreferencesTitle": "he: User preferences",
-      "UserPreferencesGender": "he: Sex",
-      "UserPreferencesLocale": "he: Preferred language"
+      "UserPreferencesTitle": "העדפות משתמש",
+      "UserPreferencesGender": "מין",
+      "UserPreferencesLocale": "שפה מועדפת"
     },
     "Dashboard": {
-      "Title": "he: Welcome to the Prion Registry!",
-      "Text": "he: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+      "Title": "ברוכים הבאים ל-Prion Registry!",
+      "Text": "כל אדם שאובחן עם מחלת פריון יכול להשתתף ביוזמת המחקר שלנו. שתפו את המידע הרפואי ואת המידע הגנטי האפשרי כדי שהחוקרים יוכלו להבין טוב יותר את מחלת פריון."
     },
     "DatePicker": {
-      "Day": "he: Choose day...",
-      "Month": "he: Choose month...",
-      "Year": "he: Choose year...",
-      "January": "he: January",
-      "February": "he: February",
-      "March": "he: March",
-      "April": "he: April",
-      "May": "he: May",
-      "June": "he: June",
-      "July": "he: July",
-      "August": "he: August",
-      "September": "he: September",
-      "October": "he: October",
-      "November": "he: November",
-      "December": "he: December"
+      "Day": "בחרו יום...",
+      "Month": "בחרו חודש...",
+      "Year": "בחרו שנה...",
+      "January": "ינואר",
+      "February": "פברואר",
+      "March": "מרץ",
+      "April": "אפריל",
+      "May": "מאי",
+      "June": "יוני",
+      "July": "יולי",
+      "August": "אוגוסט",
+      "September": "ספטמבר",
+      "October": "אוקטובר",
+      "November": "נובמבר",
+      "December": "דצמבר"
     },
     "UserMenu": {
-      "DashboardButton": "he: My Dashboard",
-      "SignOutButton": "he: Sign Out"
+      "DashboardButton": "לוח המחוונים שלי",
+      "SignOutButton": "יציאה"
     },
     "DetailsPlaceholder": {
-      "PluralForm": "he: characters remaining",
-      "SingularForm": "he: character remaining"
+      "PluralForm": "תווים שנותרו",
+      "SingularForm": "תו שנותר"
     },
     "Title": {
-      "Default": "he: Prion Registry",
-      "Alert": "he: Your session will time-out soon"
+      "Default": "Prion Registry",
+      "Alert": "ההפעלה שלכם תסתיים בקרוב"
     },
     "EmailEntry": {
-      "InvalidEmail": "he: Please enter a valid email"
+      "InvalidEmail": "הזינו כתובת דוא\"ל חוקית"
     },
     "Institutions": {
       "Fields": {
-        "Name": "he: Physician Name",
-        "Institution": "he: Institution",
-        "InstitutionAny": "he: Institution (if any)",
-        "City": "he: City",
-        "State": "he: State"
+        "Name": "שם הרופא",
+        "Institution": "מוסד",
+        "InstitutionAny": "מוסד (אם קיים)",
+        "City": "עיר",
+        "State": "מדינה"
       },
-      "PhysicianValidation": "he: Please fill out all required fields"
+      "PhysicianValidation": "מלאו את כל השדות הנדרשים"
     },
     "MailAddress": {
       "Fields": {
-        "Name": "he: Full Name",
-        "Country": "he: Country/Territory",
-        "Street1": "he: Street Address",
-        "Street2": "he: Apt/Floor #",
+        "Name": "שם מלא",
+        "Country": "ארץ/טריטוריה",
+        "Street1": "כתובת רחוב",
+        "Street2": "מספר דירה/קומה",
         "State": {
-          "State": "he: State",
-          "Province": "he: Province",
-          "State/Province/Region": "he: State/Province/Region"
+          "State": "ארץ",
+          "Province": "מחוז",
+          "State/Province/Region": "מדינה/מחוז/אזור"
         },
-        "City": "he: City",
-        "Phone": "he: Phone",
+        "City": "עיר",
+        "Phone": "טלפון",
         "Zip": {
-          "Zip Code": "he: Zip Code",
-          "Postal Code": "he: Postal Code",
-          "Zip/Postal Code": "he: Zip/Postal Code"
+          "Zip Code": "מיקוד",
+          "Postal Code": "מיקוד",
+          "Zip/Postal Code": "מיקוד"
         },
-        "Choose": "he: Choose {{field}} ..."
+        "Choose": "בחרו ב-{{field}} ..."
       },
       "Suggestion": {
-        "Title": "he: We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "he: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "he: Suggested:",
-        "AsEntered": "he: As Entered:"
+        "Title": "בדקנו את רשומת הכתובת והצענו שינויים שיכולים לעזור להבטיח את המסירה.",
+        "Subtitle": "לחצו על 'הצעה' כדי לעדכן את הטופס. תוכלו ללחוץ על 'כפי שהוזן' כדי לשחזר את הרשומות המקוריות.",
+        "Suggested": "הצעה:",
+        "AsEntered": "כפי שהוזן:"
       },
       "Error": {
-        "InvalidAddress": "he: Invalid address.",
-        "CannotVerify": "he: Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "he: An unknown error occurred while verifying address.",
-        "FieldIsRequired": "he: {{field}} is required",
-        "FieldIsInvalid": "he: {{field}} has an invalid value",
-        "InvalidHouseNumber": "he: Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "he: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "he: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "he: The requested resource could not be found.",
-        "FORBIDDEN": "he: Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "he: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "he: Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "he: Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "he: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "he: This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "he: API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "he: At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "he: The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "he: Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "he: The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "he: The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "he: Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "he: Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "he: The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "he: Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "he: One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "he: Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "he: Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "he: Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "he: USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "he: International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "he: Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "he: Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "he: This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "he: No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "he: We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "he: We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "he: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "he: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "he: House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "he: We could not find the street number provided.",
-        "E.STREET.MISSING": "he: Street is missing.",
-        "E.STREET.INVALID": "he: Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "he: Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "he: Box number is invalid.",
-        "E.ADDRESS.INVALID": "he: Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "he: Zip not found.",
-        "E.ZIP.INVALID": "he: Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "he: Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "he: Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "he: Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "he: Dual address.",
-        "E.STREET.MAGNET": "he: Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "he: Unverifiable city / state.",
-        "E.STATE.INVALID": "he: Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "he: Invalid delivery address.",
-        "E.TIMED_OUT": "he: Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "he: The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "he: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+        "InvalidAddress": "כתובת לא חוקית.",
+        "CannotVerify": "לא ניתן לאמת את הכתובת, בדקו שוב את כתובתכם.",
+        "UnknownVerifyError": "ארעה שגיאה לא ידועה בזמן אימות הכתובת.",
+        "FieldIsRequired": "{{field}} הוא שדה חובה.",
+        "FieldIsInvalid": "ב{{field}} קיים ערך בלתי חוקי",
+        "InvalidHouseNumber": "לא ניתן למצוא את מספר הרחוב",
+        "INTERNAL_SERVER_ERROR": "מצטערים, משהו השתבש. אם הבעיה נמשכת צרו איתנו קשר בכתובת support@easypost.com.",
+        "NOT_ACCEPTABLE": "המשאב שזוהה על ידי הבקשה מסוגל ליצור רק ישויות תגובה שיש להם מאפייני תוכן שאינם מקובלים על פי כותרות הקבלה שנשלחו בבקשה.",
+        "NOT_FOUND": "לא ניתן למצוא את המשאב המבוקש.",
+        "FORBIDDEN": "לא ניתן לגשת למשאב המבוקש.",
+        "PAYMENT_REQUIRED": "אין מספיק כספים. בדקו את הגדרות החיוב שלכם בכתובת http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "לא ניתן לגשת למשאב המבוקש, האישור נכשל.",
+        "BAD_REQUEST": "בקשה שגויה. בדקו את התוכן ונסו שוב.",
+        "PAYMENT_GATEWAY.ERROR": "מעבד התשלום אינו יכול לטפל בבקשה. נסו שוב או צרו איתנו קשר בכתובת support@easypost.com אם הבעיה נמשכת.",
+        "MODE.UNAUTHORIZED": "משאב זה דורש יצירה של מפתח API כדי להיכנס.",
+        "MODE.CONFLICT": "מצב מפתח API נוגד את מצב הפרמטר.",
+        "DATE.PARSE.FAILURE": "לפחות תאריך אחד נכתב בתבנית שגויה ואינו ניתן לניתוח.",
+        "PARAMETER.FORBIDDEN": "לא ניתן להשלים את הבקשה עקב תכונות אסורות הקיימות בפרמטרים.",
+        "PARAMETER.REQUIRED": "פרמטר נדרש חסר.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "הפרמטרים שעברו כללו תו לא חוקי.",
+        "ADDRESS.PARAMETERS.INVALID": "הפרמטרים שעברו ליצירת כתובת היו חסרים או לא תקניים.",
+        "ADDRESS.COUNTRY.INVALID": "'ארץ' לא נכונה, יש לספק קוד ארץ ISO בן 2 תווים.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "כתובת לא נמצאה.",
+        "ADDRESS.VERIFICATION.FAILURE": "הכתובת אינה ניתנת לאימות.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "אימות כתובת אינו זמין. נסו שוב.",
+        "ADDRESS.VERIFICATION.INVALID": "אחד מהאימותים שנבחרו אינו נכון.",
+        "ADDRESS.VERIFY.FAILURE": "לא ניתן לאמת את הכתובת.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "לא ניתן לאמת את הכתובת באמצעות ספק השירות שצוין.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "אימות הכתובת אינו זמין עקב שירות upstream שאינו מגיב. אנא נסו שוב.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS מסוגל לאמת כתובות בארה\"ב בלבד.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "אימות בינלאומי אינו מפעל בחשבון זה. צרו קשר עם support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "נתוני הכתובת שסופקו אינם מספיקים. יש לספק שם רחוב.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "נתוני הכתובת שסופקו אינם מספיקים. יש לספק עיר ומדינה או מיקוד.",
+        "E.COUNTRY.UNSUPPORTED": "ארץ זו אינה נתמכת במצב זה. נסו במצב ייצור.",
+        "E.ENGINE.UNAVAILABLE": "אין מנוע אימות הזמין לשרת ארץ זו. אנא נסו שוב מאוחר יותר.",
+        "E.QUERY.UNANSWERABLE": "איננו יכולים לספק נתונים מספקים בארץ זו כדי למלא בקשה זו. אנא נסו שוב מאוחר יותר.",
+        "E.ADDRESS.NOT_FOUND": "לא מצאנו את הכתובת שהוזנה.",
+        "E.SECONDARY_INFORMATION.INVALID": "מידע משני לא תקני (מספר דירה). לתשומת לבכם הודעה זו יכולה להופיע כשגיאה בבקשה שהצליחה.",
+        "E.SECONDARY_INFORMATION.MISSING": "מידע משני חסר (מספר דירה). לתשומת לבכם הודעה זו יכולה להופיע כשגיאה בבקשה שהצליחה.",
+        "E.HOUSE_NUMBER.MISSING": "מספר הבניין חסר.",
+        "E.HOUSE_NUMBER.INVALID": "לא מצאנו את מספר הרחוב שצוין.",
+        "E.STREET.MISSING": "הרחוב חסר.",
+        "E.STREET.INVALID": "הרחוב לא תקני.",
+        "E.BOX_NUMBER.MISSING": "מספר התיבה חסר.",
+        "E.BOX_NUMBER.INVALID": "מספר התיבה אינו תקני.",
+        "E.ADDRESS.INVALID": "עיר/מדינה/מיקוד לא תקניים.",
+        "E.ZIP.NOT_FOUND": "המיקוד לא נמצא.",
+        "E.ZIP.INVALID": "המיקוד אינו תקני.",
+        "E.ZIP.PLUS4.NOT_FOUND": "המיקוד + 4 לא נמצא.",
+        "E.ADDRESS.MULTIPLE": "מספר כתובות חזרו עם מספר מיקוד זהה.",
+        "E.ADDRESS.INSUFFICIENT": "נתוני כתובת בלתי מספקים/שגויים.",
+        "E.ADDRESS.DUAL": "כתובת כפולה.",
+        "E.STREET.MAGNET": "כתובת הרחוב אינה ברורה.",
+        "E.CITY_STATE.INVALID": "עיר / מדינה בלתי מזוהים.",
+        "E.STATE.INVALID": "מדינה לא תקנית.",
+        "E.ADDRESS.DELIVERY.INVALID": "כתובת משלוח לא תקנית.",
+        "E.TIMED_OUT": "חריגה מהזמן הקצוב המרבי.",
+        "E.TIME_ZONE.UNAVAILABLE": "שירות אזור הזמן אינו זמין כרגע.",
+        "E.PO_BOX.INTERNATIONAL": "לא ניתן לאמת תא דואר בינלאומי. לתשומת לבכם הודעה זו יכולה להופיע כשגיאה בבקשה שהצליחה."
       }
     },
-    "TooltipAlt": "he: Information"
+    "TooltipAlt": "מידע"
   }
 }

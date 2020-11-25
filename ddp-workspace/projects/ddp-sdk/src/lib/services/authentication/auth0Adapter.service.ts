@@ -268,7 +268,12 @@ export class Auth0AdapterService implements OnDestroy {
         this.session.clear();
         this.log.logEvent(this.LOG_SOURCE, 'logout');
         this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
-        const returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;
+
+        let returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;
+        if (returnToUrl.startsWith('http')) {
+          returnTo = returnToUrl;
+        }
+
         if (wasAdmin) {
             this.adminWebAuth.logout({
                 returnTo,
