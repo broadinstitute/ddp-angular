@@ -155,7 +155,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
         }
-        const isParentOption = this.block.picklistOptions.includes(option);
+        const isParentOption = this.block.picklistOptions.includes(option) || this.groupParentOptionSelected(option);
         if (isParentOption) {
             this.parentOptionSelected(value, option);
         } else {
@@ -239,6 +239,10 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
             return option && option.exclusive;
         });
         return hasExclusive;
+    }
+
+    private groupParentOptionSelected(option: ActivityPicklistOption): boolean {
+        return this.block.picklistGroups.some(group => group.options.includes(option));
     }
 
     private removeNestedOptionsAnswers(option: ActivityPicklistOption): Array<ActivityPicklistAnswerDto> {
