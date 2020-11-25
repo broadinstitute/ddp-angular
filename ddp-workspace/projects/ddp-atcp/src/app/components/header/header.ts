@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
   isMultiGoverned: boolean;
   private readonly LOG_SOURCE = 'HeaderComponent';
+  private prevParticipantGuid: string;
 
   constructor(@Inject(LanguagesToken) public languages: Language[],
               private session: SessionMementoService,
@@ -38,6 +39,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
               @Inject('ddp.config') private configuration: ConfigurationService,
               private userPreferencesServiceAgent: UserPreferencesServiceAgent,
               private multiGovernedUserService: MultiGovernedUserService) {
+  }
+
+  onBeforeLanguageChange(): void {
+    if (!this.session.session) {
+      return;
+    }
+
+    if (this.session.session.participantGuid) {
+      this.prevParticipantGuid = this.session.session.participantGuid;
+      this.session.setParticipant(null);
+    }
+  }
+
+  onAfterProfileLanguageChange(): void {
+    if (this.prevParticipantGuid) {
+      this.session.setParticipant(this.prevParticipantGuid);
+      this.prevParticipantGuid = null;
+    }
   }
 
   public ngOnInit(): void {

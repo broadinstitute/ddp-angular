@@ -1,12 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { skipWhile, take } from 'rxjs/operators';
 
 import {
   ActivityInstance,
   ConfigurationService,
   UserActivityServiceAgent,
+  LanguageService,
+  CompositeDisposable,
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
@@ -17,12 +19,14 @@ import * as RouterResources from '../../router-resources';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   activities: ActivityInstance[];
   isLoading: boolean = true;
+  private anchor = new CompositeDisposable();
 
   constructor(
     private router: Router,
+    private languageService: LanguageService,
     private userActivityAgent: UserActivityServiceAgent,
     private activityService: ActivityService,
     @Inject('ddp.config') private config: ConfigurationService
@@ -31,6 +35,24 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.activityService.currentActivityInstanceGuid = null;
 
+    this.getActivities();
+
+    this.anchor.addNew(
+      this.languageService
+        .getProfileLanguageUpdateNotifier()
+        .pipe(skipWhile(value => value === null))
+        .subscribe(() => {
+          this.isLoading = true;
+          this.getActivities();
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
+  }
+
+  getActivities(): void {
     this.userActivityAgent
       .getActivities(of(this.config.studyGuid))
       .pipe(take(1))

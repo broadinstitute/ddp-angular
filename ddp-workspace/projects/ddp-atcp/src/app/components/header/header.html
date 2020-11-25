@@ -9,7 +9,10 @@
   <nav>
     <ul>
       <li class="dropdown">
-        <ddp-language-selector></ddp-language-selector>
+        <ddp-language-selector
+          (beforeLanguageChange)="onBeforeLanguageChange()"
+          (afterProfileLanguageChange)="onAfterProfileLanguageChange()"
+        ></ddp-language-selector>
       </li>
       <li class="dropdown">
         <a
@@ -114,7 +117,9 @@
         </ul>
       </li>
       <li>
-        <ddp-sign-in-out [signInCaption]="'Common.Navigation.SignIn' | translate"></ddp-sign-in-out>
+        <ddp-sign-in-out
+          [signInCaption]="'Common.Navigation.SignIn' | translate"
+        ></ddp-sign-in-out>
       </li>
     </ul>
   </nav>

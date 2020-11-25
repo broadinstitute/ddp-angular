@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, take, switchMap, tap } from 'rxjs/operators';
+import { map, take, switchMap, tap, skipWhile } from 'rxjs/operators';
 
 import {
   SessionMementoService,
@@ -11,6 +11,8 @@ import {
   ActivityInstance,
   UserActivityServiceAgent,
   WorkflowServiceAgent,
+  LanguageService,
+  CompositeDisposable,
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
@@ -27,12 +29,14 @@ export interface Participant {
   templateUrl: './participant-list.component.html',
   styleUrls: ['./participant-list.component.scss'],
 })
-export class ParticipantListComponent implements OnInit {
+export class ParticipantListComponent implements OnInit, OnDestroy {
   participants: Participant[] = [];
   isLoaded = false;
+  private anchor = new CompositeDisposable();
 
   constructor(
     private readonly router: Router,
+    private readonly languageService: LanguageService,
     private readonly activityService: ActivityService,
     private readonly session: SessionMementoService,
     private readonly governedParticipantsAgent: GovernedParticipantsServiceAgent,
@@ -45,6 +49,20 @@ export class ParticipantListComponent implements OnInit {
     this.session.setParticipant(null);
 
     this.getParticipants();
+
+    this.anchor.addNew(
+      this.languageService
+        .getProfileLanguageUpdateNotifier()
+        .pipe(skipWhile(value => value === null))
+        .subscribe(() => {
+          this.isLoaded = false;
+          this.getParticipants();
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 
   onAddParticipantClick(): void {
