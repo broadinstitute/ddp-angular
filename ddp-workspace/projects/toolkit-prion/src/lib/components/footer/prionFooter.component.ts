@@ -13,7 +13,7 @@ import { FooterComponent, ToolkitConfigurationService } from 'toolkit';
   selector: 'prion-footer',
   template: `
     <footer class="Footer row">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 Footer-left">
+      <div class="col-lg-6 col-md-5 col-sm-4 col-xs-12 Footer-left">
         <a href [routerLink]="['/home']">
           <img lazy-resource src="/assets/images/project-logo-dark.svg" [attr.alt]="'Toolkit.Common.LogoAlt' | translate">
         </a>
@@ -22,7 +22,7 @@ import { FooterComponent, ToolkitConfigurationService } from 'toolkit';
           <a [href]="'Toolkit.Footer.ContactMailTo' | translate" class="Footer-link NoPadding" translate>Toolkit.Footer.ContactEmail</a>
         </p>
       </div>
-      <div class="col-lg-6 col-md-4 col-sm-8 col-xs-12 Footer-links">
+      <div class="col-lg-6 col-md-7 col-sm-8 col-xs-12 Footer-links">
         <p class="Footer-text Float--right">
           <a [routerLink]="['/']" class="Footer-link" translate>Toolkit.Common.Home</a>
           <span  (click)="clickLearnMore()" class="Footer-link" translate>Toolkit.Common.LearnMore</span>
