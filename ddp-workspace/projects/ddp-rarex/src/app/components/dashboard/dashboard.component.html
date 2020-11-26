@@ -1,4 +1,15 @@
 <div class="container">
+  <ng-container *ngIf="announcements && announcements.length">
+    <ng-container *ngFor="let announcement of announcements; let i = index">
+      <div *ngIf="announcement.shown" class="announcement">
+        <button class="close-button" (click)="closeAnnouncement(i)">
+          <mat-icon class="close">clear</mat-icon>
+        </button>
+        <div class="content" [innerHTML]="announcement.instance.message"></div>
+      </div>
+    </ng-container>
+  </ng-container>
+
   <div *ngIf="isLoading" class="dashboard-spinner-container">
     <mat-spinner></mat-spinner>
   </div>

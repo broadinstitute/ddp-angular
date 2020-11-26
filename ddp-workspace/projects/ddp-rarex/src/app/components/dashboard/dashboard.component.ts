@@ -1,19 +1,26 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 import {
   ActivityInstance,
   ActivityServiceAgent,
   ConfigurationService,
   UserActivityServiceAgent,
+  AnnouncementsServiceAgent,
+  AnnouncementMessage,
 } from 'ddp-sdk';
 
 import { ActivityCodes } from '../../constants/activity-codes';
 import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { RoutePaths } from '../../router-resources';
+
+interface Announcement {
+  instance: AnnouncementMessage;
+  shown: boolean;
+}
 
 @Component({
   selector: 'rarex-dashboard',
@@ -31,9 +38,11 @@ export class RarexDashboardComponent implements OnInit {
   ];
   activityStatusCodes = ActivityStatusCodes;
   activities: ActivityInstance[];
+  announcements: Announcement[];
 
   constructor(
     private router: Router,
+    private announcementsServiceAgent: AnnouncementsServiceAgent,
     private activityService: ActivityServiceAgent,
     private currentActivityService: CurrentActivityService,
     private userActivityServiceAgent: UserActivityServiceAgent,
@@ -41,6 +50,7 @@ export class RarexDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getAnnouncements();
     this.getActivities();
   }
 
@@ -88,6 +98,10 @@ export class RarexDashboardComponent implements OnInit {
       });
   }
 
+  closeAnnouncement(index: number): void {
+    this.announcements[index].shown = false;
+  }
+
   private isConsentOrAssent(activity: ActivityInstance): boolean {
     const activityCode = activity.activityCode;
 
@@ -110,6 +124,25 @@ export class RarexDashboardComponent implements OnInit {
       )
       .subscribe(activities => {
         this.activities = activities;
+      });
+  }
+
+  private getAnnouncements(): void {
+    this.announcementsServiceAgent
+      .getMessages(this.config.studyGuid)
+      .pipe(
+        take(1),
+        map(messages =>
+          messages.map(
+            (m: AnnouncementMessage): Announcement => ({
+              instance: m,
+              shown: true,
+            })
+          )
+        )
+      )
+      .subscribe(announcements => {
+        this.announcements = announcements;
       });
   }
 }
