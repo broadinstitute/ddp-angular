@@ -1,19 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
+import {
+  Auth0CodeCallbackComponent,
+  AuthGuard,
+  BrowserGuard,
+  IrbGuard,
+} from 'ddp-sdk';
 
 import {
-  DashboardRedesignedComponent,
   LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
+import { RarexDashboardComponent } from './components/dashboard/dashboard.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
-import { TermsConditionsPageComponent, PrivacyPolicyPageComponent } from './components/static';
+import {
+  TermsConditionsPageComponent,
+  PrivacyPolicyPageComponent,
+} from './components/static';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 
@@ -21,89 +29,57 @@ const routes: Routes = [
   {
     path: RoutePaths.Activities,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ]
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: RoutePaths.Survey,
     component: RarexActivityPageComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ]
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: RoutePaths.Consent,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
-      activityCode: ActivityCodes.CONSENT
-    }
+      activityCode: ActivityCodes.CONSENT,
+    },
   },
   {
     path: RoutePaths.Demographics,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
-      activityCode: ActivityCodes.DEMOGRAPHICS
-    }
+      activityCode: ActivityCodes.DEMOGRAPHICS,
+    },
   },
   {
     path: RoutePaths.GeneralMedicalBackgroundSurvey,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
-      activityCode: ActivityCodes.GENERAL_MEDICAL_BACKGROUND_SURVEY
-    }
+      activityCode: ActivityCodes.GENERAL_MEDICAL_BACKGROUND_SURVEY,
+    },
   },
   {
     path: RoutePaths.GeneralNeuroDevelopment,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
-      activityCode: ActivityCodes.GENERAL_NEURO_DEVELOPMENT
-    }
+      activityCode: ActivityCodes.GENERAL_NEURO_DEVELOPMENT,
+    },
   },
   {
     path: RoutePaths.QualityOfLife,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
-      activityCode: ActivityCodes.QUALITY_OF_LIFE
-    }
+      activityCode: ActivityCodes.QUALITY_OF_LIFE,
+    },
   },
   {
     path: RoutePaths.ParentalConsent,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard,
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.PARENTAL_CONSENT,
     },
@@ -111,76 +87,64 @@ const routes: Routes = [
   {
     path: RoutePaths.ConsentAssent,
     component: RarexActivityRedirectComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard,
-    ],
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.CONSENT_ASSENT,
     },
   },
   {
     path: RoutePaths.Dashboard,
-    component: DashboardRedesignedComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ]
+    component: RarexDashboardComponent,
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: RoutePaths.LoginLandingWithMode,
     component: RedirectToAuth0LoginRedesignedComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.LoginLanding,
     component: LoginLandingRedesignedComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.Auth,
     component: Auth0CodeCallbackComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.Password,
-    component: PasswordRedesignedComponent
+    component: PasswordRedesignedComponent,
   },
   {
     path: RoutePaths.PrivacyPolicy,
     component: PrivacyPolicyPageComponent,
-    canActivate: [
-      IrbGuard,
-    ]
+    canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.TermsAndConditions,
     component: TermsConditionsPageComponent,
-    canActivate: [
-      IrbGuard,
-    ]
+    canActivate: [IrbGuard],
   },
   {
-      path: RoutePaths.Index,
-      component: ShareMyDataComponent,
-      pathMatch: 'full',
-      canActivate: [IrbGuard]
+    path: RoutePaths.Index,
+    component: ShareMyDataComponent,
+    pathMatch: 'full',
+    canActivate: [IrbGuard],
   },
   {
-      path: '**',
-      redirectTo: ''
-  }
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
-    imports: [
-      RouterModule.forRoot(routes, {
-        enableTracing: false,
-        scrollPositionRestoration: 'top'
-      })
-    ],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      enableTracing: false,
+      scrollPositionRestoration: 'top',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

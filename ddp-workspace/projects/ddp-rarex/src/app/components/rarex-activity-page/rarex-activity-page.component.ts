@@ -25,6 +25,7 @@ import { RoutePaths } from '../../router-resources';
 export class RarexActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
+  isReadonly: boolean;
   activities: ActivityInstance[];
   isWorkflowProgressShown: boolean;
   isActivityShown = true;
@@ -45,19 +46,21 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.studyGuid = this._toolkitConfiguration.studyGuid;
-    const activityInstance = this._currentActivity.activity$.getValue();
+    const activity = this._currentActivity.activity$.getValue();
 
-    if (!activityInstance) {
+    if (!activity) {
       this._router.navigateByUrl(RoutePaths.Dashboard);
 
       return;
     }
 
     this.getActivities().pipe(take(1)).subscribe();
-    this.instanceGuid = activityInstance.instanceGuid;
+    this.instanceGuid = activity.instance.instanceGuid;
+    this.isReadonly = activity.isReadonly;
   }
 
   ngOnDestroy(): void {
+    this._currentActivity.activity$.next(null);
     this._anchor.removeAll();
   }
 

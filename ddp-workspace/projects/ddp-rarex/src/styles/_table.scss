@@ -1,0 +1,95 @@
+@import 'variables';
+
+.mat-table {
+  .mat-cell,
+  .mat-header-cell {
+    font-size: 1rem;
+  }
+
+  .mat-cell {
+    padding: 1rem 1.5rem 1rem 0;
+
+    color: $color-text;
+  }
+
+  .mat-column-activityStatus {
+    padding-left: 1.5rem;
+  }
+
+  .mat-column-activityActions {
+    width: 10rem;
+
+    button {
+      width: 100%;
+
+      & + button {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+.dashboard-table {
+  @media (max-width: 768px) {
+    display: block;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+
+      tr {
+        display: flex;
+        flex-direction: column;
+
+        height: auto;
+
+        &:not(:last-of-type) {
+          padding-bottom: 0.75rem;
+          margin-bottom: 0.75rem;
+
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .mat-cell {
+          display: flex;
+          // align-items: center;
+
+          width: 100%;
+
+          padding: 0.25rem 0;
+
+          border-bottom: none;
+
+          &::before {
+            content: attr(data-label);
+
+            flex-shrink: 0;
+            width: 8rem;
+
+            margin-right: 1rem;
+
+            font-weight: bold;
+          }
+
+          .button {
+            width: auto;
+
+            margin: 0;
+
+            &:not(:last-of-type) {
+              margin-right: 1rem;
+            }
+          }
+
+          &:last-of-type {
+            align-items: center;
+            flex-flow: row wrap;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @import '../app-theme.scss';
+@import './variables';
 
 ol li,
 ul li,
@@ -55,4 +56,10 @@ h6 {
   font-size: 1.2rem;
   color: black;
   font-weight: bold;
+}
+
+.content {
+  .Link {
+    color: $color-secondary-teal;
+  }
 }

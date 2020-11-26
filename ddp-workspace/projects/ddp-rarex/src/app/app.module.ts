@@ -1,7 +1,7 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatProgressSpinnerModule, MatTableModule, MatIconModule } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -18,6 +18,7 @@ import {
 } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
+import { RarexDashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
@@ -98,10 +99,13 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DdpModule,
     ToolkitModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatIconModule,
   ],
   declarations: [
     AppComponent,
+    RarexDashboardComponent,
     FooterComponent,
     HeaderComponent,
     WorkflowProgressComponent,

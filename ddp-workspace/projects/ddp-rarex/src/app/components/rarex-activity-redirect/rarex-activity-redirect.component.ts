@@ -54,7 +54,7 @@ export class RarexActivityRedirectComponent implements OnInit, OnDestroy {
       this._anchor.addNew(
         getActivities$.subscribe((activityInstance?: ActivityInstance) => {
           if (activityInstance) {
-            this._currentActivity.activity$.next(activityInstance);
+            this._currentActivity.activity$.next({ instance: activityInstance, isReadonly: false });
             this._router.navigateByUrl(RoutePaths.Survey);
           } else {
             this._currentActivity.activity$.next(null);

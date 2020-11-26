@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { ActivityComponent, SubmitAnnouncementService, SubmissionManager } from 'ddp-sdk';
 
@@ -9,6 +9,7 @@ import { ActivityComponent, SubmitAnnouncementService, SubmissionManager } from 
   providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class RarexActivityComponent extends ActivityComponent {
+  @Input() isReadonly = false;
   @Output() sectionChanged = new EventEmitter();
 
   scrollToTop() {

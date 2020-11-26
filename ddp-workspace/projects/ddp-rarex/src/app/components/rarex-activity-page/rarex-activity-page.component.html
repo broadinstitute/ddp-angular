@@ -15,6 +15,7 @@
       *ngIf="isActivityShown && !isFetchingActivities"
       [studyGuid]="studyGuid"
       [activityGuid]="instanceGuid"
+      [isReadonly]="isReadonly"
       (submit)="onSubmit($event)"
     ></app-rarex-activity>
   </div>
