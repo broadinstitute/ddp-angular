@@ -1,11 +1,24 @@
 <div class="container">
-  <table mat-table [dataSource]="activities">
+  <div *ngIf="isLoading" class="dashboard-spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <table
+    *ngIf="!isLoading"
+    class="dashboard-table"
+    mat-table
+    [dataSource]="activities"
+  >
     <!-- Activity Name Column -->
     <ng-container matColumnDef="activityName">
       <th mat-header-cell *matHeaderCellDef>
         {{ 'SDK.UserActivities.ActivityName' | translate }}
       </th>
-      <td mat-cell *matCellDef="let activity">
+      <td
+        mat-cell
+        *matCellDef="let activity"
+        [attr.data-label]="'SDK.UserActivities.ActivityName' | translate"
+      >
         {{ activity.activityName }}
       </td>
     </ng-container>
@@ -15,7 +28,11 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ 'SDK.UserActivities.Summary' | translate }}
       </th>
-      <td mat-cell *matCellDef="let activity">
+      <td
+        mat-cell
+        *matCellDef="let activity"
+        [attr.data-label]="'SDK.UserActivities.Summary' | translate"
+      >
         {{ activity.activitySummary }}
       </td>
     </ng-container>
@@ -25,7 +42,11 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ 'SDK.UserActivities.ActivityDate' | translate }}
       </th>
-      <td mat-cell *matCellDef="let activity">
+      <td
+        mat-cell
+        *matCellDef="let activity"
+        [attr.data-label]="'SDK.UserActivities.ActivityDate' | translate"
+      >
         {{ activity.createdAt | date: 'MM/dd' }}
       </td>
     </ng-container>
@@ -35,7 +56,11 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ 'SDK.UserActivities.ActivityStatus' | translate }}
       </th>
-      <td mat-cell *matCellDef="let activity">
+      <td
+        mat-cell
+        *matCellDef="let activity"
+        [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate"
+      >
         <ng-container
           *ngIf="shouldShowQuestionCount(activity); else normalStatus"
         >
@@ -60,7 +85,11 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ 'SDK.UserActivities.ActivityActions' | translate }}
       </th>
-      <td mat-cell *matCellDef="let activity">
+      <td
+        mat-cell
+        *matCellDef="let activity"
+        [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate"
+      >
         <button
           *ngIf="activity.statusCode === activityStatusCodes.CREATED"
           class="button button_primary button_small"

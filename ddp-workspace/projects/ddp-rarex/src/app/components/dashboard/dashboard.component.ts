@@ -80,7 +80,11 @@ export class RarexDashboardComponent implements OnInit {
       .createInstance(this.config.studyGuid, activity.activityCode)
       .pipe(take(1))
       .subscribe(activity => {
-        // Do something after creating new activity
+        this.currentActivityService.activity$.next({
+          instance: activity as ActivityInstance,
+          isReadonly: false,
+        });
+        this.router.navigateByUrl(RoutePaths.Survey);
       });
   }
 
