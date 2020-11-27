@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "すでに登録済ですか? ここからサインインしてください",
     "confirmNewPassword": {
+      "error": "ja_Password confirmation doesn't match Password",
       "label": "新規パスワードを確認する"
     },
     "email": {
+      "error": "ja_Email cannot be empty",
+      "label": "Eメールアドレス",
       "whoseEmail": "どなたのEメールアドレスを入力しますか?",
       "whoseEmailTooltip": "あなたがA-T患者であるお子様(たち) の親/法的保護者である場合には、あなた自身のEメールアドレスを使用してください。このアドレスへ、グローバル A-T ファミリーデータプラットフォームに登録された方々に関するご連絡をいたします。"
     },
@@ -18,13 +21,16 @@
     "joinUs": "参加する",
     "or": "または",
     "password": {
+      "error": "ja_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "パスワード"
     },
     "reenter": {
+      "error": "ja_Password confirmation doesn't match Password",
       "label": "パスワードを再入力してください"
     },
     "resendInstructions": "確認方法を再送する",
     "resetPassword": {
+      "error": "ja_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "新規パスワード"
     },
     "signin": "サインイン",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "このイニシアチブについて",
     "aboutUs": "組織概要",
+    "dataAccessRequest": "データアクセスリクエスト",
     "joinUs": "参加する",
     "language": "言語",
     "learnMore": "さらに詳しく",
+    "researchers": "研究者向け",
     "signIn": "サインイン"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Eメールアドレスを使う:"
   },
   "modal": {
+    "InvalidLogin": "ja_Invalid email or password",
+    "PasswordResetError": "ja_There was an error processing the password reset.",
     "SuccessChangedPassword": "パスワードが変更されました。",
     "YouWillGetInstructions": "数分以内に、パスワードのリセット方法について説明したEメールが届きます。"
   },
   "resendInstructions": {
-    "subTitle": "確認方法が届かない場合には、Eメールアドレスを入力して確認Eメールが再度送信されるようにできます。",
     "submit": "確認方法を再送する",
+    "subTitle": "確認方法が届かない場合には、Eメールアドレスを入力して確認Eメールが再度送信されるようにできます。",
     "title": "確認方法を再送する"
   },
   "resetPassword": {

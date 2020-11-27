@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "Bereits registriert? Hier anmelden",
     "confirmNewPassword": {
+      "error": "de_Password confirmation doesn't match Password",
       "label": "Neues Kennwort bestätigen"
     },
     "email": {
+      "error": "de_Email cannot be empty",
+      "label": "E-Mail-Adresse",
       "whoseEmail": "Wessen E-Mail-Adresse gebe ich ein?",
       "whoseEmailTooltip": "Wenn Sie ein Elternteil/Erziehungsberechtigter eines oder mehrerer Kinder mit AT sind, verwenden Sie Ihre eigene E-Mail-Adresse.  Wir verwenden diese E-Mail-Adresse zur Kommunikation über alle Teilnehmer, die Sie auf der Plattform für globale Daten von AT-Familien registriert haben."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Mitglied werden",
     "or": "oder",
     "password": {
+      "error": "de_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Kennwort"
     },
     "reenter": {
+      "error": "de_Password confirmation doesn't match Password",
       "label": "Kennwort erneut eingeben"
     },
     "resendInstructions": "Bestätigungsanweisungen erneut senden",
     "resetPassword": {
+      "error": "de_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Neues Kennwort"
     },
     "signin": "Anmelden",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "Über diese Initiative",
     "aboutUs": "Über uns",
+    "dataAccessRequest": "Daten Zugriffsanforderung",
     "joinUs": "Mitglied werden",
     "language": "Sprache",
     "learnMore": "Mehr erfahren",
+    "researchers": "Für Forscher",
     "signIn": "Anmelden"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Mit Ihrer E-Mail-Adresse:"
   },
   "modal": {
+    "InvalidLogin": "de_Invalid email or password",
+    "PasswordResetError": "de_There was an error processing the password reset.",
     "SuccessChangedPassword": "Ihr Kennwort wurde erfolgreich geändert.",
     "YouWillGetInstructions": "Sie erhalten in wenigen Minuten eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Kennworts."
   },
   "resendInstructions": {
-    "subTitle": "Wenn Sie Ihre Bestätigungsanweisungen nicht erhalten haben, geben Sie Ihre E-Mail-Adresse ein, um eine neue Bestätigungs-E-Mail zu generieren.",
     "submit": "Bestätigungsanweisungen erneut senden",
+    "subTitle": "Wenn Sie Ihre Bestätigungsanweisungen nicht erhalten haben, geben Sie Ihre E-Mail-Adresse ein, um eine neue Bestätigungs-E-Mail zu generieren.",
     "title": "Bestätigungsanweisungen erneut senden"
   },
   "resetPassword": {

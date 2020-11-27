@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "Już się zarejestrowałeś? Zaloguj się",
     "confirmNewPassword": {
+      "error": "pl_Password confirmation doesn't match Password",
       "label": "Potwierdź nowe hasło"
     },
     "email": {
+      "error": "pl_Email cannot be empty",
+      "label": "Adres e-mail",
       "whoseEmail": "Czyj e-mail mam wpisać?",
       "whoseEmailTooltip": "Jeżeli jesteś rodzicem/opiekunem prawnym dziecka (dzieci) chorych na A-T, użyj swojego adresu e-mail.  Ten adres e-mail będzie wykorzystywany do komunikacji z tobą dotyczącej każdej osoby, którą zarejestrujesz w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Dołącz do nas",
     "or": "lub",
     "password": {
+      "error": "pl_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Hasło"
     },
     "reenter": {
+      "error": "pl_Password confirmation doesn't match Password",
       "label": "Wprowadź hasło ponownie"
     },
     "resendInstructions": "Ponownie wyślij instrukcje dotyczące potwierdzenia",
     "resetPassword": {
+      "error": "pl_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Nowe hasło"
     },
     "signin": "Zaloguj się",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "O inicjatywie",
     "aboutUs": "O nas",
+    "dataAccessRequest": "Żądanie dostępu do danych",
     "joinUs": "Dołącz do nas",
     "language": "Język",
     "learnMore": "Dowiedz się więcej",
+    "researchers": "Dla Naukowców",
     "signIn": "Zaloguj się"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Użyj swojego adresu e-mail:"
   },
   "modal": {
+    "InvalidLogin": "pl_Invalid email or password",
+    "PasswordResetError": "pl_There was an error processing the password reset.",
     "SuccessChangedPassword": "Twoje hasło zostało pomyślnie zmienione.",
     "YouWillGetInstructions": "W ciągu kilku minut otrzymasz e-mail z instrukcjami dotyczącymi zmiany hasła."
   },
   "resendInstructions": {
-    "subTitle": "Jeżeli nie otrzymałeś instrukcji dotyczących potwierdzenia, możesz wpisać adres e-mail, aby otrzymać kolejny e-mail z potwierdzeniem.",
     "submit": "Ponownie wyślij instrukcje dotyczące potwierdzenia",
+    "subTitle": "Jeżeli nie otrzymałeś instrukcji dotyczących potwierdzenia, możesz wpisać adres e-mail, aby otrzymać kolejny e-mail z potwierdzeniem.",
     "title": "Ponownie wyślij instrukcje dotyczące potwierdzenia"
   },
   "resetPassword": {

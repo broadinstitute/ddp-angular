@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "Kayıt yaptınız mı? Burada Oturum Açın",
     "confirmNewPassword": {
+      "error": "tr_Password confirmation doesn't match Password",
       "label": "Yeni şifreyi doğrula"
     },
     "email": {
+      "error": "tr_Email cannot be empty",
+      "label": "E-posta adresi",
       "whoseEmail": "Kimin e-postasını girmeliyim?",
       "whoseEmailTooltip": "A-T'li bir çocuğun/çocukların ebeveyni/vasisi iseniz kendi e-posta adresinizi kullanın.  Global A-T Aile Veri Platformunda kaydettiğiniz kişiler için sizinle iletişim kurmak üzere bu adresi kullanacağız."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Bize Katılın",
     "or": "veya",
     "password": {
+      "error": "tr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Şifre"
     },
     "reenter": {
+      "error": "tr_Password confirmation doesn't match Password",
       "label": "Şifreyi tekrar girin"
     },
     "resendInstructions": "Doğrulama talimatını tekrar gönder",
     "resetPassword": {
+      "error": "tr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Yeni şifre"
     },
     "signin": "Oturum Aç",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "Bu Girişim Hakkında",
     "aboutUs": "Hakkımızda",
+    "dataAccessRequest": "Veri Erişim İsteği",
     "joinUs": "Bize Katılın",
     "language": "Dil",
     "learnMore": "Daha Fazla Bilgi",
+    "researchers": "Araştırmacı",
     "signIn": "Oturum Aç"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "E-posta adresinizi kullanın:"
   },
   "modal": {
+    "InvalidLogin": "tr_Invalid email or password",
+    "PasswordResetError": "tr_There was an error processing the password reset.",
     "SuccessChangedPassword": "Şifreniz başarıyla değiştirildi.",
     "YouWillGetInstructions": "Birkaç dakika içinde şifrenizi sıfırlama talimatı içeren bir e-posta alacaksınız."
   },
   "resendInstructions": {
-    "subTitle": "Doğrulama talimatını almadıysanız yeni bir doğrulama e-postası oluşturmak için e-posta adresinizi girebilirsiniz.",
     "submit": "Doğrulama talimatını tekrar gönder",
+    "subTitle": "Doğrulama talimatını almadıysanız yeni bir doğrulama e-postası oluşturmak için e-posta adresinizi girebilirsiniz.",
     "title": "Doğrulama talimatını tekrar gönder"
   },
   "resetPassword": {

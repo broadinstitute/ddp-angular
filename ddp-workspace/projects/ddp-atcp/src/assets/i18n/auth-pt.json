@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "Já registrado? Registre-se aqui",
     "confirmNewPassword": {
+      "error": "pt_Password confirmation doesn't match Password",
       "label": "Comfirmar senha nova"
     },
     "email": {
+      "error": "pt_Email cannot be empty",
+      "label": "Endereço de e-mail",
       "whoseEmail": "Devo informar o e-mail de quem?",
       "whoseEmailTooltip": "Caso você seja pai ou mãe/responsável legal de uma criança ou crianças com A-T, use o seu próprio endereço de e-mail.  Usaremos este endereço de e-mail para nos comunicarmos com você sobre qualquer pessoa que você registrar na Global A-T Family Data Platform."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Junte-se a nós",
     "or": "ou",
     "password": {
+      "error": "pt_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Senha"
     },
     "reenter": {
+      "error": "pt_Password confirmation doesn't match Password",
       "label": "Digite a senha novamente"
     },
     "resendInstructions": "Reenviar instruções para confirmação",
     "resetPassword": {
+      "error": "pt_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Senha nova"
     },
     "signin": "Login",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "Sobre esta iniciativa",
     "aboutUs": "Sobre nós",
+    "dataAccessRequest": "Solicitação de acesso a dados",
     "joinUs": "Junte-se a nós",
     "language": "Idioma",
     "learnMore": "Descubra mais",
+    "researchers": "Para Pesquisadores",
     "signIn": "Registre-se"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Usar seu endereço de e-mail:"
   },
   "modal": {
+    "InvalidLogin": "pt_Invalid email or password",
+    "PasswordResetError": "pt_There was an error processing the password reset.",
     "SuccessChangedPassword": "Sua senha foi alterada.",
     "YouWillGetInstructions": "Você receberá em alguns minutos um e-mail com instruções para redefinição da sua senha."
   },
   "resendInstructions": {
-    "subTitle": "Caso não tenha recebido suas instruções para confirmação, você pode informar seu endereço de e-mail para gerar outro e-mail de confirmação.",
     "submit": "Reenviar instruções para confirmação",
+    "subTitle": "Caso não tenha recebido suas instruções para confirmação, você pode informar seu endereço de e-mail para gerar outro e-mail de confirmação.",
     "title": "Reenviar instruções para confirmação"
   },
   "resetPassword": {

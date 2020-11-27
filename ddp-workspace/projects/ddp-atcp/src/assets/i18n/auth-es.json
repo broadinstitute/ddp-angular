@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "¿Ya está registrado? Inicie sesión aquí",
     "confirmNewPassword": {
+      "error": "es_Password confirmation doesn't match Password",
       "label": "Confirmar la contraseña nueva"
     },
     "email": {
+      "error": "es_Email cannot be empty",
+      "label": "Dirección de correo electrónico",
       "whoseEmail": "¿Qué correo electrónico debo ingresar?",
       "whoseEmailTooltip": "Si es padre/madre o tutor legal de uno o varios niños con A-T, use su propia dirección de correo electrónico.  Usaremos esta dirección para comunicarnos con usted acerca de todas las personas que registre en la Plataforma global de datos para familias con A-T."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Únase a nosotros",
     "or": "o",
     "password": {
+      "error": "es_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Contraseña"
     },
     "reenter": {
+      "error": "es_Password confirmation doesn't match Password",
       "label": "Vuelva a escribir la contraseña"
     },
     "resendInstructions": "Volver a enviar las instrucciones de confirmación",
     "resetPassword": {
+      "error": "es_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Contraseña nueva"
     },
     "signin": "Iniciar sesión",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "Acerca de esta iniciativa",
     "aboutUs": "Acerca de nosotros",
+    "dataAccessRequest": "Solicitud de acceso a datos",
     "joinUs": "Únase a nosotros",
     "language": "Idioma",
     "learnMore": "Más información",
+    "researchers": "Para Investigadores",
     "signIn": "Iniciar sesión"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Use su dirección de correo electrónico:"
   },
   "modal": {
+    "InvalidLogin": "es_Invalid email or password",
+    "PasswordResetError": "es_There was an error processing the password reset.",
     "SuccessChangedPassword": "Su contraseña se cambió correctamente.",
     "YouWillGetInstructions": "Recibirá un correo electrónico con instrucciones para restablecer su contraseña dentro de unos minutos."
   },
   "resendInstructions": {
-    "subTitle": "Si no recibió las instrucciones de confirmación, puede ingresar su dirección de correo electrónico para generar otro correo de confirmación.",
     "submit": "Volver a enviar las instrucciones de confirmación",
+    "subTitle": "Si no recibió las instrucciones de confirmación, puede ingresar su dirección de correo electrónico para generar otro correo de confirmación.",
     "title": "Volver a enviar las instrucciones de confirmación"
   },
   "resetPassword": {

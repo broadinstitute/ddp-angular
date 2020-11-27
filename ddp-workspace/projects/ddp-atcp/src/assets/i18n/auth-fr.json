@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "Déjà enregistré ? Connectez-vous ici",
     "confirmNewPassword": {
+      "error": "fr_Password confirmation doesn't match Password",
       "label": "Confirmer le nouveau mot de passe"
     },
     "email": {
+      "error": "fr_Email cannot be empty",
+      "label": "Adresse e-mail",
       "whoseEmail": "L’adresse e-mail de qui dois-je saisir ?",
       "whoseEmailTooltip": "Si vous êtes le parent ou le tuteur légal d’un enfant AT, utilisez votre propre adresse e-mail.  Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet des participants que vous avez enregistrés sur la plateforme de données internationale sur les familles AT."
     },
@@ -18,13 +21,16 @@
     "joinUs": "Nous rejoindre",
     "or": "ou",
     "password": {
+      "error": "fr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Mot de passe"
     },
     "reenter": {
+      "error": "fr_Password confirmation doesn't match Password",
       "label": "Saisir de nouveau le mot de passe"
     },
     "resendInstructions": "Renvoyer les instructions de confirmation",
     "resetPassword": {
+      "error": "fr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "Nouveau mot de passe"
     },
     "signin": "Connexion",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "Au sujet de cette initiative",
     "aboutUs": "Qui sommes-nous ?",
+    "dataAccessRequest": "Demande d'accès aux données",
     "joinUs": "Nous rejoindre",
     "language": "Langue",
     "learnMore": "En savoir plus",
+    "researchers": "Pour les Chercheurs",
     "signIn": "Connexion"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "Utilisez votre adresse e-mail :"
   },
   "modal": {
+    "InvalidLogin": "fr_Invalid email or password",
+    "PasswordResetError": "fr_There was an error processing the password reset.",
     "SuccessChangedPassword": "Votre mot de passe a été changé.",
     "YouWillGetInstructions": "Vous recevrez un e-mail contenant les instructions de réinitialisation de votre mot de passe dans quelques minutes."
   },
   "resendInstructions": {
-    "subTitle": "Si vous n’avez pas reçu les instructions de confirmation, vous pouvez saisir votre adresse e-mail pour générer un autre e-mail de confirmation.",
     "submit": "Renvoyer les instructions de confirmation",
+    "subTitle": "Si vous n’avez pas reçu les instructions de confirmation, vous pouvez saisir votre adresse e-mail pour générer un autre e-mail de confirmation.",
     "title": "Renvoyer les instructions de confirmation"
   },
   "resetPassword": {

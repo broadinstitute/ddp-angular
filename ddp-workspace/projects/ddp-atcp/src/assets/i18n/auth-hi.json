@@ -8,9 +8,12 @@
   "common": {
     "alreadyRegistered": "पहले से पंजीकृत हैं?  यहां साइन इन करें",
     "confirmNewPassword": {
+      "error": "hi_Password confirmation doesn't match Password",
       "label": "नये पासवर्ड की पुष्टि करें"
     },
     "email": {
+      "error": "hi_Email cannot be empty",
+      "label": "ईमेल पता",
       "whoseEmail": "मुझे किसका ईमेल दर्ज करना चाहिए?",
       "whoseEmailTooltip": "यदि आप ए-टी से पीड़ित बच्चे (बच्चों) के माता/पिता/कानूनी संरक्षक हैं तो कृपया अपने स्वयं के ईमेल पते का उपयोग करें।  हम ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म में आपके द्वारा पंजीकृत किसी भी व्यक्ति के संबंध में आपसे पत्राचार करने के लिए इस पते का उपयोग करेंगे।"
     },
@@ -18,13 +21,16 @@
     "joinUs": "हमसे जुड़ें",
     "or": "या",
     "password": {
+      "error": "hi_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "पासवर्ड"
     },
     "reenter": {
+      "error": "hi_Password confirmation doesn't match Password",
       "label": "पासवर्ड पुनः दर्ज करें"
     },
     "resendInstructions": "पुष्टि करने के निर्देश दुबारा भेजें",
     "resetPassword": {
+      "error": "hi_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
       "label": "नया पासवर्ड"
     },
     "signin": "साइन इन करें",
@@ -38,9 +44,11 @@
   "header": {
     "aboutThisInitiative": "इस पहल के बारे में",
     "aboutUs": "हमारे बारे में",
+    "dataAccessRequest": "डेटा एक्सेस अनुरोध",
     "joinUs": "हमसे जुड़ें",
     "language": "भाषा",
     "learnMore": "और जानें",
+    "researchers": "शोधकर्ताओं के लिए",
     "signIn": "साइन इन करें"
   },
   "login": {
@@ -48,12 +56,14 @@
     "useEmail": "अपने ईमेल पते का उपयोग करें:"
   },
   "modal": {
+    "InvalidLogin": "hi_Invalid email or password",
+    "PasswordResetError": "hi_There was an error processing the password reset.",
     "SuccessChangedPassword": "आपका पासवर्ड सफलतापूर्वक बदल दिया गया है।",
     "YouWillGetInstructions": "आपको कुछ ही मिनटों में अपने पासवर्ड को रीसेट कैसे करें संबंधी निर्देशों के साथ एक ईमेल प्राप्त होगी।"
   },
   "resendInstructions": {
-    "subTitle": "यदि आपको अपने पुष्टि करने के निर्देश प्राप्त नहीं हुए, तो आप दूसरी पुष्टिकरण ईमेल बनाने के लिए अपना ईमेल पता दुबारा से प्रविष्ट कर सकते हैं।",
     "submit": "पुष्टि करने के निर्देश दुबारा भेजें",
+    "subTitle": "यदि आपको अपने पुष्टि करने के निर्देश प्राप्त नहीं हुए, तो आप दूसरी पुष्टिकरण ईमेल बनाने के लिए अपना ईमेल पता दुबारा से प्रविष्ट कर सकते हैं।",
     "title": "पुष्टि करने के निर्देश दुबारा भेजें"
   },
   "resetPassword": {
