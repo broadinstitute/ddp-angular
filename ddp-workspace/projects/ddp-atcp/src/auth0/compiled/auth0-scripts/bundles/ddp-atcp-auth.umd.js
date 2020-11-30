@@ -297,7 +297,6 @@
      * @return {?}
      */
     function (url) {
-        $('[data-toggle="tooltip"]').tooltip();
         $('.prepare-link-host').map((/**
          * @param {?} i
          * @param {?} el
@@ -617,7 +616,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    console.log('Using following configuration', config);
     /** @type {?} */
     var isResetPasswordPage = Array.isArray(config);
     /** @type {?} */
@@ -648,6 +646,23 @@
     /** @type {?} */
     var translator = translatorCreator(baseUrl + languageDataDir, (ɵ0$3));
     prepareUiElements(baseUrl);
+    $('[data-toggle="tooltip"]').tooltip({
+        title: (/**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var el = $(this);
+            /** @type {?} */
+            var translateKey = el.data('translate');
+            return translateKey.split('.').reduce((/**
+             * @param {?} prev
+             * @param {?} curr
+             * @return {?}
+             */
+            function (prev, curr) { return prev[curr]; }), dictionary);
+        })
+    });
     /**
      * start validate-js for checking forms
      */

@@ -18,8 +18,6 @@ import { translatorCreator } from './translator';
 declare const config;
 declare const $;
 
-console.log('Using following configuration', config);
-
 const isResetPasswordPage = Array.isArray(config);
 const webAuth = createAuth0(config);
 let baseUrl;
@@ -39,6 +37,15 @@ const translator = translatorCreator(baseUrl + languageDataDir, (loadedDictionar
 });
 
 prepareUiElements(baseUrl);
+
+$('[data-toggle="tooltip"]').tooltip({
+  title: function() {
+    const el = $(this);
+    const translateKey = el.data('translate');
+
+    return translateKey.split('.').reduce((prev, curr) => prev[curr], dictionary);
+  }
+});
 
 /**
  * start validate-js for checking forms
