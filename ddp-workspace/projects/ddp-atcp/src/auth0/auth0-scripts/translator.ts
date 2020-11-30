@@ -41,6 +41,9 @@ const loadLanguagesList = (baseUrl: string) => {
 export const translatorCreator = (url: string, cb: (dictionary) => void) => {
   loadLanguagesList(url);
   return {
-      changeTranslate: (language: string) => onChange(url, language, cb),
+      changeTranslate: (language: string) => {
+        window.localStorage.setItem('lang', language);
+        onChange(url, language, cb);
+      },
   };
 };

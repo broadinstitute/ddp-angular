@@ -608,7 +608,10 @@
              * @param {?} language
              * @return {?}
              */
-            function (language) { return onChange(url, language, cb); }),
+            function (language) {
+                window.localStorage.setItem('lang', language);
+                onChange(url, language, cb);
+            }),
         };
     });
 
@@ -655,13 +658,15 @@
             var el = $(this);
             /** @type {?} */
             var translateKey = el.data('translate-tooltip');
-            return translateKey.split('.').reduce((/**
+            return translateKey
+                .split('.')
+                .reduce((/**
              * @param {?} prev
              * @param {?} curr
              * @return {?}
              */
             function (prev, curr) { return prev[curr]; }), dictionary);
-        })
+        }),
     });
     /**
      * start validate-js for checking forms
@@ -679,7 +684,7 @@
                 password: data.password,
                 user_metadata: {
                     temp_user_guid: config.extraParams.temp_user_guid,
-                }
+                },
             }, (/**
              * @return {?}
              */
@@ -715,7 +720,7 @@
                  */
                 function (error) {
                     showModal(dictionary.modal.SuccessChangedPassword, true);
-                })
+                }),
             });
         }));
     }
@@ -747,7 +752,7 @@
     function ($form, data) {
         webAuth.changePassword({
             connection: 'Username-Password-Authentication',
-            email: data.email
+            email: data.email,
         }, (/**
          * @param {?} err
          * @return {?}
@@ -808,7 +813,22 @@
         event.preventDefault();
         translator.changeTranslate($(event.currentTarget).data('language'));
     }));
-    translator.changeTranslate('en');
+    $(document).ready((/**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var lang = window.localStorage.getItem('lang');
+        if (lang) {
+            return translator.changeTranslate(lang);
+        }
+        if (config && config.extraParams && config.extraParams.language) {
+            /** @type {?} */
+            var lang_1 = config.extraParams.language;
+            return translator.changeTranslate(lang_1);
+        }
+        translator.changeTranslate('en');
+    }));
     $('#google-sign').on('click', (/**
      * @param {?} e
      * @return {?}
@@ -833,7 +853,7 @@
         webAuth.authorize({
             state: config.extraParams.state,
             redirectUri: callbackURL,
-            connection: 'google-oauth2'
+            connection: 'google-oauth2',
         }, (/**
          * @return {?}
          */
@@ -848,23 +868,27 @@
         onActivateResetPasssword();
     }
     /** @type {?} */
-    var helpLinks = document.getElementsByClassName("FormItem-help");
+    var helpLinks = document.getElementsByClassName('FormItem-help');
     Array.from(helpLinks).forEach((/**
      * @param {?} x
      * @return {?}
      */
-    function (x) { return x.addEventListener("mouseenter", (/**
-     * @return {?}
-     */
-    function () { return showTooltip(x); })); }));
+    function (x) {
+        return x.addEventListener('mouseenter', (/**
+         * @return {?}
+         */
+        function () { return showTooltip(x); }));
+    }));
     Array.from(helpLinks).forEach((/**
      * @param {?} x
      * @return {?}
      */
-    function (x) { return x.addEventListener("mouseleave", (/**
-     * @return {?}
-     */
-    function () { return hideTooltip(x); })); }));
+    function (x) {
+        return x.addEventListener('mouseleave', (/**
+         * @return {?}
+         */
+        function () { return hideTooltip(x); }));
+    }));
     /** @type {?} */
     var api = null;
 
