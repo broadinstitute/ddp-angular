@@ -41,7 +41,7 @@ prepareUiElements(baseUrl);
 $('[data-toggle="tooltip"]').tooltip({
   title: function() {
     const el = $(this);
-    const translateKey = el.data('translate');
+    const translateKey = el.data('translate-tooltip');
 
     return translateKey.split('.').reduce((prev, curr) => prev[curr], dictionary);
   }

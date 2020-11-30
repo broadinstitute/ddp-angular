@@ -654,7 +654,7 @@
             /** @type {?} */
             var el = $(this);
             /** @type {?} */
-            var translateKey = el.data('translate');
+            var translateKey = el.data('translate-tooltip');
             return translateKey.split('.').reduce((/**
              * @param {?} prev
              * @param {?} curr
