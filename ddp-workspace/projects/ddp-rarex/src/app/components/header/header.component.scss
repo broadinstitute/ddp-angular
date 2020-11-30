@@ -7,19 +7,24 @@
     display: flex;
     align-items: center;
 
+    height: 9.6rem;
+
     padding: 1.2rem;
 
     @media only screen and (max-width: 600px) {
-      align-items: center;
+      height: auto;
+
       flex-direction: column;
     }
   }
 
   &__logo {
-    height: 7.4rem;
+    @media only screen and (max-width: 600px) {
+      margin-bottom: 0.5rem;
+    }
 
     @media only screen and (max-width: 480px) {
-      height: 5.2rem;
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -33,9 +38,21 @@
 }
 
 .logo {
-  &__img {
-    display: block;
-    height: 100%;
+  font-size: 80px;
+  text-decoration: none;
+  line-height: 1em;
+  color: #212021;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 64px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 48px;
   }
 }
 
