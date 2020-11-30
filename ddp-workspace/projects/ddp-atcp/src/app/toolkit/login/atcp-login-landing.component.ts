@@ -13,6 +13,8 @@ import { WorkflowBuilderService, ToolkitConfigurationService } from 'toolkit';
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
+import * as Routes from '../../router-resources';
+
 @Component({
   selector: 'app-atcp-login-landing',
   template: ` <toolkit-common-landing></toolkit-common-landing> `,
@@ -64,7 +66,7 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         'auth error occured: ' + JSON.stringify(error)
       );
       if (error.code === 'unauthorized') {
-        this.router.navigateByUrl('account-activation-required');
+        this.auth0.logout(Routes.AccountActivationRequired);
         return;
       }
     }
