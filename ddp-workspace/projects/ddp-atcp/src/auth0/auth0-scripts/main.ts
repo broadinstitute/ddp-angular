@@ -18,6 +18,8 @@ import { translatorCreator } from './translator';
 declare const config;
 declare const $;
 
+console.log('Using following configuration', config);
+
 const isResetPasswordPage = Array.isArray(config);
 const webAuth = createAuth0(config);
 let baseUrl;

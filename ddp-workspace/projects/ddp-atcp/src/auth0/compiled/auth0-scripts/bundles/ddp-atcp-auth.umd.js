@@ -617,6 +617,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    console.log('Using following configuration', config);
     /** @type {?} */
     var isResetPasswordPage = Array.isArray(config);
     /** @type {?} */
@@ -857,3 +858,4 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+//# sourceMappingURL=ddp-atcp-auth.umd.js.map
