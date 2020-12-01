@@ -66,9 +66,19 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         'auth error occured: ' + JSON.stringify(error)
       );
       if (error.code === 'unauthorized') {
+        const returnTo = `${this.config.baseUrl}${
+          this.config.baseUrl.endsWith('/') ? '' : '/'
+        }${Routes.AccountActivationRequired}`;
+        const clientID = this.config.auth0ClientId;
+
+        this.log.logEvent(
+          this.LOG_SOURCE,
+          `logging out and redirecting to ${returnTo}`
+        );
+
         this.auth0.webAuth.logout({
-          returnTo: Routes.AccountActivationRequired,
-          clientID: this.config.auth0ClientId,
+          returnTo,
+          clientID,
         });
 
         return;
