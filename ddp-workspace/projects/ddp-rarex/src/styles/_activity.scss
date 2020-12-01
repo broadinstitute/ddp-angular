@@ -121,13 +121,27 @@ ddp-activity-composite-answer {
   margin-bottom: 1rem;
 }
 
-.picklist {
-  .ddp-date-field-margin:first-child {
-    margin: 0 1.5rem 0 0;
+ddp-date .picklist {
+  margin-top: -1.25em;
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
   }
 
-  .ddp-date-field-margin:last-child {
-    margin: 0;
+  .date-field {
+    flex: 1;
+
+    @media only screen and (max-width: 480px) {
+      width: 100%;
+    }
+  }
+
+  .ddp-date-field-margin {
+    margin: 0 1.5rem 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 
