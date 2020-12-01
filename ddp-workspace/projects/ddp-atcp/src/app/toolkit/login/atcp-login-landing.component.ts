@@ -66,14 +66,15 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         'auth error occured: ' + JSON.stringify(error)
       );
       if (error.code === 'unauthorized') {
-        this.sessionService.sessionObservable.subscribe(session => {
-          console.log({ session });
-          if (!session) {
-            this.router.navigateByUrl(Routes.AccountActivationRequired);
-          } else {
-            this.auth0.logout(Routes.AccountActivationRequired);
-          }
-        });
+        this.sessionService.sessionObservable
+          .pipe(take(1))
+          .subscribe(session => {
+            if (session && session.idToken) {
+              this.auth0.logout(Routes.AccountActivationRequired);
+            } else {
+              this.router.navigateByUrl(Routes.AccountActivationRequired);
+            }
+          });
         return;
       }
     }
