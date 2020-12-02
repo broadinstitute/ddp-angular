@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance } from 'ddp-sdk';
 
+import { ActivityCodes } from '../../sdk/constants/activityCodes'
 import {
   COMPLETE,
   CREATED,
@@ -26,8 +27,10 @@ export class UserActivitiesComponent {
   @Output() startActivity = new EventEmitter<string>();
   @Output() continueActivity = new EventEmitter<string>();
   @Output() viewActivity = new EventEmitter<string>();
+  @Output() editActivity = new EventEmitter<ActivityInstance>();
 
   statusCodes = { COMPLETE, CREATED, IN_PROGRESS };
+  activityCodes = ActivityCodes;
 
   constructor() {}
 

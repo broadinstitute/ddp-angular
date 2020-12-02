@@ -87,10 +87,7 @@
       class="user-activities-table__cell"
     >
       <button
-        *ngIf="
-          activity === currentActivity &&
-          activity.statusCode === statusCodes.CREATED
-        "
+        *ngIf="activity.statusCode === statusCodes.CREATED"
         class="BtnFilled BtnFilled--blue"
         (click)="startActivity.emit(activity.instanceGuid)"
       >
@@ -98,23 +95,32 @@
       </button>
 
       <button
-        *ngIf="
-          activity === currentActivity &&
-          activity.statusCode === statusCodes.IN_PROGRESS
-        "
+        *ngIf="activity.statusCode === statusCodes.IN_PROGRESS"
         class="BtnFilled BtnFilled--blue"
         (click)="continueActivity.emit(activity.instanceGuid)"
       >
         {{ 'Toolkit.ActivityActions.Continue' | translate }}
       </button>
 
-      <button
+      <div
+        class="button-container"
         *ngIf="activity.statusCode === statusCodes.COMPLETE"
-        class="BtnFilled BtnFilled--blue"
-        (click)="viewActivity.emit(activity.instanceGuid)"
       >
-        {{ 'Toolkit.ActivityActions.ViewEdit' | translate }}
-      </button>
+        <button
+          class="BtnFilled BtnFilled--blue"
+          (click)="viewActivity.emit(activity.instanceGuid)"
+        >
+          {{ 'Toolkit.ActivityActions.View' | translate }}
+        </button>
+
+        <button
+          *ngIf="activity.activityCode !== activityCodes.REVIEW_AND_SUBMISSION"
+          class="BtnFilled BtnFilled--blue"
+          (click)="editActivity.emit(activity)"
+        >
+          {{ 'Toolkit.ActivityActions.Edit' | translate }}
+        </button>
+      </div>
     </td>
   </ng-container>
 
@@ -123,10 +129,15 @@
     *matHeaderRowDef="displayedColumns"
     class="user-activities-table__row--header"
   ></tr>
-  <tr
+  <!-- <tr
     mat-row
     *matRowDef="let activity; columns: displayedColumns"
     class="user-activities-table__row"
     [class.user-activities-table__row--disabled]="isRowDisabled(activity)"
+  ></tr> -->
+  <tr
+    mat-row
+    *matRowDef="let activity; columns: displayedColumns"
+    class="user-activities-table__row"
   ></tr>
 </table>
