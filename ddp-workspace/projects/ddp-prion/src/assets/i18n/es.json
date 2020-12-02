@@ -151,7 +151,8 @@
         "host": "para alojar el Registro",
         "analytics": "como herramienta de análisis"
       },
-      "Last_updated": "Última actualización:"
+      "Last_updated": "Última actualización: ",
+      "lastUpdatedDate": "8/14/20"
     }
   },
   "Toolkit": {

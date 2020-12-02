@@ -151,7 +151,8 @@
         "host": "托管注册库",
         "analytics": "提供分析工具"
       },
-      "Last_updated": "上次更新："
+      "Last_updated": "上次更新： ",
+      "lastUpdatedDate": "8/14/20"
     }
   },
   "Toolkit": {
