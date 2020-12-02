@@ -100,7 +100,7 @@ export class ParticipantListItem {
       case ActivityCodes.CONSENT:
         return this.handleEditConsent(activityInstance);
       case ActivityCodes.REGISTRATION:
-        return this.handlePartialEditActivity(activityInstance);
+        // return this.handlePartialEditActivity(activityInstance);
       case ActivityCodes.CONTACTING_PHYSICIAN:
       case ActivityCodes.MEDICAL_HISTORY:
       case ActivityCodes.GENOME_STUDY:
