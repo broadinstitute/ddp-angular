@@ -14,6 +14,7 @@ export const AppRoutes = {
     SymptomSurvey: 'symptom-survey',
     Dashboard: 'dashboard',
     Prism: 'prism',
+    PrismActivityLink: 'prism/activity-link',
     Password: 'password',
     SessionExpired: 'session-expired',
     AdminSessionExpired: 'admin-session-expired',

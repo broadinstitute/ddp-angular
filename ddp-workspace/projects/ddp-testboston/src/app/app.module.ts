@@ -35,6 +35,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
 
@@ -143,6 +144,7 @@ export function languageFactory(language: LanguageService): string {
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
+        PrismActivityLinkComponent,
         EnrollmentComponent,
         HelpComponent
     ],
