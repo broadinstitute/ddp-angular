@@ -22,7 +22,7 @@ export class ActivityRedirectComponent implements OnInit {
     const instanceGuid = this.route.snapshot.params.instanceGuid;
 
     if (instanceGuid) {
-      this.activityService.currentActivityInstanceGuid = instanceGuid;
+      this.activityService.setCurrentActivity(instanceGuid);
       this.router.navigateByUrl(RouterResources.Survey);
     } else {
       this.multiGovernedUserService.isMultiGoverned$

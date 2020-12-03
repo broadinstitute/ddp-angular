@@ -89,7 +89,7 @@ export class ParticipantListItem {
 
   onStartActivity(instanceGuid: string): void {
     this.session.setParticipant(this.participant.guid);
-    this.activityService.setCurrentActivityInstanceGuid(instanceGuid);
+    this.activityService.setCurrentActivity(instanceGuid);
 
     this.router.navigateByUrl(RouterResources.Survey);
   }
@@ -133,7 +133,7 @@ export class ParticipantListItem {
     activity: ActivityInstanceGuid,
     isConsentEditActivity: boolean = false
   ): void => {
-    this.activityService.setCurrentActivityInstanceGuid(
+    this.activityService.setCurrentActivity(
       activity.instanceGuid,
       isConsentEditActivity
     );

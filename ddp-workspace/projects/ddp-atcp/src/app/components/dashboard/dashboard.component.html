@@ -13,9 +13,10 @@
   <ng-template #userActivities>
     <atcp-user-activities
       [activities]="activities"
-      (startActivity)="onStartActivity($event)"
-      (continueActivity)="onContinueActivity($event)"
-      (viewActivity)="onViewActivity($event)"
+      (startActivity)="goToActivity($event)"
+      (continueActivity)="goToActivity($event)"
+      (viewActivity)="goToActivity($event)"
+      (editActivity)="onEditActivity($event)"
     ></atcp-user-activities>
   </ng-template>
 </div>
