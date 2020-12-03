@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Regresar a la búsqueda de participantes voluntarios",
       "Text": "Código de invitación del participante voluntario:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[ES] Entered date is invalid"
     }
   }
 }

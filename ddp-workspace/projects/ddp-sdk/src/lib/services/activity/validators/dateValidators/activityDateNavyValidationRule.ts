@@ -16,7 +16,7 @@ export class ActivityDateNavyValidationRule extends ActivityAbstractValidationRu
                 this.result = null;
                 return true;
             } else {
-                this.result = 'Entered date is invalid';
+                this.result = 'SDK.Validators.DateNavyValidationRule';
                 return false;
             }
         }

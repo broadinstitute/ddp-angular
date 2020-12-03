@@ -310,6 +310,9 @@
     },
     "UserMenu": {
       "SignOutButton": "登出"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[ZH] Entered date is invalid"
     }
   },
   "Toolkit": {

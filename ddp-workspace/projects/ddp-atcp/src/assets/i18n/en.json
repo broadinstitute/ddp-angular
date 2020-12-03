@@ -511,6 +511,9 @@
       "Assent": {
         "Download": " Download Complete Assent Form"
       }
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid"
     }
   },
   "Toolkit": {

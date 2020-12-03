@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Retounen nan rechèch sijè",
       "Text": "Kòd envitasyon sijè a:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[HT] Entered date is invalid"
     }
   }
 }

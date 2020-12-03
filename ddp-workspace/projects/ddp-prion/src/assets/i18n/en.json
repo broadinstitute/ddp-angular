@@ -71,15 +71,15 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
           "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
           "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
-          "moreInfo":  "Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
+          "moreInfo": "Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
         },
         {
           "studyName": "Biomarkers in pre-symptomatic mutation carriers",
-          "description":"Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
+          "description": "Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
           "site": "Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
           "eligibilityRequirements": "You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact MGHPrionStudy@partners.org or call 617-643-2351 to enroll"
+          "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact MGHPrionStudy@partners.org or call 617-643-2351 to enroll"
         },
         {
           "studyName": "Early Diagnosis of Human Prion Disease",
@@ -87,7 +87,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
           "site": "Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
           "eligibilityRequirements": "Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient's baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+          "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
         },
         {
           "studyName": "Teleneurology Assessment Program for CJD (TAPCJD)",
@@ -95,7 +95,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
           "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
           "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
-          "moreInfo":  "Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+          "moreInfo": "Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
         },
         {
           "studyName": "Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
@@ -103,7 +103,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
           "site": "University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
           "eligibilityRequirements": "Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
-          "moreInfo":  "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+          "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
         }
       ],
       "InputPlaceholder": "Filter all columns"
@@ -401,7 +401,6 @@
           "P2": "First, we collect certain information from you ",
           "P3Underline": "when you provide it to us directly.",
           "P4": " Specifically, we collect information about you when you: ",
-
           "P5Underline": "Create a Prion Registry account and profile",
           "P6": " through our website.",
           "P7Underline": "Participate in the Registry",
@@ -410,9 +409,7 @@
           "P10": ", surveys and other communications we may send to you.",
           "P11Underline": "Communicate with us",
           "P12": " (e.g. by email).",
-
           "P13": "Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
-
           "P14": "When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
           "P15": "We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics and MixPanel, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
         }
@@ -423,7 +420,7 @@
           "P1BoldUnderline": "Personal Information",
           "P2": ": Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
           "P3BoldUnderline": "Medical and research-related information",
-          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
+          "P4": ". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
           "P5BoldUnderline": "Registry Usage Information",
           "P6": ": Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
           "P7BoldUnderline": "Device Information",
@@ -794,6 +791,9 @@
         "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
       }
     },
-    "TooltipAlt": "Information"
+    "TooltipAlt": "Information",
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid"
+    }
   }
 }
