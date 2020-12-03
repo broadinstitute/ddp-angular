@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { DashboardColumns } from 'ddp-sdk';
+import { Cookies } from '../models/cookies/cookies';
 
 @Injectable()
 export class ToolkitConfigurationService {
     // GUIDs
     studyGuid: string;
     aboutYouGuid: string;
+    aboutFamilyGuid: string;
     aboutChildGuid: string;
     consentGuid: string;
     consentAssentGuid: string;
@@ -27,6 +29,7 @@ export class ToolkitConfigurationService {
     // URLs
     aboutUsUrl: string;
     aboutYouUrl: string;
+    aboutFamily: string;
     aboutChildUrl: string;
     lovedOneUrl: string;
     internationalPatientsUrl: string;
@@ -51,6 +54,8 @@ export class ToolkitConfigurationService {
     symptomSurveyUrl: string;
     addressUrl: string;
     adminDashboardUrl: string | null = null;
+    mailingListDialogUrl: string;
+    participantListUrl: string;
 
     // Social media and contacts
     phone: string;
@@ -73,4 +78,7 @@ export class ToolkitConfigurationService {
     // Keys and tokens
     recaptchaSiteClientKey: string;
     lightswitchInstagramWidgetId: string;
+
+    cookies: Cookies | null;
+    usePrionPrivacyPolicyTemplate: boolean;
 }

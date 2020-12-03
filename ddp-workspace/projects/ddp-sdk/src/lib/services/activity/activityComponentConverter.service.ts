@@ -6,6 +6,8 @@ import { ActivityBlock } from '../../models/activity/activityBlock';
 
 @Injectable()
 export class ActivityComponentConverter {
+    private readonly LOG_SOURCE = 'ActivityComponentConverter';
+
     constructor(private logger: LoggingService) { }
 
     public convertComponent(inputBlock: any): ActivityBlock | null {
@@ -15,8 +17,7 @@ export class ActivityComponentConverter {
             inputBlock.component.componentType === 'INSTITUTION') {
             return this.buildInstitutionComponent(inputBlock);
         } else {
-            this.logger.logError(
-                `ActivityConverter.ActivityComponentConverter`,
+            this.logger.logError(this.LOG_SOURCE,
                 `Received component of type ${inputBlock.component.componentType} that we do not know how to handle`);
         }
         return null;

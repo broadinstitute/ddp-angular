@@ -14,10 +14,13 @@ export const AppRoutes = {
     SymptomSurvey: 'symptom-survey',
     Dashboard: 'dashboard',
     Prism: 'prism',
+    PrismActivityLink: 'prism/activity-link',
     Password: 'password',
     SessionExpired: 'session-expired',
     AdminSessionExpired: 'admin-session-expired',
     Address: 'mailing-address',
     PasswordResetDone: 'password-reset-done',
-    EnrollSubject: 'enrollment'
+    EnrollSubject: 'enrollment',
+    UPS: 'ups',
+    UPS_UPPER: 'UPS'
 };

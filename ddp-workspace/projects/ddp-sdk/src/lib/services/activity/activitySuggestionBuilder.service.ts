@@ -13,6 +13,7 @@ const SUGGESTION_LIMIT = 10;
 @Injectable()
 export class ActivitySuggestionBuilder {
     private suggestionBuilders: Array<ActivityRule>;
+    private readonly LOG_SOURCE = 'ActivitySuggestionBuilder';
 
     constructor(
         private logger: LoggingService,
@@ -42,8 +43,7 @@ export class ActivitySuggestionBuilder {
         if (builder) {
             return builder.func(questionJson.suggestions);
         } else {
-            this.logger.logError(
-                `ActivityConverter.ActivitySuggestionsBuilder`,
+            this.logger.logError(this.LOG_SOURCE,
                 `Received suggestion of type ${questionJson.suggestionType} that we do not know how to handle`);
             return null;
         }

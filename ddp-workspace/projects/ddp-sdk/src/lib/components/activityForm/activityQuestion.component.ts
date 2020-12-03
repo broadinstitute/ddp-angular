@@ -11,7 +11,7 @@ import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs
 @Component({
   selector: 'ddp-activity-question',
   template: `
-      <div class="ddp-activity-question" #scrollAnchor>
+      <div class="ddp-activity-question" #scrollAnchor [ngClass]="getQuestionClass(block)">
           <ddp-activity-answer
                   [block]="block"
                   [readonly]="isReadonly"
@@ -113,6 +113,10 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.ngUnsubscribe)
     ).subscribe();
+  }
+
+  public getQuestionClass(block: ActivityQuestionBlock<any>): string {
+    return 'Question--' + block.questionType;
   }
 
   public ngOnDestroy(): void {

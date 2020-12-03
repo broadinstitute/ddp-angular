@@ -264,8 +264,7 @@
               {
                 "glob": "main.css",
                 "input": "projects/ddp-atcp/src/auth0/compiled/auth0-styles/",
-                "output": "assets/auth0-styles",
-
+                "output": "assets/auth0-styles"
               }
             ],
             "styles": [
@@ -1472,44 +1471,75 @@
         }
       }
     },
-    "ddp-brain-v2": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
+    "toolkit-prion": {
+      "projectType": "library",
+      "root": "projects/toolkit-prion",
+      "sourceRoot": "projects/toolkit-prion/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/toolkit-prion/tsconfig.lib.json",
+            "project": "projects/toolkit-prion/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/toolkit-prion/src/test.ts",
+            "tsConfig": "projects/toolkit-prion/tsconfig.spec.json",
+            "karmaConfig": "projects/toolkit-prion/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/toolkit-prion/tsconfig.lib.json",
+              "projects/toolkit-prion/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
         }
-      },
-      "root": "projects/ddp-brain-v2",
-      "sourceRoot": "projects/ddp-brain-v2/src",
+      }
+    },
+    "ddp-rgp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ddp-rgp",
+      "sourceRoot": "projects/ddp-rgp/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ddp-brain-v2",
-            "index": "projects/ddp-brain-v2/src/index.html",
-            "main": "projects/ddp-brain-v2/src/main.ts",
-            "polyfills": "projects/ddp-brain-v2/src/polyfills.ts",
-            "tsConfig": "projects/ddp-brain-v2/tsconfig.app.json",
+            "outputPath": "dist/ddp-rgp",
+            "index": "projects/ddp-rgp/src/index.html",
+            "main": "projects/ddp-rgp/src/main.ts",
+            "polyfills": "projects/ddp-rgp/src/polyfills.ts",
+            "tsConfig": "projects/ddp-rgp/tsconfig.app.json",
             "aot": false,
             "assets": [
-              "projects/ddp-brain-v2/src/favicon.ico",
-              "projects/ddp-brain-v2/src/favicon-alert.ico",
-              "projects/ddp-brain-v2/src/assets",
+              "projects/ddp-rgp/src/favicon.ico",
+              "projects/ddp-rgp/src/favicon-alert.ico",
+              "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-brain-v2/src/pdf/",
+                "input": "projects/ddp-rgp/src/pdf/",
                 "output": "/"
               },
               {
                 "glob": "pepperConfig.js",
-                "input": "projects/ddp-brain-v2/output-config/",
+                "input": "projects/ddp-rgp/output-config/",
                 "output": "assets/config"
               }
             ],
             "styles": [
-              "projects/ddp-brain-v2/src/theme.scss",
-              "projects/ddp-brain-v2/src/styles.scss"
+              "projects/ddp-rgp/src/theme.scss",
+              "projects/ddp-rgp/src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -1518,8 +1548,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ddp-brain-v2/src/environments/environment.ts",
-                  "with": "projects/ddp-brain-v2/src/environments/environment.prod.ts"
+                  "replace": "projects/ddp-rgp/src/environments/environment.ts",
+                  "with": "projects/ddp-rgp/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -1540,49 +1570,49 @@
               ]
             },
             "es5": {
-              "tsConfig": "projects/ddp-brain-v2/tsconfig.es5.json"
+              "tsConfig": "projects/ddp-rgp/tsconfig.es5.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ddp-brain-v2:build"
+            "browserTarget": "ddp-rgp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ddp-brain-v2:build:production"
+              "browserTarget": "ddp-rgp:build:production"
             },
             "es5": {
-              "browserTarget": "ddp-brain-v2:build:es5"
+              "browserTarget": "ddp-rgp:build:es5"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ddp-brain-v2:build"
+            "browserTarget": "ddp-rgp:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ddp-brain-v2/src/test.ts",
-            "polyfills": "projects/ddp-brain-v2/src/polyfills.ts",
-            "tsConfig": "projects/ddp-brain-v2/tsconfig.spec.json",
-            "karmaConfig": "projects/ddp-brain-v2/karma.conf.js",
+            "main": "projects/ddp-rgp/src/test.ts",
+            "polyfills": "projects/ddp-rgp/src/polyfills.ts",
+            "tsConfig": "projects/ddp-rgp/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-rgp/karma.conf.js",
             "assets": [
-              "projects/ddp-brain-v2/src/favicon.ico",
-              "projects/ddp-brain-v2/src/favicon-alert.ico",
-              "projects/ddp-brain-v2/src/assets",
+              "projects/ddp-rgp/src/favicon.ico",
+              "projects/ddp-rgp/src/favicon-alert.ico",
+              "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-brain-v2/src/pdf/",
+                "input": "projects/ddp-rgp/src/pdf/",
                 "output": "/"
               }
             ],
             "styles": [
-              "projects/ddp-brain-v2/src/styles.scss"
+              "projects/ddp-rgp/src/styles.scss"
             ],
             "scripts": []
           }
@@ -1591,9 +1621,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ddp-brain-v2/tsconfig.app.json",
-              "projects/ddp-brain-v2/tsconfig.spec.json",
-              "projects/ddp-brain-v2/e2e/tsconfig.json"
+              "projects/ddp-rgp/tsconfig.app.json",
+              "projects/ddp-rgp/tsconfig.spec.json",
+              "projects/ddp-rgp/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -1603,12 +1633,12 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/ddp-brain-v2/e2e/protractor.conf.js",
-            "devServerTarget": "ddp-brain-v2:serve"
+            "protractorConfig": "projects/ddp-rgp/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-rgp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ddp-brain-v2:serve:production"
+              "devServerTarget": "ddp-rgp:serve:production"
             }
           }
         }

@@ -210,7 +210,9 @@
       "Next": "अगला",
       "Previous": "पिछला",
       "SignIn": "साइन इन करें",
-      "YourParticipants": "आपके प्रतिभागी"
+      "YourParticipants": "आपके प्रतिभागी",
+      "ForResearchers": "शोधकर्ताओं के लिए",
+      "DataAccessRequest": "डेटा एक्सेस अनुरोध"
     }
   },
   "DataAccess": {

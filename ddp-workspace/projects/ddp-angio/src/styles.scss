@@ -340,7 +340,7 @@ mat-icon.ddp-dropdown-arrow {
     text-align: right;
     font-weight: 300;
     padding: 5px;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 // Footer
@@ -669,7 +669,7 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .InputRadio-label {
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
     font-size: 1rem;
     font-weight: 300;
 }
@@ -738,7 +738,7 @@ mat-icon.ddp-dropdown-arrow {
     }
 
     .PageHeader-background {
-        padding: 50px 0 0 0;
+        padding: 70px 0 0 0;
         margin-top: 0;
     }
 
@@ -874,8 +874,15 @@ ul {
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
     text-align: left;
+}
+
+.PageContent-text {
+    &__important {
+        color: mat-color($app-theme, 1000);
+        font-weight: 400;
+    }
 }
 
 .PageContent-image {
@@ -895,14 +902,10 @@ ul {
 
 .PageContent-title {
     font-size: 1.4rem;
-    color: mat-color($app-theme, 800);
-    font-weight: 300;
+    color: mat-color($app-theme, 1000);
+    font-weight: 400;
     line-height: 1.33;
     margin: 2.1rem 0 1.3rem 0;
-}
-
-.PageContent-sectionAboutUs {
-    padding: 0;
 }
 
 .Field-padding {
@@ -926,7 +929,7 @@ ul {
 }
 
 .Color--neutral {
-    color: mat-color($app-theme, 800) !important;
+    color: mat-color($app-theme, 1000) !important;
 }
 
 .Normal {
@@ -1168,7 +1171,7 @@ ul {
 .Message-text {
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 1100);
+    color: mat-color($app-theme, 1000);
     line-height: 1.6;
     margin-bottom: 18px;
 }
@@ -1211,7 +1214,7 @@ ul {
     line-height: 1.6;
     text-align: left;
     padding: 0 0 0 30px;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 .Message-quote blockquote {
@@ -1352,7 +1355,7 @@ ul {
 .Modal-title {
     font-size: 2.5rem;
     line-height: 2.5rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: mat-color($app-theme, 1000);
     margin: 10px 0 12px 0;
     font-weight: 300;
     display: flex;
@@ -1366,7 +1369,7 @@ ul {
 }
 
 .Modal-text {
-    color: rgba(0, 0, 0, 0.5);
+    color: mat-color($app-theme, 1000);
     font-size: 0.95rem;
     line-height: 1.6rem;
     font-weight: 300;
@@ -1485,7 +1488,7 @@ ul {
     padding: 60px 0 15px 0;
     font-size: 1.1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 .WizardSteps-img {
@@ -1560,7 +1563,7 @@ ul {
     font-weight: 300 !important;
     font-size: 1.1rem !important;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800) !important;
+    color: mat-color($app-theme, 1000) !important;
     margin: 0 !important;
 }
 
@@ -1573,7 +1576,7 @@ ul {
 }
 
 .PageContent-closing-text {
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
     font-size: 1rem;
     font-weight: 300;
     margin: 0 20px;
@@ -1766,7 +1769,7 @@ select:-webkit-autofill {
     margin: 0px;
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 .ddp-question {
@@ -1778,17 +1781,17 @@ select:-webkit-autofill {
     padding: 0;
 
     .ddp-required-question-prompt {
-        color: mat-color($app-theme, 800);
+        color: mat-color($app-theme, 1000);
         font-size: 1.1rem;
     }
 
     li {
-        color: mat-color($app-theme, 800);
+        color: mat-color($app-theme, 1000);
     }
 }
 
 .ddp-question-neutral {
-    color: mat-color($app-theme, 800) !important;
+    color: mat-color($app-theme, 1000) !important;
 }
 
 .ddp-required-question-prompt {
@@ -1812,11 +1815,11 @@ select:-webkit-autofill {
 
 .ddp-block-body {
     margin: 20px 0 0 0;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 
     .PageContent-text {
         margin: 14px 0 0 0;
-        color: mat-color($app-theme, 800);
+        color: mat-color($app-theme, 1000);
     }
 }
 
@@ -1842,11 +1845,11 @@ select:-webkit-autofill {
     line-height: 1.8rem;
     font-weight: 300;
     margin: 2rem 0 1rem 0;
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
 }
 
 .ddp-li-gray {
-    color: mat-color($app-theme, 800) !important;
+    color: mat-color($app-theme, 1000) !important;
 }
 
 .ddp-date-field-margin {
@@ -2021,7 +2024,7 @@ select:-webkit-autofill {
 }
 
 .mat-checkbox-label {
-    color: mat-color($app-theme, 800);
+    color: mat-color($app-theme, 1000);
     font-weight: 300;
 }
 
@@ -2171,7 +2174,7 @@ input.mat-input-element {
 
 .ddp-helper {
     font-size: 0.8rem !important;
-    color: mat-color($app-theme, 800) !important;
+    color: mat-color($app-theme, 1000) !important;
 }
 
 .ddp-counter-color {

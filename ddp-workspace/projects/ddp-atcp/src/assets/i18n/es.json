@@ -2,7 +2,7 @@
   "AboutInitiative": {
     "FirstParagraph": {
       "Text": "es una enfermedad hereditaria y neurodegenerativa. Un niño con A-T comienza a padecer una pérdida progresiva del control muscular alrededor de los dos años de edad. A los nueve o diez años, los niños con A-T por lo general comienzan a necesitar sillas de ruedas y a tener dificultad para hablar. También se dificultan la lectura y la deglución. Alrededor del 30 por ciento de los niños con A-T desarrollan cáncer, y la mayoría adquiere algún tipo de problema en el sistema inmunitario. Si bien se realizaron avances para extender la vida de las personas con A-T mediante el tratamiento de los síntomas, la enfermedad aún persiste.",
-      "Title": "ataxia telangiectasia (A-T)"
+      "Title": "Ataxia telangiectasia (A-T)"
     },
     "SecondParagraph": {
       "TextOne": "Se ha observado que los hermanos con A-T parecen compartir características clínicas más similares que los niños con A-T que portan las mismas mutaciones, pero pertenecen a diferentes familias. Es por ello que los científicos creen que los genes de una familia - además de aquel que causa la A-T - pueden cambiar la forma en que esta enfermedad afecta a los pacientes. Además, es posible que vivir en entornos diferentes, llevar estilos de vida diferentes y seguir dietas distintas puede tener un impacto en la salud de las personas con A-T.",
@@ -60,7 +60,7 @@
   "AboutPage": {
     "DataAccess": {
       "Header": "Comité de acceso a los datos",
-      "Text": "Únicamente los investigadores calificados que hayan obtenido autorización del Comité de acceso a los datos pueden acceder a la información existente en la Plataforma global de datos para familias con A-T. Este comité está conformado por representantes de familias con A-T convocados por nuestro Consejo de supervisión familiar, que a su vez convoca expertos para nuestro Consejo asesor médico y científico“ a fin de asegurar que el proyecto de cada investigador se ajuste a los objetivos de esta iniciativa.  El Consejo de supervisión familiar supervisará al Consejo asesor médico y científico."
+      "Text": "Únicamente los investigadores calificados que hayan obtenido autorización del Comité de acceso a los datos pueden acceder a la información existente en la Plataforma global de datos para familias con A-T. Este comité está conformado por representantes de familias con A-T convocados por nuestro Consejo de supervisión familiar, que a su vez convoca expertos para nuestro Consejo asesor médico y científico a fin de asegurar que el proyecto de cada investigador se ajuste a los objetivos de esta iniciativa.  El Consejo de supervisión familiar supervisará al Consejo asesor médico y científico."
     },
     "Doctors": [
       {
@@ -210,7 +210,9 @@
       "Next": "Siguiente",
       "Previous": "Ant",
       "SignIn": "Iniciar sesión",
-      "YourParticipants": "Sus participantes"
+      "YourParticipants": "Sus participantes",
+      "ForResearchers": "Para Investigadores",
+      "DataAccessRequest": "Solicitud de acceso a datos"
     }
   },
   "DataAccess": {

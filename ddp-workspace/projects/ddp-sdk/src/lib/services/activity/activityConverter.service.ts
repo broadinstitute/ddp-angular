@@ -17,6 +17,7 @@ import * as _ from 'underscore';
 @Injectable()
 export class ActivityConverter {
     private blockBuilders: Array<ActivityRule>;
+    private readonly LOG_SOURCE = 'ActivityConverter';
 
     constructor(
         private questionConverter: ActivityQuestionConverter,
@@ -85,7 +86,7 @@ export class ActivityConverter {
         newBlock.displayNumber = blockJson.displayNumber;
         newBlock.controlQuestion = this.questionConverter.buildQuestionBlock(blockJson.control, null);
         if (!newBlock.controlQuestion) {
-            this.logger.logError('ActivityConverter.convertConditionalBlock', 'Could not build control question');
+            this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'Could not build control question');
             return null;
         }
         // appears that the control question is always show (there is no "shown" variable for control question in json)
@@ -114,13 +115,13 @@ export class ActivityConverter {
         return (jsonForBlocks as any[]).map((childJson: any) => {
             const blockBuilder = this.blockBuilders.find(x => x.type === childJson.blockType);
             if (!blockBuilder) {
-                this.logger.logError('ActivityConverter.convertConditionalBlock', 'No builder for block type: '
+                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'No builder for block type: '
                     + childJson.blockType);
                 return null;
             }
             const childBlock = blockBuilder.func(childJson);
             if (!childBlock) {
-                this.logger.logError('ActivityConverter.convertConditionalBlock', 'Could not build block from JSON'
+                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'Could not build block from JSON'
                     + JSON.stringify(childJson));
                 return null;
             }
@@ -152,8 +153,7 @@ export class ActivityConverter {
                     section.blocks.push(block);
                 } else {
                     // TODO throw exception here? For now no. Just log it as a problem
-                    this.logger.logError(
-                        `ActivityConverter`,
+                    this.logger.logError(this.LOG_SOURCE,
                         `Received unknown block type with name ${inputBlock.blockType} from server`);
                 }
             }

@@ -1,205 +1,301 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import {
-    Auth0CodeCallbackComponent,
-    AuthGuard,
-    IrbGuard,
-    BrowserGuard
+  IrbGuard,
+  AuthGuard,
+  Auth0CodeCallbackComponent
 } from 'ddp-sdk';
 
 import {
-    ActivityPageComponent,
-    ActivityComponent,
-    DashboardComponent,
-    LoginLandingComponent,
-    ErrorComponent,
-    StayInformedComponent,
-    PasswordComponent,
-    RedirectToLoginLandingComponent,
-    WorkflowStartActivityComponent,
-    ActivityLinkComponent,
-    InternationalPatientsComponent,
-    HeaderActionGuard,
-    SessionExpiredComponent,
-    RedirectToAuth0LoginComponent
+  ActivityPageRedesignedComponent,
+  DashboardRedesignedComponent,
+  ActivityRedesignedComponent,
+  LoginLandingRedesignedComponent,
+  RedirectToAuth0LoginRedesignedComponent,
+  WorkflowStartActivityRedesignedComponent,
+  PasswordRedesignedComponent,
+  StayInformedRedesignedComponent,
+  ErrorRedesignedComponent,
+  HeaderActionGuard,
+  RedirectToLoginLandingRedesignedComponent,
+  AgeUpThankYou,
+  VerifyAgeUpPageComponent,
+  AcceptAgeUpPageComponent,
+  SessionExpiredRedesignedComponent
 } from 'toolkit';
 
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { AppRoutes } from './app-routes';
+import { ActivityGuids } from './aсtivity-guids';
+
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { DataComponent } from './components/data/data.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
-    {
-        path: 'about-you',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'ABOUTYOU',
-            createActivityInstance: true
-        }
-    },
-    {
-        path: 'consent',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'CONSENT'
-        }
-    },
-    {
-        path: 'release-survey',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'RELEASE'
-        }
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
-        path: 'auth',
-        component: Auth0CodeCallbackComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'activity/:id',
-        component: ActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
-        path: 'activity-link/:id',
-        component: ActivityLinkComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
-        path: 'login-landing',
-        component: LoginLandingComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'login-landing/:mode',
-        component: RedirectToAuth0LoginComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'count-me-in',
-        component: WorkflowStartActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard
-        ]
-    },
-    {
-        path: 'about-us',
-        component: AboutUsComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'error',
-        component: ErrorComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'more-details',
-        component: MoreDetailsComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'stay-informed',
-        component: StayInformedComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'password-reset-done',
-        component: RedirectToLoginLandingComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'session-expired',
-        component: SessionExpiredComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard
-        ]
-    },
-    {
-        path: 'password',
-        component: PasswordComponent
-    },
-    {
-        path: 'international-patients',
-        component: InternationalPatientsComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: '',
-        component: WelcomeComponent,
-        pathMatch: 'full',
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'about-you/:id',
-        redirectTo: 'about-you'
-    },
-    {
-        path: 'consent/:id',
-        redirectTo: 'consent'
-    },
-    {
-        path: 'release-survey/:id',
-        redirectTo: 'release-survey'
-    },
-    {
-        path: 'learn-more',
-        component: AboutUsComponent,
-        canActivate: [HeaderActionGuard],
-        data: { openSidePanel: true }
-    },
-    {
-        path: 'join-list',
-        component: AboutUsComponent,
-        canActivate: [HeaderActionGuard],
-        data: { openJoinDialog: true }
-    },
-    {
-        path: '**',
-        redirectTo: ''
+  {
+    path: AppRoutes.AboutYou,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.AboutYou
     }
+  },
+  {
+    path: AppRoutes.AboutChild,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.AboutChild
+    }
+  },
+  {
+    path: AppRoutes.ConsentAssent,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ConsentAssent
+    }
+  },
+  {
+    path: AppRoutes.ParentalConsent,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ParentalConsent
+    }
+  },
+  {
+    path: AppRoutes.ReleaseMinor,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.ReleaseMinor
+    }
+  },
+  {
+    path: AppRoutes.Consent,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.Consent
+    }
+  },
+  {
+    path: AppRoutes.Release,
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: ActivityGuids.Release
+    }
+  },
+  {
+    path: AppRoutes.Dashboard,
+    component: DashboardRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.LocalAuth,
+    component: Auth0CodeCallbackComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.ActivityId,
+    component: ActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.ActivityLinkId,
+    component: ActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.LoginLanding,
+    component: LoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.LoginLandingMode,
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.CountMeIn,
+    component: WorkflowStartActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.StayInformed,
+    component: StayInformedRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Error,
+    component: ErrorRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Password,
+    component: PasswordRedesignedComponent
+  },
+  {
+    path: AppRoutes.MoreDetails,
+    component: FaqComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Data,
+    component: DataComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.AboutUs,
+    component: AboutUsComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.JoinList,
+    component: WelcomeComponent,
+    canActivate: [
+      HeaderActionGuard
+    ],
+    data: {
+      openJoinDialog: true
+    }
+  },
+  {
+    path: AppRoutes.PasswordResetDone,
+    component: RedirectToLoginLandingRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.ThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      verify: true
+    }
+  },
+  {
+    path: AppRoutes.ProxyThankYou,
+    component: AgeUpThankYou,
+    canActivate: [
+      IrbGuard
+    ],
+    data: {
+      collect: true
+    }
+  },
+  {
+    path: AppRoutes.Verify,
+    component: VerifyAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.Accept,
+    component: AcceptAgeUpPageComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: AppRoutes.MailingList,
+    component: WelcomeComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: AppRoutes.SessionExpired,
+    component: SessionExpiredRedesignedComponent,
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: '',
+    component: WelcomeComponent,
+    pathMatch: 'full',
+    canActivate: [
+      IrbGuard
+    ]
+  },
+  {
+    path: 'about-you/:id',
+    redirectTo: AppRoutes.AboutYou
+  },
+  {
+    path: 'consent/:id',
+    redirectTo: AppRoutes.Consent
+  },
+  {
+    path: 'release-survey/:id',
+    redirectTo: AppRoutes.Release
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {
-        enableTracing: false,
-        scrollPositionRestoration: 'top'
-    })],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: false,
+    scrollPositionRestoration: 'top'
+  })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

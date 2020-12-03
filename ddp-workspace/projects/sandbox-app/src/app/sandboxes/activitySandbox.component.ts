@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { PrequalifierServiceAgent } from 'ddp-sdk';
+import { PrequalifierServiceAgent, LoggingService } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,8 +12,11 @@ export class ActivitySandboxComponent implements OnDestroy {
     public stepper = false;
     public totalCount = 0;
     private anchor: Subscription;
+    private readonly LOG_SOURCE = 'ActivitySandboxComponent';
 
-    constructor(private prequalifierServiceAgent: PrequalifierServiceAgent) {
+    constructor(
+        private logger: LoggingService,
+        private prequalifierServiceAgent: PrequalifierServiceAgent) {
         this.anchor = this.prequalifierServiceAgent.getPrequalifier(this.studyGuid)
             .subscribe(x => {
                 this.activityInstanceGuid = x;
@@ -31,6 +34,6 @@ export class ActivitySandboxComponent implements OnDestroy {
 
     public handleLoadResponse(event) {
         // FIXME: do something with event or remove this from template
-        console.log(event);
+        this.logger.logEvent(this.LOG_SOURCE, event);
     }
 }

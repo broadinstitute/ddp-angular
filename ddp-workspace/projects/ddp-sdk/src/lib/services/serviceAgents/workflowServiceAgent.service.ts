@@ -32,4 +32,8 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
     public getStart(): Observable<ActivityResponse | null> {
         return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=START`, null);
     }
+
+    public fromParticipantList(): Observable<ActivityResponse | null> {
+        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=PARTICIPANT_LIST`, null);
+    }
 }

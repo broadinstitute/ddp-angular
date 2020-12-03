@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { LanguageService } from '../languageService.service';
+import { LanguageService } from '../internationalization/languageService.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { ActivityInstanceState } from '../../models/activity/activityInstanceState';
 import { Observable } from 'rxjs';

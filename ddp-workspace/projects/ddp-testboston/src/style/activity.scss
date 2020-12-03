@@ -22,6 +22,10 @@
     margin: 1rem 0;
 }
 
+.serif-font {
+    font-family: 'PT Serif', sans-serif;
+}
+
 // consent header
 .header-section {
     margin: 0 0 2rem 0;
@@ -48,6 +52,15 @@
         font-weight: 400;
         font-size: 1.375rem;
         line-height: 2.0625rem;
+
+        &_column {
+            flex-direction: column;
+        }
+    }
+
+    &__warn {
+        margin-top: 1rem;
+        font-weight: 700;
     }
 }
 
@@ -104,6 +117,26 @@
     margin: 2rem 0;
 }
 
+// a box that calls out important information
+.callout-box {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 3px;
+    background-color: rgba(252, 246, 224, 1);
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+// a box that provides a fixed-height scroll
+.scroll-box {
+    border: 2px solid mat-color($app-theme, 1200);
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 2rem 0;
+    height: 300px;
+    overflow-y: scroll;
+    line-height: 1.3rem;
+    font-family: monospace;
+}
 
 // error message
 .ErrorMessage {
@@ -199,6 +232,12 @@
     }
 }
 
+.scrollable {
+    &:hover {
+        cursor: pointer !important;
+    }
+}
+
 @media only screen and (max-width: 620px) {
     .activity-steps {
         padding: 1rem 0;
@@ -230,6 +269,11 @@
 
     .mat-radio-label {
         align-items: normal !important;
+        width: inherit !important;
+    }
+
+    .mat-list-text {
+        width: inherit !important;
     }
 
     .mat-radio-container {
@@ -288,9 +332,23 @@ ddp-activity-boolean-answer {
 
 .date-field {
     .mat-form-field-label {
-        font-size: 18px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
         color: mat-color($app-theme, 700) !important;
+        text-overflow: unset !important;
+        overflow: initial !important;
+    }
+
+    .mat-form-field-label-wrapper {
+        overflow: initial !important;
+    }
+}
+
+@media only screen and (max-width:380px) {
+    .date-field {
+        .mat-form-field-label {
+            font-size: 16px !important;
+        }
     }
 }
 
@@ -373,7 +431,12 @@ ddp-activity-boolean-answer {
     content: ' *';
 }
 
-// picklist characters counter 
+// material dropdown
+.mat-select-value {
+    color: mat-color($app-theme, 900) !important;
+}
+
+// picklist characters counter
 .ddp-helper {
     font-size: 1.1rem;
     margin: -1rem 0 0 0;
@@ -381,6 +444,29 @@ ddp-activity-boolean-answer {
 
 .ddp-counter-color {
     color: mat-color($app-theme, 1700);
+}
+
+// native dropdown
+select {
+    font-size: 1.375rem;
+    color: mat-color($app-theme, 900);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 0;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .42);
+    border-radius: 0;
+    height: 2.65rem;
+    transition: all .3s;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+select:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
+    cursor: auto;
 }
 
 // date time composite question, BASELINE_SYMPTOM and LONGITUDINAL_COVID activities
@@ -435,4 +521,11 @@ ddp-activity-boolean-answer {
     display: flex;
     width: 13rem;
     margin-top: 0.5rem;
+}
+
+// your current occupation question, BASELINE_COVID activity
+.picklist-answer-OCCUPATION {
+    .ddp-option-details-field {
+        margin-top: 15px;
+    }
 }

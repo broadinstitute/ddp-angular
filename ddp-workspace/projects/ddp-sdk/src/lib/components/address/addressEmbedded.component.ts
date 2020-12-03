@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -43,6 +42,7 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 import { extract } from '../../utility/rxjsoperator/extract';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
+import { LoggingService } from '../../services/logging.service';
 
 interface ComponentState {
   isReadOnly: boolean;
@@ -65,41 +65,41 @@ interface AddressSuggestion {
 @Component({
     selector: 'ddp-address-embedded',
     template: `
-    <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
-    <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
-    <ddp-address-input
-            (valueChanged)="inputComponentAddress$.next($event)"
-            [address]="inputAddress$ | async"
-            [addressErrors]="addressErrors$ | async"
-            [readonly]="isReadOnly$ | async"
-            [country]="staticCountry$ | async"
-            [phoneRequired]="block.requirePhone"
-            (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
-    <ddp-validation-message
-            *ngIf="(errorMessagesToDisplay$ | async).length > 0"
-            [message]="(errorMessagesToDisplay$ | async).join(' ')">
-    </ddp-validation-message>
-    <form [formGroup]="suggestionForm" novalidate>
-        <mat-card id="suggestionMatCard" *ngIf="suggestionInfo$ | async as info">
-            <mat-card-header>
-                <mat-card-title translate>SDK.MailAddress.Suggestion.Title</mat-card-title>
-                <mat-card-subtitle translate>SDK.MailAddress.Suggestion.Subtitle</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <mat-radio-group class="suggestion-radio-group"
-                                 formControlName="suggestionRadioGroup">
-                    <mat-radio-button class="margin-5" value="suggested" [disableRipple]="true">
-                        <b>{{'SDK.MailAddress.Suggestion.Suggested' | translate}} </b>
-                        <span class="suggested"
-                              [innerHTML]="convertToFormattedString(generateTaggedAddress(info.entered, info.suggested,'b'))"></span>
-                    </mat-radio-button>
-                    <mat-radio-button class="margin-5" value="entered" [disableRipple]="true">
-                        <b>{{'SDK.MailAddress.Suggestion.AsEntered' | translate}} </b>{{ convertToFormattedString(info.entered) }}
-                    </mat-radio-button>
-                </mat-radio-group>
-            </mat-card-content>
-        </mat-card>
-    </form>`,
+        <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
+        <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
+        <ddp-address-input
+                (valueChanged)="inputComponentAddress$.next($event)"
+                [address]="inputAddress$ | async"
+                [addressErrors]="verifyFieldErrors$ | async"
+                [readonly]="isReadOnly$ | async"
+                [country]="country"
+                [phoneRequired]="block.requirePhone"
+                (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
+        <ddp-validation-message
+                *ngIf="(errorMessagesToDisplay$ | async).length > 0"
+                [message]="(errorMessagesToDisplay$ | async).join(' ')">
+        </ddp-validation-message>
+        <form [formGroup]="suggestionForm" novalidate>
+            <mat-card id="suggestionMatCard" *ngIf="suggestionInfo$ | async as info">
+                <mat-card-header>
+                    <mat-card-title translate>SDK.MailAddress.Suggestion.Title</mat-card-title>
+                    <mat-card-subtitle translate>SDK.MailAddress.Suggestion.Subtitle</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-radio-group class="suggestion-radio-group"
+                                     formControlName="suggestionRadioGroup">
+                        <mat-radio-button class="margin-5" value="suggested" [disableRipple]="true">
+                            <b>{{'SDK.MailAddress.Suggestion.Suggested' | translate}} </b>
+                            <span class="suggested"
+                                  [innerHTML]="convertToFormattedString(generateTaggedAddress(info.entered, info.suggested,'b'))"></span>
+                        </mat-radio-button>
+                        <mat-radio-button class="margin-5" value="entered" [disableRipple]="true">
+                            <b>{{'SDK.MailAddress.Suggestion.AsEntered' | translate}} </b>{{ convertToFormattedString(info.entered) }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+            </mat-card>
+        </form>`,
     styles: [
         `.suggestion-radio-group {
             display: inline-flex;
@@ -135,6 +135,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.inputAddress$.next(val);
   }
 
+    @Input()
+    public set validationRequested(val: boolean) {
+        this.validationRequested$.next(val);
+    }
+
   /**
    * Activity instance guid associated that contains this component
    * Will be used to maintain reference to mail address data until
@@ -149,7 +154,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
    * Use if we want to limit country to be only one. Country field will not be shown
    */
   @Input()
-  public country: string | null;
+  public country: string | null = null;
 
   /**
    * Will emit an address whenever it is saved
@@ -184,22 +189,23 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   // variables for template
   public suggestionInfo$: Observable<AddressSuggestion | null>;
   public inputAddress$: Subject<Address | null> = new BehaviorSubject(null);
-  public addressErrors$: Observable<AddressError[]>;
+  public verifyFieldErrors$: Observable<AddressError[]>;
   public isReadOnly$: Observable<boolean>;
   public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
   public generateTaggedAddress = generateTaggedAddress;
-  public staticCountry$: Observable<string | null>;
+
 
   private ngUnsubscribe = new Subject();
   private saveTrigger$ = new Subject<void>();
   private state$: Observable<ComponentState>;
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
   private stateSubscription: Subscription;
-
+  private validationRequested$: Subject<boolean> = new Subject<boolean>();
+  private readonly LOG_SOURCE = 'AddressEmbeddedComponent'; 
 
   constructor(
     private addressService: AddressService,
-    private cdr: ChangeDetectorRef,
+    private logger: LoggingService,
     private ngxTranslate: NGXTranslateService,
     @Optional() private submitService: SubmitAnnouncementService
   ) {
@@ -226,7 +232,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.state$ = this.stateUpdates$.pipe(
       startWith(initialState),
       scan((acc: ComponentState, update) => ({ ...acc, ...update })),
-      tap(state =>  console.debug('New embeddedComponentState$=%o', state)),
+      tap(state =>  this.logger.logDebug(`${this.LOG_SOURCE}. New embeddedComponentState$=%o`, state)),
       shareReplay(1)
     );
     this.stateSubscription = this.state$.pipe(
@@ -276,19 +282,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
           }),
       );
 
-    this.staticCountry$ = this.inputAddress$.pipe(
-        map(address => {
-          // ok to look at country at ngOnInit. We don't want to do this more than once
-          if ((this.country && (!(address) || (address.country === this.country)))) {
-            return this.country;
-          } else {
-            return null;
-          }
-        }),
-        distinctUntilChanged(),
-        shareReplay()
-    );
-
     // derived observables
 
       this.isReadOnly$ = this.state$.pipe(
@@ -299,7 +292,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
           extract('formErrorMessages')
       );
 
-    this.addressErrors$ = this.state$.pipe(
+    this.verifyFieldErrors$ = this.state$.pipe(
         extract('fieldErrors', {onlyDistinct: false})
     );
 
@@ -432,7 +425,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
         catchError((error) => {
-          console.warn('there was a problems saving temp address:' + error);
+          this.logger.logWarning(this.LOG_SOURCE, `There was a problems saving temp address: ${error}`);
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
@@ -509,21 +502,33 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => busyCounter$.next(1)),
         concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
         catchError(() => {
-          console.debug('temp delete failed. This is OK');
+          this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
           return of(null);
         }),
         tap(() => busyCounter$.next(-1))
     );
 
+    const canSaveRealAddress = (address: Address | null) =>
+        this.enoughDataToSave(address)  && this.meetsActivityRequirements(address);
+
     // "Real" as opposed to "Temp"
     const saveRealAddressAction$ = this.saveTrigger$.pipe(
         withLatestFrom(currentAddress$),
-        filter(([_, addressToSave]) => this.enoughDataToSave(addressToSave)),
+        filter(([_, addressToSave]) => canSaveRealAddress(addressToSave)),
         tap(() => busyCounter$.next(1)),
         concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
         removeTempAddressOperator(),
         tap(() => busyCounter$.next(-1)),
         share()
+    );
+
+    /* If we get to show validations, we touch controls so we will show validations errors
+        associate with controls
+     */
+    const touchFormOnSubmitWithBadAddressAction$ = this.validationRequested$.pipe(
+        withLatestFrom(currentAddress$),
+        filter(([_, addressToSave]) => !canSaveRealAddress(addressToSave)),
+        tap(() => this.addressInputComponent.touchAllControls())
     );
 
     const savedAddress$ = saveRealAddressAction$.pipe(
@@ -544,8 +549,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(isBusy => this.componentBusy.emit(isBusy))
     );
 
-    const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.addressErrors$]).pipe(
-        map(([formErrors, addressErrors]) => !formErrors.length && !addressErrors.length),
+    const activitityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
+        map(currentAddress => this.meetsActivityRequirements(currentAddress))
+    );
+
+    const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.verifyFieldErrors$, activitityRequirementsMet$]).pipe(
+        map(([formErrors, addressErrors, reqsMet]) =>
+            !formErrors.length && !addressErrors.length && reqsMet),
         distinctUntilChanged(),
         tap(status => this.validStatusChanged.emit(status))
     );
@@ -559,6 +569,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         verifyInputComponentSparseAddress$,
         handleAddressSuggestionAction$,
         saveRealAddressAction$,
+        touchFormOnSubmitWithBadAddressAction$,
         emitValueChangedAction$,
         updateInputComponentWithSavedAddressAction$,
         emitComponentBusyAction$,
@@ -575,7 +586,17 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   }
 
 
-  private computeValidityForSparseAddress(address: Address | null): boolean {
+    private meetsActivityRequirements(currentAddress: Address | null): boolean {
+      if (this.block.requireVerified && !currentAddress) {
+          return false;
+      }
+      if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
+          return false;
+      }
+      return true;
+    }
+
+    private computeValidityForSparseAddress(address: Address | null): boolean {
     if (address && this.addressIsBlank(address)) {
       // we will say address is valid if totally new and totally blank
       return !address.guid;
@@ -625,10 +646,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         tap(() => {
           this.ngUnsubscribe.next();
           this.ngUnsubscribe.complete();
-          console.debug('unsubscribe completed');
+          this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
         }),
         take(1)
     ).subscribe();
   }
 }
-

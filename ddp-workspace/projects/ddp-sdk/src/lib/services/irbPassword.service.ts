@@ -1,24 +1,29 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie';
 import { ConfigurationService } from './configuration.service';
 import { NotAuthenticatedServiceAgent } from './serviceAgents/notAuthenticatedServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { PasswordCheckResult } from './../models/passwordCheckResult';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
+    private log: LoggingService;
+    private readonly LOGGER_SOURCE = 'IrbPasswordService';
+
     constructor(
         @Inject('ddp.config') _configuration: ConfigurationService,
         private cookie: CookieService,
         _http: HttpClient,
-        _logger: LoggingService) {
+        _logger: LoggingService,
+        injector: Injector) {
         super(_configuration, _http, _logger);
+        this.log = injector.get(LoggingService);
     }
 
-    public checkPassword(password: string): Observable<boolean> {
+    public checkPassword(password: string): Observable<boolean | HttpErrorResponse> {
         const ddpCfg = this._configuration;
         const studyGuid = ddpCfg.studyGuid;
         return this.postObservable(`/studies/${studyGuid}/irb-password-check`, { password }, {}, true).pipe(
@@ -37,16 +42,16 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
         return this.checkPassword('').pipe(map(loggedIn => !loggedIn));
     }
 
-    public handleError(error: HttpErrorResponse): Observable<boolean> {
+    public handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
+            this.log.logError(this.LOGGER_SOURCE, `An error occurred: ${error.error.message}`);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
+            this.log.logError(this.LOGGER_SOURCE, `Backend returned code ${error.status}, body was: ${error.error}`);
         }
-        return of(false);
+        return throwError(error);
     }
 
     public isIrbAuthenticated(): boolean {

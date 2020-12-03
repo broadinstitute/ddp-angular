@@ -35,6 +35,12 @@ export class ConfigurationService {
     dashboardShowQuestionCountExceptions: string[] = [];
     // if activity status added here, buttons text will be changed on custom
     dashboardActivitiesCompletedStatuses: string[] = [];
+    // if activity status added here, buttons text will be changed on custom
+    dashboardActivitiesStartedStatuses: string[] = [];
+    // if activity added here, the status column will show activitySummary message and will be shown a custom button
+    dashboardSummaryInsteadOfStatus: string[] = [];
+    // if activity added here, for this activity will be shown another button
+    dashboardReportActivities: string[] = [];
     tooltipIconUrl: string = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
     languageSelectorIconURL: string | null = null;
@@ -49,4 +55,5 @@ export class ConfigurationService {
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
     defaultLanguageCode: string;
+    rtlLanguages: string[] = [];
 }

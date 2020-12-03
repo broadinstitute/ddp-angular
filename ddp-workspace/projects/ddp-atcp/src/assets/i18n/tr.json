@@ -210,7 +210,9 @@
       "Next": "Sonraki",
       "Previous": "Önceki",
       "SignIn": "Oturum Aç",
-      "YourParticipants": "Katılımcılarınız"
+      "YourParticipants": "Katılımcılarınız",
+      "ForResearchers": "Araştırmacı",
+      "DataAccessRequest": "Veri Erişim İsteği"
     }
   },
   "DataAccess": {

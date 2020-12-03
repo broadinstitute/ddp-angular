@@ -1,30 +1,33 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, Injector, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
-import { LanguageService } from "./languageService.service";
+import { LanguageService } from './internationalization/languageService.service';
 import { SessionServiceAgent } from './serviceAgents/sessionServiceAgent.service';
 import { CountryAddressInfoSummary } from '../models/countryAddressInfoSummary';
 import { CountryAddressInfo } from '../models/countryAddressInfo';
-import { Observable, ReplaySubject } from 'rxjs';
-import { Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CountryService extends SessionServiceAgent<CountryAddressInfo | CountryAddressInfoSummary[]> implements OnDestroy {
     // used to cache countries. Should never change after initial load
     private allCountryInfoSummariesSubject$: ReplaySubject<CountryAddressInfoSummary[]> = new ReplaySubject();
     private anchor: Subscription;
+    private log: LoggingService;
+    private readonly LOGGER_SOURCE = 'CountryService';
 
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService,
-        _language: LanguageService) {
+        _language: LanguageService,
+        injector: Injector) {
         super(session, configuration, http, logger, _language);
         this.initializeAllCountryInfoSummaries();
+        this.log = injector.get(LoggingService);
     }
 
     public ngOnDestroy(): void {
@@ -51,12 +54,11 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
     }
 
     public findAllCountryInfoSummaries(): Observable<CountryAddressInfoSummary[]> {
-        console.log('find all countryinfo summaries');
+        this.log.logEvent(this.LOGGER_SOURCE, 'Find all countryinfo summaries.');
         return this.allCountryInfoSummariesSubject$.asObservable();
     }
 
     private initializeAllCountryInfoSummaries(): void {
-      console.log('initializeAllCountryINfosums');
         this.anchor = this.getObservable('/addresscountries').pipe(
             map((data: any) => {
                 if (data) {
@@ -65,7 +67,6 @@ export class CountryService extends SessionServiceAgent<CountryAddressInfo | Cou
                     return [];
                 }
             }),
-          tap((data) => console.log('initializeAllCountryInfosums got allcedss' + data.length))
         ).subscribe(this.allCountryInfoSummariesSubject$);
     }
 }

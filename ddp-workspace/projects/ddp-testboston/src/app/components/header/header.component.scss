@@ -71,13 +71,10 @@
     align-items: center;
     font-weight: 600;
     font-size: 16px;
-    line-height: 33px;
+    line-height: 23px;
     white-space: nowrap;
+    margin: 5px 0 5px 0;
     color: mat-color($app-theme, 1300);
-
-    &__icon {
-        margin-right: 0.2rem;
-    }
 }
 
 .header-link:link,
@@ -209,12 +206,6 @@
     }
 }
 
-@media only screen and (max-width: 1400px) {
-    .nav {
-        margin-left: 2.5rem;
-    }
-}
-
 @media only screen and (max-width: 1370px) {
 
     .static-menu__item,
@@ -223,19 +214,20 @@
     }
 }
 
-@media only screen and (max-width: 1350px) {
+
+@media only screen and (max-width: 1200px) {
+    .nav {
+        margin-left: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
     .navigation {
         display: none;
     }
 
     .menu-button {
         display: unset;
-    }
-}
-
-@media only screen and (max-width: 1290px) {
-    .nav {
-        margin-left: 2.5rem;
     }
 }
 

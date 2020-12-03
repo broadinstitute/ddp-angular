@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityServiceAgent, ActivityForm } from 'ddp-sdk';
-import { filter, tap } from 'rxjs/operators';
+import {ActivityServiceAgent, ActivityForm, CompositeDisposable} from 'ddp-sdk';
+import { filter, take, tap } from 'rxjs/operators';
 import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
 import { ActivityCodes } from '../constants/activityCodes';
 
 @Injectable()
-export class CurrentActivityService {
-  private activity = new BehaviorSubject(null);
+export class CurrentActivityService implements OnDestroy {
 
+  private activity = new BehaviorSubject(null);
+ private anchor: CompositeDisposable = new CompositeDisposable();
   constructor(private activityServiceAgent: ActivityServiceAgent,
               private activityProgressCalculationService: ActivityProgressCalculationService) {
-    this.activity
+    this.anchor
+      .addNew(this.activity
       .pipe(filter(x => x !== null))
-      .subscribe(x => this.activityProgressCalculationService.setProgress(x));
+      .subscribe(x => this.activityProgressCalculationService.setProgress(x)));
   }
 
   public getActivity(studyGuid: Observable<string | null>,
@@ -29,9 +31,10 @@ export class CurrentActivityService {
                                sectionIndex: number): void {
     if (activity.activityCode === ActivityCodes.MEDICAL_HISTORY) {
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);
-      this.activityServiceAgent
+      this.anchor.addNew(this.activityServiceAgent
         .saveLastVisitedActivitySection(studyGuid, activityGuid, sectionIndex)
-        .subscribe();
+        .pipe(take(1))
+        .subscribe());
     }
   }
 
@@ -41,5 +44,9 @@ export class CurrentActivityService {
 
   public getCurrentActivity(): Observable<ActivityForm | null> {
     return this.activity.asObservable();
+  }
+
+  ngOnDestroy(): void {
+   this.anchor.removeAll();
   }
 }

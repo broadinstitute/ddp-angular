@@ -64,7 +64,7 @@
     },
     "Doctors": [
       {
-        "Hospital": "profesor emerytowany genetyki medycznej –“ Uniwersytet Cambridge, Cambridge, Wielka Brytania oraz honorowy członek wydziału, Instytut Wellcome Trust Sanger, Hinxton, Wielka Brytania",
+        "Hospital": "profesor emerytowany genetyki medycznej – Uniwersytet Cambridge, Cambridge, Wielka Brytania oraz honorowy członek wydziału, Instytut Wellcome Trust Sanger, Hinxton, Wielka Brytania",
         "Name": "Martin Bobrow",
         "Rank": "lek."
       },
@@ -210,7 +210,9 @@
       "Next": "Dalej",
       "Previous": "Wstecz",
       "SignIn": "Zaloguj się",
-      "YourParticipants": "Twoi uczestnicy"
+      "YourParticipants": "Twoi uczestnicy",
+      "ForResearchers": "Dla Naukowców",
+      "DataAccessRequest": "Żądanie dostępu do danych"
     }
   },
   "DataAccess": {

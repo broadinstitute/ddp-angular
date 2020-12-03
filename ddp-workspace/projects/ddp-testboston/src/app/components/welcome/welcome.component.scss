@@ -30,12 +30,12 @@
 }
 
 .invitation {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     margin: 1rem 0 0 0;
 
     .button:last-child {
         color: mat-color($app-theme, 1300) !important;
-        margin-left: 0.1rem;
     }
 }
 
@@ -112,7 +112,7 @@
     @include reset-list;
 }
 
-.member {
+.pi {
     margin: 3.5rem 0;
 
     &__title {
@@ -130,6 +130,27 @@
     }
 
     &__info {
+        color: mat-color($app-theme, 700);
+        font-size: 1.25rem;
+        @include member;
+    }
+}
+
+.others {
+    &__title {
+        color: mat-color($app-theme, 1200);
+        font-size: 1.625rem;
+        font-weight: 600;
+        @include member;
+    }
+
+    &__item {
+        &:last-child {
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    &__name {
         color: mat-color($app-theme, 700);
         font-size: 1.25rem;
         @include member;

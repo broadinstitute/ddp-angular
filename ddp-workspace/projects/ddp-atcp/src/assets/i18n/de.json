@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "Anmelden auf der Datenplattform",
-          "Text": "Klicken Sie auf \\\"Join Us\\\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
+          "Text": "Klicken Sie auf \\\"Mitglied werden\\\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
         },
         {
           "Name": "Erteilen des Einverständnisses",
@@ -52,7 +52,7 @@
         }
       ],
       "SubTitle": "So funktioniert die Plattform:",
-      "Text": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was ? so unsere Hoffnung ? zu neuen Entdeckungen führen wird.",
+      "Text": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was hoffentlich zu neuen Entdeckungen führen wird.",
       "Title": "Die Plattform für globale Daten von AT-Familien"
     },
     "Title": "Über diese Initiative"
@@ -132,7 +132,7 @@
     ],
     "FamilyOversight": {
       "Header": "Aufsichtsgremium für Familienmitglieder (Family Oversight Board)",
-      "Text": "Das Ziel unserer Plattform ist es, Forschern einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt zu gewähren, was ? so unsere Hoffnung ? zu neuen Entdeckungen führen wird. Damit unsere Vision und unsere Aktivitäten immer auf die Interessen der Personen mit AT weltweit ausgerichtet bleiben, haben wir ein internationales Aufsichtsgremium für Familienmitglieder (Family Oversight Board) eingerichtet.  Derzeit haben folgende Familienmitglieder von AT-Patienten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise einer Mitgliedschaft in diesem Gremium zugestimmt:"
+      "Text": "Das Ziel unserer Plattform ist es, Forschern einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt zu gewähren, was hoffentlich zu neuen Entdeckungen führen wird. Damit unsere Vision und unsere Aktivitäten immer auf die Interessen der Personen mit AT weltweit ausgerichtet bleiben, haben wir ein internationales Aufsichtsgremium für Familienmitglieder (Family Oversight Board) eingerichtet.  Derzeit haben folgende Familienmitglieder von AT-Patienten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise einer Mitgliedschaft in diesem Gremium zugestimmt:"
     },
     "FinancialSupport": {
       "Header": "Finanzielle Förderung der Plattform für globale Daten von AT-Familien",
@@ -210,12 +210,14 @@
       "Next": "Weiter",
       "Previous": "Zurück",
       "SignIn": "Anmelden",
-      "YourParticipants": "Ihre Teilnehmer"
+      "YourParticipants": "Ihre Teilnehmer",
+      "ForResearchers": "Für Forscher",
+      "DataAccessRequest": "Daten Zugriffsanforderung"
     }
   },
   "DataAccess": {
     "Header": {
-      "Paragraph1": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was ? so unsere Hoffnung ? zu neuen Entdeckungen führen wird."
+      "Paragraph1": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was hoffentlich zu neuen Entdeckungen führen wird."
     },
     "OrganizationForm": {
       "Country": "Land",

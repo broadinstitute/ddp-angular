@@ -7,6 +7,7 @@
 @import './style/session-expired.scss';
 @import './style/dialogs.scss';
 @import './style/subject-panel.scss';
+@import './style/right-to-left.scss';
 
 $custom-typography: mat-typography-config($font-family: 'Nunito');
 
@@ -93,6 +94,10 @@ li {
     margin: 0;
 }
 
+.no-margin-top {
+    margin-top: 0;
+}
+
 .section {
     width: 100%;
 }
@@ -124,12 +129,16 @@ li {
     text-decoration: none;
     white-space: nowrap;
 
+    &_phone {
+        unicode-bidi: embed;
+    }
+
     &_bold {
         font-weight: 700;
     }
 
     &_no-wrap {
-        white-space: initial;
+        white-space: initial !important;
     }
 
     &_semi-bold {

@@ -2,7 +2,7 @@
   "AboutInitiative": {
     "FirstParagraph": {
       "Text": "est une maladie neurodégénérative héréditaire. Un enfant atteint d’AT perd progressivement le contrôle de ses muscles à partir de deux ans. Vers l’âge de neuf ou dix ans, les enfants AT sont généralement en fauteuil roulant et présentent des troubles de l’élocution. Lire et déglutir devient également difficile. Environ 30 % des enfants AT développent un cancer, et la plupart souffrent de troubles immunitaires plus ou moins sévères. Bien que les traitements symptomatiques permettent de prolonger la vie des patients AT, la maladie demeure incurable.",
-      "Title": "ataxie-télangiectasie (AT)"
+      "Title": "Ataxie-télangiectasie (AT)"
     },
     "SecondParagraph": {
       "TextOne": "Les frères et sœurs AT semblent partager plus de caractéristiques cliniques similaires que les enfants porteurs des mêmes mutations, mais n'appartenant pas à la même famille. Les scientifiques pensent donc que les gènes d’une famille (autres que celui responsable du développement de l'AT) peuvent changer la façon dont cette maladie affecte les patients. En outre, il est possible que des environnements, des modes de vie et des régimes alimentaires différents aient un impact sur la santé des personnes atteintes d’AT.",
@@ -52,7 +52,7 @@
         }
       ],
       "SubTitle": "Fonctionnement de la plateforme :",
-      "Text": "<p>La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes.",
+      "Text": "La plateforme de données internationale pour les familles AT est un projet axé sur les patients et supervisé par les familles et les spécialistes du monde entier, qui permet de mettre à la disposition des chercheurs des informations médicales, génétiques et autres concernant les personnes atteintes d’AT. Cette plateforme permettra aux chercheurs du monde entier d’accéder rapidement, en toute sécurité et efficacement aux données patient importantes dans le but de favoriser les découvertes.",
       "Title": "Plateforme de données internationale sur les familles AT"
     },
     "Title": "Au sujet de cette initiative"
@@ -210,7 +210,9 @@
       "Next": "Suivant",
       "Previous": "Précédent",
       "SignIn": "Connexion",
-      "YourParticipants": "Vos participants"
+      "YourParticipants": "Vos participants",
+      "ForResearchers": "Pour les Chercheurs",
+      "DataAccessRequest": "Demande d'accès aux données"
     }
   },
   "DataAccess": {
