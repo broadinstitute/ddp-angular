@@ -89,7 +89,7 @@ export class ParticipantListItem {
 
   onStartActivity(instanceGuid: string): void {
     this.session.setParticipant(this.participant.guid);
-    this.activityService.currentActivityInstanceGuid = instanceGuid;
+    this.activityService.setCurrentActivityInstanceGuid(instanceGuid);
 
     this.router.navigateByUrl(RouterResources.Survey);
   }
@@ -115,7 +115,9 @@ export class ParticipantListItem {
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, ActivityCodes.CONSENT_EDIT)
       .pipe(take(1))
-      .subscribe(this.handleActivityCreation);
+      .subscribe(activity => {
+        this.handleActivityCreation(activity, true);
+      });
   }
 
   private handleEditActivity(activityInstance: ActivityInstance): void {
@@ -127,8 +129,14 @@ export class ParticipantListItem {
       .subscribe(this.handleActivityCreation);
   }
 
-  private handleActivityCreation = (activity: ActivityInstanceGuid): void => {
-    this.activityService.currentActivityInstanceGuid = activity.instanceGuid;
+  private handleActivityCreation = (
+    activity: ActivityInstanceGuid,
+    isConsentEditActivity: boolean = false
+  ): void => {
+    this.activityService.setCurrentActivityInstanceGuid(
+      activity.instanceGuid,
+      isConsentEditActivity
+    );
     this.router.navigateByUrl(RouterResources.Survey);
-  }
+  };
 }

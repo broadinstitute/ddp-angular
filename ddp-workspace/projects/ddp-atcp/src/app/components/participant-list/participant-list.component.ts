@@ -74,7 +74,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         switchMap(() => this.workflowAgent.fromParticipantList())
       )
       .subscribe(() => {
-        this.activityService.currentActivityInstanceGuid = null;
+        this.activityService.setCurrentActivityInstanceGuid(null);
         this.router.navigateByUrl(RouterResources.Survey);
       });
   }

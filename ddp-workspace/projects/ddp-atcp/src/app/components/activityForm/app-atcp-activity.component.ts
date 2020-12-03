@@ -229,6 +229,15 @@ import { delay } from 'rxjs/operators';
                                         ? ('SDK.SavingButton' | translate)
                                         : ((model.activityCode === ActivityCodes.CONSENT ? 'SDK.SignAndConsent' : 'SDK.SignAndAssent') | translate)">
                             </button>
+                            <button *ngIf="model.activityCode === ActivityCodes.CONSENT_EDIT"
+                                    #submitButton
+                                    [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                    class="button ButtonFilled ButtonFilled--green button_right"
+                                    (click)="flush()"
+                                    [innerHTML]="(isPageBusy | async)
+                                        ? ('SDK.SavingButton' | translate)
+                                        : ('SDK.SubmitButton' | translate)">
+                            </button>
                             <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY"
                                     #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
