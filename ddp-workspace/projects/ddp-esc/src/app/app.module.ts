@@ -51,6 +51,7 @@ toolkitConfig.activityUrl = 'activity';
 toolkitConfig.errorUrl = 'error';
 toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.internationalPatientsUrl = 'international-patients';
+toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-229-6991';
 toolkitConfig.infoEmail = 'info@escproject.org';
 toolkitConfig.dataEmail = 'data@escproject.org'

@@ -1814,26 +1814,26 @@ select:-webkit-autofill {
 //     font-weight: 900;
 // }
 
-// .ddp-user-menu-button {
-//     outline: none;
-//     font-size: 1rem;
-//     font-weight: 300;
-//     color: mat-color($app-theme, 1000);
-// }
+.ddp-user-menu-button {
+    outline: none;
+    font-size: 1rem;
+    font-weight: 300;
+    color: mat-color($app-theme, 1000);
+}
 
-// .ddp-user-menu-button:active,
-// .ddp-user-menu-button:focus,
-// .ddp-user-menu-button:hover {
-//     color: mat-color($app-theme, 1000);
-// }
+.ddp-user-menu-button:active,
+.ddp-user-menu-button:focus,
+.ddp-user-menu-button:hover {
+    color: mat-color($app-theme, 1000);
+}
 
-// .ddp-user {
-//     color: mat-color($app-theme, 100);
-// }
+.ddp-user {
+    color: mat-color($app-theme, 100);
+}
 
-// .ddp-user--scrolled {
-//     color: mat-color($app-theme, 600);
-// }
+.ddp-user--scrolled {
+    color: mat-color($app-theme, 2200);
+}
 
 // .ddp-institutions-form,
 // .ddp-activity-question {
