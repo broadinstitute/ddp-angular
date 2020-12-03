@@ -70,7 +70,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
         <div style="float: left;">
           <mat-form-field floatLabel="always">
             <mat-label *ngIf="label" [innerHTML]="label"></mat-label>
-            <input matInput [matDatepicker]="picker"
+            <input matInput [matDatepicker]="picker" [disabled]="readonly"
                    [placeholder]="placeholder || 'Choose a date'" [(ngModel)]="singleDate" [ngModelOptions]="{updateOn: 'blur'}">
             <mat-datepicker-toggle *ngIf="showCalendar" matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
