@@ -11,12 +11,13 @@ export class ActivityCompositeValidationRule extends ActivityAbstractValidationR
         return this.question as any;
     }
 
-    recalculate(): boolean {
+    public recalculate(): boolean {
         let answer: AnswerContainer[][] = this.compositeQuestion.answer;
         if (answer == null || answer.length === 0) {
             answer = [];
             answer.push(this.compositeQuestion.children.map((child) => ({ stableId: child.stableId, value: null })));
         }
+        this.result = null;
         return this.compositeQuestion.children
             .every((childQuestionBlock, colIdx) => childQuestionBlock
                 .validators.every(
