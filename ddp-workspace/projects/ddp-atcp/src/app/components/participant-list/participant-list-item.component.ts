@@ -7,6 +7,7 @@ import {
   ActivityServiceAgent,
   ConfigurationService,
   SessionMementoService,
+  ActivityInstanceGuid,
 } from 'ddp-sdk';
 
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
@@ -98,37 +99,36 @@ export class ParticipantListItem {
 
     switch (activityCode) {
       case ActivityCodes.CONSENT:
-        return this.handleEditConsent(activityInstance);
+        return this.handleEditConsent();
       case ActivityCodes.REGISTRATION:
-        // return this.handlePartialEditActivity(activityInstance);
       case ActivityCodes.CONTACTING_PHYSICIAN:
       case ActivityCodes.MEDICAL_HISTORY:
       case ActivityCodes.GENOME_STUDY:
       case ActivityCodes.FEEDING:
-        return this.handleFullEditActivity(activityInstance);
+        return this.handleEditActivity(activityInstance);
     }
   }
 
-  private handleEditConsent(consentInstance: ActivityInstance): void {
-    // handle consent editing...
-    console.log('Edit consent', { consentInstance });
+  private handleEditConsent(): void {
+    this.session.setParticipant(this.participant.guid);
+
+    this.activityServiceAgent
+      .createInstance(this.config.studyGuid, ActivityCodes.CONSENT_EDIT)
+      .pipe(take(1))
+      .subscribe(this.handleActivityCreation);
   }
 
-  private handlePartialEditActivity(activityInstance: ActivityInstance): void {
-    // handle registration etc...
-    console.log('Edit registration', { activityInstance });
-  }
-
-  private handleFullEditActivity(activityInstance: ActivityInstance): void {
+  private handleEditActivity(activityInstance: ActivityInstance): void {
     this.session.setParticipant(this.participant.guid);
 
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, activityInstance.activityCode)
       .pipe(take(1))
-      .subscribe(activity => {
-        this.activityService.currentActivityInstanceGuid =
-          activity.instanceGuid;
-        this.router.navigateByUrl(RouterResources.Survey);
-      });
+      .subscribe(this.handleActivityCreation);
+  }
+
+  private handleActivityCreation = (activity: ActivityInstanceGuid): void => {
+    this.activityService.currentActivityInstanceGuid = activity.instanceGuid;
+    this.router.navigateByUrl(RouterResources.Survey);
   }
 }
