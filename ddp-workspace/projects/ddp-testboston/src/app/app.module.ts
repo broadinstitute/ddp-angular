@@ -8,6 +8,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { RECAPTCHA_LANGUAGE, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+
 import { AppRoutes } from './app-routes';
 import { ActivityGuids } from './activity-guids';
 
@@ -17,7 +19,8 @@ import {
     AnalyticsEventsService,
     AnalyticsEvent,
     QuestionType,
-    LoggingService
+    LoggingService,
+    LanguageService
 } from 'ddp-sdk';
 
 import {
@@ -31,6 +34,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
+import { PrismComponent } from './components/prism/prism.component';
+import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
+import { EnrollmentComponent } from './components/enrollment/enrollment.component';
+import { HelpComponent } from './components/help/help.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -39,11 +46,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { RECAPTCHA_LANGUAGE, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { PrismComponent } from './components/prism/prism.component';
-import { EnrollmentComponent } from './components/enrollment/enrollment.component';
-import { HelpComponent } from './components/help/help.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -105,16 +107,18 @@ sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
 sdkConfig.scrollToErrorOffset = 130;
+sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];
 
-const initialLanguageCode = localStorage.getItem('studyLanguage') || 'en';
-
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
+export function translateFactory(translate: TranslateService,
+    injector: Injector,
+    logger: LoggingService,
+    language: LanguageService): () => Promise<any> {
     return () => new Promise<any>((resolve: any) => {
         const LOG_SOURCE = 'AppModule';
         const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
         locationInitialized.then(() => {
-            const locale = 'en';
+            const locale = language.getAppLanguageCode();
             translate.setDefaultLang(locale);
             translate.use(locale).subscribe(() => {
                 logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
@@ -127,6 +131,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     });
 }
 
+export function languageFactory(language: LanguageService): string {
+    return language.getAppLanguageCode();
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -136,6 +144,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
+        PrismActivityLinkComponent,
         EnrollmentComponent,
         HelpComponent
     ],
@@ -173,13 +182,17 @@ export function translateFactory(translate: TranslateService, injector: Injector
             deps: [
                 TranslateService,
                 Injector,
-                LoggingService
+                LoggingService,
+                LanguageService
             ],
             multi: true
         },
         {
             provide: RECAPTCHA_LANGUAGE,
-            useValue: initialLanguageCode,
+            useFactory: languageFactory,
+            deps: [
+                LanguageService
+            ]
         }
     ],
     bootstrap: [AppComponent]
