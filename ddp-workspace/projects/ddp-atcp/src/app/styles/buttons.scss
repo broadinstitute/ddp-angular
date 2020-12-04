@@ -335,24 +335,6 @@
   width: 50%;
 }
 
-@media (min-width: $mobile-width) {
-  .ButtonWide {
-    width: 30%
-  }
-}
-
-@media (min-width: $tablet-width) {
-  .ButtonWide {
-    width: 25%
-  }
-}
-
-@media (min-width: $desktop) {
-  .ButtonWide {
-    width: 17%
-  }
-}
-
 ddp-language-selector {
   .SimpleButton {
     display: flex;
