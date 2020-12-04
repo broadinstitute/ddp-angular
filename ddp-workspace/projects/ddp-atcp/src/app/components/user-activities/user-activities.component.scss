@@ -28,4 +28,14 @@
 
     margin: 0;
   }
+
+  .button-container {
+    padding: 3px 0;
+
+    button {
+      & + button {
+        margin-top: 3px;
+      }
+    }
+  }
 }

@@ -560,7 +560,8 @@
     "ActivityActions": {
       "Continue": "ja_Continue",
       "Start": "ja_Start",
-      "ViewEdit": "ja_View / Edit"
+      "View": "ja_View",
+      "Edit": "ja_Edit"
     },
     "Dashboard": {
       "Actions": "アクション",

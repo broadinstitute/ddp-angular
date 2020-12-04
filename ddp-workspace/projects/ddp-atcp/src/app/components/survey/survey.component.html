@@ -11,6 +11,7 @@
 
     <div class="workdir" [ngClass]="{ 'is-assent': isAssentActivity }">
       <app-workflow-progress
+        *ngIf="!isConsentEditActivity"
         [steps]="activities"
         [instanceGuid]="instanceGuid"
         (onChangeActivity)="onChangeActivity($event)"

@@ -570,7 +570,8 @@
     "ActivityActions": {
       "Continue": "hi_Continue",
       "Start": "hi_Start",
-      "ViewEdit": "hi_View / Edit"
+      "View": "hi_View",
+      "Edit": "hi_Edit"
     },
     "Dashboard": {
       "Actions": "कार्रवाइयाँ",

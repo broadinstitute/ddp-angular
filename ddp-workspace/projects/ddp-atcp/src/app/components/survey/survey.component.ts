@@ -29,6 +29,7 @@ export class SurveyComponent implements OnInit {
   public userFirstName: string;
   public activities: ActivityInstance[] = [];
   public isAssentActivity: boolean = false;
+  public isConsentEditActivity: boolean = false;
   public isActivityShown: boolean = true;
 
   constructor(
@@ -51,11 +52,11 @@ export class SurveyComponent implements OnInit {
     });
 
     this.getActivities().subscribe(() => {
-      const currentActivityInstanceGuid = this.activityService
-        .currentActivityInstanceGuid;
+      const currentActivity = this.activityService.currentActivity;
 
-      if (currentActivityInstanceGuid) {
-        this.instanceGuid = currentActivityInstanceGuid;
+      if (currentActivity && currentActivity.instanceGuid) {
+        this.instanceGuid = currentActivity.instanceGuid;
+        this.isConsentEditActivity = currentActivity.isConsentEdit;
         this.checkIfAssentByInstanceGuid(this.instanceGuid);
       } else {
         const nextActivityInstanceGuid = this.findNextActivity();

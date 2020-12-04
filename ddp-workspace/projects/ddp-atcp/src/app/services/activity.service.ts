@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+interface Activity {
+  instanceGuid: string;
+  isConsentEdit?: boolean;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ActivityService {
-  private _currentActivityInstanceGuid = new BehaviorSubject<string | null>(null);
+  private _currentActivity = new BehaviorSubject<Activity | null>(null);
 
-  get currentActivityInstanceGuid(): string | null {
-    return this._currentActivityInstanceGuid.getValue();
+  get currentActivity(): Activity | null {
+    return this._currentActivity.getValue();
   }
 
-  set currentActivityInstanceGuid(instanceGuid: string | null) {
-    this._currentActivityInstanceGuid.next(instanceGuid);
+  setCurrentActivity(
+    instanceGuid: string | null,
+    isConsentEdit: boolean = false
+  ) {
+    this._currentActivity.next({
+      instanceGuid,
+      isConsentEdit,
+    });
   }
 }

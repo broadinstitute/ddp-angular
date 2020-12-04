@@ -565,7 +565,8 @@
     "ActivityActions": {
       "Continue": "zh_Continue",
       "Start": "zh_Start",
-      "ViewEdit": "zh_View / Edit"
+      "View": "zh_View",
+      "Edit": "zh_Edit"
     },
     "Dashboard": {
       "Actions": "操作",

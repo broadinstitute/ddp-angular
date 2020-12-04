@@ -3,17 +3,17 @@
 @import '../../styles/typography';
 
 .survey {
-
   ::ng-deep {
     .ddp-required-question-prompt {
       white-space: normal;
     }
 
-    ol.ddp-list, .inner-ul-flat-list {
+    ol.ddp-list,
+    .inner-ul-flat-list {
       padding-left: 15px;
     }
 
-    ul.ddp-list  {
+    ul.ddp-list {
       label {
         font-weight: normal;
       }
@@ -24,7 +24,6 @@
     }
 
     mat-list-item {
-
       height: auto !important;
       .mat-checkbox-inner-container {
         margin-top: 0;
@@ -57,7 +56,6 @@
         border-color: $blue;
       }
     }
-
 
     ddp-activity-dropdown-picklist-question select {
       margin-bottom: 20px;
@@ -99,7 +97,6 @@
       }
     }
 
-
     app-atcp-activity {
       padding: 0;
       flex-grow: 1;
@@ -110,9 +107,7 @@
     }
 
     &.is-assent {
-
       app-atcp-activity {
-
         ::ng-deep {
           @include font-McLaren();
 
