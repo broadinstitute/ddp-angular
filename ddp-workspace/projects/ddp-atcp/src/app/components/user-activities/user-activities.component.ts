@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance } from 'ddp-sdk';
 
-import { ActivityCodes } from '../../sdk/constants/activityCodes'
+import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import {
   COMPLETE,
   CREATED,
@@ -36,13 +36,17 @@ export class UserActivitiesComponent {
 
   get currentActivity(): ActivityInstance | null {
     const inProgressActivity = this.activities.find(
-      activity => activity.statusCode === this.statusCodes.IN_PROGRESS
+      activity =>
+        activity.statusCode === this.statusCodes.IN_PROGRESS &&
+        activity.previousInstanceGuid === null
     );
 
     if (inProgressActivity) return inProgressActivity;
 
     const createdActivity = this.activities.find(
-      activity => activity.statusCode === this.statusCodes.CREATED
+      activity =>
+        activity.statusCode === this.statusCodes.CREATED &&
+        activity.previousInstanceGuid === null
     );
 
     if (createdActivity) return createdActivity;
@@ -55,6 +59,10 @@ export class UserActivitiesComponent {
   }
 
   isRowDisabled(activity: ActivityInstance): boolean {
-    return activity.statusCode === this.statusCodes.CREATED && activity !== this.currentActivity;
+    return (
+      activity.statusCode === this.statusCodes.CREATED &&
+      activity !== this.currentActivity &&
+      activity.previousInstanceGuid === null
+    );
   }
 }

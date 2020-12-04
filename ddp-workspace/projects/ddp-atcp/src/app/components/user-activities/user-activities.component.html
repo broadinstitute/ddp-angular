@@ -87,7 +87,11 @@
       class="user-activities-table__cell"
     >
       <button
-        *ngIf="activity.statusCode === statusCodes.CREATED"
+        *ngIf="
+          (activity.instanceGuid === currentActivity?.instanceGuid ||
+            activity.previousInstanceGuid !== null) &&
+          activity.statusCode === statusCodes.CREATED
+        "
         class="BtnFilled BtnFilled--blue"
         (click)="startActivity.emit(activity.instanceGuid)"
       >
@@ -95,7 +99,10 @@
       </button>
 
       <button
-        *ngIf="activity.statusCode === statusCodes.IN_PROGRESS"
+        *ngIf="
+          activity.instanceGuid === currentActivity?.instanceGuid &&
+          activity.statusCode === statusCodes.IN_PROGRESS
+        "
         class="BtnFilled BtnFilled--blue"
         (click)="continueActivity.emit(activity.instanceGuid)"
       >
@@ -129,15 +136,10 @@
     *matHeaderRowDef="displayedColumns"
     class="user-activities-table__row--header"
   ></tr>
-  <!-- <tr
-    mat-row
-    *matRowDef="let activity; columns: displayedColumns"
-    class="user-activities-table__row"
-    [class.user-activities-table__row--disabled]="isRowDisabled(activity)"
-  ></tr> -->
   <tr
     mat-row
     *matRowDef="let activity; columns: displayedColumns"
     class="user-activities-table__row"
+    [class.user-activities-table__row--disabled]="isRowDisabled(activity)"
   ></tr>
 </table>
