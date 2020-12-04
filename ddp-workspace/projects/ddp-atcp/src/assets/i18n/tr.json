@@ -560,7 +560,8 @@
     "ActivityActions": {
       "Continue": "tr_Continue",
       "Start": "tr_Start",
-      "ViewEdit": "tr_View / Edit"
+      "View": "tr_View",
+      "Edit": "tr_Edit"
     },
     "Dashboard": {
       "Actions": "Eylemler",

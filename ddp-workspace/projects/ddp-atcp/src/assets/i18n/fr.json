@@ -560,7 +560,8 @@
     "ActivityActions": {
       "Continue": "fr_Continue",
       "Start": "fr_Start",
-      "ViewEdit": "fr_View / Edit"
+      "View": "fr_View",
+      "Edit": "fr_Edit"
     },
     "Dashboard": {
       "Actions": "Actions",
