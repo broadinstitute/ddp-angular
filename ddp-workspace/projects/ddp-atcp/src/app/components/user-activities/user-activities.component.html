@@ -121,7 +121,10 @@
         </button>
 
         <button
-          *ngIf="activity.activityCode !== activityCodes.REVIEW_AND_SUBMISSION"
+          *ngIf="
+            activity.activityCode !== activityCodes.REVIEW_AND_SUBMISSION &&
+            activity.activityCode !== activityCodes.ASSENT
+          "
           class="BtnFilled BtnFilled--blue"
           (click)="editActivity.emit(activity)"
         >
