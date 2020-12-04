@@ -516,6 +516,7 @@
       "Alert": "zh_Your session will time-out soon",
       "Default": "zh_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "我应该输入谁的名字？",
     "UserActivities": {
       "ActivityActions": "操作",
       "ActivityDate": "zh_Created",

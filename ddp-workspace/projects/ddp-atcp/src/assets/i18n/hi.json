@@ -521,6 +521,7 @@
       "Alert": "hi_Your session will time-out soon",
       "Default": "hi_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "मुझे किसका नाम दर्ज करना चाहिए?",
     "UserActivities": {
       "ActivityActions": "कार्रवाइयाँ",
       "ActivityDate": "hi_Created",

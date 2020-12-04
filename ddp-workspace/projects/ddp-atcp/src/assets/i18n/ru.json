@@ -511,6 +511,7 @@
       "Alert": "ru_Your session will time-out soon",
       "Default": "ru_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "Чье имя мне нужно ввести?",
     "UserActivities": {
       "ActivityActions": "Действия",
       "ActivityDate": "ru_Created",

@@ -511,6 +511,7 @@
       "Alert": "ja_Your session will time-out soon",
       "Default": "ja_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "どなたの名前を入力しますか?",
     "UserActivities": {
       "ActivityActions": "アクション",
       "ActivityDate": "ja_Created",

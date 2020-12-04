@@ -511,6 +511,7 @@
       "Alert": "fr_Your session will time-out soon",
       "Default": "fr_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "Le nom de qui dois-je saisir ?",
     "UserActivities": {
       "ActivityActions": "Actions",
       "ActivityDate": "fr_Created",

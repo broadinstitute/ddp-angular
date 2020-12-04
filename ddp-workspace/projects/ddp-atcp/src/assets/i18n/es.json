@@ -511,6 +511,7 @@
       "Alert": "es_Your session will time-out soon",
       "Default": "es_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "¿Qué nombre debo ingresar?",
     "UserActivities": {
       "ActivityActions": "Acciones",
       "ActivityDate": "es_Created",

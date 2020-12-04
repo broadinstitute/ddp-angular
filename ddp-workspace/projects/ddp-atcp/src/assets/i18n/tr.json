@@ -511,6 +511,7 @@
       "Alert": "tr_Your session will time-out soon",
       "Default": "tr_The Global A-T Family Data Platform"
     },
+    "TooltipAlt": "Kimin adını girmeliyim?",
     "UserActivities": {
       "ActivityActions": "Eylemler",
       "ActivityDate": "tr_Created",

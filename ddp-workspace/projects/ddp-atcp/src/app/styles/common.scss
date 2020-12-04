@@ -368,3 +368,16 @@ app-activity-progress-bar .mat-progress-bar-fill::after {
   padding: 15px;
   font-size: 16px;
 }
+
+.join-us .ddp-question-prompt {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 0;
+
+  span {
+    flex-shrink: 0;
+  }
+
+  position: relative;
+}
