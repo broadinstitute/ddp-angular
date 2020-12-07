@@ -794,7 +794,7 @@
     },
     "TooltipAlt": "Información",
     "Validators": {
-      "DateNavyValidationRule": "[HE] Entered date is invalid"
+      "DateNavyValidationRule": "[ES] Entered date is invalid"
     }
   }
 }
