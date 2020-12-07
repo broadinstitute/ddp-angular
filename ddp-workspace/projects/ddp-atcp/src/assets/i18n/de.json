@@ -310,6 +310,9 @@
     },
     "UserMenu": {
       "SignOutButton": "Abmelden"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[DE] Entered date is invalid"
     }
   },
   "Toolkit": {

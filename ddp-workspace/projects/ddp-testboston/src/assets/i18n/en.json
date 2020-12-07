@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Return to subject look-up",
       "Text": "Subject Invitation Code: "
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid"
     }
   }
 }

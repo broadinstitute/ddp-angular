@@ -310,6 +310,9 @@
     },
     "UserMenu": {
       "SignOutButton": "Déconnexion"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[FR] Entered date is invalid"
     }
   },
   "Toolkit": {
