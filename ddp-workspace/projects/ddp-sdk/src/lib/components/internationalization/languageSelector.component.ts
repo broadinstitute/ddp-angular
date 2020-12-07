@@ -40,6 +40,8 @@ import { LoggingService } from '../../services/logging.service';
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
   @Input() isScrolled: boolean;
   @Output() isVisible: EventEmitter<boolean> = new EventEmitter();
+  @Output() beforeLanguageChange: EventEmitter<StudyLanguage> = new EventEmitter<StudyLanguage>();
+  @Output() afterProfileLanguageChange: EventEmitter<void> = new EventEmitter();
   public loaded: boolean;
   public currentLanguage: StudyLanguage;
   public iconURL: string;
@@ -103,6 +105,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     if (this.language.canUseLanguage(lang.languageCode)) {
       this.currentLanguage = lang;
       if (this.language.getCurrentLanguage() !== lang.languageCode) {
+        this.beforeLanguageChange.emit(lang);
         const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
         let sub;
         if (this.session.isAuthenticatedSession()) {
@@ -134,7 +137,10 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     const profileModifications: UserProfile = new UserProfile();
     profileModifications.preferredLanguage = this.currentLanguage.languageCode;
     return this.profileServiceAgent.updateProfile(profileModifications)
-      .pipe(tap(() => this.language.notifyOfProfileLanguageUpdate()));
+      .pipe(
+        tap(() => this.afterProfileLanguageChange.emit()),
+        tap(() => this.language.notifyOfProfileLanguageUpdate())
+      );
   }
 
   // Find the current language and return true if successful or false otherwise

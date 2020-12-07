@@ -1,798 +1,800 @@
 {
   "App": {
-    "Home": "家",
-    "FAQ": "更多詳情/常見問題",
-    "About": "關於我們",
-    "Join": "加入郵件列表",
-    "Twitter": "Prion <br>註冊處的推文",
+    "Home": "主页",
+    "FAQ": "更多内容/常见问题",
+    "About": "关于我们",
+    "Join": "加入邮件名单",
+    "Twitter": "朊蛋白病<br>注册库推特",
     "Common": {
-      "JoinUs": "加入我們"
+      "JoinUs": "加入我们"
     },
     "Welcome": {
-      "WelcomeTitle": "致力於抗擊research病毒疾病的研究志願者",
-      "WelcomeText": "加入Prion註冊中心，這是一個在線註冊中心，面向患有by病毒疾病或有感染風險的人，他們希望找到參與研究的機會。",
-      "Intro": "加入我們的任務",
-      "Closing": "成為這項研究運動的一部分。 讓我們一起改變未來。",
-      "Participate": "這個怎麼運作：",
+      "WelcomeTitle": "志愿参与研究以助力抗击朊蛋白病",
+      "WelcomeText": "加入朊蛋白病注册库，一个为遭受朊蛋白病影响或存在患病风险并希望有机会参与研究的人群而设立的线上注册库。",
+      "Intro": "如支持此追求，请加入我们",
+      "Closing": "成为此研究运动的一员。让我们一起改变未来。",
+      "Participate": "如何参与：",
       "Steps": {
         "FirstStep": {
-          "Title": "1. 寄存器",
-          "Text": "單擊“加入我們”為您自己或摯愛的病毒病患者創建一個帳戶。 填寫我們的簡單在線同意書後，您就可以開始了！"
+          "Title": "1. 注册",
+          "Text": "点击“加入我们”，为患有朊蛋白病的自己或亲人创建帐户。填写完一份简单的在线同意书之后，您就准备就绪了！"
         },
         "SecondStep": {
-          "Title": "2. 向我們介紹你自己",
-          "Text": "您將被要求填寫一份有關您自己以及您的診斷或風險的簡短問卷（少於10分鐘）。"
+          "Title": "2. 提供您的信息",
+          "Text": "我们将邀请您填写一份不超过 10 分钟即可完成的简短问卷调查，了解您自己和您的诊断或风险情况。"
         },
         "ThirdStep": {
-          "Title": "3. 讓我們一起學習！",
-          "Text": "問卷填寫完畢後，您將可以查看您有資格參加的研究，並聯繫調查人員進行註冊。 如果您允許我們，我們還將就未來的研究機會與您聯繫。"
+          "Title": "3. 让我们一起学习成长！",
+          "Text": "完成问卷后，就会看到您有资格参与的研究项目，您可以联系相关研究者申请加入。如果您允许，将来如有研究参与机会，我们也会联系您。"
         }
       },
-      "ArrowAlt": "箭頭"
+      "ArrowAlt": "箭头"
     },
     "StudyListing": {
-      "Title": "(zh)Study Listing",
+      "Title": "研究列表",
       "Columns": [
         {
-          "title": "研究名稱",
-          "name": "studyName",
-          "placeholder": "按名稱篩選"
+          "title": "研究名称",
+          "name": "研究名称",
+          "placeholder": "通过研究名称筛选"
         },
         {
-          "title": "研究內容",
-          "name": "description",
-          "placeholder": "按描述過濾"
+          "title": "研究描述",
+          "name": "描述",
+          "placeholder": "通过描述筛选"
         },
         {
-          "title": "首席研究員",
-          "name": "nameOfPI",
-          "placeholder": "按PI過濾"
+          "title": "研究负责人 (PI)",
+          "name": "PI 姓名",
+          "placeholder": "通过 PI 筛选"
         },
         {
-          "title": "學習地點",
-          "name": "site",
-          "placeholder": "按網站篩選"
+          "title": "研究中心",
+          "name": "中心",
+          "placeholder": "通过中心筛选"
         },
         {
-          "title": "資格要求",
-          "name": "eligibilityRequirements",
-          "placeholder": "按資格過濾"
+          "title": "资格要求",
+          "name": "资格要求",
+          "placeholder": "通过资格筛选"
         },
         {
           "title": "更多信息",
-          "name": "moreInfo",
+          "name": "更多信息",
           "placeholder": ""
         }
       ],
       "Rows": [
         {
-          "studyName": "zh: Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
-          "description": "zh: The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
-          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "zh: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "zh: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
-          "moreInfo":  "zh: Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
+          "studyName": "评估朊蛋白病在患者的非中枢神经系统相关的组织中的传染性",
+          "description": "本研究的目标是发现疾病的诊断用生物标记物和/或疾病在脊液和大脑之外的组织中的传染性。受试者需要提供皮肤拭子、毛发、血液和尿液样本。",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "site": "大学医院克利夫兰医学中心，美国俄亥俄州克利夫兰",
+          "eligibilityRequirements": "疑似患有朊蛋白病并且至少有一项诊断研究（例如：脑脊液、脑部 MRI、脑电图）提示患有该疾病的个体 ，或者携带导致朊蛋白病的突变但未表现疾病症状的个体",
+          "moreInfo":  "要了解更多信息，请联系 Fran Lissemore：216-464-6203 或 fml2@case.edu。"
         },
         {
-          "studyName": "zh: Biomarkers in pre-symptomatic mutation carriers",
-          "description":"zh: Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
-          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
-          "site": "zh: Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
-          "eligibilityRequirements": "zh: You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
-          "moreInfo":  "zh: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact Chase Wennick at 617-643-2351 cwennick@mgh.harvard.edu to enroll"
+          "studyName": "症状前突变携带者中的生物标记物研究",
+          "description":"我们的研究对象是遗传性朊蛋白病的风险人群，即在他们表现任何症状之前，通过我们的研究为检验未来的朊蛋白病疗法奠定基础。研究团队首先会与潜在志愿者进行一次电话交流，目的是获得问题的答案、确认资格和收集一些基线信息。对于决定参与研究的合格人员，研究涉及两次访视马萨诸塞州总医院（位于美国马萨诸塞州的波士顿），两次访视的时间间隔为 8-16 周。研究访视包括以下事项，历时 1.5 天完成：常规体检、健康问卷、腰椎穿刺、抽血、脑部成像扫描、认知检查。合格参与者将收到补偿金和旅行费用补助。所有参与严格执行自愿原则。",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
+          "site": "马萨诸塞州<br/>总医院，美国马萨诸塞州波士顿市<br/>",
+          "eligibilityRequirements": "如果您符合以下任何一项，则表明您可能合格：<br/><ol><li>有遗传性朊蛋白病的家族史，包括遗传性克-雅氏病 (CJD)、致命性家族失眠症 (FFI) 或 GSS 综合征 (GSS)。注：参与此研究时，并不需要知道您的遗传学状态。</li><li> 已经接受预测性检测并提示具有上述疾病的患病风险。</li><li> 来自遗传性朊蛋白病家庭，但本身无风险</li><li>希望作为对照志愿者参与研究</li></ol>除此之外，参与者必须：<dl ><dt>- 年龄在 18-85 岁之间</dt><dt>- 英文流利</dt></dl>",
+          "moreInfo":  "参见 <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>，若要加入，请联系 MGHPrionStudy@partners.org 或者致电 617-643-2351"
         },
         {
-          "studyName": "zh: Early Diagnosis of Human Prion Disease",
-          "description": "zh: The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
-          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
-          "site": "zh: Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
-          "eligibilityRequirements": "zh: Inclusion criteria: Patients must be 18 years of age or older. Must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease, or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient\"s baseline over two years or less from symptoms onset. Must have an informant who has frequent contact with the subject and is available to provide information about the subject. Exclusion criteria: Unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women). Known HIV positive or immunosuppressed patients.",
-          "moreInfo":  "zh: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>, contact Aili Golubjatnikov at 415-476-2901 Aili.Golubjatnikov@ucsf.edu to enroll"
+          "studyName": "人朊蛋白病的早期诊断研究",
+          "description": "本研究的首要目标是研究和检验用于鉴别克-雅氏病 (CJD) 与其它疾病的方法以及了解如何尽早诊断 CJD。本研究的次要目标，是通过研究每位患者的疾病随时间的进展情况，来进一步了解这些 CJD 和其它发展迅速的神经系统疾病是如何进展的。因为 CJD 是罕见病而且进展迅速，所以该疾病诊断出来时病患通常已处于非常晚期的阶段。如若将来有方法能够成功治疗 CJD，则这些治疗很可能需要尽早实施于患者，需要在疾病尚未深度进展之前实施。因此，了解如何更早做出准确诊断非常重要。",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
+          "site": "记忆与老化中心，美国加州的加州大学旧金山分校 (UCSF)",
+          "eligibilityRequirements": "纳入标准：患者必须年满 18 岁或以上。必须满足 WHO CJD 修订标准，具有家族性人朊蛋白病的家族史，或者，从基线计的两年时间内或从症状刚开始计的更少时间内，患者有进展性神经衰退因而导致了痴呆或严重的功能损伤。必须有一名经常与受试者联系并且能够提供受试者信息的信息员。排除标准：由于存在禁忌（例如：起搏器、孕妇）而不能接受 MRI 检查。已知 HIV 阳性或免疫抑制患者。",
+          "moreInfo":  "参见 <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a>，若要加入，请联系 Aili Golubjatnikov：415-476-2901 或者 Aili.Golubjatnikov@ucsf.edu"
         },
         {
-          "studyName": "zh: Teleneurology Assessment Program for CJD (TAPCJD)",
-          "description": "zh: We are recruiting inviduals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram).  We will have approximately monthly telemedicine visits with the patient and a study partner.  The participants will be asked to share their medical and family history as well as to do various assessments instruments (e.g., memory testing, physical examination) by using their own personal computer, phone, or tablet (similar to Skype or Facetime).  The goal of the project is to collect standardized clinical data to help improve diagnosis, surveillance, and knowledge regarding these conditions.",
-          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-          "site": "zh: University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-          "eligibilityRequirements": "zh: Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
-          "moreInfo":  "zh: Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
+          "studyName": "CJD 远程神经学评估计划 (TAPCJD)",
+          "description": "我们招募疑似患有朊蛋白病并且至少有一项诊断研究（例如：脑脊液、脑部 MRI、脑电图）提示患有该疾病的个体。每月大约会对患者及其研究搭档进行一次远程医学访视。我们将邀请参与者通过其个人电脑、手机或平板（类似于 Skype 或 Facetime）分享其医疗史和家族史，以及进行各种仪器检查评估，例如记忆力检查、体检等。研究项目的目标是收集标准化临床数据以帮助提高相关疾病的诊断、监控和知识水平。",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
+          "site": "大学医院克利夫兰医学中心，美国俄亥俄州克利夫兰",
+          "eligibilityRequirements": "疑似患有朊蛋白病并且至少有一项诊断研究（例如：脑脊液、脑部 MRI、脑电图）提示患有该疾病的个体",
+          "moreInfo":  "要了解更多信息，请联系 CJD 基金会：800-659-1991 或者 lori@cjdfoundation.org。"
         },
         {
-          "studyName": "zh: Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
-          "description": "zh: Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
-          "nameOfPI": "zh: <a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
-          "site": "zh: University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
-          "eligibilityRequirements": "zh: Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
-          "moreInfo":  "zh: See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+          "studyName": "用来自 PRNP 突变携带者的抗体治疗朊蛋白病的研究",
+          "description": "遗传形式的朊蛋白病通常是在较大年龄时表现症状，所以年轻突变携带者中应该存在某些因素可以防止朊蛋白病的传播。针对朊蛋白柔韧尾端的抗体在老鼠试验中显示具有防护性。研究者的目的是筛选突变携带者和遗传学上未受影响的家庭成员中存在的朊蛋白自身抗体，并从内源性自身抗体研发具有防护性的化合物。",
+          "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
+          "site": "神经病理学研究所，瑞士苏黎世大学",
+          "eligibilityRequirements": "PRNP 突变确定携带者（症状+非症状），来自有 PRNP 突变携带者的家庭而自身无已知 PRNP 状况的个体，来自 PRNP 突变确定患者的野生型 PRNP 家庭成员",
+          "moreInfo":  "参见 <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>，若要加入，请联系 Karl Frontzek：Karl.Frontzek@usz.ch"
         }
       ],
-      "InputPlaceholder": "zh: Filter all columns"
+      "InputPlaceholder": "筛选所有栏目"
     },
     "LearnMore": {
-      "Title": "zh: Learn more about Prion Registry",
+      "Title": "了解更多关于朊蛋白病注册库的信息",
       "LearnMore": {
-        "Title": "zh: Learn More",
+        "Title": "了解更多",
         "WhatIs": {
-          "Question": "zh: What is prion disease?",
-          "Text": "zh: Prion disease is a rare neurodegenerative disease caused by a misfolded protein in the brain. It comes in several different subtypes with different names, such as Creutzfeldt-Jakob disease (CJD), fatal familial insomnia (FFI), and Gertsmann-Straussler-Scheinker disease (GSS)."
+          "Question": "什么是朊蛋白病？",
+          "Text": "朊蛋白病是一种罕见的神经退行性疾病，由大脑中一种错误折叠的蛋白所致。这种疾病分为几种不同的亚型，它们具有不同的名称，比如：克-雅氏病 (CJD)、致命性家族失眠症 (FFI)、GSS 综合征 (GSS)。"
         },
         "For": {
-          "Question": "zh: What is this registry for?",
-          "Text": "zh: In order to develop a treatment or cure for prion disease, we need people to participate in research. But prion disease is rare -- it only affects about 1 in 5,000 people in their lifetimes -- so it can be hard to find enough patients to make research possible. This registry allows people affected by, or at risk for, prion disease, to connect with doctors and scientists interested in recruiting for research studies."
+          "Question": "为何创建此注册库？",
+          "Text": "为了研发出能够治疗或治愈朊蛋白病的方法，我们需要人们参与研究。朊蛋白病是一种罕见病，5000 人在其一生中仅有 1 人可能遭受该疾病。所以，有可能遇到的困难是，难以找到足够数量的患者进行有效研究。此注册库可以让那些遭受朊蛋白病影响或处于患病风险的人群能够与有意为研究项目招募参与者的医生和科学家们取得联系。"
         },
         "Participate": {
-          "Question": "zh: Can I participate in this registry?",
-          "Text": "zh: Yes! This registry has a category for everyone. If you're symptomatic with prion disease right now, this registry is for you. If you're healthy but at-risk, this registry is for you. If you aren't at risk but just want to help out by volunteering as a control, this registry is for you too."
+          "Question": "我能否加入此注册库？",
+          "Text": "当然可以！此注册库适合各类人员。如果您现在已有朊蛋白病症状，此注册库适合您。如果您是健康人但属于风险人群，此注册库也适合您。如果您无风险但希望通过志愿作为对照而提供一些帮助，此注册库同样适合您。"
         },
         "Why": {
-          "Question": "zh: Why would I want to participate in this registry?",
-          "Text": "zh: Prion disease is completely untreatable today -- there is no medicine that can reverse, prevent, or delay the disease. But it won't stay that way forever. We believe that a therapy for prion disease is possible in our lifetimes. Scientists are working hard on making this a reality, but studying cells and mice can only get us so far. In order to develop a treatment, we will need people to participate in research."
+          "Question": "我为何要加入此注册库？",
+          "Text": "朊蛋白病目前完全不可治疗，即目前没有药物可以逆转、预防或者延缓该疾病。但是这种状况不会永远如此。我们相信，在我们的有生之年，发现朊蛋白病的治疗方法是有可能的。科学家们正在努力实现这个愿望，但研究细胞和老鼠无法让我们更进一步。为了研发出疗法，我们需要人们参与研究。"
         },
         "DoIHaveTo": {
-          "Question": "zh: Do I have to participate in this registry?",
-          "Text": "zh: Not at all! This registry is purely voluntary. If you think you'll never want to participate in research, don't sign up. If you don't want to participate in research today, but you might want to in the future, you can always come back later, or you can sign up now but not enroll in any research right away, and just stay tuned."
+          "Question": "我是否必须加入此注册库？",
+          "Text": "当然不是！是否加入此注册库完全出于自愿。如果您觉得一点都不想参与研究，请勿注册。如果目前您不想参与研究，但是将来或许想，那您任何时候都可以回来；或者，您可以现在注册但不立即加入任何研究而只是持续关注。"
         }
       }
     },
     "ThirdParty": {
-      "Title": "zh: List of Third-Party Tools",
-      "Description": "zh: The Prion Registry leverages the following third-party tools that may receive information about a user:",
+      "Title": "第三方工具名单",
+      "Description": "朊蛋白病注册库使用了以下第三方工具，它们可能会接收到关于用户的信息：",
       "Tools": {
-        "Sendgrid": "zh: Sendgrid",
-        "Auth0": "zh: Auth0",
-        "Tcell": "zh: Tcell",
-        "Google_Cloud": "zh: Google Cloud",
-        "Google_Analytics": "zh: Google Analytics"
+        "Sendgrid": "Sendgrid",
+        "Auth0": "Auth0",
+        "Tcell": "Tcell",
+        "Google_Cloud": "Google Cloud",
+        "Google_Analytics": "Google Analytics"
       },
       "Usage": {
-        "email": "zh: as an email service",
-        "authentication": "zh: as an authentication system to provide access to the Registry",
-        "security": "zh: as a Registry cloud firewall and runtime protection",
-        "host": "zh: to host the Registry",
-        "analytics": "zh: as an analytics tool"
+        "email": "提供电子邮件服务",
+        "authentication": "提供访问注册库的验证系统",
+        "security": "提供注册库云防火墙和运行时保护",
+        "host": "托管注册库",
+        "analytics": "提供分析工具"
       },
-      "Last_updated": "zh: Last updated:"
+      "Last_updated": "上次更新： ",
+      "lastUpdatedDate": "8/14/20"
     }
   },
   "Toolkit": {
     "Common": {
-      "Organization": "Prion",
-      "LogoAlt": "Prion Registry 商標",
-      "Home": "家",
-      "LearnMore": "學到更多",
-      "Dashboard": "我的儀表板",
-      "JoinUs": "加入我們",
-      "StudyListing": "(zh)Study Listing"
+      "Organization": "朊蛋白",
+      "LogoAlt": "朊蛋白病注册库徽标",
+      "Home": "主页",
+      "LearnMore": "了解更多",
+      "Dashboard": "我的控制面板",
+      "JoinUs": "加入我们",
+      "StudyListing": "研究列表"
     },
     "Footer": {
-      "BackToTop": "回到頂部",
+      "BackToTop": "返回顶部",
       "PrivacyPolicy": "隐私政策",
-      "ContactUs": "聯繫我們：",
+      "ContactUs": "联系我们：",
       "ContactMailTo": "mailto:info@prionregistry.org",
       "ContactEmail": "info@prionregistry.org"
     },
     "Dashboard": {
       "StudyListing": {
-        "ActivityName": "研究清單",
-        "ActivityStatus": "可用的",
+        "ActivityName": "研究列表",
+        "ActivityStatus": "可进行",
         "ActivityCreated": "-",
-        "ActivitySummary": "可用的研究以及如何加入",
-        "ActivityActions": "視圖"
+        "ActivitySummary": "可供您查看和志愿参与",
+        "ActivityActions": "查看"
       }
     },
     "LoginLanding": {
-      "Text": "zh: Please wait. You will be redirected to a destination soon..."
+      "Text": "请稍候。您很快将重定向到目的地..."
     },
     "Dialogs": {
       "Disclaimer": {
-        "Title": "zh: View Prion Registry Data",
-        "Text": "zh: You are now leaving the Prion Registry website and will be directed to cBioPortal. Please note that as these data were generated by the Prion Registry in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
-        "SubmitButton": "zh: OK"
+        "Title": "查看朊蛋白病注册库数据",
+        "Text": "您正在离开朊蛋白病注册库网站，并将转到 cBioPortal。请注意，这些是由朊蛋白病注册库生成的研究数据，而不是来自于临床和实验室，它们仅用于研究目的，不能用于指示临床决策。",
+        "SubmitButton": "确定"
       },
       "JoinMailingList": {
-        "Title": "zh: Stay informed!",
-        "Text": "zh: Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Title": "获取最新信息！",
+        "Text": "请在下面提供您的电子邮箱，我们会通过它让您了解最新研究进展。<br>您随时可以退订。",
         "Fields": {
           "FirstName": {
-            "Placeholder": "zh: First Name *",
-            "Error": "zh: First Name is required"
+            "Placeholder": "名字*",
+            "Error": "名字必填"
           },
           "LastName": {
-            "Placeholder": "zh: Last Name *",
-            "Error": "zh: Last Name is required"
+            "Placeholder": "姓氏*",
+            "Error": "姓氏必填"
           },
           "Email": {
-            "Placeholder": "zh: Email Address *",
-            "Error": "zh: Please enter a valid Email Address"
+            "Placeholder": "电子邮箱地址*",
+            "Error": "请输入有效的电子邮箱地址"
           },
           "ConfirmEmail": {
-            "Placeholder": "zh: Email Confirmation (Reenter Email) *",
-            "Error": "zh: Please enter a valid Email Address"
+            "Placeholder": "电子邮箱确认（再次输入电子邮箱）*",
+            "Error": "请输入有效的电子邮箱地址"
           }
         },
-        "CancelButton": "zh: CANCEL",
-        "SubmitButton": "zh: JOIN",
-        "Required": "zh: * Required field",
-        "MatchEmailsError": "zh: Please ensure that both email fields are filled in and that the addresses match.",
-        "LoadingError": "zh: We're sorry, but an error has occurred."
+        "CancelButton": "取消",
+        "SubmitButton": "加入",
+        "Required": "* 必填字段",
+        "MatchEmailsError": "请确保已填写电子邮箱且其地址正确无误。",
+        "LoadingError": "抱歉，发生了错误。"
       },
       "SessionWillExpire": {
-        "Title": "zh: Your session will time-out soon!",
-        "Text": "zh: To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "SignOut": "zh: Sign Out",
-        "Continue": "zh: Continue",
-        "RenewalFailed": "zh: Session renewal failed. Please log out and log back in again."
+        "Title": "您的会话即将超时！",
+        "Text": "由于您离开了一段时间，为保护隐私，我们会将您退出系统。点击“继续 (Continue)”保持登录状态。如果您已经完成操作，请点击“退出 (Sign Out)”。",
+        "SignOut": "退出",
+        "Continue": "继续",
+        "RenewalFailed": "会话更新失败。请退出并再次登录。"
       },
       "LanguagePreferences": {
-        "Text": "zh: Changing the language preference will also change the language used for e-mail communications.",
-        "CheckboxText": "zh: Don't show this again",
-        "ButtonText": "zh: OK"
+        "Text": "变更语言偏好设置也将相应变更电子邮件通信使用的语言。",
+        "CheckboxText": "不再显示",
+        "ButtonText": "确定"
       }
     },
     "Warning": {
-      "Title": "zh: Download Chrome or Safari to Continue",
-      "Text1": "zh: This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
-      "Text2": "zh: It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Title": "下载 Chrome 或 Safari 以继续",
+      "Text1": "此注册库基于最安全且最受欢迎的互联网浏览器 - Chrome 和 Safari 而设计。",
+      "Text2": "您似乎使用的是 Internet Explorer。您需要使用其它浏览器才能加入注册库。建议您使用 Chrome 或 Safari，确保您在此网站获得流畅、安全的用户体验。",
       "Text3": {
-        "Pt1": "zh: Click the following links to download",
-        "Pt2": "zh: or",
-        "Pt3": "zh: Chrome and Safari are always free.",
-        "Chrome": "zh: Chrome (for Mac & PC)",
-        "Safari": "zh: Safari (for Mac)"
+        "Pt1": "点击下方链接下载",
+        "Pt2": "或者",
+        "Pt3": "Chrome 和 Safari 永久免费。",
+        "Chrome": "Chrome（适用于 Mac 和 PC）",
+        "Safari": "Safari（适用于 Mac）"
       },
-      "SubmitButton": "zh: OK"
+      "SubmitButton": "确定"
     },
     "Password": {
-      "Title": "zh: Please enter the password",
-      "Text": "zh: Please enter your password",
+      "Title": "请输入密码",
+      "Text": "请输入您的密码",
       "InputPlaceholder": "  ",
-      "SubmitButton": "zh: Submit",
-      "PasswordWrongError": "zh: Incorrect password. Please try again.",
-      "PasswordRequiredError": "zh: Password is required",
-      "OtherError": "zh: We're sorry, but an error has occurred.",
+      "SubmitButton": "提交",
+      "PasswordWrongError": "密码不正确。请重试。",
+      "PasswordRequiredError": "密码必填",
+      "OtherError": "抱歉，发生了错误。",
       "PasswordField": {
-        "Error": "zh: Password is required"
+        "Error": "密码必填"
       }
     },
     "ErrorPage": {
-      "Title": "zh: We've encountered an error",
-      "Header": "zh: We're sorry, but an error has occurred.",
+      "Title": "我们遇到了一个错误",
+      "Header": "抱歉，发生了错误。",
       "DefaultText": {
-        "TextPt1": "zh: Please wait a moment and retry. If the trouble persists, please email us at",
-        "TextPt2": "zh: ."
+        "TextPt1": "请稍后重试。如果问题仍然存在，请发送电子邮件到",
+        "TextPt2": "。"
       }
     },
     "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "zh: Your password reset link has expired."
+      "PASSWORD_RESET_LINK_EXPIRED": "您的密码重置链接已经过期。"
     },
     "SessionExpired": {
       "Text": {
-        "Pt1": "zh: You were away for a while, so we logged you out as a security precaution.",
-        "Pt2": "zh: Please log in again to return to the last page you were on."
+        "Pt1": "您离开了一段时间，出于安全考虑，我们将您退出了系统。",
+        "Pt2": "请再次登录以返回到您上次访问的页面。"
       },
-      "LogInButton": "zh: Log In"
+      "LogInButton": "登录"
     },
     "CookiesBanner": {
-      "Text_Before_Policy_Link": "zh: We use cookies to evaluate site usage, improve performance, and ensure proper function of the website. Please review our",
-      "Text_After_Policy_Link": "zh: to learn more about the cookies we use.",
-      "Policy": "zh: Privacy Policy",
-      "Preferences": "zh: Manage Preferences",
-      "Reject": "zh: Reject Cookies",
-      "Accept": "zh: Accept Cookies"
+      "Text_Before_Policy_Link": "我们使用 Cookie 来评估网站使用情况、改进性能和确保网站正常运行。请查看我们的",
+      "Text_After_Policy_Link": "了解更多关于我们使用的 Cookie。",
+      "Policy": "隐私政策",
+      "Preferences": "管理偏好设置",
+      "Reject": "拒绝 Cookie",
+      "Accept": "接受 Cookie"
     },
     "CookiesModal": {
-      "Title": "zh: Manage Cookie Preferences",
-      "Privacy": "zh: Your Privacy",
-      "Privacy_Text": "zh: The Prion Registry collects cookies for functional and analytical purposes. You can find out more and change our default cookie settings by clicking on the tabs. Please note that functional cookies must be placed to allow proper function of the website.",
-      "Functional": "zh: Functional Cookies",
-      "Functional_Text": "zh: These cookies provide necessary access, function, and security to the website.",
-      "Analytical": "zh: Analytical Cookies",
-      "Reject": "zh: Reject",
-      "Accept": "zh: Accept",
-      "AlwaysOn": "zh: Always On",
-      "Analytical_Text": "zh: These cookies allow us to evaluate site usage, and improve site experience and performance.",
-      "Details": "zh: Cookie Details",
-      "Name": "zh: Name",
-      "Description": "zh: Description",
-      "Duration": "zh:  Duration",
-      "Policy": "zh: Privacy policy",
-      "Submit": "zh: Submit Preferences",
+      "Title": "管理 Cookie 偏好设置",
+      "Privacy": "您的隐私",
+      "Privacy_Text": "朊蛋白病注册库收集 Cookie 用于功能和分析用途。您可以查看更多关于 Cookie 的设置，也可以点击各个选项卡变更默认设置。请注意，为确保网站正常运行，必须保留功能性 Cookie。",
+      "Functional": "功能性 Cookie",
+      "Functional_Text": "以下 Cookie 为本网站提供必要的访问、功能和安全。",
+      "Analytical": "分析性 Cookie",
+      "Reject": "拒绝",
+      "Accept": "接受",
+      "AlwaysOn": "始终启用",
+      "Analytical_Text": "这些 Cookie 有助于我们评估网站使用情况，改进网站体验和性能。",
+      "Details": "Cookie 详情",
+      "Name": "名称",
+      "Description": "描述",
+      "Duration": "持续时间",
+      "Policy": "隐私政策",
+      "Submit": "提交偏好设置",
       "CookieName": {
-        "auth0": "zh: Auth0:",
-        "auth0_com.auth0.auth": "zh: com.auth0.auth.#",
-        "auth0_auth0": "zh: auth0",
-        "auth0_auth0_compat": "zh: auth0_compat",
-        "auth0_did": "zh: did",
-        "auth0_did_compat": "zh: did_compat",
-        "pepper": "zh: Pepper:",
-        "pepper_cookie": "zh: prion_cookies_consent",
-        "pepper_session_key": "zh: session_key",
-        "pepper_token": "zh: token",
-        "pepper_studyLanguage": "zh: studyLanguage",
-        "pepper_nextUrl": "zh: nextUrl",
-        "pepper_auth": "zh: localAuthParams",
-        "tcell": "zh: Tcell:",
-        "tcell_agent_session_id": "zh: tcell_agent_session_id",
-        "tcell_agent_policy_cache": "zh: tcell_agent_policy_cache",
-        "google_analytics": "zh: Google Analytics:",
-        "ga": "zh: _ga",
-        "gid": "zh: _gid",
-        "gat": "zh: _gat",
-        "gat_platform": "zh: _gat_platform"
+        "auth0": "Auth0:",
+        "auth0_com.auth0.auth": "com.auth0.auth.#",
+        "auth0_auth0": "auth0",
+        "auth0_auth0_compat": "auth0_compat",
+        "auth0_did": "did",
+        "auth0_did_compat": "did_compat",
+        "pepper": "Pepper:",
+        "pepper_cookie": "prion_cookies_consent",
+        "pepper_session_key": "session_key",
+        "pepper_token": "token",
+        "pepper_studyLanguage": "studyLanguage",
+        "pepper_nextUrl": "nextUrl",
+        "pepper_auth": "localAuthParams",
+        "tcell": "Tcell:",
+        "tcell_agent_session_id": "tcell_agent_session_id",
+        "tcell_agent_policy_cache": "tcell_agent_policy_cache",
+        "google_analytics": "Google Analytics:",
+        "ga": "_ga",
+        "gid": "_gid",
+        "gat": "_gat",
+        "gat_platform": "_gat_platform"
       },
       "CookieDescription": {
-        "authentication": "zh: authentication",
-        "authorization": "zh: authorization",
-        "identification": "zh: identification",
-        "navigation": "zh: navigation helper",
-        "grouping_behavior": "zh: grouping user behavior",
-        "throttling": "zh: throttling to increase the efficiency of analytics collection",
-        "security": "zh: security",
-        "cookie": "zh: cookie preferences",
-        "language": "zh: language preferences",
-        "session": "zh: handles user sessions",
-        "ua_identifier": "zh: the identifier for a device/user agent"
+        "authentication": "身份验证",
+        "authorization": "授权",
+        "identification": "识别",
+        "navigation": "导航助手",
+        "grouping_behavior": "分组用户行为",
+        "throttling": "限流以提高分析收集效率",
+        "security": "安全",
+        "cookie": "Cookie 偏好设置",
+        "language": "语言偏好设置",
+        "session": "处理用户会话",
+        "ua_identifier": "设备/用户代理的标识符"
       },
       "CookieDuration": {
-        "session": "zh: session",
-        "1year": "zh: 1 year",
-        "2years": "zh: 2 years",
-        "24hours": "zh: 24 hours",
-        "3days": "zh: 3 days",
-        "10minutes": "zh: 10 minutes",
-        "30minutes": "zh: 30 minutes",
-        "persistent": "zh: persistent"
+        "session": "会话",
+        "1year": "1 年",
+        "2years": "2 年",
+        "24hours": "24 小时",
+        "3days": "3 天",
+        "10minutes": "10 分钟",
+        "30minutes": "30 分钟",
+        "persistent": "持续"
       }
     },
     "PrivacyPolicy": {
-      "Title": "zh: Prion Registry Privacy Statement",
+      "Title": "朊蛋白病注册库隐私声明",
       "Intro": {
-        "Title": "zh: Last Updated: July 28, 2020",
+        "Title": "上次更新日期：2020-07-28",
         "Text": {
-          "P1": "zh: The Prion Registry has been developed by the Broad Institute of MIT and Harvard (“",
-          "P2BoldUnderline": "Broad Institute",
-          "P3": "zh: ”) in collaboration with the Prion Registry Consortium. We deeply value your privacy. This Privacy Statement (“",
-          "P4BoldUnderline": "zh: Policy",
-          "P5": "zh: ”) provides important information about how the Prion Registry collects and uses your personal information. ",
-          "P6Bold": "zh: Please make sure you review this Policy before submitting your information to the Prion Registry. If you have any questions about this Policy, please contact us at the addresses listed at the end of this Policy."
+          "P1": "朊蛋白病注册库由麻省理工与哈佛大学博德研究所（“",
+          "P2BoldUnderline": "博德研究所",
+          "P3": "”）和朊蛋白病注册库联盟合作开发。我们非常看重用户隐私。本隐私声明（“",
+          "P4BoldUnderline": "政策",
+          "P5": "”）包含关于朊蛋白病注册库如何收集和使用您个人信息的重要内容。",
+          "P6Bold": "请确保在发送您的信息到朊蛋白病注册库之前仔细阅读本政策。如果您对于本政策存在任何疑问，请通过本政策末尾所列的联系方式联系我们。"
         }
       },
       "Who": {
-        "Title": "zh: 1. Who is the Prion Registry?",
+        "Title": "1. 朊蛋白病注册库是什么？",
         "Text": {
-          "P1": "zh: The Prion Registry is an online registry, maintained by scientists and prion disease patient advocates at the Broad Institute, for people affected by or at risk for prion disease who want to find opportunities to participate in research. Our ultimate goal is to further the development of life-saving therapies to cure, treat, prevent, or delay prion disease. We created this Registry to make it easier for patients to:",
+          "P1": "朊蛋白病注册库为遭受朊蛋白病影响或存在患病风险并希望有机会参与研究的人群而设立，并由博德研究所的科学家和朊蛋白病支持者维护的一个线上注册库。我们的最终目标是进一步研发可以挽救生命的用于治愈、治疗、预防或延缓朊蛋白病的疗法。我们创建本注册库的目的是方便患者：",
           "P2Number": {
-            "1": "zh: be counted,",
-            "2": "zh: find research studies to participate in, and",
-            "3": "zh: share their data with researchers."
+            "1": "参与统计，",
+            "2": "发现可以参与的研究项目，以及",
+            "3": "与研究者们分享他们的数据。"
           },
-          "P3": "zh: This Registry will also help qualified researchers recruit study participants and gather data. For more information on the Prion Registry, please see ",
+          "P3": "本注册库还有助于符合资质的研究者招募研究参与者和收集数据。要了解更多关于朊蛋白病注册库的信息，请参见",
           "P4Link": "PrionRegistry.org",
-          "P5": "zh: . For more information on the Broad Institute, please see ",
+          "P5": "。要了解更多关于博德研究所的信息，请参见",
           "P6Link": "https://www.broadinstitute.org/about-us",
-          "P7": "zh: . ",
-          "P8": "zh: Please note that the Registry may link to other websites that are not affiliated with us or the Research Project (“",
-          "P9Bold": "zh: Third-Party Sites",
-          "P10": "zh: ”). We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites. You should make sure you review the privacy policies for those Third-Party Sites before providing them any of your information."
+          "P7": "。",
+          "P8": "请注意，本注册库可能链接到与我们或本研究项目无关的其他网站（“",
+          "P9Bold": "第三方网站",
+          "P10": "”）。我们提供这些链接只是为了给您提供便利，但我们对这些第三方网站的隐私规范不负任何责任。在向这些第三方网站提供您的任何信息之前，务必先阅读它们的隐私政策。"
         }
       },
       "Purpose": {
-        "Title": "zh: 2. What is the purpose and scope of this Policy?",
+        "Title": "2. 本政策的目的和适用范围是什么？",
         "Text": {
-          "P1": "zh: This Policy describes the information we collect from users of the Registry, the purposes for collecting that information, how we use that information, and with whom we share that information.   It applies to users who are patients enrolled in our Research Projects (“",
-          "P2Bold": "zh: Participant Users",
-          "P3": "zh: ”), and those users who are not enrolled in any Research Project and are using the Registry for general informational purposes or because they are interested in participating in a future research project (“",
-          "P4Bold": "zh: General Users",
-          "P5": "zh: ”).  We will refer to all users, including Participant Users and General Users, in this Policy as “",
-          "P6Bold": "zh: you",
-          "P7": "zh: ” or “",
-          "P8Bold": "zh: your",
-          "P9": "zh: ”."
+          "P1": "本政策的内容包含：我们收集注册库用户的哪些信息，收集这些信息的目的，我们如何使用这些信息以及与谁分享这些信息。它适用于加入我们的研究项目的用户（“",
+          "P2Bold": "参与用户",
+          "P3": "”），也适用于未加入任何研究项目的用户，他们一般是把此注册库作为信息来源，或者因为他们有兴趣参与将来的研究项目（“",
+          "P4Bold": "一般用户",
+          "P5": "”）。在本政策中，我们在提及所有用户（包括参与用户和一般用户）时使用“",
+          "P6Bold": "您",
+          "P7": "”或者“",
+          "P8Bold": "您的",
+          "P9": "”。"
         }
       },
       "Use": {
-        "Title": "zh: 3. If I use the Registry, am I agreeing to this Policy?",
-        "Text": "zh: Yes.  However, your use of and contribution of information to the Registry is entirely voluntary and you have certain rights to control use of your information as described below.   If you decide to use the Registry, you are agreeing that we can use your information as described in this Policy."
+        "Title": "3. 如果我使用注册库，是否表示我同意本政策的内容？",
+        "Text": "是的。但是，您对本注册库信息的使用和贡献完全出于自愿，您对您的信息拥有下文所述的特定使用控制权。如果您决定使用本注册库，表明您同意我们依据本政策中的规定使用您的信息。"
       },
       "HowCollect": {
-        "Title": "zh: 4. How do we collect information from you?",
+        "Title": "4. 我们是如何从您那里收集信息的？",
         "Text": {
-          "P1": "zh: We collect information about you in two ways.",
-          "P2": "zh: First, we collect certain information from you ",
-          "P3Underline": "zh: when you provide it to us directly.",
-          "P4": "zh:  Specifically, we collect information about you when you: ",
+          "P1": "我们通过两种方式收集关于您的信息。",
+          "P2": "首先，我们从您那里收集由",
+          "P3Underline": "您直接提供给我们的特定信息。",
+          "P4": "具体而言，在下列情况下我们会收集您的信息：",
 
-          "P5Underline": "zh: Create a Prion Registry account and profile",
-          "P6": "zh:  through our website.",
-          "P7Underline": "zh: Participate in the Registry",
-          "P8": "zh:  by providing us information about you and your experiences with prion disease.  For example, the medical questionnaire in our Registry will ask you a series of questions about your demographics, current prion disease status, willingness to be contacted for trials, past trial participation, zip code and contact information.  Please note that you are not required to answer any question.",
-          "P9Underline": "zh: Respond to notifications of research opportunities",
-          "P10": "zh: , surveys and other communications we may send to you.",
-          "P11Underline": "zh: Communicate with us",
-          "P12": "zh:  (e.g. by email).",
+          "P5Underline": "您通过我们的网站创建朊蛋白病注册库帐户",
+          "P6": "和个人资料。",
+          "P7Underline": "通过提供您自身和您的朊蛋白病经历的信息",
+          "P8": "而加入本注册库。例如：本注册库中的医学问卷将询问您一系列问题，主要涉及您的人口统计学特征、当前朊蛋白病状况、是否希望我们联系您参与临床试验、既往临床试验参与情况、邮政编码和联系方式等。请注意，我们并不强制要求您回答任何问题。",
+          "P9Underline": "我们向您发送研究机会、调查等通知，或者就其它方面与您沟通时，",
+          "P10": "您给予回复。",
+          "P11Underline": "与我们的沟通往来",
+          "P12": "（例如通过电子邮件）。",
 
-          "P13": "zh: Second, when you access our Registry, we collect through certain automated technologies that create and log information automatically. For example:",
+          "P13": "其次，当您访问我们的注册库时，我们通过自动创建和记录信息的特定自动化技术来进行信息收集。例如：",
 
-          "P14": "zh: When you visit the Registry website (whether on your computer or on a mobile device), we collect certain information automatically and store it in log files. This information may include IP addresses, the Internet Service Provider, referring/exit pages, date/time stamps, clickstream data, login/logout times, and duration of time spent on the Registry.",
-          "P15": "zh: We use cookies (small text files sent by your computer each time you visit the Registry that are unique to your account or your browser) for various purposes, including to help us understand how often you use the Registry, where you are accessing the Registry from and events that happen on the Registry. We use a mix of automated tools and services, such as Google Analytics and MixPanel, to evaluate and improve our Registry.   We may also use third-party tracking technologies to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services."
+          "P14": "当您访问本注册库网站时（不论用个人计算机还是移动设备），我们会自动收集特定的信息，并把它存储在日志文件中。这些信息可能包括 IP 地址、互联网服务提供商、转入/退出页面、日期/时间戳、点击流数据、登录/退出次数、在注册库中停留的时间。",
+          "P15": "我们使用 Cookie（您每次访问注册库时，您的计算机发送的您的帐户或浏览器独有的小文本文件）出于若干目的，包括：帮助我们了解您使用注册库的频率，您从何处访问注册库以及您在注册库中发生的事件。我们结合使用各种自动化工具和服务（例如 Google Analytics 和 MixPanel），来评估和改进我们的注册库。我们可能还会采用第三方追踪技术来检测针对本注册库的恶意编码或攻击。上述实体可能会使用 Cookie 和其它追踪技术来实施其服务。"
         }
       },
       "WhatCollect": {
-        "Title": "zh: 5. What kind of information do we collect?",
+        "Title": "5. 我们收集什么样的信息？",
         "Text": {
-          "P1BoldUnderline": "zh: Personal Information",
-          "P2": "zh: : Information that alone or in combination with other information may be used to readily identify, contact, or locate you.  For example, your name, zip code, trial participation status and email address, are personal information you may provide to us through your use of the Registry. If you provide someone else's personal information (for example, you submit information to the registry on someone else’s behalf of or provide details of family medical history that may identify a family member) you should make them aware, to the extent that their soundness of mind allows, that you have provided the information to us.  We will only use such personal information in accordance with this privacy policy and applicable law.",
-          "P3BoldUnderline": "zh: Medical and research-related information",
-          "P4":". The medical questionnaire in the Registry will ask you for information about your experience with prion disease and willingness to participate in research.",
-          "P5BoldUnderline": "zh: Registry Usage Information",
-          "P6": "zh: : Information related to your usage of the Registry, including the pages you view, the links you click, and the length of time you visit our Registry.",
-          "P7BoldUnderline": "zh: Device Information",
-          "P8": "zh: : Information that relates to a particular computer, mobile device, or other device (e.g. iPad) that you use to access the Registry. Device information includes your IP address (which is a number assigned by an internet service provider to the computer you use to access the Internet), a device ID (which is a number assigned to a mobile phone by the device manufacturer), or the type of operating system or web browser used to access the Registry.\n"
+          "P1BoldUnderline": "个人信息",
+          "P2": "：可以单独使用或者与其它信息一起用于识别、联系您或对您进行定位的信息。例如，您通过使用注册库而提供给我们的您的姓名、邮编、试验参与状态和电子邮箱地址，这些都属于个人信息。如果您提供了其他人的个人信息（例如：您代表另一个人发送信息至注册库时，或者，您提供了家庭医疗详史而某家庭成员可能会被认出时），您应该在其心智能力允许的范围内让其知晓您向我们提供了其信息。我们仅依照本隐私政策和适用的法律来使用这些个人信息。",
+          "P3BoldUnderline": "医学和研究相关的信息",
+          "P4":"。本注册库中的医学问卷将询问关于您的朊蛋白病经历以及您是否有意愿参与研究的信息。",
+          "P5BoldUnderline": "注册库使用信息",
+          "P6": "：与您使用本注册库相关的信息，包括您浏览的页面、您点击的链接、您在注册库中停留的时间等。",
+          "P7BoldUnderline": "设备信息",
+          "P8": "：与您用来访问注册库的特定计算机、移动设备或其它设备（比如 iPad）相关的信息。设备信息包括您的 IP 地址（即由互联网服务提供商分配给您访问互联网时所用计算机的一串数字）、设备 ID（由设备生产商分配给移动设备的一串数字），或者访问注册库使用了何种操作系统或网页浏览器。"
         }
       },
       "Cookies": {
-        "Title": "zh: 6. Do we use cookies and other tracking technologies?",
+        "Title": "6. 我们使用 Cookie 和其它追踪技术吗？",
         "Text": {
-          "P1": "zh: Yes.  We use cookies for various purposes, such as to make it easier for you to navigate our Registry, to enable a faster log-in process or to better understand user interactions with the Registry.  There are two types of cookies: session and persistent cookies.",
-          "P2Underline": "zh: Session Cookies",
-          "P3": "zh: .  Session cookies exist only during a session.  They disappear from your computer or device when you close your browser or turn off your computer or device.  We use Session Cookies to allow our systems to uniquely identify you during a session or while you are logged in to the Registry.  This allows us to process your communications and requests and verify your identity after you have logged in and as you move through our Registry, and to optimize your experience in using the Registry.",
-          "P4Underline": "zh: Persistent Cookies",
-          "P5": "zh: .  Persistent Cookies remain on your computer or device after you have closed your browser or the Registry or turned off your computer or mobile device.  We use persistent cookies to track aggregate and statistical information about user activity on our Registry (see “Tracking Technologies” below).",
-          "P6Bold": "zh: Disabling Cookies.",
-          "P7": "zh:   You may opt-out of non-essential cookies by selecting “Reject Cookies” or by clicking on “Manage Preferences” in the prompt asking whether you accept the use of cookies. Non-essential cookies are those that allow us to monitor site usage and improve the site, such as Google Analytics. Other cookies, however, are essential to the website’s functionality, including those cookies that allow you to stay logged into the site while you use it. The only way to opt out of these essential cookies is to not join the site.",
-          "P8": "zh: You may also view and manage your cookie preferences by clicking on the button below.",
-          "P9Bold": "zh: Tracking Technologies.",
-          "P10": "zh:   We use automated devices, applications, and analytic tools such as Google Analytics, to evaluate usage of our Registry and improve our user experience and performance.  We may also use third-party tracking technologies, such as tCell, to detect malicious code or attacks on our Registry.  These entities may use cookies and other tracking technologies to perform their services.  We do not share your personal information with these third parties.",
-          "P11Bold": "zh: Do Not Track Signals. ",
-          "P12": "zh: We respond to browser-level Do Not Track (“",
-          "P13BoldUnderline": "zh: DNT",
-          "P14": "zh: ”) signals by disabling optional tracking technologies such as Google Analytics, however, we do not disable tracking that is essential to the website’s functionality, such as cookies that allow you to stay logged in. For information about DNT, visit ",
+          "P1": "是的。我们使用 Cookie 出于若干不同的目的，比如：提升注册库导航便利度、加快登录速度，或更好地了解用户与注册库的互动。有两种类型的 Cookie：会话性 Cookie 和持久性 Cookie。",
+          "P2Underline": "会话性 Cookie",
+          "P3": "。会话性 Cookie 仅存在于访问期间。当您关闭浏览器或关闭计算机或设备时，这些 Cookie 会从您的计算机或设备中清除。使用会话性 Cookie 时，我们的系统可以在会话期间或您登录注册库期间对您进行唯一的识别。在您登录注册库后和您在注册库中浏览时，我们可以处理您的通信和请求，验证您的身份，以及优化您的注册库使用体验。",
+          "P4Underline": "持久性 Cookie",
+          "P5": "。在您关闭浏览器或注册库或者关闭计算机或移动设备后，持久性 Cookie 仍存在于您的计算机或设备中。我们使用持久性 Cookie 来追踪关于用户注册库活动的汇总信息和统计学信息（参见下文的 “追踪技术”）。",
+          "P6Bold": "禁用 Cookie",
+          "P7": "您可以选择“拒绝 Cookie”，或在提示您是否接受使用 Cookie 时点击“管理偏好设置”来选择退出非必要的 Cookie。非必要 Cookie 是指能够让我们监控网站使用情况和改进网站的 Cookie，比如 Google Analytics。但有些 Cookie 对于网站的功能很有必要，其中包括您在使用网站期间让您保持登录状态的 Cookie。您选择不使用这些必要 Cookie 的唯一办法就是不注册我们的网站。",
+          "P8": "您还可以点击下面的按钮，来查看和管理您的 Cookie 偏好设置。",
+          "P9Bold": "追踪技术。",
+          "P10": "我们使用自动化设备、应用和诸如 Google Analytics 等分析工具，来评估我们的注册库使用情况和改进用户体验和网站性能。我们可能还会采用第三方追踪技术比如 tCell 来检测针对注册库的恶意编码或攻击。上述实体可能会使用 Cookie 和其它追踪技术来实施其服务。我们不与这些第三方分享您的个人信息。",
+          "P11Bold": "请勿追踪信号。",
+          "P12": "我们通过禁用 Google Analytics 等选用的追踪技术，来回应浏览器级别的请勿追踪（“",
+          "P13BoldUnderline": "DNT",
+          "P14": "”）信号，但我们不禁用网站功能所必须的追踪，比如保持您处于登录状态的 Cookie。关于 DNT 的信息，请访问",
           "P15Link": "www.allaboutdnt.org",
-          "P16": "zh: ."
+          "P16": "。"
         }
       },
-      "CookiePreferences": "zh: Cookie Preferences",
+      "CookiePreferences": "Cookie 偏好设置",
       "HowUse": {
-        "Title": "zh: 6. How do we use your information?",
+        "Title": "6. 我们是如何使用您的信息的？",
         "Text": {
-          "P1": "zh: We use your data for the following purposes only:",
-          "P2BoldUnderline": "zh: Identify Research Opportunities.",
-          "P3": "zh:  We use the information you provide about yourself, your medical condition, and experiences to identify opportunities for you to participate in research. If you agree, you may choose to be contacted about future research studies and/or clinical trials in which you may be eligible to participate. You may also choose not to receive these invitations or decline to participate in future studies. Please note that the research studies with whom we partner only receive aggregate, de-identified data from our participants unless you enter into a separate research consent with them. This aggregate data does not identify you personally.",
-          "P4BoldUnderline": "zh: Provide the Registry and Communicate with You.",
-          "P5": "zh:  We, together with our collaborators, vendors, and service providers, use your information to operate the Registry, respond to your inquiries, notify you of research opportunities, ask you to periodically update your profile and health status, and for other communication purposes.",
-          "P6BoldUnderline": "zh: Perform and promote research.",
-          "P7": "zh:  We will use the information you provide to generate de-identified, aggregate descriptive statistics, such as the number of people interested in participating in prion disease research in a given geographic area. These statistics may be used to perform research, such as characterizing the prevalence of prion disease, or to promote prion disease research, for example, by securing funding or collaborations. As part of this work, we may use the information you provide to verify the accuracy of the Registry data, develop scientific publications, and answer questions from IRBs, IECs or government or regulatory agencies.",
-          "P8BoldUnderline": "zh: Personalize Your Experience.",
-          "P9": "zh:  We use your information to tailor the content and information that we may send or display to you, to offer location customization, and personalized help and instructions, and to otherwise personalize your experiences while you are using the Registry.",
-          "P10BoldUnderline": "zh: Develop and Improve Our Registry.",
-          "P11": "zh:  We use your information to ensure our Registry is working as intended, to better understand how users access and use our Registry, both on an aggregated and individualized basis, to understand the features that our Registry find valuable, make improvements to our Registry, to develop new features and applications, and for other research and analytical purposes."
+          "P1": "我们仅出于以下目的使用您的数据：",
+          "P2BoldUnderline": "确定研究机会。",
+          "P3": "我们使用您提供的关于您自己、您的医学状况和经历等方面的信息，来确定您可以参与的研究机会。如果您同意，将来如有您合适参与的研究项目和/或临床试验，您可以选择允许我们与您取得联系。您也可以选择不接收这些邀请或者拒绝参与将来的研究项目。请注意，与我们合作的研究项目仅从参与者那里收集去标识的汇总数据，除非您与他们签署了独立的研究同意书。这种汇总数据不会识别出您的个人身份。",
+          "P4BoldUnderline": "提供注册库和与您通信。",
+          "P5": "我们连同我们的合作者、供应商和服务商，使用您的信息是为了运营注册库、回应您的询问、通知您研究机会、提示您定期更新您的个人资料和健康状况，以及用于其它方面的沟通。",
+          "P6BoldUnderline": "实施和推广研究。",
+          "P7": "我们使用您提供的信息产生汇总的去标识描述性统计数据，例如特定地区有兴趣参与朊蛋白病研究的人数等数据。这些统计数据可用于实施研究，比如：用于表征朊蛋白病的流行率，或者例如通过确保获取资金或合作来推广朊蛋白病的研究。作为此工作的一部分，我们可能使用您提供的信息来验证注册库数据的准确性，撰写科学刊物，回答 IRB、IEC 或者政府、监管部门提出的问题。",
+          "P8BoldUnderline": "将您的体验个性化。",
+          "P9": "我们利用您的信息为您量身定制我们向您发送或显示的内容和信息，提供位置定制、个性化帮助和指导，还可以个性化您的注册库使用体验。",
+          "P10BoldUnderline": "开发和改进我们的注册库。",
+          "P11": "我们使用您的信息的目的是：确保注册库按计划运行；基于汇总的个体化信息，更好地了解用户如何访问和使用我们的注册库；了解注册库有价值的特性并改进注册库；开发新的特性和应用；以及用于其它研究和分析目的。"
         }
       },
       "ShareWith": {
-        "Title": "zh: 7. With whom do we share your information?",
+        "Title": "7. 我们与谁分享您的信息？",
         "Text": {
-          "P1": "zh: The Prion Registry does not sell or share your information for marketing purposes, but we may share your information in the following ways: ",
-          "P2BoldUnderline": "zh: Research Partners.",
-          "P3": "zh:   After removing your name and any other readily identifiable information, Registry staff may share statistics regarding de-identified data with researchers or organizations interested in launching research studies. For example, staff may provide information regarding the number of individuals in the registry who qualify for a potential research study, based on age, genetic mutation status, location, and/or other information. This information could be used to help design a study or secure funding or collaboration commitments. Qualified researchers who have received approval from an ethics committee will also be able to post studies for which you will be notified of your eligibility. An ethics committee is a group that independently reviews and watches over all research studies involving people. The board follows local laws and codes of ethics to make sure that the rights and welfare of people taking part in research studies are protected. ",
-          "P4Bold": "zh: It will then be your choice whether to contact these researchers and share your identity in order to enroll in their studies; researchers will not be able to directly view your contact information in the registry.",
-          "P5BoldUnderline": "zh: Vendors and Service Providers.",
-          "P6": "zh:   We use various third-party vendors and service providers that assist us in providing the Registry.  For example, we may use third-party vendors to store and authenticate account credentials, store and analyze system logs, send email communications, and for hosting and storing information collected through our Registry.  We may need to share your information with these vendors and service providers to enable them to provide these services to us.  These service providers and vendors are required to only use your information to provide their services to us and in a manner consistent with this Policy.",
-          "P7BoldUnderline": "zh: Legal and Safety Reasons.",
-          "P8": "zh:   We may be required, by law, to disclose your personal information to third parties, such as in the following situations:",
-          "P9": "zh: In response to a request by law enforcement;",
-          "P10": "zh: In response to legal process, such as a subpoena, a request for discovery in a civil proceeding, or in response to a court order.",
-          "P11": "zh: We may also access, preserve, and disclose your personal information to enforce the terms of use for the Registry and protect your, our, or others’ rights, property, or safety.",
-          "P12BoldUnderline": "zh: Reorganization, Sale or Merger.",
-          "P13": "zh:   Broad Institute may be involved in a business transaction where its ownership or assets are transferred or sold to another legal entity.  This can happen in a merger with another legal entity, an acquisition by another legal entity, a corporate reorganization, or a legal proceeding (e.g. bankruptcy or receivership), where a trustee or other takes over control of the entity.  In each of these situations, your information may be transferred as part of such a transaction as permitted by law and/or contract. The successor in interest will continue to be bound by the terms of this Policy.",
-          "P14BoldUnderline": "zh: With Your Consent.",
-          "P15": "zh:   We may ask you from time to time to give us permission to share your information with other third parties not described in this section.  In each case, we will describe that third party and the purpose for sharing your information.",
-          "P16BoldUnderline": "zh: Aggregate and De-Identified Information.",
-          "P17": "zh:   We may share aggregate or de-identified information about users and their use of the Registry with third parties and publicly for reporting, funding applications, research, or similar purposes.  This information will not identify you personally."
+          "P1": "朊蛋白病注册库不会为了营销目的而出售或分享您的信息，但是我们可能通过以下方式分享您的信息：",
+          "P2BoldUnderline": "研究合作伙伴。",
+          "P3": "在删除您的姓名和任何其它可识别身份的信息后，注册库工作人员可能与有兴趣启动研究项目的研究者或组织分享去标识的统计数据。例如，工作人员可能会基于年龄、遗传学变异状态、位置和/或其它信息，提供关于注册库中某些潜在研究项目的合格人数的信息。这些信息可用于辅助研究项目的设计或有助于保障资金或合作的承诺。已获得伦理委员会批准的合格研究者还能够发布研究信息，而您将被通知是否有资格参与。伦理委员会是一个独立的团体，其职能是审核和监督所有涉及人的研究项目。伦理委员会遵从当地法律和伦理准则，确保参与研究的人员其权利和福利得到保护。",
+          "P4Bold": "接下来，则由您决定是否联系这些研究者和与之分享您的身份信息以便入组其研究项目；研究者无法直接通过注册库查看您的联系信息。",
+          "P5BoldUnderline": "供应商和服务商。",
+          "P6": "在我们提供注册库服务的过程中，我们会使用各种第三方供应商和服务商来辅助我们的工作。例如：我们可能使用第三方供应商来存储和验证帐户凭据，存储和分析系统日志，发送电子邮件，以及托管和存储我们通过注册库收集到的信息。我们可能需要与这些供应商和服务商分享您的信息，以确保他们能够为我们提供上述服务。这些服务商和供应商只能将您的信息用于为我们提供服务并且需要采取与本政策相一致的方式。",
+          "P7BoldUnderline": "法律和安全方面的原因。",
+          "P8": "如有需要，在诸如以下情况时，我们可能依照法律向第三方披露您的个人信息：",
+          "P9": "回应执法请求时；",
+          "P10": "回应诸如传唤、民事诉讼中的发现请求等法律程序时，或者回应法院命令时。",
+          "P11": "为了实施注册库服务条款和为了保护您的、我们的或者其他人的权利、财产或安全，我们也可能访问、保存和披露您的个人信息 。",
+          "P12BoldUnderline": "重组、销售或合并。",
+          "P13": "当博德研究所涉及商业交易时，在交易中标的物所有权或资产转让或卖给另一个合法实体。上述情况包括以下情形：与另一个合法实体合并，被另一个合法实体收购，公司重组，或者发生由受托人或其他人掌管了实体的控制权的法律程序时（例如破产或破产管理）。在上述每种情形中，您的信息可能作为交易的一部分依照法律和/或合同进行转移。利益继承人将继续遵守本政策的条款。",
+          "P14BoldUnderline": "征得同意。",
+          "P15": "关于向本节未提及的其它第三方分享您的信息，我们可能会不定时向您征求分享许可。不论何种情况，我们都将向您阐明所涉第三方以及为何向其分享您的信息。",
+          "P16BoldUnderline": "汇总的去标识信息。",
+          "P17": "我们可能与第三方分享用户本身及其注册库使用方面去标识的汇总信息，以及为了汇报、资金申请、研究或者类似目的而公开上述信息。这些信息不会识别出您的个人身份。"
         }
       },
       "ThirdParty": {
-        "Title": "zh: 8. What about Third-Party Sites?",
+        "Title": "8. 第三方网站的情况是怎样的？",
         "Text": {
-          "P1": "zh: The Registry may link to other websites that are not affiliated with us (“",
-          "P2BoldUnderline": "zh: Third-Party Sites",
-          "P3": "zh: ”).  We may offer those links as a convenience to you but we are not responsible for the privacy practice of those Third-Party Sites.  For example, we use Google Cloud to host the Registry and Auth0 as an authentication system to provide access to the Registry. Other sites may have different privacy practices. You should make sure you review the privacy policies of those Third-Party Sites before providing any of your information to them."
+          "P1": "本注册库可能链接到并不隶属于我们的其它网站（“",
+          "P2BoldUnderline": "第三方网站",
+          "P3": "”）。我们提供这些链接只是为了给您提供便利，但我们对这些第三方网站的隐私规范不负任何责任。例如：我们使用 Google Cloud 托管本注册库，用 Auth0 作为验证系统来提供注册库的访问许可。其它网站可能会有不同的隐私规范。在向这些第三方网站提供您的任何信息之前，务必先阅读它们的隐私政策。"
         }
       },
       "OtherUsers": {
-        "Title": "zh: 9. Can other users see my information?",
-        "Text": "zh: Users will not be able to post content that is visible to any other users of the Registry.  Your information will only be made available to us, our research partners, our service providers and vendors, and the other third parties listed in Section 7."
+        "Title": "9. 其他用户能看到我的信息吗？",
+        "Text": "用户无法发布注册库的其他任何用户可见的内容。您的信息只有我们、我们的研究合作伙伴、我们的服务商和供应商以及第 7 节中所列的其它第三方才能够获取。"
       },
       "InformationRights": {
-        "Title": "zh: 10. What rights do I have with respect to my information?",
+        "Title": "10.关于我的信息，我有哪些权利？",
         "Text": {
-          "P1": "zh: Registered users can request to update, receive a copy of, or delete information submitted to the Registry by clicking on the button below:",
-          "P2": "zh: We will respond to any user request as soon as we reasonably can, and within the time and in the manner required by law.   We may request additional information from you to verify the request.  We may not be able to accommodate all requests; for example, we may be unable to accommodate a deletion request if we are required to maintain information under law or a legal obligation or if information is used as part of a published study."
+          "P1": "注册用户能够更新、收到拷贝或者点击下面的按钮来删除您发送至注册库的信息：",
+          "P2": "我们会在法律要求的时间内和以法律许可的方式尽可能快地回应用户的请求。我们可能向您请求提供额外的信息来核实您的请求。我们可能无法满足所有请求；例如：依照法律要求或法定义务我们需要维护信息时，或者信息属于已发表研究中的一部分时，我们无法满足删除这些信息的请求。"
         }
       },
-      "DataRequest": "zh: Data Request",
+      "DataRequest": "数据请求",
       "Security": {
-        "Title": "zh: 11. What kind of security does the Registry use to protect my information?",
+        "Title": "11.本注册库采取何种安全措施保护我的信息？",
         "Text": {
-          "P1": "zh: We use reasonable security to protect the information we collect from users. These safeguards encompass administrative, technical, and physical procedures and controls, including:",
-          "P2": "zh: encryption of information in transit and at rest on servers;",
-          "P3": "zh: threat and risk assessments;",
-          "P4": "zh: system monitoring;",
-          "P5": "zh: access control;",
-          "P6": "zh: privacy and security training;",
-          "P7": "zh: secure destruction of records.",
-          "P8": "zh: However, we cannot guarantee the security of information we collect or any transmission of information over the Internet.  For this reason, you should make sure that you keep your profile account on the Registry confidential, including any user identification or password.  You should also notify us immediately if there has been any unauthorized use of your account."
+          "P1": "我们采用合理的安全措施来保护我们收集到的用户信息。这些安全防护包罗了管理、技术以及物理程序和控制等层面，具体包括：",
+          "P2": "传输的信息和服务器上静置的信息都加密；",
+          "P3": "威胁和风险评估；",
+          "P4": "系统监控；",
+          "P5": "访问控制；",
+          "P6": "隐私和安全培训；",
+          "P7": "安全地销毁记录。",
+          "P8": "但是，我们不能保证收集到的信息的安全性或者在互联网上传输信息的安全性。出于此原因，您应该确保您的注册库个人资料帐户的保密性，包括任何用户标识或密码。而且，如果您的帐户出现任何未授权的使用，应立即通知我们。"
         }
       },
       "Children": {
-        "Title": "zh: 12. Do you collect personal information from children?",
-        "Text": "zh: The Registry is not designed or intended for use by individuals under the legal age of majority in their location of residence, and we do not knowingly collect information from such individuals. If we become aware that we have information for minors, we will promptly delete it. Anyone who believes that we may have such information from individuals under the legal age of majority should contact us at the addresses provided below."
+        "Title": "12.你们收集儿童的个人信息吗？",
+        "Text": "本注册库的设计或意图不适用于未满居住地法定年龄的人，我们不在知情的情况下收集这些人的信息。如果我们意识到有未成年人的信息，我们会及时删除。任何人如果认为我们有未满法定年龄者的信息，应该通过下文提供的方式联系我们。"
       },
       "Country": {
-        "Title": "zh: 13. Is there any transfer of personal information from one country to another?",
-        "Text": "zh: We store and process the information you provide on servers in the United States.  If you are a user of the Registry, you agree to the transfer of your information to the United States and acknowledge that the laws in the United States may offer less protection to your information than the laws where you live."
+        "Title": "13.存在个人信息从一个国家转移到另一个国家的情况吗？",
+        "Text": "我们在美国的服务器上存储和处理您提供的信息。如果您是注册库用户，即表明您已同意把您的信息转移到美国，并且，您对于美国法律所提供的对您的信息的保护水平比不上您所在地的法律所提供的保护水平这一可能的事实表示认可。"
       },
       "Contact": {
-        "Title": "zh: 14. Whom do I contact if I have a question or request?",
+        "Title": "14.我有疑问或请求时联系谁？",
         "Text": {
-          "P1": "zh: You may contact us at the addresses below if you have any questions or complaints about information practices or this Policy:",
-          "P2Bold": "Broad Institute:",
-          "P3": "zh: By email to: info@prionregistry.org",
-          "P4": "zh: By mail to:",
+          "P1": "如果您有任何疑问，或者对本政策的信息规范存在任何不满，您可以通过以下方式联系我们：",
+          "P2Bold": "博德研究所：",
+          "P3": "电子邮箱：info@prionregistry.org",
+          "P4": "信件邮寄地址：",
           "P5": "The Broad Institute of MIT and Harvard",
-          "P6": "zh: 415 Main St.",
-          "P7": "zh: Cambridge, MA 02142,",
-          "P8": "zh: United States"
+          "P6": "415 Main Street",
+          "P7": "Cambridge, MA 02142",
+          "P8": "United States"
         }
       },
       "Update": {
-        "Title": "zh: 15. Will you update or change this Policy?",
+        "Title": "15.你们会更新或变更本政策吗？",
         "Text": {
-          "P1": "zh: We may modify this Policy from time to time, and you can see when the last update was by looking at the “Last Updated” date at the top of this page. If you object to any changes, you may stop accessing the Registry. Your continued use of the Registry after we post an updated Policy means that you acknowledge the updated Policy following the date it takes effect.",
-          "P2": "zh: As a general practice, we will not use your personal information for uses or purposes that are significantly different from those described in this Policy.  However, from time to time, we may need to use your information for uses not previously disclosed in this Policy.  If this should happen, we will use reasonable efforts to notify you and obtain your consent to such new uses as required by law."
+          "P1": "我们会不定时修订本政策，您可以查看本页顶部的“上次更新”日期来了解上次更新的日期。如果您反对任何变更，那您或许只能停止访问注册库。如果您在我们发布更新政策后仍继续使用本注册库，则表明您在更新政策生效之日后认可了经过更新的政策。",
+          "P2": "作为一般规范，我们不会将您的个人信息用于与本政策所述截然不同的用途或目的。但是，我们可能需要不定时将您的信息用于以前未在本政策披露过的一些用途。如果发生这种情况，我们会尽力通知您并获得您对法律要求的新用途的同意。"
         }
       },
       "EU": {
-        "Title": "zh: 16. Notice to Residents of the European Union",
+        "Title": "16.欧盟国家居民须知",
         "Text": {
-          "P1": "zh: This section outlines certain additional information that we are obligated to provide to data subjects of the European Union pursuant to the European Union General Data Protection Regulation 2016/679 and its amendments (“",
-          "P2BoldUnderline": "zh: GDPR",
-          "P3": "zh: ”).  We act as a data controller under the GDPR for the personal data that we collect from users of the Registry.  For such personal data, we rely on the following legal bases for processing such information:",
-          "P4Bold": "zh: Legitimate interests. ",
-          "P5": "zh: We may use your personal data for our legitimate interests provided that our legitimate interests are not outweighed by any prejudice or harm to your interests, rights and freedoms, including:",
-          "P6": "zh: improving our products and services and the content on Registry (for example to manage the Registry, improve the Registry, and better tailor the features, performance and support of the Registry);",
-          "P7": "zh: operating and administering the Registry;",
-          "P8": "zh: promoting the safety and security of the Registry;",
-          "P9": "zh: fulfilling your requests and communicating with you when you contact us; and ",
-          "P10": "zh: promoting the Registry.",
-          "P11Bold": "zh: Consent. ",
-          "P12": "zh: In some cases, you will give us consent to use your personal data for a specific purpose.  For example, we will rely on your consent to use technical information such as cookie data and health information to identify relevant research studies.",
-          "P13Bold": "zh: Legal obligations. ",
-          "P14": "zh: We may be required to process your personal data to comply with our legal obligations.",
-          "P15Bold": "zh: Data Retention. ",
-          "P16": "zh: We retain personal information about you for the time necessary to accomplish the purpose for which such information was collected, usually for any period thereafter as legally required or permitted by applicable law.  Our retention policies reflect applicable statute of limitation periods and legal requirements.",
-          "P17Bold": "zh: EU Data Subject Rights. ",
-          "P18": "zh: Data subjects of the European Union have the following rights:",
-          "P19Bold": "zh: The right to be informed - ",
-          "P20": "zh: You have the right to be informed about the collection and use of your personal data.",
-          "P21Bold": "zh: The right to access - ",
-          "P22": "zh: You have the right to request copies of your personal data.",
-          "P23Bold": "zh: The right to rectification - ",
-          "P24": "zh: You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete information that you believe is incomplete.",
-          "P25Bold": "zh: The right to erasure - ",
-          "P26": "zh: You have the right to request that we erase your personal data, under certain conditions.",
-          "P27Bold": "zh: The right to restrict processing - ",
-          "P28": "zh: You have the right to request that we restrict the processing of your personal data, under certain conditions.",
-          "P29Bold": "zh: The right to object to processing - ",
-          "P30": "zh: You have the right to object to our processing of your personal data, under certain circumstances.",
-          "P31Bold": "zh: The right to data portability - ",
-          "P32": "zh: You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.",
-          "P33": "zh: If you believe our processing of your personal data violates data protection laws, you have a legal right to lodge a complaint with a supervisory authority responsible for data protection.  You may do so in the EU member state of your habitual residence, your place of work or the place of the alleged violation.",
-          "P34Bold": "zh: Submitting Requests: ",
-          "P35": "zh: EU data subjects can submit requests by clicking on the “Data Request” button in section 10 above.  We will respond to all such requests within 30 days of our receipt of all information required for us to act on a request, unless there are extenuating circumstances or complex / multiple requests, in which event we may take up to 90 days to respond.  We will inform you if we expect our response to take longer than 30 days.  Please note, however, that certain personal data may be exempt from such rights pursuant to applicable data protection laws.  In addition, we will not respond to any request unless we are able to appropriately verify the requester’s identity. In addition, if we consider that a request is manifestly unfounded or excessive, we may either request a reasonable fee to deal with the request or refuse to deal with the request."
+          "P1": "本节阐述了我们根据欧盟数据保护一般规则 2016/679 及其修正案（“",
+          "P2BoldUnderline": "GDPR",
+          "P3": "”）而有义务向欧盟国家的数据对象提供的其它特定信息。根据 GDPR，对于我们从注册库用户收集到的个人数据，我们承担数据控制者的角色。对于这些个人数据，我们基于如下法律依据处理这些信息：",
+          "P4Bold": "合法利益。",
+          "P5": "我们可以为了我们的合法利益而使用您的个人数据，前提是对您的利益、权利和自由产生的任何偏见或损害没有超越我们的合法利益，包括用于：",
+          "P6": "改进我们的产品与服务以及注册库内容（例如：管理注册库，改进注册库，更好地定制注册库的特性、性能和支持） ；",
+          "P7": "运行和管理注册库；",
+          "P8": "促进注册库的安全和保障；",
+          "P9": "满足您的请求和在您联系我们时与您进行通信；以及",
+          "P10": "推广本注册库。",
+          "P11Bold": "关于同意。",
+          "P12": "在某些情况下，我们可能出于特定目的而需要征求您对我们使用您个人数据的同意。例如：我们需要获取您的同意，来使用诸如 Cookie 数据和健康信息等技术信息来发现相关的研究项目。",
+          "P13Bold": "法定义务。",
+          "P14": "为遵从我们的法定义务，我们可能需要处理您的个人数据。",
+          "P15Bold": "数据保留。",
+          "P16": "我们在必要的时间段内保留关于您的个人信息以完成我们收集此信息的目标，这段时间通常是在我们收集信息后的经法律要求的或经适用法律许可的一段时间。我们的保留政策反映了适用法规的限制期和法律要求。",
+          "P17Bold": "欧盟国家数据对象的权利。",
+          "P18": "欧盟国家的数据对象拥有以下权利：",
+          "P19Bold": "知情权 -",
+          "P20": "您有权知道您的个人数据被收集和使用的有关情况。",
+          "P21Bold": "访问权 -",
+          "P22": "您有权请求获得您个人数据的拷贝。",
+          "P23Bold": "修正权 -",
+          "P24": "您有权请求我们纠正您认为不准确的信息。您有权请求我们完善您认为不完善的信息。",
+          "P25Bold": "删除权 -",
+          "P26": "在一定条件下，您有权请求我们删除您的个人数据。",
+          "P27Bold": "限制处理权 -",
+          "P28": "在一定条件下，您有权请求我们限制对您的个人数据的处理。",
+          "P29Bold": "反对处理权 -",
+          "P30": "在一定条件下，您有权反对我们处理您的个人数据。",
+          "P31Bold": "数据迁移权 -",
+          "P32": "在一定条件下，您有权请求我们将我们收集到的数据转移给另一个组织或直接转移给您本人。",
+          "P33": "如果您认为我们对您的个人数据的处理违反了数据保护法，您有合法权利向负责数据保护的监督机关提起投诉。您可以向所属欧盟成员国的您的常居地、您的工作单位或您所指控的违法单位提起投诉。",
+          "P34Bold": "提交请求：",
+          "P35": "欧盟数据对象可以通过点击上面第 10 节中的“数据请求”按钮提交请求。我们会在收到我们采取行动所需要的所有信息后的 30 天内回应请求，除非是特殊情况或者提交的是复杂的或若干个请求，在这种情况下我们可能需要 90 天时间给出回应。如果我们预估需要 30 天以上才能给出回应，我们会通知您。但是我们想提醒您，依据适用的数据保护法，有些个人数据可能不享有上述权利。另外，除非我们能够正确核实请求者的身份，否则我们不会对请求做出回应。再者，如果我们认为一项请求是明显没有根据的或过分的，我们可以要求合理的付费或者拒绝处理这项请求。"
         }
       }
     },
     "DataRequest": {
-      "DataRequest": "zh: Data Request",
-      "SubmitRequest": "zh: Submit Request",
-      "Okay": "zh: Okay",
-      "SignInTooltip": "zh: Please sign in to start a data access request"
+      "DataRequest": "数据请求",
+      "SubmitRequest": "提交请求",
+      "Okay": "确定",
+      "SignInTooltip": "请登录后启动数据访问请求"
     }
   },
   "SDK": {
-    "SubmitButton": "zh: Submit",
-    "CloseButton": "zh: Back to Dashboard",
-    "AddButton": "zh: Add",
-    "CancelButton": "zh: Cancel",
-    "NextButton": "zh: Next <span class=\"Icon fa fa-chevron-right\"></span> ",
-    "PreviousButton": "zh:  <span class=\"Icon fa fa-chevron-left\"></span> Prev",
-    "SavingButton": "zh: Saving",
-    "EditButton": "zh: Edit",
-    "ReviewButton": "zh: View",
-    "ValidateError": "zh: Please complete all required fields.",
-    "CommunicationError": "zh: There was a problem saving your data. Please check the form and your answers before submitting.",
-    "SaveError": "zh: We're sorry but an error occurred.",
+    "SubmitButton": "提交",
+    "CloseButton": "返回控制面板",
+    "AddButton": "添加",
+    "CancelButton": "取消",
+    "NextButton": "下一步 <span class=\"Icon fa fa-chevron-right\"></span> ",
+    "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> 上一步",
+    "SavingButton": "保存",
+    "EditButton": "继续",
+    "StartButton": "开始",
+    "ReviewButton": "查看",
+    "ValidateError": "请填写所有必填字段。",
+    "CommunicationError": "保存您的数据时出现问题。提交前请检查表格和您的答案。",
+    "SaveError": "抱歉，发生了错误。",
     "ExportStudy": {
-      "Export": "zh: EXPORT"
+      "Export": "导出"
     },
     "Common": {
-      "LogoAlt": "zh: Prion Registry"
+      "LogoAlt": "朊蛋白病注册库"
     },
     "ListStudies": {
-      "StudyName": "zh: Study Name",
-      "ParticipantCount": "zh: Participant Count"
+      "StudyName": "研究名称",
+      "ParticipantCount": "参与者人数"
     },
     "ListWorkspaces": {
-      "WorkspaceName": "zh: Workspace Name",
-      "WorkspaceNamespace": "zh: Workspace Namespace"
+      "WorkspaceName": "工作区名称",
+      "WorkspaceNamespace": "工作区命名空间"
     },
     "Login": {
-      "Login": "zh: LOG IN",
-      "Logout": "zh: LOG OUT"
+      "Login": "登录",
+      "Logout": "退出"
     },
     "SignInOut": {
-      "SignIn": "zh: Sign In",
-      "SignOut": "zh: Sign Out"
+      "SignIn": "登录",
+      "SignOut": "退出"
     },
     "LanguageSelector": {
-      "LanguageSelection": "zh: language selection"
+      "LanguageSelection": "语言选择"
     },
     "UserActivities": {
-      "ActivityName": "zh: Activity",
-      "Summary": "zh: Summary",
-      "ActivityStatus": "zh: Status",
-      "ActivityDate": "zh: Created",
-      "ActivityActions": "zh: Actions"
+      "ActivityName": "活动",
+      "Summary": "摘要",
+      "ActivityStatus": "状态",
+      "ActivityDate": "已创建",
+      "ActivityActions": "操作"
     },
     "ManageParticipants": {
-      "GovernedParticipants": "zh: Governed participants",
-      "ParticipantPlaceholder": "zh: Participant",
-      "ParticipantsList": "zh: Participants"
+      "GovernedParticipants": "所辖参与者",
+      "ParticipantPlaceholder": "参与者",
+      "ParticipantsList": "参与者"
     },
     "ParticipantProfile": {
-      "OpenProfile": "zh: Profile",
-      "ViewAs": "zh: View As",
-      "ManageParticipants": "zh: Manage participants"
+      "OpenProfile": "个人资料",
+      "ViewAs": "查看形式",
+      "ManageParticipants": "管理参与者"
     },
     "UserPreferences": {
-      "UserPreferencesTitle": "zh: User preferences",
-      "UserPreferencesGender": "zh: Sex",
-      "UserPreferencesLocale": "zh: Preferred language"
+      "UserPreferencesTitle": "用户偏好",
+      "UserPreferencesGender": "性别",
+      "UserPreferencesLocale": "首选语言"
     },
     "Dashboard": {
-      "Title": "zh: Welcome to the Prion Registry!",
-      "Text": "zh: Every person who has been diagnosed with prion disease can participate in our research initiative. Share your medical and possibly genetic information so that researchers can better understand prion disease."
+      "Title": "欢迎访问朊蛋白病注册库！",
+      "Text": "任何已被诊断患有朊蛋白病的人士皆可加入这项研究倡议。为了方便研究者更好地了解朊蛋白疾病，请分享您的医学信息，如有可能也可以分享您的遗传学信息。"
     },
     "DatePicker": {
-      "Day": "zh: Choose day...",
-      "Month": "zh: Choose month...",
-      "Year": "zh: Choose year...",
-      "January": "zh: January",
-      "February": "zh: February",
-      "March": "zh: March",
-      "April": "zh: April",
-      "May": "zh: May",
-      "June": "zh: June",
-      "July": "zh: July",
-      "August": "zh: August",
-      "September": "zh: September",
-      "October": "zh: October",
-      "November": "zh: November",
-      "December": "zh: December"
+      "Day": "选择日...",
+      "Month": "选择月...",
+      "Year": "选择年...",
+      "January": "一月",
+      "February": "二月",
+      "March": "三月",
+      "April": "四月",
+      "May": "五月",
+      "June": "六月",
+      "July": "七月",
+      "August": "八月",
+      "September": "九月",
+      "October": "十月",
+      "November": "十一月",
+      "December": "十二月"
     },
     "UserMenu": {
-      "DashboardButton": "zh: My Dashboard",
-      "SignOutButton": "zh: Sign Out"
+      "DashboardButton": "我的控制面板",
+      "SignOutButton": "退出"
     },
     "DetailsPlaceholder": {
-      "PluralForm": "zh: characters remaining",
-      "SingularForm": "zh: character remaining"
+      "PluralForm": "剩余字符",
+      "SingularForm": "剩余字符"
     },
     "Title": {
-      "Default": "zh: Prion Registry",
-      "Alert": "zh: Your session will time-out soon"
+      "Default": "朊蛋白病注册库",
+      "Alert": "您的会话即将超时"
     },
     "EmailEntry": {
-      "InvalidEmail": "zh: Please enter a valid email"
+      "InvalidEmail": "请输入一个有效的电子邮件"
     },
     "Institutions": {
       "Fields": {
-        "Name": "zh: Physician Name",
-        "Institution": "zh: Institution",
-        "InstitutionAny": "zh: Institution (if any)",
-        "City": "zh: City",
-        "State": "zh: State"
+        "Name": "医师姓名",
+        "Institution": "机构",
+        "InstitutionAny": "机构（如果有）",
+        "City": "城市",
+        "State": "州"
       },
-      "PhysicianValidation": "zh: Please fill out all required fields"
+      "PhysicianValidation": "请填写所有必填字段"
     },
     "MailAddress": {
       "Fields": {
-        "Name": "zh: Full Name",
-        "Country": "zh: Country/Territory",
-        "Street1": "zh: Street Address",
-        "Street2": "zh: Apt/Floor #",
+        "Name": "全名",
+        "Country": "国家/地区",
+        "Street1": "街道地址",
+        "Street2": "公寓/楼层号",
         "State": {
-          "State": "zh: State",
-          "Province": "zh: Province",
-          "State/Province/Region": "zh: State/Province/Region"
+          "State": "州",
+          "Province": "省",
+          "State/Province/Region": "州/省/地区"
         },
-        "City": "zh: City",
-        "Phone": "zh: Phone",
+        "City": "城市",
+        "Phone": "电话",
         "Zip": {
-          "Zip Code": "zh: Zip Code",
-          "Postal Code": "zh: Postal Code",
-          "Zip/Postal Code": "zh: Zip/Postal Code"
+          "Zip Code": "邮政编码",
+          "Postal Code": "邮政编号",
+          "Zip/Postal Code": "邮政编码/编号"
         },
-        "Choose": "zh: Choose {{field}} ..."
+        "Choose": "选择 {{field}}..."
       },
       "Suggestion": {
-        "Title": "zh: We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "zh: Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "zh: Suggested:",
-        "AsEntered": "zh: As Entered:"
+        "Title": "我们已经检查了您的地址条目，并提出有助于确保送货的建议的更改。",
+        "Subtitle": "点击“建议的 (Suggested)”以更新表单。您将可以点击“按输入 (As entered)”以恢复原始输入。",
+        "Suggested": "建议的：",
+        "AsEntered": "按输入："
       },
       "Error": {
-        "InvalidAddress": "zh: Invalid address.",
-        "CannotVerify": "zh: Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "zh: An unknown error occurred while verifying address.",
-        "FieldIsRequired": "zh: {{field}} is required",
-        "FieldIsInvalid": "zh: {{field}} has an invalid value",
-        "InvalidHouseNumber": "zh: Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "zh: We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "zh: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "zh: The requested resource could not be found.",
-        "FORBIDDEN": "zh: Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "zh: Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "zh: Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "zh: Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "zh: The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "zh: This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "zh: API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "zh: At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "zh: The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "zh: Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "zh: The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "zh: The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "zh: Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "zh: Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "zh: The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "zh: Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "zh: One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "zh: Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "zh: Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "zh: Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "zh: USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "zh: International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "zh: Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "zh: Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "zh: This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "zh: No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "zh: We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "zh: We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "zh: Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "zh: Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "zh: House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "zh: We could not find the street number provided.",
-        "E.STREET.MISSING": "zh: Street is missing.",
-        "E.STREET.INVALID": "zh: Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "zh: Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "zh: Box number is invalid.",
-        "E.ADDRESS.INVALID": "zh: Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "zh: Zip not found.",
-        "E.ZIP.INVALID": "zh: Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "zh: Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "zh: Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "zh: Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "zh: Dual address.",
-        "E.STREET.MAGNET": "zh: Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "zh: Unverifiable city / state.",
-        "E.STATE.INVALID": "zh: Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "zh: Invalid delivery address.",
-        "E.TIMED_OUT": "zh: Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "zh: The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "zh: Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+        "InvalidAddress": "无效地址。",
+        "CannotVerify": "无法验证地址，请仔细检查您的地址。",
+        "UnknownVerifyError": "验证地址时发生未知错误。",
+        "FieldIsRequired": "{{field}} 为必填项",
+        "FieldIsInvalid": "{{field}} 包含无效值",
+        "InvalidHouseNumber": "找不到街道号码",
+        "INTERNAL_SERVER_ERROR": "很抱歉，出现了错误。如果问题仍然存在，请通过 support@easypost.com 与我们联系。",
+        "NOT_ACCEPTABLE": "由请求标识的资源仅能够生成响应实体，根据请求中发送的接受标头，该响应实体含有不可接受的内容特征。",
+        "NOT_FOUND": "找不到请求的资源。",
+        "FORBIDDEN": "无法访问请求的资源。",
+        "PAYMENT_REQUIRED": "资金不足。请访问 http://www.easypost.com/account/billing 以检查您的结算设置。",
+        "UNAUTHORIZED": "无法访问请求的资源，授权失败。",
+        "BAD_REQUEST": "请求格式错误。请检查内容，然后重试。",
+        "PAYMENT_GATEWAY.ERROR": "付款处理器无法处理该请求。如果问题仍然存在，请重试或通过 support@easypost.com 与我们联系。",
+        "MODE.UNAUTHORIZED": "此资源需要生产 API 密钥才能访问。",
+        "MODE.CONFLICT": "API 密钥模式与参数模式冲突。",
+        "DATE.PARSE.FAILURE": "至少一个日期格式不正确，无法解析。",
+        "PARAMETER.FORBIDDEN": "由于参数中存在禁止的属性，因此无法完成请求。",
+        "PARAMETER.REQUIRED": "缺少必需的参数。",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "传递的参数包含无效字符。",
+        "ADDRESS.PARAMETERS.INVALID": "用于创建地址的传递的参数丢失或无效。",
+        "ADDRESS.COUNTRY.INVALID": "“国家 (country)”无效，请提供 2 个字符的 ISO 国家代码。",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "找不到地址。",
+        "ADDRESS.VERIFICATION.FAILURE": "无法验证该地址。",
+        "ADDRESS.VERIFY.UNAVAILABLE": "地址验证不可用。请重试。",
+        "ADDRESS.VERIFICATION.INVALID": "所选的验证之一无效。",
+        "ADDRESS.VERIFY.FAILURE": "无法验证地址。",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "无法使用提供的运营商验证地址。",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "由于上游服务没有响应，因此无法进行地址验证。请重试。",
+        "ADDRESS.VERIFY.ONLY_US": "USPS 只能验证美国地址。",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "此帐户未启用国际验证。请联系 support@easypost.com。",
+        "ADDRESS.VERIFY.MISSING_STREET": "提供的地址数据不足。必须提供街道。",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "提供的地址数据不足。必须提供城市、州或邮编。",
+        "E.COUNTRY.UNSUPPORTED": "此模式中不支持该国家。在生产模式下尝试。",
+        "E.ENGINE.UNAVAILABLE": "没有可服务于该国家的验证引擎。请稍后再试。",
+        "E.QUERY.UNANSWERABLE": "我们无法提供该国家足够的数据来满足此请求。请稍后再试。",
+        "E.ADDRESS.NOT_FOUND": "我们找不到输入的地址。",
+        "E.SECONDARY_INFORMATION.INVALID": "辅助信息无效（公寓/套房号）。请注意，这可能会在成功请求后显示为错误。",
+        "E.SECONDARY_INFORMATION.MISSING": "辅助信息缺失（公寓/套房号）。请注意，这可能会在成功请求后显示为错误。",
+        "E.HOUSE_NUMBER.MISSING": "门牌号码缺失。",
+        "E.HOUSE_NUMBER.INVALID": "我们找不到提供的街道号码。",
+        "E.STREET.MISSING": "街道缺失。",
+        "E.STREET.INVALID": "街道无效。",
+        "E.BOX_NUMBER.MISSING": "邮箱号缺失。",
+        "E.BOX_NUMBER.INVALID": "邮箱号无效。",
+        "E.ADDRESS.INVALID": "城市/州/邮政编码无效。",
+        "E.ZIP.NOT_FOUND": "找不到邮政编码。",
+        "E.ZIP.INVALID": "邮政编码无效。",
+        "E.ZIP.PLUS4.NOT_FOUND": "找不到邮政编码 + 4。",
+        "E.ADDRESS.MULTIPLE": "相同的邮政编码找到多个地址。",
+        "E.ADDRESS.INSUFFICIENT": "地址数据不足/不正确。",
+        "E.ADDRESS.DUAL": "双地址。",
+        "E.STREET.MAGNET": "街道地址不明确。",
+        "E.CITY_STATE.INVALID": "无法验证城市/州。",
+        "E.STATE.INVALID": "州无效。",
+        "E.ADDRESS.DELIVERY.INVALID": "收货地址无效。",
+        "E.TIMED_OUT": "超出最大超时时间。",
+        "E.TIME_ZONE.UNAVAILABLE": "时区服务当前不可用。",
+        "E.PO_BOX.INTERNATIONAL": "无法验证国际邮政信箱。请注意，这可能会在成功请求后显示为错误。"
       }
     },
-    "TooltipAlt": "zh: Information"
+    "TooltipAlt": "信息"
   }
 }

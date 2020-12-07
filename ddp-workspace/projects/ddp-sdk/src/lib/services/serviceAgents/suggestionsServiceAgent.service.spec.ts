@@ -9,6 +9,7 @@ import { DrugSuggestionResponse } from '../../models/drugSuggestionResponse';
 import { CancerSuggestionResponse } from '../../models/cancerSuggestionResponse';
 import { CookieService } from 'ngx-cookie';
 import { of } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('SuggestionServiceAgent Test', () => {
     let service: SuggestionServiceAgent;
@@ -26,7 +27,7 @@ describe('SuggestionServiceAgent Test', () => {
         // called within the parent class
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
         // const sessionSpy: jasmine.SpyObj<SessionMementoService> = jasmine.createSpyObj('SessionMementoService', ['sessionObservable']);
-        const sessionSpy = new SessionMementoService();
+        const sessionSpy = new SessionMementoService({} as TranslateService, config);
         spyOnProperty(sessionSpy, 'sessionObservable').and.returnValue(of({ participanteGuid: 'USERGUID' }));
 
         TestBed.configureTestingModule({
