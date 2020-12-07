@@ -24,7 +24,7 @@ export class ActivityDateNavyValidationRule extends ActivityAbstractValidationRu
         return true;
     }
 
-    public isDateReadyForSave(value: DatePickerValue): boolean {
+    private isDateReadyForSave(value: DatePickerValue): boolean {
         if (value.year === 0 || value.month === 0 || value.day === 0) {
             return false;
         }
