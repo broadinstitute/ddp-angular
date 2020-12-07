@@ -151,7 +151,8 @@
         "host": "to host the Registry",
         "analytics": "as an analytics tool"
       },
-      "Last_updated": "Last updated:"
+      "Last_updated": "Last updated: ",
+      "lastUpdatedDate": "8/14/20"
     }
   },
   "Toolkit": {

@@ -3,7 +3,7 @@ import { ActivityQuestionBlock } from '../../../models/activity/activityQuestion
 
 let validator: ActivityAgeRangeValidationRule;
 
-describe('ActivityAgeRangeValidationRule Test Common year', () => {
+describe('ActivityAgeRangeValidationRule: Common year', () => {
     beforeAll(() => {
         const baseTime = new Date(2019, 7, 5);
         jasmine.clock().uninstall();
@@ -177,7 +177,7 @@ describe('ActivityAgeRangeValidationRule Test Common year', () => {
     });
 });
 
-describe('ActivityAgeRangeValidationRule Test Leap year', () => {
+describe('ActivityAgeRangeValidationRule: Leap year', () => {
     it('should return false if user was born in leap year and user is too young', () => {
         const baseTime = new Date(2021, 1, 28);
         jasmine.clock().uninstall();
