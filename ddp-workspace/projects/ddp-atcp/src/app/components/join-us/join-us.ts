@@ -1,10 +1,12 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import {
@@ -21,6 +23,8 @@ import {
 } from 'ddp-sdk';
 
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
+import { UserInfo } from '../../models/userInfo';
+import * as Routes from '../../router-resources';
 
 @Component({
   selector: `app-join-us`,
@@ -55,9 +59,14 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   public instanceGuid: string;
   public stickySubtitle: string;
   public show = true;
+
   private anchor: CompositeDisposable = new CompositeDisposable();
 
+  private readonly MAILING_LIST_WORKFLOW = 'MAILING_LIST';
+
   constructor(
+    private hostEl: ElementRef,
+    private router: Router,
     private multiGovernedUserService: MultiGovernedUserService,
     private cdr: ChangeDetectorRef,
     @Inject('toolkit.toolkitConfig')
@@ -69,7 +78,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     private temporaryUserService: TemporaryUserServiceAgent,
     private workflow: WorkflowServiceAgent,
     private auth0: Auth0AdapterService,
-    private loggingService: LoggingService,
+    private loggingService: LoggingService
   ) {}
 
   public ngOnInit(): void {
@@ -120,7 +129,18 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   }
 
   public navigate(response: ActivityResponse): void {
+    if (response.next === this.MAILING_LIST_WORKFLOW) {
+      const user = this.getName();
+
+      this.router.navigate([Routes.MailingList], {
+        queryParams: user,
+      });
+
+      return;
+    }
+
     const convertedResponse = this.convertWorkflowResponse(response);
+
     const sub = this.workflowBuilder
       .getCommand(convertedResponse)
       .execute()
@@ -134,20 +154,37 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   private convertWorkflowResponse(
     response: ActivityResponse
   ): ActivityResponse {
-    this.loggingService.logEvent('Received a response after submitting prequal', response);
+    this.loggingService.logEvent(
+      'Received a response after submitting prequal',
+      response
+    );
 
     if (!response.allowUnauthenticated) {
       const registrationActivityResponse = new ActivityResponse('REGISTRATION');
 
-      this.loggingService.logEvent(`
+      this.loggingService.logEvent(
+        `
         Activity response doesn't allow unauthenticated users to proceed,
         creating a REGISTRATION type activity response
-      `, registrationActivityResponse);
+      `,
+        registrationActivityResponse
+      );
 
       return registrationActivityResponse;
     } else {
       return response;
     }
+  }
+
+  private getName(): UserInfo {
+    const inputs = this.hostEl.nativeElement.querySelectorAll(
+      'input.mat-input-element'
+    );
+
+    return {
+      firstName: inputs[0].value,
+      lastName: inputs[1].value,
+    };
   }
 
   public signIn(): void {

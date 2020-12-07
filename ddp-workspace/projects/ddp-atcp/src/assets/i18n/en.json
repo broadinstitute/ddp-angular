@@ -598,9 +598,9 @@
         "LoadingError": "We're sorry, but an error has occurred.",
         "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "Join",
-        "Text": "Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "Stay informed"
+        "SubmitButton": "Join Mailing List",
+        "Text": "Provide us with an email address and we will keep you informed on the progress of the Global A-T Family Data Platform.",
+        "Title": "Sign up to stay informed"
       },
       "SessionWillExpire": {
         "Continue": "Continue",

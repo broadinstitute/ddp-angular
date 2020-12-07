@@ -27,6 +27,7 @@ import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-
 import { SelfEnrolledUserGuard } from './guards/self-enrolled-user.guard';
 import { MultiGovernedUserGuard } from './guards/multi-governed-user.guard';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,11 @@ const routes: Routes = [
     path: RouterResource.Survey,
     component: SurveyComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+  },
+  {
+    path: RouterResource.MailingList,
+    component: MailingListComponent,
+    canActivate: [IrbGuard, BrowserGuard],
   },
   {
     path: RouterResource.AccountActivated,

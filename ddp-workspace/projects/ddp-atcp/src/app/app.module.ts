@@ -1,7 +1,7 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -41,6 +41,7 @@ import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -115,6 +116,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     AppRoutingModule,
     DdpModule,
@@ -165,6 +167,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DashboardComponent,
     UserActivitiesComponent,
     ActivityRedirectComponent,
+    MailingListComponent,
   ],
   entryComponents: [PopupMessageComponent],
   providers: [
