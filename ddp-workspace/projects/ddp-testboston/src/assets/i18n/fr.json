@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Revenir à la recherche de patient",
       "Text": "Code d’invitation du patient :"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[FR] Entered date is invalid"
     }
   }
 }

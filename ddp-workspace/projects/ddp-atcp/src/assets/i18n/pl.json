@@ -537,7 +537,10 @@
       "UserPreferencesLocale": "pl_Preferred language",
       "UserPreferencesTitle": "pl_User preferences"
     },
-    "ValidateError": "pl_Submission cannot proceed. Please review messages in form for details."
+    "ValidateError": "pl_Submission cannot proceed. Please review messages in form for details.",
+    "Validators": {
+      "DateNavyValidationRule": "[PL] Entered date is invalid"
+    }
   },
   "Statistics": {
     "Title": "pl_The A-T Family Data Platform by the Numbers",

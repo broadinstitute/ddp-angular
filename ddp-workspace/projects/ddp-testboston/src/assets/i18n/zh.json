@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "返回受试者查找",
       "Text": "受试者邀请代码："
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[ZH] Entered date is invalid"
     }
   }
 }

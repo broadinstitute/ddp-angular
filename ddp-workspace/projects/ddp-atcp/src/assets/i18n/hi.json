@@ -547,7 +547,10 @@
       "UserPreferencesLocale": "hi_Preferred language",
       "UserPreferencesTitle": "hi_User preferences"
     },
-    "ValidateError": "hi_Submission cannot proceed. Please review messages in form for details."
+    "ValidateError": "hi_Submission cannot proceed. Please review messages in form for details.",
+    "Validators": {
+      "DateNavyValidationRule": "[HI] Entered date is invalid"
+    }
   },
   "Statistics": {
     "Title": "hi_The A-T Family Data Platform by the Numbers",

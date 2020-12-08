@@ -537,7 +537,10 @@
       "UserPreferencesLocale": "ru_Preferred language",
       "UserPreferencesTitle": "ru_User preferences"
     },
-    "ValidateError": "ru_Submission cannot proceed. Please review messages in form for details."
+    "ValidateError": "ru_Submission cannot proceed. Please review messages in form for details.",
+    "Validators": {
+      "DateNavyValidationRule": "Введена некорректная дата"
+    }
   },
   "Statistics": {
     "Title": "ru_The A-T Family Data Platform by the Numbers",

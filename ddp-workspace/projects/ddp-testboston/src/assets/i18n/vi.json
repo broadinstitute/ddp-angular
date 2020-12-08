@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Quay về Trang tìm kiếm",
       "Text": "Mã mời:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[VI] Entered date is invalid"
     }
   }
 }
