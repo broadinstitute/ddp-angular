@@ -51,37 +51,42 @@ export class SurveyComponent implements OnInit {
       this.userFirstName = data.profile.firstName;
     });
 
-    this.getActivities().subscribe(() => {
-      const currentActivity = this.activityService.currentActivity;
+    this.getActivities()
+      .pipe(
+        tap(() => {
+          const currentActivity = this.activityService.currentActivity;
 
-      if (currentActivity && currentActivity.instanceGuid) {
-        this.instanceGuid = currentActivity.instanceGuid;
-        this.isConsentEditActivity = currentActivity.isConsentEdit;
-        this.checkIfAssentByInstanceGuid(this.instanceGuid);
-      } else {
-        const nextActivityInstanceGuid = this.findNextActivity();
+          if (currentActivity && currentActivity.instanceGuid) {
+            this.instanceGuid = currentActivity.instanceGuid;
+            this.isConsentEditActivity = currentActivity.isConsentEdit;
+            this.checkIfAssentByInstanceGuid(this.instanceGuid);
+          } else {
+            const nextActivityInstanceGuid = this.findNextActivity();
 
-        if (!nextActivityInstanceGuid) {
-          this.multiGovernedUserService.isMultiGoverned$
-            .pipe(
-              filter(isMultiGoverned => isMultiGoverned !== null),
-              take(1)
-            )
-            .subscribe(isMultiGoverned => {
-              this.router.navigateByUrl(
-                isMultiGoverned
-                  ? RouterResources.ParticipantList
-                  : RouterResources.Dashboard
-              );
-            });
+            if (!nextActivityInstanceGuid) {
+              this.multiGovernedUserService.isMultiGoverned$
+                .pipe(
+                  filter(isMultiGoverned => isMultiGoverned !== null),
+                  take(1)
+                )
+                .subscribe(isMultiGoverned => {
+                  this.router.navigateByUrl(
+                    isMultiGoverned
+                      ? RouterResources.ParticipantList
+                      : RouterResources.Dashboard
+                  );
+                });
 
-          return;
-        }
+              return;
+            }
 
-        this.instanceGuid = nextActivityInstanceGuid;
-        this.checkIfAssentByInstanceGuid(this.instanceGuid);
-      }
-    });
+            this.instanceGuid = nextActivityInstanceGuid;
+            this.checkIfAssentByInstanceGuid(this.instanceGuid);
+          }
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   public onChangeActivity(activity: ActivityInstance): void {
