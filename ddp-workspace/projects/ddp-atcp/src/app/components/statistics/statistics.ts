@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { CompositeDisposable, LanguageService } from 'ddp-sdk';
-
 import {
+  CompositeDisposable,
+  LanguageService,
   StatisticsServiceAgent,
   Statistic,
-  StatisticsResponse,
-  StatisticTypes,
-} from '../../services/serviceAgents/statisticsServiceAgent.service';
+} from 'ddp-sdk';
+
+import { StatisticTypes } from '../../models/statistic-types';
 
 interface CountryDistribution {
   countryName: string;
@@ -51,7 +51,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private readonly anchor = new CompositeDisposable();
 
   constructor(
-    private statisticsService: StatisticsServiceAgent,
+    private statisticsService: StatisticsServiceAgent<StatisticTypes>,
     private languageService: LanguageService
   ) {}
 
@@ -86,7 +86,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   private convertStatisticsResponse(
-    statistics: StatisticsResponse
+    statistics: Statistic<StatisticTypes>[]
   ): FormattedStatistics {
     const stats = {} as FormattedStatistics;
 
@@ -124,7 +124,9 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return stats;
   }
 
-  private getTotalParticipantsCount(distributionStatistic: Statistic): number {
+  private getTotalParticipantsCount(
+    distributionStatistic: Statistic<StatisticTypes>
+  ): number {
     if (!distributionStatistic.statistics.length) {
       return 0;
     }
@@ -134,12 +136,14 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     }, 0);
   }
 
-  private getCountriesCount(distributionStatistic: Statistic): number {
+  private getCountriesCount(
+    distributionStatistic: Statistic<StatisticTypes>
+  ): number {
     return distributionStatistic.statistics.length;
   }
 
   private getGenomeStudyParticipantsCount(
-    genomeStudyStatistic: Statistic
+    genomeStudyStatistic: Statistic<StatisticTypes>
   ): number {
     if (!genomeStudyStatistic.statistics.length) {
       return 0;
@@ -148,7 +152,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return +genomeStudyStatistic.statistics[0].data.count;
   }
 
-  private getKitsCount(kitsStatistic: Statistic): number {
+  private getKitsCount(kitsStatistic: Statistic<StatisticTypes>): number {
     if (!kitsStatistic.statistics.length) {
       return 0;
     }
@@ -157,7 +161,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   private getParticipantsCount(
-    participantsStatistic: Statistic,
+    participantsStatistic: Statistic<StatisticTypes>,
     fieldName: string
   ): number {
     const governedParticipantsStatistic = participantsStatistic.statistics.find(
@@ -172,7 +176,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   private getCountriesDistribution(
-    distributionStatistic: Statistic,
+    distributionStatistic: Statistic<StatisticTypes>,
     totalParticipantsCount: number
   ): CountryDistribution[] {
     const unit = this.DISTRIBUTION_LIST_WIDTH / totalParticipantsCount;
