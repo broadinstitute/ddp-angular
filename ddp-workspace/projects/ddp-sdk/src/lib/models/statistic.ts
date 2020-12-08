@@ -1,6 +1,8 @@
-export interface Statistic {
+import { ActivityPicklistOption } from './activity/activityPicklistOption';
+
+export interface Statistic<T> {
   configuration: {
-    type: string;
+    type: T;
     questionStableId: string | null;
     answerValue: string | null;
   };
@@ -8,7 +10,7 @@ export interface Statistic {
     name: string;
     data: {
       count: string;
-      optionDetails?: any;
+      optionDetails?: ActivityPicklistOption;
     };
   }[];
 }
