@@ -6,7 +6,7 @@ import { DateService } from '../../../dateService.service';
 
 let validator: ActivityDateNavyValidationRule;
 const dateService = new DateService();
-const MESSAGE = 'Entered date is invalid';
+const MESSAGE = 'SDK.Validators.DateNavyValidationRule';
 
 describe('ActivityDateNavyValidationRule', () => {
     it('should initialize validator', () => {
