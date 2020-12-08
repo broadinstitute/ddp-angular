@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Возврат к поиску субъекта",
       "Text": "Код приглашения субъекта:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Введена некорректная дата"
     }
   }
 }

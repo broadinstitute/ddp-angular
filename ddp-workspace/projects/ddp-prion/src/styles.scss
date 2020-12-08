@@ -86,6 +86,10 @@ html[dir='rtl'] {
     font-weight: 500 !important;
 }
 
+html[dir='rtl'] .Accent {
+    font-weight: 600 !important;
+}
+
 .Italic {
     font-weight: 300 !important;
     font-style: italic;
@@ -3610,6 +3614,10 @@ toolkit-cookies-preferences-modal {
   .mat-tab-body-content {
     padding: 10px 0 10px 20px;
     height: 450px;
+  }
+
+  html[dir='rtl'] .mat-tab-body-content {
+    padding: 10px 20px 10px 0;
   }
 
   .mat-table {

@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "العودة إلى البحث عن مشارك",
       "Text": "رمز الدعوة الخاص بمشترك:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[AR] Entered date is invalid"
     }
   }
 }

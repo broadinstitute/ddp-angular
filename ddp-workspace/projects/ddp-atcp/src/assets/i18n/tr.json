@@ -310,6 +310,9 @@
     },
     "UserMenu": {
       "SignOutButton": "Oturumu Kapat"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[TR] Entered date is invalid"
     }
   },
   "Toolkit": {

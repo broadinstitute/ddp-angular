@@ -178,6 +178,7 @@ import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.compo
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
+import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -294,6 +295,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LanguageService,
     DisplayLanguagePopupServiceAgent,
     StudyDetailServiceAgent,
+    StatisticsServiceAgent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

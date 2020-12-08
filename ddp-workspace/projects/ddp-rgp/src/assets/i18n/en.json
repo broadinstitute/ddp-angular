@@ -1129,6 +1129,9 @@
                 "State": "State"
             },
             "PhysicianValidation": "Please fill out all required fields"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid"
         }
     }
 }

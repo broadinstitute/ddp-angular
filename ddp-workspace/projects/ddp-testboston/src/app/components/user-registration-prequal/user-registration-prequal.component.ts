@@ -20,7 +20,6 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public error: DdpError | null = null;
   public errorType = ErrorType;
-  public isLoading = false;
   @ViewChild('captcha', { static: false }) private captcha: RecaptchaComponent;
   private anchor = new Subscription();
 
@@ -36,8 +35,8 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
     // if there is a language mismatch or the language is changed we need to force
     // a reload of application to initialize recaptcha with the same language as the translation service
     this.anchor.add(merge(
-        of(this.translateService.currentLang).pipe(filter(currentLang => currentLang !== this.recaptchaLanguage)),
-        this.translateService.onLangChange.asObservable()
+      of(this.translateService.currentLang).pipe(filter(currentLang => currentLang !== this.recaptchaLanguage)),
+      this.translateService.onLangChange.asObservable()
     ).subscribe(() => {
       window.location.reload();
     }));
@@ -82,15 +81,15 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
   }
 
   private checkInvitation(invitationId: string, recaptchaToken: string, zip: string): void {
-    this.isLoading = true;
+    this.formGroup.disable();
     this.invitationService.check(invitationId, recaptchaToken, zip).pipe(
       take(1)
     ).subscribe(
       () => this.auth0.signup({ invitation_id: invitationId }),
       (error) => {
+        this.formGroup.enable();
         this.captcha.reset();
         this.error = error;
-        this.isLoading = false;
       }
     );
   }
