@@ -11,6 +11,7 @@ import { getTestScheduler, hot } from 'jasmine-marbles';
 import { By } from '@angular/platform-browser';
 import { ActivityLengthValidationRule } from '../../services/activity/validators/activityLengthValidationRule';
 import { ConfigurationService } from '../../services/configuration.service';
+import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 
 @Component({
   selector: 'ddp-activity-answer',
@@ -49,7 +50,8 @@ describe('ActivityQuestionComponent', () => {
         { provide: 'ddp.config', useValue: configServiceSpy }
       ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        TranslateTestingModule
       ]
     }).compileComponents();
   }));
