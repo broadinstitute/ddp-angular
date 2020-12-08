@@ -5,8 +5,10 @@ import { Statistic } from '../../models/statistic';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
 
 @Injectable()
-export class StatisticsServiceAgent extends SessionServiceAgent<Statistic[]> {
-  getStatistics(): Observable<Statistic[]> {
+export class StatisticsServiceAgent<T> extends SessionServiceAgent<
+  Statistic<T>[]
+> {
+  getStatistics(): Observable<Statistic<T>[]> {
     return this.getObservable(
       `/studies/${this._configuration.studyGuid}/statistics`
     );
