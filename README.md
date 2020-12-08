@@ -35,15 +35,15 @@ javascript config files.  You must build these config files from the top-level d
 
 ```shell
 # generate study specific configs.   Note semi-redundant args for angular dir, image name, and study guid
-./build-study.sh [version] [env] angio ANGIO --config
-./build-study.sh [version] [env] brain cmi-brain --config
-./build-study.sh [version] [env] mbc cmi-mbc --config
-./build-study.sh [version] [env] osteo CMI-OSTEO --config
-./build-study.sh [version] [env] testboston testboston --config
-./build-study.sh [version] [env] mpc cmi-mpc --config
-./build-study.sh [version] [env] atcp atcp --config
-./build-study.sh [version] [env] rgp rgp --config
-./build-study.sh [version] [env] prion PRION --config
+./build-study.sh [version] [env] . angio ANGIO --config
+./build-study.sh [version] [env] . atcp atcp --config
+./build-study.sh [version] [env] . brain cmi-brain --config
+./build-study.sh [version] [env] . mbc cmi-mbc --config
+./build-study.sh [version] [env] . mpc cmi-mpc --config
+./build-study.sh [version] [env] . osteo CMI-OSTEO --config
+./build-study.sh [version] [env] . prion PRION --config
+./build-study.sh [version] [env] . rgp rgp --config
+./build-study.sh [version] [env] . testboston testboston --config
 ```
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
@@ -55,7 +55,7 @@ Once rendered, you can hand-edit the `pepper-angular/ddp-workspace/projects/[ddp
 #### Building, deploying, and interacting with the frontend
 
 * Install [nvm](https://github.com/creationix/nvm) to manage different versions of node and npm
-* `nvm use 10.16.0`
+* `nvm use 12.16.1`
 * `npm install -g @angular/cli@10.2.0` (if you're working on different angular projects, you may first need a `npm uninstall -g @angular/cli`)
 * `cd ddp-workspace`
 * `npm cache clean`, `rm -fr node_modules` and `rm -fr dist` (can often be skipped)

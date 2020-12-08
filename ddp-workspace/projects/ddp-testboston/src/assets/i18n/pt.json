@@ -607,6 +607,9 @@
     "SubjectPanel": {
       "Link": "Voltar a procurar participante",
       "Text": "Código de convite do participante:"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[PT] Entered date is invalid"
     }
   }
 }
