@@ -510,12 +510,34 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * @record
+     */
+    function Language() { }
+    if (false) {
+        /** @type {?} */
+        Language.prototype.code;
+        /** @type {?} */
+        Language.prototype.name;
+    }
+    /** @type {?} */
+    var languagesList;
     /** @type {?} */
     var onTranslate = (/**
      * @param {?} dictionary
+     * @param {?} langCode
      * @return {?}
      */
-    function (dictionary) {
+    function (dictionary, langCode) {
+        /** @type {?} */
+        var selectedLang = languagesList.find((/**
+         * @param {?} lang
+         * @return {?}
+         */
+        function (lang) { return lang.code === langCode; }));
+        if (selectedLang) {
+            $('#current-language').text(selectedLang.name);
+        }
         $('[data-translate]').each((/**
          * @param {?} i
          * @param {?} el
@@ -563,7 +585,7 @@
          * @return {?}
          */
         function (data) {
-            onTranslate(data);
+            onTranslate(data, language);
             cb(data);
         }));
     });
@@ -579,6 +601,7 @@
          * @return {?}
          */
         function (languages) {
+            languagesList = languages;
             /** @type {?} */
             var $container = $('.languages');
             /** @type {?} */
@@ -588,7 +611,12 @@
              * @return {?}
              */
             function (item) {
-                items += '<li><a class="green-hover change-language" href="#" data-language="' + item.code.split('-')[0] + '">' + item.name + '</a></li>';
+                items +=
+                    '<li><a class="green-hover change-language" href="#" data-language="' +
+                        item.code.split('-')[0] +
+                        '">' +
+                        item.name +
+                        '</a></li>';
             }));
             $container.empty();
             $container.append(items);
