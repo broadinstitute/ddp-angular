@@ -71,7 +71,8 @@ export class MultiGovernedUserService {
         );
 
         if (!selfDescribeBlock) {
-          console.error(
+          this.loggingService.logError(
+            this.LOG_SOURCE,
             `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`
           );
         }
