@@ -310,6 +310,9 @@
     },
     "UserMenu": {
       "SignOutButton": "Sair"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[PT] Entered date is invalid"
     }
   },
   "Toolkit": {
