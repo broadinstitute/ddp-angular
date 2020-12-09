@@ -24,8 +24,8 @@ describe('ActivityBooleanAnswer', () => {
     @Component({
         template: `
         <ddp-activity-boolean-answer [block]="block"
-                                       [readonly]="readonly"
-                                       (valueChanged)="changed($event)">
+                                     [readonly]="readonly"
+                                     (valueChanged)="changed($event)">
         </ddp-activity-boolean-answer>`
     })
     class TestHostComponent {

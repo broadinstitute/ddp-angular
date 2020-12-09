@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { ActivityContentBlock } from '../../models/activity/activityContentBlock';
 import { ActivityContentComponent } from './activityContent.component';
 
-fdescribe('ActivityContentComponent', () => {
+describe('ActivityContentComponent', () => {
     const contentBlock = {
         content: 'Some text',
         title: null
