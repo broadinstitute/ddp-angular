@@ -5,7 +5,7 @@ These libraries and projects were generated with [Angular CLI](https://github.co
 
 ## Initial steps
 ```
-nvm use 12.16.1
+nvm use 12.20.0
 npm install -g @angular/cli@10.2.0
 npm install
 ```
