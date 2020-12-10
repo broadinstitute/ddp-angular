@@ -214,7 +214,7 @@ var DDP_ENV = {
          DDP_ENV['projectGAToken'] = "UA-172530202-1";
     {{end}}
     {{if eq $environment "prod"}}
-        DDP_ENV['assetsBucketName'] = "prod-prion-assets";
+        DDP_ENV['assetsBucketName'] = "prion-assets";
         DDP_ENV['auth0ClientId'] = "4XeiPxTKb90dXmWmDX87u8Ul7b02G2Py";
         DDP_ENV['auth0Domain'] = "prion-production.us.auth0.com";
         DDP_ENV['auth0Audience'] = "prion-production.us.auth0.com";
