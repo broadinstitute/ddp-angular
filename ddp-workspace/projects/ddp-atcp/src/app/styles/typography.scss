@@ -24,3 +24,11 @@ a {
 @mixin font-McLaren {
   font-family: 'McLaren', cursive;
 }
+
+.feeding-survey .formItem-label {
+  display: block;
+
+  margin-top: 1em;
+
+  font-size: 18px;
+}

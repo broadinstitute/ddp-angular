@@ -124,7 +124,7 @@
     </ul>
   </nav>
   <app-activity-progress-bar
-    title="Common.Navigation.MedicalHistoryQuestionnaire"
+    [title]="isMedicalHistory ? 'Common.Navigation.MedicalHistoryQuestionnaire' : 'Common.Navigation.FeedingSurvey'"
     *ngIf="isProgressBarVisible"
     automation-id="activity-progress-bar"
   ></app-activity-progress-bar>

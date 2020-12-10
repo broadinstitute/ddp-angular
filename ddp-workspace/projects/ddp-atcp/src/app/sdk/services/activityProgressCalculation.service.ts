@@ -6,14 +6,14 @@ import { ActivityCodes } from '../constants/activityCodes';
 @Injectable()
 export class ActivityProgressCalculationService {
   private progress = new BehaviorSubject(null);
-  private activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  private activitiesToShowProgress = [ActivityCodes.MEDICAL_HISTORY, ActivityCodes.FEEDING];
   private sectionIndex: number | null;
   private sectionsAmount: number;
   private lastStepWeight: number;
   private stepWeights: Array<number>;
 
   public setProgress(activity: ActivityForm): void {
-    if (activity.activityCode === this.activityToShowProgress) {
+    if (this.activitiesToShowProgress.includes(activity.activityCode as ActivityCodes)) {
       this.sectionIndex = activity.sectionIndex;
 
       if (activity.readonly) {
@@ -29,7 +29,7 @@ export class ActivityProgressCalculationService {
   }
 
   private calculateStepWeights(): void {
-    const stepsAmount = this.sectionsAmount - 1;
+    const stepsAmount = this.sectionsAmount;
     const stepWeightFloat = (100 / (stepsAmount));
     let stepWeightRounded = Math.ceil(stepWeightFloat);
     if ((stepWeightRounded * (stepsAmount - 1)) > 100) {
@@ -46,7 +46,7 @@ export class ActivityProgressCalculationService {
   }
 
   public updateProgress(activity: ActivityForm, sectionIndex: number): void {
-    if (activity.activityCode === this.activityToShowProgress
+    if (this.activitiesToShowProgress.includes(activity.activityCode as ActivityCodes)
           && this.shouldUpdate(sectionIndex)) {
       this.sectionIndex = sectionIndex;
       this.calculateProgress(sectionIndex);

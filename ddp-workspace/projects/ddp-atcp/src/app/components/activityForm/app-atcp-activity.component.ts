@@ -25,7 +25,7 @@ import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-atcp-activity',
   template: `
-  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
+  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle, 'feeding-survey': model.activityCode === ActivityCodes.FEEDING}">
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
                 <ddp-subject-panel></ddp-subject-panel>
@@ -364,8 +364,8 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
     if (this.model.readonly) {
       this.navigateToConsole();
     } else {
-      this.showThankYouPopup();
       this.flush();
+      this.showThankYouPopup();
     }
   }
 

@@ -100,7 +100,8 @@
 
       <button
         *ngIf="
-          activity.instanceGuid === currentActivity?.instanceGuid &&
+          (activity.instanceGuid === currentActivity?.instanceGuid ||
+            activity.previousInstanceGuid !== null) &&
           activity.statusCode === statusCodes.IN_PROGRESS
         "
         class="BtnFilled BtnFilled--blue"

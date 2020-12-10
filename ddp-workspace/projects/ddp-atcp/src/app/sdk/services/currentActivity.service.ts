@@ -7,6 +7,7 @@ import { ActivityCodes } from '../constants/activityCodes';
 
 @Injectable()
 export class CurrentActivityService implements OnDestroy {
+  activitiesToShowProgress = [ActivityCodes.MEDICAL_HISTORY, ActivityCodes.FEEDING];
 
   private activity = new BehaviorSubject(null);
  private anchor: CompositeDisposable = new CompositeDisposable();
@@ -29,7 +30,7 @@ export class CurrentActivityService implements OnDestroy {
                                activityGuid: string,
                                activity: ActivityForm,
                                sectionIndex: number): void {
-    if (activity.activityCode === ActivityCodes.MEDICAL_HISTORY) {
+    if (this.activitiesToShowProgress.includes(activity.activityCode as ActivityCodes)) {
       const initialSectionIndex = activity.sectionIndex;
 
       this.activityProgressCalculationService.updateProgress(activity, sectionIndex);

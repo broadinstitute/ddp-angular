@@ -26,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private anchor = new CompositeDisposable();
   private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
-  activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  isMedicalHistory = false;
+  activitiesToShowProgress = [ActivityCodes.MEDICAL_HISTORY, ActivityCodes.FEEDING];
   isMultiGoverned: boolean;
   private readonly LOG_SOURCE = 'HeaderComponent';
   private prevParticipantGuid: string;
@@ -70,9 +71,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.anchor.addNew(userProfileSubs$);
 
     const currentActivity$ = this.currentActivityService.getCurrentActivity().subscribe(x => {
-      x && x.activityCode === this.activityToShowProgress
-        ? this.isProgressBarVisible = true
-        : this.isProgressBarVisible = false;
+      this.isProgressBarVisible = x && this.activitiesToShowProgress.includes(x.activityCode as ActivityCodes);
+      this.isMedicalHistory = x && x.activityCode === ActivityCodes.MEDICAL_HISTORY;
     });
     this.anchor.addNew(currentActivity$);
 
