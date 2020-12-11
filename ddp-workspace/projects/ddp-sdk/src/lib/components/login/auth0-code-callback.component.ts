@@ -64,7 +64,12 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
                 this.windowRef.nativeWindow.location.href = nextUrl;
             });
         } else {
-            throw new Error('No auth code present in url.');
+            const error = this.route.snapshot.queryParams['error'];
+            const errorDescription = this.route.snapshot.queryParams['error_description'];
+            this.log.logError(this.LOG_SOURCE, 'No auth code present in url');
+            this.log.logError(this.LOG_SOURCE, `Error: ${error}`);
+            this.log.logError(this.LOG_SOURCE, `Error Description: ${errorDescription}`);
+            this.adapter.logout();
         }
     }
 
