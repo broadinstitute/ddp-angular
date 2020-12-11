@@ -601,9 +601,9 @@
         "LoadingError": "ru_We're sorry, but an error has occurred.",
         "MatchEmailsError": "ru_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "ru_Join",
-        "Text": "ru_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "ru_Stay informed"
+        "SubmitButton": "Внести свой адрес в список рассылки",
+        "Text": "Укажите свой адрес электронной почты, и мы будем информировать вас о развитии Глобальной платформы данных о семьях с A-T.",
+        "Title": "Зарегистрируйтесь, чтобы быть в курсе"
       },
       "SessionWillExpire": {
         "Continue": "Продолжить",

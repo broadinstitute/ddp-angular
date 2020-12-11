@@ -601,9 +601,9 @@
         "LoadingError": "fr_We're sorry, but an error has occurred.",
         "MatchEmailsError": "fr_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "fr_Join",
-        "Text": "fr_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "fr_Stay informed"
+        "SubmitButton": "S'abonner à la liste de diffusion",
+        "Text": "Fournissez-nous une adresse e-mail et nous vous tiendrons au courant de l’avancement de la plateforme de données internationale sur les familles AT.",
+        "Title": "S’inscrire pour rester informé"
       },
       "SessionWillExpire": {
         "Continue": "Continuer",

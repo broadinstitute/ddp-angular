@@ -601,9 +601,9 @@
         "LoadingError": "tr_We're sorry, but an error has occurred.",
         "MatchEmailsError": "tr_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "tr_Join",
-        "Text": "tr_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "tr_Stay informed"
+        "SubmitButton": "E-posta Listesine Katıl",
+        "Text": "Bize bir e-posta adresi sağlarsanız Global A-T Aile Veri Platformunun ilerlemesi hakkında size düzenli bilgi veririz.",
+        "Title": "Bilgilendirilmek için abone olun"
       },
       "SessionWillExpire": {
         "Continue": "Devam",

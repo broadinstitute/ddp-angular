@@ -601,9 +601,9 @@
         "LoadingError": "de_We're sorry, but an error has occurred.",
         "MatchEmailsError": "de_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "de_Join",
-        "Text": "de_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "de_Stay informed"
+        "SubmitButton": "In Verteilerliste eintragen",
+        "Text": "Geben Sie eine E-Mail-Adresse an, an die wir aktuelle Informationen der Plattform für globale Daten von AT-Familien senden können.",
+        "Title": "Registrieren Sie sich, um aktuelle Informationen zu erhalten"
       },
       "SessionWillExpire": {
         "Continue": "Weiter",
@@ -635,7 +635,7 @@
     },
     "StayInformed": {
       "Text": "Vielen Dank, dass Sie der Verteilerliste der Plattform für globale Daten von AT-Familien beigetreten sind. Sie erhalten über diese E-Mail-Adresse aktuelle Informationen über diese Initiative.",
-      "Title": "de_Stay informed"
+      "Title": "Registrieren Sie sich, um aktuelle Informationen zu erhalten"
     }
   },
   "WorkflowProgress": {

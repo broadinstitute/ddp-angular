@@ -601,9 +601,9 @@
         "LoadingError": "pt_We're sorry, but an error has occurred.",
         "MatchEmailsError": "pt_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "pt_Join",
-        "Text": "pt_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "pt_Stay informed"
+        "SubmitButton": "Participar da lista de discussão",
+        "Text": "Forneça um endereço de e-mail e nós manteremos você informado sobre o progresso da Global A-T Family Data Platform.",
+        "Title": "Assine para ficar informado"
       },
       "SessionWillExpire": {
         "Continue": "Continuar",

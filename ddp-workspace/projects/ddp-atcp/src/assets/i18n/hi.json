@@ -611,9 +611,9 @@
         "LoadingError": "hi_We're sorry, but an error has occurred.",
         "MatchEmailsError": "hi_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "hi_Join",
-        "Text": "hi_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "hi_Stay informed"
+        "SubmitButton": "मेलिंग सूची में शामिल हों",
+        "Text": "हमें एक ईमेल पता प्रदान करें और हम आपको ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म की प्रगति के बारे में सूचित करते रहेंगे।",
+        "Title": "जानकारी प्राप्त करते रहने के लिए साइन अप करें"
       },
       "SessionWillExpire": {
         "Continue": "जारी रखें",

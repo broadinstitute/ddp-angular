@@ -601,9 +601,9 @@
         "LoadingError": "pl_We're sorry, but an error has occurred.",
         "MatchEmailsError": "pl_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "pl_Join",
-        "Text": "pl_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "pl_Stay informed"
+        "SubmitButton": "Dołącz do listy mailingowej",
+        "Text": "Podaj nam swój adres e-mail. Będziemy wtedy przekazywać ci informacje o ważnych wydarzeniach w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T.",
+        "Title": "Zapisz się, aby otrzymywać informacje"
       },
       "SessionWillExpire": {
         "Continue": "Dalej",

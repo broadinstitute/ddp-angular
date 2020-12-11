@@ -601,9 +601,9 @@
         "LoadingError": "ja_We're sorry, but an error has occurred.",
         "MatchEmailsError": "ja_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "ja_Join",
-        "Text": "ja_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "ja_Stay informed"
+        "SubmitButton": "メーリングリストに参加する",
+        "Text": "Eメールアドレスを登録すれば、グローバル A-T ファミリーデータプラットフォームの進捗状況をお知らせいたします。",
+        "Title": "情報を受け取るためのサインアップ"
       },
       "SessionWillExpire": {
         "Continue": "続ける",

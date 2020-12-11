@@ -606,9 +606,9 @@
         "LoadingError": "zh_We're sorry, but an error has occurred.",
         "MatchEmailsError": "zh_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "zh_Join",
-        "Text": "zh_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "zh_Stay informed"
+        "SubmitButton": "加入电邮列表",
+        "Text": "“向我们提供一个电子邮箱地址，我们将随时向您通报全球A-T成员数据平台的进展情况。",
+        "Title": "注册以了解情况"
       },
       "SessionWillExpire": {
         "Continue": "继续",

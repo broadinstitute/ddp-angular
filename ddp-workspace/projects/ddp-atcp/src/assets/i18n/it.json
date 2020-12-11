@@ -601,9 +601,9 @@
         "LoadingError": "it_We're sorry, but an error has occurred.",
         "MatchEmailsError": "it_Please ensure that both email fields are filled in and that the addresses match.",
         "Required": "",
-        "SubmitButton": "it_Join",
-        "Text": "it_Provide your email below and we'll keep you up-to-date on developments.\nYou can unsubscribe at any time.",
-        "Title": "it_Stay informed"
+        "SubmitButton": "Iscriviti alla mailing list",
+        "Text": "Indicaci un indirizzo di posta elettronica e ti manterremo informato/a sui progressi della Piattaforma globale di dati sulle famiglie con A-T.",
+        "Title": "Iscriviti per mantenerti informato/a"
       },
       "SessionWillExpire": {
         "Continue": "Continua",
