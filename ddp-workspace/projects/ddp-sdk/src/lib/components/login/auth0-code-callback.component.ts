@@ -69,7 +69,7 @@ export class Auth0CodeCallbackComponent implements OnInit, OnDestroy {
             this.log.logError(this.LOG_SOURCE, 'No auth code present in url');
             this.log.logError(this.LOG_SOURCE, `Error: ${error}`);
             this.log.logError(this.LOG_SOURCE, `Error Description: ${errorDescription}`);
-            this.adapter.logout();
+            this.adapter.logout(this.configuration.errorPageUrl);
         }
     }
 
