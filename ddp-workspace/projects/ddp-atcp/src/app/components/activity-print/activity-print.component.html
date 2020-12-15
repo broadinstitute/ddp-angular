@@ -1,0 +1,144 @@
+<div *ngIf="loading; else activity" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #activity>
+  <div class="controls">
+    <button
+      class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
+      (click)="onPrintClick()"
+    >
+      <mat-icon>print</mat-icon>
+      Print
+    </button>
+  </div>
+
+  <div class="printable-content" #printContainer>
+    <section *ngIf="activityForm.title" class="section header-section">
+      <div class="content content_tight">
+        <h1 class="activity-header" [innerHTML]="activityForm.title"></h1>
+      </div>
+    </section>
+
+    <!-- <ng-container *ngFor="let section of activityForm.sections">
+      <ddp-activity-section
+        [section]="section"
+        [readonly]="true"
+        [studyGuid]="studyGuid"
+        [activityGuid]="instanceGuid"
+      ></ddp-activity-section>
+    </ng-container> -->
+    <ng-container *ngFor="let block of blocks">
+      <ng-container [ngSwitch]="block.type">
+        <ng-container *ngSwitchCase="blockTypes.Section">
+          <hr />
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Content">
+          <div class="content-block">
+            {{ block.content }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Boolean">
+          <div class="boolean-block">
+            <h3>
+              {{ block.content }}
+            </h3>
+
+            {{ block.value ? 'Yes' : 'No' }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Numeric">
+          <div class="numeric-block">
+            <h3>{{ block.content }}</h3>
+
+            {{ block.value }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Conditional">
+          <div class="conditional-block">
+            <h3>{{ block.content }}</h3>
+
+            <ng-container *ngIf="block.value">
+              <ng-container *ngIf="isArray(block.value) && block.value.length">
+                <ul>
+                  <li *ngFor="let answer of block.value">
+                    {{ answer.optionLabel }}
+                  </li>
+                </ul>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Text">
+          <div class="text-block">
+            <h3>{{ block.content }}</h3>
+
+            <ng-container *ngIf="block.value">
+              <ng-container
+                *ngIf="
+                  isArray(block.value) && block.value.length;
+                  else textQuestionTextAnswer
+                "
+              >
+                <ul>
+                  <ng-container *ngFor="let answer of block.value">
+                    <li *ngIf="answer && answer.value">
+                      {{ answer.value }}
+                    </li>
+                  </ng-container>
+                </ul>
+              </ng-container>
+
+              <ng-template #textQuestionTextAnswer>{{
+                block.value
+              }}</ng-template>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Composite">
+          <div class="composite-block">
+            <h3>{{ block.content }}</h3>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Picklist">
+          <div class="picklist-block">
+            <h3>{{ block.content }}</h3>
+
+            <ng-container *ngIf="block.value">
+              <ng-container *ngIf="isArray(block.value) && block.value.length">
+                <ul>
+                  <li *ngFor="let answer of block.value">
+                    {{ answer.optionLabel }}
+                  </li>
+                </ul>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Date">
+          <div class="date-block">
+            <h3>{{ block.content }}</h3>
+
+            {{ block.value | date }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="blockTypes.Agreement">
+          <div class="agreement-block">
+            <h3>{{ block.content }}</h3>
+
+            <input type="checkbox" [checked]="block.value" />
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>

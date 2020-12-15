@@ -381,3 +381,9 @@ app-activity-progress-bar .mat-progress-bar-fill::after {
 
   position: relative;
 }
+
+@media print {
+  input[type="radio"]:checked+span {
+      font-weight: bold;
+  }
+}

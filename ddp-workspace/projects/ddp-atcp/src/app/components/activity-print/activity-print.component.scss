@@ -1,0 +1,16 @@
+.controls {
+  display: flex;
+  flex-direction: row-reverse;
+
+  margin: 1.2rem 0;
+  padding: 0 2.4rem;
+
+  @media print {
+    display: none;
+  }
+}
+
+.printable-content {
+  margin: 1.2rem 0;
+  padding: 0 2.4rem;
+}
