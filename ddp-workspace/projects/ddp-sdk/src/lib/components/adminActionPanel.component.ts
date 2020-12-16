@@ -29,6 +29,6 @@ export class AdminActionPanelComponent {
     }
 
     public emitActivityEdit(): void {
-        this.requestActivityEdit.next(true);
+        this.requestActivityEdit.emit(true);
     }
 }
