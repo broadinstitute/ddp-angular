@@ -3,6 +3,10 @@
 @import "../../styles/variables";
 
 .Header {
+  @media print {
+    display: none;
+  }
+
   width: 100%;
   @include flexer(flex, column, center, center);
   padding: 0 25px 0 25px;

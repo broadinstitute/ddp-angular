@@ -3,139 +3,249 @@
 </div>
 
 <ng-template #activity>
-  <div class="controls">
-    <button
-      class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
-      (click)="onPrintClick()"
-    >
-      <mat-icon>print</mat-icon>
-      Print
-    </button>
-  </div>
-
   <div class="printable-content" #printContainer>
-    <section *ngIf="activityForm.title" class="section header-section">
-      <div class="content content_tight">
-        <h1 class="activity-header" [innerHTML]="activityForm.title"></h1>
-      </div>
+    <section *ngIf="activityForm.title" class="printable-content__header">
+      <h1
+        class="printable-content__title"
+        [innerHTML]="activityForm.title"
+      ></h1>
+
+      <button
+        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--blue"
+        (click)="onPrintClick()"
+      >
+        <mat-icon>print</mat-icon>
+      </button>
     </section>
 
-    <!-- <ng-container *ngFor="let section of activityForm.sections">
-      <ddp-activity-section
-        [section]="section"
-        [readonly]="true"
-        [studyGuid]="studyGuid"
-        [activityGuid]="instanceGuid"
-      ></ddp-activity-section>
-    </ng-container> -->
     <ng-container *ngFor="let block of blocks">
+      <!-- Block Types Switch -->
       <ng-container [ngSwitch]="block.type">
+        <!-- "SECTION" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Section">
-          <hr />
+          <hr class="printable-content__divider" />
         </ng-container>
 
+        <!-- "CONTENT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Content">
-          <div class="content-block">
+          <div *ngIf="block.content" class="content-block">
             {{ block.content }}
           </div>
         </ng-container>
 
+        <!-- "BOOLEAN" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Boolean">
           <div class="boolean-block">
-            <h3>
+            <label>
               {{ block.content }}
-            </h3>
+            </label>
 
-            {{ block.value ? 'Yes' : 'No' }}
+            <div class="radio">
+              <div class="radio__outer">
+                <div *ngIf="block.value" class="radio__inner"></div>
+              </div>
+              <span class="radio__label">
+                <ng-container
+                  *ngIf="
+                    block.additional && block.additional.trueContent;
+                    else booleanTrueContent
+                  "
+                >
+                  {{ block.additional.trueContent }}
+                </ng-container>
+
+                <ng-template #booleanTrueContent>Yes</ng-template>
+              </span>
+            </div>
+
+            <div class="radio">
+              <div class="radio__outer">
+                <div *ngIf="!block.value" class="radio__inner"></div>
+              </div>
+              <span class="radio__label">
+                <ng-container
+                  *ngIf="
+                    block.additional && block.additional.falseContent;
+                    else booleanFalseContent
+                  "
+                >
+                  {{ block.additional.falseContent }}
+                </ng-container>
+
+                <ng-template #booleanFalseContent>No</ng-template>
+              </span>
+            </div>
           </div>
         </ng-container>
 
+        <!-- "NUMERIC" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Numeric">
           <div class="numeric-block">
-            <h3>{{ block.content }}</h3>
-
-            {{ block.value }}
+            <div class="form-group">
+              <label>
+                {{ block.content }}
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                [value]="block.value"
+                disabled
+              />
+            </div>
           </div>
         </ng-container>
 
+        <!-- "CONDITIONAL" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Conditional">
           <div class="conditional-block">
-            <h3>{{ block.content }}</h3>
+            <label>
+              {{ block.content }}
+            </label>
 
             <ng-container *ngIf="block.value">
               <ng-container *ngIf="isArray(block.value) && block.value.length">
-                <ul>
-                  <li *ngFor="let answer of block.value">
-                    {{ answer.optionLabel }}
-                  </li>
-                </ul>
+                <div *ngFor="let answer of block.value" class="radio">
+                  <div class="radio__outer">
+                    <div class="radio__inner"></div>
+                  </div>
+                  <span class="radio__label">{{ answer.optionLabel }}</span>
+                </div>
               </ng-container>
             </ng-container>
           </div>
         </ng-container>
 
+        <!-- "TEXT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Text">
-          <div class="text-block">
-            <h3>{{ block.content }}</h3>
+          <div class="form-group">
+            <label>
+              {{ block.content }}
+            </label>
 
-            <ng-container *ngIf="block.value">
-              <ng-container
-                *ngIf="
-                  isArray(block.value) && block.value.length;
-                  else textQuestionTextAnswer
-                "
-              >
-                <ul>
-                  <ng-container *ngFor="let answer of block.value">
-                    <li *ngIf="answer && answer.value">
-                      {{ answer.value }}
-                    </li>
-                  </ng-container>
-                </ul>
+            <ng-container
+              *ngIf="
+                isArray(block.value) && block.value.length;
+                else textQuestionField
+              "
+            >
+              <ng-container *ngFor="let answer of block.value">
+                <div *ngIf="answer && answer.value" class="radio">
+                  <div class="radio__outer">
+                    <div class="radio__inner"></div>
+                  </div>
+                  <span class="radio__label">{{ answer.value }}</span>
+                </div>
               </ng-container>
-
-              <ng-template #textQuestionTextAnswer>{{
-                block.value
-              }}</ng-template>
             </ng-container>
+
+            <ng-template #textQuestionField>
+              <input
+                type="text"
+                class="form-control"
+                [value]="block.value"
+                disabled
+              />
+            </ng-template>
           </div>
         </ng-container>
 
+        <!-- "COMPOSITE" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Composite">
           <div class="composite-block">
-            <h3>{{ block.content }}</h3>
+            <h3 *ngIf="block.content">{{ block.content }}</h3>
           </div>
         </ng-container>
 
+        <!-- "PICKLIST" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Picklist">
-          <div class="picklist-block">
-            <h3>{{ block.content }}</h3>
+          <div
+            class="picklist-block"
+            [class.as-checkbox]="block.additional && block.additional.multiple"
+          >
+            <ng-container
+              *ngIf="block.additional && block.additional.renderMode === 'LIST'"
+            >
+              <label>
+                {{ block.content }}
+              </label>
 
-            <ng-container *ngIf="block.value">
-              <ng-container *ngIf="isArray(block.value) && block.value.length">
-                <ul>
-                  <li *ngFor="let answer of block.value">
-                    {{ answer.optionLabel }}
-                  </li>
-                </ul>
+              <ng-container *ngIf="block.value && isArray(block.value)">
+                <ng-container *ngFor="let option of block.value">
+                  <div class="radio">
+                    <div class="radio__outer">
+                      <div *ngIf="option.selected" class="radio__inner"></div>
+                    </div>
+                    <div class="radio__content">
+                      <span class="radio__label">
+                        {{ option.optionLabel }}
+                      </span>
+                      <span *ngIf="option.detail" class="radio__other">
+                        {{ option.detail }}
+                      </span>
+                    </div>
+                  </div>
+                </ng-container>
               </ng-container>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                block.additional && block.additional.renderMode === 'DROPDOWN'
+              "
+            >
+              <div class="form-group">
+                <label>
+                  {{ block.content }}
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="block.value"
+                  disabled
+                />
+              </div>
             </ng-container>
           </div>
         </ng-container>
 
+        <!-- "DATE" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Date">
           <div class="date-block">
-            <h3>{{ block.content }}</h3>
-
-            {{ block.value | date }}
+            <div class="form-group">
+              <label>
+                {{ block.content }}
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                [value]="block.value | date"
+                disabled
+              />
+            </div>
           </div>
         </ng-container>
 
+        <!-- "AGREEMENT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Agreement">
-          <div class="agreement-block">
-            <h3>{{ block.content }}</h3>
+          <div class="agreement-block as-checkbox">
+            <div class="radio">
+              <div class="radio__outer">
+                <div class="radio__inner"></div>
+              </div>
+              <div class="radio__content">
+                <span class="radio__label">
+                  {{ block.content }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
 
-            <input type="checkbox" [checked]="block.value" />
+        <!-- "COMPOSITE_DIVIDER" Block Type -->
+        <ng-container *ngSwitchCase="blockTypes.CompositeDivider">
+          <div class="composite-block-divider">
+            <span>{{ block.content }}</span>
+            <div></div>
           </div>
         </ng-container>
       </ng-container>

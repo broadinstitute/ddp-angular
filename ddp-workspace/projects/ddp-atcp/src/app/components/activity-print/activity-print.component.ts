@@ -39,12 +39,14 @@ enum BlockTypes {
   Picklist = 'PICKLIST',
   Date = 'DATE',
   Agreement = 'AGREEMENT',
+  CompositeDivider = 'COMPOSITE_DIVIDER',
 }
 
 interface Block {
   type: BlockTypes;
   content: string;
   value?: any;
+  additional?: Record<string, any>;
 }
 
 @Component({
@@ -157,17 +159,9 @@ export class ActivityPrintComponent implements OnInit {
   }
 
   private handleConditionalBlock(block: ConditionalBlock, answer?: any): void {
-    const userAnswers = answer || block.controlQuestion.answer;
-    const possibleAnswers = (block.controlQuestion as any).picklistOptions;
-    const answers = userAnswers.map(answer =>
-      possibleAnswers.find(a => a.stableId === answer.stableId)
-    );
-
-    this.blocks.push({
-      type: BlockTypes.Conditional,
-      content: this.getBlockContent(block.controlQuestion),
-      value: answers,
-    });
+    if (block.controlQuestion) {
+      this.convertBlock(block.controlQuestion);
+    }
 
     if (block.nestedGroupBlock) {
       this.convertBlock(block.nestedGroupBlock);
@@ -185,11 +179,20 @@ export class ActivityPrintComponent implements OnInit {
     block: ActivityBooleanQuestionBlock,
     answer?: any
   ): void {
-    this.blocks.push({
+    let booleanBlock = {
       type: BlockTypes.Boolean,
       content: this.getBlockContent(block),
       value: answer || block.answer,
-    });
+    } as Block;
+
+    if (block.trueContent && block.falseContent) {
+      booleanBlock.additional = {
+        trueContent: block.trueContent,
+        falseContent: block.falseContent,
+      };
+    }
+
+    this.blocks.push(booleanBlock);
   }
 
   private handleNumericQuestionBlock(
@@ -231,6 +234,13 @@ export class ActivityPrintComponent implements OnInit {
 
         this.convertBlock(childBlock, childBlockAnswer);
       }
+
+      if (i !== block.answer.length - 1) {
+        this.blocks.push({
+          type: BlockTypes.CompositeDivider,
+          content: block.additionalItemText,
+        });
+      }
     }
   }
 
@@ -238,18 +248,46 @@ export class ActivityPrintComponent implements OnInit {
     block: ActivityPicklistQuestionBlock,
     answer?: any
   ): void {
+    console.log(block);
     const userAnswers = (answer && answer.value) || block.answer;
     const possibleAnswers = block.picklistOptions;
-    const answers = Array.isArray(userAnswers)
-      ? userAnswers.map(answer =>
-          possibleAnswers.find(a => a.stableId === answer.stableId)
-        )
-      : [];
+
+    let answers;
+
+    if (block.renderMode === 'LIST') {
+      answers = Array.isArray(userAnswers)
+        ? possibleAnswers.map(possibleAnswer => {
+            const associatedUserAnswer = userAnswers.find(
+              userAnswer => userAnswer.stableId === possibleAnswer.stableId
+            );
+
+            if (!associatedUserAnswer) {
+              return possibleAnswer;
+            }
+
+            return Object.assign(possibleAnswer, {
+              selected: true,
+              detail: associatedUserAnswer ? associatedUserAnswer.detail : null,
+            });
+          })
+        : possibleAnswers;
+    } else if (block.renderMode === 'DROPDOWN') {
+      answers = block.answer
+        ? possibleAnswers.find(
+            answer => answer.stableId === block.answer[0].stableId
+          ).optionLabel
+        : '';
+    }
 
     this.blocks.push({
       type: BlockTypes.Picklist,
       content: this.getBlockContent(block),
       value: answers,
+      additional: {
+        renderMode: block.renderMode,
+        multiple: block.selectMode === 'MULTIPLE',
+        possibleOptions: possibleAnswers,
+      },
     });
   }
 
@@ -280,11 +318,7 @@ export class ActivityPrintComponent implements OnInit {
   }
 
   private getBlockContent(block: any): string {
-    return (
-      this.stripHtmlTags(block.question) ||
-      this.stripHtmlTags(block.placeholder) ||
-      ''
-    );
+    return this.stripHtmlTags(block.question || block.placeholder || '');
   }
 
   private stripHtmlTags(raw: string): string {

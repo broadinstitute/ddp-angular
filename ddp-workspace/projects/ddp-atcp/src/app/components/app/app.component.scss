@@ -12,3 +12,9 @@
     }
   }
 }
+
+mat-expansions-panel {
+  @media print {
+    display: none;
+  }
+}
