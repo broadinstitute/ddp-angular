@@ -19,7 +19,7 @@ import { AddressVerificationResponse } from '../../models/addressVerificationRes
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 import { LoggingService } from '../../services/logging.service';
-import { ConfigurationService } from 'ddp-sdk';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -59,7 +59,7 @@ class FakeAddressInputComponent {
   }
 }
 
-fdescribe('AddressEmbeddedComponent', () => {
+describe('AddressEmbeddedComponent', () => {
   let component: AddressEmbeddedComponent;
   let fixture: ComponentFixture<AddressEmbeddedComponent>;
   let childComponentFixture: DebugElement; // : ComponentFixture<FakeAddressInputComponent>;
@@ -592,4 +592,3 @@ const buildPerfectAddressVerification = (): AddressVerificationResponse => {
   const perfectAddressVerify = new AddressVerificationResponse(buildPerfectAddress());
   return perfectAddressVerify;
 };
-
