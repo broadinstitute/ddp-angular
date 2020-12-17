@@ -1,5 +1,12 @@
 @import '../../styles/variables';
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2em;
+}
+
 .ButtonBordered--withIcon {
   margin-top: 0;
   padding: 7px;
@@ -16,6 +23,10 @@
 .printable-content {
   margin: 1.2rem 0;
   padding: 0 2.4rem;
+
+  @media print {
+    padding: 2rem 4rem;
+  }
 
   &__header {
     display: flex;
@@ -38,11 +49,30 @@
 
     background-color: $grey;
     border: none;
+
+    @media print {
+      display: none;
+    }
   }
 }
 
 .radio {
   display: flex;
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    display: none;
+
+    margin: 0;
+    margin-top: 4px;
+    margin-right: 0.4em;
+
+    position: static;
+
+    @media print {
+      display: initial;
+    }
+  }
 
   &__outer {
     width: 16px;
@@ -55,6 +85,10 @@
 
     border: 1px solid $light-neutral-grey;
     border-radius: 50%;
+
+    @media print {
+      display: none;
+    }
   }
 
   &__inner {
@@ -114,5 +148,26 @@
     height: 2px;
 
     background-color: $grey;
+  }
+}
+
+.print-logo {
+  display: none;
+
+  @media print {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-top: 2.4em;
+  }
+}
+
+.composite-block {
+  p {
+    margin: 1em 0;
+
+    font-size: 18px;
+    font-weight: bold;
   }
 }

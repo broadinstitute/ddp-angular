@@ -13,8 +13,8 @@
   }
 }
 
-mat-expansions-panel {
-  @media print {
+@media print {
+  .expansion-panel {
     display: none;
   }
 }

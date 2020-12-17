@@ -18,4 +18,4 @@ export const AccountActivationRequired = 'account-activation-required';
 export const ParticipantList = 'participants';
 export const ActivityId = 'activity/:instanceGuid';
 export const LoginLandingMode = 'login-landing/:mode';
-export const ActivityPrint = 'acitivty/:instanceGuid/print';
+export const ActivityPrint = 'activity/:instanceGuid/print';

@@ -450,6 +450,7 @@
     "SignInButton": "Уже зарегистрированы? Войти здесь"
   },
   "SDK": {
+    "DownloadButton": "Загрузить обзор",
     "CancelButton": "Отменить",
     "CloseButton": "ru_Close",
     "CommunicationError": "ru_There was a problem saving your data. Please check the form and your answers before submitting",

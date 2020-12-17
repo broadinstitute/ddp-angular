@@ -160,6 +160,13 @@ import * as Routes from '../../router-resources';
                     </ng-container>
                     <hr>
                     <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
+                        <ng-container *ngIf="isLoaded && model.readonly && isFirstStep">
+                            <button class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral button--print" (click)="onDownloadClick()">
+                            <mat-icon>arrow_circle_down</mat-icon>
+                            {{ 'SDK.DownloadButton' | translate }}
+                            </button>
+                        </ng-container>
+
                         <ng-container *ngIf="isLoaded && isStepped && isFirstStep">
                             <button *ngIf="model.activityCode === ActivityCodes.MEDICAL_HISTORY"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -178,13 +185,6 @@ import * as Routes from '../../router-resources';
                                     <mat-icon *ngIf="buttonWithArrow">navigate_before</mat-icon>
                                     {{'SDK.PreviousButton' | translate}}
                             </button>
-                        </ng-container>
-
-                        <ng-container *ngIf="isLoaded && model.readonly">
-                          <button class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral button--print" (click)="onDownloadClick()">
-                            <mat-icon>arrow_circle_down</mat-icon>
-                            {{ 'SDK.DownloadButton' | translate }}
-                          </button>
                         </ng-container>
 
                         <ng-container *ngIf="isLoaded && isStepped && !isLastStep">

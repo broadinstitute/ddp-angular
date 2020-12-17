@@ -450,6 +450,7 @@
     "SignInButton": "Bereits registriert? Hier anmelden"
   },
   "SDK": {
+    "DownloadButton": "Überprüfung herunterladen",
     "CancelButton": "Abbrechen",
     "CloseButton": "de_Close",
     "CommunicationError": "de_There was a problem saving your data. Please check the form and your answers before submitting",

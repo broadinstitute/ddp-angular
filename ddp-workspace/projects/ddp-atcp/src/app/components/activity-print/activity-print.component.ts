@@ -1,13 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { EMPTY, Observable, of, Subject } from 'rxjs';
+import { catchError, switchMap, take, tap } from 'rxjs/operators';
 
 import {
   ActivityAgreementQuestionBlock,
@@ -19,14 +13,17 @@ import {
   ActivityPicklistQuestionBlock,
   ActivityServiceAgent,
   ActivityTextQuestionBlock,
+  CompositeDisposable,
   ConfigurationService,
+  LanguageService,
+  LoggingService,
   SubmissionManager,
 } from 'ddp-sdk';
 
-import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 import { ActivityGroupBlock } from 'projects/ddp-sdk/src/lib/models/activity/activityGroupBlock';
 import { ConditionalBlock } from 'projects/ddp-sdk/src/lib/models/activity/conditionalBlock';
 import { ActivityContentBlock } from 'projects/ddp-sdk/src/lib/models/activity/activityContentBlock';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 enum BlockTypes {
   Section = 'SECTION',
@@ -55,41 +52,39 @@ interface Block {
   styleUrls: ['./activity-print.component.scss'],
   providers: [SubmissionManager],
 })
-export class ActivityPrintComponent implements OnInit {
+export class ActivityPrintComponent implements OnInit, OnDestroy {
   loading: boolean;
   instanceGuid: string;
   studyGuid: string;
   activityForm: ActivityForm;
   blocks: Block[] = [];
   blockTypes = BlockTypes;
+  fetchActivityForm$ = new Subject();
 
-  @ViewChild('printContainer', { static: false }) printContainer: ElementRef;
+  private anchor = new CompositeDisposable();
+  private logSource = 'ActivityPrintComponent';
 
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityServiceAgent,
+    private languageService: LanguageService,
+    private loggingService: LoggingService,
     private multiGovernedUserService: MultiGovernedUserService,
     @Inject('ddp.config') private config: ConfigurationService
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
     this.instanceGuid = this.route.snapshot.params.instanceGuid;
     this.studyGuid = this.config.studyGuid;
 
-    this.activityService
-      .getActivity(of(this.config.studyGuid), of(this.instanceGuid))
-      .pipe(take(1))
-      .subscribe(
-        activityForm => {
-          this.activityForm = activityForm;
-          this.convertActivityForm(activityForm);
-          this.loading = false;
-        },
-        () => {
-          this.multiGovernedUserService.navigateToDashboard();
-        }
-      );
+    this.setupListener();
+    this.setupLanguageListener();
+
+    this.fetchActivityForm$.next();
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 
   onPrintClick(): void {
@@ -100,9 +95,48 @@ export class ActivityPrintComponent implements OnInit {
     return Array.isArray(value);
   }
 
-  private convertActivityForm(activityForm: ActivityForm): void {
-    console.log({ activityForm });
+  private setupListener(): void {
+    this.anchor.addNew(
+      this.fetchActivityForm$
+        .pipe(switchMap(() => this.fetchActivityForm()))
+        .subscribe()
+    );
+  }
 
+  private setupLanguageListener(): void {
+    this.anchor.addNew(
+      this.languageService
+        .getProfileLanguageUpdateNotifier()
+        .subscribe(lang => {
+          if (lang !== null) {
+            this.fetchActivityForm$.next();
+          }
+        })
+    );
+  }
+
+  private fetchActivityForm(): Observable<ActivityForm | void> {
+    this.loading = true;
+
+    return this.activityService
+      .getActivity(of(this.config.studyGuid), of(this.instanceGuid))
+      .pipe(
+        take(1),
+        tap(activityForm => {
+          this.blocks = [];
+          this.activityForm = activityForm;
+          this.convertActivityForm(activityForm);
+          this.loading = false;
+        }),
+        catchError(() => {
+          this.multiGovernedUserService.navigateToDashboard();
+
+          return EMPTY;
+        })
+      );
+  }
+
+  private convertActivityForm(activityForm: ActivityForm): void {
     for (const [idx, section] of activityForm.sections
       .filter(section => section.visible)
       .entries()) {
@@ -117,8 +151,6 @@ export class ActivityPrintComponent implements OnInit {
         this.convertBlock(block);
       }
     }
-
-    console.log(this.blocks);
   }
 
   private convertBlock(block: any, answer?: any): void {
@@ -148,7 +180,11 @@ export class ActivityPrintComponent implements OnInit {
       case ActivityAgreementQuestionBlock:
         return this.handleAgreementQuestionBlock(block);
       default:
-        console.log('Cannot determine type of this block', block);
+        this.loggingService.logWarning(
+          this.logSource,
+          'Cannot determine type of block',
+          block
+        );
     }
   }
 
@@ -248,7 +284,6 @@ export class ActivityPrintComponent implements OnInit {
     block: ActivityPicklistQuestionBlock,
     answer?: any
   ): void {
-    console.log(block);
     const userAnswers = (answer && answer.value) || block.answer;
     const possibleAnswers = block.picklistOptions;
 

@@ -44,6 +44,9 @@
               <div class="radio__outer">
                 <div *ngIf="block.value" class="radio__inner"></div>
               </div>
+
+              <input type="radio" [checked]="block.value" disabled />
+
               <span class="radio__label">
                 <ng-container
                   *ngIf="
@@ -62,6 +65,9 @@
               <div class="radio__outer">
                 <div *ngIf="!block.value" class="radio__inner"></div>
               </div>
+
+              <input type="radio" [checked]="!block.value" disabled />
+
               <span class="radio__label">
                 <ng-container
                   *ngIf="
@@ -108,6 +114,9 @@
                   <div class="radio__outer">
                     <div class="radio__inner"></div>
                   </div>
+
+                  <input type="radio" checked disabled />
+
                   <span class="radio__label">{{ answer.optionLabel }}</span>
                 </div>
               </ng-container>
@@ -133,6 +142,9 @@
                   <div class="radio__outer">
                     <div class="radio__inner"></div>
                   </div>
+
+                  <input type="radio" checked disabled />
+
                   <span class="radio__label">{{ answer.value }}</span>
                 </div>
               </ng-container>
@@ -151,8 +163,8 @@
 
         <!-- "COMPOSITE" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Composite">
-          <div class="composite-block">
-            <h3 *ngIf="block.content">{{ block.content }}</h3>
+          <div *ngIf="block.content" class="composite-block">
+            <p>{{ block.content }}</p>
           </div>
         </ng-container>
 
@@ -165,7 +177,7 @@
             <ng-container
               *ngIf="block.additional && block.additional.renderMode === 'LIST'"
             >
-              <label>
+              <label *ngIf="block.content">
                 {{ block.content }}
               </label>
 
@@ -175,6 +187,28 @@
                     <div class="radio__outer">
                       <div *ngIf="option.selected" class="radio__inner"></div>
                     </div>
+
+                    <ng-container
+                      *ngIf="
+                        block.additional && block.additional.multiple;
+                        else picklistRadio
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        [checked]="option.selected"
+                        disabled
+                      />
+                    </ng-container>
+
+                    <ng-template #picklistRadio>
+                      <input
+                        type="radio"
+                        [checked]="option.selected"
+                        disabled
+                      />
+                    </ng-template>
+
                     <div class="radio__content">
                       <span class="radio__label">
                         {{ option.optionLabel }}
@@ -232,6 +266,9 @@
               <div class="radio__outer">
                 <div class="radio__inner"></div>
               </div>
+
+              <input type="checkbox" checked disabled />
+
               <div class="radio__content">
                 <span class="radio__label">
                   {{ block.content }}
@@ -250,5 +287,12 @@
         </ng-container>
       </ng-container>
     </ng-container>
+
+    <div class="print-logo">
+      <img
+        alt="A-T Portal Logo"
+        src="assets/images/atcp/original-logo-color.svg"
+      />
+    </div>
   </div>
 </ng-template>

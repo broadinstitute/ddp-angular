@@ -455,6 +455,7 @@
     "SignInButton": "已经注册？ 在这里登录"
   },
   "SDK": {
+    "DownloadButton": "下载评论",
     "CancelButton": "取消",
     "CloseButton": "zh_Close",
     "CommunicationError": "zh_There was a problem saving your data. Please check the form and your answers before submitting",
