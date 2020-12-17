@@ -437,6 +437,8 @@ jobs:
           study_key: atcp
       - conditionally-launch-build-and-store:
           study_key: rgp
+      - conditionally-launch-build-and-store:
+          study_key: prion
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -519,7 +521,6 @@ workflows:
                 - staging
                 - production
           study_key: osteo
-
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: brain
@@ -541,6 +542,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: rgp
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: prion
 
   nightly:
     triggers:
@@ -575,3 +579,6 @@ workflows:
       - build-and-deploy-job:
           name: rgp-nightly
           study_key: rgp
+      - build-and-deploy-job:
+          name: prion-nightly
+          study_key: prion
