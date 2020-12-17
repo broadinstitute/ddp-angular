@@ -28,6 +28,7 @@ import { SelfEnrolledUserGuard } from './guards/self-enrolled-user.guard';
 import { MultiGovernedUserGuard } from './guards/multi-governed-user.guard';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
+import { ActivityPrintComponent } from './components/activity-print/activity-print.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: RouterResource.ActivityId,
     component: ActivityRedirectComponent,
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+  },
+  {
+    path: RouterResource.ActivityPrint,
+    component: ActivityPrintComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {

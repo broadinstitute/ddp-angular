@@ -42,6 +42,7 @@ import { UserPreferencesServiceAgent } from './services/serviceAgents/userPrefer
 import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
+import { ActivityPrintComponent } from './components/activity-print/activity-print.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -168,6 +169,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     UserActivitiesComponent,
     ActivityRedirectComponent,
     MailingListComponent,
+    ActivityPrintComponent,
   ],
   entryComponents: [PopupMessageComponent],
   providers: [

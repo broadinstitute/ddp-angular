@@ -450,6 +450,7 @@
     "SignInButton": "すでに登録済ですか? ここからサインインしてください"
   },
   "SDK": {
+    "DownloadButton": "レビューをダウンロードする",
     "CancelButton": "キャンセルする",
     "CloseButton": "ja_Close",
     "CommunicationError": "ja_There was a problem saving your data. Please check the form and your answers before submitting",

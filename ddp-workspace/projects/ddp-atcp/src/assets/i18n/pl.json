@@ -450,6 +450,7 @@
     "SignInButton": "Już się zarejestrowałeś? Zaloguj się"
   },
   "SDK": {
+    "DownloadButton": "Pobierz ocenę",
     "CancelButton": "Anuluj",
     "CloseButton": "pl_Close",
     "CommunicationError": "pl_There was a problem saving your data. Please check the form and your answers before submitting",

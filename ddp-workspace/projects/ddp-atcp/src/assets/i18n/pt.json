@@ -450,6 +450,7 @@
     "SignInButton": "Já registrado? Registre-se aqui"
   },
   "SDK": {
+    "DownloadButton": "Baixar análise",
     "CancelButton": "Cancelar",
     "CloseButton": "pt_Close",
     "CommunicationError": "pt_There was a problem saving your data. Please check the form and your answers before submitting",

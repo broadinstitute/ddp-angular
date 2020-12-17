@@ -451,6 +451,7 @@
     "SignInButton": "Already registered? Sign In here"
   },
   "SDK": {
+    "DownloadButton": "Download Review",
     "CancelButton": "Cancel",
     "CloseButton": "Close",
     "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",

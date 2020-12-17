@@ -450,6 +450,7 @@
     "SignInButton": "Già registrato/a? Accedi qui"
   },
   "SDK": {
+    "DownloadButton": "Scarica revisione",
     "CancelButton": "Annulla",
     "CloseButton": "it_Close",
     "CommunicationError": "it_There was a problem saving your data. Please check the form and your answers before submitting",

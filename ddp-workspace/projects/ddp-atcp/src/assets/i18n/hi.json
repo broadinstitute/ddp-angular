@@ -460,6 +460,7 @@
     "SignInButton": "पहले से पंजीकृत हैं? यहां साइन इन करें"
   },
   "SDK": {
+    "DownloadButton": "समीक्षा डाउनलोड करें",
     "CancelButton": "रद्द करें",
     "CloseButton": "hi_Close",
     "CommunicationError": "hi_There was a problem saving your data. Please check the form and your answers before submitting",

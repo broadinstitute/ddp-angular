@@ -2,6 +2,11 @@
 @import './brushes';
 @import 'theme';
 
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
 hr {
   border-color: $silver-grey;
 }
@@ -380,4 +385,10 @@ app-activity-progress-bar .mat-progress-bar-fill::after {
   }
 
   position: relative;
+}
+
+@media print {
+  input[type="radio"]:checked+span {
+      font-weight: bold;
+  }
 }

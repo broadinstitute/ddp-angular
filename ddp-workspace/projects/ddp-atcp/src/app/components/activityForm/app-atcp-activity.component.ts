@@ -21,11 +21,12 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { delay } from 'rxjs/operators';
+import * as Routes from '../../router-resources';
 
 @Component({
   selector: 'app-atcp-activity',
   template: `
-  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle, 'feeding-survey': model.activityCode === ActivityCodes.FEEDING}">
+  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle, 'feeding-survey': model?.activityCode === ActivityCodes.FEEDING}">
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
                 <ddp-subject-panel></ddp-subject-panel>
@@ -159,6 +160,13 @@ import { delay } from 'rxjs/operators';
                     </ng-container>
                     <hr>
                     <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
+                        <ng-container *ngIf="isLoaded && model.readonly && isFirstStep">
+                            <button class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral button--print" (click)="onDownloadClick()">
+                            <mat-icon>arrow_circle_down</mat-icon>
+                            {{ 'SDK.DownloadButton' | translate }}
+                            </button>
+                        </ng-container>
+
                         <ng-container *ngIf="isLoaded && isStepped && isFirstStep">
                             <button *ngIf="model.activityCode === ActivityCodes.MEDICAL_HISTORY"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -170,7 +178,7 @@ import { delay } from 'rxjs/operators';
 
                         <ng-container *ngIf="isLoaded && isStepped && !isFirstStep">
                             <button [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button"
+                                    class="button button--prev"
                                     [ngClass]="{'ButtonBordered ButtonBordered--green' : model.activityCode !== ActivityCodes.ASSENT,
                                               'ButtonFilled ButtonFilled--kids ButtonFilled--light-green' : model.activityCode === ActivityCodes.ASSENT}"
                                     (click)="decrementStep()">
@@ -367,6 +375,10 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       this.flush();
       this.showThankYouPopup();
     }
+  }
+
+  public onDownloadClick(): void {
+    this.router.navigateByUrl(Routes.ActivityPrint.replace(':instanceGuid', this.activityGuid));
   }
 
   private showThankYouPopup(): void {
