@@ -196,6 +196,7 @@ export class Auth0AdapterService implements OnDestroy {
         const auth0Params = {
             study_guid: this.configuration.studyGuid,
             mode: Auth0Mode.LoginOnly,
+            is_admin_client: true,
             ...(additionalParams && additionalParams)
         };
         if (this.configuration.doLocalRegistration) {
