@@ -452,7 +452,8 @@
       "ActivityStatus": "État",
       "ActivityDate": "Créé",
       "ActivityActions": "Actions ",
-      "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse"
+      "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Participants régis",
@@ -607,6 +608,10 @@
     "SubjectPanel": {
       "Link": "Revenir à la recherche de patient",
       "Text": "Code d’invitation du patient :"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
     },
     "Validators": {
       "DateNavyValidationRule": "[FR] Entered date is invalid"

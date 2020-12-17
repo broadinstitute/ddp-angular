@@ -452,7 +452,8 @@
       "ActivityStatus": "Estado",
       "ActivityDate": "Creado",
       "ActivityActions": "Acciones",
-      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas"
+      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Participantes controlados",
@@ -607,6 +608,10 @@
     "SubjectPanel": {
       "Link": "Regresar a la búsqueda de participantes voluntarios",
       "Text": "Código de invitación del participante voluntario:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
     },
     "Validators": {
       "DateNavyValidationRule": "[ES] Entered date is invalid"
