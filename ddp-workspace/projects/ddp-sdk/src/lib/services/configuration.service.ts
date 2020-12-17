@@ -41,7 +41,7 @@ export class ConfigurationService {
     dashboardSummaryInsteadOfStatus: string[] = [];
     // if activity added here, for this activity will be shown another button
     dashboardReportActivities: string[] = [];
-    tooltipIconUrl: string = '';
+    tooltipIconUrl = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
     languageSelectorIconURL: string | null = null;
     // urls for app pages
@@ -52,6 +52,8 @@ export class ConfigurationService {
     dashboardPageUrl = 'dashboard';
     // if questions inside of composite questions shouldn't show asterisk at the end, add question type here
     compositeRequiredFieldExceptions: QuestionType[] = [];
+    // whether address validation enforces that required fields need to be entered (as opposed to just accepting EasyPost validation)
+    addressEnforceRequiredFields = false;
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
     defaultLanguageCode: string;
