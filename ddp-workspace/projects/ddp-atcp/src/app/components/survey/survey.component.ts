@@ -1,7 +1,12 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { take, tap, filter } from 'rxjs/operators';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs/operators';
 
 import {
   ActivityInstance,
@@ -10,12 +15,12 @@ import {
   UserProfileServiceAgent,
   WindowRef,
   ConfigurationService,
+  CompositeDisposable,
 } from 'ddp-sdk';
 import { WorkflowBuilderService } from 'toolkit';
 
 import { ActivityService } from '../../services/activity.service';
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
-import * as RouterResources from '../../router-resources';
 import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
 
 @Component({
@@ -23,7 +28,7 @@ import { CREATED, IN_PROGRESS } from '../workflow-progress/workflow-progress';
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.scss'],
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, OnDestroy {
   public instanceGuid: string;
   public studyGuid: string;
   public userFirstName: string;
@@ -32,8 +37,11 @@ export class SurveyComponent implements OnInit {
   public isConsentEditActivity: boolean = false;
   public isActivityShown: boolean = true;
 
+  private anchor = new CompositeDisposable();
+  private isFirstRun = true;
+  private fetchActivities$ = new Subject();
+
   constructor(
-    private router: Router,
     private multiGovernedUserService: MultiGovernedUserService,
     private userActivityAgent: UserActivityServiceAgent,
     private userProfileAgent: UserProfileServiceAgent,
@@ -47,46 +55,14 @@ export class SurveyComponent implements OnInit {
   ngOnInit(): void {
     this.studyGuid = this.config.studyGuid;
 
-    this.userProfileAgent.profile.pipe(take(1)).subscribe(data => {
-      this.userFirstName = data.profile.firstName;
-    });
+    this.fetchUsername();
+    this.setupActivitiesListener();
 
-    this.getActivities()
-      .pipe(
-        tap(() => {
-          const currentActivity = this.activityService.currentActivity;
+    this.fetchActivities$.next();
+  }
 
-          if (currentActivity && currentActivity.instanceGuid) {
-            this.instanceGuid = currentActivity.instanceGuid;
-            this.isConsentEditActivity = currentActivity.isConsentEdit;
-            this.checkIfAssentByInstanceGuid(this.instanceGuid);
-          } else {
-            const nextActivityInstanceGuid = this.findNextActivity();
-
-            if (!nextActivityInstanceGuid) {
-              this.multiGovernedUserService.isMultiGoverned$
-                .pipe(
-                  filter(isMultiGoverned => isMultiGoverned !== null),
-                  take(1)
-                )
-                .subscribe(isMultiGoverned => {
-                  this.router.navigateByUrl(
-                    isMultiGoverned
-                      ? RouterResources.ParticipantList
-                      : RouterResources.Dashboard
-                  );
-                });
-
-              return;
-            }
-
-            this.instanceGuid = nextActivityInstanceGuid;
-            this.checkIfAssentByInstanceGuid(this.instanceGuid);
-          }
-        }),
-        take(1)
-      )
-      .subscribe();
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 
   public onChangeActivity(activity: ActivityInstance): void {
@@ -100,20 +76,60 @@ export class SurveyComponent implements OnInit {
   public onSubmit(activityResponse: ActivityResponse): void {
     if (activityResponse && activityResponse.instanceGuid) {
       this.instanceGuid = activityResponse.instanceGuid;
+      this.checkIfAssentByInstanceGuid(this.instanceGuid);
       this.resetComponent();
 
-      this.getActivities().subscribe();
+      this.fetchActivities$.next();
     } else {
       this.workflowBuilder.getCommand(activityResponse).execute();
     }
   }
 
-  private getActivities(): Observable<ActivityInstance[]> {
-    return this.userActivityAgent.getActivities(of(this.config.studyGuid)).pipe(
-      tap(activities => {
-        this.activities = activities;
-      })
+  private fetchUsername(): void {
+    this.userProfileAgent.profile.pipe(take(1)).subscribe(data => {
+      this.userFirstName = data.profile.firstName;
+    });
+  }
+
+  private setupActivitiesListener(): void {
+    this.anchor.addNew(
+      this.fetchActivities$
+        .pipe(
+          switchMap(() => this.getActivities()),
+          tap(activities => {
+            this.activities = activities;
+          }),
+          tap(() => {
+            if (this.isFirstRun) {
+              this.checkCurrentActivity();
+              this.isFirstRun = false;
+            }
+          })
+        )
+        .subscribe()
     );
+  }
+
+  private checkCurrentActivity(): void {
+    const currentActivity = this.activityService.currentActivity;
+
+    if (currentActivity && currentActivity.instanceGuid) {
+      this.instanceGuid = currentActivity.instanceGuid;
+      this.isConsentEditActivity = currentActivity.isConsentEdit;
+      this.checkIfAssentByInstanceGuid(this.instanceGuid);
+    } else {
+      this.instanceGuid = this.findNextActivity();
+
+      if (!this.instanceGuid) {
+        this.multiGovernedUserService.navigateToDashboard();
+      }
+
+      this.checkIfAssentByInstanceGuid(this.instanceGuid);
+    }
+  }
+
+  private getActivities(): Observable<ActivityInstance[]> {
+    return this.userActivityAgent.getActivities(of(this.config.studyGuid));
   }
 
   private findNextActivity(): string | null {

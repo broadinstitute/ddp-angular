@@ -9,7 +9,7 @@
       </ng-template>
     </h1>
 
-    <div class="workdir" [ngClass]="{ 'is-assent': isAssentActivity }">
+    <div class="workdir" [class.is-assent]="isAssentActivity">
       <app-workflow-progress
         *ngIf="!isConsentEditActivity"
         [steps]="activities"
