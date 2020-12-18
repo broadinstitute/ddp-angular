@@ -452,7 +452,8 @@
       "ActivityStatus": "Estati",
       "ActivityDate": "Kreye",
       "ActivityActions": "Aksyon",
-      "ActivityQuestionCount": "{{questionsAnswered}} sou {{questionTotal}} reponn"
+      "ActivityQuestionCount": "{{questionsAnswered}} sou {{questionTotal}} reponn",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Patisipan gouvène",
@@ -607,6 +608,10 @@
     "SubjectPanel": {
       "Link": "Retounen nan rechèch sijè",
       "Text": "Kòd envitasyon sijè a:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
     },
     "Validators": {
       "DateNavyValidationRule": "[HT] Entered date is invalid"

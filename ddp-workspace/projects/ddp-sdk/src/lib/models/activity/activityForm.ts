@@ -3,6 +3,7 @@ import { ReplaySubject } from 'rxjs';
 
 export class ActivityForm {
     public readonly: boolean;
+    public isHidden: boolean;
     public title: string;
     public subtitle: string | null;
     public sections: Array<ActivitySection>;

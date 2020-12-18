@@ -348,8 +348,8 @@ export class AddressInputService implements OnDestroy {
       country: new FormControl('', Validators.required),
       street1: new FormControl('', Validators.required),
       street2: new FormControl(''),
-      zip: new FormControl(''),
-      state: new FormControl(''),
+      zip: new FormControl('', Validators.required),
+      state: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       phone: phoneRequired ? new FormControl('', Validators.required) : new FormControl(''),
       guid: new FormControl('')

@@ -20,6 +20,7 @@ import { AddressVerificationResponse } from '../../models/addressVerificationRes
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 import { LoggingService } from '../../services/logging.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'ddp-address-input',
@@ -30,10 +31,12 @@ import { LoggingService } from '../../services/logging.service';
 class FakeAddressInputComponent {
   private _address: Address | null;
   private _readonly = false;
-  @Output() valueChanged = new EventEmitter();
-  @Input() addressErrors;
-  @Input() country = null;
-  @Input() phoneRequired;
+  @Output()valueChanged = new EventEmitter();
+  @Output()
+  formValidStatusChanged = new EventEmitter<boolean>();
+  @Input()addressErrors;
+  @Input()country = null;
+  @Input()phoneRequired;
   @Input()
   set address(val: Address | null) {
     console.log('set address called with: %o', val);
@@ -64,6 +67,7 @@ describe('AddressEmbeddedComponent', () => {
   let childComponent: FakeAddressInputComponent;
   let addressServiceSpy: jasmine.SpyObj<AddressService>;
   const submitAnnounceService = new SubmitAnnouncementService();
+  const configService = new ConfigurationService();
 
 
   beforeEach(async(() => {
@@ -93,10 +97,11 @@ describe('AddressEmbeddedComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessage],
       providers: [
-        { provide: AddressService, useValue: addressServiceSpy },
-        { provide: SubmitAnnouncementService, useValue: submitAnnounceService },
-        { provide: NGXTranslateService, useValue: translateServiceSpy },
-        { provide: LoggingService, useValue: loggingServiceSpy }
+        {provide: AddressService, useValue: addressServiceSpy},
+        {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
+        {provide: NGXTranslateService, useValue: translateServiceSpy},
+        {provide: LoggingService, useValue: loggingServiceSpy},
+        {provide: 'ddp.config', useValue: configService}
       ],
       imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
     })
@@ -174,6 +179,46 @@ describe('AddressEmbeddedComponent', () => {
     // check that we are not feeding address back to input component
     expect(childComponent.address).toBeFalsy();
   });
+
+  it('ensure enforce required fields generates error', fakeAsync(() => {
+    let validStatus = true;
+    component.validStatusChanged.subscribe(status => validStatus = status);
+    // it is false by default
+    configService.addressEnforceRequiredFields = true;
+    component.activityGuid = '123';
+    const perfectAddressVerification = buildPerfectAddressVerification();
+    addressServiceSpy.verifyAddress.and.returnValue(of(clone(perfectAddressVerification)));
+    fixture.detectChanges();
+    const addressWithMissingCity = buildPerfectAddress();
+    addressWithMissingCity.city = '';
+    childComponent.valueChanged.emit(addressWithMissingCity);
+    // this is the key: childComponent says status is invalid
+    childComponent.formValidStatusChanged.emit(false);
+    fixture.detectChanges();
+    expect(addressServiceSpy.verifyAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalled();
+    expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
+    // we should not call save unless we have an address with a guid
+    expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
+    const suggestionMatCard = fixture.debugElement.query(By.css('#suggestionMatCard'));
+    // entered will differ from suggested, so suggest!
+    expect(suggestionMatCard).not.toBeNull();
+    fixture.detectChanges();
+    // tick to allow subscription to be executed
+    tick();
+    expect(validStatus).toBe(false);
+    // check that we are not feeding address back to input component
+    expect(childComponent.address).toBeFalsy();
+
+    // try again with flag set to false
+    configService.addressEnforceRequiredFields = false;
+    childComponent.valueChanged.emit(addressWithMissingCity);
+    // this is the key: childComponent says status is invalid
+    childComponent.formValidStatusChanged.emit(false);
+    fixture.detectChanges();
+    tick();
+    expect(validStatus).toBe(true);
+  }));
 
   it('check suggestion shown', () => {
     emitAddressThatTriggersSuggestion();
@@ -477,7 +522,7 @@ describe('AddressEmbeddedComponent', () => {
     expect(childComponent.country).toBeNull();
     component.activityGuid = '123';
     component.country = 'US';
-    let tempAddress = new Address({ country: 'CA' });
+    const tempAddress = new Address({country: 'CA'});
     addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
     component.ngOnInit();
     fixture.detectChanges();

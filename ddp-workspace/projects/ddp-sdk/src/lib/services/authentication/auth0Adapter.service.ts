@@ -196,6 +196,7 @@ export class Auth0AdapterService implements OnDestroy {
         const auth0Params = {
             study_guid: this.configuration.studyGuid,
             mode: Auth0Mode.LoginOnly,
+            is_admin_client: true,
             ...(additionalParams && additionalParams)
         };
         if (this.configuration.doLocalRegistration) {
@@ -219,16 +220,9 @@ export class Auth0AdapterService implements OnDestroy {
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError(`${this.LOG_SOURCE}.handleAdminAuthentication`, err);
-                let error = null;
-                try {
-                    error = JSON.parse(decodeURIComponent(err.errorDescription));
-                } catch (e) {
-                    this.log.logError(`${this.LOG_SOURCE}.handleAdminAuthentication.Problem decoding authentication error`, e);
-                }
-                if (onErrorCallback && error) {
-                    // We might encounter errors from Auth0 that is not in expected
-                    // JSON format, so only run callback if decoding is successful.
-                    onErrorCallback(error);
+                if (onErrorCallback) {
+                    // Let callback handle whether to decode error or not.
+                    onErrorCallback(err.errorDescription);
                 }
             }
         });
@@ -263,7 +257,7 @@ export class Auth0AdapterService implements OnDestroy {
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        const wasAdmin = this.session.session.isAdmin;
+        const wasAdmin = this.session.session && this.session.session.isAdmin;
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent(this.LOG_SOURCE, 'logout');

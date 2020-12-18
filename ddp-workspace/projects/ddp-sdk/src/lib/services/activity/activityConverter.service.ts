@@ -46,6 +46,7 @@ export class ActivityConverter {
     public convertActivity(input: any): ActivityForm {
         const form = new ActivityForm();
         form.readonly = input.readonly;
+        form.isHidden = input.isHidden;
         form.title = input.title;
         form.subtitle = input.subtitle;
         form.formType = input.formType;
