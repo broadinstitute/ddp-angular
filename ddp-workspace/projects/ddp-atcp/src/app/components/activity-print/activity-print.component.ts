@@ -128,7 +128,8 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
           this.convertActivityForm(activityForm);
           this.loading = false;
         }),
-        catchError(() => {
+        catchError(err => {
+          this.loggingService.logError(this.logSource, err);
           this.multiGovernedUserService.navigateToDashboard();
 
           return EMPTY;
@@ -261,8 +262,14 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
       content: this.getBlockContent(block),
     });
 
-    for (let i = 0; i < block.answer.length; i++) {
-      const answers = block.answer[i];
+    let blockAnswers = block.answer;
+
+    if (!blockAnswers) {
+      blockAnswers = [new Array(block.children.length).fill(null)];
+    }
+
+    for (let i = 0; i < blockAnswers.length; i++) {
+      const answers = blockAnswers[i];
 
       for (let j = 0; j < answers.length; j++) {
         const childBlock = block.children[j];
@@ -271,7 +278,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
         this.convertBlock(childBlock, childBlockAnswer);
       }
 
-      if (i !== block.answer.length - 1) {
+      if (i !== blockAnswers.length - 1) {
         this.blocks.push({
           type: BlockTypes.CompositeDivider,
           content: block.additionalItemText,
@@ -331,9 +338,14 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
     answer?: any
   ): void {
     const userAnswer = (answer && answer.value) || block.answer;
-    const date = new Date(
-      `${userAnswer.year}-${userAnswer.month}-${userAnswer.day}`
-    );
+
+    let date: Date | string = '';
+
+    if (userAnswer) {
+      date = new Date(
+        `${userAnswer.year}-${userAnswer.month}-${userAnswer.day}`
+      );
+    }
 
     this.blocks.push({
       type: BlockTypes.Date,
