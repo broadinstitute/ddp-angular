@@ -63,6 +63,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   private anchor: CompositeDisposable = new CompositeDisposable();
 
   private readonly MAILING_LIST_WORKFLOW = 'MAILING_LIST';
+  private readonly REGISTRATION_WORKFLOW = 'REGISTRATION';
 
   constructor(
     private hostEl: ElementRef,
@@ -141,6 +142,17 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
     const convertedResponse = this.convertWorkflowResponse(response);
 
+    if (convertedResponse.next === this.REGISTRATION_WORKFLOW) {
+      const userInfo = this.getName();
+
+      this.auth0.signup({
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+      });
+
+      return;
+    }
+
     const sub = this.workflowBuilder
       .getCommand(convertedResponse)
       .execute()
@@ -160,7 +172,9 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     );
 
     if (!response.allowUnauthenticated) {
-      const registrationActivityResponse = new ActivityResponse('REGISTRATION');
+      const registrationActivityResponse = new ActivityResponse(
+        this.REGISTRATION_WORKFLOW
+      );
 
       this.loggingService.logEvent(
         `

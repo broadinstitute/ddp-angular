@@ -61,6 +61,16 @@ $('[data-toggle="tooltip"]').tooltip({
 
 if (!isResetPasswordPage) {
   createForm(configs.signUp, ($form, data) => {
+    let firstName = '', lastName = '';
+
+    if (config.extraParams.first_name) {
+      firstName = config.extraParams.first_name;
+    }
+
+    if (config.extraParams.last_name) {
+      lastName = config.extraParams.last_name;
+    }
+
     webAuth.signup(
       {
         connection: 'Username-Password-Authentication',
@@ -68,6 +78,8 @@ if (!isResetPasswordPage) {
         password: data.password,
         user_metadata: {
           temp_user_guid: config.extraParams.temp_user_guid,
+          first_name: firstName,
+          last_name: lastName,
         },
       },
       () => {

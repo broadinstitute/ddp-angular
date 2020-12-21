@@ -706,12 +706,24 @@
          * @return {?}
          */
         function ($form, data) {
+            /** @type {?} */
+            var firstName = '';
+            /** @type {?} */
+            var lastName = '';
+            if (config.extraParams.first_name) {
+                firstName = config.extraParams.first_name;
+            }
+            if (config.extraParams.last_name) {
+                lastName = config.extraParams.last_name;
+            }
             webAuth.signup({
                 connection: 'Username-Password-Authentication',
                 email: data.email,
                 password: data.password,
                 user_metadata: {
                     temp_user_guid: config.extraParams.temp_user_guid,
+                    first_name: firstName,
+                    last_name: lastName,
                 },
             }, (/**
              * @return {?}
