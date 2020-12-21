@@ -25,7 +25,8 @@
   padding: 0 2.4rem;
 
   @media print {
-    padding: 2rem 4rem;
+    padding: 0;
+    margin: 0;
   }
 
   &__header {
@@ -59,8 +60,8 @@
 .radio {
   display: flex;
 
-  input[type="radio"],
-  input[type="checkbox"] {
+  input[type='radio'],
+  input[type='checkbox'] {
     display: none;
 
     margin: 0;
@@ -123,13 +124,15 @@
   }
 }
 
-.form-control {
-  font-size: 15px;
+.form-group {
+  .form-control {
+    font-size: 15px;
 
-  border: 1px solid $silver-grey;
-  border-left: 3px solid $silver-grey;
-  border-radius: 0;
-  box-shadow: none !important;
+    border: 1px solid $silver-grey;
+    border-left: 3px solid $silver-grey;
+    border-radius: 0;
+    box-shadow: none !important;
+  }
 }
 
 .composite-block-divider {
@@ -170,4 +173,11 @@
     font-size: 18px;
     font-weight: bold;
   }
+}
+
+.block {
+  margin: 1em 0;
+
+  page-break-inside: avoid;
+  page-break-after: auto;
 }

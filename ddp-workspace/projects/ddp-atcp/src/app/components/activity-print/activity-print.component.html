@@ -28,14 +28,14 @@
 
         <!-- "CONTENT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Content">
-          <div *ngIf="block.content" class="content-block">
+          <div *ngIf="block.content" class="block content-block">
             {{ block.content }}
           </div>
         </ng-container>
 
         <!-- "BOOLEAN" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Boolean">
-          <div class="boolean-block">
+          <div class="block boolean-block">
             <label>
               {{ block.content }}
             </label>
@@ -86,7 +86,7 @@
 
         <!-- "NUMERIC" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Numeric">
-          <div class="numeric-block">
+          <div class="block numeric-block">
             <div class="form-group">
               <label>
                 {{ block.content }}
@@ -103,7 +103,7 @@
 
         <!-- "CONDITIONAL" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Conditional">
-          <div class="conditional-block">
+          <div class="block conditional-block">
             <label>
               {{ block.content }}
             </label>
@@ -126,7 +126,7 @@
 
         <!-- "TEXT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Text">
-          <div class="form-group">
+          <div class="block form-group">
             <label>
               {{ block.content }}
             </label>
@@ -163,7 +163,7 @@
 
         <!-- "COMPOSITE" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Composite">
-          <div *ngIf="block.content" class="composite-block">
+          <div *ngIf="block.content" class="block composite-block">
             <p>{{ block.content }}</p>
           </div>
         </ng-container>
@@ -171,7 +171,7 @@
         <!-- "PICKLIST" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Picklist">
           <div
-            class="picklist-block"
+            class="block picklist-block"
             [class.as-checkbox]="block.additional && block.additional.multiple"
           >
             <ng-container
@@ -244,7 +244,7 @@
 
         <!-- "DATE" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Date">
-          <div class="date-block">
+          <div class="block date-block">
             <div class="form-group">
               <label>
                 {{ block.content }}
@@ -261,7 +261,7 @@
 
         <!-- "AGREEMENT" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.Agreement">
-          <div class="agreement-block as-checkbox">
+          <div class="block agreement-block as-checkbox">
             <div class="radio">
               <div class="radio__outer">
                 <div class="radio__inner"></div>
@@ -280,7 +280,7 @@
 
         <!-- "COMPOSITE_DIVIDER" Block Type -->
         <ng-container *ngSwitchCase="blockTypes.CompositeDivider">
-          <div class="composite-block-divider">
+          <div class="block composite-block-divider">
             <span>{{ block.content }}</span>
             <div></div>
           </div>

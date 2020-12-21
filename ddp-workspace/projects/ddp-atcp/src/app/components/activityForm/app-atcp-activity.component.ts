@@ -160,7 +160,7 @@ import * as Routes from '../../router-resources';
                     </ng-container>
                     <hr>
                     <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
-                        <ng-container *ngIf="isLoaded && model.readonly && isFirstStep">
+                        <ng-container *ngIf="isLoaded && model.readonly && isFirstStep && model.activityCode !== ActivityCodes.REVIEW_AND_SUBMISSION">
                             <button class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral button--print" (click)="onDownloadClick()">
                             <mat-icon>arrow_circle_down</mat-icon>
                             {{ 'SDK.DownloadButton' | translate }}
