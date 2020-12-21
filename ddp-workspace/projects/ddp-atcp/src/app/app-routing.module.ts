@@ -29,8 +29,7 @@ import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-
 const routes: Routes = [
   {
       path: RouterResource.Error,
-      component: ErrorRedesignedComponent,
-      canActivate: [IrbGuard]
+      component: ErrorRedesignedComponent
   },
   {
       path: RouterResource.Statistics,

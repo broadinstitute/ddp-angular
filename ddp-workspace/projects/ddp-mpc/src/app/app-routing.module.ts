@@ -139,8 +139,7 @@ const routes: Routes = [
   },
   {
     path: 'error',
-    component: ErrorComponent,
-    canActivate: [IrbGuard]
+    component: ErrorComponent
   },
   {
     path: 'more-details',

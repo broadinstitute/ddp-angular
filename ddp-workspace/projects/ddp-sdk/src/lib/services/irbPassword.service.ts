@@ -5,7 +5,7 @@ import { ConfigurationService } from './configuration.service';
 import { NotAuthenticatedServiceAgent } from './serviceAgents/notAuthenticatedServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { PasswordCheckResult } from './../models/passwordCheckResult';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
                 }
                 return loggedIn;
             }),
-            catchError(this.handleError));
+            catchError(this.handleError.bind(this)));
     }
 
     // if no password requires, sending a blank password should return true
