@@ -10,6 +10,7 @@ import {
   ConfigurationService,
   SessionMementoService,
   LoggingService,
+  Auth0AdapterService,
 } from 'ddp-sdk';
 
 import * as RouterResources from '../router-resources';
@@ -30,6 +31,7 @@ export class MultiGovernedUserService {
     private activityAgent: ActivityServiceAgent,
     private session: SessionMementoService,
     private loggingService: LoggingService,
+    private auth0: Auth0AdapterService,
     @Inject('ddp.config') private readonly config: ConfigurationService
   ) {}
 
@@ -59,33 +61,43 @@ export class MultiGovernedUserService {
           return sections[0];
         })
       )
-      .subscribe(activitySection => {
-        if (activitySection instanceof Observable) {
-          return;
-        }
+      .subscribe(
+        activitySection => {
+          if (activitySection instanceof Observable) {
+            return;
+          }
 
-        const selfDescribeBlock = activitySection.blocks.find(
-          block =>
-            block instanceof ActivityPicklistQuestionBlock &&
-            block.stableId === this.PREQUAL_SELF_DESCRIBE_STABLE_ID
-        );
-
-        if (!selfDescribeBlock) {
-          this.loggingService.logError(
-            this.LOG_SOURCE,
-            `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`
+          const selfDescribeBlock = activitySection.blocks.find(
+            block =>
+              block instanceof ActivityPicklistQuestionBlock &&
+              block.stableId === this.PREQUAL_SELF_DESCRIBE_STABLE_ID
           );
-        }
 
-        const answer = (selfDescribeBlock as ActivityPicklistQuestionBlock)
-          .answer[0];
+          if (!selfDescribeBlock) {
+            this.loggingService.logError(
+              this.LOG_SOURCE,
+              `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`
+            );
+          }
 
-        if (answer && answer.stableId) {
-          this.isMultiGoverned$.next(
-            answer.stableId === this.CHILD_DIAGNOSED_STABLE_ID
-          );
+          const answer = (selfDescribeBlock as ActivityPicklistQuestionBlock)
+            .answer[0];
+
+          if (answer && answer.stableId) {
+            this.isMultiGoverned$.next(
+              answer.stableId === this.CHILD_DIAGNOSED_STABLE_ID
+            );
+          }
+        },
+        err => {
+          console.log('No prequal', err);
+          const returnTo = `${this.config.baseUrl}${
+            this.config.baseUrl.endsWith('/') ? '' : '/'
+          }${RouterResources.JoinUs}?err=true`;
+
+          this.auth0.webAuth.logout(returnTo, this.config.auth0ClientId);
         }
-      });
+      );
   }
 
   public navigateToDashboard(): void {
