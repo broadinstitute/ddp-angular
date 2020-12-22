@@ -707,7 +707,7 @@
          */
         function ($form, data) {
             /** @type {?} */
-            var emailInput = $('#email');
+            var emailInput = $form.find('#email');
             /** @type {?} */
             var formGroup = emailInput.parent();
             formGroup.removeClass('email-taken');

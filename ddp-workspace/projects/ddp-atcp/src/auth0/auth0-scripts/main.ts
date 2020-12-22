@@ -61,7 +61,7 @@ $('[data-toggle="tooltip"]').tooltip({
 
 if (!isResetPasswordPage) {
   createForm(configs.signUp, ($form, data) => {
-    const emailInput = $('#email');
+    const emailInput = $form.find('#email');
     const formGroup = emailInput.parent();
 
     formGroup.removeClass('email-taken');
