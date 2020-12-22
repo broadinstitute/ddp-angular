@@ -707,6 +707,11 @@
          */
         function ($form, data) {
             /** @type {?} */
+            var emailInput = $('#email');
+            /** @type {?} */
+            var formGroup = emailInput.parent();
+            formGroup.removeClass('email-taken');
+            /** @type {?} */
             var firstName = '';
             /** @type {?} */
             var lastName = '';
@@ -731,10 +736,10 @@
              */
             function (err) {
                 if (err) {
-                    window.location.replace(baseUrl + "/join-us?err=true");
+                    formGroup.addClass('email-taken');
                 }
                 else {
-                    $('#enteredEmail').text($form.find('#email').val());
+                    $('#enteredEmail').text(emailInput.val());
                     onActivateActivateAccount();
                 }
             }));

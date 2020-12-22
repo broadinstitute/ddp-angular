@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "Email cannot be empty",
+      "emailTaken": "Email has already been taken. Please choose another value.",
       "label": "Email",
       "whoseEmail": "Whose email should I input?",
       "whoseEmailTooltip": "If you are a parent/legal guardian of a child(ren) with A-T, please use your own email address. We will use this address to correspond with you regarding anyone you register in The Global A-T Family Data Platform."

@@ -6,10 +6,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
-import { delay, filter, map, mergeMap, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { filter, map, mergeMap, take } from 'rxjs/operators';
 
 import {
   ActivityResponse,
@@ -25,8 +23,6 @@ import {
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
-import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
-import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 import { UserInfo } from '../../models/userInfo';
 import * as Routes from '../../router-resources';
@@ -73,7 +69,6 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   constructor(
     private hostEl: ElementRef,
     private router: Router,
-    private route: ActivatedRoute,
     private multiGovernedUserService: MultiGovernedUserService,
     private cdr: ChangeDetectorRef,
     @Inject('toolkit.toolkitConfig')
@@ -85,14 +80,10 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     private temporaryUserService: TemporaryUserServiceAgent,
     private workflow: WorkflowServiceAgent,
     private auth0: Auth0AdapterService,
-    private loggingService: LoggingService,
-    private communicationService: AtcpCommunicationService,
-    private translateService: TranslateService
+    private loggingService: LoggingService
   ) {}
 
   public ngOnInit(): void {
-    this.checkSignUpError();
-
     if (this.session.isAuthenticatedSession()) {
       this.multiGovernedUserService.navigateToDashboard();
     }
@@ -103,25 +94,6 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
   public showStickySubtitle(stickySubtitle: string): void {
     this.stickySubtitle = stickySubtitle;
-  }
-
-  private checkSignUpError(): void {
-    const queryParams = this.route.snapshot.queryParams;
-
-    if (queryParams && queryParams.err) {
-      this.communicationService.showPopupMessage(
-        new PopupMessage(
-          this.translateService.instant('JoinUs.EmailTaken'),
-          false
-        )
-      );
-
-      of(null)
-        .pipe(delay(4000))
-        .subscribe(() => {
-          this.communicationService.closePopupMessage();
-        });
-    }
   }
 
   private fetchActivity(): void {

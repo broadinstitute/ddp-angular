@@ -61,6 +61,11 @@ $('[data-toggle="tooltip"]').tooltip({
 
 if (!isResetPasswordPage) {
   createForm(configs.signUp, ($form, data) => {
+    const emailInput = $('#email');
+    const formGroup = emailInput.parent();
+
+    formGroup.removeClass('email-taken');
+
     let firstName = '', lastName = '';
 
     if (config.extraParams.first_name) {
@@ -84,9 +89,9 @@ if (!isResetPasswordPage) {
       },
       err => {
         if (err) {
-          window.location.replace(`${baseUrl}/join-us?err=true`);
+          formGroup.addClass('email-taken');
         } else {
-          $('#enteredEmail').text($form.find('#email').val());
+          $('#enteredEmail').text(emailInput.val());
           onActivateActivateAccount();
         }
       }

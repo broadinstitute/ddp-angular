@@ -21,11 +21,13 @@ b {
   border-left: 3px solid #DB2C2C !important;
 }
 
-.form-group .message {
+.form-group .message,
+.form-group .email-taken-message {
   display: none;
 }
 
-.form-group.error .message {
+.form-group.error .message,
+.form-group.email-taken .email-taken-message {
   display: block;
   color: #DB2C2C !important;
 }

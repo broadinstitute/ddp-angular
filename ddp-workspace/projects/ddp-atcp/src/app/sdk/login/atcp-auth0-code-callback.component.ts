@@ -142,16 +142,6 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (err.code === 'invalid_signup') {
-      this.router.navigate([Routes.JoinUs], {
-        queryParams: {
-          err: true,
-        },
-      });
-
-      return;
-    }
-
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 }
