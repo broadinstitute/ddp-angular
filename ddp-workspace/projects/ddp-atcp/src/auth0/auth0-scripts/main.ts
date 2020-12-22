@@ -84,13 +84,9 @@ if (!isResetPasswordPage) {
       },
       err => {
         if (err) {
-          const err = {
-            code: 'invalid_signup',
-          };
-
-          window.location.replace(`${config.callbackURL}?error=true&error_description=${JSON.stringify(err)}`);
+          window.location.replace(`${baseUrl}/join-us?err=true`);
         } else {
-          // $('#enteredEmail').text($form.find('#email').val());
+          $('#enteredEmail').text($form.find('#email').val());
           onActivateActivateAccount();
         }
       }
