@@ -65,6 +65,17 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         this.LOG_SOURCE,
         'auth error occured: ' + JSON.stringify(error)
       );
+
+      if (error.code === 'invalid_signup') {
+        this.router.navigate([Routes.JoinUs], {
+          queryParams: {
+            err: true,
+          },
+        });
+
+        return;
+      }
+
       if (error.code === 'unauthorized') {
         const returnTo = `${this.config.baseUrl}${
           this.config.baseUrl.endsWith('/') ? '' : '/'

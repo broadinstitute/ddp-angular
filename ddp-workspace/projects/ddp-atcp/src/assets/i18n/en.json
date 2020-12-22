@@ -448,7 +448,8 @@
     }
   },
   "JoinUs": {
-    "SignInButton": "Already registered? Sign In here"
+    "SignInButton": "Already registered? Sign In here",
+    "EmailTaken": "Email you've provided is already taken. Please try to sign up with a different one."
   },
   "SDK": {
     "DownloadButton": "Download Review",
