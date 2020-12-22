@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "pl_Email cannot be empty",
+      "emailTaken": "pl_Email has already been taken. Please choose another value.",
       "label": "Adres e-mail",
       "whoseEmail": "Czyj e-mail mam wpisać?",
       "whoseEmailTooltip": "Jeżeli jesteś rodzicem/opiekunem prawnym dziecka (dzieci) chorych na A-T, użyj swojego adresu e-mail.  Ten adres e-mail będzie wykorzystywany do komunikacji z tobą dotyczącej każdej osoby, którą zarejestrujesz w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T."

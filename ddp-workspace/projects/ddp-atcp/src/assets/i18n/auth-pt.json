@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "pt_Email cannot be empty",
+      "emailTaken": "pt_Email has already been taken. Please choose another value.",
       "label": "Endereço de e-mail",
       "whoseEmail": "Devo informar o e-mail de quem?",
       "whoseEmailTooltip": "Caso você seja pai ou mãe/responsável legal de uma criança ou crianças com A-T, use o seu próprio endereço de e-mail.  Usaremos este endereço de e-mail para nos comunicarmos com você sobre qualquer pessoa que você registrar na Global A-T Family Data Platform."

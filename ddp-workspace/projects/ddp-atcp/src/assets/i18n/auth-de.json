@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "de_Email cannot be empty",
+      "emailTaken": "de_Email has already been taken. Please choose another value.",
       "label": "E-Mail-Adresse",
       "whoseEmail": "Wessen E-Mail-Adresse gebe ich ein?",
       "whoseEmailTooltip": "Wenn Sie ein Elternteil/Erziehungsberechtigter eines oder mehrerer Kinder mit AT sind, verwenden Sie Ihre eigene E-Mail-Adresse.  Wir verwenden diese E-Mail-Adresse zur Kommunikation über alle Teilnehmer, die Sie auf der Plattform für globale Daten von AT-Familien registriert haben."

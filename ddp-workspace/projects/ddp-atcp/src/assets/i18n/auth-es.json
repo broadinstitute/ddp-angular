@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "es_Email cannot be empty",
+      "emailTaken": "es_Email has already been taken. Please choose another value.",
       "label": "Dirección de correo electrónico",
       "whoseEmail": "¿Qué correo electrónico debo ingresar?",
       "whoseEmailTooltip": "Si es padre/madre o tutor legal de uno o varios niños con A-T, use su propia dirección de correo electrónico.  Usaremos esta dirección para comunicarnos con usted acerca de todas las personas que registre en la Plataforma global de datos para familias con A-T."

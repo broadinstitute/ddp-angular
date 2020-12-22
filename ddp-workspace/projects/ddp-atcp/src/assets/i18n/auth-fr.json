@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "fr_Email cannot be empty",
+      "emailTaken": "fr_Email has already been taken. Please choose another value.",
       "label": "Adresse e-mail",
       "whoseEmail": "L’adresse e-mail de qui dois-je saisir ?",
       "whoseEmailTooltip": "Si vous êtes le parent ou le tuteur légal d’un enfant AT, utilisez votre propre adresse e-mail.  Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet des participants que vous avez enregistrés sur la plateforme de données internationale sur les familles AT."

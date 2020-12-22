@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "it_Email cannot be empty",
+      "emailTaken": "it_Email has already been taken. Please choose another value.",
       "label": "Indirizzo di posta elettronica",
       "whoseEmail": "Devo immettere l'indirizzo di posta elettronica di chi?",
       "whoseEmailTooltip": "Se sei il genitore/tutore legale di uno o più bambini affetti da A-T, usa il tuo indirizzo di posta elettronica.  Utilizzeremo questo indirizzo per comunicare con te in relazione a chiunque registri nella Piattaforma globale di dati sulle famiglie con A-T."

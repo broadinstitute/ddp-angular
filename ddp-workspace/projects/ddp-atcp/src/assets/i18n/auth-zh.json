@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "zh_Email cannot be empty",
+      "emailTaken": "zh_Email has already been taken. Please choose another value.",
       "label": "电子邮箱地址",
       "whoseEmail": "我应该输入哪些电子邮箱？",
       "whoseEmailTooltip": "如果您是A-T的孩子（们）的父母/法定监护人，请使用您自己的电子邮箱地址。  我们将使用此地址与您在全球A-T成员数据平台中注册的任何人对应。"

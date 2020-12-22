@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "tr_Email cannot be empty",
+      "emailTaken": "tr_Email has already been taken. Please choose another value.",
       "label": "E-posta adresi",
       "whoseEmail": "Kimin e-postasını girmeliyim?",
       "whoseEmailTooltip": "A-T'li bir çocuğun/çocukların ebeveyni/vasisi iseniz kendi e-posta adresinizi kullanın.  Global A-T Aile Veri Platformunda kaydettiğiniz kişiler için sizinle iletişim kurmak üzere bu adresi kullanacağız."

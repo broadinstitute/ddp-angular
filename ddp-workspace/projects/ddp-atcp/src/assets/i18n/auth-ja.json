@@ -13,6 +13,7 @@
     },
     "email": {
       "error": "ja_Email cannot be empty",
+      "emailTaken": "ja_Email has already been taken. Please choose another value.",
       "label": "Eメールアドレス",
       "whoseEmail": "どなたのEメールアドレスを入力しますか?",
       "whoseEmailTooltip": "あなたがA-T患者であるお子様(たち) の親/法的保護者である場合には、あなた自身のEメールアドレスを使用してください。このアドレスへ、グローバル A-T ファミリーデータプラットフォームに登録された方々に関するご連絡をいたします。"
