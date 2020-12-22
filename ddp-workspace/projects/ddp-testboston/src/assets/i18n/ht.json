@@ -382,6 +382,7 @@
       "Text": "Tanpri, mete modpas ou an *",
       "InputPlaceholder": "Modpas",
       "PasswordWrongError": "Modpas la pa bon. Tanpri, eseye ankò.",
+      "OtherError": "[HT] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "Modpas la obligatwa"
     },
     "ErrorPage": {

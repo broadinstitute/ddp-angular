@@ -382,6 +382,7 @@
       "Text": "Vui lòng nhập mật khẩu của quý vị *",
       "InputPlaceholder": "Mật khẩu",
       "PasswordWrongError": "Mật khẩu không chính xác. Vui lòng thử lại lần nữa.",
+      "OtherError": "[VI] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "Cần mật khẩu"
     },
     "ErrorPage": {

@@ -382,6 +382,7 @@
       "Text": "Saisissez votre mot de passe *",
       "InputPlaceholder": "Mot de passe",
       "PasswordWrongError": "Mot de passe incorrect. Veuillez réessayer.",
+      "OtherError": "[FR] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "Le mot de passe est requis."
     },
     "ErrorPage": {

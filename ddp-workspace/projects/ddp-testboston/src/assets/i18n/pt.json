@@ -382,6 +382,7 @@
       "Text": "Introduza a sua palavra-passe *",
       "InputPlaceholder": "Palavra-passe",
       "PasswordWrongError": "Palavra-passe incorreta. Tente de novo.",
+      "OtherError": "[PT] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "É necessária palavra-passe"
     },
     "ErrorPage": {
