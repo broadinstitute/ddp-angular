@@ -726,11 +726,21 @@
                     last_name: lastName,
                 },
             }, (/**
+             * @param {?} err
              * @return {?}
              */
-            function () {
-                $('#enteredEmail').text($form.find('#email').val());
-                onActivateActivateAccount();
+            function (err) {
+                if (err) {
+                    /** @type {?} */
+                    var err_1 = {
+                        code: 'invalid_signup',
+                    };
+                    window.location.replace(config.callbackURL + "?error=true&error_description=" + JSON.stringify(err_1));
+                }
+                else {
+                    // $('#enteredEmail').text($form.find('#email').val());
+                    onActivateActivateAccount();
+                }
             }));
         }));
     }

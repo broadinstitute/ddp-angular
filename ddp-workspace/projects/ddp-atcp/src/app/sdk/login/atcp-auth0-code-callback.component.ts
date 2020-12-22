@@ -127,10 +127,18 @@ export class AtcpAuth0CodeCallbackComponent implements OnInit, OnDestroy {
       'error_description'
     ];
     this.log.logEvent(this.LOG_SOURCE, 'auth error occured: ' + authErrorDescription);
-    if (JSON.parse(authErrorDescription).code === 'unauthorized') {
+
+    const err = JSON.parse(authErrorDescription);
+
+    if (err.code === 'unauthorized') {
       this.router.navigateByUrl('account-activation-required');
       return;
     }
+
+    if (err.code === 'invalid_signup') {
+      console.log('Email is taken!!!!!!!');
+    }
+
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 }

@@ -82,9 +82,17 @@ if (!isResetPasswordPage) {
           last_name: lastName,
         },
       },
-      () => {
-        $('#enteredEmail').text($form.find('#email').val());
-        onActivateActivateAccount();
+      err => {
+        if (err) {
+          const err = {
+            code: 'invalid_signup',
+          };
+
+          window.location.replace(`${config.callbackURL}?error=true&error_description=${JSON.stringify(err)}`);
+        } else {
+          // $('#enteredEmail').text($form.find('#email').val());
+          onActivateActivateAccount();
+        }
       }
     );
   });
