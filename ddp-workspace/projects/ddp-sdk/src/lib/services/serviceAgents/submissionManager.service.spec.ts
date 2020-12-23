@@ -45,7 +45,7 @@ describe('SubmissionManagerTest', () => {
             return of({ answers: [], blockVisibility: [] }).pipe(delayWhen(x => timer(2000)));
         });
         const start = new Date().getTime();
-        serviceAgent.saveAnswerSubmission('hey', 'ho', { stableId: 'blah', answer: 'boo' }, true).subscribe(x => {
+        serviceAgent.saveAnswerSubmission('hey', 'ho', { stableId: 'blah', value: 'boo' }, true).subscribe(x => {
             console.log('Yipee ay yea');
             console.log('The milliseconds gone by are:' + (new Date().getTime() - start));
             expect(x['answers']).not.toBeNull();

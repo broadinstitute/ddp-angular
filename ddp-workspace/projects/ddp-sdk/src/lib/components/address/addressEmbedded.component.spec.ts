@@ -2,9 +2,10 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { AddressEmbeddedComponent } from './addressEmbedded.component';
 import { AddressInputComponent } from './addressInput.component';
 import { ValidationMessage } from '../validationMessage.component';
-import { MatCardModule, MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioButton, MatRadioGroup, MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Component, DebugElement, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
 import { of, Subject, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
@@ -45,7 +46,7 @@ class FakeAddressInputComponent {
     return this._address;
   }
 
-    ais = {currentAddress$: new Subject<Address>()};
+  ais = { currentAddress$: new Subject<Address>() };
   public clearVerificationErrors(): void {
     console.log('verifications cleared!');
   }
@@ -89,12 +90,12 @@ describe('AddressEmbeddedComponent', () => {
     // @ts-ignore
     translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
       return of(Array.isArray(word) ?
-          word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
-          'label1');
+        word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
+        'label1');
     });
 
     TestBed.configureTestingModule({
-      declarations: [ AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessage ],
+      declarations: [AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessage],
       providers: [
         {provide: AddressService, useValue: addressServiceSpy},
         {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
@@ -104,7 +105,7 @@ describe('AddressEmbeddedComponent', () => {
       ],
       imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
     fixture = TestBed.createComponent(AddressEmbeddedComponent);
     component = fixture.componentInstance;
     component.addressInputComponent =
@@ -114,7 +115,7 @@ describe('AddressEmbeddedComponent', () => {
     addressBlock.subtitleText = 'The subtitle';
     component.block = addressBlock;
     childComponentFixture = fixture.debugElement.query(By.directive(FakeAddressInputComponent));
-    childComponent  = childComponentFixture.componentInstance as FakeAddressInputComponent;
+    childComponent = childComponentFixture.componentInstance as FakeAddressInputComponent;
   }));
 
   beforeEach(() => {
@@ -246,7 +247,7 @@ describe('AddressEmbeddedComponent', () => {
     const radioInstances = radioDebugElements.map(debugEl => debugEl.componentInstance) as MatRadioButton[];
     const groupInstance: MatRadioGroup = radioGroupComponentDebug.injector.get<MatRadioGroup>(MatRadioGroup);
     fixture.detectChanges();
-    expect(groupInstance.selected.value).toBe('entered');
+    expect(groupInstance.value).toBe('entered');
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalled();
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addresses.enteredAddress, '123');
@@ -309,12 +310,13 @@ describe('AddressEmbeddedComponent', () => {
     const addressToEnter = buildPerfectAddress();
     addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
     // field 'address' is the global error.
-    const overallAddressErrors: AddressError[] = [{code: '123', field: 'address', message: 'Bad address'}];
+    const overallAddressErrors: AddressError[] = [{ code: '123', field: 'address', message: 'Bad address' }];
     const verificationStatus: AddressVerificationStatus = {
-      address : new Address(),
+      address: new Address(),
       isDeliverable: false,
       code: 'BAD!',
-      errors: overallAddressErrors};
+      errors: overallAddressErrors
+    };
     addressServiceSpy.verifyAddress.and.returnValue(throwError(verificationStatus));
     fixture.detectChanges();
 
@@ -335,12 +337,13 @@ describe('AddressEmbeddedComponent', () => {
     const addressToEnter = buildPerfectAddress();
     addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
     // field 'address' is the global error.
-    const overallAddressErrors: AddressError[] = [{code: '123', field: 'street1', message: 'Bad street1!!'}];
+    const overallAddressErrors: AddressError[] = [{ code: '123', field: 'street1', message: 'Bad street1!!' }];
     const verificationStatus: AddressVerificationStatus = {
-      address : new Address(),
+      address: new Address(),
       isDeliverable: false,
       code: 'REALLYBAD!',
-      errors: overallAddressErrors};
+      errors: overallAddressErrors
+    };
     addressServiceSpy.verifyAddress.and.returnValue(throwError(verificationStatus));
     fixture.detectChanges();
 
@@ -364,7 +367,7 @@ describe('AddressEmbeddedComponent', () => {
     // field 'address' is the global error.
     const verificationResponseWithWarningForEntered = new AddressVerificationResponse(addressToEnter);
     const warningMsg = 'You have been warned!';
-    verificationResponseWithWarningForEntered.warnings.entered = [{code: 'WARNING', message: warningMsg}];
+    verificationResponseWithWarningForEntered.warnings.entered = [{ code: 'WARNING', message: warningMsg }];
 
     addressServiceSpy.verifyAddress.and.returnValue(of(verificationResponseWithWarningForEntered));
     fixture.detectChanges();
@@ -391,6 +394,7 @@ describe('AddressEmbeddedComponent', () => {
     fixture.detectChanges();
     expect(childComponent.readonly).toBe(false);
   });
+
   it('test loading default address', fakeAsync(() => {
     const defaultAddress = buildPerfectAddress();
     defaultAddress.guid = '789';
@@ -398,7 +402,7 @@ describe('AddressEmbeddedComponent', () => {
 
     // we are going to try call save in a tick or two
     const spyOnSubmitAnnounced = spyOnProperty(submitAnnounceService, 'submitAnnounced$', 'get');
-    spyOnSubmitAnnounced.and.returnValue(hot('--a', {a: (new ActivityResponse('blah'))}));
+    spyOnSubmitAnnounced.and.returnValue(hot('--a', { a: (new ActivityResponse('blah')) }));
     // @ts-ignore
     addressServiceSpy.findDefaultAddress.and.returnValue(of(defaultAddress));
     let componentIsBusy = false;
@@ -421,7 +425,7 @@ describe('AddressEmbeddedComponent', () => {
   it('test saving partial address from input component', fakeAsync(() => {
     // this makes sure child component gets initial value from parent embedded
     const spyOnSubmitAnnounced = spyOnProperty(submitAnnounceService, 'submitAnnounced$', 'get');
-    spyOnSubmitAnnounced.and.returnValue(hot('--a', {a: (new ActivityResponse('blah'))}));
+    spyOnSubmitAnnounced.and.returnValue(hot('--a', { a: (new ActivityResponse('blah')) }));
     fixture.detectChanges();
     const partialAddressFromInputComponent = new Address({
       name: 'hello',
@@ -435,12 +439,12 @@ describe('AddressEmbeddedComponent', () => {
       code: 'ADDRESS.VERIFY.FAILURE',
       message: 'Unable to verify address.',
       errors:
-      [{
-        code: 'E.ADDRESS.INVALID',
-        field: 'address',
-        message: 'Invalid city/state/ZIP',
-        suggestion: null
-      }, { code: 'E.ADDRESS.NOT_FOUND', field: 'address', message: 'Address not found', suggestion: null }]
+        [{
+          code: 'E.ADDRESS.INVALID',
+          field: 'address',
+          message: 'Invalid city/state/ZIP',
+          suggestion: null
+        }, { code: 'E.ADDRESS.NOT_FOUND', field: 'address', message: 'Address not found', suggestion: null }]
     };
     addressServiceSpy.verifyAddress.and.returnValue(throwError(validationFailureResponse));
     // here comes the partial address
@@ -468,7 +472,6 @@ describe('AddressEmbeddedComponent', () => {
     expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
     expect(addressServiceSpy.deleteTempAddress).toHaveBeenCalledWith('123');
   }));
-
 
   it('ensure we save the correct temporary address', fakeAsync(() => {
     const activityGuid = '123';
@@ -530,8 +533,8 @@ describe('AddressEmbeddedComponent', () => {
   it('test component busy output', fakeAsync(() => {
     component.activityGuid = '123';
     const perfectAddress = buildPerfectAddress();
-    addressServiceSpy.verifyAddress.and.callFake(() => cold('a', {a: buildPerfectAddressVerification()}));
-    addressServiceSpy.saveTempAddress.and.callFake(() => cold('-a', {a: true}));
+    addressServiceSpy.verifyAddress.and.callFake(() => cold('a', { a: buildPerfectAddressVerification() }));
+    addressServiceSpy.saveTempAddress.and.callFake(() => cold('-a', { a: true }));
     fixture.detectChanges();
 
     const busySpy = jasmine.createSpy(`busySpy`);
@@ -563,13 +566,12 @@ describe('AddressEmbeddedComponent', () => {
 
     childComponent.valueChanged.emit(enteredAddress);
     fixture.detectChanges();
-    return {enteredAddress, suggestedAddress: buildPerfectAddress()};
+    return { enteredAddress, suggestedAddress: buildPerfectAddress() };
   };
-
 });
+
 const findValidationMessageDebug = (fixture): DebugElement =>
   fixture.debugElement.query(By.directive(ValidationMessage));
-
 
 const findRadioGroupDebug = (fixture): DebugElement =>
   fixture.debugElement.query(By.directive(MatRadioGroup));
@@ -588,6 +590,7 @@ const buildPerfectAddress = (): Address => {
   perfectAddress.phone = '6175555555';
   return perfectAddress;
 };
+
 const buildPerfectAddressVerification = (): AddressVerificationResponse => {
   const perfectAddressVerify = new AddressVerificationResponse(buildPerfectAddress());
   return perfectAddressVerify;

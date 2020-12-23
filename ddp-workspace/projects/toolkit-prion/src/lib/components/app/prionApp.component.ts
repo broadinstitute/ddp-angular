@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { BrowserContentService, RenewSessionNotifier, UserProfileServiceAgent, WindowRef } from 'ddp-sdk';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
@@ -11,7 +11,6 @@ import {
   WarningComponent,
   CookiesManagementService
 } from 'toolkit';
-
 
 @Component({
   selector: 'app-root',
@@ -89,7 +88,7 @@ export class PrionAppComponent implements OnInit, OnDestroy {
   }
 
   private initHasToSetCookiesPreferencesListener(): void {
-    const hasToSetCookiesPreferences =  this.cookiesManagementService.getHasToSetCookiesPreferences().subscribe(x => {
+    const hasToSetCookiesPreferences = this.cookiesManagementService.getHasToSetCookiesPreferences().subscribe(x => {
       this.showCookiesBanner = x;
     });
     this.anchor.add(hasToSetCookiesPreferences);

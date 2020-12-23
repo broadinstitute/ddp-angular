@@ -431,11 +431,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TooltipComponent,
     SubjectPanelComponent,
     AdminActionPanelComponent
-  ],
-  entryComponents: [
-    UserPreferencesComponent,
-    ManageParticipantsComponent,
-    NewRequestMock
   ]
 })
 export class DdpModule { }

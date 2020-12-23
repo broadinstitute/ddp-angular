@@ -19,11 +19,15 @@ describe('AddressInputService', () => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['findCountryInfoByCode']);
     countryServiceSpy.findCountryInfoByCode.and.callFake((arg) => {
       if (arg === 'CA') {
-        return of({name: 'Canada', code: 'CA', subnationalDivisionTypeName: 'Province', subnationalDivisions: [],
-          postalCodeLabel: 'Postal Code', postalCodeRegex: 'xxxx'});
+        return of({
+          name: 'Canada', code: 'CA', subnationalDivisionTypeName: 'Province', subnationalDivisions: [],
+          postalCodeLabel: 'Postal Code', postalCodeRegex: 'xxxx'
+        });
       } else if (arg === 'US') {
-        return of({name: 'United States', code: 'US', subnationalDivisionTypeName: 'State', subnationalDivisions: [],
-          postalCodeLabel: 'ZIP Code', postalCodeRegex: 'xxxx'});
+        return of({
+          name: 'United States', code: 'US', subnationalDivisionTypeName: 'State', subnationalDivisions: [],
+          postalCodeLabel: 'ZIP Code', postalCodeRegex: 'xxxx'
+        });
       } else {
         return of(null);
       }
@@ -38,6 +42,7 @@ describe('AddressInputService', () => {
   it('should be created', () => {
     expect(ais).toBeTruthy();
   });
+
   it('change in country updates countryInfo$ observable', done => {
     expect(countryServiceSpy.findCountryInfoByCode).not.toHaveBeenCalled();
     ais.countryInfo$.pipe(bufferCount(3)).subscribe(countryArr => {
@@ -47,31 +52,35 @@ describe('AddressInputService', () => {
       expect(countryArr[2]).toBeNull();
       done();
     });
-    ais.addressForm.patchValue({country : 'CA'});
+    ais.addressForm.patchValue({ country: 'CA' });
     // unselect country
-    ais.addressForm.patchValue({country : ''});
+    ais.addressForm.patchValue({ country: '' });
   });
+
   it('change in country updates postalCodeLabel$ observable', done => {
     expect(countryServiceSpy.findCountryInfoByCode).not.toHaveBeenCalled();
     ais.postalCodeLabel$.pipe(bufferCount(3)).subscribe(postalCodeLabels => {
       expect(postalCodeLabels.length).toBe(3);
       // there should be a default label. Not worrying about value
       expect(postalCodeLabels[0]).toBeTruthy();
-      expect(postalCodeLabels[1]).toBe('Postal Code');
-      expect(postalCodeLabels[2]).toBeTruthy();
+      expect(postalCodeLabels[1]).toBeTruthy();
+      expect(postalCodeLabels[2]).toBe('Postal Code');
       done();
     });
-    ais.addressForm.patchValue({country : 'CA'});
+    ais.addressForm.patchValue({ country: 'CA' });
     // unselect country
-    ais.addressForm.patchValue({country : ''});
+    ais.addressForm.patchValue({ country: '' });
   });
+
   it('change in country updates postalCodeLabel$ observable', done => {
     expect(countryServiceSpy.findCountryInfoByCode).not.toHaveBeenCalled();
     const testPostalCodeLabel = 'Province';
     countryServiceSpy.findCountryInfoByCode.and.callFake((arg) => {
       if (arg === 'CA') {
-        return of({name: 'Canada', code: 'CA', subnationalDivisionTypeName: 'blah', subnationalDivisions: [],
-          postalCodeLabel: testPostalCodeLabel, postalCodeRegex: 'x'});
+        return of({
+          name: 'Canada', code: 'CA', subnationalDivisionTypeName: 'blah', subnationalDivisions: [],
+          postalCodeLabel: testPostalCodeLabel, postalCodeRegex: 'x'
+        });
       } else {
         return of(null);
       }
@@ -80,13 +89,13 @@ describe('AddressInputService', () => {
       expect(postalCodeLabels.length).toBe(3);
       // there should be a default label. Not worrying about value
       expect(postalCodeLabels[0]).toBeTruthy();
-      expect(postalCodeLabels[1]).toBe(testPostalCodeLabel);
-      expect(postalCodeLabels[2]).toBeTruthy();
+      expect(postalCodeLabels[1]).toBeTruthy();
+      expect(postalCodeLabels[2]).toBe(testPostalCodeLabel);
       done();
     });
-    ais.addressForm.patchValue({country : 'CA'});
+    ais.addressForm.patchValue({ country: 'CA' });
     // unselect country
-    ais.addressForm.patchValue({country : ''});
+    ais.addressForm.patchValue({ country: '' });
   });
 
   it('Setting input address updates currentAddress$ and countryInfo$ observable', done => {
@@ -102,18 +111,18 @@ describe('AddressInputService', () => {
     testAddress.guid = '123';
 
     combineLatest([
-        ais.currentAddress$.pipe(bufferCount(2)),
-        ais.countryInfo$.pipe(bufferCount(2))
-        ]).subscribe(([addressArr, countryInfoArr]) => {
-          expect(addressArr[0]).toBeTruthy();
-          expect(addressArr[0].name).toBeFalsy();
-          expect(addressArr[0].zip).toBeFalsy();
+      ais.currentAddress$.pipe(bufferCount(2)),
+      ais.countryInfo$.pipe(bufferCount(2))
+    ]).subscribe(([addressArr, countryInfoArr]) => {
+      expect(addressArr[0]).toBeTruthy();
+      expect(addressArr[0].name).toBeFalsy();
+      expect(addressArr[0].zip).toBeFalsy();
 
-          expect(addressArr[1]).toBeTruthy();
-          expect(addressArr[1].name).toBe(testAddress.name);
-          expect(addressArr[1].street1).toBe(testAddress.street1);
-          expect(countryInfoArr[1].name).toBe('United States');
-          done();
+      expect(addressArr[1]).toBeTruthy();
+      expect(addressArr[1].name).toBe(testAddress.name);
+      expect(addressArr[1].street1).toBe(testAddress.street1);
+      expect(countryInfoArr[1].name).toBe('United States');
+      done();
     });
 
     // push an input address
@@ -122,11 +131,11 @@ describe('AddressInputService', () => {
 
   it('Generate address to output stream from form updates', fakeAsync(() => {
     const addressData = {
-      name : 'Rapunzel',
-      street1 : '1 Mockingbird Lane',
-      street2 : '2nd Floor',
-      country : 'US',
-      state : 'AK',
+      name: 'Rapunzel',
+      street1: '1 Mockingbird Lane',
+      street2: '2nd Floor',
+      country: 'US',
+      state: 'AK',
       zip: '90120',
       phone: '867-5309',
       city: 'Fairbanks',
@@ -143,7 +152,7 @@ describe('AddressInputService', () => {
 
     // update form
     Object.entries(addressData).forEach((entry: any[]) => {
-      ais.addressForm.patchValue({[entry[0]]: entry[1]});
+      ais.addressForm.patchValue({ [entry[0]]: entry[1] });
     });
     // move clock forward
     tick(Object.entries(addressData).length * 1000);
@@ -158,11 +167,11 @@ describe('AddressInputService', () => {
     // Before setting any data all controls are untouched.
     expect(Object.values(ais.addressForm.controls).filter(control => control.touched).length).toBe(0);
     const addressData = {
-      name : '',
-      street1 : '1 Mockingbird Lane',
-      street2 : '2nd Floor',
-      country : 'US',
-      state : 'AK',
+      name: '',
+      street1: '1 Mockingbird Lane',
+      street2: '2nd Floor',
+      country: 'US',
+      state: 'AK',
       zip: '90120',
       phone: '867-5309',
       city: 'Fairbanks',
@@ -173,5 +182,4 @@ describe('AddressInputService', () => {
     // check that when set an address, we ensure the controls are touched
     expect(Object.values(ais.addressForm.controls).filter(control => !control.touched).length).toBe(0);
   }));
-
 });

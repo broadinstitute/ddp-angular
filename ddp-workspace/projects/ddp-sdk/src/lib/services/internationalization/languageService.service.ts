@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { isNullOrUndefined } from 'util';
 import { Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { LoggingService } from '../logging.service';
@@ -30,10 +29,10 @@ export class LanguageService {
   }
 
   public canUseLanguage(languageCode: string): boolean {
-    if (isNullOrUndefined(languageCode)) {
-      return false;
+    if (languageCode) {
+      return this.translate.getLangs().includes(languageCode);
     }
-    return this.translate.getLangs().includes(languageCode);
+    return false;
   }
 
   public addLanguages(languageCodes: Array<string>): void {
