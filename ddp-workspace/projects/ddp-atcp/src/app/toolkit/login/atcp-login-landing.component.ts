@@ -83,6 +83,20 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         });
 
         return;
+      } else if (error.code === 'prequal_skipped') {
+        const returnTo = `${this.config.baseUrl}${
+          this.config.baseUrl.endsWith('/') ? '' : '/'
+        }${Routes.JoinUs}`;
+        const clientID = this.config.auth0ClientId;
+
+        this.log.logEvent(this.LOG_SOURCE, 'User tried to skip prequal with social sign in...', `Redirecting to ${returnTo}`);
+
+        this.auth0.webAuth.logout({
+          returnTo,
+          clientID,
+        });
+
+        return;
       }
     }
     this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
