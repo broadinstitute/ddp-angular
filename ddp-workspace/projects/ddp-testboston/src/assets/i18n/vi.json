@@ -252,7 +252,9 @@
       "Placeholder": "Vui lòng nhập mã mời",
       "Error": {
         "Part1": "Mã quý vị nhập không hoạt động. Vui lòng kiểm tra mã của quý vị và thử lại lần nữa. Quý vị luôn có thể liên lạc với ban nhân viên nghiên cứu TestBoston để được trợ giúp:",
-        "Part2": "hoặc"
+        "Part2": "hoặc",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {

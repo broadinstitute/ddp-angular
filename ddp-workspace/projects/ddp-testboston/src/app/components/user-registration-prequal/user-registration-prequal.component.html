@@ -5,8 +5,8 @@
                 <h1 class="invitation-form__title semi-bold" translate>PrequalPage.Title</h1>
                 <div class="invitation-form__container">
                     <p class="invitation-form__question bold" translate>PrequalPage.InvitationCode.Question</p>
-                    <img class="invitation-form__info" 
-                         src="assets/images/info.png" 
+                    <img class="invitation-form__info"
+                         src="assets/images/info.png"
                          [alt]="'PrequalPage.InvitationCode.TooltipAlt' | translate"
                          matTooltipClass="tooltip__box"
                          (click)="tooltip.toggle()"
@@ -28,6 +28,12 @@
                         <a class="Link Link_bold" [href]="emailHref">{{email}}</a>
                         <span translate>PrequalPage.InvitationCode.Error.Part2</span>
                         <a class="Link Link_bold Link_phone" [href]="phoneHref">{{phone}}</a>.
+                    </p>
+                    <p class="error error_input error_input_additional">
+                        <span translate>PrequalPage.InvitationCode.Error.Part3</span>
+                    </p>
+                    <p class="error error_input error_input_additional">
+                        <span translate>PrequalPage.InvitationCode.Error.Part4</span>
                     </p>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Zip.Question</p>
@@ -68,7 +74,7 @@
                 </div>
                 <div class="invitation-form__submit">
                     <button class="button button_primary"
-                            type="submit" 
+                            type="submit"
                             [disabled]="formGroup.invalid || formGroup.disabled"
                             [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
                         {{'Common.Buttons.Submit.Title' | translate}}
