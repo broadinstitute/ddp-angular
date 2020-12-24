@@ -391,3 +391,9 @@ app-activity-progress-bar .mat-progress-bar-fill::after {
       font-weight: bold;
   }
 }
+
+[class*="NA_REASON"] {
+  .mat-radio-group {
+    padding-left: 1.8em;
+  }
+}
