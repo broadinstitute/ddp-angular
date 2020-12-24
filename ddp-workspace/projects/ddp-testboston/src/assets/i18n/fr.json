@@ -252,7 +252,9 @@
       "Placeholder": "Saisissez le code d’invitation",
       "Error": {
         "Part1": "Le code que vous avez saisi nʼest pas actif. Veuillez vérifier votre code et réessayer. Vous pouvez toujours contacter le personnel de lʼétude TestBoston pour obtenir de lʼaide :",
-        "Part2": "ou"
+        "Part2": "ou",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {

@@ -252,7 +252,9 @@
       "Placeholder": "Introduza o código de convite",
       "Error": {
         "Part1": "O código que inseriu não está ativo. Verifique o seu código e tente novamente. Pode sempre contactar o pessoal do estudo TestBoston para obter ajuda:",
-        "Part2": "ou"
+        "Part2": "ou",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {

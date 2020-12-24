@@ -252,7 +252,9 @@
       "Placeholder": "Ingrese su código de invitación.",
       "Error": {
         "Part1": "El código que ingresó no está activo. Verifique su código y vuelva a intentarlo. En cualquier momento puede comunicarse con el personal del estudio TestBoston para solicitar ayuda:",
-        "Part2": "o"
+        "Part2": "o",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {

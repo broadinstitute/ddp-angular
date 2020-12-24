@@ -252,7 +252,9 @@
       "Placeholder": "Mete kòd envitasyon ou an",
       "Error": {
         "Part1": "Kòd ou mete a pa aktif. Tanpri, tcheke kòd ou a epi eseye ankò. Ou ka toujou kontakte estaf etid TestBoston an pou w jwenn èd:",
-        "Part2": "oswa"
+        "Part2": "oswa",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {

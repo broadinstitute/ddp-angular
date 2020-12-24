@@ -252,7 +252,9 @@
       "Placeholder": "Enter invitation code",
       "Error": {
         "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
-        "Part2": "or"
+        "Part2": "or",
+        "Part3": "If you have already enrolled, please click Sign In above to sign back in with your email address and password.",
+        "Part4": "We anticipate reaching current study capacity around 12/23/20. If your code does not work, it's possible the study has reached capacity for now and auto-prevented your enrollment. We apologize. You may email the study and include your invitation code if you think there has been an error."
       }
     },
     "Zip": {
