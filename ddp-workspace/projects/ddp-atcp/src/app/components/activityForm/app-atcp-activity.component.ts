@@ -43,14 +43,14 @@ import * as Routes from '../../router-resources';
                     <a *ngIf="model.activityCode === ActivityCodes.CONSENT"
                        download="Research_Consent_Form_EN.pdf"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
-                       href="assets/pdf/A-T_Research_Consent_Form.pdf">
+                       href="assets/pdf/A-T_Research_Consent_Form_12_20.pdf">
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Consent.Download' | translate }}
                     </a>
                     <a *ngIf="model.activityCode === ActivityCodes.ASSENT"
                        download="Research_Assent_Form_EN.pdf"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral ButtonBordered--assent-kids"
-                       href="assets/pdf/A-T_Research_Assent_Form.pdf">
+                       href="assets/pdf/A-T_Research_Assent_Form_12_20.pdf">
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Assent.Download' | translate }}
                     </a>
