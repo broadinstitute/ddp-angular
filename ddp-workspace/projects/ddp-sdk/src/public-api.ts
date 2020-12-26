@@ -91,6 +91,7 @@ export * from './lib/components/internationalization/changeLanguageRedirect.comp
 export * from './lib/components/popupWithCheckbox.component';
 export * from './lib/components/user/activities/userActivitiesDataSource';
 export * from './lib/components/subjectPanel.component';
+export * from './lib/components/adminActionPanel.component';
 export * from './lib/components/tooltip.component';
 export * from './lib/components/validationMessage.component';
 export * from './lib/components/age-up/acceptAgeUp.component';
