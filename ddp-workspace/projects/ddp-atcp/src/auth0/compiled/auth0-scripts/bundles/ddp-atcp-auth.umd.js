@@ -520,129 +520,24 @@
         /** @type {?} */
         Language.prototype.name;
     }
-    // let languagesList: Language[];
-    // const onTranslate = (dictionary: Record<string, any>, langCode: string) => {
-    //   const selectedLang = languagesList.find(lang => lang.code === langCode);
-    //   if (selectedLang) {
-    //     $('#current-language').text(selectedLang.name);
-    //   }
-    //   $('[data-translate]').each((i, el) => {
-    //     const $el = $(el);
-    //     const key = $el.data('translate');
-    //     let text = '';
-    //     if (key.indexOf('.') !== -1) {
-    //       const pathKeys = key.split('.');
-    //       try {
-    //         text = pathKeys.reduce((prev, curr) => prev[curr], dictionary);
-    //       } catch (e) {
-    //         console.log(e);
-    //       }
-    //     } else {
-    //       text = dictionary[key];
-    //     }
-    //     $el.text(text);
-    //   });
-    // };
-    // const onChange = (
-    //   baseUrl: string,
-    //   language: string,
-    //   cb: (list: any[]) => void
-    // ) => {
-    //   $.getJSON(baseUrl + '/auth-' + language + '.json', data => {
-    //     onTranslate(data, language);
-    //     cb(data);
-    //   });
-    // };
-    // const loadLanguagesList = (baseUrl: string, cb: () => void) => {
-    //   $.getJSON(baseUrl + '/languages.json', (languages: Language[]) => {
-    //     languagesList = languages;
-    //     const $container = $('.languages');
-    //     let items = '';
-    //     languages.forEach(item => {
-    //       items +=
-    //         '<li><a class="green-hover change-language" href="#" data-language="' +
-    //         item.code.split('-')[0] +
-    //         '">' +
-    //         item.name +
-    //         '</a></li>';
-    //     });
-    //     $container.empty();
-    //     $container.append(items);
-    //   });
-    // };
-    // export const translatorCreator = (url: string, cb: (dictionary) => void) => {
-    //   // loadLanguagesList(url);
-    //   return {
-    //     changeTranslate: (language: string) => {
-    //       window.localStorage.setItem('lang', language);
-    //       onChange(url, language, cb);
-    //     },
-    //   };
-    // };
-    var 
-    // let languagesList: Language[];
-    // const onTranslate = (dictionary: Record<string, any>, langCode: string) => {
-    //   const selectedLang = languagesList.find(lang => lang.code === langCode);
-    //   if (selectedLang) {
-    //     $('#current-language').text(selectedLang.name);
-    //   }
-    //   $('[data-translate]').each((i, el) => {
-    //     const $el = $(el);
-    //     const key = $el.data('translate');
-    //     let text = '';
-    //     if (key.indexOf('.') !== -1) {
-    //       const pathKeys = key.split('.');
-    //       try {
-    //         text = pathKeys.reduce((prev, curr) => prev[curr], dictionary);
-    //       } catch (e) {
-    //         console.log(e);
-    //       }
-    //     } else {
-    //       text = dictionary[key];
-    //     }
-    //     $el.text(text);
-    //   });
-    // };
-    // const onChange = (
-    //   baseUrl: string,
-    //   language: string,
-    //   cb: (list: any[]) => void
-    // ) => {
-    //   $.getJSON(baseUrl + '/auth-' + language + '.json', data => {
-    //     onTranslate(data, language);
-    //     cb(data);
-    //   });
-    // };
-    // const loadLanguagesList = (baseUrl: string, cb: () => void) => {
-    //   $.getJSON(baseUrl + '/languages.json', (languages: Language[]) => {
-    //     languagesList = languages;
-    //     const $container = $('.languages');
-    //     let items = '';
-    //     languages.forEach(item => {
-    //       items +=
-    //         '<li><a class="green-hover change-language" href="#" data-language="' +
-    //         item.code.split('-')[0] +
-    //         '">' +
-    //         item.name +
-    //         '</a></li>';
-    //     });
-    //     $container.empty();
-    //     $container.append(items);
-    //   });
-    // };
-    // export const translatorCreator = (url: string, cb: (dictionary) => void) => {
-    //   // loadLanguagesList(url);
-    //   return {
-    //     changeTranslate: (language: string) => {
-    //       window.localStorage.setItem('lang', language);
-    //       onChange(url, language, cb);
-    //     },
-    //   };
-    // };
-    Translator = /** @class */ (function () {
+    var Translator = /** @class */ (function () {
         function Translator(baseUrl) {
             this.baseUrl = baseUrl;
         }
+        /**
+         * @param {?} baseUrl
+         * @return {?}
+         */
+        Translator.create = /**
+         * @param {?} baseUrl
+         * @return {?}
+         */
+        function (baseUrl) {
+            /** @type {?} */
+            var translator = new Translator(baseUrl);
+            translator.loadLanguages();
+            return translator;
+        };
         /**
          * @return {?}
          */
@@ -671,6 +566,7 @@
          */
         function (langCode) {
             var _this = this;
+            console.log("Changing language to " + langCode);
             this.currentLangCode = langCode;
             window.localStorage.setItem('lang', langCode);
             $.getJSON(this.baseUrl + "/auth-" + langCode + ".json", (/**
@@ -692,7 +588,7 @@
          */
         function () {
             /** @type {?} */
-            var languagesContainer = $('.container');
+            var languagesContainer = $('.languages');
             /** @type {?} */
             var content = '';
             this.languages.forEach((/**
@@ -722,13 +618,16 @@
                 /** @type {?} */
                 var langCode = window.localStorage.getItem('lang');
                 if (langCode) {
+                    console.log("Initialized language as \"" + langCode + "\" from local storage");
                     return _this.changeLanguage(langCode);
                 }
                 if (config && config.extraParams && config.extraParams.language) {
                     /** @type {?} */
                     var langCode_1 = config.extraParams.language;
+                    console.log("Initialized language as \"" + langCode_1 + "\" from config");
                     return _this.changeLanguage(langCode_1);
                 }
+                console.log('Initializing default "en" language');
                 _this.changeLanguage('en');
             }));
         };
@@ -824,14 +723,7 @@
     /** @type {?} */
     var languageDataDir = '/assets/i18n';
     /** @type {?} */
-    var translator = new Translator("" + baseUrl + languageDataDir);
-    translator.loadLanguages();
-    // const translator = translatorCreator(
-    //   baseUrl + languageDataDir,
-    //   (loadedDictionary: any) => {
-    //     dictionary = loadedDictionary;
-    //   }
-    // );
+    var translator = Translator.create("" + baseUrl + languageDataDir);
     prepareUiElements(baseUrl);
     $('[data-toggle="tooltip"]').tooltip({
         title: (/**
@@ -1018,20 +910,8 @@
      */
     function (event) {
         event.preventDefault();
-        // translator.changeTranslate($(event.currentTarget).data('language'));
         translator.changeLanguage($(event.currentTarget).data('language'));
     }));
-    // $(document).ready(() => {
-    //   const lang = window.localStorage.getItem('lang');
-    //   if (lang) {
-    //     return translator.changeTranslate(lang);
-    //   }
-    //   if (config && config.extraParams && config.extraParams.language) {
-    //     const lang = config.extraParams.language;
-    //     return translator.changeTranslate(lang);
-    //   }
-    //   translator.changeTranslate('en');
-    // });
     $('#google-sign').on('click', (/**
      * @param {?} e
      * @return {?}

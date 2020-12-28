@@ -36,15 +36,7 @@ if (authLoc === -1) {
 
 // Translator
 const languageDataDir = '/assets/i18n';
-const translator = new Translator(`${baseUrl}${languageDataDir}`);
-
-translator.loadLanguages();
-// const translator = translatorCreator(
-//   baseUrl + languageDataDir,
-//   (loadedDictionary: any) => {
-//     dictionary = loadedDictionary;
-//   }
-// );
+const translator = Translator.create(`${baseUrl}${languageDataDir}`);
 
 prepareUiElements(baseUrl);
 
@@ -183,25 +175,8 @@ $('.hideModal').on('click', event => {
 
 $(document).on('click', '.change-language', event => {
   event.preventDefault();
-  // translator.changeTranslate($(event.currentTarget).data('language'));
   translator.changeLanguage($(event.currentTarget).data('language'));
 });
-
-// $(document).ready(() => {
-//   const lang = window.localStorage.getItem('lang');
-
-//   if (lang) {
-//     return translator.changeTranslate(lang);
-//   }
-
-//   if (config && config.extraParams && config.extraParams.language) {
-//     const lang = config.extraParams.language;
-
-//     return translator.changeTranslate(lang);
-//   }
-
-//   translator.changeTranslate('en');
-// });
 
 $('#google-sign').on('click', e => {
   e.preventDefault();
