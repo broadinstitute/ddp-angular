@@ -51,6 +51,7 @@ commands:
         default: false
     steps:
       - setup-build-workspace
+      - setup-lighthouse-ci
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - unless:
@@ -61,6 +62,7 @@ commands:
             - build-app
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
+            - run-lighthouse-ci
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -266,6 +268,23 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+
+  setup-lighthouse-ci:
+    description: "Install lhci (Lighthouse CI audit tool)"
+    steps:
+      - run:
+          name: Install Lighthouse CI
+          command: |
+            npm i -g @lhci/cli@0.6.x
+
+  run-lighthouse-ci:
+    description: "Run lhci (to get audit report)"
+      steps:
+        - run:
+            name: Run Lighthouse CI
+            command: |
+              lhci autorun
+
   run-tests:
     description: "Run all tests"
     steps:
