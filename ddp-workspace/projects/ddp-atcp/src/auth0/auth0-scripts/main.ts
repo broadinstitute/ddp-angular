@@ -13,7 +13,7 @@ import {
 } from './ui-actions';
 import { createAuth0 } from './auth';
 import { configs, createForm } from './forms';
-import { translatorCreator } from './translator';
+import { Translator } from './translator';
 
 declare const config;
 declare const $;
@@ -33,14 +33,18 @@ if (authLoc === -1) {
 } else {
   baseUrl = callbackURL.substring(0, authLoc);
 }
-let dictionary;
+
+// Translator
 const languageDataDir = '/assets/i18n';
-const translator = translatorCreator(
-  baseUrl + languageDataDir,
-  (loadedDictionary: any) => {
-    dictionary = loadedDictionary;
-  }
-);
+const translator = new Translator(`${baseUrl}${languageDataDir}`);
+
+translator.loadLanguages();
+// const translator = translatorCreator(
+//   baseUrl + languageDataDir,
+//   (loadedDictionary: any) => {
+//     dictionary = loadedDictionary;
+//   }
+// );
 
 prepareUiElements(baseUrl);
 
@@ -51,7 +55,7 @@ $('[data-toggle="tooltip"]').tooltip({
 
     return translateKey
       .split('.')
-      .reduce((prev, curr) => prev[curr], dictionary);
+      .reduce((prev, curr) => prev[curr], translator.currentDictionary);
   },
 });
 
@@ -66,7 +70,8 @@ if (!isResetPasswordPage) {
 
     formGroup.removeClass('email-taken');
 
-    let firstName = '', lastName = '';
+    let firstName = '',
+      lastName = '';
 
     if (config.extraParams.first_name) {
       firstName = config.extraParams.first_name;
@@ -104,13 +109,16 @@ if (!isResetPasswordPage) {
       url: $form.attr('action'),
       data: $form.serialize(),
       success: result => {
-        showModal(dictionary.modal.SuccessChangedPassword);
+        showModal(translator.currentDictionary.modal.SuccessChangedPassword);
         if (result.result_url) {
           window.location.assign(result.result_url.split('?')[0]);
         }
       },
       error: error => {
-        showModal(dictionary.modal.SuccessChangedPassword, true);
+        showModal(
+          translator.currentDictionary.modal.SuccessChangedPassword,
+          true
+        );
       },
     });
   });
@@ -124,7 +132,7 @@ createForm(configs.login, ($form, data) => {
       email: data.email,
       password: data.password,
     },
-    () => showModal(dictionary.modal.InvalidLogin, true)
+    () => showModal(translator.currentDictionary.modal.InvalidLogin, true)
   );
 });
 
@@ -139,7 +147,7 @@ createForm(configs.forgetPassword, ($form, data) => {
       if (err) {
         $form.find('.form-group').addClass('error');
       } else {
-        showModal(dictionary.modal.YouWillGetInstructions);
+        showModal(translator.currentDictionary.modal.YouWillGetInstructions);
         onActivateLogin();
       }
     }
@@ -175,24 +183,25 @@ $('.hideModal').on('click', event => {
 
 $(document).on('click', '.change-language', event => {
   event.preventDefault();
-  translator.changeTranslate($(event.currentTarget).data('language'));
+  // translator.changeTranslate($(event.currentTarget).data('language'));
+  translator.changeLanguage($(event.currentTarget).data('language'));
 });
 
-$(document).ready(() => {
-  const lang = window.localStorage.getItem('lang');
+// $(document).ready(() => {
+//   const lang = window.localStorage.getItem('lang');
 
-  if (lang) {
-    return translator.changeTranslate(lang);
-  }
+//   if (lang) {
+//     return translator.changeTranslate(lang);
+//   }
 
-  if (config && config.extraParams && config.extraParams.language) {
-    const lang = config.extraParams.language;
+//   if (config && config.extraParams && config.extraParams.language) {
+//     const lang = config.extraParams.language;
 
-    return translator.changeTranslate(lang);
-  }
+//     return translator.changeTranslate(lang);
+//   }
 
-  translator.changeTranslate('en');
-});
+//   translator.changeTranslate('en');
+// });
 
 $('#google-sign').on('click', e => {
   e.preventDefault();

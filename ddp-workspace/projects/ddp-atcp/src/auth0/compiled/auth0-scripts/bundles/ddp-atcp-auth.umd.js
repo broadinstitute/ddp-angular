@@ -520,128 +520,285 @@
         /** @type {?} */
         Language.prototype.name;
     }
-    /** @type {?} */
-    var languagesList;
-    /** @type {?} */
-    var onTranslate = (/**
-     * @param {?} dictionary
-     * @param {?} langCode
-     * @return {?}
-     */
-    function (dictionary, langCode) {
-        /** @type {?} */
-        var selectedLang = languagesList.find((/**
-         * @param {?} lang
-         * @return {?}
-         */
-        function (lang) { return lang.code === langCode; }));
-        if (selectedLang) {
-            $('#current-language').text(selectedLang.name);
+    // let languagesList: Language[];
+    // const onTranslate = (dictionary: Record<string, any>, langCode: string) => {
+    //   const selectedLang = languagesList.find(lang => lang.code === langCode);
+    //   if (selectedLang) {
+    //     $('#current-language').text(selectedLang.name);
+    //   }
+    //   $('[data-translate]').each((i, el) => {
+    //     const $el = $(el);
+    //     const key = $el.data('translate');
+    //     let text = '';
+    //     if (key.indexOf('.') !== -1) {
+    //       const pathKeys = key.split('.');
+    //       try {
+    //         text = pathKeys.reduce((prev, curr) => prev[curr], dictionary);
+    //       } catch (e) {
+    //         console.log(e);
+    //       }
+    //     } else {
+    //       text = dictionary[key];
+    //     }
+    //     $el.text(text);
+    //   });
+    // };
+    // const onChange = (
+    //   baseUrl: string,
+    //   language: string,
+    //   cb: (list: any[]) => void
+    // ) => {
+    //   $.getJSON(baseUrl + '/auth-' + language + '.json', data => {
+    //     onTranslate(data, language);
+    //     cb(data);
+    //   });
+    // };
+    // const loadLanguagesList = (baseUrl: string, cb: () => void) => {
+    //   $.getJSON(baseUrl + '/languages.json', (languages: Language[]) => {
+    //     languagesList = languages;
+    //     const $container = $('.languages');
+    //     let items = '';
+    //     languages.forEach(item => {
+    //       items +=
+    //         '<li><a class="green-hover change-language" href="#" data-language="' +
+    //         item.code.split('-')[0] +
+    //         '">' +
+    //         item.name +
+    //         '</a></li>';
+    //     });
+    //     $container.empty();
+    //     $container.append(items);
+    //   });
+    // };
+    // export const translatorCreator = (url: string, cb: (dictionary) => void) => {
+    //   // loadLanguagesList(url);
+    //   return {
+    //     changeTranslate: (language: string) => {
+    //       window.localStorage.setItem('lang', language);
+    //       onChange(url, language, cb);
+    //     },
+    //   };
+    // };
+    var 
+    // let languagesList: Language[];
+    // const onTranslate = (dictionary: Record<string, any>, langCode: string) => {
+    //   const selectedLang = languagesList.find(lang => lang.code === langCode);
+    //   if (selectedLang) {
+    //     $('#current-language').text(selectedLang.name);
+    //   }
+    //   $('[data-translate]').each((i, el) => {
+    //     const $el = $(el);
+    //     const key = $el.data('translate');
+    //     let text = '';
+    //     if (key.indexOf('.') !== -1) {
+    //       const pathKeys = key.split('.');
+    //       try {
+    //         text = pathKeys.reduce((prev, curr) => prev[curr], dictionary);
+    //       } catch (e) {
+    //         console.log(e);
+    //       }
+    //     } else {
+    //       text = dictionary[key];
+    //     }
+    //     $el.text(text);
+    //   });
+    // };
+    // const onChange = (
+    //   baseUrl: string,
+    //   language: string,
+    //   cb: (list: any[]) => void
+    // ) => {
+    //   $.getJSON(baseUrl + '/auth-' + language + '.json', data => {
+    //     onTranslate(data, language);
+    //     cb(data);
+    //   });
+    // };
+    // const loadLanguagesList = (baseUrl: string, cb: () => void) => {
+    //   $.getJSON(baseUrl + '/languages.json', (languages: Language[]) => {
+    //     languagesList = languages;
+    //     const $container = $('.languages');
+    //     let items = '';
+    //     languages.forEach(item => {
+    //       items +=
+    //         '<li><a class="green-hover change-language" href="#" data-language="' +
+    //         item.code.split('-')[0] +
+    //         '">' +
+    //         item.name +
+    //         '</a></li>';
+    //     });
+    //     $container.empty();
+    //     $container.append(items);
+    //   });
+    // };
+    // export const translatorCreator = (url: string, cb: (dictionary) => void) => {
+    //   // loadLanguagesList(url);
+    //   return {
+    //     changeTranslate: (language: string) => {
+    //       window.localStorage.setItem('lang', language);
+    //       onChange(url, language, cb);
+    //     },
+    //   };
+    // };
+    Translator = /** @class */ (function () {
+        function Translator(baseUrl) {
+            this.baseUrl = baseUrl;
         }
-        $('[data-translate]').each((/**
-         * @param {?} i
-         * @param {?} el
+        /**
          * @return {?}
          */
-        function (i, el) {
-            /** @type {?} */
-            var $el = $(el);
-            /** @type {?} */
-            var key = $el.data('translate');
-            /** @type {?} */
-            var text = '';
-            if (key.indexOf('.') !== -1) {
-                /** @type {?} */
-                var pathKeys = key.split('.');
-                try {
-                    text = pathKeys.reduce((/**
-                     * @param {?} prev
-                     * @param {?} curr
-                     * @return {?}
-                     */
-                    function (prev, curr) { return prev[curr]; }), dictionary);
-                }
-                catch (e) {
-                    console.log(e);
-                }
-            }
-            else {
-                text = dictionary[key];
-            }
-            $el.text(text);
-        }));
-    });
-    var ɵ0$2 = onTranslate;
-    /** @type {?} */
-    var onChange = (/**
-     * @param {?} baseUrl
-     * @param {?} language
-     * @param {?} cb
-     * @return {?}
-     */
-    function (baseUrl, language, cb) {
-        $.getJSON(baseUrl + '/auth-' + language + '.json', (/**
-         * @param {?} data
+        Translator.prototype.loadLanguages = /**
          * @return {?}
          */
-        function (data) {
-            onTranslate(data, language);
-            cb(data);
-        }));
-    });
-    var ɵ1$1 = onChange;
-    /** @type {?} */
-    var loadLanguagesList = (/**
-     * @param {?} baseUrl
-     * @return {?}
-     */
-    function (baseUrl) {
-        $.getJSON(baseUrl + '/languages.json', (/**
-         * @param {?} languages
-         * @return {?}
-         */
-        function (languages) {
-            languagesList = languages;
-            /** @type {?} */
-            var $container = $('.languages');
-            /** @type {?} */
-            var items = '';
-            languages.forEach((/**
-             * @param {?} item
+        function () {
+            var _this = this;
+            $.getJSON(this.baseUrl + "/languages.json", (/**
+             * @param {?} languages
              * @return {?}
              */
-            function (item) {
-                items +=
-                    '<li><a class="green-hover change-language" href="#" data-language="' +
-                        item.code.split('-')[0] +
-                        '">' +
-                        item.name +
-                        '</a></li>';
+            function (languages) {
+                _this.languages = languages;
+                _this.populateLanguagesDropdown();
+                _this.checkLangPreferences();
             }));
-            $container.empty();
-            $container.append(items);
-        }));
-    });
-    var ɵ2$1 = loadLanguagesList;
-    /** @type {?} */
-    var translatorCreator = (/**
-     * @param {?} url
-     * @param {?} cb
-     * @return {?}
-     */
-    function (url, cb) {
-        loadLanguagesList(url);
-        return {
-            changeTranslate: (/**
+        };
+        /**
+         * @param {?} langCode
+         * @return {?}
+         */
+        Translator.prototype.changeLanguage = /**
+         * @param {?} langCode
+         * @return {?}
+         */
+        function (langCode) {
+            var _this = this;
+            this.currentLangCode = langCode;
+            window.localStorage.setItem('lang', langCode);
+            $.getJSON(this.baseUrl + "/auth-" + langCode + ".json", (/**
+             * @param {?} dictionary
+             * @return {?}
+             */
+            function (dictionary) {
+                _this.currentDictionary = dictionary;
+                _this.translateElements();
+            }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        Translator.prototype.populateLanguagesDropdown = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var languagesContainer = $('.container');
+            /** @type {?} */
+            var content = '';
+            this.languages.forEach((/**
              * @param {?} language
              * @return {?}
              */
             function (language) {
-                window.localStorage.setItem('lang', language);
-                onChange(url, language, cb);
-            }),
+                return (content += "\n      <li>\n        <a\n          href=\"#\"\n          class=\"green-hover change-language\"\n          data-language=\"" + language.code.split('-')[0] + "\"\n        >" + language.name + "</a>\n      </li>\n    ");
+            }));
+            languagesContainer.empty();
+            languagesContainer.append(content);
         };
-    });
+        /**
+         * @private
+         * @return {?}
+         */
+        Translator.prototype.checkLangPreferences = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            $(document).ready((/**
+             * @return {?}
+             */
+            function () {
+                /** @type {?} */
+                var langCode = window.localStorage.getItem('lang');
+                if (langCode) {
+                    return _this.changeLanguage(langCode);
+                }
+                if (config && config.extraParams && config.extraParams.language) {
+                    /** @type {?} */
+                    var langCode_1 = config.extraParams.language;
+                    return _this.changeLanguage(langCode_1);
+                }
+                _this.changeLanguage('en');
+            }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        Translator.prototype.translateElements = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            /** @type {?} */
+            var lang = this.languages.find((/**
+             * @param {?} lang
+             * @return {?}
+             */
+            function (lang) { return lang.code === _this.currentLangCode; }));
+            if (lang) {
+                $('#current-language').text(lang.name);
+            }
+            $('[data-translate]').each((/**
+             * @param {?} _
+             * @param {?} el
+             * @return {?}
+             */
+            function (_, el) {
+                /** @type {?} */
+                var $el = $(el);
+                /** @type {?} */
+                var key = $el.data('translate');
+                /** @type {?} */
+                var text = '';
+                if (key.indexOf('.') !== -1) {
+                    /** @type {?} */
+                    var pathKeys = key.split('.');
+                    try {
+                        text = pathKeys.reduce((/**
+                         * @param {?} prev
+                         * @param {?} curr
+                         * @return {?}
+                         */
+                        function (prev, curr) { return prev[curr]; }), _this.currentDictionary);
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
+                else {
+                    text = _this.currentDictionary[key];
+                }
+                $el.text(text);
+            }));
+        };
+        return Translator;
+    }());
+    if (false) {
+        /** @type {?} */
+        Translator.prototype.languages;
+        /** @type {?} */
+        Translator.prototype.currentLangCode;
+        /** @type {?} */
+        Translator.prototype.currentDictionary;
+        /**
+         * @type {?}
+         * @private
+         */
+        Translator.prototype.baseUrl;
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -663,19 +820,18 @@
     else {
         baseUrl = callbackURL.substring(0, authLoc);
     }
-    /** @type {?} */
-    var dictionary;
+    // Translator
     /** @type {?} */
     var languageDataDir = '/assets/i18n';
-    var ɵ0$3 = /**
-     * @param {?} loadedDictionary
-     * @return {?}
-     */
-    function (loadedDictionary) {
-        dictionary = loadedDictionary;
-    };
     /** @type {?} */
-    var translator = translatorCreator(baseUrl + languageDataDir, (ɵ0$3));
+    var translator = new Translator("" + baseUrl + languageDataDir);
+    translator.loadLanguages();
+    // const translator = translatorCreator(
+    //   baseUrl + languageDataDir,
+    //   (loadedDictionary: any) => {
+    //     dictionary = loadedDictionary;
+    //   }
+    // );
     prepareUiElements(baseUrl);
     $('[data-toggle="tooltip"]').tooltip({
         title: (/**
@@ -693,7 +849,7 @@
              * @param {?} curr
              * @return {?}
              */
-            function (prev, curr) { return prev[curr]; }), dictionary);
+            function (prev, curr) { return prev[curr]; }), translator.currentDictionary);
         }),
     });
     /**
@@ -760,7 +916,7 @@
                  * @return {?}
                  */
                 function (result) {
-                    showModal(dictionary.modal.SuccessChangedPassword);
+                    showModal(translator.currentDictionary.modal.SuccessChangedPassword);
                     if (result.result_url) {
                         window.location.assign(result.result_url.split('?')[0]);
                     }
@@ -770,7 +926,7 @@
                  * @return {?}
                  */
                 function (error) {
-                    showModal(dictionary.modal.SuccessChangedPassword, true);
+                    showModal(translator.currentDictionary.modal.SuccessChangedPassword, true);
                 }),
             });
         }));
@@ -789,7 +945,7 @@
         }, (/**
          * @return {?}
          */
-        function () { return showModal(dictionary.modal.InvalidLogin, true); }));
+        function () { return showModal(translator.currentDictionary.modal.InvalidLogin, true); }));
     }));
     createForm(configs.resendInstructions, (/**
      * @return {?}
@@ -813,7 +969,7 @@
                 $form.find('.form-group').addClass('error');
             }
             else {
-                showModal(dictionary.modal.YouWillGetInstructions);
+                showModal(translator.currentDictionary.modal.YouWillGetInstructions);
                 onActivateLogin();
             }
         }));
@@ -862,24 +1018,20 @@
      */
     function (event) {
         event.preventDefault();
-        translator.changeTranslate($(event.currentTarget).data('language'));
+        // translator.changeTranslate($(event.currentTarget).data('language'));
+        translator.changeLanguage($(event.currentTarget).data('language'));
     }));
-    $(document).ready((/**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var lang = window.localStorage.getItem('lang');
-        if (lang) {
-            return translator.changeTranslate(lang);
-        }
-        if (config && config.extraParams && config.extraParams.language) {
-            /** @type {?} */
-            var lang_1 = config.extraParams.language;
-            return translator.changeTranslate(lang_1);
-        }
-        translator.changeTranslate('en');
-    }));
+    // $(document).ready(() => {
+    //   const lang = window.localStorage.getItem('lang');
+    //   if (lang) {
+    //     return translator.changeTranslate(lang);
+    //   }
+    //   if (config && config.extraParams && config.extraParams.language) {
+    //     const lang = config.extraParams.language;
+    //     return translator.changeTranslate(lang);
+    //   }
+    //   translator.changeTranslate('en');
+    // });
     $('#google-sign').on('click', (/**
      * @param {?} e
      * @return {?}
