@@ -279,11 +279,11 @@ commands:
 
   run-lighthouse-ci:
     description: "Run lhci (to get audit report)"
-      steps:
-        - run:
-            name: Run Lighthouse CI
-            command: |
-              lhci autorun
+    steps:
+      - run:
+          name: Run Lighthouse CI
+          command: |
+            lhci autorun
 
   run-tests:
     description: "Run all tests"
