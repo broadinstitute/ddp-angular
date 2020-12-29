@@ -284,7 +284,7 @@ commands:
           name: Run Lighthouse CI
           command: |
             echo "START 2:"
-            lhci autorun --chromePath="/home/circleci/repo/ddp-workspace/node_modules/chromium/"  --chrome-flags="--headless" --collect.staticDistDir=$OUTPUT_DIR
+            lhci autorun --collect.chromePath="/home/circleci/repo/ddp-workspace/node_modules/chromium/" --collect.headful=false --collect.staticDistDir=$OUTPUT_DIR
 
   run-tests:
     description: "Run all tests"
