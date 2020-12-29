@@ -283,7 +283,8 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            lhci autorun --collect.staticDistDir=$OUTPUT_DIR
+            node -v
+            lhci autorun --collect.url=https://www.google.com/
 
   run-tests:
     description: "Run all tests"
