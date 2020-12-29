@@ -5,7 +5,8 @@ RUN \
   apt-get update \
   && apt-get install -y curl \
   && apt-get install -y nano \
-  && apt-get install -y git
+  && apt-get install -y git \
+  && apt-get install chromium
 
 RUN apt-get install -qy git libpcre3 libpcre3-dev libz-dev  apache2-dev wget libxml2-dev lua5.1 lua5.1-dev && \
     cd /root && \
