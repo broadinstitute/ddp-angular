@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { Router, Scroll, Event } from '@angular/router';
@@ -20,7 +20,8 @@ import {
     AnalyticsEvent,
     QuestionType,
     LoggingService,
-    LanguageService
+    LanguageService,
+    StackdriverErrorReporterService
 } from 'ddp-sdk';
 
 import {
@@ -97,6 +98,10 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+// sdkConfig.errorReportingApiKey = 'AIzaSyD6O2V3yLm2wcKCJYMTVz-nlVhWOlQfQ2Y';
+// sdkConfig.projectGcpId = 'broad-ddp-dev';
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM', 'RESULT_REPORT'];
@@ -195,6 +200,10 @@ export function languageFactory(language: LanguageService): string {
             deps: [
                 LanguageService
             ]
+        },
+        {
+            provide: ErrorHandler,
+            useClass: StackdriverErrorReporterService
         }
     ],
     bootstrap: [AppComponent]

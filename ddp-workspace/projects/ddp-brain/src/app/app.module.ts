@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -12,7 +12,8 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService
+  LoggingService,
+  StackdriverErrorReporterService
 } from 'ddp-sdk';
 
 import {
@@ -81,6 +82,8 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
@@ -139,6 +142,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
+    {
+      provide: ErrorHandler,
+      useClass: StackdriverErrorReporterService
+    }
   ],
   bootstrap: [AppComponent]
 })

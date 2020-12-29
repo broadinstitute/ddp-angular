@@ -1,4 +1,4 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,8 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService
+  LoggingService,
+  StackdriverErrorReporterService
 } from 'ddp-sdk';
 
 import {
@@ -95,6 +96,8 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
@@ -166,6 +169,10 @@ export class MyHammerConfig extends HammerGestureConfig {
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
+    },
+    {
+      provide: ErrorHandler,
+      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [AppComponent]

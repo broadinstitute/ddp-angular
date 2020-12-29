@@ -1,5 +1,5 @@
 // Angular imports
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 
 // SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
+import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService, StackdriverErrorReporterService } from 'ddp-sdk';
 
 // Toolkit imports
 import { ToolkitModule } from 'toolkit';
@@ -201,6 +201,8 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
 config.dashboardActivitiesStartedStatuses = ['CREATED'];
 config.rtlLanguages = ['he'];
 
@@ -271,6 +273,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [PrionAppComponent]

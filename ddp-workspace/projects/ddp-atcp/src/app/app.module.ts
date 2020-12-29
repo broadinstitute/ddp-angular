@@ -1,5 +1,5 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +18,8 @@ import {
   AnalyticsEventsService,
   ConfigurationService,
   DdpModule,
-  LoggingService
+  LoggingService,
+  StackdriverErrorReporterService
 } from 'ddp-sdk';
 
 import {
@@ -92,6 +93,8 @@ config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode : 'en';
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
@@ -179,6 +182,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: StackdriverErrorReporterService
     },
     LanguagesProvider,
     UserPreferencesServiceAgent
