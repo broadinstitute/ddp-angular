@@ -118,7 +118,9 @@
               "projects/ddp-angio/src/theme.scss",
               "projects/ddp-angio/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -293,7 +295,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ]
           },
           "configurations": {
@@ -444,7 +447,9 @@
               "projects/ddp-brain/src/theme.scss",
               "projects/ddp-brain/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -594,7 +599,9 @@
               "projects/ddp-mbc/src/theme.scss",
               "projects/ddp-mbc/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -993,7 +1000,9 @@
               "projects/ddp-osteo/src/theme.scss",
               "projects/ddp-osteo/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -1142,7 +1151,9 @@
               "projects/ddp-prion/src/theme.scss",
               "projects/ddp-prion/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -1285,7 +1296,9 @@
               "projects/ddp-testboston/src/theme.scss",
               "projects/ddp-testboston/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -1435,7 +1448,9 @@
               "projects/ddp-mpc/src/theme.scss",
               "projects/ddp-mpc/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -1625,7 +1640,9 @@
               "projects/ddp-rgp/src/theme.scss",
               "projects/ddp-rgp/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
