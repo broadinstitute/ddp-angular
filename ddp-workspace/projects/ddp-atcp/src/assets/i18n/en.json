@@ -391,6 +391,10 @@
       },
       "SubTitle": "Select all applicable options.",
       "Title": "Type of Research"
+    },
+    "Messages": {
+      "Success": "Your request for data access has been successfully submitted.",
+      "Error": "Something went wrong. Please try again."
     }
   },
   "Footer": {

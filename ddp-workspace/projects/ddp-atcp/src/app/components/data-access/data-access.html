@@ -374,7 +374,7 @@
       type="submit"
       class="ButtonBordered ButtonBordered--green"
       (click)="submit(form)"
-      [disabled]="form.invalid && form.submitted"
+      [disabled]="(form.invalid && form.submitted) || busy"
       *ngIf="activeTab === countTabs - 1"
       translate
     >

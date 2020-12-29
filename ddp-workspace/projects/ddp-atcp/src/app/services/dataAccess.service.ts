@@ -1,25 +1,68 @@
 import { Injectable } from '@angular/core';
-import { DataAccessServiceAgent } from './serviceAgents/dataAccessServiceAgent.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { DataAccessRequestSuccessResult } from '../models/dataAccessRequestSuccessResult';
-import { DataAccessRequestError } from '../models/dataAccessRequestError';
+import { concatMap, pluck, tap } from 'rxjs/operators';
+
+import { LoggingService } from 'ddp-sdk';
+
 import { DataAccessParameters } from '../models/dataAccessParameters';
 
-@Injectable()
+declare global {
+  interface Window {
+    DDP_ENV: {
+      [key: string]: any;
+      darUrl?: string;
+    };
+  }
+}
+
+interface DARFormResponse {
+  url: string;
+}
+
+@Injectable({ providedIn: 'root' })
 export class DataAccessService {
-  constructor(private dataAccessServiceAgent: DataAccessServiceAgent) {
+  private darUrl: string;
+
+  private readonly LOG_SOURCE = 'DataAccessService';
+
+  constructor(
+    private http: HttpClient,
+    private loggingService: LoggingService
+  ) {
+    this.getFunctionUrl();
   }
 
-public createNewDataAccessRequest(dataAccessParameters: DataAccessParameters, researcherBiosketch: File, studyGuid: string): Observable<DataAccessRequestSuccessResult> {
-   return this.dataAccessServiceAgent.createNewDataAccessRequest(dataAccessParameters, researcherBiosketch, studyGuid)
-     .pipe(
-     map((data: any) => {
-       return new DataAccessRequestSuccessResult(data.code, data.message);
-     }),
-     catchError((error) => {
-       return Observable.throw(error.error as DataAccessRequestError);
-     })
-   );
+  send(params: DataAccessParameters, biosketch: File): Observable<any> {
+    return this.http
+      .post<DARFormResponse>(this.darUrl, {
+        data: params,
+        attachment: {
+          name: biosketch.name,
+          size: biosketch.size,
+        },
+      })
+      .pipe(
+        concatMap(res =>
+          this.http.put(res.url, biosketch, {
+            headers: new HttpHeaders({
+              'Content-Type': biosketch.type,
+            }),
+          })
+        )
+      );
+  }
+
+  private getFunctionUrl(): void {
+    const darUrl = window.DDP_ENV.darUrl;
+
+    if (!darUrl) {
+      this.loggingService.logError(
+        this.LOG_SOURCE,
+        'No "darUrl" property found in DDP_ENV'
+      );
+    } else {
+      this.darUrl = darUrl;
+    }
   }
 }
