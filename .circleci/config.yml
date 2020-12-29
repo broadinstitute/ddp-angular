@@ -283,7 +283,7 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            lhci autorun
+            lhci autorun --collect.staticDistDir=$OUTPUT_DIR
 
   run-tests:
     description: "Run all tests"
