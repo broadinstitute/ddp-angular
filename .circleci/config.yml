@@ -283,10 +283,10 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            echo "START 1:"
-            lhci autorun --chrome-flags="--headless" --collect.url=https://www.google.com
+#             echo "START 1:"
+#             lhci autorun --chrome-flags="--headless" --collect.url=https://www.google.com
             echo "START 2:"
-            lhci autorun --chrome-flags="--headless" --collect.staticDistDir=$OUTPUT_DIR
+            lhci autorun --chromePath="/usr/lib/chromium/"  --chrome-flags="--headless" --collect.staticDistDir=$OUTPUT_DIR
 
   run-tests:
     description: "Run all tests"
