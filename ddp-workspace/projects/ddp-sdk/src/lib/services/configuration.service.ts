@@ -24,6 +24,9 @@ export class ConfigurationService {
     doLocalRegistration: boolean;
     // Google maps API key: https://developers.google.com/places/web-service/get-api-key
     mapsApiKey: string;
+    errorReportingApiKey: string;
+    // projectId of your project in GCP
+    projectGcpId: string;
     projectGAToken: string;
     studyGuid: string;
     // country code if limiting app to just one country
