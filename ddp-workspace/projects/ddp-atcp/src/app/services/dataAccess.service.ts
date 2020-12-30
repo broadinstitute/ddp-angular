@@ -33,9 +33,14 @@ export class DataAccessService {
     this.getFunctionUrl();
   }
 
-  send(params: DataAccessParameters, biosketch: File): Observable<any> {
+  send(
+    params: DataAccessParameters,
+    biosketch: File,
+    recaptchaToken: string
+  ): Observable<any> {
     return this.http
       .post<DARFormResponse>(this.darUrl, {
+        'g-recaptcha-response': recaptchaToken,
         data: params,
         attachment: {
           name: biosketch.name,

@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
 import { CommunicationService, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 import { AppRoutingModule } from './app-routing.module';
@@ -73,6 +74,7 @@ tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
 tkCfg.activityUrl = 'activity';
+tkCfg.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
@@ -137,7 +139,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         useClass: AppTranslateLoader,
         deps: [HttpClient],
       }
-    })
+    }),
+    RecaptchaV3Module,
   ],
   declarations: [
     WelcomeComponent,
@@ -196,7 +199,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
       multi: true
     },
     LanguagesProvider,
-    UserPreferencesServiceAgent
+    UserPreferencesServiceAgent,
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: tkCfg.recaptchaSiteClientKey,
+    },
   ],
   bootstrap: [AppComponent]
 })

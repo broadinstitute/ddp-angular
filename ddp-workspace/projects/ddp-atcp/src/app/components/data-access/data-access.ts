@@ -2,8 +2,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { delay, take } from 'rxjs/operators';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
-import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
+import { CompositeDisposable } from 'ddp-sdk';
 
 import { ToolkitConfigurationService } from 'toolkit';
 
@@ -28,9 +29,11 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public model: DataAccessParameters = new DataAccessParameters();
   public researcherBiosketch: File;
+  public recaptchaToken: string;
 
   constructor(
     private translateService: TranslateService,
+    private recaptchaService: ReCaptchaV3Service,
     private dataAccessService: DataAccessService,
     private communicationService: AtcpCommunicationService,
     @Inject('toolkit.toolkitConfig')
@@ -100,7 +103,7 @@ export class DataAccessComponent implements OnInit, OnDestroy {
     this.busy = true;
 
     this.dataAccessService
-      .send(this.model, this.researcherBiosketch)
+      .send(this.model, this.researcherBiosketch, this.recaptchaToken)
       .pipe(take(1))
       .subscribe(this.showResponse, this.showError);
   }
@@ -148,6 +151,13 @@ export class DataAccessComponent implements OnInit, OnDestroy {
     } else {
       this.fileSizeExceedsLimit = false;
     }
-    this.researcherBiosketch = selectedFile;
+
+    this.recaptchaService
+      .execute('file_upload')
+      .pipe(take(1))
+      .subscribe(token => {
+        this.recaptchaToken = token;
+        this.researcherBiosketch = selectedFile;
+      });
   }
 }
