@@ -60,9 +60,9 @@ commands:
             - set-deployment-environment
             - run-tests
             - build-app
+            - run-lighthouse-ci
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
-            - run-lighthouse-ci
 
   set-deployment-environment:
     description: "Determine working environment"
