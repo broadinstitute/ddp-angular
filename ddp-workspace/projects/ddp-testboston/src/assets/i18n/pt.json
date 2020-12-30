@@ -252,7 +252,9 @@
       "Placeholder": "Introduza o código de convite",
       "Error": {
         "Part1": "O código que inseriu não está ativo. Verifique o seu código e tente novamente. Pode sempre contactar o pessoal do estudo TestBoston para obter ajuda:",
-        "Part2": "ou"
+        "Part2": "ou",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -452,7 +454,8 @@
       "ActivityStatus": "Estado",
       "ActivityDate": "Criado",
       "ActivityActions": "Ações",
-      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas"
+      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Participantes regidos ",
@@ -607,6 +610,13 @@
     "SubjectPanel": {
       "Link": "Voltar a procurar participante",
       "Text": "Código de convite do participante:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[PT] Entered date is invalid"
     }
   }
 }

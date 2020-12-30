@@ -46,7 +46,7 @@
         {
           "title": "Investigador principal",
           "name": "nameOfPI",
-          "placeholder": "Filtrar por investigador principal"
+          "placeholder": "Filtrar por IP"
         },
         {
           "title": "Centro del estudio",
@@ -71,23 +71,23 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
           "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, Estados Unidos.",
           "eligibilityRequirements": "Las personas con sospecha de enfermedad priónica y al menos un estudio de diagnóstico indicativo de la enfermedad (por ejemplo, resonancia magnética del líquido cefalorraquídeo, del cerebro o electroencefalograma, O bien portadores de una mutación causante de enfermedades priónicas que no tienen síntomas).",
-          "moreInfo":  "Comuníquese con Fran Lissemore (216-464-6203, fml2@case.edu) para obtener más información."
+          "moreInfo": "Comuníquese con Fran Lissemore (216-464-6203, fml2@case.edu) para obtener más información."
         },
         {
           "studyName": "Biomarcadores en portadores de mutaciones presintomáticos",
-          "description":"Nuestro objetivo es sentar las bases para probar futuros tratamientos de las enfermedades priónicas en personas con riesgo genético antes de que presenten síntomas. Los posibles voluntarios primero deben mantener una conversación telefónica con el equipo del estudio para responder preguntas, confirmar si pueden participar y recopilar algunos datos de referencia. Para las personas que reúnan los requisitos necesarios y decidan participar, el estudio consiste en dos consultas en Massachusetts General Hospital en Boston, MA, con un intervalo entre las consultas de 8 a 16 semanas. Las consultas del estudio incluirían los siguientes componentes cada 1.5 días: exploración física periódica, cuestionarios sobre salud, punción lumbar, extracción de sangre, estudios por imágenes del cerebro, pruebas cognitivas. Los participantes que reúnan los requisitos recibirán una remuneración y asistencia económica para los gastos de traslado. La participación es estrictamente voluntaria.",
+          "description": "Nuestro objetivo es sentar las bases para probar futuros tratamientos de las enfermedades priónicas en personas con riesgo genético antes de que presenten síntomas. Los posibles voluntarios primero deben mantener una conversación telefónica con el equipo del estudio para responder preguntas, confirmar si pueden participar y recopilar algunos datos de referencia. Para las personas que reúnan los requisitos necesarios y decidan participar, el estudio consiste en dos consultas en Massachusetts General Hospital en Boston, MA, con un intervalo entre las consultas de 8 a 16 semanas. Las consultas del estudio incluirían los siguientes componentes cada 1.5 días: exploración física periódica, cuestionarios sobre salud, punción lumbar, extracción de sangre, estudios por imágenes del cerebro, pruebas cognitivas. Los participantes que reúnan los requisitos recibirán una remuneración y asistencia económica para los gastos de traslado. La participación es estrictamente voluntaria.",
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
           "site": "Massachusetts <br/>General Hospital, Boston,<br/> Massachusetts, Estados Unidos",
-          "eligibilityRequirements": "Quizás pueda participar en este estudio si reúne alguna de las siguientes condiciones: <br/><ol><li> tiene antecedentes familiares de enfermedades priónicas genéticas, como enfermedad de Creutzfeldt-Jakob (ECJ), insomnio familiar letal o síndrome de Gerstmann-Sträussler-Scheinker genéticos Nota: no es necesario que conozca su condición genética para participar.</li><li> ha recibido un resultado con valor pronóstico indicativo de que está en riesgo de desarrollar una de las enfermedades anteriores;</li><li> es integrante de una familia con enfermedades priónicas genéticas, aunque usted no está en riesgo;</li><li> desea ofrecerse para participar del grupo de control.</li></ol>Asimismo, los pacientes deben:<dl ><dt>- tener entre 18 y 85 años;</dt><dt>- hablar bien inglés.</dt></dl>",
-          "moreInfo":  "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, escriba a MGHPrionStudy@partners.org o llame al 617-643-2351 para inscribirse."
+          "eligibilityRequirements": "Quizás pueda participar en este estudio si reúne alguna de las siguientes condiciones: <br/><ol><li> tiene antecedentes familiares de enfermedades priónicas genéticas, como enfermedad de Creutzfeldt-Jakob (ECJ), insomnio familiar fatal o síndrome de Gerstmann-Sträussler-Scheinker genéticos Nota: no es necesario que conozca su condición genética para participar.</li><li> ha recibido un resultado con valor pronóstico indicativo de que está en riesgo de desarrollar una de las enfermedades anteriores;</li><li> es integrante de una familia con enfermedades priónicas genéticas, aunque usted no está en riesgo;</li><li> desea ofrecerse para participar en el grupo de control.</li></ol>Asimismo, los pacientes deben:<dl ><dt>- tener entre 18 y 85 años;</dt><dt>- hablar bien el inglés.</dt></dl>",
+          "moreInfo": "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, escriba a MGHPrionStudy@partners.org o llame al 617-643-2351 para inscribirse."
         },
         {
           "studyName": "Diagnóstico precoz de enfermedad priónica humana",
-          "description": "El principal objetivo de este estudio es desarrollar y probar métodos para diferenciar la enfermedad de Creutzfeldt-Jakob (ECJ) de otras enfermedades y aprender a diagnosticar ECJ lo antes posible. Un objetivo secundario del estudio es obtener más información sobre cómo evolucionan la ECJ y otras afecciones neurológicas rápidas. Para ello, se estudiarán esas enfermedades en cada paciente a lo largo del tiempo. Dado que la ECJ es una enfermedad poco frecuente de progresión muy rápida, por lo general el diagnóstico se hace en una etapa muy tardía del curso de la enfermedad. Para que cualquier futuro tratamiento de la ECJ resulte eficaz, probablemente deba administrarse a los pacientes lo antes posible, antes de que la enfermedad avance demasiado. Por lo tanto, es importante que aprendamos a hacer diagnósticos precisos en las primeras etapas.",
+          "description": "El principal objetivo de este estudio es desarrollar y probar métodos para diferenciar la enfermedad de Creutzfeldt-Jakob (ECJ) de otras enfermedades y aprender a diagnosticar la ECJ lo antes posible. Un objetivo secundario del estudio es obtener más información sobre cómo evolucionan la ECJ y otras afecciones neurológicas rápidas. Para ello, se estudiarán esas enfermedades en cada paciente a lo largo del tiempo. Dado que la ECJ es una enfermedad poco frecuente de progresión muy rápida, por lo general el diagnóstico se hace en una etapa muy tardía del curso de la enfermedad. Para que cualquier futuro tratamiento de la ECJ resulte eficaz, probablemente deba administrarse a los pacientes lo antes posible, antes de que la enfermedad avance demasiado. Por lo tanto, es importante que aprendamos a hacer diagnósticos precisos en las primeras etapas.",
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\" ><strong>Michael Geschwind </strong></a>",
           "site": "Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, Estados Unidos",
           "eligibilityRequirements": "Criterios de inclusión: Los pacientes deben ser mayores de 18 años. Deben cumplir con los criterios corregidos de la OMS sobre la ECJ, tener antecedentes familiares de enfermedad priónica humana hereditaria, o antecedentes de deterioro neurológico progresivo causante de demencia o deterioro funcional considerable al cabo de dos años o menos desde el inicio de los síntomas. Se debe contar con un informante que tenga contacto frecuente con el sujeto y pueda brindar información sobre este. Criterios de exclusión: Personas que no puedan realizarse resonancias magnéticas por contraindicación (por ejemplo, usuarios de marcapasos, mujeres embarazadas). Pacientes infectados por el VIH o inmunodeprimidos.",
-          "moreInfo":  "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a> y comuníquese con Aili Golubjatnikov (415-476-2901 Aili.Golubjatnikov@ucsf.edu) para inscribirse."
+          "moreInfo": "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/geschwind-10-04905-consent.pdf\">PDF</a> y comuníquese con Aili Golubjatnikov (415-476-2901 Aili.Golubjatnikov@ucsf.edu) para inscribirse."
         },
         {
           "studyName": "Programa de evaluación teleneurológica de la ECJ",
@@ -95,7 +95,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
           "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, Estados Unidos.",
           "eligibilityRequirements": "Personas con sospecha de enfermedad priónica y al menos un estudio de diagnóstico indicativo de la enfermedad (por ejemplo, resonancia magnética del líquido cefalorraquídeo, del cerebro o electroencefalograma).",
-          "moreInfo":  "Comuníquese con la CJD Foundation (800-659-1991, lori@cjdfoundation.org) para obtener más información."
+          "moreInfo": "Comuníquese con la CJD Foundation (800-659-1991, lori@cjdfoundation.org) para obtener más información."
         },
         {
           "studyName": "Anticuerpos terapéuticos de portadores de mutaciones del gen PRNP para combatir las enfermedades priónicas",
@@ -103,7 +103,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
           "site": "University of Zurich, Institute of Neuropathology, Zúrich, Suiza",
           "eligibilityRequirements": "Portadores confirmados de mutaciones en el gen PRNP (sintomáticos+asintomáticos), personas de familias con mutaciones del gen PRNP que no conocen la condición del gen PRNP, familiares con el gen PRNP natural de pacientes con mutaciones confirmadas de dicho gen.",
-          "moreInfo":  "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, comuníquese con Karl Frontzek (Karl.Frontzek@usz.ch) para inscribirse."
+          "moreInfo": "Consulte este <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, comuníquese con Karl Frontzek (Karl.Frontzek@usz.ch) para inscribirse."
         }
       ],
       "InputPlaceholder": "Filtrar todas las columnas"
@@ -114,7 +114,7 @@
         "Title": "Más información",
         "WhatIs": {
           "Question": "¿Qué son las enfermedades priónicas?",
-          "Text": "La enfermedad priónica es una afección neurodegenerativa poco frecuente causada por una proteína con plegamientos anómalos en el cerebro. Tiene varios subtipos diferentes con nombres distintos, como enfermedad de Creutzfeldt-Jakob (ECJ), insomnio familiar mortal y síndrome de Gerstmann-Sträussler-Scheinker."
+          "Text": "La enfermedad priónica es una afección neurodegenerativa poco frecuente causada por una proteína con plegamientos anómalos en el cerebro. Tiene varios subtipos diferentes con nombres distintos, como enfermedad de Creutzfeldt-Jakob (ECJ), insomnio familiar fatal y síndrome de Gerstmann-Sträussler-Scheinker."
         },
         "For": {
           "Question": "¿Para qué es este registro?",
@@ -151,7 +151,8 @@
         "host": "para alojar el Registro",
         "analytics": "como herramienta de análisis"
       },
-      "Last_updated": "Última actualización:"
+      "Last_updated": "Última actualización: ",
+      "lastUpdatedDate": "8/14/20"
     }
   },
   "Toolkit": {
@@ -349,7 +350,7 @@
       "Intro": {
         "Title": "Última actualización: 28 de julio de 2020",
         "Text": {
-          "P1": "Prion Registry es un proyecto desarrollado por el Broad Institute del MIT y Harvard (“el",
+          "P1": "Prion Registry es un proyecto desarrollado por el Broad Institute del MIT y Harvard (“el ",
           "P2BoldUnderline": "Broad Institute",
           "P3": "”) en colaboración con Prion Registry Consortium. Valoramos mucho su privacidad. Esta declaración de privacidad (“",
           "P4BoldUnderline": "Política",
@@ -360,15 +361,15 @@
       "Who": {
         "Title": "1. ¿Quiénes integran Prion Registry?",
         "Text": {
-          "P1": "Prion Registry es un registro en línea para personas afectadas por enfermedades priónicas o en riesgo de desarrollarlas que buscan oportunidades para participar en investigaciones. Se trata de una iniciativa llevada a cabo por científicos y representantes de pacientes con enfermedades priónicas en el Broad Institute. Nuestro objetivo primordial es promover el desarrollo de tratamientos decisivos para curar, tratar, prevenir o retrasar la enfermedad priónica. Creamos este Registro con el fin de que a los pacientes les resulte más fácil lo siguiente:",
+          "P1": "Prion Registry es un registro en línea para personas afectadas por enfermedades priónicas o en riesgo de desarrollarlas que buscan oportunidades para participar en investigaciones. Se trata de una iniciativa llevada a cabo por científicos y representantes de pacientes con enfermedades priónicas en el Broad Institute. Nuestro objetivo primordial es promover el desarrollo de tratamientos vitales para curar, tratar, prevenir o retrasar la enfermedad priónica. Creamos este Registro con el fin de que a los pacientes les resulte más fácil lo siguiente:",
           "P2Number": {
-            "1": "que los recuenten;",
+            "1": "que los cuenten;",
             "2": "encontrar estudios de investigación en los que puedan participar; y",
             "3": "transmitir sus datos a los investigadores."
           },
-          "P3": "Este Registro también contribuirá a que investigadores expertos seleccionen participantes para los estudios y reúnan información. Para obtener más información sobre Prion Registry, consulte",
+          "P3": "Este Registro también contribuirá a que investigadores expertos seleccionen participantes para los estudios y reúnan información. Para obtener más información sobre Prion Registry, consulte ",
           "P4Link": "PrionRegistry.org",
-          "P5": ". Para obtener más información sobre el Broad Institute, consulte",
+          "P5": ". Para obtener más información sobre el Broad Institute, consulte ",
           "P6Link": "https://www.broadinstitute.org/about-us",
           "P7": ". ",
           "P8": "Tenga en cuenta que el Registro podría contener enlaces a otros sitios web que no están relacionados con nosotros ni con el proyecto de investigación (“",
@@ -379,7 +380,7 @@
       "Purpose": {
         "Title": "2. ¿Cuál es el objetivo y el alcance de esta Política?",
         "Text": {
-          "P1": "En esta Política se detalla la información que recopilamos de los usuarios del Registro, el objetivo de dicha recolección, cómo usamos la información y a quiénes se la entregamos.   Se aplica a los usuarios que son pacientes inscritos en nuestros proyectos de investigación (“",
+          "P1": "En esta Política se detalla la información que recopilamos de los usuarios del Registro, el objetivo de dicha recopilación, cómo usamos la información y a quiénes se la entregamos.   Se aplica a los usuarios que son pacientes inscritos en nuestros proyectos de investigación (“",
           "P2Bold": "Usuarios participantes",
           "P3": "”) y a los usuarios que no están inscritos en ningún proyecto de investigación y usan el Registro con fines informativos generales o porque tienen interés en participar en un futuro proyecto de investigación (“",
           "P4Bold": "Usuarios generales",
@@ -398,21 +399,18 @@
         "Title": "4. ¿Cómo recopilamos información de su parte?",
         "Text": {
           "P1": "Recopilamos información sobre usted de dos maneras.",
-          "P2": "En primer lugar, recopilamos ciertos datos sobre usted",
+          "P2": "En primer lugar, recopilamos ciertos datos sobre usted ",
           "P3Underline": "cuando nos los brinda directamente.",
-          "P4": "En particular, recopilamos información sobre usted en las siguientes ocasiones:",
-
+          "P4": " En particular, recopilamos información sobre usted en las siguientes ocasiones:",
           "P5Underline": "Cuando crea una cuenta y un perfil en Prion Registry",
-          "P6": "mediante nuestro sitio web.",
+          "P6": " mediante nuestro sitio web.",
           "P7Underline": "Cuando participa en el Registro",
           "P8": " brindándonos información sobre usted y sus experiencias con la enfermedad priónica.  Por ejemplo, en el cuestionario médico del Registro deberá responder una serie de preguntas sobre sus datos demográficos, el estado actual de la enfermedad priónica, su deseo de que se comuniquen con usted para que participe en ensayos, participaciones en ensayos anteriores, su código postal y sus datos de contacto.  Tenga en cuenta que no tiene la obligación de responder ninguna pregunta.",
           "P9Underline": "Cuando responde a notificaciones sobre oportunidades para participar en investigaciones,",
-          "P10": "encuestas y otras comunicaciones que quizás le enviemos.",
+          "P10": " encuestas y otras comunicaciones que quizás le enviemos.",
           "P11Underline": "Cuando se comunica con nosotros",
-          "P12": "(por ejemplo, por correo electrónico).",
-
+          "P12": " (por ejemplo, por correo electrónico).",
           "P13": "En segundo lugar, cuando accede a nuestro Registro, recopilamos datos mediante determinadas tecnologías automatizadas que generan y registran datos de forma automática. Por ejemplo:",
-
           "P14": "Cuando visita el sitio web del Registro (ya sea con su computadora o con un dispositivo móvil), recopilamos ciertos datos de forma automática y los almacenamos en archivos de registro. Esa información puede abarcar direcciones IP, el prestador del servicio de Internet, páginas de referencia/salida, marcas de fecha/hora, datos del registro de clics, horas de inicio/cierre de sesión y el tiempo que pasa en el Registro.",
           "P15": "Utilizamos cookies (pequeños archivos de texto enviados a su computadora cada vez que visita el Registro y que son exclusivos para su cuenta o su navegador) con distintos fines, ya sea analizar la frecuencia con la que usa el Registro, dónde accede a él y la actividad que sucede allí. Usamos una combinación de herramientas y servicios automatizados, como Google Analytics y MixPanel, para evaluar y mejorar nuestro Registro.   Además, es posible que usemos tecnologías de seguimiento externas para detectar códigos malintencionados o ataques en el Registro.  Esas entidades pueden usar cookies y otras tecnologías de seguimiento para prestar sus servicios."
         }
@@ -421,13 +419,13 @@
         "Title": "5. ¿Qué tipo de información recopilamos?",
         "Text": {
           "P1BoldUnderline": "Información personal:",
-          "P2": "Información que, por sí sola o combinada con otros datos, se puede utilizar para conocer su identidad, comunicarse con usted o determinar su ubicación.  Por ejemplo, su nombre, código postal, condición de participación en ensayos y correo electrónico es información personal que puede brindarnos mediante su uso del Registro. Si entrega la información personal de alguien más (por ejemplo, envía al registro información en nombre de otra personas o da detalles de sus antecedentes médicos familiares que podrían servir para identificar a un familiar), debe avisarle, en la medida que lo permitan sus facultades mentales.  Solo usaremos dicha información personal de conformidad con esta política de privacidad y la ley pertinente.",
+          "P2": " Información que, por sí sola o combinada con otros datos, se puede utilizar para conocer su identidad, comunicarse con usted o determinar su ubicación.  Por ejemplo, su nombre, código postal, condición de participación en ensayos y correo electrónico es información personal que puede brindarnos mediante su uso del Registro. Si entrega la información personal de alguien más (por ejemplo, envía al registro información en nombre de otra persona o da detalles de sus antecedentes médicos familiares que podrían servir para identificar a un familiar), debe avisarle, en la medida que lo permitan sus facultades mentales.  Solo usaremos dicha información personal de conformidad con esta política de privacidad y la ley pertinente.",
           "P3BoldUnderline": "Información médica y relacionada con investigaciones:",
-          "P4":". En el cuestionario médico del Registro le pedirán información sobre su experiencia con la enfermedad priónica y su deseo de participar en investigaciones.",
+          "P4": ". En el cuestionario médico del Registro le pedirán información sobre su experiencia con la enfermedad priónica y su deseo de participar en investigaciones.",
           "P5BoldUnderline": "Información sobre el uso del Registro:",
-          "P6": "Información relacionada con su uso del Registro, como las páginas que vea, los enlaces en los que haga clic y la duración de su visita.",
+          "P6": " Información relacionada con su uso del Registro, como las páginas que vea, los enlaces en los que haga clic y la duración de su visita.",
           "P7BoldUnderline": "Información sobre dispositivos:",
-          "P8": "Información relacionada con la computadora, el dispositivo móvil u otro (por ejemplo, iPad) en particular que utilice para entrar al Registro. La información sobre dispositivos incluye su dirección IP (que es un número asignado por el prestador del servicio de Internet a la computadora que utiliza para ingresar a Internet), un identificador del dispositivo (que es un número asignado al teléfono celular por el fabricante del dispositivo) o el tipo de sistema operativo o navegador que usa para entrar al Registro.\n"
+          "P8": " Información relacionada con la computadora, el dispositivo móvil u otro (por ejemplo, iPad) en particular que utilice para entrar al Registro. La información sobre dispositivos incluye su dirección IP (que es un número asignado por el prestador del servicio de Internet a la computadora que utiliza para ingresar a Internet), un identificador del dispositivo (que es un número asignado al teléfono celular por el fabricante del dispositivo) o el tipo de sistema operativo o navegador que usa para entrar al Registro.\n"
         }
       },
       "Cookies": {
@@ -439,7 +437,7 @@
           "P4Underline": "Cookies persistentes:",
           "P5": ".  Las cookies persistentes quedan en su computadora o dispositivo después de que cierra el navegador o el Registro o apaga el equipo.  Utilizamos cookies persistentes para realizar un seguimiento de información combinada y estadística sobre la actividad de los usuarios en nuestro Registro (consulte “Tecnologías de seguimiento” a continuación).",
           "P6Bold": "Cómo desactivar las cookies.",
-          "P7": "  Puede optar por no aceptar las cookies que no sean esenciales. Para esto, haga clic en “Rechazar cookies” o en “Gestionar preferencias” en el mensaje donde le preguntarán si acepta el uso de cookies. Las cookies no esenciales son las que nos permiten supervisar el uso del sitio y mejorarlo, por ejemplo Google Analytics. Sin embargo, otras cookies son esenciales para funcionalidad del sitio web, por ejemplo las que le permiten mantener la sesión abierta mientas utiliza el Registro. La única manera de no aceptar esas cookies esenciales es no usar el sitio.",
+          "P7": "  Puede optar por no aceptar las cookies que no sean esenciales. Para esto, haga clic en “Rechazar cookies” o en “Gestionar preferencias” en el mensaje donde le preguntarán si acepta el uso de cookies. Las cookies no esenciales son las que nos permiten supervisar el uso del sitio y mejorarlo, por ejemplo Google Analytics. Sin embargo, otras cookies son esenciales para la funcionalidad del sitio web, por ejemplo las que le permiten mantener la sesión abierta mientas utiliza el Registro. La única manera de no aceptar esas cookies esenciales es no usar el sitio.",
           "P8": "También puede ver y gestionar sus preferencias sobre las cookies haciendo clic en el siguiente botón.",
           "P9Bold": "Tecnologías de seguimiento.",
           "P10": "  Utilizamos dispositivos, aplicaciones y herramientas analíticas automatizadas, como Google Analytics, para evaluar el uso de nuestro Registro y mejorar la experiencia del usuario y el rendimiento del sitio.  Además, es posible que usemos tecnologías de seguimiento externas, como tCell, para detectar códigos malintencionados o ataques en el Registro.  Esas entidades pueden usar cookies y otras tecnologías de seguimiento para prestar sus servicios.  No entregamos su información personal a esas entidades externas.",
@@ -447,7 +445,7 @@
           "P12": "Cuando el usuario selecciona la opción “No realizar seguimiento” (“",
           "P13BoldUnderline": "DNT",
           "P14": "”, por sus siglas en inglés) en su navegador, desactivamos las tecnologías de seguimiento, como Google Analytics; sin embargo, no desactivamos el seguimiento esencial para la funcionalidad del sitio web, como las cookies que permiten mantener abierta la sesión. Para obtener información sobre la opción “No realizar seguimiento”, visite",
-          "P15Link": "www.allaboutdnt.org",
+          "P15Link": " www.allaboutdnt.org",
           "P16": "."
         }
       },
@@ -463,9 +461,9 @@
           "P6BoldUnderline": "Realizar y promover investigaciones.",
           "P7": " Utilizaremos la información que nos brinde para generar estadísticas descriptivas combinadas y anonimizadas, por ejemplo sobre la cantidad de personas interesadas en participar en investigaciones acerca de la enfermedad priónica en una zona geográfica determinada. Esas estadísticas se pueden usar para realizar investigaciones (por ejemplo para caracterizar la prevalencia de la enfermedad priónica) o para promover el estudio de la enfermedad priónica, ya sea procurando fondos o solicitando colaboraciones. En el marco de esa labor, podemos utilizar la información que nos brinde para verificar la exactitud de los datos del Registro, desarrollar publicaciones científicas y responder preguntas de comités institucionales de revisión, comités de ética u organismos gubernamentales o reguladores.",
           "P8BoldUnderline": "Personalizar su experiencia.",
-          "P9": "Utilizamos sus datos para adaptar el contenido y la información que le enviamos o le mostramos, para ofrecer una versión personalizada según su región, así como ayuda e instrucciones adaptadas, y para personalizar de cualquier otro modo su experiencia mientras use el Registro.",
+          "P9": " Utilizamos sus datos para adaptar el contenido y la información que le enviamos o le mostramos, para ofrecer una versión personalizada según su región, así como ayuda e instrucciones adaptadas, y para personalizar de cualquier otro modo su experiencia mientras use el Registro.",
           "P10BoldUnderline": "Desarrollar y mejorar nuestro Registro.",
-          "P11": "Utilizamos su información para garantizar que el Registro funcione según lo previsto; para analizar cómo los usuarios ingresan a él y lo usan, tanto de manera combinada como individualizada; para saber qué funciones son valiosas para el Registro; para implementar mejoras  en él; para desarrollar nuevas funciones y aplicaciones; y para otros fines de investigación y analíticos."
+          "P11": " Utilizamos su información para garantizar que el Registro funcione según lo previsto; para analizar cómo los usuarios ingresan a él y lo usan, tanto de manera combinada como individualizada; para saber qué funciones son valiosas para el Registro; para implementar mejoras  en él; para desarrollar nuevas funciones y aplicaciones; y para otros fines de investigación y analíticos."
         }
       },
       "ShareWith": {
@@ -478,14 +476,14 @@
           "P5BoldUnderline": "Proveedores y prestadores de servicios.",
           "P6": "  Recurrimos a varios proveedores externos y prestadores de servicios que nos ayudan a operar el Registro.  Por ejemplo, es posible que recurramos a proveedores externos para almacenar y autenticar las credenciales de las cuentas, guardar y analizar los registros del sistema, enviar comunicaciones por correo electrónico, y alojar y almacenar la información recopilada mediante el Registro.  Quizás tengamos que entregar su información a esos proveedores y prestadores para que puedan ofrecernos esos servicios.  Los prestadores de servicios y proveedores están obligados a utilizar la información brindada por usted únicamente para prestarnos sus servicios y de conformidad con esta Política.",
           "P7BoldUnderline": "Motivos legales y relacionados con la seguridad.",
-          "P8": "Es posible que la ley nos obligue a revelar su información personal ante terceros, por ejemplo en las siguientes situaciones:",
+          "P8": " Es posible que la ley nos obligue a revelar su información personal ante terceros, por ejemplo en las siguientes situaciones:",
           "P9": "si lo solicitan las autoridades judiciales y policiales;",
           "P10": "a causa de un proceso judicial, como una citación, una solicitud de exhibición de pruebas en un proceso civil o una orden judicial.",
           "P11": "También podemos consultar, conservar y revelar su información personal para aplicar los términos de uso del Registro y para proteger nuestros derechos, bienes y seguridad, así como los de usted u otros.",
           "P12BoldUnderline": "Reorganización, venta o fusión.",
           "P13": "  El Broad Institute podría participar en una transacción comercial en la que su propiedad o sus bienes se transfieran o vendan a otra entidad jurídica.  Eso puede suceder en el caso de una fusión con otra entidad jurídica, una adquisición por parte de otra entidad jurídica, una reorganización corporativa o un proceso judicial (por ejemplo, quiebra o administración judicial) en el cual un fideicomisario u otro asuma el control de la entidad.  En cada una de esas situaciones, su información se puede transferir en el marco de la transacción en la medida que lo permita la ley o el contrato pertinente. El sucesor continuará estando sujeto a los términos de esta Política.",
           "P14BoldUnderline": "Con su consentimiento.",
-          "P15": "  En ocasiones, quizás le pidamos permiso para entregar su información a terceros que no se definen en esta sección.  Encada caso, definiremos el tercero y el fin con el cual nos proponemos entregar su información.",
+          "P15": "  En ocasiones, quizás le pidamos permiso para entregar su información a terceros que no se definen en esta sección.  En cada caso, definiremos el tercero y el fin con el cual nos proponemos entregar su información.",
           "P16BoldUnderline": "Información combinada y anonimizada.",
           "P17": "  Es posible que entreguemos a terceros y que difundamos públicamente información combinada o anonimizada sobre los usuarios y su uso del Registro, con el objeto de realizar informes, presentar solicitudes de fondos, llevar a cabo investigaciones o fines similares.  Esa información no permitirá conocer su identidad personal."
         }
@@ -573,22 +571,22 @@
           "P17Bold": "Derechos de los sujetos de datos de la UE. ",
           "P18": "Los sujetos de datos de la Unión Europea tienen los siguientes derechos:",
           "P19Bold": "El derecho a ser informados:",
-          "P20": "Usted tiene derecho a que le notifiquen la recopilación y el uso de sus datos personales.",
+          "P20": " Usted tiene derecho a que le notifiquen la recopilación y el uso de sus datos personales.",
           "P21Bold": "El derecho al acceso:",
-          "P22": "Usted tiene derecho a solicitar copias de sus datos personales.",
+          "P22": " Usted tiene derecho a solicitar copias de sus datos personales.",
           "P23Bold": "El derecho a la rectificación:",
-          "P24": "Usted tiene derecho a solicitar que corrijamos cualquier información que considere inexacta. Asimismo, tiene derecho a solicitar que completemos toda información que considere incompleta.",
+          "P24": " Usted tiene derecho a solicitar que corrijamos cualquier información que considere inexacta. Asimismo, tiene derecho a solicitar que completemos toda información que considere incompleta.",
           "P25Bold": "El derecho a la eliminación:",
-          "P26": "En determinadas circunstancias, tiene derecho a solicitar que eliminemos sus datos personales.",
+          "P26": " En determinadas circunstancias, tiene derecho a solicitar que eliminemos sus datos personales.",
           "P27Bold": "El derecho a limitar el procesamiento:",
-          "P28": "En determinadas circunstancias, tiene derecho a solicitar que limitemos el procesamiento de sus datos personales.",
+          "P28": " En determinadas circunstancias, tiene derecho a solicitar que limitemos el procesamiento de sus datos personales.",
           "P29Bold": "El derecho a oponerse al procesamiento:",
-          "P30": "En determinadas circunstancias, tiene derecho a oponerse a que procesemos sus datos personales.",
+          "P30": " En determinadas circunstancias, tiene derecho a oponerse a que procesemos sus datos personales.",
           "P31Bold": "El derecho a la portabilidad de los datos:",
-          "P32": "En determinadas circunstancias, tiene derecho a solicitar que transfiramos los datos que hemos recopilado a otra organización o que directamente se los enviemos a usted.",
+          "P32": " En determinadas circunstancias, tiene derecho a solicitar que transfiramos los datos que hemos recopilado a otra organización o que directamente se los enviemos a usted.",
           "P33": "Si considera que nuestro procesamiento de sus datos personales infringe las leyes de protección de los datos, tiene el derecho legítimo a presentar una queja ante una autoridad supervisora responsable de protegerlos.  Puede hacerlo en el Estado miembro de la UE donde resida habitualmente, en su lugar de trabajo o en el lugar donde haya ocurrido la presunta infracción.",
           "P34Bold": "Envío de solicitudes:",
-          "P35": "Los sujetos de datos de la UE pueden enviar solicitudes haciendo clic en el botón “Solicitud de datos” que se encuentra en la sección 10.  Responderemos a todas las solicitudes dentro de los 30 días posteriores a la recepción de los datos necesarios para tomar medidas, salvo que existan circunstancias atenuantes o solicitudes complejas/múltiples, en cuyo caso podemos demorar hasta 90 días en responder.  Le avisaremos si prevemos que nuestra respuesta se demorará más de 30 días.  No obstante, tenga en cuenta que determinados datos personales pueden estar exentos de los derechos de conformidad con las leyes pertinentes de protección de datos.  Asimismo, no responderemos a ninguna solicitud a menos que podamos verificar correctamente la identidad del solicitante. Por otro lado, si consideramos que una solicitud es evidentemente infundada o excesiva, podemos exigir el pago de una suma módica para ocuparnos de ella, o podemos negarnos a tenerla en cuenta."
+          "P35": " Los sujetos de datos de la UE pueden enviar solicitudes haciendo clic en el botón “Solicitud de datos” que se encuentra en la sección 10.  Responderemos a todas las solicitudes dentro de los 30 días posteriores a la recepción de los datos necesarios para tomar medidas, salvo que existan circunstancias atenuantes o solicitudes complejas/múltiples, en cuyo caso podemos demorar hasta 90 días en responder.  Le avisaremos si prevemos que nuestra respuesta se demorará más de 30 días.  No obstante, tenga en cuenta que determinados datos personales pueden estar exentos de los derechos de conformidad con las leyes pertinentes de protección de datos.  Asimismo, no responderemos a ninguna solicitud a menos que podamos verificar correctamente la identidad del solicitante. Por otro lado, si consideramos que una solicitud es evidentemente infundada o excesiva, podemos exigir el pago de una suma módica para ocuparnos de ella, o podemos negarnos a tenerla en cuenta."
         }
       }
     },
@@ -794,6 +792,9 @@
         "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que este error puede aparecer en solicitudes satisfactorias."
       }
     },
-    "TooltipAlt": "Información"
+    "TooltipAlt": "Información",
+    "Validators": {
+      "DateNavyValidationRule": "[ES] Entered date is invalid"
+    }
   }
 }

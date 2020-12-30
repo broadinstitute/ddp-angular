@@ -1,4 +1,4 @@
-import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
+import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { ActivityAbstractValidationRule } from './activityAbstractValidationRule';
 
@@ -6,7 +6,7 @@ export class ActivityOptionsAmountValidationRule extends ActivityAbstractValidat
     private outcome: boolean;
 
     constructor(
-        question: ActivityQuestionBlock<ActivityPicklistOption[]>,
+        question: ActivityQuestionBlock<ActivityPicklistAnswerDto[]>,
         public minimumSelection: number,
         public maximumSelection: number) {
         super(question);
@@ -14,11 +14,8 @@ export class ActivityOptionsAmountValidationRule extends ActivityAbstractValidat
 
     public recalculate(): boolean {
         let length = 0;
-        if (this.question.answer && this.question.answer.picklistOptions) {
-            length = this.question.answer.picklistOptions.length;
-        }
-        if (this.question.answer && this.question.answer.otherOptionSelected) {
-            length++;
+        if (this.question.answer && this.question.answer.length) {
+            length = this.question.answer.length;
         }
         if (length >= this.minimumSelection && length <= this.maximumSelection) {
             this.result = null;

@@ -723,6 +723,9 @@
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
         },
-        "TooltipAlt": "Information"
+        "TooltipAlt": "Information",
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid"
+        }
     }
 }

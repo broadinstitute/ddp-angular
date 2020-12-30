@@ -15,4 +15,6 @@ export interface ActivityInstance {
     numQuestions: number;
     numQuestionsAnswered: number;
     isFollowup: boolean;
+    isHidden: boolean;
+    previousInstanceGuid: string | null;
 }

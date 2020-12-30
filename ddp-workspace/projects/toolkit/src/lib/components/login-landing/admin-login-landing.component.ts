@@ -53,10 +53,11 @@ export class AdminLoginLandingComponent implements OnInit, OnDestroy {
   }
 
   private handleAuthError(error: any | null): void {
-    if (error) {
-      this.logger.logError(this.LOG_SOURCE, error);
-    }
-    this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
+    // No need to decode error, and it should have already been logged.
+
+    // Logout to clear any potentially leftover state. Otherwise, user might be stuck in error mode
+    // and cannot re-attempt login until browser cache is cleared manually.
+    this.auth0.logout(this.toolkitConfiguration.errorUrl);
   }
 
   private redirect(): void {

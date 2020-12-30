@@ -11,6 +11,8 @@ dispatch:
     service: testboston
   - url: "mpc.dev.datadonationplatform.org/*"
     service: mpc
+  - url: "prion.dev.datadonationplatform.org/*"
+    service: prion
   - url: "pepper-dev.datadonationplatform.org/docs*"
     service: pepper-api-spec
   - url: "pepper-dev.datadonationplatform.org/spec/*"

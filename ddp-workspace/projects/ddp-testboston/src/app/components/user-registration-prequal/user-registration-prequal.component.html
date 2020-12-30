@@ -5,8 +5,8 @@
                 <h1 class="invitation-form__title semi-bold" translate>PrequalPage.Title</h1>
                 <div class="invitation-form__container">
                     <p class="invitation-form__question bold" translate>PrequalPage.InvitationCode.Question</p>
-                    <img class="invitation-form__info" 
-                         src="assets/images/info.png" 
+                    <img class="invitation-form__info"
+                         src="assets/images/info.png"
                          [alt]="'PrequalPage.InvitationCode.TooltipAlt' | translate"
                          matTooltipClass="tooltip__box"
                          (click)="tooltip.toggle()"
@@ -20,7 +20,6 @@
                            formControlName="invitationId"
                            pattern="[a-zA-Z0-9]{12}"
                            maxLength="18"
-                           [attr.disabled]="isLoading ? true : null"
                            [placeholder]="'PrequalPage.InvitationCode.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidInvitation)">
@@ -30,6 +29,12 @@
                         <span translate>PrequalPage.InvitationCode.Error.Part2</span>
                         <a class="Link Link_bold Link_phone" [href]="phoneHref">{{phone}}</a>.
                     </p>
+                    <p class="error error_input error_input_additional">
+                        <span translate>PrequalPage.InvitationCode.Error.Part3</span>
+                    </p>
+                    <p class="error error_input error_input_additional">
+                        <span translate>PrequalPage.InvitationCode.Error.Part4</span>
+                    </p>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Zip.Question</p>
                 <mat-form-field class="invitation-form__input">
@@ -38,7 +43,6 @@
                            minlength="5"
                            maxlength="5"
                            pattern="[0-9]{5}"
-                           [attr.disabled]="isLoading ? true : null"
                            [placeholder]="'PrequalPage.Zip.Placeholder' | translate">
                 </mat-form-field>
                 <ng-container *ngIf="hasInvitationError(errorType.InvalidQualifications)">
@@ -47,7 +51,7 @@
                     </p>
                 </ng-container>
                 <p class="invitation-form__question bold" translate>PrequalPage.Adult.Question</p>
-                <mat-radio-group class="age" formControlName="adult" [disabled]="isLoading">
+                <mat-radio-group class="age" formControlName="adult">
                     <mat-radio-button value="true" class="age__item">
                         {{'PrequalPage.Adult.Yes' | translate}}
                     </mat-radio-button>
@@ -69,10 +73,12 @@
                     </re-captcha>
                 </div>
                 <div class="invitation-form__submit">
-                    <button class="button button_primary" type="submit" [disabled]="formGroup.invalid || isLoading"
-                        [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
+                    <button class="button button_primary"
+                            type="submit"
+                            [disabled]="formGroup.invalid || formGroup.disabled"
+                            [attr.aria-label]="'Common.Buttons.Submit.AriaLabel' | translate">
                         {{'Common.Buttons.Submit.Title' | translate}}
-                        <mat-icon *ngIf="isLoading" class="button__spinner">
+                        <mat-icon *ngIf="formGroup.disabled" class="button__spinner">
                             <mat-spinner color="primary" diameter="20"></mat-spinner>
                         </mat-icon>
                     </button>

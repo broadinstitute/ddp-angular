@@ -1,10 +1,13 @@
 // Angular imports
-import {
-  MatCardModule, MatDialogModule, MatFormFieldModule,
-  MatIconModule, MatInputModule, MatProgressBar,
-  MatProgressBarModule, MatProgressSpinnerModule, MatTableModule,
-  MatToolbarModule
-} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule, MatProgressBar } from '@angular/material/progress-bar';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -18,14 +21,10 @@ import { AnalyticsEventsService, DdpModule } from 'ddp-sdk';
 import {
   ActivityLinkComponent,
   CommunicationService,
-  DisclaimerComponent,
   HeaderActionGuard,
   LoginLandingComponent,
   RedirectToAuth0LoginComponent,
-  ResendEmailComponent,
-  SessionWillExpireComponent,
   ToolkitModule,
-  WarningComponent,
   WarningMessageComponent,
   WorkflowBuilderService,
   WorkflowMapperService
@@ -109,12 +108,6 @@ import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-aut
     PrionWorkflowStartActivityComponent,
     RedirectToAuth0LoginComponent,
     WarningMessageComponent
-  ],
-  entryComponents: [
-    DisclaimerComponent,
-    ResendEmailComponent,
-    WarningComponent,
-    SessionWillExpireComponent
   ]
 })
 export class ToolkitPrionModule {

@@ -22,7 +22,7 @@ references:
 executors:
   build-executor:
     docker:
-      - image: broadinstitute/study-website-build:07-28-2020A
+      - image: broadinstitute/study-website-build:12-08-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
@@ -438,6 +438,8 @@ jobs:
           study_key: rgp
       - conditionally-launch-build-and-store:
           study_key: esc
+      - conditionally-launch-build-and-store:
+          study_key: prion
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -520,7 +522,6 @@ workflows:
                 - staging
                 - production
           study_key: osteo
-
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: brain
@@ -545,6 +546,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: esc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: prion
 
   nightly:
     triggers:
@@ -582,3 +586,6 @@ workflows:
       - build-and-deploy-job:
           name: esc-nightly
           study_key: esc
+      - build-and-deploy-job:
+          name: prion-nightly
+          study_key: prion

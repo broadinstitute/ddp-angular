@@ -252,7 +252,9 @@
       "Placeholder": "Vui lòng nhập mã mời",
       "Error": {
         "Part1": "Mã quý vị nhập không hoạt động. Vui lòng kiểm tra mã của quý vị và thử lại lần nữa. Quý vị luôn có thể liên lạc với ban nhân viên nghiên cứu TestBoston để được trợ giúp:",
-        "Part2": "hoặc"
+        "Part2": "hoặc",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -452,7 +454,8 @@
       "ActivityStatus": "Tình trạng",
       "ActivityDate": "Được tạo ra",
       "ActivityActions": "Hành động",
-      "ActivityQuestionCount": "{{questionsAnswered}} của {{questionTotal}} được trả lời"
+      "ActivityQuestionCount": "{{questionsAnswered}} của {{questionTotal}} được trả lời",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Người tham gia được kiểm soát",
@@ -607,6 +610,13 @@
     "SubjectPanel": {
       "Link": "Quay về Trang tìm kiếm",
       "Text": "Mã mời:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[VI] Entered date is invalid"
     }
   }
 }

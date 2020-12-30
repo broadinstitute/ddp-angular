@@ -44,7 +44,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 const baseElt = document.getElementsByTagName('base');
@@ -106,6 +107,7 @@ sdkConfig.dashboardReportActivities = ['RESULT_REPORT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.addressEnforceRequiredFields = true;
 sdkConfig.scrollToErrorOffset = 130;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];

@@ -1,9 +1,12 @@
-import { Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy, Component } from '@angular/core';
 import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { Subscription } from 'rxjs';
 
+@Component({
+    template: ``
+})
 export class BaseActivityPicklistQuestion implements OnChanges, OnDestroy {
     @Input() block: ActivityPicklistQuestionBlock;
     @Input() readonly: boolean;
