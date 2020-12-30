@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
-import { delay, take } from 'rxjs/operators';
+import { iif, of } from 'rxjs';
+import { delay, switchMap, take } from 'rxjs/operators';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 import { CompositeDisposable } from 'ddp-sdk';
@@ -102,14 +102,25 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
     this.busy = true;
 
-    this.dataAccessService
+    const sendDar$ = this.dataAccessService
       .send(this.model, this.researcherBiosketch, this.recaptchaToken)
-      .pipe(take(1))
+      .pipe(take(1));
+
+    const getTokenFirst$ = this.recaptchaService.execute('dar_submit').pipe(
+      switchMap(token =>
+        this.dataAccessService.send(this.model, this.researcherBiosketch, token)
+      ),
+      take(1)
+    );
+
+    of(this.recaptchaToken)
+      .pipe(switchMap(token => iif(() => !!token, sendDar$, getTokenFirst$)))
       .subscribe(this.showResponse, this.showError);
   }
 
   private showResponse = (): void => {
     this.busy = false;
+    this.recaptchaToken = null;
 
     this.communicationService.showPopupMessage(
       new PopupMessage(
@@ -128,6 +139,7 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   private showError = (): void => {
     this.busy = false;
+    this.recaptchaToken = null;
 
     this.communicationService.showPopupMessage(
       new PopupMessage(
