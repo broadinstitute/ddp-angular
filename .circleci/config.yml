@@ -37,7 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - run-tests
+      # - run-tests
       - build-app
       - store-app-build
 
@@ -275,7 +275,7 @@ commands:
       - run:
           name: Install Lighthouse CI
           command: |
-            npm i -g @lhci/cli@0.6.x
+            npm i -g @lhci/cli@0.6.1
 
   run-lighthouse-ci:
     description: "Run lhci (to get audit report)"
