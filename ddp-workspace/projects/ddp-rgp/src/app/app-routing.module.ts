@@ -12,7 +12,6 @@ import { ForYourPhysicianComponent } from './components/for-your-physician/for-y
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
@@ -130,11 +129,6 @@ const routes: Routes = [
   {
     path: 'count-me-in',
     redirectTo: 'tell-us-your-story',
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'thank-you',
-    component: ThankYouComponent,
     canActivate: [IrbGuard]
   },
   {

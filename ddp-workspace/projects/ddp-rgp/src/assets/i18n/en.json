@@ -996,8 +996,8 @@
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {
-                "Title": "Stay informed!",
-                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Title": "Thank you for your interest in joining the Rare Genomes Project!",
+                "Text": " <p class=\"Paragraph\" i18n>Unfortunately, your responses to our pre-screening questionnaire do not match the\n <a href=\"/eligibility-criteria\" class=\"Link\">current requirements for participation</a> in\n the study. The Rare Genomes Project can only accept applications from families who meet all of these\n conditions:</p>\n <ul>\n <li class=\"List-li\">Understand English</li>\n      <li class=\"List-li\">Live in the United States</li>\n      <li class=\"List-li\">Have a rare and undiagnosed genetic condition</li>\n      <li class=\"List-li\">Are currently under the care of a doctor helping to figure out the cause of the\n        patient’s condition</li>\n    </ul>\n    <p class=\"Paragraph TopMargin25\" i18n>Over time, we may be able to expand the project. We hope you will join\n      our mailing list. If you do, we will contact you if participation requirements change, making you eligible to\n      apply to the study.</p>",
                 "Fields": {
                     "FirstName": {
                         "Placeholder": "First Name *",
