@@ -143,7 +143,7 @@ const routes: Routes = [
   },
   {
     path: 'activity/:id',
-    component: ActivityRedesignedComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent,
     canActivate: [
       AuthGuard,
       IrbGuard
@@ -151,7 +151,7 @@ const routes: Routes = [
   },
   {
     path: 'activity-link/:id',
-    component: ActivityRedesignedComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent,
     canActivate: [
       AuthGuard,
       IrbGuard
