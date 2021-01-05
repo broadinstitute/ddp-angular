@@ -58,7 +58,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
-            - run-tests
+            # - run-tests
             - build-app
             - run-lighthouse-ci
             - deploy-exploded-build:
@@ -283,7 +283,8 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            lhci autorun --collect.staticDistDir=$OUTPUT_DIR
+            lhci autorun --collect.staticDistDir=$OUTPUT_DIR --collect.chromePath=$CHROME_BIN --collect.isSinglePageApplication
+
 
   run-tests:
     description: "Run all tests"
