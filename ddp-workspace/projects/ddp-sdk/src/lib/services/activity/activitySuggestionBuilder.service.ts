@@ -121,32 +121,13 @@ export class ActivitySuggestionBuilder {
             }
         };
 
-        let nonMatches: Array<string> = [];
-        const findMatches = (suggestionsLeft: Array<string>, matcher): Array<TextSuggestion> => {
-            nonMatches = [];
-            return suggestionsLeft.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
-                const offset = matcher(suggestion);
-                if (offset >= 0) {
-                    accumulator.push({
-                        value: suggestion,
-                        matches: [{
-                            offset,
-                            length
-                        }]
-                    });
-                } else {
-                    nonMatches.push(suggestion);
-                }
-                return accumulator;
-            }, []);
-        };
-
-        let suggestionsLeft = suggestions.filter(hasAnyMatch);
-        const startsWithSuggestions = findMatches(suggestionsLeft, indexOfStartWithMatch);
-        suggestionsLeft = nonMatches;
-        const startOfWordSuggestions = findMatches(suggestionsLeft, indexOfStartOfWordMatch);
-        suggestionsLeft = nonMatches;
-        const suggestionsWithinWords = findMatches(suggestionsLeft, indexOfFirstMatch);
+        const suggestionsMatched = suggestions.filter(hasAnyMatch);
+        const resultForStartWith = this.findMatches(suggestionsMatched, indexOfStartWithMatch);
+        const resultForStartOfWord = this.findMatches(resultForStartWith.leftover, indexOfStartOfWordMatch);
+        const resultForWithinWord = this.findMatches(resultForStartOfWord.leftover, indexOfFirstMatch);
+        const startsWithSuggestions = resultForStartWith.matches;
+        const startOfWordSuggestions = resultForStartOfWord.matches;
+        const suggestionsWithinWords = resultForWithinWord.matches;
 
         startsWithSuggestions.sort(compareOffsetAndText);
         startOfWordSuggestions.sort(compareOffsetAndText);
@@ -158,4 +139,29 @@ export class ActivitySuggestionBuilder {
             ...suggestionsWithinWords
         ];
     }
+
+    private findMatches(suggestions: Array<string>, matcher: (string) => number): MatchResult {
+        const leftover = [];
+        const matches = suggestions.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
+            const offset = matcher(suggestion);
+            if (offset >= 0) {
+                accumulator.push({
+                    value: suggestion,
+                    matches: [{
+                        offset,
+                        length
+                    }]
+                });
+            } else {
+                leftover.push(suggestion);
+            }
+            return accumulator;
+        }, []);
+        return { matches, leftover };
+    }
+}
+
+interface MatchResult {
+    matches: Array<TextSuggestion>,
+    leftover: Array<string>
 }
