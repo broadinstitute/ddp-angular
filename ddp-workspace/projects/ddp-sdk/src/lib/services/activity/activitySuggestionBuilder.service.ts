@@ -3,9 +3,10 @@ import { TextSuggestionProvider } from '../../models/activity/textSuggestionProv
 import { SuggestionType } from '../../models/activity/suggestionType';
 import { ActivityRule } from '../../models/activity/activityRule';
 import { TextSuggestion } from '../../models/activity/textSuggestion';
+import { InstitutionServiceAgent } from '../serviceAgents/institutionServiceAgent.service';
 import { SuggestionServiceAgent } from '../serviceAgents/suggestionServiceAgent.service';
 import { LoggingService } from '../logging.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, filter } from 'rxjs/operators';
 
 const SUGGESTION_LIMIT = 10;
@@ -17,6 +18,7 @@ export class ActivitySuggestionBuilder {
 
     constructor(
         private logger: LoggingService,
+        private institutionService: InstitutionServiceAgent,
         private suggestionService: SuggestionServiceAgent) {
         this.suggestionBuilders = [
             {
@@ -34,6 +36,10 @@ export class ActivitySuggestionBuilder {
             {
                 type: SuggestionType.Included,
                 func: (x) => this.getIncludedSuggestions(x)
+            },
+            {
+                type: SuggestionType.Institution,
+                func: (x) => this.getInstitutionSuggestions()
             }
         ];
     }
@@ -81,22 +87,30 @@ export class ActivitySuggestionBuilder {
 
     private getIncludedSuggestions(suggestions: Array<string>): TextSuggestionProvider {
         return (value$: Observable<string>) => value$.pipe(
-            map(value => this.findIncludedSuggestions(value, suggestions))
+            map(value => this.buildTextSuggestions(value, suggestions))
         );
     }
 
-    private findIncludedSuggestions(value: string, suggestions: Array<string>): Array<TextSuggestion> {
-        const lowerCaseValue = value.toLowerCase();
+    private getInstitutionSuggestions(): TextSuggestionProvider {
+        return (value$: Observable<string>) => value$.pipe(
+            switchMap(value => this.institutionService.getSummary(of(value), SUGGESTION_LIMIT).pipe(
+                map(institutions => institutions.map(institution => institution.name)),
+                map(names => this.buildTextSuggestions(value, names))
+            ))
+        );
+    }
+
+    private buildTextSuggestions(value: string, suggestions: Array<string>): Array<TextSuggestion> {
         const length = value.length;
+        const lowerCaseValue = value.toLowerCase();
+        const safeValue = lowerCaseValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const safeValueRegexp = new RegExp('\\b' + safeValue + '(\\b|\\w+)');
 
         const indexOfFirstMatch = (suggestion: string): number => suggestion.toLowerCase().indexOf(lowerCaseValue);
         const hasAnyMatch = (suggestion: string): boolean => indexOfFirstMatch(suggestion) !== -1;
         const hasStartWithMatch = (suggestion: string): boolean => suggestion.toLowerCase().startsWith(lowerCaseValue);
-        const hasStartOfWordMatch = (suggestion: string): number => {
-            const safeValue = lowerCaseValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regexp = new RegExp('\\b' + safeValue + '(\\b|\\w+)');
-            return suggestion.toLowerCase().search(regexp);
-        };
+        const indexOfStartWithMatch = (suggestion: string): number => hasStartWithMatch(suggestion) ? 0 : -1;
+        const indexOfStartOfWordMatch = (suggestion: string): number => suggestion.toLowerCase().search(safeValueRegexp);
 
         const compareOffsetAndText = (suggestion1: TextSuggestion, suggestion2: TextSuggestion): number => {
             const offsetCompResult = suggestion1.matches[0].offset - suggestion2.matches[0].offset;
@@ -107,52 +121,32 @@ export class ActivitySuggestionBuilder {
             }
         };
 
+        let nonMatches: Array<string> = [];
+        const findMatches = (suggestionsLeft: Array<string>, matcher): Array<TextSuggestion> => {
+            nonMatches = [];
+            return suggestionsLeft.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
+                const offset = matcher(suggestion);
+                if (offset >= 0) {
+                    accumulator.push({
+                        value: suggestion,
+                        matches: [{
+                            offset,
+                            length
+                        }]
+                    });
+                } else {
+                    nonMatches.push(suggestion);
+                }
+                return accumulator;
+            }, []);
+        }
+
         let suggestionsLeft = suggestions.filter(hasAnyMatch);
-
-        const startsWithSuggestions = suggestionsLeft.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
-            if (hasStartWithMatch(suggestion)) {
-                accumulator.push({
-                    value: suggestion,
-                    matches: [{
-                        offset: 0,
-                        length
-                    }]
-                });
-            }
-            return accumulator;
-        }, []);
-
-        suggestionsLeft = suggestionsLeft.filter((suggestion: string) => !hasStartWithMatch(suggestion));
-
-        const startOfWordSuggestions = suggestionsLeft.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
-            const offset = hasStartOfWordMatch(suggestion);
-            if (offset !== -1) {
-                accumulator.push({
-                    value: suggestion,
-                    matches: [{
-                        offset,
-                        length
-                    }]
-                });
-            }
-            return accumulator;
-        }, []);
-
-        suggestionsLeft = suggestionsLeft.filter((suggestion: string) => hasStartOfWordMatch(suggestion) === -1);
-
-        const suggestionsWithinWords = suggestionsLeft.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
-            const offset = indexOfFirstMatch(suggestion);
-            if (offset !== -1) {
-                accumulator.push({
-                    value: suggestion,
-                    matches: [{
-                        offset,
-                        length
-                    }]
-                });
-            }
-            return accumulator;
-        }, []);
+        const startsWithSuggestions = findMatches(suggestionsLeft, indexOfStartWithMatch);
+        suggestionsLeft = nonMatches;
+        const startOfWordSuggestions = findMatches(suggestionsLeft, indexOfStartOfWordMatch);
+        suggestionsLeft = nonMatches;
+        const suggestionsWithinWords = findMatches(suggestionsLeft, indexOfFirstMatch);
 
         startsWithSuggestions.sort(compareOffsetAndText);
         startOfWordSuggestions.sort(compareOffsetAndText);

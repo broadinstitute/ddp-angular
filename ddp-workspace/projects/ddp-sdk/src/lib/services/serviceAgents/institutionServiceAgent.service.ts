@@ -18,11 +18,15 @@ export class InstitutionServiceAgent extends SessionServiceAgent<any> {
         super(session, configuration, http, logger, null);
     }
 
-    public getSummary(input: Observable<string>): Observable<Institution[]> {
+    public getSummary(input: Observable<string>, limit?: number): Observable<Institution[]> {
         return input.pipe(
-            flatMap(item =>
-                this.getObservable(`/autocomplete/institution?namePattern=${item}`, null),
-                (x, y) => y)
+            flatMap(item => {
+                const queryParams = {
+                    namePattern: item,
+                    ...(limit && limit >= 0) ? { limit } : {}
+                };
+                return this.getObservable('/autocomplete/institution', { params : queryParams });
+            }, (x, y) => y)
         );
     }
 }
