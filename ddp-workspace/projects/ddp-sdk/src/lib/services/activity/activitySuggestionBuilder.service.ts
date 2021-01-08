@@ -139,7 +139,7 @@ export class ActivitySuggestionBuilder {
                 }
                 return accumulator;
             }, []);
-        }
+        };
 
         let suggestionsLeft = suggestions.filter(hasAnyMatch);
         const startsWithSuggestions = findMatches(suggestionsLeft, indexOfStartWithMatch);
