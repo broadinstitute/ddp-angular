@@ -18,9 +18,11 @@ import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs
                   [validationRequested]="validationRequested$ | async"
                   (valueChanged)="enteredValue$.next($event)">
           </ddp-activity-answer>
-          <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
-              <ddp-validation-message [message]="errorMsg">
-              </ddp-validation-message>
+          <div *ngIf="block.shown">
+            <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
+                <ddp-validation-message [message]="errorMsg">
+                </ddp-validation-message>
+            </div>
           </div>
       </div>`
 })
