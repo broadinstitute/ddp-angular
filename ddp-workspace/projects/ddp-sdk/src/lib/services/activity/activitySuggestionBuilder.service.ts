@@ -121,10 +121,30 @@ export class ActivitySuggestionBuilder {
             }
         };
 
+        const findMatches = (suggestions: Array<string>, matcher: (string) => number): MatchResult => {
+            const leftover = [];
+            const matches = suggestions.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
+                const offset = matcher(suggestion);
+                if (offset >= 0) {
+                    accumulator.push({
+                        value: suggestion,
+                        matches: [{
+                            offset,
+                            length
+                        }]
+                    });
+                } else {
+                    leftover.push(suggestion);
+                }
+                return accumulator;
+            }, []);
+            return { matches, leftover };
+        };
+
         const suggestionsMatched = suggestions.filter(hasAnyMatch);
-        const resultForStartWith = this.findMatches(suggestionsMatched, indexOfStartWithMatch);
-        const resultForStartOfWord = this.findMatches(resultForStartWith.leftover, indexOfStartOfWordMatch);
-        const resultForWithinWord = this.findMatches(resultForStartOfWord.leftover, indexOfFirstMatch);
+        const resultForStartWith = findMatches(suggestionsMatched, indexOfStartWithMatch);
+        const resultForStartOfWord = findMatches(resultForStartWith.leftover, indexOfStartOfWordMatch);
+        const resultForWithinWord = findMatches(resultForStartOfWord.leftover, indexOfFirstMatch);
         const startsWithSuggestions = resultForStartWith.matches;
         const startOfWordSuggestions = resultForStartOfWord.matches;
         const suggestionsWithinWords = resultForWithinWord.matches;
@@ -138,26 +158,6 @@ export class ActivitySuggestionBuilder {
             ...startOfWordSuggestions,
             ...suggestionsWithinWords
         ];
-    }
-
-    private findMatches(suggestions: Array<string>, matcher: (string) => number): MatchResult {
-        const leftover = [];
-        const matches = suggestions.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
-            const offset = matcher(suggestion);
-            if (offset >= 0) {
-                accumulator.push({
-                    value: suggestion,
-                    matches: [{
-                        offset,
-                        length
-                    }]
-                });
-            } else {
-                leftover.push(suggestion);
-            }
-            return accumulator;
-        }, []);
-        return { matches, leftover };
     }
 }
 
