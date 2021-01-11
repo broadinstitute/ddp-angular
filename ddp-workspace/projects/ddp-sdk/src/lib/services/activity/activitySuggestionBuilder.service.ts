@@ -121,7 +121,7 @@ export class ActivitySuggestionBuilder {
             }
         };
 
-        const findMatches = (suggestions: Array<string>, matcher: (string) => number): MatchResult => {
+        const findMatches = (suggestions: Array<string>, matcher: (val: string) => number): MatchResult => {
             const leftover = [];
             const matches = suggestions.reduce((accumulator: Array<TextSuggestion>, suggestion: string) => {
                 const offset = matcher(suggestion);
@@ -162,6 +162,6 @@ export class ActivitySuggestionBuilder {
 }
 
 interface MatchResult {
-    matches: Array<TextSuggestion>,
-    leftover: Array<string>
+    matches: Array<TextSuggestion>;
+    leftover: Array<string>;
 }
