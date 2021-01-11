@@ -252,7 +252,9 @@
       "Placeholder": "输入邀请代码",
       "Error": {
         "Part1": "您输入的代码无效。请检查您的代码，然后重试。您可以随时联系 TestBoston 研究人员以寻求帮助：",
-        "Part2": "或者"
+        "Part2": "或者",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -452,7 +454,8 @@
       "ActivityStatus": "状态",
       "ActivityDate": "已创建",
       "ActivityActions": "操作",
-      "ActivityQuestionCount": "已解答 {{questionsAnswered}} 题，共 {{questionTotal}} 题"
+      "ActivityQuestionCount": "已解答 {{questionsAnswered}} 题，共 {{questionTotal}} 题",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "受管参与者",
@@ -607,6 +610,10 @@
     "SubjectPanel": {
       "Link": "返回受试者查找",
       "Text": "受试者邀请代码："
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
     },
     "Validators": {
       "DateNavyValidationRule": "[ZH] Entered date is invalid"

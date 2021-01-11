@@ -11,7 +11,7 @@ import * as _ from 'underscore';
             </li>
         </ul>
         <ng-template #singleMessage>
-            <span [innerHTML]="(isArrayOfMessages() ? message[0] : message) | translate" routeTransformer></span>
+            <span [innerHTML]="getSingleMessage() | translate" routeTransformer></span>
         </ng-template>
     </div>`,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,5 +26,9 @@ export class ValidationMessage {
 
   public isArrayOfMessages(): boolean {
     return _.isArray(this.message);
+  }
+
+  public getSingleMessage(): string {
+      return this.isArrayOfMessages() ? this.message[0] : String(this.message);
   }
 }

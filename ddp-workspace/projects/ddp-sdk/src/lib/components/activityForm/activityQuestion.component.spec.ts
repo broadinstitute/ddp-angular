@@ -73,6 +73,7 @@ describe('ActivityQuestionComponent', () => {
     expect(answerComponentFixture).toBeTruthy();
     expect(answerComponent).toBeTruthy();
   });
+
   it('expect block validation to appear and disappear', fakeAsync(() => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';

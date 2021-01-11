@@ -220,16 +220,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CommonLandingRedesignedComponent,
     CookiesBannerComponent,
     PrionPrivacyPolicyComponent
-  ],
-  entryComponents: [
-    DisclaimerComponent,
-    JoinMailingListComponent,
-    ResendEmailComponent,
-    WarningComponent,
-    SessionWillExpireComponent,
-    CookiesPreferencesModalComponent,
-    PrivacyPolicyModalComponent,
-    ModalActivityComponent
   ]
 })
 export class ToolkitModule {

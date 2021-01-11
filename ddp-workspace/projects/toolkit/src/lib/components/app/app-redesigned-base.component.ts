@@ -1,4 +1,4 @@
-import { OnInit, OnDestroy, Inject } from '@angular/core';
+import { OnInit, OnDestroy, Inject, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { NavigationEnd, Router } from '@angular/router';
@@ -8,6 +8,9 @@ import { JoinMailingListComponent } from '../dialogs/joinMailingList.component';
 import { SessionWillExpireComponent } from '../dialogs/sessionWillExpire.component';
 import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 
+@Component({
+    template: ``
+})
 export class AppRedesignedBaseComponent implements OnInit, OnDestroy {
     private anchor = new CompositeDisposable();
     private readonly DIALOG_BASE_SETTINGS = {

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { MatDialog, MatDialogRef, MatSidenav } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from './app.component.state';

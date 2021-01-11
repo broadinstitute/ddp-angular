@@ -1,4 +1,4 @@
-import { EventEmitter, Injector, Input, OnChanges, OnDestroy, Output, SimpleChange } from '@angular/core';
+import { EventEmitter, Injector, Input, OnChanges, OnDestroy, Output, SimpleChange, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
 import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
@@ -23,6 +23,9 @@ import {
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
 
+@Component({
+    template: ``
+})
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;

@@ -1,6 +1,7 @@
 @import '../app-theme.scss';
 
-.ddp-subject-panel {
+.ddp-subject-panel,
+.ddp-admin-action-panel {
     background-color: mat-color($app-theme, 200);
     font-family: 'Nunito', sans-serif;
 
@@ -18,6 +19,15 @@
     }
 }
 
+.ddp-admin-action-panel {
+    background-color: mat-color($app-theme, 300);
+
+    &__text {
+        margin: 0 10px 0 0;
+    }
+}
+
+.admin-action-panel-container,
 .subject-panel-container {
     max-width: 1450px;
     padding: 1rem 1.5625rem;
@@ -29,6 +39,15 @@
 
 @media only screen and (max-width: 710px) {
     .subject-panel-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ddp-admin-action-panel__text {
+        margin: 0 0 10px 0;
+    }
+
+    .admin-action-panel-container {
         flex-direction: column;
         align-items: flex-start;
     }

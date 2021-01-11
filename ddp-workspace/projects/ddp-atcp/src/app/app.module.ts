@@ -1,7 +1,7 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatMenuModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,8 +12,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
-import { CommunicationService, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
+
+import {
+  AnalyticsEvent,
+  AnalyticsEventsService,
+  ConfigurationService,
+  DdpModule,
+  LoggingService
+} from 'ddp-sdk';
+
+import {
+  CommunicationService,
+  ToolkitConfigurationService,
+  ToolkitModule
+} from 'toolkit';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { AboutUsComponent } from './components/about-us/about-us';
@@ -142,10 +155,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
     FileUploaderComponent,
-    PopupMessageComponent
-  ],
-  entryComponents: [
-    DashBoardComponent,
     PopupMessageComponent
   ],
   providers: [

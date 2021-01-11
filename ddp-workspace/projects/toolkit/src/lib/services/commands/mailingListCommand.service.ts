@@ -1,4 +1,4 @@
-import { OnDestroy } from '@angular/core';
+import { OnDestroy, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { WorkflowCommand } from '../../models/workflowCommand';
@@ -6,6 +6,7 @@ import { JoinMailingListComponent } from './../../components/dialogs/joinMailing
 import { UserProfileServiceAgent, UserProfile, UserProfileDecorator, CompositeDisposable } from 'ddp-sdk';
 import { Observable, Subscriber } from 'rxjs';
 
+@Injectable()
 export class MailingListCommand implements OnDestroy, WorkflowCommand {
     private anchor: CompositeDisposable = new CompositeDisposable();
     private emitter: Subscriber<void>;

@@ -8,7 +8,6 @@ import { UserProfile } from '../../models/userProfile';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
 
 @Injectable()
 export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
@@ -52,14 +51,14 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
         // save non-null profile attributes
         let profileChanges: object = {};
         for (let key of Object.keys(profile)) {
-            if (!isNullOrUndefined(profile[key])) {
+            if (profile[key]) {
                 profileChanges[key] = profile[key];
             }
         }
         return this.patchObservable('/profile', JSON.stringify(profileChanges));
     }
 
-    private createProfile(profile: UserProfile): Observable<any> {
+    public createProfile(profile: UserProfile): Observable<any> {
         return this.postObservable('/profile', JSON.stringify(profile));
     }
 }
