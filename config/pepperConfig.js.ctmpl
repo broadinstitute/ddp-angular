@@ -125,11 +125,15 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['darUrl'] = "https://us-central1-peak-segment-297211.cloudfunctions.net/cf-study-contact";
+        DDP_ENV['recaptchaSiteClientKey'] = "6Ld2VRoaAAAAAG_5-jx9XxXRriTWvCF5HANdt3Rl";
     {{else if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "7HzrckGgnPAO7UqDbcuUb9QoTc3V2eHa";
         DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['darUrl'] = "https://us-central1-peak-segment-297211.cloudfunctions.net/cf-study-contact";
+        DDP_ENV['recaptchaSiteClientKey'] = "6Ld2VRoaAAAAAG_5-jx9XxXRriTWvCF5HANdt3Rl";
     {{end}}
 {{end}}
 
