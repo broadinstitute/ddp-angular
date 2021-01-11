@@ -13,16 +13,16 @@ import {
   ActivityPicklistQuestionBlock,
   ActivityServiceAgent,
   ActivityTextQuestionBlock,
+  ActivityGroupBlock,
+  ActivityContentBlock,
   CompositeDisposable,
   ConfigurationService,
+  ConditionalBlock,
   LanguageService,
   LoggingService,
   SubmissionManager,
 } from 'ddp-sdk';
 
-import { ActivityGroupBlock } from 'projects/ddp-sdk/src/lib/models/activity/activityGroupBlock';
-import { ConditionalBlock } from 'projects/ddp-sdk/src/lib/models/activity/conditionalBlock';
-import { ActivityContentBlock } from 'projects/ddp-sdk/src/lib/models/activity/activityContentBlock';
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 enum BlockTypes {
