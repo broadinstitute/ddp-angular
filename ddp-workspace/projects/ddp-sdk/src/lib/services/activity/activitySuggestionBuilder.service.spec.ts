@@ -1,13 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { SuggestionServiceAgent } from '../serviceAgents/suggestionServiceAgent.service';
-import { LoggingService } from './../../services/logging.service';
+import { LoggingService } from '../../services/logging.service';
+import { InstitutionServiceAgent } from '../serviceAgents/institutionServiceAgent.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
 import { of } from 'rxjs';
 
 let service: ActivitySuggestionBuilder;
 const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
 const drugServiceSpy: jasmine.SpyObj<SuggestionServiceAgent> = jasmine.createSpyObj('SuggestionServiceAgent', ['findDrugSuggestions']);
+const institutionServiceSpy: jasmine.SpyObj<InstitutionServiceAgent> = jasmine.createSpyObj('InstitutionServiceAgent', ['getSummary']);
 
 describe('ActivitySuggestionBuilder Test', () => {
     beforeEach(() => {
@@ -16,11 +18,12 @@ describe('ActivitySuggestionBuilder Test', () => {
             providers: [
                 ActivitySuggestionBuilder,
                 LoggingService,
-                SuggestionServiceAgent
+                SuggestionServiceAgent,
+                InstitutionServiceAgent
             ]
         });
 
-        service = new ActivitySuggestionBuilder(loggerServiceSpy, drugServiceSpy);
+        service = new ActivitySuggestionBuilder(loggerServiceSpy, institutionServiceSpy, drugServiceSpy);
     });
 
     it('should initialize service', () => {
