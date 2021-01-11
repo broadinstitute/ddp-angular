@@ -18,12 +18,12 @@ import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs
                   [validationRequested]="validationRequested$ | async"
                   (valueChanged)="enteredValue$.next($event)">
           </ddp-activity-answer>
-          <div *ngIf="block.shown">
+          <ng-container *ngIf="block.shown">
             <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
                 <ddp-validation-message [message]="errorMsg">
                 </ddp-validation-message>
             </div>
-          </div>
+          </ng-container>
       </div>`
 })
 export class ActivityQuestionComponent implements OnInit, OnDestroy {
