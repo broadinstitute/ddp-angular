@@ -283,8 +283,7 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            lhci autorun --collect.staticDistDir=$OUTPUT_DIR --collect.chromePath=$CHROME_BIN --collect.isSinglePageApplication
-
+            lhci autorun --collect.staticDistDir=$OUTPUT_DIR --collect.chromePath=$CHROME_BIN
 
   run-tests:
     description: "Run all tests"

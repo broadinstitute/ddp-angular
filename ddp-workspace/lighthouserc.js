@@ -5,9 +5,11 @@ module.exports = {
       //target: 'filesystem' // for keeping reports locally
     },
     collect: {
-      "settings": {
-        "chromeFlags": "--disable-gpu --no-sandbox"
-      }
+      settings: {
+        chromeFlags: '--disable-gpu --no-sandbox'
+      },
+      isSinglePageApplication: true,
+      additive: true
     }
   }
 };
