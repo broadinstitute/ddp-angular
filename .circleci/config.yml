@@ -37,7 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - run-tests
+      # - run-tests
       - build-app
       - store-app-build
 
@@ -58,7 +58,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
-            - run-tests
+            # - run-tests
             - build-app
             - run-lighthouse-ci
             - deploy-exploded-build:
@@ -275,7 +275,7 @@ commands:
       - run:
           name: Install Lighthouse CI
           command: |
-            npm i -g @lhci/cli@0.6.x
+            npm i -g @lhci/cli@0.6.1
 
   run-lighthouse-ci:
     description: "Run lhci (to get audit report)"
@@ -283,8 +283,8 @@ commands:
       - run:
           name: Run Lighthouse CI
           command: |
-            echo "START 2:"
-            lhci autorun --collect.staticDistDir=$OUTPUT_DIR --upload.target="temporary-public-storage"
+            lhci autorun --collect.staticDistDir=$OUTPUT_DIR --collect.chromePath=$CHROME_BIN --collect.isSinglePageApplication
+
 
   run-tests:
     description: "Run all tests"
