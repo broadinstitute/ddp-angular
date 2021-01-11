@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectorRef,
     Component,
     Inject,
     Injector,
@@ -23,6 +24,10 @@ import { LoggingService } from '../../services/logging.service';
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
                 <ddp-subject-panel></ddp-subject-panel>
+                <ddp-admin-action-panel
+                        [activityReadonly]="isReadonly()"
+                        (requestActivityEdit)="updateIsAdminEditing($event)">
+                </ddp-admin-action-panel>
             </section>
             <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
                 <div class="content content_tight">
@@ -50,7 +55,7 @@ import { LoggingService } from '../../services/logging.service';
                 <ng-container *ngIf="model && model.introduction">
                     <ddp-activity-section
                             [section]="model.introduction"
-                            [readonly]="model.readonly || dataEntryDisabled"
+                            [readonly]="isReadonly() || dataEntryDisabled"
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
@@ -96,7 +101,7 @@ import { LoggingService } from '../../services/logging.service';
                 <ng-container *ngIf="model">
                     <ddp-activity-section
                             [section]="currentSection"
-                            [readonly]="model.readonly || dataEntryDisabled"
+                            [readonly]="isReadonly() || dataEntryDisabled"
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
@@ -109,7 +114,7 @@ import { LoggingService } from '../../services/logging.service';
                     <ng-container *ngIf="model.closing">
                         <ddp-activity-section
                                 [section]="model.closing"
-                                [readonly]="model.readonly || dataEntryDisabled"
+                                [readonly]="isReadonly() || dataEntryDisabled"
                                 [validationRequested]="validationRequested"
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
@@ -127,7 +132,7 @@ import { LoggingService } from '../../services/logging.service';
                     <ng-container *ngIf="model.lastUpdatedText">
                         <span class="last-updated">{{model.lastUpdatedText}} </span>
                     </ng-container>
-                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
+                    <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
                         <ng-container *ngIf="isLoaded && isStepped">
                             <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -143,20 +148,20 @@ import { LoggingService } from '../../services/logging.service';
                             </button>
                         </ng-container>
                         <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded">
-                            <button *ngIf="!model.readonly && !isAgree()" #submitButton
+                            <button *ngIf="!isReadonly() && !isAgree()" #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button button_medium button_primary button_right"
                                     (click)="flush()"
                                     (mouseenter)="mouseEnterOnSubmit()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.readonly"
+                            <button *ngIf="isReadonly()"
                                     class="button button_medium button_primary button_right"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly">
+                        <ng-container *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()">
                             <button class="button button_medium button_warn"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     (click)="close()">
@@ -188,9 +193,12 @@ import { LoggingService } from '../../services/logging.service';
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() agreeConsent = false;
 
+    private isAdminEditing = false;
+
     constructor(
         logger: LoggingService,
         windowRef: WindowRef,
+        private changeRef: ChangeDetectorRef,
         renderer: Renderer2,
         submitService: SubmitAnnouncementService,
         analytics: AnalyticsEventsService,
@@ -201,5 +209,14 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
 
     public isAgree(): boolean {
         return this.model.formType === 'CONSENT' && this.agreeConsent;
+    }
+
+    public isReadonly(): boolean {
+        return !this.isAdminEditing && this.model.readonly;
+    }
+
+    public updateIsAdminEditing(adminEditing: boolean): void {
+        this.isAdminEditing = adminEditing;
+        this.changeRef.detectChanges();
     }
 }

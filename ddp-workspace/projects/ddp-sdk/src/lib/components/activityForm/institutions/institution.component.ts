@@ -99,7 +99,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     private guid: string | null;
     private timer: any;
     private findSubject: Subject<string> = new Subject<string>();
-    private answerSubject: BehaviorSubject<ActivityInstitutionInfo | null> = new BehaviorSubject<ActivityInstitutionInfo | null>(this.value);
+    private answerSubject: BehaviorSubject<ActivityInstitutionInfo | null> = new BehaviorSubject<ActivityInstitutionInfo | null>(null);
     private anchor: Subscription = new Subscription();
 
     constructor(
@@ -115,7 +115,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             )).subscribe(value => this.institutions = value);
 
         const form = this.answerSubject.pipe(
-            filter(answer => answer != null),
+            filter(answer => answer !== null),
             distinctUntilChanged((answer1, answer2) => {
                 return _.isEqual(answer1, answer2);
             }),

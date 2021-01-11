@@ -162,6 +162,7 @@ import { QuestionPromptComponent } from './components/activityForm/questionPromp
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
 import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
@@ -364,7 +365,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
+    SubjectPanelComponent,
+    AdminActionPanelComponent
   ],
   exports: [
     NetworkSnifferComponent,
@@ -427,12 +429,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     InvitationCodeFormatterDirective,
     InvitationPipe,
     TooltipComponent,
-    SubjectPanelComponent
-  ],
-  entryComponents: [
-    UserPreferencesComponent,
-    ManageParticipantsComponent,
-    NewRequestMock
+    SubjectPanelComponent,
+    AdminActionPanelComponent
   ]
 })
 export class DdpModule { }

@@ -28,6 +28,7 @@ export class Auth0AdapterService implements OnDestroy {
     public webAuth: any;
     public adminWebAuth: any | null;
     private ngUnsubscribe = new Subject<any>();
+    private isAdminSession = false;
     private readonly LOG_SOURCE = 'Auth0AdapterService';
 
     constructor(
@@ -196,6 +197,7 @@ export class Auth0AdapterService implements OnDestroy {
         const auth0Params = {
             study_guid: this.configuration.studyGuid,
             mode: Auth0Mode.LoginOnly,
+            is_admin_client: true,
             ...(additionalParams && additionalParams)
         };
         if (this.configuration.doLocalRegistration) {
@@ -250,13 +252,13 @@ export class Auth0AdapterService implements OnDestroy {
             decodedJwt['exp'] as number,
             authResult.participantGuid,
             isAdmin);
+        this.isAdminSession = isAdmin;
         this.log.logEvent(this.LOG_SOURCE,
             `Successfully updated session token: ${JSON.stringify(decodedJwt)}`);
     }
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        const wasAdmin = this.session.session && this.session.session.isAdmin;
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent(this.LOG_SOURCE, 'logout');
@@ -267,7 +269,7 @@ export class Auth0AdapterService implements OnDestroy {
           returnTo = returnToUrl;
         }
 
-        if (wasAdmin) {
+        if (this.isAdminSession) {
             this.adminWebAuth.logout({
                 returnTo,
                 clientID: this.configuration.adminClientId
@@ -344,7 +346,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private getSessionExpiredUrl(): string {
-        return this.session.session.isAdmin ?
+        return this.isAdminSession ?
             this.configuration.adminSessionExpiredUrl : this.configuration.sessionExpiredUrl;
     }
 }

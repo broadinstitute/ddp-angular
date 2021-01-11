@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es5",
@@ -15,18 +15,9 @@
     "lib": [
       "dom",
       "es2018"
-    ],
-    "paths": {
-      "ddp-sdk": [
-        "dist/ddp-sdk"
-        ],
-        "ddp-sdk/*": [
-          "dist/ddp-sdk/*"
-        ]
-      }
-    },
+    ]
+  },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,

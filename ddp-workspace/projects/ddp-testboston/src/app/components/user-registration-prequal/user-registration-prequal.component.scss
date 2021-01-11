@@ -73,6 +73,10 @@
         line-height: 1.5rem;
     }
 
+    &_input_additional {
+        margin-top: 0.6rem;
+    }
+
     .Link {
         color: mat-color($app-theme, 2700) !important;
     }

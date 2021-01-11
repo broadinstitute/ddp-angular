@@ -55,8 +55,8 @@ Once rendered, you can hand-edit the `pepper-angular/ddp-workspace/projects/[ddp
 #### Building, deploying, and interacting with the frontend
 
 * Install [nvm](https://github.com/creationix/nvm) to manage different versions of node and npm
-* `nvm use 12.16.1`
-* `npm install -g @angular/cli@8.3.29` (if you're working on different angular projects, you may first need a `npm uninstall -g @angular/cli`)
+* `nvm use 12.20.0`
+* `npm install -g @angular/cli@10.2.0` (if you're working on different angular projects, you may first need a `npm uninstall -g @angular/cli`)
 * `cd ddp-workspace`
 * `npm cache clean`, `rm -fr node_modules` and `rm -fr dist` (can often be skipped)
 * `npm install` (this can often be skipped but must be done at least once)
