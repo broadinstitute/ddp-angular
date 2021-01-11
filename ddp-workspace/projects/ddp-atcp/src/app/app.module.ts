@@ -51,7 +51,6 @@ import { StatisticsComponent } from './components/statistics/statistics';
 import { WelcomeComponent } from './components/welcome/welcome';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
 import { ParticipantListComponent } from './components/participant-list/participant-list.component';
-import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
@@ -108,23 +107,32 @@ config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLangua
 config.languageSelectorIconURL = 'assets/images/atcp/globe.svg#globe';
 config.tooltipIconUrl = '';
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
-  return () => new Promise<any>((resolve: any) => {
+export function translateFactory(
+  translate: TranslateService,
+  injector: Injector,
+  logger: LoggingService,
+  languageService: LanguageService,
+) {
+  return () => new Promise<any>(resolve => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    const language: Language[] = injector.get(LanguagesToken, Promise.resolve(null));
-    const languageService = injector.get(LanguageService, Promise.resolve(null));
+
     locationInitialized.then(() => {
-      translate.addLangs(language.map(x => x.code));
       const locale = languageService.getAppLanguageCode();
+
       translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
-      }, () => {
-        resolve(null);
-      });
+
+      translate.use(locale).subscribe(
+        () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
+        },
+        () => {
+          resolve(null);
+        }
+      );
     });
   });
 }
@@ -188,7 +196,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MailingListComponent,
     ActivityPrintComponent,
   ],
-  // entryComponents: [PopupMessageComponent],
   providers: [
     CurrentActivityService,
     ActivityProgressCalculationService,
@@ -208,11 +215,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
       deps: [
         TranslateService,
         Injector,
-        LoggingService
+        LoggingService,
+        LanguageService
       ],
       multi: true
     },
-    LanguagesProvider,
     UserPreferencesServiceAgent,
     {
       provide: RECAPTCHA_V3_SITE_KEY,

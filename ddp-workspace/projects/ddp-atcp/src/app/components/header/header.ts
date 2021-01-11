@@ -1,46 +1,50 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { filter, take } from 'rxjs/operators';
+
 import {
   CompositeDisposable,
   ConfigurationService,
   SessionMementoService,
   UserProfileDecorator,
-  LoggingService
+  LoggingService,
 } from 'ddp-sdk';
+
 import * as RouterResource from '../../router-resources';
-import { Language, LanguagesToken } from '../../providers/languages.provider';
-import { TranslateService } from '@ngx-translate/core';
+
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
-import { take } from 'rxjs/operators';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.html',
-  styleUrls: ['./header.scss']
+  styleUrls: ['./header.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public RouterResource = RouterResource;
-  private anchor = new CompositeDisposable();
-  private userProfileDecorator: UserProfileDecorator;
+  RouterResource = RouterResource;
   isProgressBarVisible = false;
   isMedicalHistory = false;
-  activitiesToShowProgress = [ActivityCodes.MEDICAL_HISTORY, ActivityCodes.FEEDING];
+  activitiesToShowProgress = [
+    ActivityCodes.MEDICAL_HISTORY,
+    ActivityCodes.FEEDING,
+  ];
   isMultiGoverned: boolean;
-  private readonly LOG_SOURCE = 'HeaderComponent';
   private prevParticipantGuid: string;
+  private userProfileDecorator: UserProfileDecorator;
+  private readonly LOG_SOURCE = 'HeaderComponent';
+  private anchor = new CompositeDisposable();
 
-  constructor(@Inject(LanguagesToken) public languages: Language[],
-              private session: SessionMementoService,
-              private logger: LoggingService,
-              private translate: TranslateService,
-              private currentActivityService: CurrentActivityService,
-              @Inject('ddp.config') private configuration: ConfigurationService,
-              private userPreferencesServiceAgent: UserPreferencesServiceAgent,
-              private multiGovernedUserService: MultiGovernedUserService) {
-  }
+  constructor(
+    private session: SessionMementoService,
+    private logger: LoggingService,
+    private translate: TranslateService,
+    private currentActivityService: CurrentActivityService,
+    @Inject('ddp.config') private configuration: ConfigurationService,
+    private userPreferencesServiceAgent: UserPreferencesServiceAgent,
+    private multiGovernedUserService: MultiGovernedUserService
+  ) {}
 
   onBeforeLanguageChange(): void {
     if (!this.session.session) {
@@ -61,25 +65,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const userProfileSubs$ = this.userPreferencesServiceAgent.profile
-      .subscribe((data: UserProfileDecorator) => {
+    const userProfileSubs$ = this.userPreferencesServiceAgent.profile.subscribe(
+      (data: UserProfileDecorator) => {
         if (!!data && this.isAuthenticated) {
           this.userProfileDecorator = data;
-          this.runTranslator(this.userProfileDecorator.profile.preferredLanguage);
+          this.runTranslator(
+            this.userProfileDecorator.profile.preferredLanguage
+          );
         }
-      });
+      }
+    );
     this.anchor.addNew(userProfileSubs$);
 
-    const currentActivity$ = this.currentActivityService.getCurrentActivity().subscribe(x => {
-      this.isProgressBarVisible = x && this.activitiesToShowProgress.includes(x.activityCode as ActivityCodes);
-      this.isMedicalHistory = x && x.activityCode === ActivityCodes.MEDICAL_HISTORY;
-    });
+    const currentActivity$ = this.currentActivityService
+      .getCurrentActivity()
+      .subscribe(x => {
+        this.isProgressBarVisible =
+          x &&
+          this.activitiesToShowProgress.includes(
+            x.activityCode as ActivityCodes
+          );
+        this.isMedicalHistory =
+          x && x.activityCode === ActivityCodes.MEDICAL_HISTORY;
+      });
     this.anchor.addNew(currentActivity$);
 
     this.multiGovernedUserService.isMultiGoverned$
       .pipe(
         filter(value => value !== null),
-        take(1),
+        take(1)
       )
       .subscribe(isMultiGoverned => {
         this.isMultiGoverned = isMultiGoverned;
@@ -95,14 +109,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public runTranslator(languageCode: string): void {
-    this.translate.use(languageCode)
+    this.translate
+      .use(languageCode)
       .pipe(take(1))
-      .subscribe(() => {
-        this.logger.logEvent(`${this.LOG_SOURCE} %s`, `Successfully initialized '${languageCode}' UI language.`);
-      }, () => {
-        this.logger.logError(`${this.LOG_SOURCE} %s`, `Problem with '${languageCode}' UI language initialization.
-        Default '${this.configuration.defaultLanguageCode}' UI language is used`);
-        this.translate.use(this.configuration.defaultLanguageCode);
-      });
+      .subscribe(
+        () => {
+          this.logger.logEvent(
+            `${this.LOG_SOURCE} %s`,
+            `Successfully initialized '${languageCode}' UI language.`
+          );
+        },
+        () => {
+          this.logger.logError(
+            `${this.LOG_SOURCE} %s`,
+            `Problem with '${languageCode}' UI language initialization.
+        Default '${this.configuration.defaultLanguageCode}' UI language is used`
+          );
+          this.translate.use(this.configuration.defaultLanguageCode);
+        }
+      );
   }
 }
