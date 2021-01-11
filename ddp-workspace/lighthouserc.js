@@ -6,7 +6,7 @@ module.exports = {
     },
     collect: {
       settings: {
-        chromeFlags: '--disable-gpu --no-sandbox'
+        chromeFlags: '--disable-gpu --no-sandbox --incognito --headless'
       },
       isSinglePageApplication: true,
       additive: true
