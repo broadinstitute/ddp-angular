@@ -29,7 +29,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
 
     <ng-template #nativeSelect>
-        <select [(ngModel)]="nativeSelectedValue"
+        <select [value]="nativeSelectedValue"
                 [disabled]="readonly"
                 (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
                 class="width">
