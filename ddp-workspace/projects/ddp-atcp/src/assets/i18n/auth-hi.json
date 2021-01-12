@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "पहले से पंजीकृत हैं?  यहां साइन इन करें",
     "confirmNewPassword": {
-      "error": "hi_Password confirmation doesn't match Password",
+      "error": "पासवर्ड का पुष्टिकरण पासवर्ड से मेल नहीं खाता है",
       "label": "नये पासवर्ड की पुष्टि करें"
     },
     "email": {
-      "error": "hi_Email cannot be empty",
-      "emailTaken": "hi_Email has already been taken. Please choose another value.",
+      "error": "ईमेल को खाली नहीं छोड़ा जा सकता",
+      "emailTaken": "ईमेल पहले से ही लिया जा चुका है। कृपया कोई भिन्न मान चुनें।",
       "label": "ईमेल पता",
       "whoseEmail": "मुझे किसका ईमेल दर्ज करना चाहिए?",
       "whoseEmailTooltip": "यदि आप ए-टी से पीड़ित बच्चे (बच्चों) के माता/पिता/कानूनी संरक्षक हैं तो कृपया अपने स्वयं के ईमेल पते का उपयोग करें।  हम ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म में आपके द्वारा पंजीकृत किसी भी व्यक्ति के संबंध में आपसे पत्राचार करने के लिए इस पते का उपयोग करेंगे।"
@@ -22,16 +22,16 @@
     "joinUs": "हमसे जुड़ें",
     "or": "या",
     "password": {
-      "error": "hi_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "कम से कम 8 वर्ण, जिनमें शामिल हों: एक छोटा (लोअर-केस) अक्षर, एक बड़ा (अपर-केस) अक्षर, एक संख्या, एक विशेष वर्ण (जैसे !@#$%^&*)।",
       "label": "पासवर्ड"
     },
     "reenter": {
-      "error": "hi_Password confirmation doesn't match Password",
+      "error": "पासवर्ड का पुष्टिकरण पासवर्ड से मेल नहीं खाता है",
       "label": "पासवर्ड पुनः दर्ज करें"
     },
     "resendInstructions": "पुष्टि करने के निर्देश दुबारा भेजें",
     "resetPassword": {
-      "error": "hi_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "कम से कम 8 वर्ण, जिनमें शामिल हों: एक छोटा (लोअर-केस) अक्षर, एक बड़ा (अपर-केस) अक्षर, एक संख्या, एक विशेष वर्ण (जैसे !@#$%^&*)।",
       "label": "नया पासवर्ड"
     },
     "signin": "साइन इन करें",
@@ -57,8 +57,8 @@
     "useEmail": "अपने ईमेल पते का उपयोग करें:"
   },
   "modal": {
-    "InvalidLogin": "hi_Invalid email or password",
-    "PasswordResetError": "hi_There was an error processing the password reset.",
+    "InvalidLogin": "अमान्य ईमेल या पासवर्ड",
+    "PasswordResetError": "पासवर्ड रीसेट करने की प्रक्रिया में कोई त्रुटि हुई।",
     "SuccessChangedPassword": "आपका पासवर्ड सफलतापूर्वक बदल दिया गया है।",
     "YouWillGetInstructions": "आपको कुछ ही मिनटों में अपने पासवर्ड को रीसेट कैसे करें संबंधी निर्देशों के साथ एक ईमेल प्राप्त होगी।"
   },

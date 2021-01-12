@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Уже зарегистрированы? Войти здесь",
     "confirmNewPassword": {
-      "error": "ru_Password confirmation doesn't match Password",
+      "error": "Подтверждение пароля не совпадает с паролем",
       "label": "Подтвердить новый пароль"
     },
     "email": {
-      "error": "ru_Email cannot be empty",
-      "emailTaken": "ru_Email has already been taken. Please choose another value.",
+      "error": "Адрес электронной почты не может быть пустым",
+      "emailTaken": "Этот адрес электронной почты уже занят. Введите другое значение.",
       "label": "Адрес электронной почты",
       "whoseEmail": "Чей адрес электронной почты мне нужно ввести?",
       "whoseEmailTooltip": "Если вы являетесь родителем/законным опекуном ребенка (детей) с A-T, используйте свой адрес электронной почты.  Мы будем использовать этот адрес для связи с вами по поводу лиц, которых вы зарегистрируете в Глобальной платформе данных о семьях с A-T."
@@ -22,16 +22,16 @@
     "joinUs": "Присоединиться",
     "or": "или",
     "password": {
-      "error": "ru_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "не менее 8 символов, включая строчную букву, прописную букву, число, специальный символ (например !@#$%^&*).",
       "label": "Пароль"
     },
     "reenter": {
-      "error": "ru_Password confirmation doesn't match Password",
+      "error": "Подтверждение пароля не совпадает с паролем",
       "label": "Введите пароль еще раз"
     },
     "resendInstructions": "Отправить инструкции еще раз",
     "resetPassword": {
-      "error": "ru_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "не менее 8 символов, включая строчную букву, прописную букву, число, специальный символ (например !@#$%^&*).",
       "label": "Новый пароль"
     },
     "signin": "Войти",
@@ -57,8 +57,8 @@
     "useEmail": "Использовать адрес электронной почты:"
   },
   "modal": {
-    "InvalidLogin": "ru_Invalid email or password",
-    "PasswordResetError": "ru_There was an error processing the password reset.",
+    "InvalidLogin": "Недопустимый адрес электронной почты или пароль",
+    "PasswordResetError": "Произошла ошибка при обработке сброса пароля.",
     "SuccessChangedPassword": "Пароль успешно изменен.",
     "YouWillGetInstructions": "Вы получите электронное письмо с инструкциями о том, как сменить пароль, в течение нескольких минут."
   },

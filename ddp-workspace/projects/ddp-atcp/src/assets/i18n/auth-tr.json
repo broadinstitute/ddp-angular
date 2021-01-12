@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Kayıt yaptınız mı? Burada Oturum Açın",
     "confirmNewPassword": {
-      "error": "tr_Password confirmation doesn't match Password",
+      "error": "Teyit için girilen şifre, Şifre alanına girilen ile eşleşmiyor",
       "label": "Yeni şifreyi doğrula"
     },
     "email": {
-      "error": "tr_Email cannot be empty",
-      "emailTaken": "tr_Email has already been taken. Please choose another value.",
+      "error": "E-posta alanı boş olamaz",
+      "emailTaken": "E-posta zaten alınmış. Lütfen farklı bir değer seçin.",
       "label": "E-posta adresi",
       "whoseEmail": "Kimin e-postasını girmeliyim?",
       "whoseEmailTooltip": "A-T'li bir çocuğun/çocukların ebeveyni/vasisi iseniz kendi e-posta adresinizi kullanın.  Global A-T Aile Veri Platformunda kaydettiğiniz kişiler için sizinle iletişim kurmak üzere bu adresi kullanacağız."
@@ -22,16 +22,16 @@
     "joinUs": "Bize Katılın",
     "or": "veya",
     "password": {
-      "error": "tr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "aşağıdakiler dahil en az 8 karakter: küçük harf, büyük harf, sayı, özel karakter (!@#$%^&* gibi).",
       "label": "Şifre"
     },
     "reenter": {
-      "error": "tr_Password confirmation doesn't match Password",
+      "error": "Teyit için girilen şifre, Şifre alanına girilen ile eşleşmiyor",
       "label": "Şifreyi tekrar girin"
     },
     "resendInstructions": "Doğrulama talimatını tekrar gönder",
     "resetPassword": {
-      "error": "tr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "aşağıdakiler dahil en az 8 karakter: küçük harf, büyük harf, sayı, özel karakter (!@#$%^&* gibi).",
       "label": "Yeni şifre"
     },
     "signin": "Oturum Aç",
@@ -57,8 +57,8 @@
     "useEmail": "E-posta adresinizi kullanın:"
   },
   "modal": {
-    "InvalidLogin": "tr_Invalid email or password",
-    "PasswordResetError": "tr_There was an error processing the password reset.",
+    "InvalidLogin": "E-posta adresi veya şifre geçersiz",
+    "PasswordResetError": "Şifre sıfırlama işlemi sırasında bir hata meydana geldi.",
     "SuccessChangedPassword": "Şifreniz başarıyla değiştirildi.",
     "YouWillGetInstructions": "Birkaç dakika içinde şifrenizi sıfırlama talimatı içeren bir e-posta alacaksınız."
   },

@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Déjà enregistré ? Connectez-vous ici",
     "confirmNewPassword": {
-      "error": "fr_Password confirmation doesn't match Password",
+      "error": "La confirmation du mot de passe ne correspond pas au mot de passe.",
       "label": "Confirmer le nouveau mot de passe"
     },
     "email": {
-      "error": "fr_Email cannot be empty",
-      "emailTaken": "fr_Email has already been taken. Please choose another value.",
+      "error": "L'adresse e-mail ne peut pas être vide.",
+      "emailTaken": "Cet e-mail a déjà été pris. Veuillez choisir une valeur différente.",
       "label": "Adresse e-mail",
       "whoseEmail": "L’adresse e-mail de qui dois-je saisir ?",
       "whoseEmailTooltip": "Si vous êtes le parent ou le tuteur légal d’un enfant AT, utilisez votre propre adresse e-mail.  Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet des participants que vous avez enregistrés sur la plateforme de données internationale sur les familles AT."
@@ -22,16 +22,16 @@
     "joinUs": "Nous rejoindre",
     "or": "ou",
     "password": {
-      "error": "fr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "au moins 8 caractères dont une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial (tel que !@#$%^&*).",
       "label": "Mot de passe"
     },
     "reenter": {
-      "error": "fr_Password confirmation doesn't match Password",
+      "error": "La confirmation du mot de passe ne correspond pas au mot de passe.",
       "label": "Saisir de nouveau le mot de passe"
     },
     "resendInstructions": "Renvoyer les instructions de confirmation",
     "resetPassword": {
-      "error": "fr_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "au moins 8 caractères dont une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial (tel que !@#$%^&*).",
       "label": "Nouveau mot de passe"
     },
     "signin": "Connexion",
@@ -57,8 +57,8 @@
     "useEmail": "Utilisez votre adresse e-mail :"
   },
   "modal": {
-    "InvalidLogin": "fr_Invalid email or password",
-    "PasswordResetError": "fr_There was an error processing the password reset.",
+    "InvalidLogin": "Adresse e-mail ou mot de passe non valide",
+    "PasswordResetError": "Une erreur est survenue lors du traitement de la réinitialisation du mot de passe.",
     "SuccessChangedPassword": "Votre mot de passe a été changé.",
     "YouWillGetInstructions": "Vous recevrez un e-mail contenant les instructions de réinitialisation de votre mot de passe dans quelques minutes."
   },

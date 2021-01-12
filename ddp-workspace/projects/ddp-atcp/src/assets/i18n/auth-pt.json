@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Já registrado? Registre-se aqui",
     "confirmNewPassword": {
-      "error": "pt_Password confirmation doesn't match Password",
+      "error": "A confirmação da senha não é igual à senha",
       "label": "Comfirmar senha nova"
     },
     "email": {
-      "error": "pt_Email cannot be empty",
-      "emailTaken": "pt_Email has already been taken. Please choose another value.",
+      "error": "O campo \"E-mail\" não pode ficar em branco",
+      "emailTaken": "O e-mail já foi recebido. Escolha um valor diferente.",
       "label": "Endereço de e-mail",
       "whoseEmail": "Devo informar o e-mail de quem?",
       "whoseEmailTooltip": "Caso você seja pai ou mãe/responsável legal de uma criança ou crianças com A-T, use o seu próprio endereço de e-mail.  Usaremos este endereço de e-mail para nos comunicarmos com você sobre qualquer pessoa que você registrar na Global A-T Family Data Platform."
@@ -22,16 +22,16 @@
     "joinUs": "Junte-se a nós",
     "or": "ou",
     "password": {
-      "error": "pt_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "pelo menos oito caracteres, incluindo: uma letra minúscula, uma letra maiúscula, um número, um caractere especial (como !@#$%^&*).",
       "label": "Senha"
     },
     "reenter": {
-      "error": "pt_Password confirmation doesn't match Password",
+      "error": "A confirmação da senha não é igual à senha",
       "label": "Digite a senha novamente"
     },
     "resendInstructions": "Reenviar instruções para confirmação",
     "resetPassword": {
-      "error": "pt_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "pelo menos oito caracteres, incluindo: uma letra minúscula, uma letra maiúscula, um número, um caractere especial (como !@#$%^&*).",
       "label": "Senha nova"
     },
     "signin": "Login",
@@ -57,8 +57,8 @@
     "useEmail": "Usar seu endereço de e-mail:"
   },
   "modal": {
-    "InvalidLogin": "pt_Invalid email or password",
-    "PasswordResetError": "pt_There was an error processing the password reset.",
+    "InvalidLogin": "E-mail ou senha inválidos",
+    "PasswordResetError": "Houve um erro ao processar a redefinição da senha.",
     "SuccessChangedPassword": "Sua senha foi alterada.",
     "YouWillGetInstructions": "Você receberá em alguns minutos um e-mail com instruções para redefinição da sua senha."
   },

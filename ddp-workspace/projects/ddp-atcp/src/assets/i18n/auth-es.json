@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "¿Ya está registrado? Inicie sesión aquí",
     "confirmNewPassword": {
-      "error": "es_Password confirmation doesn't match Password",
+      "error": "La confirmación de la contraseña no coincide con la contraseña",
       "label": "Confirmar la contraseña nueva"
     },
     "email": {
-      "error": "es_Email cannot be empty",
-      "emailTaken": "es_Email has already been taken. Please choose another value.",
+      "error": "El campo del correo electrónico no puede estar vacío",
+      "emailTaken": "El correo ya a sido recibido. Elija un valor diferente.",
       "label": "Dirección de correo electrónico",
       "whoseEmail": "¿Qué correo electrónico debo ingresar?",
       "whoseEmailTooltip": "Si es padre/madre o tutor legal de uno o varios niños con A-T, use su propia dirección de correo electrónico.  Usaremos esta dirección para comunicarnos con usted acerca de todas las personas que registre en la Plataforma global de datos para familias con A-T."
@@ -22,16 +22,16 @@
     "joinUs": "Únase a nosotros",
     "or": "o",
     "password": {
-      "error": "es_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "al menos 8 caracteres que incluyan: una letra minúscula, una letra mayúscula, un número y un carácter especial (como !@#$%^&*).",
       "label": "Contraseña"
     },
     "reenter": {
-      "error": "es_Password confirmation doesn't match Password",
+      "error": "La confirmación de la contraseña no coincide con la contraseña",
       "label": "Vuelva a escribir la contraseña"
     },
     "resendInstructions": "Volver a enviar las instrucciones de confirmación",
     "resetPassword": {
-      "error": "es_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "al menos 8 caracteres que incluyan: una letra minúscula, una letra mayúscula, un número y un carácter especial (como !@#$%^&*).",
       "label": "Contraseña nueva"
     },
     "signin": "Iniciar sesión",
@@ -57,8 +57,8 @@
     "useEmail": "Use su dirección de correo electrónico:"
   },
   "modal": {
-    "InvalidLogin": "es_Invalid email or password",
-    "PasswordResetError": "es_There was an error processing the password reset.",
+    "InvalidLogin": "El correo electrónico o la contraseña no son válidos",
+    "PasswordResetError": "Se ha producido un error al procesar el restablecimiento de la contraseña.",
     "SuccessChangedPassword": "Su contraseña se cambió correctamente.",
     "YouWillGetInstructions": "Recibirá un correo electrónico con instrucciones para restablecer su contraseña dentro de unos minutos."
   },

@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Już się zarejestrowałeś? Zaloguj się",
     "confirmNewPassword": {
-      "error": "pl_Password confirmation doesn't match Password",
+      "error": "Potwierdzenie hasła nie jest zgodne z hasłem",
       "label": "Potwierdź nowe hasło"
     },
     "email": {
-      "error": "pl_Email cannot be empty",
-      "emailTaken": "pl_Email has already been taken. Please choose another value.",
+      "error": "Pole e-mail nie może być puste",
+      "emailTaken": "E-mail został już odebrany. Wybierz inną wartość.",
       "label": "Adres e-mail",
       "whoseEmail": "Czyj e-mail mam wpisać?",
       "whoseEmailTooltip": "Jeżeli jesteś rodzicem/opiekunem prawnym dziecka (dzieci) chorych na A-T, użyj swojego adresu e-mail.  Ten adres e-mail będzie wykorzystywany do komunikacji z tobą dotyczącej każdej osoby, którą zarejestrujesz w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T."
@@ -22,16 +22,16 @@
     "joinUs": "Dołącz do nas",
     "or": "lub",
     "password": {
-      "error": "pl_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "co najmniej 8 znaków, w tym: mała litera, duża litera, cyfra, znak specjalny (np. !@#$%^&*).",
       "label": "Hasło"
     },
     "reenter": {
-      "error": "pl_Password confirmation doesn't match Password",
+      "error": "Potwierdzenie hasła nie jest zgodne z hasłem",
       "label": "Wprowadź hasło ponownie"
     },
     "resendInstructions": "Ponownie wyślij instrukcje dotyczące potwierdzenia",
     "resetPassword": {
-      "error": "pl_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "co najmniej 8 znaków, w tym: mała litera, duża litera, cyfra, znak specjalny (np. !@#$%^&*).",
       "label": "Nowe hasło"
     },
     "signin": "Zaloguj się",
@@ -57,8 +57,8 @@
     "useEmail": "Użyj swojego adresu e-mail:"
   },
   "modal": {
-    "InvalidLogin": "pl_Invalid email or password",
-    "PasswordResetError": "pl_There was an error processing the password reset.",
+    "InvalidLogin": "Nieprawidłowy e-mail lub hasło",
+    "PasswordResetError": "Podczas resetowania hasła wystąpił błąd.",
     "SuccessChangedPassword": "Twoje hasło zostało pomyślnie zmienione.",
     "YouWillGetInstructions": "W ciągu kilku minut otrzymasz e-mail z instrukcjami dotyczącymi zmiany hasła."
   },

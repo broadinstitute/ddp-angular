@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Già registrato/a? Accedi qui",
     "confirmNewPassword": {
-      "error": "it_Password confirmation doesn't match Password",
+      "error": "La password di conferma non coincide con la password immessa",
       "label": "Conferma la nuova password"
     },
     "email": {
-      "error": "it_Email cannot be empty",
-      "emailTaken": "it_Email has already been taken. Please choose another value.",
+      "error": "Il campo e-mail non può essere vuoto.",
+      "emailTaken": "L'e-mail E 'gia' stata presa. Scegli un valore diverso.",
       "label": "Indirizzo di posta elettronica",
       "whoseEmail": "Devo immettere l'indirizzo di posta elettronica di chi?",
       "whoseEmailTooltip": "Se sei il genitore/tutore legale di uno o più bambini affetti da A-T, usa il tuo indirizzo di posta elettronica.  Utilizzeremo questo indirizzo per comunicare con te in relazione a chiunque registri nella Piattaforma globale di dati sulle famiglie con A-T."
@@ -22,16 +22,16 @@
     "joinUs": "Unisciti a noi",
     "or": "oppure",
     "password": {
-      "error": "it_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "almeno 8 caratteri che includano: una lettera minuscola, una lettera maiuscola, un numero, un carattere speciale (ad esempio !@#$%^&*).",
       "label": "Password"
     },
     "reenter": {
-      "error": "it_Password confirmation doesn't match Password",
+      "error": "La password di conferma non coincide con la password immessa",
       "label": "Immetti nuovamente la password"
     },
     "resendInstructions": "Invia nuovamente le istruzioni per la conferma",
     "resetPassword": {
-      "error": "it_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "almeno 8 caratteri che includano: una lettera minuscola, una lettera maiuscola, un numero, un carattere speciale (ad esempio !@#$%^&*).",
       "label": "Nuova password"
     },
     "signin": "Accedi",
@@ -57,8 +57,8 @@
     "useEmail": "Usa il tuo indirizzo di posta elettronica:"
   },
   "modal": {
-    "InvalidLogin": "it_Invalid email or password",
-    "PasswordResetError": "it_There was an error processing the password reset.",
+    "InvalidLogin": "E-mail o password non validi",
+    "PasswordResetError": "Si è verificato un errore durante la reimpostazione della password.",
     "SuccessChangedPassword": "La tua password è stata modificata con successo.",
     "YouWillGetInstructions": "Tra qualche minuto riceverai un'e-mail con le istruzioni su come reimpostare la tua password."
   },

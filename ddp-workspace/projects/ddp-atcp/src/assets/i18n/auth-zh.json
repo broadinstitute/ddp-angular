@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "已经注册？ 在这里登录",
     "confirmNewPassword": {
-      "error": "zh_Password confirmation doesn't match Password",
+      "error": "密码确认与密码不匹配 ",
       "label": "确认新密码"
     },
     "email": {
-      "error": "zh_Email cannot be empty",
-      "emailTaken": "zh_Email has already been taken. Please choose another value.",
+      "error": "电子邮箱不能留空",
+      "emailTaken": "電子郵件已經被接收。 請選擇其他值。",
       "label": "电子邮箱地址",
       "whoseEmail": "我应该输入哪些电子邮箱？",
       "whoseEmailTooltip": "如果您是A-T的孩子（们）的父母/法定监护人，请使用您自己的电子邮箱地址。  我们将使用此地址与您在全球A-T成员数据平台中注册的任何人对应。"
@@ -22,16 +22,16 @@
     "joinUs": "加入我们",
     "or": "或",
     "password": {
-      "error": "zh_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "至少 8 个字符，其中包括：一个小写字母、一个大写字母、一个数字、一个特殊字符（如 !@#$%^&*）。",
       "label": "密码"
     },
     "reenter": {
-      "error": "zh_Password confirmation doesn't match Password",
+      "error": "密码确认与密码不匹配",
       "label": "重新输入密码"
     },
     "resendInstructions": "重新发送确认说明",
     "resetPassword": {
-      "error": "zh_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "至少 8 个字符，其中包括：一个小写字母、一个大写字母、一个数字、一个特殊字符（如 !@#$%^&*）。",
       "label": "新密码"
     },
     "signin": "签到",
@@ -57,8 +57,8 @@
     "useEmail": "使用您的电子邮箱地址"
   },
   "modal": {
-    "InvalidLogin": "zh_Invalid email or password",
-    "PasswordResetError": "zh_There was an error processing the password reset.",
+    "InvalidLogin": "电子邮箱或密码无效",
+    "PasswordResetError": "处理密码重置时出错。",
     "SuccessChangedPassword": "您的密码已成功更改。",
     "YouWillGetInstructions": "您将在几分钟内收到一封电子邮件，说明如何重新设置您的密码。"
   },

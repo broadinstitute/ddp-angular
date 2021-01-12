@@ -8,12 +8,12 @@
   "common": {
     "alreadyRegistered": "Bereits registriert? Hier anmelden",
     "confirmNewPassword": {
-      "error": "de_Password confirmation doesn't match Password",
+      "error": "Kennwortbestätigung stimmt nicht mit Kennwort überein",
       "label": "Neues Kennwort bestätigen"
     },
     "email": {
-      "error": "de_Email cannot be empty",
-      "emailTaken": "de_Email has already been taken. Please choose another value.",
+      "error": "„E-Mail“ darf nicht leer sein",
+      "emailTaken": "„E-Mail“ wurde bereits entgegengenommen. Bitte wählen Sie einen anderen Wert.",
       "label": "E-Mail-Adresse",
       "whoseEmail": "Wessen E-Mail-Adresse gebe ich ein?",
       "whoseEmailTooltip": "Wenn Sie ein Elternteil/Erziehungsberechtigter eines oder mehrerer Kinder mit AT sind, verwenden Sie Ihre eigene E-Mail-Adresse.  Wir verwenden diese E-Mail-Adresse zur Kommunikation über alle Teilnehmer, die Sie auf der Plattform für globale Daten von AT-Familien registriert haben."
@@ -22,16 +22,16 @@
     "joinUs": "Mitglied werden",
     "or": "oder",
     "password": {
-      "error": "de_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "mindestens 8 Zeichen, einschließlich: ein Kleinbuchstabe, ein Großbuchstabe, eine Ziffer, ein Sonderzeichen (z. B. !@#$%^&*).",
       "label": "Kennwort"
     },
     "reenter": {
-      "error": "de_Password confirmation doesn't match Password",
+      "error": "Kennwortbestätigung stimmt nicht mit Kennwort überein",
       "label": "Kennwort erneut eingeben"
     },
     "resendInstructions": "Bestätigungsanweisungen erneut senden",
     "resetPassword": {
-      "error": "de_at least 8 characters including: a lower-case letter, an upper-case letter, a number, a special character (such as !@#$%^&*).",
+      "error": "mindestens 8 Zeichen, einschließlich: ein Kleinbuchstabe, ein Großbuchstabe, eine Ziffer, ein Sonderzeichen (z. B. !@#$%^&*).",
       "label": "Neues Kennwort"
     },
     "signin": "Anmelden",
@@ -57,8 +57,8 @@
     "useEmail": "Mit Ihrer E-Mail-Adresse:"
   },
   "modal": {
-    "InvalidLogin": "de_Invalid email or password",
-    "PasswordResetError": "de_There was an error processing the password reset.",
+    "InvalidLogin": "E-Mail oder Kennwort ungültig",
+    "PasswordResetError": "Beim Zurücksetzen des Kennworts ist ein Fehler aufgetreten.",
     "SuccessChangedPassword": "Ihr Kennwort wurde erfolgreich geändert.",
     "YouWillGetInstructions": "Sie erhalten in wenigen Minuten eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Kennworts."
   },
