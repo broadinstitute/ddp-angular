@@ -38,7 +38,8 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
               x.activity == null || x.activity === '') {
               return of(null);
             }
-            return this.getObservable(`/studies/${x.study}/activities/${x.activity}`, {}, [404]);
+            const baseUrl = this.getBaseUrl(x.study, x.activity);
+            return this.getObservable(baseUrl, {}, [404]);
           }, (x, y) => y),
           catchError(e => {
             if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
@@ -58,7 +59,8 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     public saveAnswerSubmission(studyGuid: string, activityGuid: string, answerSubmission: AnswerSubmission,
         throwError: boolean): Observable<PatchAnswerResponse> {
         const payload = { answers: [answerSubmission] };
-        return this.patchObservable(`/studies/${studyGuid}/activities/${activityGuid}/answers`, payload, {}, throwError).pipe(
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.patchObservable(`${baseUrl}/answers`, payload, {}, throwError).pipe(
             map(httpResponse => httpResponse.body));
     }
 
@@ -77,19 +79,26 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     }
 
     public flushForm(studyGuid: string, activityGuid: string): Observable<any> {
-        return this.putObservable(`/studies/${studyGuid}/activities/${activityGuid}/answers`, null);
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.putObservable(`${baseUrl}/answers`, null);
     }
 
     public createInstance(studyGuid: string, activityCode: string): Observable<ActivityInstanceGuid | null> {
-        return this.postObservable(`/studies/${studyGuid}/activities`, { activityCode }).pipe(
+        const baseUrl = this.getBaseUrl(studyGuid);
+        return this.postObservable(baseUrl, { activityCode }).pipe(
             map(x => !!x ? x.body as ActivityInstanceGuid : null)
         );
     }
 
-  public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
-    const payload = { index };
+    public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
+        const payload = { index };
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.patchObservable(baseUrl, payload).pipe(
+            map(httpResponse => httpResponse));
+    }
 
-    return this.patchObservable(`/studies/${studyGuid}/activities/${activityGuid}`, payload).pipe(
-      map(httpResponse => httpResponse));
+    private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
+        const activityGuidPart = activityGuid ? `/${activityGuid}` : '';
+        return `/studies/${studyGuid}/activities${activityGuidPart}`;
     }
 }
