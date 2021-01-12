@@ -125,10 +125,10 @@ export class SubmissionManager implements OnDestroy {
                         return error.pipe(
                             mergeMap((submissionError, i) => {
                                 const errorCount = ++i;
-                                // we will retry on HTTP errors that are not not the ones listed here
+                                // we will retry on HTTP errors that are not the ones listed here
                                 if (errorCount > this.maxRetryCount || !(submissionError instanceof HttpErrorResponse)
                                     || [404, 401, 422].includes(submissionError.status)) {
-                                    // Would have prefered to throw error, and have subscriber handle it in the error handler
+                                    // Would have preferred to throw error, and have subscriber handle it in the error handler
                                     // but could not get the error
                                     this.answerSubmissionFailureSubject.next(submissionError);
                                     throw submissionError;
@@ -202,7 +202,7 @@ export class SubmissionManager implements OnDestroy {
             }, [] as ActivityInstanceAnswerSubmission[])
         );
 
-        // finally we update queue subject by having it having it subscribe
+        // finally we update queue subject by having it subscribe
         workingSubmissionQueue.subscribe(pendingAnswerSubmissionSubject);
 
         this.pendingAnswerSubmissionQueue$ = pendingAnswerSubmissionSubject.asObservable();

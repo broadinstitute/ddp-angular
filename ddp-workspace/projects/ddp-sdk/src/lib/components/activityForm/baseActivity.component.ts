@@ -177,7 +177,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     debounceTime(250),
                     filter(isPageBusy => !isPageBusy),
                     take(1))),
-                // if we cant' save we are not going past filter, so do necessary cleanup here
+                // if we can't save we are not going past filter, so do necessary cleanup here
                 tap(() => !this.isAllFormContentValid.value && (this.dataEntryDisabled = false)),
                 filter(() => this.isAllFormContentValid.value),
                 concatMap(() => this.serviceAgent.flushForm(this.studyGuid, this.activityGuid)))
