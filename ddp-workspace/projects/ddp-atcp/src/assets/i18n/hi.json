@@ -255,10 +255,10 @@
   "Common": {
     "Buttons": {
       "Submit": {
-        "Title": "hi_Submit"
+        "Title": "सबमिट करें"
       },
       "Expand": {
-        "Title": "hi_Expand"
+        "Title": "विस्तृत करें"
       }
     },
     "Navigation": {
@@ -271,135 +271,13 @@
       "LearnMore": "और जानें",
       "MedicalHistoryQuestionnaire": "चिकित्सीय इतिहास",
       "MyAccount": "मेरा खाता",
-      "MyDashboard": "hi_My Dashboard",
+      "MyDashboard": "मेरा डैशबोर्ड",
       "Next": "अगला",
       "Previous": "पिछला",
       "SignIn": "साइन इन करें",
-      "Statistics": "hi_Platform Statistics",
-      "Submit": "hi_Submit",
+      "Statistics": "प्लेटफॉर्म संबंधी आँकड़े",
+      "Submit": "सबमिट करें",
       "YourParticipants": "आपके प्रतिभागी"
-    }
-  },
-  "DataAccess": {
-    "Assurances": {
-      "AssuranceList": [
-        "hi_Data will only be used for approved research.",
-        "hi_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
-        "hi_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
-        "hi_All applicable laws and local institutional policies will be followed.",
-        "hi_Data will not be sold or shared with third parties.",
-        "hi_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
-        "hi_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
-        "hi_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
-        "hi_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
-        "hi_These assurances will be agreed to annually."
-      ],
-      "Controls": {
-        "ApplyingSignature": {
-          "Label": "hi_Signature of Applying Researcher"
-        },
-        "Date": {
-          "Label": "hi_Date"
-        }
-      },
-      "Paragraph1": "hi_I agree to the following assurances:",
-      "Title": "hi_Assurances Statement"
-    },
-    "Dataset": {
-      "Controls": {
-        "Genomic": {
-          "Label": "hi_Genomic Data"
-        },
-        "Survey": {
-          "Label": "hi_Clinical Survey Data"
-        }
-      },
-      "Messages": {
-        "FileSizeExceedsTheLimit": "hi_File size exceeds the limit",
-        "ResearcherBiosketch": "hi_Researcher biosketch cannot be empty.",
-        "ResearcherEmail": "hi_Researcher email cannot be empty.",
-        "ResearcherName": "hi_Researcher name cannot be empty.",
-        "ResearcherOrgAddress": "hi_Org address 1 cannot be empty.",
-        "ResearcherOrgCity": "hi_Org city cannot be empty.",
-        "ResearcherOrgCountry": "hi_Org country cannot be empty.",
-        "ResearcherOrgName": "hi_Org name cannot be empty.",
-        "ResearcherOrgZip": "hi_Org zip cannot be empty.",
-        "ResearcherPhone": "hi_Researcher phone cannot include letters.",
-        "ResearcherProjectDescription": "hi_Project description cannot be empty.",
-        "ResearcherSign": "hi_Researcher signature cannot be empty.",
-        "ResearcherUse": "hi_Research use cannot be empty."
-      },
-      "SubTitle1": "hi_Select all applicable options.",
-      "SubTitle2": "hi_Specific Requests",
-      "Text1": "hi_Please state the disease area(s), if any, that this study focuses on.",
-      "Title": "hi_Dataset(s) requested"
-    },
-    "Header": {
-      "Paragraph1": "ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म एक रोगी-संचालित प्रयास है, जिसकी देखरेख दुनिया भर में मौजूद ए-टी परिवारों एवं विशेषज्ञों द्वारा की जाती है, जिसके माध्यम से ए-टी से पीड़ित लोगों की स्वास्थ्य संबंधी जानकारी, उनके आनुवंशिक एवं संभावित अन्य प्रकार के डेटा को शोधकर्ताओं के साथ साझा किया जा सकता है। यह प्लेटफॉर्म शोधकर्ताओं को दुनिया भर से आए महत्वपूर्ण रोगी डेटा तक त्वरित, सुरक्षित एवं कुशल रूप से पहुँच बनाने में सक्षम बनाता है, जिससे नई खोजों में मदद मिलने की उम्मीद है।",
-      "Paragraph2": "hi_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
-      "Paragraph3": "hi_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
-      "Paragraph4": "hi_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
-      "Paragraph5": "hi_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
-      "Title": "hi_Data Access Request"
-    },
-    "OrganizationForm": {
-      "Address1": "hi_Address 1",
-      "Address2": "hi_Address 2",
-      "City": "hi_City/Town",
-      "Country": "देश",
-      "Department": "hi_Department",
-      "Name": "hi_Organization Name",
-      "State": "राज्य/प्रांत",
-      "Title": "hi_Organization Information",
-      "Zip": "hi_Zip/Postal Code"
-    },
-    "ResearcherForm": {
-      "Attachment": "hi_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
-      "Email": "hi_Email",
-      "Name": "hi_Name",
-      "Phone": "hi_Phone",
-      "Title": "hi_Researcher Information"
-    },
-    "ResearchProject": {
-      "Article1": {
-        "Paragraph": "hi_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
-        "Title": "hi_Descriptive Title of Project"
-      },
-      "Article2": {
-        "Paragraph": "hi_Collaborators at different institutions from the PI must complete a separate DAR form.",
-        "Title": "hi_Names and Institutions of Collaborators"
-      },
-      "Article3": {
-        "Paragraph": "hi_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
-        "Title": "hi_Research Use Statement"
-      },
-      "Title": "hi_Research Project Overview"
-    },
-    "TypeResearch": {
-      "Controls": {
-        "Label": "hi_Controls",
-        "Paragraph": "hi_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
-      },
-      "Describe": {
-        "Label": "hi_Please describe"
-      },
-      "DisableStudy": {
-        "Label": "hi_Disease study",
-        "Paragraph": "hi_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
-      },
-      "MethodDevelopment": {
-        "Label": "hi_Methods development and validation studies",
-        "Paragraph": "hi_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
-      },
-      "Other": {
-        "Label": "hi_Other"
-      },
-      "Population": {
-        "Label": "hi_Population structure or normal variation studies",
-        "Paragraph": "hi_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
-      },
-      "SubTitle": "hi_Select all applicable options.",
-      "Title": "hi_Type of Research"
     }
   },
   "Footer": {
@@ -462,32 +340,32 @@
   "SDK": {
     "DownloadButton": "समीक्षा डाउनलोड करें",
     "CancelButton": "रद्द करें",
-    "CloseButton": "hi_Close",
-    "CommunicationError": "hi_There was a problem saving your data. Please check the form and your answers before submitting",
+    "CloseButton": "बंद करें",
+    "CommunicationError": "आपके डेटा को सेव करने में समस्या आई थी। कृपया सबमिट करने से पहले प्रपत्र और अपने जवाबों की जांच कर लें",
     "Dashboard": {
       "Text": "",
       "Title": "मेरा कंसोल"
     },
     "DatePicker": {
-      "April": "hi_April",
-      "August": "hi_August",
-      "Day": "hi_Choose day...",
-      "December": "hi_December",
-      "February": "hi_February",
-      "January": "hi_January",
-      "July": "hi_July",
-      "June": "hi_June",
-      "March": "hi_March",
-      "May": "hi_May",
-      "Month": "hi_Choose month...",
-      "November": "hi_November",
-      "October": "hi_October",
-      "September": "hi_September",
-      "Year": "hi_Choose year..."
+      "April": "अप्रैल",
+      "August": "अगस्त",
+      "Day": "दिन चुनें...",
+      "December": "दिसंबर",
+      "February": "फरवरी",
+      "January": "जनवरी",
+      "July": "जुलाई",
+      "June": "जून",
+      "March": "मार्च",
+      "May": "मई",
+      "Month": "माह चुनें...",
+      "November": "नवंबर",
+      "October": "अक्टूबर",
+      "September": "सितंबर",
+      "Year": "वर्ष चुनें..."
     },
     "DetailsPlaceholder": {
-      "PluralForm": "hi_characters remaining",
-      "SingularForm": "hi_character remaining"
+      "PluralForm": "बाकी बचे वर्ण",
+      "SingularForm": "बाकी बचा वर्ण"
     },
     "DoNotAssent": "स्वीकृति न दें",
     "DoNotConsent": "सहमति न दें",
@@ -510,73 +388,73 @@
     "RegisterButton": "पंजीकृत करें",
     "SaveAndSubmit": "सहेजें और प्रस्तुत करें",
     "SaveAndSubmitEnrollment": "नामांकन सहेजें एवं प्रस्तुत करें",
-    "SavingButton": "hi_Saving",
+    "SavingButton": "सेव किया जा रहा है",
     "SignAndAssent": "हस्ताक्षर करें और स्वीकृति दें",
     "SignAndConsent": "हस्ताक्षर करें और सहमति दें",
     "StartOrResume": "आरंभ करें/पुनः शुरू करें",
-    "SubmitButton": "hi_Submit",
+    "SubmitButton": "सबमिट करें",
     "SignInOut": {
       "SignOut": "साइन आउट करें"
     },
     "Title": {
-      "Alert": "hi_Your session will time-out soon",
-      "Default": "hi_The Global A-T Family Data Platform"
+      "Alert": "जल्दी ही आपके सत्र की समय-सीमा समाप्त हो जाएगी",
+      "Default": "ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म"
     },
     "TooltipAlt": "मुझे किसका नाम दर्ज करना चाहिए?",
     "UserActivities": {
       "ActivityActions": "कार्रवाइयाँ",
-      "ActivityDate": "hi_Created",
-      "ActivityName": "hi_Form",
+      "ActivityDate": "बनाया गया",
+      "ActivityName": "से",
       "ActivityStatus": "प्रास्थिति",
       "ActivityStatuses": {
         "COMPLETE": "पूर्ण",
         "CREATED": "शुरू नहीं हुआ",
         "IN_PROGRESS": "प्रगति अधीन"
       },
-      "QuestionCount": "hi_{{ answered }} / {{ total }} Answered",
-      "Summary": "hi_Summary",
+      "QuestionCount": "{{ answered }} / {{ total }} उत्तरित",
+      "Summary": "सारांश",
       "SurveysToComplete": {
-        "Plural": "hi_{{ count }} surveys to complete",
-        "Singular": "hi_{{ count }} survey to complete"
+        "Plural": "{{ count }} सर्वेक्षण पूरे करने हैं",
+        "Singular": "{{ count }} सर्वेक्षण पूरा करना है"
       }
     },
     "UserMenu": {
       "SignOutButton": "साइन आउट करें"
     },
     "UserPreferences": {
-      "UserPreferencesGender": "hi_Sex",
-      "UserPreferencesLocale": "hi_Preferred language",
-      "UserPreferencesTitle": "hi_User preferences"
+      "UserPreferencesGender": "लिंग",
+      "UserPreferencesLocale": "वरीय भाषा",
+      "UserPreferencesTitle": "उपयोगकर्ता की वरीयताएँ"
     },
-    "ValidateError": "hi_Submission cannot proceed. Please review messages in form for details.",
+    "ValidateError": "सबमिट करना आगे नहीं बढ़ सकता है। कृपया अधिक जानकारी के लिए, प्रपत्र में मोजूद संदेशों की समीक्षा करें।",
     "Validators": {
-      "DateNavyValidationRule": "[HI] Entered date is invalid"
+      "DateNavyValidationRule": "दर्ज की गई तिथि अमान्य है"
     }
   },
   "Statistics": {
-    "Title": "hi_The A-T Family Data Platform by the Numbers",
+    "Title": "संख्याओं के हिसाब से ए-टी फैमिली डेटा प्लेटफॉर्म",
     "CountList": {
-      "totalParticipantsCount": "hi_Total number of participants",
-      "countriesCount": "hi_Countries represented",
-      "genomeStudyParticipantsCount": "hi_People consenting to participate in genome sequencing",
-      "governedParticipantsCount": "hi_Children enrolled by their parents",
-      "selfEnrolledParticipantsCount": "hi_Self-enrolled participants"
+      "totalParticipantsCount": "सहभागियों की कुल संख्या",
+      "countriesCount": "देश जिनका प्रतिनिधित्व किया गया",
+      "genomeStudyParticipantsCount": "जीनोम अनुक्रमण में भाग लेने के लिए सहमति देने वाले लोग",
+      "governedParticipantsCount": "बच्चे जिनको उनके माता-पिता द्वारा नामांकित किया गया",
+      "selfEnrolledParticipantsCount": "स्व-नामांकित सहभागी"
     },
-    "Subtitle": "hi_Countries represented"
+    "Subtitle": "देश जिनका प्रतिनिधित्व किया गया"
   },
   "Survey": {
     "Self": "{{ firstName }} की नामांकन प्रक्रिया",
-    "NewParticipant": "{{ firstName }} की नामांकन प्रक्रिया",
+    "NewParticipant": "नए प्रतिभागी की नामांकन प्रक्रिया",
     "ThankYouPopup": {
-      "Text": "hi_Thank you for submitting the survey"
+      "Text": "सर्वेक्षण सबमिट करने के लिए आपका धन्यवाद"
     }
   },
   "Toolkit": {
     "ActivityActions": {
-      "Continue": "hi_Continue",
-      "Start": "hi_Start",
-      "View": "hi_View",
-      "Edit": "hi_Edit"
+      "Continue": "जारी रखें",
+      "Start": "शुरू करें",
+      "View": "देखें",
+      "Edit": "संपादित करें"
     },
     "Dashboard": {
       "Actions": "कार्रवाइयाँ",
@@ -593,38 +471,38 @@
         "CancelButton": "रद्द करें",
         "Fields": {
           "ConfirmEmail": {
-            "Error": "hi_Please enter a valid email address",
-            "Placeholder": "hi_Email confirmation *"
+            "Error": "कृपया एक मान्य ईमेल पता दर्ज करें",
+            "Placeholder": "ईमेल पुष्टीकरण *"
           },
           "Email": {
-            "Error": "hi_Please enter a valid email address",
+            "Error": "कृपया एक मान्य ईमेल पता दर्ज करें",
             "Placeholder": "ईमेल पता"
           },
           "FirstName": {
-            "Error": "hi_First Name is required",
+            "Error": "प्रथम नाम आवश्यक है",
             "Placeholder": "्रथम नाम"
           },
           "LastName": {
-            "Error": "hi_Last Name is required",
+            "Error": "अंतिम नाम आवश्यक है",
             "Placeholder": "अंतिम नाम"
           }
         },
-        "LoadingError": "hi_We're sorry, but an error has occurred.",
-        "MatchEmailsError": "hi_Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "हमें खेद है, किंतु एक त्रुटि हुई है।",
+        "MatchEmailsError": "कृपया सुनिश्चित करें कि दोनों ईमेल फील्ड भरे गए हों और कि पते मेल खाते हों।",
         "Required": "",
-        "SubmitButton": "मेलिंग सूची में शामिल हों",
-        "Text": "हमें एक ईमेल पता प्रदान करें और हम आपको ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म की प्रगति के बारे में सूचित करते रहेंगे।",
-        "Title": "जानकारी प्राप्त करते रहने के लिए साइन अप करें"
+        "SubmitButton": "शामिल हों",
+        "Text": "अपना ईमेल नीचे प्रदान करें और हम आपको प्रगति के बारे में नवीनतम जानकारी से अवगत रखेंगे।\nआप किसी भी समय सदस्यता समाप्त कर सकते हैं।",
+        "Title": "सूचित रहें"
       },
       "SessionWillExpire": {
         "Continue": "जारी रखें",
         "SignOut": "साइन आउट करें",
-        "Text": "hi_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "Title": "hi_Your session will time-out soon"
+        "Text": "आपकी निजता की रक्षा करने के लिए, सिस्टम आपको लॉग आउट करने जा रहा है क्योंकि आप कुछ समय से दूर रहे हैं। लॉग इन किए रखने के लिए \"जारी रखें\" पर क्लिक करें। यदि आप अभी के लिए आपका काम हो चुका हो तो \"साइन आउट\" पर क्लिक करें।",
+        "Title": "जल्दी ही आपके सत्र की समय-सीमा समाप्त हो जाएगी"
       }
     },
     "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "hi_Your password reset link has expired."
+      "PASSWORD_RESET_LINK_EXPIRED": "आपका पासवर्ड रीसेट करने के लिंक की अवधि समाप्त हो गई है।"
     },
     "ErrorPage": {
       "DefaultText": {
@@ -635,18 +513,18 @@
       "Title": "हमें खेद है, किंतु एक त्रुटि हुई। कृपया बाद में पुन: प्रयास करें।"
     },
     "Password": {
-      "InputPlaceholder": "hi_Password",
-      "PasswordRequiredError": "hi_Password is required",
-      "PasswordWrongError": "hi_Incorrect password. Please try again.",
-      "Text": "hi_Please enter your password *",
-      "Title": "hi_Please enter the password"
+      "InputPlaceholder": "पासवर्ड",
+      "PasswordRequiredError": "पासवर्ड आवश्यक है",
+      "PasswordWrongError": "गलत पासवर्ड। कृपया पुनः प्रयास करें।",
+      "Text": "कृपया अपना पासवर्ड दर्ज करें *",
+      "Title": "कृपया पासवर्ड दर्ज करें"
     },
     "SessionExpired": {
-      "Text": "hi_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+      "Text": "आप कुछ समय से दूर थे, इसलिए हमने आपको सुरक्षा सावधानी के तौर पर लॉग आउट कर दिया है। आप जिस अंतिम पृष्ठ पर थे उस पर लौटने के लिए कृपया पुनः लॉग इन करें।"
     },
     "StayInformed": {
-      "Text": "ग्लोबल ए-टी फैमिली डेटा प्लेटफॉर्म मेलिंग सूची में शामिल होने के लिए धन्यवाद। हम आपके द्वारा प्रदान किए गए ईमेल पते के माध्यम से आपको इस पहल के बारे में सूचित करते रहेंगे।",
-      "Title": "hi_Stay informed"
+      "Text": "ग्ईमेल सूची में शामिल होने के लिए आपका धन्यवाद। हम आपको अपडेट भेजेंगे और आपको सूचित करते रहेंगे। आप किसी भी समय सदस्यता समाप्त कर सकते हैं। यदि इस परियोजना में आपकी स्थिति के बारे में आपके कोई प्रश्न हों तो कृपया ईमेल करें",
+      "Title": "सूचित रहें"
     }
   },
   "WorkflowProgress": {

@@ -245,10 +245,10 @@
   "Common": {
     "Buttons": {
       "Submit": {
-        "Title": "ja_Submit"
+        "Title": "提出する"
       },
       "Expand": {
-        "Title": "ja_Expand"
+        "Title": "展開する"
       }
     },
     "Navigation": {
@@ -261,135 +261,13 @@
       "LearnMore": "さらに詳しく",
       "MedicalHistoryQuestionnaire": "病歴",
       "MyAccount": "マイアカウント",
-      "MyDashboard": "ja_My Dashboard",
+      "MyDashboard": "マイダッシュボード",
       "Next": "次へ",
       "Previous": "前へ",
       "SignIn": "サインイン",
-      "Statistics": "ja_Platform Statistics",
-      "Submit": "ja_Submit",
+      "Statistics": "プラットフォーム統計",
+      "Submit": "提出する",
       "YourParticipants": "参加者"
-    }
-  },
-  "DataAccess": {
-    "Assurances": {
-      "AssuranceList": [
-        "ja_Data will only be used for approved research.",
-        "ja_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
-        "ja_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
-        "ja_All applicable laws and local institutional policies will be followed.",
-        "ja_Data will not be sold or shared with third parties.",
-        "ja_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
-        "ja_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
-        "ja_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
-        "ja_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
-        "ja_These assurances will be agreed to annually."
-      ],
-      "Controls": {
-        "ApplyingSignature": {
-          "Label": "ja_Signature of Applying Researcher"
-        },
-        "Date": {
-          "Label": "ja_Date"
-        }
-      },
-      "Paragraph1": "ja_I agree to the following assurances:",
-      "Title": "ja_Assurances Statement"
-    },
-    "Dataset": {
-      "Controls": {
-        "Genomic": {
-          "Label": "ja_Genomic Data"
-        },
-        "Survey": {
-          "Label": "ja_Clinical Survey Data"
-        }
-      },
-      "Messages": {
-        "FileSizeExceedsTheLimit": "ja_File size exceeds the limit",
-        "ResearcherBiosketch": "ja_Researcher biosketch cannot be empty.",
-        "ResearcherEmail": "ja_Researcher email cannot be empty.",
-        "ResearcherName": "ja_Researcher name cannot be empty.",
-        "ResearcherOrgAddress": "ja_Org address 1 cannot be empty.",
-        "ResearcherOrgCity": "ja_Org city cannot be empty.",
-        "ResearcherOrgCountry": "ja_Org country cannot be empty.",
-        "ResearcherOrgName": "ja_Org name cannot be empty.",
-        "ResearcherOrgZip": "ja_Org zip cannot be empty.",
-        "ResearcherPhone": "ja_Researcher phone cannot include letters.",
-        "ResearcherProjectDescription": "ja_Project description cannot be empty.",
-        "ResearcherSign": "ja_Researcher signature cannot be empty.",
-        "ResearcherUse": "ja_Research use cannot be empty."
-      },
-      "SubTitle1": "ja_Select all applicable options.",
-      "SubTitle2": "ja_Specific Requests",
-      "Text1": "ja_Please state the disease area(s), if any, that this study focuses on.",
-      "Title": "ja_Dataset(s) requested"
-    },
-    "Header": {
-      "Paragraph1": "グローバル A-T ファミリーデータプラットフォームは、世界中のA-T患者の家族や専門家によって監督される患者主導の取り組みです。これを通して、A-T患者の健康情報、遺伝データや可能性のあるその他のデータが研究者と共有されます。このプラットフォームによって、研究者は、新発見を導く可能性のある世界各国からの重要な患者データに、迅速、安全かつ効果的にアクセスすることができます。",
-      "Paragraph2": "ja_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
-      "Paragraph3": "ja_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
-      "Paragraph4": "ja_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
-      "Paragraph5": "ja_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
-      "Title": "ja_Data Access Request"
-    },
-    "OrganizationForm": {
-      "Address1": "ja_Address 1",
-      "Address2": "ja_Address 2",
-      "City": "ja_City/Town",
-      "Country": "国名",
-      "Department": "ja_Department",
-      "Name": "ja_Organization Name",
-      "State": "州/県名",
-      "Title": "ja_Organization Information",
-      "Zip": "ja_Zip/Postal Code"
-    },
-    "ResearcherForm": {
-      "Attachment": "ja_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
-      "Email": "ja_Email",
-      "Name": "ja_Name",
-      "Phone": "ja_Phone",
-      "Title": "ja_Researcher Information"
-    },
-    "ResearchProject": {
-      "Article1": {
-        "Paragraph": "ja_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
-        "Title": "ja_Descriptive Title of Project"
-      },
-      "Article2": {
-        "Paragraph": "ja_Collaborators at different institutions from the PI must complete a separate DAR form.",
-        "Title": "ja_Names and Institutions of Collaborators"
-      },
-      "Article3": {
-        "Paragraph": "ja_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
-        "Title": "ja_Research Use Statement"
-      },
-      "Title": "ja_Research Project Overview"
-    },
-    "TypeResearch": {
-      "Controls": {
-        "Label": "ja_Controls",
-        "Paragraph": "ja_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
-      },
-      "Describe": {
-        "Label": "ja_Please describe"
-      },
-      "DisableStudy": {
-        "Label": "ja_Disease study",
-        "Paragraph": "ja_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
-      },
-      "MethodDevelopment": {
-        "Label": "ja_Methods development and validation studies",
-        "Paragraph": "ja_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
-      },
-      "Other": {
-        "Label": "ja_Other"
-      },
-      "Population": {
-        "Label": "ja_Population structure or normal variation studies",
-        "Paragraph": "ja_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
-      },
-      "SubTitle": "ja_Select all applicable options.",
-      "Title": "ja_Type of Research"
     }
   },
   "Footer": {
@@ -452,32 +330,32 @@
   "SDK": {
     "DownloadButton": "レビューをダウンロードする",
     "CancelButton": "キャンセルする",
-    "CloseButton": "ja_Close",
-    "CommunicationError": "ja_There was a problem saving your data. Please check the form and your answers before submitting",
+    "CloseButton": "閉じる",
+    "CommunicationError": "データの保存中に問題がありました。フォームと回答を確認してから提出してください",
     "Dashboard": {
       "Text": "",
       "Title": "マイコンソール"
     },
     "DatePicker": {
-      "April": "ja_April",
-      "August": "ja_August",
-      "Day": "ja_Choose day...",
-      "December": "ja_December",
-      "February": "ja_February",
-      "January": "ja_January",
-      "July": "ja_July",
-      "June": "ja_June",
-      "March": "ja_March",
-      "May": "ja_May",
-      "Month": "ja_Choose month...",
-      "November": "ja_November",
-      "October": "ja_October",
-      "September": "ja_September",
-      "Year": "ja_Choose year..."
+      "April": "4月",
+      "August": "8月",
+      "Day": "日を選択してください...",
+      "December": "12月",
+      "February": "2月",
+      "January": "1月",
+      "July": "7月",
+      "June": "6月",
+      "March": "3月",
+      "May": "5月",
+      "Month": "月を選択してください...",
+      "November": "11月",
+      "October": "10月",
+      "September": "9月",
+      "Year": "年を選択してください..."
     },
     "DetailsPlaceholder": {
-      "PluralForm": "ja_characters remaining",
-      "SingularForm": "ja_character remaining"
+      "PluralForm": "文字残っています",
+      "SingularForm": "文字残っています"
     },
     "DoNotAssent": "アセントしません",
     "DoNotConsent": "同意しません",
@@ -500,73 +378,73 @@
     "RegisterButton": "登録する",
     "SaveAndSubmit": "保存および提出",
     "SaveAndSubmitEnrollment": "登録の保存および提出",
-    "SavingButton": "ja_Saving",
+    "SavingButton": "保存しています",
     "SignAndAssent": "署名およびアセント",
     "SignAndConsent": "署名および同意",
     "StartOrResume": "開始/再開",
-    "SubmitButton": "ja_Submit",
+    "SubmitButton": "提出する",
     "SignInOut": {
       "SignOut": "サインアウト"
     },
     "Title": {
-      "Alert": "ja_Your session will time-out soon",
-      "Default": "ja_The Global A-T Family Data Platform"
+      "Alert": "セッションはまもなく時間切れになります",
+      "Default": "グローバルA-Tファミリーデータプラットフォーム"
     },
     "TooltipAlt": "どなたの名前を入力しますか?",
     "UserActivities": {
       "ActivityActions": "アクション",
-      "ActivityDate": "ja_Created",
-      "ActivityName": "ja_Form",
+      "ActivityDate": "作成されました",
+      "ActivityName": "フォーム",
       "ActivityStatus": "状況",
       "ActivityStatuses": {
         "COMPLETE": "完了しました",
         "CREATED": "まだ開始していません",
         "IN_PROGRESS": "進行中"
       },
-      "QuestionCount": "ja_{{ answered }} / {{ total }} Answered",
-      "Summary": "ja_Summary",
+      "QuestionCount": "{{ answered }} / {{ total }} 回答済みです",
+      "Summary": "要約",
       "SurveysToComplete": {
-        "Plural": "ja_{{ count }} surveys to complete",
-        "Singular": "ja_{{ count }} survey to complete"
+        "Plural": "{{ count }} 件のアンケートに回答する必要があります",
+        "Singular": "{{ count }} 件のアンケートに回答する必要があります"
       }
     },
     "UserMenu": {
       "SignOutButton": "サインアウト"
     },
     "UserPreferences": {
-      "UserPreferencesGender": "ja_Sex",
-      "UserPreferencesLocale": "ja_Preferred language",
-      "UserPreferencesTitle": "ja_User preferences"
+      "UserPreferencesGender": "性別",
+      "UserPreferencesLocale": "希望言語",
+      "UserPreferencesTitle": "ユーザー詳細設定"
     },
-    "ValidateError": "ja_Submission cannot proceed. Please review messages in form for details.",
+    "ValidateError": "提出を処理できません。詳細はフォームのメッセージを確認してください。",
     "Validators": {
-      "DateNavyValidationRule": "[JA] Entered date is invalid"
+      "DateNavyValidationRule": "入力した日付が無効です"
     }
   },
   "Statistics": {
-    "Title": "ja_The A-T Family Data Platform by the Numbers",
+    "Title": "数字で見るA-T ファミリーデータプラットフォーム",
     "CountList": {
-      "totalParticipantsCount": "ja_Total number of participants",
-      "countriesCount": "ja_Countries represented",
-      "genomeStudyParticipantsCount": "ja_People consenting to participate in genome sequencing",
-      "governedParticipantsCount": "ja_Children enrolled by their parents",
-      "selfEnrolledParticipantsCount": "ja_Self-enrolled participants"
+      "totalParticipantsCount": "参加者合計人数",
+      "countriesCount": "参加者の国",
+      "genomeStudyParticipantsCount": "ゲノムシークエンシングへの参加同意者",
+      "governedParticipantsCount": "両親が登録した未成年者",
+      "selfEnrolledParticipantsCount": "自分で登録した参加者"
     },
-    "Subtitle": "ja_Countries represented"
+    "Subtitle": "参加者の国"
   },
   "Survey": {
     "Self": "{{ firstName }} の登録プロセス",
-    "NewParticipant": "New Participant の登録プロセス",
+    "NewParticipant": "新規参加者登録プロセス",
     "ThankYouPopup": {
-      "Text": "ja_Thank you for submitting the survey"
+      "Text": "アンケートをご提出いただきありがとうございます"
     }
   },
   "Toolkit": {
     "ActivityActions": {
-      "Continue": "ja_Continue",
-      "Start": "ja_Start",
-      "View": "ja_View",
-      "Edit": "ja_Edit"
+      "Continue": "続ける",
+      "Start": "開始する",
+      "View": "表示",
+      "Edit": "編集"
     },
     "Dashboard": {
       "Actions": "アクション",
@@ -583,24 +461,24 @@
         "CancelButton": "キャンセルする",
         "Fields": {
           "ConfirmEmail": {
-            "Error": "ja_Please enter a valid email address",
-            "Placeholder": "ja_Email confirmation *"
+            "Error": "有効なEメールアドレスを入力してください",
+            "Placeholder": "確認用Eメール *"
           },
           "Email": {
-            "Error": "ja_Please enter a valid email address",
+            "Error": "有効なEメールアドレスを入力してください",
             "Placeholder": "Eメールアドレス"
           },
           "FirstName": {
-            "Error": "ja_First Name is required",
+            "Error": "ファーストネーム（名）は必須です",
             "Placeholder": "ファーストネーム"
           },
           "LastName": {
-            "Error": "ja_Last Name is required",
+            "Error": "ラストネーム（姓）は必須です",
             "Placeholder": "ラストネーム"
           }
         },
-        "LoadingError": "ja_We're sorry, but an error has occurred.",
-        "MatchEmailsError": "ja_Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "申し訳ありませんが、エラーが発生しました。",
+        "MatchEmailsError": "両方のEメール欄に入力していること、アドレスが一致していることを確認してください。",
         "Required": "",
         "SubmitButton": "メーリングリストに参加する",
         "Text": "Eメールアドレスを登録すれば、グローバル A-T ファミリーデータプラットフォームの進捗状況をお知らせいたします。",
@@ -609,12 +487,12 @@
       "SessionWillExpire": {
         "Continue": "続ける",
         "SignOut": "サインアウト",
-        "Text": "ja_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "Title": "ja_Your session will time-out soon"
+        "Text": "プライバシー保護のため、しばらく操作していないと、システムからログアウトされます。ログインしたままにするには「続ける」をクリックしてください。終了する場合は「サインアウト」をクリックしてください。",
+        "Title": "セッションはまもなく時間切れになります"
       }
     },
     "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "ja_Your password reset link has expired."
+      "PASSWORD_RESET_LINK_EXPIRED": "パスワードリセットのリンクは有効期限切れです。"
     },
     "ErrorPage": {
       "DefaultText": {
@@ -625,18 +503,18 @@
       "Title": "申し訳ありませんが、エラーが発生しました。後でもう一度やり直してください。"
     },
     "Password": {
-      "InputPlaceholder": "ja_Password",
-      "PasswordRequiredError": "ja_Password is required",
-      "PasswordWrongError": "ja_Incorrect password. Please try again.",
-      "Text": "ja_Please enter your password *",
-      "Title": "ja_Please enter the password"
+      "InputPlaceholder": "パスワード",
+      "PasswordRequiredError": "パスワードは必須です",
+      "PasswordWrongError": "パスワードが間違っています。もう一度入力してください。",
+      "Text": "パスワードを入力してください *",
+      "Title": "パスワードを入力してください"
     },
     "SessionExpired": {
-      "Text": "ja_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+      "Text": "しばらく操作していなかったため、セキュリティ対策としてログアウトされました。開いていた最後のページに戻るには、もう一度ログインしてください。"
     },
     "StayInformed": {
       "Text": "グローバル A-T ファミリーデータプラットフォームメーリングリストへのご参加ありがとうございます。ご指定のEメールアドレスに、このイニシアチブについてのお知らせをお届けします。",
-      "Title": "ja_Stay informed"
+      "Title": "最新情報を受け取る"
     }
   },
   "WorkflowProgress": {
