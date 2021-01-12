@@ -61,6 +61,7 @@ describe('ActivityQuestionComponent', () => {
     component = fixture.componentInstance;
     const block = new ActivityTextQuestionBlock();
     block.inputType = InputType.Text;
+    block.shown = true;
     component.block = block;
     component.readonly = false;
     answerComponentFixture = getAnswerComponentFixture();
@@ -78,6 +79,7 @@ describe('ActivityQuestionComponent', () => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
+    block.shown = true;
     component.block = block;
     component.ngOnInit();
     // these tick(1) needed because of delay(0) used in message observable definition
@@ -110,6 +112,7 @@ describe('ActivityQuestionComponent', () => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
+    block.shown = true;
     component.block = block;
     const rule = new ActivityLengthValidationRule(block, null, 3);
     rule.message = 'Too long!';
@@ -130,6 +133,7 @@ describe('ActivityQuestionComponent', () => {
     const block = new ActivityTextQuestionBlock();
     block.stableId = '123';
     block.inputType = InputType.Text;
+    block.shown = true;
     component.block = block;
     component.ngOnInit();
     fixture.detectChanges();
