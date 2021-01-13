@@ -12,7 +12,7 @@ import { DialogData } from '../../models/dialogData.model';
 export class AboutUsComponent {
   constructor(private dialog: MatDialog) { }
 
-  public openDialog(data: DialogData) {
+  public openDialog(data: DialogData): void {
     this.dialog.open(AboutUsDialogComponent, {
       data,
       scrollStrategy: new NoopScrollStrategy()
