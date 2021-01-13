@@ -10,7 +10,7 @@ var DDP_ENV = {
     {{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
     mapsApiKey: "{{.Data.mapsApiKey}}",
     errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
-    projectGcpId: "{{.Data.projectGcpId}}",
+    projectGcpId: "{{.Data.googleProjectId}}",
     {{end}}
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
