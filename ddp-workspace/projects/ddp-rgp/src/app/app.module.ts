@@ -75,7 +75,7 @@ toolkitConfig.mailingListDialogUrl = 'updates';
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
