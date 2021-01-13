@@ -250,10 +250,10 @@
   "Common": {
     "Buttons": {
       "Submit": {
-        "Title": "zh_Submit"
+        "Title": "提交"
       },
       "Expand": {
-        "Title": "zh_Expand"
+        "Title": "展开"
       }
     },
     "Navigation": {
@@ -266,135 +266,13 @@
       "LearnMore": "了解更多",
       "MedicalHistoryQuestionnaire": "病史",
       "MyAccount": "我的帐户",
-      "MyDashboard": "zh_My Dashboard",
+      "MyDashboard": "我的仪表板",
       "Next": "下一个",
       "Previous": "上一个",
       "SignIn": "签到",
-      "Statistics": "zh_Platform Statistics",
-      "Submit": "zh_Submit",
+      "Statistics": "平台统计数据",
+      "Submit": "提交",
       "YourParticipants": "您的参与者"
-    }
-  },
-  "DataAccess": {
-    "Assurances": {
-      "AssuranceList": [
-        "zh_Data will only be used for approved research.",
-        "zh_Data confidentiality will be protected and the investigator will never make any attempt at \"re-identification.\"",
-        "zh_There will be no transfer of any part of the dataset to any other investigators or institutions (except between collaborating investigators or any project assistants who answer directly to the Principal Investigator).",
-        "zh_All applicable laws and local institutional policies will be followed.",
-        "zh_Data will not be sold or shared with third parties.",
-        "zh_Accidental transfer of any part of the dataset will be prevented. Adequate security controls are in place, such as secure laptops and storage devices; no downloading is allowed to unsecured network drives or servers.",
-        "zh_Report on the uses of the data, e.g. publications, will be provided to the DAC annually.",
-        "zh_The Global A-T Family Data Platform Dataset will be acknowledged in any publication or presentation resulting from the use of the Dataset.",
-        "zh_Collaborating investigators from the researcher’s institution, as listed in the DAR form, agree to these Assurances.",
-        "zh_These assurances will be agreed to annually."
-      ],
-      "Controls": {
-        "ApplyingSignature": {
-          "Label": "zh_Signature of Applying Researcher"
-        },
-        "Date": {
-          "Label": "zh_Date"
-        }
-      },
-      "Paragraph1": "zh_I agree to the following assurances:",
-      "Title": "zh_Assurances Statement"
-    },
-    "Dataset": {
-      "Controls": {
-        "Genomic": {
-          "Label": "zh_Genomic Data"
-        },
-        "Survey": {
-          "Label": "zh_Clinical Survey Data"
-        }
-      },
-      "Messages": {
-        "FileSizeExceedsTheLimit": "zh_File size exceeds the limit",
-        "ResearcherBiosketch": "zh_Researcher biosketch cannot be empty.",
-        "ResearcherEmail": "zh_Researcher email cannot be empty.",
-        "ResearcherName": "zh_Researcher name cannot be empty.",
-        "ResearcherOrgAddress": "zh_Org address 1 cannot be empty.",
-        "ResearcherOrgCity": "zh_Org city cannot be empty.",
-        "ResearcherOrgCountry": "zh_Org country cannot be empty.",
-        "ResearcherOrgName": "zh_Org name cannot be empty.",
-        "ResearcherOrgZip": "zh_Org zip cannot be empty.",
-        "ResearcherPhone": "zh_Researcher phone cannot include letters.",
-        "ResearcherProjectDescription": "zh_Project description cannot be empty.",
-        "ResearcherSign": "zh_Researcher signature cannot be empty.",
-        "ResearcherUse": "zh_Research use cannot be empty."
-      },
-      "SubTitle1": "zh_Select all applicable options.",
-      "SubTitle2": "zh_Specific Requests",
-      "Text1": "zh_Please state the disease area(s), if any, that this study focuses on.",
-      "Title": "zh_Dataset(s) requested"
-    },
-    "Header": {
-      "Paragraph1": "全球A-T成员数据平台是由A-T成员和全球专家监督的患者驱动的努力，通过该平台，研究人员可以共享关于A-T人员的健康信息、遗传和潜在的其他类型的数据。 该平台将使研究人员能够快速、安全有效地访问世界各地的重要患者数据，希望能够引起新的发现。",
-      "Paragraph2": "zh_Researchers should request access to the data using this Data Access Request (DAR) form which includes assurances associated with the use of these data sets.",
-      "Paragraph3": "zh_Our Data Access Committee (DAC) will review the DAR form submitted by the researchers and will either approve or disapprove data access.",
-      "Paragraph4": "zh_Researchers will certify that they will abide by the assurances given in this form, including agreeing not to distribute controlled-access data in any form to any third parties other than their own research staff who have agreed to these assurances. For projects that include collaborators at other institutions, collaborating investigators are required to submit separate DAR forms.",
-      "Paragraph5": "zh_Upon receiving access approval, researchers will be provided with specific credentials to authenticate their identity and gain access to the controlled-access datasets. The DAC requests annual reports from researchers about what has been accomplished using the data and any violations of the assurances that may have occurred.",
-      "Title": "zh_Data Access Request"
-    },
-    "OrganizationForm": {
-      "Address1": "zh_Address 1",
-      "Address2": "zh_Address 2",
-      "City": "zh_City/Town",
-      "Country": "国家",
-      "Department": "zh_Department",
-      "Name": "zh_Organization Name",
-      "State": "州/省",
-      "Title": "zh_Organization Information",
-      "Zip": "zh_Zip/Postal Code"
-    },
-    "ResearcherForm": {
-      "Attachment": "zh_Please attach a CV and/or biographical sketch (PDF files only, 2MB max)",
-      "Email": "zh_Email",
-      "Name": "zh_Name",
-      "Phone": "zh_Phone",
-      "Title": "zh_Researcher Information"
-    },
-    "ResearchProject": {
-      "Article1": {
-        "Paragraph": "zh_Please note that coordinated requests made by researchers who are collaborating on the same project should use the same title.",
-        "Title": "zh_Descriptive Title of Project"
-      },
-      "Article2": {
-        "Paragraph": "zh_Collaborators at different institutions from the PI must complete a separate DAR form.",
-        "Title": "zh_Names and Institutions of Collaborators"
-      },
-      "Article3": {
-        "Paragraph": "zh_Please provide a brief description of the proposed use of the dataset(s) to be reviewed by the Data Access Committee. This statement should be one or two paragraphs in length and include research objectives, the study design and an analysis plan. If you are requesting multiple datasets, please describe how you will use them.",
-        "Title": "zh_Research Use Statement"
-      },
-      "Title": "zh_Research Project Overview"
-    },
-    "TypeResearch": {
-      "Controls": {
-        "Label": "zh_Controls",
-        "Paragraph": "zh_The reason for this request is to increase the number of controls available for a comparison group (e.g., a case-control study)."
-      },
-      "Describe": {
-        "Label": "zh_Please describe"
-      },
-      "DisableStudy": {
-        "Label": "zh_Disease study",
-        "Paragraph": "zh_The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders)."
-      },
-      "MethodDevelopment": {
-        "Label": "zh_Methods development and validation studies",
-        "Paragraph": "zh_The primary purpose of the research is to develop and/or validate new methods for analyzing or interpreting data (e.g., developing more powerful methods to detect epistatic, gene-environment, or other types of complex interactions in genome-wide association studies). Data will be used for developing and/or validating new methods."
-      },
-      "Other": {
-        "Label": "zh_Other"
-      },
-      "Population": {
-        "Label": "zh_Population structure or normal variation studies",
-        "Paragraph": "zh_The primary purpose of the research is to understand variation in the general population (e.g., genetic substructure of a population)."
-      },
-      "SubTitle": "zh_Select all applicable options.",
-      "Title": "zh_Type of Research"
     }
   },
   "Footer": {
@@ -457,32 +335,32 @@
   "SDK": {
     "DownloadButton": "下载评论",
     "CancelButton": "取消",
-    "CloseButton": "zh_Close",
-    "CommunicationError": "zh_There was a problem saving your data. Please check the form and your answers before submitting",
+    "CloseButton": "关闭",
+    "CommunicationError": "保存数据时出现问题。 请在提交前检查表单和您的答案",
     "Dashboard": {
       "Text": "",
       "Title": "我的控制台"
     },
     "DatePicker": {
-      "April": "zh_April",
-      "August": "zh_August",
-      "Day": "zh_Choose day...",
-      "December": "zh_December",
-      "February": "zh_February",
-      "January": "zh_January",
-      "July": "zh_July",
-      "June": "zh_June",
-      "March": "zh_March",
-      "May": "zh_May",
-      "Month": "zh_Choose month...",
-      "November": "zh_November",
-      "October": "zh_October",
-      "September": "zh_September",
-      "Year": "zh_Choose year..."
+      "April": "4 月",
+      "August": "8 月",
+      "Day": "选择日期...",
+      "December": "12 月",
+      "February": "2 月",
+      "January": "1 月",
+      "July": "7 月",
+      "June": "6 月",
+      "March": "3 月",
+      "May": "5 月",
+      "Month": "选择月份...",
+      "November": "11 月",
+      "October": "12 月",
+      "September": "9 月",
+      "Year": "选择年份..."
     },
     "DetailsPlaceholder": {
-      "PluralForm": "zh_characters remaining",
-      "SingularForm": "zh_character remaining"
+      "PluralForm": "个剩余字符",
+      "SingularForm": "个剩余字符"
     },
     "DoNotAssent": "不同意",
     "DoNotConsent": "不同意",
@@ -505,73 +383,73 @@
     "RegisterButton": "注册",
     "SaveAndSubmit": "保存并提交",
     "SaveAndSubmitEnrollment": "保存并提交注册",
-    "SavingButton": "zh_Saving",
+    "SavingButton": "正在保存",
     "SignAndAssent": "签名和同意",
     "SignAndConsent": "签名和同意",
     "StartOrResume": "开始/恢复",
-    "SubmitButton": "zh_Submit",
+    "SubmitButton": "提交",
     "SignInOut": {
       "SignOut": "登出"
     },
     "Title": {
-      "Alert": "zh_Your session will time-out soon",
-      "Default": "zh_The Global A-T Family Data Platform"
+      "Alert": "您的会话即将超时",
+      "Default": "全球 A-T 成员数据平台"
     },
     "TooltipAlt": "我应该输入谁的名字？",
     "UserActivities": {
       "ActivityActions": "操作",
-      "ActivityDate": "zh_Created",
-      "ActivityName": "zh_Form",
+      "ActivityDate": "创建日期",
+      "ActivityName": "表单",
       "ActivityStatus": "状态",
       "ActivityStatuses": {
         "COMPLETE": "已完成",
         "CREATED": "没有开始",
         "IN_PROGRESS": "进行中"
       },
-      "QuestionCount": "zh_{{ answered }} / {{ total }} Answered",
-      "Summary": "zh_Summary",
+      "QuestionCount": "已回答 {{ answered }} 道题，共 {{ total }} 道题",
+      "Summary": "摘要",
       "SurveysToComplete": {
-        "Plural": "zh_{{ count }} surveys to complete",
-        "Singular": "zh_{{ count }} survey to complete"
+        "Plural": "待完成 {{ count }} 项调查",
+        "Singular": "待完成 {{ count }} 项调查"
       }
     },
     "UserMenu": {
       "SignOutButton": "登出"
     },
     "UserPreferences": {
-      "UserPreferencesGender": "zh_Sex",
-      "UserPreferencesLocale": "zh_Preferred language",
-      "UserPreferencesTitle": "zh_User preferences"
+      "UserPreferencesGender": "性别",
+      "UserPreferencesLocale": "首选语言",
+      "UserPreferencesTitle": "用户偏好设置"
     },
-    "ValidateError": "zh_Submission cannot proceed. Please review messages in form for details.",
+    "ValidateError": "无法继续提交。有关详细信息，请查看表单中的消息。",
     "Validators": {
-      "DateNavyValidationRule": "[ZH] Entered date is invalid"
+      "DateNavyValidationRule": "輸入的日期無效"
     }
   },
   "Statistics": {
-    "Title": "zh_The A-T Family Data Platform by the Numbers",
+    "Title": "A-T 成员数据平台（按数字）",
     "CountList": {
-      "totalParticipantsCount": "zh_Total number of participants",
-      "countriesCount": "zh_Countries represented",
-      "genomeStudyParticipantsCount": "zh_People consenting to participate in genome sequencing",
-      "governedParticipantsCount": "zh_Children enrolled by their parents",
-      "selfEnrolledParticipantsCount": "zh_Self-enrolled participants"
+      "totalParticipantsCount": "参与者总数",
+      "countriesCount": "所代表的国家",
+      "genomeStudyParticipantsCount": "同意参与基因组测序的人",
+      "governedParticipantsCount": "由家长代为注册的儿童",
+      "selfEnrolledParticipantsCount": "自行注册的参与者"
     },
-    "Subtitle": "zh_Countries represented"
+    "Subtitle": "所代表的国家"
   },
   "Survey": {
     "Self": "{{ firstName }}的注册程序",
-    "NewParticipant": "New Participant的注册程序",
+    "NewParticipant": "新参与者注册流程",
     "ThankYouPopup": {
-      "Text": "zh_Thank you for submitting the survey"
+      "Text": "感谢您提交调查问卷"
     }
   },
   "Toolkit": {
     "ActivityActions": {
-      "Continue": "zh_Continue",
-      "Start": "zh_Start",
-      "View": "zh_View",
-      "Edit": "zh_Edit"
+      "Continue": "继续",
+      "Start": "开始",
+      "View": "查看",
+      "Edit": "编辑"
     },
     "Dashboard": {
       "Actions": "操作",
@@ -588,24 +466,24 @@
         "CancelButton": "取消",
         "Fields": {
           "ConfirmEmail": {
-            "Error": "zh_Please enter a valid email address",
-            "Placeholder": "zh_Email confirmation *"
+            "Error": "请输入有效的电子邮箱地址",
+            "Placeholder": "电子邮箱确认 *"
           },
           "Email": {
-            "Error": "zh_Please enter a valid email address",
+            "Error": "请输入有效的电子邮箱地址",
             "Placeholder": "电子邮箱地址："
           },
           "FirstName": {
-            "Error": "zh_First Name is required",
+            "Error": "名字必填。",
             "Placeholder": "名"
           },
           "LastName": {
-            "Error": "zh_Last Name is required",
+            "Error": "姓氏必填。",
             "Placeholder": "姓"
           }
         },
-        "LoadingError": "zh_We're sorry, but an error has occurred.",
-        "MatchEmailsError": "zh_Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "很抱歉，发生了错误。",
+        "MatchEmailsError": "两个电子邮箱地址字段都要填写，并且地址要匹配。",
         "Required": "",
         "SubmitButton": "加入电邮列表",
         "Text": "“向我们提供一个电子邮箱地址，我们将随时向您通报全球A-T成员数据平台的进展情况。",
@@ -614,12 +492,12 @@
       "SessionWillExpire": {
         "Continue": "继续",
         "SignOut": "登出",
-        "Text": "zh_To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "Title": "zh_Your session will time-out soon"
+        "Text": "您已经离开一段时间了，为保护您的隐私，系统会将您注销。点击“继续”保持登录状态。如果目前已完成操作，请点击“注销”。",
+        "Title": "您的会话即将超时"
       }
     },
     "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "zh_Your password reset link has expired."
+      "PASSWORD_RESET_LINK_EXPIRED": "您的密码重置链接已过期。"
     },
     "ErrorPage": {
       "DefaultText": {
@@ -630,18 +508,18 @@
       "Title": "很抱歉，但发生错误。 请稍后再试。"
     },
     "Password": {
-      "InputPlaceholder": "zh_Password",
-      "PasswordRequiredError": "zh_Password is required",
-      "PasswordWrongError": "zh_Incorrect password. Please try again.",
-      "Text": "zh_Please enter your password *",
-      "Title": "zh_Please enter the password"
+      "InputPlaceholder": "密码",
+      "PasswordRequiredError": "密码必填",
+      "PasswordWrongError": "密码不正确。请重试。",
+      "Text": "请输入您的密码 *",
+      "Title": "请输入密码"
     },
     "SessionExpired": {
-      "Text": "zh_You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+      "Text": "您离开一段时间了，为了安全起见，我们已将您注销。请再次登录以返回上一页。"
     },
     "StayInformed": {
       "Text": "感谢您加入全球A-T成员数据平台邮箱列表。 我们将通过您提供的电子邮箱地址通知您这一计划。",
-      "Title": "zh_Stay informed"
+      "Title": "随时了解最新信息"
     }
   },
   "WorkflowProgress": {
