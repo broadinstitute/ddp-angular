@@ -3,7 +3,8 @@
     "activateAccount": "Un message contenant les instructions d’activation de votre compte vous a été envoyé.",
     "checkEmail": "Vous avez presque fini ! Merci de consulter vos e-mails : ",
     "stillWaiting": "Vous ne l’avez toujours pas reçu ?",
-    "title": "Activation du compte"
+    "title": "Activation du compte",
+    "stillWaitingTooltip": "Attendez encore un peu. Parfois, la réception du message peut être retardée pour des raisons qui ne dépendent pas de nous. Vous pouvez également consulter le dossier des courriers indésirables de votre messagerie. L’e-mail peut s'y trouver."
   },
   "common": {
     "alreadyRegistered": "Déjà enregistré ? Connectez-vous ici",

@@ -435,7 +435,7 @@
   },
   "Survey": {
     "Self": "{{ firstName }} - processus d’inscription",
-    "NewParticipant": "New Participant - processus d’inscription",
+    "NewParticipant": "Nouveau processus d'inscription des participants",
     "ThankYouPopup": {
       "Text": "Merci d'avoir envoyé l'enquête"
     }

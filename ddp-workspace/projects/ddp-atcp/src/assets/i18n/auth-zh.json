@@ -3,7 +3,8 @@
     "activateAccount": "电子邮件已发送到那里，并附有指导信息以激活您的帐户。",
     "checkEmail": "您几乎完成了！ 请查看您的邮箱： ",
     "stillWaiting": "还在等您的电子邮件？",
-    "title": "帐号激活"
+    "title": "帐号激活",
+    "stillWaitingTooltip": "等一会儿 有时电子邮件的传递可能会被我们控制之外的进程推迟。 您还可以检查您的电子邮箱的垃圾文件夹。 电子邮件有时会在那里。"
   },
   "common": {
     "alreadyRegistered": "已经注册？ 在这里登录",

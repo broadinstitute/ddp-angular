@@ -3,7 +3,8 @@
     "activateAccount": "Na podany adres został wysłany e-mail z instrukcjami dotyczącymi aktywacji konta.",
     "checkEmail": "To już prawie wszystko! Sprawdź swoją skrzynkę pocztową: ",
     "stillWaiting": "Nadal nie otrzymałeś e-maila?",
-    "title": "Aktywacja konta"
+    "title": "Aktywacja konta",
+    "stillWaitingTooltip": "Poczekaj jeszcze chwilę. Dostarczanie e-maili niekiedy się opóźnia. Nie mamy na to wpływu. Sprawdź także wiadomości-śmieci w swojej poczcie. Niektóre e-maile tam trafiają."
   },
   "common": {
     "alreadyRegistered": "Już się zarejestrowałeś? Zaloguj się",

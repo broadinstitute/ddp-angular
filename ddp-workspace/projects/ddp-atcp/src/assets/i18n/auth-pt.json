@@ -3,7 +3,8 @@
     "activateAccount": "Um e-mail foi enviado para esse endereço com as instruções para você ativar sua conta.",
     "checkEmail": "Você está quase lá! Verifique seu e-mail: ",
     "stillWaiting": "Ainda está esperando o e-mail?",
-    "title": "Ativação da conta"
+    "title": "Ativação da conta",
+    "stillWaitingTooltip": "Aguarde mais um pouco. A entrega de e-mails às vezes atrasa em decorrência de processos além do nosso controle. Você pode também verificar a pasta de lixo eletrônico da sua conta de e-mail. A mensagem às vezes acaba lá."
   },
   "common": {
     "alreadyRegistered": "Já registrado? Registre-se aqui",

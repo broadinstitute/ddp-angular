@@ -3,7 +3,8 @@
     "activateAccount": "Ti abbiamo inviato un'e-mail con le istruzioni per attivare il tuo account.",
     "checkEmail": "Hai quasi finito! Controlla la tua casella di posta elettronica: ",
     "stillWaiting": "Non hai ancora ricevuto l'e-mail?",
-    "title": "Attivazione dell'account"
+    "title": "Attivazione dell'account",
+    "stillWaitingTooltip": "Aspetta un altro po'. Talvolta la ricezione dell'e-mail può essere ritardata da processi al di fuori del nostro controllo. Prova anche a controllare la cartella Posta indesiderata della tua casella di posta elettronica. A volte l'e-mail si trova lì."
   },
   "common": {
     "alreadyRegistered": "Già registrato/a? Accedi qui",

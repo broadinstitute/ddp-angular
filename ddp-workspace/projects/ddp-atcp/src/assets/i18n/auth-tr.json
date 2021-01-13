@@ -3,7 +3,8 @@
     "activateAccount": "Hesabınızı etkinleştirmek için talimatlar içeren bir e-posta gönderildi.",
     "checkEmail": "Neredeyse bitti! Lütfen e-postanızı kontrol edin: ",
     "stillWaiting": "Halen e-postayı mı bekliyorsunuz?",
-    "title": "Hesabı Etkinleştir"
+    "title": "Hesabı Etkinleştir",
+    "stillWaitingTooltip": "Biraz daha bekleyin. Bazen bir e-postanın iletilmesi elimizde olmayan nedenlerle gecikebilir. Ayrıca e-posta hesabınızın istenmeyen klasörünü kontrol edebilirsiniz. E-posta bazen oraya gider."
   },
   "common": {
     "alreadyRegistered": "Kayıt yaptınız mı? Burada Oturum Açın",

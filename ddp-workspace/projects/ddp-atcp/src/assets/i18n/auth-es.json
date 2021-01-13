@@ -3,7 +3,8 @@
     "activateAccount": "Le hemos enviado un correo electrónico con instrucciones para activar su cuenta.",
     "checkEmail": "¡Ya está casi listo! Controle su correo electrónico ",
     "stillWaiting": "¿Aún no recibió el correo electrónico?",
-    "title": "Activación de la cuenta"
+    "title": "Activación de la cuenta",
+    "stillWaitingTooltip": "Espere un poco más. A veces la entrega del correo electrónico tarda por procesos que no están bajo nuestro control. También puede controlar la carpeta Correo no deseado de su cuenta de correo electrónico. Muchas veces el correo termina allí."
   },
   "common": {
     "alreadyRegistered": "¿Ya está registrado? Inicie sesión aquí",

@@ -3,7 +3,8 @@
     "activateAccount": "An email has been sent there with the guidelines to activate your account.",
     "checkEmail": "You are almost done! Please check your email:",
     "stillWaiting": "Still waiting for your email?",
-    "title": "Account Activation"
+    "title": "Account Activation",
+    "stillWaitingTooltip": "Wait a little longer. Sometimes delivery of email can be delayed by processes outside our control. You can also check the junk folder of your email account. The email sometimes ends up there."
   },
   "common": {
     "alreadyRegistered": "Already registered? Sign In here",
