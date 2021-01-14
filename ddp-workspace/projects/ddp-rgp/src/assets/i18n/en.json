@@ -1005,6 +1005,11 @@
                 "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
                 "SignOut": "Sign Out",
                 "Continue": "Continue"
+            },
+            "LanguagePreferences": {
+                "Text": "Changing the language preference will also change the language used for e-mail communications.",
+                "CheckboxText": "Don't show this again",
+                "ButtonText": "OK"
             }
         }
     },
