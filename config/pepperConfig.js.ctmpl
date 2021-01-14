@@ -91,7 +91,6 @@ var DDP_ENV = {
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "2LLtNaf1eoiwyMiORtgrcOzL0aASMNC3";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
-    {{end}}
     {{else if eq $environment "test"}}
         DDP_ENV['auth0ClientId'] = "fixme-not-set";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
