@@ -228,15 +228,15 @@ var DDP_ENV = {
 {{if eq $study_guid "rgp"}}
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "Bal2RZDbCcWHV5W2QgenIWRRN31GGO52";
-        DDP_ENV['auth0Domain'] = "rgp-dev.auth0.com";
-        DDP_ENV['auth0Audience'] = "rgp-dev.auth0.com";
+        DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "cbI1pq5iRnb4jz4K2atiOmuwGuObaPn1";
-        DDP_ENV['auth0Domain'] = "prion-dev.auth0.com";
-        DDP_ENV['auth0Audience'] = "prion-dev.auth0.com";
+        DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}

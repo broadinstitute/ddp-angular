@@ -37,7 +37,6 @@ import { ForYourPhysicianComponent } from './components/for-your-physician/for-y
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
@@ -73,10 +72,11 @@ toolkitConfig.errorUrl = 'error';
 toolkitConfig.phone = '617-714-7395';
 toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
 toolkitConfig.facebookGroupId = 'RareGenomesProject';
+toolkitConfig.mailingListDialogUrl = 'updates';
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -130,7 +130,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DataSharingComponent,
     LGMDComponent,
     CraniofacialComponent,
-    ThankYouComponent,
     StayInformedComponent,
     ErrorComponent,
     TellUsYourStoryComponent,

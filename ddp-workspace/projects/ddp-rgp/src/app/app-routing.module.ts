@@ -12,7 +12,6 @@ import { ForYourPhysicianComponent } from './components/for-your-physician/for-y
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
@@ -27,6 +26,7 @@ import {
   Auth0CodeCallbackComponent,
   AuthGuard
 } from 'ddp-sdk';
+import { ActivityRedesignedComponent } from 'toolkit';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
 // The Angular compiler complains if you try to create a function that returns a generic version of
@@ -132,11 +132,6 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'thank-you',
-    component: ThankYouComponent,
-    canActivate: [IrbGuard]
-  },
-  {
     path: 'stay-informed',
     component: StayInformedComponent,
     canActivate: [IrbGuard]
@@ -147,19 +142,8 @@ const routes: Routes = [
     canActivate: [IrbGuard]
   },
   {
-    path: 'about-your-family',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
-    canActivate: [
-      AuthGuard,
-      IrbGuard
-    ],
-    data: {
-      activityGuid: '' // To be defined later
-    }
-  },
-  {
     path: 'activity/:id',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent,
     canActivate: [
       AuthGuard,
       IrbGuard
@@ -167,7 +151,7 @@ const routes: Routes = [
   },
   {
     path: 'activity-link/:id',
-    component: HomeComponent, // The route requires component here, so temporarily added HomeComponent, until we create ActivityComponent
+    component: ActivityRedesignedComponent,
     canActivate: [
       AuthGuard,
       IrbGuard

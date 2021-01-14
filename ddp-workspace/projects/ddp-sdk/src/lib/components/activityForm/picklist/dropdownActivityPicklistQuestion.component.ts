@@ -29,7 +29,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
 
     <ng-template #nativeSelect>
-        <select [value]="setNativeSelected()"
+        <select [(ngModel)]="nativeSelectedValue"
                 [disabled]="readonly"
                 (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
                 class="width">
@@ -70,6 +70,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
      */
     private exclusiveChosen = false;
+    private nativeSelectedValue = '';
 
     constructor(private translate: NGXTranslateService) {
         super(translate);
@@ -78,6 +79,9 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
 
     public ngOnInit(): void {
         this.exclusiveChosen = this.hasSelectedExclusiveOption();
+        if (this.block.selectMode !== PicklistSelectMode.MULTIPLE) {
+            this.nativeSelectedValue = this.findInitialNativeSelected();
+        }
     }
 
     public setMaterialSelected(): Array<string> | string {
@@ -97,7 +101,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
         return selected;
     }
 
-    public setNativeSelected(): string {
+    private findInitialNativeSelected(): string {
         let selected = '';
         if (this.block.answer) {
             if (this.block.answer.length) {
