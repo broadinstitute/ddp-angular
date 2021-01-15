@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "report": "webpack-bundle-analyzer"
   },
   "private": true,
   "husky": {
@@ -80,6 +81,7 @@
     "protractor": "7.0.0",
     "ts-node": "9.0.0",
     "tslint": "6.1.0",
-    "typescript": "4.0.2"
+    "typescript": "4.0.2",
+    "webpack-bundle-analyzer": "^4.3.0"
   }
 }
