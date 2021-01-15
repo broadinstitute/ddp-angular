@@ -35,8 +35,6 @@ export class StackdriverErrorReporterService extends ErrorHandler {
   }
 
   private getUserInfo(): string {
-    return this.sessionService.session ?
-      `userGuid: ${this.sessionService.session.userGuid}, browserInfo: ${window.navigator.userAgent}`
-      : 'unknown user';
+    return this.sessionService.session ? this.sessionService.session.userGuid : 'unknown user';
   }
 }
