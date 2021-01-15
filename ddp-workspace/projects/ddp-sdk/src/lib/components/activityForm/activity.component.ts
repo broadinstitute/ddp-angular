@@ -226,6 +226,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             (response) => {
                 this.updateVisibility((response as PatchAnswerResponse).blockVisibility);
                 this.updateServerValidationMessages(response);
+                this.communicationErrorOccurred = false;
             },
             (error) => {
                 this.logger.logError(this.LOG_SOURCE,
@@ -444,10 +445,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private updateServerValidationMessages(response: PatchAnswerResponse): void {
         const questionBlocks: AbstractActivityQuestionBlock[] = this.model.sections.reduce((allBlocks, section) =>
             allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
+
         // We should clear server-side validations each time to prevent messages accumulating
         questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
+
         if (response.validationFailures && response.validationFailures.length !== 0) {
             const answerStableIds = response.answers.map(answer => answer.stableId);
+
             response.validationFailures.forEach(failure => {
                 // First we try to see if we can find the question that provided the answer that triggered the failure
                 const questionsForResponse = questionBlocks

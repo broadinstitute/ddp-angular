@@ -16,6 +16,8 @@ const ERROR_MSG_TRANS_KEY_PREFIX = 'SDK.MailAddress.Error.';
 
 @Injectable()
 export class AddressService extends UserServiceAgent<Address> {
+    private readonly BASE_URL = '/profile/address';
+
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
@@ -27,7 +29,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public verifyAddress(address: Address): Observable<AddressVerificationResponse> {
-        return this.postObservable('/profile/address/verify', {...address, studyGuid: this.configuration.studyGuid}, null, true).pipe(
+        return this.postObservable(`${this.BASE_URL}/verify`, {...address, studyGuid: this.configuration.studyGuid}, null, true).pipe(
             map((data: any) => {
                 return new AddressVerificationResponse(data.body);
             }),
@@ -46,7 +48,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public saveTempAddress(address: Address, activityInstanceGuid: string): Observable<any> {
-        return this.putObservable('/profile/address/temp/' + activityInstanceGuid, address, {}, true).pipe(
+        return this.putObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`, address, {}, true).pipe(
             catchError((error) => {
                 return throwError(error.error);
             })
@@ -54,7 +56,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public getTempAddress(activityInstanceGuid: string): Observable<Address | null> {
-        return this.getObservable('/profile/address/temp/' + activityInstanceGuid).pipe(
+        return this.getObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`).pipe(
             map((data: any) => {
                 if (data) {
                     return new Address(data);
@@ -66,12 +68,12 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public deleteTempAddress(activityInstanceGuid: string): Observable<any> {
-        return this.deleteObservable('/profile/address/temp/' + activityInstanceGuid, null, true);
+        return this.deleteObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`, null, true);
     }
 
     public saveAddress(address: Address, strict = true): Observable<Address | null> {
         if (!address.guid || address.guid.trim().length === 0) {
-            const path = '/profile/address' + (strict ? '' : '?strict=false');
+            const path = this.BASE_URL + (strict ? '' : '?strict=false');
             return this.postObservable(path, address, null, true).pipe(
                 map(
                     (data: any) => {
@@ -86,7 +88,7 @@ export class AddressService extends UserServiceAgent<Address> {
                 })
             );
         } else {
-            const path = '/profile/address/' + address.guid + (strict ? '' : '?strict=false');
+            const path = `${this.BASE_URL}/${address.guid}` + (strict ? '' : '?strict=false');
             return this.putObservable(path, address, {}, true).pipe(
                 map(() => {
                     return null;
@@ -100,7 +102,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public findDefaultAddress(): Observable<Address | null> {
-        return this.getObservable('/profile/address/default').pipe(
+        return this.getObservable(`${this.BASE_URL}/default`).pipe(
             map((data: any) => {
                 if (data) {
                     return new Address(data);
@@ -113,6 +115,6 @@ export class AddressService extends UserServiceAgent<Address> {
 
     public deleteAddress(addressOrGuid: Address | string): Observable<any> {
         const guid = addressOrGuid instanceof Address ? addressOrGuid.guid : addressOrGuid as string;
-        return this.deleteObservable('/profile/address/' + guid, null, true);
+        return this.deleteObservable(`${this.BASE_URL}/${guid}`, null, true);
     }
 }
