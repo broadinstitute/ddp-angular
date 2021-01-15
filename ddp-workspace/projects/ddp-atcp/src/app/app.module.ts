@@ -1,5 +1,5 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
-import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,8 +18,7 @@ import {
   AnalyticsEventsService,
   ConfigurationService,
   DdpModule,
-  LoggingService,
-  StackdriverErrorReporterService
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -182,10 +181,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: StackdriverErrorReporterService
     },
     LanguagesProvider,
     UserPreferencesServiceAgent

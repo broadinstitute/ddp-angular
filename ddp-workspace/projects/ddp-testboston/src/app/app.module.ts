@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { Router, Scroll, Event } from '@angular/router';
@@ -20,8 +20,7 @@ import {
     AnalyticsEvent,
     QuestionType,
     LoggingService,
-    LanguageService,
-    StackdriverErrorReporterService
+    LanguageService
 } from 'ddp-sdk';
 
 import {
@@ -198,10 +197,6 @@ export function languageFactory(language: LanguageService): string {
             deps: [
                 LanguageService
             ]
-        },
-        {
-            provide: ErrorHandler,
-            useClass: StackdriverErrorReporterService
         }
     ],
     bootstrap: [AppComponent]

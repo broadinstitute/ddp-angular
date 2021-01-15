@@ -1,4 +1,4 @@
-import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,8 +10,7 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService,
-  StackdriverErrorReporterService
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -135,10 +134,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [AppComponent]

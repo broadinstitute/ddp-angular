@@ -1,5 +1,5 @@
 // Angular imports
-import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,13 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 
 // SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService, StackdriverErrorReporterService } from 'ddp-sdk';
+import {
+  AnalyticsEvent,
+  AnalyticsEventsService,
+  ConfigurationService,
+  DdpModule,
+  LoggingService
+} from 'ddp-sdk';
 
 // Toolkit imports
 import { ToolkitModule } from 'toolkit';
@@ -273,10 +279,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [PrionAppComponent]

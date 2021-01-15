@@ -1,4 +1,4 @@
-import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,8 +10,7 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService,
-  StackdriverErrorReporterService
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -55,7 +54,7 @@ toolkitConfig.internationalPatientsUrl = 'international-patients';
 toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-293-5029';
 toolkitConfig.infoEmail = 'info@mpcproject.org';
-toolkitConfig.dataEmail = 'data@mpcproject.org'
+toolkitConfig.dataEmail = 'data@mpcproject.org';
 toolkitConfig.twitterAccountId = 'PrCaProject';
 toolkitConfig.facebookGroupId = 'Prostate-Cancer-Project-1828647940721720';
 toolkitConfig.cBioPortalLink = 'http://www.cbioportal.org/study/summary?id=prad_mpcproject_2018';
@@ -131,10 +130,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    {
-      provide: ErrorHandler,
-      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [AppComponent]

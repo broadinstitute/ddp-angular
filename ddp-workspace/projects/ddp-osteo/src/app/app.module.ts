@@ -1,4 +1,4 @@
-import { NgModule, Injector, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,8 +12,7 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService,
-  StackdriverErrorReporterService
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -135,7 +134,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ToolkitModule,
     MatExpansionModule,
     MatIconModule,
-    HammerModule 
+    HammerModule
   ],
   declarations: [
     WelcomeComponent,
@@ -169,10 +168,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
-    },
-    {
-      provide: ErrorHandler,
-      useClass: StackdriverErrorReporterService
     }
   ],
   bootstrap: [AppComponent]
