@@ -16,7 +16,8 @@ export class StackdriverErrorReporterService extends ErrorHandler {
     this.errorHandler = new StackdriverErrorReporter();
     this.errorHandler.start({
       key: this.config.errorReportingApiKey,
-      projectId: this.config.projectGcpId
+      projectId: this.config.projectGcpId,
+      service: this.config.studyGuid
     });
   }
 
