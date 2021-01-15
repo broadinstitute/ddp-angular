@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceAgent } from './userServiceAgent.service';
 import { ConfigurationService } from '../configuration.service';
-import { SessionMementoService } from './../sessionMemento.service';
+import { SessionMementoService } from '../sessionMemento.service';
 import { LoggingService } from '../logging.service';
 import { ActivityResponse } from '../../models/activity/activityResponse';
 import { Observable } from 'rxjs';
@@ -18,22 +18,31 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
     }
 
     public byActivityCode(state: string, activityCode: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&activityCode=${activityCode}`, null);
+        const baseUrl = this.getBaseUrl();
+        return this.getObservable(`${baseUrl}?from=${state}&activityCode=${activityCode}`, null);
     }
 
     public byInstanceGuid(state: string, instanceGuid: string): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=${state}&instanceGuid=${instanceGuid}`, null);
+        const baseUrl = this.getBaseUrl();
+        return this.getObservable(`${baseUrl}?from=${state}&instanceGuid=${instanceGuid}`, null);
     }
 
     public getNext(): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=RETURN_USER`, null);
+        const baseUrl = this.getBaseUrl();
+        return this.getObservable(`${baseUrl}?from=RETURN_USER`, null);
     }
 
     public getStart(): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=START`, null);
+        const baseUrl = this.getBaseUrl();
+        return this.getObservable(`${baseUrl}?from=START`, null);
     }
 
     public fromParticipantList(): Observable<ActivityResponse | null> {
-        return this.getObservable(`/studies/${this.configuration.studyGuid}/workflow?from=PARTICIPANT_LIST`, null);
+        const baseUrl = this.getBaseUrl();
+        return this.getObservable(`${baseUrl}?from=PARTICIPANT_LIST`, null);
+    }
+
+    private getBaseUrl(): string {
+        return `/studies/${this.configuration.studyGuid}/workflow`;
     }
 }

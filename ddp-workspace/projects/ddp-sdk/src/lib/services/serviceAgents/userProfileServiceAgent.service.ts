@@ -11,6 +11,8 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
+    private readonly BASE_URL = '/profile';
+
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
@@ -20,7 +22,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
     }
 
     public get profile(): Observable<UserProfileDecorator> {
-        return this.getObservable('/profile', {}, [404]).pipe(
+        return this.getObservable(this.BASE_URL, {}, [404]).pipe(
             map(x => {
                 if (x === null) {
                     return null;
@@ -41,9 +43,9 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
             profile.preferredLanguage = 'en';
         }
         if (isNew) {
-            return this.postObservable('/profile', JSON.stringify(profile));
+            return this.postObservable(this.BASE_URL, JSON.stringify(profile));
         } else {
-            return this.patchObservable('/profile', JSON.stringify(profile));
+            return this.patchObservable(this.BASE_URL, JSON.stringify(profile));
         }
     }
 
@@ -55,10 +57,10 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
                 profileChanges[key] = profile[key];
             }
         }
-        return this.patchObservable('/profile', JSON.stringify(profileChanges));
+        return this.patchObservable(this.BASE_URL, JSON.stringify(profileChanges));
     }
 
     public createProfile(profile: UserProfile): Observable<any> {
-        return this.postObservable('/profile', JSON.stringify(profile));
+        return this.postObservable(this.BASE_URL, JSON.stringify(profile));
     }
 }
