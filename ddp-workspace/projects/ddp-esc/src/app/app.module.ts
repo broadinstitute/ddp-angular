@@ -54,7 +54,7 @@ toolkitConfig.internationalPatientsUrl = 'international-patients';
 toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-229-6991';
 toolkitConfig.infoEmail = 'info@escproject.org';
-toolkitConfig.dataEmail = 'data@escproject.org'
+toolkitConfig.dataEmail = 'data@escproject.org';
 toolkitConfig.twitterAccountId = 'ecscproject';
 toolkitConfig.facebookGroupId = 'ecscproject';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
@@ -77,6 +77,7 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export function translateFactory(translate: TranslateService, injector: Injector) {
   return () => new Promise<any>((resolve: any) => {
