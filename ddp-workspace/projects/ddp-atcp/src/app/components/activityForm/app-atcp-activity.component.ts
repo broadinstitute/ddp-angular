@@ -9,18 +9,20 @@ import {
   Renderer2
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { delay } from 'rxjs/operators';
+
 import {
   AnalyticsEventsService,
   SubmissionManager,
   SubmitAnnouncementService,
   WindowRef,
-  LoggingService
+  LoggingService,
 } from 'ddp-sdk';
+
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { delay } from 'rxjs/operators';
 import * as Routes from '../../router-resources';
 
 @Component({
@@ -41,16 +43,17 @@ import * as Routes from '../../router-resources';
                      [ngClass]="{'content_download' : model.activityCode === ActivityCodes.CONSENT || ActivityCodes.ASSENT}">
                     <h1 class="activity-header" [innerHTML]="model.title"></h1>
                     <a *ngIf="model.activityCode === ActivityCodes.CONSENT"
-                       download="Research_Consent_Form_EN.pdf"
+                       [download]="consentFileName"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
-                       href="assets/pdf/A-T_Research_Consent_Form_12_20.pdf">
+                       [href]="consentLink"
+                    >
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Consent.Download' | translate }}
                     </a>
                     <a *ngIf="model.activityCode === ActivityCodes.ASSENT"
-                       download="Research_Assent_Form_EN.pdf"
+                       [download]="assentFileName"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral ButtonBordered--assent-kids"
-                       href="assets/pdf/A-T_Research_Assent_Form_12_20.pdf">
+                       [href]="assentLink">
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Assent.Download' | translate }}
                     </a>
@@ -346,6 +349,7 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
   public ActivityCodes = ActivityCodes;
 
   private matDialog: MatDialog;
+  private readonly SUPPORTED_CONSENT_ASSENT_LANGUAGES = ['en', 'de', 'es', 'fr', 'it', 'pl', 'pt', 'ru'];
 
   constructor(
       logger: LoggingService,
@@ -379,6 +383,28 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
 
   public onDownloadClick(): void {
     this.router.navigateByUrl(Routes.ActivityPrint.replace(':instanceGuid', this.activityGuid));
+  }
+
+  public get fileLanguageCode(): string {
+    const currentLang = this.translateService.currentLang;
+
+    return this.SUPPORTED_CONSENT_ASSENT_LANGUAGES.includes(currentLang) ? currentLang : 'en';
+  }
+
+  public get consentFileName(): string {
+    return `A-T_Research_Consent_Form.${this.fileLanguageCode.toUpperCase()}.pdf`;
+  }
+
+  public get consentLink(): string {
+    return `assets/pdf/${this.consentFileName}`;
+  }
+
+  public get assentFileName(): string {
+    return `A-T_Research_Assent_Form.${this.fileLanguageCode.toUpperCase()}.pdf`;
+  }
+
+  public get assentLink(): string {
+    return `assets/pdf/${this.assentFileName}`;
   }
 
   private showThankYouPopup(): void {
