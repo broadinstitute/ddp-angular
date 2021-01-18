@@ -89,6 +89,12 @@
     },
     {
       "path": "./projects/ddp-testboston/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-esc/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-esc/tsconfig.spec.json"
     }
   ]
 }
