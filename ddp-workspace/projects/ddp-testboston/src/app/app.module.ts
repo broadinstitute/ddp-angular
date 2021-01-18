@@ -113,6 +113,7 @@ sdkConfig.addressEnforceRequiredFields = true;
 sdkConfig.scrollToErrorOffset = 130;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
