@@ -61,7 +61,7 @@ export class ConfigurationService {
     scrollToErrorOffset = 100;
     defaultLanguageCode: string;
     rtlLanguages: string[] = [];
-    // The global flag indicates whether we need report JS errors to Google Cloud Error Report API
-    // It can be overridden for any single app (in proper app.module.ts)
-    doGcpErrorReporting = true;
+    // The flag indicates whether we need report JS errors to Google Cloud Error Report API
+    // It set (and can be overridden for any single app) in pepperConfig
+    doGcpErrorReporting: boolean;
 }
