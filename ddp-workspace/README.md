@@ -24,6 +24,7 @@ DDP apps:
 ng serve ddp-angio
 ng serve ddp-atcp
 ng serve ddp-brain
+ng serve ddp-esc
 ng serve ddp-mbc
 ng serve ddp-mpc
 ng serve ddp-osteo
