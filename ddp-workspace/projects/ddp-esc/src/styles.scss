@@ -52,27 +52,25 @@ p {
 a {
     text-decoration: none !important;
     outline: 0;
-}
 
-a:hover,
-a:active,
-a:focus {
-    outline: 0;
-    color: mat-color($app-theme, 700);
+    &:hover, &:active, &:focus {
+        outline: 0;
+        color: mat-color($app-theme, 700);
+    }
 }
 
 .row {
     display: block;
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .intro-row {
     margin-top: 150px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 // App Header
@@ -87,6 +85,12 @@ a:focus {
     display: flex;
     justify-content: space-between;
     background-color: mat-color($app-theme, 50);
+
+    &--scrolled {
+        color: mat-color($app-theme, 400);
+        background-color: mat-color($app-theme, 200);
+        box-shadow: 0 1px 8px mat-color($app-theme, 300);
+    }
 }
 
 .HeaderInfo {
@@ -94,13 +98,13 @@ a:focus {
     display: inline-block;
     margin: 0 0 0 20px;
 
+    &--scrolled {
+        margin: 0;
+    }
+
     a {
         color: mat-color($app-theme, 600);
     }
-}
-
-.HeaderInfo--scrolled {
-    margin: 0;
 }
 
 .Header-navItemLink {
@@ -110,17 +114,13 @@ a:focus {
     font-weight: 300;
 }
 
-.Header--scrolled {
-    color: mat-color($app-theme, 400);
-}
-
 .HeaderLink {
     transition: color 0.3s ease;
     color: mat-color($app-theme, 100);
-}
 
-.HeaderLink:hover {
-    color: mat-color($app-theme, 700);
+    &:hover {
+        color: mat-color($app-theme, 700);
+    }
 }
 
 .PageHeader-activity-subtitle {
@@ -129,11 +129,6 @@ a:focus {
     line-height: 1.6em;
     color: mat-color($app-theme, 100);
     margin: 5px 0 5px 0;
-}
-
-.Header--scrolled {
-    background-color: mat-color($app-theme, 200);
-    box-shadow: 0 1px 8px mat-color($app-theme, 300);
 }
 
 .Header-logoImg {
@@ -147,14 +142,14 @@ a:focus {
     align-items: baseline;
     display: flex;
     align-self: flex-start;
-}
 
-.Header-logo--small {
-    margin: 0;
-}
+    &--small {
+        margin: 0;
+    }
 
-.Header-logo--hide {
-    display: none;
+    &--hide {
+        display: none;
+    }
 }
 
 .Header-link {
@@ -168,27 +163,27 @@ a:focus {
     font-size: 18px;
     font-weight: 300;
     line-height: 19px;
-}
 
-.Header-logoText--Scrolled {
-    color: mat-color($app-theme, 400);
+    &--Scrolled {
+        color: mat-color($app-theme, 400);
+    }
 }
 
 .Header-nav {
     margin: 0px 50px 0 0;
-}
 
-.Header-nav--small {
-    margin: 0;
+    &--small {
+       margin: 0;
+    }
 }
 
 .Header-navList {
     display: flex;
     margin: 0px;
-}
 
-.Header-navList--small {
-    padding: 0;
+    &--small {
+        padding: 0;
+    }
 }
 
 .Header-navItem {
@@ -211,26 +206,26 @@ a:focus {
     cursor: pointer;
     outline: 0;
     transition: all 0.3s ease;
-}
 
-.CountButton:hover {
-    color: mat-color($app-theme, 700);
-    border: 2px solid mat-color($app-theme, 700);
-    transition: all 0.3s ease;
-}
+    &:hover {
+        color: mat-color($app-theme, 700);
+        border: 2px solid mat-color($app-theme, 700);
+        transition: all 0.3s ease;
+    }
 
-.CountButton--Scrolled {
-    background-color: mat-color($app-theme, 2200);
-    border: none;
-    margin: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    transition: box-shadow 0.3s ease;
-}
+    &--Scrolled {
+        background-color: mat-color($app-theme, 2200);
+        border: none;
+        margin: 2px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        transition: box-shadow 0.3s ease;
 
-.CountButton--Scrolled:hover {
-    color: mat-color($app-theme, 100);
-    border: none;
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+        &:hover {
+            color: mat-color($app-theme, 100);
+            border: none;
+            box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+        }
+    }
 }
 
 .MenuButton {
@@ -257,20 +252,20 @@ a:focus {
     color: mat-color($app-theme, 100);
     text-align: left;
     transition: all 0.3s ease;
-}
 
-.SimpleButton--Scrolled {
-    color: mat-color($app-theme, 2200);
-}
+    &--Scrolled {
+       color: mat-color($app-theme, 2200);
+    }
 
-.SimpleButton:hover {
-    color: mat-color($app-theme, 700);
-    text-decoration: none;
-}
+    &:hover {
+        color: mat-color($app-theme, 700);
+        text-decoration: none;
+    }
 
-.SimpleButton:active {
-    text-decoration: none;
-    color: mat-color($app-theme, 600);
+    &:active {
+        text-decoration: none;
+        color: mat-color($app-theme, 600);
+    }
 }
 
 .LastUpdatedText {
@@ -348,10 +343,10 @@ a:focus {
     line-height: 1.6em;
     text-decoration: none;
     padding-left: 20px;
-}
 
-.Footer-navItem--first {
-    padding: 0;
+    &--first {
+        padding: 0;
+    }
 }
 
 .Footer-navItemLink {
@@ -359,11 +354,11 @@ a:focus {
     cursor: pointer;
     color: mat-color($app-theme, 500);
     font-weight: 300;
-}
 
-.Footer-navItemLink:hover {
-    color: mat-color($app-theme, 2200);
-    text-decoration: none;
+    &:hover {
+        color: mat-color($app-theme, 2200);
+        text-decoration: none;
+    }
 }
 
 .Footer-contact {
@@ -379,10 +374,10 @@ a:focus {
     font-weight: 300;
     list-style-type: none;
     padding: 0;
-}
 
-.Footer-contactList--right {
-    padding: 0 0 0 50px;
+    &--right {
+        padding: 0 0 0 50px;
+    }
 }
 
 .Footer-contactLink {
@@ -390,11 +385,11 @@ a:focus {
     cursor: pointer;
     color: mat-color($app-theme, 500);
     font-weight: 300;
-}
 
-.Footer-contactLink:hover {
-    color: mat-color($app-theme, 2200);
-    text-decoration: none;
+    &:hover {
+      color: mat-color($app-theme, 2200);
+      text-decoration: none;
+    }
 }
 
 .Footer-contactLogos {
@@ -410,6 +405,9 @@ a:focus {
         margin: 30px 0 0 25px;
     }
 }
+
+//************************
+
 
 //   Page header
 .MainContainer {
@@ -454,6 +452,15 @@ a:focus {
     font-weight: 300;
     font-size: 2.4rem;
     line-height: 2.7rem;
+
+    small {
+        color: mat-color($app-theme, 100);
+        font-style: italic;
+        font-weight: 300;
+        font-size: 55%;
+        display: block;
+        line-height: 1.5;
+    }
 }
 
 .PageHeader-subTitle {
@@ -464,32 +471,26 @@ a:focus {
     color: mat-color($app-theme, 600);
 }
 
-.PageHeader-title small {
-    color: mat-color($app-theme, 100);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 55%;
-    display: block;
-    line-height: 1.5;
-}
 
-.PageHeader-image .PageHeader-imageSpan {
-    display: inline-block;
-    width: 100%;
-    font-size: 0;
-    line-height: 0;
-    vertical-align: middle;
-    background-size: 100%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-image: url(/assets/images/about-page-broad-hero.jpg);
-    position: relative;
-}
+.PageHeader-image {
+    .PageHeader-imageSpan {
+        display: inline-block;
+        width: 100%;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: middle;
+        background-size: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-image: url(/assets/images/about-page-broad-hero.jpg);
+        position: relative;
 
-.PageHeader-image .PageHeader-imageSpan .PageHeader-imageInner {
-    padding-top: 42%;
-    display: block;
-    height: 0;
+        .PageHeader-imageInner {
+            padding-top: 42%;
+            display: block;
+            height: 0;
+        }
+    }
 }
 
 .PageHeader-box {
@@ -559,11 +560,11 @@ a:focus {
 .partner-logo {
     max-width: 250px;
     width: 100%;
-}
 
-.partner-logo--single {
-    max-width: 500px;
-    width: 100%;
+    &--single {
+        max-width: 500px;
+        width: 100%;
+    }
 }
 
 .Wrapper {
@@ -776,6 +777,9 @@ a:focus {
     }
 }
 
+//****************************
+
+
 // Page
 .PageContent {
     padding: 50px 0 150px 0;
@@ -833,11 +837,10 @@ ul {
     color: mat-color($app-theme, 2200) !important;
     cursor: pointer;
     transition: all 0.3s ease;
-}
 
-.Link:hover,
-.Link:focus {
-    color: mat-color($app-theme, 700) !important;
+    &:hover, &:focus {
+      color: mat-color($app-theme, 700) !important;
+    }
 }
 
 .PageContent-title {
@@ -889,30 +892,39 @@ ul {
     transition: all 0.3s ease-out;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     background-color: mat-color($app-theme, 2200) !important;
-}
 
-.ButtonFilled:focus {
-    outline: none;
-}
+    &:focus {
+        outline: none;
+    }
 
-.ButtonFilled--white {
-    background-color: mat-color($app-theme, 100) !important;
-    color: mat-color($app-theme, 1500) !important;
-    font-size: 0.95rem;
-    margin-top: 20px;
-}
+    &:hover {
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+        color: mat-color($app-theme, 100);
+    }
 
-.ButtonFilled--white:hover {
-    background-color: mat-color($app-theme, 100) !important;
-}
+    &:visited {
+        color: mat-color($app-theme, 100);
+    }
 
-.ButtonFilled--neutral {
-    background-color: mat-color($app-theme, 300) !important;
-    margin-right: 0px;
-}
+    &--white {
+        background-color: mat-color($app-theme, 100) !important;
+        color: mat-color($app-theme, 1500) !important;
+        font-size: 0.95rem;
+        margin-top: 20px;
 
-.ButtonFilled--neutral--margin {
-    margin-right: 20px;
+        &:hover {
+           background-color: mat-color($app-theme, 100) !important;
+        }
+    }
+
+    &--neutral {
+        background-color: mat-color($app-theme, 300) !important;
+        margin-right: 0px;
+
+        &--margin {
+            margin-right: 20px;
+        }
+    }
 }
 
 .Button--rect {
@@ -933,16 +945,12 @@ ul {
     cursor: not-allowed;
 }
 
-.ButtonFilled:hover,
 .ButtonFloating:hover,
 .Button--rect:hover {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
-.ButtonFilled:hover,
-.ButtonFilled:visited {
-    color: mat-color($app-theme, 100);
-}
+//***********************
 
 // welcome
 .Intro {
@@ -953,63 +961,73 @@ ul {
     display: inline-block;
 }
 
-.Intro-image .Intro-imageSpan {
-    display: inline-block;
-    width: 100%;
-    font-size: 0;
-    line-height: 0;
-    vertical-align: middle;
-    background-size: 100%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-image: url(/assets/images/home-image-lg.jpg);
-    position: relative;
+.Intro-image {
+    .Intro-imageSpan {
+        display: inline-block;
+        width: 100%;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: middle;
+        background-size: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-image: url(/assets/images/home-image-lg.jpg);
+        position: relative;
+
+        .Intro-imageInner {
+            padding-top: 50%;
+            display: block;
+            height: 0;
+        }
+    }
 }
 
 @media only screen and (min-width: 1280px) {
-    .Intro-image .Intro-imageSpan {
-        background-image: url(/assets/images/home-image-lg.jpg);
-    }
+    .Intro-image {
+        .Intro-imageSpan {
+            background-image: url(/assets/images/home-image-lg.jpg);
 
-    .Intro-image .Intro-imageSpan .Intro-imageInner {
-        padding-top: 51% !important;
+            .Intro-imageInner {
+                padding-top: 51% !important;
+            }
+        }
     }
 }
 
 @media only screen and (max-width: 1280px) {
-    .Intro-image .Intro-imageSpan {
-        background-image: url(/assets/images/home-image-md.jpg);
-    }
+    .Intro-image {
+        .Intro-imageSpan {
+            background-image: url(/assets/images/home-image-md.jpg);
 
-    .Intro-image .Intro-imageSpan .Intro-imageInner {
-        padding-top: 70% !important;
+            .Intro-imageInner {
+                padding-top: 70% !important;
+            }
+        }
     }
 }
 
 @media only screen and (max-width: 800px) {
-    .Intro-image .Intro-imageSpan {
-        background-image: url(/assets/images/home-image-sm.jpg);
-    }
+    .Intro-image {
+        .Intro-imageSpan {
+            background-image: url(/assets/images/home-image-sm.jpg);
 
-    .Intro-image .Intro-imageSpan .Intro-imageInner {
-        padding-top: 68% !important;
+            .Intro-imageInner {
+                padding-top: 68% !important;
+            }
+        }
     }
 }
 
 @media only screen and (max-width: 700px) {
-    .Intro-image .Intro-imageSpan {
-        background-image: url(/assets/images/home-image-xs.jpg);
-    }
+    .Intro-image {
+        .Intro-imageSpan {
+            background-image: url(/assets/images/home-image-xs.jpg);
 
-    .Intro-image .Intro-imageSpan .Intro-imageInner {
-        padding-top: 175% !important;
+            .Intro-imageInner {
+                padding-top: 175% !important;
+            }
+        }
     }
-}
-
-.Intro-image .Intro-imageSpan .Intro-imageInner {
-    padding-top: 50%;
-    display: block;
-    height: 0;
 }
 
 .Intro-arrow {
@@ -1040,6 +1058,11 @@ ul {
 
 .Message--intro {
     margin-top: 150px;
+
+    .Message-title,
+    .Message-text {
+        color: mat-color($app-theme, 1000);
+    }
 }
 
 @media only screen and (max-width: 1500px) {
@@ -1070,37 +1093,31 @@ ul {
     }
 }
 
-.Message--intro .Message-title,
-.Message--intro .Message-text {
-    color: mat-color($app-theme, 1000);
-}
-
 .Separator {
     width: 1px;
     background: mat-color($app-theme, 2100);
     margin: 50px auto;
     position: relative;
     height: 125px;
-}
 
-.Separator:before,
-.Separator:after {
-    content: ' ';
-    display: block;
-    width: 7px;
-    height: 7px;
-    border-radius: 100%;
-    position: absolute;
-    left: -3px;
-    background: mat-color($app-theme, 2100);
-}
+    &:before, &:after {
+        content: ' ';
+        display: block;
+        width: 7px;
+        height: 7px;
+        border-radius: 100%;
+        position: absolute;
+        left: -3px;
+        background: mat-color($app-theme, 2100);
+    }
 
-.Separator:before {
-    top: -3px;
-}
+    &:before {
+        top: -3px;
+    }
 
-.Separator:after {
-    bottom: -3px;
+    &:after {
+        bottom: -3px;
+    }
 }
 
 .DNAStrand {
@@ -1165,22 +1182,26 @@ ul {
     font-weight: 700;
     border: 2px solid;
     transition: color 0.3s ease, border-color 0.3s ease;
-}
 
-.ButtonBordered,
-.ButtonBordered:visited {
     color: mat-color($app-theme, 2200) !important;
     border-color: mat-color($app-theme, 2200) !important;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     transition: all 0.3s ease-out;
-}
 
-.ButtonBordered:hover {
-    text-decoration: none;
-    background-color: transparent;
-    color: mat-color($app-theme, 700) !important;
-    border-color: mat-color($app-theme, 700) !important;
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+    &:visited {
+        color: mat-color($app-theme, 2200) !important;
+        border-color: mat-color($app-theme, 2200) !important;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+        transition: all 0.3s ease-out;
+    }
+
+    &:hover {
+        text-decoration: none;
+        background-color: transparent;
+        color: mat-color($app-theme, 700) !important;
+        border-color: mat-color($app-theme, 700) !important;
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+    }
 }
 
 .Button--countMeIn {
@@ -1208,28 +1229,26 @@ ul {
     padding: 0 !important;
     text-align: left !important;
     font-weight: 300 !important;
+
+    li {
+        padding: 0 0 0 25px !important;
+        font-size: 1.1rem !important;
+        font-weight: 300 !important;
+        margin: 35px 0 20px 0 !important;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            display: inline-block;
+            content: "";
+            height: 100%;
+        }
+    }
 }
 
 .PageContent-ol {
     list-style-type: decimal;
     list-style-position: outside;
-}
-
-.PageContent-ol li,
-.PageContent-ul li {
-    padding: 0 0 0 25px !important;
-    font-size: 1.1rem !important;
-    font-weight: 300 !important;
-    margin: 35px 0 20px 0 !important;
-    position: relative;
-}
-
-.PageContent-ol li::before,
-.PageContent-ul li::before {
-    position: absolute;
-    display: inline-block;
-    content: "";
-    height: 100%;
 }
 
 .NoListStyle {
@@ -1265,10 +1284,6 @@ ul {
     margin-bottom: 15px;
 }
 
-.ErrorMessage a {
-    text-decoration: underline !important;
-}
-
 .ErrorMessage {
     border-top: 2px solid mat-color($app-theme, 1200);
     margin-top: 30px;
@@ -1276,10 +1291,10 @@ ul {
     color: mat-color($app-theme, 1200);
     font-weight: 300;
     padding: 15px 0;
-}
 
-.ErrorMessage a {
-    text-decoration: underline !important;
+    a {
+        text-decoration: underline !important;
+    }
 }
 
 .ddp-activity-validation {
@@ -1359,6 +1374,22 @@ ul {
     margin: 40px 0 30px 0;
     text-align: center;
     cursor: pointer;
+
+    &.completed {
+        .WizardSteps-background {
+            background: mat-color($app-theme, 1400);
+        }
+
+        &.active {
+            .WizardSteps-background {
+                background: mat-color($app-theme, 600);
+            }
+
+            .WizardSteps-title {
+                color: mat-color($app-theme, 100);
+            }
+        }
+    }
 }
 
 .WizardSteps-background {
@@ -1384,18 +1415,6 @@ ul {
     height: 85px;
     background-color: mat-color($app-theme, 100);
     box-shadow: 0 0 5px mat-color($app-theme, 800);
-}
-
-.WizardSteps.completed .WizardSteps-background {
-    background: mat-color($app-theme, 1400);
-}
-
-.WizardSteps.active.completed .WizardSteps-background {
-    background: mat-color($app-theme, 600);
-}
-
-.WizardSteps.active.completed .WizardSteps-title {
-    color: mat-color($app-theme, 100);
 }
 
 .Loader {
@@ -1500,12 +1519,12 @@ ul {
     font-size: 1.2rem;
     line-height: 1.8rem;
     margin: 2rem 0 1rem 0;
-}
 
-.PageContent-subtitle.council {
-    margin-top: 0;
-    font-size: 1.4rem;
-    line-height: 1.4rem;
+    &.council {
+        margin-top: 0;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+    }
 }
 
 .PageContent-subtitle-dashboard {
@@ -1573,15 +1592,15 @@ select {
     border-radius: 2px;
     height: 3rem;
     transition: all .3s;
-}
 
-select:focus {
-    color: mat-color($app-theme, 600);
-    outline: none;
-}
+    &:focus {
+        color: mat-color($app-theme, 600);
+        outline: none;
+    }
 
-select option {
-    color: black;
+    option {
+        color: black;
+    }
 }
 
 select:-webkit-autofill {
@@ -1607,9 +1626,7 @@ select:-webkit-autofill {
     align-items: center;
     flex-direction: column;
     padding: 5px;
-}
 
-.warning-message {
     .warning-message-text {
         color: mat-color($app-theme, 1700);
         font-size: 1.1rem;
@@ -1654,14 +1671,14 @@ select:-webkit-autofill {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
-}
 
-.youtube-video__iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    &__iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 // .ddp-list {
@@ -1829,20 +1846,18 @@ select:-webkit-autofill {
     font-size: 1rem;
     font-weight: 300;
     color: mat-color($app-theme, 1000);
-}
 
-.ddp-user-menu-button:active,
-.ddp-user-menu-button:focus,
-.ddp-user-menu-button:hover {
-    color: mat-color($app-theme, 1000);
+    &:active, &:focus, &:hover {
+      color: mat-color($app-theme, 1000);
+    }
 }
 
 .ddp-user {
     color: mat-color($app-theme, 100);
-}
 
-.ddp-user--scrolled {
-    color: mat-color($app-theme, 2200);
+    &--scrolled {
+        color: mat-color($app-theme, 2200);
+    }
 }
 
 // .ddp-institutions-form,
