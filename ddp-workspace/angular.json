@@ -98,7 +98,6 @@
             "main": "projects/ddp-angio/src/main.ts",
             "polyfills": "projects/ddp-angio/src/polyfills.ts",
             "tsConfig": "projects/ddp-angio/tsconfig.app.json",
-            "optimization": true,
             "aot": true,
             "assets": [
               "projects/ddp-angio/src/favicon.ico",
