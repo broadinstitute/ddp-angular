@@ -7,7 +7,7 @@ body {
     padding: 0;
     height: 100%;
     font-size: 16px;
-    padding-right: 0px !important;
+    padding-right: 0 !important;
     background-color: mat-color($app-theme, 200);
 }
 
@@ -170,7 +170,7 @@ a {
 }
 
 .Header-nav {
-    margin: 0px 50px 0 0;
+    margin: 0 50px 0 0;
 
     &--small {
        margin: 0;
@@ -179,7 +179,7 @@ a {
 
 .Header-navList {
     display: flex;
-    margin: 0px;
+    margin: 0;
 
     &--small {
         padding: 0;
@@ -919,7 +919,7 @@ ul {
 
     &--neutral {
         background-color: mat-color($app-theme, 300) !important;
-        margin-right: 0px;
+        margin-right: 0;
 
         &--margin {
             margin-right: 20px;
