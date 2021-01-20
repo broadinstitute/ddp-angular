@@ -1298,6 +1298,8 @@ ul {
 }
 
 .ddp-activity-validation {
+    margin: 5px 0;
+
     .ErrorMessageList {
         list-style-type: square;
     }
@@ -1600,11 +1602,25 @@ select {
 
     option {
         color: black;
+        font-weight: 300;
     }
 }
 
 select:-webkit-autofill {
     background-color: transparent !important;
+}
+
+.date-field,
+ddp-activity-dropdown-picklist-question {
+    > select {
+        border: none;
+        border-bottom: 1px solid mat-color($app-theme, 1900);
+
+        &:focus {
+            border-bottom: 2px solid mat-color($app-theme, 600);
+            padding-bottom: 4px;
+        }
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1745,6 +1761,10 @@ select:-webkit-autofill {
      p {
          font-size: 1.1rem;
          color: mat-color($app-theme, 1700);
+
+         &.ddp-question-prompt {
+             font-weight: 400;
+         }
      }
  }
 
@@ -1819,6 +1839,12 @@ select:-webkit-autofill {
          border-top: 0 solid transparent !important;
      }
  }
+
+.mat-form-field-infix {
+    > select {
+        border-bottom: none !important;
+    }
+}
 
  .ddp-group-margin {
      margin: 20px;
@@ -1919,10 +1945,6 @@ select:-webkit-autofill {
      @extend .mat-button;
  }
 
- .ddp-activity-validation {
-     margin: 5px;
- }
-
  .subhead:after {
      content: "";
      display: table;
@@ -1956,7 +1978,7 @@ select:-webkit-autofill {
  }
 
  .mat-checkbox-label {
-     color: mat-color($app-theme, 800);
+     color: mat-color($app-theme, 1700);
      font-weight: 300;
  }
 
