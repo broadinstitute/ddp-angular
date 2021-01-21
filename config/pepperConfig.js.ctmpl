@@ -136,20 +136,21 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "atcp"}}
+   {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
+        DDP_ENV['auth0Domain'] = "{{.Data.auth0.domain}}",
+   {{end}}
+
+   DDP_ENV['darUrl'] = "https://us-central1-broad-ddp-dev.cloudfunctions.net/cf-study-contact";
+
    {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
-        DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-        DDP_ENV['darUrl'] = "https://us-central1-peak-segment-297211.cloudfunctions.net/cf-study-contact";
-        DDP_ENV['recaptchaSiteClientKey'] = "6Ld2VRoaAAAAAG_5-jx9XxXRriTWvCF5HANdt3Rl";
     {{else if eq $environment "dev"}}
         DDP_ENV['auth0ClientId'] = "7HzrckGgnPAO7UqDbcuUb9QoTc3V2eHa";
-        DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-        DDP_ENV['darUrl'] = "https://us-central1-broad-ddp-dev.cloudfunctions.net/cf-study-contact";
-        DDP_ENV['recaptchaSiteClientKey'] = "6LcQ1DUaAAAAAOP4ClWt6FdhV4q2u6K84CtQhvxK";
     {{end}}
 {{end}}
 
