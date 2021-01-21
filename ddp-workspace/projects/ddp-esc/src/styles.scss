@@ -710,7 +710,7 @@ a {
     }
 
     .PageHeader-background {
-        padding: 50px 0 0 0;
+        padding: 70px 0 0 0;
         margin-top: 0;
     }
 
@@ -898,6 +898,10 @@ ul {
 
     &:visited {
         color: mat-color($app-theme, 100);
+    }
+
+    &:disabled {
+        background-color: rgba(0, 0, 0, 0.12) !important;
     }
 
     &--white {
@@ -1278,7 +1282,7 @@ ul {
 
 .ErrorMessage {
     border-top: 2px solid mat-color($app-theme, 1200);
-    margin-top: 30px;
+    margin-top: 5px;
     font-size: 0.9rem;
     color: mat-color($app-theme, 1200);
     font-weight: 300;
@@ -1371,7 +1375,7 @@ ul {
 
     &.completed {
         .WizardSteps-background {
-            background: mat-color($app-theme, 1400);
+            background: mat-color($app-theme, 2300);
         }
 
         &.active {
@@ -1416,7 +1420,7 @@ ul {
     top: 50%;
     left: 50%;
     border: 12px solid mat-color($app-theme, 600);
-    border-top: 12px solid mat-color($app-theme, 1600);
+    border-top: 12px solid mat-color($app-theme, 2300);
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -2129,7 +2133,7 @@ input.mat-input-element {
 }
 
 .ddp-counter-color {
-    color: mat-color($app-theme, 600) !important;
+    color: mat-color($app-theme, 2200) !important;
 }
 
 .ddp-answer-container {
@@ -2150,6 +2154,30 @@ input.mat-input-element {
     .mat-form-field-placeholder {
         font-size: 12px !important;
         white-space: normal !important;
+    }
+
+    .composite-answer-OTHER_CANCERS_LIST {
+        .ddp-answer-container {
+            flex-direction: column !important;
+        }
+
+        .ddp-composite-text {
+            margin-right: 0;
+        }
+
+        .mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .date-answer-DIAGNOSIS_DATE {
+        .ddp-answer-container {
+            flex-direction: column !important;
+        }
+
+        select:last-child {
+            margin-top: 10px;
+        }
     }
 }
 
