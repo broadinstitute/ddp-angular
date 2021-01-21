@@ -14,7 +14,7 @@ import { ListStyleHint } from '../../models/activity/listStyleHint';
         <ng-container *ngFor="let block of blocks">
             <div *ngIf="block.blockType == 'content'"
                 class="ddp-li"
-                [ngClass]="{'ddp-li-gray': listStyle == LIST_STYLE.BULLET}">
+                [ngClass]="{'ddp-li-bullet': listStyle == LIST_STYLE.BULLET}">
                 <ng-container *ngTemplateOutlet="content; context: {block: block}">
                 </ng-container>
             </div>
@@ -33,7 +33,7 @@ import { ListStyleHint } from '../../models/activity/listStyleHint';
         <ng-container *ngFor="let block of blocks">
             <li *ngIf="block.blockType == 'content'"
                 class="ddp-li"
-                [ngClass]="{'ddp-li-gray': listStyle == LIST_STYLE.BULLET}">
+                [ngClass]="{'ddp-li-bullet': listStyle == LIST_STYLE.BULLET}">
                 <ng-container *ngTemplateOutlet="content; context: {block: block}">
                 </ng-container>
             </li>
