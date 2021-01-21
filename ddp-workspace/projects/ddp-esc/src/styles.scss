@@ -1239,6 +1239,15 @@ ul {
             content: "";
             height: 100%;
         }
+
+        ul {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        > span:first-child {
+            font-weight: 400;
+        }
     }
 }
 
@@ -1463,6 +1472,7 @@ ul {
 
 .PageContent-strong-text {
     margin: 0 0 0 40px;
+    font-weight: 400;
 }
 
 @media only screen and (max-width: 450px) {
@@ -1486,6 +1496,12 @@ ul {
 
 .PageContent-list-item {
     list-style-type: circle !important;
+
+    &.PageContent-text {
+        color: mat-color($app-theme, 1000);
+        padding-left: 0 !important;
+        margin: 15px 0 5px 0 !important;
+    }
 }
 
 .PageContent-info {
@@ -1799,7 +1815,7 @@ ddp-activity-dropdown-picklist-question {
 .ddp-block-title-color {
     font-size: 1.2rem;
     line-height: 1.8rem;
-    font-weight: 300;
+    font-weight: 400;
     margin: 2rem 0 1rem 0;
     color: mat-color($app-theme, 800);
 }
@@ -2039,7 +2055,7 @@ ddp-activity-dropdown-picklist-question {
 }
 
 .mat-list-item-content {
-    padding: 0 4px !important;
+    padding: 0 4px 0 0 !important;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {
