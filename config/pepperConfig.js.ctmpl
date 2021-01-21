@@ -149,7 +149,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
         DDP_ENV['darUrl'] = "https://us-central1-broad-ddp-dev.cloudfunctions.net/cf-study-contact";
-        DDP_ENV['recaptchaSiteClientKey'] = "6Ld2VRoaAAAAAG_5-jx9XxXRriTWvCF5HANdt3Rl";
+        DDP_ENV['recaptchaSiteClientKey'] = "6LcQ1DUaAAAAAOP4ClWt6FdhV4q2u6K84CtQhvxK";
     {{end}}
 {{end}}
 
