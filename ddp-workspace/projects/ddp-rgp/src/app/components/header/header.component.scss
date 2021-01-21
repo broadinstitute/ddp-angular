@@ -318,7 +318,7 @@ header.stick .Header-menuItem:hover,
 
 .dropdown-menu {
     border-radius: 0;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     min-width: 160px;
 }
 
@@ -370,7 +370,7 @@ header.stick .Header-menuItem:hover,
 div.navbar-collapse.collapse {
     display: block;
     overflow: hidden;
-    max-height: 0px;
+    max-height: 0;
     -webkit-transition: max-height .3s ease;
     -moz-transition: max-height .3s ease;
     -o-transition: max-height .3s ease;
