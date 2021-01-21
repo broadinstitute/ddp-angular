@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { concatMap, pluck, tap } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 
-import { LoggingService } from 'ddp-sdk';
+import { ConfigurationService, LoggingService } from 'ddp-sdk';
 
 import { DataAccessParameters } from '../models/dataAccessParameters';
 
@@ -28,7 +28,8 @@ export class DataAccessService {
 
   constructor(
     private http: HttpClient,
-    private loggingService: LoggingService
+    private loggingService: LoggingService,
+    @Inject('ddp.config') private config: ConfigurationService
   ) {
     this.getFunctionUrl();
   }
@@ -46,6 +47,8 @@ export class DataAccessService {
           name: biosketch.name,
           size: biosketch.size,
         },
+        clientId: this.config.auth0ClientId,
+        domain: this.config.auth0Domain,
       })
       .pipe(
         concatMap(res =>
