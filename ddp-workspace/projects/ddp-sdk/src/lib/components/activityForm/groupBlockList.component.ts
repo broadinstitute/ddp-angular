@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivityGroupBlock } from '../../models/activity/activityGroupBlock';
-import { AnswerValue } from './../../models/activity/answerValue';
+import { AnswerValue } from '../../models/activity/answerValue';
 import { ListStyleHint } from '../../models/activity/listStyleHint';
 
 @Component({
