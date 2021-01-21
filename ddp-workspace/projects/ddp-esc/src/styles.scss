@@ -1467,11 +1467,16 @@ ul {
     }
 }
 
+.PageContent-contact {
+  list-style-type: disc;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
 .PageContent-contact-item {
     font-weight: 300 !important;
     font-size: 1.1rem !important;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800) !important;
     margin: 0 !important;
 }
 
@@ -1769,7 +1774,6 @@ ddp-activity-dropdown-picklist-question {
 
 .ddp-block-body {
     margin: 20px 0 0 0;
-    color: mat-color($app-theme, 800);
 
     .PageContent-text {
         margin: 14px 0 0 0;
@@ -1786,11 +1790,6 @@ ddp-activity-dropdown-picklist-question {
 
 .ddp-single-question {
     margin: 35px 20px 20px 45px;
-}
-
-.PageContent-contact {
-    list-style-type: disc;
-    margin: 10px 0 0 0;
 }
 
 .ddp-block-title-color {
