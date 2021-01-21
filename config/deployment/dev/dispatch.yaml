@@ -16,7 +16,7 @@ dispatch:
   - url: "prion.dev.datadonationplatform.org/*"
     service: prion
   - url: "rgp.dev.datadonationplatform.org/*"
-      service: rgp
+    service: rgp
   - url: "pepper-dev.datadonationplatform.org/docs*"
     service: pepper-api-spec
   - url: "pepper-dev.datadonationplatform.org/spec/*"
