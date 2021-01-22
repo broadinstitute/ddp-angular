@@ -1,6 +1,6 @@
 import { Injectable, Inject, ErrorHandler } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
-import {SessionMementoService} from './sessionMemento.service';
+import { SessionMementoService } from './sessionMemento.service';
 
 declare const StackdriverErrorReporter: any;
 

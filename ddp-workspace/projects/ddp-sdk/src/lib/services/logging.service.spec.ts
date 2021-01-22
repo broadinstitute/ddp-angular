@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ConfigurationService } from './configuration.service';
 import { LoggingService } from './logging.service';
 import { LogLevel } from '../models/logLevel';
-import {StackdriverErrorReporterService} from './stackdriverErrorReporter.service';
+import { StackdriverErrorReporterService } from './stackdriverErrorReporter.service';
 
 describe('LoggingService', () => {
     let service: LoggingService;
