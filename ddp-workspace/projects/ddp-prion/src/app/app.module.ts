@@ -209,6 +209,7 @@ config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
+config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.dashboardActivitiesStartedStatuses = ['CREATED'];
 config.rtlLanguages = ['he'];
 
