@@ -24,6 +24,9 @@ export class ConfigurationService {
     doLocalRegistration: boolean;
     // Google maps API key: https://developers.google.com/places/web-service/get-api-key
     mapsApiKey: string;
+    errorReportingApiKey: string;
+    // projectId of your project in GCP
+    projectGcpId: string;
     projectGAToken: string;
     studyGuid: string;
     // country code if limiting app to just one country
@@ -58,4 +61,7 @@ export class ConfigurationService {
     scrollToErrorOffset = 100;
     defaultLanguageCode: string;
     rtlLanguages: string[] = [];
+    // The flag indicates whether we need report JS errors to Google Cloud Error Report API
+    // It set (and can be overridden for any single app) in pepperConfig
+    doGcpErrorReporting: boolean;
 }

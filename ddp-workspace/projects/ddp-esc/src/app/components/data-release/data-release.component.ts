@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: 'data-release',
+    selector: 'app-data-release',
     template: `
     <toolkit-header [showButtons]="true"></toolkit-header>
     <div class="Wrapper">

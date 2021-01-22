@@ -33,7 +33,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -77,8 +77,11 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector) {
+export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {

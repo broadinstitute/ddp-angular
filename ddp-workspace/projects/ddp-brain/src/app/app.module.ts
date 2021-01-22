@@ -81,6 +81,9 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
   return () => new Promise<any>((resolve: any) => {
@@ -138,7 +141,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })
