@@ -17,12 +17,18 @@ export class StackdriverErrorReporterService extends ErrorHandler {
     private sessionService: SessionMementoService
   ) {
     super();
+
+    const key = this.config.errorReportingApiKey;
+    const projectId = this.config.projectGcpId;
+
     this.errorHandler = new StackdriverErrorReporter();
     this.errorHandler.start({
-      key: this.config.errorReportingApiKey,
-      projectId: this.config.projectGcpId,
+      key,
+      projectId,
       service: this.config.studyGuid
     });
+
+    this.checkReportingParams(key, projectId);
     this.errorHandler.setUser(this.getUserInfo());
   }
 
@@ -32,6 +38,20 @@ export class StackdriverErrorReporterService extends ErrorHandler {
     }
     // Pass the error to the original handleError otherwise it gets swallowed in the browser console
     super.handleError(error);
+  }
+
+  private checkReportingParams(key: string, projectId: string): void {
+    const missingParams = [];
+
+    if (!key) {
+      missingParams.push('errorReportingApiKey');
+    } else if (!projectId) {
+      missingParams.push('projectGcpId');
+    }
+
+    if (missingParams.length) {
+      console.error('Missing parameters for StackDriver: ' + missingParams.join(', '));
+    }
   }
 
   private getUserInfo(): string {

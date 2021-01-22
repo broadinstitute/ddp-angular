@@ -11,16 +11,9 @@ var DDP_ENV = {
     mapsApiKey: "{{.Data.mapsApiKey}}",
     errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
     projectGcpId: "{{.Data.googleProjectId}}",
-
+    {{end}}
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
-    {{if not .Data.errorReportingApiKey}}
-        doGcpErrorReporting: false,
-    {{else if not .Data.googleProjectId}}
-        doGcpErrorReporting: false,
-    {{else}}
-        doGcpErrorReporting: true,
-    {{end}}
-    {{end}}
+    doGcpErrorReporting: true,
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
