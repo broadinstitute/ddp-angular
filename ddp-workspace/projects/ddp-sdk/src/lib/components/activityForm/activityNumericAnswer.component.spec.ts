@@ -114,10 +114,16 @@ describe('ActivityNumericAnswer', () => {
     });
 
     it('should emit valid answer', () => {
+        component.block = {
+            answer: null,
+            min: 0,
+            max: 10
+        } as ActivityNumericQuestionBlock;
         spyOn(component.valueChanged, 'emit');
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         component.numericField.patchValue(5);
+        component.onBlur('5');
         inputElement.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
         expect(component.block.answer).toBe(5);
