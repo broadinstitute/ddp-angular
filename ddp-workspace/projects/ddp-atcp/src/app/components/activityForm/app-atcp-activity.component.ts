@@ -349,7 +349,6 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
   public ActivityCodes = ActivityCodes;
 
   private matDialog: MatDialog;
-  private readonly SUPPORTED_CONSENT_ASSENT_LANGUAGES = ['en', 'de', 'es', 'fr', 'it', 'pl', 'pt', 'ru'];
 
   constructor(
       logger: LoggingService,
@@ -386,9 +385,7 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
   }
 
   public get fileLanguageCode(): string {
-    const currentLang = this.translateService.currentLang;
-
-    return this.SUPPORTED_CONSENT_ASSENT_LANGUAGES.includes(currentLang) ? currentLang : 'en';
+    return this.translateService.currentLang;
   }
 
   public get consentFileName(): string {
