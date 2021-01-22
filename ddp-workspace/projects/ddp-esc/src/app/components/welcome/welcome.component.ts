@@ -8,7 +8,7 @@ import {
 } from 'ddp-sdk';
 
 @Component({
-    selector: 'welcome',
+    selector: 'app-welcome',
     template: `
     <toolkit-header [showButtons]="true"></toolkit-header>
     <div class="Wrapper">

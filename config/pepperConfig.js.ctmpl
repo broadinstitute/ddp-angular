@@ -9,7 +9,11 @@ var DDP_ENV = {
     doLocalRegistration: false,
     {{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
     mapsApiKey: "{{.Data.mapsApiKey}}",
+    errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
+    projectGcpId: "{{.Data.googleProjectId}}",
     {{end}}
+    // The flag indicates whether we need report JS errors to Google Cloud Error Report API
+    doGcpErrorReporting: true,
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
