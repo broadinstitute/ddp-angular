@@ -15,8 +15,8 @@ references:
     "osteo brain angio mbc testboston mpc prion atcp rgp esc"
   study_guids: &study_guids
     "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rgp cmi-esc"
-  config_deployment_dir: &config_deployment_dir
-      config/deployment
+  dispatch_secret_id: &dispatch_secret_id
+      app-engine-dispatch
 
 # Container for all the builds
 executors:
@@ -132,9 +132,9 @@ commands:
     parameters:
       study_key:
         type: string
-      config_deploy_dir:
+      dispatch_secret_id:
         type: string
-        default: *config_deployment_dir
+        default: *dispatch_secret_id
     steps:
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
@@ -165,8 +165,10 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
+            echo "Reading dispatch file from Secret Manager secret id '<<parameters.dispatch_secret_id>>'"
+            gcloud secrets versions access latest --secret '<<parameters.dispatch_secret_id>>' --project "broad-ddp-${ENVIRONMENT}" > dispatch.yaml
+            cat dispatch.yaml
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" dispatch.yaml
           working_directory: *repo_path
       - run:
           name: Update deployments sheet
