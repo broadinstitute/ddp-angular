@@ -86,7 +86,7 @@ commands:
               *)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
-                echo "We are going to map << pipeline.git.branch >> to dev environment."
+                echo "We are going to map << pipeline.git.branch >> to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
@@ -286,6 +286,16 @@ commands:
   build-app:
     description: "Build DDP study app"
     steps:
+      - when:
+          condition:
+            equal: [ atcp, << pipeline.parameters.study_key >> ]
+          steps:
+            - run:
+                name: ng build atcp styles and Auth0 scripts
+                command: |
+                  set -u
+                  ng build ddp-atcp-auth
+                  ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
       - run:
           name: ng build
           command: |
