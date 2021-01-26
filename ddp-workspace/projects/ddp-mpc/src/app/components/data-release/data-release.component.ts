@@ -5,7 +5,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
 import { WindowRef } from 'ddp-sdk';
 
 @Component({
-    selector: 'data-release',
+    selector: 'app-data-release',
     styles: [`
     .PageContent-title, .PageContent-subtitle {
         color: black;
