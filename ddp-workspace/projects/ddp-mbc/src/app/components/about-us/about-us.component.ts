@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-  selector: 'about-us',
+  selector: 'app-about-us',
   template: `
   <toolkit-header [showButtons]="true"></toolkit-header>
   <div class="Wrapper">
