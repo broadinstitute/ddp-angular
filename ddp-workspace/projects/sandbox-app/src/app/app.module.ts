@@ -134,7 +134,7 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: '' }
 ];
 
-declare let ga: Function;
+declare const ga: (...args: any[]) => void;
 
 @NgModule({
   declarations: [

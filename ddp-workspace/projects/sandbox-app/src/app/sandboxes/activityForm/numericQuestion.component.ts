@@ -49,7 +49,7 @@ export class NumericQuestionComponent extends QuestionComponent<ActivityNumericQ
     }
   }
 
-  private buildBlock(parameters: NumericParameters) {
+  private buildBlock(parameters: NumericParameters): ActivityNumericQuestionBlock {
     const newQuestion = new ActivityNumericQuestionBlock();
     newQuestion.answer = parameters.answer;
     newQuestion.question = parameters.question;

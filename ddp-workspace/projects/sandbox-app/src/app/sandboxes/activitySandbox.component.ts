@@ -32,7 +32,7 @@ export class ActivitySandboxComponent implements OnDestroy {
         this.totalCount++;
     }
 
-    public handleLoadResponse(event) {
+    public handleLoadResponse(event): void {
         // FIXME: do something with event or remove this from template
         this.logger.logEvent(this.LOG_SOURCE, event);
     }
