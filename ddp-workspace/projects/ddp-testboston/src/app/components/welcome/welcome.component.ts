@@ -33,7 +33,7 @@ export class WelcomeComponent implements OnInit {
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession() || this.session.isAuthenticatedAdminSession();
   }
-  
+
   public scrollToAnchor(anchor: string): void {
     this.scrollerService.scrollToAnchor(anchor);
   }

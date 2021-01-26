@@ -8,7 +8,7 @@ import { RECAPTCHA_LANGUAGE, RecaptchaComponent } from 'ng-recaptcha';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'user-registration-prequal',
+  selector: 'app-user-registration-prequal',
   templateUrl: './user-registration-prequal.component.html',
   styleUrls: ['./user-registration-prequal.component.scss']
 })
