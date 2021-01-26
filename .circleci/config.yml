@@ -86,7 +86,7 @@ commands:
               *)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
-                echo "We are going to map << pipeline.git.branch >> to dev environment"
+                echo "We are going to map << pipeline.git.branch >> to dev environment."
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
