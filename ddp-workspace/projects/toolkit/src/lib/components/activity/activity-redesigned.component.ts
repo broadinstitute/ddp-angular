@@ -22,7 +22,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         private _activatedRoute: ActivatedRoute,
         private _workflowBuilder: WorkflowBuilderService,
         @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
-        super(_activatedRoute, _workflowBuilder, config)
+        super(_activatedRoute, _workflowBuilder, config);
     }
 
     public ngOnInit(): void {
