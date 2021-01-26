@@ -223,7 +223,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     /* TODO: consider usage of this method in baseActivity.component.ts instead of current implementation.
        This fixes issue with additional ngChange events
     */
-    for (const propName in changes) {
+    for (const propName of Object.keys(changes)) {
       if (propName === 'studyGuid' || propName === 'activityGuid') {
         this.isLoaded = false;
         this.resetValidationState();
@@ -235,47 +235,6 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         this.activityGuidObservable.next(this.activityGuid);
       }
     }
-  }
-  protected getActivity(): void {
-    const get = this.currentActivityService
-      .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-      .subscribe(
-        x => {
-          if (!x) {
-            this.model = new ActivityForm();
-          } else {
-            this.model = x;
-            this.stickySubtitle.emit(this.model.subtitle);
-            this.activityCode.emit(this.model.activityCode);
-            this.initSteps();
-            this.isLoaded = true;
-          }
-
-          // combine the latest status updates from the form model
-          // and from the embedded components into one observable
-          const canSaveSub = combineLatest(
-            // update as we get responses from server
-            this.submissionManager.answerSubmissionResponse$.pipe(
-              // We don't automatically get model updates if
-              // local validation fails
-              // so trigger one when submit
-              merge(this.submitAttempted),
-              map(() => this.model.validate()),
-              // let's start with whatever it is the initial state of the form
-              startWith(this.model.validate())),
-            this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
-            .pipe(
-              map(status => status[0] && status[1]),
-              delay(1)
-            ).subscribe(this.isAllFormContentValid);
-
-          this.anchor.addNew(canSaveSub);
-        },
-        () => {
-          this.navigateToErrorPage();
-        }
-      );
-    this.anchor.addNew(get);
   }
 
   public incrementStep(): void {
@@ -304,5 +263,48 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     this.sendLastSectionAnalytics();
     this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
     this.router.navigateByUrl('/console');
+  }
+
+  protected getActivity(): void {
+    const get = this.currentActivityService
+      .getActivity(this.studyGuidObservable, this.activityGuidObservable)
+      .subscribe(
+        x => {
+          if (!x) {
+            this.model = new ActivityForm();
+          } else {
+            this.model = x;
+            this.stickySubtitle.emit(this.model.subtitle);
+            this.activityCode.emit(this.model.activityCode);
+            this.initSteps();
+            this.isLoaded = true;
+          }
+
+          // combine the latest status updates from the form model
+          // and from the embedded components into one observable
+          const canSaveSub = combineLatest([
+            // update as we get responses from server
+            this.submissionManager.answerSubmissionResponse$.pipe(
+              // We don't automatically get model updates if
+              // local validation fails
+              // so trigger one when submit
+              merge(this.submitAttempted),
+              map(() => this.model.validate()),
+              // let's start with whatever it is the initial state of the form
+              startWith(this.model.validate())),
+            this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
+          ])
+            .pipe(
+              map(status => status[0] && status[1]),
+              delay(1)
+            ).subscribe(this.isAllFormContentValid);
+
+          this.anchor.addNew(canSaveSub);
+        },
+        () => {
+          this.navigateToErrorPage();
+        }
+      );
+    this.anchor.addNew(get);
   }
 }

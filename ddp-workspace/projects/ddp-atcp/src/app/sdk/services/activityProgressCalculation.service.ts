@@ -28,12 +28,24 @@ export class ActivityProgressCalculationService {
     }
   }
 
+  public updateProgress(activity: ActivityForm, sectionIndex: number): void {
+    if (activity.activityCode === this.activityToShowProgress
+          && this.shouldUpdate(sectionIndex)) {
+      this.sectionIndex = sectionIndex;
+      this.calculateProgress(sectionIndex);
+    }
+  }
+
+  public getProgress(): Observable<any> {
+    return this.progress.asObservable();
+  }
+
   private calculateStepWeights(): void {
     const stepsAmount = this.sectionsAmount - 1;
     const stepWeightFloat = (100 / (stepsAmount));
     let stepWeightRounded = Math.ceil(stepWeightFloat);
     if ((stepWeightRounded * (stepsAmount - 1)) > 100) {
-        stepWeightRounded = Math.floor(stepWeightFloat);
+      stepWeightRounded = Math.floor(stepWeightFloat);
     }
 
     // last step weight requires correction, therefore, initial arrays size = stepsAmsount -1
@@ -45,14 +57,6 @@ export class ActivityProgressCalculationService {
     this.stepWeights.push(this.lastStepWeight);
   }
 
-  public updateProgress(activity: ActivityForm, sectionIndex: number): void {
-    if (activity.activityCode === this.activityToShowProgress
-          && this.shouldUpdate(sectionIndex)) {
-      this.sectionIndex = sectionIndex;
-      this.calculateProgress(sectionIndex);
-    }
-  }
-
   private shouldUpdate(sectionIndex: number): boolean {
     return sectionIndex > this.sectionIndex;
   }
@@ -60,9 +64,5 @@ export class ActivityProgressCalculationService {
   private calculateProgress(sectionIndex: number | null): void {
     const currentProgress = this.stepWeights.slice(0, sectionIndex).reduce((acc, weight) => acc + weight, 0);
     this.progress.next(currentProgress);
-  }
-
-  public getProgress(): Observable<any> {
-    return this.progress.asObservable();
   }
 }

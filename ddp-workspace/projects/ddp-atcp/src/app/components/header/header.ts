@@ -23,10 +23,10 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
 export class HeaderComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
   public SignIn: string;
-  private anchor = new CompositeDisposable();
-  private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
   activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  private anchor = new CompositeDisposable();
+  private userProfileDecorator: UserProfileDecorator;
   private readonly LOG_SOURCE = 'HeaderComponent';
 
   constructor(@Inject(LanguagesToken) public languages: Language[],

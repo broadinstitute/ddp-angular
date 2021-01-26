@@ -44,11 +44,11 @@ export class DashBoardComponent implements OnInit, OnDestroy {
   public steps: ActivityInstance[] = [];
   public dataSource: UserActivitiesDataSource;
   public firstName: string;
-  private studyGuidObservable: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public showActivity = true;
   public isAssetsActivity = false;
   public CREATED = CREATED;
   public IN_PROGRESS = IN_PROGRESS;
+  private studyGuidObservable: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private anchor = new CompositeDisposable();
   private getUserActivitiesSubs = new Subscription();
 
@@ -76,6 +76,20 @@ export class DashBoardComponent implements OnInit, OnDestroy {
         this.instanceGuid = activity.instanceGuid;
         this.resetActivityComponent();
      }
+  }
+
+  public ngOnInit(): void {
+    this.studyGuid = this.toolkitConfiguration.studyGuid;
+    this.studyGuidObservable.next(this.studyGuid);
+    this.anchor.addNew(this.userAgent.profile
+      .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
+      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName));
+    this.getSteps();
+  }
+
+  public ngOnDestroy(): void {
+    this.getUserActivitiesSubs.unsubscribe();
+    this.anchor.removeAll();
   }
 
   private getSteps(): void {
@@ -107,15 +121,6 @@ export class DashBoardComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnInit(): void {
-    this.studyGuid = this.toolkitConfiguration.studyGuid;
-    this.studyGuidObservable.next(this.studyGuid);
-    this.anchor.addNew(this.userAgent.profile
-      .pipe(filter((data: UserProfileDecorator) => !!data.profile), first())
-      .subscribe((data: UserProfileDecorator) => this.firstName = data.profile.firstName));
-    this.getSteps();
-  }
-
   // force the activity component to reset it by removing and adding it again
   private resetActivityComponent(): void {
     this.showActivity = false;
@@ -123,10 +128,5 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     this.showActivity = true;
     // need to scroll to top after done! This is more visible in mobile
     this.windowRef.nativeWindow.scrollTo(0, 0);
-  }
-
-  public ngOnDestroy(): void {
-    this.getUserActivitiesSubs.unsubscribe();
-    this.anchor.removeAll();
   }
 }
