@@ -46,6 +46,7 @@ export class LoginLandingComponent implements OnDestroy {
             case UserState.Dashboard: url = 'dashboard'; break;
             case UserState.NotQualified: url = 'not-qualified'; break;
             case UserState.NotConsented: url = 'consent-declined'; break;
+            default: break;
         }
         if (!url) {
             // bit of a hack: if we don't know the state, create the prequal and go to it
