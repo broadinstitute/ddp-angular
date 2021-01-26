@@ -8,12 +8,12 @@ import { finalize, takeUntil, map } from 'rxjs/operators';
     templateUrl: 'readonlyActivityForm.component.html'
 })
 export class ReadonlyActivityFormComponent implements OnDestroy {
-    @ViewChild(ActivityComponent, { static: false }) private form: ActivityComponent;
     public instanceGuid: string;
     public activityGuid = 'READONLY01';
     public expiredInstanceGuid: string;
     public showExpired = false;
     public countdown: number;
+    @ViewChild(ActivityComponent, { static: false }) private form: ActivityComponent;
     private anchor: CompositeDisposable;
 
     constructor(private serviceAgent: ActivityServiceAgent) {
