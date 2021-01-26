@@ -16,12 +16,12 @@ export class DataAccessServiceAgent extends ServiceAgent<any> {
 
   public createNewDataAccessRequest(
       dataAccessParameters: DataAccessParameters,
-      researcher_biosketch: File,
+      researcherBiosketch: File,
       studyGuid: string): Observable<any> {
     const dataAccessParametersJson = JSON.stringify(dataAccessParameters);
     const formData = new FormData();
     formData.append('dataAccessParameters', dataAccessParametersJson);
-    formData.append('researcher_biosketch', researcher_biosketch);
+    formData.append('researcher_biosketch', researcherBiosketch);
     return this.postObservable(`/studies/${studyGuid}/new_data_access_request`, formData);
   }
 }

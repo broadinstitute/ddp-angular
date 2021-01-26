@@ -56,11 +56,11 @@ import { filter, first } from 'rxjs/operators';
   `
 })
 export class ConsoleComponent implements OnDestroy, OnInit {
-  private anchor = new CompositeDisposable();
   displayedColumns: string[] = ['participant', 'enrollmentStatus', 'consoleActions'];
   dataSource: Array<any> = [];
   isLoaded = false;
   canAddSelf = false;
+  private anchor = new CompositeDisposable();
 
   constructor(private userAgent: UserProfileServiceAgent) {
   }

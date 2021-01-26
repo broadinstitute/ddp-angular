@@ -1,3 +1,4 @@
+/* tslint:disable:variable-name */
 export class DataAccessParameters {
   request_date: string; // required. Example: 2017-11-06
   researcher_name: string; // required

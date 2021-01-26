@@ -8,7 +8,7 @@ import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core
 export class ProgressBarComponent implements OnChanges {
   @Input() public count: number;
   @Input() public active = 0;
-  @Output() public onChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output('onChange') public activeTabChanged: EventEmitter<number> = new EventEmitter<number>();
 
   public tabs: undefined[] = [];
 
@@ -20,6 +20,6 @@ export class ProgressBarComponent implements OnChanges {
 
   public setActiveTab(event: Event, index: number): void {
     event.preventDefault();
-    this.onChange.emit(index);
+    this.activeTabChanged.emit(index);
   }
 }

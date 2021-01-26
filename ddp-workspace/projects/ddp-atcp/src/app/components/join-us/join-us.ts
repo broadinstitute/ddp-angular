@@ -64,6 +64,23 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     this.stickySubtitle = stickySubtitle;
   }
 
+  public navigate(response: ActivityResponse): void {
+    const convertedResponse = this.convertWorkflowResponse(response);
+    const sub = this.workflowBuilder.getCommand(convertedResponse).execute().subscribe(() => {
+      this.resetActivityComponent();
+      this.fetchActivity();
+    });
+    this.anchor.addNew(sub);
+  }
+
+  public signIn(): void {
+    this.auth0.login();
+  }
+
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
+  }
+
   private fetchActivity(): void {
     if (this.session.isAuthenticatedSession()) {
       this.workflow.getStart().pipe(take(1)).subscribe((response: ActivityResponse | null) => {
@@ -94,28 +111,11 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     this.windowRef.nativeWindow.scrollTo(0, 0);
   }
 
-  public navigate(response: ActivityResponse): void {
-    const convertedResponse = this.convertWorkflowResponse(response);
-    const sub = this.workflowBuilder.getCommand(convertedResponse).execute().subscribe(() => {
-      this.resetActivityComponent();
-      this.fetchActivity();
-    });
-    this.anchor.addNew(sub);
-  }
-
   private convertWorkflowResponse(response: ActivityResponse): ActivityResponse {
     if (this.session.isTemporarySession() && (response.allowUnauthenticated === false)) {
       return new ActivityResponse('REGISTRATION');
     } else {
       return response;
     }
-  }
-
-  public signIn(): void {
-    this.auth0.login();
-  }
-
-  ngOnDestroy(): void {
-    this.anchor.removeAll();
   }
 }

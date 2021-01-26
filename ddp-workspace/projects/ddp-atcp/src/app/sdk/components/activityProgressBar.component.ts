@@ -40,9 +40,9 @@ import { Subscription } from 'rxjs';
   `]
 })
 export class ActivityProgressBarComponent implements OnInit, OnDestroy {
-  private anchor: Subscription = new Subscription();
   @Input() title: string;
   progress: number;
+  private anchor: Subscription = new Subscription();
 
   constructor(private activityProgressCalculationService: ActivityProgressCalculationService) {}
 

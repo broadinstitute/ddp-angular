@@ -21,13 +21,41 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public activeTab = 0;
   public countTabs = 7;
-  private readonly maxAttachmentSize = 2 * 1024 * 1024;
-  private anchor: CompositeDisposable = new CompositeDisposable();
   public fileSizeExceedsLimit: boolean;
   public studyGuid: string;
 
   public model: DataAccessParameters = new DataAccessParameters();
   public researcherBiosketch: File;
+
+  private readonly maxAttachmentSize = 2 * 1024 * 1024;
+  private anchor: CompositeDisposable = new CompositeDisposable();
+
+  constructor(private ngxTranslate: NGXTranslateService,
+              private dataAccessService: DataAccessService,
+              private communicationService: AtcpCommunicationService,
+              @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
+  }
+
+  public ngOnInit(): void {
+    this.studyGuid = this.toolkitConfiguration.studyGuid;
+    this.model.signature_date = this.getToday();
+    this.model.request_date = this.getToday();
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
+  }
+
+  public onAttachmentChange(selectedFile: any): void {
+    if (this.maxAttachmentSize && selectedFile.size >= this.maxAttachmentSize) {
+      this.fileSizeExceedsLimit = true;
+      return;
+    } else {
+      this.fileSizeExceedsLimit = false;
+    }
+    this.researcherBiosketch = selectedFile;
+  }
+
   public displayDontHaveErrors(tab: number): boolean {
     if (tab === 1) {
       return !!(this.model.researcher_name && this.model.researcher_email);
@@ -94,31 +122,5 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       .subscribe(() => {
       this.communicationService.closePopupMessage();
     });
-  }
-
-  constructor(private ngxTranslate: NGXTranslateService,
-              private dataAccessService: DataAccessService,
-              private communicationService: AtcpCommunicationService,
-              @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
-  }
-
-  public ngOnInit(): void {
-    this.studyGuid = this.toolkitConfiguration.studyGuid;
-    this.model.signature_date = this.getToday();
-    this.model.request_date = this.getToday();
-  }
-
-  public ngOnDestroy(): void {
-    this.anchor.removeAll();
-  }
-
-  public onAttachmentChange(selectedFile: any): void {
-    if (this.maxAttachmentSize && selectedFile.size >= this.maxAttachmentSize) {
-      this.fileSizeExceedsLimit = true;
-      return;
-    } else {
-      this.fileSizeExceedsLimit = false;
-    }
-    this.researcherBiosketch = selectedFile;
   }
 }
