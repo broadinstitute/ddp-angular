@@ -9,11 +9,12 @@ import { UserState } from './model/userState';
     templateUrl: './prequalifier.component.html',
 })
 export class PrequalifierComponent implements OnDestroy {
+    static STUDY_GUID = 'TESTSTUDY1';
+    static PREQUALIFIER_GUID = '7A838F4669';
+
     @Output() submit: EventEmitter<void> = new EventEmitter();
     public id: string;
     private anchor: CompositeDisposable;
-    static STUDY_GUID: string = 'TESTSTUDY1';
-    static PREQUALIFIER_GUID: string = '7A838F4669';
 
     constructor(
         private state: UserStateService,
@@ -33,7 +34,7 @@ export class PrequalifierComponent implements OnDestroy {
 
     public raiseSubmit(): void {
         const refresh = this.state.refreshState().subscribe(x => {
-            if (x == UserState.NotQualified) {
+            if (x === UserState.NotQualified) {
                 this.router.navigateByUrl('not-qualified');
             } else {
                 this.router.navigateByUrl('consent');
