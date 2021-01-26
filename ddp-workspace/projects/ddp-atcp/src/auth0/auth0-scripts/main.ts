@@ -18,7 +18,7 @@ import { Translator } from './translator';
 declare const config;
 declare const $;
 
-console.log('Initializing...');
+console.log('Testing redeployment');
 
 const isResetPasswordPage = Array.isArray(config);
 const webAuth = createAuth0(config);
