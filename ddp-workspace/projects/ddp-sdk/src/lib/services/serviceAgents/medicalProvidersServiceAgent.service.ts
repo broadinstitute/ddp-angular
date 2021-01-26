@@ -22,14 +22,19 @@ export class MedicalProvidersServiceAgent extends UserServiceAgent<any> {
         super(session, configuration, http, logger, _language);
     }
 
-    public createMedicalProvider(studyGuid: string, institutionType: string, form: ActivityInstitutionForm): Observable<MedicalProviderResponse> {
+    public createMedicalProvider(studyGuid: string,
+                                 institutionType: string,
+                                 form: ActivityInstitutionForm): Observable<MedicalProviderResponse> {
         const baseUrl = this.getBaseUrl(studyGuid, institutionType);
         return this.postObservable(baseUrl, JSON.stringify(form)).pipe(
             map(data => data && data['body'])
         );
     }
 
-    public updateMedicalProvider(studyGuid: string, institutionType: string, medicalProviderGuid: string, form: ActivityInstitutionForm): Observable<void> {
+    public updateMedicalProvider(studyGuid: string,
+                                 institutionType: string,
+                                 medicalProviderGuid: string,
+                                 form: ActivityInstitutionForm): Observable<void> {
         const baseUrl = this.getBaseUrl(studyGuid, institutionType);
         return this.patchObservable(`${baseUrl}/${medicalProviderGuid}`, JSON.stringify(form));
     }

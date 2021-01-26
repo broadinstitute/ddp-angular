@@ -18,8 +18,8 @@ import { AddressError } from '../../models/addressError';
 import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { merge, Observable, of, Subject } from 'rxjs';
 import * as _ from 'underscore';
-import { mergeMap, startWith, take, takeUntil, tap } from 'rxjs/operators';
-import { AddressInputService } from '../address/addressInput.service';
+import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { AddressInputService } from './addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { AddressService } from '../../services/address.service';
 import { LoggingService } from '../../services/logging.service';
@@ -231,6 +231,56 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     this.ais = new AddressInputService(this.logger, this.countryService, this.addressService, this.cdr, this.phoneRequired);
   }
 
+  /**
+   * Return the label to be displayed
+   *
+   * param {string} formControlName
+   * returns {any}
+   */
+  public getLabelForControl(formControlName: string): Observable<string> {
+    const fieldKey = this.buildFieldTranslationKey(formControlName);
+    if (formControlName === 'zip') {
+      return this.ais.postalCodeLabel$.pipe(
+        mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
+
+    } else if (formControlName === 'state') {
+      return this.ais.stateLabel$.pipe(
+        mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));
+    } else {
+      return this.ngxTranslate.getTranslation(fieldKey);
+    }
+  }
+
+  public displayVerificationErrors(errors: AddressError[]): void {
+    if (errors.length > 0) {
+      errors.forEach((currError: AddressError) => {
+        of(currError.message).pipe(
+          take(1))
+          .subscribe(errMessage => {
+            // Got an error that matches one of our control names? Make sure it is displayed
+            const control: AbstractControl | null = this.ais.addressForm.get(currError.field);
+            if (control) {
+              // Note that we set it as a "verify" error. We will treat this type of error differently
+              // than local validation errors
+              control.setErrors({ verify: errMessage });
+              control.markAsTouched();
+            }
+          });
+      });
+    } else {
+      this.clearVerificationErrors();
+    }
+  }
+
+  public touchAllControls(): void {
+    _.values(this.ais.addressForm.controls).forEach((control: FormControl) =>
+      control.markAsTouched({ onlySelf: true }));
+  }
+
+  public get disableAutofill(): string {
+    return `disable-autofill`;
+  }
+
   ngOnInit(): void {
     // countries is constant
     this.countries$ = this.countryService.findAllCountryInfoSummaries();
@@ -270,28 +320,10 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     this.setupBlockChromeStreet1Autofill();
 
   }
-  // latest hack to try and block Chrome's form autofill
-  private setupBlockChromeStreet1Autofill(): void {
-    const observerHack = new MutationObserver(() => {
-      observerHack.disconnect();
-      this.street1Input.nativeElement.setAttribute('autocomplete', 'new-password');
-    });
-
-    observerHack.observe(this.street1Input.nativeElement, {
-      attributes: true,
-      attributeFilter: ['autocomplete']
-    });
-  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  private syncNativeStreet1WithForm(street1ValFromForm: string | null): void {
-    if (this.street1Input.nativeElement.value !== street1ValFromForm) {
-      this.street1Input.nativeElement.value = street1ValFromForm;
-    }
   }
 
   /**
@@ -337,24 +369,22 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Return the label to be displayed
-   *
-   * param {string} formControlName
-   * returns {any}
-   */
+  // latest hack to try and block Chrome's form autofill
+  private setupBlockChromeStreet1Autofill(): void {
+    const observerHack = new MutationObserver(() => {
+      observerHack.disconnect();
+      this.street1Input.nativeElement.setAttribute('autocomplete', 'new-password');
+    });
 
-  public getLabelForControl(formControlName: string): Observable<string> {
-    const fieldKey = this.buildFieldTranslationKey(formControlName);
-    if (formControlName === 'zip') {
-      return this.ais.postalCodeLabel$.pipe(
-          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
+    observerHack.observe(this.street1Input.nativeElement, {
+      attributes: true,
+      attributeFilter: ['autocomplete']
+    });
+  }
 
-    } else if (formControlName === 'state') {
-      return this.ais.stateLabel$.pipe(
-          mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));
-    } else {
-      return this.ngxTranslate.getTranslation(fieldKey);
+  private syncNativeStreet1WithForm(street1ValFromForm: string | null): void {
+    if (this.street1Input.nativeElement.value !== street1ValFromForm) {
+      this.street1Input.nativeElement.value = street1ValFromForm;
     }
   }
 
@@ -362,40 +392,11 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     return 'SDK.MailAddress.Fields.' + formControlName[0].toUpperCase() + formControlName.substring(1);
   }
 
-  public displayVerificationErrors(errors: AddressError[]): void {
-    if (errors.length > 0) {
-      errors.forEach((currError: AddressError) => {
-        of(currError.message).pipe(
-          take(1))
-          .subscribe(errMessage => {
-            // Got an error that matches one of our control names? Make sure it is displayed
-            const control: AbstractControl | null = this.ais.addressForm.get(currError.field);
-            if (control) {
-              // Note that we set it as a "verify" error. We will treat this type of error differently
-              // than local validation errors
-              control.setErrors({ verify: errMessage });
-              control.markAsTouched();
-            }
-          });
-      });
-    } else {
-      this.clearVerificationErrors();
-    }
-  }
   private clearVerificationErrors(): void {
     _.values(this.ais.addressForm.controls).forEach((control: FormControl) => {
       if (control.errors) {
         control.setErrors(_.omit(control.errors, 'verify'));
       }
     });
-  }
-
-  public touchAllControls(): void {
-    _.values(this.ais.addressForm.controls).forEach((control: FormControl) =>
-        control.markAsTouched({ onlySelf: true }));
-  }
-
-  public get disableAutofill(): string {
-    return `disable-autofill`;
   }
 }

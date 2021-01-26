@@ -35,7 +35,7 @@ export class ScriptLoaderService {
         };
 
         scriptElement.onerror = (error: any) => {
-          observer.error("Couldn't load script " + script.src);
+          observer.error(`Couldn't load script ` + script.src);
         };
 
         this.document.getElementsByTagName('body')[0].appendChild(scriptElement);

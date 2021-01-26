@@ -123,26 +123,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
-  private launchPopup(): Subscription {
-    return this.displayPop.getShouldDisplayLanguagePopup()
-      .subscribe(shouldDisp => {
-        if (shouldDisp) { // If we should display the popup
-          this.popup.openModal(); // Display the popup!
-        }
-      });
-  }
-
-  // Update the language in the profile to the current language
-  private updateProfileLanguage(): Observable<any> {
-    const profileModifications: UserProfile = new UserProfile();
-    profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-    return this.profileServiceAgent.updateProfile(profileModifications)
-      .pipe(
-        tap(() => this.afterProfileLanguageChange.emit()),
-        tap(() => this.language.notifyOfProfileLanguageUpdate())
-      );
-  }
-
   // Find the current language and return true if successful or false otherwise
   public findCurrentLanguage(): Observable<boolean> {
     // Check for a language in the profile
@@ -175,6 +155,26 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         return false;
       }
     }));
+  }
+
+  private launchPopup(): Subscription {
+    return this.displayPop.getShouldDisplayLanguagePopup()
+      .subscribe(shouldDisp => {
+        if (shouldDisp) { // If we should display the popup
+          this.popup.openModal(); // Display the popup!
+        }
+      });
+  }
+
+  // Update the language in the profile to the current language
+  private updateProfileLanguage(): Observable<any> {
+    const profileModifications: UserProfile = new UserProfile();
+    profileModifications.preferredLanguage = this.currentLanguage.languageCode;
+    return this.profileServiceAgent.updateProfile(profileModifications)
+      .pipe(
+        tap(() => this.afterProfileLanguageChange.emit()),
+        tap(() => this.language.notifyOfProfileLanguageUpdate())
+      );
   }
 
   private getNextObservable(lang: StudyLanguage, obs: Observable<StudyLanguage>): Observable<StudyLanguage> {

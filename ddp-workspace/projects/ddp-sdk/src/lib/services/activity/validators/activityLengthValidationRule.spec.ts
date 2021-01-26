@@ -20,9 +20,9 @@ describe('ActivityLengthValidationRule', () => {
         question.answer = '';
         expect(validator.recalculate()).toBeTruthy();
         expect(validator.result).toBeNull();
-        question.answer = `Super long string Super long string Super long string Super long string Super long string Super long string 
-        Super long string Super long string Super long string Super long string Super long string Super long string Super long string 
-        Super long string Super long string Super long string Super long string Super long string Super long string Super long string 
+        question.answer = `Super long string Super long string Super long string Super long string Super long string Super long string
+        Super long string Super long string Super long string Super long string Super long string Super long string Super long string
+        Super long string Super long string Super long string Super long string Super long string Super long string Super long string
         Super long string Super long string Super long string Super long string Super long string Super long string Super long string`;
         expect(validator.recalculate()).toBeTruthy();
         expect(validator.result).toBeNull();

@@ -220,29 +220,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         this.initializeComponentState();
     }
 
-  private initializeComponentState(): void {
-      const initialState: ComponentState = {
-              isReadOnly: false,
-              activityInstanceGuid: null,
-              showSuggestion: false,
-              enteredAddress: null,
-              suggestedAddress: null,
-              formWarningMessages: [],
-              formErrorMessages: [],
-              fieldErrors: [],
-              isTemporarilyDisabled: false
-          };
-
-
-    this.state$ = this.stateUpdates$.pipe(
-      startWith(initialState),
-      scan((acc: ComponentState, update) => ({ ...acc, ...update })),
-      tap(state =>  this.logger.logDebug(`${this.LOG_SOURCE}. New embeddedComponentState$=%o`, state)),
-      shareReplay(1)
-    );
-    this.stateSubscription = this.state$.pipe(
-        takeUntil(this.ngUnsubscribe))
-        .subscribe();
+  public convertToFormattedString(a: Address): string {
+    const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
+    const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
+    const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
+    // tslint:disable-next-line:max-line-length
+    return `${isEmpty(a.name) ? '' : a.name}${isEmpty(a.name) ? streetFormat(a.street1) : format(a.street1)}${format(a.street2)}${format(a.city)}${format(a.state)}`
+      + `${format(a.zip)}${format(a.country)}${isEmpty(a.phone) ? '' : ', Phone: ' + a.phone}`;
   }
 
   ngOnInit(): void {
@@ -592,27 +576,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     ).subscribe();
   }
 
-
-    private meetsActivityRequirements(currentAddress: Address | null): boolean {
-      if (this.block.requireVerified && !currentAddress) {
-          return false;
-      }
-      if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
-          return false;
-      }
-      return true;
-    }
-
-    private computeValidityForSparseAddress(address: Address | null): boolean {
-    if (address && this.addressIsBlank(address)) {
-      // we will say address is valid if totally new and totally blank
-      return !address.guid;
-    } else {
-      return false;
-    }
-  }
-
-
   // let's have at least 2 real data fields completed before we start saving stuff
   enoughDataToVerify(address: Address): boolean {
     return address && !util.isEmpty(address.name) && !util.isEmpty(address.country) && !util.isEmpty(address.street1);
@@ -636,15 +599,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     this.saveTrigger$.next();
   }
 
-  public convertToFormattedString(a: Address): string {
-    const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
-    const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
-    const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
-      // tslint:disable-next-line:max-line-length
-    return `${isEmpty(a.name) ? '' : a.name}${isEmpty(a.name) ? streetFormat(a.street1) : format(a.street1)}${format(a.street2)}${format(a.city)}${format(a.state)}`
-      + `${format(a.zip)}${format(a.country)}${isEmpty(a.phone) ? '' : ', Phone: ' + a.phone}`;
-  }
-
   ngOnDestroy(): void {
       // finding that some slow http operations
       // killed if we destroy too early
@@ -657,5 +611,49 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         }),
         take(1)
     ).subscribe();
+  }
+
+  private initializeComponentState(): void {
+    const initialState: ComponentState = {
+      isReadOnly: false,
+      activityInstanceGuid: null,
+      showSuggestion: false,
+      enteredAddress: null,
+      suggestedAddress: null,
+      formWarningMessages: [],
+      formErrorMessages: [],
+      fieldErrors: [],
+      isTemporarilyDisabled: false
+    };
+
+
+    this.state$ = this.stateUpdates$.pipe(
+      startWith(initialState),
+      scan((acc: ComponentState, update) => ({ ...acc, ...update })),
+      tap(state =>  this.logger.logDebug(`${this.LOG_SOURCE}. New embeddedComponentState$=%o`, state)),
+      shareReplay(1)
+    );
+    this.stateSubscription = this.state$.pipe(
+      takeUntil(this.ngUnsubscribe))
+      .subscribe();
+  }
+
+  private meetsActivityRequirements(currentAddress: Address | null): boolean {
+    if (this.block.requireVerified && !currentAddress) {
+      return false;
+    }
+    if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
+      return false;
+    }
+    return true;
+  }
+
+  private computeValidityForSparseAddress(address: Address | null): boolean {
+    if (address && this.addressIsBlank(address)) {
+      // we will say address is valid if totally new and totally blank
+      return !address.guid;
+    } else {
+      return false;
+    }
   }
 }

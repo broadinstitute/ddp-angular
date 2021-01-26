@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -49,7 +49,7 @@ import { NewRequestMock } from './components/newRequestMock.component';
 import { ValidationMessage } from './components/validationMessage.component';
 // Logging components
 import { LoggingService } from './services/logging.service';
-import {StackdriverErrorReporterService} from './services/stackdriverErrorReporter.service';
+import { StackdriverErrorReporterService } from './services/stackdriverErrorReporter.service';
 
 import { ConsentServiceAgent } from './services/serviceAgents/consentServiceAgent.service';
 // User activities

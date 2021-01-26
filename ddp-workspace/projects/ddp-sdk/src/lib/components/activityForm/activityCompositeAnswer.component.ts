@@ -99,9 +99,12 @@ export class ActivityCompositeAnswer implements OnChanges {
                     const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
                         this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
 
-                    // If a row in Composite block has 2 and more questions, and a user answered only on the first question and reloaded the page
-                    // the backend returns an array of answers only with 1 item, so when the component will build rows, we will miss some blocks
-                    // example: https://broadinstitute.atlassian.net/browse/DDP-4536; method below looks which blocks were missed and add them
+                    // If a row in Composite block has 2 and more questions,
+                    // and a user answered only on the first question and reloaded the page
+                    // the backend returns an array of answers only with 1 item,
+                    // so when the component will build rows, we will miss some blocks
+                    // example: https://broadinstitute.atlassian.net/browse/DDP-4536;
+                    // method below looks which blocks were missed and add them
                     // Important: if a user answered only on the last question, backend returns the correct array of answers
                     this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
                         if (currentRow.length !== blankRow.length) {
@@ -113,45 +116,6 @@ export class ActivityCompositeAnswer implements OnChanges {
                 }
             }
         }
-    }
-
-    // Use original child question blocks as the prototypes to make real working ones
-    // tslint:disable-next-line:max-line-length
-    private buildBlockForChildQuestion(childQuestionBlock: ActivityQuestionBlock<any>, answerContainer: any, shown: boolean): ActivityQuestionBlock<any> {
-        // Each child will need its own copy of the block to work properly
-        const newQuestionBlock: ActivityQuestionBlock<any> = this.deepClone(childQuestionBlock);
-        newQuestionBlock.validators = childQuestionBlock.validators.map((each) => this.deepClone(each));
-        if (this.convertQuestionToLabels && !newQuestionBlock.label) {
-            newQuestionBlock.label = childQuestionBlock.question;
-            newQuestionBlock.question = '';
-        }
-        if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
-            newQuestionBlock.placeholder = newQuestionBlock.question;
-            newQuestionBlock.question = '';
-            if (childQuestionBlock.isRequired && this.showAsterisk(childQuestionBlock.questionType)) {
-                newQuestionBlock.placeholder += ' *';
-            }
-        }
-        if (this.block.childOrientation === ChildOrientation.Horizontal) {
-            newQuestionBlock.question = '';
-        }
-        // clone does not update references to original object. we need to do that here.
-        newQuestionBlock.validators.forEach((validator) => validator.question = newQuestionBlock);
-        newQuestionBlock.answer = answerContainer === null ? null : answerContainer.value;
-        newQuestionBlock.shown = shown;
-
-        return newQuestionBlock;
-    }
-
-    // We assume question prompt should be used as placeholder in certain situations.
-    // Relax this assumption if API adds an indicator for this.
-    private shouldSetPlaceholderToBeQuestionText(childQuestionBlock: ActivityQuestionBlock<any>): boolean {
-        if (childQuestionBlock.question && !(childQuestionBlock.placeholder)) {
-            return (childQuestionBlock.questionType === QuestionType.Text)
-                || (childQuestionBlock.questionType === QuestionType.Date)
-                || (childQuestionBlock.questionType === QuestionType.Numeric);
-        }
-        return false;
     }
 
     public updateValue(row: number, column: number, value: AnswerValue): void {
@@ -182,20 +146,6 @@ export class ActivityCompositeAnswer implements OnChanges {
         }
     }
 
-    private buildComponentAnswers(): any[][] {
-        return this.childQuestionBlocks.map(childQuestionBlockRow =>
-            childQuestionBlockRow.map((childQuestionBlock) => {
-                return this.buildChildAnswer(childQuestionBlock);
-            }));
-    }
-
-    private buildChildAnswer(childQuestionBlock: ActivityQuestionBlock<any>, answer?: any): any {
-        return {
-            stableId: childQuestionBlock.stableId,
-            value: _.isUndefined(answer) ? childQuestionBlock.answer : answer
-        };
-    }
-
     public addBlankRow(): void {
         this.childQuestionBlocks.push(this.block.children.map(questionBlock =>
             this.buildBlockForChildQuestion(questionBlock, null, this.block.shown)));
@@ -223,4 +173,58 @@ export class ActivityCompositeAnswer implements OnChanges {
     private showAsterisk(questionType: QuestionType): boolean {
         return !this.config.compositeRequiredFieldExceptions.includes(questionType);
     }
+
+    // Use original child question blocks as the prototypes to make real working ones
+    // tslint:disable-next-line:max-line-length
+    private buildBlockForChildQuestion(childQuestionBlock: ActivityQuestionBlock<any>, answerContainer: any, shown: boolean): ActivityQuestionBlock<any> {
+        // Each child will need its own copy of the block to work properly
+        const newQuestionBlock: ActivityQuestionBlock<any> = this.deepClone(childQuestionBlock);
+        newQuestionBlock.validators = childQuestionBlock.validators.map((each) => this.deepClone(each));
+        if (this.convertQuestionToLabels && !newQuestionBlock.label) {
+            newQuestionBlock.label = childQuestionBlock.question;
+            newQuestionBlock.question = '';
+        }
+        if (this.shouldSetPlaceholderToBeQuestionText(childQuestionBlock)) {
+            newQuestionBlock.placeholder = newQuestionBlock.question;
+            newQuestionBlock.question = '';
+            if (childQuestionBlock.isRequired && this.showAsterisk(childQuestionBlock.questionType)) {
+            newQuestionBlock.placeholder += ' *';
+          }
+        }
+        if (this.block.childOrientation === ChildOrientation.Horizontal) {
+            newQuestionBlock.question = '';
+        }
+        // clone does not update references to original object. we need to do that here.
+        newQuestionBlock.validators.forEach((validator) => validator.question = newQuestionBlock);
+        newQuestionBlock.answer = answerContainer === null ? null : answerContainer.value;
+        newQuestionBlock.shown = shown;
+
+        return newQuestionBlock;
+    }
+
+    // We assume question prompt should be used as placeholder in certain situations.
+    // Relax this assumption if API adds an indicator for this.
+    private shouldSetPlaceholderToBeQuestionText(childQuestionBlock: ActivityQuestionBlock<any>): boolean {
+        if (childQuestionBlock.question && !(childQuestionBlock.placeholder)) {
+            return (childQuestionBlock.questionType === QuestionType.Text)
+              || (childQuestionBlock.questionType === QuestionType.Date)
+              || (childQuestionBlock.questionType === QuestionType.Numeric);
+        }
+        return false;
+    }
+
+    private buildComponentAnswers(): any[][] {
+        return this.childQuestionBlocks.map(childQuestionBlockRow =>
+            childQuestionBlockRow.map((childQuestionBlock) => {
+                return this.buildChildAnswer(childQuestionBlock);
+            })
+        );
+    }
+
+    private buildChildAnswer(childQuestionBlock: ActivityQuestionBlock<any>, answer?: any): any {
+        return {
+            stableId: childQuestionBlock.stableId,
+            value: _.isUndefined(answer) ? childQuestionBlock.answer : answer
+        };
+  }
 }

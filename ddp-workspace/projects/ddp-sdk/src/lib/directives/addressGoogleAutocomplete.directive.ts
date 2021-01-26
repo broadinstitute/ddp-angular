@@ -3,8 +3,8 @@ import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestro
 import { ScriptLoaderService } from '../services/scriptLoader.service';
 import { Address } from '../models/address';
 import { ConfigurationService } from '../services/configuration.service';
-import { Observable, Subject } from 'rxjs';
-import { concat, share, skip, takeUntil } from 'rxjs/operators';
+import { concat, Observable, Subject } from 'rxjs';
+import { share, skip, takeUntil } from 'rxjs/operators';
 import { LoggingService } from '../services/logging.service';
 import * as _ from 'underscore';
 import Autocomplete = google.maps.places.Autocomplete;

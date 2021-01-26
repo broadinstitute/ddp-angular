@@ -68,62 +68,6 @@ export class Auth0AdapterService implements OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    private createWebAuth(clientId: string, redirectUri: string): any {
-        // TODO Clarify how audience should be used, what is the correct value,etc.
-        // TODO refactor and document differences between localregistration flow and "normal" flow
-        let audience = 'https://' + this.configuration.auth0Domain;
-        if (!_.isUndefined(this.configuration.auth0Audience)) {
-            // when using a custom auth0 domain, the audience and domain will differ
-            // and the audience needs to be the original name of the tenant
-            audience = 'https://' + this.configuration.auth0Audience;
-        }
-        audience = audience + '/userinfo';
-        return new auth0.WebAuth({
-            domain: this.configuration.auth0Domain,
-            clientID: clientId,
-            responseType: 'token id_token',
-            audience,
-            scope: 'openid profile',
-            redirectUri
-        });
-    }
-
-    private createLocalWebAuth(clientId: string): any {
-        // TODO see audience in createWebAuth()
-        let audience = 'https://' + this.configuration.auth0Domain;
-        if (!_.isUndefined(this.configuration.auth0Audience)) {
-            audience = 'https://' + this.configuration.auth0Audience;
-        }
-        audience = audience + '/userinfo';
-        return new auth0.WebAuth({
-            domain: this.configuration.auth0Domain,
-            clientID: clientId,
-            studyGuid: this.configuration.studyGuid,
-            responseType: 'code',
-            audience,
-            scope: 'offline_access openid profile',
-            redirectUri: this.configuration.auth0CodeRedirect
-        });
-    }
-
-    /**
-     * Two modes: signup or login
-     */
-    private showAuth0Modal(mode: string, additionalAuth0QueryParams?: Record<string, string> | object): void {
-        const auth0Params = {
-            study_guid: this.configuration.studyGuid,
-            mode,
-            ...(additionalAuth0QueryParams && additionalAuth0QueryParams)
-        };
-        if (this.configuration.doLocalRegistration) {
-            sessionStorage.setItem('localAdminAuth', 'false');
-            sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
-        }
-        this.webAuth.authorize(
-            auth0Params,
-            () => this.log.logError(`${this.LOG_SOURCE}.showAuth0Modal`, 'auth0 error'));
-    }
-
     /**
      * Shows the auth0 modal with the ability to login, but not signup
      */
@@ -291,8 +235,8 @@ export class Auth0AdapterService implements OnDestroy {
             const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
             return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
         };
-        const auth0 = currentSession.isAdmin ? this.adminWebAuth : this.webAuth;
-        const checkSession$ = bindNodeCallback(cb => auth0.checkSession({
+        const auth0Instance = currentSession.isAdmin ? this.adminWebAuth : this.webAuth;
+        const checkSession$ = bindNodeCallback(cb => auth0Instance.checkSession({
             studyGuid,
             responseType: 'token id_token',
             renew_token_only: true // this flag will indicate that Auth0 should not try to call user registration
@@ -338,6 +282,62 @@ export class Auth0AdapterService implements OnDestroy {
         this.renewNotifier.hideSessionExpirationNotifications();
         sessionStorage.setItem('nextUrl', this.router.url);
         this.logout(returnToUrl);
+    }
+
+    private createWebAuth(clientId: string, redirectUri: string): any {
+        // TODO Clarify how audience should be used, what is the correct value,etc.
+        // TODO refactor and document differences between localregistration flow and "normal" flow
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            // when using a custom auth0 domain, the audience and domain will differ
+            // and the audience needs to be the original name of the tenant
+            audience = 'https://' + this.configuration.auth0Audience;
+        }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            responseType: 'token id_token',
+            audience,
+            scope: 'openid profile',
+            redirectUri
+        });
+    }
+
+    private createLocalWebAuth(clientId: string): any {
+        // TODO see audience in createWebAuth()
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            audience = 'https://' + this.configuration.auth0Audience;
+        }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            studyGuid: this.configuration.studyGuid,
+            responseType: 'code',
+            audience,
+            scope: 'offline_access openid profile',
+            redirectUri: this.configuration.auth0CodeRedirect
+        });
+    }
+
+    /**
+     * Two modes: signup or login
+     */
+    private showAuth0Modal(mode: string, additionalAuth0QueryParams?: Record<string, string> | object): void {
+        const auth0Params = {
+            study_guid: this.configuration.studyGuid,
+            mode,
+            ...(additionalAuth0QueryParams && additionalAuth0QueryParams)
+        };
+        if (this.configuration.doLocalRegistration) {
+            sessionStorage.setItem('localAdminAuth', 'false');
+            sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
+        }
+        this.webAuth.authorize(
+            auth0Params,
+            () => this.log.logError(`${this.LOG_SOURCE}.showAuth0Modal`, 'auth0 error'));
     }
 
     private handleExpiredTemporarySession(): void {

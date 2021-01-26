@@ -60,35 +60,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     this.setupScrollToErrorAction();
   }
 
-  private setupErrorMessage(): void {
-    const localValidatorMsg$: Observable<string | null> =
-      combineLatest([this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)),
-      this.validationRequested$]).pipe(
-        // not displaying any local validations until a validation is requested
-        filter(([_, validationRequested]) => !!validationRequested),
-        map(() => {
-          const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
-          return firstFailedValidator ? firstFailedValidator.result : null;
-        }),
-        startWith(null as string | null)
-      );
-    // merge these together and initialize with messages coming from the question definition
-    this.errorMessage$ = combineLatest([
-      this.block.serverValidationMessages$.pipe(startWith(this.block.serverValidationMessages)),
-      localValidatorMsg$]
-    ).pipe(
-      // delay() needed to "prevent expression has changed after it was checked error"
-      delay(0),
-      map(([serverMsg, localMsg]) => {
-        const msgs: string[] = [];
-        serverMsg && msgs.push(...serverMsg);
-        localMsg && msgs.push(localMsg);
-        return msgs.length ? msgs : null;
-      }),
-      shareReplay()
-    );
-  }
-
   public setupSavingData(): void {
     this.enteredValue$.pipe(
       filter(() => this.block.canPatch()),
@@ -101,22 +72,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  private setupScrollToErrorAction(): void {
-    this.validationRequested$.pipe(
-      filter(validationRequested => validationRequested && this.block.scrollTo),
-      tap(() => {
-        const headerOffset = this.config.scrollToErrorOffset;
-        const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top + this.windowRef.nativeWindow.scrollY - headerOffset;
-        this.windowRef.nativeWindow.scrollTo({
-          top,
-          behavior: 'smooth'
-        });
-        this.block.scrollTo = false;
-      }),
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe();
-  }
-
   public getQuestionClass(block: ActivityQuestionBlock<any>): string {
     return 'Question--' + block.questionType;
   }
@@ -124,5 +79,50 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  private setupErrorMessage(): void {
+      const localValidatorMsg$: Observable<string | null> =
+          combineLatest([this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)), this.validationRequested$])
+              .pipe(
+                  // not displaying any local validations until a validation is requested
+                  filter(([_, validationRequested]) => !!validationRequested),
+                  map(() => {
+                      const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
+                      return firstFailedValidator ? firstFailedValidator.result : null;
+                  }),
+                  startWith(null as string | null)
+              );
+      // merge these together and initialize with messages coming from the question definition
+      this.errorMessage$ = combineLatest([
+          this.block.serverValidationMessages$.pipe(startWith(this.block.serverValidationMessages)),
+          localValidatorMsg$]
+      ).pipe(
+          // delay() needed to "prevent expression has changed after it was checked error"
+          delay(0),
+          map(([serverMsg, localMsg]) => {
+              const msgs: string[] = [];
+              serverMsg && msgs.push(...serverMsg);
+              localMsg && msgs.push(localMsg);
+              return msgs.length ? msgs : null;
+          }),
+          shareReplay()
+      );
+  }
+
+  private setupScrollToErrorAction(): void {
+      this.validationRequested$.pipe(
+        filter(validationRequested => validationRequested && this.block.scrollTo),
+        tap(() => {
+            const headerOffset = this.config.scrollToErrorOffset;
+            const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top + this.windowRef.nativeWindow.scrollY - headerOffset;
+            this.windowRef.nativeWindow.scrollTo({
+                top,
+                behavior: 'smooth'
+            });
+            this.block.scrollTo = false;
+        }),
+        takeUntil(this.ngUnsubscribe)
+      ).subscribe();
   }
 }

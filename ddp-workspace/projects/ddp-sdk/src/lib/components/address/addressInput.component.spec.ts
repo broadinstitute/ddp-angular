@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AddressInputComponent } from './addressInput.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -30,7 +30,7 @@ describe('AddressInputComponent', () => {
   let addressServiceSpy: jasmine.SpyObj<AddressService>;
   const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['findAllCountryInfoSummaries']);
     aisSpy = jasmine.createSpyObj('AddressInputService', ['createForm']);
 

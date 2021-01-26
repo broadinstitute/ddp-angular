@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
-import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
+import { PicklistSelectMode } from '../../../models/activity/picklistSelectMode';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
@@ -34,7 +34,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [checked]="getOptionSelection(option.stableId)"
                           [disabled]="readonly"
                           [disableRipple]="true"
-                          (change)="optionChanged($event.checked, option); 
+                          (change)="optionChanged($event.checked, option);
                                     option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
               <span [innerHTML]="option.optionLabel"></span>
                 <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
@@ -219,7 +219,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         const parentOption = this.block.picklistOptions.find(item => item.nestedOptions ? item.nestedOptions.includes(option) : []);
         if (exclusive || this.hasSelectedExclusiveNestedOption(parentOption.nestedOptions)) {
             const nestedOptionsIds = parentOption.nestedOptions.map(item => item.stableId);
-            this.block.answer = this.block.answer.filter(answer => !nestedOptionsIds.includes(answer.stableId));
+            this.block.answer = this.block.answer.filter(answ => !nestedOptionsIds.includes(answ.stableId));
         }
         const answer = this.createAnswerDto(stableId);
         if (value) {
@@ -233,9 +233,8 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
     }
 
     private hasSelectedExclusiveNestedOption(options: Array<ActivityPicklistOption>): boolean {
-        let hasExclusive = false;
-        hasExclusive = this.block.answer.some(answer => {
-            const option = options.find(option => option.stableId === answer.stableId);
+        const hasExclusive = this.block.answer.some(answer => {
+            const option = options.find(opt => opt.stableId === answer.stableId);
             return option && option.exclusive;
         });
         return hasExclusive;

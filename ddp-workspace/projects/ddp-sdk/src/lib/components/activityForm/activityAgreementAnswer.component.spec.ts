@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { By } from '@angular/platform-browser';
 import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAgreementQuestionBlock';
@@ -33,7 +33,7 @@ describe('ActivityAgreementAnswer', () => {
     let fixture: ComponentFixture<ActivityAgreementAnswer>;
     let debugElement: DebugElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatCheckboxModule,

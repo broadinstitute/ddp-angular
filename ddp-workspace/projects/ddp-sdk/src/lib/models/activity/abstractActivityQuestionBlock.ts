@@ -15,9 +15,9 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
   public displayNumber: number | null;
   public tooltip: string | null;
   public readonly: boolean | false;
-  private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
   public serverValidationMessages$: Observable<Array<string>> = this.serverValidationMessagesSubject.asObservable();
   public validators: Array<ActivityAbstractValidationRule>;
+  private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
 
   constructor() {
     super();
@@ -36,17 +36,6 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
       .reduce((accumulator, validator) => accumulator && validator.recalculate(), true);
   }
 
-  protected validateInternally(): boolean {
-    let result = true;
-    if (this.shown) {
-      result = !this.serverValidationMessages || this.serverValidationMessages.length === 0;
-      for (const validator of this.validators) {
-        result = result && validator.recalculate();
-      }
-    }
-    return result;
-  }
-
   public set serverValidationMessages(messages: Array<string>) {
     this.serverValidationMessagesSubject.next(messages);
   }
@@ -57,5 +46,17 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
 
   public addServerValidationMessage(message: string): void {
     this.serverValidationMessagesSubject.next(this.serverValidationMessagesSubject.getValue().concat(message));
+  }
+
+
+  protected validateInternally(): boolean {
+    let result = true;
+    if (this.shown) {
+      result = !this.serverValidationMessages || this.serverValidationMessages.length === 0;
+      for (const validator of this.validators) {
+        result = result && validator.recalculate();
+      }
+    }
+    return result;
   }
 }

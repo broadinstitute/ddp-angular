@@ -1,4 +1,4 @@
-import { Directive, Renderer2, ElementRef, forwardRef } from '@angular/core';
+import { Directive, Renderer2, ElementRef, forwardRef, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR, DefaultValueAccessor } from '@angular/forms';
 import * as _ from 'underscore';
 
@@ -10,11 +10,6 @@ const UPPERCASE_INPUT_CONTROL_VALUE_ACCESSOR = {
 
 @Directive({
     selector: 'input[uppercase]',
-    host: {
-        // When the user updates the input
-        '(input)': 'onInput($event.target.value)',
-        '(blur)': 'onTouched()'
-    },
     providers: [
         UPPERCASE_INPUT_CONTROL_VALUE_ACCESSOR,
     ]
@@ -27,18 +22,12 @@ export class UpperCaseInputDirective extends DefaultValueAccessor {
         super(renderer, elementRef, false);
     }
 
-    private static transformValue(value: any): any {
-        return value && typeof value === 'string'
-            ? value.toUpperCase()
-            : value;
-    }
-
     public writeValue(value: any): void {
         const transformed = UpperCaseInputDirective.transformValue(value);
         super.writeValue(transformed);
     }
 
-    public onInput(value: any): void {
+    public onInputHandler(value: any): void {
         if (_.isString(value)) {
             const start = this.elementRef.nativeElement.selectionStart;
             const end = this.elementRef.nativeElement.selectionEnd;
@@ -51,5 +40,21 @@ export class UpperCaseInputDirective extends DefaultValueAccessor {
                 this.elementRef.nativeElement.setSelectionRange(start, end);
             }
         }
+    }
+
+    @HostListener('input', ['$event.target.value'])
+    onInput(value): void {
+        this.onInputHandler(value);
+    }
+
+    @HostListener('blur')
+    onBlur(): void {
+        this.onTouched();
+    }
+
+    private static transformValue(value: any): any {
+        return value && typeof value === 'string'
+            ? value.toUpperCase()
+            : value;
     }
 }

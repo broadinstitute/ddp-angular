@@ -32,7 +32,7 @@ describe('ActivityDateNavyValidationRule', () => {
             day: null,
             year: null
         };
-        validator = new ActivityDateNavyValidationRule(question, dateService);  
+        validator = new ActivityDateNavyValidationRule(question, dateService);
         expect(validator.recalculate()).toBeTruthy();
         expect(validator.result).toBeNull();
     });
@@ -45,7 +45,7 @@ describe('ActivityDateNavyValidationRule', () => {
             day: 0,
             year: 0
         };
-        validator = new ActivityDateNavyValidationRule(question, dateService);  
+        validator = new ActivityDateNavyValidationRule(question, dateService);
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });
@@ -58,7 +58,7 @@ describe('ActivityDateNavyValidationRule', () => {
             day: 1,
             year: null
         };
-        validator = new ActivityDateNavyValidationRule(question, dateService);  
+        validator = new ActivityDateNavyValidationRule(question, dateService);
         expect(validator.recalculate()).toBeTruthy();
         expect(validator.result).toBeNull();
     });
@@ -71,7 +71,7 @@ describe('ActivityDateNavyValidationRule', () => {
             day: 111,
             year:  1
         };
-        validator = new ActivityDateNavyValidationRule(question, dateService);  
+        validator = new ActivityDateNavyValidationRule(question, dateService);
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });

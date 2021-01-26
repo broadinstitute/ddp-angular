@@ -36,8 +36,8 @@ export class ActivityNumericAnswer implements OnInit, OnChanges {
         this.initForm();
     }
 
-    public ngOnChanges(changes: SimpleChanges): void { 
-        for (const propName in changes) {
+    public ngOnChanges(changes: SimpleChanges): void {
+        for (const propName of Object.keys(changes)) {
             if (propName === 'block' && !changes['block'].firstChange) {
                 this.initForm();
             }
