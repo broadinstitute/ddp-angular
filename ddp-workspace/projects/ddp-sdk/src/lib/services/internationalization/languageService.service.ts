@@ -41,10 +41,11 @@ export class LanguageService {
 
   public useStoredLanguage(): string {
     const loadedCode: string = localStorage.getItem('studyLanguage');
-    if (this.changeLanguage(loadedCode)) {
-      return loadedCode;
+    if (loadedCode) {
+      this.changeLanguage(loadedCode);
+    } else {
+      return null;
     }
-    return null;
   }
 
   public getProfileLanguageUpdateNotifier(): Observable<void> {
