@@ -312,7 +312,7 @@ commands:
       - when:
           condition:
             or:
-              equal: [ atcp, << pipeline.parameters.study_key >> ]
+              - equal: [ atcp, << pipeline.parameters.study_key >> ]
           steps:
             - execute-study-specific-commands
       - run:
