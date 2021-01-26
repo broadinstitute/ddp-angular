@@ -5,12 +5,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { FilterInfo } from '../../models/study-listing/filter-info';
 
 export class StudyListingDataSource extends DataSource<StudyInfo> {
-  private baseData: StudyInfo[] = null;
-  private filterBy: string = null;
   shouldSort = false;
   sortIndex = -1;
   sortDir: string = null;
   dataSubj: BehaviorSubject<StudyInfo[]>;
+  private baseData: StudyInfo[] = null;
+  private filterBy: string = null;
 
   constructor(private translator: TranslateService, private bucketUrl: string, private columnFilters: FilterInfo[]) {
     super();
@@ -20,10 +20,6 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
     this.dataSubj = new BehaviorSubject<StudyInfo[]>(this.baseData);
     this.updateDataProcessing();
     this.translator.onLangChange.subscribe(() => this.updateTranslations());
-  }
-
-  private static compare(a: string, b: string, isAsc: boolean): number {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   connect(): BehaviorSubject<StudyInfo[]> {
@@ -65,6 +61,10 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
   public addColumnFilters(columnFilters: FilterInfo[]): void {
     this.columnFilters = columnFilters;
     this.updateDataProcessing();
+  }
+
+  private static compare(a: string, b: string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   private isFiltered(): boolean {
