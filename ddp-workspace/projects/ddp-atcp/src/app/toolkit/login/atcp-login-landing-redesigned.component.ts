@@ -1,15 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
 import {
-  GovernedParticipantsServiceAgent,
   LoggingService,
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
+
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
+import { AtcpCommunicationService } from '../services/communication.service';
 import { AtcpLoginLandingComponent } from './atcp-login-landing.component';
 
 @Component({
@@ -23,13 +26,14 @@ export class AtcpLoginLandingRedesignedComponent extends AtcpLoginLandingCompone
     router: Router,
     auth0: Auth0AdapterService,
     sessionService: SessionMementoService,
-    participantService: GovernedParticipantsServiceAgent,
     workflowService: WorkflowServiceAgent,
     workflowBuilder: WorkflowBuilderService,
     log: LoggingService,
+    communicationService: AtcpCommunicationService,
+    translateService: TranslateService,
     @Inject('ddp.config') config: ConfigurationService,
     @Inject('toolkit.toolkitConfig')
-    toolkitConfiguration: ToolkitConfigurationService
+    toolkitConfiguration: ToolkitConfigurationService,
   ) {
     super(
       router,
@@ -38,8 +42,10 @@ export class AtcpLoginLandingRedesignedComponent extends AtcpLoginLandingCompone
       workflowService,
       workflowBuilder,
       log,
+      communicationService,
+      translateService,
       config,
-      toolkitConfiguration
+      toolkitConfiguration,
     );
   }
 }

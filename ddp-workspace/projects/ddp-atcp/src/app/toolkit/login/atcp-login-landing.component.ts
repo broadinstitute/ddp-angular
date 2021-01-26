@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
+
 import {
   SessionMementoService,
   Auth0AdapterService,
@@ -14,6 +18,8 @@ import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import * as Routes from '../../router-resources';
+import { AtcpCommunicationService } from '../services/communication.service';
+import { PopupMessage } from '../models/popupMessage';
 
 @Component({
   selector: 'app-atcp-login-landing',
@@ -29,9 +35,11 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
     private workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
     private log: LoggingService,
+    private communicationService: AtcpCommunicationService,
+    private translateService: TranslateService,
     @Inject('ddp.config') private config: ConfigurationService,
     @Inject('toolkit.toolkitConfig')
-    private toolkitConfiguration: ToolkitConfigurationService
+    private toolkitConfiguration: ToolkitConfigurationService,
   ) {}
 
   public ngOnInit(): void {
@@ -47,7 +55,7 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
     this.anchor = this.sessionService.sessionObservable
       .pipe(
         filter(session => session !== null && !!session.idToken),
-        take(1)
+        take(1),
       )
       .subscribe(() => {
         this.redirect();
@@ -63,7 +71,7 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
     if (error) {
       this.log.logEvent(
         this.LOG_SOURCE,
-        'auth error occured: ' + JSON.stringify(error)
+        'auth error occured: ' + JSON.stringify(error),
       );
 
       if (error.code === 'unauthorized') {
@@ -74,7 +82,7 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
 
         this.log.logEvent(
           this.LOG_SOURCE,
-          `logging out and redirecting to ${returnTo}`
+          `logging out and redirecting to ${returnTo}`,
         );
 
         this.auth0.webAuth.logout({
@@ -89,7 +97,11 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
         }${Routes.JoinUs}`;
         const clientID = this.config.auth0ClientId;
 
-        this.log.logEvent(this.LOG_SOURCE, 'User tried to skip prequal with social sign in...', `Redirecting to ${returnTo}`);
+        this.log.logEvent(
+          this.LOG_SOURCE,
+          'User tried to skip prequal with social sign in...',
+          `Redirecting to ${returnTo}`,
+        );
 
         this.auth0.webAuth.logout({
           returnTo,
@@ -113,10 +125,27 @@ export class AtcpLoginLandingComponent implements OnInit, OnDestroy {
       this.workflowService
         .getNext()
         .pipe(take(1))
-        .subscribe(
-          response =>
-            response && this.workflowBuilder.getCommand(response).execute()
-        );
+        .subscribe(response => {
+          if (response) {
+            of(null)
+              .pipe(
+                tap(() => {
+                  this.communicationService.showPopupMessage(
+                    new PopupMessage(
+                      this.translateService.instant('SDK.SuccessSignIn'),
+                      false,
+                    ),
+                  );
+                }),
+                delay(5000),
+              )
+              .subscribe(() => {
+                this.communicationService.closePopupMessage();
+              });
+
+            this.workflowBuilder.getCommand(response).execute();
+          }
+        });
     }
   }
 }
