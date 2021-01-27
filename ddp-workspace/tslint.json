@@ -9,15 +9,11 @@
     "deprecation": {
       "severity": "warn"
     },
-    "align": [
-      false
-    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
     ],
     "interface-name": false,
-    "max-classes-per-file": false,
     "max-line-length": [
       true,
       140
@@ -68,7 +64,7 @@
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
-    "no-output-rename": true,
+    "no-output-rename": false,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": false,
@@ -80,7 +76,10 @@
       true,
       "check-space"
     ],
-    "curly": [true, "ignore-same-line"],
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
     "eofline": true,
     "forin": true,
     "import-spacing": true,
