@@ -15,9 +15,9 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
   public displayNumber: number | null;
   public tooltip: string | null;
   public readonly: boolean | false;
-  private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
   public serverValidationMessages$: Observable<Array<string>> = this.serverValidationMessagesSubject.asObservable();
   public validators: Array<ActivityAbstractValidationRule>;
+  private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
 
   constructor() {
     super();

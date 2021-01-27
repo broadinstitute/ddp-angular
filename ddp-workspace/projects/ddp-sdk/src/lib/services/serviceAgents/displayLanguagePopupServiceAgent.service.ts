@@ -22,18 +22,6 @@ export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAge
     super(configuration, http, logger);
    }
 
-  private getStudyDisplayLanguagePopup(): Observable<boolean> {
-    return this.studyDetailAgent.studyDetail.pipe(map(res => true === res.shouldDisplayLanguageChangePopup));
-  }
-
-  private getUserNotDisplayLanguagePopup(): Observable<boolean> {
-    // Make sure we return the starting value from the profile
-    this.profile.profile
-        .pipe(take(1))
-        .subscribe(res => this.userDoNotDisplayObsSource.next(true === res.profile.skipLanguagePopup));
-    return this.userDoNotDisplayObsSource.pipe(skip(1)); // Skip the initial false value
-  }
-
   public setUserDoNotDisplayLanguagePopup(userDoNotDisplay: boolean): void {
     // Update the value in the profile
     const userProfile = new UserProfile();
@@ -50,5 +38,17 @@ export class DisplayLanguagePopupServiceAgent extends NotAuthenticatedServiceAge
 
     return zip(studyDisplayObservable, userNotDisplayObservable)
       .pipe(map(([displayForStudy, doNotDisplayForUser]) => displayForStudy && !doNotDisplayForUser));
+  }
+
+  private getStudyDisplayLanguagePopup(): Observable<boolean> {
+    return this.studyDetailAgent.studyDetail.pipe(map(res => true === res.shouldDisplayLanguageChangePopup));
+  }
+
+  private getUserNotDisplayLanguagePopup(): Observable<boolean> {
+    // Make sure we return the starting value from the profile
+    this.profile.profile
+      .pipe(take(1))
+      .subscribe(res => this.userDoNotDisplayObsSource.next(true === res.profile.skipLanguagePopup));
+    return this.userDoNotDisplayObsSource.pipe(skip(1)); // Skip the initial false value
   }
 }

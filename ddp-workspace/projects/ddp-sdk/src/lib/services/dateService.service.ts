@@ -14,7 +14,8 @@ export class DateService {
 
         const isLeap = ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 
-        const valid = (months31.indexOf(month) !== -1 && day <= 31) || (months30.indexOf(month) !== -1 && day <= 30) || (months28.indexOf(month) !== -1 && day <= 28) || (months28.indexOf(month) !== -1 && day <= 29 && isLeap);
+        const valid = (months31.indexOf(month) !== -1 && day <= 31) || (months30.indexOf(month) !== -1 && day <= 30)
+          || (months28.indexOf(month) !== -1 && day <= 28) || (months28.indexOf(month) !== -1 && day <= 29 && isLeap);
 
         return valid; // it returns true or false
     }

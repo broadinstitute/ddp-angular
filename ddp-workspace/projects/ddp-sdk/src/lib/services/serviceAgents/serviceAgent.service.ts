@@ -1,10 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CommunicationAspect } from './../communicationAspect.service';
-import { ConfigurationService } from './../configuration.service';
+import { CommunicationAspect } from '../communicationAspect.service';
+import { ConfigurationService } from '../configuration.service';
 import { LanguageService } from '../internationalization/languageService.service';
-import { LoggingService } from './../logging.service';
-import { CommunicationException } from './../../models/exceptions/communicationException';
+import { LoggingService } from '../logging.service';
 import { beforeMethod } from 'kaop-ts';
 import { Observable, of, throwError } from 'rxjs';
 import { flatMap, catchError, map, filter, switchMap } from 'rxjs/operators';
@@ -210,14 +209,14 @@ export class ServiceAgent<TEntity> {
     }
 
     protected getHeaders(options: any): Observable<any> {
-        this.logger.logEvent(this.LOG_SOURCE, 'About to get the headers')
+        this.logger.logEvent(this.LOG_SOURCE, 'About to get the headers');
         const headers = Object.assign({
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             withCredentials: false,
             observe: 'response',
             responseType: 'json'
         }, options);
-        this.logger.logEvent(this.LOG_SOURCE, `The headers are: ${JSON.stringify(headers)}`)
+        this.logger.logEvent(this.LOG_SOURCE, `The headers are: ${JSON.stringify(headers)}`);
         return of(headers);
     }
 

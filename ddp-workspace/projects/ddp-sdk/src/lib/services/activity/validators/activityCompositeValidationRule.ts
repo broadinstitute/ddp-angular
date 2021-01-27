@@ -7,8 +7,8 @@ export class ActivityCompositeValidationRule extends ActivityAbstractValidationR
         super(compositeQuestionBlock);
     }
 
-    get compositeQuestion() {
-        return this.question as any;
+    get compositeQuestion(): any {
+        return this.question;
     }
 
     public recalculate(): boolean {

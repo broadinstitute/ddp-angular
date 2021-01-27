@@ -99,7 +99,8 @@ export class SessionMementoService implements OnDestroy {
         participantGuid: string | null = null,
         isAdmin: boolean = false,
         invitationId: string | null = null): void {
-        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000, participantGuid, isAdmin, invitationId);
+        const session = new Session(accessToken, idToken, userGuid, locale, expiresAtInSeconds * 1000,
+                                    participantGuid, isAdmin, invitationId);
         this.updateSession(session);
     }
 

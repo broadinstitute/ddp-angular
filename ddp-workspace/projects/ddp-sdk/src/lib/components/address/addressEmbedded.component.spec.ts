@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { AddressEmbeddedComponent } from './addressEmbedded.component';
 import { AddressInputComponent } from './addressInput.component';
 import { ValidationMessage } from '../validationMessage.component';
@@ -29,11 +29,8 @@ import { ConfigurationService } from '../../services/configuration.service';
     <div>{{ addressErrors }}</div>`
 })
 class FakeAddressInputComponent {
-  private _address: Address | null;
-  private _readonly = false;
-  @Output()valueChanged = new EventEmitter();
-  @Output()
-  formValidStatusChanged = new EventEmitter<boolean>();
+  @Output() valueChanged = new EventEmitter();
+  @Output() formValidStatusChanged = new EventEmitter<boolean>();
   @Input()addressErrors;
   @Input()country = null;
   @Input()phoneRequired;
@@ -47,9 +44,7 @@ class FakeAddressInputComponent {
   }
 
   ais = { currentAddress$: new Subject<Address>() };
-  public clearVerificationErrors(): void {
-    console.log('verifications cleared!');
-  }
+
   @Input()
   set readonly(val: boolean) {
     console.log('set readonly called with: %o', val);
@@ -57,6 +52,12 @@ class FakeAddressInputComponent {
   }
   get readonly(): boolean {
     return this._readonly;
+  }
+  private _address: Address | null;
+  private _readonly = false;
+
+  public clearVerificationErrors(): void {
+    console.log('verifications cleared!');
   }
 }
 
@@ -70,7 +71,7 @@ describe('AddressEmbeddedComponent', () => {
   const configService = new ConfigurationService();
 
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     addressServiceSpy = jasmine.createSpyObj('AddressService',
       ['verifyAddress', 'findDefaultAddress', 'getTempAddress', 'saveTempAddress', 'saveAddress', 'deleteTempAddress']);
     addressServiceSpy.findDefaultAddress.and.returnValue(of(null));
