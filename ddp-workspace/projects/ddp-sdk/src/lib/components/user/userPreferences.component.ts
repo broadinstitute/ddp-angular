@@ -184,7 +184,7 @@ export class UserPreferencesComponent implements OnDestroy {
                 .saveProfile(this.model.newProfile, this.model.profile)
                 .subscribe(x => {
                     this.session.updateSession(sessionDto);
-                    location.reload(true);
+                    location.reload();
                 });
             this.anchor.addNew(profile);
         }
