@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ScriptLoaderService } from 'ddp-sdk';
-import { take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LazyWidgetComponent } from '../lazy-widget/lazy-widget.component';
 
 @Component({
   selector: 'toolkit-instagram-feed-lightswitch-plugin',
@@ -17,7 +18,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
  * Wrapper for Lightwidget Instagram feed component
  * @see {@link https://lightwidget.com/} for further information
  */
-export class InstagramFeedLightwidgetPluginComponent implements OnInit {
+export class InstagramFeedLightwidgetPluginComponent extends LazyWidgetComponent implements OnInit {
   /**
    * This is the widget id that has been setup in the Lightwidget website. Defines what an how feed
    * is displayed
@@ -27,18 +28,27 @@ export class InstagramFeedLightwidgetPluginComponent implements OnInit {
 
   constructor(
     private scriptLoader: ScriptLoaderService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    root: ElementRef) {
+    super(root.nativeElement);
+  }
 
   public ngOnInit(): void {
     if (!this.widgetId) {
       throw new TypeError('widgetId is required');
     }
     this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`https://lightwidget.com/widgets/${this.widgetId}.html`);
-    this.scriptLoader.load({
+
+    const scriptLoading = this.scriptLoader.load({
       name: 'instagram-feed-plugin',
       src: 'https://cdn.lightwidget.com/widgets/lightwidget.js'
-    }).pipe(
-      take(1)
-    ).subscribe();
+    });
+
+    this.isWidgetVisible
+      .pipe(
+        switchMap(() => scriptLoading),
+        take(1),
+      )
+      .subscribe();
   }
 }
