@@ -15,13 +15,14 @@ import { ActivityResponse } from '../../models/activity/activityResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, combineLatest } from 'rxjs';
 import {
     concatMap,
     debounceTime,
     delay,
     filter,
     map,
+    merge,
     shareReplay,
     startWith,
     take,
