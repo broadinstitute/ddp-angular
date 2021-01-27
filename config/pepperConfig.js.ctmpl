@@ -243,7 +243,7 @@ var DDP_ENV = {
     {{end}}
 {{end}}
 
-{{if eq $study_guid "rgp"}}
+{{if eq $study_guid "RGP"}}
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "Bal2RZDbCcWHV5W2QgenIWRRN31GGO52";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
