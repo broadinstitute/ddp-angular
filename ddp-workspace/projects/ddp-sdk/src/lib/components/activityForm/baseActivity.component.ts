@@ -68,7 +68,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
-        this.config = injector.get('ddp.config');
+        this.config = injector.get<ConfigurationService>('ddp.config');
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();

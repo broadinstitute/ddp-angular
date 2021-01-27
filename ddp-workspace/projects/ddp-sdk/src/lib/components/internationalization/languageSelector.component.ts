@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { iif, Observable, of, Subscription, merge } from 'rxjs';
-import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
+import { map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { StudyLanguage } from '../../models/studyLanguage';
@@ -136,10 +136,10 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     // Create an observable that will check each applicable option and return the first valid language found, if any
     const langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
-      flatMap(profileLang => {
+      mergeMap(profileLang => {
         return this.getNextObservable(profileLang, currentStoredLangObservable);
       }),
-      flatMap(currentStoredLang => {
+      mergeMap(currentStoredLang => {
         return this.getNextObservable(currentStoredLang, defaultLangObservable);
       })
     );
