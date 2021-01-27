@@ -252,7 +252,7 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "cbI1pq5iRnb4jz4K2atiOmuwGuObaPn1";
+        DDP_ENV['auth0ClientId'] = "DXd5obKfJrGxCv7Cv8c6PomK0zmmxwOY";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
