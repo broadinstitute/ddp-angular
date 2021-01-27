@@ -223,7 +223,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
-        return new Array<ActivityPicklistAnswerDto>();
+        return [];
     }
 
     private getAnswersStableIds(): Array<string> {

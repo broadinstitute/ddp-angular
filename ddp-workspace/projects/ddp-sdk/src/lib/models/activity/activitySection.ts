@@ -6,13 +6,9 @@ import { ActivitySectionIcon } from './activitySectionIcon';
 export class ActivitySection {
     public name: string;
     public icons: ActivitySectionIcon[];
-    public blocks: Array<ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock>;
+    public blocks: Array<ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock> = [];
     public valid: boolean;
     public visible: boolean;
-
-    constructor() {
-        this.blocks = new Array<ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock>();
-    }
 
     public get incompleteIcon(): string {
         return this.getIcon('INCOMPLETE');

@@ -66,8 +66,8 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
 export class InstitutionsFormComponent implements OnInit, OnDestroy {
     public normalizedInstitutionType: string;
     public requestsInProgress = new BehaviorSubject<number>(1);
-    public savedAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
-    public outputAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
+    public savedAnswers: Array<ActivityInstitutionInfo> = [];
+    public outputAnswers: Array<ActivityInstitutionInfo> = [];
     @Input() block: ActivityInstitutionBlock;
     @Input() studyGuid: string;
     @Input() readonly: boolean;

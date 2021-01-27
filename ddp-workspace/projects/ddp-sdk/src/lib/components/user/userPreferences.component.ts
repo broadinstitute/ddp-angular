@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CompositeDisposable } from './../../compositeDisposable';
+import { CompositeDisposable } from '../../compositeDisposable';
 import { SessionMementoService } from '../../services/sessionMemento.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
@@ -107,7 +107,7 @@ export class UserPreferencesComponent implements OnDestroy {
         1, 2, 3, 4, 5, 6,
         7, 8, 9, 10, 11, 12
     ];
-    public years: Array<number>;
+    public years: Array<number> = [];
     public loaded = false;
     public showError = false;
     private anchor: CompositeDisposable;
@@ -121,7 +121,6 @@ export class UserPreferencesComponent implements OnDestroy {
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.locales = ['en', 'ru', 'fr'];
         this.anchor = new CompositeDisposable();
-        this.years = new Array<number>();
 
         for (let i = 0; i < 50; i++) {
             this.years.push(2005 - i);

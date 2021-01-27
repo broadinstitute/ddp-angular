@@ -6,7 +6,7 @@ import { NetworkingMock } from '../models/networkingMock';
 @Injectable()
 export class CommunicationAspect {
     static feed: Subject<string> = new Subject<string>();
-    static interceptedFeeds: Array<NetworkingMock> = new Array<NetworkingMock>();
+    static interceptedFeeds: Array<NetworkingMock> = [];
     static initialize(): void { }
     static intrcept(meta: Metadata): void {
         const callInfo = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;

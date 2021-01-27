@@ -165,7 +165,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
-        return new Array<ActivityPicklistAnswerDto>();
+        return [];
     }
 
     private createAnswerDto(stableId: string): ActivityPicklistAnswerDto {
