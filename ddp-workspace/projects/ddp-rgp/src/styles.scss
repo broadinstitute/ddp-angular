@@ -87,6 +87,42 @@ a:focus {
     z-index: 1;
 }
 
+.section:nth-of-type(3){
+    position: relative;
+    min-height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+    padding-bottom: 190px;
+    margin: 0 100px;
+
+    .content_tight {
+        padding-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .section:nth-of-type(3) .content_tight {
+        margin-left: 8.33333333%;
+        width: 75%;
+        float:left
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .section:nth-of-type(3) .content_tight {
+        float: left;
+        margin-left: 8.33333333%;
+        width: 83.33333333%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px)  {
+    .section:nth-of-type(3) .content_tight {
+        width: 100%;
+        padding: 50px 25px 75px 25px;
+    }
+}
+
 .Wrapper,
 .Wrapper--homeBottom {
     padding-bottom: 190px;
@@ -109,12 +145,14 @@ a:focus {
 @media only screen and (min-width: 2500px) {
 
     .Wrapper,
-    .Wrapper--homeBottom {
+    .Wrapper--homeBottom,
+    .section:nth-of-type(3) {
         padding-bottom: 391px;
         /* Height of the footer*/
     }
 
-    .Wrapper {
+    .Wrapper,
+    .section:nth-of-type(3) {
         margin: 0 150px;
     }
 
@@ -136,7 +174,8 @@ a:focus {
 }
 
 @media (min-width: 1025px) and (max-width: 1200px) {
-    .Wrapper {
+    .Wrapper,
+    .section:nth-of-type(3) {
         margin: 0 50px;
     }
 
@@ -148,11 +187,13 @@ a:focus {
 @media (min-width: 768px) and (max-width: 1024px) {
 
     .Wrapper,
-    .Wrapper--homeBottom {
+    .Wrapper--homeBottom,
+    .section:nth-of-type(3) {
         padding-bottom: 235px !important;
     }
 
-    .Wrapper {
+    .Wrapper,
+    .section:nth-of-type(3) {
         margin: 0 35px;
     }
 
@@ -165,11 +206,13 @@ a:focus {
 @media (min-width: 451px) and (max-width: 767px) {
 
     .Wrapper,
-    .Wrapper--homeBottom {
+    .Wrapper--homeBottom,
+    .section:nth-of-type(3) {
         padding-bottom: 440px !important;
     }
 
-    .Wrapper {
+    .Wrapper,
+    .section:nth-of-type(3) {
         margin: 0 35px;
     }
 
@@ -181,11 +224,13 @@ a:focus {
 @media only screen and (max-width: 450px) {
 
     .Wrapper,
-    .Wrapper--homeBottom {
-        padding-bottom: 440px !important;
+    .Wrapper--homeBottom,
+    .section:nth-of-type(3) {
+        padding-bottom: 500px !important;
     }
 
-    .Wrapper {
+    .Wrapper,
+    .section:nth-of-type(3) {
         margin: 0;
     }
 
@@ -684,7 +729,8 @@ td .mat-input-wrapper {
 }
 
 .PageHeader-title,
-.PageHeader-title--aboutUs {
+.PageHeader-title--aboutUs,
+.activity-header {
     font-size: 2.2rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -692,24 +738,38 @@ td .mat-input-wrapper {
     color: #ffffff;
 }
 
+.activity-header {
+    padding-left: 15px;
+}
+
+@media (min-width: 1200px) {
+    .activity-header {
+        margin-left: 8.33333333%;
+        width: 75%
+    }
+}
+
 .PageHeader-title--aboutUs {
     margin: 50px 0 30px 0 !important;
     text-align: center;
 }
 
-.PageLayout {
-    padding: 0 100px;
+.PageLayout,
+.header-section .content_tight {
+    padding: 0 100px 1px 100px;
     margin: 0;
 }
 
 @media only screen and (min-width: 2500px) {
-    .PageLayout {
+    .PageLayout,
+    .header-section .content_tight {
         padding: 0 150px 25px 150px;
     }
 }
 
 @media only screen and (max-width: 1024px) {
-    .PageLayout {
+    .PageLayout,
+    .header-section .content_tight {
         padding: 0 50px;
     }
 
@@ -719,14 +779,16 @@ td .mat-input-wrapper {
 }
 
 @media only screen and (max-width: 767px) {
-    .PageLayout {
+    .PageLayout,
+    .header-section .content_tight {
         padding: 0 35px;
         text-align: center;
     }
 }
 
 @media only screen and (max-width: 450px) {
-    .PageLayout {
+    .PageLayout,
+    .header-section .content_tight {
         padding: 0;
     }
 }
@@ -844,7 +906,8 @@ td .mat-input-wrapper {
         margin-top: 0;
     }
 
-    .PageHeader-title {
+    .PageHeader-title,
+    .activity-header {
         font-size: 2rem;
         padding: 20px 0 0 0;
     }
@@ -943,6 +1006,24 @@ h3.Panel-title {
     }
 }
 
+/* Activity pages */
+.main_activity .header-section {
+    padding-top: 75px;
+    padding-bottom: 1px;
+}
+
+
+/* How it Works activity takes up only part of the page */
+.Container--howItWorks {
+    .button_primary {
+        margin-top: 10px;
+    }
+
+    .mat-list-base .mat-list-item {
+        min-height: 48px;
+        height: unset;
+    }
+}
 /******LANDING PAGES*/
 
 .Landing-imageContainer {
@@ -1474,7 +1555,8 @@ h2.Landing-title {
     color: #E8702A;
 }
 
-.Background--orange {
+.Background--orange,
+.header-section {
     background-color: #E8702A !important;
 }
 
