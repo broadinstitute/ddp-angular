@@ -69,6 +69,7 @@ import { PrivacyPolicyModalComponent } from './components/privacy-policy/privacy
 import { PrionPrivacyPolicyComponent } from './components/privacy-policy/prionPrivacyPolicy.component';
 import { ModalActivityButtonComponent } from './components/activity/modal-activity-button.component';
 import { ModalActivityComponent } from './components/activity/modal-activity.component';
+import { LazyWidgetComponent } from './components/lazy-widget/lazy-widget.component';
 
 // Guards
 import { HeaderActionGuard } from './guards/headerAction.guard';
@@ -177,7 +178,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     PrivacyPolicyModalComponent,
     PrionPrivacyPolicyComponent,
     ModalActivityButtonComponent,
-    ModalActivityComponent
+    ModalActivityComponent,
+    LazyWidgetComponent
   ],
   exports: [
     FooterComponent,
