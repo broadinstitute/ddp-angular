@@ -3,7 +3,7 @@ import { WindowRef, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsE
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-  selector: 'welcome',
+  selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
@@ -12,8 +12,8 @@ export class WelcomeComponent implements OnInit {
   public facebookUrl: string;
   public instagramUrl: string;
   public lightswitchWidgetId: string;
-  private readonly HEADER_HEIGHT_REM = 7;
   @ViewChild('scrollAnchor', { static: true }) scrollAnchor: ElementRef;
+  private readonly HEADER_HEIGHT_REM = 7;
 
   constructor(
     private headerConfig: HeaderConfigurationService,
