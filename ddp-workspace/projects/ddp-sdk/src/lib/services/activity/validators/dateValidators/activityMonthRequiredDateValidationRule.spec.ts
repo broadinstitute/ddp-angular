@@ -31,7 +31,7 @@ describe('ActivityMonthRequiredDateValidationRule', () => {
             year: 2001
         };
         validator = new ActivityMonthRequiredDateValidationRule(question);
-        validator.message = MESSAGE;    
+        validator.message = MESSAGE;
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });

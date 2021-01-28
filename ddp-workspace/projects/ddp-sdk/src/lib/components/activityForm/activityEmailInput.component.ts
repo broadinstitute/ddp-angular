@@ -64,9 +64,9 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
     @Input() placeholder: string;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public emailForm: FormGroup;
-    private subscription: Subscription;
     // enable confirm input field to start showing errors without being touched first
     public errorStateMatcher = new InstantErrorStateMatcher();
+    private subscription: Subscription;
 
     constructor(private formBuilder: FormBuilder) { }
 
@@ -75,7 +75,7 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        for (const propName in changes) {
+        for (const propName of Object.keys(changes)) {
             if (propName === 'block' && !changes['block'].firstChange) {
                 this.initEmailForm();
             }

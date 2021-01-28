@@ -6,12 +6,12 @@ import { NetworkingMock } from '../models/networkingMock';
 @Injectable()
 export class CommunicationAspect {
     static feed: Subject<string> = new Subject<string>();
-    static interceptedFeeds: Array<NetworkingMock> = new Array<NetworkingMock>();
+    static interceptedFeeds: Array<NetworkingMock> = [];
     static initialize(): void { }
     static intrcept(meta: Metadata): void {
         const callInfo = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
         const feedMessage = `${CommunicationAspect.getHttpVerb(meta.key)} ${meta.scope.getBackendUrl() + meta.args[0]}`;
-        if (CommunicationAspect.interceptedFeeds.findIndex(x => x.key == callInfo) < 0) {
+        if (CommunicationAspect.interceptedFeeds.findIndex(x => x.key === callInfo) < 0) {
             let codes = [200];
             if (Array.isArray(meta.args[meta.args.length - 1])) {
                 codes = codes.concat(meta.args[meta.args.length - 1]);
@@ -25,13 +25,13 @@ export class CommunicationAspect {
                 returnNull: false
             });
         } else {
-            const feedInfo = CommunicationAspect.interceptedFeeds.find(x => x.key == callInfo);
+            const feedInfo = CommunicationAspect.interceptedFeeds.find(x => x.key === callInfo);
             if (feedInfo && feedInfo.mocked && feedInfo.mock) {
                 if (feedInfo.returnNull) {
                     meta.result = of(null);
                 } else {
                     const responseData = JSON.parse(feedInfo.mock);
-                    if (feedInfo.mockedCode != 200) {
+                    if (feedInfo.mockedCode !== 200) {
                         meta.result = throwError(responseData);
                     } else {
                         meta.result = of(JSON.parse(feedInfo.mock));

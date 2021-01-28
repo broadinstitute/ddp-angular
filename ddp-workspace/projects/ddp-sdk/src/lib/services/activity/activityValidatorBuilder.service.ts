@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DateService } from '../dateService.service';
-import { LoggingService } from './../logging.service';
+import { LoggingService } from '../logging.service';
 import { ActivityAgeRangeValidationRule } from './validators/activityAgeRangeValidationRule';
 import { ActivityNumericRangeValidationRule } from './validators/activityNumericRangeValidationRule';
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
@@ -32,7 +32,9 @@ export class ActivityValidatorBuilder {
             { type: 'COMPLETE', factory: (x, y) => new ActivityCompleteValidationRule(y) },
             { type: 'LENGTH', factory: (x, y) => this.buildLengthValidator(x, y) },
             { type: 'REGEX', factory: (x, y) => new ActivityRegexValidationRule(y, x.regexPattern) },
-            { type: 'NUM_OPTIONS_SELECTED', factory: (x, y) => new ActivityOptionsAmountValidationRule(y, x.minSelections, x.maxSelections) },
+            { type: 'NUM_OPTIONS_SELECTED',
+              factory: (x, y) => new ActivityOptionsAmountValidationRule(y, x.minSelections, x.maxSelections)
+            },
             { type: 'YEAR_REQUIRED', factory: (x, y) => new ActivityYearRequiredDateValidationRule(y) },
             { type: 'MONTH_REQUIRED', factory: (x, y) => new ActivityMonthRequiredDateValidationRule(y) },
             { type: 'DAY_REQUIRED', factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },

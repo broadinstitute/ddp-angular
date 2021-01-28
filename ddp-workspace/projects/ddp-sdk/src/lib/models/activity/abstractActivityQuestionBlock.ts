@@ -15,13 +15,13 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
   public displayNumber: number | null;
   public tooltip: string | null;
   public readonly: boolean | false;
+  public serverValidationMessages$: Observable<Array<string>>;
+  public validators: Array<ActivityAbstractValidationRule> = [];
   private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
-  public serverValidationMessages$: Observable<Array<string>> = this.serverValidationMessagesSubject.asObservable();
-  public validators: Array<ActivityAbstractValidationRule>;
 
   constructor() {
     super();
-    this.validators = new Array<ActivityAbstractValidationRule>();
+    this.serverValidationMessages$ = this.serverValidationMessagesSubject.asObservable();
   }
 
   public get blockType(): BlockType {

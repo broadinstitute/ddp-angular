@@ -5,11 +5,7 @@ import { StackdriverErrorReporterService } from './stackdriverErrorReporter.serv
 
 @Injectable()
 export class LoggingService {
-    constructor(
-        @Inject('ddp.config') private config: ConfigurationService,
-        private stackdriverErrorReporterService: StackdriverErrorReporterService
-    ) {}
-
+    // tslint:disable-next-line:no-console
     public logDebug = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
     public logEvent = this.showEvent(LogLevel.Info) ? console.log.bind(window.console) : () => { };
@@ -22,6 +18,10 @@ export class LoggingService {
             console.error.apply(window.console, args);
         }
       : () => { };
+
+    constructor(
+        @Inject('ddp.config') private config: ConfigurationService,
+        private stackdriverErrorReporterService: StackdriverErrorReporterService) {}
 
     private showEvent(level: LogLevel): boolean {
         return this.config.logLevel <= level;

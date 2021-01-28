@@ -1,4 +1,13 @@
-import { EventEmitter, Injector, Input, OnChanges, OnDestroy, Output, SimpleChange, Component } from '@angular/core';
+import {
+    EventEmitter,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    Output,
+    SimpleChange,
+    Component
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
 import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
@@ -68,7 +77,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-        for (const propName in changes) {
+        for (const propName of Object.keys(changes)) {
             if (propName === 'studyGuid') {
                 this.studyGuidObservable.next(this.studyGuid);
             } else if (propName === 'activityGuid') {
@@ -86,45 +95,46 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.serviceAgent
-            .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-            .subscribe(
-                x => {
-                    if (!x) {
-                        this.model = new ActivityForm();
-                    } else {
-                        this.isLoaded = true;
-                        this.model = x;
-                        this.stickySubtitle.emit(this.model.subtitle);
-                        this.activityCode.emit(this.model.activityCode);
-                        this.initSteps();
-                    }
-
-                    // combine the latest status updates from the form model
-                    // and from the embedded components into one observable
-                    const canSaveSub = combineLatest(
-                        // update as we get responses from server
-                        this.submissionManager.answerSubmissionResponse$.pipe(
-                            // We don't automatically get model updates if
-                            // local validation fails
-                            // so trigger one when submit
-                            merge(this.submitAttempted),
-                            map(() => this.model.validate()),
-                            // let's start with whatever it is the initial state of the form
-                            startWith(this.model.validate())),
-                        this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
-                        .pipe(
-                            map(status => status[0] && status[1]),
-                            delay(1)
-                        ).subscribe(this.isAllFormContentValid);
-
-                    this.anchor.addNew(canSaveSub);
-                },
-                () => {
-                    this.navigateToErrorPage();
+      const get = this.serviceAgent
+        .getActivity(this.studyGuidObservable, this.activityGuidObservable)
+        .subscribe(
+            x => {
+                if (!x) {
+                    this.model = new ActivityForm();
+                } else {
+                    this.isLoaded = true;
+                    this.model = x;
+                    this.stickySubtitle.emit(this.model.subtitle);
+                    this.activityCode.emit(this.model.activityCode);
+                    this.initSteps();
                 }
-            );
-        this.anchor.addNew(get);
+
+                // combine the latest status updates from the form model
+                // and from the embedded components into one observable
+                const canSaveSub = combineLatest([
+                  // update as we get responses from server
+                    this.submissionManager.answerSubmissionResponse$.pipe(
+                        // We don't automatically get model updates if
+                        // local validation fails
+                        // so trigger one when submit
+                        merge(this.submitAttempted),
+                        map(() => this.model.validate()),
+                        // let's start with whatever it is the initial state of the form
+                        startWith(this.model.validate())),
+                    this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
+                ])
+                    .pipe(
+                        map(status => status[0] && status[1]),
+                        delay(1)
+                    ).subscribe(this.isAllFormContentValid);
+
+              this.anchor.addNew(canSaveSub);
+            },
+            () => {
+                this.navigateToErrorPage();
+            }
+        );
+      this.anchor.addNew(get);
     }
 
     protected navigateToErrorPage(): void {

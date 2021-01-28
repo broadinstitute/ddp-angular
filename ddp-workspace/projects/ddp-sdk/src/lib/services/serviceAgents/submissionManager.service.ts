@@ -44,13 +44,13 @@ export class SubmissionManager implements OnDestroy {
      * Situation has arisen that user yshould
      */
     public answerSubmissionWarning$: Observable<boolean>;
+    retryDelayMs = SubmissionManager.DEFAULT_RETRY_DELAY_MS;
+    maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
     private answerSubmissionFailureSubject = new Subject<Error>();
     private answerSubmissionErrorSubject = new Subject<Error>();
     private answerSubmissions: Subject<ActivityInstanceAnswerSubmission> = new Subject();
     private blockGuidToVisibility$ = new BehaviorSubject<GuidToShown>({});
     private _answerSubmissionResponse$: Observable<PatchAnswerResponse>;
-    retryDelayMs = SubmissionManager.DEFAULT_RETRY_DELAY_MS;
-    maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
 
     constructor(private serviceAgent: ActivityServiceAgent) {
         this.setupAnswerSubmissionPipeline();

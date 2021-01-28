@@ -24,7 +24,7 @@ enum Keys {
     selector: '[appInputRestriction]'
 })
 export class InputRestrictionDirective {
-    @Input('appInputRestriction') appInputRestriction: string;
+    @Input() appInputRestriction: string;
     private inputElement: ElementRef;
     private arabicRegex = '[\u0600-\u06FF]';
 
@@ -38,6 +38,37 @@ export class InputRestrictionDirective {
             this.integerOnly(event);
         } else if (this.appInputRestriction === 'noSpecialChars') {
             this.noSpecialChars(event);
+        }
+    }
+
+    @HostListener('paste', ['$event'])
+    onPaste(event): void {
+        let regex;
+        if (this.appInputRestriction === 'integer') {
+            regex = /[0-9]/g;
+        } else if (this.appInputRestriction === 'noSpecialChars') {
+            regex = /[a-zA-Z0-9\u0600-\u06FF]/g;
+        }
+        const e = event as ClipboardEvent;
+        const pasteData = e.clipboardData.getData('text/plain');
+        let m;
+        let matches = 0;
+
+        // tslint:disable-next-line:no-conditional-assignment
+        while ((m = regex.exec(pasteData)) !== null) {
+          // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+            // The result can be accessed through the `m`-variable.
+            m.forEach((match, groupIndex) => {
+                matches++;
+            });
+        }
+        if (matches === pasteData.length) {
+            return;
+        } else {
+            e.preventDefault();
         }
     }
 
@@ -111,34 +142,5 @@ export class InputRestrictionDirective {
             return;
         }
         e.preventDefault();
-    }
-
-    @HostListener('paste', ['$event'])
-    onPaste(event): void {
-        let regex;
-        if (this.appInputRestriction === 'integer') {
-            regex = /[0-9]/g;
-        } else if (this.appInputRestriction === 'noSpecialChars') {
-            regex = /[a-zA-Z0-9\u0600-\u06FF]/g;
-        }
-        const e = event as ClipboardEvent;
-        const pasteData = e.clipboardData.getData('text/plain');
-        let m;
-        let matches = 0;
-        while ((m = regex.exec(pasteData)) !== null) {
-            // This is necessary to avoid infinite loops with zero-width matches
-            if (m.index === regex.lastIndex) {
-                regex.lastIndex++;
-            }
-            // The result can be accessed through the `m`-variable.
-            m.forEach((match, groupIndex) => {
-                matches++;
-            });
-        }
-        if (matches === pasteData.length) {
-            return;
-        } else {
-            e.preventDefault();
-        }
     }
 }

@@ -384,6 +384,11 @@ export class AddressInputService implements OnDestroy {
     }
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   private buildAddressFromFormData(formValue: any, country: CountryAddressInfo): Address {
     const enteredAddress = new Address();
     enteredAddress.country = country ? country.code : '';
@@ -413,10 +418,5 @@ export class AddressInputService implements OnDestroy {
     localAutocompleteAddress.phone = phone;
     return localAutocompleteAddress;
 
-  }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 }

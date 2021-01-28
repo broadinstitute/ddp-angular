@@ -197,12 +197,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
+    // one subject per section
+    public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
     private readonly HEADER_HEIGHT: number = this.isMobile ? 10 : 70;
     private anchors: CompositeDisposable[];
     // one entry per section (header, body, and footer respectively)
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
-    // one subject per section
-    public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
     private readonly LOG_SOURCE = 'ActivityComponent';
 
     constructor(
@@ -216,6 +216,17 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         // in both child and parent classes
         injector: Injector) {
         super(injector);
+    }
+
+    @HostListener('window: scroll') public onWindowScroll(): void {
+        const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
+            this.document.documentElement.scrollTop ||
+            this.document.body.scrollTop || 0;
+        if (scrolledPixels > this.HEADER_HEIGHT) {
+            this.isScrolled = true;
+        } else if (scrolledPixels < this.HEADER_HEIGHT) {
+            this.isScrolled = false;
+        }
     }
 
     public ngOnInit(): void {
@@ -406,13 +417,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.windowRef.nativeWindow.scrollTo(0, 0);
     }
 
-    private smoothScrollToTop(): void {
-        this.windowRef.nativeWindow.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
     protected nextAvailableSectionIndex(): number {
         for (let index = this.currentSectionIndex + 1; index < this.model.sections.length; index++) {
             if (this.model.sections[index].visible) {
@@ -422,6 +426,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return -1;
     }
 
+    private smoothScrollToTop(): void {
+        this.windowRef.nativeWindow.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     private previousAvailableSectionIndex(): number {
         for (let index = this.currentSectionIndex - 1; index < this.model.sections.length; index--) {
             if (this.model.sections[index].visible) {
@@ -429,17 +440,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             }
         }
         return -1;
-    }
-
-    @HostListener('window: scroll') public onWindowScroll(): void {
-        const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
-            this.document.documentElement.scrollTop ||
-            this.document.body.scrollTop || 0;
-        if (scrolledPixels > this.HEADER_HEIGHT) {
-            this.isScrolled = true;
-        } else if (scrolledPixels < this.HEADER_HEIGHT) {
-            this.isScrolled = false;
-        }
     }
 
     private updateServerValidationMessages(response: PatchAnswerResponse): void {

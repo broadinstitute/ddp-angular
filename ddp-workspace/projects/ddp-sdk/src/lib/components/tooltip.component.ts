@@ -4,8 +4,8 @@ import { ConfigurationService } from '../services/configuration.service';
 @Component({
     selector: 'ddp-tooltip',
     template: `
-        <img class="tooltip__icon" 
-             [src]="icon" 
+        <img class="tooltip__icon"
+             [src]="icon"
              [alt]="'SDK.TooltipAlt' | translate"
              [matTooltip]="text"
              matTooltipClass="tooltip__box"

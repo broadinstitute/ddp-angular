@@ -24,7 +24,7 @@ export class AddressService extends UserServiceAgent<Address> {
         http: HttpClient,
         logger: LoggingService,
         private translate: NGXTranslateService,
-        private __language: LanguageService) {
+        private __language: LanguageService) { // tslint:disable-line:variable-name
         super(session, configuration, http, logger, __language);
     }
 

@@ -1,69 +1,19 @@
-import {
-    AfterViewChecked,
-    Directive,
-    ElementRef,
-    Injectable,
-    Input,
-    NgModule,
-    Pipe,
-    PipeTransform
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { TranslateDirective, TranslateLoader, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
 
-const translations: any = {};
-
-export class FakeLoader implements TranslateLoader {
-    getTranslation(lang: string): Observable<any> {
-        return of(translations);
-    }
-}
-
-@Directive({
-    selector: '[translate],[ngx-translate]'
-})
-export class TranslateMockDirective implements AfterViewChecked {
-    @Input()
-    translateParams: any;
-
-    constructor(private readonly _element: ElementRef) {
-        console.log('TranslatePipeMock created');
-    }
-
-    ngAfterViewChecked(): void {
-        this._element.nativeElement.innerText += 'i18n';
-    }
-}
-
-@Pipe({
-    name: 'translate'
-})
-export class TranslatePipeMock implements PipeTransform {
-    public name = 'translate';
-
-    public transform(query: string, ...args: any[]): any {
-        return query;
-    }
-    public constructor() {
-        console.log('TranslatePipeMock created');
-    }
-}
-
-@Injectable()
-export class TranslateServiceStub {
-    public get<T>(key: T): Observable<T> {
-        return of(key);
-    }
-}
+import { TranslateMockPipe } from './translateMock.pipe';
+import { TranslateMockDirective } from './translateMock.directive';
+import { FakeLoader } from './fakeLoader';
+import { TranslateStubService } from './translateStub.service';
 
 @NgModule({
     declarations: [
-        TranslatePipeMock,
+        TranslateMockPipe,
         TranslateMockDirective
     ],
     providers: [
-        { provide: TranslateService, useClass: TranslateServiceStub },
-        { provide: TranslatePipe, useClass: TranslatePipeMock },
+        { provide: TranslateService, useClass: TranslateStubService },
+        { provide: TranslatePipe, useClass: TranslateMockPipe },
         { provide: TranslateDirective, useClass: TranslateMockDirective },
     ],
     imports: [
@@ -72,7 +22,7 @@ export class TranslateServiceStub {
         })
     ],
     exports: [
-        TranslatePipeMock,
+        TranslateMockPipe,
         TranslateMockDirective
     ]
 })
