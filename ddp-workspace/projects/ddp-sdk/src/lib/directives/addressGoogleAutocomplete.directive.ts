@@ -3,8 +3,8 @@ import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestro
 import { ScriptLoaderService } from '../services/scriptLoader.service';
 import { Address } from '../models/address';
 import { ConfigurationService } from '../services/configuration.service';
-import { Observable, Subject } from 'rxjs';
-import { concat, share, skip, takeUntil } from 'rxjs/operators';
+import { concat, Observable, Subject } from 'rxjs';
+import { share, skip, takeUntil } from 'rxjs/operators';
 import { LoggingService } from '../services/logging.service';
 import * as _ from 'underscore';
 import Autocomplete = google.maps.places.Autocomplete;
@@ -47,9 +47,13 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
                     this.setupAutocomplete();
                 }
             },
-            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.'));
+            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.')
+        );
         // making sure that any countryCodes handled AFTER scriptloader has processed
-        this.scriptLoader$.pipe(concat(this.countryCode$), skip(1), takeUntil(this.ngUnsubscribe)).subscribe((countryCode) => {
+        concat(this.scriptLoader$, this.countryCode$).pipe(
+            skip(1),
+            takeUntil(this.ngUnsubscribe)
+        ).subscribe((countryCode) => {
             const restrictions = this.buildAutocompleteComponentRestrictions();
             this.autoComplete.setComponentRestrictions(restrictions);
         });
