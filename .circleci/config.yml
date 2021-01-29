@@ -273,11 +273,11 @@ commands:
 
   run-linter-check:
     description: "Run linter check"
-      steps:
-        - run:
-            name: Linter check
-            command: |
-              ng lint
+    steps:
+      - run:
+          name: Linter check
+          command: |
+            ng lint
 
   run-tests:
     description: "Run all tests"
