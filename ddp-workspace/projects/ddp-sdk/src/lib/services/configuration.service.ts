@@ -53,6 +53,7 @@ export class ConfigurationService {
     adminSessionExpiredUrl = 'admin-session-expired';
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
+    passwordPageUrl = 'password';
     // if questions inside of composite questions shouldn't show asterisk at the end, add question type here
     compositeRequiredFieldExceptions: QuestionType[] = [];
     // whether address validation enforces that required fields need to be entered (as opposed to just accepting EasyPost validation)

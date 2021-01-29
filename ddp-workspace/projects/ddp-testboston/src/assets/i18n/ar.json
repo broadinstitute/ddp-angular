@@ -384,6 +384,7 @@
       "Text": "يُرجى إدخال كلمة مرورك  *",
       "InputPlaceholder": "كلمة المرور",
       "PasswordWrongError": "كلمة المرور غير صحيحة. يُرجى المحاولة مرة أخرى.",
+      "OtherError": "[AR] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "كلمة المرور مطلوبة"
     },
     "ErrorPage": {
