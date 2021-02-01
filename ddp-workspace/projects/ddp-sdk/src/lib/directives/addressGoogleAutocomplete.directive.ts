@@ -53,7 +53,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
         concat(this.scriptLoader$, this.countryCode$).pipe(
             skip(1),
             takeUntil(this.ngUnsubscribe)
-        ).subscribe((countryCode) => {
+        ).subscribe(() => {
             const restrictions = this.buildAutocompleteComponentRestrictions();
             this.autoComplete.setComponentRestrictions(restrictions);
         });
