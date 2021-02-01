@@ -25,10 +25,9 @@ import { CurrentActivityService } from '../../sdk/services/currentActivity.servi
 import {
   delay,
   map,
-  merge,
   startWith,
 } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { combineLatest, merge } from 'rxjs';
 
 @Component({
     selector: 'app-atcp-activity-base',
@@ -284,11 +283,13 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
           // and from the embedded components into one observable
           const canSaveSub = combineLatest([
             // update as we get responses from server
-            this.submissionManager.answerSubmissionResponse$.pipe(
+            merge(
+              this.submissionManager.answerSubmissionResponse$,
               // We don't automatically get model updates if
               // local validation fails
               // so trigger one when submit
-              merge(this.submitAttempted),
+              this.submitAttempted
+            ).pipe(
               map(() => this.model.validate()),
               // let's start with whatever it is the initial state of the form
               startWith(this.model.validate())),
