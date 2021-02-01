@@ -250,7 +250,7 @@
       "SubmitButton": "Submit",
       "PasswordWrongError": "Incorrect password. Please try again.",
       "PasswordRequiredError": "Password is required",
-      "OtherError": "We're sorry, but an error has occurred.",
+      "OtherError": "We're sorry, but an error has occurred. Please try again.",
       "PasswordField": {
         "Error": "Password is required"
       }

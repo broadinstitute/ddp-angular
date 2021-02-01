@@ -6,7 +6,14 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager, LoggingService } from 'ddp-sdk';
+import {
+  ActivityComponent,
+  WindowRef,
+  SubmitAnnouncementService,
+  AnalyticsEventsService,
+  SubmissionManager,
+  LoggingService
+} from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
 
 @Component({

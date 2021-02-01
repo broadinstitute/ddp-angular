@@ -2,9 +2,16 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CommunicationService } from './../../services/communication.service';
-import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { MailingListServiceAgent, AnalyticsEventsService, CompositeDisposable, Person, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
+import { CommunicationService } from '../../services/communication.service';
+import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import {
+    MailingListServiceAgent,
+    AnalyticsEventsService,
+    CompositeDisposable,
+    Person,
+    AnalyticsEventCategories,
+    AnalyticsEventActions
+} from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({

@@ -384,6 +384,7 @@
       "Text": "Ingrese su contraseña.*",
       "InputPlaceholder": "Contraseña",
       "PasswordWrongError": "Contraseña incorrecta. Vuelva a intentarlo.",
+      "OtherError": "[ES] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "La contraseña es obligatoria."
     },
     "ErrorPage": {

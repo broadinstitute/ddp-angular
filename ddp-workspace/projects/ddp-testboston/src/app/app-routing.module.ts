@@ -169,10 +169,7 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.Error,
-    component: ErrorRedesignedComponent,
-    canActivate: [
-      IrbGuard
-    ]
+    component: ErrorRedesignedComponent
   },
   {
     path: AppRoutes.SessionExpired,

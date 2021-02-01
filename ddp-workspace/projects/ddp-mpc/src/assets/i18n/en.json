@@ -392,7 +392,7 @@
             "Text": "Please enter your password",
             "SubmitButton": "SUBMIT",
             "PasswordWrongError": "Incorrect password. Please try again.",
-            "OtherError": "We're sorry, but an error has occurred.",
+            "OtherError": "We're sorry, but an error has occurred. Please try again.",
             "PasswordField": {
                 "Error": "Password is required"
             }

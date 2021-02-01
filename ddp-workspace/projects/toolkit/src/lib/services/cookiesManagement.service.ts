@@ -43,6 +43,22 @@ export class CookiesManagementService {
     }
   }
 
+  public getHasToSetCookiesPreferences(): BehaviorSubject<boolean> {
+    return this.hasToSetCookiesPreferences;
+  }
+
+  public getCurrentCookiesAcceptance(): any {
+    return this.consent.cookies;
+  }
+
+  public updatePreferences(status: CookiesConsentStatuses, cookies?: any): void {
+    this.dismissBanner();
+    this.updateConsent(status, cookies);
+    this.updateLocalStorageConsent();
+    this.followConsent();
+    this.logConsentUpdate();
+  }
+
   private setConsent(): void {
     const localStorageConsent = this.getLocalStorageConsent();
     localStorageConsent ? this.consent = localStorageConsent : this.setDefaultConsent();
@@ -72,22 +88,6 @@ export class CookiesManagementService {
 
   private showBanner(): void {
     this.hasToSetCookiesPreferences.next(true);
-  }
-
-  public getHasToSetCookiesPreferences(): BehaviorSubject<boolean> {
-    return this.hasToSetCookiesPreferences;
-  }
-
-  public getCurrentCookiesAcceptance(): any {
-    return this.consent.cookies;
-  }
-
-  public updatePreferences(status: CookiesConsentStatuses, cookies?: any): void {
-    this.dismissBanner();
-    this.updateConsent(status, cookies);
-    this.updateLocalStorageConsent();
-    this.followConsent();
-    this.logConsentUpdate();
   }
 
   private updateConsent(status: CookiesConsentStatuses, cookies?: any): void {

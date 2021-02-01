@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { GovernedParticipantsServiceAgent } from 'ddp-sdk';
 
 import { LoginLandingComponent } from './login-landing.component';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
 import {
+  GovernedParticipantsServiceAgent,
   SessionMementoService,
   Auth0AdapterService,
   ConfigurationService,

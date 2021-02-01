@@ -53,16 +53,16 @@ export class UserStateService {
                 if (!x.session) {
                     this._state = UserState.Login;
                 } else if (x.consent == null) {
-                    if (x.prequalifier == 'CREATED') {
+                    if (x.prequalifier === 'CREATED') {
                         this._state = UserState.Prequalifier;
-                    } else if (x.prequalifier == 'IN_PROGRESS') {
+                    } else if (x.prequalifier === 'IN_PROGRESS') {
                         // not qualified
                         this._state = UserState.NotQualified;
-                    } else if (x.prequalifier == 'COMPLETE') {
+                    } else if (x.prequalifier === 'COMPLETE') {
                         this._state = UserState.Consent;
                     }
                 } else {
-                    if (x.consent == 'COMPLETE') {
+                    if (x.consent === 'COMPLETE') {
                         // see if user agreed a consent
                         return this.checkConsent();
                     } else {
@@ -72,6 +72,14 @@ export class UserStateService {
                 return of(this._state);
             })
         );
+    }
+
+    public getPrequalifierState(): Observable<string | null> {
+        return this.getActivityState(this.studyGuid, 'PREQUALIFIER');
+    }
+
+    public getConsentState(): Observable<string | null> {
+        return this.getActivityState(this.studyGuid, 'CONSENT');
     }
 
     private checkConsent(): Observable<UserState> {
@@ -87,17 +95,9 @@ export class UserStateService {
         );
     }
 
-    public getPrequalifierState(): Observable<string | null> {
-        return this.getActivityState(this.studyGuid, 'PREQUALIFIER');
-    }
-
-    public getConsentState(): Observable<string | null> {
-        return this.getActivityState(this.studyGuid, 'CONSENT');
-    }
-
     private getActivityState(studyGuid: string, subtype: string): Observable<string | null> {
         return this.activityServiceAgent.getActivities(of(studyGuid)).pipe(
-            map((x: any) => x.find(y => y.activitySubtype == subtype)),
+            map((x: any) => x.find(y => y.activitySubtype === subtype)),
             map((x: any) => {
                 if (x && x.statusCode) {
                     return x.statusCode;

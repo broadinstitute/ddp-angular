@@ -72,22 +72,6 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
     this.anchor.unsubscribe();
   }
 
-  private openModal(): void {
-    this.dialog.open(this.modalRef, {
-      data: {
-        nextButtonText: this.nextButtonText,
-        prevButtonText: this.prevButtonText,
-        submitButtonText: this.submitButtonText,
-        showFinalConfirmation: this.showFinalConfirmation,
-        confirmationButtonText: this.confirmationButtonText
-      },
-      width: '740px',
-      autoFocus: false,
-      disableClose: true,
-      scrollStrategy: new NoopScrollStrategy()
-    });
-  }
-
   public createActivityInstance(): void {
     this.activityInstance$ = this.serviceAgent
       .createInstance(this.config.studyGuid, this.activityGuid).pipe(
@@ -111,5 +95,21 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl(this.config.errorUrl);
         }
       });
+  }
+
+  private openModal(): void {
+    this.dialog.open(this.modalRef, {
+      data: {
+        nextButtonText: this.nextButtonText,
+        prevButtonText: this.prevButtonText,
+        submitButtonText: this.submitButtonText,
+        showFinalConfirmation: this.showFinalConfirmation,
+        confirmationButtonText: this.confirmationButtonText
+      },
+      width: '740px',
+      autoFocus: false,
+      disableClose: true,
+      scrollStrategy: new NoopScrollStrategy()
+    });
   }
 }
