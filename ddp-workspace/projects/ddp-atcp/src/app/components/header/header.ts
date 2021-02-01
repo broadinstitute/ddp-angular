@@ -8,7 +8,7 @@ import {
   LoggingService
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
-import { Language, LanguagesToken } from '../../providers/languages.provider';
+import { Language, LANGUAGES_TOKEN } from '../../providers/languages.provider';
 import { TranslateService } from '@ngx-translate/core';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userProfileDecorator: UserProfileDecorator;
   private readonly LOG_SOURCE = 'HeaderComponent';
 
-  constructor(@Inject(LanguagesToken) public languages: Language[],
+  constructor(@Inject(LANGUAGES_TOKEN) public languages: Language[],
               private session: SessionMementoService,
               private logger: LoggingService,
               private ngxTranslate: NGXTranslateService,

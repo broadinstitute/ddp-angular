@@ -102,10 +102,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
   return () => new Promise<any>((resolve: any) => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    const languages = injector.get<Language[]>(LANGUAGES_TOKEN, Promise.resolve(null));
+    const languages = injector.get<Language[] | Promise<any>>(LANGUAGES_TOKEN, Promise.resolve(null));
 
     locationInitialized.then(() => {
-      translate.addLangs(languages.map(x => x.code));
+      translate.addLangs((languages as Language[]).map(x => x.code));
       const locale = config.defaultLanguageCode;
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
