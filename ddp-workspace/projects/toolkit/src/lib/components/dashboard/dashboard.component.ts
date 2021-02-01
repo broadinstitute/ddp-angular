@@ -53,8 +53,8 @@ import { filter, map } from 'rxjs/operators';
 export class DashboardComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
-    private anchor: Subscription = new Subscription();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+    private anchor: Subscription = new Subscription();
 
     constructor(
         private router: Router,

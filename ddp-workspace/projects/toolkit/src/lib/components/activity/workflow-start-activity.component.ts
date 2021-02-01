@@ -62,6 +62,10 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
     this.anchor.addNew(sub);
   }
 
+  public showStickySubtitle(stickySubtitle: string): void {
+    this.stickySubtitle = stickySubtitle;
+  }
+
   // force the activity component to reset it by removing and adding it again
   private resetActivityComponent(): void {
     this.show = false;
@@ -69,10 +73,6 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
     this.show = true;
     // need to scroll to top after done! This is more visible in mobile
     this.windowRef.nativeWindow.scrollTo(0, 0);
-  }
-
-  public showStickySubtitle(stickySubtitle: string): void {
-    this.stickySubtitle = stickySubtitle;
   }
 
   private fetchActivity(): void {

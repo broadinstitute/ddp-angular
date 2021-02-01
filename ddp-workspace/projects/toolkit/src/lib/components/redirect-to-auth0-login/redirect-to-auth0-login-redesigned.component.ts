@@ -13,6 +13,6 @@ export class RedirectToAuth0LoginRedesignedComponent extends RedirectToAuth0Logi
         private _activatedRoute: ActivatedRoute,
         private _auth0: Auth0AdapterService,
         private _router: Router) {
-        super(_activatedRoute, _auth0, _router)
+        super(_activatedRoute, _auth0, _router);
     }
 }

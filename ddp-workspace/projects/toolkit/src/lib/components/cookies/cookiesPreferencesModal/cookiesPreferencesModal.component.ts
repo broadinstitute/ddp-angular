@@ -97,15 +97,6 @@ export class CookiesPreferencesModalComponent implements OnInit {
     this.setDefaultAcceptance(initialCookiesAcceptance);
   }
 
-  private setDefaultAcceptance(initialCookies): void {
-    this.cookies = {...initialCookies};
-    Object.keys(initialCookies).forEach(x => {
-      if (initialCookies[x] === null) {
-        this.cookies[x] = true;
-      }
-    });
-  }
-
   public onChange(cookieType, value): void {
     this.cookies[cookieType] = value === 'Accept';
   }
@@ -117,5 +108,14 @@ export class CookiesPreferencesModalComponent implements OnInit {
   public submit(): void {
     this.cookiesService.updatePreferences(ConsentStatuses.managed, this.cookies);
     this.dialogRef.close();
+  }
+
+  private setDefaultAcceptance(initialCookies): void {
+    this.cookies = {...initialCookies};
+    Object.keys(initialCookies).forEach(x => {
+      if (initialCookies[x] === null) {
+        this.cookies[x] = true;
+      }
+    });
   }
 }
