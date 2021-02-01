@@ -39,7 +39,7 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{if (not (or (or (eq $study_guid "testboston") (eq $study_guid "PRION")) (eq $study_guid "atcp")))}}
+{{if (not (or (or (or (eq $study_guid "testboston") (eq $study_guid "PRION")) (eq $study_guid "atcp")) (eq $study_guid "RGP")))}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
@@ -243,7 +243,7 @@ var DDP_ENV = {
     {{end}}
 {{end}}
 
-{{if eq $study_guid "rgp"}}
+{{if eq $study_guid "RGP"}}
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "Bal2RZDbCcWHV5W2QgenIWRRN31GGO52";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
@@ -252,7 +252,7 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "cbI1pq5iRnb4jz4K2atiOmuwGuObaPn1";
+        DDP_ENV['auth0ClientId'] = "DXd5obKfJrGxCv7Cv8c6PomK0zmmxwOY";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
