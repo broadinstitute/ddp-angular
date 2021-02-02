@@ -6,9 +6,9 @@ export interface Language {
   name: string;
 }
 
-export const LanguagesToken = new InjectionToken<Language>('Language');
+export const LANGUAGES_TOKEN = new InjectionToken<Language[] | Promise<any>>('Language');
 
 export const LanguagesProvider: ValueProvider = {
-  provide: LanguagesToken,
+  provide: LANGUAGES_TOKEN,
   useValue: languages,
 };

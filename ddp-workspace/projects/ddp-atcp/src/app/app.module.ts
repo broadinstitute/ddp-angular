@@ -46,7 +46,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { WelcomeComponent } from './components/welcome/welcome';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
-import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
+import { Language, LanguagesProvider, LANGUAGES_TOKEN } from './providers/languages.provider';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
 
@@ -69,13 +69,15 @@ if (baseElt) {
 }
 
 declare let DDP_ENV: any;
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
+
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.dashboardUrl = RouterResource.Console;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
+
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
@@ -96,13 +98,14 @@ config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    const language: Language[] = injector.get(LanguagesToken, Promise.resolve(null));
+    const languages = injector.get<Language[] | Promise<any>>(LANGUAGES_TOKEN, Promise.resolve(null));
+
     locationInitialized.then(() => {
-      translate.addLangs(language.map(x => x.code));
+      translate.addLangs((languages as Language[]).map(x => x.code));
       const locale = config.defaultLanguageCode;
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {

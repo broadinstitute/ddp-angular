@@ -10,7 +10,7 @@ import { CompositeDisposable, NGXTranslateService, SessionMementoService } from 
 export class WelcomeComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
   public list: string[] = [];
-  private anchor = new CompositeDisposable();
+
   @ViewChild('together', {
     static: false
   }) together;
@@ -22,6 +22,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   @ViewChild('participate', {
     static: false
   }) participate;
+
+  private anchor = new CompositeDisposable();
 
   constructor(private ngxTranslate: NGXTranslateService,
               private session: SessionMementoService) {

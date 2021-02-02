@@ -1,6 +1,6 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {ActivityServiceAgent, ActivityForm, CompositeDisposable} from 'ddp-sdk';
+import { ActivityServiceAgent, ActivityForm, CompositeDisposable } from 'ddp-sdk';
 import { filter, take, tap } from 'rxjs/operators';
 import { ActivityProgressCalculationService } from './activityProgressCalculation.service';
 import { ActivityCodes } from '../constants/activityCodes';

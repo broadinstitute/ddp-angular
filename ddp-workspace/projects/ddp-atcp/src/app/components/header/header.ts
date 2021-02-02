@@ -8,7 +8,7 @@ import {
   LoggingService
 } from 'ddp-sdk';
 import * as RouterResource from '../../router-resources';
-import { Language, LanguagesToken } from '../../providers/languages.provider';
+import { Language, LANGUAGES_TOKEN } from '../../providers/languages.provider';
 import { TranslateService } from '@ngx-translate/core';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
 import { UserPreferencesServiceAgent } from '../../services/serviceAgents/userPreferencesServiceAgent';
@@ -23,13 +23,13 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
 export class HeaderComponent implements OnInit, OnDestroy {
   public RouterResource = RouterResource;
   public SignIn: string;
-  private anchor = new CompositeDisposable();
-  private userProfileDecorator: UserProfileDecorator;
   isProgressBarVisible = false;
   activityToShowProgress = ActivityCodes.MEDICAL_HISTORY;
+  private anchor = new CompositeDisposable();
+  private userProfileDecorator: UserProfileDecorator;
   private readonly LOG_SOURCE = 'HeaderComponent';
 
-  constructor(@Inject(LanguagesToken) public languages: Language[],
+  constructor(@Inject(LANGUAGES_TOKEN) public languages: Language[],
               private session: SessionMementoService,
               private logger: LoggingService,
               private ngxTranslate: NGXTranslateService,
