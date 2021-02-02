@@ -4,7 +4,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: 'data-release',
+    selector: 'app-data-release',
     styles: [`
     .PageContent-title, .PageContent-subtitle {
         color: black;
