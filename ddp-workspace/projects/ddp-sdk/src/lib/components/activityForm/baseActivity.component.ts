@@ -15,14 +15,13 @@ import { ActivityResponse } from '../../models/activity/activityResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { Observable, BehaviorSubject, Subject, combineLatest } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
 import {
     concatMap,
     debounceTime,
     delay,
     filter,
     map,
-    merge,
     shareReplay,
     startWith,
     take,
@@ -68,7 +67,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
-        this.config = injector.get('ddp.config');
+        this.config = injector.get<ConfigurationService>('ddp.config' as any);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -112,15 +111,17 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 // combine the latest status updates from the form model
                 // and from the embedded components into one observable
                 const canSaveSub = combineLatest([
-                  // update as we get responses from server
-                    this.submissionManager.answerSubmissionResponse$.pipe(
-                        // We don't automatically get model updates if
-                        // local validation fails
+                    // update as we get responses from server
+                    merge(
+                        this.submissionManager.answerSubmissionResponse$,
+                        // We don't automatically get model updates if local validation fails
                         // so trigger one when submit
-                        merge(this.submitAttempted),
+                        this.submitAttempted
+                    ).pipe(
                         map(() => this.model.validate()),
                         // let's start with whatever it is the initial state of the form
-                        startWith(this.model.validate())),
+                        startWith(this.model.validate())
+                    ),
                     this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
                 ])
                     .pipe(

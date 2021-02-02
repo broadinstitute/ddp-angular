@@ -5,8 +5,8 @@ import { AnswerValue } from '../../models/activity/answerValue';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityInstanceAnswerSubmission } from '../../models/activity/activityInstanceAnswerSubmission';
-import { Observable, Subject, BehaviorSubject, timer } from 'rxjs';
-import { concatMap, distinctUntilChanged, filter, map, merge, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
+import { Observable, Subject, BehaviorSubject, timer, merge } from 'rxjs';
+import { concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
 import * as _ from 'underscore';
 
 type GuidToShown = Record<string, boolean>;
@@ -194,11 +194,13 @@ export class SubmissionManager implements OnDestroy {
             }));
 
         // merge additions, completions, and removal of submissions to create an observable state of the queue
-        const workingSubmissionQueue: Observable<ActivityInstanceAnswerSubmission[]> = submissionQueueAdditions$.pipe(
-            merge(submissionQueueRemovalsOnCompletion$),
-            merge(submissionRemovalOnHideResponse$),
+        const workingSubmissionQueue: Observable<ActivityInstanceAnswerSubmission[]> = merge(
+            submissionQueueAdditions$,
+            submissionQueueRemovalsOnCompletion$,
+            submissionRemovalOnHideResponse$
+        ).pipe(
             scan((acc: ActivityInstanceAnswerSubmission[], currentOperation: QueueOp) => {
-                return currentOperation(acc.slice(0));
+              return currentOperation(acc.slice(0));
             }, [] as ActivityInstanceAnswerSubmission[])
         );
 
