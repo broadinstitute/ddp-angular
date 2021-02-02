@@ -101,9 +101,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
 
 @NgModule({
   imports: [
-    DdpModule,
     BrowserModule,
     AppRoutingModule,
+    DdpModule,
     ToolkitModule
   ],
   declarations: [
