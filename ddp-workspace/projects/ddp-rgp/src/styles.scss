@@ -92,7 +92,6 @@ a:focus {
     min-height: 100%;
     background-color: #ffffff;
     z-index: 1;
-    padding-bottom: 190px;
     margin: 0 100px;
 
     .content_tight {
@@ -102,15 +101,13 @@ a:focus {
 
 @media only screen and (min-width: 1200px) {
     .section:nth-of-type(3) .content_tight {
-        margin-left: 8.33333333%;
+        margin-left: calc(16.66666666px + 8.33333333%);
         width: 75%;
-        float:left
     }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .section:nth-of-type(3) .content_tight {
-        float: left;
         margin-left: 8.33333333%;
         width: 83.33333333%;
     }
@@ -147,7 +144,7 @@ a:focus {
     .Wrapper,
     .Wrapper--homeBottom,
     .section:nth-of-type(3) {
-        padding-bottom: 391px;
+        padding-bottom: 396px;
         /* Height of the footer*/
     }
 
@@ -161,9 +158,12 @@ a:focus {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2499px) {
+@media (min-width: 1201px) and (max-width: 2499px) {
     .Wrapper--home {
         margin-top: 100px !important;
+    }
+    .section:nth-of-type(3) {
+        padding-bottom: 232.25px
     }
 }
 
@@ -171,12 +171,16 @@ a:focus {
     .Wrapper--home {
         margin-top: 90px !important;
     }
+    .section:nth-of-type(3) {
+        padding-bottom: 240px;
+    }
 }
 
 @media (min-width: 1025px) and (max-width: 1200px) {
     .Wrapper,
     .section:nth-of-type(3) {
         margin: 0 50px;
+        padding-bottom: 240px !important;
     }
 
     .Wrapper--home {
@@ -184,12 +188,31 @@ a:focus {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 992px) and (max-width: 1024px) {
 
     .Wrapper,
     .Wrapper--homeBottom,
     .section:nth-of-type(3) {
-        padding-bottom: 235px !important;
+        padding-bottom: 240px !important;
+    }
+
+    .Wrapper,
+    .section:nth-of-type(3) {
+        margin: 0 35px;
+    }
+
+    .Wrapper--home {
+        margin: 80px 35px 0 35px !important;
+        padding-bottom: 50px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .Wrapper,
+    .Wrapper--homeBottom,
+    .section:nth-of-type(3) {
+        padding-bottom: 320px !important;
     }
 
     .Wrapper,
@@ -208,7 +231,7 @@ a:focus {
     .Wrapper,
     .Wrapper--homeBottom,
     .section:nth-of-type(3) {
-        padding-bottom: 440px !important;
+        padding-bottom: 518px !important;
     }
 
     .Wrapper,
@@ -1012,6 +1035,81 @@ h3.Panel-title {
     padding-bottom: 1px;
 }
 
+.activity-buttons {
+    padding-bottom: 20px;
+}
+
+.ddp-activity-question {
+    padding-bottom: 10px;
+}
+
+.Question--text .ddp-activity-validation {
+    margin-top: -15px;
+}
+
+.Question--picklist {
+    padding-bottom: 5px;
+
+    .mat-list-base .mat-list-item.mat-3-line {
+        min-height: 88px;
+        height: unset;
+    }
+
+    .mat-list-base .mat-list-item {
+        min-height: 48px;
+        height: unset;
+    }
+
+    .ddp-picklist-option-list-item .mat-form-field,
+    .ddp-picklist-option-list-item .ddp-helper {
+        float: left;
+    }
+
+    .ddp-helper {
+        padding-bottom: 15px;
+    }
+
+    .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+        flex-direction: column;
+        align-items: unset
+    }
+}
+
+.ddp-activity-validation {
+    .ErrorMessage {
+        font-size: 0.9rem;
+        color: #f44336;
+        font-weight: 300;
+        margin: 0 0 10px 0;
+        padding: 0;
+    }
+}
+
+.BlueBox {
+    background-color: rgba(12,69,125,.1);
+    border-radius: 2px;
+    border: 1px solid #0c457d;
+    color: #0c457d;
+    font-weight: 300;
+    padding: 25px;
+}
+
+.BlueHeading {
+    margin-top: 20px;
+    padding-top: 5px;
+    color: #0c457d;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+
+    .SubHeading {
+        color: #333;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 300;
+    }
+}
+
 
 /* How it Works activity takes up only part of the page */
 .Container--howItWorks {
@@ -1076,11 +1174,9 @@ h3.Panel-title {
 .Landing-message {
     position: absolute;
     top: 0;
-    margin: 0;
     max-width: 100%;
     display: inline-block;
-    margin-top: 10vh;
-    margin-right: 50px;
+    margin: 10vh 50px 0 0;
 }
 
 h1.Landing-title {
