@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CompositeDisposable, ActivityServiceAgent, UserActivityServiceAgent } from 'ddp-sdk';
 import { UserStateService } from './services/userState.service';
 import { UserState } from './model/userState';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-consent',
@@ -23,7 +23,7 @@ export class ConsentComponent implements OnDestroy {
     this.anchor = new CompositeDisposable();
     const get = listServiceAgent.getActivities(of(this.studyGuid))
       .subscribe(x => {
-        const element = x.find(y => y.activityCode == this.consentCode);
+        const element = x.find(y => y.activityCode === this.consentCode);
         if (element) {
           this.instanceGuid = element.instanceGuid;
         } else {
@@ -37,19 +37,19 @@ export class ConsentComponent implements OnDestroy {
     this.anchor.removeAll();
   }
 
+  public raiseSubmit(): void {
+    this.state.refreshState().subscribe(x => {
+      if (x === UserState.NotConsented) {
+        this.router.navigateByUrl('consent-declined');
+      } else if (x === UserState.Dashboard) {
+        this.router.navigateByUrl('dashboard');
+      }
+    });
+  }
+
   private createConsent(): void {
     const create = this.serviceAgent.createInstance(this.studyGuid, this.consentCode)
       .subscribe(x => !!x && (this.instanceGuid = x.instanceGuid));
     this.anchor.addNew(create);
-  }
-
-  public raiseSubmit(): void {
-    this.state.refreshState().subscribe(x => {
-      if (x == UserState.NotConsented) {
-        this.router.navigateByUrl('consent-declined');
-      } else if (x == UserState.Dashboard) {
-        this.router.navigateByUrl('dashboard');
-      }
-    });
   }
 }

@@ -384,6 +384,7 @@
       "Text": "请输入您的密码*",
       "InputPlaceholder": "密码",
       "PasswordWrongError": "密码不正确。请再试一次。",
+      "OtherError": "[ZH] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "需要密码"
     },
     "ErrorPage": {

@@ -9,7 +9,11 @@ var DDP_ENV = {
     doLocalRegistration: false,
     {{ with secret (printf "secret/pepper/%s/%s/conf" $environment $version) }}
     mapsApiKey: "{{.Data.mapsApiKey}}",
+    errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
+    projectGcpId: "{{.Data.googleProjectId}}",
     {{end}}
+    // The flag indicates whether we need report JS errors to Google Cloud Error Report API
+    doGcpErrorReporting: true,
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
 };
@@ -35,7 +39,7 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{if (not (or (or (eq $study_guid "testboston") (eq $study_guid "PRION")) (eq $study_guid "atcp")))}}
+{{if (not (or (or (or (eq $study_guid "testboston") (eq $study_guid "PRION")) (eq $study_guid "atcp")) (eq $study_guid "RGP")))}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
@@ -92,13 +96,13 @@ var DDP_ENV = {
         DDP_ENV['auth0ClientId'] = "2LLtNaf1eoiwyMiORtgrcOzL0aASMNC3";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{else if eq $environment "test"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0ClientId'] = "E4gkqFvzKwM8qdz8y2299g0KlevQeHw5";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{else if eq $environment "staging"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0ClientId'] = "34Hioi4iMtjaaEN43JfUB9vrEDJ9pzyE";
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{else if eq $environment "prod"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
+        DDP_ENV['auth0ClientId'] = "AZwRmj4pWo5N4eEk6eY7jNtDZ97f2xnA";
         DDP_ENV['projectGAToken'] = "UA-61688341-15";
     {{end}}
 {{end}}
@@ -244,7 +248,7 @@ var DDP_ENV = {
     {{end}}
 {{end}}
 
-{{if eq $study_guid "rgp"}}
+{{if eq $study_guid "RGP"}}
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "Bal2RZDbCcWHV5W2QgenIWRRN31GGO52";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
@@ -253,7 +257,7 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "cbI1pq5iRnb4jz4K2atiOmuwGuObaPn1";
+        DDP_ENV['auth0ClientId'] = "DXd5obKfJrGxCv7Cv8c6PomK0zmmxwOY";
         DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";

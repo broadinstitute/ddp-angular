@@ -12,7 +12,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {
+  TranslateService,
+  TranslateModule,
+  TranslateLoader,
+} from '@ngx-translate/core';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 
 import {
@@ -21,13 +25,13 @@ import {
   ConfigurationService,
   DdpModule,
   LanguageService,
-  LoggingService
+  LoggingService,
 } from 'ddp-sdk';
 
 import {
   CommunicationService,
   ToolkitConfigurationService,
-  ToolkitModule
+  ToolkitModule,
 } from 'toolkit';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -78,7 +82,8 @@ if (baseElt) {
 }
 
 declare let DDP_ENV: any;
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
+
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.dashboardUrl = RouterResource.Dashboard;
@@ -103,9 +108,14 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
-config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode : 'en';
+config.defaultLanguageCode = DDP_ENV.defaultLanguageCode
+  ? DDP_ENV.defaultLanguageCode
+  : 'en';
 config.languageSelectorIconURL = 'assets/images/atcp/globe.svg#globe';
 config.tooltipIconUrl = '';
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
+config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export function translateFactory(
   translate: TranslateService,
@@ -113,28 +123,38 @@ export function translateFactory(
   logger: LoggingService,
   languageService: LanguageService,
 ) {
-  return () => new Promise<any>(resolve => {
-    const LOG_SOURCE = 'AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-
-    locationInitialized.then(() => {
-      const locale = languageService.getAppLanguageCode();
-
-      translate.setDefaultLang(locale);
-
-      translate.use(locale).subscribe(
-        () => {
-          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-        },
-        err => {
-          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
-        },
-        () => {
-          resolve(null);
-        }
+  return () =>
+    new Promise<any>(resolve => {
+      const LOG_SOURCE = 'AppModule';
+      const locationInitialized = injector.get(
+        LOCATION_INITIALIZED,
+        Promise.resolve(null),
       );
+
+      locationInitialized.then(() => {
+        const locale = languageService.getAppLanguageCode();
+
+        translate.setDefaultLang(locale);
+
+        translate.use(locale).subscribe(
+          () => {
+            logger.logEvent(
+              LOG_SOURCE,
+              `Successfully initialized '${locale}' language as default.`,
+            );
+          },
+          err => {
+            logger.logError(
+              LOG_SOURCE,
+              `Problem with '${locale}' language initialization: ${err}`,
+            );
+          },
+          () => {
+            resolve(null);
+          },
+        );
+      });
     });
-  });
 }
 
 @NgModule({
@@ -160,7 +180,7 @@ export function translateFactory(
         provide: TranslateLoader,
         useClass: AppTranslateLoader,
         deps: [HttpClient],
-      }
+      },
     }),
     RecaptchaV3Module,
   ],
@@ -203,22 +223,17 @@ export function translateFactory(
     AtcpCommunicationService,
     {
       provide: 'ddp.config',
-      useValue: config
+      useValue: config,
     },
     {
       provide: 'toolkit.toolkitConfig',
-      useValue: tkCfg
+      useValue: tkCfg,
     },
     {
       provide: APP_INITIALIZER,
       useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService,
-        LanguageService
-      ],
-      multi: true
+      deps: [TranslateService, Injector, LoggingService, LanguageService],
+      multi: true,
     },
     UserPreferencesServiceAgent,
     {
@@ -226,11 +241,10 @@ export function translateFactory(
       useValue: tkCfg.recaptchaSiteClientKey,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    private analytics: AnalyticsEventsService) {
+  constructor(private analytics: AnalyticsEventsService) {
     this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
       ga('send', event);
       ga('platform.send', event);

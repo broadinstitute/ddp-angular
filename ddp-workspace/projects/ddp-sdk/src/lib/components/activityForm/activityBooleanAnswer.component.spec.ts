@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
@@ -24,8 +24,8 @@ describe('ActivityBooleanAnswer', () => {
     @Component({
         template: `
         <ddp-activity-boolean-answer [block]="block"
-                                       [readonly]="readonly"
-                                       (valueChanged)="changed($event)">
+                                     [readonly]="readonly"
+                                     (valueChanged)="changed($event)">
         </ddp-activity-boolean-answer>`
     })
     class TestHostComponent {
@@ -39,7 +39,7 @@ describe('ActivityBooleanAnswer', () => {
     let fixture: ComponentFixture<ActivityBooleanAnswer>;
     let debugElement: DebugElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatRadioModule,

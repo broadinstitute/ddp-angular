@@ -64,16 +64,16 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
     }`]
 })
 export class InstitutionsFormComponent implements OnInit, OnDestroy {
+    public normalizedInstitutionType: string;
+    public requestsInProgress = new BehaviorSubject<number>(1);
+    public savedAnswers: Array<ActivityInstitutionInfo> = [];
+    public outputAnswers: Array<ActivityInstitutionInfo> = [];
     @Input() block: ActivityInstitutionBlock;
     @Input() studyGuid: string;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() validStatusChanged = new EventEmitter<boolean>();
     @Output() componentBusy = new EventEmitter<boolean>();
-    public normalizedInstitutionType: string;
-    public requestsInProgress = new BehaviorSubject<number>(1);
-    public savedAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
-    public outputAnswers: Array<ActivityInstitutionInfo> = new Array<ActivityInstitutionInfo>();
     private deleteSubject = new Subject<string>();
     private anchor: Subscription = new Subscription();
     private subjectsAnchor: Subscription = new Subscription();
@@ -156,6 +156,13 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
         return this.block.institutionType === InstitutionType.Institution;
     }
 
+    public updateValidationStatus(): void {
+        if (this.block.required) {
+            const valid = this.outputAnswers.every(answer => this.isPhysicianFormFull(answer));
+            this.validStatusChanged.emit(valid);
+        }
+    }
+
     private addAnswer(answer: ActivityInstitutionInfo): void {
         this.savedAnswers.push(answer);
         this.outputAnswers.push(answer);
@@ -168,13 +175,6 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
 
     private normalizeInstitutionType(institutionType: string): string {
         return institutionType.replace(/_/g, '-').toLowerCase();
-    }
-
-    public updateValidationStatus(): void {
-        if (this.block.required) {
-            const valid = this.outputAnswers.every(answer => this.isPhysicianFormFull(answer));
-            this.validStatusChanged.emit(valid);
-        }
     }
 
     private isPhysicianFormFull(answer: ActivityInstitutionInfo): boolean {

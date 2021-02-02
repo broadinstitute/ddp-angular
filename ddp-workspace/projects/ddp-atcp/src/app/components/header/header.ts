@@ -23,14 +23,15 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
   styleUrls: ['./header.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  RouterResource = RouterResource;
-  isProgressBarVisible = false;
-  isMedicalHistory = false;
-  activitiesToShowProgress = [
+  public RouterResource = RouterResource;
+  public isProgressBarVisible = false;
+  public isMedicalHistory = false;
+  public activitiesToShowProgress = [
     ActivityCodes.MEDICAL_HISTORY,
     ActivityCodes.FEEDING,
   ];
-  isMultiGoverned: boolean;
+  public isMultiGoverned: boolean;
+  
   private prevParticipantGuid: string;
   private userProfileDecorator: UserProfileDecorator;
   private readonly LOG_SOURCE = 'HeaderComponent';

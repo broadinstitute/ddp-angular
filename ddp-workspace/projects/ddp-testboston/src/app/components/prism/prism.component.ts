@@ -136,9 +136,9 @@ export class PrismComponent implements OnInit, OnDestroy {
         this.isZipLoading = false;
         this.zipVerified = false;
       }),
-      filter(zip => this.prismForm.controls.zip.valid && !!zip),
+      filter(zipCode => this.prismForm.controls.zip.valid && !!zipCode),
       tap(() => this.isZipLoading = true),
-      switchMap(zip => this.subjectInvitation.verifyZipCode(this.studySubject.invitationId, zip)),
+      switchMap(zipCode => this.subjectInvitation.verifyZipCode(this.studySubject.invitationId, zipCode)),
       tap(() => this.isZipLoading = false)
     ).subscribe(response => {
       if (response && this.prismForm.controls.invitationId.valid) {

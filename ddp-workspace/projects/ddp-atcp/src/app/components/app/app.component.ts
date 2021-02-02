@@ -19,10 +19,10 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private anchor = new CompositeDisposable();
   public isWelcomePage = false;
   public isBasePage = false;
   public isDevMode: boolean = isDevMode();
+  private anchor = new CompositeDisposable();
 
   private readonly DIALOG_BASE_SETTINGS = {
     width: '740px',

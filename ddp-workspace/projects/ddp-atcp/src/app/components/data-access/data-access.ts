@@ -19,17 +19,17 @@ import { AtcpCommunicationService } from '../../toolkit/services/communication.s
   styleUrls: ['./data-access.scss'],
 })
 export class DataAccessComponent implements OnInit, OnDestroy {
-  busy = false;
+  public busy = false;
   public activeTab = 0;
   public countTabs = 7;
-  private readonly maxAttachmentSize = 2 * 1024 * 1024;
-  private anchor: CompositeDisposable = new CompositeDisposable();
   public fileSizeExceedsLimit: boolean;
   public studyGuid: string;
-
   public model: DataAccessParameters = new DataAccessParameters();
   public researcherBiosketch: File;
   public recaptchaToken: string;
+
+  private readonly maxAttachmentSize = 2 * 1024 * 1024;
+  private anchor: CompositeDisposable = new CompositeDisposable();
 
   constructor(
     private translateService: TranslateService,
@@ -48,6 +48,23 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.anchor.removeAll();
+  }
+
+  public onAttachmentChange(selectedFile: any): void {
+    if (this.maxAttachmentSize && selectedFile.size >= this.maxAttachmentSize) {
+      this.fileSizeExceedsLimit = true;
+      return;
+    } else {
+      this.fileSizeExceedsLimit = false;
+    }
+
+    this.recaptchaService
+      .execute('file_upload')
+      .pipe(take(1))
+      .subscribe(token => {
+        this.recaptchaToken = token;
+        this.researcherBiosketch = selectedFile;
+      });
   }
 
   public displayDontHaveErrors(tab: number): boolean {
@@ -155,21 +172,4 @@ export class DataAccessComponent implements OnInit, OnDestroy {
         this.communicationService.closePopupMessage();
       });
   };
-
-  public onAttachmentChange(selectedFile: any): void {
-    if (this.maxAttachmentSize && selectedFile.size >= this.maxAttachmentSize) {
-      this.fileSizeExceedsLimit = true;
-      return;
-    } else {
-      this.fileSizeExceedsLimit = false;
-    }
-
-    this.recaptchaService
-      .execute('file_upload')
-      .pipe(take(1))
-      .subscribe(token => {
-        this.recaptchaToken = token;
-        this.researcherBiosketch = selectedFile;
-      });
-  }
 }

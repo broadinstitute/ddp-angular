@@ -7,16 +7,20 @@ import { ReplaySubject, Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class RenewSessionNotifier implements OnDestroy {
+    public openDialogEvents: Observable<void>;
+    public closeDialogEvents: Observable<void>;
     private anchor: CompositeDisposable = new CompositeDisposable();
     private openDialog: ReplaySubject<void> = new ReplaySubject<void>(1);
     private closeDialog: Subject<void> = new Subject<void>();
-    public openDialogEvents: Observable<void> = this.openDialog.asObservable();
-    public closeDialogEvents: Observable<void> = this.closeDialog.asObservable();
 
     constructor(
         private titleService: Title,
         private ngxTranslate: NGXTranslateService,
-        @Inject(DOCUMENT) private document: any) { }
+        @Inject(DOCUMENT) private document: any) {
+
+        this.openDialogEvents = this.openDialog.asObservable();
+        this.closeDialogEvents = this.closeDialog.asObservable();
+    }
 
     public ngOnDestroy(): void {
         this.anchor.removeAll();

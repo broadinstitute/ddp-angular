@@ -1,14 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class BrowserContentService {
+    public events: Observable<void>;
     private warningEvents: Subject<void> = new Subject<void>();
-    public events: Observable<void> = this.warningEvents.asObservable();
 
-    constructor(@Inject(DOCUMENT) private document: any) { }
+    constructor(@Inject(DOCUMENT) private document: any) {
+        this.events = this.warningEvents.asObservable();
+    }
 
     public emitWarningEvent(): void {
         this.warningEvents.next();

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
-import { ActivityPicklistDetails } from './../../../models/activity/activityPicklistDetails';
-import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
+import { ActivityPicklistDetails } from '../../../models/activity/activityPicklistDetails';
+import { PicklistSelectMode } from '../../../models/activity/picklistSelectMode';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 
 @Component({
@@ -101,21 +101,6 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
         return selected;
     }
 
-    private findInitialNativeSelected(): string {
-        let selected = '';
-        if (this.block.answer) {
-            if (this.block.answer.length) {
-                selected = this.block.answer[0].stableId;
-                this.showDetails(selected);
-                if (this.details.show && this.details.text === null) {
-                    // Populate with detail from answer if cached value doesn't exist
-                    this.details.text = this.block.answer[0].detail;
-                }
-            }
-        }
-        return selected;
-    }
-
     public handleMaterialSelect(event: MatSelectChange): void {
         if (this.block.answer === null) {
             this.block.answer = this.createAnswer();
@@ -175,6 +160,21 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
         }
     }
 
+    private findInitialNativeSelected(): string {
+        let selected = '';
+        if (this.block.answer) {
+            if (this.block.answer.length) {
+                selected = this.block.answer[0].stableId;
+                this.showDetails(selected);
+                if (this.details.show && this.details.text === null) {
+                    // Populate with detail from answer if cached value doesn't exist
+                    this.details.text = this.block.answer[0].detail;
+                }
+            }
+        }
+        return selected;
+    }
+
     private showDetails(id: string): void {
         this.block.picklistOptions.forEach((item) => {
             if (item.stableId === id) {
@@ -223,7 +223,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
-        return new Array<ActivityPicklistAnswerDto>();
+        return [];
     }
 
     private getAnswersStableIds(): Array<string> {

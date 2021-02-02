@@ -79,7 +79,7 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: 'welcome' }
 ];
 
-declare let ga: Function;
+declare const ga: (...args: any[]) => void;
 
 @NgModule({
   declarations: [

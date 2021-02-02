@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
 import { ActivityNumericQuestionBlock } from '../../models/activity/activityNumericQuestionBlock';
 import * as _ from 'underscore';
@@ -25,29 +25,23 @@ import * as _ from 'underscore';
         }
     `]
 })
-export class ActivityNumericAnswer implements OnChanges {
+export class ActivityNumericAnswer implements OnInit, OnChanges {
     @Input() block: ActivityNumericQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<number> = new EventEmitter();
     public numericField: FormControl;
 
+    public ngOnInit(): void {
+        this.initForm();
+    }
+
     public ngOnChanges(changes: SimpleChanges): void {
-        for (const propName in changes) {
-            if (propName === 'block') {
-                const numericValidators = [];
-                if (_.isNumber(this.block.min)) {
-                    numericValidators.push(Validators.min(this.block.min));
-                }
-                if (_.isNumber(this.block.max)) {
-                    numericValidators.push(Validators.max(this.block.max));
-                }
-                this.numericField = new FormControl({
-                    value: _.isNumber(this.block.answer) ? this.block.answer : '',
-                    disabled: this.readonly
-                }, numericValidators);
+        for (const propName of Object.keys(changes)) {
+            if (propName === 'block' && !changes['block'].firstChange) {
+                this.initForm();
             }
-            if (propName === 'readonly') {
+            if (propName === 'readonly' && !changes['readonly'].firstChange) {
                 this.readonly ? this.numericField.disable() : this.numericField.enable();
             }
         }
@@ -69,5 +63,19 @@ export class ActivityNumericAnswer implements OnChanges {
     private emitAnswer(value: number | null): void {
         this.block.answer = value;
         this.valueChanged.emit(value);
+    }
+
+    private initForm(): void {
+        const numericValidators = [];
+        if (_.isNumber(this.block.min)) {
+            numericValidators.push(Validators.min(this.block.min));
+        }
+        if (_.isNumber(this.block.max)) {
+            numericValidators.push(Validators.max(this.block.max));
+        }
+        this.numericField = new FormControl({
+            value: _.isNumber(this.block.answer) ? this.block.answer : '',
+            disabled: this.readonly
+        }, numericValidators);
     }
 }

@@ -19,7 +19,13 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 
 // SDK imports
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
+import {
+  AnalyticsEvent,
+  AnalyticsEventsService,
+  ConfigurationService,
+  DdpModule,
+  LoggingService
+} from 'ddp-sdk';
 
 // Toolkit imports
 import { ToolkitModule } from 'toolkit';
@@ -201,6 +207,9 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
+config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.dashboardActivitiesStartedStatuses = ['CREATED'];
 config.rtlLanguages = ['he'];
 

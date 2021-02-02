@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
 import { WindowRef } from '../../services/windowRef';
@@ -35,7 +35,7 @@ describe('ActivityQuestionComponent', () => {
   let windowRefSpy: jasmine.SpyObj<WindowRef>;
   let configServiceSpy: jasmine.SpyObj<ConfigurationService>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     windowRefSpy = jasmine.createSpyObj('WindowRef', ['nativeWindow']);
     configServiceSpy = jasmine.createSpyObj('ddp.config', ['scrollToErrorOffset']);
     TestBed.configureTestingModule({

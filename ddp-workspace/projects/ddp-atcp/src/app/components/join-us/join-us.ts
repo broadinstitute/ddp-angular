@@ -92,42 +92,16 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     this.fetchActivity();
   }
 
+  ngOnDestroy(): void {
+    this.anchor.removeAll();
+  }
+
   public showStickySubtitle(stickySubtitle: string): void {
     this.stickySubtitle = stickySubtitle;
   }
 
-  private fetchActivity(): void {
-    if (this.session.isAuthenticatedSession()) {
-      this.workflow
-        .getNext()
-        .pipe(take(1))
-        .subscribe(activityResponse => {
-          this.workflowBuilder.getCommand(activityResponse).execute();
-        });
-    } else {
-      this.temporaryUserService
-        .createTemporaryUser(this.configuration.auth0ClientId)
-        .pipe(
-          filter(x => x !== null),
-          map((user: TemporaryUser) => this.session.setTemporarySession(user)),
-          mergeMap(() => this.workflow.getStart()),
-          take(1)
-        )
-        .subscribe((response: ActivityResponse | null) => {
-          if (response && response.instanceGuid) {
-            this.instanceGuid = response.instanceGuid;
-          }
-        });
-    }
-  }
-
-  // force the activity component to reset it by removing and adding it again
-  private resetActivityComponent(): void {
-    this.show = false;
-    this.cdr.detectChanges();
-    this.show = true;
-    // need to scroll to top after done! This is more visible in mobile
-    this.windowRef.nativeWindow.scrollTo(0, 0);
+  public signIn(): void {
+    this.auth0.login();
   }
 
   public navigate(response: ActivityResponse): void {
@@ -162,6 +136,40 @@ export class JoinUsComponent implements OnInit, OnDestroy {
         this.fetchActivity();
       });
     this.anchor.addNew(sub);
+  }
+
+  private fetchActivity(): void {
+    if (this.session.isAuthenticatedSession()) {
+      this.workflow
+        .getNext()
+        .pipe(take(1))
+        .subscribe(activityResponse => {
+          this.workflowBuilder.getCommand(activityResponse).execute();
+        });
+    } else {
+      this.temporaryUserService
+        .createTemporaryUser(this.configuration.auth0ClientId)
+        .pipe(
+          filter(x => x !== null),
+          map((user: TemporaryUser) => this.session.setTemporarySession(user)),
+          mergeMap(() => this.workflow.getStart()),
+          take(1)
+        )
+        .subscribe((response: ActivityResponse | null) => {
+          if (response && response.instanceGuid) {
+            this.instanceGuid = response.instanceGuid;
+          }
+        });
+    }
+  }
+
+  // force the activity component to reset it by removing and adding it again
+  private resetActivityComponent(): void {
+    this.show = false;
+    this.cdr.detectChanges();
+    this.show = true;
+    // need to scroll to top after done! This is more visible in mobile
+    this.windowRef.nativeWindow.scrollTo(0, 0);
   }
 
   private convertWorkflowResponse(
@@ -200,13 +208,5 @@ export class JoinUsComponent implements OnInit, OnDestroy {
       firstName: inputs[0].value,
       lastName: inputs[1].value,
     };
-  }
-
-  public signIn(): void {
-    this.auth0.login();
-  }
-
-  ngOnDestroy(): void {
-    this.anchor.removeAll();
   }
 }

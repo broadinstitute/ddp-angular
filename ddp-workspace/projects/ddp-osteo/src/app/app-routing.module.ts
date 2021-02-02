@@ -185,8 +185,7 @@ const routes: Routes = [
     },
     {
         path: 'error',
-        component: ErrorRedesignedComponent,
-        canActivate: [IrbGuard]
+        component: ErrorRedesignedComponent
     },
     {
         path: 'more-details',

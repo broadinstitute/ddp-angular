@@ -34,7 +34,7 @@ export class DataAccessService {
     this.getFunctionUrl();
   }
 
-  send(
+  public send(
     params: DataAccessParameters,
     biosketch: File,
     recaptchaToken: string

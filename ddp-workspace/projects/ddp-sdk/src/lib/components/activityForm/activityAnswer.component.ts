@@ -32,6 +32,7 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
                                   (valueChanged)="onChange($event)">
     </ddp-activity-picklist-answer>
     <ddp-activity-date-answer *ngIf="isDateQuestion(block) && block.shown"
+                              [class]="'date-answer-' + block.stableId"
                               [block]="block"
                               [readonly]="readonly"
                               [validationRequested]="validationRequested"

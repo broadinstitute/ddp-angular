@@ -29,7 +29,7 @@ export class HeaderComponent implements OnDestroy {
     @Inject(DOCUMENT) private document: Document) { }
 
   public ngOnDestroy(): void {
-    this.anchor.unsubscribe()
+    this.anchor.unsubscribe();
   }
 
   public get isAuthenticated(): boolean {

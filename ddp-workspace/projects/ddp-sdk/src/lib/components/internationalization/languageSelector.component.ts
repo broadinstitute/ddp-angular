@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { iif, Observable, of, Subscription, merge } from 'rxjs';
-import { flatMap, map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
+import { map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { StudyLanguage } from '../../models/studyLanguage';
@@ -94,7 +94,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   public getUnselectedLanguages(): Array<StudyLanguage> {
-    return this.studyLanguages.filter(language => language.languageCode !== this.currentLanguage.languageCode);
+    return this.studyLanguages.filter(language => !this.currentLanguage
+        || (language.languageCode !== this.currentLanguage.languageCode));
   }
 
   public changeLanguage(lang: StudyLanguage): void {
@@ -123,6 +124,40 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Find the current language and return true if successful or false otherwise
+  public findCurrentLanguage(): Observable<boolean> {
+    // Check for a language in the profile
+    const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
+
+    // Use the current language if it exists or check for a stored language
+    const currentStoredLangObservable: Observable<StudyLanguage> = this.getCurrentStoredLangObservable();
+
+    // Check for a default language
+    const defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
+
+    // Create an observable that will check each applicable option and return the first valid language found, if any
+    const langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
+      mergeMap(profileLang => {
+        return this.getNextObservable(profileLang, currentStoredLangObservable);
+      }),
+      mergeMap(currentStoredLang => {
+        return this.getNextObservable(currentStoredLang, defaultLangObservable);
+      })
+    );
+
+    // Return an observable that uses langObservable to get the language and if found, sets the language and
+    // returns true, or otherwise logs an error and returns false
+    return langObservable.pipe(map(language => {
+      if (this.foundLanguage(language)) {
+        this.changeLanguage(language);
+        return true;
+      } else {
+        this.logger.logError(this.LOG_SOURCE, 'Error: no stored, profile, or default language found.');
+        return false;
+      }
+    }));
+  }
+
   private launchPopup(): Subscription {
     return this.displayPop.getShouldDisplayLanguagePopup()
       .subscribe(shouldDisp => {
@@ -141,40 +176,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         tap(() => this.afterProfileLanguageChange.emit()),
         tap(() => this.language.notifyOfProfileLanguageUpdate())
       );
-  }
-
-  // Find the current language and return true if successful or false otherwise
-  public findCurrentLanguage(): Observable<boolean> {
-    // Check for a language in the profile
-    const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
-
-    // Use the current language if it exists or check for a stored language
-    const currentStoredLangObservable: Observable<StudyLanguage> = this.getCurrentStoredLangObservable();
-
-    // Check for a default language
-    const defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
-
-    // Create an observable that will check each applicable option and return the first valid language found, if any
-    const langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
-      flatMap(profileLang => {
-        return this.getNextObservable(profileLang, currentStoredLangObservable);
-      }),
-      flatMap(currentStoredLang => {
-        return this.getNextObservable(currentStoredLang, defaultLangObservable);
-      })
-    );
-
-    // Return an observable that uses langObservable to get the language and if found, sets the language and
-    // returns true, or otherwise logs an error and returns false
-    return langObservable.pipe(map(language => {
-      if (this.foundLanguage(language)) {
-        this.changeLanguage(language);
-        return true;
-      } else {
-        this.logger.logError(this.LOG_SOURCE, 'Error: no stored, profile, or default language found.');
-        return false;
-      }
-    }));
   }
 
   private getNextObservable(lang: StudyLanguage, obs: Observable<StudyLanguage>): Observable<StudyLanguage> {

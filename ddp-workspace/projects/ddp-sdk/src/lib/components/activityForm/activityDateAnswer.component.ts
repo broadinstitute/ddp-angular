@@ -49,7 +49,7 @@ export class ActivityDateAnswer {
     }
 
     public get fields(): Array<string> {
-        const result = new Array<string>();
+        const result = [];
         this.block.fields.forEach(x => {
             if (x === DateField.Day) {
                 result.push('DD');

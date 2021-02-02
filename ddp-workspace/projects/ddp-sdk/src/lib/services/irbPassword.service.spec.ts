@@ -18,7 +18,9 @@ describe('IrbPasswordService', () => {
     // Faking out the cookieservice
     const cookieServiceSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('CookieService', ['put']);
     // called within the parent class
-    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException', 'logEvent', 'logError']);
+    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj(
+      'LoggingService', ['logException', 'logEvent', 'logError']
+    );
     const injectorSpy: jasmine.SpyObj<Injector> = jasmine.createSpyObj('Injector', ['get']);
 
     beforeEach(() => {
