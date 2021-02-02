@@ -5,12 +5,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { FilterInfo } from '../../models/study-listing/filter-info';
 
 export class StudyListingDataSource extends DataSource<StudyInfo> {
-  private baseData: StudyInfo[] = null;
-  private filterBy: string = null;
   shouldSort = false;
   sortIndex = -1;
   sortDir: string = null;
   dataSubj: BehaviorSubject<StudyInfo[]>;
+  private baseData: StudyInfo[] = null;
+  private filterBy: string = null;
 
   constructor(private translator: TranslateService, private bucketUrl: string, private columnFilters: FilterInfo[]) {
     super();
