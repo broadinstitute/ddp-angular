@@ -5,7 +5,9 @@ import { UrlWorkflowAction } from '../models/actions/urlWorkflowAction';
 import { MailingListWorkflowAction } from '../models/actions/mailingListWorkflowAction';
 import { RegistrationWorkflowAction } from '../models/actions/registrationWorkflowAction';
 import { WorkflowState } from './../models/workflowState';
-import { ActivityResponse, LoggingService } from 'ddp-sdk';
+// import { ActivityResponse, LoggingService } from 'ddp-sdk';
+import {LoggingService} from "../../../../ddp-sdk/src/lib/services/logging.service";
+import {ActivityResponse} from "../../../../ddp-sdk/src/lib/models/activity/activityResponse";
 
 @Injectable()
 export class WorkflowMapperService {

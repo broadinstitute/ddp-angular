@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DashboardColumns } from 'ddp-sdk';
+// import { DashboardColumns } from 'ddp-sdk';
+import {DashboardColumns} from "../../../../ddp-sdk/src/lib/models/dashboardColumns";
 import { Cookies } from '../models/cookies/cookies';
 
 @Injectable()

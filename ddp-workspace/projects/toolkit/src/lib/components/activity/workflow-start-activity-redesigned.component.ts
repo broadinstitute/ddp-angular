@@ -3,13 +3,18 @@ import { WorkflowStartActivityComponent } from './workflow-start-activity.compon
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import {
-  ConfigurationService,
-  SessionMementoService,
-  TemporaryUserServiceAgent,
-  WorkflowServiceAgent,
-  WindowRef
-} from 'ddp-sdk';
+// import {
+//   ConfigurationService,
+//   SessionMementoService,
+//   TemporaryUserServiceAgent,
+//   WorkflowServiceAgent,
+//   WindowRef
+// } from 'ddp-sdk';
+import {TemporaryUserServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/temporaryUserServiceAgent.service";
+import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
+import {WorkflowServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/workflowServiceAgent.service";
+import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
+import {ConfigurationService} from "../../../../../ddp-sdk/src/lib/services/configuration.service";
 
 @Component({
   selector: 'toolkit-workflow-start-activity-redesigned',

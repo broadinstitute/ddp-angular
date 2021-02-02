@@ -1,15 +1,21 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import {
-    LoggingService,
-    UserActivityServiceAgent,
-    ActivityServiceAgent,
-    ActivityResponse,
-    ActivityInstanceGuid,
-    ActivityInstance
-} from 'ddp-sdk';
+import { WorkflowBuilderService } from '../../../services/workflowBuilder.service';
+import { ToolkitConfigurationService } from '../../../services/toolkitConfiguration.service';
+// import {
+//     LoggingService,
+//     UserActivityServiceAgent,
+//     ActivityServiceAgent,
+//     ActivityResponse,
+//     ActivityInstanceGuid,
+//     ActivityInstance
+// } from 'ddp-sdk';
+import {ActivityInstanceGuid} from "../../../../../../ddp-sdk/src/lib/models/activityInstanceGuid";
+import {ActivityServiceAgent} from "../../../../../../ddp-sdk/src/lib/services/serviceAgents/activityServiceAgent.service";
+import {UserActivityServiceAgent} from "../../../../../../ddp-sdk/src/lib/services/serviceAgents/userActivityServiceAgent.service";
+import {LoggingService} from "../../../../../../ddp-sdk/src/lib/services/logging.service";
+import {ActivityInstance} from "../../../../../../ddp-sdk/src/lib/models/activityInstance";
+import {ActivityResponse} from "../../../../../../ddp-sdk/src/lib/models/activity/activityResponse";
 import { Observable, Subject, of } from 'rxjs';
 import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
 

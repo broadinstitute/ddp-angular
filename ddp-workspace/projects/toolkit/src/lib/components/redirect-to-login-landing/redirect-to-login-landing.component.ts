@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { NGXTranslateService } from 'ddp-sdk';
+// import { NGXTranslateService } from 'ddp-sdk';
+import {NGXTranslateService} from "../../../../../ddp-sdk/src/lib/services/internationalization/ngxTranslate.service";
 import { map, mergeMap, filter } from 'rxjs/operators';
 
 @Component({

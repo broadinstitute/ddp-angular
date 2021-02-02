@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Auth0AdapterService } from 'ddp-sdk';
+// import { Auth0AdapterService } from 'ddp-sdk';
+import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
 
 @Component({
     selector: 'redirect-to-auth0-login',

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionExpiredComponent } from './session-expired.component';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { Auth0AdapterService } from 'ddp-sdk';
+// import { Auth0AdapterService } from 'ddp-sdk';
+import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -1,7 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { RedirectToLoginLandingComponent } from './redirect-to-login-landing.component';
-import { NGXTranslateService } from 'ddp-sdk';
+// import { NGXTranslateService } from 'ddp-sdk';
+import {NGXTranslateService} from "../../../../../ddp-sdk/src/lib/services/internationalization/ngxTranslate.service";
 
 @Component({
   selector: 'toolkit-redirect-to-login-landing-redesigned',

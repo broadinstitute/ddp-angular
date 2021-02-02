@@ -1,14 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActivityPageComponent } from './activity-page.component';
-import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import {
-    LoggingService,
-    UserActivityServiceAgent,
-    ActivityServiceAgent,
-} from 'ddp-sdk';
+import { ActivityPageComponent } from '../activity-page/activity-page.component';
+import { WorkflowBuilderService } from '../../../services/workflowBuilder.service';
+import { ToolkitConfigurationService } from '../../../services/toolkitConfiguration.service';
+import { HeaderConfigurationService } from '../../../services/headerConfiguration.service';
+// import {
+//     LoggingService,
+//     UserActivityServiceAgent,
+//     ActivityServiceAgent,
+// } from 'ddp-sdk';
+import {ActivityServiceAgent} from "../../../../../../ddp-sdk/src/lib/services/serviceAgents/activityServiceAgent.service";
+import {UserActivityServiceAgent} from "../../../../../../ddp-sdk/src/lib/services/serviceAgents/userActivityServiceAgent.service";
+import {LoggingService} from "../../../../../../ddp-sdk/src/lib/services/logging.service";
 
 @Component({
     selector: 'toolkit-activity-page-redesigned',

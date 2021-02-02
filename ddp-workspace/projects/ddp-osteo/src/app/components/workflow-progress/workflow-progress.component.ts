@@ -1,6 +1,9 @@
 import { Component, Input, OnChanges, Inject } from '@angular/core';
 import { WorkflowStep } from '../../models/workflowStep.model';
-import { SessionMementoService, ConfigurationService, UserActivityServiceAgent, ActivityInstance } from 'ddp-sdk';
+import { SessionMementoService } from '../../../../../ddp-sdk/src/lib/services/sessionMemento.service';
+import { UserActivityServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/userActivityServiceAgent.service';
+import { ConfigurationService } from '../../../../../ddp-sdk/src/lib/services/configuration.service';
+import { ActivityInstance } from '../../../../../ddp-sdk/src/lib/models/activityInstance';
 import { of } from 'rxjs';
 import { take, filter } from 'rxjs/operators';
 

@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-import { WorkflowServiceAgent } from 'ddp-sdk';
+// import { WorkflowServiceAgent } from 'ddp-sdk';
+import {WorkflowServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/workflowServiceAgent.service";
 import { take } from 'rxjs/operators';
 
 @Component({

@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { RenewSessionNotifier } from 'ddp-sdk';
-import { AppRedesignedBaseComponent, CommunicationService, ToolkitConfigurationService } from 'toolkit';
+import { RenewSessionNotifier } from '../../../../../ddp-sdk/src/lib/services/renewSessionNotifier.service';
+import { AppRedesignedBaseComponent } from '../../../../../toolkit/src/lib/components/app/app-redesigned-base.component';
+import { CommunicationService } from '../../../../../toolkit/src/lib/services/communication.service';
+import { ToolkitConfigurationService } from '../../../../../toolkit/src/lib/services/toolkitConfiguration.service';
 import { Router } from '@angular/router';
 
 @Component({

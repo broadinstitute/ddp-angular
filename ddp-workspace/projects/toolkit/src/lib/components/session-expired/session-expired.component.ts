@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Auth0AdapterService } from 'ddp-sdk';
+// import { Auth0AdapterService } from 'ddp-sdk';
+import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
 
 @Component({
     selector: 'toolkit-session-expired',

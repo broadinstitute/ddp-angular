@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AnalyticsEventsService, AnalyticsEventCategories } from 'ddp-sdk';
-import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
+import { AnalyticsEventsService } from '../../../../../ddp-sdk/src/lib/services/analyticsEvents.service';
+import { AnalyticsEventCategories } from '../../../../../ddp-sdk/src/lib/models/analyticsEventCategories';
+import { CommunicationService } from '../../../../../toolkit/src/lib/services/communication.service';
+import { ToolkitConfigurationService } from '../../../../../toolkit/src/lib/services/toolkitConfiguration.service';
 
 @Component({
   selector: 'app-footer',

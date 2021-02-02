@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, Input, Inject, OnInit } from '@angular/core';
 import { LazyWidgetComponent } from '../lazy-widget/lazy-widget.component';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
-import { ScriptLoaderService } from 'ddp-sdk';
+// import { ScriptLoaderService } from 'ddp-sdk';
+import {ScriptLoaderService} from "../../../../../ddp-sdk/src/lib/services/scriptLoader.service";
 import { switchMap, take } from 'rxjs/operators';
 
 @Component({

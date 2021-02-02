@@ -4,7 +4,12 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-import { MailingListServiceAgent, AnalyticsEventsService, CompositeDisposable, Person, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
+import { CompositeDisposable } from '../../../../../ddp-sdk/src/lib/compositeDisposable';
+import { MailingListServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/mailingListServiceAgent.service';
+import { AnalyticsEventsService } from '../../../../../ddp-sdk/src/lib/services/analyticsEvents.service';
+import { Person } from '../../../../../ddp-sdk/src/lib/models/person';
+import { AnalyticsEventCategories } from '../../../../../ddp-sdk/src/lib/models/analyticsEventCategories';
+import { AnalyticsEventActions } from '../../../../../ddp-sdk/src/lib/models/analyticsEventActions';
 import { take } from 'rxjs/operators';
 
 @Component({
