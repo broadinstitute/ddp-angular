@@ -1073,6 +1073,10 @@ h3.Panel-title {
         flex-direction: column;
         align-items: unset
     }
+
+    .ddp-dropdown {
+        min-height: 48px;
+    }
 }
 
 .ddp-activity-validation {
@@ -1614,8 +1618,24 @@ h2.Landing-title {
     margin-bottom: 0 !important;
 }
 
+.MarginBottom10 {
+    margin-bottom: 10px !important;
+}
+
+.MarginBottom20 {
+    margin-bottom: 20px !important;
+}
+
 .NoPadding {
     padding: 0 !important;
+}
+
+.PaddingBottom5 {
+    padding-bottom: 5px !important;
+}
+
+.PaddingBottom25 {
+    padding-bottom: 25px !important;
 }
 
 .Float--left {
