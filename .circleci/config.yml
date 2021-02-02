@@ -37,6 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - run-linter-check
       - run-tests
       - build-app
       - store-app-build
@@ -57,6 +58,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
+            - run-linter-check
             - run-tests
             - build-app
             - deploy-exploded-build:
@@ -268,6 +270,15 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+
+  run-linter-check:
+    description: "Run linter check"
+    steps:
+      - run:
+          name: Linter check
+          command: |
+            ng lint
+
   run-tests:
     description: "Run all tests"
     steps:
