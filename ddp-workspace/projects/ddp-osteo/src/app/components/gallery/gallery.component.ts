@@ -9,9 +9,9 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  @Input() private translateSource = 'BehindScenesGallery.Items';
   public gallery: Array<GalleryItem>;
   public selectedItem: GalleryItem;
+  @Input() private translateSource = 'BehindScenesGallery.Items';
 
   constructor(private translate: NGXTranslateService) { }
 
