@@ -32,7 +32,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.anchor.unsubscribe()
+    this.anchor.unsubscribe();
   }
 
   public get isAdmin(): boolean {
