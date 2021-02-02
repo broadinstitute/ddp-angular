@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AddressEmbeddedComponent, AddressService, CompositeDisposable, UserActivityServiceAgent } from 'ddp-sdk';
-import { BehaviorSubject, empty } from 'rxjs';
+import {
+  AddressEmbeddedComponent,
+  AddressService,
+  CompositeDisposable,
+  UserActivityServiceAgent,
+  MailAddressBlock,
+  LoggingService
+} from 'ddp-sdk';
+import { BehaviorSubject, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import * as _ from 'underscore';
-import { MailAddressBlock, LoggingService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-sandbox-embedded-address',
@@ -15,8 +21,8 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
   public inputParameters = {};
   public isReadOnly = true;
   public bogusAddress = null;
-  private anchor: CompositeDisposable;
   public block: MailAddressBlock;
+  private anchor: CompositeDisposable;
   private readonly LOG_SOURCE = 'AddressEmbeddedSandboxComponent';
 
   constructor(
@@ -56,7 +62,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
     this.anchor.addNew(del);
   }
 
-  public toggleReadOnly() {
+  public toggleReadOnly(): void {
     this.isReadOnly = !(this.isReadOnly);
     this.logger.logEvent(this.LOG_SOURCE, `Readonly has been toggled to : ${this.isReadOnly}`);
   }
@@ -80,7 +86,7 @@ export class AddressEmbeddedSandboxComponent implements OnInit, OnDestroy {
         if (existingAddress) {
           return this.addressService.deleteAddress(existingAddress);
         } else {
-          return empty();
+          return EMPTY;
         }
       })).subscribe(() => this.logger.logEvent(this.LOG_SOURCE, 'Address was deleted'));
     this.anchor.addNew(address);

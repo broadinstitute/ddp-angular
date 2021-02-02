@@ -56,7 +56,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
     }
   }
 
-  private buildBlock(parameters: TextParameters) {
+  private buildBlock(parameters: TextParameters): ActivityTextQuestionBlock {
     const newQuestion = new ActivityTextQuestionBlock();
     newQuestion.question = parameters.question;
     newQuestion.placeholder = parameters.placeholder;
@@ -90,6 +90,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         let position = -1;
         let step = 1;
         const matches: Array<SuggestionMatch> = [];
+        // tslint:disable-next-line:no-conditional-assignment
         while ((position = lowerCaseSuggestion.indexOf(lowerCaseValue, position + step)) !== -1) {
           matches.push({
             offset: position,
@@ -110,8 +111,8 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
 
   private sortSuggestionMatches(suggestions: Array<TextSuggestion>): Array<TextSuggestion> {
     return suggestions.sort((a, b) => {
-      a.matches.sort((a, b) => a.offset - b.offset);
-      b.matches.sort((a, b) => a.offset - b.offset);
+      a.matches.sort((a1, b1) => a1.offset - b1.offset);
+      b.matches.sort((a2, b2) => a2.offset - b2.offset);
       return a.matches[0].offset - b.matches[0].offset;
     });
   }

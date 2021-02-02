@@ -20,35 +20,36 @@ export class UserStateService {
     }
 
     public refreshState(): Observable<UserState> {
+        const getConsent = (c, p) => {
+            return {
+                consent: c,
+                prequalifier: p
+            };
+        };
+
+        const getConsentConfig =  (s: any, x: any) => {
+            this.logger.logEvent(`${this.LOG_SOURCE} %o`, s);
+            return {
+                session: s != null,
+                consent: x.consent,
+                prequalifier: x.prequalifier
+            };
+        };
+
         return this.session.sessionObservable.pipe(
-            mergeMap(
-                s => {
-                    if (s != null) {
-                        return this.getConsentState().pipe(
-                            mergeMap(
-                                _ => this.getPrequalifierState(),
-                                (c, p) => {
-                                    return {
-                                        consent: c,
-                                        prequalifier: p
-                                    };
-                                })
-                        );
-                    } else {
-                        return of({
-                            consent: null,
-                            prequalifier: null
-                        });
-                    }
-                },
-                (s: any, x: any) => {
-                    this.logger.logEvent(`${this.LOG_SOURCE} %o`, s);
-                    return {
-                        session: s != null,
-                        consent: x.consent,
-                        prequalifier: x.prequalifier
-                    };
-                }),
+            mergeMap(s => {
+                if (s != null) {
+                    return this.getConsentState().pipe(
+                        mergeMap(_ => this.getPrequalifierState()).pipe(
+                            map(getConsent)
+                        )
+                    );
+                } else {
+                    return of(getConsent(null, null));
+                }
+            }).pipe(
+                map(getConsentConfig)
+            ),
             mergeMap((x: any) => {
                 if (!x.session) {
                     this._state = UserState.Login;

@@ -79,6 +79,7 @@ export * from './lib/services/serviceAgents/governedParticipantsServiceAgent.ser
 export * from './lib/services/internationalization/languageService.service';
 export * from './lib/services/serviceAgents/invitationServiceAgent.service';
 export * from './lib/services/serviceAgents/subjectInvitationServiceAgent.service';
+export * from './lib/services/serviceAgents/userManagementServiceAgent.service';
 export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
