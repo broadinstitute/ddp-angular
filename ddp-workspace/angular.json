@@ -1792,7 +1792,9 @@
               "projects/ddp-esc/src/theme.scss",
               "projects/ddp-esc/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
