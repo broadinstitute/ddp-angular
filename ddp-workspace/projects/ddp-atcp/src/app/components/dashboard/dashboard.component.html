@@ -11,12 +11,12 @@
   </div>
 
   <ng-template #userActivities>
-    <atcp-user-activities
+    <app-user-activities
       [activities]="activities"
       (startActivity)="goToActivity($event)"
       (continueActivity)="goToActivity($event)"
       (viewActivity)="goToActivity($event)"
       (editActivity)="onEditActivity($event)"
-    ></atcp-user-activities>
+    ></app-user-activities>
   </ng-template>
 </div>

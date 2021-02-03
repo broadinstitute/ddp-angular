@@ -27,7 +27,7 @@ export interface Participant {
 }
 
 @Component({
-  selector: 'atcp-participant-list',
+  selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
   styleUrls: ['./participant-list.component.scss'],
 })

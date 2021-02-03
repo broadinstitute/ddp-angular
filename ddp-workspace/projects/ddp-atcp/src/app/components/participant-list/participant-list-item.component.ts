@@ -17,7 +17,7 @@ import * as RouterResources from '../../router-resources';
 import { Participant } from './participant-list.component';
 
 @Component({
-  selector: 'atcp-participant-list-item',
+  selector: 'app-participant-list-item',
   template: `
     <div class="participant-expandable">
       <div class="participant-expandable__header">
@@ -55,14 +55,14 @@ import { Participant } from './participant-list.component';
       </div>
 
       <div *ngIf="expanded" class="participant-expandable__activities">
-        <atcp-user-activities
+        <app-user-activities
           [activities]="participant.activities"
           [opaque]="true"
           (startActivity)="onStartActivity($event)"
           (continueActivity)="onStartActivity($event)"
           (viewActivity)="onStartActivity($event)"
           (editActivity)="onEditActivity($event)"
-        ></atcp-user-activities>
+        ></app-user-activities>
       </div>
     </div>
   `,
@@ -71,19 +71,19 @@ import { Participant } from './participant-list.component';
 export class ParticipantListItem {
   @Input() participant: Participant;
 
-  expanded: boolean = false;
+  expanded = false;
 
   constructor(
     private router: Router,
     private session: SessionMementoService,
     private activityServiceAgent: ActivityServiceAgent,
     private activityService: ActivityService,
-    @Inject('ddp.config') private config: ConfigurationService
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   get surveysToCompleteCount(): number {
     return this.participant.activities.filter(
-      activity => activity.statusCode !== COMPLETE
+      activity => activity.statusCode !== COMPLETE,
     ).length;
   }
 
@@ -106,6 +106,8 @@ export class ParticipantListItem {
       case ActivityCodes.GENOME_STUDY:
       case ActivityCodes.FEEDING:
         return this.handleEditActivity(activityInstance);
+      default:
+        break;
     }
   }
 
@@ -131,12 +133,12 @@ export class ParticipantListItem {
 
   private handleActivityCreation = (
     activity: ActivityInstanceGuid,
-    isConsentEditActivity: boolean = false
+    isConsentEditActivity: boolean = false,
   ): void => {
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
-      isConsentEditActivity
+      isConsentEditActivity,
     );
     this.router.navigateByUrl(RouterResources.Survey);
-  };
+  }
 }

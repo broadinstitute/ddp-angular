@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { delay, tap, filter, take } from 'rxjs/operators';
 
 import {
   SessionMementoService,
@@ -13,9 +13,6 @@ import {
 } from 'ddp-sdk';
 
 import { WorkflowBuilderService, ToolkitConfigurationService } from 'toolkit';
-
-import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
 
 import * as Routes from '../../router-resources';
 import { AtcpCommunicationService } from '../services/communication.service';

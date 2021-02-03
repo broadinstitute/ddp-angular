@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ActivityCodes.FEEDING,
   ];
   public isMultiGoverned: boolean;
-  
   private prevParticipantGuid: string;
   private userProfileDecorator: UserProfileDecorator;
   private readonly LOG_SOURCE = 'HeaderComponent';

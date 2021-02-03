@@ -18,13 +18,13 @@ import { ActivityService } from '../../services/activity.service';
 import * as RouterResources from '../../router-resources';
 
 @Component({
-  selector: 'atcp-dashboard',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   activities: ActivityInstance[];
-  isLoading: boolean = true;
+  isLoading = true;
   private anchor = new CompositeDisposable();
 
   constructor(
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private userActivityAgent: UserActivityServiceAgent,
     private activityService: ActivityService,
-    @Inject('ddp.config') private config: ConfigurationService
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.isLoading = true;
           this.getActivities();
-        })
+        }),
     );
   }
 
@@ -83,6 +83,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       case ActivityCodes.GENOME_STUDY:
       case ActivityCodes.FEEDING:
         return this.handleEditActivity(activityInstance);
+      default:
+        break;
     }
   }
 
@@ -104,12 +106,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private handleActivityCreation = (
     activity: ActivityInstanceGuid,
-    isConsentEditActivity: boolean = false
+    isConsentEditActivity: boolean = false,
   ): void => {
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
-      isConsentEditActivity
+      isConsentEditActivity,
     );
     this.router.navigateByUrl(RouterResources.Survey);
-  };
+  }
 }

@@ -30,34 +30,34 @@ export class MultiGovernedUserService {
     private activityAgent: ActivityServiceAgent,
     private session: SessionMementoService,
     private loggingService: LoggingService,
-    @Inject('ddp.config') private readonly config: ConfigurationService
+    @Inject('ddp.config') private readonly config: ConfigurationService,
   ) {}
 
   public checkIfMultiGoverned(): void {
     this.session.sessionObservable
       .pipe(
         filter(
-          profile => profile !== null && this.session.isAuthenticatedSession()
+          profile => profile !== null && this.session.isAuthenticatedSession(),
         ),
         take(1),
         switchMap(() =>
-          this.prequalifierAgent.getPrequalifier(this.config.studyGuid)
+          this.prequalifierAgent.getPrequalifier(this.config.studyGuid),
         ),
         switchMap(instanceGuid =>
           this.activityAgent.getActivity(
             of(this.config.studyGuid),
-            of(instanceGuid)
-          )
+            of(instanceGuid),
+          ),
         ),
         take(1),
         pluck('sections'),
         map(sections => {
           if (!sections.length) {
-            return throwError("Prequalifier doesn't have any sections");
+            return throwError(`Prequalifier doesn't have any sections`);
           }
 
           return sections[0];
-        })
+        }),
       )
       .subscribe(activitySection => {
         if (activitySection instanceof Observable) {
@@ -67,13 +67,13 @@ export class MultiGovernedUserService {
         const selfDescribeBlock = activitySection.blocks.find(
           block =>
             block instanceof ActivityPicklistQuestionBlock &&
-            block.stableId === this.PREQUAL_SELF_DESCRIBE_STABLE_ID
+            block.stableId === this.PREQUAL_SELF_DESCRIBE_STABLE_ID,
         );
 
         if (!selfDescribeBlock) {
           this.loggingService.logError(
             this.LOG_SOURCE,
-            `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`
+            `Cannot find block with stable id of ${this.PREQUAL_SELF_DESCRIBE_STABLE_ID}`,
           );
         }
 
@@ -82,7 +82,7 @@ export class MultiGovernedUserService {
 
         if (answer && answer.stableId) {
           this.isMultiGoverned$.next(
-            answer.stableId === this.CHILD_DIAGNOSED_STABLE_ID
+            answer.stableId === this.CHILD_DIAGNOSED_STABLE_ID,
           );
         }
       });
@@ -94,7 +94,7 @@ export class MultiGovernedUserService {
     if (isMultiGoverned === null) {
       this.loggingService.logEvent(
         this.LOG_SOURCE,
-        'Cannot determine type of user, redirecting to home page'
+        'Cannot determine type of user, redirecting to home page',
       );
 
       this.router.navigateByUrl(RouterResources.Welcome);
@@ -102,7 +102,7 @@ export class MultiGovernedUserService {
       this.router.navigateByUrl(
         isMultiGoverned
           ? RouterResources.ParticipantList
-          : RouterResources.Dashboard
+          : RouterResources.Dashboard,
       );
     }
   }

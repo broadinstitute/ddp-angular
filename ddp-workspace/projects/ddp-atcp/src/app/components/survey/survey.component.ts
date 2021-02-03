@@ -33,9 +33,9 @@ export class SurveyComponent implements OnInit, OnDestroy {
   public studyGuid: string;
   public userFirstName: string;
   public activities: ActivityInstance[] = [];
-  public isAssentActivity: boolean = false;
-  public isConsentEditActivity: boolean = false;
-  public isActivityShown: boolean = true;
+  public isAssentActivity = false;
+  public isConsentEditActivity = false;
+  public isActivityShown = true;
 
   private anchor = new CompositeDisposable();
   private isFirstRun = true;
@@ -158,7 +158,7 @@ export class SurveyComponent implements OnInit, OnDestroy {
 
   private checkIfAssentByInstanceGuid(instanceGuid: string): void {
     const activity = this.activities.find(
-      activity => activity.instanceGuid === instanceGuid
+      a => a.instanceGuid === instanceGuid
     );
 
     if (activity) {

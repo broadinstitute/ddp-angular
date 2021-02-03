@@ -152,7 +152,7 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.communicationService.closePopupMessage();
       });
-  };
+  }
 
   private showError = (): void => {
     this.busy = false;
@@ -171,5 +171,5 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.communicationService.closePopupMessage();
       });
-  };
+  }
 }

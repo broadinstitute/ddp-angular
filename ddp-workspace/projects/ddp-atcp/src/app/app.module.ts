@@ -122,7 +122,7 @@ export function translateFactory(
   injector: Injector,
   logger: LoggingService,
   languageService: LanguageService,
-) {
+): () => Promise<any> {
   return () =>
     new Promise<any>(resolve => {
       const LOG_SOURCE = 'AppModule';

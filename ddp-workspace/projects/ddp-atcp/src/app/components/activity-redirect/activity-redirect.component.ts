@@ -7,7 +7,7 @@ import { MultiGovernedUserService } from '../../services/multi-governed-user.ser
 import * as RouterResources from '../../router-resources';
 
 @Component({
-  selector: 'atcp-activity-redirect',
+  selector: 'app-activity-redirect',
   template: '',
 })
 export class ActivityRedirectComponent implements OnInit {

@@ -16,8 +16,8 @@ export class ActivityService {
 
   setCurrentActivity(
     instanceGuid: string | null,
-    isConsentEdit: boolean = false
-  ) {
+    isConsentEdit: boolean = false,
+  ): void {
     this._currentActivity.next({
       instanceGuid,
       isConsentEdit,

@@ -10,7 +10,7 @@ import {
 } from '../workflow-progress/workflow-progress';
 
 @Component({
-  selector: 'atcp-user-activities',
+  selector: 'app-user-activities',
   templateUrl: './user-activities.component.html',
   styleUrls: ['./user-activities.component.scss'],
 })
@@ -23,7 +23,7 @@ export class UserActivitiesComponent {
     'questionCount',
     'actions',
   ];
-  @Input() opaque: boolean = false;
+  @Input() opaque = false;
   @Output() startActivity = new EventEmitter<string>();
   @Output() continueActivity = new EventEmitter<string>();
   @Output() viewActivity = new EventEmitter<string>();

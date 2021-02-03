@@ -13,7 +13,7 @@ import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { UserInfo } from '../../models/userInfo';
 
 @Component({
-  selector: 'atcp-mailing-list',
+  selector: 'app-mailing-list',
   templateUrl: './mailing-list.component.html',
   styleUrls: ['./mailing-list.component.scss'],
 })
@@ -32,7 +32,7 @@ export class MailingListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private mailingListServiceAgent: MailingListServiceAgent,
     private communicationService: AtcpCommunicationService,
-    @Inject('ddp.config') private config: ConfigurationService
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +83,7 @@ export class MailingListComponent implements OnInit, OnDestroy {
         switchMap(person => this.mailingListServiceAgent.join(person)),
         filter(
           (res: HttpResponse<null>) =>
-            res.status === this.SUCCESS_JOIN_MAILING_LIST_STATUS
+            res.status === this.SUCCESS_JOIN_MAILING_LIST_STATUS,
         ),
         tap(() => {
           this.shouldUnsub = false;
@@ -92,14 +92,14 @@ export class MailingListComponent implements OnInit, OnDestroy {
           this.communicationService.showPopupMessage(
             new PopupMessage(
               this.translate.instant('Toolkit.StayInformed.Text'),
-              false
-            )
+              false,
+            ),
           );
         }),
         delay(4000),
         tap(() => {
           this.communicationService.closePopupMessage();
-        })
+        }),
       )
       .subscribe(() => {
         this.sub.unsubscribe();

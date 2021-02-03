@@ -47,7 +47,7 @@ interface Block {
 }
 
 @Component({
-  selector: 'atcp-activity-print',
+  selector: 'app-activity-print',
   templateUrl: './activity-print.component.html',
   styleUrls: ['./activity-print.component.scss'],
   providers: [SubmissionManager],
@@ -139,7 +139,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
 
   private convertActivityForm(activityForm: ActivityForm): void {
     for (const [idx, section] of activityForm.sections
-      .filter(section => section.visible)
+      .filter(formSection => formSection.visible)
       .entries()) {
       if (idx !== 0) {
         this.blocks.push({
@@ -186,6 +186,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
           'Cannot determine type of block',
           block
         );
+        break;
     }
   }
 
@@ -216,7 +217,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
     block: ActivityBooleanQuestionBlock,
     answer?: any
   ): void {
-    let booleanBlock = {
+    const booleanBlock = {
       type: BlockTypes.Boolean,
       content: this.getBlockContent(block),
       value: answer || block.answer,
@@ -316,7 +317,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
     } else if (block.renderMode === 'DROPDOWN') {
       answers = block.answer
         ? possibleAnswers.find(
-            answer => answer.stableId === block.answer[0].stableId
+            possibleAnswer => possibleAnswer.stableId === block.answer[0].stableId
           ).optionLabel
         : '';
     }
@@ -372,7 +373,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
     let el = document.createElement('div');
     el.innerHTML = raw;
 
-    let content = (el.textContent || el.innerHTML || '')
+    const content = (el.textContent || el.innerHTML || '')
       .replace('\u200B', '')
       .replace('*', '')
       .trim();
