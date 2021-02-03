@@ -10,6 +10,7 @@ import {
   UserProfile,
   ActivityInstance,
   UserActivityServiceAgent,
+  UserManagementServiceAgent,
   WorkflowServiceAgent,
   LanguageService,
   CompositeDisposable,
@@ -17,6 +18,7 @@ import {
 
 import { ActivityService } from '../../services/activity.service';
 import * as RouterResources from '../../router-resources';
+import { ActivityCodes } from '../../sdk/constants/activityCodes';
 
 export interface Participant {
   guid: string;
@@ -33,6 +35,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
   participants: Participant[] = [];
   isLoaded = false;
   private anchor = new CompositeDisposable();
+  private COMPLETE_STATUS_CODE = 'COMPLETE';
 
   constructor(
     private readonly router: Router,
@@ -42,6 +45,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     private readonly governedParticipantsAgent: GovernedParticipantsServiceAgent,
     private readonly userActivityAgent: UserActivityServiceAgent,
     private readonly workflowAgent: WorkflowServiceAgent,
+    private readonly userManagementService: UserManagementServiceAgent,
     @Inject('ddp.config') private readonly config: ConfigurationService
   ) {}
 
@@ -97,7 +101,10 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
             )
           )
         ),
-        switchMap(participants$ => forkJoin(participants$))
+        switchMap(participants$ => forkJoin(participants$)),
+        switchMap(participants =>
+          this.checkAndDeleteAccidentalParticipant(participants)
+        )
       )
       .subscribe({
         next: participants => {
@@ -124,5 +131,30 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
           observer.complete();
         });
     });
+  }
+
+  private checkAndDeleteAccidentalParticipant(
+    participants: Participant[]
+  ): Observable<Participant[]> {
+    const accidentalParticipant = participants.find(participant => {
+      const registrationActivity = participant.activities.find(
+        activity => activity.activityCode === ActivityCodes.REGISTRATION
+      );
+
+      return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE;
+    });
+
+    if (!accidentalParticipant) {
+      return of(participants);
+    }
+
+    return this.userManagementService
+      .deleteUser(accidentalParticipant.guid)
+      .pipe(
+        take(1),
+        map(() =>
+          participants.filter(p => p.guid !== accidentalParticipant.guid)
+        )
+      );
   }
 }
