@@ -1,11 +1,16 @@
-.Header {
+.header-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    padding: 20px 100px;
+    right: 0;
+
     z-index: 3;
+}
+
+.Header {
     margin: 0;
+    padding: 20px 100px;
+
     background: transparent;
 }
 
