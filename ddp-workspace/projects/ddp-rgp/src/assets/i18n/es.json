@@ -3,6 +3,10 @@
         "LogoAlt": "[es]Rare Genome Project logo",
         "ApplyButton": "[es]Apply"
     },
+    "Banner": {
+        "Text": "[es]For updates on how COVID-19 is impacting our study, please click",
+        "LinkText": "[es]here."
+    },
     "Header": {
         "Families": {
             "Text": "[es]For Families ",
