@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
+import {
+  Routes,
+  RouterModule,
+  UrlSegment,
+  UrlMatchResult,
+} from '@angular/router';
 
+import { Routes as AppRoutes } from './routes';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -21,160 +27,151 @@ import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/r
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
-import {
-  IrbGuard,
-  Auth0CodeCallbackComponent,
-  AuthGuard
-} from 'ddp-sdk';
+import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard } from 'ddp-sdk';
 import { ActivityRedesignedComponent } from 'toolkit';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
 // The Angular compiler complains if you try to create a function that returns a generic version of
 // this function where it case-insensitively matches the specified string
 export function lgmdMatcher(url: UrlSegment[]): UrlMatchResult {
-  return (url[0].path.toLowerCase() === 'lgmd' ? ({ consumed: url }) : null) as UrlMatchResult;
+  return (url[0].path.toLowerCase() === 'lgmd'
+    ? { consumed: url }
+    : null) as UrlMatchResult;
 }
 
 const routes: Routes = [
   {
-    path: '',
+    path: AppRoutes.Home,
     component: HomeComponent,
     pathMatch: 'full',
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
     matcher: lgmdMatcher,
-    redirectTo: 'limb-girdle-muscular-dystrophy',
-    canActivate: [IrbGuard]
+    redirectTo: AppRoutes.LGMD,
+    canActivate: [IrbGuard],
   },
   {
-    path: 'auth',
+    path: AppRoutes.Auth,
     component: Auth0CodeCallbackComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'login-landing',
+    path: AppRoutes.LoginLanding,
     component: Auth0LandingComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'login-landing/:mode',
+    path: AppRoutes.LoginLandingMode,
     component: Auth0RedirectComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'password-reset-done',
+    path: AppRoutes.PasswordResetDone,
     component: RedirectToAuth0Landing,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'session-expired',
+    path: AppRoutes.SessionExpired,
     component: SessionExpiredComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'tell-us-your-story',
+    path: AppRoutes.TellUsYourStory,
     component: TellUsYourStoryComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'about-us',
+    path: AppRoutes.AboutUs,
     component: AboutUsComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'faq',
+    path: AppRoutes.Faq,
     component: FaqComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'eligibility-criteria',
+    path: AppRoutes.EligibilityCriteria,
     component: EligibilityCriteriaComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'how-it-works',
+    path: AppRoutes.HowItWorks,
     component: HowItWorksComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'privacy-and-your-data',
+    path: AppRoutes.PrivacyAndYourData,
     component: PrivacyAndYourDataComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'for-your-physician',
+    path: AppRoutes.ForYourPhysician,
     component: ForYourPhysicianComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'data-sharing',
+    path: AppRoutes.DataSharing,
     component: DataSharingComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'limb-girdle-muscular-dystrophy',
+    path: AppRoutes.LGMD,
     component: LGMDComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'craniofacial',
+    path: AppRoutes.Craniofacial,
     component: CraniofacialComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'password',
-    component: PasswordComponent
+    path: AppRoutes.Password,
+    component: PasswordComponent,
   },
   {
-    path: 'count-me-in',
-    redirectTo: 'tell-us-your-story',
-    canActivate: [IrbGuard]
+    path: AppRoutes.CountMeIn,
+    redirectTo: AppRoutes.TellUsYourStory,
+    canActivate: [IrbGuard],
   },
   {
-    path: 'stay-informed',
+    path: AppRoutes.StayInformed,
     component: StayInformedComponent,
-    canActivate: [IrbGuard]
+    canActivate: [IrbGuard],
   },
   {
-    path: 'error',
-    component: ErrorComponent
+    path: AppRoutes.Error,
+    component: ErrorComponent,
   },
   {
-    path: 'activity/:id',
+    path: AppRoutes.ActivityId,
     component: ActivityRedesignedComponent,
-    canActivate: [
-      AuthGuard,
-      IrbGuard
-    ]
+    canActivate: [AuthGuard, IrbGuard],
   },
   {
-    path: 'activity-link/:id',
+    path: AppRoutes.ActivityLink,
     component: ActivityRedesignedComponent,
-    canActivate: [
-      AuthGuard,
-      IrbGuard
-    ]
+    canActivate: [AuthGuard, IrbGuard],
   },
   {
-    path: 'dashboard',
+    path: AppRoutes.Dashboard,
     component: UserDashboardComponent,
-    canActivate: [
-      AuthGuard,
-      IrbGuard
-    ]
+    canActivate: [AuthGuard, IrbGuard],
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: AppRoutes.Home,
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    enableTracing: false,
-    scrollPositionRestoration: 'top'
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      enableTracing: false,
+      scrollPositionRestoration: 'top',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

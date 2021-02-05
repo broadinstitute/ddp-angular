@@ -1816,20 +1816,6 @@ toolkit-session-will-expire {
     }
 }
 
-// Language selector styles
-.SimpleButton .ddp-globe {
-    stroke: #0C457D;
-    fill: transparent;
-    vertical-align: middle;
-    transition: stroke 0.3s ease;
-}
-.SimpleButton:hover .ddp-globe {
-    stroke: #0EA6B5;
-    fill: transparent;
-    vertical-align: middle;
-    transition: stroke 0.3s ease;
-}
-
 mat-icon.ddp-dropdown-arrow {
     width: 1px;
     height: 1px;

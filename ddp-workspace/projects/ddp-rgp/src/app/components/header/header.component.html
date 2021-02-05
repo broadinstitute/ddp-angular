@@ -1,4 +1,4 @@
-<div class="header-container">
+<!-- <div class="header-container">
   <app-page-banner></app-page-banner>
 
   <header
@@ -91,7 +91,6 @@
             </div>
           </li>
 
-          <!--ONLY FOR SMALLER DEVICES-->
           <a
             (click)="isForFamiliesCollapsed = !isForFamiliesCollapsed"
             class="Hidden-desktop Header-menuMobile"
@@ -174,7 +173,6 @@
               >Header.Projects.Item2</a
             >
           </div>
-          <!--UNTIL HERE-->
 
           <li data-target=".navbar-collapse.in" data-toggle="collapse">
             <a
@@ -217,6 +215,156 @@
           </li>
         </div>
       </ul>
+    </nav>
+  </header>
+</div> -->
+
+<div class="header-container">
+  <app-page-banner></app-page-banner>
+
+  <header class="app-header">
+    <a class="app-header__logo" [routerLink]="Routes.Home"></a>
+
+    <button class="app-header__toggle" (click)="onToggleClick($event)">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+
+    <nav
+      class="app-header__nav"
+      [class.app-header__nav--open]="isMobileNavShown"
+    >
+      <ul class="nav-list">
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              (click)="onDropdownClick($event, 'families')"
+            >
+              {{ 'Header.Families.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div
+              *ngIf="isFamiliesMenuShown"
+              #familiesMenu
+              class="nav-control__dropdown"
+            >
+              <a
+                class="nav-control__link"
+                [routerLink]="Routes.EligibilityCriteria"
+              >
+                {{ 'Header.Families.Item1' | translate }}
+              </a>
+              <a class="nav-control__link" [routerLink]="Routes.HowItWorks">
+                {{ 'Header.Families.Item2' | translate }}
+              </a>
+              <a
+                class="nav-control__link"
+                [routerLink]="Routes.PrivacyAndYourData"
+              >
+                {{ 'Header.Families.Item3' | translate }}
+              </a>
+              <a
+                class="nav-control__link"
+                [routerLink]="Routes.ForYourPhysician"
+              >
+                {{ 'Header.Families.Item4' | translate }}
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              (click)="onDropdownClick($event, 'researchers')"
+            >
+              {{ 'Header.Researchers.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div *ngIf="isResearchersMenuShown" class="nav-control__dropdown">
+              <a class="nav-control__link" [routerLink]="Routes.DataSharing">
+                {{ 'Header.Researchers.Item1' | translate }}
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              (click)="onDropdownClick($event, 'projects')"
+            >
+              {{ 'Header.Projects.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div *ngIf="isProjectsMenuShown" class="nav-control__dropdown">
+              <a class="nav-control__link" [routerLink]="Routes.LGMD">
+                {{ 'Header.Projects.Item1' | translate }}
+              </a>
+
+              <a class="nav-control__link" [routerLink]="Routes.Craniofacial">
+                {{ 'Header.Projects.Item2' | translate }}
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <a class="nav-control__button pm" [routerLink]="Routes.AboutUs">
+              {{ 'Header.AboutUs' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <a class="nav-control__button pm" [routerLink]="Routes.Faq">
+              {{ 'Header.FAQs' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li *ngIf="isAuthenticated" class="nav-list__item">
+          <div class="nav-control">
+            <a class="nav-control__button" [routerLink]="Routes.Dashboard">
+              {{ 'Header.Dashboard' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <ddp-language-selector></ddp-language-selector>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <a
+              class="nav-control__button pm get-started-link"
+              [routerLink]="Routes.HowItWorks"
+            >
+              {{ 'Header.GetStarted' | translate }}
+            </a>
+          </div>
+
+          <div class="get-started-auth only-desktop">
+            <ddp-sign-in-out></ddp-sign-in-out>
+          </div>
+        </li>
+      </ul>
+
+      <div class="sign-in-out only-mobile pm">
+        <ddp-sign-in-out></ddp-sign-in-out>
+      </div>
     </nav>
   </header>
 </div>
