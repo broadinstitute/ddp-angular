@@ -1,14 +1,7 @@
-import {
-  Component,
-  ViewEncapsulation,
-  Inject,
-  HostListener,
-  OnInit,
-  ElementRef,
-} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
-import { WindowRef, SessionMementoService } from 'ddp-sdk';
+
+import { SessionMementoService } from 'ddp-sdk';
 
 import { Routes } from '../../routes';
 
@@ -16,7 +9,6 @@ import { Routes } from '../../routes';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
   public Routes = Routes;
@@ -24,31 +16,20 @@ export class HeaderComponent implements OnInit {
   public isResearchersMenuShown = false;
   public isProjectsMenuShown = false;
   public isMobileNavShown = false;
+  public isHeaderWhite = false;
+  private isHeaderWhiteRoute = false;
+  private scrollYThreshold = 80;
+  private whiteHeaderRoutes = [
+    Routes.Home,
+    Routes.EligibilityCriteria,
+    Routes.LGMD,
+    Routes.Craniofacial,
+  ];
 
-  public inHome = true;
-  public inLGMD = true;
-  public inEligiblityCrit = true;
-  public isCollapsed = true;
-  public isForFamiliesCollapsed = true;
-  public isForResearchersCollapsed = true;
-  public isSpecialtyProjectsCollapsed = true;
-  public isPageScrolled = false;
-
-  constructor(
-    private host: ElementRef,
-    private router: Router,
-    private window: WindowRef,
-    private session: SessionMementoService,
-    @Inject(DOCUMENT) private document: any,
-  ) {}
+  constructor(private router: Router, private session: SessionMementoService) {}
 
   public ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isCollapsed = true;
-        this.trackNavigation(event.urlAfterRedirects);
-      }
-    });
+    this.setupRoutesListener();
   }
 
   public get isAuthenticated(): boolean {
@@ -72,18 +53,15 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  @HostListener('window: scroll') public onWindowScroll(): void {
-    const scrolledPixels =
-      this.window.nativeWindow.pageYOffset ||
-      this.document.documentElement.scrollTop ||
-      this.document.body.scrollTop ||
-      0;
-    this.isPageScrolled = !!scrolledPixels;
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    const yPos = window.scrollY || window.pageYOffset || 0;
+
+    this.isHeaderWhite =
+      this.isHeaderWhiteRoute || yPos > this.scrollYThreshold;
   }
 
-  public onDropdownClick(e: Event, target: string): void {
-    e.stopPropagation();
-
+  public onDropdownClick(_: Event, target: string): void {
     this.isFamiliesMenuShown = false;
     this.isResearchersMenuShown = false;
     this.isProjectsMenuShown = false;
@@ -103,31 +81,19 @@ export class HeaderComponent implements OnInit {
     this.isMobileNavShown = !this.isMobileNavShown;
   }
 
+  private setupRoutesListener(): void {
+    this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.isMobileNavShown = false;
+        this.trackNavigation(e.urlAfterRedirects);
+      }
+    });
+  }
+
   private trackNavigation(route: string): void {
-    if (
-      route === null ||
-      route === undefined ||
-      route === '/' ||
-      route.indexOf('/password') === 0 ||
-      route.indexOf('/limb-girdle-muscular-dystrophy') === 0 ||
-      route.indexOf('/craniofacial') === 0 ||
-      route.indexOf('/eligibility-criteria') === 0
-    ) {
-      this.inHome = true;
-      this.inLGMD = true;
-      this.inEligiblityCrit = true;
-      return;
-    }
-
-    if (route.indexOf('/about-us') === 0) {
-      this.inHome = false;
-      this.inLGMD = false;
-      this.inEligiblityCrit = false;
-      return;
-    }
-
-    this.inLGMD = false;
-    this.inHome = false;
-    this.inEligiblityCrit = false;
+    this.isHeaderWhiteRoute = this.whiteHeaderRoutes.includes(
+      route.replace('/', '') as Routes,
+    );
+    this.isHeaderWhite = this.isHeaderWhiteRoute;
   }
 }
