@@ -1037,6 +1037,40 @@ h3.Panel-title {
 
 .activity-buttons {
     padding-bottom: 20px;
+
+    .button.previous_button,
+    .button.next_button,
+    .button.submit_button {
+        background-color: #19457d;
+        color: #fff;
+        border-color: #ffffff;
+        border-style: none;
+        box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0 6px 10px 0 rgba(0, 0, 0, 0.14),
+        0 1px 18px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .button.previous_button {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+    }
+
+    .button.next_button {
+        border-radius: 50%;
+        float: right;
+        width: 56px;
+        height: 56px;
+    }
+
+    .button.submit_button {
+        border-radius: 999px;
+        float: right;
+        padding: 8px 20px;
+        line-height: 36px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
 }
 
 .ddp-activity-question {
@@ -1114,6 +1148,15 @@ h3.Panel-title {
     }
 }
 
+.BlueSubHeading {
+    color: #0c457d;
+    padding-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    font-weight: 500;
+}
 
 /* How it Works activity takes up only part of the page */
 .Container--howItWorks {
