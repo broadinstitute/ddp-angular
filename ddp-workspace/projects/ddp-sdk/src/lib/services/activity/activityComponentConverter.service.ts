@@ -13,8 +13,7 @@ export class ActivityComponentConverter {
     public convertComponent(inputBlock: any): ActivityBlock | null {
         if (inputBlock.component.componentType === 'MAILING_ADDRESS') {
             return this.buildMailAddressComponent(inputBlock);
-        } else if (inputBlock.component.componentType === 'PHYSICIAN' ||
-            inputBlock.component.componentType === 'INSTITUTION') {
+        } else if (['PHYSICIAN', 'INSTITUTION'].includes(inputBlock.component.componentType)) {
             return this.buildInstitutionComponent(inputBlock);
         } else {
             this.logger.logError(this.LOG_SOURCE,
@@ -24,23 +23,25 @@ export class ActivityComponentConverter {
     }
 
     private buildMailAddressComponent(inputBlock: any): MailAddressBlock {
+        const params = inputBlock.component.parameters;
         const block = new MailAddressBlock(inputBlock.displayNumber);
-        block.titleText = inputBlock.component.parameters.titleText;
-        block.subtitleText = inputBlock.component.parameters.subtitleText;
-        block.requireVerified = !!inputBlock.component.parameters.requireVerified;
-        block.requirePhone = !!inputBlock.component.parameters.requirePhone;
+        block.titleText = params.titleText;
+        block.subtitleText = params.subtitleText;
+        block.requireVerified = !!params.requireVerified;
+        block.requirePhone = !!params.requirePhone;
         return block;
     }
 
     private buildInstitutionComponent(inputBlock: any): ActivityInstitutionBlock {
+        const params = inputBlock.component.parameters;
         const institutionBlock = new ActivityInstitutionBlock();
-        institutionBlock.allowMultiple = inputBlock.component.parameters.allowMultiple;
-        institutionBlock.addButtonText = inputBlock.component.parameters.addButtonText;
-        institutionBlock.titleText = inputBlock.component.parameters.titleText;
-        institutionBlock.subtitleText = inputBlock.component.parameters.subtitleText;
-        institutionBlock.institutionType = inputBlock.component.parameters.institutionType;
-        institutionBlock.showFieldsInitially = inputBlock.component.parameters.showFieldsInitially;
-        institutionBlock.required = inputBlock.component.parameters.required;
+        institutionBlock.allowMultiple = params.allowMultiple;
+        institutionBlock.addButtonText = params.addButtonText;
+        institutionBlock.titleText = params.titleText;
+        institutionBlock.subtitleText = params.subtitleText;
+        institutionBlock.institutionType = params.institutionType;
+        institutionBlock.showFieldsInitially = params.showFieldsInitially;
+        institutionBlock.required = params.required;
         institutionBlock.displayNumber = inputBlock.displayNumber;
         return institutionBlock;
     }
