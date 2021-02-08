@@ -32,7 +32,7 @@
             <button
               class="nav-control__button"
               [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick($event, 'families')"
+              (click)="onDropdownClick('families')"
             >
               {{ 'Header.Families.Text' | translate }}
               <span class="caret"></span>
@@ -73,7 +73,7 @@
             <button
               class="nav-control__button"
               [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick($event, 'researchers')"
+              (click)="onDropdownClick('researchers')"
             >
               {{ 'Header.Researchers.Text' | translate }}
               <span class="caret"></span>
@@ -92,7 +92,7 @@
             <button
               class="nav-control__button"
               [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick($event, 'projects')"
+              (click)="onDropdownClick('projects')"
             >
               {{ 'Header.Projects.Text' | translate }}
               <span class="caret"></span>
@@ -150,6 +150,7 @@
           <div class="nav-control">
             <ddp-language-selector
               [class.nav-control__button--white]="isHeaderWhite"
+              (click)="onDropdownClick('languageList')"
             ></ddp-language-selector>
           </div>
         </li>

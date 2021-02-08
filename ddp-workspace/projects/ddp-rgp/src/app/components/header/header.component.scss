@@ -30,19 +30,11 @@
   display: flex;
   align-items: center;
 
-  padding: 20px 60px;
+  padding: 20px 50px;
 
   position: relative;
 
   background-color: transparent;
-
-  @media only screen and (max-width: 1240px) {
-    padding: 20px 40px;
-  }
-
-  @media only screen and (max-width: 1024px) {
-    padding: 20px 35px;
-  }
 
   @media only screen and (max-width: 920px) {
     align-items: flex-start;
@@ -285,6 +277,10 @@ ddp-sign-in-out {
 }
 
 .only-desktop {
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.9rem;
+  }
+
   @media only screen and (max-width: 920px) {
     display: none;
   }

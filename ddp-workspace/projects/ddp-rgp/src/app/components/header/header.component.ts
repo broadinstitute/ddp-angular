@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
-import { SessionMementoService } from 'ddp-sdk';
+import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Routes } from '../../routes';
 
@@ -10,7 +10,7 @@ import { Routes } from '../../routes';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   public Routes = Routes;
   public isFamiliesMenuShown = false;
   public isResearchersMenuShown = false;
@@ -25,11 +25,16 @@ export class HeaderComponent implements OnInit {
     Routes.LGMD,
     Routes.Craniofacial,
   ];
+  private anchor = new CompositeDisposable();
 
   constructor(private router: Router, private session: SessionMementoService) {}
 
   public ngOnInit(): void {
     this.setupRoutesListener();
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 
   public get isAuthenticated(): boolean {
@@ -61,7 +66,7 @@ export class HeaderComponent implements OnInit {
       this.isHeaderWhiteRoute || yPos > this.scrollYThreshold;
   }
 
-  public onDropdownClick(_: Event, target: string): void {
+  public onDropdownClick(target: string): void {
     this.isFamiliesMenuShown = false;
     this.isResearchersMenuShown = false;
     this.isProjectsMenuShown = false;
@@ -72,6 +77,8 @@ export class HeaderComponent implements OnInit {
       this.isResearchersMenuShown = true;
     } else if (target === 'projects') {
       this.isProjectsMenuShown = true;
+    } else if (target === 'languageList') {
+      console.log('Clicked language selector');
     }
   }
 
@@ -82,12 +89,14 @@ export class HeaderComponent implements OnInit {
   }
 
   private setupRoutesListener(): void {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationEnd) {
-        this.isMobileNavShown = false;
-        this.trackNavigation(e.urlAfterRedirects);
-      }
-    });
+    this.anchor.addNew(
+      this.router.events.subscribe(e => {
+        if (e instanceof NavigationEnd) {
+          this.resetState();
+          this.trackNavigation(e.urlAfterRedirects);
+        }
+      }),
+    );
   }
 
   private trackNavigation(route: string): void {
@@ -95,5 +104,12 @@ export class HeaderComponent implements OnInit {
       route.replace('/', '') as Routes,
     );
     this.isHeaderWhite = this.isHeaderWhiteRoute;
+  }
+
+  private resetState(): void {
+    this.isFamiliesMenuShown = false;
+    this.isProjectsMenuShown = false;
+    this.isResearchersMenuShown = false;
+    this.isMobileNavShown = false;
   }
 }
