@@ -4,5 +4,6 @@ export enum BlockType {
     Institution = 'institution',
     MailAddress = 'mailaddress',
     Group = 'group',
-    Conditional = 'conditional'
+    Conditional = 'conditional',
+    Activity = 'activity'
 }

@@ -12,6 +12,7 @@ import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ListStyleHint } from '../../models/activity/listStyleHint';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
+import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import * as _ from 'underscore';
 
 @Injectable()
@@ -22,25 +23,9 @@ export class ActivityConverter {
     constructor(
         private questionConverter: ActivityQuestionConverter,
         private componentConverter: ActivityComponentConverter,
-        private logger: LoggingService) {
-        this.blockBuilders = [
-            {
-                type: 'CONTENT', func: (input) => {
-                    const block = new ActivityContentBlock();
-                    block.content = input.body;
-                    block.title = input.title;
-                    return block;
-                }
-            },
-            {
-                type: 'QUESTION', func: (input) => this.questionConverter.buildQuestionBlock(
-                    input.question,
-                    input.displayNumber)
-            },
-            { type: 'COMPONENT', func: (input) => this.componentConverter.convertComponent(input) },
-            { type: 'GROUP', func: (input) => this.convertGroupBlock(input) },
-            { type: 'CONDITIONAL', func: (input) => this.convertConditionalBlock(input) }
-        ];
+        private logger: LoggingService
+    ) {
+        this.initBlockBuilders();
     }
 
     public convertActivity(input: any): ActivityForm {
@@ -54,11 +39,7 @@ export class ActivityConverter {
         form.sectionIndex = input.sectionIndex;
         input.lastUpdatedText && (form.lastUpdatedText = input.lastUpdatedText);
         input.lastUpdated && (form.lastUpdated = input.lastUpdated);
-        if (_.isUndefined(input.readonlyHint)) {
-            form.readonlyHint = null;
-        } else {
-            form.readonlyHint = input.readonlyHint;
-        }
+        form.readonlyHint = _.isUndefined(input.readonlyHint) ? null : input.readonlyHint;
         for (const inputSection of input.sections) {
             const section = this.convertActivitySection(inputSection);
             form.sections.push(section);
@@ -73,8 +54,15 @@ export class ActivityConverter {
         return form;
     }
 
-    private convertGroupBlock(blockJson: any): ActivityBlock {
-        const groupBlock: ActivityGroupBlock = new ActivityGroupBlock();
+    private convertContentBlock(input: any): ActivityContentBlock {
+        const block = new ActivityContentBlock();
+        block.content = input.body;
+        block.title = input.title;
+        return block;
+    }
+
+    private convertGroupBlock(blockJson: any): ActivityGroupBlock {
+        const groupBlock = new ActivityGroupBlock();
         groupBlock.title = blockJson.title;
         groupBlock.nestedBlocks = this.buildActivityBlocks(blockJson.nested);
         groupBlock.shown = blockJson.shown;
@@ -92,32 +80,37 @@ export class ActivityConverter {
         }
         // appears that the control question is always show (there is no "shown" variable for control question in json)
         newBlock.controlQuestion.shown = true;
-        const nestedGroupBlock = new ActivityGroupBlock();
+
+        this.buildShownField(newBlock, blockJson);
+        newBlock.id = blockJson.blockGuid;
+        newBlock.nestedGroupBlock = this.createGroupBlock(blockJson.nested);
+        return newBlock;
+    }
+
+    private createGroupBlock(nestedBlocks: any): ActivityGroupBlock {
+        const groupBlock = new ActivityGroupBlock();
         // we don't really get this from the server, but to keep things consistent on client...
-        nestedGroupBlock.shown = true;
-        nestedGroupBlock.nestedBlocks = this.buildActivityBlocks(blockJson.nested);
-        for (const block of nestedGroupBlock.nestedBlocks) {
+        groupBlock.shown = true;
+        groupBlock.nestedBlocks = this.buildActivityBlocks(nestedBlocks);
+        for (const block of groupBlock.nestedBlocks) {
             if (block.blockType === BlockType.Question) {
                 // dependent questions should not show a number
                 (block as AbstractActivityQuestionBlock).displayNumber = null;
             }
         }
         // need to set a a list style to keep the group block happy. And we don't want a style
-        nestedGroupBlock.listStyle = ListStyleHint['NONE'];
-        this.buildShownField(newBlock, blockJson).id = blockJson.blockGuid;
-        newBlock.nestedGroupBlock = nestedGroupBlock;
-        return newBlock;
+        groupBlock.listStyle = ListStyleHint.NONE;
+        return groupBlock;
     }
 
-    private buildActivityBlocks(jsonForBlocks: any | null | undefined): ActivityBlock[] {
+    private buildActivityBlocks(jsonForBlocks: any): ActivityBlock[] {
         if (!(_.isArray(jsonForBlocks))) {
             return [];
         }
         return (jsonForBlocks as any[]).map((childJson: any) => {
             const blockBuilder = this.blockBuilders.find(x => x.type === childJson.blockType);
             if (!blockBuilder) {
-                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'No builder for block type: '
-                    + childJson.blockType);
+                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'No builder for block type: ' + childJson.blockType);
                 return null;
             }
             const childBlock = blockBuilder.func(childJson);
@@ -126,9 +119,21 @@ export class ActivityConverter {
                     + JSON.stringify(childJson));
                 return null;
             }
-            this.buildShownField(childBlock, childJson).id = childJson.blockGuid;
+            this.buildShownField(childBlock, childJson);
+            childBlock.id = childJson.blockGuid;
             return childBlock;
         });
+    }
+
+    private convertActivityBlock(blockJson: any): ActivityActivityBlock {
+        const activityBlock = new ActivityActivityBlock();
+        activityBlock.title = blockJson.title;
+        activityBlock.renderHint = blockJson.renderHint;
+        activityBlock.activityCode = blockJson.activityCode;
+        activityBlock.allowMultiple = blockJson.allowMultiple;
+        activityBlock.addButtonText  = blockJson.addButtonText;
+        activityBlock.instances = blockJson.instances;
+        return activityBlock;
     }
 
     private convertActivitySection(jsonSection: any): ActivitySection {
@@ -150,12 +155,12 @@ export class ActivityConverter {
                     if (!block) {
                         continue;
                     }
-                    this.buildShownField(block, inputBlock).id = inputBlock.blockGuid;
+                    this.buildShownField(block, inputBlock);
+                    block.id = inputBlock.blockGuid;
                     section.blocks.push(block);
                 } else {
                     // TODO throw exception here? For now no. Just log it as a problem
-                    this.logger.logError(this.LOG_SOURCE,
-                        `Received unknown block type with name ${inputBlock.blockType} from server`);
+                    this.logger.logError(this.LOG_SOURCE, `Received unknown block type with name ${inputBlock.blockType} from server`);
                 }
             }
         }
@@ -163,11 +168,36 @@ export class ActivityConverter {
     }
 
     private buildShownField<TBlock extends ActivityBlock>(block: TBlock, inputBlock: any): TBlock {
-        if (inputBlock.shown != null) {
-            block.shown = inputBlock.shown;
-        } else {
-            block.shown = true;
-        }
+        block.shown = (inputBlock.shown != null) ? inputBlock.shown : true;
         return block;
     }
+
+  private initBlockBuilders(): void {
+      this.blockBuilders = [
+          {
+              type: BlockType.Content.toUpperCase(),
+              func: (input) => this.convertContentBlock(input)
+          },
+          {
+              type: BlockType.Question.toUpperCase(),
+              func: (input) => this.questionConverter.buildQuestionBlock(input.question, input.displayNumber)
+          },
+          {
+              type: 'COMPONENT', // TODO: check - where is this type enum ?
+              func: (input) => this.componentConverter.convertComponent(input)
+          },
+          {
+              type: BlockType.Group.toUpperCase(),
+              func: (input) => this.convertGroupBlock(input)
+          },
+          {
+              type: BlockType.Conditional.toUpperCase(),
+              func: (input) => this.convertConditionalBlock(input)
+          },
+          {
+              type: BlockType.Activity.toUpperCase(),
+              func: (input) => this.convertActivityBlock(input)
+          }
+      ];
+  }
 }
