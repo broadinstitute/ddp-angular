@@ -175,27 +175,27 @@ export class ActivityConverter {
   private initBlockBuilders(): void {
       this.blockBuilders = [
           {
-              type: BlockType.Content.toUpperCase(),
+              type: BlockType.Content,
               func: (input) => this.convertContentBlock(input)
           },
           {
-              type: BlockType.Question.toUpperCase(),
+              type: BlockType.Question,
               func: (input) => this.questionConverter.buildQuestionBlock(input.question, input.displayNumber)
           },
           {
-              type: BlockType.Component.toUpperCase(),
+              type: BlockType.Component,
               func: (input) => this.componentConverter.convertComponent(input)
           },
           {
-              type: BlockType.Group.toUpperCase(),
+              type: BlockType.Group,
               func: (input) => this.convertGroupBlock(input)
           },
           {
-              type: BlockType.Conditional.toUpperCase(),
+              type: BlockType.Conditional,
               func: (input) => this.convertConditionalBlock(input)
           },
           {
-              type: BlockType.Activity.toUpperCase(),
+              type: BlockType.Activity,
               func: (input) => this.convertActivityBlock(input)
           }
       ];

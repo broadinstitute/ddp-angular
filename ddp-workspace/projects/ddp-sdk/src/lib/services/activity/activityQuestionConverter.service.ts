@@ -115,31 +115,31 @@ export class ActivityQuestionConverter {
     private initQuestionBuilders(): void {
       this.questionBuilders = [
           {
-              type: QuestionType.Boolean.toUpperCase(),
+              type: QuestionType.Boolean,
               func: (questionJson) => this.getBooleanBlock(questionJson)
           },
           {
-              type: QuestionType.Text.toUpperCase(),
+              type: QuestionType.Text,
               func: (questionJson) => this.getTextBlock(questionJson)
           },
           {
-              type: QuestionType.Numeric.toUpperCase(),
+              type: QuestionType.Numeric,
               func: (questionJson) => this.getNumericBlock(questionJson)
           },
           {
-              type: QuestionType.Picklist.toUpperCase(),
+              type: QuestionType.Picklist,
               func: (questionJson) => this.getPicklistBlock(questionJson)
           },
           {
-              type: QuestionType.Date.toUpperCase(),
+              type: QuestionType.Date,
               func: (questionJson) => this.getDateBlock(questionJson)
           },
           {
-              type: QuestionType.Composite.toUpperCase(),
+              type: QuestionType.Composite,
               func: (questionJson) => this.getCompositeBlock(questionJson)
           },
           {
-              type: QuestionType.Agreement.toUpperCase(),
+              type: QuestionType.Agreement,
               func: () => new ActivityAgreementQuestionBlock()
         }
       ];
