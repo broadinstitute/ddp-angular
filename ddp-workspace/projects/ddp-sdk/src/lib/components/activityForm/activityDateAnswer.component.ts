@@ -33,14 +33,16 @@ export class ActivityDateAnswer {
     constructor(private logger: LoggingService) { }
 
     public handleChange(value: DatePickerValue | null): void {
-        if (value == null) {
-            return;
+        let dateValue: DatePickerValue | null = null;
+
+        if (value !== null) {
+            dateValue = {
+                month: value.month,
+                day: value.day,
+                year: value.year
+            };
         }
-        const dateValue: DatePickerValue = {
-            month: value.month,
-            day: value.day,
-            year: value.year
-        };
+
         // Assign answer value and trigger validations.
         this.block.answer = dateValue;
         this.logger.logEvent(this.LOG_SOURCE, `value ${JSON.stringify(dateValue)}`);

@@ -1,10 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { LOCATION_INITIALIZED } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslateService } from '@ngx-translate/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
@@ -21,36 +25,31 @@ import {
   ToolkitConfigurationService
 } from 'toolkit';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
-import { FaqComponent } from './components/faq/faq.component';
-import { PasswordComponent } from './components/password/password.component';
-import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
-import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
-import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
-import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
-import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
-import { LGMDComponent } from './components/lgmd/lgmd.component';
-import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
-import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
-import { ErrorComponent } from './components/error/error.component';
-import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
+import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
+import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
+import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
+import { ErrorComponent } from './components/error/error.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ForYourPhysicianComponent } from './components/for-your-physician/for-your-physician.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
+import { LGMDComponent } from './components/lgmd/lgmd.component';
+import { PageBannerComponent } from './components/page-banner/page-banner.component';
+import { PasswordComponent } from './components/password/password.component';
+import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
+import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
+import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -137,7 +136,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     Auth0RedirectComponent,
     RedirectToAuth0Landing,
     SessionExpiredComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    PageBannerComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent

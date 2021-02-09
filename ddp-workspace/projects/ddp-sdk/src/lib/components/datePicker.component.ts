@@ -295,6 +295,8 @@ export class DatePickerComponent implements OnChanges {
             this.selectedDay = day.toString();
             this.selectedYear = year.toString();
             this.emitValue(year, month, day);
+        } else {
+            this.discardValue();
         }
     }
 
@@ -401,6 +403,10 @@ export class DatePickerComponent implements OnChanges {
             day: this.includeDayField() ? day : null,
         };
         this.valueChanged.emit(valueToEmit);
+    }
+
+    private discardValue(): void {
+        this.valueChanged.emit(null);
     }
 
     private includeMonthField(): boolean {
