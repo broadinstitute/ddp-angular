@@ -17,7 +17,8 @@ import {
   ConfigurationService,
   LogLevel,
   AnalyticsEventsService,
-  AnalyticsEvent
+  AnalyticsEvent,
+  LanguageService
 } from 'ddp-sdk';
 
 import {
@@ -95,11 +96,15 @@ config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector): () => Promise<any> {
+export function translateFactory(
+  translate: TranslateService,
+  injector: Injector,
+  languageService: LanguageService,
+): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
     locationInitialized.then(() => {
-      const locale = 'en';
+      const locale = languageService.getAppLanguageCode();
       translate.setDefaultLang(locale);
       translate.use(locale).subscribe(() => {
         console.log(`Successfully initialized '${locale}' language as default.`);
@@ -172,7 +177,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       useFactory: translateFactory,
       deps: [
         TranslateService,
-        Injector
+        Injector,
+        LanguageService,
       ],
       multi: true
     }

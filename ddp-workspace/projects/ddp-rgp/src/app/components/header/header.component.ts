@@ -77,8 +77,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isResearchersMenuShown = true;
     } else if (target === 'projects') {
       this.isProjectsMenuShown = true;
-    } else if (target === 'languageList') {
-      console.log('Clicked language selector');
     }
   }
 
