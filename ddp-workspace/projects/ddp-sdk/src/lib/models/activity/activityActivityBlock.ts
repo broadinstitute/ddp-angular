@@ -1,11 +1,7 @@
 import { ActivityBlock } from './activityBlock';
 import { BlockType } from './blockType';
 import { ActivityInstance } from '../activityInstance';
-
-enum ActivityRenderHintType {
-    Embedded = 'EMBEDDED',
-    Modal = 'MODAL'
-}
+import { ActivityRenderHintType } from './activityRenderHintType';
 
 export class ActivityActivityBlock extends ActivityBlock {
     public title: string;
