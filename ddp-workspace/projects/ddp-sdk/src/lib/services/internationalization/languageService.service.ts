@@ -43,6 +43,8 @@ export class LanguageService {
     const loadedCode: string = localStorage.getItem('studyLanguage');
     if (loadedCode) {
       this.changeLanguage(loadedCode);
+
+      return loadedCode;
     } else {
       return null;
     }
