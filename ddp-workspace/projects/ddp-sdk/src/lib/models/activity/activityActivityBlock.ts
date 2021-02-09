@@ -1,5 +1,6 @@
 import { ActivityBlock } from './activityBlock';
 import { BlockType } from './blockType';
+import { ActivityInstance } from 'ddp-sdk';
 
 enum ChildActivityRendering {
     Embedded = 'embedded',
@@ -12,7 +13,7 @@ export class ActivityActivityBlock extends ActivityBlock {
     public activityCode: string;
     public allowMultiple: boolean;
     public addButtonText: string;
-    public instances: any[];
+    public instances: ActivityInstance[];
 
     public get blockType(): BlockType {
         return BlockType.Activity;
