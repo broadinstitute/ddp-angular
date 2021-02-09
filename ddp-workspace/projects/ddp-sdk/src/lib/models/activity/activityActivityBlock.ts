@@ -1,6 +1,6 @@
 import { ActivityBlock } from './activityBlock';
 import { BlockType } from './blockType';
-import { ActivityInstance } from 'ddp-sdk';
+import { ActivityInstance } from '../activityInstance';
 
 enum ActivityRenderHintType {
     Embedded = 'EMBEDDED',
