@@ -3,6 +3,7 @@ import { LoggingService } from '../logging.service';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { ActivityInstitutionBlock } from '../../models/activity/activityInstitutionBlock';
 import { ActivityBlock } from '../../models/activity/activityBlock';
+import { ComponentType } from '../../models/activity/componentType';
 
 @Injectable()
 export class ActivityComponentConverter {
@@ -11,9 +12,9 @@ export class ActivityComponentConverter {
     constructor(private logger: LoggingService) { }
 
     public convertComponent(inputBlock: any): ActivityBlock | null {
-        if (inputBlock.component.componentType === 'MAILING_ADDRESS') {
+        if (inputBlock.component.componentType === ComponentType.MailingAddress) {
             return this.buildMailAddressComponent(inputBlock);
-        } else if (['PHYSICIAN', 'INSTITUTION'].includes(inputBlock.component.componentType)) {
+        } else if ([ComponentType.Physician, ComponentType.Institution].includes(inputBlock.component.componentType)) {
             return this.buildInstitutionComponent(inputBlock);
         } else {
             this.logger.logError(this.LOG_SOURCE,
