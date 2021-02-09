@@ -156,7 +156,7 @@ import { LoggingService } from '../../services/logging.service';
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
                             <button *ngIf="isReadonly()"
-                                    class="button button_medium button_primary button_right"
+                                    class="button button_medium button_primary button_right close_button"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>

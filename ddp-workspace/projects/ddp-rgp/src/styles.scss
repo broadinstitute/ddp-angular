@@ -1036,11 +1036,13 @@ h3.Panel-title {
 }
 
 .activity-buttons {
-    padding-bottom: 20px;
+    overflow: hidden;
+    padding-bottom: 15px;
 
     .button.previous_button,
     .button.next_button,
-    .button.submit_button {
+    .button.submit_button,
+    .button.close_button {
         background-color: #19457d;
         color: #fff;
         border-color: #ffffff;
@@ -1063,7 +1065,8 @@ h3.Panel-title {
         height: 56px;
     }
 
-    .button.submit_button {
+    .button.submit_button,
+    .button.close_button {
         border-radius: 999px;
         float: right;
         padding: 8px 20px;
