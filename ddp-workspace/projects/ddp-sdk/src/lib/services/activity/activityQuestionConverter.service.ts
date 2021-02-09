@@ -227,7 +227,7 @@ export class ActivityQuestionConverter {
         newBlock.allowMultiple && (newBlock.additionalItemText = questionJson.additionalItemText);
         newBlock.children = (questionJson.children as ActivityQuestionBlock<any>[])
             .map(childInputBlock => this.buildQuestionBlock(childInputBlock, null))
-            .filter(block => block != null);
+            .filter(block => block !== null);
         return newBlock;
     }
 }
