@@ -113,6 +113,11 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             map(httpResponse => httpResponse));
     }
 
+    public deleteActivityInstance(studyGuid: string, activityGuid: string): Observable<any> {
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.deleteObservable(baseUrl, null, true);
+    }
+
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
         const activityGuidPart = activityGuid ? `/${activityGuid}` : '';
         return `/studies/${studyGuid}/activities${activityGuidPart}`;
