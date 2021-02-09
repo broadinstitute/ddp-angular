@@ -33,7 +33,7 @@ export class ActivityDateAnswer {
     constructor(private logger: LoggingService) { }
 
     public handleChange(value: DatePickerValue | null): void {
-        let dateValue: DatePickerValue | null = value;
+        let dateValue: DatePickerValue | null = null;
 
         if (value !== null) {
             dateValue = {
