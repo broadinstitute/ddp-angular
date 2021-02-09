@@ -2,14 +2,14 @@ import { ActivityBlock } from './activityBlock';
 import { BlockType } from './blockType';
 import { ActivityInstance } from 'ddp-sdk';
 
-enum ChildActivityRendering {
-    Embedded = 'embedded',
-    Modal = 'modal'
+enum ActivityRenderHintType {
+    Embedded = 'EMBEDDED',
+    Modal = 'MODAL'
 }
 
 export class ActivityActivityBlock extends ActivityBlock {
     public title: string;
-    public renderHint: ChildActivityRendering;
+    public renderHint: ActivityRenderHintType;
     public activityCode: string;
     public allowMultiple: boolean;
     public addButtonText: string;
