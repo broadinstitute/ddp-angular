@@ -5,5 +5,6 @@ export enum BlockType {
     MailAddress = 'mailaddress',
     Group = 'group',
     Conditional = 'conditional',
-    Activity = 'activity'
+    Activity = 'activity',
+    Component = 'component'
 }

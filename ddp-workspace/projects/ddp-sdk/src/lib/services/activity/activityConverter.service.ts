@@ -183,7 +183,7 @@ export class ActivityConverter {
               func: (input) => this.questionConverter.buildQuestionBlock(input.question, input.displayNumber)
           },
           {
-              type: 'COMPONENT', // TODO: check - where is this type enum ?
+              type: BlockType.Component.toUpperCase(),
               func: (input) => this.componentConverter.convertComponent(input)
           },
           {
