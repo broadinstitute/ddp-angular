@@ -136,13 +136,13 @@ import { LoggingService } from '../../services/logging.service';
                         <ng-container *ngIf="isLoaded && isStepped">
                             <button *ngIf="!isFirstStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button button_medium button_secondary"
+                                    class="button button_medium button_secondary previous_button"
                                     (click)="decrementStep()"
                                     [innerHTML]="'SDK.PreviousButton' | translate">
                             </button>
                             <button *ngIf="!isLastStep"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button button_medium button_primary button_right"
+                                    class="button button_medium button_primary button_right next_button"
                                     (click)="incrementStep()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
                             </button>
@@ -150,13 +150,13 @@ import { LoggingService } from '../../services/logging.service';
                         <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded">
                             <button *ngIf="!isReadonly() && !isAgree()" #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button button_medium button_primary button_right"
+                                    class="button button_medium button_primary button_right submit_button"
                                     (click)="flush()"
                                     (mouseenter)="mouseEnterOnSubmit()"
                                     [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                             </button>
                             <button *ngIf="isReadonly()"
-                                    class="button button_medium button_primary button_right"
+                                    class="button button_medium button_primary button_right close_button"
                                     (click)="close()"
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>
