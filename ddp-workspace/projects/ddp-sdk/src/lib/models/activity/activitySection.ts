@@ -2,11 +2,14 @@ import { ActivityContentBlock } from './activityContentBlock';
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { ActivityInstitutionBlock } from './activityInstitutionBlock';
 import { ActivitySectionIcon } from './activitySectionIcon';
+import { ActivityActivityBlock } from './activityActivityBlock';
+
+type ActivityBlock = ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock | ActivityActivityBlock;
 
 export class ActivitySection {
     public name: string;
     public icons: ActivitySectionIcon[];
-    public blocks: Array<ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock> = [];
+    public blocks: Array<ActivityBlock> = [];
     public valid: boolean;
     public visible: boolean;
 

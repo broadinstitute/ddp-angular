@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivityGroupBlock } from '../../models/activity/activityGroupBlock';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { ListStyleHint } from '../../models/activity/listStyleHint';
+import { BlockType } from '../../models/activity/blockType';
 
 @Component({
     selector: 'ddp-group-block-list',
@@ -12,15 +13,15 @@ import { ListStyleHint } from '../../models/activity/listStyleHint';
 
     <ng-template #flatList>
         <ng-container *ngFor="let block of blocks">
-            <div *ngIf="block.blockType == 'content'"
+            <div *ngIf="block.blockType === BLOCK_TYPE.Content"
                 class="ddp-li"
-                [ngClass]="{'ddp-li-bullet': listStyle == LIST_STYLE.BULLET}">
+                [ngClass]="{'ddp-li-bullet': listStyle === LIST_STYLE.BULLET}">
                 <ng-container *ngTemplateOutlet="content; context: {block: block}">
                 </ng-container>
             </div>
-            <div *ngIf="block.blockType == 'question'"
+            <div *ngIf="block.blockType === BLOCK_TYPE.Question"
                 class="ddp-question"
-                [ngClass]="{'ddp-question-neutral': listStyle == LIST_STYLE.BULLET,
+                [ngClass]="{'ddp-question-neutral': listStyle === LIST_STYLE.BULLET,
                             'ddp-group-block-list': listStyle !== LIST_STYLE.BULLET,
                             'ddp-hide-block': !block.shown}">
                 <ng-container *ngTemplateOutlet="question; context: {block: block}">
@@ -31,15 +32,15 @@ import { ListStyleHint } from '../../models/activity/listStyleHint';
 
     <ng-template #itemedList>
         <ng-container *ngFor="let block of blocks">
-            <li *ngIf="block.blockType == 'content'"
+            <li *ngIf="block.blockType === BLOCK_TYPE.Content"
                 class="ddp-li"
-                [ngClass]="{'ddp-li-bullet': listStyle == LIST_STYLE.BULLET}">
+                [ngClass]="{'ddp-li-bullet': listStyle === LIST_STYLE.BULLET}">
                 <ng-container *ngTemplateOutlet="content; context: {block: block}">
                 </ng-container>
             </li>
-            <li *ngIf="block.blockType == 'question'"
+            <li *ngIf="block.blockType === BLOCK_TYPE.Question"
                 class="ddp-question"
-                [ngClass]="{'ddp-question-neutral': listStyle == LIST_STYLE.BULLET,
+                [ngClass]="{'ddp-question-neutral': listStyle === LIST_STYLE.BULLET,
                             'ddp-group-block-list': listStyle !== LIST_STYLE.BULLET,
                             'ddp-hide-block': !block.shown}">
                 <ng-container *ngTemplateOutlet="question; context: {block: block}">
@@ -77,6 +78,7 @@ export class GroupBlockList {
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
 
     public readonly LIST_STYLE = ListStyleHint;
+    public readonly BLOCK_TYPE = BlockType;
 
     public handleChange(value: AnswerValue): void {
         this.valueChanged.emit(value);
