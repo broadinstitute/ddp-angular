@@ -1,457 +1,320 @@
+@import '../../../styles/variables';
+
+@mixin highlight {
+  color: #fff;
+
+  transition: color 0.3s ease-in-out;
+
+  @media only screen and (max-width: 920px) {
+    color: $color-blue-dark;
+  }
+
+  &:hover {
+    color: $color-teal;
+
+    @media only screen and (max-width: 920px) {
+      color: $color-blue-dark;
+    }
+  }
+}
+
 .header-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.Header {
-    margin: 0;
-    padding: 20px 100px;
+.app-header {
+  display: flex;
+  align-items: center;
 
-    background: transparent;
-}
+  padding: 20px 50px;
 
-/*WHEN PAGE IS SCROLLED OR IN HOME*/
+  position: relative;
 
-header.stick,
-.Header--home {
-    background: #ffffff !important;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1) !important;
-}
+  background-color: transparent;
 
-.Header .navbar {
-    margin: 0;
-    border: none;
-}
+  @media only screen and (max-width: 920px) {
+    align-items: flex-start;
+    flex-direction: column;
 
-.Header .navbar-toggle {
-    margin: 8px 0 8px 15px;
-}
+    padding: 15px;
+  }
 
-.Header-menuItem {
-    margin: 0;
-    text-align: right;
-}
+  &--white {
+    background-color: white;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 
-.navbar-collapse.in,
-.navbar-collapse.collapsing {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    padding: 5px 15px 0 15px;
-}
+    ddp-sign-in-out {
+      color: $color-blue-dark;
+    }
+  }
 
-.Header-logo {
-    display: inline-block;
-    position: relative;
-    height: 50px;
+  &__logo {
     width: 117px;
-    margin-top: 5px;
-    background-repeat: no-repeat;
+    height: 50px;
+
+    margin-right: auto;
+
     background-image: url('/assets/images/rare-genome-project-logo-inverted.svg');
-}
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
-header.stick .Header-logo,
-.Header--home .Header-logo {
-    background-image: url('/assets/images/rare-genome-project-logo-primary.svg');
-}
+    @media only screen and (max-width: 1024px) {
+      width: 90px;
 
-.Hamburger {
-    margin: 8px 0 8px 20px;
-}
-
-.icon-bar {
-    background-color: #ffffff !important;
-}
-
-header.stick .icon-bar,
-.Header--home .icon-bar {
-    background-color: #E8702A !important;
-}
-
-@media only screen and (min-width: 2500px) {
-    .Header {
-        padding: 50px 150px;
+      background-size: contain;
     }
 
-    .Header-logo {
-        height: 86px;
-        width: 200px;
-        background-size: 200px 86px;
+    &--white {
+      background-image: url('/assets/images/rare-genome-project-logo-primary.svg');
     }
-}
+  }
 
-@media (min-width: 1921px) and (max-width: 2499px) {
-    .Header {
-        padding: 20px 100px;
-    }
-}
+  &__toggle {
+    display: none;
 
-@media (min-width: 1201px) and (max-width: 1920px) {
-    .Header {
-        padding: 15px 50px;
-    }
-}
+    padding: 9px 10px;
 
-@media (min-width: 1025px) and (max-width: 1200px) {
-    .Header {
-        padding: 15px 50px;
-    }
-}
+    position: absolute;
+    top: 50%;
+    right: 15px;
 
-@media only screen and (max-width: 1024px) {
-    .Header {
-        padding: 15px;
+    background-color: transparent;
+    border: none;
+    transform: translateY(-50%);
+
+    @media only screen and (max-width: 920px) {
+      display: block;
     }
 
-    .Header-logo {
-        width: 90px;
-        background-size: contain;
-    }
-}
+    .bar {
+      width: 22px;
+      height: 2px;
 
-@media (min-width: 451px) and (max-width: 850px) {
-    .Header-logo {
-        height: 40px;
-        width: 94px;
-        background-size: 94px 40px;
-    }
-}
+      background-color: white;
 
-@media only screen and (max-width: 450px) {
-    .Header {
-        padding: 15px 10px 15px 20px;
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
     }
 
-    .Header-logo {
-        height: 35px;
-        width: 83px;
-        background-size: 83px 35px;
-        margin-top: 7px;
+    &--white {
+      .bar {
+        background-color: $color-orange;
+      }
     }
+  }
 
-    .Hamburger {
-        margin: 8px 0 8px 10px;
-    }
-}
+  &__nav {
+    @media only screen and (max-width: 920px) {
+      display: none;
 
-.Header-menu {
-    list-style: none;
-    float: right;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-}
+      width: 100%;
 
-.Header-menuMobile {
-    display: block;
-    width: 100%;
-    text-align: right;
-    padding: 0;
-}
+      padding: 24px 15px;
 
-.Header-menuMobile .Header-menuItem,
-.Hidden-desktop .Header-menuItem {
-    margin-top: 7px;
-    margin-bottom: 7px;
-}
+      position: absolute;
+      top: 100%;
+      left: 0;
 
-.Header-menu li {
-    display: inline-block;
-    position: relative;
-}
+      background-color: #fff;
 
-@media only screen and (min-width: 849px) {
-    .Header-menu {
-        margin-top: 5px;
-    }
-}
-
-@media only screen and (max-width: 849px) {
-    .Header-menu li {
+      &--open {
         display: block;
-        text-align: right;
+
+        border-top: 1px solid #f1f1f1;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+      }
     }
+  }
 }
 
-.Header-menuItem {
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
-    text-align: center;
-    margin: 15px 0 0 50px;
+.nav-list {
+  display: flex;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  @media only screen and (max-width: 920px) {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__item {
+    position: relative;
+
+    &:not(:last-of-type) {
+      margin-right: 40px;
+
+      @media only screen and (max-width: 1240px) {
+        margin-right: 20px;
+      }
+
+      @media only screen and (max-width: 920px) {
+        margin-right: 0;
+        margin-bottom: 14px;
+
+        text-align: right;
+      }
+    }
+  }
+}
+
+.nav-control {
+  position: relative;
+
+  &__button {
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+
+    font-family: inherit;
     font-size: 1.1rem;
     font-weight: 500;
+
     cursor: pointer;
-    color: #ffffff;
-    position: relative;
-}
 
-.Header-menuItem.Sign-in {
-    position: absolute;
-    text-align: right;
-    width: 100%;
-    bottom: -18px;
-    left: 0;
-    font-weight: 400;
-    margin: 0;
-    font-size: 15px !important;
-}
+    @include highlight();
 
-@media only screen and (max-width: 849px) {
-    .Header-menuItem.Sign-in {
-        position: relative;
-        text-align: left;
-        width: auto;
-        bottom: 0;
-        left: 0;
-        font-weight: 500;
-        margin: 7px 10px;
-        font-size: 0.95rem !important;
-    }
-}
-
-.nav .open>a.Header-menuItem,
-.nav .open>a.Header-menuItem:hover,
-.nav .open>a.Header-menuItem:focus {
-    background-color: transparent;
-}
-
-header.stick .Header-menuItem,
-.Header--home .Header-menuItem,
-.navbar-collapse.in .Header-menuItem,
-.navbar-collapse.collapsing .Header-menuItem {
-    color: #0C457D !important;
-}
-
-.navbar-collapse.in,
-.navbar-collapse.collapsing {
-    width: calc(100% + 30px);
-    background-color: #FFFFFF;
-    position: absolute;
-    top: 60px;
-    left: -15px;
-    padding: 15px 15px 20px 15px;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
-}
-
-header.stick .navbar-collapse.in,
-header.stick .navbar-collapse.collapsing {
-    border-top: 1px solid #F1F1F1;
-}
-
-.Header-menuItem:hover,
-header.stick .Header-menuItem:hover,
-.Header--home .Header-menuItem:hover {
-    color: #0EA7B5 !important;
-}
-
-@media only screen and (min-width: 2500px) {
-    .Header-menuItem {
-        margin: 25px 0 0 50px;
-        font-size: 1.2rem;
+    @media only screen and (max-width: 1240px) {
+      font-size: 1rem;
     }
 
-    .Header-menuItem .caret {
-        border-top: 10px dashed;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-    }
-}
-
-@media only screen and (max-width: 1350px) {
-    .Header-menuItem {
-        margin: 15px 0 0 25px;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .Header-menuItem {
-        margin: 15px 0 0 20px;
-    }
-}
-
-@media only screen and (max-width: 1140px) {
-    .Header-menuItem {
-        font-size: 0.95rem;
-        margin: 15px 0 0 15px;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    .Header-menuItem {
-        font-size: 0.95rem;
-        margin: 15px 0 0 12px;
-    }
-}
-
-@media only screen and (min-width: 850px) {
-    .Hidden-mobile {
-        display: inline-block;
+    @media only screen and (max-width: 1024px) {
+      font-size: 0.9rem;
     }
 
-    .Hidden-desktop {
-        display: none !important;
-        visibility: hidden !important;
+    @media only screen and (max-width: 920px) {
+      font-size: 1rem;
     }
 
-    .navbar-header {
-        margin-left: 10px;
+    &--white {
+      color: $color-blue-dark;
     }
-}
+  }
 
-@media only screen and (min-width: 850px) and (max-width: 900px) {
-    .Header-menuItem {
-        font-size: 14px;
-        margin: 5px 0 0 12px;
-    }
-}
-
-@media only screen and (max-width: 849px) {
-    .Hidden-desktop {
-        display: block;
-    }
-
-    .Header-menuAllSizes {
-        margin: 7px 10px;
-    }
-}
-
-.dropdown-menu {
-    border-radius: 0;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  &__dropdown {
     min-width: 160px;
-}
 
-.dropdown-menu a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
+    padding: 5px 0;
+
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    background-color: white;
+
+    @media only screen and (max-width: 920px) {
+      min-width: unset;
+
+      padding: 0;
+      padding-top: 8px;
+
+      position: static;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  &__link {
     display: block;
-}
 
-.dropdown-menu a:hover {
-    background-color: #f1f1f1
-}
+    padding: 10px 20px;
 
-.Header-subMenuItem {
-    cursor: pointer;
-    outline: 0;
-    border: none;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+    font-family: inherit;
     font-size: 0.95rem;
-    font-family: 'Roboto', sans-serif !important;
-    padding: 10px 20px !important;
-    text-align: left;
-    text-decoration: none;
-    position: relative;
+    color: #000;
+
+    cursor: pointer;
+
+    @media only screen and (max-width: 920px) {
+      padding: 3px 13px 3px 0;
+
+      font-weight: 300;
+      font-size: 1rem;
+      color: $color-blue-light;
+    }
+
+    &:hover {
+      background-color: $color-grey-light;
+      color: #000;
+
+      @media only screen and (max-width: 920px) {
+        background-color: transparent;
+        color: $color-blue-dark;
+      }
+    }
+  }
 }
 
-.Header-subMenuMobile {
-    padding: 3px 15px;
-    text-align: right;
+.get-started-auth {
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+}
+
+ddp-sign-in-out {
+  @include highlight();
+  font-size: 15px;
+  color: white;
+}
+
+.pm {
+  @media only screen and (max-width: 920px) {
+    padding-right: 13px;
+  }
+}
+
+.only-desktop {
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.9rem;
+  }
+
+  @media only screen and (max-width: 920px) {
+    display: none;
+  }
+}
+
+.only-mobile {
+  display: none;
+
+  @media only screen and (max-width: 920px) {
     display: block;
-    font-weight: 300;
+  }
 }
 
-@media only screen and (min-width: 2500px) {
-    .dropdown-menu a {
-        padding: 25px 30px;
-    }
+.get-started-link {
+  @media only screen and (max-width: 920px) {
+    color: $color-orange;
 
-    .Header-subMenuItem {
-        font-size: 1rem;
-        padding: 25px 30px !important;
+    &:hover {
+      color: $color-orange;
     }
+  }
+
+  &--orange {
+    color: $color-orange;
+
+    &:hover {
+      color: $color-teal;
+    }
+  }
 }
 
-div.navbar-collapse.collapse {
-    display: block;
-    overflow: hidden;
-    max-height: 0;
-    -webkit-transition: max-height .3s ease;
-    -moz-transition: max-height .3s ease;
-    -o-transition: max-height .3s ease;
-    transition: max-height .3s ease;
-}
+.sign-in-out {
+  margin-top: 14px;
 
-div.navbar-collapse.collapse.in {
-    max-height: 2000px;
-}
-
-.multi-collapse:not(.in) {
-    display: none !important;
-}
-
-header.stick .Orange-link,
-.Header--home .Orange-link,
-.navbar-collapse.in .Orange-link,
-.navbar-collapse.collapsing .Orange-link {
-    color: #E8702A !important;
-}
-
-@media only screen and (max-width: 849px) {
-
-    header.stick .Orange-link,
-    .Header--home .Orange-link,
-    .navbar-collapse.in .Orange-link,
-    .navbar-collapse.collapsing .Orange-link {
-        width: 100%;
-        text-align: right;
-        padding-right: 20px;
-    }
-}
-
-@media (max-width: 849px) {
-    .navbar-header {
-        float: none;
-    }
-
-    .navbar-left,
-    .navbar-right {
-        float: none !important;
-    }
-
-    .navbar-toggle {
-        display: block;
-    }
-
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .navbar-fixed-top {
-        top: 0;
-        border-width: 0 0 1px;
-    }
-
-    .navbar-collapse.collapse {
-        display: none !important;
-    }
-
-    .navbar-nav {
-        float: none !important;
-        margin-top: 7.5px;
-    }
-
-    .navbar-nav>li {
-        float: none;
-    }
-
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .collapse.in {
-        display: block !important;
-    }
+  font-weight: 500;
+  text-align: right;
 }

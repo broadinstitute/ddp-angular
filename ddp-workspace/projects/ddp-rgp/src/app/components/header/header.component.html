@@ -2,221 +2,182 @@
   <app-page-banner></app-page-banner>
 
   <header
-    class="row Header"
-    [ngClass]="{
-      'Header--home': inHome || inLGMD || inEligiblityCrit,
-      stick: isPageScrolled
-    }"
+    class="app-header"
+    [class.app-header--white]="isHeaderWhite"
+    (click)="$event.stopPropagation()"
   >
-    <nav class="navbar" role="navigation">
-      <div class="navbar-header Display--inline">
-        <a
-          class="navbar-brand Header-logo"
-          routerLink="/"
-          [attr.alt]="'Common.LogoAlt' | translate"
-        ></a>
-        <button
-          type="button"
-          class="navbar-toggle"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed"
-          aria-controls="rare-genomes-nav"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <ul class="nav Header-menu">
-        <div
-          class="collapse navbar-collapse Display--inline"
-          id="rare-genomes-nav"
-          [collapse]="isCollapsed"
-        >
-          <li dropdown class="dropdown Hidden-mobile">
-            <a dropdownToggle class="Header-menuItem" translate
-              >Header.Families.Text<span class="caret"></span
-            ></a>
-            <div *dropdownMenu class="dropdown-menu">
-              <a
-                routerLink="/eligibility-criteria"
-                class="Header-subMenuItem"
-                translate
-                >Header.Families.Item1</a
-              >
-              <a routerLink="/how-it-works" class="Header-subMenuItem" translate
-                >Header.Families.Item2</a
-              >
-              <a
-                routerLink="/privacy-and-your-data"
-                class="Header-subMenuItem"
-                translate
-                >Header.Families.Item3</a
-              >
-              <a
-                routerLink="/for-your-physician"
-                class="Header-subMenuItem"
-                translate
-                >Header.Families.Item4</a
-              >
-            </div>
-          </li>
+    <a
+      class="app-header__logo"
+      [class.app-header__logo--white]="isHeaderWhite"
+      [routerLink]="Routes.Home"
+    ></a>
 
-          <li dropdown class="dropdown Hidden-mobile">
-            <a dropdownToggle class="Header-menuItem" translate
-              >Header.Researchers.Text<span class="caret"></span
-            ></a>
-            <div *dropdownMenu class="dropdown-menu">
-              <a routerLink="/data-sharing" class="Header-subMenuItem" translate
-                >Header.Researchers.Item1</a
-              >
-            </div>
-          </li>
+    <button
+      class="app-header__toggle"
+      [class.app-header__toggle--white]="isHeaderWhite"
+      (click)="onToggleClick($event)"
+    >
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
 
-          <li dropdown class="dropdown Hidden-mobile">
-            <a dropdownToggle class="Header-menuItem" translate
-              >Header.Projects.Text<span class="caret"></span
-            ></a>
-            <div *dropdownMenu class="dropdown-menu">
+    <nav
+      class="app-header__nav"
+      [class.app-header__nav--open]="isMobileNavShown"
+    >
+      <ul class="nav-list">
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              [class.nav-control__button--white]="isHeaderWhite"
+              (click)="onDropdownClick('families')"
+            >
+              {{ 'Header.Families.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div
+              *ngIf="isFamiliesMenuShown"
+              #familiesMenu
+              class="nav-control__dropdown"
+            >
               <a
-                routerLink="/limb-girdle-muscular-dystrophy"
-                class="Header-subMenuItem"
-                translate
-                >Header.Projects.Item1</a
+                class="nav-control__link"
+                [routerLink]="Routes.EligibilityCriteria"
               >
-              <a routerLink="/craniofacial" class="Header-subMenuItem" translate
-                >Header.Projects.Item2</a
+                {{ 'Header.Families.Item1' | translate }}
+              </a>
+              <a class="nav-control__link" [routerLink]="Routes.HowItWorks">
+                {{ 'Header.Families.Item2' | translate }}
+              </a>
+              <a
+                class="nav-control__link"
+                [routerLink]="Routes.PrivacyAndYourData"
               >
+                {{ 'Header.Families.Item3' | translate }}
+              </a>
+              <a
+                class="nav-control__link"
+                [routerLink]="Routes.ForYourPhysician"
+              >
+                {{ 'Header.Families.Item4' | translate }}
+              </a>
             </div>
-          </li>
+          </div>
+        </li>
 
-          <!--ONLY FOR SMALLER DEVICES-->
-          <a
-            (click)="isForFamiliesCollapsed = !isForFamiliesCollapsed"
-            class="Hidden-desktop Header-menuMobile"
-          >
-            <p class="Header-menuItem" translate>
-              Header.Families.Text<span class="caret"></span>
-            </p>
-          </a>
-          <div
-            [collapse]="isForFamiliesCollapsed"
-            class="multi-collapse"
-            data-toggle="collapse"
-            data-target=".multi-collapse.in, .navbar-collapse.in"
-          >
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              [class.nav-control__button--white]="isHeaderWhite"
+              (click)="onDropdownClick('researchers')"
+            >
+              {{ 'Header.Researchers.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div *ngIf="isResearchersMenuShown" class="nav-control__dropdown">
+              <a class="nav-control__link" [routerLink]="Routes.DataSharing">
+                {{ 'Header.Researchers.Item1' | translate }}
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <button
+              class="nav-control__button"
+              [class.nav-control__button--white]="isHeaderWhite"
+              (click)="onDropdownClick('projects')"
+            >
+              {{ 'Header.Projects.Text' | translate }}
+              <span class="caret"></span>
+            </button>
+
+            <div *ngIf="isProjectsMenuShown" class="nav-control__dropdown">
+              <a class="nav-control__link" [routerLink]="Routes.LGMD">
+                {{ 'Header.Projects.Item1' | translate }}
+              </a>
+
+              <a class="nav-control__link" [routerLink]="Routes.Craniofacial">
+                {{ 'Header.Projects.Item2' | translate }}
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
             <a
-              routerLink="/eligibility-criteria"
-              class="Header-subMenuMobile"
-              translate
-              >Header.Families.Item1</a
+              class="nav-control__button pm"
+              [class.nav-control__button--white]="isHeaderWhite"
+              [routerLink]="Routes.AboutUs"
             >
-            <a routerLink="/how-it-works" class="Header-subMenuMobile" translate
-              >Header.Families.Item2</a
-            >
+              {{ 'Header.AboutUs' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
             <a
-              routerLink="/privacy-and-your-data"
-              class="Header-subMenuMobile"
-              translate
-              >Header.Families.Item3</a
+              class="nav-control__button pm"
+              [class.nav-control__button--white]="isHeaderWhite"
+              [routerLink]="Routes.Faq"
             >
+              {{ 'Header.FAQs' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li *ngIf="isAuthenticated" class="nav-list__item">
+          <div class="nav-control">
             <a
-              routerLink="/for-your-physician"
-              class="Header-subMenuMobile"
-              translate
-              >Header.Families.Item4</a
+              class="nav-control__button"
+              [class.nav-control__button--white]="isHeaderWhite"
+              [routerLink]="Routes.Dashboard"
             >
+              {{ 'Header.Dashboard' | translate }}
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-list__item">
+          <div class="nav-control">
+            <ddp-language-selector
+              [class.nav-control__button--white]="isHeaderWhite"
+              (click)="onDropdownClick('languageList')"
+            ></ddp-language-selector>
+          </div>
+        </li>
+
+        <li *ngIf="!isAuthenticated" class="nav-list__item">
+          <div class="nav-control">
+            <a
+              class="nav-control__button pm get-started-link"
+              [class.get-started-link--orange]="isHeaderWhite"
+              [routerLink]="Routes.HowItWorks"
+            >
+              {{ 'Header.GetStarted' | translate }}
+            </a>
           </div>
 
-          <a
-            (click)="isForResearchersCollapsed = !isForResearchersCollapsed"
-            class="Hidden-desktop Header-menuMobile"
-          >
-            <p class="Header-menuItem" translate>
-              Header.Researchers.Text<span class="caret"></span>
-            </p>
-          </a>
           <div
-            [collapse]="isForResearchersCollapsed"
-            class="multi-collapse"
-            data-toggle="collapse"
-            data-target=".multi-collapse.in, .navbar-collapse.in"
+            class="get-started-auth only-desktop"
+            [class.get-started-auth--white]="isHeaderWhite"
           >
-            <a routerLink="/data-sharing" class="Header-subMenuMobile" translate
-              >Header.Researchers.Item1</a
-            >
+            <ddp-sign-in-out></ddp-sign-in-out>
           </div>
-
-          <a
-            (click)="
-              isSpecialtyProjectsCollapsed = !isSpecialtyProjectsCollapsed
-            "
-            class="Hidden-desktop Header-menuMobile"
-          >
-            <p class="Header-menuItem" translate>
-              Header.Projects.Text<span class="caret"></span>
-            </p>
-          </a>
-          <div
-            [collapse]="isSpecialtyProjectsCollapsed"
-            class="multi-collapse"
-            data-toggle="collapse"
-            data-target=".multi-collapse.in, .navbar-collapse.in"
-          >
-            <a
-              routerLink="/limb-girdle-muscular-dystrophy"
-              class="Header-subMenuMobile"
-              translate
-              >Header.Projects.Item1</a
-            >
-            <a routerLink="/craniofacial" class="Header-subMenuMobile" translate
-              >Header.Projects.Item2</a
-            >
-          </div>
-          <!--UNTIL HERE-->
-
-          <li data-target=".navbar-collapse.in" data-toggle="collapse">
-            <a
-              routerLink="/about-us"
-              class="Header-menuItem Header-menuAllSizes"
-              translate
-              >Header.AboutUs</a
-            >
-          </li>
-          <li data-target=".navbar-collapse.in" data-toggle="collapse">
-            <a
-              routerLink="/faq"
-              class="Header-menuItem Header-menuAllSizes"
-              translate
-              >Header.FAQs</a
-            >
-          </li>
-          <li
-            *ngIf="isAuthenticated"
-            data-target=".navbar-collapse.in"
-            data-toggle="collapse"
-          >
-            <a
-              routerLink="/dashboard"
-              class="Header-menuItem Header-menuAllSizes"
-              translate
-              >Header.Dashboard</a
-            >
-          </li>
-          <li data-target=".navbar-collapse.in" data-toggle="collapse">
-            <a
-              routerLink="/how-it-works"
-              class="Header-menuItem Header-menuAllSizes Orange-link"
-              translate
-              >Header.GetStarted</a
-            >
-            <ddp-sign-in-out
-              class="Header-menuItem Header-menuAllSizes Sign-in"
-            ></ddp-sign-in-out>
-          </li>
-        </div>
+        </li>
       </ul>
+
+      <div class="sign-in-out only-mobile pm">
+        <ddp-sign-in-out></ddp-sign-in-out>
+      </div>
     </nav>
   </header>
 </div>
