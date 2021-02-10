@@ -13,6 +13,7 @@ import { mergeMap, catchError, map, switchMap } from 'rxjs/operators';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
+import { ActivityInstance } from '../../models/activityInstance';
 
 interface GuidsObject {
     study: string;
@@ -69,6 +70,11 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
           );
     }
 
+    public getActivitySummary(studyGuid: string, activityGuid: string): Observable<ActivityInstance> {
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.getObservable(`${baseUrl}/summary`, {}, [404]);
+    }
+
     public saveAnswerSubmission(studyGuid: string,
         activityGuid: string,
         answerSubmission: AnswerSubmission,
@@ -111,6 +117,11 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.patchObservable(baseUrl, payload).pipe(
             map(httpResponse => httpResponse));
+    }
+
+    public deleteActivityInstance(studyGuid: string, activityGuid: string): Observable<any> {
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.deleteObservable(baseUrl, null, true);
     }
 
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
