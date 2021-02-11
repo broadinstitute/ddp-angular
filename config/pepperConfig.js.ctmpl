@@ -143,6 +143,7 @@ var DDP_ENV = {
    {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
         DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
         DDP_ENV['auth0Domain'] = "{{.Data.auth0.domain}}",
+        DDP_ENV['darUrl'] = "{{.Data.cloudFunctions.darUrl}}"
    {{end}}
 
    DDP_ENV['darUrl'] = "https://us-central1-broad-ddp-dev.cloudfunctions.net/cf-study-contact";
