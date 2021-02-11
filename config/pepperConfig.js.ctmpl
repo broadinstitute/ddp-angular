@@ -146,8 +146,6 @@ var DDP_ENV = {
         DDP_ENV['darUrl'] = "{{.Data.cloudFunctions.darUrl}}"
    {{end}}
 
-   DDP_ENV['darUrl'] = "https://us-central1-broad-ddp-dev.cloudfunctions.net/cf-study-contact";
-
    {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
