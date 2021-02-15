@@ -1,0 +1,31 @@
+<mat-vertical-stepper *ngIf="steps?.length" (selectionChange)="onStepChanged($event)">
+    <!-- Override the default edit (with pencil sign) icon -->
+    <ng-template matStepperIcon="edit" let-index="index">
+        {{index + 1}}
+    </ng-template>
+
+    <mat-step *ngFor="let step of steps; index as i; first as isFirstStep; last as isLastStep;">
+        <ng-template matStepLabel>{{step.label}}</ng-template>
+
+        <ng-container *ngTemplateOutlet="step.template"></ng-container>
+
+        <div class="controls">
+            <button mat-stroked-button
+                    matStepperPrevious
+                    [ngClass]="{'hidden': isFirstStep}"
+                    class="button left">{{'SDK.PreviousButton' | translate}}
+            </button>
+            <button mat-stroked-button
+                    *ngIf="!isLastStep"
+                    matStepperNext
+                    class="button right">{{'SDK.NextButton' | translate}}
+            </button>
+            <button mat-stroked-button
+                    *ngIf="isLastStep"
+                    (click)="finish()"
+                    class="button right">{{'SDK.FinishButton' | translate}}
+            </button>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>
+
