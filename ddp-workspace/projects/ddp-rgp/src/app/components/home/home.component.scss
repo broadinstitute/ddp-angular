@@ -235,7 +235,6 @@ h2.Home-title {
 @media only screen and (max-width: 1200px) {
     .Home-message {
         position: relative;
-        margin-top: 0;
         left: 15px;
         top: -1px;
         margin: 0;
@@ -296,8 +295,7 @@ h2.Home-title {
     }
 
     .Home-message {
-        margin-top: 35%;
-        margin: 0;
+        margin: 35% 0 0 0;
         left: 15px;
         width: calc(100% - 30px);
         -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -326,7 +324,6 @@ h2.Home-title {
 
     .Home-message {
         position: relative;
-        margin-top: 0;
         left: 15px;
         top: -1px;
         margin: 0;

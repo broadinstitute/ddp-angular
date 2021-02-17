@@ -1,8 +1,10 @@
 export enum BlockType {
-    Question = 'question',
-    Content = 'content',
-    Institution = 'institution',
-    MailAddress = 'mailaddress',
-    Group = 'group',
-    Conditional = 'conditional'
+    Question = 'QUESTION',
+    Content = 'CONTENT',
+    Institution = 'INSTITUTION',
+    MailAddress = 'MAILADDRESS',
+    Group = 'GROUP',
+    Conditional = 'CONDITIONAL',
+    Activity = 'ACTIVITY',
+    Component = 'COMPONENT'
 }
