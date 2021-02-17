@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     Routes.EligibilityCriteria,
     Routes.LGMD,
     Routes.Craniofacial,
+    Routes.Password,
   ];
   private anchor = new CompositeDisposable();
 
