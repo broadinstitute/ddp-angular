@@ -997,6 +997,10 @@
     "Auth0LandingPage": {
         "Text": "[es]Please wait. You will be redirected to a destination soon..."
     },
+    "EmailVerifiedCallbackPage": {
+        "Header": "[es] Email verified",
+        "Text": "[es] Please wait. You will be redirected to a login page soon..."
+    },
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {

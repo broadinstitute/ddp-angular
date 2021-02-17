@@ -26,6 +26,7 @@ import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redire
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { EmailVerifiedCallbackComponent } from './components/email-verified-callback/email-verified-callback.component';
 
 import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard } from 'ddp-sdk';
 import { ActivityRedesignedComponent } from 'toolkit';
@@ -94,6 +95,11 @@ const routes: Routes = [
   {
     path: AppRoutes.EligibilityCriteria,
     component: EligibilityCriteriaComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: AppRoutes.EmailVerifiedCallback,
+    component: EmailVerifiedCallbackComponent,
     canActivate: [IrbGuard],
   },
   {
