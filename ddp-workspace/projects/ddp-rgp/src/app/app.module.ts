@@ -33,6 +33,7 @@ import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redire
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
+import { EmailVerifiedCallbackComponent } from './components/email-verified-callback/email-verified-callback.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -143,6 +144,7 @@ export function translateFactory(
     SessionExpiredComponent,
     UserDashboardComponent,
     PageBannerComponent,
+    EmailVerifiedCallbackComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent
