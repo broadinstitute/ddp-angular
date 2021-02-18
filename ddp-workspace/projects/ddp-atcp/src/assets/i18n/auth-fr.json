@@ -3,14 +3,19 @@
     "activateAccount": "Un message contenant les instructions d’activation de votre compte vous a été envoyé.",
     "checkEmail": "Vous avez presque fini ! Merci de consulter vos e-mails : ",
     "stillWaiting": "Vous ne l’avez toujours pas reçu ?",
-    "title": "Activation du compte"
+    "title": "Activation du compte",
+    "stillWaitingTooltip": "Attendez encore un peu. Parfois, la réception du message peut être retardée pour des raisons qui ne dépendent pas de nous. Vous pouvez également consulter le dossier des courriers indésirables de votre messagerie. L’e-mail peut s'y trouver."
   },
   "common": {
     "alreadyRegistered": "Déjà enregistré ? Connectez-vous ici",
     "confirmNewPassword": {
+      "error": "La confirmation du mot de passe ne correspond pas au mot de passe.",
       "label": "Confirmer le nouveau mot de passe"
     },
     "email": {
+      "error": "L'adresse e-mail ne peut pas être vide.",
+      "emailTaken": "Cet e-mail a déjà été pris. Veuillez choisir une valeur différente.",
+      "label": "Adresse e-mail",
       "whoseEmail": "L’adresse e-mail de qui dois-je saisir ?",
       "whoseEmailTooltip": "Si vous êtes le parent ou le tuteur légal d’un enfant AT, utilisez votre propre adresse e-mail.  Nous utiliserons cette adresse e-mail pour communiquer avec vous au sujet des participants que vous avez enregistrés sur la plateforme de données internationale sur les familles AT."
     },
@@ -18,13 +23,16 @@
     "joinUs": "Nous rejoindre",
     "or": "ou",
     "password": {
+      "error": "au moins 8 caractères dont une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial (tel que !@#$%^&*).",
       "label": "Mot de passe"
     },
     "reenter": {
+      "error": "La confirmation du mot de passe ne correspond pas au mot de passe.",
       "label": "Saisir de nouveau le mot de passe"
     },
     "resendInstructions": "Renvoyer les instructions de confirmation",
     "resetPassword": {
+      "error": "au moins 8 caractères dont une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial (tel que !@#$%^&*).",
       "label": "Nouveau mot de passe"
     },
     "signin": "Connexion",
@@ -38,9 +46,11 @@
   "header": {
     "aboutThisInitiative": "Au sujet de cette initiative",
     "aboutUs": "Qui sommes-nous ?",
+    "dataAccessRequest": "Demande d'accès aux données",
     "joinUs": "Nous rejoindre",
     "language": "Langue",
     "learnMore": "En savoir plus",
+    "researchers": "Pour les Chercheurs",
     "signIn": "Connexion"
   },
   "login": {
@@ -48,12 +58,14 @@
     "useEmail": "Utilisez votre adresse e-mail :"
   },
   "modal": {
+    "InvalidLogin": "Adresse e-mail ou mot de passe non valide",
+    "PasswordResetError": "Une erreur est survenue lors du traitement de la réinitialisation du mot de passe.",
     "SuccessChangedPassword": "Votre mot de passe a été changé.",
     "YouWillGetInstructions": "Vous recevrez un e-mail contenant les instructions de réinitialisation de votre mot de passe dans quelques minutes."
   },
   "resendInstructions": {
-    "subTitle": "Si vous n’avez pas reçu les instructions de confirmation, vous pouvez saisir votre adresse e-mail pour générer un autre e-mail de confirmation.",
     "submit": "Renvoyer les instructions de confirmation",
+    "subTitle": "Si vous n’avez pas reçu les instructions de confirmation, vous pouvez saisir votre adresse e-mail pour générer un autre e-mail de confirmation.",
     "title": "Renvoyer les instructions de confirmation"
   },
   "resetPassword": {

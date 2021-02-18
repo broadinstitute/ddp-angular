@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "Anmelden auf der Datenplattform",
-          "Text": "Klicken Sie auf \\\"Mitglied werden\\\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
+          "Text": "Klicken Sie auf \"Mitglied werden\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
         },
         {
           "Name": "Erteilen des Einverständnisses",
@@ -70,64 +70,103 @@
       },
       {
         "Hospital": "Professor für medizinische Genetik, Sapienza Universität, Rom, Italien",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien"
+        "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien",
+        "Name": "David Coman",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Name": "Thomas Crawford",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA"
+        "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan"
+        "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien"
+        "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien"
+        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA"
+        "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+        "Name": "Howard Lederman",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich"
+        "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "Dr. med., MSc, MPH"
       },
       {
-        "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel"
+        "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA"
+        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA",
+        "Name": "Anthony Philippakis",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien"
+        "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien",
+        "Name": "Agata Polizzi",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel"
+        "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien"
+        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich"
+        "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan"
+        "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan",
+        "Name": "Masatoshi Takagi",
+        "Rank": "Dr. med., PhD"
       },
       {
-        "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada"
+        "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien"
+        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien"
+        "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien",
+        "Name": "William Whitehouse",
+        "Rank": "Dr. med."
       },
       {
-        "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland"
+        "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland",
+        "Name": "Stefan Zielen",
+        "Rank": "Dr. med., PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "Wir gehen davon aus, dass die Plattform für globale Daten von AT-Familien zukünftig mit weiteren Organisationen zusammenarbeitet, um weitere biologische und Lebensstildaten zu erfassen, unter anderem über tragbare Technologien, durch die erfasst werden kann, wie sich ein AT-Patient bewegt."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Bevor Sie fortfahren können, müssen Sie Ihre E-Mail-Adresse bestätigen.",
+    "EmailConfirmed": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Einreichen"
+      },
+      "Expand": {
+        "Title": "Aufklappen"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Über diese Initiative",
       "AboutUs": "Über uns",
+      "DataAccessRequest": "Daten Zugriffsanforderung",
+      "ForResearchers": "Für Forscher",
       "JoinUs": "Mitglied werden",
       "Language": "Sprache",
       "LearnMore": "Mehr erfahren",
+      "MedicalHistoryQuestionnaire": "Krankengeschichte",
+      "FeedingSurvey": "Ernährungsumfrage",
       "MyAccount": "Mein Konto",
+      "MyDashboard": "Mein Dashboard",
       "Next": "Weiter",
       "Previous": "Zurück",
       "SignIn": "Anmelden",
-      "YourParticipants": "Ihre Teilnehmer",
-      "ForResearchers": "Für Forscher",
-      "DataAccessRequest": "Daten Zugriffsanforderung"
+      "Statistics": "Plattform-Statistik",
+      "Submit": "Einreichen",
+      "YourParticipants": "Ihre Teilnehmer"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was hoffentlich zu neuen Entdeckungen führen wird."
-    },
-    "OrganizationForm": {
-      "Country": "Land",
-      "State": "Bundesland/Kanton/Provinz"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Bleiben Sie informiert über die neuesten Entdeckungen und Entwicklungen im Bereich AT."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Bereits registriert? Hier anmelden"
+  },
   "SDK": {
+    "DownloadButton": "Überprüfung herunterladen",
     "CancelButton": "Abbrechen",
+    "CloseButton": "Schließen",
+    "CommunicationError": "Beim Speichern Ihrer Daten ist ein Fehler aufgetreten. Bitte prüfen Sie das Formular und Ihre Antworten vor dem Einreichen",
     "Dashboard": {
+      "Text": "",
       "Title": "Mein Gerät"
+    },
+    "DatePicker": {
+      "April": "April",
+      "August": "August",
+      "Day": "Tag wählen ...",
+      "December": "Dezember",
+      "February": "Februar",
+      "January": "Januar",
+      "July": "Juli",
+      "June": "Juni",
+      "March": "März",
+      "May": "Mai",
+      "Month": "Monat wählen ...",
+      "November": "November",
+      "October": "Oktober",
+      "September": "September",
+      "Year": "Jahr wählen ..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "Zeichen verbleibend",
+      "SingularForm": "Zeichen verbleibend"
     },
     "DoNotAssent": "Stimme nicht zu",
     "DoNotConsent": "Ich gebe mein Einverständnis nicht",
@@ -287,39 +368,85 @@
         "Download": "Vollständige Einverständniserklärung herunterladen"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Ort"
-      }
-    },
     "JoinUsButton": "Mitglied werden",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Teilnehmer"
+      "AddParticipant": "Teilnehmer hinzufügen",
+      "ParticipantPlaceholder": "Teilnehmer",
+      "ParticipantsList": "Familienmitglieder mit AT"
     },
     "NextButton": "Weiter",
     "PreviousButton": "Zurück",
     "RegisterButton": "Registrieren",
     "SaveAndSubmit": "Speichern und einreichen",
     "SaveAndSubmitEnrollment": "Speichern und Registrierung einreichen",
+    "SavingButton": "Wird gespeichert",
     "SignAndAssent": "Unterzeichnen und Zustimmung",
     "SignAndConsent": "Unterzeichnen und Einverständnis",
     "StartOrResume": "Starten/Fortsetzen",
+    "SubmitButton": "Einreichen",
+    "SuccessSignIn": "Anmeldung erfolgreich!",
+    "SignInOut": {
+      "SignOut": "Abmelden"
+    },
+    "Title": {
+      "Alert": "Ihre Sitzung läuft in Kürze ab",
+      "Default": "Die Plattform für globale Daten von Familien mit AT-Diagnose"
+    },
+    "TooltipAlt": "Wessen Namen gebe ich ein?",
     "UserActivities": {
       "ActivityActions": "Aktionen",
-      "ActivityStatus": "Status"
+      "ActivityDate": "Erstellt",
+      "ActivityName": "Formular",
+      "ActivityStatus": "Status",
+      "ActivityStatuses": {
+        "COMPLETE": "Ausgefüllt",
+        "CREATED": "Nicht begonnen",
+        "IN_PROGRESS": "In Arbeit"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} Beantwortet",
+      "Summary": "Zusammenfassung",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} Umfragen, an denen teilgenommen werden kann",
+        "Singular": "{{ count }} Umfrage, an der teilgenommen werden kann"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Abmelden"
     },
+    "UserPreferences": {
+      "UserPreferencesGender": "Geschlecht",
+      "UserPreferencesLocale": "Bevorzugte Sprache",
+      "UserPreferencesTitle": "Nutzereinstellungen"
+    },
+    "ValidateError": "Einreichen nicht möglich. Für Einzelheiten prüfen Sie bitte die im Formular angezeigten Meldungen.",
     "Validators": {
-      "DateNavyValidationRule": "[DE] Entered date is invalid"
+      "DateNavyValidationRule": "Das eingegebene Datum ist ungültig"
+    }
+  },
+  "Statistics": {
+    "Title": "Die Plattform für Daten von Familien mit AT-Diagnose in Zahlen",
+    "CountList": {
+      "totalParticipantsCount": "Gesamtzahl der Teilnehmer",
+      "countriesCount": "Vertretene Länder",
+      "genomeStudyParticipantsCount": "Personen, die der Teilnahme an einer Genomsequenzierung zustimmen",
+      "governedParticipantsCount": "Von ihren Eltern registrierte Kinder",
+      "selfEnrolledParticipantsCount": "Teilnehmer, die sich selbst registriert haben"
+    },
+    "Subtitle": "Vertretene Länder"
+  },
+  "Survey": {
+    "Self": "{{ firstName }}-Registrierungsprozess",
+    "NewParticipant": "New Participant-Registrierungsprozess",
+    "ThankYouPopup": {
+      "Text": "Vielen Dank für das Einreichen der Umfrage!"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "oder"
-      }
+    "ActivityActions": {
+      "Continue": "Weiter",
+      "Start": "Starten",
+      "View": "Anzeigen",
+      "Edit": "Bearbeiten"
     },
     "Dashboard": {
       "Actions": "Aktionen",
@@ -335,28 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "Abbrechen",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
+            "Placeholder": "E-Mail-Bestätigung *"
+          },
           "Email": {
+            "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
             "Placeholder": "E-Mail-Adresse"
           },
           "FirstName": {
+            "Error": "„Vorname“ ist ein Pflichtfeld",
             "Placeholder": "Vorname"
           },
           "LastName": {
+            "Error": "„Nachname“ ist ein Pflichtfeld",
             "Placeholder": "Nachname"
           }
-        }
+        },
+        "LoadingError": "Es tut uns leid, aber es ist ein Fehler aufgetreten.",
+        "MatchEmailsError": "Stellen Sie sicher, dass beide E-Mail-Felder ausgefüllt sind und die Adressen übereinstimmen.",
+        "Required": "",
+        "SubmitButton": "In Liste eintragen",
+        "Text": "Geben Sie bitte unten Ihre E-Mail-Adresse an, damit wir Sie über neue Entwicklungen auf dem Laufenden halten können.\nSie können sich jederzeit wieder abmelden.",
+        "Title": "Bleiben Sie informiert"
       },
       "SessionWillExpire": {
         "Continue": "Weiter",
-        "SignOut": "Abmelden"
+        "SignOut": "Abmelden",
+        "Text": "Zum Schutz Ihrer Privatsphäre meldet das System Sie ab, da Sie eine geraume Zeit nicht aktiv gewesen sind. Klicken Sie auf „Fortsetzen“, um weiter angemeldet zu bleiben. Klicken Sie auf „Abmelden“, wenn Sie fertig sind.",
+        "Title": "Ihre Sitzung läuft in Kürze ab"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Ihr Link zum Zurücksetzen des Kennworts ist abgelaufen."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Wenden Sie sich an den ",
         "TextPt2": ", wenn weiterhin Probleme auftreten."
       },
+      "Text": "",
       "Title": "Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut."
+    },
+    "Password": {
+      "InputPlaceholder": "Kennwort",
+      "PasswordRequiredError": "„Kennwort“ ist ein Pflichtfeld",
+      "PasswordWrongError": "Falsches Kennwort. Versuchen Sie es erneut.",
+      "Text": "Geben Sie bitte Ihr Kennwort ein *",
+      "Title": "Geben Sie bitte das Kennwort ein"
+    },
+    "SessionExpired": {
+      "Text": "Sie waren eine geraume Zeit nicht aktiv, weshalb wir Sie aus Sicherheitsgründen abgemeldet haben. Melden Sie sich bitte wieder an, um die Seite zu öffnen, an der Sie zuletzt gearbeitet haben."
+    },
+    "StayInformed": {
+      "Text": "Vielen Dank, dass Sie sich in die E-Mail-Liste eingetragen haben. Wir werden Ihnen Neuigkeiten zuschicken und Sie auf dem Laufenden halten. Sie können sich jederzeit wieder abmelden. Bei Fragen zu Ihrem Status im Projekt schreiben Sie bitte eine E-Mail an",
+      "Title": "Bleiben Sie informiert"
     }
   },
   "WorkflowProgress": {
@@ -371,9 +531,5 @@
       "CREATED": "Nicht begonnen",
       "IN_PROGRESS": "In Arbeit"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Bevor Sie fortfahren können, müssen Sie Ihre E-Mail-Adresse bestätigen.",
-    "EmailConfirmed": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt."
   }
 }

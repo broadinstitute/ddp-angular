@@ -6,7 +6,7 @@
     },
     "SecondParagraph": {
       "TextOne": "I fratelli affetti da A-T sembrano condividere caratteristiche cliniche più simili rispetto ai bambini con A-T portatori delle stesse mutazioni, ma appartenenti a famiglie diverse. Gli scienziati ritengono quindi che altri geni - presenti in una determinata famiglia, diversi da quello responsabile per l'A-T - possono cambiare il modo in cui la malattia colpisce i pazienti. Inoltre, è possibile che vivere in ambienti diversi, condurre stili di vita diversi e seguire una dieta diversa possano influire sullo stato di salute delle persone affette da A-T.",
-      "TextSecond": "Abbiamo recentemente individuato varie persone che presentano le tipiche mutazioni responsabili della malattia nel gene dell'A-T e che non producono la proteina associata all'A-T (esattamente come le altre persone affette da A-T), ma che tuttavia manifestano sintomi sorprendentemente lievi. Siamo ora ottimisti in relazione alla possibilità di trovare alterazioni in altri geni che siano in grado di correggere o compensare le mutazioni responsabili dell'A-T in questi \\\"pazienti con sintomi\\\" molto lievi. Se così fosse, i ricercatori potrebbero trovare nuovi trattamenti farmacologici in grado di aiutare tutte le persone affette da A-T. Ma prima dobbiamo raccogliere i dati clinici e genetici del maggior numero possibile di persone affette da A-T.",
+      "TextSecond": "Abbiamo recentemente individuato varie persone che presentano le tipiche mutazioni responsabili della malattia nel gene dell'A-T e che non producono la proteina associata all'A-T (esattamente come le altre persone affette da A-T), ma che tuttavia manifestano sintomi sorprendentemente lievi. Siamo ora ottimisti in relazione alla possibilità di trovare alterazioni in altri geni che siano in grado di correggere o compensare le mutazioni responsabili dell'A-T in questi \"pazienti con sintomi\" molto lievi. Se così fosse, i ricercatori potrebbero trovare nuovi trattamenti farmacologici in grado di aiutare tutte le persone affette da A-T. Ma prima dobbiamo raccogliere i dati clinici e genetici del maggior numero possibile di persone affette da A-T.",
       "TextThird": "Analogamente, confrontando la storia clinica e lo stile di vita di pazienti diversi affetti da A-T, i ricercatori potrebbero comprendere quali strategie di gestione dei sintomi producono esiti migliori a livello sanitario. Ma prima dobbiamo ottenere e combinare in un unico archivio i dati di molti pazienti affetti da A-T.",
       "Title": "L'A-T colpisce ogni paziente in maniera diversa"
     },
@@ -64,70 +64,109 @@
     },
     "Doctors": [
       {
-        "Hospital": "Professore emerito di Genetica medica –“ Università di Cambridge, Cambridge, Regno Unito e Docente onorario, Wellcome Trust Sanger Institute, Hinxton, Regno Unito",
+        "Hospital": "Professore emerito di Genetica medica – Università di Cambridge, Cambridge, Regno Unito e Docente onorario, Wellcome Trust Sanger Institute, Hinxton, Regno Unito",
         "Name": "Martin Bobrow",
         "Rank": "MD"
       },
       {
         "Hospital": "Professore di Genetica medica, Università La Sapienza, Roma, Italia",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Direttore medico del Dipartimento di Pediatria, Wesley Hospital, Queensland, Australia"
+        "Hospital": "Direttore medico del Dipartimento di Pediatria, Wesley Hospital, Queensland, Australia",
+        "Name": "David Coman",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Professore associato di Pediatria e Neurologia, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti"
+        "Hospital": "Professore associato di Pediatria e Neurologia, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti",
+        "Name": "Thomas Crawford",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Direttore, Google Genomics, Mountain View, CA, Stati Uniti"
+        "Hospital": "Direttore, Google Genomics, Mountain View, CA, Stati Uniti",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatria e Biologia dello sviluppo, Università di Medicina e Odontoiatria di Tokyo, Giappone"
+        "Hospital": "Pediatria e Biologia dello sviluppo, Università di Medicina e Odontoiatria di Tokyo, Giappone",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Professore associato, Università del Queensland, Queensland, Australia"
+        "Hospital": "Professore associato, Università del Queensland, Queensland, Australia",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore fondatore di Oncologia molecolare, Università del Queensland, Brisbane, Australia"
+        "Hospital": "Professore fondatore di Oncologia molecolare, Università del Queensland, Brisbane, Australia",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore di Pediatria, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti"
+        "Hospital": "Professore di Pediatria, Johns Hopkins Children’s Center, Baltimora, MD, Stati Uniti",
+        "Name": "Howard Lederman",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Immunoematologia pediatrica, Coordinatore del Centro di riferimento francese per i deficit immunitari ereditari, Ospedale Necker, Parigi, Francia"
+        "Hospital": "Immunoematologia pediatrica, Coordinatore del Centro di riferimento francese per i deficit immunitari ereditari, Ospedale Necker, Parigi, Francia",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "MD, MSc, MPH"
       },
       {
-        "Hospital": "Neurologo pediatrico, Sheba Medical Center, Ramat Gan, Israele"
+        "Hospital": "Neurologo pediatrico, Sheba Medical Center, Ramat Gan, Israele",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Responsabile dati aziendali, Broad Institute, Cambridge, MA, Stati Uniti"
+        "Hospital": "Responsabile dati aziendali, Broad Institute, Cambridge, MA, Stati Uniti",
+        "Name": "Anthony Philippakis",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Centro Nazionale Malattie Rare, Roma, Italia"
+        "Hospital": "Centro Nazionale Malattie Rare, Roma, Italia",
+        "Name": "Agata Polizzi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Professore di Genetica umana, Università di Tel Aviv, Ramat Aviv, Israele"
+        "Hospital": "Professore di Genetica umana, Università di Tel Aviv, Ramat Aviv, Israele",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito"
+        "Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore di Genetica, Università Paris Descartes e Direttore del Dipartimento di Genetica, Institut Curie, Parigi, Francia"
+        "Hospital": "Professore di Genetica, Università Paris Descartes e Direttore del Dipartimento di Genetica, Institut Curie, Parigi, Francia",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Professore associato, Università di Medicina e Odontoiatria di Tokyo, Tokyo, Giappone"
+        "Hospital": "Professore associato, Università di Medicina e Odontoiatria di Tokyo, Tokyo, Giappone",
+        "Name": "Masatoshi Takagi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "Direttore esecutivo, Public Population Project in Genomics and Society, Montreal, Canada"
+        "Hospital": "Direttore esecutivo, Public Population Project in Genomics and Society, Montreal, Canada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito"
+        "Hospital": "Professore di Genetica oncologica, Facoltà di Medicina dell'Università di Birmingham, Birmingham, Regno Unito",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Professore associato clinico, Università di Nottingham, Nottingham, Regno Unito"
+        "Hospital": "Professore associato clinico, Università di Nottingham, Nottingham, Regno Unito",
+        "Name": "William Whitehouse",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Ospedale pediatrico dell'Università Johann Wolfgang Goethe, Francoforte, Germania"
+        "Hospital": "Ospedale pediatrico dell'Università Johann Wolfgang Goethe, Francoforte, Germania",
+        "Name": "Stefan Zielen",
+        "Rank": "MD, PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "WCi auguriamo che in futuro la Piattaforma globale di dati sulle famiglie con A-T possa collaborare con altre organizzazioni al fine di raccogliere altri tipi di dati biologici e sullo stile di vita, utilizzando ad esempio tecnologie indossabili per acquisire informazioni su come si muovono le persone affette da A-T."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Devi confermare il tuo indirizzo di posta elettronica prima di continuare.",
+    "EmailConfirmed": "Il tuo indirizzo di posta elettronica è stato confermato con successo."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Invia"
+      },
+      "Expand": {
+        "Title": "Espandi"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Informazioni su questa iniziativa",
       "AboutUs": "Chi siamo",
+      "DataAccessRequest": "Richiesta di accesso ai dati",
+      "ForResearchers": "Per i Ricercatori",
       "JoinUs": "Unisciti a noi",
       "Language": "Lingua",
       "LearnMore": "Per saperne di più",
+      "MedicalHistoryQuestionnaire": "Storia clinica",
+      "FeedingSurvey": "Sondaggio sull'alimentazione",
       "MyAccount": "Il Mio Account",
+      "MyDashboard": "Il mio dashboard",
       "Next": "Avanti",
       "Previous": "Indietro",
       "SignIn": "Accedi",
-      "YourParticipants": "I tuoi partecipanti",
-      "ForResearchers": "Per i Ricercatori",
-      "DataAccessRequest": "Richiesta di accesso ai dati"
+      "Statistics": "Statistiche piattaforma",
+      "Submit": "Invia",
+      "YourParticipants": "I tuoi partecipanti"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "La Piattaforma globale di dati sulle famiglie con A-T è uno sforzo incentrato sui pazienti e supervisionato da famiglie con A-T e da specialisti di tutto il mondo attraverso il quale è possibile condividere con i ricercatori informazioni sanitarie, dati genetici ed eventualmente dati di altro tipo sulle persone affette da A-T. Questa piattaforma permetterà ai ricercatori di accedere in modo rapido, sicuro ed efficiente da tutto il mondo a dati importanti dei pazienti, con la speranza che ciò possa condurre a nuove scoperte."
-    },
-    "OrganizationForm": {
-      "Country": "Paese",
-      "State": "Stato/Provincia"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Unisciti a noi in questa ricerca e mantieniti informato/a sulle ultime scoperte."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Già registrato/a? Accedi qui"
+  },
   "SDK": {
+    "DownloadButton": "Scarica revisione",
     "CancelButton": "Annulla",
+    "CloseButton": "Chiudi",
+    "CommunicationError": "Si è verificato un problema durante il salvataggio dei dati. Controlla il modulo e le tue risposte prima dell'invio",
     "Dashboard": {
+      "Text": "",
       "Title": "La mia console"
+    },
+    "DatePicker": {
+      "April": "Aprile",
+      "August": "Agosto",
+      "Day": "Scegli il giorno...",
+      "December": "Dicembre",
+      "February": "Febbraio",
+      "January": "Gennaio",
+      "July": "Luglio",
+      "June": "Giugno",
+      "March": "Marzo",
+      "May": "Maggio",
+      "Month": "Scegli il mese...",
+      "November": "Novembre",
+      "October": "Ottobre",
+      "September": "Settembre",
+      "Year": "Scegli l'anno..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "caratteri rimanenti",
+      "SingularForm": "carattere rimanente"
     },
     "DoNotAssent": "Non rilascio l'assenso",
     "DoNotConsent": "Non rilascio il consenso",
@@ -287,39 +368,85 @@
         "Download": "Scarica la versione integrale del modulo di consenso"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Città"
-      }
-    },
     "JoinUsButton": "Unisciti a noi",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Partecipante"
+      "AddParticipant": "Aggiungi un partecipante",
+      "ParticipantPlaceholder": "Partecipante",
+      "ParticipantsList": "Familiari affetti da A-T"
     },
     "NextButton": "Avanti",
     "PreviousButton": "Indietro",
     "RegisterButton": "Registra",
     "SaveAndSubmit": "Salva e invia",
     "SaveAndSubmitEnrollment": "Salva e invia arruolamento",
+    "SavingButton": "Salvataggio",
     "SignAndAssent": "Firma e assenso",
     "SignAndConsent": "Firma e consenso",
     "StartOrResume": "Inizia/Riprendi",
+    "SubmitButton": "Invia",
+    "SuccessSignIn": "Accesso effettuato con successo.",
+    "SignInOut": {
+      "SignOut": "Disconnetti"
+    },
+    "Title": {
+      "Alert": "Si verificherà presto il timeout della sessione",
+      "Default": "La Piattaforma globale di dati sulle famiglie con A-T"
+    },
+    "TooltipAlt": "Devo immettere il nome di chi?",
     "UserActivities": {
       "ActivityActions": "Azioni",
-      "ActivityStatus": "Stato"
+      "ActivityDate": "Creazione",
+      "ActivityName": "Modulo",
+      "ActivityStatus": "Stato",
+      "ActivityStatuses": {
+        "COMPLETE": "Completato",
+        "CREATED": "Non iniziato",
+        "IN_PROGRESS": "In corso"
+      },
+      "QuestionCount": "risposte{{ answered }} / {{ total }} risposte",
+      "Summary": "Riepilogo",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} sondaggi da completare",
+        "Singular": "{{ count }} sondaggio da completare"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Disconnetti"
     },
+    "UserPreferences": {
+      "UserPreferencesGender": "Sesso",
+      "UserPreferencesLocale": "Lingua preferita",
+      "UserPreferencesTitle": "Preferenze utente"
+    },
+    "ValidateError": "Impossibile procedere con l'invio. Rivedi i messaggi nel modulo per i dettagli.",
     "Validators": {
-      "DateNavyValidationRule": "[IT] Entered date is invalid"
+      "DateNavyValidationRule": "La data inserita non è valida"
+    }
+  },
+  "Statistics": {
+    "Title": "I numeri della Piattaforma globale di dati sulle famiglie con A-T",
+    "CountList": {
+      "totalParticipantsCount": "Numero totale dei partecipanti",
+      "countriesCount": "Paesi rappresentati",
+      "genomeStudyParticipantsCount": "Persone consenzienti a partecipare al sequenziamento del genoma",
+      "governedParticipantsCount": "Bambini iscritti dai loro genitori",
+      "selfEnrolledParticipantsCount": "Partecipanti iscritti autonomamente"
+    },
+    "Subtitle": "Paesi rappresentati"
+  },
+  "Survey": {
+    "Self": "Processo di arruolamento di {{ firstName }}",
+    "NewParticipant": "Processo di arruolamento di New Participant",
+    "ThankYouPopup": {
+      "Text": "Grazie per aver partecipato al sondaggio"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "oppure"
-      }
+    "ActivityActions": {
+      "Continue": "Continua",
+      "Start": "Inizia",
+      "View": "Visualizza",
+      "Edit": "Modifica"
     },
     "Dashboard": {
       "Actions": "Azioni",
@@ -335,27 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "Annulla",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Inserisci un indirizzo di posta elettronica valido",
+            "Placeholder": "Conferma e-mail *"
+          },
           "Email": {
+            "Error": "Inserisci un indirizzo di posta elettronica valido",
             "Placeholder": "Indirizzo di posta elettronica"
           },
           "FirstName": {
+            "Error": "Il nome è obbligatorio",
             "Placeholder": "Nome"
           },
           "LastName": {
+            "Error": "Il cognome è obbligatorio",
             "Placeholder": "Cognome"
           }
-        }
+        },
+        "LoadingError": "Siamo spiacenti, si è verificato un errore.",
+        "MatchEmailsError": "Assicurati che entrambi i campi dell'e-mail siano compilati e che gli indirizzi coincidano.",
+        "Required": "",
+        "SubmitButton": "Iscriviti alla mailing list",
+        "Text": "Indicaci un indirizzo di posta elettronica e ti manterremo informato/a sui progressi della Piattaforma globale di dati sulle famiglie con A-T.",
+        "Title": "Iscriviti per mantenerti informato/a"
       },
       "SessionWillExpire": {
         "Continue": "Continua",
-        "SignOut": "Disconnetti"
+        "SignOut": "Disconnetti",
+        "Text": "Poiché è trascorso un po' di tempo senza eseguire operazioni, il sistema ti disconnetterà per tutelare la tua privacy. Fai clic su \"Continua\" per restare connesso. Fai clic su \"Disconnetti\" se hai terminato.",
+        "Title": "Si verificherà presto il timeout della sessione"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Il link di reimpostazione password è scaduto."
     },
     "ErrorPage": {
       "DefaultText": {
-        "TextPt1": "Se i problemi persistono, contatta l'"
+        "TextPt1": "Se i problemi persistono, contatta l'",
+        "TextPt2": ""
       },
+      "Text": "",
       "Title": "Siamo spiacenti, si è verificato un errore. Riprova più tardi."
+    },
+    "Password": {
+      "InputPlaceholder": "Password",
+      "PasswordRequiredError": "La password è obbligatoria",
+      "PasswordWrongError": "Password errata. Riprova.",
+      "Text": "Inserisci la password *",
+      "Title": "Inserisci la password"
+    },
+    "SessionExpired": {
+      "Text": "Il sistema ha rilevato il protrarsi della tua inattività e ti ha disconnesso come precauzione di sicurezza. Accedi nuovamente per tornare all'ultima pagina in cui ti trovavi."
+    },
+    "StayInformed": {
+      "Text": "Grazie per esserti iscritto/a alla mailing list della Piattaforma globale di dati sulle famiglie con A-T. Ti manterremo informato/a su questa iniziativa tramite l'indirizzo di posta elettronica che hai fornito.",
+      "Title": "Resta informato/a"
     }
   },
   "WorkflowProgress": {
@@ -370,9 +531,5 @@
       "CREATED": "Non iniziato",
       "IN_PROGRESS": "In corso"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Devi confermare il tuo indirizzo di posta elettronica prima di continuare.",
-    "EmailConfirmed": "Il tuo indirizzo di posta elettronica è stato confermato con successo."
   }
 }

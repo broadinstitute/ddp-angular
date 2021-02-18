@@ -3,12 +3,14 @@ import {
   Component,
   Inject,
   Injector,
+  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
   SimpleChange
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   SubmitAnnouncementService,
   SubmissionManager,
@@ -17,15 +19,20 @@ import {
   WindowRef,
   AnalyticsEventsService,
   ActivityForm,
-  LoggingService
+  LoggingService,
+  LanguageService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
+import * as RouterResources from '../../router-resources';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 import {
   delay,
+  filter,
   map,
   startWith,
+  take,
 } from 'rxjs/operators';
 import { combineLatest, merge } from 'rxjs';
 
@@ -201,8 +208,14 @@ import { combineLatest, merge } from 'rxjs';
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  @Input() isPrequal = false;
 
+  public isMultiGoverned: boolean;
   public currentActivityService: CurrentActivityService;
+
+  private multiGovernedUserService: MultiGovernedUserService;
+  private languageService: LanguageService;
+  protected translateService: TranslateService;
 
   constructor(
     logger: LoggingService,
@@ -216,6 +229,34 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     injector: Injector) {
     super(logger, windowRef, renderer, submitService, analytics, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
+    this.multiGovernedUserService = injector.get(MultiGovernedUserService);
+    this.languageService = injector.get(LanguageService);
+    this.translateService = injector.get(TranslateService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
+    this.multiGovernedUserService.isMultiGoverned$.pipe(
+      filter(isMultiGoverned => isMultiGoverned !== null),
+      take(1),
+    ).subscribe(isMultiGoverned => {
+      this.isMultiGoverned = isMultiGoverned;
+    });
+
+    this.anchor.addNew(
+      this.languageService.getProfileLanguageUpdateNotifier()
+        .subscribe((value: null | undefined) => {
+          if (value === undefined) {
+            // User manually changed preferred language
+            this.isLoaded = false;
+          }
+        })
+    );
+
+    if (this.isPrequal) {
+      this.setupPrequalLangListener();
+    }
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -234,34 +275,6 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         this.activityGuidObservable.next(this.activityGuid);
       }
     }
-  }
-
-  public incrementStep(): void {
-    const nextIndex = this.nextAvailableSectionIndex();
-    if (nextIndex !== -1) {
-      this.scrollToTop();
-      // enable any validation errors to be visible
-      this.validationRequested = true;
-      this.sendSectionAnalytics();
-      this.currentSection.validate();
-      if (this.currentSection.valid) {
-        this.resetValidationState();
-        this.currentSectionIndex = nextIndex;
-        this.visitedSectionIndexes[nextIndex] = true;
-        this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
-      }
-    }
-  }
-
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.currentActivityService.saveCurrentActivity(null);
-  }
-
-  public navigateToConsole(): void {
-    this.sendLastSectionAnalytics();
-    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    this.router.navigateByUrl('/console');
   }
 
   protected getActivity(): void {
@@ -307,5 +320,51 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         }
       );
     this.anchor.addNew(get);
+  }
+
+  public incrementStep(): void {
+    const nextIndex = this.nextAvailableSectionIndex();
+    if (nextIndex !== -1) {
+      this.scrollToTop();
+      // enable any validation errors to be visible
+      this.validationRequested = true;
+      this.sendSectionAnalytics();
+      this.currentSection.validate();
+      if (this.currentSection.valid) {
+        this.resetValidationState();
+        this.currentSectionIndex = nextIndex;
+        this.visitedSectionIndexes[nextIndex] = true;
+        this.currentActivityService.updateActivitySection(this.studyGuid, this.activityGuid, this.model, this.currentSectionIndex);
+      }
+    }
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.anchor.removeAll();
+    this.currentActivityService.saveCurrentActivity(null);
+  }
+
+  public navigateToConsole(): void {
+    this.sendLastSectionAnalytics();
+    this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
+
+    this.router.navigateByUrl(this.isMultiGoverned ? RouterResources.ParticipantList : RouterResources.Dashboard);
+  }
+
+  private setupPrequalLangListener(): void {
+    let prevLang = this.translateService.currentLang;
+
+    this.anchor.addNew(
+      this.translateService.onLangChange
+        .pipe(
+          filter(e => e.lang !== prevLang)
+        )
+        .subscribe(e => {
+          prevLang = e.lang;
+
+          this.getActivity();
+        })
+    );
   }
 }

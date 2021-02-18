@@ -1,0 +1,43 @@
+<div class="participants">
+  <h1 class="title title--grey" translate>Toolkit.Dashboard.Title</h1>
+  <h2 class="subtitle subtitle--light" translate>Toolkit.Dashboard.Text</h2>
+  <h2 class="title title--green" translate>
+    SDK.ManageParticipants.ParticipantsList
+  </h2>
+
+  <div *ngIf="!isLoaded; else participantList" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-template #participantList>
+    <ul
+      *ngIf="participants.length; else noParticipants"
+      class="participant-list"
+    >
+      <li
+        class="participant-list__item"
+        *ngFor="let participant of participants"
+      >
+        <app-participant-list-item
+          [participant]="participant"
+        ></app-participant-list-item>
+      </li>
+    </ul>
+
+    <ng-template #noParticipants>
+      <ul class="participant-list">
+        <li class="participant-list__item participant-list__item--placeholder">
+          {{ 'Toolkit.Dashboard.NoParticipants' | translate }}
+        </li>
+      </ul>
+    </ng-template>
+  </ng-template>
+
+  <button
+    class="button ButtonFilled ButtonFilled--green"
+    (click)="onAddParticipantClick()"
+  >
+    <mat-icon>add</mat-icon>
+    <span translate>SDK.ManageParticipants.AddParticipant</span>
+  </button>
+</div>

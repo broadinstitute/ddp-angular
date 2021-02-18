@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "注册数据平台",
-          "Text": "点击 \\\"加入我们\\\" 并用您的姓名和电子邮箱地址创建一个帐户。 创建帐户后，您可以填写一份简短的表格，在自己的数据平台上注册自己（如果您有A-T）或您的孩子（A）作为参与者登录我们的数据平台。"
+          "Text": "点击 \"加入我们\" 并用您的姓名和电子邮箱地址创建一个帐户。 创建帐户后，您可以填写一份简短的表格，在自己的数据平台上注册自己（如果您有A-T）或您的孩子（A）作为参与者登录我们的数据平台。"
         },
         {
           "Name": "给我们许可",
@@ -70,64 +70,108 @@
       },
       {
         "Hospital": "意大利罗马Sapienza大学医学遗传学教授",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "澳大利亚昆士兰州卫斯理医院儿科医生"
+        "Hospital": "澳大利亚昆士兰州卫斯理医院儿科医生",
+        "Name": "David Coman",
+        "Rank": "MD"
       },
       {
-        "Hospital": "美国马里兰州巴尔的摩约翰霍普金斯儿童中心儿科与神经病学副教授"
+        "Hospital": "巴西圣保罗联邦大学副教授",
+        "Name": "David Coman",
+        "Rank": "MD"
       },
       {
-        "Hospital": "美国加州 山景城Google基因组学 负责人"
+        "Hospital": "美国马里兰州巴尔的摩约翰霍普金斯儿童中心儿科与神经病学副教授",
+        "Name": "Thomas Crawford",
+        "Rank": "MD"
       },
       {
-        "Hospital": "日本东京医科大学儿科与发育生物学系"
+        "Hospital": "美国加州 山景城Google基因组学 负责人",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "澳大利亚昆士兰州，昆士兰大学副教授"
+        "Hospital": "日本东京医科大学儿科与发育生物学系",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "MD"
       },
       {
-        "Hospital": "澳大利亚昆士兰布里斯班，大学分子肿瘤学基础教授"
+        "Hospital": "澳大利亚昆士兰州，昆士兰大学副教授",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "美国巴尔的摩，约翰霍普金斯儿童中心儿科教授"
+        "Hospital": "澳大利亚昆士兰布里斯班，大学分子肿瘤学基础教授",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "法国巴黎Necker医院，法国原发免疫缺陷转诊中心儿童免疫血液学协调员"
+        "Hospital": "美国巴尔的摩，约翰霍普金斯儿童中心儿科教授",
+        "Name": "Howard Lederman",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "以色列拉马特甘的Sheba医学中心小儿神经病学家"
+        "Hospital": "法国巴黎Necker医院，法国原发免疫缺陷转诊中心儿童免疫血液学协调员",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "MD, MSc, MPH"
       },
       {
-        "Hospital": "美国马萨诸塞州剑桥大学研究所首席数据官"
+        "Hospital": "以色列拉马特甘的Sheba医学中心小儿神经病学家",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "MD"
       },
       {
-        "Hospital": "意大利罗马国家罕见疾病中心"
+        "Hospital": "美国马萨诸塞州剑桥大学研究所首席数据官",
+        "Name": "Anthony Philippakis",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "以色列拉姆特维夫特拉维夫大学人类遗传学教授"
+        "Hospital": "意大利罗马国家罕见疾病中心",
+        "Name": "Agata Polizzi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授"
+        "Hospital": "以色列拉姆特维夫特拉维夫大学人类遗传学教授",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "巴黎笛卡尔大学遗传学教授，法国巴黎居里研究所遗传学系主任"
+        "Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "日本东京东京医科大学副教授"
+        "Hospital": "巴黎笛卡尔大学遗传学教授，法国巴黎居里研究所遗传学系主任",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "基因组学与社会公共人口项目执行主任，加拿大蒙特利尔"
+        "Hospital": "日本东京东京医科大学副教授",
+        "Name": "Masatoshi Takagi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授"
+        "Hospital": "基因组学与社会公共人口项目执行主任，加拿大蒙特利尔",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "英国诺丁汉诺丁汉大学临床副教授"
+        "Hospital": "英国伯明翰伯明翰大学医学院癌症遗传学教授",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "德国法兰克福约翰·沃尔夫冈歌德大学儿童医院"
+        "Hospital": "英国诺丁汉诺丁汉大学临床副教授",
+        "Name": "William Whitehouse",
+        "Rank": "MD"
+      },
+      {
+        "Hospital": "德国法兰克福约翰·沃尔夫冈歌德大学儿童医院",
+        "Name": "Stefan Zielen",
+        "Rank": "MD, PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +243,43 @@
       "Third": "我们预计，未来，全球A-T成员数据平台将与其他组织合作，收集其他类型的生物和生活方式数据，例如使用可穿戴技术来获取有关A-T人员移动的信息。"
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "您必须先确认您的电子邮箱地址才能继续。",
+    "EmailConfirmed": "您的电子邮箱地址已成功确认。"
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "提交"
+      },
+      "Expand": {
+        "Title": "展开"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "关于这个计划",
       "AboutUs": "关于我们",
+      "DataAccessRequest": "数据访问请求",
+      "ForResearchers": "研究员",
       "JoinUs": "加入我们",
       "Language": "语言",
       "LearnMore": "了解更多",
+      "MedicalHistoryQuestionnaire": "病史",
+      "FeedingSurvey": "进食调查",
       "MyAccount": "我的帐户",
+      "MyDashboard": "我的仪表板",
       "Next": "下一个",
       "Previous": "上一个",
       "SignIn": "签到",
-      "YourParticipants": "您的参与者",
-      "ForResearchers": "研究员",
-      "DataAccessRequest": "数据访问请求"
+      "Statistics": "平台统计数据",
+      "Submit": "提交",
+      "YourParticipants": "您的参与者"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "全球A-T成员数据平台是由A-T成员和全球专家监督的患者驱动的努力，通过该平台，研究人员可以共享关于A-T人员的健康信息、遗传和潜在的其他类型的数据。 该平台将使研究人员能够快速、安全有效地访问世界各地的重要患者数据，希望能够引起新的发现。"
-    },
-    "OrganizationForm": {
-      "Country": "国家",
-      "State": "州/省"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +330,38 @@
       "Title": "应邀加入我们，随时了解最新发现。"
     }
   },
+  "JoinUs": {
+    "SignInButton": "已经注册？ 在这里登录"
+  },
   "SDK": {
+    "DownloadButton": "下载评论",
     "CancelButton": "取消",
+    "CloseButton": "关闭",
+    "CommunicationError": "保存数据时出现问题。 请在提交前检查表单和您的答案",
     "Dashboard": {
+      "Text": "",
       "Title": "我的控制台"
+    },
+    "DatePicker": {
+      "April": "4 月",
+      "August": "8 月",
+      "Day": "选择日期...",
+      "December": "12 月",
+      "February": "2 月",
+      "January": "1 月",
+      "July": "7 月",
+      "June": "6 月",
+      "March": "3 月",
+      "May": "5 月",
+      "Month": "选择月份...",
+      "November": "11 月",
+      "October": "12 月",
+      "September": "9 月",
+      "Year": "选择年份..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "个剩余字符",
+      "SingularForm": "个剩余字符"
     },
     "DoNotAssent": "不同意",
     "DoNotConsent": "不同意",
@@ -287,39 +373,85 @@
         "Download": "下载完整的知情同意书"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "市"
-      }
-    },
     "JoinUsButton": "加入我们",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "参与者"
+      "AddParticipant": " 添加参与者",
+      "ParticipantPlaceholder": "参与者",
+      "ParticipantsList": "有A-T的家庭成员"
     },
     "NextButton": "下一个",
     "PreviousButton": "上一个",
     "RegisterButton": "注册",
     "SaveAndSubmit": "保存并提交",
     "SaveAndSubmitEnrollment": "保存并提交注册",
+    "SavingButton": "正在保存",
     "SignAndAssent": "签名和同意",
     "SignAndConsent": "签名和同意",
     "StartOrResume": "开始/恢复",
+    "SubmitButton": "提交",
+    "SuccessSignIn": "登录成功。",
+    "SignInOut": {
+      "SignOut": "登出"
+    },
+    "Title": {
+      "Alert": "您的会话即将超时",
+      "Default": "全球 A-T 成员数据平台"
+    },
+    "TooltipAlt": "我应该输入谁的名字？",
     "UserActivities": {
       "ActivityActions": "操作",
-      "ActivityStatus": "状态"
+      "ActivityDate": "创建日期",
+      "ActivityName": "表单",
+      "ActivityStatus": "状态",
+      "ActivityStatuses": {
+        "COMPLETE": "已完成",
+        "CREATED": "没有开始",
+        "IN_PROGRESS": "进行中"
+      },
+      "QuestionCount": "已回答 {{ answered }} 道题，共 {{ total }} 道题",
+      "Summary": "摘要",
+      "SurveysToComplete": {
+        "Plural": "待完成 {{ count }} 项调查",
+        "Singular": "待完成 {{ count }} 项调查"
+      }
     },
     "UserMenu": {
       "SignOutButton": "登出"
     },
+    "UserPreferences": {
+      "UserPreferencesGender": "性别",
+      "UserPreferencesLocale": "首选语言",
+      "UserPreferencesTitle": "用户偏好设置"
+    },
+    "ValidateError": "无法继续提交。有关详细信息，请查看表单中的消息。",
     "Validators": {
-      "DateNavyValidationRule": "[ZH] Entered date is invalid"
+      "DateNavyValidationRule": "輸入的日期無效"
+    }
+  },
+  "Statistics": {
+    "Title": "A-T 成员数据平台（按数字）",
+    "CountList": {
+      "totalParticipantsCount": "参与者总数",
+      "countriesCount": "所代表的国家",
+      "genomeStudyParticipantsCount": "同意参与基因组测序的人",
+      "governedParticipantsCount": "由家长代为注册的儿童",
+      "selfEnrolledParticipantsCount": "自行注册的参与者"
+    },
+    "Subtitle": "所代表的国家"
+  },
+  "Survey": {
+    "Self": "{{ firstName }}的注册程序",
+    "NewParticipant": "新参与者注册流程",
+    "ThankYouPopup": {
+      "Text": "感谢您提交调查问卷"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "或"
-      }
+    "ActivityActions": {
+      "Continue": "继续",
+      "Start": "开始",
+      "View": "查看",
+      "Edit": "编辑"
     },
     "Dashboard": {
       "Actions": "操作",
@@ -335,27 +467,61 @@
       "JoinMailingList": {
         "CancelButton": "取消",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "请输入有效的电子邮箱地址",
+            "Placeholder": "电子邮箱确认 *"
+          },
           "Email": {
+            "Error": "请输入有效的电子邮箱地址",
             "Placeholder": "电子邮箱地址："
           },
           "FirstName": {
+            "Error": "名字必填。",
             "Placeholder": "名"
           },
           "LastName": {
+            "Error": "姓氏必填。",
             "Placeholder": "姓"
           }
-        }
+        },
+        "LoadingError": "很抱歉，发生了错误。",
+        "MatchEmailsError": "两个电子邮箱地址字段都要填写，并且地址要匹配。",
+        "Required": "",
+        "SubmitButton": "加入电邮列表",
+        "Text": "“向我们提供一个电子邮箱地址，我们将随时向您通报全球A-T成员数据平台的进展情况。",
+        "Title": "注册以了解情况"
       },
       "SessionWillExpire": {
         "Continue": "继续",
-        "SignOut": "登出"
+        "SignOut": "登出",
+        "Text": "您已经离开一段时间了，为保护您的隐私，系统会将您注销。点击“继续”保持登录状态。如果目前已完成操作，请点击“注销”。",
+        "Title": "您的会话即将超时"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "您的密码重置链接已过期。"
     },
     "ErrorPage": {
       "DefaultText": {
-        "TextPt1": "如果您遇到困难无法继续， "
+        "TextPt1": "如果您遇到困难无法继续， ",
+        "TextPt2": ""
       },
+      "Text": "",
       "Title": "很抱歉，但发生错误。 请稍后再试。"
+    },
+    "Password": {
+      "InputPlaceholder": "密码",
+      "PasswordRequiredError": "密码必填",
+      "PasswordWrongError": "密码不正确。请重试。",
+      "Text": "请输入您的密码 *",
+      "Title": "请输入密码"
+    },
+    "SessionExpired": {
+      "Text": "您离开一段时间了，为了安全起见，我们已将您注销。请再次登录以返回上一页。"
+    },
+    "StayInformed": {
+      "Text": "感谢您加入全球A-T成员数据平台邮箱列表。 我们将通过您提供的电子邮箱地址通知您这一计划。",
+      "Title": "随时了解最新信息"
     }
   },
   "WorkflowProgress": {
@@ -370,9 +536,5 @@
       "CREATED": "没有开始",
       "IN_PROGRESS": "进行中"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "您必须先确认您的电子邮箱地址才能继续。",
-    "EmailConfirmed": "您的电子邮箱地址已成功确认。"
   }
 }

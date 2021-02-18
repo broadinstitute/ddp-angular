@@ -41,7 +41,18 @@
         </div>
         <div class="form-group">
           <label for="phone" translate>DataAccess.ResearcherForm.Phone</label>
-          <input type="text" class="form-control" id="phone" [(ngModel)]="model.researcher_phone" [ngModelOptions]="{standalone: true}">
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            pattern="[0-9\-\+\(\) ]+"
+            [(ngModel)]="model.researcher_phone"
+            [ngModelOptions]="{standalone: true}"
+            #phoneControl="ngModel"
+          />
+          <span class="error" *ngIf="form.submitted && phoneControl.errors && phoneControl.errors.pattern">
+            {{ 'DataAccess.Dataset.Messages.ResearcherPhone' | translate }}
+          </span>
         </div>
         <p><b>{{ ('DataAccess.ResearcherForm.Attachment') | translate }} *</b></p>
         <!-- TODO: add translation for buttonText and hintText-->
@@ -363,7 +374,7 @@
       type="submit"
       class="ButtonBordered ButtonBordered--green"
       (click)="submit(form)"
-      [disabled]="form.invalid && form.submitted"
+      [disabled]="(form.invalid && form.submitted) || busy"
       *ngIf="activeTab === countTabs - 1"
       translate
     >

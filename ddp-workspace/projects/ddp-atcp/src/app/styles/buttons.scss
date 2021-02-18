@@ -335,20 +335,60 @@
   width: 50%;
 }
 
-@media (min-width: $mobile-width) {
-  .ButtonWide {
-    width: 30%
+ddp-language-selector {
+  .SimpleButton {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: -3px;
+  }
+
+  .ddp-globe {
+    width: 13px;
+    height: 14px;
+
+    margin-right: 5px;
+
+    stroke: currentColor;
+    fill: currentColor;
+  }
+
+  .ddp-dropdown-arrow {
+    width: 22px;
+    height: 18px;
+
+    font-size: 20px;
   }
 }
 
-@media (min-width: $tablet-width) {
-  .ButtonWide {
-    width: 25%
+.language-menu {
+  width: 160px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px !important;
+  box-shadow: 0 1px 2px $silver-grey !important;
+
+  .mat-menu-content {
+    padding: 0 !important;
+
+    .mat-menu-item {
+      display: flex;
+      align-items: center;
+
+      height: auto;
+
+      padding: 10px 20px;
+
+      line-height: 20px;
+
+      &:hover {
+        background-color: $grey;
+        color: $green;
+      }
+    }
   }
 }
 
-@media (min-width: $desktop) {
-  .ButtonWide {
-    width: 17%
-  }
+.button--print {
+  margin-right: 1em;
 }

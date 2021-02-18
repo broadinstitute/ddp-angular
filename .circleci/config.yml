@@ -296,13 +296,43 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
+  build-atcp-assets:
+    description: build atcp auth0 scripts & styles
+    steps:
+      - run:
+          name: build atcp auth0 scripts
+          command: |
+            set -u
+            ng build ddp-atcp-auth
+      - run:
+          name: build atcp auth0 styles
+          command: |
+            set -u
+            ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
+
+  execute-study-specific-commands:
+    description: run study specific commands if necessary
+    steps:
+      - when:
+          condition:
+            equal: [ atcp, << pipeline.parameters.study_key >> ]
+          steps:
+            - build-atcp-assets
+
   build-app:
     description: "Build DDP study app"
     steps:
+      - when:
+          condition:
+            or:
+              - equal: [ atcp, << pipeline.parameters.study_key >> ]
+          steps:
+            - execute-study-specific-commands
       - run:
           name: ng build
           command: |
             set -u
+            export NODE_OPTIONS="--max-old-space-size=4096"
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
 
   store-app-build:

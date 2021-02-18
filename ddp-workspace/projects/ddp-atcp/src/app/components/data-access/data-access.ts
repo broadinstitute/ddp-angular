@@ -1,13 +1,15 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { CompositeDisposable, NGXTranslateService } from 'ddp-sdk';
-import { of } from 'rxjs';
-import { delay, take } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { iif, of } from 'rxjs';
+import { delay, switchMap, take } from 'rxjs/operators';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+
+import { CompositeDisposable } from 'ddp-sdk';
+
 import { ToolkitConfigurationService } from 'toolkit';
+
 import { DataAccessParameters } from '../../models/dataAccessParameters';
-import { DataAccessRequestError } from '../../models/dataAccessRequestError';
-import { DataAccessRequestSuccessResult } from '../../models/dataAccessRequestSuccessResult';
 import { DataAccessService } from '../../services/dataAccess.service';
-import { DataAccessServiceAgent } from '../../services/serviceAgents/dataAccessServiceAgent.service';
 import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
 
@@ -15,26 +17,28 @@ import { AtcpCommunicationService } from '../../toolkit/services/communication.s
   selector: 'app-data-access',
   templateUrl: './data-access.html',
   styleUrls: ['./data-access.scss'],
-  providers: [DataAccessService, DataAccessServiceAgent]
 })
 export class DataAccessComponent implements OnInit, OnDestroy {
-
+  public busy = false;
   public activeTab = 0;
   public countTabs = 7;
   public fileSizeExceedsLimit: boolean;
   public studyGuid: string;
-
   public model: DataAccessParameters = new DataAccessParameters();
   public researcherBiosketch: File;
+  public recaptchaToken: string;
 
   private readonly maxAttachmentSize = 2 * 1024 * 1024;
   private anchor: CompositeDisposable = new CompositeDisposable();
 
-  constructor(private ngxTranslate: NGXTranslateService,
-              private dataAccessService: DataAccessService,
-              private communicationService: AtcpCommunicationService,
-              @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
-  }
+  constructor(
+    private translateService: TranslateService,
+    private recaptchaService: ReCaptchaV3Service,
+    private dataAccessService: DataAccessService,
+    private communicationService: AtcpCommunicationService,
+    @Inject('toolkit.toolkitConfig')
+    private toolkitConfiguration: ToolkitConfigurationService
+  ) {}
 
   public ngOnInit(): void {
     this.studyGuid = this.toolkitConfiguration.studyGuid;
@@ -53,18 +57,31 @@ export class DataAccessComponent implements OnInit, OnDestroy {
     } else {
       this.fileSizeExceedsLimit = false;
     }
-    this.researcherBiosketch = selectedFile;
+
+    this.recaptchaService
+      .execute('file_upload')
+      .pipe(take(1))
+      .subscribe(token => {
+        this.recaptchaToken = token;
+        this.researcherBiosketch = selectedFile;
+      });
   }
 
   public displayDontHaveErrors(tab: number): boolean {
     if (tab === 1) {
       return !!(this.model.researcher_name && this.model.researcher_email);
     } else if (tab === 2) {
-      return !!(this.model.org_name && this.model.org_address_1 && this.model.org_city && this.model.org_country && this.model.org_zip);
+      return !!(
+        this.model.org_name &&
+        this.model.org_address_1 &&
+        this.model.org_city &&
+        this.model.org_country &&
+        this.model.org_zip
+      );
     } else if (tab === 3) {
       return !!(this.model.project_description && this.model.research_use);
     } else if (tab === 6) {
-      return !!(this.model.researcher_signature);
+      return !!this.model.researcher_signature;
     }
     return true;
   }
@@ -80,7 +97,13 @@ export class DataAccessComponent implements OnInit, OnDestroy {
     const data = new Date();
     const month = data.getMonth() + 1;
     const day = data.getDate();
-    return data.getFullYear() + '-' + (month > 9 ? month : '0' + month) + '-' + (day > 9 ? day : '0' + day);
+    return (
+      data.getFullYear() +
+      '-' +
+      (month > 9 ? month : '0' + month) +
+      '-' +
+      (day > 9 ? day : '0' + day)
+    );
   }
 
   public submit(form): void {
@@ -94,33 +117,59 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.dataAccessService.createNewDataAccessRequest(this.model, this.researcherBiosketch, this.studyGuid)
-      .pipe(take(1))
-      .subscribe(
-      {
-        next: value => this.showResponse(value) ,
-        error: error => this.showError(error)
-      }
+    this.busy = true;
+
+    const sendDar$ = this.dataAccessService
+      .send(this.model, this.researcherBiosketch, this.recaptchaToken)
+      .pipe(take(1));
+
+    const getTokenFirst$ = this.recaptchaService.execute('dar_submit').pipe(
+      switchMap(token =>
+        this.dataAccessService.send(this.model, this.researcherBiosketch, token)
+      ),
+      take(1)
     );
+
+    of(this.recaptchaToken)
+      .pipe(switchMap(token => iif(() => !!token, sendDar$, getTokenFirst$)))
+      .subscribe(this.showResponse, this.showError);
   }
 
-  private showResponse(dataAccessRequestSuccessResult: DataAccessRequestSuccessResult): void {
-    this.communicationService.showPopupMessage(new PopupMessage(dataAccessRequestSuccessResult.message, false));
+  private showResponse = (): void => {
+    this.busy = false;
+    this.recaptchaToken = null;
+
+    this.communicationService.showPopupMessage(
+      new PopupMessage(
+        this.translateService.instant('DataAccess.Messages.Success'),
+        false
+      )
+    );
+
     of('')
       .pipe(take(1))
       .pipe(delay(3000))
       .subscribe(() => {
-      this.communicationService.closePopupMessage();
-    });
+        this.communicationService.closePopupMessage();
+      });
   }
 
-  private showError(error: DataAccessRequestError): void {
-    this.communicationService.showPopupMessage(new PopupMessage(error.text, true));
+  private showError = (): void => {
+    this.busy = false;
+    this.recaptchaToken = null;
+
+    this.communicationService.showPopupMessage(
+      new PopupMessage(
+        this.translateService.instant('DataAccess.Messages.Error'),
+        true
+      )
+    );
+
     of('')
       .pipe(take(1))
       .pipe(delay(3000))
       .subscribe(() => {
-      this.communicationService.closePopupMessage();
-    });
+        this.communicationService.closePopupMessage();
+      });
   }
 }

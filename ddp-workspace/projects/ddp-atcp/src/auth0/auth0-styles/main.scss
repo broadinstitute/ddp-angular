@@ -1,4 +1,4 @@
-//./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/auth0-styles/main.css --style compressed
+// ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
 
 @import '../../app/components/header/header';
 @import '../../app/components/footer/footer';
@@ -12,20 +12,24 @@ b {
   font-weight: 700
 }
 
-.form-group.error .FormItem-label {
+.form-group.error .FormItem-label,
+.form-group.email-taken .FormItem-label {
   color: #DB2C2C !important;
 }
 
-.form-group.error input {
+.form-group.error input,
+.form-group.email-taken input {
   border: 1px solid #DB2C2C !important;
   border-left: 3px solid #DB2C2C !important;
 }
 
-.form-group .message {
+.form-group .message,
+.form-group .email-taken-message {
   display: none;
 }
 
-.form-group.error .message {
+.form-group.error .message,
+.form-group.email-taken .email-taken-message {
   display: block;
   color: #DB2C2C !important;
 }

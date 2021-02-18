@@ -1,0 +1,128 @@
+<div class="page-padding">
+  <div class="row">
+    <div class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
+      <h1 class="PageHeader-title title">
+        {{ 'Toolkit.Dialogs.JoinMailingList.Title' | translate }}
+      </h1>
+
+      <h2 class="subtitle subtitle--light">
+        {{ 'Toolkit.Dialogs.JoinMailingList.Text' | translate }}
+      </h2>
+
+      <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="firstName">{{
+                'Toolkit.Dialogs.JoinMailingList.Fields.FirstName.Placeholder'
+                  | translate
+              }}</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+              />
+              <ng-container
+                *ngIf="
+                  emailForm.controls.firstName.invalid &&
+                  emailForm.controls.firstName.touched
+                "
+              >
+                <span class="error">
+                  <ng-container
+                    *ngIf="emailForm.controls.firstName.errors.required"
+                  >
+                    {{
+                      'Toolkit.Dialogs.JoinMailingList.Fields.FirstName.Error'
+                        | translate
+                    }}
+                  </ng-container>
+                </span>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="lastName">{{
+                'Toolkit.Dialogs.JoinMailingList.Fields.LastName.Placeholder'
+                  | translate
+              }}</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                formControlName="lastName"
+              />
+              <ng-container
+                *ngIf="
+                  emailForm.controls.lastName.invalid &&
+                  emailForm.controls.lastName.touched
+                "
+              >
+                <span class="error">
+                  <ng-container
+                    *ngIf="emailForm.controls.lastName.errors.required"
+                  >
+                    {{
+                      'Toolkit.Dialogs.JoinMailingList.Fields.LastName.Error'
+                        | translate
+                    }}
+                  </ng-container>
+                </span>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="email">{{
+                'Toolkit.Dialogs.JoinMailingList.Fields.Email.Placeholder'
+                  | translate
+              }}</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                formControlName="email"
+              />
+              <ng-container
+                *ngIf="
+                  emailForm.controls.email.invalid &&
+                  emailForm.controls.email.touched
+                "
+              >
+                <span class="error">
+                  <ng-container
+                    *ngIf="
+                      emailForm.controls.email.errors.required ||
+                      emailForm.controls.email.errors.email
+                    "
+                  >
+                    {{
+                      'Toolkit.Dialogs.JoinMailingList.Fields.Email.Error'
+                        | translate
+                    }}
+                  </ng-container>
+                </span>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="BtnFilled BtnFilled--blue">
+            {{ 'Toolkit.Dialogs.JoinMailingList.SubmitButton' | translate }}
+          </button>
+        </div>
+      </form>
+
+      <hr />
+
+      <div class="helpHint align-center">
+        <a (click)="signIn()" translate>JoinUs.SignInButton</a>
+      </div>
+    </div>
+  </div>
+</div>
