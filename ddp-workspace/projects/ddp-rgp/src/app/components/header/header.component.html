@@ -134,24 +134,31 @@
           </div>
         </li>
 
-        <li *ngIf="isAuthenticated" class="nav-list__item">
-          <div class="nav-control">
-            <a
-              class="nav-control__button"
-              [class.nav-control__button--white]="isHeaderWhite"
-              [routerLink]="Routes.Dashboard"
-            >
-              {{ 'Header.Dashboard' | translate }}
-            </a>
-          </div>
-        </li>
-
         <li class="nav-list__item">
           <div class="nav-control">
             <ddp-language-selector
               [class.nav-control__button--white]="isHeaderWhite"
               (click)="onDropdownClick('languageList')"
             ></ddp-language-selector>
+          </div>
+        </li>
+
+        <li *ngIf="isAuthenticated" class="nav-list__item">
+          <div class="nav-control">
+            <a
+              class="nav-control__button pm get-started-link"
+              [class.nav-control__button--white]="isHeaderWhite"
+              [routerLink]="Routes.Dashboard"
+            >
+              {{ 'Header.Dashboard' | translate }}
+            </a>
+          </div>
+
+          <div
+            class="get-started-auth only-desktop"
+            [class.get-started-auth--white]="isHeaderWhite"
+          >
+            <ddp-sign-in-out></ddp-sign-in-out>
           </div>
         </li>
 
