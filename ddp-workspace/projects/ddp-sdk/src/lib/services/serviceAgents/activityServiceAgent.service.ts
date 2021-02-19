@@ -124,6 +124,19 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         return this.deleteObservable(baseUrl, null, true);
     }
 
+    public getActivityInstance(studyGuid: string, activityGuid: string, instanceGuid: string): Observable<ActivityForm> {
+      const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+      return this.getObservable(`${baseUrl}/${instanceGuid}`, {}, [404])
+        .pipe(
+          map(x => {
+            if (x == null) {
+              return null;
+            }
+            return this.converter.convertActivity(x);
+          })
+        );
+    }
+
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
         const activityGuidPart = activityGuid ? `/${activityGuid}` : '';
         return `/studies/${studyGuid}/activities${activityGuidPart}`;
