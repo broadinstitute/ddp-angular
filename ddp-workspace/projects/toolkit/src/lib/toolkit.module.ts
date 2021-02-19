@@ -89,6 +89,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ModalActivityBlockComponent } from './components/activity/modal-activity-block.component';
 
 
 @NgModule({
@@ -135,6 +136,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ActivityPageRedesignedComponent,
     ActivityComponent,
     ActivityRedesignedComponent,
+    ModalActivityBlockComponent,
     DashboardComponent,
     DashboardRedesignedComponent,
     LoginLandingComponent,
@@ -188,6 +190,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ActivityPageRedesignedComponent,
     ActivityComponent,
     ActivityRedesignedComponent,
+    ModalActivityBlockComponent,
     DashboardComponent,
     DashboardRedesignedComponent,
     LoginLandingComponent,
