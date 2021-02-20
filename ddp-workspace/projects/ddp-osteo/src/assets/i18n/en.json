@@ -534,6 +534,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "ADD",

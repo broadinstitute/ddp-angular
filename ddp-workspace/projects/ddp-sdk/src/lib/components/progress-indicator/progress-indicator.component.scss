@@ -1,0 +1,49 @@
+$btn-margin: 15px;
+$btn-color: #1D1B25;
+$visited-step-cirle-color: #00d39d;
+
+::ng-deep {
+    .mat-vertical-content {
+        margin: 0 10%;
+    }
+
+    .mat-step-icon {
+        .mat-step-icon-content {
+            top: 45%;
+        }
+
+        &.mat-step-icon-state-edit { // visited step
+            background-color: $visited-step-cirle-color;
+        }
+    }
+}
+
+.controls {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+
+    .button {
+        height: 50px;
+        width: 190px;
+        min-width: 35px;
+        font-size: 16px;
+        font-weight: 600;
+        color: $btn-color;
+        border: 2px solid $btn-color;
+        border-radius: 4px;
+        flex-shrink: 1.5;
+
+        &.hidden {
+            visibility: hidden;
+        }
+
+        &.left {
+            margin-right: $btn-margin;
+        }
+
+        &.right {
+            margin-left: $btn-margin;
+        }
+    }
+}
