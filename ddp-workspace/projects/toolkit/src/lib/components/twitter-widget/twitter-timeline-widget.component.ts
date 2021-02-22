@@ -12,11 +12,24 @@ export class TwitterTimelineWidgetComponent implements OnInit {
   @Input() private widgetHeight = 600;
   @ViewChild('twitter', { static: true }) private twitter: ElementRef;
 
+  private readonly observer = new IntersectionObserver(
+    this.onIntersectionChanged.bind(this),
+    {
+      rootMargin: '0px',
+      threshold: 0
+    }
+  );
+
   constructor(
+    private root: ElementRef,
     private scriptLoader: ScriptLoaderService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
+    this.observer.observe(this.root.nativeElement);
+  }
+
+  private loadScript(): void {
     this.scriptLoader.load({
       name: 'twitter-widget',
       src: 'https://platform.twitter.com/widgets.js'
@@ -40,5 +53,16 @@ export class TwitterTimelineWidgetComponent implements OnInit {
         limit: 20
       }
     );
+  }
+
+  private onIntersectionChanged(entries: IntersectionObserverEntry[]): void {
+    if (!entries.length) {
+      console.warn('No entries found!');
+      return;
+    }
+    if (entries[0].isIntersecting) {
+      this.observer.disconnect();
+      this.loadScript();
+    }
   }
 }
