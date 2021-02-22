@@ -7,22 +7,15 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
 import { Subscription } from 'rxjs';
 import { filter, take, mergeMap, tap } from 'rxjs/operators';
 
-// import {
-//   SessionMementoService,
-//   Auth0AdapterService,
-//   ConfigurationService,
-//   WorkflowServiceAgent,
-//   LoggingService,
-//   GovernedParticipantsServiceAgent,
-//   Participant
-// } from 'ddp-sdk';
-import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
-import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {GovernedParticipantsServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/governedParticipantsServiceAgent.service";
-import {WorkflowServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/workflowServiceAgent.service";
-import {ConfigurationService} from "../../../../../ddp-sdk/src/lib/services/configuration.service";
-import {Participant} from "../../../../../ddp-sdk/src/lib/models/participant";
+import {
+  SessionMementoService,
+  Auth0AdapterService,
+  ConfigurationService,
+  WorkflowServiceAgent,
+  LoggingService,
+  GovernedParticipantsServiceAgent,
+  Participant
+} from 'ddp-sdk';
 
 @Component({
   selector: 'toolkit-login-landing',

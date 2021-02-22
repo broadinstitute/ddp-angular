@@ -1,13 +1,8 @@
 import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { SessionMementoService } from '../../../../../ddp-sdk/src/lib/services/sessionMemento.service';
-import { WindowRef } from '../../../../../ddp-sdk/src/lib/services/windowRef';
-import { AnalyticsEventsService } from '../../../../../ddp-sdk/src/lib/services/analyticsEvents.service';
-import { AnalyticsEventCategories } from '../../../../../ddp-sdk/src/lib/models/analyticsEventCategories';
-import { AnalyticsEventActions } from '../../../../../ddp-sdk/src/lib/models/analyticsEventActions';
-import { CommunicationService } from '../../../../../toolkit/src/lib/services/communication.service';
-import { HeaderConfigurationService } from '../../../../../toolkit/src/lib/services/headerConfiguration.service';
+import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
+import { HeaderConfigurationService, CommunicationService } from 'toolkit';
 
 @Component({
   selector: 'app-header',

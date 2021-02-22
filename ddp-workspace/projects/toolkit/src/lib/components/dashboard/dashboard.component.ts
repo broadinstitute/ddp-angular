@@ -2,8 +2,7 @@ import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
-// import { AnnouncementsServiceAgent } from 'ddp-sdk';
-import {AnnouncementsServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/announcementsServiceAgent.service";
+import { AnnouncementsServiceAgent } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 

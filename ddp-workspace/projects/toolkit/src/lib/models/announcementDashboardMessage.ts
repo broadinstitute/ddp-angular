@@ -1,5 +1,4 @@
-// import { AnnouncementMessage } from 'ddp-sdk';
-import {AnnouncementMessage} from "../../../../ddp-sdk/src/lib/models/announcementMessage";
+import { AnnouncementMessage } from 'ddp-sdk';
 
 export interface AnnouncementDashboardMessage extends AnnouncementMessage {
     shown: boolean;

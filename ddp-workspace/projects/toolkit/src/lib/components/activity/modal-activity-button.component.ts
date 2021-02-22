@@ -1,16 +1,12 @@
 import { Component, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-// import {
-//   ActivityInstanceGuid,
-//   ActivityServiceAgent,
-//   LoggingService,
-//   SessionMementoService
-// } from 'ddp-sdk';
-import {ActivityInstanceGuid} from "../../../../../ddp-sdk/src/lib/models/activityInstanceGuid";
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {ActivityServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/activityServiceAgent.service";
-import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
+import {
+  ActivityInstanceGuid,
+  ActivityServiceAgent,
+  LoggingService,
+  SessionMementoService
+} from 'ddp-sdk';
 import { map, share, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';

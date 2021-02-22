@@ -1,24 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { GovernedParticipantsServiceAgent } from 'ddp-sdk';
 
 import { LoginLandingComponent } from './login-landing.component';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 
-// import {
-//   GovernedParticipantsServiceAgent,
-//   SessionMementoService,
-//   Auth0AdapterService,
-//   ConfigurationService,
-//   WorkflowServiceAgent,
-//   LoggingService
-// } from 'ddp-sdk';
-import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
-import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {GovernedParticipantsServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/governedParticipantsServiceAgent.service";
-import {ConfigurationService} from "../../../../../ddp-sdk/src/lib/services/configuration.service";
-import {WorkflowServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/workflowServiceAgent.service";
+import {
+  SessionMementoService,
+  Auth0AdapterService,
+  ConfigurationService,
+  WorkflowServiceAgent,
+  LoggingService
+} from 'ddp-sdk';
 
 @Component({
   selector: 'toolkit-login-landing-redesigned',

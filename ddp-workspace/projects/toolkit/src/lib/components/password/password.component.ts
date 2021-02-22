@@ -1,8 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-// import { IrbPasswordService } from 'ddp-sdk';
-import {IrbPasswordService} from "../../../../../ddp-sdk/src/lib/services/irbPassword.service";
+import { IrbPasswordService } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({

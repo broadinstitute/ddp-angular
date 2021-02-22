@@ -2,8 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-// import { ActivityResponse } from 'ddp-sdk';
-import {ActivityResponse} from "../../../../../ddp-sdk/src/lib/models/activity/activityResponse";
+import { ActivityResponse } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-activity',

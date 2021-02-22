@@ -6,8 +6,7 @@ import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { JoinMailingListComponent } from '../dialogs/joinMailingList.component';
 import { SessionWillExpireComponent } from '../dialogs/sessionWillExpire.component';
-import { CompositeDisposable } from '../../../../../ddp-sdk/src/lib/compositeDisposable';
-import { RenewSessionNotifier } from '../../../../../ddp-sdk/src/lib/services/renewSessionNotifier.service';
+import { CompositeDisposable, RenewSessionNotifier } from 'ddp-sdk';
 
 @Component({
     template: ``

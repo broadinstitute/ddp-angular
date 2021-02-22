@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SessionMementoService } from '../../../../ddp-sdk/src/lib/services/sessionMemento.service';
-import { LoggingService } from '../../../../ddp-sdk/src/lib/services/logging.service';
+import { SessionMementoService, LoggingService } from 'ddp-sdk';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
 import { AnalyticsManagementService } from './analyticsManagement.service';
 import { CookiesTypes } from '../models/cookies/cookiesType';

@@ -3,11 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-// import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {AnnouncementsServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/announcementsServiceAgent.service";
-import {UserInvitationServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/userInvitationServiceAgent.service";
-import {InvitationType} from "../../../../../ddp-sdk/src/lib/models/invitationType";
+import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
 import { map, take, filter } from 'rxjs/operators';
 
 @Component({

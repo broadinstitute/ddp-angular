@@ -2,10 +2,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-// import { ResendEmailServiceAgent, CompositeDisposable, Email } from 'ddp-sdk';
-import {CompositeDisposable} from "../../../../../ddp-sdk/src/lib/compositeDisposable";
-import {ResendEmailServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/resendEmailServiceAgent.service";
-import {Email} from "../../../../../ddp-sdk/src/lib/models/email";
+import { ResendEmailServiceAgent, CompositeDisposable, Email } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-resend-email',

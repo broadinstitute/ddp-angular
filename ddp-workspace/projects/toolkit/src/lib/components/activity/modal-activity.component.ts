@@ -6,14 +6,8 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-// import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager, LoggingService } from 'ddp-sdk';
-import {SubmitAnnouncementService} from "../../../../../ddp-sdk/src/lib/services/submitAnnouncement.service";
-import {SubmissionManager} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/submissionManager.service";
-import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
-import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
-import {AnalyticsEventsService} from "../../../../../ddp-sdk/src/lib/services/analyticsEvents.service";
+import { ActivityComponent, WindowRef, SubmitAnnouncementService, AnalyticsEventsService, SubmissionManager, LoggingService } from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
-import {ActivityComponent} from "../../../../../ddp-sdk/src/lib/components/activityForm/activity/activity.component";
 
 @Component({
   selector: 'toolkit-modal-activity',

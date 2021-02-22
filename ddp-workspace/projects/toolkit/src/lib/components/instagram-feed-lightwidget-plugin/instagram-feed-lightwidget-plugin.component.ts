@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-// import { ScriptLoaderService } from 'ddp-sdk';
-import {ScriptLoaderService} from "../../../../../ddp-sdk/src/lib/services/scriptLoader.service";
+import { ScriptLoaderService } from 'ddp-sdk';
 import { switchMap, take } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LazyWidgetComponent } from '../lazy-widget/lazy-widget.component';

@@ -1,24 +1,16 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
-// import {
-//   ActivityResponse,
-//   CompositeDisposable,
-//   ConfigurationService,
-//   SessionMementoService,
-//   TemporaryUser,
-//   TemporaryUserServiceAgent,
-//   WorkflowServiceAgent,
-//   WindowRef
-// } from 'ddp-sdk';
-import {CompositeDisposable} from "../../../../../ddp-sdk/src/lib/compositeDisposable";
-import {TemporaryUserServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/temporaryUserServiceAgent.service";
-import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
-import {WorkflowServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/workflowServiceAgent.service";
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {ConfigurationService} from "../../../../../ddp-sdk/src/lib/services/configuration.service";
-import {ActivityResponse} from "../../../../../ddp-sdk/src/lib/models/activity/activityResponse";
-import {TemporaryUser} from "../../../../../ddp-sdk/src/lib/models/temporaryUser";
+import {
+  ActivityResponse,
+  CompositeDisposable,
+  ConfigurationService,
+  SessionMementoService,
+  TemporaryUser,
+  TemporaryUserServiceAgent,
+  WorkflowServiceAgent,
+  WindowRef
+} from 'ddp-sdk';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 
 @Component({

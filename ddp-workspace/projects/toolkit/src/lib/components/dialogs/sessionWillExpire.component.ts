@@ -1,18 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-// import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
-import {SessionMementoService} from '../../../../../ddp-sdk/src/lib/services/sessionMemento.service';
-import {Auth0AdapterService} from '../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service';
-import {RenewSessionNotifier} from '../../../../../ddp-sdk/src/lib/services/renewSessionNotifier.service';
+import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-session-will-expire',
     template: `
-    <div class='Modal-title'>
-        <h1 class='Modal-title no-margin'>
-            <span *ngIf='!renewalFailed; else renewalFailedMessage'>
+    <div class="Modal-title">
+        <h1 class="Modal-title no-margin">
+            <span *ngIf="!renewalFailed; else renewalFailedMessage">
                 <span translate>Toolkit.Dialogs.SessionWillExpire.Title</span>
                 <span>{{ timeLeft }}</span>
             </span>
@@ -20,25 +17,25 @@ import { finalize, take } from 'rxjs/operators';
                 <span translate>Toolkit.Dialogs.SessionWillExpire.RenewalFailed</span>
             </ng-template>
         </h1>
-        <button mat-icon-button (click)='closeDialog()' [disabled]='blockUI'>
-            <mat-icon class='ddp-close-button'>clear</mat-icon>
+        <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI">
+            <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
-    <mat-dialog-content *ngIf='!renewalFailed'>
-        <p class='Modal-text' translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
+    <mat-dialog-content *ngIf="!renewalFailed">
+        <p class="Modal-text" translate>Toolkit.Dialogs.SessionWillExpire.Text</p>
     </mat-dialog-content>
-    <mat-dialog-content *ngIf='blockUI'>
-        <mat-progress-bar class='Modal-progress' mode='indeterminate'></mat-progress-bar>
+    <mat-dialog-content *ngIf="blockUI">
+        <mat-progress-bar class="Modal-progress" mode="indeterminate"></mat-progress-bar>
     </mat-dialog-content>
-    <mat-dialog-actions align='end' class='row NoMargin'>
-        <button class='ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary'
-                (click)='signOut()'
-                [disabled]='blockUI'
+    <mat-dialog-actions align="end" class="row NoMargin">
+        <button class="ButtonFilled ButtonFilled--neutral ButtonFilled--neutral--margin Button--rect button button_small button_secondary"
+                (click)="signOut()"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.SignOut' | translate">
         </button>
-        <button *ngIf='!renewalFailed' class='ButtonFilled Button--rect button button_small button_primary'
-                (click)='renewSession()'
-                [disabled]='blockUI'
+        <button *ngIf="!renewalFailed" class="ButtonFilled Button--rect button button_small button_primary"
+                (click)="renewSession()"
+                [disabled]="blockUI"
                 [innerHTML]="'Toolkit.Dialogs.SessionWillExpire.Continue' | translate">
         </button>
     </mat-dialog-actions>`

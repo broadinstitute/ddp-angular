@@ -3,10 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
 import { JoinMailingListComponent } from './../dialogs/joinMailingList.component';
-import {AnalyticsEventsService} from "../../../../../ddp-sdk/src/lib/services/analyticsEvents.service";
-import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
-import {AnalyticsEventCategories} from "../../../../../ddp-sdk/src/lib/models/analyticsEventCategories";
-// import { AnalyticsEventsService, WindowRef, AnalyticsEventCategories } from 'ddp-sdk';
+import { AnalyticsEventsService, WindowRef, AnalyticsEventCategories } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-footer',

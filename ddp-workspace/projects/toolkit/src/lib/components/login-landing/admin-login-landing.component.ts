@@ -6,16 +6,12 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-// import {
-//   SessionMementoService,
-//   Auth0AdapterService,
-//   ConfigurationService,
-//   LoggingService
-// } from 'ddp-sdk';
-import {LoggingService} from "../../../../../ddp-sdk/src/lib/services/logging.service";
-import {SessionMementoService} from "../../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
-import {ConfigurationService} from "../../../../../ddp-sdk/src/lib/services/configuration.service";
+import {
+  SessionMementoService,
+  Auth0AdapterService,
+  ConfigurationService,
+  LoggingService
+} from 'ddp-sdk';
 
 @Component({
   selector: 'toolkit-admin-login-landing',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GalleryItem } from '../../models/galleryItem.model';
-import { NGXTranslateService } from '../../../../../ddp-sdk/src/lib/services/internationalization/ngxTranslate.service';
+import { NGXTranslateService } from 'ddp-sdk';
 import { take } from 'rxjs/operators';
 
 @Component({

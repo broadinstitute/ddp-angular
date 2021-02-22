@@ -12,22 +12,15 @@ import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { distinctUntilChanged, filter, map, scan, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, merge, Observable, of } from 'rxjs';
-import { CompositeDisposable } from '../../../../../ddp-sdk/src/lib/compositeDisposable';
-import { BrowserContentService } from '../../../../../ddp-sdk/src/lib/services/browserContent.service';
-import { RenewSessionNotifier } from '../../../../../ddp-sdk/src/lib/services/renewSessionNotifier.service';
-import { WindowRef } from '../../../../../ddp-sdk/src/lib/services/windowRef';
-import { UserProfileServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/userProfileServiceAgent.service';
-import { UserProfile } from '../../../../../ddp-sdk/src/lib/models/userProfile';
-import { UserProfileDecorator } from '../../../../../ddp-sdk/src/lib/models/userProfileDecorator';
-// import {
-//     BrowserContentService,
-//     UserProfile,
-//     UserProfileDecorator,
-//     UserProfileServiceAgent,
-//     WindowRef,
-//     RenewSessionNotifier,
-//     CompositeDisposable
-// } from 'ddp-sdk';
+import {
+    BrowserContentService,
+    UserProfile,
+    UserProfileDecorator,
+    UserProfileServiceAgent,
+    WindowRef,
+    RenewSessionNotifier,
+    CompositeDisposable
+} from 'ddp-sdk';
 
 declare global {
     interface Window {

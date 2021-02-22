@@ -122,7 +122,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   imports: [
     BrowserModule,
     CommonModule,
-    TranslateModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule,

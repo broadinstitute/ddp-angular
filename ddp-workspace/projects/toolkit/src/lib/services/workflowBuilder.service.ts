@@ -12,10 +12,7 @@ import { RegistrationWorkflowAction } from './../models/actions/registrationWork
 import { WorkflowCommand } from '../models/workflowCommand';
 import { WorkflowMapperService } from './workflowMapper.service';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
-// import { ActivityResponse, UserProfileServiceAgent, Auth0AdapterService } from 'ddp-sdk';
-import {UserProfileServiceAgent} from "../../../../ddp-sdk/src/lib/services/serviceAgents/userProfileServiceAgent.service";
-import {Auth0AdapterService} from "../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
-import {ActivityResponse} from "../../../../ddp-sdk/src/lib/models/activity/activityResponse";
+import { ActivityResponse, UserProfileServiceAgent, Auth0AdapterService } from 'ddp-sdk';
 
 @Injectable()
 export class WorkflowBuilderService {

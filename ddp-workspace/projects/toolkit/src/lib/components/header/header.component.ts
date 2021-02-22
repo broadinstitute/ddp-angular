@@ -3,12 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { CommunicationService } from './../../services/communication.service';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-// import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
-import {AnalyticsEventsService} from "../../../../../ddp-sdk/src/lib/services/analyticsEvents.service";
-import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
-import {BrowserContentService} from "../../../../../ddp-sdk/src/lib/services/browserContent.service";
-import {AnalyticsEventCategories} from "../../../../../ddp-sdk/src/lib/models/analyticsEventCategories";
-import {AnalyticsEventActions} from "../../../../../ddp-sdk/src/lib/models/analyticsEventActions";
+import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-header',
@@ -51,7 +46,7 @@ import {AnalyticsEventActions} from "../../../../../ddp-sdk/src/lib/models/analy
             <li *ngIf="showButtons" class="Header-navItem">
                 <span [routerLink]="unsupportedBrowser ? null : '/count-me-in'"
                       (click)="clickCountMeIn()"
-                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}"
+                      class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}" 
                       [innerHTML]="'Toolkit.Header.CountMeIn' | translate">
                 </span>
             </li>

@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
-// import { WindowRef } from 'ddp-sdk';
-import {WindowRef} from "../../../../../ddp-sdk/src/lib/services/windowRef";
+import { WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-disclaimer',

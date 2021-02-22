@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { HeaderConfigurationService } from '../../../../../toolkit/src/lib/services/headerConfiguration.service';
-import { ToolkitConfigurationService } from '../../../../../toolkit/src/lib/services/toolkitConfiguration.service';
+import { ToolkitConfigurationService, HeaderConfigurationService } from 'toolkit';
 
 @Component({
   selector: 'app-faq',

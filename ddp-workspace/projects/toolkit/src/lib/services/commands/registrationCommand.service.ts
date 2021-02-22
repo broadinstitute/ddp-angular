@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WorkflowCommand } from '../../models/workflowCommand';
-// import { Auth0AdapterService } from 'ddp-sdk';
-import {Auth0AdapterService} from "../../../../../ddp-sdk/src/lib/services/authentication/auth0Adapter.service";
+import { Auth0AdapterService } from 'ddp-sdk';
 import { Observable } from 'rxjs';
 
 @Injectable()

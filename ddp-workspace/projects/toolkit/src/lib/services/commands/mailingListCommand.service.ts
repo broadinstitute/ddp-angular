@@ -3,11 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { WorkflowCommand } from '../../models/workflowCommand';
 import { JoinMailingListComponent } from './../../components/dialogs/joinMailingList.component';
-// import { UserProfileServiceAgent, UserProfile, UserProfileDecorator, CompositeDisposable } from 'ddp-sdk';
-import {CompositeDisposable} from "../../../../../ddp-sdk/src/lib/compositeDisposable";
-import {UserProfileServiceAgent} from "../../../../../ddp-sdk/src/lib/services/serviceAgents/userProfileServiceAgent.service";
-import {UserProfileDecorator} from "../../../../../ddp-sdk/src/lib/models/userProfileDecorator";
-import {UserProfile} from "../../../../../ddp-sdk/src/lib/models/userProfile";
+import { UserProfileServiceAgent, UserProfile, UserProfileDecorator, CompositeDisposable } from 'ddp-sdk';
 import { Observable, Subscriber } from 'rxjs';
 
 @Injectable()
