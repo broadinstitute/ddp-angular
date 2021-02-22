@@ -1,28 +1,36 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule } from '@angular/platform-browser';
-import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
+import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as Hammer from 'hammerjs';
 
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
+import {
+  DdpModule,
+  ConfigurationService,
+  AnalyticsEventsService,
+  AnalyticsEvent,
+  LoggingService
+} from 'ddp-sdk';
+
+import {
+  ToolkitModule,
+  ToolkitConfigurationService
+} from 'toolkit';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 
+import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
-import { ToolkitModule } from '../../../toolkit/src/lib/toolkit.module';
-import { ToolkitConfigurationService } from '../../../toolkit/src/lib/services/toolkitConfiguration.service';
-import { DdpModule } from '../../../ddp-sdk/src/lib/ddp.module';
-import { LoggingService } from '../../../ddp-sdk/src/lib/services/logging.service';
-import { AnalyticsEventsService } from '../../../ddp-sdk/src/lib/services/analyticsEvents.service';
-import { AnalyticsEvent } from '../../../ddp-sdk/src/lib/models/analyticsEvent';
-import { ConfigurationService } from '../../../ddp-sdk/src/lib/services/configuration.service';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -130,8 +138,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     HammerModule
   ],
   declarations: [
+    WelcomeComponent,
     AppComponent,
     FooterComponent,
+    GalleryComponent,
+    AboutUsComponent,
     FaqComponent,
     HeaderComponent,
     WorkflowProgressComponent

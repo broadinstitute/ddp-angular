@@ -15,7 +15,7 @@ import { WindowRef } from 'ddp-sdk';
     </mat-dialog-content>
     <mat-dialog-actions align="start" class="row NoMargin">
         <button mat-button
-                color="primary"
+                mat-button color="primary"
                 class="ButtonFilled Button--rect"
                 (click)="submitDialog()"
                 [innerHTML]="'Toolkit.Dialogs.Disclaimer.SubmitButton' | translate">

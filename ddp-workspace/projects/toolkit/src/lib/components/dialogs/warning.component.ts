@@ -13,7 +13,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     </mat-dialog-content>
     <mat-dialog-actions align="start" class="row NoMargin">
         <button mat-button
-                color="primary"
+                mat-button color="primary"
                 class="ButtonFilled Button--rect"
                 (click)="closeDialog()"
                 [innerHTML]="'Toolkit.Warning.SubmitButton' | translate">
