@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ActivityBooleanQuestionBlock } from '../../models/activity/activityBooleanQuestionBlock';
+import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-boolean-answer',

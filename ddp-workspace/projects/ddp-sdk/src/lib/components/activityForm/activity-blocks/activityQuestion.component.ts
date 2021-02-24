@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, Inject } from '@angular/core';
-import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlock';
-import { WindowRef } from '../../services/windowRef';
-import { AnswerValue } from '../../models/activity/answerValue';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { ConfigurationService } from '../../services/configuration.service';
+import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { WindowRef } from '../../../services/windowRef';
+import { AnswerValue } from '../../../models/activity/answerValue';
+import { BlockVisibility } from '../../../models/activity/blockVisibility';
+import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
+import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 

@@ -11,13 +11,13 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivityTextAnswer } from './activityTextAnswer.component';
-import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { QuestionPromptComponent } from './questionPrompt.component';
-import { InputType } from '../../models/activity/inputType';
-import { TextSuggestion } from '../../models/activity/textSuggestion';
+import { InputType } from '../../../models/activity/inputType';
+import { TextSuggestion } from '../../../models/activity/textSuggestion';
 import { ActivityEmailInput } from './activityEmailInput.component';
-import { TooltipComponent } from '../tooltip.component';
-import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { TooltipComponent } from '../../tooltip.component';
+import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 
 describe('ActivityTextAnswer', () => {
     let component: ActivityTextAnswer;

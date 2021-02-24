@@ -3,7 +3,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { By } from '@angular/platform-browser';
-import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAgreementQuestionBlock';
+import { ActivityAgreementQuestionBlock } from '../../../models/activity/activityAgreementQuestionBlock';
 import { ActivityAgreementAnswer } from './activityAgreementAnswer.component';
 import { FormsModule } from '@angular/forms';
 
