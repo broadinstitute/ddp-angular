@@ -1,0 +1,11 @@
+<div class="activity-block-container">
+    <div *ngIf="block.title" [innerHTML]="block.title"></div>
+
+    <div *ngIf="block.instances?.length" class="cards-block">
+        <div *ngFor="let card of block.instances" class="card">
+            <!-- card component [data]="card" -->
+        </div>
+    </div>
+
+    <button *ngIf="block.allowMultiple" mat-flat color="primary">{{block.addButtonText}}</button>
+</div>
