@@ -116,7 +116,7 @@ describe('ActivityTextAnswer', () => {
     inputElement.dispatchEvent(new Event('change'));
     fixture.detectChanges();
     // tick to allow subscription to be executed
-    tick();
+    tick(400);
     expect(valueChangedEmitted).toBe(true);
   }));
 });

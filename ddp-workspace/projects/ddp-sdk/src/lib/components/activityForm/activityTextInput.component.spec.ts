@@ -92,7 +92,7 @@ describe('ActivityTextInput', () => {
 
     fixture.detectChanges();
 
-    tick();
+    tick(400);
 
     expect(valueChangedEmitted).toBeTruthy();
   }));
@@ -229,7 +229,7 @@ describe('ActivityTextInput', () => {
     suggestionOptionEl.nativeElement.click();
 
     fixture.detectChanges();
-    tick(1);
+    tick(400);
 
     expect(valueChanged).toBeTrue();
   }));
@@ -323,7 +323,7 @@ describe('ActivityTextInput', () => {
       `${component.block.stableId}_confirmation`
     ].patchValue(valueToEnter);
 
-    tick(10);
+    tick(400);
 
     expect(valueEmitted).toBeTrue();
   }));
@@ -385,6 +385,8 @@ describe('ActivityTextInput', () => {
     const selectedOptionIdx = 0;
 
     suggestions[selectedOptionIdx].nativeElement.click();
+
+    tick(400);
 
     expect(formControl.value).toEqual(textSuggestions[selectedOptionIdx].value);
   }));

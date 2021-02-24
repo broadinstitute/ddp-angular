@@ -232,6 +232,7 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
           return data[this.controlName] ? data[this.controlName].trim() : null;
         }),
         distinctUntilChanged(),
+        debounceTime(300),
       )
       .subscribe(value => {
         this.block.setAnswer(value, true);
