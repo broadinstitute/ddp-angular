@@ -1,0 +1,89 @@
+<mat-card class="modal-activity-block__card">
+  <mat-card-content class="modal-activity-block__card-content">
+    <div>
+      <mat-card-title class="modal-activity-block__card-title">
+        {{activityInstance?.activityName}}
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="activityInstance?.activityDescription"
+                         class="modal-activity-block__card-subtitle">
+        {{activityInstance.activityDescription}}
+      </mat-card-subtitle>
+
+      <div *ngIf="activityInstance?.statusCode !== 'CREATED'"
+           class="modal-activity-block__success-message">
+        <mat-icon inline>check_circle</mat-icon>
+        <span>{{activityInstance?.numQuestionsAnswered}} questions answered</span>
+      </div>
+    </div>
+
+    <mat-card-actions class="modal-activity-block__card-buttons">
+      <button mat-mini-fab
+              *ngIf="!activityInstance?.readonly"
+              class="button_primary"
+              (click)="openEditDialog()">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 0 32 32" width="32px" height="32px">
+          <g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill="none"
+             fill-rule="evenodd" transform="translate(6, 3)">
+            <path
+              d="M18.9426829,1.54512195 C18.3553294,0.960271379 17.5586034,0.634405059 16.7297471,0.639944989 C15.9008907,0.645627485 15.1086496,0.982250836 14.5292683,1.575 L2.15121951,13.9530488 L0.640243902,19.847561 L6.5347561,18.3357317 L18.9128049,5.95768293 C19.5057143,5.37856338 19.8424647,4.58642216 19.8481478,3.75763414 C19.8536884,2.92884611 19.5276958,2.13221737 18.9426829,1.54512195 Z"></path>
+            <line x1="14.1758537" y1="1.92926829" x2="18.5585366" y2="6.31195122"></line>
+            <line x1="2.15207317" y1="13.9521951" x2="6.53902439" y2="18.3314634"></line>
+          </g>
+        </svg>
+      </button>
+      <button mat-mini-fab
+              *ngIf="activityInstance?.canDelete"
+              #delete_button
+              class="button_secondary"
+              (click)="openDeleteDialog()">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             width="32px" height="32px" viewBox="0 0 32 32">
+          <g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill="none"
+             fill-rule="evenodd" transform="translate(6, 1)">
+            <polygon
+              points="18.5862069 22.3793103 3.4137931 22.3793103 3.4137931 3.4137931 18.5862069 3.4137931"></polygon>
+            <polygon
+              points="14.7931034 3.4137931 7.20689655 3.4137931 7.20689655 0.379310345 14.7931034 0.379310345"></polygon>
+            <line x1="0.379310345" y1="3.4137931" x2="21.6206897" y2="3.4137931"></line>
+            <line x1="7.20689655" y1="7.5862069" x2="7.20689655" y2="18.2068966"></line>
+            <line x1="11" y1="7.5862069" x2="11" y2="18.2068966"></line>
+            <line x1="14.7931034" y1="7.5862069" x2="14.7931034" y2="18.2068966"></line>
+          </g>
+        </svg>
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #edit_dialog>
+  <div mat-dialog-title class="modal-activity-block__edit-dialog-title">
+    <div>{{activityInstance?.activityName}}</div>
+    <button mat-icon-button mat-dialog-close class="modal-activity-block__close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="modal-activity-block__edit-dialog-content">
+    <ddp-activity-section [section]="activityForm?.sections[0]"
+                          [readonly]="activityForm?.readonly"
+                          [studyGuid]="studyGuid"
+                          [activityGuid]="activityGuid"
+    ></ddp-activity-section>
+
+    <button mat-flat-button
+            class="button_primary modal-activity-block__save_activity"
+            (click)="closeEditDialog()">
+      Save
+    </button>
+  </mat-dialog-content>
+</ng-template>
+
+<ng-template #delete_dialog>
+  <div class="modal-activity-block__delete-dialog">
+    <span class="modal-activity-block__delete-dialog-title">Are you sure you want to delete\n this information?</span>
+    <div class="modal-activity-block__delete-dialog-buttons">
+      <button mat-flat-button color="warn" (click)="deleteActivityInstance()">Delete</button>
+      <button mat-stroked-button mat-dialog-close>Cancel</button>
+    </div>
+  </div>
+</ng-template>
