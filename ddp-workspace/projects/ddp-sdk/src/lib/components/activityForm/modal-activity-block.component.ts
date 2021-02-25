@@ -3,10 +3,10 @@ import { ActivityForm, ActivityInstance, ActivityServiceAgent } from 'ddp-sdk';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
-import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
+import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-  selector: 'modal-activity-block',
+  selector: 'ddp-modal-activity-block',
   styles: [
     `.modal-activity-block__card {
       padding: 18.5px 37px 18px 32.5px;

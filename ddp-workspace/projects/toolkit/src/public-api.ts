@@ -13,7 +13,6 @@ export * from './lib/services/cookiesManagement.service';
 
 export * from './lib/components/activity/activity.component';
 export * from './lib/components/activity/activity-redesigned.component';
-export * from './lib/components/activity/modal-activity-block.component';
 export * from './lib/components/activity/activity-page.component';
 export * from './lib/components/activity/activity-page-redesigned.component';
 export * from './lib/components/app/app.component';
