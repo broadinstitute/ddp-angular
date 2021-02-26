@@ -447,8 +447,26 @@ select:disabled {
 
 .composite-answer-CHILD_OTHER_CANCER_LIST,
 .composite-answer-OTHER_CANCER_LIST {
+
+    .mat-form-field-type-mat-native-select .mat-input-element {
+        padding-left: 5px;
+    }
+
     .ddp-answer-container {
-        align-items: baseline;
+        align-items: center;
+
+        .ddp-answer-field {
+            margin-right: 1.5rem;
+            flex-grow: 1;
+
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+
+        .ddp-answer-field:last-child {
+            margin-right: 0;
+        }
     }
 
     .ddp-composite-text {
@@ -459,6 +477,11 @@ select:disabled {
     @media only screen and (max-width: 700px) {
         .ddp-answer-container {
             flex-direction: column !important;
+            align-items: initial !important;
+
+            .ddp-answer-field {
+                margin-right: 0 !important;
+            }
         }
 
         .ddp-composite-text {
