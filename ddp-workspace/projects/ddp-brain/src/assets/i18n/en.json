@@ -543,6 +543,17 @@
                     "Alt": "Mariella G. Filbin photo"
                 },
                 {
+                    "Name": "Alexandra Golby, M.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "https://golbylab.bwh.harvard.edu/",
+                    "Image": "assets/images/SAC-Golby.png",
+                    "Alt": "Alexandra Golby photo"
+                },
+                {
                     "Name": "Jason T. Huse, M.D., Ph.D.",
                     "Affiliations": [
                         "University of Texas MD Anderson Cancer Center"
