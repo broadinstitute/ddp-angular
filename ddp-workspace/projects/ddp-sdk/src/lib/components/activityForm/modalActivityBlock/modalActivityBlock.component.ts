@@ -7,8 +7,8 @@ import { ActivityActivityBlock } from '../../../models/activity/activityActivity
 
 @Component({
   selector: 'ddp-modal-activity-block',
-  styleUrls: ['modal-activity-block.component.scss'],
-  templateUrl: 'modal-activity-block.component.html',
+  styleUrls: ['modalActivityBlock.component.scss'],
+  templateUrl: 'modalActivityBlock.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalActivityBlockComponent implements OnInit {
