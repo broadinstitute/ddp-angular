@@ -9,6 +9,7 @@ import { AbstractActivityQuestionBlock } from '../../models/activity/abstractAct
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ConfigurationService } from '../../services/configuration.service';
+import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -81,6 +82,16 @@ import { ConfigurationService } from '../../services/configuration.service';
                                  [activityGuid]="activityGuid">
                 </ddp-group-block>
             </div>
+
+            <div *ngIf="isActivity(block)">
+                <ddp-modal-activity-block *ngIf="block.renderHint === 'MODAL'"
+                                          [block]="block"
+                                          [readonly]="readonly"
+                                          [validationRequested]="validationRequested"
+                                          [studyGuid]="studyGuid"
+                                          [activityGuid]="activityGuid">
+                </ddp-modal-activity-block>
+            </div>
         </div>`
 })
 export class ActivitySectionComponent {
@@ -130,5 +141,9 @@ export class ActivitySectionComponent {
 
     public isConditional(block: ActivityBlock): block is ConditionalBlock {
         return block.blockType === BlockType.Conditional && block.shown;
+    }
+
+    public isActivity(block: ActivityBlock): block is ActivityActivityBlock {
+       return block.blockType === BlockType.Activity && block.shown;
     }
 }
