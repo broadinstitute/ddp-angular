@@ -13,6 +13,8 @@
            class="modal-activity-block__success-message">
         <mat-icon inline>check_circle</mat-icon>
         <span>{{instance.numQuestionsAnswered}} questions answered</span>
+        <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
+          | translate: { number: instance.numQuestionsAnswered }"></span>
       </div>
     </div>
 
@@ -21,14 +23,16 @@
               *ngIf="!instance.readonly"
               class="button_primary"
               (click)="openEditDialog(instance)">
-        <img src="assets/images/pencil.svg" alt="Edit">
+        <img src="assets/images/pencil.svg"
+             [alt]="'SDK.EditButton' | translate">
       </button>
       <button mat-mini-fab
               *ngIf="instance.canDelete"
               #delete_button
               class="button_secondary"
               (click)="openDeleteDialog(instance)">
-        <img src="assets/images/trash.svg" alt="Delete">
+        <img src="assets/images/trash.svg"
+             [alt]="'SDK.DeleteButton' | translate">
       </button>
     </mat-card-actions>
   </mat-card-content>
@@ -51,18 +55,27 @@
 
     <button mat-flat-button
             class="button_primary modal-activity-block__save_activity"
-            (click)="closeEditDialog()">
-      Save
+            (click)="closeEditDialog()"
+            [innerHTML]="'SDK.SaveButton' | translate">
     </button>
   </mat-dialog-content>
 </ng-template>
 
 <ng-template #delete_dialog>
   <div class="modal-activity-block__delete-dialog">
-    <span class="modal-activity-block__delete-dialog-title">Are you sure you want to delete\n this information?</span>
+    <span class="modal-activity-block__delete-dialog-title"
+          [innerHTML]="'SDK.ModalActivityBlock.ConfirmDeletion' | translate">
+    </span>
     <div class="modal-activity-block__delete-dialog-buttons">
-      <button mat-flat-button color="warn" (click)="deleteActivityInstance()">Delete</button>
-      <button mat-stroked-button mat-dialog-close>Cancel</button>
+      <button mat-flat-button
+              color="warn"
+              (click)="deleteActivityInstance()"
+              [innerHTML]="'SDK.DeleteButton' | translate">
+      </button>
+      <button mat-stroked-button
+              mat-dialog-close
+              [innerHTML]="'SDK.CancelButton' | translate">
+      </button>
     </div>
   </div>
 </ng-template>
