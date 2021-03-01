@@ -1,24 +1,29 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ActivityForm, ActivityInstance, ActivityServiceAgent } from 'ddp-sdk';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
+import { ActivityActivityBlock } from '../../../models/activity/activityActivityBlock';
 
 @Component({
   selector: 'ddp-modal-activity-block',
   styleUrls: ['modal-activity-block.component.scss'],
-  templateUrl: 'modal-activity-block.component.html'
+  templateUrl: 'modal-activity-block.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalActivityBlockComponent implements OnInit {
   @Input() studyGuid: string;
   @Input() activityGuid: string;
+  @Input() block: ActivityActivityBlock;
+  @Input() validationRequested: boolean;
+  @Input() readonly: boolean;
   @Output() deleteActivity = new EventEmitter<void>();
 
   @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
   @ViewChild('delete_dialog') private deleteModalRef: TemplateRef<any>;
   @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
-  public activityInstance: ActivityInstance;
+  public currentActivityInstance: ActivityInstance;
   public activityForm: ActivityForm;
 
   private readonly DEFAULT_DIALOG_SETTINGS = {
@@ -37,11 +42,12 @@ export class ModalActivityBlockComponent implements OnInit {
   public deleteActivityInstance(): void {
     this.activityServiceAgent.deleteActivityInstance(
       this.studyGuid,
-      this.activityGuid
+      this.currentActivityInstance.instanceGuid
     ).subscribe(() => this.deleteActivity.emit());
   }
 
-  public openEditDialog(): void {
+  public openEditDialog(instance: ActivityInstance): void {
+    this.currentActivityInstance = instance;
     this.getFullActivity();
     this.dialog.open(this.editModalRef, {
       ...this.DEFAULT_DIALOG_SETTINGS,
@@ -56,7 +62,8 @@ export class ModalActivityBlockComponent implements OnInit {
     this.getActivityInstance();
   }
 
-  public openDeleteDialog(): void {
+  public openDeleteDialog(instance: ActivityInstance): void {
+    this.currentActivityInstance = instance;
     const dialogWidth = 396;
     const realDialogWidth = dialogWidth + 20; // because of the arrow
     const dialogHeight = 160;
@@ -83,12 +90,16 @@ export class ModalActivityBlockComponent implements OnInit {
   private getFullActivity(): void {
     this.activityServiceAgent.getActivity(
       of(this.studyGuid),
-      of(this.activityGuid)
+      of(this.currentActivityInstance.instanceGuid)
     ).subscribe(activity => this.activityForm = activity);
   }
 
   private getActivityInstance(): void {
     this.activityServiceAgent.getActivitySummary(this.studyGuid, this.activityGuid)
-      .subscribe(activityInstance => this.activityInstance = activityInstance);
+      .subscribe(activityInstance => {
+        // todo simplify it
+        const index = this.block.instances.findIndex(item => item.instanceGuid === activityInstance.instanceGuid);
+        this.block.instances[index] = {...activityInstance};
+      });
   }
 }
