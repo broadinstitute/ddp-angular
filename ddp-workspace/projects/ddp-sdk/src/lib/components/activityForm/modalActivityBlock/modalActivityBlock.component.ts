@@ -3,6 +3,7 @@ import { ActivityForm, ActivityInstance, ActivityServiceAgent } from 'ddp-sdk';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ActivityActivityBlock } from '../../../models/activity/activityActivityBlock';
 
 @Component({
@@ -43,7 +44,9 @@ export class ModalActivityBlockComponent implements OnInit {
     this.activityServiceAgent.deleteActivityInstance(
       this.studyGuid,
       this.currentActivityInstance.instanceGuid
-    ).subscribe(() => this.deleteActivity.emit());
+    )
+      .pipe(take(1))
+      .subscribe(() => this.deleteActivity.emit());
   }
 
   public openEditDialog(instance: ActivityInstance): void {
@@ -91,11 +94,14 @@ export class ModalActivityBlockComponent implements OnInit {
     this.activityServiceAgent.getActivity(
       of(this.studyGuid),
       of(this.currentActivityInstance.instanceGuid)
-    ).subscribe(activity => this.activityForm = activity);
+    )
+      .pipe(take(1))
+      .subscribe(activity => this.activityForm = activity);
   }
 
   private getActivityInstance(): void {
     this.activityServiceAgent.getActivitySummary(this.studyGuid, this.activityGuid)
+      .pipe(take(1))
       .subscribe(activityInstance => {
         // todo simplify it
         const index = this.block.instances.findIndex(item => item.instanceGuid === activityInstance.instanceGuid);
