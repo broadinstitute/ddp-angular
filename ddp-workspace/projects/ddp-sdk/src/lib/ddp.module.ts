@@ -97,6 +97,7 @@ import { ActivityCompositeAnswer } from './components/activityForm/activityCompo
 import { ActivityContentComponent } from './components/activityForm/activityContent.component';
 import { GroupBlock } from './components/activityForm/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/groupBlockList.component';
+import { EmbeddedActivityBlockComponent } from './components/activityForm/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -343,6 +344,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
@@ -375,7 +377,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
-        ProgressIndicatorComponent
+        ProgressIndicatorComponent,
+        EmbeddedActivityBlockComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -406,6 +409,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
