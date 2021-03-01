@@ -116,3 +116,9 @@
 .Margin--25 {
   margin-top: 25px;
 }
+
+.Container {
+  @media (max-width: 450px) {
+    margin-top: 0;
+  }
+}
