@@ -23,7 +23,7 @@
               *ngIf="!instance.readonly"
               class="button_primary"
               (click)="openEditDialog()">
-        <img src="assets/images/pencil.svg"
+        <img src="assets/shared/pencil.svg"
              [alt]="'SDK.EditButton' | translate">
       </button>
       <button mat-mini-fab
@@ -31,7 +31,7 @@
               #delete_button
               class="button_secondary"
               (click)="openDeleteDialog()">
-        <img src="assets/images/trash.svg"
+        <img src="assets/shared/trash.svg"
              [alt]="'SDK.DeleteButton' | translate">
       </button>
     </mat-card-actions>
