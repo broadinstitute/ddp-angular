@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
+import { ActivityInstance } from '../../../../models/activityInstance';
 
 const DEBUG_DATA = {
     title: `<span>Title 123</span>`,
@@ -21,9 +22,19 @@ export class ActivityBlockComponent implements OnInit {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     isModal: boolean;
+    cards: ActivityInstance[];
 
     ngOnInit(): void {
         // TODO: check whether we should keep renderHint field in an activityInstance
         this.isModal = this.block.renderHint === ActivityRenderHintType.Modal;
+        this.cards = this.block.instances;
+    }
+
+    getCardId(index: number, card: ActivityInstance): string {
+        return card.instanceGuid;
+    }
+
+    onDeleteCard(instanceGuid: string): void {
+        this.cards = this.cards.filter(card => card.instanceGuid !== instanceGuid);
     }
 }

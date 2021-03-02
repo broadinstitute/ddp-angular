@@ -1,14 +1,15 @@
 <div class="activity-block-container">
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
-    <div *ngIf="block.instances?.length" class="cards-block">
+    <div *ngIf="cards?.length" class="cards-block">
         <ng-container *ngIf="isModal">
-            <div *ngFor="let instance of block.instances" class="card">
-                <ddp-modal-activity-block [instance]="instance"
+            <div *ngFor="let card of cards; trackBy: getCardId" class="card">
+                <ddp-modal-activity-block [instance]="card"
                                           [readonly]="readonly"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
-                                          [activityGuid]="activityGuid">
+                                          [activityGuid]="activityGuid"
+                                          (deleteActivity)="onDeleteCard($event)">
                 </ddp-modal-activity-block>
             </div>
         </ng-container>

@@ -31,7 +31,7 @@ export class ModalActivityBlockComponent {
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
-    @Output() deleteActivity = new EventEmitter<void>();
+    @Output() deleteActivity = new EventEmitter<string>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
     @ViewChild('delete_dialog') private deleteModalRef: TemplateRef<any>;
@@ -55,7 +55,9 @@ export class ModalActivityBlockComponent {
             this.instance.instanceGuid
             )
             .pipe(take(1))
-            .subscribe(() => this.deleteActivity.emit());
+            .subscribe(() => {
+                this.deleteActivity.emit(this.instance.instanceGuid);
+            });
     }
 
     public openEditDialog(): void {
