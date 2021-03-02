@@ -4,7 +4,7 @@ import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { ActivityActivityBlock } from '../../../models/activity/activityActivityBlock';
+import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 
 @Component({
   selector: 'ddp-modal-activity-block',

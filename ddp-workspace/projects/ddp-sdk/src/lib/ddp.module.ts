@@ -184,7 +184,7 @@ import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailSer
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activity-block/activityBlock.component';
-import { ModalActivityBlockComponent } from './components/activityForm/modalActivityBlock/modalActivityBlock.component';
+import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
