@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { ActivityForm, ActivityInstance, ActivityServiceAgent } from 'ddp-sdk';
+import { ActivityInstance } from '../../../models/activityInstance';
+import { ActivityForm } from '../../../models/activity/activityForm';
+import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
