@@ -979,6 +979,23 @@
         "Header": "Email verified",
         "Text": "Please wait. You will be redirected to a login page soon..."
     },
+    "ThankYouPage": {
+        "Title": "Thank you for your interest in joining the Rare Genomes Project",
+        "Paragraph1": "Unfortunately, your responses to our pre-screening questionnaire do not match the <a href=\"eligibility-criteria\" class=\"Link\">current requirements for participation</a> in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:",
+        "List": [
+            "Understand English or Spanish",
+            "Live in the United States",
+            "Have a rare and undiagnosed genetic condition",
+            "Are currently under the care of a doctor helping to figure out the cause of the patient's condition"
+        ],
+        "Paragraph2": "Over time, we may be able to expand the project. We hope you will join our mailing list. If you do, we will contact you if participation requirements change, making you eligible to apply to the study.",
+        "Form": {
+            "Label": "Email Address *",
+            "Error": "Please enter a valid Email Address",
+            "Submit": "Join Mailing List"
+        },
+        "Paragraph3": "If you would like your information to be deleted from our database at any time, please email us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
+    },
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {
