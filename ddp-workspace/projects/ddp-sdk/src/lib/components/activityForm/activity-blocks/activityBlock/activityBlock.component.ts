@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
+import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
 
 const DEBUG_DATA = {
     title: `<span>Title 123</span>`,
@@ -19,7 +20,10 @@ export class ActivityBlockComponent implements OnInit {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    isModal: boolean;
 
     ngOnInit(): void {
+        // TODO: check whether we should keep renderHint field in an activityInstance
+        this.isModal = this.block.renderHint === ActivityRenderHintType.Modal;
     }
 }

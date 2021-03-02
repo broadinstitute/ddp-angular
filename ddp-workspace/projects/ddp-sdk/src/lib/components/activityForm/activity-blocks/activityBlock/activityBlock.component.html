@@ -2,9 +2,16 @@
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
     <div *ngIf="block.instances?.length" class="cards-block">
-        <div *ngFor="let card of block.instances" class="card">
-            <!-- card component [data]="card" -->
-        </div>
+        <ng-container *ngIf="isModal">
+            <div *ngFor="let instance of block.instances" class="card">
+                <ddp-modal-activity-block [instance]="instance"
+                                          [readonly]="readonly"
+                                          [validationRequested]="validationRequested"
+                                          [studyGuid]="studyGuid"
+                                          [activityGuid]="activityGuid">
+                </ddp-modal-activity-block>
+            </div>
+        </ng-container>
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat class="add-btn button button_primary">

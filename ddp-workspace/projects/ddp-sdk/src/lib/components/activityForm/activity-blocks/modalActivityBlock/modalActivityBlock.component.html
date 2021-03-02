@@ -1,4 +1,4 @@
-<mat-card *ngFor="let instance of block.instances" class="modal-activity-block__card">
+<mat-card class="modal-activity-block__card">
   <mat-card-content class="modal-activity-block__card-content">
     <div>
       <mat-card-title class="modal-activity-block__card-title">
@@ -22,7 +22,7 @@
       <button mat-mini-fab
               *ngIf="!instance.readonly"
               class="button_primary"
-              (click)="openEditDialog(instance)">
+              (click)="openEditDialog()">
         <img src="assets/images/pencil.svg"
              [alt]="'SDK.EditButton' | translate">
       </button>
@@ -30,7 +30,7 @@
               *ngIf="instance.canDelete"
               #delete_button
               class="button_secondary"
-              (click)="openDeleteDialog(instance)">
+              (click)="openDeleteDialog()">
         <img src="assets/images/trash.svg"
              [alt]="'SDK.DeleteButton' | translate">
       </button>
@@ -40,7 +40,7 @@
 
 <ng-template #edit_dialog>
   <div mat-dialog-title class="modal-activity-block__edit-dialog-title">
-    <div>{{currentActivityInstance?.activityName}}</div>
+    <div>{{instance.activityName}}</div>
     <button mat-icon-button mat-dialog-close class="modal-activity-block__close-button">
       <mat-icon>close</mat-icon>
     </button>
