@@ -1,3 +1,12 @@
+.FullWidth {
+    margin-top: 58px;
+  
+    @media (max-width: 554px) {
+      margin-top: 77px;
+    }
+  }
+  
+
 .Background--blue.alt {
     padding: 0;
     position: absolute;
@@ -7,6 +16,44 @@
     margin-top: -100px;
     right: 0;
     margin-right: 100px;
+
+    @media (max-width: 1200px) {
+        margin-right: 50px;
+    }
+
+    @media (max-width: 1024px) {
+        margin-right: 35px;
+    }
+
+    @media (max-width: 450px) {
+        position: static;
+
+        margin: 0;
+    }
+}
+
+.PageHeader-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #fff;
+
+    @media (max-width: 1024px) {
+      font-size: 26px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 450px) {
+        padding: 0;
+    }
+}
+
+.Container {
+    @media (max-width: 450px) {
+        margin-top: 0;
+    }
 }
 
 .Background--blue.alt .PageHeader-title {

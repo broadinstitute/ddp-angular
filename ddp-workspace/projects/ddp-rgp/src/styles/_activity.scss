@@ -1,0 +1,66 @@
+/**
+ * General Activity Styles
+ */
+.ddp-picklist-option-list-item {
+  height: unset !important;
+  min-height: unset !important;
+
+  .mat-list-item-content {
+    padding-left: 0 !important;
+
+    .mat-checkbox {
+      margin-bottom: 10px !important;
+
+      .mat-checkbox-layout {
+        position: relative;
+
+        .mat-checkbox-inner-container {
+          width: 20px !important;
+          height: 20px !important;
+
+          position: absolute !important;
+          top: 2px;
+
+          margin: 0;
+        }
+
+        .mat-checkbox-label {
+          margin-left: 28px;
+
+          color: rgb(51, 51, 51);
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.ddp-question-prompt {
+  margin-bottom: 10px;
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/**
+ * Tell Us Your Story Page
+ */
+.tell-us-your-story {
+  .activity-buttons {
+    display: flex;
+
+    margin-top: 5px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e8e8e8;
+
+    .button {
+      margin-top: 0;
+    }
+  }
+
+  .ddp-activity-question {
+    padding: 0;
+  }
+}

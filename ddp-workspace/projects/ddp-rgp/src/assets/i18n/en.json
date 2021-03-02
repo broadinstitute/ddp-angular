@@ -664,7 +664,7 @@
         "Items": [
             {
                 "title": "Get to know our project",
-                "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a> and read through the steps below.",
+                "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, please watch our informational video (click <a href=\"https://youtu.be/ux4_MwSALrc\" target=\"_blank\" class=\"Link\">here</a> to watch), review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a>, and read through the steps below.",
                 "image": "/assets/images/step-1.jpg "
             },
             {

@@ -20,8 +20,28 @@
 
     <ng-container *ngFor="let item of 'HowItWorksPage.Items' | translate; let first = first;">
       <hr *ngIf="first" class="HorizontalLine">
+
       <hr *ngIf="!first" class="HorizontalLine HorizontalLine--howItWorks">
-      <div class="row">
+
+      <div *ngIf="first" class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <a [href]="videoUrl" target="_blank">
+            <img
+              lazy-resource
+              class="PageContent-imageStep PageContent-imageStep--no-border"
+              [src]="item.image"
+              [alt]="'HowItWorksPage.CommonAlt' | translate"
+            />
+          </a>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 PageContent-textStep">
+          <h2 class="Title Color--blue">{{ item.title }}</h2>
+          <p class="Paragraph" [innerHTML]="item.text"></p>
+        </div>
+      </div>
+
+      <div *ngIf="!first" class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <img lazy-resource [src]="item.image" class="PageContent-imageStep"
             [alt]="'HowItWorksPage.CommonAlt' | translate">
