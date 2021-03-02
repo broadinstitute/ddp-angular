@@ -124,7 +124,7 @@ export * from './lib/components/activityForm/activity-blocks/conditionalBlock.co
 export * from './lib/components/activityForm/activity-blocks/groupBlockList.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlock.component';
 export * from './lib/components/activityForm/activity-blocks/activityContent.component';
-export * from './lib/components/activityForm/activity-blocks/activity-block/activityBlock.component';
+export * from './lib/components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 export * from './lib/components/activityForm/answers/activityAgreementAnswer.component';
 export * from './lib/components/activityForm/answers/activityCompositeAnswer.component';
 export * from './lib/components/activityForm/answers/activityDateAnswer.component';

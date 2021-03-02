@@ -10,8 +10,8 @@ const DEBUG_DATA = {
 
 @Component({
     selector: 'ddp-activity-block',
-    templateUrl: './activity-block.component.html',
-    styleUrls: ['./activity-block.component.scss']
+    templateUrl: './activityBlock.component.html',
+    styleUrls: ['./activityBlock.component.scss']
 })
 export class ActivityBlockComponent implements OnInit {
     @Input() block: ActivityActivityBlock = DEBUG_DATA;

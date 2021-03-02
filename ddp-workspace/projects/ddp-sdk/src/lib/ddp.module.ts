@@ -183,7 +183,7 @@ import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
-import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activity-block/activityBlock.component';
+import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
