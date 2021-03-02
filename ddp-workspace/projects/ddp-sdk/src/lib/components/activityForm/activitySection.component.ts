@@ -90,17 +90,6 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                     [activityGuid]="activityGuid">
                 </ddp-activity-block>
             </div>
-
-          // TODO: check it after merge
-            <div *ngIf="isActivity(block)">
-              <ddp-modal-activity-block *ngIf="block.renderHint === 'MODAL'"
-                                        [block]="block"
-                                        [readonly]="readonly"
-                                        [validationRequested]="validationRequested"
-                                        [studyGuid]="studyGuid"
-                                        [activityGuid]="activityGuid">
-              </ddp-modal-activity-block>
-            </div>
         </div>`
 })
 export class ActivitySectionComponent {
