@@ -134,6 +134,7 @@ export * from './lib/components/activityForm/answers/activityEmailInput.componen
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
+export * from './lib/components/activityForm/modalActivityBlock/modalActivityBlock.component';
 export * from './lib/components/activityForm/activitySection.component';
 export * from './lib/components/activityForm/activity-redesigned.component';
 export * from './lib/components/dashboard.component';
