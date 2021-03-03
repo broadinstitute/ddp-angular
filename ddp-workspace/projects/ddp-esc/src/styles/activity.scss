@@ -1,0 +1,35 @@
+// composite question
+ddp-activity-composite-answer {
+    .mat-form-field-type-mat-native-select .mat-input-element {
+        padding-left: 5px;
+    }
+
+    .ddp-answer-container {
+        align-items: center;
+
+        .ddp-answer-field {
+            margin-right: 1.5rem;
+            flex-grow: 1;
+
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+
+        .ddp-answer-field:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .ddp-answer-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: initial !important;
+
+        .ddp-answer-field {
+            margin-right: 0 !important;
+        }
+    }
+}
