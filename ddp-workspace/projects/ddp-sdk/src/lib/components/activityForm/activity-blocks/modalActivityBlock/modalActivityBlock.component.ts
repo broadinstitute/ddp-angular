@@ -26,7 +26,6 @@ import { ActivityServiceAgent } from '../../../../services/serviceAgents/activit
 })
 export class ModalActivityBlockComponent {
     @Input() studyGuid: string;
-    // TODO: Check whether activityGuid and instance.instanceGuid are the same ? What should we use for `getActivitySummary` method
     @Input() activityGuid: string;
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
@@ -62,7 +61,6 @@ export class ModalActivityBlockComponent {
 
     public openEditDialog(): void {
         this.getFullActivity();
-        // TODO: check if we need a loader during getting the activity data
         this.dialog.open(this.editModalRef, {
             ...this.DEFAULT_DIALOG_SETTINGS,
             width: `862px`,
@@ -73,7 +71,6 @@ export class ModalActivityBlockComponent {
 
     public closeEditDialog(): void {
         this.dialog.closeAll();
-        // TODO: check if we need a loader during getting the instance data
         this.getActivityInstance();
     }
 
@@ -114,7 +111,7 @@ export class ModalActivityBlockComponent {
     }
 
     private getActivityInstance(): void {
-        this.activityServiceAgent.getActivitySummary(this.studyGuid, this.activityGuid)
+        this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
             .pipe(take(1))
             .subscribe(activityInstance => {
                 this.instance = activityInstance;

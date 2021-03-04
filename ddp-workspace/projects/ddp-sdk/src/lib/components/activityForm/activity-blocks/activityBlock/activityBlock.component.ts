@@ -25,7 +25,6 @@ export class ActivityBlockComponent implements OnInit {
     cards: ActivityInstance[];
 
     ngOnInit(): void {
-        // TODO: check whether we should keep renderHint field in an activityInstance
         this.isModal = this.block.renderHint === ActivityRenderHintType.Modal;
         this.cards = this.block.instances;
     }
