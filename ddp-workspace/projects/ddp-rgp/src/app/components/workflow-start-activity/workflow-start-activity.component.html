@@ -1,0 +1,11 @@
+<ddp-activity-redesigned
+  *ngIf="show"
+  [studyGuid]="studyGuid"
+  [activityGuid]="instanceGuid"
+  [agreeConsent]="_toolkitConfiguration.agreeConsent"
+  (submit)="navigate($event)"
+  (stickySubtitle)="showStickySubtitle($event)"
+  (activityCode)="activityCodeChanged($event)"
+  (sectionsVisibilityChanged)="sectionsVisibilityChanged($event)"
+>
+</ddp-activity-redesigned>
