@@ -123,6 +123,12 @@ a:focus {
     }
 }
 
+@media (max-width: 768px) {
+    .section:nth-of-type(3) .content_tight {
+        padding: 50px 15px 75px 15px;
+    }
+}
+
 .Wrapper,
 .Wrapper--homeBottom {
     padding-bottom: 190px;

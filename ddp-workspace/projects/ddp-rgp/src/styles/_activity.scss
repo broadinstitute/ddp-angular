@@ -1,6 +1,152 @@
+@import 'variables';
+
 /**
  * General Activity Styles
  */
+.section-spinner {
+  &__header {
+    padding-top: 150px;
+
+    background: $color-orange;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+
+    margin: 0 100px;
+    padding: 175px 0;
+
+    background: #ffffff;
+
+    @media (max-width: 1200px) {
+      margin: 0 50px;
+      padding: 125px 0;
+    }
+
+    @media (max-width: 768px) {
+      margin: 0 35px;
+      padding: 25px 0;
+    }
+
+    @media (max-width: 450px) {
+      margin: 0;
+    }
+  }
+}
+
+.activity-stepper {
+  display: flex;
+  align-items: center;
+
+  margin: 50px 0 35px;
+  padding: 0;
+
+  list-style: none;
+
+  &__step-container {
+    flex: 1;
+  }
+}
+
+.stepper-btn {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 0;
+
+  background: transparent;
+  border: none;
+
+  &--first {
+    @media (max-width: 450px) {
+      padding-left: 25px;
+    }
+
+    @media (max-width: 360px) {
+      padding-left: 0;
+    }
+  }
+
+  &--last {
+    @media (max-width: 450px) {
+      padding-right: 25px;
+    }
+
+    @media (max-width: 360px) {
+      padding-right: 0;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: '';
+
+    flex: 1;
+    height: 4px;
+
+    background: $color-grey-light-2;
+  }
+
+  &--complete::before,
+  &--complete::after {
+    background: $color-orange-light;
+  }
+
+  &--active::before,
+  &--active::after {
+    background: $color-orange;
+  }
+
+  &--first::before {
+    background: transparent;
+
+    @media (max-width: 450px) {
+      display: none;
+    }
+  }
+
+  &--last::after {
+    background: transparent;
+
+    @media (max-width: 450px) {
+      display: none;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    background: $color-grey-light-2;
+    border-radius: 20px;
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #ffffff;
+
+    @media (max-width: 750px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &--complete &__label {
+    background: $color-orange-light;
+  }
+
+  &--active &__label {
+    background: $color-orange;
+  }
+}
+
 .ddp-picklist-option-list-item {
   height: unset !important;
   min-height: unset !important;
