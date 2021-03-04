@@ -1,0 +1,61 @@
+<div class="PageHeader">
+  <div class="PageHeader-background Background--orange">
+    <div class="row PageLayout">
+      <div
+        class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+      >
+        <h1 class="PageHeader-title" translate>ThankYouPage.Title</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="Wrapper row">
+  <div
+    class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container"
+  >
+    <p
+      class="Paragraph"
+      [innerHTML]="'ThankYouPage.Paragraph1' | translate"
+    ></p>
+
+    <ul class="list">
+      <li
+        *ngFor="let item of 'ThankYouPage.List' | translate"
+        class="list__item"
+      >
+        {{ item }}
+      </li>
+    </ul>
+
+    <p class="Paragraph">
+      {{ 'ThankYouPage.Paragraph2' | translate }}
+    </p>
+
+    <form class="form" [formGroup]="mailingForm" (ngSubmit)="submit$.next()">
+      <mat-form-field class="form__field">
+        <mat-label>{{ 'ThankYouPage.Form.Label' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="" />
+        <mat-error *ngIf="showError()">
+          {{ 'ThankYouPage.Form.Error' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form__btn-container">
+        <button
+          mat-raised-button
+          type="submit"
+          class="button button--primary"
+          [disabled]="submitBtnDisabled"
+        >
+          {{ 'ThankYouPage.Form.Submit' | translate }}
+        </button>
+      </div>
+    </form>
+
+    <p
+      class="Paragraph TopMargin50"
+      [innerHTML]="'ThankYouPage.Paragraph3' | translate"
+    ></p>
+  </div>
+</div>

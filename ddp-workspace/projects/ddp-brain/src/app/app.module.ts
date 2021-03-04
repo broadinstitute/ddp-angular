@@ -60,10 +60,10 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
 toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
-toolkitConfig.infoEmail = 'info@braincancerproject.org';
-toolkitConfig.dataEmail = 'data@braincancerproject.org';
-toolkitConfig.twitterAccountId = 'BrainCancerProj';
-toolkitConfig.facebookGroupId = 'braincancerproject';
+toolkitConfig.infoEmail = 'info@braintumorproject.org';
+toolkitConfig.dataEmail = 'data@braintumorproject.org';
+toolkitConfig.twitterAccountId = 'BrainTumorProj';
+toolkitConfig.facebookGroupId = 'braintumorproject';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();

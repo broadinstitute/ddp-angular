@@ -49,7 +49,9 @@ import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/r
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflow-start-activity.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -72,7 +74,6 @@ toolkitConfig.errorUrl = 'error';
 toolkitConfig.phone = '617-714-7395';
 toolkitConfig.infoEmail = 'raregenomes@broadinstitute.org';
 toolkitConfig.facebookGroupId = 'RareGenomesProject';
-toolkitConfig.mailingListDialogUrl = 'updates';
 
 declare const DDP_ENV: any;
 
@@ -145,6 +146,8 @@ export function translateFactory(
     UserDashboardComponent,
     PageBannerComponent,
     EmailVerifiedCallbackComponent,
+    WorkflowStartActivityComponent,
+    ThankYouComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent

@@ -21,6 +21,7 @@ import { CraniofacialComponent } from './components/craniofacial/craniofacial.co
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
@@ -105,6 +106,11 @@ const routes: Routes = [
   {
     path: AppRoutes.HowItWorks,
     component: HowItWorksComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: AppRoutes.ThankYou,
+    component: ThankYouComponent,
     canActivate: [IrbGuard],
   },
   {
