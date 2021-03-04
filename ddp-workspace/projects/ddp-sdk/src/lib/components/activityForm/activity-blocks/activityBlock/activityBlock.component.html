@@ -15,7 +15,9 @@
         </ng-container>
     </div>
 
-    <button *ngIf="block.allowMultiple" mat-flat class="add-btn button button_primary">
+    <button *ngIf="block.allowMultiple" mat-flat
+            class="add-btn button button_primary"
+            (click)="createNewCard()">
         <img lazy-resource src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
         <span class="text">{{block.addButtonText}}</span>
     </button>
