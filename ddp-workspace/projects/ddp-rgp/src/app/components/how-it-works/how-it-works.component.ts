@@ -11,6 +11,7 @@ export class HowItWorksComponent implements OnInit {
   public email: string;
   public phoneHref: string;
   public emailHref: string;
+  public videoUrl = 'https://youtu.be/ux4_MwSALrc';
 
   constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 

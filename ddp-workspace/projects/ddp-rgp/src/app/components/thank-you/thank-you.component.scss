@@ -1,0 +1,22 @@
+.list {
+  padding-bottom: 10px;
+
+  &__item {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6rem;
+  }
+}
+
+.form {
+  &__field {
+    width: 100%;
+  }
+
+  &__btn-container {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 25px;
+  }
+}

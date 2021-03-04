@@ -664,7 +664,7 @@
         "Items": [
             {
                 "title": "[es]Get to know our project",
-                "text": "[es]The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a> and read through the steps below.",
+                "text": "[es]The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, please watch our informational video (click <a href=\"https://youtu.be/ux4_MwSALrc\" target=\"_blank\" class=\"Link\">here</a> to watch), review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a>, and read through the steps below.",
                 "image": "/assets/images/step-1.jpg "
             },
             {
@@ -954,23 +954,6 @@
             "Text": "[es]Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">Genetics Home Reference</a>."
         }
     },
-    "ThankYouPage": {
-        "Title": "[es]Thank you for your interest in joining the Rare Genomes Project",
-        "Intro": {
-            "Text1": "[es]Unfortunately, your responses to our pre-screening questionnaire do not match the",
-            "Text2": "[es]current requirements for participation",
-            "Text3": "[es]in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:"
-        },
-        "List": {
-            "Item1": "[es]Understand English",
-            "Item2": "[es]Live in the United States",
-            "Item3": "[es]Have a rare and undiagnosed genetic condition",
-            "Item4": "[es]Are currently under the care of a doctor helping to figure out the cause of the patient’s condition"
-        },
-        "Button": "[es]Join Mailing List",
-        "Ending": "[es]Over time, we may be able to expand the project. We hope you will join our mailing list. If you do, we will contact you if participation requirements change, making you eligible to apply to the study.",
-        "Info": "[es]If you would like your information to be deleted from our database at any time, please email us at"
-    },
     "StayInformedPage": {
         "Title": "[es]Stay Informed!",
         "Text": "[es]Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
@@ -1000,6 +983,23 @@
     "EmailVerifiedCallbackPage": {
         "Header": "[es] Email verified",
         "Text": "[es] Please wait. You will be redirected to a login page soon..."
+    },
+    "ThankYouPage": {
+        "Title": "[es]Thank you for your interest in joining the Rare Genomes Project",
+        "Paragraph1": "[es]Unfortunately, your responses to our pre-screening questionnaire do not match the <a href=\"eligibility-criteria\" class=\"Link\">current requirements for participation</a> in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:",
+        "List": [
+            "[es]Understand English or Spanish",
+            "[es]Live in the United States",
+            "[es]Have a rare and undiagnosed genetic condition",
+            "[es]Are currently under the care of a doctor helping to figure out the cause of the patient's condition"
+        ],
+        "Paragraph2": "[es]Over time, we may be able to expand the project. We hope you will join our mailing list. If you do, we will contact you if participation requirements change, making you eligible to apply to the study.",
+        "Form": {
+            "Label": "[es]Email Address *",
+            "Error": "[es]Please enter a valid Email Address",
+            "Submit": "[es]Join Mailing List"
+        },
+        "Paragraph3": "[es]If you would like your information to be deleted from our database at any time, please email us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
     },
     "Toolkit": {
         "Dialogs": {

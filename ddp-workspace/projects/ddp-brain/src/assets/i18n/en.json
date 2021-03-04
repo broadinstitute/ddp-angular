@@ -21,8 +21,8 @@
     },
     "Header": {
         "Logo": {
-            "Title": "Brain Cancer<br>Project",
-            "Alt": "Brain Cancer Project logo"
+            "Title": "Brain Tumor<br>Project",
+            "Alt": "Brain Tumor Project logo"
         }
     },
     "Footer": {
@@ -32,7 +32,7 @@
         "Twitter": "Twitter",
         "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States",
         "Text": {
-            "Part1": "The Brain Cancer Project is part of",
+            "Part1": "The Brain Tumor Project is part of",
             "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
         }
     },
@@ -49,9 +49,9 @@
     },
     "HomePage": {
         "Introduction": {
-            "Title": "Help transform our understanding of Brain Cancer",
-            "Text": "If you or your child have been diagnosed with a primary brain cancer, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice.",
-            "Examples": "Examples of primary brain cancers: glioblastoma, astrocytoma, oligodendroglioma, and medulloblastoma.",
+            "Title": "Help transform our understanding of brain tumors",
+            "Text": "If you or your child have been diagnosed with a primary brain tumor, you can join a nationwide movement of patients and their families, doctors, and scientists by sharing your information and your voice.",
+            "Examples": "Examples of primary brain tumors: glioblastoma, astrocytoma, oligodendroglioma, and medulloblastoma.",
             "BroadAlt": "Broad Institute logo",
             "DanaFarberAlt": "Dana Farber logo",
             "MinderooAlt": "Minderoo Foundation logo",
@@ -59,8 +59,8 @@
         },
         "About": {
             "Title": "What’s this project about?",
-            "Text1": "The Brain Cancer Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
-            "Text2": "Patients with brain cancer are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
+            "Text1": "The Brain Tumor Project is part of Count Me In, a nonprofit organization that’s pursuing a new approach to cancer research - bringing patients and researchers together as partners to accelerate discoveries.",
+            "Text2": "Patients with brain tumors are empowered to contribute to breakthroughs and increase the pace of biomedical research, no matter where they live. By discovering the genes and the variants that drive this disease and sharing this data, we hope insights can be gained to develop more effective therapies.",
             "Text3": {
                 "Part1": "To learn more about Count Me In, our mission, and other projects and published research,",
                 "Part2": "visit our site"
@@ -100,7 +100,7 @@
                         "Number": "STEP 3",
                         "Time": "10 minutes",
                         "Title": "Respond to simple surveys",
-                        "Text": "In these surveys, we ask questions about your experience with brain cancer, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
+                        "Text": "In these surveys, we ask questions about your experience with a brain tumor, like your brain tumor type, when you were diagnosed, and the types of treatments you’ve had.",
                         "Links": [
                             {
                                 "Text": "Preview the adult surveys",
@@ -177,7 +177,7 @@
                     }
                 ]
             ],
-            "Text": "For more information on how to become a partner for the Brain Cancer Project, contact the team at"
+            "Text": "For more information on how to become a partner for the Brain Tumor Project, contact the team at"
         },
         "StayInformed": {
             "Title": "Stay informed",
@@ -189,13 +189,13 @@
         },
         "Join": {
             "Title": "Please join us in saying “Count Me In!”",
-            "Text": "With your help, patients and their families can be the driving force behind transformative brain cancer research."
+            "Text": "With your help, patients and their families can be the driving force behind transformative brain tumor research."
         }
     },
     "FaqPage": {
         "Title": "Frequently Asked Questions",
         "Intro": {
-            "Text1": "The Brain Cancer Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+            "Text1": "The Brain Tumor Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain tumors around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
             "Text2": {
                 "Part1": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
                 "Part2": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
@@ -208,15 +208,15 @@
                     {
                         "Question": "What is the goal of this project?",
                         "Paragraphs": [
-                            "The goal of this project is to generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of brain cancer and accelerate discoveries by making data more readily available."
+                            "The goal of this project is to generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of brain tumors and accelerate discoveries by making data more readily available."
                         ]
                     },
                     {
                         "Question": "What are the genomic and molecular research aspects of this project?",
                         "Paragraphs": [
-                            "This study involves genomic and molecular research to better define the genes and molecules that are important in brain cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified as oncogenes, genes that have the potential to cause cancer, and have led to the development of new drugs that specifically target those alterations.",
+                            "This study involves genomic and molecular research to better define the genes and molecules that are important in brain tumors. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified as oncogenes, genes that have the potential to cause cancer, and have led to the development of new drugs that specifically target those alterations.",
                             "However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of more effective cancer therapies.",
-                            "In order to define these gene alterations in brain cancers, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
+                            "In order to define these gene alterations in brain tumors, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
                         ]
                     },
                     {
@@ -226,9 +226,9 @@
                         ]
                     },
                     {
-                        "Question": "How has the brain cancer community been involved in the design of this project?",
+                        "Question": "How has the brain tumor community been involved in the design of this project?",
                         "Paragraphs": [
-                            "We have worked closely with patients, parents, and patient advocates within the brain cancer community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in brain cancer.",
+                            "We have worked closely with patients, parents, and patient advocates within the brain tumor community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in brain tumors.",
                             "We're proud to have our Advocacy Partners TargetCancer Foundation, American Brain Tumor Association, National Brain Tumor Society, Oligo Nation, Dragon Master Foundation, and OurBrainBank."
                         ]
                     },
@@ -247,7 +247,7 @@
                     {
                         "Question": "After I provide my information, will I be asked to share a small portion of my tumor tissue and medical records?",
                         "Paragraphs": [
-                            "We will be asking for informed consent from all patients with brain cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Cancer Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
+                            "We will be asking for informed consent from all patients with brain tumors who enroll in this study. As part of the process of providing consent, we will ask your permission for the Brain Tumor Project to obtain copies of your medical records. We will ask if you would like to opt-in to provide a portion of your stored tumor tissue and/or a blood sample. Archived tumor tissue is obtained by sending requests directly to the pathology departments where the tissue is housed. This information is gathered through the participant's release form, and by reading through patient’s medical records. We will keep you informed about our progress along the way."
                         ]
                     },
                     {
@@ -261,7 +261,7 @@
                     {
                         "Question": "Is this study a clinical trial?",
                         "Paragraphs": [
-                            "This study is not a clinical trial. Participation will not have any impact on you/your child’s course of care for brain cancer. We are not permitted to give any clinical advice as part of your/your child’s participation in this project. We are also not able to return any individual results to people participating in this project as all testing is research-grade and not clinical-grade. Please see below for further details."
+                            "This study is not a clinical trial. Participation will not have any impact on you/your child’s course of care for brain tumor. We are not permitted to give any clinical advice as part of your/your child’s participation in this project. We are also not able to return any individual results to people participating in this project as all testing is research-grade and not clinical-grade. Please see below for further details."
                         ]
                     },
                     {
@@ -282,7 +282,7 @@
                     {
                         "Question": "If I'm part of another study, can you use that genomic data instead of me submitting my samples for analysis?",
                         "Paragraphs": [
-                            "No. In order for you to contribute genomic data to the Brain Cancer Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
+                            "No. In order for you to contribute genomic data to the Brain Tumor Project, our team will request, sequence, and analyze your samples. The resulting genomic data will be deidentified and made publicly available for the biomedical community."
                         ]
                     },
                     {
@@ -294,13 +294,13 @@
                 ]
             },
             {
-                "Title": "I/my child have been diagnosed with brain cancer",
+                "Title": "I/my child have been diagnosed with brain tumor",
                 "Items": [
                     {
                         "Question": "How does this project work?",
                         "Paragraphs": [
                             "<span class=\"medium\">A. Tell us about yourself or your child.</span>",
-                            "Click \"Count Me In\" and complete a simple online form to tell us about yourself/your child. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your/your child’s experiences with brain cancer and couple that information with what we learn from the DNA in your/their tumor.",
+                            "Click \"Count Me In\" and complete a simple online form to tell us about yourself/your child. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your/your child’s experiences with a brain tumor and couple that information with what we learn from the DNA in your/their tumor.",
                             "<span class=\"medium\">B. Give us permission to collect your/your child’s samples and data.</span>",
                             "If you are in the United States or Canada after you fill out the initial survey, we will ask you to complete an online consent form that requests your permission to obtain copies of your/your child’s medical records and a saliva sample. You may also opt-in to providing a blood sample and/or allowing us to request a small portion of your/your child’s stored tumor sample. We’ll also ask you to tell us where you/your child received medical care so we can contact the appropriate doctors and hospitals.",
                             "<span class=\"medium\">C. We'll find and request your/your child's records.</span>",
@@ -311,14 +311,14 @@
                             "<span class=\"medium\">E. We'll Analyze Your/Your Child’s Tumor and Medical Data.</span>",
                             "We will perform cutting-edge, comprehensive genomic analyses on your/your child's saliva, tumor, and/or blood sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your/your child’s medical record. Any information that would make it easy to identify you/your child as an individual will be removed from all genomic and clinical data.",
                             "<span class=\"medium\">F. We'll Share the Data with Other Researchers.</span>",
-                            "Once potentially identifying information has been removed, our database of genomic and medical information (with your/your child’s identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand brain cancer and develop new therapies. To see what kind of data we will be generating you can reference our sister project's, the Metastatic Breast Cancer Project, data on <a class=\"Link\" href=\"https://mbcproject.org/data-release\" target=\"_blank\">mbcproject.org/data-release</a>. By sharing all sequencing and clinical data with multiple public databases, we will enable anyone to use this data to accelerate research."
+                            "Once potentially identifying information has been removed, our database of genomic and medical information (with your/your child’s identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand brain tumors and develop new therapies. To see what kind of data we will be generating you can reference our sister project's, the Metastatic Breast Cancer Project, data on <a class=\"Link\" href=\"https://mbcproject.org/data-release\" target=\"_blank\">mbcproject.org/data-release</a>. By sharing all sequencing and clinical data with multiple public databases, we will enable anyone to use this data to accelerate research."
                         ]
                     },
                     {
-                        "Question": "What happens when my child with brain cancer becomes an adult?",
+                        "Question": "What happens when my child with a brain tumor becomes an adult?",
                         "Paragraphs": [
                             "When your child reaches the age of consenting for themselves, they need to consent themselves to continue to participate in the project. For the US and Canada, this varies by locations and is between ages 18 and 21.",
-                            "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s brain cancer treatment."
+                            "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s brain tumor treatment."
                         ]
                     }
                 ]
@@ -327,13 +327,13 @@
                 "Title": "I am a member of the community who would like to get involved",
                 "Items": [
                     {
-                        "Question": "How can I spread the word about the Brain Cancer Project?",
+                        "Question": "How can I spread the word about the Brain Tumor Project?",
                         "Paragraphs": [
-                            "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@braincancerproject.org\">info@braincancerproject.org</a> or call us at <a class=\"Link\" href=\"tel:651-229-3480\">651-229-3480</a>."
+                            "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@braintumorproject.org\">info@braintumorproject.org</a> or call us at <a class=\"Link\" href=\"tel:651-229-3480\">651-229-3480</a>."
                         ]
                     },
                     {
-                        "Question": "How can I receive updates on the Brain Cancer Project?",
+                        "Question": "How can I receive updates on the Brain Tumor Project?",
                         "Paragraphs": [
                             "If you would like updates on the project, please <a class=\"Link\" href=\"/join-list\">sign up for our mailing list</a>."
                         ]
@@ -345,7 +345,7 @@
             "Title": "Do you have other questions?",
             "Text1": {
                 "Part1": "You can access a 1 page printable information sheet about the project linked here:",
-                "Part2": "The Brain Cancer Project"
+                "Part2": "The Brain Tumor Project"
             },
             "Text2": {
                 "Part1": "If you have any other questions, please email us at",
@@ -362,16 +362,16 @@
                 {
                     "Title": "Brain Tumor Diagnosis Type",
                     "Date": "[Date Published]",
-                    "Text": "Patient-reported responses to the question: “When you were first diagnosed with brain cancer, what type was it?”",
+                    "Text": "Patient-reported responses to the question: “When you were first diagnosed with brain tumor, what type was it?”",
                     "Image": "assets/images/diagnosis.png",
                     "Alt": "Brain tumor diagnosis type diagram"
                 },
                 {
-                    "Title": "Age at Initial Brain Cancer Diagnosis",
+                    "Title": "Age at Initial Brain Tumor Diagnosis",
                     "Date": "[Date Published]",
-                    "Text": "Calculated from response to the question: “When were you first diagnosed with brain cancer?” & patient-reported date of birth.",
+                    "Text": "Calculated from response to the question: “When were you first diagnosed with brain tumor?” & patient-reported date of birth.",
                     "Image": "assets/images/initial.png",
-                    "Alt": "Age at initial brain cancer diagnosis diagram"
+                    "Alt": "Age at initial brain tumor diagnosis diagram"
                 }
             ]
         },
@@ -380,7 +380,7 @@
         },
         "DataRelease": {
             "Title": "What does a data release look like?",
-            "Text": "Below are links out to datasets from other Count Me In projects. This is what we’re working towards for the Brain Cancer Project. If you have questions about our data release process, please email us at",
+            "Text": "Below are links out to datasets from other Count Me In projects. This is what we’re working towards for the Brain Tumor Project. If you have questions about our data release process, please email us at",
             "Diagrams": [
                 {
                     "Alt": "The Metastatic Breast Cancer Project data release diagram",
@@ -408,17 +408,17 @@
             "Title": "About Us",
             "HeroImgAlt": "Broad hero",
             "Text": {
-                "Main": "The <span class=\"regular\">Brain Cancer Project</span> is part of <span class=\"regular italic\">Count Me In</span>, a nonprofit organization that <span class=\"regular\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
+                "Main": "The <span class=\"regular\">Brain Tumor Project</span> is part of <span class=\"regular italic\">Count Me In</span>, a nonprofit organization that <span class=\"regular\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
                 "Link": "Visit <span class=\"italic\">Count Me In</span> website"
             }
         },
         "CMI": {
             "Paragraph1": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization.",
-            "Paragraph2": "The Brain Cancer Project has been designed and implemented collaboratively with brain cancer patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+            "Paragraph2": "The Brain Tumor Project has been designed and implemented collaboratively with brain tumor patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
         "PAC": {
             "Title": "Project Advisory Council",
-            "Text": "The Brain Cancer Project Advisory Council (PAC) is made up of <span class=\"medium\">patients, advocates, caregivers,</span> and <span class=\"medium\">loved ones</span> who have been impacted by brain cancer. The PAC meets regularly with the project operations team via video calls to <span class=\"medium\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
+            "Text": "The Brain Tumor Project Advisory Council (PAC) is made up of <span class=\"medium\">patients, advocates, caregivers,</span> and <span class=\"medium\">loved ones</span> who have been impacted by brain tumors. The PAC meets regularly with the project operations team via video calls to <span class=\"medium\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
             "Members": [
                 {
                     "Name": "Charlie Blotner",
@@ -541,6 +541,17 @@
                     "Url": "https://filbinlab.dana-farber.org/",
                     "Image": "assets/images/SAC-Filbrin.jpg",
                     "Alt": "Mariella G. Filbin photo"
+                },
+                {
+                    "Name": "Alexandra Golby, M.D.",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Brigham and Women’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "https://golbylab.bwh.harvard.edu/",
+                    "Image": "assets/images/SAC-Golby.png",
+                    "Alt": "Alexandra Golby photo"
                 },
                 {
                     "Name": "Jason T. Huse, M.D., Ph.D.",
@@ -726,7 +737,7 @@
         },
         "Dashboard": {
             "Title": "My Dashboard",
-            "Text": "The dashboard below describes each Brain Cancer Project form and its status."
+            "Text": "The dashboard below describes each Brain Tumor Project form and its status."
         },
         "DatePicker": {
             "Day": "Choose day...",
@@ -754,7 +765,7 @@
             "SingularForm": "character remaining"
         },
         "Title": {
-            "Default": "Brain Cancer Project",
+            "Default": "Brain Tumor Project",
             "Alert": "Your session will time-out soon"
         },
         "EmailEntry": {
