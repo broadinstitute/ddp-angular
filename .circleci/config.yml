@@ -338,7 +338,7 @@ commands:
               - equal: [ atcp, << parameters.study_key >> ]
           steps:
             - execute-study-specific-commands:
-                study_key: parameters.study_key
+                study_key: << parameters.study_key >>
       - run:
           name: ng build
           command: |
