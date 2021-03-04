@@ -8,15 +8,28 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityForm } from '../../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
+
+const DEFAULT_DIALOG_SETTINGS = {
+    hasBackdrop: true,
+    autoFocus: false,
+    scrollStrategy: new NoopScrollStrategy(),
+};
+
+const EDIT_DIALOG_CONFIG: MatDialogConfig = {
+    ...DEFAULT_DIALOG_SETTINGS,
+    width: `862px`,
+    position: {top: '65px'},
+    panelClass: 'modal-activity-block__edit-dialog',
+};
 
 @Component({
     selector: 'ddp-modal-activity-block',
@@ -38,12 +51,6 @@ export class ModalActivityBlockComponent {
 
     public activityForm: ActivityForm;
 
-    private readonly DEFAULT_DIALOG_SETTINGS = {
-        hasBackdrop: true,
-        autoFocus: false,
-        scrollStrategy: new NoopScrollStrategy(),
-    };
-
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
                 private dialog: MatDialog) {
     }
@@ -60,13 +67,14 @@ export class ModalActivityBlockComponent {
     }
 
     public openEditDialog(): void {
-        this.getFullActivity();
-        this.dialog.open(this.editModalRef, {
-            ...this.DEFAULT_DIALOG_SETTINGS,
-            width: `862px`,
-            position: {top: '65px'},
-            panelClass: 'modal-activity-block__edit-dialog',
-        });
+        this.getFullActivity()
+            .then((activity: ActivityForm) => {
+                this.activityForm = activity;
+                this.openDialog(this.editModalRef, EDIT_DIALOG_CONFIG);
+            })
+            .catch((err) => {
+                console.error('An error during getting a full activity', err);
+            });
     }
 
     public closeEditDialog(): void {
@@ -75,18 +83,55 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
+        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig());
+    }
+
+    private getFullActivity(): Promise<ActivityForm> {
+        return new Promise((resolve, reject) => {
+            this.getActivity$()
+                .subscribe((activity: ActivityForm) => {
+                    resolve(activity);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    private getActivity$(): Observable<ActivityForm> {
+        return this.activityServiceAgent.getActivity(
+            of(this.studyGuid),
+            of(this.instance.instanceGuid)
+            )
+            .pipe(take(1));
+    }
+
+
+    private getActivityInstance(): void {
+        this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
+            .pipe(take(1))
+            .subscribe(activityInstance => {
+                this.instance = activityInstance;
+            });
+    }
+
+    private openDialog(templateRef: TemplateRef<any>, config: any): void {
+        this.dialog.open(templateRef, config);
+    }
+
+    private getDeleteDialogConfig(): MatDialogConfig {
         const dialogWidth = 396;
-        const realDialogWidth = dialogWidth + 20; // because of the arrow
+        const dialogArrowWidth = 20;
+        const realDialogWidth = dialogWidth + dialogArrowWidth;
         const dialogHeight = 160;
         const position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
 
-        this.dialog.open(this.deleteModalRef, {
-            ...this.DEFAULT_DIALOG_SETTINGS,
+        return {
+            ...DEFAULT_DIALOG_SETTINGS,
             width: `${realDialogWidth}px`,
             height: `${dialogHeight}px`,
             position,
             panelClass: 'modal-activity-block__delete-dialog'
-        });
+        };
     }
 
     private calculateDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
@@ -97,24 +142,5 @@ export class ModalActivityBlockComponent {
             top: `${box.top - dialogHeight - verticalGap}px`,
             left: `${xCenter - dialogWidth / 2}px`
         };
-    }
-
-    private getFullActivity(): void {
-        this.activityServiceAgent.getActivity(
-            of(this.studyGuid),
-            of(this.instance.instanceGuid)
-            )
-            .pipe(take(1))
-            .subscribe(activity => {
-                this.activityForm = activity;
-            });
-    }
-
-    private getActivityInstance(): void {
-        this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
-            .pipe(take(1))
-            .subscribe(activityInstance => {
-                this.instance = activityInstance;
-            });
     }
 }
