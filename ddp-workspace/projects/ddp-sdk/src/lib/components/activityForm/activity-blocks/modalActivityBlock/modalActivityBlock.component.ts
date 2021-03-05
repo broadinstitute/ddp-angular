@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -52,7 +53,8 @@ export class ModalActivityBlockComponent {
     public activityForm: ActivityForm;
 
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private cdr: ChangeDetectorRef) {
     }
 
     public deleteActivityInstance(): void {
@@ -78,8 +80,14 @@ export class ModalActivityBlockComponent {
     }
 
     public closeEditDialog(): void {
-        this.dialog.closeAll();
-        this.getActivityInstance();
+        this.getActivityInstance()
+            .then(() => {
+                this.cdr.detectChanges();
+                this.dialog.closeAll();
+            })
+            .catch((err) => {
+                console.error('An error during getting an activity instance', err);
+            });
     }
 
     public openDeleteDialog(): void {
@@ -106,12 +114,17 @@ export class ModalActivityBlockComponent {
     }
 
 
-    private getActivityInstance(): void {
-        this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
-            .pipe(take(1))
-            .subscribe(activityInstance => {
-                this.instance = activityInstance;
-            });
+    private getActivityInstance(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
+                .pipe(take(1))
+                .subscribe(activityInstance => {
+                    this.instance = activityInstance;
+                    resolve();
+                }, (err) => {
+                    reject(err);
+                });
+        });
     }
 
     private openDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
