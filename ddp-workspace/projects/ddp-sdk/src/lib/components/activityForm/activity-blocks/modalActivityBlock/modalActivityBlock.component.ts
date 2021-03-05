@@ -70,7 +70,7 @@ export class ModalActivityBlockComponent {
         this.getFullActivity()
             .then((activity: ActivityForm) => {
                 this.activityForm = activity;
-                this.openDialog(this.editModalRef, EDIT_DIALOG_CONFIG);
+                this.openDialog(this.editModalRef, EDIT_DIALOG_CONFIG, this.closeEditDialog.bind(this));
             })
             .catch((err) => {
                 console.error('An error during getting a full activity', err);
@@ -83,7 +83,7 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig());
+        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeEditDialog.bind(this));
     }
 
     private getFullActivity(): Promise<ActivityForm> {
@@ -114,8 +114,14 @@ export class ModalActivityBlockComponent {
             });
     }
 
-    private openDialog(templateRef: TemplateRef<any>, config: any): void {
-        this.dialog.open(templateRef, config);
+    private openDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
+        const dialogRef = this.dialog.open(templateRef, config);
+
+        if (closeDialogCallback) {
+            dialogRef.beforeClosed().subscribe(result => {
+                closeDialogCallback(result);
+            });
+        }
     }
 
     private getDeleteDialogConfig(): MatDialogConfig {
