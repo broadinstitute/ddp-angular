@@ -1,6 +1,12 @@
 $max-btn-font-size: 20px;
 $flexible-btn-font-size: 1.25rem;
 
+.cards-block {
+    .card {
+        margin-bottom: 24px;
+    }
+}
+
 .add-btn {
     display: flex;
     align-items: center;
@@ -8,6 +14,7 @@ $flexible-btn-font-size: 1.25rem;
     max-height: 60px;
     max-width: 370px;
     min-width: 200px;
+    margin-top: 42px;
 
     border-radius: 35px;
     border: transparent;
