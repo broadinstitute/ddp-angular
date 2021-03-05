@@ -65,6 +65,7 @@ export class ModalActivityBlockComponent {
             .pipe(take(1))
             .subscribe(() => {
                 this.deleteActivity.emit(this.instance.instanceGuid);
+                this.dialog.closeAll();
             });
     }
 
@@ -87,6 +88,7 @@ export class ModalActivityBlockComponent {
             })
             .catch((err) => {
                 console.error('An error during getting an activity instance', err);
+                this.dialog.closeAll();
             });
     }
 
