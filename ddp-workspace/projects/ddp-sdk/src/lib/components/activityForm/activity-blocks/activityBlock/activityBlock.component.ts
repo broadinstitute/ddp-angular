@@ -23,7 +23,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     cards: ActivityInstance[];
     private ngUnsubscribe = new Subject();
 
-    constructor(private readonly activityServiceAgent: ActivityServiceAgent) {
+    constructor(private activityServiceAgent: ActivityServiceAgent) {
     }
 
     ngOnInit(): void {
