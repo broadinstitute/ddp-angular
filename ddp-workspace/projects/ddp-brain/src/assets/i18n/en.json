@@ -195,11 +195,11 @@
     "FaqPage": {
         "Title": "Frequently Asked Questions",
         "Intro": {
-            "Text1": "The Brain Tumor Project takes a new approach to cancer research. Researchers partner directly with patients, who share their samples and clinical information in order to make important discoveries. Our goal is to reach out to patients with brain tumors around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
-            "Text2": {
-                "Part1": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
-                "Part2": "is stewarded by four leading organizations: the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
-            }
+            "Text1": {
+                "Part1": "The Brain Tumor Project (BTp) takes a new approach to cancer research in which patients contribute their experiences, clinical information, and samples to make data freely available for any brain cancer researchers. By generating the most comprehensive database for brain tumors, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of",
+                "Part2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
+            },
+            "Text2": "This project has been built with the guidance and input of many different members of the Brain Tumor Community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at <a class=\"Link\" href=\"mailto:info@braintumorproject.org\">info@braintumorproject.org</a> or by phone at <a class=\"Link\" href=\"tel:651-229-3480\">651-229-3480</a>."
         },
         "Sections": [
             {
