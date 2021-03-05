@@ -353,6 +353,23 @@ ddp-activity-composite-answer {
     margin-right: 1.5rem;
 }
 
+.ddp-answer-container {
+    align-items: baseline;
+
+    .ddp-answer-field {
+        margin-right: 1.5rem;
+        flex-grow: 1;
+
+        .mat-form-field {
+            line-height: 21px;
+        }
+    }
+
+    .ddp-answer-field:last-child {
+        margin-right: 0;
+    }
+}
+
 @media screen and (max-width: 560px) {
     .ddp-answer-container {
         display: flex !important;
