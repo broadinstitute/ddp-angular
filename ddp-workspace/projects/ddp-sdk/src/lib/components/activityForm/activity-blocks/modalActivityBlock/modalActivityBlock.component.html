@@ -1,80 +1,80 @@
 <mat-card class="modal-activity-block__card">
-  <mat-card-content class="modal-activity-block__card-content">
-    <div>
-      <mat-card-title class="modal-activity-block__card-title">
-        {{instance.activityName}}
-      </mat-card-title>
-      <mat-card-subtitle *ngIf="instance.activityDescription"
-                         class="modal-activity-block__card-subtitle">
-        {{instance.activityDescription}}
-      </mat-card-subtitle>
+    <mat-card-content class="modal-activity-block__card-content">
+        <div>
+            <mat-card-title class="modal-activity-block__card-title">
+                {{instance.activityName}}
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="instance.activityDescription"
+                               class="modal-activity-block__card-subtitle">
+                {{instance.activityDescription}}
+            </mat-card-subtitle>
 
-      <div *ngIf="instance.statusCode !== 'CREATED'"
-           class="modal-activity-block__success-message">
-        <mat-icon inline>check_circle</mat-icon>
-        <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
+            <div *ngIf="instance.statusCode !== 'CREATED'"
+                 class="modal-activity-block__success-message">
+                <mat-icon inline>check_circle</mat-icon>
+                <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
           | translate: { number: instance.numQuestionsAnswered }"></span>
-      </div>
-    </div>
+            </div>
+        </div>
 
-    <mat-card-actions class="modal-activity-block__card-buttons">
-      <button mat-mini-fab
-              *ngIf="!instance.readonly"
-              class="button_primary"
-              (click)="openEditDialog()">
-        <img src="assets/shared/pencil.svg"
-             [alt]="'SDK.ModalActivityBlock.EditButton' | translate">
-      </button>
-      <button mat-mini-fab
-              *ngIf="instance.canDelete"
-              #delete_button
-              class="button_secondary"
-              (click)="openDeleteDialog()">
-        <img src="assets/shared/trash.svg"
-             [alt]="'SDK.ModalActivityBlock.DeleteButton' | translate">
-      </button>
-    </mat-card-actions>
-  </mat-card-content>
+        <mat-card-actions class="modal-activity-block__card-buttons">
+            <button mat-mini-fab
+                    *ngIf="!instance.readonly"
+                    class="button_primary"
+                    (click)="openEditDialog()">
+                <img src="assets/shared/pencil.svg"
+                     [alt]="'SDK.ModalActivityBlock.EditButton' | translate">
+            </button>
+            <button mat-mini-fab
+                    *ngIf="instance.canDelete"
+                    #delete_button
+                    class="button_secondary"
+                    (click)="openDeleteDialog()">
+                <img src="assets/shared/trash.svg"
+                     [alt]="'SDK.ModalActivityBlock.DeleteButton' | translate">
+            </button>
+        </mat-card-actions>
+    </mat-card-content>
 </mat-card>
 
 <ng-template #edit_dialog>
-  <div mat-dialog-title class="modal-activity-block__edit-dialog-title">
-    <div>{{instance.activityName}}</div>
-    <button mat-icon-button mat-dialog-close class="modal-activity-block__close-button">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <mat-dialog-content class="modal-activity-block__edit-dialog-content">
-    <ddp-activity-section [section]="activityForm?.sections[0]"
-                          [readonly]="readonly"
-                          [studyGuid]="studyGuid"
-                          [activityGuid]="instance.instanceGuid"
-                          [validationRequested]="validationRequested"
-    ></ddp-activity-section>
+    <div mat-dialog-title class="modal-activity-block__edit-dialog-title">
+        <div>{{instance.activityName}}</div>
+        <button mat-icon-button mat-dialog-close class="modal-activity-block__close-button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content class="modal-activity-block__edit-dialog-content">
+        <ddp-activity-section [section]="activityForm?.sections[0]"
+                              [readonly]="readonly"
+                              [studyGuid]="studyGuid"
+                              [activityGuid]="instance.instanceGuid"
+                              [validationRequested]="validationRequested"
+        ></ddp-activity-section>
 
-    <button mat-flat-button
-            class="button_primary modal-activity-block__save_activity"
-            (click)="closeEditDialog()"
-            [innerHTML]="'SDK.ModalActivityBlock.SaveButton' | translate">
-    </button>
-  </mat-dialog-content>
+        <button mat-flat-button
+                class="ctrl-btn button_primary modal-activity-block__save_activity"
+                (click)="closeEditDialog()">
+            <span [innerHTML]="'SDK.ModalActivityBlock.SaveButton' | translate"></span>
+        </button>
+    </mat-dialog-content>
 </ng-template>
 
 <ng-template #delete_dialog>
-  <div class="modal-activity-block__delete-dialog">
+    <div class="modal-activity-block__delete-dialog">
     <span class="modal-activity-block__delete-dialog-title"
           [innerHTML]="'SDK.ModalActivityBlock.ConfirmDeletion' | translate">
     </span>
-    <div class="modal-activity-block__delete-dialog-buttons">
-      <button mat-flat-button
-              color="warn"
-              (click)="deleteActivityInstance()"
-              [innerHTML]="'SDK.ModalActivityBlock.DeleteButton' | translate">
-      </button>
-      <button mat-stroked-button
-              mat-dialog-close
-              [innerHTML]="'SDK.ModalActivityBlock.CancelButton' | translate">
-      </button>
+        <div class="modal-activity-block__delete-dialog-buttons">
+            <button mat-flat-button class="ctrl-btn delete-btn"
+                    color="warn"
+                    (click)="deleteActivityInstance()"
+                    [innerHTML]="'SDK.ModalActivityBlock.DeleteButton' | translate">
+            </button>
+            <button mat-stroked-button class="ctrl-btn"
+                    mat-dialog-close
+                    [innerHTML]="'SDK.ModalActivityBlock.CancelButton' | translate">
+            </button>
+        </div>
     </div>
-  </div>
 </ng-template>
