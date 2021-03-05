@@ -66,7 +66,7 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
 
       <ng-container *ngIf="block.confirmEntry">
         <p
-          class="ddp-question-prompt"
+          class="ddp-question-prompt ddp-question-prompt-confirmation"
           [class.ddp-required-question-prompt]="this.block.isRequired"
           [innerHTML]="block.confirmPrompt"
         ></p>
@@ -81,9 +81,9 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
           />
 
           <mat-error
-            *ngIf="shouldShowControlError(confirmationControlName, 'mustMatch')"
+            *ngIf="shouldShowControlError(confirmationControlName, 'mustMatch') && block.mismatchMessage"
           >
-            {{ block.mismatchMessage || 'Values do not match' }}
+            {{ block.mismatchMessage }}
           </mat-error>
         </mat-form-field>
       </ng-container>
