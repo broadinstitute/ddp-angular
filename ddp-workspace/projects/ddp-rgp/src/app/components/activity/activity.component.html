@@ -89,24 +89,97 @@
         </ol>
       </ng-container>
 
-      <ng-container *ngIf="model">
-        <ddp-activity-section
-          [section]="currentSection"
-          [readonly]="isReadonly() || dataEntryDisabled"
-          [validationRequested]="validationRequested"
-          [studyGuid]="studyGuid"
-          [activityGuid]="activityGuid"
-          (visibilityChanged)="updateVisibility($event)"
-          (embeddedComponentsValidationStatus)="
-            updateEmbeddedComponentValidationStatus(1, $event)
-          "
-          (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)"
-        >
-        </ddp-activity-section>
+      <ddp-activity-section
+        *ngIf="currentSection"
+        [section]="currentSection"
+        [readonly]="isReadonly() || dataEntryDisabled"
+        [validationRequested]="validationRequested"
+        [studyGuid]="studyGuid"
+        [activityGuid]="activityGuid"
+        (visibilityChanged)="updateVisibility($event)"
+        (embeddedComponentsValidationStatus)="
+          updateEmbeddedComponentValidationStatus(1, $event)
+        "
+        (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)"
+      >
+      </ddp-activity-section>
 
-        <!-- closing section -->
-        <ng-container *ngIf="model.closing">
+      <ng-container *ngIf="model">
+        <ng-container *ngIf="shouldShowReadonlyHint">
+          <div class="infobox" [innerHTML]="model.readonlyHint"></div>
+        </ng-container>
+
+        <ng-container *ngIf="model.lastUpdatedText">
+          <span class="last-updated">{{ model.lastUpdatedText }} </span>
+        </ng-container>
+
+        <div
+          *ngIf="isLoaded"
+          class="survey-buttons"
+          [ngClass]="{
+            'activity-buttons_mobile':
+              (!isStepped || isLastStep) &&
+              isAgree() &&
+              isLoaded &&
+              !isReadonly()
+          }"
+        >
+          <ng-container *ngIf="isEnrollmentActivity">
+            <button
+              mat-fab
+              class="activity-button"
+              [disabled]="
+                currentSectionIndex === 0 ||
+                dataEntryDisabled ||
+                (isPageBusy | async)
+              "
+              (click)="decrementStep()"
+            >
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+
+            <button
+              *ngIf="!isLastStep"
+              mat-fab
+              class="activity-button"
+              [disabled]="dataEntryDisabled || (isPageBusy | async)"
+              (click)="incrementStep()"
+            >
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+
+            <ng-container *ngIf="isLastStep">
+              <button
+                #submitButton
+                *ngIf="!isReadonly() && !isAgree()"
+                class="button button--primary"
+                [disabled]="dataEntryDisabled || (isPageBusy | async)"
+                (click)="flush()"
+                (mouseenter)="mouseEnterOnSubmit()"
+              >
+                {{
+                  ((isPageBusy | async)
+                    ? 'SDK.SavingButton'
+                    : 'SDK.SubmitButton'
+                  ) | translate
+                }}
+              </button>
+
+              <button
+                *ngIf="isReadonly()"
+                class="button button--primary"
+                (click)="close()"
+              >
+                {{ 'SDK.CloseButton' | translate }}
+              </button>
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <!-- Closing section -->
+        <div class="section section--closing">
           <ddp-activity-section
+            *ngIf="model.closing"
             [section]="model.closing"
             [readonly]="isReadonly() || dataEntryDisabled"
             [validationRequested]="validationRequested"
@@ -119,100 +192,8 @@
             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)"
           >
           </ddp-activity-section>
-        </ng-container>
-
-        <ng-container *ngIf="shouldShowReadonlyHint">
-          <div class="infobox" [innerHTML]="model.readonlyHint"></div>
-        </ng-container>
-
-        <ng-container *ngIf="model.lastUpdatedText">
-          <span class="last-updated">{{ model.lastUpdatedText }} </span>
-        </ng-container>
-        <div
-          class="activity-buttons"
-          [ngClass]="{
-            'activity-buttons_mobile':
-              (!isStepped || isLastStep) &&
-              isAgree() &&
-              isLoaded &&
-              !isReadonly()
-          }"
-        >
-          <ng-container *ngIf="isLoaded && isStepped">
-            <button
-              *ngIf="!isFirstStep"
-              [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              class="button button_medium button_secondary previous_button"
-              (click)="decrementStep()"
-              [innerHTML]="'SDK.PreviousButton' | translate"
-            ></button>
-            <button
-              *ngIf="!isLastStep"
-              [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              class="button button_medium button_primary button_right next_button"
-              (click)="incrementStep()"
-              [innerHTML]="
-                (isPageBusy | async)
-                  ? ('SDK.SavingButton' | translate)
-                  : ('SDK.NextButton' | translate)
-              "
-            ></button>
-          </ng-container>
-          <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded">
-            <button
-              *ngIf="!isReadonly() && !isAgree()"
-              #submitButton
-              [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              class="button button_medium button_primary button_right submit_button"
-              (click)="flush()"
-              (mouseenter)="mouseEnterOnSubmit()"
-              [innerHTML]="
-                (isPageBusy | async)
-                  ? ('SDK.SavingButton' | translate)
-                  : ('SDK.SubmitButton' | translate)
-              "
-            ></button>
-            <button
-              *ngIf="isReadonly()"
-              class="button button_medium button_primary button_right close_button"
-              (click)="close()"
-              [innerHTML]="'SDK.CloseButton' | translate"
-            ></button>
-          </ng-container>
-          <ng-container
-            *ngIf="
-              (!isStepped || isLastStep) &&
-              isAgree() &&
-              isLoaded &&
-              !isReadonly()
-            "
-          >
-            <button
-              class="button button_medium button_warn"
-              [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              (click)="close()"
-            >
-              <mat-icon class="button__icon">highlight_off</mat-icon>
-              {{ 'SDK.NotAgreeButton' | translate }}
-            </button>
-            <button
-              #submitButton
-              [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              class="button button_medium button_primary"
-              (click)="flush()"
-              (mouseenter)="mouseEnterOnSubmit()"
-            >
-              <mat-icon *ngIf="!(isPageBusy | async)" class="button__icon"
-                >check_circle_outline</mat-icon
-              >
-              {{
-                (isPageBusy | async)
-                  ? ('SDK.SavingButton' | translate)
-                  : ('SDK.AgreeButton' | translate)
-              }}
-            </button>
-          </ng-container>
         </div>
+
         <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
           <span translate>SDK.ValidateError</span>
         </div>

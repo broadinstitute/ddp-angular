@@ -1063,7 +1063,6 @@ h3.Panel-title {
 }
 
 .activity-buttons {
-    overflow: hidden;
     padding-bottom: 15px;
 
     .button.previous_button,
@@ -1101,10 +1100,6 @@ h3.Panel-title {
         font-size: 1rem;
         font-weight: 500;
     }
-}
-
-.ddp-activity-question {
-    padding-bottom: 10px;
 }
 
 .Question--text .ddp-activity-validation {
