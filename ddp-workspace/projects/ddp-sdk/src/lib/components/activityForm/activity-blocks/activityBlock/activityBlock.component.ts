@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, concatMap, takeUntil } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
@@ -45,7 +45,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     createNewCard(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.activityGuid)
             .pipe(
-                switchMap((instanceGuid: ActivityInstanceGuid) => {
+                concatMap((instanceGuid: ActivityInstanceGuid) => {
                     return this.activityServiceAgent.getActivitySummary(this.studyGuid, instanceGuid.instanceGuid);
                 }),
                 catchError(err => {
