@@ -12,7 +12,7 @@ import {
 import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
-import { of, Observable } from 'rxjs';
+import { of, Observable, EMPTY } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 import { ActivityInstance } from '../../../../models/activityInstance';
@@ -61,11 +61,13 @@ export class ModalActivityBlockComponent {
     }
 
     public deleteActivityInstance(): void {
-        this.activityServiceAgent.deleteActivityInstance(
-            this.studyGuid,
-            this.instance.instanceGuid
+        this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
+            catchError(err => {
+                this.logger.logError(this.LOG_SOURCE, 'An error during getting an activityInstance deleting', err);
+                return EMPTY;
+            }),
+            take(1)
             )
-            .pipe(take(1))
             .subscribe(() => {
                 this.deleteActivity.emit(this.instance.instanceGuid);
                 this.dialog.closeAll();
@@ -76,6 +78,7 @@ export class ModalActivityBlockComponent {
         this.getFullActivity$().pipe(
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during getting a full activity', err);
+                return EMPTY;
             }),
             take(1)
         ).subscribe((activity: ActivityForm) => {
@@ -89,6 +92,7 @@ export class ModalActivityBlockComponent {
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during getting an activity instance', err);
                 this.dialog.closeAll();
+                return EMPTY;
             }),
             take(1)
         ).subscribe((activityInstance: ActivityInstance) => {
@@ -99,7 +103,11 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeEditDialog.bind(this));
+        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
+    }
+
+    private closeDeleteDialog(): void {
+        this.dialog.closeAll();
     }
 
     private getFullActivity$(): Observable<ActivityForm> {
