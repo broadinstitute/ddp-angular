@@ -136,7 +136,9 @@ export class ModalActivityBlockComponent {
         const dialogRef = this.dialog.open(templateRef, config);
 
         if (closeDialogCallback) {
-            dialogRef.beforeClosed().subscribe(result => {
+            dialogRef.beforeClosed().pipe(
+                take(1)
+            ).subscribe(result => {
                 closeDialogCallback(result);
             });
         }
