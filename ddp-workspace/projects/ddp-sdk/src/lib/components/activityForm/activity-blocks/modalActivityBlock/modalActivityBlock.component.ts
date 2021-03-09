@@ -18,6 +18,7 @@ import { take } from 'rxjs/operators';
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityForm } from '../../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
+import { LoggingService } from '../../../../services/logging.service';
 
 const DEFAULT_DIALOG_SETTINGS = {
     hasBackdrop: true,
@@ -51,10 +52,12 @@ export class ModalActivityBlockComponent {
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
     public activityForm: ActivityForm;
+    private readonly LOG_SOURCE = 'ModalActivityBlockComponent';
 
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
                 private dialog: MatDialog,
-                private cdr: ChangeDetectorRef) {
+                private cdr: ChangeDetectorRef,
+                private logger: LoggingService) {
     }
 
     public deleteActivityInstance(): void {
@@ -76,7 +79,7 @@ export class ModalActivityBlockComponent {
                 this.openDialog(this.editModalRef, EDIT_DIALOG_CONFIG, this.closeEditDialog.bind(this));
             })
             .catch((err) => {
-                console.error('An error during getting a full activity', err);
+                this.logger.logError(this.LOG_SOURCE, 'An error during getting a full activity', err);
             });
     }
 
@@ -87,7 +90,7 @@ export class ModalActivityBlockComponent {
                 this.dialog.closeAll();
             })
             .catch((err) => {
-                console.error('An error during getting an activity instance', err);
+                this.logger.logError(this.LOG_SOURCE, 'An error during getting an activity instance', err);
                 this.dialog.closeAll();
             });
     }
@@ -120,7 +123,7 @@ export class ModalActivityBlockComponent {
         return new Promise((resolve, reject) => {
             this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid)
                 .pipe(take(1))
-                .subscribe(activityInstance => {
+                .subscribe((activityInstance: ActivityInstance) => {
                     this.instance = activityInstance;
                     resolve();
                 }, (err) => {
