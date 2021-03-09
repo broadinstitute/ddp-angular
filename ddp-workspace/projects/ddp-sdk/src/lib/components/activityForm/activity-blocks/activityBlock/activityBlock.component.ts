@@ -21,7 +21,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
     isModal: boolean;
-    cards: ActivityInstance[];
+    childInstances: ActivityInstance[];
     private ngUnsubscribe = new Subject();
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
@@ -31,15 +31,15 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.isModal = this.block.renderHint === ActivityRenderHintType.Modal;
-        this.cards = this.block.instances;
+        this.childInstances = this.block.instances;
     }
 
-    getCardId(index: number, card: ActivityInstance): string {
-        return card.instanceGuid;
+    getInstanceId(index: number, instance: ActivityInstance): string {
+        return instance.instanceGuid;
     }
 
     onDeleteCard(instanceGuid: string): void {
-        this.cards = this.cards.filter(card => card.instanceGuid !== instanceGuid);
+        this.childInstances = this.childInstances.filter(instance => instance.instanceGuid !== instanceGuid);
     }
 
     createNewCard(): void {
@@ -55,7 +55,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
                 takeUntil(this.ngUnsubscribe)
             )
             .subscribe((instance: ActivityInstance) => {
-                this.cards.push(instance);
+                this.childInstances.push(instance);
             });
     }
 

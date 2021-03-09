@@ -1,10 +1,10 @@
 <div class="activity-block-container">
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
-    <div *ngIf="cards?.length" class="cards-block">
+    <div *ngIf="childInstances?.length" class="cards-block">
         <ng-container *ngIf="isModal">
-            <div *ngFor="let card of cards; trackBy: getCardId" class="card">
-                <ddp-modal-activity-block [instance]="card"
+            <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
+                <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
