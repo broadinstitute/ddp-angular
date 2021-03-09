@@ -7,6 +7,7 @@ import { ActivityRenderHintType } from '../../../../models/activity/activityRend
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityInstanceGuid } from '../../../../models/activityInstanceGuid';
+import { LoggingService } from '../../../../services/logging.service';
 
 @Component({
     selector: 'ddp-activity-block',
@@ -22,8 +23,10 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     isModal: boolean;
     cards: ActivityInstance[];
     private ngUnsubscribe = new Subject();
+    private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
-    constructor(private activityServiceAgent: ActivityServiceAgent) {
+    constructor(private activityServiceAgent: ActivityServiceAgent,
+                private logger: LoggingService) {
     }
 
     ngOnInit(): void {
@@ -46,7 +49,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
                     return this.activityServiceAgent.getActivitySummary(this.studyGuid, instanceGuid.instanceGuid);
                 }),
                 catchError(err => {
-                    console.error('An error during a new instance creation', err);
+                    this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);
                     return throwError(err);
                 }),
                 takeUntil(this.ngUnsubscribe)
