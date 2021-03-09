@@ -87,7 +87,7 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                     [readonly]="readonly"
                                     [validationRequested]="validationRequested"
                                     [studyGuid]="studyGuid"
-                                    [activityGuid]="activityGuid">
+                                    [parentActivityInstanceGuid]="activityGuid">
                 </ddp-activity-block>
             </div>
         </div>`

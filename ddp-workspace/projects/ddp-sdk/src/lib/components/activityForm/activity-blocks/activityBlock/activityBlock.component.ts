@@ -19,7 +19,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
-    @Input() activityGuid: string;
+    @Input() parentActivityInstanceGuid: string;
     isModal: boolean;
     cards: ActivityInstance[];
     private ngUnsubscribe = new Subject();
@@ -43,7 +43,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     }
 
     createNewCard(): void {
-        this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.activityGuid)
+        this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
                 concatMap((instanceGuid: ActivityInstanceGuid) => {
                     return this.activityServiceAgent.getActivitySummary(this.studyGuid, instanceGuid.instanceGuid);

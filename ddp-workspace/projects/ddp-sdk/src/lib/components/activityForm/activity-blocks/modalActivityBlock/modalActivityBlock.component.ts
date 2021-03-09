@@ -41,7 +41,7 @@ const EDIT_DIALOG_CONFIG: MatDialogConfig = {
 })
 export class ModalActivityBlockComponent {
     @Input() studyGuid: string;
-    @Input() activityGuid: string;
+    @Input() parentActivityInstanceGuid: string;
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
