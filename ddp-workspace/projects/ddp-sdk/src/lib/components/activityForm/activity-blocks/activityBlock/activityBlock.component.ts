@@ -38,11 +38,11 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
         return instance.instanceGuid;
     }
 
-    onDeleteCard(instanceGuid: string): void {
+    onDeleteChildInstance(instanceGuid: string): void {
         this.childInstances = this.childInstances.filter(instance => instance.instanceGuid !== instanceGuid);
     }
 
-    createNewCard(): void {
+    createChildInstance(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
                 concatMap((instanceGuid: ActivityInstanceGuid) => {
