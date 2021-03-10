@@ -45,12 +45,15 @@
     </button>
   </div>
   <mat-dialog-content class="modal-activity-block__edit-dialog-content">
-    <ddp-activity-section [section]="activityForm?.sections[0]"
-                          [readonly]="readonly"
-                          [studyGuid]="studyGuid"
-                          [activityGuid]="currentActivityInstance.instanceGuid"
-                          [validationRequested]="validationRequested"
-    ></ddp-activity-section>
+    <mat-spinner *ngIf="!activityForm; else section"></mat-spinner>
+    <ng-template #section>
+      <ddp-activity-section [section]="activityForm?.sections[0]"
+                            [readonly]="readonly"
+                            [studyGuid]="studyGuid"
+                            [activityGuid]="currentActivityInstance.instanceGuid"
+                            [validationRequested]="validationRequested"
+      ></ddp-activity-section>
+    </ng-template>
 
     <button mat-flat-button
             class="button_primary modal-activity-block__save_activity"
