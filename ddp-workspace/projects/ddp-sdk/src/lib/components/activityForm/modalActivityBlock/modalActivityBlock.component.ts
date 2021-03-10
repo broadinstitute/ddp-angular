@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ActivityInstance } from '../../../models/activityInstance';
 import { ActivityForm } from '../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
