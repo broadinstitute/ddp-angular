@@ -56,8 +56,8 @@ export class ModalActivityBlockComponent implements OnInit {
     this.getFullActivity();
     this.dialog.open(this.editModalRef, {
       ...this.DEFAULT_DIALOG_SETTINGS,
-      width: `862px`,
-      position: { top: '65px' },
+      width: '70vw',
+      position: { top: '10vh' },
       panelClass: 'modal-activity-block__edit-dialog',
     });
   }
