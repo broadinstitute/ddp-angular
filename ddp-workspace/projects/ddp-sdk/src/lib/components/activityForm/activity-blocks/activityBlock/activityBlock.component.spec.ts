@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivityBlockComponent } from './activityBlock.component';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
-import { LoggingService } from 'ddp-sdk';
+import { LoggingService } from '../../../../services/logging.service';
+
 
 describe('ActivityBlockComponent', () => {
     let component: ActivityBlockComponent;
