@@ -4,14 +4,15 @@
  * General Activity Styles
  */
 .section--closing {
-  margin-top: 25px;
-  margin-bottom: 125px;
+  margin: 25px 0 0 0 !important;
+  padding-bottom: 125px !important;
 
   .BlueBox {
     border: none;
 
     a {
       color: $color-orange;
+      overflow-wrap: break-word;
     }
   }
 }
@@ -293,6 +294,24 @@ ddp-activity-dropdown-picklist-question select {
     .ddp-helper {
       margin-bottom: 15px;
     }
+  }
+}
+
+.ErrorMessage {
+  margin-top: 10px;
+
+  color: $color-red;
+  font-size: 0.9rem;
+  font-weight: 400;
+  
+  &--global {
+    margin-top: 25px;
+    padding-top: 25px;
+
+    border-top: 1px solid $color-grey-light-3;
+
+    font-size: 1rem;
+    font-weight: 500;
   }
 }
 

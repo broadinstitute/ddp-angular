@@ -176,6 +176,13 @@
           </ng-container>
         </div>
 
+        <div *ngIf="displayGlobalError$ | async" class="ErrorMessage ErrorMessage--global">
+          <span translate>SDK.ValidateError</span>
+        </div>
+        <div *ngIf="communicationErrorOccurred" class="ErrorMessage ErrorMessage--global">
+          <span translate>SDK.CommunicationError</span>
+        </div>
+
         <!-- Closing section -->
         <div class="section section--closing">
           <ddp-activity-section
@@ -192,13 +199,6 @@
             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)"
           >
           </ddp-activity-section>
-        </div>
-
-        <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
-          <span translate>SDK.ValidateError</span>
-        </div>
-        <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
-          <span translate>SDK.CommunicationError</span>
         </div>
       </ng-container>
     </div>
