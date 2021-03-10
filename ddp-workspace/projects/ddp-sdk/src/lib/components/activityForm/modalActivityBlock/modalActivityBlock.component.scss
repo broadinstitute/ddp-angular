@@ -69,7 +69,7 @@
 
       & > button {
         height: var(--modal-activity-block-delete-dialog-button-height, 40px);
-        width: var(--modal-activity-block-delete-dialog-button-width, 140px);
+        width: var(--modal-activity-block-delete-dialog-button-width, 9rem);
       }
     }
   }
@@ -117,16 +117,18 @@
       padding: 27px 45px 20px 45px;
     }
 
-    &:after { // arrow
-      content: " ";
-      position: relative;
-      height: 0;
-      right: 50%;
-      bottom: -100%;
-      border-top: 10px solid white;
-      border-right: 10px solid transparent;
-      border-left: 10px solid transparent;
-      border-bottom: none;
+    @media (min-width: 768px) {
+      &:after { // arrow
+        content: " ";
+        position: relative;
+        height: 0;
+        right: 50%;
+        bottom: -100%;
+        border-top: 10px solid white;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-bottom: none;
+      }
     }
   }
 

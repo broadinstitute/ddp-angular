@@ -7,6 +7,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ActivityActivityBlock } from '../../../models/activity/activityActivityBlock';
+import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
 
 @Component({
   selector: 'ddp-modal-activity-block',
@@ -14,7 +15,7 @@ import { ActivityActivityBlock } from '../../../models/activity/activityActivity
   templateUrl: 'modalActivityBlock.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalActivityBlockComponent implements OnInit {
+export class ModalActivityBlockComponent {
   @Input() studyGuid: string;
   @Input() activityGuid: string;
   @Input() block: ActivityActivityBlock;
@@ -34,13 +35,10 @@ export class ModalActivityBlockComponent implements OnInit {
     autoFocus: false,
     scrollStrategy: new NoopScrollStrategy(),
   };
+  private readonly isMobile = window.screen.width <= 768;
 
   constructor(private readonly activityServiceAgent: ActivityServiceAgent,
               private dialog: MatDialog) {}
-
-  public ngOnInit(): void {
-    this.getActivityInstance();
-  }
 
   public deleteActivityInstance(): void {
     this.activityServiceAgent.deleteActivityInstance(
@@ -54,32 +52,38 @@ export class ModalActivityBlockComponent implements OnInit {
   public openEditDialog(instance: ActivityInstance): void {
     this.currentActivityInstance = instance;
     this.getFullActivity();
-    this.dialog.open(this.editModalRef, {
+
+    const width = this.isMobile ? '100vw' : '70vw';
+    this.dialog.open(
+      this.editModalRef, {
       ...this.DEFAULT_DIALOG_SETTINGS,
-      width: '70vw',
+      width,
+      maxWidth: width,
       position: { top: '10vh' },
       panelClass: 'modal-activity-block__edit-dialog',
-    });
-  }
-
-  public closeEditDialog(): void {
-    this.dialog.closeAll();
-    this.getActivityInstance();
+    }).afterClosed()
+      .pipe(take(1))
+      .subscribe(() => this.getActivityInstance());
   }
 
   public openDeleteDialog(instance: ActivityInstance): void {
     this.currentActivityInstance = instance;
+
     const dialogWidth = 396;
     const realDialogWidth = dialogWidth + 20; // because of the arrow
     const dialogHeight = 160;
-    const position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
-    this.dialog.open(this.deleteModalRef, {
+    const config: MatDialogConfig = {
       ...this.DEFAULT_DIALOG_SETTINGS,
-      width: `${realDialogWidth}px`,
-      height: `${dialogHeight}px`,
-      position,
-      panelClass: 'modal-activity-block__delete-dialog'
-    });
+      panelClass: 'modal-activity-block__delete-dialog',
+      height: `${dialogHeight}px`
+    };
+
+    if (!this.isMobile) {
+      config.position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
+      config.width = `${realDialogWidth}px`;
+    }
+
+    this.dialog.open(this.deleteModalRef, config);
   }
 
   private calculateDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
@@ -102,7 +106,7 @@ export class ModalActivityBlockComponent implements OnInit {
   }
 
   private getActivityInstance(): void {
-    this.activityServiceAgent.getActivitySummary(this.studyGuid, this.activityGuid)
+    this.activityServiceAgent.getActivitySummary(this.studyGuid, this.currentActivityInstance.instanceGuid)
       .pipe(take(1))
       .subscribe(activityInstance => {
         // todo simplify it
