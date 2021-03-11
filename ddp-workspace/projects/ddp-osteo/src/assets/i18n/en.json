@@ -534,10 +534,6 @@
         }
     },
     "SDK": {
-        "ModalActivityBlock": {
-          "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
-          "NumQuestionsAnswered": "{{number}} questions answered"
-        },
         "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
@@ -733,6 +729,14 @@
         "TooltipAlt": "Information",
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid"
+        },
+        "ModalActivityBlock": {
+            "NumQuestionsAnswered": "{{number}} questions answered",
+            "EditButton": "Edit",
+            "DeleteButton": "Delete",
+            "SaveButton": "Save",
+            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+            "CancelButton": "Cancel"
         }
     }
 }

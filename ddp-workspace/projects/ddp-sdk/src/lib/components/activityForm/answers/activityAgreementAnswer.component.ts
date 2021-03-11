@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAgreementQuestionBlock';
+import { ActivityAgreementQuestionBlock } from '../../../models/activity/activityAgreementQuestionBlock';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({

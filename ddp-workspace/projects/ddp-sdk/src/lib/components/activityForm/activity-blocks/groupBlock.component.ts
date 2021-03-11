@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerValue } from './../../models/activity/answerValue';
-import { ActivityGroupBlock } from '../../models/activity/activityGroupBlock';
-import { ListStyleHint } from '../../models/activity/listStyleHint';
+import { AnswerValue } from '../../../models/activity/answerValue';
+import { ActivityGroupBlock } from '../../../models/activity/activityGroupBlock';
+import { ListStyleHint } from '../../../models/activity/listStyleHint';
 
 @Component({
     selector: 'ddp-group-block',
@@ -11,7 +11,7 @@ import { ListStyleHint } from '../../models/activity/listStyleHint';
           [innerHTML]="block.title">
     </div>
     <!-- todo arz pass through question blocks -->
-    <!-- todo factor out type lookups like isCOntent() to separate class -->
+    <!-- todo factor out type lookups like isContent() to separate class -->
     <ng-template #blockList>
         <ddp-group-block-list [blocks]="block.nestedBlocks"
                               [readonly]="readonly"

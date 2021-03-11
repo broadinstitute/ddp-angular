@@ -994,6 +994,11 @@
                 "glob": "pepperConfig.js",
                 "input": "projects/ddp-osteo/output-config/",
                 "output": "assets/config"
+              },
+              {
+                "glob": "*.*",
+                "input": "projects/ddp-sdk/src/assets/",
+                "output": "assets/shared"
               }
             ],
             "styles": [
@@ -1078,6 +1083,11 @@
                 "glob": "*.pdf",
                 "input": "projects/ddp-osteo/src/pdf/",
                 "output": "/"
+              },
+              {
+                "glob": "*.*",
+                "input": "projects/ddp-sdk/assets/",
+                "output": "assets/shared"
               }
             ],
             "styles": [

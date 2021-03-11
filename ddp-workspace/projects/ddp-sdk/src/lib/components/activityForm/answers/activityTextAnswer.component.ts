@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange } from '@angular/core';
-import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
-import { InputType } from '../../models/activity/inputType';
-import { TextSuggestion } from '../../models/activity/textSuggestion';
-import { SuggestionMatch } from '../../models/suggestionMatch';
-import { TextSuggestionProvider } from '../../models/activity/textSuggestionProvider';
+import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
+import { InputType } from '../../../models/activity/inputType';
+import { TextSuggestion } from '../../../models/activity/textSuggestion';
+import { SuggestionMatch } from '../../../models/suggestionMatch';
+import { TextSuggestionProvider } from '../../../models/activity/textSuggestionProvider';
 import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 

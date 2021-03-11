@@ -82,15 +82,13 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                  [activityGuid]="activityGuid">
                 </ddp-group-block>
             </div>
-
-            <div *ngIf="isActivity(block)">
-                <ddp-modal-activity-block *ngIf="block.renderHint === 'MODAL'"
-                                          [block]="block"
-                                          [readonly]="readonly"
-                                          [validationRequested]="validationRequested"
-                                          [studyGuid]="studyGuid"
-                                          [activityGuid]="activityGuid">
-                </ddp-modal-activity-block>
+            <div *ngIf="isActivityBlock(block)">
+                <ddp-activity-block [block]="block"
+                                    [readonly]="readonly"
+                                    [validationRequested]="validationRequested"
+                                    [studyGuid]="studyGuid"
+                                    [parentActivityInstanceGuid]="activityGuid">
+                </ddp-activity-block>
             </div>
         </div>`
 })
@@ -143,7 +141,7 @@ export class ActivitySectionComponent {
         return block.blockType === BlockType.Conditional && block.shown;
     }
 
-    public isActivity(block: ActivityBlock): block is ActivityActivityBlock {
-       return block.blockType === BlockType.Activity && block.shown;
+    public isActivityBlock(block: ActivityBlock): block is ActivityActivityBlock {
+        return block.blockType === BlockType.Activity && block.shown;
     }
 }

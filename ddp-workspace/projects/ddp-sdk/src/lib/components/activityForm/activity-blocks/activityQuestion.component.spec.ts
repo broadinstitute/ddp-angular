@@ -1,17 +1,17 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
-import { WindowRef } from '../../services/windowRef';
-import { InputType } from '../../models/activity/inputType';
+import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
+import { WindowRef } from '../../../services/windowRef';
+import { InputType } from '../../../models/activity/inputType';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
-import { ValidationMessage } from '../validationMessage.component';
+import { ValidationMessage } from '../../validationMessage.component';
 import { ActivityQuestionComponent } from './activityQuestion.component';
-import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
 import { getTestScheduler, hot } from 'jasmine-marbles';
 import { By } from '@angular/platform-browser';
-import { ActivityLengthValidationRule } from '../../services/activity/validators/activityLengthValidationRule';
-import { ConfigurationService } from '../../services/configuration.service';
-import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { ActivityLengthValidationRule } from '../../../services/activity/validators/activityLengthValidationRule';
+import { ConfigurationService } from '../../../services/configuration.service';
+import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 
 @Component({
   selector: 'ddp-activity-answer',

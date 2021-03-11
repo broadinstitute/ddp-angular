@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { combineLatest, Observable, of, throwError } from 'rxjs';
+import { mergeMap, catchError, map, switchMap } from 'rxjs/operators';
+
 import { ActivityConverter } from '../activity/activityConverter.service';
 import { UserServiceAgent } from './userServiceAgent.service';
 import { LoggingService } from '../logging.service';
@@ -8,8 +12,6 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { LanguageService } from '../internationalization/languageService.service';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { ActivityInstanceGuid } from '../../models/activityInstanceGuid';
-import { combineLatest, Observable, of, throwError } from 'rxjs';
-import { mergeMap, catchError, map, switchMap } from 'rxjs/operators';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
@@ -67,7 +69,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
                 }
                 return this.converter.convertActivity(x);
             })
-          );
+        );
     }
 
     public getActivitySummary(studyGuid: string, activityGuid: string): Observable<ActivityInstance> {
@@ -76,21 +78,21 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     }
 
     public saveAnswerSubmission(studyGuid: string,
-        activityGuid: string,
-        answerSubmission: AnswerSubmission,
-        throwErrorFlag: boolean): Observable<PatchAnswerResponse> {
-        const payload = { answers: [answerSubmission] };
+                                activityGuid: string,
+                                answerSubmission: AnswerSubmission,
+                                throwErrorFlag: boolean): Observable<PatchAnswerResponse> {
+        const payload = {answers: [answerSubmission]};
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.patchObservable(`${baseUrl}/answers`, payload, {}, throwErrorFlag).pipe(
             map(httpResponse => httpResponse.body));
     }
 
     public saveAnswer(studyGuid: string,
-        activityGuid: string,
-        questionStableId: string,
-        value: AnswerValue,
-        answerId: string | null = null,
-        throwErrorFlag = false): Observable<any> {
+                      activityGuid: string,
+                      questionStableId: string,
+                      value: AnswerValue,
+                      answerId: string | null = null,
+                      throwErrorFlag = false): Observable<any> {
         const data: AnswerSubmission = {
             stableId: questionStableId,
             answerGuid: answerId,
@@ -105,15 +107,20 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         return this.putObservable(`${baseUrl}/answers`, null);
     }
 
-    public createInstance(studyGuid: string, activityCode: string): Observable<ActivityInstanceGuid | null> {
+    public createInstance(studyGuid: string, activityCode: string, parentInstanceGuid?: string): Observable<ActivityInstanceGuid | null> {
         const baseUrl = this.getBaseUrl(studyGuid);
-        return this.postObservable(baseUrl, { activityCode }).pipe(
+        let body: any = {activityCode};
+        if (parentInstanceGuid) {
+            body = {...body, parentInstanceGuid};
+        }
+
+        return this.postObservable(baseUrl, body).pipe(
             map(x => !!x ? x.body as ActivityInstanceGuid : null)
         );
     }
 
     public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
-        const payload = { index };
+        const payload = {index};
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.patchObservable(baseUrl, payload).pipe(
             map(httpResponse => httpResponse));

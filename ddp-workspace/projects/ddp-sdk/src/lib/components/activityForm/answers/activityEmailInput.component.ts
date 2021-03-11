@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { distinctUntilChanged, map, skip, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { InstantErrorStateMatcher } from '../../utility/ui/instantErrorStateMatcher';
+import { InstantErrorStateMatcher } from '../../../utility/ui/instantErrorStateMatcher';
 
 // Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
 // const EMAIL_REGEXP =
