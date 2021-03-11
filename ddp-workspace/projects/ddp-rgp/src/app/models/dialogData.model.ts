@@ -1,6 +1,7 @@
 export interface DialogData {
-    name: string;
-    role: string;
-    imageUrl: string;
-    bio: string;
+  name: string;
+  degree: string;
+  position: string;
+  bio: string;
+  image: string;
 }
