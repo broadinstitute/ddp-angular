@@ -28,8 +28,9 @@ const DEFAULT_DIALOG_SETTINGS = {
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
-    width: `862px`,
-    position: {top: '65px'},
+    width: `100vw`,
+    maxWidth: `100vw`,
+    position: {top: '10vh'},
     panelClass: 'modal-activity-block__edit-dialog',
 };
 
@@ -52,6 +53,7 @@ export class ModalActivityBlockComponent {
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
     public activityForm: ActivityForm;
+    private readonly isMobile = window.screen.width <= 768;
     private readonly LOG_SOURCE = 'ModalActivityBlockComponent';
 
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
@@ -83,7 +85,7 @@ export class ModalActivityBlockComponent {
             take(1)
         ).subscribe((activity: ActivityForm) => {
             this.activityForm = activity;
-            this.openDialog(this.editModalRef, EDIT_DIALOG_CONFIG, this.closeEditDialog.bind(this));
+            this.openDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
         });
     }
 
@@ -130,20 +132,35 @@ export class ModalActivityBlockComponent {
         }
     }
 
+    private getEditDialogConfig(): MatDialogConfig {
+        const widthForMobile = '70vw';
+        const editDialogMobileConfig = {
+            ...EDIT_DIALOG_CONFIG,
+            width: widthForMobile,
+            maxWidth: widthForMobile
+        };
+
+        return this.isMobile ? editDialogMobileConfig : EDIT_DIALOG_CONFIG;
+    }
+
     private getDeleteDialogConfig(): MatDialogConfig {
         const dialogWidth = 396;
         const dialogArrowWidth = 20;
         const realDialogWidth = dialogWidth + dialogArrowWidth;
         const dialogHeight = 160;
-        const position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
 
-        return {
+        const config: MatDialogConfig = {
             ...DEFAULT_DIALOG_SETTINGS,
-            width: `${realDialogWidth}px`,
-            height: `${dialogHeight}px`,
-            position,
-            panelClass: 'modal-activity-block__delete-dialog'
+            panelClass: 'modal-activity-block__delete-dialog',
+            height: `${dialogHeight}px`
         };
+
+        if (!this.isMobile) {
+            config.position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
+            config.width = `${realDialogWidth}px`;
+        }
+
+        return config;
     }
 
     private calculateDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {

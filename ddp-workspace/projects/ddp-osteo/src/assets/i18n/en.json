@@ -534,10 +534,6 @@
         }
     },
     "SDK": {
-        "ModalActivityBlock": {
-          "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
-          "NumQuestionsAnswered": "{{number}} questions answered"
-        },
         "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
@@ -739,7 +735,7 @@
             "EditButton": "Edit",
             "DeleteButton": "Delete",
             "SaveButton": "Save",
-            "ConfirmDeletion": "Are you sure you want to delete this information?",
+            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
             "CancelButton": "Cancel"
         }
     }
