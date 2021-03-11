@@ -14,6 +14,7 @@ export enum Routes {
   ActivityLink = 'activity-link/:id',
   Dashboard = 'dashboard',
   EmailVerifiedCallback = 'email-verified-callback',
+  ThankYou = 'thank-you',
 
   /**
    * Static Content Pages

@@ -1,4 +1,5 @@
 @import 'styles/variables';
+@import 'styles/main.scss';
 
 html,
 body {
@@ -968,6 +969,10 @@ td .mat-input-wrapper {
 
 .PageContent-imageStep {
     border-bottom: 7px solid #E8702A;
+
+    &--no-border {
+        border-bottom: none;
+    }
 }
 
 .Panel {
