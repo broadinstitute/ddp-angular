@@ -183,6 +183,7 @@ import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
+import { ModalActivityBlockComponent } from './components/activityForm/modalActivityBlock/modalActivityBlock.component';
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -343,6 +344,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        ModalActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
@@ -406,6 +408,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        ModalActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,

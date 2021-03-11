@@ -123,6 +123,7 @@ export * from './lib/components/activityForm/questionPrompt.component';
 export * from './lib/components/activityForm/conditionalBlock.component';
 export * from './lib/components/activityForm/groupBlockList.component';
 export * from './lib/components/activityForm/groupBlock.component';
+export * from './lib/components/activityForm/modalActivityBlock/modalActivityBlock.component';
 export * from './lib/components/activityForm/activityContent.component';
 export * from './lib/components/activityForm/activityAgreementAnswer.component';
 export * from './lib/components/activityForm/activityCompositeAnswer.component';
