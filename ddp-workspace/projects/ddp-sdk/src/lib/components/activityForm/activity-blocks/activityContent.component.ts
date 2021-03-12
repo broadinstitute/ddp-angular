@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivityContentBlock } from '../../models/activity/activityContentBlock';
+import { ActivityContentBlock } from '../../../models/activity/activityContentBlock';
 
 @Component({
     selector: 'ddp-activity-content',

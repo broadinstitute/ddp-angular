@@ -66,11 +66,11 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit {
     public details: ActivityPicklistDetails;
     public readonly SELECT_MODE = PicklistSelectMode;
+    public nativeSelectedValue = '';
     /**
      * If an option is marked exclusive, then when it's selected all other options should be de-selected.
      */
     private exclusiveChosen = false;
-    private nativeSelectedValue = '';
 
     constructor(private translate: NGXTranslateService) {
         super(translate);

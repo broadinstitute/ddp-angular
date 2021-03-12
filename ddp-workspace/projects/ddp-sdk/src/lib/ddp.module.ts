@@ -80,24 +80,24 @@ import { WindowRef } from './services/windowRef';
 
 import { ActivityComponent } from './components/activityForm/activity.component';
 import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned.component';
-import { ActivityQuestionComponent } from './components/activityForm/activityQuestion.component';
-import { ActivityBooleanAnswer } from './components/activityForm/activityBooleanAnswer.component';
-import { ActivityAgreementAnswer } from './components/activityForm/activityAgreementAnswer.component';
-import { ActivityTextAnswer } from './components/activityForm/activityTextAnswer.component';
-import { ActivityEmailInput } from './components/activityForm/activityEmailInput.component';
-import { ActivityNumericAnswer } from './components/activityForm/activityNumericAnswer.component';
+import { ActivityQuestionComponent } from './components/activityForm/activity-blocks/activityQuestion.component';
+import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
+import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
+import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
+import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
+import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
-import { ActivityAnswerComponent } from './components/activityForm/activityAnswer.component';
+import { ActivityAnswerComponent } from './components/activityForm/answers/activityAnswer.component';
 import { ActivityPicklistAnswer } from './components/activityForm/picklist/activityPicklistAnswer.component';
 import { DropdownActivityPicklistQuestion } from './components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './components/activityForm/picklist/radiobuttonsActivityPicklistQuestion.component';
-import { ActivityDateAnswer } from './components/activityForm/activityDateAnswer.component';
-import { ActivityCompositeAnswer } from './components/activityForm/activityCompositeAnswer.component';
-import { ActivityContentComponent } from './components/activityForm/activityContent.component';
-import { GroupBlock } from './components/activityForm/groupBlock.component';
-import { GroupBlockList } from './components/activityForm/groupBlockList.component';
-import { EmbeddedActivityBlockComponent } from './components/activityForm/embeddedActivityBlock/embeddedActivityBlock.component';
+import { ActivityDateAnswer } from './components/activityForm/answers/activityDateAnswer.component';
+import { ActivityCompositeAnswer } from './components/activityForm/answers/activityCompositeAnswer.component';
+import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
+import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
+import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
+import { EmbeddedActivityBlockComponent } from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -160,8 +160,8 @@ import { MedicalProvidersServiceAgent } from './services/serviceAgents/medicalPr
 import { WorkflowServiceAgent } from './services/serviceAgents/workflowServiceAgent.service';
 import { UpperCaseInputDirective } from './directives/upperCaseInputDirective.directive';
 import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAutocomplete.directive';
-import { ConditionalBlockComponent } from './components/activityForm/conditionalBlock.component';
-import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
+import { ConditionalBlockComponent } from './components/activityForm/activity-blocks/conditionalBlock.component';
+import { QuestionPromptComponent } from './components/activityForm/answers/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
 import { SubjectPanelComponent } from './components/subjectPanel.component';
@@ -184,7 +184,8 @@ import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
-
+import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
+import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -344,6 +345,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        ModalActivityBlockComponent,
         EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
@@ -378,7 +380,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
-        EmbeddedActivityBlockComponent
+        ActivityBlockComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -409,6 +411,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityContentComponent,
         GroupBlock,
         GroupBlockList,
+        ModalActivityBlockComponent,
         EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
@@ -444,7 +447,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
-        ProgressIndicatorComponent
+        ProgressIndicatorComponent,
+        ActivityBlockComponent
     ]
 })
 export class DdpModule {

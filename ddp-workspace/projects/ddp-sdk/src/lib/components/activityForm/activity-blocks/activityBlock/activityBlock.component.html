@@ -1,0 +1,24 @@
+<div class="activity-block-container">
+    <div *ngIf="block.title" [innerHTML]="block.title"></div>
+
+    <div *ngIf="childInstances?.length" class="cards-block">
+        <ng-container *ngIf="isModal">
+            <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
+                <ddp-modal-activity-block [instance]="instance"
+                                          [readonly]="readonly"
+                                          [validationRequested]="validationRequested"
+                                          [studyGuid]="studyGuid"
+                                          [parentActivityInstanceGuid]="parentActivityInstanceGuid"
+                                          (deleteActivity)="onDeleteChildInstance($event)">
+                </ddp-modal-activity-block>
+            </div>
+        </ng-container>
+    </div>
+
+    <button *ngIf="block.allowMultiple" mat-flat
+            class="add-btn button button_primary"
+            (click)="createChildInstance()">
+        <img src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
+        <span class="text">{{block.addButtonText}}</span>
+    </button>
+</div>

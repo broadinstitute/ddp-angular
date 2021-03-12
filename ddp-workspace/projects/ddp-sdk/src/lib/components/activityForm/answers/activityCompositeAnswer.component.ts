@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
-import { ActivityCompositeQuestionBlock } from '../../models/activity/activityCompositeQuestionBlock';
-import { AnswerValue } from '../../models/activity/answerValue';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlock';
-import { ChildOrientation } from '../../models/activity/childOrientation';
-import { QuestionType } from '../../models/activity/questionType';
-import { ActivityDateQuestionBlock } from '../../models/activity/activityDateQuestionBlock';
-import { DateRenderMode } from '../../models/activity/dateRenderMode';
-import { ConfigurationService } from '../../services/configuration.service';
+import { ActivityCompositeQuestionBlock } from '../../../models/activity/activityCompositeQuestionBlock';
+import { AnswerValue } from '../../../models/activity/answerValue';
+import { BlockVisibility } from '../../../models/activity/blockVisibility';
+import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { ChildOrientation } from '../../../models/activity/childOrientation';
+import { QuestionType } from '../../../models/activity/questionType';
+import { ActivityDateQuestionBlock } from '../../../models/activity/activityDateQuestionBlock';
+import { DateRenderMode } from '../../../models/activity/dateRenderMode';
+import { ConfigurationService } from '../../../services/configuration.service';
 import * as _ from 'underscore';
 
 // todo see if style in here can be moved to shared resource, like external CSS

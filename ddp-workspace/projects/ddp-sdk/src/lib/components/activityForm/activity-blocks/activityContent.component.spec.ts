@@ -1,7 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivityContentBlock } from '../../models/activity/activityContentBlock';
+import { ActivityContentBlock } from '../../../models/activity/activityContentBlock';
 import { ActivityContentComponent } from './activityContent.component';
 
 describe('ActivityContentComponent', () => {

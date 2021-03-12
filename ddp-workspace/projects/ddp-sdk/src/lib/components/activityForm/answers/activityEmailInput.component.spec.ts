@@ -5,9 +5,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionPromptComponent } from './questionPrompt.component';
-import { TooltipComponent } from '../tooltip.component';
-import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
-import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
+import { TooltipComponent } from '../../tooltip.component';
+import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
+import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { ActivityEmailInput } from './activityEmailInput.component';
 import { MatInputModule } from '@angular/material/input';
 

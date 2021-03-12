@@ -543,6 +543,8 @@
         "PreviousButton": "Back",
         "SavingButton": "Saving",
         "EditButton": "View/Edit",
+        "SaveButton": "Save",
+        "DeleteButton": "Delete",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
         "NotAgreeButton": "I am not ready to agree",
@@ -727,6 +729,14 @@
         "TooltipAlt": "Information",
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid"
+        },
+        "ModalActivityBlock": {
+            "NumQuestionsAnswered": "{{number}} questions answered",
+            "EditButton": "Edit",
+            "DeleteButton": "Delete",
+            "SaveButton": "Save",
+            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+            "CancelButton": "Cancel"
         }
     }
 }
