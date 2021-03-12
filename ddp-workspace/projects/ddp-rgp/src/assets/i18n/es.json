@@ -323,7 +323,7 @@
                             "name": "[es]Samantha Baxter",
                             "degree": "[es]MS, CGC",
                             "position": "[es]Associate Director, Genetic and Genomic Data Sharing",
-                            "bio": "[es]Sam is a licensed, board-certified genetic counselor and associate director of genetic and genomic data sharing in the Translational Genomics Group at the Broad Institute. This role includes managing the operations for gnomAD, overseeing all of the data sharing activities for the Broad’s Center for Mendelian Genomics, and leading a team of variant curators.  As part of her ongoing research, she uses various curation processes to estimate the prevalence of rare disease in the global population.",
+                            "bio": "[es]Sam is a licensed, board-certified genetic counselor and associate director of genetic and genomic data sharing in the Translational Genomics Group at the Broad Institute. This role includes managing the operations for <a href=\"https://gnomad.broadinstitute.org/\" class=\"Link\" target=\"_blank\">gnomAD</a>, overseeing all of the data sharing activities for the <a href=\"https://cmg.broadinstitute.org/\" class=\"Link\" target=\"_blank\">Broad’s Center for Mendelian Genomics</a>, and leading a team of variant curators.  As part of her ongoing research, she uses various curation processes to estimate the prevalence of rare disease in the global population.",
                             "image": "samantha-baxter.jpg"
                         },
                         {
