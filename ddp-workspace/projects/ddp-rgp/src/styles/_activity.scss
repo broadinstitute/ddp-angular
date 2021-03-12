@@ -162,6 +162,8 @@
 }
 
 .BlueHeading {
+  margin-bottom: 20px;
+
   .Accent {
     font-weight: 600 !important;
   }
@@ -185,16 +187,22 @@
   font-weight: 500;
   line-height: 1.5rem;
 
+  & > span > span:empty {
+    display: block;
+    margin-top: -30px;
+  }
+
   .Italic {
     font-size: 1rem;
   }
 }
 
 .ddp-helper {
-  margin: -16px 0 0 0;
+  display: none;
+}
 
-  font-size: 0.9rem;
-  opacity: 0.9;
+.ddp-textarea {
+  min-height: 48px;
 }
 
 .mat-select-trigger {
@@ -211,7 +219,7 @@
 }
 
 ddp-activity-dropdown-picklist-question select {
-  margin-bottom: 10px;
+  margin-bottom: 1.25em;
   padding: 0.4375em 0;
 
   border: none;
@@ -225,10 +233,7 @@ ddp-activity-dropdown-picklist-question select {
 .ddp-radio-group-column {
   & > div {
     margin: 0 !important;
-
-    &:not(:last-child) {
-      margin-bottom: 10px !important;
-    }
+    margin-bottom: 10px !important;
 
     &:last-child * {
       margin-bottom: 0 !important;
@@ -288,22 +293,25 @@ ddp-activity-dropdown-picklist-question select {
     }
 
     .mat-form-field {
-      margin-top: 5px;
-    }
-
-    .ddp-helper {
-      margin-bottom: 15px;
+      margin-bottom: 6px;
     }
   }
 }
 
+.picklist-answer-microarray_family,
+.picklist-answer-exome_family,
+.picklist-answer-genome_family {
+  display: block;
+  margin-top: -36px;
+}
+
 .ErrorMessage {
-  margin-top: 10px;
+  margin-bottom: 16px;
 
   color: $color-red;
   font-size: 0.9rem;
   font-weight: 400;
-  
+
   &--global {
     margin-top: 25px;
     padding-top: 25px;
