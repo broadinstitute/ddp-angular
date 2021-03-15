@@ -50,6 +50,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     public model: ActivityForm;
     public validationRequested = false;
     public isLoaded = false;
+    public isLoaded$ = new Subject<void>();
     public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
@@ -107,6 +108,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
                 }
+                this.isLoaded$.next();
 
                 // combine the latest status updates from the form model
                 // and from the embedded components into one observable

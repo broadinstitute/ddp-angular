@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
+import { A11yModule } from '@angular/cdk/a11y';
 
 // ngx-translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -79,7 +80,7 @@ import { AnnouncementsServiceAgent } from './services/serviceAgents/announcement
 import { WindowRef } from './services/windowRef';
 
 import { ActivityComponent } from './components/activityForm/activity.component';
-import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned.component';
+import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned/activity-redesigned.component';
 import { ActivityQuestionComponent } from './components/activityForm/activity-blocks/activityQuestion.component';
 import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
@@ -246,7 +247,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
                 deps: [SessionMementoService]
             }
         }),
-        RouterModule
+        RouterModule,
+        A11yModule
     ],
     providers: [
         AuthGuard,
