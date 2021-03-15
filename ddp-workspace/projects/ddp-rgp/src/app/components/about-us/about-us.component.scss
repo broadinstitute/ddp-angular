@@ -1,92 +1,151 @@
+.FullWidth {
+  margin-top: 58px;
+
+  @media (max-width: 554px) {
+    margin-top: 77px;
+  }
+}
+
+.Background--blue.alt {
+  padding: 0;
+  position: absolute;
+  z-index: 2;
+  width: auto;
+  text-align: center;
+  margin-top: -100px;
+  right: 0;
+  margin-right: 100px;
+
+  @media only screen and (max-width: 1200px) and (min-width: 1025px) {
+    margin-right: 50px;
+    margin-top: -70px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-right: 35px;
+    margin-top: -70px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    position: static;
+
+    margin: 0;
+    margin-top: -1px;
+  }
+
+  .PageHeader-title {
+    margin: 45px 0;
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      margin: 35px 0;
+
+      font-size: 26px;
+    }
+
+    @media only screen and (max-width: 767px) {
+      margin: 35px 0;
+      padding: 0;
+
+      font-size: 20px;
+    }
+  }
+}
+
+
+
 .AboutUs-imageContainer {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .AboutUs-image {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
-    top: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @media only screen and (min-width: 1921px) {
-    .AboutUs-imageContainer {
-        padding: 50% 0 0 0;
-        /* xl 50% = 100 / (w / h) = 100 / (3000 / 1490) */
-    }
+  .AboutUs-imageContainer {
+    padding: 50% 0 0 0;
+    /* xl 50% = 100 / (w / h) = 100 / (3000 / 1490) */
+  }
 
-    .AboutUs-image {
-        background-image: url(/assets/images/about-us-image-xl.jpg);
-        width: 3000px;
-        height: 1490px;
-    }
+  .AboutUs-image {
+    background-image: url(/assets/images/about-us-image-xl.jpg);
+    width: 3000px;
+    height: 1490px;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1920px) {
-    .AboutUs-imageContainer {
-        padding: 43% 0 0 0;
-        /* lg 43% = 100 / (w / h) = 100 / (1920 / 820) */
-    }
+  .AboutUs-imageContainer {
+    padding: 43% 0 0 0;
+    /* lg 43% = 100 / (w / h) = 100 / (1920 / 820) */
+  }
 
-    .AboutUs-image {
-        background-image: url(/assets/images/about-us-image-lg.jpg);
-        width: 1920px;
-        height: 820px;
-    }
+  .AboutUs-image {
+    background-image: url(/assets/images/about-us-image-lg.jpg);
+    width: 1920px;
+    height: 820px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .AboutUs-imageContainer {
-        padding: 43% 0 0 0;
-        /* md 43% = 100 / (w / h) = 100 / (1024 / 438) */
-    }
+  .AboutUs-imageContainer {
+    padding: 43% 0 0 0;
+    /* md 43% = 100 / (w / h) = 100 / (1024 / 438) */
+  }
 
-    .AboutUs-image {
-        background-image: url(/assets/images/about-us-image-md.jpg);
-        width: 1024px;
-        height: 438px;
-    }
+  .AboutUs-image {
+    background-image: url(/assets/images/about-us-image-md.jpg);
+    width: 1024px;
+    height: 438px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-    .AboutUs-imageContainer {
-        padding: 50% 0 0 0;
-        /* sm 50% = 100 / (w / h) = 100 / (767 / 381) */
-    }
+  .AboutUs-imageContainer {
+    padding: 50% 0 0 0;
+    /* sm 50% = 100 / (w / h) = 100 / (767 / 381) */
+  }
 
-    .AboutUs-image {
-        background-image: url(/assets/images/about-us-image-sm.jpg);
-        width: 767px;
-        height: 381px;
-    }
+  .AboutUs-image {
+    background-image: url(/assets/images/about-us-image-sm.jpg);
+    width: 767px;
+    height: 381px;
+  }
 }
 
 .TeamMember {
-    list-style: none;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+  list-style: none;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .TeamMember-name {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .TeamMember-role {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #717174;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #717174;
 }
 
 .TeamMember:hover .TeamMember-name,
 .TeamMember:hover .TeamMember-role {
-    color: #0EA7B5 !important;
+  color: #0ea7b5 !important;
+}
+
+.mt-40 {
+  margin-top: 40px;
 }
