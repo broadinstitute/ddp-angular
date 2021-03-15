@@ -7,19 +7,19 @@ import {
   ConfigurationService,
   WorkflowServiceAgent,
   GovernedParticipantsServiceAgent,
-  LoggingService
+  LoggingService,
 } from 'ddp-sdk';
 
 import {
   WorkflowBuilderService,
   ToolkitConfigurationService,
-  LoginLandingComponent
+  LoginLandingComponent,
 } from 'toolkit';
 
 @Component({
   selector: 'app-auth0-landing',
   templateUrl: './auth0-landing.component.html',
-  styleUrls: ['./auth0-landing.component.scss']
+  styleUrls: ['./auth0-landing.component.scss'],
 })
 export class Auth0LandingComponent extends LoginLandingComponent {
   constructor(
@@ -31,7 +31,24 @@ export class Auth0LandingComponent extends LoginLandingComponent {
     workflowService: WorkflowServiceAgent,
     workflowBuilder: WorkflowBuilderService,
     @Inject('ddp.config') config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(router, logger, auth0, sessionService, participantService, workflowService, workflowBuilder, config, toolkitConfiguration);
+    @Inject('toolkit.toolkitConfig')
+    toolkitConfiguration: ToolkitConfigurationService,
+  ) {
+    super(
+      router,
+      logger,
+      auth0,
+      sessionService,
+      participantService,
+      workflowService,
+      workflowBuilder,
+      config,
+      toolkitConfiguration,
+    );
+  }
+
+  protected handleAuthError(error: any | null): void {
+    console.log('Error!');
+    console.log(error);
   }
 }

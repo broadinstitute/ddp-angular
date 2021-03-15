@@ -28,11 +28,13 @@ import {
 
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { Auth0CodeCallbackComponent } from './components/auth0-code-callback/auth0-code-callback.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
 import { DataSharingComponent } from './components/data-sharing/data-sharing.component';
 import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
+import { EmailVerificationRequiredComponent } from './components/email-verification-required/email-verification-required.component';
 import { EmailVerifiedCallbackComponent } from './components/email-verified-callback/email-verified-callback.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -148,6 +150,8 @@ export function translateFactory(
     EmailVerifiedCallbackComponent,
     WorkflowStartActivityComponent,
     ThankYouComponent,
+    Auth0CodeCallbackComponent,
+    EmailVerificationRequiredComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent
