@@ -16,6 +16,7 @@ import {
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="(activityInstance$ | async)?.instanceGuid"
                                  [agreeConsent]="config.agreeConsent"
+                                 [activitiesWithVerticalProgress]="config.usesVerticalStepper"
                                  (submit)="raiseSubmit($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">

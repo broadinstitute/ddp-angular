@@ -11,6 +11,7 @@ import { HeaderConfigurationService } from '../../services/headerConfiguration.s
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="id"
                                  [agreeConsent]="config.agreeConsent"
+                                 [activitiesWithVerticalProgress]="config.usesVerticalStepper"
                                  (submit)="navigate($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">

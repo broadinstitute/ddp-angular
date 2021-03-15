@@ -18,6 +18,7 @@ import {
                                [studyGuid]="studyGuid"
                                [activityGuid]="instanceGuid"
                                [agreeConsent]="_toolkitConfiguration.agreeConsent"
+                               [activitiesWithVerticalProgress]="_toolkitConfiguration.usesVerticalStepper"
                                (submit)="navigate($event)"
                                (stickySubtitle)="showStickySubtitle($event)"
                                (activityCode)="activityCodeChanged($event)"
