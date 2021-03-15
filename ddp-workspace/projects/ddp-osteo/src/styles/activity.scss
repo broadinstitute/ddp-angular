@@ -80,6 +80,7 @@
 
     .article-content {
         display: flex;
+        max-width: 1500px;
     }
 }
 
@@ -110,6 +111,10 @@
             + .content {
                 margin-left: 0;
             }
+        }
+
+        @media only screen and (min-width: 1500px) {
+            margin: 10px 10vw;
         }
 
         .activity-steps__divider {
