@@ -10,9 +10,9 @@ import {
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityForm } from '../../../../models/activity/activityForm';
-import {EMPTY, of} from 'rxjs';
-import {catchError, take} from 'rxjs/operators';
-import {LoggingService} from "../../../../services/logging.service";
+import { EMPTY, of } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
+import { LoggingService } from '../../../../services/logging.service';
 
 @Component({
   selector: 'ddp-embedded-activity-block',
