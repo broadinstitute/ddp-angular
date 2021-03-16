@@ -29,6 +29,7 @@ import {
 import { AboutUsDialogComponent } from './components/about-us/dialog/about-us-dialog.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { Auth0CodeCallbackComponent } from './components/auth0-code-callback/auth0-code-callback.component';
+import { ActivityComponent } from './components/activity/activity.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
 import { CraniofacialComponent } from './components/craniofacial/craniofacial.component';
@@ -50,6 +51,7 @@ import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
+import { SurveyComponent } from './components/survey/survey.component';
 import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-us-your-story.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
@@ -152,6 +154,8 @@ export function translateFactory(
     ThankYouComponent,
     Auth0CodeCallbackComponent,
     EmailVerificationRequiredComponent,
+    ActivityComponent,
+    SurveyComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent

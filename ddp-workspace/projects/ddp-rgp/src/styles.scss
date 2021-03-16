@@ -123,6 +123,12 @@ a:focus {
     }
 }
 
+@media (max-width: 768px) {
+    .section:nth-of-type(3) .content_tight {
+        padding: 50px 15px 75px 15px;
+    }
+}
+
 .Wrapper,
 .Wrapper--homeBottom {
     padding-bottom: 190px;
@@ -1057,7 +1063,6 @@ h3.Panel-title {
 }
 
 .activity-buttons {
-    overflow: hidden;
     padding-bottom: 15px;
 
     .button.previous_button,
@@ -1097,10 +1102,6 @@ h3.Panel-title {
     }
 }
 
-.ddp-activity-question {
-    padding-bottom: 10px;
-}
-
 .Question--text .ddp-activity-validation {
     margin-top: -15px;
 }
@@ -1134,16 +1135,6 @@ h3.Panel-title {
 
     .ddp-dropdown {
         min-height: 48px;
-    }
-}
-
-.ddp-activity-validation {
-    .ErrorMessage {
-        font-size: 0.9rem;
-        color: #f44336;
-        font-weight: 300;
-        margin: 0 0 10px 0;
-        padding: 0;
     }
 }
 
