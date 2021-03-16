@@ -53,58 +53,57 @@
             <ng-container *ngIf="isStepped && showStepper">
                 <ng-container *ngIf="!isVerticalProgress; then horizontalProgressIndicator">
                 </ng-container>
+            </ng-container>
 
-                <ng-container *ngIf="model">
+            <ng-container *ngIf="model">
+                <ddp-activity-section
+                    [section]="currentSection"
+                    [readonly]="isReadonly() || dataEntryDisabled"
+                    [validationRequested]="validationRequested"
+                    [studyGuid]="studyGuid"
+                    [activityGuid]="activityGuid"
+                    (visibilityChanged)="updateVisibility($event)"
+                    (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
+                    (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                </ddp-activity-section>
+
+                <!-- closing section -->
+                <ng-container *ngIf="model.closing">
                     <ddp-activity-section
-                        [section]="currentSection"
+                        [section]="model.closing"
                         [readonly]="isReadonly() || dataEntryDisabled"
                         [validationRequested]="validationRequested"
                         [studyGuid]="studyGuid"
                         [activityGuid]="activityGuid"
                         (visibilityChanged)="updateVisibility($event)"
-                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                        (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
+                        (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                     </ddp-activity-section>
-
-                    <!-- closing section -->
-                    <ng-container *ngIf="model.closing">
-                        <ddp-activity-section
-                            [section]="model.closing"
-                            [readonly]="isReadonly() || dataEntryDisabled"
-                            [validationRequested]="validationRequested"
-                            [studyGuid]="studyGuid"
-                            [activityGuid]="activityGuid"
-                            (visibilityChanged)="updateVisibility($event)"
-                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                            (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
-                        </ddp-activity-section>
-                    </ng-container>
-
-                    <ng-container *ngIf="shouldShowReadonlyHint">
-                        <div class="infobox" [innerHTML]="model.readonlyHint"></div>
-                    </ng-container>
-
-                    <ng-container *ngIf="model.lastUpdatedText">
-                        <span class="last-updated">{{model.lastUpdatedText}} </span>
-                    </ng-container>
-
-                    <div class="activity-buttons"
-                         [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
-                        <ng-container *ngIf="isLoaded && isStepped; then navigationButtons"></ng-container>
-                        <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded; then lastStepButtons"></ng-container>
-                        <ng-container
-                            *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly(); then agreementButtons">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
-                        <span translate>SDK.ValidateError</span>
-                    </div>
-                    <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
-                        <span translate>SDK.CommunicationError</span>
-                    </div>
                 </ng-container>
 
+                <ng-container *ngIf="shouldShowReadonlyHint">
+                    <div class="infobox" [innerHTML]="model.readonlyHint"></div>
+                </ng-container>
+
+                <ng-container *ngIf="model.lastUpdatedText">
+                    <span class="last-updated">{{model.lastUpdatedText}} </span>
+                </ng-container>
+
+                <div class="activity-buttons"
+                     [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
+                    <ng-container *ngIf="isLoaded && isStepped; then navigationButtons"></ng-container>
+                    <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded; then lastStepButtons"></ng-container>
+                    <ng-container
+                        *ngIf="(!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly(); then agreementButtons">
+                    </ng-container>
+                </div>
+
+                <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
+                    <span translate>SDK.ValidateError</span>
+                </div>
+                <div *ngIf="communicationErrorOccurred" class="ErrorMessage">
+                    <span translate>SDK.CommunicationError</span>
+                </div>
             </ng-container>
         </div>
     </section>
