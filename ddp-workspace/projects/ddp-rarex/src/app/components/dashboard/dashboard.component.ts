@@ -23,7 +23,7 @@ interface Announcement {
 }
 
 @Component({
-  selector: 'rarex-dashboard',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -46,7 +46,7 @@ export class RarexDashboardComponent implements OnInit {
     private activityService: ActivityServiceAgent,
     private currentActivityService: CurrentActivityService,
     private userActivityServiceAgent: UserActivityServiceAgent,
-    @Inject('ddp.config') private config: ConfigurationService
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
@@ -85,9 +85,9 @@ export class RarexDashboardComponent implements OnInit {
     this.router.navigateByUrl(RoutePaths.Survey);
   }
 
-  onEditClick(activity: ActivityInstance): void {
+  onEditClick(activityToEdit: ActivityInstance): void {
     this.activityService
-      .createInstance(this.config.studyGuid, activity.activityCode)
+      .createInstance(this.config.studyGuid, activityToEdit.activityCode)
       .pipe(take(1))
       .subscribe(activity => {
         this.currentActivityService.activity$.next({
@@ -120,7 +120,7 @@ export class RarexDashboardComponent implements OnInit {
         take(1),
         tap(() => {
           this.isLoading = false;
-        })
+        }),
       )
       .subscribe(activities => {
         this.activities = activities;
@@ -137,9 +137,9 @@ export class RarexDashboardComponent implements OnInit {
             (m: AnnouncementMessage): Announcement => ({
               instance: m,
               shown: true,
-            })
-          )
-        )
+            }),
+          ),
+        ),
       )
       .subscribe(announcements => {
         this.announcements = announcements;

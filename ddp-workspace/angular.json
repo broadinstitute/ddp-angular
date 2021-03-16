@@ -1138,16 +1138,11 @@
             "main": "projects/ddp-rarex/src/main.ts",
             "polyfills": "projects/ddp-rarex/src/polyfills.ts",
             "tsConfig": "projects/ddp-rarex/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ddp-rarex/src/favicon.ico",
               "projects/ddp-rarex/src/favicon-alert.ico",
               "projects/ddp-rarex/src/assets",
-              {
-                "glob": "*.pdf",
-                "input": "projects/ddp-rarex/src/pdf/",
-                "output": "/"
-              },
               {
                 "glob": "pepperConfig.js",
                 "input": "projects/ddp-rarex/output-config/",
@@ -1158,8 +1153,9 @@
               "projects/ddp-rarex/src/theme.scss",
               "projects/ddp-rarex/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -1174,14 +1170,13 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "5mb",
                   "maximumError": "5mb"
                 }
               ]

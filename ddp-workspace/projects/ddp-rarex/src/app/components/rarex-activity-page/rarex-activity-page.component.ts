@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
@@ -20,7 +26,7 @@ import { RoutePaths } from '../../router-resources';
 @Component({
   selector: 'app-rarex-activity-page',
   templateUrl: './rarex-activity-page.component.html',
-  styleUrls: ['./rarex-activity-page.component.scss']
+  styleUrls: ['./rarex-activity-page.component.scss'],
 })
 export class RarexActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
@@ -41,7 +47,8 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
     private readonly _userActivites: UserActivityServiceAgent,
     private readonly _logger: LoggingService,
     private readonly _workflowBuilder: WorkflowBuilderService,
-    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
+    @Inject('toolkit.toolkitConfig')
+    private _toolkitConfiguration: ToolkitConfigurationService,
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +86,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
       .execute();
   }
 
-  onChangeActivity(activity: ActivityInstance) {
+  onChangeActivity(activity: ActivityInstance): void {
     this.instanceGuid = activity.instanceGuid;
     this.resetActivityComponent();
   }
@@ -96,12 +103,13 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
         this.activities = activities;
 
         const demographicsActivity = activities.find(
-          activity => activity.activityCode === ActivityCodes.DEMOGRAPHICS
+          activity => activity.activityCode === ActivityCodes.DEMOGRAPHICS,
         );
 
-        this.isWorkflowProgressShown =
-          demographicsActivity ? demographicsActivity.statusCode === ActivityStatusCodes.COMPLETE : false;
-      })
+        this.isWorkflowProgressShown = demographicsActivity
+          ? demographicsActivity.statusCode === ActivityStatusCodes.COMPLETE
+          : false;
+      }),
     );
   }
 
