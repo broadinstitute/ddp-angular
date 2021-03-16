@@ -979,6 +979,10 @@
         "Header": "Email verified",
         "Text": "Please wait. You will be redirected to a login page soon..."
     },
+    "EmailVerificationRequiredPage": {
+        "Header": "Email verification required",
+        "Text": "Please verify your email using a link which was sent to your email address."
+    },
     "ThankYouPage": {
         "Title": "Thank you for your interest in joining the Rare Genomes Project",
         "Paragraph1": "Unfortunately, your responses to our pre-screening questionnaire do not match the <a href=\"eligibility-criteria\" class=\"Link\">current requirements for participation</a> in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:",
