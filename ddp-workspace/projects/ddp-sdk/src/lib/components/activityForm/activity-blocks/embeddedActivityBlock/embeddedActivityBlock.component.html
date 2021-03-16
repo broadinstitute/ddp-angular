@@ -1,0 +1,16 @@
+<ng-container *ngIf="!activity; else section">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<ng-template #section>
+  <ddp-activity-section [section]="activity.sections[0]"
+                        [studyGuid]="studyGuid"
+                        [activityGuid]="instance.instanceGuid"
+                        [readonly]="readonly"
+                        [validationRequested]="validationRequested">
+  </ddp-activity-section>
+
+  <button mat-button
+          *ngIf="singleSection">
+  </button>
+</ng-template>
