@@ -30,7 +30,6 @@ import { LoggingService } from '../../services/logging.service';
           }"
         >
             <ng-container *ngIf="isLoaded && model">
-                SS 1
                 <section class="section">
                     <ddp-subject-panel></ddp-subject-panel>
                     <ddp-admin-action-panel
