@@ -2,7 +2,7 @@
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
     <div *ngIf="childInstances?.length" class="cards-block">
-        <ng-container *ngIf="isModal">
+        <ng-container *ngIf="isModal; else embedded">
             <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
                 <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
@@ -13,6 +13,16 @@
                 </ddp-modal-activity-block>
             </div>
         </ng-container>
+        <ng-template #embedded>
+          <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
+            <ddp-embedded-activity-block [instance]="instance"
+                                         [readonly]="readonly"
+                                         [validationRequested]="validationRequested"
+                                         [studyGuid]="studyGuid"
+                                         (componentBusy)="embeddedComponentBusy.emit($event)">
+            </ddp-embedded-activity-block>
+          </div>
+        </ng-template>
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat
