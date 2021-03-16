@@ -24,6 +24,9 @@ export class ConfigurationService {
     doLocalRegistration: boolean;
     // Google maps API key: https://developers.google.com/places/web-service/get-api-key
     mapsApiKey: string;
+    errorReportingApiKey: string;
+    // projectId of your project in GCP
+    projectGcpId: string;
     projectGAToken: string;
     studyGuid: string;
     // country code if limiting app to just one country
@@ -41,7 +44,7 @@ export class ConfigurationService {
     dashboardSummaryInsteadOfStatus: string[] = [];
     // if activity added here, for this activity will be shown another button
     dashboardReportActivities: string[] = [];
-    tooltipIconUrl: string = '';
+    tooltipIconUrl = '';
     // must be a 24x24 svg icon.  To make sure colors match, do not specify a stroke color
     languageSelectorIconURL: string | null = null;
     // urls for app pages
@@ -50,10 +53,16 @@ export class ConfigurationService {
     adminSessionExpiredUrl = 'admin-session-expired';
     errorPageUrl = 'error';
     dashboardPageUrl = 'dashboard';
+    passwordPageUrl = 'password';
     // if questions inside of composite questions shouldn't show asterisk at the end, add question type here
     compositeRequiredFieldExceptions: QuestionType[] = [];
+    // whether address validation enforces that required fields need to be entered (as opposed to just accepting EasyPost validation)
+    addressEnforceRequiredFields = false;
     // this property reflects offset from the top of the page when we scroll to invalid question
     scrollToErrorOffset = 100;
     defaultLanguageCode: string;
     rtlLanguages: string[] = [];
+    // The flag indicates whether we need report JS errors to Google Cloud Error Report API
+    // It set (and can be overridden for any single app) in pepperConfig
+    doGcpErrorReporting: boolean;
 }

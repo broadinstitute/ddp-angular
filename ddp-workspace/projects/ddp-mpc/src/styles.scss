@@ -7,7 +7,7 @@ body {
     padding: 0;
     height: 100%;
     font-size: 16px;
-    padding-right: 0px !important;
+    padding-right: 0 !important;
     background-color: mat-color($app-theme, 200);
 }
 
@@ -177,7 +177,7 @@ a:focus {
 }
 
 .Header-nav {
-    margin: 0px 50px 0 0;
+    margin: 0 50px 0 0;
 }
 
 .Header-nav--small {
@@ -186,7 +186,7 @@ a:focus {
 
 .Header-navList {
     display: flex;
-    margin: 0px;
+    margin: 0;
 }
 
 .Header-navList--small {
@@ -786,8 +786,15 @@ a:focus {
     }
 
     .PageHeader-subTitle {
-        font-size: 1rem;
-        line-height: 1.3rem;
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .PageHeader-subTitle {
+        font-size: 0.8rem;
+        line-height: 1rem;
     }
 }
 
@@ -907,7 +914,7 @@ a:focus {
 
 .ButtonFilled--neutral {
     background-color: mat-color($app-theme, 300) !important;
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .ButtonFilled--neutral--margin {
@@ -1656,7 +1663,7 @@ select:-webkit-autofill {
 
 .ddp-agreement-text {
     white-space: normal;
-    margin: 0px;
+    margin: 0;
     font-size: 1rem;
     font-weight: 300;
     color: mat-color($app-theme, 800);
@@ -1737,7 +1744,7 @@ select:-webkit-autofill {
     color: mat-color($app-theme, 800);
 }
 
-.ddp-li-gray {
+.ddp-li-bullet {
     color: mat-color($app-theme, 800) !important;
 }
 
@@ -1901,7 +1908,7 @@ select:-webkit-autofill {
     box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
     margin: 4px;
     background-color: mat-color($app-theme, 100);
-    padding: 0px 0px 0px 0px !important;
+    padding: 0 !important;
 }
 
 .mat-checkbox-label {
@@ -1966,7 +1973,7 @@ select:-webkit-autofill {
 }
 
 .mat-list-item-content {
-    padding: 0px 4px !important;
+    padding: 0 4px !important;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {

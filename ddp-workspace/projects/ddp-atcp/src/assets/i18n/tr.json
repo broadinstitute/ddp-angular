@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "Veri Platformuna kaydolun",
-          "Text": "\\\"Bize Katılın\\\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
+          "Text": "\"Bize Katılın\" kısmına tıklayıp adınız ve e-posta adresinizle bir hesap oluşturun. Hesabınızı oluşturduktan sonra kendinizi (A-T durumunuz varsa) veya A-T'li çocuğunuzu/çocuklarınızı kısa bir form doldurarak Veri Platformumuzda katılımcılar olarak kaydedebileceksiniz."
         },
         {
           "Name": "Bize izin verin",
@@ -65,69 +65,108 @@
     "Doctors": [
       {
         "Hospital": "Tıbbi Genetik Emeritus Profesörü – Cambridge Üniversitesi, Cambridge, Birleşik Krallık ve Onursal Öğretim Üyesi, Wellcome Trust Sanger Enstitüsü, Hinxton, Birleşik Krallık",
-        "Name": "Martin Bobrow",
-        "Rank": "Dr."
+        "Name": "Dr. Martin Bobrow",
+        "Rank": ""
       },
       {
         "Hospital": "Tıbbi Genetik Profesörü, Sapienza Üniversitesi, Roma, İtalya",
-        "Name": "Luciana Chessa"
+        "Name": "Dr. Luciana Chessa",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatri Tıbbi Müdürü, Wesley Hastanesi, Queensland, Avustralya"
+        "Hospital": "Pediatri Tıbbi Müdürü, Wesley Hastanesi, Queensland, Avustralya",
+        "Name": "Dr. David Coman",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatri ve Nöroloji Doçenti, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD."
+        "Hospital": "Pediatri ve Nöroloji Doçenti, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD.",
+        "Name": "Dr. Thomas Crawford",
+        "Rank": ""
       },
       {
-        "Hospital": "Müdür, Google Genomics, Mountain View, CA, ABD"
+        "Hospital": "Müdür, Google Genomics, Mountain View, CA, ABD",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatrik ve Gelişimsel Biyoloji, Tokyo Tıp ve Diş Hekimliği Üniversitesi, Japonya"
+        "Hospital": "Pediatrik ve Gelişimsel Biyoloji, Tokyo Tıp ve Diş Hekimliği Üniversitesi, Japonya",
+        "Name": "Dr. Setsuko Hasegawa",
+        "Rank": ""
       },
       {
-        "Hospital": "Doçent, Queensland Üniversitesi, Queensland, Avustralya"
+        "Hospital": "Doçent, Queensland Üniversitesi, Queensland, Avustralya",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Moleküler Onkoloji Kurucu Profesörü, Queensland Üniversitesi, Brisbane, Avustralya"
+        "Hospital": "Moleküler Onkoloji Kurucu Profesörü, Queensland Üniversitesi, Brisbane, Avustralya",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Pediatrik İmmunohematoloji, Primer İmmünyetmezlikler için Fransız Referans Merkezi Koordinatörü, Necker Hastanesi, Paris, Fransa"
+        "Hospital": "Pediatri Profesörü, Johns Hopkins Çocuk Merkezi, Baltimore, MD, ABD",
+        "Name": "Dr. Howard Lederman",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Pediatrik Nörolog, Sheba Tıp Merkezi, Ramat Gan, İsrail"
+        "Hospital": "Pediatrik İmmunohematoloji, Primer İmmünyetmezlikler için Fransız Referans Merkezi Koordinatörü, Necker Hastanesi, Paris, Fransa",
+        "Name": "Dr. Nizar Mahlaoui",
+        "Rank": "MSc, MPH"
       },
       {
-        "Hospital": "Baş Veri Görevlisi, Broad Enstitüsü, Cambridge, MA, ABD"
+        "Hospital": "Pediatrik Nörolog, Sheba Tıp Merkezi, Ramat Gan, İsrail",
+        "Name": "Dr. Andreea Nissenkorn",
+        "Rank": ""
       },
       {
-        "Hospital": "Ulusal Nadir Hastalıklar Merkezi, Roma, İtalya"
+        "Hospital": "Baş Veri Görevlisi, Broad Enstitüsü, Cambridge, MA, ABD",
+        "Name": "Dr. Anthony Philippakis",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Bilim Koordinatörü, A-T Çocuk Projesi, Coconut Creek, FL, ABD"
+        "Hospital": "Ulusal Nadir Hastalıklar Merkezi, Roma, İtalya",
+        "Name": "Dr. Agata Polizzi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "İnsan Genetiği Profesörü, Tel Aviv University, Ramat Aviv, İsrail"
+        "Hospital": "İnsan Genetiği Profesörü, Tel Aviv University, Ramat Aviv, İsrail",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Genetik Profesörü, Paris Descartes Üniversitesi ve Genetik Bölümü Başkanı, Curie Enstitüsü, Paris, Fransa"
+        "Hospital": "Genetik Profesörü, Paris Descartes Üniversitesi ve Genetik Bölümü Başkanı, Curie Enstitüsü, Paris, Fransa",
+        "Name": "Dr. Dominique Stoppa-Lyonnet",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Doçent, Tokyo Tıp ve Diş Hekimliği Üniversitesi Tokyo, Japonya"
+        "Hospital": "Doçent, Tokyo Tıp ve Diş Hekimliği Üniversitesi Tokyo, Japonya",
+        "Name": "Dr. Masatoshi Takagi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Yönetici Müdür, Genomik ve Toplum için Kamusal Popülasyon Projesi, Montreal, Kanada"
+        "Hospital": "Yönetici Müdür, Genomik ve Toplum için Kamusal Popülasyon Projesi, Montreal, Kanada",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık"
+        "Hospital": "Kanser Genetiği Profesörü, Birmingham Üniversitesi Tıp Fakültesi, Birmingham, Birleşik Krallık",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Klinik Doçent, Nottingham Üniversitesi, Nottingham, Birleşik Krallık"
+        "Hospital": "Klinik Doçent, Nottingham Üniversitesi, Nottingham, Birleşik Krallık",
+        "Name": "Dr. William Whitehouse",
+        "Rank": ""
       },
       {
-        "Hospital": "Johann Wolfgang Goethe Üniversitesi Çocuk Hastanesi, Frankfurt, Almanya"
+        "Hospital": "Johann Wolfgang Goethe Üniversitesi Çocuk Hastanesi, Frankfurt, Almanya",
+        "Name": "Dr. Stefan Zielen",
+        "Rank": "PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "Gelecekte Global A-T Aile Veri Platformunun, A-T'li bir hastanın nasıl hareket ettiği konusunda bilgi toplamak için giyilebilir teknolojiler kullanmak gibi diğer türlerde biyolojik ve yaşam tarzıyla ilgili verileri toplamak amacıyla başka kurumlarla işbirliği yapmasını bekliyoruz."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
+    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Gönder"
+      },
+      "Expand": {
+        "Title": "Genişlet"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Bu girişim hakkında",
       "AboutUs": "Hakkımızda",
+      "DataAccessRequest": "Veri Erişim İsteği",
+      "ForResearchers": "Araştırmacı",
       "JoinUs": "Bize Katılın",
       "Language": "Dil",
       "LearnMore": "Daha Fazla Bilgi",
+      "MedicalHistoryQuestionnaire": "Tıbbi Öykü",
+      "FeedingSurvey": "Beslenme Anketi",
       "MyAccount": "Hesabım",
+      "MyDashboard": "Panom",
       "Next": "Sonraki",
       "Previous": "Önceki",
       "SignIn": "Oturum Aç",
-      "YourParticipants": "Katılımcılarınız",
-      "ForResearchers": "Araştırmacı",
-      "DataAccessRequest": "Veri Erişim İsteği"
+      "Statistics": "Platform İstatistikleri",
+      "Submit": "Gönder",
+      "YourParticipants": "Katılımcılarınız"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "Global A-T Aile Veri Platformu, dünya çapında A-T aileleri ve uzmanlarının gözetimi altında ve A-T hastalarının sağlık bilgileri ile genetik ve olası diğer tipteki verilerinin araştırmacılarla paylaşılabileceği, hasta odaklı bir girişimdir. Bu platform, araştırmacıların dünya çapında önemli hasta verilerine hızlı, güvenli ve etkin bir şekilde erişmelerini sağlayacak ve umarız ki yeni keşiflerin yapılmasını mümkün kılacaktır."
-    },
-    "OrganizationForm": {
-      "Country": "Ülke",
-      "State": "İl"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Bu arayışta bize katılıp son bulgulardan haberdar olun."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Kayıt yaptınız mı? Burada Oturum Açın"
+  },
   "SDK": {
+    "DownloadButton": "Gözden Geçirmeyi İndir",
     "CancelButton": "İptal",
+    "CloseButton": "Kapat",
+    "CommunicationError": "Verileriniz kaydedilirken bir hata meydana geldi. Lütfen göndermeden önce formu ve cevaplarınızı kontrol edin",
     "Dashboard": {
+      "Text": "",
       "Title": "Konsolum"
+    },
+    "DatePicker": {
+      "April": "Nisan",
+      "August": "Ağustos",
+      "Day": "Gün seçin...",
+      "December": "Aralık",
+      "February": "Şubat",
+      "January": "Ocak",
+      "July": "Temmuz",
+      "June": "Haziran",
+      "March": "Mart",
+      "May": "Mayıs",
+      "Month": "Ay seçin...",
+      "November": "Kasım",
+      "October": "Ekim",
+      "September": "Eylül",
+      "Year": "Yıl seçin..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "karakter kaldı",
+      "SingularForm": "karakter kaldı"
     },
     "DoNotAssent": "Olur Vermiyorum",
     "DoNotConsent": "Olur Vermiyorum",
@@ -287,36 +368,85 @@
         "Download": "Tüm Olur Formunu İndir"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "İlçe"
-      }
-    },
     "JoinUsButton": "Bize Katılın",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Katılımcı"
+      "AddParticipant": "Bir Katılımcı Ekleyin",
+      "ParticipantPlaceholder": "Katılımcı",
+      "ParticipantsList": "A-T'li aile üyeleri"
     },
     "NextButton": "Sonraki",
     "PreviousButton": "Önceki",
     "RegisterButton": "Kaydol",
     "SaveAndSubmit": "Kaydet ve Gönder",
     "SaveAndSubmitEnrollment": "Kaydet ve Çalışmaya Kaydı Gönder",
+    "SavingButton": "Kaydediliyor",
     "SignAndAssent": "İmza ve Olur",
     "SignAndConsent": "İmza ve Olur",
     "StartOrResume": "Başla/Devam Et",
+    "SubmitButton": "Gönder",
+    "SuccessSignIn": "Oturum başarıyla açıldı.",
+    "SignInOut": {
+      "SignOut": "Oturumu Kapat"
+    },
+    "Title": {
+      "Alert": "Oturumunuz yakında zaman aşımına uğrayacak",
+      "Default": "Global A-T Aile Veri Platformu"
+    },
+    "TooltipAlt": "Kimin adını girmeliyim?",
     "UserActivities": {
       "ActivityActions": "Eylemler",
-      "ActivityStatus": "Durum"
+      "ActivityDate": "Oluşturulma",
+      "ActivityName": "Form",
+      "ActivityStatus": "Durum",
+      "ActivityStatuses": {
+        "COMPLETE": "Tamamlandı",
+        "CREATED": "Henüz Başlanmadı",
+        "IN_PROGRESS": "İşlemde"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} Yanıtlandı",
+      "Summary": "Özet",
+      "SurveysToComplete": {
+        "Plural": "Tamamlanacak {{ count }} anket",
+        "Singular": "Tamamlanacak {{ count }} anket"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Oturumu Kapat"
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "Cinsiyet",
+      "UserPreferencesLocale": "Tercih edilen dil",
+      "UserPreferencesTitle": "Kullanıcı tercihleri"
+    },
+    "ValidateError": "Gönderme işlemine devam edilemiyor. Ayrıntılar için lütfen formdaki mesajları gözden geçirin.",
+    "Validators": {
+      "DateNavyValidationRule": "Girilen tarih geçersiz"
+    }
+  },
+  "Statistics": {
+    "Title": "Sayılarla A-T Aile Veri Platformu",
+    "CountList": {
+      "totalParticipantsCount": "Toplam katılımcı sayısı",
+      "countriesCount": "Temsil edilen ülkeler",
+      "genomeStudyParticipantsCount": "Genom dizilemesine katılmayı kabul eden kişiler",
+      "governedParticipantsCount": "Ebeveynleri tarafından kaydettirilen çocuklar",
+      "selfEnrolledParticipantsCount": "Kendi kendine kaydolan katılımcılar"
+    },
+    "Subtitle": "Temsil edilen ülkeler"
+  },
+  "Survey": {
+    "Self": "{{ firstName }} Kayıt Süreci",
+    "NewParticipant": "Yeni Katılımcı Kayıt İşlemi",
+    "ThankYouPopup": {
+      "Text": "Anketi gönderdiğiniz için teşekkürler"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "veya"
-      }
+    "ActivityActions": {
+      "Continue": "Devam",
+      "Start": "Başla",
+      "View": "Görüntüle",
+      "Edit": "Düzenle"
     },
     "Dashboard": {
       "Actions": "Eylemler",
@@ -332,28 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "İptal",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Lütfen geçerli bir e-posta adresi girin",
+            "Placeholder": "E-posta doğrulaması *"
+          },
           "Email": {
+            "Error": "Lütfen geçerli bir e-posta adresi girin",
             "Placeholder": "E-posta adresi"
           },
           "FirstName": {
+            "Error": "Ad gerekli",
             "Placeholder": "Adı"
           },
           "LastName": {
+            "Error": "Soyadı gerekli",
             "Placeholder": "Soyadı"
           }
-        }
+        },
+        "LoadingError": "Üzgünüz ama bir hata oluştu.",
+        "MatchEmailsError": "Lütfen her iki e-posta alanının da doldurulduğundan ve adreslerin uyuştuğundan emin olun.",
+        "Required": "",
+        "SubmitButton": "E-posta Listesine Katıl",
+        "Text": "Bize bir e-posta adresi sağlarsanız Global A-T Aile Veri Platformunun ilerlemesi hakkında size düzenli bilgi veririz.",
+        "Title": "Bilgilendirilmek için abone olun"
       },
       "SessionWillExpire": {
         "Continue": "Devam",
-        "SignOut": "Oturumu Kapat"
+        "SignOut": "Oturumu Kapat",
+        "Text": "Bir süredir uzakta olmanız nedeniyle, gizliliğinizi korumak için sistem oturumunuzu kapatacaktır. Oturumunuzun açık kalması için “Devam” düğmesine tıklayın. Şimdilik işiniz bittiyse “Oturumu Kapat” düğmesine tıklayın.",
+        "Title": "Oturumunuz yakında zaman aşımına uğrayacak"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Şifre sıfırlama bağlantınızın süresi doldu."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Sorun yaşamaya devam ederseniz lütfen ",
         "TextPt2": " site yöneticisiyle irtibat kurun."
       },
+      "Text": "",
       "Title": "Üzgünüz ama bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+    },
+    "Password": {
+      "InputPlaceholder": "Şifre",
+      "PasswordRequiredError": "Şifre gerekli",
+      "PasswordWrongError": "Yanlış şifre Lütfen tekrar deneyin.",
+      "Text": "Lütfen şifrenizi girin *",
+      "Title": "Lütfen şifreyi girin"
+    },
+    "SessionExpired": {
+      "Text": "Bir süredir uzaktaydınız, bu yüzden güvenlik önlemi olarak oturumunuz kapatıldı. Bulunduğunuz son sayfaya dönmek için lütfen tekrar giriş yapın."
+    },
+    "StayInformed": {
+      "Text": "Global A-T Aile Veri Platformu e-posta listesine katıldığınız için teşekkür ederiz. Sizi verdiğiniz e-posta adresini kullanarak bu girişim konusunda haberdar edeceğiz.",
+      "Title": "Güncel bilgilerden haberdar olun"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +531,5 @@
       "CREATED": "Henüz Başlanmadı",
       "IN_PROGRESS": "İşlemde"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Devam etmeden önce e-posta adresinizi doğrulamanız gerekli.",
-    "EmailConfirmed": "E-posta adresiniz başarıyla doğrulandı."
   }
 }

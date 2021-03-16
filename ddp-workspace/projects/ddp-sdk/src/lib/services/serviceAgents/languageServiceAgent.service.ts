@@ -1,10 +1,10 @@
-import { Inject, Injectable } from "@angular/core";
-import { StudyLanguage } from "../../models/studyLanguage";
-import { NotAuthenticatedServiceAgent } from "./notAuthenticatedServiceAgent.service";
+import { Inject, Injectable } from '@angular/core';
+import { StudyLanguage } from '../../models/studyLanguage';
+import { NotAuthenticatedServiceAgent } from './notAuthenticatedServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class LanguageServiceAgent extends NotAuthenticatedServiceAgent<Array<StudyLanguage>> {

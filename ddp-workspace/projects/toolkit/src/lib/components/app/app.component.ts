@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { MatDialog, MatDialogRef, MatSidenav } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from './app.component.state';
@@ -79,6 +80,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     public twitterUrl: string;
     public unsupportedBrowser: boolean;
     public blogUrl: string;
+    @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
     private anchor = new CompositeDisposable();
     private readonly dialogBaseSettings = {
         width: '740px',
@@ -88,7 +90,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         scrollStrategy: new NoopScrollStrategy()
     };
     private joinDialogObservable = new BehaviorSubject<MatDialogRef<JoinMailingListComponent> | null>(null);
-    @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
 
     constructor(
         private translate: TranslateService,
@@ -130,16 +131,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.communicationService.openJoinDialog();
     }
 
-    private openJoinDialog(firstName: string | null, lastName: string | null): void {
-        this.joinDialogObservable.next(this.dialog.open(JoinMailingListComponent, {
-            ...this.dialogBaseSettings,
-            data: {
-                firstName: firstName ? firstName : '',
-                lastName: lastName ? lastName : ''
-            }
-        }));
-    }
-
     public openWarningDialog(): void {
         this.dialog.open(WarningComponent, this.dialogBaseSettings);
     }
@@ -162,6 +153,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public get showBlog(): boolean {
         return this.toolkitConfiguration.showBlog;
+    }
+
+    private openJoinDialog(firstName: string | null, lastName: string | null): void {
+        this.joinDialogObservable.next(this.dialog.open(JoinMailingListComponent, {
+            ...this.dialogBaseSettings,
+            data: {
+                firstName: firstName ? firstName : '',
+                lastName: lastName ? lastName : ''
+            }
+        }));
     }
 
     private initUserActionsListeners(): void {

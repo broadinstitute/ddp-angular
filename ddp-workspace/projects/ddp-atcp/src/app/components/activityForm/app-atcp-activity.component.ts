@@ -8,20 +8,27 @@ import {
   OnInit,
   Renderer2
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { delay } from 'rxjs/operators';
+
 import {
   AnalyticsEventsService,
   SubmissionManager,
   SubmitAnnouncementService,
   WindowRef,
-  LoggingService
+  LoggingService,
 } from 'ddp-sdk';
+
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
+import { PopupMessageComponent } from '../../toolkit/dialogs/popupMessage.component';
+import * as Routes from '../../router-resources';
 
 @Component({
   selector: 'app-atcp-activity',
   template: `
-  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle}">
+  <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle, 'feeding-survey': model?.activityCode === ActivityCodes.FEEDING}">
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
                 <ddp-subject-panel></ddp-subject-panel>
@@ -36,16 +43,17 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
                      [ngClass]="{'content_download' : model.activityCode === ActivityCodes.CONSENT || ActivityCodes.ASSENT}">
                     <h1 class="activity-header" [innerHTML]="model.title"></h1>
                     <a *ngIf="model.activityCode === ActivityCodes.CONSENT"
-                       download="Research_Consent_Form_EN.pdf"
+                       [download]="consentFileName"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral"
-                       href="assets/pdf/A-T_Research_Consent_Form.pdf">
+                       [href]="consentLink"
+                    >
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Consent.Download' | translate }}
                     </a>
                     <a *ngIf="model.activityCode === ActivityCodes.ASSENT"
-                       download="Research_Assent_Form_EN.pdf"
+                       [download]="assentFileName"
                        class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral ButtonBordered--assent-kids"
-                       href="assets/pdf/A-T_Research_Assent_Form.pdf">
+                       [href]="assentLink">
                       <mat-icon>arrow_circle_down</mat-icon>
                       {{ 'SDK.DownloadPdf.Assent.Download' | translate }}
                     </a>
@@ -155,6 +163,13 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
                     </ng-container>
                     <hr>
                     <div class="activity-buttons" [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !model.readonly}">
+                        <ng-container *ngIf="isLoaded && model.readonly && isFirstStep && model.activityCode !== ActivityCodes.REVIEW_AND_SUBMISSION">
+                            <button class="ButtonBordered ButtonBordered--withIcon ButtonBordered--neutral button--print" (click)="onDownloadClick()">
+                            <mat-icon>arrow_circle_down</mat-icon>
+                            {{ 'SDK.DownloadButton' | translate }}
+                            </button>
+                        </ng-container>
+
                         <ng-container *ngIf="isLoaded && isStepped && isFirstStep">
                             <button *ngIf="model.activityCode === ActivityCodes.MEDICAL_HISTORY"
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -166,7 +181,7 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
 
                         <ng-container *ngIf="isLoaded && isStepped && !isFirstStep">
                             <button [disabled]="(isPageBusy | async) || dataEntryDisabled"
-                                    class="button"
+                                    class="button button--prev"
                                     [ngClass]="{'ButtonBordered ButtonBordered--green' : model.activityCode !== ActivityCodes.ASSENT,
                                               'ButtonFilled ButtonFilled--kids ButtonFilled--light-green' : model.activityCode === ActivityCodes.ASSENT}"
                                     (click)="decrementStep()">
@@ -225,6 +240,15 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
                                         ? ('SDK.SavingButton' | translate)
                                         : ((model.activityCode === ActivityCodes.CONSENT ? 'SDK.SignAndConsent' : 'SDK.SignAndAssent') | translate)">
                             </button>
+                            <button *ngIf="model.activityCode === ActivityCodes.CONSENT_EDIT"
+                                    #submitButton
+                                    [disabled]="(isPageBusy | async) || dataEntryDisabled"
+                                    class="button ButtonFilled ButtonFilled--green button_right"
+                                    (click)="flush()"
+                                    [innerHTML]="(isPageBusy | async)
+                                        ? ('SDK.SavingButton' | translate)
+                                        : ('SDK.SubmitButton' | translate)">
+                            </button>
                             <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY"
                                     #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
@@ -282,6 +306,29 @@ import { ActivityCodes } from '../../sdk/constants/activityCodes';
                                     [innerHTML]="'SDK.CloseButton' | translate">
                             </button>
                         </ng-container>
+
+                        <ng-container *ngIf="isLoaded && model.activityCode === ActivityCodes.FEEDING">
+                            <button
+                                *ngIf="!model.readonly && isLastStep"
+                                class="button ButtonFilled ButtonFilled--green button_right"
+                                [disabled]="isPageBusy | async"
+                                (click)="onSubmitFeedingSurvey()"
+                            >
+                                <ng-container *ngIf="(isPageBusy | async); else feedingActivityControls">
+                                    {{ 'SDK.SavingButton' | translate }}
+                                </ng-container>
+
+                                <ng-template #feedingActivityControls>
+                                    <ng-container *ngIf="!model.readonly">
+                                        {{ 'SDK.SubmitButton' | translate }}
+                                    </ng-container>
+
+                                    <ng-container *ngIf="model.readonly">
+                                        {{ 'SDK.CloseButton' | translate }}
+                                    </ng-container>
+                                </ng-template>
+                            </button>
+                        </ng-container>
                     </div>
                     <div *ngIf="displayGlobalError$ | async" class="ErrorMessage">
                         <span translate>SDK.ValidateError</span>
@@ -300,6 +347,9 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
   @Input() buttonWithArrow = false;
 
   public ActivityCodes = ActivityCodes;
+
+  private matDialog: MatDialog;
+
   constructor(
       logger: LoggingService,
       windowRef: WindowRef,
@@ -309,9 +359,68 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
     super(logger, windowRef, renderer, submitService, analytics, document, injector);
+
+    this.matDialog = injector.get(MatDialog);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
   }
 
   public isAgree(): boolean {
       return this.model.formType === 'CONSENT' && this.agreeConsent;
+  }
+
+  public onSubmitFeedingSurvey(): void {
+    if (this.model.readonly) {
+      this.navigateToConsole();
+    } else {
+      this.flush();
+      this.showThankYouPopup();
+    }
+  }
+
+  public onDownloadClick(): void {
+    this.router.navigateByUrl(Routes.ActivityPrint.replace(':instanceGuid', this.activityGuid));
+  }
+
+  public get fileLanguageCode(): string {
+    return this.translateService.currentLang;
+  }
+
+  public get consentFileName(): string {
+    return `A-T_Research_Consent_Form.${this.fileLanguageCode.toUpperCase()}.pdf`;
+  }
+
+  public get consentLink(): string {
+    return `assets/pdf/${this.consentFileName}`;
+  }
+
+  public get assentFileName(): string {
+    return `A-T_Research_Assent_Form.${this.fileLanguageCode.toUpperCase()}.pdf`;
+  }
+
+  public get assentLink(): string {
+    return `assets/pdf/${this.assentFileName}`;
+  }
+
+  private showThankYouPopup(): void {
+    const dialogRef = this.matDialog.open(PopupMessageComponent, {
+      width: '100%',
+      position: {
+        top: '0px',
+      },
+      data: {
+        text: this.translateService.instant('Survey.ThankYouPopup.Text'),
+      },
+      autoFocus: false,
+      scrollStrategy: new NoopScrollStrategy(),
+      panelClass: ['server-modal-box', 'thank-you-popup'],
+
+    });
+
+    dialogRef.afterOpened().pipe(delay(2000)).subscribe(() => {
+      dialogRef.close();
+    });
   }
 }

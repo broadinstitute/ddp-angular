@@ -252,7 +252,9 @@
       "Placeholder": "Saisissez le code d’invitation",
       "Error": {
         "Part1": "Le code que vous avez saisi nʼest pas actif. Veuillez vérifier votre code et réessayer. Vous pouvez toujours contacter le personnel de lʼétude TestBoston pour obtenir de lʼaide :",
-        "Part2": "ou"
+        "Part2": "ou",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -382,6 +384,7 @@
       "Text": "Saisissez votre mot de passe *",
       "InputPlaceholder": "Mot de passe",
       "PasswordWrongError": "Mot de passe incorrect. Veuillez réessayer.",
+      "OtherError": "[FR] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "Le mot de passe est requis."
     },
     "ErrorPage": {
@@ -452,7 +455,8 @@
       "ActivityStatus": "État",
       "ActivityDate": "Créé",
       "ActivityActions": "Actions ",
-      "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse"
+      "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Participants régis",
@@ -607,6 +611,13 @@
     "SubjectPanel": {
       "Link": "Revenir à la recherche de patient",
       "Text": "Code d’invitation du patient :"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[FR] Entered date is invalid"
     }
   }
 }

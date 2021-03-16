@@ -3,14 +3,19 @@
     "activateAccount": "mit Hinweisen zur Aktivierung Ihres Kontos wurde an Ihre E-Mail-Adresse gesendet.",
     "checkEmail": "Fast geschafft! Eine E-Mail ",
     "stillWaiting": "Sie haben noch keine E-Mail erhalten?",
-    "title": "Kontoaktivierung"
+    "title": "Kontoaktivierung",
+    "stillWaitingTooltip": "Manchmal dauert die Zustellung einer E-Mail etwas länger. Dies ist außerhalb unserer Kontrolle. Prüfen Sie auch den Spam-Ordner  Ihres E-Mail-Kontos."
   },
   "common": {
     "alreadyRegistered": "Bereits registriert? Hier anmelden",
     "confirmNewPassword": {
+      "error": "Kennwortbestätigung stimmt nicht mit Kennwort überein",
       "label": "Neues Kennwort bestätigen"
     },
     "email": {
+      "error": "„E-Mail“ darf nicht leer sein",
+      "emailTaken": "„E-Mail“ wurde bereits entgegengenommen. Bitte wählen Sie einen anderen Wert.",
+      "label": "E-Mail-Adresse",
       "whoseEmail": "Wessen E-Mail-Adresse gebe ich ein?",
       "whoseEmailTooltip": "Wenn Sie ein Elternteil/Erziehungsberechtigter eines oder mehrerer Kinder mit AT sind, verwenden Sie Ihre eigene E-Mail-Adresse.  Wir verwenden diese E-Mail-Adresse zur Kommunikation über alle Teilnehmer, die Sie auf der Plattform für globale Daten von AT-Familien registriert haben."
     },
@@ -18,13 +23,16 @@
     "joinUs": "Mitglied werden",
     "or": "oder",
     "password": {
+      "error": "mindestens 8 Zeichen, einschließlich: ein Kleinbuchstabe, ein Großbuchstabe, eine Ziffer, ein Sonderzeichen (z. B. !@#$%^&*).",
       "label": "Kennwort"
     },
     "reenter": {
+      "error": "Kennwortbestätigung stimmt nicht mit Kennwort überein",
       "label": "Kennwort erneut eingeben"
     },
     "resendInstructions": "Bestätigungsanweisungen erneut senden",
     "resetPassword": {
+      "error": "mindestens 8 Zeichen, einschließlich: ein Kleinbuchstabe, ein Großbuchstabe, eine Ziffer, ein Sonderzeichen (z. B. !@#$%^&*).",
       "label": "Neues Kennwort"
     },
     "signin": "Anmelden",
@@ -38,9 +46,11 @@
   "header": {
     "aboutThisInitiative": "Über diese Initiative",
     "aboutUs": "Über uns",
+    "dataAccessRequest": "Daten Zugriffsanforderung",
     "joinUs": "Mitglied werden",
     "language": "Sprache",
     "learnMore": "Mehr erfahren",
+    "researchers": "Für Forscher",
     "signIn": "Anmelden"
   },
   "login": {
@@ -48,12 +58,14 @@
     "useEmail": "Mit Ihrer E-Mail-Adresse:"
   },
   "modal": {
+    "InvalidLogin": "E-Mail oder Kennwort ungültig",
+    "PasswordResetError": "Beim Zurücksetzen des Kennworts ist ein Fehler aufgetreten.",
     "SuccessChangedPassword": "Ihr Kennwort wurde erfolgreich geändert.",
     "YouWillGetInstructions": "Sie erhalten in wenigen Minuten eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Kennworts."
   },
   "resendInstructions": {
-    "subTitle": "Wenn Sie Ihre Bestätigungsanweisungen nicht erhalten haben, geben Sie Ihre E-Mail-Adresse ein, um eine neue Bestätigungs-E-Mail zu generieren.",
     "submit": "Bestätigungsanweisungen erneut senden",
+    "subTitle": "Wenn Sie Ihre Bestätigungsanweisungen nicht erhalten haben, geben Sie Ihre E-Mail-Adresse ein, um eine neue Bestätigungs-E-Mail zu generieren.",
     "title": "Bestätigungsanweisungen erneut senden"
   },
   "resetPassword": {

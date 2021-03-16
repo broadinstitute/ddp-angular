@@ -1,9 +1,7 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-
-import * as Hammer from 'hammerjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -31,6 +29,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { MyHammerConfig } from './my-hammer-config';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -41,7 +40,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -95,8 +94,11 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
+config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
@@ -114,15 +116,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
   });
 }
 
-export class MyHammerConfig extends HammerGestureConfig {
-  public buildHammer(element: HTMLElement): Hammer {
-    const hammer = new Hammer(element, {
-      touchAction: 'pan-y'
-    });
-    return hammer;
-  }
-}
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -131,7 +124,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     DdpModule,
     ToolkitModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    HammerModule
   ],
   declarations: [
     WelcomeComponent,

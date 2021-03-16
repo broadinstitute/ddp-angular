@@ -47,7 +47,6 @@ export const hideModal = () => {
 };
 
 export const prepareUiElements = (url: string): void => {
-  $('[data-toggle="tooltip"]').tooltip();
   $('.prepare-link-host').map((i, el) => {
     const $el = $(el);
     $el.attr('href', url + $el.attr('href'));

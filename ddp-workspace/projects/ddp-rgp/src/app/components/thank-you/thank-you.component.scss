@@ -1,10 +1,22 @@
-.Button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.list {
+  padding-bottom: 10px;
+
+  &__item {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6rem;
+  }
 }
 
-.Button {
-  background: #19457d;
-  color: white;
+.form {
+  &__field {
+    width: 100%;
+  }
+
+  &__btn-container {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 25px;
+  }
 }

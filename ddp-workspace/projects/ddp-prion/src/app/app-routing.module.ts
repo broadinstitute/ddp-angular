@@ -146,7 +146,6 @@ const routes: Routes = [
     path: 'error',
     component: PrionErrorComponent,
     canActivate: [
-      IrbGuard,
       CookiesConsentGuard
     ]
   },

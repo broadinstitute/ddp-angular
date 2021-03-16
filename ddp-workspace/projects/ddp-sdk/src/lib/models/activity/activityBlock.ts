@@ -10,7 +10,7 @@ export abstract class ActivityBlock {
 
     public shouldScrollToFirstInvalidQuestion(): boolean {
         if (this.shown) {
-            this.valid ? this.scrollTo = false : this.scrollTo = true;
+            this.scrollTo = !this.valid;
         }
         return this.scrollTo;
     }

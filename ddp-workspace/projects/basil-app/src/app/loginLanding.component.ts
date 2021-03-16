@@ -29,8 +29,8 @@ export class LoginLandingComponent implements OnDestroy {
         private activityServiceAgent: ActivityServiceAgent) {
         this.anchor = sessionService.sessionObservable.pipe(
             filter(x => x != null),
-            mergeMap(x => userState.refreshState(), (x, y) => y)
-        ).subscribe(x => this.redirect(x));
+            mergeMap(() => userState.refreshState())
+        ).subscribe(state => this.redirect(state));
     }
 
     public ngOnDestroy(): void {
@@ -46,11 +46,12 @@ export class LoginLandingComponent implements OnDestroy {
             case UserState.Dashboard: url = 'dashboard'; break;
             case UserState.NotQualified: url = 'not-qualified'; break;
             case UserState.NotConsented: url = 'consent-declined'; break;
+            default: break;
         }
         if (!url) {
             // bit of a hack: if we don't know the state, create the prequal and go to it
             this.activityServiceAgent.createInstance(PrequalifierComponent.STUDY_GUID, PrequalifierComponent.PREQUALIFIER_GUID)
-                .subscribe(x => {
+                .subscribe(() => {
                     this.router.navigateByUrl('prequalifier');
                 });
         } else {

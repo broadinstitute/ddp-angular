@@ -78,6 +78,12 @@ import * as _ from 'underscore';
     }`]
 })
 export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
+    public institutions: Array<Institution> = [];
+    public institutionName: string;
+    public physicianName: string;
+    public city: string;
+    public state: string;
+    public readonly AUTOCOMPLETE_VALUE: string = 'nothing';
     @Input() readonly: boolean;
     @Input() value: ActivityInstitutionInfo | null;
     @Input() institutionType: string;
@@ -90,16 +96,10 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     @Output() componentBusy: EventEmitter<number> = new EventEmitter<number>();
     @ViewChild(MatAutocompleteTrigger, { static: true }) autocomplete: MatAutocompleteTrigger;
     @ViewChild('institutionForm', { static: true }) private institutionForm: NgForm;
-    public institutions: Array<Institution> = [];
-    public institutionName: string;
-    public physicianName: string;
-    public city: string;
-    public state: string;
-    public readonly AUTOCOMPLETE_VALUE: string = 'nothing';
     private guid: string | null;
     private timer: any;
     private findSubject: Subject<string> = new Subject<string>();
-    private answerSubject: BehaviorSubject<ActivityInstitutionInfo | null> = new BehaviorSubject<ActivityInstitutionInfo | null>(this.value);
+    private answerSubject: BehaviorSubject<ActivityInstitutionInfo | null> = new BehaviorSubject<ActivityInstitutionInfo | null>(null);
     private anchor: Subscription = new Subscription();
 
     constructor(
@@ -115,7 +115,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             )).subscribe(value => this.institutions = value);
 
         const form = this.answerSubject.pipe(
-            filter(answer => answer != null),
+            filter(answer => answer !== null),
             distinctUntilChanged((answer1, answer2) => {
                 return _.isEqual(answer1, answer2);
             }),
@@ -135,7 +135,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-        for (const propName in changes) {
+        for (const propName of Object.keys(changes)) {
             if (propName === 'value' && this.value) {
                 this.institutionName = this.value.institutionName ? this.value.institutionName : '';
                 this.physicianName = this.value.physicianName ? this.value.physicianName : '';
@@ -145,7 +145,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             }
             if (propName === 'validationRequested') {
                 if (this.validationRequested && this.required) {
-                    for (const controlName in this.institutionForm.controls) {
+                    for (const controlName of Object.keys(this.institutionForm.controls)) {
                         this.institutionForm.controls[controlName].markAsTouched();
                     }
                 }
@@ -229,14 +229,14 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         return this.providersServiceAgent.createMedicalProvider(this.studyGuid,
             this.normalizedInstitutionType, form).pipe(
                 tap(response => {
-                    const answer = new ActivityInstitutionInfo(form.physicianName ? form.physicianName : '',
+                    const newAnswer = new ActivityInstitutionInfo(form.physicianName ? form.physicianName : '',
                         form.physicianName ? form.physicianName : '',
                         form.city ? form.city : '',
                         form.state ? form.state : '',
                         response.medicalProviderGuid
                     );
                     this.guid = response.medicalProviderGuid;
-                    this.valueChanged.emit(answer);
+                    this.valueChanged.emit(newAnswer);
                 })
             );
     }

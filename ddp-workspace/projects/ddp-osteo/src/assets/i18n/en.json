@@ -466,7 +466,7 @@
             "Text": "Please enter your password *",
             "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
-            "OtherError": "We're sorry, but an error has occurred.",
+            "OtherError": "We're sorry, but an error has occurred. Please try again.",
             "PasswordRequiredError": "Password is required"
         },
         "StayInformed": {
@@ -534,6 +534,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "ADD",
@@ -542,6 +543,8 @@
         "PreviousButton": "Back",
         "SavingButton": "Saving",
         "EditButton": "View/Edit",
+        "SaveButton": "Save",
+        "DeleteButton": "Delete",
         "ReviewButton": "View",
         "AgreeButton": "I agree",
         "NotAgreeButton": "I am not ready to agree",
@@ -723,6 +726,17 @@
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
         },
-        "TooltipAlt": "Information"
+        "TooltipAlt": "Information",
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid"
+        },
+        "ModalActivityBlock": {
+            "NumQuestionsAnswered": "{{number}} questions answered",
+            "EditButton": "Edit",
+            "DeleteButton": "Delete",
+            "SaveButton": "Save",
+            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+            "CancelButton": "Cancel"
+        }
     }
 }

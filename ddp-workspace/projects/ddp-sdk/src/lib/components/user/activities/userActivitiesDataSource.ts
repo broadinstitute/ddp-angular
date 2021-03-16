@@ -24,7 +24,7 @@ export class UserActivitiesDataSource extends DataSource<ActivityInstance> {
         return this.serviceAgent.getActivities(this.study).pipe(
             map(x => {
                 if (x == null) {
-                    return new Array<ActivityInstance>();
+                    return [] as Array<ActivityInstance>;
                 } else {
                     return x;
                 }

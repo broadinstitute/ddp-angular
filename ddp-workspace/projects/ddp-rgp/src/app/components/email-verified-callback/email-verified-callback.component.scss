@@ -1,0 +1,16 @@
+.Spinner {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  margin-top: 6rem;
+  padding: 2rem;
+
+  @media only screen and (max-width: 992px) {
+    margin-top: 2rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 0;
+  }
+}

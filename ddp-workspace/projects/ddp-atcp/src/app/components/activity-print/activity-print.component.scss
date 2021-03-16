@@ -1,0 +1,183 @@
+@import '../../styles/variables';
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2em;
+}
+
+.ButtonBordered--withIcon {
+  margin-top: 0;
+  padding: 7px;
+
+  mat-icon {
+    margin-right: 0px;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.printable-content {
+  margin: 1.2rem 0;
+  padding: 0 2.4rem;
+
+  @media print {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 1em;
+  }
+
+  &__title {
+    margin: 0;
+    margin-right: 0.4em;
+
+    font-size: 24px;
+    font-weight: 700;
+    color: #4274bc;
+  }
+
+  &__divider {
+    height: 2px;
+
+    background-color: $grey;
+    border: none;
+
+    @media print {
+      display: none;
+    }
+  }
+}
+
+.radio {
+  display: flex;
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    display: none;
+
+    margin: 0;
+    margin-top: 4px;
+    margin-right: 0.4em;
+
+    position: static;
+
+    @media print {
+      display: initial;
+    }
+  }
+
+  &__outer {
+    width: 16px;
+    height: 16px;
+
+    margin-top: 3px;
+    margin-right: 0.4em;
+
+    position: relative;
+
+    border: 1px solid $light-neutral-grey;
+    border-radius: 50%;
+
+    @media print {
+      display: none;
+    }
+  }
+
+  &__inner {
+    height: 10px;
+    width: 10px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+
+    background-color: $light-neutral-grey;
+    border-radius: 50%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.as-checkbox {
+  .radio {
+    &__outer {
+      border-radius: 0;
+    }
+
+    &__inner {
+      border-radius: 0;
+    }
+  }
+}
+
+.form-group {
+  .form-control {
+    font-size: 15px;
+
+    border: 1px solid $silver-grey;
+    border-left: 3px solid $silver-grey;
+    border-radius: 0;
+    box-shadow: none !important;
+  }
+}
+
+.composite-block-divider {
+  display: flex;
+  align-items: center;
+
+  margin: 1em 0;
+
+  span {
+    margin-right: 1em;
+  }
+
+  div {
+    flex: 1;
+
+    height: 2px;
+
+    background-color: $grey;
+  }
+}
+
+.print-logo {
+  display: none;
+
+  @media print {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-top: 2.4em;
+  }
+}
+
+.composite-block {
+  p {
+    margin: 1em 0;
+
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.block {
+  margin: 1em 0;
+
+  page-break-inside: avoid;
+  page-break-after: auto;
+}

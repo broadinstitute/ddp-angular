@@ -252,7 +252,9 @@
       "Placeholder": "Ingrese su código de invitación.",
       "Error": {
         "Part1": "El código que ingresó no está activo. Verifique su código y vuelva a intentarlo. En cualquier momento puede comunicarse con el personal del estudio TestBoston para solicitar ayuda:",
-        "Part2": "o"
+        "Part2": "o",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -382,6 +384,7 @@
       "Text": "Ingrese su contraseña.*",
       "InputPlaceholder": "Contraseña",
       "PasswordWrongError": "Contraseña incorrecta. Vuelva a intentarlo.",
+      "OtherError": "[ES] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "La contraseña es obligatoria."
     },
     "ErrorPage": {
@@ -452,7 +455,8 @@
       "ActivityStatus": "Estado",
       "ActivityDate": "Creado",
       "ActivityActions": "Acciones",
-      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas"
+      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Participantes controlados",
@@ -607,6 +611,13 @@
     "SubjectPanel": {
       "Link": "Regresar a la búsqueda de participantes voluntarios",
       "Text": "Código de invitación del participante voluntario:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[ES] Entered date is invalid"
     }
   }
 }

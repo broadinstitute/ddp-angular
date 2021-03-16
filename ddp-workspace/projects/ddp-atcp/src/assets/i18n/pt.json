@@ -5,8 +5,8 @@
       "Title": "Ataxia-telangiectasia (A-T)"
     },
     "SecondParagraph": {
-      "TextOne": "Irmãos com A-T parecem compartilhar mais características clínicas do que crianças com A-T portadoras das mesmas mutações, mas que pertencem a famílias diferentes. Os cientistas, portanto, acreditam que os genes \\\" de uma família, exceto o gene que causa a A-T \\\", podem afetar como a A-T acomete os pacientes. Além disso, é possível que viver em diferentes ambientes, seguir estilos de vida diferentes e consumir dietas diferentes possa afetar a saúde de pessoas com A-T.",
-      "TextSecond": "Identificamos recentemente diversas pessoas com mutações típicas, que causam doenças, nos seus genes da A-T e que não produzem a proteína da A-T (assim como outras pessoas com A-T), mas seus sintomas de A-T são surpreendentemente brandos. Estamos agora otimistas de que seremos capazes de encontrar alterações em outros genes que corrigem ou compensam as mutações da A-T nesses pacientes com A-T \\\"super branda\\\". Em caso positivo, os pesquisadores poderão possivelmente encontrar novos tratamentos medicamentosos para ajudar todas as pessoas com A-T. Mas precisamos, primeiro, reunir os dados clínicos e genéticos de tantas pessoas com A-T quanto possível.",
+      "TextOne": "Irmãos com A-T parecem compartilhar mais características clínicas do que crianças com A-T portadoras das mesmas mutações, mas que pertencem a famílias diferentes. Os cientistas, portanto, acreditam que os genes \" de uma família, exceto o gene que causa a A-T \", podem afetar como a A-T acomete os pacientes. Além disso, é possível que viver em diferentes ambientes, seguir estilos de vida diferentes e consumir dietas diferentes possa afetar a saúde de pessoas com A-T.",
+      "TextSecond": "Identificamos recentemente diversas pessoas com mutações típicas, que causam doenças, nos seus genes da A-T e que não produzem a proteína da A-T (assim como outras pessoas com A-T), mas seus sintomas de A-T são surpreendentemente brandos. Estamos agora otimistas de que seremos capazes de encontrar alterações em outros genes que corrigem ou compensam as mutações da A-T nesses pacientes com A-T \"super branda\". Em caso positivo, os pesquisadores poderão possivelmente encontrar novos tratamentos medicamentosos para ajudar todas as pessoas com A-T. Mas precisamos, primeiro, reunir os dados clínicos e genéticos de tantas pessoas com A-T quanto possível.",
       "TextThird": "De maneira similar, mediante comparação dos históricos médicos e dos estilos de vida de diferentes pacientes com A-T, os pesquisadores poderão descobrir quais estratégicas de manejo de sintomas produzem melhores resultados de saúde. Mas precisamos, primeiro, obter e reunir em um só lugar dados de muitos pacientes com A-T.",
       "Title": "A A-T afeta cada pessoa de maneira diferente"
     },
@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "Inscreva-se na plataforma de dados",
-          "Text": "Clique em \\\"Junte-se a nós\\\" e crie uma conta com o seu nome e endereço de e-mail. Depois que tiver criado sua conta, você poderá se registrar (caso tenha A-T) ou registrar seu(s) filho(s) com A-T como participantes de nossa plataforma de dados preenchendo um breve formulário."
+          "Text": "Clique em \"Junte-se a nós\" e crie uma conta com o seu nome e endereço de e-mail. Depois que tiver criado sua conta, você poderá se registrar (caso tenha A-T) ou registrar seu(s) filho(s) com A-T como participantes de nossa plataforma de dados preenchendo um breve formulário."
         },
         {
           "Name": "Dê seu consentimento",
@@ -65,69 +65,108 @@
     "Doctors": [
       {
         "Hospital": "professor emérito de genética médica – Universidade de Cambridge, Cambridge, Reino Unido, e professor honorário do Wellcome Trust Sanger Institute, Hinxton, Reino Unido",
-        "Name": "Martin Bobrow",
-        "Rank": "Dr."
+        "Name": "Dr. Martin Bobrow",
+        "Rank": ""
       },
       {
         "Hospital": "professora de genética médica, Universidade Sapienza, Roma, Itália.",
-        "Name": "Luciana Chessa"
+        "Name": "Dra. Luciana Chessa",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "diretor médico de pediatria, Hospital Wesley, Queensland, Austrália"
+        "Hospital": "diretor médico de pediatria, Hospital Wesley, Queensland, Austrália",
+        "Name": "Dr. David Coman",
+        "Rank": ""
       },
       {
-        "Hospital": "professor associado de pediatria e neurologia, Centro Pediátrico Johns Hopkins, Baltimore, Maryland, EUA"
+        "Hospital": "professor associado de pediatria e neurologia, Centro Pediátrico Johns Hopkins, Baltimore, Maryland, EUA",
+        "Name": "Dr. Thomas Crawford",
+        "Rank": ""
       },
       {
-        "Hospital": "diretor do Google Genomics, Mountain View, Califórnia, EUA"
+        "Hospital": "diretor do Google Genomics, Mountain View, Califórnia, EUA",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "pediatria e biologia desenvolvimental, Universidade Médica e Odontológica de Tóquio, Japão"
+        "Hospital": "pediatria e biologia desenvolvimental, Universidade Médica e Odontológica de Tóquio, Japão",
+        "Name": "Dra. Setsuko Hasegawa",
+        "Rank": ""
       },
       {
-        "Hospital": "professor associado, Universidade de Queensland, Queensland, Austrália"
+        "Hospital": "professor associado, Universidade de Queensland, Queensland, Austrália",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor de oncologia molecular, Universidade de Queensland, Brisbane, Austrália"
+        "Hospital": "professor de oncologia molecular, Universidade de Queensland, Brisbane, Austrália",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor de pediatria, Centro Pediátrico Johns Hopkins, Baltimore, Maryland, EUA"
+        "Hospital": "professor de pediatria, Centro Pediátrico Johns Hopkins, Baltimore, Maryland, EUA",
+        "Name": "Dr. Howard Lederman",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "imuno-hematologia pediátrica, coordenador do Centro Francês de Referência para Imunodeficiências Primárias, Hospital Necker, Paris, França"
+        "Hospital": "imuno-hematologia pediátrica, coordenador do Centro Francês de Referência para Imunodeficiências Primárias, Hospital Necker, Paris, França",
+        "Name": "Dr. Nizar Mahlaoui",
+        "Rank": "MSc, MPH"
       },
       {
-        "Hospital": "neurologista pediátrica, Centro Médico Sheba, Ramat Gan, Israel"
+        "Hospital": "neurologista pediátrica, Centro Médico Sheba, Ramat Gan, Israel",
+        "Name": "Dra. Andreea Nissenkorn",
+        "Rank": ""
       },
       {
-        "Hospital": "diretor executivo de dados, Broad Institute, Cambridge, Maryland, EUA"
+        "Hospital": "diretor executivo de dados, Broad Institute, Cambridge, Maryland, EUA",
+        "Name": "Dr. Anthony Philippakis",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "Centro Nacional para Doenças Raras, Roma, Itália"
+        "Hospital": "Centro Nacional para Doenças Raras, Roma, Itália",
+        "Name": "Dra. Agata Polizzi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor de genética humana, Universidade de Tel Aviv, Ramat Aviv, Israel"
+        "Hospital": "professor de genética humana, Universidade de Tel Aviv, Ramat Aviv, Israel",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor de genética do câncer, Escola de Medicina da Universidade de Birmingham, Birmingham, Reino Unido"
+        "Hospital": "professor de genética do câncer, Escola de Medicina da Universidade de Birmingham, Birmingham, Reino Unido",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professora de genética da Universidade Paris Descartes e diretora do Departamento de Genética do Instituto Curie, Paris, França"
+        "Hospital": "professora de genética da Universidade Paris Descartes e diretora do Departamento de Genética do Instituto Curie, Paris, França",
+        "Name": "Dra. Dominique Stoppa-Lyonnet",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor associado, Universidade Médica e Odontológica de Tóquio, Tóquio, Japão"
+        "Hospital": "professor associado, Universidade Médica e Odontológica de Tóquio, Tóquio, Japão",
+        "Name": "Dr. Masatoshi Takagi",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "diretora executiva, Projeto de População Pública em Genômica e Sociedade, Montreal, Canadá"
+        "Hospital": "diretora executiva, Projeto de População Pública em Genômica e Sociedade, Montreal, Canadá",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor de genética do câncer, Escola de Medicina da Universidade de Birmingham, Birmingham, Reino Unido"
+        "Hospital": "professor de genética do câncer, Escola de Medicina da Universidade de Birmingham, Birmingham, Reino Unido",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "professor associado clínico, Universidade de Nottingham, Nottingham, Reino Unido"
+        "Hospital": "professor associado clínico, Universidade de Nottingham, Nottingham, Reino Unido",
+        "Name": "Dr. William Whitehouse",
+        "Rank": ""
       },
       {
-        "Hospital": "Hospital Infantil da Universidade Johann Wolfgang Goethe, Frankfurt, Alemanha"
+        "Hospital": "Hospital Infantil da Universidade Johann Wolfgang Goethe, Frankfurt, Alemanha",
+        "Name": "Dr. Stefan Zielen",
+        "Rank": "PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "WEsperamos que a Global A-T Family Data Platform forme futuramente parcerias com mais organizações para coletar outros tipos de dados biológicos e de estilo de vida, tais como o uso de tecnologias usáveis para registrar informações sobre como uma pessoa com A-T se locomove."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Você precisa confirmar seu endereço de e-mail antes de continuar.",
+    "EmailConfirmed": "Seu endereço de e-mail foi confirmado."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Enviar"
+      },
+      "Expand": {
+        "Title": "Expandir"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Sobre esta iniciativa",
       "AboutUs": "Sobre nós",
+      "DataAccessRequest": "Solicitação de acesso a dados",
+      "ForResearchers": "Para Pesquisadores",
       "JoinUs": "Junte-se a nós",
       "Language": "Idioma",
       "LearnMore": "Descubra mais",
+      "MedicalHistoryQuestionnaire": "Histórico médico",
+      "FeedingSurvey": "Pesquisa sobre alimentação",
       "MyAccount": "Minha conta",
+      "MyDashboard": "Meu painel",
       "Next": "Avançar",
       "Previous": "Anterior",
       "SignIn": "Registre-se",
-      "YourParticipants": "Seus participantes",
-      "ForResearchers": "Para Pesquisadores",
-      "DataAccessRequest": "Solicitação de acesso a dados"
+      "Statistics": "Estatísticas da plataforma",
+      "Submit": "Enviar",
+      "YourParticipants": "Seus participantes"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "A Global A-T Family Data Platform é uma iniciativa liderada por pacientes e supervisionada por famílias e especialistas em A-T de todo o mundo através da qual informações de saúde, dados genéticos e potencialmente outros tipos de dados sobre pessoas com A-T podem ser compartilhados com pesquisadores. A missão da nossa plataforma é permitir aos pesquisadores acessar importantes dados de pacientes de todo o mundo de maneira rápida, segura e eficiente, o que, esperamos, leve a novas descobertas."
-    },
-    "OrganizationForm": {
-      "Country": "País",
-      "State": "Estado/província"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Junte-se a nós nessa busca e fique informado sobre as últimas descobertas."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Já registrado? Registre-se aqui"
+  },
   "SDK": {
+    "DownloadButton": "Baixar análise",
     "CancelButton": "Cancelar",
+    "CloseButton": "Fechar",
+    "CommunicationError": "Houve um problema ao salvar seus dados. Confira o formulário e suas respostas antes de enviar",
     "Dashboard": {
+      "Text": "",
       "Title": "Meu console"
+    },
+    "DatePicker": {
+      "April": "Abril",
+      "August": "Agosto",
+      "Day": "Escolher dia...",
+      "December": "Dezembro",
+      "February": "Fevereiro",
+      "January": "Janeiro",
+      "July": "Julho",
+      "June": "Junho",
+      "March": "Março",
+      "May": "Maio",
+      "Month": "Escolher mês...",
+      "November": "Novembro",
+      "October": "Outubro",
+      "September": "Setembro",
+      "Year": "Escolher ano..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "caracteres restantes",
+      "SingularForm": "caractere restante"
     },
     "DoNotAssent": "Não consinto",
     "DoNotConsent": "Não consinto",
@@ -287,36 +368,85 @@
         "Download": "Baixar o formulário de consentimento completo"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Cidade"
-      }
-    },
     "JoinUsButton": "Junte-se a nós",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Participante"
+      "AddParticipant": " Parentes com A-T",
+      "ParticipantPlaceholder": "Participante",
+      "ParticipantsList": "Adicionar um participante"
     },
     "NextButton": "Avançar",
     "PreviousButton": "Anterior",
     "RegisterButton": "Registrar",
     "SaveAndSubmit": "Salvar e enviar",
     "SaveAndSubmitEnrollment": "Salvar e enviar registro",
+    "SavingButton": "Salvando",
     "SignAndAssent": "Assino e consinto",
     "SignAndConsent": "Assino e consinto",
     "StartOrResume": "Iniciar/retomar",
+    "SubmitButton": "Enviar",
+    "SuccessSignIn": "Login bem-sucedido.",
+    "SignInOut": {
+      "SignOut": "Sair"
+    },
+    "Title": {
+      "Alert": "Sua sessão será encerrada em breve",
+      "Default": "A Global A-T Family Data Platform"
+    },
+    "TooltipAlt": "Devo informar o nome de quem?",
     "UserActivities": {
       "ActivityActions": "Ações",
-      "ActivityStatus": "Situação"
+      "ActivityDate": "Criado",
+      "ActivityName": "Formulário",
+      "ActivityStatus": "Situação",
+      "ActivityStatuses": {
+        "COMPLETE": "Preenchido",
+        "CREATED": "Não iniciado",
+        "IN_PROGRESS": "Em andamento"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} respondidas",
+      "Summary": "Resumo",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} pesquisas para responder",
+        "Singular": "{{ count }} pesquisa para responder"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Sair"
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "Sexo",
+      "UserPreferencesLocale": "Idioma preferencial",
+      "UserPreferencesTitle": "Preferências do usuário"
+    },
+    "ValidateError": "Não é possível concluir o envio. Confira as mensagens no formulário para saber detalhes.",
+    "Validators": {
+      "DateNavyValidationRule": "A data inserida é inválida"
+    }
+  },
+  "Statistics": {
+    "Title": "Os números da A-T Family Data Platform",
+    "CountList": {
+      "totalParticipantsCount": "Número total de participantes",
+      "countriesCount": "Países representados",
+      "genomeStudyParticipantsCount": "Pessoas que aceitaram participar do sequenciamento de genoma",
+      "governedParticipantsCount": "Crianças inscritas pelos pais",
+      "selfEnrolledParticipantsCount": "Participantes autoinscritos"
+    },
+    "Subtitle": "Países representados"
+  },
+  "Survey": {
+    "Self": "{{ firstName }}- processo de inscrição",
+    "NewParticipant": "Novo Participante- processo de inscrição",
+    "ThankYouPopup": {
+      "Text": "Agradecemos por enviar a pesquisa"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "ou"
-      }
+    "ActivityActions": {
+      "Continue": "Continuar",
+      "Start": "Iniciar",
+      "View": "Ver",
+      "Edit": "Editar"
     },
     "Dashboard": {
       "Actions": "Ações",
@@ -332,28 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "Cancelar",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Insira um endereço de e-mail válido",
+            "Placeholder": "Confirmação do e-mail *"
+          },
           "Email": {
+            "Error": "Insira um endereço de e-mail válido",
             "Placeholder": "Endereço de e-mail"
           },
           "FirstName": {
+            "Error": "O campo \"Nome\" é obrigatório",
             "Placeholder": "Primeiro nome"
           },
           "LastName": {
+            "Error": "O campo \"Sobrenome\" é obrigatório",
             "Placeholder": "Sobrenome"
           }
-        }
+        },
+        "LoadingError": "Infelizmente ocorreu um erro.",
+        "MatchEmailsError": "Ambos os campos de e-mail devem ser preenchidos e os endereços devem ser iguais.",
+        "Required": "",
+        "SubmitButton": "Participar da lista de discussão",
+        "Text": "Forneça um endereço de e-mail e nós manteremos você informado sobre o progresso da Global A-T Family Data Platform.",
+        "Title": "Assine para ficar informado"
       },
       "SessionWillExpire": {
         "Continue": "Continuar",
-        "SignOut": "Sair"
+        "SignOut": "Sair",
+        "Text": "Para proteger sua privacidade, o sistema encerrará sua sessão porque você está ausente há algum tempo. Clique em \"Continuar\" para manter a conexão. Clique em \"Sair\" se tiver concluído por enquanto.",
+        "Title": "Sua sessão será encerrada em breve"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "O link de redefinição de senha expirou."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Entre em contato com o ",
         "TextPt2": " caso continue a ter dificuldades."
       },
+      "Text": "",
       "Title": "Lamentamos, mas ocorreu um erro. Tente novamente mais tarde."
+    },
+    "Password": {
+      "InputPlaceholder": "Senha",
+      "PasswordRequiredError": "É necessário inserir a senha",
+      "PasswordWrongError": "Senha incorreta. Tente novamente.",
+      "Text": "Insira sua senha *",
+      "Title": "Insira a senha"
+    },
+    "SessionExpired": {
+      "Text": "Você está ausente há algum tempo e encerraremos a sessão como medida de segurança. Faça login novamente para voltar à página em que estava."
+    },
+    "StayInformed": {
+      "Text": "Obrigado por se associar à lista de discussão da Global A-T Family Data Platfom. Manteremos você informado sobre essa iniciativa usando o endereço de e-mail que você forneceu.",
+      "Title": "Mantenha-se informado"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +531,5 @@
       "CREATED": "Não iniciado",
       "IN_PROGRESS": "Em andamento"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Você precisa confirmar seu endereço de e-mail antes de continuar.",
-    "EmailConfirmed": "Seu endereço de e-mail foi confirmado."
   }
 }

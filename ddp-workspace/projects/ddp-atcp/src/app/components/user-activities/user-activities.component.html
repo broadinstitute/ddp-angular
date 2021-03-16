@@ -1,0 +1,149 @@
+<table
+  *ngIf="activities"
+  mat-table
+  class="user-activities-table"
+  [class.user-activities-table--opaque]="opaque"
+  [dataSource]="activities"
+>
+  <ng-container matColumnDef="activityName">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      class="user-activities-table__cell user-activities-table__cell--header"
+    >
+      {{ 'SDK.UserActivities.ActivityName' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
+      {{ activity.activityName }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="activitySummary">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      class="user-activities-table__cell user-activities-table__cell--header"
+    >
+      {{ 'SDK.UserActivities.Summary' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
+      {{ activity.activitySummary }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      class="user-activities-table__cell user-activities-table__cell--header"
+    >
+      {{ 'SDK.UserActivities.ActivityDate' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
+      {{ activity.createdAt | date: 'MM / dd' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="questionCount">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      class="user-activities-table__cell user-activities-table__cell--header"
+    >
+      {{ 'SDK.UserActivities.ActivityStatus' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let activity" class="user-activities-table__cell">
+      <ng-container *ngIf="showQuestionCount(activity); else activityStatus">
+        {{
+          'SDK.UserActivities.QuestionCount'
+            | translate
+              : {
+                  answered: activity.numQuestionsAnswered,
+                  total: activity.numQuestions
+                }
+        }}
+      </ng-container>
+
+      <ng-template #activityStatus>
+        {{
+          'SDK.UserActivities.ActivityStatuses.' + activity.statusCode
+            | translate
+        }}
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      class="user-activities-table__cell user-activities-table__cell--header"
+    >
+      {{ 'SDK.UserActivities.ActivityActions' | translate }}
+    </th>
+    <td
+      mat-cell
+      *matCellDef="let activity; let i = index"
+      class="user-activities-table__cell"
+    >
+      <button
+        *ngIf="
+          (activity.instanceGuid === currentActivity?.instanceGuid ||
+            activity.previousInstanceGuid !== null) &&
+          activity.statusCode === statusCodes.CREATED
+        "
+        class="BtnFilled BtnFilled--blue"
+        (click)="startActivity.emit(activity.instanceGuid)"
+      >
+        {{ 'Toolkit.ActivityActions.Start' | translate }}
+      </button>
+
+      <button
+        *ngIf="
+          (activity.instanceGuid === currentActivity?.instanceGuid ||
+            activity.previousInstanceGuid !== null) &&
+          activity.statusCode === statusCodes.IN_PROGRESS
+        "
+        class="BtnFilled BtnFilled--blue"
+        (click)="continueActivity.emit(activity.instanceGuid)"
+      >
+        {{ 'Toolkit.ActivityActions.Continue' | translate }}
+      </button>
+
+      <div
+        class="button-container"
+        *ngIf="activity.statusCode === statusCodes.COMPLETE"
+      >
+        <button
+          class="BtnFilled BtnFilled--blue"
+          (click)="viewActivity.emit(activity.instanceGuid)"
+        >
+          {{ 'Toolkit.ActivityActions.View' | translate }}
+        </button>
+
+        <button
+          *ngIf="
+            activity.activityCode !== activityCodes.REVIEW_AND_SUBMISSION &&
+            activity.activityCode !== activityCodes.ASSENT
+          "
+          class="BtnFilled BtnFilled--blue"
+          (click)="editActivity.emit(activity)"
+        >
+          {{ 'Toolkit.ActivityActions.Edit' | translate }}
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="displayedColumns"
+    class="user-activities-table__row--header"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let activity; columns: displayedColumns"
+    class="user-activities-table__row"
+    [class.user-activities-table__row--disabled]="isRowDisabled(activity)"
+  ></tr>
+</table>

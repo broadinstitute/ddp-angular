@@ -6,7 +6,7 @@ import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { LanguageService } from '../internationalization/languageService.service';
 import { Observable, of } from 'rxjs';
-import { flatMap, take } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 
 @Injectable()
 export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
@@ -21,7 +21,7 @@ export class SessionServiceAgent<TEntity> extends ServiceAgent<TEntity> {
 
     protected getHeaders(options: any): Observable<any> {
         return this._session.sessionObservable.pipe(
-            flatMap(x => {
+            mergeMap(x => {
                 if (x === null) {
                     return of(null);
                 }

@@ -36,6 +36,11 @@ import { tap, mergeMap, take } from 'rxjs/operators';
         </mat-header-cell>
         <mat-cell *matCellDef="let element" class="padding-5">
           <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
+          <mat-icon *ngIf="element.isHidden"
+                    class="dashboard-hidden-icon"
+                    matTooltip="{{ 'SDK.UserActivities.HiddenTooltip' | translate }}">
+            visibility_off
+          </mat-icon>
           <button class="dashboard-activity-button Link"
                 [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
                 (click)="openActivity(element.instanceGuid, element.activityCode)">
@@ -151,6 +156,10 @@ import { tap, mergeMap, take } from 'rxjs/operators';
       .dashboard-status-container__img {
         height: 36px;
         width: 36px;
+      }
+
+      .dashboard-hidden-icon {
+        padding-right: 5px;
       }
 
       .padding-5 {

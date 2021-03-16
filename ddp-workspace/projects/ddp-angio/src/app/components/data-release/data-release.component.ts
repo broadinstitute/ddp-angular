@@ -4,7 +4,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: 'data-release',
+    selector: 'app-data-release',
     template: `
     <toolkit-header [showButtons]="false"></toolkit-header>
     <div class="Wrapper">
@@ -39,13 +39,13 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                         <button mat-button color="primary"
                                                 class="ButtonFilled Button--rect"
                                                 [innerHTML]="'Toolkit.DataRelease.ViewPaperButton' | translate">
-                                        </button>  
+                                        </button>
                                     </a>
                                 </div>
                                 <p class="PageContent-text PageContent-text__important" translate>Toolkit.DataRelease.Intro.Paragraph5</p>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph6</p>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.Intro.Paragraph7</p>
-                                
+
                                 <h2 class="PageContent-title" translate>Toolkit.DataRelease.cBioPortal.Title</h2>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.cBioPortal.Paragraph1</p>
                                 <p class="PageContent-text" translate>Toolkit.DataRelease.cBioPortal.Paragraph2</p>
@@ -65,7 +65,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.cBioPortal.Paragraph4</h2>
                                 <ul class="PageContent-ul">
                                     <ng-container *ngFor="let item of 'Toolkit.DataRelease.cBioPortal.List' | translate">
-                                        <li class="PageContent-text PageContent-text-list">{{item}}</li>        
+                                        <li class="PageContent-text PageContent-text-list">{{item}}</li>
                                     </ng-container>
                                 </ul>
 
@@ -88,7 +88,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 </div>
                                 <ng-container *ngFor="let item of 'Toolkit.DataRelease.GDC.Questions' | translate">
                                     <h2 class="PageContent-subtitle">{{item.Question}}</h2>
-                                    <p class="PageContent-text">{{item.Answer}}</p> 
+                                    <p class="PageContent-text">{{item.Answer}}</p>
                                 </ng-container>
 
                                 <h2 class="PageContent-title" translate>Toolkit.DataRelease.FAQ.Title</h2>
@@ -129,7 +129,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                         <li class="PageContent-text PageContent-text-list">
                                             <a [href]="item.PDF" target="_blank" class="Link">{{item.Link}}</a>
                                             <span>{{item.Text}}</span>
-                                        </li>                             
+                                        </li>
                                     </ng-container>
                                 </ul>
                                 <h2 class="PageContent-subtitle" translate>Toolkit.DataRelease.FAQ.Terminology.Title</h2>

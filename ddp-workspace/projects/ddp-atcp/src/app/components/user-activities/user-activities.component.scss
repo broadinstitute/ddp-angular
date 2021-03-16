@@ -1,0 +1,41 @@
+.user-activities-table {
+  width: 100%;
+
+  font-family: 'Lato', sans-serif;
+
+  &--opaque {
+    background-color: #fafafa;
+  }
+
+  &__row {
+    &--disabled {
+      opacity: 0.7;
+    }
+  }
+
+  &__cell {
+    font-size: 15px !important;
+
+    &--header {
+      font-size: 16px !important;
+      font-style: italic;
+      font-weight: bold;
+    }
+  }
+
+  .BtnFilled {
+    width: 100%;
+
+    margin: 0;
+  }
+
+  .button-container {
+    padding: 3px 0;
+
+    button {
+      & + button {
+        margin-top: 3px;
+      }
+    }
+  }
+}

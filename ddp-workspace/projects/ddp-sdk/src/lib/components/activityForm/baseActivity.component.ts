@@ -1,4 +1,13 @@
-import { EventEmitter, Injector, Input, OnChanges, OnDestroy, Output, SimpleChange } from '@angular/core';
+import {
+    EventEmitter,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    Output,
+    SimpleChange,
+    Component
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
 import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
@@ -6,14 +15,13 @@ import { ActivityResponse } from '../../models/activity/activityResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { Observable, BehaviorSubject, Subject, combineLatest } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
 import {
     concatMap,
     debounceTime,
     delay,
     filter,
     map,
-    merge,
     shareReplay,
     startWith,
     take,
@@ -23,6 +31,9 @@ import {
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
 
+@Component({
+    template: ``
+})
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
@@ -56,7 +67,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
-        this.config = injector.get('ddp.config');
+        this.config = injector.get<ConfigurationService>('ddp.config' as any);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
         this.anchor = new CompositeDisposable();
@@ -65,7 +76,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-        for (const propName in changes) {
+        for (const propName of Object.keys(changes)) {
             if (propName === 'studyGuid') {
                 this.studyGuidObservable.next(this.studyGuid);
             } else if (propName === 'activityGuid') {
@@ -83,45 +94,48 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.serviceAgent
-            .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-            .subscribe(
-                x => {
-                    if (!x) {
-                        this.model = new ActivityForm();
-                    } else {
-                        this.isLoaded = true;
-                        this.model = x;
-                        this.stickySubtitle.emit(this.model.subtitle);
-                        this.activityCode.emit(this.model.activityCode);
-                        this.initSteps();
-                    }
-
-                    // combine the latest status updates from the form model
-                    // and from the embedded components into one observable
-                    const canSaveSub = combineLatest(
-                        // update as we get responses from server
-                        this.submissionManager.answerSubmissionResponse$.pipe(
-                            // We don't automatically get model updates if
-                            // local validation fails
-                            // so trigger one when submit
-                            merge(this.submitAttempted),
-                            map(() => this.model.validate()),
-                            // let's start with whatever it is the initial state of the form
-                            startWith(this.model.validate())),
-                        this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
-                        .pipe(
-                            map(status => status[0] && status[1]),
-                            delay(1)
-                        ).subscribe(this.isAllFormContentValid);
-
-                    this.anchor.addNew(canSaveSub);
-                },
-                () => {
-                    this.navigateToErrorPage();
+      const get = this.serviceAgent
+        .getActivity(this.studyGuidObservable, this.activityGuidObservable)
+        .subscribe(
+            x => {
+                if (!x) {
+                    this.model = new ActivityForm();
+                } else {
+                    this.isLoaded = true;
+                    this.model = x;
+                    this.stickySubtitle.emit(this.model.subtitle);
+                    this.activityCode.emit(this.model.activityCode);
+                    this.initSteps();
                 }
-            );
-        this.anchor.addNew(get);
+
+                // combine the latest status updates from the form model
+                // and from the embedded components into one observable
+                const canSaveSub = combineLatest([
+                    // update as we get responses from server
+                    merge(
+                        this.submissionManager.answerSubmissionResponse$,
+                        // We don't automatically get model updates if local validation fails
+                        // so trigger one when submit
+                        this.submitAttempted
+                    ).pipe(
+                        map(() => this.model.validate()),
+                        // let's start with whatever it is the initial state of the form
+                        startWith(this.model.validate())
+                    ),
+                    this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
+                ])
+                    .pipe(
+                        map(status => status[0] && status[1]),
+                        delay(1)
+                    ).subscribe(this.isAllFormContentValid);
+
+              this.anchor.addNew(canSaveSub);
+            },
+            () => {
+                this.navigateToErrorPage();
+            }
+        );
+      this.anchor.addNew(get);
     }
 
     protected navigateToErrorPage(): void {
@@ -174,7 +188,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     debounceTime(250),
                     filter(isPageBusy => !isPageBusy),
                     take(1))),
-                // if we cant' save we are not going past filter, so do necessary cleanup here
+                // if we can't save we are not going past filter, so do necessary cleanup here
                 tap(() => !this.isAllFormContentValid.value && (this.dataEntryDisabled = false)),
                 filter(() => this.isAllFormContentValid.value),
                 concatMap(() => this.serviceAgent.flushForm(this.studyGuid, this.activityGuid)))

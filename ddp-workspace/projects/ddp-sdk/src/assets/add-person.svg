@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Add person@1x</title>
+    <g id="Revisions" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Add-person" transform="translate(1.000000, 1.000000)" stroke="#FFFFFF" stroke-width="1.5">
+            <g id="Regular">
+                <circle id="Oval" cx="18.971875" cy="18.971875" r="6.825"></circle>
+                <line x1="18.971875" y1="15.559375" x2="18.971875" y2="22.384375" id="Shape"></line>
+                <line x1="15.559375" y1="18.971875" x2="22.384375" y2="18.971875" id="Shape"></line>
+                <path d="M0.203125,18.971875 C0.204881058,16.3935874 1.50000323,13.9881453 3.65144586,12.5672777 C5.80288849,11.14641 8.52366113,10.8996526 10.895625,11.910275" id="Shape"></path>
+                <circle id="Oval" cx="7.88125" cy="4.8953125" r="4.6921875"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

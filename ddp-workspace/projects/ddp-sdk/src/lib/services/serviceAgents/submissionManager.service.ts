@@ -5,8 +5,8 @@ import { AnswerValue } from '../../models/activity/answerValue';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityInstanceAnswerSubmission } from '../../models/activity/activityInstanceAnswerSubmission';
-import { Observable, Subject, BehaviorSubject, timer } from 'rxjs';
-import { concatMap, distinctUntilChanged, filter, map, merge, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
+import { Observable, Subject, BehaviorSubject, timer, merge } from 'rxjs';
+import { concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
 import * as _ from 'underscore';
 
 type GuidToShown = Record<string, boolean>;
@@ -44,13 +44,13 @@ export class SubmissionManager implements OnDestroy {
      * Situation has arisen that user yshould
      */
     public answerSubmissionWarning$: Observable<boolean>;
+    retryDelayMs = SubmissionManager.DEFAULT_RETRY_DELAY_MS;
+    maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
     private answerSubmissionFailureSubject = new Subject<Error>();
     private answerSubmissionErrorSubject = new Subject<Error>();
     private answerSubmissions: Subject<ActivityInstanceAnswerSubmission> = new Subject();
     private blockGuidToVisibility$ = new BehaviorSubject<GuidToShown>({});
     private _answerSubmissionResponse$: Observable<PatchAnswerResponse>;
-    retryDelayMs = SubmissionManager.DEFAULT_RETRY_DELAY_MS;
-    maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
 
     constructor(private serviceAgent: ActivityServiceAgent) {
         this.setupAnswerSubmissionPipeline();
@@ -125,10 +125,10 @@ export class SubmissionManager implements OnDestroy {
                         return error.pipe(
                             mergeMap((submissionError, i) => {
                                 const errorCount = ++i;
-                                // we will retry on HTTP errors that are not not the ones listed here
+                                // we will retry on HTTP errors that are not the ones listed here
                                 if (errorCount > this.maxRetryCount || !(submissionError instanceof HttpErrorResponse)
                                     || [404, 401, 422].includes(submissionError.status)) {
-                                    // Would have prefered to throw error, and have subscriber handle it in the error handler
+                                    // Would have preferred to throw error, and have subscriber handle it in the error handler
                                     // but could not get the error
                                     this.answerSubmissionFailureSubject.next(submissionError);
                                     throw submissionError;
@@ -194,15 +194,17 @@ export class SubmissionManager implements OnDestroy {
             }));
 
         // merge additions, completions, and removal of submissions to create an observable state of the queue
-        const workingSubmissionQueue: Observable<ActivityInstanceAnswerSubmission[]> = submissionQueueAdditions$.pipe(
-            merge(submissionQueueRemovalsOnCompletion$),
-            merge(submissionRemovalOnHideResponse$),
+        const workingSubmissionQueue: Observable<ActivityInstanceAnswerSubmission[]> = merge(
+            submissionQueueAdditions$,
+            submissionQueueRemovalsOnCompletion$,
+            submissionRemovalOnHideResponse$
+        ).pipe(
             scan((acc: ActivityInstanceAnswerSubmission[], currentOperation: QueueOp) => {
-                return currentOperation(acc.slice(0));
+              return currentOperation(acc.slice(0));
             }, [] as ActivityInstanceAnswerSubmission[])
         );
 
-        // finally we update queue subject by having it having it subscribe
+        // finally we update queue subject by having it subscribe
         workingSubmissionQueue.subscribe(pendingAnswerSubmissionSubject);
 
         this.pendingAnswerSubmissionQueue$ = pendingAnswerSubmissionSubject.asObservable();

@@ -1,69 +1,114 @@
-import { Component, ViewEncapsulation, Inject, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
-import { WindowRef, SessionMementoService } from 'ddp-sdk';
+
+import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
+
+import { Routes } from '../../routes';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent implements OnInit {
-  public inHome = true;
-  public inLGMD = true;
-  public inEligiblityCrit = true;
-  public isCollapsed = true;
-  public isForFamiliesCollapsed = true;
-  public isForResearchersCollapsed = true;
-  public isSpecialtyProjectsCollapsed = true;
-  public isPageScrolled = false;
+export class HeaderComponent implements OnInit, OnDestroy {
+  public Routes = Routes;
+  public isFamiliesMenuShown = false;
+  public isResearchersMenuShown = false;
+  public isProjectsMenuShown = false;
+  public isMobileNavShown = false;
+  public isHeaderWhite = false;
+  private isHeaderWhiteRoute = false;
+  private scrollYThreshold = 80;
+  private whiteHeaderRoutes = [
+    Routes.Home,
+    Routes.EligibilityCriteria,
+    Routes.LGMD,
+    Routes.Craniofacial,
+    Routes.Password,
+  ];
+  private anchor = new CompositeDisposable();
 
-  constructor(
-    private router: Router,
-    private window: WindowRef,
-    private session: SessionMementoService,
-    @Inject(DOCUMENT) private document: any) { }
+  constructor(private router: Router, private session: SessionMementoService) {}
 
   public ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isCollapsed = true;
-        this.trackNavigation(event.urlAfterRedirects);
-      }
-    });
+    this.setupRoutesListener();
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.removeAll();
   }
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
   }
 
-  @HostListener('window: scroll') public onWindowScroll(): void {
-    const scrolledPixels = this.window.nativeWindow.pageYOffset
-      || this.document.documentElement.scrollTop
-      || this.document.body.scrollTop || 0;
-    this.isPageScrolled = !!scrolledPixels;
+  @HostListener('document:click')
+  public onWindowClick(e: MouseEvent): void {
+    this.isFamiliesMenuShown = false;
+    this.isResearchersMenuShown = false;
+    this.isProjectsMenuShown = false;
+    this.isMobileNavShown = false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  public onWindowResize(e: Event): void {
+    const window = e.target as Window;
+
+    if (this.isMobileNavShown && window.innerWidth > 920) {
+      this.isMobileNavShown = false;
+    }
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    const yPos = window.scrollY || window.pageYOffset || 0;
+
+    this.isHeaderWhite =
+      this.isHeaderWhiteRoute || yPos > this.scrollYThreshold;
+  }
+
+  public onDropdownClick(target: string): void {
+    this.isFamiliesMenuShown = false;
+    this.isResearchersMenuShown = false;
+    this.isProjectsMenuShown = false;
+
+    if (target === 'families') {
+      this.isFamiliesMenuShown = true;
+    } else if (target === 'researchers') {
+      this.isResearchersMenuShown = true;
+    } else if (target === 'projects') {
+      this.isProjectsMenuShown = true;
+    }
+  }
+
+  public onToggleClick(e: Event): void {
+    e.stopPropagation();
+
+    this.isMobileNavShown = !this.isMobileNavShown;
+  }
+
+  private setupRoutesListener(): void {
+    this.anchor.addNew(
+      this.router.events.subscribe(e => {
+        if (e instanceof NavigationEnd) {
+          this.resetState();
+          this.trackNavigation(e.urlAfterRedirects);
+        }
+      }),
+    );
   }
 
   private trackNavigation(route: string): void {
-    if (route === null || route === undefined || route === '/' ||
-      route.indexOf('/password') === 0 || route.indexOf('/limb-girdle-muscular-dystrophy') === 0 ||
-      route.indexOf('/craniofacial') === 0 || route.indexOf('/eligibility-criteria') === 0) {
-      this.inHome = true;
-      this.inLGMD = true;
-      this.inEligiblityCrit = true;
-      return;
-    }
+    this.isHeaderWhiteRoute = this.whiteHeaderRoutes.includes(
+      route.replace('/', '') as Routes,
+    );
+    this.isHeaderWhite = this.isHeaderWhiteRoute;
+  }
 
-    if (route.indexOf('/about-us') === 0) {
-      this.inHome = false;
-      this.inLGMD = false;
-      this.inEligiblityCrit = false;
-      return;
-    }
-
-    this.inLGMD = false;
-    this.inHome = false;
-    this.inEligiblityCrit = false;
+  private resetState(): void {
+    this.isFamiliesMenuShown = false;
+    this.isProjectsMenuShown = false;
+    this.isResearchersMenuShown = false;
+    this.isMobileNavShown = false;
   }
 }

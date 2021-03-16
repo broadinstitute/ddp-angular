@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -49,6 +49,7 @@ import { NewRequestMock } from './components/newRequestMock.component';
 import { ValidationMessage } from './components/validationMessage.component';
 // Logging components
 import { LoggingService } from './services/logging.service';
+import { StackdriverErrorReporterService } from './services/stackdriverErrorReporter.service';
 
 import { ConsentServiceAgent } from './services/serviceAgents/consentServiceAgent.service';
 // User activities
@@ -71,6 +72,7 @@ import { ActivityComponentConverter } from './services/activity/activityComponen
 import { ActivityValidatorBuilder } from './services/activity/activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './services/activity/activitySuggestionBuilder.service';
 import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectInvitationServiceAgent.service';
+import { UserManagementServiceAgent } from './services/serviceAgents/userManagementServiceAgent.service';
 import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 
@@ -78,23 +80,23 @@ import { WindowRef } from './services/windowRef';
 
 import { ActivityComponent } from './components/activityForm/activity.component';
 import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned.component';
-import { ActivityQuestionComponent } from './components/activityForm/activityQuestion.component';
-import { ActivityBooleanAnswer } from './components/activityForm/activityBooleanAnswer.component';
-import { ActivityAgreementAnswer } from './components/activityForm/activityAgreementAnswer.component';
-import { ActivityTextAnswer } from './components/activityForm/activityTextAnswer.component';
-import { ActivityEmailInput } from './components/activityForm/activityEmailInput.component';
-import { ActivityNumericAnswer } from './components/activityForm/activityNumericAnswer.component';
+import { ActivityQuestionComponent } from './components/activityForm/activity-blocks/activityQuestion.component';
+import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
+import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
+import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
+import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
+import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
-import { ActivityAnswerComponent } from './components/activityForm/activityAnswer.component';
+import { ActivityAnswerComponent } from './components/activityForm/answers/activityAnswer.component';
 import { ActivityPicklistAnswer } from './components/activityForm/picklist/activityPicklistAnswer.component';
 import { DropdownActivityPicklistQuestion } from './components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './components/activityForm/picklist/radiobuttonsActivityPicklistQuestion.component';
-import { ActivityDateAnswer } from './components/activityForm/activityDateAnswer.component';
-import { ActivityCompositeAnswer } from './components/activityForm/activityCompositeAnswer.component';
-import { ActivityContentComponent } from './components/activityForm/activityContent.component';
-import { GroupBlock } from './components/activityForm/groupBlock.component';
-import { GroupBlockList } from './components/activityForm/groupBlockList.component';
+import { ActivityDateAnswer } from './components/activityForm/answers/activityDateAnswer.component';
+import { ActivityCompositeAnswer } from './components/activityForm/answers/activityCompositeAnswer.component';
+import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
+import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
+import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -157,11 +159,12 @@ import { MedicalProvidersServiceAgent } from './services/serviceAgents/medicalPr
 import { WorkflowServiceAgent } from './services/serviceAgents/workflowServiceAgent.service';
 import { UpperCaseInputDirective } from './directives/upperCaseInputDirective.directive';
 import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAutocomplete.directive';
-import { ConditionalBlockComponent } from './components/activityForm/conditionalBlock.component';
-import { QuestionPromptComponent } from './components/activityForm/questionPrompt.component';
+import { ConditionalBlockComponent } from './components/activityForm/activity-blocks/conditionalBlock.component';
+import { QuestionPromptComponent } from './components/activityForm/answers/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
 import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
 import { InvitationServiceAgent } from './services/serviceAgents/invitationServiceAgent.service';
@@ -178,259 +181,272 @@ import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.compo
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
-
+import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
+import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
+import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
+import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
-  const getter = () => sessionService.token;
-  return {
-    tokenGetter: getter
-  };
+    const getter = () => sessionService.token;
+    return {
+        tokenGetter: getter
+    };
 }
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatChipsModule,
-    MatListModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatProgressBarModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    MatGridListModule,
-    MatStepperModule,
-    MatAutocompleteModule,
-    MatTooltipModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      }
-    }),
-    CookieModule.forRoot(),
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtOptionsFactory,
-        deps: [SessionMementoService]
-      }
-    }),
-    RouterModule
-  ],
-  providers: [
-    AuthGuard,
-    AdminAuthGuard,
-    IrbGuard,
-    BrowserGuard,
-    Auth0AdapterService,
-    Auth0RenewService,
-    ConfigurationService,
-    UserProfileBusService,
-    LoggingService,
-    SessionMementoService,
-    AnalyticsEventsService,
-    UserActivityServiceAgent,
-    SubjectInvitationServiceAgent,
-    UserProfileServiceAgent,
-    ActivityServiceAgent,
-    PrequalifierServiceAgent,
-    GovernedParticipantsServiceAgent,
-    ActivityInstanceStatusServiceAgent,
-    LanguageServiceAgent,
-    MailingListServiceAgent,
-    ActivityValidatorBuilder,
-    ActivitySuggestionBuilder,
-    ActivityConverter,
-    ActivityQuestionConverter,
-    ActivityComponentConverter,
-    FireCloudServiceAgent,
-    WindowRef,
-    ExceptionDispatcher,
-    ConsentServiceAgent,
-    AddressService,
-    AddressEntryDataService,
-    CountryService,
-    DateService,
-    InstitutionServiceAgent,
-    ScriptLoaderService,
-    MedicalProvidersServiceAgent,
-    WorkflowServiceAgent,
-    NGXTranslateService,
-    SuggestionServiceAgent,
-    IrbPasswordService,
-    ResendEmailServiceAgent,
-    AnnouncementsServiceAgent,
-    UserInvitationServiceAgent,
-    BrowserContentService,
-    TemporaryUserServiceAgent,
-    InvitationServiceAgent,
-    Title,
-    RenewSessionNotifier,
-    LanguageService,
-    DisplayLanguagePopupServiceAgent,
-    StudyDetailServiceAgent,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
-  declarations: [
-    NetworkSnifferComponent,
-    NewRequestMock,
-    ValidationMessage,
+    imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+        MatChipsModule,
+        MatListModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatProgressBarModule,
+        MatFormFieldModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        MatGridListModule,
+        MatStepperModule,
+        MatAutocompleteModule,
+        MatTooltipModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            }
+        }),
+        CookieModule.forRoot(),
+        JwtModule.forRoot({
+            jwtOptionsProvider: {
+                provide: JWT_OPTIONS,
+                useFactory: jwtOptionsFactory,
+                deps: [SessionMementoService]
+            }
+        }),
+        RouterModule
+    ],
+    providers: [
+        AuthGuard,
+        AdminAuthGuard,
+        IrbGuard,
+        BrowserGuard,
+        Auth0AdapterService,
+        Auth0RenewService,
+        ConfigurationService,
+        UserProfileBusService,
+        LoggingService,
+        SessionMementoService,
+        AnalyticsEventsService,
+        UserActivityServiceAgent,
+        SubjectInvitationServiceAgent,
+        UserProfileServiceAgent,
+        ActivityServiceAgent,
+        PrequalifierServiceAgent,
+        GovernedParticipantsServiceAgent,
+        ActivityInstanceStatusServiceAgent,
+        LanguageServiceAgent,
+        MailingListServiceAgent,
+        ActivityValidatorBuilder,
+        ActivitySuggestionBuilder,
+        ActivityConverter,
+        ActivityQuestionConverter,
+        ActivityComponentConverter,
+        FireCloudServiceAgent,
+        WindowRef,
+        ExceptionDispatcher,
+        ConsentServiceAgent,
+        AddressService,
+        AddressEntryDataService,
+        CountryService,
+        DateService,
+        InstitutionServiceAgent,
+        ScriptLoaderService,
+        MedicalProvidersServiceAgent,
+        WorkflowServiceAgent,
+        NGXTranslateService,
+        SuggestionServiceAgent,
+        IrbPasswordService,
+        ResendEmailServiceAgent,
+        AnnouncementsServiceAgent,
+        UserManagementServiceAgent,
+        UserInvitationServiceAgent,
+        BrowserContentService,
+        TemporaryUserServiceAgent,
+        InvitationServiceAgent,
+        Title,
+        RenewSessionNotifier,
+        LanguageService,
+        DisplayLanguagePopupServiceAgent,
+        StudyDetailServiceAgent,
+        StatisticsServiceAgent,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: StackdriverErrorReporterService
+        }
+    ],
+    declarations: [
+        NetworkSnifferComponent,
+        NewRequestMock,
+        ValidationMessage,
 
-    LoginComponent,
-    SignInOutComponent,
-    UserProfileComponent,
-    ParticipantProfileComponent,
-    UserPreferencesComponent,
-    UserActivitiesComponent,
-    DashboardComponent,
-    ChangeLanguageRedirectComponent,
-    PopupWithCheckboxComponent,
+        LoginComponent,
+        SignInOutComponent,
+        UserProfileComponent,
+        ParticipantProfileComponent,
+        UserPreferencesComponent,
+        UserActivitiesComponent,
+        DashboardComponent,
+        ChangeLanguageRedirectComponent,
+        PopupWithCheckboxComponent,
 
-    // activity form
-    ActivityComponent,
-    ActivityRedesignedComponent,
-    ActivitySectionComponent,
-    ActivityQuestionComponent,
-    ActivityBooleanAnswer,
-    ActivityTextAnswer,
-    ActivityEmailInput,
-    ActivityNumericAnswer,
-    ActivityAnswerComponent,
-    ActivityPicklistAnswer,
-    ActivityDateAnswer,
-    ActivityCompositeAnswer,
-    ActivityAgreementAnswer,
-    ActivityContentComponent,
-    GroupBlock,
-    GroupBlockList,
-    ConditionalBlockComponent,
-    QuestionPromptComponent,
-    DropdownActivityPicklistQuestion,
-    CheckboxesActivityPicklistQuestion,
-    RadioButtonsActivityPicklistQuestion,
-    InstitutionComponent,
-    InstitutionsFormComponent,
-    LoadingComponent,
-    LoaderComponent,
-    UserMenuComponent,
-    LanguageSelectorComponent,
-    ManageParticipantsComponent,
-    Auth0CodeCallbackComponent,
-    RedirectToAuth0LoginComponent,
-    FireCloudListStudiesComponent,
-    FireCloudListWorkspacesComponent,
-    ExportStudyComponent,
-    DatePickerComponent,
-    AddressInputComponent,
-    AddressEmbeddedComponent,
-    VerifyAgeUpComponent,
-    AcceptAgeUpComponent,
-    InputRestrictionDirective,
-    LazyLoadResourcesDirective,
-    UpperCaseInputDirective,
-    AddressGoogleAutocompleteDirective,
-    RouteTransformerDirective,
-    InvitationCodeFormatterDirective,
-    InvitationPipe,
-    TooltipComponent,
-    SubjectPanelComponent
-  ],
-  exports: [
-    NetworkSnifferComponent,
-    NewRequestMock,
+        // activity form
+        ActivityComponent,
+        ActivityRedesignedComponent,
+        ActivitySectionComponent,
+        ActivityQuestionComponent,
+        ActivityBooleanAnswer,
+        ActivityTextAnswer,
+        ActivityEmailInput,
+        ActivityNumericAnswer,
+        ActivityAnswerComponent,
+        ActivityPicklistAnswer,
+        ActivityDateAnswer,
+        ActivityCompositeAnswer,
+        ActivityAgreementAnswer,
+        ActivityContentComponent,
+        GroupBlock,
+        GroupBlockList,
+        ModalActivityBlockComponent,
+        ConditionalBlockComponent,
+        QuestionPromptComponent,
+        DropdownActivityPicklistQuestion,
+        CheckboxesActivityPicklistQuestion,
+        RadioButtonsActivityPicklistQuestion,
+        InstitutionComponent,
+        InstitutionsFormComponent,
+        LoadingComponent,
+        LoaderComponent,
+        UserMenuComponent,
+        LanguageSelectorComponent,
+        ManageParticipantsComponent,
+        Auth0CodeCallbackComponent,
+        RedirectToAuth0LoginComponent,
+        FireCloudListStudiesComponent,
+        FireCloudListWorkspacesComponent,
+        ExportStudyComponent,
+        DatePickerComponent,
+        AddressInputComponent,
+        AddressEmbeddedComponent,
+        VerifyAgeUpComponent,
+        AcceptAgeUpComponent,
+        InputRestrictionDirective,
+        LazyLoadResourcesDirective,
+        UpperCaseInputDirective,
+        AddressGoogleAutocompleteDirective,
+        RouteTransformerDirective,
+        InvitationCodeFormatterDirective,
+        InvitationPipe,
+        TooltipComponent,
+        SubjectPanelComponent,
+        AdminActionPanelComponent,
+        ProgressIndicatorComponent,
+        ActivityBlockComponent
+    ],
+    exports: [
+        NetworkSnifferComponent,
+        NewRequestMock,
 
-    LoginComponent,
-    SignInOutComponent,
-    UserProfileComponent,
-    ParticipantProfileComponent,
-    UserActivitiesComponent,
-    DashboardComponent,
-    ChangeLanguageRedirectComponent,
-    PopupWithCheckboxComponent,
+        LoginComponent,
+        SignInOutComponent,
+        UserProfileComponent,
+        ParticipantProfileComponent,
+        UserActivitiesComponent,
+        DashboardComponent,
+        ChangeLanguageRedirectComponent,
+        PopupWithCheckboxComponent,
 
-    ActivityComponent,
-    ActivityRedesignedComponent,
-    ActivitySectionComponent,
-    ActivityQuestionComponent,
-    ActivityBooleanAnswer,
-    ActivityTextAnswer,
-    ActivityEmailInput,
-    ActivityNumericAnswer,
-    ActivityAnswerComponent,
-    ActivityPicklistAnswer,
-    ActivityDateAnswer,
-    ActivityCompositeAnswer,
-    ActivityAgreementAnswer,
-    ActivityContentComponent,
-    GroupBlock,
-    GroupBlockList,
-    ConditionalBlockComponent,
-    QuestionPromptComponent,
-    DropdownActivityPicklistQuestion,
-    CheckboxesActivityPicklistQuestion,
-    RadioButtonsActivityPicklistQuestion,
-    InstitutionComponent,
-    InstitutionsFormComponent,
+        ActivityComponent,
+        ActivityRedesignedComponent,
+        ActivitySectionComponent,
+        ActivityQuestionComponent,
+        ActivityBooleanAnswer,
+        ActivityTextAnswer,
+        ActivityEmailInput,
+        ActivityNumericAnswer,
+        ActivityAnswerComponent,
+        ActivityPicklistAnswer,
+        ActivityDateAnswer,
+        ActivityCompositeAnswer,
+        ActivityAgreementAnswer,
+        ActivityContentComponent,
+        GroupBlock,
+        GroupBlockList,
+        ModalActivityBlockComponent,
+        ConditionalBlockComponent,
+        QuestionPromptComponent,
+        DropdownActivityPicklistQuestion,
+        CheckboxesActivityPicklistQuestion,
+        RadioButtonsActivityPicklistQuestion,
+        InstitutionComponent,
+        InstitutionsFormComponent,
 
-    LoadingComponent,
-    LoaderComponent,
-    UserMenuComponent,
-    LanguageSelectorComponent,
-    ManageParticipantsComponent,
-    RedirectToAuth0LoginComponent,
-    Auth0CodeCallbackComponent,
-    FireCloudListStudiesComponent,
-    FireCloudListWorkspacesComponent,
-    ExportStudyComponent,
-    DatePickerComponent,
+        LoadingComponent,
+        LoaderComponent,
+        UserMenuComponent,
+        LanguageSelectorComponent,
+        ManageParticipantsComponent,
+        RedirectToAuth0LoginComponent,
+        Auth0CodeCallbackComponent,
+        FireCloudListStudiesComponent,
+        FireCloudListWorkspacesComponent,
+        ExportStudyComponent,
+        DatePickerComponent,
 
-    AddressInputComponent,
-    AddressEmbeddedComponent,
-    VerifyAgeUpComponent,
-    AcceptAgeUpComponent,
-    ValidationMessage,
-    TranslateModule,
-    LazyLoadResourcesDirective,
-    RouteTransformerDirective,
-    UpperCaseInputDirective,
-    InvitationCodeFormatterDirective,
-    InvitationPipe,
-    TooltipComponent,
-    SubjectPanelComponent
-  ],
-  entryComponents: [
-    UserPreferencesComponent,
-    ManageParticipantsComponent,
-    NewRequestMock
-  ]
+        AddressInputComponent,
+        AddressEmbeddedComponent,
+        VerifyAgeUpComponent,
+        AcceptAgeUpComponent,
+        ValidationMessage,
+        TranslateModule,
+        LazyLoadResourcesDirective,
+        RouteTransformerDirective,
+        UpperCaseInputDirective,
+        InvitationCodeFormatterDirective,
+        InvitationPipe,
+        TooltipComponent,
+        SubjectPanelComponent,
+        AdminActionPanelComponent,
+        ProgressIndicatorComponent,
+        ActivityBlockComponent
+    ]
 })
-export class DdpModule { }
+export class DdpModule {
+}

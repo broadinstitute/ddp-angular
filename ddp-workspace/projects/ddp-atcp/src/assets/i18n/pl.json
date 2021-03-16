@@ -6,7 +6,7 @@
     },
     "SecondParagraph": {
       "TextOne": "U rodzeństwa z A-T można zauważyć więcej podobieństw w objawach klinicznych niż u dzieci, które obciążone są tymi samymi mutacjami, ale należą do innych rodzin. Dlatego naukowcy uważają, iż geny rodzinne, inne niż te, które wywołują A-T, mogą modyfikować wpływ A-T na pacjentów. Dodatkowo możliwe jest, że życie w różnych środowiskach, prowadzenie odmiennego trybu życia oraz stosowanie różnych diet może wpływać na zdrowie osób z A-T.",
-      "TextSecond": "Nie tak dawno zidentyfikowaliśmy kilka osób, które posiadają typowe, chorobotwórcze mutacje w ich genach A-T i nie wytwarzają białek A-T (tak jak inne osoby z A-T), a jednak ich objawy A-T są zadziwiająco łagodne. Jesteśmy dobrej myśli, że być może uda nam się wykryć zmiany w innych genach, które naprawiają bądź kompensują mutacje A-T u pacjentów z takimi \\\"wyjątkowo łagodnymi\\\" objawami. Gdyby tak było, badacze mogliby znaleźć nowe metody leczenia wszystkich osób z A-T. Jednakże najpierw musimy zebrać dane kliniczne i genetyczne od jak największej liczby osób z A-T.",
+      "TextSecond": "Nie tak dawno zidentyfikowaliśmy kilka osób, które posiadają typowe, chorobotwórcze mutacje w ich genach A-T i nie wytwarzają białek A-T (tak jak inne osoby z A-T), a jednak ich objawy A-T są zadziwiająco łagodne. Jesteśmy dobrej myśli, że być może uda nam się wykryć zmiany w innych genach, które naprawiają bądź kompensują mutacje A-T u pacjentów z takimi \"wyjątkowo łagodnymi\" objawami. Gdyby tak było, badacze mogliby znaleźć nowe metody leczenia wszystkich osób z A-T. Jednakże najpierw musimy zebrać dane kliniczne i genetyczne od jak największej liczby osób z A-T.",
       "TextThird": "W podobny sposób, porównując wywiady chorobowe oraz tryb życia różnych pacjentów z A-T, badacze będą w stanie określić, które strategie radzenia sobie z symptomami dają lepsze rezultaty zdrowotne. Najpierw jednak musimy uzyskać i połączyć dane od wielu pacjentów z A-T w jednym miejscu.",
       "Title": "A-T dotyka każdego w inny sposób."
     },
@@ -65,69 +65,108 @@
     "Doctors": [
       {
         "Hospital": "profesor emerytowany genetyki medycznej – Uniwersytet Cambridge, Cambridge, Wielka Brytania oraz honorowy członek wydziału, Instytut Wellcome Trust Sanger, Hinxton, Wielka Brytania",
-        "Name": "Martin Bobrow",
-        "Rank": "lek."
+        "Name": "lek. Martin Bobrow",
+        "Rank": ""
       },
       {
         "Hospital": "profesor genetyki medycznej, Uniwersytet Sapienza, Rzym, Włochy",
-        "Name": "Luciana Chessa"
+        "Name": "dr n.med. Luciana Chessa",
+        "Rank": ""
       },
       {
-        "Hospital": "dyrektor oddziału pediatrii, Szpital Wesley, Queensland, Australia"
+        "Hospital": "dyrektor oddziału pediatrii, Szpital Wesley, Queensland, Australia",
+        "Name": "dr David Coman",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor nadzwyczajny pediatrii i neurologii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
+        "Hospital": "profesor nadzwyczajny pediatrii i neurologii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA",
+        "Name": "lek. Thomas Crawford",
+        "Rank": ""
       },
       {
-        "Hospital": "dyrektor, Google Genomics, Mountain View, CA, USA"
+        "Hospital": "dyrektor, Google Genomics, Mountain View, CA, USA",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "pediatria i biologia rozwojowa, Uniwersytet Medyczny i Stomatologiczny w Tokio, Japonia"
+        "Hospital": "pediatria i biologia rozwojowa, Uniwersytet Medyczny i Stomatologiczny w Tokio, Japonia",
+        "Name": "lek. Setsuko Hasegawa",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor nadzwyczajny, Uniwersytet Queensland, Queensland, Australia"
+        "Hospital": "profesor nadzwyczajny, Uniwersytet Queensland, Queensland, Australia",
+        "Name": "dr Lutz Krause",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor, założyciel Onkologii Molekularnej, Uniwersytet Queensland, Brisbane, Australia"
+        "Hospital": "profesor, założyciel Onkologii Molekularnej, Uniwersytet Queensland, Brisbane, Australia",
+        "Name": "dr Martin Lavin",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor pediatrii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA"
+        "Hospital": "profesor pediatrii, Centrum Dziecięce im. Johnsa Hopkinsa, Baltimore, MD, USA",
+        "Name": "dr n.med. Howard Lederman",
+        "Rank": ""
       },
       {
-        "Hospital": "immunohematologia dziecięca, Koordynator Francuskiego Ośrodka Referencyjnego ds. Pierwotnych Zaburzeń Odporności, Szpital Neckera, Paryż, Francja"
+        "Hospital": "immunohematologia dziecięca, Koordynator Francuskiego Ośrodka Referencyjnego ds. Pierwotnych Zaburzeń Odporności, Szpital Neckera, Paryż, Francja",
+        "Name": "lek. Nizar Mahlaoui",
+        "Rank": ""
       },
       {
-        "Hospital": "neurolog dziecięcy, Centrum Medyczne Sheba, Ramat Gan, Izrael"
+        "Hospital": "neurolog dziecięcy, Centrum Medyczne Sheba, Ramat Gan, Izrael",
+        "Name": "lek. Andreea Nissenkorn",
+        "Rank": ""
       },
       {
-        "Hospital": "główny inspektor danych, Broad Institute, Cambridge, MA, USA"
+        "Hospital": "główny inspektor danych, Broad Institute, Cambridge, MA, USA",
+        "Name": "dr n.med. Anthony Philippakis",
+        "Rank": ""
       },
       {
-        "Hospital": "Krajowy Ośrodek Chorób Rzadkich, Rzym, Włochy"
+        "Hospital": "Krajowy Ośrodek Chorób Rzadkich, Rzym, Włochy",
+        "Name": "dr n.med. Agata Polizzi",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor genetyki człowieka, Uniwersytet Telawiwski, Ramat Aviv, Izrael"
+        "Hospital": "profesor genetyki człowieka, Uniwersytet Telawiwski, Ramat Aviv, Izrael",
+        "Name": "dr Yosef Shiloh",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
+        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania",
+        "Name": "dr Grant Stewart",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor genetyki, Uniwersytet Paris Descartes, oraz dziekan wydziału genetyki, Instytut Curie, Paryż, Francja"
+        "Hospital": "profesor genetyki, Uniwersytet Paris Descartes, oraz dziekan wydziału genetyki, Instytut Curie, Paryż, Francja",
+        "Name": "dr n.med. Dominique Stoppa-Lyonnet",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor nadzwyczajny, Uniwersytet Medyczny i Stomatologiczny Tokio, Tokio, Japonia"
+        "Hospital": "profesor nadzwyczajny, Uniwersytet Medyczny i Stomatologiczny Tokio, Tokio, Japonia",
+        "Name": "dr n.med. Masatoshi Takagi",
+        "Rank": ""
       },
       {
-        "Hospital": "dyrektor wykonawczy, Public Population Project in Genomics and Society, Montreal, Kanada"
+        "Hospital": "dyrektor wykonawczy, Public Population Project in Genomics and Society, Montreal, Kanada",
+        "Name": "dr Anne-Marie TassÃ©",
+        "Rank": ""
       },
       {
-        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania"
+        "Hospital": "profesor genetyki nowotworów, Uniwersytet Medyczny w Birmingham, Birmingham, Wielka Brytania",
+        "Name": "dr A. Malcolm Taylor",
+        "Rank": ""
       },
       {
-        "Hospital": "kliniczny profesor nadzwyczajny, Uniwersytet w Nottingham, Nottingham, Wielka Brytania"
+        "Hospital": "kliniczny profesor nadzwyczajny, Uniwersytet w Nottingham, Nottingham, Wielka Brytania",
+        "Name": "lek. William Whitehouse",
+        "Rank": ""
       },
       {
-        "Hospital": "szpital dziecięcy uniwersytetu im. Johanna Wolfganga Goethego, Frankfurt, Niemcy"
+        "Hospital": "szpital dziecięcy uniwersytetu im. Johanna Wolfganga Goethego, Frankfurt, Niemcy",
+        "Name": "dr n.med. Stefan Zielen",
+        "Rank": ""
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "WMamy nadzieję, że Platforma w przyszłości będzie współpracować z kolejnymi organizacjami w celu uzyskania innych danych biologicznych lub informacji dotyczących stylu życia, takich jak na przykład korzystanie z technologii noszonych na ciele, po to, aby zyskać informacje o tym, jak osoba z A-T się porusza."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Aby kontynuować, musisz potwierdzić swój adres e-mail.",
+    "EmailConfirmed": "Twój adres e-mail został pomyślnie potwierdzony."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Prześlij"
+      },
+      "Expand": {
+        "Title": "Rozwiń"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "O inicjatywie",
       "AboutUs": "O nas",
+      "DataAccessRequest": "Żądanie dostępu do danych",
+      "ForResearchers": "Dla Naukowców",
       "JoinUs": "Dołącz do nas",
       "Language": "Język",
       "LearnMore": "Dowiedz się więcej",
+      "MedicalHistoryQuestionnaire": "Dokumentacja medyczna",
+      "FeedingSurvey": "Ankieta dotycząca karmienia",
       "MyAccount": "Moje konto",
+      "MyDashboard": "Mój pulpit",
       "Next": "Dalej",
       "Previous": "Wstecz",
       "SignIn": "Zaloguj się",
-      "YourParticipants": "Twoi uczestnicy",
-      "ForResearchers": "Dla Naukowców",
-      "DataAccessRequest": "Żądanie dostępu do danych"
+      "Statistics": "Statystyki platformy",
+      "Submit": "Prześlij",
+      "YourParticipants": "Twoi uczestnicy"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "Ogólnoświatowa platforma danych stowarzyszenia rodzin z A-T prowadzona jest wspólnym wysiłkiem pacjentów pod nadzorem rodzin i ekspertów na całym świecie. Dzięki niej informacje zdrowotne, genetyczne, ale i inne, mogą zostać przekazane naukowcom. Platforma ta umożliwi badaczom szybki, bezpieczny i sprawny dostęp do ważnych informacji o pacjentach z całego świata, co może przyczynić się do nowych odkryć."
-    },
-    "OrganizationForm": {
-      "Country": "Kraj",
-      "State": "Stan/prowincja"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Dołącz do naszych poszukiwań i bądź na bieżąco z najnowszymi odkryciami."
     }
   },
+  "JoinUs": {
+    "SignInButton": "Już się zarejestrowałeś? Zaloguj się"
+  },
   "SDK": {
+    "DownloadButton": "Pobierz ocenę",
     "CancelButton": "Anuluj",
+    "CloseButton": "Zamknij",
+    "CommunicationError": "Podczas zapisywania danych wystąpił problem. Przed wysłaniem należy sprawdzić formularz i swoje odpowiedzi",
     "Dashboard": {
+      "Text": "",
       "Title": "Moja konsola"
+    },
+    "DatePicker": {
+      "April": "kwiecień",
+      "August": "sierpień",
+      "Day": "Wybierz dzień...",
+      "December": "grudzień",
+      "February": "luty",
+      "January": "styczeń",
+      "July": "lipiec",
+      "June": "czerwiec",
+      "March": "marzec",
+      "May": "maj",
+      "Month": "Wybierz miesiąc...",
+      "November": "listopad",
+      "October": "październik",
+      "September": "wrzesień",
+      "Year": "Wybierz rok..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "pozostało znaków",
+      "SingularForm": "pozostał znak"
     },
     "DoNotAssent": "Brak zgody",
     "DoNotConsent": "Nie udzielono zgody",
@@ -287,36 +368,85 @@
         "Download": "Pobierz kompletny formularz zgody"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Miejscowość"
-      }
-    },
     "JoinUsButton": "Dołącz do nas",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Uczestnik"
+      "AddParticipant": "Dodaj uczestnika",
+      "ParticipantPlaceholder": "Uczestnik",
+      "ParticipantsList": "Członkowie rodzin chorujący na A-T"
     },
     "NextButton": "Dalej",
     "PreviousButton": "Wstecz",
     "RegisterButton": "Zarejestruj się",
     "SaveAndSubmit": "Zapisz i prześlij",
     "SaveAndSubmitEnrollment": "Zapisz i wyślij formularz rejestracji",
+    "SavingButton": "Zapisywanie",
     "SignAndAssent": "Podpis i udzielenie zgody przez osobę małoletnią",
     "SignAndConsent": "Podpis i udzielenie zgody",
     "StartOrResume": "Rozpocznij/wznów",
+    "SubmitButton": "Prześlij",
+    "SuccessSignIn": "Logowanie przebiegło pomyślnie.",
+    "SignInOut": {
+      "SignOut": "Wyloguj"
+    },
+    "Title": {
+      "Alert": "Twoja sesja wkrótce wygaśnie",
+      "Default": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T"
+    },
+    "TooltipAlt": "Czyje imię i nazwisko mam wpisać?",
     "UserActivities": {
       "ActivityActions": "Działania",
-      "ActivityStatus": "Status"
+      "ActivityDate": "Utworzono",
+      "ActivityName": "Formularz",
+      "ActivityStatus": "Status",
+      "ActivityStatuses": {
+        "COMPLETE": "Wypełniono",
+        "CREATED": "Nie rozpoczęto",
+        "IN_PROGRESS": "W toku"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} Odpowiedziano",
+      "Summary": "Podsumowanie",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} ankiet do wypełnienia",
+        "Singular": "{{ count }} ankieta do wypełnienia"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Wyloguj"
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "Płeć",
+      "UserPreferencesLocale": "Preferowany język",
+      "UserPreferencesTitle": "Preferencje użytkownika"
+    },
+    "ValidateError": "Nie można przesłać dalej. Aby uzyskać szczegółowe informacje, należy sprawdzić wiadomości w formularzu.",
+    "Validators": {
+      "DateNavyValidationRule": "Podana data jest nieprawidłowa"
+    }
+  },
+  "Statistics": {
+    "Title": "Ogólnoświatowa Platforma Danych Stowarzyszenia Rodzin z A-T w liczbach",
+    "CountList": {
+      "totalParticipantsCount": "Łączna liczba uczestników",
+      "countriesCount": "Reprezentowane kraje",
+      "genomeStudyParticipantsCount": "Osoby wyrażające zgodę na udział w sekwencjonowaniu genomu",
+      "governedParticipantsCount": "Dzieci zapisane przez rodziców",
+      "selfEnrolledParticipantsCount": "Uczestnicy zarejestrowani samodzielnie"
+    },
+    "Subtitle": "Reprezentowane kraje"
+  },
+  "Survey": {
+    "Self": "{{ firstName }}proces rekrutacji uczestnika",
+    "NewParticipant": "New Participantproces rekrutacji uczestnika",
+    "ThankYouPopup": {
+      "Text": "Dziękujemy za przesłanie ankiety"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "lub"
-      }
+    "ActivityActions": {
+      "Continue": "Dalej",
+      "Start": "Rozpocznij",
+      "View": "Podgląd",
+      "Edit": "Edytuj"
     },
     "Dashboard": {
       "Actions": "Działania",
@@ -332,27 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "Anuluj",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Podaj prawidłowy adres e-mail",
+            "Placeholder": "Potwierdzenie adresu e-mail *"
+          },
           "Email": {
+            "Error": "Podaj prawidłowy adres e-mail",
             "Placeholder": "Adres e-mail"
           },
           "FirstName": {
+            "Error": "Wymagane jest imię",
             "Placeholder": "Imię"
           },
           "LastName": {
+            "Error": "Wymagane jest nazwisko",
             "Placeholder": "Nazwisko"
           }
-        }
+        },
+        "LoadingError": "Przykro nam, ale wystąpił błąd.",
+        "MatchEmailsError": "Upewnij się, że oba pola e-mail są wypełnione i że adresy się zgadzają.",
+        "Required": "",
+        "SubmitButton": "Dołącz do listy mailingowej",
+        "Text": "Podaj nam swój adres e-mail. Będziemy wtedy przekazywać ci informacje o ważnych wydarzeniach w Ogólnoświatowej Platformie Danych Stowarzyszenia Rodzin z A-T.",
+        "Title": "Zapisz się, aby otrzymywać informacje"
       },
       "SessionWillExpire": {
         "Continue": "Dalej",
-        "SignOut": "Wyloguj"
+        "SignOut": "Wyloguj",
+        "Text": "Jeśli odejdziesz na pewien czas, system wyloguje Cię ze względu na ochronę Twojej prywatności. Kliknij „Kontynuuj”, aby pozostać zalogowanym/ą. Kliknij „Wyloguj się”, jeśli na razie chcesz zakończyć.",
+        "Title": "Twoja sesja wkrótce wygaśnie"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Twój link do resetowania hasła wygasł."
     },
     "ErrorPage": {
       "DefaultText": {
-        "TextPt1": "Jeżeli problemy będą nadal występować, skontaktuj się z "
+        "TextPt1": "Jeżeli problemy będą nadal występować, skontaktuj się z ",
+        "TextPt2": ""
       },
+      "Text": "",
       "Title": "Niestety wystąpił błąd. Prosimy spróbować później."
+    },
+    "Password": {
+      "InputPlaceholder": "Hasło",
+      "PasswordRequiredError": "Wymagane jest hasło",
+      "PasswordWrongError": "Niepoprawne hasło. Proszę spróbować ponownie.",
+      "Text": "Proszę wprowadzić swoje hasło *",
+      "Title": "Proszę wprowadzić hasło"
+    },
+    "SessionExpired": {
+      "Text": "Ponieważ przez pewien czas Cię nie było, ze względów bezpieczeństwa nastąpiło wylogowanie. Zaloguj się ponownie, aby powrócić do ostatnio otwartej strony."
+    },
+    "StayInformed": {
+      "Text": "Dziękujemy za dołączenie do listy mailingowej Ogólnoświatowej Platformy Danych Stowarzyszenia Rodzin z A-T. Będziemy ci przekazywać informacje o tej inicjatywie na podany adres e-mail.",
+      "Title": "Otrzymuj informacje na bieżąco"
     }
   },
   "WorkflowProgress": {
@@ -367,9 +531,5 @@
       "CREATED": "Nie rozpoczęto",
       "IN_PROGRESS": "W toku"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Aby kontynuować, musisz potwierdzić swój adres e-mail.",
-    "EmailConfirmed": "Twój adres e-mail został pomyślnie potwierdzony."
   }
 }

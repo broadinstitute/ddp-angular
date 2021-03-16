@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChange, EventEmitter, ViewChild, Renderer2 } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DateService } from '../services/dateService.service';
 import { DatePickerValue } from '../models/datePickerValue';
@@ -62,7 +62,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
         <div *ngIf="showCalendar && !readonly" style="overflow: hidden;margin-top:10px">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          <input matInput [matDatepicker]="picker" style="visibility: hidden;width:0px;"
+          <input matInput [matDatepicker]="picker" style="visibility: hidden;width:0;"
                  (dateChange)="addEvent($event)">
         </div>
       </div>
@@ -70,7 +70,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
         <div style="float: left;">
           <mat-form-field floatLabel="always">
             <mat-label *ngIf="label" [innerHTML]="label"></mat-label>
-            <input matInput [matDatepicker]="picker"
+            <input matInput [matDatepicker]="picker" [disabled]="readonly"
                    [placeholder]="placeholder || 'Choose a date'" [(ngModel)]="singleDate" [ngModelOptions]="{updateOn: 'blur'}">
             <mat-datepicker-toggle *ngIf="showCalendar" matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -138,7 +138,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
           <mat-datepicker #picker></mat-datepicker>
           <input size="0" matInput
                  [matDatepicker]="picker"
-                 style="visibility: hidden;width:0px;"
+                 style="visibility: hidden;width:0;"
                  [min]="minDate"
                  [max]="maxDate"
                  (dateChange)="addEvent($event)">
@@ -195,6 +195,11 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
     }`]
 })
 export class DatePickerComponent implements OnChanges {
+    public daysInMonth: Array<number> = Array.from(new Array(31), (x, i) => i + 1);
+    public years: Array<number>;
+    public selectedMonth: string;
+    public selectedDay: string;
+    public selectedYear: string;
     @Input() label: string;
     @Input() readonly: boolean;
     @Input() placeholder: string;
@@ -209,11 +214,6 @@ export class DatePickerComponent implements OnChanges {
     @ViewChild('MM', { static: false }) private MM;
     @ViewChild('DD', { static: false }) private DD;
     @ViewChild('YYYY', { static: false }) private YYYY;
-    public daysInMonth: Array<number> = Array.from(new Array(31), (x, i) => i + 1);
-    public years: Array<number>;
-    public selectedMonth: string;
-    public selectedDay: string;
-    public selectedYear: string;
     private cachedDate: Date | null = null;
 
     // NOTE: internal dates stored in "selected" or "DatePickerValue" have month in range [1, 12].
@@ -295,6 +295,8 @@ export class DatePickerComponent implements OnChanges {
             this.selectedDay = day.toString();
             this.selectedYear = year.toString();
             this.emitValue(year, month, day);
+        } else {
+            this.discardValue();
         }
     }
 
@@ -390,6 +392,10 @@ export class DatePickerComponent implements OnChanges {
         }
     }
 
+    public floatLabelType(): string | null {
+        return this.label ? 'always' : null;
+    }
+
     private emitValue(year: number, month: number, day: number): void {
         const valueToEmit = {
             year: this.includeYearField() ? year : null,
@@ -397,6 +403,10 @@ export class DatePickerComponent implements OnChanges {
             day: this.includeDayField() ? day : null,
         };
         this.valueChanged.emit(valueToEmit);
+    }
+
+    private discardValue(): void {
+        this.valueChanged.emit(null);
     }
 
     private includeMonthField(): boolean {
@@ -440,8 +450,5 @@ export class DatePickerComponent implements OnChanges {
         } else {
             return null;
         }
-    }
-    public floatLabelType(): string | null {
-      return this.label ? 'always' : null;
     }
 }

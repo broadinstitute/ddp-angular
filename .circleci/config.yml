@@ -12,17 +12,17 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston mpc prion atcp rgp rarex"
+    "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc"
   study_guids: &study_guids
-      "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rgp rarex"
-  config_deployment_dir: &config_deployment_dir
-      config/deployment
+    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc"
+  dispatch_secret_id: &dispatch_secret_id
+      app-engine-dispatch
 
 # Container for all the builds
 executors:
   build-executor:
     docker:
-      - image: broadinstitute/study-website-build:07-28-2020A
+      - image: broadinstitute/study-website-build:12-08-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
 
@@ -37,6 +37,7 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - run-linter-check
       - run-tests
       - build-app
       - store-app-build
@@ -57,6 +58,7 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
+            - run-linter-check
             - run-tests
             - build-app
             - deploy-exploded-build:
@@ -132,9 +134,9 @@ commands:
     parameters:
       study_key:
         type: string
-      config_deploy_dir:
+      dispatch_secret_id:
         type: string
-        default: *config_deployment_dir
+        default: *dispatch_secret_id
     steps:
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
@@ -165,8 +167,10 @@ commands:
           name: Update GAE dispatch config
           command: |
             set -u
-            DISPATCH_FILE_PATH="<< parameters.config_deploy_dir >>/${ENVIRONMENT}/dispatch.yaml"
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" "${DISPATCH_FILE_PATH}"
+            echo "Reading dispatch file from Secret Manager secret id '<<parameters.dispatch_secret_id>>'"
+            gcloud secrets versions access latest --secret '<<parameters.dispatch_secret_id>>' --project "broad-ddp-${ENVIRONMENT}" > dispatch.yaml
+            cat dispatch.yaml
+            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" dispatch.yaml
           working_directory: *repo_path
       - run:
           name: Update deployments sheet
@@ -266,6 +270,15 @@ commands:
           key: *npm_cache_key
           paths:
             - ./node_modules
+
+  run-linter-check:
+    description: "Run linter check"
+    steps:
+      - run:
+          name: Linter check
+          command: |
+            ng lint
+
   run-tests:
     description: "Run all tests"
     steps:
@@ -283,13 +296,43 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
+  build-atcp-assets:
+    description: build atcp auth0 scripts & styles
+    steps:
+      - run:
+          name: build atcp auth0 scripts
+          command: |
+            set -u
+            ng build ddp-atcp-auth
+      - run:
+          name: build atcp auth0 styles
+          command: |
+            set -u
+            ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
+
+  execute-study-specific-commands:
+    description: run study specific commands if necessary
+    steps:
+      - when:
+          condition:
+            equal: [ atcp, << pipeline.parameters.study_key >> ]
+          steps:
+            - build-atcp-assets
+
   build-app:
     description: "Build DDP study app"
     steps:
+      - when:
+          condition:
+            or:
+              - equal: [ atcp, << pipeline.parameters.study_key >> ]
+          steps:
+            - execute-study-specific-commands
       - run:
           name: ng build
           command: |
             set -u
+            export NODE_OPTIONS="--max-old-space-size=4096"
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
 
   store-app-build:
@@ -438,6 +481,10 @@ jobs:
           study_key: rarex
       - conditionally-launch-build-and-store:
           study_key: rgp
+      - conditionally-launch-build-and-store:
+          study_key: esc
+      - conditionally-launch-build-and-store:
+          study_key: prion
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -520,7 +567,6 @@ workflows:
                 - staging
                 - production
           study_key: osteo
-
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: brain
@@ -545,6 +591,12 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: rgp
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: esc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: prion
 
   nightly:
     triggers:
@@ -582,3 +634,9 @@ workflows:
       - build-and-deploy-job:
           name: rgp-nightly
           study_key: rgp
+      - build-and-deploy-job:
+          name: esc-nightly
+          study_key: esc
+      - build-and-deploy-job:
+          name: prion-nightly
+          study_key: prion

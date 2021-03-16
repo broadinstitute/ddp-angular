@@ -1,0 +1,600 @@
+{
+    "App": {
+        "Home": "Home",
+        "FAQ": "More Details/FAQ",
+        "About": "About Us",
+        "Join": "Join Mailing List",
+        "Info": "Information for Physicians",
+        "Data": "Data"
+    },
+    "Common": {
+        "CMIButton": "count me in"
+    },
+    "Welcome": {
+        "Intro": {
+            "Title": "You can have a direct impact on the future of Esophageal and Stomach Cancer",
+            "Text": "If you have been diagnosed with esophageal or gastric/stomach cancer, join a nationwide initiative of patients, doctors, and scientists by sharing your tumor samples, your medical information, and your voice. Together we can develop a comprehensive resource to accelerate discoveries that may inform future therapies."
+        },
+        "FirstBlock": {
+            "Text": "There are significant unmet needs that prevent the development of better therapies for esophageal and gastric/stomach cancer patients, and diagnoses are rising dramatically. If you have esophageal or gastric/stomach cancer, you have the power to accelerate cancer research by combining your data with other patients."
+        },
+        "SecondBlock": {
+            "Title": "Your tumor and medical record could unlock discoveries",
+            "Text": "The unique genetic information in your cancer could hold the key to rapid advances in cancer treatment. By analyzing the DNA in your samples, researchers can make discoveries that will ultimately lead to a better understanding and faster advances in the treatment of esophageal and gastric/stomach cancer. This information will be invaluable to cancer research for years to come."
+        },
+        "ThirdBlock": {
+            "Title": "Here's how you can participate",
+            "FirstStep": {
+                "Title": "Step 1",
+                "Subtitle": "Tell us about yourself",
+                "TextPt1": "Click",
+                "Link": "\"Count Me In\"",
+                "TextPt2": "and complete a short online form to tell us about yourself and your esophageal or gastric/stomach cancer."
+            },
+            "SecondStep": {
+                "Title": "Step 2",
+                "Subtitle": "Give us permission to collect your samples and data",
+                "Text1": "You will be directed to an online consent form where you can provide permission for the project to collect your saliva sample and medical record data. You may also choose to provide a blood sample and/or share access to your stored tumor samples. We will do the rest-- we'll send you the sample collection kit(s) and contact your doctors and hospitals to securely obtain copies of your medical records and tissue samples.",
+                "Text2": {
+                    "Part1": "To learn more about how we collect samples see our",
+                    "Part2": "FAQ"
+                }
+            },
+            "ThirdStep": {
+                "Title": "Step 3",
+                "Subtitle": "Learn with us along the way",
+                "Text": "The data generated from your samples and medical records will be coupled with that of other patients, de-identified, and shared widely with the biomedical community. We may also ask you additional questions about your experiences to help with future studies. We will provide you with regular updates regarding key discoveries and progress from the project, however, please note that individual data cannot be shared."
+            }
+        },
+        "FourthBlock": {
+            "TitlePt1": "The time to",
+            "TitlePt2": "act",
+            "TitlePt3": "is now",
+            "Text": "We are asking you to say \"Count Me In\" and donate something invaluable to cancer research. Your biological samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of esophageal and gastric/stomach cancer."
+        },
+        "FifthBlock": {
+            "LeadTitle": "Lead Project Engagement Partner",
+            "PartnersTitle": "Our Advocacy Partners"
+        },
+        "SixthBlock": {
+            "TitlePt1": "Please join us and say",
+            "TitlePt2": "\"Count Me In\"",
+            "Text": "With your help, patients can be the driving force behind cancer research."
+        }
+    },
+    "AboutUs": {
+        "PageHeader": {
+            "Part1": "The Esophageal and Stomach Cancer Project is part of ",
+            "Part2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+        },
+        "PageHeaderLink": {
+            "Part1": "Visit the",
+            "Part2": "website"
+        },
+        "Title": "About us",
+        "Organization": {
+            "Section1": {
+                "Part1": "is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. For more information about",
+                "Part2": "go to",
+                "Part3": "joincountmein.org"
+            },
+            "Section2": {
+                "Part1": "The Esophageal and Stomach Cancer Project is led by",
+                "Part2": "Dr. Adam Bass",
+                "Part3": "MD, an oncologist and esophageal and gastric/stomach cancer researcher. This project was designed and has been implemented collaboratively with esophageal and gastric/stomach cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
+                "Part4": "Count Me In’s",
+                "Part5": "resources and the voice of the esophageal and gastric/stomach cancer community in order to focus cutting edge genomic science squarely on people living with esophageal and gastric/stomach cancer."
+            }
+        },
+        "Teams": [
+            {
+                "Title": "Leadership Team",
+                "Members": [
+                    {
+                        "Name": "Adam Bass, MD",
+                        "Bio": [
+                            "Adam Bass is an Associate Professor of medicine at Harvard Medical School, a physician/scientist at the Dana-Farber Cancer Institute and Brigham and Women’s Hospital and also is an associate member of the Broad Institute. Dr. Bass obtained his undergraduate degree from Amherst College and his MD degree at Duke University School of Medicine then pursued clinical training in internal medicine at the Massachusetts General Hospital and medical oncology at the Dana-Farber/Partners Cancer Center. At the completion of his clinical training, he was a post-doctoral fellow with Dr. Matthew Meyerson at both the Dana-Farber Cancer Institute and Broad Institute."
+                        ],
+                        "Photo": "assets/images/adam_bass.jpg",
+                        "Alt": "Adam Bass photo"
+                    },
+                    {
+                        "Name": "Jim Palma",
+                        "Bio": [
+                            "Jim Palma is the Executive Director of TargetCancer Foundation in Cambridge, MA. Since joining TargetCancer Foundation in 2010, Jim has overseen its growth from a small start-up to a nationally recognized foundation supporting comprehensive rare cancer research and patient support programs. In addition, Jim serves on the Board of Directors of the National Organization for Rare Disorders (NORD), and is a founding Co-Chair of the NORD Rare Cancers Coalition. Jim attended Loyola University Maryland, and has also completed studies at the Institute for Nonprofit Management and Leadership at the Questrom School of Business at Boston University."
+                        ],
+                        "Photo": "assets/images/jim_palma.jpg",
+                        "Alt": "Jim Palma photo"
+                    }
+                ]
+            },
+            {
+                "Title": "Meet the Project Advisory Council",
+                "Members": [
+                    {
+                        "Name": "Dana Deighton",
+                        "Bio": [
+                            "Dana is an accomplished and enthusiastic marketing professional with decades of experience in corporate marketing and publishing, membership, and partner/project management. After 25 years at National Geographic, she is now in a new career in the health and wellness arena at Inspire, the leading social network for health.",
+                            "Outside of work, she is also focused on healthcare advocacy and policy. In addition to serving as an Executive Board Member of the Esophageal Cancer Action Network (ECAN), she is a Patient Representative on the Locally Advanced Esophageal Cancer Guideline Panel for the American Society of Clinical Oncology (ASCO). Dana lives in Alexandria, VA, with her husband and three teenagers, and enjoys travel and walking and running outdoors."
+                        ],
+                        "Photo": "assets/images/dana_deighton.jpg",
+                        "Alt": "Dana Deighton photo"
+                    },
+                    {
+                        "Name": "Bill Drake",
+                        "Bio": [
+                            "A career marketing and advertising creative executive, Bill was diagnosed with Stage IV esophageal cancer on Sept 11, 2013. A life-long acid reflux condition prompted him to ask for an upper GI endoscopy despite having no symptoms associated with esophageal problems. After his diagnosis Bill responded to treatments with chemotherapy, radiation and immunotherapy under care at Massachusetts General Hospital, until he passed away in July 2019.",
+                            "Bill was an avid esophageal cancer awareness advocate, and played a key role in assembling the Project Advisory Council for the Esophageal and Stomach Cancer Project. In addition, he served on the Board of the Esophageal Cancer Awareness Association and actively volunteered with TargetCancer Foundation. Bill produced and directed a series of YouTube videos called “Living with Esophageal Cancer” that features the stories of 8 esophageal cancer survivors."
+                        ],
+                        "Photo": "assets/images/bill_drake.jpg",
+                        "Alt": "Bill Drake photo"
+                    },
+                    {
+                        "Name": "George Evans",
+                        "Bio": [
+                            "A resident of Chappaqua, NY with his wife and two teenage children, George’s long career as a software engineer led to him most recently heading up the technology department for a hedge fund in NYC. George served on the Project Advisory Council from September 2017 to June 2018, when he passed away. George was diagnosed with Stage IV esophageal cancer on May 24, 2016 and tirelessly fought the disease."
+                        ],
+                        "Photo": "assets/images/george_evans.jpg",
+                        "Alt": "George Evans photo"
+                    },
+                    {
+                        "Name": "Jeff Thomas",
+                        "Bio": [
+                            "Jeff is nearing his 7 year survival anniversary. He volunteers with Imerman’s Angels, Livestrong at the YMCA, and a local men’s cancer support group. He still works full time and enjoys exotic (low budget) trips with his boys. He recently got his first tattoo (a periwinkle ribbon) while visiting Bali, Indonesia.",
+                            "<span class=\"Italic\">“I’m excited about playing a small part in the development of this program. I look forward to working with my fellow survivors to make this project the most comprehensive of its kind. Meeting the folks at the Broad Institute was a real pleasure. These are some of the smartest people I have ever met.”</span>"
+                        ],
+                        "Photo": "assets/images/jeff_thomas.jpg",
+                        "Alt": "Jeff Thomas photo"
+                    }
+                ]
+            }
+        ]
+    },
+    "MoreDetails": {
+        "Title": "Learn more about the Esophageal and Stomach Cancer Project",
+        "MainText": {
+            "Section1": {
+                "Pt1": "The Esophageal and Stomach Cancer Project takes a new approach to cancer research in which researchers partner directly with patients, who share their samples and clinical information in order to speed important discoveries. The project is part of",
+                "Pt2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+                "Pt3": "is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The project also works in collaboration with a growing coalition of nonprofit advocacy partners."
+            },
+            "Section2": "Our goal is to reach out to patients with esophageal and gastric/stomach cancer around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they live."
+        },
+        "HowProjectWorks": {
+            "Title": "Here's how the project works:",
+            "AboutYourself": {
+                "Title": "A. Tell us about yourself.",
+                "Text": {
+                    "Part1": "Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. Click",
+                    "Part2": "and complete a simple online form to tell us about yourself and your cancer. In order to understand this disease, we need to hear about your experiences with esophageal and gastric/stomach cancer and couple that information with what we learn from the DNA in your tumor.",
+                    "Link": "\"Count Me In\""
+                }
+            },
+            "Permission": {
+                "Title": "B. Give us permission to collect your samples and data.",
+                "Text": "Complete an online consent form that requests your permission for the Esophageal and Stomach Cancer Project to obtain copies of your medical records and send you a saliva collection kit. You will be able to choose whether you would like to provide a blood sample, and/or access to a portion of your stored tumor tissue. We’ll also ask you to tell us where you received your medical care so we can contact your doctors and hospitals."
+            },
+            "Request": {
+                "Title": "C. We’ll find and request your records and tissue.",
+                "Text": "Our team will contact your doctors and hospitals to obtain copies of your medical records. If you choose to opt-in and share a portion of your stored tumor samples with the study, we will ask pathology departments to send only a part of the tumor tissue, and not to send anything to us that might be needed for clinical care. You may also choose to provide a blood sample instead of, or in addition to, your stored tumor sample."
+            },
+            "SendUs": {
+                "Title": "D. Provide us with a saliva and/or blood sample.",
+                "Text": "We’ll also send you a simple kit to collect a saliva sample, which will contain \"healthy\" DNA that can be compared with DNA from your tumor sample. We may also send you a simple kit to collect a blood sample. We ask that you bring in a blood tube to your health care providers office and ask them to draw a sample, which may contain DNA from your tumor. This may help us to understand the genomics of your cancer from a simple blood draw."
+            },
+            "Analyze": {
+                "Title": "E. We’ll Analyze Your Tumor and Medical Data.",
+                "Text": "We will perform cutting-edge, comprehensive genomic analyses on your tumor and saliva sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your medical record. Any information that would make it easy to identify you as an individual will be removed from all genomic and clinical data."
+            },
+            "Share": {
+                "Title": "F. We’ll Share the Data with Other Researchers",
+                "Text": "Our database of genomic and medical information (with your identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand esophageal and gastric/stomach cancer and develop new therapies."
+            },
+            "Learn": {
+                "Title": "G. Learn with us along the way.",
+                "Text": "We are excited to learn with you! Throughout the project, we will provide all patients who say “Count Me In” with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+            }
+        },
+        "FAQ": {
+            "Title": "Frequently Asked Questions",
+            "Goal": {
+                "Question": "1. What is the goal of this project?",
+                "Section1": "This project will connect esophageal and gastric/stomach cancer patients at clinics around the country with scientists using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle.",
+                "Section2": "Today, very few patients have the ability to contribute their tumor samples and clinical data to cancer research, largely because they do not have a way of doing so. We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity.",
+                "Section3": "We hope our initial studies will help us understand the genomic landscape of esophageal and gastric/stomach cancer. By discovering the genes that drive this disease and sharing this data, we hope that effective therapies to treat esophageal and gastric/stomach cancer can be developed."
+            },
+            "Research": {
+                "Question": "2. What does it mean that you are conducting genomic and molecular research as part of this project?",
+                "Section1": "This study involves genomic and molecular research to better define the genes and molecules that are important in esophageal and gastric/stomach cancer. Cancers occur when the molecules that control normal cell growth (such as genes and proteins) are altered. Genes are composed of DNA letters, which contain the instructions that tell the cells in our bodies how to grow and work. Changes in the DNA letters of genes that occur in tumor cells and normal tissues are called alterations. Several alterations that occur in certain types of cancers have already been identified and have led to the development of new drugs that specifically target those alterations. However, the vast majority of tumors from patients have not been studied, which means there is a tremendous amount of information about the molecular basis of cancer that is still left to be discovered. Our goal is to discover more alterations involved in cancer, and to better understand those that have been previously described. We think this information could lead to the development of additional cancer therapies and cures.",
+                "Section2": "In order to define these gene alterations in your cancer, we will use a technology called DNA sequencing. Sequencing is a way of reading the DNA letters of your genes to identify alterations in genes that may contribute to the behavior of cells. Some changes in genes occur only in cancer cells. Others occur in normal cells as well, in the genes that may have been passed from parent to child. This research study will examine both kinds of genes."
+            },
+            "WhyBoth": {
+                "Question": "3. Why are you studying both esophageal and gastric/stomach cancer?",
+                "Section1": "In the United States, the most common anatomic location where we see esophageal and gastric/stomach cancer is where the stomach and esophagus meet (often referred to as the gastroesophageal junction or GE Junction). In addition to cancers that arise at this junction, cancers that start in the esophagus may spread to the stomach, and cancers that start in the stomach may spread to the esophagus. Additionally, recent scientific studies indicate that these cancers are strikingly similar on the molecular level. By studying these cancers together we can further compare and contrast them to determine to what extent they have distinct biologic and clinical features."
+            },
+            "Conduct": {
+                "Question": "4. Are there any costs for me to participate?",
+                "Text": {
+                    "Part1": "This project is being conducted by",
+                    "Part2": "and a growing coalition of non-profit advocacy partners. Our team — led by Dr. Adam Bass, a physician and cancer researcher— is made up of cancer researchers, physicians, clinical specialists, and patient advocates.",
+                    "Part3": "Learn more about us here"
+                }
+            },
+            "Involved": {
+                "Question": "5. How have patients been involved in the design of this project?",
+                "Section1": "We have worked closely with patients and patient advocates within the esophageal and gastric/stomach cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website.",
+                "Section2": "We're proud to have as our Advocacy Partners: TargetCancer Foundation, ECAN, ECAA, DeGregorio Family Foundation, Debbie's Dream Foundation, GI Cancers Alliance, Gastric Cancer Foundation, No Stomach for Cancer, and Hope for Stomach Cancer."
+            },
+            "Costs": {
+                "Question": "6. Are there any costs for me to participate?",
+                "Text": "No, there are no costs to you. All associated costs related to acquiring medical records and tissue will be covered by the study."
+            },
+            "TissueAndMedicalRecords": {
+                "Question": "7. After I provide my information, will I be asked to share my tumor tissue and medical records?",
+                "Text": "We will be asking for informed consent from all patients with esophageal and gastric/stomach cancer who enroll in this study. As part of the process of providing consent, we will ask your permission for the Esophageal and Stomach Cancer Project to obtain and analyze your stored tumor tissue and medical records, should you choose to share access to stored tumor tissue. We will keep you informed about our progress along the way."
+            },
+            "TissueSample": {
+                "Question": "8. If I am asked to share a tissue sample, will my tissue be exhausted?",
+                "Text": "If you do elect to share tissue as part of the study, we will take every measure to ensure that your samples are not exhausted as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they send only a small portion to us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us, and we will notify you that we did not use your samples for this reason. You may also choose to provide a blood sample in addition to, or instead of tissue samples if you have no tissue available or elect not to share your stored tissue samples."
+            },
+            "ReceiveBack": {
+                "Question": "9. If my tissue, blood, and medical records are analyzed, will I receive any information back from this study?",
+                "Text": "You will not receive individual information from this study. Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+            },
+            "Profit": {
+                "Question": "10. Is this research being conducted for profit?",
+                "Text": "No. This project is a not-for-profit, academic research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in a way that protects your personal information in order to fuel discoveries."
+            },
+            "Info": {
+                "Question": "11. What information can I bring to my medical team so that I can discuss this study with them?",
+                "Text": "This provided PDF is designed to educate your medical team about the project:",
+                "Link": "Generate PDF for physicians"
+            },
+            "OtherQuestions": {
+                "Title": "Do you have other questions?",
+                "Section1": {
+                    "Text": "You can access a 1 page printable information sheet about the project linked here:",
+                    "Link": "The Esophageal and Stomach Cancer Project"
+                },
+                "Section2": {
+                    "TextPt1": "If you have any other questions, please email us at",
+                    "TextPt2": "or call us at"
+                }
+            }
+        }
+    },
+    "DataRelease": {
+        "Title": "ESCproject Data",
+        "DataBrowser": "The Esophageal and Stomach Cancer Project Patient Data Browser",
+        "BrowserText": "Below is an interactive data browser for exploring the patient-reported data from the Esophageal and Stomach Cancer Project. This contains data from patients from the USA and Canada who signed consent.",
+        "PatientReported": "Patient-reported data included here are from patients who completed the following survey. An example of what patients see when they sign up is linked here:",
+        "InitialSurvey": "Initial intake survey",
+        "DataUse": {
+            "Text": "How to use the data browser:",
+            "List": [
+                "On a computer, hover your cursor over any chart to see more information.",
+                "Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left-hand corner.",
+                "Click or tap it again to remove the filter.",
+                "Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+            ]
+        },
+        "Updated": "This data will be updated periodically as new patients join the project and as new surveys are deployed. If you have any questions or feedback, please email",
+        "ThankYou": "Thank you to every patient who has said <span class=\"Italic\">Count Me In</span> and generously shared their experiences, information, and samples to accelerate discoveries.",
+        "Video": {
+            "Part1": "Here is a",
+            "Link": "walkthrough video",
+            "Part2": "on how to use the interactive data browser to explore the survey data."
+        },
+        "Tableau": "ESC Data Browser"
+    },
+    "Toolkit": {
+        "Common": {
+            "Organization": "Count Me In"
+        },
+        "Header": {
+            "HeaderLogo": "Esophageal<br>& Stomach<br>Cancer Project",
+            "LearnMore": "Learn More",
+            "CountMeIn": "count me in",
+            "DataRelease": "Data"
+        },
+        "Footer": {
+            "FooterLogo": "Esophageal<br>& Stomach<br>Cancer Project",
+            "Home": "Home",
+            "Data": "Data",
+            "FAQ": "More Details/FAQ",
+            "About": "About Us",
+            "Join": "Join Mailing List",
+            "Info": "Information for Physicians",
+            "Top": "▴ Back to top",
+            "Contacts": {
+                "ContactUs": "Contact Us:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            }
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        },
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "Stay informed!",
+                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "First Name *",
+                        "Error": "First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "Last Name *",
+                        "Error": "Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "Email Address *",
+                        "Error": "Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Email Confirmation (Reenter Email) *",
+                        "Error": "Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "CANCEL",
+                "SubmitButton": "JOIN",
+                "Required": "* Required field",
+                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue"
+            }
+        },
+        "Warning": {
+            "Title": "Download Chrome or Safari to Continue",
+            "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+            "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "Click the following links to download",
+                "Pt2": "or",
+                "Pt3": "Chrome and Safari are always free.",
+                "Chrome": "Chrome (for Mac & PC)",
+                "Safari": "Safari (for Mac)"
+            },
+            "SubmitButton": "OK"
+        },
+        "StayInformed": {
+            "Title": "Stay Informed!",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "RETURN HOME"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password",
+            "SubmitButton": "SUBMIT",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred.",
+            "PasswordField": {
+                "Error": "Password is required"
+            }
+        },
+        "InternationalPatients": {
+            "Title": "Information for International Patients",
+            "ThankYou": {
+                "TextPt1": "Thank you for your interest in joining the Esophageal and Stomach Cancer Project. Currently, the Esophageal and Stomach Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
+                "TextPt2": "or"
+            },
+            "Understand": "We understand that the experiences of every patient matters, and eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Header": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "Log In"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "SUBMIT",
+        "CloseButton": "CLOSE",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "NEXT",
+        "PreviousButton": "PREV",
+        "SavingButton": "SAVING",
+        "EditButton": "EDIT",
+        "ReviewButton": "VIEW",
+        "ValidateError": "Please correct any errors in the form.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SaveError": "We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex",
+            "UserPreferencesLocale": "Preferred language"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Esophageal and Stomach Cancer Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Esophageal and Stomach Cancer Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+              "Name": "Physician Name",
+              "Institution": "Institution",
+              "InstitutionAny": "Institution (if any)",
+              "City": "City",
+              "State": "State"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+      }
+    }
+}

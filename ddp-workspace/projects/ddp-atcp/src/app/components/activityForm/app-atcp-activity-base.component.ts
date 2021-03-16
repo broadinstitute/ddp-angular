@@ -3,12 +3,14 @@ import {
   Component,
   Inject,
   Injector,
+  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
   SimpleChange
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   SubmitAnnouncementService,
   SubmissionManager,
@@ -17,18 +19,22 @@ import {
   WindowRef,
   AnalyticsEventsService,
   ActivityForm,
-  LoggingService
+  LoggingService,
+  LanguageService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
+import * as RouterResources from '../../router-resources';
+import { MultiGovernedUserService } from '../../services/multi-governed-user.service';
 
 import {
   delay,
+  filter,
   map,
-  merge,
   startWith,
+  take,
 } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { combineLatest, merge } from 'rxjs';
 
 @Component({
     selector: 'app-atcp-activity-base',
@@ -202,8 +208,14 @@ import { combineLatest } from 'rxjs';
     providers: [SubmitAnnouncementService, SubmissionManager]
 })
 export class AtcpActivityBaseComponent extends ActivityComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  @Input() isPrequal = false;
 
+  public isMultiGoverned: boolean;
   public currentActivityService: CurrentActivityService;
+
+  private multiGovernedUserService: MultiGovernedUserService;
+  private languageService: LanguageService;
+  protected translateService: TranslateService;
 
   constructor(
     logger: LoggingService,
@@ -217,13 +229,41 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     injector: Injector) {
     super(logger, windowRef, renderer, submitService, analytics, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
+    this.multiGovernedUserService = injector.get(MultiGovernedUserService);
+    this.languageService = injector.get(LanguageService);
+    this.translateService = injector.get(TranslateService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
+    this.multiGovernedUserService.isMultiGoverned$.pipe(
+      filter(isMultiGoverned => isMultiGoverned !== null),
+      take(1),
+    ).subscribe(isMultiGoverned => {
+      this.isMultiGoverned = isMultiGoverned;
+    });
+
+    this.anchor.addNew(
+      this.languageService.getProfileLanguageUpdateNotifier()
+        .subscribe((value: null | undefined) => {
+          if (value === undefined) {
+            // User manually changed preferred language
+            this.isLoaded = false;
+          }
+        })
+    );
+
+    if (this.isPrequal) {
+      this.setupPrequalLangListener();
+    }
   }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
     /* TODO: consider usage of this method in baseActivity.component.ts instead of current implementation.
        This fixes issue with additional ngChange events
     */
-    for (const propName in changes) {
+    for (const propName of Object.keys(changes)) {
       if (propName === 'studyGuid' || propName === 'activityGuid') {
         this.isLoaded = false;
         this.resetValidationState();
@@ -236,6 +276,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
       }
     }
   }
+
   protected getActivity(): void {
     const get = this.currentActivityService
       .getActivity(this.studyGuidObservable, this.activityGuidObservable)
@@ -253,17 +294,20 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
 
           // combine the latest status updates from the form model
           // and from the embedded components into one observable
-          const canSaveSub = combineLatest(
+          const canSaveSub = combineLatest([
             // update as we get responses from server
-            this.submissionManager.answerSubmissionResponse$.pipe(
+            merge(
+              this.submissionManager.answerSubmissionResponse$,
               // We don't automatically get model updates if
               // local validation fails
               // so trigger one when submit
-              merge(this.submitAttempted),
+              this.submitAttempted
+            ).pipe(
               map(() => this.model.validate()),
               // let's start with whatever it is the initial state of the form
               startWith(this.model.validate())),
-            this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true)))
+            this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
+          ])
             .pipe(
               map(status => status[0] && status[1]),
               delay(1)
@@ -297,12 +341,30 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
 
   public ngOnDestroy(): void {
     super.ngOnDestroy();
+    this.anchor.removeAll();
     this.currentActivityService.saveCurrentActivity(null);
   }
 
   public navigateToConsole(): void {
     this.sendLastSectionAnalytics();
     this.sendActivityAnalytics(AnalyticsEventCategories.CloseSurvey);
-    this.router.navigateByUrl('/console');
+
+    this.router.navigateByUrl(this.isMultiGoverned ? RouterResources.ParticipantList : RouterResources.Dashboard);
+  }
+
+  private setupPrequalLangListener(): void {
+    let prevLang = this.translateService.currentLang;
+
+    this.anchor.addNew(
+      this.translateService.onLangChange
+        .pipe(
+          filter(e => e.lang !== prevLang)
+        )
+        .subscribe(e => {
+          prevLang = e.lang;
+
+          this.getActivity();
+        })
+    );
   }
 }

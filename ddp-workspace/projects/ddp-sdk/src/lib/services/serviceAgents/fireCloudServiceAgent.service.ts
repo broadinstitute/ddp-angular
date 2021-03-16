@@ -11,14 +11,14 @@ import { catchError, filter, map } from 'rxjs/operators';
 
 @Injectable()
 export class FireCloudServiceAgent extends AdminServiceAgent<any> {
+    public currentListStudiesMessage: Observable<string>;
+    public currentListWorkspacesMessage: Observable<string>;
+    public currentListWorkspaceNamespacesMessage: Observable<string>;
+    public currentExportSuccessStatus: Observable<string>;
     private listStudiesMessageSource = new BehaviorSubject<string>('default message');
     private listWorkspacesMessageSource = new BehaviorSubject<string>('default message');
     private listWorkspaceNamespaceMessageSource = new BehaviorSubject<string>('default message');
     private exportSuccessIndicatorSource = new BehaviorSubject<string>('Unsuccessful export!');
-    public currentListStudiesMessage = this.listStudiesMessageSource.asObservable();
-    public currentListWorkspacesMessage = this.listWorkspacesMessageSource.asObservable();
-    public currentListWorkspaceNamespacesMessage = this.listWorkspaceNamespaceMessageSource.asObservable();
-    public currentExportSuccessStatus = this.exportSuccessIndicatorSource.asObservable();
 
     constructor(
         session: SessionMementoService,
@@ -26,21 +26,25 @@ export class FireCloudServiceAgent extends AdminServiceAgent<any> {
         http: HttpClient,
         logger: LoggingService) {
         super(session, configuration, http, logger);
+        this.currentListStudiesMessage = this.listStudiesMessageSource.asObservable();
+        this.currentListWorkspacesMessage = this.listWorkspacesMessageSource.asObservable();
+        this.currentListWorkspaceNamespacesMessage = this.listWorkspaceNamespaceMessageSource.asObservable();
+        this.currentExportSuccessStatus = this.exportSuccessIndicatorSource.asObservable();
     }
 
-    public changeListStudiesMessage(message: string) {
+    public changeListStudiesMessage(message: string): void {
         this.listStudiesMessageSource.next(message);
     }
 
-    public changeListWorkspacesMessage(message: string) {
+    public changeListWorkspacesMessage(message: string): void {
         this.listWorkspacesMessageSource.next(message);
     }
 
-    public changeListWorkspaceNamespacesMessage(message: string) {
+    public changeListWorkspaceNamespacesMessage(message: string): void {
         this.listWorkspaceNamespaceMessageSource.next(message);
     }
 
-    public changeExportSuccessStatus(goodExport: boolean) {
+    public changeExportSuccessStatus(goodExport: boolean): void {
         if (goodExport) {
             this.exportSuccessIndicatorSource.next('Successful export!');
         } else {

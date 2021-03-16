@@ -3,14 +3,19 @@
     "activateAccount": "电子邮件已发送到那里，并附有指导信息以激活您的帐户。",
     "checkEmail": "您几乎完成了！ 请查看您的邮箱： ",
     "stillWaiting": "还在等您的电子邮件？",
-    "title": "帐号激活"
+    "title": "帐号激活",
+    "stillWaitingTooltip": "等一会儿 有时电子邮件的传递可能会被我们控制之外的进程推迟。 您还可以检查您的电子邮箱的垃圾文件夹。 电子邮件有时会在那里。"
   },
   "common": {
     "alreadyRegistered": "已经注册？ 在这里登录",
     "confirmNewPassword": {
+      "error": "密码确认与密码不匹配 ",
       "label": "确认新密码"
     },
     "email": {
+      "error": "电子邮箱不能留空",
+      "emailTaken": "電子郵件已經被接收。 請選擇其他值。",
+      "label": "电子邮箱地址",
       "whoseEmail": "我应该输入哪些电子邮箱？",
       "whoseEmailTooltip": "如果您是A-T的孩子（们）的父母/法定监护人，请使用您自己的电子邮箱地址。  我们将使用此地址与您在全球A-T成员数据平台中注册的任何人对应。"
     },
@@ -18,13 +23,16 @@
     "joinUs": "加入我们",
     "or": "或",
     "password": {
+      "error": "至少 8 个字符，其中包括：一个小写字母、一个大写字母、一个数字、一个特殊字符（如 !@#$%^&*）。",
       "label": "密码"
     },
     "reenter": {
+      "error": "密码确认与密码不匹配",
       "label": "重新输入密码"
     },
     "resendInstructions": "重新发送确认说明",
     "resetPassword": {
+      "error": "至少 8 个字符，其中包括：一个小写字母、一个大写字母、一个数字、一个特殊字符（如 !@#$%^&*）。",
       "label": "新密码"
     },
     "signin": "签到",
@@ -38,9 +46,11 @@
   "header": {
     "aboutThisInitiative": "关于这个计划",
     "aboutUs": "关于我们",
+    "dataAccessRequest": "数据访问请求",
     "joinUs": "加入我们",
     "language": "语言",
     "learnMore": "了解更多",
+    "researchers": "研究员",
     "signIn": "签到"
   },
   "login": {
@@ -48,12 +58,14 @@
     "useEmail": "使用您的电子邮箱地址"
   },
   "modal": {
+    "InvalidLogin": "电子邮箱或密码无效",
+    "PasswordResetError": "处理密码重置时出错。",
     "SuccessChangedPassword": "您的密码已成功更改。",
     "YouWillGetInstructions": "您将在几分钟内收到一封电子邮件，说明如何重新设置您的密码。"
   },
   "resendInstructions": {
-    "subTitle": "如果您没有收到确认说明，您可以输入电子邮箱地址以产生另一个确认电子邮件。",
     "submit": "重新发送确认说明",
+    "subTitle": "如果您没有收到确认说明，您可以输入电子邮箱地址以产生另一个确认电子邮件。",
     "title": "重新发送确认说明"
   },
   "resetPassword": {

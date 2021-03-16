@@ -3,9 +3,10 @@ import { ReplaySubject } from 'rxjs';
 
 export class ActivityForm {
     public readonly: boolean;
+    public isHidden: boolean;
     public title: string;
     public subtitle: string | null;
-    public sections: Array<ActivitySection>;
+    public sections: Array<ActivitySection> = [];
     public introduction: ActivitySection;
     public closing: ActivitySection;
     public formType: string;
@@ -15,10 +16,6 @@ export class ActivityForm {
     public lastUpdated?: Date;
     public validationState: ReplaySubject<boolean> = new ReplaySubject();
     public sectionIndex: number | null;
-
-    constructor() {
-        this.sections = new Array<ActivitySection>();
-    }
 
     public validate(): boolean {
         let isValid = true;

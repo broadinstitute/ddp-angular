@@ -7,16 +7,17 @@ export class ActivityCompositeValidationRule extends ActivityAbstractValidationR
         super(compositeQuestionBlock);
     }
 
-    get compositeQuestion() {
-        return this.question as any;
+    get compositeQuestion(): any {
+        return this.question;
     }
 
-    recalculate(): boolean {
+    public recalculate(): boolean {
         let answer: AnswerContainer[][] = this.compositeQuestion.answer;
         if (answer == null || answer.length === 0) {
             answer = [];
             answer.push(this.compositeQuestion.children.map((child) => ({ stableId: child.stableId, value: null })));
         }
+        this.result = null;
         return this.compositeQuestion.children
             .every((childQuestionBlock, colIdx) => childQuestionBlock
                 .validators.every(

@@ -22,21 +22,34 @@ export class MedicalProvidersServiceAgent extends UserServiceAgent<any> {
         super(session, configuration, http, logger, _language);
     }
 
-    public createMedicalProvider(studyGuid: string, institutionType: string, form: ActivityInstitutionForm): Observable<MedicalProviderResponse> {
-        return this.postObservable(`/studies/${studyGuid}/medical-providers/${institutionType}`, JSON.stringify(form)).pipe(
+    public createMedicalProvider(studyGuid: string,
+        institutionType: string,
+        form: ActivityInstitutionForm): Observable<MedicalProviderResponse> {
+        const baseUrl = this.getBaseUrl(studyGuid, institutionType);
+        return this.postObservable(baseUrl, JSON.stringify(form)).pipe(
             map(data => data && data['body'])
         );
     }
 
-    public updateMedicalProvider(studyGuid: string, institutionType: string, medicalProviderGuid: string, form: ActivityInstitutionForm): Observable<void> {
-        return this.patchObservable(`/studies/${studyGuid}/medical-providers/${institutionType}/${medicalProviderGuid}`, JSON.stringify(form));
+    public updateMedicalProvider(studyGuid: string,
+        institutionType: string,
+        medicalProviderGuid: string,
+        form: ActivityInstitutionForm): Observable<void> {
+        const baseUrl = this.getBaseUrl(studyGuid, institutionType);
+        return this.patchObservable(`${baseUrl}/${medicalProviderGuid}`, JSON.stringify(form));
     }
 
     public getMedicalProviders(studyGuid: string, institutionType: string): Observable<ActivityInstitution[]> {
-        return this.getObservable(`/studies/${studyGuid}/medical-providers/${institutionType}`);
+        const baseUrl = this.getBaseUrl(studyGuid, institutionType);
+        return this.getObservable(baseUrl);
     }
 
     public deleteMedicalProvider(studyGuid: string, institutionType: string, medicalProviderGuid: string): Observable<void> {
-        return this.deleteObservable(`/studies/${studyGuid}/medical-providers/${institutionType}/${medicalProviderGuid}`);
+        const baseUrl = this.getBaseUrl(studyGuid, institutionType);
+        return this.deleteObservable(`${baseUrl}/${medicalProviderGuid}`);
+    }
+
+    private getBaseUrl(studyGuid: string, institutionType: string): string {
+        return `/studies/${studyGuid}/medical-providers/${institutionType}`;
     }
 }

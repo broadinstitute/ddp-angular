@@ -33,7 +33,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
@@ -54,7 +54,7 @@ toolkitConfig.internationalPatientsUrl = 'international-patients';
 toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-293-5029';
 toolkitConfig.infoEmail = 'info@mpcproject.org';
-toolkitConfig.dataEmail = 'data@mpcproject.org'
+toolkitConfig.dataEmail = 'data@mpcproject.org';
 toolkitConfig.twitterAccountId = 'PrCaProject';
 toolkitConfig.facebookGroupId = 'Prostate-Cancer-Project-1828647940721720';
 toolkitConfig.cBioPortalLink = 'http://www.cbioportal.org/study/summary?id=prad_mpcproject_2018';
@@ -78,8 +78,11 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));

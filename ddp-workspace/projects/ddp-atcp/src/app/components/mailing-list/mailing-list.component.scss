@@ -1,0 +1,42 @@
+label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+input {
+  font-size: 15px;
+  border: 1px solid #cccccc;
+  border-left: 3px solid #cccccc;
+  border-radius: 0;
+  box-shadow: none !important;
+
+  &.ng-invalid.ng-touched {
+    border-color: #db2c2c !important;
+  }
+}
+
+.error {
+  color: #db2c2c !important;
+  font-weight: 700;
+}
+
+.title {
+  margin-top: 40px;
+  color: #4274bc;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.BtnFilled {
+  margin-top: 0;
+}
+
+.helpHint {
+  padding-top: 0 !important;
+}

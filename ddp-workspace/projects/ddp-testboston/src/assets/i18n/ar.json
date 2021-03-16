@@ -252,7 +252,9 @@
       "Placeholder": "أدخل رمز الدعوة",
       "Error": {
         "Part1": "الرمز الذي أدخلته غير نشط. يُرجى التحقق من الرمز الذي أدخلته والمحاولة مرة أخرى. يمكنك دائمًا الاتصال بفريق دراسة TestBoston للحصول على المساعدة:",
-        "Part2": "أو"
+        "Part2": "أو",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -382,6 +384,7 @@
       "Text": "يُرجى إدخال كلمة مرورك  *",
       "InputPlaceholder": "كلمة المرور",
       "PasswordWrongError": "كلمة المرور غير صحيحة. يُرجى المحاولة مرة أخرى.",
+      "OtherError": "[AR] We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "كلمة المرور مطلوبة"
     },
     "ErrorPage": {
@@ -452,7 +455,8 @@
       "ActivityStatus": "الحالة",
       "ActivityDate": "تم الإنشاء",
       "ActivityActions": "الإجراءات",
-      "ActivityQuestionCount": "تمت الإجابة عن {{questionsAnswered}} من {{questionTotal}}"
+      "ActivityQuestionCount": "تمت الإجابة عن {{questionsAnswered}} من {{questionTotal}}",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "المشاركون المنظمون",
@@ -607,6 +611,13 @@
     "SubjectPanel": {
       "Link": "العودة إلى البحث عن مشارك",
       "Text": "رمز الدعوة الخاص بمشترك:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "[AR] Entered date is invalid"
     }
   }
 }

@@ -2,6 +2,10 @@
 @import './brushes';
 @import 'theme';
 
+@page {
+  size: auto;
+}
+
 hr {
   border-color: $silver-grey;
 }
@@ -239,6 +243,21 @@ blockquote {
   }
 }
 
+.thank-you-popup {
+  .popup-message-text {
+    margin: 0;
+  }
+
+  .popup-message {
+    position: relative;
+
+    .mat-icon {
+      right: 0 !important;
+      top: 0 !important;
+    }
+  }
+}
+
 .c-black {
   @include c-black();
 }
@@ -338,6 +357,10 @@ a[href^="mailto"]:active {
   background-color: $disabled-grey !important;
 }
 
+.mat-radio-label-content {
+  font-weight: normal;
+}
+
 app-activity-progress-bar .mat-progress-bar-fill::after {
   background-color: $bright-blue !important;
 }
@@ -348,4 +371,29 @@ app-activity-progress-bar .mat-progress-bar-fill::after {
   margin: 20px 0;
   padding: 15px;
   font-size: 16px;
+}
+
+.join-us .ddp-question-prompt {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 0;
+
+  span {
+    flex-shrink: 0;
+  }
+
+  position: relative;
+}
+
+@media print {
+  input[type="radio"]:checked+span {
+      font-weight: bold;
+  }
+}
+
+[class*="NA_REASON"] {
+  .mat-radio-group {
+    padding-left: 1.8em;
+  }
 }

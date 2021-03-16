@@ -34,12 +34,11 @@ export class UserProfileBusService implements OnDestroy {
         return this.profile.asObservable();
     }
 
-    public loadProfile(currentSession: Session) {
-        const self = this;
+    public loadProfile(currentSession: Session): void {
         this.auth0.webAuth.client.userInfo(currentSession.accessToken,
             (err, profile) => {
                 if (profile) {
-                    self.profile.next(new UserProfileDto(profile.name));
+                    this.profile.next(new UserProfileDto(profile.name));
                 } else if (err) {
                     this.log.logError(this.LOG_SOURCE, err);
                 }

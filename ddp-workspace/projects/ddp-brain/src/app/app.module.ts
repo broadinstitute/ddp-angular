@@ -60,10 +60,10 @@ toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
 toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
-toolkitConfig.infoEmail = 'info@braincancerproject.org';
-toolkitConfig.dataEmail = 'data@braincancerproject.org';
-toolkitConfig.twitterAccountId = 'BrainCancerProj';
-toolkitConfig.facebookGroupId = 'braincancerproject';
+toolkitConfig.infoEmail = 'info@braintumorproject.org';
+toolkitConfig.dataEmail = 'data@braintumorproject.org';
+toolkitConfig.twitterAccountId = 'BrainTumorProj';
+toolkitConfig.facebookGroupId = 'braintumorproject';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();
@@ -81,8 +81,11 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
+export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
     const LOG_SOURCE = 'AppModule';
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
@@ -138,7 +141,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

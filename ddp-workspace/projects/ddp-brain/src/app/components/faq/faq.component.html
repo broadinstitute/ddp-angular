@@ -7,13 +7,12 @@
     <section class="section">
         <div class="content content_tight intro-faq-block">
             <div class="intro-faq-block__content">
-                <p [innerHTML]="'FaqPage.Intro.Text1' | translate"></p>
                 <p>
+                    <span translate>FaqPage.Intro.Text1.Part1</span>
                     <a class="Link italic" [href]="cmiUrl" target="_blank" translate>Common.CMI</a>,
-                    <span translate>FaqPage.Intro.Text2.Part1</span>
-                    <a class="Link italic" [href]="cmiUrl" target="_blank" translate>Common.CMI</a>
-                    <span translate>FaqPage.Intro.Text2.Part2</span>
+                    <span translate>FaqPage.Intro.Text1.Part2</span>
                 </p>
+                <p [innerHTML]="'FaqPage.Intro.Text2' | translate"></p>
             </div>
         </div>
     </section>

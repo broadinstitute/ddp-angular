@@ -197,12 +197,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
+    // one subject per section
+    public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
     private readonly HEADER_HEIGHT: number = this.isMobile ? 10 : 70;
     private anchors: CompositeDisposable[];
     // one entry per section (header, body, and footer respectively)
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
-    // one subject per section
-    public embeddedComponentBusy$ = [false, false, false].map((initialVal) => new BehaviorSubject(initialVal));
     private readonly LOG_SOURCE = 'ActivityComponent';
 
     constructor(
@@ -218,6 +218,17 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         super(injector);
     }
 
+    @HostListener('window: scroll') public onWindowScroll(): void {
+        const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
+            this.document.documentElement.scrollTop ||
+            this.document.body.scrollTop || 0;
+        if (scrolledPixels > this.HEADER_HEIGHT) {
+            this.isScrolled = true;
+        } else if (scrolledPixels < this.HEADER_HEIGHT) {
+            this.isScrolled = false;
+        }
+    }
+
     public ngOnInit(): void {
         this.getActivity();
         const submitSub = this.submit.subscribe(response => this.submitService.announceSubmit(response));
@@ -226,6 +237,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             (response) => {
                 this.updateVisibility((response as PatchAnswerResponse).blockVisibility);
                 this.updateServerValidationMessages(response);
+                this.communicationErrorOccurred = false;
             },
             (error) => {
                 this.logger.logError(this.LOG_SOURCE,
@@ -405,13 +417,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.windowRef.nativeWindow.scrollTo(0, 0);
     }
 
-    private smoothScrollToTop(): void {
-        this.windowRef.nativeWindow.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
     protected nextAvailableSectionIndex(): number {
         for (let index = this.currentSectionIndex + 1; index < this.model.sections.length; index++) {
             if (this.model.sections[index].visible) {
@@ -419,6 +424,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             }
         }
         return -1;
+    }
+
+    private smoothScrollToTop(): void {
+        this.windowRef.nativeWindow.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     private previousAvailableSectionIndex(): number {
@@ -430,24 +442,16 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         return -1;
     }
 
-    @HostListener('window: scroll') public onWindowScroll(): void {
-        const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
-            this.document.documentElement.scrollTop ||
-            this.document.body.scrollTop || 0;
-        if (scrolledPixels > this.HEADER_HEIGHT) {
-            this.isScrolled = true;
-        } else if (scrolledPixels < this.HEADER_HEIGHT) {
-            this.isScrolled = false;
-        }
-    }
-
     private updateServerValidationMessages(response: PatchAnswerResponse): void {
         const questionBlocks: AbstractActivityQuestionBlock[] = this.model.sections.reduce((allBlocks, section) =>
             allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
+
         // We should clear server-side validations each time to prevent messages accumulating
         questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
+
         if (response.validationFailures && response.validationFailures.length !== 0) {
             const answerStableIds = response.answers.map(answer => answer.stableId);
+
             response.validationFailures.forEach(failure => {
                 // First we try to see if we can find the question that provided the answer that triggered the failure
                 const questionsForResponse = questionBlocks

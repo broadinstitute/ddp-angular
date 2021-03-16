@@ -7,9 +7,9 @@ import { InvitationServiceAgent } from '../../services/serviceAgents/invitationS
     template: `<mat-spinner></mat-spinner>`
 })
 export class VerifyAgeUpComponent implements OnInit {
-    private url: string;
     @Output() public error: EventEmitter<void> = new EventEmitter();
     @Output() public nextUrl: EventEmitter<string> = new EventEmitter();
+    private url: string;
 
     constructor(
         private route: ActivatedRoute,

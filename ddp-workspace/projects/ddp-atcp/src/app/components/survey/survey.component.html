@@ -1,0 +1,29 @@
+<div class="survey">
+  <div class="page-padding">
+    <h1>
+      <ng-container *ngIf="userFirstName; else newParticipant">
+        {{ 'Survey.Self' | translate: { firstName: userFirstName } }}
+      </ng-container>
+      <ng-template #newParticipant>
+        {{ 'Survey.NewParticipant' | translate }}
+      </ng-template>
+    </h1>
+
+    <div class="workdir" [class.is-assent]="isAssentActivity">
+      <app-workflow-progress
+        *ngIf="!isConsentEditActivity"
+        [steps]="activities"
+        [instanceGuid]="instanceGuid"
+        (onChangeActivity)="onChangeActivity($event)"
+      ></app-workflow-progress>
+
+      <app-atcp-activity
+        *ngIf="isActivityShown"
+        [studyGuid]="studyGuid"
+        [buttonWithArrow]="true"
+        [activityGuid]="instanceGuid"
+        (submit)="onSubmit($event)"
+      ></app-atcp-activity>
+    </div>
+  </div>
+</div>

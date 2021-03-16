@@ -14,7 +14,7 @@
       "Steps": [
         {
           "Name": "データプラットホームに登録する",
-          "Text": "\\\"参加する\\\" をクリックした後、あなたの名前とEメールアドレスを使用しアカウントを作成してください。アカウントが作成できたら、簡潔なフォームへの記入を行うことで、あなた自身 (A-T患者の場合) またはA-T患者であるお子様(たち) を参加者としてデータプラットフォームへ登録できます。"
+          "Text": "\"参加する\" をクリックした後、あなたの名前とEメールアドレスを使用しアカウントを作成してください。アカウントが作成できたら、簡潔なフォームへの記入を行うことで、あなた自身 (A-T患者の場合) またはA-T患者であるお子様(たち) を参加者としてデータプラットフォームへ登録できます。"
         },
         {
           "Name": "許可を与える",
@@ -70,64 +70,103 @@
       },
       {
         "Hospital": "サピエンザ大学医科遺伝学教授 (イタリア、ローマ)",
-        "Name": "Luciana Chessa"
+        "Name": "Luciana Chessa",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "ウェスレイ病院小児科医長 (オーストラリア、クイーンズランド州)"
+        "Hospital": "ウェスレイ病院小児科医長 (オーストラリア、クイーンズランド州)",
+        "Name": "David Coman",
+        "Rank": "MD"
       },
       {
-        "Hospital": "ジョンズ・ホプキンス小児センター小児科および神経科准教授 (米国、メリーランド州ボルチモア)"
+        "Hospital": "ジョンズ・ホプキンス小児センター小児科および神経科准教授 (米国、メリーランド州ボルチモア)",
+        "Name": "Thomas Crawford",
+        "Rank": "MD"
       },
       {
-        "Hospital": "Google ゲノミクスディレクター (米国、カリフォルニア州マウンテンビュー)"
+        "Hospital": "Google ゲノミクスディレクター (米国、カリフォルニア州マウンテンビュー)",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "東京医科歯科大学小児科および発生生物学 (日本)"
+        "Hospital": "東京医科歯科大学小児科および発生生物学 (日本)",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "MD"
       },
       {
-        "Hospital": "クイーンズランド大学准教授 (オーストラリア、クイーンズランド州)"
+        "Hospital": "クイーンズランド大学准教授 (オーストラリア、クイーンズランド州)",
+        "Name": "Lutz Krause",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "クイーンズランド大学分子腫瘍学基礎教授 (オーストラリア、クイーンズランド州ブリスベン)"
+        "Hospital": "クイーンズランド大学分子腫瘍学基礎教授 (オーストラリア、クイーンズランド州ブリスベン)",
+        "Name": "Martin Lavin",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "ジョンズ・ホプキンス小児センター小児科教授 (米国、メリーランド州ボルチモア)"
+        "Hospital": "ジョンズ・ホプキンス小児センター小児科教授 (米国、メリーランド州ボルチモア)",
+        "Name": "Howard Lederman",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "ネカー病院小児免疫血液学、原発性免疫不全症のためのフランスリファレンスセンター共同コーディネーター (フランス、パリ)"
+        "Hospital": "ネカー病院小児免疫血液学、原発性免疫不全症のためのフランスリファレンスセンター共同コーディネーター (フランス、パリ)",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "MD, MSc, MPH"
       },
       {
-        "Hospital": "シェバ医療センター小児神経科医 (イスラエル、ラマト・ガン)"
+        "Hospital": "シェバ医療センター小児神経科医 (イスラエル、ラマト・ガン)",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "MD"
       },
       {
-        "Hospital": "ブロード研究所チーフデータオフィサー (米国、マサチューセッツ州ケンブリッジ)"
+        "Hospital": "ブロード研究所チーフデータオフィサー (米国、マサチューセッツ州ケンブリッジ)",
+        "Name": "Anthony Philippakis",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "国立希少疾患センター (イタリア、ローマ)"
+        "Hospital": "国立希少疾患センター (イタリア、ローマ)",
+        "Name": "Agata Polizzi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "テルアビブ大学人類遺伝学教授 (イスラエル、ラマトアビブ)"
+        "Hospital": "テルアビブ大学人類遺伝学教授 (イスラエル、ラマトアビブ)",
+        "Name": "Yosef Shiloh",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "バーミンガム大学医学部がん遺伝学教授 (英国、バーミンガム)"
+        "Hospital": "バーミンガム大学医学部がん遺伝学教授 (英国、バーミンガム)",
+        "Name": "Grant Stewart",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "パリ第5大学遺伝学教授およびキュリー研究所遺伝学部門長 (フランス、パリ)"
+        "Hospital": "パリ第5大学遺伝学教授およびキュリー研究所遺伝学部門長 (フランス、パリ)",
+        "Name": "Dominique Stoppa-Lyonnet",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "東京医科歯科大学准教授 (日本、東京)"
+        "Hospital": "東京医科歯科大学准教授 (日本、東京)",
+        "Name": "Masatoshi Takagi",
+        "Rank": "MD, PhD"
       },
       {
-        "Hospital": "ゲノミクスと社会における国民人口プロジェクト事務局長 (カナダ、モントリオール)"
+        "Hospital": "ゲノミクスと社会における国民人口プロジェクト事務局長 (カナダ、モントリオール)",
+        "Name": "Anne-Marie Tassé",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "バーミンガム大学医学部がん遺伝学教授 (英国、バーミンガム)"
+        "Hospital": "バーミンガム大学医学部がん遺伝学教授 (英国、バーミンガム)",
+        "Name": "A. Malcolm Taylor",
+        "Rank": "PhD"
       },
       {
-        "Hospital": "ノッティンガム大学臨床准教授 (英国、ノッティンガム)"
+        "Hospital": "ノッティンガム大学臨床准教授 (英国、ノッティンガム)",
+        "Name": "William Whitehouse",
+        "Rank": "MD"
       },
       {
-        "Hospital": "ヨハン・ヴォルフガング・ゲーテ大学小児病院 (ドイツ、フランクフルト)"
+        "Hospital": "ヨハン・ヴォルフガング・ゲーテ大学小児病院 (ドイツ、フランクフルト)",
+        "Name": "Stefan Zielen",
+        "Rank": "MD, PhD"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "私たちは将来、グローバル A-T ファミリーデータプラットフォームが、 たとえばA-T患者がどのような動きをするかといった情報を捉える装着型技術を使用した際に得られる別のタイプの生物学的およびライフスタイルデータを集めるために、他の団体とさらに提携することを想定しています。"
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "続ける前にEメールアドレスを確認する必要があります。",
+    "EmailConfirmed": "Eメールアドレスが確認されました。"
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "提出する"
+      },
+      "Expand": {
+        "Title": "展開する"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "このイニシアチブについて",
       "AboutUs": "組織概要",
+      "DataAccessRequest": "データアクセスリクエスト",
+      "ForResearchers": "研究者向け",
       "JoinUs": "参加する",
       "Language": "言語",
       "LearnMore": "さらに詳しく",
+      "MedicalHistoryQuestionnaire": "病歴",
+      "FeedingSurvey": "食事介助アンケート",
       "MyAccount": "マイアカウント",
+      "MyDashboard": "マイダッシュボード",
       "Next": "次へ",
       "Previous": "前へ",
       "SignIn": "サインイン",
-      "YourParticipants": "参加者",
-      "ForResearchers": "研究者向け",
-      "DataAccessRequest": "データアクセスリクエスト"
+      "Statistics": "プラットフォーム統計",
+      "Submit": "提出する",
+      "YourParticipants": "参加者"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "グローバル A-T ファミリーデータプラットフォームは、世界中のA-T患者の家族や専門家によって監督される患者主導の取り組みです。これを通して、A-T患者の健康情報、遺伝データや可能性のあるその他のデータが研究者と共有されます。このプラットフォームによって、研究者は、新発見を導く可能性のある世界各国からの重要な患者データに、迅速、安全かつ効果的にアクセスすることができます。"
-    },
-    "OrganizationForm": {
-      "Country": "国名",
-      "State": "州/県名"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "この探求に参加した方々には、常に最新情報をお知らせします。"
     }
   },
+  "JoinUs": {
+    "SignInButton": "すでに登録済ですか? ここからサインインしてください"
+  },
   "SDK": {
+    "DownloadButton": "レビューをダウンロードする",
     "CancelButton": "キャンセルする",
+    "CloseButton": "閉じる",
+    "CommunicationError": "データの保存中に問題がありました。フォームと回答を確認してから提出してください",
     "Dashboard": {
+      "Text": "",
       "Title": "マイコンソール"
+    },
+    "DatePicker": {
+      "April": "4月",
+      "August": "8月",
+      "Day": "日を選択してください...",
+      "December": "12月",
+      "February": "2月",
+      "January": "1月",
+      "July": "7月",
+      "June": "6月",
+      "March": "3月",
+      "May": "5月",
+      "Month": "月を選択してください...",
+      "November": "11月",
+      "October": "10月",
+      "September": "9月",
+      "Year": "年を選択してください..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "文字残っています",
+      "SingularForm": "文字残っています"
     },
     "DoNotAssent": "アセントしません",
     "DoNotConsent": "同意しません",
@@ -287,36 +368,85 @@
         "Download": "完全版の同意書をダウンロードする"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "市"
-      }
-    },
     "JoinUsButton": "参加する",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "参加者"
+      "AddParticipant": " 参加者を追加",
+      "ParticipantPlaceholder": "参加者",
+      "ParticipantsList": "A-T患者である家族"
     },
     "NextButton": "次へ",
     "PreviousButton": "前へ",
     "RegisterButton": "登録する",
     "SaveAndSubmit": "保存および提出",
     "SaveAndSubmitEnrollment": "登録の保存および提出",
+    "SavingButton": "保存しています",
     "SignAndAssent": "署名およびアセント",
     "SignAndConsent": "署名および同意",
     "StartOrResume": "開始/再開",
+    "SubmitButton": "提出する",
+    "SuccessSignIn": "サインインしました。",
+    "SignInOut": {
+      "SignOut": "サインアウト"
+    },
+    "Title": {
+      "Alert": "セッションはまもなく時間切れになります",
+      "Default": "グローバルA-Tファミリーデータプラットフォーム"
+    },
+    "TooltipAlt": "どなたの名前を入力しますか?",
     "UserActivities": {
       "ActivityActions": "アクション",
-      "ActivityStatus": "状況"
+      "ActivityDate": "作成されました",
+      "ActivityName": "フォーム",
+      "ActivityStatus": "状況",
+      "ActivityStatuses": {
+        "COMPLETE": "完了しました",
+        "CREATED": "まだ開始していません",
+        "IN_PROGRESS": "進行中"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} 回答済みです",
+      "Summary": "要約",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} 件のアンケートに回答する必要があります",
+        "Singular": "{{ count }} 件のアンケートに回答する必要があります"
+      }
     },
     "UserMenu": {
       "SignOutButton": "サインアウト"
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "性別",
+      "UserPreferencesLocale": "希望言語",
+      "UserPreferencesTitle": "ユーザー詳細設定"
+    },
+    "ValidateError": "提出を処理できません。詳細はフォームのメッセージを確認してください。",
+    "Validators": {
+      "DateNavyValidationRule": "入力した日付が無効です"
+    }
+  },
+  "Statistics": {
+    "Title": "数字で見るA-T ファミリーデータプラットフォーム",
+    "CountList": {
+      "totalParticipantsCount": "参加者合計人数",
+      "countriesCount": "参加者の国",
+      "genomeStudyParticipantsCount": "ゲノムシークエンシングへの参加同意者",
+      "governedParticipantsCount": "両親が登録した未成年者",
+      "selfEnrolledParticipantsCount": "自分で登録した参加者"
+    },
+    "Subtitle": "参加者の国"
+  },
+  "Survey": {
+    "Self": "{{ firstName }} の登録プロセス",
+    "NewParticipant": "新規参加者登録プロセス",
+    "ThankYouPopup": {
+      "Text": "アンケートをご提出いただきありがとうございます"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "または"
-      }
+    "ActivityActions": {
+      "Continue": "続ける",
+      "Start": "開始する",
+      "View": "表示",
+      "Edit": "編集"
     },
     "Dashboard": {
       "Actions": "アクション",
@@ -332,28 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "キャンセルする",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "有効なEメールアドレスを入力してください",
+            "Placeholder": "確認用Eメール *"
+          },
           "Email": {
+            "Error": "有効なEメールアドレスを入力してください",
             "Placeholder": "Eメールアドレス"
           },
           "FirstName": {
+            "Error": "ファーストネーム（名）は必須です",
             "Placeholder": "ファーストネーム"
           },
           "LastName": {
+            "Error": "ラストネーム（姓）は必須です",
             "Placeholder": "ラストネーム"
           }
-        }
+        },
+        "LoadingError": "申し訳ありませんが、エラーが発生しました。",
+        "MatchEmailsError": "両方のEメール欄に入力していること、アドレスが一致していることを確認してください。",
+        "Required": "",
+        "SubmitButton": "メーリングリストに参加する",
+        "Text": "Eメールアドレスを登録すれば、グローバル A-T ファミリーデータプラットフォームの進捗状況をお知らせいたします。",
+        "Title": "情報を受け取るためのサインアップ"
       },
       "SessionWillExpire": {
         "Continue": "続ける",
-        "SignOut": "サインアウト"
+        "SignOut": "サインアウト",
+        "Text": "プライバシー保護のため、しばらく操作していないと、システムからログアウトされます。ログインしたままにするには「続ける」をクリックしてください。終了する場合は「サインアウト」をクリックしてください。",
+        "Title": "セッションはまもなく時間切れになります"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "パスワードリセットのリンクは有効期限切れです。"
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "問題が継続するようであれば、",
         "TextPt2": "にご連絡ください。"
       },
+      "Text": "",
       "Title": "申し訳ありませんが、エラーが発生しました。後でもう一度やり直してください。"
+    },
+    "Password": {
+      "InputPlaceholder": "パスワード",
+      "PasswordRequiredError": "パスワードは必須です",
+      "PasswordWrongError": "パスワードが間違っています。もう一度入力してください。",
+      "Text": "パスワードを入力してください *",
+      "Title": "パスワードを入力してください"
+    },
+    "SessionExpired": {
+      "Text": "しばらく操作していなかったため、セキュリティ対策としてログアウトされました。開いていた最後のページに戻るには、もう一度ログインしてください。"
+    },
+    "StayInformed": {
+      "Text": "グローバル A-T ファミリーデータプラットフォームメーリングリストへのご参加ありがとうございます。ご指定のEメールアドレスに、このイニシアチブについてのお知らせをお届けします。",
+      "Title": "最新情報を受け取る"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +531,5 @@
       "CREATED": "まだ開始していません",
       "IN_PROGRESS": "進行中"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "続ける前にEメールアドレスを確認する必要があります。",
-    "EmailConfirmed": "Eメールアドレスが確認されました。"
   }
 }

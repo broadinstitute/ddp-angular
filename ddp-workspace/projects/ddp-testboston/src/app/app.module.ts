@@ -35,6 +35,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
 
@@ -43,7 +44,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 const baseElt = document.getElementsByTagName('base');
@@ -95,6 +97,8 @@ sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.supportedCountry = 'US';
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT', 'ADHOC_SYMPTOM', 'RESULT_REPORT'];
@@ -105,9 +109,11 @@ sdkConfig.dashboardReportActivities = ['RESULT_REPORT'];
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.compositeRequiredFieldExceptions = [QuestionType.Numeric];
+sdkConfig.addressEnforceRequiredFields = true;
 sdkConfig.scrollToErrorOffset = 130;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
@@ -143,6 +149,7 @@ export function languageFactory(language: LanguageService): string {
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
+        PrismActivityLinkComponent,
         EnrollmentComponent,
         HelpComponent
     ],

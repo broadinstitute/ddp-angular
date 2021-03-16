@@ -17,6 +17,7 @@ import { ActivityPicklistOption } from './../../models/activity/activityPicklist
 import { ActivityNumericQuestionBlock } from '../../models/activity/activityNumericQuestionBlock';
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
+import { QuestionType } from '../../models/activity/questionType';
 import * as _ from 'underscore';
 
 const DETAIL_MAXLENGTH = 500;
@@ -29,109 +30,9 @@ export class ActivityQuestionConverter {
     constructor(
         private validatorBuilder: ActivityValidatorBuilder,
         private suggestionBuilder: ActivitySuggestionBuilder,
-        private logger: LoggingService) {
-        this.questionBuilders = [
-            {
-                type: 'BOOLEAN', func: (questionJson) => {
-                    const booleanBlock = new ActivityBooleanQuestionBlock();
-                    booleanBlock.trueContent = questionJson.trueContent;
-                    booleanBlock.falseContent = questionJson.falseContent;
-                    return booleanBlock;
-                }
-            },
-            {
-                type: 'TEXT', func: (questionJson) => {
-                    // let's capture some of the validation into the textblock object itself
-                    // make's it easier to apply validations in the widget
-                    const textBlock = new ActivityTextQuestionBlock();
-                    textBlock.placeholder = questionJson.placeholderText;
-                    questionJson.validations.forEach(validation => {
-                        if (validation.minLength !== undefined) {
-                            textBlock.minLength = validation.minLength;
-                        }
-                        if (validation.maxLength !== undefined) {
-                            textBlock.maxLength = validation.maxLength;
-                        }
-                        if (validation.regexPattern !== undefined) {
-                            textBlock.regexPattern = validation.regexPattern;
-                        }
-                    });
-                    textBlock.confirmEntry = questionJson.confirmEntry;
-                    textBlock.confirmPrompt = questionJson.confirmPrompt;
-                    textBlock.mismatchMessage = questionJson.mismatchMessage;
-                    textBlock.inputType = questionJson.inputType;
-                    textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
-                    return textBlock;
-                }
-            },
-            {
-                type: 'NUMERIC', func: (questionJson) => {
-                    const numericBlock = new ActivityNumericQuestionBlock();
-                    numericBlock.placeholder = questionJson.placeholderText;
-                    numericBlock.numericType = questionJson.numericType;
-                    questionJson.validations.forEach(validation => {
-                        if (_.isNumber(validation.min)) {
-                            numericBlock.min = validation.min;
-                        }
-                        if (_.isNumber(validation.max)) {
-                            numericBlock.max = validation.max;
-                        }
-                    });
-                    return numericBlock;
-                }
-            },
-            {
-                type: 'PICKLIST', func: (questionJson) => {
-                    const picklistBlock = new ActivityPicklistQuestionBlock();
-                    picklistBlock.picklistOptions = this.filterPicklistOptions(questionJson.picklistOptions);
-                    picklistBlock.picklistLabel = questionJson.picklistLabel;
-                    picklistBlock.selectMode = questionJson.selectMode;
-                    picklistBlock.renderMode = questionJson.renderMode;
-                    picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
-                    picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
-                    return picklistBlock;
-                }
-            },
-            {
-                type: 'DATE', func: (questionJson) => {
-                    const dateBlock = new ActivityDateQuestionBlock();
-                    dateBlock.renderMode = questionJson.renderMode;
-                    dateBlock.fields = questionJson.fields;
-                    dateBlock.placeholder = questionJson.placeholder;
-                    dateBlock.displayCalendar = questionJson.displayCalendar;
-                    if (dateBlock.renderMode === DateRenderMode.Picklist) {
-                        // Use loose null check and normalize missing/nulled properties to undefined.
-                        dateBlock.useMonthNames = (questionJson.useMonthNames == null
-                            ? undefined : questionJson.useMonthNames);
-                        dateBlock.startYear = (questionJson.startYear == null
-                            ? undefined : questionJson.startYear);
-                        dateBlock.endYear = (questionJson.endYear == null
-                            ? undefined : questionJson.endYear);
-                        dateBlock.firstSelectedYear = (questionJson.firstSelectedYear == null
-                            ? undefined : questionJson.firstSelectedYear);
-                    }
-                    return dateBlock;
-                }
-            },
-            {
-                type: 'COMPOSITE', func: (questionJson) => {
-                    const newBlock = new ActivityCompositeQuestionBlock();
-                    newBlock.addButtonText = questionJson.addButtonText;
-                    newBlock.allowMultiple = questionJson.allowMultiple;
-                    newBlock.childOrientation = questionJson.childOrientation;
-                    newBlock.allowMultiple && (newBlock.additionalItemText = questionJson.additionalItemText);
-                    newBlock.children = (questionJson.children as ActivityQuestionBlock<any>[])
-                        .map(childInputBlock => this.buildQuestionBlock(childInputBlock, null))
-                        .filter(block => block != null);
-                    return newBlock;
-                }
-            },
-            {
-                type: 'AGREEMENT', func: () => {
-                    return new ActivityAgreementQuestionBlock();
-                }
-            }
-        ];
+        private logger: LoggingService
+    ) {
+        this.initQuestionBuilders();
     }
 
     public buildQuestionBlock(questionJson: any, displayNumber: number | null): ActivityQuestionBlock<any> | null {
@@ -150,6 +51,7 @@ export class ActivityQuestionConverter {
         questionBlock.question = questionJson.prompt;
         questionBlock.stableId = questionJson.stableId;
         questionBlock.tooltip = questionJson.tooltip;
+        questionBlock.readonly = questionJson.readonly;
         questionBlock.displayNumber = displayNumber;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
@@ -208,5 +110,124 @@ export class ActivityQuestionConverter {
             convertedGroup.options = groupedOptions;
             return convertedGroup;
         });
+    }
+
+    private initQuestionBuilders(): void {
+      this.questionBuilders = [
+          {
+              type: QuestionType.Boolean,
+              func: (questionJson) => this.getBooleanBlock(questionJson)
+          },
+          {
+              type: QuestionType.Text,
+              func: (questionJson) => this.getTextBlock(questionJson)
+          },
+          {
+              type: QuestionType.Numeric,
+              func: (questionJson) => this.getNumericBlock(questionJson)
+          },
+          {
+              type: QuestionType.Picklist,
+              func: (questionJson) => this.getPicklistBlock(questionJson)
+          },
+          {
+              type: QuestionType.Date,
+              func: (questionJson) => this.getDateBlock(questionJson)
+          },
+          {
+              type: QuestionType.Composite,
+              func: (questionJson) => this.getCompositeBlock(questionJson)
+          },
+          {
+              type: QuestionType.Agreement,
+              func: () => new ActivityAgreementQuestionBlock()
+        }
+      ];
+    }
+
+    private getBooleanBlock(questionJson: any): ActivityBooleanQuestionBlock {
+        const booleanBlock = new ActivityBooleanQuestionBlock();
+        booleanBlock.trueContent = questionJson.trueContent;
+        booleanBlock.falseContent = questionJson.falseContent;
+        return booleanBlock;
+    }
+
+    private getTextBlock(questionJson: any): ActivityTextQuestionBlock {
+        // let's capture some of the validation into the textblock object itself
+        // make's it easier to apply validations in the widget
+        const textBlock = new ActivityTextQuestionBlock();
+        textBlock.placeholder = questionJson.placeholderText;
+        questionJson.validations.forEach(validation => {
+            if (validation.minLength !== undefined) {
+                textBlock.minLength = validation.minLength;
+            }
+            if (validation.maxLength !== undefined) {
+                textBlock.maxLength = validation.maxLength;
+            }
+            if (validation.regexPattern !== undefined) {
+                textBlock.regexPattern = validation.regexPattern;
+            }
+        });
+        textBlock.confirmEntry = questionJson.confirmEntry;
+        textBlock.confirmPrompt = questionJson.confirmPrompt;
+        textBlock.mismatchMessage = questionJson.mismatchMessage;
+        textBlock.inputType = questionJson.inputType;
+        textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
+        return textBlock;
+    }
+
+    private getNumericBlock(questionJson: any): ActivityNumericQuestionBlock {
+        const numericBlock = new ActivityNumericQuestionBlock();
+        numericBlock.placeholder = questionJson.placeholderText;
+        numericBlock.numericType = questionJson.numericType;
+        questionJson.validations.forEach(validation => {
+            if (_.isNumber(validation.min)) {
+                numericBlock.min = validation.min;
+            }
+            if (_.isNumber(validation.max)) {
+                numericBlock.max = validation.max;
+            }
+        });
+        return numericBlock;
+    }
+
+    private getPicklistBlock(questionJson: any): ActivityPicklistQuestionBlock {
+        const picklistBlock = new ActivityPicklistQuestionBlock();
+        picklistBlock.picklistOptions = this.filterPicklistOptions(questionJson.picklistOptions);
+        picklistBlock.picklistLabel = questionJson.picklistLabel;
+        picklistBlock.selectMode = questionJson.selectMode;
+        picklistBlock.renderMode = questionJson.renderMode;
+        picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
+        picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
+        return picklistBlock;
+    }
+
+
+    private getDateBlock(questionJson: any): ActivityDateQuestionBlock {
+        const dateBlock = new ActivityDateQuestionBlock();
+        dateBlock.renderMode = questionJson.renderMode;
+        dateBlock.fields = questionJson.fields;
+        dateBlock.placeholder = questionJson.placeholder;
+        dateBlock.displayCalendar = questionJson.displayCalendar;
+        if (dateBlock.renderMode === DateRenderMode.Picklist) {
+            // Use loose null check and normalize missing/nulled properties to undefined.
+            dateBlock.useMonthNames = (questionJson.useMonthNames == null ? undefined : questionJson.useMonthNames);
+            dateBlock.startYear = (questionJson.startYear == null ? undefined : questionJson.startYear);
+            dateBlock.endYear = (questionJson.endYear == null ? undefined : questionJson.endYear);
+            dateBlock.firstSelectedYear = (questionJson.firstSelectedYear == null ? undefined : questionJson.firstSelectedYear);
+        }
+        return dateBlock;
+    }
+
+    private getCompositeBlock(questionJson: any): ActivityCompositeQuestionBlock {
+        const newBlock = new ActivityCompositeQuestionBlock();
+        newBlock.addButtonText = questionJson.addButtonText;
+        newBlock.allowMultiple = questionJson.allowMultiple;
+        newBlock.childOrientation = questionJson.childOrientation;
+        newBlock.allowMultiple && (newBlock.additionalItemText = questionJson.additionalItemText);
+        newBlock.children = (questionJson.children as ActivityQuestionBlock<any>[])
+            .map(childInputBlock => this.buildQuestionBlock(childInputBlock, null))
+            .filter(block => block !== null);
+        return newBlock;
     }
 }

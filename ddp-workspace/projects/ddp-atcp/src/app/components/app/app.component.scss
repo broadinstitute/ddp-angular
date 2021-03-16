@@ -12,3 +12,9 @@
     }
   }
 }
+
+@media print {
+  .expansion-panel {
+    display: none;
+  }
+}

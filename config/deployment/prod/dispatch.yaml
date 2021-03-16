@@ -11,6 +11,10 @@ dispatch:
     service: testboston
   - url: "mpcproject.org/*"
     service: mpc
+  - url: "escproject.org/*"
+    service: esc
+  - url: "prionregistry.org/*"
+    service: prion
   - url: "pepper.datadonationplatform.org/docs*"
     service: pepper-api-spec
   - url: "pepper.datadonationplatform.org/spec/*"

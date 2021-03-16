@@ -1,46 +1,123 @@
 declare const $;
+declare const config: Record<string, any>;
 
-const onTranslate = (dictionary) => {
-  $('[data-translate]').each((i, el) => {
-    const $el = $(el);
-    const key = $el.data('translate');
-    let text = '';
-    if (key.indexOf('.') !== - 1) {
-      const pathKeys = key.split('.');
-      try {
-        text = pathKeys.reduce((prev, curr) => prev[curr], dictionary);
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      text = dictionary[key];
-    }
-    $el.text(text);
-  });
-};
+interface Language {
+  code: string;
+  name: string;
+}
 
-const onChange = (baseUrl: string, language: string, cb: (list: any[]) => void) => {
-  $.getJSON(baseUrl + '/auth-' + language + '.json', data => {
-    onTranslate(data);
-    cb(data);
-  });
-};
+export class Translator {
+  languages: Language[];
+  currentLangCode: string;
+  currentDictionary: Record<string, any>;
 
-const loadLanguagesList = (baseUrl: string) => {
-  $.getJSON(baseUrl + '/languages.json', (languages: any[]) => {
-    const $container = $('.languages');
-    let items = '';
-    languages.forEach(item => {
-      items += '<li><a class="green-hover change-language" href="#" data-language="' + item.code.split('-')[0] + '">' + item.name + '</a></li>';
+  constructor(private baseUrl: string) {}
+
+  static create(baseUrl: string): Translator {
+    const translator = new Translator(baseUrl);
+    translator.loadLanguages();
+
+    return translator;
+  }
+
+  loadLanguages(): void {
+    $.getJSON(`${this.baseUrl}/languages.json`, (languages: Language[]) => {
+      this.languages = languages;
+      this.populateLanguagesDropdown();
+      this.checkLangPreferences();
     });
-    $container.empty();
-    $container.append(items);
-  });
-};
+  }
 
-export const translatorCreator = (url: string, cb: (dictionary) => void) => {
-  loadLanguagesList(url);
-  return {
-      changeTranslate: (language: string) => onChange(url, language, cb),
-  };
-};
+  changeLanguage(langCode: string): void {
+    console.log(`Changing language to ${langCode}`);
+
+    this.currentLangCode = langCode;
+    window.localStorage.setItem('lang', langCode);
+
+    $.getJSON(
+      `${this.baseUrl}/auth-${langCode}.json`,
+      (dictionary: Record<string, any>) => {
+        this.currentDictionary = dictionary;
+        this.translateElements();
+      }
+    );
+  }
+
+  private populateLanguagesDropdown(): void {
+    const languagesContainer = $('.languages');
+    let content = '';
+
+    this.languages.forEach(
+      language =>
+        (content += `
+      <li>
+        <a
+          href="#"
+          class="green-hover change-language"
+          data-language="${language.code.split('-')[0]}"
+        >${language.name}</a>
+      </li>
+    `)
+    );
+
+    languagesContainer.empty();
+    languagesContainer.append(content);
+  }
+
+  private checkLangPreferences(): void {
+    $(document).ready(() => {
+      const langCode = window.localStorage.getItem('lang');
+
+      if (langCode) {
+        console.log(`Initialized language as "${langCode}" from local storage`);
+
+        return this.changeLanguage(langCode);
+      }
+
+      if (config && config.extraParams && config.extraParams.language) {
+        const langCode = config.extraParams.language;
+
+        console.log(`Initialized language as "${langCode}" from config`);
+
+        return this.changeLanguage(langCode);
+      }
+
+      console.log('Initializing default "en" language');
+
+      this.changeLanguage('en');
+    });
+  }
+
+  private translateElements(): void {
+    const lang = this.languages.find(
+      lang => lang.code === this.currentLangCode
+    );
+
+    if (lang) {
+      $('#current-language').text(lang.name);
+    }
+
+    $('[data-translate]').each((_: number, el: any) => {
+      const $el = $(el);
+      const key = $el.data('translate');
+      let text = '';
+
+      if (key.indexOf('.') !== -1) {
+        const pathKeys = key.split('.');
+
+        try {
+          text = pathKeys.reduce(
+            (prev, curr) => prev[curr],
+            this.currentDictionary
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        text = this.currentDictionary[key];
+      }
+
+      $el.text(text);
+    });
+  }
+}

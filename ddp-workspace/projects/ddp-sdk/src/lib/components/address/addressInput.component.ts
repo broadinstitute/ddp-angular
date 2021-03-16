@@ -19,7 +19,7 @@ import { CountryAddressInfo } from '../../models/countryAddressInfo';
 import { merge, Observable, of, Subject } from 'rxjs';
 import * as _ from 'underscore';
 import { mergeMap, take, takeUntil, tap } from 'rxjs/operators';
-import { AddressInputService } from '../address/addressInput.service';
+import { AddressInputService } from './addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { AddressService } from '../../services/address.service';
 import { LoggingService } from '../../services/logging.service';
@@ -199,6 +199,12 @@ export class AddressInputComponent implements OnInit, OnDestroy {
   valueChanged = new EventEmitter<Address | null>();
 
   /**
+   * Whether form contents are valid or not
+   */
+  @Output()
+  formValidStatusChanged = new EventEmitter<boolean>();
+
+  /**
    * Emit flag indicating if component is busy doing work, particularly communicating with an external service
    */
   @Output()
@@ -237,15 +243,23 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     const valueChangedEmit$ = this.ais.addressOutputStream$.pipe(
       tap(val => this.valueChanged.emit(val)),
     );
+
+    const formValidStatusChangedEmit$ = merge(this.ais.inputAddress$, this.ais.addressForm.valueChanges).pipe(
+          tap(val => this.formValidStatusChanged.emit(this.ais.addressForm.valid))
+    );
+
     const componentBusyEmit$ = this.ais.isBusy$.pipe(
       tap(val => this.componentBusy.emit(val))
     );
+
+
 
 
     // shoot for single subscribe
     merge(
       syncStreet1FieldValue$,
       valueChangedEmit$,
+      formValidStatusChangedEmit$,
       componentBusyEmit$,
     ).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();

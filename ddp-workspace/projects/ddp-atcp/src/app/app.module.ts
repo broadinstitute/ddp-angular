@@ -1,7 +1,8 @@
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatMenuModule } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,9 +12,28 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
-import { AnalyticsEvent, AnalyticsEventsService, ConfigurationService, DdpModule, LoggingService } from 'ddp-sdk';
-import { CommunicationService, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
+import {
+  TranslateService,
+  TranslateModule,
+  TranslateLoader,
+} from '@ngx-translate/core';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+
+import {
+  AnalyticsEvent,
+  AnalyticsEventsService,
+  ConfigurationService,
+  DdpModule,
+  LanguageService,
+  LoggingService,
+} from 'ddp-sdk';
+
+import {
+  CommunicationService,
+  ToolkitConfigurationService,
+  ToolkitModule,
+} from 'toolkit';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AboutInitiativeComponent } from './components/about-initiative/about-initiative';
 import { AboutUsComponent } from './components/about-us/about-us';
@@ -22,8 +42,9 @@ import { AccountActivationRequiredComponent } from './components/account-activat
 import { AtcpActivityBaseComponent } from './components/activityForm/app-atcp-activity-base.component';
 import { AtcpActivityComponent } from './components/activityForm/app-atcp-activity.component';
 import { AppComponent } from './components/app/app.component';
-import { ConsoleComponent } from './components/console/console';
-import { DashBoardComponent } from './components/dashboard/dashboard';
+import { SurveyComponent } from './components/survey/survey.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { DataAccessComponent } from './components/data-access/data-access';
 import { FooterComponent } from './components/footer/footer';
 import { HeaderComponent } from './components/header/header';
@@ -33,9 +54,13 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { WelcomeComponent } from './components/welcome/welcome';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress';
-import { Language, LanguagesProvider, LanguagesToken } from './providers/languages.provider';
+import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
+import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
+import { MailingListComponent } from './components/mailing-list/mailing-list.component';
+import { ActivityPrintComponent } from './components/activity-print/activity-print.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -47,6 +72,7 @@ import { PopupMessageComponent } from './toolkit/dialogs/popupMessage.component'
 import { AtcpLoginLandingRedesignedComponent } from './toolkit/login/atcp-login-landing-redesigned.component';
 import { AtcpLoginLandingComponent } from './toolkit/login/atcp-login-landing.component';
 import { AtcpCommunicationService } from './toolkit/services/communication.service';
+import { AppTranslateLoader } from './translate.loader';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -56,13 +82,17 @@ if (baseElt) {
 }
 
 declare let DDP_ENV: any;
-declare const ga: Function;
+declare const ga: (...args: any[]) => void;
+
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
-tkCfg.dashboardUrl = RouterResource.Console;
+tkCfg.dashboardUrl = RouterResource.Dashboard;
+tkCfg.participantListUrl = RouterResource.ParticipantList;
 tkCfg.errorUrl = RouterResource.Error;
 tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
+tkCfg.activityUrl = 'activity';
+tkCfg.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
@@ -78,32 +108,60 @@ config.doLocalRegistration = DDP_ENV.doLocalRegistration;
 config.mapsApiKey = DDP_ENV.mapsApiKey;
 config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
-config.defaultLanguageCode = DDP_ENV.defaultLanguageCode ? DDP_ENV.defaultLanguageCode : 'en';
+config.defaultLanguageCode = DDP_ENV.defaultLanguageCode
+  ? DDP_ENV.defaultLanguageCode
+  : 'en';
+config.languageSelectorIconURL = 'assets/images/atcp/globe.svg#globe';
+config.tooltipIconUrl = '';
+config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+config.projectGcpId = DDP_ENV.projectGcpId;
+config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService) {
-  return () => new Promise<any>((resolve: any) => {
-    const LOG_SOURCE = 'AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    const language: Language[] = injector.get(LanguagesToken, Promise.resolve(null));
-    locationInitialized.then(() => {
-      translate.addLangs(language.map(x => x.code));
-      const locale = config.defaultLanguageCode;
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization: ${err}`);
-      }, () => {
-        resolve(null);
+export function translateFactory(
+  translate: TranslateService,
+  injector: Injector,
+  logger: LoggingService,
+  languageService: LanguageService,
+): () => Promise<any> {
+  return () =>
+    new Promise<any>(resolve => {
+      const LOG_SOURCE = 'AppModule';
+      const locationInitialized = injector.get(
+        LOCATION_INITIALIZED,
+        Promise.resolve(null),
+      );
+
+      locationInitialized.then(() => {
+        const locale = languageService.getAppLanguageCode();
+
+        translate.setDefaultLang(locale);
+
+        translate.use(locale).subscribe(
+          () => {
+            logger.logEvent(
+              LOG_SOURCE,
+              `Successfully initialized '${locale}' language as default.`,
+            );
+          },
+          err => {
+            logger.logError(
+              LOG_SOURCE,
+              `Problem with '${locale}' language initialization: ${err}`,
+            );
+          },
+          () => {
+            resolve(null);
+          },
+        );
       });
     });
-  });
 }
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     AppRoutingModule,
     DdpModule,
@@ -116,7 +174,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatTableModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: AppTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    RecaptchaV3Module,
   ],
   declarations: [
     WelcomeComponent,
@@ -129,11 +195,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpActivityComponent,
     JoinUsComponent,
     DataAccessComponent,
-    DashBoardComponent,
+    SurveyComponent,
     WorkflowProgressComponent,
     StatisticsComponent,
     ProgressBarComponent,
-    ConsoleComponent,
     ExtractTranslationPathsForArrayPipe,
     AccountActivatedComponent,
     AccountActivationRequiredComponent,
@@ -142,11 +207,14 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpLoginLandingComponent,
     AtcpLoginLandingRedesignedComponent,
     FileUploaderComponent,
-    PopupMessageComponent
-  ],
-  entryComponents: [
-    DashBoardComponent,
-    PopupMessageComponent
+    PopupMessageComponent,
+    ParticipantListComponent,
+    ParticipantListItem,
+    DashboardComponent,
+    UserActivitiesComponent,
+    ActivityRedirectComponent,
+    MailingListComponent,
+    ActivityPrintComponent,
   ],
   providers: [
     CurrentActivityService,
@@ -155,30 +223,28 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AtcpCommunicationService,
     {
       provide: 'ddp.config',
-      useValue: config
+      useValue: config,
     },
     {
       provide: 'toolkit.toolkitConfig',
-      useValue: tkCfg
+      useValue: tkCfg,
     },
     {
       provide: APP_INITIALIZER,
       useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService
-      ],
-      multi: true
+      deps: [TranslateService, Injector, LoggingService, LanguageService],
+      multi: true,
     },
-    LanguagesProvider,
-    UserPreferencesServiceAgent
+    UserPreferencesServiceAgent,
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: tkCfg.recaptchaSiteClientKey,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    private analytics: AnalyticsEventsService) {
+  constructor(private analytics: AnalyticsEventsService) {
     this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
       ga('send', event);
       ga('platform.send', event);

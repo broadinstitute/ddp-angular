@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-activity-progress-bar',
   template: `
     <div class="app-activity-progress-bar">
-      <span class="progress-title" translate>{{ title }}</span>
+      <span class="progress-title">{{ title | translate }}</span>
       <mat-progress-bar mode="determinate" value="{{ progress }}"></mat-progress-bar>
       <span class="progress-value">{{ progress }} %</span>
     </div>
@@ -40,9 +40,9 @@ import { Subscription } from 'rxjs';
   `]
 })
 export class ActivityProgressBarComponent implements OnInit, OnDestroy {
-  private anchor: Subscription = new Subscription();
   @Input() title: string;
   progress: number;
+  private anchor: Subscription = new Subscription();
 
   constructor(private activityProgressCalculationService: ActivityProgressCalculationService) {}
 

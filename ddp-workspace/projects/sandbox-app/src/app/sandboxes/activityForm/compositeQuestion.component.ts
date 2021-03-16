@@ -178,7 +178,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
     return questionBlock;
   }
 
-  private initializeQuestionRules() {
+  private initializeQuestionRules(): void {
     // TODO I cut and pasted a chunk  of code from SDK for this.
     // want to support all different possible child questions without having to rewrite custom code
     // Also don't want to make this functionality public.

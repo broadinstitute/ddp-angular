@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -43,6 +44,7 @@ import { AddressVerificationWarnings } from '../../models/addressVerificationWar
 import { extract } from '../../utility/rxjsoperator/extract';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { LoggingService } from '../../services/logging.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 interface ComponentState {
   isReadOnly: boolean;
@@ -69,6 +71,7 @@ interface AddressSuggestion {
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
         <ddp-address-input
                 (valueChanged)="inputComponentAddress$.next($event)"
+                (formValidStatusChanged)="formValidStatusChanged$.next($event)"
                 [address]="inputAddress$ | async"
                 [addressErrors]="verifyFieldErrors$ | async"
                 [readonly]="isReadOnly$ | async"
@@ -192,6 +195,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   public verifyFieldErrors$: Observable<AddressError[]>;
   public isReadOnly$: Observable<boolean>;
   public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
+  public formValidStatusChanged$: Subject<boolean> = new BehaviorSubject(true);
   public generateTaggedAddress = generateTaggedAddress;
 
 
@@ -201,19 +205,20 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
   private stateUpdates$ = new Subject<Partial<ComponentState>>();
   private stateSubscription: Subscription;
   private validationRequested$: Subject<boolean> = new Subject<boolean>();
-  private readonly LOG_SOURCE = 'AddressEmbeddedComponent'; 
+  private readonly LOG_SOURCE = 'AddressEmbeddedComponent';
 
-  constructor(
-    private addressService: AddressService,
-    private logger: LoggingService,
-    private ngxTranslate: NGXTranslateService,
-    @Optional() private submitService: SubmitAnnouncementService
-  ) {
-    this.suggestionForm = new FormGroup({
-      suggestionRadioGroup: new FormControl('entered')
-    });
-    this.initializeComponentState();
-  }
+    constructor(
+        private addressService: AddressService,
+        private logger: LoggingService,
+        private ngxTranslate: NGXTranslateService,
+        @Inject('ddp.config') private configuration: ConfigurationService,
+        @Optional() private submitService: SubmitAnnouncementService
+    ) {
+        this.suggestionForm = new FormGroup({
+            suggestionRadioGroup: new FormControl('entered')
+        });
+        this.initializeComponentState();
+    }
 
   private initializeComponentState(): void {
       const initialState: ComponentState = {
@@ -553,9 +558,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         map(currentAddress => this.meetsActivityRequirements(currentAddress))
     );
 
-    const emitValidStatusAction$ = combineLatest([this.formErrorMessages$, this.verifyFieldErrors$, activitityRequirementsMet$]).pipe(
-        map(([formErrors, addressErrors, reqsMet]) =>
-            !formErrors.length && !addressErrors.length && reqsMet),
+    const emitValidStatusAction$ = combineLatest([this.formValidStatusChanged$, this.formErrorMessages$, this.verifyFieldErrors$,
+        activitityRequirementsMet$]).pipe(
+        map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
+            (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
+                && !formErrors.length && !addressErrors.length && reqsMet),
         distinctUntilChanged(),
         tap(status => this.validStatusChanged.emit(status))
     );

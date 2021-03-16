@@ -13,6 +13,7 @@ export const COMPLETE = 'COMPLETE';
 export class WorkflowProgressComponent implements OnInit, OnDestroy {
   @Input() public steps: ActivityInstance[] = [];
   @Input() public instanceGuid: string;
+  // tslint:disable-next-line:no-output-on-prefix
   @Output() public onChangeActivity = new EventEmitter<ActivityInstance>();
 
   public CREATED = CREATED;
@@ -31,8 +32,28 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
     this.anchor.addNew(translate$);
   }
 
+  public get currentActivity(): ActivityInstance {
+    if (!this.steps) {
+      return null;
+    }
+
+    const inProgressActivity = this.steps.find(
+      activity => activity.statusCode === IN_PROGRESS
+    );
+
+    if (inProgressActivity) return inProgressActivity;
+
+    const createdActivity = this.steps.find(
+      activity => activity.statusCode === CREATED
+    );
+
+    if (createdActivity) return createdActivity;
+
+    return null;
+  }
+
   public changeActivity(step: ActivityInstance): void {
-    if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS) {
+    if (step.statusCode === COMPLETE || step.statusCode === IN_PROGRESS || step === this.currentActivity) {
       this.onChangeActivity.emit(step);
     }
   }

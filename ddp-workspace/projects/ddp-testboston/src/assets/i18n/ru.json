@@ -252,7 +252,9 @@
       "Placeholder": "Введите код приглашения",
       "Error": {
         "Part1": "Введенный вами код не работает. Пожалуйста, проверьте свой код и повторите попытку. Вы всегда можете обратиться за помощью к сотрудникам исследования TestBoston:",
-        "Part2": "или"
+        "Part2": "или",
+        "Part3": "",
+        "Part4": ""
       }
     },
     "Zip": {
@@ -381,7 +383,8 @@
       "Title": "Пожалуйста, введите пароль",
       "Text": "Пожалуйста, введите свой пароль *",
       "InputPlaceholder": "Пароль",
-      "PasswordWrongError": "Неправильный пароль Пожалуйста, повторите попытку.",
+      "PasswordWrongError": "Неправильный пароль. Пожалуйста, повторите попытку.",
+      "OtherError": "Мы сожалеем, но произошла неизвестная ошибка. Пожалуйста, повторите попытку.",
       "PasswordRequiredError": "Требуется пароль"
     },
     "ErrorPage": {
@@ -452,7 +455,8 @@
       "ActivityStatus": "Статус",
       "ActivityDate": "Создано",
       "ActivityActions": "Действия",
-      "ActivityQuestionCount": "На {{questionsAnswered}} из {{questionTotal}} даны ответы"
+      "ActivityQuestionCount": "На {{questionsAnswered}} из {{questionTotal}} даны ответы",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Управляемые участники",
@@ -607,6 +611,13 @@
     "SubjectPanel": {
       "Link": "Возврат к поиску субъекта",
       "Text": "Код приглашения субъекта:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Введена некорректная дата"
     }
   }
 }

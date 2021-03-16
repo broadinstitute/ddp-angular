@@ -10,17 +10,8 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
 
 describe('SubmissionManagerTest', () => {
     let submissionManager: SubmissionManager;
-    // const source: Observable<number>;
     let serviceAgent: jasmine.SpyObj< ActivityServiceAgent>;
 
-    beforeAll(() => {
-
-    });
-
-    afterAll(() => {
-        console.log('bye bye!!');
-
-    });
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
         console.log('The jasmine default timeout is:' + jasmine.DEFAULT_TIMEOUT_INTERVAL);
@@ -33,20 +24,16 @@ describe('SubmissionManagerTest', () => {
 
         submissionManager = new SubmissionManager(serviceAgent);
     });
-    afterEach(() => {
-
-    });
 
     it('test submission manager mock', (done) => {
         expect(submissionManager).not.toBeNull();
         serviceAgent.saveAnswerSubmission.and.callFake((studyGuid: string, activityGuid: string, answerSubmission: AnswerSubmission,
                                                         throwAnError: boolean): Observable<PatchAnswerResponse> => {
 
-            return of({ answers: [], blockVisibility: [] }).pipe(delayWhen(x => timer(2000)));
+            return of({ answers: [], blockVisibility: [] }).pipe(delayWhen(() => timer(2000)));
         });
         const start = new Date().getTime();
-        serviceAgent.saveAnswerSubmission('hey', 'ho', { stableId: 'blah', answer: 'boo' }, true).subscribe(x => {
-            console.log('Yipee ay yea');
+        serviceAgent.saveAnswerSubmission('hey', 'ho', { stableId: 'blah', value: 'boo' }, true).subscribe(x => {
             console.log('The milliseconds gone by are:' + (new Date().getTime() - start));
             expect(x['answers']).not.toBeNull();
             done();
@@ -64,21 +51,22 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [{stableId: requestIdxAsString, answerGuid: 'blah'}],
                 blockVisibility: []
-            }).pipe(tap((x) => console.log('Creating ' + x.answers[0].stableId)), delayWhen(x => timer(parseInt(delayAsString, 10))));
+            }).pipe(
+                tap((x) => console.log('Creating ' + x.answers[0].stableId)),
+                delayWhen(() => timer(parseInt(delayAsString, 10)))
+            );
         });
 
         let previousCompletedRequestIdx = -1;
         const startTime: number = new Date().getTime();
         httpCallDelays.forEach((delay, requestIdx) => {
             setTimeout(() => {
-                    submissionManager.patchAnswer(httpCallDelays[requestIdx] + '', requestIdx + '',
-                                                  'y', 'dummyValue', 'blockGuid');
-                },
-                       requestIdx * 10);
+                submissionManager.patchAnswer(httpCallDelays[requestIdx] + '', requestIdx + '', 'y', 'dummyValue', 'blockGuid');
+            }, requestIdx * 10);
         });
         setTimeout(() => {
-               done();
-        },         6000);
+            done();
+        }, 6000);
         const subscription = submissionManager.answerSubmissionResponse$
             .subscribe(patchResponse => {
                 expect(patchResponse).not.toBeNull();
@@ -102,7 +90,7 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [],
                 blockVisibility: []
-            }).pipe(delayWhen(x => timer(httpCallDelay)));
+            }).pipe(delayWhen(() => timer(httpCallDelay)));
         });
 
         interface ValueAndDelay {
@@ -147,7 +135,7 @@ describe('SubmissionManagerTest', () => {
             expect(returnedInProgressValues[2].delay).toBeGreaterThanOrEqual(httpCallDelay);
             console.log('Checks completed!');
             done();
-        },         2000);
+        }, 2000);
 
     });
 
@@ -157,7 +145,10 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [{stableId: requestIdxAsString, answerGuid: 'blah'}],
                 blockVisibility: []
-            }).pipe(tap((x) => console.log('Creating ' + x.answers[0].stableId)), delayWhen(x => timer(200)));
+            }).pipe(
+                tap((x) => console.log('Creating ' + x.answers[0].stableId)),
+                delayWhen(() => timer(200))
+            );
         });
 
         const startTime: number = new Date().getTime();
@@ -213,7 +204,7 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [],
                 blockVisibility: []
-            }).pipe(delayWhen(x => {
+            }).pipe(delayWhen(() => {
                 ++countOfExecutionAttempts;
                 console.log(`I am entering delay in my task with activityGuid ${activityGuid}`);
                 console.log('I have had this many errors: ' + errorCount);
@@ -253,7 +244,6 @@ describe('SubmissionManagerTest', () => {
 
     it('test retry and fail requests', (done) => {
         const activityGuidThatWillThrow = '1';
-        const numberOfErrorsToGenerate = 2;
         let countOfExecutionAttempts = 0;
         const errorMessage = 'Boom!';
         submissionManager.maxRetryCount = 5;
@@ -265,7 +255,7 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [],
                 blockVisibility: []
-            }).pipe(delayWhen(x => {
+            }).pipe(delayWhen(() => {
                 ++countOfExecutionAttempts;
                 console.log(`I am entering delay in my task with activityGuid ${activityGuid}`);
                 // this is where we generate the throwError for our test case
@@ -317,15 +307,11 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [],
                 blockVisibility: testBlockVisibility
-            }).pipe(delayWhen(x => timer(100)));
+            }).pipe(delayWhen(() => timer(100)));
         });
         submissionManager.answerSubmissionResponse$.subscribe((response) => {
             console.log('I got a new response: ' + JSON.stringify(response));
         });
-
-        // submissionManager.pendingAnswerSubmissionQueue$.subscribe((queue) =>
-        //     console.log('In the queue: ' + JSON.stringify(queue))
-        // );
 
         let invalidSubmissions: AnswerSubmission[] = [];
         submissionManager.invalidAnswerSubmissions$.subscribe(invalidSubmission => {
@@ -345,8 +331,6 @@ describe('SubmissionManagerTest', () => {
             expect(invalidSubmissions.length).toBe(1);
             expect(invalidSubmissions[0].stableId).toBe('2');
             done();
-        },
-                   10000);
-
+        }, 10000);
     });
 });

@@ -252,7 +252,9 @@
       "Placeholder": "Enter invitation code",
       "Error": {
         "Part1": "The code you entered isn’t active. Please check your code and try again. You can always contact the TestBoston study staff for help:",
-        "Part2": "or"
+        "Part2": "or",
+        "Part3": "If you have already enrolled, please click Sign In above to sign back in with your email address and password.",
+        "Part4": "We anticipate reaching current study capacity around 12/23/20. If your code does not work, it's possible the study has reached capacity for now and auto-prevented your enrollment. We apologize. You may email the study and include your invitation code if you think there has been an error."
       }
     },
     "Zip": {
@@ -382,6 +384,7 @@
       "Text": "Please enter your password *",
       "InputPlaceholder": "Password",
       "PasswordWrongError": "Incorrect password. Please try again.",
+      "OtherError": "We're sorry, but an error has occurred. Please try again.",
       "PasswordRequiredError": "Password is required"
     },
     "ErrorPage": {
@@ -452,7 +455,8 @@
       "ActivityStatus": "Status",
       "ActivityDate": "Created",
       "ActivityActions": "Actions",
-      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered"
+      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
+      "HiddenTooltip": "This activity is hidden."
     },
     "ManageParticipants": {
       "GovernedParticipants": "Governed participants",
@@ -607,6 +611,13 @@
     "SubjectPanel": {
       "Link": "Return to subject look-up",
       "Text": "Subject Invitation Code: "
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid"
     }
   }
 }

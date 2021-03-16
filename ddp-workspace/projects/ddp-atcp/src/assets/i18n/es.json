@@ -70,64 +70,103 @@
       },
       {
         "Hospital": "Profesora de Genética Médica, Universidad La Sapienza, Roma, Italia",
-        "Name": "Luciana Chessa"
+        "Name": "Dra. Luciana Chessa",
+        "Rank": "Médica"
       },
       {
-        "Hospital": "Director Médico de Pediatría, Hospital Wesley, Queensland, Australia"
+        "Hospital": "Director Médico de Pediatría, Hospital Wesley, Queensland, Australia",
+        "Name": "David Coman",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Profesor Adjunto de Pediatría y Neurología, Johns Hopkins Children’s Center, Baltimore, MD, EE. UU."
+        "Hospital": "Profesor Adjunto de Pediatría y Neurología, Johns Hopkins Children’s Center, Baltimore, MD, EE. UU.",
+        "Name": "Thomas Crawford",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Director, Google Genomics, Mountain View, CA, EE. UU."
+        "Hospital": "Director, Google Genomics, Mountain View, CA, EE. UU.",
+        "Name": "David Glazer",
+        "Rank": ""
       },
       {
-        "Hospital": "Pediatría y Biología del Desarrollo, Universidad de Medicina y Odontología de Tokio, Japón"
+        "Hospital": "Pediatría y Biología del Desarrollo, Universidad de Medicina y Odontología de Tokio, Japón",
+        "Name": "Setsuko Hasegawa",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Profesor Adjunto, Universidad de Queensland, Queensland, Australia"
+        "Hospital": "Profesor Adjunto, Universidad de Queensland, Queensland, Australia",
+        "Name": "Dr. Lutz Krause",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesor fundador de la cátedra Oncología Molecular, Universidad de Queensland, Brisbane, Australia"
+        "Hospital": "Profesor fundador de la cátedra Oncología Molecular, Universidad de Queensland, Brisbane, Australia",
+        "Name": "Dr. Martin Lavin",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesor de Pediatría, Johns Hopkins Children’s Center, Baltimore, MD, EE. UU."
+        "Hospital": "Profesor de Pediatría, Johns Hopkins Children’s Center, Baltimore, MD, EE. UU.",
+        "Name": "Dr. Howard Lederman",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Inmunohematología Pediátrica, Coordinador Asistente del Centro de Referencia para Inmunodeficiencias Primarias, Hospital Necker, París, Francia"
+        "Hospital": "Inmunohematología Pediátrica, Coordinador Asistente del Centro de Referencia para Inmunodeficiencias Primarias, Hospital Necker, París, Francia",
+        "Name": "Nizar Mahlaoui",
+        "Rank": "Médico, Maestría en Ciencias y Salud Pública"
       },
       {
-        "Hospital": "Neuróloga Pediátrica, Centro Médico Sheba, Ramat Gan, Israel"
+        "Hospital": "Neuróloga Pediátrica, Centro Médico Sheba, Ramat Gan, Israel",
+        "Name": "Andreea Nissenkorn",
+        "Rank": "Médica"
       },
       {
-        "Hospital": "Director General de Información, Instituto Broad, Cambridge, MA, EE. UU."
+        "Hospital": "Director General de Información, Instituto Broad, Cambridge, MA, EE. UU.",
+        "Name": "Dr. Anthony Philippakis",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Centro Nacional de Enfermedades Raras, Roma, Italia"
+        "Hospital": "Centro Nacional de Enfermedades Raras, Roma, Italia",
+        "Name": "Dra. Agata Polizzi",
+        "Rank": "Médica"
       },
       {
-        "Hospital": "Profesor de Genética Humana, Universidad de Tel Aviv, Ramat Aviv, Israel"
+        "Hospital": "Profesor de Genética Humana, Universidad de Tel Aviv, Ramat Aviv, Israel",
+        "Name": "Dr. Yosef Shiloh",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesor de Genética del Cáncer, Facultad de Medicina de la Universidad de Birmingham, Birmingham, Reino Unido"
+        "Hospital": "Profesor de Genética del Cáncer, Facultad de Medicina de la Universidad de Birmingham, Birmingham, Reino Unido",
+        "Name": "Dr. Grant Stewart",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesora de Genética, Universidad de París Descartes, y Jefa del Departamento de Genética, Institut Curie, París, Francia"
+        "Hospital": "Profesora de Genética, Universidad de París Descartes, y Jefa del Departamento de Genética, Institut Curie, París, Francia",
+        "Name": "Dra. Dominique Stoppa-Lyonnet",
+        "Rank": "Médica"
       },
       {
-        "Hospital": "Profesor Adjunto, Universidad de Medicina y Odontología de Tokio, Japón"
+        "Hospital": "Profesor Adjunto, Universidad de Medicina y Odontología de Tokio, Japón",
+        "Name": "Dr. Masatoshi Takagi",
+        "Rank": "Médico"
       },
       {
-        "Hospital": "Directora Ejecutiva, Public Population Project in Genomics and Society, Montreal, Canadá"
+        "Hospital": "Directora Ejecutiva, Public Population Project in Genomics and Society, Montreal, Canadá",
+        "Name": "Dra. Anne-Marie Tassé",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesor de Genética del Cáncer, Facultad de Medicina de la Universidad de Birmingham, Birmingham, Reino Unido"
+        "Hospital": "Profesor de Genética del Cáncer, Facultad de Medicina de la Universidad de Birmingham, Birmingham, Reino Unido",
+        "Name": "Dr. A. Malcolm Taylor",
+        "Rank": ""
       },
       {
-        "Hospital": "Profesor Clínico Adjunto, Universidad de Nottingham, Nottingham, Reino Unido"
+        "Hospital": "Profesor Clínico Adjunto, Universidad de Nottingham, Nottingham, Reino Unido",
+        "Name": "William Whitehouse",
+        "Rank": ""
       },
       {
-        "Hospital": "Hospital de Niños de la Universidad Johann Wolfgang Goethe, Fráncfort, Alemania"
+        "Hospital": "Hospital de Niños de la Universidad Johann Wolfgang Goethe, Fráncfort, Alemania",
+        "Name": "Dr. Stefan Zielen",
+        "Rank": "Médico"
       }
     ],
     "FamilyOversight": {
@@ -199,29 +238,43 @@
       "Third": "WEsperamos que, en el futuro, la Plataforma global de datos para familias con A-T se asocie con más organizaciones para recopilar otro tipo de datos biológicos y de estilo de vida, como el uso de tecnologías para vestir y capturar información sobre cómo se mueve una persona con A-T."
     }
   },
+  "AccountActivation": {
+    "AccountActivationRequired": "Debe confirmar su dirección de correo electrónico antes de continuar.",
+    "EmailConfirmed": "Su dirección de correo electrónico se confirmó correctamente."
+  },
   "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Enviar"
+      },
+      "Expand": {
+        "Title": "Ampliar"
+      }
+    },
     "Navigation": {
       "AboutThisInitiative": "Acerca de esta iniciativa",
       "AboutUs": "Acerca de nosotros",
+      "DataAccessRequest": "Solicitud de acceso a datos",
+      "ForResearchers": "Para Investigadores",
       "JoinUs": "Únase a nosotros",
       "Language": "Idioma",
       "LearnMore": "Más información",
+      "MedicalHistoryQuestionnaire": "Historia clínica",
+      "FeedingSurvey": "Encuesta sobre alimentación",
       "MyAccount": "Mi Cuenta",
+      "MyDashboard": "Mi panel de control",
       "Next": "Siguiente",
       "Previous": "Ant",
       "SignIn": "Iniciar sesión",
-      "YourParticipants": "Sus participantes",
-      "ForResearchers": "Para Investigadores",
-      "DataAccessRequest": "Solicitud de acceso a datos"
+      "Statistics": "Estadísiticas de la plataforma",
+      "Submit": "Enviar",
+      "YourParticipants": "Sus participantes"
     }
   },
-  "DataAccess": {
-    "Header": {
-      "Paragraph1": "La Plataforma global de datos para familias con A-T es un proyecto dirigido por pacientes y supervisado por familias con A-T y expertos de todo el mundo donde se puede compartir con los investigadores información de salud, datos genéticos y potencialmente otro tipo de datos sobre las personas con A-T. Esta plataforma permitirá que los investigadores tengan acceso a datos importantes de pacientes de todo el mundo de forma rápida, segura y eficiente, con la esperanza de que conduzca a nuevos descubrimientos."
-    },
-    "OrganizationForm": {
-      "Country": "País",
-      "State": "Estado/Provincia"
+  "Footer": {
+    "Contacts": {
+      "Email": "support@atfamilies.org",
+      "Phone": "+1 954-481-6611"
     }
   },
   "HomePage": {
@@ -272,10 +325,38 @@
       "Title": "Únase a nosotros en este desafío y manténgase informado sobre los hallazgos más recientes."
     }
   },
+  "JoinUs": {
+    "SignInButton": "¿Ya está registrado? Inicie sesión aquí"
+  },
   "SDK": {
+    "DownloadButton": "Descargar revisión",
     "CancelButton": "Cancelar",
+    "CloseButton": "Cerrar",
+    "CommunicationError": "Se ha producido un error al guardar sus datos. Compruebe el formulario y sus respuestas antes de enviarlo.",
     "Dashboard": {
+      "Text": "",
       "Title": "Mi consola"
+    },
+    "DatePicker": {
+      "April": "Abril",
+      "August": "Agosto",
+      "Day": "Seleccione el día...",
+      "December": "Diciembre",
+      "February": "Febrero",
+      "January": "Enero",
+      "July": "Julio",
+      "June": "Junio",
+      "March": "Marzo",
+      "May": "Mayo",
+      "Month": "Seleccione el mes...",
+      "November": "Noviembre",
+      "October": "Octubre",
+      "September": "Septiembre",
+      "Year": "Seleccione el año..."
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "caracteres restantes",
+      "SingularForm": "carácter restante"
     },
     "DoNotAssent": "No doy mi conformidad",
     "DoNotConsent": "No doy mi consentimiento",
@@ -287,36 +368,85 @@
         "Download": "Descargar el formulario de consentimiento completo"
       }
     },
-    "Institutions": {
-      "Fields": {
-        "City": "Ciudad"
-      }
-    },
     "JoinUsButton": "Únase a nosotros",
     "ManageParticipants": {
-      "ParticipantPlaceholder": "Participante"
+      "AddParticipant": "Agregar a un participante",
+      "ParticipantPlaceholder": "Participante",
+      "ParticipantsList": "Miembros de familias con A-T"
     },
     "NextButton": "Siguiente",
     "PreviousButton": "Ant",
     "RegisterButton": "Registrarse",
     "SaveAndSubmit": "Guardar y enviar",
     "SaveAndSubmitEnrollment": "Guardar y enviar inscripción",
+    "SavingButton": "Guardando",
     "SignAndAssent": "Firma y conformidad",
     "SignAndConsent": "Firma y consentimiento",
     "StartOrResume": "Iniciar/Reanudar",
+    "SubmitButton": "Enviar",
+    "SuccessSignIn": "Ha iniciado sesión correctamente.",
+    "SignInOut": {
+      "SignOut": "Cerrar sesión"
+    },
+    "Title": {
+      "Alert": "Su sesión caducará pronto",
+      "Default": "La plataforma de datos Global A-T Family"
+    },
+    "TooltipAlt": "¿Qué nombre debo ingresar?",
     "UserActivities": {
       "ActivityActions": "Acciones",
-      "ActivityStatus": "Estado"
+      "ActivityDate": "Creado",
+      "ActivityName": "Formulario",
+      "ActivityStatus": "Estado",
+      "ActivityStatuses": {
+        "COMPLETE": "Completo",
+        "CREATED": "No comenzado",
+        "IN_PROGRESS": "En curso"
+      },
+      "QuestionCount": "{{ answered }} / {{ total }} respondidos",
+      "Summary": "Resumen",
+      "SurveysToComplete": {
+        "Plural": "{{ count }} encuestas que completar",
+        "Singular": "{{ count }} encuesta que completar"
+      }
     },
     "UserMenu": {
       "SignOutButton": "Cerrar sesión"
+    },
+    "UserPreferences": {
+      "UserPreferencesGender": "Sexo",
+      "UserPreferencesLocale": "Idioma preferido",
+      "UserPreferencesTitle": "Preferencias de usuario"
+    },
+    "ValidateError": "No se puede enviar. Revise los mensajes en el formulario para obtener más información.",
+    "Validators": {
+      "DateNavyValidationRule": "La fecha ingresada no es válida"
+    }
+  },
+  "Statistics": {
+    "Title": "La plataforma de datos A-T Family en números",
+    "CountList": {
+      "totalParticipantsCount": "Número total de participantes",
+      "countriesCount": "Países representados",
+      "genomeStudyParticipantsCount": "Personas que han dado su consentimiento para participar en la secuenciación genómica",
+      "governedParticipantsCount": "Niños inscritos por sus padres",
+      "selfEnrolledParticipantsCount": "Participantes inscritos de forma autónoma"
+    },
+    "Subtitle": "Países representados"
+  },
+  "Survey": {
+    "Self": "Proceso de inscripción de {{ firstName }}",
+    "NewParticipant": "Proceso de inscripción de New Participant",
+    "ThankYouPopup": {
+      "Text": "Gracias por enviar la encuesta"
     }
   },
   "Toolkit": {
-    "AgeUpThankYou": {
-      "EmailCollected": {
-        "TextPt2": "o"
-      }
+    "ActivityActions": {
+      "Continue": "Continuar",
+      "Start": "Empezar",
+      "View": "Ver",
+      "Edit": "Editar"
     },
     "Dashboard": {
       "Actions": "Acciones",
@@ -332,28 +462,61 @@
       "JoinMailingList": {
         "CancelButton": "Cancelar",
         "Fields": {
+          "ConfirmEmail": {
+            "Error": "Introduzca una dirección de correo electrónico válida",
+            "Placeholder": "Confirmación del correo electrónico*"
+          },
           "Email": {
+            "Error": "Introduzca una dirección de correo electrónico válida",
             "Placeholder": "Dirección de correo electrónico"
           },
           "FirstName": {
+            "Error": "El nombre es obligatorio",
             "Placeholder": "Nombre"
           },
           "LastName": {
+            "Error": "Los apellidos son obligatorios",
             "Placeholder": "Apellido"
           }
-        }
+        },
+        "LoadingError": "Lo sentimos, se ha producido un error.",
+        "MatchEmailsError": "Asegúrese de que los dos campos de correo electrónico estén rellenados y las direcciones coincidan.",
+        "Required": "",
+        "SubmitButton": "Unirse",
+        "Text": "Introduzca su correo electrónico más abajo y le mantendremos informado acerca de los avances.\nPuede cancelar la suscripción en cualquier momento.",
+        "Title": "Manténgase informado"
       },
       "SessionWillExpire": {
         "Continue": "Continuar",
-        "SignOut": "Cerrar sesión"
+        "SignOut": "Cerrar sesión",
+        "Text": "Para proteger su privacidad, el sistema va a cerrar su sesión porque lleva ausente un tiempo. Haga clic en \"Continuar\" para permanecer conectado. Haga clic en \"Cerrar sesión\" si ha terminado por ahora.",
+        "Title": "Su sesión caducará pronto"
       }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Su enlace de restablecimiento de contraseña ha caducado."
     },
     "ErrorPage": {
       "DefaultText": {
         "TextPt1": "Póngase en contacto con el ",
         "TextPt2": " si continúa teniendo dificultades."
       },
+      "Text": "",
       "Title": "Lo sentimos, ocurrió un error. Vuelva a intentarlo más tarde."
+    },
+    "Password": {
+      "InputPlaceholder": "Contraseña",
+      "PasswordRequiredError": "La contraseña es obligatoria",
+      "PasswordWrongError": "Contraseña incorrecta. Vuelva a intentarlo.",
+      "Text": "Introduzca su contraseña*",
+      "Title": "Introduzca la contraseña"
+    },
+    "SessionExpired": {
+      "Text": "Ha estado ausente un tiempo, así que hemos cerrado su sesión como medida de seguridad. Inicie sesión de nuevo y vuelva a la última página donde se encontraba."
+    },
+    "StayInformed": {
+      "Text": "¡Gracias por unirse a la lista de distribución de correo de la Plataforma global de datos para familias con A-T! Lo mantendremos informado sobre esta iniciativa a través de la dirección de correo electrónico que ingresó.",
+      "Title": "Manténgase informado"
     }
   },
   "WorkflowProgress": {
@@ -368,9 +531,5 @@
       "CREATED": "No comenzado",
       "IN_PROGRESS": "En curso"
     }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Debe confirmar su dirección de correo electrónico antes de continuar.",
-    "EmailConfirmed": "Su dirección de correo electrónico se confirmó correctamente."
   }
 }
