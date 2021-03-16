@@ -136,7 +136,7 @@ export * from './lib/components/activityForm/answers/activityBooleanAnswer.compo
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 export * from './lib/components/activityForm/activitySection.component';
-export * from './lib/components/activityForm/activity-redesigned/activity-redesigned.component';
+export * from './lib/components/activityForm/activity-redesigned.component';
 export * from './lib/components/dashboard.component';
 export * from './lib/components/user/userProfile.component';
 export * from './lib/components/login/signInOut.component';

@@ -80,7 +80,7 @@ import { AnnouncementsServiceAgent } from './services/serviceAgents/announcement
 import { WindowRef } from './services/windowRef';
 
 import { ActivityComponent } from './components/activityForm/activity.component';
-import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned/activity-redesigned.component';
+import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned.component';
 import { ActivityQuestionComponent } from './components/activityForm/activity-blocks/activityQuestion.component';
 import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
