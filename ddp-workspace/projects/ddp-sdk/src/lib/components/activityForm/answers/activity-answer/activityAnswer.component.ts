@@ -49,7 +49,12 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
                                    [block]="block"
                                    [readonly]="readonly"
                                    (valueChanged)="onChange($event)">
-    </ddp-activity-agreement-answer>`
+    </ddp-activity-agreement-answer>
+    <span *ngIf="block.additionalInfoFooter && block.shown"
+          [innerHTML]="block.additionalInfoFooter"
+          class="ddp-activity-answer__info-footer">
+    </span>`,
+    styleUrls: ['activityAnswer.component.scss']
 })
 
 export class ActivityAnswerComponent {

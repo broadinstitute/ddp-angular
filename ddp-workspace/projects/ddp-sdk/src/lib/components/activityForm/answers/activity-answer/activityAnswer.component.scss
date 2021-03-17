@@ -1,0 +1,8 @@
+.ddp-activity-answer {
+  &__info-footer {
+    margin-top: var(--question-prompt-additional-header-margin-top, 10px);
+    font-size: var(--question-prompt-additional-header-font-size, 14px);
+    color: var(--question-prompt-additional-header-color, #000);
+    line-height: var(--question-prompt-additional-header-line-height, 18px);
+  }
+}
