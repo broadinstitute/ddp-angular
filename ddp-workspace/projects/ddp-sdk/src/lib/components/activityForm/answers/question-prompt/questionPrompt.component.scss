@@ -1,0 +1,8 @@
+.ddp-question-prompt {
+  &__info-header {
+    display: inline-block;
+    font-size: var(--question-prompt-additional-header-font-size, 14px);
+    color: var(--question-prompt-additional-header-color, #343434);
+    line-height: var(--question-prompt-additional-header-line-height, 20px);
+  }
+}
