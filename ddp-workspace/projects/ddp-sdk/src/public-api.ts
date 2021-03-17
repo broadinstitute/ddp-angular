@@ -119,7 +119,7 @@ export * from './lib/components/activityForm/picklist/radiobuttonsActivityPickli
 export * from './lib/components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/activityPicklistAnswer.component';
-export * from './lib/components/activityForm/answers/questionPrompt.component';
+export * from './lib/components/activityForm/answers/question-prompt/questionPrompt.component';
 export * from './lib/components/activityForm/activity-blocks/conditionalBlock.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlockList.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlock.component';

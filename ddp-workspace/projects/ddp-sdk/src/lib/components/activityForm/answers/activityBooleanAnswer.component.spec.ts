@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
 import { ActivityBooleanAnswer } from './activityBooleanAnswer.component';
-import { QuestionPromptComponent } from './questionPrompt.component';
+import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 

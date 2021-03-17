@@ -160,7 +160,7 @@ import { WorkflowServiceAgent } from './services/serviceAgents/workflowServiceAg
 import { UpperCaseInputDirective } from './directives/upperCaseInputDirective.directive';
 import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAutocomplete.directive';
 import { ConditionalBlockComponent } from './components/activityForm/activity-blocks/conditionalBlock.component';
-import { QuestionPromptComponent } from './components/activityForm/answers/questionPrompt.component';
+import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
 import { SubjectPanelComponent } from './components/subjectPanel.component';

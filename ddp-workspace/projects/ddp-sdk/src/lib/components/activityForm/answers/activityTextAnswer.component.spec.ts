@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivityTextAnswer } from './activityTextAnswer.component';
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
-import { QuestionPromptComponent } from './questionPrompt.component';
+import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { InputType } from '../../../models/activity/inputType';
 import { TextSuggestion } from '../../../models/activity/textSuggestion';
 import { ActivityEmailInput } from './activityEmailInput.component';

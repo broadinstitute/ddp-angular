@@ -3,10 +3,10 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
-import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
+import { ActivityBooleanQuestionBlock } from '../../../../models/activity/activityBooleanQuestionBlock';
 import { QuestionPromptComponent } from './questionPrompt.component';
-import { TooltipComponent } from '../../tooltip.component';
-import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
+import { TooltipComponent } from '../../../tooltip.component';
+import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 
 describe('QuestionPromptComponent', () => {
     const questionBlock = {

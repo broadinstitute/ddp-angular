@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 
 @Component({
     selector: 'ddp-question-prompt',
