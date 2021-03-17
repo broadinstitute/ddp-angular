@@ -87,7 +87,7 @@ import { ActivityTextAnswer } from './components/activityForm/answers/activityTe
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
-import { ActivityAnswerComponent } from './components/activityForm/answers/activityAnswer.component';
+import { ActivityAnswerComponent } from './components/activityForm/answers/activity-answer/activityAnswer.component';
 import { ActivityPicklistAnswer } from './components/activityForm/picklist/activityPicklistAnswer.component';
 import { DropdownActivityPicklistQuestion } from './components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
