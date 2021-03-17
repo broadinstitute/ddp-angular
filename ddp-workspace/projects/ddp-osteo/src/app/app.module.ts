@@ -78,6 +78,7 @@ tkCfg.instagramId = 'the_osproject';
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
+tkCfg.usesVerticalStepper = ['FAMILY_HISTORY'];
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;

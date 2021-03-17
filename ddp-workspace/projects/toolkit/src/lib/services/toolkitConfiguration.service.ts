@@ -75,7 +75,7 @@ export class ToolkitConfigurationService {
     agreeConsent: boolean;
     dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     // activities which should use a vertical progress indicator
-    usesVerticalStepper = ['FAMILY_HISTORY'];
+    usesVerticalStepper: string[] = [];
 
     // Keys and tokens
     recaptchaSiteClientKey: string;
