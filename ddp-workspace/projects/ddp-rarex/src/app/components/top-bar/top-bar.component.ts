@@ -7,11 +7,10 @@ import { RoutePaths } from '../../router-resources';
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent {
   readonly routes = RoutePaths;
-  readonly rarexLink = 'https://rare-x.org/';
 
   constructor(private readonly _session: SessionMementoService) {}
 

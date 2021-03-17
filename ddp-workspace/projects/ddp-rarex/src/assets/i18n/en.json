@@ -22,6 +22,9 @@
   "pages": {
     "welcome": "Welcome Page"
   },
+  "RedirectToLogin": {
+    "Text": "Please wait until you are redirected"
+  },
   "WorkflowProgress": {
     "AboutYou": "About You",
     "LegacySurvey": "Legacy Survey",

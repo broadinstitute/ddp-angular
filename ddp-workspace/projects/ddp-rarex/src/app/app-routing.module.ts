@@ -18,6 +18,7 @@ import { RarexDashboardComponent } from './components/dashboard/dashboard.compon
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import {
   TermsConditionsPageComponent,
   PrivacyPolicyPageComponent,
@@ -124,6 +125,11 @@ const routes: Routes = [
   {
     path: RoutePaths.TermsAndConditions,
     component: TermsConditionsPageComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: RoutePaths.LoginRedirect,
+    component: RedirectToLoginComponent,
     canActivate: [IrbGuard],
   },
   {

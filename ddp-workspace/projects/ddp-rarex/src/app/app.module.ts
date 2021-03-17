@@ -33,6 +33,7 @@ import {
 } from './components/static';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
@@ -149,6 +150,7 @@ export const translateFactory = (
     TopBarComponent,
     PrivacyPolicyPageComponent,
     TermsConditionsPageComponent,
+    RedirectToLoginComponent,
   ],
   providers: [
     {

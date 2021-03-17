@@ -10,6 +10,7 @@ export enum RoutePaths {
   TermsAndConditions = 'terms-and-conditions',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',
+  LoginRedirect = 'login-redirect',
   // Activities
   Consent = 'consent',
   Demographics = 'demographics',
