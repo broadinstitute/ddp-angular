@@ -49,6 +49,8 @@ export class ActivityQuestionConverter {
             questionBlock.placeholder = questionJson.placeholderText;
         }
         questionBlock.question = questionJson.prompt;
+        questionBlock.additionalInfoHeader = questionJson.additionalInfoHeader;
+        questionBlock.additionalInfoFooter = questionJson.additionalInfoFooter;
         questionBlock.stableId = questionJson.stableId;
         questionBlock.tooltip = questionJson.tooltip;
         questionBlock.readonly = questionJson.readonly;

@@ -13,6 +13,8 @@ export interface TextParameters {
   suggestions: Array<string>;
   autocomplete: boolean;
   question?: string;
+  additionalInfoHeader?: string;
+  additionalInfoFooter?: string;
   placeholder?: string;
   label?: string;
   confirmEntry?: boolean;
@@ -59,6 +61,8 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
   private buildBlock(parameters: TextParameters): ActivityTextQuestionBlock {
     const newQuestion = new ActivityTextQuestionBlock();
     newQuestion.question = parameters.question;
+    newQuestion.additionalInfoHeader = parameters.additionalInfoHeader;
+    newQuestion.additionalInfoFooter = parameters.additionalInfoFooter;
     newQuestion.placeholder = parameters.placeholder;
     newQuestion.shown = parameters.shown;
     newQuestion.maxLength = parameters.maxLength;
