@@ -10,7 +10,7 @@ import {
     Input
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { ActivityComponent } from './activity.component';
 import { WindowRef } from '../../services/windowRef';
@@ -239,6 +239,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
 
     public isVerticalProgress: boolean;
     private isAdminEditing = false;
+    private subscription: Subscription;
 
     constructor(
         logger: LoggingService,
@@ -251,11 +252,10 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         injector: Injector
     ) {
         super(logger, windowRef, renderer, submitService, analytics, document, injector);
-        this.isLoaded$.pipe(take(1))
-            .subscribe(_ => {
-                const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
-                this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
-            });
+        this.subscription = this.getIsLoaded$().subscribe(_ => {
+            const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
+            this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
+        });
     }
 
     public isAgree(): boolean {
@@ -269,5 +269,10 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     public updateIsAdminEditing(adminEditing: boolean): void {
         this.isAdminEditing = adminEditing;
         this.changeRef.detectChanges();
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+        super.ngOnDestroy();
     }
 }
