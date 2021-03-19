@@ -236,7 +236,6 @@ import { LoggingService } from '../../services/logging.service';
 })
 export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() agreeConsent = false;
-    @Input() activitiesWithVerticalProgress: string[] = [];
 
     public isVerticalProgress: boolean;
     private isAdminEditing = false;
@@ -254,7 +253,8 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         super(logger, windowRef, renderer, submitService, analytics, document, injector);
         this.isLoaded$.pipe(take(1))
             .subscribe(_ => {
-                this.isVerticalProgress = this.model && this.activitiesWithVerticalProgress.includes(this.model.activityCode);
+                const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
+                this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
             });
     }
 

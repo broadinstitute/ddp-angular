@@ -78,7 +78,6 @@ tkCfg.instagramId = 'the_osproject';
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
-tkCfg.usesVerticalStepper = ['FAMILY_HISTORY'];
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -98,6 +97,7 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+config.usesVerticalStepper = ['FAMILY_HISTORY'];
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
