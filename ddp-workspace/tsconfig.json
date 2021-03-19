@@ -49,6 +49,12 @@
       "path": "./projects/ddp-atcp/tsconfig.spec.json"
     },
     {
+      "path": "./projects/ddp-rarex/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-rarex/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/ddp-mpc/tsconfig.app.json"
     },
     {

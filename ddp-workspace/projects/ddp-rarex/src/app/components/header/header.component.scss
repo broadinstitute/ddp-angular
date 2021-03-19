@@ -1,0 +1,75 @@
+@import "../../../app-theme.scss";
+
+.main-header {
+  background-color: mat-color($app-theme, 100);
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    height: 9.6rem;
+
+    padding: 1.2rem;
+
+    @media only screen and (max-width: 600px) {
+      height: auto;
+
+      flex-direction: column;
+    }
+  }
+
+  &__logo {
+    @media only screen and (max-width: 600px) {
+      margin-bottom: 0.5rem;
+    }
+
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  &__powered-by {
+    margin-left: auto;
+
+    @media only screen and (max-width: 600px) {
+      margin-left: 0;
+    }
+  }
+}
+
+.logo {
+  font-size: 80px;
+  text-decoration: none;
+  line-height: 1em;
+  color: #212021;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 64px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 48px;
+  }
+}
+
+.powered-by {
+  align-self: flex-end;
+
+  height: 3.2rem;
+
+  @media only screen and (max-width: 600px) {
+    align-self: center;
+  }
+
+  @media only screen and (max-width: 480px) {
+    height: 2.4rem;
+  }
+
+  &__img {
+    height: 100%;
+  }
+}

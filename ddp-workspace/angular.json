@@ -1123,6 +1123,139 @@
         }
       }
     },
+    "ddp-rarex": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ddp-rarex",
+      "sourceRoot": "projects/ddp-rarex/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-rarex",
+            "index": "projects/ddp-rarex/src/index.html",
+            "main": "projects/ddp-rarex/src/main.ts",
+            "polyfills": "projects/ddp-rarex/src/polyfills.ts",
+            "tsConfig": "projects/ddp-rarex/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-rarex/src/favicon.ico",
+              "projects/ddp-rarex/src/favicon-alert.ico",
+              "projects/ddp-rarex/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-rarex/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-rarex/src/theme.scss",
+              "projects/ddp-rarex/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-rarex/src/environments/environment.ts",
+                  "with": "projects/ddp-rarex/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "es5": {
+              "tsConfig": "projects/ddp-rarex/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-rarex:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-rarex:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-rarex:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-rarex:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-rarex/src/test.ts",
+            "polyfills": "projects/ddp-rarex/src/polyfills.ts",
+            "tsConfig": "projects/ddp-rarex/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-rarex/karma.conf.js",
+            "assets": [
+              "projects/ddp-rarex/src/favicon.ico",
+              "projects/ddp-rarex/src/favicon-alert.ico",
+              "projects/ddp-rarex/src/assets",
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-rarex/src/pdf/",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/ddp-rarex/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-rarex/tsconfig.app.json",
+              "projects/ddp-rarex/tsconfig.spec.json",
+              "projects/ddp-rarex/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-rarex/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-rarex:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-rarex:serve:production"
+            }
+          }
+        }
+      }
+    },
     "ddp-prion": {
       "projectType": "application",
       "schematics": {

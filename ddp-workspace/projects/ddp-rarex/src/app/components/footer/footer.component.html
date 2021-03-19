@@ -1,0 +1,21 @@
+<footer class="main-footer">
+  <nav class="main-footer__nav">
+    <ul class="nav-list">
+      <li *ngFor="let link of navLinks" class="nav-list__item">
+        <a
+          *ngIf="!link.external"
+          [routerLink]="link.routePath"
+          class="nav-list__link"
+          translate
+        >{{ link.translationKey }}</a>
+
+        <a
+          *ngIf="link.external"
+          [href]="link.routePath"
+          class="nav-list__link"
+          translate
+        >{{ link.translationKey }}</a>
+      </li>
+    </ul>
+  </nav>
+</footer>
