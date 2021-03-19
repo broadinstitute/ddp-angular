@@ -1072,7 +1072,7 @@
     },
     "EmailVerificationRequiredPage": {
         "Header": "Email verification required",
-        "Text": "Please verify your email using a link which was sent to your email address."
+        "Text": "Please verify your email using the link that was sent to your email address."
     },
     "ThankYouPage": {
         "Title": "Thank you for your interest in joining the Rare Genomes Project",
