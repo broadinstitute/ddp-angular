@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EmbeddedActivityBlockComponent } from 'ddp-sdk';
+import { EmbeddedActivityBlockComponent } from './embeddedActivityBlock.component';
 
 describe('EmbeddedActivityBlockComponent', () => {
   let component: EmbeddedActivityBlockComponent;
