@@ -8,52 +8,54 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 @Component({
     selector: 'ddp-activity-answer',
     template: `
-    <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block) && block.shown"
-                                 [class]="'boolean-answer-' + block.stableId"
-                                 [block]="block"
-                                 [readonly]="readonly"
-                                 (valueChanged)="onChange($event)">
-    </ddp-activity-boolean-answer>
-    <ddp-activity-text-answer *ngIf="isTextQuestion(block) && block.shown"
-                              [block]="block"
-                              [readonly]="readonly"
-                              (valueChanged)="onChange($event)">
-    </ddp-activity-text-answer>
-    <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) && block.shown"
-                                 [class]="'numeric-answer-' + block.stableId"
-                                 [block]="block"
-                                 [readonly]="readonly"
-                                 (valueChanged)="onChange($event)">
-    </ddp-activity-numeric-answer>
-    <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block) && block.shown"
-                                  [class]="'picklist-answer-' + block.stableId"
-                                  [block]="block"
-                                  [readonly]="readonly"
-                                  (valueChanged)="onChange($event)">
-    </ddp-activity-picklist-answer>
-    <ddp-activity-date-answer *ngIf="isDateQuestion(block) && block.shown"
-                              [class]="'date-answer-' + block.stableId"
-                              [block]="block"
-                              [readonly]="readonly"
-                              [validationRequested]="validationRequested"
-                              (valueChanged)="onChange($event)">
-    </ddp-activity-date-answer>
-    <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block) && block.shown"
-                                   [class]="'composite-answer-' + block.stableId"
-                                   [block]="block"
-                                   [readonly]="readonly"
-                                   [validationRequested]="validationRequested"
-                                   (valueChanged)="onChange($event)">
-    </ddp-activity-composite-answer>
-    <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block) && block.shown"
+    <ng-container *ngIf="block.shown">
+      <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block)"
+                                   [class]="'boolean-answer-' + block.stableId"
                                    [block]="block"
                                    [readonly]="readonly"
                                    (valueChanged)="onChange($event)">
-    </ddp-activity-agreement-answer>
-    <span *ngIf="block.additionalInfoFooter && block.shown"
-          [innerHTML]="block.additionalInfoFooter"
-          class="ddp-activity-answer__info-footer">
-    </span>`,
+      </ddp-activity-boolean-answer>
+      <ddp-activity-text-answer *ngIf="isTextQuestion(block)"
+                                [block]="block"
+                                [readonly]="readonly"
+                                (valueChanged)="onChange($event)">
+      </ddp-activity-text-answer>
+      <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block)"
+                                   [class]="'numeric-answer-' + block.stableId"
+                                   [block]="block"
+                                   [readonly]="readonly"
+                                   (valueChanged)="onChange($event)">
+      </ddp-activity-numeric-answer>
+      <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block)"
+                                    [class]="'picklist-answer-' + block.stableId"
+                                    [block]="block"
+                                    [readonly]="readonly"
+                                    (valueChanged)="onChange($event)">
+      </ddp-activity-picklist-answer>
+      <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
+                                [class]="'date-answer-' + block.stableId"
+                                [block]="block"
+                                [readonly]="readonly"
+                                [validationRequested]="validationRequested"
+                                (valueChanged)="onChange($event)">
+      </ddp-activity-date-answer>
+      <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block)"
+                                     [class]="'composite-answer-' + block.stableId"
+                                     [block]="block"
+                                     [readonly]="readonly"
+                                     [validationRequested]="validationRequested"
+                                     (valueChanged)="onChange($event)">
+      </ddp-activity-composite-answer>
+      <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
+                                     [block]="block"
+                                     [readonly]="readonly"
+                                     (valueChanged)="onChange($event)">
+      </ddp-activity-agreement-answer>
+      <span *ngIf="block.additionalInfoFooter"
+            [innerHTML]="block.additionalInfoFooter"
+            class="ddp-activity-answer__info-footer">
+      </span>
+    </ng-container>`,
     styleUrls: ['activityAnswer.component.scss']
 })
 
