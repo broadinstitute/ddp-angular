@@ -57,6 +57,7 @@ export * from './lib/components/twitter-widget/twitter-timeline-widget.component
 export * from './lib/components/app/app-redesigned-base.component';
 export * from './lib/components/cookies/cookiesBanner/cookiesBanner.component';
 export * from './lib/components/privacy-policy/prionPrivacyPolicy.component';
+export * from './lib/components/thank-you/thank-you-family-history/thank-you-family-history.component';
 
 export * from './lib/guards/headerAction.guard';
 export * from './lib/guards/cookiesConsent.guard';

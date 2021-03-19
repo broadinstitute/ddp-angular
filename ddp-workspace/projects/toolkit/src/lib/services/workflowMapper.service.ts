@@ -1,31 +1,36 @@
 import { Injectable, Inject } from '@angular/core';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
-import { WorkflowAction } from './../models/actions/workflowAction';
+import { WorkflowAction } from '../models/actions/workflowAction';
 import { UrlWorkflowAction } from '../models/actions/urlWorkflowAction';
 import { MailingListWorkflowAction } from '../models/actions/mailingListWorkflowAction';
 import { RegistrationWorkflowAction } from '../models/actions/registrationWorkflowAction';
-import { WorkflowState } from './../models/workflowState';
+import { WorkflowState } from '../models/workflowState';
 import { ActivityResponse, LoggingService } from 'ddp-sdk';
 
 @Injectable()
 export class WorkflowMapperService {
     private readonly LOG_SOURCE = 'WorkflowMapperService';
+    private readonly DASHBOARD_LIST = [this.toolkitConfiguration.dashboardGuid, WorkflowState.DASHBOARD, WorkflowState.UNKNOWN];
+    private readonly THANK_YOU_LIST = [this.toolkitConfiguration.lovedOneThankYouGuid, WorkflowState.THANK_YOU];
+    private readonly INTERNATIONAL_PATIENTS_LIST = [
+        this.toolkitConfiguration.internationalPatientsUrl,
+        WorkflowState.INTERNATIONAL_PATIENTS
+    ];
 
     constructor(
         private logger: LoggingService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public convert(activityResponse: ActivityResponse): WorkflowAction {
-        if (activityResponse.next === this.toolkitConfiguration.dashboardGuid || activityResponse.next === WorkflowState.DASHBOARD
-            || activityResponse.next === WorkflowState.UNKNOWN) {
+        if (this.DASHBOARD_LIST.includes(activityResponse.next)) {
             return new UrlWorkflowAction(this.toolkitConfiguration.dashboardUrl);
         } else if (activityResponse.next === WorkflowState.PARTICIPANT_LIST) {
             return new UrlWorkflowAction(this.toolkitConfiguration.participantListUrl);
-        } else if (activityResponse.next === this.toolkitConfiguration.lovedOneThankYouGuid
-            || activityResponse.next === WorkflowState.THANK_YOU) {
+        } else if (activityResponse.activityCode === 'FAMILY_HISTORY' && activityResponse.next === WorkflowState.THANK_YOU) {
+            return new UrlWorkflowAction(this.toolkitConfiguration.familyHistoryThankYouUrl);
+        } else if (this.THANK_YOU_LIST.includes(activityResponse.next)) {
             return new UrlWorkflowAction(this.toolkitConfiguration.lovedOneThankYouUrl);
-        } else if (activityResponse.next === this.toolkitConfiguration.internationalPatientsUrl
-            || activityResponse.next === WorkflowState.INTERNATIONAL_PATIENTS) {
+        } else if (this.INTERNATIONAL_PATIENTS_LIST.includes(activityResponse.next)) {
             return new UrlWorkflowAction(this.toolkitConfiguration.internationalPatientsUrl);
         } else if (activityResponse.next === WorkflowState.DONE) {
             return new UrlWorkflowAction(this.toolkitConfiguration.doneUrl);
@@ -36,8 +41,7 @@ export class WorkflowMapperService {
         } else if (activityResponse.next === WorkflowState.REGISTRATION) {
             return new RegistrationWorkflowAction();
         } else {
-            this.logger.logWarning(this.LOG_SOURCE,
-                `Unknown server routing: ${JSON.stringify(activityResponse)}`);
+            this.logger.logWarning(this.LOG_SOURCE, `Unknown server routing: ${JSON.stringify(activityResponse)}`);
         }
         return new UrlWorkflowAction('');
     }

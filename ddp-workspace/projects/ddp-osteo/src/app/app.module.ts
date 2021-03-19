@@ -68,6 +68,7 @@ tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
 tkCfg.lovedOneThankYouUrl = 'loved-one-thank-you';
+tkCfg.familyHistoryThankYouUrl = 'family-history-thank-you';
 tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
