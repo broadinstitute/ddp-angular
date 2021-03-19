@@ -1,16 +1,21 @@
-<ng-container *ngIf="!activity; else section">
+<ng-container *ngIf="!activity; else sections">
   <mat-spinner></mat-spinner>
 </ng-container>
 
-<ng-template #section>
-  <ddp-activity-section [section]="activity.sections[0]"
+<ng-template #sections>
+  <ddp-activity-section *ngFor="let section of activity.sections; trackBy: getSectionId"
+                        [section]="section"
                         [studyGuid]="studyGuid"
                         [activityGuid]="instance.instanceGuid"
                         [readonly]="readonly"
                         [validationRequested]="validationRequested">
   </ddp-activity-section>
 
-  <button mat-button
-          *ngIf="singleSection">
+  <button mat-flat-button
+          *ngIf="singleSection"
+          class="button_primary"
+          [disabled]="readonly"
+          [innerHTML]="'SDK.SubmitButton' | translate"
+          (click)="completeActivity()">
   </button>
 </ng-template>
