@@ -1,0 +1,37 @@
+.container {
+  max-width: 1024px;
+}
+
+.title {
+  margin-bottom: 8px;
+
+  font-size: 24px;
+}
+
+.subtitle {
+  margin: 0;
+
+  font-size: 18px;
+
+  & + .paragraph {
+    margin-top: 0;
+  }
+}
+
+h3.subtitle {
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+h4.subtitle {
+  font-weight: normal;
+  font-style: italic;
+}
+
+.list {
+  padding-left: 2.4rem;
+
+  li {
+    margin: 12px 0;
+  }
+}

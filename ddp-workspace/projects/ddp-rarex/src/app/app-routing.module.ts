@@ -19,10 +19,8 @@ import { RarexActivityPageComponent } from './components/rarex-activity-page/rar
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
-import {
-  TermsConditionsPageComponent,
-  PrivacyPolicyPageComponent,
-} from './components/static';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 
@@ -119,12 +117,12 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.PrivacyPolicy,
-    component: PrivacyPolicyPageComponent,
+    component: PrivacyPolicyComponent,
     canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.TermsAndConditions,
-    component: TermsConditionsPageComponent,
+    component: TermsAndConditionsComponent,
     canActivate: [IrbGuard],
   },
   {

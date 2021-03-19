@@ -10,7 +10,12 @@ p {
   line-height: 1.65rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 1em 0;
 
   color: black;
@@ -50,6 +55,10 @@ h6 {
   font-weight: bold;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .consent-agree {
   margin: 1em 0;
 
@@ -61,5 +70,19 @@ h6 {
 .content {
   .Link {
     color: $color-secondary-teal;
+  }
+}
+
+.privacy-policy {
+  a {
+    &,
+    &:visited {
+      color: #26355c;
+
+      &[href^="mailto"],
+      &[href^="http"] {
+        text-decoration: underline;
+      }
+    }
   }
 }
