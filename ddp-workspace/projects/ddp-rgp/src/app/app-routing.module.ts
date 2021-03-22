@@ -28,9 +28,11 @@ import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/r
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmailVerifiedCallbackComponent } from './components/email-verified-callback/email-verified-callback.component';
+import { Auth0CodeCallbackComponent } from './components/auth0-code-callback/auth0-code-callback.component';
+import { EmailVerificationRequiredComponent } from './components/email-verification-required/email-verification-required.component';
 import { SurveyComponent } from './components/survey/survey.component';
 
-import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard } from 'ddp-sdk';
+import { IrbGuard, AuthGuard } from 'ddp-sdk';
 
 // This matches "lgmd" case insensitively ("lgmd" and "LgMd" both match)
 // The Angular compiler complains if you try to create a function that returns a generic version of
@@ -96,6 +98,11 @@ const routes: Routes = [
   {
     path: AppRoutes.EligibilityCriteria,
     component: EligibilityCriteriaComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: AppRoutes.EmailVerificationRequired,
+    component: EmailVerificationRequiredComponent,
     canActivate: [IrbGuard],
   },
   {

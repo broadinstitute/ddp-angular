@@ -63,7 +63,7 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
     this.anchor && this.anchor.unsubscribe();
   }
 
-  private handleAuthError(error: any | null): void {
+  protected handleAuthError(error: any | null): void {
     if (error) {
       this.logger.logError(this.LOG_SOURCE, error);
     }
