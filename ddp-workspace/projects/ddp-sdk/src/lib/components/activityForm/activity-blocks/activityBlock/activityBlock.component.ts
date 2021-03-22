@@ -20,7 +20,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
-    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
     isModal: boolean;
     childInstances: ActivityInstance[];
     private ngUnsubscribe = new Subject();

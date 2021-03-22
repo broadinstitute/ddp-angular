@@ -10,12 +10,4 @@
                         [readonly]="readonly"
                         [validationRequested]="validationRequested">
   </ddp-activity-section>
-
-  <button mat-flat-button
-          *ngIf="singleSection"
-          class="button_primary"
-          [disabled]="readonly"
-          [innerHTML]="'SDK.SubmitButton' | translate"
-          (click)="completeActivity()">
-  </button>
 </ng-template>
