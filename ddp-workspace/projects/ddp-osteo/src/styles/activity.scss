@@ -1,4 +1,5 @@
 @import "../app-theme.scss";
+@import "./variables.scss";
 
 // common activity styles
 .section-spinner {
@@ -72,12 +73,110 @@
 }
 
 // steps
+.with-vertical-progress-indicator {
+    .header-section {
+        text-align: center;
+    }
+
+    .article-content {
+        display: flex;
+        max-width: 1500px;
+    }
+}
+
 .activity-steps {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     grid-gap: 1rem;
     margin: 3rem 0;
+}
+
+.vertical {
+    &.activity-steps {
+        grid-gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+        padding-left: 1rem;
+        min-width: 130px;
+
+        @media only screen and (max-width: 480px) {
+            min-width: $step-circle-size;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            margin: 10px 6vw;
+
+            + .content {
+                margin-left: 0;
+            }
+        }
+
+        @media only screen and (min-width: 1500px) {
+            margin: 10px 10vw;
+        }
+
+        .activity-steps__divider {
+            height: 1.3rem;
+            width: 1px;
+            border-left: 2px solid #D2D2D2;
+            margin-left: calc(#{$step-circle-size} / 2);
+        }
+    }
+
+    .activity-step {
+        height: $step-circle-size;
+        display: flex;
+        align-items: center;
+
+        &.cdk-mouse-focused, &.cdk-touch-focused {
+            outline: none;
+        }
+
+        &.active.completed {
+            .activity-step__number {
+                background-color: #7154FF;
+            }
+
+            .activity-step__text {
+                color: #282828;
+                font-weight: 600;
+            }
+        }
+
+        &.completed {
+            .activity-step__number {
+                background-color: #00D39D;
+            }
+
+            .activity-step__text {
+                color: mat-color($app-theme, 200);
+            }
+        }
+
+        &__number {
+            display: inline-flex;
+            background-color: #757575;
+            color: white;
+            border-radius: calc(#{$step-circle-size} / 2);
+            min-width: $step-circle-size;
+            width: $step-circle-size;
+            height: $step-circle-size;
+            line-height: $step-circle-size;
+            justify-content: center;
+        }
+
+        &__text {
+            margin-left: 0.5rem;
+        }
+
+        @media only screen and (max-width: 480px) {
+            &__text {
+                display: none;
+            }
+        }
+    }
 }
 
 .activity-step {

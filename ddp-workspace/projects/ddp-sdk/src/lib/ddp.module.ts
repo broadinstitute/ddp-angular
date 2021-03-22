@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
+import { A11yModule } from '@angular/cdk/a11y';
 
 // ngx-translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -246,7 +247,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
                 deps: [SessionMementoService]
             }
         }),
-        RouterModule
+        RouterModule,
+        A11yModule
     ],
     providers: [
         AuthGuard,

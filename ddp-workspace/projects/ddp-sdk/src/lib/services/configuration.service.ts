@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
-import { QuestionType } from './../models/activity/questionType';
+import { QuestionType } from '../models/activity/questionType';
 
 @Injectable()
 export class ConfigurationService {
@@ -65,4 +65,6 @@ export class ConfigurationService {
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
     // It set (and can be overridden for any single app) in pepperConfig
     doGcpErrorReporting: boolean;
+    // activities which should use a vertical progress indicator
+    usesVerticalStepper: string[] = [];
 }
