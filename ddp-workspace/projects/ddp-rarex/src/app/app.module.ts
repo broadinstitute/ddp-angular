@@ -27,13 +27,11 @@ import { RarexActivityComponent } from './components/rarex-activity/rarex-activi
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
-import {
-  PrivacyPolicyPageComponent,
-  TermsConditionsPageComponent,
-} from './components/static';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
@@ -148,9 +146,9 @@ export const translateFactory = (
     RarexActivityRedirectComponent,
     ShareMyDataComponent,
     TopBarComponent,
-    PrivacyPolicyPageComponent,
-    TermsConditionsPageComponent,
     RedirectToLoginComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
   ],
   providers: [
     {
