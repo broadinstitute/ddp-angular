@@ -14,7 +14,7 @@ import { ActivityPicklistQuestionBlock } from '../../../models/activity/activity
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityPicklistAnswer } from './activityPicklistAnswer.component';
-import { QuestionPromptComponent } from '../answers/questionPrompt.component';
+import { QuestionPromptComponent } from '../answers/question-prompt/questionPrompt.component';
 import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 import { of } from 'rxjs';

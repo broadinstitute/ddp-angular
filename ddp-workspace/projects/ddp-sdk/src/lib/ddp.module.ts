@@ -88,7 +88,7 @@ import { ActivityTextAnswer } from './components/activityForm/answers/activityTe
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
-import { ActivityAnswerComponent } from './components/activityForm/answers/activityAnswer.component';
+import { ActivityAnswerComponent } from './components/activityForm/answers/activity-answer/activityAnswer.component';
 import { ActivityPicklistAnswer } from './components/activityForm/picklist/activityPicklistAnswer.component';
 import { DropdownActivityPicklistQuestion } from './components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
@@ -161,7 +161,7 @@ import { WorkflowServiceAgent } from './services/serviceAgents/workflowServiceAg
 import { UpperCaseInputDirective } from './directives/upperCaseInputDirective.directive';
 import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAutocomplete.directive';
 import { ConditionalBlockComponent } from './components/activityForm/activity-blocks/conditionalBlock.component';
-import { QuestionPromptComponent } from './components/activityForm/answers/questionPrompt.component';
+import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
 import { SubjectPanelComponent } from './components/subjectPanel.component';

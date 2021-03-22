@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 
 @Component({
     selector: 'ddp-question-prompt',
@@ -8,9 +8,14 @@ import { ActivityQuestionBlock } from '../../../models/activity/activityQuestion
         <p class="ddp-question-prompt"
            [ngClass]="{'ddp-required-question-prompt': displayAsRequired}">
            <span [innerHTML]="block.question"></span>
+           <span *ngIf="block.additionalInfoHeader"
+                 [innerHTML]="block.additionalInfoHeader"
+                 class="ddp-question-prompt__info-header">
+           </span>
            <ddp-tooltip *ngIf="block.tooltip" class="tooltip" [text]="block.tooltip"></ddp-tooltip>
         </p>
-    </div>`
+    </div>`,
+    styleUrls: ['questionPrompt.component.scss']
 })
 export class QuestionPromptComponent {
     /**

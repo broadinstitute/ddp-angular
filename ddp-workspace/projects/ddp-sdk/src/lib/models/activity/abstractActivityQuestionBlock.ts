@@ -9,6 +9,8 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
   // todo these 2 properties can probably go back to being type string
   // after placeholder property is added to API
   public question: string | null;
+  public additionalInfoHeader: string | null;
+  public additionalInfoFooter: string | null;
   public label: string | null = null;
   public placeholder: string | null;
   public stableId: string;
