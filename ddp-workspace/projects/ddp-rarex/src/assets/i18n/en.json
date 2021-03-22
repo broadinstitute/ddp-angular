@@ -283,6 +283,7 @@
         },
         {
           "Title": "GENERAL",
+          "SkipCount": true,
           "Paragraphs": [
             {
               "Title": "<span class=\"underline\">Entire Agreement</span>",
