@@ -27,12 +27,12 @@ export class EmbeddedActivityBlockComponent implements OnInit {
 
   constructor(private activityServiceAgent: ActivityServiceAgent,
               private changeDetector: ChangeDetectorRef,
-              private submitService: SubmitAnnouncementService,
+              private submitAnnouncementService: SubmitAnnouncementService,
               private logger: LoggingService) { }
 
   ngOnInit(): void {
     this.getActivity();
-    this.submitService.submitAnnounced$.pipe(
+    this.submitAnnouncementService.submitAnnounced$.pipe(
         tap(() => this.componentBusy.emit(true)),
         concatMap(() => this.activityServiceAgent.flushForm(this.studyGuid, this.instance.instanceGuid)),
         catchError(err => {
