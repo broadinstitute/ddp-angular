@@ -449,7 +449,9 @@
     "ThankYouFamilyHistory": {
         "Title": "Thank you for working with us to make\n this research possible.",
         "Subtitle": "If you’d like to update or review your answers to this survey, you can access it\n from your dashboard at any time.",
-        "ReturnToDashboard": "Return to dashboard"
+        "ReturnToDashboard": "Return to dashboard",
+        "FirstImage": "First image",
+        "SecondImage": "Second image"
     },
     "Toolkit": {
         "Dashboard": {
