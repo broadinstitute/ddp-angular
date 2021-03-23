@@ -1,1 +1,49 @@
-Terms And Conditions
+<div class="terms-and-conditions container">
+  <h1 class="title">
+    {{ 'Pages.TermsAndConditions.Title' | translate }}
+  </h1>
+
+  <p
+    class="paragraph"
+    [innerHTML]="'Pages.TermsAndConditions.Paragraph1' | translate"
+  ></p>
+
+  <p
+    class="paragraph"
+    [innerHTML]="'Pages.TermsAndConditions.Paragraph2' | translate"
+  ></p>
+
+  <ol class="terms-list">
+    <li *ngFor="let term of terms" class="terms-list__item">
+      <div class="term">
+        <h2 class="term__title">
+          <span *ngIf="!term.SkipCount" class="term__count">
+            {{ term.Count }}.
+          </span>
+          {{ term.Title }}
+        </h2>
+
+        <ng-container *ngFor="let paragraph of term.Paragraphs">
+          <ng-container
+            *ngTemplateOutlet="
+              isComplexParagraph(paragraph)
+                ? complexParagraph
+                : simpleParagraph;
+              context: { paragraph: paragraph }
+            "
+          ></ng-container
+        ></ng-container>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<ng-template #simpleParagraph let-paragraph="paragraph">
+  <p class="paragraph" [innerHTML]="paragraph"></p>
+</ng-template>
+
+<ng-template #complexParagraph let-paragraph="paragraph">
+  <p class="paragraph" [innerHTML]="paragraph.Title"></p>
+
+  <p class="paragraph" [innerHTML]="paragraph.Content"></p>
+</ng-template>

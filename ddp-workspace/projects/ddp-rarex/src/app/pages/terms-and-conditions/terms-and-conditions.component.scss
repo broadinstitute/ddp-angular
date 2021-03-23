@@ -1,0 +1,30 @@
+.container {
+  padding: 1.2rem 2.4rem;
+
+  max-width: 1024px;
+
+  @media (max-width: 600px) {
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+.title {
+  margin-top: 10px;
+  margin-bottom: 24px;
+
+  font-size: 24px;
+}
+
+.terms-list {
+  list-style: none;
+}
+
+.term {
+  &__title {
+    font-size: 1.0625rem;
+  }
+
+  &__count {
+    margin-right: 1em;
+  }
+}

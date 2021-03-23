@@ -79,10 +79,20 @@ h6 {
     &:visited {
       color: #26355c;
 
-      &[href^="mailto"],
-      &[href^="http"] {
+      &[href^='mailto'],
+      &[href^='http'] {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+.terms-and-conditions {
+  a {
+    &,
+    &:visited {
+      color: #26355c;
+      text-decoration: underline;
     }
   }
 }
