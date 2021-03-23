@@ -21,12 +21,12 @@ export class WorkflowMapperService {
         private logger: LoggingService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
-    public convert(activityResponse: ActivityResponse): WorkflowAction {
+    public convert(activityResponse: ActivityResponse, currentActivityCode?: string): WorkflowAction {
         if (this.DASHBOARD_LIST.includes(activityResponse.next)) {
             return new UrlWorkflowAction(this.toolkitConfiguration.dashboardUrl);
         } else if (activityResponse.next === WorkflowState.PARTICIPANT_LIST) {
             return new UrlWorkflowAction(this.toolkitConfiguration.participantListUrl);
-        } else if (activityResponse.activityCode === 'FAMILY_HISTORY' && activityResponse.next === WorkflowState.THANK_YOU) {
+        } else if (currentActivityCode === 'FAMILY_HISTORY' && activityResponse.next === WorkflowState.THANK_YOU) {
             return new UrlWorkflowAction(this.toolkitConfiguration.familyHistoryThankYouUrl);
         } else if (this.THANK_YOU_LIST.includes(activityResponse.next)) {
             return new UrlWorkflowAction(this.toolkitConfiguration.lovedOneThankYouUrl);
