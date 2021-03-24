@@ -119,7 +119,7 @@ export * from './lib/components/activityForm/picklist/radiobuttonsActivityPickli
 export * from './lib/components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/activityPicklistAnswer.component';
-export * from './lib/components/activityForm/answers/questionPrompt.component';
+export * from './lib/components/activityForm/answers/question-prompt/questionPrompt.component';
 export * from './lib/components/activityForm/activity-blocks/conditionalBlock.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlockList.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlock.component';
@@ -128,7 +128,7 @@ export * from './lib/components/activityForm/activity-blocks/activityBlock/activ
 export * from './lib/components/activityForm/answers/activityAgreementAnswer.component';
 export * from './lib/components/activityForm/answers/activityCompositeAnswer.component';
 export * from './lib/components/activityForm/answers/activityDateAnswer.component';
-export * from './lib/components/activityForm/answers/activityAnswer.component';
+export * from './lib/components/activityForm/answers/activity-answer/activityAnswer.component';
 export * from './lib/components/activityForm/answers/activityNumericAnswer.component';
 export * from './lib/components/activityForm/answers/activityEmailInput.component';
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';

@@ -1,0 +1,22 @@
+<div class="rarex-activity-page">
+  <div
+    *ngIf="isWorkflowProgressShown"
+    class="rarex-activity-page__progress-container"
+  >
+    <app-workflow-progress
+      [activityList]="activities"
+      [instanceGuid]="instanceGuid"
+      (changeActivity)="onChangeActivity($event)"
+    ></app-workflow-progress>
+  </div>
+
+  <div class="rarex-activity-page__activity-container">
+    <app-rarex-activity
+      *ngIf="isActivityShown && !isFetchingActivities"
+      [studyGuid]="studyGuid"
+      [activityGuid]="instanceGuid"
+      [isReadonly]="isReadonly"
+      (submit)="onSubmit($event)"
+    ></app-rarex-activity>
+  </div>
+</div>

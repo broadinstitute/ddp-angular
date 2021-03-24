@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuestionPromptComponent } from './questionPrompt.component';
+import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';

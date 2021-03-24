@@ -1,36 +1,54 @@
 // composite question
+.composite-answer-CONSENT_DETAILS {
+    .ddp-answer-container {
+        align-items: initial;
+    }
+
+    .date-answer-CONSENT_DOB {
+        .mat-form-field {
+            width: 2.4em !important;
+        }
+
+        ddp-date {
+            .mat-dialog-content {
+                width: unset !important;
+            }
+        }
+    }
+}
+
 ddp-activity-composite-answer {
-  .mat-form-field-type-mat-native-select .mat-input-element {
-    padding-left: 5px;
-  }
-
-  .ddp-answer-container {
-    align-items: baseline;
-
-    .ddp-answer-field {
-      margin-right: 1.5rem;
-      flex-grow: 1;
-
-      .mat-dialog-content,
-      .mat-form-field {
-        width: 100%;
-      }
+    .mat-form-field-type-mat-native-select .mat-input-element {
+        padding-left: 5px;
     }
 
-    .ddp-answer-field:last-child {
-      margin-right: 0;
+    .ddp-answer-container {
+        align-items: baseline;
+
+        .ddp-answer-field {
+            margin-right: 1.5rem;
+            flex-grow: 1;
+
+            .mat-dialog-content,
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+
+        .ddp-answer-field:last-child {
+            margin-right: 0;
+        }
     }
-  }
 }
 
 @media screen and (max-width: 560px) {
-  .ddp-answer-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: initial !important;
+    .ddp-answer-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: initial !important;
 
-    .ddp-answer-field {
-      margin-right: 0 !important;
+        .ddp-answer-field {
+            margin-right: 0 !important;
+        }
     }
-  }
 }

@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuestionPromptComponent } from './questionPrompt.component';
+import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';

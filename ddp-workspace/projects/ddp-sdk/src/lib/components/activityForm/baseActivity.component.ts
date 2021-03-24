@@ -49,7 +49,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected config: ConfigurationService;
     public model: ActivityForm;
     public validationRequested = false;
-    public isLoaded = false;
+    public isLoaded$ = new BehaviorSubject<boolean>(false);
     public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
@@ -75,6 +75,14 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.setupSubmitPipeline();
     }
 
+    public get isLoaded(): boolean {
+        return this.isLoaded$.getValue();
+    }
+
+    public getIsLoaded$(): Observable<boolean> {
+        return this.isLoaded$.asObservable();
+    }
+
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
         for (const propName of Object.keys(changes)) {
             if (propName === 'studyGuid') {
@@ -83,7 +91,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 this.activityGuidObservable.next(this.activityGuid);
             }
             if (propName === 'studyGuid' || propName === 'activityGuid') {
-                this.isLoaded = false;
+                this.isLoaded$.next(false);
                 this.resetValidationState();
             }
         }
@@ -101,12 +109,12 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 if (!x) {
                     this.model = new ActivityForm();
                 } else {
-                    this.isLoaded = true;
                     this.model = x;
                     this.stickySubtitle.emit(this.model.subtitle);
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
                 }
+                this.isLoaded$.next(true);
 
                 // combine the latest status updates from the form model
                 // and from the embedded components into one observable
@@ -187,11 +195,13 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 concatMap(() => this.isPageBusy.pipe(
                     debounceTime(250),
                     filter(isPageBusy => !isPageBusy),
-                    take(1))),
+                    take(1))
+                ),
                 // if we can't save we are not going past filter, so do necessary cleanup here
                 tap(() => !this.isAllFormContentValid.value && (this.dataEntryDisabled = false)),
                 filter(() => this.isAllFormContentValid.value),
-                concatMap(() => this.serviceAgent.flushForm(this.studyGuid, this.activityGuid)))
+                concatMap(() => this.serviceAgent.flushForm(this.studyGuid, this.activityGuid))
+            )
             .subscribe((x) => {
                 if (x) {
                     this.submit.emit(x.body.workflow);

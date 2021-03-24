@@ -1,0 +1,14 @@
+@import 'app-theme.scss';
+@import './styles/variables';
+@import './styles/reset';
+@import './styles/base';
+@import './styles/typography';
+@import './styles/common';
+@import './styles/static-page.scss';
+@import './styles/password.scss';
+@import './styles/buttons.scss';
+@import './styles/activity.scss';
+@import './styles/dashboard.scss';
+@import './styles/table.scss';
+
+@include mat-core($app-typography);

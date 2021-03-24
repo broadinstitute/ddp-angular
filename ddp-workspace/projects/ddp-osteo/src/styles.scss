@@ -10,6 +10,7 @@
 @import './styles/dialogs.scss';
 @import './styles/static-page.scss';
 @import './styles/family-history-thank-you.scss';
+@import './styles/variables.scss';
 
 $custom-typography: mat-typography-config($font-family: 'Source Sans Pro');
 
@@ -119,15 +120,15 @@ h4 {
 }
 
 .content_wide {
-    max-width: 1200px;
+    max-width: $content-wide-width;
 }
 
 .content_medium {
-    max-width: 1000px;
+    max-width: $content-medium-width;
 }
 
 .content_tight {
-    max-width: 700px;
+    max-width: $content-tight-width;
 }
 
 .bold {
