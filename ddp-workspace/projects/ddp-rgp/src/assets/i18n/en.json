@@ -1046,7 +1046,27 @@
         }
     },
     "DashboardPage": {
-        "Title": "My Dashboard"
+        "Title": "Dashboard",
+        "UserActivities": {
+          "Title": "Study Forms",
+          "Header": {
+            "Form": "Form",
+            "Summary": "Summary",
+            "Status": "Status",
+            "Actions": "Actions"
+          },
+          "StatusCode": {
+            "CREATED": "Created",
+            "IN_PROGRESS": "In Progress",
+            "COMPLETE": "Complete"
+          },
+          "Actions": {
+            "Start": "Start",
+            "Continue": "Continue",
+            "View": "View"
+          },
+          "NotAvailable": "N/A"
+        }
     },
     "ErrorPage": {
         "Title": "We've encountered an error",

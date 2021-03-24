@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -56,6 +57,7 @@ import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-u
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflow-start-activity.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -156,6 +158,7 @@ export function translateFactory(
     EmailVerificationRequiredComponent,
     ActivityComponent,
     SurveyComponent,
+    UserActivitiesComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent
@@ -174,7 +177,8 @@ export function translateFactory(
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
   ],
   providers: [
     {

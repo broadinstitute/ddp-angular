@@ -1051,7 +1051,27 @@
         "Button": "[es]Return home"
     },
     "DashboardPage": {
-        "Title": "[es]My Dashboard"
+        "Title": "[es]My Dashboard",
+        "UserActivities": {
+          "Title": "[es]Study Forms",
+          "Header": {
+            "Form": "[es]Form",
+            "Summary": "[es]Summary",
+            "Status": "[es]Status",
+            "Actions": "[es]Actions"
+          },
+          "StatusCode": {
+            "CREATED": "[es]Created",
+            "IN_PROGRESS": "[es]In Progress",
+            "COMPLETE": "[es]Complete"
+          },
+          "Actions": {
+            "Start": "[es]Start",
+            "Continue": "[es]Continue",
+            "View": "[es]View"
+          },
+          "NotAvailable": "[es]N/A"
+        }
     },
     "ErrorPage": {
         "Title": "[es]We've encountered an error",
