@@ -1052,6 +1052,18 @@
     },
     "DashboardPage": {
         "Title": "[es]My Dashboard",
+        "StudyMessages": {
+          "Title": "[es]Study Messages",
+          "Header": {
+            "Date": "[es]Date",
+            "Title": "[es]Title",
+            "Description": "[es]Description"
+          },
+          "Actions": {
+            "ShowMore": "[es]Show more",
+            "ShowLess": "[es]Show less"
+          }
+        },
         "UserActivities": {
           "Title": "[es]Study Forms",
           "Header": {

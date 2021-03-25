@@ -58,6 +58,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflow-start-activity.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { StudyMessagesComponent } from './components/study-messages/study-messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -159,6 +160,7 @@ export function translateFactory(
     ActivityComponent,
     SurveyComponent,
     UserActivitiesComponent,
+    StudyMessagesComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent

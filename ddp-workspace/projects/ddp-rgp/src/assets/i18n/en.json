@@ -1047,6 +1047,18 @@
     },
     "DashboardPage": {
         "Title": "Dashboard",
+        "StudyMessages": {
+          "Title": "Study Messages",
+          "Header": {
+            "Date": "Date",
+            "Title": "Title",
+            "Description": "Description"
+          },
+          "Actions": {
+            "ShowMore": "Show more",
+            "ShowLess": "Show less"
+          }
+        },
         "UserActivities": {
           "Title": "Study Forms",
           "Header": {

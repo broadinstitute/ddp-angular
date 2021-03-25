@@ -8,18 +8,18 @@
       {{ 'DashboardPage.UserActivities.Title' | translate }}
     </h2>
 
-    <table mat-table class="activities-table" [dataSource]="activities">
+    <table mat-table class="app-table" [dataSource]="activities">
       <ng-container matColumnDef="name">
         <th
           mat-header-cell
-          class="activities-table__cell activities-table__cell--header activities-table__col--form"
+          class="app-table__cell app-table__cell--header app-table__col--form"
           *matHeaderCellDef
         >
           {{ 'DashboardPage.UserActivities.Header.Form' | translate }}
         </th>
         <td
           mat-cell
-          class="activities-table__cell"
+          class="app-table__cell"
           *matCellDef="let activity"
           [attr.label]="'DashboardPage.UserActivities.Header.Form' | translate"
         >
@@ -30,14 +30,14 @@
       <ng-container matColumnDef="summary">
         <th
           mat-header-cell
-          class="activities-table__cell activities-table__cell--header activities-table__col--summary"
+          class="app-table__cell app-table__cell--header app-table__col--summary"
           *matHeaderCellDef
         >
           {{ 'DashboardPage.UserActivities.Header.Summary' | translate }}
         </th>
         <td
           mat-cell
-          class="activities-table__cell"
+          class="app-table__cell"
           *matCellDef="let activity"
           [attr.label]="
             'DashboardPage.UserActivities.Header.Summary' | translate
@@ -53,20 +53,20 @@
       <ng-container matColumnDef="status">
         <th
           mat-header-cell
-          class="activities-table__cell activities-table__cell--header activities-table__col--status"
+          class="app-table__cell app-table__cell--header app-table__col--status"
           *matHeaderCellDef
         >
           {{ 'DashboardPage.UserActivities.Header.Status' | translate }}
         </th>
         <td
           mat-cell
-          class="activities-table__cell"
+          class="app-table__cell"
           *matCellDef="let activity"
           [attr.label]="
             'DashboardPage.UserActivities.Header.Status' | translate
           "
         >
-          <div class="activities-table__cell--status">
+          <div class="app-table__cell--status">
             <mat-icon
               class="status-icon"
               [ngClass]="'status-icon--' + activity.statusCode"
@@ -85,14 +85,14 @@
       <ng-container matColumnDef="actions">
         <th
           mat-header-cell
-          class="activities-table__cell activities-table__cell--header activities-table__col--actions"
+          class="app-table__cell app-table__cell--header app-table__col--actions"
           *matHeaderCellDef
         >
           {{ 'DashboardPage.UserActivities.Header.Actions' | translate }}
         </th>
         <td
           mat-cell
-          class="activities-table__cell"
+          class="app-table__cell"
           *matCellDef="let activity"
           [attr.label]="
             'DashboardPage.UserActivities.Header.Actions' | translate
@@ -129,12 +129,12 @@
 
       <tr
         mat-header-row
-        class="activities-table__row activities-table__row--header"
+        class="app-table__row app-table__row--header"
         *matHeaderRowDef="displayedColumns"
       ></tr>
       <tr
         mat-row
-        class="activities-table__row"
+        class="app-table__row"
         *matRowDef="let row; columns: displayedColumns"
       ></tr>
     </table>

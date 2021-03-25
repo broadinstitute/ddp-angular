@@ -5,9 +5,7 @@
   justify-content: center;
 }
 
-.activities-table {
-  width: 100%;
-
+.app-table {
   &__col {
     &--form {
       width: 20%;
@@ -29,47 +27,7 @@
     }
   }
 
-  &__row {
-    @media (max-width: 860px) {
-      display: flex;
-      flex-flow: column nowrap;
-
-      height: auto;
-    }
-
-    &--header {
-      @media (max-width: 860px) {
-        display: none;
-      }
-    }
-  }
-
   &__cell {
-    padding: 12px 0;
-
-    font-size: 1rem;
-    font-weight: normal;
-
-    @media (max-width: 860px) {
-      display: flex;
-      align-items: baseline;
-
-      padding: 16px !important;
-
-      &::before {
-        content: attr(label);
-
-        flex: 0 0 100px;
-
-        font-weight: 500;
-        opacity: 0.8;
-      }
-    }
-
-    &--header {
-      font-weight: 500;
-    }
-
     &--status {
       display: flex;
       align-items: center;

@@ -1,0 +1,94 @@
+<div class="study-messages">
+  <h2 class="study-messages__title">
+    {{ 'DashboardPage.StudyMessages.Title' | translate }}
+  </h2>
+
+  <table class="app-table" mat-table [dataSource]="messages">
+    <ng-container matColumnDef="date">
+      <th
+        class="app-table__cell app-table__cell--header app-table__col--date"
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.StudyMessages.Header.Date' | translate }}
+      </th>
+
+      <td
+        class="app-table__cell"
+        mat-cell
+        *matCellDef="let message"
+        [attr.label]="'DashboardPage.StudyMessages.Header.Date' | translate"
+      >
+        {{ message.date | date: 'M/d/yyyy' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th
+        class="app-table__cell app-table__cell--header app-table__col--title"
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.StudyMessages.Header.Title' | translate }}
+      </th>
+
+      <td
+        class="app-table__cell"
+        mat-cell
+        *matCellDef="let message"
+        [attr.label]="'DashboardPage.StudyMessages.Header.Title' | translate"
+      >
+        {{ message.title }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th
+        class="app-table__cell app-table__cell--header app-table__col--description"
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.StudyMessages.Header.Description' | translate }}
+      </th>
+
+      <td
+        class="app-table__cell"
+        mat-cell
+        *matCellDef="let message"
+        [attr.label]="
+          'DashboardPage.StudyMessages.Header.Description' | translate
+        "
+      >
+        <div class="app-table__cell--description">
+          {{ message.description }}
+
+          <div *ngIf="message.additionalMessage">
+            <div
+              *ngIf="!!showMoreMap[message.description]"
+              [innerHTML]="message.additionalMessage"
+            ></div>
+
+            <button class="show-more-btn" (click)="toggleShowMore(message)">
+              {{
+                'DashboardPage.StudyMessages.Actions.' +
+                  (!!showMoreMap[message.description] ? 'ShowLess' : 'ShowMore')
+                  | translate
+              }}
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr
+      class="app-table__row app-table__row--header"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr
+      class="app-table__row"
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>

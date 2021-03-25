@@ -13,23 +13,8 @@
   <div
     class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Dashboard-container Container"
   >
-    <ng-container
-      *ngFor="let announcement of announcementMessages; let i = index"
-    >
-      <ng-container *ngIf="announcement.shown">
-        <div class="infobox infobox_dashboard">
-          <button
-            *ngIf="!announcement.permanent"
-            mat-icon-button
-            (click)="closeMessage(i)"
-            class="close-button"
-          >
-            <mat-icon class="close">clear</mat-icon>
-          </button>
-          <div [innerHTML]="announcement.message"></div>
-        </div>
-      </ng-container>
-    </ng-container>
+    <app-study-messages></app-study-messages>
+
     <div class="TopMargin50">
       <app-user-activities></app-user-activities>
     </div>

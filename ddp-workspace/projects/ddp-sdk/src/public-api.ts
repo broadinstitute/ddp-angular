@@ -81,6 +81,7 @@ export * from './lib/services/serviceAgents/invitationServiceAgent.service';
 export * from './lib/services/serviceAgents/subjectInvitationServiceAgent.service';
 export * from './lib/services/serviceAgents/userManagementServiceAgent.service';
 export * from './lib/services/serviceAgents/userInvitationServiceAgent.service';
+export * from './lib/services/serviceAgents/userStatusServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/userServiceAgent.service';

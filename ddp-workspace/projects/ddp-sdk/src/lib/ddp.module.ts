@@ -76,6 +76,7 @@ import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectI
 import { UserManagementServiceAgent } from './services/serviceAgents/userManagementServiceAgent.service';
 import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
+import { UserStatusServiceAgent } from './services/serviceAgents/userStatusServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
 
@@ -295,6 +296,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AnnouncementsServiceAgent,
         UserManagementServiceAgent,
         UserInvitationServiceAgent,
+        UserStatusServiceAgent,
         BrowserContentService,
         TemporaryUserServiceAgent,
         InvitationServiceAgent,
