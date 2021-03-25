@@ -19,7 +19,6 @@ export class EmbeddedActivityBlockComponent implements OnInit {
   @Input() readonly: boolean;
   @Input() validationRequested: boolean;
   @Input() studyGuid: string;
-  @Input() singleSection: boolean;
   @Output() componentBusy = new EventEmitter<boolean>(true);
 
   public activity: ActivityForm;
