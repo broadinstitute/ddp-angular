@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { catchError, concatMap, takeUntil } from 'rxjs/operators';
 
@@ -20,6 +20,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
+    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
     isModal: boolean;
     childInstances: ActivityInstance[];
     private ngUnsubscribe = new Subject();

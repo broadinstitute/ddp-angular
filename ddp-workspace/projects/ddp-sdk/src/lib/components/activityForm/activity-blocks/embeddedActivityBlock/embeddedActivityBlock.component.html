@@ -1,0 +1,13 @@
+<ng-container *ngIf="!activity; else sections">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<ng-template #sections>
+  <ddp-activity-section *ngFor="let section of activity.sections; trackBy: getSectionId"
+                        [section]="section"
+                        [studyGuid]="studyGuid"
+                        [activityGuid]="instance.instanceGuid"
+                        [readonly]="readonly"
+                        [validationRequested]="validationRequested">
+  </ddp-activity-section>
+</ng-template>

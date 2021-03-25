@@ -87,7 +87,8 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                     [readonly]="readonly"
                                     [validationRequested]="validationRequested"
                                     [studyGuid]="studyGuid"
-                                    [parentActivityInstanceGuid]="activityGuid">
+                                    [parentActivityInstanceGuid]="activityGuid"
+                                    (embeddedComponentBusy)="embeddedComponentBusy.emit($event)">
                 </ddp-activity-block>
             </div>
         </div>`
