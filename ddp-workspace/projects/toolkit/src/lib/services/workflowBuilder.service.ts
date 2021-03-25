@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { UrlCommand } from './commands/urlCommand.service';
 import { MailingListCommand } from './commands/mailingListCommand.service';
 import { RegistrationCommand } from './commands/registrationCommand.service';
-import { WorkflowRule } from './../models/workflowRule';
+import { WorkflowRule } from '../models/workflowRule';
 import { WorkflowActionType } from '../models/workflowActionType';
-import { MailingListWorkflowAction } from './../models/actions/mailingListWorkflowAction';
-import { UrlWorkflowAction } from './../models/actions/urlWorkflowAction';
-import { RegistrationWorkflowAction } from './../models/actions/registrationWorkflowAction';
+import { MailingListWorkflowAction } from '../models/actions/mailingListWorkflowAction';
+import { UrlWorkflowAction } from '../models/actions/urlWorkflowAction';
+import { RegistrationWorkflowAction } from '../models/actions/registrationWorkflowAction';
 import { WorkflowCommand } from '../models/workflowCommand';
 import { WorkflowMapperService } from './workflowMapper.service';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
@@ -41,8 +41,8 @@ export class WorkflowBuilderService {
         ];
     }
 
-    public getCommand(response: ActivityResponse): WorkflowCommand {
-        const action = this.workflowMapper.convert(response);
+    public getCommand(response: ActivityResponse, currentActivityCode?: string): WorkflowCommand {
+        const action = this.workflowMapper.convert(response, currentActivityCode);
         const builder = this.workflowBuilders.find(x => x.type === action.actionType);
         if (builder) {
             return builder.func(action);
