@@ -16,6 +16,7 @@ export class ActivityForm {
     public lastUpdated?: Date;
     public validationState: ReplaySubject<boolean> = new ReplaySubject();
     public sectionIndex: number | null;
+    public statusCode: string;
 
     public validate(): boolean {
         let isValid = true;

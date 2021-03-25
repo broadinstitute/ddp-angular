@@ -22,7 +22,7 @@ import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
@@ -204,6 +204,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     // one entry per section (header, body, and footer respectively)
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     private readonly LOG_SOURCE = 'ActivityComponent';
+    private readonly COMPLETE = 'COMPLETE';
+    private shouldSaveLastStep = false;
 
     constructor(
         private logger: LoggingService,
@@ -231,6 +233,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnInit(): void {
         this.getActivity();
+        this.getFirstSectionIndex();
         const submitSub = this.submit.subscribe(response => this.submitService.announceSubmit(response));
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -337,6 +340,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.resetValidationState();
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
+                this.saveLastVisitedSectionIndex(nextIndex);
             }
         }
     }
@@ -471,5 +475,26 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 }
             });
         }
+    }
+
+    private saveLastVisitedSectionIndex(sectionIndex: number): void {
+      if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
+        this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex);
+      }
+    }
+
+    private getFirstSectionIndex(): void {
+      this.getIsLoaded$()
+        .pipe(
+          filter(value => !!value),
+          take(1),
+          tap(() => this.shouldSaveLastStep = this.model.statusCode !== this.COMPLETE &&
+            this.config.usesVerticalStepper.includes(this.model.activityCode))
+        )
+        .subscribe(() => {
+          this.currentSectionIndex = this.shouldSaveLastStep
+            ? this.model.sectionIndex || 0
+            : 0;
+        });
     }
 }
