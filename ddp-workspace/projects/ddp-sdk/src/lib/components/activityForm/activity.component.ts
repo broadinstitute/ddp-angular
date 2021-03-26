@@ -26,7 +26,7 @@ import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
-import { ActivityStatusCodes } from '../../../../../ddp-rarex/src/app/constants/activity-status-codes';
+import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
 
 @Component({
     selector: 'ddp-activity',

@@ -1,6 +1,6 @@
 import { ActivitySection } from './activitySection';
 import { ReplaySubject } from 'rxjs';
-import { ActivityStatusCodes } from '../../../../../ddp-rarex/src/app/constants/activity-status-codes';
+import { ActivityStatusCodes } from './activityStatusCodes';
 
 export class ActivityForm {
     public readonly: boolean;

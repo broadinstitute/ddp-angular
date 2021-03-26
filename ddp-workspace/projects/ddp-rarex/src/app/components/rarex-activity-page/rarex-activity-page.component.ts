@@ -20,7 +20,7 @@ import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
+import { ActivityStatusCodes } from '../../../../../ddp-sdk/src/lib/models/activity/activityStatusCodes';
 import { RoutePaths } from '../../router-resources';
 
 @Component({
