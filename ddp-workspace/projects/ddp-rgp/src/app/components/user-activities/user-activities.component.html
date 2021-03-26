@@ -1,142 +1,130 @@
-<div *ngIf="loading; else activitiesTable" class="spinner-container">
-  <mat-spinner></mat-spinner>
-</div>
+<div class="user-activities">
+  <h2 class="user-activities__title">
+    {{ 'DashboardPage.UserActivities.Title' | translate }}
+  </h2>
 
-<ng-template #activitiesTable>
-  <div class="user-activities">
-    <h2 class="user-activities__title">
-      {{ 'DashboardPage.UserActivities.Title' | translate }}
-    </h2>
+  <table mat-table class="app-table" [dataSource]="activities">
+    <ng-container matColumnDef="name">
+      <th
+        mat-header-cell
+        class="app-table__cell app-table__cell--header app-table__col--form"
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.UserActivities.Header.Form' | translate }}
+      </th>
+      <td
+        mat-cell
+        class="app-table__cell"
+        *matCellDef="let activity"
+        [attr.label]="'DashboardPage.UserActivities.Header.Form' | translate"
+      >
+        {{ activity.activityName }}
+      </td>
+    </ng-container>
 
-    <table mat-table class="app-table" [dataSource]="activities">
-      <ng-container matColumnDef="name">
-        <th
-          mat-header-cell
-          class="app-table__cell app-table__cell--header app-table__col--form"
-          *matHeaderCellDef
-        >
-          {{ 'DashboardPage.UserActivities.Header.Form' | translate }}
-        </th>
-        <td
-          mat-cell
-          class="app-table__cell"
-          *matCellDef="let activity"
-          [attr.label]="'DashboardPage.UserActivities.Header.Form' | translate"
-        >
-          {{ activity.activityName }}
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="summary">
+      <th
+        mat-header-cell
+        class="app-table__cell app-table__cell--header app-table__col--summary"
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.UserActivities.Header.Summary' | translate }}
+      </th>
+      <td
+        mat-cell
+        class="app-table__cell"
+        *matCellDef="let activity"
+        [attr.label]="'DashboardPage.UserActivities.Header.Summary' | translate"
+      >
+        {{
+          activity.activitySummary ||
+            ('DashboardPage.UserActivities.NotAvailable' | translate)
+        }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="summary">
-        <th
-          mat-header-cell
-          class="app-table__cell app-table__cell--header app-table__col--summary"
-          *matHeaderCellDef
-        >
-          {{ 'DashboardPage.UserActivities.Header.Summary' | translate }}
-        </th>
-        <td
-          mat-cell
-          class="app-table__cell"
-          *matCellDef="let activity"
-          [attr.label]="
-            'DashboardPage.UserActivities.Header.Summary' | translate
-          "
-        >
+    <ng-container matColumnDef="status">
+      <th
+        mat-header-cell
+        class="app-table__cell app-table__cell--header app-table__col--status"
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.UserActivities.Header.Status' | translate }}
+      </th>
+      <td
+        mat-cell
+        class="app-table__cell"
+        *matCellDef="let activity"
+        [attr.label]="'DashboardPage.UserActivities.Header.Status' | translate"
+      >
+        <div class="app-table__cell--status">
+          <mat-icon
+            class="status-icon"
+            [ngClass]="'status-icon--' + activity.statusCode"
+          >
+            {{ StatusIcon[activity.statusCode] }}
+          </mat-icon>
+
           {{
-            activity.activitySummary ||
-              ('DashboardPage.UserActivities.NotAvailable' | translate)
+            'DashboardPage.UserActivities.StatusCode.' + activity.statusCode
+              | translate
           }}
-        </td>
-      </ng-container>
+        </div>
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th
-          mat-header-cell
-          class="app-table__cell app-table__cell--header app-table__col--status"
-          *matHeaderCellDef
+    <ng-container matColumnDef="actions">
+      <th
+        mat-header-cell
+        class="app-table__cell app-table__cell--header app-table__col--actions"
+        *matHeaderCellDef
+      >
+        {{ 'DashboardPage.UserActivities.Header.Actions' | translate }}
+      </th>
+      <td
+        mat-cell
+        class="app-table__cell"
+        *matCellDef="let activity"
+        [attr.label]="'DashboardPage.UserActivities.Header.Actions' | translate"
+      >
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.Created"
+          mat-raised-button
+          class="button button--secondary"
+          (click)="redirectToActivity(activity)"
         >
-          {{ 'DashboardPage.UserActivities.Header.Status' | translate }}
-        </th>
-        <td
-          mat-cell
-          class="app-table__cell"
-          *matCellDef="let activity"
-          [attr.label]="
-            'DashboardPage.UserActivities.Header.Status' | translate
-          "
+          {{ 'DashboardPage.UserActivities.Actions.Start' | translate }}
+        </button>
+
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.InProgress"
+          mat-raised-button
+          class="button button--secondary"
+          (click)="redirectToActivity(activity)"
         >
-          <div class="app-table__cell--status">
-            <mat-icon
-              class="status-icon"
-              [ngClass]="'status-icon--' + activity.statusCode"
-            >
-              {{ StatusIcon[activity.statusCode] }}
-            </mat-icon>
+          {{ 'DashboardPage.UserActivities.Actions.Continue' | translate }}
+        </button>
 
-            {{
-              'DashboardPage.UserActivities.StatusCode.' + activity.statusCode
-                | translate
-            }}
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th
-          mat-header-cell
-          class="app-table__cell app-table__cell--header app-table__col--actions"
-          *matHeaderCellDef
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.Complete"
+          mat-raised-button
+          class="button button--secondary button--outline"
+          (click)="redirectToActivity(activity)"
         >
-          {{ 'DashboardPage.UserActivities.Header.Actions' | translate }}
-        </th>
-        <td
-          mat-cell
-          class="app-table__cell"
-          *matCellDef="let activity"
-          [attr.label]="
-            'DashboardPage.UserActivities.Header.Actions' | translate
-          "
-        >
-          <button
-            *ngIf="activity.statusCode === ActivityStatusCode.Created"
-            mat-raised-button
-            class="button button--secondary"
-            (click)="redirectToActivity(activity)"
-          >
-            {{ 'DashboardPage.UserActivities.Actions.Start' | translate }}
-          </button>
+          {{ 'DashboardPage.UserActivities.Actions.View' | translate }}
+        </button>
+      </td>
+    </ng-container>
 
-          <button
-            *ngIf="activity.statusCode === ActivityStatusCode.InProgress"
-            mat-raised-button
-            class="button button--secondary"
-            (click)="redirectToActivity(activity)"
-          >
-            {{ 'DashboardPage.UserActivities.Actions.Continue' | translate }}
-          </button>
-
-          <button
-            *ngIf="activity.statusCode === ActivityStatusCode.Complete"
-            mat-raised-button
-            class="button button--secondary button--outline"
-            (click)="redirectToActivity(activity)"
-          >
-            {{ 'DashboardPage.UserActivities.Actions.View' | translate }}
-          </button>
-        </td>
-      </ng-container>
-
-      <tr
-        mat-header-row
-        class="app-table__row app-table__row--header"
-        *matHeaderRowDef="displayedColumns"
-      ></tr>
-      <tr
-        mat-row
-        class="app-table__row"
-        *matRowDef="let row; columns: displayedColumns"
-      ></tr>
-    </table>
-  </div>
-</ng-template>
+    <tr
+      mat-header-row
+      class="app-table__row app-table__row--header"
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr
+      mat-row
+      class="app-table__row"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>

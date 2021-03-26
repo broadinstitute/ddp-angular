@@ -1,24 +1,44 @@
 .Dashboard-container {
-    font-weight: 300;
+  font-weight: 300;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 125px;
+
+  @media (max-width: 1240px) {
+    margin-top: 75px;
+  }
+
+  @media (max-width: 992px) {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 15px;
+  }
 }
 
 .infobox {
-    border: 2px solid #e8702a;
-    border-radius: 8px;
-    background-color: rgba(113, 84, 255, 0.06);
-    padding: 1rem;
+  border: 2px solid #e8702a;
+  border-radius: 8px;
+  background-color: rgba(113, 84, 255, 0.06);
+  padding: 1rem;
 }
 
 .infobox_dashboard {
-    padding: 1.5rem 2rem;
-    position: relative;
+  padding: 1.5rem 2rem;
+  position: relative;
 
-    .close-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+  .close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
