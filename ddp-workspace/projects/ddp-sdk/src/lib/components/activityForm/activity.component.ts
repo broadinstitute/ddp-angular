@@ -233,7 +233,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnInit(): void {
         this.getActivity();
-        this.getFirstSectionIndex();
+        this.initStepperState();
         const submitSub = this.submit.subscribe(response => this.submitService.announceSubmit(response));
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -483,18 +483,15 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private getFirstSectionIndex(): void {
+    private initStepperState(): void {
         this.getIsLoaded$()
             .pipe(
                 filter(Boolean),
                 take(1),
                 tap(() => this.shouldSaveLastStep = this.model.statusCode !== ActivityStatusCodes.COMPLETE &&
-                this.config.usesVerticalStepper.includes(this.model.activityCode))
+                  this.config.usesVerticalStepper.includes(this.model.activityCode)),
+                tap(() => this.currentSectionIndex = this.shouldSaveLastStep ? this.model.sectionIndex || 0 : 0)
             )
-            .subscribe(() => {
-                this.currentSectionIndex = this.shouldSaveLastStep
-                    ? this.model.sectionIndex || 0
-                    : 0;
-            });
+            .subscribe();
     }
 }
