@@ -249,7 +249,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         .subscribe((value: null | undefined) => {
           if (value === undefined) {
             // User manually changed preferred language
-            this.isLoaded = false;
+            this.isLoaded$.next(false);
           }
         })
     );
@@ -265,7 +265,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     */
     for (const propName of Object.keys(changes)) {
       if (propName === 'studyGuid' || propName === 'activityGuid') {
-        this.isLoaded = false;
+        this.isLoaded$.next(false);
         this.resetValidationState();
       }
       // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
@@ -289,7 +289,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
             this.stickySubtitle.emit(this.model.subtitle);
             this.activityCode.emit(this.model.activityCode);
             this.initSteps();
-            this.isLoaded = true;
+            this.isLoaded$.next(true);
           }
 
           // combine the latest status updates from the form model
