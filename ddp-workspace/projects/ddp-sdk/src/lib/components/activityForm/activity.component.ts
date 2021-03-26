@@ -26,6 +26,7 @@ import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
+import { ActivityStatusCodes } from '../../../../../ddp-rarex/src/app/constants/activity-status-codes';
 
 @Component({
     selector: 'ddp-activity',
@@ -204,7 +205,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     // one entry per section (header, body, and footer respectively)
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     private readonly LOG_SOURCE = 'ActivityComponent';
-    private readonly COMPLETE = 'COMPLETE';
     private shouldSaveLastStep = false;
 
     constructor(
@@ -478,23 +478,23 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     private saveLastVisitedSectionIndex(sectionIndex: number): void {
-      if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
-        this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex);
-      }
+        if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
+            this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex);
+        }
     }
 
     private getFirstSectionIndex(): void {
-      this.getIsLoaded$()
-        .pipe(
-          filter(value => !!value),
-          take(1),
-          tap(() => this.shouldSaveLastStep = this.model.statusCode !== this.COMPLETE &&
-            this.config.usesVerticalStepper.includes(this.model.activityCode))
-        )
-        .subscribe(() => {
-          this.currentSectionIndex = this.shouldSaveLastStep
-            ? this.model.sectionIndex || 0
-            : 0;
-        });
+        this.getIsLoaded$()
+            .pipe(
+                filter(Boolean),
+                take(1),
+                tap(() => this.shouldSaveLastStep = this.model.statusCode !== ActivityStatusCodes.COMPLETE &&
+                this.config.usesVerticalStepper.includes(this.model.activityCode))
+            )
+            .subscribe(() => {
+                this.currentSectionIndex = this.shouldSaveLastStep
+                    ? this.model.sectionIndex || 0
+                    : 0;
+            });
     }
 }
