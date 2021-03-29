@@ -1123,6 +1123,90 @@
         },
         "Paragraph3": "If you would like your information to be deleted from our database at any time, please email us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
     },
+    "StudyMessages": {
+      "Enrollment": {
+        "Subject": "Enrollment application",
+        "Message": "Thank you for your interest in the Rare Genomes Project! Please complete your application below.",
+        "More": "TBD"
+      },
+      "ApplicationDecision": {
+        "Accepted": {
+          "Subject": "Application decision",
+          "Message": "Our team has reviewed your application and determined that you are eligible to participate.",
+          "More": "TBD"
+        },
+        "NotAccepted": {
+          "Subject": "Application decision",
+          "Message": "Our team has reviewed your application and determined that you are not eligible to participate at this time.",
+          "More": "TBD"
+        },
+        "NeedMoreInfo": {
+          "Subject": "Application decision",
+          "Message": "Our team has reviewed your application to determine your eligibility to participate and needs more information to make a decision.",
+          "More": "TBD"
+        }
+      },
+      "ConsentAppointment": {
+        "ScheduleNeeded": {
+          "Subject": "Informed consent appointment",
+          "Message": "Please schedule an informed consent appointment.",
+          "More": "TBD"
+        },
+        "Scheduled": {
+          "Subject": "Informed consent appointment",
+          "Message": "Your appointment has been scheduled."
+        }
+      },
+      "ConsentForm": {
+        "Subject": "Consent form",
+        "Message": "A signed consent form is needed to be enrolled.",
+        "More": "TBD"
+      },
+      "MedicalRecords": {
+        "NoRecords": {
+          "Subject": "Medical records",
+          "Message": "Copies of medical records are needed.",
+          "More": "TBD"
+        },
+        "Partial": {
+          "Subject": "Medical records",
+          "Message": "We have received some of the medical records needed.",
+          "More": "TBD"
+        },
+        "NA": {
+          "Subject": "Medical records",
+          "Message": "We do not need medical records at this time.",
+          "More": "TBD"
+        }
+      },
+      "SampleKit": {
+        "Blood": {
+          "Subject": "Sample",
+          "Message": "A sample collection kit will be sent to you within the next 2 weeks.",
+          "More": "TBD"
+        },
+        "Sent": {
+          "Subject": "Sample",
+          "Message": "A sample collection kit has been sent to you.",
+          "More": "TBD"
+        },
+        "Received": {
+          "Subject": "Sample",
+          "Message": "Your sample has been received."
+        }
+      },
+      "RedCapSurvey": {
+        "Enrolled": {
+          "Subject": "Survey",
+          "Message": "An optional survey has been sent to you.",
+          "More": "TBD"
+        },
+        "Completed": {
+          "Subject": "Survey",
+          "Message": "Your survey response has been received."
+        }
+      }
+    },
     "Toolkit": {
         "Dialogs": {
             "JoinMailingList": {
