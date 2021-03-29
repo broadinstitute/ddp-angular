@@ -249,7 +249,7 @@ import * as Routes from '../../router-resources';
                                         ? ('SDK.SavingButton' | translate)
                                         : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY"
+                            <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY || model.activityCode === ActivityCodes.BLOOD_TYPE"
                                     #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button ButtonFilled ButtonFilled--green button_right"
