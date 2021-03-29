@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ActivityInstance } from 'ddp-sdk';
-
-import { ActivityStatusCodes } from '../../../../../ddp-sdk/src/lib/models/activity/activityStatusCodes';
+import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
 @Component({
   selector: 'app-workflow-progress',

@@ -11,6 +11,7 @@ export * from './lib/models/activity/activityResponse';
 export * from './lib/models/activityInstanceGuid';
 export * from './lib/models/activityInstance';
 export * from './lib/models/logLevel';
+export * from './lib/models/activity/activityStatusCodes';
 export * from './lib/models/activity/dateRenderMode';
 export * from './lib/models/activity/dateField';
 export * from './lib/models/activity/activityPicklistOption';
