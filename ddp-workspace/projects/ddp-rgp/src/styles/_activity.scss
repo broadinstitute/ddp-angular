@@ -197,6 +197,10 @@
   }
 }
 
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
 .ddp-helper {
   display: none;
 }
