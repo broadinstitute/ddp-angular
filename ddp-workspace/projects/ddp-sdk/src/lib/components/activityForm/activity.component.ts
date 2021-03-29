@@ -488,9 +488,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             .pipe(
                 filter(Boolean),
                 take(1),
-                tap(() => this.shouldSaveLastStep = this.model.statusCode !== ActivityStatusCodes.COMPLETE &&
-                  this.config.usesVerticalStepper.includes(this.model.activityCode)),
-                tap(() => this.currentSectionIndex = this.shouldSaveLastStep ? this.model.sectionIndex || 0 : 0)
+                tap(() => {
+                  if (this.model.statusCode !== ActivityStatusCodes.COMPLETE) {
+                    this.shouldSaveLastStep = this.config.usesVerticalStepper.includes(this.model.activityCode);
+                    this.currentSectionIndex = this.model.sectionIndex;
+                  }
+                })
             )
             .subscribe();
     }
