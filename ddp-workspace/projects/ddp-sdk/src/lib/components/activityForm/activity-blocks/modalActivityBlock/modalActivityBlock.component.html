@@ -19,14 +19,14 @@
 
         <mat-card-actions class="modal-activity-block__card-buttons">
             <button mat-mini-fab
-                    *ngIf="!instance.readonly"
                     class="button_primary"
                     (click)="openEditDialog()">
-                <img src="assets/shared/pencil.svg"
+                <img *ngIf="!readonly" src="assets/shared/pencil.svg"
                      [alt]="'SDK.ModalActivityBlock.EditButton' | translate">
+                <mat-icon *ngIf="readonly">remove_red_eye</mat-icon>
             </button>
             <button mat-mini-fab
-                    *ngIf="instance.canDelete"
+                    *ngIf="instance.canDelete && !readonly"
                     #delete_button
                     class="button_secondary"
                     (click)="openDeleteDialog()">
@@ -53,6 +53,7 @@
         ></ddp-activity-section>
 
         <button mat-flat-button
+                [disabled]="readonly"
                 class="ctrl-btn button_primary modal-activity-block__save_activity"
                 (click)="closeEditDialog()">
             <span [innerHTML]="'SDK.ModalActivityBlock.SaveButton' | translate"></span>

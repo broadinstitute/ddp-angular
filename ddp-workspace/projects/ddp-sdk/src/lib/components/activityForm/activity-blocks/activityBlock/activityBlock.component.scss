@@ -33,6 +33,11 @@ $flexible-btn-font-size: 1.25rem;
         margin-right: 13px;
         width: 2rem;
     }
+
+    &[disabled] {
+        background-color: rgba(0,0,0,0.12);
+        cursor: default;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
