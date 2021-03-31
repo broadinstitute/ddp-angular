@@ -479,7 +479,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     private saveLastVisitedSectionIndex(sectionIndex: number): void {
         if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
-            this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex);
+            this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex)
+              .pipe(take(1))
+              .subscribe();
         }
     }
 
@@ -489,10 +491,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 filter(Boolean),
                 take(1),
                 tap(() => {
-                  if (this.model.statusCode !== ActivityStatusCodes.COMPLETE) {
-                    this.shouldSaveLastStep = this.config.usesVerticalStepper.includes(this.model.activityCode);
-                    this.currentSectionIndex = this.model.sectionIndex || 0;
-                  }
+                    if (this.model.statusCode !== ActivityStatusCodes.COMPLETE) {
+                        this.shouldSaveLastStep = this.config.usesVerticalStepper.includes(this.model.activityCode);
+                        this.currentSectionIndex = this.model.sectionIndex || 0;
+                        this.visitedSectionIndexes = this.visitedSectionIndexes
+                            .map((value, index) => index <= this.currentSectionIndex);
+                    }
                 })
             )
             .subscribe();
