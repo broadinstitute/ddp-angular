@@ -105,6 +105,7 @@ export class ParticipantListItem {
       case ActivityCodes.MEDICAL_HISTORY:
       case ActivityCodes.GENOME_STUDY:
       case ActivityCodes.FEEDING:
+      case ActivityCodes.BLOOD_TYPE:
         return this.handleEditActivity(activityInstance);
       default:
         break;

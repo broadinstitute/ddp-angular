@@ -1,0 +1,46 @@
+.family-history-thank-you-container {
+    .content {
+        max-width: 1024px;
+        margin: 0 auto;
+        text-align: center;
+        letter-spacing: 0;
+        color: #1D1B25;
+
+        .image-first {
+            width: 100%;
+        }
+
+        .image-second {
+            height: 82px;
+            width: 213px;
+            margin: 18px 0 30px 0;
+        }
+
+        .title {
+            font-size: 32px;
+            line-height: 46px;
+            margin-bottom: 22px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            line-height: 24px;
+            max-width: 520px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .title, .subtitle {
+            white-space: pre-wrap;
+
+            @media (max-width: 600px) {
+                white-space: inherit;
+            }
+        }
+
+        .button {
+            display: inline-block;
+            margin: 45px 0 150px 0;
+        }
+    }
+}

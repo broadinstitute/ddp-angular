@@ -98,6 +98,7 @@ import { ActivityCompositeAnswer } from './components/activityForm/answers/activ
 import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
 import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
+import { EmbeddedActivityBlockComponent } from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -347,6 +348,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         GroupBlock,
         GroupBlockList,
         ModalActivityBlockComponent,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
@@ -412,6 +414,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         GroupBlock,
         GroupBlockList,
         ModalActivityBlockComponent,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
