@@ -1,65 +1,21 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
-import { ActivityCompositeQuestionBlock } from '../../../models/activity/activityCompositeQuestionBlock';
-import { AnswerValue } from '../../../models/activity/answerValue';
-import { BlockVisibility } from '../../../models/activity/blockVisibility';
-import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
-import { ChildOrientation } from '../../../models/activity/childOrientation';
-import { QuestionType } from '../../../models/activity/questionType';
-import { ActivityDateQuestionBlock } from '../../../models/activity/activityDateQuestionBlock';
-import { DateRenderMode } from '../../../models/activity/dateRenderMode';
-import { ConfigurationService } from '../../../services/configuration.service';
+import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
+import { AnswerValue } from '../../../../models/activity/answerValue';
+import { BlockVisibility } from '../../../../models/activity/blockVisibility';
+import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
+import { ChildOrientation } from '../../../../models/activity/childOrientation';
+import { QuestionType } from '../../../../models/activity/questionType';
+import { ActivityDateQuestionBlock } from '../../../../models/activity/activityDateQuestionBlock';
+import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
+import { ConfigurationService } from '../../../../services/configuration.service';
 import * as _ from 'underscore';
 
 // todo see if style in here can be moved to shared resource, like external CSS
 
 @Component({
     selector: 'ddp-activity-composite-answer',
-    template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
-    <ng-container *ngFor="let childBlockRow of childQuestionBlocks; let row = index">
-        <p *ngIf="row > 0" class="Title-text PageContent-subtitle Normal">
-            <span>{{ block.additionalItemText }}</span>
-            <button *ngIf="!readonly" mat-icon-button (click)="removeRow(row)">
-                <mat-icon class="ddp-close-button">close</mat-icon>
-            </button>
-        </p>
-        <div [ngClass]="['ddp-answer-container', setOrientationClass(block.childOrientation)]">
-            <ng-container *ngFor="let childBlock of childBlockRow; let column = index">
-                <ddp-activity-answer [ngClass]="[(childBlock.questionType == 'text'
-                                                && block.childOrientation !== 'VERTICAL') ? 'ddp-composite-text' : '',
-                                                'ddp-answer-field']"
-                                     [block]="childBlock"
-                                     [readonly]="readonly"
-                                     [validationRequested]="validationRequested"
-                                     (valueChanged)="updateValue(row, column, $event)"
-                                     (visibilityChanged)="updateVisibility($event)">
-                </ddp-activity-answer>
-            </ng-container>
-        </div>
-    </ng-container>
-    <button *ngIf="block.allowMultiple && !readonly"
-            type="button"
-            class="ButtonFilled ButtonFilled--white button button_medium button_secondary button_new-item"
-            (click)="addBlankRow()">
-        {{ block.addButtonText }}
-    </button>`,
-    styles: [
-        `.Title-text {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .vertical {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .horizontal {
-            display: flex;
-            flex-direction: row;
-        }`
-    ]
+    templateUrl: 'activityCompositeAnswer.component.html',
+    styleUrls: ['activityCompositeAnswer.component.scss']
 })
 
 // todo can we make some of these styles be common? button styles copied from physician form
