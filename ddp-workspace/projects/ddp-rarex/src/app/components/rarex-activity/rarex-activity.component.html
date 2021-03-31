@@ -3,7 +3,7 @@
 </div>
 
 <!-- article content -->
-<article *ngIf="isLoaded" class="rarex-activity" [ngClass]="{'PageContent': isLoaded}">
+<article *ngIf="isLoaded" class="rarex-activity" [ngClass]="{'PageContent': isLoaded}" [class.is-consent]="isConsent">
   <div class="PageLayout">
     <div class="row NoMargin">
       <div *ngIf="shouldShowReadonlyHint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -96,11 +96,19 @@
 
             <div class="activity__btn-section__right">
               <button
-                *ngIf="!isLastStep"
+                *ngIf="!isLastStep && (!isConsent || isReadonly)"
                 class="button button_medium button_primary"
                 [disabled]="(isPageBusy | async)"
                 (click)="incrementStep()"
                 [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
+              ></button>
+
+              <button
+                *ngIf="!isLastStep && isConsent && !isReadonly"
+                class="button button_medium button_primary"
+                [disabled]="(isPageBusy | async)"
+                (click)="incrementStep()"
+                [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.IUnderstandButton' | translate)"
               ></button>
 
               <ng-container *ngIf="isLastStep">
