@@ -5,6 +5,7 @@ export enum RoutePaths {
   LoginLanding = 'login-landing',
   LoginLandingWithMode = 'login-landing/:mode',
   Dashboard = 'dashboard',
+  ParticipantsList = 'participants',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
   TermsAndConditions = 'terms-and-conditions',

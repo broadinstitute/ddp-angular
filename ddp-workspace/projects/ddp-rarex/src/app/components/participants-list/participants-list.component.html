@@ -1,0 +1,27 @@
+<div class="container">
+  <div *ngIf="loading; else content" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<ng-template #content>
+  <app-notifications [messages]="messages"></app-notifications>
+
+  <app-participant-activities
+    *ngFor="let participant of participants"
+    [activities]="participant.activities"
+    (startActivity)="onStartActivity(participant.userGuid, $event)"
+    (continueActivity)="onContinueActivity(participant.userGuid, $event)"
+    (editActivity)="onEditActivity(participant.userGuid, $event)"
+    (viewActivity)="onViewActivity(participant.userGuid, $event)"
+  ></app-participant-activities>
+
+  <div class="controls">
+    <button
+      class="button button_primary button_medium"
+      (click)="onAddParticipantClick()"
+    >
+      Add Participant
+    </button>
+  </div>
+</ng-template>

@@ -20,9 +20,12 @@ import {
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
-import { RarexDashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ParticipantActivitiesComponent } from './components/participant-activities/participant-activities.component';
+import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
@@ -50,7 +53,6 @@ declare const ga: (type: string, event: AnalyticsEvent) => void;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.activityUrl = RoutePaths.Activity;
-tkCfg.dashboardUrl = RoutePaths.Dashboard;
 tkCfg.consentUrl = RoutePaths.Consent;
 tkCfg.parentalConsentUrl = RoutePaths.ParentalConsent;
 tkCfg.consentAssentUrl = RoutePaths.ConsentAssent;
@@ -64,6 +66,8 @@ tkCfg.dashboardDisplayedColumns = [
   'status',
   'actions',
 ];
+tkCfg.dashboardUrl = RoutePaths.Dashboard;
+tkCfg.participantListUrl = RoutePaths.ParticipantsList;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -137,7 +141,7 @@ export const translateFactory = (
   ],
   declarations: [
     AppComponent,
-    RarexDashboardComponent,
+    DashboardComponent,
     FooterComponent,
     HeaderComponent,
     WorkflowProgressComponent,
@@ -149,6 +153,9 @@ export const translateFactory = (
     RedirectToLoginComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
+    ParticipantsListComponent,
+    NotificationsComponent,
+    ParticipantActivitiesComponent,
   ],
   providers: [
     {

@@ -15,6 +15,7 @@ import {
   CompositeDisposable,
   LoggingService,
   UserActivityServiceAgent,
+  SessionMementoService,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
@@ -47,6 +48,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
     private readonly _userActivites: UserActivityServiceAgent,
     private readonly _logger: LoggingService,
     private readonly _workflowBuilder: WorkflowBuilderService,
+    private readonly _session: SessionMementoService,
     @Inject('toolkit.toolkitConfig')
     private _toolkitConfiguration: ToolkitConfigurationService,
   ) {}
@@ -68,6 +70,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._currentActivity.activity$.next(null);
+    this._session.setParticipant(null);
     this._anchor.removeAll();
   }
 

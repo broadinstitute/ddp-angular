@@ -14,7 +14,8 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
-import { RarexDashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
 import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
@@ -22,6 +23,8 @@ import { RedirectToLoginComponent } from './components/redirect-to-login/redirec
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
+import { GovernedUserGuard } from './guards/governed-user.guard';
+import { SelfEnrolledUserGuard } from './guards/self-enrolled-user.guard';
 import { RoutePaths } from './router-resources';
 
 const routes: Routes = [
@@ -93,8 +96,13 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.Dashboard,
-    component: RarexDashboardComponent,
-    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+    component: DashboardComponent,
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard, SelfEnrolledUserGuard],
+  },
+  {
+    path: RoutePaths.ParticipantsList,
+    component: ParticipantsListComponent,
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard, GovernedUserGuard],
   },
   {
     path: RoutePaths.LoginLandingWithMode,

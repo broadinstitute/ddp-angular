@@ -1,148 +1,105 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { mergeMap, take, tap } from 'rxjs/operators';
 
 import {
   ActivityInstance,
   ActivityServiceAgent,
+  AnnouncementMessage,
+  AnnouncementsServiceAgent,
   ConfigurationService,
   UserActivityServiceAgent,
-  AnnouncementsServiceAgent,
-  AnnouncementMessage,
 } from 'ddp-sdk';
 
-import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
-import { CurrentActivityService } from '../../services/current-activity.service';
 import { RoutePaths } from '../../router-resources';
-
-interface Announcement {
-  instance: AnnouncementMessage;
-  shown: boolean;
-}
+import { CurrentActivityService } from '../../services/current-activity.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class RarexDashboardComponent implements OnInit {
-  isLoading = false;
-  displayedColumns = [
-    'activityName',
-    'activitySummary',
-    'activityCreatedAt',
-    'activityStatus',
-    'activityActions',
-  ];
-  activityStatusCodes = ActivityStatusCodes;
-  activities: ActivityInstance[];
-  announcements: Announcement[];
+export class DashboardComponent implements OnInit {
+  loading = false;
+  messages: AnnouncementMessage[] = [];
+  activities: ActivityInstance[] = [];
 
   constructor(
     private router: Router,
-    private announcementsServiceAgent: AnnouncementsServiceAgent,
+    private announcementsService: AnnouncementsServiceAgent,
+    private userActivityService: UserActivityServiceAgent,
     private activityService: ActivityServiceAgent,
     private currentActivityService: CurrentActivityService,
-    private userActivityServiceAgent: UserActivityServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
-    this.getAnnouncements();
-    this.getActivities();
+    this.loadData();
   }
 
-  shouldShowQuestionCount(activity: ActivityInstance): boolean {
-    const questionCount = activity.numQuestions;
-    const answeredQuestionCount = activity.numQuestionsAnswered;
-
-    if (this.isConsentOrAssent(activity)) {
-      return false;
-    }
-
-    return questionCount !== answeredQuestionCount;
+  onStartActivity(activity: ActivityInstance): void {
+    this.setCurrentActivity(activity);
+    this.redirectToActivity();
   }
 
-  canCopyActivity(activity: ActivityInstance): boolean {
-    return !this.isConsentOrAssent(activity);
+  onContinueActivity(activity: ActivityInstance): void {
+    this.setCurrentActivity(activity);
+    this.redirectToActivity();
   }
 
-  goToActivity(activity: ActivityInstance): void {
-    this.currentActivityService.activity$.next({
-      instance: activity,
-      isReadonly: false,
-    });
-    this.router.navigateByUrl(RoutePaths.Survey);
-  }
-
-  onViewClick(activity: ActivityInstance): void {
-    this.currentActivityService.activity$.next({
-      instance: activity,
-      isReadonly: true,
-    });
-    this.router.navigateByUrl(RoutePaths.Survey);
-  }
-
-  onEditClick(activityToEdit: ActivityInstance): void {
+  onEditActivity(activity: ActivityInstance): void {
     this.activityService
-      .createInstance(this.config.studyGuid, activityToEdit.activityCode)
+      .createInstance(this.config.studyGuid, activity.activityCode)
       .pipe(take(1))
       .subscribe(activity => {
-        this.currentActivityService.activity$.next({
-          instance: activity as ActivityInstance,
-          isReadonly: false,
-        });
-        this.router.navigateByUrl(RoutePaths.Survey);
+        this.setCurrentActivity(activity as ActivityInstance);
+        this.redirectToActivity();
       });
   }
 
-  closeAnnouncement(index: number): void {
-    this.announcements[index].shown = false;
+  onViewActivity(activity: ActivityInstance): void {
+    this.setCurrentActivity(activity, true);
+    this.redirectToActivity();
   }
 
-  private isConsentOrAssent(activity: ActivityInstance): boolean {
-    const activityCode = activity.activityCode;
-
-    return (
-      activityCode === ActivityCodes.CONSENT ||
-      activityCode === ActivityCodes.CONSENT_ASSENT
-    );
+  private setCurrentActivity(
+    activity: ActivityInstance,
+    isReadonly = false,
+  ): void {
+    this.currentActivityService.activity$.next({
+      instance: activity,
+      isReadonly,
+    });
   }
 
-  private getActivities(): void {
-    this.isLoading = true;
+  private redirectToActivity(): void {
+    this.router.navigateByUrl(RoutePaths.Survey);
+  }
 
-    this.userActivityServiceAgent
-      .getActivities(of(this.config.studyGuid))
+  private loadData(): void {
+    this.loading = true;
+
+    this.loadMessages()
       .pipe(
-        take(1),
-        tap(() => {
-          this.isLoading = false;
-        }),
+        tap(messages => (this.messages = messages)),
+        mergeMap(() => this.loadActivities()),
       )
       .subscribe(activities => {
         this.activities = activities;
+        this.loading = false;
       });
   }
 
-  private getAnnouncements(): void {
-    this.announcementsServiceAgent
+  private loadMessages(): Observable<AnnouncementMessage[]> {
+    return this.announcementsService
       .getMessages(this.config.studyGuid)
-      .pipe(
-        take(1),
-        map(messages =>
-          messages.map(
-            (m: AnnouncementMessage): Announcement => ({
-              instance: m,
-              shown: true,
-            }),
-          ),
-        ),
-      )
-      .subscribe(announcements => {
-        this.announcements = announcements;
-      });
+      .pipe(take(1));
+  }
+
+  private loadActivities(): Observable<ActivityInstance[]> {
+    return this.userActivityService
+      .getActivities(of(this.config.studyGuid))
+      .pipe(take(1));
   }
 }
