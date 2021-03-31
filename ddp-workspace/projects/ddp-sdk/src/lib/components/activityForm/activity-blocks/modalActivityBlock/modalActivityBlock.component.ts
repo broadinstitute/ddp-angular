@@ -28,8 +28,8 @@ const DEFAULT_DIALOG_SETTINGS = {
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
-    width: `100vw`,
-    maxWidth: `100vw`,
+    width: `70vw`,
+    maxWidth: `1000px`,
     position: {top: '10vh'},
     panelClass: 'modal-activity-block__edit-dialog',
 };
@@ -133,11 +133,9 @@ export class ModalActivityBlockComponent {
     }
 
     private getEditDialogConfig(): MatDialogConfig {
-        const widthForMobile = '70vw';
         const editDialogMobileConfig = {
             ...EDIT_DIALOG_CONFIG,
-            width: widthForMobile,
-            maxWidth: widthForMobile
+            maxWidth: '70vw'
         };
 
         return this.isMobile ? editDialogMobileConfig : EDIT_DIALOG_CONFIG;
@@ -155,21 +153,21 @@ export class ModalActivityBlockComponent {
             height: `${dialogHeight}px`
         };
 
-        if (!this.isMobile) {
-            config.position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
-            config.width = `${realDialogWidth}px`;
-        }
+        config.position = this.calculateDeleteDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
+        config.width = `${realDialogWidth}px`;
 
         return config;
     }
 
-    private calculateDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
+    private calculateDeleteDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
         const box: DOMRect = root.nativeElement.getBoundingClientRect();
         const xCenter = box.left + box.width / 2;
         const verticalGap = 15;
+
+        const left = window.innerWidth > 1260 ? `${xCenter - dialogWidth / 2}px` : undefined;
         return {
             top: `${box.top - dialogHeight - verticalGap}px`,
-            left: `${xCenter - dialogWidth / 2}px`
+            left
         };
     }
 }
