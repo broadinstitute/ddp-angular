@@ -320,9 +320,10 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public jumpStep(step: number): void {
-        if (this.visitedSectionIndexes[step]) {
+        if (this.isCompleted(step)) {
             this.smoothScrollToTop();
             this.currentSectionIndex = step;
+            this.refreshModel();
         }
     }
 
@@ -341,6 +342,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.currentSectionIndex = nextIndex;
                 this.visitedSectionIndexes[nextIndex] = true;
                 this.saveLastVisitedSectionIndex(nextIndex);
+                this.refreshModel();
             }
         }
     }
@@ -354,13 +356,14 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             if (scroll) {
                 this.scrollToTop();
             }
+            this.refreshModel();
         }
     }
 
     public setIcon(step: number, incompleteIcon: string, completeIcon: string): string {
         if (step === this.currentSectionIndex) {
             return incompleteIcon;
-        } else if (this.visitedSectionIndexes[step]) {
+        } else if (this.isCompleted(step)) {
             return completeIcon;
         }
         return incompleteIcon;
@@ -500,5 +503,11 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 })
             )
             .subscribe();
+    }
+
+    private refreshModel(): void {
+        if (this.config.shouldRefreshDuringStepperNavigation.includes(this.model.activityCode)) {
+            this.getActivity();
+        }
     }
 }
