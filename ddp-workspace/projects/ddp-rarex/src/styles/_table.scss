@@ -6,14 +6,34 @@
     font-size: 1rem;
   }
 
+  .mat-row {
+    @media (max-width: 768px) {
+      padding: 1.2rem;
+    }
+  }
+
   .mat-cell {
     padding: 1rem 1.5rem 1rem 0;
 
     color: $color-text;
   }
 
+  .mat-column-activityName {
+    width: 20%;
+    max-width: 12rem;
+
+    @media (max-width: 768px) {
+      max-width: max-content;
+    }
+  }
+
   .mat-column-activityStatus {
-    padding-left: 1.5rem;
+    width: 12%;
+    max-width: 10rem;
+
+    @media (max-width: 768px) {
+      max-width: max-content;
+    }
   }
 
   .mat-column-activityActions {
