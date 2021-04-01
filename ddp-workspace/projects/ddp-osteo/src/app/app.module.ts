@@ -99,7 +99,6 @@ config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.usesVerticalStepper = ['FAMILY_HISTORY'];
-config.shouldRefreshDuringStepperNavigation = ['FAMILY_HISTORY'];
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {

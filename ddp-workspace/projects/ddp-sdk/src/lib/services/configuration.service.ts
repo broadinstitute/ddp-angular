@@ -67,7 +67,4 @@ export class ConfigurationService {
     doGcpErrorReporting: boolean;
     // activities which should use a vertical progress indicator
     usesVerticalStepper: string[] = [];
-    // activities which should be refreshed (re-send request to get the activity model)
-    // as to get changed and saved previously model.sections
-    shouldRefreshDuringStepperNavigation: string[] = [];
 }
