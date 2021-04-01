@@ -5,18 +5,30 @@
   margin-top: 2.4rem;
 }
 
-.participants-list {
-  margin: 1.2rem 0;
+.container {
+  margin-top: 1.2rem;
+  margin-bottom: 2.4rem;
+}
 
+.title {
+  margin: 2rem 0;
+}
+
+.participants-list {
   list-style: none;
 
   &__item {
     margin: 0;
 
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid #26355c;
+    background-color: #f4efea;
 
     &:not(:last-of-type) {
       margin-bottom: 16px;
+    }
+
+    &--no-border-bottom {
+      border-bottom: none;
     }
   }
 }
@@ -28,9 +40,30 @@
     justify-content: space-between;
 
     padding: 16px 24px;
+
+    border-bottom: 1px solid #26355c;
   }
 
   &__name {
     font-size: 1rem;
   }
+
+  &__expand-btn {
+    mat-icon {
+      transition: transform 0.2s ease;
+    }
+
+    &--rotate {
+      mat-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 1.6rem;
 }

@@ -78,8 +78,7 @@ export class ParticipantsListComponent implements OnInit {
   onDeleteClick({ userGuid }: GovernedParticipant): void {
     this.loading = true;
 
-    this.userManagementService
-      .deleteUser(userGuid)
+    this.deleteParticipant(userGuid)
       .pipe(
         tap(
           () =>
@@ -186,16 +185,33 @@ export class ParticipantsListComponent implements OnInit {
           ),
         ),
         mergeMap(participantsActivities$ => forkJoin(participantsActivities$)),
+        mergeMap(participants => {
+          const accidentallyCreatedParticipant = participants.find(
+            participant => !participant.activities.length,
+          );
+
+          if (!accidentallyCreatedParticipant) {
+            return of(participants);
+          }
+
+          return this.deleteParticipant(
+            accidentallyCreatedParticipant.userGuid,
+          ).pipe(
+            map(() =>
+              participants.filter(
+                participant =>
+                  participant.userGuid !==
+                  accidentallyCreatedParticipant.userGuid,
+              ),
+            ),
+          );
+        }),
       )
       .subscribe({
         next: participants => {
-          console.log('Next called');
-
           this.participants = participants;
         },
         complete: () => {
-          console.log('Complete called');
-
           this.clearParticipant();
 
           this.loading = false;
@@ -229,5 +245,9 @@ export class ParticipantsListComponent implements OnInit {
           observer.complete();
         });
     });
+  }
+
+  private deleteParticipant(participantGuid: string): Observable<void> {
+    return this.userManagementService.deleteUser(participantGuid).pipe(take(1));
   }
 }

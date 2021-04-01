@@ -7,7 +7,13 @@
 <ng-template #content>
   <app-notifications [messages]="messages"></app-notifications>
 
-  <ng-container *ngTemplateOutlet="participantsList"></ng-container>
+  <h1 class="title">
+    {{ 'ParticipantsList.Title' | translate }}
+  </h1>
+
+  <ng-container
+    *ngTemplateOutlet="participants.length ? participantsList : noParticipants"
+  ></ng-container>
 
   <div class="controls">
     <button
@@ -24,6 +30,9 @@
     <li
       *ngFor="let participant of participants"
       class="participants-list__item"
+      [class.participants-list__item--no-border-bottom]="
+        !isParticipantContentExpanded(participant)
+      "
     >
       <div class="participant">
         <div class="participant__header">
@@ -43,6 +52,9 @@
             <button
               mat-icon-button
               class="participant__expand-btn"
+              [class.participant__expand-btn--rotate]="
+                isParticipantContentExpanded(participant)
+              "
               (click)="onExpandClick(participant)"
             >
               <mat-icon>expand_more</mat-icon>
@@ -67,4 +79,10 @@
       </div>
     </li>
   </ul>
+</ng-template>
+
+<ng-template #noParticipants>
+  <p class="no-participants">
+    {{ 'ParticipantsList.NoParticipants' | translate }}
+  </p>
 </ng-template>
