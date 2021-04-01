@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit, Output,
+    SimpleChange
+} from '@angular/core';
+import { Observable, Subject, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
@@ -25,7 +33,6 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
                        [disabled]="readonly"
                        [attr.data-ddp-test]="'answer:' + block.stableId"
                        (input)="inputSubject.next(textInput.value)"
-                       (ngModelChange)="onChange($event)"
                        [matAutocomplete]="autoCompleteFromSource"
                        #textInput="ngModel">
                 <mat-autocomplete #autoCompleteFromSource="matAutocomplete"
@@ -48,7 +55,7 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
                           [placeholder]="placeholder || block.placeholder"
                           [disabled]="readonly"
                           [attr.data-ddp-test]="'answer:' + block.stableId"
-                          (change)="onChange(textInput.value)"
+                          (input)="inputSubject.next(textInput.value)"
                           #textInput="ngModel"
                           class="ddp-textarea">
             </textarea>
@@ -71,25 +78,18 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
         }`
     ]
 })
-export class ActivityTextAnswer implements OnChanges, OnInit {
+export class ActivityTextAnswer implements OnChanges, OnInit, OnDestroy {
     @Input() block: ActivityTextQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public inputSubject = new Subject<string>();
     public filteredSuggestions$: Observable<TextSuggestion[]>;
-    public textInputModelChanged$ = new Subject<string>();
+    private subscription: Subscription;
 
     public ngOnInit(): void {
         this.initFilteredSuggestions();
-
-        this.textInputModelChanged$.pipe(
-            debounceTime(300),
-            distinctUntilChanged()
-            )
-            .subscribe((value: string) => {
-                this.valueChanged.emit(value);
-            });
+        this.initTextInputChangesEmitter();
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -103,7 +103,7 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
         // turns out server will not accept null for text questions
         // send emit empty string for falsy values
         const answer = value || '';
-        this.textInputModelChanged$.next(answer);
+        this.valueChanged.emit(answer);
     }
 
     public isTextInputType(block: ActivityTextQuestionBlock): boolean {
@@ -155,5 +155,19 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
             // empty array produces desired effect
             this.filteredSuggestions$ = of([]);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    private initTextInputChangesEmitter(): void {
+        this.subscription = this.inputSubject.pipe(
+            debounceTime(300),
+            distinctUntilChanged()
+            )
+            .subscribe((value: string) => {
+                this.valueChanged.emit(value);
+            });
     }
 }
