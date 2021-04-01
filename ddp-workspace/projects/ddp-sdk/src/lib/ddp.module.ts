@@ -94,7 +94,7 @@ import { DropdownActivityPicklistQuestion } from './components/activityForm/pick
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './components/activityForm/picklist/radiobuttonsActivityPicklistQuestion.component';
 import { ActivityDateAnswer } from './components/activityForm/answers/activityDateAnswer.component';
-import { ActivityCompositeAnswer } from './components/activityForm/answers/activityCompositeAnswer.component';
+import { ActivityCompositeAnswer } from './components/activityForm/answers/activity-composite-answer/activityCompositeAnswer.component';
 import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
 import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';

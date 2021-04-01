@@ -127,7 +127,7 @@ export * from './lib/components/activityForm/activity-blocks/groupBlock.componen
 export * from './lib/components/activityForm/activity-blocks/activityContent.component';
 export * from './lib/components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 export * from './lib/components/activityForm/answers/activityAgreementAnswer.component';
-export * from './lib/components/activityForm/answers/activityCompositeAnswer.component';
+export * from './lib/components/activityForm/answers/activity-composite-answer/activityCompositeAnswer.component';
 export * from './lib/components/activityForm/answers/activityDateAnswer.component';
 export * from './lib/components/activityForm/answers/activity-answer/activityAnswer.component';
 export * from './lib/components/activityForm/answers/activityNumericAnswer.component';
