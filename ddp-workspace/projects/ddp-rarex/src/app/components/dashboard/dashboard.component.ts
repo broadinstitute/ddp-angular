@@ -10,10 +10,10 @@ import {
   UserActivityServiceAgent,
   AnnouncementsServiceAgent,
   AnnouncementMessage,
+  ActivityStatusCodes,
 } from 'ddp-sdk';
 
 import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { RoutePaths } from '../../router-resources';
 
