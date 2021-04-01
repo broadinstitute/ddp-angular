@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
-import { map, mergeMap, pluck, take } from 'rxjs/operators';
+import { filter, map, mergeMap, pluck, take } from 'rxjs/operators';
 
 import {
   ActivityPicklistQuestionBlock,
@@ -9,6 +10,8 @@ import {
   PrequalifierServiceAgent,
   SessionMementoService,
 } from 'ddp-sdk';
+
+import { RoutePaths } from '../router-resources';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +26,7 @@ export class GovernedUserService {
   ];
 
   constructor(
+    private router: Router,
     private sessionService: SessionMementoService,
     private prequalService: PrequalifierServiceAgent,
     private activityService: ActivityServiceAgent,
@@ -67,6 +71,19 @@ export class GovernedUserService {
       )
       .subscribe((isGoverned: boolean) => {
         this.isGoverned$.next(isGoverned);
+      });
+  }
+
+  redirectToDashboard(): void {
+    this.isGoverned$
+      .pipe(
+        filter(isGoverned => isGoverned !== null),
+        map(isGoverned =>
+          isGoverned ? RoutePaths.ParticipantsList : RoutePaths.Dashboard,
+        ),
+      )
+      .subscribe(path => {
+        this.router.navigateByUrl(path);
       });
   }
 }

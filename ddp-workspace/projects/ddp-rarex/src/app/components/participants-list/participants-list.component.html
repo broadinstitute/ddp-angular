@@ -7,14 +7,7 @@
 <ng-template #content>
   <app-notifications [messages]="messages"></app-notifications>
 
-  <app-participant-activities
-    *ngFor="let participant of participants"
-    [activities]="participant.activities"
-    (startActivity)="onStartActivity(participant.userGuid, $event)"
-    (continueActivity)="onContinueActivity(participant.userGuid, $event)"
-    (editActivity)="onEditActivity(participant.userGuid, $event)"
-    (viewActivity)="onViewActivity(participant.userGuid, $event)"
-  ></app-participant-activities>
+  <ng-container *ngTemplateOutlet="participantsList"></ng-container>
 
   <div class="controls">
     <button
@@ -24,4 +17,54 @@
       Add Participant
     </button>
   </div>
+</ng-template>
+
+<ng-template #participantsList>
+  <ul *ngIf="participants.length" class="participants-list">
+    <li
+      *ngFor="let participant of participants"
+      class="participants-list__item"
+    >
+      <div class="participant">
+        <div class="participant__header">
+          <span class="participant__name">
+            {{ getParticipantName(participant) }}
+          </span>
+
+          <div class="participant__icon-container">
+            <button
+              mat-icon-button
+              class="participant__delete-btn"
+              (click)="onDeleteClick(participant)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              class="participant__expand-btn"
+              (click)="onExpandClick(participant)"
+            >
+              <mat-icon>expand_more</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isParticipantContentExpanded(participant)"
+          class="participant__content"
+        >
+          <app-participant-activities
+            [activities]="participant.activities"
+            (startActivity)="onStartActivity(participant.userGuid, $event)"
+            (continueActivity)="
+              onContinueActivity(participant.userGuid, $event)
+            "
+            (editActivity)="onEditActivity(participant.userGuid, $event)"
+            (viewActivity)="onViewActivity(participant.userGuid, $event)"
+          ></app-participant-activities>
+        </div>
+      </div>
+    </li>
+  </ul>
 </ng-template>

@@ -308,6 +308,9 @@
       ]
     }
   },
+  "ParticipantsList": {
+    "NewParticipant": "New Participant"
+  },
   "Toolkit": {
     "Password": {
       "Title": "Please enter the password",

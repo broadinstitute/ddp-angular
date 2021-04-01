@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
@@ -13,6 +14,7 @@ import {
   Participant,
   SessionMementoService,
   UserActivityServiceAgent,
+  UserManagementServiceAgent,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 
@@ -33,15 +35,18 @@ export class ParticipantsListComponent implements OnInit {
   loading = false;
   messages: AnnouncementMessage[] = [];
   participants: GovernedParticipant[] = [];
+  private expandedMap: Record<string, boolean> = {};
 
   constructor(
     private router: Router,
+    private translateService: TranslateService,
     private announcementsService: AnnouncementsServiceAgent,
     private governedParticipantsService: GovernedParticipantsServiceAgent,
     private sessionService: SessionMementoService,
     private userActivityService: UserActivityServiceAgent,
     private workflowService: WorkflowServiceAgent,
     private activityService: ActivityServiceAgent,
+    private userManagementService: UserManagementServiceAgent,
     private governedUserService: GovernedUserService,
     private currentActivityService: CurrentActivityService,
     @Inject('ddp.config') private config: ConfigurationService,
@@ -50,6 +55,42 @@ export class ParticipantsListComponent implements OnInit {
   ngOnInit(): void {
     this.clearParticipant();
     this.loadData();
+  }
+
+  getParticipantName({ userProfile }: GovernedParticipant): string {
+    const { firstName, lastName } = userProfile;
+
+    if (!firstName && !lastName) {
+      return this.translateService.instant('ParticipantsList.NewParticipant');
+    }
+
+    return `${firstName} ${lastName}`;
+  }
+
+  isParticipantContentExpanded({ userGuid }: GovernedParticipant): boolean {
+    return !!this.expandedMap[userGuid];
+  }
+
+  onExpandClick({ userGuid }: GovernedParticipant): void {
+    this.expandedMap[userGuid] = !this.expandedMap[userGuid];
+  }
+
+  onDeleteClick({ userGuid }: GovernedParticipant): void {
+    this.loading = true;
+
+    this.userManagementService
+      .deleteUser(userGuid)
+      .pipe(
+        tap(
+          () =>
+            (this.participants = this.participants.filter(
+              participant => participant.userGuid !== userGuid,
+            )),
+        ),
+      )
+      .subscribe(() => {
+        this.loading = false;
+      });
   }
 
   onStartActivity(participantGuid: string, activity: ActivityInstance): void {

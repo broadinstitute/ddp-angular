@@ -5,7 +5,6 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
 
@@ -13,16 +12,15 @@ import {
   ActivityResponse,
   ActivityInstance,
   CompositeDisposable,
-  LoggingService,
   UserActivityServiceAgent,
   SessionMementoService,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
+import { GovernedUserService } from '../../services/governed-user.service';
 import { ActivityCodes } from '../../constants/activity-codes';
 import { ActivityStatusCodes } from '../../constants/activity-status-codes';
-import { RoutePaths } from '../../router-resources';
 
 @Component({
   selector: 'app-rarex-activity-page',
@@ -41,14 +39,12 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   private _anchor = new CompositeDisposable();
 
   constructor(
-    private readonly _route: ActivatedRoute,
-    private readonly _router: Router,
     private readonly _cdr: ChangeDetectorRef,
     private readonly _currentActivity: CurrentActivityService,
     private readonly _userActivites: UserActivityServiceAgent,
-    private readonly _logger: LoggingService,
     private readonly _workflowBuilder: WorkflowBuilderService,
     private readonly _session: SessionMementoService,
+    private governedUserService: GovernedUserService,
     @Inject('toolkit.toolkitConfig')
     private _toolkitConfiguration: ToolkitConfigurationService,
   ) {}
@@ -58,7 +54,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
     const activity = this._currentActivity.activity$.getValue();
 
     if (!activity) {
-      this._router.navigateByUrl(RoutePaths.Dashboard);
+      this.governedUserService.redirectToDashboard();
 
       return;
     }

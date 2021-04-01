@@ -4,3 +4,33 @@
 
   margin-top: 2.4rem;
 }
+
+.participants-list {
+  margin: 1.2rem 0;
+
+  list-style: none;
+
+  &__item {
+    margin: 0;
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:not(:last-of-type) {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.participant {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 24px;
+  }
+
+  &__name {
+    font-size: 1rem;
+  }
+}
