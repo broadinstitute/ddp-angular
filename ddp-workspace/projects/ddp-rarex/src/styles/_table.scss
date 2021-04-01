@@ -51,6 +51,14 @@
   }
 }
 
+.dashboard {
+  .mat-row {
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+}
+
 .dashboard-table {
   @media (max-width: 768px) {
     display: block;

@@ -308,6 +308,9 @@
       ]
     }
   },
+  "Dashboard": {
+    "Title": "My Dashboard"
+  },
   "ParticipantsList": {
     "Title": "Your Participants",
     "NewParticipant": "New Participant",
