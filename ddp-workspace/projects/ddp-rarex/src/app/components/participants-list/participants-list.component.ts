@@ -92,7 +92,10 @@ export class ParticipantsListComponent implements OnInit {
         tap(participant => this.sessionService.setParticipant(participant)),
         mergeMap(() => this.workflowService.fromParticipantList()),
       )
-      .subscribe(() => {
+      .subscribe(response => {
+        this.setCurrentActivity({
+          instanceGuid: response.instanceGuid,
+        } as ActivityInstance);
         this.redirectToSurvey();
       });
   }
