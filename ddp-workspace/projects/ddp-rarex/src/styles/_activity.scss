@@ -2,7 +2,7 @@
 
 // DDP styles
 .ddp-close-button:hover {
-    color: mat-color($app-theme, 650);
+  color: mat-color($app-theme, 650);
 }
 
 .ddp-activity-validation {
@@ -13,7 +13,7 @@
   .ErrorMessageItem {
     font-size: 1.0625rem;
     color: mat-color($app-theme, 500);
-    margin: .3rem 0;
+    margin: 0.3rem 0;
     padding: 0 0 0 0;
   }
 }
@@ -39,8 +39,6 @@
 
 ddp-activity-content {
   & > div:first-of-type:not(.ddp-content) {
-    margin: 1em 0;
-
     font-size: 1.35rem;
     font-weight: bold;
     color: black;
@@ -51,7 +49,8 @@ ddp-activity-content {
     line-height: 1.65rem;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 1.5rem;
   }
 }
@@ -296,25 +295,25 @@ ddp-date .picklist {
 
 // native dropdown
 select {
-    font-size: 1.0625rem;
-    color: mat-color($app-theme, 700);
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 100%;
-    padding: 0;
-    margin-top: 1rem;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .42);
-    border-radius: 0;
-    height: 2.65rem;
-    transition: all .3s;
-    font-family: inherit;
-    cursor: pointer;
+  font-size: 1.0625rem;
+  color: mat-color($app-theme, 700);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  padding: 0;
+  margin-top: 1rem;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  border-radius: 0;
+  height: 2.65rem;
+  transition: all 0.3s;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 select:disabled {
-    color: rgba(0, 0, 0, 0.38);
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
-    cursor: auto;
+  color: rgba(0, 0, 0, 0.38);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
+  cursor: auto;
 }
 
 .consent-download {
@@ -328,4 +327,20 @@ select:disabled {
   &__link {
     color: darken(mat-color($app-theme, 350), 15%) !important;
   }
+}
+
+h3.question-prompt {
+  margin: 1.5em 0 0.25em 0;
+
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.65rem;
+  color: black;
+}
+
+p.question-sub {
+  margin: 0;
+
+  font-size: 1rem;
 }
