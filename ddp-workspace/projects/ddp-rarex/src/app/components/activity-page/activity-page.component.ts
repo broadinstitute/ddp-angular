@@ -14,13 +14,13 @@ import {
   CompositeDisposable,
   UserActivityServiceAgent,
   SessionMementoService,
+  ActivityStatusCodes,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { GovernedUserService } from '../../services/governed-user.service';
 import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 
 @Component({
   selector: 'app-activity-page',

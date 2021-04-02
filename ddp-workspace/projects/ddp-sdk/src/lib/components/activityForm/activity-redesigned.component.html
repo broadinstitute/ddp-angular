@@ -1,7 +1,8 @@
 <main class="main main_activity"
       [ngClass]="{
           'main_sticky': isLoaded && model && model.subtitle,
-          'with-vertical-progress-indicator': isVerticalProgress
+          'with-vertical-progress-indicator': isVerticalProgress,
+          'family-history': this.model?.activityCode === 'FAMILY_HISTORY'
       }"
 >
     <ng-container *ngIf="isLoaded && model">
@@ -152,14 +153,15 @@
 <ng-template #navigationButtons>
     <button *ngIf="!isFirstStep"
             [disabled]="(isPageBusy | async) || dataEntryDisabled"
-            class="button button_medium button_secondary previous_button"
+            class="button button_secondary previous_button"
+            [ngClass]="isVerticalProgress? 'button_small' : 'button_medium'"
             (click)="decrementStep()"
             [innerHTML]="'SDK.PreviousButton' | translate">
     </button>
     <button *ngIf="!isLastStep"
             [disabled]="(isPageBusy | async) || dataEntryDisabled"
-            class="button button_medium  button_right next_button"
-            [ngClass]="isVerticalProgress? 'button_secondary' : 'button_primary'"
+            class="button button_right next_button"
+            [ngClass]="isVerticalProgress? 'button_secondary button_small' : 'button_primary button_medium'"
             (click)="incrementStep()"
             [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)">
     </button>
@@ -168,8 +170,8 @@
 <ng-template #lastStepButtons>
     <button *ngIf="!isReadonly() && !isAgree()" #submitButton
             [disabled]="(isPageBusy | async) || dataEntryDisabled"
-            class="button button_medium button_right submit_button"
-            [ngClass]="isVerticalProgress? 'button_secondary' : 'button_primary'"
+            class="button button_right submit_button"
+            [ngClass]="isVerticalProgress? 'button_secondary button_small' : 'button_primary button_medium'"
             (click)="flush()"
             (mouseenter)="mouseEnterOnSubmit()"
             [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) :

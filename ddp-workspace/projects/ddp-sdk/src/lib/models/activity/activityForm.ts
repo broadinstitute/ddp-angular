@@ -1,5 +1,6 @@
 import { ActivitySection } from './activitySection';
 import { ReplaySubject } from 'rxjs';
+import { ActivityStatusCodes } from './activityStatusCodes';
 
 export class ActivityForm {
     public readonly: boolean;
@@ -16,6 +17,7 @@ export class ActivityForm {
     public lastUpdated?: Date;
     public validationState: ReplaySubject<boolean> = new ReplaySubject();
     public sectionIndex: number | null;
+    public statusCode: ActivityStatusCodes;
 
     public validate(): boolean {
         let isValid = true;

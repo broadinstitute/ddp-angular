@@ -12,8 +12,8 @@ import {
   UserActivityServiceAgent,
 } from 'ddp-sdk';
 
-import { RoutePaths } from '../../router-resources';
 import { CurrentActivityService } from '../../services/current-activity.service';
+import { RoutePaths } from '../../router-resources';
 
 @Component({
   selector: 'app-dashboard',

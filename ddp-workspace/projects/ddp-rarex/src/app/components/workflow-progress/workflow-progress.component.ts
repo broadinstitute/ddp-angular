@@ -6,9 +6,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { ActivityInstance } from 'ddp-sdk';
-
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
+import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
 @Component({
   selector: 'app-workflow-progress',

@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ActivityInstance } from 'ddp-sdk';
+import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
 import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 
 @Component({
   selector: 'app-activities-list',

@@ -17,7 +17,7 @@
         color: var(--modal-activity-block-title-color, #1D1B25);
         letter-spacing: 0;
 
-        font-size: var(--modal-activity-block-title-font-size, 20px);
+        font-size: var(--modal-activity-block-title-font-size, 1.4rem);
     }
 
     &__card-subtitle {
@@ -102,6 +102,10 @@
 
 ::ng-deep {
     & .modal-activity-block__edit-dialog {
+        ddp-activity-composite-answer .ddp-answer-container {
+            align-items: baseline;
+        }
+
         & > mat-dialog-container {
             padding: 0;
 
@@ -121,7 +125,7 @@
             padding: 27px 45px 20px 45px;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1260px) {
             &:after { // arrow
                 content: " ";
                 position: relative;

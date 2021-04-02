@@ -24,6 +24,7 @@
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat
+            [disabled]="readonly"
             class="add-btn button button_primary"
             (click)="createChildInstance()">
         <img src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
