@@ -55,7 +55,8 @@
   }
 
   &__name {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 
   &__expand-btn {
@@ -65,7 +66,7 @@
 
     &--rotate {
       mat-icon {
-        transform: rotate(180deg);
+        transform: rotateX(-180deg);
       }
     }
   }

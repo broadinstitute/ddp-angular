@@ -102,7 +102,8 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
         this.activities = activities;
 
         const demographicsActivity = activities.find(
-          activity => activity.activityCode === ActivityCodes.DEMOGRAPHICS,
+          activity =>
+            activity.activityCode === ActivityCodes.GeneralInformation,
         );
 
         this.isWorkflowProgressShown = demographicsActivity

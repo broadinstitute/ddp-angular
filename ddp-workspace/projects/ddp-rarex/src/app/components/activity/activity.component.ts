@@ -18,9 +18,9 @@ export class ActivityComponent extends SDKActivityComponent {
   @Input() isReadonly = false;
   @Output() sectionChanged = new EventEmitter();
   private consentCodes: string[] = [
-    ActivityCodes.CONSENT,
-    ActivityCodes.CONSENT_ASSENT,
-    ActivityCodes.PARENTAL_CONSENT,
+    ActivityCodes.SelfConsent,
+    ActivityCodes.ConsentAssent,
+    ActivityCodes.ParentalConsent,
   ];
 
   get isConsent(): boolean {

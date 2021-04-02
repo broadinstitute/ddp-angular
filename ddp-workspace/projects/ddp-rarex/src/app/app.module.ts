@@ -47,19 +47,9 @@ let base = document.querySelector('base').getAttribute('href');
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.activityUrl = RoutePaths.Activity;
-tkCfg.consentUrl = RoutePaths.Consent;
-tkCfg.parentalConsentUrl = RoutePaths.ParentalConsent;
-tkCfg.consentAssentUrl = RoutePaths.ConsentAssent;
-tkCfg.consentGuid = ActivityCodes.CONSENT;
-tkCfg.parentalConsentGuid = ActivityCodes.PARENTAL_CONSENT;
-tkCfg.consentAssentGuid = ActivityCodes.CONSENT_ASSENT;
-tkCfg.dashboardDisplayedColumns = [
-  'name',
-  'summary',
-  'date',
-  'status',
-  'actions',
-];
+tkCfg.consentGuid = ActivityCodes.SelfConsent;
+tkCfg.parentalConsentGuid = ActivityCodes.ParentalConsent;
+tkCfg.consentAssentGuid = ActivityCodes.ConsentAssent;
 tkCfg.dashboardUrl = RoutePaths.Dashboard;
 tkCfg.participantListUrl = RoutePaths.ParticipantsList;
 
@@ -80,10 +70,6 @@ config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.tooltipIconUrl = 'assets/images/info.png';
 config.dashboardShowQuestionCount = true;
-config.dashboardShowQuestionCountExceptions = [
-  ActivityCodes.CONSENT,
-  ActivityCodes.CONSENT_ASSENT,
-];
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
