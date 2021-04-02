@@ -48,7 +48,7 @@ describe('ActivityTextAnswer', () => {
                 MatTooltipModule
             ],
             providers: [
-                { provide: 'ddp.config', useValue: configServiceSpy }
+                {provide: 'ddp.config', useValue: configServiceSpy}
             ],
         }).compileComponents();
     }));
@@ -73,35 +73,15 @@ describe('ActivityTextAnswer', () => {
         expect(count.length).toBe(1);
     });
 
-    it('input and change work without autosuggest', fakeAsync(() => {
-        expect(component).toBeTruthy();
+    it('input change works without auto-suggest', fakeAsync(() => {
+        spyOn(component.valueChanged, 'emit');
         fixture.detectChanges();
-        const questionComponent = fixture.debugElement.query(By.directive(QuestionPromptComponent));
-        expect(questionComponent).not.toBeNull();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        expect(inputElement).not.toBeFalsy();
-        const valueToEmit = 'Boohoo';
-
-        let valueChangedEmitted = false;
-
-        // this is how we get the value out of component
-        component.valueChanged.subscribe(val => {
-            expect(val).toBe(valueToEmit);
-            valueChangedEmitted = true;
-            console.log('I got a value and it was' + val);
-        });
-
-        // sequence here of focus, set value, dispatch input and then change needed for test to work
-        // ok as this is sort of how it will happen in actual component
         inputElement.focus();
-        inputElement.value = valueToEmit;
-        // got to do both of these events for things to work. OK as user will do same
+        inputElement.value = 'New input value';
         inputElement.dispatchEvent(new Event('input'));
-        inputElement.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-        // tick to allow subscription to be executed
-        tick();
-        expect(valueChangedEmitted).toBe(true);
+        tick(400);
+        expect(component.valueChanged.emit).toHaveBeenCalledWith('New input value');
     }));
 
     it('expect suggestion source to be called when input entered', fakeAsync(() => {
@@ -131,7 +111,7 @@ describe('ActivityTextAnswer', () => {
         expect(dataSourceProviderExecuted).toBe(true);
     }));
 
-    it('Check autosuggest options opened at right time', fakeAsync(() => {
+    it('Check auto-suggest options opened at right time', fakeAsync(() => {
         const matchingVal = 'Blah';
 
         const textSuggestions = buildTestTextSuggestions(matchingVal);
@@ -190,69 +170,55 @@ describe('ActivityTextAnswer', () => {
     }));
 
     it('select matching option from list', fakeAsync(() => {
+        spyOn(component.valueChanged, 'emit');
         const matchingVal = 'Blah';
-
         const textSuggestions = buildTestTextSuggestions(matchingVal);
 
         component.block.textSuggestionSource = (queryObservable: Observable<string>) => {
-            return queryObservable.pipe(map((queryVal) => {
-                if (queryVal === matchingVal) {
-                    return textSuggestions;
-                } else {
-                    return [];
-                }
-            }));
+            return queryObservable.pipe(
+                map(queryVal => (queryVal === matchingVal) ? textSuggestions : [])
+            );
         };
-        component.block = component.block;
-
         fixture.detectChanges();
-        const inputDebugElement: DebugElement = fixture.debugElement.query(By.css('input'));
 
+        const inputDebugElement: DebugElement = fixture.debugElement.query(By.css('input'));
         inputValue(inputDebugElement, matchingVal);
         fixture.detectChanges();
         tick(400);
 
-        fixture.detectChanges();
         const autocompletePanel: DebugElement = fixture.debugElement.query(By.css('.autoCompletePanel'));
         expect(isElementVisible(autocompletePanel.nativeElement));
 
-        const selectedOptionIndex = 1;
-        let valueChanged = false;
-        component.valueChanged.subscribe(newVal => {
-            expect(newVal).toEqual(textSuggestions[selectedOptionIndex].value);
-            valueChanged = true;
-        });
-        // const secondSuggestOptionElement = autocompletePanel.children[selectedOptionIndex];
         inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
         fixture.detectChanges();
-        tick();
+        tick(400);
+
+        const selectedOptionIndex = 0;
         const secondSuggestOptionElement = fixture.debugElement.queryAll(By.css('.autoCompleteOption'))[selectedOptionIndex];
         secondSuggestOptionElement.nativeElement.click();
-        // expect(component.options.length).toBe(textSuggestions.length);
-        // component.options.last.click();
-        // secondSuggestOptionElement.dispatchEvent(new Event('click'));
         fixture.detectChanges();
-        tick(1);
-        expect(valueChanged).toBe(true);
+        tick(400);
+
+        expect(inputDebugElement.nativeElement.value).toEqual(textSuggestions[selectedOptionIndex].value);
     }));
 
     it('Compute tagged text suggestion', fakeAsync(() => {
 
         let suggestion: TextSuggestion = {
-            value: 'Tylenol', matches: [{ offset: 0, length: 3 }]
+            value: 'Tylenol', matches: [{offset: 0, length: 3}]
         };
         expect(component.generateOptionInnerHtml(suggestion, 'b')).toBe('<b>Tyl</b>enol');
 
-        suggestion = { value: 'Tylenol', matches: [] };
+        suggestion = {value: 'Tylenol', matches: []};
         expect(component.generateOptionInnerHtml(suggestion, 'b')).toBe('Tylenol');
 
-        suggestion = { value: 'Tylenol', matches: [{ offset: 0, length: 3 }, { offset: 4, length: 2 }] };
+        suggestion = {value: 'Tylenol', matches: [{offset: 0, length: 3}, {offset: 4, length: 2}]};
         expect(component.generateOptionInnerHtml(suggestion, 'b')).toBe('<b>Tyl</b>e<b>no</b>l');
 
-        suggestion = { value: 'Tylenol', matches: [{ offset: 0, length: 3 }, { offset: 4, length: 3 }] };
+        suggestion = {value: 'Tylenol', matches: [{offset: 0, length: 3}, {offset: 4, length: 3}]};
         expect(component.generateOptionInnerHtml(suggestion, 'b')).toBe('<b>Tyl</b>e<b>nol</b>');
 
-        suggestion = { value: 'Tylenol', matches: [{ offset: 0, length: 3 }, { offset: 4, length: 3 }] };
+        suggestion = {value: 'Tylenol', matches: [{offset: 0, length: 3}, {offset: 4, length: 3}]};
         expect(component.generateOptionInnerHtml(suggestion, 'span', 'nice'))
             .toBe('<span class="nice">Tyl</span>e<span class="nice">nol</span>');
 
@@ -273,10 +239,14 @@ function inputValue(inputDebugElement: DebugElement, newValue: string): void {
 }
 
 function buildTestTextSuggestions(matchingVal: string): TextSuggestion[] {
-    const textMatch1 = 'The Blahney Stone';
-    const textSuggestions = [{
-        value: textMatch1,
-        matches: [{ length: matchingVal.length, offset: textMatch1.indexOf(matchingVal) }]
-    } as TextSuggestion, { value: 'Tylenol', matches: [{ offset: 0, length: 3 }, { offset: 4, length: 2 }] }];
-    return textSuggestions;
+    const textMatchValue = 'The Blahney Stone';
+    const textMatch: TextSuggestion = {
+        value: textMatchValue,
+        matches: [{length: matchingVal.length, offset: textMatchValue.indexOf(matchingVal)}]
+    };
+    const textDoesNotMatch: TextSuggestion = {
+        value: 'Tylenol', matches: [{offset: 0, length: 3}, {offset: 4, length: 2}]
+    };
+
+    return [textMatch, textDoesNotMatch];
 }

@@ -1,65 +1,73 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit, Output,
+    SimpleChange
+} from '@angular/core';
+import { Observable, Subject, of, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { InputType } from '../../../models/activity/inputType';
 import { TextSuggestion } from '../../../models/activity/textSuggestion';
 import { SuggestionMatch } from '../../../models/suggestionMatch';
 import { TextSuggestionProvider } from '../../../models/activity/textSuggestionProvider';
-import { Observable, Subject, of } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
 
 const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
 
 @Component({
     selector: 'ddp-activity-text-answer',
     template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
-    <ng-container *ngIf="isTextInputType(block)">
-        <mat-form-field  class="example-input-field" [floatLabel]="block.label ? 'always' : null">
-            <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
-            <input matInput [(ngModel)]="block.answer"
-                [minlength]="block.minLength"
-                [maxlength]="block.maxLength"
-                [pattern]="block.regexPattern"
-                [placeholder]="placeholder || block.placeholder"
-                [disabled]="readonly"
-                [attr.data-ddp-test]="'answer:' + block.stableId"
-                (input)="inputSubject.next(textInput.value)"
-                (change)="onChange(textInput.value)"
-                [matAutocomplete]="autoCompleteFromSource"
-                #textInput="ngModel">
-            <mat-autocomplete #autoCompleteFromSource="matAutocomplete"
-                (optionSelected)="onChange(textInput.value)" class="autoCompletePanel">
+        <ddp-question-prompt [block]="block"></ddp-question-prompt>
+        <ng-container *ngIf="isTextInputType(block)">
+            <mat-form-field class="example-input-field" [floatLabel]="block.label ? 'always' : null">
+                <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
+                <input matInput [(ngModel)]="block.answer"
+                       [minlength]="block.minLength"
+                       [maxlength]="block.maxLength"
+                       [pattern]="block.regexPattern"
+                       [placeholder]="placeholder || block.placeholder"
+                       [disabled]="readonly"
+                       [attr.data-ddp-test]="'answer:' + block.stableId"
+                       (input)="inputSubject.next(textInput.value)"
+                       [matAutocomplete]="autoCompleteFromSource"
+                       #textInput="ngModel">
+                <mat-autocomplete #autoCompleteFromSource="matAutocomplete"
+                                  (optionSelected)="onChange(textInput.value)" class="autoCompletePanel">
                     <mat-option *ngFor="let suggestion of filteredSuggestions$ | async"
-                        [value]="suggestion.value" class="autoCompleteOption">
+                                [value]="suggestion.value" class="autoCompleteOption">
                         <span class="suggestion" [innerHTML]="generateOptionInnerHtml(suggestion,'span', 'suggestion-match')"></span>
                     </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </ng-container>
-    <ng-container *ngIf="isEssayInputType(block)">
-        <mat-form-field  class="example-input-field ddp-textarea-block" [floatLabel]="block.label ? 'always' : null">
-          <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
-          <textarea matInput matTextareaAutosize matAutosizeMinRows="3"
-                    [(ngModel)]="block.answer"
-                    [minlength]="block.minLength"
-                    [maxlength]="block.maxLength"
-                    [pattern]="block.regexPattern"
-                    [placeholder]="placeholder || block.placeholder"
-                    [disabled]="readonly"
-                    [attr.data-ddp-test]="'answer:' + block.stableId"
-                    (change)="onChange(textInput.value)"
-                    #textInput="ngModel"
-                    class="ddp-textarea">
+                </mat-autocomplete>
+            </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="isEssayInputType(block)">
+            <mat-form-field class="example-input-field ddp-textarea-block" [floatLabel]="block.label ? 'always' : null">
+                <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
+                <textarea matInput matTextareaAutosize matAutosizeMinRows="3"
+                          [(ngModel)]="block.answer"
+                          [minlength]="block.minLength"
+                          [maxlength]="block.maxLength"
+                          [pattern]="block.regexPattern"
+                          [placeholder]="placeholder || block.placeholder"
+                          [disabled]="readonly"
+                          [attr.data-ddp-test]="'answer:' + block.stableId"
+                          (input)="inputSubject.next(textInput.value)"
+                          #textInput="ngModel"
+                          class="ddp-textarea">
             </textarea>
-        </mat-form-field>
-    </ng-container>
-    <ng-container *ngIf="isEmailInputType(block)">
-        <ddp-activity-email-input [block]="block"
-                                  [readonly]="readonly"
-                                  [placeholder]="placeholder"
-                                  (valueChanged)="onChange($event)">
-        </ddp-activity-email-input>
-    </ng-container>
+            </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="isEmailInputType(block)">
+            <ddp-activity-email-input [block]="block"
+                                      [readonly]="readonly"
+                                      [placeholder]="placeholder"
+                                      (valueChanged)="onChange($event)">
+            </ddp-activity-email-input>
+        </ng-container>
     `,
     styles: [
         `.example-input-field {
@@ -70,16 +78,18 @@ const MIN_INPUT_LENGTH_FOR_TYPEAHEAD = 3;
         }`
     ]
 })
-export class ActivityTextAnswer implements OnChanges, OnInit {
+export class ActivityTextAnswer implements OnChanges, OnInit, OnDestroy {
     @Input() block: ActivityTextQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public inputSubject = new Subject<string>();
     public filteredSuggestions$: Observable<TextSuggestion[]>;
+    private subscription: Subscription;
 
     public ngOnInit(): void {
         this.initFilteredSuggestions();
+        this.initTextInputChangesEmitter();
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
@@ -92,7 +102,7 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
     public onChange(value: string): void {
         // turns out server will not accept null for text questions
         // send emit empty string for falsy values
-        const answer = value ? value : '';
+        const answer = value || '';
         this.valueChanged.emit(answer);
     }
 
@@ -145,5 +155,19 @@ export class ActivityTextAnswer implements OnChanges, OnInit {
             // empty array produces desired effect
             this.filteredSuggestions$ = of([]);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    private initTextInputChangesEmitter(): void {
+        this.subscription = this.inputSubject.pipe(
+            debounceTime(300),
+            distinctUntilChanged()
+            )
+            .subscribe((value: string) => {
+                this.valueChanged.emit(value);
+            });
     }
 }
