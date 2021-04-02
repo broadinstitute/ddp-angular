@@ -19,36 +19,30 @@ import {
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
+import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { AppComponent } from './components/app/app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { ParticipantActivitiesComponent } from './components/participant-activities/participant-activities.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
-import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
-import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
-import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
-import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
 
-const baseElt = document.getElementsByTagName('base');
-
-let base = '';
-if (baseElt) {
-  base = baseElt[0].getAttribute('href');
-}
-
 declare const DDP_ENV: any;
-
 declare const ga: (type: string, event: AnalyticsEvent) => void;
+
+let base = document.querySelector('base').getAttribute('href');
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -140,22 +134,22 @@ export const translateFactory = (
     MatIconModule,
   ],
   declarations: [
+    ActivitiesListComponent,
+    ActivityComponent,
+    ActivityPageComponent,
+    ActivityRedirectComponent,
     AppComponent,
     DashboardComponent,
     FooterComponent,
     HeaderComponent,
-    WorkflowProgressComponent,
-    RarexActivityPageComponent,
-    RarexActivityComponent,
-    RarexActivityRedirectComponent,
+    NotificationsComponent,
+    ParticipantsListComponent,
+    RedirectToLoginComponent,
     ShareMyDataComponent,
     TopBarComponent,
-    RedirectToLoginComponent,
+    WorkflowProgressComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
-    ParticipantsListComponent,
-    NotificationsComponent,
-    ParticipantActivitiesComponent,
   ],
   providers: [
     {

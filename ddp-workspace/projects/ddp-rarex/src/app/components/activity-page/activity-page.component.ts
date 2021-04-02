@@ -23,11 +23,11 @@ import { ActivityCodes } from '../../constants/activity-codes';
 import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 
 @Component({
-  selector: 'app-rarex-activity-page',
-  templateUrl: './rarex-activity-page.component.html',
-  styleUrls: ['./rarex-activity-page.component.scss'],
+  selector: 'app-activity-page',
+  templateUrl: './activity-page.component.html',
+  styleUrls: ['./activity-page.component.scss'],
 })
-export class RarexActivityPageComponent implements OnInit, OnDestroy {
+export class ActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
   isReadonly: boolean;

@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import {
-  ActivityComponent,
+  ActivityComponent as SDKActivityComponent,
   SubmitAnnouncementService,
   SubmissionManager,
 } from 'ddp-sdk';
@@ -9,12 +9,12 @@ import {
 import { ActivityCodes } from '../../constants/activity-codes';
 
 @Component({
-  selector: 'app-rarex-activity',
-  templateUrl: './rarex-activity.component.html',
-  styleUrls: ['./rarex-activity.component.scss'],
+  selector: 'app-activity',
+  templateUrl: './activity.component.html',
+  styleUrls: ['./activity.component.scss'],
   providers: [SubmitAnnouncementService, SubmissionManager],
 })
-export class RarexActivityComponent extends ActivityComponent {
+export class ActivityComponent extends SDKActivityComponent {
   @Input() isReadonly = false;
   @Output() sectionChanged = new EventEmitter();
   private consentCodes: string[] = [

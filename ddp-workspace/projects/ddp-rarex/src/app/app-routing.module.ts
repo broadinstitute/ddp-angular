@@ -14,12 +14,12 @@ import {
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
 
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
-import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
-import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
-import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
@@ -30,17 +30,17 @@ import { RoutePaths } from './router-resources';
 const routes: Routes = [
   {
     path: RoutePaths.Activities,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: RoutePaths.Survey,
-    component: RarexActivityPageComponent,
+    component: ActivityPageComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: RoutePaths.Consent,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.CONSENT,
@@ -48,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.Demographics,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.DEMOGRAPHICS,
@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.GeneralMedicalBackgroundSurvey,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.GENERAL_MEDICAL_BACKGROUND_SURVEY,
@@ -64,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.GeneralNeuroDevelopment,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.GENERAL_NEURO_DEVELOPMENT,
@@ -72,7 +72,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.QualityOfLife,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.QUALITY_OF_LIFE,
@@ -80,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.ParentalConsent,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.PARENTAL_CONSENT,
@@ -88,7 +88,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.ConsentAssent,
-    component: RarexActivityRedirectComponent,
+    component: ActivityRedirectComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
     data: {
       activityCode: ActivityCodes.CONSENT_ASSENT,

@@ -84,7 +84,7 @@
             <span>{{model.lastUpdatedText}}</span>
           </div>
 
-          <div *ngIf="isLoaded" class="activity__btn-section">
+          <div *ngIf="model" class="activity__btn-section">
             <div *ngIf="isStepped && !isFirstStep" class="activity__btn-section__left">
               <button
                 class="button button_medium button_primary"

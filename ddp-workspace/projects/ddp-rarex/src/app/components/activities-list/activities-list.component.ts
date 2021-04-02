@@ -6,11 +6,11 @@ import { ActivityCodes } from '../../constants/activity-codes';
 import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 
 @Component({
-  selector: 'app-participant-activities',
-  templateUrl: './participant-activities.component.html',
-  styleUrls: ['./participant-activities.component.scss'],
+  selector: 'app-activities-list',
+  templateUrl: './activities-list.component.html',
+  styleUrls: ['./activities-list.component.scss'],
 })
-export class ParticipantActivitiesComponent {
+export class ActivitiesListComponent {
   @Input() activities: ActivityInstance[];
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();

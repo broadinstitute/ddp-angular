@@ -66,7 +66,7 @@
           *ngIf="isParticipantContentExpanded(participant)"
           class="participant__content"
         >
-          <app-participant-activities
+          <app-activities-list
             [activities]="participant.activities"
             (startActivity)="onStartActivity(participant.userGuid, $event)"
             (continueActivity)="
@@ -74,7 +74,7 @@
             "
             (editActivity)="onEditActivity(participant.userGuid, $event)"
             (viewActivity)="onViewActivity(participant.userGuid, $event)"
-          ></app-participant-activities>
+          ></app-activities-list>
         </div>
       </div>
     </li>

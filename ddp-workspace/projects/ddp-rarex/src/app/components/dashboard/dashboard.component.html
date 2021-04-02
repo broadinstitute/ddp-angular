@@ -11,11 +11,11 @@
     {{ 'Dashboard.Title' | translate }}
   </h1>
 
-  <app-participant-activities
+  <app-activities-list
     [activities]="activities"
     (startActivity)="onStartActivity($event)"
     (continueActivity)="onContinueActivity($event)"
     (editActivity)="onEditActivity($event)"
     (viewActivity)="onViewActivity($event)"
-  ></app-participant-activities>
+  ></app-activities-list>
 </ng-template>
