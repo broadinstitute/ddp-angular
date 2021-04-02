@@ -42,11 +42,8 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     }
 
     onDeleteChildInstance(instanceGuid: string): void {
-        this.replaceInChildInstancesById(instanceGuid, 1);
-    }
-
-    onEditChildInstance(editedInstance: ActivityInstance): void {
-        this.replaceInChildInstancesById(editedInstance.instanceGuid, 1, editedInstance);
+        const index = this.childInstances.findIndex(instance => instance.instanceGuid === instanceGuid);
+        this.childInstances.splice(index, 1);
     }
 
     createChildInstance(): void {
@@ -70,14 +67,5 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-    }
-
-    private replaceInChildInstancesById(instanceGuid: string, amountOfInstancesToRemove: number, replaceWith?: ActivityInstance): void {
-        const index = this.childInstances.findIndex(instance => instance.instanceGuid === instanceGuid);
-        const params: [number, number, ActivityInstance?] = [index, amountOfInstancesToRemove];
-        if (replaceWith) {
-            params.push(replaceWith);
-        }
-        this.childInstances.splice(...params);
     }
 }

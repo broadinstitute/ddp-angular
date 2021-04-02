@@ -47,7 +47,6 @@ export class ModalActivityBlockComponent {
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
     @Output() deletedActivity = new EventEmitter<string>();
-    @Output() editedActivity = new EventEmitter<ActivityInstance>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
     @ViewChild('delete_dialog') private deleteModalRef: TemplateRef<any>;
@@ -99,8 +98,7 @@ export class ModalActivityBlockComponent {
             }),
             take(1)
         ).subscribe((activityInstance: ActivityInstance) => {
-            this.instance = activityInstance;
-            this.editedActivity.emit(activityInstance);
+            this.mutateWithNewPropertiesValues(this.instance, activityInstance);
             this.cdr.detectChanges();
             this.dialog.closeAll();
         });
@@ -171,5 +169,10 @@ export class ModalActivityBlockComponent {
             top: `${box.top - dialogHeight - verticalGap}px`,
             left
         };
+    }
+
+    private mutateWithNewPropertiesValues(target: ActivityInstance, source: ActivityInstance): void {
+        // mutate the target instance (copy all properties from source to target)
+        Object.assign(target, source);
     }
 }
