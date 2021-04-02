@@ -1,3 +1,8 @@
+@keyframes open {
+    0% { opacity: 0; max-height: 1px}
+    100% { opacity: 1; max-height: 50vh}
+}
+
 .family-history {
     --question-prompt-additional-header-font-size: 0.9rem;
     --question-prompt-additional-header-line-height: 1.3rem;
@@ -66,6 +71,18 @@
         &[open] > summary::before {
             display: inline-block;
             transform: rotate(45deg);
+            transition: 1s ease;
+        }
+
+        &[open] > summary ~ p {
+            animation: open 1.2s ease-in-out;
+
+            &:first-of-type {
+                animation-duration: 1.2s;
+            }
+            &:last-of-type {
+                animation-duration: 1.6s;
+            }
         }
 
         > p {
