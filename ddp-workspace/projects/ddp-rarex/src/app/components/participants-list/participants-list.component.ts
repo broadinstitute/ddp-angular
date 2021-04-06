@@ -107,11 +107,14 @@ export class ParticipantsListComponent implements OnInit {
     this.redirectToSurvey();
   }
 
-  onEditActivity(participantGuid: string, activity: ActivityInstance): void {
+  onEditActivity(
+    participantGuid: string,
+    activityToEdit: ActivityInstance,
+  ): void {
     this.setParticipant(participantGuid);
 
     this.activityService
-      .createInstance(this.config.studyGuid, activity.activityCode)
+      .createInstance(this.config.studyGuid, activityToEdit.activityCode)
       .pipe(take(1))
       .subscribe(activity => {
         this.setCurrentActivity(activity as ActivityInstance);
@@ -155,7 +158,7 @@ export class ParticipantsListComponent implements OnInit {
     });
   }
 
-  private setParticipant(participantGuid: string) {
+  private setParticipant(participantGuid: string): void {
     this.sessionService.setParticipant(participantGuid);
   }
 

@@ -48,9 +48,9 @@ export class DashboardComponent implements OnInit {
     this.redirectToActivity();
   }
 
-  onEditActivity(activity: ActivityInstance): void {
+  onEditActivity(activityToEdit: ActivityInstance): void {
     this.activityService
-      .createInstance(this.config.studyGuid, activity.activityCode)
+      .createInstance(this.config.studyGuid, activityToEdit.activityCode)
       .pipe(take(1))
       .subscribe(activity => {
         this.setCurrentActivity(activity as ActivityInstance);

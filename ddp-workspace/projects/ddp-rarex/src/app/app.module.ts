@@ -42,7 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
 declare const DDP_ENV: any;
 declare const ga: (type: string, event: AnalyticsEvent) => void;
 
-let base = document.querySelector('base').getAttribute('href');
+const base = document.querySelector('base').getAttribute('href');
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
