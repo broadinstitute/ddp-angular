@@ -24,6 +24,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
     isModal: boolean;
     childInstances: ActivityInstance[];
+    createdInstanceGuidToOpen: string;
     private ngUnsubscribe = new Subject();
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
@@ -60,6 +61,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
             )
             .subscribe((instance: ActivityInstance) => {
                 this.childInstances.push(instance);
+                this.createdInstanceGuidToOpen = instance.instanceGuid;
                 this.cdr.detectChanges();
             });
     }

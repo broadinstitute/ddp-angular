@@ -9,6 +9,7 @@
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
                                           [parentActivityInstanceGuid]="parentActivityInstanceGuid"
+                                          [needsOpeningEditDialog]="createdInstanceGuidToOpen === instance.instanceGuid"
                                           (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-modal-activity-block>
             </ng-container>
