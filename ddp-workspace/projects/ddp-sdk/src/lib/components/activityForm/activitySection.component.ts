@@ -38,7 +38,8 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
-                                           [activityGuid]="activityGuid">
+                                           [activityGuid]="activityGuid"
+                                           (visibilityChanged)="updateVisibility($event)">
                     </ddp-conditional-block>
                 </div>
                 <div *ngIf="isQuestion(block)">

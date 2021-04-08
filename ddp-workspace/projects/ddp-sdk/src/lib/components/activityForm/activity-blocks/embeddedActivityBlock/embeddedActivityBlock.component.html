@@ -1,9 +1,9 @@
-<ng-container *ngIf="!activity; else sections">
+<ng-container *ngIf="!sections.length; else sectionsTemplate">
   <mat-spinner></mat-spinner>
 </ng-container>
 
-<ng-template #sections>
-  <ddp-activity-section *ngFor="let section of activity.sections; trackBy: getSectionId"
+<ng-template #sectionsTemplate>
+  <ddp-activity-section *ngFor="let section of sections; trackBy: getSectionId"
                         [section]="section"
                         [studyGuid]="studyGuid"
                         [activityGuid]="instance.instanceGuid"

@@ -31,6 +31,7 @@ export class ConditionalBlockComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
+    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     private anchor: CompositeDisposable;
 
     constructor(private submissionManager: SubmissionManager) { }
@@ -58,5 +59,7 @@ export class ConditionalBlockComponent implements OnInit, OnDestroy {
                 matchingBlock.shown = shownBlockStatus.shown;
             }
         });
+
+        this.visibilityChanged.emit(visibility);
     }
 }
