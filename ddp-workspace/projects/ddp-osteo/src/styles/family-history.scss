@@ -1,3 +1,8 @@
+@keyframes open {
+    0% { opacity: 0; max-height: 1px}
+    100% { opacity: 1; max-height: 50vh}
+}
+
 .family-history {
     --question-prompt-additional-header-font-size: 0.9rem;
     --question-prompt-additional-header-line-height: 1.3rem;
@@ -39,21 +44,51 @@
     .PageContent-text + details {
         font-weight: 600;
         margin-top: 42px;
-        padding: 18px 0 18px 10px;
+        padding: 4px 0 18px 30px;
         border-width: 1px 0;
         border-style: solid;
         border-color: #D2D2D2;
 
-        summary {
+        > summary {
+            list-style-type: none;
             outline: none;
             cursor: pointer;
+            margin-left: -16px;
+        }
+
+        > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        > summary::before {
+            content: '+';
+            font-size: 30px;
+            position: relative;
+            top: 4px;
+            left: -10px;
+        }
+
+        &[open] > summary::before {
+            display: inline-block;
+            transform: rotate(45deg);
+            transition: 1s ease;
+        }
+
+        &[open] > summary ~ p {
+            animation: open 1.2s ease-in-out;
+
+            &:first-of-type {
+                animation-duration: 1.2s;
+            }
+            &:last-of-type {
+                animation-duration: 1.6s;
+            }
         }
 
         > p {
             font-size: 1rem;
             line-height: 1.5rem;
             font-weight: 400;
-            margin-left: 16px;
 
             &:last-child {
                 margin-bottom: 0;

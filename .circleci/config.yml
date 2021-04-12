@@ -39,7 +39,8 @@ commands:
           study_key: << parameters.study_key >>
       - run-linter-check
       - run-tests
-      - build-app
+      - build-app:
+          study_key: << parameters.study_key >>
       - store-app-build
 
   app-build-and-deploy:
@@ -60,7 +61,8 @@ commands:
             - set-deployment-environment
             - run-linter-check
             - run-tests
-            - build-app
+            - build-app:
+                study_key: << parameters.study_key >>
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
 
@@ -312,22 +314,31 @@ commands:
 
   execute-study-specific-commands:
     description: run study specific commands if necessary
+    parameters:
+      study_key:
+        type: string
+        default: "UNKNOWN"
     steps:
       - when:
           condition:
-            equal: [ atcp, << pipeline.parameters.study_key >> ]
+            equal: [ atcp, << parameters.study_key >> ]
           steps:
             - build-atcp-assets
 
   build-app:
     description: "Build DDP study app"
+    parameters:
+      study_key:
+        type: string
+        default: "UNKNOWN"
     steps:
       - when:
           condition:
             or:
-              - equal: [ atcp, << pipeline.parameters.study_key >> ]
+              - equal: [ atcp, << parameters.study_key >> ]
           steps:
-            - execute-study-specific-commands
+            - execute-study-specific-commands:
+                study_key: << parameters.study_key >>
       - run:
           name: ng build
           command: |
