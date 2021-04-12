@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, pluck, take } from 'rxjs/operators';
 
 import {
@@ -37,41 +37,44 @@ export class GovernedUserService {
     return this.isGoverned$.getValue();
   }
 
-  checkIfGoverned(): void {
-    if (!this.sessionService.isAuthenticatedSession()) {
-      return;
-    }
-
-    this.prequalService
-      .getPrequalifier(this.config.studyGuid)
-      .pipe(
-        take(1),
-        mergeMap(instanceGuid =>
-          this.activityService.getActivity(
-            of(this.config.studyGuid),
-            of(instanceGuid),
-          ),
+  checkIfGoverned(): Observable<boolean> {
+    return this.sessionService.sessionObservable.pipe(
+      filter(
+        session => !!session && this.sessionService.isAuthenticatedSession(),
+      ),
+      take(1),
+      mergeMap(() =>
+        this.prequalService.getPrequalifier(this.config.studyGuid),
+      ),
+      take(1),
+      mergeMap(instanceGuid =>
+        this.activityService.getActivity(
+          of(this.config.studyGuid),
+          of(instanceGuid),
         ),
-        pluck('sections'),
-        map(sections => sections[0]),
-        pluck('blocks'),
-        map(blocks =>
-          blocks.find(
-            block =>
-              (block as ActivityPicklistQuestionBlock).stableId ===
-              this.SELF_DESCRIBE_STABLE_ID,
-          ),
+      ),
+      pluck('sections'),
+      map(sections => sections[0]),
+      pluck('blocks'),
+      map(blocks =>
+        blocks.find(
+          block =>
+            (block as ActivityPicklistQuestionBlock).stableId ===
+            this.SELF_DESCRIBE_STABLE_ID,
         ),
-        pluck('answer'),
-        map(answer => answer[0]),
-        map(answer => answer.stableId),
-        map<string, boolean>(answerStableId =>
-          this.GOVERNED_USER_ANSWERS_STABLE_IDS.includes(answerStableId),
-        ),
-      )
-      .subscribe((isGoverned: boolean) => {
+      ),
+      pluck('answer'),
+      map(answer => answer[0]),
+      pluck('stableId'),
+      map(answerStableId =>
+        this.GOVERNED_USER_ANSWERS_STABLE_IDS.includes(answerStableId),
+      ),
+      map((isGoverned: boolean) => {
         this.isGoverned$.next(isGoverned);
-      });
+
+        return isGoverned;
+      }),
+    ) as Observable<boolean>;
   }
 
   redirectToDashboard(): void {

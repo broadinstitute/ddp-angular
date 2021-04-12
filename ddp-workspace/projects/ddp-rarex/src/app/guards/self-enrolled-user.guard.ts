@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 import { RoutePaths } from '../router-resources';
 import { GovernedUserService } from '../services/governed-user.service';
@@ -17,7 +17,13 @@ export class SelfEnrolledUserGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.governedUserService.isGoverned$.pipe(
-      filter(isGoverned => isGoverned !== null),
+      mergeMap(isGoverned => {
+        if (isGoverned === null) {
+          return this.governedUserService.checkIfGoverned();
+        }
+
+        return of(isGoverned);
+      }),
       map(isGoverned => {
         if (isGoverned) {
           this.router.navigateByUrl(RoutePaths.ParticipantsList);

@@ -1,23 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 import { SessionMementoService } from 'ddp-sdk';
-
-import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(
-    private sessionService: SessionMementoService,
-    private governedUserService: GovernedUserService,
-  ) {}
-
-  public ngOnInit(): void {
-    this.governedUserService.checkIfGoverned();
-  }
+export class AppComponent {
+  constructor(private sessionService: SessionMementoService) {}
 
   @HostListener('window:beforeunload')
   private beforeUnload(): void {
