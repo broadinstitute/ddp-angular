@@ -80,7 +80,13 @@ export class GovernedUserService {
   redirectToDashboard(): void {
     this.isGoverned$
       .pipe(
-        filter(isGoverned => isGoverned !== null),
+        mergeMap(isGoverned => {
+          if (isGoverned === null) {
+            return this.checkIfGoverned();
+          }
+
+          return of(isGoverned);
+        }),
         map(isGoverned =>
           isGoverned ? RoutePaths.ParticipantsList : RoutePaths.Dashboard,
         ),
