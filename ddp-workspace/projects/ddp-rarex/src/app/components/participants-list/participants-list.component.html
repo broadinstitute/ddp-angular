@@ -35,7 +35,11 @@
       "
     >
       <div class="participant">
-        <div class="participant__header">
+        <div
+          class="participant__header"
+          role="button"
+          (click)="onExpandClick(participant)"
+        >
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
@@ -55,7 +59,6 @@
               [class.participant__expand-btn--rotate]="
                 isParticipantContentExpanded(participant)
               "
-              (click)="onExpandClick(participant)"
             >
               <mat-icon>expand_more</mat-icon>
             </button>
