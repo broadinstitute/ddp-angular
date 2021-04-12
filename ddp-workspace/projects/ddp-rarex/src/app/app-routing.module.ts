@@ -9,7 +9,6 @@ import {
 } from 'ddp-sdk';
 
 import {
-  LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
 } from 'toolkit';
@@ -17,9 +16,11 @@ import {
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { GovernedUserGuard } from './guards/governed-user.guard';
@@ -54,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: RoutePaths.LoginLanding,
-    component: LoginLandingRedesignedComponent,
+    component: LoginLandingComponent,
     canActivate: [IrbGuard],
   },
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
   {
     path: RoutePaths.Password,
     component: PasswordRedesignedComponent,
+  },
+  {
+    path: RoutePaths.Error,
+    component: ErrorComponent,
+    canActivate: [IrbGuard],
   },
   {
     path: RoutePaths.PrivacyPolicy,

@@ -27,12 +27,14 @@ import { AppComponent } from './components/app/app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
@@ -128,12 +130,14 @@ export const translateFactory = (
     DashboardComponent,
     FooterComponent,
     HeaderComponent,
+    LoginLandingComponent,
     NotificationsComponent,
     ParticipantsListComponent,
     RedirectToLoginComponent,
     ShareMyDataComponent,
     TopBarComponent,
     WorkflowProgressComponent,
+    ErrorComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
   ],

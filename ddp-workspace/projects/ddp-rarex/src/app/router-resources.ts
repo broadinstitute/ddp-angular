@@ -8,6 +8,7 @@ export enum RoutePaths {
   ParticipantsList = 'participants',
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
+  Error = 'error',
   TermsAndConditions = 'terms-and-conditions',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',
