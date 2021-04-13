@@ -45,7 +45,7 @@ export class ModalActivityBlockComponent {
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
-    @Input() set needsOpeningEditDialog(open: boolean) {
+    @Input() set openDialog(open: boolean) {
         if (open) {
             this.openEditDialog();
         }
@@ -90,7 +90,7 @@ export class ModalActivityBlockComponent {
             take(1)
         ).subscribe((activity: ActivityForm) => {
             this.activityForm = activity;
-            this.openDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
+            this.openModalDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
         });
     }
 
@@ -110,7 +110,7 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
+        this.openModalDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
     }
 
     private closeDeleteDialog(): void {
@@ -125,7 +125,7 @@ export class ModalActivityBlockComponent {
         return this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid);
     }
 
-    private openDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
+    private openModalDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
         const dialogRef = this.dialog.open(templateRef, config);
 
         if (closeDialogCallback) {

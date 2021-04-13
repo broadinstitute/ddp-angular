@@ -8,7 +8,7 @@
                                           [readonly]="readonly"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
-                                          [needsOpeningEditDialog]="createdInstanceGuidToOpen === instance.instanceGuid"
+                                          [openDialog]="createdInstanceGuidToOpen === instance.instanceGuid"
                                           (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-modal-activity-block>
             </ng-container>
