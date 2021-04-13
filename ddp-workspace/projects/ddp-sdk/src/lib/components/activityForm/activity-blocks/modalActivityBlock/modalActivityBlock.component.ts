@@ -65,7 +65,7 @@ export class ModalActivityBlockComponent {
     public deleteActivityInstance(): void {
         this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
             catchError(err => {
-                this.logger.logError(this.LOG_SOURCE, 'An error during getting an activityInstance deleting', err);
+                this.logger.logError(this.LOG_SOURCE, 'An error during deleting an activityInstance', err);
                 return EMPTY;
             }),
             take(1)
