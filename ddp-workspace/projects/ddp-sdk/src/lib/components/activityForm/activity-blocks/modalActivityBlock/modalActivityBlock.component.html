@@ -11,9 +11,18 @@
 
             <div *ngIf="instance.statusCode !== 'CREATED'"
                  class="modal-activity-block__success-message">
-                <mat-icon inline>check_circle</mat-icon>
-                <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
-          | translate: { number: instance.numQuestionsAnswered }"></span>
+                <mat-icon *ngIf="instance.numQuestionsAnswered === instance.numQuestions" inline>check_circle</mat-icon>
+                <span *ngIf="instance.numQuestionsAnswered !== instance.numQuestions; else completeBlock"
+                      class="modal-activity-block__label"
+                      [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'| translate: {
+                      number: instance.numQuestionsAnswered
+                      }">
+                </span>
+                <ng-template #completeBlock>
+                    <span class="modal-activity-block__label"
+                          [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
+                    </span>
+                </ng-template>
             </div>
         </div>
 

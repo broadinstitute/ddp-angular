@@ -740,6 +740,7 @@
         },
         "ModalActivityBlock": {
             "NumQuestionsAnswered": "{{number}} questions answered",
+            "Complete": "Complete",
             "EditButton": "Edit",
             "DeleteButton": "Delete",
             "SaveButton": "Save",
