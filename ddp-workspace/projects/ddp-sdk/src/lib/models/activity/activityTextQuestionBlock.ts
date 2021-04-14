@@ -11,6 +11,7 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
     public confirmEntry: boolean;
     public confirmPrompt: string | null = null;
     public mismatchMessage: string | null = null;
+    protected _confirmationAnswer: string | null = null;
 
     constructor() {
       super();
@@ -18,5 +19,21 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
 
     public get questionType(): QuestionType {
       return QuestionType.Text;
+    }
+
+    public get confirmationAnswer(): string | null {
+      return this._confirmationAnswer;
+    }
+
+    public set confirmationAnswer(value: string | null) {
+      this._confirmationAnswer = value;
+    }
+
+    public setConfirmationAnswer(value: string | null, doValidation = true): void {
+      this._confirmationAnswer = value;
+
+      if (doValidation) {
+        this.validate();
+      }
     }
 }

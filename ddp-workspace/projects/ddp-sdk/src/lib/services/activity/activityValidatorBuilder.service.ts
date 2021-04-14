@@ -8,6 +8,7 @@ import { ActivityRequiredValidationRule } from './validators/activityRequiredVal
 import { ActivityCompleteValidationRule } from './validators/activityCompleteValidationRule';
 import { ActivityLengthValidationRule } from './validators/activityLengthValidationRule';
 import { ActivityRegexValidationRule } from './validators/activityRegexValidationRule';
+import { ActivityMatchValidationRule } from './validators/activityMatchValidationRule';
 import { ActivityOptionsAmountValidationRule } from './validators/activityOptionsAmountValidationRule';
 import { ActivityDateNavyValidationRule } from './validators/dateValidators/activityDateNavyValidationRule';
 import { ActivityYearRequiredDateValidationRule } from './validators/dateValidators/activityYearRequiredDateValidationRule';
@@ -15,6 +16,7 @@ import { ActivityMonthRequiredDateValidationRule } from './validators/dateValida
 import { ActivityDayRequiredDateValidationRule } from './validators/dateValidators/activityDayRequiredDateValidationRule';
 import { ActivityDateRangeValidationRule } from './validators/dateValidators/activityDateRangeValidationRule';
 import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlock';
+import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
 import { ValidationRuleFactoryMapping } from '../../models/activity/validationRuleFactoryMapping';
 import { QuestionType } from '../../models/activity/questionType';
 import * as _ from 'underscore';
@@ -61,6 +63,9 @@ export class ActivityValidatorBuilder {
         }
         if (questionBlock.questionType === QuestionType.Date) {
             rules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
+        }
+        if (questionBlock instanceof ActivityTextQuestionBlock && questionBlock.confirmEntry) {
+            rules.push(new ActivityMatchValidationRule(questionBlock));
         }
         return rules;
     }
