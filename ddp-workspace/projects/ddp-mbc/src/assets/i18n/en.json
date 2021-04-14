@@ -322,6 +322,11 @@
                 "SignOut": "Sign Out",
                 "Continue": "Continue",
                 "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            },
+            "LanguagePreferences": {
+                "Text": "Changing the language preference will also change the language used for e-mail communications.",
+                "CheckboxText": "Don't show this again",
+                "ButtonText": "OK"
             }
         },
         "Warning": {

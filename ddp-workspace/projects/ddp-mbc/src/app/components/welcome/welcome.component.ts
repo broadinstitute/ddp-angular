@@ -4,7 +4,7 @@ import { AnalyticsEventsService, BrowserContentService, AnalyticsEventCategories
 @Component({
     selector: 'app-welcome',
     template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
+    <toolkit-header [showButtons]="true" [showLanguageSelector]="true"></toolkit-header>
     <div class="Wrapper">
         <a id="topView"></a>
         <div class="Intro-image">
