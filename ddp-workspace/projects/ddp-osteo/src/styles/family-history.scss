@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 @keyframes open {
     0% { opacity: 0; max-height: 1px}
     100% { opacity: 1; max-height: 50vh}
@@ -204,6 +206,15 @@
 
         .mat-input-element {
           font-size: 1.1rem;
+          // need these styles in order to align input and select
+          height: $nativeSelectHeight;
+          //copied from material styles for select.mat-input-element
+          margin-top: 0;
+          position: relative;
+          box-sizing: border-box;
+          padding-top: 1em;
+          top: -1em;
+          margin-bottom: -1em;
         }
     }
 
