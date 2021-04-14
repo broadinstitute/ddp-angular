@@ -102,10 +102,6 @@
 
 ::ng-deep {
     & .modal-activity-block__edit-dialog {
-        ddp-activity-composite-answer .ddp-answer-container {
-            align-items: baseline;
-        }
-
         & > mat-dialog-container {
             padding: 0;
 
