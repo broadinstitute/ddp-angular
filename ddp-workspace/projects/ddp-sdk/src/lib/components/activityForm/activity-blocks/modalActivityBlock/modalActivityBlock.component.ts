@@ -45,12 +45,6 @@ export class ModalActivityBlockComponent {
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
-    @Input() set openDialog(open: boolean) {
-        if (open) {
-            this.openEditDialog();
-        }
-    }
-
     @Output() deletedActivity = new EventEmitter<string>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;

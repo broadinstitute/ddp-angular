@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    QueryList,
+    ViewChildren
+} from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { catchError, concatMap, takeUntil } from 'rxjs/operators';
 
@@ -8,6 +19,7 @@ import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityInstanceGuid } from '../../../../models/activityInstanceGuid';
 import { LoggingService } from '../../../../services/logging.service';
+import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivityBlock.component';
 
 @Component({
     selector: 'ddp-activity-block',
@@ -22,9 +34,9 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
+    @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
-    createdInstanceGuidToOpen: string;
     private ngUnsubscribe = new Subject();
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
@@ -61,13 +73,18 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
             )
             .subscribe((instance: ActivityInstance) => {
                 this.childInstances.push(instance);
-                this.createdInstanceGuidToOpen = instance.instanceGuid;
                 this.cdr.detectChanges();
+                this.openCreatedInstanceDialog(instance.instanceGuid);
             });
     }
 
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private openCreatedInstanceDialog(instanceGuid: string): void {
+        this.modalActivities.find(activity => activity.instance.instanceGuid === instanceGuid)
+            .openEditDialog();
     }
 }
