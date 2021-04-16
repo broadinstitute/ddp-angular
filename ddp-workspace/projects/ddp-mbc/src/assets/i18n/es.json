@@ -1,11 +1,11 @@
 {
     "App": {
-        "Home": "[es]Home",
-        "Data": "[es]Data Release",
-        "FAQ": "[es]More Details/FAQ",
-        "About": "[es]About Us",
-        "Join": "[es]Join Mailing List",
-        "NewsBlog": "[es]News/Blog",
+        "Home": "Página Principal",
+        "Data": "Datos",
+        "FAQ": "Más Detalles/Preguntas Más Frecuentes",
+        "About": "Sobre Nosotros",
+        "Join": "Lista de Correo",
+        "NewsBlog": "Noticias/Blog",
         "Twitter": "[es]Tweets by MBCProject"
     },
     "Partners": {
@@ -47,79 +47,77 @@
     },
     "Toolkit": {
         "Common": {
-            "Organization": "[es]Count Me In"
+            "Organization": "Cuenten Conmigo"
         },
         "Header": {
-            "HeaderLogo": "[es]Metastatic<br>Breast Cancer<br>Project",
-            "DataRelease": "[es]Data Release",
-            "LearnMore": "[es]Learn More",
-            "CountMeIn": "[es]count me <span class=\"icon-silhouette\"></span>n"
+            "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
+            "DataRelease": "Datos",
+            "LearnMore": "Aprenda Más",
+            "CountMeIn": "cuenten conmigo"
         },
         "Footer": {
-            "FooterLogo": "[es]Metastatic<br>Breast Cancer<br>Project",
-            "Home": "[es]Home",
-            "Data": "[es]Data Release",
-            "FAQ": "[es]More Details/FAQ",
-            "About": "[es]About Us",
-            "Join": "[es]Join Mailing List",
-            "NewsBlog": "[es]News/Blog",
-            "Top": "[es]▴ Back to top",
+            "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",
+            "Home": "Página Principal",
+            "Data": "Datos",
+            "FAQ": "Más Detalles/Preguntas Más Frecuentes",
+            "About": "Sobre Nosotros",
+            "Join": "Lista de Correo",
+            "NewsBlog": "Noticias/Blog",
+            "Top": "▴ Volver Arriba",
             "Contacts": {
-                "ContactUs": "[es]Contact Us:",
-                "Address": "[es]415 Main St, Cambridge, MA",
-                "Zip": "[es]02142, United States"
+                "ContactUs": "Contáctenos:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
             }
         },
         "Welcome": {
-            "WelcomeTitle": "[es]Help transform our understanding of metastatic breast cancer.",
-            "WelcomeText": "[es]If you have metastatic breast cancer, join a nationwide movement of patients, doctors, and scientists by sharing your tumor and/or blood samples, your medical information, and your voice. Together, we can speed the development of future therapies.",
-            "SmallTitle": "[es]If you have metastatic breast cancer, you have the power to accelerate cancer research in a way that no one else can.",
+            "WelcomeTitle": "Ayude a transformar nuestro conocimiento acerca del cáncer de mama metastásico.",
+            "WelcomeText": "Si usted tiene cáncer de mama metastásico, únase a un movimiento nacional de pacientes, médicos, y científicos al compartir sus muestras de tumor y/o sangre, su información médica y su voz. Juntos podemos acelerar el desarrollo de nuevas terapias.",
+            "SmallTitle": "Si padece de cáncer de mama metastásico, tiene el poder de acelerar la investigación sobre el cáncer de una forma única.",
             "FirstBlock": {
-                "Title": "[es]Your tumor and medical records could unlock discoveries.",
-                "Text": "[es]The unique genetic information in your cancer could hold the key to rapid advances in cancer treatment. By looking at the DNA in your samples, researchers can make discoveries that will ultimately lead to a better understanding and faster advances in the treatment of metastatic breast cancer. This information will be invaluable to cancer research for years to come."
+                "Title": "Su tumor y sus registros médicos pueden abrir la puerta a nuevos descubrimientos.",
+                "Text": "La información genética en su cáncer es única y puede contener la clave para acelerar descubrimientos en el tratamiento del cáncer. Estudiando el ADN (material genético) en sus muestras, investigadores pueden hacer descubrimientos que nos llevarán a un mejor conocimiento y a avances más rápidos en el tratamiento de cáncer de mama metastásico. Esta información será invaluable en la investigación del cáncer ahora y en el futuro."
             },
             "SecondBlock": {
-                "TitlePt1": "[es]Become part of the research movement.",
-                "TitlePt2": "[es]Have a direct impact on the future.",
-                "Text": "[es]By saying \"Count Me In\" you will partner with leading research institutes, hospitals, and patient advocacy groups by sharing part of your stored tumor tissue and copies of your medical records."
+                "TitlePt1": "Únase al movimiento.",
+                "TitlePt2": "Tenga un impacto directo en el futuro.",
+                "Text": "Al decir “Cuenten Conmigo” y compartir parte de las muestras de su tumor almacenados en hospitales donde ha sido tratada/o y copias de sus registros médicos, participará junto con institutos de investigación, hospitales y grupos aliados de pacientes."
             },
             "ThirdBlock": {
-                "Title": "[es]Here’s how you can participate",
+                "Title": "Cómo usted puede participar",
                 "FirstStep": {
-                    "Title": "[es]Step 1",
-                    "Subtitle": "[es]Tell us about yourself",
-                    "TextPt1": "[es]Click",
-                    "Link": "[es]\"Count Me In\"",
-                    "TextPt2": "[es]and complete a simple online form to tell us about yourself and your cancer."
+                    "Title": "Paso 1",
+                    "Subtitle": "Cuéntenos sobre usted",
+                    "TextPt1": "Haga clic en",
+                    "Link": "\"Cuenten Conmigo\"",
+                    "TextPt2": "y complete un cuestionario donde nos contará sobre usted y su cáncer."
                 },
                 "SecondStep": {
-                    "Title": "[es]Step 2",
-                    "Subtitle": "[es]Give us permission to collect your samples and data",
-                    "Text": "[es]After you fill out the online survey, we will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and some of your stored tumor tissue. We’ll also send you a simple kit to collect a saliva sample. We will send you a separate online consent form that requests your permission to obtain and analyze a sample of your blood. <em>We will do the rest</em> — we’ll contact your doctors and hospitals to obtain copies of your medical records and a portion of your stored tumor samples."
+                    "Title": "Paso 2",
+                    "Subtitle": "Autorícenos a obtener sus muestras y datos clínicos",
+                    "Text": "Se le presentará una forma de consentimiento en línea donde nos puede otorgar permiso para que el proyecto recolecte su muestra de saliva y registros médicos. También puede optar a compartir una muestra de sangre y/o compartir acceso a una cantidad mínima necesaria de muestras de su tumor almacenados. Le enviaremos un kit de saliva y/o un kit para obtener una muestra de sangre. Nosotros nos encargaremos de comunicarnos con sus médicos y hospitales para obtener copias de sus registros médicos y una parte de sus muestras de su tumor almacenados. Tomaremos todas las medidas necesarias para mantener su privacidad."
                 },
                 "ThirdStep": {
-                    "Title": "[es]Step 3",
-                    "Subtitle": "[es]Learn with us along the way",
-                    "Text": "[es]We are excited to learn with you! Throughout the project, we will provide you with regular updates about the status of the project and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+                    "Title": "Paso 3",
+                    "Subtitle": "Aprenda junto con nosotros",
+                    "Text": "¡Estamos entusiasmados de aprender junto con usted! Durante el proyecto, compartiremos regularmente los avances del estudio que usted nos haya ayudado a lograr. Puede que también le hagamos preguntas adicionales sobre su experiencia para ayudarnos a crear estudios en el futuro - queremos saber qué es importante para usted."
                 }
             },
             "FourthBlock": {
-                "TitlePt1": "[es]The time to",
-                "TitlePt2": "[es]act",
-                "TitlePt3": "[es]is now",
-                "Text": "[es]We are asking you to say \"Count Me In\" and donate something invaluable to cancer research. Your tissue samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of metastatic breast cancer."
+                "Title": "<span class=\"Color--blue\">Ahora</span> es el momento de actuar",
+                "Text": "Le estamos pidiendo que diga \"Cuenten Conmigo\" y done algo invaluable para la investigación del cáncer. Sus muestras de tumor e información médica serán usadas para estudios genómicos que resultará en una mejor comprensión y en avances más rápidos en el tratamiento del cáncer de mama metastásico."
             },
             "FifthBlock": {
-                "Title": "[es]Our Advocacy Partners",
+                "Title": "Nuestros Aliados",
                 "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
                 "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
             },
             "SixthBlock": {
-                "TitlePt1": "[es]Please join us and say",
-                "TitlePt2": "[es]\"Count Me In\"",
-                "Text": "[es]With your help, patients can be the driving force behind cancer research."
+                "TitlePt1": "Por favor acompáñenos y diga",
+                "TitlePt2": "\"Cuenten Conmigo\"",
+                "Text": "Con su ayuda, los pacientes pueden ser la fuerza detrás de la investigación de cáncer."
             },
-            "CountMeInButton": "[es]count me in"
+            "CountMeInButton": "cuenten conmigo"
         },
         "AboutUs": {
             "PageHeader": {
@@ -527,7 +525,7 @@
             "Logout": "[es]LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "[es]Sign In",
+            "SignIn": "Iniciar Sesión",
             "SignOut": "[es]Sign Out"
         },
         "LanguageSelector": {
