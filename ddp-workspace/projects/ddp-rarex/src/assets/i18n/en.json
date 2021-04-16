@@ -428,7 +428,7 @@
         "AsEntered": "As Entered:"
       },
       "Error": {
-        "InvalidAddress": "Invalid address.",
+        "InvalidAddress": "Please check the address information you provided.",
         "CannotVerify": "Could not verify address, please double-check your address.",
         "UnknownVerifyError": "An unknown error occurred while verifying address.",
         "FieldIsRequired": "{{field}} is required",
