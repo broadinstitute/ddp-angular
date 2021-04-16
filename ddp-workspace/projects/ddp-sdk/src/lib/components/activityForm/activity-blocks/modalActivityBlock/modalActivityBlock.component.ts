@@ -62,6 +62,10 @@ export class ModalActivityBlockComponent {
                 private logger: LoggingService) {
     }
 
+    get isAllQuestionsCompleted(): boolean {
+      return this.instance.numQuestionsAnswered === this.instance.numQuestions;
+    }
+
     public deleteActivityInstance(): void {
         this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
             catchError(err => {
