@@ -147,9 +147,7 @@ import { AnalyticsEventsService, BrowserContentService, AnalyticsEventCategories
         <div class="row">
             <section class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                 <h1 class="Message-title">
-                    <span translate>Toolkit.Welcome.FourthBlock.TitlePt1</span>
-                    <span class="Color--blue Semibold" translate>Toolkit.Welcome.FourthBlock.TitlePt2</span>
-                    <span translate>Toolkit.Welcome.FourthBlock.TitlePt3</span>
+                    <span [innerHTML]="'Toolkit.Welcome.FourthBlock.Title' | translate"></span>
                 </h1>
                 <p class="Message-text" translate>
                     Toolkit.Welcome.FourthBlock.Text

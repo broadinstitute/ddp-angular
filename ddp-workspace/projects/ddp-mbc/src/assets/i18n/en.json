@@ -104,9 +104,7 @@
                 }
             },
             "FourthBlock": {
-                "TitlePt1": "The time to",
-                "TitlePt2": "act",
-                "TitlePt3": "is now",
+                "Title": "The time to <span class=\"Color--blue\">act</span> is now",
                 "Text": "We are asking you to say \"Count Me In\" and donate something invaluable to cancer research. Your tissue samples and medical information will be used for transformative genomic studies that will ultimately lead to a better understanding and faster advances in the treatment of metastatic breast cancer."
             },
             "FifthBlock": {
