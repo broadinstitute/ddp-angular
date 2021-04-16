@@ -9,11 +9,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <mat-form-field [floatLabel]="block.picklistLabel && block.selectMode === SELECT_MODE.SINGLE ? 'auto' : null">
-      <mat-label *ngIf="block.picklistLabel && block.selectMode === SELECT_MODE.SINGLE">
-        {{block.picklistLabel}}
-      </mat-label>
-
+    <mat-form-field>
       <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
       </ng-container>
 
@@ -39,6 +35,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                   [disabled]="readonly"
                   (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
                   class="width">
+              <option value="">{{block.picklistLabel}}</option>
               <option *ngFor="let option of block.picklistOptions"
                       [value]="option.stableId">
                   {{option.optionLabel}}
