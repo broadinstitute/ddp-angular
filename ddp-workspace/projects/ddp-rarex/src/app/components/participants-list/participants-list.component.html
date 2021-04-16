@@ -48,7 +48,7 @@
             <button
               mat-icon-button
               class="participant__delete-btn"
-              (click)="onDeleteClick(participant)"
+              (click)="$event.stopPropagation(); onDeleteClick(participant)"
             >
               <mat-icon>delete</mat-icon>
             </button>

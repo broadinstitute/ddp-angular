@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
@@ -21,6 +22,7 @@ import {
 import { RoutePaths } from '../../router-resources';
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { GovernedUserService } from '../../services/governed-user.service';
+import { ParticipantDeletionDialogComponent } from '../participant-deletion-dialog/participant-deletion-dialog.component';
 
 interface GovernedParticipant extends Participant {
   activities: ActivityInstance[];
@@ -40,6 +42,7 @@ export class ParticipantsListComponent implements OnInit {
   constructor(
     private router: Router,
     private translateService: TranslateService,
+    private dialog: MatDialog,
     private announcementsService: AnnouncementsServiceAgent,
     private governedParticipantsService: GovernedParticipantsServiceAgent,
     private sessionService: SessionMementoService,
@@ -76,19 +79,27 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   onDeleteClick({ userGuid }: GovernedParticipant): void {
-    this.loading = true;
+    const dialogRef = this.dialog.open(ParticipantDeletionDialogComponent, {
+      maxWidth: '640px',
+    });
 
-    this.deleteParticipant(userGuid)
+    dialogRef
+      .afterClosed()
       .pipe(
-        tap(
-          () =>
-            (this.participants = this.participants.filter(
-              participant => participant.userGuid !== userGuid,
-            )),
-        ),
+        filter((shallDelete: boolean) => shallDelete),
+        tap(() => {
+          this.loading = true;
+        }),
+        mergeMap(() => this.deleteParticipant(userGuid)),
+        tap(() => {
+          this.participants = this.participants.filter(
+            participant => participant.userGuid !== userGuid,
+          );
+        }),
       )
       .subscribe(() => {
         this.loading = false;
+        this.expandedMap[userGuid] = null;
       });
   }
 

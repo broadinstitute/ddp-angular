@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -29,6 +30,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginLandingComponent } from './components/login-landing/login-landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
@@ -120,6 +122,7 @@ export const translateFactory = (
     MatProgressSpinnerModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
   ],
   declarations: [
     ActivitiesListComponent,
@@ -132,6 +135,7 @@ export const translateFactory = (
     HeaderComponent,
     LoginLandingComponent,
     NotificationsComponent,
+    ParticipantDeletionDialogComponent,
     ParticipantsListComponent,
     RedirectToLoginComponent,
     ShareMyDataComponent,

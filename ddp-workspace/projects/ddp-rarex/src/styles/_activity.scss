@@ -348,3 +348,11 @@ p.question-sub {
 .content-list {
   padding-left: 1em;
 }
+
+.address-input-container {
+  mat-form-field {
+    &:not(:last-of-type) {
+      margin-bottom: 12px;
+    }
+  }
+}
