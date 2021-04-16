@@ -50,16 +50,17 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     }
 
     public deleteInstance(): void {
+        this.componentBusy.emit(true);
         this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during deleting an activityInstance', err);
                 return EMPTY;
             }),
-            take(1)
-            )
-            .subscribe(() => {
-                this.deletedActivity.emit(this.instance.instanceGuid);
-            });
+            take(1),
+            finalize(() => this.componentBusy.emit(false))
+        ).subscribe(() => {
+            this.deletedActivity.emit(this.instance.instanceGuid);
+        });
     }
 
     private getActivity(): void {

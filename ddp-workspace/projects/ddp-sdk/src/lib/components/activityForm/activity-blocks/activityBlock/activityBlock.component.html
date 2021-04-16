@@ -10,6 +10,7 @@
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
                                           [parentActivityInstanceGuid]="parentActivityInstanceGuid"
+                                          (componentBusy)="embeddedComponentBusy.emit($event)"
                                           (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-modal-activity-block>
             </ng-container>

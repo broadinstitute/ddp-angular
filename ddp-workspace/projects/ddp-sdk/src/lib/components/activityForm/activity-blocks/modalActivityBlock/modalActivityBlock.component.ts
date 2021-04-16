@@ -13,7 +13,7 @@ import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/di
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 import { of, Observable, EMPTY } from 'rxjs';
-import { catchError, take } from 'rxjs/operators';
+import { catchError, finalize, take } from 'rxjs/operators';
 
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityForm } from '../../../../models/activity/activityForm';
@@ -46,6 +46,7 @@ export class ModalActivityBlockComponent {
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
+    @Output() componentBusy = new EventEmitter<boolean>(true);
     @Output() deletedActivity = new EventEmitter<string>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
@@ -63,17 +64,18 @@ export class ModalActivityBlockComponent {
     }
 
     public deleteActivityInstance(): void {
+        this.componentBusy.emit(true);
         this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during deleting an activityInstance', err);
                 return EMPTY;
             }),
-            take(1)
-            )
-            .subscribe(() => {
-                this.deletedActivity.emit(this.instance.instanceGuid);
-                this.dialog.closeAll();
-            });
+            take(1),
+            finalize(() => this.componentBusy.emit(false))
+        ).subscribe(() => {
+            this.deletedActivity.emit(this.instance.instanceGuid);
+            this.dialog.closeAll();
+        });
     }
 
     public openEditDialog(): void {
