@@ -19,6 +19,7 @@ import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlo
 import { ActivityTextQuestionBlock } from '../../models/activity/activityTextQuestionBlock';
 import { ValidationRuleFactoryMapping } from '../../models/activity/validationRuleFactoryMapping';
 import { QuestionType } from '../../models/activity/questionType';
+import { InputType } from '../../models/activity/inputType';
 import * as _ from 'underscore';
 
 @Injectable()
@@ -64,7 +65,11 @@ export class ActivityValidatorBuilder {
         if (questionBlock.questionType === QuestionType.Date) {
             rules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
         }
-        if (questionBlock instanceof ActivityTextQuestionBlock && questionBlock.confirmEntry) {
+        if (
+          questionBlock instanceof ActivityTextQuestionBlock &&
+          questionBlock.inputType === InputType.Text &&
+          questionBlock.confirmEntry
+        ) {
             rules.push(new ActivityMatchValidationRule(questionBlock));
         }
         return rules;
