@@ -9,7 +9,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <mat-form-field [floatLabel]="block.picklistLabel && block.selectMode === SELECT_MODE.SINGLE ? 'always' : null">
+    <mat-form-field [floatLabel]="block.picklistLabel && block.selectMode === SELECT_MODE.SINGLE ? 'auto' : null">
       <mat-label *ngIf="block.picklistLabel && block.selectMode === SELECT_MODE.SINGLE">
         {{block.picklistLabel}}
       </mat-label>
