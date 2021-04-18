@@ -1,9 +1,6 @@
-import { Input, OnDestroy, OnInit, Component, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AnswerValue } from '../../../models/activity/answerValue';
 import { ConditionalBlock } from '../../../models/activity/conditionalBlock';
-import { BlockVisibility } from '../../../models/activity/blockVisibility';
-import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
-import { CompositeDisposable } from '../../../compositeDisposable';
 
 @Component({
     selector: 'ddp-conditional-block',
