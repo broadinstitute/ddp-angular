@@ -42,7 +42,6 @@ const EDIT_DIALOG_CONFIG: MatDialogConfig = {
 })
 export class ModalActivityBlockComponent {
     @Input() studyGuid: string;
-    @Input() parentActivityInstanceGuid: string;
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
@@ -61,6 +60,10 @@ export class ModalActivityBlockComponent {
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
                 private logger: LoggingService) {
+    }
+
+    get isAllQuestionsCompleted(): boolean {
+      return this.instance.numQuestionsAnswered === this.instance.numQuestions;
     }
 
     public deleteActivityInstance(): void {
@@ -87,7 +90,7 @@ export class ModalActivityBlockComponent {
             take(1)
         ).subscribe((activity: ActivityForm) => {
             this.activityForm = activity;
-            this.openDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
+            this.openModalDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
         });
     }
 
@@ -107,7 +110,7 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
+        this.openModalDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
     }
 
     private closeDeleteDialog(): void {
@@ -122,7 +125,7 @@ export class ModalActivityBlockComponent {
         return this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid);
     }
 
-    private openDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
+    private openModalDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
         const dialogRef = this.dialog.open(templateRef, config);
 
         if (closeDialogCallback) {

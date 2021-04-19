@@ -1,0 +1,695 @@
+{
+    "App": {
+        "Home": "Página Principal",
+        "Data": "Datos",
+        "FAQ": "Más Detalles/Preguntas Más Frecuentes",
+        "About": "Sobre Nosotros",
+        "Join": "Lista de Correo",
+        "NewsBlog": "Noticias/Blog",
+        "Twitter": "[es]Tweets by MBCProject"
+    },
+    "Partners": {
+        "MBCN": "[es]Metastatic Breast Cancer Network logo",
+        "Avon": "[es]Avon Foundation For Women logo",
+        "Alliance": "[es]MBC Alliance logo",
+        "LBBC": "[es]Living Beyond Breast Cancer logo",
+        "IBCRF": "[es]Inflammatory Breast Cancer Foundation logo",
+        "Young": "[es]Young Survival Coalition logo",
+        "Share": "[es]Share Cancer Support logo",
+        "Male": "[es]The Male Breast Cancer Coalition logo",
+        "Theresa": "[es]Theresa's Research Foundation logo",
+        "TNBC": "[es]Triple Negative Breast Cancer Foundation logo",
+        "IBC": "[es]The IBC Network Foundation",
+        "A4BC": "[es]Advocates 4 Breast Cancer logo",
+        "Metavivor": "[es]Metavivor logo",
+        "Metup": "[es]Metup logo",
+        "Tigerlily": "[es]Tigerlily Foundation logo",
+        "Komen": "[es]Susan G. Komen logo",
+        "BCRF": "[es]Breast Cancer Research Foundation logo",
+        "DSLFR": "[es]The Dr. Susan Love Foundation logo",
+        "BCSM": "[es]The Breast Cancer Social Media logo",
+        "HopeScarves": "[es]Hope Scarves logo",
+        "CancerCouch": "[es]The Cancer Couch logo",
+        "TwistedPink": "[es]Twisted Pink logo",
+        "CierraSisters": "[es]Cierra Sisters logo",
+        "BC": "[es]Breast Cancer Trials logo",
+        "BCAlliance": "[es]Breast Cancer Alliance logo",
+        "TutuProject": "[es]The Tutu Project logo",
+        "MPBCAlliance": "[es]Metaplastic Breast Cancer Global Alliance logo",
+        "LBCA": "[es]Lobular Breast Cancer Alliance logo",
+        "Force": "[es]Facing Our Risk of Cancer Empowered logo",
+        "Shay": "[es]Shay Sharpe's Pink Wishes logo",
+        "MRS": "[es]Metastasis Research Society logo",
+        "Sisters": "[es]Sisters R Us Circle of Survivors logo",
+        "HMN": "[es]Health Ministries Network logo",
+        "Min": "[es]Minority Coalition logo",
+        "MBCCanada": "[es]Metastatic Breast Cancer Canada logo"
+    },
+    "Toolkit": {
+        "Common": {
+            "Organization": "Cuenten Conmigo"
+        },
+        "Header": {
+            "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
+            "DataRelease": "Datos",
+            "LearnMore": "Aprenda Más",
+            "CountMeIn": "cuenten conm<span class=\"icon-silhouette\"></span>go"
+        },
+        "Footer": {
+            "FooterLogo": "Metastatic<br>Breast Cancer<br>Project",
+            "Home": "Página Principal",
+            "Data": "Datos",
+            "FAQ": "Más Detalles/Preguntas Más Frecuentes",
+            "About": "Sobre Nosotros",
+            "Join": "Lista de Correo",
+            "NewsBlog": "Noticias/Blog",
+            "Top": "▴ Volver Arriba",
+            "Contacts": {
+                "ContactUs": "Contáctenos:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            }
+        },
+        "Welcome": {
+            "WelcomeTitle": "Ayude a transformar nuestro conocimiento acerca del cáncer de mama metastásico.",
+            "WelcomeText": "Si usted tiene cáncer de mama metastásico, únase a un movimiento nacional de pacientes, médicos, y científicos al compartir sus muestras de tumor y/o sangre, su información médica y su voz. Juntos podemos acelerar el desarrollo de nuevas terapias.",
+            "SmallTitle": "Si padece de cáncer de mama metastásico, tiene el poder de acelerar la investigación sobre el cáncer de una forma única.",
+            "FirstBlock": {
+                "Title": "Su tumor y sus registros médicos pueden abrir la puerta a nuevos descubrimientos.",
+                "Text": "La información genética en su cáncer es única y puede contener la clave para acelerar descubrimientos en el tratamiento del cáncer. Estudiando el ADN (material genético) en sus muestras, investigadores pueden hacer descubrimientos que nos llevarán a un mejor conocimiento y a avances más rápidos en el tratamiento de cáncer de mama metastásico. Esta información será invaluable en la investigación del cáncer ahora y en el futuro."
+            },
+            "SecondBlock": {
+                "TitlePt1": "Únase al movimiento.",
+                "TitlePt2": "Tenga un impacto directo en el futuro.",
+                "Text": "Al decir “Cuenten Conmigo” y compartir parte de las muestras de su tumor almacenados en hospitales donde ha sido tratada/o y copias de sus registros médicos, participará junto con institutos de investigación, hospitales y grupos aliados de pacientes."
+            },
+            "ThirdBlock": {
+                "Title": "Cómo usted puede participar",
+                "FirstStep": {
+                    "Title": "Paso 1",
+                    "Subtitle": "Cuéntenos sobre usted",
+                    "TextPt1": "Haga clic en",
+                    "Link": "\"Cuenten Conmigo\"",
+                    "TextPt2": "y complete un cuestionario donde nos contará sobre usted y su cáncer."
+                },
+                "SecondStep": {
+                    "Title": "Paso 2",
+                    "Subtitle": "Autorícenos a obtener sus muestras y datos clínicos",
+                    "Text": "Se le presentará una forma de consentimiento en línea donde nos puede otorgar permiso para que el proyecto recolecte su muestra de saliva y registros médicos. También puede optar a compartir una muestra de sangre y/o compartir acceso a una cantidad mínima necesaria de muestras de su tumor almacenados. Le enviaremos un kit de saliva y/o un kit para obtener una muestra de sangre. Nosotros nos encargaremos de comunicarnos con sus médicos y hospitales para obtener copias de sus registros médicos y una parte de sus muestras de su tumor almacenados. Tomaremos todas las medidas necesarias para mantener su privacidad."
+                },
+                "ThirdStep": {
+                    "Title": "Paso 3",
+                    "Subtitle": "Aprenda junto con nosotros",
+                    "Text": "¡Estamos entusiasmados de aprender junto con usted! Durante el proyecto, compartiremos regularmente los avances del estudio que usted nos haya ayudado a lograr. Puede que también le hagamos preguntas adicionales sobre su experiencia para ayudarnos a crear estudios en el futuro - queremos saber qué es importante para usted."
+                }
+            },
+            "FourthBlock": {
+                "Title": "<span class=\"Color--blue\">Ahora</span> es el momento de actuar",
+                "Text": "Le estamos pidiendo que diga \"Cuenten Conmigo\" y done algo invaluable para la investigación del cáncer. Sus muestras de tumor e información médica serán usadas para estudios genómicos que resultará en una mejor comprensión y en avances más rápidos en el tratamiento del cáncer de mama metastásico."
+            },
+            "FifthBlock": {
+                "Title": "Nuestros Aliados",
+                "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
+                "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
+            },
+            "SixthBlock": {
+                "TitlePt1": "Por favor acompáñenos y diga",
+                "TitlePt2": "\"Cuenten Conmigo\"",
+                "Text": "Con su ayuda, los pacientes pueden ser la fuerza detrás de la investigación de cáncer."
+            },
+            "CountMeInButton": "cuenten conmigo"
+        },
+        "AboutUs": {
+            "PageHeader": {
+                "Pt1": "[es]The Metastatic Breast Cancer Project is part of ",
+                "Pt2": "[es]a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+            },
+            "PageHeaderLink": {
+                "Pt1": "[es]Visit the",
+                "Pt2": "[es]website"
+            },
+            "Title": "[es]About us",
+            "Content": {
+                "Paragraph1": {
+                    "Pt1": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. For more information about",
+                    "Pt2": "[es]go to"
+                },
+                "Paragraph2": {
+                    "Pt1": "[es]The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
+                    "Pt2": "[es]resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
+                    "Pt3": "[es]Playground Inc.",
+                    "Pt4": "[es]for helping to design and develop this website."
+                }
+            },
+            "ContentLink": "[es]joincountmein.org",
+            "Partners": "[es]Our Advocacy Partners",
+            "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
+            "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
+        },
+        "LoginLanding": {
+            "Text": "[es]Please wait. You will be redirected to a destination soon..."
+        },
+        "DataRelease": {
+            "Title": "[es]MBCproject Data",
+            "ViewDataButton": "[es]VIEW MBCPROJECT DATA ON CBIOPORTAL",
+            "ViewDataBrowser": "[es]VIEW MBCPROJECT PATIENT DATA BROWSER",
+            "MainText": {
+                "Section1": "[es]One key goal of the MBCproject is to enable scientific discoveries and the development of new treatment strategies for metastatic breast cancer by widely sharing clinical, genomic, molecular, and patient-reported data.",
+                "Section2": "[es]To this end, the MBCproject has first released available data in cBioPortal, a web-based platform to allow exploration of genomic data. Much effort has been put into generating, cleaning, and releasing this data so that the entire global research community can analyze and develop new research directions. The MBCproject data is being released as it is generated, and as the project continues to enroll patients, more data will be added. As we release more data over time, we anticipate that this will help accelerate discoveries in metastatic breast cancer.",
+                "Section3": "[es]To everybody who is taking part in the MBCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data."
+            },
+            "InformationList": {
+                "Title": "[es]Below, you will find the following information:",
+                "Item1": "[es]Link to the MBCproject data",
+                "Item2": "[es]Additional information about the data release",
+                "Item3": "[es]List of common terms used in this research",
+                "Item4": "[es]Link to the methods used to generate this data"
+            },
+            "Contact": {
+                "Text": "[es]Questions about these data, including how to cite, can be directed to "
+            },
+            "BioPortal": {
+                "Title": "[es]The MBCproject Data on cBioPortal",
+                "Link": "[es]Visit cBioPortal to explore the MBCproject data"
+            },
+            "AdditionalInfoTitle": "[es]Additional Information About the Genomic Data Release",
+            "AdditionalData": {
+                "Title": "[es]Will the MBCproject generate and release additional data?",
+                "Text": "[es]Yes, the MBCproject is an ongoing research initiative. The project will continue to enroll patients and request saliva, blood, and tissue samples indefinitely. Our goal is to release data every 6 months as it is generated."
+            },
+            "Involved": {
+                "Title": "[es]How have patients been involved in this data release?",
+                "Text": "[es]Patients and patient advocates within the metastatic breast cancer community have been involved since the inception of the Metastatic Breast Cancer Project. We engaged patients and advocates over the course of 15 hours to help us guide the presentation and development of this data release. Patients provided extensive feedback on many aspects of this data, including data element names, descriptions of data elements, and how the data is displayed in the portal."
+            },
+            "Different": {
+                "Title": "[es]What makes this data different from what is found in existing studies?",
+                "Text": "[es]The collection of data in this release is different for several reasons:",
+                "FieldsList": {
+                    "Item1": "[es]All patients included in the study have metastatic breast cancer",
+                    "Item2": "[es]Multiple tumor samples per patient are included for many patients (including primary and metastatic biopsies)",
+                    "Item3": {
+                        "Text": "[es]Data elements include:",
+                        "SubItem1": "[es]Whole Exome Sequencing (WES) on all samples (as compared to targeted sequencing panel or other more limited testing)",
+                        "SubItem2": "[es]Samples annotated with demographic, diagnostic, and pathology data",
+                        "SubItem3": "[es]Samples annotated with treatment data, including all reported drugs given in the metastatic setting and the duration of therapy",
+                        "SubItem4": "[es]Samples annotated with patient-reported data from the MBCproject enrollment survey"
+                    },
+                    "Item4": "[es]All of this data has been generated through direct partnership with patients"
+                }
+            },
+            "DataIncluded": {
+                "Title": "[es]What data elements are included?",
+                "Text": "[es]Data is included for the following categories:",
+                "DataList": {
+                    "Item1": "[es]Genomic Information<br>Whole Exome Sequencing (WES) information is included for each tumor sample, including mutations, small insertions/deletions, amplifications, and deletions.",
+                    "Item2": "[es]Medical Record (MedR)<br>Information about diagnosis and treatment was abstracted from patients’ medical records. All information that was derived from a medical record is denoted with the prefix MedR.",
+                    "Item3": "[es]Pathology Report (PATH)<br>Detailed information was abstracted from pathology reports associated with each sample. All information derived from a pathology report is denoted with the prefix PATH.",
+                    "Item4": "[es]Patient-reported (PRD)<br>Every patient that registered for the study had the option of completing an 18-question survey about their experiences with metastatic breast cancer. Eight questions from this survey have been abstracted for inclusion. These responses have been modified and formatted to prevent individual identification without altering scientific utility. All patient-reported data elements are denoted with the prefix PRD."
+                }
+            },
+            "Resources": {
+                "Title": "[es]Are there resources to define the terminology used in this data release?",
+                "TextPt1": "[es]At the",
+                "TextPt2": "[es]page are The National Cancer Institute’s comprehensive dictionary of clinical terms.",
+                "Link": "[es]bottom of this"
+            },
+            "Unknown": {
+                "Title": "[es]Why are some attributes “Unknown” for some cases and not for others?",
+                "Text": "[es]All of the clinical information that is gathered comes directly from medical records or pathology reports. If the complete report or record that was received did not explicitly contain the information, the field was marked as “Unknown” in order to ensure accuracy."
+            },
+            "Samples": {
+                "Title": "[es]Why are there more samples than patients?",
+                "Text": "[es]For several patients, we were able to obtain multiple biopsy samples. Multiple biopsy samples are requested in cases where having multiple biopsies can help answer an important scientific question, and there is ample tissue available for research while still ensuring that tissue is left behind for future clinical use."
+            },
+            "Sequence": {
+                "Title": "[es]Will everyone who registers for this study have their tumor sequenced?",
+                "Text": "[es]As of November 2018, over 5000 women and men with metastatic breast cancer have registered for the project. Of these registrants, over 2900 have provided consent. Approximately 1800 patients have sent in saliva kits. Medical records and tumor samples are being requested for everyone who has sent in saliva. Obtaining medical records and tissue samples is a manual process involving faxes, phone calls, and additional follow up. The ultimate goal is to obtain medical records and tumors from as many consenting patients as possible. Our goal is to release new data in regular intervals as it is generated."
+            },
+            "Inform": {
+                "Title": "[es]Can I use this data to inform my clinical care?",
+                "Text": "[es]This data is intended to be used <b>for research purposes only</b>. Genomic data included in this study is generated in a research lab, not in a clinical lab. All annotations have been de-identified. Therefore, this data cannot be used to inform clinical decision-making. Some of the data has been intentionally altered to protect confidentiality in a way that does not affect data integrity (for example, Age at Diagnosis has been grouped)."
+            },
+            "Biases": {
+                "Title": "[es]Does this data contain any biases?",
+                "Text": "[es]Yes. Biases will occur based on who learns about the project and enrolls via the website. Some biases in this data set are disproportionate numbers of young participants and white participants. We hope that over time the study becomes more representative and encourage anyone with outreach ideas to contact us at "
+            },
+            "Appendices": {
+                "Title": "[es]Appendices",
+                "AppendicesList": {
+                    "Item1": {
+                        "Link": "[es]Methods",
+                        "Text": "[es]Detailed methods for how these data were generated and analyzed."
+                    },
+                    "Item2": {
+                        "Link": "[es]About You Survey",
+                        "Text": "[es]The 18 question enrollment survey."
+                    },
+                    "Item3": {
+                        "Link": "[es]Consent and Release",
+                        "Text": "[es]Forms documenting informed consent and contact information."
+                    },
+                    "Item4": {
+                        "Link": "[es]Saliva Sample Instructions",
+                        "Text": "[es]Included in each saliva kit."
+                    }
+                }
+            },
+            "Glossary": {
+                "Title": "[es]Glossary",
+                "Text": "[es]For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
+            },
+            "DataBrowser": {
+                "Title": "[es]The Metastatic Breast Cancer Project Patient Data Browser",
+                "Main": {
+                    "Intro": "[es]Below is an interactive data browser for exploring the patient-reported data from the Metastatic Breast Cancer Project. This contains data from patients from the USA and Canada who signed consent.",
+                    "List": {
+                        "Intro": "[es]Patient-reported data included here are from patients who completed both of the following surveys. Examples of what patients see when they sign up are linked here:",
+                        "Item1": "[es]Initial intake survey",
+                        "Item2": "[es]First follow-up survey"
+                    }
+                },
+                "HowToUse": {
+                    "Title": "[es]How to use the data browser:",
+                    "List": {
+                        "Item1": "[es]On a computer, hover your cursor over any chart to see more information.",
+                        "Item2": "[es]Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left hand corner.",
+                        "Item3": "[es]Click or tap it again to remove the filter.",
+                        "Item4": "[es]Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+                    },
+                    "Text1": "[es]This data will be updated periodically as new patients join the project and as new surveys are deployed. If you have any questions or feedback, please email",
+                    "Text2": "[es]Thank you to every patient who has said <span class=\"Italic\">Count Me In</span> and generously shared their experiences, information, and samples to accelerate discoveries."
+                }
+            }
+        },
+        "Dialogs": {
+            "Disclaimer": {
+                "Title": "[es]View MBCproject Data",
+                "Text": "[es]You are now leaving the MBCproject website and will be directed to cBioPortal. Please note that as these data were generated by the MBCproject in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
+                "SubmitButton": "[es]OK"
+            },
+            "JoinMailingList": {
+                "Title": "[es]Stay informed!",
+                "Text": "[es]Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "[es]First Name *",
+                        "Error": "[es]First Name is required"
+                    },
+                    "LastName": {
+                        "Placeholder": "[es]Last Name *",
+                        "Error": "[es]Last Name is required"
+                    },
+                    "Email": {
+                        "Placeholder": "[es]Email Address *",
+                        "Error": "[es]Please enter a valid Email Address"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "[es]Email Confirmation (Reenter Email) *",
+                        "Error": "[es]Please enter a valid Email Address"
+                    }
+                },
+                "CancelButton": "[es]CANCEL",
+                "SubmitButton": "[es]JOIN",
+                "Required": "[es]* Required field",
+                "MatchEmailsError": "[es]Please ensure that both email fields are filled in and that the addresses match.",
+                "LoadingError": "[es]We're sorry, but an error has occurred."
+            },
+            "SessionWillExpire": {
+                "Title": "[es]Your session will time-out soon",
+                "Text": "[es]To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "[es]Sign Out",
+                "Continue": "[es]Continue",
+                "RenewalFailed": "[es]Session renewal failed. Please log out and log back in again."
+            },
+            "LanguagePreferences": {
+                "Text": "[es]Changing the language preference will also change the language used for e-mail communications.",
+                "CheckboxText": "[es]Don't show this again",
+                "ButtonText": "[es]OK"
+            }
+        },
+        "Warning": {
+            "Title": "[es]Download Chrome or Safari to Continue",
+            "Text1": "[es]This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+            "Text2": "[es]It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "[es]Click the following links to download",
+                "Pt2": "[es]or",
+                "Pt3": "[es]Chrome and Safari are always free.",
+                "Chrome": "[es]Chrome (for Mac & PC)",
+                "Safari": "[es]Safari (for Mac)"
+            },
+            "SubmitButton": "[es]OK"
+        },
+        "MoreDetails": {
+            "Title": "[es]Learn more about the Metastatic Breast Cancer Project",
+            "MainText": {
+                "Section1": {
+                    "Pt1": "[es]The Metastatic Breast Cancer Project takes a new approach to cancer research in which researchers partner directly with patients, who share their samples and clinical information in order to speed important discoveries. The MBCproject is part of",
+                    "Pt2": "[es]a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+                    "Pt3": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                },
+                "Section2": "[es]Our goal is to reach out to patients with metastatic breast cancer throughout the USA and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute by allowing patients to participate in these studies regardless of where they live. We are also asking patients from all over the world to sign up so that we can collect information worldwide and eventually expand to additional countries."
+            },
+            "HowProjectWorks": {
+                "Title": "[es]Here’s how the project works:",
+                "AboutYourself": {
+                    "Title": "[es]A. Tell us about yourself.",
+                    "Text": "[es]Click \"Count Me In\" and complete a simple online form to tell us about yourself and your cancer. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your experiences with metastatic breast cancer and couple that information with what we learn from the DNA in your tumor."
+                },
+                "Permission": {
+                    "Title": "[es]B. Give us permission to collect your samples and data.",
+                    "Text": "[es]Once we receive the information that you fill out on our website, we will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and some of your stored tumor tissue. We’ll also ask you to tell us where you received your medical care so we can contact your doctors and hospitals."
+                },
+                "Request": {
+                    "Title": "[es]C. We’ll find and request your records and tissue.",
+                    "Text": "[es]Our team will contact your doctors and hospitals to obtain copies of your medical records and a portion of your stored tumor samples. We will ask pathology departments to share only a part of the tumor tissue, and not to share anything with us that might be needed for clinical care."
+                },
+                "SendUs": {
+                    "Title": "[es]D. Provide us with a saliva and/or blood sample.",
+                    "Text": "[es]If you live in the USA or Canada, we’ll also send you a simple kit to collect a saliva sample, which will contain \"healthy\" DNA that can be compared with DNA from your tumor sample. We may also send you a simple kit to collect a blood sample. We ask that you bring in a blood tube to your health care providers office and ask them to draw a sample, which may contain DNA from your tumor. This may help us to understand the genomics of your cancer from a simple blood draw."
+                },
+                "Analyze": {
+                    "Title": "[es]E. We’ll Analyze Your Tumor and Medical Data.",
+                    "Text": "[es]If we request and obtain your tissue, we will perform cutting-edge, comprehensive genomic analyses on your tumor and saliva sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your medical record. Any information that would make it easy to identify you as an individual will be removed from all genomic and clinical data."
+                },
+                "Share": {
+                    "Title": "[es]F. We’ll Share the Data with Other Researchers.",
+                    "Text": "[es]Once potentially identifying information has been removed, our database of genomic and medical information (with your identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand metastatic breast cancer and develop new therapies."
+                },
+                "Learn": {
+                    "Title": "[es]G. Learn with us along the way.",
+                    "TextPt1": "[es]We are excited to learn with you! Throughout the project, we will provide all patients who say \"Count Me In\" with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you. We will send updates through email, but also through social media. You can follow us on",
+                    "TextPt2": "[es]and",
+                    "Socials": {
+                        "Twitter": "[es]Twitter",
+                        "Facebook": "[es]Facebook",
+                        "Instagram": "[es]Instagram"
+                    }
+                }
+            },
+            "FAQ": {
+                "Title": "[es]Frequently Asked Questions",
+                "Goal": {
+                    "Question": "[es]1. What is the goal of this project?",
+                    "Section1": "[es]This project will connect metastatic breast cancer patients around the world with scientists using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle.",
+                    "Section2": "[es]Today, very few patients contribute their tumor samples and clinical data to cancer research, largely because they do not have a way of doing so. We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity.",
+                    "Section3": "[es]We hope our studies will help us understand the genomic landscape of metastatic breast cancer. By discovering the genes that drive this disease, we hope to be able to design effective therapies to treat metastatic breast cancer."
+                },
+                "Conduct": {
+                    "Question": "[es]2. Who is conducting this research?",
+                    "Text": {
+                        "Pt1": "[es]This project is being conducted by",
+                        "Pt2": "[es]a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research.",
+                        "Pt3": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The MBCproject also works in collaboration with a growing coalition of non-profit advocacy partners. Our team — led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher — is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more",
+                        "Pt4": "[es]about us here"
+                    }
+                },
+                "InvolvedInProject": {
+                    "Question": "[es]3. How have patients been involved in the design of this project?",
+                    "Section1": "[es]We have worked closely with patients and patient advocates within the metastatic breast cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website. The MBCproject is constantly evolving, and at every turn, we ask for patient feedback to ensure that we are aligned with the metastatic breast cancer community.",
+                    "Section2": "[es]We’re proud to have as our Advocacy Partners the MBC Alliance, Avon, the Metastatic Breast Cancer Network, Living Beyond Breast Cancer, the Young Survivors Coalition, the Inflammatory Breast Cancer Research Foundation, SHARE, METAvivor, Theresa's Research Foundation, TigerLily, Triple Negative Breast Cancer Foundation, The IBC Network Foundation, Advocates for Breast Cancer, METup, the Male Breast Cancer Coalition, Susan G. Komen, Breast Cancer Research Foundation, Dr. Susan Love Research Foundation, BCSM: Breast Cancer Social Media, Hope Scarves, The Cancer Couch Foundation, Twisted Pink, Cierra Sisters, BreastCancerTrials.org, Breast Cancer Alliance, The Tutu Project, Metaplastic Breast Cancer Global Alliance, Lobular Breast Cancer Alliance, FORCE, Shay Sharpe’s Pink Wishes, Metastasis Research Society, Sisters R Us Circle of Survivors, Health Ministries Network, the Minority Coalition for Precision Medicine, and Metastatic Breast Cancer Canada."
+                },
+                "Costs": {
+                    "Question": "[es]4. Are there any costs for me to participate?",
+                    "Text": "[es]No, there are no costs to you."
+                },
+                "TumorTissue": {
+                    "Question": "[es]5. After I provide my information, will I be asked to share my tumor tissue and medical records?",
+                    "Text": "[es]We will be asking for consent from all patients with metastatic breast cancer who enroll in this study. As part of the process of providing consent, we will ask your permission to share your stored tumor tissue. We will keep you informed about our progress along the way."
+                },
+                "TissueSample": {
+                    "Question": "[es]6. If I am asked to share a tissue sample, will my tissue be used up?",
+                    "Text": "[es]We will take every measure to ensure that your samples are not used up as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they share only a small portion with us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us. If we get what we feel is excess tissue, we will only take what we need and send the rest back."
+                },
+                "TissueAndMedicalRecords": {
+                    "Question": "[es]7. If my tissue and medical records are analyzed, will I receive any information back from this study?",
+                    "Text": "[es]Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+                },
+                "Profit": {
+                    "Question": "[es]8. Is this research being conducted for profit?",
+                    "Text": "[es]No. This project is a not-for-profit, academic research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in a way that protects your personal information in order to fuel discoveries."
+                },
+                "InfoForPhysicians": {
+                    "Question": "[es]9. Is there information that I can bring to my doctor so that I can discuss this study with them?",
+                    "Text": "[es]Yes, you can print out or use your mobile device to share the document linked here:",
+                    "Link": "[es]Metastatic Breast Cancer Project For Physicians"
+                },
+                "AggregatedData": {
+                    "Question": "[es]10. Where can I find the most recent aggregate data that's been presented?",
+                    "Text": "[es]Up-to-date information about data generated from the project can be found at"
+                },
+                "OtherQuestions": {
+                    "Title": "[es]Do you have other questions?",
+                    "Section1": {
+                        "Text": "[es]You can access a 1 page printable information sheet about the project linked here:",
+                        "Link": "[es]The Metastatic Breast Cancer Project"
+                    },
+                    "Section2": {
+                        "TextPt1": "[es]If you have any other questions, please email us at ",
+                        "TextPt2": "[es]or call us at"
+                    }
+                }
+            }
+        },
+        "StayInformed": {
+            "Title": "[es]Stay Informed!",
+            "Text": "[es]Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "[es]RETURN HOME"
+        },
+        "Password": {
+            "Title": "[es]Please enter the password",
+            "Text": "[es]Please enter your password",
+            "SubmitButton": "[es]SUBMIT",
+            "PasswordWrongError": "[es]Incorrect password. Please try again.",
+            "OtherError": "[es]We're sorry, but an error has occurred. Please try again.",
+            "PasswordField": {
+                "Error": "[es]Password is required"
+            }
+        },
+        "InternationalPatients": {
+            "Title": "[es]Information for International Patients",
+            "ThankYou": {
+                "TextPt1": "[es]Thank you for your interest in joining the Metastatic Breast Cancer Project. Currently, the Metastatic Breast Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
+                "TextPt2": "[es]or"
+            },
+            "Understand": "[es]We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+        },
+        "Dashboard": {
+            "Title": "[es]Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "[es]We've encountered an error",
+            "Header": "[es]We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "[es]Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "[es]or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "[es]Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "[es]You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "[es]Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "[es]Log In"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "[es]SUBMIT",
+        "CloseButton": "[es]CLOSE",
+        "AddButton": "[es]ADD",
+        "CancelButton": "[es]CANCEL",
+        "NextButton": "[es]NEXT",
+        "PreviousButton": "[es]PREV",
+        "SavingButton": "[es]SAVING",
+        "EditButton": "[es]EDIT",
+        "ReviewButton": "[es]VIEW",
+        "ValidateError": "[es]Please correct any errors in the form.",
+        "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SaveError": "[es]We're sorry but an error occurred.",
+        "ExportStudy": {
+            "Export": "[es]EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "[es]Study Name",
+            "ParticipantCount": "[es]Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "[es]Workspace Name",
+            "WorkspaceNamespace": "[es]Workspace Namespace"
+        },
+        "Login": {
+            "Login": "[es]LOG IN",
+            "Logout": "[es]LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Iniciar Sesión",
+            "SignOut": "[es]Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "[es]language selection"
+        },
+        "UserActivities": {
+            "ActivityName": "[es]Form",
+            "Summary": "[es]Summary",
+            "ActivityStatus": "[es]Status",
+            "ActivityDate": "[es]Created",
+            "ActivityActions": "[es]Actions"
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "[es]Governed participants",
+            "ParticipantPlaceholder": "[es]Participant",
+            "ParticipantsList": "[es]Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "[es]Profile",
+            "ViewAs": "[es]View As",
+            "ManageParticipants": "[es]Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "[es]User preferences",
+            "UserPreferencesGender": "[es]Sex",
+            "UserPreferencesLocale": "[es]Preferred language"
+        },
+        "Dashboard": {
+            "Title": "[es]My Dashboard",
+            "Text": "[es]The dashboard below describes each Metastatic Breast Cancer Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "[es]Choose day...",
+            "Month": "[es]Choose month...",
+            "Year": "[es]Choose year...",
+            "January": "[es]January",
+            "February": "[es]February",
+            "March": "[es]March",
+            "April": "[es]April",
+            "May": "[es]May",
+            "June": "[es]June",
+            "July": "[es]July",
+            "August": "[es]August",
+            "September": "[es]September",
+            "October": "[es]October",
+            "November": "[es]November",
+            "December": "[es]December"
+        },
+        "UserMenu": {
+            "DashboardButton": "[es]Dashboard",
+            "SignOutButton": "[es]Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "[es]characters remaining",
+            "SingularForm": "[es]character remaining"
+        },
+        "Title": {
+            "Default": "[es]The Metastatic Breast Cancer Project",
+            "Alert": "[es]Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "[es]Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "[es]Physician Name",
+                "Institution": "[es]Institution",
+                "InstitutionAny": "[es]Institution (if any)",
+                "City": "[es]City",
+                "State": "[es]State"
+            },
+            "PhysicianValidation": "[es]Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "[es]Full Name",
+                "Country": "[es]Country/Territory",
+                "Street1": "[es]Street Address",
+                "Street2": "[es]Apt/Floor #",
+                "State": {
+                    "State": "[es]State",
+                    "Province": "[es]Province",
+                    "State/Province/Region": "[es]State/Province/Region"
+                },
+                "City": "[es]City",
+                "Phone": "[es]Phone",
+                "Zip": {
+                    "Zip Code": "[es]Zip Code",
+                    "Postal Code": "[es]Postal Code",
+                    "Zip/Postal Code": "[es]Zip/Postal Code"
+                },
+                "Choose": "[es]Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "[es]We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "[es]Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "[es]Suggested:",
+                "AsEntered": "[es]As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "[es]Invalid address.",
+                "CannotVerify": "[es]Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "[es]An unknown error occurred while verifying address.",
+                "FieldIsRequired": "[es]{{field}} is required",
+                "FieldIsInvalid": "[es]{{field}} has an invalid value",
+                "InvalidHouseNumber": "[es]Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "[es]We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "[es]The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "[es]The requested resource could not be found.",
+                "FORBIDDEN": "[es]Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "[es]Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "[es]Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "[es]Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "[es]The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "[es]This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "[es]API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "[es]At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "[es]The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "[es]Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "[es]The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "[es]The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "[es]Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "[es]Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "[es]The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "[es]Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "[es]One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "[es]Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "[es]Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "[es]Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "[es]USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "[es]International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "[es]Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "[es]Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "[es]This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "[es]No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "[es]We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "[es]We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "[es]Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "[es]Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "[es]House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "[es]We could not find the street number provided.",
+                "E.STREET.MISSING": "[es]Street is missing.",
+                "E.STREET.INVALID": "[es]Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "[es]Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "[es]Box number is invalid.",
+                "E.ADDRESS.INVALID": "[es]Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "[es]Zip not found.",
+                "E.ZIP.INVALID": "[es]Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "[es]Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "[es]Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "[es]Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "[es]Dual address.",
+                "E.STREET.MAGNET": "[es]Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "[es]Unverifiable city / state.",
+                "E.STATE.INVALID": "[es]Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "[es]Invalid delivery address.",
+                "E.TIMED_OUT": "[es]Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "[es]The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "[es]Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+        },
+        "TooltipAlt": "[es]Information",
+        "Validators": {
+            "DateNavyValidationRule": "[es]Entered date is invalid"
+        }
+    }
+}

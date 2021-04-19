@@ -5,7 +5,7 @@ import { ToolkitConfigurationService } from 'toolkit';
 @Component({
     selector: 'app-more-details',
     template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
+    <toolkit-header [showButtons]="true" [showLanguageSelector]="true"></toolkit-header>
     <div class="Wrapper">
         <div class="PageHeader">
             <div class="PageHeader-background">
