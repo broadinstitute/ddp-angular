@@ -21,6 +21,8 @@ export class ActivityComponent extends SDKActivityComponent {
     ActivityCodes.SelfConsent,
     ActivityCodes.ConsentAssent,
     ActivityCodes.ParentalConsent,
+    ActivityCodes.LarConsent,
+    ActivityCodes.LarConsentAssent,
   ];
 
   get isConsent(): boolean {

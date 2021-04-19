@@ -3,6 +3,8 @@ export enum ActivityCodes {
   SelfConsent = 'CONSENT',
   ParentalConsent = 'PARENTAL_CONSENT',
   ConsentAssent = 'CONSENT_ASSENT',
+  LarConsent = 'LAR_CONSENT',
+  LarConsentAssent = 'LAR_CONSENT_ASSENT',
   AddParticipant = 'ADD_PARTICIPANT',
   DataSharing = 'DATA_SHARING',
   GeneralInformation = 'GENERAL_INFORMATION',
