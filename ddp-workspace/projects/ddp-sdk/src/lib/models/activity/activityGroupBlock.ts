@@ -13,6 +13,10 @@ export class ActivityGroupBlock extends ActivityBlock {
         return BlockType.Group;
     }
 
+    get blocks(): Array<ActivityBlock> {
+        return ([this] as Array<ActivityBlock>).concat(this.nestedBlocks);
+    }
+
     public validate(): boolean {
         let isValid = true;
         for (const nestedBlock of this.nestedBlocks) {

@@ -69,7 +69,6 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
-                                        (visibilityChanged)="updateVisibility($event)"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
@@ -107,7 +106,6 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
-                                        (visibilityChanged)="updateVisibility($event)"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
@@ -123,7 +121,6 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                             [validationRequested]="validationRequested"
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
-                                            (visibilityChanged)="updateVisibility($event)"
                                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
