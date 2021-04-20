@@ -1,10 +1,10 @@
-import { Directive, AfterViewInit, Input, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, AfterViewInit, Input, ElementRef, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 import { WindowRef } from '../services/windowRef';
 
 @Directive({
     selector: '[lazy-resource]'
 })
-export class LazyLoadResourcesDirective implements AfterViewInit {
+export class LazyLoadResourcesDirective implements AfterViewInit, OnChanges {
     @Input() src: string;
 
     constructor(
@@ -12,11 +12,21 @@ export class LazyLoadResourcesDirective implements AfterViewInit {
         private renderer: Renderer2,
         private windowRef: WindowRef) { }
 
+    public ngOnChanges(changes: SimpleChanges): void {
+      if (changes['src'] && !changes['src'].isFirstChange()) {
+        this.checkAndLazyLoad();
+      }
+    }
+
     public ngAfterViewInit(): void {
-        if (this.canUseLazyLoad()) {
-            this.renderer.setAttribute(this.el.nativeElement, 'src', '');
-            this.lazyLoadResource();
-        }
+        this.checkAndLazyLoad();
+    }
+
+    private checkAndLazyLoad(): void {
+      if (this.canUseLazyLoad()) {
+        this.renderer.setAttribute(this.el.nativeElement, 'src', '');
+        this.lazyLoadResource();
+      }
     }
 
     private lazyLoadResource(): void {

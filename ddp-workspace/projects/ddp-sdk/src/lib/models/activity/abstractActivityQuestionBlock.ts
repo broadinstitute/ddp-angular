@@ -30,6 +30,10 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
     return BlockType.Question;
   }
 
+  get blocks(): Array<ActivityBlock> {
+    return [this];
+  }
+
   public abstract get questionType(): QuestionType;
 
   public canPatch(): boolean {

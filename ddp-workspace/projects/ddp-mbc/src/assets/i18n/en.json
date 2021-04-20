@@ -124,10 +124,7 @@
                 "Pt1": "The Metastatic Breast Cancer Project is part of ",
                 "Pt2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
             },
-            "PageHeaderLink": {
-                "Pt1": "Visit the",
-                "Pt2": "website"
-            },
+            "PageHeaderLink": "Visit the <em>Count Me In</em> website",
             "Title": "About us",
             "Content": {
                 "Paragraph1": {
@@ -135,10 +132,9 @@
                     "Pt2": "go to"
                 },
                 "Paragraph2": {
-                    "Pt1": "The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
-                    "Pt2": "resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
-                    "Pt3": "Playground Inc.",
-                    "Pt4": "for helping to design and develop this website."
+                    "Pt1": "The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of <em>Count Me In</em>'s resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
+                    "Pt2": "Playground Inc.",
+                    "Pt3": "for helping to design and develop this website."
                 }
             },
             "ContentLink": "joincountmein.org",
@@ -234,7 +230,6 @@
                 "Text": "Yes. Biases will occur based on who learns about the project and enrolls via the website. Some biases in this data set are disproportionate numbers of young participants and white participants. We hope that over time the study becomes more representative and encourage anyone with outreach ideas to contact us at "
             },
             "Appendices": {
-                "Title": "Appendices",
                 "AppendicesList": {
                     "Item1": {
                         "Link": "Methods",
@@ -256,7 +251,10 @@
             },
             "Glossary": {
                 "Title": "Glossary",
-                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
+                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
+                "WidgetLink": "https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish",
+                "WidgetId": "NCITermDictionaryWidgetContainerEnglish",
+                "WidgetWrapperId": "NCITermDictionaryWidgetEnglish"
             },
             "DataBrowser": {
                 "Title": "The Metastatic Breast Cancer Project Patient Data Browser",

@@ -15,6 +15,10 @@ export class ActivityInstitutionBlock extends ActivityBlock {
         return BlockType.Institution;
     }
 
+    get blocks(): Array<ActivityBlock> {
+        return [this];
+    }
+
     public validate(): boolean {
         return true;
     }
