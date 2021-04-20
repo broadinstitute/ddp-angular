@@ -288,31 +288,31 @@
                 "SubmitButton": "[es]OK"
             },
             "JoinMailingList": {
-                "Title": "[es]Stay informed!",
-                "Text": "[es]Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Title": "¡Manténgase Informada/o!",
+                "Text": "Ingrese su correo electrónico para estar al corriente sobre las nuevas noticias del proyecto.<br>Puede darse de baja en cualquier momento.",
                 "Fields": {
                     "FirstName": {
-                        "Placeholder": "[es]First Name *",
-                        "Error": "[es]First Name is required"
+                        "Placeholder": "Nombre *",
+                        "Error": "Nombre es requirido"
                     },
                     "LastName": {
-                        "Placeholder": "[es]Last Name *",
-                        "Error": "[es]Last Name is required"
+                        "Placeholder": "Apellido *",
+                        "Error": "Apellido es requirido"
                     },
                     "Email": {
-                        "Placeholder": "[es]Email Address *",
-                        "Error": "[es]Please enter a valid Email Address"
+                        "Placeholder": "Correo electrónico *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
                     },
                     "ConfirmEmail": {
-                        "Placeholder": "[es]Email Confirmation (Reenter Email) *",
-                        "Error": "[es]Please enter a valid Email Address"
+                      "Placeholder": "Confirmación de correo electrónico (ingrese correo electrónico nuevamente) *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
                     }
                 },
-                "CancelButton": "[es]CANCEL",
-                "SubmitButton": "[es]JOIN",
-                "Required": "[es]* Required field",
+                "CancelButton": "CANCELAR",
+                "SubmitButton": "ENVIAR",
+                "Required": "* Requirido",
                 "MatchEmailsError": "[es]Please ensure that both email fields are filled in and that the addresses match.",
-                "LoadingError": "[es]We're sorry, but an error has occurred."
+                "LoadingError": "Lo sentimos, pero un error ha ocurrido."
             },
             "SessionWillExpire": {
                 "Title": "[es]Your session will time-out soon",
