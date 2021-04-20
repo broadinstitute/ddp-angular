@@ -121,28 +121,27 @@
         },
         "AboutUs": {
             "PageHeader": {
-                "Pt1": "[es]The Metastatic Breast Cancer Project is part of ",
-                "Pt2": "[es]a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+              "Pt1": "El Metastatic Breast Cancer Project es parte de ",
+              "Pt2": "una organización sin fines de lucro que atrae a pacientes e investigadores para juntos acelerar descubrimientos en la investigación del cáncer."
             },
             "PageHeaderLink": {
                 "Pt1": "[es]Visit the",
                 "Pt2": "[es]website"
             },
-            "Title": "[es]About us",
+            "Title": "Sobre Nosotros",
             "Content": {
                 "Paragraph1": {
-                    "Pt1": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. For more information about",
-                    "Pt2": "[es]go to"
+                    "Pt1": "es codirigido por cuatro organizaciones: Emerson Collective, una organización de transformación social basada en California; el Instituto Broad de MIT y Harvard (Broad Institute of MIT and Harvard), una institución de investigación biomédica sin fines de lucro; el Biden Cancer Initiative, una organización independiente sin fines de lucro que se basa en el Cáncer Moonshot del gobierno federal; y el Instituto de Cáncer Dana-Farber (Dana-Farber Cancer Institute), un hospital líder en el tratamiento del cáncer. Para más información sobre",
+                    "Pt2": "visite"
                 },
                 "Paragraph2": {
-                    "Pt1": "[es]The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
-                    "Pt2": "[es]resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
-                    "Pt3": "[es]Playground Inc.",
-                    "Pt4": "[es]for helping to design and develop this website."
+                    "Pt1": "El MBCproject, está siendo dirigido por el Dr. Nikhil Wagle, un oncólogo e investigador especializado en cáncer de mama y Corrie Painter, PhD, una investigadora de cáncer, paciente de cáncer y aliada de pacientes. Este proyecto fue diseñado y ha sido implementado en colaboración con pacientes que padecen de cáncer de mama metastásico, aliados de pacientes, investigadores de cáncer, médicos, y especialistas clínicos. Usamos los recursos y tecnología genómica del Instituto Broad (Broad Institute) y la voz de la comunidad de pacientes con cáncer de mama metastásico para enfocar nuestros esfuerzos en personas con esta enfermedad. Queremos agradecer especialmente a nuestros amigos de",
+                    "Pt2": "Playground Inc.",
+                    "Pt3": "por diseñar y desarrollar esta página web."
                 }
             },
-            "ContentLink": "[es]joincountmein.org",
-            "Partners": "[es]Our Advocacy Partners",
+            "ContentLink": "joincountmein.org",
+            "Partners": "Nuestros Aliados",
             "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
             "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
         },

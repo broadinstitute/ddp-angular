@@ -135,10 +135,9 @@
                     "Pt2": "go to"
                 },
                 "Paragraph2": {
-                    "Pt1": "The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
-                    "Pt2": "resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
-                    "Pt3": "Playground Inc.",
-                    "Pt4": "for helping to design and develop this website."
+                    "Pt1": "The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of <em>Count Me In</em>'s resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
+                    "Pt2": "Playground Inc.",
+                    "Pt3": "for helping to design and develop this website."
                 }
             },
             "ContentLink": "joincountmein.org",
