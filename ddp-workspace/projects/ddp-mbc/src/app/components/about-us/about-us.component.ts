@@ -49,11 +49,9 @@ import { ToolkitConfigurationService } from 'toolkit';
               <a [href]="countMeInUrl" class="Link" target="_blank" translate>Toolkit.AboutUs.ContentLink</a>.
             </p>
             <p class="PageContent-text">
-              <span translate>Toolkit.AboutUs.Content.Paragraph2.Pt1</span>
-              <span class="Italic" translate>Toolkit.Common.Organization</span>'s
-              <span translate>Toolkit.AboutUs.Content.Paragraph2.Pt2</span>
-              <a href="http://playgroundinc.com/" class="Link" target="_blank" translate>Toolkit.AboutUs.Content.Paragraph2.Pt3</a>
-              <span translate>Toolkit.AboutUs.Content.Paragraph2.Pt4</span>
+              <span [innerHTML]="'Toolkit.AboutUs.Content.Paragraph2.Pt1' | translate"></span>
+              <a href="http://playgroundinc.com/" class="Link" target="_blank" translate>Toolkit.AboutUs.Content.Paragraph2.Pt2</a>
+              <span translate>Toolkit.AboutUs.Content.Paragraph2.Pt3</span>
             </p>
           </section>
           <img lazy-resource src="./assets/images/about-page-broad-building.png" class="PageContent-image" alt="Broad Building">
