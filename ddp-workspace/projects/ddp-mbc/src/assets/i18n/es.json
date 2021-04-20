@@ -452,9 +452,9 @@
             }
         },
         "StayInformed": {
-            "Title": "[es]Stay Informed!",
-            "Text": "[es]Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
-            "ReturnButton": "[es]RETURN HOME"
+            "Title": "¡Manténgase Informada/o!",
+            "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informada/o. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
+            "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Password": {
             "Title": "[es]Please enter the password",
