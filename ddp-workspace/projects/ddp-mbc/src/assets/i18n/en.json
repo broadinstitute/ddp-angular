@@ -124,10 +124,7 @@
                 "Pt1": "The Metastatic Breast Cancer Project is part of ",
                 "Pt2": "a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
             },
-            "PageHeaderLink": {
-                "Pt1": "Visit the",
-                "Pt2": "website"
-            },
+            "PageHeaderLink": "Visit the <em>Count Me In</em> website",
             "Title": "About us",
             "Content": {
                 "Paragraph1": {
@@ -233,7 +230,6 @@
                 "Text": "Yes. Biases will occur based on who learns about the project and enrolls via the website. Some biases in this data set are disproportionate numbers of young participants and white participants. We hope that over time the study becomes more representative and encourage anyone with outreach ideas to contact us at "
             },
             "Appendices": {
-                "Title": "Appendices",
                 "AppendicesList": {
                     "Item1": {
                         "Link": "Methods",
@@ -255,7 +251,10 @@
             },
             "Glossary": {
                 "Title": "Glossary",
-                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
+                "Text": "For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms",
+                "WidgetLink": "https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish",
+                "WidgetId": "NCITermDictionaryWidgetContainerEnglish",
+                "WidgetWrapperId": "NCITermDictionaryWidgetEnglish"
             },
             "DataBrowser": {
                 "Title": "The Metastatic Breast Cancer Project Patient Data Browser",

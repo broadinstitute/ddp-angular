@@ -181,11 +181,11 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                 <p class="PageContent-text" translate>
                                     Toolkit.DataRelease.Glossary.Text
                                 </p>
-                                <div id="NCITermDictionaryWidgetEnglish">
+                                <div [id]="'Toolkit.DataRelease.Glossary.WidgetWrapperId' | translate">
                                     <iframe lazy-resource
                                             frameborder="0"
-                                            src="https://www.cancer.gov/widgets/TermDictionaryWidgetEnglish"
-                                            id="NCITermDictionaryWidgetContainerEnglish"
+                                            [src]="'Toolkit.DataRelease.Glossary.WidgetLink' | translate"
+                                            [id]="'Toolkit.DataRelease.Glossary.WidgetId' | translate"
                                             title="https://www.mbcproject.org/data-release"
                                             name="https://www.mbcproject.org/data-release"
                                             style="width: 100%; height: 300px;">
