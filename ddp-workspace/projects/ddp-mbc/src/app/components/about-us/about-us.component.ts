@@ -21,9 +21,7 @@ import { ToolkitConfigurationService } from 'toolkit';
         </div>
         <div class="PageHeader-boxFooter">
           <a [href]="countMeInUrl" class="Link" target="_blank">
-            <span translate>Toolkit.AboutUs.PageHeaderLink.Pt1</span>
-            <span class="Italic" translate>Toolkit.Common.Organization</span>
-            <span translate>Toolkit.AboutUs.PageHeaderLink.Pt2</span>
+            <span [innerHTML]="'Toolkit.AboutUs.PageHeaderLink' | translate"></span>
           </a>
         </div>
       </div>
