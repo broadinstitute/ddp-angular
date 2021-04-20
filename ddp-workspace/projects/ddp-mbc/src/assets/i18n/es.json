@@ -478,11 +478,11 @@
             "Title": "[es]Dashboard"
         },
         "ErrorPage": {
-            "Title": "[es]We've encountered an error",
-            "Header": "[es]We're sorry, but an error has occurred.",
+            "Title": "Hemos encontrado un error",
+            "Header": "Lo sentimos, pero un error ha ocurrido.",
             "DefaultText": {
-                "TextPt1": "[es]Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "[es]or call us at"
+                "TextPt1": "Por favor espere un momento y vuelva a intentarlo. Si el problema persiste, envíenos un correo electrónico a",
+                "TextPt2": "o llámenos al"
             }
         },
         "ErrorCodes": {
