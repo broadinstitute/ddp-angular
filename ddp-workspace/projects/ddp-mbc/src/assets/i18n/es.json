@@ -339,112 +339,113 @@
             "SubmitButton": "[es]OK"
         },
         "MoreDetails": {
-            "Title": "[es]Learn more about the Metastatic Breast Cancer Project",
+            "Title": "Aprende más sobre el Metastatic Breast Cancer Project",
             "MainText": {
                 "Section1": {
-                    "Pt1": "[es]The Metastatic Breast Cancer Project takes a new approach to cancer research in which researchers partner directly with patients, who share their samples and clinical information in order to speed important discoveries. The MBCproject is part of",
-                    "Pt2": "[es]a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
-                    "Pt3": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                    "Pt1": "El Metastatic Breast Cancer Project es un nuevo modelo en la investigación del cáncer en el cual los investigadores colaboran directamente con pacientes, quienes comparten sus muestras de tumor e información clínica para juntos acelerar descubrimientos. El MBCproject es parte de",
+                    "Pt2": "una organización sin fines de lucro que atrae a pacientes e investigadores para acelerar descubrimientos en la investigación del cáncer.",
+                    "Pt3": "es codirigido por cuatro organizaciones líderes: Emerson Collective, una organización de transformación social ubicada en California; el Instituto Broad de MIT y Harvard (Broad Institute of MIT and Harvard), una institución de investigación biomédica sin fines de lucro; el Biden Cancer Initiative, una organización independiente sin fines de lucro que se basa en el Cáncer Moonshot del gobierno federal; y el Instituto de Cáncer Dana-Farber (Dana-Farber Cancer Institute), un hospital líder en el tratamiento del cáncer."
                 },
-                "Section2": "[es]Our goal is to reach out to patients with metastatic breast cancer throughout the USA and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute by allowing patients to participate in these studies regardless of where they live. We are also asking patients from all over the world to sign up so that we can collect information worldwide and eventually expand to additional countries."
+                "Section2": "Nuestra meta es darles a pacientes alrededor de los Estados Unidos y sus territorios y Canadá con cáncer de mama metastásico la oportunidad de participar en estos estudios sin importar donde vivan para poder analizar su cáncer usando estudios moleculares y genómicos de última generación llevados a cabo en el Instituto Broad (Broad Institute)."
             },
             "HowProjectWorks": {
-                "Title": "[es]Here’s how the project works:",
+                "Title": "Cómo Funciona el Proyecto:",
                 "AboutYourself": {
-                    "Title": "[es]A. Tell us about yourself.",
-                    "Text": "[es]Click \"Count Me In\" and complete a simple online form to tell us about yourself and your cancer. Our goal is to perform genomics studies that will enable us to understand the genomic underpinnings of this disease. In order to understand this disease, we need to hear about your experiences with metastatic breast cancer and couple that information with what we learn from the DNA in your tumor."
+                    "Title": "A. Cuéntenos sobre usted.",
+                    "Text": "Haga clic en \"Cuenten Conmigo\" y complete un cuestionario sencillo en línea donde nos contará sobre usted y su cáncer. Nuestra meta es realizar estudios genómicos que nos permitirán entender los fundamentos genéticos de esta enfermedad. Para comprender este cáncer, necesitamos escuchar sobre sus experiencias con cáncer de mama metastásico e integrar esa información con los datos del ADN (material genético) de su tumor."
                 },
                 "Permission": {
-                    "Title": "[es]B. Give us permission to collect your samples and data.",
-                    "Text": "[es]Once we receive the information that you fill out on our website, we will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and some of your stored tumor tissue. We’ll also ask you to tell us where you received your medical care so we can contact your doctors and hospitals."
+                    "Title": "B. Autorícenos a obtener sus muestras de tumor y registros médicos.",
+                    "Text": "Una vez que complete el cuestionario en nuestra página web, le pediremos que llene una forma de consentimiento en línea pidiéndole permiso para obtener copias de su registros médicos y muestras almacenadas del tejido de su tumor. También le pediremos que nos diga el nombre de los hospitales donde recibió cuidado médico para poder comunicarnos con sus médicos y hospitales."
                 },
                 "Request": {
-                    "Title": "[es]C. We’ll find and request your records and tissue.",
-                    "Text": "[es]Our team will contact your doctors and hospitals to obtain copies of your medical records and a portion of your stored tumor samples. We will ask pathology departments to share only a part of the tumor tissue, and not to share anything with us that might be needed for clinical care."
+                    "Title": "C. Nosotros pediremos sus registros médicos y muestras de tumor.",
+                    "Text": "Nuestro equipo se comunicará con sus médicos y hospitales para obtener copias de sus registros médicos y una porción de las muestras de su tumor que hayan sido almacenadas. Le pediremos a los departamentos de patología de su hospital que compartan solo una parte del tejido de tumor, y que no compartan nada con nosotros que pueda afectar su cuidado médico en el futuro."
                 },
                 "SendUs": {
-                    "Title": "[es]D. Provide us with a saliva and/or blood sample.",
-                    "Text": "[es]If you live in the USA or Canada, we’ll also send you a simple kit to collect a saliva sample, which will contain \"healthy\" DNA that can be compared with DNA from your tumor sample. We may also send you a simple kit to collect a blood sample. We ask that you bring in a blood tube to your health care providers office and ask them to draw a sample, which may contain DNA from your tumor. This may help us to understand the genomics of your cancer from a simple blood draw."
+                    "Title": "D. Proporcione una muestra de saliva y/o muestra de sangre.",
+                    "Text": "Si usted vive en Los Estados Unidos y sus territorios o Canadá, también le enviaremos un kit para obtener una muestra de saliva que contendrá su ADN (material genético) \"saludable\" y será comparado con el ADN del tejido de su muestra de tumor. Puede ser que también le enviemos un kit para obtener una muestra de sangre. Puede llevar el kit a su próxima visita con su doctor para pedir que le tomen una muestra de sangre que puede contener fragmentos del ADN de su tumor. Estas muestras nos pueden ayudar a entender el perfil genético del tumor a partir de una sola muestra de sangre."
                 },
                 "Analyze": {
-                    "Title": "[es]E. We’ll Analyze Your Tumor and Medical Data.",
-                    "Text": "[es]If we request and obtain your tissue, we will perform cutting-edge, comprehensive genomic analyses on your tumor and saliva sample. Sequencing data we generate will be securely stored in a protected database at the Broad Institute along with information from your medical record. Any information that would make it easy to identify you as an individual will be removed from all genomic and clinical data."
+                    "Title": "E. Analizaremos sus registros médicos y su tumor.",
+                    "Text": "Una vez que hayamos obtenido sus muestras de tejido de tumor y saliva, realizaremos análisis genómicos de última generación en sus muestras. Los datos de secuenciación genómica que obtengamos estarán almacenados y seguros en una base de datos protegida en el Instituto Broad (Broad Institute), junto con la información de sus registros médicos. Cualquier información que facilite el identificarle a usted como individuo será borrada de todos los datos genómicos y clínicos para proteger su identidad."
                 },
                 "Share": {
-                    "Title": "[es]F. We’ll Share the Data with Other Researchers.",
-                    "Text": "[es]Once potentially identifying information has been removed, our database of genomic and medical information (with your identifying information removed) will be shared with the National Institutes of Health and the cancer research community, and will be able to be used for other genomic and molecular studies to help understand metastatic breast cancer and develop new therapies."
+                    "Title": "F. Compartiremos datos anónimos con otros investigadores.",
+                    "Text": "Una vez que la información que pueda identificarla/o haya sido borrada, nuestra base de datos con información genómica y médica (con su información personal borrada) será compartida con Los Institutos Nacionales de la Salud (National Institutes of Health, NIH) y la comunidad de investigadores de cáncer. Esta información podrá ser usada para otros estudios genómicos y moleculares para mejorar la comprensión del cáncer de mama metastásico y el desarrollo de nuevas terapias."
                 },
                 "Learn": {
-                    "Title": "[es]G. Learn with us along the way.",
-                    "TextPt1": "[es]We are excited to learn with you! Throughout the project, we will provide all patients who say \"Count Me In\" with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you. We will send updates through email, but also through social media. You can follow us on",
-                    "TextPt2": "[es]and",
+                    "Title": "G. Aprende junto con nosotros.",
+                    "TextPt1": "¡Estamos entusiasmados de aprender junto con usted! Durante el proyecto, compartiremos regularmente con los participantes que hayan dicho \"Cuenten conmigo\", el progreso del estudio e información sobre nuevos estudios que estaremos llevando a cabo. También estaremos compartiendo con usted nueva información que se genere de los estudios. Es posible que le hagamos preguntas adicionales sobre su experiencia para ayudarnos a diseñar nuevos estudios en el futuro - queremos saber qué es importante para usted. Compartiremos estas noticias vía correo electrónico y también a través de redes sociales. Puede seguirnos en",
+                    "TextPt2": "e",
                     "Socials": {
-                        "Twitter": "[es]Twitter",
-                        "Facebook": "[es]Facebook",
-                        "Instagram": "[es]Instagram"
+                        "Twitter": "Twitter",
+                        "Facebook": "Facebook",
+                        "Instagram": "Instagram"
                     }
                 }
             },
             "FAQ": {
-                "Title": "[es]Frequently Asked Questions",
+                "Title": "Preguntas Frecuentes",
                 "Goal": {
-                    "Question": "[es]1. What is the goal of this project?",
-                    "Section1": "[es]This project will connect metastatic breast cancer patients around the world with scientists using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle.",
-                    "Section2": "[es]Today, very few patients contribute their tumor samples and clinical data to cancer research, largely because they do not have a way of doing so. We believe everyone should have the opportunity to contribute to research, especially now that the combination of genome sequencing and internet-based communication has made it easier to give people that opportunity.",
-                    "Section3": "[es]We hope our studies will help us understand the genomic landscape of metastatic breast cancer. By discovering the genes that drive this disease, we hope to be able to design effective therapies to treat metastatic breast cancer."
+                    "Question": "1. ¿Cuál es el propósito de este proyecto?",
+                    "Section1": "Este proyecto conectará a pacientes con cáncer de mama metastásico tratados en clínicas y hospitales con científicos que usan tecnología de última generación para estudiar las causas genéticas y moleculares del cáncer. El cáncer no es una sola enfermedad aislada y cada tumor contiene una pieza del rompecabezas.",
+                    "Section2": "Hoy en día, muy pocos pacientes comparten muestras de sus tumores y datos clínicos para la investigación del cáncer, principalmente porque no tienen la forma de hacerlo. Creemos que todos deben de tener la oportunidad de contribuir a la investigación, especialmente ahora que la comunicación a través de Internet y la secuenciación de genomas han facilitado brindar esta oportunidad a las personas.",
+                    "Section3": "Esperamos que nuestros estudios ayuden a comprender las características genómicas del cáncer de mama metastásico. Al descubrir los genes que están involucrados en esta enfermedad, esperamos diseñar terapias efectivas para tratar el cáncer de mama metastásico."
                 },
                 "Conduct": {
-                    "Question": "[es]2. Who is conducting this research?",
+                    "Question": "2. ¿Quién está llevando a cabo esta investigación?",
                     "Text": {
-                        "Pt1": "[es]This project is being conducted by",
-                        "Pt2": "[es]a nonprofit organization that brings together patients & researchers as partners to accelerate discoveries in cancer research.",
-                        "Pt3": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. The MBCproject also works in collaboration with a growing coalition of non-profit advocacy partners. Our team — led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher — is made up of cancer researchers, physicians, clinical specialists, and patient advocates. Learn more",
-                        "Pt4": "[es]about us here"
+                        "Pt1": "El proyecto está siendo llevado a través de",
+                        "Pt2": "una organización sin fines de lucro que colabora junto con pacientes e investigadores de cáncer para acelerar descubrimientos en la investigación del cáncer.",
+                        "Pt3": "es codirigido por cuatro organizaciones: Emerson Collective, una organización de transformación social basada en California; el Instituto Broad de MIT y Harvard (Broad Institute of MIT and Harvard), una institución de investigación biomédica sin fines de lucro; el Biden Cancer Initiative, una organización independiente sin fines de lucro que se basa en el Cáncer Moonshot del gobierno federal; y el Instituto de Cáncer Dana-Farber (Dana-Farber Cancer Institute), un hospital líder en el tratamiento del cáncer. Nuestro equipo – dirigido por el Dr. Nikhil Wagle, un oncólogo especializado en cáncer de mama e investigador de cáncer de mama metastásico – está compuesto por investigadores de cáncer, médicos, especialistas clínicos y grupos aliados de pacientes. Más información sobre nosotros",
+                        "Pt4": "aquí"
                     }
                 },
                 "InvolvedInProject": {
-                    "Question": "[es]3. How have patients been involved in the design of this project?",
-                    "Section1": "[es]We have worked closely with patients and patient advocates within the metastatic breast cancer community from the beginning of this project through its design and implementation. Patients have been involved in all aspects including concept, goals, messaging, forms, and even the design of this website. The MBCproject is constantly evolving, and at every turn, we ask for patient feedback to ensure that we are aligned with the metastatic breast cancer community.",
-                    "Section2": "[es]We’re proud to have as our Advocacy Partners the MBC Alliance, Avon, the Metastatic Breast Cancer Network, Living Beyond Breast Cancer, the Young Survivors Coalition, the Inflammatory Breast Cancer Research Foundation, SHARE, METAvivor, Theresa's Research Foundation, TigerLily, Triple Negative Breast Cancer Foundation, The IBC Network Foundation, Advocates for Breast Cancer, METup, the Male Breast Cancer Coalition, Susan G. Komen, Breast Cancer Research Foundation, Dr. Susan Love Research Foundation, BCSM: Breast Cancer Social Media, Hope Scarves, The Cancer Couch Foundation, Twisted Pink, Cierra Sisters, BreastCancerTrials.org, Breast Cancer Alliance, The Tutu Project, Metaplastic Breast Cancer Global Alliance, Lobular Breast Cancer Alliance, FORCE, Shay Sharpe’s Pink Wishes, Metastasis Research Society, Sisters R Us Circle of Survivors, Health Ministries Network, the Minority Coalition for Precision Medicine, and Metastatic Breast Cancer Canada."
+                    "Question": "3. ¿Cómo se han involucrado los pacientes en el diseño de este proyecto?",
+                    "Section1": "Hemos trabajado cerca con pacientes y grupos aliados de pacientes dentro de la comunidad de cáncer de mama metastásico desde el inicio de este proyecto y a lo largo del diseño e implementación. Los pacientes han estado involucrados en todos los aspectos, incluyendo conceptualización del proyecto, metas, comunicación, los formularios que utilizamos e incluso en el diseño de esta página de internet. El MBCproject continúa evolucionando, y en cada paso, buscamos la ayuda de pacientes para asegurar que estamos en sincronía con la comunidad de pacientes con cáncer de mama metastásico.",
+                    "Section2": "Estamos orgullosos de mencionar a estas organizaciones como nuestros aliados en el MBCproject, Avon, Metastatic Breast Cancer Network, Living Beyond Breast Cancer, Young Survivors Coalition, Inflammatory Breast Cancer Research Foundation, SHARE, METAvivor, Theresa's Research Foundation, TigerLily, Triple Negative Breast Cancer Foundation, The IBC Network Foundation, Advocates for Breast Cancer, METup, Male Breast Cancer Coalition, Susan G. Komen, Breast Cancer Research Foundation, Dr. Susan Love Research Foundation, BCSM: Breast Cancer Social Media, Hope Scarves, The Cancer Couch Foundation, Twisted Pink, Cierra Sisters, BreastCancerTrials.org, Breast Cancer Alliance, The Tutu Project, Metaplastic Breast Cancer Global Alliance, Lobular Breast Cancer Alliance, FORCE, Shay Sharpe’s Pink Wishes, Metastasis Research Society, Sisters R Us Circle of Survivors, Health Ministries Network, Minority Coalition for Precision Medicine, y el Metastatic Breast Cancer Canada."
                 },
                 "Costs": {
-                    "Question": "[es]4. Are there any costs for me to participate?",
-                    "Text": "[es]No, there are no costs to you."
+                    "Question": "4. ¿Hay algún costo por participar en este proyecto?",
+                    "Text": "No. No existe ningún costo para usted."
                 },
                 "TumorTissue": {
-                    "Question": "[es]5. After I provide my information, will I be asked to share my tumor tissue and medical records?",
-                    "Text": "[es]We will be asking for consent from all patients with metastatic breast cancer who enroll in this study. As part of the process of providing consent, we will ask your permission to share your stored tumor tissue. We will keep you informed about our progress along the way."
+                    "Question": "5. Después de proporcionar mi información, ¿me pedirán compartir una pequeña muestra de mi tejido de tumor e información clínica?",
+                    "Text": "Si, pediremos el consentimiento de todos los pacientes que se inscriban al estudio. Como parte del proceso de consentimiento, le pediremos su permiso para que el Metastatic Breast Cancer Project obtenga copias de sus registros médicos. Le preguntaremos si desea proporcionar una parte de su tumor almacenado y/o una muestra de su sangre. El tejido de tumor almacenado es obtenido enviando una solicitud directamente a los departamentos de patología. Esta información es obtenida de la forma de autorización y al leer los registros médicos del paciente. Se le mantendrá informada/o de nuestro proyecto durante el transcurso del estudio."
                 },
                 "TissueSample": {
-                    "Question": "[es]6. If I am asked to share a tissue sample, will my tissue be used up?",
-                    "Text": "[es]We will take every measure to ensure that your samples are not used up as a result of these studies. We will ask the pathologists who have access to your stored tumor samples to make sure that they share only a small portion with us. If there doesn’t appear to be enough to allow for future clinical testing, we will not request for your samples to be sent to us. If we get what we feel is excess tissue, we will only take what we need and send the rest back."
+                    "Question": "6. Si me piden que comparta una muestra de mi tejido de tumor, ¿usarán todo el tejido?",
+                    "Text": "Si elige compartir tejido de muestras de tumor como parte del estudio, tomaremos todas las medidas necesarias para que sus muestras no sean agotadas.<br/>Para tener una idea de los tejidos de tumores almacenados que están disponibles, antes de pedirlos, nuestro equipo lee todo el registro médico para crear un historial de cirugías relacionadas con su cáncer. Una vez que creamos este historial, mandamos una solicitud directamente a los departamentos de patología donde se encuentra su tejido. Le pedimos a los departamentos de patología que envíen muestras en forma de portaobjetos o bloques sin tinción patológica. Como condición para enviarnos una porción de la muestra, les pedimos que no agoten toda la muestra. Si no hay suficiente tejido para poder realizar futuras pruebas clínicas, no pediremos que nos envíen sus muestras.<br/>Si no tiene tejido disponible o elige no compartir sus muestras de tejido de tumor almacenadas, puede optar por proporcionar una muestra de sangre en lugar de, o además de, muestras de tejido de tumor. Si recibimos más tejido de lo necesario, solamente tomaremos una pequeña parte de su muestra y el resto será regresado."
                 },
                 "TissueAndMedicalRecords": {
-                    "Question": "[es]7. If my tissue and medical records are analyzed, will I receive any information back from this study?",
-                    "Text": "[es]Because our sequencing tests are performed in a research lab and not a clinical lab, we are not currently permitted to return personal genetic data to you. However, we will regularly update you with key discoveries that we make about this disease, overall results, and progress made through this research."
+                    "Question": "7. Si mi tejido de tumor y datos clínicos son analizados, ¿recibiré la información de mis estudios genéticos?",
+                    "Text": "Nuestros estudios de secuenciación genómica son realizados en un laboratorio de investigación y no en un laboratorio clínico, por esta razón no tenemos permitido regresarle sus datos genéticos personales. Se le mantendrá informada/o sobre información nueva e importante sobre esta enfermedad, resultados sobre el proyecto y el progreso de la investigación."
                 },
                 "Profit": {
-                    "Question": "[es]8. Is this research being conducted for profit?",
-                    "Text": "[es]No. This project is a not-for-profit, academic research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in a way that protects your personal information in order to fuel discoveries."
+                    "Question": "8. ¿Esta investigación se realiza con fines de lucro?",
+                    "Text": "No. Este proyecto es un esfuerzo sin fines de lucro. Nuestra misión es generar, compilar y compartir libremente datos con la comunidad de investigación de forma que se proteja su información personal para acelerar descubrimientos científicos en cáncer."
                 },
                 "InfoForPhysicians": {
-                    "Question": "[es]9. Is there information that I can bring to my doctor so that I can discuss this study with them?",
-                    "Text": "[es]Yes, you can print out or use your mobile device to share the document linked here:",
-                    "Link": "[es]Metastatic Breast Cancer Project For Physicians"
+                    "Question": "9. ¿Hay alguna información que pueda proporcionar a mi médico y/u hospital para poder hablar sobre este estudio con ellos?",
+                    "Text": "Sí, puede imprimir o usar su dispositivo móvil para compartir este documento:",
+                    "Link": "The Metastatic Breast Cancer Project para Médicos"
                 },
                 "AggregatedData": {
-                    "Question": "[es]10. Where can I find the most recent aggregate data that's been presented?",
-                    "Text": "[es]Up-to-date information about data generated from the project can be found at"
+                    "Question": "10. ¿Dónde puedo encontrar la información más reciente que se ha publicado?",
+                    "Text": "Información sobre el proyecto más reciente, se pueden encontrar en nuestro sitio web,"
                 },
                 "OtherQuestions": {
-                    "Title": "[es]Do you have other questions?",
+                    "Title": "¿Tiene alguna otra pregunta?",
                     "Section1": {
-                        "Text": "[es]You can access a 1 page printable information sheet about the project linked here:",
-                        "Link": "[es]The Metastatic Breast Cancer Project"
+                        "TextPt1": "Puede dar clic en esta página,",
+                        "TextPt2": ", para imprimir un documento con más información.",
+                        "Link": "The Metastatic Breast Cancer Project"
                     },
                     "Section2": {
-                        "TextPt1": "[es]If you have any other questions, please email us at ",
-                        "TextPt2": "[es]or call us at"
+                        "TextPt1": "Si le gustaría obtener más información, puede contactarnos a nuestro correo electrónico: ",
+                        "TextPt2": "o llámenos al"
                     }
                 }
             }
