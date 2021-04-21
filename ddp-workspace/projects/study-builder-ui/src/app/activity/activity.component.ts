@@ -6,63 +6,50 @@ import { Template } from '../model/template';
 import { FormActivityDef } from '../model/formActivityDef';
 
 @Component({
-  selector: 'app-activity',
-  templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.scss']
+    selector: 'app-activity',
+    templateUrl: './activity.component.html',
+    styleUrls: ['./activity.component.scss']
 })
 export class ActivityComponent {
-  @Input()
-  public activity: FormActivityDef = {} as FormActivityDef;
+    @Input()
+    public activity: FormActivityDef = {} as FormActivityDef;
 
-  //public modelProxy: ExtendedBasicActivityDef = {} as ExtendedBasicActivityDef;
 
-  public shouldShowReadonlyHint = false;
+    public shouldShowReadonlyHint = false;
 
-  constructor(private config: ConfigurationService) {
-    // const handler: ProxyHandler<BasicActivityDef> = {
-    //   get(target: BasicActivityDef, prop: string | number | symbol, receiver: any): any {
-    //     if (prop === 'title') {
-    //       return target.translatedTitles.filter(trans => trans.language === 'en')
-    //         .map(trans => trans.text)
-    //         .find(x => 1 == 1);
-    //     }
-    //     return Reflect.get(target, prop, receiver);
-    //   }
-    // };
-    // this.modelProxy = new Proxy(this.model, handler) as ExtendedBasicActivityDef;
-  }
+    constructor(private config: ConfigurationService) {}
 
-  public get title(): string | null {
-    return this.getDefaultTranslationText(this.activity.translatedTitles);
-  }
-
-  public get subtitle(): string | null {
-    return this.getDefaultTranslationText(this.activity.translatedSubtitles);
-  }
-
-  public get readonlyHint(): | string | null {
-    return this.getDefaultTranslationTemplateText(this.activity.readonlyHintTemplate);
-  }
-
-  private getDefaultTranslationTemplateText(template: Template | null | undefined) {
-    if(!template) {
-      return null;
+    public get title(): string | null {
+        return this.getDefaultTranslationText(this.activity.translatedTitles);
     }
-    type NameValue = { name: string, value: string};
-    const varNameToValue: Array<NameValue> = template.variables.map(tempVar =>
-      ({name: tempVar.name, value: this.getDefaultTranslationText(tempVar.translations)}))
-      .filter(each => each.value !== null) as Array<NameValue>;
 
-    let templateValue = template.templateText;
-    varNameToValue.forEach(varNameToValue =>
-      //@TODO handle case where $ is being escaped
-      templateValue = templateValue.replace('$' + varNameToValue.name, varNameToValue.value)
-    );
-    return templateValue;
-  }
+    public get subtitle(): string | null {
+        return this.getDefaultTranslationText(this.activity.translatedSubtitles);
+    }
 
-  private getDefaultTranslationText(translations: Array<Translation> | null | undefined): string | null {
-      const text = translations?.find(trans => trans.language === this.config.defaultLanguageCode)?.text;
-      return typeof(text) === 'string' ? text : null;
-  }
+    public get readonlyHint(): | string | null {
+        return this.getDefaultTranslationTemplateText(this.activity.readonlyHintTemplate);
+    }
+
+    private getDefaultTranslationTemplateText(template: Template | null | undefined) {
+        if (!template) {
+            return null;
+        }
+        type NameValue = { name: string, value: string };
+        const varNameToValue: Array<NameValue> = template.variables.map(tempVar =>
+            ({ name: tempVar.name, value: this.getDefaultTranslationText(tempVar.translations) }))
+            .filter(each => each.value !== null) as Array<NameValue>;
+
+        let templateValue = template.templateText;
+        varNameToValue.forEach(varNameToValue =>
+            //@TODO handle case where $ is being escaped
+            templateValue = templateValue.replace('$' + varNameToValue.name, varNameToValue.value)
+        );
+        return templateValue;
+    }
+
+    private getDefaultTranslationText(translations: Array<Translation> | null | undefined): string | null {
+        const text = translations?.find(trans => trans.language === this.config.defaultLanguageCode)?.text;
+        return typeof (text) === 'string' ? text : null;
+    }
 }
