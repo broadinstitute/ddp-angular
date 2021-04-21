@@ -81,6 +81,7 @@ export class ParticipantsListComponent implements OnInit {
   onDeleteClick({ userGuid }: GovernedParticipant): void {
     const dialogRef = this.dialog.open(ParticipantDeletionDialogComponent, {
       maxWidth: '640px',
+      autoFocus: false,
     });
 
     dialogRef
