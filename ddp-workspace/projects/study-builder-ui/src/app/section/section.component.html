@@ -3,8 +3,10 @@
     </ng-container>
 
     <ng-template #hasBlocks>
-        <div>
-            has blocks
+        <div *ngFor="let block of section.blocks">
+            <div *ngIf="block.blockType === 'CONTENT'">
+                Got your content right heah!
+            </div>
         </div>
     </ng-template>
 

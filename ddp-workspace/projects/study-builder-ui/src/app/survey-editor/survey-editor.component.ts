@@ -12,8 +12,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SurveyEditorComponent implements OnInit {
   public allActivities$: Observable<ActivityDef[]>;
-  private currentActivitySubject = new BehaviorSubject<ActivityDef | null>(null);
-  public currentActivity$ = this.currentActivitySubject.asObservable();
+  public currentActivity$: Observable<ActivityDef | null>;
 
   //@TODO
   public studyGuid$ = of('Hello');
@@ -27,13 +26,13 @@ export class SurveyEditorComponent implements OnInit {
       switchMap(studyGuid => editorService.findAllActivityDefinitions(studyGuid)),
       tap(allActivities => this.setCurrentActivity(allActivities.length ? allActivities[0] : null))
     );
-
+    this.currentActivity$ = editorService.currentActivityDef$;
     this.currentActivity$.subscribe(activity => console.log('The current activity: %o', activity));
   }
 
   ngOnInit(): void {
     console.log('ngOnInit called');
-    const setCurrentFromFormAction$ =this.form.controls['activityCode'].valueChanges.pipe(
+    const setCurrentFromFormAction$ = this.form.controls['activityCode'].valueChanges.pipe(
       withLatestFrom(this.allActivities$),
       map(([code, activities]) => activities.find(activity => activity.activityCode === code)),
       tap(activity => this.setCurrentActivity(activity ? activity : null))
@@ -50,10 +49,10 @@ export class SurveyEditorComponent implements OnInit {
   }
 
   setCurrentActivity(activity: ActivityDef | null): void {
-    this.currentActivitySubject.next(activity);
+    this.editorService.setCurrentActivity(activity);
   }
 
-  createNewActivity() {
+  createNewActivity(): void {
     console.log("create new activity called");
     this.studyGuid$.pipe(
       map(studyGuid => this.editorService.createNewBlankActivityDefinition(studyGuid)),

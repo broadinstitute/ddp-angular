@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityDefinitionEditorService } from '../services/activity-definition-editor.service';
 
 @Component({
-  selector: 'app-survey-component-palette',
-  templateUrl: './survey-component-palette.component.html',
-  styleUrls: ['./survey-component-palette.component.scss']
+    selector: 'app-survey-component-palette',
+    templateUrl: './survey-component-palette.component.html',
+    styleUrls: ['./survey-component-palette.component.scss']
 })
 export class SurveyComponentPaletteComponent implements OnInit {
 
-  constructor() { }
+    constructor(private editorService: ActivityDefinitionEditorService) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
+    addContentBlock(): void {
+        this.editorService.addBlankContentBlock();
+    }
 }
