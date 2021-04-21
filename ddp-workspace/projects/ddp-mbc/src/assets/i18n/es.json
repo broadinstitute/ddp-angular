@@ -473,7 +473,7 @@
             "Understand": "[es]We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
         },
         "Dashboard": {
-            "Title": "[es]Dashboard"
+            "Title": "Tablero de Progreso"
         },
         "ErrorPage": {
             "Title": "Hemos encontrado un error",
@@ -502,7 +502,7 @@
         "NextButton": "[es]NEXT",
         "PreviousButton": "[es]PREV",
         "SavingButton": "[es]SAVING",
-        "EditButton": "[es]EDIT",
+        "EditButton": "EDITAR",
         "ReviewButton": "[es]VIEW",
         "ValidateError": "[es]Please correct any errors in the form.",
         "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
@@ -530,11 +530,11 @@
             "LanguageSelection": "[es]language selection"
         },
         "UserActivities": {
-            "ActivityName": "[es]Form",
-            "Summary": "[es]Summary",
-            "ActivityStatus": "[es]Status",
-            "ActivityDate": "[es]Created",
-            "ActivityActions": "[es]Actions"
+            "ActivityName": "Forma",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado",
+            "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
             "GovernedParticipants": "[es]Governed participants",
@@ -552,8 +552,8 @@
             "UserPreferencesLocale": "[es]Preferred language"
         },
         "Dashboard": {
-            "Title": "[es]My Dashboard",
-            "Text": "[es]The dashboard below describes each Metastatic Breast Cancer Project form and its status."
+            "Title": "Mi Tablero",
+            "Text": "Este tablero describe cada forma para el MBC Project y su estado."
         },
         "DatePicker": {
             "Day": "[es]Choose day...",
@@ -573,7 +573,7 @@
             "December": "[es]December"
         },
         "UserMenu": {
-            "DashboardButton": "[es]Dashboard",
+            "DashboardButton": "Tablero de Progreso",
             "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
