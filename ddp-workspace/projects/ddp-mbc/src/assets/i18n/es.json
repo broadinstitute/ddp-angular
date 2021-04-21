@@ -455,13 +455,13 @@
             "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Password": {
-            "Title": "[es]Please enter the password",
-            "Text": "[es]Please enter your password",
-            "SubmitButton": "[es]SUBMIT",
-            "PasswordWrongError": "[es]Incorrect password. Please try again.",
-            "OtherError": "[es]We're sorry, but an error has occurred. Please try again.",
+            "Title": "Por favor ingrese su contraseña",
+            "Text": "Por favor ingrese su contraseña",
+            "SubmitButton": "ENVIAR",
+            "PasswordWrongError": "La contraseña incorrecta. Inténtalo de nuevo, por favor.",
+            "OtherError": "Lo sentimos, pero un error ha ocurrido. Inténtalo de nuevo, por favor.",
             "PasswordField": {
-                "Error": "[es]Password is required"
+                "Error": "Una contraseña es requerido"
             }
         },
         "InternationalPatients": {
@@ -488,10 +488,10 @@
         },
         "SessionExpired": {
             "Text": {
-                "Pt1": "[es]You were away for a while, so we logged you out as a security precaution.",
-                "Pt2": "[es]Please log in again to return to the last page you were on."
+                "Pt1": "Su sesión fue cerrada por precaución de seguridad por falta de inactividad.",
+                "Pt2": "Por favor vuelva a iniciar su sesión para regresar a la ultima página en la que estaba."
             },
-            "LogInButton": "[es]Log In"
+            "LogInButton": "Iniciar Sesión"
         }
     },
     "SDK": {
