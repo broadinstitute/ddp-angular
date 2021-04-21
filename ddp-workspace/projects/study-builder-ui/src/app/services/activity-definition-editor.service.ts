@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivityDef } from '../model/activityDef';
 import { BasicActivityDef } from '../model/basicActivityDef';
 import { FormSectionDef } from '../model/formSectionDef';
+import { ContentBlockDef } from '../model/contentBlockDef';
 import { ConfigurationService } from '../configuration.service';
 import { TestBostonConsent } from '../testdata/testbostonConsent';
 import { TestBostonCovidSurvey } from '../testdata/testbostonCovidSurvey';
@@ -67,6 +68,28 @@ export class ActivityDefinitionEditorService {
 
   private createDefaultSection(): FormSectionDef {
     return { blocks: [], icons: [], nameTemplate: null };
+  }
+
+  private createDefaultContentBlock(): ContentBlockDef {
+    return {
+      blockType: 'CONTENT',
+      titleTemplate: null,
+      bodyTemplate: {
+        templateType: 'HTML',
+        templateText: '$__template__',
+        variables: [
+          {
+            name: '__template__',
+            translations: [
+              {
+                language: 'en',
+                text: '...content here'
+              }
+            ]
+          }
+        ]
+      }
+    };
   }
 
   private buildDefaultActivityCode(): string {
