@@ -3,10 +3,11 @@
     </ng-container>
 
     <ng-template #hasBlocks>
-        <div *ngFor="let block of section.blocks">
-            <div *ngIf="block.blockType === 'CONTENT'">
-                Got your content right heah!
-            </div>
+        <div *ngFor="let block of section.blocks" class="Ha!">
+            <app-content-block *ngIf="block.blockType === 'CONTENT'" [block]="block">
+            </app-content-block>
+            <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'" [block]="block">
+            </app-text-question-block>
         </div>
     </ng-template>
 

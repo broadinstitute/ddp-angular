@@ -15,6 +15,8 @@ import { ActivityComponent } from './activity/activity.component';
 import { SectionComponent } from './section/section.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ContentBlockComponent } from './content-block/content-block.component';
+import { TextQuestionBlockComponent } from './text-question-block/text-question-block.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
     SurveyComponentPaletteComponent,
     SurveyEditorComponent,
     ActivityComponent,
-    SectionComponent
+    SectionComponent,
+    ContentBlockComponent,
+    TextQuestionBlockComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,14 @@ import { ConfigurationService } from '../configuration.service';
 import { TestBostonConsent } from '../testdata/testbostonConsent';
 import { TestBostonCovidSurvey } from '../testdata/testbostonCovidSurvey';
 import { map } from 'rxjs/operators';
+import { TextQuestionDef } from '../model/textQuestionDef';
+import { TextInputType } from '../model/textInputType';
+import { SuggestionType } from '../model/suggestiionType';
+import { Template } from '../model/template';
+import { QuestionType } from '../model/questionType';
+import { RuleDef } from '../model/ruleDef';
+import { QuestionDef } from '../model/questionDef';
+import { QuestionBlockDef } from '../model/questionBlockDef';
 
 // @TODO: Scope this service to one instance per activity editor
 @Injectable({
@@ -75,21 +83,25 @@ export class ActivityDefinitionEditorService {
         return {
             blockType: 'CONTENT',
             titleTemplate: null,
-            bodyTemplate: {
-                templateType: 'HTML',
-                templateText: '$__template__',
-                variables: [
-                    {
-                        name: '__template__',
-                        translations: [
-                            {
-                                language: 'en',
-                                text: '...content here'
-                            }
-                        ]
-                    }
-                ]
-            }
+            bodyTemplate: this.createBlankTemplate()
+        };
+    }
+
+    private createBlankTemplate(): Template {
+        return {
+            templateType: 'HTML',
+            templateText: '$__template__',
+            variables: [
+                {
+                    name: '__template__',
+                    translations: [
+                        {
+                            language: 'en',
+                            text: '...content here'
+                        }
+                    ]
+                }
+            ]
         };
     }
 
@@ -113,5 +125,33 @@ export class ActivityDefinitionEditorService {
       activityToUpdate = this.currentActivityDefSubject.getValue();
       activityToUpdate?.sections[0].blocks.push(this.createDefaultContentBlock());
       this.currentActivityDefSubject.next(activityToUpdate);
+    }
+    public addBlankTextQuestionBlock(): void {
+        let activityToUpdate;
+        activityToUpdate = this.currentActivityDefSubject.getValue();
+        activityToUpdate?.sections[0].blocks.push(this.createDefaultTextQuestionBlock());
+        this.currentActivityDefSubject.next(activityToUpdate);
+    }
+    private createDefaultTextQuestionBlock(): QuestionBlockDef {
+        return {
+            blockType: 'QUESTION',
+            question: this.createDefaultTextQuestion()
+        };
+    }
+
+    private createDefaultTextQuestion(): TextQuestionDef {
+        return {
+            questionType: 'TEXT',
+            stableId: '',
+            isRestricted: false,
+            isDeprecated: false,
+            promptTemplate: this.createBlankTemplate(),
+            validations: [],
+            hideNumber: false,
+            inputType: 'TEXT',
+            suggestionType: 'NONE',
+            placeholderTemplate: null,
+            suggestions: []
+        };
     }
 }
