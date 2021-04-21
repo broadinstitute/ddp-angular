@@ -1,2 +1,8 @@
-<div *ngIf="title" [innerHTML]="title"></div>
-<div class="ddp-content" [innerHTML]="content"></div>
+<div class="content-block-container">
+    <h3>Content Block</h3>
+    <editor
+        [init]="editorInit()"
+        [initialValue]="initialContent()"
+        (onChange)="onContentChange($event)">
+    </editor>
+</div>

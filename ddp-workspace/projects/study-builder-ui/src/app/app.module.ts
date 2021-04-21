@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,9 +36,10 @@ import { TextQuestionEditorComponent } from './text-question-editor/text-questio
   imports: [
     BrowserModule,
     AppRoutingModule,
+    EditorModule,
     FlexLayoutModule,
-      MatButtonModule,
-      MatIconModule,
+    MatButtonModule,
+    MatIconModule,
     MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule

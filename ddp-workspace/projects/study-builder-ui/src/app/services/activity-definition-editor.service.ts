@@ -97,7 +97,7 @@ export class ActivityDefinitionEditorService  {
                     translations: [
                         {
                             language: 'en',
-                            text: '...content here'
+                            text: ''
                         }
                     ]
                 }
