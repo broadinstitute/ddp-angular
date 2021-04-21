@@ -31,7 +31,7 @@ export class ActivityDefinitionEditorService {
         const foundDef = defs.find(def => def.activityCode === activityCode);
         return foundDef ? foundDef : null;
       })
-    )
+    );
 
   }
 
