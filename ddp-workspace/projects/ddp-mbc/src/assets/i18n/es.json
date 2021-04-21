@@ -465,15 +465,15 @@
             }
         },
         "InternationalPatients": {
-            "Title": "[es]Information for International Patients",
+            "Title": "Información para pacientes internacionales",
             "ThankYou": {
-                "TextPt1": "[es]Thank you for your interest in joining the Metastatic Breast Cancer Project. Currently, the Metastatic Breast Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
-                "TextPt2": "[es]or"
+                "TextPt1": "Gracias por su interés en unirse al MBC proyecto. En este momento, el MBC proyecto está abierto solo a pacientes en los Estados Unidos, sus territorios y Canadá. De acuerdo a sus respuestas en el cuestionario inicial, usted en este momento no vive en los Estados Unidos o Canadá. Pero si usted vive o recibe tratamiento en los Estados Unidos o Canadá, por favor comuníquese con nosotros a ",
+                "TextPt2": "o llame al"
             },
-            "Understand": "[es]We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+            "Understand": "Entendemos que las experiencias de cada paciente son importantes y queremos en un futuro extender estos estudios a nivel internacional. Estudiando de donde se registran las personas puede permitimos a comprender mejor que partes del mundo podrían estar mas interesadas en participar en futuros proyectos de Cuenten Conmigo."
         },
         "Dashboard": {
-            "Title": "[es]Dashboard"
+            "Title": "Tablero de Progreso"
         },
         "ErrorPage": {
             "Title": "Hemos encontrado un error",
@@ -502,7 +502,7 @@
         "NextButton": "[es]NEXT",
         "PreviousButton": "[es]PREV",
         "SavingButton": "[es]SAVING",
-        "EditButton": "[es]EDIT",
+        "EditButton": "EDITAR",
         "ReviewButton": "[es]VIEW",
         "ValidateError": "[es]Please correct any errors in the form.",
         "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
@@ -530,11 +530,11 @@
             "LanguageSelection": "[es]language selection"
         },
         "UserActivities": {
-            "ActivityName": "[es]Form",
-            "Summary": "[es]Summary",
-            "ActivityStatus": "[es]Status",
-            "ActivityDate": "[es]Created",
-            "ActivityActions": "[es]Actions"
+            "ActivityName": "Forma",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado",
+            "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
             "GovernedParticipants": "[es]Governed participants",
@@ -552,8 +552,8 @@
             "UserPreferencesLocale": "[es]Preferred language"
         },
         "Dashboard": {
-            "Title": "[es]My Dashboard",
-            "Text": "[es]The dashboard below describes each Metastatic Breast Cancer Project form and its status."
+            "Title": "Mi Tablero",
+            "Text": "Este tablero describe cada forma para el MBC Project y su estado."
         },
         "DatePicker": {
             "Day": "[es]Choose day...",
@@ -573,7 +573,7 @@
             "December": "[es]December"
         },
         "UserMenu": {
-            "DashboardButton": "[es]Dashboard",
+            "DashboardButton": "Tablero de Progreso",
             "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
