@@ -3,7 +3,7 @@ import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityForm } from '../../../../models/activity/activityForm';
 import { EMPTY, of } from 'rxjs';
-import { catchError, concatMap, finalize, take, tap } from 'rxjs/operators';
+import { catchError, concatMap, take, tap } from 'rxjs/operators';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
@@ -38,9 +38,8 @@ export class EmbeddedActivityBlockComponent implements OnInit {
             this.logger.logError(this.LOG_SOURCE, 'An error during completing an activity', err);
             return EMPTY;
         }),
-        take(1),
-        finalize(() => this.componentBusy.emit(false))
-    ).subscribe();
+        take(1)
+    ).subscribe(() => this.componentBusy.emit(false));
   }
 
   public getSectionId(index: number, {name}: ActivitySection): string {
