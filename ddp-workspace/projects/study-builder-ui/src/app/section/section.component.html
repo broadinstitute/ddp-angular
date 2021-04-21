@@ -1,5 +1,22 @@
-<!--<ng-container *ngIf="section">-->
-<!--<div class="margin-bottom" *ngFor="let block of section.blocks">-->
+<ng-container *ngIf="section">
+    <ng-container *ngIf="section.blocks.length > 0; then hasBlocks else noBlocks">
+    </ng-container>
+
+    <ng-template #hasBlocks>
+        <div>
+            has blocks
+        </div>
+    </ng-template>
+
+    <ng-template #noBlocks>
+        <div class="no-blocks">
+            <div class="mid">no blocks</div>
+        </div>
+    </ng-template>
+</ng-container>
+
+<!-- <ng-container *ngIf="section"> -->
+<!-- <div class="margin-bottom" *ngFor="let block of section.blocks"> -->
 <!--  <ng-container *ngIf="displayNumber; then numbered else notNumbered">-->
 <!--  </ng-container>-->
 
@@ -32,7 +49,7 @@
 <!--                             [validationRequested]="validationRequested"-->
 <!--                             [studyGuid]="studyGuid"-->
 <!--                             [activityGuid]="activityGuid">-->
-<!--      </ddp-activity-question>-->
+      <!-- </ddp-activity-question> -->
 <!--      <ddp-activity-content *ngSwitchCase="'CONTENT'"-->
 <!--                            [block]="block">-->
 <!--      </ddp-activity-content>-->
@@ -66,4 +83,4 @@
 
 <!--</div>-->
 <!--</ng-container>-->
-<div></div>
+<!-- <div></div> -->
