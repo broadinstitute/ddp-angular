@@ -2,23 +2,14 @@
   height: 70px;
   border: 2px solid blue;
 }
-.two {
+.right-canvas-panel {
   border-color: gray;
   border-style: dashed;
+  min-height: 500px;
+
 }
-.two_one {
-  color: red;
-  border-color: red;
-  border-style: dashed;
-}
-.two_two {
-  color: blue;
-  border-color: blue;
-  border-style: dashed;
-}
-.two_three {
-  color: green;
-  border-color: green;
-  border-style: dashed;
+.left-panel {
+  height: 100%;
+  border: 2px solid red;
 }
 
