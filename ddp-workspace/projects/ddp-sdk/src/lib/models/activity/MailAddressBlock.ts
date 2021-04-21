@@ -17,6 +17,10 @@ export class MailAddressBlock extends ActivityBlock {
         return BlockType.MailAddress;
     }
 
+    get blocks(): Array<ActivityBlock> {
+        return [this];
+    }
+
     public validate(): boolean {
         return true;
     }

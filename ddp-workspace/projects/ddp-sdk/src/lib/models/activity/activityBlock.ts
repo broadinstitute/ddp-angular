@@ -8,6 +8,11 @@ export abstract class ActivityBlock {
 
     abstract get blockType(): BlockType;
 
+    /**
+     * all block contained by this block, including self
+     */
+    abstract get blocks(): Array<ActivityBlock>;
+
     public shouldScrollToFirstInvalidQuestion(): boolean {
         if (this.shown) {
             this.scrollTo = !this.valid;

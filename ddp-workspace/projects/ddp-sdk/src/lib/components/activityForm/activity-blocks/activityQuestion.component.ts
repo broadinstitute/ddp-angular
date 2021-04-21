@@ -39,7 +39,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
   @Input() studyGuid: string;
   @Input() activityGuid: string;
   @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-  @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
   public errorMessage$: Observable<string | string[] | null>;
   @ViewChild('scrollAnchor', { static: true }) scrollAnchor: ElementRef;
   private ngUnsubscribe = new Subject<void>();

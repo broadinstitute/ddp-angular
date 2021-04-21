@@ -17,6 +17,11 @@ export class ActivitySection {
         return this.getIcon('INCOMPLETE');
     }
 
+    // recursively return all the child blocks contained in section
+    public allChildBlocks(): Array<ActivityBlock> {
+        return this.blocks.reduce((acc, val) => acc.concat(val.blocks), []);
+    }
+
     public get completeIcon(): string {
         return this.getIcon('COMPLETE');
     }

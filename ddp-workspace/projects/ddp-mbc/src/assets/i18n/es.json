@@ -121,28 +121,24 @@
         },
         "AboutUs": {
             "PageHeader": {
-                "Pt1": "[es]The Metastatic Breast Cancer Project is part of ",
-                "Pt2": "[es]a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research."
+              "Pt1": "El Metastatic Breast Cancer Project es parte de ",
+              "Pt2": "una organización sin fines de lucro que atrae a pacientes e investigadores para juntos acelerar descubrimientos en la investigación del cáncer."
             },
-            "PageHeaderLink": {
-                "Pt1": "[es]Visit the",
-                "Pt2": "[es]website"
-            },
-            "Title": "[es]About us",
+          "PageHeaderLink": "Visite el sitio web <em>Cuenten Conmigo</em>",
+            "Title": "Sobre Nosotros",
             "Content": {
                 "Paragraph1": {
-                    "Pt1": "[es]is stewarded by four leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Biden Cancer Initiative, an independent nonprofit organization that builds on the federal government’s Cancer Moonshot; and the Dana-Farber Cancer Institute, a leading cancer hospital. For more information about",
-                    "Pt2": "[es]go to"
+                    "Pt1": "es codirigido por cuatro organizaciones: Emerson Collective, una organización de transformación social basada en California; el Instituto Broad de MIT y Harvard (Broad Institute of MIT and Harvard), una institución de investigación biomédica sin fines de lucro; el Biden Cancer Initiative, una organización independiente sin fines de lucro que se basa en el Cáncer Moonshot del gobierno federal; y el Instituto de Cáncer Dana-Farber (Dana-Farber Cancer Institute), un hospital líder en el tratamiento del cáncer. Para más información sobre",
+                    "Pt2": "visite"
                 },
                 "Paragraph2": {
-                    "Pt1": "[es]The MBCproject is led by Dr. Nikhil Wagle, MD, a breast cancer oncologist and metastatic breast cancer researcher and directed by Corrie Painter, PhD, a cancer researcher, cancer patient and patient advocate. This project was designed and has been implemented collaboratively with metastatic breast cancer patients, patient advocates, cancer researchers, physicians, and clinical specialists. We leverage the power of",
-                    "Pt2": "[es]resources and the voice of the metastatic breast cancer community in order to focus cutting edge genomic science squarely on people living with metastatic breast cancer. Special thanks to our friends at",
-                    "Pt3": "[es]Playground Inc.",
-                    "Pt4": "[es]for helping to design and develop this website."
+                    "Pt1": "El MBCproject, está siendo dirigido por el Dr. Nikhil Wagle, un oncólogo e investigador especializado en cáncer de mama y Corrie Painter, PhD, una investigadora de cáncer, paciente de cáncer y aliada de pacientes. Este proyecto fue diseñado y ha sido implementado en colaboración con pacientes que padecen de cáncer de mama metastásico, aliados de pacientes, investigadores de cáncer, médicos, y especialistas clínicos. Usamos los recursos y tecnología genómica del Instituto Broad (Broad Institute) y la voz de la comunidad de pacientes con cáncer de mama metastásico para enfocar nuestros esfuerzos en personas con esta enfermedad. Queremos agradecer especialmente a nuestros amigos de",
+                    "Pt2": "Playground Inc.",
+                    "Pt3": "por diseñar y desarrollar esta página web."
                 }
             },
-            "ContentLink": "[es]joincountmein.org",
-            "Partners": "[es]Our Advocacy Partners",
+            "ContentLink": "joincountmein.org",
+            "Partners": "Nuestros Aliados",
             "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
             "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
         },
@@ -150,134 +146,136 @@
             "Text": "[es]Please wait. You will be redirected to a destination soon..."
         },
         "DataRelease": {
-            "Title": "[es]MBCproject Data",
-            "ViewDataButton": "[es]VIEW MBCPROJECT DATA ON CBIOPORTAL",
-            "ViewDataBrowser": "[es]VIEW MBCPROJECT PATIENT DATA BROWSER",
+            "Title": "DATOS del MBCproject",
+            "ViewDataButton": "VER DATOS DEL MBCPROJECT EN CBIOPORTAL",
+            "ViewDataBrowser": "VER EL NAVEGADOR DE DATOS DE PACIENTES EN EL MBCPROJECT",
             "MainText": {
-                "Section1": "[es]One key goal of the MBCproject is to enable scientific discoveries and the development of new treatment strategies for metastatic breast cancer by widely sharing clinical, genomic, molecular, and patient-reported data.",
-                "Section2": "[es]To this end, the MBCproject has first released available data in cBioPortal, a web-based platform to allow exploration of genomic data. Much effort has been put into generating, cleaning, and releasing this data so that the entire global research community can analyze and develop new research directions. The MBCproject data is being released as it is generated, and as the project continues to enroll patients, more data will be added. As we release more data over time, we anticipate that this will help accelerate discoveries in metastatic breast cancer.",
-                "Section3": "[es]To everybody who is taking part in the MBCproject, we would like to extend our most sincere gratitude for your partnership that enables the generation of this data."
+                "Section1": "Una de las metas del MBCproject es que al compartir información clínica, genómica, molecular e información reportada por pacientes, se logren nuevos descubrimientos científicos que permitan el desarrollo de nuevas estrategias para el tratamiento del cáncer de mama metastásico.",
+                "Section2": "Los primeros datos publicados están disponibles en cBioPortal, una plataforma en línea que permite explorar datos genómicos. Se ha hecho esfuerzo en generar, limpiar, y publicar estos datos para que la comunidad de investigación global pueda analizar y ayudar a desarrollar nuevas direcciones de investigación. Los descubrimientos y datos del MBCproject están siendo continuamente generados y publicados. A medida que más participantes se inscriban, se generarán y publicarán nuevos datos de identificados. A lo largo del proyecto, estaremos publicando más datos y anticipamos que esta información acelerará nuevos descubrimientos en el cáncer de mama metastásico.",
+                "Section3": "A todos los pacientes que están participando en el MBCproject, nos gustaría extender nuestro más sincero agradecimiento por su colaboración que nos ayuda a generar estos datos."
             },
             "InformationList": {
-                "Title": "[es]Below, you will find the following information:",
-                "Item1": "[es]Link to the MBCproject data",
-                "Item2": "[es]Additional information about the data release",
-                "Item3": "[es]List of common terms used in this research",
-                "Item4": "[es]Link to the methods used to generate this data"
+                "Title": "Aquí podrá encontrar más información sobre los siguientes temas:",
+                "Item1": "Enlace a los datos y información del MBCproject",
+                "Item2": "Más información sobre la publicación de datos.",
+                "Item3": "Lista de los términos más usados en la investigación de cáncer",
+                "Item4": "Enlace a los métodos que se usan para generar estos datos y descubrimientos."
             },
             "Contact": {
-                "Text": "[es]Questions about these data, including how to cite, can be directed to "
+                "Text": "Preguntas sobre estos datos, incluyendo cómo citar, se pueden dirigir a nuestro correo electrónico "
             },
             "BioPortal": {
-                "Title": "[es]The MBCproject Data on cBioPortal",
-                "Link": "[es]Visit cBioPortal to explore the MBCproject data"
+                "Title": "Datos del MBCproject en cBioPortal",
+                "Link": "Visite cBioPortal para explorar los datos del MBCproject."
             },
-            "AdditionalInfoTitle": "[es]Additional Information About the Genomic Data Release",
+            "AdditionalInfoTitle": "Información adicional sobre los lanzamientos de datos genómicos",
             "AdditionalData": {
-                "Title": "[es]Will the MBCproject generate and release additional data?",
-                "Text": "[es]Yes, the MBCproject is an ongoing research initiative. The project will continue to enroll patients and request saliva, blood, and tissue samples indefinitely. Our goal is to release data every 6 months as it is generated."
+                "Title": "¿El MBCproject generará y publicará datos adicionales?",
+                "Text": "Si, el MBCproject es una iniciativa en marcha. El proyecto continuará inscribiendo pacientes y solicitando muestras de saliva, sangre, y tumor indefinidamente. Nuestra meta es publicar nuevos datos a medida que se estén generando."
             },
             "Involved": {
-                "Title": "[es]How have patients been involved in this data release?",
-                "Text": "[es]Patients and patient advocates within the metastatic breast cancer community have been involved since the inception of the Metastatic Breast Cancer Project. We engaged patients and advocates over the course of 15 hours to help us guide the presentation and development of this data release. Patients provided extensive feedback on many aspects of this data, including data element names, descriptions of data elements, and how the data is displayed in the portal."
+                "Title": "¿Cómo han participado los pacientes en la publicación de los datos?",
+                "Text": "Pacientes y aliados de pacientes, junto con la comunidad de cáncer de mama metastásico han estado involucrados desde el comienzo del MBCproject. En un trabajo conjunto, pacientes y aliados de pacientes nos ayudaron a pensar en la mejor manera de presentar y publicar estos datos de forma que proteja la identidad e información personal de cada paciente. A la vez, pacientes proporcionaron sus opiniones en varios aspectos de estos datos, incluyendo los nombres de los elementos dados a los datos, descripciones de los elementos de datos, y cómo se presentan estos datos en el portal."
             },
             "Different": {
-                "Title": "[es]What makes this data different from what is found in existing studies?",
-                "Text": "[es]The collection of data in this release is different for several reasons:",
+                "Title": "¿Qué es lo que hace estos datos diferentes a lo que ya existe en otros estudios de investigación?",
+                "Text": "Los datos colectados en este proyecto son diferentes por varias razones:",
                 "FieldsList": {
-                    "Item1": "[es]All patients included in the study have metastatic breast cancer",
-                    "Item2": "[es]Multiple tumor samples per patient are included for many patients (including primary and metastatic biopsies)",
+                    "Item1": "Todos los pacientes incluidos en este estudio tienen cáncer de mama metastásico",
+                    "Item2": "Para algunos participantes, hemos colectado múltiples muestras de tumores (incluyendo biopsias de tumores primarios y de metástasis)",
                     "Item3": {
-                        "Text": "[es]Data elements include:",
-                        "SubItem1": "[es]Whole Exome Sequencing (WES) on all samples (as compared to targeted sequencing panel or other more limited testing)",
-                        "SubItem2": "[es]Samples annotated with demographic, diagnostic, and pathology data",
-                        "SubItem3": "[es]Samples annotated with treatment data, including all reported drugs given in the metastatic setting and the duration of therapy",
-                        "SubItem4": "[es]Samples annotated with patient-reported data from the MBCproject enrollment survey"
+                        "Text": "Elementos de datos incluyen:",
+                        "SubItem1": "Secuenciación completa del exoma (WES) en todas las muestras (en comparación con paneles de secuenciación dirigida u otras pruebas más limitadas)",
+                        "SubItem2": "Muestras anotadas con información sobre la demografía, diagnóstico, y patología de pacientes participantes",
+                        "SubItem3": "Muestras anotadas con información sobre los tratamientos del paciente, incluyendo medicamentos y terapias administradas durante el tratamiento del cáncer de mama metastásico.",
+                        "SubItem4": "Muestras anotadas con información reportada por el paciente en el cuestionario inicial del MBCproject."
                     },
-                    "Item4": "[es]All of this data has been generated through direct partnership with patients"
+                    "Item4": "Todos estos datos se han generado a través de una colaboración directa con pacientes."
                 }
             },
             "DataIncluded": {
-                "Title": "[es]What data elements are included?",
-                "Text": "[es]Data is included for the following categories:",
+                "Title": "¿Que elementos de datos están incluidos?",
+                "Text": "Datos están incluidos para las siguientes categorías:",
                 "DataList": {
-                    "Item1": "[es]Genomic Information<br>Whole Exome Sequencing (WES) information is included for each tumor sample, including mutations, small insertions/deletions, amplifications, and deletions.",
-                    "Item2": "[es]Medical Record (MedR)<br>Information about diagnosis and treatment was abstracted from patients’ medical records. All information that was derived from a medical record is denoted with the prefix MedR.",
-                    "Item3": "[es]Pathology Report (PATH)<br>Detailed information was abstracted from pathology reports associated with each sample. All information derived from a pathology report is denoted with the prefix PATH.",
-                    "Item4": "[es]Patient-reported (PRD)<br>Every patient that registered for the study had the option of completing an 18-question survey about their experiences with metastatic breast cancer. Eight questions from this survey have been abstracted for inclusion. These responses have been modified and formatted to prevent individual identification without altering scientific utility. All patient-reported data elements are denoted with the prefix PRD."
+                    "Item1": "Información genética<br>Información secuenciación completa del exoma (WES) está incluida para cada muestra de tumor, incluyendo mutaciones, pequeñas inserciones/deleciones, amplificaciones y eliminaciones.",
+                    "Item2": "Registros médicos (MedR)<br>Información sobre el diagnóstico y el tratamiento se extrajo de los registros médicos de los pacientes. Toda la información que obtuvimos del registro médico es denotada con el prefijo MedR.",
+                    "Item3": "Reporte de Patología (PATH)<br>Información detallada se extrajo de los reportes de patología asociada con cada muestra. Toda la información obtenida de los reportes de patología es denotada con el prefijo PATH.",
+                    "Item4": "Información reportada por el paciente (PRD)<br>Cada paciente que se ha registrado en este estudio tuvo la opción de completar un cuestionario de 15 preguntas sobre su experiencia con cáncer de mama metastásico. Ocho preguntas han sido incluidas. Estas respuestas han sido modificadas y organizadas para evitar la identificación individual sin alterar la utilidad científica. Todos los elementos de información reportada por pacientes es denotado con el prefijo PRD."
                 }
             },
             "Resources": {
-                "Title": "[es]Are there resources to define the terminology used in this data release?",
-                "TextPt1": "[es]At the",
-                "TextPt2": "[es]page are The National Cancer Institute’s comprehensive dictionary of clinical terms.",
-                "Link": "[es]bottom of this"
+                "Title": "¿Existen recursos para definir la terminología utilizada en esta versión de datos?",
+                "TextPt1": "Al",
+                "TextPt2": "página se encuentra el diccionario completo de términos clínicos del Instituto Nacional del Cáncer (National Cancer Institute).",
+                "Link": "final de esta"
             },
             "Unknown": {
-                "Title": "[es]Why are some attributes “Unknown” for some cases and not for others?",
-                "Text": "[es]All of the clinical information that is gathered comes directly from medical records or pathology reports. If the complete report or record that was received did not explicitly contain the information, the field was marked as “Unknown” in order to ensure accuracy."
+                "Title": "¿Por qué algunos atributos son “Desconocidos” en algunos casos y no en otros?",
+                "Text": "Toda la información clínica que se obtuvo viene directamente de los registros médicos o reportes de patología. Si el reporte o registro completo que fue recibido no contiene explícitamente la información, el campo fue marcado como “Desconocido” para ser precisos."
             },
             "Samples": {
-                "Title": "[es]Why are there more samples than patients?",
-                "Text": "[es]For several patients, we were able to obtain multiple biopsy samples. Multiple biopsy samples are requested in cases where having multiple biopsies can help answer an important scientific question, and there is ample tissue available for research while still ensuring that tissue is left behind for future clinical use."
+                "Title": "¿Por qué hay más muestras de tumores que pacientes?",
+                "Text": "Para múltiples pacientes, tuvimos la oportunidad de obtener más de una muestra de biopsia por paciente. Múltiples biopsias son solicitadas cuando éstas puedan ayudar a responder preguntas científicas importantes. En estos casos, solamente pediremos muestras de su tejido almacenado si hay suficiente tejido para su futuro cuidado médico y para nuestros estudios."
             },
             "Sequence": {
-                "Title": "[es]Will everyone who registers for this study have their tumor sequenced?",
-                "Text": "[es]As of November 2018, over 5000 women and men with metastatic breast cancer have registered for the project. Of these registrants, over 2900 have provided consent. Approximately 1800 patients have sent in saliva kits. Medical records and tumor samples are being requested for everyone who has sent in saliva. Obtaining medical records and tissue samples is a manual process involving faxes, phone calls, and additional follow up. The ultimate goal is to obtain medical records and tumors from as many consenting patients as possible. Our goal is to release new data in regular intervals as it is generated."
+                "Title": "¿Serán secuenciadas las muestras de tumor de todos los participantes que se registren en este estudio?",
+                "Text": "Hasta noviembre de 2018, más de 5000 mujeres y hombres con cáncer de mama metastásico se han registrado para el proyecto. De estos participantes, más de 2900 personas han otorgado su consentimiento. Aproximadamente 1800 pacientes ya han enviado kits de saliva. Se solicitan registros médicos y muestras de tumores para todos los pacientes que han enviado saliva. La obtención de registros médicos y muestras de tejido es un proceso manual que implica faxes, llamadas telefónicas y seguimiento adicional. El propósito es obtener registros médicos y tumores de todos los pacientes posibles con consentimiento al estudio. Nuestro objetivo es lanzar nuevos lotes de datos regularmente a medida que se generan."
             },
             "Inform": {
-                "Title": "[es]Can I use this data to inform my clinical care?",
-                "Text": "[es]This data is intended to be used <b>for research purposes only</b>. Genomic data included in this study is generated in a research lab, not in a clinical lab. All annotations have been de-identified. Therefore, this data cannot be used to inform clinical decision-making. Some of the data has been intentionally altered to protect confidentiality in a way that does not affect data integrity (for example, Age at Diagnosis has been grouped)."
+                "Title": "¿Puedo usar esta información y datos para informar mi cuidado clínico?",
+                "Text": "<b>Esta información está destinada para ser utilizada solamente con fines de investigación.</b> Los datos genéticos en este estudio se generan en un laboratorio de investigación, no en un laboratorio clínico. Por lo tanto, estos datos no pueden ser utilizados para tomar decisiones clínicas. Algunos de los datos publicados han sido modificados intencionalmente para proteger la confidencialidad de una manera que no afecte la integridad de los datos (por ejemplo, Año de Diagnóstico se ha agrupado)."
             },
             "Biases": {
-                "Title": "[es]Does this data contain any biases?",
-                "Text": "[es]Yes. Biases will occur based on who learns about the project and enrolls via the website. Some biases in this data set are disproportionate numbers of young participants and white participants. We hope that over time the study becomes more representative and encourage anyone with outreach ideas to contact us at "
+                "Title": "¿Estos datos contienen algún sesgo?",
+                "Text": "Si. Los sesgos se producirán de acuerdo a quien conozca el proyecto y se inscriba a través de la página web. Algunos sesgos en este conjunto de datos son un número desproporcionado de participantes jóvenes y blancos. Esperamos que con el tiempo el estudio se vuelva más representativo e inspire a cualquier persona con ideas de alcance que se contacte con el estudio por correo electrónico, "
             },
             "Appendices": {
-                "Title": "[es]Appendices",
                 "AppendicesList": {
                     "Item1": {
-                        "Link": "[es]Methods",
-                        "Text": "[es]Detailed methods for how these data were generated and analyzed."
+                        "Link": "Métodos",
+                        "Text": "Detallados de cómo se generaron y analizaron estos datos."
                     },
                     "Item2": {
-                        "Link": "[es]About You Survey",
-                        "Text": "[es]The 18 question enrollment survey."
+                        "Link": "Acerca del cuestionario",
+                        "Text": "Donde aprenderemos más sobre usted con las 18 preguntas que se usan para inscribirse en el estudio."
                     },
                     "Item3": {
-                        "Link": "[es]Consent and Release",
-                        "Text": "[es]Forms documenting informed consent and contact information."
+                        "Link": "Forma de consentimiento y autorización",
+                        "Text": "Documentando el consentimiento informado y la información de contacto."
                     },
                     "Item4": {
-                        "Link": "[es]Saliva Sample Instructions",
-                        "Text": "[es]Included in each saliva kit."
+                        "Link": "Instrucciones para proporcionar una muestra de saliva",
+                        "Text": "Incluidas en cada kit para obtener muestras de su saliva."
                     }
                 }
             },
             "Glossary": {
-                "Title": "[es]Glossary",
-                "Text": "[es]For reference to common terms used in cancer care and research use the National Cancer Institute Dictionary of Cancer Terms"
+                "Title": "Glosario",
+                "Text": "Utilice el Diccionario de Términos del Instituto Nacional del Cáncer (National Cancer Institute) para consultar los términos comunes en el cuidado e investigación del cáncer.",
+                "WidgetLink": "https://www.cancer.gov/widgets/TermDictionaryWidgetSpanish",
+                "WidgetId": "NCITermDictionaryWidgetContainerSpanish",
+                "WidgetWrapperId": "NCITermDictionaryWidgetSpanish"
             },
             "DataBrowser": {
-                "Title": "[es]The Metastatic Breast Cancer Project Patient Data Browser",
+                "Title": "Navegador De Datos De Pacientes En El MBCProject",
                 "Main": {
-                    "Intro": "[es]Below is an interactive data browser for exploring the patient-reported data from the Metastatic Breast Cancer Project. This contains data from patients from the USA and Canada who signed consent.",
+                    "Intro": "A continuación, se encuentra un navegador de datos interactivo para explorar información reportada por pacientes del MBCproject. Este contiene datos de pacientes que dieron consentimiento de los Estados Unidos y Canadá.",
                     "List": {
-                        "Intro": "[es]Patient-reported data included here are from patients who completed both of the following surveys. Examples of what patients see when they sign up are linked here:",
-                        "Item1": "[es]Initial intake survey",
-                        "Item2": "[es]First follow-up survey"
+                        "Intro": "Información reportada por pacientes incluidos aquí son de pacientes que han completado los dos siguientes cuestionarios. Use los siguientes enlaces para poder conocer lo que pacientes responded cuando se registran:",
+                        "Item1": "Cuestionario Inicial",
+                        "Item2": "Primer Cuestionario de Seguimiento"
                     }
                 },
                 "HowToUse": {
-                    "Title": "[es]How to use the data browser:",
+                    "Title": "Como Usar el Navegador de Datos:",
                     "List": {
-                        "Item1": "[es]On a computer, hover your cursor over any chart to see more information.",
-                        "Item2": "[es]Click (or tap, on a mobile device) on any part of a chart to filter the entire browser to a subset of patients. The number of patients you have filtered down to is displayed in the upper left hand corner.",
-                        "Item3": "[es]Click or tap it again to remove the filter.",
-                        "Item4": "[es]Using the toolbar in the bottom right corner of the browser, you can undo or redo your last action, reset all filters, or download an image of the browser."
+                        "Item1": "En una computadora mueva el cursor sobre cualquier gráfico para ver más información",
+                        "Item2": "Haga clic (o toque en un su teléfono móvil) en cualquier parte de un gráfico para filtrar todo el navegador a un subconjunto de pacientes. El número de pacientes que se ha filtrado se muestra en la parte de arriba a mano izquierda.",
+                        "Item3": "Haga clic o toque nuevamente en el gráfico para remover el filtro.",
+                        "Item4": "Usando la barra de herramientas en la parte de baja a mano derecha del navegador, puede deshacer o rehacer su última acción, resetear todos los filtros o descargar una imagen del navegador."
                     },
-                    "Text1": "[es]This data will be updated periodically as new patients join the project and as new surveys are deployed. If you have any questions or feedback, please email",
-                    "Text2": "[es]Thank you to every patient who has said <span class=\"Italic\">Count Me In</span> and generously shared their experiences, information, and samples to accelerate discoveries."
+                    "Text1": "Estos datos serán actualizados periódicamente a medida que nuevos pacientes se unan al proyectos y nuevos cuestionarios sean lanzados. Si tiene alguna pregunta o sugerencia, por favor mande un correo a",
+                    "Text2": "Gracias a todos los pacientes que han dicho <span class=\"Italic\">Count Me In</span> y que han compartido generosamente sus experiencias, información y muestras para acelerar los descubrimientos."
                 }
             }
         },
@@ -288,31 +286,31 @@
                 "SubmitButton": "[es]OK"
             },
             "JoinMailingList": {
-                "Title": "[es]Stay informed!",
-                "Text": "[es]Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Title": "¡Manténgase Informada/o!",
+                "Text": "Ingrese su correo electrónico para estar al corriente sobre las nuevas noticias del proyecto.<br>Puede darse de baja en cualquier momento.",
                 "Fields": {
                     "FirstName": {
-                        "Placeholder": "[es]First Name *",
-                        "Error": "[es]First Name is required"
+                        "Placeholder": "Nombre *",
+                        "Error": "Nombre es requirido"
                     },
                     "LastName": {
-                        "Placeholder": "[es]Last Name *",
-                        "Error": "[es]Last Name is required"
+                        "Placeholder": "Apellido *",
+                        "Error": "Apellido es requirido"
                     },
                     "Email": {
-                        "Placeholder": "[es]Email Address *",
-                        "Error": "[es]Please enter a valid Email Address"
+                        "Placeholder": "Correo electrónico *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
                     },
                     "ConfirmEmail": {
-                        "Placeholder": "[es]Email Confirmation (Reenter Email) *",
-                        "Error": "[es]Please enter a valid Email Address"
+                      "Placeholder": "Confirmación de correo electrónico (ingrese correo electrónico nuevamente) *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
                     }
                 },
-                "CancelButton": "[es]CANCEL",
-                "SubmitButton": "[es]JOIN",
-                "Required": "[es]* Required field",
+                "CancelButton": "CANCELAR",
+                "SubmitButton": "ENVIAR",
+                "Required": "* Requirido",
                 "MatchEmailsError": "[es]Please ensure that both email fields are filled in and that the addresses match.",
-                "LoadingError": "[es]We're sorry, but an error has occurred."
+                "LoadingError": "Lo sentimos, pero un error ha ocurrido."
             },
             "SessionWillExpire": {
                 "Title": "[es]Your session will time-out soon",
@@ -452,9 +450,9 @@
             }
         },
         "StayInformed": {
-            "Title": "[es]Stay Informed!",
-            "Text": "[es]Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
-            "ReturnButton": "[es]RETURN HOME"
+            "Title": "¡Manténgase Informada/o!",
+            "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informada/o. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
+            "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Password": {
             "Title": "[es]Please enter the password",
@@ -467,22 +465,22 @@
             }
         },
         "InternationalPatients": {
-            "Title": "[es]Information for International Patients",
+            "Title": "Información para pacientes internacionales",
             "ThankYou": {
-                "TextPt1": "[es]Thank you for your interest in joining the Metastatic Breast Cancer Project. Currently, the Metastatic Breast Cancer Project is open to patients in the United States or Canada. From the Country field on your survey, it appears that you do not live in the United States or Canada. If you do live or are treated in the United States or Canada, please reach out to us at ",
-                "TextPt2": "[es]or"
+                "TextPt1": "Gracias por su interés en unirse al MBC proyecto. En este momento, el MBC proyecto está abierto solo a pacientes en los Estados Unidos, sus territorios y Canadá. De acuerdo a sus respuestas en el cuestionario inicial, usted en este momento no vive en los Estados Unidos o Canadá. Pero si usted vive o recibe tratamiento en los Estados Unidos o Canadá, por favor comuníquese con nosotros a ",
+                "TextPt2": "o llame al"
             },
-            "Understand": "[es]We understand that the experiences of every patient matter, and we eventually want to extend these studies internationally. Understanding where people are registering from may enable us to better understand what parts of the world might be most interested in participating in the future of Count Me In projects."
+            "Understand": "Entendemos que las experiencias de cada paciente son importantes y queremos en un futuro extender estos estudios a nivel internacional. Estudiando de donde se registran las personas puede permitimos a comprender mejor que partes del mundo podrían estar mas interesadas en participar en futuros proyectos de Cuenten Conmigo."
         },
         "Dashboard": {
-            "Title": "[es]Dashboard"
+            "Title": "Tablero de Progreso"
         },
         "ErrorPage": {
-            "Title": "[es]We've encountered an error",
-            "Header": "[es]We're sorry, but an error has occurred.",
+            "Title": "Hemos encontrado un error",
+            "Header": "Lo sentimos, pero un error ha ocurrido.",
             "DefaultText": {
-                "TextPt1": "[es]Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "[es]or call us at"
+                "TextPt1": "Por favor espere un momento y vuelva a intentarlo. Si el problema persiste, envíenos un correo electrónico a",
+                "TextPt2": "o llámenos al"
             }
         },
         "ErrorCodes": {
@@ -504,7 +502,7 @@
         "NextButton": "[es]NEXT",
         "PreviousButton": "[es]PREV",
         "SavingButton": "[es]SAVING",
-        "EditButton": "[es]EDIT",
+        "EditButton": "EDITAR",
         "ReviewButton": "[es]VIEW",
         "ValidateError": "[es]Please correct any errors in the form.",
         "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
@@ -526,17 +524,17 @@
         },
         "SignInOut": {
             "SignIn": "Iniciar Sesión",
-            "SignOut": "[es]Sign Out"
+            "SignOut": "Cerrar Sesión"
         },
         "LanguageSelector": {
             "LanguageSelection": "[es]language selection"
         },
         "UserActivities": {
-            "ActivityName": "[es]Form",
-            "Summary": "[es]Summary",
-            "ActivityStatus": "[es]Status",
-            "ActivityDate": "[es]Created",
-            "ActivityActions": "[es]Actions"
+            "ActivityName": "Forma",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado",
+            "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
             "GovernedParticipants": "[es]Governed participants",
@@ -554,8 +552,8 @@
             "UserPreferencesLocale": "[es]Preferred language"
         },
         "Dashboard": {
-            "Title": "[es]My Dashboard",
-            "Text": "[es]The dashboard below describes each Metastatic Breast Cancer Project form and its status."
+            "Title": "Mi Tablero",
+            "Text": "Este tablero describe cada forma para el MBC Project y su estado."
         },
         "DatePicker": {
             "Day": "[es]Choose day...",
@@ -575,8 +573,8 @@
             "December": "[es]December"
         },
         "UserMenu": {
-            "DashboardButton": "[es]Dashboard",
-            "SignOutButton": "[es]Sign Out"
+            "DashboardButton": "Tablero de Progreso",
+            "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
             "PluralForm": "[es]characters remaining",
