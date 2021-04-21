@@ -9,25 +9,25 @@ import { TestBostonConsent } from '../testdata/testbostonConsent';
 import { TestBostonCovidSurvey } from '../testdata/testbostonCovidSurvey';
 import { map } from 'rxjs/operators';
 import { TextQuestionDef } from '../model/textQuestionDef';
-import { TextInputType } from '../model/textInputType';
-import { SuggestionType } from '../model/suggestiionType';
 import { Template } from '../model/template';
-import { QuestionType } from '../model/questionType';
-import { RuleDef } from '../model/ruleDef';
-import { QuestionDef } from '../model/questionDef';
 import { QuestionBlockDef } from '../model/questionBlockDef';
+import { FormBlockDef } from '../model/formBlockDef';
 
 // @TODO: Scope this service to one instance per activity editor
 @Injectable({
     providedIn: 'root'
 })
-export class ActivityDefinitionEditorService {
+export class ActivityDefinitionEditorService  {
     private currentActivityDefSubject = new BehaviorSubject<ActivityDef | null>(null);
     readonly currentActivityDef$: Observable<ActivityDef | null> = this.currentActivityDefSubject.asObservable();
     private allActivityDefinitionsSubject = new BehaviorSubject<Array<ActivityDef>>([TestBostonConsent, TestBostonCovidSurvey]);
     readonly allActivityDefinitions$ = this.allActivityDefinitionsSubject.asObservable();
+    private currentBlockDefSubject = new BehaviorSubject<FormBlockDef | null>(null);
+    readonly currentBlockDef$: Observable<FormBlockDef | null> = this.currentBlockDefSubject.asObservable();
 
     constructor(private config: ConfigurationService) {
+
+
     }
 
     // @TODO: Move this to a persistence service when the time comes
@@ -154,4 +154,10 @@ export class ActivityDefinitionEditorService {
             suggestions: []
         };
     }
+
+    setCurrentBlock(block: FormBlockDef): void {
+        this.currentBlockDefSubject.next(block);
+    }
+
+
 }

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormSectionDef } from '../model/formSectionDef';
+import { FormBlockDef } from '../model/formBlockDef';
+import { ActivityDefinitionEditorService } from '../services/activity-definition-editor.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-section',
@@ -13,10 +16,18 @@ export class SectionComponent implements OnInit {
   public activityGuid = '';
   public studyGuid = '';
   public displayNumber = false;
+  public selectedBlock$: Observable<FormBlockDef | null>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private editorService: ActivityDefinitionEditorService) {
+    this.selectedBlock$ = this.editorService.currentBlockDef$;
   }
 
+  ngOnInit(): void {
+    this.selectedBlock$.subscribe(selected => console.log('the block selected is: %o', selected));
+  }
+
+    blockSelected(block: FormBlockDef): FormBlockDef {
+      this.editorService.setCurrentBlock(block);
+      return block;
+    }
 }

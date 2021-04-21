@@ -1,1 +1,3 @@
-<p>survey-component-editor works!</p>
+{{ (currentBlock$ | async)?.blockType }}
+<app-text-question-editor *ngIf="isTextQuestionBlock()" [questionBlock]="currentQuestionBlock$ | async"></app-text-question-editor>
+

@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ContentBlockComponent } from './content-block/content-block.component';
 import { TextQuestionBlockComponent } from './text-question-block/text-question-block.component';
+import { TextQuestionEditorComponent } from './text-question-editor/text-question-editor.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TextQuestionBlockComponent } from './text-question-block/text-question-
     ActivityComponent,
     SectionComponent,
     ContentBlockComponent,
-    TextQuestionBlockComponent
+    TextQuestionBlockComponent,
+    TextQuestionEditorComponent
   ],
   imports: [
     BrowserModule,
