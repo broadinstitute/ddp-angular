@@ -356,3 +356,10 @@ p.question-sub {
     }
   }
 }
+
+.PageContent-infobox {
+  padding: 1.2rem;
+
+  border: 3px solid mat-color($app-theme, 300);
+  background: #f4efea;
+}

@@ -3,13 +3,20 @@
 </div>
 
 <!-- article content -->
-<article *ngIf="isLoaded" class="rarex-activity" [ngClass]="{'PageContent': isLoaded}" [class.is-consent]="isConsent">
+<article
+  *ngIf="isLoaded"
+  class="rarex-activity"
+  [ngClass]="{ PageContent: isLoaded }"
+  [class.is-consent]="isConsent"
+>
   <div class="PageLayout">
-    <div class="row NoMargin">
-      <div *ngIf="shouldShowReadonlyHint" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="PageContent-infobox NoMargin" [innerHTML]="model.readonlyHint"></div>
-      </div>
+    <div
+      *ngIf="shouldShowReadonlyHint"
+      class="PageContent-infobox topMarginMedium"
+      [innerHTML]="model.readonlyHint"
+    ></div>
 
+    <div class="row NoMargin">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <!-- introduction section -->
         <!-- Check model not null and not undefined. Open to race condition -->
@@ -21,7 +28,9 @@
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
             (visibilityChanged)="updateVisibility($event)"
-            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
+            (embeddedComponentsValidationStatus)="
+              updateEmbeddedComponentValidationStatus(0, $event)
+            "
             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)"
           ></ddp-activity-section>
         </ng-container>
@@ -38,7 +47,9 @@
               [class.stepper-list__item--active]="isActive(i)"
               [class.stepper-list__item--completed]="isCompleted(i)"
               [class.stepper-list__item--incomplete]="!isCompleted(i)"
-            >{{ section.name }}</li>
+            >
+              {{ section.name }}
+            </li>
           </ng-container>
         </ng-container>
       </ol>
@@ -54,7 +65,9 @@
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
             (visibilityChanged)="updateVisibility($event)"
-            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
+            (embeddedComponentsValidationStatus)="
+              updateEmbeddedComponentValidationStatus(1, $event)
+            "
             (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)"
           ></ddp-activity-section>
         </div>
@@ -71,24 +84,25 @@
               [studyGuid]="studyGuid"
               [activityGuid]="activityGuid"
               (visibilityChanged)="updateVisibility($event)"
-              (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
+              (embeddedComponentsValidationStatus)="
+                updateEmbeddedComponentValidationStatus(2, $event)
+              "
               (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)"
             ></ddp-activity-section>
           </ng-container>
 
-          <ng-container *ngIf="shouldShowReadonlyHint">
-            <div class="PageContent-infobox topMarginMedium" [innerHTML]="model.readonlyHint"></div>
-          </ng-container>
-
           <div *ngIf="model.lastUpdatedText" class="LastUpdatedText">
-            <span>{{model.lastUpdatedText}}</span>
+            <span>{{ model.lastUpdatedText }}</span>
           </div>
 
           <div *ngIf="model" class="activity__btn-section">
-            <div *ngIf="isStepped && !isFirstStep" class="activity__btn-section__left">
+            <div
+              *ngIf="isStepped && !isFirstStep"
+              class="activity__btn-section__left"
+            >
               <button
                 class="button button_medium button_primary"
-                [disabled]="(isPageBusy | async)"
+                [disabled]="isPageBusy | async"
                 (click)="decrementStep()"
                 [innerHTML]="'SDK.PreviousButton' | translate"
               ></button>
@@ -98,17 +112,25 @@
               <button
                 *ngIf="!isLastStep && (!isConsent || isReadonly)"
                 class="button button_medium button_primary"
-                [disabled]="(isPageBusy | async)"
+                [disabled]="isPageBusy | async"
                 (click)="incrementStep()"
-                [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
+                [innerHTML]="
+                  (isPageBusy | async)
+                    ? ('SDK.SavingButton' | translate)
+                    : ('SDK.NextButton' | translate)
+                "
               ></button>
 
               <button
                 *ngIf="!isLastStep && isConsent && !isReadonly"
                 class="button button_medium button_primary"
-                [disabled]="(isPageBusy | async)"
+                [disabled]="isPageBusy | async"
                 (click)="incrementStep()"
-                [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.IUnderstandButton' | translate)"
+                [innerHTML]="
+                  (isPageBusy | async)
+                    ? ('SDK.SavingButton' | translate)
+                    : ('SDK.IUnderstandButton' | translate)
+                "
               ></button>
 
               <ng-container *ngIf="isLastStep">
@@ -126,7 +148,11 @@
                   [disabled]="(isPageBusy | async) || dataEntryDisabled"
                   (click)="flush()"
                   (mouseenter)="mouseEnterOnSubmit()"
-                  [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)"
+                  [innerHTML]="
+                    (isPageBusy | async)
+                      ? ('SDK.SavingButton' | translate)
+                      : ('SDK.SubmitButton' | translate)
+                  "
                 ></button>
               </ng-container>
             </div>
