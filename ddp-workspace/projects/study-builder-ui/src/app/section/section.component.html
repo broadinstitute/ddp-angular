@@ -1,0 +1,69 @@
+<!--<ng-container *ngIf="section">-->
+<!--<div class="margin-bottom" *ngFor="let block of section.blocks">-->
+<!--  <ng-container *ngIf="displayNumber; then numbered else notNumbered">-->
+<!--  </ng-container>-->
+
+<!--  <ng-template #numbered>-->
+<!--    <ol class="ddp-list">-->
+<!--      <li class="ddp-li" [value]="displayNumber">-->
+<!--        <ng-container *ngTemplateOutlet="content"></ng-container>-->
+<!--      </li>-->
+<!--    </ol>-->
+<!--  </ng-template>-->
+
+<!--  <ng-template #notNumbered>-->
+<!--    <div class="ddp-single-question">-->
+<!--      <ng-container *ngTemplateOutlet="content"></ng-container>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+<!--  <ng-template #content>-->
+<!--    <div [ngSwitch]="block.blockType">-->
+<!--      <ddp-conditional-block *ngSwitchCase="'CONDITIONAL'"-->
+<!--                             [block]="block"-->
+<!--                             [readonly]="readonly"-->
+<!--                             [validationRequested]="validationRequested"-->
+<!--                             [studyGuid]="studyGuid"-->
+<!--                             [activityGuid]="activityGuid">-->
+<!--      </ddp-conditional-block>-->
+<!--      <ddp-activity-question *ngSwitchCase="'QUESTION'"-->
+<!--                             [block]="block"-->
+<!--                             [readonly]="readonly"-->
+<!--                             [validationRequested]="validationRequested"-->
+<!--                             [studyGuid]="studyGuid"-->
+<!--                             [activityGuid]="activityGuid">-->
+<!--      </ddp-activity-question>-->
+<!--      <ddp-activity-content *ngSwitchCase="'CONTENT'"-->
+<!--                            [block]="block">-->
+<!--      </ddp-activity-content>-->
+<!--      <ddp-group-block *ngSwitchCase="'GROUP'"-->
+<!--                       [block]="block"-->
+<!--                       [readonly]="readonly"-->
+<!--                       [validationRequested]="validationRequested"-->
+<!--                       [studyGuid]="studyGuid"-->
+<!--                       [activityGuid]="activityGuid">-->
+<!--      </ddp-group-block>-->
+<!--      <ng-container *ngSwitchCase="'COMPONENT'">-->
+<!--        <ng-container *ngSwitch="block.componentType">-->
+<!--          <ddp-institutions-form *ngSwitchCase="'INSTITUTION'"-->
+<!--                                 [block]="block"-->
+<!--                                 [studyGuid]="studyGuid"-->
+<!--                                 [readonly]="readonly"-->
+<!--                                 [validationRequested]="validationRequested">-->
+<!--          </ddp-institutions-form>-->
+
+
+<!--            <ddp-address-embedded *ngSwitchCase="'MAILING_ADDRESS'"-->
+<!--                                  [block]="block"-->
+<!--                                  [readonly]="readonly"-->
+<!--                                  [activityGuid]="activityGuid"-->
+<!--                                  [validationRequested]="validationRequested">-->
+<!--            </ddp-address-embedded>-->
+<!--        </ng-container>-->
+<!--      </ng-container>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+<!--</div>-->
+<!--</ng-container>-->
+<div></div>

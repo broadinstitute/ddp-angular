@@ -1,0 +1,7 @@
+export enum BlockTypeEnum {
+  COMPONENT = 'COMPONENT',
+  CONTENT = 'CONTENT',
+  QUESTION = 'QUESTION',
+  CONDITIONAL = 'CONDITIONAL',
+  GROUP = 'GROUP'
+}

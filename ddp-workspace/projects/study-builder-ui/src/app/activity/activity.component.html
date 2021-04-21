@@ -1,0 +1,28 @@
+<main>
+  <section *ngIf="subtitle" class="section sticky-section">
+    <div class="content content_tight">
+      <div class="sticky-block" [innerHTML]="subtitle"></div>
+    </div>
+  </section>
+  <section *ngIf="title" class="section header-section">
+    <div class="content content_tight">
+      <h1 class="activity-header" [innerHTML]="title"></h1>
+    </div>
+  </section>
+  <section class="section">
+  <app-section [section]="activity.sections[0]"></app-section>
+  </section>
+  <section>
+    <div class="content content_tight">
+      <ng-container *ngIf="shouldShowReadonlyHint">
+        <div class="infobox" [innerHTML]="readonlyHint">
+        </div>
+      </ng-container>
+<!--      <activity-section></activity-section>-->
+      <ng-container *ngIf="shouldShowReadonlyHint">
+        <div class="infobox" [innerHTML]="readonlyHint">
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</main>
