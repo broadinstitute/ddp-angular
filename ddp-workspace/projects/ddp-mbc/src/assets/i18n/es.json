@@ -455,13 +455,13 @@
             "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Password": {
-            "Title": "[es]Please enter the password",
-            "Text": "[es]Please enter your password",
-            "SubmitButton": "[es]SUBMIT",
-            "PasswordWrongError": "[es]Incorrect password. Please try again.",
-            "OtherError": "[es]We're sorry, but an error has occurred. Please try again.",
+            "Title": "Por favor ingrese su contraseña",
+            "Text": "Por favor ingrese su contraseña",
+            "SubmitButton": "ENVIAR",
+            "PasswordWrongError": "La contraseña incorrecta. Inténtalo de nuevo, por favor.",
+            "OtherError": "Lo sentimos, pero un error ha ocurrido. Inténtalo de nuevo, por favor.",
             "PasswordField": {
-                "Error": "[es]Password is required"
+                "Error": "Una contraseña es requerido"
             }
         },
         "InternationalPatients": {
