@@ -1,13 +1,10 @@
 /* tslint:disable:max-classes-per-file */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { By } from '@angular/platform-browser';
 import { LazyLoadResourcesDirective, WindowRef } from 'ddp-sdk';
-import { FormsModule } from '@angular/forms';
 
-fdescribe('LazyLoadResourcesDirective', () => {
+describe('LazyLoadResourcesDirective', () => {
   @Component({
     template: `
         <img lazy-resource [src]="src" alt=""/>`
@@ -18,7 +15,6 @@ fdescribe('LazyLoadResourcesDirective', () => {
 
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
-  let debugElement: DebugElement;
 
   beforeEach(waitForAsync(() => {
     class IntersectionObserver {
@@ -38,11 +34,6 @@ fdescribe('LazyLoadResourcesDirective', () => {
     (window as any).IntersectionObserver = IntersectionObserver;
 
     TestBed.configureTestingModule({
-      imports: [
-        MatCheckboxModule,
-        BrowserAnimationsModule,
-        FormsModule
-      ],
       declarations: [
         TestHostComponent,
         LazyLoadResourcesDirective
@@ -54,7 +45,6 @@ fdescribe('LazyLoadResourcesDirective', () => {
 
     fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
     fixture.detectChanges();
   }));
 
@@ -62,7 +52,7 @@ fdescribe('LazyLoadResourcesDirective', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('updates src', () => {
+  it('updates src', () => {
     const img = fixture.debugElement.query(By.css('img')).nativeElement;
     expect(img.src).toBe('http://test/');
 
