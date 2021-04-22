@@ -8,7 +8,8 @@
         <span class="instance__label">{{instance.activityTitle}}</span>
         <button *ngIf="instance.canDelete"
                 mat-icon-button class="instance__close-btn"
-                (click)="deleteInstance()">
+                #delete_button
+                (click)="openDeleteDialog()">
             <mat-icon>close</mat-icon>
         </button>
     </div>

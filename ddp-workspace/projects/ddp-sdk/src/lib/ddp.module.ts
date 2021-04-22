@@ -187,6 +187,8 @@ import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServi
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
+import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
+import { ActivityBlockModalService } from './services/activity-block-modal.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -305,6 +307,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
+        ActivityBlockModalService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -382,7 +385,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
-        ActivityBlockComponent
+        ActivityBlockComponent,
+        ActivityDeleteDialogComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -451,7 +455,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent
-    ]
+    ],
+    entryComponents: [ActivityDeleteDialogComponent]
 })
 export class DdpModule {
 }

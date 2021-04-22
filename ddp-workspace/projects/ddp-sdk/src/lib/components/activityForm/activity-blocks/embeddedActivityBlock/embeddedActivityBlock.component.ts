@@ -2,11 +2,15 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
-    Output
+    Output,
+    ViewChild
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import { EMPTY, of } from 'rxjs';
 import { catchError, concatMap, finalize, take, tap } from 'rxjs/operators';
 
@@ -16,6 +20,8 @@ import { ActivityForm } from '../../../../models/activity/activityForm';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
+import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
+import { ActivityDeleteDialogComponent } from '../activityDeleteDialog/activityDeleteDialog.component';
 
 @Component({
     selector: 'ddp-embedded-activity-block',
@@ -30,6 +36,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() studyGuid: string;
     @Output() componentBusy = new EventEmitter<boolean>(true);
     @Output() deletedActivity = new EventEmitter<string>();
+    @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
     public activity: ActivityForm;
     private readonly LOG_SOURCE = 'EmbeddedActivityBlockComponent';
@@ -37,7 +44,9 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     constructor(private activityServiceAgent: ActivityServiceAgent,
                 private changeDetector: ChangeDetectorRef,
                 private submitAnnouncementService: SubmitAnnouncementService,
-                private logger: LoggingService) {
+                private logger: LoggingService,
+                private dialog: MatDialog,
+                private modalService: ActivityBlockModalService) {
     }
 
     ngOnInit(): void {
@@ -47,6 +56,14 @@ export class EmbeddedActivityBlockComponent implements OnInit {
 
     public getSectionId(index: number, {name}: ActivitySection): string {
         return `${index}_${name}`;
+    }
+
+    public openDeleteDialog(): void {
+        const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
+        config.data = {
+            actionCallback: this.deleteInstance.bind(this)
+        };
+        this.dialog.open(ActivityDeleteDialogComponent, config);
     }
 
     public deleteInstance(): void {

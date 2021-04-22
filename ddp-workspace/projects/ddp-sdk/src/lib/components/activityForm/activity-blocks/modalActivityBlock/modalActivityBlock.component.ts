@@ -9,8 +9,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { of, Observable, EMPTY } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
@@ -19,12 +18,8 @@ import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityForm } from '../../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { LoggingService } from '../../../../services/logging.service';
-
-const DEFAULT_DIALOG_SETTINGS = {
-    hasBackdrop: true,
-    autoFocus: false,
-    scrollStrategy: new NoopScrollStrategy(),
-};
+import { ActivityDeleteDialogComponent } from '../activityDeleteDialog/activityDeleteDialog.component';
+import { ActivityBlockModalService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/activity-block-modal.service';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -49,7 +44,6 @@ export class ModalActivityBlockComponent {
     @Output() deletedActivity = new EventEmitter<string>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
-    @ViewChild('delete_dialog') private deleteModalRef: TemplateRef<any>;
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
     public activityForm: ActivityForm;
@@ -59,7 +53,8 @@ export class ModalActivityBlockComponent {
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
-                private logger: LoggingService) {
+                private logger: LoggingService,
+                private modalService: ActivityBlockModalService) {
     }
 
     get isAllQuestionsCompleted(): boolean {
@@ -110,11 +105,11 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        this.openModalDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
-    }
-
-    private closeDeleteDialog(): void {
-        this.dialog.closeAll();
+        const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
+        config.data = {
+            actionCallback: this.deleteActivityInstance.bind(this)
+        };
+        this.dialog.open(ActivityDeleteDialogComponent, config);
     }
 
     private getFullActivity$(): Observable<ActivityForm> {
@@ -144,36 +139,6 @@ export class ModalActivityBlockComponent {
         };
 
         return this.isMobile ? editDialogMobileConfig : EDIT_DIALOG_CONFIG;
-    }
-
-    private getDeleteDialogConfig(): MatDialogConfig {
-        const dialogWidth = 396;
-        const dialogArrowWidth = 20;
-        const realDialogWidth = dialogWidth + dialogArrowWidth;
-        const dialogHeight = 160;
-
-        const config: MatDialogConfig = {
-            ...DEFAULT_DIALOG_SETTINGS,
-            panelClass: 'modal-activity-block__delete-dialog',
-            height: `${dialogHeight}px`
-        };
-
-        config.position = this.calculateDeleteDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
-        config.width = `${realDialogWidth}px`;
-
-        return config;
-    }
-
-    private calculateDeleteDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
-        const box: DOMRect = root.nativeElement.getBoundingClientRect();
-        const xCenter = box.left + box.width / 2;
-        const verticalGap = 15;
-
-        const left = window.innerWidth > 1260 ? `${xCenter - dialogWidth / 2}px` : undefined;
-        return {
-            top: `${box.top - dialogHeight - verticalGap}px`,
-            left
-        };
     }
 
     private mutateWithNewPropertiesValues(target: ActivityInstance, source: ActivityInstance): void {

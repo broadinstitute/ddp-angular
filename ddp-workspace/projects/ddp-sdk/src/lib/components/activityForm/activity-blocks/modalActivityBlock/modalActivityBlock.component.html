@@ -69,22 +69,3 @@
         </button>
     </mat-dialog-content>
 </ng-template>
-
-<ng-template #delete_dialog>
-    <div class="modal-activity-block__delete-dialog">
-    <span class="modal-activity-block__delete-dialog-title"
-          [innerHTML]="'SDK.ModalActivityBlock.ConfirmDeletion' | translate">
-    </span>
-        <div class="modal-activity-block__delete-dialog-buttons">
-            <button mat-flat-button class="ctrl-btn delete-btn"
-                    color="warn"
-                    (click)="deleteActivityInstance()"
-                    [innerHTML]="'SDK.ModalActivityBlock.DeleteButton' | translate">
-            </button>
-            <button mat-stroked-button class="ctrl-btn"
-                    mat-dialog-close
-                    [innerHTML]="'SDK.ModalActivityBlock.CancelButton' | translate">
-            </button>
-        </div>
-    </div>
-</ng-template>
