@@ -349,7 +349,7 @@
                 "Section2": "Nuestra meta es darles a pacientes alrededor de los Estados Unidos y sus territorios y Canadá con cáncer de mama metastásico la oportunidad de participar en estos estudios sin importar donde vivan para poder analizar su cáncer usando estudios moleculares y genómicos de última generación llevados a cabo en el Instituto Broad (Broad Institute)."
             },
             "HowProjectWorks": {
-                "Title": "Cómo Funciona el Proyecto:",
+                "Title": "Cómo funciona el proyecto:",
                 "AboutYourself": {
                     "Title": "A. Cuéntenos sobre usted.",
                     "Text": "Haga clic en \"Cuenten Conmigo\" y complete un cuestionario sencillo en línea donde nos contará sobre usted y su cáncer. Nuestra meta es realizar estudios genómicos que nos permitirán entender los fundamentos genéticos de esta enfermedad. Para comprender este cáncer, necesitamos escuchar sobre sus experiencias con cáncer de mama metastásico e integrar esa información con los datos del ADN (material genético) de su tumor."
@@ -430,7 +430,7 @@
                 "InfoForPhysicians": {
                     "Question": "9. ¿Hay alguna información que pueda proporcionar a mi médico y/u hospital para poder hablar sobre este estudio con ellos?",
                     "Text": "Sí, puede imprimir o usar su dispositivo móvil para compartir este documento:",
-                    "Link": "The Metastatic Breast Cancer Project para Médicos"
+                    "Link": "El Metastatic Breast Cancer Project para Médicos"
                 },
                 "AggregatedData": {
                     "Question": "10. ¿Dónde puedo encontrar la información más reciente que se ha publicado?",
