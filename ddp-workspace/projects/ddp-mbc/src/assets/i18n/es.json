@@ -496,7 +496,7 @@
         }
     },
     "SDK": {
-        "SubmitButton": "[es]SUBMIT",
+        "SubmitButton": "ENVIAR",
         "CloseButton": "[es]CLOSE",
         "AddButton": "[es]ADD",
         "CancelButton": "[es]CANCEL",
@@ -557,21 +557,21 @@
             "Text": "Este tablero describe cada forma para el MBC Project y su estado."
         },
         "DatePicker": {
-            "Day": "[es]Choose day...",
-            "Month": "[es]Choose month...",
-            "Year": "[es]Choose year...",
-            "January": "[es]January",
-            "February": "[es]February",
-            "March": "[es]March",
-            "April": "[es]April",
-            "May": "[es]May",
-            "June": "[es]June",
-            "July": "[es]July",
-            "August": "[es]August",
-            "September": "[es]September",
-            "October": "[es]October",
-            "November": "[es]November",
-            "December": "[es]December"
+            "Day": "Escoja el día...",
+            "Month": "Escoja el mes...",
+            "Year": "Escoja el año...",
+            "January": "enero",
+            "February": "febrero",
+            "March": "marzo",
+            "April": "abril",
+            "May": "mayo",
+            "June": "junio",
+            "July": "julio",
+            "August": "agosto",
+            "September": "septiembre",
+            "October": "octubre",
+            "November": "noviembre",
+            "December": "diciembre"
         },
         "UserMenu": {
             "DashboardButton": "Tablero de Progreso",
