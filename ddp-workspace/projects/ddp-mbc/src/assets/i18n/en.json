@@ -439,7 +439,8 @@
                 "OtherQuestions": {
                     "Title": "Do you have other questions?",
                     "Section1": {
-                        "Text": "You can access a 1 page printable information sheet about the project linked here:",
+                        "TextPt1": "You can access a 1 page printable information sheet about the project linked here:",
+                        "TextPt2": ".",
                         "Link": "The Metastatic Breast Cancer Project"
                     },
                     "Section2": {
