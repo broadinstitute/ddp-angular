@@ -1,40 +1,64 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { QuestionBlockDef } from '../model/questionBlockDef';
 import { FormBuilder } from '@angular/forms';
 import { TextQuestionDef } from '../model/textQuestionDef';
+import { BehaviorSubject, merge, Subscription } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-text-question-editor',
   templateUrl: './text-question-editor.component.html',
   styleUrls: ['./text-question-editor.component.scss']
 })
-export class TextQuestionEditorComponent implements OnInit {
-  @Input()questionBlock: QuestionBlockDef;
+export class TextQuestionEditorComponent implements OnInit, OnDestroy {
+  questionBlockSubject: BehaviorSubject<QuestionBlockDef | null> = new BehaviorSubject(null);
+  @Input()
+  set questionBlock(questionBlock: QuestionBlockDef) {
+    this.questionBlockSubject.next(questionBlock);
+  }
+
   formGroup = this.fb.group({
     inputType: [''],
     stableId: [''],
     required: [false]
   });
+  private sub: Subscription;
 
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.formGroup.patchValue({
-      inputType: this.question.inputType,
-      guid: this.question.stableId,
-      required: this.question.validations.some(val => val.ruleType === 'REQUIRED')
-    });
-    this.formGroup.valueChanges.subscribe(formData => this.updateQuestion(formData));
-    console.log('The question block is: %o', this.questionBlock);
+    const updateFormPipe = this.questionBlockSubject.pipe(
+        filter(block => !!block),
+        map(block => block.question),
+        tap(question => this.updateForm(question as TextQuestionDef))
+    );
+    const updateQuestionPipe = this.formGroup.valueChanges.pipe(
+        tap(formData => this.updateQuestion(formData))
+    );
+    this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe();
   }
-  private get question(): TextQuestionDef {
-    return this.questionBlock?.question as TextQuestionDef;
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
-  updateQuestion(formData: any): void {
-    this.question.inputType = formData.inputType;
-    this.question.stableId = formData.stableId;
-    this.question.validations = formData.required ? [{ruleType: 'REQUIRED', hintTemplate: null}] : [];
+  private updateForm(question: TextQuestionDef): void {
+    this.formGroup.patchValue({
+      inputType: question.inputType,
+      guid: question.stableId,
+      required: question.validations.some(val => val.ruleType === 'REQUIRED')
+    });
+  }
+
+  private currentQuestion(): TextQuestionDef | null {
+    return this.questionBlockSubject.getValue()?.question as TextQuestionDef;
+  }
+
+  private updateQuestion(formData: any): void {
+    const question = this.currentQuestion();
+    if (!question)return;
+    question.inputType = formData.inputType;
+    question.stableId = formData.stableId;
+    question.validations = formData.required ? [{ruleType: 'REQUIRED', hintTemplate: null}] : [];
   }
 }
