@@ -43,6 +43,7 @@ export class ToolkitConfigurationService {
     errorUrl: string;
     stayInformedUrl: string;
     lovedOneThankYouUrl: string;
+    familyHistoryThankYouUrl: string;
     moreDetailsUrl: string;
     tissueConsentUrl: string;
     tissueReleaseUrl: string;

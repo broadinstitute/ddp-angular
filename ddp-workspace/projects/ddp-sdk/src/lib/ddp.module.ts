@@ -95,10 +95,11 @@ import { DropdownActivityPicklistQuestion } from './components/activityForm/pick
 import { CheckboxesActivityPicklistQuestion } from './components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 import { RadioButtonsActivityPicklistQuestion } from './components/activityForm/picklist/radiobuttonsActivityPicklistQuestion.component';
 import { ActivityDateAnswer } from './components/activityForm/answers/activityDateAnswer.component';
-import { ActivityCompositeAnswer } from './components/activityForm/answers/activityCompositeAnswer.component';
+import { ActivityCompositeAnswer } from './components/activityForm/answers/activity-composite-answer/activityCompositeAnswer.component';
 import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
 import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
+import { EmbeddedActivityBlockComponent } from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -349,6 +350,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         GroupBlock,
         GroupBlockList,
         ModalActivityBlockComponent,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,
@@ -414,6 +416,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         GroupBlock,
         GroupBlockList,
         ModalActivityBlockComponent,
+        EmbeddedActivityBlockComponent,
         ConditionalBlockComponent,
         QuestionPromptComponent,
         DropdownActivityPicklistQuestion,

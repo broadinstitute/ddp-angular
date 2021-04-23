@@ -79,7 +79,6 @@ import * as Routes from '../../router-resources';
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
-                            (visibilityChanged)="updateVisibility($event)"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
@@ -134,7 +133,6 @@ import * as Routes from '../../router-resources';
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
-                            (visibilityChanged)="updateVisibility($event)"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                             (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
@@ -147,7 +145,6 @@ import * as Routes from '../../router-resources';
                                 [validationRequested]="validationRequested"
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
-                                (visibilityChanged)="updateVisibility($event)"
                                 (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                 (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
@@ -249,7 +246,7 @@ import * as Routes from '../../router-resources';
                                         ? ('SDK.SavingButton' | translate)
                                         : ('SDK.SubmitButton' | translate)">
                             </button>
-                            <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY"
+                            <button *ngIf="model.activityCode === ActivityCodes.CONTACTING_PHYSICIAN || model.activityCode === ActivityCodes.GENOME_STUDY || model.activityCode === ActivityCodes.BLOOD_TYPE"
                                     #submitButton
                                     [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                     class="button ButtonFilled ButtonFilled--green button_right"

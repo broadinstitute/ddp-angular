@@ -11,6 +11,7 @@ export * from './lib/models/activity/activityResponse';
 export * from './lib/models/activityInstanceGuid';
 export * from './lib/models/activityInstance';
 export * from './lib/models/logLevel';
+export * from './lib/models/activity/activityStatusCodes';
 export * from './lib/models/activity/dateRenderMode';
 export * from './lib/models/activity/dateField';
 export * from './lib/models/activity/activityPicklistOption';
@@ -127,7 +128,7 @@ export * from './lib/components/activityForm/activity-blocks/groupBlock.componen
 export * from './lib/components/activityForm/activity-blocks/activityContent.component';
 export * from './lib/components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 export * from './lib/components/activityForm/answers/activityAgreementAnswer.component';
-export * from './lib/components/activityForm/answers/activityCompositeAnswer.component';
+export * from './lib/components/activityForm/answers/activity-composite-answer/activityCompositeAnswer.component';
 export * from './lib/components/activityForm/answers/activityDateAnswer.component';
 export * from './lib/components/activityForm/answers/activity-answer/activityAnswer.component';
 export * from './lib/components/activityForm/answers/activityNumericAnswer.component';
@@ -136,6 +137,7 @@ export * from './lib/components/activityForm/answers/activityTextAnswer.componen
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
+export * from './lib/components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 export * from './lib/components/activityForm/activitySection.component';
 export * from './lib/components/activityForm/activity-redesigned.component';
 export * from './lib/components/dashboard.component';

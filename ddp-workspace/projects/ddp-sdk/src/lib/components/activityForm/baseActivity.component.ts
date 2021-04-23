@@ -37,7 +37,7 @@ import { ConfigurationService } from '../../services/configuration.service';
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-    @Output() submit: EventEmitter<ActivityResponse | null> = new EventEmitter();
+    @Output() submit: EventEmitter<ActivityResponse | null> = new EventEmitter(true);
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
     @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();

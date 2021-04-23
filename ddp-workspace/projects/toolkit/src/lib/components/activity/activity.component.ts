@@ -34,8 +34,8 @@ export class ActivityComponent implements OnInit {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
     }
 
-    public navigate(response: ActivityResponse): void {
-        this.workflowBuilder.getCommand(response).execute();
+    public navigate(response: ActivityResponse, currentActivityCode?: string): void {
+        this.workflowBuilder.getCommand(response, currentActivityCode).execute();
     }
 
     public showStickySubtitle(stickySubtitle: string): void {

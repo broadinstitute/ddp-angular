@@ -1,0 +1,294 @@
+@import "./variables.scss";
+
+@keyframes open {
+    0% { opacity: 0; max-height: 1px}
+    100% { opacity: 1; max-height: 50vh}
+}
+
+.family-history {
+    --question-prompt-additional-header-font-size: 0.9rem;
+    --question-prompt-additional-header-line-height: 1.3rem;
+
+    .Semibold {
+        font-weight: 600;
+    }
+
+    .top-graphic {
+        width: 100%;
+        height: 125px;
+        background: url(/assets/images/FHS-Tree1.png) no-repeat;
+        background-size: contain;
+    }
+
+    .second-graphic {
+        height: 83px;
+        width: 212px;
+        margin: 20px auto 35px auto;
+        background: url(/assets/images/FHS-Tree2.png) no-repeat;
+        background-size: contain;
+
+        @media (max-width: 680px) {
+            height: 62px;
+            width: 155px;
+            margin-top: 0;
+        }
+    }
+
+    .ddp-section-title {
+        font-size: 2rem;
+    }
+
+    .PageContent-text {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .PageContent-text + details {
+        font-weight: 600;
+        margin-top: 42px;
+        padding: 4px 0 18px 30px;
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #D2D2D2;
+
+        > summary {
+            list-style-type: none;
+            outline: none;
+            cursor: pointer;
+            margin-left: -16px;
+        }
+
+        > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        > summary::before {
+            content: '+';
+            font-size: 30px;
+            position: relative;
+            top: 4px;
+            left: -10px;
+        }
+
+        &[open] > summary::before {
+            display: inline-block;
+            transform: rotate(45deg);
+            transition: 1s ease;
+        }
+
+        &[open] > summary ~ p {
+            animation: open 1.2s ease-in-out;
+
+            &:first-of-type {
+                animation-duration: 1.2s;
+            }
+            &:last-of-type {
+                animation-duration: 1.6s;
+            }
+        }
+
+        > p {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 400;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .modal-activity-block {
+        &__card {
+            border: 1px solid #D1D1D1;
+            box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .ddp-li {
+        font-size: 1.2rem;
+    }
+
+    .ddp-question-prompt {
+        font-family: 'Source Sans Pro';
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+
+        &__info-header {
+            font-weight: 400;
+            margin-top: 8px;
+        }
+    }
+
+    .mat-list {
+        .mat-list-item {
+            margin-bottom: 0;
+        }
+
+        .mat-checkbox-inner-container {
+            width: 18px !important;
+            height: 18px !important;
+        }
+
+        .mat-checkbox-label {
+            font-size: 14px;
+            color: #282828;
+        }
+    }
+
+    @media (max-width: 680px) {
+        .top-graphic {
+            height: 100px;
+        }
+
+        .second-graphic {
+            height: 62px;
+            width: 155px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .mat-list {
+            .mat-list-item {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    @media (max-width: 420px) {
+        .top-graphic {
+            height: 75px;
+        }
+
+        .second-graphic {
+            height: 50px;
+            width: 128px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .top-graphic {
+            height: 60px;
+        }
+
+        .second-graphic {
+            height: 40px;
+            width: 100px;
+        }
+    }
+}
+
+.modal-activity-block {
+    &__edit-dialog {
+        .ddp-li::marker {
+            font-size: 1.2rem;
+        }
+
+        .ddp-question-prompt {
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+        }
+
+        .mat-radio-group {
+            flex-direction: row !important;
+        }
+
+        .mat-radio-label-content {
+            font-size: 1rem;
+            margin-right: 5px;
+            color: #1D1B25;
+        }
+
+        select {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .mat-input-element {
+          font-size: 1.1rem;
+          // need these styles in order to align input and select
+          height: $nativeSelectHeight;
+          //copied from material styles for select.mat-input-element
+          margin-top: 0;
+          position: relative;
+          box-sizing: border-box;
+          padding-top: 1em;
+          top: -1em;
+          margin-bottom: -1em;
+        }
+    }
+
+    &__save_activity {
+        .mat-button-wrapper > span {
+            vertical-align: initial;
+        }
+    }
+
+    &__success-message {
+        line-height: 24px;
+    }
+
+    &__delete-dialog-buttons {
+        .ctrl-btn {
+            font-size: 1rem;
+        }
+    }
+
+    &__card-content {
+        line-height: 30px;
+    }
+}
+
+@media (max-width: 680px) {
+    .modal-activity-block {
+        &__card {
+            --modal-activity-block-card-padding: 12px 20px;
+        }
+
+        &__card-buttons {
+            min-width: 80px;
+        }
+
+        &__card-buttons > button {
+            --modal-activity-block-button-size: 30px;
+
+            &:only-child {
+                float: right;
+            }
+
+            img {
+                height: 24px;
+                position: relative;
+                top: -4px;
+            }
+        }
+
+        &__edit-dialog > mat-dialog-container > * {
+            padding: 12px !important;
+        }
+
+        &__edit-dialog .mat-radio-group {
+            flex-direction: column !important;
+        }
+
+        &__edit-dialog-title > div {
+            margin: auto;
+        }
+
+        &__close-button {
+            right: 0 !important;
+        }
+
+        &__save_activity {
+            margin-top: 8px !important;
+        }
+
+        &__delete-dialog > mat-dialog-container {
+            overflow: hidden;
+        }
+    }
+
+    .button_new-item {
+        margin-top: 16px;
+    }
+}

@@ -4,6 +4,7 @@ import { ActivityComponent } from './activity.component';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
+import { ActivityResponse } from 'ddp-sdk';
 
 @Component({
     selector: 'toolkit-activity-redesigned',
@@ -36,5 +37,10 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
 
     public activityCodeChanged(code: string): void {
         this.headerConfig.currentActivityCode = code;
+    }
+
+    public navigate(response: ActivityResponse): void {
+      const currentActivityCode = this.headerConfig && this.headerConfig.currentActivityCode;
+      super.navigate(response, currentActivityCode);
     }
 }

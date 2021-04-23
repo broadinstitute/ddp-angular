@@ -14,4 +14,8 @@ export class ActivityActivityBlock extends ActivityBlock {
     public get blockType(): BlockType {
         return BlockType.Activity;
     }
+
+    get blocks(): Array<ActivityBlock> {
+        return [this];
+    }
 }

@@ -47,3 +47,6 @@ Thumbs.db
 
 # Karma test report
 TESTS.xml
+
+# any configuration files
+*.conf

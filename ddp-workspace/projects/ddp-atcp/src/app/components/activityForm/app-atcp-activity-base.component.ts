@@ -77,7 +77,6 @@ import { combineLatest, merge } from 'rxjs';
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
-                                        (visibilityChanged)="updateVisibility($event)"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
@@ -95,7 +94,7 @@ import { combineLatest, merge } from 'rxjs';
                                             [class.active]="isActive(i)"
                                             [class.completed]="isCompleted(i)">
                                             <div class="WizardSteps-img">
-                                                <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
+                                                <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)" alt="Wizard Steps Image">
                                             </div>
                                             <div class="WizardSteps-background">
                                                 <div class="WizardSteps-title">{{section.name}}</div>
@@ -115,7 +114,6 @@ import { combineLatest, merge } from 'rxjs';
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
-                                        (visibilityChanged)="updateVisibility($event)"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                                         (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
@@ -131,7 +129,6 @@ import { combineLatest, merge } from 'rxjs';
                                             [validationRequested]="validationRequested"
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
-                                            (visibilityChanged)="updateVisibility($event)"
                                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                             (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
@@ -249,7 +246,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
         .subscribe((value: null | undefined) => {
           if (value === undefined) {
             // User manually changed preferred language
-            this.isLoaded = false;
+            this.isLoaded$.next(false);
           }
         })
     );
@@ -265,7 +262,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     */
     for (const propName of Object.keys(changes)) {
       if (propName === 'studyGuid' || propName === 'activityGuid') {
-        this.isLoaded = false;
+        this.isLoaded$.next(false);
         this.resetValidationState();
       }
       // observable.next() call may lead to firing additional ngChange events, so it should be executed in the end.
@@ -289,7 +286,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
             this.stickySubtitle.emit(this.model.subtitle);
             this.activityCode.emit(this.model.activityCode);
             this.initSteps();
-            this.isLoaded = true;
+            this.isLoaded$.next(true);
           }
 
           // combine the latest status updates from the form model

@@ -15,12 +15,12 @@ import {
   CompositeDisposable,
   LoggingService,
   UserActivityServiceAgent,
+  ActivityStatusCodes,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { ActivityCodes } from '../../constants/activity-codes';
-import { ActivityStatusCodes } from '../../constants/activity-status-codes';
 import { RoutePaths } from '../../router-resources';
 
 @Component({

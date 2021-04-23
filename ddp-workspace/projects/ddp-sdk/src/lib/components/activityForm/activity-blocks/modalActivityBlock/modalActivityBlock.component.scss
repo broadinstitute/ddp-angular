@@ -17,7 +17,7 @@
         color: var(--modal-activity-block-title-color, #1D1B25);
         letter-spacing: 0;
 
-        font-size: var(--modal-activity-block-title-font-size, 20px);
+        font-size: var(--modal-activity-block-title-font-size, 1.4rem);
     }
 
     &__card-subtitle {
@@ -107,7 +107,7 @@
 
             & > * {
                 box-sizing: border-box;
-                padding: 0 40px 0 93px;
+                padding: 0 40px 0 85px;
             }
         }
 
@@ -121,7 +121,7 @@
             padding: 27px 45px 20px 45px;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1260px) {
             &:after { // arrow
                 content: " ";
                 position: relative;

@@ -2,20 +2,28 @@
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
     <div *ngIf="childInstances?.length" class="cards-block">
-        <ng-container *ngIf="isModal">
-            <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
+        <div *ngFor="let instance of childInstances; trackBy: getInstanceId" class="card">
+            <ng-container *ngIf="isModal; else embedded">
                 <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
-                                          [parentActivityInstanceGuid]="parentActivityInstanceGuid"
-                                          (deleteActivity)="onDeleteChildInstance($event)">
+                                          (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-modal-activity-block>
-            </div>
-        </ng-container>
+            </ng-container>
+            <ng-template #embedded>
+                <ddp-embedded-activity-block [instance]="instance"
+                                             [readonly]="readonly"
+                                             [validationRequested]="validationRequested"
+                                             [studyGuid]="studyGuid"
+                                             (componentBusy)="embeddedComponentBusy.emit($event)">
+                </ddp-embedded-activity-block>
+            </ng-template>
+        </div>
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat
+            [disabled]="readonly"
             class="add-btn button button_primary"
             (click)="createChildInstance()">
         <img src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">

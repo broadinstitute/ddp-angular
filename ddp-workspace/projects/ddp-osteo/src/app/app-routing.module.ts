@@ -24,7 +24,8 @@ import {
     HeaderActionGuard,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
-    AgeUpThankYou
+    AgeUpThankYou,
+    ThankYouFamilyHistoryComponent
 } from 'toolkit';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -202,6 +203,12 @@ const routes: Routes = [
         component: LovedOneThankYouRedesignedComponent,
         canActivate: [IrbGuard]
     },
+  {
+        path: 'family-history-thank-you',
+        component: ThankYouFamilyHistoryComponent,
+        canActivate: [IrbGuard]
+    },
+
     {
         path: 'thank-you',
         component: AgeUpThankYou,

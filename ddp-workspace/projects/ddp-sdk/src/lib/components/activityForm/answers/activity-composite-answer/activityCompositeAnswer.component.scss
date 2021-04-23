@@ -1,0 +1,21 @@
+.Title-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-icon-button {
+  position: relative;
+  top: auto;
+  right: auto;
+}

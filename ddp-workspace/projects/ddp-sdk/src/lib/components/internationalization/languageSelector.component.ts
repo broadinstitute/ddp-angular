@@ -18,7 +18,9 @@ import { LoggingService } from '../../services/logging.service';
   selector: 'ddp-language-selector',
   template: `
     <div [hidden]="!loaded">
-      <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" *ngIf="currentLanguage !== null && currentLanguage !== undefined" [matMenuTriggerFor]="menu">
+      <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
+              *ngIf="currentLanguage !== null && currentLanguage !== undefined"
+              [matMenuTriggerFor]="menu">
         <svg class="ddp-globe" height="24px" width="24px">
           <title id="title" [lang]="currentLanguage.languageCode" translate>SDK.LanguageSelector.LanguageSelection</title>
           <use [attr.href]="iconURL"></use>
@@ -28,11 +30,13 @@ import { LoggingService } from '../../services/logging.service';
       </button>
 
       <mat-menu #menu="matMenu" class="language-menu">
-        <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()" (click)="changeLanguage(lang)">{{lang.displayName}}</button>
+        <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()"
+          (click)="changeLanguage(lang)">{{lang.displayName}}
+        </button>
       </mat-menu>
       <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
-                                   checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
-                                   buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+                               checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
+                               buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
       </ddp-popup-with-checkbox>
     </div>
   `
@@ -196,7 +200,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         const loadedCode: string = this.language.useStoredLanguage();
         if (loadedCode) {
           const lang: StudyLanguage = this.studyLanguages.find(studyLang => studyLang.languageCode === loadedCode);
-          subscriber.next(lang ? lang : null);
+          subscriber.next(lang || null);
         } else {
           subscriber.next(null);
         }
@@ -220,11 +224,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private getDefaultLangObservable(): Observable<StudyLanguage> {
     return new Observable<StudyLanguage>(subscriber => {
       const lang: StudyLanguage = this.studyLanguages.find(element => element.isDefault = true);
-      if (lang) {
-        subscriber.next(lang);
-      } else {
-        subscriber.next(null);
-      }
+      subscriber.next(lang || null);
       subscriber.complete();
     });
   }
@@ -238,9 +238,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       filter(() => !!this.currentLanguage),
       filter(event => event.lang !== this.currentLanguage.languageCode)
     ).subscribe(event => {
-      this.currentLanguage = this.studyLanguages.find(language => {
-        return language.languageCode === event.lang;
-      });
+      this.currentLanguage = this.studyLanguages.find(language => language.languageCode === event.lang);
     });
     this.anchor.addNew(sub);
   }

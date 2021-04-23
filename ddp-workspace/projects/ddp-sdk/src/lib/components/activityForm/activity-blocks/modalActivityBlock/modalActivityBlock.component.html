@@ -11,22 +11,31 @@
 
             <div *ngIf="instance.statusCode !== 'CREATED'"
                  class="modal-activity-block__success-message">
-                <mat-icon inline>check_circle</mat-icon>
-                <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
-          | translate: { number: instance.numQuestionsAnswered }"></span>
+                <mat-icon *ngIf="isAllQuestionsCompleted" inline>check_circle</mat-icon>
+                <span *ngIf="!isAllQuestionsCompleted; else completeBlock"
+                      class="modal-activity-block__label"
+                      [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'| translate: {
+                      number: instance.numQuestionsAnswered
+                      }">
+                </span>
+                <ng-template #completeBlock>
+                    <span class="modal-activity-block__label"
+                          [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
+                    </span>
+                </ng-template>
             </div>
         </div>
 
         <mat-card-actions class="modal-activity-block__card-buttons">
             <button mat-mini-fab
-                    *ngIf="!instance.readonly"
                     class="button_primary"
                     (click)="openEditDialog()">
-                <img src="assets/shared/pencil.svg"
+                <img *ngIf="!readonly" src="assets/shared/pencil.svg"
                      [alt]="'SDK.ModalActivityBlock.EditButton' | translate">
+                <mat-icon *ngIf="readonly">remove_red_eye</mat-icon>
             </button>
             <button mat-mini-fab
-                    *ngIf="instance.canDelete"
+                    *ngIf="instance.canDelete && !readonly"
                     #delete_button
                     class="button_secondary"
                     (click)="openDeleteDialog()">
@@ -53,6 +62,7 @@
         ></ddp-activity-section>
 
         <button mat-flat-button
+                [disabled]="readonly"
                 class="ctrl-btn button_primary modal-activity-block__save_activity"
                 (click)="closeEditDialog()">
             <span [innerHTML]="'SDK.ModalActivityBlock.SaveButton' | translate"></span>

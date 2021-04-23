@@ -28,8 +28,8 @@ const DEFAULT_DIALOG_SETTINGS = {
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
-    width: `100vw`,
-    maxWidth: `100vw`,
+    width: `70vw`,
+    maxWidth: `1000px`,
     position: {top: '10vh'},
     panelClass: 'modal-activity-block__edit-dialog',
 };
@@ -42,11 +42,10 @@ const EDIT_DIALOG_CONFIG: MatDialogConfig = {
 })
 export class ModalActivityBlockComponent {
     @Input() studyGuid: string;
-    @Input() parentActivityInstanceGuid: string;
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
-    @Output() deleteActivity = new EventEmitter<string>();
+    @Output() deletedActivity = new EventEmitter<string>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
     @ViewChild('delete_dialog') private deleteModalRef: TemplateRef<any>;
@@ -62,6 +61,10 @@ export class ModalActivityBlockComponent {
                 private logger: LoggingService) {
     }
 
+    get isAllQuestionsCompleted(): boolean {
+      return this.instance.numQuestionsAnswered === this.instance.numQuestions;
+    }
+
     public deleteActivityInstance(): void {
         this.activityServiceAgent.deleteActivityInstance(this.studyGuid, this.instance.instanceGuid).pipe(
             catchError(err => {
@@ -71,7 +74,7 @@ export class ModalActivityBlockComponent {
             take(1)
             )
             .subscribe(() => {
-                this.deleteActivity.emit(this.instance.instanceGuid);
+                this.deletedActivity.emit(this.instance.instanceGuid);
                 this.dialog.closeAll();
             });
     }
@@ -85,7 +88,7 @@ export class ModalActivityBlockComponent {
             take(1)
         ).subscribe((activity: ActivityForm) => {
             this.activityForm = activity;
-            this.openDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
+            this.openModalDialog(this.editModalRef, this.getEditDialogConfig(), this.closeEditDialog.bind(this));
         });
     }
 
@@ -98,14 +101,14 @@ export class ModalActivityBlockComponent {
             }),
             take(1)
         ).subscribe((activityInstance: ActivityInstance) => {
-            this.instance = activityInstance;
+            this.mutateWithNewPropertiesValues(this.instance, activityInstance);
             this.cdr.detectChanges();
             this.dialog.closeAll();
         });
     }
 
     public openDeleteDialog(): void {
-        this.openDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
+        this.openModalDialog(this.deleteModalRef, this.getDeleteDialogConfig(), this.closeDeleteDialog.bind(this));
     }
 
     private closeDeleteDialog(): void {
@@ -120,7 +123,7 @@ export class ModalActivityBlockComponent {
         return this.activityServiceAgent.getActivitySummary(this.studyGuid, this.instance.instanceGuid);
     }
 
-    private openDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
+    private openModalDialog(templateRef: TemplateRef<any>, config: any, closeDialogCallback: (...args) => void): void {
         const dialogRef = this.dialog.open(templateRef, config);
 
         if (closeDialogCallback) {
@@ -133,11 +136,9 @@ export class ModalActivityBlockComponent {
     }
 
     private getEditDialogConfig(): MatDialogConfig {
-        const widthForMobile = '70vw';
         const editDialogMobileConfig = {
             ...EDIT_DIALOG_CONFIG,
-            width: widthForMobile,
-            maxWidth: widthForMobile
+            maxWidth: '70vw'
         };
 
         return this.isMobile ? editDialogMobileConfig : EDIT_DIALOG_CONFIG;
@@ -155,21 +156,26 @@ export class ModalActivityBlockComponent {
             height: `${dialogHeight}px`
         };
 
-        if (!this.isMobile) {
-            config.position = this.calculateDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
-            config.width = `${realDialogWidth}px`;
-        }
+        config.position = this.calculateDeleteDialogPosition(this.deleteButtonRef, dialogWidth, dialogHeight);
+        config.width = `${realDialogWidth}px`;
 
         return config;
     }
 
-    private calculateDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
+    private calculateDeleteDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
         const box: DOMRect = root.nativeElement.getBoundingClientRect();
         const xCenter = box.left + box.width / 2;
         const verticalGap = 15;
+
+        const left = window.innerWidth > 1260 ? `${xCenter - dialogWidth / 2}px` : undefined;
         return {
             top: `${box.top - dialogHeight - verticalGap}px`,
-            left: `${xCenter - dialogWidth / 2}px`
+            left
         };
+    }
+
+    private mutateWithNewPropertiesValues(target: ActivityInstance, source: ActivityInstance): void {
+        // mutate the target instance (copy all properties from source to target)
+        Object.assign(target, source);
     }
 }
