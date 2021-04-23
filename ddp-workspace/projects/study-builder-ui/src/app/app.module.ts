@@ -19,6 +19,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContentBlockComponent } from './content-block/content-block.component';
 import { TextQuestionBlockComponent } from './text-question-block/text-question-block.component';
 import { TextQuestionEditorComponent } from './text-question-editor/text-question-editor.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,11 @@ import { TextQuestionEditorComponent } from './text-question-editor/text-questio
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
+    MatInputModule,
+    MatRadioModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
