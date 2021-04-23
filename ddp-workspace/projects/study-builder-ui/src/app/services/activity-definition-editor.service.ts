@@ -121,17 +121,19 @@ export class ActivityDefinitionEditorService  {
         this.currentActivityDefSubject.next(activity);
     }
     public addBlankContentBlock(): void {
-      let activityToUpdate;
-      activityToUpdate = this.currentActivityDefSubject.getValue();
-      activityToUpdate?.sections[0].blocks.push(this.createDefaultContentBlock());
-      this.currentActivityDefSubject.next(activityToUpdate);
+      this.addNewBlock(this.createDefaultContentBlock());
     }
     public addBlankTextQuestionBlock(): void {
-        let activityToUpdate;
-        activityToUpdate = this.currentActivityDefSubject.getValue();
-        activityToUpdate?.sections[0].blocks.push(this.createDefaultTextQuestionBlock());
-        this.currentActivityDefSubject.next(activityToUpdate);
+        this.addNewBlock(this.createDefaultTextQuestionBlock());
     }
+
+    private addNewBlock(newBlock: FormBlockDef): void {
+        const activityToUpdate = this.currentActivityDefSubject.getValue();
+        activityToUpdate?.sections[0].blocks.push(newBlock);
+        this.currentActivityDefSubject.next(activityToUpdate);
+        this.currentBlockDefSubject.next(newBlock);
+    }
+
     private createDefaultTextQuestionBlock(): QuestionBlockDef {
         return {
             blockType: 'QUESTION',
