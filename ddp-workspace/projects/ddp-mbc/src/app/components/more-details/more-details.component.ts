@@ -94,7 +94,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.FAQ.TumorTissue.Text</p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.FAQ.TissueSample.Question</h2>
-                        <p class="PageContent-text" translate>Toolkit.MoreDetails.FAQ.TissueSample.Text</p>
+                        <p class="PageContent-text" [innerHTML]="'Toolkit.MoreDetails.FAQ.TissueSample.Text' | translate"></p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.FAQ.TissueAndMedicalRecords.Question</h2>
                         <p class="PageContent-text" translate>Toolkit.MoreDetails.FAQ.TissueAndMedicalRecords.Text</p>
@@ -117,8 +117,8 @@ import { ToolkitConfigurationService } from 'toolkit';
                     <section class="PageContent-section">
                         <h1 class="PageContent-title" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Title</h1>
                         <p class="PageContent-text">
-                            <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Text</span>
-                            <a href="MBC-Brochure-one-pager.pdf" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a>
+                            <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.TextPt1</span>
+                            <a href="MBC-Brochure-one-pager.pdf" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a><span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.TextPt2</span>
                         </p>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section2.TextPt1</span>
