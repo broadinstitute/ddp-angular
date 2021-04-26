@@ -13,13 +13,6 @@ export class ActivityDeleteDialogComponent {
     ) {
     }
 
-    delete(): void {
-        if (this.modalData && this.modalData.actionCallback) {
-            this.modalData.actionCallback();
-        }
-        this.closeDialog();
-    }
-
     closeDialog(): void {
         this.dialogRef.close();
     }

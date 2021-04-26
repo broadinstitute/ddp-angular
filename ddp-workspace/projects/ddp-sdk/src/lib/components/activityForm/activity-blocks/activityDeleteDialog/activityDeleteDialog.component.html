@@ -5,7 +5,7 @@
     <div class="activity-block__delete-dialog-buttons">
         <button mat-flat-button class="ctrl-btn delete-btn"
                 color="warn"
-                (click)="delete()"
+                [mat-dialog-close]="true"
                 [innerHTML]="'SDK.DeleteButton' | translate">
         </button>
         <button mat-stroked-button class="ctrl-btn"

@@ -58,7 +58,7 @@ export class ModalActivityBlockComponent {
     }
 
     get isAllQuestionsCompleted(): boolean {
-      return this.instance.numQuestionsAnswered === this.instance.numQuestions;
+        return this.instance.numQuestionsAnswered === this.instance.numQuestions;
     }
 
     public deleteActivityInstance(): void {
@@ -106,10 +106,16 @@ export class ModalActivityBlockComponent {
 
     public openDeleteDialog(): void {
         const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
-        config.data = {
-            actionCallback: this.deleteActivityInstance.bind(this)
-        };
-        this.dialog.open(ActivityDeleteDialogComponent, config);
+
+        const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
+        dialogRef.afterClosed().pipe(
+            take(1)
+            )
+            .subscribe((confirmDelete: boolean) => {
+                if (confirmDelete) {
+                    this.deleteActivityInstance();
+                }
+            });
     }
 
     private getFullActivity$(): Observable<ActivityForm> {
