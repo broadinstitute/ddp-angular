@@ -9,7 +9,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <mat-form-field>
+    <mat-form-field class="ddp-dropdown-field">
       <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
       </ng-container>
 
@@ -42,27 +42,31 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
               </option>
           </select>
       </ng-template>
+    </mat-form-field>
 
-      <ng-container *ngIf="details.show">
-          <mat-form-field class="width ddp-option-details-field">
-              <input matInput
-                     (change)="detailTextChanged($event.target.value)"
-                     (input)="updateCharactersLeftIndicator(details.stableId, $event.target.value)"
-                     [disabled]="readonly"
-                     [attr.maxlength]="block.detailMaxLength"
-                     [placeholder]="details.placeholder"
-                     [value]="details.text">
-          </mat-form-field>
-          <p *ngIf="!readonly" class="ddp-helper">
-              <span class="ddp-counter-color">
-                  {{ questionIdToCharactersLeft[details.stableId] }}
-              </span>{{ questionIdToCharacterLeftMsg[details.stableId] }}
-          </p>
-      </ng-container>
-    </mat-form-field>`,
+    <ng-container *ngIf="details.show">
+        <mat-form-field class="width ddp-option-details-field">
+            <input matInput
+                   (change)="detailTextChanged($event.target.value)"
+                   (input)="updateCharactersLeftIndicator(details.stableId, $event.target.value)"
+                   [disabled]="readonly"
+                   [attr.maxlength]="block.detailMaxLength"
+                   [placeholder]="details.placeholder"
+                   [value]="details.text">
+        </mat-form-field>
+        <p *ngIf="!readonly" class="ddp-helper">
+            <span class="ddp-counter-color">
+                {{ questionIdToCharactersLeft[details.stableId] }}
+            </span>{{ questionIdToCharacterLeftMsg[details.stableId] }}
+        </p>
+    </ng-container>`,
     styles: [`
         .width {
             width: 100%;
+        }
+
+        .ddp-dropdown-field ::ng-deep .mat-form-field-infix {
+          width: auto;
         }
     `]
 })
