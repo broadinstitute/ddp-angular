@@ -143,7 +143,7 @@
             "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
         },
         "LoginLanding": {
-            "Text": "[es]Please wait. You will be redirected to a destination soon..."
+            "Text": "Por favor espere. Le estaremos dirigiendo a su página destinataria en un momento..."
         },
         "DataRelease": {
             "Title": "DATOS del MBCproject",
@@ -496,32 +496,37 @@
         }
     },
     "SDK": {
-        "SubmitButton": "ENVIAR",
-        "CloseButton": "[es]CLOSE",
-        "AddButton": "[es]ADD",
-        "CancelButton": "[es]CANCEL",
-        "NextButton": "SIGUIENTE",
-        "PreviousButton": "ANTERIOR",
-        "SavingButton": "[es]SAVING",
-        "EditButton": "EDITAR",
-        "ReviewButton": "[es]VIEW",
-        "ValidateError": "[es]Please correct any errors in the form.",
-        "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
-        "SaveError": "[es]We're sorry but an error occurred.",
+        "SubmitButton": "Enviar",
+        "CloseButton": "Cerrar",
+        "AddButton": "AGREGAR",
+        "CancelButton": "CANCELAR",
+        "NextButton": "Siguiente",
+        "PreviousButton": "Atrás",
+        "SavingButton": "Guardando...",
+        "EditButton": "Continuar",
+        "ReviewButton": "Ver",
+        "ValidateError": "Por favor complete todos los campos requeridos.",
+        "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
+        "SaveError": "Lamentablemente, se produjo un error.",
+        "OpenButton": "Abrir",
+        "StartButton": "Comenzar",
+        "AgreeButton": "Acepto",
+        "ReportButton": "Reportar",
+        "NotAgreeButton": "Todavía no quiero aceptar", "CompleteButton": "Editar",
         "ExportStudy": {
-            "Export": "[es]EXPORT"
+            "Export": "EXPORTAR"
         },
         "ListStudies": {
-            "StudyName": "[es]Study Name",
-            "ParticipantCount": "[es]Participant Count"
+            "StudyName": "Nombre del estudio",
+            "ParticipantCount": "Cantidad de participantes"
         },
         "ListWorkspaces": {
-            "WorkspaceName": "[es]Workspace Name",
-            "WorkspaceNamespace": "[es]Workspace Namespace"
+            "WorkspaceName": "Nombre del espacio de trabajo",
+            "WorkspaceNamespace": "Espacio de nombre del espacio de trabajo"
         },
         "Login": {
-            "Login": "[es]LOG IN",
-            "Logout": "[es]LOG OUT"
+            "Login": "INICIAR SESIÓN",
+            "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
             "SignIn": "Iniciar Sesión",
@@ -538,19 +543,19 @@
             "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
-            "GovernedParticipants": "[es]Governed participants",
-            "ParticipantPlaceholder": "[es]Participant",
-            "ParticipantsList": "[es]Participants"
+            "GovernedParticipants": "Participantes controlados",
+            "ParticipantPlaceholder": "Participante",
+            "ParticipantsList": "Participantes"
         },
         "ParticipantProfile": {
-            "OpenProfile": "[es]Profile",
-            "ViewAs": "[es]View As",
-            "ManageParticipants": "[es]Manage participants"
+            "OpenProfile": "Perfil",
+            "ViewAs": "Ver como",
+            "ManageParticipants": "Administrar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "[es]User preferences",
-            "UserPreferencesGender": "[es]Sex",
-            "UserPreferencesLocale": "[es]Preferred language"
+            "UserPreferencesTitle": "Preferencias del usuario",
+            "UserPreferencesGender": "Sexo",
+            "UserPreferencesLocale": "Idioma preferido"
         },
         "Dashboard": {
             "Title": "Mi Tablero",
@@ -578,25 +583,25 @@
             "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
-            "PluralForm": "[es]characters remaining",
-            "SingularForm": "[es]character remaining"
+            "PluralForm": "caracteres restantes",
+            "SingularForm": "carácter restante"
         },
         "Title": {
             "Default": "[es]The Metastatic Breast Cancer Project",
-            "Alert": "[es]Your session will time-out soon"
+            "Alert": "Su sesión terminará pronto."
         },
         "EmailEntry": {
-            "InvalidEmail": "[es]Please enter a valid email"
+            "InvalidEmail": "Ingrese un correo electrónico válido."
         },
         "Institutions": {
             "Fields": {
-                "Name": "[es]Physician Name",
-                "Institution": "[es]Institution",
-                "InstitutionAny": "[es]Institution (if any)",
-                "City": "[es]City",
-                "State": "[es]State"
+                "Name": "Nombre del médico",
+                "Institution": "Institución",
+                "InstitutionAny": "Institución (si la hay)",
+                "City": "Ciudad",
+                "State": "Estado"
             },
-            "PhysicianValidation": "[es]Please fill out all required fields"
+            "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "MailAddress": {
             "Fields": {
@@ -688,7 +693,7 @@
         },
         "TooltipAlt": "Información",
         "Validators": {
-            "DateNavyValidationRule": "[es]Entered date is invalid"
+            "DateNavyValidationRule": "La fecha es inválida"
         }
     }
 }
