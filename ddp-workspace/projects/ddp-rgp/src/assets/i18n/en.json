@@ -1124,86 +1124,142 @@
         "Paragraph3": "If you would like your information to be deleted from our database at any time, please email us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
     },
     "StudyMessages": {
-      "Enrollment": {
-        "Subject": "Enrollment application",
-        "Message": "Thank you for your interest in the Rare Genomes Project! Please complete your application below.",
-        "More": "TBD"
+      "Application": {
+        "PreReview": {
+          "Subject": "Application",
+          "Message": "Thank you for your interest in the Rare Genomes Project! Please see below to complete your application."
+        },
+        "InReview": {
+          "Subject": "Application",
+          "Message": "Thank you for applying! Your application is being reviewed.",
+          "More": "<p>We will contact you as soon as a decision about your application has been made. If you do not hear from our office within 6 weeks, please contact us.</p>"
+        },
+        "ThankYou": {
+          "Subject": "Application",
+          "Message": "Thank you for applying!",
+          "More": "<p>At any time during your involvement with the study, contact us with any questions or concerns.</p><p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+        }
       },
       "ApplicationDecision": {
         "Accepted": {
           "Subject": "Application decision",
-          "Message": "Our team has reviewed your application and determined that you are eligible to participate.",
-          "More": "TBD"
+          "Message": "Your application has been reviewed, and you are eligible to participate.",
+          "More": "<p>The next step is to schedule an appointment for a Consent Session. See above.</p>"
         },
         "NotAccepted": {
           "Subject": "Application decision",
-          "Message": "Our team has reviewed your application and determined that you are not eligible to participate at this time.",
-          "More": "TBD"
+          "Message": "Your application has been reviewed, and unfortunately, you are not eligible to participate.",
+          "More": "<p>The Rare Genomes Project is a research study aimed at understanding the genetic causes of rare and undiagnosed conditions in families. Our expertise is using genomic approaches to find changes in a single gene that result in a medical condition. There are a number of situations where our approach is not likely to be successful. Due to this, we are not able to enroll all families who have applied. Some reasons for this include, but are not limited to, families that have:<p><ul><li>Family members with very different medical conditions</li><li>A condition which is not likely to be caused by a change in a single gene</li><li>A condition where genomic sequencing is not the best test to use for diagnosis</li><li>Already received a genetic diagnosis</li></ul><p>Following is a list of resources that may provide information or support for your family:</p><ul><li><a href=\"https://rarediseases.org/\" target=\"_blank\">National Organization for Rare Disorders</a>: an advocacy organization dedicated to improving the lives of patients and families afflicted by rare disease and provides information on diseases, genetic testing, financial assistance programs, clinical trials, and more.</li><li><a href=\"https://globalgenes.org/\" target=\"_blank\">Global Genes</a>: a rare disease patient advocacy organization that promotes the varied needs of the rare disease community. Their mission is to build awareness, educate the global community, and provide critical connections and resources that equip advocates to become activists for their disease.</li><li><a href=\"https://www.clinicalgenome.org/genomeconnect/for-patients-genomeconnect/\" target=\"_blank\">GenomeConnect</a>: an online patient registry where individuals can securely share their genetic and health information with researchers, have the option to connect with others with similar genetic test results or diagnoses, learn about additional research opportunities, and receive updates about their genetic test results.</li><li><a href=\"https://mygene2.org/MyGene2/\" target=\"_blank\">MyGene2</a>: a registry where families can create their own entry and connect with other families, clinicians, and researchers interested in similar findings.</li><li><a href=\"https://medlineplus.gov/genetics/\" target=\"_blank\">Medline Plus: Genetics</a>: a federally-funded resource of information about genetics and the role of genes in human disease.</li><li><a href=\"https://clinicaltrials.gov/\" target=\"_blank\">Clinicaltrials.gov</a>: a database of privately- and publicly-funded research studies from around the world. Visitors are able to search by disease name or symptoms as well as gene(s) of interest.</li></ul>"
         },
-        "NeedMoreInfo": {
+        "MoreInfoNeeded": {
           "Subject": "Application decision",
-          "Message": "Our team has reviewed your application to determine your eligibility to participate and needs more information to make a decision.",
-          "More": "TBD"
+          "Message": "Your application has been reviewed, and we need more information to make a decision about your eligibility to participate.",
+          "More": "<p>We would like to review the medical records for the person in the family with rare disease. In order to review medical records, that individual must be enrolled in the study.</p><p>To proceed, the family member with the rare disease should schedule a Consent Session (see above). Only the individual with rare disease (age 7 or older) needs to attend with his/her legal guardian, if applicable. After review of medical records, our team will determine if your family is eligible to proceed with the study.</p>"
+        },
+        "NMI": {
+          "Subject": "Application decision",
+          "Message": "Medical records have been reviewed, and you are eligible to participate.",
+          "More": "<p>Here are the next steps for you and your family:</p><ul><li>Sample collection: We will send you a sample collection kit (see above).</li><li>Enroll family members: Please contact us to discuss which family members we would invite to participate. Whenever possible, we seek to enroll both biological parents, other affected family members, and up to two healthy siblings. Similar to the family member who already enrolled, these additional family members will need to have a Consent Session with one of our team members to learn more about the study before deciding about participation.</li></ul>"
         }
       },
-      "ConsentAppointment": {
+      "ConsentSession": {
         "ScheduleNeeded": {
-          "Subject": "Informed consent appointment",
-          "Message": "Please schedule an informed consent appointment.",
-          "More": "TBD"
+          "Subject": "Consent session",
+          "Message": "Please schedule an appointment for a Consent Session.<br /><a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Schedule an appointment</a>"
         },
         "Scheduled": {
-          "Subject": "Informed consent appointment",
-          "Message": "Your appointment has been scheduled."
+          "Subject": "Consent session",
+          "Message": "Your Consent Session has been scheduled.",
+          "More": "<p>If you need to reschedule your appointment, please use the link in the email confirmation you received. If you need assistance, please call our office at <a href=\"tel:6177147395\">617-714-7395</a>.</p><p>If other members of your family need to schedule a Consent Session, they can make an appointment <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">here</a>.</p>"
         }
       },
       "ConsentForm": {
-        "Subject": "Consent form",
-        "Message": "A signed consent form is needed to be enrolled.",
-        "More": "TBD"
+        "SignedFormRequired": {
+          "Subject": "Consent form",
+          "Message": "Thank you for attending the Consent Session. A signed consent form is required to move forward with the study.",
+          "More": "<p>After your Consent Session, you will receive an email from AdobeSign with an electronic copy of the consent form (and assent form, if applicable). If you would like to participate, please electronically sign the form(s), which will automatically be sent back to us. If you have any questions or if you have decided not to participate, please contact us.</p><p>If other members of your family need to schedule a Consent Session, they can make an appointment <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">here</a>.</p>"
+        },
+        "SignedFormReceived": {
+          "Subject": "Consent form",
+          "Message": "A signed consent form has been received.",
+          "More": "<p>See items above for your next steps.</p><p>If other members of your family need to schedule a consent session, they can make an appointment <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">here</a>.</p>"
+        },
+        "Decline": {
+          "Subject": "Consent form",
+          "Message": "You have decided not to participate in this study.",
+          "More": "<p>If you should change your mind at a later date, please call us.</p>"
+        }
       },
       "MedicalRecords": {
         "NoRecords": {
           "Subject": "Medical records",
           "Message": "Copies of medical records are needed.",
-          "More": "TBD"
+          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Partial": {
           "Subject": "Medical records",
           "Message": "We have received some of the medical records needed.",
+          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+        },
+        "Received": {
+          "Subject": "Medical records",
+          "Message": "We have received your records. Thank you!",
           "More": "TBD"
         },
         "NA": {
           "Subject": "Medical records",
-          "Message": "We do not need medical records at this time.",
-          "More": "TBD"
+          "Message": "We do not need medical records at this time."
         }
       },
-      "SampleKit": {
-        "Blood": {
+      "RedCap": {
+        "Enrolled": {
+          "Subject": "Survey",
+          "Message": "An email with a link to an optional survey will be sent to you 7 days after you signed the consent form.",
+          "More": "<p>The survey asks questions about your experience with the rare disease present in you or your child. We are using these questions to research the impact of having a rare disease and the reasons for participating in genomic research.</p><p>If you do not receive an email with a survey link, please contact our office by phone or email.</p>"
+        },
+        "Complete": {
+          "Subject": "Survey",
+          "Message": "Your survey response has been received. Thank you!"
+        }
+      },
+      "Sample": {
+        "Enrolled": {
           "Subject": "Sample",
-          "Message": "A sample collection kit will be sent to you within the next 2 weeks.",
-          "More": "TBD"
+          "Message": "A sample collection kit will be sent to you in approximately 2 weeks.",
+          "More": "<p>We will update you when it has been sent.</p>"
         },
         "Sent": {
           "Subject": "Sample",
           "Message": "A sample collection kit has been sent to you.",
-          "More": "TBD"
+          "More": "<p>You can have your blood drawn at a location of your choosing. Regardless of where you choose have your blood drawn, <span class=\"bold underline\">please confirm with the technician that they have labeled both the blood tube and the paperwork in the box with your legal name and date of birth</span>:</p><p>If you go to Quest Diagnostics, we recommend that you <a href=\"http://www.questdiagnostics.com/appointment\" target=\"_blank\">make an appointment online</a> to ensure you are seen promptly. They require that the blood be drawn Monday-Friday before 2 PM to ensure they can send it back to us the same day. The required Quest paperwork is in the box. They will take care of shipping the sample to us and will bill us directly for the service.</p><p>If you go to your doctor's office or hospital’s lab, we recommend you call the location before you go to ensure they are willing to draw the sample. The pre-paid FedEx shipping materials inside the box can be used to send the sample back to us. If there is a charge for the blood draw, send us a copy of the bill so we can reimburse you. Please call our office if we can be of assistance.</p>"
         },
         "Received": {
           "Subject": "Sample",
-          "Message": "Your sample has been received."
+          "Message": "Your sample has been received. Thank you!"
         }
       },
-      "RedCapSurvey": {
-        "Enrolled": {
-          "Subject": "Survey",
-          "Message": "An optional survey has been sent to you.",
-          "More": "TBD"
+      "Withdraw": {
+        "Withdraw": {
+          "Subject": "Withdraw",
+          "Message": "You have decided to withdraw from the study.",
+          "More": "<p>Your sample, medical records and/or data will be destroyed. We are unable to destroy samples and information that have already been shared with other researchers.</p>"
+        }
+      },
+      "DataAnalysis": {
+        "FamilyStepsComplete": {
+          "Subject": "Sequencing and Analysis",
+          "Message": "Your study activities are now complete.",
+          "More": "<p>Your participation will help us in our search for a genetic explanation for the undiagnosed condition in your family member. Thank you for taking part in this study!</p>"
         },
-        "Completed": {
-          "Subject": "Survey",
-          "Message": "Your survey response has been received."
+        "ProbandStepsComplete": {
+          "Subject": "Sequencing and Analysis",
+          "Message": "We have received your sample and are processing it for sequencing.",
+          "More": "<p>It typically takes 4-6 months before we have data to analyze. Then, our team of analysts will begin look for connections between genetic changes present and your symptoms. If we identify a genetic change that we believe may be related to your medical condition, we will contact you to discuss confirmation testing in a clinical laboratory.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. If we do not initially find a result, we will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study. Thank you for participating in the Rare Genomes Project!</p>"
+        },
+        "ProbandNeg": {
+          "Subject": "Sequencing and Analysis",
+          "Message": "We have not identified a result to date.",
+          "More": "<p>Analysis of your DNA and health information has not revealed a genetic variant that we think explains your condition.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. We will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study.</p>"
         }
       }
     },
