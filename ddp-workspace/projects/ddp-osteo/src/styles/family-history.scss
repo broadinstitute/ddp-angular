@@ -228,14 +228,16 @@
         line-height: 24px;
     }
 
+    &__card-content {
+        line-height: 30px;
+    }
+}
+
+.activity-block {
     &__delete-dialog-buttons {
         .ctrl-btn {
             font-size: 1rem;
         }
-    }
-
-    &__card-content {
-        line-height: 30px;
     }
 }
 
@@ -282,9 +284,11 @@
         &__save_activity {
             margin-top: 8px !important;
         }
+    }
 
+    .modal-activity-block, .activity-block {
         &__delete-dialog > mat-dialog-container {
-            overflow: hidden;
+            padding: 24px !important;
         }
     }
 

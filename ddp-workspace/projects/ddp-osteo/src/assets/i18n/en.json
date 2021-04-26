@@ -744,8 +744,9 @@
             "EditButton": "Edit",
             "DeleteButton": "Delete",
             "SaveButton": "Save",
-            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
             "CancelButton": "Cancel"
-        }
+        },
+        "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+        "CancelBtn": "Cancel"
     }
 }

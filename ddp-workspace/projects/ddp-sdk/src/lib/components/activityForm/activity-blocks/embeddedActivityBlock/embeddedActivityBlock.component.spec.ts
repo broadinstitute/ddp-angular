@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs';
+
 import { EmbeddedActivityBlockComponent } from './embeddedActivityBlock.component';
 import { ActivityForm, ActivityServiceAgent, LoggingService, SubmitAnnouncementService } from 'ddp-sdk';
-import { of } from 'rxjs';
+import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
 
 describe('EmbeddedActivityBlockComponent', () => {
   let component: EmbeddedActivityBlockComponent;
@@ -19,7 +22,9 @@ describe('EmbeddedActivityBlockComponent', () => {
       providers: [
         {provide: ActivityServiceAgent, useValue: activityServiceAgentSpy},
         {provide: LoggingService, useValue: loggingServiceSpy},
-        {provide: SubmitAnnouncementService, useValue: submitAnnounceService}
+        {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
+        {provide: MatDialog, useValue: {}},
+        ActivityBlockModalService
       ]
     })
     .compileComponents();
