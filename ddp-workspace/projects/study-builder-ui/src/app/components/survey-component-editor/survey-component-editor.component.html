@@ -1,0 +1,3 @@
+{{ (currentBlock$ | async)?.blockType }}
+<app-text-question-editor *ngIf="isTextQuestionBlock$ | async" [questionBlock]="currentBlock$ | async" (questionBlockChanged)="blockChanged($event)"></app-text-question-editor>
+

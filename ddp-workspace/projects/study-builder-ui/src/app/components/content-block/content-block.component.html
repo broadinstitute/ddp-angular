@@ -1,0 +1,8 @@
+<div class="content-block-container">
+    <h3>Content Block</h3>
+    <editor
+        [init]="editorInit()"
+        [initialValue]="initialContent()"
+        (onChange)="onContentChange($event)">
+    </editor>
+</div>

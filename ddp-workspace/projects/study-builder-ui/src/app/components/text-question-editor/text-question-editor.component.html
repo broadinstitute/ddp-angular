@@ -1,0 +1,34 @@
+<form [formGroup]="formGroup" class="container">
+    <div>
+    <mat-form-field>
+        <mat-label>stableId</mat-label>
+    <input matInput
+           formControlName="stableId" required>
+    </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Question Prompt</mat-label>
+            <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="prompt" required></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-label>Input Type</mat-label>
+        <mat-radio-group formControlName="inputType" class="radio-group">
+            <mat-radio-button  value="TEXT">Text</mat-radio-button>
+
+            <mat-radio-button  value="ESSAY">Essay</mat-radio-button>
+
+            <mat-radio-button  value="EMAIL">Email</mat-radio-button>
+
+            <mat-radio-button  value="SIGNATURE">Signature</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="validations">
+        <mat-label>Validations</mat-label>
+        <mat-checkbox formControlName="required">Required</mat-checkbox>
+    </div>
+
+
+
+</form>

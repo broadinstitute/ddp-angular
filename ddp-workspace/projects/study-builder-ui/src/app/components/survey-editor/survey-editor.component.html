@@ -1,0 +1,27 @@
+
+
+<div fxLayout="column" [formGroup]="form">
+  <div class="control-bar">
+    <mat-form-field appearance="fill">
+      <mat-label>Activity</mat-label>
+      <mat-select formControlName="activityCode">
+        <mat-option *ngFor="let activity of allActivities$ | async" [value]="activity.activityCode">
+          {{activity.activityCode}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="createNewActivity()">New</button>
+  </div>
+
+  <div fxLayout="row" class="zero">
+
+    <div fxFlex="500px" fxLayout="column" class="left-panel">
+      <app-survey-component-palette></app-survey-component-palette>
+      <app-survey-component-editor></app-survey-component-editor>
+    </div>
+
+    <div fxFlex="100%" class="right-canvas-panel">
+      <app-survey-canvas [activity]="currentActivity$ | async"></app-survey-canvas>
+    </div>
+  </div>
+</div>
