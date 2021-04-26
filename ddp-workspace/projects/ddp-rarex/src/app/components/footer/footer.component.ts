@@ -11,17 +11,27 @@ interface NavLink {
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
   readonly rarexUrl = 'https://rare-x.org/';
   navLinks: NavLink[] = [
-    { translationKey: 'Footer.Links.Home', routePath: this.rarexUrl, external: true },
-    { translationKey: 'Footer.Links.TermsAndConditions', routePath: RoutePaths.TermsAndConditions },
-    { translationKey: 'Footer.Links.PrivacyPolicy', routePath: RoutePaths.PrivacyPolicy }
+    {
+      translationKey: 'Footer.Links.Home',
+      routePath: this.rarexUrl,
+      external: true,
+    },
+    {
+      translationKey: 'Footer.Links.TermsAndConditions',
+      routePath: RoutePaths.TermsAndConditions,
+    },
+    {
+      translationKey: 'Footer.Links.PrivacyPolicy',
+      routePath: RoutePaths.PrivacyPolicy,
+    },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {}
 }

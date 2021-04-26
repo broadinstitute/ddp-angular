@@ -5,7 +5,6 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
 
@@ -13,22 +12,22 @@ import {
   ActivityResponse,
   ActivityInstance,
   CompositeDisposable,
-  LoggingService,
   UserActivityServiceAgent,
+  SessionMementoService,
   ActivityStatusCodes,
 } from 'ddp-sdk';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
+import { GovernedUserService } from '../../services/governed-user.service';
 import { ActivityCodes } from '../../constants/activity-codes';
-import { RoutePaths } from '../../router-resources';
 
 @Component({
-  selector: 'app-rarex-activity-page',
-  templateUrl: './rarex-activity-page.component.html',
-  styleUrls: ['./rarex-activity-page.component.scss'],
+  selector: 'app-activity-page',
+  templateUrl: './activity-page.component.html',
+  styleUrls: ['./activity-page.component.scss'],
 })
-export class RarexActivityPageComponent implements OnInit, OnDestroy {
+export class ActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
   isReadonly: boolean;
@@ -40,13 +39,12 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
   private _anchor = new CompositeDisposable();
 
   constructor(
-    private readonly _route: ActivatedRoute,
-    private readonly _router: Router,
     private readonly _cdr: ChangeDetectorRef,
     private readonly _currentActivity: CurrentActivityService,
     private readonly _userActivites: UserActivityServiceAgent,
-    private readonly _logger: LoggingService,
     private readonly _workflowBuilder: WorkflowBuilderService,
+    private readonly _session: SessionMementoService,
+    private governedUserService: GovernedUserService,
     @Inject('toolkit.toolkitConfig')
     private _toolkitConfiguration: ToolkitConfigurationService,
   ) {}
@@ -56,7 +54,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
     const activity = this._currentActivity.activity$.getValue();
 
     if (!activity) {
-      this._router.navigateByUrl(RoutePaths.Dashboard);
+      this.governedUserService.redirectToDashboard();
 
       return;
     }
@@ -68,6 +66,7 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._currentActivity.activity$.next(null);
+    this._session.setParticipant(null);
     this._anchor.removeAll();
   }
 
@@ -103,7 +102,8 @@ export class RarexActivityPageComponent implements OnInit, OnDestroy {
         this.activities = activities;
 
         const demographicsActivity = activities.find(
-          activity => activity.activityCode === ActivityCodes.DEMOGRAPHICS,
+          activity =>
+            activity.activityCode === ActivityCodes.GeneralInformation,
         );
 
         this.isWorkflowProgressShown = demographicsActivity

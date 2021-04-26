@@ -1,0 +1,11 @@
+<ng-container *ngIf="messages && messages.length > 0">
+  <ng-container *ngFor="let message of messages">
+    <div *ngIf="isMessageShown(message)" class="announcement">
+      <button class="close-button" (click)="hideMessage(message)">
+        <mat-icon class="close">clear</mat-icon>
+      </button>
+
+      <div class="content" [innerHTML]="message.message"></div>
+    </div>
+  </ng-container>
+</ng-container>

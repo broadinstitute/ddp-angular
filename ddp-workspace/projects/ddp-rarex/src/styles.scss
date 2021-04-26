@@ -10,5 +10,6 @@
 @import './styles/activity.scss';
 @import './styles/dashboard.scss';
 @import './styles/table.scss';
+@import './styles/material';
 
 @include mat-core($app-typography);

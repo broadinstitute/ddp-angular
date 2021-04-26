@@ -10,24 +10,26 @@ import {
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  readonly naa10FoundationLink = 'https://www.naa10.org/';
   readonly rarexLink = 'https://rare-x.org/';
 
   constructor(
     private session: SessionMementoService,
-    private analytics: AnalyticsEventsService
-  ) { }
+    private analytics: AnalyticsEventsService,
+  ) {}
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {}
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
   }
 
   public sendAnalytics(): void {
-    this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromHeader);
+    this.analytics.emitCustomEvent(
+      AnalyticsEventCategories.ClickedCountMeIn,
+      AnalyticsEventActions.FromHeader,
+    );
   }
 }
