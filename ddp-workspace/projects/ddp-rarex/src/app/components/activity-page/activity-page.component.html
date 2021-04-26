@@ -11,12 +11,12 @@
   </div>
 
   <div class="rarex-activity-page__activity-container">
-    <app-rarex-activity
+    <app-activity
       *ngIf="isActivityShown && !isFetchingActivities"
       [studyGuid]="studyGuid"
       [activityGuid]="instanceGuid"
       [isReadonly]="isReadonly"
       (submit)="onSubmit($event)"
-    ></app-rarex-activity>
+    ></app-activity>
   </div>
 </div>

@@ -1,69 +1,74 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { filter, map, mergeMap, take } from 'rxjs/operators';
+import { mergeMap, take, tap } from 'rxjs/operators';
 
 import {
+  ActivityResponse,
+  ConfigurationService,
   SessionMementoService,
   TemporaryUserServiceAgent,
-  ConfigurationService,
   WorkflowServiceAgent,
-  ActivityResponse,
 } from 'ddp-sdk';
 
-import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
+import { WorkflowBuilderService } from 'toolkit';
 
 @Component({
   selector: 'app-share-my-data',
   templateUrl: './share-my-data.component.html',
-  styleUrls: ['./share-my-data.component.scss']
+  styleUrls: ['./share-my-data.component.scss'],
 })
 export class ShareMyDataComponent implements OnInit {
   studyGuid: string;
-  activityGuid: string;
+  instanceGuid: string;
 
   constructor(
-    @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
-    @Inject('ddp.config') private _configuration: ConfigurationService,
-    private _session: SessionMementoService,
-    private _temporaryUserService: TemporaryUserServiceAgent,
-    private _workflow: WorkflowServiceAgent,
-    private _workflowBuilder: WorkflowBuilderService,
+    private sessionService: SessionMementoService,
+    private workflowService: WorkflowServiceAgent,
+    private workflowBuilderService: WorkflowBuilderService,
+    private tempUserService: TemporaryUserServiceAgent,
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
-    this.studyGuid = this._toolkitConfiguration.studyGuid;
+    this.studyGuid = this.config.studyGuid;
 
-    this.fetchActivity();
+    this.checkSession();
   }
 
-  onSubmit(activityResponse: ActivityResponse): void {
-    let response = activityResponse;
-
-    if (this._session.isTemporarySession() && !activityResponse.allowUnauthenticated)  {
-      response = new ActivityResponse('REGISTRATION');
+  onSubmit(response: ActivityResponse): void {
+    if (!response.allowUnauthenticated) {
+      this.workflowBuilderService
+        .getCommand(new ActivityResponse('REGISTRATION'))
+        .execute();
     }
-
-    this._workflowBuilder.getCommand(response).execute();
   }
 
-  private fetchActivity(): void {
-    if (this._session.isAuthenticatedSession()) {
-      this._workflow.getNext().subscribe(response => {
-        this._workflowBuilder.getCommand(response).execute();
-      });
+  private checkSession(): void {
+    if (this.sessionService.isAuthenticatedSession()) {
+      this.getNextWorkflow();
     } else {
-      this._temporaryUserService
-        .createTemporaryUser(this._configuration.auth0ClientId)
-        .pipe(
-          filter(x => x !== null),
-          map(user => this._session.setTemporarySession(user)),
-          mergeMap(() => this._workflow.getStart()),
-          take(1),
-        )
-        .subscribe((response: ActivityResponse | null) => {
-          if (response && response.instanceGuid) {
-            this.activityGuid = response.instanceGuid;
-          }
-        });
+      this.getStartWorkflow();
     }
+  }
+
+  private getNextWorkflow(): void {
+    this.workflowService
+      .getNext()
+      .pipe(take(1))
+      .subscribe(response => {
+        this.workflowBuilderService.getCommand(response).execute();
+      });
+  }
+
+  private getStartWorkflow(): void {
+    this.tempUserService
+      .createTemporaryUser(this.config.auth0ClientId)
+      .pipe(
+        tap(tempUser => this.sessionService.setTemporarySession(tempUser)),
+        mergeMap(() => this.workflowService.getStart()),
+        take(1),
+      )
+      .subscribe(response => {
+        this.instanceGuid = response.instanceGuid;
+      });
   }
 }
