@@ -62,14 +62,11 @@ export class EmbeddedActivityBlockComponent implements OnInit {
         const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
 
         const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
-        dialogRef.afterClosed().pipe(
-            take(1)
-            )
-            .subscribe((confirmDelete: boolean) => {
-                if (confirmDelete) {
-                    this.deleteInstance();
-                }
-            });
+        dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
+            if (confirmDelete) {
+                this.deleteInstance();
+            }
+        });
     }
 
     public deleteInstance(): void {

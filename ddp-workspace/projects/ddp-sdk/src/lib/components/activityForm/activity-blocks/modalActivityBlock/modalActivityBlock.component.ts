@@ -108,14 +108,11 @@ export class ModalActivityBlockComponent {
         const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
 
         const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
-        dialogRef.afterClosed().pipe(
-            take(1)
-            )
-            .subscribe((confirmDelete: boolean) => {
-                if (confirmDelete) {
-                    this.deleteActivityInstance();
-                }
-            });
+        dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
+            if (confirmDelete) {
+                this.deleteActivityInstance();
+            }
+        });
     }
 
     private getFullActivity$(): Observable<ActivityForm> {
@@ -130,9 +127,7 @@ export class ModalActivityBlockComponent {
         const dialogRef = this.dialog.open(templateRef, config);
 
         if (closeDialogCallback) {
-            dialogRef.beforeClosed().pipe(
-                take(1)
-            ).subscribe(result => {
+            dialogRef.beforeClosed().subscribe(result => {
                 closeDialogCallback(result);
             });
         }
