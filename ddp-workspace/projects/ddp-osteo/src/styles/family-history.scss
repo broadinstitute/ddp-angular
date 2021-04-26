@@ -286,9 +286,9 @@
         }
     }
 
-    .activity-block {
+    .modal-activity-block, .activity-block {
         &__delete-dialog > mat-dialog-container {
-            overflow: hidden;
+            padding: 24px !important;
         }
     }
 

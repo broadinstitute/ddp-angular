@@ -8,36 +8,42 @@ export const DEFAULT_DIALOG_SETTINGS = {
     scrollStrategy: new NoopScrollStrategy(),
 };
 
+const DIALOG_WIDTH = 396;
+const DIALOG_ARROW_WIDTH = 20;
+const DIALOG_HEIGHT = 160;
+const VERTICAL_GAP = 15; // margin between dialog and delete button
+
 @Injectable()
 export class ActivityBlockModalService {
 
     public getDeleteDialogConfig(deleteButtonRef: ElementRef): MatDialogConfig {
-        const dialogWidth = 396;
-        const dialogArrowWidth = 20;
-        const realDialogWidth = dialogWidth + dialogArrowWidth;
-        const dialogHeight = 160;
+        const realDialogWidth = DIALOG_WIDTH + DIALOG_ARROW_WIDTH;
+        const rootBox: DOMRect = deleteButtonRef.nativeElement.getBoundingClientRect();
+        const isDialogLocatedAbove = (rootBox.top - DIALOG_HEIGHT - VERTICAL_GAP) > 0;
 
-        const config: MatDialogConfig = {
+        return {
             ...DEFAULT_DIALOG_SETTINGS,
-            panelClass: 'modal-activity-block__delete-dialog',
-            height: `${dialogHeight}px`
-        };
-
-        config.position = this.calculateDeleteDialogPosition(deleteButtonRef, dialogWidth, dialogHeight);
-        config.width = `${realDialogWidth}px`;
-
-        return config;
+            panelClass: [
+                'modal-activity-block__delete-dialog',
+                isDialogLocatedAbove ? 'on-top' : 'on-bottom'
+            ],
+            height: `${DIALOG_HEIGHT}px`,
+            width: `${realDialogWidth}px`,
+            position: this.calculateDeleteDialogPosition(rootBox, isDialogLocatedAbove)
+        } as MatDialogConfig;
     }
 
-    private calculateDeleteDialogPosition(root: ElementRef, dialogWidth: number, dialogHeight: number): DialogPosition {
-        const box: DOMRect = root.nativeElement.getBoundingClientRect();
+    private calculateDeleteDialogPosition(box: DOMRect, isDialogLocatedAbove: boolean): DialogPosition {
         const xCenter = box.left + box.width / 2;
-        const verticalGap = 15;
+        const top = isDialogLocatedAbove ? `${box.top - DIALOG_HEIGHT - VERTICAL_GAP}px`
+            : `${box.bottom + VERTICAL_GAP}px`;
 
-        const left = window.innerWidth > 1260 ? `${xCenter - dialogWidth / 2}px` : undefined;
-        return {
-            top: `${box.top - dialogHeight - verticalGap}px`,
-            left
-        };
+        let left;
+        if (window.innerWidth > 1260) {
+          left = isDialogLocatedAbove ? `${xCenter - DIALOG_WIDTH / 2}px`
+              : `${xCenter - DIALOG_WIDTH / 2 - box.width / 2}px`;
+        }
+
+        return { top, left };
     }
 }
