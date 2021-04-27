@@ -6,6 +6,7 @@ import { BehaviorSubject, merge, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ConfigurationService } from '../configuration.service';
 import { SimpleTemplate } from '../model/simpleTemplate';
+import { QuestionDef } from '../model/questionDef';
 
 @Component({
     selector: 'app-text-question-editor',
@@ -13,10 +14,10 @@ import { SimpleTemplate } from '../model/simpleTemplate';
     styleUrls: ['./text-question-editor.component.scss']
 })
 export class TextQuestionEditorComponent implements OnInit, OnDestroy {
-    private questionBlockSubject: BehaviorSubject<QuestionBlockDef | null> = new BehaviorSubject(null);
+    private questionBlockSubject: BehaviorSubject<QuestionBlockDef<QuestionDef> | null> = new BehaviorSubject(null);
 
     @Input()
-    set questionBlock(questionBlock: QuestionBlockDef) {
+    set questionBlock(questionBlock: QuestionBlockDef<TextQuestionDef>) {
         this.questionBlockSubject.next(questionBlock);
     }
 

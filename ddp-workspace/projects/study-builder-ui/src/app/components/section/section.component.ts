@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormSectionDef } from '../model/formSectionDef';
-import { FormBlockDef } from '../model/formBlockDef';
-import { ActivityDefinitionEditorService } from '../services/activity-definition-editor.service';
+import { FormSectionDef } from '../../model/formSectionDef';
+import { FormBlockDef } from '../../model/formBlockDef';
+import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent implements OnInit {
-  @Input() section: FormSectionDef | undefined;
+  // @Input() section: FormSectionDef | undefined;
+  section$: Observable<FormSectionDef | null>;
   public validationRequested = false;
   public readonly = true;
   public activityGuid = '';
@@ -20,6 +21,7 @@ export class SectionComponent implements OnInit {
 
   constructor(private editorService: ActivityDefinitionEditorService) {
     this.selectedBlock$ = this.editorService.currentBlockDef$;
+    this.section$ = this.editorService.currentSectionDef$;
   }
 
   ngOnInit(): void {

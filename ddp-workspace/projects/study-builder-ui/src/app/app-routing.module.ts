@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SurveyEditorComponent } from './survey-editor/survey-editor.component';
+import { SurveyEditorComponent } from './components/survey-editor/survey-editor.component';
 
 
 const routes: Routes = [{
