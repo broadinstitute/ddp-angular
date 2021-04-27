@@ -354,6 +354,11 @@
       "September": "Сентябрь",
       "Year": "Выбрать год..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "символов осталось",
       "SingularForm": "символ остался"

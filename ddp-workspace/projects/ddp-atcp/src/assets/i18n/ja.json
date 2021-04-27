@@ -354,6 +354,11 @@
       "September": "9月",
       "Year": "年を選択してください..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "文字残っています",
       "SingularForm": "文字残っています"

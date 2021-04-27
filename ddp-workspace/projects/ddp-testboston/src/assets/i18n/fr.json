@@ -494,6 +494,11 @@
       "November": "Novembre",
       "December": "Décembre"
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "UserMenu": {
       "DashboardButton": "Tableau de bord",
       "SignOutButton": "Déconnexion"

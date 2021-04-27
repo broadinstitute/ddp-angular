@@ -354,6 +354,11 @@
       "September": "Eylül",
       "Year": "Yıl seçin..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "karakter kaldı",
       "SingularForm": "karakter kaldı"
