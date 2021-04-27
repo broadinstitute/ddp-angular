@@ -116,8 +116,7 @@ export class ActivityConverter {
             }
             const childBlock = blockBuilder.func(childJson);
             if (!childBlock) {
-                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'Could not build block from JSON'
-                    + JSON.stringify(childJson));
+                this.logger.logError(`${this.LOG_SOURCE}.convertConditionalBlock`, 'Could not build block from JSON', childJson);
                 return null;
             }
             this.buildShownField(childBlock, childJson);
