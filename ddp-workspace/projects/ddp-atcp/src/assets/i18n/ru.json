@@ -355,9 +355,9 @@
       "Year": "Выбрать год..."
     },
     "DateLabel": {
-      "YYYY": "YYYY",
+      "YYYY": "ГГГГ",
       "MM": "MM",
-      "DD": "DD"
+      "DD": "ДД"
     },
     "DetailsPlaceholder": {
       "PluralForm": "символов осталось",
