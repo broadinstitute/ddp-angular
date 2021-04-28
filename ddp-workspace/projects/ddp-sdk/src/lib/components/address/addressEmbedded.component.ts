@@ -268,7 +268,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => this.stateUpdates$.next({isTemporarilyDisabled: true})),
             mergeMap((state) => this.addressService.findDefaultAddress().pipe(
                 catchError(error => {
-                    this.logger.logWarning(this.LOG_SOURCE, `An error occurred during findDefaultAddress: ${error.code}, ${error.message}`);
+                    this.logger.logDebug(this.LOG_SOURCE, `An error occurred during findDefaultAddress: ${error.code}, ${error.message}`);
                     return of(null);
                 }),
                 map(defaultAddress => [state, defaultAddress]),
@@ -281,7 +281,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             // map(([state, _]) => state as ComponentState),
             mergeMap(([state, _]) => this.addressService.getTempAddress(state.activityInstanceGuid).pipe(
                 catchError(error => {
-                    this.logger.logWarning(this.LOG_SOURCE, `An error occurred during getTempAddress: ${error.code}, ${error.message}`);
+                    this.logger.logDebug(this.LOG_SOURCE, `An error occurred during getTempAddress: ${error.code}, ${error.message}`);
                     return of(null);
                 })
             )),
