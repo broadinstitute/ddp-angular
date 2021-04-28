@@ -15,7 +15,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
-                     [placeholder]="placeholder && dateFields.length == 1 ? placeholder : 'MM'"
+                     [placeholder]="placeholder && dateFields.length == 1 ? placeholder : ('SDK.DateLabel.MM' | translate)"
                      size="3"
                      maxlength="2"
                      #MM
@@ -31,7 +31,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
-                     [placeholder]="placeholder && dateFields.length === 1 ? placeholder : 'DD'"
+                     [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.DD' | translate)"
                      size="3"
                      maxlength="2"
                      #DD
@@ -47,7 +47,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
-                     [placeholder]="(placeholder && dateFields.length == 1) ? placeholder : 'YYYY'"
+                     [placeholder]="(placeholder && dateFields.length == 1) ? placeholder : ('SDK.DateLabel.YYYY' | translate)"
                      size="5"
                      maxlength="4"
                      #YYYY

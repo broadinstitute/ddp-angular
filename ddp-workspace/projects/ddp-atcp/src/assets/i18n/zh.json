@@ -359,6 +359,11 @@
       "September": "9 月",
       "Year": "选择年份..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "个剩余字符",
       "SingularForm": "个剩余字符"

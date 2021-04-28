@@ -369,6 +369,11 @@
       "November": "November",
       "December": "December"
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "TooltipAlt": "Information",
     "SignInOut": {
       "SignIn": "Log In",

@@ -573,6 +573,11 @@
             "November": "noviembre",
             "December": "diciembre"
         },
+        "DateLabel": {
+            "YYYY": "AAAA",
+            "MM": "MM",
+            "DD": "DD"
+        },
         "UserMenu": {
             "DashboardButton": "Tablero de Progreso",
             "SignOutButton": "Cerrar Sesión"
@@ -690,5 +695,6 @@
         "Validators": {
             "DateNavyValidationRule": "[es]Entered date is invalid"
         }
+
     }
 }

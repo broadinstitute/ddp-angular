@@ -1213,6 +1213,11 @@
             "November": "[es]November",
             "December": "[es]December"
         },
+        "DateLabel": {
+            "YYYY": "AAAA",
+            "MM": "MM",
+            "DD": "DD"
+        },
         "UserMenu": {
             "DashboardButton": "[es]Dashboard",
             "SignOutButton": "[es]Sign Out"
