@@ -43,6 +43,7 @@
 
   <ng-container *ngIf="block.confirmEntry">
     <p
+      *ngIf="block.confirmPrompt"
       class="ddp-question-prompt ddp-question-prompt-confirmation"
       [class.ddp-required-question-prompt]="this.block.isRequired"
       [innerHTML]="block.confirmPrompt"
@@ -53,7 +54,7 @@
         matInput
         type="text"
         [formControl]="formGroup.get(confirmationControlName)"
-        [placeholder]="placeholder || block.placeholder"
+        [placeholder]="block.confirmPlaceholder"
         [attr.data-ddp-test]="'answer-confirmation:' + block.stableId"
       />
     </mat-form-field>

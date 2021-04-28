@@ -9,7 +9,7 @@ import { TooltipComponent } from '../../tooltip.component';
 import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { ActivityTextAnswer } from './activityTextAnswer.component';
 
-fdescribe('ActivityTextAnswer', () => {
+describe('ActivityTextAnswer', () => {
   let component: ActivityTextAnswer;
   let fixture: ComponentFixture<ActivityTextAnswer>;
   const configServiceSpy = jasmine.createSpyObj('ddp.config', [

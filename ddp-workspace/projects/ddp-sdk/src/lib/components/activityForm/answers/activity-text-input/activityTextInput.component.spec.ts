@@ -23,7 +23,7 @@ import { TextSuggestion } from '../../../../models/activity/textSuggestion';
 import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 import { ActivityTextInput } from './activityTextInput.component';
 
-fdescribe('ActivityTextInput', () => {
+describe('ActivityTextInput', () => {
   let component: ActivityTextInput;
   let fixture: ComponentFixture<ActivityTextInput>;
   let block: ActivityTextQuestionBlock;
@@ -97,6 +97,20 @@ fdescribe('ActivityTextInput', () => {
     const inputList = fixture.debugElement.queryAll(By.css('input'));
 
     expect(inputList.length).toEqual(2);
+  }));
+
+  it('passes placeholder to confirmation field if one is provided', fakeAsync(() => {
+    const confirmPlaceholder = 'blah';
+
+    block.confirmEntry = true;
+    block.confirmPlaceholder = confirmPlaceholder;
+
+    fixture.detectChanges();
+
+    const inputList = fixture.debugElement.queryAll(By.css('input'));
+    const confirmInputEl: HTMLInputElement = inputList[1].nativeElement;
+
+    expect(confirmInputEl.dataset.placeholder).toEqual(confirmPlaceholder);
   }));
 
   it('input field should be disabled if "readonly" prop is true', () => {

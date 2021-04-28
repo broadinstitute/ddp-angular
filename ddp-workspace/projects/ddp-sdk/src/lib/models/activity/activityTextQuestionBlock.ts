@@ -10,6 +10,7 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
     public textSuggestionSource: TextSuggestionProvider | null = null;
     public confirmEntry: boolean;
     public confirmPrompt: string | null = null;
+    public confirmPlaceholder: string | null = null;
     public mismatchMessage: string | null = null;
     protected _confirmationAnswer: string | null = null;
 

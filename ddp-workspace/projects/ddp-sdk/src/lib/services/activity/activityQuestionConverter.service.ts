@@ -172,6 +172,7 @@ export class ActivityQuestionConverter {
         });
         textBlock.confirmEntry = questionJson.confirmEntry;
         textBlock.confirmPrompt = questionJson.confirmPrompt;
+        textBlock.confirmPlaceholder = questionJson.confirmPlaceholderText;
         textBlock.mismatchMessage = questionJson.mismatchMessage;
         textBlock.inputType = questionJson.inputType;
         textBlock.textSuggestionSource = this.suggestionBuilder.getSuggestionProvider(questionJson);
