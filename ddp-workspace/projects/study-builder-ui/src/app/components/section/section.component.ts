@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormSectionDef } from '../../model/formSectionDef';
 import { FormBlockDef } from '../../model/formBlockDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-section',
@@ -17,6 +18,7 @@ export class SectionComponent implements OnInit {
   public activityGuid = '';
   public studyGuid = '';
   public displayNumber = false;
+  blockSubjects: Array<BehaviorSubject<FormBlockDef>> = [];
   public selectedBlock$: Observable<FormBlockDef | null>;
 
   constructor(private editorService: ActivityDefinitionEditorService) {
@@ -25,11 +27,13 @@ export class SectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedBlock$.subscribe(selected => console.log('the block selected is: %o', selected));
+        this.section$.pipe(
+            tap(section =>
+            section && (this.blockSubjects = section.blocks.map(block => new BehaviorSubject<FormBlockDef>(block))))
+        ).subscribe();
   }
 
-    blockSelected(block: FormBlockDef): FormBlockDef {
-      this.editorService.setCurrentBlock(block);
-      return block;
+    blockSelected(block: BehaviorSubject<FormBlockDef>): void {
+      this.editorService.setCurrentBlock(block.value);
     }
 }
