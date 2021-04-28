@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+
+import { SessionMementoService } from 'ddp-sdk';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor() { }
+export class AppComponent {
+  constructor(private sessionService: SessionMementoService) {}
 
-  public ngOnInit(): void { }
+  @HostListener('window:beforeunload')
+  private beforeUnload(): void {
+    this.sessionService.setParticipant(null);
+  }
 }

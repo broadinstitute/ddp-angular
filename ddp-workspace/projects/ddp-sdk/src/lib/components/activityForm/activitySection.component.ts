@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { ActivityBlock } from '../../models/activity/activityBlock';
 import { BlockType } from '../../models/activity/blockType';
@@ -10,6 +10,8 @@ import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
+import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -46,8 +48,7 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
-                                           [activityGuid]="activityGuid"
-                                           (visibilityChanged)="updateVisibility($event)">
+                                           [activityGuid]="activityGuid">
                     </ddp-activity-question>
                 </div>
                 <div *ngIf="isInstitution(block)">
@@ -93,22 +94,44 @@ import { ActivityActivityBlock } from '../../models/activity/activityActivityBlo
             </div>
         </div>`
 })
-export class ActivitySectionComponent {
+export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public section: ActivitySection;
     @Input() public readonly: boolean;
     @Input() public validationRequested = false;
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
-    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    private subscription: Subscription;
     private embeddedValidationStatus: boolean[] = new Array(2).fill(true);
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService) {
+    constructor(@Inject('ddp.config') public config: ConfigurationService, private submissionManager: SubmissionManager,
+                private readonly cdr: ChangeDetectorRef) {
+    }
+
+    ngOnInit(): void {
+        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response =>
+            this.updateVisibility(response.blockVisibility)
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     public updateVisibility(visibility: BlockVisibility[]): void {
-        this.visibilityChanged.emit(visibility);
+        let blockVisibilityChanged = false;
+        visibility.forEach(element => {
+            this.section.allChildBlocks().forEach(block => {
+                if (block.id === element.blockGuid) {
+                    if (block.shown !== element.shown) {
+                        block.shown = element.shown;
+                        blockVisibilityChanged = true;
+                    }
+                }
+            });
+        });
+        blockVisibilityChanged && this.cdr.detectChanges();
     }
 
     public updateEmbeddedComponentValidationStatus(componentIndex: number, isValid: boolean): void {
@@ -145,4 +168,5 @@ export class ActivitySectionComponent {
     public isActivityBlock(block: ActivityBlock): block is ActivityActivityBlock {
         return block.blockType === BlockType.Activity && block.shown;
     }
+
 }

@@ -11,9 +11,18 @@
 
             <div *ngIf="instance.statusCode !== 'CREATED'"
                  class="modal-activity-block__success-message">
-                <mat-icon inline>check_circle</mat-icon>
-                <span [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'
-          | translate: { number: instance.numQuestionsAnswered }"></span>
+                <mat-icon *ngIf="isAllQuestionsCompleted" inline>check_circle</mat-icon>
+                <span *ngIf="!isAllQuestionsCompleted; else completeBlock"
+                      class="modal-activity-block__label"
+                      [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'| translate: {
+                      number: instance.numQuestionsAnswered
+                      }">
+                </span>
+                <ng-template #completeBlock>
+                    <span class="modal-activity-block__label"
+                          [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
+                    </span>
+                </ng-template>
             </div>
         </div>
 
@@ -59,23 +68,4 @@
             <span [innerHTML]="'SDK.ModalActivityBlock.SaveButton' | translate"></span>
         </button>
     </mat-dialog-content>
-</ng-template>
-
-<ng-template #delete_dialog>
-    <div class="modal-activity-block__delete-dialog">
-    <span class="modal-activity-block__delete-dialog-title"
-          [innerHTML]="'SDK.ModalActivityBlock.ConfirmDeletion' | translate">
-    </span>
-        <div class="modal-activity-block__delete-dialog-buttons">
-            <button mat-flat-button class="ctrl-btn delete-btn"
-                    color="warn"
-                    (click)="deleteActivityInstance()"
-                    [innerHTML]="'SDK.ModalActivityBlock.DeleteButton' | translate">
-            </button>
-            <button mat-stroked-button class="ctrl-btn"
-                    mat-dialog-close
-                    [innerHTML]="'SDK.ModalActivityBlock.CancelButton' | translate">
-            </button>
-        </div>
-    </div>
 </ng-template>

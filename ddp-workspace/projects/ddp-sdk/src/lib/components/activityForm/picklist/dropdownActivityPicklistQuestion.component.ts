@@ -9,37 +9,38 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
-    </ng-container>
+    <mat-form-field class="width ddp-dropdown-field">
+      <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
+      </ng-container>
 
-    <ng-template #matSelect>
-        <div class="ddp-dropdown">
-            <mat-select [value]="setMaterialSelected()"
-                        [placeholder]="block.picklistLabel"
-                        [disabled]="readonly"
-                        [multiple]="true"
-                        (selectionChange)="handleMaterialSelect($event); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
-                        class="width">
-                <mat-option *ngFor="let option of block.picklistOptions"
-                            [value]="option.stableId">
-                    {{option.optionLabel}}
-                </mat-option>
-            </mat-select>
-        </div>
-    </ng-template>
+      <ng-template #matSelect>
+          <div class="ddp-dropdown">
+              <mat-select [value]="setMaterialSelected()"
+                          [placeholder]="block.picklistLabel"
+                          [disabled]="readonly"
+                          [multiple]="true"
+                          (selectionChange)="handleMaterialSelect($event); details.show ? updateCharactersLeftIndicator(details.stableId) : null">
+                  <mat-option *ngFor="let option of block.picklistOptions"
+                              [value]="option.stableId">
+                      {{option.optionLabel}}
+                  </mat-option>
+              </mat-select>
+          </div>
+      </ng-template>
 
-    <ng-template #nativeSelect>
-        <select [(ngModel)]="nativeSelectedValue"
-                [disabled]="readonly"
-                (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
-                class="width">
-            <option value="">{{block.picklistLabel}}</option>
-            <option *ngFor="let option of block.picklistOptions"
-                    [value]="option.stableId">
-                {{option.optionLabel}}
-            </option>
-        </select>
-    </ng-template>
+      <ng-template #nativeSelect>
+          <select matNativeControl
+                  [(ngModel)]="nativeSelectedValue"
+                  [disabled]="readonly"
+                  (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null">
+              <option value="">{{block.picklistLabel}}</option>
+              <option *ngFor="let option of block.picklistOptions"
+                      [value]="option.stableId">
+                  {{option.optionLabel}}
+              </option>
+          </select>
+      </ng-template>
+    </mat-form-field>
 
     <ng-container *ngIf="details.show">
         <mat-form-field class="width ddp-option-details-field">
@@ -60,6 +61,10 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     styles: [`
         .width {
             width: 100%;
+        }
+
+        .ddp-dropdown-field ::ng-deep .mat-form-field-infix {
+          width: auto;
         }
     `]
 })
@@ -84,7 +89,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
         }
     }
 
-    public setMaterialSelected(): Array<string> | string {
+    public setMaterialSelected(): Array<string> {
         const selected = Array<string>();
         if (this.block.answer) {
             if (this.block.answer.length) {

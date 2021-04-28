@@ -1,0 +1,26 @@
+.announcement {
+  margin-bottom: 1.2rem;
+  padding: 1.2rem 2.4rem;
+
+  border: 3px solid #26355c;
+  background-color: #f4efea;
+
+  position: relative;
+
+  .close-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+
+    background-color: transparent;
+    border: none;
+
+    color: #414042;
+
+    cursor: pointer;
+  }
+
+  .content {
+    padding: 0;
+  }
+}

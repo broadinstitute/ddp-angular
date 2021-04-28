@@ -29,6 +29,9 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
     </div>
     <nav class="Header-nav" ngClass.xs="Header-nav--small">
         <ul class="Header-navList" ngClass.xs="Header-navList--small">
+            <li *ngIf="showLanguageSelector" class="Header-navItem language-selector">
+                <ddp-language-selector [isScrolled]="isScrolled"></ddp-language-selector>
+            </li>
             <li *ngIf="showButtons && showDataRelease" class="Header-navItem" fxShow="false" fxShow.gt-sm>
                 <span [routerLink]="['/data-release']" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.DataRelease
@@ -62,6 +65,7 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
 })
 export class HeaderComponent implements OnInit {
     @Input() showButtons: boolean;
+    @Input() showLanguageSelector = false;
     @Input() showUserMenu = true;
     @Input() stickySubtitle: string;
     public isScrolled = false;

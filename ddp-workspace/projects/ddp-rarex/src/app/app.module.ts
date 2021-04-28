@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -19,51 +20,42 @@ import {
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
+import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { AppComponent } from './components/app/app.component';
-import { RarexDashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { RarexActivityComponent } from './components/rarex-activity/rarex-activity.component';
-import { RarexActivityPageComponent } from './components/rarex-activity-page/rarex-activity-page.component';
-import { RarexActivityRedirectComponent } from './components/rarex-activity-redirect/rarex-activity-redirect.component';
+import { LoginLandingComponent } from './components/login-landing/login-landing.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
+import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ShareMyDataComponent } from './components/share-my-data/share-my-data.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
-import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { ActivityCodes } from './constants/activity-codes';
 import { RoutePaths } from './router-resources';
 import { AppRoutingModule } from './app-routing.module';
 
-const baseElt = document.getElementsByTagName('base');
-
-let base = '';
-if (baseElt) {
-  base = baseElt[0].getAttribute('href');
-}
-
 declare const DDP_ENV: any;
-
 declare const ga: (type: string, event: AnalyticsEvent) => void;
+
+const base = document.querySelector('base').getAttribute('href');
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.activityUrl = RoutePaths.Activity;
+tkCfg.consentGuid = ActivityCodes.SelfConsent;
+tkCfg.parentalConsentGuid = ActivityCodes.ParentalConsent;
+tkCfg.consentAssentGuid = ActivityCodes.ConsentAssent;
 tkCfg.dashboardUrl = RoutePaths.Dashboard;
-tkCfg.consentUrl = RoutePaths.Consent;
-tkCfg.parentalConsentUrl = RoutePaths.ParentalConsent;
-tkCfg.consentAssentUrl = RoutePaths.ConsentAssent;
-tkCfg.consentGuid = ActivityCodes.CONSENT;
-tkCfg.parentalConsentGuid = ActivityCodes.PARENTAL_CONSENT;
-tkCfg.consentAssentGuid = ActivityCodes.CONSENT_ASSENT;
-tkCfg.dashboardDisplayedColumns = [
-  'name',
-  'summary',
-  'date',
-  'status',
-  'actions',
-];
+tkCfg.participantListUrl = RoutePaths.ParticipantsList;
 
 export let config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -82,10 +74,6 @@ config.auth0Audience = DDP_ENV.auth0Audience;
 config.projectGAToken = DDP_ENV.projectGAToken;
 config.tooltipIconUrl = 'assets/images/info.png';
 config.dashboardShowQuestionCount = true;
-config.dashboardShowQuestionCountExceptions = [
-  ActivityCodes.CONSENT,
-  ActivityCodes.CONSENT_ASSENT,
-];
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
@@ -134,19 +122,26 @@ export const translateFactory = (
     MatProgressSpinnerModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
   ],
   declarations: [
+    ActivitiesListComponent,
+    ActivityComponent,
+    ActivityPageComponent,
+    ActivityRedirectComponent,
     AppComponent,
-    RarexDashboardComponent,
+    DashboardComponent,
     FooterComponent,
     HeaderComponent,
-    WorkflowProgressComponent,
-    RarexActivityPageComponent,
-    RarexActivityComponent,
-    RarexActivityRedirectComponent,
+    LoginLandingComponent,
+    NotificationsComponent,
+    ParticipantDeletionDialogComponent,
+    ParticipantsListComponent,
+    RedirectToLoginComponent,
     ShareMyDataComponent,
     TopBarComponent,
-    RedirectToLoginComponent,
+    WorkflowProgressComponent,
+    ErrorComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
   ],

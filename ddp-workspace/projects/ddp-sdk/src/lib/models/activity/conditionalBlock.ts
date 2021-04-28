@@ -12,6 +12,12 @@ export class ConditionalBlock extends ActivityBlock {
         return BlockType.Conditional;
     }
 
+    public get blocks(): Array<ActivityBlock> {
+        return [this as ActivityBlock]
+            .concat(this.controlQuestion.blocks as ActivityBlock[])
+            .concat(this.nestedGroupBlock.blocks as ActivityBlock[]);
+    }
+
     public validate(): boolean {
         let isValid = true;
         if (this.controlQuestion && this.controlQuestion.shown) {

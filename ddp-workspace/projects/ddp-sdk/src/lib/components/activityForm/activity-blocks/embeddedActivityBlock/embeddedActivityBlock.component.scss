@@ -1,0 +1,17 @@
+.instance {
+    &__divider {
+        height: 1px;
+        border-bottom: 1px solid;
+        border-color: transparent;
+    }
+
+    &__header {
+        padding: 10px 0;
+    }
+
+    &__close-btn {
+        float: right;
+        top: -10px;
+    }
+}
+
