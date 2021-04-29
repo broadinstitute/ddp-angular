@@ -20,10 +20,10 @@ import { FileUploadService } from '../../../services/fileUpload.service';
         <ddp-question-prompt [block]="block"></ddp-question-prompt>
         <div class="file-upload-content">
             <input type="file" class="file-input"
-                   (change)="onFileSelected($event)" #fileUpload>
+                   (change)="onFilesSelected($event.target.files)" #fileUpload>
 
             <div class="file-select">
-                <div class="drop-block">
+                <div class="drop-block" dropFileToUpload (filesDropped)="onFilesSelected($event)">
                     <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
                     <span class="drop-block-text">Drag files to upload</span>
                 </div>
@@ -55,10 +55,14 @@ import { FileUploadService } from '../../../services/fileUpload.service';
             height: 150px;
             border: 1px dashed grey;
             border-radius: 10px;
-            background-color: lightyellow;
+            background-color: whitesmoke;
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        .drop-block.file-over {
+            background-color: lightyellow;
         }
 
         .upload-icon {
@@ -99,8 +103,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     constructor(private fileUploadService: FileUploadService) {
     }
 
-    onFileSelected(event): void {
-        const file: File = event.target.files[0];
+    onFilesSelected(files: File[]): void {
+        const file: File = files[0];
 
         if (file) {
             this.fileName = file.name;

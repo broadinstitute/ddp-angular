@@ -191,6 +191,7 @@ import { ModalActivityBlockComponent } from './components/activityForm/activity-
 import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
 import { ActivityBlockModalService } from './services/activity-block-modal.service';
 import { FileUploadService } from './services/fileUpload.service';
+import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -390,7 +391,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent
+        ActivityDeleteDialogComponent,
+        DropFileToUploadDirective
     ],
     exports: [
         NetworkSnifferComponent,
