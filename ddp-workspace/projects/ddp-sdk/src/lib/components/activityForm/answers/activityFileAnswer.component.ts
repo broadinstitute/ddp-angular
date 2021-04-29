@@ -34,11 +34,15 @@ import { FileUploadService } from '../../../services/fileUpload.service';
 
             </div>
             <div class="file-info">
-                <span class="file-name">{{fileName}}</span>
+                <span class="file-name">{{file?.name || 'No file uploaded'}}</span>
             </div>
         </div>
 
-        <button mat-raised-button color="primary" class="submit-btn">Submit
+        <button mat-raised-button color="primary"
+                class="submit-btn"
+                [disabled]="!isFileSelected"
+                (click)="uploadFile()"
+        >Submit
         </button>
     `,
     styles: [
@@ -97,7 +101,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
 
-    fileName = 'No file uploaded';
+    file: File;
+    fileUploadUrl: string;
+    isFileSelected: boolean;
     private subscription: Subscription;
 
     constructor(private fileUploadService: FileUploadService) {
@@ -107,27 +113,45 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const file: File = files[0];
 
         if (file) {
-            this.fileName = file.name;
+            this.file = file;
 
             const requestBody: FileUploadBody = {
                 questionStableId: this.block.stableId,
                 fileName: file.name,
                 fileSize: file.size,
-                // mimeType: "application/octet-stream",
-                resumable: true
-
+                mimeType: file.type
+                // resumable: false
             };
+
             this.subscription = this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
                 .pipe(
                     catchError(err => {
-                        console.log('ActivityFileAnswer error:', err);
+                        console.log('ActivityFileAnswer getUploadUrl error:', err);
                         return EMPTY;
                     })
                 )
                 .subscribe((res: FileUploadResponse) => {
                     console.log('FileUploadResponse:', res);
+                    this.isFileSelected = true;
+                    this.fileUploadUrl = res.uploadUrl;
                 });
         }
+    }
+
+    uploadFile(): void {
+        const formData = new FormData();
+        formData.append('file', this.file);
+
+        this.fileUploadService.uploadFile(this.fileUploadUrl, formData, this.file.type)
+            .pipe(
+                catchError(err => {
+                    console.log('ActivityFileAnswer uploadFile error:', err);
+                    return EMPTY;
+                })
+            )
+            .subscribe((res) => {
+                console.log('uploadFile res:', res);
+            });
     }
 
     ngOnInit(): void {
