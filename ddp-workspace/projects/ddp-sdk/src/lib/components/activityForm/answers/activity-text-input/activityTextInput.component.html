@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form class="activity-text-input" [ngClass]="formClass" [formGroup]="formGroup">
   <mat-form-field
     class="example-input-field"
     [floatLabel]="block.label ? 'always' : null"
@@ -54,7 +54,7 @@
         matInput
         type="text"
         [formControl]="formGroup.get(confirmationControlName)"
-        [placeholder]="block.confirmPlaceholder"
+        [placeholder]="block.confirmPlaceholder || placeholder"
         [attr.data-ddp-test]="'answer-confirmation:' + block.stableId"
       />
     </mat-form-field>

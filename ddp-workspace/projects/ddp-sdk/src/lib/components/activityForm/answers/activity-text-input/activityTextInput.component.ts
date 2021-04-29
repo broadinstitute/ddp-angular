@@ -63,6 +63,10 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  get formClass(): string {
+    return `activity-text-input-${this.block.stableId}`;
+  }
+
   onInput(enteredValue: string): void {
     this.input$.next(enteredValue);
   }
