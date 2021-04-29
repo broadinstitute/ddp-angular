@@ -18,6 +18,7 @@ import { ActivityNumericQuestionBlock } from '../../models/activity/activityNume
 import { ActivityAbstractValidationRule } from './validators/activityAbstractValidationRule';
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import { QuestionType } from '../../models/activity/questionType';
+import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import * as _ from 'underscore';
 
 const DETAIL_MAXLENGTH = 500;
@@ -79,7 +80,7 @@ export class ActivityQuestionConverter {
                         if (_.isArray(rowOfValues)) {
                             return (rowOfValues as any[]).map(eachValue => {
                                 // todo this object signature ought to have its own interface
-                                return eachValue !== null ? { value: eachValue.value, stableId: questionJson.stableId } : null;
+                                return eachValue !== null ? {value: eachValue.value, stableId: questionJson.stableId} : null;
                             });
                         } else {
                             return null;
@@ -103,7 +104,7 @@ export class ActivityQuestionConverter {
     }
 
     private convertPicklistGroups(options: Array<ActivityPicklistOption>,
-        groups: Array<ActivityPicklistGroup>): Array<ActivityPicklistNormalizedGroup> {
+                                  groups: Array<ActivityPicklistGroup>): Array<ActivityPicklistNormalizedGroup> {
         return groups.map(group => {
             const convertedGroup = {} as ActivityPicklistNormalizedGroup;
             const groupedOptions: Array<ActivityPicklistOption> = options.filter(option =>
@@ -115,36 +116,40 @@ export class ActivityQuestionConverter {
     }
 
     private initQuestionBuilders(): void {
-      this.questionBuilders = [
-          {
-              type: QuestionType.Boolean,
-              func: (questionJson) => this.getBooleanBlock(questionJson)
-          },
-          {
-              type: QuestionType.Text,
-              func: (questionJson) => this.getTextBlock(questionJson)
-          },
-          {
-              type: QuestionType.Numeric,
-              func: (questionJson) => this.getNumericBlock(questionJson)
-          },
-          {
-              type: QuestionType.Picklist,
-              func: (questionJson) => this.getPicklistBlock(questionJson)
-          },
-          {
-              type: QuestionType.Date,
-              func: (questionJson) => this.getDateBlock(questionJson)
-          },
-          {
-              type: QuestionType.Composite,
-              func: (questionJson) => this.getCompositeBlock(questionJson)
-          },
-          {
-              type: QuestionType.Agreement,
-              func: () => new ActivityAgreementQuestionBlock()
-        }
-      ];
+        this.questionBuilders = [
+            {
+                type: QuestionType.Boolean,
+                func: (questionJson) => this.getBooleanBlock(questionJson)
+            },
+            {
+                type: QuestionType.Text,
+                func: (questionJson) => this.getTextBlock(questionJson)
+            },
+            {
+                type: QuestionType.Numeric,
+                func: (questionJson) => this.getNumericBlock(questionJson)
+            },
+            {
+                type: QuestionType.Picklist,
+                func: (questionJson) => this.getPicklistBlock(questionJson)
+            },
+            {
+                type: QuestionType.Date,
+                func: (questionJson) => this.getDateBlock(questionJson)
+            },
+            {
+                type: QuestionType.Composite,
+                func: (questionJson) => this.getCompositeBlock(questionJson)
+            },
+            {
+                type: QuestionType.Agreement,
+                func: () => new ActivityAgreementQuestionBlock()
+            },
+            {
+                type: QuestionType.File,
+                func: (questionJson) => this.getFileBlock(questionJson)
+            }
+        ];
     }
 
     private getBooleanBlock(questionJson: any): ActivityBooleanQuestionBlock {
@@ -231,5 +236,10 @@ export class ActivityQuestionConverter {
             .map(childInputBlock => this.buildQuestionBlock(childInputBlock, null))
             .filter(block => block !== null);
         return newBlock;
+    }
+
+    private getFileBlock(questionJson: any): ActivityFileQuestionBlock {
+        const fileBlock = new ActivityFileQuestionBlock();
+        return fileBlock;
     }
 }

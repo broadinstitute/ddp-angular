@@ -8,54 +8,62 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 @Component({
     selector: 'ddp-activity-answer',
     template: `
-    <ng-container *ngIf="block.shown">
-      <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block)"
-                                   [class]="'boolean-answer-' + block.stableId"
-                                   [block]="block"
-                                   [readonly]="readonly"
-                                   (valueChanged)="onChange($event)">
-      </ddp-activity-boolean-answer>
-      <ddp-activity-text-answer *ngIf="isTextQuestion(block)"
-                                [block]="block"
-                                [readonly]="readonly"
-                                (valueChanged)="onChange($event)">
-      </ddp-activity-text-answer>
-      <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block)"
-                                   [class]="'numeric-answer-' + block.stableId"
-                                   [block]="block"
-                                   [readonly]="readonly"
-                                   (valueChanged)="onChange($event)">
-      </ddp-activity-numeric-answer>
-      <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block)"
-                                    [class]="'picklist-answer-' + block.stableId"
-                                    [block]="block"
-                                    [readonly]="readonly"
-                                    (valueChanged)="onChange($event)">
-      </ddp-activity-picklist-answer>
-      <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
-                                [class]="'date-answer-' + block.stableId"
-                                [block]="block"
-                                [readonly]="readonly"
-                                [validationRequested]="validationRequested"
-                                (valueChanged)="onChange($event)">
-      </ddp-activity-date-answer>
-      <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block)"
-                                     [class]="'composite-answer-' + block.stableId"
-                                     [block]="block"
-                                     [readonly]="readonly"
-                                     [validationRequested]="validationRequested"
-                                     (valueChanged)="onChange($event)">
-      </ddp-activity-composite-answer>
-      <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
-                                     [block]="block"
-                                     [readonly]="readonly"
-                                     (valueChanged)="onChange($event)">
-      </ddp-activity-agreement-answer>
-      <span *ngIf="block.additionalInfoFooter"
-            [innerHTML]="block.additionalInfoFooter"
-            class="ddp-activity-answer__info-footer">
+        <ng-container *ngIf="block.shown">
+            <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block)"
+                                         [class]="'boolean-answer-' + block.stableId"
+                                         [block]="block"
+                                         [readonly]="readonly"
+                                         (valueChanged)="onChange($event)">
+            </ddp-activity-boolean-answer>
+            <ddp-activity-text-answer *ngIf="isTextQuestion(block)"
+                                      [block]="block"
+                                      [readonly]="readonly"
+                                      (valueChanged)="onChange($event)">
+            </ddp-activity-text-answer>
+            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block)"
+                                         [class]="'numeric-answer-' + block.stableId"
+                                         [block]="block"
+                                         [readonly]="readonly"
+                                         (valueChanged)="onChange($event)">
+            </ddp-activity-numeric-answer>
+            <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block)"
+                                          [class]="'picklist-answer-' + block.stableId"
+                                          [block]="block"
+                                          [readonly]="readonly"
+                                          (valueChanged)="onChange($event)">
+            </ddp-activity-picklist-answer>
+            <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
+                                      [class]="'date-answer-' + block.stableId"
+                                      [block]="block"
+                                      [readonly]="readonly"
+                                      [validationRequested]="validationRequested"
+                                      (valueChanged)="onChange($event)">
+            </ddp-activity-date-answer>
+            <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block)"
+                                           [class]="'composite-answer-' + block.stableId"
+                                           [block]="block"
+                                           [readonly]="readonly"
+                                           [validationRequested]="validationRequested"
+                                           (valueChanged)="onChange($event)">
+            </ddp-activity-composite-answer>
+            <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
+                                           [block]="block"
+                                           [readonly]="readonly"
+                                           (valueChanged)="onChange($event)">
+            </ddp-activity-agreement-answer>
+            <ddp-activity-file-answer *ngIf="isFileQuestion(block)"
+                                      [class]="'file-answer-' + block.stableId"
+                                      [block]="block"
+                                      [readonly]="readonly"
+                                      [studyGuid]="studyGuid"
+                                      [activityGuid]="activityGuid"
+                                      (valueChanged)="onChange($event)">
+            </ddp-activity-file-answer>
+            <span *ngIf="block.additionalInfoFooter"
+                  [innerHTML]="block.additionalInfoFooter"
+                  class="ddp-activity-answer__info-footer">
       </span>
-    </ng-container>`,
+        </ng-container>`,
     styleUrls: ['activityAnswer.component.scss']
 })
 
@@ -63,6 +71,8 @@ export class ActivityAnswerComponent {
     @Input() block: AbstractActivityQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
+    @Input() studyGuid: string;
+    @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
 
@@ -98,7 +108,11 @@ export class ActivityAnswerComponent {
         return this.isQuestion(block) && block.questionType === QuestionType.Agreement;
     }
 
-    public isQuestion(block: AbstractActivityQuestionBlock): boolean {
+    public isFileQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return this.isQuestion(block) && block.questionType === QuestionType.File;
+    }
+
+    private isQuestion(block: AbstractActivityQuestionBlock): boolean {
         return block.blockType === BlockType.Question;
     }
 }
