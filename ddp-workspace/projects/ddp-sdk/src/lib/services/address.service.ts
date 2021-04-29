@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { map, catchError, take } from 'rxjs/operators';
+
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
@@ -7,8 +11,6 @@ import { SessionMementoService } from './sessionMemento.service';
 import { LanguageService } from './internationalization/languageService.service';
 import { AddressVerificationStatus } from '../models/addressVerificationStatus';
 import { Address } from '../models/address';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, take } from 'rxjs/operators';
 import { AddressVerificationResponse } from '../models/addressVerificationResponse';
 import { NGXTranslateService } from './internationalization/ngxTranslate.service';
 
@@ -56,13 +58,16 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public getTempAddress(activityInstanceGuid: string): Observable<Address | null> {
-        return this.getObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`).pipe(
+        return this.getObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`, {}, [404]).pipe(
             map((data: any) => {
                 if (data) {
                     return new Address(data);
                 } else {
                     return null;
                 }
+            }),
+            catchError((error) => {
+                return throwError(error.error);
             })
         );
     }
@@ -98,17 +103,19 @@ export class AddressService extends UserServiceAgent<Address> {
                 })
             );
         }
-
     }
 
     public findDefaultAddress(): Observable<Address | null> {
-        return this.getObservable(`${this.BASE_URL}/default`).pipe(
+        return this.getObservable(`${this.BASE_URL}/default`, {}, [404]).pipe(
             map((data: any) => {
                 if (data) {
                     return new Address(data);
                 } else {
                     return null;
                 }
+            }),
+            catchError((error) => {
+                return throwError(error.error);
             })
         );
     }
