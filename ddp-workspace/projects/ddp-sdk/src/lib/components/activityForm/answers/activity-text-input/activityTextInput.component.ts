@@ -44,7 +44,7 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
       this.initFilteredSuggestions();
     }
 
-    for (const propName in changes) {
+    for (const propName of Object.keys(changes)) {
       if (propName === 'block' && !changes['block'].firstChange) {
         this.buildForm();
       }
