@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { from, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { LoggingService } from './logging.service';
@@ -20,7 +20,7 @@ export class FileUploadService extends UserServiceAgent<any> {
         super(session, configuration, http, logger, null);
     }
 
-    getUploadUrl(studyGuid: string, activityGuid: string, requestBody: FileUploadBody): any {
+    getUploadUrl(studyGuid: string, activityGuid: string, requestBody: FileUploadBody): Observable<FileUploadResponse> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
         return this.postObservable(path, requestBody, {}, true).pipe(
@@ -31,4 +31,34 @@ export class FileUploadService extends UserServiceAgent<any> {
             map(x => !!x ? x.body as FileUploadResponse : null)
         );
     }
+
+    uploadFile(path: string, formData: FormData, contentType: string): any {
+        const headers = new HttpHeaders({
+            'Content-Type': contentType,
+            // 'Access-Control-Allow-Origin': '*'
+        });
+
+        return this.http.put(path, formData, {headers}).pipe(
+            catchError(error => {
+                console.log('uploadFile error', error);
+                return throwError(error.error);
+            })
+        );
+    }
+
+    // uploadData(path: string, file: File, formData: FormData, contentType: string): Observable<any> {
+    //     return from(
+    //         fetch(
+    //             path,
+    //             {
+    //                 body: formData,
+    //                 headers: {
+    //                     'Content-Type': contentType,
+    //                     'Access-Control-Allow-Origin': '*'
+    //                 },
+    //                 method: 'PUT',
+    //                 // mode: 'no-cors'
+    //             }
+    //         ));
+    // }
 }

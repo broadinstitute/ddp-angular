@@ -14,7 +14,7 @@ export class ServiceAgent<TEntity> {
 
     constructor(
         @Inject('ddp.config') protected configuration: ConfigurationService,
-        private http: HttpClient,
+        protected http: HttpClient,
         private logger: LoggingService,
         private language: LanguageService) { }
 

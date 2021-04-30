@@ -3,7 +3,7 @@ export interface FileUploadBody {
     fileName: string;
     fileSize: number;
     mimeType?: string;
-    resumable: boolean;
+    resumable?: boolean;
 }
 
 export interface FileUploadResponse {

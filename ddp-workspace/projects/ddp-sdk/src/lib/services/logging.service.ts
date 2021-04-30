@@ -18,7 +18,7 @@ export class LoggingService {
                 return (typeof item === 'object') ? this.stringify(item) : item;
             });
 
-            this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
+            // this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
             console.error.apply(window.console, stringifiedArgs);
         }
       : () => { };
