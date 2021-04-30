@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { from, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { LoggingService } from './logging.service';
@@ -34,8 +34,7 @@ export class FileUploadService extends UserServiceAgent<any> {
 
     uploadFile(path: string, formData: FormData, contentType: string): any {
         const headers = new HttpHeaders({
-            'Content-Type': contentType,
-            // 'Access-Control-Allow-Origin': '*'
+            'Content-Type': contentType
         });
 
         return this.http.put(path, formData, {headers}).pipe(
@@ -45,20 +44,4 @@ export class FileUploadService extends UserServiceAgent<any> {
             })
         );
     }
-
-    // uploadData(path: string, file: File, formData: FormData, contentType: string): Observable<any> {
-    //     return from(
-    //         fetch(
-    //             path,
-    //             {
-    //                 body: formData,
-    //                 headers: {
-    //                     'Content-Type': contentType,
-    //                     'Access-Control-Allow-Origin': '*'
-    //                 },
-    //                 method: 'PUT',
-    //                 // mode: 'no-cors'
-    //             }
-    //         ));
-    // }
 }

@@ -3,12 +3,11 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit,
     Output
 } from '@angular/core';
 
-import { EMPTY, Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, Subject } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { FileUploadBody, FileUploadResponse } from '../../../models/fileUpload';
@@ -94,7 +93,7 @@ import { FileUploadService } from '../../../services/fileUpload.service';
         `
     ]
 })
-export class ActivityFileAnswer implements OnInit, OnDestroy {
+export class ActivityFileAnswer implements OnDestroy {
     @Input() block: ActivityTextQuestionBlock;
     @Input() readonly: boolean;
     @Input() studyGuid: string;
@@ -102,9 +101,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
 
     file: File;
-    fileUploadUrl: string;
+    fileUploadData: FileUploadResponse;
     isFileSelected: boolean;
-    private subscription: Subscription;
+    private ngUnsubscribe = new Subject();
 
     constructor(private fileUploadService: FileUploadService) {
     }
@@ -123,17 +122,18 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 // resumable: false
             };
 
-            this.subscription = this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
+            this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
                 .pipe(
                     catchError(err => {
                         console.log('ActivityFileAnswer getUploadUrl error:', err);
                         return EMPTY;
-                    })
+                    }),
+                    takeUntil(this.ngUnsubscribe)
                 )
                 .subscribe((res: FileUploadResponse) => {
                     console.log('FileUploadResponse:', res);
                     this.isFileSelected = true;
-                    this.fileUploadUrl = res.uploadUrl;
+                    this.fileUploadData = res;
                 });
         }
     }
@@ -142,22 +142,22 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const formData = new FormData();
         formData.append('file', this.file);
 
-        this.fileUploadService.uploadFile(this.fileUploadUrl, formData, this.file.type)
+        this.fileUploadService.uploadFile(this.fileUploadData.uploadUrl, formData, this.file.type)
             .pipe(
                 catchError(err => {
                     console.log('ActivityFileAnswer uploadFile error:', err);
                     return EMPTY;
-                })
+                }),
+                takeUntil(this.ngUnsubscribe)
             )
             .subscribe((res) => {
-                console.log('uploadFile res:', res);
+                console.log('uploadFile success', res);
+                this.valueChanged.emit(this.fileUploadData.uploadGuid);
             });
     }
 
-    ngOnInit(): void {
-    }
-
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }
