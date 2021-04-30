@@ -10,6 +10,6 @@
     </div>
   </section>
   <section class="section">
-    <app-section *ngIf="sections.length > 0"></app-section>
+    <app-section *ngIf="activity.sectionsObservables[0]" [section]="activity.sectionsObservables[0]"></app-section>
   </section>
 </main>

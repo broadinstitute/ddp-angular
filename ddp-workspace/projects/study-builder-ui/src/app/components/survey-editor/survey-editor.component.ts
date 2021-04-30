@@ -17,7 +17,7 @@ export class SurveyEditorComponent implements OnInit {
   public allActivities$: Observable<ActivityDef[]>;
   public currentActivity$: Observable<ActivityDef | null>;
 
-  //@TODO
+  // @TODO
   public studyGuid$ = of('Hello');
   readonly form: FormGroup;
 
@@ -42,7 +42,6 @@ export class SurveyEditorComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ngOnInit called');
-    this.currentActivity$.subscribe(act => this.cdr.detectChanges());
     const setCurrentFromFormAction$ = this.form.controls['activityCode'].valueChanges.pipe(
       withLatestFrom(this.allActivities$),
       map(([code, activities]) => activities.find(activity => activity.activityCode === code)),
@@ -59,7 +58,7 @@ export class SurveyEditorComponent implements OnInit {
       ).subscribe();
   }
 
-  setCurrentActivity(activity: ActivityDef | null): void {
+  public setCurrentActivity(activity: ActivityDef | null): void {
     this.editorService.setCurrentActivity(activity);
   }
 

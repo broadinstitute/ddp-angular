@@ -7,25 +7,27 @@ import { ContentBlockDef } from '../model/contentBlockDef';
 import { ConfigurationService } from '../configuration.service';
 import { TestBostonConsent } from '../testdata/testbostonConsent';
 import { TestBostonCovidSurvey } from '../testdata/testbostonCovidSurvey';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { TextQuestionDef } from '../model/textQuestionDef';
 import { Template } from '../model/template';
 import { QuestionBlockDef } from '../model/questionBlockDef';
 import { FormBlockDef } from '../model/formBlockDef';
+import { ObservableActivityDef } from '../model/observableActvityDef';
+import { ObservableFormSectionDef } from '../model/observableFormSectionDef';
 
 // @TODO: Scope this service to one instance per activity editor
 @Injectable({
     providedIn: 'root'
 })
 export class ActivityDefinitionEditorService  {
-    private currentActivityDefSubject = new BehaviorSubject<ActivityDef | null>(null);
+    private currentActivityDefSubject = new BehaviorSubject<ObservableActivityDef | null>(null);
     private currentSectionDefSubject = new BehaviorSubject<FormSectionDef | null>(null);
-    readonly currentSectionDef$ = this.currentSectionDefSubject.asObservable();
     readonly currentActivityDef$: Observable<ActivityDef | null> = this.currentActivityDefSubject.asObservable();
     private allActivityDefinitionsSubject = new BehaviorSubject<Array<ActivityDef>>([TestBostonConsent, TestBostonCovidSurvey]);
     readonly allActivityDefinitions$ = this.allActivityDefinitionsSubject.asObservable();
     private currentBlockDefSubject = new BehaviorSubject<FormBlockDef | null>(null);
     readonly currentBlockDef$: Observable<FormBlockDef | null> = this.currentBlockDefSubject.asObservable();
+    private selectedBlockSubject: BehaviorSubject<FormBlockDef>;
 
     constructor(private config: ConfigurationService) {
         this.currentActivityDef$.pipe(
@@ -34,23 +36,75 @@ export class ActivityDefinitionEditorService  {
     }
 
     // @TODO: Move this to a persistence service when the time comes
-    findAllActivityDefinitions(studyGuid: string): Observable<Array<ActivityDef>> {
+    public findAllActivityDefinitions(studyGuid: string): Observable<Array<ActivityDef>> {
         return this.allActivityDefinitions$;
     }
 
-    findActivityDefinition(studyGuid: string, activityCode: string): Observable<ActivityDef | null> {
-        return this.findAllActivityDefinitions(activityCode).pipe(
-            map(defs => {
-                const foundDef = defs.find(def => def.activityCode === activityCode);
-                return foundDef ? foundDef : null;
-            })
-        );
-
+    public setCurrentActivity(activity: ActivityDef): void {
+        this.currentActivityDefSubject.next(new ObservableActivityDef(activity as BasicActivityDef));
     }
 
-    createDefaultActivityDef(newStudyGuid: string, newActivityCode: string): BasicActivityDef {
-        const defaultSection = this.createDefaultSection();
+    public createNewBlankActivityDefinition(studyGuid: string): ObservableActivityDef {
+        const newDef = this.createDefaultActivityDef(studyGuid, this.buildDefaultActivityCode());
+        this.allActivityDefinitionsSubject.next(this.allActivityDefinitionsSubject.value.concat(newDef));
+        return newDef;
+    }
+
+    public addBlankContentBlockToActivity(): void {
+      this.addNewBlock(this.createDefaultContentBlock());
+    }
+
+    public addBlankTextQuestionBlockToActivity(): void {
+        this.addNewBlock(this.createDefaultTextQuestionBlock());
+    }
+
+    private addNewBlock(newBlock: FormBlockDef): void {
+        this.selectedBlockSubject = this.currentActivityDefSubject.value.sectionsSubjects[0].value.addBlock(newBlock);
+        this.currentBlockDefSubject.next(newBlock);
+    }
+
+    private createDefaultTextQuestionBlock(): QuestionBlockDef<TextQuestionDef> {
         return {
+            blockType: 'QUESTION',
+            question: this.createDefaultTextQuestion()
+        };
+    }
+
+    private createDefaultTextQuestion(): TextQuestionDef {
+        return {
+            questionType: 'TEXT',
+            stableId: '',
+            isRestricted: false,
+            isDeprecated: false,
+            promptTemplate: this.createBlankTemplate(),
+            validations: [],
+            hideNumber: false,
+            inputType: 'TEXT',
+            suggestionType: 'NONE',
+            placeholderTemplate: null,
+            suggestions: []
+        };
+    }
+
+    private setCurrentBlock(block: FormBlockDef): void {
+        this.currentBlockDefSubject.next(block);
+    }
+
+    public setCurrentBlockSubject(block: BehaviorSubject<FormBlockDef>): void {
+        this.selectedBlockSubject = block;
+        this.setCurrentBlock(block.value);
+    }
+
+
+    public updateCurrentBlock(block: QuestionBlockDef<TextQuestionDef>): void {
+        Object.assign(this.currentBlockDefSubject.value, block);
+        this.currentBlockDefSubject.next(this.currentBlockDefSubject.value);
+        this.selectedBlockSubject.next(this.currentBlockDefSubject.value);
+    }
+
+    private createDefaultActivityDef(newStudyGuid: string, newActivityCode: string): ObservableActivityDef {
+        const defaultSection = this.createDefaultSection();
+        const basicDef: BasicActivityDef = {
             activityCode: newActivityCode,
             studyGuid: newStudyGuid,
             activityType: 'FORMS',
@@ -76,10 +130,11 @@ export class ActivityDefinitionEditorService  {
             writeOnce: false,
             mappings: []
         };
+        return new ObservableActivityDef(basicDef);
     }
 
-    private createDefaultSection(): FormSectionDef {
-        return { blocks: [], icons: [], nameTemplate: null };
+    private createDefaultSection(): ObservableFormSectionDef {
+        return new ObservableFormSectionDef({ blocks: [], icons: [], nameTemplate: null });
     }
 
     private createDefaultContentBlock(): ContentBlockDef {
@@ -112,63 +167,4 @@ export class ActivityDefinitionEditorService  {
         return 'ACTIVITY-' + (this.allActivityDefinitionsSubject.value.length + 1);
     }
 
-
-    createNewBlankActivityDefinition(studyGuid: string): BasicActivityDef {
-        const newDef = this.createDefaultActivityDef(studyGuid, this.buildDefaultActivityCode());
-        this.allActivityDefinitionsSubject.next(this.allActivityDefinitionsSubject.value.concat(newDef));
-        this.currentActivityDefSubject.next(newDef);
-        return newDef;
-    }
-
-    setCurrentActivity(activity: ActivityDef): void {
-        this.currentActivityDefSubject.next(activity);
-    }
-    public addBlankContentBlock(): void {
-      this.addNewBlock(this.createDefaultContentBlock());
-    }
-    public addBlankTextQuestionBlock(): void {
-        this.addNewBlock(this.createDefaultTextQuestionBlock());
-    }
-
-    private addNewBlock(newBlock: FormBlockDef): void {
-        // const activityToUpdate = this.currentActivityDefSubject.getValue();
-        this.currentSectionDefSubject.value.blocks.push(newBlock);
-        this.currentSectionDefSubject.next(this.currentSectionDefSubject.value);
-        this.currentBlockDefSubject.next(newBlock);
-    }
-
-    private createDefaultTextQuestionBlock(): QuestionBlockDef<TextQuestionDef> {
-        return {
-            blockType: 'QUESTION',
-            question: this.createDefaultTextQuestion()
-        };
-    }
-
-    private createDefaultTextQuestion(): TextQuestionDef {
-        return {
-            questionType: 'TEXT',
-            stableId: '',
-            isRestricted: false,
-            isDeprecated: false,
-            promptTemplate: this.createBlankTemplate(),
-            validations: [],
-            hideNumber: false,
-            inputType: 'TEXT',
-            suggestionType: 'NONE',
-            placeholderTemplate: null,
-            suggestions: []
-        };
-    }
-
-    setCurrentBlock(block: FormBlockDef): void {
-        this.currentBlockDefSubject.next(block);
-    }
-
-
-    updatedCurrentBlock(block: QuestionBlockDef<TextQuestionDef>): void {
-        Object.assign(this.currentBlockDefSubject.value, block);
-        console.log('updated the current block!!!!: %o', this.currentBlockDefSubject.value);
-        this.currentActivityDefSubject.next(this.currentActivityDefSubject.value);
-        this.currentSectionDefSubject.next(this.currentSectionDefSubject.value);
-    }
 }

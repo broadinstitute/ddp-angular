@@ -16,8 +16,8 @@ export class TextQuestionBlockComponent implements OnInit {
     private definitionBlockSubject = new BehaviorSubject<QuestionBlockDef<TextQuestionDef | null>>(null);
 
     @Input()
-    set definitionBlock(block: QuestionBlockDef<TextQuestionDef>) {
-        this.definitionBlockSubject.next(block);
+    set definitionBlock(block: BehaviorSubject<QuestionBlockDef<TextQuestionDef>>) {
+        this.definitionBlockSubject = block;
     }
 
     angularClientBlockSubject = new BehaviorSubject<ActivityTextQuestionBlock | null>(null);

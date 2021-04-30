@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivityDef } from '../model/activityDef';
+import { ObservableActivityDef } from '../model/observableActvityDef';
 
 @Component({
   selector: 'app-survey-canvas',
@@ -7,7 +7,7 @@ import { ActivityDef } from '../model/activityDef';
   styleUrls: ['./survey-canvas.component.scss']
 })
 export class SurveyCanvasComponent implements OnInit {
-  @Input() activity: ActivityDef | null = null;
+  @Input() activity: ObservableActivityDef | null = null;
 
   constructor() { }
 

@@ -1,18 +1,17 @@
-<ng-container *ngIf="section$ | async as section">
+<ng-container *ngIf="section1 | async as section">
     <ng-container *ngIf="section.blocks.length > 0; then hasBlocks else noBlocks">
     </ng-container>
 
     <ng-template #hasBlocks>
         <div>I got {{section.blocks.length}} blocks</div>
-        <div>I got {{blockSubjects.length}} blocks subjects</div>
-        <div *ngFor="let blockSubject of blockSubjects; index as i" (click)="blockSelected(blockSubject)" [ngClass]="{'selection-highlight': blockSubject.value === (selectedBlock$ | async)}">
-            <ng-container *ngIf="blockSubject | async as block">
-            <app-content-block *ngIf="block.blockType === 'CONTENT'" [block]="block">
-            </app-content-block>
-            <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'" [definitionBlock]="block">
-            </app-text-question-block>
-            </ng-container>
-        </div>
+        <ng-container *ngFor="let blockSubject of section.blocksSubjects; index as i">
+            <div *ngIf="blockSubject | async as block" [ngClass]="{'selection-highlight': block === (selectedBlock$ | async)}" (click)="blockSubjectSelected(blockSubject)">
+                <app-content-block *ngIf="block.blockType === 'CONTENT'" [block]="block"></app-content-block>
+                <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'"
+                                         [definitionBlock]="blockSubject"></app-text-question-block>
+            </div>
+        </ng-container>
+
     </ng-template>
 
     <ng-template #noBlocks>

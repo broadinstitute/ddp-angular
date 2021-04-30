@@ -6,6 +6,7 @@ import { FormActivityDef } from '../../model/formActivityDef';
 import { QuestionBlockDef } from '../../model/questionBlockDef';
 import { TextQuestionDef } from '../../model/textQuestionDef';
 import { FormSectionDef } from '../../model/formSectionDef';
+import { ObservableActivityDef } from '../../model/observableActvityDef';
 
 @Component({
     selector: 'app-activity',
@@ -14,7 +15,7 @@ import { FormSectionDef } from '../../model/formSectionDef';
 })
 export class ActivityComponent implements OnChanges {
     @Input()
-    public activity: FormActivityDef = {} as FormActivityDef;
+    public activity: ObservableActivityDef;
     sections: Array<FormSectionDef> = [];
 
 

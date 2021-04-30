@@ -45,6 +45,18 @@ const routes: Routes = [
         }
     },
     {
+        path: 'fileupload',
+        component: ActivityPageComponent,
+        canActivate: [
+            BrowserGuard,
+            AuthGuard
+        ],
+        data: {
+            activityGuid: 'FILEUPLOAD',
+            createActivityInstance: true
+        }
+    },
+    {
         path: 'loved-one',
         component: ActivityPageComponent,
         canActivate: [

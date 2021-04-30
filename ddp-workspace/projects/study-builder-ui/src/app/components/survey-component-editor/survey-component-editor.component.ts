@@ -35,6 +35,6 @@ export class SurveyComponentEditorComponent implements OnInit {
     }
 
     blockChanged(block: QuestionBlockDef<TextQuestionDef>): void {
-        this.editorService.updatedCurrentBlock(block);
+        this.editorService.updateCurrentBlock(block);
     }
 }

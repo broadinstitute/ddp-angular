@@ -15,10 +15,10 @@ export class SurveyComponentPaletteComponent implements OnInit {
     }
 
     addContentBlock(): void {
-        this.editorService.addBlankContentBlock();
+        this.editorService.addBlankContentBlockToActivity();
     }
 
     addTextQuestionBlock(): void {
-        this.editorService.addBlankTextQuestionBlock();
+        this.editorService.addBlankTextQuestionBlockToActivity();
     }
 }
