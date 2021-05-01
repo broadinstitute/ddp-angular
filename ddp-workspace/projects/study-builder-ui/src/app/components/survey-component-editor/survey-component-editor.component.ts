@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
-import { FormBlockDef } from '../../model/formBlockDef';
+import { FormBlockDef } from '../../model/core/formBlockDef';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
-import { TextQuestionDef } from '../../model/textQuestionDef';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
 
 @Component({
     selector: 'app-survey-component-editor',

@@ -1,13 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, merge, Observable, of } from 'rxjs';
-import { ActivityDef } from '../../model/activityDef';
+import { Component, OnInit } from '@angular/core';
+import { merge, Observable, of } from 'rxjs';
+import { ActivityDef } from '../../model/core/activityDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
 import { map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
-import { QuestionDef } from '../../model/questionDef';
-import { TextQuestionDef } from '../../model/textQuestionDef';
-import { ObservableActivityDef } from '../../model/observableActvityDef';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
+import { ObservableActivityDef } from '../../model/core-extended/observableActvityDef';
 
 @Component({
   selector: 'app-survey-editor',

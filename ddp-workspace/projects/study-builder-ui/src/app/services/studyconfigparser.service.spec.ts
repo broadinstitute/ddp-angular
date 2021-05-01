@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { StudyConfigParserService } from './study-config-parser.service';
 import { TestBostonConsent } from '../testdata/testbostonConsent';
-import { ConsentActivityDef } from '../model/consentActivityDef';
+import { ConsentActivityDef } from '../model/core/consentActivityDef';
 
 describe('StudyConfigParserService', () => {
   let service: StudyConfigParserService;

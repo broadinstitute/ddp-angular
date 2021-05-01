@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ContentBlockDef } from '../../model/contentBlockDef';
+import { ContentBlockDef } from '../../model/core/contentBlockDef';
 
 @Component({
   selector: 'app-content-block',

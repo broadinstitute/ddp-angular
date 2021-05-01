@@ -1,4 +1,4 @@
-import { ConsentActivityDef } from '../model/consentActivityDef';
+import { ConsentActivityDef } from '../model/core/consentActivityDef';
 
 export const TestBostonConsent: ConsentActivityDef = {
   "activityCode": "CONSENT",

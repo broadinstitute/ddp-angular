@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormSectionDef } from '../../model/formSectionDef';
-import { FormBlockDef } from '../../model/formBlockDef';
+import { FormSectionDef } from '../../model/core/formSectionDef';
+import { FormBlockDef } from '../../model/core/formBlockDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ObservableFormSectionDef } from '../../model/observableFormSectionDef';
+import { ObservableFormSectionDef } from '../../model/core-extended/observableFormSectionDef';
 
 @Component({
     selector: 'app-section',

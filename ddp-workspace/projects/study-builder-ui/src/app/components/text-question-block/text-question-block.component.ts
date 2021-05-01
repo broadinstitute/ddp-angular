@@ -1,11 +1,11 @@
 import { AfterContentChecked, AfterViewChecked, Component, Input, OnInit } from '@angular/core';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { ActivityTextQuestionBlock } from 'ddp-sdk';
-import { TextQuestionDef } from '../../model/textQuestionDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
 import { filter, tap } from 'rxjs/operators';
-import { SimpleTemplate } from '../../model/simpleTemplate';
+import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 
 @Component({
     selector: 'app-text-question-block',

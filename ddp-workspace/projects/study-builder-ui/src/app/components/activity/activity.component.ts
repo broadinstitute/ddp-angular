@@ -1,12 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfigurationService } from '../../configuration.service';
-import { Translation } from '../../model/translation';
-import { Template } from '../../model/template';
-import { FormActivityDef } from '../../model/formActivityDef';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
-import { TextQuestionDef } from '../../model/textQuestionDef';
-import { FormSectionDef } from '../../model/formSectionDef';
-import { ObservableActivityDef } from '../../model/observableActvityDef';
+import { Translation } from '../../model/core/translation';
+import { Template } from '../../model/core/template';
+import { FormSectionDef } from '../../model/core/formSectionDef';
+import { ObservableActivityDef } from '../../model/core-extended/observableActvityDef';
 
 @Component({
     selector: 'app-activity',

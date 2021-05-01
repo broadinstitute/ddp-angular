@@ -1,8 +1,8 @@
-import { Template } from './template';
-import { TemplateType } from './templateType';
-import { TemplateVariable } from './templateVariable';
-import { Translation } from './translation';
-import { LanguageCode } from './languageCode';
+import { Template } from '../core/template';
+import { TemplateType } from '../core/templateType';
+import { TemplateVariable } from '../core/templateVariable';
+import { Translation } from '../core/translation';
+import { LanguageCode } from '../core/languageCode';
 
 export class SimpleTemplate implements Template {
     templateCode: string = null;

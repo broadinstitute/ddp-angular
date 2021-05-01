@@ -1,4 +1,4 @@
-import { BasicActivityDef } from '../model/basicActivityDef';
+import { BasicActivityDef } from '../model/core/basicActivityDef';
 
 export const TestBostonCovidSurvey: BasicActivityDef = {
   "activityCode": "BASELINE_COVID",

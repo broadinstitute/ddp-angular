@@ -1,9 +1,6 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivityDef } from '../../model/activityDef';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ActivityDef } from '../../model/core/activityDef';
 import { BehaviorSubject } from 'rxjs';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
-import { QuestionDef } from '../../model/questionDef';
-import { TextQuestionDef } from '../../model/textQuestionDef';
 
 @Component({
   selector: 'app-survey-canvas',

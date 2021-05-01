@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { QuestionBlockDef } from '../../model/questionBlockDef';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { FormBuilder } from '@angular/forms';
-import { TextQuestionDef } from '../../model/textQuestionDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ConfigurationService } from '../../configuration.service';
-import { SimpleTemplate } from '../../model/simpleTemplate';
+import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 
 @Component({
     selector: 'app-text-question-editor',

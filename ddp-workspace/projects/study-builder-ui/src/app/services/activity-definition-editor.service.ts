@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivityDef } from '../model/activityDef';
-import { BasicActivityDef } from '../model/basicActivityDef';
-import { FormSectionDef } from '../model/formSectionDef';
-import { ContentBlockDef } from '../model/contentBlockDef';
+import { ActivityDef } from '../model/core/activityDef';
+import { BasicActivityDef } from '../model/core/basicActivityDef';
+import { FormSectionDef } from '../model/core/formSectionDef';
+import { ContentBlockDef } from '../model/core/contentBlockDef';
 import { ConfigurationService } from '../configuration.service';
-import { TestBostonConsent } from '../testdata/testbostonConsent';
 import { TestBostonCovidSurvey } from '../testdata/testbostonCovidSurvey';
 import { tap } from 'rxjs/operators';
-import { TextQuestionDef } from '../model/textQuestionDef';
-import { Template } from '../model/template';
-import { QuestionBlockDef } from '../model/questionBlockDef';
-import { FormBlockDef } from '../model/formBlockDef';
-import { ObservableActivityDef } from '../model/observableActvityDef';
-import { ObservableFormSectionDef } from '../model/observableFormSectionDef';
+import { TextQuestionDef } from '../model/core/textQuestionDef';
+import { Template } from '../model/core/template';
+import { QuestionBlockDef } from '../model/core/questionBlockDef';
+import { FormBlockDef } from '../model/core/formBlockDef';
+import { ObservableActivityDef } from '../model/core-extended/observableActvityDef';
 
 // @TODO: Scope this service to one instance per activity editor
 @Injectable({
