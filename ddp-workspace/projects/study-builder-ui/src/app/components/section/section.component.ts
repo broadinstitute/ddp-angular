@@ -33,6 +33,6 @@ export class SectionComponent implements OnInit {
     }
 
     blockSubjectSelected(blockSubject: BehaviorSubject<FormBlockDef>): void {
-        this.editorService.setCurrentBlockSubject(blockSubject);
+        this.editorService.setSelectedBlockSubject(blockSubject);
     }
 }

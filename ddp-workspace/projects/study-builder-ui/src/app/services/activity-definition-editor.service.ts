@@ -21,27 +21,30 @@ import { ObservableFormSectionDef } from '../model/observableFormSectionDef';
 })
 export class ActivityDefinitionEditorService  {
     private currentActivityDefSubject = new BehaviorSubject<ObservableActivityDef | null>(null);
-    private currentSectionDefSubject = new BehaviorSubject<FormSectionDef | null>(null);
     readonly currentActivityDef$: Observable<ActivityDef | null> = this.currentActivityDefSubject.asObservable();
-    private allActivityDefinitionsSubject = new BehaviorSubject<Array<ActivityDef>>([TestBostonConsent, TestBostonCovidSurvey]);
+    private allActivityDefinitionsSubject = new BehaviorSubject<Array<ObservableActivityDef>>([new ObservableActivityDef(TestBostonCovidSurvey)]);
     readonly allActivityDefinitions$ = this.allActivityDefinitionsSubject.asObservable();
+    // the subject for block that is being currently edited
     private currentBlockDefSubject = new BehaviorSubject<FormBlockDef | null>(null);
     readonly currentBlockDef$: Observable<FormBlockDef | null> = this.currentBlockDefSubject.asObservable();
+    // the subject that contains block that has been selected in canvas
     private selectedBlockSubject: BehaviorSubject<FormBlockDef>;
 
     constructor(private config: ConfigurationService) {
         this.currentActivityDef$.pipe(
-            tap(activityOrNull => this.currentSectionDefSubject.next(activityOrNull ? activityOrNull.sections[0] : null))
+            tap(() => this.currentBlockDefSubject.next(null)),
+            tap(() => this.selectedBlockSubject = null)
+    //        tap(activityOrNull => this.currentSectionDefSubject.next(activityOrNull ? activityOrNull.sections[0] : null))
         ).subscribe();
     }
 
     // @TODO: Move this to a persistence service when the time comes
-    public findAllActivityDefinitions(studyGuid: string): Observable<Array<ActivityDef>> {
+    public findAllActivityDefinitions(studyGuid: string): Observable<Array<ObservableActivityDef>> {
         return this.allActivityDefinitions$;
     }
 
-    public setCurrentActivity(activity: ActivityDef): void {
-        this.currentActivityDefSubject.next(new ObservableActivityDef(activity as BasicActivityDef));
+    public setCurrentActivity(activity: ObservableActivityDef): void {
+        this.currentActivityDefSubject.next(activity ? activity : null);
     }
 
     public createNewBlankActivityDefinition(studyGuid: string): ObservableActivityDef {
@@ -90,9 +93,9 @@ export class ActivityDefinitionEditorService  {
         this.currentBlockDefSubject.next(block);
     }
 
-    public setCurrentBlockSubject(block: BehaviorSubject<FormBlockDef>): void {
-        this.selectedBlockSubject = block;
-        this.setCurrentBlock(block.value);
+    public setSelectedBlockSubject(blockSubject: BehaviorSubject<FormBlockDef>): void {
+        this.selectedBlockSubject = blockSubject;
+        this.setCurrentBlock(blockSubject.value);
     }
 
 
@@ -133,8 +136,8 @@ export class ActivityDefinitionEditorService  {
         return new ObservableActivityDef(basicDef);
     }
 
-    private createDefaultSection(): ObservableFormSectionDef {
-        return new ObservableFormSectionDef({ blocks: [], icons: [], nameTemplate: null });
+    private createDefaultSection(): FormSectionDef {
+        return { blocks: [], icons: [], nameTemplate: null };
     }
 
     private createDefaultContentBlock(): ContentBlockDef {

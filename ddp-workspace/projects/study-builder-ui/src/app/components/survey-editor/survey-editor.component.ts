@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { QuestionBlockDef } from '../../model/questionBlockDef';
 import { QuestionDef } from '../../model/questionDef';
 import { TextQuestionDef } from '../../model/textQuestionDef';
+import { ObservableActivityDef } from '../../model/observableActvityDef';
 
 @Component({
   selector: 'app-survey-editor',
@@ -14,14 +15,14 @@ import { TextQuestionDef } from '../../model/textQuestionDef';
   styleUrls: ['./survey-editor.component.scss']
 })
 export class SurveyEditorComponent implements OnInit {
-  public allActivities$: Observable<ActivityDef[]>;
+  public allActivities$: Observable<ObservableActivityDef[]>;
   public currentActivity$: Observable<ActivityDef | null>;
 
   // @TODO
   public studyGuid$ = of('Hello');
   readonly form: FormGroup;
 
-  constructor(private editorService: ActivityDefinitionEditorService, private cdr: ChangeDetectorRef) {
+  constructor(private editorService: ActivityDefinitionEditorService) {
     this.form = new FormGroup({
       activityCode: new FormControl('')
     });
@@ -44,7 +45,8 @@ export class SurveyEditorComponent implements OnInit {
     console.log('ngOnInit called');
     const setCurrentFromFormAction$ = this.form.controls['activityCode'].valueChanges.pipe(
       withLatestFrom(this.allActivities$),
-      map(([code, activities]) => activities.find(activity => activity.activityCode === code)),
+      map(([code, activities]) => activities
+          .find(activity => activity?.activityCode === code)),
       tap(activity => this.setCurrentActivity(activity ? activity : null))
     );
     const setFormCodeFromCurrentAction$ = this.currentActivity$.pipe(
@@ -58,12 +60,11 @@ export class SurveyEditorComponent implements OnInit {
       ).subscribe();
   }
 
-  public setCurrentActivity(activity: ActivityDef | null): void {
+  public setCurrentActivity(activity: ObservableActivityDef | null): void {
     this.editorService.setCurrentActivity(activity);
   }
 
   createNewActivity(): void {
-    console.log("create new activity called");
     this.studyGuid$.pipe(
       map(studyGuid => this.editorService.createNewBlankActivityDefinition(studyGuid)),
       tap(newDef => this.setCurrentActivity(newDef)),
