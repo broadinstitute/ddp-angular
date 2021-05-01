@@ -241,8 +241,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.communicationErrorOccurred = false;
             },
             (error) => {
-                this.logger.logError(this.LOG_SOURCE,
-                    `There has been unexpected error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
+                this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
                 this.navigateToErrorPage();
             }
         );
@@ -255,8 +254,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
         // Get notified of failure patching. Submission Manager has given up.
         const subErrSub = this.submissionManager.answerSubmissionFailure$.subscribe((error) => {
-            this.logger.logError('ActivityComponent',
-                `There was an error during submission: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
+            this.logger.logError('ActivityComponent', 'There was an error during submission:', error);
             return this.navigateToErrorPage();
         });
 

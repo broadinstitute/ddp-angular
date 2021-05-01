@@ -494,6 +494,11 @@
       "November": "Ноябрь",
       "December": "Декабрь"
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "UserMenu": {
       "DashboardButton": "Контрольная панель",
       "SignOutButton": "Выйти из системы"

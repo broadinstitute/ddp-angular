@@ -14,8 +14,12 @@ export class LoggingService {
 
     public logError = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            this.stackdriverErrorReporterService.handleError(args.join(' '));
-            console.error.apply(window.console, args);
+            const stringifiedArgs = args.map(item => {
+                return (typeof item === 'object') ? this.stringify(item) : item;
+            });
+
+            this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
+            console.error.apply(window.console, stringifiedArgs);
         }
       : () => { };
 
@@ -25,5 +29,9 @@ export class LoggingService {
 
     private showEvent(level: LogLevel): boolean {
         return this.config.logLevel <= level;
+    }
+
+    private stringify(obj: object): string {
+        return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
     }
 }

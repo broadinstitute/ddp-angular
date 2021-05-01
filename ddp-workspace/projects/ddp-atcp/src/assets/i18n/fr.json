@@ -354,6 +354,11 @@
       "September": "Septembre",
       "Year": "Choisir l'année..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "caractères restants",
       "SingularForm": "caractère restant"

@@ -1,0 +1,62 @@
+<form class="activity-text-input" [ngClass]="formClass" [formGroup]="formGroup">
+  <mat-form-field
+    class="example-input-field"
+    [floatLabel]="block.label ? 'always' : null"
+  >
+    <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
+
+    <input
+      matInput
+      type="text"
+      [formControl]="formGroup.get(controlName)"
+      [minlength]="block.minLength"
+      [maxlength]="block.maxLength"
+      [pattern]="block.regexPattern"
+      [placeholder]="placeholder || block.placeholder"
+      [attr.data-ddp-test]="'answer:' + block.stableId"
+      [matAutocomplete]="autoCompleteFromSource"
+      (input)="onInput($event.target.value)"
+    />
+
+    <mat-autocomplete
+      #autoCompleteFromSource="matAutocomplete"
+      class="autoCompletePanel"
+    >
+      <mat-option
+        *ngFor="let suggestion of filteredSuggestions$ | async"
+        class="autoCompleteOption"
+        [value]="suggestion.value"
+      >
+        <span
+          class="suggestion"
+          [innerHTML]="
+            generateSuggestionOptionInnerHtml(
+              suggestion,
+              'span',
+              'suggestion-match'
+            )
+          "
+        ></span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <ng-container *ngIf="block.confirmEntry">
+    <p
+      *ngIf="block.confirmPrompt"
+      class="ddp-question-prompt ddp-question-prompt-confirmation"
+      [class.ddp-required-question-prompt]="this.block.isRequired"
+      [innerHTML]="block.confirmPrompt"
+    ></p>
+
+    <mat-form-field class="example-input-field-confirmation">
+      <input
+        matInput
+        type="text"
+        [formControl]="formGroup.get(confirmationControlName)"
+        [placeholder]="block.confirmPlaceholder || placeholder"
+        [attr.data-ddp-test]="'answer-confirmation:' + block.stableId"
+      />
+    </mat-form-field>
+  </ng-container>
+</form>

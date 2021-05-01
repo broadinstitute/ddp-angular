@@ -9,7 +9,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 @Component({
     selector: 'ddp-activity-dropdown-picklist-question',
     template: `
-    <mat-form-field class="ddp-dropdown-field">
+    <mat-form-field class="width ddp-dropdown-field">
       <ng-container *ngIf="block.selectMode === SELECT_MODE.MULTIPLE; then matSelect else nativeSelect">
       </ng-container>
 
@@ -19,8 +19,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [placeholder]="block.picklistLabel"
                           [disabled]="readonly"
                           [multiple]="true"
-                          (selectionChange)="handleMaterialSelect($event); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
-                          class="width">
+                          (selectionChange)="handleMaterialSelect($event); details.show ? updateCharactersLeftIndicator(details.stableId) : null">
                   <mat-option *ngFor="let option of block.picklistOptions"
                               [value]="option.stableId">
                       {{option.optionLabel}}
@@ -33,8 +32,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
           <select matNativeControl
                   [(ngModel)]="nativeSelectedValue"
                   [disabled]="readonly"
-                  (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null"
-                  class="width">
+                  (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null">
               <option value="">{{block.picklistLabel}}</option>
               <option *ngFor="let option of block.picklistOptions"
                       [value]="option.stableId">

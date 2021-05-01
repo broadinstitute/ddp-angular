@@ -11,6 +11,7 @@ import { Routes } from '../../routes';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  public isLanguageSelectorVisible: boolean;
   public Routes = Routes;
   public isFamiliesMenuShown = false;
   public isResearchersMenuShown = false;
@@ -85,6 +86,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     e.stopPropagation();
 
     this.isMobileNavShown = !this.isMobileNavShown;
+  }
+
+  public onLanguageSelectorVisibilityChange(isVisible: boolean): void {
+    this.isLanguageSelectorVisible = isVisible;
   }
 
   private setupRoutesListener(): void {
