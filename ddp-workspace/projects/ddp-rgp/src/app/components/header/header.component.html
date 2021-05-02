@@ -134,11 +134,12 @@
           </div>
         </li>
 
-        <li class="nav-list__item">
+        <li class="nav-list__item" *ngIf="isLanguageSelectorVisible">
           <div class="nav-control">
             <ddp-language-selector
               [class.nav-control__button--white]="isHeaderWhite"
               (click)="onDropdownClick('languageList')"
+              (isVisible)="onLanguageSelectorVisibilityChange($event)"
             ></ddp-language-selector>
           </div>
         </li>

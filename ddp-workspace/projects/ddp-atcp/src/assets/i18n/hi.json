@@ -364,6 +364,11 @@
       "September": "सितंबर",
       "Year": "वर्ष चुनें..."
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "DetailsPlaceholder": {
       "PluralForm": "बाकी बचे वर्ण",
       "SingularForm": "बाकी बचा वर्ण"

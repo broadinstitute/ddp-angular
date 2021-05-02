@@ -15,7 +15,7 @@ export class Auth0RenewService {
         this.log.logEvent(this.LOG_SOURCE, `Parsing auth0 hash: ${auth0Hash}`);
         this.adapter.webAuth.parseHash(auth0Hash, (err, response) => {
             if (err) {
-                this.log.logError(this.LOG_SOURCE, `Error parsing auth0 jwt ${auth0Hash} from hash. Error: ${err}`);
+                this.log.logError(this.LOG_SOURCE, `Error parsing auth0 jwt ${auth0Hash} from hash. Error:`, err);
             } else {
                 this.log.logEvent(this.LOG_SOURCE, `Renewed auth: ${response}`);
                 this.adapter.setSession(response);
