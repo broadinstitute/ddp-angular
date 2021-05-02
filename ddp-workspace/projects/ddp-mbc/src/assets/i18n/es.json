@@ -6,48 +6,48 @@
         "About": "Sobre Nosotros",
         "Join": "Lista de Correo",
         "NewsBlog": "Noticias/Blog",
-        "Twitter": "[es]Tweets by MBCProject"
+        "Twitter": "Tweets del MBCProject"
     },
     "Partners": {
-        "MBCN": "[es]Metastatic Breast Cancer Network logo",
-        "Avon": "[es]Avon Foundation For Women logo",
-        "Alliance": "[es]MBC Alliance logo",
-        "LBBC": "[es]Living Beyond Breast Cancer logo",
-        "IBCRF": "[es]Inflammatory Breast Cancer Foundation logo",
-        "Young": "[es]Young Survival Coalition logo",
-        "Share": "[es]Share Cancer Support logo",
-        "Male": "[es]The Male Breast Cancer Coalition logo",
-        "Theresa": "[es]Theresa's Research Foundation logo",
-        "TNBC": "[es]Triple Negative Breast Cancer Foundation logo",
-        "IBC": "[es]The IBC Network Foundation",
-        "A4BC": "[es]Advocates 4 Breast Cancer logo",
-        "Metavivor": "[es]Metavivor logo",
-        "Metup": "[es]Metup logo",
-        "Tigerlily": "[es]Tigerlily Foundation logo",
-        "Komen": "[es]Susan G. Komen logo",
-        "BCRF": "[es]Breast Cancer Research Foundation logo",
-        "DSLFR": "[es]The Dr. Susan Love Foundation logo",
-        "BCSM": "[es]The Breast Cancer Social Media logo",
-        "HopeScarves": "[es]Hope Scarves logo",
-        "CancerCouch": "[es]The Cancer Couch logo",
-        "TwistedPink": "[es]Twisted Pink logo",
-        "CierraSisters": "[es]Cierra Sisters logo",
-        "BC": "[es]Breast Cancer Trials logo",
-        "BCAlliance": "[es]Breast Cancer Alliance logo",
-        "TutuProject": "[es]The Tutu Project logo",
-        "MPBCAlliance": "[es]Metaplastic Breast Cancer Global Alliance logo",
-        "LBCA": "[es]Lobular Breast Cancer Alliance logo",
-        "Force": "[es]Facing Our Risk of Cancer Empowered logo",
-        "Shay": "[es]Shay Sharpe's Pink Wishes logo",
-        "MRS": "[es]Metastasis Research Society logo",
-        "Sisters": "[es]Sisters R Us Circle of Survivors logo",
-        "HMN": "[es]Health Ministries Network logo",
-        "Min": "[es]Minority Coalition logo",
-        "MBCCanada": "[es]Metastatic Breast Cancer Canada logo"
+        "MBCN": "logo de Metastatic Breast Cancer Network",
+        "Avon": "logo de Avon Foundation For Women",
+        "Alliance": "logo de MBC Alliance",
+        "LBBC": "logo de Living Beyond Breast Cancer",
+        "IBCRF": "logo de Inflammatory Breast Cancer Foundation",
+        "Young": "logo de Young Survival Coalition",
+        "Share": "logo de Share Cancer Support",
+        "Male": "logo de The Male Breast Cancer Coalition",
+        "Theresa": "logo de Theresa's Research Foundation",
+        "TNBC": "logo de Triple Negative Breast Cancer Foundation",
+        "IBC": "logo de The IBC Network Foundation",
+        "A4BC": "logo de Advocates 4 Breast Cancer",
+        "Metavivor": "logo de Metavivor",
+        "Metup": "logo de Metup",
+        "Tigerlily": "logo de Tigerlily Foundation",
+        "Komen": "logo de Susan G. Komen",
+        "BCRF": "logo de Breast Cancer Research Foundation",
+        "DSLFR": "logo de The Dr. Susan Love Foundation",
+        "BCSM": "logo de The Breast Cancer Social Media",
+        "HopeScarves": "logo de Hope Scarves",
+        "CancerCouch": "logo de The Cancer Couch",
+        "TwistedPink": "logo de Twisted Pink",
+        "CierraSisters": "logo de Cierra Sisters",
+        "BC": "logo de Breast Cancer Trials",
+        "BCAlliance": "logo de Breast Cancer Alliance",
+        "TutuProject": "logo de The Tutu Project",
+        "MPBCAlliance": "logo de Metaplastic Breast Cancer Global Alliance",
+        "LBCA": "logo de Lobular Breast Cancer Alliance",
+        "Force": "logo de Facing Our Risk of Cancer Empowered",
+        "Shay": "logo de Shay Sharpe's Pink Wishes",
+        "MRS": "logo de Metastasis Research Society",
+        "Sisters": "logo de Sisters R Us Circle of Survivors",
+        "HMN": "logo de Health Ministries Network",
+        "Min": "logo de Minority Coalition",
+        "MBCCanada": "logo de Metastatic Breast Cancer Canada"
     },
     "Toolkit": {
         "Common": {
-            "Organization": "Cuenten Conmigo"
+            "Organization": "Count Me In"
         },
         "Header": {
             "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
@@ -84,7 +84,7 @@
                 "Text": "Al decir “Cuenten Conmigo” y compartir parte de las muestras de su tumor almacenados en hospitales donde ha sido tratada/o y copias de sus registros médicos, participará junto con institutos de investigación, hospitales y grupos aliados de pacientes."
             },
             "ThirdBlock": {
-                "Title": "Cómo usted puede participar",
+                "Title": "Cómo puede participar",
                 "FirstStep": {
                     "Title": "Paso 1",
                     "Subtitle": "Cuéntenos sobre usted",
@@ -109,8 +109,8 @@
             },
             "FifthBlock": {
                 "Title": "Nuestros Aliados",
-                "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
-                "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
+                "Quote": "MBCN se complace en apoyar el Metastatic Breast Cancer Project. Al compartir tejidos e historias clínicas, los pacientes pueden tener un papel activo y clave para ayudar a los investigadores a descubrir los misterios de la enfermedad metastásica.",
+                "QuoteAuthor": "Shirley Mertz, Presidenta del Metastatic Breast Cancer Network"
             },
             "SixthBlock": {
                 "TitlePt1": "Por favor acompáñenos y diga",
@@ -121,10 +121,10 @@
         },
         "AboutUs": {
             "PageHeader": {
-              "Pt1": "El Metastatic Breast Cancer Project es parte de ",
-              "Pt2": "una organización sin fines de lucro que atrae a pacientes e investigadores para juntos acelerar descubrimientos en la investigación del cáncer."
+                "Pt1": "El Metastatic Breast Cancer Project es parte de ",
+                "Pt2": "una organización sin fines de lucro que atrae a pacientes e investigadores para juntos acelerar descubrimientos en la investigación del cáncer."
             },
-          "PageHeaderLink": "Visite el sitio web <em>Cuenten Conmigo</em>",
+            "PageHeaderLink": "Visite el sitio web <em>Count Me In</em>",
             "Title": "Sobre Nosotros",
             "Content": {
                 "Paragraph1": {
@@ -139,11 +139,11 @@
             },
             "ContentLink": "joincountmein.org",
             "Partners": "Nuestros Aliados",
-            "Quote": "[es]MBCN is thrilled to support the Metastatic Breast Cancer Project. By sharing tissue and medical histories, patients can play an active, key role in helping researchers unlock the mysteries of metastatic disease.",
-            "QuoteAuthor": "[es]-Shirley Mertz, President of Metastatic Breast Cancer Network"
+            "Quote": "MBCN se complace en apoyar el Metastatic Breast Cancer Project. Al compartir tejidos e historias clínicas, los pacientes pueden tener un papel activo y clave para ayudar a los investigadores a descubrir los misterios de la enfermedad metastásica.",
+            "QuoteAuthor": "-Shirley Mertz, Presidenta del Metastatic Breast Cancer Network"
         },
         "LoginLanding": {
-            "Text": "[es]Please wait. You will be redirected to a destination soon..."
+            "Text": "Por favor espere. Le estaremos dirigiendo a su página destinataria en un momento..."
         },
         "DataRelease": {
             "Title": "DATOS del MBCproject",
@@ -194,7 +194,7 @@
                 }
             },
             "DataIncluded": {
-                "Title": "¿Que elementos de datos están incluidos?",
+                "Title": "¿Qué elementos de datos están incluidos?",
                 "Text": "Datos están incluidos para las siguientes categorías:",
                 "DataList": {
                     "Item1": "Información genética<br>Información secuenciación completa del exoma (WES) está incluida para cada muestra de tumor, incluyendo mutaciones, pequeñas inserciones/deleciones, amplificaciones y eliminaciones.",
@@ -215,7 +215,7 @@
             },
             "Samples": {
                 "Title": "¿Por qué hay más muestras de tumores que pacientes?",
-                "Text": "Para múltiples pacientes, tuvimos la oportunidad de obtener más de una muestra de biopsia por paciente. Múltiples biopsias son solicitadas cuando éstas puedan ayudar a responder preguntas científicas importantes. En estos casos, solamente pediremos muestras de su tejido almacenado si hay suficiente tejido para su futuro cuidado médico y para nuestros estudios."
+                "Text": "Para algunos pacientes, tuvimos la oportunidad de obtener más de una muestra de biopsia por paciente. Múltiples biopsias son solicitadas cuando éstas puedan ayudar a responder preguntas científicas importantes. En estos casos, solamente pediremos muestras de su tejido almacenado si hay suficiente tejido para su futuro cuidado médico y para nuestros estudios."
             },
             "Sequence": {
                 "Title": "¿Serán secuenciadas las muestras de tumor de todos los participantes que se registren en este estudio?",
@@ -267,7 +267,7 @@
                     }
                 },
                 "HowToUse": {
-                    "Title": "Como Usar el Navegador de Datos:",
+                    "Title": "Cómo Usar el Navegador de Datos:",
                     "List": {
                         "Item1": "En una computadora mueva el cursor sobre cualquier gráfico para ver más información",
                         "Item2": "Haga clic (o toque en un su teléfono móvil) en cualquier parte de un gráfico para filtrar todo el navegador a un subconjunto de pacientes. El número de pacientes que se ha filtrado se muestra en la parte de arriba a mano izquierda.",
@@ -275,15 +275,15 @@
                         "Item4": "Usando la barra de herramientas en la parte de baja a mano derecha del navegador, puede deshacer o rehacer su última acción, resetear todos los filtros o descargar una imagen del navegador."
                     },
                     "Text1": "Estos datos serán actualizados periódicamente a medida que nuevos pacientes se unan al proyectos y nuevos cuestionarios sean lanzados. Si tiene alguna pregunta o sugerencia, por favor mande un correo a",
-                    "Text2": "Gracias a todos los pacientes que han dicho <span class=\"Italic\">Count Me In</span> y que han compartido generosamente sus experiencias, información y muestras para acelerar los descubrimientos."
+                    "Text2": "Gracias a todos los pacientes que han dicho <span class=\"Italic\">Cuenten Conmigo</span> y que han compartido generosamente sus experiencias, información y muestras para acelerar los descubrimientos."
                 }
             }
         },
         "Dialogs": {
             "Disclaimer": {
-                "Title": "[es]View MBCproject Data",
-                "Text": "[es]You are now leaving the MBCproject website and will be directed to cBioPortal. Please note that as these data were generated by the MBCproject in a research, not a clinical, laboratory, they are for research purposes only and cannot be used to inform clinical decision-making.",
-                "SubmitButton": "[es]OK"
+                "Title": "Ver Datos Del MBCproject",
+                "Text": "En este momento esta saliendo de la pagina MBCproject y será dirigido a cBioPortal. Por favor tenga en cuenta que dado que estos datos fueron generados por el MBCproject en un estudio de investigación y no en un laboratorio clínico, estos datos son solo para fines de investigación y no pueden usarse para tomar decisiones clínicas.",
+                "SubmitButton": "Aceptar"
             },
             "JoinMailingList": {
                 "Title": "¡Manténgase Informada/o!",
@@ -302,41 +302,41 @@
                         "Error": "Ingrese correo electrónico correcto, por favor"
                     },
                     "ConfirmEmail": {
-                      "Placeholder": "Confirmación de correo electrónico (ingrese correo electrónico nuevamente) *",
+                        "Placeholder": "Confirmación de correo electrónico (ingrese correo electrónico nuevamente) *",
                         "Error": "Ingrese correo electrónico correcto, por favor"
                     }
                 },
                 "CancelButton": "CANCELAR",
                 "SubmitButton": "ENVIAR",
                 "Required": "* Requirido",
-                "MatchEmailsError": "[es]Please ensure that both email fields are filled in and that the addresses match.",
+                "MatchEmailsError": "Por favor asegurase que ambos correos electrónicos estén correctos.",
                 "LoadingError": "Lo sentimos, pero un error ha ocurrido."
             },
             "SessionWillExpire": {
-                "Title": "[es]Your session will time-out soon",
-                "Text": "[es]To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-                "SignOut": "[es]Sign Out",
-                "Continue": "[es]Continue",
-                "RenewalFailed": "[es]Session renewal failed. Please log out and log back in again."
+                "Title": "Su sesión terminará pronto",
+                "Text": "Para proteger su privacidad, este sistema cerrará su sesión por falta de inactividad. Haga clic en “Continuar” para mantenerse conectado. Haga clic en “Cerrar Sesión” si ha terminado por ahora",
+                "SignOut": "Cerrar Sesión",
+                "Continue": "Continuar",
+                "RenewalFailed": "No se pudo renovar la sesión. Por favor cierre la sesión y vuelva a intentar."
             },
             "LanguagePreferences": {
-                "Text": "[es]Changing the language preference will also change the language used for e-mail communications.",
-                "CheckboxText": "[es]Don't show this again",
-                "ButtonText": "[es]OK"
+                "Text": "Cambiando la preferencia del idioma, también cambiará el idioma utilizado para las comunicaciones por correo electrónico.",
+                "CheckboxText": "No mostrar esto de nuevo",
+                "ButtonText": "Aceptar"
             }
         },
         "Warning": {
-            "Title": "[es]Download Chrome or Safari to Continue",
-            "Text1": "[es]This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
-            "Text2": "[es]It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Title": "Descarge Chrome o Safari para continuar",
+            "Text1": "Este proyecto esta diseñado para su uso con los navegadores de internet mas populares y seguros -- Chrome y Safari.",
+            "Text2": "Parece que está utilizando Internet Explorer. Deberá utilizar otro navegador para unirse al proyecto. Le sugerimos que utilice Chrome o Safari para asegurarse de que su experiencia con el sitio web sea fluida y segura.",
             "Text3": {
-                "Pt1": "[es]Click the following links to download",
-                "Pt2": "[es]or",
-                "Pt3": "[es]Chrome and Safari are always free.",
-                "Chrome": "[es]Chrome (for Mac & PC)",
-                "Safari": "[es]Safari (for Mac)"
+                "Pt1": "Haga clic en los siguientes enlaces para descargar",
+                "Pt2": "o",
+                "Pt3": "Chrome y Safari siempre son gratis.",
+                "Chrome": "Chrome (para Mac y PC)",
+                "Safari": "Safari (para Mac)"
             },
-            "SubmitButton": "[es]OK"
+            "SubmitButton": "Aceptar"
         },
         "MoreDetails": {
             "Title": "Aprende más sobre el Metastatic Breast Cancer Project",
@@ -375,7 +375,7 @@
                     "Text": "Una vez que la información que pueda identificarla/o haya sido borrada, nuestra base de datos con información genómica y médica (con su información personal borrada) será compartida con Los Institutos Nacionales de la Salud (National Institutes of Health, NIH) y la comunidad de investigadores de cáncer. Esta información podrá ser usada para otros estudios genómicos y moleculares para mejorar la comprensión del cáncer de mama metastásico y el desarrollo de nuevas terapias."
                 },
                 "Learn": {
-                    "Title": "G. Aprende junto con nosotros.",
+                    "Title": "G. Aprenda junto con nosotros.",
                     "TextPt1": "¡Estamos entusiasmados de aprender junto con usted! Durante el proyecto, compartiremos regularmente con los participantes que hayan dicho \"Cuenten conmigo\", el progreso del estudio e información sobre nuevos estudios que estaremos llevando a cabo. También estaremos compartiendo con usted nueva información que se genere de los estudios. Es posible que le hagamos preguntas adicionales sobre su experiencia para ayudarnos a diseñar nuevos estudios en el futuro - queremos saber qué es importante para usted. Compartiremos estas noticias vía correo electrónico y también a través de redes sociales. Puede seguirnos en",
                     "TextPt2": "e",
                     "Socials": {
@@ -471,7 +471,7 @@
                 "TextPt1": "Gracias por su interés en unirse al MBC proyecto. En este momento, el MBC proyecto está abierto solo a pacientes en los Estados Unidos, sus territorios y Canadá. De acuerdo a sus respuestas en el cuestionario inicial, usted en este momento no vive en los Estados Unidos o Canadá. Pero si usted vive o recibe tratamiento en los Estados Unidos o Canadá, por favor comuníquese con nosotros a ",
                 "TextPt2": "o llame al"
             },
-            "Understand": "Entendemos que las experiencias de cada paciente son importantes y queremos en un futuro extender estos estudios a nivel internacional. Estudiando de donde se registran las personas puede permitimos a comprender mejor que partes del mundo podrían estar mas interesadas en participar en futuros proyectos de Cuenten Conmigo."
+            "Understand": "Entendemos que las experiencias de cada paciente son importantes y queremos en un futuro extender estos estudios a nivel internacional. Estudiando de donde se registran las personas puede permitimos a comprender mejor que partes del mundo podrían estar mas interesadas en participar en futuros proyectos de Count Me In."
         },
         "Dashboard": {
             "Title": "Tablero de Progreso"
@@ -485,7 +485,7 @@
             }
         },
         "ErrorCodes": {
-            "PASSWORD_RESET_LINK_EXPIRED": "[es]Your password reset link has expired."
+            "PASSWORD_RESET_LINK_EXPIRED": "El enlace para restablecer su contraseña ha caducado"
         },
         "SessionExpired": {
             "Text": {
@@ -496,39 +496,44 @@
         }
     },
     "SDK": {
-        "SubmitButton": "ENVIAR",
-        "CloseButton": "[es]CLOSE",
-        "AddButton": "[es]ADD",
-        "CancelButton": "[es]CANCEL",
-        "NextButton": "SIGUIENTE",
-        "PreviousButton": "ANTERIOR",
-        "SavingButton": "[es]SAVING",
-        "EditButton": "EDITAR",
-        "ReviewButton": "[es]VIEW",
-        "ValidateError": "[es]Please correct any errors in the form.",
-        "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting.",
-        "SaveError": "[es]We're sorry but an error occurred.",
+        "SubmitButton": "Enviar",
+        "CloseButton": "Cerrar",
+        "AddButton": "AGREGAR",
+        "CancelButton": "CANCELAR",
+        "NextButton": "Siguiente",
+        "PreviousButton": "Atrás",
+        "SavingButton": "Guardando...",
+        "EditButton": "Continuar",
+        "ReviewButton": "Ver",
+        "ValidateError": "Por favor complete todos los campos requeridos.",
+        "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
+        "SaveError": "Lamentablemente, se produjo un error.",
+        "OpenButton": "Abrir",
+        "StartButton": "Comenzar",
+        "AgreeButton": "Acepto",
+        "ReportButton": "Reportar",
+        "NotAgreeButton": "Todavía no quiero aceptar", "CompleteButton": "Editar",
         "ExportStudy": {
-            "Export": "[es]EXPORT"
+            "Export": "EXPORTAR"
         },
         "ListStudies": {
-            "StudyName": "[es]Study Name",
-            "ParticipantCount": "[es]Participant Count"
+            "StudyName": "Nombre del estudio",
+            "ParticipantCount": "Cantidad de participantes"
         },
         "ListWorkspaces": {
-            "WorkspaceName": "[es]Workspace Name",
-            "WorkspaceNamespace": "[es]Workspace Namespace"
+            "WorkspaceName": "Nombre del espacio de trabajo",
+            "WorkspaceNamespace": "Espacio de nombre del espacio de trabajo"
         },
         "Login": {
-            "Login": "[es]LOG IN",
-            "Logout": "[es]LOG OUT"
+            "Login": "INICIAR SESIÓN",
+            "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
             "SignIn": "Iniciar Sesión",
             "SignOut": "Cerrar Sesión"
         },
         "LanguageSelector": {
-            "LanguageSelection": "[es]language selection"
+            "LanguageSelection": "selección de idioma"
         },
         "UserActivities": {
             "ActivityName": "Forma",
@@ -538,19 +543,19 @@
             "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
-            "GovernedParticipants": "[es]Governed participants",
-            "ParticipantPlaceholder": "[es]Participant",
-            "ParticipantsList": "[es]Participants"
+            "GovernedParticipants": "Participantes controlados",
+            "ParticipantPlaceholder": "Participante",
+            "ParticipantsList": "Participantes"
         },
         "ParticipantProfile": {
-            "OpenProfile": "[es]Profile",
-            "ViewAs": "[es]View As",
-            "ManageParticipants": "[es]Manage participants"
+            "OpenProfile": "Perfil",
+            "ViewAs": "Ver como",
+            "ManageParticipants": "Administrar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "[es]User preferences",
-            "UserPreferencesGender": "[es]Sex",
-            "UserPreferencesLocale": "[es]Preferred language"
+            "UserPreferencesTitle": "Preferencias del usuario",
+            "UserPreferencesGender": "Sexo",
+            "UserPreferencesLocale": "Idioma preferido"
         },
         "Dashboard": {
             "Title": "Mi Tablero",
@@ -573,35 +578,30 @@
             "November": "noviembre",
             "December": "diciembre"
         },
-        "DateLabel": {
-            "YYYY": "AAAA",
-            "MM": "MM",
-            "DD": "DD"
-        },
         "UserMenu": {
             "DashboardButton": "Tablero de Progreso",
             "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
-            "PluralForm": "[es]characters remaining",
-            "SingularForm": "[es]character remaining"
+            "PluralForm": "caracteres restantes",
+            "SingularForm": "carácter restante"
         },
         "Title": {
-            "Default": "[es]The Metastatic Breast Cancer Project",
-            "Alert": "[es]Your session will time-out soon"
+            "Default": "El Metastatic Breast Cancer Project",
+            "Alert": "Su sesión terminará pronto."
         },
         "EmailEntry": {
-            "InvalidEmail": "[es]Please enter a valid email"
+            "InvalidEmail": "Ingrese un correo electrónico válido."
         },
         "Institutions": {
             "Fields": {
-                "Name": "[es]Physician Name",
-                "Institution": "[es]Institution",
-                "InstitutionAny": "[es]Institution (if any)",
-                "City": "[es]City",
-                "State": "[es]State"
+                "Name": "Nombre del médico",
+                "Institution": "Institución",
+                "InstitutionAny": "Institución (si la hay)",
+                "City": "Ciudad",
+                "State": "Estado"
             },
-            "PhysicianValidation": "[es]Please fill out all required fields"
+            "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "MailAddress": {
             "Fields": {
@@ -693,8 +693,7 @@
         },
         "TooltipAlt": "Información",
         "Validators": {
-            "DateNavyValidationRule": "[es]Entered date is invalid"
+            "DateNavyValidationRule": "La fecha es inválida"
         }
-
     }
 }
