@@ -68,7 +68,8 @@
                 "ContactUs": "Contáctenos:",
                 "Address": "415 Main St, Cambridge, MA",
                 "Zip": "02142, United States"
-            }
+            },
+            "FacebookLink": "https://www.facebook.com/mbcprojectenespanol"
         },
         "Welcome": {
             "WelcomeTitle": "Ayude a transformar nuestro conocimiento acerca del cáncer de mama metastásico.",
@@ -149,6 +150,7 @@
             "Title": "DATOS del MBCproject",
             "ViewDataButton": "VER DATOS DEL MBCPROJECT EN CBIOPORTAL",
             "ViewDataBrowser": "VER EL NAVEGADOR DE DATOS DE PACIENTES EN EL MBCPROJECT",
+            "ConsentAndReleaseDocument": "MBCp in Spanish Individual Consent.pdf",
             "MainText": {
                 "Section1": "Una de las metas del MBCproject es que al compartir información clínica, genómica, molecular e información reportada por pacientes, se logren nuevos descubrimientos científicos que permitan el desarrollo de nuevas estrategias para el tratamiento del cáncer de mama metastásico.",
                 "Section2": "Los primeros datos publicados están disponibles en cBioPortal, una plataforma en línea que permite explorar datos genómicos. Se ha hecho esfuerzo en generar, limpiar, y publicar estos datos para que la comunidad de investigación global pueda analizar y ayudar a desarrollar nuevas direcciones de investigación. Los descubrimientos y datos del MBCproject están siendo continuamente generados y publicados. A medida que más participantes se inscriban, se generarán y publicarán nuevos datos de identificados. A lo largo del proyecto, estaremos publicando más datos y anticipamos que esta información acelerará nuevos descubrimientos en el cáncer de mama metastásico.",
@@ -387,6 +389,7 @@
             },
             "FAQ": {
                 "Title": "Preguntas Frecuentes",
+                "OnePagerDocument": "MBCpSpanish_One-Pager.pdf",
                 "Goal": {
                     "Question": "1. ¿Cuál es el propósito de este proyecto?",
                     "Section1": "Este proyecto conectará a pacientes con cáncer de mama metastásico tratados en clínicas y hospitales con científicos que usan tecnología de última generación para estudiar las causas genéticas y moleculares del cáncer. El cáncer no es una sola enfermedad aislada y cada tumor contiene una pieza del rompecabezas.",

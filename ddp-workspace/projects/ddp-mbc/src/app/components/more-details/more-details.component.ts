@@ -1,6 +1,9 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { NGXTranslateService } from 'ddp-sdk';
 
 @Component({
     selector: 'app-more-details',
@@ -60,7 +63,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.HowProjectWorks.Learn.TextPt1</span>
                             <a [href]="twitterUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Twitter</a>,
-                            <a [href]="facebookUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Facebook</a>
+                            <a [href]="facebookUrl$ | async" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Facebook</a>
                             <span translate>Toolkit.MoreDetails.HowProjectWorks.Learn.TextPt2</span>
                             <a [href]="instagramUrl" class="Link" target="_blank" translate>Toolkit.MoreDetails.HowProjectWorks.Learn.Socials.Instagram</a>.
                         </p>
@@ -118,7 +121,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h1 class="PageContent-title" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Title</h1>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.TextPt1</span>
-                            <a href="MBC-Brochure-one-pager.pdf" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a><span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.TextPt2</span>
+                            <a [href]="'Toolkit.MoreDetails.FAQ.OnePagerDocument' | translate" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a><span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.TextPt2</span>
                         </p>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section2.TextPt1</span>
@@ -139,11 +142,12 @@ export class MoreDetailsComponent implements OnInit {
     public infoEmailHref: string;
     public phoneHref: string;
     public countMeInUrl: string;
-    public facebookUrl: string;
+    public facebookUrl$: Observable<string>;
     public twitterUrl: string;
     public instagramUrl: string;
 
-    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    constructor(@Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+                private ngxTranslate: NGXTranslateService) { }
 
     public ngOnInit(): void {
         this.infoEmail = this.toolkitConfiguration.infoEmail;
@@ -151,7 +155,7 @@ export class MoreDetailsComponent implements OnInit {
         this.phone = this.toolkitConfiguration.phone;
         this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
         this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
-        this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
+        this.facebookUrl$ = this.ngxTranslate.getTranslation('Toolkit.Footer.FacebookLink');
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
     }

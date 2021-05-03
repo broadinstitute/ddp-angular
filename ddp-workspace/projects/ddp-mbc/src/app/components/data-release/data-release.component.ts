@@ -167,7 +167,7 @@ import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
                                         <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Text</span>
                                     </li>
                                     <li class="PageContent-text PageContent-text-list">
-                                        <a href="ConsentAndRelease.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item3.Link</a>
+                                        <a [href]="'Toolkit.DataRelease.ConsentAndReleaseDocument' | translate" target="_blank" class="Link">{{'Toolkit.DataRelease.Appendices.AppendicesList.Item3.Link' | translate}}</a>
                                         <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item3.Text</span>
                                     </li>
                                     <li class="PageContent-text PageContent-text-list">
