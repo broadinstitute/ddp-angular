@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ToolkitConfigurationService } from './../../services/toolkitConfiguration.service';
 import { JoinMailingListComponent } from './../dialogs/joinMailingList.component';
-import { AnalyticsEventsService, WindowRef, AnalyticsEventCategories } from 'ddp-sdk';
+import { AnalyticsEventsService, WindowRef, AnalyticsEventCategories, NGXTranslateService } from 'ddp-sdk';
+import { Observable } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-footer',
@@ -52,7 +54,7 @@ import { AnalyticsEventsService, WindowRef, AnalyticsEventCategories } from 'ddp
                       <a [href]="phoneHref" class="Footer-contactLink">{{ phone }}</a>
                   </li>
                   <li>
-                      <a target="_blank" [href]="facebookUrl" (click)="doAnalytics('facebook')">
+                      <a target="_blank" [href]="facebookUrl$ | async" (click)="doAnalytics('facebook')">
                           <img lazy-resource class="Footer-contactLogos" src="assets/images/facebook.svg" alt="Facebook">
                       </a>
                       <a target="_blank" [href]="twitterUrl" (click)="doAnalytics('twitter')">
@@ -84,7 +86,7 @@ export class FooterComponent implements OnInit {
     public email: string;
     public phoneHref: string;
     public emailHref: string;
-    public facebookUrl: string;
+    public facebookUrl$: Observable<string>;
     public twitterUrl: string;
     public countMeInUrl: string;
     public blogUrl: string;
@@ -93,17 +95,22 @@ export class FooterComponent implements OnInit {
         private dialog: MatDialog,
         private analytics: AnalyticsEventsService,
         private windowRef: WindowRef,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+        private ngxTranslate: NGXTranslateService) { }
 
     public ngOnInit(): void {
         this.phone = this.toolkitConfiguration.phone;
         this.email = this.toolkitConfiguration.infoEmail;
         this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
         this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
+        const fbLinkKey = 'Toolkit.Footer.FacebookLink';
+        this.facebookUrl$ = this.ngxTranslate.getTranslation(fbLinkKey).pipe(
+            map(transVal => transVal === fbLinkKey ?
+                `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}` : transVal)
+        );
     }
 
     public goToTop(): void {
