@@ -32,6 +32,7 @@ export class FileUploadService extends UserServiceAgent<any> {
         );
     }
 
+    // Upload a file to GCP Bucket via an authorized upload URL (received in `getUploadUrl` method above)
     uploadFile(path: string, formData: FormData, contentType: string): any {
         const headers = new HttpHeaders({
             'Content-Type': contentType
