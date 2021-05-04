@@ -18,3 +18,16 @@ p {
   font-family: 'Catamaran', sans-serif !important;
   font-weight: 600 !important;
 }
+
+.medium {
+  font-weight: 500;
+}
+
+.medium,
+.normal {
+  font-family: Catamaran, sans-serif;
+}
+
+.light {
+  font-weight: 300;
+}
