@@ -5,17 +5,28 @@ import { Person } from './../../models/person';
 import { LoggingService } from './../logging.service';
 import { ConfigurationService } from './../configuration.service';
 import { Observable } from 'rxjs';
+import { LanguageService } from '../internationalization/languageService.service';
 
 @Injectable()
 export class MailingListServiceAgent extends NotAuthenticatedServiceAgent<any> {
     constructor(
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
-        logger: LoggingService) {
+        logger: LoggingService,
+        private langService: LanguageService) {
         super(configuration, http, logger);
     }
 
     public join(person: Person): Observable<any> {
-        return this.postObservable(`/mailing-list`, JSON.stringify(person));
+        const payload = {
+            firstName: person.firstName,
+            lastName: person.lastName,
+            emailAddress: person.emailAddress,
+            info: person.info,
+            umbrellaGuid: person.umbrellaGuid,
+            studyGuid: person.studyGuid,
+            isoLanguageCode: this.langService.getCurrentLanguage()
+        };
+        return this.postObservable(`/mailing-list`, payload);
     }
 }
