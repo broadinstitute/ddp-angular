@@ -407,12 +407,13 @@ ddp-activity-dropdown-picklist-question select {
 }
 
 .add-btn {
+  display: inline-block !important;
   font-size: 1rem !important;
   font-family: 'Roboto', sans-serif !important;
-  padding: 8px 20px !important;
   color: #333 !important;
   background-color: #ccc !important;
   border: 1px solid #ccc !important;
+  margin-top: 10px !important;
 }
 
 .add-btn .icon {
