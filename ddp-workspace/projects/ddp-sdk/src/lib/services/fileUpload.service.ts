@@ -25,7 +25,7 @@ export class FileUploadService extends UserServiceAgent<any> {
 
         return this.postObservable(path, requestBody, {}, true).pipe(
             catchError(error => {
-                console.log('getUploadUrl error', error);
+                this.logger.logDebug('getUploadUrl error', error);
                 return throwError(error.error);
             }),
             map(x => !!x ? x.body as FileUploadResponse : null)
@@ -39,7 +39,7 @@ export class FileUploadService extends UserServiceAgent<any> {
 
         return this.http.put(path, formData, {headers}).pipe(
             catchError(error => {
-                console.log('uploadFile error', error);
+                this.logger.logDebug('uploadFile to GCP Bucket error', error);
                 return throwError(error.error);
             })
         );

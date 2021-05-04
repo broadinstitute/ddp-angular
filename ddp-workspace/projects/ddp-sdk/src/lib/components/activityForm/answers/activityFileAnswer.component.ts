@@ -10,8 +10,9 @@ import { EMPTY, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
 import { FileUploadBody, FileUploadResponse } from '../../../models/fileUpload';
-import { FileUploadService } from '../../../services/fileUpload.service';
 import { ActivityFileQuestionBlock } from '../../../models/activity/activityFileQuestionBlock';
+import { FileUploadService } from '../../../services/fileUpload.service';
+import { LoggingService } from '../../../services/logging.service';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -105,7 +106,8 @@ export class ActivityFileAnswer implements OnDestroy {
     isFileSelected: boolean;
     private ngUnsubscribe = new Subject();
 
-    constructor(private fileUploadService: FileUploadService) {
+    constructor(private fileUploadService: FileUploadService,
+                private logger: LoggingService) {
     }
 
     onFilesSelected(files: File[]): void {
@@ -124,13 +126,12 @@ export class ActivityFileAnswer implements OnDestroy {
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
                 .pipe(
                     catchError(err => {
-                        console.log('ActivityFileAnswer getUploadUrl error:', err);
+                        this.logger.logDebug('ActivityFileAnswer getUploadUrl error:', err);
                         return EMPTY;
                     }),
                     takeUntil(this.ngUnsubscribe)
                 )
                 .subscribe((res: FileUploadResponse) => {
-                    console.log('FileUploadResponse:', res);
                     this.isFileSelected = true;
                     this.fileUploadData = res;
                 });
@@ -144,14 +145,13 @@ export class ActivityFileAnswer implements OnDestroy {
         this.fileUploadService.uploadFile(this.fileUploadData.uploadUrl, formData, this.file.type)
             .pipe(
                 catchError(err => {
-                    console.log('ActivityFileAnswer uploadFile error:', err);
+                    this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
                     return EMPTY;
                 }),
                 takeUntil(this.ngUnsubscribe)
             )
             .subscribe((res) => {
                 this.block.answer = this.fileUploadData.uploadGuid;
-                console.log('uploadFile success', res);
                 this.valueChanged.emit(this.fileUploadData.uploadGuid);
             });
     }
