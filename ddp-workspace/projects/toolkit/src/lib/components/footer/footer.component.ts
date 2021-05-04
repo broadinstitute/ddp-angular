@@ -103,7 +103,6 @@ export class FooterComponent implements OnInit {
         this.email = this.toolkitConfiguration.infoEmail;
         this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
         this.emailHref = `mailto:${this.toolkitConfiguration.infoEmail}`;
-        // this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
