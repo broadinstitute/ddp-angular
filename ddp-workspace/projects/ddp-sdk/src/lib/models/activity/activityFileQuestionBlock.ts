@@ -1,7 +1,7 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
 
-export class ActivityFileQuestionBlock extends ActivityQuestionBlock<boolean> {
+export class ActivityFileQuestionBlock extends ActivityQuestionBlock<string> {
     constructor() {
         super();
     }

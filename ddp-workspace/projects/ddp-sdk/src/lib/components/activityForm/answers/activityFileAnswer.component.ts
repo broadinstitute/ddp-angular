@@ -9,9 +9,9 @@ import {
 import { EMPTY, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
-import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { FileUploadBody, FileUploadResponse } from '../../../models/fileUpload';
 import { FileUploadService } from '../../../services/fileUpload.service';
+import { ActivityFileQuestionBlock } from '../../../models/activity/activityFileQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -94,7 +94,7 @@ import { FileUploadService } from '../../../services/fileUpload.service';
     ]
 })
 export class ActivityFileAnswer implements OnDestroy {
-    @Input() block: ActivityTextQuestionBlock;
+    @Input() block: ActivityFileQuestionBlock;
     @Input() readonly: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
@@ -119,7 +119,6 @@ export class ActivityFileAnswer implements OnDestroy {
                 fileName: file.name,
                 fileSize: file.size,
                 mimeType: file.type
-                // resumable: false
             };
 
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
@@ -151,6 +150,7 @@ export class ActivityFileAnswer implements OnDestroy {
                 takeUntil(this.ngUnsubscribe)
             )
             .subscribe((res) => {
+                this.block.answer = this.fileUploadData.uploadGuid;
                 console.log('uploadFile success', res);
                 this.valueChanged.emit(this.fileUploadData.uploadGuid);
             });
