@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+.medium {
+  font-weight: 500;
+}
+.medium, .normal {
+  font-family: Catamaran,sans-serif;
+}
+.light {
+  font-weight: 300;
+}
+.mt10 {
+  margin: 10px 0 0 0;
+}
+.mt20 {
+  margin: 20px 0 0 0;
+}
+.float--right {
+  float: right;
+}
