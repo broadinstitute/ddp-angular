@@ -1,20 +1,115 @@
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
+import {
+  ConfigurationService,
+  DdpModule,
+  LanguageService,
+  LoggingService,
+} from 'ddp-sdk';
+
+import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
+
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/pages/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
+
+declare const DDP_ENV: any;
+
+const base = document.querySelector('base').getAttribute('href') || '';
+
+/**
+ * DDP SDK config
+ */
+export const ddpCfg = new ConfigurationService();
+ddpCfg.studyGuid = DDP_ENV.studyGuid;
+ddpCfg.backendUrl = DDP_ENV.basePepperUrl;
+ddpCfg.auth0Domain = DDP_ENV.auth0Domain;
+ddpCfg.auth0ClientId = DDP_ENV.auth0ClientId;
+ddpCfg.baseUrl = location.origin + base;
+ddpCfg.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
+ddpCfg.loginLandingUrl = DDP_ENV.loginLandingUrl;
+ddpCfg.auth0CodeRedirect = ddpCfg.baseUrl + 'auth';
+ddpCfg.localRegistrationUrl = ddpCfg.backendUrl + '/pepper/v1/register';
+ddpCfg.doLocalRegistration = DDP_ENV.doLocalRegistration;
+ddpCfg.mapsApiKey = DDP_ENV.mapsApiKey;
+ddpCfg.auth0Audience = DDP_ENV.auth0Audience;
+ddpCfg.projectGAToken = DDP_ENV.projectGAToken;
+ddpCfg.logLevel = DDP_ENV.logLevel;
+ddpCfg.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+ddpCfg.projectGcpId = DDP_ENV.projectGcpId;
+ddpCfg.defaultLanguageCode = DDP_ENV.defaultLanguageCode || 'en';
+ddpCfg.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+
+/**
+ * Toolkit config
+ */
+export const tkCfg = new ToolkitConfigurationService();
+tkCfg.studyGuid = DDP_ENV.studyGuid;
+
+export function translateFactory(
+  translate: TranslateService,
+  injector: Injector,
+  logger: LoggingService,
+  languageService: LanguageService,
+): () => Promise<any> {
+  return () =>
+    new Promise<any>(resolve => {
+      const LOG_SOURCE = 'AppModule';
+      const locationInitialized = injector.get(
+        LOCATION_INITIALIZED,
+        Promise.resolve(null),
+      );
+
+      locationInitialized.then(() => {
+        const locale = languageService.getAppLanguageCode();
+
+        translate.setDefaultLang(locale);
+
+        translate.use(locale).subscribe(
+          () => {
+            logger.logEvent(
+              LOG_SOURCE,
+              `Successfully initialized '${locale}' language as default.`,
+            );
+          },
+          err => {
+            logger.logError(
+              LOG_SOURCE,
+              `Problem with '${locale}' language initialization:`,
+              err,
+            );
+          },
+          () => {
+            resolve(null);
+          },
+        );
+      });
+    });
+}
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent
+  declarations: [AppComponent, HeaderComponent, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, DdpModule, ToolkitModule],
+  providers: [
+    {
+      provide: 'ddp.config',
+      useValue: ddpCfg,
+    },
+    {
+      provide: 'toolkit.toolkitConfig',
+      useValue: tkCfg,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [TranslateService, Injector, LoggingService, LanguageService],
+      multi: true,
+    },
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
