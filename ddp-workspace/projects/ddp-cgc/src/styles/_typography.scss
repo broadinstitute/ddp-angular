@@ -31,3 +31,11 @@ p {
 .light {
   font-weight: 300;
 }
+
+.title {
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: $color-h2-title;
+  font-family: Lato,sans-serif;
+}
