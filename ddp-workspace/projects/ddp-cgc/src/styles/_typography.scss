@@ -1,3 +1,5 @@
+@import 'variables';
+
 p {
   font-family: 'Catamaran', sans-serif;
   font-size: 1rem;
@@ -25,7 +27,7 @@ h2.Title {
   margin-bottom: 15px;
 
   font-size: 1.6rem;
-  color: #7a7a7a;
+  color: $color-dark-grey;
 }
 
 h1.Title,
