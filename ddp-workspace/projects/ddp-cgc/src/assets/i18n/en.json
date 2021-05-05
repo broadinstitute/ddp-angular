@@ -1,0 +1,62 @@
+{
+  "HomePage": {
+    "Landing": {
+      "Title": "Patients hold the key to driving progress against cancer.",
+      "Paragraph": "Join a nationwide movement of patients, doctors, and scientists by sharing your existing genetic and medical information, and your voice. Together, our data has the power to accelerate cancer research in a way nothing else can."
+    },
+    "Mission": {
+      "Paragraph1": "Our Mission: To accelerate progress against cancer by partnering with patients to liberate and share their data for research",
+      "Paragraph2": "If you have and/or had cancer and have had a genetic test related to your cancer, please consider partnering with us to create an invaluable resource for cancer researchers, providers, and advocates all over the world.",
+      "Paragraph3": "By saying <b>“Count Me In”</b> you will partner with leading research institutes, hospitals, and patient advocacy groups by sharing your existing genetic and medical record data.",
+      "Button": "Count Me In"
+    },
+    "HowProjectWorks": {
+      "Title": "Here’s how the project works:",
+      "Steps": [
+        {
+          "Icon": "step-1.svg",
+          "Title": "Tell us about yourself",
+          "Description": "Click <b>“Count Me In”</b>. We will ask you to confirm a few questions about your cancer and the genetic test you have had done."
+        },
+        {
+          "Icon": "step-2.svg",
+          "Title": "Consent to the project",
+          "Description": "We will ask you to fill out an online consent form to obtain your permission to obtain copies of your medical records and previously generated cancer genetic data. We also ask that you fill out a short survey about your cancer."
+        },
+        {
+          "Icon": "step-3.svg",
+          "Title": "Let's learn together!",
+          "Description": "Throughout the project, we will provide you will regular updates about the status of the project. We will share results from research studies with you. We will also provide a place you can propose your own research project."
+        }
+      ],
+      "StepAlt": "How it works - Step {{ count }}",
+      "Button": "Learn More"
+    },
+    "ContactUs": {
+      "Title": "Contact Us!",
+      "Paragraph": "Please reach out to us with any questions, concerns, or project ideas at <span class=\"semibold\">cancergenomecollective@broadinstitute.org</span> or <span class=\"semibold\">651-229-5806.</span>",
+      "Links": [
+        {
+          "Href": "https://www.facebook.com/cancergenomecollective",
+          "Icon": "icon-facebook.svg"
+        },
+        {
+          "Href": "https://twitter.com/CGeneCollective",
+          "Icon": "icon-twitter.svg"
+        },
+        {
+          "Href": "tel:651-229-5806",
+          "Icon": "icon-phone.svg"
+        },
+        {
+          "Href": "mailto:cancergenomecollective@broadinstitute.org",
+          "Icon": "icon-mail.svg"
+        }
+      ]
+    },
+    "Partners": {
+      "Title": "Partner Institutions",
+      "Alt": "Broad Institute logo"
+    }
+  }
+}

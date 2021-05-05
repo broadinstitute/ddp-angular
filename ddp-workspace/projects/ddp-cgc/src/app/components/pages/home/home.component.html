@@ -1,0 +1,175 @@
+<section class="landing">
+  <div class="landing__image">
+    <div
+      class="landing__content text-shadow col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"
+    >
+      <h1 class="Title">
+        {{ 'HomePage.Landing.Title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'HomePage.Landing.Paragraph' | translate }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="mission">
+  <div class="row">
+    <div
+      class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"
+    >
+      <div class="vertical-space">
+        <p [innerHTML]="'HomePage.Mission.Paragraph1' | translate"></p>
+
+        <p [innerHTML]="'HomePage.Mission.Paragraph2' | translate"></p>
+
+        <p [innerHTML]="'HomePage.Mission.Paragraph3' | translate"></p>
+
+        <div class="row">
+          <div
+            class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12"
+          >
+            <a
+              class="button button--primary"
+              style="width: 100%; margin-top: 20px"
+              [routerLink]="routes.PreScreening"
+            >
+              {{ 'HomePage.Mission.Button' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-project-works">
+  <div class="text-center">
+    <img src="/assets/images/white-arrow.svg" alt="Arrow" />
+  </div>
+
+  <div class="row">
+    <div
+      class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"
+    >
+      <div class="vertical-space">
+        <h1 class="Title text-center">
+          {{ 'HomePage.HowProjectWorks.Title' | translate }}
+        </h1>
+
+        <ng-container
+          *ngFor="
+            let Step of 'HomePage.HowProjectWorks.Steps' | translate;
+            let i = index
+          "
+        >
+          <div class="row">
+            <img
+              class="message__icon col-lg-3 col-md-3 col-sm-3 col-xs-3"
+              [src]="'/assets/images/' + Step.Icon"
+              [alt]="
+                'HomePage.HowProjectWorks.StepAlt' | translate: { count: i + 1 }
+              "
+            />
+
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+              <h3 class="message__title">
+                {{ i + 1 }}. {{ Step.Title | translate }}
+              </h3>
+
+              <p
+                class="message__text"
+                [innerHTML]="Step.Description | translate"
+              ></p>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row">
+          <div
+            class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12"
+          >
+            <a
+              class="button button--primary-outline"
+              style="width: 100%; margin-top: 20px"
+              [routerLink]="routes.LearnMore"
+            >
+              {{ 'HomePage.HowProjectWorks.Button' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-us">
+  <div class="text-center">
+    <img src="/assets/images/grey-arrow.svg" alt="Arrow" />
+  </div>
+
+  <div class="row">
+    <div
+      class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"
+    >
+      <div class="vertical-space text-shadow">
+        <h1 class="Title">
+          {{ 'HomePage.ContactUs.Title' | translate }}
+        </h1>
+
+        <p [innerHTML]="'HomePage.ContactUs.Paragraph' | translate"></p>
+
+        <div class="row">
+          <ng-container
+            *ngFor="let Link of 'HomePage.ContactUs.Links' | translate"
+          >
+            <a target="_blank" [href]="Link.Href">
+              <img
+                class="col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                style="margin-top: 20px"
+                [src]="'/assets/images/' + Link.Icon"
+              />
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="text-center">
+    <img
+      src="/assets/images/dark-blue-arrow.svg"
+      alt="Arrow"
+      style="margin-top: -1px"
+    />
+  </div>
+
+  <div class="row">
+    <div
+      class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"
+    >
+      <div class="vertical-space text-center">
+        <h1 class="Title">
+          {{ 'HomePage.Partners.Title' | translate }}
+        </h1>
+
+        <div class="row">
+          <div
+            class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12"
+          >
+            <a [href]="broadUrl" target="_blank">
+              <img
+                src="/assets/images/broad-logo.svg"
+                style="width: 100%; margin-top: 10px"
+                [alt]="'HomePage.Partners.Alt' | translate"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

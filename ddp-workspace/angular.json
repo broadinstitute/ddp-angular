@@ -2070,7 +2070,12 @@
             "aot": true,
             "assets": [
               "projects/ddp-cgc/src/favicon.ico",
-              "projects/ddp-cgc/src/assets"
+              "projects/ddp-cgc/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-cgc/output-config/",
+                "output": "assets/config"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -2079,7 +2084,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ]
           },
           "configurations": {
