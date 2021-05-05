@@ -14,6 +14,7 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
 import { translateFactory } from './util/translateFactory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,7 +53,13 @@ export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    HomeComponent,
+    LearnMoreComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, DdpModule, ToolkitModule],
   providers: [
     {

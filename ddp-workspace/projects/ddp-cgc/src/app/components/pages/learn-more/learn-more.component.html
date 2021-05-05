@@ -1,0 +1,42 @@
+<div class="learn-more">
+  <div class="row">
+    <div
+      class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <div class="row">
+        <div
+          class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-12 col-xs-12"
+          style="padding-left: 10px"
+        >
+          <h2 class="Title">{{ 'LearnMore.Title' | translate }}</h2>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let Step of 'LearnMore.Steps' | translate">
+        <div class="row">
+          <div class="step__circle col-lg-1 col-md-1 col-sm-2 col-xs-2">
+            <h3 class="step__letter">
+              {{ Step.Letter | translate }}
+            </h3>
+          </div>
+
+          <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+            <h3 class="step__title">
+              {{ Step.Title | translate }}
+            </h3>
+
+            <p
+              class="step__description"
+              [innerHTML]="Step.Description | translate"
+            ></p>
+          </div>
+        </div>
+      </ng-container>
+
+      <div
+        class="box box--light-blue"
+        [innerHTML]="'LearnMore.Info' | translate"
+      ></div>
+    </div>
+  </div>
+</div>
