@@ -1,3 +1,5 @@
+@import 'variables';
+
 *,
 *::before,
 *::after {
@@ -20,9 +22,22 @@ body {
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #333333;
+  color: $color-text;
 }
 
 .row {
   margin: 0 !important;
+}
+
+.box {
+  margin: 20px 0;
+  padding: 15px;
+
+  border-radius: 2px;
+
+  text-align: center;
+
+  &--light-blue {
+    background: $color-light-blue;
+  }
 }
