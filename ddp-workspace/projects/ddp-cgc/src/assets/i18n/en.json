@@ -58,5 +58,46 @@
       "Title": "Partner Institutions",
       "Alt": "Broad Institute logo"
     }
+  },
+  "LearnMore": {
+    "Title": "Here’s how the project works:",
+    "Steps": [
+      {
+        "Letter": "A",
+        "Title": "Tell us about yourself.",
+        "Description": "<p>Click <b>“Count Me In”</b>. Confirm that you have and/or have had cancer and select the cancer genetic test that you have had done.</p>"
+      },
+      {
+        "Letter": "B",
+        "Title": "Give us permission to collect your data.",
+        "Description": "<p>We will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and previously generated cancer genetic data.</p><p>We will also ask you to fill out a short survey about you and your cancer, including your type of cancer and where you received your medical care so we can contact your doctors and hospitals.</p>"
+      },
+      {
+        "Letter": "C",
+        "Title": "We will work with you to obtain your genetic test results.",
+        "Description": "<p>Our study team will work with you via email to obtain your genetic test results from the appropriate company/lab.</p>"
+      },
+      {
+        "Letter": "D",
+        "Title": "We will gather your medical record data.",
+        "Description": "<p>We will request your medical records from your physicians and hospitals. We will extract the relevant information aggregate these results. You also have access to these records. If you want a copy of the records we have requested, email cancergenomecollective@broadinstitute.org and we will send your medical records to you.</p>"
+      },
+      {
+        "Letter": "E",
+        "Title": "We will aggregate the genetic and medical record data.",
+        "Description": "<p>We will then take the important information from your medical record, along with your genetic information and combine it to look for patterns. As we discover new connections, we will share this with you and the rest of world via presentations, publications, and blog posts.</p>"
+      },
+      {
+        "Letter": "F",
+        "Title": "We will share the data with other researchers.",
+        "Description": "<p>In the future, we will share this data with the greater research community.</p>"
+      },
+      {
+        "Letter": "G",
+        "Title": "Become an active researcher!",
+        "Description": "<p>We are excited to learn with you! Throughout the project, we will provide all patients with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you.</p><p>We also encourage you to submit your own research ideas by sending an email to cancergenomecollective@broadinstitute.org. We will do our best to conquer any research ideas put forward by our patients!</p>"
+      }
+    ],
+    "Info": "Please contact us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b> with any questions, comments, or suggestions."
   }
 }
