@@ -88,6 +88,10 @@ export class ActivityQuestionConverter {
                     questionBlock.setAnswer(answer, false);
                 } else {
                     questionBlock.answer = valueForQuestion;
+                    if (questionJson.questionType === 'TEXT' && questionJson.confirmEntry) {
+                        const textQuestion = questionBlock as ActivityTextQuestionBlock;
+                        textQuestion.confirmationAnswer = textQuestion.answer;
+                    }
                 }
             }
         }
