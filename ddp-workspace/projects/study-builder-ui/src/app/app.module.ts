@@ -24,6 +24,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
+import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
+
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -40,7 +42,8 @@ ddpConfig.doGcpErrorReporting = false;
     SectionComponent,
     ContentBlockComponent,
     TextQuestionBlockComponent,
-    TextQuestionEditorComponent
+    TextQuestionEditorComponent,
+    StaticContentBlockComponent
   ],
     imports: [
         BrowserModule,

@@ -37,7 +37,7 @@ export class ContentBlockComponent implements OnInit {
     };
   }
 
-  public initialContent(): String {
+  public initialContent(): string {
     const translation = this.block.bodyTemplate.variables[0].translations[0];
     return translation.text;
   }
