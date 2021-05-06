@@ -59,6 +59,27 @@
       "Alt": "Broad Institute logo"
     }
   },
+  "AboutUsPage": {
+    "Title": "About Us",
+    "Paragraph1": "The <b>Cancer Genome Collective</b> is a research study being launched and funded by the <a href=\"https://www.broadinstitute.org\" target=\"_blank\">Broad Institute of MIT and Harvard</a>, a nonprofit academic research institution whose mission is to dramatically accelerate the understanding and treatment of disease. This study is being conducted in collaboration with <a href=\"http://www.dana-farber.org\" target=\"_blank\">Dana-Farber Cancer Institute</a>. With this project, we are exploring a new approach to cancer genetic research in which we partner directly with patients to speed up important discoveries",
+    "Paragraph2": "Over the past decade, the we have uncovered many details about what drives cancer on a genetic and molecular level. These discoveries have led to the development of new therapies that have already revolutionized cancer care. Despite this progress, there is a long way to go.",
+    "Paragraph3": "There is a lot of knowledge currently hidden in existing clinical and genetic data that could propel the next cancer discoveries. We believe that the best way to discover this knowledge is by working with patients to liberate their own data for research use.",
+    "Paragraph4": "The overarching goal of this study is to develop a platform that empowers patients to drive research by connecting their genetic and medical record data with researcher from around the world.",
+    "List": {
+      "Paragraph1": "Some of the research questions we aim to answer include:",
+      "Item1": "What genes can lead to metastatic cancer?",
+      "Item2": "Why do some tumor have extraordinary response to particular treatments?",
+      "Item3": "Why do some tumors never respond to particular treatments?",
+      "Item4": "What genes lead to developing cancer at a young age?"
+    },
+    "Paragraph5": "To get there, the detailed genetic characterization of many thousands of clinically annotated cancer samples will be required. As many patients are treated in the community setting, where research maybe rare, we are reaching out to patients directly. We are seeking to empower patients to share their previous genetic testing results, from a commercial or academic test, along with their clinical data.",
+    "Paragraph6": "Patients will also have the option of consenting to an optional consent, which will entail the patient being contacted if there are clinical trials they may be eligible for. If your patient meets these criteria, and have consented to the optional consent, they will be contacted with further information about how to become part of the clinical trial. In this case, we will make every effort to contact and explain the clinical trial to all treating physicians as well.",
+    "Paragraph7": "On our website (cancergenomecollective.org) patients, who are over 18 and have had a genetic test, will be offered an electronic consent form that explains the risks and benefits of the study and asks for permission to obtain the results of their genetic test and copies of their medical records. For patients who consent, our clinical research team will contact their physicians to request copies of their medical records, which will be reviewed by our study team to confirm eligibility. We will work with patients to obtain their genomic data and to donate it to the Cancer Genome Collective.",
+    "Paragraph8": "Genetic data will be linked to de-identified clinical information, and the resulting data are used to identify drivers of tumorigenesis, mechanisms of response and resistance to therapies, and diagnostic, prognostic, and therapeutic biomarkers. The database of clinically annotated genomic information will be shared with the cancer research community. Study updates and discoveries are shared at regular intervals with all patients along with the public.",
+    "Paragraph9": "This direct-to-patient approach should be particularly enabling for the identification of patients with rare phenotypes or clinical behavior. This project seeks to establish a patient-researcher partnership to accelerate genomic discoveries and improve outcomes in cancer, and may ultimately serve as a means to build a new clinical and translational research model for all patients with cancer.",
+    "Paragraph10": "Please feel free to visit our website: cancergenomecollective.org.",
+    "Box": "If you have any questions or concerns about this study, please reach out to us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b>."
+  },  
   "LearnMore": {
     "Title": "Here’s how the project works:",
     "Steps": [

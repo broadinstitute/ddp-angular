@@ -18,8 +18,10 @@ import { LearnMoreComponent } from './components/pages/learn-more/learn-more.com
 import { translateFactory } from './util/translateFactory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 
 declare const DDP_ENV: any;
+
 
 const base = document.querySelector('base').getAttribute('href') || '';
 
@@ -27,6 +29,7 @@ const base = document.querySelector('base').getAttribute('href') || '';
  * DDP SDK config
  */
 export const ddpCfg = new ConfigurationService();
+
 ddpCfg.studyGuid = DDP_ENV.studyGuid;
 ddpCfg.backendUrl = DDP_ENV.basePepperUrl;
 ddpCfg.auth0Domain = DDP_ENV.auth0Domain;
@@ -58,6 +61,7 @@ tkCfg.studyGuid = DDP_ENV.studyGuid;
     FooterComponent,
     HeaderComponent,
     HomeComponent,
+    AboutUsComponent,
     LearnMoreComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, DdpModule, ToolkitModule],

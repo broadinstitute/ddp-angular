@@ -1,5 +1,6 @@
 export enum Route {
   Home = '',
-  PreScreening = 'pre-screening',
+  AboutUs = 'about-us',
   LearnMore = 'learn-more',
+  PreScreening = 'pre-screening',
 }
