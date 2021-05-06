@@ -1,3 +1,3 @@
-import { Identifier } from './identifier';
+import { Identifiable } from './identifiable';
 import { FormBlockDef } from '../core/formBlockDef';
-export type IdentifiableFormBlockDef = FormBlockDef & Identifier;
+export type IdentifiableFormBlockDef = FormBlockDef & Identifiable;

@@ -1,39 +1,33 @@
-import { AfterContentChecked, AfterViewChecked, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { ActivityTextQuestionBlock } from 'ddp-sdk';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
-import { filter, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 
 @Component({
     selector: 'app-text-question-block',
     templateUrl: './text-question-block.component.html',
-    styleUrls: ['./text-question-block.component.scss']
+    styleUrls: ['./text-question-block.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextQuestionBlockComponent implements OnInit {
-    private definitionBlockSubject = new BehaviorSubject<QuestionBlockDef<TextQuestionDef | null>>(null);
 
     @Input()
-    set definitionBlock(block: BehaviorSubject<QuestionBlockDef<TextQuestionDef>>) {
-        this.definitionBlockSubject = block;
-    }
-
-    angularClientBlockSubject = new BehaviorSubject<ActivityTextQuestionBlock | null>(null);
-    // @Input()definitionBlock: QuestionBlockDef<TextQuestionDef>;
-    angularClientBlock: ActivityTextQuestionBlock;
+    definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
+    angularClientBlock$: Observable<ActivityTextQuestionBlock>;
 
     constructor(private config: ConfigurationService) {
     }
 
 
     ngOnInit(): void {
-        this.definitionBlockSubject.pipe(
+        this.angularClientBlock$ = this.definitionBlock$.pipe(
             tap(defBlock => console.log('getting defblock: %o', defBlock)),
             filter(block => !!block),
-            tap(defBlock => this.angularClientBlock = this.buildFromDef(defBlock))
-        ).subscribe();
+            map(defBlock => this.buildFromDef(defBlock)));
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {

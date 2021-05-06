@@ -1,7 +1,7 @@
 import { QuestionBlockDef } from '../core/questionBlockDef';
 import { TextQuestionDef } from '../core/textQuestionDef';
 import { Template } from '../core/template';
-import { Identifier } from './identifier';
+import { Identifiable } from './identifiable';
 import { ObservableActivityDef } from './observableActvityDef';
 import { BasicActivityDef } from '../core/basicActivityDef';
 import { ConfigurationService } from '../../configuration.service';
@@ -62,7 +62,7 @@ export class StudyConfigObjectFactory {
         return this.buildObservableSectionDef({ blocks: [], icons: [], nameTemplate: null });
     }
 
-    public createDefaultTextQuestionBlock(): QuestionBlockDef<TextQuestionDef> & Identifier {
+    public createDefaultTextQuestionBlock(): QuestionBlockDef<TextQuestionDef> & Identifiable {
         return {
             blockType: 'QUESTION',
             question: this.createDefaultTextQuestion(),
@@ -70,7 +70,7 @@ export class StudyConfigObjectFactory {
         };
     }
 
-    public createDefaultContentBlock(): ContentBlockDef & Identifier {
+    public createDefaultContentBlock(): ContentBlockDef & Identifiable {
         return {
             blockType: 'CONTENT',
             titleTemplate: null,

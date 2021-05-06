@@ -1,8 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConfigurationService } from '../../configuration.service';
 import { Translation } from '../../model/core/translation';
 import { Template } from '../../model/core/template';
-import { FormSectionDef } from '../../model/core/formSectionDef';
 import { ObservableActivityDef } from '../../model/core-extended/observableActvityDef';
 
 @Component({
@@ -10,10 +9,9 @@ import { ObservableActivityDef } from '../../model/core-extended/observableActvi
     templateUrl: './activity.component.html',
     styleUrls: ['./activity.component.scss']
 })
-export class ActivityComponent implements OnChanges {
+export class ActivityComponent {
     @Input()
     public activity: ObservableActivityDef;
-    sections: Array<FormSectionDef> = [];
 
 
     public shouldShowReadonlyHint = false;
@@ -58,10 +56,4 @@ export class ActivityComponent implements OnChanges {
         return typeof (text) === 'string' ? text : null;
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.activity) {
-            this.sections = [].concat(changes.activity.currentValue.sections);
-            console.log("sections is now: %o", this.sections);
-        }
-    }
 }

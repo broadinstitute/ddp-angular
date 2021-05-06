@@ -9,16 +9,18 @@ import { Mapping } from '../core/mapping';
 import { Translation } from '../core/translation';
 import { ActivityValidation } from '../core/activityValidation';
 import { ObservableFormSectionDef } from './observableFormSectionDef';
+import { IdentifiableFormBlockDef } from './identifiableFormBlockDef';
 
 export class ObservableActivityDef implements BasicActivityDef {
+    // TODO: Can we make the subjects private?
     public sectionsSubjects: Array<BehaviorSubject<ObservableFormSectionDef>>;
     get sectionsObservables(): Array<Observable<ObservableFormSectionDef>> {
         return this.sectionsSubjects.map(subjs => subjs.asObservable());
     }
-    set sections(sectionDefs: FormSectionDef[]) {
-        this.sectionsSubjects = sectionDefs.map(sectionDef => new BehaviorSubject(new ObservableFormSectionDef(sectionDef)));
+    set sections(observableSectionDefs: Array<ObservableFormSectionDef>) {
+        this.sectionsSubjects = observableSectionDefs.map(def => new BehaviorSubject<ObservableFormSectionDef>(def));
     }
-    get sections(): Array<FormSectionDef> {
+    get sections(): Array<ObservableFormSectionDef> {
         return this.sectionsSubjects.map(sectionSubj => sectionSubj.value);
     }
     activityCode: string;
@@ -63,9 +65,7 @@ export class ObservableActivityDef implements BasicActivityDef {
         this.formType = activityDef.formType;
         this.introduction = activityDef.introduction;
         this.listStyleHint = activityDef.listStyleHint;
-
         this.maxInstancesPerUser = activityDef.maxInstancesPerUser;
-        this.sections = activityDef.sections;
         this.snapshotSubstitutionsOnSubmit = activityDef.snapshotSubstitutionsOnSubmit;
         this.studyGuid = activityDef.studyGuid;
         this.translatedDescriptions = activityDef.translatedDescriptions;
@@ -77,6 +77,11 @@ export class ObservableActivityDef implements BasicActivityDef {
         this.validations = activityDef.validations;
         this.versionTag = activityDef.versionTag;
         this.writeOnce = activityDef.writeOnce;
+    }
+    public findBlockSubjectById(blockId: string): BehaviorSubject<IdentifiableFormBlockDef> | undefined {
+        return this.sectionsSubjects
+            .map(sectSubj => sectSubj.value.findBlockSubjectById(blockId))
+            .find(block => !!block);
     }
 }
 

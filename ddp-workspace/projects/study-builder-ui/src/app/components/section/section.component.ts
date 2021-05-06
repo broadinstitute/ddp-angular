@@ -1,23 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormSectionDef } from '../../model/core/formSectionDef';
+import { ChangeDetectionStrategy, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBlockDef } from '../../model/core/formBlockDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { ObservableFormSectionDef } from '../../model/core-extended/observableFormSectionDef';
 
 @Component({
     selector: 'app-section',
     templateUrl: './section.component.html',
-    styleUrls: ['./section.component.scss']
+    styleUrls: ['./section.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class SectionComponent implements OnInit {
-    section1: BehaviorSubject<ObservableFormSectionDef> | undefined;
     @Input()
-    set section(section: BehaviorSubject<ObservableFormSectionDef>) {
-      console.log("section: %o", section);
-      this.section1 = section;
-    }
+    section$: Observable<ObservableFormSectionDef>;
     public validationRequested = false;
     public readonly = true;
     public activityGuid = '';
@@ -32,7 +28,7 @@ export class SectionComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    blockSubjectSelected(blockSubject: BehaviorSubject<FormBlockDef>): void {
-        this.editorService.setSelectedBlockSubject(blockSubject);
+    blockSelected(block: FormBlockDef): void {
+        this.editorService.setSelectedBlock(block);
     }
 }
