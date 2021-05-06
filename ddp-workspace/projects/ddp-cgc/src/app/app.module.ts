@@ -19,6 +19,7 @@ import { translateFactory } from './util/translateFactory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
+import { ErrorComponent } from './components/pages/error/error.component';
 
 declare const DDP_ENV: any;
 
@@ -63,6 +64,7 @@ tkCfg.studyGuid = DDP_ENV.studyGuid;
     HomeComponent,
     AboutUsComponent,
     LearnMoreComponent,
+    ErrorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, DdpModule, ToolkitModule],
   providers: [

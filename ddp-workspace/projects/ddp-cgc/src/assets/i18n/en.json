@@ -120,5 +120,9 @@
       }
     ],
     "Info": "Please contact us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b> with any questions, comments, or suggestions."
+  },
+  "ErrorPage": {
+    "Title": "Something went wrong",
+    "Text": "We are working on it now."
   }
 }
