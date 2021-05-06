@@ -213,14 +213,14 @@
   margin-bottom: 10px;
   padding: 0.4375em 0;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.42);
 }
 
-.mat-select-disabled {
-  .mat-select-trigger {
-    border-bottom-style: dotted;
-  }
-}
+// .mat-select-disabled {
+//   .mat-select-trigger {
+//     border-bottom-style: dotted;
+//   }
+// }
 
 ddp-activity-dropdown-picklist-question select {
   margin-bottom: 1.25em;
@@ -229,9 +229,9 @@ ddp-activity-dropdown-picklist-question select {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
 
-  &:disabled {
-    border-bottom-style: dotted;
-  }
+  // &:disabled {
+  //   border-bottom-style: dotted;
+  // }
 }
 
 .ddp-radio-group-column {
@@ -376,4 +376,46 @@ ddp-activity-dropdown-picklist-question select {
   .ddp-activity-question {
     padding: 0;
   }
+}
+
+/**
+ * Enrollment nested activities
+ */
+.instance {
+  .instance__divider {
+    display: block;
+    border-top: 2px solid #0C457D;
+    border-bottom: none !important;
+    border-color: #0C457D !important;
+    margin: 25px 0 10px 0;
+  }
+
+  .instance__header {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    margin-top: 20px;
+  }
+}
+
+.instance:first-child .instance__divider {
+  display: none;
+}
+
+.instance:first-child .instance__header {
+  display: none;
+}
+
+.add-btn {
+  display: inline-block !important;
+  font-size: 1rem !important;
+  font-family: 'Roboto', sans-serif !important;
+  color: #333 !important;
+  background-color: #ccc !important;
+  border: 1px solid #ccc !important;
+  margin-top: 10px !important;
+}
+
+.add-btn .icon {
+  display: none;
 }
