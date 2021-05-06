@@ -1,4 +1,8 @@
+import { Route } from './constants/route';
 import { Component } from '@angular/core';
+import { Mode } from './components/header/enums.ts/header-mode';
+import { RouterUtil } from './util';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  Route = Route;
   title = 'ddp-cgc';
+
+  getHeaderMode(): Mode {
+    return RouterUtil.isRoute(Route.Home)
+      ? Mode.OVERLAY 
+      : Mode.STANDARD;
+  }
 }
