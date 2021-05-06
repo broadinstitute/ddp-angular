@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 
 import { IrbGuard } from 'ddp-sdk';
 
@@ -15,6 +16,11 @@ const routes: Routes = [
     component: HomeComponent,
     pathMatch: 'full',
     canActivate: [IrbGuard],
+  },
+  {
+    path: Route.AboutUs,
+    component: AboutUsComponent,
+    pathMatch: 'full',
   },
   {
     path: Route.LearnMore,

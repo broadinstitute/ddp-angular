@@ -54,6 +54,14 @@ h2.Title {
   font-weight: 300;
 }
 
+.title {
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: $color-dark-grey;
+  font-family: Lato,sans-serif;
+}
+
 .learn-more {
   p {
     margin: 0 0 20px 10px;
