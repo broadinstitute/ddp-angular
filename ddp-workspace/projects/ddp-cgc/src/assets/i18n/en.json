@@ -111,5 +111,14 @@
       },
       "Submit": "I want to stay informed"
     }
+  },
+  "PasswordPage": {
+    "Form": {
+      "Password": {
+        "Label": "Please enter your password",
+        "Required": "Please enter your password",
+        "Invalid": "Incorrect password. Please try again."
+      }
+    }
   }
 }

@@ -4,4 +4,5 @@ export enum Route {
   LearnMore = 'learn-more',
   StayInformed = 'stay-informed',
   Error = 'error',
+  Password = 'password',
 }
