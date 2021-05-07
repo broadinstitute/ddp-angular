@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   AnalyticsEventsService,
-  Auth0AdapterService,
+  Auth0AdapterService, NGXTranslateService,
   SessionMementoService,
   WindowRef
 } from 'ddp-sdk';
@@ -44,8 +44,9 @@ export class PrionFooterComponent extends FooterComponent {
     private _windowRef: WindowRef,
     @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
     private _auth0Adapter: Auth0AdapterService,
-    private _session: SessionMementoService) {
-    super(_dialog, _analytics, _windowRef, _toolkitConfiguration);
+    private _session: SessionMementoService,
+    private translate: NGXTranslateService) {
+    super(_dialog, _analytics, _windowRef, _toolkitConfiguration, translate);
   }
 
   public isLoggedIn(): boolean {

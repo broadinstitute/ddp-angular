@@ -5,7 +5,8 @@ import {
     Auth0CodeCallbackComponent,
     AuthGuard,
     IrbGuard,
-    BrowserGuard
+    BrowserGuard,
+    AdminAuthGuard
 } from 'ddp-sdk';
 
 import {
@@ -22,15 +23,38 @@ import {
     SessionExpiredComponent,
     ActivityLinkComponent,
     LovedOneThankYouComponent,
-    RedirectToAuth0LoginComponent
+    RedirectToAuth0LoginComponent,
+    AdminLoginLandingComponent
 } from 'toolkit';
 
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
+    {
+        path: 'prism',
+        component: PrismComponent,
+        canActivate: [
+            IrbGuard,
+            AdminAuthGuard
+        ]
+    },
+    {
+        path: 'admin-login-landing',
+        component: AdminLoginLandingComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: 'admin-session-expired',
+        component: SessionExpiredComponent,
+        canActivate: [IrbGuard],
+        data: {
+            isAdmin: true
+        }
+    },
     {
         path: 'about-you',
         component: ActivityPageComponent,

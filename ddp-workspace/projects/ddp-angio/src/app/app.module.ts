@@ -22,6 +22,7 @@ import {
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
+import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const baseElt = document.getElementsByTagName('base');
@@ -48,6 +49,7 @@ tkCfg.lovedOneUrl = 'loved-one';
 tkCfg.consentUrl = 'consent';
 tkCfg.releaseUrl = 'release-survey';
 tkCfg.dashboardUrl = 'dashboard';
+tkCfg.adminDashboardUrl = 'prism';
 tkCfg.activityUrl = 'activity';
 tkCfg.errorUrl = 'error';
 tkCfg.stayInformedUrl = 'stay-informed';
@@ -71,11 +73,13 @@ export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
+config.adminClientId = DDP_ENV.adminClientId;
 config.studyGuid = DDP_ENV.studyGuid;
 config.logLevel = DDP_ENV.logLevel;
 config.baseUrl = location.origin + base;
 config.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 config.loginLandingUrl = DDP_ENV.loginLandingUrl;
+config.adminLoginLandingUrl = DDP_ENV.adminLoginLandingUrl;
 config.auth0CodeRedirect = location.origin + base + 'auth';
 config.localRegistrationUrl = config.backendUrl + '/pepper/v1/register';
 config.doLocalRegistration = DDP_ENV.doLocalRegistration;
@@ -115,6 +119,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     DataReleaseComponent,
     MoreDetailsComponent,
+    PrismComponent,
     WelcomeComponent
   ],
   providers: [
