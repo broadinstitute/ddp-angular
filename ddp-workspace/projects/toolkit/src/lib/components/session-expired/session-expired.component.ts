@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Auth0AdapterService } from 'ddp-sdk';
 
 @Component({
@@ -41,10 +42,22 @@ import { Auth0AdapterService } from 'ddp-sdk';
             </article>
         </div>`
 })
-export class SessionExpiredComponent {
-    constructor(private auth0: Auth0AdapterService) { }
+export class SessionExpiredComponent implements OnInit {
+    private isAdminSessionExpired: boolean;
+
+    constructor(
+        private activatedRoute: ActivatedRoute,
+        private auth0: Auth0AdapterService) { }
+
+    public ngOnInit(): void {
+        this.isAdminSessionExpired = !!this.activatedRoute.snapshot.data.isAdmin;
+    }
 
     public signin(): void {
-        this.auth0.login();
+        if (this.isAdminSessionExpired) {
+            this.auth0.adminLogin();
+        } else {
+            this.auth0.login();
+        }
     }
 }

@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:recommended", "tslint-jasmine-rules"],
   "rulesDirectory": [
     "codelyzer"
   ],
@@ -191,6 +191,7 @@
     "typedef": [
       true,
       "call-signature"
-    ]
+    ],
+    "no-focused-tests": true
   }
 }

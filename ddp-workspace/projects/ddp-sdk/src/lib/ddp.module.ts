@@ -86,6 +86,7 @@ import { ActivityQuestionComponent } from './components/activityForm/activity-bl
 import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
+import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -188,6 +189,8 @@ import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServi
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
+import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
+import { ActivityBlockModalService } from './services/activity-block-modal.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -307,6 +310,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
+        ActivityBlockModalService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -339,6 +343,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityQuestionComponent,
         ActivityBooleanAnswer,
         ActivityTextAnswer,
+        ActivityTextInput,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -384,7 +389,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
-        ActivityBlockComponent
+        ActivityBlockComponent,
+        ActivityDeleteDialogComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -453,7 +459,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent
-    ]
+    ],
+    entryComponents: [ActivityDeleteDialogComponent]
 })
 export class DdpModule {
 }

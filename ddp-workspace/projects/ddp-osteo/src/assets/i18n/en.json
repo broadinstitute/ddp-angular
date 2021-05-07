@@ -621,6 +621,11 @@
             "November": "November",
             "December": "December"
         },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
         "UserMenu": {
             "DashboardButton": "Dashboard",
             "SignOutButton": "Sign Out"
@@ -744,8 +749,9 @@
             "EditButton": "Edit",
             "DeleteButton": "Delete",
             "SaveButton": "Save",
-            "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
             "CancelButton": "Cancel"
-        }
+        },
+        "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+        "CancelBtn": "Cancel"
     }
 }

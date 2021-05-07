@@ -68,7 +68,8 @@
                 "ContactUs": "Contact Us:",
                 "Address": "415 Main St, Cambridge, MA",
                 "Zip": "02142, United States"
-            }
+            },
+            "FacebookLink": "https://www.facebook.com/The-Metastatic-Breast-Cancer-Project-852059048224675"
         },
         "Welcome": {
             "WelcomeTitle": "Help transform our understanding of metastatic breast cancer.",
@@ -149,6 +150,7 @@
             "Title": "MBCproject Data",
             "ViewDataButton": "VIEW MBCPROJECT DATA ON CBIOPORTAL",
             "ViewDataBrowser": "VIEW MBCPROJECT PATIENT DATA BROWSER",
+            "ConsentAndReleaseDocument": "ConsentAndRelease.pdf",
             "MainText": {
                 "Section1": "One key goal of the MBCproject is to enable scientific discoveries and the development of new treatment strategies for metastatic breast cancer by widely sharing clinical, genomic, molecular, and patient-reported data.",
                 "Section2": "To this end, the MBCproject has first released available data in cBioPortal, a web-based platform to allow exploration of genomic data. Much effort has been put into generating, cleaning, and releasing this data so that the entire global research community can analyze and develop new research directions. The MBCproject data is being released as it is generated, and as the project continues to enroll patients, more data will be added. As we release more data over time, we anticipate that this will help accelerate discoveries in metastatic breast cancer.",
@@ -387,6 +389,7 @@
             },
             "FAQ": {
                 "Title": "Frequently Asked Questions",
+                "OnePagerDocument": "MBC-Brochure-one-pager.pdf",
                 "Goal": {
                     "Question": "1. What is the goal of this project?",
                     "Section1": "This project will connect metastatic breast cancer patients around the world with scientists using cutting-edge technology to study cancer's genetic and molecular causes. Cancer is not a single disease, and each tumor holds part of the puzzle.",
@@ -572,6 +575,11 @@
             "October": "October",
             "November": "November",
             "December": "December"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",

@@ -133,6 +133,7 @@ export * from './lib/components/activityForm/answers/activityDateAnswer.componen
 export * from './lib/components/activityForm/answers/activity-answer/activityAnswer.component';
 export * from './lib/components/activityForm/answers/activityNumericAnswer.component';
 export * from './lib/components/activityForm/answers/activityEmailInput.component';
+export * from './lib/components/activityForm/answers/activity-text-input/activityTextInput.component';
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';

@@ -494,6 +494,11 @@
       "November": "Novanm",
       "December": "Desanm"
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "UserMenu": {
       "DashboardButton": "Dach",
       "SignOutButton": "Dekonekte"

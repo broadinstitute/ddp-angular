@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Auth0AdapterService } from 'ddp-sdk';
 import { SessionExpiredComponent } from 'toolkit';
 
@@ -31,7 +32,9 @@ import { SessionExpiredComponent } from 'toolkit';
         </div>`
 })
 export class PrionSessionExpiredComponent extends SessionExpiredComponent {
-  constructor(private _auth0: Auth0AdapterService) {
-    super(_auth0);
+  constructor(
+      private _activatedRoute: ActivatedRoute,
+      private _auth0: Auth0AdapterService) {
+    super(_activatedRoute, _auth0);
   }
 }

@@ -7,14 +7,16 @@
           [routerLink]="link.routePath"
           class="nav-list__link"
           translate
-        >{{ link.translationKey }}</a>
+          >{{ link.translationKey }}</a
+        >
 
         <a
           *ngIf="link.external"
           [href]="link.routePath"
           class="nav-list__link"
           translate
-        >{{ link.translationKey }}</a>
+          >{{ link.translationKey }}</a
+        >
       </li>
     </ul>
   </nav>

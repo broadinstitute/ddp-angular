@@ -1,13 +1,24 @@
 <ng-container *ngIf="!activity; else sections">
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </ng-container>
 
 <ng-template #sections>
-  <ddp-activity-section *ngFor="let section of activity.sections; trackBy: getSectionId"
-                        [section]="section"
-                        [studyGuid]="studyGuid"
-                        [activityGuid]="instance.instanceGuid"
-                        [readonly]="readonly"
-                        [validationRequested]="validationRequested">
-  </ddp-activity-section>
+    <div class="instance__divider"></div>
+    <div class="instance__header">
+        <span class="instance__label">{{instance.activityName}}</span>
+        <button *ngIf="instance.canDelete"
+                mat-icon-button class="instance__close-btn"
+                #delete_button
+                (click)="openDeleteDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <ddp-activity-section *ngFor="let section of activity.sections; trackBy: getSectionId"
+                          [section]="section"
+                          [studyGuid]="studyGuid"
+                          [activityGuid]="instance.instanceGuid"
+                          [readonly]="readonly"
+                          [validationRequested]="validationRequested">
+    </ddp-activity-section>
 </ng-template>

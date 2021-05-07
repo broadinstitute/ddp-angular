@@ -2,11 +2,13 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
+import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
 
 describe('ModalActivityBlockComponent', () => {
   @Component({
@@ -49,6 +51,7 @@ describe('ModalActivityBlockComponent', () => {
         { provide: ActivityServiceAgent, useValue: {} },
         { provide: MatDialog, useValue: {} },
         { provide: LoggingService, useValue: {} },
+        { provide: ActivityBlockModalService, useValue: {} }
       ],
       imports: [
         MatCardModule,

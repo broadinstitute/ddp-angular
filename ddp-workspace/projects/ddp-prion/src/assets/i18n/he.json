@@ -679,6 +679,11 @@
       "November": "נובמבר",
       "December": "דצמבר"
     },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
     "UserMenu": {
       "DashboardButton": "לוח המחוונים שלי",
       "SignOutButton": "יציאה"

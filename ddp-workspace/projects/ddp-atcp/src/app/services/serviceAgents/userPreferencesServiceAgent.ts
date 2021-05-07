@@ -53,7 +53,7 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
       profile.preferredLanguage = this.configuration.defaultLanguageCode;
       return this.postObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(catchError(e => {
-          this.log.logError(this.LOGGER_SOURCE, `Error occurred on user profile creation: ${JSON.stringify(e)}`);
+          this.log.logError(this.LOGGER_SOURCE, `Error occurred on user profile creation:`, e);
           return throwError(e);
         }));
     } else {
