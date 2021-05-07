@@ -1,6 +1,9 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   ConfigurationService,
@@ -15,6 +18,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
+import { PasswordComponent } from './components/pages/password/password.component';
+import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
+import { Route } from './constants/route';
 import { translateFactory } from './util/translateFactory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,12 +55,15 @@ ddpCfg.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 ddpCfg.projectGcpId = DDP_ENV.projectGcpId;
 ddpCfg.defaultLanguageCode = DDP_ENV.defaultLanguageCode || 'en';
 ddpCfg.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+ddpCfg.errorPageUrl = Route.Error;
+ddpCfg.passwordPageUrl = Route.Password;
 
 /**
  * Toolkit config
  */
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
+tkCfg.errorUrl = Route.Error;
 
 @NgModule({
   declarations: [
@@ -65,8 +74,18 @@ tkCfg.studyGuid = DDP_ENV.studyGuid;
     AboutUsComponent,
     LearnMoreComponent,
     ErrorComponent,
+    PasswordComponent,
+    StayInformedComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, DdpModule, ToolkitModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    DdpModule,
+    ToolkitModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   providers: [
     {
       provide: 'ddp.config',

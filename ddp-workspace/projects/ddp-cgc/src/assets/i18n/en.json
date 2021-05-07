@@ -124,5 +124,26 @@
   "ErrorPage": {
     "Title": "Something went wrong",
     "Text": "We are working on it now."
+  },
+  "StayInformed": {
+    "Title": "Thank you for your interest!",
+    "Paragraph1": "Unfortunately, at this time, all of the statements on the previous page must be true to participate.",
+    "Paragraph2": "Please join our mailing list to be informed about the project and any updates on future participation.",
+    "Form": {
+      "Email": {
+        "Label": "Email Account*",
+        "Error": "Please enter a valid Email Account"
+      },
+      "Submit": "I want to stay informed"
+    }
+  },
+  "PasswordPage": {
+    "Form": {
+      "Password": {
+        "Label": "Please enter your password",
+        "Required": "Please enter your password",
+        "Invalid": "Incorrect password. Please try again."
+      }
+    }
   }
 }
