@@ -1,0 +1,45 @@
+.file-upload-content {
+    display: flex;
+}
+
+.file-select {
+    text-align: center;
+}
+
+.drop-block {
+    width: 200px;
+    height: 150px;
+    border: 1px dashed grey;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.drop-block.file-over {
+    background-color: lightyellow;
+}
+
+.upload-icon {
+    font-size: 48px;
+    width: auto;
+    height: auto;
+}
+
+.upload-btn {
+    margin: 20px 0;
+}
+
+.file-info {
+    padding: 10px 20px;
+}
+
+.file-input {
+    display: none;
+}
+
+.submit-btn {
+    margin: 20px 0;
+    float: right;
+}

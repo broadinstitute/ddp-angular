@@ -9,90 +9,15 @@ import {
 import { EMPTY, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
-import { FileUploadBody, FileUploadResponse } from '../../../models/fileUpload';
-import { ActivityFileQuestionBlock } from '../../../models/activity/activityFileQuestionBlock';
-import { FileUploadService } from '../../../services/fileUpload.service';
-import { LoggingService } from '../../../services/logging.service';
+import { FileUploadBody, FileUploadResponse } from '../../../../models/fileUpload';
+import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
+import { FileUploadService } from '../../../../services/fileUpload.service';
+import { LoggingService } from '../../../../services/logging.service';
 
 @Component({
     selector: 'ddp-activity-file-answer',
-    template: `
-        <ddp-question-prompt [block]="block"></ddp-question-prompt>
-        <div class="file-upload-content">
-            <input type="file" class="file-input"
-                   (change)="onFilesSelected($event.target.files)" #fileUpload>
-
-            <div class="file-select">
-                <div class="drop-block" dropFileToUpload (filesDropped)="onFilesSelected($event)">
-                    <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
-                    <span class="drop-block-text">Drag files to upload</span>
-                </div>
-                <button mat-raised-button color="primary" class="upload-btn"
-                        (click)="fileUpload.click()">Choose file
-                    <mat-icon>attach_file</mat-icon>
-                </button>
-
-            </div>
-            <div class="file-info">
-                <span class="file-name">{{file?.name || 'No file uploaded'}}</span>
-            </div>
-        </div>
-
-        <button mat-raised-button color="primary"
-                class="submit-btn"
-                [disabled]="!isFileSelected"
-                (click)="uploadFile()"
-        >Submit
-        </button>
-    `,
-    styles: [
-        `.file-upload-content {
-            display: flex;
-        }
-
-        .file-select {
-            text-align: center;
-        }
-
-        .drop-block {
-            width: 200px;
-            height: 150px;
-            border: 1px dashed grey;
-            border-radius: 10px;
-            background-color: whitesmoke;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .drop-block.file-over {
-            background-color: lightyellow;
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            width: auto;
-            height: auto;
-        }
-
-        .upload-btn {
-            margin: 20px 0;
-        }
-
-        .file-info {
-            padding: 10px 20px;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .submit-btn {
-            margin: 20px 0;
-            float: right;
-        }
-        `
-    ]
+    templateUrl: 'activityFileAnswer.component.html',
+    styleUrls: ['activityFileAnswer.component.scss']
 })
 export class ActivityFileAnswer implements OnDestroy {
     @Input() block: ActivityFileQuestionBlock;
