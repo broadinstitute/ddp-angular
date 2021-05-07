@@ -27,6 +27,16 @@
   border-radius: 8px;
   background-color: rgba(113, 84, 255, 0.06);
   padding: 1rem;
+
+  &--common {
+    margin-bottom: 2.4rem;
+
+    text-align: justify;
+
+    p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .infobox_dashboard {

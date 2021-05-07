@@ -20,6 +20,11 @@
 </div>
 
 <ng-template #content>
+  <div class="infobox infobox--common">
+    <p [innerHTML]="'DashboardPage.Info.Paragraph1' | translate"></p>
+    <p [innerHTML]="'DashboardPage.Info.Paragraph2' | translate"></p>
+  </div>
+
   <app-study-messages [messages]="messages"></app-study-messages>
 
   <div class="TopMargin50">

@@ -37,9 +37,8 @@
         mat-cell
         *matCellDef="let message"
         [attr.label]="'DashboardPage.StudyMessages.Header.Title' | translate"
-      >
-        {{ message.title }}
-      </td>
+        [innerHTML]="message.subject | translate"
+      ></td>
     </ng-container>
 
     <ng-container matColumnDef="description">
@@ -60,18 +59,18 @@
         "
       >
         <div class="app-table__cell--description">
-          {{ message.description }}
+          <p [innerHTML]="message.message | translate"></p>
 
-          <div *ngIf="message.additionalMessage">
+          <div *ngIf="hasMoreText(message.more) | async">
             <div
-              *ngIf="!!showMoreMap[message.description]"
-              [innerHTML]="message.additionalMessage"
+              *ngIf="!!showMoreMap[message.more]"
+              [innerHTML]="message.more | translate"
             ></div>
 
             <button class="show-more-btn" (click)="toggleShowMore(message)">
               {{
                 'DashboardPage.StudyMessages.Actions.' +
-                  (!!showMoreMap[message.description] ? 'ShowLess' : 'ShowMore')
+                  (!!showMoreMap[message.more] ? 'ShowLess' : 'ShowMore')
                   | translate
               }}
             </button>
