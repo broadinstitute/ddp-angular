@@ -3,8 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivityDef } from '../model/core/activityDef';
 import { ConfigurationService } from '../configuration.service';
 import { map, take, tap } from 'rxjs/operators';
-import { TextQuestionDef } from '../model/core/textQuestionDef';
-import { QuestionBlockDef } from '../model/core/questionBlockDef';
 import { FormBlockDef } from '../model/core/formBlockDef';
 import { ObservableActivityDef } from '../model/core-extended/observableActvityDef';
 import { IdentifiableFormBlockDef } from '../model/core-extended/identifiableFormBlockDef';
@@ -46,7 +44,7 @@ export class ActivityDefinitionEditorService  {
         this.setCurrentBlock(this.selectedBlockSubject.value);
     }
 
-    public updateCurrentBlock(block: QuestionBlockDef<TextQuestionDef>): void {
+    public updateCurrentBlock(block: FormBlockDef): void {
         Object.assign(this.currentBlockDefSubject.value, block);
         this.currentBlockDefSubject.next(this.currentBlockDefSubject.value);
         this.selectedBlockSubject.next(this.currentBlockDefSubject.value);

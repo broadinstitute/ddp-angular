@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
+import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
 
 
 const ddpConfig = new ConfigurationService();
@@ -43,7 +44,8 @@ ddpConfig.doGcpErrorReporting = false;
     ContentBlockComponent,
     TextQuestionBlockComponent,
     TextQuestionEditorComponent,
-    StaticContentBlockComponent
+    StaticContentBlockComponent,
+    StaticContentBlockEditorComponent
   ],
     imports: [
         BrowserModule,

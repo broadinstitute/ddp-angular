@@ -95,7 +95,7 @@ export class StudyConfigObjectFactory {
         };
     }
 
-    private createBlankTemplate(): Template {
+    public createBlankTemplate(): Template {
         return {
             templateType: 'HTML',
             templateText: '$__template__',
