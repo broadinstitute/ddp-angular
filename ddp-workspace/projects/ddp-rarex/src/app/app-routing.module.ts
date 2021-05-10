@@ -78,7 +78,7 @@ const routes: Routes = [
     canActivate: [IrbGuard],
   },
   {
-    path: RoutePaths.TermsAndConditions,
+    path: RoutePaths.TermsOfUse,
     component: TermsAndConditionsComponent,
     canActivate: [IrbGuard],
   },

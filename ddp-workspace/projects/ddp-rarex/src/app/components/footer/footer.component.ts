@@ -6,6 +6,7 @@ interface NavLink {
   translationKey: string;
   routePath: string;
   external?: boolean;
+  openNewTab: boolean;
 }
 
 @Component({
@@ -20,14 +21,17 @@ export class FooterComponent implements OnInit {
       translationKey: 'Footer.Links.Home',
       routePath: this.rarexUrl,
       external: true,
+      openNewTab: false
     },
     {
-      translationKey: 'Footer.Links.TermsAndConditions',
-      routePath: RoutePaths.TermsAndConditions,
+      translationKey: 'Footer.Links.TermsOfUse',
+      routePath: RoutePaths.TermsOfUse,
+      openNewTab: true
     },
     {
       translationKey: 'Footer.Links.PrivacyPolicy',
       routePath: RoutePaths.PrivacyPolicy,
+      openNewTab: true
     },
   ];
 
