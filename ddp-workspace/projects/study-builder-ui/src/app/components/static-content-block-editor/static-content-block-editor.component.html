@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup" class="container">
+    <editor
+            [init]="editorInit()"
+            [initialValue]="initialContent()"
+            (onChange)="onContentChange($event)">
+    </editor>
+    <div>
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput
+                   formControlName="title" required>
+        </mat-form-field>
+    </div>
+</form>
