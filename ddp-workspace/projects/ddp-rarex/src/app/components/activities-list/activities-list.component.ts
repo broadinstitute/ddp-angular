@@ -28,6 +28,7 @@ export class ActivitiesListComponent {
     ActivityCodes.HealthAndDevelopment,
     ActivityCodes.QualityOfLife,
     ActivityCodes.ParentalQualityOfLife,
+    ActivityCodes.DataSharing,
   ];
   private consentActivities = [
     ActivityCodes.SelfConsent,
