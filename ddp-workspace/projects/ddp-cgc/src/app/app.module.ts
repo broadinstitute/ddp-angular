@@ -25,6 +25,7 @@ import { translateFactory } from './util/translateFactory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
+import { ErrorComponent } from './components/pages/error/error.component';
 
 declare const DDP_ENV: any;
 
@@ -72,6 +73,7 @@ tkCfg.errorUrl = Route.Error;
     HomeComponent,
     AboutUsComponent,
     LearnMoreComponent,
+    ErrorComponent,
     PasswordComponent,
     StayInformedComponent,
   ],

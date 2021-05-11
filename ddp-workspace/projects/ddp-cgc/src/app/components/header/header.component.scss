@@ -1,3 +1,14 @@
+.overlay {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  .navbar {
+    background-color: unset!important;
+  }
+}
+
 .navbar {
   border-radius: 0;
   padding: 40px 80px;

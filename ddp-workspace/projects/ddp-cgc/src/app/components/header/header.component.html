@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [ngClass]="{ overlay: mode === Mode.OVERLAY }">
   <nav class="navbar navbar-default header-background">
     <div class="navbar-header">
       <button aria-expanded="false" class="navbar-toggle collapsed header-hamburger" data-target="#menu" data-toggle="collapse" type="button">
@@ -25,7 +25,7 @@
       </ul>
     </div>
   </nav>
-  <div class="row arrow">
+  <div class="row arrow" *ngIf="mode === Mode.STANDARD">
     <div class="col-lg-10 col-md-10 col-sm-11 col-xs-11">
       <img alt="Arrow" class="header-arrow" src="/assets/images/darkblue_arrow.svg">
     </div>
