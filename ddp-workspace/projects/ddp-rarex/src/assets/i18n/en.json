@@ -404,6 +404,9 @@
       "PluralForm": "characters remaining",
       "SingularForm": "character remaining"
     },
+    "Validators": {
+      "DateNavyValidationRule": "Please check the date"
+    },
     "MailAddress": {
       "Fields": {
         "Name": "Full Name",
