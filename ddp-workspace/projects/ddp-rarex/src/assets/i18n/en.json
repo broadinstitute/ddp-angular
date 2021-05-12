@@ -4,7 +4,8 @@
       "CREATED": "New",
       "IN_PROGRESS": "In Progress",
       "COMPLETE": "Complete"
-    }
+    },
+    "PageCount": "Page {{ current }} of {{ total }}"
   },
   "Header": {
     "Alts": {
