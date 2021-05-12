@@ -603,9 +603,9 @@
         },
         "Institutions": {
             "Fields": {
-                "Name": "Nombre del médico",
+                "Name": "Nombre del doctor",
                 "Institution": "Institución",
-                "InstitutionAny": "Institución (si la hay)",
+                "InstitutionAny": "Institución (si aplica)",
                 "City": "Ciudad",
                 "State": "Estado"
             },
@@ -613,10 +613,10 @@
         },
         "MailAddress": {
             "Fields": {
-                "Name": "Nombre completo",
+                "Name": "Su nombre completo",
                 "Country": "País/territorio",
-                "Street1": "Dirección",
-                "Street2": "N.º de apartamento/piso",
+                "Street1": "Dirección postal",
+                "Street2": "Apt / piso #",
                 "State": {
                     "State": "Estado",
                     "Province": "Provincia",
