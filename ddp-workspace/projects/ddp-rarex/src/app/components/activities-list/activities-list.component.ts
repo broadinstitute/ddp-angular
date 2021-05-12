@@ -27,13 +27,16 @@ export class ActivitiesListComponent {
     ActivityCodes.GeneralInformation,
     ActivityCodes.HealthAndDevelopment,
     ActivityCodes.QualityOfLife,
-    ActivityCodes.ParentalQualityOfLife,
+    ActivityCodes.ChildQualityOfLife,
+    ActivityCodes.PatientQualityOfLife,
     ActivityCodes.DataSharing,
   ];
   private consentActivities = [
     ActivityCodes.SelfConsent,
     ActivityCodes.ConsentAssent,
     ActivityCodes.ParentalConsent,
+    ActivityCodes.LarConsent,
+    ActivityCodes.LarConsentAssent,
   ];
 
   shouldShowQuestionCount(activity: ActivityInstance): boolean {
