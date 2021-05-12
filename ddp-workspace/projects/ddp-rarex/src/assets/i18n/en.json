@@ -309,10 +309,10 @@
     }
   },
   "Dashboard": {
-    "Title": "My Dashboard"
+    "Title": "Dashboard"
   },
   "ParticipantsList": {
-    "Title": "Your Participants",
+    "Title": "Participant Dashboard",
     "NewParticipant": "New Participant",
     "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below."
   },
