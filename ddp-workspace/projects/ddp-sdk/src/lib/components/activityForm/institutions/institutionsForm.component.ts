@@ -29,8 +29,8 @@ import { filter, scan, map, startWith, distinctUntilChanged, concatMap, tap } fr
         <ng-container *ngFor="let answer of savedAnswers; let i = index">
             <div *ngIf="block.showFieldsInitially ? i >= 1 : i >= 0" [id]="block.institutionType + i">
                 <p class="PageContent-subtitle Normal ddp-institutions-form__additional-text">
-                    <span *ngIf="isPhysician">Other physician</span>
-                    <span *ngIf="isInstitution">Other institution</span>
+                    <span *ngIf="isPhysician" translate>SDK.Institutions.Form.OtherPhysician</span>
+                    <span *ngIf="isInstitution" translate>SDK.Institutions.Form.OtherInstitution</span>
                     <button mat-icon-button *ngIf="!readonly" (click)="removeProvider(i)">
                         <mat-icon class="ddp-close-button">close</mat-icon>
                     </button>

@@ -707,6 +707,10 @@
         "City": "城市",
         "State": "州"
       },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
       "PhysicianValidation": "请填写所有必填字段"
     },
     "MailAddress": {

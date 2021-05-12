@@ -522,6 +522,10 @@
         "City": "Vil",
         "State": "Eta"
       },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
       "PhysicianValidation": "Tanpri ranpli tout chan obligatwa yo"
     },
     "MailAddress": {

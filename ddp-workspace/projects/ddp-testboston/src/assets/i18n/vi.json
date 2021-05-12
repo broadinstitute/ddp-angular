@@ -522,6 +522,10 @@
         "City": "Thành phố",
         "State": "Tiểu bang"
       },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
       "PhysicianValidation": "Vui lòng điền vào tất cả các trường cần thiết"
     },
     "MailAddress": {
