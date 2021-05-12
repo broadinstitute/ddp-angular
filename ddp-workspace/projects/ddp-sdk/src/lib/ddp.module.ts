@@ -87,6 +87,7 @@ import { ActivityBooleanAnswer } from './components/activityForm/answers/activit
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
+import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -192,6 +193,8 @@ import { ActivityBlockComponent } from './components/activityForm/activity-block
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
 import { ActivityBlockModalService } from './services/activity-block-modal.service';
+import { FileUploadService } from './services/fileUpload.service';
+import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -313,6 +316,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
         ActivityBlockModalService,
+        FileUploadService,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
@@ -348,6 +352,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBooleanAnswer,
         ActivityTextAnswer,
         ActivityTextInput,
+        ActivityFileAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -394,7 +399,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent
+        ActivityDeleteDialogComponent,
+        DropFileToUploadDirective
     ],
     exports: [
         NetworkSnifferComponent,
@@ -416,6 +422,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityQuestionComponent,
         ActivityBooleanAnswer,
         ActivityTextAnswer,
+        ActivityFileAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
