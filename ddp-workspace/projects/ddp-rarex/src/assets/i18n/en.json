@@ -350,7 +350,8 @@
     },
     "Navigation": {
       "Dashboard": "Dashboard"
-    }
+    },
+    "LogoutReminder": "Please log out after completing your session."
   },
   "SDK": {
     "DatePicker": {

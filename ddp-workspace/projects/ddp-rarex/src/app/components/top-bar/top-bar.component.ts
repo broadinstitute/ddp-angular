@@ -63,7 +63,6 @@ export class TopBarComponent implements OnInit {
       )
       .subscribe(profile => {
         this.profile = profile;
-        console.log(this.profile);
       });
   }
 }
