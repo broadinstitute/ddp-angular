@@ -609,6 +609,10 @@
                 "City": "Ciudad",
                 "State": "Estado"
             },
+            "Form" : {
+                "OtherPhysician": "Otro doctor",
+                "OtherInstitution": "Otra institución"
+            },
             "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "MailAddress": {
