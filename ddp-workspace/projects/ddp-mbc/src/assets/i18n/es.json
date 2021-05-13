@@ -626,7 +626,7 @@
                     "Province": "Provincia",
                     "State/Province/Region": "Estado/Provincia/Región"
                 },
-                "City": "Cuidad",
+                "City": "Ciudad",
                 "Phone": "Teléfono",
                 "Zip": {
                     "Zip Code": "Código postal",
