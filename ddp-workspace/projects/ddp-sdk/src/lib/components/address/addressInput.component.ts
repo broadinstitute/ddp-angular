@@ -79,7 +79,11 @@ import { LoggingService } from '../../services/logging.service';
         </mat-form-field>
 
         <ng-container *ngIf="ais.countryInfo$ | async as info; else defaultStateField">
-          <ng-container *ngIf="hasStatesList(info); then showStateDropdown else showStateTextField">
+          <ng-container *ngIf="!info.stateCode">
+            <ng-container *ngIf="info.subnationalDivisionTypeName as stateLabel; else defaultStateField">
+              <ng-container *ngIf="hasStatesList(info); then showStateDropdown else showStateTextField">
+              </ng-container>
+            </ng-container>
           </ng-container>
 
           <ng-template #showStateDropdown>
