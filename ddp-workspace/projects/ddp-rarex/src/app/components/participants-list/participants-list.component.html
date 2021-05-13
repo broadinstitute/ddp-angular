@@ -19,6 +19,10 @@
     *ngTemplateOutlet="participants.length ? participantsList : noParticipants"
   ></ng-container>
 
+  <div *ngIf="errorMessage" class="ErrorMessage">
+    <span>{{ errorMessage }}</span>
+  </div>
+
   <div class="controls">
     <button
       class="button button_primary button_medium"
