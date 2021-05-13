@@ -395,8 +395,9 @@ export class AddressInputService implements OnDestroy {
     enteredAddress.street1 = formValue.street1 as string;
     enteredAddress.street2 = formValue.street2 as string;
     enteredAddress.city = formValue.city as string;
-    // special case here for territories: state and country can be same. Check to see if country info has the state to use
-    enteredAddress.state = (country && country.stateCode) ? country.stateCode : (formValue.state ? formValue.state : '');
+    // special case here for U.S. territories. if selected country has a stateCode, then then state needs to be empty
+    // i.e., country field is all we need
+    enteredAddress.state = (country && country.stateCode) ? '' : (formValue.state ? formValue.state : '');
     enteredAddress.zip = formValue.zip as string;
     enteredAddress.name = formValue.name as string;
     enteredAddress.phone = formValue.phone as string;
