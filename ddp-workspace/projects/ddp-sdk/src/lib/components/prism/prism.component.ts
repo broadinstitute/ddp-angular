@@ -80,7 +80,7 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit, OnChang
   }
 
   public clearSearch(): void {
-    this.searchField.reset('', {emitEvent: true});
+    this.searchField.reset('');
   }
 
   private setSubject(user?: SearchParticipant): void {
