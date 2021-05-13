@@ -1,33 +1,56 @@
 <header class="header" [ngClass]="{ overlay: mode === Mode.OVERLAY }">
   <nav class="navbar navbar-default header-background">
     <div class="navbar-header">
-      <button aria-expanded="false" class="navbar-toggle collapsed header-hamburger" data-target="#menu" data-toggle="collapse" type="button">
+      <button
+        aria-expanded="false"
+        class="navbar-toggle collapsed header-hamburger"
+        data-target="#menu"
+        data-toggle="collapse"
+        type="button"
+      >
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
       <a class="header-logo" routerLink="/home">
-        <img alt="Cancer Collective Logo" src="/assets/images/logo.svg">
+        <img alt="Cancer Collective Logo" src="/assets/images/logo.svg" />
       </a>
     </div>
     <div class="collapse navbar-collapse header-collapse" id="menu">
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-item__link" [routerLink]="Route.Home">Home</a>
+          <a class="nav-item__link" [routerLink]="Route.Home">{{
+            'Header.Links.Home' | translate
+          }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-item__link"  [routerLink]="Route.AboutUs">About Us</a>
+          <a class="nav-item__link" [routerLink]="Route.AboutUs">{{
+            'Header.Links.AboutUs' | translate
+          }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-item__link" [routerLink]="Route.LearnMore">Learn More</a>
+          <a class="nav-item__link" [routerLink]="Route.LearnMore">{{
+            'Header.Links.LearnMore' | translate
+          }}</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="button button--primary button--lg"
+            [routerLink]="Route.PreScreening"
+            >{{ 'Header.Links.CountMeIn' | translate }}</a
+          >
         </li>
       </ul>
     </div>
   </nav>
   <div class="row arrow" *ngIf="mode === Mode.STANDARD">
     <div class="col-lg-10 col-md-10 col-sm-11 col-xs-11">
-      <img alt="Arrow" class="header-arrow" src="/assets/images/darkblue_arrow.svg">
+      <img
+        alt="Arrow"
+        class="header-arrow"
+        src="/assets/images/darkblue_arrow.svg"
+      />
     </div>
   </div>
 </header>

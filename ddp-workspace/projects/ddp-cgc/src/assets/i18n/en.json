@@ -1,4 +1,12 @@
 {
+  "Header": {
+    "Links": {
+      "Home": "Home",
+      "AboutUs": "About Us",
+      "LearnMore": "Learn More",
+      "CountMeIn": "Count Me In"
+    }
+  },
   "HomePage": {
     "Landing": {
       "Title": "Patients hold the key to driving progress against cancer.",
@@ -79,7 +87,7 @@
     "Paragraph9": "This direct-to-patient approach should be particularly enabling for the identification of patients with rare phenotypes or clinical behavior. This project seeks to establish a patient-researcher partnership to accelerate genomic discoveries and improve outcomes in cancer, and may ultimately serve as a means to build a new clinical and translational research model for all patients with cancer.",
     "Paragraph10": "Please feel free to visit our website: cancergenomecollective.org.",
     "Box": "If you have any questions or concerns about this study, please reach out to us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b>."
-  },  
+  },
   "LearnMore": {
     "Title": "Here’s how the project works:",
     "Steps": [
@@ -145,5 +153,11 @@
         "Invalid": "Incorrect password. Please try again."
       }
     }
+  },
+  "SDK": {
+    "CountMeIn": "Count Me In",
+    "PreviousButton": "Previous",
+    "NextButton": "Next",
+    "SubmitButton": "Submit"
   }
 }
