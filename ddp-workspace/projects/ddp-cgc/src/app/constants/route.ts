@@ -6,4 +6,7 @@ export enum Route {
   StayInformed = 'stay-informed',
   Password = 'password',
   PreScreening = 'pre-screening',
+  LoginLandingMode = 'login-landing/:mode',
+  LoginLanding = 'login-landing',
+  Auth = 'auth',
 }

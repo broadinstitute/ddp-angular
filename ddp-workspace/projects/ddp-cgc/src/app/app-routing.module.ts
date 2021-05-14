@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IrbGuard } from 'ddp-sdk';
+import { Auth0CodeCallbackComponent, IrbGuard } from 'ddp-sdk';
+
+import {
+  LoginLandingRedesignedComponent,
+  RedirectToAuth0LoginRedesignedComponent,
+} from 'toolkit';
+
 import { Route } from './constants/route';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ErrorComponent } from './components/pages/error/error.component';
@@ -42,6 +48,21 @@ const routes: Routes = [
   {
     path: Route.PreScreening,
     component: PreScreeningComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.LoginLandingMode,
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.LoginLanding,
+    component: LoginLandingRedesignedComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.Auth,
+    component: Auth0CodeCallbackComponent,
     canActivate: [IrbGuard],
   },
   {
