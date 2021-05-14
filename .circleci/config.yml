@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc"
+    "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc"
   study_guids: &study_guids
-    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc"
+    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc"
   dispatch_secret_id: &dispatch_secret_id
       app-engine-dispatch
 
@@ -496,6 +496,8 @@ jobs:
           study_key: esc
       - conditionally-launch-build-and-store:
           study_key: prion
+      - conditionally-launch-build-and-store:
+          study_key: cgc
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -608,6 +610,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: prion
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: cgc
 
   nightly:
     triggers:
@@ -651,3 +656,6 @@ workflows:
       - build-and-deploy-job:
           name: prion-nightly
           study_key: prion
+      - build-and-deploy-job:
+          name: cgc-nightly
+          study_key: cgc

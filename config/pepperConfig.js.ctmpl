@@ -322,3 +322,45 @@ var DDP_ENV = {
         DDP_ENV['projectGAToken'] = "fixme-not-set";
     {{end}}
 {{end}}
+
+{{if eq $study_guid "cgc"}}
+    {{if eq $environment "local"}}
+        DDP_ENV['auth0ClientId'] = "rJyIQ6yXIZsXiOUobx5nb9lqAaJcIypR";
+        DDP_ENV['auth0Domain'] = "cgc-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "cgc-dev.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "TBD";
+    {{end}}
+
+    {{if eq $environment "dev"}}
+        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0Domain'] = "cgc-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "cgc-dev.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "TBD";
+    {{end}}
+
+    {{if eq $environment "test"}}
+        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0Domain'] = "TBD";
+        DDP_ENV['auth0Audience'] = "TBD";
+        DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "TBD";
+    {{end}}
+
+    {{if eq $environment "staging"}}
+        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0Domain'] = "TBD";
+        DDP_ENV['auth0Audience'] = "TBD";
+        DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "TBD";
+    {{end}}
+
+    {{if eq $environment "prod"}}
+        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0Domain'] = "TBD";
+        DDP_ENV['auth0Audience'] = "TBD";
+        DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "TBD";
+    {{end}}
+{{end}}
