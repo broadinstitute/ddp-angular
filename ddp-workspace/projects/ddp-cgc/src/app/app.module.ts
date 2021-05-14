@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import {
   ConfigurationService,
@@ -14,11 +15,13 @@ import {
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
+import { ActivityComponent } from './components/activity/activity.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
 import { PasswordComponent } from './components/pages/password/password.component';
+import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
 import { Route } from './constants/route';
 import { translateFactory } from './util/translateFactory';
@@ -28,7 +31,6 @@ import { AboutUsComponent } from './components/pages/about-us/about-us.component
 import { ErrorComponent } from './components/pages/error/error.component';
 
 declare const DDP_ENV: any;
-
 
 const base = document.querySelector('base').getAttribute('href') || '';
 
@@ -68,6 +70,7 @@ tkCfg.errorUrl = Route.Error;
 @NgModule({
   declarations: [
     AppComponent,
+    ActivityComponent,
     FooterComponent,
     HeaderComponent,
     HomeComponent,
@@ -75,6 +78,7 @@ tkCfg.errorUrl = Route.Error;
     LearnMoreComponent,
     ErrorComponent,
     PasswordComponent,
+    PreScreeningComponent,
     StayInformedComponent,
   ],
   imports: [
@@ -85,6 +89,7 @@ tkCfg.errorUrl = Route.Error;
     ToolkitModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

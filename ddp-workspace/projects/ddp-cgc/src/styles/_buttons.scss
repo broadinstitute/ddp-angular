@@ -3,7 +3,7 @@
 .button {
   display: inline-block;
 
-  padding: 10px 20px 8px 20px;
+  padding: 10px 20px 8px 20px !important;
 
   font-weight: 600;
   font-size: 1rem;
@@ -17,25 +17,31 @@
   transition: all 0.5s ease;
   cursor: pointer;
 
+  &:disabled {
+    opacity: 0.8;
+
+    cursor: not-allowed;
+  }
+
   &:hover {
-    box-shadow: 2px 2px 0 #9e9e9e;
+    box-shadow: 2px 2px 0 #9e9e9e !important;
   }
 
   &--primary {
-    background: $color-green;
-    border: 1px solid $color-green;
+    background: $color-green !important;
+    border: 1px solid $color-green !important;
 
     color: #ffffff !important;
 
     &-outline {
-      background: transparent;
-      border: 2px solid $color-green;
+      background: transparent !important;
+      border: 2px solid $color-green !important;
 
       color: $color-green !important;
     }
   }
 
   &--lg {
-    padding: 15px 22px;
+    padding: 15px 22px !important;
   }
 }
