@@ -73,7 +73,7 @@ tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=brca_mbcproject_wagle
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;
 tkCfg.showInfoForPhysicians = false;
-tkCfg.showBlog = true;
+tkCfg.showBlog = false;
 tkCfg.blogUrl = 'http://mbc-project.blogspot.com/';
 
 export const config = new ConfigurationService();
