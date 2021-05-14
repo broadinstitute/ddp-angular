@@ -388,7 +388,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 suggested.isDefault = entered.isDefault;
                 suggested.guid = entered.guid;
                 // showing suggestion only if it differs from entered address
-                // we might have warning messages for the entered addresss
+                // we might have warning messages for the entered address
                 const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
                 if (!suggested.hasSameDataValues(entered)) {
                     this.stateUpdates$.next({
