@@ -15,7 +15,7 @@ export class AppComponent {
 
   getHeaderMode(): Mode {
     return RouterUtil.isRoute(Route.Home)
-      ? Mode.OVERLAY 
+      ? Mode.OVERLAY
       : Mode.STANDARD;
   }
 }
