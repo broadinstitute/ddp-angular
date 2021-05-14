@@ -157,7 +157,6 @@ import { LoggingService } from '../../services/logging.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-
 export class AddressInputComponent implements OnInit, OnDestroy {
   /**
    * Country codes that will be included as options in form. Need to make sure they are supported in { CountryService }.
@@ -256,9 +255,6 @@ export class AddressInputComponent implements OnInit, OnDestroy {
       tap(val => this.componentBusy.emit(val))
     );
 
-
-
-
     // shoot for single subscribe
     merge(
       syncStreet1FieldValue$,
@@ -352,8 +348,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     const fieldKey = this.buildFieldTranslationKey(formControlName);
     if (formControlName === 'zip') {
       return this.ais.postalCodeLabel$.pipe(
-          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
-
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`))
+      );
     } else if (formControlName === 'state') {
       return this.ais.stateLabel$.pipe(
           mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));
