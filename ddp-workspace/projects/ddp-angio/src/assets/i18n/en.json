@@ -656,6 +656,14 @@
             "DateNavyValidationRule": "Entered date is invalid"
         },
         "Prism": {
+            "EnrollmentStatusType": {
+                "Registered": "Registered",
+                "Enrolled": "Enrolled",
+                "ExitedBeforeEnrollment": "Exited before enrollment",
+                "ExitedAfterEnrollment": "Exited after enrollment",
+                "ConsentSuspended": "Consent suspended",
+                "Completed": "Completed"
+            },
             "ClearSearch": "Clear",
             "ClearSearchLabel": "Clear user search",
             "Title": "Enter the subject’s 12-digit invitation code, name, email, short id, or participant guid",

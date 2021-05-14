@@ -62,7 +62,7 @@
                 {{'SDK.Prism.TableColumns.Status' | translate}}
             </mat-header-cell>
             <mat-cell *matCellDef="let element" class="status-column">
-                {{ enrollmentStatusTypeToLabel.get(element.status) }}
+                {{ enrollmentStatusTypeToLabel.get(element.status) | translate }}
             </mat-cell>
         </ng-container>
 

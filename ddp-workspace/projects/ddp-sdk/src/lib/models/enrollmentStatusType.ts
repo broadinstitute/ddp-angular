@@ -7,10 +7,10 @@ export enum EnrollmentStatusType {
     COMPLETED = 'COMPLETED',
 }
 export const enrollmentStatusTypeToLabel = new Map<EnrollmentStatusType, string>([
-    [EnrollmentStatusType.REGISTERED, 'Registered'],
-    [EnrollmentStatusType.ENROLLED, 'Enrolled'],
-    [EnrollmentStatusType.EXITED_BEFORE_ENROLLMENT, 'Exited before enrollment'],
-    [EnrollmentStatusType.EXITED_AFTER_ENROLLMENT, 'Exited after enrollment'],
-    [EnrollmentStatusType.CONSENT_SUSPENDED, 'Consent suspended'],
-    [EnrollmentStatusType.COMPLETED, 'Completed'],
+    [EnrollmentStatusType.REGISTERED, 'SDK.Prism.EnrollmentStatusType.Registered'],
+    [EnrollmentStatusType.ENROLLED, 'SDK.Prism.EnrollmentStatusType.Enrolled'],
+    [EnrollmentStatusType.EXITED_BEFORE_ENROLLMENT, 'SDK.Prism.EnrollmentStatusType.ExitedBeforeEnrollment'],
+    [EnrollmentStatusType.EXITED_AFTER_ENROLLMENT, 'SDK.Prism.EnrollmentStatusType.ExitedAfterEnrollment'],
+    [EnrollmentStatusType.CONSENT_SUSPENDED, 'SDK.Prism.EnrollmentStatusType.ConsentSuspended'],
+    [EnrollmentStatusType.COMPLETED, 'SDK.Prism.EnrollmentStatusType.Completed'],
 ]);
