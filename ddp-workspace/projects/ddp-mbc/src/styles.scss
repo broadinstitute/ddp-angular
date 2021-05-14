@@ -2289,3 +2289,15 @@ input.mat-input-element {
 .mat-progress-bar-buffer {
     background-color: lightgray !important;
 }
+
+// nested picklist
+.ddp-nested-picklist {
+  margin-left: 3rem;
+
+  &__title {
+    margin: 1rem 0 0.5rem 0;
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+}

@@ -5,6 +5,7 @@
         <a
           *ngIf="!link.external"
           [routerLink]="link.routePath"
+          [target]="link.openNewTab ? '_blank' : '_self'"
           class="nav-list__link"
           translate
           >{{ link.translationKey }}</a
@@ -13,6 +14,7 @@
         <a
           *ngIf="link.external"
           [href]="link.routePath"
+          [target]="link.openNewTab ? '_blank' : '_self'"
           class="nav-list__link"
           translate
           >{{ link.translationKey }}</a

@@ -24,25 +24,15 @@ import { ActivatedRoute } from '@angular/router';
         </main>`
 })
 export class SessionExpiredRedesignedComponent extends SessionExpiredComponent implements OnInit {
-    private isAdminSessionExpired: boolean;
 
     constructor(
-        private activatedRoute: ActivatedRoute,
+        private _activatedRoute: ActivatedRoute,
         private headerConfig: HeaderConfigurationService,
         private _auth0: Auth0AdapterService) {
-        super(_auth0);
+        super(_activatedRoute, _auth0);
     }
 
     public ngOnInit(): void {
         this.headerConfig.setupDefaultHeader();
-        this.isAdminSessionExpired = !!this.activatedRoute.snapshot.data.isAdmin;
-    }
-
-    public signin(): void {
-        if (this.isAdminSessionExpired) {
-            this._auth0.adminLogin();
-        } else {
-            super.signin();
-        }
     }
 }

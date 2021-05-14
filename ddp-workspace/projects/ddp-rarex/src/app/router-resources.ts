@@ -9,7 +9,7 @@ export enum RoutePaths {
   Activity = 'activity',
   Activities = 'activity/:instanceGuid',
   Error = 'error',
-  TermsAndConditions = 'terms-and-conditions',
+  TermsOfUse = 'terms-of-use',
   PrivacyPolicy = 'privacy-policy',
   Survey = 'survey',
   LoginRedirect = 'login-redirect',

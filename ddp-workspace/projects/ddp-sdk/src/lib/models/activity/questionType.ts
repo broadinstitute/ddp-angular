@@ -6,5 +6,6 @@ export enum QuestionType {
     Physician = 'PHYSICIAN',
     Composite = 'COMPOSITE',
     Agreement = 'AGREEMENT',
-    Numeric = 'NUMERIC'
+    Numeric = 'NUMERIC',
+    File = 'FILE'
 }
