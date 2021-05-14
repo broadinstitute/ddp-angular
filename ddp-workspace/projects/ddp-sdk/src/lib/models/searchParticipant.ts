@@ -15,8 +15,3 @@ export interface SearchParticipant extends SearchParticipantBase {
     invitationId?: string;
     proxy?: SearchParticipantBase;
 }
-
-export interface SearchParticipantResponse {
-    totalCount: number;
-    results: SearchParticipant[];
-}

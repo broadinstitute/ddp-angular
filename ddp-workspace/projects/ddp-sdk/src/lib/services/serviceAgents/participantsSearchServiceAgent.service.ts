@@ -6,7 +6,7 @@ import { LoggingService } from '../logging.service';
 import { Observable } from 'rxjs';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { map } from 'rxjs/operators';
-import { SearchParticipantResponse } from '../../models/searchParticipant';
+import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
 
 @Injectable()
 export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {

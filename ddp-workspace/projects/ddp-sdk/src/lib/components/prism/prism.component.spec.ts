@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { PrismComponent } from './prism.component';
-import { SessionMementoService } from 'ddp-sdk';
+import { ConfigurationService, SessionMementoService } from 'ddp-sdk';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,24 +36,9 @@ class TranslateLoaderMock implements TranslateLoader {
     return of(TRANSLATIONS[code]);
   }
 }
-// tslint:disable-next-line:max-classes-per-file
-@Component({
-  template: `
-        <ddp-prism [dashboardRoute]="dashboardRoute"
-                   [withProxy]="withProxy"
-                   [withInvitationId]="withInvitationId"
-                   [withLegacyId]="withLegacyId"></ddp-prism>
-    `})
-class WrapperComponent {
-  dashboardRoute: string;
-  withProxy: boolean;
-  withInvitationId: boolean;
-  withLegacyId: boolean;
-}
 
 describe('PrismComponent', () => {
-  let fixture: ComponentFixture<WrapperComponent>;
-  let wrapperComponent: WrapperComponent;
+  let fixture: ComponentFixture<PrismComponent>;
   let component: PrismComponent;
   let debugElement: DebugElement;
   let sessionServiceSpy: jasmine.SpyObj<SessionMementoService>;
@@ -92,6 +77,7 @@ describe('PrismComponent', () => {
         email: 'test@test.com',
       }
     ];
+  const configColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus'];
 
   beforeEach(async() => {
     sessionServiceSpy = jasmine.createSpyObj('sessionServiceSpy', ['setInvitationId', 'setParticipant']);
@@ -105,7 +91,7 @@ describe('PrismComponent', () => {
         ReactiveFormsModule,
         MatTableModule,
         RouterTestingModule.withRoutes([
-          { path: dashboardRoute, component: WrapperComponent },
+          { path: dashboardRoute, component: PrismComponent },
         ]),
         MatPaginatorModule,
         TranslateModule.forRoot({
@@ -113,10 +99,11 @@ describe('PrismComponent', () => {
         }),
       ],
       providers: [
-          {provide: SessionMementoService, useValue: sessionServiceSpy},
-          {provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy},
+          { provide: SessionMementoService, useValue: sessionServiceSpy },
+          { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
+          { provide: ConfigurationService, useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute } },
       ],
-      declarations: [WrapperComponent, PrismComponent],
+      declarations: [PrismComponent],
     })
         .compileComponents();
 
@@ -125,11 +112,10 @@ describe('PrismComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WrapperComponent);
-    wrapperComponent = fixture.debugElement.componentInstance;
+    fixture = TestBed.createComponent(PrismComponent);
+    component = fixture.debugElement.componentInstance;
     debugElement = fixture.debugElement;
     fixture.detectChanges();
-    component = fixture.debugElement.query(By.directive(PrismComponent)).componentInstance;
     router = TestBed.inject(Router);
   });
 
@@ -264,35 +250,8 @@ describe('PrismComponent', () => {
     expect(warningElement.textContent.trim()).toContain(`WarningSize ${data.length} from ${data.length + 1} test`);
   }));
 
-  it('sets displayedColumns correctly by default', () => {
-    expect(component.displayedColumns).toEqual(['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink']);
-  });
-
-  it('sets displayedColumns correctly with invitation id', () => {
-    wrapperComponent.withInvitationId = true;
-    fixture.detectChanges();
-
-    expect(component.displayedColumns).toEqual(['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink',
-      'invitationId']);
-  });
-
-  it('sets displayedColumns correctly with proxy', () => {
-    wrapperComponent.withInvitationId = true;
-    wrapperComponent.withProxy = true;
-    fixture.detectChanges();
-
-    expect(component.displayedColumns).toEqual(['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink',
-      'invitationId', 'proxyGuid', 'proxyShortId', 'proxyUserName']);
-  });
-
-  it('sets displayedColumns correctly with legacy id', () => {
-    wrapperComponent.withInvitationId = true;
-    wrapperComponent.withProxy = true;
-    wrapperComponent.withLegacyId = true;
-    fixture.detectChanges();
-
-    expect(component.displayedColumns).toEqual(['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink',
-      'invitationId', 'proxyGuid', 'proxyShortId', 'proxyUserName', 'legacyAltPid', 'legacyShortId']);
+  it('sets displayedColumns from configuration', () => {
+    expect(component.displayedColumns).toEqual(configColumns);
   });
 
   it('sets empty invitation id and participant on init', () => {
@@ -301,7 +260,6 @@ describe('PrismComponent', () => {
   });
 
   it('sets correct invitation id and participant when click on dashboard button', fakeAsync(() => {
-    wrapperComponent.dashboardRoute = dashboardRoute;
     component.searchField.patchValue('test');
     tick(300);
     fixture.detectChanges();
@@ -316,7 +274,6 @@ describe('PrismComponent', () => {
 
   it('navigates to the correct url when click on dashboard button', fakeAsync(() => {
     const navigateSpy = spyOn(router, 'navigateByUrl');
-    wrapperComponent.dashboardRoute = dashboardRoute;
     component.searchField.patchValue('test');
     tick(300);
     fixture.detectChanges();

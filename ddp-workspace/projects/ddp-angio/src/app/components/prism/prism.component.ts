@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
             </div>
             <div class="PageContent">
                 <div class="PageLayout PageLayout-prism">
-                    <ddp-prism dashboardRoute="dashboard" [withLegacyId]="true"></ddp-prism>
+                    <ddp-prism></ddp-prism>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import { LoggingService } from '../logging.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { SearchParticipantResponse } from '../../models/searchParticipant';
+import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
 import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
 
 describe('ParticipantsSearchServiceAgent Test', () => {

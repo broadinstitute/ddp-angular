@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap, map, takeUntil } from 'rxjs/operators';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 import { SessionMementoService } from '../../services/sessionMemento.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import { enrollmentStatusTypeToLabel } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,27 +12,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
 
-const BASE_COLUMNS = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink'];
-const INVITATION_COLUMNS = ['invitationId'];
-const PROXY_COLUMNS = ['proxyGuid', 'proxyShortId', 'proxyUserName'];
-const LEGACY_COLUMNS = ['legacyAltPid', 'legacyShortId'];
-
 @Component({
   selector: 'ddp-prism',
   templateUrl: './prism.component.html',
   styleUrls: ['./prism.component.scss'],
 })
-export class PrismComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-  @Input() dashboardRoute: string;
-  @Input() withProxy = false;
-  @Input() withInvitationId = false;
-  @Input() withLegacyId = false;
-
+export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   public searchField = new FormControl();
-  public displayedColumns = BASE_COLUMNS;
+  public displayedColumns: string[] = [];
   public dataSource = new MatTableDataSource<SearchParticipant>([]);
   public totalCount = 0;
   public isSearchLoading = false;
@@ -43,17 +34,9 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit, OnChang
   constructor(
     private sessionService: SessionMementoService,
     private participantsSearch: ParticipantsSearchServiceAgent,
-    private router: Router) { }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['withProxy'] || changes['withInvitationId'] || changes['withLegacyId']) {
-      this.displayedColumns = [
-          ...BASE_COLUMNS,
-          ...(changes['withInvitationId']?.currentValue ? INVITATION_COLUMNS : []),
-          ...(changes['withProxy']?.currentValue ? PROXY_COLUMNS : []),
-          ...(changes['withLegacyId']?.currentValue ? LEGACY_COLUMNS : []),
-      ];
-    }
+    private router: Router,
+    @Inject('ddp.config') private config: ConfigurationService) {
+    this.displayedColumns = this.config.prismColumns;
   }
 
   public ngOnInit(): void {
@@ -120,7 +103,7 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit, OnChang
 
   public clickOnUser(user: SearchParticipant): void {
     this.setSubject(user);
-    this.router.navigateByUrl(`/${this.dashboardRoute}`);
+    this.router.navigateByUrl(`/${this.config.prismDashboardRoute}`);
   }
 
   public getUserLabel(user: SearchParticipant): string {
