@@ -615,7 +615,10 @@
     "TooltipAlt": "Информация",
     "SubjectPanel": {
       "Link": "Возврат к поиску субъекта",
-      "Text": "Код приглашения субъекта:"
+      "InvitationCode": "Код приглашения субъекта:",
+      "Email": "Адрес электронной почты:",
+      "Name": "Имя:",
+      "ShortId": "Сокращенный код субъекта/HRUID:"
     },
     "AdminActionPanel": {
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",

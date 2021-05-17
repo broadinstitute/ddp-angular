@@ -119,11 +119,11 @@
                 {{'SDK.Prism.TableColumns.DashboardLink' | translate}}
             </mat-header-cell>
             <mat-cell *matCellDef="let element" class="dashboard-column">
-                <button mat-stroked-button
-                        (click)="clickOnUser(element)"
+                <a mat-stroked-button
+                        [routerLink]="'/' + dashboardRoute + '/' + element.guid"
                         [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }">
                     {{'SDK.Prism.DashboardButton' | translate}}
-                </button>
+                </a>
             </mat-cell>
         </ng-container>
 

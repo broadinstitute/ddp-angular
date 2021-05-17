@@ -24,6 +24,7 @@ export class EnrollmentComponent implements OnInit {
   public accountForm: FormGroup;
   public isLoading = false;
   public showError = false;
+  public invitationId: string;
   private profile: UserProfile;
 
   constructor(
@@ -38,6 +39,7 @@ export class EnrollmentComponent implements OnInit {
   public ngOnInit(): void {
     this.initAccountForm();
     this.setupInitialState();
+    this.invitationId = this.session.session.invitationId;
   }
 
   public onSubmit(): void {
@@ -47,9 +49,8 @@ export class EnrollmentComponent implements OnInit {
 
     const profile = this.createProfile();
     const email = this.accountForm.controls.email.value;
-    const invitationId = this.session.session.invitationId;
     const participantGuid = this.session.session.participantGuid;
-    const participantGuid$ = participantGuid ? of(participantGuid) : this.createStudyParticipant(invitationId);
+    const participantGuid$ = participantGuid ? of(participantGuid) : this.createStudyParticipant(this.invitationId);
 
     this.isLoading = true;
     this.accountForm.disable();
@@ -101,7 +102,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   private setupInitialState(): void {
-    const invitationId$ = of(this.session.session.invitationId);
+    const invitationId$ = of(this.invitationId);
 
     invitationId$.pipe(
       take(1),
@@ -116,8 +117,7 @@ export class EnrollmentComponent implements OnInit {
         if (studySubject.userLoginEmail) {
           return throwError('The subject already has email-associated account!');
         } else {
-          const participantGuid = this.session.session.participantGuid;
-          return participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
+          return this.session.session.participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
         }
       })
     ).subscribe(

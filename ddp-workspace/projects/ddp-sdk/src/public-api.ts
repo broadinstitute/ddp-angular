@@ -50,6 +50,7 @@ export * from './lib/models/studySubject';
 export * from './lib/models/invitationType';
 export * from './lib/models/activity/questionType';
 export * from './lib/models/statistic';
+export * from './lib/models/searchParticipant';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
@@ -88,6 +89,7 @@ export * from './lib/services/serviceAgents/userServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
+export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
 
 export * from './lib/components/login/auth0-code-callback.component';

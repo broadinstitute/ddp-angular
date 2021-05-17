@@ -12,7 +12,8 @@ import {
   SubmitAnnouncementService,
   AnalyticsEventsService,
   SubmissionManager,
-  LoggingService
+  LoggingService,
+  SessionMementoService
 } from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
 
@@ -80,9 +81,10 @@ export class ModalActivityComponent extends ActivityComponent {
               renderer: Renderer2,
               submitService: SubmitAnnouncementService,
               analytics: AnalyticsEventsService,
+              session: SessionMementoService,
               @Inject(DOCUMENT) document: any,
               injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, session, document, injector);
   }
 
   public get isStepBeforeLast(): boolean {

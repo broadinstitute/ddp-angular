@@ -11,14 +11,14 @@ import { map, take, filter } from 'rxjs/operators';
     template: `
         <main class="main">
             <section class="section">
-                <ddp-subject-panel></ddp-subject-panel>
+                <ddp-subject-panel [invitationId]="invitationId"></ddp-subject-panel>
             </section>
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
                     <h1 class="dashboard-title-section__title" translate>
                         Toolkit.Dashboard.Title
                     </h1>
-                    <p *ngIf="invitationId" class="invitation-code">
+                    <p *ngIf="invitationId && !isAdmin" class="invitation-code">
                         <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
                         <span>{{invitationId | invitation}}</span>
                     </p>
@@ -80,7 +80,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public ngOnInit(): void {
         super.ngOnInit();
         this.headerConfig.setupDefaultHeader();
-        !this.isAdmin && this.getInvitationId();
+        this.getInvitationId();
     }
 
     public get isAdmin(): boolean {

@@ -615,7 +615,10 @@
     "TooltipAlt": "Informations",
     "SubjectPanel": {
       "Link": "Revenir à la recherche de patient",
-      "Text": "Code d’invitation du patient :"
+      "InvitationCode": "Code d’invitation du patient :",
+      "Email": "[FR] Email:",
+      "Name": "[FR] Name:",
+      "ShortId": "[FR] Subject Short ID/HRUID:"
     },
     "AdminActionPanel": {
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",

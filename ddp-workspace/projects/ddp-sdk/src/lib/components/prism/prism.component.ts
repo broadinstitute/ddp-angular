@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap, map, takeUntil } from 'rxjs/operators';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { enrollmentStatusTypeToLabel } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
@@ -28,19 +27,19 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
   public isSearchLoading = false;
   public isSearchDebounce = false;
   public MIN_SEARCH_LENGTH = 4;
+  public dashboardRoute: string;
   private ngUnsubscribe = new Subject();
   public readonly enrollmentStatusTypeToLabel = enrollmentStatusTypeToLabel;
 
   constructor(
-    private sessionService: SessionMementoService,
     private participantsSearch: ParticipantsSearchServiceAgent,
     private router: Router,
     @Inject('ddp.config') private config: ConfigurationService) {
     this.displayedColumns = this.config.prismColumns;
+    this.dashboardRoute = this.config.prismDashboardRoute;
   }
 
   public ngOnInit(): void {
-    this.setSubject();
     this.initSearchListener();
   }
 
@@ -64,11 +63,6 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public clearSearch(): void {
     this.searchField.reset('');
-  }
-
-  private setSubject(user?: SearchParticipant): void {
-    this.sessionService.setInvitationId(user?.invitationId);
-    this.sessionService.setParticipant(user?.guid);
   }
 
   public hasValidUserSearchQuery(): boolean {
@@ -99,11 +93,6 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
       this.dataSource.data = response?.results || [];
       this.totalCount = response?.totalCount || 0;
     });
-  }
-
-  public clickOnUser(user: SearchParticipant): void {
-    this.setSubject(user);
-    this.router.navigateByUrl(`/${this.config.prismDashboardRoute}`);
   }
 
   public getUserLabel(user: SearchParticipant): string {

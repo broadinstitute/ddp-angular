@@ -3,7 +3,7 @@ import {
   OnInit,
   OnDestroy,
   OnChanges,
-  SimpleChange,
+  SimpleChanges,
   Input,
   Output,
   EventEmitter,
@@ -199,6 +199,7 @@ import { tap, mergeMap, take } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
   @Input() studyGuid: string;
+  @Input() selectedUserGuid: string;
   @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
   @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -221,6 +222,11 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public ngOnInit(): void {
+    if (this.selectedUserGuid) {
+      this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
+    } else {
+      this.serviceAgent.resetSelectedUser();
+    }
     this.dataSource = new UserActivitiesDataSource(
       this.serviceAgent,
       this.logger,
@@ -234,7 +240,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // observable stream from main data source, so we will get
           // single final result when both statuses and activity
           // instances will be loaded
-          mergeMap(x => this.dataSource.isNull)
+          mergeMap(() => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
         ).subscribe(x => {
@@ -243,12 +249,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
         });
   }
 
-  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-    for (const propName in changes) {
-      if (propName === 'studyGuid') {
-        this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
-        this.studyGuidObservable.next(this.studyGuid);
-      }
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['studyGuid']) {
+      this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
+      this.studyGuidObservable.next(this.studyGuid);
     }
   }
 
@@ -306,11 +310,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public showSummary(activityInstance: ActivityInstance): boolean {
-    if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!(this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary);
   }
 
   public getButtonTranslate(activityInstance: ActivityInstance): string {

@@ -26,6 +26,7 @@ import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
+import { SessionMementoService } from '../../services/sessionMemento.service';
 import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
 
 @Component({
@@ -192,6 +193,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
+
+    public invitationId: string;
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
@@ -210,11 +213,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
         private analytics: AnalyticsEventsService,
+        private session: SessionMementoService,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes
         injector: Injector) {
         super(injector);
+        this.invitationId = this.session.session.invitationId;
     }
 
     @HostListener('window: scroll') public onWindowScroll(): void {
@@ -231,7 +236,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe(response => this.submitService.announceSubmit(null));
+        const submitSub = this.submitAttempted.subscribe(() => this.submitService.announceSubmit(null));
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(

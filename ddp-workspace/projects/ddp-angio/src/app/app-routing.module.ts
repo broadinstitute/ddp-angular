@@ -12,7 +12,6 @@ import {
 import {
     ActivityPageComponent,
     ActivityComponent,
-    DashboardComponent,
     LoginLandingComponent,
     ErrorComponent,
     StayInformedComponent,
@@ -32,6 +31,7 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
@@ -107,6 +107,20 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [
+            IrbGuard,
+            BrowserGuard,
+            AuthGuard
+        ]
+    },
+    // {
+    //     path: 'dashboard',
+    //     redirectTo: 'dashboard/',
+    //     pathMatch: 'full'
+    // },
+    {
+        path: 'dashboard/:userGuid',
         component: DashboardComponent,
         canActivate: [
             IrbGuard,

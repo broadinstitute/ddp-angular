@@ -18,6 +18,7 @@ import {
   SubmitAnnouncementService,
   WindowRef,
   LoggingService,
+  SessionMementoService,
 } from 'ddp-sdk';
 
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
@@ -31,7 +32,7 @@ import * as Routes from '../../router-resources';
   <main class="main main_activity" [ngClass]="{'main_sticky': isLoaded && model && model.subtitle, 'feeding-survey': model?.activityCode === ActivityCodes.FEEDING}">
         <ng-container *ngIf="isLoaded && model">
             <section class="section">
-                <ddp-subject-panel></ddp-subject-panel>
+                <ddp-subject-panel [invitationId]="invitationId"></ddp-subject-panel>
             </section>
             <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
                 <div class="content content_tight">
@@ -353,9 +354,10 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       renderer: Renderer2,
       submitService: SubmitAnnouncementService,
       analytics: AnalyticsEventsService,
+      session: SessionMementoService,
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, session, document, injector);
 
     this.matDialog = injector.get(MatDialog);
   }

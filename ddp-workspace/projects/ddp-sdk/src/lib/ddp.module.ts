@@ -317,6 +317,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ActivityBlockModalService,
         FileUploadService,
+        InvitationPipe,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,

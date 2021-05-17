@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
-import { AnnouncementsServiceAgent } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SearchParticipant } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -23,6 +23,11 @@ import { filter, map } from 'rxjs/operators';
                     </div>
                 </div>
             </div>
+            <ddp-subject-panel *ngIf="selectedUser"
+                               [invitationId]="selectedUser.invitationId"
+                               [email]="selectedUser.email || selectedUser.proxy?.email"
+                               [name]="selectedUser.firstName + selectedUser.lastName">
+            </ddp-subject-panel>
             <article class="PageContent">
                 <div class="PageLayout PageLayout-dashboard">
                     <div class="row NoMargin">
@@ -40,6 +45,7 @@ import { filter, map } from 'rxjs/operators';
                             </ng-container>
                             <section class="PageContent-section">
                                 <ddp-dashboard [studyGuid]="studyGuid"
+                                               [selectedUserGuid]="selectedUser.guid"
                                                (open)="navigate($event)"
                                                (loadedEvent)="load($event)">
                                 </ddp-dashboard>
@@ -51,6 +57,8 @@ import { filter, map } from 'rxjs/operators';
         </div>`
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+    @Input() selectedUser: SearchParticipant;
+
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -64,6 +72,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
+
+        if (this.selectedUser) {
+            this.announcements.updateSelectedUser(this.selectedUser.guid);
+        } else {
+            this.announcements.resetSelectedUser();
+        }
         const anno = this.announcements.getMessages(this.studyGuid)
             .pipe(
                 filter(messages => !!messages),

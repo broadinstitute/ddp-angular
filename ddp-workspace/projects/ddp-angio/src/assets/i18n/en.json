@@ -688,6 +688,13 @@
             "MinQueryLengthHint":  "Enter at least {{length}} characters",
             "DashboardButtonLabel":  "Navigates to dashboard for the user {{user}}",
             "WarningSize": "You can see only {{count}} participant from {{totalCount}}. Specify your search request."
+        },
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "InvitationCode": "Subject Invitation Code:",
+            "Email": "Email:",
+            "Name": "Name:",
+            "ShortId": "Subject Short ID/HRUID:"
         }
     }
 }
