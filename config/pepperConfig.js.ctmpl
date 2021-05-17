@@ -340,7 +340,7 @@ var DDP_ENV = {
     {{end}}
 
     {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0ClientId'] = "hqyjbOmfft4PNk0J8Ff4RigtGs4Kl4Jz";
         DDP_ENV['auth0Domain'] = "cgc-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "cgc-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
