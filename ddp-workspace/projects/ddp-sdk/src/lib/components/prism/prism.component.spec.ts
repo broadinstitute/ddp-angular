@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,12 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { PrismComponent } from './prism.component';
-import { ConfigurationService, SessionMementoService } from 'ddp-sdk';
+import { SessionMementoService } from 'ddp-sdk';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(code: string = ''): Observable<object> {
@@ -77,7 +78,7 @@ describe('PrismComponent', () => {
         email: 'test@test.com',
       }
     ];
-  const configColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus'];
+  const configColumns = ['guid', 'userName', 'email', 'enrollmentStatus', 'dashboardLink'];
 
   beforeEach(async() => {
     sessionServiceSpy = jasmine.createSpyObj('sessionServiceSpy', ['setInvitationId', 'setParticipant']);
@@ -90,6 +91,7 @@ describe('PrismComponent', () => {
         MatInputModule,
         ReactiveFormsModule,
         MatTableModule,
+        MatIconModule,
         RouterTestingModule.withRoutes([
           { path: dashboardRoute, component: PrismComponent },
         ]),
@@ -101,7 +103,7 @@ describe('PrismComponent', () => {
       providers: [
           { provide: SessionMementoService, useValue: sessionServiceSpy },
           { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
-          { provide: ConfigurationService, useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute } },
+          { provide: 'ddp.config', useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute } },
       ],
       declarations: [PrismComponent],
     })
