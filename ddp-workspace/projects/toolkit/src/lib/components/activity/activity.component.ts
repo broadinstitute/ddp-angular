@@ -10,7 +10,8 @@ import { ActivityResponse } from 'ddp-sdk';
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
-        <ddp-activity [studyGuid]="studyGuid"
+        <ddp-activity *ngIf="id"
+                      [studyGuid]="studyGuid"
                       [activityGuid]="id"
                       (submit)="navigate($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
