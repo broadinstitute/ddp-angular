@@ -1,0 +1,70 @@
+@import '../../../styles/variables';
+
+.header {
+  position: sticky;
+  top: 0;
+
+  background: #ffffff;
+
+  transition: box-shadow 0.2s ease;
+
+  &--sticky {
+    box-shadow: 0 0.2rem 2rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    max-width: 140rem;
+
+    margin: 0 auto;
+    padding: 1.6rem 2.4rem 2.6rem;
+  }
+
+  &__logo {
+    height: 6rem;
+
+    margin-right: 4rem;
+  }
+
+  &__logo-img {
+    height: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    padding-top: 1rem;
+
+    &--left {
+      margin-right: auto;
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  &__item {
+    &:not(:last-of-type) {
+      margin-right: 4rem;
+    }
+  }
+
+  &__link {
+    &,
+    &:visited {
+      text-decoration: none;
+      color: $color-blue-2;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

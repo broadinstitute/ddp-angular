@@ -1,0 +1,27 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal;
+  font-size: 1.6rem;
+  font-style: normal;
+  line-height: 1.45;
+  color: $color-font-dark;
+
+  box-sizing: border-box;
+}

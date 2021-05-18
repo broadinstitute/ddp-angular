@@ -13,6 +13,7 @@ import {
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
+import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -85,7 +86,7 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent],
   imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
   providers: [
     {

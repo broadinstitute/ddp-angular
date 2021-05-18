@@ -1,4 +1,14 @@
 {
+  "Header": {
+    "Links": {
+      "Home": "Home",
+      "About": "About the Study",
+      "Participation": "Participation",
+      "FAQ": "FAQ",
+      "Team": "Meet the Team",
+      "SignUp": "Sign Up"
+    }
+  },
   "HomePage": {
     "Title": "Home page"
   },

@@ -1,0 +1,43 @@
+@import 'variables';
+
+.button {
+  display: inline-block;
+
+  padding: 1.5rem 2.6rem;
+
+  border-radius: 12px;
+
+  font-size: 1.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+
+  transition: background 0.2s ease;
+
+  &--yellow {
+    background: $color-yellow-1;
+
+    color: #000000;
+
+    &:hover {
+      background: darken($color-yellow-1, 5%);
+    }
+  }
+}
+
+.header {
+  .SimpleButton {
+    background: none;
+    border: none;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration: inherit;
+    line-height: inherit;
+    color: inherit;
+
+    cursor: pointer;
+  }
+}
