@@ -522,6 +522,10 @@
         "City": "المدينة",
         "State": "الولاية"
       },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
       "PhysicianValidation": "يُرجى بعبئة جميع الحقول المطلوبة"
     },
     "MailAddress": {

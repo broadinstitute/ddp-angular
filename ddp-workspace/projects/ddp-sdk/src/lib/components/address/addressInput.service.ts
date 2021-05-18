@@ -28,7 +28,6 @@ import { Address } from '../../models/address';
 import { AddressService } from '../../services/address.service';
 import { LoggingService } from '../../services/logging.service';
 
-
 type CountryCache = Record<string, CountryAddressInfo>;
 
 export interface AddressInputComponentState {
@@ -131,7 +130,6 @@ export class AddressInputService implements OnDestroy {
           );
         }
       }));
-
 
     const componentState$: Observable<AddressInputComponentState> = merge(
       // consolidate updates from form into one update
@@ -395,8 +393,9 @@ export class AddressInputService implements OnDestroy {
     enteredAddress.street1 = formValue.street1 as string;
     enteredAddress.street2 = formValue.street2 as string;
     enteredAddress.city = formValue.city as string;
-    // special case here for territories: state and country can be same. Check to see if country info has the state to use
-    enteredAddress.state = (country && country.stateCode) ? country.stateCode : (formValue.state ? formValue.state : '');
+    // special case here for U.S. territories. if selected country has a stateCode, then state needs to be empty
+    // i.e., country field is all we need
+    enteredAddress.state = (country && country.stateCode) ? '' : (formValue.state || '');
     enteredAddress.zip = formValue.zip as string;
     enteredAddress.name = formValue.name as string;
     enteredAddress.phone = formValue.phone as string;
@@ -407,7 +406,7 @@ export class AddressInputService implements OnDestroy {
   }
 
   private buildAutoCompleteAddress(autocompleteAddress: Address, name: string, phone: string): Address {
-    this.logger.logDebug(this.LOG_SOURCE, `Processing showAutomcoplete with: ${JSON.stringify(autocompleteAddress)}`);
+    this.logger.logDebug(this.LOG_SOURCE, `Processing showAutocomplete with: ${JSON.stringify(autocompleteAddress)}`);
 
     const localAutocompleteAddress = new Address(autocompleteAddress);
     // capitalize incoming text
@@ -417,6 +416,5 @@ export class AddressInputService implements OnDestroy {
     localAutocompleteAddress.name = name;
     localAutocompleteAddress.phone = phone;
     return localAutocompleteAddress;
-
   }
 }

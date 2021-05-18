@@ -522,6 +522,10 @@
         "City": "Cidade",
         "State": "Estado"
       },
+      "Form" : {
+        "OtherPhysician": "Outro médico",
+        "OtherInstitution": "Outra instituição"
+      },
       "PhysicianValidation": "Preencha todos os campos obrigatórios"
     },
     "MailAddress": {

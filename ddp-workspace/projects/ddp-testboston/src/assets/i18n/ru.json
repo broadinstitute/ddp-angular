@@ -522,6 +522,10 @@
         "City": "Город",
         "State": "Штат"
       },
+      "Form" : {
+        "OtherPhysician": "Другой врач",
+        "OtherInstitution": "Другая организация"
+      },
       "PhysicianValidation": "Пожалуйста, заполните все необходимые поля"
     },
     "MailAddress": {

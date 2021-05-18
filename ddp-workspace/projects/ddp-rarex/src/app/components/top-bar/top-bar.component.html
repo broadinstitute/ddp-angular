@@ -1,4 +1,8 @@
 <div class="top-bar">
+  <span class="username" *ngIf="profile">
+    {{ profile.firstName }} {{ profile.lastName }}
+  </span>
+
   <nav class="top-bar__nav">
     <ul class="nav-list">
       <li *ngIf="isAuthenticated" class="nav-list__item">
