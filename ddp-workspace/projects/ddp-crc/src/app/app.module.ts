@@ -26,29 +26,22 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
-sdkConfig.adminClientId = DDP_ENV.adminClientId;
 sdkConfig.logLevel = DDP_ENV.logLevel;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
-sdkConfig.adminLoginLandingUrl = DDP_ENV.adminLoginLandingUrl;
 sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
-sdkConfig.supportedCountry = 'US';
 sdkConfig.defaultLanguageCode = 'en';
-sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.dashboardUrl = 'TBD';
-toolkitConfig.adminDashboardUrl = 'TBD';
-toolkitConfig.activityUrl = 'TBD';
-toolkitConfig.errorUrl = 'TBD';
 
 export function translateFactory(
   inj: Injector,
