@@ -7,7 +7,8 @@ import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import { SessionMementoService } from './sessionMemento.service';
-import { FileUploadBody, FileUploadResponse } from '../models/fileUpload';
+import { FileUploadBody } from '../models/fileUploadBody';
+import { FileUploadResponse } from '../models/fileUploadResponse';
 
 @Injectable()
 export class FileUploadService extends UserServiceAgent<any> {
@@ -33,12 +34,12 @@ export class FileUploadService extends UserServiceAgent<any> {
     }
 
     // Upload a file to GCP Bucket via an authorized upload URL (received in `getUploadUrl` method above)
-    uploadFile(path: string, formData: FormData, contentType: string): any {
+    uploadFile(path: string, file: File): any {
         const headers = new HttpHeaders({
-            'Content-Type': contentType
+            'Content-Type': file.type
         });
 
-        return this.http.put(path, formData, {headers}).pipe(
+        return this.http.put(path, file, {headers}).pipe(
             catchError(error => {
                 this.logger.logDebug('uploadFile to GCP Bucket error', error);
                 return throwError(error.error);
