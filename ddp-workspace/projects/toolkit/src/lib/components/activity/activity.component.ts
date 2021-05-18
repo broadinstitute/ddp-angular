@@ -10,15 +10,15 @@ import { ActivityResponse } from 'ddp-sdk';
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
-        <ddp-activity *ngIf="id"
+        <ddp-activity *ngIf="instanceGuid"
                       [studyGuid]="studyGuid"
-                      [activityGuid]="id"
+                      [activityGuid]="instanceGuid"
                       (submit)="navigate($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
         </ddp-activity>`
 })
 export class ActivityComponent implements OnInit {
-    public id: string;
+    public instanceGuid: string;
     public studyGuid: string;
     public stickySubtitle: string;
     public activityCode: string;
@@ -29,8 +29,8 @@ export class ActivityComponent implements OnInit {
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
-        this.activatedRoute.params.subscribe(x => {
-            this.id = x.id;
+        this.activatedRoute.params.subscribe(params => {
+            this.instanceGuid = params.id;
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
     }
