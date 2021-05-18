@@ -127,7 +127,7 @@ export class SubmissionManager implements OnDestroy {
                                 const errorCount = ++i;
                                 // we will retry on HTTP errors that are not the ones listed here
                                 if (errorCount > this.maxRetryCount || !(submissionError instanceof HttpErrorResponse)
-                                    || [404, 401, 422].includes(submissionError.status)) {
+                                    || [400, 404, 401, 422].includes(submissionError.status)) {
                                     // Would have preferred to throw error, and have subscriber handle it in the error handler
                                     // but could not get the error
                                     this.answerSubmissionFailureSubject.next(submissionError);
@@ -234,5 +234,4 @@ export class SubmissionManager implements OnDestroy {
     private setupAnswerSubmissionWarning(): void {
         this.answerSubmissionWarning$ = this.answerSubmissionErrorSubject.pipe(map(() => true));
     }
-
 }
