@@ -19,11 +19,15 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
         <toolkit-header [showButtons]="false"
                         [stickySubtitle]="stickySubtitle">
         </toolkit-header>
-        <ddp-activity [studyGuid]="studyGuid"
-                      [activityGuid]="(activityInstance$ | async)?.instanceGuid"
-                      (submit)="raiseSubmit($event)"
-                      (stickySubtitle)="showStickySubtitle($event)">
-        </ddp-activity>`
+
+        <ng-container *ngIf="(activityInstance$ | async)?.instanceGuid as activityInstanceGuid">
+            <ddp-activity [studyGuid]="studyGuid"
+                          [activityGuid]="activityInstanceGuid"
+                          (submit)="raiseSubmit($event)"
+                          (stickySubtitle)="showStickySubtitle($event)">
+            </ddp-activity>
+        </ng-container>
+    `
 })
 export class ActivityPageComponent implements OnInit, OnDestroy {
     @Output() submit: EventEmitter<void> = new EventEmitter();

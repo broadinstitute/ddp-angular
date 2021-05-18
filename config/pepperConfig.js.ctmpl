@@ -271,24 +271,24 @@ var DDP_ENV = {
     {{end}}
 
     {{if eq $environment "test"}}
-        DDP_ENV['auth0ClientId'] = "FIX_ME";
-        DDP_ENV['auth0Domain'] = "FIX_ME";
-        DDP_ENV['auth0Audience'] = "FIX_ME";
-        DDP_ENV['basePepperUrl'] = "FIX_ME";
+        DDP_ENV['auth0ClientId'] = "4Azj6TSFYVdegmcrY3onCq237PLAhK3Q";
+        DDP_ENV['auth0Domain'] = "rarex-test.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rarex-test.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
     {{end}}
 
     {{if eq $environment "staging"}}
-        DDP_ENV['auth0ClientId'] = "FIX_ME";
-        DDP_ENV['auth0Domain'] = "FIX_ME";
-        DDP_ENV['auth0Audience'] = "FIX_ME";
-        DDP_ENV['basePepperUrl'] = "FIX_ME";
+        DDP_ENV['auth0ClientId'] = "9bkaGaDGvFueNjUDC6PNJa2WvcqsUdn4";
+        DDP_ENV['auth0Domain'] = "rarex-staging.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rarex-staging.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
     {{end}}
 
     {{if eq $environment "prod"}}
-        DDP_ENV['auth0ClientId'] = "FIX_ME";
-        DDP_ENV['auth0Domain'] = "FIX_ME";
-        DDP_ENV['auth0Audience'] = "FIX_ME";
-        DDP_ENV['basePepperUrl'] = "FIX_ME";
+        DDP_ENV['auth0ClientId'] = "7RO0fGEmpGze4J5aPrgIax1hlZgfs7IJ";
+        DDP_ENV['auth0Domain'] = "rarex-prod.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "rarex-prod.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
     {{end}}
 {{end}}
 

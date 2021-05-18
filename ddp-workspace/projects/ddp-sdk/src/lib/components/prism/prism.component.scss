@@ -1,0 +1,144 @@
+.prism-title {
+    color: #454545;
+    font-size: 1.375rem;
+    line-height: 2.0625rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.prism-subtitle {
+    color: #454545;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    margin: 0;
+}
+
+.prism-field {
+    width: 24rem;
+
+    &__icon {
+        color: #787681;
+        position: relative;
+        top: 0.25rem;
+        padding-right: 5px;
+        box-sizing: content-box;
+    }
+
+    &__clear {
+        font-size: 1.125rem;
+        font-family: inherit;
+        border: none;
+        text-decoration: underline;
+        background: none;
+        color: #787681;
+        transition: 0.3s;
+
+        &:hover {
+            color: #454545;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .prism-field {
+        width: 20rem;
+    }
+}
+
+.no-data-message,
+.no-users-message {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.mat-table {
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.mat-spinner {
+    margin: 40px auto 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.guid-column {
+    flex: 0 0 185px;
+    min-width: 185px;
+}
+
+.short-id-column,
+.proxy-short-id-column {
+    flex: 0 0 65px;
+    min-width: 65px;
+}
+
+.invitation-column {
+    flex: 0 0 160px;
+    min-width: 160px;
+}
+
+.user-name-column,
+.proxy-name-column {
+    flex: 0 0 225px;
+    min-width: 225px;
+}
+
+.email-column {
+    flex: 0 0 250px;
+    word-break: break-all;
+    min-width: 250px;
+}
+
+.status-column {
+    flex: 0 0 160px;
+    min-width: 160px;
+}
+
+.legacy-short-id-column {
+    flex: 0 0 65px;
+    min-width: 65px;
+}
+
+.legacy-AltPid-column {
+    flex: 0 0 180px;
+    min-width: 180px;
+}
+
+.dashboard-column {
+    flex: 0 0 115px;
+    min-width: 115px;
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding-right: 15px;
+    box-sizing: content-box;
+}
+
+.mat-row,
+.mat-header-row {
+    display: inline-flex;
+}
+
+.table-container {
+    position: relative;
+
+    .mat-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+}
+
+.warning-container {
+    height: 20px;
+    margin-top: 20px;
+    color: #ed933a;
+
+    .mat-icon {
+        vertical-align: bottom;
+    }
+}
