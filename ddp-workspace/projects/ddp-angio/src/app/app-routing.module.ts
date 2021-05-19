@@ -114,11 +114,6 @@ const routes: Routes = [
             AuthGuard
         ]
     },
-    // {
-    //     path: 'dashboard',
-    //     redirectTo: 'dashboard/',
-    //     pathMatch: 'full'
-    // },
     {
         path: 'dashboard/:userGuid',
         component: DashboardComponent,
