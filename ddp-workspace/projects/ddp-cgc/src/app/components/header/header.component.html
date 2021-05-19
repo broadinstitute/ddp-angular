@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse header-collapse" id="menu">
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-item__link" [routerLink]="Route.Home">{{
+          <a class="nav-item__link" *ngIf="mode === Mode.STANDARD" [routerLink]="Route.Home">{{
             'Header.Links.Home' | translate
           }}</a>
         </li>
