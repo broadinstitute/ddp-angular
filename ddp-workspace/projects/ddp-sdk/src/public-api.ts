@@ -51,6 +51,7 @@ export * from './lib/models/invitationType';
 export * from './lib/models/activity/questionType';
 export * from './lib/models/statistic';
 export * from './lib/models/searchParticipant';
+export * from './lib/models/enrollmentStatusType';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
@@ -162,5 +163,7 @@ export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';
 export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
+
+export * from './lib/testsupport/componentMock';
 
 export * from './lib/compositeDisposable';

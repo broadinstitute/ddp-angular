@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType, ParticipantsSearchServiceAgent } from 'ddp-sdk';
 import { map, take, filter } from 'rxjs/operators';
 
 @Component({
@@ -73,8 +73,9 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
         private userInvitation: UserInvitationServiceAgent,
+        _participantsSearch: ParticipantsSearchServiceAgent,
         @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
-        super(_router, _announcements, config);
+        super(_router, _announcements, _participantsSearch, config);
     }
 
     public ngOnInit(): void {

@@ -2,8 +2,8 @@ import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter, Input } fro
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
-import { AnnouncementsServiceAgent, SearchParticipant } from 'ddp-sdk';
-import { Subscription } from 'rxjs';
+import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
+import { Observable, of, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -23,10 +23,11 @@ import { filter, map } from 'rxjs/operators';
                     </div>
                 </div>
             </div>
-            <ddp-subject-panel *ngIf="selectedUser"
+            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser"
                                [invitationId]="selectedUser.invitationId"
+                               [shortId]="selectedUser.hruid"
                                [email]="selectedUser.email || selectedUser.proxy?.email"
-                               [name]="selectedUser.firstName + selectedUser.lastName">
+                               [name]="selectedUser.firstName || selectedUser.lastName ? (selectedUser.firstName + ' ' + selectedUser.lastName) : ''">
             </ddp-subject-panel>
             <article class="PageContent">
                 <div class="PageLayout PageLayout-dashboard">
@@ -45,7 +46,7 @@ import { filter, map } from 'rxjs/operators';
                             </ng-container>
                             <section class="PageContent-section">
                                 <ddp-dashboard [studyGuid]="studyGuid"
-                                               [selectedUserGuid]="selectedUser.guid"
+                                               [selectedUserGuid]="selectedUserGuid"
                                                (open)="navigate($event)"
                                                (loadedEvent)="load($event)">
                                 </ddp-dashboard>
@@ -57,8 +58,9 @@ import { filter, map } from 'rxjs/operators';
         </div>`
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-    @Input() selectedUser: SearchParticipant;
+    @Input() selectedUserGuid: string;
 
+    public selectedUser$: Observable<SearchParticipant|null>;
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -67,14 +69,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private announcements: AnnouncementsServiceAgent,
+        private participantsSearch: ParticipantsSearchServiceAgent,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
     }
 
     public ngOnInit(): void {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
 
-        if (this.selectedUser) {
-            this.announcements.updateSelectedUser(this.selectedUser.guid);
+        if (this.selectedUserGuid) {
+            this.announcements.updateSelectedUser(this.selectedUserGuid);
         } else {
             this.announcements.resetSelectedUser();
         }
@@ -87,6 +90,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 })))
             ).subscribe(messages => this.announcementMessages = messages);
         this.anchor.add(anno);
+
+        this.selectedUser$ = this.selectedUserGuid ? this.participantsSearch.getParticipant(this.selectedUserGuid) : of(null);
     }
 
     public ngOnDestroy(): void {

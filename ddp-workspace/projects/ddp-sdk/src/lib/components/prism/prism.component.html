@@ -120,8 +120,9 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let element" class="dashboard-column">
                 <a mat-stroked-button
-                        [routerLink]="'/' + dashboardRoute + '/' + element.guid"
-                        [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }">
+                   class="dashboard-link"
+                   [routerLink]="'/' + dashboardRoute + '/' + element.guid"
+                   [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }">
                     {{'SDK.Prism.DashboardButton' | translate}}
                 </a>
             </mat-cell>

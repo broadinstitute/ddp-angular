@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap, map, takeUntil } from 'rxjs/operators';
 import { SearchParticipant } from '../../models/searchParticipant';
@@ -10,13 +10,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
+import { SessionStorageService } from '../../services/sessionStorage.service';
 
 @Component({
   selector: 'ddp-prism',
   templateUrl: './prism.component.html',
   styleUrls: ['./prism.component.scss'],
 })
-export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PrismComponent implements OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -30,16 +31,35 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
   public dashboardRoute: string;
   private ngUnsubscribe = new Subject();
   public readonly enrollmentStatusTypeToLabel = enrollmentStatusTypeToLabel;
+  private readonly searchParticipantsStorageName: string;
+  private readonly searchCountStorageName: string;
+  private readonly searchQueryStorageName: string;
 
   constructor(
     private participantsSearch: ParticipantsSearchServiceAgent,
     private router: Router,
-    @Inject('ddp.config') private config: ConfigurationService) {
+    private storageService: SessionStorageService,
+    @Inject('ddp.config') private config: ConfigurationService,
+    ) {
     this.displayedColumns = this.config.prismColumns;
     this.dashboardRoute = this.config.prismDashboardRoute;
-  }
+    this.searchParticipantsStorageName = `${this.config.studyGuid}_prism_search_participants`;
+    this.searchCountStorageName = `${this.config.studyGuid}_prism_search_participants_count`;
+    this.searchQueryStorageName = `${this.config.studyGuid}_prism_search_query`;
 
-  public ngOnInit(): void {
+    const savedSearchQuery = this.storageService.get(this.searchQueryStorageName);
+    const savedSearchCount = this.storageService.get(this.searchCountStorageName);
+    const savedSearchParticipants = JSON.parse(this.storageService.get(this.searchParticipantsStorageName));
+    if (savedSearchQuery) {
+      this.searchField.patchValue(savedSearchQuery);
+    }
+    if (savedSearchParticipants) {
+      this.dataSource.data = savedSearchParticipants;
+    }
+    if (savedSearchCount) {
+      this.totalCount = Number(savedSearchCount);
+    }
+
     this.initSearchListener();
   }
 
@@ -92,6 +112,10 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe(response => {
       this.dataSource.data = response?.results || [];
       this.totalCount = response?.totalCount || 0;
+
+      this.storageService.set(this.searchParticipantsStorageName, JSON.stringify(this.dataSource.data));
+      this.storageService.set(this.searchCountStorageName, String(this.totalCount));
+      this.storageService.set(this.searchQueryStorageName, this.searchField.value);
     });
   }
 

@@ -73,8 +73,8 @@ export class SubjectPanelComponent implements OnChanges {
     ngOnChanges(): void {
         this.subjectFields = [
             ...(this.name ? [{label: 'SDK.SubjectPanel.Name', value: this.name}] : []),
-            ...(this.email ? [{label: 'SDK.SubjectPanel.ShortId', value: this.email}] : []),
-            ...(this.shortId ? [{label: 'SDK.SubjectPanel.Email', value: this.shortId}] : []),
+            ...(this.email ? [{label: 'SDK.SubjectPanel.Email', value: this.email}] : []),
+            ...(this.shortId ? [{label: 'SDK.SubjectPanel.ShortId', value: this.shortId}] : []),
             ...(this.invitationId
                 ? [{label: 'SDK.SubjectPanel.InvitationCode', value: this.invitationPipe.transform(this.invitationId)}]
                 : []),
