@@ -44,6 +44,10 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        {{if eq $study_guid "cmi-mbc"}}
+            DDP_ENV['languageHostNames'] = [{languageCode: 'es', hostName: 'mbc-dot-broad-ddp-dev.uc.r.appspot.com'}];
+            DDP_ENV['baseHostName'] = 'mbc.dev.datadonationplatform.org';
+        {{end}}
     {{else if eq $environment "test"}}
         DDP_ENV['auth0Domain'] = "login-test.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-test.auth0.com";

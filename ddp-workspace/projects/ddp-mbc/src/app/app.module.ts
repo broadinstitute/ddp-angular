@@ -25,6 +25,8 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PartnersComponent } from './components/partners/partners.component';
+import { MbcConfigurationService } from './services/mbcConfiguration.service';
+import { LanguageHostRedirector } from './services/languageHostRedirector.service';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -76,7 +78,7 @@ tkCfg.showInfoForPhysicians = false;
 tkCfg.showBlog = false;
 tkCfg.blogUrl = 'http://mbc-project.blogspot.com/';
 
-export const config = new ConfigurationService();
+export const config = new MbcConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -94,8 +96,10 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+config.baseHostName = DDP_ENV.baseHostName;
+config.languageHostNames = DDP_ENV.languageHostNames || [];
 
-export function translateFactory(translate: TranslateService,
+export function translateFactory(redirector: LanguageHostRedirector, translate: TranslateService,
                                  injector: Injector,
                                  logger: LoggingService,
                                  language: LanguageService): () => Promise<any> {
@@ -143,6 +147,7 @@ export function translateFactory(translate: TranslateService,
       provide: APP_INITIALIZER,
       useFactory: translateFactory,
       deps: [
+        LanguageHostRedirector,
         TranslateService,
         Injector,
         LoggingService,
