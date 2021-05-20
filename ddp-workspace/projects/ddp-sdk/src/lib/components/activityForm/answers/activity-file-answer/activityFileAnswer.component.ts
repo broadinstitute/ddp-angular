@@ -1,11 +1,14 @@
 import {
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnDestroy,
     OnInit,
-    Output
+    Output,
+    ViewChild
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { EMPTY, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
@@ -17,6 +20,8 @@ import { LoggingService } from '../../../../services/logging.service';
 import { ActivityFileAnswerDto } from '../../../../models/activity/activityFileAnswerDto';
 import { FileUploadBody } from '../../../../models/fileUploadBody';
 import { FileUploadResponse } from '../../../../models/fileUploadResponse';
+import { ModalService } from '../../../../services/modal.service';
+import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -29,6 +34,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
+    @ViewChild('uploadBtn', {read: ElementRef}) private uploadButtonRef: ElementRef;
+    @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
 
     selectedFile: File;
     isFileSelected: boolean;
@@ -37,7 +44,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     private ngUnsubscribe = new Subject();
 
     constructor(private fileUploadService: FileUploadService,
-                private logger: LoggingService) {
+                private logger: LoggingService,
+                private dialog: MatDialog,
+                private modalService: ModalService) {
     }
 
     ngOnInit(): void {
@@ -77,9 +86,55 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
     }
 
-    uploadFile(): void {
-        // TODO: add confirm dialog "Are you sure to replace?" if there is already `this.uploadedFile`
+    submitFileUpload(): void {
+        if (this.uploadedFile) {
+            this.openConfirmDialog();
+        } else {
+            this.uploadFile();
+        }
+    }
 
+    public openConfirmDialog(): void {
+        const panelClass = 'file-upload-confirm-dialog';
+        const config = this.modalService.getDialogConfig(this.uploadButtonRef, panelClass);
+        config.data = {
+            title: 'SDK.FileUpload.ConfirmReuploadTitle',
+            confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',
+            cancelBtnText: 'SDK.FileUpload.CancelBtnText'
+        };
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+        dialogRef.afterClosed().subscribe((confirmUpload: boolean) => {
+            if (confirmUpload) {
+                this.uploadFile();
+            }
+        });
+    }
+
+    undoUploadedFile(): void {
+        const panelClass = 'file-upload-confirm-dialog';
+        const config = this.modalService.getDialogConfig(this.undoUploadButtonRef, panelClass);
+        config.data = {
+            title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
+            confirmBtnText: 'SDK.FileUpload.UndoBtnText',
+            cancelBtnText: 'SDK.FileUpload.CancelBtnText'
+        };
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+        dialogRef.afterClosed().subscribe((confirmUndo: boolean) => {
+            if (confirmUndo) {
+                this.patchAnswer(null);
+                this.setUploadedFile(null);
+            }
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+
+    private uploadFile(): void {
         this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.selectedFile)
             .pipe(
                 catchError(err => {
@@ -90,25 +145,12 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             )
             .subscribe((res) => {
                 this.patchAnswer(this.fileToUpload);
-                // check if ok ^, then =>
                 this.setUploadedFile({
                     ...this.fileToUpload,
                     isUploaded: true
                 });
                 this.resetSelectedFile();
             });
-    }
-
-    removeUploadedFile(): void {
-        // TODO: add confirm dialog "Are you sure to remove (undo uploading)?"
-        this.patchAnswer(null);
-        // check if ok ^, then =>
-        this.setUploadedFile(null);
-    }
-
-    ngOnDestroy(): void {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
     }
 
     private initUploadedFile(): void {

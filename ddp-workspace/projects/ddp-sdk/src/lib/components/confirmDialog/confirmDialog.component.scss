@@ -27,7 +27,7 @@ $dialog-arrow-half-width: $dialog-arrow-width / 2;
 }
 
 ::ng-deep {
-    & .modal-activity-block__delete-dialog {
+    & .modal-activity-block__delete-dialog, .file-upload-confirm-dialog {
         & > mat-dialog-container {
             padding: 27px 45px 20px 45px;
         }
