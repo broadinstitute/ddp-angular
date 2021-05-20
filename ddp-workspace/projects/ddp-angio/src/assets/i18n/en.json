@@ -561,6 +561,10 @@
                 "City": "City",
                 "State": "State"
             },
+            "Form" : {
+                "OtherPhysician": "Other physician",
+                "OtherInstitution": "Other institution"
+            },
             "PhysicianValidation": "Please fill out all required fields"
         },
         "MailAddress": {
@@ -654,6 +658,40 @@
         "TooltipAlt": "Information",
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid"
+        },
+        "Prism": {
+            "EnrollmentStatusType": {
+                "Registered": "Registered",
+                "Enrolled": "Enrolled",
+                "ExitedBeforeEnrollment": "Exited before enrollment",
+                "ExitedAfterEnrollment": "Exited after enrollment",
+                "ConsentSuspended": "Consent suspended",
+                "Completed": "Completed"
+            },
+            "ClearSearch": "Clear",
+            "ClearSearchLabel": "Clear user search",
+            "Title": "Enter the subject’s 12-digit invitation code, name, email, short id, or participant guid",
+            "Subtitle": "If the Short ID is unknown, consult the DSM Data Browser.",
+            "Placeholder": "Enter User Data",
+            "TableColumns": {
+                "Name": "Participant Name",
+                "Email": "Email",
+                "ShortId": "Short ID",
+                "InvitationId": "Invitation ID",
+                "Status": "Enrollment Status",
+                "ProxyName": "Proxy Name",
+                "ProxyShortId": "Proxy Short ID",
+                "ProxyGUID": "Proxy GUID",
+                "DashboardLink": "Dashboard Link",
+                "LegacyShortId": "Legacy Short ID",
+                "LegacyAltPid": "Legacy AltPID"
+            },
+            "NoUsers": "No participants are found",
+            "NoData": "No participants data is entered",
+            "DashboardButton": "Dashboard",
+            "MinQueryLengthHint":  "Enter at least {{length}} characters",
+            "DashboardButtonLabel":  "Navigates to dashboard for the user {{user}}",
+            "WarningSize": "You can see only {{count}} participant from {{totalCount}}. Specify your search request."
         }
     }
 }

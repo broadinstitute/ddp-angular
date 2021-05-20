@@ -52,7 +52,7 @@
 
       background-color: mat-color($app-theme, 650);
       border-radius: 12px;
-      transition: background-color .2s ease;
+      transition: background-color 0.2s ease;
     }
 
     &--completed {
@@ -79,4 +79,11 @@
       }
     }
   }
+}
+
+.page-count {
+  margin: 1.75rem 0;
+
+  font-weight: bold;
+  text-align: center;
 }

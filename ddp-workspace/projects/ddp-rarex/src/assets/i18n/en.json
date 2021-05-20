@@ -4,7 +4,8 @@
       "CREATED": "New",
       "IN_PROGRESS": "In Progress",
       "COMPLETE": "Complete"
-    }
+    },
+    "PageCount": "Page {{ current }} of {{ total }}"
   },
   "Header": {
     "Alts": {
@@ -14,7 +15,7 @@
   "Footer": {
     "Links": {
       "Home": "RARE-X.org",
-      "TermsAndConditions": "Terms and Conditions",
+      "TermsOfUse": "Terms of Use",
       "PrivacyPolicy": "Privacy Policy"
     }
   },
@@ -308,12 +309,13 @@
     }
   },
   "Dashboard": {
-    "Title": "My Dashboard"
+    "Title": "Dashboard"
   },
   "ParticipantsList": {
-    "Title": "Your Participants",
+    "Title": "Participant Dashboard",
     "NewParticipant": "New Participant",
-    "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below."
+    "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
+    "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Rare-X study personnel directly."
   },
   "ParticipantDeletionDialog": {
     "Text": "Are you sure you want to delete this participant? All data entered for this participant will be cleared."
@@ -349,7 +351,8 @@
     },
     "Navigation": {
       "Dashboard": "Dashboard"
-    }
+    },
+    "LogoutReminder": "Please log out after completing your session."
   },
   "SDK": {
     "DatePicker": {
@@ -403,6 +406,9 @@
     "DetailsPlaceholder": {
       "PluralForm": "characters remaining",
       "SingularForm": "character remaining"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Please check the date"
     },
     "MailAddress": {
       "Fields": {

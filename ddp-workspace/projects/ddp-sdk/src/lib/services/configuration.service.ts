@@ -67,4 +67,6 @@ export class ConfigurationService {
     doGcpErrorReporting: boolean;
     // activities which should use a vertical progress indicator
     usesVerticalStepper: string[] = [];
+    prismColumns: string[] = [];
+    prismDashboardRoute: string;
 }

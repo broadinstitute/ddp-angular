@@ -117,7 +117,7 @@ export class SessionMementoService implements OnDestroy {
         this.sessionSubject.next(session);
     }
 
-    public setParticipant(guid: string): void {
+    public setParticipant(guid?: string): void {
         if (this.session === null) {
             return;
         }
@@ -126,7 +126,7 @@ export class SessionMementoService implements OnDestroy {
         this.updateSession(session);
     }
 
-    public setInvitationId(invitationId: string): void {
+    public setInvitationId(invitationId?: string): void {
         if (this.session === null) {
             return;
         }
@@ -150,11 +150,7 @@ export class SessionMementoService implements OnDestroy {
 
     public isAuthenticatedSession(): boolean {
         const session = this.sessionSubject.value;
-        if (session === null || this.hasOnlyUserGuid(session)) {
-            return false;
-        }
-
-        return true;
+        return !(session === null || this.hasOnlyUserGuid(session));
     }
 
     public isAuthenticatedAdminSession(): boolean {

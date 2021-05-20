@@ -50,12 +50,14 @@ import { BlockType } from '../../../models/activity/blockType';
     </ng-template>
 
     <ng-template #content let-block="block">
-        <span *ngIf="block.title" class="ddp-block-title-bold"
-              [innerHTML]="block.title">
-        </span>
-        <div class="ddp-block-body"
-             [innerHTML]="block.content">
-        </div>
+        <ng-container *ngIf="block.shown">
+            <span *ngIf="block.title" class="ddp-block-title-bold"
+                  [innerHTML]="block.title">
+            </span>
+            <div class="ddp-block-body"
+                 [innerHTML]="block.content">
+            </div>
+        </ng-container>
     </ng-template>
 
     <ng-template #question let-block="block">

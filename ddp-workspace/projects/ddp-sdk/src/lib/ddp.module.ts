@@ -66,6 +66,7 @@ import { ActivityInstanceStatusServiceAgent } from './services/serviceAgents/act
 import { MailingListServiceAgent } from './services/serviceAgents/mailingListServiceAgent.service';
 import { InstitutionServiceAgent } from './services/serviceAgents/institutionServiceAgent.service';
 import { ResendEmailServiceAgent } from './services/serviceAgents/resendEmailServiceAgent.service';
+import { ParticipantsSearchServiceAgent } from './services/serviceAgents/participantsSearchServiceAgent.service';
 
 import { ActivityConverter } from './services/activity/activityConverter.service';
 import { ActivityQuestionConverter } from './services/activity/activityQuestionConverter.service';
@@ -86,6 +87,7 @@ import { ActivityBooleanAnswer } from './components/activityForm/answers/activit
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
+import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -149,6 +151,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
 
 import { ScriptLoaderService } from './services/scriptLoader.service';
 import { AddressService } from './services/address.service';
@@ -190,6 +193,9 @@ import { ActivityBlockComponent } from './components/activityForm/activity-block
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
 import { ActivityBlockModalService } from './services/activity-block-modal.service';
+import { FileUploadService } from './services/fileUpload.service';
+import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
+import { PrismComponent } from './components/prism/prism.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -236,6 +242,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MatStepperModule,
         MatAutocompleteModule,
         MatTooltipModule,
+        MatSortModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -309,6 +316,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
         ActivityBlockModalService,
+        FileUploadService,
+        ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -333,6 +342,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DashboardComponent,
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
+        PrismComponent,
 
         // activity form
         ActivityComponent,
@@ -342,6 +352,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBooleanAnswer,
         ActivityTextAnswer,
         ActivityTextInput,
+        ActivityFileAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -388,7 +399,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent
+        ActivityDeleteDialogComponent,
+        DropFileToUploadDirective
     ],
     exports: [
         NetworkSnifferComponent,
@@ -402,6 +414,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DashboardComponent,
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
+        PrismComponent,
 
         ActivityComponent,
         ActivityRedesignedComponent,
@@ -409,6 +422,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityQuestionComponent,
         ActivityBooleanAnswer,
         ActivityTextAnswer,
+        ActivityFileAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,

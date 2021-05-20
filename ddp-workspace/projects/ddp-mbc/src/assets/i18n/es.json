@@ -264,7 +264,7 @@
                     "Intro": "A continuación, se encuentra un navegador de datos interactivo para explorar información reportada por pacientes del MBCproject. Este contiene datos de pacientes que dieron consentimiento de los Estados Unidos y Canadá.",
                     "List": {
                         "Intro": "Información reportada por pacientes incluidos aquí son de pacientes que han completado los dos siguientes cuestionarios. Use los siguientes enlaces para poder conocer lo que pacientes responded cuando se registran:",
-                        "Item1": "Cuestionario Inicial",
+                        "Item1": "Cuestionario de inscripción inicial",
                         "Item2": "Primer Cuestionario de Seguimiento"
                     }
                 },
@@ -581,6 +581,11 @@
             "November": "noviembre",
             "December": "diciembre"
         },
+        "DateLabel": {
+          "YYYY": "AAAA",
+          "MM": "MM",
+          "DD": "DD"
+        },
         "UserMenu": {
             "DashboardButton": "Tablero de Progreso",
             "SignOutButton": "Cerrar Sesión"
@@ -598,26 +603,30 @@
         },
         "Institutions": {
             "Fields": {
-                "Name": "Nombre del médico",
+                "Name": "Nombre del doctor",
                 "Institution": "Institución",
-                "InstitutionAny": "Institución (si la hay)",
+                "InstitutionAny": "Institución (si aplica)",
                 "City": "Ciudad",
                 "State": "Estado"
+            },
+            "Form" : {
+                "OtherPhysician": "Otro doctor",
+                "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "MailAddress": {
             "Fields": {
-                "Name": "Nombre completo",
+                "Name": "Su nombre completo",
                 "Country": "País/territorio",
-                "Street1": "Dirección",
-                "Street2": "N.º de apartamento/piso",
+                "Street1": "Dirección postal",
+                "Street2": "Apt / piso #",
                 "State": {
                     "State": "Estado",
                     "Province": "Provincia",
                     "State/Province/Region": "Estado/Provincia/Región"
                 },
-                "City": "Cuidad",
+                "City": "Ciudad",
                 "Phone": "Teléfono",
                 "Zip": {
                     "Zip Code": "Código postal",

@@ -5,6 +5,10 @@
 </div>
 
 <ng-template #content>
+  <div class="PageContent-infobox logout-reminder">
+    {{ 'Common.LogoutReminder' | translate }}
+  </div>
+
   <app-notifications [messages]="messages"></app-notifications>
 
   <h1 class="title">
@@ -14,6 +18,10 @@
   <ng-container
     *ngTemplateOutlet="participants.length ? participantsList : noParticipants"
   ></ng-container>
+
+  <div *ngIf="errorMessage" class="ErrorMessage">
+    <span>{{ errorMessage }}</span>
+  </div>
 
   <div class="controls">
     <button

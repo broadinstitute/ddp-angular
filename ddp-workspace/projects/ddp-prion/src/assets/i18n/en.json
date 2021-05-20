@@ -79,7 +79,7 @@
           "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
           "site": "Massachusetts <br/>General Hospital, Boston,<br/>  Massachusetts, USA",
           "eligibilityRequirements": "You may be eligible for this study if any of the following apply to you: <br/><ol><li> Have a family history of genetic prion disease, including genetic Creutzfeld-Jakob Disease (CJD), fatal familial insomnia (FFI), or Gerstmann-Straussler-Scheinker syndrome (GSS). Note: you do not need to know your genetic status to participate.</li><li> Have received predictive testing indicating that you are at risk for one of the above diseases.</li><li> Are from a genetic prion disease family, though not at risk yourself</li><li> Wish to volunteer as a control</li></ol>In addition, participants must be:<dl ><dt>- Between the ages of 18-85</dt><dt>- Fluent in English</dt></dl>",
-          "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact MGHPrionStudy@partners.org or call 617-643-2351 to enroll"
+          "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/arnold-2017P000214-flyer.pdf\">PDF</a>, contact MGHPrionStudy@partners.org or call 617-726-0928 to enroll"
         },
         {
           "studyName": "Early Diagnosis of Human Prion Disease",
@@ -706,6 +706,10 @@
         "InstitutionAny": "Institution (if any)",
         "City": "City",
         "State": "State"
+      },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
       },
       "PhysicianValidation": "Please fill out all required fields"
     },
