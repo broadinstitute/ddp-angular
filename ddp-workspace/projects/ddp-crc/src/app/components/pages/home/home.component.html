@@ -1,1 +1,133 @@
-<h1>{{ 'HomePage.Title' | translate }}</h1>
+<section class="section section--cta">
+  <div class="cta">
+    <h1 class="cta__title">
+      {{ 'HomePage.Cta.Title' | translate }}
+    </h1>
+
+    <p class="cta__description">
+      {{ 'HomePage.Cta.Description' | translate }}
+    </p>
+
+    <div class="cta__btn-container">
+      <a class="button button--yellow" [routerLink]="Route.JoinUs">
+        {{ 'HomePage.Cta.JoinBtn' | translate }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.About.Title' | translate }}
+    </h2>
+
+    <p class="paragraph mb-5">
+      {{ 'HomePage.About.Paragraph' | translate }}
+    </p>
+
+    <h3>
+      {{ 'HomePage.About.Subtitle' | translate }}
+    </h3>
+
+    <ul class="bullet-list">
+      <li
+        class="bullet-list__item"
+        *ngFor="let Question of 'HomePage.About.Questions' | translate"
+      >
+        {{ Question }}
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--grey">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.Participation.Title' | translate }}
+    </h2>
+
+    <p class="paragraph mb-5">
+      {{ 'HomePage.Participation.Description' | translate }}
+    </p>
+
+    <h3>
+      {{ 'HomePage.Participation.Subtitle' | translate }}
+    </h3>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Duration' | translate"
+    ></p>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Provided' | translate"
+    ></p>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Activities' | translate"
+    ></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content-container">
+    <h2 class="text-center mb-2">
+      {{ 'HomePage.FAQ.Title' | translate }}
+    </h2>
+
+    <p
+      class="paragraph mb-3"
+      [innerHTML]="'HomePage.FAQ.Description' | translate"
+    ></p>
+
+    <mat-accordion displayMode="flat" [hideToggle]="true" [multi]="true">
+      <mat-expansion-panel
+        *ngFor="let Question of 'HomePage.FAQ.Questions' | translate"
+        class="mat-elevation-z0"
+      >
+        <mat-expansion-panel-header>
+          <mat-icon>add</mat-icon>{{ Question.Title }}
+        </mat-expansion-panel-header>
+
+        {{ Question.Answer }}
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>
+
+<section class="section section--grey">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.Team.Title' | translate }}
+    </h2>
+
+    <p class="paragraph mb-5">
+      {{ 'HomePage.Team.Description' | translate }}
+    </p>
+
+    <ng-container *ngFor="let Member of 'HomePage.Team.Members' | translate">
+      <div class="member">
+        <div class="member__img-container">
+          <img [src]="Member.ImageUrl" [alt]="Member.Name + ' image'" />
+        </div>
+
+        <div class="member__info">
+          <h4 class="member__name">
+            {{ Member.Name }}
+          </h4>
+
+          <h5 class="member__title">
+            {{ Member.Title }}
+          </h5>
+
+          <p class="member__bio">
+            {{ Member.Bio }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

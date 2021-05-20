@@ -1,0 +1,19 @@
+@import 'variables';
+
+.text-center {
+  text-align: center;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.link {
+  font-weight: 400;
+  color: $color-blue-2;
+  text-decoration: none;
+}

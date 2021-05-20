@@ -1,0 +1,21 @@
+app-home {
+  .mat-accordion {
+    .mat-expansion-panel {
+      .mat-expansion-panel-header {
+        .mat-content {
+          align-items: center;
+
+          font-size: 1.8rem;
+          font-weight: 300;
+        }
+      }
+
+      .mat-expansion-panel-body {
+        padding: 0 1.2rem 2rem 6.1rem;
+
+        font-size: 1.8rem;
+        font-weight: 300;
+      }
+    }
+  }
+}

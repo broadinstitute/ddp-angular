@@ -2,6 +2,8 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 import {
   DdpModule,
@@ -87,7 +89,14 @@ export function translateFactory(
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, HomeComponent],
-  imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    MatExpansionModule,
+    MatIconModule,
+    DdpModule,
+    ToolkitModule,
+    AppRoutingModule,
+  ],
   providers: [
     {
       provide: 'ddp.config',

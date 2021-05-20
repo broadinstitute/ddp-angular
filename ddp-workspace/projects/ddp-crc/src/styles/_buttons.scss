@@ -3,7 +3,7 @@
 .button {
   display: inline-block;
 
-  padding: 1.5rem 2.6rem;
+  padding: 1.65rem 2.8rem;
 
   border-radius: 12px;
 
@@ -19,8 +19,13 @@
 
     color: #000000;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: darken($color-yellow-1, 5%);
+    }
+
+    &:active {
+      background: darken($color-yellow-1, 10%);
     }
   }
 }

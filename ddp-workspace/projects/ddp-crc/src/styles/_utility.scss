@@ -1,0 +1,20 @@
+$sizes: (1, 2, 3, 4, 5);
+$space: 1rem;
+
+@each $size in $sizes {
+  .mt-#{$size} {
+    margin-top: #{$size * $space} !important;
+  }
+
+  .mr-#{$size} {
+    margin-right: #{$size * $space} !important;
+  }
+
+  .mb-#{$size} {
+    margin-bottom: #{$size * $space} !important;
+  }
+
+  .ml-#{$size} {
+    margin-left: #{$size * $space} !important;
+  }
+}
