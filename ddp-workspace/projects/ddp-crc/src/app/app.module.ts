@@ -15,6 +15,7 @@ import {
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -88,7 +89,7 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent],
+  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent],
   imports: [
     BrowserModule,
     MatExpansionModule,

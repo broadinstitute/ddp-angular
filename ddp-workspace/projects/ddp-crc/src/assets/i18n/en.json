@@ -9,6 +9,24 @@
       "SignUp": "Sign Up"
     }
   },
+  "Footer": {
+    "Circadia": {
+      "Title": "Circadia",
+      "Home": "Home",
+      "About": "About the Study",
+      "FAQ": "FAQ",
+      "Team": "Meet the Team",
+      "StayInformed": "Stay Informed",
+      "PrivacyPolicy": "Privacy Policy"
+    },
+    "ContactUs": {
+      "Title": "Contact Us"
+    },
+    "Participation": {
+      "Title": "Participation",
+      "SignUp": "Sign Up"
+    }
+  },
   "HomePage": {
     "Cta": {
       "Title": "Circadia is an online research study to understand circadian rhythm disorders",

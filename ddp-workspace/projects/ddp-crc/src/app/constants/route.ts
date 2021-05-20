@@ -5,4 +5,6 @@ export enum Route {
   FAQ = 'faq',
   Team = 'team',
   JoinUs = 'join-us',
+  StayInformed = 'stay-informed',
+  PrivacyPolicy = 'privacy-policy',
 }
