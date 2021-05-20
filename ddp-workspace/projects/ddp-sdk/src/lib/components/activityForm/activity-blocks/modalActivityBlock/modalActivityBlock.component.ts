@@ -18,8 +18,8 @@ import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityForm } from '../../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { LoggingService } from '../../../../services/logging.service';
-import { ActivityDeleteDialogComponent } from '../activityDeleteDialog/activityDeleteDialog.component';
-import { ActivityBlockModalService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/activity-block-modal.service';
+import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
+import { ModalService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal.service';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -54,7 +54,7 @@ export class ModalActivityBlockComponent {
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
                 private logger: LoggingService,
-                private modalService: ActivityBlockModalService) {
+                private modalService: ModalService) {
     }
 
     get isAllQuestionsCompleted(): boolean {
@@ -105,9 +105,15 @@ export class ModalActivityBlockComponent {
     }
 
     public openDeleteDialog(): void {
-        const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
+        const panelClass = 'modal-activity-block__delete-dialog';
+        const config = this.modalService.getDialogConfig(this.deleteButtonRef, panelClass);
+        config.data = {
+            title: 'SDK.ConfirmDeletion',
+            confirmBtnText: 'SDK.DeleteButton',
+            cancelBtnText: 'SDK.CancelBtn'
+        };
 
-        const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
             if (confirmDelete) {
                 this.deleteActivityInstance();

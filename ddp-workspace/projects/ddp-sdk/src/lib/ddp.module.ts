@@ -191,8 +191,8 @@ import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServi
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
-import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
-import { ActivityBlockModalService } from './services/activity-block-modal.service';
+import { ConfirmDialogComponent } from './components/confirmDialog/confirmDialog.component';
+import { ModalService } from './services/modal.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
@@ -315,7 +315,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
-        ActivityBlockModalService,
+        ModalService,
         FileUploadService,
         ParticipantsSearchServiceAgent,
         {
@@ -399,7 +399,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent,
+        ConfirmDialogComponent,
         DropFileToUploadDirective
     ],
     exports: [
@@ -472,7 +472,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ProgressIndicatorComponent,
         ActivityBlockComponent
     ],
-    entryComponents: [ActivityDeleteDialogComponent]
+    entryComponents: [ConfirmDialogComponent]
 })
 export class DdpModule {
 }

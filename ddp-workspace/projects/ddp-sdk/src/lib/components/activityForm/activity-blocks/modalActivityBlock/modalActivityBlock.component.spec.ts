@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
-import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
+import { ModalService } from '../../../../services/modal.service';
 
 describe('ModalActivityBlockComponent', () => {
   @Component({
@@ -51,7 +51,7 @@ describe('ModalActivityBlockComponent', () => {
         { provide: ActivityServiceAgent, useValue: {} },
         { provide: MatDialog, useValue: {} },
         { provide: LoggingService, useValue: {} },
-        { provide: ActivityBlockModalService, useValue: {} }
+        { provide: ModalService, useValue: {} }
       ],
       imports: [
         MatCardModule,
