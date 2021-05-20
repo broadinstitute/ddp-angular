@@ -38,7 +38,7 @@ commands:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run-linter-check
-      - run-tests
+      - run-tests:
           study_key: << parameters.study_key >>
       - build-app:
           study_key: << parameters.study_key >>
@@ -61,7 +61,7 @@ commands:
           steps:
             - set-deployment-environment
             - run-linter-check
-            - run-tests
+            - run-tests:
                 study_key: << parameters.study_key >>
             - build-app:
                 study_key: << parameters.study_key >>
