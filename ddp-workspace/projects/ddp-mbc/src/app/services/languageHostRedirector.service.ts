@@ -5,6 +5,11 @@ import { MbcConfigurationService } from './mbcConfiguration.service';
 @Injectable({
   providedIn: 'root',
 })
+/**
+ * Service meant to be used from app initializer to redirect from a hostname that is meant to be in a particular language,
+ * e.g., MyStudyInSpanish.org , to the "real" host, making sure after redirection that the proper language is selected
+ * Note that we leverage existing ChangeLanguageRedirectComponent
+ */
 export class LanguageHostRedirector  {
   constructor(@Inject('ddp.config') private mbcConfig: MbcConfigurationService) {
       const matchingHostName = mbcConfig.languageHostNames.find(each => each.hostName === window.location.hostname);
