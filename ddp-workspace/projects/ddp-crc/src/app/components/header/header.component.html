@@ -17,25 +17,29 @@
         </li>
 
         <li class="nav-list__item">
-          <a class="nav-list__link" [routerLink]="Route.About">
+          <a class="nav-list__link" [routerLink]="Route.Home" fragment="about">
             {{ 'Header.Links.About' | translate }}
           </a>
         </li>
 
         <li class="nav-list__item">
-          <a class="nav-list__link" [routerLink]="Route.Participation">
+          <a
+            class="nav-list__link"
+            [routerLink]="Route.Home"
+            fragment="participation"
+          >
             {{ 'Header.Links.Participation' | translate }}
           </a>
         </li>
 
         <li class="nav-list__item">
-          <a class="nav-list__link" [routerLink]="Route.FAQ">
+          <a class="nav-list__link" [routerLink]="Route.Home" fragment="faq">
             {{ 'Header.Links.FAQ' | translate }}
           </a>
         </li>
 
         <li class="nav-list__item">
-          <a class="nav-list__link" [routerLink]="Route.Team">
+          <a class="nav-list__link" [routerLink]="Route.Home" fragment="team">
             {{ 'Header.Links.Team' | translate }}
           </a>
         </li>
