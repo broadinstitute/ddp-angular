@@ -295,7 +295,7 @@ commands:
           command: |
             mkdir -p /tmp/junit
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
-            ng test ddp-toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
             ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
