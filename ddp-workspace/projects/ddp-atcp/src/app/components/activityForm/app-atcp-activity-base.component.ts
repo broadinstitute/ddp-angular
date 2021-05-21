@@ -21,7 +21,6 @@ import {
   ActivityForm,
   LoggingService,
   LanguageService,
-  SessionMementoService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
@@ -221,12 +220,11 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     renderer: Renderer2,
     submitService: SubmitAnnouncementService,
     analytics: AnalyticsEventsService,
-    session: SessionMementoService,
     @Inject(DOCUMENT) document: any,
     // using Injector here as we get error using constructor injection
     // in both child and parent classes
     injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, session, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
     this.multiGovernedUserService = injector.get(MultiGovernedUserService);
     this.languageService = injector.get(LanguageService);

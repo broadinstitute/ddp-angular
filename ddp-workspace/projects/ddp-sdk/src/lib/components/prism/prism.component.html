@@ -143,5 +143,9 @@
         <mat-spinner color="primary" diameter="30"></mat-spinner>
     </ng-template>
 </div>
-<mat-paginator [hidden]="isSearchLoading || dataSource.data.length <= 10" [pageSizeOptions]="[10, 25, 100]">
+<mat-paginator [hidden]="isSearchLoading || dataSource.data.length <= 10"
+               [pageSizeOptions]="[10, 25, 100]"
+               [pageIndex]="initialPageIndex"
+               [pageSize]="initialPageSize"
+               (page)="updatePageDataInStorage($event)">
 </mat-paginator>

@@ -23,12 +23,7 @@ import { filter, map } from 'rxjs/operators';
                     </div>
                 </div>
             </div>
-            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser"
-                               [invitationId]="selectedUser.invitationId"
-                               [shortId]="selectedUser.hruid"
-                               [email]="selectedUser.email || selectedUser.proxy?.email"
-                               [name]="selectedUser.firstName || selectedUser.lastName ? (selectedUser.firstName + ' ' + selectedUser.lastName) : ''">
-            </ddp-subject-panel>
+            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
             <article class="PageContent">
                 <div class="PageLayout PageLayout-dashboard">
                     <div class="row NoMargin">

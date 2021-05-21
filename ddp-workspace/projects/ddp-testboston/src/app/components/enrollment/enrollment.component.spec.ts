@@ -16,7 +16,6 @@ describe('EnrollmentComponent', () => {
   let fixture: ComponentFixture<EnrollmentComponent>;
   let component: EnrollmentComponent;
   let debugElement: DebugElement;
-  const invitationId = '123';
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
@@ -27,7 +26,7 @@ describe('EnrollmentComponent', () => {
         NoopAnimationsModule
       ],
       providers: [
-          { provide: SessionMementoService, useValue: { session: { invitationId } } },
+          { provide: SessionMementoService, useValue: { session: { } } },
           { provide: UserProfileServiceAgent, useValue: {} },
           { provide: WorkflowServiceAgent, useValue: {} },
           { provide: WorkflowBuilderService, useValue: {} },
@@ -47,9 +46,5 @@ describe('EnrollmentComponent', () => {
 
   it('should create component', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should set invitation id correctly', () => {
-    expect(component.invitationId).toBe(invitationId);
   });
 });

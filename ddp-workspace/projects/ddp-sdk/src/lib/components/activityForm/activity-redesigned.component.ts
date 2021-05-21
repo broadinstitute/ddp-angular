@@ -18,7 +18,6 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { LoggingService } from '../../services/logging.service';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 
 @Component({
     selector: 'ddp-activity-redesigned',
@@ -39,11 +38,10 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         renderer: Renderer2,
         submitService: SubmitAnnouncementService,
         analytics: AnalyticsEventsService,
-        session: SessionMementoService,
         @Inject(DOCUMENT) document: any,
         injector: Injector
     ) {
-        super(logger, windowRef, renderer, submitService, analytics, session, document, injector);
+        super(logger, windowRef, renderer, submitService, analytics, document, injector);
         this.subscription = this.getIsLoaded$().subscribe(_ => {
             const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
             this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);

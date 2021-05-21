@@ -220,6 +220,8 @@ describe('PrismComponent', () => {
     expect(component.dataSource.data).toEqual([]);
     expect(component.totalCount).toBe(0);
     expect(component.searchField.value).toBeFalsy();
+    expect(component.initialPageIndex).toBe(1);
+    expect(component.initialPageSize).toBe(10);
   }));
 
   it('sets table data correctly', fakeAsync(() => {
@@ -350,13 +352,17 @@ describe('PrismComponent with storage', () => {
       email: 'proxytest@test.com',
     }
   }];
-  const count = '12';
+  const count = 12;
+  const pageSize = 25;
+  const pageIndex = 2;
 
   beforeEach(async() => {
     storageServiceSpy = jasmine.createSpyObj('storageServiceSpy', { get: null, set: undefined });
     storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_query`).and.returnValue(searchQuery);
     storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_participants`).and.returnValue(JSON.stringify(participants));
-    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_participants_count`).and.returnValue(count);
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_participants_count`).and.returnValue(String(count));
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_pagination_size`).and.returnValue(String(pageSize));
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_pagination_index`).and.returnValue(String(pageIndex));
     await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
@@ -396,7 +402,9 @@ describe('PrismComponent with storage', () => {
 
   it('sets initial data from storage', fakeAsync(() => {
     expect(component.dataSource.data).toEqual(participants);
-    expect(component.totalCount).toBe(Number(count));
+    expect(component.totalCount).toBe(count);
     expect(component.searchField.value).toBe(searchQuery);
+    expect(component.initialPageIndex).toBe(pageIndex);
+    expect(component.initialPageSize).toBe(pageSize);
   }));
 });

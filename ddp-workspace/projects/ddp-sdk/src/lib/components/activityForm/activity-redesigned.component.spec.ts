@@ -7,7 +7,6 @@ import {
     AnalyticsEventsService,
     LoggingService,
     mockComponent,
-    SessionMementoService,
     WindowRef,
     WorkflowServiceAgent
 } from 'ddp-sdk';
@@ -28,7 +27,6 @@ describe('ActivityRedesignedComponent', () => {
     let fixture: ComponentFixture<ActivityRedesignedComponent>;
     let component: ActivityRedesignedComponent;
     let debugElement: DebugElement;
-    const invitationId = 'testInvitationId';
 
     beforeEach(async() => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['invitationId'] });
@@ -48,7 +46,6 @@ describe('ActivityRedesignedComponent', () => {
                 { provide: LoggingService, useValue: {} },
                 { provide: WindowRef, useValue: {} },
                 { provide: AnalyticsEventsService, useValue: {} },
-                { provide: SessionMementoService, useValue: { session: { invitationId } } },
                 { provide: ActivityServiceAgent, useValue: serviceAgentSpy },
                 { provide: WorkflowServiceAgent, useValue: {} },
                 { provide: 'ddp.config', useValue: { usesVerticalStepper: [] } },
@@ -67,9 +64,5 @@ describe('ActivityRedesignedComponent', () => {
 
     it('should create component', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should set invitation id from session', () => {
-        expect(component.invitationId).toBe(invitationId);
     });
 });

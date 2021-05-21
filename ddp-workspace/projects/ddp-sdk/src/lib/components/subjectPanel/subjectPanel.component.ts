@@ -1,7 +1,8 @@
-import { Component, Inject, Input, OnChanges } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { SessionMementoService } from '../../services/sessionMemento.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { InvitationPipe } from '../../pipes/invitationFormatter.pipe';
+import { SearchParticipant } from '../../models/searchParticipant';
 
 interface SubjectField {
     label: string;
@@ -13,12 +14,8 @@ interface SubjectField {
     templateUrl: './subjectPanel.component.html',
     styleUrls: ['./subjectPanel.component.scss'],
 })
-export class SubjectPanelComponent implements OnChanges {
-    // todo: replace list of inputs with one input of SearchParticipant type once new prism will be integrated to testboston
-    @Input() name: string;
-    @Input() shortId: string;
-    @Input() email: string;
-    @Input() invitationId: string;
+export class SubjectPanelComponent implements OnInit {
+    @Input() subject: SearchParticipant;
 
     public subjectFields: SubjectField[] = [];
 
@@ -27,15 +24,27 @@ export class SubjectPanelComponent implements OnChanges {
         private invitationPipe: InvitationPipe,
         @Inject('ddp.config') private config: ConfigurationService) { }
 
-    ngOnChanges(): void {
-        this.subjectFields = [
-            ...(this.name ? [{label: 'SDK.SubjectPanel.Name', value: this.name}] : []),
-            ...(this.email ? [{label: 'SDK.SubjectPanel.Email', value: this.email}] : []),
-            ...(this.shortId ? [{label: 'SDK.SubjectPanel.ShortId', value: this.shortId}] : []),
-            ...(this.invitationId
-                ? [{label: 'SDK.SubjectPanel.InvitationCode', value: this.invitationPipe.transform(this.invitationId)}]
-                : []),
-        ];
+    ngOnInit(): void {
+        if (this.subject) {
+            this.subjectFields = [
+                ...(this.subject.firstName || this.subject.lastName
+                    ? [{label: 'SDK.SubjectPanel.Name', value: (this.subject.firstName + ' ' + this.subject.lastName)}]
+                    : []),
+                ...(this.subject.email || this.subject.proxy?.email
+                    ? [{label: 'SDK.SubjectPanel.Email', value: this.subject.email || this.subject.proxy?.email}]
+                    : []),
+                ...(this.subject.hruid ? [{label: 'SDK.SubjectPanel.ShortId', value: this.subject.hruid}] : []),
+                ...(this.subject.invitationId
+                    ? [{label: 'SDK.SubjectPanel.InvitationCode', value: this.invitationPipe.transform(this.subject.invitationId)}]
+                    : []),
+            ];
+            // todo: remove once new prism will be integrated to testboston
+        } else if (this.session.session.invitationId) {
+            this.subjectFields = [{
+                label: 'SDK.SubjectPanel.InvitationCode',
+                value: this.invitationPipe.transform(this.session.session.invitationId)
+            }];
+        }
     }
 
     public isAdmin(): boolean {
@@ -47,6 +56,7 @@ export class SubjectPanelComponent implements OnChanges {
     }
 
     public hasUserData(): boolean {
-        return !!this.shortId || !!this.email || !!this.invitationId;
+        // todo: remove once new prism will be integrated to testboston
+        return !!this.subject || !!this.session.session.invitationId;
     }
 }

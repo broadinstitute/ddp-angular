@@ -24,7 +24,6 @@ export class EnrollmentComponent implements OnInit {
   public accountForm: FormGroup;
   public isLoading = false;
   public showError = false;
-  public invitationId: string;
   private profile: UserProfile;
 
   constructor(
@@ -39,7 +38,6 @@ export class EnrollmentComponent implements OnInit {
   public ngOnInit(): void {
     this.initAccountForm();
     this.setupInitialState();
-    this.invitationId = this.session.session.invitationId;
   }
 
   public onSubmit(): void {
@@ -49,8 +47,9 @@ export class EnrollmentComponent implements OnInit {
 
     const profile = this.createProfile();
     const email = this.accountForm.controls.email.value;
+    const invitationId = this.session.session.invitationId;
     const participantGuid = this.session.session.participantGuid;
-    const participantGuid$ = participantGuid ? of(participantGuid) : this.createStudyParticipant(this.invitationId);
+    const participantGuid$ = participantGuid ? of(participantGuid) : this.createStudyParticipant(invitationId);
 
     this.isLoading = true;
     this.accountForm.disable();
@@ -102,7 +101,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   private setupInitialState(): void {
-    const invitationId$ = of(this.invitationId);
+    const invitationId$ = of(this.session.session.invitationId);
 
     invitationId$.pipe(
       take(1),

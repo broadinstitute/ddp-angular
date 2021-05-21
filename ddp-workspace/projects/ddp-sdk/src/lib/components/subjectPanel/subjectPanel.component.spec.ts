@@ -1,13 +1,13 @@
 /* tslint:disable:max-classes-per-file */
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { SubjectPanelComponent, SessionMementoService, InvitationPipe } from 'ddp-sdk';
+import { SubjectPanelComponent, SessionMementoService, InvitationPipe, EnrollmentStatusType } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule } from '@angular/material/icon';
+import { Session } from '../../models/session';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -19,25 +19,12 @@ class TranslateLoaderMock implements TranslateLoader {
 }
 
 describe('SubjectPanelComponent', () => {
-    @Component({
-        template: `
-        <ddp-subject-panel [name]="name" [shortId]="shortId" [email]="email" [invitationId]="invitationId">
-        </ddp-subject-panel>`
-    })
-    class TestHostComponent {
-        name: string;
-        shortId: string;
-        email: string;
-        invitationId: string;
-    }
-
-    let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let fixture: ComponentFixture<SubjectPanelComponent>;
     let component: SubjectPanelComponent;
-    let sessionSpy: jasmine.SpyObj<SessionMementoService>;
+    let sessionMock: SessionMementoService;
 
     beforeEach(async() => {
-        sessionSpy = jasmine.createSpyObj('sessionSpy', { isAuthenticatedAdminSession: true });
+        sessionMock = { isAuthenticatedAdminSession: () => true, session: {} as Session } as SessionMementoService;
         const invitationPipeSpy = jasmine.createSpyObj('invitationPipeSpy', { transform: 'transformedInvitation' });
         await TestBed.configureTestingModule({
             imports: [
@@ -49,11 +36,11 @@ describe('SubjectPanelComponent', () => {
                 }),
             ],
             providers: [
-                { provide: SessionMementoService , useValue: sessionSpy },
+                { provide: SessionMementoService , useValue: sessionMock },
                 { provide: InvitationPipe , useValue: invitationPipeSpy },
                 { provide: 'ddp.config', useValue: { lookupPageUrl: 'lookupPageUrl' } },
             ],
-            declarations: [TestHostComponent, SubjectPanelComponent],
+            declarations: [SubjectPanelComponent],
         })
             .compileComponents();
 
@@ -62,9 +49,8 @@ describe('SubjectPanelComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestHostComponent);
-        hostComponent = fixture.debugElement.componentInstance;
-        component = fixture.debugElement.query(By.directive(SubjectPanelComponent)).componentInstance;
+        fixture = TestBed.createComponent(SubjectPanelComponent);
+        component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
 
@@ -73,24 +59,29 @@ describe('SubjectPanelComponent', () => {
     });
 
     it('should not display subject panel for not admins', () => {
-        sessionSpy.isAuthenticatedAdminSession.and.returnValue(false);
+        spyOn(sessionMock, 'isAuthenticatedAdminSession').and.returnValue(false);
         fixture.detectChanges();
 
         const panel = fixture.debugElement.query(By.css('.ddp-subject-panel'));
         expect(panel).toBeFalsy();
     });
 
-    it('should not display subject panel for admins if no selected user data', () => {
-        sessionSpy.isAuthenticatedAdminSession.and.returnValue(true);
+    it('should not display subject panel for admins if no subject was passed', () => {
+        spyOn(sessionMock, 'isAuthenticatedAdminSession').and.returnValue(true);
         fixture.detectChanges();
 
         const panel = fixture.debugElement.query(By.css('.ddp-subject-panel'));
         expect(panel).toBeFalsy();
     });
 
-    it('should not display subject panel for admins if there is some user data', () => {
-        sessionSpy.isAuthenticatedAdminSession.and.returnValue(true);
-        hostComponent.email = 'testEmail@gmail.com';
+    it('should display subject panel for admins if subject was passed', () => {
+        spyOn(sessionMock, 'isAuthenticatedAdminSession').and.returnValue(true);
+        component.subject = {
+            guid: '1234',
+            hruid: '5678',
+            status: EnrollmentStatusType.COMPLETED,
+        };
+        component.ngOnInit();
         fixture.detectChanges();
 
         const panel = fixture.debugElement.query(By.css('.ddp-subject-panel'));
@@ -98,11 +89,17 @@ describe('SubjectPanelComponent', () => {
     });
 
     it('sets subjectFields correctly', () => {
-        sessionSpy.isAuthenticatedAdminSession.and.returnValue(true);
-        hostComponent.email = 'testEmail@gmail.com';
-        hostComponent.shortId = 'testShortId';
-        hostComponent.name = 'test user name';
-        hostComponent.invitationId = 'TB6QTVAGHAHT';
+        spyOn(sessionMock, 'isAuthenticatedAdminSession').and.returnValue(true);
+        component.subject = {
+            guid: '1234',
+            hruid: 'testShortId',
+            status: EnrollmentStatusType.COMPLETED,
+            email: 'testEmail@gmail.com',
+            firstName: 'test user',
+            lastName: 'name',
+            invitationId: 'TB6QTVAGHAHT'
+        };
+        component.ngOnInit();
         fixture.detectChanges();
 
         expect(component.subjectFields).toEqual([
@@ -114,9 +111,15 @@ describe('SubjectPanelComponent', () => {
     });
 
     it('sets subjectFields correctly if some data is missed', () => {
-        sessionSpy.isAuthenticatedAdminSession.and.returnValue(true);
-        hostComponent.shortId = 'testShortId';
-        hostComponent.name = 'test user name';
+        spyOn(sessionMock, 'isAuthenticatedAdminSession').and.returnValue(true);
+        component.subject = {
+            guid: '1234',
+            hruid: 'testShortId',
+            status: EnrollmentStatusType.COMPLETED,
+            firstName: 'test user',
+            lastName: 'name',
+        };
+        component.ngOnInit();
         fixture.detectChanges();
 
         expect(component.subjectFields).toEqual([

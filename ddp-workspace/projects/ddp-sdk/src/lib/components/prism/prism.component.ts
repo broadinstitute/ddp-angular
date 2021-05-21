@@ -6,7 +6,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
 import { ConfigurationService } from '../../services/configuration.service';
 import { enrollmentStatusTypeToLabel } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
@@ -31,9 +31,13 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
   public dashboardRoute: string;
   private ngUnsubscribe = new Subject();
   public readonly enrollmentStatusTypeToLabel = enrollmentStatusTypeToLabel;
+  public readonly initialPageIndex: number;
+  public readonly initialPageSize: number;
   private readonly searchParticipantsStorageName: string;
   private readonly searchCountStorageName: string;
   private readonly searchQueryStorageName: string;
+  private readonly paginationSizeStorageName: string;
+  private readonly paginationIndexStorageName: string;
 
   constructor(
     private participantsSearch: ParticipantsSearchServiceAgent,
@@ -46,7 +50,11 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
     this.searchParticipantsStorageName = `${this.config.studyGuid}_prism_search_participants`;
     this.searchCountStorageName = `${this.config.studyGuid}_prism_search_participants_count`;
     this.searchQueryStorageName = `${this.config.studyGuid}_prism_search_query`;
+    this.paginationSizeStorageName = `${this.config.studyGuid}_prism_search_pagination_size`;
+    this.paginationIndexStorageName = `${this.config.studyGuid}_prism_search_pagination_index`;
 
+    this.initialPageIndex = Number(this.storageService.get(this.paginationIndexStorageName)) || 1;
+    this.initialPageSize = Number(this.storageService.get(this.paginationSizeStorageName)) || 10;
     const savedSearchQuery = this.storageService.get(this.searchQueryStorageName);
     const savedSearchCount = this.storageService.get(this.searchCountStorageName);
     const savedSearchParticipants = JSON.parse(this.storageService.get(this.searchParticipantsStorageName));
@@ -121,5 +129,10 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
 
   public getUserLabel(user: SearchParticipant): string {
     return user.firstName || user.lastName ? `${user.firstName} ${user.lastName}` : user.guid;
+  }
+
+  public updatePageDataInStorage($event: PageEvent): void {
+    this.storageService.set(this.paginationSizeStorageName, String($event.pageSize));
+    this.storageService.set(this.paginationIndexStorageName, String($event.pageIndex));
   }
 }
