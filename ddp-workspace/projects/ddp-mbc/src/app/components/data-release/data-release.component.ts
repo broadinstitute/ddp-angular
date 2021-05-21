@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { DisclaimerComponent, ToolkitConfigurationService } from 'toolkit';
+import { LanguageService } from 'ddp-sdk';
 
 @Component({
     selector: 'app-data-release',
@@ -16,7 +17,8 @@ export class DataReleaseComponent implements OnInit {
     public iframeHeight: number;
 
     constructor(private dialog: MatDialog,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+                @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+                private languageService: LanguageService) { }
 
     public ngOnInit(): void {
         this.dataEmail = this.toolkitConfiguration.dataEmail;
@@ -43,5 +45,9 @@ export class DataReleaseComponent implements OnInit {
 
     public get isMobile(): boolean {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    public get currentLanguage(): string {
+        return this.languageService.getAppLanguageCode();
     }
 }

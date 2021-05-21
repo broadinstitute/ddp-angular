@@ -173,7 +173,8 @@
                                     <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item1.Text</span>
                                 </li>
                                 <li class="PageContent-text PageContent-text-list">
-                                    <a href="AboutYouSurvey.pdf" target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Link</a>
+                                    <a [href]="currentLanguage === 'es' ? 'AboutYouSurveySpanish.pdf' : 'AboutYouSurveyV2.pdf'"
+                                       target="_blank" class="Link" translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Link</a>
                                     <span translate>Toolkit.DataRelease.Appendices.AppendicesList.Item2.Text</span>
                                 </li>
                                 <li class="PageContent-text PageContent-text-list">
