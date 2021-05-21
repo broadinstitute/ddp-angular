@@ -56,9 +56,13 @@ export class StaticContentBlockEditorComponent implements OnInit, OnDestroy {
     // TODO: How do we turn on other elements like <li><ol>, etc?
     public editorInit(): object {
         return {
-            toolbar: 'pepper',
+            toolbar:  `undo redo | code | styleselect | bold italic |
+                alignleft aligncenter alignright alignjustify |bullist numlist outdent indent | link image | print preview media fullpage |
+                forecolor backcolor emoticons | help`,
+            plugins: `advlist autolink link image lists charmap hr anchor
+            searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media
+            table template paste help advcode`,
             setup: editor => {
-                let toggled = false;
                 editor.ui.registry.addMenuButton('pepper', {
                     text: 'pepper',
                     fetch: callback => {
@@ -81,10 +85,6 @@ export class StaticContentBlockEditorComponent implements OnInit, OnDestroy {
         return this.contentBlockSubject.value?.bodyTemplate ?
             new SimpleTemplate(this.contentBlockSubject.value?.bodyTemplate).getTranslationText(this.config.defaultLanguageCode)
             : '';
-    }
-
-    onContentChange({ event, editor }): void {
-        this.formGroup.patchValue({ body: editor.getContent() });
     }
 
     private updateForm(contentBlock: ContentBlockDef): void {
