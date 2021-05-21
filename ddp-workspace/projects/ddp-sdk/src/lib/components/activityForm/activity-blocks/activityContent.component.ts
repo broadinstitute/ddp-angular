@@ -10,5 +10,5 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ActivityContentComponent {
     @Input() block: ActivityContentBlock;
-    constructor(private sanitizer: DomSanitizer) {}
+    constructor(public sanitizer: DomSanitizer) {}
 }
