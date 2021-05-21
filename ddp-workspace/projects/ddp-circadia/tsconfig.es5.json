@@ -3,5 +3,5 @@
   "compilerOptions": {
     "target": "es5"
   },
-  "include": ["projects/ddp-crc/src/**/*.d.ts"]
+  "include": ["projects/ddp-circadia/src/**/*.d.ts"]
 }

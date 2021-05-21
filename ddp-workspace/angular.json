@@ -2048,33 +2048,33 @@
         }
       }
     },
-    "ddp-crc": {
+    "ddp-circadia": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ddp-crc",
-      "sourceRoot": "projects/ddp-crc/src",
+      "root": "projects/ddp-circadia",
+      "sourceRoot": "projects/ddp-circadia/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ddp-crc",
-            "index": "projects/ddp-crc/src/index.html",
-            "main": "projects/ddp-crc/src/main.ts",
-            "polyfills": "projects/ddp-crc/src/polyfills.ts",
-            "tsConfig": "projects/ddp-crc/tsconfig.app.json",
+            "outputPath": "dist/ddp-circadia",
+            "index": "projects/ddp-circadia/src/index.html",
+            "main": "projects/ddp-circadia/src/main.ts",
+            "polyfills": "projects/ddp-circadia/src/polyfills.ts",
+            "tsConfig": "projects/ddp-circadia/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/ddp-crc/src/favicon.ico",
-              "projects/ddp-crc/src/assets",
+              "projects/ddp-circadia/src/favicon.ico",
+              "projects/ddp-circadia/src/assets",
               {
                 "glob": "pepperConfig.js",
-                "input": "projects/ddp-crc/output-config/",
+                "input": "projects/ddp-circadia/output-config/",
                 "output": "assets/config"
               }
             ],
             "styles": [
-              "projects/ddp-crc/src/styles.scss"
+              "projects/ddp-circadia/src/styles.scss"
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
@@ -2084,8 +2084,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ddp-crc/src/environments/environment.ts",
-                  "with": "projects/ddp-crc/src/environments/environment.prod.ts"
+                  "replace": "projects/ddp-circadia/src/environments/environment.ts",
+                  "with": "projects/ddp-circadia/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -2115,43 +2115,43 @@
                   "maximumWarning": "25kb"
                 }
               ],
-              "tsConfig": "projects/ddp-crc/tsconfig.es5.json"
+              "tsConfig": "projects/ddp-circadia/tsconfig.es5.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ddp-crc:build"
+            "browserTarget": "ddp-circadia:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ddp-crc:build:production"
+              "browserTarget": "ddp-circadia:build:production"
             },
             "es5": {
-              "browserTarget": "ddp-crc:build:es5"
+              "browserTarget": "ddp-circadia:build:es5"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ddp-crc:build"
+            "browserTarget": "ddp-circadia:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ddp-crc/src/test.ts",
-            "polyfills": "projects/ddp-crc/src/polyfills.ts",
-            "tsConfig": "projects/ddp-crc/tsconfig.spec.json",
-            "karmaConfig": "projects/ddp-crc/karma.conf.js",
+            "main": "projects/ddp-circadia/src/test.ts",
+            "polyfills": "projects/ddp-circadia/src/polyfills.ts",
+            "tsConfig": "projects/ddp-circadia/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-circadia/karma.conf.js",
             "assets": [
-              "projects/ddp-crc/src/favicon.ico",
-              "projects/ddp-crc/src/assets"
+              "projects/ddp-circadia/src/favicon.ico",
+              "projects/ddp-circadia/src/assets"
             ],
             "styles": [
-              "projects/ddp-crc/src/styles.scss"
+              "projects/ddp-circadia/src/styles.scss"
             ],
             "scripts": []
           }
@@ -2160,9 +2160,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ddp-crc/tsconfig.app.json",
-              "projects/ddp-crc/tsconfig.spec.json",
-              "projects/ddp-crc/e2e/tsconfig.json"
+              "projects/ddp-circadia/tsconfig.app.json",
+              "projects/ddp-circadia/tsconfig.spec.json",
+              "projects/ddp-circadia/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -2172,12 +2172,12 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/ddp-crc/e2e/protractor.conf.js",
-            "devServerTarget": "ddp-crc:serve"
+            "protractorConfig": "projects/ddp-circadia/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-circadia:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ddp-crc:serve:production"
+              "devServerTarget": "ddp-circadia:serve:production"
             }
           }
         }
