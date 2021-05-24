@@ -216,13 +216,13 @@ describe('PrismComponent', () => {
     expect(noUsersElement.textContent.trim()).toBe('NoUsers test');
   }));
 
-  it('sets initial data correctly', fakeAsync(() => {
+  it('sets initial data correctly', () => {
     expect(component.dataSource.data).toEqual([]);
     expect(component.totalCount).toBe(0);
     expect(component.searchField.value).toBeFalsy();
     expect(component.initialPageIndex).toBe(1);
     expect(component.initialPageSize).toBe(10);
-  }));
+  });
 
   it('sets table data correctly', fakeAsync(() => {
     component.searchField.patchValue('test');
@@ -400,11 +400,11 @@ describe('PrismComponent with storage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('sets initial data from storage', fakeAsync(() => {
+  it('sets initial data from storage', () => {
     expect(component.dataSource.data).toEqual(participants);
     expect(component.totalCount).toBe(count);
     expect(component.searchField.value).toBe(searchQuery);
     expect(component.initialPageIndex).toBe(pageIndex);
     expect(component.initialPageSize).toBe(pageSize);
-  }));
+  });
 });
