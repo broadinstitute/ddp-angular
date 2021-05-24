@@ -240,33 +240,17 @@ var DDP_ENV = {
         DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
         DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{end}}
-    {{if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "DXd5obKfJrGxCv7Cv8c6PomK0zmmxwOY";
-        DDP_ENV['auth0Domain'] = "rgp-dev.us.auth0.com";
-        DDP_ENV['auth0Audience'] = "rgp-dev.us.auth0.com";
-        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-        DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{end}}
-    {{if eq $environment "test"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
-        DDP_ENV['auth0Domain'] = "fixme-not-set";
-        DDP_ENV['auth0Audience'] = "fixme-not-set";
-        DDP_ENV['basePepperUrl'] = "fixme-not-set";
-        DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{end}}
-    {{if eq $environment "staging"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
-        DDP_ENV['auth0Domain'] = "fixme-not-set";
-        DDP_ENV['auth0Audience'] = "fixme-not-set";
-        DDP_ENV['basePepperUrl'] = "fixme-not-set";
-        DDP_ENV['projectGAToken'] = "fixme-not-set";
-    {{end}}
-    {{if eq $environment "prod"}}
-        DDP_ENV['auth0ClientId'] = "fixme-not-set";
-        DDP_ENV['auth0Domain'] = "fixme-not-set";
-        DDP_ENV['auth0Audience'] = "fixme-not-set";
-        DDP_ENV['basePepperUrl'] = "fixme-not-set";
-        DDP_ENV['projectGAToken'] = "fixme-not-set";
+    {{else}}
+        {{with secret (printf "secret/pepper/%s/%s/rgp/conf" $environment $version)}}
+            DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
+            DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        {{end}}
+        {{if eq $environment "prod"}}
+            DDP_ENV['projectGAToken'] = "UA-102514572-1";
+        {{else}}
+            DDP_ENV['projectGAToken'] = "UA-108484823-1";
+        {{end}}
     {{end}}
 {{end}}
