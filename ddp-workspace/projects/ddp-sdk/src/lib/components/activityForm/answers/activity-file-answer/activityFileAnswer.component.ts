@@ -22,6 +22,7 @@ import { FileUploadBody } from '../../../../models/fileUploadBody';
 import { FileUploadResponse } from '../../../../models/fileUploadResponse';
 import { ModalService } from '../../../../services/modal.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
+import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -40,6 +41,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     selectedFile: File;
     isFileSelected: boolean;
     uploadedFile: UploadFile | null;
+    fileMaxSize: number;
+    fileMimeTypes: string[];
+    errorMessage: string;
     private fileToUpload: UploadFile | null;
     private ngUnsubscribe = new Subject();
 
@@ -50,6 +54,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.initFileRequirements();
         this.initUploadedFile();
     }
 
@@ -87,6 +92,12 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     submitFileUpload(): void {
+        const failedLocalValidator = this.getFailedLocalValidator();
+        if (failedLocalValidator) {
+            this.errorMessage = failedLocalValidator.result;
+            return;
+        }
+
         if (this.uploadedFile) {
             this.openConfirmDialog();
         } else {
@@ -134,6 +145,23 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
+    private initFileRequirements(): void {
+        this.fileMaxSize = this.block.maxFileSize;
+        this.fileMimeTypes = this.block.mimeTypes || [];
+    }
+
+    private initUploadedFile(): void {
+        if (this.block?.answer) {
+            this.setUploadedFile({
+                uploadGuid: '',
+                uploadUrl: ',',
+                name: this.block.answer.fileName,
+                size: this.block.answer.fileSize,
+                isUploaded: true
+            } as UploadFile);
+        }
+    }
+
     private uploadFile(): void {
         this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.selectedFile)
             .pipe(
@@ -150,19 +178,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     isUploaded: true
                 });
                 this.resetSelectedFile();
+                this.errorMessage = '';
             });
-    }
-
-    private initUploadedFile(): void {
-        if (this.block?.answer) {
-            this.setUploadedFile({
-                uploadGuid: '',
-                uploadUrl: ',',
-                name: this.block.answer.fileName,
-                size: this.block.answer.fileSize,
-                isUploaded: true
-            } as UploadFile);
-        }
     }
 
     private setUploadedFile(file: UploadFile | null): void {
@@ -177,5 +194,17 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     private resetSelectedFile(): void {
         this.selectedFile = null;
         this.isFileSelected = false;
+    }
+
+    private getFailedLocalValidator(): ActivityFileValidationRule {
+        return this.block.validators
+            .filter(validator => validator instanceof ActivityFileValidationRule)
+            .find(validator => {
+                const preUploadFileAnswer: ActivityFileAnswerDto = {
+                    fileName: this.fileToUpload.name,
+                    fileSize: this.fileToUpload.size
+                };
+                return !validator.recalculate(preUploadFileAnswer);
+            }) as ActivityFileValidationRule;
     }
 }

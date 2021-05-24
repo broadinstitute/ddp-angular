@@ -17,5 +17,5 @@ export abstract class ActivityAbstractValidationRule {
 
   constructor(public question: ActivityQuestionBlock<any>) { }
 
-  public abstract recalculate(): boolean;
+  public abstract recalculate(args?: any): boolean;
 }

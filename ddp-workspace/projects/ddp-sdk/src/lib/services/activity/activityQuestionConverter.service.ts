@@ -245,6 +245,9 @@ export class ActivityQuestionConverter {
 
     private getFileBlock(questionJson: any): ActivityFileQuestionBlock {
         const fileBlock = new ActivityFileQuestionBlock();
+        fileBlock.maxFileSize = questionJson.maxFileSize;
+        fileBlock.mimeTypes = questionJson.mimeTypes;
+
         return fileBlock;
     }
 }

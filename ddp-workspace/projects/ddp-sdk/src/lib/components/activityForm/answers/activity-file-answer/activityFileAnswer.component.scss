@@ -1,6 +1,10 @@
 $drop-block-color: whitesmoke;
 $drop-block-active-color: lightyellow;
 
+.file-requirements {
+    margin-bottom: 10px;
+}
+
 .file-upload-content {
     display: flex;
     flex-wrap: wrap;

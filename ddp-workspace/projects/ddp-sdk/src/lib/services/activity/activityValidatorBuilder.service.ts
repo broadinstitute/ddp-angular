@@ -21,6 +21,8 @@ import { ValidationRuleFactoryMapping } from '../../models/activity/validationRu
 import { QuestionType } from '../../models/activity/questionType';
 import { InputType } from '../../models/activity/inputType';
 import * as _ from 'underscore';
+import { ActivityFileValidationRule } from './validators/activityFileValidationRule';
+import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -62,17 +64,29 @@ export class ActivityValidatorBuilder {
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }
+        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionJson, questionBlock);
+        return rules.concat(additionalLocalRules);
+    }
+
+    private buildQuestionLocalValidatorRules(questionJson: any, questionBlock: ActivityQuestionBlock<any>)
+        : Array<ActivityAbstractValidationRule> {
+        const localRules = [];
+
         if (questionBlock.questionType === QuestionType.Date) {
-            rules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
+            localRules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
         }
-        if (
-          questionBlock instanceof ActivityTextQuestionBlock &&
-          questionBlock.inputType === InputType.Text &&
-          questionBlock.confirmEntry
-        ) {
-            rules.push(new ActivityMatchValidationRule(questionBlock));
+
+        if (questionBlock instanceof ActivityTextQuestionBlock &&
+            questionBlock.inputType === InputType.Text &&
+            questionBlock.confirmEntry) {
+            localRules.push(new ActivityMatchValidationRule(questionBlock));
         }
-        return rules;
+
+        if (questionBlock.questionType === QuestionType.File) {
+            localRules.push(new ActivityFileValidationRule(questionBlock as ActivityFileQuestionBlock));
+        }
+
+        return localRules;
     }
 
     private buildLengthValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):
