@@ -26,7 +26,7 @@
     </ng-container>
 </div>
 <div class="table-container">
-    <mat-table [dataSource]="dataSource" matSort>
+    <mat-table [dataSource]="dataSource" matSort sticky-scroll>
         <ng-container matColumnDef="userName">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="user-name-column">
                 {{'SDK.Prism.TableColumns.Name' | translate}}
