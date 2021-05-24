@@ -19,18 +19,18 @@
     </div>
     <div class="collapse navbar-collapse header-collapse" id="menu">
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a routerLinkActive="nav-item__link_active" [routerLinkActiveOptions]="{exact: true}" class="nav-item__link" [routerLink]="Route.Home">{{
+        <li routerLinkActive="nav-item__link_active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+          <a class="nav-item__link" [routerLink]="Route.Home">{{
             'Header.Links.Home' | translate
           }}</a>
         </li>
-        <li class="nav-item">
-          <a routerLinkActive="nav-item__link_active" class="nav-item__link" [routerLink]="Route.AboutUs">{{
+        <li routerLinkActive="nav-item__link_active" class="nav-item">
+          <a class="nav-item__link" [routerLink]="Route.AboutUs">{{
             'Header.Links.AboutUs' | translate
           }}</a>
         </li>
-        <li class="nav-item">
-          <a routerLinkActive="nav-item__link_active" class="nav-item__link" [routerLink]="Route.LearnMore">{{
+        <li routerLinkActive="nav-item__link_active" class="nav-item">
+          <a class="nav-item__link" [routerLink]="Route.LearnMore">{{
             'Header.Links.LearnMore' | translate
           }}</a>
         </li>
