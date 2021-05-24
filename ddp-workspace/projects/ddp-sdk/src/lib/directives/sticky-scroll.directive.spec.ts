@@ -8,10 +8,11 @@ import { WindowRef } from 'ddp-sdk';
 // We have to add this space to window height in order to make it work
 const notRecognizableTopSpace = 73;
 const containerHeight = 50;
+const smallSpaceToPartlyHideElement = 10;
 // less then container height in order to see the scroll
-const windowHeight = containerHeight - 10 + notRecognizableTopSpace;
+const windowHeight = containerHeight - smallSpaceToPartlyHideElement + notRecognizableTopSpace;
 
-function getTestComponentTemplateWithStyles({hostWidth = '100px', padding = '0'}: {hostWidth?: string; padding?: string} = {}): string {
+function getTestComponentTemplateWithStyles(hostWidth = '100px', padding = '0'): string {
   return `<div style="height: 150px; padding-top: ${padding}; display: block; overflow-y: auto;">
                <div class="directive-host"
                     sticky-scroll
@@ -72,16 +73,14 @@ describe('Directive: StickyScrollDirective', () => {
   });
 
   it('should hide sticky scrollbar when native scrollbar is visible', () => {
-    windowRefMock = {nativeWindow: {innerHeight: containerHeight + 10 + notRecognizableTopSpace}} as WindowRef;
+    windowRefMock = {nativeWindow: {innerHeight: containerHeight + smallSpaceToPartlyHideElement + notRecognizableTopSpace}} as WindowRef;
     setupComponent();
 
     checkScrollbarIsHidden();
   });
 
   it('should hide sticky scrollbar when component does not have horizontal scrollbar', () => {
-    TestBed.overrideTemplateUsingTestingModule(TestStickyScrollComponent, getTestComponentTemplateWithStyles({
-      hostWidth: '1000px'
-    }));
+    TestBed.overrideTemplateUsingTestingModule(TestStickyScrollComponent, getTestComponentTemplateWithStyles('1000px'));
     setupComponent();
     const {nativeElement} = directiveHost;
 
@@ -90,9 +89,7 @@ describe('Directive: StickyScrollDirective', () => {
   });
 
   it('should hide sticky scrollbar when component is not visible', () => {
-    TestBed.overrideTemplateUsingTestingModule(TestStickyScrollComponent, getTestComponentTemplateWithStyles({
-      padding: '100px'
-    }));
+    TestBed.overrideTemplateUsingTestingModule(TestStickyScrollComponent, getTestComponentTemplateWithStyles('100px', '100px'));
     setupComponent();
 
     checkScrollbarIsHidden();
