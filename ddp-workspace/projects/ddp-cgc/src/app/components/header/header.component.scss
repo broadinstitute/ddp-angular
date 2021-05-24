@@ -78,6 +78,9 @@
       line-height: 3.2rem!important;
       text-shadow: none;
       padding: 0!important;
+      &_active {
+        display: none;
+      }
     }
   }
 }
