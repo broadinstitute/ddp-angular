@@ -7,7 +7,7 @@ import { SessionMementoService } from '../../services/sessionMemento.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { enrollmentStatusTypeToLabel } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
@@ -108,5 +108,9 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public getUserLabel(user: SearchParticipant): string {
     return user.firstName || user.lastName ? `${user.firstName} ${user.lastName}` : user.guid;
+  }
+
+  public syncPaginators(event: PageEvent): void {
+
   }
 }

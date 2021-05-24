@@ -25,6 +25,9 @@
         </p>
     </ng-container>
 </div>
+<mat-paginator (page)="syncPaginators($event)"
+               [pageSize]="paginator.pageSize" [pageIndex]="paginator.pageIndex"
+               [length]="paginator.length" [pageSizeOptions]="paginator.pageSizeOptions"></mat-paginator>
 <div class="table-container">
     <mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="userName">
