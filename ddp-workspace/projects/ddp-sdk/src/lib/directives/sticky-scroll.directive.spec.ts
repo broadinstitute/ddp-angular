@@ -4,6 +4,8 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { WindowRef } from 'ddp-sdk';
 
+// by some reason (it might be related to karma settings) getBoundingClientRect top for element is 73px instead of 0.
+// We have to add this space to window height in order to make it work
 const notRecognizableTopSpace = 73;
 const containerHeight = 50;
 // less then container height in order to see the scroll
