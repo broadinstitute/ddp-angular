@@ -96,6 +96,13 @@
       ]
     }
   },
+  "LoginLandingPage": {
+    "Message": "Please wait until you are redirected..."
+  },
+  "ErrorPage": {
+    "Title": "Error",
+    "Description": "Something went wrong on our side, please try again"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Dashboard",

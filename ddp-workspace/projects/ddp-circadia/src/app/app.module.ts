@@ -4,6 +4,7 @@ import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import {
   DdpModule,
@@ -17,7 +18,10 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callback/auth0-code-callback.component';
+import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
 import { AppRoutingModule } from './app-routing.module';
 
 declare const DDP_ENV: any;
@@ -89,11 +93,20 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    Auth0CodeCallbackComponent,
+    ErrorComponent,
+    HomeComponent,
+    LoginLandingComponent,
+  ],
   imports: [
     BrowserModule,
     MatExpansionModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

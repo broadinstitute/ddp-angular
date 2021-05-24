@@ -3,4 +3,8 @@ export enum Route {
   JoinUs = 'join-us',
   StayInformed = 'stay-informed',
   PrivacyPolicy = 'privacy-policy',
+  Auth = 'auth',
+  LoginLanding = 'login-landing',
+  LoginLandingMode = 'login-landing/:mode',
+  Error = 'error',
 }
