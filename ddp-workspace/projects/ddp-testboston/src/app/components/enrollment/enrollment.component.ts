@@ -116,8 +116,7 @@ export class EnrollmentComponent implements OnInit {
         if (studySubject.userLoginEmail) {
           return throwError('The subject already has email-associated account!');
         } else {
-          const participantGuid = this.session.session.participantGuid;
-          return participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
+          return this.session.session.participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
         }
       })
     ).subscribe(
