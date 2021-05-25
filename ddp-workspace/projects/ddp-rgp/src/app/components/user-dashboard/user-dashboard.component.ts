@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnnouncementsServiceAgent } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent } from 'ddp-sdk';
 import { ToolkitConfigurationService, DashboardComponent } from 'toolkit';
 
 @Component({
@@ -12,7 +12,8 @@ export class UserDashboardComponent extends DashboardComponent {
   constructor(
     router: Router,
     announcements: AnnouncementsServiceAgent,
+    _participantsSearch: ParticipantsSearchServiceAgent,
     @Inject('toolkit.toolkitConfig') toolkitConfiguration: ToolkitConfigurationService) {
-    super(router, announcements, toolkitConfiguration);
+    super(router, announcements, _participantsSearch, toolkitConfiguration);
   }
 }
