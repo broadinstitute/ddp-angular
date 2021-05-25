@@ -38,7 +38,8 @@ commands:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run-linter-check
-      - run-tests
+      - run-tests:
+          study_key: << parameters.study_key >>
       - build-app:
           study_key: << parameters.study_key >>
       - store-app-build
@@ -60,7 +61,8 @@ commands:
           steps:
             - set-deployment-environment
             - run-linter-check
-            - run-tests
+            - run-tests:
+                study_key: << parameters.study_key >>
             - build-app:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
@@ -283,12 +285,18 @@ commands:
 
   run-tests:
     description: "Run all tests"
+    parameters:
+      study_key:
+        type: string
+        default: "UNKNOWN"
     steps:
       - run:
           name: ng test
           command: |
             mkdir -p /tmp/junit
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml
