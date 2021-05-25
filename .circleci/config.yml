@@ -279,8 +279,9 @@ commands:
       - run:
           name: Linter check
           command: |
-            ng lint
-
+            ng lint ddp-sdk
+            ng lint toolkit
+            ng lint $ANGULAR_PROJECT_NAME
   run-tests:
     description: "Run all tests"
     steps:
@@ -289,6 +290,8 @@ commands:
           command: |
             mkdir -p /tmp/junit
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml

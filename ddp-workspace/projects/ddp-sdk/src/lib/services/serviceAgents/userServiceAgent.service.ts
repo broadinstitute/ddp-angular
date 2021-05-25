@@ -10,7 +10,7 @@ import { filter, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserServiceAgent<TEntity> extends SessionServiceAgent<TEntity> implements OnDestroy {
-    private userGuid: string;
+    protected userGuid: string;
     private anchor: Subscription;
 
     constructor(

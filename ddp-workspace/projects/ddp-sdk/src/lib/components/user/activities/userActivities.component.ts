@@ -3,7 +3,7 @@ import {
   OnInit,
   OnDestroy,
   OnChanges,
-  SimpleChange,
+  SimpleChanges,
   Input,
   Output,
   EventEmitter,
@@ -83,7 +83,9 @@ import { tap, mergeMap, take } from 'rxjs/operators';
             <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
             <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">
               <ng-container *ngIf="element.icon">
-                <img class="dashboard-status-container__img" [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)">
+                <img class="dashboard-status-container__img"
+                     [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)"
+                     alt="">
               </ng-container>
               <ng-container *ngIf="showQuestionCount(element)">
                 {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered': element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}
@@ -199,13 +201,14 @@ import { tap, mergeMap, take } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
   @Input() studyGuid: string;
+  @Input() selectedUserGuid: string;
   @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
   @Output() open: EventEmitter<string> = new EventEmitter();
   @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public dataSource: UserActivitiesDataSource;
   public loaded = false;
   private states: Array<ActivityInstanceState> | null = null;
-  private studyGuidObservable: BehaviorSubject<string | null>;
+  private studyGuidObservable = new BehaviorSubject<string | null>(null);
   private loadingAnchor: Subscription;
   private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
@@ -216,11 +219,15 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private activityServiceAgent: ActivityServiceAgent,
     private analytics: AnalyticsEventsService,
     @Inject('ddp.config') private config: ConfigurationService,
-    public domSanitizationService: DomSanitizer) {
-    this.studyGuidObservable = new BehaviorSubject<string | null>(null);
-  }
+    public domSanitizationService: DomSanitizer) {}
 
   public ngOnInit(): void {
+    if (this.selectedUserGuid) {
+      this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
+    } else {
+      this.serviceAgent.resetSelectedUser();
+    }
+
     this.dataSource = new UserActivitiesDataSource(
       this.serviceAgent,
       this.logger,
@@ -234,7 +241,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
           // observable stream from main data source, so we will get
           // single final result when both statuses and activity
           // instances will be loaded
-          mergeMap(x => this.dataSource.isNull)
+          mergeMap(() => this.dataSource.isNull)
           // here is the final subscription, on which we will update
           // 'loaded' flag
         ).subscribe(x => {
@@ -243,12 +250,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
         });
   }
 
-  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-    for (const propName in changes) {
-      if (propName === 'studyGuid') {
-        this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
-        this.studyGuidObservable.next(this.studyGuid);
-      }
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['studyGuid']) {
+      this.logger.logEvent(this.LOG_SOURCE, `studyChanged: ${this.studyGuid}`);
+      this.studyGuidObservable.next(this.studyGuid);
     }
   }
 
@@ -286,10 +291,8 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
       return false;
     } else if (activityInstance.numQuestions === 0) {
       return false;
-    } else if (activityInstance.statusCode === 'COMPLETE' && activityInstance.numQuestions === activityInstance.numQuestionsAnswered) {
-      return false;
     } else {
-      return true;
+      return !(activityInstance.statusCode === 'COMPLETE' && activityInstance.numQuestions === activityInstance.numQuestionsAnswered);
     }
   }
 
@@ -306,11 +309,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   public showSummary(activityInstance: ActivityInstance): boolean {
-    if (this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!(this.config.dashboardSummaryInsteadOfStatus.includes(activityInstance.activityCode) && activityInstance.activitySummary);
   }
 
   public getButtonTranslate(activityInstance: ActivityInstance): string {

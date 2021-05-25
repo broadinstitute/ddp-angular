@@ -24,6 +24,7 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -91,6 +92,7 @@ config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'proxyGuid', 'proxyShortId', 'proxyUserName'];
 config.prismDashboardRoute = 'dashboard';
+config.lookupPageUrl = 'prism';
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -122,7 +124,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DataReleaseComponent,
     MoreDetailsComponent,
     PrismComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    DashboardComponent
   ],
   providers: [
     {

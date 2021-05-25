@@ -1,16 +1,16 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap, map, takeUntil } from 'rxjs/operators';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { enrollmentStatusTypeToLabel } from '../../models/enrollmentStatusType';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
+import { SessionStorageService } from '../../services/sessionStorage.service';
 import { StickyScrollDirective } from '../../directives/sticky-scroll.directive';
 
 @Component({
@@ -18,7 +18,7 @@ import { StickyScrollDirective } from '../../directives/sticky-scroll.directive'
   templateUrl: './prism.component.html',
   styleUrls: ['./prism.component.scss'],
 })
-export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PrismComponent implements OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(StickyScrollDirective, { static: true }) stickyScroll: StickyScrollDirective;
@@ -30,19 +30,47 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
   public isSearchLoading = false;
   public isSearchDebounce = false;
   public MIN_SEARCH_LENGTH = 4;
+  public dashboardRoute: string;
   private ngUnsubscribe = new Subject();
   public readonly enrollmentStatusTypeToLabel = enrollmentStatusTypeToLabel;
+  public readonly initialPageIndex: number;
+  public readonly initialPageSize: number;
+  private readonly searchParticipantsStorageName: string;
+  private readonly searchCountStorageName: string;
+  private readonly searchQueryStorageName: string;
+  private readonly paginationSizeStorageName: string;
+  private readonly paginationIndexStorageName: string;
+  readonly paginationSizes = [10, 25, 100];
 
   constructor(
-    private sessionService: SessionMementoService,
     private participantsSearch: ParticipantsSearchServiceAgent,
     private router: Router,
-    @Inject('ddp.config') private config: ConfigurationService) {
+    private storageService: SessionStorageService,
+    @Inject('ddp.config') private config: ConfigurationService,
+    ) {
     this.displayedColumns = this.config.prismColumns;
-  }
+    this.dashboardRoute = this.config.prismDashboardRoute;
+    this.searchParticipantsStorageName = `${this.config.studyGuid}_prism_search_participants`;
+    this.searchCountStorageName = `${this.config.studyGuid}_prism_search_participants_count`;
+    this.searchQueryStorageName = `${this.config.studyGuid}_prism_search_query`;
+    this.paginationSizeStorageName = `${this.config.studyGuid}_prism_search_pagination_size`;
+    this.paginationIndexStorageName = `${this.config.studyGuid}_prism_search_pagination_index`;
 
-  public ngOnInit(): void {
-    this.setSubject();
+    this.initialPageIndex = Number(this.storageService.get(this.paginationIndexStorageName)) || 1;
+    this.initialPageSize = Number(this.storageService.get(this.paginationSizeStorageName)) || this.paginationSizes[0];
+    const savedSearchQuery = this.storageService.get(this.searchQueryStorageName);
+    const savedSearchCount = this.storageService.get(this.searchCountStorageName);
+    const savedSearchParticipants = JSON.parse(this.storageService.get(this.searchParticipantsStorageName));
+    if (savedSearchQuery) {
+      this.searchField.patchValue(savedSearchQuery);
+    }
+    if (savedSearchParticipants) {
+      this.dataSource.data = savedSearchParticipants;
+    }
+    if (savedSearchCount) {
+      this.totalCount = Number(savedSearchCount);
+    }
+
     this.initSearchListener();
   }
 
@@ -66,11 +94,6 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public clearSearch(): void {
     this.searchField.reset('');
-  }
-
-  private setSubject(user?: SearchParticipant): void {
-    this.sessionService.setInvitationId(user?.invitationId);
-    this.sessionService.setParticipant(user?.guid);
   }
 
   public hasValidUserSearchQuery(): boolean {
@@ -102,15 +125,29 @@ export class PrismComponent implements OnInit, OnDestroy, AfterViewInit {
       this.totalCount = response?.totalCount || 0;
 
       this.stickyScroll.refresh();
-    });
-  }
 
-  public clickOnUser(user: SearchParticipant): void {
-    this.setSubject(user);
-    this.router.navigateByUrl(`/${this.config.prismDashboardRoute}`);
+      this.storageService.set(this.searchParticipantsStorageName, JSON.stringify(this.dataSource.data));
+      this.storageService.set(this.searchCountStorageName, String(this.totalCount));
+      this.storageService.set(this.searchQueryStorageName, this.searchField.value);
+    });
   }
 
   public getUserLabel(user: SearchParticipant): string {
     return user.firstName || user.lastName ? `${user.firstName} ${user.lastName}` : user.guid;
+  }
+
+  public updatePageDataInStorage($event: PageEvent): void {
+    this.storageService.set(this.paginationSizeStorageName, String($event.pageSize));
+    this.storageService.set(this.paginationIndexStorageName, String($event.pageIndex));
+  }
+
+  public syncPaginators(event: PageEvent): void {
+    this.paginator.pageIndex = event.pageIndex;
+    this.paginator.pageSize = event.pageSize;
+    this.paginator.page.emit(event);
+  }
+
+  get isPaginationHidden(): boolean {
+    return this.isSearchLoading || this.dataSource.data.length <= this.paginationSizes[0];
   }
 }
