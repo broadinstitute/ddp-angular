@@ -171,7 +171,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 }),
                 takeUntil(this.ngUnsubscribe)
             )
-            .subscribe((res) => {
+            .subscribe(() => {
                 this.patchAnswer(this.fileToUpload);
                 this.setUploadedFile({
                     ...this.fileToUpload,
@@ -201,8 +201,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             .filter(validator => validator instanceof ActivityFileValidationRule)
             .find(validator => {
                 const preUploadFileAnswer: ActivityFileAnswerDto = {
-                    fileName: this.fileToUpload.name,
-                    fileSize: this.fileToUpload.size
+                    fileName: this.fileToUpload && this.fileToUpload.name,
+                    fileSize: this.fileToUpload && this.fileToUpload.size
                 };
                 return !validator.recalculate(preUploadFileAnswer);
             }) as ActivityFileValidationRule;

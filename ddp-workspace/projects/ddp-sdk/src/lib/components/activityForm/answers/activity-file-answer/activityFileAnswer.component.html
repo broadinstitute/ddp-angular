@@ -39,6 +39,7 @@
 
         <mat-chip-list>
             <mat-chip *ngIf="uploadedFile?.isUploaded"
+                      class="uploaded-file-chip"
                       color="primary" selected
                       (removed)="undoUploadedFile()">{{uploadedFile.name}} (size: {{uploadedFile.size}})
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
