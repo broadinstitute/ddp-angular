@@ -137,6 +137,8 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
   }
 
   public syncPaginators(event: PageEvent): void {
-
+    this.paginator.pageIndex = event.pageIndex;
+    this.paginator.pageSize = event.pageSize;
+    this.paginator.page.emit(event);
   }
 }
