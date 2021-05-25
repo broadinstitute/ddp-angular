@@ -280,8 +280,8 @@ commands:
           name: Linter check
           command: |
             ng lint ddp-sdk
-            ng test toolkit
-            ng test $ANGULAR_PROJECT_NAME
+            ng lint toolkit
+            ng lint $ANGULAR_PROJECT_NAME
   run-tests:
     description: "Run all tests"
     steps:
