@@ -38,6 +38,7 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
   private readonly searchQueryStorageName: string;
   private readonly paginationSizeStorageName: string;
   private readonly paginationIndexStorageName: string;
+  readonly paginationSizes = [10, 25, 100];
 
   constructor(
     private participantsSearch: ParticipantsSearchServiceAgent,
@@ -54,7 +55,7 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
     this.paginationIndexStorageName = `${this.config.studyGuid}_prism_search_pagination_index`;
 
     this.initialPageIndex = Number(this.storageService.get(this.paginationIndexStorageName)) || 1;
-    this.initialPageSize = Number(this.storageService.get(this.paginationSizeStorageName)) || 10;
+    this.initialPageSize = Number(this.storageService.get(this.paginationSizeStorageName)) || this.paginationSizes[0];
     const savedSearchQuery = this.storageService.get(this.searchQueryStorageName);
     const savedSearchCount = this.storageService.get(this.searchCountStorageName);
     const savedSearchParticipants = JSON.parse(this.storageService.get(this.searchParticipantsStorageName));
@@ -140,5 +141,9 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
     this.paginator.pageIndex = event.pageIndex;
     this.paginator.pageSize = event.pageSize;
     this.paginator.page.emit(event);
+  }
+
+  get isPaginationHidden(): boolean {
+    return this.isSearchLoading || this.dataSource.data.length <= this.paginationSizes[0];
   }
 }
