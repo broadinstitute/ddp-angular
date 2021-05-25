@@ -51,22 +51,7 @@
       *matCellDef="let activity"
       [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate"
     >
-      <ng-container
-        *ngIf="shouldShowQuestionCount(activity); else normalStatus"
-      >
-        {{
-          'SDK.UserActivities.ActivityQuestionCount'
-            | translate
-              : {
-                  questionsAnswered: activity.numQuestionsAnswered,
-                  questionTotal: activity.numQuestions
-                }
-        }}
-      </ng-container>
-
-      <ng-template #normalStatus>
-        {{ 'Activities.StatusCodes.' + activity.statusCode | translate }}
-      </ng-template>
+      {{ 'Activities.StatusCodes.' + activity.statusCode | translate }}
     </td>
   </ng-container>
 

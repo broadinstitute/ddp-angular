@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AnnouncementsServiceAgent } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent } from 'ddp-sdk';
 import { DashboardComponent, ToolkitConfigurationService } from 'toolkit';
 
 export interface StaticActivity {
@@ -136,9 +136,10 @@ export class PrionDashboardComponent extends DashboardComponent implements OnIni
   constructor(
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
+        _participantsSearch: ParticipantsSearchServiceAgent,
         @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
-        super(_router, _announcements, _toolkitConfiguration);
+        super(_router, _announcements, _participantsSearch, _toolkitConfiguration);
   }
 
   public ngOnInit(): void {
