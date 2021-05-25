@@ -605,7 +605,7 @@
     "NextButton": "Next <span class=\"Icon fa fa-chevron-right\"></span> ",
     "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> Prev",
     "SavingButton": "Saving",
-    "EditButton": "Continue",
+    "EditButton": "Update",
     "StartButton": "Start",
     "ReviewButton": "View",
     "ValidateError": "Please complete all required fields.",
