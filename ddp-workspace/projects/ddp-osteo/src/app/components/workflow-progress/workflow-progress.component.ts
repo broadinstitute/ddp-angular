@@ -116,7 +116,7 @@ export class WorkflowProgressComponent implements OnChanges {
             },
             {number: 3, name: 'WorkflowProgress.MedicalRelease', isCompleted: false, activityCodes: ['RELEASE_SELF', 'RELEASE_MINOR']},
             {number: 4, name: 'WorkflowProgress.Questionnaire', isCompleted: false, activityCodes: ['ABOUTYOU', 'ABOUTCHILD']},
-            {number: 5, name: 'WorkflowProgress.FamilyHistory', isCompleted: false, activityCodes: ['FAMILY_HISTORY']}
+            // {number: 5, name: 'WorkflowProgress.FamilyHistory', isCompleted: false, activityCodes: ['FAMILY_HISTORY']}
         ];
     }
 }

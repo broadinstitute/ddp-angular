@@ -90,7 +90,7 @@
                     <span class="last-updated">{{model.lastUpdatedText}} </span>
                 </ng-container>
 
-                <div class="activity-buttons"
+                <div class="activity-buttons" *ngIf="activityGuid"
                      [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
                     <ng-container *ngIf="isLoaded && isStepped; then navigationButtons"></ng-container>
                     <ng-container *ngIf="(!isStepped || isLastStep) && isLoaded; then lastStepButtons"></ng-container>

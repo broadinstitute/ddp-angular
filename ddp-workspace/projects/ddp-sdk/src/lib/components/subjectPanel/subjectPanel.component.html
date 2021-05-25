@@ -1,0 +1,14 @@
+<div *ngIf="isAdmin() && hasUserData()" class="ddp-subject-panel">
+    <div class="subject-panel-container">
+        <a [routerLink]="'/' + adminPage()" class="ddp-subject-panel__text bold">
+            <mat-icon>chevron_left</mat-icon>
+            <span class="Link" translate>SDK.SubjectPanel.Link</span>
+        </a>
+        <div>
+            <p *ngFor="let field of subjectFields" class="ddp-subject-panel__text ddp-subject-panel_inline">
+                <span translate class="ddp-subject-panel__text-label">{{field.label}}</span>
+                <b>{{ field.value }}</b>
+            </p>
+        </div>
+    </div>
+</div>

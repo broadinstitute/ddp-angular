@@ -1,14 +1,17 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { ConfigurationService } from '../configuration.service';
-import { ParticipantsSearchServiceAgent } from './participantsSearchServiceAgent.service';
-import { LoggingService } from '../logging.service';
-import { SessionMementoService } from '../sessionMemento.service';
+import {
+    ConfigurationService,
+    ParticipantsSearchServiceAgent,
+    LoggingService,
+    SessionMementoService,
+    SearchParticipant,
+    EnrollmentStatusType
+} from 'ddp-sdk';
 import { of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
-import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
 
 describe('ParticipantsSearchServiceAgent Test', () => {
     let service: ParticipantsSearchServiceAgent;
@@ -61,6 +64,24 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         const req = httpTestingController.expectOne(`${backendUrl}/pepper/v1/admin/studies/${studyGuid}/participants-lookup`);
         expect(req.request.method).toBe('POST');
         expect(req.request.body).toEqual({query});
+        req.flush(response);
+    });
+
+    it('should return participant data', (done) => {
+        const response: SearchParticipant = {
+            guid: '1234',
+            hruid: '5678',
+            status: EnrollmentStatusType.COMPLETED,
+        };
+
+        const guid = 'ABC123';
+        service.getParticipant(guid).subscribe((result: SearchParticipant) => {
+            expect(result).toEqual(response);
+            done();
+        });
+
+        const req = httpTestingController.expectOne(`${backendUrl}/pepper/v1/admin/studies/${studyGuid}/participants/${guid}`);
+        expect(req.request.method).toBe('GET');
         req.flush(response);
     });
 });

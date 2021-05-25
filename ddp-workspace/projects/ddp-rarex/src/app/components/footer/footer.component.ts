@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
       translationKey: 'Footer.Links.Home',
       routePath: this.rarexUrl,
       external: true,
-      openNewTab: false
+      openNewTab: true
     },
     {
       translationKey: 'Footer.Links.TermsOfUse',

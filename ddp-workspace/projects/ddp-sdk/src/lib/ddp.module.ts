@@ -169,7 +169,7 @@ import { ConditionalBlockComponent } from './components/activityForm/activity-bl
 import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
-import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { SubjectPanelComponent } from './components/subjectPanel/subjectPanel.component';
 import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
@@ -317,6 +317,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ModalService,
         FileUploadService,
+        InvitationPipe,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,

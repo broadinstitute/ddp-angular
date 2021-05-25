@@ -2,7 +2,6 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatStepperModule } from '@angular/material/stepper';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NEVER, Observable, of } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -10,13 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { PrismComponent } from './prism.component';
-import { SessionMementoService } from 'ddp-sdk';
-import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
+import { ParticipantsSearchServiceAgent, EnrollmentStatusType } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
-import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { SessionStorageService } from '../../services/sessionStorage.service';
 
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(code: string = ''): Observable<object> {
@@ -42,10 +39,10 @@ describe('PrismComponent', () => {
   let fixture: ComponentFixture<PrismComponent>;
   let component: PrismComponent;
   let debugElement: DebugElement;
-  let sessionServiceSpy: jasmine.SpyObj<SessionMementoService>;
   let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
-  let router: Router;
+  let storageServiceSpy: jasmine.SpyObj<SessionStorageService>;
 
+  const studyGuid = 'TEST_ANGIO';
   const dashboardRoute = 'test-dashboard-route';
   const data = [{
       guid: '1234',
@@ -81,29 +78,26 @@ describe('PrismComponent', () => {
   const configColumns = ['guid', 'userName', 'email', 'enrollmentStatus', 'dashboardLink'];
 
   beforeEach(async() => {
-    sessionServiceSpy = jasmine.createSpyObj('sessionServiceSpy', ['setInvitationId', 'setParticipant']);
+    storageServiceSpy = jasmine.createSpyObj('storageServiceSpy', { get: null, set: undefined });
     participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {search: of({results: data, totalCount: data.length})});
     await TestBed.configureTestingModule({
       imports: [
-        MatStepperModule,
         NoopAnimationsModule,
         MatProgressSpinnerModule,
         MatInputModule,
         ReactiveFormsModule,
         MatTableModule,
         MatIconModule,
-        RouterTestingModule.withRoutes([
-          { path: dashboardRoute, component: PrismComponent },
-        ]),
+        RouterTestingModule,
         MatPaginatorModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
         }),
       ],
       providers: [
-          { provide: SessionMementoService, useValue: sessionServiceSpy },
+          { provide: SessionStorageService , useValue: storageServiceSpy },
           { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
-          { provide: 'ddp.config', useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute } },
+          { provide: 'ddp.config', useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute, studyGuid } },
       ],
       declarations: [PrismComponent],
     })
@@ -118,7 +112,6 @@ describe('PrismComponent', () => {
     component = fixture.debugElement.componentInstance;
     debugElement = fixture.debugElement;
     fixture.detectChanges();
-    router = TestBed.inject(Router);
   });
 
   it('should create component', () => {
@@ -223,6 +216,14 @@ describe('PrismComponent', () => {
     expect(noUsersElement.textContent.trim()).toBe('NoUsers test');
   }));
 
+  it('sets initial data correctly', () => {
+    expect(component.dataSource.data).toEqual([]);
+    expect(component.totalCount).toBe(0);
+    expect(component.searchField.value).toBeFalsy();
+    expect(component.initialPageIndex).toBe(1);
+    expect(component.initialPageSize).toBe(10);
+  });
+
   it('sets table data correctly', fakeAsync(() => {
     component.searchField.patchValue('test');
     tick(300);
@@ -230,6 +231,17 @@ describe('PrismComponent', () => {
 
     expect(component.dataSource.data).toEqual(data);
     expect(component.totalCount).toBe(data.length);
+  }));
+
+  it('saves the result in the storage', fakeAsync(() => {
+    const query = 'test';
+    component.searchField.patchValue(query);
+    tick(300);
+    fixture.detectChanges();
+
+    expect(storageServiceSpy.set).toHaveBeenCalledWith(`${studyGuid}_prism_search_query`, query);
+    expect(storageServiceSpy.set).toHaveBeenCalledWith(`${studyGuid}_prism_search_participants`, JSON.stringify(data));
+    expect(storageServiceSpy.set).toHaveBeenCalledWith(`${studyGuid}_prism_search_participants_count`, String(data.length));
   }));
 
   it('handles search null result correctly', fakeAsync(() => {
@@ -256,34 +268,13 @@ describe('PrismComponent', () => {
     expect(component.displayedColumns).toEqual(configColumns);
   });
 
-  it('sets empty invitation id and participant on init', () => {
-    expect(sessionServiceSpy.setInvitationId).toHaveBeenCalledWith(undefined);
-    expect(sessionServiceSpy.setParticipant).toHaveBeenCalledWith(undefined);
-  });
-
-  it('sets correct invitation id and participant when click on dashboard button', fakeAsync(() => {
-    component.searchField.patchValue('test');
-    tick(300);
-    fixture.detectChanges();
-
-    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-column button')).nativeElement;
-    firstUserDashboardButton.click();
-
-    expect(data[0].invitationId).toBeTruthy();
-    expect(sessionServiceSpy.setInvitationId).toHaveBeenCalledWith(data[0].invitationId);
-    expect(sessionServiceSpy.setParticipant).toHaveBeenCalledWith(data[0].guid);
-  }));
-
   it('navigates to the correct url when click on dashboard button', fakeAsync(() => {
-    const navigateSpy = spyOn(router, 'navigateByUrl');
     component.searchField.patchValue('test');
     tick(300);
     fixture.detectChanges();
 
-    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-column button')).nativeElement;
-    firstUserDashboardButton.click();
-
-    expect(navigateSpy).toHaveBeenCalledWith(`/${dashboardRoute}`);
+    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-link')).nativeElement;
+    expect(firstUserDashboardButton.getAttribute('href')).toEqual(`/${dashboardRoute}/1234`);
   }));
 
   it('sorts by userName correctly', () => {
@@ -320,7 +311,7 @@ describe('PrismComponent', () => {
     tick(300);
     fixture.detectChanges();
 
-    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-column button')).nativeElement;
+    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-link')).nativeElement;
     expect(firstUserDashboardButton.getAttribute('aria-label')).toBe(`DashboardButtonLabel ${firstName} ${lastName} test`);
   }));
 
@@ -332,7 +323,88 @@ describe('PrismComponent', () => {
     tick(300);
     fixture.detectChanges();
 
-    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-column button')).nativeElement;
+    const firstUserDashboardButton = fixture.debugElement.query(By.css('.dashboard-link')).nativeElement;
     expect(firstUserDashboardButton.getAttribute('aria-label')).toBe(`DashboardButtonLabel ${guid} test`);
   }));
+});
+
+describe('PrismComponent with storage', () => {
+  let fixture: ComponentFixture<PrismComponent>;
+  let component: PrismComponent;
+  let debugElement: DebugElement;
+  let storageServiceSpy: jasmine.SpyObj<SessionStorageService>;
+
+  const studyGuid = 'TEST_ANGIO';
+  const searchQuery = 'test query';
+  const participants = [{
+    guid: '1234',
+    hruid: '5678',
+    firstName: 'Bob',
+    lastName: 'Adams',
+    status: EnrollmentStatusType.COMPLETED,
+    invitationId: 'TBM398WQ8P6Z',
+    legacyShortId: '12',
+    proxy: {
+      guid: '1235',
+      hruid: '5679',
+      firstName: 'Tom',
+      lastName: 'Adams',
+      email: 'proxytest@test.com',
+    }
+  }];
+  const count = 12;
+  const pageSize = 25;
+  const pageIndex = 2;
+
+  beforeEach(async() => {
+    storageServiceSpy = jasmine.createSpyObj('storageServiceSpy', { get: null, set: undefined });
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_query`).and.returnValue(searchQuery);
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_participants`).and.returnValue(JSON.stringify(participants));
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_participants_count`).and.returnValue(String(count));
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_pagination_size`).and.returnValue(String(pageSize));
+    storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_pagination_index`).and.returnValue(String(pageIndex));
+    await TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatIconModule,
+        RouterTestingModule,
+        MatPaginatorModule,
+        TranslateModule.forRoot({
+          loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
+        }),
+      ],
+      providers: [
+        { provide: ParticipantsSearchServiceAgent, useValue: {} },
+        { provide: SessionStorageService , useValue: storageServiceSpy },
+        { provide: 'ddp.config', useValue: { prismColumns: ['guid'], studyGuid } },
+      ],
+      declarations: [PrismComponent],
+    })
+        .compileComponents();
+
+    const translate = TestBed.inject(TranslateService);
+    translate.use('en');
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PrismComponent);
+    component = fixture.debugElement.componentInstance;
+    debugElement = fixture.debugElement;
+    fixture.detectChanges();
+  });
+
+  it('should create component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('sets initial data from storage', () => {
+    expect(component.dataSource.data).toEqual(participants);
+    expect(component.totalCount).toBe(count);
+    expect(component.searchField.value).toBe(searchQuery);
+    expect(component.initialPageIndex).toBe(pageIndex);
+    expect(component.initialPageSize).toBe(pageSize);
+  });
 });
