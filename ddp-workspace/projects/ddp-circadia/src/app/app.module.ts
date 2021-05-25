@@ -1,10 +1,13 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   DdpModule,
@@ -21,7 +24,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callback/auth0-code-callback.component';
 import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
+import { Route } from './constants/route';
 import { AppRoutingModule } from './app-routing.module';
 
 declare const DDP_ENV: any;
@@ -47,9 +52,13 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.defaultLanguageCode = 'en';
+sdkConfig.errorPageUrl = Route.Error;
+sdkConfig.loginLandingUrl = Route.LoginLanding;
+sdkConfig.passwordPageUrl = Route.Password;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.errorUrl = Route.Error;
 
 export function translateFactory(
   inj: Injector,
@@ -100,13 +109,18 @@ export function translateFactory(
     Auth0CodeCallbackComponent,
     ErrorComponent,
     HomeComponent,
+    IrbPasswordComponent,
     LoginLandingComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatExpansionModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

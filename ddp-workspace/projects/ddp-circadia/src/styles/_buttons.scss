@@ -6,6 +6,7 @@
   padding: 1.65rem 2.8rem;
 
   border-radius: 12px;
+  border: none;
 
   font-size: 1.8rem;
   line-height: 1;
@@ -13,6 +14,7 @@
   text-decoration: none;
 
   transition: background 0.2s ease;
+  cursor: pointer;
 
   &--yellow {
     background: $color-yellow-1;

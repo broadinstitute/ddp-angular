@@ -1,4 +1,9 @@
 {
+  "Common": {
+    "Buttons": {
+      "Submit": "Submit"
+    }
+  },
   "Header": {
     "Links": {
       "Home": "Home",
@@ -102,6 +107,15 @@
   "ErrorPage": {
     "Title": "Error",
     "Description": "Something went wrong on our side, please try again"
+  },
+  "PasswordPage": {
+    "Title": "Please enter the password",
+    "Placeholder": "Password",
+    "Errors": {
+      "Invalid": "Password is required",
+      "Wrong": "Password you provided is incorrect",
+      "Communication": "We're sorry, but an error has occured. Please try again."
+    }
   },
   "Toolkit": {
     "Dashboard": {

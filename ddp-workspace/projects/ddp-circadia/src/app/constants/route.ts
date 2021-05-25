@@ -7,4 +7,5 @@ export enum Route {
   LoginLanding = 'login-landing',
   LoginLandingMode = 'login-landing/:mode',
   Error = 'error',
+  Password = 'password',
 }
