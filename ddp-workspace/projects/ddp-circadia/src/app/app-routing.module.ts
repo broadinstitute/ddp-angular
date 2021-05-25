@@ -9,6 +9,7 @@ import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callba
 import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
+import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
 import { Route } from './constants/route';
 
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: Route.Error,
     component: ErrorComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.JoinUs,
+    component: JoinUsComponent,
     canActivate: [IrbGuard],
   },
   {

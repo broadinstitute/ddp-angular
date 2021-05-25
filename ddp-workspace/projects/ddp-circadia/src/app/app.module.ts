@@ -18,6 +18,7 @@ import {
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
+import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -25,6 +26,7 @@ import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callba
 import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
+import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
 import { Route } from './constants/route';
 import { AppRoutingModule } from './app-routing.module';
@@ -103,6 +105,7 @@ export function translateFactory(
 
 @NgModule({
   declarations: [
+    ActivityComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
@@ -110,6 +113,7 @@ export function translateFactory(
     ErrorComponent,
     HomeComponent,
     IrbPasswordComponent,
+    JoinUsComponent,
     LoginLandingComponent,
   ],
   imports: [
