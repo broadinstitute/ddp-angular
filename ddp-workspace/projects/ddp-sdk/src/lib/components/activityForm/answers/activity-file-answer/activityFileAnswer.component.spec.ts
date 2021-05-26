@@ -93,7 +93,7 @@ describe('ActivityFileAnswer', () => {
         it('should init previously uploaded file if any', () => {
             expect(component.uploadedFile).toEqual({
                 uploadGuid: '',
-                uploadUrl: ',',
+                uploadUrl: '',
                 name: '1.png',
                 size: 1000,
                 isUploaded: true
@@ -108,7 +108,6 @@ describe('ActivityFileAnswer', () => {
         it('should call undoUploadedFile by click on remove uploaded file button', () => {
             spyOn(component, 'undoUploadedFile');
             const removeUploadedFileBtn = fixture.debugElement.query(By.css('.uploaded-file mat-icon')).nativeElement;
-            expect(removeUploadedFileBtn).toBeTruthy();
             removeUploadedFileBtn.click();
             expect(component.undoUploadedFile).toHaveBeenCalled();
         });
@@ -139,12 +138,12 @@ describe('ActivityFileAnswer', () => {
         });
 
         it('should call openConfirmDialog on click Reupload button', () => {
-            spyOn(component, 'openConfirmDialog');
+            spyOn(component, 'openReuploadConfirmDualog');
             component.isFileSelected = true;
             fixture.detectChanges();
             const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
             submitBtn.click();
-            expect(component.openConfirmDialog).toHaveBeenCalled();
+            expect(component.openReuploadConfirmDualog).toHaveBeenCalled();
         });
 
         it('should upload file after confirmation', () => {
@@ -160,7 +159,7 @@ describe('ActivityFileAnswer', () => {
             component.onFilesSelected([{name: 'fileName', size: 1000} as File]);
             fixture.detectChanges();
 
-            component.openConfirmDialog();
+            component.openReuploadConfirmDualog();
             expect(fileUploadServiceSpy.uploadFile).toHaveBeenCalled();
         });
     });

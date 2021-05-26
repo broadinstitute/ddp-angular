@@ -46,6 +46,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     errorMessage: string;
     private fileToUpload: UploadFile | null;
     private ngUnsubscribe = new Subject();
+    private readonly panelClass = 'file-upload-confirm-dialog';
 
     constructor(private fileUploadService: FileUploadService,
                 private logger: LoggingService,
@@ -101,15 +102,14 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
 
         if (this.uploadedFile) {
-            this.openConfirmDialog();
+            this.openReuploadConfirmDualog();
         } else {
             this.uploadFile();
         }
     }
 
-    public openConfirmDialog(): void {
-        const panelClass = 'file-upload-confirm-dialog';
-        const config = this.modalService.getDialogConfig(this.uploadButtonRef, panelClass);
+    openReuploadConfirmDualog(): void {
+        const config = this.modalService.getDialogConfig(this.uploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',
             confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',
@@ -125,8 +125,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     undoUploadedFile(): void {
-        const panelClass = 'file-upload-confirm-dialog';
-        const config = this.modalService.getDialogConfig(this.undoUploadButtonRef, panelClass);
+        const config = this.modalService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
             confirmBtnText: 'SDK.FileUpload.UndoBtnText',
@@ -156,7 +155,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         if (this.block?.answer) {
             this.setUploadedFile({
                 uploadGuid: '',
-                uploadUrl: ',',
+                uploadUrl: '',
                 name: this.block.answer.fileName,
                 size: this.block.answer.fileSize,
                 isUploaded: true
