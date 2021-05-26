@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
     `,
     styles: [`
         .PageLayout-prism {
-            max-width: 1200px !important;
+            max-width: 100% !important;
             padding: 0 30px;
         }
     `]

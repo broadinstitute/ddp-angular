@@ -196,6 +196,7 @@ import { ActivityBlockModalService } from './services/activity-block-modal.servi
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
+import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -394,6 +395,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressGoogleAutocompleteDirective,
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,
@@ -466,6 +468,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,
