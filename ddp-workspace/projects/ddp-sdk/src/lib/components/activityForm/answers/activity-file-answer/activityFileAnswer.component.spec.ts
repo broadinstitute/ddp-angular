@@ -102,7 +102,7 @@ describe('ActivityFileAnswer', () => {
 
         it('should display an uploaded file data', () => {
             const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-            expect(uploadedFile.textContent.trim()).toBe('1.png (size: 1000) cancel');
+            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1000)');
         });
 
         it('should call undoUploadedFile by click on remove uploaded file button', () => {

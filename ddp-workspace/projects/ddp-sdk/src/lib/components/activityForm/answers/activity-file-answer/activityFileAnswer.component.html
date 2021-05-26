@@ -6,7 +6,7 @@
     <div class="file-types" *ngIf="fileMimeTypes.length">Allowed mime-types: {{fileMimeTypes.join(', ')}}</div>
 </div>
 
-<div class="file-upload-content" [ngClass]="{'readonly': readonly}">
+<div class="file-upload-content" [class.readonly]="readonly">
     <input type="file" class="file-input"
            [accept]="fileMimeTypes.join(',')"
            (change)="onFilesSelected($event.target.files)" #fileUpload>

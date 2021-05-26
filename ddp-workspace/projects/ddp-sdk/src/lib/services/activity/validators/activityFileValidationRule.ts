@@ -25,12 +25,12 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
     }
 
     private isMaxFileSizeExceeded(answer: ActivityFileAnswerDto): boolean {
-        return this.block.maxFileSize && answer && answer.fileSize > this.block.maxFileSize;
+        return this.block.maxFileSize && answer?.fileSize > this.block.maxFileSize;
     }
 
     private isNotAllowedFileType(answer: ActivityFileAnswerDto): boolean {
         const allowedFileTypes = this.block.mimeTypes?.length ? this.block.mimeTypes : null;
-        const fileExtension = answer && answer.fileMimeType;
+        const fileExtension = answer?.fileMimeType;
         return allowedFileTypes && fileExtension && !allowedFileTypes.includes(fileExtension);
     }
 }

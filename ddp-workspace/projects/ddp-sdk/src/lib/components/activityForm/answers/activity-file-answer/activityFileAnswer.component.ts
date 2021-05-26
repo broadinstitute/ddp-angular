@@ -189,7 +189,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     private patchAnswer(file: UploadFile | null): void {
-        this.block.answer = file ? { fileName: file.name, fileSize: file.size } as ActivityFileAnswerDto : null;
+        this.block.answer = file ? { fileName: file.name, fileSize: file.size } : null;
         this.valueChanged.emit(file?.uploadGuid || null);
     }
 
@@ -203,9 +203,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             .filter(validator => validator instanceof ActivityFileValidationRule)
             .find(validator => {
                 const preUploadFileAnswer: ActivityFileAnswerDto = {
-                    fileName: this.fileToUpload && this.fileToUpload.name,
-                    fileSize: this.fileToUpload && this.fileToUpload.size,
-                    fileMimeType: this.fileToUpload && this.fileToUpload.fileMimeType
+                    fileName: this.fileToUpload?.name,
+                    fileSize: this.fileToUpload?.size,
+                    fileMimeType: this.fileToUpload?.fileMimeType
                 };
                 return !validator.recalculate(preUploadFileAnswer);
             }) as ActivityFileValidationRule;
