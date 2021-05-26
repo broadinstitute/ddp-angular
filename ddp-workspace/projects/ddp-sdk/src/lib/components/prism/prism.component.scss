@@ -52,8 +52,7 @@
 }
 
 .mat-table {
-    margin-top: 10px;
-    overflow: auto;
+    min-width: 100%;
 }
 
 .mat-spinner {
@@ -64,51 +63,52 @@
     display: none !important;
 }
 
-.guid-column {
-    flex: 0 0 185px;
+.guid-column,
+.proxy-guid-column {
+    width: 185px;
     min-width: 185px;
 }
 
 .short-id-column,
 .proxy-short-id-column {
-    flex: 0 0 65px;
+    width: 65px;
     min-width: 65px;
 }
 
 .invitation-column {
-    flex: 0 0 160px;
+    width: 160px;
     min-width: 160px;
 }
 
 .user-name-column,
 .proxy-name-column {
-    flex: 0 0 225px;
+    width: 225px;
     min-width: 225px;
 }
 
 .email-column {
-    flex: 0 0 250px;
     word-break: break-all;
+    width: 250px;
     min-width: 250px;
 }
 
 .status-column {
-    flex: 0 0 160px;
+    width: 160px;
     min-width: 160px;
 }
 
 .legacy-short-id-column {
-    flex: 0 0 65px;
+    width: 65px;
     min-width: 65px;
 }
 
 .legacy-AltPid-column {
-    flex: 0 0 180px;
+    width: 180px;
     min-width: 180px;
 }
 
 .dashboard-column {
-    flex: 0 0 115px;
+    width: 115px;
     min-width: 115px;
 }
 
@@ -118,13 +118,10 @@
     box-sizing: content-box;
 }
 
-.mat-row,
-.mat-header-row {
-    display: inline-flex;
-}
-
 .table-container {
     position: relative;
+    margin-top: 10px;
+    overflow: auto;
 
     .mat-spinner {
         position: absolute;
