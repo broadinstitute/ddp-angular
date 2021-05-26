@@ -73,8 +73,8 @@
         </p>
 
         <ul class="links__list">
-          <li class="links__list-item">
-            <a class="links__link" href="#">{{
+          <li *ngIf="!isAuthenticated" class="links__list-item">
+            <a class="links__link" [routerLink]="Route.JoinUs">{{
               'Footer.Participation.SignUp' | translate
             }}</a>
           </li>

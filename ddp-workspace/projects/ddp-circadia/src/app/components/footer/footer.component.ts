@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { SessionMementoService } from 'ddp-sdk';
+
 import { Route } from '../../constants/route';
 
 @Component({
@@ -9,4 +11,10 @@ import { Route } from '../../constants/route';
 })
 export class FooterComponent {
   Route = Route;
+
+  constructor(private sessionService: SessionMementoService) {}
+
+  get isAuthenticated(): boolean {
+    return this.sessionService.isAuthenticatedSession();
+  }
 }
