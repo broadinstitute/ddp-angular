@@ -11,12 +11,12 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
         const answer = answerBeforeUpload || this.block.answer;
 
         if (this.isMaxFileSizeExceeded(answer)) {
-            this.result = 'The file size is too big';
+            this.result = 'File size exceeded maximum of 100 bytes';
             return false;
         }
 
         if (this.isNotAllowedFileType(answer)) {
-            this.result = 'The file mime-type is not allowed';
+            this.result = 'Mime type not belongs to allowed list';
             return false;
         }
 
@@ -30,7 +30,7 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
 
     private isNotAllowedFileType(answer: ActivityFileAnswerDto): boolean {
         const allowedFileTypes = this.block.mimeTypes?.length ? this.block.mimeTypes : null;
-        const fileExtension = answer && answer.fileName.split('.')[1];
+        const fileExtension = answer && answer.fileMimeType;
         return allowedFileTypes && fileExtension && !allowedFileTypes.includes(fileExtension);
     }
 }

@@ -75,6 +75,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 .pipe(
                     catchError(err => {
                         this.logger.logDebug('ActivityFileAnswer getUploadUrl error:', err);
+                        this.errorMessage = err.message;
                         return EMPTY;
                     }),
                     takeUntil(this.ngUnsubscribe)
@@ -85,6 +86,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                         ...res,
                         name: file.name,
                         size: file.size,
+                        fileMimeType: file.type,
                         isUploaded: false
                     };
                 });
@@ -202,7 +204,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             .find(validator => {
                 const preUploadFileAnswer: ActivityFileAnswerDto = {
                     fileName: this.fileToUpload && this.fileToUpload.name,
-                    fileSize: this.fileToUpload && this.fileToUpload.size
+                    fileSize: this.fileToUpload && this.fileToUpload.size,
+                    fileMimeType: this.fileToUpload && this.fileToUpload.fileMimeType
                 };
                 return !validator.recalculate(preUploadFileAnswer);
             }) as ActivityFileValidationRule;
