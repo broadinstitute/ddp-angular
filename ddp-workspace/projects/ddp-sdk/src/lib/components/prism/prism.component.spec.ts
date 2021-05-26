@@ -9,12 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { PrismComponent } from './prism.component';
-import { ParticipantsSearchServiceAgent, EnrollmentStatusType } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { SessionStorageService } from '../../services/sessionStorage.service';
 import { StickyScrollDirective } from '../../directives/sticky-scroll.directive';
+import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
+import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
+import { WindowRef } from '../../services/windowRef';
 
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(code: string = ''): Observable<object> {
@@ -91,7 +93,6 @@ describe('PrismComponent', () => {
         MatIconModule,
         RouterTestingModule,
         MatPaginatorModule,
-        StickyScrollDirective,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
         }),
@@ -100,8 +101,9 @@ describe('PrismComponent', () => {
           { provide: SessionStorageService , useValue: storageServiceSpy },
           { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
           { provide: 'ddp.config', useValue: { prismColumns: configColumns, prismDashboardRoute: dashboardRoute, studyGuid } },
+          WindowRef
       ],
-      declarations: [PrismComponent],
+      declarations: [PrismComponent, StickyScrollDirective],
     })
         .compileComponents();
 
