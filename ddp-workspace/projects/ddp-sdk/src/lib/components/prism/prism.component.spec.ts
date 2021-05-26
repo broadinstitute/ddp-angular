@@ -14,6 +14,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { SessionStorageService } from '../../services/sessionStorage.service';
+import { StickyScrollDirective } from '../../directives/sticky-scroll.directive';
 
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(code: string = ''): Observable<object> {
@@ -90,6 +91,7 @@ describe('PrismComponent', () => {
         MatIconModule,
         RouterTestingModule,
         MatPaginatorModule,
+        StickyScrollDirective,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
         }),
