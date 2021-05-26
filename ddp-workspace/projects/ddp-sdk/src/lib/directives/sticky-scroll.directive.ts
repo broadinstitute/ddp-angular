@@ -1,7 +1,6 @@
 import { AfterViewInit, OnDestroy, Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { WindowRef } from '../services/windowRef';
 
-// todo: consider replace with position fixed with sticky once we stop supporting IE11 (check if it simplifies the logic)
 /**
  * Sticky bottom scroll for any container. Currently we use it with table only but might be used on other elements.
  * This directive creates dom element with scrollbar which syncs with host element's scrollbar
