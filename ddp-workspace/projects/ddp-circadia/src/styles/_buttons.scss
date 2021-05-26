@@ -24,8 +24,15 @@
     cursor: not-allowed;
   }
 
-  &:hover,
-  &:focus {
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -42,13 +49,15 @@
 
     color: #000000;
 
-    &:hover,
-    &:focus {
-      background: darken($color-yellow-1, 5%);
-    }
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: darken($color-yellow-1, 5%);
+      }
 
-    &:active {
-      background: darken($color-yellow-1, 10%);
+      &:active {
+        background: darken($color-yellow-1, 10%);
+      }
     }
   }
 
@@ -57,13 +66,15 @@
 
     color: #ffffff;
 
-    &:hover,
-    &:focus {
-      background: lighten($color-blue-2, 5%);
-    }
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: lighten($color-blue-2, 5%);
+      }
 
-    &:active {
-      background: lighten($color-blue-2, 10%);
+      &:active {
+        background: lighten($color-blue-2, 10%);
+      }
     }
   }
 }

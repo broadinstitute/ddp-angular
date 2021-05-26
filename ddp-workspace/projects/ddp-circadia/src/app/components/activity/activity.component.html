@@ -18,6 +18,33 @@
       <h1 class="activity__title" [innerHTML]="model.title"></h1>
     </section>
 
+    <section *ngIf="isStepped" class="section section--stepper">
+      <ol class="stepper-list">
+        <ng-container *ngFor="let section of model.sections; let i = index">
+          <li class="stepper-list__item">
+            <button
+              class="button button--yellow step-button"
+              [class.step-button--active]="isActive(i)"
+              [disabled]="!isCompleted(i)"
+              (click)="jumpStep(i)"
+            >
+              <ng-container *ngIf="!isCompleted(i) || isActive(i)">
+                {{ i + 1 }}
+              </ng-container>
+
+              <ng-container *ngIf="isCompleted(i) && !isActive(i)">
+                <mat-icon>done</mat-icon>
+              </ng-container>
+            </button>
+          </li>
+          <li
+            *ngIf="i !== model.sections.length - 1"
+            class="stepper-list__divider"
+          ></li>
+        </ng-container>
+      </ol>
+    </section>
+
     <section
       *ngIf="shouldShowReadonlyHint"
       class="section section--readonly-hint"
