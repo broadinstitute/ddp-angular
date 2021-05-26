@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IrbGuard } from 'ddp-sdk';
+import { AuthGuard, IrbGuard } from 'ddp-sdk';
 
 import { RedirectToAuth0LoginRedesignedComponent } from 'toolkit';
 
+import { ActivityPageComponent } from './components/pages/activity-page/activity-page.component';
 import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callback/auth0-code-callback.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
@@ -48,6 +50,16 @@ const routes: Routes = [
     path: Route.JoinUs,
     component: JoinUsComponent,
     canActivate: [IrbGuard],
+  },
+  {
+    path: Route.Dashboard,
+    component: DashboardComponent,
+    canActivate: [IrbGuard, AuthGuard],
+  },
+  {
+    path: Route.ActivityId,
+    component: ActivityPageComponent,
+    canActivate: [IrbGuard, AuthGuard],
   },
   {
     path: '**',

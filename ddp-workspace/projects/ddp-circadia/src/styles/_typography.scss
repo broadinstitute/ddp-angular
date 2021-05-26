@@ -18,8 +18,13 @@
   text-decoration: none;
 }
 
-.error-message {
+.error-message,
+.ErrorMessage {
   margin: 1rem 0;
 
   color: $color-error;
+}
+
+.page-title {
+  margin: 1em 0 0.5em;
 }

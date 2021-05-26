@@ -21,10 +21,14 @@ app-home {
 }
 
 .container {
-  max-width: 728px;
+  max-width: 72.8rem;
 
   margin: 0 auto;
   padding: 0 2.4rem;
+
+  &--wide {
+    max-width: 80rem;
+  }
 }
 
 .content-container {

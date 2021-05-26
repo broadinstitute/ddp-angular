@@ -48,11 +48,17 @@
 
     <nav class="header__nav header__nav--right">
       <ul class="nav-list">
+        <li *ngIf="isAuthenticated" class="nav-list__item">
+          <a class="nav-list__link" [routerLink]="Route.Dashboard">
+            {{ 'Header.Links.Dashboard' | translate }}
+          </a>
+        </li>
+
         <li class="nav-list__item">
           <ddp-sign-in-out class="nav-list__link"></ddp-sign-in-out>
         </li>
 
-        <li class="nav-list__item">
+        <li *ngIf="!isAuthenticated" class="nav-list__item">
           <a class="button button--yellow" [routerLink]="Route.JoinUs">
             {{ 'Header.Links.SignUp' | translate }}
           </a>

@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 import {
   DdpModule,
@@ -22,12 +23,15 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ActivityPageComponent } from './components/pages/activity-page/activity-page.component';
 import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callback/auth0-code-callback.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { ErrorComponent } from './components/pages/error/error.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { Route } from './constants/route';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -57,10 +61,14 @@ sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.errorPageUrl = Route.Error;
 sdkConfig.loginLandingUrl = Route.LoginLanding;
 sdkConfig.passwordPageUrl = Route.Password;
+sdkConfig.dashboardPageUrl = Route.Dashboard;
+sdkConfig.scrollToErrorOffset = 100;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.errorUrl = Route.Error;
+toolkitConfig.dashboardUrl = Route.Dashboard;
+toolkitConfig.activityUrl = Route.Activity;
 
 export function translateFactory(
   inj: Injector,
@@ -109,12 +117,15 @@ export function translateFactory(
     AppComponent,
     FooterComponent,
     HeaderComponent,
+    ActivityPageComponent,
     Auth0CodeCallbackComponent,
+    DashboardComponent,
     ErrorComponent,
     HomeComponent,
     IrbPasswordComponent,
     JoinUsComponent,
     LoginLandingComponent,
+    UserActivitiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,6 +136,7 @@ export function translateFactory(
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

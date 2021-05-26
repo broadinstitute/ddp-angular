@@ -11,7 +11,8 @@
       "Participation": "Participation",
       "FAQ": "FAQ",
       "Team": "Meet the Team",
-      "SignUp": "Sign Up"
+      "SignUp": "Sign Up",
+      "Dashboard": "Dashboard"
     }
   },
   "Footer": {
@@ -115,6 +116,26 @@
       "Invalid": "Password is required",
       "Wrong": "Password you provided is incorrect",
       "Communication": "We're sorry, but an error has occured. Please try again."
+    }
+  },
+  "DashboardPage": {
+    "Title": "Dashboard"
+  },
+  "UserActivities": {
+    "Header": {
+      "Name": "Name",
+      "Status": "Status",
+      "Actions": "Actions"
+    },
+    "Statuses": {
+      "CREATED": "Not started",
+      "IN_PROGRESS": "In progress",
+      "COMPLETE": "Complete"
+    },
+    "Actions": {
+      "Start": "Start",
+      "Continue": "Continue",
+      "View": "View"
     }
   },
   "Toolkit": {

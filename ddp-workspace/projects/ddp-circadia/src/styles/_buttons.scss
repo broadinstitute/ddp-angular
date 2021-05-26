@@ -7,14 +7,35 @@
 
   border-radius: 12px;
   border: none;
+  box-shadow: none;
 
+  font-family: inherit;
   font-size: 1.8rem;
   line-height: 1;
   white-space: nowrap;
   text-decoration: none;
 
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.8;
+
+    cursor: not-allowed;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &--sm {
+    padding: 1.4rem 2.6rem;
+
+    border-radius: 10px;
+
+    font-size: 1.6rem;
+  }
 
   &--yellow {
     background: $color-yellow-1;
@@ -28,6 +49,21 @@
 
     &:active {
       background: darken($color-yellow-1, 10%);
+    }
+  }
+
+  &--blue {
+    background: $color-blue-2;
+
+    color: #ffffff;
+
+    &:hover,
+    &:focus {
+      background: lighten($color-blue-2, 5%);
+    }
+
+    &:active {
+      background: lighten($color-blue-2, 10%);
     }
   }
 }

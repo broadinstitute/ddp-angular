@@ -111,7 +111,7 @@
     <ng-container *ngFor="let Member of 'HomePage.Team.Members' | translate">
       <div class="member">
         <div class="member__img-container">
-          <img [src]="Member.ImageUrl" [alt]="Member.Name + ' image'" />
+          <img class="member__img" [src]="Member.ImageUrl" [alt]="Member.Name + ' image'" />
         </div>
 
         <div class="member__info">
