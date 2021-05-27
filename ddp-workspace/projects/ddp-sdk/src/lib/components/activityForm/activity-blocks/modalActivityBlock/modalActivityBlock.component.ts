@@ -19,7 +19,7 @@ import { ActivityForm } from '../../../../models/activity/activityForm';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
 import { LoggingService } from '../../../../services/logging.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
-import { ModalService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal.service';
+import { ModalDialogService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal-dialog.service';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -54,7 +54,7 @@ export class ModalActivityBlockComponent {
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
                 private logger: LoggingService,
-                private modalService: ModalService) {
+                private modalDialogService: ModalDialogService) {
     }
 
     get isAllQuestionsCompleted(): boolean {
@@ -106,7 +106,7 @@ export class ModalActivityBlockComponent {
 
     public openDeleteDialog(): void {
         const panelClass = 'modal-activity-block__delete-dialog';
-        const config = this.modalService.getDialogConfig(this.deleteButtonRef, panelClass);
+        const config = this.modalDialogService.getDialogConfig(this.deleteButtonRef, panelClass);
         config.data = {
             title: 'SDK.ConfirmDeletion',
             confirmBtnText: 'SDK.DeleteButton',

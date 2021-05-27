@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 import { EmbeddedActivityBlockComponent } from './embeddedActivityBlock.component';
 import { ActivityForm, ActivityServiceAgent, LoggingService, SubmitAnnouncementService } from 'ddp-sdk';
-import { ModalService } from '../../../../services/modal.service';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
 
 describe('EmbeddedActivityBlockComponent', () => {
   let component: EmbeddedActivityBlockComponent;
@@ -24,7 +24,7 @@ describe('EmbeddedActivityBlockComponent', () => {
         {provide: LoggingService, useValue: loggingServiceSpy},
         {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
         {provide: MatDialog, useValue: {}},
-        ModalService
+        ModalDialogService
       ]
     })
     .compileComponents();

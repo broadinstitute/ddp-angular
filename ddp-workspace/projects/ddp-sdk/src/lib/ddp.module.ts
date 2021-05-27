@@ -192,7 +192,7 @@ import { ProgressIndicatorComponent } from './components/progress-indicator/prog
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 import { ConfirmDialogComponent } from './components/confirmDialog/confirmDialog.component';
-import { ModalService } from './services/modal.service';
+import { ModalDialogService } from './services/modal-dialog.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
@@ -315,7 +315,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
-        ModalService,
+        ModalDialogService,
         FileUploadService,
         InvitationPipe,
         ParticipantsSearchServiceAgent,

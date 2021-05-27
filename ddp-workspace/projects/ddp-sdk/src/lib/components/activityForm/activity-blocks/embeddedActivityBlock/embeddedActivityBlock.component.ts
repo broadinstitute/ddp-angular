@@ -20,7 +20,7 @@ import { ActivityForm } from '../../../../models/activity/activityForm';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
-import { ModalService } from '../../../../services/modal.service';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 
 @Component({
@@ -46,7 +46,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
                 private submitAnnouncementService: SubmitAnnouncementService,
                 private logger: LoggingService,
                 private dialog: MatDialog,
-                private modalService: ModalService) {
+                private modalDialogService: ModalDialogService) {
     }
 
     ngOnInit(): void {
@@ -60,7 +60,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
 
     public openDeleteDialog(): void {
         const panelClass = 'modal-activity-block__delete-dialog';
-        const config = this.modalService.getDialogConfig(this.deleteButtonRef, panelClass);
+        const config = this.modalDialogService.getDialogConfig(this.deleteButtonRef, panelClass);
         config.data = {
             title: 'SDK.ConfirmDeletion',
             confirmBtnText: 'SDK.DeleteButton',

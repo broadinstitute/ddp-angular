@@ -14,7 +14,7 @@ const DIALOG_HEIGHT = 160;
 const VERTICAL_GAP = 15; // margin between dialog and delete button
 
 @Injectable()
-export class ModalService {
+export class ModalDialogService {
 
     public getDialogConfig(rootButtonRef: ElementRef, panelClass: string): MatDialogConfig {
         const realDialogWidth = DIALOG_WIDTH + DIALOG_ARROW_WIDTH;

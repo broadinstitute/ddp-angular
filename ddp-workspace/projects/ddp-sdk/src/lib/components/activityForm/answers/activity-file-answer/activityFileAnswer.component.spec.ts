@@ -15,7 +15,7 @@ import { TranslateTestingModule } from '../../../../testsupport/translateTesting
 import { ActivityFileAnswer } from './activityFileAnswer.component';
 import { FileUploadService } from '../../../../services/fileUpload.service';
 import { LoggingService } from '../../../../services/logging.service';
-import { ModalService } from '../../../../services/modal.service';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
 import { ValidationMessage } from '../../../validationMessage.component';
@@ -27,13 +27,13 @@ describe('ActivityFileAnswer', () => {
     let fileUploadServiceSpy: jasmine.SpyObj<FileUploadService>;
     let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
     let matDialogSpy: jasmine.SpyObj<MatDialog>;
-    let modalServiceSpy: jasmine.SpyObj<ModalService>;
+    let modalDialogServiceSpy: jasmine.SpyObj<ModalDialogService>;
 
     beforeEach(async() => {
         fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService', ['getUploadUrl', 'uploadFile']);
         loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logDebug']);
         matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
-        modalServiceSpy = jasmine.createSpyObj('ModalService', ['getDialogConfig']);
+        modalDialogServiceSpy = jasmine.createSpyObj('ModalService', ['getDialogConfig']);
 
         await TestBed.configureTestingModule({
             declarations: [
@@ -53,7 +53,7 @@ describe('ActivityFileAnswer', () => {
                 {provide: FileUploadService, useValue: fileUploadServiceSpy},
                 {provide: LoggingService, useValue: loggingServiceSpy},
                 {provide: MatDialog, useValue: matDialogSpy},
-                {provide: ModalService, useValue: modalServiceSpy},
+                {provide: ModalDialogService, useValue: modalDialogServiceSpy},
                 {provide: MatDialogRef, useValue: {}},
                 {provide: MAT_DIALOG_DATA, useValue: {}}
             ],
@@ -116,7 +116,7 @@ describe('ActivityFileAnswer', () => {
             matDialogSpy.open.and.returnValue({
                 afterClosed: () => of(true)
             } as any);
-            modalServiceSpy.getDialogConfig.and.returnValue({});
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
             component.undoUploadedFile();
             expect(component.uploadedFile).toBeNull();
         });
@@ -126,7 +126,7 @@ describe('ActivityFileAnswer', () => {
             matDialogSpy.open.and.returnValue({
                 afterClosed: () => of(true)
             } as any);
-            modalServiceSpy.getDialogConfig.and.returnValue({});
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
             component.undoUploadedFile();
             expect(component.block.answer).toBeNull();
             expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
@@ -155,7 +155,7 @@ describe('ActivityFileAnswer', () => {
             matDialogSpy.open.and.returnValue({
                 afterClosed: () => of(true)
             } as any);
-            modalServiceSpy.getDialogConfig.and.returnValue({});
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
             component.onFilesSelected([{name: 'fileName', size: 1000} as File]);
             fixture.detectChanges();
 

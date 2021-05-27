@@ -20,7 +20,7 @@ import { LoggingService } from '../../../../services/logging.service';
 import { ActivityFileAnswerDto } from '../../../../models/activity/activityFileAnswerDto';
 import { FileUploadBody } from '../../../../models/fileUploadBody';
 import { FileUploadResponse } from '../../../../models/fileUploadResponse';
-import { ModalService } from '../../../../services/modal.service';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 
@@ -51,7 +51,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     constructor(private fileUploadService: FileUploadService,
                 private logger: LoggingService,
                 private dialog: MatDialog,
-                private modalService: ModalService) {
+                private modalDialogService: ModalDialogService) {
     }
 
     ngOnInit(): void {
@@ -109,7 +109,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     openReuploadConfirmDialog(): void {
-        const config = this.modalService.getDialogConfig(this.uploadButtonRef, this.panelClass);
+        const config = this.modalDialogService.getDialogConfig(this.uploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',
             confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',
@@ -125,7 +125,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     undoUploadedFile(): void {
-        const config = this.modalService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
+        const config = this.modalDialogService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
             confirmBtnText: 'SDK.FileUpload.UndoBtnText',
