@@ -138,6 +138,14 @@
       "View": "View"
     }
   },
+  "SessionWillExpire": {
+    "Title": "Your session will time-out soon",
+    "TimeLeft": "Time left: {{ timeLeft }}",
+    "RenewalFailed": "Session renewal failed. Please log out and log back in again.",
+    "Paragraph": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+    "SignOut": "Sign Out",
+    "Continue": "Continue"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Dashboard",
@@ -243,7 +251,7 @@
     },
     "Dashboard": {
       "Title": "My Dashboard",
-      "Text": "The dashboard below describes each TestBoston form and its status."
+      "Text": "The dashboard below describes each Circadia form and its status."
     },
     "DatePicker": {
       "Day": "Choose day...",
@@ -276,7 +284,7 @@
       "SingularForm": "character remaining"
     },
     "Title": {
-      "Default": "TestBoston",
+      "Default": "Circadia",
       "Alert": "Your session will time-out soon"
     },
     "EmailEntry": {

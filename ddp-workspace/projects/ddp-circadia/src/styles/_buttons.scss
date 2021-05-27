@@ -77,6 +77,25 @@
       }
     }
   }
+
+  &--opaque {
+    background: #efefef;
+
+    color: #000000;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: darken(#efefef, 5%);
+        box-shadow: none;
+      }
+
+      &:active {
+        background: darken(#efefef, 10%);
+        box-shadow: none;
+      }
+    }
+  }
 }
 
 .SimpleButton {

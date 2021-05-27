@@ -4,11 +4,14 @@ import { LOCATION_INITIALIZED } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   DdpModule,
@@ -31,6 +34,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
+import { SessionWillExpireComponent } from './components/session-will-expire/session-will-expire.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { Route } from './constants/route';
 import { AppRoutingModule } from './app-routing.module';
@@ -125,6 +129,7 @@ export function translateFactory(
     IrbPasswordComponent,
     JoinUsComponent,
     LoginLandingComponent,
+    SessionWillExpireComponent,
     UserActivitiesComponent,
   ],
   imports: [
@@ -132,11 +137,14 @@ export function translateFactory(
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    MatIconModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
