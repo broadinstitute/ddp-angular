@@ -36,10 +36,13 @@
         </li>
         <li class="nav-item">
           <a
-            class="button button--primary button--lg"
+            class="button button--primary button--lg nav-item__button"
             [routerLink]="Route.PreScreening"
             >{{ 'Header.Links.CountMeIn' | translate }}</a
           >
+        </li>
+        <li class="nav-item">
+          <app-login></app-login>
         </li>
       </ul>
     </div>
@@ -53,4 +56,5 @@
       />
     </div>
   </div>
+
 </header>

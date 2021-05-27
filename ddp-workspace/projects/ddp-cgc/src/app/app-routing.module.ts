@@ -16,6 +16,7 @@ import { PasswordComponent } from './components/pages/password/password.componen
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,11 @@ const routes: Routes = [
     path: Route.Error,
     component: ErrorComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.LoginRedirect,
+    component: RedirectToLoginComponent,
     canActivate: [IrbGuard],
   },
   {

@@ -158,6 +158,10 @@
     "CountMeIn": "Count Me In",
     "PreviousButton": "Previous",
     "NextButton": "Next",
-    "SubmitButton": "Submit"
+    "SubmitButton": "Submit",
+    "SignInOut": {
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
+    }
   }
 }

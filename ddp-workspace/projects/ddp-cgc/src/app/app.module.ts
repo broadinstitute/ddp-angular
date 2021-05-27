@@ -29,6 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { ErrorComponent } from './components/pages/error/error.component';
+import { LoginComponent } from './components/login/login.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 
 declare const DDP_ENV: any;
 
@@ -80,6 +82,8 @@ tkCfg.errorUrl = Route.Error;
     PasswordComponent,
     PreScreeningComponent,
     StayInformedComponent,
+    LoginComponent,
+    RedirectToLoginComponent,
   ],
   imports: [
     BrowserModule,

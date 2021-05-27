@@ -87,10 +87,13 @@
 
 @media only screen and (max-width: 992px) {
   .navbar-header {
-    padding: 0 25px 25px 25px!important;
+    padding: 0 0 25px 25px!important;
   }
   .header-background {
     padding: 25px 0 0 0!important;
+  }
+  .nav-item {
+    padding-left: 15px;
   }
   .arrow {
     display: none;
@@ -100,6 +103,12 @@
 @media only screen and (max-width: 850px) {
   .header-logo img {
     height: 34px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-item__button {
+    display: inline;
   }
 }
 
