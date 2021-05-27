@@ -2,6 +2,11 @@ import { ActivityAbstractValidationRule } from './activityAbstractValidationRule
 import { ActivityFileQuestionBlock } from '../../../models/activity/activityFileQuestionBlock';
 import { ActivityFileAnswerDto } from '../../../models/activity/activityFileAnswerDto';
 
+enum FILE_VALIDATION_MESSAGE {
+  maxSize = 'File size exceeded maximum of 100 bytes',
+  invalidType = 'Mime type not belongs to allowed list'
+}
+
 export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
     constructor(private block: ActivityFileQuestionBlock) {
         super(block);
@@ -11,12 +16,12 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
         const answer = answerBeforeUpload || this.block.answer;
 
         if (this.isMaxFileSizeExceeded(answer)) {
-            this.result = 'File size exceeded maximum of 100 bytes';
+            this.result = FILE_VALIDATION_MESSAGE.maxSize;
             return false;
         }
 
         if (this.isNotAllowedFileType(answer)) {
-            this.result = 'Mime type not belongs to allowed list';
+            this.result = FILE_VALIDATION_MESSAGE.invalidType;
             return false;
         }
 
