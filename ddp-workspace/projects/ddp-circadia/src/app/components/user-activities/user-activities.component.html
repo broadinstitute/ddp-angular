@@ -15,7 +15,30 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
-      {{ 'UserActivities.Statuses.' + activity.statusCode | translate }}
+      <div class="activity-status">
+        <ng-container
+          *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
+        >
+          <mat-icon class="status-icon status-icon--created">info</mat-icon
+          >{{ 'UserActivities.Statuses.Created' | translate }}
+        </ng-container>
+
+        <ng-container
+          *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
+        >
+          <mat-icon class="status-icon status-icon--in-progress"
+            >pending</mat-icon
+          >{{ 'UserActivities.Statuses.InProgress' | translate }}
+        </ng-container>
+
+        <ng-container
+          *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
+        >
+          <mat-icon class="status-icon status-icon--complete"
+            >check_circle</mat-icon
+          >{{ 'UserActivities.Statuses.Complete' | translate }}
+        </ng-container>
+      </div>
     </td>
   </ng-container>
 

@@ -128,9 +128,9 @@
       "Actions": "Actions"
     },
     "Statuses": {
-      "CREATED": "Not started",
-      "IN_PROGRESS": "In progress",
-      "COMPLETE": "Complete"
+      "Created": "Not started",
+      "InProgress": "In progress",
+      "Complete": "Complete"
     },
     "Actions": {
       "Start": "Start",

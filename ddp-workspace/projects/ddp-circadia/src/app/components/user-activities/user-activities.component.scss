@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .mat-table {
   width: 100%;
 }
@@ -22,4 +24,26 @@
 
 .mat-column-actions {
   width: 25%;
+}
+
+.activity-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  margin-top: -0.1em;
+  margin-right: 0.3em;
+
+  &--created {
+    color: $color-yellow-1;
+  }
+
+  &--in-progress {
+    color: $color-blue-4;
+  }
+
+  &--complete {
+    color: $color-success;
+  }
 }
