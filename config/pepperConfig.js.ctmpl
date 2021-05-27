@@ -202,6 +202,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "rarex-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rarex-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{end}}
 
     {{if eq $environment "dev"}}
@@ -209,6 +210,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "rarex-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rarex-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{end}}
 
     {{if eq $environment "test"}}
@@ -216,6 +218,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "rarex-test.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rarex-test.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-test.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{end}}
 
     {{if eq $environment "staging"}}
@@ -223,13 +226,15 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "rarex-staging.us.auth0.com";
         DDP_ENV['auth0Audience'] = "rarex-staging.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-staging.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{end}}
 
     {{if eq $environment "prod"}}
         DDP_ENV['auth0ClientId'] = "7RO0fGEmpGze4J5aPrgIax1hlZgfs7IJ";
-        DDP_ENV['auth0Domain'] = "rarex-prod.us.auth0.com";
+        DDP_ENV['auth0Domain'] = "login.dcp.rare-x.org";
         DDP_ENV['auth0Audience'] = "rarex-prod.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper.datadonationplatform.org";
+        DDP_ENV['projectGAToken'] = "UA-5430047-79";
     {{end}}
 {{end}}
 
