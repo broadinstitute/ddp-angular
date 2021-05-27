@@ -34,6 +34,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
+import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { SessionWillExpireComponent } from './components/session-will-expire/session-will-expire.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { Route } from './constants/route';
@@ -45,16 +46,11 @@ const base = document.querySelector('base').getAttribute('href') || '';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
-sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.logLevel = DDP_ENV.logLevel;
-sdkConfig.baseUrl = location.origin + base;
-sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
-sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
 sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
-sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
 sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
 sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
@@ -62,10 +58,16 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.defaultLanguageCode = 'en';
+sdkConfig.baseUrl = location.origin + base;
+sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.errorPageUrl = Route.Error;
-sdkConfig.loginLandingUrl = Route.LoginLanding;
+sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
 sdkConfig.passwordPageUrl = Route.Password;
 sdkConfig.dashboardPageUrl = Route.Dashboard;
+sdkConfig.sessionExpiredUrl = Route.SessionExpired;
+sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
+sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
+sdkConfig.loginLandingUrl = Route.LoginLanding;
 sdkConfig.scrollToErrorOffset = 100;
 
 export const toolkitConfig = new ToolkitConfigurationService();
@@ -129,6 +131,7 @@ export function translateFactory(
     IrbPasswordComponent,
     JoinUsComponent,
     LoginLandingComponent,
+    SessionExpiredComponent,
     SessionWillExpireComponent,
     UserActivitiesComponent,
   ],

@@ -11,4 +11,5 @@ export enum Route {
   Dashboard = 'dashboard',
   Activity = 'activity',
   ActivityId = 'activity/:id',
+  SessionExpired = 'session-expired',
 }

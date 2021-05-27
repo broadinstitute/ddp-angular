@@ -13,6 +13,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { IrbPasswordComponent } from './components/pages/irb-password/irb-password.component';
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
+import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { Route } from './constants/route';
 
 const routes: Routes = [
@@ -55,6 +56,11 @@ const routes: Routes = [
     path: Route.Dashboard,
     component: DashboardComponent,
     canActivate: [IrbGuard, AuthGuard],
+  },
+  {
+    path: Route.SessionExpired,
+    component: SessionExpiredComponent,
+    canActivate: [IrbGuard],
   },
   {
     path: Route.ActivityId,

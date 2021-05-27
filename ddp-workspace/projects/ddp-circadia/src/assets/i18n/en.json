@@ -146,6 +146,11 @@
     "SignOut": "Sign Out",
     "Continue": "Continue"
   },
+  "SessionExpired": {
+    "Title": "Session has expired",
+    "Description": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on.",
+    "Button": "Login"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Dashboard",
