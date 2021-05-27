@@ -1,0 +1,24 @@
+<div class="container container--wide">
+  <h1 class="page-title">
+    {{ 'DashboardPage.Title' | translate }}
+  </h1>
+
+  <ng-container
+    *ngTemplateOutlet="loading ? loadingSpinner : userActivities"
+  ></ng-container>
+</div>
+
+<ng-template #userActivities>
+  <app-user-activities
+    [activities]="activities"
+    (viewActivity)="onViewActivity($event)"
+    (startActivity)="onStartActivity($event)"
+    (continueActivity)="onContinueActivity($event)"
+  ></app-user-activities>
+</ng-template>
+
+<ng-template #loadingSpinner>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

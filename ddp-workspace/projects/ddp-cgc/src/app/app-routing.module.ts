@@ -16,6 +16,8 @@ import { PasswordComponent } from './components/pages/password/password.componen
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
 
 const routes: Routes = [
   {
@@ -69,6 +71,16 @@ const routes: Routes = [
     path: Route.Error,
     component: ErrorComponent,
     pathMatch: 'full',
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.Dashboard,
+    component: DashboardComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.ActivityId,
+    component: ActivityPageComponent,
     canActivate: [IrbGuard],
   },
   {

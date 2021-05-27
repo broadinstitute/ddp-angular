@@ -1,20 +1,10 @@
+import { MaterialModule } from './modules/material/material.module';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-import {
-  ConfigurationService,
-  DdpModule,
-  LanguageService,
-  LoggingService,
-} from 'ddp-sdk';
-
+import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
-
 import { ActivityComponent } from './components/activity/activity.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -29,6 +19,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { ErrorComponent } from './components/pages/error/error.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
+
 
 declare const DDP_ENV: any;
 
@@ -59,6 +53,7 @@ ddpCfg.defaultLanguageCode = DDP_ENV.defaultLanguageCode || 'en';
 ddpCfg.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 ddpCfg.errorPageUrl = Route.Error;
 ddpCfg.passwordPageUrl = Route.Password;
+ddpCfg.dashboardPageUrl = Route.Dashboard;
 
 /**
  * Toolkit config
@@ -66,11 +61,14 @@ ddpCfg.passwordPageUrl = Route.Password;
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.errorUrl = Route.Error;
+tkCfg.dashboardUrl = Route.Dashboard;
+tkCfg.activityUrl = Route.Activity;
 
 @NgModule({
   declarations: [
     AppComponent,
     ActivityComponent,
+    ActivityPageComponent,
     FooterComponent,
     HeaderComponent,
     HomeComponent,
@@ -80,6 +78,8 @@ tkCfg.errorUrl = Route.Error;
     PasswordComponent,
     PreScreeningComponent,
     StayInformedComponent,
+    DashboardComponent,
+    UserActivitiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,9 +87,7 @@ tkCfg.errorUrl = Route.Error;
     AppRoutingModule,
     DdpModule,
     ToolkitModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
+    MaterialModule
   ],
   providers: [
     {
