@@ -102,13 +102,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
 
         if (this.uploadedFile) {
-            this.openReuploadConfirmDualog();
+            this.openReuploadConfirmDialog();
         } else {
             this.uploadFile();
         }
     }
 
-    openReuploadConfirmDualog(): void {
+    openReuploadConfirmDialog(): void {
         const config = this.modalService.getDialogConfig(this.uploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',

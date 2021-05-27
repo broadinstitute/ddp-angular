@@ -138,12 +138,12 @@ describe('ActivityFileAnswer', () => {
         });
 
         it('should call openConfirmDialog on click Reupload button', () => {
-            spyOn(component, 'openReuploadConfirmDualog');
+            spyOn(component, 'openReuploadConfirmDialog');
             component.isFileSelected = true;
             fixture.detectChanges();
             const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
             submitBtn.click();
-            expect(component.openReuploadConfirmDualog).toHaveBeenCalled();
+            expect(component.openReuploadConfirmDialog).toHaveBeenCalled();
         });
 
         it('should upload file after confirmation', () => {
@@ -159,7 +159,7 @@ describe('ActivityFileAnswer', () => {
             component.onFilesSelected([{name: 'fileName', size: 1000} as File]);
             fixture.detectChanges();
 
-            component.openReuploadConfirmDualog();
+            component.openReuploadConfirmDialog();
             expect(fileUploadServiceSpy.uploadFile).toHaveBeenCalled();
         });
     });
