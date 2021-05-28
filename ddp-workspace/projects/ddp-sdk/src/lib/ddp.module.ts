@@ -196,6 +196,7 @@ import { ModalDialogService } from './services/modal-dialog.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
+import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -317,7 +318,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,
-        InvitationPipe,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
@@ -395,6 +395,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
@@ -467,6 +468,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,

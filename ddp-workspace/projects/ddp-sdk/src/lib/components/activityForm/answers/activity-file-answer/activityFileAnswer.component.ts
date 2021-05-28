@@ -23,6 +23,7 @@ import { FileUploadResponse } from '../../../../models/fileUploadResponse';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
+import { FILE_SIZE_MEASURE } from '../../../../models/fileSizeMeasure';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -37,7 +38,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     @ViewChild('uploadBtn', {read: ElementRef}) private uploadButtonRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
-
+    readonly fileSizeMeasure = FILE_SIZE_MEASURE;
     selectedFile: File;
     isFileSelected: boolean;
     uploadedFile: UploadFile | null;
@@ -138,6 +139,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 this.patchAnswer(null);
                 this.setUploadedFile(null);
             }
+        });
+    }
+
+    mapMimeTypesToFileExtentions(mimeTypes: string[]): string[] {
+        return mimeTypes.map((mimeType: string) => {
+            const [type, subtype] = mimeType.split('/');
+            return '*.' + subtype;
         });
     }
 

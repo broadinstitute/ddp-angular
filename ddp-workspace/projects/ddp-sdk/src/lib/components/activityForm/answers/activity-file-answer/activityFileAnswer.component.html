@@ -2,8 +2,10 @@
 <ddp-question-prompt [block]="block"></ddp-question-prompt>
 
 <div class="file-requirements" *ngIf="fileMaxSize || fileMimeTypes.length">
-    <div class="file-max-size" *ngIf="fileMaxSize">Max size: {{fileMaxSize}}</div>
-    <div class="file-types" *ngIf="fileMimeTypes.length">Allowed mime-types: {{fileMimeTypes.join(', ')}}</div>
+    <div class="file-max-size" *ngIf="fileMaxSize">Max size: {{fileMaxSize | fileSize: fileSizeMeasure.Mb}} Mb</div>
+    <div class="file-types" *ngIf="fileMimeTypes.length">
+        Allowed files: {{mapMimeTypesToFileExtentions(fileMimeTypes).join(', ')}}
+    </div>
 </div>
 
 <div class="file-upload-content" [class.readonly]="readonly">
@@ -41,7 +43,8 @@
             <mat-chip *ngIf="uploadedFile?.isUploaded"
                       class="uploaded-file-chip"
                       color="primary" selected
-                      (removed)="undoUploadedFile()">{{uploadedFile.name}} (size: {{uploadedFile.size}})
+                      (removed)="undoUploadedFile()">
+                {{uploadedFile.name}} (size: {{uploadedFile.size| fileSize: fileSizeMeasure.Mb}} Mb)
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>

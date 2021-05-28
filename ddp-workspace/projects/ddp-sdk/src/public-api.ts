@@ -92,6 +92,7 @@ export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
 export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
+export * from './lib/services/modal-dialog.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
@@ -138,6 +139,8 @@ export * from './lib/components/activityForm/answers/activityEmailInput.componen
 export * from './lib/components/activityForm/answers/activity-text-input/activityTextInput.component';
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
+export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
+
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
 export * from './lib/components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
@@ -158,6 +161,7 @@ export * from './lib/directives/lazyLoadResources.directive';
 export * from './lib/directives/invitationCodeFormatter.directive';
 
 export * from './lib/pipes/invitationFormatter.pipe';
+export * from './lib/pipes/fileSizeFormatter.pipe';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';
