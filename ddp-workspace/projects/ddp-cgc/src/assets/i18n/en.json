@@ -274,10 +274,6 @@
       "PluralForm": "characters remaining",
       "SingularForm": "character remaining"
     },
-    "Title": {
-      "Default": "TestBoston",
-      "Alert": "Your session will time-out soon"
-    },
     "EmailEntry": {
       "InvalidEmail": "Please enter a valid email"
     },
