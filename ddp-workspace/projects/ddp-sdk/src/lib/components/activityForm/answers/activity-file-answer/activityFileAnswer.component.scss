@@ -49,6 +49,12 @@ $drop-block-active-color: lightyellow;
     }
 }
 
+.uploaded-file-chip {
+    .file-size {
+        margin-left: 5px;
+    }
+}
+
 .upload-btn {
     margin: 20px 0;
 }

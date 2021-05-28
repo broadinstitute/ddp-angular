@@ -5,8 +5,10 @@ import { FILE_SIZE_MEASURE } from '../models/fileSizeMeasure';
     name: 'fileSize'
 })
 export class FileSizeFormatterPipe implements PipeTransform {
-    transform(value: number, measure: FILE_SIZE_MEASURE): number {
-        const formattedNumber = value / measure;
-        return +(formattedNumber.toFixed(2));
+    transform(value: number): string {
+        const isFileSizeLessThenOneMb = value < FILE_SIZE_MEASURE.Mb;
+        const fractionDigits = isFileSizeLessThenOneMb ? 0 : 2;
+        const measure = isFileSizeLessThenOneMb ? FILE_SIZE_MEASURE.kB : FILE_SIZE_MEASURE.Mb;
+        return (value / measure).toFixed(fractionDigits) + FILE_SIZE_MEASURE[measure];
     }
 }

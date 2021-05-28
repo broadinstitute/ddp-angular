@@ -704,8 +704,17 @@
             "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
             "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
             "ReuploadBtnText": "Reupload",
+            "UploadBtnText": "Upload",
             "UndoBtnText": "OK",
-            "CancelBtnText": "Cancel"
+            "CancelBtnText": "Cancel",
+            "MaxSize": "Max size: {{maxSize}}",
+            "AllowedFiles": "Allowed files: {{allowedFileTypes}}",
+            "DragFiles": "Drag files to upload",
+            "ChooseFile": "Choose file",
+            "Uploaded": "Uploaded:",
+            "Size": "(size: {{size}})",
+            "MaxSizeErrorMessage": "File size exceeds allowed size",
+            "InvalidTypeErrorMessage": "File type not belongs to allowed list"
         }
     }
 }

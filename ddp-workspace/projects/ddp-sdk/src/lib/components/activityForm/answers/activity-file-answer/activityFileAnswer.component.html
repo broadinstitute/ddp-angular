@@ -1,10 +1,11 @@
-<!--  TODO: Add i18n  -->
 <ddp-question-prompt [block]="block"></ddp-question-prompt>
 
 <div class="file-requirements" *ngIf="fileMaxSize || allowedFileTypes.length">
-    <div class="file-max-size" *ngIf="fileMaxSize">Max size: {{fileMaxSize | fileSize: fileSizeMeasure.Mb}} Mb</div>
+    <div class="file-max-size" *ngIf="fileMaxSize">
+        {{'SDK.FileUpload.MaxSize' | translate : { maxSize: fileMaxSize | fileSize} }}
+    </div>
     <div class="file-types" *ngIf="allowedFileTypes.length">
-        Allowed files: {{getAllowedTypes(allowedFileTypes)}}
+        {{'SDK.FileUpload.AllowedFiles' | translate : { allowedFileTypes: getAllowedTypes(allowedFileTypes)} }}
     </div>
 </div>
 
@@ -19,11 +20,11 @@
              dropFileToUpload
              (filesDropped)="!readonly && onFilesSelected($event)">
             <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
-            <span class="drop-block-text">Drag files to upload</span>
+            <span class="drop-block-text" translate>SDK.FileUpload.DragFiles</span>
         </div>
         <button mat-raised-button color="primary" class="upload-btn"
                 [disabled]="readonly"
-                (click)="fileUpload.click()">Choose file
+                (click)="fileUpload.click()">{{'SDK.FileUpload.ChooseFile' | translate}}
             <mat-icon>attach_file</mat-icon>
         </button>
 
@@ -32,20 +33,22 @@
         <button *ngIf="!readonly" #uploadBtn
                 mat-raised-button color="primary"
                 class="submit-btn"
-                [disabled]="!fileToUpload?.isReadyToUpload"
-                (click)="submitFileUpload()">{{uploadedFile? 'Reupload' : 'Upload'}}
+
+                (click)="submitFileUpload()">
+            {{uploadedFile? ('SDK.FileUpload.ReuploadBtnText' | translate) : ('SDK.FileUpload.UploadBtnText' | translate)}}
         </button>
     </div>
 
     <div class="uploaded-file">
-        <div class="title">Uploaded:</div>
+        <div class="title" translate>SDK.FileUpload.Uploaded</div>
 
         <mat-chip-list>
             <mat-chip *ngIf="uploadedFile"
                       class="uploaded-file-chip"
                       color="primary" selected
                       (removed)="undoUploadedFile()">
-                {{uploadedFile.fileName}} (size: {{uploadedFile.fileSize| fileSize: fileSizeMeasure.Mb}} Mb)
+                {{uploadedFile.fileName}}
+                <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>

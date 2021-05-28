@@ -3,8 +3,8 @@ import { ActivityFileQuestionBlock } from '../../../models/activity/activityFile
 import { ActivityFileAnswerDto } from '../../../models/activity/activityFileAnswerDto';
 
 enum FILE_VALIDATION_MESSAGE {
-  maxSize = 'File size exceeded maximum of 100 bytes',
-  invalidType = 'Mime type not belongs to allowed list'
+  maxSize = 'SDK.FileUpload.MaxSizeErrorMessage',
+  invalidType = 'SDK.FileUpload.InvalidTypeErrorMessage'
 }
 
 export class ActivityFileValidationRule extends ActivityAbstractValidationRule {

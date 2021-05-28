@@ -23,7 +23,6 @@ import { FileUploadResponse } from '../../../../models/fileUploadResponse';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
-import { FILE_SIZE_MEASURE } from '../../../../models/fileSizeMeasure';
 import { FileAnswerMapperService } from '../../../../services/fileAnswerMapper.service';
 
 @Component({
@@ -39,7 +38,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     @ViewChild('uploadBtn', {read: ElementRef}) private uploadButtonRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
-    readonly fileSizeMeasure = FILE_SIZE_MEASURE;
     fileToUpload: UploadFile | null;
     uploadedFile: ActivityFileAnswerDto | null;
     fileMaxSize: number;

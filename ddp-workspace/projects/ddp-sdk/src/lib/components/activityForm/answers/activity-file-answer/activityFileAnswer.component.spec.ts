@@ -6,7 +6,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 import { ActivityFileAnswer } from './activityFileAnswer.component';
@@ -18,6 +18,25 @@ import { QuestionPromptComponent } from '../question-prompt/questionPrompt.compo
 import { ValidationMessage } from '../../../validationMessage.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FileSizeFormatterPipe } from '../../../../pipes/fileSizeFormatter.pipe';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+
+class TranslateLoaderMock implements TranslateLoader {
+    getTranslation(code: string = ''): Observable<object> {
+        const TRANSLATIONS = {
+            en: {
+                SDK: {
+                    FileUpload: {
+                        ReuploadBtnText: 'Reupload',
+                        UploadBtnText: 'Upload',
+                        CancelBtnText: 'Cancel',
+                        Size: '(size: {{size}})',
+                    }
+                }
+            }
+        };
+        return of(TRANSLATIONS[code]);
+    }
+}
 
 describe('ActivityFileAnswer', () => {
     let component: ActivityFileAnswer;
@@ -47,6 +66,9 @@ describe('ActivityFileAnswer', () => {
                 MatIconTestingModule,
                 MatChipsModule,
                 TranslateTestingModule,
+                TranslateModule.forRoot({
+                    loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+                }),
             ],
             providers: [
                 {provide: FileUploadService, useValue: fileUploadServiceSpy},
@@ -57,6 +79,9 @@ describe('ActivityFileAnswer', () => {
                 {provide: MAT_DIALOG_DATA, useValue: {}}
             ],
         }).compileComponents();
+
+        const translate = TestBed.inject(TranslateService);
+        translate.use('en');
     });
 
     beforeEach(() => {
@@ -98,7 +123,7 @@ describe('ActivityFileAnswer', () => {
 
         it('should display an uploaded file data', () => {
             const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91 Mb)');
+            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91Mb)');
         });
 
         it('should call undoUploadedFile by click on remove uploaded file button', () => {
