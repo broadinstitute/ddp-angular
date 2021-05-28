@@ -116,6 +116,7 @@ commands:
             # we are getting our builds from the one bucket
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Looking for archive matching ${TAR_FILE_URL_PATTERN}"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
 
             if [ -z $TAR_FILE_URL ]
@@ -124,6 +125,7 @@ commands:
               exit 1
             fi
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
+            echo "Downloading ${TAR_FILE_URL} to ${TAR_FILE_PATH}"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive at $OUTPUT_DIR"
@@ -279,8 +281,9 @@ commands:
       - run:
           name: Linter check
           command: |
-            ng lint
-
+            ng lint ddp-sdk
+            ng lint toolkit
+            ng lint $ANGULAR_PROJECT_NAME
   run-tests:
     description: "Run all tests"
     steps:
@@ -289,6 +292,8 @@ commands:
           command: |
             mkdir -p /tmp/junit
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml

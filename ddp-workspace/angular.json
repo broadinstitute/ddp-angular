@@ -376,7 +376,7 @@
               }
             ],
             "styles": [
-              "projects/ddp-atcp/src/styles.scss"
+              "projects/ddp-atcp/src/app/styles/main.scss"
             ],
             "scripts": []
           }

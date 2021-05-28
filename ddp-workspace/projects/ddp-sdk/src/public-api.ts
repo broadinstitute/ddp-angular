@@ -50,6 +50,8 @@ export * from './lib/models/studySubject';
 export * from './lib/models/invitationType';
 export * from './lib/models/activity/questionType';
 export * from './lib/models/statistic';
+export * from './lib/models/searchParticipant';
+export * from './lib/models/enrollmentStatusType';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
@@ -88,6 +90,7 @@ export * from './lib/services/serviceAgents/userServiceAgent.service';
 export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
+export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
@@ -96,7 +99,7 @@ export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/internationalization/changeLanguageRedirect.component';
 export * from './lib/components/popupWithCheckbox.component';
 export * from './lib/components/user/activities/userActivitiesDataSource';
-export * from './lib/components/subjectPanel.component';
+export * from './lib/components/subjectPanel/subjectPanel.component';
 export * from './lib/components/adminActionPanel.component';
 export * from './lib/components/tooltip.component';
 export * from './lib/components/validationMessage.component';
@@ -160,5 +163,7 @@ export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';
 export * from './lib/guards/browser.guard';
 export * from './lib/guards/irb.guard';
+
+export * from './lib/testsupport/componentMock';
 
 export * from './lib/compositeDisposable';

@@ -169,7 +169,7 @@ import { ConditionalBlockComponent } from './components/activityForm/activity-bl
 import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
-import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { SubjectPanelComponent } from './components/subjectPanel/subjectPanel.component';
 import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
@@ -196,6 +196,7 @@ import { ActivityBlockModalService } from './services/activity-block-modal.servi
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
+import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -317,6 +318,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ActivityBlockModalService,
         FileUploadService,
+        InvitationPipe,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
@@ -393,6 +395,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressGoogleAutocompleteDirective,
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,
@@ -465,6 +468,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,

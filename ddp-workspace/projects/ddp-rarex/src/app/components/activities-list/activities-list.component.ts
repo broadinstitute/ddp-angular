@@ -39,17 +39,6 @@ export class ActivitiesListComponent {
     ActivityCodes.LarConsentAssent,
   ];
 
-  shouldShowQuestionCount(activity: ActivityInstance): boolean {
-    const questionCount = activity.numQuestions;
-    const answeredQuestionCount = activity.numQuestionsAnswered;
-
-    if (this.isConsentOrAssent(activity)) {
-      return false;
-    }
-
-    return questionCount !== answeredQuestionCount;
-  }
-
   canCopyActivity(activity: ActivityInstance): boolean {
     return this.allowedToEditActivities.includes(
       activity.activityCode as ActivityCodes,
@@ -70,11 +59,5 @@ export class ActivitiesListComponent {
 
   onViewClick(activity: ActivityInstance): void {
     this.viewActivity.emit(activity);
-  }
-
-  private isConsentOrAssent(activity: ActivityInstance): boolean {
-    return this.consentActivities.includes(
-      activity.activityCode as ActivityCodes,
-    );
   }
 }
