@@ -1,27 +1,29 @@
+import { Route } from './constants/route';
+import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { translateFactory } from './util/translateFactory';
 import { MaterialModule } from './modules/material/material.module';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
-import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
+import { LoginComponent } from './components/login/login.component';
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
-import { ActivityComponent } from './components/activity/activity.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
+import { ErrorComponent } from './components/pages/error/error.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { PasswordComponent } from './components/pages/password/password.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { LearnMoreComponent } from './components/pages/learn-more/learn-more.component';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
+import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
-import { Route } from './constants/route';
-import { translateFactory } from './util/translateFactory';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AboutUsComponent } from './components/pages/about-us/about-us.component';
-import { ErrorComponent } from './components/pages/error/error.component';
-import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
-import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
+import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 
 
 declare const DDP_ENV: any;
@@ -67,27 +69,29 @@ tkCfg.activityUrl = Route.Activity;
 @NgModule({
   declarations: [
     AppComponent,
-    ActivityComponent,
-    ActivityPageComponent,
+    HomeComponent,
+    ErrorComponent,
+    LoginComponent,
     FooterComponent,
     HeaderComponent,
-    HomeComponent,
     AboutUsComponent,
-    LearnMoreComponent,
-    ErrorComponent,
+    ActivityComponent,
     PasswordComponent,
+    LearnMoreComponent,
+    DashboardComponent,
+    ActivityPageComponent,
     PreScreeningComponent,
     StayInformedComponent,
-    DashboardComponent,
     UserActivitiesComponent,
+    RedirectToLoginComponent,
   ],
   imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
     DdpModule,
+    BrowserModule,
     ToolkitModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
