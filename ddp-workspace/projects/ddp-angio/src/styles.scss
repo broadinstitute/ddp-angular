@@ -872,7 +872,8 @@ ul {
 }
 
 .PageContent-text,
-.PageContent-box-text {
+.PageContent-box-text,
+.prism-subtitle {
     font-weight: 300;
     font-size: 1.1rem;
     line-height: 1.6rem;
@@ -902,12 +903,17 @@ ul {
     color: mat-color($app-theme, 700) !important;
 }
 
-.PageContent-title {
+.PageContent-title,
+.prism-title {
     font-size: 1.4rem;
     color: mat-color($app-theme, 1000);
     font-weight: 400;
     line-height: 1.33;
     margin: 2.1rem 0 1.3rem 0;
+}
+
+.prism-title {
+    margin: 0 0 0.4rem;
 }
 
 .Field-padding {
@@ -2211,4 +2217,17 @@ input.mat-input-element {
 .ddp-subject-panel__text {
     font-size: 15px;
     line-height: 23px;
+}
+
+.prism-field__icon,
+.prism-field__clear {
+    color: mat-color($app-theme, 1000);
+}
+
+.prism-field__clear {
+    font-size: 1.1rem;
+}
+
+.prism__warning-container {
+    color: mat-color($app-theme, 500);
 }

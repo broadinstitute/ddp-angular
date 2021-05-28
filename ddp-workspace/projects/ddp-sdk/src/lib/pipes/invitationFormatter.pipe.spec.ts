@@ -18,4 +18,8 @@ describe('InvitationPipe test', () => {
     it('should format invitation code using custom chunk size and custom separator', () => {
         expect(pipe.transform('111111111111', 6, '~')).toBe('111111~111111');
     });
+
+    it('should not transform invitation code of oldv format', () => {
+        expect(pipe.transform('f13e21a7-eff9-4203-b307-37131d02e709')).toBe('f13e21a7-eff9-4203-b307-37131d02e709');
+    });
 });

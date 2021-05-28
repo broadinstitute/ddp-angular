@@ -1,4 +1,4 @@
-<p class="prism-title" translate>SDK.Prism.Title</p>
+<h2 class="prism-title" translate>SDK.Prism.Title</h2>
 <p class="prism-subtitle" translate>SDK.Prism.Subtitle</p>
 <mat-form-field class="prism-field" floatLabel="never">
     <mat-icon class="prism-field__icon" matPrefix>search</mat-icon>
@@ -17,7 +17,7 @@
         {{'SDK.Prism.MinQueryLengthHint' | translate : { length: MIN_SEARCH_LENGTH } }}
     </mat-hint>
 </mat-form-field>
-<div class="warning-container">
+<div class="prism__warning-container">
     <ng-container *ngIf="totalCount > dataSource.data.length">
         <p>
             <mat-icon>warning</mat-icon>
