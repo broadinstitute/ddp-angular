@@ -197,6 +197,7 @@ import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
 import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
+import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -318,6 +319,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,
+        FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,

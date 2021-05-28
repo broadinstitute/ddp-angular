@@ -24,6 +24,7 @@ import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FILE_SIZE_MEASURE } from '../../../../models/fileSizeMeasure';
+import { FileAnswerMapperService } from '../../../../services/fileAnswerMapper.service';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -39,13 +40,11 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @ViewChild('uploadBtn', {read: ElementRef}) private uploadButtonRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
     readonly fileSizeMeasure = FILE_SIZE_MEASURE;
-    selectedFile: File;
-    isFileSelected: boolean;
-    uploadedFile: UploadFile | null;
+    fileToUpload: UploadFile | null;
+    uploadedFile: ActivityFileAnswerDto | null;
     fileMaxSize: number;
-    fileMimeTypes: string[];
+    allowedFileTypes: string[];
     errorMessage: string;
-    private fileToUpload: UploadFile | null;
     private ngUnsubscribe = new Subject();
     private readonly panelClass = 'file-upload-confirm-dialog';
 
@@ -64,13 +63,18 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const file: File = files[0];
 
         if (file) {
-            this.selectedFile = file;
+            this.fileToUpload = {
+                file,
+                uploadGuid: null,
+                uploadUrl: null,
+                isReadyToUpload: false
+            };
 
             const requestBody: FileUploadBody = {
                 questionStableId: this.block.stableId,
-                fileName: this.selectedFile.name,
-                fileSize: this.selectedFile.size,
-                mimeType: this.selectedFile.type
+                fileName: file.name,
+                fileSize: file.size,
+                mimeType: file.type
             };
 
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
@@ -83,13 +87,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     takeUntil(this.ngUnsubscribe)
                 )
                 .subscribe((res: FileUploadResponse) => {
-                    this.isFileSelected = true;
                     this.fileToUpload = {
+                        ...this.fileToUpload,
                         ...res,
-                        name: file.name,
-                        size: file.size,
-                        fileMimeType: file.type,
-                        isUploaded: false
+                        isReadyToUpload: true
                     };
                 });
         }
@@ -142,11 +143,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         });
     }
 
-    mapMimeTypesToFileExtentions(mimeTypes: string[]): string[] {
-        return mimeTypes.map((mimeType: string) => {
-            const [type, subtype] = mimeType.split('/');
-            return '*.' + subtype;
-        });
+    getAllowedTypes(allowedFileTypes: string[]): string {
+        return FileAnswerMapperService.mapMimeTypesToFileExtentions(allowedFileTypes).join(', ');
     }
 
     ngOnDestroy(): void {
@@ -156,23 +154,20 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
 
     private initFileRequirements(): void {
         this.fileMaxSize = this.block.maxFileSize;
-        this.fileMimeTypes = this.block.mimeTypes || [];
+        this.allowedFileTypes = this.block.mimeTypes || [];
     }
 
     private initUploadedFile(): void {
         if (this.block?.answer) {
             this.setUploadedFile({
-                uploadGuid: '',
-                uploadUrl: '',
-                name: this.block.answer.fileName,
-                size: this.block.answer.fileSize,
-                isUploaded: true
-            } as UploadFile);
+                fileName: this.block.answer.fileName,
+                fileSize: this.block.answer.fileSize
+            });
         }
     }
 
     private uploadFile(): void {
-        this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.selectedFile)
+        this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.fileToUpload.file)
             .pipe(
                 catchError(err => {
                     this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
@@ -181,28 +176,21 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 takeUntil(this.ngUnsubscribe)
             )
             .subscribe(() => {
-                this.patchAnswer(this.fileToUpload);
-                this.setUploadedFile({
-                    ...this.fileToUpload,
-                    isUploaded: true
-                });
-                this.resetSelectedFile();
+                const uploadedFile = FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload);
+                this.patchAnswer(uploadedFile, this.fileToUpload.uploadGuid);
+                this.setUploadedFile(uploadedFile);
+                this.fileToUpload = null;
                 this.errorMessage = '';
             });
     }
 
-    private setUploadedFile(file: UploadFile | null): void {
+    private setUploadedFile(file: ActivityFileAnswerDto | null): void {
         this.uploadedFile = file;
     }
 
-    private patchAnswer(file: UploadFile | null): void {
-        this.block.answer = file ? { fileName: file.name, fileSize: file.size } : null;
-        this.valueChanged.emit(file?.uploadGuid || null);
-    }
-
-    private resetSelectedFile(): void {
-        this.selectedFile = null;
-        this.isFileSelected = false;
+    private patchAnswer(file: ActivityFileAnswerDto | null, fileUploadGuid?: string): void {
+        this.block.answer = file || null;
+        this.valueChanged.emit(fileUploadGuid || null);
     }
 
     private getFailedLocalValidator(): ActivityFileValidationRule {
@@ -210,9 +198,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             .filter(validator => validator instanceof ActivityFileValidationRule)
             .find(validator => {
                 const preUploadFileAnswer: ActivityFileAnswerDto = {
-                    fileName: this.fileToUpload?.name,
-                    fileSize: this.fileToUpload?.size,
-                    fileMimeType: this.fileToUpload?.fileMimeType
+                    ...FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload),
+                    fileMimeType: this.fileToUpload?.file?.type
                 };
                 return !validator.recalculate(preUploadFileAnswer);
             }) as ActivityFileValidationRule;

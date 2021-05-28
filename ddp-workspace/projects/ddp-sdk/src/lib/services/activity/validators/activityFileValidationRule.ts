@@ -35,7 +35,7 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
 
     private isNotAllowedFileType(answer: ActivityFileAnswerDto): boolean {
         const allowedFileTypes = this.block.mimeTypes?.length ? this.block.mimeTypes : null;
-        const fileExtension = answer?.fileMimeType;
-        return allowedFileTypes && fileExtension && !allowedFileTypes.includes(fileExtension);
+        const fileType = answer?.fileMimeType;
+        return allowedFileTypes && fileType && !allowedFileTypes.includes(fileType);
     }
 }

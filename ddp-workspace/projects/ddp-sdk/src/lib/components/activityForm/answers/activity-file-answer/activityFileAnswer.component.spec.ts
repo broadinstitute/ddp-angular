@@ -76,7 +76,7 @@ describe('ActivityFileAnswer', () => {
         component.ngOnInit();
 
         expect(component.fileMaxSize).toEqual(1000);
-        expect(component.fileMimeTypes).toEqual(['image/jpeg', 'image/png']);
+        expect(component.allowedFileTypes).toEqual(['image/jpeg', 'image/png']);
     });
 
     describe('There is already uploaded file', () => {
@@ -91,11 +91,8 @@ describe('ActivityFileAnswer', () => {
 
         it('should init previously uploaded file if any', () => {
             expect(component.uploadedFile).toEqual({
-                uploadGuid: '',
-                uploadUrl: '',
-                name: '1.png',
-                size: 2000000,
-                isUploaded: true
+                fileName: '1.png',
+                fileSize: 2000000
             });
         });
 
@@ -138,7 +135,17 @@ describe('ActivityFileAnswer', () => {
 
         it('should call openConfirmDialog on click Reupload button', () => {
             spyOn(component, 'openReuploadConfirmDialog');
-            component.isFileSelected = true;
+            component.block.validators = [];
+            component.fileToUpload = {
+                file: {} as File,
+                uploadGuid: 'uploadGuid',
+                uploadUrl: 'uploadUrl',
+                isReadyToUpload: true
+            };
+            component.uploadedFile = {
+                fileName: '1.png',
+                fileSize: 2000000
+            };
             fixture.detectChanges();
             const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
             submitBtn.click();
@@ -183,8 +190,8 @@ describe('ActivityFileAnswer', () => {
             expect(component.block.answer).toEqual({fileName: 'fileName', fileSize: 2000000});
             expect(component.valueChanged.emit).toHaveBeenCalledWith('uploadGuid');
 
-            expect(component.selectedFile).toBeNull();
-            expect(component.isFileSelected).toBeFalse();
+            expect(component.fileToUpload).toBeNull();
+            expect(component.errorMessage).toBe('');
         });
 
         it('should show error message if a local validator failed', () => {
@@ -193,14 +200,15 @@ describe('ActivityFileAnswer', () => {
             localValidator.result = errorMessage;
             localValidator.recalculate = () => false;
             component.block.validators = [localValidator];
+            component.fileToUpload = {
+                file: {} as File,
+                uploadGuid: '',
+                uploadUrl: '',
+                isReadyToUpload: false
+            };
 
             component.submitFileUpload();
             expect(component.errorMessage).toBe(errorMessage);
         });
-    });
-
-    it('should map mime types to file extensions', () => {
-        expect(component.mapMimeTypesToFileExtentions(['application/pdf', 'image/jpeg']))
-            .toEqual(['*.pdf', '*.jpeg']);
     });
 });
