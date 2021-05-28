@@ -84,16 +84,18 @@
     ></p>
 
     <mat-accordion displayMode="flat" [hideToggle]="true" [multi]="true">
-      <mat-expansion-panel
+      <ng-container
         *ngFor="let Question of 'HomePage.FAQ.Questions' | translate"
-        class="mat-elevation-z0"
       >
-        <mat-expansion-panel-header>
-          <mat-icon>add</mat-icon>{{ Question.Title }}
-        </mat-expansion-panel-header>
+        <mat-expansion-panel #panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-icon [class.mat-icon--rotate]="panel.expanded">add</mat-icon
+            >{{ Question.Title }}
+          </mat-expansion-panel-header>
 
-        {{ Question.Answer }}
-      </mat-expansion-panel>
+          {{ Question.Answer }}
+        </mat-expansion-panel>
+      </ng-container>
     </mat-accordion>
   </div>
 </section>
@@ -111,7 +113,11 @@
     <ng-container *ngFor="let Member of 'HomePage.Team.Members' | translate">
       <div class="member">
         <div class="member__img-container">
-          <img class="member__img" [src]="Member.ImageUrl" [alt]="Member.Name + ' image'" />
+          <img
+            class="member__img"
+            [src]="Member.ImageUrl"
+            [alt]="Member.Name + ' image'"
+          />
         </div>
 
         <div class="member__info">

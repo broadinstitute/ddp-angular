@@ -93,6 +93,14 @@ h3 {
   }
 }
 
+.mat-icon {
+  transition: transform 0.2s ease;
+
+  &--rotate {
+    transform: rotate(45deg) scale(1.1);
+  }
+}
+
 .member {
   display: flex;
 
