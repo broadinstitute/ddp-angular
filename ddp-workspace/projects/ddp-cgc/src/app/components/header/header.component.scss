@@ -112,3 +112,9 @@
   }
 }
 
+::ng-deep {
+  app-login ul li {
+    display: inline-block;
+    padding-right: 30px;
+  }
+}
