@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, of } from 'rxjs';
 import { SessionStorageService } from '../../services/sessionStorage.service';
+import { StickyScrollDirective } from '../../directives/sticky-scroll.directive';
 
 @Component({
   selector: 'ddp-prism',
@@ -20,6 +21,7 @@ import { SessionStorageService } from '../../services/sessionStorage.service';
 export class PrismComponent implements OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(StickyScrollDirective, { static: true }) stickyScroll: StickyScrollDirective;
 
   public searchField = new FormControl();
   public displayedColumns: string[] = [];
@@ -121,6 +123,8 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
     ).subscribe(response => {
       this.dataSource.data = response?.results || [];
       this.totalCount = response?.totalCount || 0;
+
+      this.stickyScroll.refresh();
 
       this.storageService.set(this.searchParticipantsStorageName, JSON.stringify(this.dataSource.data));
       this.storageService.set(this.searchCountStorageName, String(this.totalCount));

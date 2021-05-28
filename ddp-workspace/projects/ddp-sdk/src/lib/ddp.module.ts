@@ -198,6 +198,7 @@ import { DropFileToUploadDirective } from './directives/drop-file-to-upload.dire
 import { PrismComponent } from './components/prism/prism.component';
 import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
 import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
+import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -396,6 +397,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressGoogleAutocompleteDirective,
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         FileSizeFormatterPipe,
         TooltipComponent,
@@ -469,6 +471,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         FileSizeFormatterPipe,
         TooltipComponent,
