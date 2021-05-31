@@ -5,6 +5,9 @@
   }
   &-item {
     padding: 0 0 0 30px;
+    &__link-active {
+      display: none;
+    }
   }
 }
 
