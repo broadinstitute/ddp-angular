@@ -11,6 +11,11 @@ import { Mode } from './enums.ts/header-mode';
 export class HeaderComponent {
   Mode = Mode;
   Route = Route;
+  isAuth = false;
 
   @Input() mode: Mode = Mode.STANDARD;
+
+  toggleIsAuthenticated(): void {
+    this.isAuth = true;
+  }
 }

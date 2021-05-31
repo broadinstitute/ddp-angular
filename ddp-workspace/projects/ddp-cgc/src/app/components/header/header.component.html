@@ -34,7 +34,7 @@
             'Header.Links.LearnMore' | translate
           }}</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuth">
           <a
             class="button button--primary button--lg nav-item__button"
             [routerLink]="Route.PreScreening"
@@ -42,7 +42,7 @@
           >
         </li>
         <li class="nav-item">
-          <app-login></app-login>
+          <app-login (isAuth)="toggleIsAuthenticated()"></app-login>
         </li>
       </ul>
     </div>

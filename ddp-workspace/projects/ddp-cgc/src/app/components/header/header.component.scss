@@ -85,6 +85,20 @@
   }
 }
 
+@media only screen and (max-width: 1030px) {
+  .header-background {
+    padding: 30px 45px;
+  }
+
+  .nav {
+    &-item {
+      &__link {
+        font-size: 17px;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 992px) {
   .navbar-header {
     padding: 0 0 25px 25px!important;
@@ -106,7 +120,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .nav-item__button {
     display: inline;
   }
@@ -115,6 +129,14 @@
 ::ng-deep {
   app-login ul li {
     display: inline-block;
-    padding-right: 30px;
+    padding-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep {
+    app-login ul li {
+      padding-right: 0;
+    }
   }
 }

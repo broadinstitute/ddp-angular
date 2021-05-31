@@ -8,4 +8,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .nav {
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
 
