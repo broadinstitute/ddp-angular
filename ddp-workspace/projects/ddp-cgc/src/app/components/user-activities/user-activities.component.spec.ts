@@ -6,7 +6,7 @@ describe('UserActivitiesComponent', () => {
   let component: UserActivitiesComponent;
   let fixture: ComponentFixture<UserActivitiesComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ UserActivitiesComponent ]
     })
