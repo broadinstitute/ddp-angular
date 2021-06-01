@@ -10,6 +10,22 @@
   border: 0;
 }
 
+.SimpleButton:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.SimpleButton:focus {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media only screen and (max-width: 1030px) {
+  .SimpleButton {
+    font-size: 17px;
+  }
+}
+
 .button {
   display: inline-block;
 

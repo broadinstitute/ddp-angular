@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { SessionMementoService } from 'ddp-sdk';
 
@@ -10,6 +10,7 @@ import { Route } from '../../constants/route';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  @Output() isAuth: EventEmitter<boolean> = new EventEmitter<boolean>();
   readonly routes = Route;
 
   constructor(
@@ -17,6 +18,7 @@ export class LoginComponent {
   ) {}
 
   get isAuthenticated(): boolean {
+    this.isAuth.emit(this.sessionService.isAuthenticatedSession());
     return this.sessionService.isAuthenticatedSession();
   }
 }
