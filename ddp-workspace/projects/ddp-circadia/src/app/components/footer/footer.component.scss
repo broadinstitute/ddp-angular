@@ -1,0 +1,55 @@
+@import '../../../styles/variables';
+
+.footer {
+  background: $color-blue-1;
+
+  color: #ffffff;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 80rem;
+
+    margin: 0 auto;
+    padding: 4.2rem 2.4rem 5rem;
+  }
+
+  &__links-container {
+    flex: 0 0 30%;
+  }
+}
+
+.links {
+  &__title {
+    margin-bottom: 2rem;
+
+    font-weight: 600;
+    color: #9da0b3;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__list-item {
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__link {
+    &,
+    &:visited {
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.25px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+}
