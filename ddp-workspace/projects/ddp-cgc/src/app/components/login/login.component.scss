@@ -5,8 +5,11 @@
   }
   &-item {
     padding: 0 0 0 30px;
-    &__link-active {
-      display: none;
+    &__link {
+      padding-right: 15px;
+      &_active {
+        display: none;
+      }
     }
   }
 }
