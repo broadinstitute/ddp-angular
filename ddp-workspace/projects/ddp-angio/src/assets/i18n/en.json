@@ -708,13 +708,13 @@
             "UndoBtnText": "OK",
             "CancelBtnText": "Cancel",
             "MaxSize": "Max size: {{maxSize}}",
-            "AllowedFiles": "Allowed files: {{allowedFileTypes}}",
+            "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
             "DragFiles": "Drag files to upload",
             "ChooseFile": "Choose file",
             "Uploaded": "Uploaded:",
             "Size": "(size: {{size}})",
-            "MaxSizeErrorMessage": "File size exceeds allowed size",
-            "InvalidTypeErrorMessage": "File type not belongs to allowed list"
+            "MaxSizeErrorMessage": "Maximum file size exceeded",
+            "InvalidTypeErrorMessage": "Type of file selected is not valid"
         }
     }
 }
