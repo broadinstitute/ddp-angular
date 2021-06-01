@@ -1,18 +1,26 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from 'toolkit';
-import { ParticipantsSearchServiceAgent, EnrollmentStatusType, AnnouncementsServiceAgent, mockComponent } from 'ddp-sdk';
+import { DashboardRedesignedComponent, HeaderConfigurationService } from 'toolkit';
+import {
+    ParticipantsSearchServiceAgent,
+    EnrollmentStatusType,
+    AnnouncementsServiceAgent,
+    mockComponent,
+    SessionMementoService, UserInvitationServiceAgent
+} from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { Session } from 'inspector';
 
-describe('DashboardComponent', () => {
-    let fixture: ComponentFixture<DashboardComponent>;
-    let component: DashboardComponent;
+describe('DashboardRedesignedComponent', () => {
+    let fixture: ComponentFixture<DashboardRedesignedComponent>;
+    let component: DashboardRedesignedComponent;
     let debugElement: DebugElement;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let announcementsSpy: jasmine.SpyObj<AnnouncementsServiceAgent>;
+    let sessionMock: SessionMementoService;
 
     beforeEach(async() => {
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {
@@ -27,8 +35,11 @@ describe('DashboardComponent', () => {
             resetSelectedUser: undefined,
             getMessages: of([])
         });
-        const toolkitHeader = mockComponent({ selector: 'toolkit-header', inputs: ['showButtons'] });
-        const dashboard = mockComponent({ selector: 'ddp-dashboard', inputs: ['studyGuid', 'selectedUserGuid'] });
+        sessionMock = { isAuthenticatedAdminSession: () => true, session: {} as Session } as unknown as SessionMementoService;
+        const headerConfigSpy = jasmine.createSpyObj('participantsSearchSpy', ['setupDefaultHeader']);
+        const userInvitationSpy = jasmine.createSpyObj('userInvitationSpy', { getInvitations: of([]) });
+
+        const dashboard = mockComponent({ selector: 'ddp-user-activities', inputs: ['studyGuid', 'selectedUserGuid', 'displayedColumns'] });
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         await TestBed.configureTestingModule({
             imports: [
@@ -39,14 +50,17 @@ describe('DashboardComponent', () => {
                 { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
                 { provide: AnnouncementsServiceAgent, useValue: announcementsSpy },
                 { provide: 'toolkit.toolkitConfig', useValue: {} },
+                { provide: HeaderConfigurationService, useValue: headerConfigSpy },
+                { provide: SessionMementoService, useValue: sessionMock },
+                { provide: UserInvitationServiceAgent, useValue: userInvitationSpy },
             ],
-            declarations: [DashboardComponent, toolkitHeader, dashboard, subjectPanel],
+            declarations: [DashboardRedesignedComponent, dashboard, subjectPanel],
         })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DashboardComponent);
+        fixture = TestBed.createComponent(DashboardRedesignedComponent);
         component = fixture.debugElement.componentInstance;
         debugElement = fixture.debugElement;
         fixture.detectChanges();
@@ -56,13 +70,13 @@ describe('DashboardComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should not display subject panel if selected user guid input is empty', () => {
+    it('should display subject panel if selected user guid input is empty', () => {
         component.selectedUserGuid = null;
         component.ngOnInit();
         fixture.detectChanges();
 
         const subjectPanel = fixture.debugElement.query(By.css('ddp-subject-panel'));
-        expect(subjectPanel).toBeFalsy();
+        expect(subjectPanel).toBeTruthy();
     });
 
     it('should not display subject panel if selected user is not found', () => {
@@ -84,24 +98,12 @@ describe('DashboardComponent', () => {
         expect(subjectPanel).toBeTruthy();
     });
 
-    it('updates selected user for announcements service', () => {
-        const id = '12345';
-        component.selectedUserGuid = id;
-        announcementsSpy.updateSelectedUser.calls.reset();
-        announcementsSpy.resetSelectedUser.calls.reset();
+    it('should display dashboard conent if session is empty but selected user is passed', () => {
+        component.selectedUserGuid = '123';
         component.ngOnInit();
+        fixture.detectChanges();
 
-        expect(announcementsSpy.updateSelectedUser).toHaveBeenCalledWith(id);
-        expect(announcementsSpy.resetSelectedUser).not.toHaveBeenCalled();
-    });
-
-    it('resets selected user for announcements service', () => {
-        component.selectedUserGuid = null;
-        announcementsSpy.updateSelectedUser.calls.reset();
-        announcementsSpy.resetSelectedUser.calls.reset();
-        component.ngOnInit();
-
-        expect(announcementsSpy.updateSelectedUser).not.toHaveBeenCalled();
-        expect(announcementsSpy.resetSelectedUser).toHaveBeenCalledWith();
+        const dashboardContent = fixture.debugElement.query(By.css('.dashboard-content'));
+        expect(dashboardContent).toBeTruthy();
     });
 });

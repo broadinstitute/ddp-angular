@@ -14,8 +14,10 @@ export const AppRoutes = {
     ReleaseMinor: 'release-minor-survey',
     Release: 'release-survey',
     Dashboard: 'dashboard',
+    DashboardId: 'dashboard/:userGuid',
     Password: 'password',
     SessionExpired: 'session-expired',
+    AdminSessionExpired: 'admin-session-expired',
     PasswordResetDone: 'password-reset-done',
     CountMeIn: 'count-me-in',
     AboutUs: 'about-us',
@@ -27,5 +29,7 @@ export const AppRoutes = {
     ProxyThankYou: 'proxy-thank-you',
     Verify: 'verify',
     Accept: 'accept',
-    MailingList: 'updates'
+    MailingList: 'updates',
+    Prism: 'prism',
+    AdminLanding: 'admin-login-landing'
 };

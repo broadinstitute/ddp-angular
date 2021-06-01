@@ -33,6 +33,8 @@ import { LearnMoreSectionComponent } from './components/learn-more-section/learn
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
+import { PrismComponent } from './components/prism/prism.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -51,6 +53,7 @@ toolkitConfig.aboutYouGuid = ActivityGuids.AboutYou;
 toolkitConfig.consentGuid = ActivityGuids.Consent;
 toolkitConfig.releaseGuid = ActivityGuids.Release;
 toolkitConfig.dashboardGuid = ActivityGuids.Dashboard;
+toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.aboutYouUrl = AppRoutes.AboutYou;
 toolkitConfig.consentUrl = AppRoutes.Consent;
 toolkitConfig.releaseUrl = AppRoutes.Release;
@@ -70,11 +73,13 @@ export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
+sdkConfig.adminClientId = DDP_ENV.adminClientId;
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
 sdkConfig.logLevel = DDP_ENV.logLevel;
 sdkConfig.baseUrl = location.origin + base;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
+sdkConfig.adminLoginLandingUrl = DDP_ENV.adminLoginLandingUrl;
 sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
@@ -84,6 +89,9 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'invitationId', 'proxyGuid', 'proxyShortId', 'proxyUserName'];
+sdkConfig.prismDashboardRoute = AppRoutes.Dashboard;
+sdkConfig.lookupPageUrl = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -113,7 +121,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DataComponent,
     AboutUsComponent,
     ModalImageComponent,
-    LearnMoreSectionComponent
+    LearnMoreSectionComponent,
+    PrismComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

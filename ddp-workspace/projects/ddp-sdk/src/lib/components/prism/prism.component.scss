@@ -1,15 +1,4 @@
-.prism-title {
-    color: #454545;
-    font-size: 1.375rem;
-    line-height: 2.0625rem;
-    margin: 0;
-    font-weight: bold;
-}
-
 .prism-subtitle {
-    color: #454545;
-    font-size: 1.125rem;
-    line-height: 1.5rem;
     margin: 0;
 }
 
@@ -17,7 +6,6 @@
     width: 24rem;
 
     &__icon {
-        color: #787681;
         position: relative;
         top: 0.25rem;
         padding-right: 5px;
@@ -25,13 +13,11 @@
     }
 
     &__clear {
-        font-size: 1.125rem;
-        font-family: inherit;
         border: none;
         text-decoration: underline;
         background: none;
-        color: #787681;
         transition: 0.3s;
+        cursor: pointer;
 
         &:hover {
             color: #454545;
@@ -130,10 +116,9 @@
     }
 }
 
-.warning-container {
+.prism__warning-container {
     height: 20px;
     margin-top: 20px;
-    color: #ed933a;
 
     .mat-icon {
         vertical-align: bottom;
