@@ -259,3 +259,19 @@ var DDP_ENV = {
         {{end}}
     {{end}}
 {{end}}
+
+{{if eq $study_guid "pancan"}}
+    {{if eq $environment "local"}}
+        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0Domain'] = "TBD";
+        DDP_ENV['auth0Audience'] = "TBD";
+        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{else}}
+        {{with secret (printf "secret/pepper/%s/%s/pancan/conf" $environment $version)}}
+            DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
+            DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        {{end}}
+    {{end}}
+{{end}}
