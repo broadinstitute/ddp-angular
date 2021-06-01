@@ -1,17 +1,17 @@
 <ddp-question-prompt [block]="block"></ddp-question-prompt>
 
-<div class="file-requirements" *ngIf="fileMaxSize || allowedFileTypes.length">
-    <div class="file-max-size" *ngIf="fileMaxSize">
-        {{'SDK.FileUpload.MaxSize' | translate : { maxSize: fileMaxSize | fileSize} }}
+<div class="file-requirements" *ngIf="block.maxFileSize || block.mimeTypes?.length">
+    <div class="file-max-size" *ngIf="block.maxFileSize">
+        {{'SDK.FileUpload.MaxSize' | translate : { maxSize: block.maxFileSize | fileSize} }}
     </div>
-    <div class="file-types" *ngIf="allowedFileTypes.length">
-        {{'SDK.FileUpload.AllowedFileTypes' | translate : { allowedFileTypes: getAllowedTypes(allowedFileTypes)} }}
+    <div class="file-types" *ngIf="block.mimeTypes?.length">
+        {{'SDK.FileUpload.AllowedFileTypes' | translate : { allowedFileTypes: getAllowedTypes(block.mimeTypes)} }}
     </div>
 </div>
 
 <div class="file-upload-content" [class.readonly]="readonly">
     <input type="file" class="file-input"
-           [accept]="allowedFileTypes.join(',')"
+           [accept]="(block.mimeTypes || []).join(',')"
            (click)="fileUpload.value = null;"
            (change)="onFilesSelected($event.target.files)" #fileUpload>
 

@@ -40,8 +40,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
     fileToUpload: UploadFile | null;
     uploadedFile: ActivityFileAnswerDto | null;
-    fileMaxSize: number;
-    allowedFileTypes: string[];
     errorMessage: string;
     private ngUnsubscribe = new Subject();
     private readonly panelClass = 'file-upload-confirm-dialog';
@@ -53,7 +51,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.initFileRequirements();
         this.initUploadedFile();
     }
 
@@ -141,18 +138,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         });
     }
 
-    getAllowedTypes(allowedFileTypes: string[]): string {
+    getAllowedTypes(allowedFileTypes: string[] = []): string {
         return FileAnswerMapperService.mapMimeTypesToFileExtentions(allowedFileTypes).join(', ');
     }
 
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-    }
-
-    private initFileRequirements(): void {
-        this.fileMaxSize = this.block.maxFileSize;
-        this.allowedFileTypes = this.block.mimeTypes || [];
     }
 
     private initUploadedFile(): void {

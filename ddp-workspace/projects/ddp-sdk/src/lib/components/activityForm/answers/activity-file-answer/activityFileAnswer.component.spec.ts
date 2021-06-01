@@ -95,15 +95,6 @@ describe('ActivityFileAnswer', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should init file requirements', () => {
-        component.block.maxFileSize = 1000;
-        component.block.mimeTypes = ['image/jpeg', 'image/png'];
-        component.ngOnInit();
-
-        expect(component.fileMaxSize).toEqual(1000);
-        expect(component.allowedFileTypes).toEqual(['image/jpeg', 'image/png']);
-    });
-
     describe('There is already uploaded file', () => {
         beforeEach(() => {
             component.block.answer = {
