@@ -19,7 +19,8 @@ describe('InvitationPipe test', () => {
         expect(pipe.transform('111111111111', 6, '~')).toBe('111111~111111');
     });
 
-    it('should not transform invitation code of oldv format', () => {
-        expect(pipe.transform('f13e21a7-eff9-4203-b307-37131d02e709')).toBe('f13e21a7-eff9-4203-b307-37131d02e709');
+    it('should not transform invitation code of old format', () => {
+        const code = 'f13e21a7-eff9-4203-b307-37131d02e709';
+        expect(pipe.transform(code)).toBe(code);
     });
 });

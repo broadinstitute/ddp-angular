@@ -11,7 +11,7 @@ export class InvitationPipe implements PipeTransform {
             return code.match(regexp).join(separator);
         }
 
-        // don't do anything with old formats since they already contains dashes
+        // don't do anything with old formats since they already contain dashes
         return code;
     }
 }
