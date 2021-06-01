@@ -15,7 +15,7 @@ export class HeaderComponent {
 
   @Input() mode: Mode = Mode.STANDARD;
 
-  toggleIsAuthenticated(event): void {
+  toggleIsAuthenticated(event: boolean): void {
     this.isAuth = event;
   }
 }
