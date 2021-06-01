@@ -34,13 +34,18 @@
   }
   &-collapse ul {
     margin: 10px 0;
+    display: flex;
+    align-items: center;
   }
   &-background {
     margin: 0;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: 30px 80px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   &-hamburger {
     & .icon-bar,
@@ -64,7 +69,6 @@
     background: #26355c;
   }
   &-logo img {
-    margin-top: 5px;
     height: 38px;
   }
 }
@@ -85,13 +89,21 @@
   }
 }
 
-@media only screen and (max-width: 992px) {
-  .navbar-header {
-    padding: 0 0 25px 25px!important;
-  }
+@media only screen and (max-width: 1030px) {
   .header-background {
-    padding: 25px 0 0 0!important;
+    padding: 10px 0;
   }
+
+  .nav {
+    &-item {
+      &__link {
+        font-size: 17px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
   .nav-item {
     padding-left: 15px;
   }
@@ -107,14 +119,35 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .header {
+    &-collapse ul {
+      display: block;
+    }
+
+    &-background {
+      display: block;
+    }
+
+    &-logo img {
+      margin: 7px 0 0 15px;
+    }
+  }
+
   .nav-item__button {
-    display: inline;
+    display: inline-block;
   }
 }
 
 ::ng-deep {
   app-login ul li {
-    display: inline-block;
-    padding-right: 30px;
+    display: inline;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep {
+    app-login ul li {
+      padding-right: 0;
+    }
   }
 }
