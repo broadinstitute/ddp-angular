@@ -272,6 +272,6 @@ var DDP_ENV = {
         DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
         DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
         DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
-        DDP_ENV['basePepperUrl'] = "{{.Data.basePepperUrl}}";
+        DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
     {{end}}
 {{end}}
