@@ -33,7 +33,7 @@
         <button *ngIf="!readonly" #uploadBtn
                 mat-raised-button color="primary"
                 class="submit-btn"
-
+                [disabled]="!fileToUpload?.isReadyToUpload"
                 (click)="submitFileUpload()">
             {{uploadedFile? ('SDK.FileUpload.ReuploadBtnText' | translate) : ('SDK.FileUpload.UploadBtnText' | translate)}}
         </button>
