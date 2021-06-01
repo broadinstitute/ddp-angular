@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
 import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
-import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
 import { QuestionType } from '../../../../models/activity/questionType';
@@ -24,7 +23,6 @@ export class ActivityCompositeAnswer implements OnChanges {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
 
@@ -164,8 +162,6 @@ export class ActivityCompositeAnswer implements OnChanges {
         this.childQuestionBlocks.splice(index, 1);
         this.valueChanged.emit(this.buildComponentAnswers());
     }
-
-    public updateVisibility(event: any): void { }
 
     // We need this method because we want to include the prototype in the clone.
     // Underscore's _.clone doesn't allow it.
