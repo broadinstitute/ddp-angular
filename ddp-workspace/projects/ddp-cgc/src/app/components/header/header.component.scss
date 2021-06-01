@@ -42,7 +42,10 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: 30px 80px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   &-hamburger {
     & .icon-bar,
@@ -66,7 +69,6 @@
     background: #26355c;
   }
   &-logo img {
-    margin-top: 5px;
     height: 38px;
   }
 }
@@ -89,7 +91,7 @@
 
 @media only screen and (max-width: 1030px) {
   .header-background {
-    padding: 30px 45px;
+    padding: 10px 0;
   }
 
   .nav {
@@ -102,12 +104,6 @@
 }
 
 @media only screen and (max-width: 992px) {
-  .navbar-header {
-    padding: 0 0 25px 25px!important;
-  }
-  .header-background {
-    padding: 25px 0 0 0!important;
-  }
   .nav-item {
     padding-left: 15px;
   }
@@ -122,10 +118,18 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .header {
     &-collapse ul {
       display: block;
+    }
+
+    &-background {
+      display: block;
+    }
+
+    &-logo img {
+      margin: 7px 0 0 15px;
     }
   }
 
