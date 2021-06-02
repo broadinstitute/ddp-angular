@@ -14,7 +14,7 @@ references:
   study_keys: &study_keys
     "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc pancan"
   study_guids: &study_guids
-    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc pancan"
+    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cmi-pancan"
   dispatch_secret_id: &dispatch_secret_id
       app-engine-dispatch
 

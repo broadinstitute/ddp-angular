@@ -21,21 +21,10 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { MailingListComponent } from './components/mailing-list/mailing-list.component';
-import { UserRegistrationPrequalComponent } from './components/user-registration-prequal/user-registration-prequal.component';
-import { PrismComponent } from './components/prism/prism.component';
-import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
-import { EnrollmentComponent } from './components/enrollment/enrollment.component';
-import { HelpComponent } from './components/help/help.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -95,7 +84,7 @@ export function translateFactory(translate: TranslateService,
         AppComponent,
         FooterComponent,
         HeaderComponent,
-        HomeComponent,
+        WelcomeComponent,
     ],
     imports: [
         BrowserModule,

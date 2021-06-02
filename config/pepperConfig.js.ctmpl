@@ -39,7 +39,7 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
-{{if (eq $study_guid "ANGIO" "cmi-brain" "cmi-esc" "cmi-mbc" "cmi-mpc" "CMI-OSTEO")}}
+{{if (eq $study_guid "ANGIO" "cmi-brain" "cmi-esc" "cmi-mbc" "cmi-mpc" "CMI-OSTEO" "cmi-pancan")}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
         DDP_ENV['auth0Audience'] = "ddp-dev.auth0.com";
@@ -256,22 +256,6 @@ var DDP_ENV = {
             DDP_ENV['projectGAToken'] = "UA-102514572-1";
         {{else}}
             DDP_ENV['projectGAToken'] = "UA-108484823-1";
-        {{end}}
-    {{end}}
-{{end}}
-
-{{if eq $study_guid "pancan"}}
-    {{if eq $environment "local"}}
-        DDP_ENV['auth0ClientId'] = "TBD";
-        DDP_ENV['auth0Domain'] = "TBD";
-        DDP_ENV['auth0Audience'] = "TBD";
-        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-    {{else}}
-        {{with secret (printf "secret/pepper/%s/%s/pancan/conf" $environment $version)}}
-            DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
-            DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
-            DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
-            DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
         {{end}}
     {{end}}
 {{end}}
