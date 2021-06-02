@@ -139,10 +139,13 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
     of(this.recaptchaToken)
       .pipe(switchMap(token => iif(() => !!token, sendDar$, getTokenFirst$)))
-      .subscribe(this.showResponse, this.showError);
+      .subscribe(
+        () => this.showResponse(),
+        () => this.showError(),
+      );
   }
 
-  private showResponse = (): void => {
+  private showResponse(): void {
     this.busy = false;
     this.recaptchaToken = null;
 
@@ -161,9 +164,9 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
         this.router.navigateByUrl(Routes.Welcome);
       });
-  };
+  }
 
-  private showError = (): void => {
+  private showError(): void {
     this.busy = false;
     this.recaptchaToken = null;
 
@@ -180,5 +183,5 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.communicationService.closePopupMessage();
       });
-  };
+  }
 }
