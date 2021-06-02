@@ -5,6 +5,20 @@
       "AboutUs": "About Us",
       "LearnMore": "Learn More",
       "CountMeIn": "Count Me In"
+    },
+    "Titles": {
+      "ToggleNavigation": "Toggle navigation"
+    }
+  },
+  "Footer": {
+    "Links": {
+      "Home": "Home",
+      "AboutUs": "About Us",
+      "LearnMore": "Learn More",
+      "BackToTop": "Back to top"
+    },
+    "Titles": {
+      "ContactUs": "Contact Us"
     }
   },
   "HomePage": {
@@ -148,8 +162,8 @@
   "PasswordPage": {
     "Form": {
       "Password": {
-        "Label": "Please enter your password",
-        "Required": "Please enter your password",
+        "Label": "Please enter the site password",
+        "Required": "Please enter the site password",
         "Invalid": "Incorrect password. Please try again."
       }
     }
