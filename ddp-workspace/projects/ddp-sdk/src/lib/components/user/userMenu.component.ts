@@ -18,11 +18,19 @@ import { Auth0AdapterService } from '../../services/authentication/auth0Adapter.
             </mat-icon>
         </button>
         <mat-menu #userMenu="matMenu">
-            <button mat-menu-item
+            <button *ngIf="!isAdmin; else prismLink"
+                    mat-menu-item
                     (click)="openDashboard()"
-                    class="ddp-user-menu-button">
+                    class="ddp-user-menu-button dashboard-link">
                 <span class="ddp-menu-text" translate>SDK.UserMenu.DashboardButton</span>
             </button>
+            <ng-template #prismLink>
+                <button mat-menu-item
+                        (click)="openPrism()"
+                        class="ddp-user-menu-button prism-link">
+                    <span class="ddp-menu-text" translate>SDK.UserMenu.PrismButton</span>
+                </button>
+            </ng-template>
             <button mat-menu-item
                     (click)="logout()"
                     class="ddp-user-menu-button">
@@ -51,7 +59,15 @@ export class UserMenuComponent {
         this.router.navigateByUrl('dashboard');
     }
 
+    public openPrism(): void {
+        this.router.navigateByUrl('prism');
+    }
+
     public logout(): void {
         this.auth0.logout();
+    }
+
+    public get isAdmin(): boolean {
+        return this.session.isAuthenticatedAdminSession();
     }
 }
