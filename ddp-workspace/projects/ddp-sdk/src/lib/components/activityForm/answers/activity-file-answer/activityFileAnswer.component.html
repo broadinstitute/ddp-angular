@@ -18,15 +18,11 @@
     <div class="file-select">
         <div class="drop-block"
              dropFileToUpload
-             (filesDropped)="!readonly && onFilesSelected($event)">
+             (filesDropped)="!readonly && onFilesSelected($event)"
+             (click)="!readonly && fileUpload.click()">
             <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
-            <span class="drop-block-text" translate>SDK.FileUpload.DragFiles</span>
+            <div class="drop-block-text" translate>SDK.FileUpload.ChooseFile</div>
         </div>
-        <button mat-raised-button color="primary" class="upload-btn"
-                [disabled]="readonly"
-                (click)="fileUpload.click()">{{'SDK.FileUpload.ChooseFile' | translate}}
-            <mat-icon>attach_file</mat-icon>
-        </button>
 
         <div class="selected-file">{{fileToUpload?.file.name}}</div>
 

@@ -37,6 +37,7 @@ $drop-block-active-color: lightyellow;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
 
     &.file-over {
         background-color: $drop-block-active-color
@@ -47,16 +48,16 @@ $drop-block-active-color: lightyellow;
         width: auto;
         height: auto;
     }
+
+    &-text {
+        white-space: pre;
+    }
 }
 
 .uploaded-file-chip {
     .file-size {
         margin-left: 5px;
     }
-}
-
-.upload-btn {
-    margin: 20px 0;
 }
 
 .file-info {
