@@ -28,10 +28,7 @@
 
 .button {
   display: inline-block;
-
-  border-radius: 5px;
   padding: 7px 50px;
-  font-weight: 600;
   font-size: 1rem;
   line-height: 1.4rem;
   text-align: center;
@@ -63,7 +60,7 @@
   }
 
   &--lg {
-    padding: 15px 22px !important;
+    padding: 15px 15px !important;
   }
 
   &--sm {
@@ -86,6 +83,14 @@
       &:active {
         background: lighten($button-background, 10%);
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .button {
+    &--lg {
+      padding: 14px 9px !important;
     }
   }
 }
