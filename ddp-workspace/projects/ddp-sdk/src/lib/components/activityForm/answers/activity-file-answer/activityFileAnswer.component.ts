@@ -103,7 +103,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',
             confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',
-            cancelBtnText: 'SDK.FileUpload.CancelBtnText'
+            cancelBtnText: 'SDK.FileUpload.CancelBtnText',
+            confirmBtnColor: 'primary'
         };
 
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
@@ -119,7 +120,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         config.data = {
             title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
             confirmBtnText: 'SDK.FileUpload.UndoBtnText',
-            cancelBtnText: 'SDK.FileUpload.CancelBtnText'
+            cancelBtnText: 'SDK.FileUpload.CancelBtnText',
+            confirmBtnColor: 'primary'
         };
 
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);

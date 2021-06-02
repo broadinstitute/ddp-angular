@@ -64,7 +64,8 @@ export class EmbeddedActivityBlockComponent implements OnInit {
         config.data = {
             title: 'SDK.ConfirmDeletion',
             confirmBtnText: 'SDK.DeleteButton',
-            cancelBtnText: 'SDK.CancelBtn'
+            cancelBtnText: 'SDK.CancelBtn',
+            confirmBtnColor: 'warn'
         };
 
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);

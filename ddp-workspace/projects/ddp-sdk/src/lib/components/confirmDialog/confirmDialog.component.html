@@ -4,7 +4,7 @@
     </span>
     <div class="confirm-dialog-buttons">
         <button mat-flat-button class="ctrl-btn confirm-btn"
-                color="warn"
+                [color]="confirmBtnColor"
                 [mat-dialog-close]="true"
                 [innerHTML]="confirmBtnText | translate">
         </button>

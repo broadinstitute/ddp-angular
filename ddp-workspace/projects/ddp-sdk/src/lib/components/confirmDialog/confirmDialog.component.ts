@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
     selector: 'ddp-confirm-dialog',
@@ -10,10 +11,12 @@ export class ConfirmDialogComponent {
     title: string;
     confirmBtnText: string;
     cancelBtnText: string;
+    confirmBtnColor: ThemePalette;
 
     constructor(@Inject(MAT_DIALOG_DATA) data) {
         this.title = data.title;
         this.confirmBtnText = data.confirmBtnText;
         this.cancelBtnText = data.cancelBtnText;
+        this.confirmBtnColor = data.confirmBtnColor;
     }
 }
