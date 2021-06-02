@@ -42,7 +42,7 @@
     padding: 0;
   }
   &-collapse ul {
-    margin: 10px 0;
+    margin: 0;
     display: flex;
     align-items: center;
   }
@@ -84,7 +84,7 @@
 
 .nav {
   &-item {
-    padding: 0 0 0 30px;
+    padding: 0 0 0 24px;
     &__link {
       color: #fff!important;
       font-size: 19px;
@@ -101,6 +101,7 @@
 @media only screen and (max-width: 1030px) {
   .nav {
     &-item {
+      padding: 0 0 0 20px;
       &__link {
         font-size: 17px;
       }
@@ -110,10 +111,12 @@
 
 @media only screen and (max-width: 992px) {
   .header-background {
-    padding: 25px;
+    padding: 19px;
   }
-  .nav-item {
-    padding-left: 15px;
+  .nav {
+    &-item {
+      padding-left: 13px;
+    }
   }
   .arrow {
     display: none;
@@ -130,6 +133,7 @@
   .header {
     &-collapse ul {
       display: block;
+      padding-top: 25px;
     }
 
     &-background {
