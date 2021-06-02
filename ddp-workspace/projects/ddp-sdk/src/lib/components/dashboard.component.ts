@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     public activitiesColumns: DashboardColumns[];
 
     ngOnInit(): void {
+        // todo: return the actions column back once new prism would support actions for selected user
         const baseColumns: DashboardColumns[] = ['name', 'summary', 'date', 'status'];
         this.activitiesColumns = this.selectedUserGuid ? baseColumns : [...baseColumns, 'actions'];
     }

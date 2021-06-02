@@ -723,7 +723,8 @@
             "Summary": "Summary",
             "ActivityStatus": "Status",
             "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityActions": "Actions",
+            "HiddenTooltip": "This activity is hidden."
         },
         "ManageParticipants": {
             "GovernedParticipants": "Governed participants",
