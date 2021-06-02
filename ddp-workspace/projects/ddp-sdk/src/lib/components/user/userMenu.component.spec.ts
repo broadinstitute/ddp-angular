@@ -13,7 +13,6 @@ import { By } from '@angular/platform-browser';
 describe('UserMenuComponent', () => {
     let fixture: ComponentFixture<UserMenuComponent>;
     let component: UserMenuComponent;
-    let debugElement: DebugElement;
     let sessionSpy: jasmine.SpyObj<SessionMementoService>;
     let router: Router;
 
@@ -41,7 +40,6 @@ describe('UserMenuComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(UserMenuComponent);
         component = fixture.debugElement.componentInstance;
-        debugElement = fixture.debugElement;
         fixture.detectChanges();
         router = TestBed.inject(Router);
     });
