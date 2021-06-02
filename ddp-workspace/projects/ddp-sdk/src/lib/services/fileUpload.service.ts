@@ -21,8 +21,15 @@ export class FileUploadService extends UserServiceAgent<any> {
         super(session, configuration, http, logger, null);
     }
 
-    getUploadUrl(studyGuid: string, activityGuid: string, requestBody: FileUploadBody): Observable<FileUploadResponse> {
+    getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, file: File): Observable<FileUploadResponse> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
+
+        const requestBody: FileUploadBody = {
+            questionStableId,
+            fileName: file.name,
+            fileSize: file.size,
+            mimeType: file.type
+        };
 
         return this.postObservable(path, requestBody, {}, true).pipe(
             catchError(error => {

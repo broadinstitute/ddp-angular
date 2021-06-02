@@ -18,7 +18,6 @@ import { ActivityFileQuestionBlock } from '../../../../models/activity/activityF
 import { FileUploadService } from '../../../../services/fileUpload.service';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivityFileAnswerDto } from '../../../../models/activity/activityFileAnswerDto';
-import { FileUploadBody } from '../../../../models/fileUploadBody';
 import { FileUploadResponse } from '../../../../models/fileUploadResponse';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
@@ -66,14 +65,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 isReadyToUpload: false
             };
 
-            const requestBody: FileUploadBody = {
-                questionStableId: this.block.stableId,
-                fileName: file.name,
-                fileSize: file.size,
-                mimeType: file.type
-            };
-
-            this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, requestBody)
+            this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, file)
                 .pipe(
                     catchError(err => {
                         this.logger.logDebug('ActivityFileAnswer getUploadUrl error:', err);
