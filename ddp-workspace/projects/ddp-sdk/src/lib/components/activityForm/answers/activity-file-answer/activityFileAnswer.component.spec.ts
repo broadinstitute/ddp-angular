@@ -112,7 +112,7 @@ describe('ActivityFileAnswer', () => {
 
         it('should display an uploaded file data', () => {
             const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91MB)');
+            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91 MB)');
         });
 
         it('should call undoUploadedFile by click on remove uploaded file button', () => {
