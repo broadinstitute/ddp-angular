@@ -42,7 +42,7 @@
     },
     "ContactUs": {
       "Title": "Contact Us!",
-      "Paragraph": "Please reach out to us with any questions, concerns, or project ideas at <span class=\"semibold\">cancergenomecollective@broadinstitute.org</span> or <span class=\"semibold\">651-229-5806.</span>",
+      "Paragraph": "Please reach out to us with any questions, concerns, or project ideas at <span class=\"semibold\">info@cancercollective.org</span> or <span class=\"semibold\">651-229-5806.</span>",
       "Links": [
         {
           "Href": "https://www.facebook.com/cancergenomecollective",
@@ -57,7 +57,7 @@
           "Icon": "icon-phone.svg"
         },
         {
-          "Href": "mailto:cancergenomecollective@broadinstitute.org",
+          "Href": "mailto:info@cancercollective.org",
           "Icon": "icon-mail.svg"
         }
       ]
@@ -86,7 +86,7 @@
     "Paragraph8": "Genetic data will be linked to de-identified clinical information, and the resulting data are used to identify drivers of tumorigenesis, mechanisms of response and resistance to therapies, and diagnostic, prognostic, and therapeutic biomarkers. The database of clinically annotated genomic information will be shared with the cancer research community. Study updates and discoveries are shared at regular intervals with all patients along with the public.",
     "Paragraph9": "This direct-to-patient approach should be particularly enabling for the identification of patients with rare phenotypes or clinical behavior. This project seeks to establish a patient-researcher partnership to accelerate genomic discoveries and improve outcomes in cancer, and may ultimately serve as a means to build a new clinical and translational research model for all patients with cancer.",
     "Paragraph10": "Please feel free to visit our website: cancergenomecollective.org.",
-    "Box": "If you have any questions or concerns about this study, please reach out to us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b>."
+    "Box": "If you have any questions or concerns about this study, please reach out to us at <b>info@cancercollective.org</b> or <b>651-229-5806</b>."
   },
   "LearnMore": {
     "Title": "Here’s how the project works:",
@@ -109,7 +109,7 @@
       {
         "Letter": "D",
         "Title": "We will gather your medical record data.",
-        "Description": "<p>We will request your medical records from your physicians and hospitals. We will extract the relevant information aggregate these results. You also have access to these records. If you want a copy of the records we have requested, email cancergenomecollective@broadinstitute.org and we will send your medical records to you.</p>"
+        "Description": "<p>We will request your medical records from your physicians and hospitals. We will extract the relevant information aggregate these results. You also have access to these records. If you want a copy of the records we have requested, email info@cancercollective.org and we will send your medical records to you.</p>"
       },
       {
         "Letter": "E",
@@ -124,10 +124,10 @@
       {
         "Letter": "G",
         "Title": "Become an active researcher!",
-        "Description": "<p>We are excited to learn with you! Throughout the project, we will provide all patients with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you.</p><p>We also encourage you to submit your own research ideas by sending an email to cancergenomecollective@broadinstitute.org. We will do our best to conquer any research ideas put forward by our patients!</p>"
+        "Description": "<p>We are excited to learn with you! Throughout the project, we will provide all patients with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you.</p><p>We also encourage you to submit your own research ideas by sending an email to info@cancercollective.org. We will do our best to conquer any research ideas put forward by our patients!</p>"
       }
     ],
-    "Info": "Please contact us at <b>cancergenomecollective@broadinstitute.org</b> or <b>651-229-5806</b> with any questions, comments, or suggestions."
+    "Info": "Please contact us at <b>info@cancercollective.org</b> or <b>651-229-5806</b> with any questions, comments, or suggestions."
   },
   "ErrorPage": {
     "Title": "Something went wrong",
