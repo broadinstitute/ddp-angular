@@ -35,7 +35,7 @@ export class LoginLandingComponent implements OnInit {
   ngOnInit(): void {
     if (!this.config.doLocalRegistration) {
       if (location.hash) {
-        this.auth0Service.handleAuthentication(this.handleAuthError);
+        this.auth0Service.handleAuthentication(e => this.handleAuthError(e));
       } else {
         this.redirect();
       }
@@ -46,18 +46,20 @@ export class LoginLandingComponent implements OnInit {
         filter(session => session !== null && !!session.idToken),
         take(1),
       )
-      .subscribe(this.redirect);
+      .subscribe(() => {
+        this.redirect();
+      });
   }
 
-  private handleAuthError = (err: any): void => {
+  private handleAuthError(err: any): void {
     if (err) {
       this.loggingService.logError(this.LOG_SOURCE, err);
     }
 
     this.router.navigateByUrl(Route.Error);
-  };
+  }
 
-  private redirect = (): void => {
+  private redirect(): void {
     const nextUrl = sessionStorage.getItem('nextUrl');
 
     if (nextUrl) {
@@ -74,5 +76,5 @@ export class LoginLandingComponent implements OnInit {
             this.workflowBuilderService.getCommand(response).execute(),
         );
     }
-  };
+  }
 }
