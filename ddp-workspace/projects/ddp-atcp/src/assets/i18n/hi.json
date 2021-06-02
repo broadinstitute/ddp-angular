@@ -546,5 +546,20 @@
       "CREATED": "शुरू नहीं हुआ",
       "IN_PROGRESS": "प्रगति अधीन"
     }
+  },
+  "EnrollmentStatus": {
+    "Prefix": "[HI] Enrollment Status: ",
+    "ContactUsTooltip": "[HI] +1 954.481.6611 or support@atfamilies.org",
+    "Messages": {
+      "Registered": "[HI] Registered",
+      "Consented": "[HI] Consented",
+      "ConsentedNeedsAssent": "[HI] Consented, Needs Assent",
+      "SubmittedPhysicianInfo": "[HI] Submitted Physician Info",
+      "SubmittedMedicalHistory": "[HI] Submitted Medical History",
+      "SubmittedGenomeStudyShippingInfo": "[HI] Submitted Genome Study Shipping Info",
+      "SubmittedEnrollment": "[HI] Submitted Enrollment / Pending Confirmation",
+      "Enrolled": "[HI] Enrolled",
+      "ContactUs": "[HI] Please Contact Us"
+    }
   }
 }

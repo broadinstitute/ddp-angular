@@ -663,5 +663,20 @@
       "CREATED": "New",
       "IN_PROGRESS": "In Progress"
     }
+  },
+  "EnrollmentStatus": {
+    "Prefix": "Enrollment Status: ",
+    "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
+    "Messages": {
+      "Registered": "Registered",
+      "Consented": "Consented",
+      "ConsentedNeedsAssent": "Consented, Needs Assent",
+      "SubmittedPhysicianInfo": "Submitted Physician Info",
+      "SubmittedMedicalHistory": "Submitted Medical History",
+      "SubmittedGenomeStudyShippingInfo": "Submitted Genome Study Shipping Info",
+      "SubmittedEnrollment": "Submitted Enrollment / Pending Confirmation",
+      "Enrolled": "Enrolled",
+      "ContactUs": "Please Contact Us"
+    }
   }
 }

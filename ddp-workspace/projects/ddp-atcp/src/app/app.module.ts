@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   TranslateService,
@@ -61,6 +62,7 @@ import { ParticipantListItem } from './components/participant-list/participant-l
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { ActivityPrintComponent } from './components/activity-print/activity-print.component';
+import { TooltipButtonComponent } from './components/tooltip-button/tooltip-button.component';
 
 // import of components prepared for SDK and Toolkit, but currently located in atcp project
 import { FileUploaderComponent } from './sdk/components/file-uploader.component';
@@ -138,10 +140,17 @@ export function translateFactory(
 
         translate.use(locale).subscribe(
           () => {
-            logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+            logger.logEvent(
+              LOG_SOURCE,
+              `Successfully initialized '${locale}' language as default.`,
+            );
           },
           err => {
-            logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+            logger.logError(
+              LOG_SOURCE,
+              `Problem with '${locale}' language initialization:`,
+              err,
+            );
           },
           () => {
             resolve(null);
@@ -169,6 +178,7 @@ export function translateFactory(
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -209,6 +219,7 @@ export function translateFactory(
     ActivityRedirectComponent,
     MailingListComponent,
     ActivityPrintComponent,
+    TooltipButtonComponent,
   ],
   providers: [
     CurrentActivityService,

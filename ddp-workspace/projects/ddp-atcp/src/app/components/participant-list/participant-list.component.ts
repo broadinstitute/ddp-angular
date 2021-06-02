@@ -14,16 +14,26 @@ import {
   WorkflowServiceAgent,
   LanguageService,
   CompositeDisposable,
+  UserStatusServiceAgent,
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
 import * as RouterResources from '../../router-resources';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
+import { Workflow } from '../../models/workflow';
+import { RegistrationStatus } from '../../models/registration-status';
 
 export interface Participant {
   guid: string;
   profile: UserProfile;
+  status?: ParticipantStatus;
   activities: ActivityInstance[];
+}
+
+export interface ParticipantStatus {
+  workflow: string;
+  status: string;
+  date: string;
 }
 
 @Component({
@@ -46,7 +56,8 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     private readonly userActivityAgent: UserActivityServiceAgent,
     private readonly workflowAgent: WorkflowServiceAgent,
     private readonly userManagementService: UserManagementServiceAgent,
-    @Inject('ddp.config') private readonly config: ConfigurationService
+    private readonly userStatusService: UserStatusServiceAgent,
+    @Inject('ddp.config') private readonly config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +72,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.isLoaded = false;
           this.getParticipants();
-        })
+        }),
     );
   }
 
@@ -75,7 +86,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         tap(participantGuid => this.session.setParticipant(participantGuid)),
-        switchMap(() => this.workflowAgent.fromParticipantList())
+        switchMap(() => this.workflowAgent.fromParticipantList()),
       )
       .subscribe(() => {
         this.activityService.setCurrentActivity(null);
@@ -92,19 +103,23 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
           participants.map(participant => ({
             guid: participant.userGuid,
             profile: participant.userProfile,
-          }))
+          })),
         ),
         map(participants =>
           participants.map(participant =>
             this.fetchParticipantActivity(participant.guid).pipe(
-              map(activities => ({ ...participant, activities }))
-            )
-          )
+              map(({ activities, status }) => ({
+                ...participant,
+                activities,
+                status,
+              })),
+            ),
+          ),
         ),
         switchMap(participants$ => forkJoin(participants$)),
         switchMap(participants =>
-          this.checkAndDeleteAccidentalParticipant(participants)
-        )
+          this.checkAndDeleteAccidentalParticipant(participants),
+        ),
       )
       .subscribe({
         next: participants => {
@@ -118,27 +133,36 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
       });
   }
 
-  private fetchParticipantActivity(
-    participantGuid: string
-  ): Observable<ActivityInstance[]> {
+  private fetchParticipantActivity(participantGuid: string): Observable<{
+    activities: ActivityInstance[];
+    status?: ParticipantStatus;
+  }> {
     return new Observable(observer => {
       this.session.setParticipant(participantGuid);
 
-      this.userActivityAgent
-        .getActivities(of(this.config.studyGuid))
-        .subscribe(activities => {
-          observer.next(activities);
-          observer.complete();
+      forkJoin({
+        status: this.userStatusService.getStatus(),
+        activities: this.userActivityAgent
+          .getActivities(of(this.config.studyGuid))
+          .pipe(take(1)),
+      }).subscribe(response => {
+        observer.next({
+          activities: response.activities,
+          status: response.status.workflows.find(
+            workflow => workflow.workflow === Workflow.RegistrationStatus,
+          ),
         });
+        observer.complete();
+      });
     });
   }
 
   private checkAndDeleteAccidentalParticipant(
-    participants: Participant[]
+    participants: Participant[],
   ): Observable<Participant[]> {
     const accidentalParticipant = participants.find(participant => {
       const registrationActivity = participant.activities.find(
-        activity => activity.activityCode === ActivityCodes.REGISTRATION
+        activity => activity.activityCode === ActivityCodes.REGISTRATION,
       );
 
       return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE;
@@ -153,8 +177,8 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         map(() =>
-          participants.filter(p => p.guid !== accidentalParticipant.guid)
-        )
+          participants.filter(p => p.guid !== accidentalParticipant.guid),
+        ),
       );
   }
 }
