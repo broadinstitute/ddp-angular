@@ -26,8 +26,6 @@ class TranslateLoaderMock implements TranslateLoader {
             en: {
                 SDK: {
                     FileUpload: {
-                        ReuploadBtnText: 'Reupload',
-                        UploadBtnText: 'Upload',
                         CancelBtnText: 'Cancel',
                         Size: '(size: {{size}})',
                     }
@@ -114,7 +112,7 @@ describe('ActivityFileAnswer', () => {
 
         it('should display an uploaded file data', () => {
             const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91Mb)');
+            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91MB)');
         });
 
         it('should call undoUploadedFile by click on remove uploaded file button', () => {
@@ -144,30 +142,6 @@ describe('ActivityFileAnswer', () => {
             expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
         });
 
-        it('submit button should have `Reupload` text', () => {
-            const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
-            expect(submitBtn.textContent.trim()).toBe('Reupload');
-        });
-
-        it('should call openConfirmDialog on click Reupload button', () => {
-            spyOn(component, 'openReuploadConfirmDialog');
-            component.block.validators = [];
-            component.fileToUpload = {
-                file: {} as File,
-                uploadGuid: 'uploadGuid',
-                uploadUrl: 'uploadUrl',
-                isReadyToUpload: true
-            };
-            component.uploadedFile = {
-                fileName: '1.png',
-                fileSize: 2000000
-            };
-            fixture.detectChanges();
-            const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
-            submitBtn.click();
-            expect(component.openReuploadConfirmDialog).toHaveBeenCalled();
-        });
-
         it('should upload file after confirmation', () => {
             fileUploadServiceSpy.getUploadUrl.and.returnValue(of({
                 uploadGuid: 'uploadGuid',
@@ -187,25 +161,21 @@ describe('ActivityFileAnswer', () => {
     });
 
     describe('There is not any uploaded file', () => {
-        it('submit button should have `Upload` text', () => {
-            const submitBtn = fixture.debugElement.query(By.css('.submit-btn')).nativeElement;
-            expect(submitBtn.textContent.trim()).toBe('Upload');
-        });
 
         it('should patch file answer after upload', () => {
             spyOn(component.valueChanged, 'emit');
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
             fileUploadServiceSpy.getUploadUrl.and.returnValue(of({
                 uploadGuid: 'uploadGuid',
                 uploadUrl: 'uploadUrl'
             }));
             fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
-            component.onFilesSelected([{name: 'fileName', size: 2000000} as File]);
+            component.uploadedFile = null;
+            component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'} as File]);
             fixture.detectChanges();
 
-            component.submitFileUpload();
             expect(component.block.answer).toEqual({fileName: 'fileName', fileSize: 2000000});
             expect(component.valueChanged.emit).toHaveBeenCalledWith('uploadGuid');
-
             expect(component.fileToUpload).toBeNull();
             expect(component.errorMessage).toBe('');
         });
@@ -219,8 +189,7 @@ describe('ActivityFileAnswer', () => {
             component.fileToUpload = {
                 file: {} as File,
                 uploadGuid: '',
-                uploadUrl: '',
-                isReadyToUpload: false
+                uploadUrl: ''
             };
 
             component.submitFileUpload();

@@ -23,16 +23,6 @@
             <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
             <div class="drop-block-text" translate>SDK.FileUpload.ChooseFile</div>
         </div>
-
-        <div class="selected-file">{{fileToUpload?.file.name}}</div>
-
-        <button *ngIf="!readonly" #uploadBtn
-                mat-raised-button color="primary"
-                class="submit-btn"
-                [disabled]="!fileToUpload?.isReadyToUpload"
-                (click)="submitFileUpload()">
-            {{uploadedFile? ('SDK.FileUpload.ReuploadBtnText' | translate) : ('SDK.FileUpload.UploadBtnText' | translate)}}
-        </button>
     </div>
 
     <div class="uploaded-file">
@@ -42,7 +32,8 @@
             <mat-chip *ngIf="uploadedFile"
                       class="uploaded-file-chip"
                       color="primary" selected
-                      (removed)="undoUploadedFile()">
+                      (removed)="undoUploadedFile()"
+                      #uploaded>
                 {{uploadedFile.fileName}}
                 <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>

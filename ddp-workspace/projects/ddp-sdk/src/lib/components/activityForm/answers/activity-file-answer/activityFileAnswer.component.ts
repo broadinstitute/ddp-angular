@@ -35,7 +35,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
-    @ViewChild('uploadBtn', {read: ElementRef}) private uploadButtonRef: ElementRef;
+    @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
     fileToUpload: UploadFile | null;
     uploadedFile: ActivityFileAnswerDto | null;
@@ -61,8 +61,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             this.fileToUpload = {
                 file,
                 uploadGuid: null,
-                uploadUrl: null,
-                isReadyToUpload: false
+                uploadUrl: null
             };
 
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, file)
@@ -77,9 +76,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 .subscribe((res: FileUploadResponse) => {
                     this.fileToUpload = {
                         ...this.fileToUpload,
-                        ...res,
-                        isReadyToUpload: true
+                        ...res
                     };
+                    this.submitFileUpload();
                 });
         }
     }
@@ -99,7 +98,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     openReuploadConfirmDialog(): void {
-        const config = this.modalDialogService.getDialogConfig(this.uploadButtonRef, this.panelClass);
+        const config = this.modalDialogService.getDialogConfig(this.uploadedFileRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',
             confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',

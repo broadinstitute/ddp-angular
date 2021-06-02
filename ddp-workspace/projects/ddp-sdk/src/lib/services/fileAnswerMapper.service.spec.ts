@@ -13,8 +13,7 @@ describe('FileAnswerMapperService', () => {
                 size: 1000
             } as File,
             uploadGuid: 'uploadGuid',
-            uploadUrl: 'uploadUrl',
-            isReadyToUpload: true,
+            uploadUrl: 'uploadUrl'
         }))
             .toEqual({
                 fileName: '1.png',

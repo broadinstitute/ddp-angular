@@ -7,11 +7,11 @@ describe('FileSizeFormatterPipe', () => {
         expect(pipe).toBeTruthy();
     });
 
-    it('should format file size in kB', () => {
-        expect(pipe.transform(1024)).toBe('1kB');
+    it('should format file size in KB', () => {
+        expect(pipe.transform(1024)).toBe('1KB');
     });
 
-    it('should format file size in Mb', () => {
-        expect(pipe.transform(2000000)).toBe('1.91Mb');
+    it('should format file size in MB', () => {
+        expect(pipe.transform(2000000)).toBe('1.91MB');
     });
 });

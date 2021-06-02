@@ -43,10 +43,17 @@ describe('FileUploadService', () => {
 
     describe('Get upload url', () => {
         const activityGuid = 'activityGuid';
+        const questionStableId = 'stableId';
+        const file = {
+            name: 'fileName',
+            size: 1000,
+            type: '*.png'
+        } as File;
         const requestBody: FileUploadBody = {
             questionStableId: 'stableId',
             fileName: 'fileName',
-            fileSize: 1000
+            fileSize: 1000,
+            mimeType: '*.png'
         };
         const response: FileUploadResponse = {
             uploadGuid: 'guid',
@@ -54,7 +61,7 @@ describe('FileUploadService', () => {
         };
 
         it('positive case', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, requestBody).subscribe((res: FileUploadResponse) => {
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe((res: FileUploadResponse) => {
                 expect(res).toEqual(response);
                 done();
             });
@@ -67,7 +74,7 @@ describe('FileUploadService', () => {
         });
 
         it('negative case', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, requestBody).subscribe(
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe(
                 () => fail('should have failed with an error'),
                 (error) => {
                     expect(error.message).toEqual('An error occurred');
