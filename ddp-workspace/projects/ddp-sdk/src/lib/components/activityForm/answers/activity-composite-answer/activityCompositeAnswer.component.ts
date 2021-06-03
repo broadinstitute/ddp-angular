@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
 import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
-import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
 import { QuestionType } from '../../../../models/activity/questionType';
@@ -24,7 +23,6 @@ export class ActivityCompositeAnswer implements OnChanges {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
 
@@ -105,12 +103,8 @@ export class ActivityCompositeAnswer implements OnChanges {
     // We assume question prompt should be used as placeholder in certain situations.
     // Relax this assumption if API adds an indicator for this.
     private shouldSetPlaceholderToBeQuestionText(childQuestionBlock: ActivityQuestionBlock<any>): boolean {
-        if (childQuestionBlock.question && !(childQuestionBlock.placeholder)) {
-            return (childQuestionBlock.questionType === QuestionType.Text)
-                || (childQuestionBlock.questionType === QuestionType.Date)
-                || (childQuestionBlock.questionType === QuestionType.Numeric);
-        }
-        return false;
+        return childQuestionBlock.question && !childQuestionBlock.placeholder
+            && [QuestionType.Text, QuestionType.Date, QuestionType.Numeric].includes(childQuestionBlock.questionType);
     }
 
     public updateValue(row: number, column: number, value: AnswerValue): void {
@@ -132,13 +126,7 @@ export class ActivityCompositeAnswer implements OnChanges {
     }
 
     public setOrientationClass(orientation: ChildOrientation | null): string {
-        if (orientation === ChildOrientation.Horizontal) {
-            return ChildOrientation.Horizontal.toLowerCase();
-        } else if (orientation === ChildOrientation.Vertical) {
-            return ChildOrientation.Vertical.toLowerCase();
-        } else {
-            return '';
-        }
+        return Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
     }
 
     private buildComponentAnswers(): any[][] {
@@ -165,8 +153,6 @@ export class ActivityCompositeAnswer implements OnChanges {
         this.valueChanged.emit(this.buildComponentAnswers());
     }
 
-    public updateVisibility(event: any): void { }
-
     // We need this method because we want to include the prototype in the clone.
     // Underscore's _.clone doesn't allow it.
     private deepClone<T>(block: T): T {
@@ -175,8 +161,11 @@ export class ActivityCompositeAnswer implements OnChanges {
 
     // we will show labels if we have a question with a picklist date. Placeholder is not available
     private shouldSetLabelToBeQuestionText(childQuestionBlocks: ActivityQuestionBlock<any>[]): boolean {
-        return childQuestionBlocks.filter(block => block.questionType === QuestionType.Date
-            && (block as ActivityDateQuestionBlock).renderMode === DateRenderMode.Picklist).length > 0;
+        return childQuestionBlocks
+            .filter(block => block.questionType === QuestionType.Date
+                && (block as ActivityDateQuestionBlock).renderMode === DateRenderMode.Picklist
+            )
+            .length > 0;
     }
 
     private showAsterisk(questionType: QuestionType): boolean {
