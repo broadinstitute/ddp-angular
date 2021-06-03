@@ -1,7 +1,7 @@
 import { Template } from './template';
 
 export interface PicklistOptionDef {
-  stableId: String;
+  stableId: string;
   optionLabelTemplate: Template;
   tooltipTemplate?: Template;
   detailLabelTemplate?: Template;

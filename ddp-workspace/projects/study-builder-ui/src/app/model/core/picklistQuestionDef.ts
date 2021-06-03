@@ -1,4 +1,3 @@
-import { QuestionDef } from './questionDef';
 import { Template } from './template';
 import { AbstractQuestionDef } from './abstractQuestionDef';
 import { PicklistSelectMode } from './picklistSelectMode';
