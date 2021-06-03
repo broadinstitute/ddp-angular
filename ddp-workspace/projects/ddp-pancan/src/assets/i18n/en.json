@@ -1,1 +1,19 @@
-{}
+{
+  "App": {
+    "FAQ": {
+      "Title": "Frequently Asked Questions",
+      "Button": {
+        "Expand": "Expand all",
+        "Collapse": "Collapse all"
+      },
+      "What": {
+        "Question": "What is Count Me In?",
+        "Answer": "Count Me In is a nonprofit research initiative that enables patients to accelerate cancer research by sharing their samples, their clinical information, and their voices. With patient consent, all data collected by and generated through Count Me In are shared regularly with the research community (after being stripped of identifying information) through freely available scientific databases, so researchers anywhere can help rapidly accelerate the pace of discovery, expand our understanding of cancer, and develop new treatment strategies – breaking down silos that exist in cancer research."
+      },
+      "Why": {
+        "Question": "Why is this needed?",
+        "Answer": "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. \nThe majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research.\nAnswering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
+      }
+    }
+  }
+}
