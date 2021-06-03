@@ -769,6 +769,7 @@
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
+            "PrismButton": "Prism",
             "SignOutButton": "Sign Out"
         },
         "DetailsPlaceholder": {

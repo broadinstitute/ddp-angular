@@ -92,6 +92,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'invitationId', 'proxyGuid', 'proxyShortId', 'proxyUserName'];
 sdkConfig.prismDashboardRoute = AppRoutes.Dashboard;
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.prismRoute = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
