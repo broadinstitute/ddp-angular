@@ -13,9 +13,9 @@ import {
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { COMPLETE } from '../workflow-progress/workflow-progress';
 import { ActivityService } from '../../services/activity.service';
+import { RegistrationStatusService } from '../../services/registrationStatus.service';
 import * as RouterResources from '../../router-resources';
 import { Participant } from './participant-list.component';
-import { RegistrationStatus } from '../../models/registration-status';
 
 @Component({
   selector: 'app-participant-list-item',
@@ -95,16 +95,13 @@ export class ParticipantListItem {
   @Input() participant: Participant;
 
   expanded = false;
-  private contactUsStatuses = [
-    RegistrationStatus.NotEligible,
-    RegistrationStatus.Duplicate,
-  ];
 
   constructor(
     private router: Router,
     private session: SessionMementoService,
     private activityServiceAgent: ActivityServiceAgent,
     private activityService: ActivityService,
+    private registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
@@ -115,34 +112,14 @@ export class ParticipantListItem {
   }
 
   get enrollmentMessageKey(): string {
-    const baseKey = 'EnrollmentStatus.Messages';
-
-    switch (this.participant.status.status) {
-      case RegistrationStatus.Registered:
-        return `${baseKey}.Registered`;
-      case RegistrationStatus.Consented:
-        return `${baseKey}.Consented`;
-      case RegistrationStatus.ConsentedNeedsAssent:
-        return `${baseKey}.ConsentedNeedsAssent`;
-      case RegistrationStatus.SubmittedPhysicianInfo:
-        return `${baseKey}.SubmittedPhysicianInfo`;
-      case RegistrationStatus.SubmittedMedicalHistory:
-        return `${baseKey}.SubmittedMedicalHistory`;
-      case RegistrationStatus.SubmittedGenomeStudyShippingInfo:
-        return `${baseKey}.SubmittedGenomeStudyShippingInfo`;
-      case RegistrationStatus.SubmittedEnrollment:
-        return `${baseKey}.SubmittedEnrollment`;
-      case RegistrationStatus.Enrolled:
-        return `${baseKey}.Enrolled`;
-      case RegistrationStatus.NotEligible:
-      case RegistrationStatus.Duplicate:
-        return `${baseKey}.ContactUs`;
-    }
+    return this.registrationStatusService.getEnrollmentMessageKey(
+      this.participant.status,
+    );
   }
 
   get isContactUsStatus(): boolean {
-    return this.contactUsStatuses.includes(
-      this.participant.status.status as RegistrationStatus,
+    return this.registrationStatusService.isContactUsStatus(
+      this.participant.status,
     );
   }
 

@@ -18,22 +18,16 @@ import {
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
+import { RegistrationStatusService } from '../../services/registrationStatus.service';
 import * as RouterResources from '../../router-resources';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
-import { Workflow } from '../../models/workflow';
-import { RegistrationStatus } from '../../models/registration-status';
+import { WorkflowModel } from '../../models/workflow.model';
 
 export interface Participant {
   guid: string;
   profile: UserProfile;
-  status?: ParticipantStatus;
+  status?: WorkflowModel;
   activities: ActivityInstance[];
-}
-
-export interface ParticipantStatus {
-  workflow: string;
-  status: string;
-  date: string;
 }
 
 @Component({
@@ -57,6 +51,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     private readonly workflowAgent: WorkflowServiceAgent,
     private readonly userManagementService: UserManagementServiceAgent,
     private readonly userStatusService: UserStatusServiceAgent,
+    private readonly registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private readonly config: ConfigurationService,
   ) {}
 
@@ -135,7 +130,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
 
   private fetchParticipantActivity(participantGuid: string): Observable<{
     activities: ActivityInstance[];
-    status?: ParticipantStatus;
+    status?: WorkflowModel;
   }> {
     return new Observable(observer => {
       this.session.setParticipant(participantGuid);
@@ -148,9 +143,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
       }).subscribe(response => {
         observer.next({
           activities: response.activities,
-          status: response.status.workflows.find(
-            workflow => workflow.workflow === Workflow.RegistrationStatus,
-          ),
+          status: this.registrationStatusService.findStatus(response.status),
         });
         observer.complete();
       });
