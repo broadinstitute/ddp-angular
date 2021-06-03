@@ -29,7 +29,7 @@ describe('DashboardComponent', () => {
         });
         const toolkitHeader = mockComponent({ selector: 'toolkit-header', inputs: ['showButtons'] });
         const dashboard = mockComponent({ selector: 'ddp-dashboard', inputs: ['studyGuid', 'selectedUserGuid'] });
-        const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['invitationId', 'shortId', 'email', 'name'] });
+        const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,

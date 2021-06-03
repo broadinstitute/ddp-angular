@@ -1,0 +1,75 @@
+@import '../../../styles/variables';
+
+.header {
+  width: 100%;
+  height: 10rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: #ffffff;
+
+  transition: box-shadow 0.2s ease;
+  z-index: 100;
+
+  &--sticky {
+    box-shadow: 0 0.2rem 2rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    max-width: 140rem;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 2.4rem;
+  }
+
+  &__logo {
+    height: 6rem;
+
+    margin-top: -1rem;
+    margin-right: 4rem;
+  }
+
+  &__logo-img {
+    height: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    &--left {
+      margin-right: auto;
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  &__item {
+    &:not(:last-of-type) {
+      margin-right: 4rem;
+    }
+  }
+
+  &__link {
+    &,
+    &:visited {
+      text-decoration: none;
+      color: $color-blue-2;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
