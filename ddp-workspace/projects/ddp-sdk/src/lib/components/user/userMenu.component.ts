@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionMementoService } from '../../services/sessionMemento.service';
 import { Auth0AdapterService } from '../../services/authentication/auth0Adapter.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
     selector: 'ddp-user-menu',
@@ -49,7 +50,8 @@ export class UserMenuComponent {
     constructor(
         private router: Router,
         private session: SessionMementoService,
-        private auth0: Auth0AdapterService) { }
+        private auth0: Auth0AdapterService,
+        @Inject('ddp.config') private config: ConfigurationService) { }
 
     public get isAuthenticated(): boolean {
         return this.session.isAuthenticatedSession();
@@ -60,7 +62,7 @@ export class UserMenuComponent {
     }
 
     public openPrism(): void {
-        this.router.navigateByUrl('prism');
+        this.router.navigateByUrl(this.config.prismRoute);
     }
 
     public logout(): void {

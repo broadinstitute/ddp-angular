@@ -1,4 +1,3 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserMenuComponent } from './userMenu.component';
@@ -19,6 +18,7 @@ describe('UserMenuComponent', () => {
     const dashboardLinkSelector = '.dashboard-link';
     const prismLinkSelector = '.prism-link';
     const menuTriggerSelector = '.mat-menu-trigger';
+    const prismRoute = 'prism-test';
 
     beforeEach(async() => {
         const signInOut = mockComponent({ selector: 'ddp-sign-in-out', inputs: ['isScrolled'] });
@@ -31,6 +31,7 @@ describe('UserMenuComponent', () => {
             providers: [
                 { provide: SessionMementoService , useValue: sessionSpy },
                 { provide: Auth0AdapterService , useValue: { } },
+                { provide: 'ddp.config', useValue: { prismRoute } },
             ],
             declarations: [UserMenuComponent, signInOut],
         })
@@ -77,6 +78,6 @@ describe('UserMenuComponent', () => {
 
         prismLink.nativeElement.click();
 
-        expect(router.navigateByUrl).toHaveBeenCalledWith('prism');
+        expect(router.navigateByUrl).toHaveBeenCalledWith(prismRoute);
     });
 });
