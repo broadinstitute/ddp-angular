@@ -41,6 +41,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     fileToUpload: UploadFile | null;
     uploadedFile: ActivityFileAnswerDto | null;
     errorMessage: string;
+    isLoading: boolean;
     private ngUnsubscribe = new Subject();
     private readonly panelClass = 'file-upload-confirm-dialog';
 
@@ -157,6 +158,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     private uploadFile(): void {
+        this.isLoading = true;
         this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.fileToUpload.file)
             .pipe(
                 catchError(err => {
@@ -164,7 +166,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     return EMPTY;
                 }),
                 takeUntil(this.ngUnsubscribe),
-                finalize(() => this.componentBusy.emit(false))
+                finalize(() => {
+                    this.componentBusy.emit(false);
+                    this.isLoading = false;
+                })
             )
             .subscribe(() => {
                 const uploadedFile = FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload);

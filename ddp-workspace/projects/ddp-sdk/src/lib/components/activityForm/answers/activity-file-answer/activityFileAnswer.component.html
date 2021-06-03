@@ -39,6 +39,7 @@
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
+        <ddp-loading *ngIf="fileToUpload" [loaded]="!isLoading" class="loading-bar"></ddp-loading>
     </div>
 </div>
 
