@@ -67,7 +67,6 @@ sdkConfig.dashboardPageUrl = Route.Dashboard;
 sdkConfig.sessionExpiredUrl = Route.SessionExpired;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
-sdkConfig.loginLandingUrl = Route.LoginLanding;
 sdkConfig.scrollToErrorOffset = 100;
 
 export const toolkitConfig = new ToolkitConfigurationService();
