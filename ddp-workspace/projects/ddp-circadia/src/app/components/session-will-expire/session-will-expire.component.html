@@ -1,0 +1,63 @@
+<header class="header">
+  <ng-container
+    *ngTemplateOutlet="renewalFailed ? renewalFailedTemplate : title"
+  ></ng-container>
+
+  <button
+    mat-icon-button
+    class="close-btn"
+    [disabled]="blockUI"
+    (click)="closeDialog()"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</header>
+
+<mat-dialog-content>
+  <ng-container *ngIf="!renewalFailed">
+    <p>
+      {{ 'SessionWillExpire.Paragraph' | translate }}
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="blockUI">
+    <mat-progress-bar
+      class="progress-bar"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    class="button button--sm button--opaque"
+    [disabled]="blockUI"
+    (click)="signOut()"
+  >
+    {{ 'SessionWillExpire.SignOut' | translate }}
+  </button>
+
+  <button
+    class="button button--sm button--yellow"
+    [disabled]="blockUI"
+    (click)="renewSession()"
+  >
+    {{ 'SessionWillExpire.Continue' | translate }}
+  </button>
+</mat-dialog-actions>
+
+<ng-template #title>
+  <h2 class="title">
+    {{ 'SessionWillExpire.Title' | translate }}
+  </h2>
+
+  <h3 class="subtitle">
+    {{ 'SessionWillExpire.TimeLeft' | translate: { timeLeft: timeLeft } }}
+  </h3>
+</ng-template>
+
+<ng-template #renewalFailedTemplate>
+  <h1 class="title">
+    {{ 'SessionWillExpire.RenewalFailed' | translate }}
+  </h1>
+</ng-template>
