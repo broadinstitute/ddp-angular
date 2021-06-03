@@ -106,6 +106,9 @@ export class EmbeddedActivityBlockComponent implements OnInit {
             tap(() => {
                 activityValidStatus = this.activity.validate();
                 this.validStatusChanged.emit(activityValidStatus);
+                if (!activityValidStatus) {
+                    this.componentBusy.emit(false);
+                }
             }),
             filter(_ => activityValidStatus),
             concatMap(() => this.activityServiceAgent.flushForm(this.studyGuid, this.instance.instanceGuid)),
