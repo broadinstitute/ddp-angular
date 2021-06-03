@@ -58,7 +58,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
-                                           [activityGuid]="activityGuid">
+                                           [activityGuid]="activityGuid"
+                                           (componentBusy)="embeddedComponentBusy.emit($event)">
                     </ddp-activity-question>
                 </div>
                 <div *ngIf="isInstitution(block)">

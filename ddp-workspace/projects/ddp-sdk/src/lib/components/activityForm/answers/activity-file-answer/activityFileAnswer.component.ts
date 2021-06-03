@@ -11,7 +11,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { EMPTY, Subject } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { catchError, finalize, takeUntil } from 'rxjs/operators';
 
 import { UploadFile } from '../../../../models/uploadFile';
 import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
@@ -35,6 +35,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
+    @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
     fileToUpload: UploadFile | null;
@@ -64,11 +65,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 uploadUrl: null
             };
 
+            this.componentBusy.emit(true);
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, file)
                 .pipe(
                     catchError(err => {
                         this.logger.logDebug('ActivityFileAnswer getUploadUrl error:', err);
                         this.errorMessage = err.message;
+                        this.componentBusy.emit(false);
                         return EMPTY;
                     }),
                     takeUntil(this.ngUnsubscribe)
@@ -87,6 +90,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const failedLocalValidator = this.getFailedLocalValidator();
         if (failedLocalValidator) {
             this.errorMessage = failedLocalValidator.result;
+            this.componentBusy.emit(false);
             return;
         }
 
@@ -110,6 +114,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe((confirmUpload: boolean) => {
             if (confirmUpload) {
                 this.uploadFile();
+            } else {
+                this.componentBusy.emit(false);
             }
         });
     }
@@ -157,7 +163,8 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
                     return EMPTY;
                 }),
-                takeUntil(this.ngUnsubscribe)
+                takeUntil(this.ngUnsubscribe),
+                finalize(() => this.componentBusy.emit(false))
             )
             .subscribe(() => {
                 const uploadedFile = FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload);

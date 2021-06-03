@@ -18,7 +18,8 @@ import { ConfigurationService } from '../../../services/configuration.service';
                 [validationRequested]="validationRequested$ | async"
                 [studyGuid]="studyGuid"
                 [activityGuid]="activityGuid"
-                (valueChanged)="enteredValue$.next($event)">
+                (valueChanged)="enteredValue$.next($event)"
+                (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
             <ng-container *ngIf="block.shown">
                 <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
@@ -41,6 +42,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
+    @Output() componentBusy = new EventEmitter<boolean>();
     public errorMessage$: Observable<string | string[] | null>;
     @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
     private ngUnsubscribe = new Subject<void>();
