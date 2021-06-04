@@ -24,6 +24,6 @@ export class QuestionPromptComponent {
     @Input() block: ActivityQuestionBlock<any>;
 
     public get displayAsRequired(): boolean {
-        return !!(this.block) && this.block.isRequired && !!(this.block.question) && (this.block.question.trim().length > 0);
+        return this.block?.isRequired && this.block?.question && (this.block.question.trim().length > 0);
     }
 }

@@ -536,5 +536,20 @@
       "CREATED": "Nicht begonnen",
       "IN_PROGRESS": "In Arbeit"
     }
+  },
+  "EnrollmentStatus": {
+    "Prefix": "[DE] Enrollment Status: ",
+    "ContactUsTooltip": "[DE] +1 954.481.6611 or support@atfamilies.org",
+    "Messages": {
+      "Registered": "[DE] Registered",
+      "Consented": "[DE] Consented",
+      "ConsentedNeedsAssent": "[DE] Consented, Needs Assent",
+      "SubmittedPhysicianInfo": "[DE] Submitted Physician Info",
+      "SubmittedMedicalHistory": "[DE] Submitted Medical History",
+      "SubmittedGenomeStudyShippingInfo": "[DE] Submitted Genome Study Shipping Info",
+      "SubmittedEnrollment": "[DE] Submitted Enrollment / Pending Confirmation",
+      "Enrolled": "[DE] Enrolled",
+      "ContactUs": "[DE] Please Contact Us"
+    }
   }
 }

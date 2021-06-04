@@ -69,4 +69,5 @@ export class ConfigurationService {
     usesVerticalStepper: string[] = [];
     prismColumns: string[] = [];
     prismDashboardRoute: string;
+    prismRoute: string;
 }

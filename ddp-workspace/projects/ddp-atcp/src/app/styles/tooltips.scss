@@ -79,3 +79,10 @@
     z-index: 1000;
   }
 }
+
+.mat-tooltip-above {
+  &::before {
+    top: 100%;
+    left: 50%;
+  }
+}

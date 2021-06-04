@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  font-size: 1.6rem;
+}
+
+.mat-cell {
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+}
+
+.mat-column-name {
+  width: 50%;
+}
+
+.mat-column-status {
+  width: 25%;
+}
+
+.mat-column-actions {
+  width: 25%;
+}
+
+.activity-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  margin-top: -0.1em;
+  margin-right: 0.3em;
+
+  &--created {
+    color: $color-yellow-1;
+  }
+
+  &--in-progress {
+    color: $color-blue-4;
+  }
+
+  &--complete {
+    color: $color-success;
+  }
+}

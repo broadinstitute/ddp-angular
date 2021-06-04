@@ -264,7 +264,7 @@ describe('PrismComponent', () => {
     tick(300);
     fixture.detectChanges();
 
-    const warningElement = fixture.debugElement.query(By.css('.warning-container')).nativeElement;
+    const warningElement = fixture.debugElement.query(By.css('.prism__warning-container')).nativeElement;
     expect(warningElement.textContent.trim()).toContain(`WarningSize ${data.length} from ${data.length + 1} test`);
   }));
 

@@ -541,5 +541,20 @@
       "CREATED": "没有开始",
       "IN_PROGRESS": "进行中"
     }
+  },
+  "EnrollmentStatus": {
+    "Prefix": "[ZH] Enrollment Status: ",
+    "ContactUsTooltip": "[ZH] +1 954.481.6611 or support@atfamilies.org",
+    "Messages": {
+      "Registered": "[ZH] Registered",
+      "Consented": "[ZH] Consented",
+      "ConsentedNeedsAssent": "[ZH] Consented, Needs Assent",
+      "SubmittedPhysicianInfo": "[ZH] Submitted Physician Info",
+      "SubmittedMedicalHistory": "[ZH] Submitted Medical History",
+      "SubmittedGenomeStudyShippingInfo": "[ZH] Submitted Genome Study Shipping Info",
+      "SubmittedEnrollment": "[ZH] Submitted Enrollment / Pending Confirmation",
+      "Enrolled": "[ZH] Enrolled",
+      "ContactUs": "[ZH] Please Contact Us"
+    }
   }
 }

@@ -1,0 +1,413 @@
+{
+  "Common": {
+    "Buttons": {
+      "Submit": "Submit"
+    }
+  },
+  "Header": {
+    "Links": {
+      "Home": "Home",
+      "About": "About the Study",
+      "Participation": "Participation",
+      "FAQ": "FAQ",
+      "Team": "Meet the Team",
+      "SignUp": "Sign Up",
+      "Dashboard": "Dashboard"
+    }
+  },
+  "Footer": {
+    "Circadia": {
+      "Title": "Circadia",
+      "Home": "Home",
+      "About": "About the Study",
+      "FAQ": "FAQ",
+      "Team": "Meet the Team",
+      "StayInformed": "Stay Informed",
+      "PrivacyPolicy": "Privacy Policy"
+    },
+    "ContactUs": {
+      "Title": "Contact Us"
+    },
+    "Participation": {
+      "Title": "Participation",
+      "SignUp": "Sign Up"
+    }
+  },
+  "HomePage": {
+    "Cta": {
+      "Title": "Circadia is an online research study to understand circadian rhythm disorders",
+      "Description": "We're looking for people living with circadian rhythm disorders to join our completely remote, at-home study.",
+      "JoinBtn": "Join the Circadia Study"
+    },
+    "About": {
+      "Title": "About the Study",
+      "Paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae inventore iusto nam esse ad, vel earum officia laudantium eligendi perferendis quod provident maiores doloribus, dolore eum voluptates fuga consequuntur corrupti!",
+      "Subtitle": "Questions we are trying to answer:",
+      "Questions": [
+        "Duis aute irure dolor in reprehenderit in voluptate?",
+        "Excepteur sint occaecat cupidatat non proident?",
+        "Duis aute irure dolor in reprehenderit in voluptate?"
+      ]
+    },
+    "Participation": {
+      "Title": "Participation",
+      "Description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex explicabo, reiciendis neque aliquid ratione nulla, consequatur iusto aliquam, pariatur fugiat vero itaque sequi sit magni? Deserunt, laborum minus minima rerum atque tempore nam cum porro natus magni modi repudiandae, nulla obcaecati voluptate quasi? Accusantium, corrupti ipsum. Vero vitae temporibus eum?",
+      "Subtitle": "Quick facts",
+      "Duration": "<span class=\"semibold\">Study duration:</span> 4 weeks",
+      "Provided": "<span class=\"semibold\">We provide:</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita facilis sapiente voluptate nobis, consequatur nam aliquid! Quo, quia?",
+      "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits, journaling about mood and meals, wearing a biosensor that tracks sleep patterns"
+    },
+    "FAQ": {
+      "Title": "Frequently Asked Questions",
+      "Description": "If your question is not answered below, you can call or email our study staff at <a class=\"link\" href=\"tel:16171234567\">1-617-123-4567</a> or <a class=\"link\" href=\"mailto:info@circadiastudy.org\">info@circadiastudy.org</a>.",
+      "Questions": [
+        {
+          "Title": "Can anybody join this study?",
+          "Answer": "TBD"
+        },
+        {
+          "Title": "What will I be asked to do?",
+          "Answer": "TBD"
+        },
+        {
+          "Title": "Is it free to participate?",
+          "Answer": "TBD"
+        },
+        {
+          "Title": "How long will the study last?",
+          "Answer": "TBD"
+        },
+        {
+          "Title": "Who is running this study?",
+          "Answer": "TBD"
+        }
+      ]
+    },
+    "Team": {
+      "Title": "Our Team",
+      "Description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Minima ratione obcaecati hic expedita doloribus quas.",
+      "Members": [
+        {
+          "Name": "Name",
+          "Title": "Title",
+          "Bio": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Esentium doloremque veritatis corporis ullam. Alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit.",
+          "ImageUrl": "/assets/img/team/image1.jpg"
+        },
+        {
+          "Name": "Name",
+          "Title": "Title",
+          "Bio": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Esentium doloremque veritatis corporis ullam. Alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit.",
+          "ImageUrl": "/assets/img/team/image2.jpg"
+        }
+      ]
+    }
+  },
+  "LoginLandingPage": {
+    "Message": "Please wait until you are redirected..."
+  },
+  "ErrorPage": {
+    "Title": "Error",
+    "Description": "Something went wrong on our side, please try again"
+  },
+  "PasswordPage": {
+    "Title": "Please enter the password",
+    "Placeholder": "Password",
+    "Errors": {
+      "Invalid": "Password is required",
+      "Wrong": "Password you provided is incorrect",
+      "Communication": "We're sorry, but an error has occured. Please try again."
+    }
+  },
+  "DashboardPage": {
+    "Title": "Dashboard"
+  },
+  "UserActivities": {
+    "Header": {
+      "Name": "Name",
+      "Status": "Status",
+      "Actions": "Actions"
+    },
+    "Statuses": {
+      "Created": "Not started",
+      "InProgress": "In progress",
+      "Complete": "Complete"
+    },
+    "Actions": {
+      "Start": "Start",
+      "Continue": "Continue",
+      "View": "View"
+    }
+  },
+  "SessionWillExpire": {
+    "Title": "Your session will time-out soon",
+    "TimeLeft": "Time left: {{ timeLeft }}",
+    "RenewalFailed": "Session renewal failed. Please log out and log back in again.",
+    "Paragraph": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+    "SignOut": "Sign Out",
+    "Continue": "Continue"
+  },
+  "SessionExpired": {
+    "Title": "Session has expired",
+    "Description": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on.",
+    "Button": "Login"
+  },
+  "Toolkit": {
+    "Dashboard": {
+      "Title": "Dashboard",
+      "Invitation": {
+        "InvitationCode": "Invitation Code:",
+        "Message": "Please use the look-up tool to manage a participant.",
+        "Button": "Go"
+      }
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password *",
+      "InputPlaceholder": "Password",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "OtherError": "We're sorry, but an error has occurred. Please try again.",
+      "PasswordRequiredError": "Password is required"
+    },
+    "ErrorPage": {
+      "Title": "We've encountered an error",
+      "Text": "We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "or call us at"
+      }
+    },
+    "SessionExpired": {
+      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "Dialogs": {
+      "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue",
+        "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+      }
+    }
+  },
+  "SDK": {
+    "SubmitButton": "Submit",
+    "CloseButton": "Close",
+    "AddButton": "ADD",
+    "CancelButton": "CANCEL",
+    "NextButton": "Next",
+    "PreviousButton": "Back",
+    "SavingButton": "Saving",
+    "EditButton": "Continue",
+    "CompleteButton": "Edit",
+    "ReviewButton": "View",
+    "OpenButton": "Open",
+    "StartButton": "Start",
+    "AgreeButton": "I agree",
+    "ReportButton": "Report",
+    "NotAgreeButton": "I'm not ready to agree",
+    "ValidateError": "Please complete all required fields.",
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+    "SaveError": "We're sorry but an error occurred",
+    "ExportStudy": {
+      "Export": "EXPORT"
+    },
+    "ListStudies": {
+      "StudyName": "Study Name",
+      "ParticipantCount": "Participant Count"
+    },
+    "ListWorkspaces": {
+      "WorkspaceName": "Workspace Name",
+      "WorkspaceNamespace": "Workspace Namespace"
+    },
+    "Login": {
+      "Login": "LOG IN",
+      "Logout": "LOG OUT"
+    },
+    "SignInOut": {
+      "SignIn": "Sign In",
+      "SignOut": "Sign Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "Form",
+      "Summary": "Summary",
+      "ActivityStatus": "Status",
+      "ActivityDate": "Created",
+      "ActivityActions": "Actions",
+      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
+      "HiddenTooltip": "This activity is hidden."
+    },
+    "ManageParticipants": {
+      "GovernedParticipants": "Governed participants",
+      "ParticipantPlaceholder": "Participant",
+      "ParticipantsList": "Participants"
+    },
+    "ParticipantProfile": {
+      "OpenProfile": "Profile",
+      "ViewAs": "View As",
+      "ManageParticipants": "Manage participants"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "User preferences",
+      "UserPreferencesGender": "Sex",
+      "UserPreferencesLocale": "Preferred language"
+    },
+    "Dashboard": {
+      "Title": "My Dashboard",
+      "Text": "The dashboard below describes each Circadia form and its status."
+    },
+    "DatePicker": {
+      "Day": "Choose day...",
+      "Month": "Choose month...",
+      "Year": "Choose year...",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
+    "UserMenu": {
+      "DashboardButton": "Dashboard",
+      "SignOutButton": "Sign Out"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "characters remaining",
+      "SingularForm": "character remaining"
+    },
+    "Title": {
+      "Default": "Circadia",
+      "Alert": "Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "Physician Name",
+        "Institution": "Institution",
+        "InstitutionAny": "Institution (if any)",
+        "City": "City",
+        "State": "State"
+      },
+      "Form": {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
+      "PhysicianValidation": "Please fill out all required fields"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "Full Name",
+        "Country": "Country/Territory",
+        "Street1": "Street Address",
+        "Street2": "Apt/Floor #",
+        "State": {
+          "State": "State",
+          "Province": "Province",
+          "State/Province/Region": "State/Province/Region"
+        },
+        "City": "City",
+        "Phone": "Phone",
+        "Zip": {
+          "Zip Code": "Zip Code",
+          "Postal Code": "Postal Code",
+          "Zip/Postal Code": "Zip/Postal Code"
+        },
+        "Choose": "Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "Suggested:",
+        "AsEntered": "As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "Invalid address.",
+        "CannotVerify": "Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "An unknown error occurred while verifying address.",
+        "FieldIsRequired": "{{field}} is required",
+        "FieldIsInvalid": "{{field}} has an invalid value",
+        "InvalidHouseNumber": "Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "The requested resource could not be found.",
+        "FORBIDDEN": "Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+        "E.STREET.MISSING": "Street is missing.",
+        "E.STREET.INVALID": "Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "Zip not found.",
+        "E.ZIP.INVALID": "Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "Dual address.",
+        "E.STREET.MAGNET": "Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+        "E.STATE.INVALID": "Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+        "E.TIMED_OUT": "Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      }
+    },
+    "TooltipAlt": "Information",
+    "SubjectPanel": {
+      "Link": "Return to subject look-up",
+      "Text": "Subject Invitation Code: "
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid"
+    }
+  }
+}

@@ -90,9 +90,10 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
-config.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'proxyGuid', 'proxyShortId', 'proxyUserName'];
+config.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'legacyShortId', 'legacyAltPid'];
 config.prismDashboardRoute = 'dashboard';
-config.lookupPageUrl = 'prism';
+config.prismRoute = 'prism';
+config.lookupPageUrl = config.prismRoute;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {

@@ -33,7 +33,8 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
-    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
+    @Output() validStatusChanged = new EventEmitter<boolean>();
+    @Output() embeddedComponentBusy = new EventEmitter<boolean>();
     @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
