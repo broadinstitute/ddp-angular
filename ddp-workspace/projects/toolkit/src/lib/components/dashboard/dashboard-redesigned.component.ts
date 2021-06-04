@@ -11,8 +11,10 @@ import { map, take, filter } from 'rxjs/operators';
     template: `
         <main class="main">
             <section class="section">
-                <ddp-subject-panel *ngIf="!selectedUserGuid || (selectedUser$ | async) as selectedUser" [subject]="selectedUser">
-                </ddp-subject-panel>
+                <ng-container *ngIf="{selectedUser: selectedUser$ | async} as data">
+                  <ddp-subject-panel *ngIf="!selectedUserGuid || data.selectedUser" [subject]="data.selectedUser">
+                  </ddp-subject-panel>
+                </ng-container>
             </section>
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
