@@ -1,0 +1,78 @@
+{
+  "App": {
+    "FAQ": {
+      "Title": "Frequently Asked Questions",
+      "Button": {
+        "Expand": "Expand all",
+        "Collapse": "Collapse all"
+      },
+      "What": {
+        "Question": "What is Count Me In?",
+        "Answer": "Count Me In is a nonprofit research initiative that enables patients to accelerate cancer research by sharing their samples, their clinical information, and their voices. With patient consent, all data collected by and generated through Count Me In are shared regularly with the research community (after being stripped of identifying information) through freely available scientific databases, so researchers anywhere can help rapidly accelerate the pace of discovery, expand our understanding of cancer, and develop new treatment strategies – breaking down silos that exist in cancer research."
+      },
+      "Why": {
+        "Question": "Why is this needed?",
+        "Answer": "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. \nThe majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research.\nAnswering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
+      },
+      "Participation": {
+        "Question": "How can I participate?",
+        "Section1": {
+          "TextPt1": "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”. ",
+          "Link": "Click here",
+          "TextPt2": " to learn more about participation."
+        },
+        "Section2": "If you’re a cancer researcher, you can access the data generated through Count Me In projects through existing publicly available databases, such as the cBioPortal for Cancer Genomics and the National Cancer Institute’s Genomic Data Commons. You can also join our mailing list for updates about new data releases and publications."
+      },
+      "Data": {
+        "Question": "What does Count Me In do with the data?",
+        "Section1": "After removing all personal information that would readily identify individuals, data is shared freely in an effort to accelerate discoveries, enabling researchers to identify patterns in data. Batches of data are released publicly on a regular basis, and are available to all researchers—so that everyone may use the data to make discoveries and advance progress against cancer, including new medicines and diagnostics.",
+        "Section2": "Quick links to released data:"
+      }
+    }
+  },
+  "Toolkit": {
+    "Header": {
+      "HeaderLogo": "Count Me In",
+      "DataRelease": "Data Release",
+      "LearnMore": "Learn More",
+      "CountMeIn": "count me in"
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password",
+      "SubmitButton": "SUBMIT",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "OtherError": "We're sorry, but an error has occurred. Please try again.",
+      "PasswordField": {
+        "Error": "Password is required"
+      }
+    },
+    "ErrorPage": {
+      "Title": "We've encountered an error",
+      "Header": "We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "or call us at"
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+    },
+    "SessionExpired": {
+      "Text": {
+        "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+        "Pt2": "Please log in again to return to the last page you were on."
+      },
+      "LogInButton": "Log In"
+    },
+    "LoginLanding": {
+      "Text": "Please wait. You will be redirected to a destination soon..."
+    }
+  },
+  "SDK": {
+    "SignInOut": {
+      "SignIn": "Sign In",
+      "SignOut": "Sign Out"
+    }
+  }
+}

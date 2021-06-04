@@ -107,6 +107,12 @@
     },
     {
       "path": "./projects/ddp-circadia/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-pancan/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-pancan/tsconfig.spec.json"
     }
   ]
 }
