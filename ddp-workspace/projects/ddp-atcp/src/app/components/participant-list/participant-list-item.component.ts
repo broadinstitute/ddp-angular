@@ -177,5 +177,5 @@ export class ParticipantListItem {
       isConsentEditActivity,
     );
     this.router.navigateByUrl(RouterResources.Survey);
-  };
+  }
 }
