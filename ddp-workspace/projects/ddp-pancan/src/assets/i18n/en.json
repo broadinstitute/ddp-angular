@@ -49,6 +49,42 @@
         "Text": "With your help, patients can be the driving force behind transformative cancer research."
       }
     },
+    "ParticipationPage": {
+      "MainTitle": "PARTICIPATION PAGE",
+      "Step1": {
+        "Step": "STEP 1",
+        "Time": "10-15 minutes",
+        "Title": "Provide consent for the study",
+        "Text": "This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
+        "ViewConsentDocumentButton": "View Consent Document"
+      },
+      "Step2": {
+        "Step": "STEP 2",
+        "Time": "5 minutes",
+        "Title": "Tell us where you’ve been treated",
+        "Text": "Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+        "ViewMedicalReleaseButton": "View Medical Release"
+      },
+      "Step3": {
+        "Step": "STEP 3",
+        "Time": "5 minutes",
+        "Title": "Respond to surveys about you and your experience with cancer",
+        "Text": "In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
+        "ViewSurveysButton": "“View Surveys"
+      },
+      "Step4": {
+        "Step": "STEP 4",
+        "Time": "10 minutes",
+        "Title": "Provide a saliva and/or blood sample",
+        "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
+        "ViewKitInstructionsButton": "View Kit Instructions"
+      },
+      "Step5": {
+        "Step": "STEP 5",
+        "Title": "Stay involved",
+        "Text": "Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+      }
+    },
     "FAQ": {
       "Title": "Frequently Asked Questions",
       "Button": {
