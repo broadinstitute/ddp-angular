@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UserStatusResponse } from 'ddp-sdk';
+import { LoggingService, UserStatusResponse } from 'ddp-sdk';
 
 import { RegistrationStatus } from '../models/registration-status';
 import { Workflow } from '../models/workflow';
@@ -14,6 +14,9 @@ export class RegistrationStatusService {
     RegistrationStatus.NotEligible,
     RegistrationStatus.Duplicate,
   ];
+  private readonly LOG_SOURCE = 'RegistrationStatusService';
+
+  constructor(private loggingService: LoggingService) {}
 
   findStatus(response: UserStatusResponse): WorkflowModel {
     return response.workflows.find(
@@ -50,6 +53,13 @@ export class RegistrationStatusService {
       case RegistrationStatus.NotEligible:
       case RegistrationStatus.Duplicate:
         return `${baseKey}.ContactUs`;
+      default:
+        this.loggingService.logError(
+          this.LOG_SOURCE,
+          `Unknown registration status: "${workflow.status}"`,
+          workflow,
+        );
+        break;
     }
   }
 }
