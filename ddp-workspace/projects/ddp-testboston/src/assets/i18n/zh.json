@@ -522,6 +522,10 @@
         "City": "城市",
         "State": "州"
       },
+      "Form" : {
+        "OtherPhysician": "Other physician",
+        "OtherInstitution": "Other institution"
+      },
       "PhysicianValidation": "请填写所有必填字段"
     },
     "MailAddress": {
@@ -615,7 +619,10 @@
     "TooltipAlt": "信息",
     "SubjectPanel": {
       "Link": "返回受试者查找",
-      "Text": "受试者邀请代码："
+      "InvitationCode": "受试者邀请代码：",
+      "Email": "[ZH] Email:",
+      "Name": "[ZH] Name:",
+      "ShortId": "[ZH] Subject Short ID/HRUID:"
     },
     "AdminActionPanel": {
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",

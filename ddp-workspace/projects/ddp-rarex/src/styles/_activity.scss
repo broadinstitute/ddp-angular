@@ -363,3 +363,15 @@ p.question-sub {
   border: 3px solid mat-color($app-theme, 300);
   background: #f4efea;
 }
+
+.boolean-answer-HD_DEVELOPMENT_CONCERNS_PATIENT {
+  mat-radio-group {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  mat-radio-button {
+     margin-top: 0 !important;
+     margin-bottom: 10px !important;
+   }
+}
+

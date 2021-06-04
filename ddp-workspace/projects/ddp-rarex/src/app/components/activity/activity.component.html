@@ -27,7 +27,6 @@
             [validationRequested]="validationRequested"
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
-            (visibilityChanged)="updateVisibility($event)"
             (embeddedComponentsValidationStatus)="
               updateEmbeddedComponentValidationStatus(0, $event)
             "
@@ -55,6 +54,14 @@
       </ol>
     </div>
 
+    <div class="PageContent-infobox page-count" *ngIf="isConsent">
+      {{
+        'Activities.PageCount'
+          | translate
+            : { current: currentSectionIndex + 1, total: model.sections.length }
+      }}
+    </div>
+
     <ng-container *ngIf="model">
       <div class="row NoMargin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -64,7 +71,6 @@
             [validationRequested]="validationRequested"
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
-            (visibilityChanged)="updateVisibility($event)"
             (embeddedComponentsValidationStatus)="
               updateEmbeddedComponentValidationStatus(1, $event)
             "
@@ -83,7 +89,6 @@
               [validationRequested]="validationRequested"
               [studyGuid]="studyGuid"
               [activityGuid]="activityGuid"
-              (visibilityChanged)="updateVisibility($event)"
               (embeddedComponentsValidationStatus)="
                 updateEmbeddedComponentValidationStatus(2, $event)
               "

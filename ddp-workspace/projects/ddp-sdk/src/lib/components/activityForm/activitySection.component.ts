@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { ActivitySection } from '../../models/activity/activitySection';
 import { ActivityBlock } from '../../models/activity/activityBlock';
 import { BlockType } from '../../models/activity/blockType';
@@ -11,7 +22,6 @@ import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -89,6 +99,7 @@ import { Subscription } from 'rxjs';
                                     [validationRequested]="validationRequested"
                                     [studyGuid]="studyGuid"
                                     [parentActivityInstanceGuid]="activityGuid"
+                                    (validStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
                                     (embeddedComponentBusy)="embeddedComponentBusy.emit($event)">
                 </ddp-activity-block>
             </div>
@@ -103,9 +114,10 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
     private subscription: Subscription;
-    private embeddedValidationStatus: boolean[] = new Array(2).fill(true);
+    private embeddedValidationStatus: boolean[] = new Array(3).fill(true);
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService, private submissionManager: SubmissionManager,
+    constructor(@Inject('ddp.config') public config: ConfigurationService,
+                private submissionManager: SubmissionManager,
                 private readonly cdr: ChangeDetectorRef) {
     }
 
@@ -168,5 +180,4 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     public isActivityBlock(block: ActivityBlock): block is ActivityActivityBlock {
         return block.blockType === BlockType.Activity && block.shown;
     }
-
 }

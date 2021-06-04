@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
-import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, SessionMementoService, UserInvitationServiceAgent, InvitationType, ParticipantsSearchServiceAgent } from 'ddp-sdk';
 import { map, take, filter } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,8 @@ import { map, take, filter } from 'rxjs/operators';
     template: `
         <main class="main">
             <section class="section">
-                <ddp-subject-panel></ddp-subject-panel>
+                <ddp-subject-panel *ngIf="!selectedUserGuid || (selectedUser$ | async) as selectedUser" [subject]="selectedUser">
+                </ddp-subject-panel>
             </section>
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
@@ -55,6 +56,7 @@ import { map, take, filter } from 'rxjs/operators';
                     <div class="content content_medium">
                         <div class="dashboard-content dashboard-content_table">
                             <ddp-user-activities [studyGuid]="studyGuid"
+                                                 [selectedUserGuid]="selectedUserGuid"
                                                  [displayedColumns]="config.dashboardDisplayedColumns"
                                                  (open)="navigate($event)">
                             </ddp-user-activities>
@@ -73,8 +75,9 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private _router: Router,
         private _announcements: AnnouncementsServiceAgent,
         private userInvitation: UserInvitationServiceAgent,
+        _participantsSearch: ParticipantsSearchServiceAgent,
         @Inject('toolkit.toolkitConfig') public config: ToolkitConfigurationService) {
-        super(_router, _announcements, config);
+        super(_router, _announcements, _participantsSearch, config);
     }
 
     public ngOnInit(): void {
@@ -88,7 +91,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     public get subjectInfoExists(): boolean {
-        return !!this.session.session.participantGuid && !!this.session.session.invitationId;
+        return (!!this.session.session.participantGuid && !!this.session.session.invitationId) || !!this.selectedUserGuid;
     }
 
     private getInvitationId(): void {

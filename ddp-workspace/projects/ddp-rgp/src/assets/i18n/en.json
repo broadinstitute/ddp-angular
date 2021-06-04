@@ -1412,6 +1412,10 @@
                 "City": "City",
                 "State": "State"
             },
+            "Form" : {
+                "OtherPhysician": "Other physician",
+                "OtherInstitution": "Other institution"
+            },
             "PhysicianValidation": "Please fill out all required fields"
         },
         "Validators": {

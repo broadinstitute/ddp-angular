@@ -8,6 +8,9 @@ import { LanguageService } from '../../services/internationalization/languageSer
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
 
+export const LANGUAGE_QUERY_PARAM = 'language';
+export const DESTINATION_QUERY_PARAM = 'destination';
+
 @Component({
   selector: 'ddp-change-language-redirect',
   template: `<ng-container></ng-container>`
@@ -62,14 +65,14 @@ export class ChangeLanguageRedirectComponent implements OnInit {
 
   private getQueryParamInfo(): Promise<void> {
     return this.getPromiseFromObservable(this.route.queryParamMap, (queryParams => {
-      if (queryParams.has('language')) {
-        this.lang = queryParams.get('language');
+      if (queryParams.has(LANGUAGE_QUERY_PARAM)) {
+        this.lang = queryParams.get(LANGUAGE_QUERY_PARAM);
       } else {
         this.logger.logError(this.LOG_SOURCE, 'Missing language query parameter!');
       }
 
-      if (queryParams.has('destination')) {
-        this.dest = queryParams.get('destination');
+      if (queryParams.has(DESTINATION_QUERY_PARAM)) {
+        this.dest = queryParams.get(DESTINATION_QUERY_PARAM);
       } else {
         this.logger.logError(this.LOG_SOURCE, 'Missing destination query parameter!');
       }

@@ -19,6 +19,7 @@
                                              [validationRequested]="validationRequested"
                                              [studyGuid]="studyGuid"
                                              (componentBusy)="embeddedComponentBusy.emit($event)"
+                                             (validStatusChanged)="validStatusChanged.emit($event)"
                                              (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-embedded-activity-block>
             </ng-template>

@@ -16,6 +16,8 @@ import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs
                   [block]="block"
                   [readonly]="isReadonly"
                   [validationRequested]="validationRequested$ | async"
+                  [studyGuid]="studyGuid"
+                  [activityGuid]="activityGuid"
                   (valueChanged)="enteredValue$.next($event)">
           </ddp-activity-answer>
           <ng-container *ngIf="block.shown">

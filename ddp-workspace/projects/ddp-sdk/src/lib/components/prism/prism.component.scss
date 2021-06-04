@@ -1,0 +1,126 @@
+.prism-subtitle {
+    margin: 0;
+}
+
+.prism-field {
+    width: 24rem;
+
+    &__icon {
+        position: relative;
+        top: 0.25rem;
+        padding-right: 5px;
+        box-sizing: content-box;
+    }
+
+    &__clear {
+        border: none;
+        text-decoration: underline;
+        background: none;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            color: #454545;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .prism-field {
+        width: 20rem;
+    }
+}
+
+.no-data-message,
+.no-users-message {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.mat-table {
+    min-width: 100%;
+}
+
+.mat-spinner {
+    margin: 40px auto 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.guid-column,
+.proxy-guid-column {
+    width: 185px;
+    min-width: 185px;
+}
+
+.short-id-column,
+.proxy-short-id-column {
+    width: 65px;
+    min-width: 65px;
+}
+
+.invitation-column {
+    width: 160px;
+    min-width: 160px;
+}
+
+.user-name-column,
+.proxy-name-column {
+    width: 225px;
+    min-width: 225px;
+}
+
+.email-column {
+    word-break: break-all;
+    width: 250px;
+    min-width: 250px;
+}
+
+.status-column {
+    width: 160px;
+    min-width: 160px;
+}
+
+.legacy-short-id-column {
+    width: 65px;
+    min-width: 65px;
+}
+
+.legacy-AltPid-column {
+    width: 180px;
+    min-width: 180px;
+}
+
+.dashboard-column {
+    width: 115px;
+    min-width: 115px;
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding-right: 15px;
+    box-sizing: content-box;
+}
+
+.table-container {
+    position: relative;
+    margin-top: 10px;
+    overflow: auto;
+
+    .mat-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+}
+
+.prism__warning-container {
+    height: 20px;
+    margin-top: 20px;
+
+    .mat-icon {
+        vertical-align: bottom;
+    }
+}

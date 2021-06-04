@@ -27,24 +27,17 @@ export class ActivitiesListComponent {
     ActivityCodes.GeneralInformation,
     ActivityCodes.HealthAndDevelopment,
     ActivityCodes.QualityOfLife,
-    ActivityCodes.ParentalQualityOfLife,
+    ActivityCodes.ChildQualityOfLife,
+    ActivityCodes.PatientQualityOfLife,
+    ActivityCodes.DataSharing,
   ];
   private consentActivities = [
     ActivityCodes.SelfConsent,
     ActivityCodes.ConsentAssent,
     ActivityCodes.ParentalConsent,
+    ActivityCodes.LarConsent,
+    ActivityCodes.LarConsentAssent,
   ];
-
-  shouldShowQuestionCount(activity: ActivityInstance): boolean {
-    const questionCount = activity.numQuestions;
-    const answeredQuestionCount = activity.numQuestionsAnswered;
-
-    if (this.isConsentOrAssent(activity)) {
-      return false;
-    }
-
-    return questionCount !== answeredQuestionCount;
-  }
 
   canCopyActivity(activity: ActivityInstance): boolean {
     return this.allowedToEditActivities.includes(
@@ -66,11 +59,5 @@ export class ActivitiesListComponent {
 
   onViewClick(activity: ActivityInstance): void {
     this.viewActivity.emit(activity);
-  }
-
-  private isConsentOrAssent(activity: ActivityInstance): boolean {
-    return this.consentActivities.includes(
-      activity.activityCode as ActivityCodes,
-    );
   }
 }

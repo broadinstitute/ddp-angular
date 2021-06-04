@@ -4,12 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   IrbGuard,
   AuthGuard,
-  Auth0CodeCallbackComponent
+  Auth0CodeCallbackComponent,
+  AdminAuthGuard,
 } from 'ddp-sdk';
 
 import {
   ActivityPageRedesignedComponent,
-  DashboardRedesignedComponent,
   ActivityRedesignedComponent,
   LoginLandingRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
@@ -22,7 +22,8 @@ import {
   AgeUpThankYou,
   VerifyAgeUpPageComponent,
   AcceptAgeUpPageComponent,
-  SessionExpiredRedesignedComponent
+  SessionExpiredRedesignedComponent,
+  AdminLoginLandingComponent,
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -32,8 +33,31 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { PrismComponent } from './components/prism/prism.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
+  {
+    path: AppRoutes.Prism,
+    component: PrismComponent,
+    canActivate: [
+      IrbGuard,
+      AdminAuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.AdminLanding,
+    component: AdminLoginLandingComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: AppRoutes.AdminSessionExpired,
+    component: SessionExpiredRedesignedComponent,
+    canActivate: [IrbGuard],
+    data: {
+      isAdmin: true
+    }
+  },
   {
     path: AppRoutes.AboutYou,
     component: ActivityPageRedesignedComponent,
@@ -113,7 +137,15 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.Dashboard,
-    component: DashboardRedesignedComponent,
+    component: DashboardComponent,
+    canActivate: [
+      IrbGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: AppRoutes.DashboardId,
+    component: DashboardComponent,
     canActivate: [
       IrbGuard,
       AuthGuard

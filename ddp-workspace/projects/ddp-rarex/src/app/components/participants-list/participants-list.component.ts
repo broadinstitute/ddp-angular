@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
 import {
   ActivityInstance,
@@ -38,6 +38,7 @@ export class ParticipantsListComponent implements OnInit {
   messages: AnnouncementMessage[] = [];
   participants: GovernedParticipant[] = [];
   private expandedMap: Record<string, boolean> = {};
+  errorMessage: string | null = null;
 
   constructor(
     private router: Router,
@@ -85,23 +86,28 @@ export class ParticipantsListComponent implements OnInit {
     });
 
     dialogRef
-      .afterClosed()
-      .pipe(
-        filter((shallDelete: boolean) => shallDelete),
-        tap(() => {
-          this.loading = true;
-        }),
-        mergeMap(() => this.deleteParticipant(userGuid)),
-        tap(() => {
-          this.participants = this.participants.filter(
-            participant => participant.userGuid !== userGuid,
-          );
-        }),
-      )
-      .subscribe(() => {
-        this.loading = false;
-        this.expandedMap[userGuid] = null;
-      });
+        .afterClosed()
+        .pipe(
+            filter((shallDelete: boolean) => shallDelete),
+            tap(() => {
+              this.loading = true;
+              this.errorMessage = null;
+            }),
+            mergeMap(() => this.deleteParticipant(userGuid)),
+            tap(() => {
+              this.participants = this.participants.filter(
+                  participant => participant.userGuid !== userGuid,
+              );
+            }),
+            catchError(() => {
+              this.errorMessage = this.translateService.instant('ParticipantsList.DeleteError');
+              return of(null);
+            })
+        )
+        .subscribe(() => {
+          this.loading = false;
+          this.expandedMap[userGuid] = null;
+        });
   }
 
   onStartActivity(participantGuid: string, activity: ActivityInstance): void {

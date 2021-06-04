@@ -1277,6 +1277,10 @@
                 "City": "[es]City",
                 "State": "[es]State"
             },
+            "Form" : {
+                "OtherPhysician": "Otro doctor",
+                "OtherInstitution": "Otra institución"
+            },
             "PhysicianValidation": "[es]Please fill out all required fields"
         },
         "Validators": {
