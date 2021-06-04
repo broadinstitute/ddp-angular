@@ -1,0 +1,113 @@
+.activity {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 1.5em 0 0.65em;
+  }
+
+  h1,
+  &__title {
+    font-size: 3.2rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.65rem;
+  }
+
+  h6 {
+    font-size: 1.6rem;
+  }
+
+  table {
+    margin: 0.75em 0;
+
+    border-collapse: collapse;
+
+    td {
+      padding: 0.5em 1em;
+
+      &:first-of-type {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    tr {
+      &:not(:last-of-type) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .dotted-list {
+    margin: 0.75em 0;
+
+    padding-left: 1.5em;
+  }
+
+  .paragraph {
+    margin: 0.75em 0;
+  }
+
+  /*
+   * SDK
+   */
+  .question-title,
+  .ddp-question-prompt {
+    margin: 1.5em 0 0.5em;
+
+    font-size: 1.75rem;
+    font-weight: bold;
+
+    .paragraph {
+      margin: 0.5em 0;
+
+      font-size: 1.5rem;
+
+      opacity: 0.8;
+    }
+  }
+
+  .mat-radio-group {
+    .margin-5 {
+      margin: 0 !important;
+    }
+  }
+
+  .mat-radio-button {
+    margin: 0.5em 1.5em 0.5em 0 !important;
+  }
+
+  .ddp-activity-question {
+    .mat-list {
+      padding: 0 !important;
+    }
+
+    .mat-list-item {
+      height: 4rem;
+    }
+
+    .mat-list-item-content {
+      padding: 0 !important;
+    }
+
+    .mat-checkbox-inner-container {
+      width: 2rem !important;
+      height: 2rem !important;
+    }
+  }
+}

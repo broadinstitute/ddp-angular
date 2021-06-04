@@ -3,16 +3,18 @@ import { ConfigurationService } from './configuration.service';
 import { LogLevel } from '../models/logLevel';
 import { StackdriverErrorReporterService } from './stackdriverErrorReporter.service';
 
+type Logger = (message?: any, ...optionalParams: any[]) => void;
+
 @Injectable()
 export class LoggingService {
     // tslint:disable-next-line:no-console
-    public logDebug = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
+    public logDebug: Logger = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
-    public logEvent = this.showEvent(LogLevel.Info) ? console.log.bind(window.console) : () => { };
+    public logEvent: Logger = this.showEvent(LogLevel.Info) ? console.log.bind(window.console) : () => { };
 
-    public logWarning = this.showEvent(LogLevel.Warning) ? console.warn.bind(window.console) : () => { };
+    public logWarning: Logger = this.showEvent(LogLevel.Warning) ? console.warn.bind(window.console) : () => { };
 
-    public logError = this.showEvent(LogLevel.Error) ?
+    public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
             const stringifiedArgs = args.map(item => {
                 return (typeof item === 'object') ? this.stringify(item) : item;

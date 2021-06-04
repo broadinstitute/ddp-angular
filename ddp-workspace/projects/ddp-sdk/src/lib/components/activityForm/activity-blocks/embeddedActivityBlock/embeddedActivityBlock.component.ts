@@ -12,7 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { EMPTY, of } from 'rxjs';
-import { catchError, concatMap, finalize, take, tap } from 'rxjs/operators';
+import { catchError, concatMap, filter, finalize, take, tap } from 'rxjs/operators';
 
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
@@ -34,7 +34,8 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
-    @Output() componentBusy = new EventEmitter<boolean>(true);
+    @Output() componentBusy = new EventEmitter<boolean>();
+    @Output() validStatusChanged = new EventEmitter<boolean>();
     @Output() deletedActivity = new EventEmitter<string>();
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
@@ -98,8 +99,18 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     }
 
     private flushFormOnSubmit(): void {
+        let activityValidStatus: boolean;
+
         this.submitAnnouncementService.submitAnnounced$.pipe(
             tap(() => this.componentBusy.emit(true)),
+            tap(() => {
+                activityValidStatus = this.activity.validate();
+                this.validStatusChanged.emit(activityValidStatus);
+                if (!activityValidStatus) {
+                    this.componentBusy.emit(false);
+                }
+            }),
+            filter(_ => activityValidStatus),
             concatMap(() => this.activityServiceAgent.flushForm(this.studyGuid, this.instance.instanceGuid)),
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during completing an activity', err);

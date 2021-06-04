@@ -1,0 +1,32 @@
+@import 'variables';
+
+.text-center {
+  text-align: center;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.link {
+  font-weight: 400;
+  color: $color-blue-2;
+  text-decoration: none;
+}
+
+.error-message,
+.ErrorMessage {
+  margin: 1rem 0;
+
+  color: $color-error;
+}
+
+.page-title {
+  margin: 1.5em 0 0.65em;
+
+  font-size: 3.2rem;
+}

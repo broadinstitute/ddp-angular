@@ -41,11 +41,14 @@ import { tap, mergeMap, take } from 'rxjs/operators';
                     matTooltip="{{ 'SDK.UserActivities.HiddenTooltip' | translate }}">
             visibility_off
           </mat-icon>
-          <button class="dashboard-activity-button Link"
-                [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
-                (click)="openActivity(element.instanceGuid, element.activityCode)">
+            <!-- todo: return the link back once new prism would support activity for selected user-->
+          <button *ngIf="!selectedUserGuid; else textName"
+                  class="dashboard-activity-button Link"
+                  [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
+                  (click)="openActivity(element.instanceGuid, element.activityCode)">
             {{ element.activityName }}
           </button>
+          <ng-template #textName>{{ element.activityName }}</ng-template>
         </mat-cell>
       </ng-container>
 

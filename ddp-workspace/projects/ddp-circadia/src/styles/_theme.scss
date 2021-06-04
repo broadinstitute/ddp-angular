@@ -1,0 +1,115 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$md-primary: (
+  50: #e3e6ed,
+  100: #babfd1,
+  200: #8c95b3,
+  300: #5d6b95,
+  400: #3b4b7e,
+  500: #182b67,
+  600: #15265f,
+  700: #112054,
+  800: #0e1a4a,
+  900: #081039,
+  A100: #7183ff,
+  A200: #3e57ff,
+  A400: #0b2aff,
+  A700: #001ff1,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$md-secondary: (
+  50: #fdf8eb,
+  100: #faedce,
+  200: #f7e2ae,
+  300: #f3d68d,
+  400: #f1cd74,
+  500: #eec45c,
+  600: #ecbe54,
+  700: #e9b64a,
+  800: #e7af41,
+  900: #e2a230,
+  A100: #ffffff,
+  A200: #fffaf2,
+  A400: #ffe7bf,
+  A700: #ffdda6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$md-warn: (
+  50: #fee8e7,
+  100: #fcc7c3,
+  200: #faa19b,
+  300: #f77b72,
+  400: #f65f54,
+  500: #f44336,
+  600: #f33d30,
+  700: #f13429,
+  800: #ef2c22,
+  900: #ec1e16,
+  A100: #ffffff,
+  A200: #ffe9e9,
+  A400: #ffb8b6,
+  A700: #ff9f9c,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$app-primary: mat-palette($md-primary);
+$app-secondary: mat-palette($md-secondary);
+$app-warn: mat-palette($md-warn);
+
+$app-theme: mat-light-theme($app-primary, $app-secondary, $app-warn);
+
+$app-typography: mat-typography-config(
+  $font-family: 'Nunito, sans-serif',
+);
+
+@include angular-material-theme($app-theme);
+@include angular-material-typography($app-typography);
