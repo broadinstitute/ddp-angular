@@ -55,7 +55,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.initUploadedFile();
     }
 
-    onFilesSelected(files: File[]): void {
+    onFilesSelected(files: FileList): void {
         this.errorMessage = '';
         const file: File = files[0];
 
