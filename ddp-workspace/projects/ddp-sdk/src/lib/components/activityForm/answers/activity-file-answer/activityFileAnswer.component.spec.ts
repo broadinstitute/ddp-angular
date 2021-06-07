@@ -152,10 +152,10 @@ describe('ActivityFileAnswer', () => {
                 afterClosed: () => of(true)
             } as any);
             modalDialogServiceSpy.getDialogConfig.and.returnValue({});
-            component.onFilesSelected([{name: 'fileName', size: 2000000} as File]);
+            component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'}] as unknown as FileList);
             fixture.detectChanges();
 
-            component.openReuploadConfirmDialog();
+            component.openReuploadConfirmDialog({} as File, 'uploadGuid', 'uploadUrl');
             expect(fileUploadServiceSpy.uploadFile).toHaveBeenCalled();
         });
     });
@@ -171,12 +171,12 @@ describe('ActivityFileAnswer', () => {
             }));
             fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
             component.uploadedFile = null;
-            component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'} as File]);
+            component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'}] as unknown as FileList);
             fixture.detectChanges();
 
-            expect(component.block.answer).toEqual({fileName: 'fileName', fileSize: 2000000});
+            expect(component.block.answer).toEqual({fileName: 'fileName', fileSize: 2000000, fileMimeType: '*.png'});
             expect(component.valueChanged.emit).toHaveBeenCalledWith('uploadGuid');
-            expect(component.fileToUpload).toBeNull();
+            expect(component.fileNameToUpload).toBe('');
             expect(component.errorMessage).toBe('');
         });
 
@@ -186,13 +186,8 @@ describe('ActivityFileAnswer', () => {
             localValidator.result = errorMessage;
             localValidator.recalculate = () => false;
             component.block.validators = [localValidator];
-            component.fileToUpload = {
-                file: {} as File,
-                uploadGuid: '',
-                uploadUrl: ''
-            };
 
-            component.submitFileUpload();
+            component.submitFileUpload({} as File, 'uploadGuid', 'uploadUrl');
             expect(component.errorMessage).toBe(errorMessage);
         });
     });
