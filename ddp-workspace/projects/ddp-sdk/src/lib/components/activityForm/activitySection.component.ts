@@ -59,7 +59,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                            [validationRequested]="validationRequested"
                                            [studyGuid]="studyGuid"
                                            [activityGuid]="activityGuid"
-                                           (componentBusy)="embeddedComponentBusy.emit($event)">
+                                           (componentBusy)="componentBusy.emit($event)">
                     </ddp-activity-question>
                 </div>
                 <div *ngIf="isInstitution(block)">
@@ -68,7 +68,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
                                            (validStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
-                                           (componentBusy)="embeddedComponentBusy.emit($event)">
+                                           (componentBusy)="componentBusy.emit($event)">
                     </ddp-institutions-form>
                 </div>
                 <div *ngIf="isMailAddress(block)">
@@ -78,7 +78,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                           [activityGuid]="activityGuid"
                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
                                           [validationRequested]="validationRequested"
-                                          (componentBusy)="embeddedComponentBusy.emit($event)">
+                                          (componentBusy)="componentBusy.emit($event)">
                     </ddp-address-embedded>
                 </div>
             </ng-template>
@@ -101,7 +101,7 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
                                     [studyGuid]="studyGuid"
                                     [parentActivityInstanceGuid]="activityGuid"
                                     (validStatusChanged)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                    (embeddedComponentBusy)="embeddedComponentBusy.emit($event)">
+                                    (embeddedComponentBusy)="componentBusy.emit($event)">
                 </ddp-activity-block>
             </div>
         </div>`
@@ -113,7 +113,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
-    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
     private subscription: Subscription;
     private embeddedValidationStatus: boolean[] = new Array(3).fill(true);
 

@@ -37,7 +37,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-            (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+            (componentBusy)="embeddedComponentBusy$[1].next($event)">
           </ddp-activity-section>
         </ng-container>
       </div>
