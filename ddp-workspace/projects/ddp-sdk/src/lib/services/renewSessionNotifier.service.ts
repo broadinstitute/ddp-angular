@@ -40,7 +40,7 @@ export class RenewSessionNotifier implements OnDestroy {
 
     private setTabFavicon(icon: string): void {
         const iconHash = Date.now();
-        this.document.getElementById('app-favicon').setAttribute('href', `${icon}.ico?v=${iconHash}`);
+        this.document.getElementById('app-favicon')?.setAttribute('href', `${icon}.ico?v=${iconHash}`);
     }
 
     private setTabTitle(key: string): void {
