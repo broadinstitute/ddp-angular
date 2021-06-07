@@ -13,7 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, Subject } from 'rxjs';
 import { catchError, finalize, takeUntil } from 'rxjs/operators';
 
-import { UploadFile } from '../../../../models/uploadFile';
 import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
 import { FileUploadService } from '../../../../services/fileUpload.service';
 import { LoggingService } from '../../../../services/logging.service';
@@ -38,7 +37,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
-    fileToUpload: UploadFile | null;
+    fileNameToUpload: string;
     uploadedFile: ActivityFileAnswerDto | null;
     errorMessage: string;
     isLoading: boolean;
@@ -60,12 +59,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const file: File = files[0];
 
         if (file) {
-            this.fileToUpload = {
-                file,
-                uploadGuid: null,
-                uploadUrl: null
-            };
-
             this.componentBusy.emit(true);
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, file)
                 .pipe(
@@ -78,17 +71,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     takeUntil(this.ngUnsubscribe)
                 )
                 .subscribe((res: FileUploadResponse) => {
-                    this.fileToUpload = {
-                        ...this.fileToUpload,
-                        ...res
-                    };
-                    this.submitFileUpload();
+                    this.submitFileUpload(file, res.uploadGuid, res.uploadUrl);
                 });
         }
     }
 
-    submitFileUpload(): void {
-        const failedLocalValidator = this.getFailedLocalValidator();
+    submitFileUpload(file: File, uploadGuid: string, uploadUrl: string): void {
+        const failedLocalValidator = this.getFailedLocalValidator(file);
         if (failedLocalValidator) {
             this.errorMessage = failedLocalValidator.result;
             this.componentBusy.emit(false);
@@ -96,13 +85,13 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
 
         if (this.uploadedFile) {
-            this.openReuploadConfirmDialog();
+            this.openReuploadConfirmDialog(file, uploadGuid, uploadUrl);
         } else {
-            this.uploadFile();
+            this.uploadFile(file, uploadGuid, uploadUrl);
         }
     }
 
-    openReuploadConfirmDialog(): void {
+    openReuploadConfirmDialog(file: File, uploadGuid: string, uploadUrl: string): void {
         const config = this.modalDialogService.getDialogConfig(this.uploadedFileRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmReuploadTitle',
@@ -114,7 +103,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmUpload: boolean) => {
             if (confirmUpload) {
-                this.uploadFile();
+                this.uploadFile(file, uploadGuid, uploadUrl);
             } else {
                 this.componentBusy.emit(false);
             }
@@ -135,6 +124,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             if (confirmUndo) {
                 this.patchAnswer(null);
                 this.setUploadedFile(null);
+                this.fileNameToUpload = '';
             }
         });
     }
@@ -157,9 +147,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
     }
 
-    private uploadFile(): void {
+    private uploadFile(file: File, uploadGuid: string, uploadUrl: string): void {
         this.isLoading = true;
-        this.fileUploadService.uploadFile(this.fileToUpload.uploadUrl, this.fileToUpload.file)
+        this.fileNameToUpload = file?.name;
+        this.fileUploadService.uploadFile(uploadUrl, file)
             .pipe(
                 catchError(err => {
                     this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
@@ -172,10 +163,14 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 })
             )
             .subscribe(() => {
-                const uploadedFile = FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload);
-                this.patchAnswer(uploadedFile, this.fileToUpload.uploadGuid);
-                this.setUploadedFile(uploadedFile);
-                this.fileToUpload = null;
+                const fileAnswer: ActivityFileAnswerDto = {
+                    fileName: file?.name,
+                    fileSize: file?.size,
+                    fileMimeType: file?.type
+                };
+                this.patchAnswer(fileAnswer, uploadGuid);
+                this.setUploadedFile(fileAnswer);
+                this.fileNameToUpload = '';
                 this.errorMessage = '';
             });
     }
@@ -189,13 +184,14 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.valueChanged.emit(fileUploadGuid || null);
     }
 
-    private getFailedLocalValidator(): ActivityFileValidationRule {
+    private getFailedLocalValidator(file: File): ActivityFileValidationRule {
         return this.block.validators
             .filter(validator => validator instanceof ActivityFileValidationRule)
             .find(validator => {
                 const preUploadFileAnswer: ActivityFileAnswerDto = {
-                    ...FileAnswerMapperService.mapFileAnswerDto(this.fileToUpload),
-                    fileMimeType: this.fileToUpload?.file?.type
+                    fileName: file?.name,
+                    fileSize: file?.size,
+                    fileMimeType: file?.type
                 };
                 return !validator.recalculate(preUploadFileAnswer);
             }) as ActivityFileValidationRule;

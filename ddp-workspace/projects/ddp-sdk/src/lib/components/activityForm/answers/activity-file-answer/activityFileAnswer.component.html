@@ -26,7 +26,10 @@
     </div>
 
     <div class="uploaded-file">
-        <div class="title" translate>SDK.FileUpload.Uploaded</div>
+        <ng-container *ngIf="fileNameToUpload">
+            <div class="title">{{'SDK.FileUpload.Uploading' | translate: {filename: fileNameToUpload} }}</div>
+            <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
+        </ng-container>
 
         <mat-chip-list>
             <mat-chip *ngIf="uploadedFile"
@@ -39,7 +42,6 @@
                 <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
-        <ddp-loading *ngIf="fileToUpload" [loaded]="!isLoading" class="loading-bar"></ddp-loading>
     </div>
 </div>
 

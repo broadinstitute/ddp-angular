@@ -5,19 +5,4 @@ describe('FileAnswerMapperService', () => {
         expect(FileAnswerMapperService.mapMimeTypesToFileExtentions(['application/pdf', 'image/jpeg']))
             .toEqual(['*.pdf', '*.jpeg']);
     });
-
-    it('should map mapFileAnswerDto', () => {
-        expect(FileAnswerMapperService.mapFileAnswerDto({
-            file: {
-                name: '1.png',
-                size: 1000
-            } as File,
-            uploadGuid: 'uploadGuid',
-            uploadUrl: 'uploadUrl'
-        }))
-            .toEqual({
-                fileName: '1.png',
-                fileSize: 1000
-            });
-    });
 });
