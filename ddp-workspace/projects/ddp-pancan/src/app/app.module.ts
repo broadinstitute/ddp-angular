@@ -34,8 +34,8 @@ declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.phone = 'TBD';
-toolkitConfig.infoEmail = 'TBD';
+toolkitConfig.phone = '651-287-1608';
+toolkitConfig.infoEmail = 'info@joincountmein.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;

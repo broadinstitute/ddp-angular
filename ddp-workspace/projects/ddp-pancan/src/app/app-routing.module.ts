@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { Auth0CodeCallbackComponent, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
-  ErrorComponent,
-  LoginLandingComponent,
-  PasswordComponent,
-  RedirectToAuth0LoginComponent,
-  RedirectToLoginLandingComponent,
-  SessionExpiredComponent,
-  WorkflowStartActivityComponent
+    ErrorRedesignedComponent,
+    LoginLandingRedesignedComponent,
+    PasswordRedesignedComponent,
+    RedirectToAuth0LoginRedesignedComponent,
+    RedirectToLoginLandingRedesignedComponent,
+    SessionExpiredRedesignedComponent,
+    WorkflowStartActivityRedesignedComponent
 } from 'toolkit';
 import { AppRoutes } from './components/app-routes';
 
@@ -27,17 +27,17 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.LoginLanding,
-    component: LoginLandingComponent,
+    component: LoginLandingRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
     path: AppRoutes.LoginLandingMode,
-    component: RedirectToAuth0LoginComponent,
+    component: RedirectToAuth0LoginRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
     path: AppRoutes.CountMeIn,
-    component: WorkflowStartActivityComponent,
+    component: WorkflowStartActivityRedesignedComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard
@@ -45,16 +45,16 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.Error,
-    component: ErrorComponent
+    component: ErrorRedesignedComponent
   },
   {
     path: AppRoutes.PasswordResetDone,
-    component: RedirectToLoginLandingComponent,
+    component: RedirectToLoginLandingRedesignedComponent,
     canActivate: [IrbGuard]
   },
   {
     path: AppRoutes.SessionExpired,
-    component: SessionExpiredComponent,
+    component: SessionExpiredRedesignedComponent,
     canActivate: [
       IrbGuard,
       BrowserGuard
@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.Password,
-    component: PasswordComponent
+    component: PasswordRedesignedComponent
   },
   {
     path: '**',
