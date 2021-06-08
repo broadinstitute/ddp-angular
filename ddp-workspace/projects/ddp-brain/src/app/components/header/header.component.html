@@ -33,7 +33,7 @@
         </nav>
         <div class="side-menu">
             <ng-container *ngIf="isAuthenticated">
-                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+                <ng-container *ngTemplateOutlet="dashboardPrismButton"></ng-container>
             </ng-container>
             <ddp-sign-in-out *ngIf="headerConfig.showLoginButton" class="side-menu__auth"></ddp-sign-in-out>
             <a *ngIf="!isAuthenticated && headerConfig.showCmiButton" [routerLink]="'/' + appRoutes.CountMeIn"
@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li *ngIf="isAuthenticated" class="menu__item menu__item_dashboard">
-                <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>
+                <ng-container *ngTemplateOutlet="dashboardPrismButton"></ng-container>
             </li>
             <li *ngIf="headerConfig.showLoginButton" class="menu__item menu__item_auth">
                 <ddp-sign-in-out></ddp-sign-in-out>
@@ -99,9 +99,11 @@
     </nav>
 </div>
 
-<ng-template #dashboardButton>
-    <a class="header-link header-link_dashboard" [routerLink]="'/' + appRoutes.Dashboard" (click)="closeMenu()"
-        routerLinkActive="header-link_active">
+<ng-template #dashboardPrismButton>
+    <a class="header-link header-link_dashboard-prism"
+       [routerLink]="'/' + (isAdmin ? appRoutes.Prism : appRoutes.Dashboard)"
+       (click)="closeMenu()"
+       routerLinkActive="header-link_active">
         <svg class="dashboard-icon" width="22px" height="22px" viewBox="0 0 22 22" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
@@ -120,6 +122,6 @@
                 </g>
             </g>
         </svg>
-        <span translate>Navigation.Dashboard</span>
+        <span translate>{{isAdmin ? 'Navigation.Prism' : 'Navigation.Dashboard'}}</span>
     </a>
 </ng-template>
