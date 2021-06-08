@@ -704,9 +704,10 @@
         "FileUpload": {
             "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
             "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
+            "ConfirmCancelUploadTitle": "Are you sure you want \nto cancel upload?",
             "ReuploadBtnText": "Reupload",
             "UploadBtnText": "Upload",
-            "UndoBtnText": "OK",
+            "OkBtnText": "OK",
             "CancelBtnText": "Cancel",
             "MaxSize": "Max size: {{maxSize}}",
             "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
@@ -714,7 +715,9 @@
             "Uploading": "Uploading {{filename}}",
             "Size": "(size: {{size}})",
             "MaxSizeErrorMessage": "Maximum file size exceeded",
-            "InvalidTypeErrorMessage": "Type of file selected is not valid"
+            "InvalidTypeErrorMessage": "Type of file selected is not valid",
+            "CancelUpload": "Cancel upload",
+            "RemoveUploadedFile": "Remove uploaded file"
         }
     }
 }
