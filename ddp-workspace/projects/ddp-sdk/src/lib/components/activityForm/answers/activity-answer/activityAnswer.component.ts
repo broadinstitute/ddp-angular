@@ -3,7 +3,6 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
-import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -74,7 +73,6 @@ export class ActivityAnswerComponent {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
 
     public onChange(value: AnswerValue): void {
         this.valueChanged.emit(value);

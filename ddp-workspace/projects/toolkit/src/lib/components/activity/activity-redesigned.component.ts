@@ -10,7 +10,7 @@ import { ActivityResponse } from 'ddp-sdk';
     selector: 'toolkit-activity-redesigned',
     template: `
         <ddp-activity-redesigned [studyGuid]="studyGuid"
-                                 [activityGuid]="id"
+                                 [activityGuid]="instanceGuid"
                                  [agreeConsent]="config.agreeConsent"
                                  (submit)="navigate($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"

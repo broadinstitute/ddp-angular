@@ -1,0 +1,159 @@
+<h2 class="prism-title" translate>SDK.Prism.Title</h2>
+<p class="prism-subtitle" translate>SDK.Prism.Subtitle</p>
+<mat-form-field class="prism-field" floatLabel="never">
+    <mat-icon class="prism-field__icon" matPrefix>search</mat-icon>
+    <input matInput
+           [attr.aria-label]="'SDK.Prism.Placeholder' | translate"
+           [formControl]="searchField"
+           [placeholder]="'SDK.Prism.Placeholder' | translate">
+    <button *ngIf="searchField.value"
+            matSuffix
+            [attr.aria-label]="'SDK.Prism.ClearSearchLabel' | translate"
+            class="prism-field__clear"
+            (click)="clearSearch()">
+        {{'SDK.Prism.ClearSearch' | translate}}
+    </button>
+    <mat-hint *ngIf="!hasValidUserSearchQuery()">
+        {{'SDK.Prism.MinQueryLengthHint' | translate : { length: MIN_SEARCH_LENGTH } }}
+    </mat-hint>
+</mat-form-field>
+<div class="prism__warning-container">
+    <ng-container *ngIf="totalCount > dataSource.data.length">
+        <p>
+            <mat-icon>warning</mat-icon>
+            {{'SDK.Prism.WarningSize' | translate : { count: dataSource.data.length, totalCount: totalCount } }}
+        </p>
+    </ng-container>
+</div>
+<mat-paginator #paginator
+               [hidden]="isPaginationHidden"
+               [pageSizeOptions]="paginationSizes"
+               [pageIndex]="initialPageIndex"
+               [pageSize]="initialPageSize"
+               (page)="updatePageDataInStorage($event)">
+</mat-paginator>
+<div class="table-container" sticky-scroll>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="user-name-column">
+                {{'SDK.Prism.TableColumns.Name' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="user-name-column">
+                {{ element.firstName }} {{ element.lastName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="email-column">
+                {{'SDK.Prism.TableColumns.Email' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="email-column">
+                {{ element.email || element.proxy?.email }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shortId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="hruid" class="short-id-column">
+                {{'SDK.Prism.TableColumns.ShortId' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="short-id-column">{{ element.hruid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="guid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="guid-column">GUID</th>
+            <td mat-cell *matCellDef="let element" class="guid-column">{{ element.guid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="enrollmentStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="status" class="status-column">
+                {{'SDK.Prism.TableColumns.Status' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="status-column">
+                {{ enrollmentStatusTypeToLabel.get(element.status) | translate }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="invitationId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="invitation-column">
+                {{'SDK.Prism.TableColumns.InvitationId' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="invitation-column">
+                {{ (element.invitationId || '') | invitation  }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="proxyUserName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="proxy-name-column">
+                {{'SDK.Prism.TableColumns.ProxyName' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="proxy-name-column">
+                {{ element.proxy?.firstName }} {{ element.proxy?.lastName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="proxyShortId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="proxy-short-id-column">
+                {{'SDK.Prism.TableColumns.ProxyShortId' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="proxy-short-id-column">{{ element.proxy?.hruid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="proxyGuid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="proxy-guid-column">
+                {{'SDK.Prism.TableColumns.ProxyGUID' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="proxy-guid-column">{{ element.proxy?.guid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="legacyShortId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="legacy-short-id-column">
+                {{'SDK.Prism.TableColumns.LegacyShortId' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="legacy-short-id-column">
+                {{ element.legacyShortId }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="legacyAltPid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="legacy-AltPid-column">
+                {{'SDK.Prism.TableColumns.LegacyAltPid' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="legacy-AltPid-column">{{ element.legacyAltPid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dashboardLink">
+            <th mat-header-cell *matHeaderCellDef class="dashboard-column">
+                {{'SDK.Prism.TableColumns.DashboardLink' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element" class="dashboard-column">
+                <a mat-stroked-button
+                   class="dashboard-link"
+                   [routerLink]="'/' + dashboardRoute + '/' + element.guid"
+                   [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }">
+                    {{'SDK.Prism.DashboardButton' | translate}}
+                </a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-container *ngIf="!isSearchLoading; else loader">
+        <p *ngIf="!hasValidUserSearchQuery()" class="no-data-message" translate>SDK.Prism.NoData</p>
+        <p *ngIf="hasValidUserSearchQuery() && !dataSource.data.length && !isSearchDebounce"
+           class="no-users-message"
+           translate>
+            SDK.Prism.NoUsers
+        </p>
+    </ng-container>
+    <ng-template #loader>
+        <mat-spinner color="primary" diameter="30"></mat-spinner>
+    </ng-template>
+</div>
+<mat-paginator [hidden]="isPaginationHidden"
+               [pageSizeOptions]="paginator.pageSizeOptions"
+               [pageIndex]="paginator.pageIndex"
+               [pageSize]="paginator.pageSize"
+               [length]="paginator.length"
+               (page)="syncPaginators($event);">
+</mat-paginator>

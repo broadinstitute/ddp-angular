@@ -9,12 +9,6 @@ import {
     Component
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
-import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
-import { ActivityResponse } from '../../models/activity/activityResponse';
-import { ActivityForm } from '../../models/activity/activityForm';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { CompositeDisposable } from '../../compositeDisposable';
 import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
 import {
     concatMap,
@@ -28,6 +22,13 @@ import {
     tap,
     withLatestFrom
 } from 'rxjs/operators';
+
+import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
+import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
+import { ActivityResponse } from '../../models/activity/activityResponse';
+import { ActivityForm } from '../../models/activity/activityForm';
+import { BlockVisibility } from '../../models/activity/blockVisibility';
+import { CompositeDisposable } from '../../compositeDisposable';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
 

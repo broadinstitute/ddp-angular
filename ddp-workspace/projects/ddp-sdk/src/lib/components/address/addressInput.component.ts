@@ -79,7 +79,11 @@ import { LoggingService } from '../../services/logging.service';
         </mat-form-field>
 
         <ng-container *ngIf="ais.countryInfo$ | async as info; else defaultStateField">
-          <ng-container *ngIf="hasStatesList(info); then showStateDropdown else showStateTextField">
+          <ng-container *ngIf="!info.stateCode">
+            <ng-container *ngIf="info.subnationalDivisionTypeName as stateLabel; else defaultStateField">
+              <ng-container *ngIf="hasStatesList(info); then showStateDropdown else showStateTextField">
+              </ng-container>
+            </ng-container>
           </ng-container>
 
           <ng-template #showStateDropdown>
@@ -152,7 +156,6 @@ import { LoggingService } from '../../services/logging.service';
     }`],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 
 export class AddressInputComponent implements OnInit, OnDestroy {
   /**
@@ -252,9 +255,6 @@ export class AddressInputComponent implements OnInit, OnDestroy {
       tap(val => this.componentBusy.emit(val))
     );
 
-
-
-
     // shoot for single subscribe
     merge(
       syncStreet1FieldValue$,
@@ -348,8 +348,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
     const fieldKey = this.buildFieldTranslationKey(formControlName);
     if (formControlName === 'zip') {
       return this.ais.postalCodeLabel$.pipe(
-          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`)));
-
+          mergeMap(postalCodeString => this.ngxTranslate.getTranslation(`${fieldKey}.${postalCodeString}`))
+      );
     } else if (formControlName === 'state') {
       return this.ais.stateLabel$.pipe(
           mergeMap(stateString => this.ngxTranslate.getTranslation(`${fieldKey}.${stateString}`)));

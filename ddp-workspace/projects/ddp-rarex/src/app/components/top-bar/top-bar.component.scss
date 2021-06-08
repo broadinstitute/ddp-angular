@@ -3,7 +3,6 @@
 .top-bar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 
   padding: 0.6rem 1.2rem;
 
@@ -12,6 +11,10 @@
   @media only screen and (max-width: 480px) {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  &__nav {
+    margin-left: auto;
   }
 }
 
@@ -37,4 +40,15 @@
       }
     }
   }
+}
+
+.username {
+  padding: 5px;
+
+  font-size: 1.0625rem;
+  color: white;
+}
+
+.SimpleButton {
+  padding: 5px;
 }

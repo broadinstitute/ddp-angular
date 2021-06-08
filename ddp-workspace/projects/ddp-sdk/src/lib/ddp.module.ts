@@ -66,6 +66,7 @@ import { ActivityInstanceStatusServiceAgent } from './services/serviceAgents/act
 import { MailingListServiceAgent } from './services/serviceAgents/mailingListServiceAgent.service';
 import { InstitutionServiceAgent } from './services/serviceAgents/institutionServiceAgent.service';
 import { ResendEmailServiceAgent } from './services/serviceAgents/resendEmailServiceAgent.service';
+import { ParticipantsSearchServiceAgent } from './services/serviceAgents/participantsSearchServiceAgent.service';
 
 import { ActivityConverter } from './services/activity/activityConverter.service';
 import { ActivityQuestionConverter } from './services/activity/activityQuestionConverter.service';
@@ -76,6 +77,7 @@ import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectI
 import { UserManagementServiceAgent } from './services/serviceAgents/userManagementServiceAgent.service';
 import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
+import { UserStatusServiceAgent } from './services/serviceAgents/userStatusServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
 
@@ -150,6 +152,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
 
 import { ScriptLoaderService } from './services/scriptLoader.service';
 import { AddressService } from './services/address.service';
@@ -167,7 +170,7 @@ import { ConditionalBlockComponent } from './components/activityForm/activity-bl
 import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
-import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { SubjectPanelComponent } from './components/subjectPanel/subjectPanel.component';
 import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
@@ -193,6 +196,8 @@ import { ActivityDeleteDialogComponent } from './components/activityForm/activit
 import { ActivityBlockModalService } from './services/activity-block-modal.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
+import { PrismComponent } from './components/prism/prism.component';
+import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -239,6 +244,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MatStepperModule,
         MatAutocompleteModule,
         MatTooltipModule,
+        MatSortModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -300,6 +306,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         IrbPasswordService,
         ResendEmailServiceAgent,
         AnnouncementsServiceAgent,
+        UserStatusServiceAgent,
         UserManagementServiceAgent,
         UserInvitationServiceAgent,
         BrowserContentService,
@@ -313,6 +320,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ActivityBlockModalService,
         FileUploadService,
+        InvitationPipe,
+        ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -337,6 +346,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DashboardComponent,
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
+        PrismComponent,
 
         // activity form
         ActivityComponent,
@@ -387,6 +397,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressGoogleAutocompleteDirective,
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,
@@ -408,6 +419,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DashboardComponent,
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
+        PrismComponent,
 
         ActivityComponent,
         ActivityRedesignedComponent,
@@ -458,6 +470,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
         TooltipComponent,
         SubjectPanelComponent,

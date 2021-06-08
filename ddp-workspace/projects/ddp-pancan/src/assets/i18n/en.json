@@ -1,0 +1,277 @@
+{
+    "App": {
+        "HomePage": {
+            "JoinCountMeInButton": "Join Count Me In",
+            "IntroductionSection": {
+                "Title": "Have a direct impact on the future of cancer research.",
+                "Text": "Count Me In is a nonprofit research initiative that engages patients and enables them to accelerate cancer research by sharing their samples, their clinical information, and their voices."
+            },
+            "LearnMoreSection": {
+                "Title": "Every patient's experience with cancer should be counted.",
+                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <span class=\"italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
+                "LearnMoreAboutUsButton": "Learn more about us"
+            },
+            "JoinSection": {
+                "Title": "Who can join?",
+                "Text1": "Anyone who has ever been diagnosed with cancer may participate if they live in the USA or Canada.",
+                "Text2": "We welcome people of all ages, genders, races, ethnicities, and abilities."
+            },
+            "ParticipateSection": {
+                "Title": "Here’s how to participate",
+                "Step1": {
+                    "Title": "STEP 1",
+                    "Time": "10-15 minutes",
+                    "Description": "Provide consent and tell us where you’ve been treated"
+                },
+                "Step2": {
+                    "Title": "STEP 2",
+                    "Time": "5 minutes",
+                    "Description": "Answer questions about your cancer"
+                },
+                "Step3": {
+                    "Title": "STEP 3",
+                    "Time": "10 minutes",
+                    "Description": "Provide samples (we’ll send a kit)"
+                },
+                "Step4": {
+                    "Title": "STEP 4",
+                    "Description": "Learn with us along the way"
+                },
+                "LearnMoreAboutParticipationButton": "Learn more about participation"
+            },
+            "StayInformedSection": {
+                "Title": "Stay informed",
+                "Text": "Sign up for our mailing list or follow us on social media",
+                "JoinMailingListButton": "Join Mailing List"
+            },
+            "CountMeInSection": {
+                "Title": "Join the movement and say Count Me In",
+                "Text": "With your help, patients can be the driving force behind transformative cancer research."
+            }
+        },
+        "ParticipationPage": {
+            "Title": "Here’s how to participate",
+            "Step1": {
+                "Step": "STEP 1",
+                "Time": "10-15 minutes",
+                "Title": "Provide consent for the study",
+                "Text": "This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
+                "ViewConsentDocumentButton": "View Consent Document"
+            },
+            "Step2": {
+                "Step": "STEP 2",
+                "Time": "5 minutes",
+                "Title": "Tell us where you’ve been treated",
+                "Text": "Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                "ViewMedicalReleaseButton": "View Medical Release"
+            },
+            "Step3": {
+                "Step": "STEP 3",
+                "Time": "5 minutes",
+                "Title": "Respond to surveys about you and your experience with cancer",
+                "Text": "In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
+                "ViewSurveysButton": "“View Surveys"
+            },
+            "Step4": {
+                "Step": "STEP 4",
+                "Time": "10 minutes",
+                "Title": "Provide a saliva and/or blood sample",
+                "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
+                "ViewKitInstructionsButton": "View Kit Instructions"
+            },
+            "Step5": {
+                "Step": "STEP 5",
+                "Title": "Stay involved",
+                "Text": "Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+            }
+        },
+        "AboutUs": {
+            "Title": "About Us",
+            "Section1": {
+                "Title": "Mission",
+                "Text1": "Count Me In is a nonprofit organization catalyzing research initiatives that take a unique approach to cancer research. Count Me In is deeply committed to making every patient's experience count in the effort to more deeply understand cancer. We do this by working directly with patients as partners to accelerate discoveries. We seek to empower individuals living with cancer, including those from marginalized communities who have historically been excluded from research, no matter where they live, to contribute to breakthroughs and increase the pace of biomedical research.",
+                "Text2": "Participating patients help shape and propel research, including by contributing information about their cancer and experience through patient surveys, and also by directly sharing and providing access to medical records and biological samples for study and analysis. From participant contributions, the Count Me In team works with software engineers and computational scientists, to collect, analyze, and share de-identified data. Data generated by Count Me In is shared regularly via scientific platforms so that it can be harnessed by researchers everywhere to make impactful discoveries."
+            },
+            "Section2": {
+                "Title": "History and Milestones",
+                "Text1": "Count Me In (CMI) began with discussions between Emerson Collective and the Broad Institute of MIT and Harvard in 2013. Since the launch of the first project in metastatic breast cancer in late 2015, thousands of individuals living with cancer from around the United States and Canada have said “Count Me In” to partnering with researchers and sharing their experiences. The Metastatic Breast Cancer (MBC) project was the first iteration of this new vision, followed by the Angiosarcoma (ASC) Project in 2017, and the Metastatic Prostate Cancer (MPC) Project in 2018. Since then, CMI has also launched the Esophageal and Stomach Cancer Project, the Osteosarcoma (OS) Project, and the Brain Tumor (BT) Project. In Fall 2021, enrollment in Count Me In became available to any patient in the United States or Canada who has ever been diagnosed with cancer.",
+                "Text2": "Count Me In is stewarded by the <a href=\"#\">Emerson Collective</a>, a California-based social change organization; the <a href=\"#\">Broad Institute</a>, a leading nonprofit biomedical research institution; and the <a href=\"#\">Dana Farber Cancer Institute</a>, a leading cancer hospital."
+            },
+            "Section3": {
+                "Title": "People",
+                "PeopleList": [
+                    "<b>Elana Anastasio<b><br/>Leadership",
+                    "<b>Roeshana Moore-Evans<b><br/>Leadership",
+                    "<b>Corrie Painter<b><br/>Leadership",
+                    "<b>Nikhil Wagle<b><br/>Leadership",
+                    "<b>Kim Hurley<b><br/>Finances and Grants",
+                    "<b>Ashley Matthews<b><br/>Finances and Grants",
+                    "<b>Brett Tomson<b><br/>Scientific Alliances and Outreach",
+                    "<b>Colleen Nguyen<b><br/>Community Engagement",
+                    "<b>Christina Arecy<b><br/>Community Engagement",
+                    "<b>Tania Hernandez<b><br/>Community Engagement",
+                    "<b>Oyin Alao<b><br/>Project Management and Coordination",
+                    "<b>Imani Boykin<b><br/>Project Management and Coordination",
+                    "<b>Maria Cerio<b><br/>Project Management and Coordination",
+                    "<b>Parker Chastain<b><br/>Project Management and Coordination",
+                    "<b>Taylor Cusher<b><br/>Project Management and Coordination",
+                    "<b>Jordan Doucette<b><br/>Project Management and Coordination",
+                    "<b>Ayanah Dowdye<b><br/>Project Management and Coordination",
+                    "<b>Mary McGillicuddy<b><br/>Project Management and Coordination",
+                    "<b>Rafael Ramos<b><br/>Project Management and Coordination",
+                    "<b>Sarah Winnicki<b><br/>Project Management and Coordination",
+                    "<b>Ben Zola<b><br/>Project Management and Coordination",
+                    "<b>Shahrayz Shah<b><br/>Clinical Abstraction",
+                    "<b>Ilan Small<b><br/>Clinical Abstraction",
+                    "<b>Delia Sosa<b><br/>Clinical Abstraction",
+                    "<b>Lauren Sterlin<b><br/>Clinical Abstraction",
+                    "<b>Beena Thomas<b><br/>Clinical Abstraction",
+                    "<b>Daniel Abravanel<b><br/>Medical Oncology",
+                    "<b>Sara Balch<b><br/>Computational Team",
+                    "<b>Jorge Gomez Tejeda Zanudo<b><br/>Computational Team",
+                    "<b>Esha Jain<b><br/>Computational Team",
+                    "<b>Dewey Kim<b><br/>Computational Team"
+                ]
+            }
+        },
+        "FAQ": {
+            "Title": "Frequently Asked Questions",
+            "Button": {
+                "Expand": "Expand all",
+                "Collapse": "Collapse all",
+                "MoreFAQs": "More FAQs"
+            },
+            "Question1": {
+                "Question": "What is Count Me In?",
+                "Answer": "Count Me In is a nonprofit research initiative that enables patients to accelerate cancer research by sharing their samples, their clinical information, and their voices. With patient consent, all data collected by and generated through Count Me In are shared regularly with the research community (after being stripped of identifying information) through freely available scientific databases, so researchers anywhere can help rapidly accelerate the pace of discovery, expand our understanding of cancer, and develop new treatment strategies – breaking down silos that exist in cancer research."
+            },
+            "Question2": {
+                "Question": "Why is this needed?",
+                "Answer": "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. \nThe majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research.\nAnswering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
+            },
+            "Question3": {
+                "Question": "How can I participate?",
+                "Answer": {
+                    "Section1": {
+                        "TextPt1": "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”. ",
+                        "Link": "Click here",
+                        "TextPt2": " to learn more about participation."
+                    },
+                    "Section2": "If you’re a cancer researcher, you can access the data generated through Count Me In projects through existing publicly available databases, such as the cBioPortal for Cancer Genomics and the National Cancer Institute’s Genomic Data Commons. You can also join our mailing list for updates about new data releases and publications."
+                }
+            },
+            "Question4": {
+                "Question": "What does Count Me In do with the data?",
+                "Answer": {
+                    "Section1": "After removing all personal information that would readily identify individuals, data is shared freely in an effort to accelerate discoveries, enabling researchers to identify patterns in data. Batches of data are released publicly on a regular basis, and are available to all researchers—so that everyone may use the data to make discoveries and advance progress against cancer, including new medicines and diagnostics.",
+                    "Section2": "Quick links to released data:"
+                }
+            },
+            "Question5": {
+                "Question": "How have patients been involved in Count Me In?",
+                "Answer": "Count Me In has worked closely with patients, parents, loved ones and patient advocates within several cancer communities from the beginning of the first project, the Metastatic Breast Cancer Project, launched in 2015. Patients have been included in all aspects of the design including concept, goals, messaging, forms, and the website."
+            },
+            "Question6": {
+                "Question": "How is Count Me In addressing inclusivity in participation?",
+                "Answer": {
+                    "Section1": "Count Me In understands that many barriers exist - structural and historical - that prevent underrepresented and marginalized communities from directly participating in research. Count Me In is committed to the core principle that every cancer patient, regardless of where they live, what language they speak, what their heritage may be - that their experience matters and the inclusion of their experience is imperative in furthering our understanding of cancer.",
+                    "Section2": "Traditional cancer research does not lend itself to being as inclusive as it should be. Cancer disparities exist as evidence of how much more work in this space needs to be done - and it’s one in which we recognize that we’ll never truly arrive - but continue to strive for, alongside patients. We believe patients should be direct partners in cancer research and know that we can only advance our understanding of cancer and accelerate discoveries, if we do so together."
+                }
+            },
+            "Question7": {
+                "Question": "How can I receive updates on Count Me In?",
+                "Answer": {
+                    "TextPt1": "Please  ",
+                    "Link": "sign up for our mailing list",
+                    "TextPt2": " to receive updates"
+                }
+            },
+            "Question8": {
+                "Question": "Will I be paid to take part in this research study?",
+                "Answer": "You will not be paid to take part in this study."
+            },
+            "Question9": {
+                "Question": "Are there costs to take part in this research study?",
+                "Answer": "There are no costs to take part in this study."
+            },
+            "Question10": {
+                "Question": "Is this a clinical trial?",
+                "Answer": "Count Me In is not a clinical trial. Joining will not have any impact on a participant’s course of care, and Count Me In is not permitted to give any clinical advice as part of participation in this project."
+            },
+            "Question11": {
+                "Question": "Can I stop taking part in Count Me In?",
+                "Answer": {
+                    "Section1": "You can stop participating in Count Me In at any time. However, information that has already been used for research will not be able to be withdrawn. To withdraw your permission, reach out to the study team at info@joincountmein.org.",
+                    "Section2": "If you withdraw, any remaining tissue samples will be returned to where they were obtained, and any remaining saliva and/or blood samples will be destroyed. No additional tests will be performed on the samples. Additionally, no additional medical records will be collected, and any copies of medical records will be destroyed. However, the results from the tests done and any information learned from your medical records before you stopped participating will be kept."
+                }
+            },
+            "Question12": {
+                "Question": "If I choose to share tissue sample(s), will my samples be used up?",
+                "Answer": "Count Me In will take every measure to ensure that samples are not used up as a result of these studies. Pathologists who have access to stored tumor samples will be asked to share only a small portion. If there doesn’t appear to be enough to allow for future clinical testing, Count Me In will not request for samples. Any excess tissue will be sent back."
+            },
+            "Question13": {
+                "Question": "What does Count Me In do with copies of medical records?",
+                "Answer": {
+                    "Section1": "Medical records provide valuable information about experiences with cancer. From medical records, researchers can learn important details like what treatments you received and how long you received them for, details about the pathology of your tumor(s), information about your cancer at diagnosis, and more.",
+                    "Section2": "For researchers studying cancer, it is valuable to be able to look at medical record information with the information from your samples in order to make discoveries."
+                }
+            },
+            "Question14": {
+                "Question": "Why is Count Me In studying specific cohorts?",
+                "Answer": "A cohort is a group of people sharing a similar set of characteristics. This could include various demographic information, cancer types, mutation types, responses to treatment, and more. By studying specific cohorts in-depth, researchers can find patterns and detect trends that may help us better understand various aspects of cancer."
+            },
+            "Question15": {
+                "Question": "If I have signed up on behalf of my child, what happens when they become an adult?",
+                "Answer": {
+                    "Section1": "When your child reaches the age where they can consent for themselves, they need to do so to continue to participate. For the US and Canada, this varies by state and territory, and is between ages of 18 and 21. Count Me In will contact you prior to this age to get your child’s contact information.",
+                    "Section2": "If your child chooses to remain in the study  the project team will continue to request medical records and tissue samples from any point in your child’s cancer treatment."
+                }
+            }
+        }
+    },
+    "Toolkit": {
+        "Header": {
+            "HeaderLogo": "Count Me In",
+            "DataRelease": "Data Release",
+            "LearnMore": "Learn More",
+            "CountMeIn": "count me in"
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password",
+            "SubmitButton": "SUBMIT",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred. Please try again.",
+            "PasswordField": {
+                "Error": "Password is required"
+            }
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Header": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+                "Pt2": "Please log in again to return to the last page you were on."
+            },
+            "LogInButton": "Log In"
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        }
+    },
+    "SDK": {
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        }
+    }
+}

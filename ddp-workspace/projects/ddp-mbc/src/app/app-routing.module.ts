@@ -5,7 +5,8 @@ import {
     Auth0CodeCallbackComponent,
     AuthGuard,
     IrbGuard,
-    BrowserGuard
+    BrowserGuard,
+    ChangeLanguageRedirectComponent
 } from 'ddp-sdk';
 
 import {
@@ -20,7 +21,7 @@ import {
     WorkflowStartActivityComponent,
     InternationalPatientsComponent,
     SessionExpiredComponent,
-    RedirectToAuth0LoginComponent
+    RedirectToAuth0LoginComponent,
 } from 'toolkit';
 
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -256,6 +257,13 @@ const routes: Routes = [
     {
         path: 'followupone/:id',
         redirectTo: 'followup'
+    },
+    {
+        path: 'change-language-redirect',
+        component: ChangeLanguageRedirectComponent,
+        canActivate: [
+            IrbGuard
+        ]
     },
     {
         path: '**',

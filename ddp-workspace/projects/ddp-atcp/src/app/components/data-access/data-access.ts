@@ -1,4 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { iif, of } from 'rxjs';
 import { delay, switchMap, take } from 'rxjs/operators';
@@ -12,6 +13,7 @@ import { DataAccessParameters } from '../../models/dataAccessParameters';
 import { DataAccessService } from '../../services/dataAccess.service';
 import { PopupMessage } from '../../toolkit/models/popupMessage';
 import { AtcpCommunicationService } from '../../toolkit/services/communication.service';
+import * as Routes from '../../router-resources';
 
 @Component({
   selector: 'app-data-access',
@@ -32,12 +34,13 @@ export class DataAccessComponent implements OnInit, OnDestroy {
   private anchor: CompositeDisposable = new CompositeDisposable();
 
   constructor(
+    private router: Router,
     private translateService: TranslateService,
     private recaptchaService: ReCaptchaV3Service,
     private dataAccessService: DataAccessService,
     private communicationService: AtcpCommunicationService,
     @Inject('toolkit.toolkitConfig')
-    private toolkitConfiguration: ToolkitConfigurationService
+    private toolkitConfiguration: ToolkitConfigurationService,
   ) {}
 
   public ngOnInit(): void {
@@ -125,25 +128,32 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
     const getTokenFirst$ = this.recaptchaService.execute('dar_submit').pipe(
       switchMap(token =>
-        this.dataAccessService.send(this.model, this.researcherBiosketch, token)
+        this.dataAccessService.send(
+          this.model,
+          this.researcherBiosketch,
+          token,
+        ),
       ),
-      take(1)
+      take(1),
     );
 
     of(this.recaptchaToken)
       .pipe(switchMap(token => iif(() => !!token, sendDar$, getTokenFirst$)))
-      .subscribe(this.showResponse, this.showError);
+      .subscribe(
+        () => this.showResponse(),
+        () => this.showError(),
+      );
   }
 
-  private showResponse = (): void => {
+  private showResponse(): void {
     this.busy = false;
     this.recaptchaToken = null;
 
     this.communicationService.showPopupMessage(
       new PopupMessage(
         this.translateService.instant('DataAccess.Messages.Success'),
-        false
-      )
+        false,
+      ),
     );
 
     of('')
@@ -151,18 +161,20 @@ export class DataAccessComponent implements OnInit, OnDestroy {
       .pipe(delay(3000))
       .subscribe(() => {
         this.communicationService.closePopupMessage();
+
+        this.router.navigateByUrl(Routes.Welcome);
       });
   }
 
-  private showError = (): void => {
+  private showError(): void {
     this.busy = false;
     this.recaptchaToken = null;
 
     this.communicationService.showPopupMessage(
       new PopupMessage(
         this.translateService.instant('DataAccess.Messages.Error'),
-        true
-      )
+        true,
+      ),
     );
 
     of('')

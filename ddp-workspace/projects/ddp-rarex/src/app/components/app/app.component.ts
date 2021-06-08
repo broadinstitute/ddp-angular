@@ -8,10 +8,12 @@ import { SessionMementoService } from 'ddp-sdk';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private sessionService: SessionMementoService) {}
+  constructor(private sessionService: SessionMementoService) {
+    this.resetParticipant();
+  }
 
   @HostListener('window:beforeunload')
-  private beforeUnload(): void {
+  private resetParticipant(): void {
     this.sessionService.setParticipant(null);
   }
 }
