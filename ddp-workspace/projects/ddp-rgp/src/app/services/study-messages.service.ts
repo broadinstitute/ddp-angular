@@ -30,9 +30,9 @@ export class StudyMessagesService {
   ): StudyMessage[] {
     return studyMessagesConfiguration.map(messageConfiguration => {
       const workflow = workflows.find(
-        workflow =>
-          workflow.workflow === messageConfiguration.workflowKey &&
-          messageConfiguration.condition(workflow),
+        w =>
+          w.workflow === messageConfiguration.workflowKey &&
+          messageConfiguration.condition(w),
       );
 
       let additionalCondition = true;
@@ -47,8 +47,7 @@ export class StudyMessagesService {
 
         if (messageConfiguration.dateWorkflowKey) {
           const dateWorkflow = workflows.find(
-            workflow =>
-              workflow.workflow === messageConfiguration.dateWorkflowKey,
+            w => w.workflow === messageConfiguration.dateWorkflowKey,
           );
 
           dateStr = dateWorkflow?.status ?? dateStr;
