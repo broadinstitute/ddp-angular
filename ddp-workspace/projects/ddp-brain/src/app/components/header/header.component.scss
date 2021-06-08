@@ -69,7 +69,7 @@
         text-decoration: underline;
     }
 
-    &_dashboard {
+    &_dashboard-prism {
         display: flex;
         align-items: center;
         margin-right: 2.5rem;
@@ -224,7 +224,7 @@
 @media screen and (max-width: 725px) {
     .side-menu {
         .header-link {
-            &_dashboard {
+            &_dashboard-prism {
                 display: none;
             }
         }

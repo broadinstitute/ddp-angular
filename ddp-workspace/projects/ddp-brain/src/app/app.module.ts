@@ -31,6 +31,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { LearnMoreSectionComponent } from './components/learn-more-section/learn-more-section.component';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
 import { PrismComponent } from './components/prism/prism.component';
@@ -92,6 +93,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink', 'invitationId', 'proxyGuid', 'proxyShortId', 'proxyUserName'];
 sdkConfig.prismDashboardRoute = AppRoutes.Dashboard;
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.prismRoute = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -131,7 +133,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     DdpModule,
     ToolkitModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonModule
   ],
   providers: [
     {

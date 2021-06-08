@@ -42,6 +42,7 @@
         "AboutUs": "About Us",
         "Data": "Data",
         "Dashboard": "Dashboard",
+        "Prism": "Prism",
         "Menu": "Menu"
     },
     "LearnMoreSection": {
@@ -769,6 +770,7 @@
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
+            "PrismButton": "Prism",
             "SignOutButton": "Sign Out"
         },
         "DetailsPlaceholder": {
