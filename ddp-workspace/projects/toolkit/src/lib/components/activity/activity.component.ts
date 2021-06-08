@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { WorkflowBuilderService } from '../../services/workflowBuilder.service';
 import { ActivityResponse } from 'ddp-sdk';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-activity',
@@ -13,6 +14,7 @@ import { ActivityResponse } from 'ddp-sdk';
         <ddp-activity *ngIf="instanceGuid"
                       [studyGuid]="studyGuid"
                       [activityGuid]="instanceGuid"
+                      [selectedUserGuid]="selectedUserGuid"
                       (submit)="navigate($event)"
                       (stickySubtitle)="showStickySubtitle($event)">
         </ddp-activity>`
@@ -22,6 +24,7 @@ export class ActivityComponent implements OnInit {
     public studyGuid: string;
     public stickySubtitle: string;
     public activityCode: string;
+    public selectedUserGuid: string;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -29,14 +32,18 @@ export class ActivityComponent implements OnInit {
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
-        this.activatedRoute.params.subscribe(params => {
-            this.instanceGuid = params.id;
+        this.activatedRoute.paramMap.subscribe(params => {
+            this.instanceGuid = params.get('id');
+        });
+        this.activatedRoute.queryParamMap.pipe(map(params => params.get('user_guid'))).subscribe((result) => {
+            this.selectedUserGuid = result;
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
     }
 
     public navigate(response: ActivityResponse, currentActivityCode?: string): void {
-        this.workflowBuilder.getCommand(response, currentActivityCode).execute();
+        const params = this.selectedUserGuid ? `user_guid=${this.selectedUserGuid}` : null;
+        this.workflowBuilder.getCommand(response, currentActivityCode).execute(params);
     }
 
     public showStickySubtitle(stickySubtitle: string): void {

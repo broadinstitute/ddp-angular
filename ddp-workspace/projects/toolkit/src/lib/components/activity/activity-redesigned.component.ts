@@ -12,6 +12,7 @@ import { ActivityResponse } from 'ddp-sdk';
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="instanceGuid"
                                  [agreeConsent]="config.agreeConsent"
+                                 [selectedUserGuid]="selectedUserGuid"
                                  (submit)="navigate($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">

@@ -5,7 +5,6 @@ import { combineLatest, Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError, map, switchMap } from 'rxjs/operators';
 
 import { ActivityConverter } from '../activity/activityConverter.service';
-import { UserServiceAgent } from './userServiceAgent.service';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
@@ -16,6 +15,7 @@ import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
 import { ActivityInstance } from '../../models/activityInstance';
+import { WithSelectedUserServiceAgent } from './withSelectedUserServiceAgent.service';
 
 interface GuidsObject {
     study: string;
@@ -23,7 +23,7 @@ interface GuidsObject {
 }
 
 @Injectable()
-export class ActivityServiceAgent extends UserServiceAgent<any> {
+export class ActivityServiceAgent extends WithSelectedUserServiceAgent<any> {
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,

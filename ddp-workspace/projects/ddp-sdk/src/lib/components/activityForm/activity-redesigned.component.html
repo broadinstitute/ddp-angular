@@ -7,9 +7,10 @@
 >
     <ng-container *ngIf="isLoaded && model">
         <section class="section">
-            <ddp-subject-panel></ddp-subject-panel>
+            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
             <ddp-admin-action-panel
                 [activityReadonly]="isReadonly()"
+                [selectedUserGuid]="selectedUserGuid"
                 (requestActivityEdit)="updateIsAdminEditing($event)">
             </ddp-admin-action-panel>
         </section>

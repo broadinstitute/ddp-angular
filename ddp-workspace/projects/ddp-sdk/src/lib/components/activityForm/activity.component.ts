@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -27,6 +28,8 @@ import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
 import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
+import { SearchParticipant } from '../../models/searchParticipant';
+import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 
 @Component({
     selector: 'ddp-activity',
@@ -51,6 +54,13 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
             </div>
             <!-- article content -->
             <ddp-loader *ngIf="!isLoaded"></ddp-loader>
+            <ng-container *ngIf="isLoaded && model">
+                <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
+                <ddp-admin-action-panel [activityReadonly]="isReadonly()"
+                                        [selectedUserGuid]="selectedUserGuid"
+                                        (requestActivityEdit)="updateIsAdminEditing($event)">
+                </ddp-admin-action-panel>
+            </ng-container>
             <article *ngIf="isLoaded" [ngClass]="{'PageContent': isLoaded}">
                 <div class="PageLayout">
                     <div class="row NoMargin">
@@ -65,7 +75,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                             <ng-container *ngIf="model && model.introduction">
                                 <ddp-activity-section
                                         [section]="model.introduction"
-                                        [readonly]="model.readonly || dataEntryDisabled"
+                                        [readonly]="isReadonly() || dataEntryDisabled"
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
@@ -102,7 +112,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <ddp-activity-section
                                         [section]="currentSection"
-                                        [readonly]="model.readonly || dataEntryDisabled"
+                                        [readonly]="isReadonly() || dataEntryDisabled"
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
@@ -117,7 +127,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                 <ng-container *ngIf="model.closing">
                                     <ddp-activity-section
                                             [section]="model.closing"
-                                            [readonly]="model.readonly || dataEntryDisabled"
+                                            [readonly]="isReadonly() || dataEntryDisabled"
                                             [validationRequested]="validationRequested"
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
@@ -134,7 +144,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
                                 <div *ngIf="!isStepped || isLastStep">
-                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
+                                    <button *ngIf="!isReadonly() && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="flush()"
@@ -142,7 +152,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                             [innerHTML]="(isPageBusy | async)
                                                                 ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                                     </button>
-                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary" id="closeButton"
+                                    <button *ngIf="isReadonly() && isLoaded" mat-raised-button color="primary" id="closeButton"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="close()"
                                             [innerHTML]="'SDK.CloseButton' | translate">
@@ -189,9 +199,12 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
 export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
+    @Input() selectedUserGuid: string;
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
+
+    public selectedUser$: Observable<SearchParticipant|null>;
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
@@ -203,6 +216,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     private readonly LOG_SOURCE = 'ActivityComponent';
     private shouldSaveLastStep = false;
+    private isAdminEditing = false;
 
     constructor(
         private logger: LoggingService,
@@ -210,6 +224,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
         private analytics: AnalyticsEventsService,
+        private participantsSearch: ParticipantsSearchServiceAgent,
+        private changeRef: ChangeDetectorRef,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes
@@ -229,6 +245,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnInit(): void {
+        if (this.selectedUserGuid) {
+            this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
+        } else {
+            this.serviceAgent.resetSelectedUser();
+        }
+
         this.getActivity();
         this.initStepperState();
         const submitSub = this.submitAttempted.subscribe(() => this.submitService.announceSubmit(null));
@@ -268,6 +290,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             .subscribe(this.isPageBusy);
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
+
+        this.selectedUser$ = this.participantsSearch.getParticipant(this.selectedUserGuid);
     }
 
     public ngAfterViewInit(): void {
@@ -496,5 +520,14 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 })
             )
             .subscribe();
+    }
+
+    public isReadonly(): boolean {
+      return !this.isAdminEditing && this.model.readonly;
+    }
+
+    public updateIsAdminEditing(adminEditing: boolean): void {
+      this.isAdminEditing = adminEditing;
+      this.changeRef.detectChanges();
     }
 }

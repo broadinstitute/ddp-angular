@@ -23,6 +23,7 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
         <ng-container *ngIf="(activityInstance$ | async)?.instanceGuid as activityInstanceGuid">
             <ddp-activity [studyGuid]="studyGuid"
                           [activityGuid]="activityInstanceGuid"
+                          [selectedUserGuid]="selectedUserGuid"
                           (submit)="raiseSubmit($event)"
                           (stickySubtitle)="showStickySubtitle($event)">
             </ddp-activity>
@@ -34,7 +35,8 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
     public stickySubtitle: string;
-    private activityGuid: string;
+    public selectedUserGuid: string;
+    private readonly activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
     // this could be overkill, but has nice property that actually trigger the onComplete
@@ -94,6 +96,15 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
+        this.activatedRoute.queryParamMap.pipe(map(params => params.get('user_guid'))).subscribe((result) => {
+            this.selectedUserGuid = result;
+            if (this.selectedUserGuid) {
+                this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
+            } else {
+                this.serviceAgent.resetSelectedUser();
+            }
+        });
+
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
@@ -106,7 +117,8 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public raiseSubmit(response: ActivityResponse): void {
-        this.workflowBuilder.getCommand(response).execute();
+        const params = this.selectedUserGuid ? `user_guid=${this.selectedUserGuid}` : null;
+        this.workflowBuilder.getCommand(response).execute(params);
     }
 
     public showStickySubtitle(stickySubtitle: string): void {

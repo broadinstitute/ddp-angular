@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
 import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ).subscribe(messages => this.announcementMessages = messages);
         this.anchor.add(anno);
 
-        this.selectedUser$ = this.selectedUserGuid ? this.participantsSearch.getParticipant(this.selectedUserGuid) : of(null);
+        this.selectedUser$ = this.participantsSearch.getParticipant(this.selectedUserGuid);
     }
 
     public ngOnDestroy(): void {
@@ -98,7 +98,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public navigate(id: string): void {
-        this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
+        this.router.navigate([this.toolkitConfiguration.activityUrl, id], {
+          queryParams: this.selectedUserGuid ? { user_guid: this.selectedUserGuid } : null
+        });
     }
 
     public load(loaded: boolean): void {
