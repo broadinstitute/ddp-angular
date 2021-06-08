@@ -1,4 +1,4 @@
-<div class="study-messages">
+<div class="study-messages" *ngIf="messages.length > 0">
   <h2 class="study-messages__title">
     {{ 'DashboardPage.StudyMessages.Title' | translate }}
   </h2>
@@ -43,7 +43,9 @@
 
     <ng-container matColumnDef="description">
       <th
-        class="app-table__cell app-table__cell--header app-table__col--description"
+        class="
+          app-table__cell app-table__cell--header app-table__col--description
+        "
         mat-header-cell
         *matHeaderCellDef
       >
@@ -59,7 +61,7 @@
         "
       >
         <div class="app-table__cell--description">
-          <p [innerHTML]="message.message | translate"></p>
+          <p [innerHTML]="message.message | translate" style="margin: 0"></p>
 
           <div *ngIf="hasMoreText(message.more) | async">
             <div

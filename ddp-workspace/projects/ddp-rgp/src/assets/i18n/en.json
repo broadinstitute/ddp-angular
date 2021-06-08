@@ -1207,15 +1207,14 @@
         },
         "Received": {
           "Subject": "Medical records",
-          "Message": "We have received your records. Thank you!",
-          "More": "TBD"
+          "Message": "We have received your records. Thank you!"
         },
         "NA": {
           "Subject": "Medical records",
           "Message": "We do not need medical records at this time."
         }
       },
-      "RedCap": {
+      "Survey": {
         "Enrolled": {
           "Subject": "Survey",
           "Message": "An email with a link to an optional survey will be sent to you 7 days after you signed the consent form.",
