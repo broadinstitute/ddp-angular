@@ -1,4 +1,19 @@
 {
+    "Common": {
+        "Buttons": {
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In"
+            },
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit"
+            },
+            "HeaderMenu": {
+                "AriaLabel": "Header menu button"
+            }
+        }
+    },
     "App": {
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
@@ -227,28 +242,38 @@
                     "Section2": "If your child chooses to remain in the study  the project team will continue to request medical records and tissue samples from any point in your child’s cancer treatment."
                 }
             }
+        },
+        "Header": {
+            "Logo": {
+                "Title": "Count<br>Me<br>In",
+                "ImageAlt": "Pan-Cancer project logo"
+            }
+        },
+        "Navigation": {
+            "AboutUs": "About Us",
+            "Participation": "Participation",
+            "ScientificResearch": "Scientific Research",
+            "FAQ": "FAQ",
+            "Join": "Join"
+        },
+        "Footer": {
+            "BackToTopButton": "Back to top",
+            "Contacts": "Contact Us",
+            "Copyright": "Copyright © 2021 Count Me In. All rights reserved."
         }
     },
     "Toolkit": {
-        "Header": {
-            "HeaderLogo": "Count Me In",
-            "DataRelease": "Data Release",
-            "LearnMore": "Learn More",
-            "CountMeIn": "count me in"
-        },
         "Password": {
             "Title": "Please enter the password",
-            "Text": "Please enter your password",
-            "SubmitButton": "SUBMIT",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
             "PasswordWrongError": "Incorrect password. Please try again.",
             "OtherError": "We're sorry, but an error has occurred. Please try again.",
-            "PasswordField": {
-                "Error": "Password is required"
-            }
+            "PasswordRequiredError": "Password is required"
         },
         "ErrorPage": {
             "Title": "We've encountered an error",
-            "Header": "We're sorry, but an error has occurred.",
+            "Text": "We're sorry, but an error has occurred.",
             "DefaultText": {
                 "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
                 "TextPt2": "or call us at"
@@ -258,11 +283,7 @@
             "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
         },
         "SessionExpired": {
-            "Text": {
-                "Pt1": "You were away for a while, so we logged you out as a security precaution.",
-                "Pt2": "Please log in again to return to the last page you were on."
-            },
-            "LogInButton": "Log In"
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
         },
         "LoginLanding": {
             "Text": "Please wait. You will be redirected to a destination soon..."
@@ -270,8 +291,8 @@
     },
     "SDK": {
         "SignInOut": {
-            "SignIn": "Sign In",
-            "SignOut": "Sign Out"
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
         }
     }
 }
