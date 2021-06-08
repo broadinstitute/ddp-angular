@@ -45,7 +45,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
-import { PageBannerComponent } from './components/page-banner/page-banner.component';
 import { PasswordComponent } from './components/password/password.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
@@ -148,7 +147,6 @@ export function translateFactory(
     RedirectToAuth0Landing,
     SessionExpiredComponent,
     UserDashboardComponent,
-    PageBannerComponent,
     EmailVerifiedCallbackComponent,
     WorkflowStartActivityComponent,
     ThankYouComponent,
