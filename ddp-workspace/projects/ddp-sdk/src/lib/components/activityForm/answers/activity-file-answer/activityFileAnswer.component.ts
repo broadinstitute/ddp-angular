@@ -37,6 +37,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
+    @ViewChild('cancelUploadBtn', {read: ElementRef}) private cancelUploadingButtonRef: ElementRef;
     fileNameToUpload: string;
     uploadedFile: ActivityFileAnswerDto | null;
     errorMessage: string;
@@ -114,7 +115,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const config = this.modalDialogService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
-            confirmBtnText: 'SDK.FileUpload.UndoBtnText',
+            confirmBtnText: 'SDK.FileUpload.OkBtnText',
             cancelBtnText: 'SDK.FileUpload.CancelBtnText',
             confirmBtnColor: 'primary'
         };
@@ -125,6 +126,23 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 this.patchAnswer(null);
                 this.setUploadedFile(null);
                 this.fileNameToUpload = '';
+            }
+        });
+    }
+
+    cancelUpload(): void {
+        const config = this.modalDialogService.getDialogConfig(this.cancelUploadingButtonRef, this.panelClass);
+        config.data = {
+            title: 'SDK.FileUpload.ConfirmCancelUploadTitle',
+            confirmBtnText: 'SDK.FileUpload.OkBtnText',
+            cancelBtnText: 'SDK.FileUpload.CancelBtnText',
+            confirmBtnColor: 'primary'
+        };
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+        dialogRef.afterClosed().subscribe((confirm: boolean) => {
+            if (confirm) {
+                this.ngUnsubscribe.next();
             }
         });
     }
@@ -150,6 +168,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     private uploadFile(file: File, uploadGuid: string, uploadUrl: string): void {
         this.isLoading = true;
         this.fileNameToUpload = file?.name;
+
         this.fileUploadService.uploadFile(uploadUrl, file)
             .pipe(
                 catchError(err => {
@@ -160,6 +179,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 finalize(() => {
                     this.componentBusy.emit(false);
                     this.isLoading = false;
+                    this.fileNameToUpload = '';
                 })
             )
             .subscribe(() => {
@@ -170,7 +190,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 };
                 this.patchAnswer(fileAnswer, uploadGuid);
                 this.setUploadedFile(fileAnswer);
-                this.fileNameToUpload = '';
                 this.errorMessage = '';
             });
     }

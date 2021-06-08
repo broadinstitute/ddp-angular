@@ -54,26 +54,37 @@ $drop-block-active-color: lightyellow;
     }
 }
 
-.uploaded-file-chip {
-    .file-size {
-        margin-left: 5px;
+.uploaded-file {
+    .title {
+        float: left;
     }
-}
 
-.file-info {
-    padding: 10px 20px;
+    .cancel-upload-btn {
+        top: -8px;
+        right: -7px;
+        float: right;
+    }
+
+    .loading-bar {
+        display: block;
+        margin: 10px 0;
+        clear: both;
+    }
+
+    .uploaded-file-chip {
+        .file-size {
+            margin-left: 5px;
+        }
+
+        .mat-icon-button {
+            height: initial;
+        }
+    }
 }
 
 .file-input {
     display: none;
 }
 
-.submit-btn {
-    margin: 10px;
-    float: right;
-}
 
-.loading-bar {
-    display: block;
-    margin: 10px 0;
-}
+

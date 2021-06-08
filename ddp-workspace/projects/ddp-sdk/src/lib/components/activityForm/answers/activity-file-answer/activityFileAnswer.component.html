@@ -27,6 +27,13 @@
 
     <div class="uploaded-file">
         <ng-container *ngIf="fileNameToUpload">
+            <button mat-icon-button color="primary"
+                    class="cancel-upload-btn"
+                    [attr.aria-label]="'SDK.FileUpload.CancelUpload' | translate"
+                    (click)="cancelUpload()"
+                    #cancelUploadBtn>
+                <mat-icon>cancel</mat-icon>
+            </button>
             <div class="title">{{'SDK.FileUpload.Uploading' | translate: {filename: fileNameToUpload} }}</div>
             <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
         </ng-container>
@@ -39,7 +46,12 @@
                       #uploaded>
                 {{uploadedFile.fileName}}
                 <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
-                <mat-icon matChipRemove *ngIf="!readonly" #undoUploadBtn>cancel</mat-icon>
+                <button matChipRemove *ngIf="!readonly"
+                        mat-icon-button
+                        [attr.aria-label]="'SDK.FileUpload.RemoveUploadedFile' | translate"
+                        #undoUploadBtn>
+                    <mat-icon>cancel</mat-icon>
+                </button>
             </mat-chip>
         </mat-chip-list>
     </div>
