@@ -309,7 +309,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         UserStatusServiceAgent,
         UserManagementServiceAgent,
         UserInvitationServiceAgent,
-        UserStatusServiceAgent,
         BrowserContentService,
         TemporaryUserServiceAgent,
         InvitationServiceAgent,
