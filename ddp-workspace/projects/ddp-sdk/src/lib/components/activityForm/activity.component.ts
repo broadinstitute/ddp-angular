@@ -22,7 +22,7 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
@@ -291,7 +291,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
 
-        this.selectedUser$ = this.participantsSearch.getParticipant(this.selectedUserGuid);
+        this.selectedUser$ = this.selectedUserGuid ? this.participantsSearch.getParticipant(this.selectedUserGuid) : of(null);
     }
 
     public ngAfterViewInit(): void {
