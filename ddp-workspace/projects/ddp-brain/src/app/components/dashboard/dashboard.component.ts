@@ -10,6 +10,6 @@ import { map } from 'rxjs/operators';
 export class DashboardComponent {
     public selectedUserGuid$: Observable<string|null>;
     constructor(private route: ActivatedRoute) {
-        this.selectedUserGuid$ = this.route.paramMap.pipe(map(params => params.get('userGuid')));
+        this.selectedUserGuid$ = this.route.queryParamMap.pipe(map(params => params.get('user_guid')));
     }
 }

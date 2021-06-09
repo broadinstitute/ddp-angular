@@ -115,15 +115,6 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'dashboard/:userGuid',
-        component: DashboardComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
         path: 'auth',
         component: Auth0CodeCallbackComponent,
         canActivate: [IrbGuard]

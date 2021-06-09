@@ -144,14 +144,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: AppRoutes.DashboardId,
-    component: DashboardComponent,
-    canActivate: [
-      IrbGuard,
-      AuthGuard
-    ]
-  },
-  {
     path: AppRoutes.LocalAuth,
     component: Auth0CodeCallbackComponent,
     canActivate: [

@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { SessionMementoService } from '../sessionMemento.service';
 import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
-import { Observable, } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
 import { map, tap } from 'rxjs/operators';
 import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { SessionStorageService } from '../sessionStorage.service';
-import { of } from 'rxjs';
 
 @Injectable()
 export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
