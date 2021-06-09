@@ -74,13 +74,13 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                             <!-- Check model not null and not undefined. Open to race condition -->
                             <ng-container *ngIf="model && model.introduction">
                                 <ddp-activity-section
-                                        [section]="model.introduction"
-                                        [readonly]="isReadonly() || dataEntryDisabled"
-                                        [validationRequested]="validationRequested"
-                                        [studyGuid]="studyGuid"
-                                        [activityGuid]="activityGuid"
-                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                                        (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                                    [section]="model.introduction"
+                                    [readonly]="isReadonly() || dataEntryDisabled"
+                                    [validationRequested]="validationRequested"
+                                    [studyGuid]="studyGuid"
+                                    [activityGuid]="activityGuid"
+                                    (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
+                                    (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
                             </ng-container>
                         </div>
@@ -92,9 +92,9 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                 <ng-container *ngFor="let section of model.sections; let i = index">
                                     <ng-container *ngIf="section.visible">
                                         <div class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                                            (click)="jumpStep(i)"
-                                            [class.active]="isActive(i)"
-                                            [class.completed]="isCompleted(i)">
+                                             (click)="jumpStep(i)"
+                                             [class.active]="isActive(i)"
+                                             [class.completed]="isCompleted(i)">
                                             <div class="WizardSteps-img">
                                                 <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
                                             </div>
@@ -111,13 +111,13 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                         <div class="row NoMargin">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <ddp-activity-section
-                                        [section]="currentSection"
-                                        [readonly]="isReadonly() || dataEntryDisabled"
-                                        [validationRequested]="validationRequested"
-                                        [studyGuid]="studyGuid"
-                                        [activityGuid]="activityGuid"
-                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                                        (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                                    [section]="currentSection"
+                                    [readonly]="isReadonly() || dataEntryDisabled"
+                                    [validationRequested]="validationRequested"
+                                    [studyGuid]="studyGuid"
+                                    [activityGuid]="activityGuid"
+                                    (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
+                                    (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
                             </div>
                         </div>
@@ -126,13 +126,13 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                 <!-- closing section -->
                                 <ng-container *ngIf="model.closing">
                                     <ddp-activity-section
-                                            [section]="model.closing"
-                                            [readonly]="isReadonly() || dataEntryDisabled"
-                                            [validationRequested]="validationRequested"
-                                            [studyGuid]="studyGuid"
-                                            [activityGuid]="activityGuid"
-                                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                            (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                                        [section]="model.closing"
+                                        [readonly]="isReadonly() || dataEntryDisabled"
+                                        [validationRequested]="validationRequested"
+                                        [studyGuid]="studyGuid"
+                                        [activityGuid]="activityGuid"
+                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                        (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
                                 </ng-container>
                                 <ng-container *ngIf="shouldShowReadonlyHint">
@@ -500,8 +500,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private saveLastVisitedSectionIndex(sectionIndex: number): void {
         if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
             this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex)
-              .pipe(take(1))
-              .subscribe();
+                .pipe(take(1))
+                .subscribe();
         }
     }
 
@@ -523,11 +523,11 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public isReadonly(): boolean {
-      return !this.isAdminEditing && this.model.readonly;
+        return !this.isAdminEditing && this.model.readonly;
     }
 
     public updateIsAdminEditing(adminEditing: boolean): void {
-      this.isAdminEditing = adminEditing;
-      this.changeRef.detectChanges();
+        this.isAdminEditing = adminEditing;
+        this.changeRef.detectChanges();
     }
 }

@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public navigate(id: string): void {
         this.router.navigate([this.toolkitConfiguration.activityUrl, id], {
-          queryParams: this.selectedUserGuid ? { user_guid: this.selectedUserGuid } : null
+            queryParams: this.selectedUserGuid ? { user_guid: this.selectedUserGuid } : null
         });
     }
 
