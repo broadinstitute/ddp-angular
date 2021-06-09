@@ -84,6 +84,13 @@ body {
     }
 }
 
+.subject-panel-container,
+.ddp-admin-action-panel {
+    margin: 0 auto;
+    padding: 1rem 1.5625rem;
+    max-width: 1000px;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;

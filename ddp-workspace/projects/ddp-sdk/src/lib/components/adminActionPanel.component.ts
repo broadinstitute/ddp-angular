@@ -9,11 +9,34 @@ import { SessionMementoService } from '../services/sessionMemento.service';
                 <p class="ddp-admin-action-panel__text">
                     {{ 'SDK.AdminActionPanel.ActivityEdit' | translate }}
                 </p>
-                <button class="button button_small button_primary" (click)="emitActivityEdit()">
+                <button class="button button_small button_primary ButtonFilled" (click)="emitActivityEdit()">
                     {{ 'SDK.AdminActionPanel.EditButton' | translate }}
                 </button>
             </div>
-        </div>`
+        </div>`,
+    styles: [`
+        .ddp-admin-action-panel__text {
+            margin: 0 10px 0 0;
+        }
+
+        .admin-action-panel-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 710px) {
+            .ddp-admin-action-panel__text {
+                margin: 0 0 10px 0;
+            }
+
+            .admin-action-panel-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    `]
 })
 export class AdminActionPanelComponent {
     @Input() public activityReadonly: boolean;
