@@ -41,7 +41,7 @@
     },
     "About": {
       "Title": "About the Study",
-      "Paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae inventore iusto nam esse ad, vel earum officia laudantium eligendi perferendis quod provident maiores doloribus, dolore eum voluptates fuga consequuntur corrupti!",
+      "Paragraph": "The Circadia research study is focused on better understanding the genetics of circadian rhythm disorders. Circadian rhythms are an integral part of our functioning, regulating and syncing our human behavior and physiology with the external environment and the 24-hour day. While research has been able to identify core components of our molecular circadian clock, much is still unknown about the genetics and physiological mechanisms driving our circadian rhythms.",
       "Subtitle": "Questions we are trying to answer:",
       "Questions": [
         "Duis aute irure dolor in reprehenderit in voluptate?",
@@ -51,11 +51,11 @@
     },
     "Participation": {
       "Title": "Participation",
-      "Description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex explicabo, reiciendis neque aliquid ratione nulla, consequatur iusto aliquam, pariatur fugiat vero itaque sequi sit magni? Deserunt, laborum minus minima rerum atque tempore nam cum porro natus magni modi repudiandae, nulla obcaecati voluptate quasi? Accusantium, corrupti ipsum. Vero vitae temporibus eum?",
+      "Description": "To participate in this study you will first need to complete our online screening questionnaire. The online screening questionnaire will allow us to check that you are eligible to participate in the Circadia research study. To complete the questionnaire, please use the Sign-Up button located at the top right of the screen.",
       "Subtitle": "Quick facts",
-      "Duration": "<span class=\"semibold\">Study duration:</span> 4 weeks",
-      "Provided": "<span class=\"semibold\">We provide:</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita facilis sapiente voluptate nobis, consequatur nam aliquid! Quo, quia?",
-      "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits, journaling about mood and meals, wearing a biosensor that tracks sleep patterns"
+      "Duration": "<span class=\"semibold\">Study duration:</span> Approximately 6 weeks",
+      "Provided": "<span class=\"semibold\">We provide:</span> Monetary compensation, up to $200; all study material is provided",
+      "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits; journaling about sleep, meals, and mood; wearing a biosensor to track sleep patterns and daily activity"
     },
     "FAQ": {
       "Title": "Frequently Asked Questions",
@@ -84,20 +84,15 @@
       ]
     },
     "Team": {
-      "Title": "Our Team",
-      "Description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Minima ratione obcaecati hic expedita doloribus quas.",
+      "Title": "Meet the Team",
       "Members": [
         {
-          "Name": "Name",
-          "Title": "Title",
-          "Bio": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Esentium doloremque veritatis corporis ullam. Alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit.",
-          "ImageUrl": "/assets/img/team/image1.jpg"
+          "Bio": "Dr. Lane has a long-standing commitment to utilize genetics to understand the mechanisms and causal links of common traits and disease. Her goal is to identify new causal genetic factors for circadian rhythm disorders and elucidate biological pathways underlying circadian regulation.",
+          "ImageUrl": "/assets/img/team/dr-lane.jpeg"
         },
         {
-          "Name": "Name",
-          "Title": "Title",
-          "Bio": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta asperiores praesentium doloremque veritatis corporis ullam aliquid a, aliquam reprehenderit itaque quos magnam ipsum alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit. Esentium doloremque veritatis corporis ullam. Alias ad voluptatibus vero, soluta nam numquam pariatur ut fugit.",
-          "ImageUrl": "/assets/img/team/image2.jpg"
+          "Bio": "Irma is a research coordinator for the Circadia research study and has spent several years working in genetics research related to circadian rhythms and sleep. She is excited to study circadian rhythm disorders through the Circadia research study.",
+          "ImageUrl": "/assets/img/team/irma.jpg"
         }
       ]
     }
