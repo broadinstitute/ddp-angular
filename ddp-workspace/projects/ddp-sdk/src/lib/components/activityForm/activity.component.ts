@@ -473,7 +473,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private saveLastVisitedSectionIndex(sectionIndex: number): void {
+    protected saveLastVisitedSectionIndex(sectionIndex: number): void {
         if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
             this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex)
               .pipe(take(1))
