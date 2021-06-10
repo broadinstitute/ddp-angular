@@ -13,18 +13,18 @@ describe('ActivityComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ActivityPageComponent ],
       providers: [
-        { 
+        {
           provide: ActivatedRoute,
           useValue: {
             params: of({ id: 'id' })
-          } 
+          }
         },
         { provide: 'ddp.config', useValue: {} },
-        { 
-          provide: WorkflowBuilderService, 
-          useValue: { 
-            getActivities: (response) => ({ execute: () => {} }) 
-          } 
+        {
+          provide: WorkflowBuilderService,
+          useValue: {
+            getActivities: (response) => ({ execute: () => {} })
+          }
         },
       ]
     })
