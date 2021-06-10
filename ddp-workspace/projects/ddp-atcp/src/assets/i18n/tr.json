@@ -538,18 +538,18 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[TR] Enrollment Status: ",
-    "ContactUsTooltip": "[TR] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "Kayıt Durumu: ",
+    "ContactUsTooltip": "+1 954.481.6611 veya support@atfamilies.org",
     "Messages": {
-      "Registered": "[TR] Registered",
-      "Consented": "[TR] Consented",
-      "ConsentedNeedsAssent": "[TR] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[TR] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[TR] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[TR] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[TR] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[TR] Enrolled",
-      "ContactUs": "[TR] Please Contact Us"
+      "Registered": "Kaydoldu",
+      "Consented": "Olur Verildi",
+      "ConsentedNeedsAssent": "Olur Verildi, Küçükler için Olur Gerekli",
+      "SubmittedPhysicianInfo": "İrtibat Kurulacak Doktor Bilgisi Gönderildi",
+      "SubmittedMedicalHistory": "Tıbbi Öykü Gönderildi",
+      "SubmittedGenomeStudyShippingInfo": "Genom Çalışması Sevkıyat Bilgisi Gönderildi",
+      "SubmittedEnrollment": "Çalışma Kaydı Gönderildi/Doğrulama Bekleniyor",
+      "Enrolled": "Çalışmaya Kaydoldu",
+      "ContactUs": "Lütfen Bizimle İrtibat Kurun"
     }
   }
 }

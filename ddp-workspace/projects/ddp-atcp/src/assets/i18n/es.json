@@ -538,18 +538,18 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[ES] Enrollment Status: ",
-    "ContactUsTooltip": "[ES] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "Estado de inscripción: ",
+    "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
-      "Registered": "[ES] Registered",
-      "Consented": "[ES] Consented",
-      "ConsentedNeedsAssent": "[ES] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[ES] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[ES] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[ES] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[ES] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[ES] Enrolled",
-      "ContactUs": "[ES] Please Contact Us"
+      "Registered": "Registrado",
+      "Consented": "Consentido",
+      "ConsentedNeedsAssent": "Consentido, se necesita conformidad",
+      "SubmittedPhysicianInfo": "Información de contacto del médico completada",
+      "SubmittedMedicalHistory": "Historia clínica enviada",
+      "SubmittedGenomeStudyShippingInfo": "Estudio del genoma completado",
+      "SubmittedEnrollment": "Inscripción enviada / Confirmación pendiente",
+      "Enrolled": "Inscrito",
+      "ContactUs": "Contáctenos"
     }
   }
 }
