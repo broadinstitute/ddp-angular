@@ -1,24 +1,24 @@
 @import '../../../styles/variables';
 
 .ec {
-  margin-top: 168px;
+  margin-top: 90px;
 
   position: relative;
 
   @media (max-width: 1920px) {
-    margin-top: 151px;
+    margin-top: 90px;
   }
 
   @media (max-width: 1024px) {
-    margin-top: 150px;
+    margin-top: 90px;
   }
 
   @media (max-width: 920px) {
-    margin-top: 140px;
+    margin-top: 80px;
   }
 
   @media (max-width: 554px) {
-    margin-top: 158px;
+    margin-top: 80px;
   }
 
   &__header {
